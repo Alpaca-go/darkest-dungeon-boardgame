@@ -1,72 +1,144 @@
+import { useMemo, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useGameStore } from '../store/useGameStore';
-import ColorBlockImage from '../components/placeholders/ColorBlockImage';
+import { getHeroById } from '../data/heroes';
+import { getMonsterById } from '../data/monsters';
+import { getActiveUnit, getUnit, legalTargetsForActor } from '../game-engine/battle';
+import type { BattleUnit } from '../types';
+import InitiativeBar from '../components/battle/InitiativeBar';
+import Battlefield from '../components/battle/Battlefield';
+import SkillBar from '../components/battle/SkillBar';
+import BattleLog from '../components/battle/BattleLog';
+import ActorDetails from '../components/battle/ActorDetails';
 
+/**
+ * 战斗页面（Phase 3）：
+ * 顶部先攻条 → 战场 → 行动栏（英雄回合）→ 详情 + 日志。
+ * 胜利 / 失败时显示结算面板。
+ */
 export default function BattlePage() {
   const navigate = useNavigate();
   const campaign = useGameStore((s) => s.campaign);
-  const leaveBattle = useGameStore((s) => s.leaveBattle);
+  const battleSkillId = useGameStore((s) => s.ui.battleSkillId);
+  const selectBattleSkill = useGameStore((s) => s.selectBattleSkill);
+  const battleHeroMove = useGameStore((s) => s.battleHeroMove);
+  const battleUseSkill = useGameStore((s) => s.battleUseSkill);
+  const battleEndTurn = useGameStore((s) => s.battleEndTurn);
+  const battleResolveVictory = useGameStore((s) => s.battleResolveVictory);
+  const battleRetreat = useGameStore((s) => s.battleRetreat);
+
+  const [inspectId, setInspectId] = useState<string | null>(null);
+
+  const battle = campaign?.battle ?? null;
+
+  // 当前英雄可选技能的合法目标（仅在已选技能时计算）。
+  const legalTargetIds = useMemo(() => {
+    if (!battle || battle.status !== 'active' || !battleSkillId) return [];
+    return legalTargetsForActor(battle, battleSkillId);
+  }, [battle, battleSkillId]);
 
   if (!campaign) return <Navigate to="/" replace />;
-  if (!campaign.battle) return <Navigate to="/dungeon" replace />;
+  if (!battle) return <Navigate to="/dungeon" replace />;
 
-  const battle = campaign.battle;
-  const heroes = battle.units.filter((u) => u.side === 'hero');
-  const monsters = battle.units.filter((u) => u.side === 'monster');
+  const activeUnit = getActiveUnit(battle);
+  const isHeroTurn = battle.status === 'active' && activeUnit?.side === 'hero';
 
-  const onLeave = () => {
-    leaveBattle();
+  const colorOf = (u: BattleUnit): string => {
+    if (u.side === 'monster') return getMonsterById(u.sourceId)?.color ?? '#8b2b2b';
+    const inst = campaign.heroes.find((h) => h.instanceId === u.sourceId);
+    return (inst && getHeroById(inst.heroId)?.color) ?? '#5b8a5b';
+  };
+
+  const onPickTarget = (unitId: string) => {
+    if (battleSkillId && legalTargetIds.includes(unitId)) {
+      battleUseSkill(unitId);
+      return;
+    }
+    setInspectId(unitId);
+  };
+
+  const inspectUnit = getUnit(battle, inspectId) ?? activeUnit ?? null;
+
+  const onVictoryReturn = () => {
+    battleResolveVictory();
+    navigate('/dungeon');
+  };
+  const onRetreat = () => {
+    battleRetreat();
     navigate('/dungeon');
   };
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-2xl font-bold text-dd-text mb-1">战斗</h1>
-      <div className="rounded-lg border border-dd-accent bg-dd-accent/10 p-5 my-4 text-center">
-        <p className="text-lg font-bold text-dd-accent2">战斗系统将在 Phase 3 实现</p>
-        <p className="text-sm text-dd-muted mt-1">
-          本阶段仅建立最小战斗状态（BattleState）并切换至此页面，不执行 Initiative、攻击、怪物行动与轮数推进。
-        </p>
+    <div className="p-6 max-w-5xl mx-auto space-y-4">
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-bold text-dd-text">战斗</h1>
+        {battle.status === 'active' && (
+          <span className="text-xs text-dd-muted">击败所有敌人即可获胜；第 {battle.maxRounds} 轮结束仍未清除则被迫撤退。</span>
+        )}
       </div>
 
-      {/* 怪物 */}
-      <section className="mb-4">
-        <h2 className="text-sm font-bold text-dd-text mb-2">敌人</h2>
-        <div className="flex flex-wrap gap-3">
-          {monsters.map((m) => (
-            <div key={m.id} className="rounded-md border border-dd-border bg-dd-panel p-2 w-36">
-              <ColorBlockImage color="#8b2b2b" label={m.name.slice(0, 2)} className="w-full h-16 rounded" />
-              <div className="text-xs text-dd-text mt-1 truncate">{m.name}</div>
-              <div className="text-[11px] text-dd-muted">
-                HP {Math.max(0, m.hp)}/{m.maxHp}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      <InitiativeBar battle={battle} />
 
-      {/* 英雄 */}
-      <section className="mb-4">
-        <h2 className="text-sm font-bold text-dd-text mb-2">我方</h2>
-        <div className="flex flex-wrap gap-3">
-          {heroes.map((h) => (
-            <div key={h.id} className="rounded-md border border-dd-border bg-dd-panel p-2 w-36">
-              <ColorBlockImage color="#5b8a5b" label={h.name.slice(0, 2)} className="w-full h-16 rounded" />
-              <div className="text-xs text-dd-text mt-1 truncate">{h.name}</div>
-              <div className="text-[11px] text-dd-muted">
-                HP {Math.max(0, h.hp)}/{h.maxHp} · 压力 {h.stress ?? 0}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      <Battlefield
+        battle={battle}
+        colorOf={colorOf}
+        legalTargetIds={legalTargetIds}
+        onPickTarget={onPickTarget}
+      />
 
-      <button
-        onClick={onLeave}
-        className="px-4 py-2 rounded bg-dd-panel2 text-dd-text border border-dd-border hover:bg-dd-panel transition-colors"
-      >
-        返回地牢（Phase 3 前临时出口）
-      </button>
+      {/* 结算面板 */}
+      {battle.status === 'victory' && (
+        <div className="rounded-lg border border-emerald-500 bg-emerald-500/10 p-5 text-center" data-testid="victory-panel">
+          <p className="text-lg font-bold text-emerald-400">战斗胜利！</p>
+          <p className="text-sm text-dd-muted mt-1">获得 {battle.rewards.gold} Gold，房间将被标记为已清除。</p>
+          <button
+            onClick={onVictoryReturn}
+            className="mt-3 px-4 py-2 rounded bg-emerald-600 text-white text-sm hover:bg-emerald-500 transition-colors"
+          >
+            领取奖励并返回地牢
+          </button>
+        </div>
+      )}
+      {battle.status === 'defeat' && (
+        <div className="rounded-lg border border-red-500 bg-red-500/10 p-5 text-center" data-testid="defeat-panel">
+          <p className="text-lg font-bold text-red-400">战斗失败……</p>
+          <p className="text-sm text-dd-muted mt-1">小队被迫撤退，房间未被清除。</p>
+          <div className="mt-3 flex justify-center gap-3">
+            <button
+              onClick={onRetreat}
+              className="px-4 py-2 rounded bg-dd-panel2 text-dd-text text-sm border border-dd-border hover:bg-dd-panel transition-colors"
+            >
+              撤退回地牢
+            </button>
+            <button
+              onClick={() => {
+                battleRetreat();
+                navigate('/');
+              }}
+              className="px-4 py-2 rounded bg-dd-panel2 text-dd-muted text-sm border border-dd-border hover:bg-dd-panel transition-colors"
+            >
+              回到首页
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* 英雄行动栏 */}
+      {isHeroTurn && activeUnit && (
+        <SkillBar
+          battle={battle}
+          actor={activeUnit}
+          selectedSkillId={battleSkillId}
+          onSelectSkill={selectBattleSkill}
+          onMove={battleHeroMove}
+          onEndTurn={battleEndTurn}
+        />
+      )}
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <ActorDetails unit={inspectUnit ?? null} />
+        <BattleLog entries={battle.battleLog} />
+      </div>
     </div>
   );
 }

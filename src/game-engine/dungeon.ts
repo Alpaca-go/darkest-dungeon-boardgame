@@ -1,20 +1,12 @@
-import type {
-  BattleState,
-  BattleUnit,
-  CampaignState,
-  DungeonRoom,
-  DungeonState,
-} from '../types';
+import type { CampaignState, DungeonRoom, DungeonState } from '../types';
 import { DUNGEON_NODES, roomTypeMapForQuest } from '../data/dungeons';
-import { MONSTERS } from '../data/monsters';
-import { createId, pick } from './random';
+import { pick } from './random';
+import { initBattle } from './battle';
 import { pushLog } from './log';
 import { resolveExplorationEvent } from './exploration';
 
 /** 宝藏房间固定奖励。 */
 export const TREASURE_GOLD = 20;
-/** 进入战斗房间时生成的怪物数量（Phase 2 仅展示，不战斗）。 */
-const BATTLE_MONSTER_COUNT = 2;
 
 /**
  * 根据任务生成一张固定拓扑的地牢地图。
@@ -140,9 +132,9 @@ function applyRoomResult(campaign: CampaignState, room: DungeonRoom): CampaignSt
       return log(c, '陷阱触发且无 Tool，随机英雄受 1 Wound，全队压力 +1！', 'danger');
     }
     case 'battle': {
-      // 创建最小 BattleState 并切入战斗阶段；Phase 3 前不推进战斗。
-      const c = createBattle(campaign, room.id);
-      return log(c, '进入战斗房间，遭遇敌人！（战斗系统将在 Phase 3 实现）', 'danger');
+      // Phase 3：初始化完整战斗并切入战斗阶段。
+      const c = initBattle(campaign, room.id);
+      return log(c, '进入战斗房间，遭遇敌人！', 'danger');
     }
     default:
       return campaign;
@@ -201,70 +193,9 @@ export function moveToRoom(campaign: CampaignState, roomId: string): CampaignSta
   return next;
 }
 
-/** 创建最小 BattleState（Phase 2 仅占位，不实现战斗推进）。 */
-export function createBattle(campaign: CampaignState, roomId: string): CampaignState {
-  const heroUnits: BattleUnit[] = campaign.heroes.map((h) => ({
-    id: `u_${h.instanceId}`,
-    side: 'hero',
-    sourceId: h.instanceId,
-    name: h.name,
-    maxHp: h.maxLife,
-    hp: Math.max(0, h.maxLife - h.wounds),
-    stress: h.stress,
-    speed: h.speed,
-    stance: h.stance,
-    isAlive: h.isAlive,
-    actionPoints: 2,
-    guardTargetId: null,
-  }));
-
-  const monsters = MONSTERS.slice(0, BATTLE_MONSTER_COUNT).map((m, i) => ({
-    id: `u_${m.id}_${i}`,
-    side: 'monster' as const,
-    sourceId: m.id,
-    name: m.name,
-    maxHp: m.maxHp,
-    hp: m.maxHp,
-    speed: m.speed,
-    stance: 'aggressive' as const,
-    isAlive: true,
-    actionPoints: 0,
-    targetRule: m.targetRule,
-    guardTargetId: null,
-  }));
-
-  const battle: BattleState = {
-    roomId,
-    round: 1,
-    units: [...heroUnits, ...monsters],
-    initiative: [],
-    activeEntryIndex: 0,
-    selectedTargetId: null,
-    result: 'active',
-    log: [
-      {
-        id: createId('log'),
-        at: new Date().toISOString(),
-        message: '战斗开始（占位：Phase 3 将实现完整回合）。',
-        kind: 'info',
-      },
-    ],
-  };
-
-  return {
-    ...campaign,
-    gamePhase: 'battle',
-    battle,
-    dungeon: campaign.dungeon
-      ? markRoom(campaign.dungeon, roomId, 'current')
-      : campaign.dungeon,
-  };
-}
-
-/** 离开战斗（Phase 3 前的临时出口）：清除战斗状态并回到地牢。 */
-export function leaveBattlePhase2(campaign: CampaignState): CampaignState {
+/** 撤退/战败后返回地牢：清除战斗状态，战斗房间标记为已访问（未清除）。 */
+export function retreatFromBattle(campaign: CampaignState): CampaignState {
   if (!campaign.dungeon) return { ...campaign, gamePhase: 'dungeon-explore', battle: null };
-  // 战斗房间在 Phase 2 视为已访问（未清除）。
   const dungeon = markRoom(campaign.dungeon, campaign.dungeon.currentRoomId, 'visited');
   return {
     ...campaign,

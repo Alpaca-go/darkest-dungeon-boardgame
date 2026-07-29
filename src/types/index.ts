@@ -17,6 +17,24 @@ export type GamePhase =
 /** 四个抽象战斗站位 / 英雄姿态。 */
 export type Stance = 'aggressive' | 'defensive' | 'ranged' | 'support';
 
+/** 状态效果类型（Phase 3 仅实现 Bleed / Blight / Stun / Mark）。 */
+export type StatusEffectType = 'bleed' | 'blight' | 'stun' | 'mark';
+
+/** 生效中的状态层数。 */
+export interface ActiveEffect {
+  type: StatusEffectType;
+  amount: number;
+}
+
+/** 战斗总状态。 */
+export type BattleStatus = 'setup' | 'active' | 'victory' | 'defeat';
+
+/** 战斗单位阵营。 */
+export type BattleSide = 'hero' | 'monster';
+
+/** 技能目标阵营。 */
+export type SkillTargetSide = 'enemy' | 'ally' | 'self';
+
 /** 游戏日志条目。 */
 export interface GameLogEntry {
   id: string;
@@ -89,41 +107,61 @@ export interface DungeonState {
   canLeave: boolean;
 }
 
-/** 战斗单位（英雄或怪物）。 */
+/** 战斗单位（英雄或怪物）。所有字段均可序列化以支持 localStorage 存档。 */
 export interface BattleUnit {
   id: string;
-  side: 'hero' | 'monster';
-  sourceId: string;
   name: string;
+  side: BattleSide;
+  sourceId: string;
   maxHp: number;
   hp: number;
-  stress?: number;
+  stress: number;
+  /** 站位编号 1..4（1 为最前排）。 */
+  position: number;
   speed: number;
   stance: Stance;
   isAlive: boolean;
+  /** Stun 剩余回合（>0 时跳过本次行动）。 */
+  stunned: number;
+  /** Bleed 层数（回合开始按层数扣血后 -1）。 */
+  bleed: number;
+  /** Blight 层数（回合开始按层数扣血后 -1）。 */
+  blight: number;
+  /** 是否被 Mark（部分技能的目标加成标记）。 */
+  marked: boolean;
+  buffs: ActiveEffect[];
+  debuffs: ActiveEffect[];
+  /** 当前行动点（仅英雄回合使用，怪物回合由 AI 自动执行）。 */
   actionPoints: number;
+  /** 英雄已装备技能 id（仅 hero 有）。 */
+  equippedSkillIds?: string[];
+  /** 怪物可用技能 id（仅 monster 有）。 */
+  monsterSkillIds?: string[];
+  /** 怪物自动行动的目标规则。 */
   targetRule?: MonsterTargetRule;
-  guardTargetId?: string | null;
-}
-
-/** 先攻条目。 */
-export interface InitiativeEntry {
-  id: string;
-  unitId: string;
-  side: 'hero' | 'monster';
-  resolved: boolean;
 }
 
 /** 战斗状态。 */
 export interface BattleState {
-  roomId: string;
-  round: 1 | 2 | 3 | 4;
-  units: BattleUnit[];
-  initiative: InitiativeEntry[];
-  activeEntryIndex: number;
+  battleId: string;
+  status: BattleStatus;
+  round: number;
+  maxRounds: number;
+  heroes: BattleUnit[];
+  monsters: BattleUnit[];
+  /** 先攻行动顺序（单位 id 列表）。 */
+  initiativeOrder: string[];
+  /** 当前在先攻列表中的索引。 */
+  initiativeIndex: number;
+  /** 当前行动单位 id（null 表示战斗已结束待处理）。 */
+  activeActorId: string | null;
+  currentActionPoints: number;
+  selectedSkillId: string | null;
   selectedTargetId: string | null;
-  result: 'active' | 'victory' | 'fled' | 'defeat';
-  log: GameLogEntry[];
+  battleLog: GameLogEntry[];
+  /** 来源战斗房间 id（用于胜利后标记 cleared）。 */
+  sourceRoomId: string;
+  rewards: { gold: number };
 }
 
 /** Hamlet（村庄）状态。 */
@@ -186,10 +224,55 @@ export interface SkillDefinition {
   range: number;
   cooldown?: number;
   description: string;
+  // ---- Phase 3 战斗字段 ----
+  /** 允许释放的站位（1..4）。 */
+  usableFromPositions?: number[];
+  /** 合法目标站位（1..4）。 */
+  validTargetPositions?: number[];
+  targetSide?: SkillTargetSide;
+  /** 命中阈值：掷 d10，结果 <= accuracy 视为命中（1..10）。 */
+  accuracy?: number;
+  minDamage?: number;
+  maxDamage?: number;
+  /** 治疗量（对 ally 目标）。 */
+  stressHeal?: number;
+  /** 自身位移（delta，负值前移）。 */
+  moveSelf?: number;
+  /** 目标位移（delta，正值为向后推）。 */
+  moveTarget?: number;
+  applyEffects?: ActiveEffect[];
 }
 
 /** 怪物目标规则。 */
-export type MonsterTargetRule = 'closest' | 'mostWounded' | 'mostStressed' | 'random';
+export type MonsterTargetRule =
+  | 'closest'
+  | 'furthest'
+  | 'mostWounded'
+  | 'mostStressed'
+  | 'random';
+
+/** 战斗结算通用技能形状（英雄技能与怪物技能的公共子集）。 */
+export type BattleSkillLike = SkillDefinition | MonsterSkillDefinition;
+
+/** 怪物技能定义（mock 静态数据）。 */
+export interface MonsterSkillDefinition {
+  id: string;
+  monsterId: string;
+  name: string;
+  usableFromPositions: number[];
+  validTargetPositions: number[];
+  targetSide: SkillTargetSide;
+  accuracy: number;
+  minDamage: number;
+  maxDamage: number;
+  stress?: number;
+  stressHeal?: number;
+  heal?: number;
+  moveSelf?: number;
+  moveTarget?: number;
+  applyEffects?: ActiveEffect[];
+  description: string;
+}
 
 /** 怪物定义（mock 静态数据）。 */
 export interface MonsterDefinition {
@@ -197,9 +280,9 @@ export interface MonsterDefinition {
   name: string;
   maxHp: number;
   speed: number;
-  damage: number;
-  stress?: number;
   targetRule: MonsterTargetRule;
+  /** 可用技能 id 列表（至少 2 个）。 */
+  skillIds: string[];
   color: string;
 }
 

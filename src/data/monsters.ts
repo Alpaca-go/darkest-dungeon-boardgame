@@ -1,44 +1,34 @@
 import type { MonsterDefinition } from '../types';
 
-// 4 种普通怪物（Phase 1 战斗使用）。
+// Phase 3 战斗怪物：3 种“骨系”敌人（简化版，非规则书完整怪物）。
+// 每种至少 2 个技能，在 monster-skills.ts 中定义。
 export const MONSTERS: MonsterDefinition[] = [
   {
-    id: 'bandit-cutthroat',
-    name: 'Bandit Cutthroat',
-    maxHp: 18,
-    speed: 6,
-    damage: 5,
-    stress: 2,
-    targetRule: 'mostWounded',
+    id: 'bone-soldier',
+    name: 'Bone Soldier',
+    maxHp: 20,
+    speed: 3,
+    targetRule: 'closest',
+    skillIds: ['bone-soldier-bash', 'bone-soldier-cleave'],
     color: '#8b2b2b',
   },
   {
-    id: 'bandit-brawler',
-    name: 'Bandit Brawler',
-    maxHp: 26,
-    speed: 3,
-    damage: 7,
-    targetRule: 'closest',
+    id: 'bone-arbalist',
+    name: 'Bone Arbalist',
+    maxHp: 14,
+    speed: 5,
+    targetRule: 'random',
+    skillIds: ['bone-arbalist-shot', 'bone-arbalist-snipe'],
     color: '#a83737',
   },
   {
-    id: 'cultist-zealot',
-    name: 'Cultist Zealot',
-    maxHp: 20,
+    id: 'bone-courtier',
+    name: 'Bone Courtier',
+    maxHp: 18,
     speed: 4,
-    damage: 4,
-    stress: 4,
-    targetRule: 'mostStressed',
+    targetRule: 'mostWounded',
+    skillIds: ['bone-courtier-curse', 'bone-courtier-charm'],
     color: '#9c3b6b',
-  },
-  {
-    id: 'ghoul',
-    name: 'Starving Ghoul',
-    maxHp: 22,
-    speed: 5,
-    damage: 6,
-    targetRule: 'random',
-    color: '#7a4f8a',
   },
 ];
 

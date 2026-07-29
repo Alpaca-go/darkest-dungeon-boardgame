@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { CampaignState, GamePhase, HeroBattleAction, ProvisionPool } from '../types';
+import type { CampaignState, GamePhase, ProvisionPool } from '../types';
 import {
   createNewCampaign,
   createHeroInstance,
@@ -14,8 +14,14 @@ import {
   moveToRoom as engineMoveToRoom,
   canScout,
   canMoveTo,
-  leaveBattlePhase2,
+  retreatFromBattle,
 } from '../game-engine/dungeon';
+import {
+  heroMove as engineHeroMove,
+  heroUseSkill as engineHeroUseSkill,
+  endHeroTurn as engineEndHeroTurn,
+  resolveVictory as engineResolveVictory,
+} from '../game-engine/battle';
 import {
   clearCampaign,
   loadCampaign,
@@ -27,6 +33,8 @@ interface UiState {
   selectedHeroId: string | null;
   selectedSkillId: string | null;
   modal: string | null;
+  /** 战斗中当前选中的技能（目标选择前的临时态）。 */
+  battleSkillId: string | null;
 }
 
 interface GameStore {
@@ -51,12 +59,17 @@ interface GameStore {
   // ---- Phase 2：地牢探索 ----
   scout(): void;
   moveToRoom(roomId: string): void;
-  leaveBattle(): void;
   useProvision(type: keyof ProvisionPool, heroId?: string): void;
 
-  // ---- Phase 3/4 预留（本阶段不实现） ----
-  heroAction(action: HeroBattleAction): void;
-  advanceBattle(): void;
+  // ---- Phase 3：战斗 ----
+  selectBattleSkill(skillId: string | null): void;
+  battleHeroMove(dir: -1 | 1): void;
+  battleUseSkill(targetId: string): void;
+  battleEndTurn(): void;
+  battleResolveVictory(): void;
+  battleRetreat(): void;
+
+  // ---- Phase 4 预留（本阶段不实现） ----
   visitBuilding(heroId: string, buildingId: string): void;
   endHamletDay(): void;
 }
@@ -65,6 +78,7 @@ const EMPTY_UI: UiState = {
   selectedHeroId: null,
   selectedSkillId: null,
   modal: null,
+  battleSkillId: null,
 };
 
 // 初始化时尝试从 localStorage 恢复战役（刷新可恢复进度）。
@@ -170,13 +184,6 @@ export const useGameStore = create<GameStore>((set, get) => {
       commit(engineMoveToRoom(c, roomId));
     },
 
-    // Phase 3 前的临时出口：清除战斗状态并返回地牢（不结算战斗）。
-    leaveBattle: () => {
-      const c = get().campaign;
-      if (!c) return;
-      commit(leaveBattlePhase2(c));
-    },
-
     useProvision: (type, _heroId) => {
       const c = get().campaign;
       if (!c) return;
@@ -187,13 +194,54 @@ export const useGameStore = create<GameStore>((set, get) => {
       });
     },
 
-    // ---- Phase 3/4 预留，本阶段为安全空实现 ----
-    heroAction: () => {
-      /* Phase 3: 英雄战斗动作 */
+    // ---- Phase 3：战斗动作（全部委托给 game-engine，并自动保存） ----
+    selectBattleSkill: (skillId) => {
+      set((st) => ({ ui: { ...st.ui, battleSkillId: skillId } }));
     },
-    advanceBattle: () => {
-      /* Phase 3: 推进先攻 */
+
+    battleHeroMove: (dir) => {
+      const c = get().campaign;
+      if (!c?.battle || c.battle.status !== 'active' || !c.battle.activeActorId) return;
+      const battle = engineHeroMove(c.battle, c.battle.activeActorId, dir);
+      if (battle === c.battle) return;
+      set((st) => ({ ui: { ...st.ui, battleSkillId: null } }));
+      commit({ ...c, battle });
     },
+
+    battleUseSkill: (targetId) => {
+      const c = get().campaign;
+      const skillId = get().ui.battleSkillId;
+      if (!c?.battle || c.battle.status !== 'active' || !c.battle.activeActorId || !skillId) return;
+      const battle = engineHeroUseSkill(c.battle, c.battle.activeActorId, skillId, targetId);
+      if (battle === c.battle) return;
+      set((st) => ({ ui: { ...st.ui, battleSkillId: null } }));
+      commit({ ...c, battle });
+    },
+
+    battleEndTurn: () => {
+      const c = get().campaign;
+      if (!c?.battle || c.battle.status !== 'active' || !c.battle.activeActorId) return;
+      set((st) => ({ ui: { ...st.ui, battleSkillId: null } }));
+      commit({ ...c, battle: engineEndHeroTurn(c.battle, c.battle.activeActorId) });
+    },
+
+    // 胜利结算：房间 cleared + Gold + 同步英雄状态 + 返回地牢。
+    battleResolveVictory: () => {
+      const c = get().campaign;
+      if (!c?.battle || c.battle.status !== 'victory') return;
+      set((st) => ({ ui: { ...st.ui, battleSkillId: null } }));
+      commit(engineResolveVictory(c));
+    },
+
+    // 战败/撤退：清除战斗，房间保持未清除，返回地牢。
+    battleRetreat: () => {
+      const c = get().campaign;
+      if (!c?.battle) return;
+      set((st) => ({ ui: { ...st.ui, battleSkillId: null } }));
+      commit(retreatFromBattle(c));
+    },
+
+    // ---- Phase 4 预留，本阶段为安全空实现 ----
     visitBuilding: () => {
       /* Phase 4: 访问建筑 */
     },
