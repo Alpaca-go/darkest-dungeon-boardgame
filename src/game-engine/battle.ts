@@ -45,7 +45,7 @@ function setUnit(state: BattleState, unit: BattleUnit): BattleState {
 
 function pushBattleLog(state: BattleState, message: string, kind: GameLogEntry['kind'] = 'info'): BattleState {
   const entry: GameLogEntry = { id: createId('blog'), at: nowIso(), message, kind };
-  return { ...state, battleLog: [...state.battleLog, entry].slice(-60) };
+  return { ...state, battleLog: [...state.battleLog, entry].slice(-100) };
 }
 
 /** 按 id 查找战斗单位（英雄或怪物）。 */
@@ -445,7 +445,8 @@ export function checkEnd(state: BattleState): BattleState {
 /** 胜利结算：标记来源房间 cleared、发放 Gold、同步英雄状态、清除战斗、返回地牢。 */
 export function resolveVictory(campaign: CampaignState): CampaignState {
   const b = campaign.battle;
-  if (!b) return campaign;
+  // 仅在 victory 状态结算一次；defeat/active 或已清除的战斗不发奖励（防重复/误发）。
+  if (!b || b.status !== 'victory') return campaign;
 
   let c: CampaignState = { ...campaign, gold: campaign.gold + b.rewards.gold };
   c = pushLog(c, `战斗胜利，获得 ${b.rewards.gold} Gold。`, 'success');

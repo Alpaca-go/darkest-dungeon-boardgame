@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { CampaignState, GamePhase, ProvisionPool } from '../types';
+import type { CampaignState, ProvisionPool } from '../types';
 import {
   createNewCampaign,
   createHeroInstance,
@@ -34,9 +34,12 @@ import {
 } from '../game-engine/hamlet';
 import {
   clearCampaign,
+  exportSaveString,
+  importSaveString,
   loadCampaign,
   saveCampaign,
 } from '../game-engine/save';
+import { routeForPhase as guardRouteForPhase } from '../app/route-guards';
 
 // UI 临时状态（不持久化）。
 interface UiState {
@@ -55,7 +58,12 @@ interface GameStore {
   newCampaign(): void;
   continueCampaign(): void;
   resetCampaign(): void;
-  setPhase(phase: GamePhase): void;
+  /** 手动保存当前战役（存档管理 UI 用）。 */
+  manualSave(): void;
+  /** 导出存档 JSON 字符串；无存档返回 null。 */
+  exportSave(): string | null;
+  /** 导入存档 JSON；成功返回 null，失败返回错误信息（不覆盖现有存档）。 */
+  importSave(json: string): string | null;
 
   // ---- Phase 2：战役准备 ----
   chooseHero(heroId: string): void;
@@ -133,10 +141,24 @@ export const useGameStore = create<GameStore>((set, get) => {
       set({ campaign: null, ui: { ...EMPTY_UI } });
     },
 
-    setPhase: (phase) => {
+    manualSave: () => {
       const c = get().campaign;
       if (!c) return;
-      commit({ ...c, gamePhase: phase });
+      saveCampaign(c);
+    },
+
+    exportSave: () => {
+      // 先确保内存态已落盘，再导出。
+      const c = get().campaign;
+      if (c) saveCampaign(c);
+      return exportSaveString();
+    },
+
+    importSave: (json) => {
+      const { error, campaign } = importSaveString(json);
+      if (error) return error; // 验证失败：不覆盖现有存档与内存状态
+      set({ campaign, ui: { ...EMPTY_UI } });
+      return null;
     },
 
     // 切换式选择：已选则移除，未选且未满 4 人则加入（不影响其他英雄配置）。
@@ -312,28 +334,5 @@ export const useGameStore = create<GameStore>((set, get) => {
   };
 });
 
-/** 根据 gamePhase 映射到路由路径（供首页“继续战役”使用）。 */
-export function routeForPhase(phase: GamePhase): string {
-  switch (phase) {
-    case 'home':
-      return '/';
-    case 'campaign-setup':
-      return '/setup';
-    case 'skill-loadout':
-      return '/loadout';
-    case 'quest-select':
-      return '/quests';
-    case 'dungeon-explore':
-      return '/dungeon';
-    case 'battle':
-      return '/battle';
-    case 'quest-result':
-      return '/result';
-    case 'hamlet':
-      return '/hamlet';
-    case 'campaign-over':
-      return '/';
-    default:
-      return '/';
-  }
-}
+/** 根据 gamePhase 映射到路由路径（统一由路由守卫模块提供）。 */
+export const routeForPhase = guardRouteForPhase;

@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGameStore, routeForPhase } from '../store/useGameStore';
-import { isCorrupt, clearCampaign } from '../game-engine/save';
+import { clearCampaign, loadSaveDetailed } from '../game-engine/save';
 import { getQuestById } from '../data/quests';
 import ConfirmModal from '../components/feedback/ConfirmModal';
 
@@ -17,10 +17,17 @@ export default function HomePage() {
   const newCampaign = useGameStore((s) => s.newCampaign);
   const continueCampaign = useGameStore((s) => s.continueCampaign);
   const resetCampaign = useGameStore((s) => s.resetCampaign);
+  const manualSave = useGameStore((s) => s.manualSave);
+  const exportSave = useGameStore((s) => s.exportSave);
+  const importSave = useGameStore((s) => s.importSave);
 
   const [confirm, setConfirm] = useState<null | 'new' | 'clear'>(null);
+  const [notice, setNotice] = useState<{ kind: 'ok' | 'error'; text: string } | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const corrupt = isCorrupt();
+  // 详细读档状态：区分损坏 / 版本不支持，给出明确提示。
+  const saveDetail = loadSaveDetailed();
+  const broken = saveDetail.status === 'corrupt' || saveDetail.status === 'unsupported';
 
   const doNew = () => {
     newCampaign();
@@ -28,7 +35,6 @@ export default function HomePage() {
   };
 
   const handleNew = () => {
-    // 已有存档时避免覆盖，弹出确认。
     if (campaign) setConfirm('new');
     else doNew();
   };
@@ -42,27 +48,88 @@ export default function HomePage() {
   const handleClear = () => {
     resetCampaign();
     setConfirm(null);
+    setNotice({ kind: 'ok', text: '本地存档已删除。' });
   };
 
-  // 存档损坏：提示并提供清除入口，避免页面崩溃。
-  if (corrupt) {
+  const handleManualSave = () => {
+    manualSave();
+    setNotice({ kind: 'ok', text: '已手动保存当前战役。' });
+  };
+
+  const handleExport = () => {
+    const json = exportSave();
+    if (!json) {
+      setNotice({ kind: 'error', text: '没有可导出的存档。' });
+      return;
+    }
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `dd-save-${Date.now()}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    setNotice({ kind: 'ok', text: '存档已导出为 JSON 文件。' });
+  };
+
+  const handleImportFile = async (file: File | null) => {
+    if (!file) return;
+    if (!file.name.endsWith('.json') && file.type !== 'application/json') {
+      setNotice({ kind: 'error', text: '导入失败：只接受 JSON 文件。' });
+      return;
+    }
+    const text = await file.text();
+    const err = importSave(text);
+    if (err) {
+      setNotice({ kind: 'error', text: err });
+    } else {
+      setNotice({ kind: 'ok', text: '存档导入成功。点击「继续战役」进入游戏。' });
+    }
+    if (fileInputRef.current) fileInputRef.current.value = '';
+  };
+
+  // 存档损坏 / 版本不支持：明确提示 + 删除存档 + 返回首页（不白屏、不静默重建）。
+  if (broken && !campaign) {
     return (
       <div className="p-8 max-w-2xl">
         <h1 className="text-3xl font-bold mb-4 text-dd-text">Darkest Dungeon · 网页原型</h1>
-        <div className="rounded-lg border border-dd-accent bg-dd-panel p-5">
-          <p className="text-dd-accent2 font-semibold mb-2">存档已损坏</p>
-          <p className="text-dd-muted text-sm mb-4">
-            本地存档无法解析，可能是旧版本或不完整数据。你可以清除存档后重新开始。
+        <div className="rounded-lg border border-dd-accent bg-dd-panel p-5" data-testid="save-broken">
+          <p className="text-dd-accent2 font-semibold mb-2">
+            {saveDetail.status === 'unsupported' ? '存档版本不支持' : '存档已损坏'}
           </p>
-          <button
-            onClick={() => {
-              clearCampaign();
-              window.location.reload();
-            }}
-            className="px-4 py-2 rounded bg-dd-accent text-white hover:bg-dd-accent2 transition-colors"
-          >
-            清除损坏存档
-          </button>
+          <p className="text-dd-muted text-sm mb-4">
+            {saveDetail.error ?? '本地存档无法解析。'}
+            你可以删除存档后重新开始，或从导出的 JSON 文件重新导入。
+          </p>
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={() => {
+                clearCampaign();
+                window.location.reload();
+              }}
+              className="px-4 py-2 rounded bg-dd-accent text-white hover:bg-dd-accent2 transition-colors"
+            >
+              删除存档
+            </button>
+            <button
+              onClick={() => fileInputRef.current?.click()}
+              className="px-4 py-2 rounded bg-dd-panel2 border border-dd-border text-dd-text hover:bg-dd-panel transition-colors"
+            >
+              导入存档
+            </button>
+          </div>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="application/json,.json"
+            className="hidden"
+            onChange={(e) => void handleImportFile(e.target.files?.[0] ?? null)}
+          />
+          {notice && (
+            <p className={`mt-3 text-sm ${notice.kind === 'ok' ? 'text-emerald-400' : 'text-red-400'}`}>
+              {notice.text}
+            </p>
+          )}
         </div>
       </div>
     );
@@ -72,10 +139,10 @@ export default function HomePage() {
     <div className="p-8 max-w-3xl">
       <h1 className="text-3xl font-bold mb-1 text-dd-text">Darkest Dungeon · 网页原型</h1>
       <p className="text-dd-muted text-sm mb-6">
-        单机 · 本地运行 · 可点击体验的桌游网页原型（第一阶段：项目骨架）
+        单机 · 本地运行 · 可点击体验的桌游网页原型（Phase 5：完整闭环）
       </p>
 
-      <div className="flex flex-wrap gap-3 mb-6">
+      <div className="flex flex-wrap gap-3 mb-3">
         <button
           onClick={handleNew}
           className="px-4 py-2 rounded bg-dd-positive text-white font-semibold hover:brightness-110 transition-colors"
@@ -85,6 +152,7 @@ export default function HomePage() {
         <button
           onClick={handleContinue}
           disabled={!campaign}
+          data-testid="btn-continue"
           className={[
             'px-4 py-2 rounded font-semibold transition-colors',
             campaign
@@ -92,21 +160,65 @@ export default function HomePage() {
               : 'bg-dd-panel2 text-dd-muted cursor-not-allowed',
           ].join(' ')}
         >
-          继续战役
+          继续游戏
+        </button>
+      </div>
+
+      {/* 存档管理 */}
+      <div className="flex flex-wrap gap-2 mb-6 text-sm">
+        <button
+          onClick={handleManualSave}
+          disabled={!campaign}
+          className={[
+            'px-3 py-1.5 rounded border border-dd-border transition-colors',
+            campaign ? 'text-dd-muted hover:text-dd-text hover:bg-dd-panel2' : 'text-dd-muted/50 cursor-not-allowed',
+          ].join(' ')}
+        >
+          手动保存
+        </button>
+        <button
+          onClick={handleExport}
+          disabled={!campaign}
+          className={[
+            'px-3 py-1.5 rounded border border-dd-border transition-colors',
+            campaign ? 'text-dd-muted hover:text-dd-text hover:bg-dd-panel2' : 'text-dd-muted/50 cursor-not-allowed',
+          ].join(' ')}
+        >
+          导出存档
+        </button>
+        <button
+          onClick={() => fileInputRef.current?.click()}
+          className="px-3 py-1.5 rounded border border-dd-border text-dd-muted hover:text-dd-text hover:bg-dd-panel2 transition-colors"
+        >
+          导入存档
         </button>
         <button
           onClick={() => setConfirm('clear')}
           disabled={!campaign}
           className={[
-            'px-4 py-2 rounded border border-dd-border transition-colors',
-            campaign
-              ? 'text-dd-muted hover:text-dd-text hover:bg-dd-panel2'
-              : 'text-dd-muted/50 cursor-not-allowed',
+            'px-3 py-1.5 rounded border border-dd-border transition-colors',
+            campaign ? 'text-red-400/80 hover:text-red-400 hover:bg-red-500/10' : 'text-dd-muted/50 cursor-not-allowed',
           ].join(' ')}
         >
-          清除本地存档
+          删除存档
         </button>
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="application/json,.json"
+          className="hidden"
+          onChange={(e) => void handleImportFile(e.target.files?.[0] ?? null)}
+        />
       </div>
+
+      {notice && (
+        <p
+          className={`mb-4 text-sm ${notice.kind === 'ok' ? 'text-emerald-400' : 'text-red-400'}`}
+          data-testid="home-notice"
+        >
+          {notice.text}
+        </p>
+      )}
 
       <div className="rounded-lg border border-dd-border bg-dd-panel p-5">
         <h2 className="text-sm font-bold text-dd-text mb-3 tracking-wide">存档摘要</h2>
@@ -126,15 +238,17 @@ export default function HomePage() {
             </div>
             <div className="flex justify-between">
               <dt className="text-dd-muted">已选英雄</dt>
-              <dd className="text-dd-text">
-                {campaign.heroes.length} / 4
-              </dd>
+              <dd className="text-dd-text">{campaign.heroes.length} / 4</dd>
             </div>
             <div className="flex justify-between">
               <dt className="text-dd-muted">Gold</dt>
               <dd className="text-dd-text">{campaign.gold}</dd>
             </div>
-            <div className="flex justify-between col-span-2">
+            <div className="flex justify-between">
+              <dt className="text-dd-muted">已完成任务</dt>
+              <dd className="text-dd-text">{campaign.completedQuestCount}</dd>
+            </div>
+            <div className="flex justify-between">
               <dt className="text-dd-muted">保存时间</dt>
               <dd className="text-dd-text">{formatTime(campaign.updatedAt)}</dd>
             </div>
@@ -158,9 +272,9 @@ export default function HomePage() {
       />
       <ConfirmModal
         open={confirm === 'clear'}
-        title="清除本地存档？"
-        message="这将删除本机保存的战役数据，且无法恢复。是否继续？"
-        confirmText="清除存档"
+        title="删除本地存档？"
+        message="这将删除本机保存的战役数据，且无法恢复。建议先导出存档备份。是否继续？"
+        confirmText="删除存档"
         danger
         onConfirm={handleClear}
         onCancel={() => setConfirm(null)}

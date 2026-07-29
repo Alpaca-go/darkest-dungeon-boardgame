@@ -9,6 +9,21 @@ export function setRandomSource(fn: (() => number) | null): void {
   _rng = fn ?? Math.random;
 }
 
+/**
+ * 创建确定性伪随机源（mulberry32）。
+ * 用于 E2E 与调试：同一 seed 产生完全相同的随机序列。
+ */
+export function createSeededRandom(seed: number): () => number {
+  let a = seed >>> 0;
+  return () => {
+    a |= 0;
+    a = (a + 0x6d2b79f5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
 /** 生成带前缀的唯一 id。 */
 export function createId(prefix = 'id'): string {
   const rand = Math.random().toString(36).slice(2, 8);

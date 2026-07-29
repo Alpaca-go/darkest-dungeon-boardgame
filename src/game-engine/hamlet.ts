@@ -14,7 +14,7 @@ function hamletLog(
   kind: GameLogEntry['kind'] = 'info'
 ): HamletState {
   const entry: GameLogEntry = { id: createId('hlog'), at: nowIso(), message, kind };
-  return { ...state, log: [...(state.log ?? []), entry].slice(-60) };
+  return { ...state, log: [...(state.log ?? []), entry].slice(-50) };
 }
 
 /** 随机选择 Caretaker 阻塞的建筑 id（统一走可注入随机源）。 */
