@@ -1,13 +1,30 @@
-import { Outlet, NavLink } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
+import { Outlet, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useGameStore } from '../../store/useGameStore';
 import { ROUTES } from '../../app/router';
 
 /**
  * 统一外层布局：顶部资源条 + 开发导航 + 内容区(Outlet) + 底部说明。
  * 开发导航为 Phase 1 的临时入口，便于访问所有页面空壳。
+ * 挂载时按存档中的 gamePhase 恢复正确路由（刷新后 result → /result、hamlet → /hamlet 等）。
  */
 export default function GameShell() {
   const campaign = useGameStore((s) => s.campaign);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const restoredRef = useRef(false);
+
+  // 仅在首次挂载（刷新/直开）时执行一次路由恢复，不干扰后续导航。
+  useEffect(() => {
+    if (restoredRef.current) return;
+    restoredRef.current = true;
+    if (!campaign) return;
+    const target = ROUTES.find((r) => r.phase === campaign.gamePhase);
+    if (target && location.pathname !== target.path) {
+      navigate(target.path, { replace: true });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col bg-dd-bg text-dd-text">

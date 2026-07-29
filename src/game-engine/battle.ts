@@ -79,6 +79,7 @@ function makeHeroUnit(hero: HeroInstance, index: number): BattleUnit {
     buffs: [],
     debuffs: [],
     actionPoints: 0,
+    damageBonus: hero.temporaryDamageBonus ?? 0,
     equippedSkillIds: [...hero.equippedSkillIds],
   };
 }
@@ -307,14 +308,17 @@ export function heroUseSkill(
   if (skill.targetSide === 'enemy') {
     const res = resolveAttack(skill);
     if (res.hit) {
-      tgt = applyDamage(tgt, res.damage);
+      // Blacksmith 临时加成：仅英雄命中时加算（下一次任务后过期清零）。
+      const totalDamage = res.damage + (actor.damageBonus ?? 0);
+      tgt = applyDamage(tgt, totalDamage);
       if (skill.applyEffects?.length) tgt = applyEffects(tgt, skill.applyEffects);
       const effNote = skill.applyEffects?.length
         ? `（施加 ${skill.applyEffects.map((e) => e.type).join('/')}）`
         : '';
+      const bonusNote = actor.damageBonus ? `（含 Blacksmith +${actor.damageBonus}）` : '';
       s = pushBattleLog(
         s,
-        `${actor.name} 使用 ${skill.name}，掷 ${res.roll}${res.crit ? '（暴击）' : ''} 命中 ${tgt.name}，造成 ${res.damage} 伤害${effNote}。`,
+        `${actor.name} 使用 ${skill.name}，掷 ${res.roll}${res.crit ? '（暴击）' : ''} 命中 ${tgt.name}，造成 ${totalDamage} 伤害${bonusNote}${effNote}。`,
         'danger'
       );
     } else {

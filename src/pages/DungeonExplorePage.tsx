@@ -14,11 +14,23 @@ export default function DungeonExplorePage() {
   const campaign = useGameStore((s) => s.campaign);
   const scout = useGameStore((s) => s.scout);
   const moveToRoom = useGameStore((s) => s.moveToRoom);
+  const leaveDungeon = useGameStore((s) => s.leaveDungeon);
 
   const gamePhase = campaign?.gamePhase;
   useEffect(() => {
     if (gamePhase === 'battle') navigate('/battle');
+    if (gamePhase === 'quest-result') navigate('/result');
   }, [gamePhase, navigate]);
+
+  const onLeaveDungeon = () => {
+    const objectiveDone = campaign?.dungeon?.objectiveComplete;
+    const msg = objectiveDone
+      ? '任务目标已完成。确定离开地牢并进行任务结算吗？'
+      : '任务目标尚未完成，现在离开将视为任务未完成。确定离开吗？';
+    if (window.confirm(msg)) {
+      leaveDungeon();
+    }
+  };
 
   if (!campaign) return <Navigate to="/" replace />;
   if (!campaign.dungeon) return <Navigate to="/quests" replace />;
@@ -32,6 +44,15 @@ export default function DungeonExplorePage() {
     <div className="p-4 max-w-6xl mx-auto flex flex-col gap-4">
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-bold text-dd-text">地牢探索</h1>
+        <div className="flex items-center gap-2">
+        <button
+          onClick={onLeaveDungeon}
+          className="px-3 py-1.5 rounded font-semibold text-sm bg-dd-panel2 text-dd-text border border-dd-border hover:bg-dd-panel transition-colors"
+          title="离开地牢并进行任务结算（未完成目标视为任务未完成）"
+          data-testid="leave-dungeon"
+        >
+          离开地牢
+        </button>
         <button
           onClick={scout}
           disabled={!scoutable}
@@ -45,6 +66,7 @@ export default function DungeonExplorePage() {
         >
           Scout（侦察）
         </button>
+        </div>
       </div>
 
       <TopResourceBar campaign={campaign} />

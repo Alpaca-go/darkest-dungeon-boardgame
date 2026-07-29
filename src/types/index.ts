@@ -133,6 +133,8 @@ export interface BattleUnit {
   debuffs: ActiveEffect[];
   /** 当前行动点（仅英雄回合使用，怪物回合由 AI 自动执行）。 */
   actionPoints: number;
+  /** Blacksmith 临时伤害加成（仅 hero 有，命中后加算）。 */
+  damageBonus?: number;
   /** 英雄已装备技能 id（仅 hero 有）。 */
   equippedSkillIds?: string[];
   /** 怪物可用技能 id（仅 monster 有）。 */
@@ -171,6 +173,40 @@ export interface HamletState {
   caretakerBlockedBuildingId: string | null;
   occupiedBuildingIds: string[];
   currentEventId: string | null;
+  /** Hamlet 期间的行动日志（进入 Hamlet 时重置）。 */
+  log: GameLogEntry[];
+  /** Supply Run 等事件带来的下次任务补给奖励（每种补给 +N）。 */
+  nextQuestProvisionBonus: number;
+}
+
+/** 任务最终结果。 */
+export type QuestOutcome = 'completed' | 'incomplete' | 'failed';
+
+/** 结算页中单个英雄的快照。 */
+export interface HeroQuestResult {
+  instanceId: string;
+  name: string;
+  hp: number;
+  maxHp: number;
+  stress: number;
+  xpGained: number;
+  isAlive: boolean;
+}
+
+/** 任务结算摘要（只生成一次，可序列化）。 */
+export interface QuestResultSummary {
+  questId: string;
+  questName: string;
+  outcome: QuestOutcome;
+  roomsCleared: number;
+  objectiveComplete: boolean;
+  /** 任务期间累计获得的 Gold（宝箱/战斗等）。 */
+  goldEarned: number;
+  /** 未使用补给转换的 Gold。 */
+  provisionGold: number;
+  /** 结算时剩余补给快照。 */
+  provisionsLeft: ProvisionPool;
+  heroes: HeroQuestResult[];
 }
 
 /** 战役状态（存档根对象）。 */
@@ -195,6 +231,12 @@ export interface CampaignState {
   battle: BattleState | null;
   hamlet: HamletState;
   log: GameLogEntry[];
+  /** 选择任务时的 Gold 快照，用于计算任务期间净收益。 */
+  questStartGold: number;
+  /** 当前任务是否已结算（防止奖励重复领取）。 */
+  questResultResolved: boolean;
+  /** 最近一次任务结算摘要（quest-result 页面数据源）。 */
+  lastQuestResult: QuestResultSummary | null;
 }
 
 // ---------------------------------------------------------------------------
@@ -331,11 +373,22 @@ export interface HamletBuildingDefinition {
   color: string;
 }
 
+/** Hamlet 事件效果类型（Phase 4 简化集合）。 */
+export type HamletEventEffectType = 'bonus-provisions' | 'none' | 'party-stress';
+
 /** Hamlet 事件定义。 */
 export interface HamletEventDefinition {
   id: string;
   name: string;
   description: string;
+  /** 本次 Hamlet 的准备天数。 */
+  preparationDays: number;
+  /** 事件效果说明（展示用）。 */
+  effect: string;
+  /** 事件效果类型（进入 Hamlet 时执行一次）。 */
+  effectType: HamletEventEffectType;
+  /** 效果数值（补给 +N / 全队 Stress +N）。 */
+  effectAmount: number;
 }
 
 /** 英雄战斗动作（Phase 3 使用，类型预留）。 */

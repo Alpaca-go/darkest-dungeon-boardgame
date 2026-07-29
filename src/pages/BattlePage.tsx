@@ -26,6 +26,7 @@ export default function BattlePage() {
   const battleEndTurn = useGameStore((s) => s.battleEndTurn);
   const battleResolveVictory = useGameStore((s) => s.battleResolveVictory);
   const battleRetreat = useGameStore((s) => s.battleRetreat);
+  const failQuestFromDefeat = useGameStore((s) => s.failQuestFromDefeat);
 
   const [inspectId, setInspectId] = useState<string | null>(null);
 
@@ -67,6 +68,11 @@ export default function BattlePage() {
     battleRetreat();
     navigate('/dungeon');
   };
+  const allHeroesDown = !battle.heroes.some((h) => h.isAlive);
+  const onQuestFail = () => {
+    failQuestFromDefeat();
+    navigate('/result');
+  };
 
   return (
     <div className="p-6 max-w-5xl mx-auto space-y-4">
@@ -102,24 +108,29 @@ export default function BattlePage() {
       {battle.status === 'defeat' && (
         <div className="rounded-lg border border-red-500 bg-red-500/10 p-5 text-center" data-testid="defeat-panel">
           <p className="text-lg font-bold text-red-400">战斗失败……</p>
-          <p className="text-sm text-dd-muted mt-1">小队被迫撤退，房间未被清除。</p>
-          <div className="mt-3 flex justify-center gap-3">
-            <button
-              onClick={onRetreat}
-              className="px-4 py-2 rounded bg-dd-panel2 text-dd-text text-sm border border-dd-border hover:bg-dd-panel transition-colors"
-            >
-              撤退回地牢
-            </button>
-            <button
-              onClick={() => {
-                battleRetreat();
-                navigate('/');
-              }}
-              className="px-4 py-2 rounded bg-dd-panel2 text-dd-muted text-sm border border-dd-border hover:bg-dd-panel transition-colors"
-            >
-              回到首页
-            </button>
-          </div>
+          {allHeroesDown ? (
+            <>
+              <p className="text-sm text-dd-muted mt-1">全员倒下，任务宣告失败。</p>
+              <button
+                onClick={onQuestFail}
+                className="mt-3 px-4 py-2 rounded bg-red-600 text-white text-sm hover:bg-red-500 transition-colors"
+              >
+                查看任务结算
+              </button>
+            </>
+          ) : (
+            <>
+              <p className="text-sm text-dd-muted mt-1">小队被迫撤退，房间未被清除。</p>
+              <div className="mt-3 flex justify-center gap-3">
+                <button
+                  onClick={onRetreat}
+                  className="px-4 py-2 rounded bg-dd-panel2 text-dd-text text-sm border border-dd-border hover:bg-dd-panel transition-colors"
+                >
+                  撤退回地牢
+                </button>
+              </div>
+            </>
+          )}
         </div>
       )}
 

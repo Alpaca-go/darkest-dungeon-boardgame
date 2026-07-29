@@ -23,6 +23,16 @@ import {
   resolveVictory as engineResolveVictory,
 } from '../game-engine/battle';
 import {
+  finishQuest,
+  failQuestFromBattle,
+} from '../game-engine/quest-result';
+import {
+  startHamletPhase,
+  visitHamletBuilding,
+  skipHeroAction,
+  endHamletDay as engineEndHamletDay,
+} from '../game-engine/hamlet';
+import {
   clearCampaign,
   loadCampaign,
   saveCampaign,
@@ -69,8 +79,18 @@ interface GameStore {
   battleResolveVictory(): void;
   battleRetreat(): void;
 
-  // ---- Phase 4 预留（本阶段不实现） ----
+  // ---- Phase 4：结算与 Hamlet ----
+  /** 主动离开地牢并结算任务（幂等）。 */
+  leaveDungeon(): void;
+  /** 战斗全灭后结算失败任务。 */
+  failQuestFromDefeat(): void;
+  /** 从结算页返回 Hamlet（单一 action 完成全部状态转换）。 */
+  returnToHamlet(): void;
+  /** 英雄访问建筑。 */
   visitBuilding(heroId: string, buildingId: string): void;
+  /** 英雄跳过今天行动。 */
+  skipHeroToday(heroId: string): void;
+  /** 结束当天（全员行动完毕后可用）。 */
   endHamletDay(): void;
 }
 
@@ -241,12 +261,53 @@ export const useGameStore = create<GameStore>((set, get) => {
       commit(retreatFromBattle(c));
     },
 
-    // ---- Phase 4 预留，本阶段为安全空实现 ----
-    visitBuilding: () => {
-      /* Phase 4: 访问建筑 */
+    // ---- Phase 4：结算与 Hamlet（全部委托 game-engine，经 commit 自动保存） ----
+    leaveDungeon: () => {
+      const c = get().campaign;
+      if (!c || c.gamePhase !== 'dungeon-explore' || !c.dungeon) return;
+      const next = finishQuest(c, 'left');
+      if (next === c) return;
+      commit(next);
     },
+
+    failQuestFromDefeat: () => {
+      const c = get().campaign;
+      if (!c?.battle || c.battle.status !== 'defeat') return;
+      const next = failQuestFromBattle(c);
+      if (next === c) return;
+      commit(next);
+    },
+
+    returnToHamlet: () => {
+      const c = get().campaign;
+      if (!c) return;
+      const next = startHamletPhase(c);
+      if (next === c) return;
+      commit(next);
+    },
+
+    visitBuilding: (heroId, buildingId) => {
+      const c = get().campaign;
+      if (!c) return;
+      const next = visitHamletBuilding(c, heroId, buildingId);
+      if (next === c) return;
+      commit(next);
+    },
+
+    skipHeroToday: (heroId) => {
+      const c = get().campaign;
+      if (!c) return;
+      const next = skipHeroAction(c, heroId);
+      if (next === c) return;
+      commit(next);
+    },
+
     endHamletDay: () => {
-      /* Phase 4: 结束 Hamlet 当天 */
+      const c = get().campaign;
+      if (!c) return;
+      const next = engineEndHamletDay(c);
+      if (next === c) return;
+      commit(next);
     },
   };
 });

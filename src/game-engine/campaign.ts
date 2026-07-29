@@ -47,6 +47,8 @@ export function createNewCampaign(): CampaignState {
       caretakerBlockedBuildingId: null,
       occupiedBuildingIds: [],
       currentEventId: null,
+      log: [],
+      nextQuestProvisionBonus: 0,
     },
     log: [
       {
@@ -56,6 +58,9 @@ export function createNewCampaign(): CampaignState {
         kind: 'info',
       },
     ],
+    questStartGold: 50,
+    questResultResolved: false,
+    lastQuestResult: null,
   };
 }
 
@@ -136,17 +141,39 @@ export function isLoadoutComplete(campaign: CampaignState): boolean {
   );
 }
 
-/** 选择任务：写入任务 id 与状态，生成地牢，进入地牢探索阶段。 */
+/**
+ * 选择任务：写入任务 id 与状态，生成新地牢与新补给池，进入地牢探索阶段。
+ * - 每次任务都发放全新 DEFAULT_PROVISIONS（上一任务补给已在结算时转换为 Gold）；
+ * - Hamlet 事件 Supply Run 的补给奖励在此一次性应用并清除；
+ * - 记录任务开始时的 Gold 快照，用于结算页展示净收益。
+ */
 export function selectQuest(campaign: CampaignState, questId: string): CampaignState {
   const quest = getQuestById(questId);
   if (!quest) return campaign;
+  const bonus = campaign.hamlet.nextQuestProvisionBonus ?? 0;
+  const provisions: ProvisionPool = {
+    food: DEFAULT_PROVISIONS.food + bonus,
+    bandage: DEFAULT_PROVISIONS.bandage + bonus,
+    potion: DEFAULT_PROVISIONS.potion + bonus,
+    torch: DEFAULT_PROVISIONS.torch + bonus,
+    tool: DEFAULT_PROVISIONS.tool + bonus,
+  };
   let next: CampaignState = {
     ...campaign,
     currentQuestId: questId,
     questStatus: 'active',
     dungeon: generateDungeon(questId),
+    battle: null,
+    provisions,
     gamePhase: 'dungeon-explore',
+    questStartGold: campaign.gold,
+    questResultResolved: false,
+    lastQuestResult: null,
+    hamlet: { ...campaign.hamlet, nextQuestProvisionBonus: 0 },
   };
   next = pushLog(next, `选择了任务：${quest.name}。地牢已生成，开始探索。`, 'success');
+  if (bonus > 0) {
+    next = pushLog(next, `Supply Run 事件生效：每种补给 +${bonus}。`, 'success');
+  }
   return next;
 }
