@@ -26,11 +26,22 @@ export const SKILLS: SkillDefinition[] = [
   { id: 'hellion-guard', heroId: 'hellion', name: 'Breakthrough', kind: 'guard', range: 0, description: '蓄力防御姿态。' },
   { id: 'hellion-stance', heroId: 'hellion', name: 'Adrenaline Rush', kind: 'move', range: 0, description: '调整站位获得先攻。' },
 
-  // 占位英雄技能（通用）
+  // 占位英雄技能（通用，每英雄至少 3 个以便装备）
   { id: 'leper-hew', heroId: 'leper', name: 'Hew', kind: 'attack', damage: 7, range: 1, description: '占位：沉重劈砍。' },
+  { id: 'leper-guard', heroId: 'leper', name: 'Fortify', kind: 'guard', range: 0, description: '占位：架起防御姿态。' },
+  { id: 'leper-stance', heroId: 'leper', name: 'Reposition', kind: 'move', range: 0, description: '占位：调整站位。' },
+
   { id: 'occultist-sap', heroId: 'occultist', name: 'Sap', kind: 'attack', damage: 5, range: 3, description: '占位：抽取生命。' },
+  { id: 'occultist-guard', heroId: 'occultist', name: 'Ward', kind: 'guard', range: 0, description: '占位：布下护盾。' },
+  { id: 'occultist-stance', heroId: 'occultist', name: 'Blink', kind: 'move', range: 1, description: '占位：短距位移。' },
+
   { id: 'plague-doctor-noxious', heroId: 'plague-doctor', name: 'Noxious Blast', kind: 'attack', damage: 4, range: 3, description: '占位：毒爆。' },
+  { id: 'plague-doctor-guard', heroId: 'plague-doctor', name: 'Guard', kind: 'guard', range: 0, description: '占位：化学防护。' },
+  { id: 'plague-doctor-stance', heroId: 'plague-doctor', name: 'Tincture', kind: 'move', range: 0, description: '占位：调配药剂。' },
+
   { id: 'grave-robber-flash', heroId: 'grave-robber', name: 'Flash', kind: 'attack', damage: 5, range: 2, description: '占位：眩光偷袭。' },
+  { id: 'grave-robber-guard', heroId: 'grave-robber', name: 'Dodge', kind: 'guard', range: 0, description: '占位：灵巧闪避。' },
+  { id: 'grave-robber-stance', heroId: 'grave-robber', name: 'Sneak', kind: 'move', range: 1, description: '占位：潜行位移。' },
 ];
 
 export function getSkillsByHero(heroId: string): SkillDefinition[] {

@@ -1,11 +1,21 @@
 import { create } from 'zustand';
-import type {
-  CampaignState,
-  GamePhase,
-  HeroBattleAction,
-  ProvisionPool,
-} from '../types';
-import { createNewCampaign } from '../game-engine/campaign';
+import type { CampaignState, GamePhase, HeroBattleAction, ProvisionPool } from '../types';
+import {
+  createNewCampaign,
+  createHeroInstance,
+  equipSkill as engineEquipSkill,
+  applyDefaultLoadout as engineApplyDefaultLoadout,
+  selectQuest as engineSelectQuest,
+  canProceedToLoadout,
+  isLoadoutComplete,
+} from '../game-engine/campaign';
+import {
+  scoutDungeon,
+  moveToRoom as engineMoveToRoom,
+  canScout,
+  canMoveTo,
+  leaveBattlePhase2,
+} from '../game-engine/dungeon';
 import {
   clearCampaign,
   loadCampaign,
@@ -23,19 +33,28 @@ interface GameStore {
   campaign: CampaignState | null;
   ui: UiState;
 
-  // ---- Phase 1 真实实现 ----
+  // ---- 通用 ----
   newCampaign(): void;
   continueCampaign(): void;
   resetCampaign(): void;
+  setPhase(phase: GamePhase): void;
 
-  // ---- Phase 2+ 预留桩（本阶段不实现业务逻辑） ----
+  // ---- Phase 2：战役准备 ----
   chooseHero(heroId: string): void;
   removeHero(heroId: string): void;
   equipSkill(heroId: string, skillId: string): void;
+  applyDefaultLoadout(): void;
+  proceedToLoadout(): void;
+  proceedToQuests(): void;
   chooseQuest(questId: string): void;
+
+  // ---- Phase 2：地牢探索 ----
   scout(): void;
   moveToRoom(roomId: string): void;
+  leaveBattle(): void;
   useProvision(type: keyof ProvisionPool, heroId?: string): void;
+
+  // ---- Phase 3/4 预留（本阶段不实现） ----
   heroAction(action: HeroBattleAction): void;
   advanceBattle(): void;
   visitBuilding(heroId: string, buildingId: string): void;
@@ -51,66 +70,138 @@ const EMPTY_UI: UiState = {
 // 初始化时尝试从 localStorage 恢复战役（刷新可恢复进度）。
 const initialCampaign = loadCampaign();
 
-export const useGameStore = create<GameStore>((set, get) => ({
-  campaign: initialCampaign,
-  ui: EMPTY_UI,
+export const useGameStore = create<GameStore>((set, get) => {
+  /** 写入存档并应用到状态。所有重要变更都经过此方法以保证自动保存。 */
+  const commit = (next: CampaignState): void => {
+    saveCampaign(next);
+    set({ campaign: next });
+  };
 
-  // 新建战役：创建初始状态并写入存档。
-  newCampaign: () => {
-    const campaign = createNewCampaign();
-    set({ campaign, ui: { ...EMPTY_UI } });
-    saveCampaign(campaign);
-  },
+  return {
+    campaign: initialCampaign,
+    ui: EMPTY_UI,
 
-  // 继续战役：若内存中无战役则从存档读取（刷新后通常已恢复）。
-  continueCampaign: () => {
-    if (!get().campaign) {
-      const loaded = loadCampaign();
-      if (loaded) set({ campaign: loaded });
-    }
-  },
+    newCampaign: () => {
+      const campaign = createNewCampaign();
+      saveCampaign(campaign);
+      set({ campaign, ui: { ...EMPTY_UI } });
+    },
 
-  // 清除本地存档。
-  resetCampaign: () => {
-    clearCampaign();
-    set({ campaign: null, ui: { ...EMPTY_UI } });
-  },
+    continueCampaign: () => {
+      if (!get().campaign) {
+        const loaded = loadCampaign();
+        if (loaded) set({ campaign: loaded });
+      }
+    },
 
-  // ---- 以下为后续阶段预留，本阶段仅为空实现 ----
-  chooseHero: () => {
-    /* Phase 2: 战役设置选择英雄 */
-  },
-  removeHero: () => {
-    /* Phase 2: 移除已选英雄 */
-  },
-  equipSkill: () => {
-    /* Phase 2: 装备/卸下技能 */
-  },
-  chooseQuest: () => {
-    /* Phase 2: 选择任务并生成地牢 */
-  },
-  scout: () => {
-    /* Phase 2: 侦察相邻房间 */
-  },
-  moveToRoom: () => {
-    /* Phase 2: 移动到相邻房间 */
-  },
-  useProvision: () => {
-    /* Phase 3: 使用补给 */
-  },
-  heroAction: () => {
-    /* Phase 3: 英雄战斗动作 */
-  },
-  advanceBattle: () => {
-    /* Phase 3: 推进先攻 */
-  },
-  visitBuilding: () => {
-    /* Phase 4: 访问建筑 */
-  },
-  endHamletDay: () => {
-    /* Phase 4: 结束 Hamlet 当天 */
-  },
-}));
+    resetCampaign: () => {
+      clearCampaign();
+      set({ campaign: null, ui: { ...EMPTY_UI } });
+    },
+
+    setPhase: (phase) => {
+      const c = get().campaign;
+      if (!c) return;
+      commit({ ...c, gamePhase: phase });
+    },
+
+    // 切换式选择：已选则移除，未选且未满 4 人则加入（不影响其他英雄配置）。
+    chooseHero: (heroId) => {
+      const c = get().campaign;
+      if (!c) return;
+      const exists = c.heroes.some((h) => h.heroId === heroId);
+      let heroes: CampaignState['heroes'];
+      if (exists) {
+        heroes = c.heroes.filter((h) => h.heroId !== heroId);
+      } else {
+        if (c.heroes.length >= 4) return; // 已满 4 人
+        const inst = createHeroInstance(heroId);
+        if (!inst) return;
+        heroes = [...c.heroes, inst];
+      }
+      commit({ ...c, heroes });
+    },
+
+    removeHero: (heroId) => {
+      const c = get().campaign;
+      if (!c) return;
+      commit({ ...c, heroes: c.heroes.filter((h) => h.heroId !== heroId) });
+    },
+
+    equipSkill: (heroId, skillId) => {
+      const c = get().campaign;
+      if (!c) return;
+      commit(engineEquipSkill(c, heroId, skillId));
+    },
+
+    applyDefaultLoadout: () => {
+      const c = get().campaign;
+      if (!c) return;
+      commit(engineApplyDefaultLoadout(c));
+    },
+
+    proceedToLoadout: () => {
+      const c = get().campaign;
+      if (!c || !canProceedToLoadout(c)) return;
+      commit({ ...c, gamePhase: 'skill-loadout' });
+    },
+
+    proceedToQuests: () => {
+      const c = get().campaign;
+      if (!c || !isLoadoutComplete(c)) return;
+      commit({ ...c, gamePhase: 'quest-select' });
+    },
+
+    chooseQuest: (questId) => {
+      const c = get().campaign;
+      if (!c) return;
+      commit(engineSelectQuest(c, questId));
+    },
+
+    scout: () => {
+      const c = get().campaign;
+      if (!c || !c.dungeon || !canScout(c.dungeon)) return;
+      commit(scoutDungeon(c));
+    },
+
+    moveToRoom: (roomId) => {
+      const c = get().campaign;
+      if (!c || !c.dungeon || !canMoveTo(c.dungeon, roomId)) return;
+      commit(engineMoveToRoom(c, roomId));
+    },
+
+    // Phase 3 前的临时出口：清除战斗状态并返回地牢（不结算战斗）。
+    leaveBattle: () => {
+      const c = get().campaign;
+      if (!c) return;
+      commit(leaveBattlePhase2(c));
+    },
+
+    useProvision: (type, _heroId) => {
+      const c = get().campaign;
+      if (!c) return;
+      if (c.provisions[type] <= 0) return;
+      commit({
+        ...c,
+        provisions: { ...c.provisions, [type]: c.provisions[type] - 1 },
+      });
+    },
+
+    // ---- Phase 3/4 预留，本阶段为安全空实现 ----
+    heroAction: () => {
+      /* Phase 3: 英雄战斗动作 */
+    },
+    advanceBattle: () => {
+      /* Phase 3: 推进先攻 */
+    },
+    visitBuilding: () => {
+      /* Phase 4: 访问建筑 */
+    },
+    endHamletDay: () => {
+      /* Phase 4: 结束 Hamlet 当天 */
+    },
+  };
+});
 
 /** 根据 gamePhase 映射到路由路径（供首页“继续战役”使用）。 */
 export function routeForPhase(phase: GamePhase): string {

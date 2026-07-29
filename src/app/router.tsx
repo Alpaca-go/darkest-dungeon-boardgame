@@ -2,9 +2,9 @@ import type { ReactNode } from 'react';
 import type { GamePhase } from '../types';
 import HomePage from '../pages/HomePage';
 import CampaignSetupPage from '../pages/CampaignSetupPage';
-import LoadoutPage from '../pages/LoadoutPage';
+import SkillLoadoutPage from '../pages/SkillLoadoutPage';
 import QuestSelectPage from '../pages/QuestSelectPage';
-import DungeonPage from '../pages/DungeonPage';
+import DungeonExplorePage from '../pages/DungeonExplorePage';
 import BattlePage from '../pages/BattlePage';
 import QuestResultPage from '../pages/QuestResultPage';
 import HamletPage from '../pages/HamletPage';
@@ -20,9 +20,9 @@ export interface RouteDef {
 export const ROUTES: RouteDef[] = [
   { path: '/', phase: 'home', label: '首页', element: <HomePage /> },
   { path: '/setup', phase: 'campaign-setup', label: '战役设置', element: <CampaignSetupPage /> },
-  { path: '/loadout', phase: 'skill-loadout', label: '技能配置', element: <LoadoutPage /> },
+  { path: '/loadout', phase: 'skill-loadout', label: '技能配置', element: <SkillLoadoutPage /> },
   { path: '/quests', phase: 'quest-select', label: '任务选择', element: <QuestSelectPage /> },
-  { path: '/dungeon', phase: 'dungeon-explore', label: '地牢探索', element: <DungeonPage /> },
+  { path: '/dungeon', phase: 'dungeon-explore', label: '地牢探索', element: <DungeonExplorePage /> },
   { path: '/battle', phase: 'battle', label: '战斗', element: <BattlePage /> },
   { path: '/result', phase: 'quest-result', label: '任务结算', element: <QuestResultPage /> },
   { path: '/hamlet', phase: 'hamlet', label: '村庄', element: <HamletPage /> },

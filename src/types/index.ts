@@ -147,6 +147,7 @@ export interface CampaignState {
   completedQuestCount: number;
   currentThreatId: string | null;
   currentQuestId: string | null;
+  questStatus: 'none' | 'selected' | 'active' | 'complete' | 'failed';
   gold: number;
   light: number;
   heroes: HeroInstance[];
@@ -207,6 +208,7 @@ export interface QuestDefinition {
   id: string;
   name: string;
   type: string;
+  description: string;
   dungeonLevel: number;
   roomCount: number;
   objective: string;
@@ -222,13 +224,13 @@ export interface RoomTypeMeta {
   description: string;
 }
 
-/** 探索事件结果。 */
+/** 探索事件结果（Phase 2 简化集合）。 */
 export type ExplorationEventResult =
-  | 'safe'
+  | 'none'
   | 'hunger'
+  | 'trap'
   | 'darkness'
-  | 'rubble'
-  | 'curio';
+  | 'rubble';
 
 /** 探索事件定义。 */
 export interface ExplorationEventDefinition {
