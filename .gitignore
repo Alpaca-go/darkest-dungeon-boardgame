@@ -6,8 +6,8 @@ dist
 dist-ssr
 *.local
 
-# npm cache (used during install attempts)
-.npm-cache
+# npm cache (used during install attempts; includes versioned variants like .npm-cache-p6)
+.npm-cache*
 
 # Logs
 npm-debug.log*
