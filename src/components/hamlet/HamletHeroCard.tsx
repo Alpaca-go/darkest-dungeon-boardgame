@@ -2,6 +2,7 @@ import type { HeroInstance } from '../../types';
 import ResolveStateBadge from '../mental/ResolveStateBadge';
 import DiseaseBadge from '../disease/DiseaseBadge';
 import { getQuirkById } from '../../data/quirks';
+import TrinketSlots from '../trinkets/TrinketSlots';
 
 /** Hamlet 左侧英雄卡：状态 + 选中 + 跳过按钮。 */
 export default function HamletHeroCard({
@@ -90,6 +91,7 @@ export default function HamletHeroCard({
           </div>
         </div>
       </button>
+      <TrinketSlots hero={hero} mode="manage" />
       {!dead && !hero.hasActedToday && (
         <button
           type="button"

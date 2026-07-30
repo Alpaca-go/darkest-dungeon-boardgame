@@ -10,6 +10,7 @@ import DungeonMap from '../components/dungeon/DungeonMap';
 import TopResourceBar from '../components/dungeon/TopResourceBar';
 import EventLog from '../components/dungeon/EventLog';
 import HeroCard from '../components/hero/HeroCard';
+import TrinketSlots from '../components/trinkets/TrinketSlots';
 
 export default function DungeonExplorePage() {
   const navigate = useNavigate();
@@ -91,21 +92,24 @@ export default function DungeonExplorePage() {
                 speed={h.speed}
                 stance={h.stance}
                 footer={
-                  h.disease || h.pendingBleed > 0 || h.pendingBlight > 0 ? (
-                    <div className="flex flex-wrap items-center gap-1">
-                      <DiseaseBadge disease={h.disease} />
-                      {h.pendingBleed > 0 && (
-                        <span className="px-1 rounded text-[10px] leading-4 bg-red-950/70 text-red-300">
-                          流血 {h.pendingBleed}
-                        </span>
-                      )}
-                      {h.pendingBlight > 0 && (
-                        <span className="px-1 rounded text-[10px] leading-4 bg-emerald-950/70 text-emerald-300">
-                          腐蚀 {h.pendingBlight}
-                        </span>
-                      )}
-                    </div>
-                  ) : undefined
+                  <>
+                    {(h.disease || h.pendingBleed > 0 || h.pendingBlight > 0) && (
+                      <div className="flex flex-wrap items-center gap-1">
+                        <DiseaseBadge disease={h.disease} />
+                        {h.pendingBleed > 0 && (
+                          <span className="px-1 rounded text-[10px] leading-4 bg-red-950/70 text-red-300">
+                            流血 {h.pendingBleed}
+                          </span>
+                        )}
+                        {h.pendingBlight > 0 && (
+                          <span className="px-1 rounded text-[10px] leading-4 bg-emerald-950/70 text-emerald-300">
+                            腐蚀 {h.pendingBlight}
+                          </span>
+                        )}
+                      </div>
+                    )}
+                    <TrinketSlots hero={h} mode="manage" />
+                  </>
                 }
               />
             );

@@ -134,6 +134,8 @@ export function selectReplacementHero(
     disease: null,
     pendingBleed: 0,
     pendingBlight: 0,
+    // ---- Phase 8C：替补英雄从空 Trinket 起始；死者遗物走「死亡转移」流程分配 ----
+    equippedTrinkets: [],
   };
 
   let next = updateSlot(campaign, slotId, (s) => ({

@@ -5,6 +5,7 @@ import { SAVE_VERSION, readSavedAt } from '../../game-engine/save';
 import { ALL_QUIRKS, getQuirkById } from '../../data/quirks';
 import { ALL_DISEASES, getDiseaseById } from '../../data/diseases';
 import { QUIRK_CAP } from '../../game-engine/quirks';
+import { ALL_TRINKETS, validateTrinketRegistry } from '../../data/trinkets/trinket-registry';
 
 /**
  * 开发调试面板：仅在开发环境（import.meta.env.DEV）渲染。
@@ -22,8 +23,11 @@ export default function DebugPanel() {
   const debugRecoverStress = useGameStore((s) => s.debugRecoverStress);
   const debugGrantQuirk = useGameStore((s) => s.debugGrantQuirk);
   const debugGrantDisease = useGameStore((s) => s.debugGrantDisease);
+  const debugGrantTrinket = useGameStore((s) => s.debugGrantTrinket);
+  const openNomadWagon = useGameStore((s) => s.openNomadWagon);
   const [quirkId, setQuirkId] = useState<string>(ALL_QUIRKS[0]?.id ?? '');
   const [diseaseId, setDiseaseId] = useState<string>(ALL_DISEASES[0]?.id ?? '');
+  const [trinketId, setTrinketId] = useState<string>(ALL_TRINKETS[0]?.id ?? '');
 
   if (!import.meta.env.DEV) return null;
 
@@ -189,6 +193,56 @@ export default function DebugPanel() {
                     </div>
                   );
                 })}
+              </div>
+            </div>
+          )}
+          {campaign && campaign.heroes.length > 0 && (
+            <div className="mb-2 border-t border-dd-border pt-2">
+              <div className="text-dd-muted mb-1 font-semibold">Phase 8C · Trinket（道具授予）</div>
+              <select
+                value={trinketId}
+                onChange={(e) => setTrinketId(e.target.value)}
+                className="w-full mb-1 rounded bg-dd-panel2 border border-dd-border text-dd-text px-1 py-0.5"
+                data-testid="debug-trinket-select"
+              >
+                {ALL_TRINKETS.map((t) => (
+                  <option key={t.id} value={t.id}>
+                    [L{t.level}] {t.dataOrigin === 'prototype' ? '★' : '·'} {t.name}
+                  </option>
+                ))}
+              </select>
+              <div className="space-y-1 max-h-40 overflow-auto">
+                {campaign.heroes.map((h) => (
+                  <div key={h.instanceId} className="flex items-center gap-1.5">
+                    <span className="flex-1 truncate text-dd-text" title={h.name}>
+                      {h.name}
+                    </span>
+                    <span className="text-dd-muted" title="容量/等级">
+                      {h.equippedTrinkets?.length ?? 0}/{h.level}
+                    </span>
+                    <button
+                      onClick={() => debugGrantTrinket(h.instanceId, trinketId)}
+                      disabled={h.dead || !trinketId}
+                      className="px-1.5 rounded bg-dd-panel2 border border-dd-border text-dd-muted hover:text-dd-text disabled:opacity-40"
+                      data-testid={`debug-trinket-grant-${h.instanceId}`}
+                    >
+                      授予
+                    </button>
+                  </div>
+                ))}
+              </div>
+              <button
+                onClick={() => openNomadWagon()}
+                className="mt-1.5 w-full px-2 py-1 rounded bg-dd-panel2 border border-dd-border text-dd-muted hover:text-dd-text"
+                data-testid="debug-nomad-wagon"
+              >
+                生成 Nomad Wagon Offer
+              </button>
+              <div className="mt-1.5 text-[10px] text-dd-muted">
+                {(() => {
+                  const s = validateTrinketRegistry();
+                  return `Registry：${s.totalDefinitions} 定义 / 已核实 ${s.verifiedDefinitions} / 缺官方 ${s.missingOfficialCount} / 重复 ${s.duplicateIds.length} / 策略违规 ${s.policyViolations.length}`;
+                })()}
               </div>
             </div>
           )}

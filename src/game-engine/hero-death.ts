@@ -7,6 +7,7 @@ import type {
 } from '../types';
 import { createId, nowIso } from './random';
 import { pushLog } from './log';
+import { transferDeadHeroTrinkets } from './trinkets/transfer-dead-hero-trinkets';
 
 /** killCampaignHero 的输入命令。 */
 export interface KillHeroCommand {
@@ -100,6 +101,9 @@ export function killCampaignHero(campaign: CampaignState, cmd: KillHeroCommand):
     },
   };
   next = pushLog(next, `${hero.name} 永久阵亡（${cmd.cause}）。战斗/探索结束后需要补充队伍。`, 'danger');
+  // Phase 8C（§13）：死亡记录完成后立即处理 Trinket 转移。
+  // Death Transfer 分配必须先于 Replacement 结算（核心约束 8，由 store / UI 判定队列）。
+  next = transferDeadHeroTrinkets(next, hero.instanceId);
   return next;
 }
 

@@ -7,13 +7,19 @@ import type {
   HamletState,
   HeroDiseaseState,
   HeroInstance,
+  HeroTrinketState,
+  NomadWagonState,
   QuestResultSummary,
+  TrinketSide,
 } from '../types';
 import { nowIso } from './random';
 import { createInitialStagecoach } from './stagecoach';
 import { getQuirkById, normalizeQuirkId } from '../data/quirks';
 import { getDiseaseById } from '../data/diseases';
 import { QUIRK_CAP } from './quirks';
+import { getTrinketById } from '../data/trinkets/trinket-registry';
+import { createInitialNomadWagonState } from './trinkets/trinket-state';
+import { getTrinketCapacity } from './trinkets/capacity';
 
 // ---------------------------------------------------------------------------
 // 存档格式（Phase 6 升级为 v3 SaveFile）
@@ -26,9 +32,10 @@ export const STORAGE_KEY = 'dd-web-prototype-save-v1';
  * v1 = SaveEnvelope（Phase 1-4），v2 = SaveFile（Phase 5），
  * v3 = Phase 6（死亡/Stagecoach），v4 = Phase 7（Stress/Resolve/Affliction/Virtue/Heart Attack），
  * v5 = Phase 8A（Quirk 引擎：真实 Quirk id / 上限 3 / pendingQuirkDecisions），
- * v6 = Phase 8B（Disease / Sanitarium 移除 / Curio / 战斗外 Bleed-Blight 累积）。
+ * v6 = Phase 8B（Disease / Sanitarium 移除 / Curio / 战斗外 Bleed-Blight 累积），
+ * v7 = Phase 8C（Trinket / 容量=等级 / 正负面翻转 / Nomad Wagon）。
  */
-export const SAVE_VERSION = 6;
+export const SAVE_VERSION = 7;
 
 /**
  * v2 存档文件结构。
@@ -159,11 +166,50 @@ export function validateSaveFile(data: unknown): string | null {
     if (typeof h.pendingBlight !== 'number' || h.pendingBlight < 0) {
       return `英雄 ${h.instanceId} 的 pendingBlight 非法`;
     }
+    // Phase 8C：Trinket 结构 / 容量 / 定义引用校验（迁移后必然合法）
+    if (!Array.isArray(h.equippedTrinkets)) {
+      return `英雄 ${h.instanceId} 的 equippedTrinkets 缺失或不是数组`;
+    }
+    if (h.equippedTrinkets.length > getTrinketCapacity(h)) {
+      return `英雄 ${h.instanceId} 的 Trinket 数量（${h.equippedTrinkets.length}）超过容量（等级 ${h.level}）`;
+    }
+    const seenTrinketInstanceIds = new Set<string>();
+    for (const t of h.equippedTrinkets) {
+      if (!t || typeof t.instanceId !== 'string' || typeof t.trinketId !== 'string') {
+        return `英雄 ${h.instanceId} 的 Trinket 结构非法`;
+      }
+      if (seenTrinketInstanceIds.has(t.instanceId)) {
+        return `英雄 ${h.instanceId} 存在重复的 Trinket 实例：${t.instanceId}`;
+      }
+      seenTrinketInstanceIds.add(t.instanceId);
+      if (!getTrinketById(t.trinketId)) {
+        return `英雄 ${h.instanceId} 引用了未知 Trinket：${t.trinketId}`;
+      }
+      if (t.currentSide !== 'positive' && t.currentSide !== 'negative') {
+        return `英雄 ${h.instanceId} 的 Trinket ${t.instanceId} 面向非法`;
+      }
+    }
+  }
+  // 同一 Trinket 实例不得同时被两名英雄持有（无公共仓库，实例唯一）
+  const globalTrinketInstanceIds = new Set<string>();
+  for (const h of c.heroes) {
+    for (const t of h.equippedTrinkets ?? []) {
+      if (globalTrinketInstanceIds.has(t.instanceId)) {
+        return `Trinket 实例 ${t.instanceId} 被多名英雄同时持有`;
+      }
+      globalTrinketInstanceIds.add(t.instanceId);
+    }
   }
   if (!Array.isArray(c.pendingQuirkDecisions)) return 'campaign.pendingQuirkDecisions 缺失或不是数组';
   if (!Array.isArray(c.diseaseAcquisitionRecords)) return 'campaign.diseaseAcquisitionRecords 缺失或不是数组';
   if (!Array.isArray(c.diseaseTreatmentRecords)) return 'campaign.diseaseTreatmentRecords 缺失或不是数组';
   if (!Array.isArray(c.processedDiseaseEventIds)) return 'campaign.processedDiseaseEventIds 缺失或不是数组';
+  // Phase 8C
+  if (!Array.isArray(c.pendingTrinketAllocations)) return 'campaign.pendingTrinketAllocations 缺失或不是数组';
+  if (!Array.isArray(c.trinketAcquisitionRecords)) return 'campaign.trinketAcquisitionRecords 缺失或不是数组';
+  if (!Array.isArray(c.processedTrinketEventIds)) return 'campaign.processedTrinketEventIds 缺失或不是数组';
+  if (!Array.isArray(c.processedTrinketResetKeys)) return 'campaign.processedTrinketResetKeys 缺失或不是数组';
+  if (!c.nomadWagon || typeof c.nomadWagon !== 'object') return 'campaign.nomadWagon 缺失';
 
   // 阶段相关引用完整性
   if (c.gamePhase === 'dungeon-explore' || c.gamePhase === 'battle') {
@@ -562,34 +608,191 @@ export function migrateCampaignToV6(campaign: CampaignState): CampaignState {
   };
 }
 
-/** 将战役迁移到当前最新版本（v3 Phase 6 → v4 Phase 7 → v5 Phase 8A → v6 Phase 8B）。 */
+/**
+ * Phase 8C 战役字段迁移（v6 → v7）：
+ * - 英雄补 equippedTrinkets=[]；已有数组则逐条净化：
+ *   · 引用未知 Trinket 定义的实例一律丢弃（数据不可信优先于「保留玩家物品」，
+ *     并保证 UI 永远不会因未知 id 白屏 —— 核心约束 10）；
+ *   · currentSide 非法 → 回退 positive；usedTurnId / lastUsedEventId 补 null；
+ *   · 超出「容量 = 英雄等级」的部分按顺序截断（关键规则 1：无超容量仓库）。
+ * - 进行中的战斗单位补 equippedTrinketInstanceIds（英雄从战役英雄同步，怪物为空数组），
+ *   并清空 battle.pendingAction（旧会话冻结的动作无法安全续做）；
+ * - campaign 补全部 Phase 8C 队列 / 记录 / 幂等集合与 nomadWagon 初始状态；
+ * - 旧存档遗留的 pendingTrinketUseTransaction 一律清空（同上，避免半结算导致重复翻面）；
+ * - pendingTrinketUseOpportunities 一律清空（使用机会随窗口存在，跨会话不保留）。
+ */
+export function migrateCampaignToV7(campaign: CampaignState): CampaignState {
+  let changed = false;
+
+  const heroes: HeroInstance[] = (campaign.heroes ?? []).map((h) => {
+    const anyH = h as HeroInstance & Record<string, unknown>;
+    const raw = anyH.equippedTrinkets;
+    if (raw === undefined) {
+      changed = true;
+      return { ...h, equippedTrinkets: [] };
+    }
+    if (!Array.isArray(raw)) {
+      changed = true;
+      return { ...h, equippedTrinkets: [] };
+    }
+    const capacity = getTrinketCapacity(h);
+    const sanitized: HeroTrinketState[] = [];
+    let heroChanged = false;
+    for (const t of raw as HeroTrinketState[]) {
+      if (!t || typeof t !== 'object' || typeof t.instanceId !== 'string' || typeof t.trinketId !== 'string') {
+        heroChanged = true;
+        continue;
+      }
+      if (!getTrinketById(t.trinketId)) {
+        heroChanged = true; // 未知定义 → 丢弃
+        continue;
+      }
+      if (sanitized.length >= capacity) {
+        heroChanged = true; // 超容量 → 截断
+        continue;
+      }
+      const side: TrinketSide = t.currentSide === 'negative' ? 'negative' : 'positive';
+      const fixed: HeroTrinketState = {
+        instanceId: t.instanceId,
+        trinketId: t.trinketId,
+        currentSide: side,
+        usedTurnId: typeof t.usedTurnId === 'string' ? t.usedTurnId : null,
+        lastUsedEventId: typeof t.lastUsedEventId === 'string' ? t.lastUsedEventId : null,
+        acquiredAt: typeof t.acquiredAt === 'string' ? t.acquiredAt : nowIso(),
+        acquiredQuestId: typeof t.acquiredQuestId === 'string' ? t.acquiredQuestId : null,
+        source: t.source ?? 'migration',
+        sourceEventId: typeof t.sourceEventId === 'string' ? t.sourceEventId : `migrated-${t.instanceId}`,
+      };
+      if (
+        fixed.currentSide !== t.currentSide ||
+        fixed.usedTurnId !== (t.usedTurnId ?? null) ||
+        fixed.lastUsedEventId !== (t.lastUsedEventId ?? null) ||
+        fixed.source !== t.source
+      ) {
+        heroChanged = true;
+      }
+      sanitized.push(fixed);
+    }
+    if (!heroChanged) return h;
+    changed = true;
+    return { ...h, equippedTrinkets: sanitized };
+  });
+
+  let battle = campaign.battle;
+  if (battle) {
+    const anyB = battle as BattleState & Record<string, unknown>;
+    const unitNeeds = (u: BattleUnit) =>
+      !Array.isArray((u as BattleUnit & Record<string, unknown>).equippedTrinketInstanceIds);
+    if (battle.heroes.some(unitNeeds) || battle.monsters.some(unitNeeds) || anyB.pendingAction !== null) {
+      changed = true;
+      battle = {
+        ...battle,
+        pendingAction: null,
+        heroes: battle.heroes.map((u) => {
+          if (!unitNeeds(u)) return u;
+          const src = heroes.find((h) => h.instanceId === u.sourceId);
+          return {
+            ...u,
+            equippedTrinketInstanceIds: (src?.equippedTrinkets ?? []).map((t) => t.instanceId),
+          };
+        }),
+        monsters: battle.monsters.map((u) =>
+          unitNeeds(u) ? { ...u, equippedTrinketInstanceIds: [] } : u,
+        ),
+      };
+    }
+  }
+
+  const anyC = campaign as CampaignState & Record<string, unknown>;
+  const needsCampaignFields =
+    !Array.isArray(anyC.pendingTrinketAllocations) ||
+    !Array.isArray(anyC.pendingTrinketUseOpportunities) ||
+    (anyC.pendingTrinketUseOpportunities as unknown[]).length > 0 ||
+    anyC.pendingTrinketUseTransaction !== null ||
+    !Array.isArray(anyC.trinketAcquisitionRecords) ||
+    !Array.isArray(anyC.trinketUseRecords) ||
+    !Array.isArray(anyC.trinketTransferRecords) ||
+    !Array.isArray(anyC.processedTrinketEventIds) ||
+    !Array.isArray(anyC.processedTrinketResetKeys) ||
+    !anyC.nomadWagon ||
+    typeof anyC.nomadWagon !== 'object';
+  if (needsCampaignFields) changed = true;
+
+  if (!changed && campaign.saveVersion === SAVE_VERSION) return campaign;
+
+  const rawWagon = anyC.nomadWagon as NomadWagonState | undefined;
+  const nomadWagon: NomadWagonState =
+    rawWagon && typeof rawWagon === 'object'
+      ? {
+          ...createInitialNomadWagonState(),
+          ...rawWagon,
+          // 本阶段禁止建筑升级：等级恒为 1，防手工存档写入非法值
+          buildingLevel: 1,
+          offeredTrinketIds: Array.isArray(rawWagon.offeredTrinketIds)
+            ? rawWagon.offeredTrinketIds.filter((id) => !!getTrinketById(id))
+            : [],
+        }
+      : createInitialNomadWagonState();
+
+  return {
+    ...campaign,
+    saveVersion: SAVE_VERSION,
+    heroes,
+    battle,
+    pendingTrinketAllocations: Array.isArray(anyC.pendingTrinketAllocations)
+      ? (campaign.pendingTrinketAllocations ?? []).filter((a) => !!getTrinketById(a.trinketId))
+      : [],
+    // 使用机会依附于「当前开着的窗口」，跨会话不保留（重开窗即可重新获得）
+    pendingTrinketUseOpportunities: [],
+    // 半结算事务无法安全续做 → 丢弃，避免重复翻面 / 重复结算（核心约束 4）
+    pendingTrinketUseTransaction: null,
+    trinketAcquisitionRecords: Array.isArray(anyC.trinketAcquisitionRecords)
+      ? campaign.trinketAcquisitionRecords
+      : [],
+    trinketUseRecords: Array.isArray(anyC.trinketUseRecords) ? campaign.trinketUseRecords : [],
+    trinketTransferRecords: Array.isArray(anyC.trinketTransferRecords)
+      ? campaign.trinketTransferRecords
+      : [],
+    processedTrinketEventIds: Array.isArray(anyC.processedTrinketEventIds)
+      ? campaign.processedTrinketEventIds
+      : [],
+    processedTrinketResetKeys: Array.isArray(anyC.processedTrinketResetKeys)
+      ? campaign.processedTrinketResetKeys
+      : [],
+    nomadWagon,
+  };
+}
+
+/** 将战役迁移到当前最新版本（v3 Phase 6 → v4 Phase 7 → v5 Phase 8A → v6 Phase 8B → v7 Phase 8C）。 */
 export function migrateCampaignToLatest(campaign: CampaignState): CampaignState {
-  return migrateCampaignToV6(migrateCampaignToV5(migrateCampaignToV4(migrateCampaignToV3(campaign))));
+  return migrateCampaignToV7(
+    migrateCampaignToV6(migrateCampaignToV5(migrateCampaignToV4(migrateCampaignToV3(campaign)))),
+  );
 }
 
 /**
  * 迁移旧版本存档到当前版本。无法迁移时返回 null。
  * v1（SaveEnvelope）→ v2（SaveFile）→ v3（Phase 6）→ v4（Phase 7）→ v5（Phase 8A Quirk）
- * → v6（Phase 8B Disease）。
+ * → v6（Phase 8B Disease）→ v7（Phase 8C Trinket）。
  */
 export function migrateSaveFile(raw: unknown): SaveFile | null {
   if (!raw || typeof raw !== 'object') return null;
   const anyRaw = raw as Record<string, unknown>;
 
-  // 已是 v6（当前版本）
+  // 已是 v7（当前版本）
   if (typeof anyRaw.version === 'number' && anyRaw.version === SAVE_VERSION) {
     const file = raw as SaveFile;
     // campaign 缺失或非对象 → 无法迁移（调用方回退为「无法识别的存档结构」）
     if (!file.campaign || typeof file.campaign !== 'object') return null;
-    // 保险：即使 version=6 也补齐缺失字段（防手工编辑的存档）
+    // 保险：即使 version=7 也补齐缺失字段（防手工编辑的存档）
     const campaign = migrateCampaignToLatest(file.campaign);
     return campaign === file.campaign ? file : { ...createSaveSnapshot(campaign), savedAt: file.savedAt };
   }
 
-  // v2 / v3 / v4 / v5：{ version: 2|3|4|5, savedAt, campaign, ... }
+  // v2 / v3 / v4 / v5 / v6：{ version: 2..6, savedAt, campaign, ... }
   if (
     typeof anyRaw.version === 'number' &&
-    (anyRaw.version === 2 || anyRaw.version === 3 || anyRaw.version === 4 || anyRaw.version === 5) &&
+    [2, 3, 4, 5, 6].includes(anyRaw.version) &&
     anyRaw.campaign &&
     typeof anyRaw.campaign === 'object'
   ) {
@@ -680,7 +883,7 @@ export function loadSaveDetailed(): LoadResult {
   const migrated = migrateSaveFile(parsed);
   if (!migrated) {
     const v = (parsed as Record<string, unknown> | null)?.version ?? (parsed as Record<string, unknown> | null)?.saveVersion;
-    if (typeof v === 'number' && v !== SAVE_VERSION && ![1, 2, 3, 4, 5].includes(v)) {
+    if (typeof v === 'number' && v !== SAVE_VERSION && ![1, 2, 3, 4, 5, 6].includes(v)) {
       return { status: 'unsupported', campaign: null, error: `不支持的存档版本：${v}` };
     }
     return { status: 'corrupt', campaign: null, error: '存档结构无法识别' };

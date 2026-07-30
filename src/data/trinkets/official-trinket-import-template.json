@@ -1,0 +1,956 @@
+{
+  "$schemaVersion": 1,
+  "title": "Darkest Dungeon 核心盒 Trinket 官方数据导入模板",
+  "expectedCoreCount": 38,
+  "filledCount": 1,
+  "instructions": [
+    "本文件是官方 Trinket 数据的填写模板，不是游戏运行时数据源。",
+    "严禁在此文件中填写任何推测数值：没有出处就保持 null 并让 filled=false。",
+    "每填好一张，把它整理成 TrinketDefinition 写入 src/data/trinkets/verified-trinkets.ts，才会进入官方池。",
+    "officialDataStatus 只有 verified 才允许 enabledInOfficialPool=true；partial/unavailable 一律 false。",
+    "level 合法值 1|2|3；出售价由等级推导（2/3/4），Level I 购买价 4，Level II/III 购买价官方未提供，保持缺失。",
+    "useWindows 取值见 src/types/trinkets.ts 的 TrinketUseWindow。",
+    "modifiers[].type 取值见 TrinketModifierType；effects[].type 取值见 ActiveEffectDefinition。"
+  ],
+  "priceReference": {
+    "sell": {
+      "1": 2,
+      "2": 3,
+      "3": 4
+    },
+    "buy": {
+      "1": 4,
+      "2": null,
+      "3": null
+    },
+    "buyNote": "Level II / III 购买价规则书未提供可靠数值，保持 null，禁止臆测。"
+  },
+  "entries": [
+    {
+      "slot": 1,
+      "id": "critical-stone",
+      "name": "Critical Stone",
+      "level": 1,
+      "sourceReference": "DD_EN_COREBOX_RULES.pdf — Trinket 示例卡",
+      "positiveSide": {
+        "label": "暴击 +2",
+        "description": "攻击掷骰前声明：本次攻击暴击 +2。",
+        "useWindows": [
+          "before-attack-roll"
+        ],
+        "modifiers": [
+          {
+            "type": "crit",
+            "amount": 2
+          }
+        ],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": "命中 -2",
+        "description": "攻击掷骰前声明：本次攻击命中 -2。",
+        "useWindows": [
+          "before-attack-roll"
+        ],
+        "modifiers": [
+          {
+            "type": "accuracy",
+            "amount": -2
+          }
+        ],
+        "effects": []
+      },
+      "officialDataStatus": "verified",
+      "enabledInOfficialPool": true,
+      "filled": true
+    },
+    {
+      "slot": 2,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 3,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 4,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 5,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 6,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 7,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 8,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 9,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 10,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 11,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 12,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 13,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 14,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 15,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 16,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 17,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 18,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 19,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 20,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 21,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 22,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 23,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 24,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 25,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 26,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 27,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 28,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 29,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 30,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 31,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 32,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 33,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 34,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 35,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 36,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 37,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    },
+    {
+      "slot": 38,
+      "id": null,
+      "name": null,
+      "level": null,
+      "sourceReference": null,
+      "positiveSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "negativeSide": {
+        "label": null,
+        "description": null,
+        "useWindows": [],
+        "modifiers": [],
+        "effects": []
+      },
+      "officialDataStatus": "unavailable",
+      "enabledInOfficialPool": false,
+      "filled": false
+    }
+  ]
+}

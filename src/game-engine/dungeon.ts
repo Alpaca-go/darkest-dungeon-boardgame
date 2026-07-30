@@ -8,6 +8,8 @@ import { resolveExplorationEvent } from './exploration';
 import { resolveDamage } from './damage';
 import { applyStressBatch } from './stress';
 import { createRuleEventContext, emitPartyRuleEvent } from './quirks';
+import { drawTrinket } from './trinkets/draw-trinket';
+import { acquireTrinket } from './trinkets/acquire-trinket';
 import type { MentalEventSourceType } from '../types';
 
 /** Phase 7：全队压力统一入口（存活英雄各 +amount，走统一管线处理阈值）。 */
@@ -121,12 +123,27 @@ function applyRoomResult(campaign: CampaignState, room: DungeonRoom): CampaignSt
     }
     case 'treasure': {
       const updated = markRoom(dungeon, room.id, 'cleared');
-      const c: CampaignState = {
+      let c: CampaignState = {
         ...campaign,
         gold: campaign.gold + TREASURE_GOLD,
         dungeon: { ...updated, roomsCleared: updated.roomsCleared + 1 },
       };
-      return log(c, `发现宝藏，获得 ${TREASURE_GOLD} Gold。`, 'success');
+      c = log(c, `发现宝藏，获得 ${TREASURE_GOLD} Gold。`, 'success');
+      // Phase 8C §15.1：Loot Chest 抽取 Trinket。
+      // - 先抽取并立即通过 acquireTrinket 写入存档（equipped / pending-allocation），
+      //   刷新后由存档恢复，绝不重抽（房间已 cleared + sourceEventId 幂等双保险）；
+      // - 官方池只出 verified 卡；池为空（异常情况）则安全跳过，不白屏。
+      const lootEventId = `loot:${dungeon.questId}:${room.id}`;
+      const draw = drawTrinket({ level: 1, pool: 'official' });
+      if (draw.definition) {
+        c = acquireTrinket(c, {
+          trinketId: draw.definition.id,
+          source: 'loot',
+          sourceEventId: lootEventId,
+          questId: dungeon.questId,
+        }).campaign;
+      }
+      return c;
     }
     case 'objective': {
       const updated = markRoom(dungeon, room.id, 'cleared');

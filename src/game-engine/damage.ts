@@ -129,6 +129,8 @@ function sourceTypeToCause(sourceType: DamageCommand['sourceType']): HeroDeathCa
       return 'deathblow-trap';
     case 'exploration':
       return 'deathblow-exploration';
+    case 'trinket':
+      return 'deathblow-trinket';
     default:
       return 'unknown';
   }
