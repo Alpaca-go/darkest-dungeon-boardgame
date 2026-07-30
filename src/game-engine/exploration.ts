@@ -3,6 +3,30 @@ import { EXPLORATION_EVENTS } from '../data/exploration-events';
 import { createId, pick } from './random';
 import { pushLog } from './log';
 import { resolveDamage } from './damage';
+import { applyStressBatch } from './stress';
+
+/**
+ * Phase 7：全队压力统一入口（存活英雄各 +amount，经统一管线处理阈值）。
+ * 同一次事件共用一个 batchId（幂等保护）。
+ */
+function applyPartyStress(
+  campaign: CampaignState,
+  amount: number,
+  sourceId: string
+): CampaignState {
+  const batchId = createId('sbatch');
+  const inputs = campaign.heroes
+    .filter((h) => !h.dead)
+    .map((h) => ({
+      heroId: h.instanceId,
+      amount,
+      sourceType: 'exploration' as const,
+      sourceId,
+      questId: campaign.currentQuestId ?? '',
+      batchId,
+    }));
+  return applyStressBatch(campaign, inputs).campaign;
+}
 
 /** 根据事件类型扣减对应补给（不降级为负值）。 */
 function consumeProvision(
@@ -63,10 +87,7 @@ export function applyExplorationResult(
       }
       const victim = pick(next.heroes.filter((h) => !h.dead));
       if (victim) next = dealExplorationDamage(next, victim.instanceId, 1, 'trap');
-      next = {
-        ...next,
-        heroes: next.heroes.map((h) => (h.dead ? h : { ...h, stress: h.stress + 1 })),
-      };
+      next = applyPartyStress(next, 1, 'corridor-trap');
       return pushLog(next, '走廊陷阱且缺乏 Tool，随机英雄受 1 伤害，全队压力 +1！', 'danger');
     }
 
@@ -75,10 +96,7 @@ export function applyExplorationResult(
         next = { ...next, provisions: consumeProvision(next.provisions, 'torch', 1) };
         return pushLog(next, '黑暗：消耗 1 Torch 照明。', 'info');
       }
-      next = {
-        ...next,
-        heroes: next.heroes.map((h) => (h.dead ? h : { ...h, stress: h.stress + 1 })),
-      };
+      next = applyPartyStress(next, 1, 'darkness');
       return pushLog(next, '黑暗且缺乏 Torch，全队压力 +1！', 'warning');
 
     case 'rubble': {
@@ -88,10 +106,7 @@ export function applyExplorationResult(
       }
       const victim = pick(next.heroes.filter((h) => !h.dead));
       if (victim) next = dealExplorationDamage(next, victim.instanceId, 1, 'exploration');
-      next = {
-        ...next,
-        heroes: next.heroes.map((h) => (h.dead ? h : { ...h, stress: h.stress + 1 })),
-      };
+      next = applyPartyStress(next, 1, 'rubble');
       return pushLog(next, '碎石且缺乏 Tool，随机英雄受 1 伤害，全队压力 +1！', 'danger');
     }
 

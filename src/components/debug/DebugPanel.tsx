@@ -15,6 +15,8 @@ export default function DebugPanel() {
   const campaign = useGameStore((s) => s.campaign);
   const manualSave = useGameStore((s) => s.manualSave);
   const resetCampaign = useGameStore((s) => s.resetCampaign);
+  const debugApplyStress = useGameStore((s) => s.debugApplyStress);
+  const debugRecoverStress = useGameStore((s) => s.debugRecoverStress);
 
   if (!import.meta.env.DEV) return null;
 
@@ -56,6 +58,46 @@ export default function DebugPanel() {
               </div>
             ))}
           </dl>
+          {campaign && campaign.heroes.length > 0 && (
+            <div className="mb-2 border-t border-dd-border pt-2">
+              <div className="text-dd-muted mb-1 font-semibold">Phase 7 · Stress（统一管线）</div>
+              <div className="space-y-1 max-h-40 overflow-auto">
+                {campaign.heroes.map((h) => (
+                  <div key={h.instanceId} className="flex items-center gap-1.5">
+                    <span className="flex-1 truncate text-dd-text" title={h.name}>
+                      {h.name}
+                    </span>
+                    <span
+                      className={
+                        h.stress >= 10 ? 'text-red-400 font-bold' : h.stress >= 7 ? 'text-amber-400' : 'text-dd-muted'
+                      }
+                    >
+                      {h.dead ? '死亡' : `${h.stress}/10`}
+                    </span>
+                    <span className="text-dd-muted" title="resolveState">
+                      {h.resolveState === 'virtuous' ? '✦' : h.resolveState === 'afflicted' ? '☠' : '·'}
+                    </span>
+                    <button
+                      onClick={() => debugApplyStress(h.instanceId, 2)}
+                      disabled={h.dead}
+                      className="px-1.5 rounded bg-dd-panel2 border border-dd-border text-dd-muted hover:text-dd-text disabled:opacity-40"
+                      data-testid={`debug-stress-add-${h.instanceId}`}
+                    >
+                      +2
+                    </button>
+                    <button
+                      onClick={() => debugRecoverStress(h.instanceId, 2)}
+                      disabled={h.dead}
+                      className="px-1.5 rounded bg-dd-panel2 border border-dd-border text-dd-muted hover:text-dd-text disabled:opacity-40"
+                      data-testid={`debug-stress-sub-${h.instanceId}`}
+                    >
+                      -2
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
           <div className="flex flex-wrap gap-1.5">
             <button onClick={copySummary} className="px-2 py-1 rounded bg-dd-panel2 border border-dd-border text-dd-muted hover:text-dd-text">
               复制摘要

@@ -1,5 +1,5 @@
 import { Navigate, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useGameStore } from '../store/useGameStore';
 import { canScout } from '../game-engine/dungeon';
 import { getRoomMeta } from '../data/rooms';
@@ -15,6 +15,7 @@ export default function DungeonExplorePage() {
   const scout = useGameStore((s) => s.scout);
   const moveToRoom = useGameStore((s) => s.moveToRoom);
   const leaveDungeon = useGameStore((s) => s.leaveDungeon);
+  const [confirmLeave, setConfirmLeave] = useState(false);
 
   const gamePhase = campaign?.gamePhase;
   useEffect(() => {
@@ -22,15 +23,13 @@ export default function DungeonExplorePage() {
     if (gamePhase === 'quest-result') navigate('/result');
   }, [gamePhase, navigate]);
 
-  const onLeaveDungeon = () => {
-    const objectiveDone = campaign?.dungeon?.objectiveComplete;
-    const msg = objectiveDone
-      ? '任务目标已完成。确定离开地牢并进行任务结算吗？'
-      : '任务目标尚未完成，现在离开将视为任务未完成。确定离开吗？';
-    if (window.confirm(msg)) {
-      leaveDungeon();
-    }
+  const objectiveDone = campaign?.dungeon?.objectiveComplete;
+  const onRequestLeave = () => setConfirmLeave(true);
+  const onConfirmLeave = () => {
+    setConfirmLeave(false);
+    leaveDungeon();
   };
+  const onCancelLeave = () => setConfirmLeave(false);
 
   if (!campaign) return <Navigate to="/" replace />;
   if (!campaign.dungeon) return <Navigate to="/quests" replace />;
@@ -46,7 +45,7 @@ export default function DungeonExplorePage() {
         <h1 className="text-xl font-bold text-dd-text">地牢探索</h1>
         <div className="flex items-center gap-2">
         <button
-          onClick={onLeaveDungeon}
+          onClick={onRequestLeave}
           className="px-3 py-1.5 rounded font-semibold text-sm bg-dd-panel2 text-dd-text border border-dd-border hover:bg-dd-panel transition-colors"
           title="离开地牢并进行任务结算（未完成目标视为任务未完成）"
           data-testid="leave-dungeon"
@@ -126,6 +125,40 @@ export default function DungeonExplorePage() {
       </div>
 
       <EventLog log={campaign.log} />
+
+      {confirmLeave && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
+          role="dialog"
+          aria-modal="true"
+          data-testid="leave-dungeon-confirm"
+        >
+          <div className="rounded-lg border border-dd-border bg-dd-panel p-5 w-[340px] max-w-[90vw] flex flex-col gap-4">
+            <h3 className="text-base font-bold text-dd-text">离开地牢</h3>
+            <p className="text-sm text-dd-muted">
+              {objectiveDone
+                ? '任务目标已完成。确定离开地牢并进行任务结算吗？'
+                : '任务目标尚未完成，现在离开将视为任务未完成。确定离开吗？'}
+            </p>
+            <div className="flex justify-end gap-2">
+              <button
+                onClick={onCancelLeave}
+                className="px-3 py-1.5 rounded font-semibold text-sm bg-dd-panel2 text-dd-text border border-dd-border hover:bg-dd-panel transition-colors"
+                data-testid="leave-dungeon-cancel"
+              >
+                取消
+              </button>
+              <button
+                onClick={onConfirmLeave}
+                className="px-3 py-1.5 rounded font-semibold text-sm bg-dd-warn text-black hover:brightness-110 transition-colors"
+                data-testid="leave-dungeon-confirm-ok"
+              >
+                确认离开
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

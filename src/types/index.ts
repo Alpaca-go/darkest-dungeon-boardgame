@@ -88,6 +88,25 @@ export interface HeroInstance {
   skillLevels: Record<string, 1 | 2 | 3>;
   /** 关联的死亡记录 id（dead=true 时存在）。 */
   deathRecordId?: string;
+  // ---- Phase 7：Stress / Resolve / Affliction / Virtue / Heart Attack ----
+  /** 本 Quest 是否已进行过 Resolve Test（每名英雄每 Quest 仅一次）。 */
+  resolveTestedThisQuest: boolean;
+  /** 精神状态：normal / virtuous / afflicted。以该字段为主，避免互相冲突的布尔。 */
+  resolveState: ResolveState;
+  /** 当前 Virtue 卡牌 id（resolveState==='virtuous' 时存在，否则 null）。 */
+  virtueId: string | null;
+  /** 当前 Affliction 卡牌 id（resolveState==='afflicted' 时存在，否则 null）。 */
+  afflictionId: string | null;
+  /** Heart Attack 累计次数（统计用，不影响规则）。 */
+  heartAttackCount: number;
+  /** 已获得 Positive Quirk id 列表（Phase 7 为 placeholder，不执行被动效果）。 */
+  positiveQuirkIds: string[];
+  /** 已获得 Negative Quirk id 列表（Phase 7 为 placeholder，不执行被动效果）。 */
+  negativeQuirkIds: string[];
+  /** 最近一次 Resolve Test 所在 Quest id（防重复 / 刷新恢复）。 */
+  lastResolveQuestId: string | null;
+  /** 最近一次精神事件 id（防重复执行 / 调试）。 */
+  lastMentalEventId: string | null;
 }
 
 /** 地牢房间类型。 */
@@ -172,6 +191,32 @@ export interface BattleUnit {
   deathCause?: HeroDeathCause;
   /** 英雄技能等级快照（仅 hero 有）。 */
   skillLevels?: Record<string, 1 | 2 | 3>;
+  // ---- Phase 7：精神效果 ----
+  /** 本 Quest 是否已进行 Resolve Test。 */
+  resolveTestedThisQuest: boolean;
+  /** 精神状态。 */
+  resolveState: ResolveState;
+  /** 当前 Virtue 卡牌 id。 */
+  virtueId: string | null;
+  /** 当前 Affliction 卡牌 id。 */
+  afflictionId: string | null;
+  /** 本英雄回合精神效果已处理的 turnId（防刷新 / 重复调用重复检定）。 */
+  mentalEffectResolvedTurnId: string | null;
+  /** 精神效果给予的当前回合伤害加成（回合结束清零）。 */
+  turnDamageBonus?: number;
+  /** 精神效果给予的当前回合命中加成（回合结束清零）。 */
+  turnAccuracyBonus?: number;
+}
+
+/** Phase 7：战斗内产生的待处理压力事件（store 层路由到统一 stress 管线）。 */
+export interface BattleStressEvent {
+  id: string;
+  /** 目标英雄 instanceId（怪物不产生压力事件）。 */
+  heroInstanceId: string;
+  /** 正数 = 加压，负数 = 恢复。 */
+  amount: number;
+  sourceType: MentalEventSourceType;
+  sourceId?: string;
 }
 
 /** 战斗状态。 */
@@ -195,6 +240,13 @@ export interface BattleState {
   /** 来源战斗房间 id（用于胜利后标记 cleared）。 */
   sourceRoomId: string;
   rewards: { gold: number };
+  // ---- Phase 7（可选字段，兼容旧存档与测试 fixture）----
+  /** 英雄回合开始暂停点：等待 campaign 层执行精神效果检定。 */
+  pendingMentalCheck?: boolean;
+  /** 战斗内待处理压力事件（processBattleStressEvents 消费后清空）。 */
+  pendingStressEvents?: BattleStressEvent[];
+  /** 精神效果导致的本回合行动点惩罚（授予行动点时消耗）。 */
+  pendingActionPointPenalty?: number;
 }
 
 /** Hamlet（村庄）状态。 */
@@ -252,6 +304,7 @@ export type HeroDeathCause =
   | 'deathblow-periodic'
   | 'deathblow-trap'
   | 'deathblow-exploration'
+  | 'heart-attack'
   | 'unknown';
 
 /** 死亡记录（永久保存在 CampaignState.deathRecords）。 */
@@ -406,6 +459,13 @@ export interface CampaignState {
   stagecoachXpApplied: boolean;
   /** 战役失败原因（campaign-over 页面展示）。 */
   campaignOverReason: string | null;
+  // ---- Phase 7 ----
+  /** 精神事件队列（日志 / UI 展示 / E2E 断言；保留最近 200 条）。 */
+  mentalEvents: MentalEvent[];
+  /** Quest 结束 Resolve → Quirk 转换记录（幂等保护，永久保存）。 */
+  resolveConversionRecords: ResolveConversionRecord[];
+  /** 已处理的 Stress 阈值批次 id（防同一批次重复 Resolve Test / Heart Attack）。 */
+  processedStressBatchIds: string[];
 }
 
 // ---------------------------------------------------------------------------
@@ -567,4 +627,168 @@ export interface HeroBattleAction {
   targetId?: string | null;
   provisionType?: keyof ProvisionPool;
   newStance?: Stance;
+}
+
+// ---------------------------------------------------------------------------
+// Phase 7：Stress / Resolve / Affliction / Virtue / Heart Attack / Quirk
+// ---------------------------------------------------------------------------
+
+/** 精神状态。优先以 resolveState 为主，避免互相冲突的布尔字段。 */
+export type ResolveState =
+  | 'normal'
+  | 'virtuous'
+  | 'afflicted';
+
+/** Resolve Test 修正接口（Phase 8 的 Quirk / Disease 可调整 Virtue 阈值）。 */
+export interface ResolveTestModifiers {
+  /** Virtue 阈值偏移量（正=更难获得 Virtue）。 */
+  virtueThresholdDelta: number;
+  /** 强制结果（未来接口预留，本阶段无正常玩法来源）。 */
+  forceVirtue?: boolean;
+  forceAffliction?: boolean;
+}
+
+/** 精神效果（数据驱动执行器使用，不为每张卡写独立 if/else）。 */
+export type ResolveEffect =
+  | { type: 'stress-self'; amount: number }
+  | { type: 'stress-allies'; amount: number }
+  | { type: 'heal-self'; amount: number }
+  | { type: 'damage-self'; amount: number }
+  | { type: 'temporary-damage-bonus'; amount: number; duration: 'current-turn' }
+  | { type: 'temporary-accuracy-bonus'; amount: number; duration: 'current-turn' }
+  | { type: 'consume-provision'; amount: number; selection: 'random' | 'food-first' }
+  | { type: 'lose-action-points'; amount: number }
+  | { type: 'move-self'; distance: number; direction: 'forward' | 'backward' | 'random' }
+  | { type: 'log-only'; message: string };
+
+/** 效果数据来源可信度。 */
+export type ResolveSourceAccuracy =
+  | 'rulebook-visible'
+  | 'prototype-simplified'
+  | 'verified-card';
+
+/** Virtue / Affliction 卡牌定义（数据驱动）。 */
+export interface ResolveEffectDefinition {
+  id: string;
+  name: string;
+  type: 'virtue' | 'affliction';
+  triggerRollMin: number;
+  triggerRollMax: number;
+  triggerTiming: 'hero-turn-start';
+  effects: ResolveEffect[];
+  description: string;
+  sourceAccuracy: ResolveSourceAccuracy;
+}
+
+/** 精神事件类型（日志 / UI / 防重复 / E2E 断言）。 */
+export type MentalEventType =
+  | 'stress-gained'
+  | 'stress-recovered'
+  | 'resolve-test'
+  | 'virtue-gained'
+  | 'affliction-gained'
+  | 'resolve-effect-triggered'
+  | 'resolve-effect-missed'
+  | 'heart-attack'
+  | 'resolve-converted-to-quirk';
+
+/** 精神事件来源。 */
+export type MentalEventSourceType =
+  | 'battle-skill'
+  | 'critical'
+  | 'exploration'
+  | 'scout'
+  | 'light'
+  | 'curio'
+  | 'hamlet-event'
+  | 'resolve-effect'
+  | 'debug'
+  | 'migration';
+
+/** 精神事件。 */
+export interface MentalEvent {
+  id: string;
+  questId: string;
+  heroId: string;
+  type: MentalEventType;
+  sourceType: MentalEventSourceType;
+  sourceId?: string;
+  amount?: number;
+  roll?: number;
+  resultId?: string;
+  createdAt: string;
+  sequence: number;
+}
+
+/** Quest 结束 Resolve 状态转换为 Quirk 的记录（幂等键 = questId+heroId+sourceResolveId）。 */
+export interface ResolveConversionRecord {
+  id: string;
+  questId: string;
+  heroId: string;
+  from: 'virtue' | 'affliction';
+  sourceResolveId: string;
+  grantedQuirkId: string;
+  convertedAt: string;
+}
+
+/** Placeholder Quirk（Phase 7 仅建立数据，不执行被动效果，留待 Phase 8）。 */
+export interface QuirkDefinition {
+  id: string;
+  name: string;
+  polarity: 'positive' | 'negative';
+  description: string;
+  /** Phase 7 标记：被动效果将在成长系统启用。 */
+  inactiveUntilPhase8: true;
+}
+
+/** Resolve Test 结果。 */
+export interface ResolveTestResult {
+  heroId: string;
+  questId: string;
+  roll: number;
+  outcome: 'virtue' | 'affliction';
+  virtueThreshold: number;
+  cardId: string;
+  resolveState: ResolveState;
+}
+
+/** 统一 Stress 应用结果。 */
+export interface ApplyStressResult {
+  heroId: string;
+  previousStress: number;
+  appliedAmount: number;
+  currentStress: number;
+  thresholdReached: boolean;
+  resolveTest?: ResolveTestResult;
+  heartAttack?: HeartAttackResult;
+  mentalEvents: MentalEvent[];
+}
+
+/** Heart Attack 结果（复用 Phase 6 死亡记录）。 */
+export interface HeartAttackResult {
+  heroId: string;
+  questId: string;
+  battleId?: string;
+  deathRecordId?: string;
+  heartAttackCount: number;
+}
+
+/** 统一 Stress 应用输入。 */
+export interface ApplyStressInput {
+  heroId: string;
+  amount: number;
+  sourceType: MentalEventSourceType;
+  sourceId?: string;
+  questId: string;
+  battleId?: string;
+  batchId?: string;
+}
+
+/** 统一 Stress 恢复输入。 */
+export interface RecoverStressInput {
+  heroId: string;
+  amount: number;
+  sourceType: MentalEventSourceType;
+  sourceId?: string;
+  questId: string;
 }

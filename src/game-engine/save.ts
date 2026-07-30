@@ -1,5 +1,6 @@
 import type {
   BattleState,
+  BattleUnit,
   CampaignState,
   DungeonState,
   GamePhase,
@@ -16,8 +17,12 @@ import { createInitialStagecoach } from './stagecoach';
 
 /** localStorage 键名（沿用 v1 键名以便旧存档可被发现并迁移）。 */
 export const STORAGE_KEY = 'dd-web-prototype-save-v1';
-/** 当前存档格式版本。v1 = SaveEnvelope（Phase 1-4），v2 = SaveFile（Phase 5），v3 = Phase 6（死亡/Stagecoach）。 */
-export const SAVE_VERSION = 3;
+/**
+ * 当前存档格式版本。
+ * v1 = SaveEnvelope（Phase 1-4），v2 = SaveFile（Phase 5），
+ * v3 = Phase 6（死亡/Stagecoach），v4 = Phase 7（Stress/Resolve/Affliction/Virtue/Heart Attack）。
+ */
+export const SAVE_VERSION = 4;
 
 /**
  * v2 存档文件结构。
@@ -110,6 +115,19 @@ export function validateSaveFile(data: unknown): string | null {
     if (!h || typeof h.instanceId !== 'string' || typeof h.heroId !== 'string') {
       return '英雄数据缺少 instanceId/heroId';
     }
+    // Phase 7：精神系统字段结构校验（迁移后必然存在）
+    if (typeof h.stress !== 'number' || h.stress < 0 || h.stress > 10) {
+      return `英雄 ${h.instanceId} 的 stress 超出 0-10 范围`;
+    }
+    if (h.resolveState !== 'normal' && h.resolveState !== 'virtuous' && h.resolveState !== 'afflicted') {
+      return `英雄 ${h.instanceId} 的 resolveState 非法`;
+    }
+    if (h.resolveState === 'virtuous' && !h.virtueId) {
+      return `英雄 ${h.instanceId} 处于 virtuous 但缺少 virtueId`;
+    }
+    if (h.resolveState === 'afflicted' && !h.afflictionId) {
+      return `英雄 ${h.instanceId} 处于 afflicted 但缺少 afflictionId`;
+    }
   }
 
   // 阶段相关引用完整性
@@ -183,40 +201,167 @@ export function migrateCampaignToV3(campaign: CampaignState): CampaignState {
   };
 }
 
+/** Stress 合法范围钳制（Phase 7：0-10）。 */
+function clampStress(value: unknown): number {
+  const n = typeof value === 'number' && Number.isFinite(value) ? value : 0;
+  return Math.max(0, Math.min(10, Math.round(n)));
+}
+
+/**
+ * Phase 7 战役字段迁移（v3 → v4）：
+ * - 英雄补精神系统字段：resolveTestedThisQuest=false / resolveState='normal' /
+ *   virtueId=null / afflictionId=null / heartAttackCount=0 /
+ *   positiveQuirkIds=[] / negativeQuirkIds=[] / lastResolveQuestId=null / lastMentalEventId=null；
+ * - stress 钳制到 0-10（旧存档若超界不视为损坏，直接修正）；
+ * - 进行中的战斗（campaign.battle）内的单位同步补 BattleUnit 精神字段
+ *   （英雄单位从对应战役英雄同步，怪物全默认值）。
+ */
+export function migrateCampaignToV4(campaign: CampaignState): CampaignState {
+  let changed = false;
+
+  const heroes: HeroInstance[] = (campaign.heroes ?? []).map((h) => {
+    const anyH = h as HeroInstance & Record<string, unknown>;
+    const needs =
+      typeof anyH.resolveTestedThisQuest !== 'boolean' ||
+      typeof anyH.resolveState !== 'string' ||
+      anyH.virtueId === undefined ||
+      anyH.afflictionId === undefined ||
+      typeof anyH.heartAttackCount !== 'number' ||
+      !Array.isArray(anyH.positiveQuirkIds) ||
+      !Array.isArray(anyH.negativeQuirkIds) ||
+      anyH.lastResolveQuestId === undefined ||
+      anyH.lastMentalEventId === undefined ||
+      clampStress(anyH.stress) !== anyH.stress;
+    if (!needs) return h;
+    changed = true;
+    return {
+      ...h,
+      stress: clampStress(anyH.stress),
+      resolveTestedThisQuest:
+        typeof anyH.resolveTestedThisQuest === 'boolean' ? anyH.resolveTestedThisQuest : false,
+      resolveState:
+        anyH.resolveState === 'virtuous' || anyH.resolveState === 'afflicted'
+          ? anyH.resolveState
+          : 'normal',
+      virtueId: typeof anyH.virtueId === 'string' ? anyH.virtueId : null,
+      afflictionId: typeof anyH.afflictionId === 'string' ? anyH.afflictionId : null,
+      heartAttackCount: typeof anyH.heartAttackCount === 'number' ? anyH.heartAttackCount : 0,
+      positiveQuirkIds: Array.isArray(anyH.positiveQuirkIds)
+        ? (anyH.positiveQuirkIds as string[])
+        : [],
+      negativeQuirkIds: Array.isArray(anyH.negativeQuirkIds)
+        ? (anyH.negativeQuirkIds as string[])
+        : [],
+      lastResolveQuestId:
+        typeof anyH.lastResolveQuestId === 'string' ? anyH.lastResolveQuestId : null,
+      lastMentalEventId:
+        typeof anyH.lastMentalEventId === 'string' ? anyH.lastMentalEventId : null,
+    };
+  });
+
+  let battle = campaign.battle;
+  if (battle) {
+    const migrateUnit = (u: BattleUnit): BattleUnit => {
+      const anyU = u as BattleUnit & Record<string, unknown>;
+      const needs =
+        typeof anyU.resolveTestedThisQuest !== 'boolean' ||
+        typeof anyU.resolveState !== 'string' ||
+        anyU.virtueId === undefined ||
+        anyU.afflictionId === undefined ||
+        anyU.mentalEffectResolvedTurnId === undefined ||
+        clampStress(anyU.stress) !== anyU.stress;
+      if (!needs) return u;
+      changed = true;
+      // 英雄单位优先从战役英雄同步精神状态
+      const src = u.side === 'hero' ? heroes.find((h) => h.instanceId === u.sourceId) : undefined;
+      return {
+        ...u,
+        stress: clampStress(anyU.stress),
+        resolveTestedThisQuest:
+          typeof anyU.resolveTestedThisQuest === 'boolean'
+            ? anyU.resolveTestedThisQuest
+            : src?.resolveTestedThisQuest ?? false,
+        resolveState:
+          anyU.resolveState === 'virtuous' || anyU.resolveState === 'afflicted'
+            ? anyU.resolveState
+            : src?.resolveState ?? 'normal',
+        virtueId: typeof anyU.virtueId === 'string' ? anyU.virtueId : src?.virtueId ?? null,
+        afflictionId:
+          typeof anyU.afflictionId === 'string' ? anyU.afflictionId : src?.afflictionId ?? null,
+        mentalEffectResolvedTurnId:
+          typeof anyU.mentalEffectResolvedTurnId === 'string'
+            ? anyU.mentalEffectResolvedTurnId
+            : null,
+      };
+    };
+    const nextHeroUnits = battle.heroes.map(migrateUnit);
+    const nextMonsterUnits = battle.monsters.map(migrateUnit);
+    if (changed) battle = { ...battle, heroes: nextHeroUnits, monsters: nextMonsterUnits };
+  }
+
+  // 战役级 Phase 7 字段
+  const anyC = campaign as CampaignState & Record<string, unknown>;
+  const needsCampaignFields =
+    !Array.isArray(anyC.mentalEvents) ||
+    !Array.isArray(anyC.resolveConversionRecords) ||
+    !Array.isArray(anyC.processedStressBatchIds);
+  if (needsCampaignFields) changed = true;
+
+  if (!changed && campaign.saveVersion === SAVE_VERSION) return campaign;
+  return {
+    ...campaign,
+    saveVersion: SAVE_VERSION,
+    heroes,
+    battle,
+    mentalEvents: Array.isArray(anyC.mentalEvents) ? campaign.mentalEvents : [],
+    resolveConversionRecords: Array.isArray(anyC.resolveConversionRecords)
+      ? campaign.resolveConversionRecords
+      : [],
+    processedStressBatchIds: Array.isArray(anyC.processedStressBatchIds)
+      ? campaign.processedStressBatchIds
+      : [],
+  };
+}
+
+/** 将战役迁移到当前最新版本（v3 补 Phase 6 字段 → v4 补 Phase 7 字段）。 */
+export function migrateCampaignToLatest(campaign: CampaignState): CampaignState {
+  return migrateCampaignToV4(migrateCampaignToV3(campaign));
+}
+
 /**
  * 迁移旧版本存档到当前版本。无法迁移时返回 null。
- * v1（SaveEnvelope）→ v2（SaveFile）→ v3（Phase 6 字段）。
+ * v1（SaveEnvelope）→ v2（SaveFile）→ v3（Phase 6 字段）→ v4（Phase 7 精神系统）。
  */
 export function migrateSaveFile(raw: unknown): SaveFile | null {
   if (!raw || typeof raw !== 'object') return null;
   const anyRaw = raw as Record<string, unknown>;
 
-  // 已是 v3
+  // 已是 v4（当前版本）
   if (typeof anyRaw.version === 'number' && anyRaw.version === SAVE_VERSION) {
     const file = raw as SaveFile;
     // campaign 缺失或非对象 → 无法迁移（调用方回退为「无法识别的存档结构」）
     if (!file.campaign || typeof file.campaign !== 'object') return null;
-    // 保险：即使 version=3 也补齐缺失字段（防手工编辑的存档）
-    const campaign = migrateCampaignToV3(file.campaign);
+    // 保险：即使 version=4 也补齐缺失字段（防手工编辑的存档）
+    const campaign = migrateCampaignToLatest(file.campaign);
     return campaign === file.campaign ? file : { ...createSaveSnapshot(campaign), savedAt: file.savedAt };
   }
 
-  // v2：{ version: 2, savedAt, campaign, ... }
+  // v2 / v3：{ version: 2|3, savedAt, campaign, ... }
   if (
     typeof anyRaw.version === 'number' &&
-    anyRaw.version === 2 &&
+    (anyRaw.version === 2 || anyRaw.version === 3) &&
     anyRaw.campaign &&
     typeof anyRaw.campaign === 'object'
   ) {
     const file = raw as SaveFile;
-    const campaign = migrateCampaignToV3(file.campaign);
+    const campaign = migrateCampaignToLatest(file.campaign);
     return { ...createSaveSnapshot(campaign), savedAt: file.savedAt ?? nowIso() };
   }
 
   // v1：{ saveVersion: 1, savedAt, campaign }
   const v1 = raw as Partial<SaveEnvelopeV1>;
   if (v1.saveVersion === 1 && v1.campaign && typeof v1.campaign === 'object') {
-    const campaign = migrateCampaignToV3(v1.campaign as CampaignState);
+    const campaign = migrateCampaignToLatest(v1.campaign as CampaignState);
     const snapshot = createSaveSnapshot(campaign);
     return { ...snapshot, savedAt: v1.savedAt ?? snapshot.savedAt };
   }
@@ -295,7 +440,7 @@ export function loadSaveDetailed(): LoadResult {
   const migrated = migrateSaveFile(parsed);
   if (!migrated) {
     const v = (parsed as Record<string, unknown> | null)?.version ?? (parsed as Record<string, unknown> | null)?.saveVersion;
-    if (typeof v === 'number' && v !== SAVE_VERSION && v !== 2 && v !== 1) {
+    if (typeof v === 'number' && v !== SAVE_VERSION && v !== 3 && v !== 2 && v !== 1) {
       return { status: 'unsupported', campaign: null, error: `不支持的存档版本：${v}` };
     }
     return { status: 'corrupt', campaign: null, error: '存档结构无法识别' };

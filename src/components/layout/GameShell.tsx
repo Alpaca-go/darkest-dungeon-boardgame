@@ -5,6 +5,7 @@ import { ROUTES } from '../../app/router';
 import { checkRouteAccess, nearestLegalPath } from '../../app/route-guards';
 import ErrorBoundary from '../feedback/ErrorBoundary';
 import DebugPanel from '../debug/DebugPanel';
+import MentalEventOverlay from '../mental/MentalEventOverlay';
 
 /**
  * 统一外层布局：顶部资源条 + 导航 + 内容区(Outlet) + 底部说明。
@@ -102,6 +103,7 @@ export default function GameShell() {
         单机原型 · 本地自动存档 · 所有视觉使用纯色块占位。导航中灰色条目表示当前阶段不可进入。
       </footer>
 
+      <MentalEventOverlay />
       <DebugPanel />
     </div>
   );

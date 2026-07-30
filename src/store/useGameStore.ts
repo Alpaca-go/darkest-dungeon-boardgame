@@ -21,7 +21,13 @@ import {
   heroUseSkill as engineHeroUseSkill,
   endHeroTurn as engineEndHeroTurn,
   resolveVictory as engineResolveVictory,
+  resumeTurnAfterMentalCheck,
 } from '../game-engine/battle';
+import {
+  processBattleStressEvents,
+  resolveTurnStartMentalEffect,
+} from '../game-engine/mental-effects';
+import { applyStress as engineApplyStress, recoverStress as engineRecoverStress } from '../game-engine/stress';
 import {
   finishQuest,
   failQuestFromBattle,
@@ -139,6 +145,12 @@ interface GameStore {
   // ---- Phase 6：Stagecoach 与战役失败 ----
   applyQuestXpToStagecoach(xp: number): void;
   failCampaign(reason: string): void;
+
+  // ---- Phase 7：Stress / Resolve（Debug 受控入口） ----
+  /** Debug：给英雄加压（统一管线，阈值规则生效）。 */
+  debugApplyStress(heroId: string, amount: number): void;
+  /** Debug：给英雄减压（统一管线）。 */
+  debugRecoverStress(heroId: string, amount: number): void;
 }
 
 const EMPTY_UI: UiState = {
@@ -175,6 +187,39 @@ export const useGameStore = create<GameStore>((set, get) => {
   const commit = (next: CampaignState): void => {
     saveCampaign(next);
     set({ campaign: next });
+  };
+
+  /**
+   * Phase 7：战斗状态统一结算（每次战斗引擎推进后、commit 前调用）。
+   * 顺序（文档 11.1 / 11.4）：
+   * 1. processBattleDeaths —— 永久死亡同步到 Campaign（恰好一次）；
+   * 2. processBattleStressEvents —— 消费战斗压力事件（阈值 → Resolve Test / Heart Attack）；
+   * 3. pendingMentalCheck 循环 —— 回合暂停时执行精神检定并恢复回合；
+   *    恢复可能推进到下一个需要检定的英雄，因此循环处理（防御上限 50 次）。
+   */
+  const settleBattle = (c: CampaignState): CampaignState => {
+    let next = processBattleDeaths(c);
+    next = processBattleStressEvents(next);
+    let guard = 0;
+    while (
+      next.battle &&
+      next.battle.status === 'active' &&
+      next.battle.pendingMentalCheck &&
+      guard < 50
+    ) {
+      guard += 1;
+      // 检定（结果先落地存档数据，UI 之后只读展示）
+      next = resolveTurnStartMentalEffect(next).campaign;
+      // 检定期间可能已死亡同步 / 产生新的压力事件
+      next = processBattleDeaths(next);
+      next = processBattleStressEvents(next);
+      if (!next.battle) break;
+      // 恢复回合（英雄死亡 → 推进；Stun → 跳过；AP 扣光 → 自动结束）
+      next = { ...next, battle: resumeTurnAfterMentalCheck(next.battle) };
+      next = processBattleDeaths(next);
+      next = processBattleStressEvents(next);
+    }
+    return next;
   };
 
   return {
@@ -282,6 +327,8 @@ export const useGameStore = create<GameStore>((set, get) => {
       const c = get().campaign;
       if (!c || !c.dungeon || !canMoveTo(c.dungeon, roomId)) return;
       let next = engineMoveToRoom(c, roomId);
+      // Phase 7：进入战斗房间时首个英雄可能立即需要精神检定
+      if (next.battle) next = settleBattle(next);
       // Phase 6：探索伤害可能导致永久死亡 → 判定替补流程（战斗阶段不打断，胜利结算后再判）
       if (next.gamePhase === 'dungeon-explore') next = evaluateReplacementFlow(next);
       commit(next);
@@ -308,8 +355,8 @@ export const useGameStore = create<GameStore>((set, get) => {
       const battle = engineHeroMove(c.battle, c.battle.activeActorId, dir);
       if (battle === c.battle) return;
       set((st) => ({ ui: { ...st.ui, battleSkillId: null } }));
-      // Phase 6：每次战斗 commit 前同步永久死亡到 Campaign（恰好一次）
-      commit(processBattleDeaths({ ...c, battle }));
+      // Phase 6/7：每次战斗 commit 前统一结算（死亡同步 + 压力事件 + 精神检定）
+      commit(settleBattle({ ...c, battle }));
     },
 
     battleUseSkill: (targetId) => {
@@ -319,7 +366,7 @@ export const useGameStore = create<GameStore>((set, get) => {
       const battle = engineHeroUseSkill(c.battle, c.battle.activeActorId, skillId, targetId);
       if (battle === c.battle) return;
       set((st) => ({ ui: { ...st.ui, battleSkillId: null } }));
-      commit(processBattleDeaths({ ...c, battle }));
+      commit(settleBattle({ ...c, battle }));
     },
 
     battleEndTurn: () => {
@@ -327,7 +374,7 @@ export const useGameStore = create<GameStore>((set, get) => {
       if (!c?.battle || c.battle.status !== 'active' || !c.battle.activeActorId) return;
       set((st) => ({ ui: { ...st.ui, battleSkillId: null } }));
       const battle = engineEndHeroTurn(c.battle, c.battle.activeActorId);
-      commit(processBattleDeaths({ ...c, battle }));
+      commit(settleBattle({ ...c, battle }));
     },
 
     // 胜利结算：房间 cleared + Gold + 同步英雄状态 + 返回地牢；有阵亡 → 替补流程。
@@ -335,7 +382,7 @@ export const useGameStore = create<GameStore>((set, get) => {
       const c = get().campaign;
       if (!c?.battle || c.battle.status !== 'victory') return;
       set((st) => ({ ui: { ...st.ui, battleSkillId: null } }));
-      let next = processBattleDeaths(c);
+      let next = settleBattle(c);
       next = engineResolveVictory(next);
       next = evaluateReplacementFlow(next);
       commit(next);
@@ -346,7 +393,8 @@ export const useGameStore = create<GameStore>((set, get) => {
       const c = get().campaign;
       if (!c?.battle) return;
       set((st) => ({ ui: { ...st.ui, battleSkillId: null } }));
-      commit(retreatFromBattle(c));
+      // Phase 7：撤退前消费剩余压力事件与死亡同步，避免清除战斗时丢失
+      commit(retreatFromBattle(settleBattle(c)));
     },
 
     // ---- Phase 4：结算与 Hamlet（全部委托 game-engine，经 commit 自动保存） ----
@@ -364,7 +412,7 @@ export const useGameStore = create<GameStore>((set, get) => {
     failQuestFromDefeat: () => {
       const c = get().campaign;
       if (!c?.battle || c.battle.status !== 'defeat') return;
-      let next = processBattleDeaths(c);
+      let next = settleBattle(c);
       next = failQuestFromBattle(next);
       if (next === c) return;
       next = retargetPendingReplacement(next, 'quest-result');
@@ -493,6 +541,38 @@ export const useGameStore = create<GameStore>((set, get) => {
       const c = get().campaign;
       if (!c) return;
       const next = engineFailCampaign(c, reason);
+      if (next === c) return;
+      commit(next);
+    },
+
+    // ---- Phase 7：Debug 受控入口（统一管线，阈值规则照常生效） ----
+    debugApplyStress: (heroId, amount) => {
+      const c = get().campaign;
+      if (!c || amount <= 0) return;
+      let { campaign: next } = engineApplyStress(c, {
+        heroId,
+        amount,
+        sourceType: 'debug',
+        sourceId: 'debug-panel',
+        questId: c.currentQuestId ?? '',
+        battleId: c.battle?.battleId,
+      });
+      if (next === c) return;
+      // 阈值可能触发 Heart Attack → 同步战斗死亡
+      if (next.battle) next = processBattleDeaths(next);
+      commit(next);
+    },
+
+    debugRecoverStress: (heroId, amount) => {
+      const c = get().campaign;
+      if (!c || amount <= 0) return;
+      const { campaign: next } = engineRecoverStress(c, {
+        heroId,
+        amount,
+        sourceType: 'debug',
+        sourceId: 'debug-panel',
+        questId: c.currentQuestId ?? '',
+      });
       if (next === c) return;
       commit(next);
     },

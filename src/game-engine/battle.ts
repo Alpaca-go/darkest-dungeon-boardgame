@@ -51,6 +51,50 @@ function pushBattleLog(state: BattleState, message: string, kind: GameLogEntry['
   return { ...state, battleLog: [...state.battleLog, entry].slice(-100) };
 }
 
+// ---------------------------------------------------------------------------
+// Phase 7：回合键 / 压力事件队列 / 精神效果辅助
+// ---------------------------------------------------------------------------
+
+/** 稳定回合键（幂等标记用：battleId:round:initiativeIndex:actorId）。 */
+export function battleTurnKey(
+  battleId: string,
+  round: number,
+  initiativeIndex: number,
+  actorId: string
+): string {
+  return `${battleId}:${round}:${initiativeIndex}:${actorId}`;
+}
+
+/** 当前激活单位的回合键。 */
+export function currentTurnKey(state: BattleState): string | null {
+  if (!state.activeActorId) return null;
+  return battleTurnKey(state.battleId, state.round, state.initiativeIndex, state.activeActorId);
+}
+
+/**
+ * 追加一条战斗内压力事件（由 store 层 processBattleStressEvents 路由到统一
+ * stress 管线）。战斗引擎内不直接结算阈值 —— Resolve Test / Heart Attack
+ * 需要 Campaign 级数据（卡牌、死亡记录、替补），统一在 campaign 层处理。
+ */
+function queueStressEvent(
+  state: BattleState,
+  heroInstanceId: string,
+  amount: number,
+  sourceType: 'battle-skill' | 'critical' | 'resolve-effect',
+  sourceId?: string
+): BattleState {
+  const ev = { id: createId('bse'), heroInstanceId, amount, sourceType, sourceId };
+  return { ...state, pendingStressEvents: [...(state.pendingStressEvents ?? []), ev] };
+}
+
+/** 单位回合结束时清理精神效果给予的临时加成。 */
+function clearTurnBonuses(state: BattleState): BattleState {
+  if (!state.activeActorId) return state;
+  const u = findUnit(state, state.activeActorId);
+  if (!u || (!u.turnDamageBonus && !u.turnAccuracyBonus)) return state;
+  return setUnit(state, { ...u, turnDamageBonus: 0, turnAccuracyBonus: 0 });
+}
+
 /** 按 id 查找战斗单位（英雄或怪物）。 */
 export function getUnit(state: BattleState, id: string | null): BattleUnit | undefined {
   return findUnit(state, id);
@@ -87,6 +131,12 @@ function makeHeroUnit(hero: HeroInstance, index: number): BattleUnit {
     damageBonus: hero.temporaryDamageBonus ?? 0,
     equippedSkillIds: [...hero.equippedSkillIds],
     skillLevels: { ...(hero.skillLevels ?? {}) },
+    // ---- Phase 7：精神状态快照（从战役英雄同步） ----
+    resolveTestedThisQuest: hero.resolveTestedThisQuest ?? false,
+    resolveState: hero.resolveState ?? 'normal',
+    virtueId: hero.virtueId ?? null,
+    afflictionId: hero.afflictionId ?? null,
+    mentalEffectResolvedTurnId: null,
   };
 }
 
@@ -114,6 +164,12 @@ function makeMonsterUnit(monster: MonsterDefinition, index: number): BattleUnit 
     actionPoints: 0,
     monsterSkillIds: [...monster.skillIds],
     targetRule: monster.targetRule,
+    // ---- Phase 7：怪物不参与精神系统，全部默认值 ----
+    resolveTestedThisQuest: false,
+    resolveState: 'normal',
+    virtueId: null,
+    afflictionId: null,
+    mentalEffectResolvedTurnId: null,
   };
 }
 
@@ -189,7 +245,8 @@ export function initBattle(campaign: CampaignState, roomId: string): CampaignSta
 /** 推进到下一个行动者；自动跳过死亡/Stun 单位，并在怪物回合自动执行其动作。 */
 export function advanceTurn(state: BattleState): BattleState {
   if (state.status !== 'active') return state;
-  let s: BattleState = { ...state };
+  // Phase 7：上一个行动单位的临时加成在回合结束时清零
+  let s: BattleState = clearTurnBonuses({ ...state });
   let idx = s.initiativeIndex;
   let guard = 0;
 
@@ -212,6 +269,24 @@ export function advanceTurn(state: BattleState): BattleState {
     const unit = findUnit(s, id);
     if (!unit || !unit.isAlive) continue;
 
+    // Phase 7：英雄携带精神状态时，先暂停交给 campaign 层做回合开始检定
+    // （顺序遵循文档 5.8：精神效果先于 Bleed/Blight/Death's Door/Stun）。
+    if (
+      unit.side === 'hero' &&
+      unit.resolveState !== 'normal' &&
+      unit.mentalEffectResolvedTurnId !== battleTurnKey(s.battleId, s.round, idx, id)
+    ) {
+      return {
+        ...s,
+        initiativeIndex: idx,
+        activeActorId: id,
+        currentActionPoints: 0,
+        selectedSkillId: null,
+        selectedTargetId: null,
+        pendingMentalCheck: true,
+      };
+    }
+
     if (unit.stunned > 0) {
       s = applyStunSkip(s, id);
       continue;
@@ -219,24 +294,12 @@ export function advanceTurn(state: BattleState): BattleState {
 
     // 激活该单位：Bleed/Blight 合并为同一批次，只经过一次统一伤害入口
     s = { ...s, initiativeIndex: idx, activeActorId: id };
-    const sof = resolveStartOfTurnConditions(unit);
-    s = setUnit(s, sof.unit);
-    for (const m of sof.messages) s = pushBattleLog(s, m, sof.heroDied ? 'danger' : 'warning');
-    if (sof.heroDied || (sof.unit.side === 'monster' && !sof.unit.isAlive)) {
-      s = checkEnd(s);
-      if (s.status !== 'active') return s;
-    }
-    const after = findUnit(s, id);
-    if (!after || !after.isAlive) continue; // 持续伤害致死（Deathblow / 怪物倒下），跳过
+    s = activateUnitAfterMental(s, id);
+    if (s.status !== 'active') return s;
+    const activated = findUnit(s, id);
+    if (!activated || !activated.isAlive) continue; // 持续伤害致死，跳过
 
-    s = {
-      ...s,
-      currentActionPoints: after.side === 'hero' ? 2 : 0,
-      selectedSkillId: null,
-      selectedTargetId: null,
-    };
-
-    if (after.side === 'monster') {
+    if (activated.side === 'monster') {
       s = runMonsterTurn(s, id);
       s = checkEnd(s);
       if (s.status !== 'active') return s;
@@ -245,6 +308,72 @@ export function advanceTurn(state: BattleState): BattleState {
     return s; // 轮到英雄，交还玩家控制
   }
   return checkEnd(s);
+}
+
+/**
+ * 精神检定之后（或无需检定时）激活单位：
+ * Bleed/Blight → Death's Door/Deathblow → 行动点授予。
+ */
+function activateUnitAfterMental(state: BattleState, id: string): BattleState {
+  let s = state;
+  const unit = findUnit(s, id);
+  if (!unit || !unit.isAlive) return s;
+
+  const sof = resolveStartOfTurnConditions(unit);
+  s = setUnit(s, sof.unit);
+  for (const m of sof.messages) s = pushBattleLog(s, m, sof.heroDied ? 'danger' : 'warning');
+  if (sof.heroDied || (sof.unit.side === 'monster' && !sof.unit.isAlive)) {
+    s = checkEnd(s);
+    if (s.status !== 'active') return s;
+  }
+  const after = findUnit(s, id);
+  if (!after || !after.isAlive) return s;
+
+  // Phase 7：精神效果的行动点惩罚在授予时消耗
+  const penalty = s.pendingActionPointPenalty ?? 0;
+  const baseAp = after.side === 'hero' ? 2 : 0;
+  const ap = Math.max(0, baseAp - penalty);
+  if (after.side === 'hero' && penalty > 0) {
+    s = pushBattleLog(s, `${after.name} 因精神效果失去 ${Math.min(penalty, baseAp)} 个行动点。`, 'warning');
+  }
+  s = {
+    ...s,
+    currentActionPoints: ap,
+    pendingActionPointPenalty: 0,
+    selectedSkillId: null,
+    selectedTargetId: null,
+  };
+  return s;
+}
+
+/**
+ * Phase 7：campaign 层完成精神效果检定后恢复回合。
+ * 处理顺序（文档 5.8）：英雄可能已死（Heart Attack/自伤 Deathblow）→ 推进；
+ * Stun → 跳过；否则 Bleed/Blight → Death's Door → 授予行动点。
+ * 英雄行动点为 0（精神效果扣光）时自动结束其回合。
+ */
+export function resumeTurnAfterMentalCheck(state: BattleState): BattleState {
+  if (state.status !== 'active' || !state.pendingMentalCheck) return state;
+  let s: BattleState = { ...state, pendingMentalCheck: false };
+  const id = s.activeActorId;
+  if (!id) return advanceTurn(s);
+
+  const unit = findUnit(s, id);
+  if (!unit || !unit.isAlive) {
+    s = checkEnd(s);
+    if (s.status !== 'active') return s;
+    return advanceTurn(s);
+  }
+  if (unit.stunned > 0) {
+    s = applyStunSkip(s, id);
+    return advanceTurn(s);
+  }
+  s = activateUnitAfterMental(s, id);
+  if (s.status !== 'active') return s;
+  const after = findUnit(s, id);
+  if (!after || !after.isAlive) return advanceTurn(s);
+  if (after.side === 'hero' && s.currentActionPoints <= 0) return advanceTurn(s);
+  return s;
 }
 
 function applyStunSkip(state: BattleState, id: string): BattleState {
@@ -321,10 +450,12 @@ export function heroUseSkill(
   const levelBonus = SKILL_LEVEL_BONUS[skillLevel];
 
   if (skill.targetSide === 'enemy') {
-    const res = resolveAttack(skill);
+    // Phase 7：精神效果（Focused）的当前回合命中加成
+    const res = resolveAttack(skill, actor.turnAccuracyBonus ?? 0);
     if (res.hit) {
-      // Blacksmith 临时加成 + 技能等级加成：仅英雄命中时加算。
-      const totalDamage = res.damage + (actor.damageBonus ?? 0) + levelBonus.damage;
+      // Blacksmith 临时加成 + 技能等级加成 + 精神效果回合加成：仅英雄命中时加算。
+      const totalDamage =
+        res.damage + (actor.damageBonus ?? 0) + levelBonus.damage + (actor.turnDamageBonus ?? 0);
       const outcome = applyBattleUnitDamage(tgt, totalDamage);
       tgt = outcome.unit;
       if (outcome.heroDied) tgt = { ...tgt, deathCause: 'deathblow-attack' };
@@ -352,8 +483,10 @@ export function heroUseSkill(
       s = pushBattleLog(s, `${actor.name} 使用 ${skill.name} 治疗 ${target.name} ${healOutcome.healed} 点。`, 'success');
       for (const m of healOutcome.logs) s = pushBattleLog(s, m, 'success');
     }
-    if (skill.stressHeal) {
+    if (skill.stressHeal && tgt.side === 'hero') {
+      // Phase 7：单位即时更新 + 排入压力事件，由 store 层统一走 recoverStress 管线
       tgt = { ...tgt, stress: Math.max(0, tgt.stress - skill.stressHeal) };
+      s = queueStressEvent(s, tgt.sourceId, -skill.stressHeal, 'battle-skill', skill.id);
       s = pushBattleLog(s, `${target.name} 压力降低 ${skill.stressHeal}。`, 'success');
     }
     if (skill.applyEffects?.length) tgt = applyEffects(tgt, skill.applyEffects);
@@ -431,8 +564,13 @@ export function runMonsterTurn(state: BattleState, monsterId: string): BattleSta
     const outcome = applyBattleUnitDamage(tgt, res.damage);
     tgt = outcome.unit;
     if (outcome.heroDied) tgt = { ...tgt, deathCause: 'deathblow-attack' };
+    let queuedStress = 0;
     if (tgt.isAlive) {
-      if (skill.stress) tgt = { ...tgt, stress: tgt.stress + skill.stress };
+      if (skill.stress && tgt.side === 'hero') {
+        // Phase 7：单位即时钳制到 0-10 + 排入压力事件，阈值处理由 campaign 层统一执行
+        tgt = { ...tgt, stress: Math.min(10, tgt.stress + skill.stress) };
+        queuedStress = skill.stress;
+      }
       if (skill.applyEffects?.length) tgt = applyEffects(tgt, skill.applyEffects);
     }
     const effNote = skill.applyEffects?.length
@@ -440,6 +578,9 @@ export function runMonsterTurn(state: BattleState, monsterId: string): BattleSta
       : '';
     const stressNote = skill.stress ? ` 并施加 ${skill.stress} 压力。` : '';
     let s = setUnit(state, tgt);
+    if (queuedStress > 0) {
+      s = queueStressEvent(s, tgt.sourceId, queuedStress, 'battle-skill', skill.id);
+    }
     s = pushBattleLog(
       s,
       `${monster.name} 使用 ${skill.name}，掷 ${res.roll}${res.crit ? '（暴击）' : ''} 命中 ${tgt.name}，造成 ${res.damage} 伤害${stressNote}${effNote}`,

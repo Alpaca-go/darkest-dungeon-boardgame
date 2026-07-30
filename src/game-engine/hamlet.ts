@@ -4,6 +4,7 @@ import { HAMLET_EVENTS } from '../data/hamlet-events';
 import { createId, nowIso, pick } from './random';
 import { pushLog } from './log';
 import { resolveHealing } from './healing';
+import { applyStressBatch, recoverStress } from './stress';
 
 // ---------------------------------------------------------------------------
 // 工具
@@ -68,14 +69,24 @@ export function startHamletPhase(campaign: CampaignState): CampaignState {
     case 'bonus-provisions':
       hamlet = { ...hamlet, nextQuestProvisionBonus: event.effectAmount };
       break;
-    case 'party-stress':
-      next = {
-        ...next,
-        heroes: next.heroes.map((h) =>
-          h.isAlive ? { ...h, stress: h.stress + event.effectAmount } : h
-        ),
-      };
+    case 'party-stress': {
+      // Phase 7：Hamlet 事件压力统一走 applyStressBatch（阈值规则照常生效）。
+      const batchId = createId('sbatch');
+      next = applyStressBatch(
+        next,
+        next.heroes
+          .filter((h) => h.isAlive && !h.dead)
+          .map((h) => ({
+            heroId: h.instanceId,
+            amount: event.effectAmount,
+            sourceType: 'hamlet-event' as const,
+            sourceId: event.id,
+            questId: next.currentQuestId ?? '',
+            batchId,
+          }))
+      ).campaign;
       break;
+    }
     case 'none':
     default:
       break;
@@ -149,6 +160,19 @@ export function visitHamletBuilding(
     effectNote = `恢复 ${resolution.healed} HP${resolution.leftDeathsDoor ? '，脱离 Death\u0027s Door' : ''}`;
   }
 
+  // Phase 7：Tavern 减压统一走 recoverStress（不撤销 Virtue/Affliction）
+  if (buildingId === 'tavern') {
+    const out = recoverStress(base, {
+      heroId: heroInstanceId,
+      amount: 3,
+      sourceType: 'hamlet-event',
+      sourceId: 'tavern',
+      questId: base.currentQuestId ?? '',
+    });
+    base = out.campaign;
+    effectNote = `Stress -${Math.abs(out.result.appliedAmount)}`;
+  }
+
   const heroes = base.heroes.map((h) => {
     if (h.instanceId !== heroInstanceId) return h;
     let u = { ...h, hasActedToday: true };
@@ -157,10 +181,7 @@ export function visitHamletBuilding(
         break; // 治疗已在 resolveHealing 中完成
       }
       case 'tavern': {
-        const relieved = Math.min(3, u.stress);
-        u = { ...u, stress: u.stress - relieved };
-        effectNote = `Stress -${relieved}`;
-        break;
+        break; // 减压已在 recoverStress 中完成
       }
       case 'guild':
         u = { ...u, xp: u.xp + 1 };

@@ -120,6 +120,16 @@ export function selectReplacementHero(
     dead: false,
     deathblowRollCount: 0,
     skillLevels,
+    // ---- Phase 7：新英雄精神系统初始状态 ----
+    resolveTestedThisQuest: false,
+    resolveState: 'normal',
+    virtueId: null,
+    afflictionId: null,
+    heartAttackCount: 0,
+    positiveQuirkIds: [],
+    negativeQuirkIds: [],
+    lastResolveQuestId: null,
+    lastMentalEventId: null,
   };
 
   let next = updateSlot(campaign, slotId, (s) => ({

@@ -6,6 +6,7 @@ import { getQuestById } from '../data/quests';
 import { generateDungeon } from './dungeon';
 import { pushLog } from './log';
 import { createInitialStagecoach } from './stagecoach';
+import { resetMentalStateForNewQuest } from './resolve-conversion';
 
 /** Phase 1 初始补给池默认值（后续阶段可由 Provision Dice 生成替换）。 */
 export const DEFAULT_PROVISIONS: ProvisionPool = {
@@ -24,7 +25,7 @@ export const DEFAULT_PROVISIONS: ProvisionPool = {
 export function createNewCampaign(): CampaignState {
   const now = nowIso();
   return {
-    saveVersion: 3,
+    saveVersion: 4,
     id: createId('cmp'),
     createdAt: now,
     updatedAt: now,
@@ -68,6 +69,10 @@ export function createNewCampaign(): CampaignState {
     processedDamageEventIds: [],
     stagecoachXpApplied: false,
     campaignOverReason: null,
+    // ---- Phase 7 ----
+    mentalEvents: [],
+    resolveConversionRecords: [],
+    processedStressBatchIds: [],
   };
 }
 
@@ -96,6 +101,16 @@ export function createHeroInstance(heroId: string, partySlot = 0): HeroInstance 
     dead: false,
     deathblowRollCount: 0,
     skillLevels: {},
+    // ---- Phase 7：精神系统初始状态 ----
+    resolveTestedThisQuest: false,
+    resolveState: 'normal',
+    virtueId: null,
+    afflictionId: null,
+    heartAttackCount: 0,
+    positiveQuirkIds: [],
+    negativeQuirkIds: [],
+    lastResolveQuestId: null,
+    lastMentalEventId: null,
   };
 }
 
@@ -186,6 +201,8 @@ export function selectQuest(campaign: CampaignState, questId: string): CampaignS
     // Phase 6：新任务重置 Stagecoach XP 幂等标记
     stagecoachXpApplied: false,
   };
+  // Phase 7：新任务重置精神状态（resolveTestedThisQuest / 兜底清理未转换状态）
+  next = resetMentalStateForNewQuest(next);
   next = pushLog(next, `选择了任务：${quest.name}。地牢已生成，开始探索。`, 'success');
   if (bonus > 0) {
     next = pushLog(next, `Supply Run 事件生效：每种补给 +${bonus}。`, 'success');

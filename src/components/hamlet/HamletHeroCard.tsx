@@ -1,4 +1,6 @@
 import type { HeroInstance } from '../../types';
+import ResolveStateBadge from '../mental/ResolveStateBadge';
+import { getQuirkById } from '../../data/placeholder-quirks';
 
 /** Hamlet 左侧英雄卡：状态 + 选中 + 跳过按钮。 */
 export default function HamletHeroCard({
@@ -50,11 +52,38 @@ export default function HamletHeroCard({
             </div>
             <div className="flex flex-wrap gap-x-2 text-[11px] text-dd-muted">
               <span>HP <span className="text-dd-text">{hp}/{hero.maxLife}</span></span>
-              <span>Stress <span className="text-amber-400">{hero.stress}</span></span>
+              <span>
+                Stress{' '}
+                <span className={hero.stress >= 10 ? 'text-red-400 font-bold' : hero.stress >= 7 ? 'text-amber-400' : 'text-dd-text'}>
+                  {hero.stress}/10
+                </span>
+              </span>
               <span>XP <span className="text-sky-400">{hero.xp}</span></span>
               {hero.temporaryDamageBonus > 0 && (
                 <span className="text-red-400">⚔ +{hero.temporaryDamageBonus}</span>
               )}
+            </div>
+            <div className="flex flex-wrap gap-1 mt-0.5">
+              <ResolveStateBadge
+                resolveState={hero.resolveState}
+                virtueId={hero.virtueId}
+                afflictionId={hero.afflictionId}
+              />
+              {[...hero.positiveQuirkIds, ...hero.negativeQuirkIds].map((qid) => {
+                const q = getQuirkById(qid);
+                if (!q) return null;
+                return (
+                  <span
+                    key={qid}
+                    className={`px-1 rounded text-[10px] leading-4 ${
+                      q.polarity === 'positive' ? 'bg-sky-900/70 text-sky-200' : 'bg-stone-700/70 text-stone-300'
+                    }`}
+                    title={`${q.description}（效果将在 Phase 8 启用）`}
+                  >
+                    {q.name}
+                  </span>
+                );
+              })}
             </div>
           </div>
         </div>

@@ -14,9 +14,9 @@ export interface AttackResult {
  * - 自然 10 必中且为暴击（暴击统一造成最大伤害）。
  * 未命中 damage = 0。
  */
-export function resolveAttack(skill: BattleSkillLike): AttackResult {
+export function resolveAttack(skill: BattleSkillLike, accuracyBonus = 0): AttackResult {
   const roll = d10();
-  const accuracy = skill.accuracy ?? 7;
+  const accuracy = (skill.accuracy ?? 7) + accuracyBonus;
   const crit = roll === 10;
   const hit = crit || roll <= accuracy;
   let damage = 0;

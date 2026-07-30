@@ -7,6 +7,7 @@ import type {
 import { getQuestById } from '../data/quests';
 import { pushLog } from './log';
 import { applyQuestXpToStagecoach } from './stagecoach';
+import { convertResolveStatesAtQuestEnd } from './resolve-conversion';
 
 /** 空补给池（结算后清空用）。 */
 export const EMPTY_PROVISIONS: ProvisionPool = {
@@ -123,6 +124,9 @@ export function applyQuestRewards(
   // Phase 6：Stagecoach 累计任务 XP —— 每次任务只累计一次（不按英雄人数乘算），幂等。
   const stagecoachXp = xpForOutcome(summary.outcome, true);
   next = applyQuestXpToStagecoach(next, stagecoachXp);
+
+  // Phase 7：Quest 结束把 Virtue/Affliction 转换为 Placeholder Quirk（幂等）。
+  next = convertResolveStatesAtQuestEnd(next);
   return next;
 }
 

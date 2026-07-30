@@ -23,6 +23,11 @@ vite.config.ts.timestamp-*.mjs
 test-results/
 playwright-report/
 
+# Validation build / Playwright output dirs (generated during sandbox validation runs)
+build-out-*/
+pw-*/
+pw-out/
+
 # Editor / OS
 .DS_Store
 *.swp

@@ -5,6 +5,29 @@ import { initBattle } from './battle';
 import { pushLog } from './log';
 import { resolveExplorationEvent } from './exploration';
 import { resolveDamage } from './damage';
+import { applyStressBatch } from './stress';
+import type { MentalEventSourceType } from '../types';
+
+/** Phase 7：全队压力统一入口（存活英雄各 +amount，走统一管线处理阈值）。 */
+function applyPartyStress(
+  campaign: CampaignState,
+  amount: number,
+  sourceType: MentalEventSourceType,
+  sourceId: string
+): CampaignState {
+  const batchId = createId('sbatch');
+  const inputs = campaign.heroes
+    .filter((h) => !h.dead)
+    .map((h) => ({
+      heroId: h.instanceId,
+      amount,
+      sourceType,
+      sourceId,
+      questId: campaign.currentQuestId ?? '',
+      batchId,
+    }));
+  return applyStressBatch(campaign, inputs).campaign;
+}
 
 /** 宝藏房间固定奖励。 */
 export const TREASURE_GOLD = 20;
@@ -69,10 +92,7 @@ export function scoutDungeon(campaign: CampaignState): CampaignState {
     ...campaign,
     dungeon: { ...revealAdjacentRooms(campaign.dungeon), scoutedNextMove: true },
   };
-  next = {
-    ...next,
-    heroes: next.heroes.map((h) => ({ ...h, stress: h.stress + 1 })),
-  };
+  next = applyPartyStress(next, 1, 'scout', 'scout');
   next = pushLog(next, '小队进行了侦察（Scout），相邻房间被揭示，全队压力 +1。', 'warning');
   return next;
 }
@@ -130,10 +150,7 @@ function applyRoomResult(campaign: CampaignState, room: DungeonRoom): CampaignSt
           eventId: createId('trap'),
         }).campaign;
       }
-      c = {
-        ...c,
-        heroes: c.heroes.map((h) => (h.dead ? h : { ...h, stress: h.stress + 1 })),
-      };
+      c = applyPartyStress(c, 1, 'exploration', 'trap-room');
       c = { ...c, dungeon: markRoom(c.dungeon!, room.id, 'visited') };
       return log(c, '陷阱触发且无 Tool，随机英雄受 1 伤害，全队压力 +1！', 'danger');
     }

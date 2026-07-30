@@ -61,6 +61,12 @@ function makeUnit(partial: Partial<BattleUnit> & { id: string; side: 'hero' | 'm
     buffs: [],
     debuffs: [],
     actionPoints: 0,
+    // ---- Phase 7：BattleUnit 必填字段 ----
+    resolveTestedThisQuest: false,
+    resolveState: 'normal',
+    virtueId: null,
+    afflictionId: null,
+    mentalEffectResolvedTurnId: null,
     ...partial,
   };
 }
