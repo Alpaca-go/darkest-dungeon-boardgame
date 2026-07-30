@@ -5,6 +5,7 @@ import { HAMLET_BUILDINGS, getHamletBuildingById } from '../data/hamlet-building
 import { getHamletEventById } from '../data/hamlet-events';
 import { buildingVisitError, canEndHamletDay } from '../game-engine/hamlet';
 import { getHeroById } from '../data/heroes';
+import { getQuirkById } from '../data/quirks';
 import HamletEventCard from '../components/hamlet/HamletEventCard';
 import HamletBuildingCard from '../components/hamlet/HamletBuildingCard';
 import HamletHeroCard from '../components/hamlet/HamletHeroCard';
@@ -21,7 +22,10 @@ export default function HamletPage() {
   const visitBuilding = useGameStore((s) => s.visitBuilding);
   const skipHeroToday = useGameStore((s) => s.skipHeroToday);
   const endHamletDay = useGameStore((s) => s.endHamletDay);
+  const visitAbbey = useGameStore((s) => s.visitAbbey);
   const [selectedHeroId, setSelectedHeroId] = useState<string | null>(null);
+  // Phase 8A：Abbey 需要选择移除哪个 Quirk，用局部弹层承载（不写入存档）。
+  const [abbeyHeroId, setAbbeyHeroId] = useState<string | null>(null);
 
   // preparationDays 归零后 gamePhase → quest-select，自动跳转下一任务选择。
   const gamePhase = campaign?.gamePhase;
@@ -40,9 +44,23 @@ export default function HamletPage() {
   const canEnd = canEndHamletDay(campaign);
   const selectedHero = campaign.heroes.find((h) => h.instanceId === selectedHeroId) ?? null;
 
+  const abbeyHero = campaign.heroes.find((h) => h.instanceId === abbeyHeroId) ?? null;
+
   const onVisit = (buildingId: string) => {
     if (!selectedHeroId) return;
+    // Abbey 走二次选择流程，其余建筑直接结算。
+    if (buildingId === 'abbey') {
+      setAbbeyHeroId(selectedHeroId);
+      return;
+    }
     visitBuilding(selectedHeroId, buildingId);
+    setSelectedHeroId(null);
+  };
+
+  const onAbbeyRemove = (quirkId: string) => {
+    if (!abbeyHeroId) return;
+    visitAbbey(abbeyHeroId, quirkId);
+    setAbbeyHeroId(null);
     setSelectedHeroId(null);
   };
 
@@ -138,6 +156,56 @@ export default function HamletPage() {
           </button>
         </div>
       </div>
+
+      {/* Phase 8A：Abbey 移除怪癖选择弹层 */}
+      {abbeyHero && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
+          data-testid="abbey-modal"
+        >
+          <div className="w-full max-w-sm rounded-lg border-2 border-indigo-400/70 bg-dd-panel p-5 shadow-2xl">
+            <div className="text-lg font-bold text-dd-text mb-1">Abbey · 移除怪癖</div>
+            <p className="text-xs text-dd-muted mb-3">
+              选择 {abbeyHero.name} 要移除的一个怪癖（花费{' '}
+              {getHamletBuildingById('abbey')?.cost ?? 0} Gold）。
+            </p>
+            <div className="space-y-1.5">
+              {[...abbeyHero.negativeQuirkIds, ...abbeyHero.positiveQuirkIds].map((qid) => {
+                const q = getQuirkById(qid);
+                return (
+                  <button
+                    key={qid}
+                    type="button"
+                    onClick={() => onAbbeyRemove(qid)}
+                    className="w-full rounded border border-dd-border bg-dd-panel2 px-3 py-2 text-left text-sm text-dd-text hover:border-dd-accent transition-colors"
+                    data-testid={`abbey-remove-${qid}`}
+                  >
+                    <span className="font-semibold">
+                      {q?.name ?? qid}
+                      <span
+                        className={`ml-1.5 text-[10px] ${
+                          q?.polarity === 'positive' ? 'text-sky-300' : 'text-stone-400'
+                        }`}
+                      >
+                        {q?.polarity === 'positive' ? '正面' : '负面'}
+                      </span>
+                    </span>
+                    {q && <span className="block text-[11px] text-dd-muted">{q.description}</span>}
+                  </button>
+                );
+              })}
+            </div>
+            <button
+              type="button"
+              onClick={() => setAbbeyHeroId(null)}
+              className="mt-3 w-full rounded border border-dd-border bg-dd-panel2 px-3 py-1.5 text-sm text-dd-muted hover:text-dd-text transition-colors"
+              data-testid="abbey-cancel"
+            >
+              取消
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

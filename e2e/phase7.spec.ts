@@ -5,7 +5,7 @@ import { test, expect, type Page } from '@playwright/test';
  * 1. (A) 压力达上限触发 Resolve Test 浮层（调试面板统一加压 + 调试控件可用性）
  * 2. (B) 已 Resolve 英雄压力再次达上限 → 心脏病发作死亡
  * 3. (C) 任务结束将 Resolve 状态转化为占位 Quirk（Hamlet 卡显示 Phase 8 提示）
- * 4. (D) 旧 v3 存档可迁移到 v4（精神字段补齐，不损坏、不白屏）
+ * 4. (D) 旧 v3 存档可迁移到 v5（精神字段 + Quirk 字段补齐，不损坏、不白屏）
  * 5. (E) 战斗中已 Resolve 英雄的「回合开始」精神效果触发（战斗日志 / 浮层）
  * 6. (F) Hamlet 显示压力并可通过统一管线恢复（含 Resolve 标记）
  * 7. (G) 回归：Resolve 浮层确认后刷新不再重复弹出（幂等，不重掷）
@@ -172,7 +172,7 @@ test('B. 已 Resolve 英雄压力再次达上限 → 心脏病发作死亡', asy
   await expect(page.getByTestId('debug-panel')).toContainText('死亡');
 });
 
-test('C. 任务结束将 Resolve 状态转化为占位 Quirk（Hamlet 卡显示 Phase 8 提示）', async ({ page }) => {
+test('C. 任务结束将 Resolve 状态转化为真实 Quirk（Hamlet 卡显示怪癖芯片）', async ({ page }) => {
   await setupToQuests(page);
   await chooseQuest(page, 'Scout Ahead');
   await openDebug(page);
@@ -182,17 +182,21 @@ test('C. 任务结束将 Resolve 状态转化为占位 Quirk（Hamlet 卡显示 
   await page.getByTestId('mental-overlay-confirm').click();
 
   // 离开地牢 → 结算 → Hamlet
-  page.once('dialog', (d) => void d.accept());
   await page.getByTestId('leave-dungeon').click();
+  await page.getByTestId('leave-dungeon-confirm-ok').click();
   await expect(page).toHaveURL(/\/result$/);
   await page.getByTestId('return-hamlet').click();
   await expect(page).toHaveURL(/\/hamlet$/);
 
-  // Hamlet 英雄卡应出现占位 Quirk 卡（Phase 8 提示）
-  await expect(page.getByTitle(/Phase 8/).first()).toBeVisible();
+  // Phase 8A：Resolve 状态在 Quest 结束时已转化为真实 Quirk（走 acquireQuirk 上限状态机），
+  // Hamlet 英雄卡不再显示「Phase 8 提示」占位，而是展示真实怪癖芯片（含描述 title）。
+  // 转换后 resolveState=normal，徽章不渲染，卡内唯一带 title 的 span 即怪癖芯片。
+  const firstCard = page.locator('[data-testid^="hamlet-hero-"]').first();
+  await expect(firstCard).toBeVisible();
+  await expect(firstCard.locator('span[title]').first()).toBeVisible();
 });
 
-test('D. 旧 v3 存档可迁移到 v4（精神字段补齐，不损坏、不白屏）', async ({ page }) => {
+test('D. 旧 v3 存档可迁移到 v5（精神字段 + Quirk 字段补齐，不损坏、不白屏）', async ({ page }) => {
   await setupToQuests(page);
   await chooseQuest(page, 'Scout Ahead');
   // 强制保存一份真实 v4 存档
@@ -231,7 +235,7 @@ test('D. 旧 v3 存档可迁移到 v4（精神字段补齐，不损坏、不白�
   // 恢复到任务/地牢页（gamePhase 驱动的路由恢复）
   await expect(page).toHaveURL(/\/(dungeon|quests)$/);
 
-  // 重新打开调试面板并把迁移后的 Campaign 回写存档，验证其已升级为合法 v4
+  // 重新打开调试面板并把迁移后的 Campaign 回写存档，验证其已升级为合法 v5（Phase 8A）
   await openDebug(page);
   await page.getByRole('button', { name: '强制保存' }).click();
 
@@ -241,8 +245,8 @@ test('D. 旧 v3 存档可迁移到 v4（精神字段补齐，不损坏、不白�
     const d = JSON.parse(raw);
     return { version: d.version, resolveState: d?.campaign?.heroes?.[0]?.resolveState };
   });
-  // 关键证据：迁移后的存档已是 v4，且英雄补全了 resolveState 字段
-  expect(after.version).toBe(4);
+  // 关键证据：迁移后的存档已是当前最新版本 v5（Phase 8A），且英雄补全了 resolveState 字段
+  expect(after.version).toBe(5);
   expect(after.resolveState).toBe('normal');
 });
 
@@ -271,8 +275,8 @@ test('F. Hamlet 显示压力并可通过统一管线恢复（含 Resolve 标记�
   await addStressUntilOverlay(page);
   await page.getByTestId('mental-overlay-confirm').click();
 
-  page.once('dialog', (d) => void d.accept());
   await page.getByTestId('leave-dungeon').click();
+  await page.getByTestId('leave-dungeon-confirm-ok').click();
   await expect(page).toHaveURL(/\/result$/);
   await page.getByTestId('return-hamlet').click();
   await expect(page).toHaveURL(/\/hamlet$/);

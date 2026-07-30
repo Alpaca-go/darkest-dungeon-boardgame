@@ -6,6 +6,7 @@ import { pushLog } from './log';
 import { resolveExplorationEvent } from './exploration';
 import { resolveDamage } from './damage';
 import { applyStressBatch } from './stress';
+import { createRuleEventContext, emitPartyRuleEvent } from './quirks';
 import type { MentalEventSourceType } from '../types';
 
 /** Phase 7：全队压力统一入口（存活英雄各 +amount，走统一管线处理阈值）。 */
@@ -94,6 +95,8 @@ export function scoutDungeon(campaign: CampaignState): CampaignState {
   };
   next = applyPartyStress(next, 1, 'scout', 'scout');
   next = pushLog(next, '小队进行了侦察（Scout），相邻房间被揭示，全队压力 +1。', 'warning');
+  // Phase 8A：scout-attempted 时机事件（Fear of the Unknown 等）
+  next = emitPartyRuleEvent(next, 'scout-attempted', createRuleEventContext());
   return next;
 }
 
@@ -208,7 +211,11 @@ export function moveToRoom(campaign: CampaignState, roomId: string): CampaignSta
   };
   next = { ...next, dungeon: updatedDungeon };
 
-  // 3) 仅首次进入（hidden/revealed）时结算房间结果
+  // 3) Phase 8A：room-entered 时机事件（Stress Eater / Hopeless 等），
+  //    先于房间结算，保证补给消耗在陷阱/战斗判定之前生效
+  next = emitPartyRuleEvent(next, 'room-entered', createRuleEventContext());
+
+  // 4) 仅首次进入（hidden/revealed）时结算房间结果
   if (target.status === 'hidden' || target.status === 'revealed') {
     next = applyRoomResult(next, target);
   }

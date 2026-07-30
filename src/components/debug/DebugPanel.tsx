@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useGameStore } from '../../store/useGameStore';
 import { SAVE_VERSION, readSavedAt } from '../../game-engine/save';
+import { ALL_QUIRKS, getQuirkById } from '../../data/quirks';
+import { QUIRK_CAP } from '../../game-engine/quirks';
 
 /**
  * 开发调试面板：仅在开发环境（import.meta.env.DEV）渲染。
@@ -17,6 +19,8 @@ export default function DebugPanel() {
   const resetCampaign = useGameStore((s) => s.resetCampaign);
   const debugApplyStress = useGameStore((s) => s.debugApplyStress);
   const debugRecoverStress = useGameStore((s) => s.debugRecoverStress);
+  const debugGrantQuirk = useGameStore((s) => s.debugGrantQuirk);
+  const [quirkId, setQuirkId] = useState<string>(ALL_QUIRKS[0]?.id ?? '');
 
   if (!import.meta.env.DEV) return null;
 
@@ -95,6 +99,51 @@ export default function DebugPanel() {
                     </button>
                   </div>
                 ))}
+              </div>
+            </div>
+          )}
+          {campaign && campaign.heroes.length > 0 && (
+            <div className="mb-2 border-t border-dd-border pt-2">
+              <div className="text-dd-muted mb-1 font-semibold">
+                Phase 8A · Quirk（上限 {QUIRK_CAP}）
+              </div>
+              <select
+                value={quirkId}
+                onChange={(e) => setQuirkId(e.target.value)}
+                className="w-full mb-1 rounded bg-dd-panel2 border border-dd-border text-dd-text px-1 py-0.5"
+                data-testid="debug-quirk-select"
+              >
+                {ALL_QUIRKS.map((q) => (
+                  <option key={q.id} value={q.id}>
+                    {q.polarity === 'positive' ? '＋' : '－'} {q.name}
+                  </option>
+                ))}
+              </select>
+              <div className="space-y-1 max-h-40 overflow-auto">
+                {campaign.heroes.map((h) => {
+                  const owned = [...h.positiveQuirkIds, ...h.negativeQuirkIds];
+                  return (
+                    <div key={h.instanceId} className="flex items-center gap-1.5">
+                      <span
+                        className="flex-1 truncate text-dd-text"
+                        title={owned.map((id) => getQuirkById(id)?.name ?? id).join('、') || '无怪癖'}
+                      >
+                        {h.name}
+                      </span>
+                      <span className="text-dd-muted">
+                        {owned.length}/{QUIRK_CAP}
+                      </span>
+                      <button
+                        onClick={() => debugGrantQuirk(h.instanceId, quirkId)}
+                        disabled={h.dead || !quirkId}
+                        className="px-1.5 rounded bg-dd-panel2 border border-dd-border text-dd-muted hover:text-dd-text disabled:opacity-40"
+                        data-testid={`debug-quirk-grant-${h.instanceId}`}
+                      >
+                        授予
+                      </button>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           )}

@@ -1,5 +1,6 @@
 import type { ActiveEffect, BattleUnit } from '../types';
 import { applyBattleUnitDamage, type BattleDamageOutcome } from './damage';
+import { applyQuirkModifiersRaw, describeModifierApplications } from './quirk-passives';
 
 /** 给单位施加一个状态效果（返回新单位，不修改原对象）。 */
 export function applyEffectToUnit(unit: BattleUnit, effect: ActiveEffect): BattleUnit {
@@ -44,19 +45,40 @@ export interface StartOfTurnResult {
  * - 每种状态仍分别减少自己的层数；
  * - 怪物保持即时死亡规则。
  */
-export function resolveStartOfTurnConditions(unit: BattleUnit): StartOfTurnResult {
+export function resolveStartOfTurnConditions(unit: BattleUnit, light = 0): StartOfTurnResult {
   const messages: string[] = [];
   let next = unit;
-  const bleedDmg = next.bleed > 0 ? next.bleed : 0;
-  const blightDmg = next.blight > 0 ? next.blight : 0;
+  const rawBleed = next.bleed > 0 ? next.bleed : 0;
+  const rawBlight = next.blight > 0 ? next.blight : 0;
+
+  // Phase 8A：Clotter / Thick Blooded 等按伤害来源分别修正，再合并为同一批次
+  const isHero = next.side === 'hero';
+  const bleedMod = isHero
+    ? applyQuirkModifiersRaw(next.quirkIds ?? [], light, 'damage-taken', rawBleed, 'bleed')
+    : { amount: rawBleed, applied: [] };
+  const blightMod = isHero
+    ? applyQuirkModifiersRaw(next.quirkIds ?? [], light, 'damage-taken', rawBlight, 'blight')
+    : { amount: rawBlight, applied: [] };
+  const bleedDmg = rawBleed > 0 ? bleedMod.amount : 0;
+  const blightDmg = rawBlight > 0 ? blightMod.amount : 0;
+  if (bleedMod.applied.length > 0 && rawBleed > 0) {
+    messages.push(
+      `${next.name} 流血伤害 ${rawBleed} → ${bleedDmg}${describeModifierApplications(bleedMod.applied)}。`
+    );
+  }
+  if (blightMod.applied.length > 0 && rawBlight > 0) {
+    messages.push(
+      `${next.name} 腐蚀伤害 ${rawBlight} → ${blightDmg}${describeModifierApplications(blightMod.applied)}。`
+    );
+  }
   const total = bleedDmg + blightDmg;
 
-  // 分别减少层数（伤害合并结算，层数各自 -1）
-  if (bleedDmg > 0) {
+  // 分别减少层数（伤害合并结算，层数各自 -1；即使被修正到 0 也要正常衰减）
+  if (rawBleed > 0) {
     next = { ...next, bleed: Math.max(0, next.bleed - 1) };
     messages.push(`${next.name} 受到 Bleed 伤害 ${bleedDmg}（剩余 ${next.bleed}）。`);
   }
-  if (blightDmg > 0) {
+  if (rawBlight > 0) {
     next = { ...next, blight: Math.max(0, next.blight - 1) };
     messages.push(`${next.name} 受到 Blight 伤害 ${blightDmg}（剩余 ${next.blight}）。`);
   }

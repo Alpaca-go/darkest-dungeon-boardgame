@@ -8,6 +8,7 @@ import type {
 import { randInt } from './random';
 import { killCampaignHero } from './hero-death';
 import { pushLog } from './log';
+import { applyQuirkModifiers, describeModifierApplications } from './quirk-passives';
 
 // ---------------------------------------------------------------------------
 // Phase 6 统一伤害管线。
@@ -158,6 +159,30 @@ export function resolveDamage(
   // 幂等：同一伤害事件只结算一次
   if (campaign.processedDamageEventIds.includes(command.eventId)) return noop();
 
+  // Phase 8A：Quirk 前置修正器（Fragile / Hard Skinned / 来源与光照条件类）
+  const mod = applyQuirkModifiers(
+    campaign,
+    hero.instanceId,
+    'damage-taken',
+    command.amount,
+    command.sourceType
+  );
+  const modifiedAmount = mod.amount;
+  if (modifiedAmount <= 0 && !hero.atDeathsDoor) {
+    // 修正后归零：完全抵消（Death's Door 下仍需掷 Deathblow，不抵消）
+    const c = mod.applied.length
+      ? pushLog(campaign, `${hero.name} 的伤害被怪癖完全抵消${describeModifierApplications(mod.applied)}。`, 'info')
+      : campaign;
+    return { campaign: c, resolution: noop().resolution };
+  }
+  if (mod.applied.length > 0) {
+    campaign = pushLog(
+      campaign,
+      `${hero.name} 受到伤害 ${command.amount} → ${modifiedAmount}${describeModifierApplications(mod.applied)}。`,
+      'info'
+    );
+  }
+
   const markProcessed = (c: CampaignState): CampaignState => ({
     ...c,
     processedDamageEventIds: [...c.processedDamageEventIds, command.eventId].slice(-MAX_EVENT_IDS),
@@ -219,8 +244,8 @@ export function resolveDamage(
     };
   }
 
-  // 普通扣血
-  const nextHp = Math.max(0, previousHp - command.amount);
+  // 普通扣血（使用怪癖修正后的伤害值）
+  const nextHp = Math.max(0, previousHp - modifiedAmount);
   const entered = nextHp === 0;
   let c: CampaignState = {
     ...campaign,

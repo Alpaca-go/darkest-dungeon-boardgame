@@ -6,6 +6,7 @@ import { checkRouteAccess, nearestLegalPath } from '../../app/route-guards';
 import ErrorBoundary from '../feedback/ErrorBoundary';
 import DebugPanel from '../debug/DebugPanel';
 import MentalEventOverlay from '../mental/MentalEventOverlay';
+import QuirkDecisionOverlay from '../quirk/QuirkDecisionOverlay';
 
 /**
  * 统一外层布局：顶部资源条 + 导航 + 内容区(Outlet) + 底部说明。
@@ -103,6 +104,8 @@ export default function GameShell() {
         单机原型 · 本地自动存档 · 所有视觉使用纯色块占位。导航中灰色条目表示当前阶段不可进入。
       </footer>
 
+      {/* Phase 8A：Quirk 决策浮层（z 低于精神事件浮层，保证先看结果再做取舍） */}
+      <QuirkDecisionOverlay />
       <MentalEventOverlay />
       <DebugPanel />
     </div>

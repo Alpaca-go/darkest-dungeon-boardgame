@@ -189,7 +189,7 @@ describe('Caretaker', () => {
   it('结束当天后 Caretaker 重新随机（注入不同随机值）', () => {
     let c = hamletCampaign(); // day1 阻塞 sanitarium
     for (const h of c.heroes) c = skipHeroAction(c, h.instanceId);
-    setRandomSource(() => 0.8); // 下一天 pick index 3 → blacksmith
+    setRandomSource(() => 0.7); // 下一天 pick index 3 → blacksmith（Phase 8A 后建筑增至 5 个）
     c = endHamletDay(c);
     expect(c.hamlet.currentDay).toBe(2);
     expect(c.hamlet.caretakerBlockedBuildingId).toBe('blacksmith');

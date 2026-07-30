@@ -10,6 +10,8 @@ import type {
 } from '../types';
 import { nowIso } from './random';
 import { createInitialStagecoach } from './stagecoach';
+import { getQuirkById, normalizeQuirkId } from '../data/quirks';
+import { QUIRK_CAP } from './quirks';
 
 // ---------------------------------------------------------------------------
 // 存档格式（Phase 6 升级为 v3 SaveFile）
@@ -20,9 +22,10 @@ export const STORAGE_KEY = 'dd-web-prototype-save-v1';
 /**
  * 当前存档格式版本。
  * v1 = SaveEnvelope（Phase 1-4），v2 = SaveFile（Phase 5），
- * v3 = Phase 6（死亡/Stagecoach），v4 = Phase 7（Stress/Resolve/Affliction/Virtue/Heart Attack）。
+ * v3 = Phase 6（死亡/Stagecoach），v4 = Phase 7（Stress/Resolve/Affliction/Virtue/Heart Attack），
+ * v5 = Phase 8A（Quirk 引擎：真实 Quirk id / 上限 3 / pendingQuirkDecisions）。
  */
-export const SAVE_VERSION = 4;
+export const SAVE_VERSION = 5;
 
 /**
  * v2 存档文件结构。
@@ -128,7 +131,18 @@ export function validateSaveFile(data: unknown): string | null {
     if (h.resolveState === 'afflicted' && !h.afflictionId) {
       return `英雄 ${h.instanceId} 处于 afflicted 但缺少 afflictionId`;
     }
+    // Phase 8A：Quirk 结构与上限校验（迁移后必然合法）
+    if (!Array.isArray(h.positiveQuirkIds) || !Array.isArray(h.negativeQuirkIds)) {
+      return `英雄 ${h.instanceId} 的 Quirk 字段不是数组`;
+    }
+    if (h.positiveQuirkIds.length + h.negativeQuirkIds.length > QUIRK_CAP) {
+      return `英雄 ${h.instanceId} 的 Quirk 数量超过上限 ${QUIRK_CAP}`;
+    }
+    for (const qid of [...h.positiveQuirkIds, ...h.negativeQuirkIds]) {
+      if (!getQuirkById(qid)) return `英雄 ${h.instanceId} 引用了未知 Quirk：${qid}`;
+    }
   }
+  if (!Array.isArray(c.pendingQuirkDecisions)) return 'campaign.pendingQuirkDecisions 缺失或不是数组';
 
   // 阶段相关引用完整性
   if (c.gamePhase === 'dungeon-explore' || c.gamePhase === 'battle') {
@@ -323,33 +337,111 @@ export function migrateCampaignToV4(campaign: CampaignState): CampaignState {
   };
 }
 
-/** 将战役迁移到当前最新版本（v3 补 Phase 6 字段 → v4 补 Phase 7 字段）。 */
+/**
+ * Phase 8A 战役字段迁移（v4 → v5）：
+ * - 英雄的 Quirk id 归一化（Phase 7 占位 id → 真实 Quirk id），未知 id 丢弃；
+ * - 去重，并按「先正面后负面、超出部分丢弃」裁剪到上限 3（迁移绝不制造 Madness Death）；
+ * - 补 campaign.pendingQuirkDecisions=[]；
+ * - 进行中的战斗补 BattleUnit.quirkIds（英雄从战役英雄同步）与 battle.light。
+ */
+export function migrateCampaignToV5(campaign: CampaignState): CampaignState {
+  let changed = false;
+
+  const heroes: HeroInstance[] = (campaign.heroes ?? []).map((h) => {
+    const rawPos = Array.isArray(h.positiveQuirkIds) ? h.positiveQuirkIds : [];
+    const rawNeg = Array.isArray(h.negativeQuirkIds) ? h.negativeQuirkIds : [];
+    const seen = new Set<string>();
+    const norm = (ids: string[], polarity: 'positive' | 'negative'): string[] => {
+      const out: string[] = [];
+      for (const id of ids) {
+        const nid = normalizeQuirkId(id);
+        if (!nid || seen.has(nid)) continue;
+        if (getQuirkById(nid)?.polarity !== polarity) continue;
+        seen.add(nid);
+        out.push(nid);
+      }
+      return out;
+    };
+    let pos = norm(rawPos, 'positive');
+    let neg = norm(rawNeg, 'negative');
+    // 裁剪到上限 3：优先保留正面，再补负面
+    if (pos.length + neg.length > QUIRK_CAP) {
+      pos = pos.slice(0, QUIRK_CAP);
+      neg = neg.slice(0, Math.max(0, QUIRK_CAP - pos.length));
+    }
+    const same =
+      pos.length === rawPos.length &&
+      neg.length === rawNeg.length &&
+      pos.every((id, i) => id === rawPos[i]) &&
+      neg.every((id, i) => id === rawNeg[i]);
+    if (same) return h;
+    changed = true;
+    return { ...h, positiveQuirkIds: pos, negativeQuirkIds: neg };
+  });
+
+  let battle = campaign.battle;
+  if (battle) {
+    const needsUnit = (u: BattleUnit) => !Array.isArray(u.quirkIds);
+    if (battle.heroes.some(needsUnit) || battle.monsters.some(needsUnit) || battle.light === undefined) {
+      changed = true;
+      battle = {
+        ...battle,
+        light: typeof battle.light === 'number' ? battle.light : campaign.light,
+        heroes: battle.heroes.map((u) => {
+          if (Array.isArray(u.quirkIds)) return u;
+          const src = heroes.find((h) => h.instanceId === u.sourceId);
+          return {
+            ...u,
+            quirkIds: src ? [...src.positiveQuirkIds, ...src.negativeQuirkIds] : [],
+          };
+        }),
+        monsters: battle.monsters.map((u) => (Array.isArray(u.quirkIds) ? u : { ...u, quirkIds: [] })),
+      };
+    }
+  }
+
+  const anyC = campaign as CampaignState & Record<string, unknown>;
+  if (!Array.isArray(anyC.pendingQuirkDecisions)) changed = true;
+
+  if (!changed && campaign.saveVersion === SAVE_VERSION) return campaign;
+  return {
+    ...campaign,
+    saveVersion: SAVE_VERSION,
+    heroes,
+    battle,
+    pendingQuirkDecisions: Array.isArray(anyC.pendingQuirkDecisions)
+      ? campaign.pendingQuirkDecisions
+      : [],
+  };
+}
+
+/** 将战役迁移到当前最新版本（v3 Phase 6 → v4 Phase 7 → v5 Phase 8A）。 */
 export function migrateCampaignToLatest(campaign: CampaignState): CampaignState {
-  return migrateCampaignToV4(migrateCampaignToV3(campaign));
+  return migrateCampaignToV5(migrateCampaignToV4(migrateCampaignToV3(campaign)));
 }
 
 /**
  * 迁移旧版本存档到当前版本。无法迁移时返回 null。
- * v1（SaveEnvelope）→ v2（SaveFile）→ v3（Phase 6 字段）→ v4（Phase 7 精神系统）。
+ * v1（SaveEnvelope）→ v2（SaveFile）→ v3（Phase 6）→ v4（Phase 7）→ v5（Phase 8A Quirk）。
  */
 export function migrateSaveFile(raw: unknown): SaveFile | null {
   if (!raw || typeof raw !== 'object') return null;
   const anyRaw = raw as Record<string, unknown>;
 
-  // 已是 v4（当前版本）
+  // 已是 v5（当前版本）
   if (typeof anyRaw.version === 'number' && anyRaw.version === SAVE_VERSION) {
     const file = raw as SaveFile;
     // campaign 缺失或非对象 → 无法迁移（调用方回退为「无法识别的存档结构」）
     if (!file.campaign || typeof file.campaign !== 'object') return null;
-    // 保险：即使 version=4 也补齐缺失字段（防手工编辑的存档）
+    // 保险：即使 version=5 也补齐缺失字段（防手工编辑的存档）
     const campaign = migrateCampaignToLatest(file.campaign);
     return campaign === file.campaign ? file : { ...createSaveSnapshot(campaign), savedAt: file.savedAt };
   }
 
-  // v2 / v3：{ version: 2|3, savedAt, campaign, ... }
+  // v2 / v3 / v4：{ version: 2|3|4, savedAt, campaign, ... }
   if (
     typeof anyRaw.version === 'number' &&
-    (anyRaw.version === 2 || anyRaw.version === 3) &&
+    (anyRaw.version === 2 || anyRaw.version === 3 || anyRaw.version === 4) &&
     anyRaw.campaign &&
     typeof anyRaw.campaign === 'object'
   ) {
@@ -440,7 +532,7 @@ export function loadSaveDetailed(): LoadResult {
   const migrated = migrateSaveFile(parsed);
   if (!migrated) {
     const v = (parsed as Record<string, unknown> | null)?.version ?? (parsed as Record<string, unknown> | null)?.saveVersion;
-    if (typeof v === 'number' && v !== SAVE_VERSION && v !== 3 && v !== 2 && v !== 1) {
+    if (typeof v === 'number' && v !== SAVE_VERSION && v !== 4 && v !== 3 && v !== 2 && v !== 1) {
       return { status: 'unsupported', campaign: null, error: `不支持的存档版本：${v}` };
     }
     return { status: 'corrupt', campaign: null, error: '存档结构无法识别' };

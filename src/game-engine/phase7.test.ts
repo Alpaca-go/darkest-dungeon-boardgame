@@ -330,7 +330,7 @@ describe('存档迁移 v3 → v4', () => {
     expect(migrated).not.toBeNull();
     expect(migrated!.version).toBe(SAVE_VERSION);
     const c = migrated!.campaign;
-    expect(c.saveVersion).toBe(4);
+    expect(c.saveVersion).toBe(SAVE_VERSION);
     expect(c.mentalEvents).toEqual([]);
     expect(c.resolveConversionRecords).toEqual([]);
     expect(c.processedStressBatchIds).toEqual([]);

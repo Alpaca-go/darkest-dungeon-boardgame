@@ -1,18 +1,16 @@
-// Phase 7：Quest 结束时 Virtue/Affliction → Placeholder Quirk 转换，
+// Phase 7 / 8A：Quest 结束时 Virtue/Affliction → 真实 Quirk 转换，
 // 以及新 Quest 开始时的精神状态重置。
 // 幂等键 = questId + heroId + sourceResolveId：同一 Quest 的同一状态只转换一次，
 // 重复调用（刷新 / 重复结算）不会二次发放 Quirk。
-// Quirk 仅记录，不执行任何被动效果（完整 Quirk 系统留待 Phase 8）。
+// Phase 8A 起：Quirk 走 acquireQuirk 状态机（上限 3 / 替换决策 / Madness Death），
+// 并具备真实被动效果，不再是占位数据。
 
 import type { CampaignState, ResolveConversionRecord } from '../types';
-import {
-  PLACEHOLDER_NEGATIVE_QUIRKS,
-  PLACEHOLDER_POSITIVE_QUIRKS,
-  getQuirkById,
-} from '../data/placeholder-quirks';
+import { NEGATIVE_QUIRKS, POSITIVE_QUIRKS, getQuirkById } from '../data/quirks';
 import { createId, nowIso, pick } from './random';
 import { pushLog } from './log';
 import { pushMentalEvent } from './mental-log';
+import { acquireQuirk } from './quirks';
 
 /** 转换记录上限（防存档膨胀）。 */
 const CONVERSION_RECORD_LIMIT = 100;
@@ -30,8 +28,9 @@ export function hasConversionRecord(
 }
 
 /**
- * Quest 结束统一入口：把所有仍处于 Virtue/Affliction 的英雄转换为 Placeholder Quirk。
- * - Virtue → 随机正面 Quirk；Affliction → 随机负面 Quirk；
+ * Quest 结束统一入口：把所有仍处于 Virtue/Affliction 的英雄转换为真实 Quirk。
+ * - Virtue → 随机正面 Quirk；Affliction → 随机负面 Quirk（排除已拥有的）；
+ * - 发放统一走 acquireQuirk（上限 3 / 替换决策 / 第 4 个负面 → Madness Death）；
  * - 转换后英雄回到 normal（清空 virtueId/afflictionId）；
  * - 已死亡英雄不转换（死亡时状态保留在尸体上，无 Quirk 收益）；
  * - 幂等：同一 questId+heroId+sourceResolveId 只发放一次；
@@ -55,8 +54,13 @@ export function convertResolveStatesAtQuestEnd(campaign: CampaignState): Campaig
 
     let grantedQuirkId = '';
     if (!already) {
-      const quirk = pick(from === 'virtue' ? PLACEHOLDER_POSITIVE_QUIRKS : PLACEHOLDER_NEGATIVE_QUIRKS);
-      grantedQuirkId = quirk?.id ?? (from === 'virtue' ? 'quirk_pos_steady' : 'quirk_neg_nervous');
+      const owned = new Set([...fresh.positiveQuirkIds, ...fresh.negativeQuirkIds]);
+      const pool = (from === 'virtue' ? POSITIVE_QUIRKS : NEGATIVE_QUIRKS).filter(
+        (q) => !owned.has(q.id)
+      );
+      const fallbackPool = from === 'virtue' ? POSITIVE_QUIRKS : NEGATIVE_QUIRKS;
+      const quirk = pool.length > 0 ? pick(pool) : pick(fallbackPool);
+      grantedQuirkId = quirk?.id ?? (from === 'virtue' ? 'balanced' : 'nervous');
 
       const record: ResolveConversionRecord = {
         id: createId('rcv'),
@@ -77,27 +81,17 @@ export function convertResolveStatesAtQuestEnd(campaign: CampaignState): Campaig
       };
     }
 
-    // 清理英雄状态 + （首次时）发放 Quirk
+    // 1) 先清理英雄的 Resolve 状态（无论是否已转换过）
     next = {
       ...next,
-      heroes: next.heroes.map((h) => {
-        if (h.instanceId !== fresh.instanceId) return h;
-        const updated = {
-          ...h,
-          resolveState: 'normal' as const,
-          virtueId: null,
-          afflictionId: null,
-        };
-        if (!already && grantedQuirkId) {
-          if (from === 'virtue') {
-            return { ...updated, positiveQuirkIds: [...h.positiveQuirkIds, grantedQuirkId] };
-          }
-          return { ...updated, negativeQuirkIds: [...h.negativeQuirkIds, grantedQuirkId] };
-        }
-        return updated;
-      }),
+      heroes: next.heroes.map((h) =>
+        h.instanceId === fresh.instanceId
+          ? { ...h, resolveState: 'normal' as const, virtueId: null, afflictionId: null }
+          : h
+      ),
     };
 
+    // 2) 首次转换：走 acquireQuirk 状态机发放（可能产生决策 / Madness Death）
     if (!already && grantedQuirkId) {
       const ev = pushMentalEvent(next, {
         questId,
@@ -111,9 +105,14 @@ export function convertResolveStatesAtQuestEnd(campaign: CampaignState): Campaig
       const quirkName = getQuirkById(grantedQuirkId)?.name ?? grantedQuirkId;
       next = pushLog(
         next,
-        `${fresh.name} 的 ${from === 'virtue' ? 'Virtue' : 'Affliction'} 转化为怪癖「${quirkName}」（效果将在 Phase 8 启用）。`,
+        `${fresh.name} 的 ${from === 'virtue' ? 'Virtue' : 'Affliction'} 转化为怪癖「${quirkName}」。`,
         from === 'virtue' ? 'success' : 'warning'
       );
+      next = acquireQuirk(next, fresh.instanceId, grantedQuirkId, {
+        source: 'resolve-conversion',
+        deathSource: 'quest-result',
+        deathResumePhase: 'quest-result',
+      }).campaign;
     }
   }
 

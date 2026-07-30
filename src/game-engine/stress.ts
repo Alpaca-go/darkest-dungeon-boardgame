@@ -11,6 +11,7 @@ import { pushMentalEvent, syncHeroMentalToBattle } from './mental-log';
 import { performResolveTest } from './resolve-test';
 import { triggerHeartAttack } from './heart-attack';
 import { STRESS_MAX, clampStressValue } from './stress-constants';
+import { applyQuirkModifiers, describeModifierApplications } from './quirk-passives';
 
 export { STRESS_MAX, STRESS_MIN, clampStressValue } from './stress-constants';
 
@@ -48,8 +49,19 @@ export function applyStress(campaign: CampaignState, input: ApplyStressInput): A
   if (!hero || hero.dead) {
     return { campaign, result: noopResult(input.heroId, hero?.stress ?? 0) };
   }
-  const amount = Math.floor(input.amount);
-  if (amount <= 0) return { campaign, result: noopResult(hero.instanceId, hero.stress) };
+  const baseAmount = Math.floor(input.amount);
+  if (baseAmount <= 0) return { campaign, result: noopResult(hero.instanceId, hero.stress) };
+
+  // Phase 8A：Quirk 前置修正器（Nervous / Resilient / 光照条件类）
+  const mod = applyQuirkModifiers(campaign, hero.instanceId, 'stress-applied', baseAmount);
+  const amount = mod.amount;
+  if (amount <= 0) {
+    // 修正后归零：视为完全抵消，不写事件、不触发阈值
+    const c = mod.applied.length
+      ? pushLog(campaign, `${hero.name} 的压力被怪癖完全抵消${describeModifierApplications(mod.applied)}。`, 'info')
+      : campaign;
+    return { campaign: c, result: noopResult(hero.instanceId, hero.stress) };
+  }
 
   // 批次幂等：同一 batchId + heroId 只处理一次（防刷新 / 重复调用）
   let next = campaign;
@@ -91,7 +103,7 @@ export function applyStress(campaign: CampaignState, input: ApplyStressInput): A
   if (appliedAmount > 0) {
     next = pushLog(
       next,
-      `${hero.name} Stress +${appliedAmount}（${currentStress}/${STRESS_MAX}）。`,
+      `${hero.name} Stress +${appliedAmount}（${currentStress}/${STRESS_MAX}）${describeModifierApplications(mod.applied)}。`,
       currentStress >= STRESS_MAX ? 'danger' : 'warning'
     );
   }
@@ -184,7 +196,12 @@ export function recoverStress(
   if (!hero || hero.dead) {
     return { campaign, result: noopResult(input.heroId, hero?.stress ?? 0) };
   }
-  const amount = Math.floor(input.amount);
+  const baseAmount = Math.floor(input.amount);
+  if (baseAmount <= 0) return { campaign, result: noopResult(hero.instanceId, hero.stress) };
+
+  // Phase 8A：Quirk 前置修正器（Stress Faster / Nocturnal / Photomania）
+  const mod = applyQuirkModifiers(campaign, hero.instanceId, 'stress-recovered', baseAmount);
+  const amount = mod.amount;
   if (amount <= 0) return { campaign, result: noopResult(hero.instanceId, hero.stress) };
 
   const previousStress = hero.stress;
@@ -210,7 +227,7 @@ export function recoverStress(
     });
     next = ev.campaign;
     collected.push(ev.event);
-    next = pushLog(next, `${hero.name} Stress -${recovered}（${currentStress}/${STRESS_MAX}）。`, 'success');
+    next = pushLog(next, `${hero.name} Stress -${recovered}（${currentStress}/${STRESS_MAX}）${describeModifierApplications(mod.applied)}。`, 'success');
   }
 
   next = syncHeroMentalToBattle(next, hero.instanceId);

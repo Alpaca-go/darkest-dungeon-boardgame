@@ -24,6 +24,13 @@ import { applyEffects, resolveStartOfTurnConditions, tickStun } from './status-e
 import { SKILL_LEVEL_BONUS } from '../data/hero-level-profiles';
 import { chooseMonsterAction } from './monster-ai';
 import { pushLog } from './log';
+import {
+  applyQuirkModifiersRaw,
+  describeModifierApplications,
+  getQuirkSpeedBonus,
+  heroQuirkIds,
+} from './quirk-passives';
+import { createRuleEventContext, emitPartyRuleEvent } from './quirks';
 import type { GameLogEntry } from '../types';
 
 export const MAX_ROUNDS = 4;
@@ -116,7 +123,8 @@ function makeHeroUnit(hero: HeroInstance, index: number): BattleUnit {
     hp,
     stress: hero.stress,
     position: index + 1,
-    speed: hero.speed,
+    // Phase 8A：Quick Reflexes / Slow Reflexes 静态速度修正
+    speed: Math.max(1, hero.speed + getQuirkSpeedBonus(hero)),
     stance: hero.stance,
     isAlive: !hero.dead,
     atDeathsDoor: hero.atDeathsDoor || (!hero.dead && hp === 0),
@@ -131,6 +139,8 @@ function makeHeroUnit(hero: HeroInstance, index: number): BattleUnit {
     damageBonus: hero.temporaryDamageBonus ?? 0,
     equippedSkillIds: [...hero.equippedSkillIds],
     skillLevels: { ...(hero.skillLevels ?? {}) },
+    // ---- Phase 8A：Quirk 快照（战斗内修正器用；获取/移除只发生在战役层） ----
+    quirkIds: heroQuirkIds(hero),
     // ---- Phase 7：精神状态快照（从战役英雄同步） ----
     resolveTestedThisQuest: hero.resolveTestedThisQuest ?? false,
     resolveState: hero.resolveState ?? 'normal',
@@ -221,6 +231,8 @@ export function initBattle(campaign: CampaignState, roomId: string): CampaignSta
     ],
     sourceRoomId: roomId,
     rewards: { gold: BATTLE_REWARD_GOLD },
+    // Phase 8A：战斗开始时的光照快照（战斗内 Quirk 条件判定用）
+    light: campaign.light,
   };
 
   const started = advanceTurn(battle);
@@ -230,12 +242,16 @@ export function initBattle(campaign: CampaignState, roomId: string): CampaignSta
     rooms: campaign.dungeon.rooms.map((r) => (r.id === roomId ? { ...r, status: 'current' as const } : r)),
   };
 
-  return {
+  let next: CampaignState = {
     ...campaign,
     gamePhase: 'battle',
     battle: started,
     dungeon,
   };
+  // Phase 8A：battle-started 时机事件（Off Guard / Shocker 等）。
+  // 派生 Stress 走统一管线，applyStress 内部会同步回战斗单位。
+  next = emitPartyRuleEvent(next, 'battle-started', createRuleEventContext());
+  return next;
 }
 
 // ---------------------------------------------------------------------------
@@ -319,7 +335,7 @@ function activateUnitAfterMental(state: BattleState, id: string): BattleState {
   const unit = findUnit(s, id);
   if (!unit || !unit.isAlive) return s;
 
-  const sof = resolveStartOfTurnConditions(unit);
+  const sof = resolveStartOfTurnConditions(unit, state.light ?? 0);
   s = setUnit(s, sof.unit);
   for (const m of sof.messages) s = pushBattleLog(s, m, sof.heroDied ? 'danger' : 'warning');
   if (sof.heroDied || (sof.unit.side === 'monster' && !sof.unit.isAlive)) {
@@ -454,8 +470,24 @@ export function heroUseSkill(
     const res = resolveAttack(skill, actor.turnAccuracyBonus ?? 0);
     if (res.hit) {
       // Blacksmith 临时加成 + 技能等级加成 + 精神效果回合加成：仅英雄命中时加算。
-      const totalDamage =
+      const rawDamage =
         res.damage + (actor.damageBonus ?? 0) + levelBonus.damage + (actor.turnDamageBonus ?? 0);
+      // Phase 8A：Quirk 输出修正（Warrior of Light 等，条件用战斗光照快照）
+      const outMod = applyQuirkModifiersRaw(
+        actor.quirkIds ?? [],
+        s.light ?? 0,
+        'damage-output',
+        rawDamage,
+        'attack'
+      );
+      const totalDamage = outMod.amount;
+      if (outMod.applied.length > 0) {
+        s = pushBattleLog(
+          s,
+          `${actor.name} 输出修正 ${rawDamage} → ${totalDamage}${describeModifierApplications(outMod.applied)}。`,
+          'info'
+        );
+      }
       const outcome = applyBattleUnitDamage(tgt, totalDamage);
       tgt = outcome.unit;
       if (outcome.heroDied) tgt = { ...tgt, deathCause: 'deathblow-attack' };
@@ -477,7 +509,20 @@ export function heroUseSkill(
   } else {
     // 治疗 / 缓解压力 / buff（ally 或 self）——治疗统一走 applyBattleUnitHealing
     if (skill.heal) {
-      const totalHeal = skill.heal + levelBonus.heal;
+      const rawHeal = skill.heal + levelBonus.heal;
+      // Phase 8A：Quirk 治疗接受修正（目标为英雄时）
+      const healMod =
+        tgt.side === 'hero'
+          ? applyQuirkModifiersRaw(tgt.quirkIds ?? [], s.light ?? 0, 'healing-received', rawHeal)
+          : { amount: rawHeal, applied: [] };
+      const totalHeal = healMod.amount;
+      if (healMod.applied.length > 0) {
+        s = pushBattleLog(
+          s,
+          `${tgt.name} 治疗修正 ${rawHeal} → ${totalHeal}${describeModifierApplications(healMod.applied)}。`,
+          'info'
+        );
+      }
       const healOutcome = applyBattleUnitHealing(tgt, totalHeal);
       tgt = healOutcome.unit;
       s = pushBattleLog(s, `${actor.name} 使用 ${skill.name} 治疗 ${target.name} ${healOutcome.healed} 点。`, 'success');
@@ -561,7 +606,20 @@ export function runMonsterTurn(state: BattleState, monsterId: string): BattleSta
   const res = resolveAttack(skill);
   let tgt: BattleUnit = target;
   if (res.hit) {
-    const outcome = applyBattleUnitDamage(tgt, res.damage);
+    // Phase 8A：英雄承伤修正（Fragile / Hard Skinned / Night Blindness 等）
+    const inMod =
+      tgt.side === 'hero'
+        ? applyQuirkModifiersRaw(tgt.quirkIds ?? [], state.light ?? 0, 'damage-taken', res.damage, 'attack')
+        : { amount: res.damage, applied: [] };
+    const incomingDamage = inMod.amount;
+    if (inMod.applied.length > 0) {
+      state = pushBattleLog(
+        state,
+        `${tgt.name} 承伤修正 ${res.damage} → ${incomingDamage}${describeModifierApplications(inMod.applied)}。`,
+        'info'
+      );
+    }
+    const outcome = applyBattleUnitDamage(tgt, incomingDamage);
     tgt = outcome.unit;
     if (outcome.heroDied) tgt = { ...tgt, deathCause: 'deathblow-attack' };
     let queuedStress = 0;
@@ -583,7 +641,7 @@ export function runMonsterTurn(state: BattleState, monsterId: string): BattleSta
     }
     s = pushBattleLog(
       s,
-      `${monster.name} 使用 ${skill.name}，掷 ${res.roll}${res.crit ? '（暴击）' : ''} 命中 ${tgt.name}，造成 ${res.damage} 伤害${stressNote}${effNote}`,
+      `${monster.name} 使用 ${skill.name}，掷 ${res.roll}${res.crit ? '（暴击）' : ''} 命中 ${tgt.name}，造成 ${incomingDamage} 伤害${stressNote}${effNote}`,
       'danger'
     );
     for (const m of outcome.logs) s = pushBattleLog(s, m, outcome.heroDied ? 'danger' : 'warning');

@@ -25,7 +25,7 @@ export const DEFAULT_PROVISIONS: ProvisionPool = {
 export function createNewCampaign(): CampaignState {
   const now = nowIso();
   return {
-    saveVersion: 4,
+    saveVersion: 5, // Phase 8A（与 save.ts SAVE_VERSION 保持一致）
     id: createId('cmp'),
     createdAt: now,
     updatedAt: now,
@@ -73,6 +73,8 @@ export function createNewCampaign(): CampaignState {
     mentalEvents: [],
     resolveConversionRecords: [],
     processedStressBatchIds: [],
+    // ---- Phase 8A ----
+    pendingQuirkDecisions: [],
   };
 }
 

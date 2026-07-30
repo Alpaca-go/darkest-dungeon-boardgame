@@ -5,6 +5,8 @@ import { createId, nowIso, pick } from './random';
 import { pushLog } from './log';
 import { resolveHealing } from './healing';
 import { applyStressBatch, recoverStress } from './stress';
+import { createRuleEventContext, emitPartyRuleEvent, removeQuirkFromHero } from './quirks';
+import { getQuirkById } from '../data/quirks';
 
 // ---------------------------------------------------------------------------
 // 工具
@@ -105,6 +107,8 @@ export function startHamletPhase(campaign: CampaignState): CampaignState {
 
   next = { ...next, hamlet };
   next = pushLog(next, `小队返回 Hamlet，事件「${event.name}」生效。`, 'info');
+  // Phase 8A：hamlet-arrived 时机事件（Bad Gambler / Skilled Gambler / Early Riser 等）
+  next = emitPartyRuleEvent(next, 'hamlet-arrived', createRuleEventContext());
   return next;
 }
 
@@ -134,7 +138,60 @@ export function buildingVisitError(
   if (campaign.gold < building.cost) return 'Gold 不足';
   if (buildingId === 'sanitarium' && hero.wounds <= 0) return 'HP 已满，无需治疗';
   if (buildingId === 'tavern' && hero.stress <= 0) return 'Stress 已为 0';
+  // Phase 8A：Abbey 需要有可移除的 Quirk
+  if (
+    buildingId === 'abbey' &&
+    hero.positiveQuirkIds.length + hero.negativeQuirkIds.length === 0
+  ) {
+    return '该英雄没有可移除的怪癖';
+  }
   return null;
+}
+
+/** Phase 8A：Abbey 移除指定 Quirk 的合法性校验（null = 可执行）。 */
+export function abbeyRemoveQuirkError(
+  campaign: CampaignState,
+  heroInstanceId: string,
+  quirkId: string
+): string | null {
+  const base = buildingVisitError(campaign, heroInstanceId, 'abbey');
+  if (base) return base;
+  const hero = campaign.heroes.find((h) => h.instanceId === heroInstanceId)!;
+  if (!hero.positiveQuirkIds.includes(quirkId) && !hero.negativeQuirkIds.includes(quirkId)) {
+    return '该英雄没有这个怪癖';
+  }
+  return null;
+}
+
+/**
+ * Phase 8A：Abbey 访问（移除英雄一个 Quirk）。
+ * 与 visitHamletBuilding 同样的消费/占用/行动标记规则，但需要额外的 quirkId 参数，
+ * 因此单独提供入口；移除动作统一走 removeQuirkFromHero（组件不得直接改数组）。
+ */
+export function visitAbbey(
+  campaign: CampaignState,
+  heroInstanceId: string,
+  quirkId: string
+): CampaignState {
+  if (abbeyRemoveQuirkError(campaign, heroInstanceId, quirkId) !== null) return campaign;
+  const building = getHamletBuildingById('abbey')!;
+  const hero = campaign.heroes.find((h) => h.instanceId === heroInstanceId)!;
+  const quirkName = getQuirkById(quirkId)?.name ?? quirkId;
+
+  const base = removeQuirkFromHero(campaign, heroInstanceId, quirkId);
+  const heroes = base.heroes.map((h) =>
+    h.instanceId === heroInstanceId ? { ...h, hasActedToday: true } : h
+  );
+  const hamlet = hamletLog(
+    {
+      ...base.hamlet,
+      occupiedBuildingIds: [...base.hamlet.occupiedBuildingIds, 'abbey'],
+    },
+    `${hero.name} 访问 ${building.name}（-${building.cost} Gold）：移除怪癖「${quirkName}」。`,
+    'success'
+  );
+
+  return { ...base, gold: base.gold - building.cost, heroes, hamlet };
 }
 
 /**
@@ -146,6 +203,8 @@ export function visitHamletBuilding(
   heroInstanceId: string,
   buildingId: string
 ): CampaignState {
+  // Phase 8A：Abbey 需要选择移除目标，必须走 visitAbbey（避免无参访问产生消费）。
+  if (buildingId === 'abbey') return campaign;
   if (buildingVisitError(campaign, heroInstanceId, buildingId) !== null) return campaign;
   const building = getHamletBuildingById(buildingId)!;
   const hero = campaign.heroes.find((h) => h.instanceId === heroInstanceId)!;

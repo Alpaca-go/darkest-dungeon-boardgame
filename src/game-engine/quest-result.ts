@@ -8,6 +8,7 @@ import { getQuestById } from '../data/quests';
 import { pushLog } from './log';
 import { applyQuestXpToStagecoach } from './stagecoach';
 import { convertResolveStatesAtQuestEnd } from './resolve-conversion';
+import { createRuleEventContext, emitPartyRuleEvent } from './quirks';
 
 /** 空补给池（结算后清空用）。 */
 export const EMPTY_PROVISIONS: ProvisionPool = {
@@ -125,7 +126,12 @@ export function applyQuestRewards(
   const stagecoachXp = xpForOutcome(summary.outcome, true);
   next = applyQuestXpToStagecoach(next, stagecoachXp);
 
-  // Phase 7：Quest 结束把 Virtue/Affliction 转换为 Placeholder Quirk（幂等）。
+  // Phase 8A：quest-completed 时机事件（Hoarder 等，仅任务成功时触发）。
+  if (summary.outcome === 'completed') {
+    next = emitPartyRuleEvent(next, 'quest-completed', createRuleEventContext());
+  }
+
+  // Phase 7/8A：Quest 结束把 Virtue/Affliction 转换为真实 Quirk（幂等，走 acquireQuirk）。
   next = convertResolveStatesAtQuestEnd(next);
   return next;
 }

@@ -134,8 +134,8 @@ test('1. 完整成功闭环：新建 → 战斗胜利 → 结算 completed → H
   await exploreUntilObjective(page);
 
   // 离开地牢（确认对话框）→ 任务结算
-  page.once('dialog', (d) => void d.accept());
   await page.getByTestId('leave-dungeon').click();
+  await page.getByTestId('leave-dungeon-confirm-ok').click();
   await expect(page).toHaveURL(/\/result$/);
   await expect(page.getByTestId('quest-summary')).toContainText('任务完成');
 
@@ -169,8 +169,8 @@ test('2. 刷新恢复：dungeon / battle / result / hamlet 节点刷新后路由
   }
 
   // --- result 节点刷新 ---
-  page.once('dialog', (d) => void d.accept());
   await page.getByTestId('leave-dungeon').click();
+  await page.getByTestId('leave-dungeon-confirm-ok').click();
   await expect(page).toHaveURL(/\/result$/);
   await page.reload();
   await expect(page).toHaveURL(/\/result$/);
@@ -208,8 +208,8 @@ test('3. 任务未完成：直接离开地牢 → incomplete 结算 → Hamlet �
   await setupToQuests(page);
   await chooseQuest(page, 'Scout Ahead');
 
-  page.once('dialog', (d) => void d.accept());
   await page.getByTestId('leave-dungeon').click();
+  await page.getByTestId('leave-dungeon-confirm-ok').click();
   await expect(page).toHaveURL(/\/result$/);
   await expect(page.getByTestId('quest-summary')).toContainText('任务未完成');
 

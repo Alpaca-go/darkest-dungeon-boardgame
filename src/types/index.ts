@@ -99,9 +99,9 @@ export interface HeroInstance {
   afflictionId: string | null;
   /** Heart Attack 累计次数（统计用，不影响规则）。 */
   heartAttackCount: number;
-  /** 已获得 Positive Quirk id 列表（Phase 7 为 placeholder，不执行被动效果）。 */
+  /** 已获得 Positive Quirk id 列表（Phase 8A 起被动效果生效；与 negative 合计上限 3）。 */
   positiveQuirkIds: string[];
-  /** 已获得 Negative Quirk id 列表（Phase 7 为 placeholder，不执行被动效果）。 */
+  /** 已获得 Negative Quirk id 列表（Phase 8A 起被动效果生效；与 positive 合计上限 3）。 */
   negativeQuirkIds: string[];
   /** 最近一次 Resolve Test 所在 Quest id（防重复 / 刷新恢复）。 */
   lastResolveQuestId: string | null;
@@ -206,6 +206,9 @@ export interface BattleUnit {
   turnDamageBonus?: number;
   /** 精神效果给予的当前回合命中加成（回合结束清零）。 */
   turnAccuracyBonus?: number;
+  // ---- Phase 8A：Quirk 快照（仅英雄；进入战斗时从战役英雄同步） ----
+  /** 该英雄全部 Quirk id（positive + negative），战斗内被动修正使用。 */
+  quirkIds?: string[];
 }
 
 /** Phase 7：战斗内产生的待处理压力事件（store 层路由到统一 stress 管线）。 */
@@ -247,6 +250,9 @@ export interface BattleState {
   pendingStressEvents?: BattleStressEvent[];
   /** 精神效果导致的本回合行动点惩罚（授予行动点时消耗）。 */
   pendingActionPointPenalty?: number;
+  // ---- Phase 8A（可选字段，兼容旧存档与测试 fixture）----
+  /** 战斗开始时的光照快照（Quirk 光照条件在战斗内使用该值）。 */
+  light?: number;
 }
 
 /** Hamlet（村庄）状态。 */
@@ -305,6 +311,7 @@ export type HeroDeathCause =
   | 'deathblow-trap'
   | 'deathblow-exploration'
   | 'heart-attack'
+  | 'madness'
   | 'unknown';
 
 /** 死亡记录（永久保存在 CampaignState.deathRecords）。 */
@@ -466,6 +473,9 @@ export interface CampaignState {
   resolveConversionRecords: ResolveConversionRecord[];
   /** 已处理的 Stress 阈值批次 id（防同一批次重复 Resolve Test / Heart Attack）。 */
   processedStressBatchIds: string[];
+  // ---- Phase 8A ----
+  /** 待玩家决策的 Quirk 获取事件队列（先进先出，UI 强制处理）。 */
+  pendingQuirkDecisions: PendingQuirkDecision[];
 }
 
 // ---------------------------------------------------------------------------
@@ -690,7 +700,11 @@ export type MentalEventType =
   | 'resolve-effect-triggered'
   | 'resolve-effect-missed'
   | 'heart-attack'
-  | 'resolve-converted-to-quirk';
+  | 'resolve-converted-to-quirk'
+  | 'quirk-gained'
+  | 'quirk-removed'
+  | 'quirk-reaction'
+  | 'madness-death';
 
 /** 精神事件来源。 */
 export type MentalEventSourceType =
@@ -702,6 +716,7 @@ export type MentalEventSourceType =
   | 'curio'
   | 'hamlet-event'
   | 'resolve-effect'
+  | 'quirk'
   | 'debug'
   | 'migration';
 
@@ -731,14 +746,139 @@ export interface ResolveConversionRecord {
   convertedAt: string;
 }
 
-/** Placeholder Quirk（Phase 7 仅建立数据，不执行被动效果，留待 Phase 8）。 */
+// ---------------------------------------------------------------------------
+// Phase 8A：通用 Rule Event 与 Quirk 被动效果引擎
+// ---------------------------------------------------------------------------
+
+/** 通用游戏规则事件类型。
+ * - 数值型事件（modifier 可调整 amount）：stress-applied / stress-recovered /
+ *   damage-taken / damage-output / healing-received / resolve-test（调整 Virtue 阈值）。
+ * - 时机型事件（reaction 触发追加效果）：battle-started / scout-attempted /
+ *   room-entered / hamlet-arrived / quest-completed。
+ */
+export type RuleEventType =
+  | 'stress-applied'
+  | 'stress-recovered'
+  | 'damage-taken'
+  | 'damage-output'
+  | 'healing-received'
+  | 'resolve-test'
+  | 'battle-started'
+  | 'scout-attempted'
+  | 'room-entered'
+  | 'hamlet-arrived'
+  | 'quest-completed';
+
+/** 受伤事件的伤害来源（供 modifier 条件过滤）。 */
+export type RuleDamageSource =
+  | 'attack'
+  | 'bleed'
+  | 'blight'
+  | 'periodic-batch'
+  | 'trap'
+  | 'exploration';
+
+/** Rule Event 上下文：贯穿一个根事件的整条派生链，用于循环保护。
+ * - rootEventId：根事件 id；同一 Quirk 在同一根事件内最多触发一次。
+ * - depth：派生深度（>= MAX_RULE_EVENT_DEPTH 时静默丢弃）。
+ * - triggeredQuirkIds：本根事件内已触发过 reaction 的 Quirk id。
+ */
+export interface RuleEventContext {
+  rootEventId: string;
+  depth: number;
+  triggeredQuirkIds: string[];
+}
+
+/** 通用规则事件。所有 Quirk 被动均针对该结构声明，不写散落的 if/else。 */
+export interface RuleEvent {
+  id: string;
+  type: RuleEventType;
+  /** 受影响英雄 instanceId。 */
+  heroId: string;
+  /** 数值型事件的基础数值（时机型事件为 0）。 */
+  amount: number;
+  /** damage-taken / damage-output 事件的伤害来源。 */
+  damageSource?: RuleDamageSource;
+  questId?: string;
+  sourceId?: string;
+  context: RuleEventContext;
+}
+
+/** Quirk modifier 触发条件（全部可选，同时声明的条件需全部满足）。 */
+export interface QuirkCondition {
+  /** 当前光照 >= minLight。 */
+  minLight?: number;
+  /** 当前光照 <= maxLight。 */
+  maxLight?: number;
+  /** 伤害来源限定（仅 damage-taken / damage-output 事件有效）。 */
+  damageSourceIn?: RuleDamageSource[];
+}
+
+/** 前置修正器：只调整事件数值，禁止派生新事件。 */
+export interface QuirkModifier {
+  eventType: RuleEventType;
+  condition?: QuirkCondition;
+  /** 数值加减（damage/stress/healing 的 amount 或 resolve-test 的 Virtue 阈值偏移）。 */
+  flatDelta: number;
+}
+
+/** 后置反应效果（由引擎路由到统一管线执行，禁止直接改业务字段）。 */
+export type QuirkReactionEffect =
+  | { type: 'stress-self'; amount: number }
+  | { type: 'stress-recover-self'; amount: number }
+  | { type: 'stress-allies'; amount: number }
+  | { type: 'damage-self'; amount: number }
+  | { type: 'heal-self'; amount: number }
+  | { type: 'consume-provision'; provision: keyof ProvisionPool; amount: number }
+  | { type: 'gain-gold'; amount: number }
+  | { type: 'lose-gold'; amount: number }
+  | { type: 'log-only'; message: string };
+
+/** 后置反应：事件结算后触发追加效果（可派生新事件，受循环保护约束）。 */
+export interface QuirkReaction {
+  eventType: RuleEventType;
+  condition?: QuirkCondition;
+  /** d10 <= chanceD10 时触发；省略 = 必定触发。使用可注入 RNG。 */
+  chanceD10?: number;
+  effects: QuirkReactionEffect[];
+}
+
+/** Quirk 定义（Phase 8A 起为真实被动效果承载体）。 */
 export interface QuirkDefinition {
   id: string;
   name: string;
   polarity: 'positive' | 'negative';
   description: string;
-  /** Phase 7 标记：被动效果将在成长系统启用。 */
-  inactiveUntilPhase8: true;
+  /** 静态属性修正（进入战斗时计算，如速度）。 */
+  statModifiers?: { speed?: number };
+  /** 前置修正器列表。 */
+  modifiers?: QuirkModifier[];
+  /** 后置反应列表。 */
+  reactions?: QuirkReaction[];
+}
+
+/** Quirk 获取结果。 */
+export type AcquireQuirkOutcome =
+  | 'added'
+  | 'duplicate'
+  | 'decision-pending'
+  | 'discarded'
+  | 'madness-death';
+
+/** 待玩家决策的 Quirk 获取事件（上限 3 时的替换/放弃选择）。 */
+export interface PendingQuirkDecision {
+  id: string;
+  heroId: string;
+  heroName: string;
+  incomingQuirkId: string;
+  polarity: 'positive' | 'negative';
+  /** 可被替换移除的既有 Quirk id（Positive 进入：既有 Positive；Negative 进入：既有 Positive）。 */
+  replaceableQuirkIds: string[];
+  /** 是否允许直接放弃新 Quirk（Positive 进入允许；Negative 进入不允许）。 */
+  canDiscardIncoming: boolean;
+  source: 'resolve-conversion' | 'debug';
+  createdAt: string;
+  resolved: boolean;
 }
 
 /** Resolve Test 结果。 */

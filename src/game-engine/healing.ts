@@ -1,5 +1,6 @@
 import type { BattleUnit, CampaignState, HealingResolution } from '../types';
 import { pushLog } from './log';
+import { applyQuirkModifiers, describeModifierApplications } from './quirk-passives';
 
 // ---------------------------------------------------------------------------
 // Phase 6 统一治疗管线。
@@ -52,7 +53,24 @@ export function resolveHealing(
   };
   if (!hero || hero.dead || amount <= 0) return { campaign, resolution: noop };
 
-  const nextHp = Math.min(hero.maxLife, previousHp + amount);
+  // Phase 8A：Quirk 前置修正器（healing-received）
+  const mod = applyQuirkModifiers(campaign, hero.instanceId, 'healing-received', Math.floor(amount));
+  const modifiedAmount = mod.amount;
+  if (modifiedAmount <= 0) {
+    const c = mod.applied.length
+      ? pushLog(campaign, `${hero.name} 的治疗被怪癖完全抵消${describeModifierApplications(mod.applied)}。`, 'info')
+      : campaign;
+    return { campaign: c, resolution: noop };
+  }
+  if (mod.applied.length > 0) {
+    campaign = pushLog(
+      campaign,
+      `${hero.name} 接受治疗 ${amount} → ${modifiedAmount}${describeModifierApplications(mod.applied)}。`,
+      'info'
+    );
+  }
+
+  const nextHp = Math.min(hero.maxLife, previousHp + modifiedAmount);
   const healed = nextHp - previousHp;
   if (healed <= 0) return { campaign, resolution: noop };
 

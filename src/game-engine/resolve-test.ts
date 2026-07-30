@@ -12,6 +12,7 @@ import type {
 } from '../types';
 import { d10, pick } from './random';
 import { pushLog } from './log';
+import { getResolveTestThresholdDelta } from './quirk-passives';
 import { pushMentalEvent } from './mental-log';
 import { syncHeroMentalToBattle } from './mental-log';
 import { VIRTUES, VIRTUE_FALLBACK_ID, getVirtueById } from '../data/virtues';
@@ -77,7 +78,12 @@ export function performResolveTest(
   }
   if (!questId) return { campaign, result: null, skippedReason: '当前没有进行中的 Quest' };
 
-  const threshold = getVirtueThreshold(hero, modifiers);
+  // Phase 8A：Quirk 阈值偏移（Balanced +1 / Mercurial -1）与外部 modifiers 叠加
+  const quirkDelta = getResolveTestThresholdDelta(campaign, heroInstanceId);
+  const threshold = getVirtueThreshold(hero, {
+    ...modifiers,
+    virtueThresholdDelta: (modifiers?.virtueThresholdDelta ?? 0) + quirkDelta,
+  });
   const roll = d10();
   let outcome: 'virtue' | 'affliction' = roll <= threshold ? 'virtue' : 'affliction';
   // 未来接口预留：本阶段无正常玩法来源

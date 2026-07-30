@@ -35,9 +35,15 @@ import {
 import {
   startHamletPhase,
   visitHamletBuilding,
+  visitAbbey as engineVisitAbbey,
   skipHeroAction,
   endHamletDay as engineEndHamletDay,
 } from '../game-engine/hamlet';
+import {
+  acquireQuirk as engineAcquireQuirk,
+  resolveQuirkDecision as engineResolveQuirkDecision,
+} from '../game-engine/quirks';
+import type { QuirkDecisionChoice } from '../game-engine/quirks';
 import {
   clearCampaign,
   exportSaveString,
@@ -151,6 +157,14 @@ interface GameStore {
   debugApplyStress(heroId: string, amount: number): void;
   /** Debug：给英雄减压（统一管线）。 */
   debugRecoverStress(heroId: string, amount: number): void;
+
+  // ---- Phase 8A：Quirk ----
+  /** Abbey：花费 Gold 移除英雄的一个 Quirk。 */
+  visitAbbey(heroId: string, quirkId: string): void;
+  /** 结算一条 Quirk 待决策（放弃新 Quirk / 替换既有 Positive）。 */
+  resolveQuirkDecision(decisionId: string, choice: QuirkDecisionChoice): void;
+  /** Debug：给英雄授予 Quirk（走 acquireQuirk 状态机，上限/决策/疯狂死亡规则照常生效）。 */
+  debugGrantQuirk(heroId: string, quirkId: string): void;
 }
 
 const EMPTY_UI: UiState = {
@@ -574,6 +588,46 @@ export const useGameStore = create<GameStore>((set, get) => {
         questId: c.currentQuestId ?? '',
       });
       if (next === c) return;
+      commit(next);
+    },
+
+    // ---- Phase 8A：Quirk（组件不得直接改 quirk 数组，全部经引擎入口） ----
+    visitAbbey: (heroId, quirkId) => {
+      const c = get().campaign;
+      if (!c) return;
+      const next = engineVisitAbbey(c, heroId, quirkId);
+      if (next === c) return;
+      commit(next);
+    },
+
+    resolveQuirkDecision: (decisionId, choice) => {
+      const c = get().campaign;
+      if (!c) return;
+      const next = engineResolveQuirkDecision(c, decisionId, choice);
+      if (next === c) return;
+      commit(next);
+    },
+
+    debugGrantQuirk: (heroId, quirkId) => {
+      const c = get().campaign;
+      if (!c) return;
+      const { campaign: acquired, outcome } = engineAcquireQuirk(c, heroId, quirkId, {
+        source: 'debug',
+        deathSource: c.battle ? 'battle' : c.gamePhase === 'dungeon-explore' ? 'exploration' : 'quest-result',
+        deathResumePhase:
+          c.gamePhase === 'dungeon-explore'
+            ? 'dungeon-explore'
+            : c.gamePhase === 'hamlet'
+              ? 'hamlet'
+              : 'quest-result',
+      });
+      let next = acquired;
+      if (next === c) return;
+      // 疯狂死亡可能导致队伍减员 → 走替补流程判定
+      if (outcome === 'madness-death') {
+        if (next.battle) next = processBattleDeaths(next);
+        next = evaluateReplacementFlow(next);
+      }
       commit(next);
     },
   };

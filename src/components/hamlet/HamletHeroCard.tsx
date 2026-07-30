@@ -1,6 +1,6 @@
 import type { HeroInstance } from '../../types';
 import ResolveStateBadge from '../mental/ResolveStateBadge';
-import { getQuirkById } from '../../data/placeholder-quirks';
+import { getQuirkById } from '../../data/quirks';
 
 /** Hamlet 左侧英雄卡：状态 + 选中 + 跳过按钮。 */
 export default function HamletHeroCard({
@@ -78,7 +78,7 @@ export default function HamletHeroCard({
                     className={`px-1 rounded text-[10px] leading-4 ${
                       q.polarity === 'positive' ? 'bg-sky-900/70 text-sky-200' : 'bg-stone-700/70 text-stone-300'
                     }`}
-                    title={`${q.description}（效果将在 Phase 8 启用）`}
+                    title={q.description}
                   >
                     {q.name}
                   </span>
