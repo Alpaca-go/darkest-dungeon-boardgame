@@ -39,6 +39,24 @@ import {
   loadCampaign,
   saveCampaign,
 } from '../game-engine/save';
+import { resolveDamage as engineResolveDamage } from '../game-engine/damage';
+import { resolveHealing as engineResolveHealing } from '../game-engine/healing';
+import { killCampaignHero, processBattleDeaths } from '../game-engine/hero-death';
+import type { KillHeroCommand } from '../game-engine/hero-death';
+import {
+  applyQuestXpToStagecoach as engineApplyQuestXp,
+  evaluateReplacementFlow,
+  failCampaign as engineFailCampaign,
+  unconfirmedSlotCount,
+} from '../game-engine/stagecoach';
+import {
+  selectReplacementHero as engineSelectReplacementHero,
+  addReplacementUpgrade as engineAddReplacementUpgrade,
+  removeReplacementUpgrade as engineRemoveReplacementUpgrade,
+  confirmReplacement as engineConfirmReplacement,
+  completeReplacementFlow as engineCompleteReplacementFlow,
+} from '../game-engine/replacement';
+import type { DamageCommand } from '../types';
 import { routeForPhase as guardRouteForPhase } from '../app/route-guards';
 
 // UI 临时状态（不持久化）。
@@ -100,6 +118,27 @@ interface GameStore {
   skipHeroToday(heroId: string): void;
   /** 结束当天（全员行动完毕后可用）。 */
   endHamletDay(): void;
+
+  // ---- Phase 6：统一伤害/治疗/死亡（§17） ----
+  /** 统一伤害入口（Campaign 英雄；trap/exploration 等非战斗伤害）。 */
+  applyDamage(command: DamageCommand): void;
+  /** 统一治疗入口（Campaign 英雄；Sanitarium 等非战斗治疗）。 */
+  healActor(targetId: string, amount: number): void;
+  /** 直接记录英雄永久死亡（引擎单一死亡入口的 store 包装）。 */
+  recordHeroDeath(cmd: KillHeroCommand): void;
+  /** 手动触发替补流程判定（能补齐→replacement，不能→campaign-over）。 */
+  openReplacementFlow(): void;
+
+  // ---- Phase 6：替补流程 ----
+  selectReplacementHero(slotId: string, heroClassId: string): void;
+  addReplacementUpgrade(slotId: string, op: { type: 'hero-level' } | { type: 'skill-level'; skillId: string }): void;
+  removeReplacementUpgrade(slotId: string, operationId: string): void;
+  confirmReplacement(slotId: string): void;
+  completeReplacementFlow(): void;
+
+  // ---- Phase 6：Stagecoach 与战役失败 ----
+  applyQuestXpToStagecoach(xp: number): void;
+  failCampaign(reason: string): void;
 }
 
 const EMPTY_UI: UiState = {
@@ -111,6 +150,25 @@ const EMPTY_UI: UiState = {
 
 // 初始化时尝试从 localStorage 恢复战役（刷新可恢复进度）。
 const initialCampaign = loadCampaign();
+
+/**
+ * Phase 6：当替补流程尚未处理而游戏阶段推进时，
+ * 将 pendingReplacement 的 resumePhase 重定向到新的返回阶段。
+ */
+function retargetPendingReplacement(
+  c: CampaignState,
+  resumePhase: 'dungeon-explore' | 'quest-result' | 'hamlet'
+): CampaignState {
+  const pending = c.stagecoach.pendingReplacement;
+  if (!pending || pending.resolved || pending.resumePhase === resumePhase) return c;
+  return {
+    ...c,
+    stagecoach: {
+      ...c.stagecoach,
+      pendingReplacement: { ...pending, resumePhase },
+    },
+  };
+}
 
 export const useGameStore = create<GameStore>((set, get) => {
   /** 写入存档并应用到状态。所有重要变更都经过此方法以保证自动保存。 */
@@ -171,7 +229,7 @@ export const useGameStore = create<GameStore>((set, get) => {
         heroes = c.heroes.filter((h) => h.heroId !== heroId);
       } else {
         if (c.heroes.length >= 4) return; // 已满 4 人
-        const inst = createHeroInstance(heroId);
+        const inst = createHeroInstance(heroId, c.heroes.length + 1);
         if (!inst) return;
         heroes = [...c.heroes, inst];
       }
@@ -223,7 +281,10 @@ export const useGameStore = create<GameStore>((set, get) => {
     moveToRoom: (roomId) => {
       const c = get().campaign;
       if (!c || !c.dungeon || !canMoveTo(c.dungeon, roomId)) return;
-      commit(engineMoveToRoom(c, roomId));
+      let next = engineMoveToRoom(c, roomId);
+      // Phase 6：探索伤害可能导致永久死亡 → 判定替补流程（战斗阶段不打断，胜利结算后再判）
+      if (next.gamePhase === 'dungeon-explore') next = evaluateReplacementFlow(next);
+      commit(next);
     },
 
     useProvision: (type, _heroId) => {
@@ -247,7 +308,8 @@ export const useGameStore = create<GameStore>((set, get) => {
       const battle = engineHeroMove(c.battle, c.battle.activeActorId, dir);
       if (battle === c.battle) return;
       set((st) => ({ ui: { ...st.ui, battleSkillId: null } }));
-      commit({ ...c, battle });
+      // Phase 6：每次战斗 commit 前同步永久死亡到 Campaign（恰好一次）
+      commit(processBattleDeaths({ ...c, battle }));
     },
 
     battleUseSkill: (targetId) => {
@@ -257,22 +319,26 @@ export const useGameStore = create<GameStore>((set, get) => {
       const battle = engineHeroUseSkill(c.battle, c.battle.activeActorId, skillId, targetId);
       if (battle === c.battle) return;
       set((st) => ({ ui: { ...st.ui, battleSkillId: null } }));
-      commit({ ...c, battle });
+      commit(processBattleDeaths({ ...c, battle }));
     },
 
     battleEndTurn: () => {
       const c = get().campaign;
       if (!c?.battle || c.battle.status !== 'active' || !c.battle.activeActorId) return;
       set((st) => ({ ui: { ...st.ui, battleSkillId: null } }));
-      commit({ ...c, battle: engineEndHeroTurn(c.battle, c.battle.activeActorId) });
+      const battle = engineEndHeroTurn(c.battle, c.battle.activeActorId);
+      commit(processBattleDeaths({ ...c, battle }));
     },
 
-    // 胜利结算：房间 cleared + Gold + 同步英雄状态 + 返回地牢。
+    // 胜利结算：房间 cleared + Gold + 同步英雄状态 + 返回地牢；有阵亡 → 替补流程。
     battleResolveVictory: () => {
       const c = get().campaign;
       if (!c?.battle || c.battle.status !== 'victory') return;
       set((st) => ({ ui: { ...st.ui, battleSkillId: null } }));
-      commit(engineResolveVictory(c));
+      let next = processBattleDeaths(c);
+      next = engineResolveVictory(next);
+      next = evaluateReplacementFlow(next);
+      commit(next);
     },
 
     // 战败/撤退：清除战斗，房间保持未清除，返回地牢。
@@ -287,24 +353,32 @@ export const useGameStore = create<GameStore>((set, get) => {
     leaveDungeon: () => {
       const c = get().campaign;
       if (!c || c.gamePhase !== 'dungeon-explore' || !c.dungeon) return;
-      const next = finishQuest(c, 'left');
+      let next = finishQuest(c, 'left');
       if (next === c) return;
+      // Phase 6：仍有未确认替补 → 切换 resumePhase 到 quest-result 再判定
+      next = retargetPendingReplacement(next, 'quest-result');
+      next = evaluateReplacementFlow(next);
       commit(next);
     },
 
     failQuestFromDefeat: () => {
       const c = get().campaign;
       if (!c?.battle || c.battle.status !== 'defeat') return;
-      const next = failQuestFromBattle(c);
+      let next = processBattleDeaths(c);
+      next = failQuestFromBattle(next);
       if (next === c) return;
+      next = retargetPendingReplacement(next, 'quest-result');
+      next = evaluateReplacementFlow(next);
       commit(next);
     },
 
     returnToHamlet: () => {
       const c = get().campaign;
       if (!c) return;
-      const next = startHamletPhase(c);
+      let next = startHamletPhase(c);
       if (next === c) return;
+      next = retargetPendingReplacement(next, 'hamlet');
+      next = evaluateReplacementFlow(next);
       commit(next);
     },
 
@@ -328,6 +402,97 @@ export const useGameStore = create<GameStore>((set, get) => {
       const c = get().campaign;
       if (!c) return;
       const next = engineEndHamletDay(c);
+      if (next === c) return;
+      commit(next);
+    },
+
+    // ---- Phase 6：统一伤害/治疗/死亡 ----
+    applyDamage: (command) => {
+      const c = get().campaign;
+      if (!c) return;
+      const { campaign: next } = engineResolveDamage(c, command);
+      if (next === c) return;
+      commit(next);
+    },
+
+    healActor: (targetId, amount) => {
+      const c = get().campaign;
+      if (!c) return;
+      const { campaign: next } = engineResolveHealing(c, targetId, amount);
+      if (next === c) return;
+      commit(next);
+    },
+
+    recordHeroDeath: (cmd) => {
+      const c = get().campaign;
+      if (!c) return;
+      const next = killCampaignHero(c, cmd);
+      if (next === c) return;
+      commit(next);
+    },
+
+    openReplacementFlow: () => {
+      const c = get().campaign;
+      if (!c || unconfirmedSlotCount(c) === 0) return;
+      const next = evaluateReplacementFlow(c);
+      if (next === c) return;
+      commit(next);
+    },
+
+    // ---- Phase 6：替补流程 ----
+    selectReplacementHero: (slotId, heroClassId) => {
+      const c = get().campaign;
+      if (!c) return;
+      const next = engineSelectReplacementHero(c, slotId, heroClassId);
+      if (next === c) return;
+      commit(next);
+    },
+
+    addReplacementUpgrade: (slotId, op) => {
+      const c = get().campaign;
+      if (!c) return;
+      const next = engineAddReplacementUpgrade(c, slotId, op);
+      if (next === c) return;
+      commit(next);
+    },
+
+    removeReplacementUpgrade: (slotId, operationId) => {
+      const c = get().campaign;
+      if (!c) return;
+      const next = engineRemoveReplacementUpgrade(c, slotId, operationId);
+      if (next === c) return;
+      commit(next);
+    },
+
+    confirmReplacement: (slotId) => {
+      const c = get().campaign;
+      if (!c) return;
+      const next = engineConfirmReplacement(c, slotId);
+      if (next === c) return;
+      commit(next);
+    },
+
+    completeReplacementFlow: () => {
+      const c = get().campaign;
+      if (!c) return;
+      const next = engineCompleteReplacementFlow(c);
+      if (next === c) return;
+      commit(next);
+    },
+
+    // ---- Phase 6：Stagecoach 与战役失败 ----
+    applyQuestXpToStagecoach: (xp) => {
+      const c = get().campaign;
+      if (!c) return;
+      const next = engineApplyQuestXp(c, xp);
+      if (next === c) return;
+      commit(next);
+    },
+
+    failCampaign: (reason) => {
+      const c = get().campaign;
+      if (!c) return;
+      const next = engineFailCampaign(c, reason);
       if (next === c) return;
       commit(next);
     },

@@ -3,6 +3,7 @@ import { HAMLET_BUILDINGS, getHamletBuildingById } from '../data/hamlet-building
 import { HAMLET_EVENTS } from '../data/hamlet-events';
 import { createId, nowIso, pick } from './random';
 import { pushLog } from './log';
+import { resolveHealing } from './healing';
 
 // ---------------------------------------------------------------------------
 // 工具
@@ -139,15 +140,21 @@ export function visitHamletBuilding(
   const hero = campaign.heroes.find((h) => h.instanceId === heroInstanceId)!;
 
   let effectNote = '';
-  const heroes = campaign.heroes.map((h) => {
+  let base = campaign;
+
+  // Phase 6：Sanitarium 治疗统一走 resolveHealing（脱离 Death's Door 生效）
+  if (buildingId === 'sanitarium') {
+    const { campaign: healedCampaign, resolution } = resolveHealing(base, heroInstanceId, 3);
+    base = healedCampaign;
+    effectNote = `恢复 ${resolution.healed} HP${resolution.leftDeathsDoor ? '，脱离 Death\u0027s Door' : ''}`;
+  }
+
+  const heroes = base.heroes.map((h) => {
     if (h.instanceId !== heroInstanceId) return h;
     let u = { ...h, hasActedToday: true };
     switch (buildingId) {
       case 'sanitarium': {
-        const healed = Math.min(3, u.wounds);
-        u = { ...u, wounds: u.wounds - healed };
-        effectNote = `恢复 ${healed} HP`;
-        break;
+        break; // 治疗已在 resolveHealing 中完成
       }
       case 'tavern': {
         const relieved = Math.min(3, u.stress);
@@ -171,16 +178,16 @@ export function visitHamletBuilding(
 
   const hamlet = hamletLog(
     {
-      ...campaign.hamlet,
-      occupiedBuildingIds: [...campaign.hamlet.occupiedBuildingIds, buildingId],
+      ...base.hamlet,
+      occupiedBuildingIds: [...base.hamlet.occupiedBuildingIds, buildingId],
     },
     `${hero.name} 访问 ${building.name}（-${building.cost} Gold）：${effectNote}。`,
     'success'
   );
 
   return {
-    ...campaign,
-    gold: campaign.gold - building.cost,
+    ...base,
+    gold: base.gold - building.cost,
     heroes,
     hamlet,
   };

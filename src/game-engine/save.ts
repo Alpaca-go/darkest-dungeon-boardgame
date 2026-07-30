@@ -4,18 +4,20 @@ import type {
   DungeonState,
   GamePhase,
   HamletState,
+  HeroInstance,
   QuestResultSummary,
 } from '../types';
 import { nowIso } from './random';
+import { createInitialStagecoach } from './stagecoach';
 
 // ---------------------------------------------------------------------------
-// 存档格式（Phase 5 升级为 v2 SaveFile）
+// 存档格式（Phase 6 升级为 v3 SaveFile）
 // ---------------------------------------------------------------------------
 
 /** localStorage 键名（沿用 v1 键名以便旧存档可被发现并迁移）。 */
 export const STORAGE_KEY = 'dd-web-prototype-save-v1';
-/** 当前存档格式版本。v1 = SaveEnvelope（Phase 1-4），v2 = SaveFile。 */
-export const SAVE_VERSION = 2;
+/** 当前存档格式版本。v1 = SaveEnvelope（Phase 1-4），v2 = SaveFile（Phase 5），v3 = Phase 6（死亡/Stagecoach）。 */
+export const SAVE_VERSION = 3;
 
 /**
  * v2 存档文件结构。
@@ -57,6 +59,7 @@ const VALID_PHASES: GamePhase[] = [
   'battle',
   'quest-result',
   'hamlet',
+  'replacement',
   'campaign-over',
 ];
 
@@ -133,22 +136,88 @@ export function validateSaveFile(data: unknown): string | null {
 }
 
 /**
+ * Phase 6 战役字段迁移（v1/v2 → v3）：
+ * - 英雄补 dead=false / atDeathsDoor=false / deathblowRollCount=0 / skillLevels={} / partySlot；
+ * - 旧存档 hp<=0（wounds>=maxLife）的存活英雄恢复为 1 HP —— 迁移绝不制造意外永久死亡；
+ * - 补 stagecoach（waitingTokens=2, accumulatedXp=0）、deathRecords=[]、
+ *   processedDamageEventIds=[]、stagecoachXpApplied=false、campaignOverReason=null。
+ */
+export function migrateCampaignToV3(campaign: CampaignState): CampaignState {
+  const anyC = campaign as CampaignState & Record<string, unknown>;
+  const heroes: HeroInstance[] = (campaign.heroes ?? []).map((h, i) => {
+    const anyH = h as HeroInstance & Record<string, unknown>;
+    const dead = typeof anyH.dead === 'boolean' ? anyH.dead : false;
+    // 旧存档：wounds >= maxLife（hp<=0）但未死 → 恢复为 1 HP
+    const wounds = !dead && h.wounds >= h.maxLife ? h.maxLife - 1 : h.wounds;
+    return {
+      ...h,
+      wounds: Math.max(0, wounds),
+      isAlive: !dead,
+      partySlot: typeof anyH.partySlot === 'number' ? anyH.partySlot : i + 1,
+      atDeathsDoor: typeof anyH.atDeathsDoor === 'boolean' ? anyH.atDeathsDoor : false,
+      dead,
+      deathblowRollCount:
+        typeof anyH.deathblowRollCount === 'number' ? anyH.deathblowRollCount : 0,
+      skillLevels:
+        anyH.skillLevels && typeof anyH.skillLevels === 'object'
+          ? (anyH.skillLevels as HeroInstance['skillLevels'])
+          : {},
+    };
+  });
+  return {
+    ...campaign,
+    saveVersion: SAVE_VERSION,
+    heroes,
+    stagecoach:
+      anyC.stagecoach && typeof anyC.stagecoach === 'object'
+        ? campaign.stagecoach
+        : createInitialStagecoach(),
+    deathRecords: Array.isArray(anyC.deathRecords) ? campaign.deathRecords : [],
+    processedDamageEventIds: Array.isArray(anyC.processedDamageEventIds)
+      ? campaign.processedDamageEventIds
+      : [],
+    stagecoachXpApplied:
+      typeof anyC.stagecoachXpApplied === 'boolean' ? campaign.stagecoachXpApplied : false,
+    campaignOverReason:
+      typeof anyC.campaignOverReason === 'string' ? campaign.campaignOverReason : null,
+  };
+}
+
+/**
  * 迁移旧版本存档到当前版本。无法迁移时返回 null。
- * v1（SaveEnvelope）→ v2（SaveFile）。
+ * v1（SaveEnvelope）→ v2（SaveFile）→ v3（Phase 6 字段）。
  */
 export function migrateSaveFile(raw: unknown): SaveFile | null {
   if (!raw || typeof raw !== 'object') return null;
   const anyRaw = raw as Record<string, unknown>;
 
-  // 已是 v2
+  // 已是 v3
   if (typeof anyRaw.version === 'number' && anyRaw.version === SAVE_VERSION) {
-    return raw as SaveFile;
+    const file = raw as SaveFile;
+    // campaign 缺失或非对象 → 无法迁移（调用方回退为「无法识别的存档结构」）
+    if (!file.campaign || typeof file.campaign !== 'object') return null;
+    // 保险：即使 version=3 也补齐缺失字段（防手工编辑的存档）
+    const campaign = migrateCampaignToV3(file.campaign);
+    return campaign === file.campaign ? file : { ...createSaveSnapshot(campaign), savedAt: file.savedAt };
+  }
+
+  // v2：{ version: 2, savedAt, campaign, ... }
+  if (
+    typeof anyRaw.version === 'number' &&
+    anyRaw.version === 2 &&
+    anyRaw.campaign &&
+    typeof anyRaw.campaign === 'object'
+  ) {
+    const file = raw as SaveFile;
+    const campaign = migrateCampaignToV3(file.campaign);
+    return { ...createSaveSnapshot(campaign), savedAt: file.savedAt ?? nowIso() };
   }
 
   // v1：{ saveVersion: 1, savedAt, campaign }
   const v1 = raw as Partial<SaveEnvelopeV1>;
   if (v1.saveVersion === 1 && v1.campaign && typeof v1.campaign === 'object') {
-    const snapshot = createSaveSnapshot(v1.campaign as CampaignState);
+    const campaign = migrateCampaignToV3(v1.campaign as CampaignState);
+    const snapshot = createSaveSnapshot(campaign);
     return { ...snapshot, savedAt: v1.savedAt ?? snapshot.savedAt };
   }
   return null;
@@ -174,6 +243,13 @@ export function sanitizeSaveFile(save: SaveFile): SaveFile {
   }
   if (c.gamePhase === 'quest-result' && !c.lastQuestResult) {
     c = { ...c, gamePhase: 'quest-select' };
+  }
+  // Phase 6：replacement 阶段但没有待处理替补 → 回退
+  if (
+    c.gamePhase === 'replacement' &&
+    (!c.stagecoach?.pendingReplacement || c.stagecoach.pendingReplacement.slots.length === 0)
+  ) {
+    c = { ...c, gamePhase: c.dungeon ? 'dungeon-explore' : 'quest-select' };
   }
 
   if (c !== save.campaign || save.gamePhase !== c.gamePhase) {
@@ -219,7 +295,7 @@ export function loadSaveDetailed(): LoadResult {
   const migrated = migrateSaveFile(parsed);
   if (!migrated) {
     const v = (parsed as Record<string, unknown> | null)?.version ?? (parsed as Record<string, unknown> | null)?.saveVersion;
-    if (typeof v === 'number' && v !== SAVE_VERSION && v !== 1) {
+    if (typeof v === 'number' && v !== SAVE_VERSION && v !== 2 && v !== 1) {
       return { status: 'unsupported', campaign: null, error: `不支持的存档版本：${v}` };
     }
     return { status: 'corrupt', campaign: null, error: '存档结构无法识别' };

@@ -17,8 +17,11 @@ import {
   isLegalTarget,
   isSkillUsableFrom,
 } from './targeting';
-import { applyDamage, resolveAttack } from './combat-resolution';
-import { applyEffects, applyStartOfTurn, tickStun } from './status-effects';
+import { resolveAttack } from './combat-resolution';
+import { applyBattleUnitDamage } from './damage';
+import { applyBattleUnitHealing } from './healing';
+import { applyEffects, resolveStartOfTurnConditions, tickStun } from './status-effects';
+import { SKILL_LEVEL_BONUS } from '../data/hero-level-profiles';
 import { chooseMonsterAction } from './monster-ai';
 import { pushLog } from './log';
 import type { GameLogEntry } from '../types';
@@ -26,7 +29,7 @@ import type { GameLogEntry } from '../types';
 export const MAX_ROUNDS = 4;
 const BATTLE_REWARD_GOLD = 25;
 const VICTORY_LOG = '所有敌人被击败，战斗胜利！';
-const DEFEAT_LOG = '全员倒下，战斗失败……';
+const DEFEAT_LOG = '全员阵亡，战斗失败……';
 
 // ---------------------------------------------------------------------------
 // 基础工具
@@ -71,7 +74,9 @@ function makeHeroUnit(hero: HeroInstance, index: number): BattleUnit {
     position: index + 1,
     speed: hero.speed,
     stance: hero.stance,
-    isAlive: hero.isAlive && hp > 0,
+    isAlive: !hero.dead,
+    atDeathsDoor: hero.atDeathsDoor || (!hero.dead && hp === 0),
+    deathblowRollCount: hero.deathblowRollCount ?? 0,
     stunned: 0,
     bleed: 0,
     blight: 0,
@@ -81,6 +86,7 @@ function makeHeroUnit(hero: HeroInstance, index: number): BattleUnit {
     actionPoints: 0,
     damageBonus: hero.temporaryDamageBonus ?? 0,
     equippedSkillIds: [...hero.equippedSkillIds],
+    skillLevels: { ...(hero.skillLevels ?? {}) },
   };
 }
 
@@ -97,6 +103,8 @@ function makeMonsterUnit(monster: MonsterDefinition, index: number): BattleUnit 
     speed: monster.speed,
     stance: 'aggressive',
     isAlive: true,
+    atDeathsDoor: false,
+    deathblowRollCount: 0,
     stunned: 0,
     bleed: 0,
     blight: 0,
@@ -135,7 +143,7 @@ export function initBattle(campaign: CampaignState, roomId: string): CampaignSta
   const room = campaign.dungeon?.rooms.find((r) => r.id === roomId);
   if (!room || !campaign.dungeon) return campaign;
 
-  const heroUnits = campaign.heroes.map((h, i) => makeHeroUnit(h, i));
+  const heroUnits = campaign.heroes.filter((h) => !h.dead).map((h, i) => makeHeroUnit(h, i));
   const encounter = buildEncounter(room.type);
   const monsterUnits = encounter.map((m, i) => makeMonsterUnit(m, i));
 
@@ -209,13 +217,17 @@ export function advanceTurn(state: BattleState): BattleState {
       continue;
     }
 
-    // 激活该单位
+    // 激活该单位：Bleed/Blight 合并为同一批次，只经过一次统一伤害入口
     s = { ...s, initiativeIndex: idx, activeActorId: id };
-    const sof = applyStartOfTurn(unit);
+    const sof = resolveStartOfTurnConditions(unit);
     s = setUnit(s, sof.unit);
-    for (const m of sof.messages) s = pushBattleLog(s, m, 'warning');
+    for (const m of sof.messages) s = pushBattleLog(s, m, sof.heroDied ? 'danger' : 'warning');
+    if (sof.heroDied || (sof.unit.side === 'monster' && !sof.unit.isAlive)) {
+      s = checkEnd(s);
+      if (s.status !== 'active') return s;
+    }
     const after = findUnit(s, id);
-    if (!after || !after.isAlive) continue; // 持续伤害致死，跳过
+    if (!after || !after.isAlive) continue; // 持续伤害致死（Deathblow / 怪物倒下），跳过
 
     s = {
       ...s,
@@ -305,31 +317,40 @@ export function heroUseSkill(
   let tgt: BattleUnit = target;
   let act: BattleUnit = actor;
 
+  const skillLevel = (actor.skillLevels?.[skill.id] ?? 1) as 1 | 2 | 3;
+  const levelBonus = SKILL_LEVEL_BONUS[skillLevel];
+
   if (skill.targetSide === 'enemy') {
     const res = resolveAttack(skill);
     if (res.hit) {
-      // Blacksmith 临时加成：仅英雄命中时加算（下一次任务后过期清零）。
-      const totalDamage = res.damage + (actor.damageBonus ?? 0);
-      tgt = applyDamage(tgt, totalDamage);
-      if (skill.applyEffects?.length) tgt = applyEffects(tgt, skill.applyEffects);
+      // Blacksmith 临时加成 + 技能等级加成：仅英雄命中时加算。
+      const totalDamage = res.damage + (actor.damageBonus ?? 0) + levelBonus.damage;
+      const outcome = applyBattleUnitDamage(tgt, totalDamage);
+      tgt = outcome.unit;
+      if (outcome.heroDied) tgt = { ...tgt, deathCause: 'deathblow-attack' };
+      if (tgt.isAlive && skill.applyEffects?.length) tgt = applyEffects(tgt, skill.applyEffects);
       const effNote = skill.applyEffects?.length
         ? `（施加 ${skill.applyEffects.map((e) => e.type).join('/')}）`
         : '';
       const bonusNote = actor.damageBonus ? `（含 Blacksmith +${actor.damageBonus}）` : '';
+      const lvNote = levelBonus.damage > 0 ? `（技能 Lv${skillLevel} +${levelBonus.damage}）` : '';
       s = pushBattleLog(
         s,
-        `${actor.name} 使用 ${skill.name}，掷 ${res.roll}${res.crit ? '（暴击）' : ''} 命中 ${tgt.name}，造成 ${totalDamage} 伤害${bonusNote}${effNote}。`,
+        `${actor.name} 使用 ${skill.name}，掷 ${res.roll}${res.crit ? '（暴击）' : ''} 命中 ${tgt.name}，造成 ${totalDamage} 伤害${bonusNote}${lvNote}${effNote}。`,
         'danger'
       );
+      for (const m of outcome.logs) s = pushBattleLog(s, m, outcome.heroDied ? 'danger' : 'warning');
     } else {
       s = pushBattleLog(s, `${actor.name} 使用 ${skill.name}，掷 ${res.roll} 未命中 ${target.name}。`, 'info');
     }
   } else {
-    // 治疗 / 缓解压力 / buff（ally 或 self）
+    // 治疗 / 缓解压力 / buff（ally 或 self）——治疗统一走 applyBattleUnitHealing
     if (skill.heal) {
-      const before = tgt.hp;
-      tgt = { ...tgt, hp: Math.min(tgt.maxHp, tgt.hp + skill.heal) };
-      s = pushBattleLog(s, `${actor.name} 使用 ${skill.name} 治疗 ${target.name} ${tgt.hp - before} 点。`, 'success');
+      const totalHeal = skill.heal + levelBonus.heal;
+      const healOutcome = applyBattleUnitHealing(tgt, totalHeal);
+      tgt = healOutcome.unit;
+      s = pushBattleLog(s, `${actor.name} 使用 ${skill.name} 治疗 ${target.name} ${healOutcome.healed} 点。`, 'success');
+      for (const m of healOutcome.logs) s = pushBattleLog(s, m, 'success');
     }
     if (skill.stressHeal) {
       tgt = { ...tgt, stress: Math.max(0, tgt.stress - skill.stressHeal) };
@@ -407,9 +428,13 @@ export function runMonsterTurn(state: BattleState, monsterId: string): BattleSta
   const res = resolveAttack(skill);
   let tgt: BattleUnit = target;
   if (res.hit) {
-    tgt = applyDamage(tgt, res.damage);
-    if (skill.stress) tgt = { ...tgt, stress: tgt.stress + skill.stress };
-    if (skill.applyEffects?.length) tgt = applyEffects(tgt, skill.applyEffects);
+    const outcome = applyBattleUnitDamage(tgt, res.damage);
+    tgt = outcome.unit;
+    if (outcome.heroDied) tgt = { ...tgt, deathCause: 'deathblow-attack' };
+    if (tgt.isAlive) {
+      if (skill.stress) tgt = { ...tgt, stress: tgt.stress + skill.stress };
+      if (skill.applyEffects?.length) tgt = applyEffects(tgt, skill.applyEffects);
+    }
     const effNote = skill.applyEffects?.length
       ? `（施加 ${skill.applyEffects.map((e) => e.type).join('/')}）`
       : '';
@@ -420,6 +445,7 @@ export function runMonsterTurn(state: BattleState, monsterId: string): BattleSta
       `${monster.name} 使用 ${skill.name}，掷 ${res.roll}${res.crit ? '（暴击）' : ''} 命中 ${tgt.name}，造成 ${res.damage} 伤害${stressNote}${effNote}`,
       'danger'
     );
+    for (const m of outcome.logs) s = pushBattleLog(s, m, outcome.heroDied ? 'danger' : 'warning');
     s = checkEnd(s);
     return s;
   }
@@ -432,7 +458,11 @@ export function runMonsterTurn(state: BattleState, monsterId: string): BattleSta
 // 胜负判定与结算
 // ---------------------------------------------------------------------------
 
-/** 检查战斗是否结束（全怪死→胜利，全英雄死→失败）。 */
+/**
+ * 检查战斗是否结束。
+ * Phase 6：Death's Door（hp=0 但 isAlive=true）仍算存活，全队处于 Death's Door 不判负；
+ * 仅当所有英雄 isAlive=false（永久死亡）才判负。
+ */
 export function checkEnd(state: BattleState): BattleState {
   if (state.status !== 'active') return state;
   const monstersAlive = state.monsters.some((m) => m.isAlive);
@@ -454,12 +484,15 @@ export function resolveVictory(campaign: CampaignState): CampaignState {
   const heroes = c.heroes.map((h) => {
     const u = b.heroes.find((x) => x.sourceId === h.instanceId);
     if (!u) return h;
+    if (h.dead || !u.isAlive) return h; // 永久死亡由 processBattleDeaths 统一处理，这里不覆盖
     return {
       ...h,
       maxLife: u.maxHp,
       wounds: Math.max(0, u.maxHp - u.hp),
       stress: Math.max(0, u.stress),
-      isAlive: u.isAlive,
+      isAlive: !h.dead,
+      atDeathsDoor: u.atDeathsDoor,
+      deathblowRollCount: u.deathblowRollCount,
     };
   });
   c = { ...c, heroes };

@@ -1,9 +1,10 @@
 import type { CampaignState, DungeonRoom, DungeonState } from '../types';
 import { DUNGEON_NODES, roomTypeMapForQuest } from '../data/dungeons';
-import { pick } from './random';
+import { createId, pick } from './random';
 import { initBattle } from './battle';
 import { pushLog } from './log';
 import { resolveExplorationEvent } from './exploration';
+import { resolveDamage } from './damage';
 
 /** 宝藏房间固定奖励。 */
 export const TREASURE_GOLD = 20;
@@ -119,17 +120,22 @@ function applyRoomResult(campaign: CampaignState, room: DungeonRoom): CampaignSt
         c = { ...c, provisions: { ...c.provisions, tool: c.provisions.tool - 1 } };
         return log(c, '触发陷阱，消耗 1 Tool 将其拆除。', 'warning');
       }
-      const victim = pick(c.heroes.filter((h) => h.isAlive));
+      // Phase 6：陷阱伤害统一走 resolveDamage（Death's Door / Deathblow 生效）
+      const victim = pick(c.heroes.filter((h) => !h.dead));
+      if (victim) {
+        c = resolveDamage(c, {
+          targetId: victim.instanceId,
+          amount: 1,
+          sourceType: 'trap',
+          eventId: createId('trap'),
+        }).campaign;
+      }
       c = {
         ...c,
-        heroes: c.heroes.map((h) => ({
-          ...h,
-          wounds: h.instanceId === victim?.instanceId ? h.wounds + 1 : h.wounds,
-          stress: h.stress + 1,
-        })),
+        heroes: c.heroes.map((h) => (h.dead ? h : { ...h, stress: h.stress + 1 })),
       };
       c = { ...c, dungeon: markRoom(c.dungeon!, room.id, 'visited') };
-      return log(c, '陷阱触发且无 Tool，随机英雄受 1 Wound，全队压力 +1！', 'danger');
+      return log(c, '陷阱触发且无 Tool，随机英雄受 1 伤害，全队压力 +1！', 'danger');
     }
     case 'battle': {
       // Phase 3：初始化完整战斗并切入战斗阶段。

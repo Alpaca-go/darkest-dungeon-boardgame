@@ -23,8 +23,11 @@ export function routeForPhase(phase: GamePhase): string {
       return '/result';
     case 'hamlet':
       return '/hamlet';
-    case 'home':
+    case 'replacement':
+      return '/replacement';
     case 'campaign-over':
+      return '/campaign-over';
+    case 'home':
     default:
       return '/';
   }
@@ -41,7 +44,8 @@ const ALLOWED_PATHS: Record<GamePhase, string[]> = {
   battle: ['/', '/battle'],
   'quest-result': ['/', '/result'],
   hamlet: ['/', '/hamlet'],
-  'campaign-over': ['/'],
+  replacement: ['/', '/replacement'],
+  'campaign-over': ['/', '/campaign-over'],
 };
 
 export interface GuardResult {
@@ -72,6 +76,10 @@ function dataError(campaign: CampaignState, path: string): string | null {
       return campaign.questResultResolved && campaign.lastQuestResult ? null : '没有任务结算数据';
     case '/hamlet':
       return campaign.hamlet?.currentEventId ? null : '没有进行中的 Hamlet 阶段';
+    case '/replacement': {
+      const pending = campaign.stagecoach?.pendingReplacement;
+      return pending && pending.slots.length > 0 ? null : '没有待处理的替补流程';
+    }
     default:
       return null;
   }

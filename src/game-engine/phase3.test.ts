@@ -51,6 +51,9 @@ function makeUnit(partial: Partial<BattleUnit> & { id: string; side: 'hero' | 'm
     speed: 4,
     stance: 'aggressive',
     isAlive: true,
+    // ---- Phase 6：BattleUnit 必填字段 ----
+    atDeathsDoor: false,
+    deathblowRollCount: 0,
     stunned: 0,
     bleed: 0,
     blight: 0,

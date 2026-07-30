@@ -5,6 +5,7 @@ import { getSkillsByHero } from '../data/skills';
 import { getQuestById } from '../data/quests';
 import { generateDungeon } from './dungeon';
 import { pushLog } from './log';
+import { createInitialStagecoach } from './stagecoach';
 
 /** Phase 1 初始补给池默认值（后续阶段可由 Provision Dice 生成替换）。 */
 export const DEFAULT_PROVISIONS: ProvisionPool = {
@@ -23,7 +24,7 @@ export const DEFAULT_PROVISIONS: ProvisionPool = {
 export function createNewCampaign(): CampaignState {
   const now = nowIso();
   return {
-    saveVersion: 1,
+    saveVersion: 3,
     id: createId('cmp'),
     createdAt: now,
     updatedAt: now,
@@ -61,11 +62,17 @@ export function createNewCampaign(): CampaignState {
     questStartGold: 50,
     questResultResolved: false,
     lastQuestResult: null,
+    // ---- Phase 6 ----
+    stagecoach: createInitialStagecoach(),
+    deathRecords: [],
+    processedDamageEventIds: [],
+    stagecoachXpApplied: false,
+    campaignOverReason: null,
   };
 }
 
 /** 由英雄定义创建战役内的英雄实例。 */
-export function createHeroInstance(heroId: string): HeroInstance | null {
+export function createHeroInstance(heroId: string, partySlot = 0): HeroInstance | null {
   const def = getHeroById(heroId);
   if (!def) return null;
   return {
@@ -83,6 +90,12 @@ export function createHeroInstance(heroId: string): HeroInstance | null {
     isAlive: true,
     hasActedToday: false,
     temporaryDamageBonus: 0,
+    // ---- Phase 6 ----
+    partySlot,
+    atDeathsDoor: false,
+    dead: false,
+    deathblowRollCount: 0,
+    skillLevels: {},
   };
 }
 
@@ -93,7 +106,7 @@ export function createHeroInstance(heroId: string): HeroInstance | null {
 export function selectParty(campaign: CampaignState, heroIds: string[]): CampaignState {
   const unique = Array.from(new Set(heroIds)).slice(0, 4);
   const heroes = unique
-    .map((id) => createHeroInstance(id))
+    .map((id, i) => createHeroInstance(id, i + 1))
     .filter((h): h is HeroInstance => h !== null);
   return { ...campaign, heroes };
 }
@@ -170,6 +183,8 @@ export function selectQuest(campaign: CampaignState, questId: string): CampaignS
     questResultResolved: false,
     lastQuestResult: null,
     hamlet: { ...campaign.hamlet, nextQuestProvisionBonus: 0 },
+    // Phase 6：新任务重置 Stagecoach XP 幂等标记
+    stagecoachXpApplied: false,
   };
   next = pushLog(next, `选择了任务：${quest.name}。地牢已生成，开始探索。`, 'success');
   if (bonus > 0) {

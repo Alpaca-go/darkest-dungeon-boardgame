@@ -1,4 +1,5 @@
 import type { ActiveEffect, BattleUnit } from '../types';
+import { applyBattleUnitDamage, type BattleDamageOutcome } from './damage';
 
 /** 给单位施加一个状态效果（返回新单位，不修改原对象）。 */
 export function applyEffectToUnit(unit: BattleUnit, effect: ActiveEffect): BattleUnit {
@@ -22,29 +23,83 @@ export function applyEffects(unit: BattleUnit, effects?: ActiveEffect[]): Battle
   return effects.reduce((u, e) => applyEffectToUnit(u, e), unit);
 }
 
+/** 回合开始持续伤害批量结算的结果。 */
+export interface StartOfTurnResult {
+  unit: BattleUnit;
+  messages: string[];
+  /** 本批次是否掷了 Deathblow（Death's Door + Bleed/Blight = 只掷一次）。 */
+  deathblowRolled: boolean;
+  deathblowRoll?: number;
+  deathblowResult?: 'safe' | 'dead';
+  enteredDeathsDoor: boolean;
+  /** 英雄因本批次持续伤害永久死亡。 */
+  heroDied: boolean;
+}
+
 /**
- * 回合开始时的持续效果结算（Bleed / Blight）。
- * 按当前层数造成伤害，然后层数 -1；归零后不再触发。死亡则标记 isAlive=false。
- * 返回更新后的单位与需要写入日志的消息。
+ * Phase 6：回合开始时的持续伤害批量结算（5.4 / 第 9 节）。
+ * Bleed 与 Blight 合并为同一批次，只调用一次统一伤害入口：
+ * - Death's Door 英雄同时有 Bleed+Blight → 只掷一次 Deathblow；
+ * - 非 Death's Door 英雄合并扣血，首次归零只进入 Death's Door（本批次不掷骰）；
+ * - 每种状态仍分别减少自己的层数；
+ * - 怪物保持即时死亡规则。
+ */
+export function resolveStartOfTurnConditions(unit: BattleUnit): StartOfTurnResult {
+  const messages: string[] = [];
+  let next = unit;
+  const bleedDmg = next.bleed > 0 ? next.bleed : 0;
+  const blightDmg = next.blight > 0 ? next.blight : 0;
+  const total = bleedDmg + blightDmg;
+
+  // 分别减少层数（伤害合并结算，层数各自 -1）
+  if (bleedDmg > 0) {
+    next = { ...next, bleed: Math.max(0, next.bleed - 1) };
+    messages.push(`${next.name} 受到 Bleed 伤害 ${bleedDmg}（剩余 ${next.bleed}）。`);
+  }
+  if (blightDmg > 0) {
+    next = { ...next, blight: Math.max(0, next.blight - 1) };
+    messages.push(`${next.name} 受到 Blight 伤害 ${blightDmg}（剩余 ${next.blight}）。`);
+  }
+
+  if (total <= 0) {
+    return {
+      unit: next,
+      messages,
+      deathblowRolled: false,
+      enteredDeathsDoor: false,
+      heroDied: false,
+    };
+  }
+
+  // 单次批量伤害入口（batch：Bleed + Blight 只有一次死亡判定）
+  const outcome: BattleDamageOutcome = applyBattleUnitDamage(next, total);
+  let resolved = outcome.unit;
+  if (outcome.heroDied) {
+    resolved = { ...resolved, deathCause: 'deathblow-periodic' };
+  }
+  messages.push(...outcome.logs);
+  if (resolved.side === 'monster' && !resolved.isAlive && unit.isAlive) {
+    messages.push(`${resolved.name} 因持续伤害倒下！`);
+  }
+
+  return {
+    unit: resolved,
+    messages,
+    deathblowRolled: outcome.deathblowRolled,
+    deathblowRoll: outcome.deathblowRoll,
+    deathblowResult: outcome.deathblowResult,
+    enteredDeathsDoor: outcome.enteredDeathsDoor,
+    heroDied: outcome.heroDied,
+  };
+}
+
+/**
+ * 兼容旧签名的包装（Phase 3 命名）。
+ * 内部走 Phase 6 统一批量结算管线。
  */
 export function applyStartOfTurn(unit: BattleUnit): { unit: BattleUnit; messages: string[] } {
-  let next = unit;
-  const messages: string[] = [];
-  if (next.bleed > 0) {
-    const dmg = next.bleed;
-    next = { ...next, hp: Math.max(0, next.hp - dmg), bleed: Math.max(0, next.bleed - 1) };
-    messages.push(`${next.name} 受到 Bleed 伤害 ${dmg}（剩余 ${next.bleed}）。`);
-  }
-  if (next.blight > 0) {
-    const dmg = next.blight;
-    next = { ...next, hp: Math.max(0, next.hp - dmg), blight: Math.max(0, next.blight - 1) };
-    messages.push(`${next.name} 受到 Blight 伤害 ${dmg}（剩余 ${next.blight}）。`);
-  }
-  if (next.hp <= 0 && next.isAlive) {
-    next = { ...next, isAlive: false, hp: 0 };
-    messages.push(`${next.name} 因持续伤害倒下！`);
-  }
-  return { unit: next, messages };
+  const r = resolveStartOfTurnConditions(unit);
+  return { unit: r.unit, messages: r.messages };
 }
 
 /** Stun 跳过：行动结束后移除一层 Stun。 */

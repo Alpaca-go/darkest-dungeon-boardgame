@@ -6,6 +6,7 @@ import type {
 } from '../types';
 import { getQuestById } from '../data/quests';
 import { pushLog } from './log';
+import { applyQuestXpToStagecoach } from './stagecoach';
 
 /** 空补给池（结算后清空用）。 */
 export const EMPTY_PROVISIONS: ProvisionPool = {
@@ -87,6 +88,7 @@ export function applyQuestRewards(
   if (campaign.questResultResolved) return campaign;
 
   const heroes = campaign.heroes.map((h) => {
+    if (h.dead) return h; // 阵亡英雄不再获得 XP
     const r = summary.heroes.find((x) => x.instanceId === h.instanceId);
     return {
       ...h,
@@ -117,6 +119,10 @@ export function applyQuestRewards(
     `${outcomeText}：清除 ${summary.roomsCleared} 个房间，补给转换 ${summary.provisionGold} Gold，Light 重置为 5。`,
     summary.outcome === 'failed' ? 'danger' : 'success'
   );
+
+  // Phase 6：Stagecoach 累计任务 XP —— 每次任务只累计一次（不按英雄人数乘算），幂等。
+  const stagecoachXp = xpForOutcome(summary.outcome, true);
+  next = applyQuestXpToStagecoach(next, stagecoachXp);
   return next;
 }
 
@@ -138,12 +144,14 @@ export function failQuestFromBattle(campaign: CampaignState): CampaignState {
   if (b) {
     const heroes = campaign.heroes.map((h) => {
       const u = b.heroes.find((x) => x.sourceId === h.instanceId);
-      if (!u) return h;
+      if (!u || h.dead) return h; // 永久死亡由 processBattleDeaths 统一处理
       return {
         ...h,
         wounds: Math.max(0, u.maxHp - u.hp),
         stress: Math.max(0, u.stress),
-        isAlive: u.isAlive,
+        isAlive: !h.dead,
+        atDeathsDoor: u.atDeathsDoor,
+        deathblowRollCount: u.deathblowRollCount,
       };
     });
     c = { ...c, heroes };

@@ -8,6 +8,8 @@ import DungeonExplorePage from '../pages/DungeonExplorePage';
 import BattlePage from '../pages/BattlePage';
 import QuestResultPage from '../pages/QuestResultPage';
 import HamletPage from '../pages/HamletPage';
+import ReplacementPage from '../pages/ReplacementPage';
+import CampaignOverPage from '../pages/CampaignOverPage';
 
 export interface RouteDef {
   path: string;
@@ -26,4 +28,6 @@ export const ROUTES: RouteDef[] = [
   { path: '/battle', phase: 'battle', label: '战斗', element: <BattlePage /> },
   { path: '/result', phase: 'quest-result', label: '任务结算', element: <QuestResultPage /> },
   { path: '/hamlet', phase: 'hamlet', label: '村庄', element: <HamletPage /> },
+  { path: '/replacement', phase: 'replacement', label: '替补招募', element: <ReplacementPage /> },
+  { path: '/campaign-over', phase: 'campaign-over', label: '战役结束', element: <CampaignOverPage /> },
 ];

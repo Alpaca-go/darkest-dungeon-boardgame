@@ -12,6 +12,7 @@ export type GamePhase =
   | 'battle'
   | 'quest-result'
   | 'hamlet'
+  | 'replacement'
   | 'campaign-over';
 
 /** 四个抽象战斗站位 / 英雄姿态。 */
@@ -52,7 +53,13 @@ export interface ProvisionPool {
   tool: number;
 }
 
-/** 英雄实例（进入战役后的具体状态）。 */
+/** 英雄实例（进入战役后的具体状态）。
+ * Phase 6 健康模型：hp = max(0, maxLife - wounds)。
+ * - hp > 0：正常存活；
+ * - hp === 0 && atDeathsDoor === true：Death's Door（仍存活，可行动）；
+ * - dead === true：永久死亡（isAlive 同步为 false）。
+ * dead 与 atDeathsDoor 不得同时为 true。
+ */
 export interface HeroInstance {
   instanceId: string;
   heroId: string;
@@ -68,6 +75,19 @@ export interface HeroInstance {
   isAlive: boolean;
   hasActedToday: boolean;
   temporaryDamageBonus: number;
+  // ---- Phase 6：Death's Door 与永久死亡 ----
+  /** 队伍固定站位 1..4（替补填入死亡英雄的原位置）。 */
+  partySlot: number;
+  /** 是否处于 Death's Door（HP=0 但仍存活）。 */
+  atDeathsDoor: boolean;
+  /** 永久死亡标记。 */
+  dead: boolean;
+  /** 累计 Deathblow 掷骰次数（展示用）。 */
+  deathblowRollCount: number;
+  /** 每个已装备技能的等级（1..3，默认 1）。 */
+  skillLevels: Record<string, 1 | 2 | 3>;
+  /** 关联的死亡记录 id（dead=true 时存在）。 */
+  deathRecordId?: string;
 }
 
 /** 地牢房间类型。 */
@@ -141,6 +161,17 @@ export interface BattleUnit {
   monsterSkillIds?: string[];
   /** 怪物自动行动的目标规则。 */
   targetRule?: MonsterTargetRule;
+  // ---- Phase 6：Death's Door（仅英雄使用；怪物 HP=0 即死） ----
+  /** 是否处于 Death's Door（hp=0 且 isAlive 仍为 true）。 */
+  atDeathsDoor: boolean;
+  /** 本场战斗累计 Deathblow 掷骰次数。 */
+  deathblowRollCount: number;
+  /** 永久死亡是否已同步到 Campaign（防重复 killCampaignHero）。 */
+  deathResolved?: boolean;
+  /** 战斗内死亡原因（同步 Campaign 时写入 DeathRecord）。 */
+  deathCause?: HeroDeathCause;
+  /** 英雄技能等级快照（仅 hero 有）。 */
+  skillLevels?: Record<string, 1 | 2 | 3>;
 }
 
 /** 战斗状态。 */
@@ -209,9 +240,136 @@ export interface QuestResultSummary {
   heroes: HeroQuestResult[];
 }
 
+// ---------------------------------------------------------------------------
+// Phase 6：死亡、Stagecoach 与替补类型
+// ---------------------------------------------------------------------------
+
+/** 英雄永久死亡原因。 */
+export type HeroDeathCause =
+  | 'deathblow-attack'
+  | 'deathblow-bleed'
+  | 'deathblow-blight'
+  | 'deathblow-periodic'
+  | 'deathblow-trap'
+  | 'deathblow-exploration'
+  | 'unknown';
+
+/** 死亡记录（永久保存在 CampaignState.deathRecords）。 */
+export interface DeathRecord {
+  id: string;
+  campaignHeroId: string;
+  heroClassId: string;
+  heroName: string;
+  cause: HeroDeathCause;
+  questId?: string;
+  roomId?: string;
+  battleId?: string;
+  round?: number;
+  sourceActorId?: string;
+  sourceSkillId?: string;
+  occurredAt: string;
+  sequence: number;
+}
+
+/** 替补免 Gold 升级操作（最多 2 次）。 */
+export type ReplacementUpgradeOperation =
+  | {
+      id: string;
+      type: 'hero-level';
+      fromLevel: 1 | 2;
+      toLevel: 2 | 3;
+      xpCost: 4;
+    }
+  | {
+      id: string;
+      type: 'skill-level';
+      skillId: string;
+      fromLevel: 1 | 2;
+      toLevel: 2 | 3;
+      xpCost: 2;
+    };
+
+/** 单个替补槽位（每名死亡英雄一个）。 */
+export interface ReplacementSlot {
+  partySlot: number;
+  deadCampaignHeroId: string;
+  deathRecordId: string;
+  selectedHeroClassId?: string;
+  draftHero?: HeroInstance;
+  upgradeOperations: ReplacementUpgradeOperation[];
+  confirmed: boolean;
+}
+
+/** 待处理替补流程状态。 */
+export interface PendingReplacementState {
+  id: string;
+  source: 'battle' | 'exploration' | 'quest-result';
+  resumePhase: 'dungeon-explore' | 'quest-result' | 'hamlet';
+  slots: ReplacementSlot[];
+  createdAt: string;
+  resolved: boolean;
+}
+
+/** Stagecoach 状态。 */
+export interface StagecoachState {
+  level: 1 | 2 | 3;
+  waitingTokens: number;
+  accumulatedXp: number;
+  deadHeroClassIds: string[];
+  recruitedHeroClassIds: string[];
+  pendingReplacement: PendingReplacementState | null;
+}
+
+/** 统一伤害入口的输入命令。 */
+export interface DamageCommand {
+  targetId: string;
+  amount: number;
+  sourceType:
+    | 'attack'
+    | 'bleed'
+    | 'blight'
+    | 'periodic-batch'
+    | 'trap'
+    | 'exploration';
+  sourceActorId?: string;
+  sourceSkillId?: string;
+  eventId: string;
+  batchId?: string;
+}
+
+/** 统一伤害入口的输出结果。 */
+export interface DamageResolution {
+  targetId: string;
+  previousHp: number;
+  nextHp: number;
+  enteredDeathsDoor: boolean;
+  deathblowRolled: boolean;
+  deathblowRoll?: number;
+  deathblowResult?: 'safe' | 'dead';
+  heroDied: boolean;
+  logs: string[];
+}
+
+/** 统一治疗入口的输出结果。 */
+export interface HealingResolution {
+  targetId: string;
+  previousHp: number;
+  nextHp: number;
+  healed: number;
+  leftDeathsDoor: boolean;
+  logs: string[];
+}
+
+/** 英雄等级 Profile（data-driven；每英雄三个等级）。 */
+export interface HeroLevelProfile {
+  level: 1 | 2 | 3;
+  maxHp: number;
+  speed: number;
+}
+
 /** 战役状态（存档根对象）。 */
 export interface CampaignState {
-  saveVersion: 1;
+  saveVersion: number;
   id: string;
   createdAt: string;
   updatedAt: string;
@@ -237,6 +395,17 @@ export interface CampaignState {
   questResultResolved: boolean;
   /** 最近一次任务结算摘要（quest-result 页面数据源）。 */
   lastQuestResult: QuestResultSummary | null;
+  // ---- Phase 6 ----
+  /** Stagecoach 状态（Token、累计 XP、待替补流程）。 */
+  stagecoach: StagecoachState;
+  /** 全部死亡记录（永久保存，不裁剪）。 */
+  deathRecords: DeathRecord[];
+  /** 已处理的伤害事件 id（幂等保护，保留最近 200 条）。 */
+  processedDamageEventIds: string[];
+  /** 本次任务的 Stagecoach XP 是否已累计（幂等标记，选新任务时重置）。 */
+  stagecoachXpApplied: boolean;
+  /** 战役失败原因（campaign-over 页面展示）。 */
+  campaignOverReason: string | null;
 }
 
 // ---------------------------------------------------------------------------
