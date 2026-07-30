@@ -141,9 +141,11 @@ describe('Hamlet Event', () => {
   });
 
   it('7. Hamlet 事件效果只执行一次（重复调用不叠加）', () => {
+    // 先造好战役（地牢生成会消耗随机源，Phase 8B 起会放置 Curio），
+    // 再注入随机源，确保 0.9 精确落在 Hamlet 事件抽取上。
+    const base = resolvedCampaign();
     // rng 0.9 → troubled-town（全队 Stress +2），随后 rng 0 选建筑
     setRandomSource(seqRng([0.9, 0]));
-    const base = resolvedCampaign();
     const c = startHamletPhase(base);
     expect(c.hamlet.currentEventId).toBe('event-troubled-town');
     for (const h of c.heroes) {

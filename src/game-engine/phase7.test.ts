@@ -137,8 +137,9 @@ describe('applyStress / recoverStress 统一管线', () => {
 
 describe('Resolve Test', () => {
   it('6. roll <= 2 获得 Virtue；状态与事件正确', () => {
-    setRandomSource(seqAdvance([roll(2), 0])); // d10=2 → Virtue；pick VIRTUES[0]
+    // 先造好战役（地牢生成会消耗随机源），再注入随机源
     let c = freshCampaign();
+    setRandomSource(seqAdvance([roll(2), 0])); // d10=2 → Virtue；pick VIRTUES[0]
     const id = c.heroes[0].instanceId;
     c = { ...c, heroes: c.heroes.map((h, i) => (i === 0 ? { ...h, stress: 10 } : h)) };
     const { campaign: next, result } = performResolveTest(c, id);
@@ -155,8 +156,9 @@ describe('Resolve Test', () => {
   });
 
   it('7. roll >= 3 获得 Affliction', () => {
-    setRandomSource(seqAdvance([roll(7), 0])); // d10=7 → Affliction；pick AFFLICTIONS[0]
+    // 先造好战役（地牢生成会消耗随机源），再注入随机源
     let c = freshCampaign();
+    setRandomSource(seqAdvance([roll(7), 0])); // d10=7 → Affliction；pick AFFLICTIONS[0]
     const id = c.heroes[0].instanceId;
     c = { ...c, heroes: c.heroes.map((h, i) => (i === 0 ? { ...h, stress: 10 } : h)) };
     const { campaign: next, result } = performResolveTest(c, id);

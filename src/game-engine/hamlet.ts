@@ -49,6 +49,7 @@ export function startHamletPhase(campaign: CampaignState): CampaignState {
   const blocked = rollCaretakerBuilding();
 
   let hamlet: HamletState = {
+    visitId: createId('hvisit'),
     preparationDays: event.preparationDays,
     currentDay: 1,
     caretakerBlockedBuildingId: blocked,

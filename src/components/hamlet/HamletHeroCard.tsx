@@ -1,5 +1,6 @@
 import type { HeroInstance } from '../../types';
 import ResolveStateBadge from '../mental/ResolveStateBadge';
+import DiseaseBadge from '../disease/DiseaseBadge';
 import { getQuirkById } from '../../data/quirks';
 
 /** Hamlet 左侧英雄卡：状态 + 选中 + 跳过按钮。 */
@@ -69,6 +70,7 @@ export default function HamletHeroCard({
                 virtueId={hero.virtueId}
                 afflictionId={hero.afflictionId}
               />
+              <DiseaseBadge disease={hero.disease} />
               {[...hero.positiveQuirkIds, ...hero.negativeQuirkIds].map((qid) => {
                 const q = getQuirkById(qid);
                 if (!q) return null;

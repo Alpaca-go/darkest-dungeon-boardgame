@@ -4,6 +4,8 @@ import { useGameStore } from '../store/useGameStore';
 import { canScout } from '../game-engine/dungeon';
 import { getRoomMeta } from '../data/rooms';
 import { getHeroById } from '../data/heroes';
+import { getCurioById } from '../data/curios';
+import DiseaseBadge from '../components/disease/DiseaseBadge';
 import DungeonMap from '../components/dungeon/DungeonMap';
 import TopResourceBar from '../components/dungeon/TopResourceBar';
 import EventLog from '../components/dungeon/EventLog';
@@ -15,6 +17,7 @@ export default function DungeonExplorePage() {
   const scout = useGameStore((s) => s.scout);
   const moveToRoom = useGameStore((s) => s.moveToRoom);
   const leaveDungeon = useGameStore((s) => s.leaveDungeon);
+  const interactWithCurio = useGameStore((s) => s.interactWithCurio);
   const [confirmLeave, setConfirmLeave] = useState(false);
 
   const gamePhase = campaign?.gamePhase;
@@ -38,6 +41,7 @@ export default function DungeonExplorePage() {
   const current = dungeon.rooms.find((r) => r.id === dungeon.currentRoomId);
   const meta = current ? getRoomMeta(current.type) : undefined;
   const scoutable = canScout(dungeon);
+  const curio = getCurioById(current?.curioId);
 
   return (
     <div className="p-4 max-w-6xl mx-auto flex flex-col gap-4">
@@ -86,6 +90,23 @@ export default function DungeonExplorePage() {
                 stress={h.stress}
                 speed={h.speed}
                 stance={h.stance}
+                footer={
+                  h.disease || h.pendingBleed > 0 || h.pendingBlight > 0 ? (
+                    <div className="flex flex-wrap items-center gap-1">
+                      <DiseaseBadge disease={h.disease} />
+                      {h.pendingBleed > 0 && (
+                        <span className="px-1 rounded text-[10px] leading-4 bg-red-950/70 text-red-300">
+                          流血 {h.pendingBleed}
+                        </span>
+                      )}
+                      {h.pendingBlight > 0 && (
+                        <span className="px-1 rounded text-[10px] leading-4 bg-emerald-950/70 text-emerald-300">
+                          腐蚀 {h.pendingBlight}
+                        </span>
+                      )}
+                    </div>
+                  ) : undefined
+                }
               />
             );
           })}
@@ -118,6 +139,42 @@ export default function DungeonExplorePage() {
               )}
             </div>
           )}
+
+          {/* Phase 8B：房间内的 Curio（选择一名英雄搜查，结果全部由引擎产生） */}
+          {curio && (
+            <div
+              className="rounded-md border border-lime-800/60 bg-lime-950/30 p-2.5"
+              data-testid="curio-panel"
+            >
+              <div className="text-sm font-bold text-lime-300">⚱ {curio.name}</div>
+              <div className="text-[11px] text-dd-muted mt-0.5">{curio.description}</div>
+              {current?.curioUsed ? (
+                <div className="text-[11px] text-dd-muted mt-1.5" data-testid="curio-used">
+                  已搜查过。
+                </div>
+              ) : (
+                <div className="mt-1.5">
+                  <div className="text-[11px] text-dd-muted mb-1">选择搜查的英雄：</div>
+                  <div className="flex flex-wrap gap-1">
+                    {campaign.heroes
+                      .filter((h) => !h.dead && h.isAlive)
+                      .map((h) => (
+                        <button
+                          key={h.instanceId}
+                          type="button"
+                          onClick={() => interactWithCurio(h.instanceId)}
+                          className="px-2 py-1 rounded border border-dd-border bg-dd-panel2 text-[11px] text-dd-text hover:border-lime-400 transition-colors"
+                          data-testid={`curio-search-${h.instanceId}`}
+                        >
+                          {h.name}
+                        </button>
+                      ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
           <p className="text-[11px] text-dd-muted mt-auto">
             提示：Scout 会揭示相邻房间并增加全队压力；移动可能触发走廊探索事件。
           </p>

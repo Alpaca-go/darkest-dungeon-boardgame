@@ -12,6 +12,10 @@ import { performResolveTest } from './resolve-test';
 import { triggerHeartAttack } from './heart-attack';
 import { STRESS_MAX, clampStressValue } from './stress-constants';
 import { applyQuirkModifiers, describeModifierApplications } from './quirk-passives';
+// 注意：quirks.ts 亦引用本模块，形成 ESM 循环依赖。
+// emitRuleEvent / childRuleEventContext / createRuleEventContext 均为函数声明（提升），
+// 且仅在运行时调用，不在模块顶层求值，因此循环安全。
+import { childRuleEventContext, createRuleEventContext, emitRuleEvent } from './quirks';
 
 export { STRESS_MAX, STRESS_MIN, clampStressValue } from './stress-constants';
 
@@ -147,6 +151,19 @@ export function applyStress(campaign: CampaignState, input: ApplyStressInput): A
         _depth -= 1;
       }
     }
+  }
+
+  // Phase 8B：压力结算完成后的后置事件（The Worries：stress-resolved → damage-self 2）。
+  // 位置固定在「阈值处理之后」，因此 Resolve Test / Heart Attack 先行结算；
+  // 英雄若已死亡（Heart Attack / Madness）则不再发射。
+  const survivor = next.heroes.find((h) => h.instanceId === hero.instanceId);
+  if (survivor && !survivor.dead && appliedAmount > 0) {
+    const baseCtx = input.ctx ?? createRuleEventContext();
+    next = emitRuleEvent(
+      next,
+      { type: 'stress-resolved', heroId: hero.instanceId },
+      input.ctx ? childRuleEventContext(baseCtx) : baseCtx
+    );
   }
 
   // 战斗单位同步（英雄若已因 Heart Attack 死亡，heart-attack.ts 已处理单位）

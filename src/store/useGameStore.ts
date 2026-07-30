@@ -44,6 +44,20 @@ import {
   resolveQuirkDecision as engineResolveQuirkDecision,
 } from '../game-engine/quirks';
 import type { QuirkDecisionChoice } from '../game-engine/quirks';
+// ---- Phase 8B：Disease / Sanitarium ----
+import {
+  acquireDisease as engineAcquireDisease,
+  finalizeDiseaseTransaction,
+} from '../game-engine/diseases/acquire-disease';
+import {
+  processBattleDiseaseInfections,
+  processBattleRuleEvents,
+} from '../game-engine/diseases/battle-bridge';
+import {
+  useSanitariumRemoveDisease as engineRemoveDisease,
+  sanitariumRemoveDiseaseError,
+} from '../game-engine/hamlet/sanitarium';
+import { interactWithCurio as engineInteractWithCurio } from '../game-engine/diseases/curio';
 import {
   clearCampaign,
   exportSaveString,
@@ -165,6 +179,18 @@ interface GameStore {
   resolveQuirkDecision(decisionId: string, choice: QuirkDecisionChoice): void;
   /** Debug：给英雄授予 Quirk（走 acquireQuirk 状态机，上限/决策/疯狂死亡规则照常生效）。 */
   debugGrantQuirk(heroId: string, quirkId: string): void;
+
+  // ---- Phase 8B：Disease / Sanitarium ----
+  /** Sanitarium：花费 2 Gold 移除英雄的 Disease（扣费与移除为单事务）。 */
+  visitSanitariumRemoveDisease(heroId: string): void;
+  /** 该英雄当前能否在 Sanitarium 移除疾病（null = 可以，否则为拒绝原因）。 */
+  sanitariumRemoveDiseaseError(heroId: string): string | null;
+  /** Debug：让英雄感染指定 Disease（走 acquireDisease 状态机，替换/负面怪癖规则照常生效）。 */
+  debugGrantDisease(heroId: string, diseaseId: string): void;
+  /** 地牢：指定英雄搜查当前房间的 Curio（随机结果由引擎产生）。 */
+  interactWithCurio(heroId: string): void;
+  /** 确认 Disease 获取浮层（仅清空 lastDiseaseAcquisition，不改变任何规则状态）。 */
+  acknowledgeDiseaseAcquisition(): void;
 }
 
 const EMPTY_UI: UiState = {
@@ -214,6 +240,10 @@ export const useGameStore = create<GameStore>((set, get) => {
   const settleBattle = (c: CampaignState): CampaignState => {
     let next = processBattleDeaths(c);
     next = processBattleStressEvents(next);
+    // Phase 8B：战斗排队的规则事件（Lethargy / Vertigo）与感染
+    next = processBattleRuleEvents(next);
+    next = processBattleDiseaseInfections(next);
+    next = processBattleDeaths(next);
     let guard = 0;
     while (
       next.battle &&
@@ -232,6 +262,8 @@ export const useGameStore = create<GameStore>((set, get) => {
       next = { ...next, battle: resumeTurnAfterMentalCheck(next.battle) };
       next = processBattleDeaths(next);
       next = processBattleStressEvents(next);
+      next = processBattleRuleEvents(next);
+      next = processBattleDiseaseInfections(next);
     }
     return next;
   };
@@ -628,7 +660,70 @@ export const useGameStore = create<GameStore>((set, get) => {
         if (next.battle) next = processBattleDeaths(next);
         next = evaluateReplacementFlow(next);
       }
+      // Disease 替换引发的 Quirk 决策一旦结清，收尾事务
+      next = finalizeDiseaseTransaction(next);
       commit(next);
+    },
+
+    // ---- Phase 8B：Disease / Sanitarium（组件不得直接改 hero.disease） ----
+    visitSanitariumRemoveDisease: (heroId) => {
+      const c = get().campaign;
+      if (!c) return;
+      const { campaign: next, error } = engineRemoveDisease(c, heroId);
+      if (error || next === c) return;
+      commit(next);
+    },
+
+    sanitariumRemoveDiseaseError: (heroId) => {
+      const c = get().campaign;
+      if (!c) return '战役未初始化';
+      return sanitariumRemoveDiseaseError(c, heroId);
+    },
+
+    debugGrantDisease: (heroId, diseaseId) => {
+      const c = get().campaign;
+      if (!c) return;
+      const { campaign: acquired, outcome } = engineAcquireDisease(c, {
+        heroId,
+        diseaseId,
+        source: 'debug',
+        sourceEventId: `debug-${heroId}-${diseaseId}-${Date.now()}`,
+        questId: c.currentQuestId,
+        deathSource: c.battle
+          ? 'battle'
+          : c.gamePhase === 'dungeon-explore'
+            ? 'exploration'
+            : 'quest-result',
+        deathResumePhase:
+          c.gamePhase === 'dungeon-explore'
+            ? 'dungeon-explore'
+            : c.gamePhase === 'hamlet'
+              ? 'hamlet'
+              : 'quest-result',
+      });
+      let next = acquired;
+      if (next === c) return;
+      // 替换 Disease 时抽到的负面 Quirk 可能触发 Madness Death → 走替补流程
+      if (outcome === 'replaced-hero-died') {
+        if (next.battle) next = processBattleDeaths(next);
+        next = evaluateReplacementFlow(next);
+      }
+      commit(next);
+    },
+
+    interactWithCurio: (heroId) => {
+      const c = get().campaign;
+      if (!c) return;
+      const { campaign: next, error } = engineInteractWithCurio(c, heroId);
+      if (error || next === c) return;
+      // Curio 感染可能触发 Madness Death（替换 Disease → 第 4 个负面 Quirk）
+      commit(evaluateReplacementFlow(next));
+    },
+
+    acknowledgeDiseaseAcquisition: () => {
+      const c = get().campaign;
+      if (!c || !c.lastDiseaseAcquisition) return;
+      commit({ ...c, lastDiseaseAcquisition: null });
     },
   };
 });

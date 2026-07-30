@@ -107,6 +107,13 @@ export interface HeroInstance {
   lastResolveQuestId: string | null;
   /** 最近一次精神事件 id（防重复执行 / 调试）。 */
   lastMentalEventId: string | null;
+  // ---- Phase 8B：Disease ----
+  /** 当前 Disease（每名英雄最多 1 个；无病为 null）。 */
+  disease: HeroDiseaseState | null;
+  /** 战斗外累积的 Bleed 层数（进入下一场战斗时注入 BattleUnit）。 */
+  pendingBleed: number;
+  /** 战斗外累积的 Blight 层数（进入下一场战斗时注入 BattleUnit）。 */
+  pendingBlight: number;
 }
 
 /** 地牢房间类型。 */
@@ -132,6 +139,23 @@ export interface DungeonRoom {
   type: DungeonRoomType;
   status: DungeonRoomStatus;
   adjacentRoomIds: string[];
+  /** Phase 8B：房间内的 Curio id（null = 无）。 */
+  curioId?: string | null;
+  /** Phase 8B：该 Curio 是否已被互动过（每个房间只能互动一次）。 */
+  curioUsed?: boolean;
+}
+
+/** Phase 8B：Curio 定义（最小实现，仅承载 Disease 感染来源）。 */
+export interface CurioDefinition {
+  id: string;
+  name: string;
+  description: string;
+  /** 互动后的效果。 */
+  effect:
+    | { kind: 'disease-guaranteed'; diseaseId: string }
+    | { kind: 'disease-chance'; diseaseId: string; d10AtMost: number; safeMessage: string }
+    | { kind: 'gold'; amount: number };
+  color: string;
 }
 
 /** 地牢状态。 */
@@ -209,6 +233,13 @@ export interface BattleUnit {
   // ---- Phase 8A：Quirk 快照（仅英雄；进入战斗时从战役英雄同步） ----
   /** 该英雄全部 Quirk id（positive + negative），战斗内被动修正使用。 */
   quirkIds?: string[];
+  // ---- Phase 8B：Disease 快照（仅英雄；进入战斗时从战役英雄 hydrate） ----
+  /** 当前 Disease 定义 id（无病为 null）。 */
+  diseaseId?: string | null;
+  /** 当前 Disease 实例 id（用于被动循环保护的唯一键）。 */
+  diseaseInstanceId?: string | null;
+  /** 英雄等级快照（Disease 的 hero-level 缩放伤害使用）。 */
+  heroLevel?: number;
 }
 
 /** Phase 7：战斗内产生的待处理压力事件（store 层路由到统一 stress 管线）。 */
@@ -253,10 +284,36 @@ export interface BattleState {
   // ---- Phase 8A（可选字段，兼容旧存档与测试 fixture）----
   /** 战斗开始时的光照快照（Quirk 光照条件在战斗内使用该值）。 */
   light?: number;
+  // ---- Phase 8B（可选字段，兼容旧存档与测试 fixture）----
+  /**
+   * 战斗内待处理的规则事件（processBattleRuleEvents 消费后清空）。
+   * 战斗引擎是纯 BattleState 函数，无法访问 Campaign 级数据（Disease、死亡记录），
+   * 因此 hero-move-action-resolved / hero-shuffled 等只排队、不结算。
+   */
+  pendingRuleEvents?: BattleRuleEvent[];
+  /** 战斗内待结算的感染（processBattleDiseaseInfections 消费后清空）。 */
+  pendingDiseaseInfections?: BattleDiseaseInfection[];
+}
+
+/** 战斗内排队的规则事件（Phase 8B）。 */
+export interface BattleRuleEvent {
+  id: string;
+  type: RuleEventType;
+  heroInstanceId: string;
+}
+
+/** 战斗内排队的感染事件（Phase 8B）。 */
+export interface BattleDiseaseInfection {
+  id: string;
+  heroInstanceId: string;
+  diseaseId: string;
+  sourceSkillId: string;
 }
 
 /** Hamlet（村庄）状态。 */
 export interface HamletState {
+  /** Phase 8B：本次 Hamlet 访问的唯一 id（Sanitarium 治疗幂等键的组成部分）。 */
+  visitId: string;
   preparationDays: number;
   currentDay: number;
   caretakerBlockedBuildingId: string | null;
@@ -395,6 +452,8 @@ export interface DamageCommand {
   sourceSkillId?: string;
   eventId: string;
   batchId?: string;
+  /** Phase 8B：该伤害是否为被动派生（派生伤害不再二次发射 damage-resolved，避免自激）。 */
+  derived?: boolean;
 }
 
 /** 统一伤害入口的输出结果。 */
@@ -476,6 +535,17 @@ export interface CampaignState {
   // ---- Phase 8A ----
   /** 待玩家决策的 Quirk 获取事件队列（先进先出，UI 强制处理）。 */
   pendingQuirkDecisions: PendingQuirkDecision[];
+  // ---- Phase 8B ----
+  /** Disease 获取记录（永久保存）。 */
+  diseaseAcquisitionRecords: DiseaseAcquisitionRecord[];
+  /** Sanitarium 移除 Disease 的治疗记录（永久保存）。 */
+  diseaseTreatmentRecords: DiseaseTreatmentRecord[];
+  /** 已处理的 Disease 感染事件 id（幂等保护，保留最近 200 条）。 */
+  processedDiseaseEventIds: string[];
+  /** 进行中的 Disease 替换事务（刷新恢复用；完成后置 null）。 */
+  pendingDiseaseTransaction: PendingDiseaseTransaction | null;
+  /** 最近一次 Disease 获取结果（Overlay 数据源；确认后置 null）。 */
+  lastDiseaseAcquisition: DiseaseAcquisitionRecord | null;
 }
 
 // ---------------------------------------------------------------------------
@@ -552,6 +622,8 @@ export interface MonsterSkillDefinition {
   moveSelf?: number;
   moveTarget?: number;
   applyEffects?: ActiveEffect[];
+  /** Phase 8B：命中英雄后按 d10 <= d10AtMost 的概率使其感染指定 Disease。 */
+  diseaseChance?: { diseaseId: string; d10AtMost: number };
   description: string;
 }
 
@@ -594,7 +666,9 @@ export type ExplorationEventResult =
   | 'hunger'
   | 'trap'
   | 'darkness'
-  | 'rubble';
+  | 'rubble'
+  /** Phase 8B：污秽遗骸 —— 随机 1 名英雄有几率感染 Disease。 */
+  | 'contaminated-remains';
 
 /** 探索事件定义。 */
 export interface ExplorationEventDefinition {
@@ -767,7 +841,30 @@ export type RuleEventType =
   | 'scout-attempted'
   | 'room-entered'
   | 'hamlet-arrived'
-  | 'quest-completed';
+  | 'quest-completed'
+  // ---- Phase 8B：Disease 触发时机（与 Quirk 共用同一套事件与被动引擎） ----
+  /** Disease 首次感染完成后。 */
+  | 'disease-acquired'
+  /** Disease 被替换（旧 → 新）完成后。 */
+  | 'disease-replaced'
+  /** Exploration 中一次 Rubble 结算完成后（Creeping Cough）。 */
+  | 'rubble-resolved'
+  /** Exploration 中一次 Hunger 结算完成后（Tapeworm）。 */
+  | 'hunger-resolved'
+  /** 英雄主动 Move Action 完成后（Lethargy）。 */
+  | 'hero-move-action-resolved'
+  /** 英雄被 Push / Pull 且实际位移 > 0（Vertigo）。 */
+  | 'hero-shuffled'
+  /** 英雄主动消耗 1 份 Food 后（Bulimic）。 */
+  | 'food-consumed'
+  /** Bleed 即将施加到英雄（前置：Hemophilia 追加独立 Bleed）。 */
+  | 'bleed-before-apply'
+  /** Blight 即将施加到英雄（前置：Black Plague 追加独立 Blight）。 */
+  | 'blight-before-apply'
+  /** 英雄实际受到 > 0 的伤害后（Spotted Fever / Syphilis）。 */
+  | 'damage-resolved'
+  /** 英雄实际受到 > 0 的压力并完成阈值结算后（The Worries 追加 Wounds）。 */
+  | 'stress-resolved';
 
 /** 受伤事件的伤害来源（供 modifier 条件过滤）。 */
 export type RuleDamageSource =
@@ -779,14 +876,15 @@ export type RuleDamageSource =
   | 'exploration';
 
 /** Rule Event 上下文：贯穿一个根事件的整条派生链，用于循环保护。
- * - rootEventId：根事件 id；同一 Quirk 在同一根事件内最多触发一次。
+ * - rootEventId：根事件 id。
  * - depth：派生深度（>= MAX_RULE_EVENT_DEPTH 时静默丢弃）。
- * - triggeredQuirkIds：本根事件内已触发过 reaction 的 Quirk id。
+ * - triggeredPassiveKeys：本根事件内已触发过 reaction 的被动唯一键
+ *   （Phase 8B 起为 `rootEventId|heroId|sourceType|instanceId|triggerType`）。
  */
 export interface RuleEventContext {
   rootEventId: string;
   depth: number;
-  triggeredQuirkIds: string[];
+  triggeredPassiveKeys: string[];
 }
 
 /** 通用规则事件。所有 Quirk 被动均针对该结构声明，不写散落的 if/else。 */
@@ -832,7 +930,12 @@ export type QuirkReactionEffect =
   | { type: 'consume-provision'; provision: keyof ProvisionPool; amount: number }
   | { type: 'gain-gold'; amount: number }
   | { type: 'lose-gold'; amount: number }
-  | { type: 'log-only'; message: string };
+  | { type: 'log-only'; message: string }
+  // ---- Phase 8B：通用扩展（Quirk / Disease / 未来 Trinket 共用） ----
+  /** 对自身施加独立的 Bleed / Blight（potency 层 / duration 回合）。 */
+  | { type: 'condition-self'; condition: 'bleed' | 'blight'; potency: number; duration: number }
+  /** 对自身造成按英雄等级缩放的伤害（amount = multiplier × heroLevel）。 */
+  | { type: 'damage-self-scaled'; scaling: 'hero-level'; multiplier: number };
 
 /** 后置反应：事件结算后触发追加效果（可派生新事件，受循环保护约束）。 */
 export interface QuirkReaction {
@@ -876,9 +979,130 @@ export interface PendingQuirkDecision {
   replaceableQuirkIds: string[];
   /** 是否允许直接放弃新 Quirk（Positive 进入允许；Negative 进入不允许）。 */
   canDiscardIncoming: boolean;
-  source: 'resolve-conversion' | 'debug';
+  source: 'resolve-conversion' | 'debug' | 'disease-replacement';
   createdAt: string;
   resolved: boolean;
+}
+
+// ---------------------------------------------------------------------------
+// Phase 8B：Disease 与 Sanitarium
+// ---------------------------------------------------------------------------
+
+/** 通用前置修正器定义（Quirk / Disease / 未来 Trinket 共用同一结构）。 */
+export type PassiveModifierDefinition = QuirkModifier;
+
+/** 通用后置反应定义（Quirk / Disease / 未来 Trinket 共用同一结构）。 */
+export type PassiveReactionDefinition = QuirkReaction;
+
+/** 被动来源类型（决定同优先级时的稳定排序）。 */
+export type PassiveSourceType = 'quirk' | 'disease' | 'trinket' | 'room' | 'boss';
+
+/** 一条已解析的被动来源（Passive Collector 输出）。 */
+export interface PassiveSource {
+  sourceType: PassiveSourceType;
+  /** 实例 id：Quirk 用 quirkId，Disease 用 HeroDiseaseState.instanceId。 */
+  instanceId: string;
+  /** 定义 id：quirkId / diseaseId。 */
+  definitionId: string;
+  priority: number;
+  ownerHeroId: string;
+  modifiers: PassiveModifierDefinition[];
+  reactions: PassiveReactionDefinition[];
+  /** 展示名（日志用）。 */
+  name: string;
+}
+
+/** Disease 定义（数据驱动，效果全部由通用被动引擎执行）。 */
+export interface DiseaseDefinition {
+  id: string;
+  name: string;
+  description: string;
+  /** 声明该 Disease 关注的事件（文档/调试用；实际匹配以 modifiers/reactions 为准）。 */
+  triggerTypes: RuleEventType[];
+  /** 排序优先级（数值小者先执行）。 */
+  priority: number;
+  modifiers: PassiveModifierDefinition[];
+  reactions: PassiveReactionDefinition[];
+  rulesPage: 27 | 28;
+}
+
+/** Disease 获取来源。 */
+export type DiseaseSourceKind =
+  | 'curio'
+  | 'monster-skill'
+  | 'room'
+  | 'exploration-event'
+  | 'hamlet-event'
+  | 'debug'
+  | 'migration';
+
+/** 英雄身上的 Disease 实例状态。 */
+export interface HeroDiseaseState {
+  instanceId: string;
+  diseaseId: string;
+  acquiredQuestId: string | null;
+  acquiredAt: string;
+  source: DiseaseSourceKind;
+  sourceEventId: string;
+}
+
+/** Disease 获取结果分类。 */
+export type DiseaseAcquisitionOutcome =
+  | 'added'
+  | 'duplicate-discarded'
+  | 'replaced'
+  | 'replaced-quirk-decision-pending'
+  | 'replaced-hero-died'
+  | 'discarded-dead-hero'
+  | 'discarded-invalid';
+
+/** Disease 获取记录（永久保存，用于 UI / 幂等 / 回归验证）。 */
+export interface DiseaseAcquisitionRecord {
+  id: string;
+  heroId: string;
+  heroName: string;
+  questId: string | null;
+  incomingDiseaseId: string;
+  removedDiseaseId?: string;
+  negativeQuirkId?: string;
+  pendingQuirkDecisionId?: string;
+  deathRecordId?: string;
+  outcome: DiseaseAcquisitionOutcome;
+  sourceEventId: string;
+  createdAt: string;
+}
+
+/** Disease 替换事务（跨刷新恢复：防止重复抽 Negative Quirk）。 */
+export interface PendingDiseaseTransaction {
+  transactionId: string;
+  heroId: string;
+  incomingDiseaseId: string;
+  previousDiseaseId: string | null;
+  negativeQuirkId?: string;
+  status: 'disease-written' | 'quirk-processing' | 'decision-pending' | 'completed' | 'hero-died';
+}
+
+/** Sanitarium 服务项。 */
+export interface SanitariumService {
+  id: 'heal-small' | 'heal-large' | 'remove-disease';
+  name: string;
+  goldCost: number;
+  effect: { type: 'heal'; amount: number } | { type: 'remove-disease' };
+}
+
+/** Sanitarium 治疗记录（含幂等键）。 */
+export interface DiseaseTreatmentRecord {
+  id: string;
+  heroId: string;
+  heroName: string;
+  diseaseInstanceId: string;
+  diseaseId: string;
+  hamletVisitId: string;
+  hamletDay: number;
+  goldCost: 2;
+  treatedAt: string;
+  /** hamletVisitId + day + heroId + sanitarium-remove-disease。 */
+  idempotencyKey: string;
 }
 
 /** Resolve Test 结果。 */
@@ -922,6 +1146,12 @@ export interface ApplyStressInput {
   questId: string;
   battleId?: string;
   batchId?: string;
+  /**
+   * Phase 8B：规则事件上下文。
+   * 传入时，本次加压产生的 stress-resolved 后置事件会并入同一根事件
+   * （共享循环保护与深度计数）；不传则自建根上下文。
+   */
+  ctx?: RuleEventContext;
 }
 
 /** 统一 Stress 恢复输入。 */

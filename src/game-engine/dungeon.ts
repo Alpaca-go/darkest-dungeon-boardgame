@@ -1,6 +1,7 @@
 import type { CampaignState, DungeonRoom, DungeonState } from '../types';
 import { DUNGEON_NODES, roomTypeMapForQuest } from '../data/dungeons';
-import { createId, pick } from './random';
+import { CURIOS } from '../data/curios';
+import { createId, d10, pick } from './random';
 import { initBattle } from './battle';
 import { pushLog } from './log';
 import { resolveExplorationEvent } from './exploration';
@@ -44,6 +45,9 @@ export function generateDungeon(questId: string): DungeonState {
     type: typeMap[node.id] ?? node.templateType,
     status: node.id === 'start' ? 'current' : 'hidden',
     adjacentRoomIds: [...node.adjacentRoomIds],
+    // Phase 8B：起点外的每个房间随机放置一个 Curio（约 1/2 概率），起点永远没有
+    curioId: node.id === 'start' ? null : d10() <= 5 ? pick(CURIOS).id : null,
+    curioUsed: false,
   }));
   return {
     questId,

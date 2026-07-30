@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useGameStore } from '../../store/useGameStore';
 import { SAVE_VERSION, readSavedAt } from '../../game-engine/save';
 import { ALL_QUIRKS, getQuirkById } from '../../data/quirks';
+import { ALL_DISEASES, getDiseaseById } from '../../data/diseases';
 import { QUIRK_CAP } from '../../game-engine/quirks';
 
 /**
@@ -20,7 +21,9 @@ export default function DebugPanel() {
   const debugApplyStress = useGameStore((s) => s.debugApplyStress);
   const debugRecoverStress = useGameStore((s) => s.debugRecoverStress);
   const debugGrantQuirk = useGameStore((s) => s.debugGrantQuirk);
+  const debugGrantDisease = useGameStore((s) => s.debugGrantDisease);
   const [quirkId, setQuirkId] = useState<string>(ALL_QUIRKS[0]?.id ?? '');
+  const [diseaseId, setDiseaseId] = useState<string>(ALL_DISEASES[0]?.id ?? '');
 
   if (!import.meta.env.DEV) return null;
 
@@ -140,6 +143,48 @@ export default function DebugPanel() {
                         data-testid={`debug-quirk-grant-${h.instanceId}`}
                       >
                         授予
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+          {campaign && campaign.heroes.length > 0 && (
+            <div className="mb-2 border-t border-dd-border pt-2">
+              <div className="text-dd-muted mb-1 font-semibold">
+                Phase 8B · Disease（每人最多 1 个）
+              </div>
+              <select
+                value={diseaseId}
+                onChange={(e) => setDiseaseId(e.target.value)}
+                className="w-full mb-1 rounded bg-dd-panel2 border border-dd-border text-dd-text px-1 py-0.5"
+                data-testid="debug-disease-select"
+              >
+                {ALL_DISEASES.map((d) => (
+                  <option key={d.id} value={d.id}>
+                    ☣ {d.name}
+                  </option>
+                ))}
+              </select>
+              <div className="space-y-1 max-h-40 overflow-auto">
+                {campaign.heroes.map((h) => {
+                  const cur = h.disease ? getDiseaseById(h.disease.diseaseId) : undefined;
+                  return (
+                    <div key={h.instanceId} className="flex items-center gap-1.5">
+                      <span className="flex-1 truncate text-dd-text" title={cur?.description ?? '无疾病'}>
+                        {h.name}
+                      </span>
+                      <span className="text-dd-muted truncate max-w-[70px]" title={cur?.name ?? '无'}>
+                        {cur?.name ?? '无'}
+                      </span>
+                      <button
+                        onClick={() => debugGrantDisease(h.instanceId, diseaseId)}
+                        disabled={h.dead || !diseaseId}
+                        className="px-1.5 rounded bg-dd-panel2 border border-dd-border text-dd-muted hover:text-dd-text disabled:opacity-40"
+                        data-testid={`debug-disease-grant-${h.instanceId}`}
+                      >
+                        感染
                       </button>
                     </div>
                   );

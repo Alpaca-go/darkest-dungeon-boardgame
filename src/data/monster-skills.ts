@@ -84,6 +84,22 @@ export const MONSTER_SKILLS: MonsterSkillDefinition[] = [
     stress: 4,
     description: '魅惑前排，造成大量压力。',
   },
+  // Phase 8B：感染来源之一（怪物技能）。
+  // 命中后把英雄向后推 1 格（触发 Vertigo），并有 3/10 概率使其感染 Black Plague。
+  {
+    id: 'bone-courtier-pestilent-grasp',
+    monsterId: 'bone-courtier',
+    name: 'Pestilent Grasp',
+    usableFromPositions: [1, 2, 3],
+    validTargetPositions: [1, 2],
+    targetSide: 'enemy',
+    accuracy: 7,
+    minDamage: 1,
+    maxDamage: 3,
+    moveTarget: 1,
+    diseaseChance: { diseaseId: 'black-plague', d10AtMost: 3 },
+    description: '腐臭之手抓向前排，将其推后 1 格，并可能传染 Black Plague。',
+  },
 ];
 
 export function getMonsterSkillById(id: string): MonsterSkillDefinition | undefined {

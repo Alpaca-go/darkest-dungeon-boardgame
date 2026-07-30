@@ -6,6 +6,8 @@ import { getHamletEventById } from '../data/hamlet-events';
 import { buildingVisitError, canEndHamletDay } from '../game-engine/hamlet';
 import { getHeroById } from '../data/heroes';
 import { getQuirkById } from '../data/quirks';
+import { getDiseaseById } from '../data/diseases';
+import { SANITARIUM_SERVICES } from '../game-engine/hamlet/sanitarium';
 import HamletEventCard from '../components/hamlet/HamletEventCard';
 import HamletBuildingCard from '../components/hamlet/HamletBuildingCard';
 import HamletHeroCard from '../components/hamlet/HamletHeroCard';
@@ -23,9 +25,13 @@ export default function HamletPage() {
   const skipHeroToday = useGameStore((s) => s.skipHeroToday);
   const endHamletDay = useGameStore((s) => s.endHamletDay);
   const visitAbbey = useGameStore((s) => s.visitAbbey);
+  const visitSanitariumRemoveDisease = useGameStore((s) => s.visitSanitariumRemoveDisease);
+  const sanitariumRemoveDiseaseError = useGameStore((s) => s.sanitariumRemoveDiseaseError);
   const [selectedHeroId, setSelectedHeroId] = useState<string | null>(null);
   // Phase 8A：Abbey 需要选择移除哪个 Quirk，用局部弹层承载（不写入存档）。
   const [abbeyHeroId, setAbbeyHeroId] = useState<string | null>(null);
+  // Phase 8B：Sanitarium 有两项服务（治疗 3 Gold / 治病 2 Gold），同样用局部弹层选择。
+  const [sanitariumHeroId, setSanitariumHeroId] = useState<string | null>(null);
 
   // preparationDays 归零后 gamePhase → quest-select，自动跳转下一任务选择。
   const gamePhase = campaign?.gamePhase;
@@ -45,12 +51,17 @@ export default function HamletPage() {
   const selectedHero = campaign.heroes.find((h) => h.instanceId === selectedHeroId) ?? null;
 
   const abbeyHero = campaign.heroes.find((h) => h.instanceId === abbeyHeroId) ?? null;
+  const sanitariumHero = campaign.heroes.find((h) => h.instanceId === sanitariumHeroId) ?? null;
 
   const onVisit = (buildingId: string) => {
     if (!selectedHeroId) return;
-    // Abbey 走二次选择流程，其余建筑直接结算。
+    // Abbey / Sanitarium 走二次选择流程，其余建筑直接结算。
     if (buildingId === 'abbey') {
       setAbbeyHeroId(selectedHeroId);
+      return;
+    }
+    if (buildingId === 'sanitarium') {
+      setSanitariumHeroId(selectedHeroId);
       return;
     }
     visitBuilding(selectedHeroId, buildingId);
@@ -114,9 +125,14 @@ export default function HamletPage() {
           </h2>
           <div className="grid sm:grid-cols-2 gap-3">
             {HAMLET_BUILDINGS.map((b) => {
-              const reason = selectedHeroId
+              let reason = selectedHeroId
                 ? buildingVisitError(campaign, selectedHeroId, b.id)
                 : '请先选择英雄';
+              // Phase 8B：Sanitarium 有两项服务，任一可用即可进入（治病不要求有伤）。
+              if (selectedHeroId && b.id === 'sanitarium' && reason) {
+                const diseaseReason = sanitariumRemoveDiseaseError(selectedHeroId);
+                if (!diseaseReason) reason = null;
+              }
               return (
                 <HamletBuildingCard
                   key={b.id}
@@ -200,6 +216,75 @@ export default function HamletPage() {
               onClick={() => setAbbeyHeroId(null)}
               className="mt-3 w-full rounded border border-dd-border bg-dd-panel2 px-3 py-1.5 text-sm text-dd-muted hover:text-dd-text transition-colors"
               data-testid="abbey-cancel"
+            >
+              取消
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Phase 8B：Sanitarium 服务选择弹层（治疗伤势 / 治疗疾病） */}
+      {sanitariumHero && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
+          data-testid="sanitarium-modal"
+        >
+          <div className="w-full max-w-sm rounded-lg border-2 border-lime-500/70 bg-dd-panel p-5 shadow-2xl">
+            <div className="text-lg font-bold text-dd-text mb-1">Sanitarium · 选择服务</div>
+            <p className="text-xs text-dd-muted mb-3">
+              为 {sanitariumHero.name} 选择一项服务（本次访问只能选择一项）。
+            </p>
+            <div className="space-y-1.5">
+              {SANITARIUM_SERVICES.map((svc) => {
+                const err =
+                  svc.id === 'remove-disease'
+                    ? sanitariumRemoveDiseaseError(sanitariumHero.instanceId)
+                    : buildingVisitError(campaign, sanitariumHero.instanceId, 'sanitarium');
+                const disabled = err !== null;
+                return (
+                  <button
+                    key={svc.id}
+                    type="button"
+                    disabled={disabled}
+                    title={err ?? undefined}
+                    onClick={() => {
+                      if (svc.id === 'remove-disease') {
+                        visitSanitariumRemoveDisease(sanitariumHero.instanceId);
+                      } else {
+                        visitBuilding(sanitariumHero.instanceId, 'sanitarium');
+                      }
+                      setSanitariumHeroId(null);
+                      setSelectedHeroId(null);
+                    }}
+                    className={[
+                      'w-full rounded border px-3 py-2 text-left text-sm transition-colors',
+                      disabled
+                        ? 'border-dd-border bg-dd-panel2 text-dd-muted cursor-not-allowed opacity-60'
+                        : 'border-dd-border bg-dd-panel2 text-dd-text hover:border-lime-400',
+                    ].join(' ')}
+                    data-testid={`sanitarium-${svc.id}`}
+                  >
+                    <span className="font-semibold">
+                      {svc.name}
+                      <span className="ml-1.5 text-[10px] text-dd-warn">{svc.goldCost} Gold</span>
+                    </span>
+                    <span className="block text-[11px] text-dd-muted">
+                      {svc.effect.type === 'heal'
+                        ? `恢复 ${svc.effect.amount} 点生命`
+                        : sanitariumHero.disease
+                          ? `移除「${getDiseaseById(sanitariumHero.disease.diseaseId)?.name ?? sanitariumHero.disease.diseaseId}」`
+                          : '当前没有疾病'}
+                    </span>
+                    {disabled && <span className="block text-[11px] text-red-400">{err}</span>}
+                  </button>
+                );
+              })}
+            </div>
+            <button
+              type="button"
+              onClick={() => setSanitariumHeroId(null)}
+              className="mt-3 w-full rounded border border-dd-border bg-dd-panel2 px-3 py-1.5 text-sm text-dd-muted hover:text-dd-text transition-colors"
+              data-testid="sanitarium-cancel"
             >
               取消
             </button>

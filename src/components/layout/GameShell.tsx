@@ -7,6 +7,7 @@ import ErrorBoundary from '../feedback/ErrorBoundary';
 import DebugPanel from '../debug/DebugPanel';
 import MentalEventOverlay from '../mental/MentalEventOverlay';
 import QuirkDecisionOverlay from '../quirk/QuirkDecisionOverlay';
+import DiseaseAcquisitionOverlay from '../disease/DiseaseAcquisitionOverlay';
 
 /**
  * 统一外层布局：顶部资源条 + 导航 + 内容区(Outlet) + 底部说明。
@@ -106,6 +107,8 @@ export default function GameShell() {
 
       {/* Phase 8A：Quirk 决策浮层（z 低于精神事件浮层，保证先看结果再做取舍） */}
       <QuirkDecisionOverlay />
+      {/* Phase 8B：Disease 获取结果浮层（先看到感染结果，再处理可能的 Quirk 决策） */}
+      <DiseaseAcquisitionOverlay />
       <MentalEventOverlay />
       <DebugPanel />
     </div>

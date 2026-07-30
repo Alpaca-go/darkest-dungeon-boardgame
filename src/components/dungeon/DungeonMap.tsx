@@ -93,6 +93,16 @@ export default function DungeonMap({ dungeon, onRoomClick }: DungeonMapProps) {
           >
             <span className="text-xs font-bold text-dd-text">{meta?.label ?? room.type}</span>
             <span className="text-[10px] text-dd-muted">{statusLabel}</span>
+            {/* Phase 8B：房间内存在未搜查的 Curio（隐藏房间不剧透） */}
+            {room.curioId && !room.curioUsed && room.status !== 'hidden' && (
+              <span
+                className="absolute -top-1.5 -right-1.5 text-[10px] leading-none px-1 py-0.5 rounded bg-lime-950 text-lime-300 border border-lime-800"
+                title="房间内有可搜查的物件"
+                data-testid={`curio-marker-${room.id}`}
+              >
+                ⚱
+              </span>
+            )}
           </button>
         );
       })}

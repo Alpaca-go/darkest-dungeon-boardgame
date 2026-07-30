@@ -5,12 +5,14 @@ import type {
   DungeonState,
   GamePhase,
   HamletState,
+  HeroDiseaseState,
   HeroInstance,
   QuestResultSummary,
 } from '../types';
 import { nowIso } from './random';
 import { createInitialStagecoach } from './stagecoach';
 import { getQuirkById, normalizeQuirkId } from '../data/quirks';
+import { getDiseaseById } from '../data/diseases';
 import { QUIRK_CAP } from './quirks';
 
 // ---------------------------------------------------------------------------
@@ -23,9 +25,10 @@ export const STORAGE_KEY = 'dd-web-prototype-save-v1';
  * 当前存档格式版本。
  * v1 = SaveEnvelope（Phase 1-4），v2 = SaveFile（Phase 5），
  * v3 = Phase 6（死亡/Stagecoach），v4 = Phase 7（Stress/Resolve/Affliction/Virtue/Heart Attack），
- * v5 = Phase 8A（Quirk 引擎：真实 Quirk id / 上限 3 / pendingQuirkDecisions）。
+ * v5 = Phase 8A（Quirk 引擎：真实 Quirk id / 上限 3 / pendingQuirkDecisions），
+ * v6 = Phase 8B（Disease / Sanitarium 移除 / Curio / 战斗外 Bleed-Blight 累积）。
  */
-export const SAVE_VERSION = 5;
+export const SAVE_VERSION = 6;
 
 /**
  * v2 存档文件结构。
@@ -141,8 +144,26 @@ export function validateSaveFile(data: unknown): string | null {
     for (const qid of [...h.positiveQuirkIds, ...h.negativeQuirkIds]) {
       if (!getQuirkById(qid)) return `英雄 ${h.instanceId} 引用了未知 Quirk：${qid}`;
     }
+    // Phase 8B：Disease 结构校验（每人最多 1 个，且必须引用已知 Disease）
+    if (h.disease !== null && h.disease !== undefined) {
+      if (typeof h.disease.diseaseId !== 'string' || typeof h.disease.instanceId !== 'string') {
+        return `英雄 ${h.instanceId} 的 disease 结构非法`;
+      }
+      if (!getDiseaseById(h.disease.diseaseId)) {
+        return `英雄 ${h.instanceId} 引用了未知 Disease：${h.disease.diseaseId}`;
+      }
+    }
+    if (typeof h.pendingBleed !== 'number' || h.pendingBleed < 0) {
+      return `英雄 ${h.instanceId} 的 pendingBleed 非法`;
+    }
+    if (typeof h.pendingBlight !== 'number' || h.pendingBlight < 0) {
+      return `英雄 ${h.instanceId} 的 pendingBlight 非法`;
+    }
   }
   if (!Array.isArray(c.pendingQuirkDecisions)) return 'campaign.pendingQuirkDecisions 缺失或不是数组';
+  if (!Array.isArray(c.diseaseAcquisitionRecords)) return 'campaign.diseaseAcquisitionRecords 缺失或不是数组';
+  if (!Array.isArray(c.diseaseTreatmentRecords)) return 'campaign.diseaseTreatmentRecords 缺失或不是数组';
+  if (!Array.isArray(c.processedDiseaseEventIds)) return 'campaign.processedDiseaseEventIds 缺失或不是数组';
 
   // 阶段相关引用完整性
   if (c.gamePhase === 'dungeon-explore' || c.gamePhase === 'battle') {
@@ -415,33 +436,160 @@ export function migrateCampaignToV5(campaign: CampaignState): CampaignState {
   };
 }
 
-/** 将战役迁移到当前最新版本（v3 Phase 6 → v4 Phase 7 → v5 Phase 8A）。 */
+/** 非负整数钳制（Phase 8B：pendingBleed / pendingBlight）。 */
+function clampNonNegative(value: unknown): number {
+  const n = typeof value === 'number' && Number.isFinite(value) ? Math.round(value) : 0;
+  return Math.max(0, n);
+}
+
+/**
+ * Phase 8B 战役字段迁移（v5 → v6）：
+ * - 英雄补 disease=null / pendingBleed=0 / pendingBlight=0；已有 disease 若引用未知
+ *   Disease id 则丢弃为 null（迁移绝不制造未知被动，也绝不制造 Madness Death）；
+ * - 战役补 diseaseAcquisitionRecords / diseaseTreatmentRecords / processedDiseaseEventIds /
+ *   pendingDiseaseTransaction=null / lastDiseaseAcquisition=null；
+ * - 旧存档遗留的 pendingDiseaseTransaction 一律清空（旧事务在新会话中无法安全续做）；
+ * - hamlet 补 visitId（Sanitarium 幂等键依赖）；
+ * - dungeon 房间补 curioId=null / curioUsed=false（旧地牢不追加 Curio）；
+ * - 进行中的战斗补 BattleUnit.diseaseId / diseaseInstanceId / heroLevel（英雄从战役英雄同步），
+ *   并补 battle.pendingRuleEvents / pendingDiseaseInfections 为空队列。
+ */
+export function migrateCampaignToV6(campaign: CampaignState): CampaignState {
+  let changed = false;
+
+  const heroes: HeroInstance[] = (campaign.heroes ?? []).map((h) => {
+    const anyH = h as HeroInstance & Record<string, unknown>;
+    const rawDisease = anyH.disease as HeroDiseaseState | null | undefined;
+    const disease: HeroDiseaseState | null =
+      rawDisease && typeof rawDisease === 'object' && getDiseaseById(rawDisease.diseaseId)
+        ? rawDisease
+        : null;
+    const pendingBleed = clampNonNegative(anyH.pendingBleed);
+    const pendingBlight = clampNonNegative(anyH.pendingBlight);
+    const needs =
+      anyH.disease === undefined ||
+      disease !== (rawDisease ?? null) ||
+      anyH.pendingBleed !== pendingBleed ||
+      anyH.pendingBlight !== pendingBlight;
+    if (!needs) return h;
+    changed = true;
+    return { ...h, disease, pendingBleed, pendingBlight };
+  });
+
+  let battle = campaign.battle;
+  if (battle) {
+    const unitNeeds = (u: BattleUnit) =>
+      (u as BattleUnit & Record<string, unknown>).diseaseId === undefined ||
+      (u as BattleUnit & Record<string, unknown>).diseaseInstanceId === undefined;
+    const anyB = battle as BattleState & Record<string, unknown>;
+    if (
+      battle.heroes.some(unitNeeds) ||
+      battle.monsters.some(unitNeeds) ||
+      !Array.isArray(anyB.pendingRuleEvents) ||
+      !Array.isArray(anyB.pendingDiseaseInfections)
+    ) {
+      changed = true;
+      battle = {
+        ...battle,
+        pendingRuleEvents: Array.isArray(anyB.pendingRuleEvents) ? battle.pendingRuleEvents : [],
+        pendingDiseaseInfections: Array.isArray(anyB.pendingDiseaseInfections)
+          ? battle.pendingDiseaseInfections
+          : [],
+        heroes: battle.heroes.map((u) => {
+          if (!unitNeeds(u)) return u;
+          const src = heroes.find((h) => h.instanceId === u.sourceId);
+          return {
+            ...u,
+            diseaseId: src?.disease?.diseaseId ?? null,
+            diseaseInstanceId: src?.disease?.instanceId ?? null,
+            heroLevel: typeof u.heroLevel === 'number' ? u.heroLevel : src?.level ?? 1,
+          };
+        }),
+        monsters: battle.monsters.map((u) =>
+          unitNeeds(u) ? { ...u, diseaseId: null, diseaseInstanceId: null } : u,
+        ),
+      };
+    }
+  }
+
+  let dungeon = campaign.dungeon;
+  if (dungeon && dungeon.rooms.some((r) => r.curioId === undefined)) {
+    changed = true;
+    dungeon = {
+      ...dungeon,
+      rooms: dungeon.rooms.map((r) =>
+        r.curioId === undefined ? { ...r, curioId: null, curioUsed: false } : r,
+      ),
+    };
+  }
+
+  const anyC = campaign as CampaignState & Record<string, unknown>;
+  let hamlet = campaign.hamlet;
+  if (hamlet && typeof (hamlet as HamletState).visitId !== 'string') {
+    changed = true;
+    hamlet = { ...hamlet, visitId: `hvisit-migrated-${campaign.id ?? 'save'}` };
+  }
+
+  const needsCampaignFields =
+    !Array.isArray(anyC.diseaseAcquisitionRecords) ||
+    !Array.isArray(anyC.diseaseTreatmentRecords) ||
+    !Array.isArray(anyC.processedDiseaseEventIds) ||
+    anyC.pendingDiseaseTransaction !== null ||
+    anyC.lastDiseaseAcquisition === undefined;
+  if (needsCampaignFields) changed = true;
+
+  if (!changed && campaign.saveVersion === SAVE_VERSION) return campaign;
+  return {
+    ...campaign,
+    saveVersion: SAVE_VERSION,
+    heroes,
+    battle,
+    dungeon,
+    hamlet,
+    diseaseAcquisitionRecords: Array.isArray(anyC.diseaseAcquisitionRecords)
+      ? campaign.diseaseAcquisitionRecords
+      : [],
+    diseaseTreatmentRecords: Array.isArray(anyC.diseaseTreatmentRecords)
+      ? campaign.diseaseTreatmentRecords
+      : [],
+    processedDiseaseEventIds: Array.isArray(anyC.processedDiseaseEventIds)
+      ? campaign.processedDiseaseEventIds
+      : [],
+    // 旧事务无法安全续做（Quirk 抽取结果未落盘）→ 一律丢弃，英雄保留已写入的 Disease
+    pendingDiseaseTransaction: null,
+    lastDiseaseAcquisition:
+      anyC.lastDiseaseAcquisition === undefined ? null : campaign.lastDiseaseAcquisition,
+  };
+}
+
+/** 将战役迁移到当前最新版本（v3 Phase 6 → v4 Phase 7 → v5 Phase 8A → v6 Phase 8B）。 */
 export function migrateCampaignToLatest(campaign: CampaignState): CampaignState {
-  return migrateCampaignToV5(migrateCampaignToV4(migrateCampaignToV3(campaign)));
+  return migrateCampaignToV6(migrateCampaignToV5(migrateCampaignToV4(migrateCampaignToV3(campaign))));
 }
 
 /**
  * 迁移旧版本存档到当前版本。无法迁移时返回 null。
- * v1（SaveEnvelope）→ v2（SaveFile）→ v3（Phase 6）→ v4（Phase 7）→ v5（Phase 8A Quirk）。
+ * v1（SaveEnvelope）→ v2（SaveFile）→ v3（Phase 6）→ v4（Phase 7）→ v5（Phase 8A Quirk）
+ * → v6（Phase 8B Disease）。
  */
 export function migrateSaveFile(raw: unknown): SaveFile | null {
   if (!raw || typeof raw !== 'object') return null;
   const anyRaw = raw as Record<string, unknown>;
 
-  // 已是 v5（当前版本）
+  // 已是 v6（当前版本）
   if (typeof anyRaw.version === 'number' && anyRaw.version === SAVE_VERSION) {
     const file = raw as SaveFile;
     // campaign 缺失或非对象 → 无法迁移（调用方回退为「无法识别的存档结构」）
     if (!file.campaign || typeof file.campaign !== 'object') return null;
-    // 保险：即使 version=5 也补齐缺失字段（防手工编辑的存档）
+    // 保险：即使 version=6 也补齐缺失字段（防手工编辑的存档）
     const campaign = migrateCampaignToLatest(file.campaign);
     return campaign === file.campaign ? file : { ...createSaveSnapshot(campaign), savedAt: file.savedAt };
   }
 
-  // v2 / v3 / v4：{ version: 2|3|4, savedAt, campaign, ... }
+  // v2 / v3 / v4 / v5：{ version: 2|3|4|5, savedAt, campaign, ... }
   if (
     typeof anyRaw.version === 'number' &&
-    (anyRaw.version === 2 || anyRaw.version === 3 || anyRaw.version === 4) &&
+    (anyRaw.version === 2 || anyRaw.version === 3 || anyRaw.version === 4 || anyRaw.version === 5) &&
     anyRaw.campaign &&
     typeof anyRaw.campaign === 'object'
   ) {
@@ -532,7 +680,7 @@ export function loadSaveDetailed(): LoadResult {
   const migrated = migrateSaveFile(parsed);
   if (!migrated) {
     const v = (parsed as Record<string, unknown> | null)?.version ?? (parsed as Record<string, unknown> | null)?.saveVersion;
-    if (typeof v === 'number' && v !== SAVE_VERSION && v !== 4 && v !== 3 && v !== 2 && v !== 1) {
+    if (typeof v === 'number' && v !== SAVE_VERSION && ![1, 2, 3, 4, 5].includes(v)) {
       return { status: 'unsupported', campaign: null, error: `不支持的存档版本：${v}` };
     }
     return { status: 'corrupt', campaign: null, error: '存档结构无法识别' };

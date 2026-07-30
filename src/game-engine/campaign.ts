@@ -25,7 +25,7 @@ export const DEFAULT_PROVISIONS: ProvisionPool = {
 export function createNewCampaign(): CampaignState {
   const now = nowIso();
   return {
-    saveVersion: 5, // Phase 8A（与 save.ts SAVE_VERSION 保持一致）
+    saveVersion: 6, // Phase 8B（与 save.ts SAVE_VERSION 保持一致）
     id: createId('cmp'),
     createdAt: now,
     updatedAt: now,
@@ -44,6 +44,7 @@ export function createNewCampaign(): CampaignState {
     dungeon: null,
     battle: null,
     hamlet: {
+      visitId: createId('hvisit'),
       preparationDays: 0,
       currentDay: 1,
       caretakerBlockedBuildingId: null,
@@ -75,6 +76,12 @@ export function createNewCampaign(): CampaignState {
     processedStressBatchIds: [],
     // ---- Phase 8A ----
     pendingQuirkDecisions: [],
+    // ---- Phase 8B ----
+    diseaseAcquisitionRecords: [],
+    diseaseTreatmentRecords: [],
+    processedDiseaseEventIds: [],
+    pendingDiseaseTransaction: null,
+    lastDiseaseAcquisition: null,
   };
 }
 
@@ -113,6 +120,10 @@ export function createHeroInstance(heroId: string, partySlot = 0): HeroInstance 
     negativeQuirkIds: [],
     lastResolveQuestId: null,
     lastMentalEventId: null,
+    // ---- Phase 8B ----
+    disease: null,
+    pendingBleed: 0,
+    pendingBlight: 0,
   };
 }
 

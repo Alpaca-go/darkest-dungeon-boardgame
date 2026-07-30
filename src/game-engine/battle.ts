@@ -4,9 +4,10 @@ import type {
   CampaignState,
   HeroInstance,
   MonsterDefinition,
+  RuleEventType,
   SkillDefinition,
 } from '../types';
-import { createId, nowIso } from './random';
+import { createId, d10, nowIso } from './random';
 import { getSkillById } from '../data/skills';
 import { getMonsterSkillById } from '../data/monster-skills';
 import { buildEncounter } from '../data/battle-encounters';
@@ -94,6 +95,21 @@ function queueStressEvent(
   return { ...state, pendingStressEvents: [...(state.pendingStressEvents ?? []), ev] };
 }
 
+/**
+ * Phase 8B：追加一条战斗内规则事件（由 store 层 processBattleRuleEvents 路由到
+ * 统一被动引擎）。同 queueStressEvent，战斗引擎内不直接结算 —— Disease 反应可能
+ * 造成伤害 / 死亡 / Resolve Test，需要 Campaign 级数据。
+ */
+function queueBattleRuleEvent(
+  state: BattleState,
+  type: RuleEventType,
+  heroInstanceId: string
+): BattleState {
+  if (!heroInstanceId) return state;
+  const ev = { id: createId('bre'), type, heroInstanceId };
+  return { ...state, pendingRuleEvents: [...(state.pendingRuleEvents ?? []), ev] };
+}
+
 /** 单位回合结束时清理精神效果给予的临时加成。 */
 function clearTurnBonuses(state: BattleState): BattleState {
   if (!state.activeActorId) return state;
@@ -130,8 +146,9 @@ function makeHeroUnit(hero: HeroInstance, index: number): BattleUnit {
     atDeathsDoor: hero.atDeathsDoor || (!hero.dead && hp === 0),
     deathblowRollCount: hero.deathblowRollCount ?? 0,
     stunned: 0,
-    bleed: 0,
-    blight: 0,
+    // Phase 8B：注入战斗外累积的 Bleed / Blight（Disease 在探索阶段施加的层数）
+    bleed: hero.pendingBleed ?? 0,
+    blight: hero.pendingBlight ?? 0,
     marked: false,
     buffs: [],
     debuffs: [],
@@ -141,6 +158,10 @@ function makeHeroUnit(hero: HeroInstance, index: number): BattleUnit {
     skillLevels: { ...(hero.skillLevels ?? {}) },
     // ---- Phase 8A：Quirk 快照（战斗内修正器用；获取/移除只发生在战役层） ----
     quirkIds: heroQuirkIds(hero),
+    // ---- Phase 8B：Disease 快照 + 等级（damage-self-scaled 与战斗内修正器用） ----
+    diseaseId: hero.disease?.diseaseId ?? null,
+    diseaseInstanceId: hero.disease?.instanceId ?? null,
+    heroLevel: hero.level,
     // ---- Phase 7：精神状态快照（从战役英雄同步） ----
     resolveTestedThisQuest: hero.resolveTestedThisQuest ?? false,
     resolveState: hero.resolveState ?? 'normal',
@@ -240,6 +261,14 @@ export function initBattle(campaign: CampaignState, roomId: string): CampaignSta
   const dungeon = {
     ...campaign.dungeon,
     rooms: campaign.dungeon.rooms.map((r) => (r.id === roomId ? { ...r, status: 'current' as const } : r)),
+  };
+
+  // Phase 8B：pendingBleed / pendingBlight 已注入战斗单位，清零避免下场战斗重复生效
+  campaign = {
+    ...campaign,
+    heroes: campaign.heroes.map((h) =>
+      h.pendingBleed || h.pendingBlight ? { ...h, pendingBleed: 0, pendingBlight: 0 } : h
+    ),
   };
 
   let next: CampaignState = {
@@ -423,6 +452,8 @@ export function heroMove(state: BattleState, unitId: string, dir: -1 | 1): Battl
   let s = setUnit(state, { ...actor, position: np });
   s = { ...s, currentActionPoints: s.currentActionPoints - 1 };
   s = pushBattleLog(s, `${actor.name} 移动到位置 ${np}。`, 'info');
+  // Phase 8B：Lethargy —— 英雄「使用 Move Action」时触发（怪物移动、技能位移不算）
+  s = queueBattleRuleEvent(s, 'hero-move-action-resolved', actor.sourceId);
   s = checkEnd(s);
   if (s.status === 'active' && s.currentActionPoints <= 0) s = advanceTurn(s);
   return s;
@@ -631,6 +662,16 @@ export function runMonsterTurn(state: BattleState, monsterId: string): BattleSta
       }
       if (skill.applyEffects?.length) tgt = applyEffects(tgt, skill.applyEffects);
     }
+    // Phase 8B：Push / Pull —— 怪物技能对英雄的强制位移（实际发生位移才算 shuffle）
+    let shuffled = false;
+    if (skill.moveTarget && tgt.side === 'hero' && tgt.isAlive) {
+      const np = clamp(tgt.position + skill.moveTarget, 1, 4);
+      if (np !== tgt.position && !state.heroes.some((h) => h.id !== tgt.id && h.position === np)) {
+        tgt = { ...tgt, position: np };
+        shuffled = true;
+      }
+    }
+
     const effNote = skill.applyEffects?.length
       ? `（施加 ${skill.applyEffects.map((e) => e.type).join('/')}）`
       : '';
@@ -638,6 +679,29 @@ export function runMonsterTurn(state: BattleState, monsterId: string): BattleSta
     let s = setUnit(state, tgt);
     if (queuedStress > 0) {
       s = queueStressEvent(s, tgt.sourceId, queuedStress, 'battle-skill', skill.id);
+    }
+    if (shuffled) {
+      s = pushBattleLog(s, `${tgt.name} 被强制移动到位置 ${tgt.position}。`, 'warning');
+      // Vertigo：被 Push / Pull 且实际发生位移
+      s = queueBattleRuleEvent(s, 'hero-shuffled', tgt.sourceId);
+    }
+    // Phase 8B：怪物技能感染（命中且英雄存活时按 d10 判定）
+    if (skill.diseaseChance && tgt.side === 'hero' && tgt.isAlive) {
+      if (d10() <= skill.diseaseChance.d10AtMost) {
+        s = {
+          ...s,
+          pendingDiseaseInfections: [
+            ...(s.pendingDiseaseInfections ?? []),
+            {
+              id: createId('binf'),
+              heroInstanceId: tgt.sourceId,
+              diseaseId: skill.diseaseChance.diseaseId,
+              sourceSkillId: skill.id,
+            },
+          ],
+        };
+        s = pushBattleLog(s, `${tgt.name} 被 ${skill.name} 传染了疾病！`, 'danger');
+      }
     }
     s = pushBattleLog(
       s,

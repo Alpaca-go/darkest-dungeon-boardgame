@@ -1,6 +1,7 @@
 import type { BattleUnit } from '../../types';
 import ColorBlockImage from '../placeholders/ColorBlockImage';
 import ResolveStateBadge from '../mental/ResolveStateBadge';
+import DiseaseBadge from '../disease/DiseaseBadge';
 
 interface ActorSlotProps {
   unit: BattleUnit;
@@ -94,12 +95,15 @@ export default function ActorSlot({
         )}
       </div>
       {unit.side === 'hero' && (
-        <ResolveStateBadge
-          resolveState={unit.resolveState}
-          virtueId={unit.virtueId}
-          afflictionId={unit.afflictionId}
-          className="mt-0.5 inline-block"
-        />
+        <>
+          <ResolveStateBadge
+            resolveState={unit.resolveState}
+            virtueId={unit.virtueId}
+            afflictionId={unit.afflictionId}
+            className="mt-0.5 inline-block"
+          />
+          <DiseaseBadge diseaseId={unit.diseaseId} className="mt-0.5 ml-1 inline-block" />
+        </>
       )}
       <EffectTags unit={unit} />
     </button>

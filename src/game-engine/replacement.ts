@@ -130,6 +130,10 @@ export function selectReplacementHero(
     negativeQuirkIds: [],
     lastResolveQuestId: null,
     lastMentalEventId: null,
+    // ---- Phase 8B：替补英雄不携带 Disease ----
+    disease: null,
+    pendingBleed: 0,
+    pendingBlight: 0,
   };
 
   let next = updateSlot(campaign, slotId, (s) => ({

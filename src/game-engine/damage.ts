@@ -4,11 +4,14 @@ import type {
   DamageCommand,
   DamageResolution,
   HeroDeathCause,
+  RuleEventContext,
 } from '../types';
 import { randInt } from './random';
 import { killCampaignHero } from './hero-death';
 import { pushLog } from './log';
 import { applyQuirkModifiers, describeModifierApplications } from './quirk-passives';
+// 循环依赖说明同 stress.ts：仅运行时调用被提升的函数声明，循环安全。
+import { childRuleEventContext, createRuleEventContext, emitRuleEvent } from './quirks';
 
 // ---------------------------------------------------------------------------
 // Phase 6 统一伤害管线。
@@ -139,8 +142,26 @@ function sourceTypeToCause(sourceType: DamageCommand['sourceType']): HeroDeathCa
  */
 export function resolveDamage(
   campaign: CampaignState,
-  command: DamageCommand
+  command: DamageCommand,
+  ctx?: RuleEventContext
 ): { campaign: CampaignState; resolution: DamageResolution } {
+  /**
+   * Phase 8B：伤害真正落地且英雄存活后发射 damage-resolved
+   * （Spotted Fever → Blight，Syphilis → 等级伤害）。
+   * command.derived === true 表示本次伤害本身就是被动派生产物，不再二次发射。
+   */
+  const emitDamageResolved = (c: CampaignState): CampaignState => {
+    if (command.derived) return c;
+    const fresh = c.heroes.find((h) => h.instanceId === command.targetId);
+    if (!fresh || fresh.dead) return c;
+    const baseCtx = ctx ?? createRuleEventContext();
+    return emitRuleEvent(
+      c,
+      { type: 'damage-resolved', heroId: command.targetId },
+      ctx ? childRuleEventContext(baseCtx) : baseCtx
+    );
+  };
+
   const hero = campaign.heroes.find((h) => h.instanceId === command.targetId);
   const noop = (logs: string[] = []): { campaign: CampaignState; resolution: DamageResolution } => ({
     campaign,
@@ -228,6 +249,7 @@ export function resolveDamage(
     }
     c = markProcessed(c);
     c = pushLog(c, `${hero.name} 再次受伤，Deathblow Die = ${roll}，暂时逃过死亡。`, 'warning');
+    c = emitDamageResolved(c);
     return {
       campaign: c,
       resolution: {
@@ -263,6 +285,7 @@ export function resolveDamage(
   if (entered) {
     c = pushLog(c, `${hero.name} 的生命降至 0，进入 Death's Door！`, 'danger');
   }
+  if (modifiedAmount > 0) c = emitDamageResolved(c);
   return {
     campaign: c,
     resolution: {

@@ -21,13 +21,15 @@ import type {
   AcquireQuirkOutcome,
   CampaignState,
   HeroInstance,
+  PassiveSource,
   PendingQuirkDecision,
   QuirkReactionEffect,
   RuleEventContext,
   RuleEventType,
 } from '../types';
 import { getQuirkById } from '../data/quirks';
-import { heroQuirkIds, quirkConditionMet, resolveQuirkDefs } from './quirk-passives';
+import { collectHeroPassiveSources, passiveConditionMet } from './rule-events/passive-collector';
+import { passiveTriggerKey } from './rule-events/passive-ordering';
 import { applyStress, recoverStress } from './stress';
 import { resolveDamage } from './damage';
 import { resolveHealing } from './healing';
@@ -47,7 +49,12 @@ const DECISION_LIMIT = 20;
 
 /** 创建根事件上下文。 */
 export function createRuleEventContext(): RuleEventContext {
-  return { rootEventId: createId('rev'), depth: 0, triggeredQuirkIds: [] };
+  return { rootEventId: createId('rev'), depth: 0, triggeredPassiveKeys: [] };
+}
+
+/** 派生子上下文（深度 +1，共享同一份已触发键数组）。 */
+export function childRuleEventContext(ctx: RuleEventContext): RuleEventContext {
+  return { ...ctx, depth: ctx.depth + 1 };
 }
 
 function heroTotalQuirks(hero: HeroInstance): number {
@@ -58,14 +65,87 @@ function heroTotalQuirks(hero: HeroInstance): number {
 // 反应效果执行（全部路由统一管线）
 // ---------------------------------------------------------------------------
 
+/** 被动来源在日志中的称谓（Quirk =「怪癖」，Disease =「疾病」）。 */
+function sourceLabel(src: PassiveSource): string {
+  return src.sourceType === 'disease' ? '疾病' : '怪癖';
+}
+
+/**
+ * Phase 8B：把 Bleed / Blight 写入英雄。
+ * - 战斗中：直接写入对应 BattleUnit（层数递减模型）；
+ * - 战斗外：累积到 HeroInstance.pendingBleed / pendingBlight，进入下一场战斗时注入。
+ */
+function writeConditionLayers(
+  campaign: CampaignState,
+  heroId: string,
+  condition: 'bleed' | 'blight',
+  layers: number
+): CampaignState {
+  if (layers <= 0) return campaign;
+  const battle = campaign.battle;
+  const unit = battle?.heroes.find((u) => u.sourceId === heroId && u.isAlive);
+  if (battle && unit) {
+    return {
+      ...campaign,
+      battle: {
+        ...battle,
+        heroes: battle.heroes.map((u) =>
+          u.id === unit.id ? { ...u, [condition]: u[condition] + layers } : u
+        ),
+      },
+    };
+  }
+  const field = condition === 'bleed' ? 'pendingBleed' : 'pendingBlight';
+  return {
+    ...campaign,
+    heroes: campaign.heroes.map((h) =>
+      h.instanceId === heroId ? { ...h, [field]: (h[field] ?? 0) + layers } : h
+    ),
+  };
+}
+
+/**
+ * Phase 8B：统一的「施加 Bleed / Blight」入口。
+ * 施加前先发射 bleed-before-apply / blight-before-apply，
+ * 使 Hemophilia / Black Plague 能够追加独立层数与派生伤害（受循环保护约束）。
+ */
+export function applyConditionToHero(
+  campaign: CampaignState,
+  heroId: string,
+  condition: 'bleed' | 'blight',
+  potency: number,
+  duration: number,
+  sourceName: string,
+  ctx: RuleEventContext
+): CampaignState {
+  const hero = campaign.heroes.find((h) => h.instanceId === heroId);
+  if (!hero || hero.dead || potency <= 0) return campaign;
+
+  const beforeType: RuleEventType =
+    condition === 'bleed' ? 'bleed-before-apply' : 'blight-before-apply';
+  let next = emitRuleEvent(campaign, { type: beforeType, heroId }, childRuleEventContext(ctx));
+
+  const fresh = next.heroes.find((h) => h.instanceId === heroId);
+  if (!fresh || fresh.dead) return next;
+
+  next = writeConditionLayers(next, heroId, condition, potency);
+  return pushLog(
+    next,
+    `${fresh.name} 受到 ${condition === 'bleed' ? 'Bleed' : 'Blight'} ${potency} / ${duration} turns（来源：${sourceName}）。`,
+    'warning'
+  );
+}
+
 function execReactionEffect(
   campaign: CampaignState,
   hero: HeroInstance,
-  quirkName: string,
+  src: PassiveSource,
   effect: QuirkReactionEffect,
   ctx: RuleEventContext
 ): CampaignState {
   const questId = campaign.currentQuestId ?? '';
+  const label = sourceLabel(src);
+  const name = src.name;
   let next = campaign;
   switch (effect.type) {
     case 'stress-self': {
@@ -73,8 +153,9 @@ function execReactionEffect(
         heroId: hero.instanceId,
         amount: effect.amount,
         sourceType: 'quirk',
-        sourceId: `${quirkName}:${ctx.rootEventId}`,
+        sourceId: `${name}:${ctx.rootEventId}`,
         questId,
+        ctx,
       });
       return out.campaign;
     }
@@ -83,7 +164,7 @@ function execReactionEffect(
         heroId: hero.instanceId,
         amount: effect.amount,
         sourceType: 'quirk',
-        sourceId: `${quirkName}:${ctx.rootEventId}`,
+        sourceId: `${name}:${ctx.rootEventId}`,
         questId,
       });
       return out.campaign;
@@ -95,21 +176,59 @@ function execReactionEffect(
           heroId: ally.instanceId,
           amount: effect.amount,
           sourceType: 'quirk',
-          sourceId: `${quirkName}:${ctx.rootEventId}`,
+          sourceId: `${name}:${ctx.rootEventId}`,
           questId,
+          ctx,
         });
         next = out.campaign;
       }
       return next;
     }
     case 'damage-self': {
-      const out = resolveDamage(next, {
-        targetId: hero.instanceId,
-        amount: effect.amount,
-        sourceType: 'exploration',
-        eventId: createId('qrk-dmg'),
-      });
+      const out = resolveDamage(
+        next,
+        {
+          targetId: hero.instanceId,
+          amount: effect.amount,
+          sourceType: 'exploration',
+          eventId: createId('qrk-dmg'),
+          derived: true,
+        },
+        ctx
+      );
       return out.campaign;
+    }
+    case 'damage-self-scaled': {
+      const amount = Math.max(0, effect.multiplier * (hero.level ?? 1));
+      if (amount <= 0) return next;
+      next = pushLog(
+        next,
+        `${hero.name} 因${label}「${name}」受到 ${amount} 点伤害（${effect.multiplier} × 等级 ${hero.level}）。`,
+        'danger'
+      );
+      const out = resolveDamage(
+        next,
+        {
+          targetId: hero.instanceId,
+          amount,
+          sourceType: 'exploration',
+          eventId: createId('dis-dmg'),
+          derived: true,
+        },
+        ctx
+      );
+      return out.campaign;
+    }
+    case 'condition-self': {
+      return applyConditionToHero(
+        next,
+        hero.instanceId,
+        effect.condition,
+        effect.potency,
+        effect.duration,
+        name,
+        ctx
+      );
     }
     case 'heal-self': {
       const out = resolveHealing(next, hero.instanceId, effect.amount);
@@ -123,19 +242,19 @@ function execReactionEffect(
         ...next,
         provisions: { ...next.provisions, [effect.provision]: current - consumed },
       };
-      return pushLog(next, `${hero.name} 因怪癖「${quirkName}」额外消耗 ${consumed} 份补给。`, 'warning');
+      return pushLog(next, `${hero.name} 因${label}「${name}」额外消耗 ${consumed} 份补给。`, 'warning');
     }
     case 'gain-gold': {
       next = { ...next, gold: next.gold + effect.amount };
-      return pushLog(next, `${hero.name} 因怪癖「${quirkName}」获得 ${effect.amount} Gold。`, 'success');
+      return pushLog(next, `${hero.name} 因${label}「${name}」获得 ${effect.amount} Gold。`, 'success');
     }
     case 'lose-gold': {
       const lost = Math.min(next.gold, effect.amount);
       next = { ...next, gold: next.gold - lost };
-      return pushLog(next, `${hero.name} 因怪癖「${quirkName}」失去 ${lost} Gold。`, 'warning');
+      return pushLog(next, `${hero.name} 因${label}「${name}」失去 ${lost} Gold。`, 'warning');
     }
     case 'log-only':
-      return pushLog(next, `${hero.name}（${quirkName}）：${effect.message}`, 'info');
+      return pushLog(next, `${hero.name}（${name}）：${effect.message}`, 'info');
     default:
       return next;
   }
@@ -164,34 +283,46 @@ export function emitRuleEvent(
   if (!hero || hero.dead) return campaign;
 
   let next = campaign;
-  for (const def of resolveQuirkDefs(heroQuirkIds(hero))) {
-    const reactions = (def.reactions ?? []).filter((r) => r.eventType === input.type);
+  // Phase 8B：Quirk + Disease 统一收集并稳定排序（priority → sourceType → instanceId）
+  for (const src of collectHeroPassiveSources(hero)) {
+    // 死亡短路：任一被动导致永久死亡后，停止该英雄剩余被动
+    const alive = next.heroes.find((h) => h.instanceId === hero.instanceId);
+    if (!alive || alive.dead) break;
+
+    const reactions = src.reactions.filter((r) => r.eventType === input.type);
     if (reactions.length === 0) continue;
-    // 循环保护：同一 Quirk 每个根事件只触发一次
-    if (ctx.triggeredQuirkIds.includes(def.id)) continue;
+    // 循环保护：rootEventId + heroId + sourceType + instanceId + triggerType
+    const key = passiveTriggerKey(
+      ctx.rootEventId,
+      hero.instanceId,
+      src.sourceType,
+      src.instanceId,
+      input.type
+    );
+    if (ctx.triggeredPassiveKeys.includes(key)) continue;
 
     let triggered = false;
     for (const reaction of reactions) {
-      if (!quirkConditionMet(reaction.condition, next.light)) continue;
+      if (!passiveConditionMet(reaction.condition, next.light)) continue;
       if (reaction.chanceD10 !== undefined && d10() > reaction.chanceD10) continue;
       if (!triggered) {
         triggered = true;
-        ctx.triggeredQuirkIds.push(def.id);
+        ctx.triggeredPassiveKeys.push(key);
       }
-      const childCtx: RuleEventContext = { ...ctx, depth: ctx.depth + 1 };
+      const childCtx = childRuleEventContext(ctx);
       const ev = pushMentalEvent(next, {
         questId: next.currentQuestId ?? '',
         heroId: hero.instanceId,
         type: 'quirk-reaction',
         sourceType: 'quirk',
-        sourceId: def.id,
+        sourceId: src.definitionId,
         resultId: input.type,
       });
       next = ev.campaign;
       for (const effect of reaction.effects) {
         const fresh = next.heroes.find((h) => h.instanceId === hero.instanceId);
         if (!fresh || fresh.dead) break;
-        next = execReactionEffect(next, fresh, def.name, effect, childCtx);
+        next = execReactionEffect(next, fresh, src, effect, childCtx);
       }
     }
   }
@@ -223,7 +354,7 @@ export interface AcquireQuirkResult {
   decisionId?: string;
 }
 
-interface AcquireQuirkOptions {
+export interface AcquireQuirkOptions {
   source: PendingQuirkDecision['source'];
   /** Madness Death 时传给 killCampaignHero 的恢复参数。 */
   deathSource?: 'battle' | 'exploration' | 'quest-result';
