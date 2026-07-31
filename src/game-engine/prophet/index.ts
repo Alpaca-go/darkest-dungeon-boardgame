@@ -1,0 +1,70 @@
+// Phase 9C：Prophet 模块导出聚合。
+//
+// 对外只暴露正式入口函数；组件层通过这里取能力，
+// 禁止在 React 组件内写 Prophet 专属分支（§10 / §20）。
+
+export {
+  PROPHET_ACTIONS_PER_ROUND,
+  PROPHET_ACTION_OVERRIDES,
+  PROPHET_FAMILY_ID,
+  PROPHET_OFFICIAL_LEVEL_IDS,
+  PROPHET_OFFICIAL_ROOM_LEVEL_1,
+  PROPHET_PEW_COUNT,
+  PROPHET_PROTOTYPE_AREA_IDS,
+  PROPHET_PROTOTYPE_BOSS,
+  PROPHET_PROTOTYPE_BOSS_ID,
+  PROPHET_PROTOTYPE_FAMILY_ID,
+  PROPHET_PROTOTYPE_ROOM,
+  PROPHET_PROTOTYPE_ROOM_ID,
+  PROPHET_PROTOTYPE_RUBBLE_ID,
+  PROPHET_REGISTRY,
+  getProphetDefinition,
+  getProphetNormalSkillTable,
+  getProphetOfficialDataGaps,
+  getProphetRoomDefinition,
+  getProphetThreat,
+  isProphetOfficialBattleEnabled,
+  resolveProphetActionSkillId,
+  validateProphetFamily,
+  validateRoomMap,
+} from '../../data/bosses/prophet-family';
+
+export {
+  beginProphetRound,
+  canEnterArea,
+  clearAllPews,
+  clearResolvedPews,
+  countPewsInArea,
+  createProphetBattleRuntime,
+  createProphetInitiativeCards,
+  createSeededRng,
+  formatPlacementLog,
+  formatRubbleLog,
+  getAreaOccupancy,
+  getProphetActionSemantics,
+  hashRoomDefinition,
+  idempotencyKeys,
+  migrateProphetSave,
+  prototypeRubblePipeline,
+  repairProphetRuntime,
+  resolveActiveRoomDefinition,
+  resolveAreaAttackTargets,
+  resolveBossActionByOrdinal,
+  resolveProphetPewPlacement,
+  resolveProphetRubbleOfRuin,
+  resolveProphetSecondAction,
+  resolveProphetVictory,
+  rollD10,
+  selectTargetableActorIds,
+} from './runtime';
+
+export type {
+  AreaAttackPipeline,
+  AreaOccupant,
+  PewPlacementInput,
+  PewPlacementResult,
+  ProphetSaveSnapshot,
+  ProphetVictoryResult,
+  RubbleResult,
+  SecondActionResult,
+} from './runtime';

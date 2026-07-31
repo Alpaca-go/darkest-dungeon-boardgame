@@ -1,4 +1,5 @@
 import { test, expect, type Page } from '@playwright/test';
+import { SAVE_VERSION } from '../src/game-engine/save';
 
 /**
  * Phase 8C E2E（文档 §24 八场景）：
@@ -9,7 +10,7 @@ import { test, expect, type Page } from '@playwright/test';
  * 5. Nomad Wagon 买卖：卖出 + 买入同次访问，Gold 净变化正确
  * 6. Hamlet 死亡转移：英雄阵亡 → 饰品转入待分配（正面接收）
  * 7. Hamlet 重置：返回村庄把所有饰品重置为正面
- * 8. 迁移 v6→v7：旧档补齐 Trinket / Nomad Wagon 字段，升级为 v7，不白屏
+ * 8. 迁移 v6→最新：旧档补齐 Trinket / Nomad Wagon 字段，升级为当前 SAVE_VERSION，不白屏
  *
  * 所有场景注入固定随机种子（localStorage['dd-fixed-rng']）保证确定性。
  * Debug 面板仅在 DEV 渲染（Playwright 走 `npm run dev`），因此调试授予可用。
@@ -359,7 +360,7 @@ test('7. Hamlet 重置：返回村庄把所有饰品重置为正面', async ({ p
 // 8. 迁移 v6→v7：旧档补齐字段并升级为 v7，不白屏
 // ---------------------------------------------------------------------------
 
-test('8. 迁移 v6→v7：补齐 Trinket / Nomad Wagon 字段并升级为 v7', async ({ page }) => {
+test('8. 迁移 v6→最新：补齐 Trinket / Nomad Wagon 字段并升级为当前 SAVE_VERSION', async ({ page }) => {
   await setupToQuests(page);
   await chooseQuest(page, 'Scout Ahead');
   await openDebug(page);
@@ -398,7 +399,8 @@ test('8. 迁移 v6→v7：补齐 Trinket / Nomad Wagon 字段并升级为 v7', a
     const d = JSON.parse(raw);
     return { version: d.version, nomadWagon: d.campaign?.nomadWagon ?? null };
   }, STORAGE_KEY);
-  expect(after.version).toBe(7); // 升级到当前最新版本 v7
+  // 跟随 SAVE_VERSION 常量，避免后续 Phase 升版后此断言失效（Phase 9C 起为 v9）。
+  expect(after.version).toBe(SAVE_VERSION);
   expect(after.nomadWagon).toBeTruthy();
   expect(after.nomadWagon.buildingLevel).toBe(1);
 });

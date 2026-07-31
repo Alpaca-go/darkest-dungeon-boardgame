@@ -42,9 +42,12 @@ export const STORAGE_KEY = 'dd-web-prototype-save-v1';
  * v5 = Phase 8A（Quirk 引擎：真实 Quirk id / 上限 3 / pendingQuirkDecisions），
  * v6 = Phase 8B（Disease / Sanitarium 移除 / Curio / 战斗外 Bleed-Blight 累积），
  * v7 = Phase 8C + 8D（Trinket + Quest XP / Hero Level / Skill Level / Guild），
- * v8 = Phase 9A（Campaign Progress / Imminent Threat / Face the Threat / Boss Battle）。
+ * v8 = Phase 9A（Campaign Progress / Imminent Threat / Face the Threat / Boss Battle），
+ * v9 = Phase 9C（Prophet / Wooden Pews 延迟区域攻击：prophetBattleRuntime /
+ *      delayedAreaHazards / prophetPewPlacementHistory / prophetRubbleHistory /
+ *      activeBossDefinitionSnapshot）。
  */
-export const SAVE_VERSION = 8;
+export const SAVE_VERSION = 9;
 
 /**
  * v2 存档文件结构。
@@ -70,7 +73,7 @@ interface SaveEnvelopeV1 {
 }
 
 /** 可被迁移到当前版本的历史存档版本号。 */
-const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6, 7];
+const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6, 7, 8];
 
 /** 读档结果：区分正常 / 无存档 / 损坏 / 版本不支持。 */
 export type LoadStatus = 'ok' | 'empty' | 'corrupt' | 'unsupported';
@@ -1064,12 +1067,12 @@ export function migrateSaveFile(raw: unknown): SaveFile | null {
     const file = raw as SaveFile;
     // campaign 缺失或非对象 → 无法迁移（调用方回退为「无法识别的存档结构」）
     if (!file.campaign || typeof file.campaign !== 'object') return null;
-    // 保险：即使 version=8 也补齐缺失字段（防手工编辑的存档）
+    // 保险：即使已是最新版本也补齐缺失字段（防手工编辑的存档）
     const campaign = migrateCampaignToLatest(file.campaign);
     return campaign === file.campaign ? file : { ...createSaveSnapshot(campaign), savedAt: file.savedAt };
   }
 
-  // v2..v7：{ version: 2|3|4|5|6|7, savedAt, campaign, ... }
+  // v2..v8：{ version: 2|3|4|5|6|7|8, savedAt, campaign, ... }
   if (
     typeof anyRaw.version === 'number' &&
     LEGACY_SAVE_VERSIONS.includes(anyRaw.version) &&
