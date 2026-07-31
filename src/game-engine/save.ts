@@ -46,8 +46,11 @@ export const STORAGE_KEY = 'dd-web-prototype-save-v1';
  * v9 = Phase 9C（Prophet / Wooden Pews 延迟区域攻击：prophetBattleRuntime /
  *      delayedAreaHazards / prophetPewPlacementHistory / prophetRubbleHistory /
  *      activeBossDefinitionSnapshot）。
+ * v10 = Phase 9D（Collector / Collected Heroes / Linked Summon Group：collectorBattleRuntime /
+ *      linkedSummonGroups / collectedActorSnapshots / collectorLootChestStates /
+ *      collectorSummonHistory / collectorDataAudit / activeBossDefinitionSnapshot）。
  */
-export const SAVE_VERSION = 9;
+export const SAVE_VERSION = 10;
 
 /**
  * v2 存档文件结构。
@@ -73,7 +76,7 @@ interface SaveEnvelopeV1 {
 }
 
 /** 可被迁移到当前版本的历史存档版本号。 */
-const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6, 7, 8];
+const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 /** 读档结果：区分正常 / 无存档 / 损坏 / 版本不支持。 */
 export type LoadStatus = 'ok' | 'empty' | 'corrupt' | 'unsupported';
@@ -1044,7 +1047,7 @@ function sanitizeCampaignProgress(raw: CampaignProgressState): CampaignProgressS
   };
 }
 
-/** 将战役迁移到当前最新版本（v3→v4→v5→v6→v7→v8 = Phase 9A）。 */
+/** 将战役迁移到当前最新版本（v3→…→v8 = Phase 9A → v9 = Phase 9C → v10 = Phase 9D）。 */
 export function migrateCampaignToLatest(campaign: CampaignState): CampaignState {
   return migrateCampaignToV8(
     migrateCampaignToV7(
