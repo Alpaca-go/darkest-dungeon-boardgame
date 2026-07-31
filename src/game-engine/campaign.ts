@@ -7,6 +7,10 @@ import { generateDungeon } from './dungeon';
 import { pushLog } from './log';
 import { createInitialStagecoach } from './stagecoach';
 import { resetMentalStateForNewQuest } from './resolve-conversion';
+import { SAVE_VERSION } from './save';
+import { createInitialXpState } from './progression/xp-ledger';
+import { getHeroSkillSlots } from './progression/upgrade-core';
+import { refreshObjectiveProgress } from './progression/quest-objectives';
 
 /** Phase 1 初始补给池默认值（后续阶段可由 Provision Dice 生成替换）。 */
 export const DEFAULT_PROVISIONS: ProvisionPool = {
@@ -25,7 +29,7 @@ export const DEFAULT_PROVISIONS: ProvisionPool = {
 export function createNewCampaign(): CampaignState {
   const now = nowIso();
   return {
-    saveVersion: 6, // Phase 8B（与 save.ts SAVE_VERSION 保持一致）
+    saveVersion: SAVE_VERSION, // Phase 8D（唯一来源：save.ts）
     id: createId('cmp'),
     createdAt: now,
     updatedAt: now,
@@ -82,6 +86,14 @@ export function createNewCampaign(): CampaignState {
     processedDiseaseEventIds: [],
     pendingDiseaseTransaction: null,
     lastDiseaseAcquisition: null,
+    // ---- Phase 8D ----
+    objectiveProgress: [],
+    pendingQuestXp: null,
+    questXpResults: [],
+    progressionTransactions: [],
+    guildVisitSession: null,
+    replacementUpgradeSession: null,
+    temporarySkillFormOverrides: [],
   };
 }
 
@@ -100,7 +112,9 @@ export function createHeroInstance(heroId: string, partySlot = 0): HeroInstance 
     speed: def.speed,
     stance: def.defaultStance,
     equippedSkillIds: [],
+    // Phase 8D：xp 为 xpState.currentXp 的只读镜像，唯一写入口是 xp-ledger
     xp: 0,
+    xpState: createInitialXpState(0),
     isAlive: true,
     hasActedToday: false,
     temporaryDamageBonus: 0,
@@ -140,8 +154,9 @@ export function selectParty(campaign: CampaignState, heroIds: string[]): Campaig
 }
 
 /**
- * 装备/卸下某英雄的一个技能（最多 3 个）。
- * 已装备则卸下；未装备且不足 3 个则装备；已满 3 个则忽略。
+ * 装备/卸下某英雄的一个技能。
+ * Phase 8D：槽位上限不再硬编码为 3，而是由 Hero Level 派生（getHeroSkillSlots）。
+ * 已装备则卸下；未装备且未满槽位则装备；已满则忽略。
  */
 export function equipSkill(
   campaign: CampaignState,
@@ -154,16 +169,18 @@ export function equipSkill(
     if (has) {
       return { ...h, equippedSkillIds: h.equippedSkillIds.filter((id) => id !== skillId) };
     }
-    if (h.equippedSkillIds.length >= 3) return h; // 已满 3 个，忽略
+    if (h.equippedSkillIds.length >= getHeroSkillSlots(h)) return h; // 槽位已满，忽略
     return { ...h, equippedSkillIds: [...h.equippedSkillIds, skillId] };
   });
   return { ...campaign, heroes };
 }
 
-/** 为全部英雄套用默认技能配置（取各英雄前 3 个技能）。 */
+/** 为全部英雄套用默认技能配置（按 Hero Level 派生的槽位数取前 N 个技能）。 */
 export function applyDefaultLoadout(campaign: CampaignState): CampaignState {
   const heroes = campaign.heroes.map((h) => {
-    const skills = getSkillsByHero(h.heroId).slice(0, 3).map((s) => s.id);
+    const skills = getSkillsByHero(h.heroId)
+      .slice(0, getHeroSkillSlots(h))
+      .map((s) => s.id);
     return { ...h, equippedSkillIds: skills };
   });
   return { ...campaign, heroes };
@@ -174,11 +191,11 @@ export function canProceedToLoadout(campaign: CampaignState): boolean {
   return campaign.heroes.length === 4;
 }
 
-/** 技能配置是否完成：4 名英雄且每人恰好装备 3 个技能。 */
+/** 技能配置是否完成：4 名英雄且每人恰好装满等级对应的技能槽。 */
 export function isLoadoutComplete(campaign: CampaignState): boolean {
   return (
     campaign.heroes.length === 4 &&
-    campaign.heroes.every((h) => h.equippedSkillIds.length === 3)
+    campaign.heroes.every((h) => h.equippedSkillIds.length === getHeroSkillSlots(h))
   );
 }
 
@@ -213,9 +230,14 @@ export function selectQuest(campaign: CampaignState, questId: string): CampaignS
     hamlet: { ...campaign.hamlet, nextQuestProvisionBonus: 0 },
     // Phase 6：新任务重置 Stagecoach XP 幂等标记
     stagecoachXpApplied: false,
+    // Phase 8D：新任务重置 Objective 进度与待分配 XP
+    objectiveProgress: [],
+    pendingQuestXp: null,
   };
   // Phase 7：新任务重置精神状态（resolveTestedThisQuest / 兜底清理未转换状态）
   next = resetMentalStateForNewQuest(next);
+  // Phase 8D：初始化本次任务的 Objective 进度快照（全部未完成）
+  next = refreshObjectiveProgress(next);
   next = pushLog(next, `选择了任务：${quest.name}。地牢已生成，开始探索。`, 'success');
   if (bonus > 0) {
     next = pushLog(next, `Supply Run 事件生效：每种补给 +${bonus}。`, 'success');

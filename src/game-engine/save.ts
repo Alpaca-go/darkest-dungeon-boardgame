@@ -7,6 +7,8 @@ import type {
   HamletState,
   HeroDiseaseState,
   HeroInstance,
+  HeroLevel,
+  HeroXpState,
   QuestResultSummary,
 } from '../types';
 import { nowIso } from './random';
@@ -26,9 +28,11 @@ export const STORAGE_KEY = 'dd-web-prototype-save-v1';
  * v1 = SaveEnvelope（Phase 1-4），v2 = SaveFile（Phase 5），
  * v3 = Phase 6（死亡/Stagecoach），v4 = Phase 7（Stress/Resolve/Affliction/Virtue/Heart Attack），
  * v5 = Phase 8A（Quirk 引擎：真实 Quirk id / 上限 3 / pendingQuirkDecisions），
- * v6 = Phase 8B（Disease / Sanitarium 移除 / Curio / 战斗外 Bleed-Blight 累积）。
+ * v6 = Phase 8B（Disease / Sanitarium 移除 / Curio / 战斗外 Bleed-Blight 累积），
+ * v7 = Phase 8D（Quest XP / Hero Level / Skill Level / Guild 成长系统：XP Ledger、
+ *      Objective 进度、升级事务、Guild 会话、Blacksmith 临时 Skill Form）。
  */
-export const SAVE_VERSION = 6;
+export const SAVE_VERSION = 7;
 
 /**
  * v2 存档文件结构。
@@ -52,6 +56,9 @@ interface SaveEnvelopeV1 {
   savedAt: string;
   campaign: CampaignState;
 }
+
+/** 可被迁移到当前版本的历史存档版本号。 */
+const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6];
 
 /** 读档结果：区分正常 / 无存档 / 损坏 / 版本不支持。 */
 export type LoadStatus = 'ok' | 'empty' | 'corrupt' | 'unsupported';
@@ -159,6 +166,37 @@ export function validateSaveFile(data: unknown): string | null {
     if (typeof h.pendingBlight !== 'number' || h.pendingBlight < 0) {
       return `英雄 ${h.instanceId} 的 pendingBlight 非法`;
     }
+    // Phase 8D：XP Ledger 与等级结构校验（迁移后必然合法）
+    const xs = h.xpState;
+    if (!xs || typeof xs !== 'object') return `英雄 ${h.instanceId} 缺少 xpState`;
+    if (
+      typeof xs.currentXp !== 'number' ||
+      typeof xs.lifetimeXpEarned !== 'number' ||
+      typeof xs.lifetimeXpSpent !== 'number' ||
+      xs.currentXp < 0 ||
+      xs.lifetimeXpEarned < 0 ||
+      xs.lifetimeXpSpent < 0
+    ) {
+      return `英雄 ${h.instanceId} 的 xpState 数值非法`;
+    }
+    if (xs.currentXp !== xs.lifetimeXpEarned - xs.lifetimeXpSpent) {
+      return `英雄 ${h.instanceId} 的 XP 台账不平（${xs.lifetimeXpEarned} - ${xs.lifetimeXpSpent} ≠ ${xs.currentXp}）`;
+    }
+    if (h.xp !== xs.currentXp) {
+      return `英雄 ${h.instanceId} 的 xp 镜像与 xpState.currentXp 不一致`;
+    }
+    if (h.level !== 1 && h.level !== 2 && h.level !== 3) {
+      return `英雄 ${h.instanceId} 的 level 超出 I-III 范围`;
+    }
+    for (const [sid, lv] of Object.entries(h.skillLevels ?? {})) {
+      if (lv !== 1 && lv !== 2 && lv !== 3) {
+        return `英雄 ${h.instanceId} 的技能 ${sid} 等级超出 I-III 范围`;
+      }
+    }
+  }
+  if (!Array.isArray(c.progressionTransactions)) return 'campaign.progressionTransactions 缺失或不是数组';
+  if (!Array.isArray(c.temporarySkillFormOverrides)) {
+    return 'campaign.temporarySkillFormOverrides 缺失或不是数组';
   }
   if (!Array.isArray(c.pendingQuirkDecisions)) return 'campaign.pendingQuirkDecisions 缺失或不是数组';
   if (!Array.isArray(c.diseaseAcquisitionRecords)) return 'campaign.diseaseAcquisitionRecords 缺失或不是数组';
@@ -436,10 +474,18 @@ export function migrateCampaignToV5(campaign: CampaignState): CampaignState {
   };
 }
 
-/** 非负整数钳制（Phase 8B：pendingBleed / pendingBlight）。 */
+/** 非负整数钳制（Phase 8B：pendingBleed / pendingBlight；Phase 8D：XP）。 */
 function clampNonNegative(value: unknown): number {
   const n = typeof value === 'number' && Number.isFinite(value) ? Math.round(value) : 0;
   return Math.max(0, n);
+}
+
+/** 等级钳制到 I-III（Phase 8D：Hero Level / Skill Level 共用）。
+ *  数值合法（1/2/3）保持原值；超出范围钳制到最近边界（如 5 → 3、0 → 1）；
+ *  非数值（缺失/损坏）默认 1。 */
+function clampLevel(value: unknown): HeroLevel {
+  if (typeof value !== 'number' || !Number.isFinite(value)) return 1;
+  return Math.round(Math.max(1, Math.min(3, value))) as HeroLevel;
 }
 
 /**
@@ -562,9 +608,115 @@ export function migrateCampaignToV6(campaign: CampaignState): CampaignState {
   };
 }
 
-/** 将战役迁移到当前最新版本（v3 Phase 6 → v4 Phase 7 → v5 Phase 8A → v6 Phase 8B）。 */
+/**
+ * Phase 8D 战役字段迁移（v6 → v7）：
+ * - 英雄补 xpState（由旧 hero.xp 平移：currentXp = lifetimeXpEarned = 旧 xp，
+ *   lifetimeXpSpent = 0）；xp 字段保留为 xpState.currentXp 的只读镜像；
+ * - level 钳制到 1-3；skillLevels 中每个技能等级钳制到 1-3；
+ * - 战役补 objectiveProgress=[] / pendingQuestXp=null / questXpResults=[] /
+ *   progressionTransactions=[] / guildVisitSession=null /
+ *   replacementUpgradeSession=null / temporarySkillFormOverrides=[]；
+ * - 旧存档遗留的 guildVisitSession / replacementUpgradeSession 一律清空
+ *   （未提交的会话在新会话中无法安全续做，XP/Gold 尚未扣除，丢弃是安全的）；
+ * - 进行中的战斗补 BattleUnit.heroLevel（英雄从战役英雄同步）。
+ */
+export function migrateCampaignToV7(campaign: CampaignState): CampaignState {
+  let changed = false;
+
+  const heroes: HeroInstance[] = (campaign.heroes ?? []).map((h) => {
+    const anyH = h as HeroInstance & Record<string, unknown>;
+    const rawState = anyH.xpState as HeroXpState | undefined;
+    const legacyXp = clampNonNegative(anyH.xp);
+    const xpState: HeroXpState =
+      rawState &&
+      typeof rawState === 'object' &&
+      typeof rawState.currentXp === 'number' &&
+      typeof rawState.lifetimeXpEarned === 'number' &&
+      typeof rawState.lifetimeXpSpent === 'number'
+        ? {
+            currentXp: clampNonNegative(rawState.currentXp),
+            lifetimeXpEarned: clampNonNegative(rawState.lifetimeXpEarned),
+            lifetimeXpSpent: clampNonNegative(rawState.lifetimeXpSpent),
+          }
+        : { currentXp: legacyXp, lifetimeXpEarned: legacyXp, lifetimeXpSpent: 0 };
+    // 不变式修复：currentXp 必须等于 earned - spent
+    if (xpState.currentXp !== xpState.lifetimeXpEarned - xpState.lifetimeXpSpent) {
+      xpState.lifetimeXpEarned = xpState.currentXp + xpState.lifetimeXpSpent;
+    }
+
+    const level = clampLevel(anyH.level);
+    const rawSkillLevels = (anyH.skillLevels ?? {}) as Record<string, unknown>;
+    const skillLevels: HeroInstance['skillLevels'] = {};
+    let skillLevelsChanged = false;
+    for (const [sid, lv] of Object.entries(rawSkillLevels)) {
+      const clamped = clampLevel(lv);
+      skillLevels[sid] = clamped;
+      if (clamped !== lv) skillLevelsChanged = true;
+    }
+
+    const needs =
+      rawState === undefined ||
+      xpState.currentXp !== h.xp ||
+      level !== anyH.level ||
+      skillLevelsChanged;
+    if (!needs) return h;
+    changed = true;
+    return { ...h, xp: xpState.currentXp, xpState, level, skillLevels };
+  });
+
+  let battle = campaign.battle;
+  if (battle && battle.heroes.some((u) => typeof u.heroLevel !== 'number')) {
+    changed = true;
+    battle = {
+      ...battle,
+      heroes: battle.heroes.map((u) => {
+        if (typeof u.heroLevel === 'number') return u;
+        const src = heroes.find((h) => h.instanceId === u.sourceId);
+        return { ...u, heroLevel: src?.level ?? 1 };
+      }),
+    };
+  }
+
+  const anyC = campaign as CampaignState & Record<string, unknown>;
+  const needsCampaignFields =
+    !Array.isArray(anyC.objectiveProgress) ||
+    anyC.pendingQuestXp === undefined ||
+    !Array.isArray(anyC.questXpResults) ||
+    !Array.isArray(anyC.progressionTransactions) ||
+    anyC.guildVisitSession !== null ||
+    anyC.replacementUpgradeSession !== null ||
+    !Array.isArray(anyC.temporarySkillFormOverrides);
+  if (needsCampaignFields) changed = true;
+
+  if (!changed && campaign.saveVersion === SAVE_VERSION) return campaign;
+  return {
+    ...campaign,
+    saveVersion: SAVE_VERSION,
+    heroes,
+    battle,
+    objectiveProgress: Array.isArray(anyC.objectiveProgress) ? campaign.objectiveProgress : [],
+    pendingQuestXp: anyC.pendingQuestXp === undefined ? null : campaign.pendingQuestXp,
+    questXpResults: Array.isArray(anyC.questXpResults) ? campaign.questXpResults : [],
+    progressionTransactions: Array.isArray(anyC.progressionTransactions)
+      ? campaign.progressionTransactions
+      : [],
+    // 未提交的升级会话无法安全续做（XP/Gold 尚未扣除）→ 一律丢弃
+    guildVisitSession: null,
+    replacementUpgradeSession: null,
+    temporarySkillFormOverrides: Array.isArray(anyC.temporarySkillFormOverrides)
+      ? campaign.temporarySkillFormOverrides
+      : [],
+  };
+}
+
+/**
+ * 将战役迁移到当前最新版本
+ * （v3 Phase 6 → v4 Phase 7 → v5 Phase 8A → v6 Phase 8B → v7 Phase 8D）。
+ */
 export function migrateCampaignToLatest(campaign: CampaignState): CampaignState {
-  return migrateCampaignToV6(migrateCampaignToV5(migrateCampaignToV4(migrateCampaignToV3(campaign))));
+  return migrateCampaignToV7(
+    migrateCampaignToV6(migrateCampaignToV5(migrateCampaignToV4(migrateCampaignToV3(campaign)))),
+  );
 }
 
 /**
@@ -586,10 +738,11 @@ export function migrateSaveFile(raw: unknown): SaveFile | null {
     return campaign === file.campaign ? file : { ...createSaveSnapshot(campaign), savedAt: file.savedAt };
   }
 
-  // v2 / v3 / v4 / v5：{ version: 2|3|4|5, savedAt, campaign, ... }
+  // v2 / v3 / v4 / v5 / v6：{ version: 2|3|4|5|6, savedAt, campaign, ... }
   if (
     typeof anyRaw.version === 'number' &&
-    (anyRaw.version === 2 || anyRaw.version === 3 || anyRaw.version === 4 || anyRaw.version === 5) &&
+    LEGACY_SAVE_VERSIONS.includes(anyRaw.version) &&
+    anyRaw.version !== 1 &&
     anyRaw.campaign &&
     typeof anyRaw.campaign === 'object'
   ) {
@@ -680,7 +833,7 @@ export function loadSaveDetailed(): LoadResult {
   const migrated = migrateSaveFile(parsed);
   if (!migrated) {
     const v = (parsed as Record<string, unknown> | null)?.version ?? (parsed as Record<string, unknown> | null)?.saveVersion;
-    if (typeof v === 'number' && v !== SAVE_VERSION && ![1, 2, 3, 4, 5].includes(v)) {
+    if (typeof v === 'number' && v !== SAVE_VERSION && !LEGACY_SAVE_VERSIONS.includes(v)) {
       return { status: 'unsupported', campaign: null, error: `不支持的存档版本：${v}` };
     }
     return { status: 'corrupt', campaign: null, error: '存档结构无法识别' };

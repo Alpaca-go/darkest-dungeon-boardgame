@@ -2,6 +2,21 @@
 // Phase 1 仅使用其中的部分字段（CampaignState / gamePhase / 存档结构），
 // 其余字段为后续阶段预留，类型在此统一声明以保证全工程一致。
 
+import type {
+  GuildVisitSession,
+  HeroResistanceProfile,
+  HeroXpState,
+  ProgressionTransactionRecord,
+  QuestObjectiveDefinition,
+  QuestObjectiveProgress,
+  QuestXpResult,
+  ReplacementUpgradeSession,
+  TemporarySkillFormOverride,
+} from './progression';
+
+// Phase 8D：成长系统类型统一从 types 根导出，调用方无需感知文件拆分。
+export * from './progression';
+
 /** 全局游戏阶段状态机。所有场景切换必须通过此字段完成。 */
 export type GamePhase =
   | 'home'
@@ -114,6 +129,12 @@ export interface HeroInstance {
   pendingBleed: number;
   /** 战斗外累积的 Blight 层数（进入下一场战斗时注入 BattleUnit）。 */
   pendingBlight: number;
+  // ---- Phase 8D：XP 账本 ----
+  /**
+   * XP 账本（唯一权威）。`xp` 字段自 Phase 8D 起降级为 xpState.currentXp 的只读镜像，
+   * 由 xp-ledger 统一维护，任何业务代码都不得直接赋值。
+   */
+  xpState: HeroXpState;
 }
 
 /** 地牢房间类型。 */
@@ -240,6 +261,11 @@ export interface BattleUnit {
   diseaseInstanceId?: string | null;
   /** 英雄等级快照（Disease 的 hero-level 缩放伤害使用）。 */
   heroLevel?: number;
+  // ---- Phase 8D：Hero Level 派生的抗性 / 免疫快照（不落盘，进入战斗时派生） ----
+  /** 由 Hero Level Registry 派生的抗性百分比（stun/bleed/blight/disease/debuff/move）。 */
+  resistances?: HeroResistanceProfile;
+  /** 由 Hero Level Registry 派生的免疫状态列表（如 'stun'）。 */
+  immunities?: string[];
 }
 
 /** Phase 7：战斗内产生的待处理压力事件（store 层路由到统一 stress 管线）。 */
@@ -353,6 +379,12 @@ export interface QuestResultSummary {
   /** 结算时剩余补给快照。 */
   provisionsLeft: ProvisionPool;
   heroes: HeroQuestResult[];
+  /** Phase 8D：Objective 完成明细（0-3 XP 的计算依据）。 */
+  objectives: QuestObjectiveProgress[];
+  /** Phase 8D：每名合格英雄将获得的 XP（回到 Hamlet 时才真正发放）。 */
+  xpPerHero: number;
+  /** Phase 8D：完成的 Objective 数量。 */
+  completedObjectiveCount: number;
 }
 
 // ---------------------------------------------------------------------------
@@ -395,7 +427,8 @@ export type ReplacementUpgradeOperation =
       type: 'hero-level';
       fromLevel: 1 | 2;
       toLevel: 2 | 3;
-      xpCost: 4;
+      /** Phase 8D：成本来自 GUILD_UPGRADE_COSTS.heroLevel.xp（数据驱动，不再硬编码字面量）。 */
+      xpCost: number;
     }
   | {
       id: string;
@@ -403,7 +436,8 @@ export type ReplacementUpgradeOperation =
       skillId: string;
       fromLevel: 1 | 2;
       toLevel: 2 | 3;
-      xpCost: 2;
+      /** Phase 8D：成本来自 GUILD_UPGRADE_COSTS.skillLevel.xp。 */
+      xpCost: number;
     };
 
 /** 单个替补槽位（每名死亡英雄一个）。 */
@@ -546,6 +580,21 @@ export interface CampaignState {
   pendingDiseaseTransaction: PendingDiseaseTransaction | null;
   /** 最近一次 Disease 获取结果（Overlay 数据源；确认后置 null）。 */
   lastDiseaseAcquisition: DiseaseAcquisitionRecord | null;
+  // ---- Phase 8D：Quest XP / Hero Level / Skill Level / Guild ----
+  /** 当前任务的 Objective 实时进度（选择任务时重置）。 */
+  objectiveProgress: QuestObjectiveProgress[];
+  /** 已结算但尚未发放的 Quest XP（回到 Hamlet 时一次性发放；发放后置 null）。 */
+  pendingQuestXp: QuestXpResult | null;
+  /** 历史 Quest XP 结算记录（永久保存，含已发放标记）。 */
+  questXpResults: QuestXpResult[];
+  /** 已提交的升级事务记录（Hero 成长履历，永久保存）。 */
+  progressionTransactions: ProgressionTransactionRecord[];
+  /** 进行中的 Guild 访问会话（未 Commit 时不影响任何英雄数据；刷新可恢复）。 */
+  guildVisitSession: GuildVisitSession | null;
+  /** 进行中的 Replacement 升级会话（免 Gold，消耗个人 XP）。 */
+  replacementUpgradeSession: ReplacementUpgradeSession | null;
+  /** Blacksmith 临时 Skill Form 覆盖（只影响下一次任务，不改永久等级）。 */
+  temporarySkillFormOverrides: TemporarySkillFormOverride[];
 }
 
 // ---------------------------------------------------------------------------
@@ -647,9 +696,12 @@ export interface QuestDefinition {
   description: string;
   dungeonLevel: number;
   roomCount: number;
+  /** 人类可读的主目标描述（保留给旧 UI）。 */
   objective: string;
   reward: string;
   difficulty: 'easy' | 'normal' | 'hard';
+  /** Phase 8D：结构化 Objective 列表（最多 3 条，决定 0-3 XP）。 */
+  objectives: QuestObjectiveDefinition[];
 }
 
 /** 房间类型元数据（用于纯色块区分）。 */

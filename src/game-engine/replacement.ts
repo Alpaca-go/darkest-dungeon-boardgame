@@ -1,6 +1,7 @@
 import type {
   CampaignState,
   HeroInstance,
+  ProgressionUpgradeChoice,
   ReplacementSlot,
   ReplacementUpgradeOperation,
 } from '../types';
@@ -10,14 +11,30 @@ import { getSkillsByHero } from '../data/skills';
 import { getHeroLevelProfile } from '../data/hero-level-profiles';
 import { getReplacementCandidates } from './stagecoach';
 import { pushLog } from './log';
+import { createInitialXpState } from './progression/xp-ledger';
+import {
+  applyUpgradeChoicesToHero,
+  getHeroSkillSlots,
+  validateProgressionUpgrade,
+} from './progression/upgrade-core';
+import {
+  GUILD_UPGRADE_COSTS,
+  MAX_UPGRADES_PER_REPLACEMENT,
+} from '../data/progression/guild-costs';
 
 // ---------------------------------------------------------------------------
 // Phase 6 替补流程：选择候选 → （最多 2 次免 Gold 升级）→ 确认 → 填回原槽位。
+//
+// Phase 8D：升级校验与应用改为复用 progression/upgrade-core（与 Guild 同一份规则），
+// 唯一差异是 paymentMode='xp-only'（不消耗 Gold），XP 仍来自 Stagecoach 累计。
+// 缺少等级卡面数据时一律拒绝升级，不编造数值。
 // ---------------------------------------------------------------------------
 
-const MAX_UPGRADES = 2;
-export const HERO_LEVEL_XP_COST = 4;
-export const SKILL_LEVEL_XP_COST = 2;
+const MAX_UPGRADES = MAX_UPGRADES_PER_REPLACEMENT;
+/** Level 1 英雄的技能槽位数（由 Registry 派生，避免硬编码 3）。 */
+const LEVEL_1_SKILL_SLOTS = getHeroSkillSlots({ heroId: '', level: 1 } as HeroInstance);
+export const HERO_LEVEL_XP_COST = GUILD_UPGRADE_COSTS.heroLevel.xp;
+export const SKILL_LEVEL_XP_COST = GUILD_UPGRADE_COSTS.skillLevel.xp;
 
 function findSlot(campaign: CampaignState, slotId: string): ReplacementSlot | undefined {
   return campaign.stagecoach.pendingReplacement?.slots.find(
@@ -49,19 +66,21 @@ export function upgradeXpSpent(ops: ReplacementUpgradeOperation[]): number {
   return ops.reduce((sum, op) => sum + op.xpCost, 0);
 }
 
-/** 应用升级操作后的英雄有效等级（1 + hero-level 操作次数）。 */
-function effectiveHeroLevel(base: 1 | 2 | 3, ops: ReplacementUpgradeOperation[]): 1 | 2 | 3 {
-  const n = base + ops.filter((o) => o.type === 'hero-level').length;
-  return Math.min(3, n) as 1 | 2 | 3;
-}
-
-function effectiveSkillLevel(
-  base: 1 | 2 | 3,
-  skillId: string,
+/** 把持久化的替补升级操作转换为 upgrade-core 的通用选择结构。 */
+function toUpgradeChoices(
+  heroInstanceId: string,
   ops: ReplacementUpgradeOperation[]
-): 1 | 2 | 3 {
-  const n = base + ops.filter((o) => o.type === 'skill-level' && o.skillId === skillId).length;
-  return Math.min(3, n) as 1 | 2 | 3;
+): ProgressionUpgradeChoice[] {
+  return ops.map((o) => ({
+    id: o.id,
+    type: o.type,
+    heroInstanceId,
+    skillId: o.type === 'skill-level' ? o.skillId ?? null : null,
+    fromLevel: o.fromLevel,
+    toLevel: o.toLevel,
+    xpCost: o.xpCost,
+    goldCost: 0, // Replacement 免 Gold（规则 16）
+  }));
 }
 
 /**
@@ -96,7 +115,7 @@ export function selectReplacementHero(
   if (!candidate?.selectable) return campaign;
 
   const profile = getHeroLevelProfile(heroClassId, 1);
-  const defaultSkills = getSkillsByHero(heroClassId).slice(0, 3);
+  const defaultSkills = getSkillsByHero(heroClassId).slice(0, LEVEL_1_SKILL_SLOTS);
   const skillLevels: Record<string, 1 | 2 | 3> = {};
   for (const s of defaultSkills) skillLevels[s.id] = 1;
 
@@ -111,7 +130,9 @@ export function selectReplacementHero(
     speed: profile?.speed ?? def.speed,
     stance: def.defaultStance,
     equippedSkillIds: defaultSkills.map((s) => s.id),
+    // Phase 8D：替补英雄带着 Stagecoach 累计 XP 入场（xp 为 xpState 的只读镜像）
     xp: campaign.stagecoach.accumulatedXp,
+    xpState: createInitialXpState(campaign.stagecoach.accumulatedXp),
     isAlive: true,
     hasActedToday: false,
     temporaryDamageBonus: 0,
@@ -146,7 +167,41 @@ export function selectReplacementHero(
   return next;
 }
 
-/** 校验并添加一次升级操作；非法时返回原状态。 */
+/**
+ * 校验一次替补升级请求（复用 upgrade-core 的规则），返回可直接展示的原因。
+ * 与 Guild 唯一的差异是 paymentMode='xp-only'。
+ */
+export function validateReplacementUpgrade(
+  campaign: CampaignState,
+  slotId: string,
+  request: { type: 'hero-level' } | { type: 'skill-level'; skillId: string }
+) {
+  const slot = findSlot(campaign, slotId);
+  if (!slot || slot.confirmed || !slot.draftHero) {
+    return {
+      ok: false as const,
+      reason: '当前槽位不可升级',
+      type: request.type,
+      skillId: null,
+      fromLevel: 1 as const,
+      toLevel: 1 as const,
+      xpCost: 0,
+      goldCost: 0,
+    };
+  }
+  return validateProgressionUpgrade(
+    {
+      hero: slot.draftHero,
+      choices: toUpgradeChoices(slot.draftHero.instanceId, slot.upgradeOperations),
+      maxUpgrades: MAX_UPGRADES,
+      paymentMode: 'xp-only',
+      availableGold: Number.POSITIVE_INFINITY,
+    },
+    { type: request.type, skillId: request.type === 'skill-level' ? request.skillId : null }
+  );
+}
+
+/** 校验并添加一次升级操作；非法时返回原状态（不产生任何消费）。 */
 export function addReplacementUpgrade(
   campaign: CampaignState,
   slotId: string,
@@ -156,38 +211,27 @@ export function addReplacementUpgrade(
 ): CampaignState {
   const slot = findSlot(campaign, slotId);
   if (!slot || slot.confirmed || !slot.draftHero) return campaign;
-  const ops = slot.upgradeOperations;
-  if (ops.length >= MAX_UPGRADES) return campaign;
 
-  const spent = upgradeXpSpent(ops);
-  const available = campaign.stagecoach.accumulatedXp - spent;
+  const validation = validateReplacementUpgrade(campaign, slotId, op);
+  if (!validation.ok) return campaign;
 
-  let newOp: ReplacementUpgradeOperation;
-  if (op.type === 'hero-level') {
-    if (available < HERO_LEVEL_XP_COST) return campaign;
-    const from = effectiveHeroLevel(1, ops);
-    if (from >= 3) return campaign;
-    newOp = {
-      id: createId('upg'),
-      type: 'hero-level',
-      fromLevel: from as 1 | 2,
-      toLevel: (from + 1) as 2 | 3,
-      xpCost: HERO_LEVEL_XP_COST,
-    };
-  } else {
-    if (available < SKILL_LEVEL_XP_COST) return campaign;
-    if (!slot.draftHero.equippedSkillIds.includes(op.skillId)) return campaign;
-    const from = effectiveSkillLevel(1, op.skillId, ops);
-    if (from >= 3) return campaign;
-    newOp = {
-      id: createId('upg'),
-      type: 'skill-level',
-      skillId: op.skillId,
-      fromLevel: from as 1 | 2,
-      toLevel: (from + 1) as 2 | 3,
-      xpCost: SKILL_LEVEL_XP_COST,
-    };
-  }
+  const newOp: ReplacementUpgradeOperation =
+    validation.type === 'hero-level'
+      ? {
+          id: createId('upg'),
+          type: 'hero-level',
+          fromLevel: validation.fromLevel as 1 | 2,
+          toLevel: validation.toLevel as 2 | 3,
+          xpCost: validation.xpCost,
+        }
+      : {
+          id: createId('upg'),
+          type: 'skill-level',
+          skillId: validation.skillId!,
+          fromLevel: validation.fromLevel as 1 | 2,
+          toLevel: validation.toLevel as 2 | 3,
+          xpCost: validation.xpCost,
+        };
 
   return updateSlot(campaign, slotId, (s) => ({
     ...s,
@@ -210,28 +254,26 @@ export function removeReplacementUpgrade(
   }));
 }
 
-/** 将升级操作真实应用到 draft hero（等级 Profile 与技能等级数据）。 */
+/**
+ * 将升级操作真实应用到 draft hero（复用 upgrade-core，XP 走统一台账）。
+ * 返回 null 表示应用失败（XP 不足或缺少等级卡面数据），调用方必须整体放弃。
+ */
 export function applyUpgradesToDraft(
   draft: HeroInstance,
   ops: ReplacementUpgradeOperation[],
   stagecoachXp: number
-): HeroInstance {
-  let hero = { ...draft, skillLevels: { ...draft.skillLevels } };
-  for (const op of ops) {
-    if (op.type === 'hero-level') {
-      const profile = getHeroLevelProfile(hero.heroId, op.toLevel);
-      hero = {
-        ...hero,
-        level: op.toLevel,
-        maxLife: profile?.maxHp ?? hero.maxLife,
-        speed: profile?.speed ?? hero.speed,
-        wounds: 0, // 满血入队
-      };
-    } else {
-      hero.skillLevels[op.skillId] = op.toLevel;
-    }
-  }
-  return { ...hero, xp: Math.max(0, stagecoachXp - upgradeXpSpent(ops)) };
+): HeroInstance | null {
+  // draft 的 XP 以确认时的 Stagecoach 累计值为准（改选/刷新后可能变化）
+  const base: HeroInstance = {
+    ...draft,
+    xp: stagecoachXp,
+    xpState: createInitialXpState(stagecoachXp),
+    skillLevels: { ...draft.skillLevels },
+  };
+  const applied = applyUpgradeChoicesToHero(base, toUpgradeChoices(base.instanceId, ops));
+  if (!applied) return null;
+  // 替补英雄满血入队（升级带来的 maxLife 提升同样体现为满血）
+  return { ...applied, wounds: 0 };
 }
 
 /**
@@ -268,6 +310,10 @@ export function confirmReplacement(campaign: CampaignState, slotId: string): Cam
   if (upgradeXpSpent(ops) > campaign.stagecoach.accumulatedXp) return campaign;
 
   const finalHero = applyUpgradesToDraft(slot.draftHero, ops, campaign.stagecoach.accumulatedXp);
+  // Phase 8D：缺少卡面数据或 XP 不足 → 整体放弃，不产生任何消费（不扣 Token）
+  if (!finalHero) {
+    return pushLog(campaign, '替补升级失败（缺少等级卡面数据或 XP 不足），已取消本次确认。', 'danger');
+  }
 
   // 用新英雄替换阵亡英雄（保持数组位置 = 原 partySlot 顺序）
   const heroes = campaign.heroes.map((h) =>

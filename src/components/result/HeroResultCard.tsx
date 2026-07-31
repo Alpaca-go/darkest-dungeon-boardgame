@@ -41,6 +41,7 @@ export default function HeroResultCard({
           </span>
           <span>
             XP <span className="text-sky-400">+{hero.xpGained}</span>
+            <span className="text-[10px] text-dd-muted">（回村发放）</span>
           </span>
         </div>
       </div>

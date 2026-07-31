@@ -21,8 +21,20 @@ import {
 import { resolveAttack } from './combat-resolution';
 import { applyBattleUnitDamage } from './damage';
 import { applyBattleUnitHealing } from './healing';
-import { applyEffects, resolveStartOfTurnConditions, tickStun } from './status-effects';
+import {
+  applyEffects,
+  applyEffectsWithResistance,
+  describeBlockedEffects,
+  resolveStartOfTurnConditions,
+  tickStun,
+} from './status-effects';
 import { SKILL_LEVEL_BONUS } from '../data/hero-level-profiles';
+import {
+  getEffectiveHeroLevel,
+  getEffectiveSkillLevel,
+  getHeroImmunities,
+  getHeroResistances,
+} from './progression/upgrade-core';
 import { chooseMonsterAction } from './monster-ai';
 import { pushLog } from './log';
 import {
@@ -128,8 +140,24 @@ export function getActiveUnit(state: BattleState): BattleUnit | undefined {
   return findUnit(state, state.activeActorId);
 }
 
-function makeHeroUnit(hero: HeroInstance, index: number): BattleUnit {
+/**
+ * Phase 8D：进入战斗时把英雄的「有效」等级快照进 BattleUnit。
+ * - skillLevels 取 max(永久等级, Blacksmith 临时 Form)，因此战斗内一律读快照；
+ * - heroLevel / resistances / immunities 由 Hero Level Registry 派生，不落盘。
+ */
+function makeHeroUnit(hero: HeroInstance, index: number, campaign: CampaignState): BattleUnit {
   const hp = Math.max(0, hero.maxLife - hero.wounds);
+  const effectiveSkillLevels: Record<string, 1 | 2 | 3> = {};
+  for (const skillId of hero.equippedSkillIds) {
+    effectiveSkillLevels[skillId] = getEffectiveSkillLevel(campaign, hero, skillId);
+  }
+  // 未装备但已有永久等级的技能也保留快照（换装/调试时不丢数据）
+  for (const [skillId, lv] of Object.entries(hero.skillLevels ?? {})) {
+    if (effectiveSkillLevels[skillId] === undefined) {
+      effectiveSkillLevels[skillId] = getEffectiveSkillLevel(campaign, hero, skillId);
+      void lv;
+    }
+  }
   return {
     id: `u_${hero.instanceId}`,
     name: hero.name,
@@ -155,13 +183,17 @@ function makeHeroUnit(hero: HeroInstance, index: number): BattleUnit {
     actionPoints: 0,
     damageBonus: hero.temporaryDamageBonus ?? 0,
     equippedSkillIds: [...hero.equippedSkillIds],
-    skillLevels: { ...(hero.skillLevels ?? {}) },
+    // Phase 8D：有效技能等级（永久 ∪ Blacksmith 临时 Form）
+    skillLevels: effectiveSkillLevels,
     // ---- Phase 8A：Quirk 快照（战斗内修正器用；获取/移除只发生在战役层） ----
     quirkIds: heroQuirkIds(hero),
     // ---- Phase 8B：Disease 快照 + 等级（damage-self-scaled 与战斗内修正器用） ----
     diseaseId: hero.disease?.diseaseId ?? null,
     diseaseInstanceId: hero.disease?.instanceId ?? null,
-    heroLevel: hero.level,
+    heroLevel: getEffectiveHeroLevel(hero),
+    // ---- Phase 8D：Hero Level 派生的抗性 / 免疫（不落盘，战斗内即时生效） ----
+    resistances: getHeroResistances(hero),
+    immunities: getHeroImmunities(hero),
     // ---- Phase 7：精神状态快照（从战役英雄同步） ----
     resolveTestedThisQuest: hero.resolveTestedThisQuest ?? false,
     resolveState: hero.resolveState ?? 'normal',
@@ -230,7 +262,9 @@ export function initBattle(campaign: CampaignState, roomId: string): CampaignSta
   const room = campaign.dungeon?.rooms.find((r) => r.id === roomId);
   if (!room || !campaign.dungeon) return campaign;
 
-  const heroUnits = campaign.heroes.filter((h) => !h.dead).map((h, i) => makeHeroUnit(h, i));
+  const heroUnits = campaign.heroes
+    .filter((h) => !h.dead)
+    .map((h, i) => makeHeroUnit(h, i, campaign));
   const encounter = buildEncounter(room.type);
   const monsterUnits = encounter.map((m, i) => makeMonsterUnit(m, i));
 
@@ -660,7 +694,18 @@ export function runMonsterTurn(state: BattleState, monsterId: string): BattleSta
         tgt = { ...tgt, stress: Math.min(10, tgt.stress + skill.stress) };
         queuedStress = skill.stress;
       }
-      if (skill.applyEffects?.length) tgt = applyEffects(tgt, skill.applyEffects);
+      // Phase 8D：英雄承受负面状态时，先过 Hero Level 抗性 / 免疫判定
+      if (skill.applyEffects?.length) {
+        const eff = applyEffectsWithResistance(tgt, skill.applyEffects);
+        tgt = eff.unit;
+        if (eff.blocked.length > 0) {
+          state = pushBattleLog(
+            state,
+            `${tgt.name} 凭 Level ${tgt.heroLevel ?? 1} 抗性抵挡了部分效果${describeBlockedEffects(eff.blocked)}。`,
+            'success'
+          );
+        }
+      }
     }
     // Phase 8B：Push / Pull —— 怪物技能对英雄的强制位移（实际发生位移才算 shuffle）
     let shuffled = false;

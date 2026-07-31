@@ -20,6 +20,8 @@ import {
   importSaveString,
 } from './save';
 import { routeForPhase, nearestLegalPath, checkRouteAccess } from '../app/route-guards';
+import { visitBlacksmith, getActiveSkillFormOverrides } from './hamlet/blacksmith';
+import { getEffectiveSkillLevel } from './progression/upgrade-core';
 
 const FOUR_HEROES = ['crusader', 'vestal', 'highwayman', 'hellion'];
 
@@ -263,14 +265,18 @@ describe('防重复结算', () => {
 
   it('17. 双击建筑不会重复扣 Gold', () => {
     let c = startHamletPhase(finishQuest(withObjective(freshCampaign()), 'left'));
-    c = { ...c, hamlet: { ...c.hamlet, caretakerBlockedBuildingId: 'sanitarium' } };
+    c = {
+      ...c,
+      hamlet: { ...c.hamlet, caretakerBlockedBuildingId: 'blacksmith' },
+      heroes: c.heroes.map((h, i) => (i === 0 ? { ...h, wounds: 2 } : h)),
+    };
     const hero = c.heroes[0];
-    const once = visitHamletBuilding(c, hero.instanceId, 'guild');
-    expect(once.gold).toBe(c.gold - 2);
+    const once = visitHamletBuilding(c, hero.instanceId, 'sanitarium');
+    expect(once.gold).toBe(c.gold - 3);
     // 第二次点击：英雄已行动 + 建筑已占用 → 原样返回，不再扣钱
-    const twice = visitHamletBuilding(once, hero.instanceId, 'guild');
+    const twice = visitHamletBuilding(once, hero.instanceId, 'sanitarium');
     expect(twice).toBe(once);
-    expect(twice.gold).toBe(c.gold - 2);
+    expect(twice.gold).toBe(c.gold - 3);
   });
 
   it('18. 双击结束当天不会跳过两天', () => {
@@ -326,19 +332,22 @@ describe('状态隔离', () => {
     }
   });
 
-  it('21. Blacksmith 加成经过一次任务结算后清零', () => {
+  it('21. Blacksmith 临时 Skill Form 经过一次任务结算后失效', () => {
     let c = startHamletPhase(finishQuest(withObjective(freshCampaign()), 'left'));
     c = { ...c, hamlet: { ...c.hamlet, caretakerBlockedBuildingId: 'sanitarium' } };
-    c = visitHamletBuilding(c, c.heroes[0].instanceId, 'blacksmith');
-    expect(c.heroes[0].temporaryDamageBonus).toBe(1);
+    const heroId = c.heroes[0].instanceId;
+    const skillId = c.heroes[0].equippedSkillIds[0];
+    c = visitBlacksmith(c, heroId, skillId);
+    expect(getEffectiveSkillLevel(c, c.heroes[0], skillId)).toBe(2);
     for (const h of c.heroes.slice(1)) c = skipHeroAction(c, h.instanceId);
     c = endHamletDay(c);
     for (const h of c.heroes) c = skipHeroAction(c, h.instanceId);
     c = endHamletDay(c);
     c = selectQuest(c, 'recover-relic');
-    expect(c.heroes[0].temporaryDamageBonus).toBe(1); // 带入下一任务
+    expect(getEffectiveSkillLevel(c, c.heroes[0], skillId)).toBe(2); // 带入下一任务
     const done = finishQuest(withObjective(c), 'left');
-    expect(done.heroes[0].temporaryDamageBonus).toBe(0); // 结算后清零
+    expect(getEffectiveSkillLevel(done, done.heroes[0], skillId)).toBe(1); // 结算后失效
+    expect(getActiveSkillFormOverrides(done, heroId)).toHaveLength(0);
     // 不会残留到再下一次任务
     expect(done.lastQuestResult).toBeTruthy();
   });

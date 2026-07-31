@@ -58,6 +58,20 @@ import {
   sanitariumRemoveDiseaseError,
 } from '../game-engine/hamlet/sanitarium';
 import { interactWithCurio as engineInteractWithCurio } from '../game-engine/diseases/curio';
+// ---- Phase 8D：Guild / Blacksmith / 成长 ----
+import {
+  startGuildVisit as engineStartGuildVisit,
+  cancelGuildVisit as engineCancelGuildVisit,
+  addGuildUpgrade as engineAddGuildUpgrade,
+  removeGuildUpgrade as engineRemoveGuildUpgrade,
+  commitGuildVisit as engineCommitGuildVisit,
+  guildVisitError as engineGuildVisitError,
+} from '../game-engine/hamlet/guild';
+import {
+  visitBlacksmith as engineVisitBlacksmith,
+  blacksmithVisitError as engineBlacksmithVisitError,
+} from '../game-engine/hamlet/blacksmith';
+import { earnHeroXp as engineEarnHeroXp } from '../game-engine/progression/xp-ledger';
 import {
   clearCampaign,
   exportSaveString,
@@ -191,6 +205,26 @@ interface GameStore {
   interactWithCurio(heroId: string): void;
   /** 确认 Disease 获取浮层（仅清空 lastDiseaseAcquisition，不改变任何规则状态）。 */
   acknowledgeDiseaseAcquisition(): void;
+
+  // ---- Phase 8D：Guild / Blacksmith / 成长 ----
+  /** 开启某英雄的 Guild 升级会话（不产生消费）。 */
+  startGuildVisit(heroId: string): void;
+  /** 取消当前 Guild 会话（丢弃未提交的选择）。 */
+  cancelGuildVisit(): void;
+  /** 向当前 Guild 会话追加一次升级选择。 */
+  addGuildUpgrade(request: { type: 'hero-level' } | { type: 'skill-level'; skillId: string }): void;
+  /** 从当前 Guild 会话移除一次升级选择。 */
+  removeGuildUpgrade(choiceId: string): void;
+  /** 原子提交 Guild 会话；返回错误信息（成功为 null）。 */
+  commitGuildVisit(): string | null;
+  /** 该英雄能否开启 Guild 会话（null = 可以）。 */
+  guildVisitError(heroId: string): string | null;
+  /** Blacksmith：为指定技能购买临时 Form（仅下次任务生效）。 */
+  visitBlacksmith(heroId: string, skillId: string): void;
+  /** Blacksmith 校验（null = 可以购买）。 */
+  blacksmithVisitError(heroId: string, skillId: string): string | null;
+  /** Debug：给英雄发放 XP（统一走 XP Ledger，不直接写 hero.xp）。 */
+  debugGrantXp(heroId: string, amount: number): void;
 }
 
 const EMPTY_UI: UiState = {
@@ -724,6 +758,77 @@ export const useGameStore = create<GameStore>((set, get) => {
       const c = get().campaign;
       if (!c || !c.lastDiseaseAcquisition) return;
       commit({ ...c, lastDiseaseAcquisition: null });
+    },
+
+    // ---- Phase 8D：Guild 会话（组件只触发，规则全在 game-engine/hamlet/guild.ts） ----
+    startGuildVisit: (heroId) => {
+      const c = get().campaign;
+      if (!c) return;
+      const next = engineStartGuildVisit(c, heroId);
+      if (next === c) return;
+      commit(next);
+    },
+
+    cancelGuildVisit: () => {
+      const c = get().campaign;
+      if (!c) return;
+      const next = engineCancelGuildVisit(c);
+      if (next === c) return;
+      commit(next);
+    },
+
+    addGuildUpgrade: (request) => {
+      const c = get().campaign;
+      if (!c) return;
+      const next = engineAddGuildUpgrade(c, request);
+      if (next === c) return;
+      commit(next);
+    },
+
+    removeGuildUpgrade: (choiceId) => {
+      const c = get().campaign;
+      if (!c) return;
+      const next = engineRemoveGuildUpgrade(c, choiceId);
+      if (next === c) return;
+      commit(next);
+    },
+
+    commitGuildVisit: () => {
+      const c = get().campaign;
+      if (!c) return '战役未初始化';
+      const { campaign: next, ok, error } = engineCommitGuildVisit(c);
+      if (!ok) return error ?? '升级失败';
+      commit(next);
+      return null;
+    },
+
+    guildVisitError: (heroId) => {
+      const c = get().campaign;
+      if (!c) return '战役未初始化';
+      return engineGuildVisitError(c, heroId);
+    },
+
+    // ---- Phase 8D：Blacksmith 临时 Skill Form ----
+    visitBlacksmith: (heroId, skillId) => {
+      const c = get().campaign;
+      if (!c) return;
+      const next = engineVisitBlacksmith(c, heroId, skillId);
+      if (next === c) return;
+      commit(next);
+    },
+
+    blacksmithVisitError: (heroId, skillId) => {
+      const c = get().campaign;
+      if (!c) return '战役未初始化';
+      return engineBlacksmithVisitError(c, heroId, skillId);
+    },
+
+    debugGrantXp: (heroId, amount) => {
+      const c = get().campaign;
+      if (!c || amount <= 0) return;
+      const next = engineEarnHeroXp(c, heroId, amount, 'Debug 面板发放');
+      if (next === c) return;
+      commit(next);
     },
   };
 });

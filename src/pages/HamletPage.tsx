@@ -12,6 +12,10 @@ import HamletEventCard from '../components/hamlet/HamletEventCard';
 import HamletBuildingCard from '../components/hamlet/HamletBuildingCard';
 import HamletHeroCard from '../components/hamlet/HamletHeroCard';
 import HamletLog from '../components/hamlet/HamletLog';
+import GuildPanel from '../components/hamlet/GuildPanel';
+import BlacksmithPanel from '../components/hamlet/BlacksmithPanel';
+import { guildVisitError } from '../game-engine/hamlet/guild';
+import { blacksmithVisitError } from '../game-engine/hamlet/blacksmith';
 
 /**
  * Hamlet 页 /hamlet：
@@ -27,11 +31,14 @@ export default function HamletPage() {
   const visitAbbey = useGameStore((s) => s.visitAbbey);
   const visitSanitariumRemoveDisease = useGameStore((s) => s.visitSanitariumRemoveDisease);
   const sanitariumRemoveDiseaseError = useGameStore((s) => s.sanitariumRemoveDiseaseError);
+  const startGuildVisit = useGameStore((s) => s.startGuildVisit);
   const [selectedHeroId, setSelectedHeroId] = useState<string | null>(null);
   // Phase 8A：Abbey 需要选择移除哪个 Quirk，用局部弹层承载（不写入存档）。
   const [abbeyHeroId, setAbbeyHeroId] = useState<string | null>(null);
   // Phase 8B：Sanitarium 有两项服务（治疗 3 Gold / 治病 2 Gold），同样用局部弹层选择。
   const [sanitariumHeroId, setSanitariumHeroId] = useState<string | null>(null);
+  // Phase 8D：Blacksmith 需要选择技能（Guild 的会话状态存在 campaign 里，刷新可续做）。
+  const [blacksmithHeroId, setBlacksmithHeroId] = useState<string | null>(null);
 
   // preparationDays 归零后 gamePhase → quest-select，自动跳转下一任务选择。
   const gamePhase = campaign?.gamePhase;
@@ -52,16 +59,33 @@ export default function HamletPage() {
 
   const abbeyHero = campaign.heroes.find((h) => h.instanceId === abbeyHeroId) ?? null;
   const sanitariumHero = campaign.heroes.find((h) => h.instanceId === sanitariumHeroId) ?? null;
+  const blacksmithHero =
+    campaign.heroes.find((h) => h.instanceId === blacksmithHeroId) ?? null;
+  // Phase 8D：Guild 会话持久化在 campaign 中，刷新后可以继续未提交的选择。
+  const guildSession =
+    campaign.guildVisitSession && !campaign.guildVisitSession.committed
+      ? campaign.guildVisitSession
+      : null;
+  const guildHero =
+    campaign.heroes.find((h) => h.instanceId === guildSession?.heroInstanceId) ?? null;
 
   const onVisit = (buildingId: string) => {
     if (!selectedHeroId) return;
-    // Abbey / Sanitarium 走二次选择流程，其余建筑直接结算。
+    // Abbey / Sanitarium / Guild / Blacksmith 走二次选择流程，其余建筑直接结算。
     if (buildingId === 'abbey') {
       setAbbeyHeroId(selectedHeroId);
       return;
     }
     if (buildingId === 'sanitarium') {
       setSanitariumHeroId(selectedHeroId);
+      return;
+    }
+    if (buildingId === 'guild') {
+      startGuildVisit(selectedHeroId);
+      return;
+    }
+    if (buildingId === 'blacksmith') {
+      setBlacksmithHeroId(selectedHeroId);
       return;
     }
     visitBuilding(selectedHeroId, buildingId);
@@ -132,6 +156,19 @@ export default function HamletPage() {
               if (selectedHeroId && b.id === 'sanitarium' && reason) {
                 const diseaseReason = sanitariumRemoveDiseaseError(selectedHeroId);
                 if (!diseaseReason) reason = null;
+              }
+              // Phase 8D：Guild / Blacksmith 的可用性由各自专用校验决定。
+              if (selectedHeroId && b.id === 'guild') {
+                reason = guildVisitError(campaign, selectedHeroId);
+              }
+              if (selectedHeroId && b.id === 'blacksmith') {
+                const hero = campaign.heroes.find((h) => h.instanceId === selectedHeroId);
+                // 任意已装备技能可买 Form 即视为建筑可用
+                const anyOk = (hero?.equippedSkillIds ?? []).some(
+                  (sid) => blacksmithVisitError(campaign, selectedHeroId, sid) === null
+                );
+                if (anyOk) reason = null;
+                else if (!reason) reason = '没有可临时强化的技能';
               }
               return (
                 <HamletBuildingCard
@@ -290,6 +327,29 @@ export default function HamletPage() {
             </button>
           </div>
         </div>
+      )}
+
+      {/* Phase 8D：Guild 升级会话面板（会话持久化在 campaign，刷新可续做） */}
+      {guildHero && guildSession && (
+        <GuildPanel
+          campaign={campaign}
+          hero={guildHero}
+          onClose={() => {
+            setSelectedHeroId(null);
+          }}
+        />
+      )}
+
+      {/* Phase 8D：Blacksmith 临时 Skill Form 面板 */}
+      {blacksmithHero && (
+        <BlacksmithPanel
+          campaign={campaign}
+          hero={blacksmithHero}
+          onClose={() => {
+            setBlacksmithHeroId(null);
+            setSelectedHeroId(null);
+          }}
+        />
       )}
     </div>
   );

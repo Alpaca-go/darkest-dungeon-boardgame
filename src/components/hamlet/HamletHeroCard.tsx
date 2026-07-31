@@ -2,6 +2,14 @@ import type { HeroInstance } from '../../types';
 import ResolveStateBadge from '../mental/ResolveStateBadge';
 import DiseaseBadge from '../disease/DiseaseBadge';
 import { getQuirkById } from '../../data/quirks';
+import {
+  getEffectiveHeroLevel,
+  getHeroSkillSlots,
+  getHeroTrinketCapacity,
+} from '../../game-engine/progression/upgrade-core';
+import { getHeroXp } from '../../game-engine/progression/xp-ledger';
+
+const ROMAN: Record<number, string> = { 1: 'I', 2: 'II', 3: 'III' };
 
 /** Hamlet 左侧英雄卡：状态 + 选中 + 跳过按钮。 */
 export default function HamletHeroCard({
@@ -19,6 +27,11 @@ export default function HamletHeroCard({
 }) {
   const hp = Math.max(0, hero.maxLife - hero.wounds);
   const dead = !hero.isAlive;
+  // Phase 8D：Level 与派生槽位全部由 Registry 计算，卡片只展示（不落盘）。
+  const level = getEffectiveHeroLevel(hero);
+  const xp = getHeroXp(hero);
+  const skillSlots = getHeroSkillSlots(hero);
+  const trinketSlots = getHeroTrinketCapacity(hero);
   return (
     <div
       className={[
@@ -42,7 +55,16 @@ export default function HamletHeroCard({
           <div className="w-8 h-8 rounded shrink-0" style={{ background: color }} aria-hidden />
           <div className="flex-1 min-w-0">
             <div className="flex items-baseline justify-between">
-              <span className="font-bold text-dd-text text-sm truncate">{hero.name}</span>
+              <span className="font-bold text-dd-text text-sm truncate">
+                {hero.name}
+                <span
+                  className="ml-1 px-1 rounded bg-amber-900/70 text-amber-200 text-[10px] font-bold align-middle"
+                  title={`Hero Level ${level}：技能槽 ${skillSlots}，饰品位 ${trinketSlots}`}
+                  data-testid={`hero-level-${hero.instanceId}`}
+                >
+                  Lv {ROMAN[level] ?? level}
+                </span>
+              </span>
               {dead ? (
                 <span className="text-[10px] text-red-400 font-bold shrink-0">阵亡</span>
               ) : hero.hasActedToday ? (
@@ -59,10 +81,13 @@ export default function HamletHeroCard({
                   {hero.stress}/10
                 </span>
               </span>
-              <span>XP <span className="text-sky-400">{hero.xp}</span></span>
-              {hero.temporaryDamageBonus > 0 && (
-                <span className="text-red-400">⚔ +{hero.temporaryDamageBonus}</span>
-              )}
+              <span data-testid={`hero-xp-${hero.instanceId}`}>
+                XP <span className="text-sky-400 font-bold">{xp}</span>
+              </span>
+              <span title="Hero Level 派生的技能槽 / 饰品位（不落盘）">
+                槽 <span className="text-dd-text">{skillSlots}</span>/饰{' '}
+                <span className="text-dd-text">{trinketSlots}</span>
+              </span>
             </div>
             <div className="flex flex-wrap gap-1 mt-0.5">
               <ResolveStateBadge

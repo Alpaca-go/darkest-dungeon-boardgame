@@ -7,6 +7,8 @@ import { resolveHealing } from './healing';
 import { applyStressBatch, recoverStress } from './stress';
 import { createRuleEventContext, emitPartyRuleEvent, removeQuirkFromHero } from './quirks';
 import { getQuirkById } from '../data/quirks';
+import { distributeQuestXp } from './progression/quest-xp';
+import { clearConsumedSkillForms } from './progression/skill-forms';
 
 // ---------------------------------------------------------------------------
 // 工具
@@ -37,7 +39,8 @@ export function rollCaretakerBuilding(): string {
  * 3. preparationDays 由事件决定，currentDay = 1；
  * 4. 重置英雄 hasActedToday、清空 occupiedBuildingIds；
  * 5. 随机生成当天 Caretaker 阻塞建筑；
- * 6. gamePhase → hamlet。
+ * 6. Phase 8D：发放本次任务的 Quest XP（英雄 + Stagecoach，幂等）并清理已消耗的临时 Skill Form；
+ * 7. gamePhase → hamlet。
  * 仅允许在 quest-result 且已结算后调用（幂等保护）。
  */
 export function startHamletPhase(campaign: CampaignState): CampaignState {
@@ -64,8 +67,15 @@ export function startHamletPhase(campaign: CampaignState): CampaignState {
     heroes: campaign.heroes.map((h) => ({ ...h, hasActedToday: false })),
     dungeon: null,
     battle: null,
+    guildVisitSession: null,
     gamePhase: 'hamlet',
   };
+
+  // Phase 8D：Quest XP 在「返回 Hamlet」时才真正发放（规则 2），幂等。
+  const xpOutcome = distributeQuestXp(next);
+  next = xpOutcome.campaign;
+  // Phase 8D：清理上一次任务已消耗的临时 Skill Form。
+  next = clearConsumedSkillForms(next);
 
   // 事件效果只执行一次（在此处，之后不再触发）。
   switch (event.effectType) {
@@ -105,6 +115,13 @@ export function startHamletPhase(campaign: CampaignState): CampaignState {
     `第 1 天开始，Caretaker 占据了 ${getHamletBuildingById(blocked)?.name ?? blocked}。`,
     'warning'
   );
+  if (xpOutcome.result) {
+    hamlet = hamletLog(
+      hamlet,
+      `Quest XP 发放：完成 ${xpOutcome.result.completedObjectiveCount} 个 Objective，${xpOutcome.result.eligibleHeroIds.length} 名英雄各 +${xpOutcome.result.xpPerHero} XP，Stagecoach +${xpOutcome.result.stagecoachXp} XP。`,
+      xpOutcome.result.xpPerHero > 0 ? 'success' : 'info',
+    );
+  }
 
   next = { ...next, hamlet };
   next = pushLog(next, `小队返回 Hamlet，事件「${event.name}」生效。`, 'info');
@@ -206,6 +223,9 @@ export function visitHamletBuilding(
 ): CampaignState {
   // Phase 8A：Abbey 需要选择移除目标，必须走 visitAbbey（避免无参访问产生消费）。
   if (buildingId === 'abbey') return campaign;
+  // Phase 8D：Guild 是「会话式」升级（startGuildVisit / commitGuildVisit），
+  // Blacksmith 需要指定技能（visitBlacksmith）；两者都不能通过无参访问产生消费。
+  if (buildingId === 'guild' || buildingId === 'blacksmith') return campaign;
   if (buildingVisitError(campaign, heroInstanceId, buildingId) !== null) return campaign;
   const building = getHamletBuildingById(buildingId)!;
   const hero = campaign.heroes.find((h) => h.instanceId === heroInstanceId)!;
@@ -243,14 +263,6 @@ export function visitHamletBuilding(
       case 'tavern': {
         break; // 减压已在 recoverStress 中完成
       }
-      case 'guild':
-        u = { ...u, xp: u.xp + 1 };
-        effectNote = '获得 1 XP';
-        break;
-      case 'blacksmith':
-        u = { ...u, temporaryDamageBonus: 1 };
-        effectNote = '下次任务攻击 +1 伤害';
-        break;
       default:
         break;
     }

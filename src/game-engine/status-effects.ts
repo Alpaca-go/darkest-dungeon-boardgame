@@ -1,6 +1,7 @@
-import type { ActiveEffect, BattleUnit } from '../types';
+import type { ActiveEffect, BattleUnit, HeroResistanceProfile } from '../types';
 import { applyBattleUnitDamage, type BattleDamageOutcome } from './damage';
 import { applyQuirkModifiersRaw, describeModifierApplications } from './quirk-passives';
+import { rollDie } from './random';
 
 /** 给单位施加一个状态效果（返回新单位，不修改原对象）。 */
 export function applyEffectToUnit(unit: BattleUnit, effect: ActiveEffect): BattleUnit {
@@ -18,10 +19,87 @@ export function applyEffectToUnit(unit: BattleUnit, effect: ActiveEffect): Battl
   }
 }
 
-/** 施加一组状态效果。 */
+/** 施加一组状态效果（不含抗性判定，保留给怪物与旧调用方）。 */
 export function applyEffects(unit: BattleUnit, effects?: ActiveEffect[]): BattleUnit {
   if (!effects || effects.length === 0) return unit;
   return effects.reduce((u, e) => applyEffectToUnit(u, e), unit);
+}
+
+// ---------------------------------------------------------------------------
+// Phase 8D：Hero Level 派生抗性 / 免疫在战斗内即时生效
+//
+// 规则 12：Hero Level 影响的抗性与免疫不落盘，进入战斗时由 Registry 派生成
+// BattleUnit 快照，效果施加时统一在此判定：
+//   1. 免疫列表命中 → 直接免疫（不掷骰）；
+//   2. 否则掷 d100，roll ≤ 抗性百分比 → 抵抗成功；
+//   3. 缺少抗性数据（怪物 / 老存档）→ 不判定，按原规则施加。
+// mark 不受抗性影响（对应桌游中的标记不是 debuff 判定）。
+// ---------------------------------------------------------------------------
+
+/** 抗性判定涉及的效果类型 → 抗性字段。 */
+const RESIST_KEY_BY_EFFECT: Partial<Record<ActiveEffect['type'], keyof HeroResistanceProfile>> = {
+  stun: 'stun',
+  bleed: 'bleed',
+  blight: 'blight',
+};
+
+/** 单条效果被抗性/免疫拦截的记录（供战斗日志展示）。 */
+export interface BlockedEffectRecord {
+  type: ActiveEffect['type'];
+  reason: 'immune' | 'resisted';
+  /** 抵抗判定时的 d100 结果（immune 时为 undefined）。 */
+  roll?: number;
+  /** 该项抗性百分比（immune 时为 undefined）。 */
+  resistance?: number;
+}
+
+export interface ApplyEffectsWithResistanceResult {
+  unit: BattleUnit;
+  blocked: BlockedEffectRecord[];
+}
+
+/**
+ * 带抗性 / 免疫判定的效果施加（英雄目标使用；怪物无抗性数据时等价于 applyEffects）。
+ * 掷骰统一走 rollDie，测试可通过 setRandomSource 固定。
+ */
+export function applyEffectsWithResistance(
+  unit: BattleUnit,
+  effects?: ActiveEffect[]
+): ApplyEffectsWithResistanceResult {
+  if (!effects || effects.length === 0) return { unit, blocked: [] };
+  const immunities = unit.immunities ?? [];
+  const resistances = unit.resistances;
+  const blocked: BlockedEffectRecord[] = [];
+  let next = unit;
+
+  for (const effect of effects) {
+    if (immunities.includes(effect.type)) {
+      blocked.push({ type: effect.type, reason: 'immune' });
+      continue;
+    }
+    const key = RESIST_KEY_BY_EFFECT[effect.type];
+    const pct = key && resistances ? resistances[key] : 0;
+    if (pct > 0) {
+      const roll = rollDie(100);
+      if (roll <= pct) {
+        blocked.push({ type: effect.type, reason: 'resisted', roll, resistance: pct });
+        continue;
+      }
+    }
+    next = applyEffectToUnit(next, effect);
+  }
+  return { unit: next, blocked };
+}
+
+/** 把拦截记录格式化为战斗日志片段（无拦截时返回空串）。 */
+export function describeBlockedEffects(blocked: BlockedEffectRecord[]): string {
+  if (blocked.length === 0) return '';
+  const parts = blocked.map((b) =>
+    b.reason === 'immune'
+      ? `${b.type} 被免疫`
+      : `${b.type} 被抵抗（d100=${b.roll} ≤ ${b.resistance}）`
+  );
+  return `（${parts.join('，')}）`;
 }
 
 /** 回合开始持续伤害批量结算的结果。 */

@@ -6,9 +6,14 @@ import type {
 } from '../types';
 import { getQuestById } from '../data/quests';
 import { pushLog } from './log';
-import { applyQuestXpToStagecoach } from './stagecoach';
 import { convertResolveStatesAtQuestEnd } from './resolve-conversion';
 import { createRuleEventContext, emitPartyRuleEvent } from './quirks';
+import {
+  createQuestXpResult,
+  evaluateQuestObjectives,
+  refreshObjectiveProgress,
+} from './progression/quest-objectives';
+import { consumeTemporarySkillForms } from './progression/skill-forms';
 
 /** 空补给池（结算后清空用）。 */
 export const EMPTY_PROVISIONS: ProvisionPool = {
@@ -22,7 +27,10 @@ export const EMPTY_PROVISIONS: ProvisionPool = {
 /** 结束任务的原因：主动离开地牢 / 战斗全灭失败。 */
 export type QuestEndReason = 'left' | 'defeat';
 
-/** 简化 XP 规则：completed 存活 +2；incomplete 存活 +1；failed 或死亡 0。 */
+/**
+ * @deprecated Phase 8D 起 Quest XP 由 Objective 完成数决定（见 progression/quest-objectives）。
+ * 保留仅用于旧存档兼容与回归对照，业务代码不得再调用。
+ */
 export function xpForOutcome(outcome: QuestOutcome, isAlive: boolean): number {
   if (!isAlive || outcome === 'failed') return 0;
   return outcome === 'completed' ? 2 : 1;
@@ -53,6 +61,11 @@ export function resolveQuestResult(
   else if (objectiveComplete) outcome = 'completed';
   else outcome = 'incomplete';
 
+  // Phase 8D：XP 完全由 Objective 完成数决定（0-3），与 outcome 解耦。
+  // 阵亡英雄不获得 XP；存活英雄全部获得相同数量（不按人数拆分）。
+  const objectives = evaluateQuestObjectives(campaign);
+  const xpPerHero = Math.min(3, objectives.filter((o) => o.completed).length);
+
   return {
     questId: campaign.currentQuestId ?? '',
     questName: quest?.name ?? '未知任务',
@@ -62,13 +75,17 @@ export function resolveQuestResult(
     goldEarned: Math.max(0, campaign.gold - (campaign.questStartGold ?? campaign.gold)),
     provisionGold: provisionsToGold(campaign.provisions),
     provisionsLeft: { ...campaign.provisions },
+    objectives,
+    xpPerHero,
+    completedObjectiveCount: objectives.filter((o) => o.completed).length,
     heroes: campaign.heroes.map((h) => ({
       instanceId: h.instanceId,
       name: h.name,
       hp: Math.max(0, h.maxLife - h.wounds),
       maxHp: h.maxLife,
       stress: h.stress,
-      xpGained: xpForOutcome(outcome, h.isAlive),
+      // Phase 8D：这里只是「预告」，真实发放推迟到回到 Hamlet（规则 2）
+      xpGained: h.isAlive && !h.dead ? xpPerHero : 0,
       isAlive: h.isAlive,
     })),
   };
@@ -77,7 +94,10 @@ export function resolveQuestResult(
 /**
  * 应用任务结算（只允许一次；questResultResolved 已为 true 时原样返回）：
  * - 未使用补给按每个 1 Gold 转换并清空；
- * - 英雄获得简化 XP；temporaryDamageBonus 到期清零；
+ * - temporaryDamageBonus 到期清零；
+ * - Phase 8D：只「生成」Quest XP 结算单（pendingQuestXp），不发放 XP —— 真实发放
+ *   推迟到回到 Hamlet（规则 2），Stagecoach XP 同样推迟；
+ * - Phase 8D：Blacksmith 临时 Skill Form 在任务结束时标记为已消耗（规则 15）；
  * - completed 时 completedQuestCount +1；
  * - Light 重置为 5；清除 BattleState；
  * - 写入 lastQuestResult 并切到 quest-result 阶段。
@@ -89,19 +109,17 @@ export function applyQuestRewards(
 ): CampaignState {
   if (campaign.questResultResolved) return campaign;
 
-  const heroes = campaign.heroes.map((h) => {
-    if (h.dead) return h; // 阵亡英雄不再获得 XP
-    const r = summary.heroes.find((x) => x.instanceId === h.instanceId);
-    return {
-      ...h,
-      xp: h.xp + (r?.xpGained ?? 0),
-      temporaryDamageBonus: 0,
-    };
-  });
+  // temporaryDamageBonus 是单次任务内的临时加成，任务结束即清零。
+  const heroes = campaign.heroes.map((h) =>
+    h.temporaryDamageBonus === 0 ? h : { ...h, temporaryDamageBonus: 0 },
+  );
+
+  // Phase 8D：先刷新 Objective 进度，再据此生成待发放的 XP 结算单。
+  const refreshed = refreshObjectiveProgress({ ...campaign, heroes });
+  const questXp = createQuestXpResult(refreshed);
 
   let next: CampaignState = {
-    ...campaign,
-    heroes,
+    ...refreshed,
     gold: campaign.gold + summary.provisionGold,
     provisions: { ...EMPTY_PROVISIONS },
     light: 5,
@@ -110,9 +128,13 @@ export function applyQuestRewards(
       campaign.completedQuestCount + (summary.outcome === 'completed' ? 1 : 0),
     questStatus: summary.outcome === 'failed' ? 'failed' : 'complete',
     questResultResolved: true,
-    lastQuestResult: summary,
+    lastQuestResult: { ...summary, objectives: refreshed.objectiveProgress },
+    pendingQuestXp: questXp,
     gamePhase: 'quest-result',
   };
+
+  // Phase 8D：临时 Skill Form 随任务结束失效（永久等级不受影响）。
+  next = consumeTemporarySkillForms(next);
 
   const outcomeText =
     summary.outcome === 'completed' ? '任务完成' : summary.outcome === 'incomplete' ? '任务未完成' : '任务失败';
@@ -122,9 +144,11 @@ export function applyQuestRewards(
     summary.outcome === 'failed' ? 'danger' : 'success'
   );
 
-  // Phase 6：Stagecoach 累计任务 XP —— 每次任务只累计一次（不按英雄人数乘算），幂等。
-  const stagecoachXp = xpForOutcome(summary.outcome, true);
-  next = applyQuestXpToStagecoach(next, stagecoachXp);
+  next = pushLog(
+    next,
+    `Quest XP 结算：完成 ${questXp.completedObjectiveCount} 个 Objective → 每名存活英雄 ${questXp.xpPerHero} XP（回到 Hamlet 时发放）。`,
+    questXp.xpPerHero > 0 ? 'success' : 'info',
+  );
 
   // Phase 8A：quest-completed 时机事件（Hoarder 等，仅任务成功时触发）。
   if (summary.outcome === 'completed') {

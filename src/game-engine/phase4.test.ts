@@ -14,6 +14,8 @@ import {
 import { initBattle } from './battle';
 import { saveCampaign, loadCampaign, clearCampaign } from './save';
 import { HAMLET_BUILDINGS } from '../data/hamlet-buildings';
+import { visitBlacksmith, getActiveSkillFormOverrides } from './hamlet/blacksmith';
+import { getEffectiveSkillLevel, getPermanentSkillLevel } from './progression/upgrade-core';
 
 const FOUR_HEROES = ['crusader', 'vestal', 'highwayman', 'hellion'];
 
@@ -88,12 +90,27 @@ describe('Quest Result 判定', () => {
     }
   });
 
-  it('completed 时存活英雄获得 2 XP 并计入 completedQuestCount', () => {
+  it('completed 时生成待发放 Quest XP 并计入 completedQuestCount（Phase 8D：回到 Hamlet 才入账）', () => {
     const c = finishQuest(withObjective(freshCampaign()), 'left');
     expect(c.completedQuestCount).toBe(1);
-    for (const h of c.heroes) expect(h.xp).toBe(2);
+    // Phase 8D：任务结束时 XP 只挂起，不写入英雄
+    for (const h of c.heroes) expect(h.xp).toBe(0);
+    expect(c.pendingQuestXp).not.toBeNull();
+    expect(c.pendingQuestXp!.distributed).toBe(false);
+    // scout-ahead：roomsCleared=2 → 只完成「全队无人阵亡」1 条 → 1 XP
+    expect(c.pendingQuestXp!.xpPerHero).toBe(1);
     expect(c.gamePhase).toBe('quest-result');
     expect(c.lastQuestResult?.outcome).toBe('completed');
+
+    // 回到 Hamlet 后统一发放
+    const h1 = startHamletPhase(c);
+    for (const h of h1.heroes) expect(h.xp).toBe(1);
+    // 发放后挂起项清空，归档到 questXpResults
+    expect(h1.pendingQuestXp).toBeNull();
+    expect(h1.questXpResults).toHaveLength(1);
+    expect(h1.questXpResults[0].distributed).toBe(true);
+    // 幂等：重复进入 Hamlet 不会二次发放
+    expect(startHamletPhase(h1)).toBe(h1);
   });
 
   it('4. Quest 奖励不能重复领取（finishQuest 幂等）', () => {
@@ -216,18 +233,23 @@ describe('Hamlet 建筑与每日行动', () => {
 
   it('11. 每名英雄每天只能行动一次', () => {
     let c = withBlocked(hamletCampaign(), 'blacksmith');
+    c = { ...c, heroes: c.heroes.map((h, i) => (i === 0 ? { ...h, wounds: 2 } : h)) };
     const hero = c.heroes[0];
-    c = visitHamletBuilding(c, hero.instanceId, 'guild');
+    c = visitHamletBuilding(c, hero.instanceId, 'sanitarium');
     expect(c.heroes[0].hasActedToday).toBe(true);
     expect(buildingVisitError(c, hero.instanceId, 'tavern')).toBe('该英雄今天已经行动过');
   });
 
   it('12. Gold 不足时不能访问建筑', () => {
-    let c = withBlocked(hamletCampaign(), 'sanitarium');
-    c = { ...c, gold: 1 };
+    let c = withBlocked(hamletCampaign(), 'blacksmith');
+    c = {
+      ...c,
+      gold: 1,
+      heroes: c.heroes.map((h, i) => (i === 0 ? { ...h, wounds: 2 } : h)),
+    };
     const hero = c.heroes[0];
-    expect(buildingVisitError(c, hero.instanceId, 'guild')).toBe('Gold 不足');
-    expect(visitHamletBuilding(c, hero.instanceId, 'guild')).toBe(c);
+    expect(buildingVisitError(c, hero.instanceId, 'sanitarium')).toBe('Gold 不足');
+    expect(visitHamletBuilding(c, hero.instanceId, 'sanitarium')).toBe(c);
   });
 
   it('13. Sanitarium 治疗不超过 maxHp；HP 已满时不能使用', () => {
@@ -257,12 +279,21 @@ describe('Hamlet 建筑与每日行动', () => {
   });
 
   it('15. 建筑行动后 Gold 正确扣除并写入日志', () => {
+    let c = withBlocked(hamletCampaign(), 'blacksmith');
+    c = { ...c, heroes: c.heroes.map((h, i) => (i === 0 ? { ...h, wounds: 2 } : h)) };
+    const hero = c.heroes[0];
+    const after = visitHamletBuilding(c, hero.instanceId, 'sanitarium');
+    expect(after.gold).toBe(c.gold - 3);
+    expect(after.heroes[0].wounds).toBe(0);
+    expect(after.hamlet.log.some((e) => e.message.includes('Sanitarium'))).toBe(true);
+  });
+
+  it('15b. Phase 8D：Guild / Blacksmith 不能通过无参访问产生消费', () => {
     const c = withBlocked(hamletCampaign(), 'sanitarium');
     const hero = c.heroes[0];
-    const after = visitHamletBuilding(c, hero.instanceId, 'guild');
-    expect(after.gold).toBe(c.gold - 2);
-    expect(after.heroes[0].xp).toBe(c.heroes[0].xp + 1);
-    expect(after.hamlet.log.some((e) => e.message.includes('Guild'))).toBe(true);
+    // 两者都需要专用入口（startGuildVisit / visitBlacksmith），无参访问原样返回
+    expect(visitHamletBuilding(c, hero.instanceId, 'guild')).toBe(c);
+    expect(visitHamletBuilding(c, hero.instanceId, 'blacksmith')).toBe(c);
   });
 
   it('16. 跳过行动：无消费、无效果、标记已行动', () => {
@@ -362,26 +393,42 @@ describe('自动存档与恢复', () => {
 // ---------------------------------------------------------------------------
 
 describe('Blacksmith 与完整任务循环', () => {
-  it('23. Blacksmith 加成只对下一任务生效，任务结算后清零', () => {
+  it('23. Blacksmith 临时 Skill Form 只对下一任务生效，任务结算后失效', () => {
     let c = withBlocked(hamletCampaign(), 'sanitarium');
-    c = visitHamletBuilding(c, c.heroes[0].instanceId, 'blacksmith');
-    expect(c.heroes[0].temporaryDamageBonus).toBe(1);
+    const heroId = c.heroes[0].instanceId;
+    const skillId = c.heroes[0].equippedSkillIds[0];
+    const goldBefore = c.gold;
+
+    c = visitBlacksmith(c, heroId, skillId);
+    // 扣费 + 授予临时 Form，但不写永久等级
+    expect(c.gold).toBe(goldBefore - 5);
+    expect(c.heroes[0].hasActedToday).toBe(true);
+    expect(getActiveSkillFormOverrides(c, heroId).map((o) => o.skillId)).toContain(skillId);
+    expect(getPermanentSkillLevel(c.heroes[0], skillId)).toBe(1);
+    expect(getEffectiveSkillLevel(c, c.heroes[0], skillId)).toBe(2);
+
     for (const h of c.heroes.slice(1)) c = skipHeroAction(c, h.instanceId);
     c = endHamletDay(c);
     for (const h of c.heroes) c = skipHeroAction(c, h.instanceId);
     c = endHamletDay(c);
     expect(c.gamePhase).toBe('quest-select');
-    // 加成带入下一任务的战斗单位
+
+    // Form 带入下一任务
     c = selectQuest(c, 'recover-relic');
-    expect(c.heroes[0].temporaryDamageBonus).toBe(1);
+    expect(getEffectiveSkillLevel(c, c.heroes[0], skillId)).toBe(2);
     const battle = initBattle(c, c.dungeon!.currentRoomId);
-    const unit = battle.battle!.heroes.find(
-      (u) => u.sourceId === c.heroes[0].instanceId
-    )!;
-    expect(unit.damageBonus).toBe(1);
-    // 任务结算后清零，不永久叠加
+    expect(
+      battle.battle!.heroes.find((u) => u.sourceId === heroId)
+    ).toBeTruthy();
+
+    // 任务结算后标记 consumed → 不再生效，也不永久叠加
     const done = finishQuest(withObjective(c), 'left');
-    expect(done.heroes[0].temporaryDamageBonus).toBe(0);
+    expect(getActiveSkillFormOverrides(done, heroId)).toHaveLength(0);
+    expect(getEffectiveSkillLevel(done, done.heroes[0], skillId)).toBe(1);
+    expect(getPermanentSkillLevel(done.heroes[0], skillId)).toBe(1);
+    // 下次进入 Hamlet 时被清理出列表
+    const back = startHamletPhase(done);
+    expect(back.temporarySkillFormOverrides).toHaveLength(0);
   });
 
   it('24. 完整流程可运行两次任务而不发生状态污染', () => {
@@ -390,11 +437,12 @@ describe('Blacksmith 与完整任务循环', () => {
     const firstDungeonRooms = c.dungeon!.rooms.map((r) => r.id).join(',');
     c = finishQuest(withObjective(c), 'left');
     const goldAfterQuest1 = c.gold;
-    const xpAfterQuest1 = c.heroes.map((h) => h.xp);
     expect(c.completedQuestCount).toBe(1);
 
-    // ---- Hamlet ----
+    // ---- Hamlet ----（Phase 8D：Quest XP 在此统一发放）
     c = startHamletPhase(c);
+    const xpAfterQuest1 = c.heroes.map((h) => h.xp);
+    expect(xpAfterQuest1).toEqual([1, 1, 1, 1]);
     c = endTwoDays(c);
     expect(c.gamePhase).toBe('quest-select');
 
