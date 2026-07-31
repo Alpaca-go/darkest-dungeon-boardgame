@@ -23,6 +23,7 @@ import {
   type PassiveModifierApplication,
   type PassiveModifierResult,
 } from './rule-events/passive-collector';
+import { collectThreatPassiveSources } from './threats/threat-passives';
 
 export { heroQuirkIds, resolveQuirkDefs, collectHeroPassiveSources };
 
@@ -89,7 +90,9 @@ export function applyQuirkModifiers(
     campaign.light,
     eventType,
     baseAmount,
-    damageSource
+    damageSource,
+    // Phase 9A：当前 Imminent Threat 作为普通被动来源一并参与修正（§6.4）。
+    collectThreatPassiveSources(campaign, hero)
   );
 }
 

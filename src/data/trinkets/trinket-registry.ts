@@ -14,7 +14,7 @@ import type {
 } from '../../types/trinkets';
 import { VERIFIED_TRINKETS } from './verified-trinkets';
 import { PROTOTYPE_TRINKETS } from './prototype-trinkets';
-import importTemplate from './official-trinket-import-template.json';
+import { OFFICIAL_TRINKET_IMPORT_TEMPLATE_META as importTemplate } from './official-trinket-import-template-meta';
 
 /** 官方核心盒 Trinket 标称总数（规则书）。 */
 export const EXPECTED_CORE_TRINKET_COUNT = 38;
@@ -92,7 +92,7 @@ function checkSide(def: TrinketDefinition, side: TrinketSide, out: string[]): vo
 
 /** 已填写的官方模板槽位数量（filled=true）。 */
 export function filledTemplateSlotCount(): number {
-  const entries = (importTemplate as { entries?: { filled?: boolean }[] }).entries ?? [];
+  const entries = importTemplate.entries ?? [];
   return entries.filter((e) => e.filled === true).length;
 }
 

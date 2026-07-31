@@ -15,6 +15,17 @@ import type {
 } from './progression';
 
 import type {
+  ActiveThreatRuntime,
+  BossBattleState,
+  BossDungeonGenerationRecord,
+  BossQuestState,
+  BossSummonRecord,
+  CampaignAdvanceRecord,
+  CampaignProgressState,
+  InitiativeCard,
+} from './bosses';
+
+import type {
   HeroTrinketState,
   NomadWagonState,
   PendingTrinketAllocation,
@@ -29,6 +40,10 @@ import type {
 export * from './progression';
 // Phase 8C：Trinket 域类型统一从此处再导出，调用方无需区分文件。
 export * from './trinkets';
+// Phase 9A：Boss / Threat / Campaign 进度类型统一从 types 根导出。
+// 说明：bosses.ts 反向 `import type ... from './index'` 构成类型层循环引用，
+// 但纯类型导入在编译期被完全擦除，不会产生运行时循环依赖。
+export * from './bosses';
 
 /** 全局游戏阶段状态机。所有场景切换必须通过此字段完成。 */
 export type GamePhase =
@@ -366,6 +381,23 @@ export interface BattleState {
    * 逐条决定使用/放弃，全部结清后由引擎继续执行该动作。
    */
   pendingAction?: PendingBattleAction | null;
+  // ---- Phase 9A（可选字段；普通战斗不写入，保证既有行为零变化）----
+  /**
+   * Boss 战斗状态。非 null 即 Boss Battle（§11.1）。
+   * 普通战斗恒为 undefined/null，因此旧存档迁移后天然是非 Boss 战。
+   */
+  boss?: BossBattleState | null;
+  /**
+   * 四轮上限开关（§11.3）。缺省视为 true（普通战斗保持四轮上限），
+   * Boss 战初始化时显式写 false。
+   */
+  roundLimitEnabled?: boolean;
+  /** Actor-specific Initiative 牌堆（§12.1；普通战斗为空数组/undefined）。 */
+  initiativeCards?: InitiativeCard[];
+  /** 本轮尚未抽出的卡 id 顺序表；Summon 插卡写入此处（§13.2）。 */
+  initiativeDrawPile?: string[];
+  /** 已结算过的 Initiative Card id（同一张卡不得让 Boss 行动两次，§22）。 */
+  resolvedInitiativeCardIds?: string[];
 }
 
 /** 战斗内排队的规则事件（Phase 8B）。 */
@@ -664,6 +696,25 @@ export interface CampaignState {
   processedTrinketResetKeys: string[];
   /** Nomad Wagon 状态。 */
   nomadWagon: NomadWagonState;
+  // ---- Phase 9A：Campaign Act / Imminent Threat / Face the Threat ----
+  /**
+   * 战役进度权威数据（§5.1）。
+   * 顶层 act / campaignLevel / currentThreatId 保留为只读镜像（旧 UI 与存档兼容），
+   * 一切写入必须经 campaign-progress 引擎，避免两份真相。
+   */
+  campaignProgress: CampaignProgressState;
+  /** 当前 Imminent Threat 运行时（未抽取时为 null，§6.2）。 */
+  activeThreatRuntime: ActiveThreatRuntime | null;
+  /** 当前 Face the Threat Quest 状态（未解锁为 null，§8.3）。 */
+  bossQuestState: BossQuestState | null;
+  /** Boss 地牢生成记录（刷新不得重新随机，§9.3）。 */
+  bossDungeonGeneration: BossDungeonGenerationRecord | null;
+  /** 战役推进历史（幂等 + 调试，§18）。 */
+  campaignAdvanceHistory: CampaignAdvanceRecord[];
+  /** Boss 召唤历史（跨战斗留存，战斗结束后仍可查，§13.4）。 */
+  bossSummonHistory: BossSummonRecord[];
+  /** 已执行的 Boss / Threat 域事务 id（幂等保护，§22；保留最近 200 条）。 */
+  processedBossTransactionIds: string[];
 }
 
 // ---------------------------------------------------------------------------
@@ -1119,8 +1170,17 @@ export type PassiveModifierDefinition = QuirkModifier;
 /** 通用后置反应定义（Quirk / Disease / 未来 Trinket 共用同一结构）。 */
 export type PassiveReactionDefinition = QuirkReaction;
 
-/** 被动来源类型（决定同优先级时的稳定排序）。 */
-export type PassiveSourceType = 'quirk' | 'disease' | 'trinket' | 'room' | 'boss';
+/**
+ * 被动来源类型（决定同优先级时的稳定排序）。
+ * Phase 9A §6.4：Imminent Threat 作为通用被动来源接入，不得在组件里做 id 分支。
+ */
+export type PassiveSourceType =
+  | 'quirk'
+  | 'disease'
+  | 'trinket'
+  | 'room'
+  | 'boss'
+  | 'boss-threat';
 
 /** 一条已解析的被动来源（Passive Collector 输出）。 */
 export interface PassiveSource {

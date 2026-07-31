@@ -31,7 +31,10 @@ import {
   ALL_TRINKETS,
   officialTrinketPool,
   getTrinketById,
+  filledTemplateSlotCount,
 } from '../data/trinkets/trinket-registry';
+import { OFFICIAL_TRINKET_IMPORT_TEMPLATE_META } from '../data/trinkets/official-trinket-import-template-meta';
+import TEMPLATE_RAW from '../data/trinkets/official-trinket-import-template.json?raw';
 import { migrateCampaignToV7, SAVE_VERSION } from './save';
 
 const FOUR_HEROES = ['crusader', 'vestal', 'highwayman', 'hellion'];
@@ -424,5 +427,27 @@ describe('Registry 与数据策略', () => {
     const proto = ALL_TRINKETS.filter((t) => t.dataOrigin === 'prototype');
     expect(proto.length).toBeGreaterThan(0);
     expect(proto.every((t) => !t.enabledInOfficialPool)).toBe(true);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// 九、官方导入模板摘要与 JSON 保持同步（Phase 9A 基线修复）
+//
+// 运行时不再直接 import JSON（Node 22 ESM 需要 import attribute，会让 E2E 加载失败），
+// 改为读取 TS 摘要常量；此测试以 ?raw 方式读入 JSON 原文，确保两者永不漂移。
+// ---------------------------------------------------------------------------
+describe('官方 Trinket 导入模板摘要', () => {
+  it('TS 摘要与 official-trinket-import-template.json 完全一致', () => {
+    const json = JSON.parse(TEMPLATE_RAW) as {
+      $schemaVersion: number;
+      expectedCoreCount: number;
+      filledCount: number;
+      entries: { filled?: boolean }[];
+    };
+    expect(OFFICIAL_TRINKET_IMPORT_TEMPLATE_META.schemaVersion).toBe(json.$schemaVersion);
+    expect(OFFICIAL_TRINKET_IMPORT_TEMPLATE_META.expectedCoreCount).toBe(json.expectedCoreCount);
+    expect(OFFICIAL_TRINKET_IMPORT_TEMPLATE_META.totalSlots).toBe(json.entries.length);
+    expect(filledTemplateSlotCount()).toBe(json.entries.filter((e) => e.filled === true).length);
+    expect(filledTemplateSlotCount()).toBe(json.filledCount);
   });
 });

@@ -12,6 +12,7 @@ import { createInitialXpState } from './progression/xp-ledger';
 import { getHeroSkillSlots } from './progression/upgrade-core';
 import { refreshObjectiveProgress } from './progression/quest-objectives';
 import { createInitialNomadWagonState } from './trinkets/trinket-state';
+import { createInitialCampaignProgress } from './campaign/campaign-progress';
 
 /** Phase 1 初始补给池默认值（后续阶段可由 Provision Dice 生成替换）。 */
 export const DEFAULT_PROVISIONS: ProvisionPool = {
@@ -30,7 +31,7 @@ export const DEFAULT_PROVISIONS: ProvisionPool = {
 export function createNewCampaign(): CampaignState {
   const now = nowIso();
   return {
-    saveVersion: SAVE_VERSION, // v7 = Phase 8C + 8D（Trinket + XP/Leveling/Guild）
+    saveVersion: SAVE_VERSION, // v8 = Phase 9A（Boss / Imminent Threat / Face the Threat）
     id: createId('cmp'),
     createdAt: now,
     updatedAt: now,
@@ -105,6 +106,16 @@ export function createNewCampaign(): CampaignState {
     processedTrinketEventIds: [],
     processedTrinketResetKeys: [],
     nomadWagon: createInitialNomadWagonState(),
+    // ---- Phase 9A ----
+    // 新战役从 Act I / Level I 开始；Threat 不在此处抽取（UI 不生成随机数），
+    // 由 act-start 事务在进入战役后抽一次并保存（§7.2 / 核心约束 1、2）。
+    campaignProgress: createInitialCampaignProgress({ act: 1, campaignLevel: 1, now }),
+    activeThreatRuntime: null,
+    bossQuestState: null,
+    bossDungeonGeneration: null,
+    campaignAdvanceHistory: [],
+    bossSummonHistory: [],
+    processedBossTransactionIds: [],
   };
 }
 

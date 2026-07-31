@@ -1,6 +1,11 @@
 import type {
+  ActiveThreatRuntime,
   BattleState,
   BattleUnit,
+  BossBattleState,
+  BossDungeonGenerationRecord,
+  BossQuestState,
+  CampaignProgressState,
   CampaignState,
   DungeonState,
   GamePhase,
@@ -22,6 +27,7 @@ import { QUIRK_CAP } from './quirks';
 import { getTrinketById } from '../data/trinkets/trinket-registry';
 import { createInitialNomadWagonState } from './trinkets/trinket-state';
 import { getTrinketCapacity } from './trinkets/capacity';
+import { createInitialCampaignProgress } from './campaign/campaign-progress';
 
 // ---------------------------------------------------------------------------
 // 存档格式（Phase 6 升级为 v3 SaveFile）
@@ -35,9 +41,10 @@ export const STORAGE_KEY = 'dd-web-prototype-save-v1';
  * v3 = Phase 6（死亡/Stagecoach），v4 = Phase 7（Stress/Resolve/Affliction/Virtue/Heart Attack），
  * v5 = Phase 8A（Quirk 引擎：真实 Quirk id / 上限 3 / pendingQuirkDecisions），
  * v6 = Phase 8B（Disease / Sanitarium 移除 / Curio / 战斗外 Bleed-Blight 累积），
- * v7 = Phase 8C + 8D（Trinket + Quest XP / Hero Level / Skill Level / Guild）。
+ * v7 = Phase 8C + 8D（Trinket + Quest XP / Hero Level / Skill Level / Guild），
+ * v8 = Phase 9A（Campaign Progress / Imminent Threat / Face the Threat / Boss Battle）。
  */
-export const SAVE_VERSION = 7;
+export const SAVE_VERSION = 8;
 
 /**
  * v2 存档文件结构。
@@ -63,7 +70,7 @@ interface SaveEnvelopeV1 {
 }
 
 /** 可被迁移到当前版本的历史存档版本号。 */
-const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6];
+const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6, 7];
 
 /** 读档结果：区分正常 / 无存档 / 损坏 / 版本不支持。 */
 export type LoadStatus = 'ok' | 'empty' | 'corrupt' | 'unsupported';
@@ -246,6 +253,36 @@ export function validateSaveFile(data: unknown): string | null {
   if (!Array.isArray(c.processedTrinketEventIds)) return 'campaign.processedTrinketEventIds 缺失或不是数组';
   if (!Array.isArray(c.processedTrinketResetKeys)) return 'campaign.processedTrinketResetKeys 缺失或不是数组';
   if (!c.nomadWagon || typeof c.nomadWagon !== 'object') return 'campaign.nomadWagon 缺失';
+  // Phase 9A：Campaign Progress / Boss 域结构校验（迁移后必然存在）
+  const cp = c.campaignProgress;
+  if (!cp || typeof cp !== 'object') return 'campaign.campaignProgress 缺失';
+  if (cp.act !== 1 && cp.act !== 2 && cp.act !== 3 && cp.act !== 4) {
+    return `campaign.campaignProgress.act 非法：${String(cp.act)}`;
+  }
+  if (cp.campaignLevel !== 1 && cp.campaignLevel !== 2 && cp.campaignLevel !== 3) {
+    return `campaign.campaignProgress.campaignLevel 非法：${String(cp.campaignLevel)}`;
+  }
+  if (
+    typeof cp.completedStandardQuestsThisAct !== 'number' ||
+    cp.completedStandardQuestsThisAct < 0
+  ) {
+    return 'campaign.campaignProgress.completedStandardQuestsThisAct 非法';
+  }
+  if (!Array.isArray(cp.defeatedThreatIds) || !Array.isArray(cp.defeatedBossFamilyIds)) {
+    return 'campaign.campaignProgress 的已击败列表不是数组';
+  }
+  if (!Array.isArray(cp.actStartTransactionIds)) {
+    return 'campaign.campaignProgress.actStartTransactionIds 不是数组';
+  }
+  if (!Array.isArray(c.campaignAdvanceHistory)) return 'campaign.campaignAdvanceHistory 不是数组';
+  if (!Array.isArray(c.bossSummonHistory)) return 'campaign.bossSummonHistory 不是数组';
+  if (!Array.isArray(c.processedBossTransactionIds)) {
+    return 'campaign.processedBossTransactionIds 不是数组';
+  }
+  // Boss Quest 与 Boss 地牢生成记录必须互相自洽（损坏时由 sanitize 兜底，不白屏）
+  if (c.bossDungeonGeneration && typeof c.bossDungeonGeneration.objectiveRoomId !== 'string') {
+    return 'campaign.bossDungeonGeneration.objectiveRoomId 非法';
+  }
 
   // 阶段相关引用完整性
   if (c.gamePhase === 'dungeon-explore' || c.gamePhase === 'battle') {
@@ -870,33 +907,169 @@ export function migrateCampaignToV7(campaign: CampaignState): CampaignState {
   };
 }
 
-/** 将战役迁移到当前最新版本（v3→v4→v5→v6→v7 = 8C+8D）。 */
+/**
+ * Phase 9A 战役字段迁移（v7 → v8）：
+ * - 补 campaignProgress。已有 campaignLevel 时按 §20.4 clamp 1-3、由 Level 推导 Act，
+ *   并置 pendingThreatInitialization=true —— 迁移过程绝不自动抽 Threat（抽取必须走事务）；
+ * - 补 activeThreatRuntime / bossQuestState / bossDungeonGeneration /
+ *   campaignAdvanceHistory / bossSummonHistory / processedBossTransactionIds；
+ * - §20.5：进行中的旧 Battle 一律补 boss=null、roundLimitEnabled=true，
+ *   绝不把旧战斗误判成 Boss Battle；
+ * - §20.6：旧战斗没有 Actor-specific Initiative Card，initiativeCards 保持空数组
+ *   （= legacy 顺序模式，继续用 initiativeOrder 结算），不在迁移里随机重建当前轮。
+ */
+export function migrateCampaignToV8(campaign: CampaignState): CampaignState {
+  const anyC = campaign as CampaignState & Record<string, unknown>;
+
+  const rawProgress = anyC.campaignProgress as Partial<CampaignProgressState> | undefined;
+  const hasProgress =
+    !!rawProgress && typeof rawProgress === 'object' && typeof rawProgress.act === 'number';
+  const progress: CampaignProgressState = hasProgress
+    ? sanitizeCampaignProgress(rawProgress as CampaignProgressState)
+    : createInitialCampaignProgress({
+        // §20.4：旧存档只有顶层 campaignLevel，Act 由 Level 推导。
+        campaignLevel: anyC.campaignLevel,
+        now: typeof anyC.createdAt === 'string' ? anyC.createdAt : undefined,
+        pendingThreatInitialization: true,
+      });
+
+  // ---- §20.5 / §20.6：Battle 迁移 ----
+  let battle = campaign.battle;
+  if (battle) {
+    const anyB = battle as BattleState & Record<string, unknown>;
+    const needsBattleFields =
+      anyB.boss === undefined ||
+      typeof anyB.roundLimitEnabled !== 'boolean' ||
+      !Array.isArray(anyB.initiativeCards) ||
+      !Array.isArray(anyB.initiativeDrawPile) ||
+      !Array.isArray(anyB.resolvedInitiativeCardIds);
+    if (needsBattleFields) {
+      battle = {
+        ...battle,
+        boss: (anyB.boss as BossBattleState | null | undefined) ?? null,
+        roundLimitEnabled:
+          typeof anyB.roundLimitEnabled === 'boolean' ? anyB.roundLimitEnabled : true,
+        initiativeCards: Array.isArray(anyB.initiativeCards) ? battle.initiativeCards : [],
+        initiativeDrawPile: Array.isArray(anyB.initiativeDrawPile) ? battle.initiativeDrawPile : [],
+        resolvedInitiativeCardIds: Array.isArray(anyB.resolvedInitiativeCardIds)
+          ? battle.resolvedInitiativeCardIds
+          : [],
+      };
+    }
+  }
+
+  const needsCampaignFields =
+    !hasProgress ||
+    anyC.activeThreatRuntime === undefined ||
+    anyC.bossQuestState === undefined ||
+    anyC.bossDungeonGeneration === undefined ||
+    !Array.isArray(anyC.campaignAdvanceHistory) ||
+    !Array.isArray(anyC.bossSummonHistory) ||
+    !Array.isArray(anyC.processedBossTransactionIds);
+
+  const progressUnchanged =
+    hasProgress && JSON.stringify(progress) === JSON.stringify(rawProgress);
+  if (
+    !needsCampaignFields &&
+    battle === campaign.battle &&
+    progressUnchanged &&
+    campaign.saveVersion === SAVE_VERSION
+  ) {
+    return campaign;
+  }
+
+  return {
+    ...campaign,
+    saveVersion: SAVE_VERSION,
+    battle,
+    // 顶层 act / campaignLevel / currentThreatId 作为 campaignProgress 的只读镜像同步，
+    // 保证旧 UI 与新引擎读到同一份真相。
+    act: progress.act,
+    campaignLevel: progress.campaignLevel,
+    currentThreatId: progress.activeThreatId,
+    campaignProgress: progress,
+    activeThreatRuntime:
+      (anyC.activeThreatRuntime as ActiveThreatRuntime | null | undefined) ?? null,
+    bossQuestState: (anyC.bossQuestState as BossQuestState | null | undefined) ?? null,
+    bossDungeonGeneration:
+      (anyC.bossDungeonGeneration as BossDungeonGenerationRecord | null | undefined) ?? null,
+    campaignAdvanceHistory: Array.isArray(anyC.campaignAdvanceHistory)
+      ? campaign.campaignAdvanceHistory
+      : [],
+    bossSummonHistory: Array.isArray(anyC.bossSummonHistory) ? campaign.bossSummonHistory : [],
+    processedBossTransactionIds: Array.isArray(anyC.processedBossTransactionIds)
+      ? campaign.processedBossTransactionIds
+      : [],
+  };
+}
+
+/** 净化已存在的 campaignProgress（补缺字段 / clamp / 去掉非法类型），不重新随机。 */
+function sanitizeCampaignProgress(raw: CampaignProgressState): CampaignProgressState {
+  const base = createInitialCampaignProgress({
+    act: raw.act,
+    campaignLevel: raw.campaignLevel,
+    now: typeof raw.currentActStartedAt === 'string' ? raw.currentActStartedAt : undefined,
+    pendingThreatInitialization: raw.pendingThreatInitialization !== false,
+  });
+  const strArray = (v: unknown): string[] =>
+    Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string') : [];
+  return {
+    ...base,
+    activeThreatId: typeof raw.activeThreatId === 'string' ? raw.activeThreatId : null,
+    activeBossDefinitionId:
+      typeof raw.activeBossDefinitionId === 'string' ? raw.activeBossDefinitionId : null,
+    activeBossFamilyId: typeof raw.activeBossFamilyId === 'string' ? raw.activeBossFamilyId : null,
+    completedStandardQuestsThisAct:
+      typeof raw.completedStandardQuestsThisAct === 'number' &&
+      raw.completedStandardQuestsThisAct >= 0
+        ? Math.floor(raw.completedStandardQuestsThisAct)
+        : 0,
+    bossQuestUnlocked: raw.bossQuestUnlocked === true,
+    bossQuestRequired: raw.bossQuestRequired === true,
+    bossQuestCompletedThisAct: raw.bossQuestCompletedThisAct === true,
+    defeatedThreatIds: strArray(raw.defeatedThreatIds),
+    defeatedBossFamilyIds: strArray(raw.defeatedBossFamilyIds),
+    darkestDungeonUnlocked: raw.darkestDungeonUnlocked === true,
+    lastCampaignAdvanceTransactionId:
+      typeof raw.lastCampaignAdvanceTransactionId === 'string'
+        ? raw.lastCampaignAdvanceTransactionId
+        : null,
+    // 已有 activeThreatId 时不可能仍处于「待初始化」。
+    pendingThreatInitialization:
+      typeof raw.activeThreatId === 'string' ? false : raw.pendingThreatInitialization !== false,
+    actStartTransactionIds: strArray(raw.actStartTransactionIds),
+  };
+}
+
+/** 将战役迁移到当前最新版本（v3→v4→v5→v6→v7→v8 = Phase 9A）。 */
 export function migrateCampaignToLatest(campaign: CampaignState): CampaignState {
-  return migrateCampaignToV7(
-    migrateCampaignToV6(migrateCampaignToV5(migrateCampaignToV4(migrateCampaignToV3(campaign)))),
+  return migrateCampaignToV8(
+    migrateCampaignToV7(
+      migrateCampaignToV6(migrateCampaignToV5(migrateCampaignToV4(migrateCampaignToV3(campaign)))),
+    ),
   );
 }
 
 /**
  * 迁移旧版本存档到当前版本。无法迁移时返回 null。
  * v1（SaveEnvelope）→ v2（SaveFile）→ v3（Phase 6）→ v4（Phase 7）→ v5（Phase 8A Quirk）
- * → v6（Phase 8B Disease）→ v7（Phase 8C Trinket）。
+ * → v6（Phase 8B Disease）→ v7（Phase 8C Trinket + 8D XP）→ v8（Phase 9A Boss / Threat）。
  */
 export function migrateSaveFile(raw: unknown): SaveFile | null {
   if (!raw || typeof raw !== 'object') return null;
   const anyRaw = raw as Record<string, unknown>;
 
-  // 已是 v7（当前版本）
+  // 已是 v8（当前版本）
   if (typeof anyRaw.version === 'number' && anyRaw.version === SAVE_VERSION) {
     const file = raw as SaveFile;
     // campaign 缺失或非对象 → 无法迁移（调用方回退为「无法识别的存档结构」）
     if (!file.campaign || typeof file.campaign !== 'object') return null;
-    // 保险：即使 version=7 也补齐缺失字段（防手工编辑的存档）
+    // 保险：即使 version=8 也补齐缺失字段（防手工编辑的存档）
     const campaign = migrateCampaignToLatest(file.campaign);
     return campaign === file.campaign ? file : { ...createSaveSnapshot(campaign), savedAt: file.savedAt };
   }
 
-  // v2 / v3 / v4 / v5 / v6：{ version: 2|3|4|5|6, savedAt, campaign, ... }
+  // v2..v7：{ version: 2|3|4|5|6|7, savedAt, campaign, ... }
   if (
     typeof anyRaw.version === 'number' &&
     LEGACY_SAVE_VERSIONS.includes(anyRaw.version) &&

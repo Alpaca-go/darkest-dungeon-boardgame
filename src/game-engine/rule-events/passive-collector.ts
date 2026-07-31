@@ -76,13 +76,19 @@ function diseaseSource(
 export function collectPassiveSourcesRaw(
   quirkIds: readonly string[],
   disease: { diseaseId: string | null | undefined; instanceId: string | null | undefined },
-  ownerHeroId: string
+  ownerHeroId: string,
+  /**
+   * Phase 9A：额外被动来源（当前用于 Imminent Threat）。
+   * 由调用方在战役层解析后传入，收集器本身不认识任何具体来源类型。
+   */
+  extraSources: readonly PassiveSource[] = []
 ): PassiveSource[] {
   const sources: PassiveSource[] = resolveQuirkDefs(quirkIds).map((d) => quirkSource(d, ownerHeroId));
   const def = getDiseaseById(disease.diseaseId);
   if (def) {
     sources.push(diseaseSource(def, disease.instanceId ?? def.id, ownerHeroId));
   }
+  for (const extra of extraSources) sources.push(extra);
   return sortPassiveSources(sources);
 }
 
@@ -102,8 +108,14 @@ export function collectHeroPassiveSources(hero: HeroInstance): PassiveSource[] {
 /** 单条修正命中明细（日志 / 测试断言用）。 */
 export interface PassiveModifierApplication {
   sourceType: PassiveSource['sourceType'];
-  /** 定义 id（Quirk id / Disease id）。 */
+  /** 定义 id（Quirk id / Disease id / Threat id）。 */
   quirkId: string;
+  /**
+   * Phase 9A：来源实例 id。
+   * Threat 效果的实例 id 形如 `${threatId}:${effectKey}`，
+   * 供「每次 Hamlet 只生效一次」的消耗记录定位到具体效果。
+   */
+  instanceId: string;
   /** 展示名。 */
   quirkName: string;
   delta: number;
@@ -140,11 +152,12 @@ export function applyPassiveModifiersRaw(
   light: number,
   eventType: RuleEventType,
   baseAmount: number,
-  damageSource?: RuleDamageSource
+  damageSource?: RuleDamageSource,
+  extraSources: readonly PassiveSource[] = []
 ): PassiveModifierResult {
   const applied: PassiveModifierApplication[] = [];
   let amount = baseAmount;
-  for (const src of collectPassiveSourcesRaw(quirkIds, disease, '')) {
+  for (const src of collectPassiveSourcesRaw(quirkIds, disease, '', extraSources)) {
     for (const m of src.modifiers) {
       if (m.eventType !== eventType) continue;
       if (!passiveConditionMet(m.condition, light, damageSource)) continue;
@@ -152,6 +165,7 @@ export function applyPassiveModifiersRaw(
       applied.push({
         sourceType: src.sourceType,
         quirkId: src.definitionId,
+        instanceId: src.instanceId,
         quirkName: src.name,
         delta: m.flatDelta,
       });

@@ -45,12 +45,18 @@ export default function HamletHeroCard({
       ].join(' ')}
       data-testid={`hamlet-hero-${hero.instanceId}`}
     >
+      {/*
+        选中入口是这颗内层按钮，而不是外层卡片 div。外层 div 还包含 TrinketSlots /
+        「跳过」按钮等无选中语义的区域，点它们不应改变选中态。E2E 请始终定位
+        `hero-select-*`，不要点外层 `hamlet-hero-*`（其几何中心并不在本按钮内）。
+      */}
       <button
         type="button"
         className="w-full text-left disabled:cursor-not-allowed"
         onClick={onSelect}
         disabled={dead || hero.hasActedToday}
         title={dead ? '已阵亡' : hero.hasActedToday ? '今天已行动' : '选中后点击建筑访问'}
+        data-testid={`hero-select-${hero.instanceId}`}
       >
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded shrink-0" style={{ background: color }} aria-hidden />

@@ -173,6 +173,19 @@ async function heroXp(page: Page, instanceId: string): Promise<number> {
 }
 
 /**
+ * 点击英雄卡的「选中」按钮。
+ *
+ * 注意：`hamlet-hero-*` 是外层容器 div，选中处理器挂在内层按钮上，其余区域
+ * （TrinketSlots / 跳过按钮）没有选中语义。自 Phase 8C 插入 TrinketSlots 后，
+ * 外层 div 的几何中心已落到按钮下方，直接 `card.click()` 会命中后代元素 —— 
+ * Playwright 的 hit-target 检查因此通过、不报错，但选中态压根没建立（静默失效）。
+ * 所以这里必须显式点 `hero-select-*`。
+ */
+async function toggleHeroSelect(card: Locator) {
+  await card.locator('[data-testid^="hero-select-"]').click();
+}
+
+/**
  * 在 Hamlet 中选出一名「能进入指定建筑」的英雄并返回其卡片定位器。
  * 建筑可用性取决于当前选中英雄（Gold、是否已行动、Caretaker 阻塞、技能可强化等），
  * 因此逐个英雄试选，选中后建筑按钮可用即返回。
@@ -184,12 +197,12 @@ async function selectHeroForBuilding(page: Page, buildingId: string): Promise<Lo
   const reasons: string[] = [];
   for (let i = 0; i < n; i += 1) {
     const hero = heroCards.nth(i);
-    await hero.click();
+    await toggleHeroSelect(hero);
     await page.waitForTimeout(120);
     if (await card.isEnabled()) return hero;
     reasons.push((await card.getAttribute('title')) ?? '未知原因');
     // 取消选中，避免影响下一次点击
-    await hero.click();
+    await toggleHeroSelect(hero);
     await page.waitForTimeout(80);
   }
   throw new Error(`没有英雄可进入建筑 ${buildingId}；原因：${reasons.join(' | ')}`);
@@ -296,7 +309,7 @@ test('2. Hero Level：Guild 升级英雄等级 → XP/Gold 扣除 → 刷新保�
   expect(levelBefore).toBe('I');
 
   // 选中英雄 → 访问 Guild
-  await firstCard.click();
+  await toggleHeroSelect(firstCard);
   await page.getByTestId('building-guild').click();
   await expect(page.getByTestId('guild-modal')).toBeVisible();
 
@@ -334,7 +347,7 @@ test('3. Skill Level：Guild 升级技能 → 待提交记录 → 提交成功',
   await completeQuestToHamlet(page, 'Scout Ahead');
 
   const firstCard = page.locator('[data-testid^="hamlet-hero-"]').first();
-  await firstCard.click();
+  await toggleHeroSelect(firstCard);
   await page.getByTestId('building-guild').click();
   await expect(page.getByTestId('guild-modal')).toBeVisible();
 
@@ -362,7 +375,7 @@ test('4. 两次升级：Hero + Skill 一次确认 → 英雄当天行动结束',
   await completeQuestToHamlet(page, 'Scout Ahead');
 
   const firstCard = page.locator('[data-testid^="hamlet-hero-"]').first();
-  await firstCard.click();
+  await toggleHeroSelect(firstCard);
   await page.getByTestId('building-guild').click();
   await expect(page.getByTestId('guild-modal')).toBeVisible();
 
@@ -393,7 +406,7 @@ test('5. 升级次数上限：单会话最多 2 次，第三次被阻止', async
   await completeQuestToHamlet(page, 'Scout Ahead');
 
   const firstCard = page.locator('[data-testid^="hamlet-hero-"]').first();
-  await firstCard.click();
+  await toggleHeroSelect(firstCard);
   await page.getByTestId('building-guild').click();
   await expect(page.getByTestId('guild-modal')).toBeVisible();
 
@@ -425,7 +438,7 @@ test('6. Trinket Capacity 联动：等级提升 → 容量由等级派生', asyn
   const heroId = (await firstCard.getAttribute('data-testid'))!.replace('hamlet-hero-', '');
   expect(await heroLevelText(page, heroId)).toBe('I'); // Level 1 → 容量 1
 
-  await firstCard.click();
+  await toggleHeroSelect(firstCard);
   await page.getByTestId('building-guild').click();
   await expect(page.getByTestId('guild-modal')).toBeVisible();
   const heroBtn = page.getByTestId('guild-upgrade-hero-level');
@@ -518,7 +531,7 @@ test('8. Blacksmith：临时 Skill Form → 永久等级不变 → 关闭恢复'
   await page.getByTestId('blacksmith-cancel').click();
   await expect(page.getByTestId('blacksmith-modal')).toHaveCount(0);
   // 取消会清空英雄选中态；重新选中后建筑仍可访问（英雄未被标记已行动、建筑未被占用）
-  await heroCard.click();
+  await toggleHeroSelect(heroCard);
   await expect(building).toBeEnabled();
 
   // 再次打开并购买一个临时 Form
@@ -536,8 +549,10 @@ test('8. Blacksmith：临时 Skill Form → 永久等级不变 → 关闭恢复'
   await expect(log).toContainText('获得临时 Form');
   await expect(log).toContainText('永久等级仍为');
 
-  // 重新选中该英雄：当天已行动 + 建筑已占用 → 不可再次访问
-  await heroCard.click();
+  // 重新选中该英雄：当天已行动 + 建筑已占用 → 不可再次访问。
+  // 此时选中按钮自身已 disabled（点击会被 Playwright 一直重试直到超时），
+  // 因此这里直接断言「不可再选中」+「建筑不可进入」两件事。
+  await expect(heroCard.locator('[data-testid^="hero-select-"]')).toBeDisabled();
   await expect(building).toBeDisabled();
 });
 

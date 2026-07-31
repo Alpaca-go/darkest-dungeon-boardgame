@@ -28,7 +28,10 @@ import type {
   RuleEventType,
 } from '../types';
 import { getQuirkById } from '../data/quirks';
-import { collectHeroPassiveSources, passiveConditionMet } from './rule-events/passive-collector';
+import { passiveConditionMet } from './rule-events/passive-collector';
+import {
+  collectCampaignPassiveSources,
+} from './threats/threat-passives';
 import { passiveTriggerKey } from './rule-events/passive-ordering';
 import { applyStress, recoverStress } from './stress';
 import { resolveDamage } from './damage';
@@ -284,7 +287,8 @@ export function emitRuleEvent(
 
   let next = campaign;
   // Phase 8B：Quirk + Disease 统一收集并稳定排序（priority → sourceType → instanceId）
-  for (const src of collectHeroPassiveSources(hero)) {
+  // Phase 9A：当前 Imminent Threat 的反应作为同一批被动来源一并参与（§6.4）
+  for (const src of collectCampaignPassiveSources(campaign, hero)) {
     // 死亡短路：任一被动导致永久死亡后，停止该英雄剩余被动
     const alive = next.heroes.find((h) => h.instanceId === hero.instanceId);
     if (!alive || alive.dead) break;

@@ -2,7 +2,7 @@
 //
 // 排序：
 //   1. priority 数值从小到大；
-//   2. sourceType：quirk → disease → trinket → room → boss；
+//   2. sourceType：quirk → disease → trinket → room → boss → boss-threat；
 //   3. instanceId 字典序。
 // （phase：pre-modifier / post-reaction 由调用方分两次遍历，天然分层。）
 //
@@ -18,6 +18,8 @@ const SOURCE_TYPE_ORDER: Record<PassiveSourceType, number> = {
   trinket: 2,
   room: 3,
   boss: 4,
+  // Phase 9A：Imminent Threat 排在最后，保证「先算英雄自身被动，再叠 Threat 全局影响」。
+  'boss-threat': 5,
 };
 
 /** 稳定排序比较器。 */
