@@ -6,6 +6,7 @@ import { ALL_QUIRKS, getQuirkById } from '../../data/quirks';
 import { ALL_DISEASES, getDiseaseById } from '../../data/diseases';
 import { QUIRK_CAP } from '../../game-engine/quirks';
 import { ALL_TRINKETS, validateTrinketRegistry } from '../../data/trinkets/trinket-registry';
+import FanaticPyreDebugSection from './FanaticPyreDebugSection';
 
 /**
  * 开发调试面板：仅在开发环境（import.meta.env.DEV）渲染。
@@ -52,7 +53,7 @@ export default function DebugPanel() {
   return (
     <div className="fixed bottom-3 right-3 z-50 text-xs" data-testid="debug-panel">
       {open ? (
-        <div className="w-64 rounded-md border border-dd-border bg-dd-panel shadow-xl p-3">
+        <div className="w-64 max-h-[calc(100vh-1.5rem)] overflow-y-auto rounded-md border border-dd-border bg-dd-panel shadow-xl p-3">
           <div className="flex items-center justify-between mb-2">
             <span className="font-bold text-dd-text">Debug</span>
             <button onClick={() => setOpen(false)} className="text-dd-muted hover:text-dd-text">
@@ -246,6 +247,7 @@ export default function DebugPanel() {
               </div>
             </div>
           )}
+          <FanaticPyreDebugSection />
           <div className="flex flex-wrap gap-1.5">
             <button onClick={copySummary} className="px-2 py-1 rounded bg-dd-panel2 border border-dd-border text-dd-muted hover:text-dd-text">
               复制摘要

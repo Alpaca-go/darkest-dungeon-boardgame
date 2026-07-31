@@ -49,8 +49,12 @@ export const STORAGE_KEY = 'dd-web-prototype-save-v1';
  * v10 = Phase 9D（Collector / Collected Heroes / Linked Summon Group：collectorBattleRuntime /
  *      linkedSummonGroups / collectedActorSnapshots / collectorLootChestStates /
  *      collectorSummonHistory / collectorDataAudit / activeBossDefinitionSnapshot）。
+ * v11 = Phase 9E（Fanatic / Pyre / 强制抓取-囚禁：fanaticBattleRuntime / captiveActorStates /
+ *      fanaticPreludeHistory / closestHeroSelectionHistory / throwIntoPyreHistory /
+ *      pyreActionHistory / fanaticDataAudit / activeBossDefinitionSnapshot）。
+ *      迁移只补字段、不重放战斗；快照/迁移函数在 game-engine/fanatic/runtime.ts。
  */
-export const SAVE_VERSION = 10;
+export const SAVE_VERSION = 11;
 
 /**
  * v2 存档文件结构。
@@ -76,7 +80,7 @@ interface SaveEnvelopeV1 {
 }
 
 /** 可被迁移到当前版本的历史存档版本号。 */
-const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 /** 读档结果：区分正常 / 无存档 / 损坏 / 版本不支持。 */
 export type LoadStatus = 'ok' | 'empty' | 'corrupt' | 'unsupported';
