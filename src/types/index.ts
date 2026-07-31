@@ -14,8 +14,21 @@ import type {
   TemporarySkillFormOverride,
 } from './progression';
 
+import type {
+  HeroTrinketState,
+  NomadWagonState,
+  PendingTrinketAllocation,
+  PendingTrinketUseTransaction,
+  TrinketAcquisitionRecord,
+  TrinketTransferRecord,
+  TrinketUseOpportunity,
+  TrinketUseRecord,
+} from './trinkets';
+
 // Phase 8D：成长系统类型统一从 types 根导出，调用方无需感知文件拆分。
 export * from './progression';
+// Phase 8C：Trinket 域类型统一从此处再导出，调用方无需区分文件。
+export * from './trinkets';
 
 /** 全局游戏阶段状态机。所有场景切换必须通过此字段完成。 */
 export type GamePhase =
@@ -135,6 +148,12 @@ export interface HeroInstance {
    * 由 xp-ledger 统一维护，任何业务代码都不得直接赋值。
    */
   xpState: HeroXpState;
+  // ---- Phase 8C：Trinket ----
+  /**
+   * 已装备的 Trinket（容量 = 英雄等级，见 game-engine/trinkets/capacity.ts）。
+   * 不存在「未装备仓库」：任何超容量的 Trinket 只能被丢弃或转移。
+   */
+  equippedTrinkets: HeroTrinketState[];
 }
 
 /** 地牢房间类型。 */
@@ -266,6 +285,27 @@ export interface BattleUnit {
   resistances?: HeroResistanceProfile;
   /** 由 Hero Level Registry 派生的免疫状态列表（如 'stun'）。 */
   immunities?: string[];
+  // ---- Phase 8C：Trinket 快照（仅英雄；获取/翻面等权威状态始终在战役英雄上） ----
+  /** 该英雄已装备 Trinket 的实例 id（战斗内查找开窗机会用）。 */
+  equippedTrinketInstanceIds?: string[];
+}
+
+/**
+ * Phase 8C：等待 Trinket 开窗决策的战斗动作。
+ * 使用窗口（如 before-attack-roll）会中断技能结算：先把意图冻结在此，
+ * 玩家决定使用/放弃后再由引擎执行，UI 全程不产生随机数（核心约束 2）。
+ */
+export interface PendingBattleAction {
+  kind: 'hero-skill';
+  actorUnitId: string;
+  skillId: string;
+  targetId: string;
+  /** Trinket 累计的命中修正。 */
+  accuracyBonus: number;
+  /** Trinket 累计的暴击阈值修正（crit 判定为 roll >= 10 - critBonus）。 */
+  critBonus: number;
+  /** Trinket 累计的伤害修正。 */
+  damageBonus: number;
 }
 
 /** Phase 7：战斗内产生的待处理压力事件（store 层路由到统一 stress 管线）。 */
@@ -319,6 +359,13 @@ export interface BattleState {
   pendingRuleEvents?: BattleRuleEvent[];
   /** 战斗内待结算的感染（processBattleDiseaseInfections 消费后清空）。 */
   pendingDiseaseInfections?: BattleDiseaseInfection[];
+  // ---- Phase 8C（可选字段，兼容旧存档与测试 fixture）----
+  /**
+   * 被 Trinket 使用窗口冻结的战斗动作。
+   * 非 null 时战斗暂停，等待玩家在 campaign.pendingTrinketUseOpportunities 中
+   * 逐条决定使用/放弃，全部结清后由引擎继续执行该动作。
+   */
+  pendingAction?: PendingBattleAction | null;
 }
 
 /** 战斗内排队的规则事件（Phase 8B）。 */
@@ -399,6 +446,7 @@ export type HeroDeathCause =
   | 'deathblow-periodic'
   | 'deathblow-trap'
   | 'deathblow-exploration'
+  | 'deathblow-trinket'
   | 'heart-attack'
   | 'madness'
   | 'unknown';
@@ -481,7 +529,9 @@ export interface DamageCommand {
     | 'blight'
     | 'periodic-batch'
     | 'trap'
-    | 'exploration';
+    | 'exploration'
+    /** Phase 8C：Trinket 负面效果对自身造成的伤害。 */
+    | 'trinket';
   sourceActorId?: string;
   sourceSkillId?: string;
   eventId: string;
@@ -595,6 +645,25 @@ export interface CampaignState {
   replacementUpgradeSession: ReplacementUpgradeSession | null;
   /** Blacksmith 临时 Skill Form 覆盖（只影响下一次任务，不改永久等级）。 */
   temporarySkillFormOverrides: TemporarySkillFormOverride[];
+  // ---- Phase 8C：Trinket / Nomad Wagon ----
+  /** 待分配的 Trinket 队列（先进先出；含死亡转移，刷新可恢复）。 */
+  pendingTrinketAllocations: PendingTrinketAllocation[];
+  /** 当前开放中的 Trinket 使用机会（同一窗口可能同时开多张卡）。 */
+  pendingTrinketUseOpportunities: TrinketUseOpportunity[];
+  /** 进行中的 Trinket 使用事务（防同一次使用重复结算 / 重复翻面）。 */
+  pendingTrinketUseTransaction: PendingTrinketUseTransaction | null;
+  /** Trinket 获取记录（永久保存）。 */
+  trinketAcquisitionRecords: TrinketAcquisitionRecord[];
+  /** Trinket 使用记录（永久保存，保留最近 200 条）。 */
+  trinketUseRecords: TrinketUseRecord[];
+  /** Trinket 转移 / 丢弃 / 买卖记录（永久保存，保留最近 200 条）。 */
+  trinketTransferRecords: TrinketTransferRecord[];
+  /** 已处理的 Trinket 来源事件 id（幂等保护，保留最近 200 条）。 */
+  processedTrinketEventIds: string[];
+  /** 已执行的返回 Hamlet 正面重置幂等键（questId + returnTransactionId）。 */
+  processedTrinketResetKeys: string[];
+  /** Nomad Wagon 状态。 */
+  nomadWagon: NomadWagonState;
 }
 
 // ---------------------------------------------------------------------------
@@ -843,6 +912,8 @@ export type MentalEventSourceType =
   | 'hamlet-event'
   | 'resolve-effect'
   | 'quirk'
+  /** Phase 8C：Trinket 主动效果（玩家在使用窗口声明后产生）。 */
+  | 'trinket'
   | 'debug'
   | 'migration';
 
@@ -925,7 +996,9 @@ export type RuleDamageSource =
   | 'blight'
   | 'periodic-batch'
   | 'trap'
-  | 'exploration';
+  | 'exploration'
+  /** Phase 8C：Trinket Active Effect 自伤（damage-self）。 */
+  | 'trinket';
 
 /** Rule Event 上下文：贯穿一个根事件的整条派生链，用于循环保护。
  * - rootEventId：根事件 id。

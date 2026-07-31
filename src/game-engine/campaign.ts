@@ -11,6 +11,7 @@ import { SAVE_VERSION } from './save';
 import { createInitialXpState } from './progression/xp-ledger';
 import { getHeroSkillSlots } from './progression/upgrade-core';
 import { refreshObjectiveProgress } from './progression/quest-objectives';
+import { createInitialNomadWagonState } from './trinkets/trinket-state';
 
 /** Phase 1 初始补给池默认值（后续阶段可由 Provision Dice 生成替换）。 */
 export const DEFAULT_PROVISIONS: ProvisionPool = {
@@ -29,7 +30,7 @@ export const DEFAULT_PROVISIONS: ProvisionPool = {
 export function createNewCampaign(): CampaignState {
   const now = nowIso();
   return {
-    saveVersion: SAVE_VERSION, // Phase 8D（唯一来源：save.ts）
+    saveVersion: SAVE_VERSION, // v7 = Phase 8C + 8D（Trinket + XP/Leveling/Guild）
     id: createId('cmp'),
     createdAt: now,
     updatedAt: now,
@@ -94,6 +95,16 @@ export function createNewCampaign(): CampaignState {
     guildVisitSession: null,
     replacementUpgradeSession: null,
     temporarySkillFormOverrides: [],
+    // ---- Phase 8C ----
+    pendingTrinketAllocations: [],
+    pendingTrinketUseOpportunities: [],
+    pendingTrinketUseTransaction: null,
+    trinketAcquisitionRecords: [],
+    trinketUseRecords: [],
+    trinketTransferRecords: [],
+    processedTrinketEventIds: [],
+    processedTrinketResetKeys: [],
+    nomadWagon: createInitialNomadWagonState(),
   };
 }
 
@@ -138,6 +149,8 @@ export function createHeroInstance(heroId: string, partySlot = 0): HeroInstance 
     disease: null,
     pendingBleed: 0,
     pendingBlight: 0,
+    // ---- Phase 8C：容量 = 等级，新英雄 Level 1 → 1 格空位 ----
+    equippedTrinkets: [],
   };
 }
 

@@ -8,6 +8,7 @@ import {
   getHeroTrinketCapacity,
 } from '../../game-engine/progression/upgrade-core';
 import { getHeroXp } from '../../game-engine/progression/xp-ledger';
+import TrinketSlots from '../trinkets/TrinketSlots';
 
 const ROMAN: Record<number, string> = { 1: 'I', 2: 'II', 3: 'III' };
 
@@ -115,6 +116,7 @@ export default function HamletHeroCard({
           </div>
         </div>
       </button>
+      <TrinketSlots hero={hero} mode="manage" />
       {!dead && !hero.hasActedToday && (
         <button
           type="button"

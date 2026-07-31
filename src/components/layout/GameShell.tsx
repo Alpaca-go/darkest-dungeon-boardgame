@@ -8,6 +8,8 @@ import DebugPanel from '../debug/DebugPanel';
 import MentalEventOverlay from '../mental/MentalEventOverlay';
 import QuirkDecisionOverlay from '../quirk/QuirkDecisionOverlay';
 import DiseaseAcquisitionOverlay from '../disease/DiseaseAcquisitionOverlay';
+import TrinketUseOverlay from '../trinkets/TrinketUseOverlay';
+import TrinketAllocationOverlay from '../trinkets/TrinketAllocationOverlay';
 
 /**
  * 统一外层布局：顶部资源条 + 导航 + 内容区(Outlet) + 底部说明。
@@ -109,6 +111,9 @@ export default function GameShell() {
       <QuirkDecisionOverlay />
       {/* Phase 8B：Disease 获取结果浮层（先看到感染结果，再处理可能的 Quirk 决策） */}
       <DiseaseAcquisitionOverlay />
+      {/* Phase 8C：饰品使用机会 / 待分配（含死亡转移）浮层，阻塞至玩家决策 */}
+      <TrinketUseOverlay />
+      <TrinketAllocationOverlay />
       <MentalEventOverlay />
       <DebugPanel />
     </div>

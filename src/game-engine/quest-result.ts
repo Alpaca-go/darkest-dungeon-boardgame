@@ -14,6 +14,9 @@ import {
   refreshObjectiveProgress,
 } from './progression/quest-objectives';
 import { consumeTemporarySkillForms } from './progression/skill-forms';
+import { drawTrinket } from './trinkets/draw-trinket';
+import { acquireTrinket } from './trinkets/acquire-trinket';
+import { hasTrinketCapacity } from './trinkets/capacity';
 
 /** 空补给池（结算后清空用）。 */
 export const EMPTY_PROVISIONS: ProvisionPool = {
@@ -153,6 +156,27 @@ export function applyQuestRewards(
   // Phase 8A：quest-completed 时机事件（Hoarder 等，仅任务成功时触发）。
   if (summary.outcome === 'completed') {
     next = emitPartyRuleEvent(next, 'quest-completed', createRuleEventContext());
+
+    // Phase 8C §15.2：任务完成奖励 1 件 Trinket（简化 Quest Reward）。
+    // - reward 只结算一次：外层 questResultResolved 闸门 + sourceEventId 幂等双保险；
+    // - 幂等键用「任务 id + 本次为第 N 次完成」，同一任务日后重打不会被误判为重复；
+    // - 官方池抽 Level I；池为空则安全跳过（不白屏、不发假卡）。
+    const rewardEventId = `quest-reward:${summary.questId}:q${campaign.completedQuestCount}`;
+    const draw = drawTrinket({ level: 1, pool: 'official' });
+    if (draw.definition) {
+      // 归属英雄：有空位的第一名存活英雄；若全满则留待分配（玩家在入村前结算）。
+      const rewardHero = next.heroes.find(
+        (h) => h.isAlive && !h.dead && hasTrinketCapacity(h)
+      );
+      next = pushLog(next, '任务奖励：获得一件饰品。', 'success');
+      next = acquireTrinket(next, {
+        trinketId: draw.definition.id,
+        source: 'quest-reward',
+        sourceEventId: rewardEventId,
+        questId: summary.questId,
+        heroId: rewardHero?.instanceId,
+      }).campaign;
+    }
   }
 
   // Phase 7/8A：Quest 结束把 Virtue/Affliction 转换为真实 Quirk（幂等，走 acquireQuirk）。

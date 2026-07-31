@@ -503,12 +503,48 @@ export function legalTargetsForActor(state: BattleState, skillId: string): strin
   return computeLegalTargetIds(state, actor, skill);
 }
 
-/** 英雄使用技能（消耗 1 行动点）。 */
-export function heroUseSkill(
+/** Phase 8C：Trinket 对冻结动作累计的加成（无 Trinket 时全 0）。 */
+export interface TrinketActionBonuses {
+  accuracy: number;
+  crit: number;
+  damage: number;
+}
+
+const NO_TRINKET_BONUSES: TrinketActionBonuses = { accuracy: 0, crit: 0, damage: 0 };
+
+/**
+ * 校验英雄技能是否可以合法释放（不结算）。
+ * Phase 8C：store 层在开 before-attack-roll 窗口前先调用，
+ * 避免为一个非法动作冻结 PendingBattleAction。
+ */
+export function heroSkillActionError(
   state: BattleState,
   unitId: string,
   skillId: string,
   targetId: string
+): string | null {
+  const actor = findUnit(state, unitId);
+  if (!actor || actor.side !== 'hero' || actor.id !== state.activeActorId) return '当前不是该英雄的回合。';
+  if (state.currentActionPoints <= 0) return '行动点不足。';
+  const raw = getSkillById(skillId);
+  if (!raw) return '技能不存在。';
+  const skill = normalizeHeroSkill(raw);
+  if (!isSkillUsableFrom(actor, skill)) return `无法从当前站位释放 ${skill.name}。`;
+  const target = findUnit(state, targetId);
+  if (!target || !isLegalTarget(actor, target, skill)) return '目标不合法。';
+  return null;
+}
+
+/** 英雄使用技能（消耗 1 行动点）。
+ * Phase 8C：trinketBonuses 为 before-attack-roll 窗口期间使用 Trinket 累计的修正，
+ * 由 store 层从 PendingBattleAction 传入；不传等价于全 0。
+ */
+export function heroUseSkill(
+  state: BattleState,
+  unitId: string,
+  skillId: string,
+  targetId: string,
+  trinketBonuses: TrinketActionBonuses = NO_TRINKET_BONUSES
 ): BattleState {
   const actor = findUnit(state, unitId);
   if (!actor || actor.side !== 'hero' || actor.id !== state.activeActorId) return state;
@@ -532,11 +568,29 @@ export function heroUseSkill(
 
   if (skill.targetSide === 'enemy') {
     // Phase 7：精神效果（Focused）的当前回合命中加成
-    const res = resolveAttack(skill, actor.turnAccuracyBonus ?? 0);
+    // Phase 8C：Trinket 命中 / 暴击阈值修正（来自冻结动作）
+    const res = resolveAttack(
+      skill,
+      (actor.turnAccuracyBonus ?? 0) + trinketBonuses.accuracy,
+      trinketBonuses.crit
+    );
+    if (trinketBonuses.accuracy !== 0 || trinketBonuses.crit !== 0 || trinketBonuses.damage !== 0) {
+      s = pushBattleLog(
+        s,
+        `${actor.name} 的 Trinket 修正：命中 ${trinketBonuses.accuracy >= 0 ? '+' : ''}${trinketBonuses.accuracy}、暴击 +${trinketBonuses.crit}、伤害 ${trinketBonuses.damage >= 0 ? '+' : ''}${trinketBonuses.damage}。`,
+        'info'
+      );
+    }
     if (res.hit) {
-      // Blacksmith 临时加成 + 技能等级加成 + 精神效果回合加成：仅英雄命中时加算。
-      const rawDamage =
-        res.damage + (actor.damageBonus ?? 0) + levelBonus.damage + (actor.turnDamageBonus ?? 0);
+      // Blacksmith 临时加成 + 技能等级加成 + 精神效果回合加成 + Trinket 伤害修正：仅英雄命中时加算。
+      const rawDamage = Math.max(
+        0,
+        res.damage +
+          (actor.damageBonus ?? 0) +
+          levelBonus.damage +
+          (actor.turnDamageBonus ?? 0) +
+          trinketBonuses.damage
+      );
       // Phase 8A：Quirk 输出修正（Warrior of Light 等，条件用战斗光照快照）
       const outMod = applyQuirkModifiersRaw(
         actor.quirkIds ?? [],

@@ -16,6 +16,9 @@ import GuildPanel from '../components/hamlet/GuildPanel';
 import BlacksmithPanel from '../components/hamlet/BlacksmithPanel';
 import { guildVisitError } from '../game-engine/hamlet/guild';
 import { blacksmithVisitError } from '../game-engine/hamlet/blacksmith';
+import NomadWagonPanel from '../components/trinkets/NomadWagonPanel';
+import { NOMAD_WAGON_BUILDING_ID, NOMAD_WAGON_NAME } from '../data/nomad-wagon';
+import { nomadWagonVisitError } from '../game-engine/nomad-wagon';
 
 /**
  * Hamlet 页 /hamlet：
@@ -39,6 +42,8 @@ export default function HamletPage() {
   const [sanitariumHeroId, setSanitariumHeroId] = useState<string | null>(null);
   // Phase 8D：Blacksmith 需要选择技能（Guild 的会话状态存在 campaign 里，刷新可续做）。
   const [blacksmithHeroId, setBlacksmithHeroId] = useState<string | null>(null);
+  // Phase 8C：Nomad Wagon 入口（建筑列表中无此条目，单独作为流浪商队入口）。
+  const [nomadHeroId, setNomadHeroId] = useState<string | null>(null);
 
   // preparationDays 归零后 gamePhase → quest-select，自动跳转下一任务选择。
   const gamePhase = campaign?.gamePhase;
@@ -86,6 +91,10 @@ export default function HamletPage() {
     }
     if (buildingId === 'blacksmith') {
       setBlacksmithHeroId(selectedHeroId);
+      return;
+    }
+    if (buildingId === NOMAD_WAGON_BUILDING_ID) {
+      setNomadHeroId(selectedHeroId);
       return;
     }
     visitBuilding(selectedHeroId, buildingId);
@@ -181,6 +190,44 @@ export default function HamletPage() {
                 />
               );
             })}
+            {/* Phase 8C：Nomad Wagon（流浪商队）入口：建筑列表无此条目，单独作为商队卡片 */}
+            <button
+              type="button"
+              onClick={() => onVisit(NOMAD_WAGON_BUILDING_ID)}
+              disabled={!selectedHeroId}
+              title={
+                selectedHeroId
+                  ? nomadWagonVisitError(campaign, selectedHeroId) ?? `花费 Gold：买卖饰品`
+                  : '请先选择英雄'
+              }
+              className={[
+                'relative rounded-lg border p-3 text-left transition-all w-full',
+                hamlet.caretakerBlockedBuildingId === NOMAD_WAGON_BUILDING_ID
+                  ? 'border-red-500/60 bg-red-500/5 cursor-not-allowed'
+                  : !selectedHeroId
+                  ? 'border-dd-border bg-dd-panel opacity-60 cursor-not-allowed'
+                  : 'border-dd-border bg-dd-panel hover:border-dd-accent hover:-translate-y-0.5',
+              ].join(' ')}
+              data-testid="building-nomad-wagon"
+            >
+              <div
+                className="w-full h-14 rounded mb-2"
+                style={{ background: '#7c5e3b' }}
+                aria-hidden
+              />
+              <div className="flex items-baseline justify-between gap-1">
+                <span className="font-bold text-dd-text text-sm">{NOMAD_WAGON_NAME}</span>
+                <span className="text-[11px] text-dd-warn shrink-0">交易</span>
+              </div>
+              <p className="text-[11px] text-dd-muted mt-1">
+                买卖饰品（展示位由建筑等级决定，Level I 至多 3 件）。
+              </p>
+              {hamlet.occupiedBuildingIds.includes(NOMAD_WAGON_BUILDING_ID) && (
+                <span className="absolute top-2 right-2 text-[10px] font-bold text-amber-400 bg-amber-500/20 border border-amber-500/50 rounded px-1.5 py-0.5">
+                  今日已占用
+                </span>
+              )}
+            </button>
           </div>
           {selectedHeroId && (
             <p className="text-[11px] text-dd-muted mt-2">
@@ -347,6 +394,17 @@ export default function HamletPage() {
           hero={blacksmithHero}
           onClose={() => {
             setBlacksmithHeroId(null);
+            setSelectedHeroId(null);
+          }}
+        />
+      )}
+
+      {/* Phase 8C：Nomad Wagon 交易面板 */}
+      {nomadHeroId && (
+        <NomadWagonPanel
+          heroId={nomadHeroId}
+          onClose={() => {
+            setNomadHeroId(null);
             setSelectedHeroId(null);
           }}
         />

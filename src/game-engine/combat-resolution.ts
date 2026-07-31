@@ -11,14 +11,21 @@ export interface AttackResult {
 /**
  * 简化 d10 命中判定：
  * - 掷 1..10，结果 <= accuracy 视为命中；
- * - 自然 10 必中且为暴击（暴击统一造成最大伤害）。
+ * - 自然 10 必中且为暴击（暴击统一造成最大伤害）；
+ * - Phase 8C：critBonus 降低暴击阈值（crit 判定为 roll >= 10 - critBonus 且命中）。
  * 未命中 damage = 0。
  */
-export function resolveAttack(skill: BattleSkillLike, accuracyBonus = 0): AttackResult {
+export function resolveAttack(
+  skill: BattleSkillLike,
+  accuracyBonus = 0,
+  critBonus = 0
+): AttackResult {
   const roll = d10();
   const accuracy = (skill.accuracy ?? 7) + accuracyBonus;
-  const crit = roll === 10;
-  const hit = crit || roll <= accuracy;
+  const critThreshold = Math.max(2, 10 - Math.max(0, critBonus));
+  const natural10 = roll === 10;
+  const hit = natural10 || roll <= accuracy;
+  const crit = natural10 || (hit && roll >= critThreshold);
   let damage = 0;
   if (hit) {
     const min = skill.minDamage ?? 0;

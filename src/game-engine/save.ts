@@ -9,13 +9,19 @@ import type {
   HeroInstance,
   HeroLevel,
   HeroXpState,
+  HeroTrinketState,
+  NomadWagonState,
   QuestResultSummary,
+  TrinketSide,
 } from '../types';
 import { nowIso } from './random';
 import { createInitialStagecoach } from './stagecoach';
 import { getQuirkById, normalizeQuirkId } from '../data/quirks';
 import { getDiseaseById } from '../data/diseases';
 import { QUIRK_CAP } from './quirks';
+import { getTrinketById } from '../data/trinkets/trinket-registry';
+import { createInitialNomadWagonState } from './trinkets/trinket-state';
+import { getTrinketCapacity } from './trinkets/capacity';
 
 // ---------------------------------------------------------------------------
 // 存档格式（Phase 6 升级为 v3 SaveFile）
@@ -29,8 +35,7 @@ export const STORAGE_KEY = 'dd-web-prototype-save-v1';
  * v3 = Phase 6（死亡/Stagecoach），v4 = Phase 7（Stress/Resolve/Affliction/Virtue/Heart Attack），
  * v5 = Phase 8A（Quirk 引擎：真实 Quirk id / 上限 3 / pendingQuirkDecisions），
  * v6 = Phase 8B（Disease / Sanitarium 移除 / Curio / 战斗外 Bleed-Blight 累积），
- * v7 = Phase 8D（Quest XP / Hero Level / Skill Level / Guild 成长系统：XP Ledger、
- *      Objective 进度、升级事务、Guild 会话、Blacksmith 临时 Skill Form）。
+ * v7 = Phase 8C + 8D（Trinket + Quest XP / Hero Level / Skill Level / Guild）。
  */
 export const SAVE_VERSION = 7;
 
@@ -193,6 +198,39 @@ export function validateSaveFile(data: unknown): string | null {
         return `英雄 ${h.instanceId} 的技能 ${sid} 等级超出 I-III 范围`;
       }
     }
+    // Phase 8C：Trinket 结构 / 容量 / 定义引用校验（迁移后必然合法）
+    if (!Array.isArray(h.equippedTrinkets)) {
+      return `英雄 ${h.instanceId} 的 equippedTrinkets 缺失或不是数组`;
+    }
+    if (h.equippedTrinkets.length > getTrinketCapacity(h)) {
+      return `英雄 ${h.instanceId} 的 Trinket 数量（${h.equippedTrinkets.length}）超过容量（等级 ${h.level}）`;
+    }
+    const seenTrinketInstanceIds = new Set<string>();
+    for (const t of h.equippedTrinkets) {
+      if (!t || typeof t.instanceId !== 'string' || typeof t.trinketId !== 'string') {
+        return `英雄 ${h.instanceId} 的 Trinket 结构非法`;
+      }
+      if (seenTrinketInstanceIds.has(t.instanceId)) {
+        return `英雄 ${h.instanceId} 存在重复的 Trinket 实例：${t.instanceId}`;
+      }
+      seenTrinketInstanceIds.add(t.instanceId);
+      if (!getTrinketById(t.trinketId)) {
+        return `英雄 ${h.instanceId} 引用了未知 Trinket：${t.trinketId}`;
+      }
+      if (t.currentSide !== 'positive' && t.currentSide !== 'negative') {
+        return `英雄 ${h.instanceId} 的 Trinket ${t.instanceId} 面向非法`;
+      }
+    }
+  }
+  // 同一 Trinket 实例不得同时被两名英雄持有（无公共仓库，实例唯一）
+  const globalTrinketInstanceIds = new Set<string>();
+  for (const h of c.heroes) {
+    for (const t of h.equippedTrinkets ?? []) {
+      if (globalTrinketInstanceIds.has(t.instanceId)) {
+        return `Trinket 实例 ${t.instanceId} 被多名英雄同时持有`;
+      }
+      globalTrinketInstanceIds.add(t.instanceId);
+    }
   }
   if (!Array.isArray(c.progressionTransactions)) return 'campaign.progressionTransactions 缺失或不是数组';
   if (!Array.isArray(c.temporarySkillFormOverrides)) {
@@ -202,6 +240,12 @@ export function validateSaveFile(data: unknown): string | null {
   if (!Array.isArray(c.diseaseAcquisitionRecords)) return 'campaign.diseaseAcquisitionRecords 缺失或不是数组';
   if (!Array.isArray(c.diseaseTreatmentRecords)) return 'campaign.diseaseTreatmentRecords 缺失或不是数组';
   if (!Array.isArray(c.processedDiseaseEventIds)) return 'campaign.processedDiseaseEventIds 缺失或不是数组';
+  // Phase 8C
+  if (!Array.isArray(c.pendingTrinketAllocations)) return 'campaign.pendingTrinketAllocations 缺失或不是数组';
+  if (!Array.isArray(c.trinketAcquisitionRecords)) return 'campaign.trinketAcquisitionRecords 缺失或不是数组';
+  if (!Array.isArray(c.processedTrinketEventIds)) return 'campaign.processedTrinketEventIds 缺失或不是数组';
+  if (!Array.isArray(c.processedTrinketResetKeys)) return 'campaign.processedTrinketResetKeys 缺失或不是数组';
+  if (!c.nomadWagon || typeof c.nomadWagon !== 'object') return 'campaign.nomadWagon 缺失';
 
   // 阶段相关引用完整性
   if (c.gamePhase === 'dungeon-explore' || c.gamePhase === 'battle') {
@@ -609,22 +653,28 @@ export function migrateCampaignToV6(campaign: CampaignState): CampaignState {
 }
 
 /**
- * Phase 8D 战役字段迁移（v6 → v7）：
+ * Phase 8C + 8D 战役字段迁移（v6 → v7）：
  * - 英雄补 xpState（由旧 hero.xp 平移：currentXp = lifetimeXpEarned = 旧 xp，
  *   lifetimeXpSpent = 0）；xp 字段保留为 xpState.currentXp 的只读镜像；
  * - level 钳制到 1-3；skillLevels 中每个技能等级钳制到 1-3；
- * - 战役补 objectiveProgress=[] / pendingQuestXp=null / questXpResults=[] /
- *   progressionTransactions=[] / guildVisitSession=null /
- *   replacementUpgradeSession=null / temporarySkillFormOverrides=[]；
- * - 旧存档遗留的 guildVisitSession / replacementUpgradeSession 一律清空
- *   （未提交的会话在新会话中无法安全续做，XP/Gold 尚未扣除，丢弃是安全的）；
- * - 进行中的战斗补 BattleUnit.heroLevel（英雄从战役英雄同步）。
+ * - 英雄补 equippedTrinkets=[]；已有数组则逐条净化（未知定义丢弃、
+ *   非法 side 回退 positive、超容量截断）；
+ * - 进行中的战斗补 BattleUnit.heroLevel（英雄从战役英雄同步）与
+ *   equippedTrinketInstanceIds（英雄从战役英雄同步，怪物为空数组），并清空 pendingAction；
+ * - 战役补 Phase 8D 字段（objectiveProgress / pendingQuestXp / questXpResults /
+ *   progressionTransactions / guildVisitSession / replacementUpgradeSession /
+ *   temporarySkillFormOverrides）；
+ * - 战役补 Phase 8C 字段（pendingTrinketAllocations / trinketAcquisitionRecords /
+ *   nomadWagon 等全部 Trinket 队列与记录集合）；
+ * - 旧存档遗留的 guildVisitSession / replacementUpgradeSession / pendingTrinketUseTransaction
+ *   一律清空（未提交的会话/事务在新会话中无法安全续做）。
  */
 export function migrateCampaignToV7(campaign: CampaignState): CampaignState {
   let changed = false;
 
   const heroes: HeroInstance[] = (campaign.heroes ?? []).map((h) => {
     const anyH = h as HeroInstance & Record<string, unknown>;
+    // ---- Phase 8D：XP / Level / Skill Level 迁移 ----
     const rawState = anyH.xpState as HeroXpState | undefined;
     const legacyXp = clampNonNegative(anyH.xp);
     const xpState: HeroXpState =
@@ -654,65 +704,173 @@ export function migrateCampaignToV7(campaign: CampaignState): CampaignState {
       if (clamped !== lv) skillLevelsChanged = true;
     }
 
+    // ---- Phase 8C：Trinket 净化迁移 ----
+    const rawTrinkets = anyH.equippedTrinkets;
+    let trinketChanged = false;
+    let equippedTrinkets: HeroTrinketState[] = [];
+    if (rawTrinkets === undefined || !Array.isArray(rawTrinkets)) {
+      trinketChanged = true;
+      equippedTrinkets = [];
+    } else {
+      const capacity = getTrinketCapacity(h);
+      const sanitized: HeroTrinketState[] = [];
+      for (const t of rawTrinkets as HeroTrinketState[]) {
+        if (!t || typeof t !== 'object' || typeof t.instanceId !== 'string' || typeof t.trinketId !== 'string') {
+          trinketChanged = true; continue;
+        }
+        if (!getTrinketById(t.trinketId)) { trinketChanged = true; continue; }
+        if (sanitized.length >= capacity) { trinketChanged = true; continue; }
+        const side: TrinketSide = t.currentSide === 'negative' ? 'negative' : 'positive';
+        const fixed: HeroTrinketState = {
+          instanceId: t.instanceId, trinketId: t.trinketId, currentSide: side,
+          usedTurnId: typeof t.usedTurnId === 'string' ? t.usedTurnId : null,
+          lastUsedEventId: typeof t.lastUsedEventId === 'string' ? t.lastUsedEventId : null,
+          acquiredAt: typeof t.acquiredAt === 'string' ? t.acquiredAt : nowIso(),
+          acquiredQuestId: typeof t.acquiredQuestId === 'string' ? t.acquiredQuestId : null,
+          source: t.source ?? 'migration',
+          sourceEventId: typeof t.sourceEventId === 'string' ? t.sourceEventId : `migrated-${t.instanceId}`,
+        };
+        if (fixed.currentSide !== t.currentSide || fixed.usedTurnId !== (t.usedTurnId ?? null) ||
+            fixed.lastUsedEventId !== (t.lastUsedEventId ?? null) || fixed.source !== t.source) {
+          trinketChanged = true;
+        }
+        sanitized.push(fixed);
+      }
+      if (!trinketChanged && sanitized.length === rawTrinkets.length) equippedTrinkets = rawTrinkets as HeroTrinketState[];
+      else equippedTrinkets = sanitized;
+    }
+
     const needs =
       rawState === undefined ||
       xpState.currentXp !== h.xp ||
       level !== anyH.level ||
-      skillLevelsChanged;
+      skillLevelsChanged ||
+      trinketChanged;
     if (!needs) return h;
     changed = true;
-    return { ...h, xp: xpState.currentXp, xpState, level, skillLevels };
+    return { ...h, xp: xpState.currentXp, xpState, level, skillLevels, equippedTrinkets };
   });
 
+  // ---- Battle 迁移：8D（heroLevel）+ 8C（equippedTrinketInstanceIds + pendingAction） ----
   let battle = campaign.battle;
-  if (battle && battle.heroes.some((u) => typeof u.heroLevel !== 'number')) {
-    changed = true;
-    battle = {
-      ...battle,
-      heroes: battle.heroes.map((u) => {
-        if (typeof u.heroLevel === 'number') return u;
-        const src = heroes.find((h) => h.instanceId === u.sourceId);
-        return { ...u, heroLevel: src?.level ?? 1 };
-      }),
-    };
+  if (battle) {
+    const anyB = battle as BattleState & Record<string, unknown>;
+    const needsHeroLevel = (u: BattleUnit) => typeof u.heroLevel !== 'number';
+    const needsTrinketIds = (u: BattleUnit) =>
+      !Array.isArray((u as BattleUnit & Record<string, unknown>).equippedTrinketInstanceIds);
+    const needsBattleUpdate =
+      battle.heroes.some((u) => needsHeroLevel(u) || needsTrinketIds(u)) ||
+      battle.monsters.some(needsTrinketIds) ||
+      !Array.isArray(anyB.pendingRuleEvents) ||
+      !Array.isArray(anyB.pendingDiseaseInfections) ||
+      anyB.pendingAction !== null;
+    if (needsBattleUpdate) {
+      changed = true;
+      battle = {
+        ...battle,
+        pendingAction: null,
+        pendingRuleEvents: Array.isArray(anyB.pendingRuleEvents) ? battle.pendingRuleEvents : [],
+        pendingDiseaseInfections: Array.isArray(anyB.pendingDiseaseInfections)
+          ? battle.pendingDiseaseInfections
+          : [],
+        heroes: battle.heroes.map((u) => {
+          const d = needsHeroLevel(u);
+          const c = needsTrinketIds(u);
+          if (!d && !c) return u;
+          const src = heroes.find((h) => h.instanceId === u.sourceId);
+          return {
+            ...u,
+            ...(d ? { heroLevel: src?.level ?? 1 } : {}),
+            ...(c ? { equippedTrinketInstanceIds: (src?.equippedTrinkets ?? []).map((t) => t.instanceId) } : {}),
+          };
+        }),
+        monsters: battle.monsters.map((u) =>
+          needsTrinketIds(u) ? { ...u, equippedTrinketInstanceIds: [] } : u
+        ),
+      };
+    }
   }
 
   const anyC = campaign as CampaignState & Record<string, unknown>;
   const needsCampaignFields =
+    // ---- Phase 8D 字段 ----
     !Array.isArray(anyC.objectiveProgress) ||
     anyC.pendingQuestXp === undefined ||
     !Array.isArray(anyC.questXpResults) ||
     !Array.isArray(anyC.progressionTransactions) ||
     anyC.guildVisitSession !== null ||
     anyC.replacementUpgradeSession !== null ||
-    !Array.isArray(anyC.temporarySkillFormOverrides);
+    !Array.isArray(anyC.temporarySkillFormOverrides) ||
+    // ---- Phase 8C 字段 ----
+    !Array.isArray(anyC.pendingTrinketAllocations) ||
+    !Array.isArray(anyC.pendingTrinketUseOpportunities) ||
+    (anyC.pendingTrinketUseOpportunities as unknown[]).length > 0 ||
+    anyC.pendingTrinketUseTransaction !== null ||
+    !Array.isArray(anyC.trinketAcquisitionRecords) ||
+    !Array.isArray(anyC.trinketUseRecords) ||
+    !Array.isArray(anyC.trinketTransferRecords) ||
+    !Array.isArray(anyC.processedTrinketEventIds) ||
+    !Array.isArray(anyC.processedTrinketResetKeys) ||
+    !anyC.nomadWagon ||
+    typeof anyC.nomadWagon !== 'object';
   if (needsCampaignFields) changed = true;
 
   if (!changed && campaign.saveVersion === SAVE_VERSION) return campaign;
+
+  // Phase 8C：Nomad Wagon 净化
+  const rawWagon = anyC.nomadWagon as NomadWagonState | undefined;
+  const nomadWagon: NomadWagonState =
+    rawWagon && typeof rawWagon === 'object'
+      ? {
+          ...createInitialNomadWagonState(),
+          ...rawWagon,
+          buildingLevel: 1,
+          offeredTrinketIds: Array.isArray(rawWagon.offeredTrinketIds)
+            ? rawWagon.offeredTrinketIds.filter((id) => !!getTrinketById(id))
+            : [],
+        }
+      : createInitialNomadWagonState();
   return {
     ...campaign,
     saveVersion: SAVE_VERSION,
     heroes,
     battle,
+    // ---- Phase 8D 字段 ----
     objectiveProgress: Array.isArray(anyC.objectiveProgress) ? campaign.objectiveProgress : [],
     pendingQuestXp: anyC.pendingQuestXp === undefined ? null : campaign.pendingQuestXp,
     questXpResults: Array.isArray(anyC.questXpResults) ? campaign.questXpResults : [],
     progressionTransactions: Array.isArray(anyC.progressionTransactions)
       ? campaign.progressionTransactions
       : [],
-    // 未提交的升级会话无法安全续做（XP/Gold 尚未扣除）→ 一律丢弃
     guildVisitSession: null,
     replacementUpgradeSession: null,
     temporarySkillFormOverrides: Array.isArray(anyC.temporarySkillFormOverrides)
       ? campaign.temporarySkillFormOverrides
       : [],
+    // ---- Phase 8C 字段 ----
+    pendingTrinketAllocations: Array.isArray(anyC.pendingTrinketAllocations)
+      ? (campaign.pendingTrinketAllocations ?? []).filter((a) => !!getTrinketById(a.trinketId))
+      : [],
+    pendingTrinketUseOpportunities: [],
+    pendingTrinketUseTransaction: null,
+    trinketAcquisitionRecords: Array.isArray(anyC.trinketAcquisitionRecords)
+      ? campaign.trinketAcquisitionRecords
+      : [],
+    trinketUseRecords: Array.isArray(anyC.trinketUseRecords) ? campaign.trinketUseRecords : [],
+    trinketTransferRecords: Array.isArray(anyC.trinketTransferRecords)
+      ? campaign.trinketTransferRecords
+      : [],
+    processedTrinketEventIds: Array.isArray(anyC.processedTrinketEventIds)
+      ? campaign.processedTrinketEventIds
+      : [],
+    processedTrinketResetKeys: Array.isArray(anyC.processedTrinketResetKeys)
+      ? campaign.processedTrinketResetKeys
+      : [],
+    nomadWagon,
   };
 }
 
-/**
- * 将战役迁移到当前最新版本
- * （v3 Phase 6 → v4 Phase 7 → v5 Phase 8A → v6 Phase 8B → v7 Phase 8D）。
- */
+/** 将战役迁移到当前最新版本（v3→v4→v5→v6→v7 = 8C+8D）。 */
 export function migrateCampaignToLatest(campaign: CampaignState): CampaignState {
   return migrateCampaignToV7(
     migrateCampaignToV6(migrateCampaignToV5(migrateCampaignToV4(migrateCampaignToV3(campaign)))),
@@ -722,18 +880,18 @@ export function migrateCampaignToLatest(campaign: CampaignState): CampaignState 
 /**
  * 迁移旧版本存档到当前版本。无法迁移时返回 null。
  * v1（SaveEnvelope）→ v2（SaveFile）→ v3（Phase 6）→ v4（Phase 7）→ v5（Phase 8A Quirk）
- * → v6（Phase 8B Disease）。
+ * → v6（Phase 8B Disease）→ v7（Phase 8C Trinket）。
  */
 export function migrateSaveFile(raw: unknown): SaveFile | null {
   if (!raw || typeof raw !== 'object') return null;
   const anyRaw = raw as Record<string, unknown>;
 
-  // 已是 v6（当前版本）
+  // 已是 v7（当前版本）
   if (typeof anyRaw.version === 'number' && anyRaw.version === SAVE_VERSION) {
     const file = raw as SaveFile;
     // campaign 缺失或非对象 → 无法迁移（调用方回退为「无法识别的存档结构」）
     if (!file.campaign || typeof file.campaign !== 'object') return null;
-    // 保险：即使 version=6 也补齐缺失字段（防手工编辑的存档）
+    // 保险：即使 version=7 也补齐缺失字段（防手工编辑的存档）
     const campaign = migrateCampaignToLatest(file.campaign);
     return campaign === file.campaign ? file : { ...createSaveSnapshot(campaign), savedAt: file.savedAt };
   }

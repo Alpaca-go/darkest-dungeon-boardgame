@@ -18,7 +18,6 @@ import {
 } from '../game-engine/dungeon';
 import {
   heroMove as engineHeroMove,
-  heroUseSkill as engineHeroUseSkill,
   endHeroTurn as engineEndHeroTurn,
   resolveVictory as engineResolveVictory,
   resumeTurnAfterMentalCheck,
@@ -96,7 +95,25 @@ import {
   confirmReplacement as engineConfirmReplacement,
   completeReplacementFlow as engineCompleteReplacementFlow,
 } from '../game-engine/replacement';
-import type { DamageCommand } from '../types';
+import type { DamageCommand, NomadWagonVisitCommand } from '../types';
+// ---- Phase 8C：Trinket / Nomad Wagon ----
+import {
+  beginHeroSkillAction,
+  resolveTrinketOpportunity,
+  openBattleTurnStartWindow,
+  openRoomEnteredWindows,
+} from '../game-engine/trinkets/battle-trinket-bridge';
+import {
+  resolveTrinketAllocation as engineResolveTrinketAllocation,
+  discardTrinket as engineDiscardTrinket,
+} from '../game-engine/trinkets/allocate-trinket';
+import type { TrinketAllocationChoice } from '../game-engine/trinkets/allocate-trinket';
+import { transferTrinket as engineTransferTrinket } from '../game-engine/trinkets/transfer-trinket';
+import { acquireTrinket as engineAcquireTrinket } from '../game-engine/trinkets/acquire-trinket';
+import {
+  ensureNomadWagonOffer,
+  commitNomadWagonVisit as engineCommitNomadWagonVisit,
+} from '../game-engine/nomad-wagon';
 import { routeForPhase as guardRouteForPhase } from '../app/route-guards';
 
 // UI 临时状态（不持久化）。
@@ -225,6 +242,23 @@ interface GameStore {
   blacksmithVisitError(heroId: string, skillId: string): string | null;
   /** Debug：给英雄发放 XP（统一走 XP Ledger，不直接写 hero.xp）。 */
   debugGrantXp(heroId: string, amount: number): void;
+  // ---- Phase 8C：Trinket ----
+  /** 对一条使用机会声明使用（战斗冻结动作会累计加成并在结清后恢复）。 */
+  useTrinketOpportunity(opportunityId: string): void;
+  /** 跳过一条使用机会。 */
+  declineTrinketOpportunity(opportunityId: string): void;
+  /** 结算一条待分配（assign / replace / discard）。 */
+  resolveTrinketAllocation(allocationId: string, choice: TrinketAllocationChoice): void;
+  /** 非战斗时把饰品从一名英雄转交给另一名英雄。 */
+  transferTrinket(fromHeroId: string, toHeroId: string, instanceId: string): void;
+  /** 丢弃英雄身上的一件饰品。 */
+  discardTrinket(heroId: string, instanceId: string): void;
+  /** 打开 Nomad Wagon（本次 Hamlet 首次打开时生成 Offer 并立即保存）。 */
+  openNomadWagon(): void;
+  /** 提交一次 Nomad Wagon 访问（买/卖原子事务）；返回错误信息或 null。 */
+  commitNomadWagonVisit(cmd: NomadWagonVisitCommand): string | null;
+  /** Debug：给英雄发一件饰品（走 acquireTrinket 状态机，容量/分配规则照常生效）。 */
+  debugGrantTrinket(heroId: string, trinketId: string): void;
 }
 
 const EMPTY_UI: UiState = {
@@ -299,6 +333,9 @@ export const useGameStore = create<GameStore>((set, get) => {
       next = processBattleRuleEvents(next);
       next = processBattleDiseaseInfections(next);
     }
+    // Phase 8C：战斗推进后为当前出手英雄开 hero-turn-start 窗口（幂等；
+    // 精神检定暂停 / 冻结动作存在 / 敌方回合时引擎内部自动跳过）。
+    next = openBattleTurnStartWindow(next);
     return next;
   };
 
@@ -409,6 +446,8 @@ export const useGameStore = create<GameStore>((set, get) => {
       let next = engineMoveToRoom(c, roomId);
       // Phase 7：进入战斗房间时首个英雄可能立即需要精神检定
       if (next.battle) next = settleBattle(next);
+      // Phase 8C：非战斗房间为全体存活英雄开 room-entered 窗口（幂等）
+      next = openRoomEnteredWindows(next, roomId);
       // Phase 6：探索伤害可能导致永久死亡 → 判定替补流程（战斗阶段不打断，胜利结算后再判）
       if (next.gamePhase === 'dungeon-explore') next = evaluateReplacementFlow(next);
       commit(next);
@@ -443,10 +482,13 @@ export const useGameStore = create<GameStore>((set, get) => {
       const c = get().campaign;
       const skillId = get().ui.battleSkillId;
       if (!c?.battle || c.battle.status !== 'active' || !c.battle.activeActorId || !skillId) return;
-      const battle = engineHeroUseSkill(c.battle, c.battle.activeActorId, skillId, targetId);
-      if (battle === c.battle) return;
+      // Phase 8C：动作声明统一走桥接 —— 先校验合法性，再开 before-attack-roll 窗口；
+      // 有可用 Trinket 时冻结 PendingBattleAction 等待玩家（此时不结算、不产生随机数）。
+      const { campaign: next, error, paused } = beginHeroSkillAction(c, skillId, targetId);
+      if (error) return;
       set((st) => ({ ui: { ...st.ui, battleSkillId: null } }));
-      commit(settleBattle({ ...c, battle }));
+      // 冻结中不跑 settleBattle（动作尚未执行）；直接落盘保证刷新可恢复。
+      commit(paused ? next : settleBattle(next));
     },
 
     battleEndTurn: () => {
@@ -802,6 +844,72 @@ export const useGameStore = create<GameStore>((set, get) => {
       return null;
     },
 
+    // ---- Phase 8C：Trinket / Nomad Wagon（组件不得直接改 equippedTrinkets） ----
+    useTrinketOpportunity: (opportunityId) => {
+      const c = get().campaign;
+      if (!c) return;
+      const { campaign: resolved, error } = resolveTrinketOpportunity(c, opportunityId, 'use');
+      if (error || resolved === c) return;
+      let next = resolved;
+      // 使用效果（自伤等）或恢复执行的冻结动作都可能改变战斗状态 → 统一结算
+      if (next.battle) next = settleBattle(next);
+      // 非战斗场景的自伤可能导致永久死亡 → 替补流程判定
+      if (next.gamePhase === 'dungeon-explore') next = evaluateReplacementFlow(next);
+      commit(next);
+    },
+
+    declineTrinketOpportunity: (opportunityId) => {
+      const c = get().campaign;
+      if (!c) return;
+      const { campaign: resolved, error } = resolveTrinketOpportunity(c, opportunityId, 'decline');
+      if (error || resolved === c) return;
+      let next = resolved;
+      if (next.battle) next = settleBattle(next);
+      commit(next);
+    },
+
+    resolveTrinketAllocation: (allocationId, choice) => {
+      const c = get().campaign;
+      if (!c) return;
+      const { campaign: next, error } = engineResolveTrinketAllocation(c, allocationId, choice);
+      if (error || next === c) return;
+      commit(next);
+    },
+
+    transferTrinket: (fromHeroId, toHeroId, instanceId) => {
+      const c = get().campaign;
+      if (!c) return;
+      const { campaign: next, error } = engineTransferTrinket(c, fromHeroId, toHeroId, instanceId);
+      if (error || next === c) return;
+      commit(next);
+    },
+
+    discardTrinket: (heroId, instanceId) => {
+      const c = get().campaign;
+      if (!c) return;
+      const { campaign: next, error } = engineDiscardTrinket(c, heroId, instanceId);
+      if (error || next === c) return;
+      commit(next);
+    },
+
+    openNomadWagon: () => {
+      const c = get().campaign;
+      if (!c || c.gamePhase !== 'hamlet') return;
+      const next = ensureNomadWagonOffer(c);
+      if (next === c) return;
+      // 生成后立即落盘：刷新不重抽（§16.3）
+      commit(next);
+    },
+
+    commitNomadWagonVisit: (cmd) => {
+      const c = get().campaign;
+      if (!c) return '战役未初始化';
+      const { campaign: next, error } = engineCommitNomadWagonVisit(c, cmd);
+      if (error) return error;
+      commit(next);
+      return null;
+    },
+
     guildVisitError: (heroId) => {
       const c = get().campaign;
       if (!c) return '战役未初始化';
@@ -827,6 +935,20 @@ export const useGameStore = create<GameStore>((set, get) => {
       const c = get().campaign;
       if (!c || amount <= 0) return;
       const next = engineEarnHeroXp(c, heroId, amount, 'Debug 面板发放');
+      if (next === c) return;
+      commit(next);
+    },
+
+    debugGrantTrinket: (heroId, trinketId) => {
+      const c = get().campaign;
+      if (!c) return;
+      const { campaign: next } = engineAcquireTrinket(c, {
+        trinketId,
+        source: 'debug',
+        sourceEventId: `debug-trk:${heroId}:${trinketId}:${Date.now()}`,
+        questId: c.currentQuestId,
+        heroId,
+      });
       if (next === c) return;
       commit(next);
     },

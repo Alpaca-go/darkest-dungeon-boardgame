@@ -9,6 +9,9 @@ import { createRuleEventContext, emitPartyRuleEvent, removeQuirkFromHero } from 
 import { getQuirkById } from '../data/quirks';
 import { distributeQuestXp } from './progression/quest-xp';
 import { clearConsumedSkillForms } from './progression/skill-forms';
+import { resetAllTrinketsForHamlet } from './trinkets/reset-trinkets';
+import { clearAllTrinketOpportunities } from './trinkets/trinket-opportunities';
+import { resetNomadWagonForHamletEnd } from './nomad-wagon';
 
 // ---------------------------------------------------------------------------
 // 工具
@@ -43,8 +46,26 @@ export function rollCaretakerBuilding(): string {
  * 7. gamePhase → hamlet。
  * 仅允许在 quest-result 且已结算后调用（幂等保护）。
  */
+/**
+ * Phase 8C §14/§15.2：Trinket 待分配未解决时不能进入 Hamlet。
+ * 返回 null 表示可进入，否则为阻塞原因（UI 用于禁用按钮并提示）。
+ */
+export function hamletEntryBlockedByTrinkets(campaign: CampaignState): string | null {
+  const pending = (campaign.pendingTrinketAllocations ?? []).filter(
+    (a) => a.status === 'pending'
+  );
+  if (pending.length > 0) {
+    return `还有 ${pending.length} 件饰品等待分配，处理完成后才能返回 Hamlet`;
+  }
+  return null;
+}
+
 export function startHamletPhase(campaign: CampaignState): CampaignState {
   if (campaign.gamePhase !== 'quest-result' || !campaign.questResultResolved) {
+    return campaign;
+  }
+  // Phase 8C §14：Pending Allocation 未解决时不能进入 Hamlet。
+  if (hamletEntryBlockedByTrinkets(campaign) !== null) {
     return campaign;
   }
 
@@ -76,6 +97,11 @@ export function startHamletPhase(campaign: CampaignState): CampaignState {
   next = xpOutcome.campaign;
   // Phase 8D：清理上一次任务已消耗的临时 Skill Form。
   next = clearConsumedSkillForms(next);
+  // Phase 8C §14：返回 Hamlet 单一事务内重置所有 Trinket 为正面。
+  // 幂等键 = questId + returnTransactionId（本次 Hamlet visitId），刷新/重复调用不二次重置；
+  // 同时清掉任何残留的使用窗口（防御性，正常流程战斗结束时已关闭）。
+  next = clearAllTrinketOpportunities(next);
+  next = resetAllTrinketsForHamlet(next, campaign.currentQuestId ?? null, hamlet.visitId).campaign;
 
   // 事件效果只执行一次（在此处，之后不再触发）。
   switch (event.effectType) {
@@ -361,6 +387,8 @@ export function endHamletDay(campaign: CampaignState): CampaignState {
       caretakerBlockedBuildingId: null,
     },
   };
+  // Phase 8C §16.3：Hamlet 结束时未购买的 Nomad Wagon Offer 返回抽取池并清空状态。
+  next = resetNomadWagonForHamletEnd(next);
   next = pushLog(next, '准备阶段结束，小队整装待发。选择下一个任务。', 'success');
   return next;
 }
