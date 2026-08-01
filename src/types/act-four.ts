@@ -23,6 +23,7 @@ import type {
 // Phase 10B 硬约束 1：Templars 运行时不新增 CampaignState 字段，
 // 而是挂在 ActFourState 下（与 finalEncounterState 同构）。
 import type { TemplarsEncounterState } from './templars';
+import type { MammothCystEncounterState } from './mammoth-cyst';
 
 /** Act IV 数据可信度（与项目统一四态一致）。 */
 export type ActFourDataStatus = DataCredibility;
@@ -382,6 +383,13 @@ export interface ActFourState {
    * Pit Toss 历史），真正的战斗仍由既有 BattleState 驱动。
    */
   templarsEncounterState: TemplarsEncounterState | null;
+  /**
+   * Phase 10C：Mammoth Cyst / White Cell Stalk 遭遇运行时。
+   * 同样遵守硬约束 1 —— 不新增 CampaignState 顶层字段、不创建第二套 Battle/Initiative/召唤
+   * 状态机；这里只保存 Mammoth Cyst 域的 *附加* 运行时（Cyst/Stalk Actor 状态、
+   * Initiative 归属、召唤历史、传送历史、Hero Area 占位）。
+   */
+  mammothCystEncounterState: MammothCystEncounterState | null;
 
   actFourStartedAt: string | null;
   lastTransitionTransactionId: string | null;

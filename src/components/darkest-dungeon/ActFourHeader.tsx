@@ -6,6 +6,7 @@ import FinalHamletPanel from './FinalHamletPanel';
 import FinalEncounterHeader from './FinalEncounterHeader';
 import FormTransitionOverlay from './FormTransitionOverlay';
 import TemplarsEncounterPanel from './TemplarsEncounterPanel';
+import MammothCystEncounterPanel from './MammothCystEncounterPanel';
 
 /**
  * Act IV 顶部常驻横幅（只读）：游戏内唯一可见入口，挂在 GameShell。
@@ -39,6 +40,14 @@ export default function ActFourHeader() {
         {a4.templarsEncounterState && (
           <TemplarsEncounterPanel
             state={a4.templarsEncounterState}
+            heroNames={Object.fromEntries(campaign.heroes.map((h) => [h.instanceId, h.heroId]))}
+          />
+        )}
+        {/* Phase 10C §24：Mammoth Cyst 遭遇进行中时显示只读面板
+            （Cyst / Stalk 各自独立、Stalk 未召唤显示 Reserve、d10 结果持久化）。 */}
+        {a4.mammothCystEncounterState && (
+          <MammothCystEncounterPanel
+            state={a4.mammothCystEncounterState}
             heroNames={Object.fromEntries(campaign.heroes.map((h) => [h.instanceId, h.heroId]))}
           />
         )}

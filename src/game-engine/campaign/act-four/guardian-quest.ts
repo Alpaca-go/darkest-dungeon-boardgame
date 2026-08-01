@@ -33,6 +33,10 @@ import { earnPartyXp } from '../../progression/xp-ledger';
 // ⚠️ 直接引用 runtime 模块文件而不是 bosses/templars/index 桶文件——
 // 桶文件会再导出 templars-victory，而后者反向依赖本模块，走桶文件会形成循环依赖。
 import { setupTemplarsEncounter } from '../../bosses/templars/templars-runtime';
+// Phase 10C：Mammoth Cyst 家族的 Guardian 在 Boss Battle 创建后追加 Cyst Setup。
+// ⚠️ 同样直接引用 runtime 模块文件而不是 bosses/mammoth-cyst/index 桶文件——
+// 桶文件会再导出 mammoth-cyst-victory，而后者反向依赖本模块，走桶文件会形成循环依赖。
+import { setupMammothCystEncounter } from '../../bosses/mammoth-cyst/mammoth-cyst-runtime';
 import { failCampaign } from '../../stagecoach';
 import { pushLog } from '../../log';
 import { createId, nowIso } from '../../random';
@@ -156,6 +160,10 @@ export interface StartGuardianBattleResult {
   isTemplarsEncounter?: boolean;
   /** Phase 10B：Templars Setup 失败原因（Setup 失败不回滚 Battle 创建，仅降级为普通 Boss Battle）。 */
   templarsSetupReason?: string | null;
+  /** Phase 10C：该 Guardian 是否为 Mammoth Cyst 家族（触发 Cyst Setup + Stalk Reserve 登记）。 */
+  isMammothCystEncounter?: boolean;
+  /** Phase 10C：Mammoth Cyst Setup 失败原因（同样只降级、不回滚 Battle 创建）。 */
+  mammothCystSetupReason?: string | null;
 }
 
 /**
@@ -244,6 +252,34 @@ export function startGuardianBattle(
     }
   }
 
+  // ---- Phase 10C §9 / §10：Mammoth Cyst 家族 → 追加 Cyst Setup ----
+  // 同样复用既有 Room Reveal / Boss Battle Create 幂等（硬约束 1：不创建第二套战斗流程）。
+  // 此处只创建 **Cyst 一名** Actor + 2 张 Initiative，White Cell Stalk 仅登记 Reserve
+  // （硬约束 3：初始不创建 Stalk Actor、不加 Stalk Initiative）。
+  const isMammothCystEncounter = guardian?.family === 'mammoth-cyst';
+  let mammothCystSetupReason: string | null = null;
+
+  if (isMammothCystEncounter) {
+    const setup = setupMammothCystEncounter(campaignAfter, {
+      mode: options?.mode ?? 'prototype',
+      rng: options?.rng,
+      seed: options?.seed,
+      now: options?.now,
+    });
+    if (setup.ok) {
+      campaignAfter = setup.campaign;
+    } else {
+      // Setup 失败（多为 official Data Gate 拦截）不回滚 Battle 创建，
+      // 降级为普通 Boss Battle 并把原因透出给 UI / Debug（§3）。
+      mammothCystSetupReason = setup.reason;
+      campaignAfter = pushLog(
+        campaignAfter,
+        `Mammoth Cyst Setup 未执行：${setup.reason ?? '未知原因'}`,
+        'warning',
+      );
+    }
+  }
+
   return {
     ok: true,
     campaign: campaignAfter,
@@ -252,6 +288,8 @@ export function startGuardianBattle(
     reason: null,
     isTemplarsEncounter,
     templarsSetupReason,
+    isMammothCystEncounter,
+    mammothCystSetupReason,
   };
 }
 

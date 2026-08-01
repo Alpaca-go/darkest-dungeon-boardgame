@@ -30,6 +30,7 @@ import type {
 import { isFinalFormId } from '../../../data/darkest-dungeon/final-form-registry';
 // Phase 10B §28：Templars 运行时净化（该模块只依赖 types + data 层，无循环依赖）。
 import { sanitizeTemplarsEncounterState } from '../../bosses/templars/templars-content-validation';
+import { sanitizeMammothCystEncounterState } from '../../bosses/mammoth-cyst/mammoth-cyst-content-validation';
 import { nowIso } from '../../random';
 
 // ---------------------------------------------------------------------------
@@ -111,6 +112,8 @@ export function createInitialActFourState(): ActFourState {
     finalEncounterState: null,
     // Phase 10B：Templars 遭遇运行时（未进入 Guardian Quest 战斗前恒为 null）。
     templarsEncounterState: null,
+    // Phase 10C：Mammoth Cyst 遭遇运行时（未进入 Guardian Quest 战斗前恒为 null）。
+    mammothCystEncounterState: null,
 
     actFourStartedAt: null,
     lastTransitionTransactionId: null,
@@ -302,6 +305,9 @@ export function sanitizeActFourState(raw: unknown): ActFourState {
     // Phase 10B §28：Templars 运行时结构性字段缺失时返回 null（安全兜底，不白屏），
     // 且净化过程绝不重掷任何随机数（已保存的 d10 / Initiative 顺序原样保留）。
     templarsEncounterState: sanitizeTemplarsEncounterState(r.templarsEncounterState),
+    // Phase 10C §26：Mammoth Cyst 运行时同样走安全兜底 —— 结构性字段缺失返回 null，
+    // 已保存的 d10 Skill Roll / Teleportation Roll / 召唤记录原样保留，绝不重掷。
+    mammothCystEncounterState: sanitizeMammothCystEncounterState(r.mammothCystEncounterState),
 
     actFourStartedAt: str(r.actFourStartedAt),
     lastTransitionTransactionId: str(r.lastTransitionTransactionId),

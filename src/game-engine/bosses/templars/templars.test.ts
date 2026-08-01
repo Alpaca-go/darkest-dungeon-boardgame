@@ -969,8 +969,10 @@ describe('§30.8 Dual Boss Victory / Guardian Victory / Failure', () => {
 // ---------------------------------------------------------------------------
 
 describe('§30.9 Save Migration & sanitize（§28 / SAVE_VERSION）', () => {
-  it('SAVE_VERSION === 13（Phase 10B）', () => {
-    expect(SAVE_VERSION).toBe(13);
+  // ⚠️ 不硬编码具体版本号：后续 Phase 会继续升 SAVE_VERSION（Phase 10C 已升到 14），
+  // 这里只断言「Phase 10B 引入的 v13 之后不回退」，避免每次升版都要回头改 10B 的测试。
+  it('SAVE_VERSION >= 13（Phase 10B 引入 templarsEncounterState 后不回退）', () => {
+    expect(SAVE_VERSION).toBeGreaterThanOrEqual(13);
   });
 
   it('完整 Templars 战役 migrateCampaignToLatest 后 templarsEncounterState 存活且 validateSaveFile 通过', () => {

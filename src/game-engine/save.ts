@@ -65,8 +65,16 @@ export const STORAGE_KEY = 'dd-web-prototype-save-v1';
  *      迁移一律补 null——绝不凭空生成遭遇、绝不重掷已保存的 d10；
  *      已存在则过 sanitizeTemplarsEncounterState 净化（结构性字段缺失 → null，不白屏）。
  *      硬约束 1：不新增 CampaignState 顶层字段，Templars 运行时挂在 ActFourState 下。
+ * v14 = Phase 10C（Mammoth Cyst / White Cell Stalk / Teleportation：actFourState 内新增
+ *      mammothCystEncounterState，承载 Cyst 独立 Boss Actor、动态召唤的 Stalk Actor、
+ *      2（Cyst）+ 2（Stalk）Initiative 归属与失效标记、召唤历史（generation 递增）、
+ *      Teleportation 历史（d10 骰点先保存后展示）、Room Entry Effect 运行时与 Definition Snapshot。
+ *      旧存档（v8-v13）从未写过该字段，迁移一律补 null——绝不凭空召唤 Stalk、
+ *      绝不重掷已保存的 d10（Skill Roll / Teleportation Roll 一律只读）；
+ *      已存在则过 sanitizeMammothCystEncounterState 净化（结构性字段缺失 → null，不白屏）。
+ *      硬约束 1：仍不新增 CampaignState 顶层字段，Mammoth Cyst 运行时挂在 ActFourState 下。
  */
-export const SAVE_VERSION = 13;
+export const SAVE_VERSION = 14;
 
 /**
  * v2 存档文件结构。
@@ -92,7 +100,7 @@ interface SaveEnvelopeV1 {
 }
 
 /** 可被迁移到当前版本的历史存档版本号。 */
-const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 
 /** 读档结果：区分正常 / 无存档 / 损坏 / 版本不支持。 */
 export type LoadStatus = 'ok' | 'empty' | 'corrupt' | 'unsupported';
@@ -330,6 +338,40 @@ export function validateSaveFile(data: unknown): string | null {
       }
       if (!Array.isArray(ts.initiativeCards) || ts.initiativeCards.length !== 4) {
         return 'templarsEncounterState.initiativeCards 必须为 2 + 2 共 4 张';
+      }
+    }
+  }
+  // Phase 10C：mammothCystEncounterState 字段必须存在（值可为 null），v14 迁移后必然如此。
+  // 同样只做「字段存在 + 类型形状」校验；内部结构损坏由 sanitizeMammothCystEncounterState 兜底为 null。
+  {
+    const a4 = c.actFourState as unknown as Record<string, unknown>;
+    if (!('mammothCystEncounterState' in a4)) {
+      return 'campaign.actFourState.mammothCystEncounterState 缺失（v14 迁移未执行）';
+    }
+    const m = a4.mammothCystEncounterState;
+    if (m !== null && typeof m !== 'object') {
+      return 'campaign.actFourState.mammothCystEncounterState 既不是 null 也不是对象';
+    }
+    if (m && typeof m === 'object') {
+      const ms = m as Record<string, unknown>;
+      if (typeof ms.battleId !== 'string' || typeof ms.roomId !== 'string') {
+        return 'mammothCystEncounterState 缺少 battleId / roomId';
+      }
+      // 硬约束 3：初始只有 Cyst 1 名；召唤后追加 Stalk，Stalk 死亡后保留记录（isAlive=false）。
+      // 因此合法区间是 1—2 名（绝不为 0，也不会出现第二只 Stalk —— 硬约束 8 maxAlive=1）。
+      if (!Array.isArray(ms.actorStates) || ms.actorStates.length < 1 || ms.actorStates.length > 2) {
+        return 'mammothCystEncounterState.actorStates 必须为 1（仅 Cyst）或 2（Cyst + Stalk）名';
+      }
+      // Cyst 恒 2 张；Stalk 召唤后再加 2 张 → 合法总数为 2 或 4。
+      if (
+        !Array.isArray(ms.initiativeCards) ||
+        (ms.initiativeCards.length !== 2 && ms.initiativeCards.length !== 4)
+      ) {
+        return 'mammothCystEncounterState.initiativeCards 必须为 2（仅 Cyst）或 4（Cyst + Stalk）张';
+      }
+      const rt = ms.mammothCystBattleRuntime;
+      if (!rt || typeof rt !== 'object') {
+        return 'mammothCystEncounterState.mammothCystBattleRuntime 缺失或不是对象';
       }
     }
   }
@@ -1104,6 +1146,25 @@ export function migrateCampaignToV13(campaign: CampaignState): CampaignState {
   return { ...campaign, saveVersion: SAVE_VERSION, actFourState };
 }
 
+/**
+ * Phase 10C 战役字段迁移（v13 → v14：Mammoth Cyst / White Cell Stalk / Teleportation）。
+ *
+ * - 硬约束 1：不新增 CampaignState 顶层字段 —— Mammoth Cyst 运行时挂在 actFourState 下；
+ * - 旧存档（v8-v13）没有 mammothCystEncounterState → 补 null。
+ *   绝不凭空生成遭遇、绝不凭空召唤 White Cell Stalk（硬约束 3：初始只在 Reserve）；
+ * - 已存在则过 sanitizeActFourState（内部会调 sanitizeMammothCystEncounterState）：
+ *   结构性字段缺失 → 整体降为 null（§26 安全兜底，不白屏、不抛异常），
+ *   且净化过程**不重掷任何随机数**（已保存的 d10 Skill Roll / Teleportation Roll、
+ *   Initiative 顺序、召唤 generation 原样保留，硬约束 14「先保存后展示、刷新不重掷」）。
+ */
+export function migrateCampaignToV14(campaign: CampaignState): CampaignState {
+  const anyC = campaign as CampaignState & Record<string, unknown>;
+  const raw = anyC.actFourState;
+  const actFourState: ActFourState =
+    raw && typeof raw === 'object' ? sanitizeActFourState(raw) : createInitialActFourState();
+  return { ...campaign, saveVersion: SAVE_VERSION, actFourState };
+}
+
 /** 净化已存在的 campaignProgress（补缺字段 / clamp / 去掉非法类型），不重新随机。 */
 function sanitizeCampaignProgress(raw: CampaignProgressState): CampaignProgressState {
   const base = createInitialCampaignProgress({
@@ -1145,15 +1206,17 @@ function sanitizeCampaignProgress(raw: CampaignProgressState): CampaignProgressS
 /**
  * 将战役迁移到当前最新版本
  * （v3 → v8 = Phase 9A → v9 = Phase 9C → v10 = Phase 9D → v11 = Phase 9E → v12 = Phase 10A
- *  → v13 = Phase 10B Templars）。
+ *  → v13 = Phase 10B Templars → v14 = Phase 10C Mammoth Cyst）。
  */
 export function migrateCampaignToLatest(campaign: CampaignState): CampaignState {
-  return migrateCampaignToV13(
-    migrateCampaignToV12(
-      migrateCampaignToV8(
-        migrateCampaignToV7(
-          migrateCampaignToV6(
-            migrateCampaignToV5(migrateCampaignToV4(migrateCampaignToV3(campaign))),
+  return migrateCampaignToV14(
+    migrateCampaignToV13(
+      migrateCampaignToV12(
+        migrateCampaignToV8(
+          migrateCampaignToV7(
+            migrateCampaignToV6(
+              migrateCampaignToV5(migrateCampaignToV4(migrateCampaignToV3(campaign))),
+            ),
           ),
         ),
       ),
