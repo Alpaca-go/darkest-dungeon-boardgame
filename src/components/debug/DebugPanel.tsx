@@ -7,6 +7,7 @@ import { ALL_DISEASES, getDiseaseById } from '../../data/diseases';
 import { QUIRK_CAP } from '../../game-engine/quirks';
 import { ALL_TRINKETS, validateTrinketRegistry } from '../../data/trinkets/trinket-registry';
 import FanaticPyreDebugSection from './FanaticPyreDebugSection';
+import ActFourDebugSection from './ActFourDebugSection';
 
 /**
  * 开发调试面板：仅在开发环境（import.meta.env.DEV）渲染。
@@ -248,6 +249,7 @@ export default function DebugPanel() {
             </div>
           )}
           <FanaticPyreDebugSection />
+          <ActFourDebugSection />
           <div className="flex flex-wrap gap-1.5">
             <button onClick={copySummary} className="px-2 py-1 rounded bg-dd-panel2 border border-dd-border text-dd-muted hover:text-dd-text">
               复制摘要

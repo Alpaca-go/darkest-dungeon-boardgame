@@ -36,6 +36,9 @@ import type {
   TrinketUseRecord,
 } from './trinkets';
 
+// Phase 10A：Act IV（Darkest Dungeon）状态挂载到 CampaignState 上。
+import type { ActFourState } from './act-four';
+
 // Phase 8D：成长系统类型统一从 types 根导出，调用方无需感知文件拆分。
 export * from './progression';
 // Phase 8C：Trinket 域类型统一从此处再导出，调用方无需区分文件。
@@ -44,6 +47,10 @@ export * from './trinkets';
 // 说明：bosses.ts 反向 `import type ... from './index'` 构成类型层循环引用，
 // 但纯类型导入在编译期被完全擦除，不会产生运行时循环依赖。
 export * from './bosses';
+// Phase 10A：Final Encounter / Act IV 类型统一从 types 根导出。
+// 顺序要求：final-encounter 先于 act-four（后者依赖前者的 FinalFormId 系列类型）。
+export * from './final-encounter';
+export * from './act-four';
 
 /** 全局游戏阶段状态机。所有场景切换必须通过此字段完成。 */
 export type GamePhase =
@@ -715,6 +722,15 @@ export interface CampaignState {
   bossSummonHistory: BossSummonRecord[];
   /** 已执行的 Boss / Threat 域事务 id（幂等保护，§22；保留最近 200 条）。 */
   processedBossTransactionIds: string[];
+  // ---- Phase 10A：Darkest Dungeon Act IV ----
+  /**
+   * Act IV 运行时（Phase 10A §5）。
+   * 硬约束 1：这是 CampaignState 上的**唯一**新增字段，不新增 GamePhase、
+   * 不创建第二套 Campaign / Dungeon / Battle 状态机；
+   * Quest 抽取 / Content Runtime / Layout / Boss Slot / Excavation /
+   * Final Hamlet / Final Encounter / Form Transition 全部挂在它下面（§23）。
+   */
+  actFourState: ActFourState;
 }
 
 // ---------------------------------------------------------------------------

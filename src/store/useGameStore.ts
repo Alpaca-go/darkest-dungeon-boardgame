@@ -135,6 +135,8 @@ interface GameStore {
   resetCampaign(): void;
   /** 手动保存当前战役（存档管理 UI 用）。 */
   manualSave(): void;
+  /** 整体替换当前战役（调试 / 引擎事务回写用）。会同步落盘。 */
+  replaceCampaign(c: CampaignState): void;
   /** 导出存档 JSON 字符串；无存档返回 null。 */
   exportSave(): string | null;
   /** 导入存档 JSON；成功返回 null，失败返回错误信息（不覆盖现有存档）。 */
@@ -364,6 +366,11 @@ export const useGameStore = create<GameStore>((set, get) => {
     manualSave: () => {
       const c = get().campaign;
       if (!c) return;
+      saveCampaign(c);
+    },
+
+    replaceCampaign: (c) => {
+      set({ campaign: c });
       saveCampaign(c);
     },
 

@@ -13,6 +13,7 @@ import { getHeroSkillSlots } from './progression/upgrade-core';
 import { refreshObjectiveProgress } from './progression/quest-objectives';
 import { createInitialNomadWagonState } from './trinkets/trinket-state';
 import { createInitialCampaignProgress } from './campaign/campaign-progress';
+import { createInitialActFourState } from './campaign/act-four/act-four-state';
 
 /** Phase 1 初始补给池默认值（后续阶段可由 Provision Dice 生成替换）。 */
 export const DEFAULT_PROVISIONS: ProvisionPool = {
@@ -116,6 +117,10 @@ export function createNewCampaign(): CampaignState {
     campaignAdvanceHistory: [],
     bossSummonHistory: [],
     processedBossTransactionIds: [],
+    // ---- Phase 10A ----
+    // Act IV 初始为「未解锁」；解锁只能由 unlockDarkestDungeonAct() 在
+    // 第三个 Boss 被击败后触发（§6），新战役不预置任何 Act IV 随机结果。
+    actFourState: createInitialActFourState(),
   };
 }
 

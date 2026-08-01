@@ -5,6 +5,7 @@ import { ROUTES } from '../../app/router';
 import { checkRouteAccess, nearestLegalPath } from '../../app/route-guards';
 import ErrorBoundary from '../feedback/ErrorBoundary';
 import DebugPanel from '../debug/DebugPanel';
+import ActFourHeader from '../darkest-dungeon/ActFourHeader';
 import MentalEventOverlay from '../mental/MentalEventOverlay';
 import QuirkDecisionOverlay from '../quirk/QuirkDecisionOverlay';
 import DiseaseAcquisitionOverlay from '../disease/DiseaseAcquisitionOverlay';
@@ -98,6 +99,7 @@ export default function GameShell() {
       </nav>
 
       <main className="flex-1 overflow-auto">
+        <ActFourHeader />
         <ErrorBoundary module={ROUTES.find((r) => r.path === location.pathname)?.label ?? '游戏页面'}>
           <Outlet />
         </ErrorBoundary>

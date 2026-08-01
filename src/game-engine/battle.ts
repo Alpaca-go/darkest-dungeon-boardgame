@@ -144,8 +144,11 @@ export function getActiveUnit(state: BattleState): BattleUnit | undefined {
  * Phase 8D：进入战斗时把英雄的「有效」等级快照进 BattleUnit。
  * - skillLevels 取 max(永久等级, Blacksmith 临时 Form)，因此战斗内一律读快照；
  * - heroLevel / resistances / immunities 由 Hero Level Registry 派生，不落盘。
+ *
+ * Phase 10A：Final Encounter 不经过 Dungeon Room（硬约束 14），无法调用 initBattle，
+ * 但必须复用同一套英雄单位构建逻辑，故导出。
  */
-function makeHeroUnit(hero: HeroInstance, index: number, campaign: CampaignState): BattleUnit {
+export function makeHeroUnit(hero: HeroInstance, index: number, campaign: CampaignState): BattleUnit {
   const hp = Math.max(0, hero.maxLife - hero.wounds);
   const effectiveSkillLevels: Record<string, 1 | 2 | 3> = {};
   for (const skillId of hero.equippedSkillIds) {

@@ -28,6 +28,8 @@ import { getTrinketById } from '../data/trinkets/trinket-registry';
 import { createInitialNomadWagonState } from './trinkets/trinket-state';
 import { getTrinketCapacity } from './trinkets/capacity';
 import { createInitialCampaignProgress } from './campaign/campaign-progress';
+import type { ActFourState } from '../types/act-four';
+import { createInitialActFourState, sanitizeActFourState } from './campaign/act-four/act-four-state';
 
 // ---------------------------------------------------------------------------
 // 存档格式（Phase 6 升级为 v3 SaveFile）
@@ -53,8 +55,12 @@ export const STORAGE_KEY = 'dd-web-prototype-save-v1';
  *      fanaticPreludeHistory / closestHeroSelectionHistory / throwIntoPyreHistory /
  *      pyreActionHistory / fanaticDataAudit / activeBossDefinitionSnapshot）。
  *      迁移只补字段、不重放战斗；快照/迁移函数在 game-engine/fanatic/runtime.ts。
+ * v12 = Phase 10A（Darkest Dungeon Act IV：新增顶层 actFourState 字段，存放 Act IV 全部状态；
+ *      旧存档 v8-v11 从未写过该字段，迁移一律用 createInitialActFourState() 初始化
+ *      （unlocked=false, stage='locked'），绝不自动解锁或重掷；已存在则过 sanitizeActFourState
+ *      净化（损坏不白屏，非法 skippedFinalFormId 等被丢弃为安全默认）。
  */
-export const SAVE_VERSION = 11;
+export const SAVE_VERSION = 12;
 
 /**
  * v2 存档文件结构。
@@ -80,7 +86,7 @@ interface SaveEnvelopeV1 {
 }
 
 /** 可被迁移到当前版本的历史存档版本号。 */
-const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
 /** 读档结果：区分正常 / 无存档 / 损坏 / 版本不支持。 */
 export type LoadStatus = 'ok' | 'empty' | 'corrupt' | 'unsupported';
@@ -292,6 +298,10 @@ export function validateSaveFile(data: unknown): string | null {
   // Boss Quest 与 Boss 地牢生成记录必须互相自洽（损坏时由 sanitize 兜底，不白屏）
   if (c.bossDungeonGeneration && typeof c.bossDungeonGeneration.objectiveRoomId !== 'string') {
     return 'campaign.bossDungeonGeneration.objectiveRoomId 非法';
+  }
+  // Phase 10A：ActFourState 必须存在且为对象（迁移后必然合法；sanitize 兜底损坏，不白屏）
+  if (!c.actFourState || typeof c.actFourState !== 'object') {
+    return 'campaign.actFourState 缺失或不是对象';
   }
 
   // 阶段相关引用完整性
@@ -1013,6 +1023,25 @@ export function migrateCampaignToV8(campaign: CampaignState): CampaignState {
   };
 }
 
+/**
+ * Phase 10A 战役字段迁移（v9=Phase 9C Prophet / v10=Phase 9D Collector /
+ * v11=Phase 9E Fanatic-Pyre / v12=Phase 10A Darkest Dungeon Act IV）：
+ * - v12：补 campaign.actFourState（顶层字段，Act IV 状态的单一权威容器）。
+ *   - 旧存档（v8-v11）从未写过该字段 → 一律用 createInitialActFourState() 初始化
+ *     （unlocked=false, stage='locked'），绝不自动解锁或重掷；
+ *   - 已存在则过 sanitizeActFourState 净化（§23 测试 82：损坏 ActFourState 不白屏，
+ *     绝不抛异常，非法 skippedFinalFormId 等被丢弃为安全默认）。
+ */
+export function migrateCampaignToV12(campaign: CampaignState): CampaignState {
+  const anyC = campaign as CampaignState & Record<string, unknown>;
+  const raw = anyC.actFourState;
+  const actFourState: ActFourState =
+    raw && typeof raw === 'object'
+      ? sanitizeActFourState(raw)
+      : createInitialActFourState();
+  return { ...campaign, saveVersion: SAVE_VERSION, actFourState };
+}
+
 /** 净化已存在的 campaignProgress（补缺字段 / clamp / 去掉非法类型），不重新随机。 */
 function sanitizeCampaignProgress(raw: CampaignProgressState): CampaignProgressState {
   const base = createInitialCampaignProgress({
@@ -1051,11 +1080,16 @@ function sanitizeCampaignProgress(raw: CampaignProgressState): CampaignProgressS
   };
 }
 
-/** 将战役迁移到当前最新版本（v3→…→v8 = Phase 9A → v9 = Phase 9C → v10 = Phase 9D）。 */
+/**
+ * 将战役迁移到当前最新版本
+ * （v3 → v8 = Phase 9A → v9 = Phase 9C → v10 = Phase 9D → v11 = Phase 9E → v12 = Phase 10A）。
+ */
 export function migrateCampaignToLatest(campaign: CampaignState): CampaignState {
-  return migrateCampaignToV8(
-    migrateCampaignToV7(
-      migrateCampaignToV6(migrateCampaignToV5(migrateCampaignToV4(migrateCampaignToV3(campaign)))),
+  return migrateCampaignToV12(
+    migrateCampaignToV8(
+      migrateCampaignToV7(
+        migrateCampaignToV6(migrateCampaignToV5(migrateCampaignToV4(migrateCampaignToV3(campaign)))),
+      ),
     ),
   );
 }
@@ -1063,7 +1097,9 @@ export function migrateCampaignToLatest(campaign: CampaignState): CampaignState 
 /**
  * 迁移旧版本存档到当前版本。无法迁移时返回 null。
  * v1（SaveEnvelope）→ v2（SaveFile）→ v3（Phase 6）→ v4（Phase 7）→ v5（Phase 8A Quirk）
- * → v6（Phase 8B Disease）→ v7（Phase 8C Trinket + 8D XP）→ v8（Phase 9A Boss / Threat）。
+ * → v6（Phase 8B Disease）→ v7（Phase 8C Trinket + 8D XP）→ v8（Phase 9A Boss / Threat）
+ * → v9（Phase 9C Prophet）→ v10（Phase 9D Collector）→ v11（Phase 9E Fanatic-Pyre）
+ * → v12（Phase 10A Darkest Dungeon Act IV：actFourState）。
  */
 export function migrateSaveFile(raw: unknown): SaveFile | null {
   if (!raw || typeof raw !== 'object') return null;
