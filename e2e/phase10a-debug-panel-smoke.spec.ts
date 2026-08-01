@@ -13,6 +13,7 @@
 //   由 e2e/phase10a-act-four-framework.spec.ts 在运行时层完成。
 
 import { test, expect, type Page } from '@playwright/test';
+import { SAVE_VERSION } from '../src/game-engine/save';
 
 const HEROES = ['Crusader', 'Vestal', 'Highwayman', 'Hellion'];
 
@@ -74,8 +75,9 @@ test('冒烟 2 · Debug 面板可展开，只读字段正常渲染', async ({ pa
   await expect(panel).toContainText('Debug');
   await expect(panel).toContainText('gamePhase');
   await expect(panel).toContainText('saveVersion');
-  // Phase 10A 存档版本为 v12
-  await expect(panel).toContainText('v12');
+  // ⚠ 跟随 SAVE_VERSION 常量断言，绝不硬编码版本号——
+  // Phase 9A 曾因硬编码 'v11' 导致后续升版时此用例莫名失败。
+  await expect(panel).toContainText(`v${SAVE_VERSION}`);
   await expect(panel).toContainText('route');
   await expect(panel).toContainText('hamlet');
 });

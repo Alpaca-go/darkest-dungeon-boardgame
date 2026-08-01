@@ -29,6 +29,10 @@ import {
   getDarkestDungeonQuestById,
 } from '../../../data/darkest-dungeon/quest-registry';
 import { earnPartyXp } from '../../progression/xp-ledger';
+// Phase 10B：Templars 家族的 Guardian 在 Boss Battle 创建后追加双 Boss Setup。
+// ⚠️ 直接引用 runtime 模块文件而不是 bosses/templars/index 桶文件——
+// 桶文件会再导出 templars-victory，而后者反向依赖本模块，走桶文件会形成循环依赖。
+import { setupTemplarsEncounter } from '../../bosses/templars/templars-runtime';
 import { failCampaign } from '../../stagecoach';
 import { pushLog } from '../../log';
 import { createId, nowIso } from '../../random';
@@ -148,6 +152,10 @@ export interface StartGuardianBattleResult {
   battleId: string | null;
   alreadyStarted: boolean;
   reason: string | null;
+  /** Phase 10B：该 Guardian 是否为 Templars 家族（触发双 Boss Setup）。 */
+  isTemplarsEncounter?: boolean;
+  /** Phase 10B：Templars Setup 失败原因（Setup 失败不回滚 Battle 创建，仅降级为普通 Boss Battle）。 */
+  templarsSetupReason?: string | null;
 }
 
 /**
@@ -159,7 +167,7 @@ export interface StartGuardianBattleResult {
 export function startGuardianBattle(
   campaign: CampaignState,
   roomId: string,
-  options?: { now?: string },
+  options?: { now?: string; mode?: ActFourContentMode; rng?: () => number; seed?: number },
 ): StartGuardianBattleResult {
   const state = campaign.actFourState;
   const quest = state.guardianQuestState;
@@ -202,16 +210,48 @@ export function startGuardianBattle(
   );
   next = withActFourStage(next, 'guardian-battle-active', `${transactionId}:stage`);
 
+  let campaignAfter: CampaignState = {
+    ...pushLog(campaign, `Guardian 出现在 Objective Room（${roomId}）。`, 'danger'),
+    actFourState: next,
+    updatedAt: options?.now ?? nowIso(),
+  };
+
+  // ---- Phase 10B §10：Templars 家族 → 追加双 Boss Setup ----
+  // 复用既有 Room Reveal / Boss Battle Create 幂等（硬约束：不创建第二套战斗流程），
+  // Templars 的两名独立 Boss Actor、2+2 Initiative、Spiked Pit Runtime 都在这里装配。
+  const guardian = getDarkestDungeonGuardianById(quest.guardianDefinitionId);
+  const isTemplarsEncounter = guardian?.family === 'templars';
+  let templarsSetupReason: string | null = null;
+
+  if (isTemplarsEncounter) {
+    const setup = setupTemplarsEncounter(campaignAfter, {
+      mode: options?.mode ?? 'prototype',
+      rng: options?.rng,
+      seed: options?.seed,
+      now: options?.now,
+    });
+    if (setup.ok) {
+      campaignAfter = setup.campaign;
+    } else {
+      // Setup 失败（多为 official Data Gate 拦截）不回滚 Battle 创建，
+      // 也不静默吞掉：降级为普通 Boss Battle 并把原因透出给 UI / Debug（§22）。
+      templarsSetupReason = setup.reason;
+      campaignAfter = pushLog(
+        campaignAfter,
+        `The Templars 双 Boss Setup 未执行：${setup.reason ?? '未知原因'}`,
+        'warning',
+      );
+    }
+  }
+
   return {
     ok: true,
-    campaign: {
-      ...pushLog(campaign, `Guardian 出现在 Objective Room（${roomId}）。`, 'danger'),
-      actFourState: next,
-      updatedAt: options?.now ?? nowIso(),
-    },
+    campaign: campaignAfter,
     battleId,
     alreadyStarted: false,
     reason: null,
+    isTemplarsEncounter,
+    templarsSetupReason,
   };
 }
 

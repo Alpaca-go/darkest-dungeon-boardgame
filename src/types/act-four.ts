@@ -20,6 +20,9 @@ import type {
   FormTransitionRecord,
   SkippableFinalFormId,
 } from './final-encounter';
+// Phase 10B 硬约束 1：Templars 运行时不新增 CampaignState 字段，
+// 而是挂在 ActFourState 下（与 finalEncounterState 同构）。
+import type { TemplarsEncounterState } from './templars';
 
 /** Act IV 数据可信度（与项目统一四态一致）。 */
 export type ActFourDataStatus = DataCredibility;
@@ -372,6 +375,13 @@ export interface ActFourState {
   guardianQuestState: DarkestDungeonQuestState | null;
   finalHamletState: FinalHamletState | null;
   finalEncounterState: FinalEncounterState | null;
+  /**
+   * Phase 10B：The Templars 双 Boss 遭遇运行时。
+   * 硬约束 1 —— 不新增 CampaignState 顶层字段，也不创建第二套 Battle/Initiative 状态机；
+   * 这里只保存 Templars 域的 *附加* 运行时（Actor 状态、Initiative 归属、Pit 运行时、
+   * Pit Toss 历史），真正的战斗仍由既有 BattleState 驱动。
+   */
+  templarsEncounterState: TemplarsEncounterState | null;
 
   actFourStartedAt: string | null;
   lastTransitionTransactionId: string | null;

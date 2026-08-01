@@ -28,6 +28,8 @@ import type {
   FormTransitionRecord,
 } from '../../../types/final-encounter';
 import { isFinalFormId } from '../../../data/darkest-dungeon/final-form-registry';
+// Phase 10B §28：Templars 运行时净化（该模块只依赖 types + data 层，无循环依赖）。
+import { sanitizeTemplarsEncounterState } from '../../bosses/templars/templars-content-validation';
 import { nowIso } from '../../random';
 
 // ---------------------------------------------------------------------------
@@ -107,6 +109,8 @@ export function createInitialActFourState(): ActFourState {
     guardianQuestState: null,
     finalHamletState: null,
     finalEncounterState: null,
+    // Phase 10B：Templars 遭遇运行时（未进入 Guardian Quest 战斗前恒为 null）。
+    templarsEncounterState: null,
 
     actFourStartedAt: null,
     lastTransitionTransactionId: null,
@@ -295,6 +299,9 @@ export function sanitizeActFourState(raw: unknown): ActFourState {
     guardianQuestState: (r.guardianQuestState as DarkestDungeonQuestState | null) ?? null,
     finalHamletState: (r.finalHamletState as FinalHamletState | null) ?? null,
     finalEncounterState: (r.finalEncounterState as FinalEncounterState | null) ?? null,
+    // Phase 10B §28：Templars 运行时结构性字段缺失时返回 null（安全兜底，不白屏），
+    // 且净化过程绝不重掷任何随机数（已保存的 d10 / Initiative 顺序原样保留）。
+    templarsEncounterState: sanitizeTemplarsEncounterState(r.templarsEncounterState),
 
     actFourStartedAt: str(r.actFourStartedAt),
     lastTransitionTransactionId: str(r.lastTransitionTransactionId),

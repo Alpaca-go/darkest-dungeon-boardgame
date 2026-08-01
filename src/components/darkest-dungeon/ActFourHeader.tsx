@@ -5,6 +5,7 @@ import ExcavationSitePanel from './ExcavationSitePanel';
 import FinalHamletPanel from './FinalHamletPanel';
 import FinalEncounterHeader from './FinalEncounterHeader';
 import FormTransitionOverlay from './FormTransitionOverlay';
+import TemplarsEncounterPanel from './TemplarsEncounterPanel';
 
 /**
  * Act IV 顶部常驻横幅（只读）：游戏内唯一可见入口，挂在 GameShell。
@@ -33,6 +34,14 @@ export default function ActFourHeader() {
 
       <div className="mt-2 flex flex-col gap-2">
         {a4.questDrawRecord && <DarkestDungeonQuestReveal />}
+        {/* Phase 10B §25：Templars 遭遇进行中时显示双 Boss 只读面板
+            （两名 Templar 各自独立、Pit 作为 Room 元素、Pit Toss 结果持久化）。 */}
+        {a4.templarsEncounterState && (
+          <TemplarsEncounterPanel
+            state={a4.templarsEncounterState}
+            heroNames={Object.fromEntries(campaign.heroes.map((h) => [h.instanceId, h.heroId]))}
+          />
+        )}
         {a4.excavationSiteStates.length > 0 && <ExcavationSitePanel />}
         {a4.stage === 'final-hamlet' && <FinalHamletPanel />}
         {inFinalEncounter && <FinalEncounterHeader />}

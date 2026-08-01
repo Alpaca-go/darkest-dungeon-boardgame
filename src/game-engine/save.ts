@@ -59,8 +59,14 @@ export const STORAGE_KEY = 'dd-web-prototype-save-v1';
  *      旧存档 v8-v11 从未写过该字段，迁移一律用 createInitialActFourState() 初始化
  *      （unlocked=false, stage='locked'），绝不自动解锁或重掷；已存在则过 sanitizeActFourState
  *      净化（损坏不白屏，非法 skippedFinalFormId 等被丢弃为安全默认）。
+ * v13 = Phase 10B（The Templars 双 Boss 遭遇：actFourState 内新增 templarsEncounterState，
+ *      承载两名独立 Boss Actor 状态、2+2 Initiative 归属、Spiked Pit 运行时、
+ *      Pit Toss 历史与 Definition Snapshot。旧存档（v8-v12）从未写过该字段，
+ *      迁移一律补 null——绝不凭空生成遭遇、绝不重掷已保存的 d10；
+ *      已存在则过 sanitizeTemplarsEncounterState 净化（结构性字段缺失 → null，不白屏）。
+ *      硬约束 1：不新增 CampaignState 顶层字段，Templars 运行时挂在 ActFourState 下。
  */
-export const SAVE_VERSION = 12;
+export const SAVE_VERSION = 13;
 
 /**
  * v2 存档文件结构。
@@ -86,7 +92,7 @@ interface SaveEnvelopeV1 {
 }
 
 /** 可被迁移到当前版本的历史存档版本号。 */
-const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 /** 读档结果：区分正常 / 无存档 / 损坏 / 版本不支持。 */
 export type LoadStatus = 'ok' | 'empty' | 'corrupt' | 'unsupported';
@@ -303,12 +309,50 @@ export function validateSaveFile(data: unknown): string | null {
   if (!c.actFourState || typeof c.actFourState !== 'object') {
     return 'campaign.actFourState 缺失或不是对象';
   }
+  // Phase 10B：templarsEncounterState 字段必须存在（值可为 null），迁移后必然如此。
+  // 只做「字段存在 + 类型形状」校验；内部结构损坏由 sanitizeTemplarsEncounterState 兜底为 null。
+  {
+    const a4 = c.actFourState as unknown as Record<string, unknown>;
+    if (!('templarsEncounterState' in a4)) {
+      return 'campaign.actFourState.templarsEncounterState 缺失（v13 迁移未执行）';
+    }
+    const t = a4.templarsEncounterState;
+    if (t !== null && typeof t !== 'object') {
+      return 'campaign.actFourState.templarsEncounterState 既不是 null 也不是对象';
+    }
+    if (t && typeof t === 'object') {
+      const ts = t as Record<string, unknown>;
+      if (typeof ts.battleId !== 'string' || typeof ts.roomId !== 'string') {
+        return 'templarsEncounterState 缺少 battleId / roomId';
+      }
+      if (!Array.isArray(ts.actorStates) || ts.actorStates.length !== 2) {
+        return 'templarsEncounterState.actorStates 必须恰好包含 2 名 Templar';
+      }
+      if (!Array.isArray(ts.initiativeCards) || ts.initiativeCards.length !== 4) {
+        return 'templarsEncounterState.initiativeCards 必须为 2 + 2 共 4 张';
+      }
+    }
+  }
 
   // 阶段相关引用完整性
   if (c.gamePhase === 'dungeon-explore' || c.gamePhase === 'battle') {
     const d = c.dungeon as DungeonState | null | undefined;
-    if (!d || !Array.isArray(d.rooms)) return `${c.gamePhase} 阶段缺少合法的 dungeon`;
-    if (!d.rooms.some((r) => r.id === d.currentRoomId)) return 'dungeon.currentRoomId 引用了不存在的房间';
+    // Phase 10A/B：act-four 的 Guardian Battle 不写 c.dungeon，地牢在 actFourState.mapState
+    // （slot 制地图，结构不同于 DungeonState：无 rooms / currentRoomId，只有 roomCount）。
+    // 因此 battle 阶段也接受 actFourState.mapState 作为「合法地牢」来源，
+    // 且对 act-four 地图跳过 currentRoomId 检查（其房间引用走 bossSlotAssignment）。
+    const a4 = c.actFourState as unknown as Record<string, unknown> | undefined;
+    const a4Map = a4?.mapState as { roomCount?: number } | undefined;
+    const actFourDungeonOk =
+      c.gamePhase === 'battle' &&
+      !!a4Map &&
+      typeof a4Map.roomCount === 'number' &&
+      a4Map.roomCount > 0;
+    if (!d && !actFourDungeonOk) return `${c.gamePhase} 阶段缺少合法的 dungeon`;
+    if (d) {
+      if (!Array.isArray(d.rooms)) return `${c.gamePhase} 阶段缺少合法的 dungeon`;
+      if (!d.rooms.some((r) => r.id === d.currentRoomId)) return 'dungeon.currentRoomId 引用了不存在的房间';
+    }
   }
   if (c.gamePhase === 'battle') {
     const b = c.battle as BattleState | null | undefined;
@@ -1042,6 +1086,24 @@ export function migrateCampaignToV12(campaign: CampaignState): CampaignState {
   return { ...campaign, saveVersion: SAVE_VERSION, actFourState };
 }
 
+/**
+ * Phase 10B 战役字段迁移（v12 → v13：The Templars 双 Boss 遭遇）。
+ *
+ * - 硬约束 1：不新增 CampaignState 顶层字段 —— Templars 运行时挂在 actFourState 下；
+ * - 旧存档（v8-v12）没有 templarsEncounterState → 补 null。
+ *   绝不凭空生成一场遭遇，也绝不给已存在的战斗补 Boss；
+ * - 已存在则过 sanitizeActFourState（内部会调 sanitizeTemplarsEncounterState）：
+ *   结构性字段缺失 → 整体降为 null（§28 安全兜底，不白屏、不抛异常），
+ *   且净化过程**不重掷任何随机数**（已保存的 d10 Pit Toss 结果原样保留，硬约束「刷新不重掷」）。
+ */
+export function migrateCampaignToV13(campaign: CampaignState): CampaignState {
+  const anyC = campaign as CampaignState & Record<string, unknown>;
+  const raw = anyC.actFourState;
+  const actFourState: ActFourState =
+    raw && typeof raw === 'object' ? sanitizeActFourState(raw) : createInitialActFourState();
+  return { ...campaign, saveVersion: SAVE_VERSION, actFourState };
+}
+
 /** 净化已存在的 campaignProgress（补缺字段 / clamp / 去掉非法类型），不重新随机。 */
 function sanitizeCampaignProgress(raw: CampaignProgressState): CampaignProgressState {
   const base = createInitialCampaignProgress({
@@ -1082,13 +1144,18 @@ function sanitizeCampaignProgress(raw: CampaignProgressState): CampaignProgressS
 
 /**
  * 将战役迁移到当前最新版本
- * （v3 → v8 = Phase 9A → v9 = Phase 9C → v10 = Phase 9D → v11 = Phase 9E → v12 = Phase 10A）。
+ * （v3 → v8 = Phase 9A → v9 = Phase 9C → v10 = Phase 9D → v11 = Phase 9E → v12 = Phase 10A
+ *  → v13 = Phase 10B Templars）。
  */
 export function migrateCampaignToLatest(campaign: CampaignState): CampaignState {
-  return migrateCampaignToV12(
-    migrateCampaignToV8(
-      migrateCampaignToV7(
-        migrateCampaignToV6(migrateCampaignToV5(migrateCampaignToV4(migrateCampaignToV3(campaign)))),
+  return migrateCampaignToV13(
+    migrateCampaignToV12(
+      migrateCampaignToV8(
+        migrateCampaignToV7(
+          migrateCampaignToV6(
+            migrateCampaignToV5(migrateCampaignToV4(migrateCampaignToV3(campaign))),
+          ),
+        ),
       ),
     ),
   );
@@ -1099,7 +1166,8 @@ export function migrateCampaignToLatest(campaign: CampaignState): CampaignState 
  * v1（SaveEnvelope）→ v2（SaveFile）→ v3（Phase 6）→ v4（Phase 7）→ v5（Phase 8A Quirk）
  * → v6（Phase 8B Disease）→ v7（Phase 8C Trinket + 8D XP）→ v8（Phase 9A Boss / Threat）
  * → v9（Phase 9C Prophet）→ v10（Phase 9D Collector）→ v11（Phase 9E Fanatic-Pyre）
- * → v12（Phase 10A Darkest Dungeon Act IV：actFourState）。
+ * → v12（Phase 10A Darkest Dungeon Act IV：actFourState）
+ * → v13（Phase 10B The Templars：actFourState.templarsEncounterState）。
  */
 export function migrateSaveFile(raw: unknown): SaveFile | null {
   if (!raw || typeof raw !== 'object') return null;
