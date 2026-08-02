@@ -1,0 +1,133 @@
+{
+  "seedId": "golden-normal-success-01",
+  "outcome": "campaign-over",
+  "reachedMilestones": [
+    "M00",
+    "M01",
+    "M02"
+  ],
+  "blockedAtMilestone": "M03",
+  "blockedReason": "CAMPAIGN_FLOW_BLOCKED：已完成 10 个 Standard Quest（首次触发于第 3 个），campaign.act 始终为 1。Act 推进状态机（src/game-engine/campaign/campaign-progress.ts）无任何生产调用方，Boss Quest 定义（FACE_THE_THREAT_QUEST_DEFINITION）零引用，11-Quest 循环在正式路径上不可达。",
+  "finalAct": 1,
+  "finalPhase": "campaign-over",
+  "completedQuestCount": 10,
+  "eventCount": 140,
+  "rngDrawCount": 659,
+  "invariantErrorCount": 0,
+  "invariantErrors": [],
+  "duplicateTransactionIds": [],
+  "deadlockPhase": null,
+  "actStuckAfterQuests": 3,
+  "maxQuestsWithActStuck": 10,
+  "uiStoreShimSteps": [
+    "proceedToLoadout",
+    "proceedToQuests",
+    "moveToRoom",
+    "autoBattle",
+    "resolveVictory",
+    "finishQuest",
+    "returnToHamlet",
+    "resolveReplacements"
+  ],
+  "saveResumeChecks": [
+    {
+      "milestoneId": "M00",
+      "label": "新战役创建完成（4 英雄 + 默认技能）",
+      "saveVersion": 16,
+      "validationError": null,
+      "stateHashMatches": true,
+      "hashBefore": "f1a8e3da",
+      "hashAfter": "f1a8e3da",
+      "passed": true
+    },
+    {
+      "milestoneId": "M01",
+      "label": "Act I · Standard Quest 1 结算完成",
+      "saveVersion": 16,
+      "validationError": null,
+      "stateHashMatches": true,
+      "hashBefore": "f122fc56",
+      "hashAfter": "f122fc56",
+      "passed": true
+    },
+    {
+      "milestoneId": "M02",
+      "label": "Act I · Standard Quest 2 结算完成",
+      "saveVersion": 16,
+      "validationError": null,
+      "stateHashMatches": true,
+      "hashBefore": "52a0458e",
+      "hashAfter": "52a0458e",
+      "passed": true
+    }
+  ],
+  "maxSaveBytes": 88403,
+  "maxLedger": 29,
+  "peakActors": 7,
+  "peakInitiative": 7,
+  "milestoneHashes": [
+    {
+      "id": "M00",
+      "label": "新战役创建完成（4 英雄 + 默认技能）",
+      "stateHash": "f1a8e3da",
+      "rngSnapshotId": "golden-normal-success-01#0",
+      "party": [
+        "crusader@1",
+        "hellion@4",
+        "highwayman@3",
+        "vestal@2"
+      ],
+      "stagecoach": [],
+      "gold": 50,
+      "xp": 0,
+      "buildings": [],
+      "boss": null,
+      "questCount": 0,
+      "saveVersion": 16,
+      "contentManifestHash": "1ae3bcf5",
+      "pendingTransactionCount": 0
+    },
+    {
+      "id": "M01",
+      "label": "Act I · Standard Quest 1 结算完成",
+      "stateHash": "f122fc56",
+      "rngSnapshotId": "golden-normal-success-01#56",
+      "party": [
+        "crusader@1",
+        "hellion@4",
+        "highwayman@3",
+        "vestal@2"
+      ],
+      "stagecoach": [],
+      "gold": 87,
+      "xp": 0,
+      "buildings": [],
+      "boss": null,
+      "questCount": 1,
+      "saveVersion": 16,
+      "contentManifestHash": "1ae3bcf5",
+      "pendingTransactionCount": 1
+    },
+    {
+      "id": "M02",
+      "label": "Act I · Standard Quest 2 结算完成",
+      "stateHash": "52a0458e",
+      "rngSnapshotId": "golden-normal-success-01#68",
+      "party": [
+        "crusader@1",
+        "hellion@4",
+        "highwayman@3",
+        "vestal@2"
+      ],
+      "stagecoach": [],
+      "gold": 101,
+      "xp": 4,
+      "buildings": [],
+      "boss": null,
+      "questCount": 2,
+      "saveVersion": 16,
+      "contentManifestHash": "1ae3bcf5",
+      "pendingTransactionCount": 3
+    }
+  ]
+}

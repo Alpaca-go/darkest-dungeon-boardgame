@@ -42,5 +42,14 @@ pw-out/
 # WorkBuddy internal state (assistant memory, not project source)
 .workbuddy
 
-# Project docs (development docs + large rules PDF ~98MB, intentionally untracked)
-docs/
+# Project docs: dev docs + the ~98MB rules PDF stay untracked.
+# Phase 11A audit deliverables under docs/reports/ and docs/data/ ARE tracked (spec §34).
+docs/*
+!docs/reports/
+!docs/data/
+docs/references/
+
+# Phase 11A audit run logs (throwaway, not deliverables)
+audit-*.log
+*.audit.log
+

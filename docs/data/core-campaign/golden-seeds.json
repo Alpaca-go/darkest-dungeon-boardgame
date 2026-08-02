@@ -1,0 +1,311 @@
+{
+  "milestones": [
+    {
+      "id": "M00",
+      "label": "新战役创建完成（4 英雄 + 默认技能）",
+      "requires": "createNewCampaign / selectParty / applyDefaultLoadout"
+    },
+    {
+      "id": "M01",
+      "label": "Act I · Standard Quest 1 结算完成",
+      "requires": "selectQuest / finishQuest / startHamletPhase"
+    },
+    {
+      "id": "M02",
+      "label": "Act I · Standard Quest 2 结算完成",
+      "requires": "campaign-progress.withStandardQuestCompleted"
+    },
+    {
+      "id": "M03",
+      "label": "Act I · Boss Quest 胜利 → 进入 Act II",
+      "requires": "campaign-progress.withActStarted + Boss Quest 可选中"
+    },
+    {
+      "id": "M04",
+      "label": "Act II · Standard Quest 1 结算完成",
+      "requires": "Act 推进生效"
+    },
+    {
+      "id": "M05",
+      "label": "Act II · Standard Quest 2 结算完成",
+      "requires": "Act 推进生效"
+    },
+    {
+      "id": "M06",
+      "label": "Act II · Boss Quest 胜利 → 进入 Act III",
+      "requires": "Act 推进生效"
+    },
+    {
+      "id": "M07",
+      "label": "Act III · Standard Quest 1 结算完成",
+      "requires": "Act 推进生效"
+    },
+    {
+      "id": "M08",
+      "label": "Act III · Standard Quest 2 结算完成",
+      "requires": "Act 推进生效"
+    },
+    {
+      "id": "M09",
+      "label": "Act III · Boss Quest 胜利 → 第三 Threat 后 Hamlet",
+      "requires": "Act 推进生效"
+    },
+    {
+      "id": "M10",
+      "label": "Darkest Dungeon 解锁 + Guardian Quest 生成",
+      "requires": "act-four unlock + createGuardianQuest"
+    },
+    {
+      "id": "M11",
+      "label": "Guardian 击败 → Final Hamlet",
+      "requires": "resolveGuardianVictory（官方数据缺失，仅 prototype harness）"
+    },
+    {
+      "id": "M12",
+      "label": "Final Hamlet 4 天完成",
+      "requires": "startFinalHamlet / advanceFinalHamletDay"
+    },
+    {
+      "id": "M13",
+      "label": "Final Encounter 开始（首个 Form 出场）",
+      "requires": "prepareFinalEncounter / startFinalEncounter"
+    },
+    {
+      "id": "M14",
+      "label": "倒数第二个 Form 被击败",
+      "requires": "defeatFinalForm / transitionToNextFinalForm"
+    },
+    {
+      "id": "M15",
+      "label": "Heart of Darkness 击败 → Campaign Victory",
+      "requires": "resolveCampaignVictory"
+    }
+  ],
+  "seeds": [
+    {
+      "id": "golden-normal-success-01",
+      "rngSeed": "20260802",
+      "campaignMode": "normal",
+      "setupOverrides": {},
+      "expectedMilestones": [
+        "M00",
+        "M01",
+        "M02",
+        "M03",
+        "M04",
+        "M05",
+        "M06",
+        "M07",
+        "M08",
+        "M09",
+        "M10",
+        "M11",
+        "M12",
+        "M13",
+        "M14",
+        "M15"
+      ],
+      "expectedOutcome": "campaign-victory",
+      "runnable": false,
+      "blockedReason": "Act 推进状态机（campaign-progress.ts）无任何生产调用方，Boss Quest 定义零引用 → 11-Quest 循环在正式路径上不可达（ISSUE-P0-001）"
+    },
+    {
+      "id": "golden-save-resume-01",
+      "rngSeed": "sr-01",
+      "campaignMode": "save-resume",
+      "setupOverrides": {},
+      "expectedMilestones": [
+        "M00",
+        "M01",
+        "M02",
+        "M03",
+        "M04",
+        "M05",
+        "M06",
+        "M07",
+        "M08",
+        "M09",
+        "M10",
+        "M11",
+        "M12",
+        "M13",
+        "M14",
+        "M15"
+      ],
+      "expectedOutcome": "campaign-victory",
+      "runnable": false,
+      "blockedReason": "依赖完整 11-Quest 循环；Save/Resume 本身可在已达成的里程碑上单独验证"
+    },
+    {
+      "id": "golden-hero-death-replacement-01",
+      "rngSeed": "hd-01",
+      "campaignMode": "hero-death",
+      "setupOverrides": {},
+      "expectedMilestones": [
+        "M00",
+        "M01",
+        "M02",
+        "M03",
+        "M04",
+        "M05",
+        "M06",
+        "M07",
+        "M08",
+        "M09",
+        "M10",
+        "M11",
+        "M12",
+        "M13",
+        "M14",
+        "M15"
+      ],
+      "expectedOutcome": "campaign-victory",
+      "runnable": false,
+      "blockedReason": "依赖完整 11-Quest 循环（英雄死亡/替补机制本身已实现并单测覆盖）"
+    },
+    {
+      "id": "golden-stagecoach-exhaustion-01",
+      "rngSeed": "se-01",
+      "campaignMode": "stagecoach-exhaustion",
+      "setupOverrides": {},
+      "expectedMilestones": [
+        "M00"
+      ],
+      "expectedOutcome": "campaign-over",
+      "runnable": true
+    },
+    {
+      "id": "golden-boss-failure-01",
+      "rngSeed": "bf-01",
+      "campaignMode": "boss-failure",
+      "setupOverrides": {},
+      "expectedMilestones": [
+        "M00"
+      ],
+      "expectedOutcome": "campaign-over",
+      "runnable": false,
+      "blockedReason": "Boss Quest 无法通过正式路径选中（FACE_THE_THREAT_QUEST_DEFINITION 零引用）"
+    },
+    {
+      "id": "golden-guardian-failure-01",
+      "rngSeed": "gf-01",
+      "campaignMode": "guardian-failure",
+      "setupOverrides": {},
+      "expectedMilestones": [
+        "M00",
+        "M10"
+      ],
+      "expectedOutcome": "campaign-over",
+      "runnable": false,
+      "blockedReason": "Guardian 官方数据 unavailable（Data Gate 关闭），仅 prototype harness 可跑"
+    },
+    {
+      "id": "golden-final-failure-01",
+      "rngSeed": "ff-01",
+      "campaignMode": "final-failure",
+      "setupOverrides": {},
+      "expectedMilestones": [
+        "M00",
+        "M10",
+        "M11",
+        "M12",
+        "M13"
+      ],
+      "expectedOutcome": "campaign-over",
+      "runnable": false,
+      "blockedReason": "Final Encounter 官方数据 unavailable（isFinalEncounterOfficialEnabled() === false）"
+    },
+    {
+      "id": "golden-templars-guardian",
+      "rngSeed": "tmpl",
+      "campaignMode": "guardian",
+      "setupOverrides": {},
+      "expectedMilestones": [
+        "M10",
+        "M11"
+      ],
+      "expectedOutcome": "campaign-victory",
+      "guardianFamily": "templars",
+      "runnable": false,
+      "blockedReason": "官方 Guardian 数据缺失；prototype harness 已在 Phase 10B E2E 覆盖"
+    },
+    {
+      "id": "golden-mammoth-cyst-guardian",
+      "rngSeed": "mmth",
+      "campaignMode": "guardian",
+      "setupOverrides": {},
+      "expectedMilestones": [
+        "M10",
+        "M11"
+      ],
+      "expectedOutcome": "campaign-victory",
+      "guardianFamily": "mammoth-cyst",
+      "runnable": false,
+      "blockedReason": "官方 Guardian 数据缺失；prototype harness 已在 Phase 10C E2E 覆盖"
+    },
+    {
+      "id": "golden-shuffling-horror-guardian",
+      "rngSeed": "shuf",
+      "campaignMode": "guardian",
+      "setupOverrides": {},
+      "expectedMilestones": [
+        "M10",
+        "M11"
+      ],
+      "expectedOutcome": "campaign-victory",
+      "guardianFamily": "shuffling-horror",
+      "runnable": false,
+      "blockedReason": "官方 Guardian 数据缺失；prototype harness 已在 Phase 10D E2E 覆盖"
+    },
+    {
+      "id": "golden-skip-ancestor-first",
+      "rngSeed": "sk1",
+      "campaignMode": "skipped-form",
+      "setupOverrides": {},
+      "expectedMilestones": [
+        "M12",
+        "M13",
+        "M14",
+        "M15"
+      ],
+      "expectedOutcome": "campaign-victory",
+      "skippedForm": "ancestor-first-form",
+      "runnable": false,
+      "blockedReason": "Final Encounter 官方数据 unavailable；prototype harness 已在 Phase 10E E2E 覆盖"
+    },
+    {
+      "id": "golden-skip-ancestor-second",
+      "rngSeed": "sk2",
+      "campaignMode": "skipped-form",
+      "setupOverrides": {},
+      "expectedMilestones": [
+        "M12",
+        "M13",
+        "M14",
+        "M15"
+      ],
+      "expectedOutcome": "campaign-victory",
+      "skippedForm": "ancestor-second-form",
+      "runnable": false,
+      "blockedReason": "Final Encounter 官方数据 unavailable；prototype harness 已在 Phase 10E E2E 覆盖"
+    },
+    {
+      "id": "golden-skip-gestating-heart",
+      "rngSeed": "sk3",
+      "campaignMode": "skipped-form",
+      "setupOverrides": {},
+      "expectedMilestones": [
+        "M12",
+        "M13",
+        "M14",
+        "M15"
+      ],
+      "expectedOutcome": "campaign-victory",
+      "skippedForm": "gestating-heart",
+      "runnable": false,
+      "blockedReason": "Final Encounter 官方数据 unavailable；prototype harness 已在 Phase 10E E2E 覆盖"
+    }
+  ],
+  "runnable": 1,
+  "blocked": 12
+}

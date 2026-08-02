@@ -1,0 +1,76 @@
+{
+  "measuredAt": "1970-01-01T00:00:00.000Z",
+  "environment": {
+    "node": "v22.22.2",
+    "platform": "win32"
+  },
+  "newCampaignInit": {
+    "iters": 20,
+    "avgMs": 0.123,
+    "minMs": 0.008,
+    "maxMs": 1.715,
+    "p95Ms": 1.715
+  },
+  "questSetup": {
+    "iters": 10,
+    "avgMs": 2.832,
+    "minMs": 1.353,
+    "maxMs": 9.648,
+    "p95Ms": 9.648
+  },
+  "battleSetup": {
+    "iters": 10,
+    "avgMs": 3.037,
+    "minMs": 1.872,
+    "maxMs": 7.096,
+    "p95Ms": 7.096
+  },
+  "save": {
+    "iters": 50,
+    "avgMs": 0.003,
+    "minMs": 0.001,
+    "maxMs": 0.025,
+    "p95Ms": 0.006,
+    "representativeBytes": 20145
+  },
+  "load": {
+    "iters": 50,
+    "avgMs": 0.255,
+    "minMs": 0.214,
+    "maxMs": 0.49,
+    "p95Ms": 0.422
+  },
+  "formTransition": {
+    "iters": 10,
+    "avgMs": 0.574,
+    "minMs": 0.341,
+    "maxMs": 1.604,
+    "p95Ms": 1.604,
+    "mechanismLevel": true,
+    "reachabilityNote": "机制级测量：经正式引擎装配链推到 Final Encounter 后计时；正式四 Act 主循环不可达（ISSUE-P0-001）。"
+  },
+  "fullRun": {
+    "eventCount": 140,
+    "maxSaveBytes": 88403,
+    "maxLedger": 29,
+    "peakActors": 7,
+    "peakInitiative": 7,
+    "note": "完整 Run 在正式路径上仅能跑到 Act I（完成 10 个任务后停在 campaign-over），以下为**该可达 Run**的真实极值，不代表完整 11-Quest 全链路。"
+  },
+  "engineeringGate": {
+    "saveLoad100xNoCrash": true,
+    "saveLoad100xNoInflation": true,
+    "formTransitionNoLeak": true,
+    "stepBudgetsMs": {
+      "newCampaignInit": 50,
+      "questSetup": 250,
+      "battleSetup": 300,
+      "save": 60,
+      "load": 60,
+      "formTransition": 120
+    },
+    "longUnresponsive": false,
+    "duplicateListenerBlowup": "unmeasured"
+  },
+  "notes": []
+}

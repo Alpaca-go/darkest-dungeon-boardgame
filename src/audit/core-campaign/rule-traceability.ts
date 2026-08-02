@@ -1,0 +1,240 @@
+// Phase 11A — Rule Traceability Matrix (spec §10).
+// Curated mapping of P0 core-campaign rules to implementation files, definition IDs,
+// and test IDs. Status is honest: data-missing where the official rulebook card
+// data is unavailable (never fabricated). Implementation-policy items are flagged.
+
+import type { RuleTraceabilityRecord } from './types';
+
+export const RULE_TRACEABILITY: RuleTraceabilityRecord[] = [
+  {
+    id: 'R-ACT-STRUCTURE',
+    priority: 'P0',
+    ruleDomain: 'Campaign Structure',
+    ruleSummary: '核心盒 = 四 Act / 十一 Quest；Acts I—III 各 2 普通 + 1 Boss Quest；Act IV = Guardian + Final Encounter。',
+    sourceReference: 'DD_EN_COREBOX_RULES.pdf §9-12',
+    sourceType: 'rulebook',
+    implementationFiles: ['src/game-engine/campaign.ts', 'src/game-engine/campaign/campaign-progress.ts'],
+    definitionIds: [],
+    testIds: ['tests/audit/content-manifest.test.ts', 'src/game-engine/campaign/campaign-progress.test.ts'],
+    status: 'implemented-not-tested',
+    notes: ['campaign-progress.ts 状态机存在但未被 finishQuest/selectQuest 调用（见 ISSUE-ACT-FLOW）。'],
+  },
+  {
+    id: 'R-BOSS-FAIL-OVER',
+    priority: 'P0',
+    ruleDomain: 'Fail Path',
+    ruleSummary: 'Boss Quest 失败 → Campaign Over。',
+    sourceReference: 'DD_EN_COREBOX_RULES.pdf §13',
+    sourceType: 'rulebook',
+    implementationFiles: ['src/game-engine/campaign/act-four/guardian-quest.ts', 'src/store/useGameStore.ts'],
+    definitionIds: ['failCampaign'],
+    testIds: ['e2e/campaign-failure.spec.ts'],
+    status: 'implemented-not-tested',
+    notes: [],
+  },
+  {
+    id: 'R-GUARDIAN-FAIL-OVER',
+    priority: 'P0',
+    ruleDomain: 'Fail Path',
+    ruleSummary: 'Darkest Dungeon Guardian 失败 → Campaign Over。',
+    sourceReference: 'DD_EN_COREBOX_RULES.pdf §13',
+    sourceType: 'rulebook',
+    implementationFiles: ['src/game-engine/campaign/act-four/guardian-quest.ts'],
+    definitionIds: ['resolveGuardianFailure'],
+    testIds: ['e2e/guardian-matrix.spec.ts'],
+    status: 'implemented-not-tested',
+    notes: [],
+  },
+  {
+    id: 'R-FINAL-FAIL-OVER',
+    priority: 'P0',
+    ruleDomain: 'Fail Path',
+    ruleSummary: '任意 Final Form 失败 → Campaign Over。',
+    sourceReference: 'DD_EN_COREBOX_RULES.pdf §13',
+    sourceType: 'rulebook',
+    implementationFiles: ['src/game-engine/campaign/act-four/final-form-sequence.ts'],
+    definitionIds: ['failFinalEncounter'],
+    testIds: ['e2e/final-form-matrix.spec.ts'],
+    status: 'implemented-not-tested',
+    notes: [],
+  },
+  {
+    id: 'R-STAGECOACH-EXHAUSTION',
+    priority: 'P0',
+    ruleDomain: 'Fail Path',
+    ruleSummary: '无法组成 4 人 Party（Stagecoach 耗尽）→ Campaign Over。',
+    sourceReference: 'DD_EN_COREBOX_RULES.pdf §6',
+    sourceType: 'rulebook',
+    implementationFiles: ['src/game-engine/stagecoach.ts', 'src/game-engine/replacement.ts'],
+    definitionIds: ['failCampaign', 'evaluateReplacementFlow'],
+    testIds: ['src/game-engine/phase8d-replacement.test.ts', 'e2e/campaign-failure.spec.ts'],
+    status: 'implemented-and-tested',
+    notes: [],
+  },
+  {
+    id: 'R-HEART-VICTORY',
+    priority: 'P0',
+    ruleDomain: 'Victory',
+    ruleSummary: 'Heart of Darkness 被击败 → Campaign Victory。',
+    sourceReference: 'DD_EN_COREBOX_RULES.pdf §36',
+    sourceType: 'rulebook',
+    implementationFiles: ['src/game-engine/campaign/act-four/transition-final-form.ts', 'src/game-engine/campaign/act-four/resolve-campaign-victory.ts'],
+    definitionIds: ['resolveHeartOfDarknessDefeat', 'resolveCampaignVictory'],
+    testIds: ['src/game-engine/campaign/act-four/final-forms.test.ts', 'e2e/phase10e-final-encounter.spec.ts'],
+    status: 'implemented-and-tested',
+    notes: [],
+  },
+  {
+    id: 'R-ACT4-LEVEL',
+    priority: 'P0',
+    ruleDomain: 'Campaign Structure',
+    ruleSummary: 'Act IV 仍为 Campaign Level III。',
+    sourceReference: 'DD_EN_COREBOX_RULES.pdf §9',
+    sourceType: 'rulebook',
+    implementationFiles: ['src/game-engine/campaign/campaign-progress.ts'],
+    definitionIds: ['campaignLevelForAct'],
+    testIds: ['src/game-engine/campaign/campaign-progress.test.ts'],
+    status: 'implemented-and-tested',
+    notes: ['campaignLevelForAct(4) === 3 由单测保证。'],
+  },
+  {
+    id: 'R-FORM-SEQ',
+    priority: 'P0',
+    ruleDomain: 'Final Encounter',
+    ruleSummary: 'effective sequence 恰好 3 个 Form，Heart of Darkness 最后，skipped Form 不 Spawn。',
+    sourceReference: 'DD_EN_COREBOX_RULES.pdf §40',
+    sourceType: 'rulebook',
+    implementationFiles: ['src/game-engine/campaign/act-four/prepare-final-encounter.ts'],
+    definitionIds: ['buildOrderedFinalFormIds', 'getOrderedFinalFormIds'],
+    testIds: ['src/game-engine/campaign/act-four/final-forms.test.ts'],
+    status: 'implemented-and-tested',
+    notes: [],
+  },
+  {
+    id: 'R-PARTY-4',
+    priority: 'P0',
+    ruleDomain: 'Party',
+    ruleSummary: 'Active Party 固定 4 人；Hero 死亡从 Stagecoach 替补。',
+    sourceReference: 'DD_EN_COREBOX_RULES.pdf §6',
+    sourceType: 'rulebook',
+    implementationFiles: ['src/game-engine/campaign.ts', 'src/game-engine/replacement.ts'],
+    definitionIds: ['selectParty', 'selectReplacementHero'],
+    testIds: ['src/game-engine/phase2.test.ts', 'src/game-engine/phase8d-replacement.test.ts'],
+    status: 'implemented-and-tested',
+    notes: [],
+  },
+  {
+    id: 'R-QUEST-RESULT',
+    priority: 'P0',
+    ruleDomain: 'Dungeon',
+    ruleSummary: 'Quest 完成后结算 Gold / XP / Quirk / Disease，回 Hamlet 清理。',
+    sourceReference: 'DD_EN_COREBOX_RULES.pdf §14',
+    sourceType: 'rulebook',
+    implementationFiles: ['src/game-engine/quest-result.ts', 'src/game-engine/hamlet.ts'],
+    definitionIds: ['finishQuest', 'startHamletPhase'],
+    testIds: ['src/game-engine/phase4.test.ts'],
+    status: 'implemented-and-tested',
+    notes: [],
+  },
+  {
+    id: 'R-OFFICIAL-GUARDIAN-DATA',
+    priority: 'P0',
+    ruleDomain: 'Content',
+    ruleSummary: 'Act IV Guardian 正式卡牌资料（Ruins Boss 完整定义）。',
+    sourceReference: 'DD_EN_COREBOX_RULES.pdf — Guardian Boss Cards',
+    sourceType: 'rulebook',
+    implementationFiles: ['src/data/darkest-dungeon/guardian-registry.ts'],
+    definitionIds: [],
+    testIds: [],
+    status: 'data-missing',
+    notes: ['isDarkestDungeonOfficialGuardianPoolEnabled() === false；官方 Guardian 资料 unavailable。'],
+  },
+  {
+    id: 'R-OFFICIAL-FINAL-DATA',
+    priority: 'P0',
+    ruleDomain: 'Content',
+    ruleSummary: 'Final Encounter / Ancestor Room 正式卡牌资料。',
+    sourceReference: 'DD_EN_COREBOX_RULES.pdf §36,40,41',
+    sourceType: 'rulebook',
+    implementationFiles: ['src/data/darkest-dungeon/final-form-registry.ts'],
+    definitionIds: [],
+    testIds: [],
+    status: 'data-missing',
+    notes: ['isFinalEncounterOfficialEnabled() === false；OFFICIAL_FINAL_FORMS 全 unavailable。'],
+  },
+  {
+    id: 'R-OFFICIAL-CORE-CARDS',
+    priority: 'P0',
+    ruleDomain: 'Content',
+    ruleSummary: 'Hero / Skill / Quest / Monster / Room / Curio / Quirk / Disease 正式卡牌资料带 sourceReference。',
+    sourceReference: 'DD_EN_COREBOX_RULES.pdf — Core Cards',
+    sourceType: 'rulebook',
+    implementationFiles: ['src/data/heroes.ts', 'src/data/skills.ts', 'src/data/quests.ts', 'src/data/monsters.ts', 'src/data/rooms.ts'],
+    definitionIds: [],
+    testIds: [],
+    status: 'data-missing',
+    notes: ['核心内容均无 sourceReference 字段，无法判定 verified。'],
+  },
+  {
+    id: 'R-DETERMINISTIC-RNG',
+    priority: 'P0',
+    ruleDomain: 'Engine',
+    ruleSummary: '所有随机行为经统一可注入 RNG，禁止 Math.random() 直接进入正式逻辑。',
+    sourceReference: 'Phase 11A 实施约束 9',
+    sourceType: 'implementation-policy',
+    implementationFiles: ['src/game-engine/random.ts', 'src/game-engine/campaign/act-four/rng.ts'],
+    definitionIds: ['setRandomSource', 'createSeededRng'],
+    testIds: ['tests/audit/rng-audit.test.ts'],
+    status: 'implemented-not-tested',
+    notes: ['createId() 在 random.ts:29 直接调用 Math.random()，golden-run 哈希漂移（见 ISSUE-RNG-DETERMINISM）。'],
+  },
+  {
+    id: 'R-PROTOTYPE-ISOLATION',
+    priority: 'P0',
+    ruleDomain: 'Content',
+    ruleSummary: 'official path 不得引用 prototype-* ID。',
+    sourceReference: 'Phase 11A 硬约束 6',
+    sourceType: 'implementation-policy',
+    implementationFiles: ['src/audit/core-campaign/prototype-scan.ts'],
+    definitionIds: [],
+    testIds: ['tests/audit/prototype-scan.test.ts'],
+    status: 'implemented-and-tested',
+    notes: [],
+  },
+];
+
+export function getRuleTraceability(): RuleTraceabilityRecord[] {
+  return RULE_TRACEABILITY;
+}
+
+/** 按状态汇总 P0 规则覆盖情况（Release Gate 使用）。 */
+export interface RuleTraceabilitySummary {
+  total: number;
+  p0Total: number;
+  implementedAndTested: number;
+  implementedNotTested: number;
+  dataMissing: number;
+  implementationMissing: number;
+  p0Complete: boolean;
+  blockedRuleIds: string[];
+}
+
+export function summarizeRuleTraceability(
+  records: RuleTraceabilityRecord[] = RULE_TRACEABILITY,
+): RuleTraceabilitySummary {
+  const p0 = records.filter((r) => r.priority === 'P0');
+  const count = (s: RuleTraceabilityRecord['status']) => p0.filter((r) => r.status === s).length;
+  const implementedAndTested = count('implemented-and-tested');
+  return {
+    total: records.length,
+    p0Total: p0.length,
+    implementedAndTested,
+    implementedNotTested: count('implemented-not-tested'),
+    dataMissing: count('data-missing'),
+    implementationMissing: count('implementation-missing'),
+    p0Complete: p0.length > 0 && implementedAndTested === p0.length,
+    blockedRuleIds: p0
+      .filter((r) => r.status === 'data-missing' || r.status === 'implementation-missing')
+      .map((r) => r.id),
+  };
+}

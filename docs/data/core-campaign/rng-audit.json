@@ -1,0 +1,93 @@
+{
+  "passed": false,
+  "mathRandomLeaks": 1,
+  "officialPathMathRandomLeaks": 1,
+  "timeSourceLeaks": 8,
+  "definitionHashStable": true,
+  "officialFindings": [
+    {
+      "file": "src/game-engine/random.ts",
+      "line": 29,
+      "text": "const rand = Math.random().toString(36).slice(2, 8);"
+    }
+  ],
+  "allFindings": [
+    {
+      "file": "src/components/dungeon/EventLog.tsx",
+      "line": 12,
+      "category": "new-date",
+      "severity": "warning",
+      "text": "const d = new Date(iso);"
+    },
+    {
+      "file": "src/components/feedback/ErrorBoundary.tsx",
+      "line": 36,
+      "category": "new-date",
+      "severity": "warning",
+      "text": "at: new Date().toISOString(),"
+    },
+    {
+      "file": "src/game-engine/necromancer/runtime.ts",
+      "line": 61,
+      "category": "new-date",
+      "severity": "warning",
+      "text": "const at = new Date().toISOString();"
+    },
+    {
+      "file": "src/game-engine/necromancer/runtime.ts",
+      "line": 134,
+      "category": "new-date",
+      "severity": "warning",
+      "text": "createdAt: new Date().toISOString(),"
+    },
+    {
+      "file": "src/game-engine/phase7.test.ts",
+      "line": 323,
+      "category": "new-date",
+      "severity": "warning",
+      "text": "savedAt: new Date().toISOString(),"
+    },
+    {
+      "file": "src/game-engine/phase8a.test.ts",
+      "line": 563,
+      "category": "new-date",
+      "severity": "warning",
+      "text": "savedAt: new Date().toISOString(),"
+    },
+    {
+      "file": "src/game-engine/random.ts",
+      "line": 5,
+      "category": "other",
+      "severity": "warning",
+      "text": "let _rng: () => number = Math.random; (legitimate default / injection point)"
+    },
+    {
+      "file": "src/game-engine/random.ts",
+      "line": 9,
+      "category": "other",
+      "severity": "warning",
+      "text": "_rng = fn ?? Math.random; (legitimate default / injection point)"
+    },
+    {
+      "file": "src/game-engine/random.ts",
+      "line": 29,
+      "category": "math-random",
+      "severity": "error",
+      "text": "const rand = Math.random().toString(36).slice(2, 8);"
+    },
+    {
+      "file": "src/game-engine/random.ts",
+      "line": 35,
+      "category": "new-date",
+      "severity": "warning",
+      "text": "return new Date().toISOString();"
+    },
+    {
+      "file": "src/pages/HomePage.tsx",
+      "line": 9,
+      "category": "new-date",
+      "severity": "warning",
+      "text": "const d = new Date(iso);"
+    }
+  ]
+}

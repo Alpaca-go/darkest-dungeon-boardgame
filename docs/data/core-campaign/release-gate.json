@@ -1,0 +1,64 @@
+{
+  "buildPasses": true,
+  "unitPasses": true,
+  "integrationPasses": false,
+  "criticalE2EPasses": false,
+  "goldenCampaignPasses": false,
+  "replayDeterminismPasses": false,
+  "openP0": 2,
+  "openP1": 3,
+  "prototypeReferencesInOfficialPath": 0,
+  "duplicateCommittedTransactions": 0,
+  "engineDeadlocks": 0,
+  "elevenQuestLoopClosed": false,
+  "campaignVictoryReachable": false,
+  "campaignOverReachable": true,
+  "threeGuardiansPass": false,
+  "threeSkippedFormsPass": false,
+  "fourRuinsBossesPass": false,
+  "saveResumeKeyNodesPass": true,
+  "ruleTraceabilityP0Complete": false,
+  "passed": false,
+  "verdict": "FAIL",
+  "conclusion": "FAIL — campaign-flow-blocked：11-Quest / 4-Act 主循环无法在正式引擎路径上闭环（停在 Act 1 / campaign-over，完成 10 个任务）。 根因：CAMPAIGN_FLOW_BLOCKED：已完成 10 个 Standard Quest（首次触发于第 3 个），campaign.act 始终为 1。Act 推进状态机（src/game-engine/campaign/campaign-progress.ts）无任何生产调用方，Boss Quest 定义（FACE_THE_THREAT_QUEST_DEFINITION）零引用，11-Quest 循环在正式路径上不可达。",
+  "unmeasuredGateBits": [
+    "integrationPasses",
+    "criticalE2EPasses"
+  ],
+  "dataGates": {
+    "officialGuardianPoolEnabled": false,
+    "officialFinalEncounterEnabled": false,
+    "officialDarkestDungeonQuestPoolEnabled": false,
+    "guardianDataGaps": [
+      "darkest-dungeon-guardian-templars（guardian-name:darkest-dungeon-guardian-templars；guardian-room:darkest-dungeon-guardian-templars；guardian-actors:darkest-dungeon-guardian-templars；Guardian darkest-dungeon-guardian-templars 数据缺失（unavailable）→ official 禁用）",
+      "darkest-dungeon-guardian-mammoth-cyst（guardian-name:darkest-dungeon-guardian-mammoth-cyst；guardian-room:darkest-dungeon-guardian-mammoth-cyst；guardian-actors:darkest-dungeon-guardian-mammoth-cyst；Guardian darkest-dungeon-guardian-mammoth-cyst 数据缺失（unavailable）→ official 禁用）",
+      "darkest-dungeon-guardian-shuffling-horror（guardian-name:darkest-dungeon-guardian-shuffling-horror；guardian-room:darkest-dungeon-guardian-shuffling-horror；guardian-actors:darkest-dungeon-guardian-shuffling-horror；Guardian darkest-dungeon-guardian-shuffling-horror 数据缺失（unavailable）→ official 禁用）"
+    ],
+    "finalEncounterDataGaps": [
+      "final-form-ancestor-first-form（final-form-name:ancestor-first-form；final-form-hp:ancestor-first-form；final-form-skills:ancestor-first-form；Final Form ancestor-first-form 数据缺失（unavailable）→ official 禁用）",
+      "final-form-ancestor-second-form（final-form-name:ancestor-second-form；final-form-hp:ancestor-second-form；final-form-skills:ancestor-second-form；Final Form ancestor-second-form 数据缺失（unavailable）→ official 禁用）",
+      "final-form-gestating-heart（final-form-name:gestating-heart；final-form-hp:gestating-heart；final-form-skills:gestating-heart；Final Form gestating-heart 数据缺失（unavailable）→ official 禁用）",
+      "final-form-heart-of-darkness（final-form-name:heart-of-darkness；final-form-hp:heart-of-darkness；final-form-skills:heart-of-darkness；Final Form heart-of-darkness 数据缺失（unavailable）→ official 禁用）",
+      "final-encounter-room（Final Room Card / Area 缺失）"
+    ],
+    "darkestDungeonQuestDataGaps": [
+      "darkest-dungeon-quest-1（quest-name:darkest-dungeon-quest-1；guardian-definition:darkest-dungeon-quest-1；skipped-final-form:darkest-dungeon-quest-1；provision-policy:darkest-dungeon-quest-1；Quest darkest-dungeon-quest-1 卡面数据缺失（unavailable）→ official 禁用）",
+      "darkest-dungeon-quest-2（quest-name:darkest-dungeon-quest-2；guardian-definition:darkest-dungeon-quest-2；skipped-final-form:darkest-dungeon-quest-2；provision-policy:darkest-dungeon-quest-2；Quest darkest-dungeon-quest-2 卡面数据缺失（unavailable）→ official 禁用）",
+      "darkest-dungeon-quest-3（quest-name:darkest-dungeon-quest-3；guardian-definition:darkest-dungeon-quest-3；skipped-final-form:darkest-dungeon-quest-3；provision-policy:darkest-dungeon-quest-3；Quest darkest-dungeon-quest-3 卡面数据缺失（unavailable）→ official 禁用）"
+    ]
+  },
+  "ruleSummary": {
+    "total": 15,
+    "p0Total": 15,
+    "implementedAndTested": 7,
+    "implementedNotTested": 5,
+    "dataMissing": 3,
+    "implementationMissing": 0,
+    "p0Complete": false,
+    "blockedRuleIds": [
+      "R-OFFICIAL-GUARDIAN-DATA",
+      "R-OFFICIAL-FINAL-DATA",
+      "R-OFFICIAL-CORE-CARDS"
+    ]
+  }
+}

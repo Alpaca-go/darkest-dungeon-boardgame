@@ -1,0 +1,36 @@
+{
+  "version": "1.0.0",
+  "requiredSuites": {
+    "goldenCampaign": [
+      "golden-normal-success-01"
+    ],
+    "failures": [
+      "golden-boss-failure-01",
+      "golden-guardian-failure-01",
+      "golden-final-failure-01",
+      "golden-stagecoach-exhaustion-01"
+    ],
+    "saveResume": [
+      "golden-save-resume-01"
+    ],
+    "guardians": [
+      "golden-templars-guardian",
+      "golden-mammoth-cyst-guardian",
+      "golden-shuffling-horror-guardian"
+    ],
+    "skippedForms": [
+      "golden-skip-ancestor-first",
+      "golden-skip-ancestor-second",
+      "golden-skip-gestating-heart"
+    ]
+  },
+  "releaseGate": {
+    "openP0": 0,
+    "openP1": 0,
+    "prototypeReferencesInOfficialPath": 0,
+    "duplicateCommittedTransactions": 0,
+    "engineDeadlocks": 0,
+    "goldenCampaignPassed": true,
+    "replayDeterminismPassed": true
+  }
+}
