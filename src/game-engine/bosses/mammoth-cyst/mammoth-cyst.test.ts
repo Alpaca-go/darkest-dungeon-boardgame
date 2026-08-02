@@ -889,15 +889,17 @@ describe('§31.5 Death / Resummon / Victory', () => {
     expect(sanitized!.skillRolls).toHaveLength(s.skillRolls.length);
   });
 
-  it('SAVE_VERSION = 14（Phase 10C 升版）', () => {
-    expect(SAVE_VERSION).toBe(14);
+  // ⚠️ 不要硬编码版本号：后续 Phase 升版会让这里无谓变红。
+  // 断言应聚焦「≥ Phase 10C 引入的 v14」与「迁移到当前 SAVE_VERSION」。
+  it('SAVE_VERSION ≥ 14（Phase 10C 引入 mammothCystEncounterState）', () => {
+    expect(SAVE_VERSION).toBeGreaterThanOrEqual(14);
   });
 
-  it('v13 存档迁移到 v14：补齐 mammothCystEncounterState 字段且为 null', () => {
+  it('v13 存档迁移到最新版：补齐 mammothCystEncounterState 字段且为 null', () => {
     const c = baseCampaign();
     const v13 = { ...c, saveVersion: 13 } as CampaignState;
     const migrated = migrateCampaignToLatest(v13);
-    expect(migrated.saveVersion).toBe(14);
+    expect(migrated.saveVersion).toBe(SAVE_VERSION);
     expect(migrated.actFourState.mammothCystEncounterState).toBeNull();
   });
 
@@ -905,7 +907,7 @@ describe('§31.5 Death / Resummon / Victory', () => {
     const c = mammothCystBattleCampaign();
     const v13 = { ...c, saveVersion: 13 } as CampaignState;
     const migrated = migrateCampaignToLatest(v13);
-    expect(migrated.saveVersion).toBe(14);
+    expect(migrated.saveVersion).toBe(SAVE_VERSION);
     const kept = migrated.actFourState.mammothCystEncounterState;
     expect(kept).toBeTruthy();
     expect(kept!.battleId).toBe(mc(c).battleId);

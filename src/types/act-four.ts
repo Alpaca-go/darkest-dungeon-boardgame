@@ -24,6 +24,7 @@ import type {
 // 而是挂在 ActFourState 下（与 finalEncounterState 同构）。
 import type { TemplarsEncounterState } from './templars';
 import type { MammothCystEncounterState } from './mammoth-cyst';
+import type { ShufflingHorrorEncounterState } from './shuffling-horror';
 
 /** Act IV 数据可信度（与项目统一四态一致）。 */
 export type ActFourDataStatus = DataCredibility;
@@ -390,6 +391,13 @@ export interface ActFourState {
    * Initiative 归属、召唤历史、传送历史、Hero Area 占位）。
    */
   mammothCystEncounterState: MammothCystEncounterState | null;
+  /**
+   * Phase 10D：Shuffling Horror / 动态怪物行动优先级 / Echoing Disassembly / Hero Stance
+   * Shuffle 遭遇运行时。同样遵守硬约束 1 —— 不新增 CampaignState 顶层字段、不创建第二套
+   * Battle/Initiative 状态机；这里只保存 Shuffling Horror 域的 *附加* 运行时（Monster
+   * Opportunity 卡组、Stance Priority Tracker、Monster/Hero Action Budget、Hero Stance 排列）。
+   */
+  shufflingHorrorEncounterState: ShufflingHorrorEncounterState | null;
 
   actFourStartedAt: string | null;
   lastTransitionTransactionId: string | null;

@@ -73,9 +73,11 @@ async function driveToMammothCystEncounter(page: Page) {
   await setupToQuests(page);
   await openDebug(page);
 
+  // ⚠️ ActFourDebugSection 默认折叠（useState(false)），按钮只在展开后渲染，
+  // 必须先展开再点「解锁 Act IV」，否则 locator 会一直等到 test timeout。
+  await openActFour(page);
   // 解锁 Act IV（带 withUnlockPrecondition 临时补齐 3 个 Boss Family）。
   await page.getByTestId('debug-actfour-解锁 Act IV').click();
-  await openActFour(page);
   await page.getByTestId('debug-actfour-跳过第三Boss回归').click();
   await page.getByTestId('debug-actfour-抽 Quest').click();
   await page.getByTestId('debug-actfour-抽 Layout').click();

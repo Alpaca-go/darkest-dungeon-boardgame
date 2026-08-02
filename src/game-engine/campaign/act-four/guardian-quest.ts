@@ -37,6 +37,7 @@ import { setupTemplarsEncounter } from '../../bosses/templars/templars-runtime';
 // ⚠️ 同样直接引用 runtime 模块文件而不是 bosses/mammoth-cyst/index 桶文件——
 // 桶文件会再导出 mammoth-cyst-victory，而后者反向依赖本模块，走桶文件会形成循环依赖。
 import { setupMammothCystEncounter } from '../../bosses/mammoth-cyst/mammoth-cyst-runtime';
+import { setupShufflingHorrorEncounter } from '../../bosses/shuffling-horror/shuffling-horror-runtime';
 import { failCampaign } from '../../stagecoach';
 import { pushLog } from '../../log';
 import { createId, nowIso } from '../../random';
@@ -164,6 +165,10 @@ export interface StartGuardianBattleResult {
   isMammothCystEncounter?: boolean;
   /** Phase 10C：Mammoth Cyst Setup 失败原因（同样只降级、不回滚 Battle 创建）。 */
   mammothCystSetupReason?: string | null;
+  /** Phase 10D：该 Guardian 是否为 Shuffling Horror 家族（触发 Horror Setup + Priest/Growth Reserve 登记）。 */
+  isShufflingHorrorEncounter?: boolean;
+  /** Phase 10D：Shuffling Horror Setup 失败原因（同样只降级、不回滚 Battle 创建）。 */
+  shufflingHorrorSetupReason?: string | null;
 }
 
 /**
@@ -280,6 +285,29 @@ export function startGuardianBattle(
     }
   }
 
+  // ---- Phase 10D §9：Shuffling Horror 家族 → 追加 Horror Setup + Priest/Growth Reserve ----
+  const isShufflingHorrorEncounter = guardian?.family === 'shuffling-horror';
+  let shufflingHorrorSetupReason: string | null = null;
+
+  if (isShufflingHorrorEncounter) {
+    const setup = setupShufflingHorrorEncounter(campaignAfter, {
+      mode: options?.mode ?? 'prototype',
+      rng: options?.rng,
+      seed: options?.seed,
+      now: options?.now,
+    });
+    if (setup.ok) {
+      campaignAfter = setup.campaign;
+    } else {
+      shufflingHorrorSetupReason = setup.reason;
+      campaignAfter = pushLog(
+        campaignAfter,
+        `Shuffling Horror Setup 未执行：${setup.reason ?? '未知原因'}`,
+        'warning',
+      );
+    }
+  }
+
   return {
     ok: true,
     campaign: campaignAfter,
@@ -290,6 +318,8 @@ export function startGuardianBattle(
     templarsSetupReason,
     isMammothCystEncounter,
     mammothCystSetupReason,
+    isShufflingHorrorEncounter,
+    shufflingHorrorSetupReason,
   };
 }
 

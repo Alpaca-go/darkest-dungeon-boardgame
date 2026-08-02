@@ -74,7 +74,7 @@ export const STORAGE_KEY = 'dd-web-prototype-save-v1';
  *      已存在则过 sanitizeMammothCystEncounterState 净化（结构性字段缺失 → null，不白屏）。
  *      硬约束 1：仍不新增 CampaignState 顶层字段，Mammoth Cyst 运行时挂在 ActFourState 下。
  */
-export const SAVE_VERSION = 14;
+export const SAVE_VERSION = 15;
 
 /**
  * v2 存档文件结构。
@@ -100,7 +100,7 @@ interface SaveEnvelopeV1 {
 }
 
 /** 可被迁移到当前版本的历史存档版本号。 */
-const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 
 /** 读档结果：区分正常 / 无存档 / 损坏 / 版本不支持。 */
 export type LoadStatus = 'ok' | 'empty' | 'corrupt' | 'unsupported';
@@ -1165,6 +1165,15 @@ export function migrateCampaignToV14(campaign: CampaignState): CampaignState {
   return { ...campaign, saveVersion: SAVE_VERSION, actFourState };
 }
 
+/** Phase 10D：在 V14 基础上补 shufflingHorrorEncounterState 字段（sanitize 内已支持）。 */
+export function migrateCampaignToV15(campaign: CampaignState): CampaignState {
+  const anyC = campaign as CampaignState & Record<string, unknown>;
+  const raw = anyC.actFourState;
+  const actFourState: ActFourState =
+    raw && typeof raw === 'object' ? sanitizeActFourState(raw) : createInitialActFourState();
+  return { ...campaign, saveVersion: SAVE_VERSION, actFourState };
+}
+
 /** 净化已存在的 campaignProgress（补缺字段 / clamp / 去掉非法类型），不重新随机。 */
 function sanitizeCampaignProgress(raw: CampaignProgressState): CampaignProgressState {
   const base = createInitialCampaignProgress({
@@ -1206,16 +1215,18 @@ function sanitizeCampaignProgress(raw: CampaignProgressState): CampaignProgressS
 /**
  * 将战役迁移到当前最新版本
  * （v3 → v8 = Phase 9A → v9 = Phase 9C → v10 = Phase 9D → v11 = Phase 9E → v12 = Phase 10A
- *  → v13 = Phase 10B Templars → v14 = Phase 10C Mammoth Cyst）。
+ *  → v13 = Phase 10B Templars → v14 = Phase 10C Mammoth Cyst → v15 = Phase 10D Shuffling Horror）。
  */
 export function migrateCampaignToLatest(campaign: CampaignState): CampaignState {
-  return migrateCampaignToV14(
-    migrateCampaignToV13(
-      migrateCampaignToV12(
-        migrateCampaignToV8(
-          migrateCampaignToV7(
-            migrateCampaignToV6(
-              migrateCampaignToV5(migrateCampaignToV4(migrateCampaignToV3(campaign))),
+  return migrateCampaignToV15(
+    migrateCampaignToV14(
+      migrateCampaignToV13(
+        migrateCampaignToV12(
+          migrateCampaignToV8(
+            migrateCampaignToV7(
+              migrateCampaignToV6(
+                migrateCampaignToV5(migrateCampaignToV4(migrateCampaignToV3(campaign))),
+              ),
             ),
           ),
         ),
@@ -1230,7 +1241,9 @@ export function migrateCampaignToLatest(campaign: CampaignState): CampaignState 
  * → v6（Phase 8B Disease）→ v7（Phase 8C Trinket + 8D XP）→ v8（Phase 9A Boss / Threat）
  * → v9（Phase 9C Prophet）→ v10（Phase 9D Collector）→ v11（Phase 9E Fanatic-Pyre）
  * → v12（Phase 10A Darkest Dungeon Act IV：actFourState）
- * → v13（Phase 10B The Templars：actFourState.templarsEncounterState）。
+ * → v13（Phase 10B The Templars：actFourState.templarsEncounterState）
+ * → v14（Phase 10C Mammoth Cyst：actFourState.mammothCystEncounterState）
+ * → v15（Phase 10D Shuffling Horror：actFourState.shufflingHorrorEncounterState）。
  */
 export function migrateSaveFile(raw: unknown): SaveFile | null {
   if (!raw || typeof raw !== 'object') return null;

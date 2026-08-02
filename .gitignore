@@ -15,6 +15,9 @@ yarn-debug.log*
 yarn-error.log*
 vite-dev.log
 npm-install*.log
+# Playwright run logs (pw-all.log / pw10d.log ... produced by validation runs)
+pw-*.log
+pw[0-9]*.log
 
 # Vite temporary build artifacts
 vite.config.ts.timestamp-*.mjs

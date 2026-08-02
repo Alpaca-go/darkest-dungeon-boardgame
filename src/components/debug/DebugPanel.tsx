@@ -10,6 +10,7 @@ import FanaticPyreDebugSection from './FanaticPyreDebugSection';
 import ActFourDebugSection from './ActFourDebugSection';
 import TemplarsDebugSection from './TemplarsDebugSection';
 import MammothCystDebugSection from './MammothCystDebugSection';
+import ShufflingHorrorDebugSection from './ShufflingHorrorDebugSection';
 
 /**
  * 开发调试面板：仅在开发环境（import.meta.env.DEV）渲染。
@@ -254,6 +255,7 @@ export default function DebugPanel() {
           <ActFourDebugSection />
           <TemplarsDebugSection />
           <MammothCystDebugSection />
+          <ShufflingHorrorDebugSection />
           <div className="flex flex-wrap gap-1.5">
             <button onClick={copySummary} className="px-2 py-1 rounded bg-dd-panel2 border border-dd-border text-dd-muted hover:text-dd-text">
               复制摘要

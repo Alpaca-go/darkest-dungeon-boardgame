@@ -7,6 +7,7 @@ import FinalEncounterHeader from './FinalEncounterHeader';
 import FormTransitionOverlay from './FormTransitionOverlay';
 import TemplarsEncounterPanel from './TemplarsEncounterPanel';
 import MammothCystEncounterPanel from './MammothCystEncounterPanel';
+import ShufflingHorrorEncounterPanel from './ShufflingHorrorEncounterPanel';
 
 /**
  * Act IV 顶部常驻横幅（只读）：游戏内唯一可见入口，挂在 GameShell。
@@ -48,6 +49,14 @@ export default function ActFourHeader() {
         {a4.mammothCystEncounterState && (
           <MammothCystEncounterPanel
             state={a4.mammothCystEncounterState}
+            heroNames={Object.fromEntries(campaign.heroes.map((h) => [h.instanceId, h.heroId]))}
+          />
+        )}
+        {/* Phase 10D §24：Shuffling Horror 遭遇进行中时显示只读面板
+            （三名 Actor 各自独立、Stance Priority Tracker、Opportunity 不绑定 Actor、Hero Stance 排列）。 */}
+        {a4.shufflingHorrorEncounterState && (
+          <ShufflingHorrorEncounterPanel
+            state={a4.shufflingHorrorEncounterState}
             heroNames={Object.fromEntries(campaign.heroes.map((h) => [h.instanceId, h.heroId]))}
           />
         )}

@@ -31,6 +31,7 @@ import { isFinalFormId } from '../../../data/darkest-dungeon/final-form-registry
 // Phase 10B §28：Templars 运行时净化（该模块只依赖 types + data 层，无循环依赖）。
 import { sanitizeTemplarsEncounterState } from '../../bosses/templars/templars-content-validation';
 import { sanitizeMammothCystEncounterState } from '../../bosses/mammoth-cyst/mammoth-cyst-content-validation';
+import { sanitizeShufflingHorrorEncounterState } from '../../bosses/shuffling-horror/shuffling-horror-content-validation';
 import { nowIso } from '../../random';
 
 // ---------------------------------------------------------------------------
@@ -114,6 +115,8 @@ export function createInitialActFourState(): ActFourState {
     templarsEncounterState: null,
     // Phase 10C：Mammoth Cyst 遭遇运行时（未进入 Guardian Quest 战斗前恒为 null）。
     mammothCystEncounterState: null,
+    // Phase 10D：Shuffling Horror 遭遇运行时（未进入 Guardian Quest 战斗前恒为 null）。
+    shufflingHorrorEncounterState: null,
 
     actFourStartedAt: null,
     lastTransitionTransactionId: null,
@@ -308,6 +311,9 @@ export function sanitizeActFourState(raw: unknown): ActFourState {
     // Phase 10C §26：Mammoth Cyst 运行时同样走安全兜底 —— 结构性字段缺失返回 null，
     // 已保存的 d10 Skill Roll / Teleportation Roll / 召唤记录原样保留，绝不重掷。
     mammothCystEncounterState: sanitizeMammothCystEncounterState(r.mammothCystEncounterState),
+    // Phase 10D：Shuffling Horror 运行时走安全兜底 —— 结构性字段缺失返回 null，
+    // 已保存的 Stance Priority / Action Budget / Hero Stance 排列原样保留，绝不重掷。
+    shufflingHorrorEncounterState: sanitizeShufflingHorrorEncounterState(r.shufflingHorrorEncounterState),
 
     actFourStartedAt: str(r.actFourStartedAt),
     lastTransitionTransactionId: str(r.lastTransitionTransactionId),
