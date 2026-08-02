@@ -27,6 +27,7 @@ import type {
 } from '../../../types/final-encounter';
 import {
   DEFAULT_FORM_TRANSITION_POLICY,
+  UNSKIPPABLE_FINAL_FORM_ID,
   getFinalFormDisplayName,
   getFinalFormPool,
 } from '../../../data/darkest-dungeon/final-form-registry';
@@ -36,6 +37,8 @@ import type { ActFourContentMode } from './draw-quest';
 import { withProcessedActFourTransaction } from './act-four-state';
 import { buildFinalEncounterBattle, buildFinalFormUnit } from './final-form-sequence';
 import { createSeededRng } from './rng';
+// Phase 10E：切换到新 Form 时同步建立其机制运行时（上一 Form 的运行时保留供审计）。
+import { setupFinalFormRuntime } from './final-forms/final-form-runtime';
 
 /** Form 切换历史保留条数（与 sanitizeActFourState 的 slice(-20) 对齐）。 */
 export const FORM_TRANSITION_HISTORY_LIMIT = 20;
@@ -77,6 +80,57 @@ export function diffFormTransitionSnapshots(
     if (a.stress !== b.stress) violations.push(`${b.heroId}：stress ${b.stress} → ${a.stress}`);
     if (a.stance !== b.stance) violations.push(`${b.heroId}：stance ${b.stance} → ${a.stance}`);
   }
+  return violations;
+}
+
+// ---------------------------------------------------------------------------
+// Phase 10E：Form Transition 严格校验
+// ---------------------------------------------------------------------------
+
+/**
+ * 切换前的结构性校验（Phase 10E 硬约束 2 / 4 / 5 / 13）。
+ *
+ * 只做「顺序 / 跳过」层面的判断，不涉及数值；任何一条不满足都拒绝切换，
+ * 而不是先切过去再补救 —— 半切状态会污染整场 Final Encounter。
+ */
+export function validateFinalFormTransition(
+  encounter: FinalEncounterState,
+  fromFormId: FinalFormId,
+  toFormId: FinalFormId,
+): string[] {
+  const violations: string[] = [];
+  const order = encounter.orderedFormIds;
+
+  const fromIndex = order.indexOf(fromFormId);
+  const toIndex = order.indexOf(toFormId);
+
+  if (fromIndex < 0) violations.push(`来源 Form ${fromFormId} 不在本局顺序内`);
+  if (toIndex < 0) violations.push(`目标 Form ${toFormId} 不在本局顺序内`);
+  if (fromIndex >= 0 && toIndex >= 0 && toIndex !== fromIndex + 1) {
+    violations.push(`Form 顺序必须逐个推进（${fromFormId} → ${toFormId} 跳级或回退）`);
+  }
+
+  // 硬约束 4：skipped Form 只能来自 Quest，且绝不出现在实际顺序里。
+  if (order.includes(encounter.skippedFormId)) {
+    violations.push(`被 Quest 取消的 Form ${encounter.skippedFormId} 不得出现在顺序中`);
+  }
+  if (toFormId === encounter.skippedFormId) {
+    violations.push(`不得切换到已被 Quest 取消的 Form ${toFormId}`);
+  }
+
+  // 硬约束 5 / 13：Heart of Darkness 恒为最后一个，且不可被跳过。
+  if (order.length > 0 && order[order.length - 1] !== UNSKIPPABLE_FINAL_FORM_ID) {
+    violations.push('Form 顺序的最后一个必须是 Heart of Darkness');
+  }
+
+  // 上一个 Form 必须确实已被击败（防止绕过 defeatFinalForm 直接切换）。
+  if (!encounter.defeatedFormIds.includes(fromFormId)) {
+    violations.push(`来源 Form ${fromFormId} 尚未被击败，不得切换`);
+  }
+  if (encounter.defeatedFormIds.includes(toFormId)) {
+    violations.push(`目标 Form ${toFormId} 已被击败，不得重复出场`);
+  }
+
   return violations;
 }
 
@@ -167,6 +221,16 @@ export function transitionToNextFinalForm(
     };
   }
 
+  // Phase 10E：先做结构性校验，不合规一律不切（避免半切状态）。
+  const structuralViolations = validateFinalFormTransition(
+    encounter,
+    pending.fromFormId,
+    pending.toFormId,
+  );
+  if (structuralViolations.length > 0) {
+    return transFail(campaign, `Form 切换校验失败：${structuralViolations.join('；')}`);
+  }
+
   const def = getFinalFormPool(mode).find((f) => f.formId === pending.toFormId);
   if (!def) return transFail(campaign, `找不到 Final Form 定义：${pending.toFormId}`);
 
@@ -193,6 +257,23 @@ export function transitionToNextFinalForm(
     return transFail(
       campaign,
       `Form 切换改变了 Room（${previousRoomId} → ${battle.sourceRoomId}），违反「所有 Form 同一 Room」`,
+    );
+  }
+
+  // ---- 3.5 Phase 10E：为新 Form 建立机制运行时 ----
+  // 与 startFinalEncounter 同一范式：上一个 Form 的运行时保留在 runtimes 内供审计 / 复盘，
+  // 只是 activeFormId 前移。任何一个 Form 的 Data Gate 不通过都在这里拦下，
+  // 绝不允许「战斗已切、机制没建」的半切状态。
+  const mechanicsSetup = setupFinalFormRuntime(
+    state.finalFormRuntimeState,
+    encounter.id,
+    pending.toFormId,
+    { mode, rng, now },
+  );
+  if (!mechanicsSetup.ok) {
+    return transFail(
+      campaign,
+      mechanicsSetup.reason ?? `无法建立 ${pending.toFormId} 的机制运行时`,
     );
   }
 
@@ -255,6 +336,7 @@ export function transitionToNextFinalForm(
     {
       ...state,
       finalEncounterState: nextEncounter,
+      finalFormRuntimeState: mechanicsSetup.state,
       formTransitionHistory: [...state.formTransitionHistory, record].slice(
         -FORM_TRANSITION_HISTORY_LIMIT,
       ),

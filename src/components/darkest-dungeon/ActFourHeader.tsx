@@ -8,6 +8,7 @@ import FormTransitionOverlay from './FormTransitionOverlay';
 import TemplarsEncounterPanel from './TemplarsEncounterPanel';
 import MammothCystEncounterPanel from './MammothCystEncounterPanel';
 import ShufflingHorrorEncounterPanel from './ShufflingHorrorEncounterPanel';
+import FinalFormMechanicsPanel from './FinalFormMechanicsPanel';
 
 /**
  * Act IV 顶部常驻横幅（只读）：游戏内唯一可见入口，挂在 GameShell。
@@ -63,6 +64,12 @@ export default function ActFourHeader() {
         {a4.excavationSiteStates.length > 0 && <ExcavationSitePanel />}
         {a4.stage === 'final-hamlet' && <FinalHamletPanel />}
         {inFinalEncounter && <FinalEncounterHeader />}
+        {/* Phase 10E §UI：四形态机制运行时只读面板（Reflections / GUARD /
+            Absolute Nothingness / Sispersion / Impending Doom）。
+            切换后旧 Form 的运行时保留展示，便于复盘与 E2E 断言。 */}
+        {a4.finalFormRuntimeState && (
+          <FinalFormMechanicsPanel state={a4.finalFormRuntimeState} />
+        )}
         {a4.finalEncounterState?.transitionState && <FormTransitionOverlay />}
       </div>
     </div>

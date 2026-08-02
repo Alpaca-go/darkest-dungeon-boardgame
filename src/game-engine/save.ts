@@ -73,8 +73,15 @@ export const STORAGE_KEY = 'dd-web-prototype-save-v1';
  *      绝不重掷已保存的 d10（Skill Roll / Teleportation Roll 一律只读）；
  *      已存在则过 sanitizeMammothCystEncounterState 净化（结构性字段缺失 → null，不白屏）。
  *      硬约束 1：仍不新增 CampaignState 顶层字段，Mammoth Cyst 运行时挂在 ActFourState 下。
+ * v15 = Phase 10D（Shuffling Horror：actFourState 内新增 shufflingHorrorEncounterState）。
+ * v16（Phase 10E）：ActFourState 增加 finalFormRuntimeState —— Final Encounter 四形态
+ *      （Ancestor 1st / Ancestor 2nd / Gestating Heart / Heart of Darkness）的机制运行时容器，
+ *      内含 Reflection 的随机 Stance 分配、Absolute Nothingness 占位、Sispersion 抽取历史、
+ *      Impending Doom Forecast（d10 先保存后展示）。旧存档一律补 null，
+ *      迁移**不代掷**任何随机数；已存在则过 sanitizeFinalFormRuntimeState 净化。
+ *      硬约束 1：仍不新增 CampaignState 顶层字段。
  */
-export const SAVE_VERSION = 15;
+export const SAVE_VERSION = 16;
 
 /**
  * v2 存档文件结构。
@@ -100,7 +107,7 @@ interface SaveEnvelopeV1 {
 }
 
 /** 可被迁移到当前版本的历史存档版本号。 */
-const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
 /** 读档结果：区分正常 / 无存档 / 损坏 / 版本不支持。 */
 export type LoadStatus = 'ok' | 'empty' | 'corrupt' | 'unsupported';
@@ -1174,6 +1181,26 @@ export function migrateCampaignToV15(campaign: CampaignState): CampaignState {
   return { ...campaign, saveVersion: SAVE_VERSION, actFourState };
 }
 
+/**
+ * Phase 10E 战役字段迁移（v15 → v16：Final Encounter 四形态机制运行时）。
+ *
+ * - 硬约束 1：不新增 CampaignState 顶层字段 —— finalFormRuntimeState 挂在 actFourState 下；
+ * - 旧存档（v8-v15）没有 finalFormRuntimeState → 补 null。
+ *   绝不凭空建立 Final Form 机制运行时，更不会替旧存档生成 Impending Doom Forecast
+ *   或 Reflection 的 Stance 分配（硬约束 25：随机先保存后展示，迁移不得代掷）；
+ * - 已存在则过 sanitizeActFourState（内部调 sanitizeFinalFormRuntimeState）：
+ *   runtime.kind 与 formId 不符、缺 initiativeCardCount 等结构性损坏 → 丢弃该 Form 运行时；
+ *   encounterId 缺失 → 整体降为 null。净化过程**不重掷任何已保存随机数**
+ *   （d10 传送结果、Impending Doom roll、Sispersion 抽取记录原样保留）。
+ */
+export function migrateCampaignToV16(campaign: CampaignState): CampaignState {
+  const anyC = campaign as CampaignState & Record<string, unknown>;
+  const raw = anyC.actFourState;
+  const actFourState: ActFourState =
+    raw && typeof raw === 'object' ? sanitizeActFourState(raw) : createInitialActFourState();
+  return { ...campaign, saveVersion: SAVE_VERSION, actFourState };
+}
+
 /** 净化已存在的 campaignProgress（补缺字段 / clamp / 去掉非法类型），不重新随机。 */
 function sanitizeCampaignProgress(raw: CampaignProgressState): CampaignProgressState {
   const base = createInitialCampaignProgress({
@@ -1215,17 +1242,20 @@ function sanitizeCampaignProgress(raw: CampaignProgressState): CampaignProgressS
 /**
  * 将战役迁移到当前最新版本
  * （v3 → v8 = Phase 9A → v9 = Phase 9C → v10 = Phase 9D → v11 = Phase 9E → v12 = Phase 10A
- *  → v13 = Phase 10B Templars → v14 = Phase 10C Mammoth Cyst → v15 = Phase 10D Shuffling Horror）。
+ *  → v13 = Phase 10B Templars → v14 = Phase 10C Mammoth Cyst → v15 = Phase 10D Shuffling Horror
+ *  → v16 = Phase 10E Final Encounter 四形态）。
  */
 export function migrateCampaignToLatest(campaign: CampaignState): CampaignState {
-  return migrateCampaignToV15(
-    migrateCampaignToV14(
-      migrateCampaignToV13(
-        migrateCampaignToV12(
-          migrateCampaignToV8(
-            migrateCampaignToV7(
-              migrateCampaignToV6(
-                migrateCampaignToV5(migrateCampaignToV4(migrateCampaignToV3(campaign))),
+  return migrateCampaignToV16(
+    migrateCampaignToV15(
+      migrateCampaignToV14(
+        migrateCampaignToV13(
+          migrateCampaignToV12(
+            migrateCampaignToV8(
+              migrateCampaignToV7(
+                migrateCampaignToV6(
+                  migrateCampaignToV5(migrateCampaignToV4(migrateCampaignToV3(campaign))),
+                ),
               ),
             ),
           ),

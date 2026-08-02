@@ -50,6 +50,8 @@ export * from './bosses';
 // Phase 10A：Final Encounter / Act IV 类型统一从 types 根导出。
 // 顺序要求：final-encounter 先于 act-four（后者依赖前者的 FinalFormId 系列类型）。
 export * from './final-encounter';
+// Phase 10E：Final Form 机制类型（依赖 final-encounter 的 FinalFormId，须先于 act-four）。
+export * from './final-forms';
 export * from './act-four';
 
 /** 全局游戏阶段状态机。所有场景切换必须通过此字段完成。 */

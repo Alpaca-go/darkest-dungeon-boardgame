@@ -33,6 +33,10 @@ import {
   withProcessedActFourTransaction,
 } from './act-four-state';
 import { createSeededRng, shuffleWithRng } from './rng';
+// Phase 10E：Form 出场时同步建立该 Form 的**机制**运行时（Reflections / Absolute
+// Nothingness / Sispersion / Impending Doom）。硬约束 1 —— 这里不新建战斗状态机，
+// 只是把 Definition 驱动的附加状态挂到 ActFourState 下。
+import { setupFinalFormRuntime } from './final-forms/final-form-runtime';
 
 // ---------------------------------------------------------------------------
 // Form 单位构建
@@ -210,6 +214,17 @@ export function startFinalEncounter(
   const formUnit = buildFinalFormUnit(def);
   const battle = buildFinalEncounterBattle(campaign, encounter, formUnit, rng);
 
+  // Phase 10E：建立第一个 Form 的机制运行时。数据缺口（Data Gate）一律拒绝出场，
+  // 避免出现「Boss 站在场上但机制不生效」的半成品状态。
+  const mechanicsSetup = setupFinalFormRuntime(state.finalFormRuntimeState, encounter.id, formId, {
+    mode,
+    rng,
+    now,
+  });
+  if (!mechanicsSetup.ok) {
+    return formFail(campaign, mechanicsSetup.reason ?? `无法建立 ${formId} 的机制运行时`);
+  }
+
   const nextEncounter: FinalEncounterState = {
     ...encounter,
     status: 'form-active',
@@ -230,7 +245,11 @@ export function startFinalEncounter(
   next = pushLog(next, `最终决战开始：${getFinalFormDisplayName(formId)} 挡在面前。`, 'danger');
 
   let nextState = withProcessedActFourTransaction(
-    { ...state, finalEncounterState: nextEncounter },
+    {
+      ...state,
+      finalEncounterState: nextEncounter,
+      finalFormRuntimeState: mechanicsSetup.state,
+    },
     transactionId,
   );
   nextState = withActFourStage(nextState, 'final-encounter-active', `${transactionId}:stage`);

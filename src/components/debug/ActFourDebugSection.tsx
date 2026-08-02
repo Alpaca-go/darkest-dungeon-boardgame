@@ -32,18 +32,33 @@ import {
 } from '../../game-engine/campaign/act-four/final-form-sequence';
 import { transitionToNextFinalForm } from '../../game-engine/campaign/act-four/transition-final-form';
 import { resolveCampaignVictory } from '../../game-engine/campaign/act-four/resolve-campaign-victory';
+import {
+  applyFinalFormReflectionDeath,
+  applyFinalFormWoundedReaction,
+  consumeFinalFormImpendingDoom,
+  evaluateFinalEncounterOutcome,
+  generateFinalFormImpendingDoom,
+  performFinalFormSispersion,
+  resolveFinalFormAncestorStance,
+  resolveHeartOfDarknessDefeat,
+  rollFinalFormAncestorTeleport,
+  settleFinalEncounterIfNeeded,
+} from '../../game-engine/campaign/act-four/final-forms';
 import { actFourStageLabel } from '../../game-engine/campaign/act-four/act-four-state';
 import { getFinalFormDisplayName } from '../../data/darkest-dungeon/final-form-registry';
 import type { CampaignState } from '../../types';
+import type { FinalFormRuntime } from '../../types/final-forms';
 
 /**
- * Phase 10A · Act IV 调试区（只读字段 + 受控按钮，dev-only）。
+ * Phase 10A—10E · Act IV 调试区（只读字段 + 受控按钮，dev-only）。
  *
- * 字段覆盖 §27；按钮全部调用**正式运行时入口**（unlock / draw / build / excavate /
- * guardian / final hamlet / final encounter / victory / failure），通过 replaceCampaign
- * 回写 store 并落盘。所有按钮在状态不允许时由正式入口自身幂等拒绝（ok:false，无副作用）。
+ * 字段覆盖 §27（10A 框架）+ Final Form 机制运行时（10E）；按钮全部调用**正式运行时入口**
+ * （unlock / draw / build / excavate / guardian / final hamlet / final encounter /
+ * form mechanics / victory / failure），通过 replaceCampaign 回写 store 并落盘。
+ * 所有按钮在状态不允许时由正式入口自身幂等拒绝（ok:false，无副作用）。
  *
- * 「一键通关 (prototype)」按序串起全部正式入口，用于端到端验证 Act IV 框架。
+ * 「一键通关 (prototype)」按序串起全部正式入口（含每个 Form 出场期间的机制动作），
+ * 用于端到端验证 Act IV 框架与 Final Encounter 全链路。
  */
 export default function ActFourDebugSection() {
   const [open, setOpen] = useState(false);
@@ -61,6 +76,12 @@ export default function ActFourDebugSection() {
   };
 
   const rng = (): () => number => createSeededRng(seedCounter.next());
+
+  // Phase 10E：Final Form 机制运行时（切换后旧 Form 仍保留在 runtimes 里，只操作当前出场者）。
+  const ffs = a4.finalFormRuntimeState;
+  const activeFormRuntime: FinalFormRuntime | null = ffs?.activeFormId
+    ? ffs.runtimes[ffs.activeFormId] ?? null
+    : null;
 
   /**
    * 调试 harness：解锁需要「已击败 >= 3 个 Boss Family」。
@@ -105,7 +126,12 @@ export default function ActFourDebugSection() {
   };
   const onGuardianVictory = () => apply('guardianVictory', resolveGuardianVictory(campaign!));
   const onFinalHamletDay = () => apply('finalHamletDay', advanceFinalHamletDay(campaign!));
+  const onStartFinalHamlet = () => apply('startFinalHamlet', startFinalHamlet(campaign!));
   const onPrepareFinal = () => apply('prepareFinal', prepareFinalEncounter(campaign!, { mode: 'prototype' }));
+  const onStartFinal = () =>
+    apply('startFinal', startFinalEncounter(campaign!, { mode: 'prototype', rng: rng() }));
+  const onTransitionNext = () =>
+    apply('transitionNext', transitionToNextFinalForm(campaign!, { rng: rng(), mode: 'prototype' }));
   const onDefeatForm = () => {
     const id = a4.finalEncounterState?.activeFormId;
     if (id) apply('defeatForm', defeatFinalForm(campaign!, id));
@@ -114,6 +140,84 @@ export default function ActFourDebugSection() {
   const onFail = () => {
     const res = failFinalEncounter(campaign!, '调试模拟失败');
     replaceCampaign(res.campaign);
+  };
+
+  // ---- Phase 10E：Final Form 机制动作（全部走 final-forms 的 campaign 层正式入口）----
+
+  const onReflectionDeath = () => {
+    if (activeFormRuntime?.kind !== 'ancestor-first-form') return;
+    const target = activeFormRuntime.reflections.find((r) => r.alive);
+    if (!target) return;
+    apply(
+      'reflectionDeath',
+      applyFinalFormReflectionDeath(campaign!, target.id, { mode: 'prototype' }),
+    );
+  };
+
+  const onAncestorStance = () => {
+    if (activeFormRuntime?.kind !== 'ancestor-first-form') return;
+    apply(
+      'ancestorStance',
+      resolveFinalFormAncestorStance(
+        campaign!,
+        activeFormRuntime.stanceResolutionHistory.length,
+        { mode: 'prototype' },
+      ),
+    );
+  };
+
+  const onAncestorTeleport = () => {
+    if (activeFormRuntime?.kind !== 'ancestor-second-form') return;
+    apply(
+      'ancestorTeleport',
+      rollFinalFormAncestorTeleport(campaign!, activeFormRuntime.teleportHistory.length, {
+        rng: rng(),
+        mode: 'prototype',
+      }),
+    );
+  };
+
+  const onSispersion = () => {
+    if (activeFormRuntime?.kind !== 'gestating-heart') return;
+    apply(
+      'sispersion',
+      performFinalFormSispersion(campaign!, activeFormRuntime.sispersionHistory.length, {
+        rng: rng(),
+        mode: 'prototype',
+      }),
+    );
+  };
+
+  const onWoundedReaction = () => {
+    if (activeFormRuntime?.kind !== 'gestating-heart') return;
+    const hero = campaign!.heroes.find((h) => !h.dead);
+    if (!hero) return;
+    apply(
+      'woundedReaction',
+      applyFinalFormWoundedReaction(
+        campaign!,
+        activeFormRuntime.woundedReactionHistory.length,
+        { sourceHeroId: hero.instanceId, woundsApplied: 2, lethal: false },
+        { mode: 'prototype' },
+      ),
+    );
+  };
+
+  const onConsumeDoom = () =>
+    apply('consumeDoom', consumeFinalFormImpendingDoom(campaign!, { mode: 'prototype' }));
+
+  const onGenerateDoom = () =>
+    apply(
+      'generateDoom',
+      generateFinalFormImpendingDoom(campaign!, { rng: rng(), mode: 'prototype' }),
+    );
+
+  const onHeartDefeat = () => apply('heartDefeat', resolveHeartOfDarknessDefeat(campaign!));
+
+  const onSettleFinal = () => {
+    const res = settleFinalEncounterIfNeeded(campaign!);
+    if (res.changed) replaceCampaign(res.campaign);
+    else console.warn(`[ActFourDebug] settleFinal 无变化（outcome=${res.outcome}）`);
   };
 
   const onFullRun = () => {
@@ -172,6 +276,9 @@ export default function ActFourDebugSection() {
     while (guard < 12) {
       const enc = c.actFourState.finalEncounterState;
       if (!enc || !enc.activeFormId) break;
+      // Phase 10E：在击败当前 Form 之前，先跑一遍它的专属机制，
+      // 让「一键通关」同时覆盖 Reflection / Teleport / Sispersion / Impending Doom。
+      c = runFormMechanics(c, r);
       const df = defeatFinalForm(c, enc.activeFormId);
       if (!df.ok) break;
       c = df.campaign;
@@ -185,6 +292,19 @@ export default function ActFourDebugSection() {
     if (rv.ok) c = rv.campaign;
     replaceCampaign(c);
   };
+
+  // Phase 10E 只读展示：按 kind 收窄各 Form 运行时（切换后旧 Form 仍保留，可回看）。
+  const pickRuntime = <K extends FinalFormRuntime['kind']>(
+    kind: K,
+  ): Extract<FinalFormRuntime, { kind: K }> | null => {
+    const rt = ffs?.runtimes[kind];
+    return rt && rt.kind === kind ? (rt as Extract<FinalFormRuntime, { kind: K }>) : null;
+  };
+  const firstFormRt = pickRuntime('ancestor-first-form');
+  const secondFormRt = pickRuntime('ancestor-second-form');
+  const gestatingRt = pickRuntime('gestating-heart');
+  const heartRt = pickRuntime('heart-of-darkness');
+  const outcomeEval = a4.finalEncounterState ? evaluateFinalEncounterOutcome(campaign!) : null;
 
   const rows: Array<[string, string]> = [
     ['Act Four Stage', actFourStageLabel(a4.stage)],
@@ -204,6 +324,46 @@ export default function ActFourDebugSection() {
     ['Transition State', a4.finalEncounterState?.transitionState ? `${a4.finalEncounterState.transitionState.fromFormId}→${a4.finalEncounterState.transitionState.toFormId}:${a4.finalEncounterState.transitionState.status}` : '—'],
     ['Definition Hash', a4.questDrawRecord?.rngStateId ?? '—'],
     ['最近事务', a4.lastTransitionTransactionId ?? '—'],
+    // ---- Phase 10E：Final Form 机制运行时 ----
+    ['Final Outcome', outcomeEval ? `${outcomeEval.outcome}${outcomeEval.reason ? `（${outcomeEval.reason}）` : ''}` : '—'],
+    ['FinalForm Runtime', ffs ? `${ffs.contentMode} / ${ffs.dataStatus}` : '—'],
+    ['FinalForm Runtimes', ffs ? Object.keys(ffs.runtimes).join(', ') || '（空）' : '—'],
+    [
+      'Reflections',
+      firstFormRt
+        ? `${firstFormRt.reflections.filter((r) => r.alive).length}/${firstFormRt.reflections.length} 存活 · Card ${firstFormRt.initiativeCardCount}`
+        : '—',
+    ],
+    [
+      'Imperfect 反噬',
+      firstFormRt
+        ? firstFormRt.imperfectDeathReactionApplied
+          ? `已触发（${firstFormRt.imperfectDeathReaction?.woundsDealtToAncestor ?? 0} Wounds）`
+          : '未触发'
+        : '—',
+    ],
+    [
+      'Nothingness / 传送',
+      secondFormRt
+        ? `${secondFormRt.nothingness.length} 占位 · d10=${secondFormRt.lastTeleport?.roll ?? '—'}→${secondFormRt.lastTeleport?.resultStance ?? '原地'}`
+        : '—',
+    ],
+    [
+      'Sispersion',
+      gestatingRt
+        ? `${gestatingRt.sispersionHistory.length} 次 · Card ${gestatingRt.initiativeCardCount}`
+        : '—',
+    ],
+    ['Gestating Reaction', gestatingRt ? `${gestatingRt.woundedReactionHistory.length} 次` : '—'],
+    [
+      'Impending Doom',
+      heartRt
+        ? heartRt.currentForecast
+          ? `d10=${heartRt.currentForecast.roll}→${heartRt.currentForecast.skillId ?? '（无映射）'}${heartRt.currentForecast.consumed ? '（已消费）' : ''}`
+          : `无预告 · 已消费 ${heartRt.consumedForecastCount}`
+        : '—',
+    ],
+    ['FinalForm 事务', ffs?.lastTransactionId ?? '—'],
   ];
 
   return (
@@ -213,7 +373,7 @@ export default function ActFourDebugSection() {
         className="w-full flex items-center justify-between text-dd-muted mb-1 font-semibold hover:text-dd-text"
         data-testid="debug-act-four-toggle"
       >
-        <span>Phase 10A · Act IV（只读 + 受控按钮）</span>
+        <span>Phase 10A—10E · Act IV（只读 + 受控按钮）</span>
         <span>{open ? '▾' : '▸'}</span>
       </button>
       {!open ? null : (
@@ -240,9 +400,21 @@ export default function ActFourDebugSection() {
             <DebugBtn label="进入 Excavation" onClick={onEnterExcavation} />
             <DebugBtn label="完成 Free Rest" onClick={onFinishRest} />
             <DebugBtn label="击败 Guardian" onClick={onGuardianVictory} />
+            <DebugBtn label="进入 Final Hamlet" onClick={onStartFinalHamlet} />
             <DebugBtn label="Final Hamlet Day" onClick={onFinalHamletDay} />
             <DebugBtn label="准备 Final Encounter" onClick={onPrepareFinal} />
+            <DebugBtn label="进入 Final Encounter" onClick={onStartFinal} />
+            <DebugBtn label="切换下一 Form" onClick={onTransitionNext} />
             <DebugBtn label="击败当前 Form" onClick={onDefeatForm} />
+            <DebugBtn label="Ancestor Stance 结算" onClick={onAncestorStance} />
+            <DebugBtn label="Reflection 死亡" onClick={onReflectionDeath} />
+            <DebugBtn label="Ancestor 传送" onClick={onAncestorTeleport} />
+            <DebugBtn label="Sispersion 召唤" onClick={onSispersion} />
+            <DebugBtn label="Gestating Reaction" onClick={onWoundedReaction} />
+            <DebugBtn label="消费 Impending Doom" onClick={onConsumeDoom} />
+            <DebugBtn label="生成 Impending Doom" onClick={onGenerateDoom} />
+            <DebugBtn label="Heart 死亡结算" onClick={onHeartDefeat} />
+            <DebugBtn label="Final 自动收口" onClick={onSettleFinal} />
             <DebugBtn label="触发 Victory" onClick={onVictory} />
             <DebugBtn label="模拟失败" onClick={onFail} danger />
             <DebugBtn label="一键通关 (prototype)" onClick={onFullRun} primary />
@@ -278,6 +450,61 @@ function DebugBtn({
       {label}
     </button>
   );
+}
+
+/**
+ * Phase 10E：跑一遍**当前出场 Form** 的专属机制（供「一键通关」使用）。
+ *
+ * 全部走 final-forms 的 campaign 层正式入口；任何一步 ok=false 都静默跳过——
+ * 数据缺口本来就该由 Data Gate 拦下，调试链路不做兜底、不回退数值。
+ */
+function runFormMechanics(campaign: CampaignState, r: () => () => number): CampaignState {
+  const ffs = campaign.actFourState.finalFormRuntimeState;
+  const formId = ffs?.activeFormId;
+  if (!ffs || !formId) return campaign;
+  const rt = ffs.runtimes[formId];
+  if (!rt) return campaign;
+
+  let c = campaign;
+  if (rt.kind === 'ancestor-first-form') {
+    const stance = resolveFinalFormAncestorStance(c, rt.stanceResolutionHistory.length, {
+      mode: 'prototype',
+    });
+    if (stance.ok) c = stance.campaign;
+    const target = rt.reflections.find((x) => x.alive);
+    if (target) {
+      const death = applyFinalFormReflectionDeath(c, target.id, { mode: 'prototype' });
+      if (death.ok) c = death.campaign;
+    }
+  } else if (rt.kind === 'ancestor-second-form') {
+    const tp = rollFinalFormAncestorTeleport(c, rt.teleportHistory.length, {
+      rng: r(),
+      mode: 'prototype',
+    });
+    if (tp.ok) c = tp.campaign;
+  } else if (rt.kind === 'gestating-heart') {
+    const sp = performFinalFormSispersion(c, rt.sispersionHistory.length, {
+      rng: r(),
+      mode: 'prototype',
+    });
+    if (sp.ok) c = sp.campaign;
+    const hero = c.heroes.find((h) => !h.dead);
+    if (hero) {
+      const wr = applyFinalFormWoundedReaction(
+        c,
+        rt.woundedReactionHistory.length,
+        { sourceHeroId: hero.instanceId, woundsApplied: 2, lethal: false },
+        { mode: 'prototype' },
+      );
+      if (wr.ok) c = wr.campaign;
+    }
+  } else {
+    const consume = consumeFinalFormImpendingDoom(c, { mode: 'prototype' });
+    if (consume.ok) c = consume.campaign;
+    const gen = generateFinalFormImpendingDoom(c, { rng: r(), mode: 'prototype' });
+    if (gen.ok) c = gen.campaign;
+  }
+  return c;
 }
 
 /** 简单的递增种子发生器（仅调试用，不进入引擎 RNG 路径）。 */

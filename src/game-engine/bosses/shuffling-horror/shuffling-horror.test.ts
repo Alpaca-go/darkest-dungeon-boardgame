@@ -713,8 +713,14 @@ describe('§31.10 Victory / Failure', () => {
 // ===========================================================================
 
 describe('§31.11 Save Migration', () => {
-  it('SAVE_VERSION 当前为 15', () => {
-    expect(SAVE_VERSION).toBe(15);
+  // ⚠ 绝不硬编码版本号：Phase 9A / 10B / 10D / 10E 已经因为写死数字挂了四次。
+  // 这里只断言「Phase 10D 引入的 v15 之后仍在单调递增」这一语义。
+  it('SAVE_VERSION 不低于 Phase 10D 引入的 v15，且随迁移单调推进', () => {
+    expect(SAVE_VERSION).toBeGreaterThanOrEqual(15);
+    const c = shufflingHorrorBattleCampaign();
+    const legacy = JSON.parse(JSON.stringify(c)) as CampaignState;
+    legacy.saveVersion = 15;
+    expect(migrateCampaignToLatest(legacy).saveVersion).toBe(SAVE_VERSION);
   });
 
   it('迁移为旧存档补 shufflingHorrorEncounterState 字段（null）', () => {

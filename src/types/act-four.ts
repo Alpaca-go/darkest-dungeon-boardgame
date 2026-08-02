@@ -25,6 +25,9 @@ import type {
 import type { TemplarsEncounterState } from './templars';
 import type { MammothCystEncounterState } from './mammoth-cyst';
 import type { ShufflingHorrorEncounterState } from './shuffling-horror';
+// Phase 10E 硬约束 1：Final Form 的**机制**运行时同样挂在 ActFourState 下，
+// 不新增 CampaignState 顶层字段、也不新建第二套 Final Encounter 状态机。
+import type { FinalFormRuntimeState } from './final-forms';
 
 /** Act IV 数据可信度（与项目统一四态一致）。 */
 export type ActFourDataStatus = DataCredibility;
@@ -398,6 +401,13 @@ export interface ActFourState {
    * Opportunity 卡组、Stance Priority Tracker、Monster/Hero Action Budget、Hero Stance 排列）。
    */
   shufflingHorrorEncounterState: ShufflingHorrorEncounterState | null;
+  /**
+   * Phase 10E：四个 Final Form 的**专属机制**运行时（Reflections / Absolute Nothingness /
+   * Sispersion / Impending Doom）。遵守硬约束 1 —— 容器（Form 顺序 / 切换 / 胜负）仍由
+   * `finalEncounterState` 负责，本字段只保存各 Form 的附加状态；战斗本体仍走既有 BattleState。
+   * 硬约束 3：所有 Form 共用同一 Room，因此本结构不含任何 roomId。
+   */
+  finalFormRuntimeState: FinalFormRuntimeState | null;
 
   actFourStartedAt: string | null;
   lastTransitionTransactionId: string | null;

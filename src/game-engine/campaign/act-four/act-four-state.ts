@@ -32,6 +32,8 @@ import { isFinalFormId } from '../../../data/darkest-dungeon/final-form-registry
 import { sanitizeTemplarsEncounterState } from '../../bosses/templars/templars-content-validation';
 import { sanitizeMammothCystEncounterState } from '../../bosses/mammoth-cyst/mammoth-cyst-content-validation';
 import { sanitizeShufflingHorrorEncounterState } from '../../bosses/shuffling-horror/shuffling-horror-content-validation';
+// Phase 10E：Final Form 机制运行时净化（该模块只依赖 types + data 层，无循环依赖）。
+import { sanitizeFinalFormRuntimeState } from './final-forms/final-form-runtime';
 import { nowIso } from '../../random';
 
 // ---------------------------------------------------------------------------
@@ -117,6 +119,8 @@ export function createInitialActFourState(): ActFourState {
     mammothCystEncounterState: null,
     // Phase 10D：Shuffling Horror 遭遇运行时（未进入 Guardian Quest 战斗前恒为 null）。
     shufflingHorrorEncounterState: null,
+    // Phase 10E：Final Form 机制运行时（未进入 Final Encounter 前恒为 null）。
+    finalFormRuntimeState: null,
 
     actFourStartedAt: null,
     lastTransitionTransactionId: null,
@@ -314,6 +318,9 @@ export function sanitizeActFourState(raw: unknown): ActFourState {
     // Phase 10D：Shuffling Horror 运行时走安全兜底 —— 结构性字段缺失返回 null，
     // 已保存的 Stance Priority / Action Budget / Hero Stance 排列原样保留，绝不重掷。
     shufflingHorrorEncounterState: sanitizeShufflingHorrorEncounterState(r.shufflingHorrorEncounterState),
+    // Phase 10E：Final Form 机制运行时同样安全兜底 —— 结构性字段缺失返回 null，
+    // 已保存的 Reflection Stance 分配 / 传送 d10 / Impending Doom Forecast 原样保留，绝不重掷。
+    finalFormRuntimeState: sanitizeFinalFormRuntimeState(r.finalFormRuntimeState),
 
     actFourStartedAt: str(r.actFourStartedAt),
     lastTransitionTransactionId: str(r.lastTransitionTransactionId),
