@@ -1,0 +1,22 @@
+{
+  "id": "necromancer-level-1",
+  "familyId": "necromancer",
+  "campaignLevel": 1,
+  "name": "Necromancer",
+  "actionsPerRound": 1,
+  "stats": null,
+  "skills": [],
+  "summonRules": [
+    {
+      "id": "necromancer-summon-level-1",
+      "monsterDefinitionId": "bone-rubble",
+      "targetPolicy": "first-empty-stance",
+      "targetAreaId": "",
+      "addInitiativeCard": true
+    }
+  ],
+  "roomDefinitionId": "necromancer-room",
+  "officialDataStatus": "partial",
+  "sourceReference": "DD_EN_COREBOX_RULES.pdf:p38",
+  "enabledInOfficialPool": false
+}

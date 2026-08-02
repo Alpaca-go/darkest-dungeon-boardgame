@@ -1,0 +1,23 @@
+{
+  "id": "gestating-heart",
+  "primaryActorDefinitionId": "gestating-heart",
+  "requiredStance": "aggressive",
+  "initiativeCardsPerRound": 1,
+  "monsterDeckId": "darkest-dungeon-monsters",
+  "sispersion": {
+    "summonCount": 1,
+    "selectionPolicy": "random",
+    "stancePolicy": "next-available-stance",
+    "initiativeCardsToAdd": 1
+  },
+  "woundedReaction": {
+    "trigger": "hero-attack-applied-wounds",
+    "blightPotency": 2,
+    "blightDurationTurns": 3,
+    "heal": 2,
+    "reactionAfterLethalWound": "definition-driven"
+  },
+  "officialDataStatus": "partial",
+  "sourceReference": "DD_EN_COREBOX_RULES.pdf:p41",
+  "enabledInOfficialPool": false
+}

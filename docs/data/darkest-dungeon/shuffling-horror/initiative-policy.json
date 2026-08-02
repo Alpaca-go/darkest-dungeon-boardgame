@@ -1,0 +1,19 @@
+{
+  "id": "stance-priority-action-budget",
+  "cardType": "monster-initiative-opportunity",
+  "stancePriority": [
+    "aggressive",
+    "defensive",
+    "ranged",
+    "support"
+  ],
+  "eligibility": [
+    "actor-alive",
+    "actor-in-stance-tracker",
+    "remaining-actions-greater-than-zero"
+  ],
+  "excessPolicy": "remove-when-drawn-if-no-eligible-actor",
+  "resolveAtDrawTime": true,
+  "officialDataStatus": "verified",
+  "sourceReference": "DD_EN_COREBOX_RULES.pdf:p30-31"
+}

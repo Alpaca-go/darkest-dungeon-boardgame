@@ -1,0 +1,21 @@
+{
+  "id": "heart-of-darkness-final-encounter",
+  "roomDefinitionId": "ancestor-room",
+  "orderedFormIds": [
+    "ancestor-first-form",
+    "ancestor-second-form",
+    "gestating-heart",
+    "heart-of-darkness"
+  ],
+  "skippableFormIds": [
+    "ancestor-first-form",
+    "ancestor-second-form",
+    "gestating-heart"
+  ],
+  "requiredFinalFormId": "heart-of-darkness",
+  "transitionPolicyId": "final-encounter-no-recovery",
+  "failurePolicy": "campaign-over",
+  "victoryPolicy": "campaign-victory",
+  "officialDataStatus": "partial",
+  "enabledInOfficialPool": false
+}

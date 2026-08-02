@@ -1,0 +1,25 @@
+{
+  "id": "collector-level-1",
+  "familyId": "collector",
+  "campaignLevel": 1,
+  "name": "Collector",
+  "actionsPerRound": 1,
+  "stats": null,
+  "skills": [],
+  "conditionalActionOverrides": [
+    {
+      "id": "collector-summon-when-no-collected",
+      "priority": 10,
+      "condition": {
+        "type": "no-alive-actors-with-tag",
+        "tag": "collected"
+      },
+      "resolverId": "collector-summon-collected-group",
+      "replacesNormalSkill": true
+    }
+  ],
+  "roomDefinitionId": "collector-room-level-1",
+  "officialDataStatus": "partial",
+  "sourceReference": "DD_EN_COREBOX_RULES.pdf:p39",
+  "enabledInOfficialPool": false
+}

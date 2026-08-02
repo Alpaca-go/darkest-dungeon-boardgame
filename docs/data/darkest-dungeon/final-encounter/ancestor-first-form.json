@@ -1,0 +1,29 @@
+{
+  "id": "ancestor-first-form",
+  "primaryActorDefinitionId": "ancestor-first-form",
+  "requiredStance": "aggressive",
+  "initialReflections": {
+    "perfectCount": 2,
+    "imperfectCount": 1,
+    "randomizeAcrossStances": [
+      "defensive",
+      "ranged",
+      "support"
+    ]
+  },
+  "initiativePolicy": {
+    "cardCountPerRound": 4,
+    "allocationPolicy": "reflection-first-then-ancestor",
+    "preserveCardCountAfterReflectionDeath": true
+  },
+  "guardPolicy": "reflections-always-guard-ancestor",
+  "imperfectDeathReaction": {
+    "effect": "deal-wounds-to-ancestor",
+    "wounds": 10
+  },
+  "fullStanceSkillId": "ancestor-time-heals-all",
+  "vacantStanceResolverId": "ancestor-fill-reflection-stances",
+  "officialDataStatus": "partial",
+  "sourceReference": "DD_EN_COREBOX_RULES.pdf:p40",
+  "enabledInOfficialPool": false
+}

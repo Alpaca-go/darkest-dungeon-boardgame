@@ -1,0 +1,62 @@
+{
+  "shufflingHorror": {
+    "id": "shuffling-horror-level-3",
+    "actorType": "boss",
+    "campaignLevel": 3,
+    "name": "Shuffling Horror",
+    "tags": [
+      "shuffling-horror",
+      "guardian",
+      "boss"
+    ],
+    "requiredStance": "aggressive",
+    "actionsPerRound": 2,
+    "stats": null,
+    "skills": [],
+    "actionOverrides": [
+      {
+        "id": "shuffling-horror-echoing-when-tracker-not-full",
+        "condition": {
+          "type": "monster-stance-tracker-not-full"
+        },
+        "resolverId": "resolve-echoing-disassembly",
+        "replacesNormalSkill": true
+      }
+    ],
+    "officialDataStatus": "partial",
+    "sourceReference": "DD_EN_COREBOX_RULES.pdf:p40",
+    "enabledInOfficialPool": false
+  },
+  "cultistPriest": {
+    "id": "cultist-priest-level-3",
+    "actorType": "boss-minion",
+    "campaignLevel": 3,
+    "name": "Cultist Priest",
+    "tags": [
+      "cultist-priest",
+      "shuffling-horror-linked-entity"
+    ],
+    "actionsPerRound": 1,
+    "stats": null,
+    "skills": [],
+    "officialDataStatus": "partial",
+    "sourceReference": "DD_EN_COREBOX_RULES.pdf:p31",
+    "enabledInOfficialPool": false
+  },
+  "malignantGrowth": {
+    "id": "malignant-growth-level-3",
+    "actorType": "boss-minion",
+    "campaignLevel": 3,
+    "name": "Malignant Growth",
+    "tags": [
+      "malignant-growth",
+      "shuffling-horror-linked-entity"
+    ],
+    "actionsPerRound": 1,
+    "stats": null,
+    "skills": [],
+    "officialDataStatus": "partial",
+    "sourceReference": "DD_EN_COREBOX_RULES.pdf:p31",
+    "enabledInOfficialPool": false
+  }
+}

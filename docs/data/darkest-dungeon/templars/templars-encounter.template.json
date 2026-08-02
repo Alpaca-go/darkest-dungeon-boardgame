@@ -1,0 +1,25 @@
+{
+  "id": "templars-guardian-level-3",
+  "guardianFamilyId": "templars",
+  "bossMembers": [
+    {
+      "actorDefinitionId": "templar-impaler-level-3",
+      "role": "impaler",
+      "requiredStance": "aggressive",
+      "requiredAreaId": "",
+      "initiativeCardsPerRound": 2
+    },
+    {
+      "actorDefinitionId": "templar-warlord-level-3",
+      "role": "warlord",
+      "requiredStance": "ranged",
+      "requiredAreaId": "",
+      "initiativeCardsPerRound": 2
+    }
+  ],
+  "roomDefinitionId": "templars-room-level-3",
+  "victoryCondition": "definition-driven",
+  "officialDataStatus": "partial",
+  "sourceReference": "DD_EN_COREBOX_RULES.pdf:p39",
+  "enabledInOfficialPool": false
+}
