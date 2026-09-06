@@ -14,6 +14,7 @@ import { refreshObjectiveProgress } from './progression/quest-objectives';
 import { createInitialNomadWagonState } from './trinkets/trinket-state';
 import { createInitialCampaignProgress } from './campaign/campaign-progress';
 import { createInitialActFourState } from './campaign/act-four/act-four-state';
+import { validateQuestSelection } from './campaign/campaign-orchestrator';
 
 /** Phase 1 初始补给池默认值（后续阶段可由 Provision Dice 生成替换）。 */
 export const DEFAULT_PROVISIONS: ProvisionPool = {
@@ -117,6 +118,8 @@ export function createNewCampaign(): CampaignState {
     campaignAdvanceHistory: [],
     bossSummonHistory: [],
     processedBossTransactionIds: [],
+    // ---- Phase 11A.1：Campaign Orchestration 事务簿记（§20） ----
+    processedCampaignTransactionIds: [],
     // ---- Phase 10A ----
     // Act IV 初始为「未解锁」；解锁只能由 unlockDarkestDungeonAct() 在
     // 第三个 Boss 被击败后触发（§6），新战役不预置任何 Act IV 随机结果。
@@ -233,10 +236,16 @@ export function isLoadoutComplete(campaign: CampaignState): boolean {
  * - 每次任务都发放全新 DEFAULT_PROVISIONS（上一任务补给已在结算时转换为 Gold）；
  * - Hamlet 事件 Supply Run 的补给奖励在此一次性应用并清除；
  * - 记录任务开始时的 Gold 快照，用于结算页展示净收益。
+ * - Phase 11A.1 §8：Engine 侧门控 —— Boss 锁定时禁止 Standard；Standard 未达 2/2 时禁止 Boss Quest。
  */
 export function selectQuest(campaign: CampaignState, questId: string): CampaignState {
   const quest = getQuestById(questId);
   if (!quest) return campaign;
+  // Phase 11A.1 §8.1 / §8.2：Engine 侧门控（即使 UI 绕过也必须拒绝）。
+  const validation = validateQuestSelection(campaign, questId);
+  if (validation !== null) {
+    return campaign;
+  }
   const bonus = campaign.hamlet.nextQuestProvisionBonus ?? 0;
   const provisions: ProvisionPool = {
     food: DEFAULT_PROVISIONS.food + bonus,

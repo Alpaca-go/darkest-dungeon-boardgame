@@ -6,11 +6,11 @@
 
 ## 0. 最终结论
 
-# FAIL — campaign-flow-blocked
+# CONDITIONAL — framework-complete-content-blocked
 
 结论语法固定为 `PASS — core-campaign-official-ready` / `CONDITIONAL — framework-complete-content-blocked` / `FAIL — campaign-flow-blocked` 三选一。
 
-**判定依据**：FAIL — campaign-flow-blocked：11-Quest / 4-Act 主循环无法在正式引擎路径上闭环（停在 Act 1 / campaign-over，完成 10 个任务）。 根因：CAMPAIGN_FLOW_BLOCKED：已完成 10 个 Standard Quest（首次触发于第 3 个），campaign.act 始终为 1。Act 推进状态机（src/game-engine/campaign/campaign-progress.ts）无任何生产调用方，Boss Quest 定义（FACE_THE_THREAT_QUEST_DEFINITION）零引用，11-Quest 循环在正式路径上不可达。
+**判定依据**：CONDITIONAL — framework-complete-content-blocked：主循环可闭环，但仍有 1 个 P0 内容缺口。
 
 ### 0.1 一句话总结
 
@@ -24,50 +24,50 @@
 
 | 项 | 值 |
 | --- | --- |
-| Commit | `72d76957b4866274ac2bf7d02a4d95857a406ea7` |
-| 分支 | `phase-11a-core-campaign-audit` |
-| 工作区 | 22 个文件未提交 |
-| Content Manifest Hash | `1ae3bcf5` |
+| Commit | `9f37087628dad00d8ab714e3861278ce1ec8bbb1` |
+| 分支 | `phase-11a1-campaign-orchestration-repair` |
+| 工作区 | 36 个文件未提交 |
+| Content Manifest Hash | `469d91eb` |
 | Manifest 生成时间 | `1970-01-01T00:00:00.000Z`（**刻意固定为 epoch**，使 manifestHash 可复现；非真实时间） |
 
 ## 2. §43 要求项逐条对照
 
 | 要求项 | 结论 |
 | --- | --- |
-| Build Commit | `72d76957b486` |
-| Content Manifest Hash | `1ae3bcf5` |
+| Build Commit | `9f37087628da` |
+| Content Manifest Hash | `469d91eb` |
 | 规则资料范围 | 15 条 P0 规则已登记 |
-| official-ready 内容 | 1 / 145 |
+| official-ready 内容 | 1 / 158 |
 | blocked 内容 | 10 |
 | Prototype 污染（官方路径） | 0 处 |
 | Traceability P0 完整 | ❌ |
-| 十一 Quest Golden Run | ❌ 仅完成 10 个任务、act=1 |
+| 十一 Quest Golden Run | ❌ 仅完成 9 个任务、act=4 |
 | Boss 顺序覆盖 | ❌ 不适用 — Boss Quest 在正式路径上不可选中（ISSUE-P0-001） |
 | Guardian 覆盖 | ❌ 不适用 — Guardian Data Gate 关闭（ISSUE-P0-002） |
 | skipped Form 覆盖 | ❌ 不适用 — Final Encounter Data Gate 关闭（ISSUE-P0-002） |
-| Outcome | `campaign-over`（`campaign-over`） |
-| Save / Resume | 3/3 通过，覆盖 3/16 里程碑 |
+| Outcome | `blocked`（`quest-select`） |
+| Save / Resume | 10/10 通过，覆盖 10/16 里程碑 |
 | Replay Hash | ❌ 同 seed 两次运行不一致 |
 | Hero Death / Replacement | ✅ 已真实触发并走 Stagecoach 正式入口 |
 | Failure Matrix | ⚠️ 仅 stagecoach-exhaustion 分支真实到达；其余 seed 标记 runnable:false |
 | Guardian Matrix | ❌ 未采集 — Data Gate 关闭 |
 | Final Form Matrix | ❌ 未采集 — Data Gate 关闭 |
-| P0 / P1 / P2 | open P0=2 / P1=3 / P2=2 |
-| Performance Baseline | ✅ 已采集（§32）：0.123ms / Quest 2.832ms / Battle 3.037ms / Save 0.003ms / Load 0.255ms / Form Transition 0.574ms（机制级）；完整 Run 140 事件、最大 Save 88403B |
-| Release Gate | **FAIL** |
-| 缺失卡牌资料 | 10 条 unavailable、144 条缺 sourceReference |
+| P0 / P1 / P2 | open P0=1 / P1=3 / P2=2 |
+| Performance Baseline | ✅ 已采集（§32）：0.416ms / Quest 3.643ms / Battle 4.055ms / Save 0.004ms / Load 0.314ms / Form Transition 0.602ms（机制级）；完整 Run 104 事件、最大 Save 77834B |
+| Release Gate | **CONDITIONAL** |
+| 缺失卡牌资料 | 10 条 unavailable、157 条缺 sourceReference |
 | 可称为「核心盒 Campaign 完整可玩」 | **否** |
 
 ## 3. 内容清单（Content Manifest）
 
-总计 **145** 条内容定义。
+总计 **158** 条内容定义。
 
 **按官方数据状态**
 
 | 状态 | 数量 |
 | --- | --- |
-| partial | 116 |
-| prototype | 18 |
+| partial | 117 |
+| prototype | 30 |
 | verified | 1 |
 | unavailable | 10 |
 
@@ -75,7 +75,7 @@
 
 | 就绪度 | 数量 |
 | --- | --- |
-| framework-only | 134 |
+| framework-only | 147 |
 | official-ready | 1 |
 | blocked | 10 |
 
@@ -85,9 +85,9 @@
 | --- | --- |
 | heroes | 8 |
 | heroSkills | 28 |
-| quests | 2 |
-| threats | 1 |
-| bosses | 1 |
+| quests | 3 |
+| threats | 7 |
+| bosses | 7 |
 | monsters | 3 |
 | rooms | 6 |
 | curios | 4 |
@@ -104,7 +104,7 @@
 | finalForms | 8 |
 
 > ⚠️ `official-ready` 仅 **1** 条，`missingSourceReference` 高达
-> **144** 条 —— 绝大多数内容尚未回指到规则书页码/卡牌编号，
+> **157** 条 —— 绝大多数内容尚未回指到规则书页码/卡牌编号，
 > 这是 ISSUE-P2-001 的量化依据。
 
 ### 3.1 Prototype 污染与引用完整性
@@ -169,34 +169,34 @@
 | 指标 | 值 |
 | --- | --- |
 | seed | `golden-normal-success-01` |
-| outcome | **campaign-over** |
-| 最终 Act | 1 |
-| 最终 GamePhase | `campaign-over` |
-| 完成任务数 | 10 |
-| 事件数 | 140 |
-| RNG 抽取次数 | 659 |
+| outcome | **blocked** |
+| 最终 Act | 4 |
+| 最终 GamePhase | `quest-select` |
+| 完成任务数 | 9 |
+| 事件数 | 104 |
+| RNG 抽取次数 | 447 |
 | 不变量违反（error） | 0 |
 | 重复事务 | 0 |
 | 引擎死锁 | 无 |
-| Act 卡死首次触发 | 第 3 个任务 |
-| Act 卡死下最多完成 | 10 个任务 |
+| Act 卡死首次触发 | — |
+| Act 卡死下最多完成 | 0 个任务 |
 
-> **阻断原因**：CAMPAIGN_FLOW_BLOCKED：已完成 10 个 Standard Quest（首次触发于第 3 个），campaign.act 始终为 1。Act 推进状态机（src/game-engine/campaign/campaign-progress.ts）无任何生产调用方，Boss Quest 定义（FACE_THE_THREAT_QUEST_DEFINITION）零引用，11-Quest 循环在正式路径上不可达。
+
 
 ### 6.1 里程碑覆盖（状态谓词判定，非任务数下标映射）
 
 | ID | 里程碑 | 到达 | State Hash |
 | --- | --- | --- | --- |
-| M00 | 新战役创建完成（4 英雄 + 默认技能） | ✅ | `f1a8e3da` |
-| M01 | Act I · Standard Quest 1 结算完成 | ✅ | `f122fc56` |
-| M02 | Act I · Standard Quest 2 结算完成 | ✅ | `52a0458e` |
-| M03 | Act I · Boss Quest 胜利 → 进入 Act II | ❌ | — |
-| M04 | Act II · Standard Quest 1 结算完成 | ❌ | — |
-| M05 | Act II · Standard Quest 2 结算完成 | ❌ | — |
-| M06 | Act II · Boss Quest 胜利 → 进入 Act III | ❌ | — |
-| M07 | Act III · Standard Quest 1 结算完成 | ❌ | — |
-| M08 | Act III · Standard Quest 2 结算完成 | ❌ | — |
-| M09 | Act III · Boss Quest 胜利 → 第三 Threat 后 Hamlet | ❌ | — |
+| M00 | 新战役创建完成（4 英雄 + 默认技能） | ✅ | `1a6e84bb` |
+| M01 | Act I · Standard Quest 1 结算完成 | ✅ | `e0bc6a01` |
+| M02 | Act I · Standard Quest 2 结算完成 | ✅ | `1dec2cf6` |
+| M03 | Act I · Boss Quest 胜利 → 进入 Act II | ✅ | `1352f39d` |
+| M04 | Act II · Standard Quest 1 结算完成 | ✅ | `54aa9b4a` |
+| M05 | Act II · Standard Quest 2 结算完成 | ✅ | `501a5094` |
+| M06 | Act II · Boss Quest 胜利 → 进入 Act III | ✅ | `53ac5a97` |
+| M07 | Act III · Standard Quest 1 结算完成 | ✅ | `3f7b3dd0` |
+| M08 | Act III · Standard Quest 2 结算完成 | ✅ | `b832b935` |
+| M09 | Act III · Boss Quest 胜利 → 第三 Threat 后 Hamlet | ✅ | `1b71a425` |
 | M10 | Darkest Dungeon 解锁 + Guardian Quest 生成 | ❌ | — |
 | M11 | Guardian 击败 → Final Hamlet | ❌ | — |
 | M12 | Final Hamlet 4 天完成 | ❌ | — |
@@ -204,7 +204,7 @@
 | M14 | 倒数第二个 Form 被击败 | ❌ | — |
 | M15 | Heart of Darkness 击败 → Campaign Victory | ❌ | — |
 
-到达率：**3 / 16**
+到达率：**10 / 16**
 
 ### 6.2 Save / Resume 矩阵
 
@@ -213,6 +213,13 @@
 | M00 | 新战役创建完成（4 英雄 + 默认技能） | ✅ |
 | M01 | Act I · Standard Quest 1 结算完成 | ✅ |
 | M02 | Act I · Standard Quest 2 结算完成 | ✅ |
+| M03 | Act I · Boss Quest 胜利 → 进入 Act II | ✅ |
+| M04 | Act II · Standard Quest 1 结算完成 | ✅ |
+| M05 | Act II · Standard Quest 2 结算完成 | ✅ |
+| M06 | Act II · Boss Quest 胜利 → 进入 Act III | ✅ |
+| M07 | Act III · Standard Quest 1 结算完成 | ✅ |
+| M08 | Act III · Standard Quest 2 结算完成 | ✅ |
+| M09 | Act III · Boss Quest 胜利 → 第三 Threat 后 Hamlet | ✅ |
 
 > 覆盖率受 Act 推进断裂限制：M03 及之后的里程碑从未到达，其存档往返**未被验证**。
 
@@ -234,14 +241,14 @@
 
 | 步骤 | avg | 备注 |
 | --- | --- | --- |
-| New Campaign 初始化 | 0.123 ms | 真实路径 |
-| Quest Setup | 2.832 ms | 真实路径 |
-| Battle Setup | 3.037 ms | 真实路径 |
-| Save | 0.003 ms | 代表性存档 20145 B |
-| Load | 0.255 ms | 真实路径 |
-| Form Transition | 0.574 ms | **机制级**（正式四 Act 主循环不可达，ISSUE-P0-001） |
+| New Campaign 初始化 | 0.416 ms | 真实路径 |
+| Quest Setup | 3.643 ms | 真实路径 |
+| Battle Setup | 4.055 ms | 真实路径 |
+| Save | 0.004 ms | 代表性存档 21566 B |
+| Load | 0.314 ms | 真实路径 |
+| Form Transition | 0.602 ms | **机制级**（正式四 Act 主循环不可达，ISSUE-P0-001） |
 
-完整 Run 体量极值：事件数 **140**、最大 Save **88403 B**、最大 Ledger **29**、峰值 Actor **7**、峰值 Initiative **7**。
+完整 Run 体量极值：事件数 **104**、最大 Save **77834 B**、最大 Ledger **33**、峰值 Actor **7**、峰值 Initiative **7**。
 
 工程门禁：Save/Load×100 不崩溃 `true`、无体积膨胀 `true`、Form Transition 无泄漏 `true`、无长时无响应 `✅`。
 
@@ -269,11 +276,10 @@
 
 ## 8. Issue Ledger
 
-open **P0=2 / P1=3 / P2=2**
+open **P0=1 / P1=3 / P2=2**
 
 | ID | 级别 | 状态 | 域 | 标题 |
 | --- | --- | --- | --- | --- |
-| ISSUE-P0-001 | P0 | open | campaign-flow | 11-Quest / 4-Act 主循环在正式引擎路径上不可达 |
 | ISSUE-P0-002 | P0 | open | content-data | Act IV 官方卡面数据缺失，官方池被 Data Gate 关闭 |
 | ISSUE-P1-001 | P1 | open | determinism | createId() 直接使用 Math.random() / Date.now()，破坏 replay 可复现性 |
 | ISSUE-P1-002 | P1 | open | determinism | 同一 seed 的两次 replay 不完全一致 |
@@ -289,14 +295,14 @@ open **P0=2 / P1=3 / P2=2**
 | unitPasses | ✅ |
 | integrationPasses | ⚪ 未验证（本阶段未测量，不计为通过） |
 | criticalE2EPasses | ⚪ 未验证（本阶段未测量，不计为通过） |
-| goldenCampaignPasses | ❌ |
+| goldenCampaignPasses | ✅ |
 | replayDeterminismPasses | ❌ |
-| openP0 | 2 |
+| openP0 | 1 |
 | openP1 | 3 |
 | prototypeReferencesInOfficialPath | 0 |
 | duplicateCommittedTransactions | 0 |
 | engineDeadlocks | 0 |
-| elevenQuestLoopClosed | ❌ |
+| elevenQuestLoopClosed | ✅ |
 | campaignVictoryReachable | ❌ |
 | campaignOverReachable | ✅ |
 | threeGuardiansPass | ❌ |

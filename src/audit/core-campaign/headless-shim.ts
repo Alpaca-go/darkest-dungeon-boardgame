@@ -50,6 +50,8 @@ import { openOpportunities } from '../../game-engine/trinkets/trinket-opportunit
 import { failQuestFromBattle, finishQuest } from '../../game-engine/quest-result';
 import { hamletEntryBlockedByTrinkets, startHamletPhase } from '../../game-engine/hamlet';
 import { resolveTrinketAllocation } from '../../game-engine/trinkets/allocate-trinket';
+// Phase 11A.1 §9 / §16.2：returnToHamlet 接入 Campaign Orchestrator。
+import { finalizeQuestReturnToHamlet } from '../../game-engine/campaign/campaign-orchestrator';
 
 /**
  * store: retargetPendingReplacement（useGameStore.ts:280-292）——
@@ -353,7 +355,22 @@ export function shimResolveReplacements(c: CampaignState, maxRounds = 8): Campai
 export function shimReturnToHamlet(c: CampaignState): CampaignState {
   // UI 会在 quest-result 页强制玩家先处理饰品分配；无头驱动等价地先结清。
   const unblocked = hamletEntryBlockedByTrinkets(c) ? resolveAllPendingTrinketAllocations(c) : c;
-  let next = startHamletPhase(unblocked);
+  // Phase 11A.1 §9：先走 Campaign Orchestrator 推进（Standard 计数 / Boss 胜利 / Act 推进），
+  // 再走既有 Hamlet 阶段进入 + Replacement 流程。
+  const summary = unblocked.lastQuestResult;
+  const questId = summary?.questId ?? unblocked.currentQuestId ?? '';
+  const dungeon = unblocked.dungeon;
+  const questRunId = dungeon?.questRunId ?? `${questId}:no-run`;
+  let next: CampaignState = unblocked;
+  if (questId) {
+    const result = finalizeQuestReturnToHamlet(unblocked, {
+      questId,
+      questRunId,
+      questOutcome: summary?.outcome ?? 'incomplete',
+    });
+    if (result.ok) next = result.campaign;
+  }
+  next = startHamletPhase(next);
   if (next === unblocked) return c;
   next = retargetPendingReplacement(next, 'hamlet');
   next = evaluateReplacementFlow(next);

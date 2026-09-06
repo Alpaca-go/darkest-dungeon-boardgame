@@ -126,6 +126,28 @@ export default function HamletPage() {
           Caretaker 阻塞：
           <span className="text-red-400 font-bold"> {blockedBuilding?.name ?? '无'}</span>
         </span>
+        {/* Phase 11A.1 §22 最小 UI：Campaign 状态条 */}
+        <span className="text-dd-muted">
+          Act <span className="text-dd-text font-bold">{campaign.campaignProgress.act}</span>
+          {' '}/ Level {campaign.campaignProgress.campaignLevel}
+        </span>
+        <span className="text-dd-muted">
+          完成任务：
+          <span className="text-dd-text font-bold">
+            {campaign.campaignProgress.completedStandardQuestsThisAct}/{campaign.campaignProgress.requiredStandardQuestsBeforeBoss}
+          </span>
+        </span>
+        {campaign.campaignProgress.activeBossFamilyId ? (
+          <span className="text-dd-muted">
+            迫近威胁：
+            <span className="text-dd-danger font-bold">
+              {campaign.campaignProgress.activeBossFamilyId}
+            </span>
+          </span>
+        ) : null}
+        {campaign.campaignProgress.darkestDungeonUnlocked ? (
+          <span className="text-dd-accent2 font-bold">Darkest Dungeon Unlocked</span>
+        ) : null}
       </div>
 
       <div className="grid lg:grid-cols-[240px_1fr_280px] gap-4">

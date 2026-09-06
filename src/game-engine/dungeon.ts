@@ -53,6 +53,8 @@ export function generateDungeon(questId: string): DungeonState {
   }));
   return {
     questId,
+    // Phase 11A.1 §20：Quest Run 唯一 id，用于 standard-complete 事务幂等。
+    questRunId: createId('qrun'),
     currentRoomId: 'start',
     previousRoomId: null,
     rooms,

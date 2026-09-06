@@ -37,6 +37,8 @@ import {
 } from './headless-shim';
 import { createSaveSnapshot, restoreSaveSnapshot, validateSaveFile } from '../../game-engine/save';
 import { createSeededRandom, setRandomSource } from '../../game-engine/random';
+// Phase 11A.1 §16.1：chooseQuest 路径走 Campaign Orchestrator 入口。
+import { engineChooseQuest } from '../../game-engine/campaign/campaign-orchestrator';
 import { assertCoreCampaignInvariants, milestoneStateHash, type InvariantFinding } from './campaign-invariants';
 import {
   stableHash,
@@ -307,9 +309,13 @@ export class CampaignSimulationDriver {
           UI_STORE_SHIM_LAYER,
         );
       case 'chooseQuest':
-        return this.commit('chooseQuest', `chooseQuest:${command.questId}`, () =>
-          selectQuest(this.state, command.questId),
-        );
+        // Phase 11A.1 §16.1：先走 engineChooseQuest（初始化 Act / Threat + 门控），
+        // 再委托给 selectQuest 生成地牢。
+        return this.commit('chooseQuest', `chooseQuest:${command.questId}`, () => {
+          const gate = engineChooseQuest(this.state, command.questId);
+          if (!gate.ok) return this.state;
+          return selectQuest(gate.campaign, command.questId);
+        });
       case 'scout':
         return this.commit('scout', 'scout', () =>
           this.state.dungeon && canScout(this.state.dungeon) ? scoutDungeon(this.state) : this.state,

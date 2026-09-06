@@ -38,6 +38,11 @@ import {
   skipHeroAction,
   endHamletDay as engineEndHamletDay,
 } from '../game-engine/hamlet';
+// ---- Phase 11A.1：Campaign Orchestration 入口 ----
+import {
+  engineChooseQuest,
+  finalizeQuestReturnToHamlet,
+} from '../game-engine/campaign/campaign-orchestrator';
 import {
   acquireQuirk as engineAcquireQuirk,
   resolveQuirkDecision as engineResolveQuirkDecision,
@@ -438,7 +443,14 @@ export const useGameStore = create<GameStore>((set, get) => {
     chooseQuest: (questId) => {
       const c = get().campaign;
       if (!c) return;
-      commit(engineSelectQuest(c, questId));
+      // Phase 11A.1：先走 engineChooseQuest 初始化 Act / Threat + 门控，
+      // 再委托 selectQuest 生成地牢。
+      const gate = engineChooseQuest(c, questId);
+      if (!gate.ok) {
+        // 门控拒绝：原样落盘 + 日志（不写脏数据）。
+        return;
+      }
+      commit(engineSelectQuest(gate.campaign, questId));
     },
 
     scout: () => {
@@ -552,8 +564,25 @@ export const useGameStore = create<GameStore>((set, get) => {
     returnToHamlet: () => {
       const c = get().campaign;
       if (!c) return;
-      let next = startHamletPhase(c);
-      if (next === c) return;
+      // Phase 11A.1 §9：返回 Hamlet 是一次性事务，调用 finalizeQuestReturnToHamlet
+      // 推进 Campaign Progress（Standard 完成计数 / Boss 胜利 / Act 推进 / Act IV 解锁）。
+      const summary = c.lastQuestResult;
+      const questId = summary?.questId ?? c.currentQuestId ?? '';
+      let afterCampaign = c;
+      if (questId) {
+        const dungeon = c.dungeon;
+        const questRunId = dungeon?.questRunId ?? `${questId}:no-run`;
+        const result = finalizeQuestReturnToHamlet(c, {
+          questId,
+          questRunId,
+          questOutcome: summary?.outcome ?? 'incomplete',
+        });
+        if (result.ok) {
+          afterCampaign = result.campaign;
+        }
+      }
+      let next = startHamletPhase(afterCampaign);
+      if (next === afterCampaign) return;
       next = retargetPendingReplacement(next, 'hamlet');
       next = evaluateReplacementFlow(next);
       commit(next);

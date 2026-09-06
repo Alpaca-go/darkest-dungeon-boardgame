@@ -4,30 +4,9 @@
 
 | 等级 | 数量 |
 | --- | --- |
-| P0 open | 2 |
+| P0 open | 1 |
 | P1 open | 3 |
 | P2 open | 2 |
-
----
-
-## ISSUE-P0-001 · P0 · campaign-flow
-
-**11-Quest / 4-Act 主循环在正式引擎路径上不可达**
-
-- **状态**：open
-- **描述**：断链共 5 处（均由 campaign-flow.test.ts 静态扫描固化）：
-(1) Act 推进状态机 src/game-engine/campaign/campaign-progress.ts 中的 withActStarted / withStandardQuestCompleted / recomputeBossLock 等函数**没有任何生产调用方**（纯死代码，但函数本身逻辑正确 —— 缺的是接线不是实现）；
-(2) finishQuest / selectQuest 中 act 只出现初始化字面量 act: 1，从不推进；
-(3) Boss Quest 定义 FACE_THE_THREAT_QUEST_DEFINITION 零生产引用，玩家永远抽不到"直面威胁"；
-(4) 全仓不存在任何 act: 2 / act: 3 写入 —— **Act II 与 Act III 在生产代码中彻底不可达**；
-(5) 唯一能写 act: 4 的 unlockDarkestDungeonAct() 依赖 defeatedBossFamilyIds.length >= 3，而 defeatedBossFamilyIds 在生产代码里**从不追加**（只有初始化 []、存档反序列化，以及 dev 调试面板 ActFourDebugSection.tsx 硬塞 [necromancer, prophet, collector]）。即 Act IV 目前只能经调试面板进入，正式游玩路径不可达。
-结论：战役永远停留在 Act I，M03~M15 里程碑无法达成。
-- **期望**：完成 2 个 Standard Quest 后 Boss Quest 解锁并强制；Boss 胜利后追加 defeatedBossFamilyIds 并 act 1 → 2 → 3；击败 3 个 Boss 家族后由正式流程（非调试面板）解锁 Act IV。
-- **实际**：完成 10 个任务后 act 仍为 1，阶段停在 campaign-over。
-- **复现 seed**：`golden-normal-success-01`
-- **复现命令**：`npm run test:golden` / `npm run audit:release-gate`
-- **State Hash**：`b3f522a2`
-- **回归测试**：`golden-run.test.ts:11-quest-loop` / `campaign-flow.test.ts:act-advance` / `campaign-flow.test.ts:act-four-debug-only`
 
 ---
 
@@ -64,7 +43,7 @@
 - **状态**：open
 - **描述**：事件序列或 RNG 抽取序列在两次运行间发生分叉。
 - **期望**：事件序列、RNG 序列、最终 state hash 三者逐位一致。
-- **实际**：firstDivergentEventIndex=0, rngMatch=true, hashA=2a6e3203, hashB=807cd6c0
+- **实际**：firstDivergentEventIndex=0, rngMatch=true, hashA=9c61f34d, hashB=aacd229e
 - **复现 seed**：`golden-normal-success-01`
 - **复现命令**：`npm run test:golden`
 - **回归测试**：`golden-run.test.ts:replay-determinism`
@@ -76,9 +55,9 @@
 **大量内容条目缺少 sourceReference**
 
 - **状态**：open
-- **描述**：144/145 条内容没有规则书出处，按 spec §6 一律不能判定为 verified / official-ready。
+- **描述**：157/158 条内容没有规则书出处，按 spec §6 一律不能判定为 verified / official-ready。
 - **期望**：所有官方内容条目具备 sourceReference。
-- **实际**：缺失 144 条。
+- **实际**：缺失 157 条。
 - **复现命令**：`npm run audit:content`
 - **回归测试**：`content-manifest.test.ts:source-reference-coverage`
 

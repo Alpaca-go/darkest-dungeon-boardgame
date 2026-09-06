@@ -6,6 +6,7 @@
 import type { DataMode, RegistryValidationIssue } from '../../types/progression';
 import type { BossThreatDefinition, CampaignLevel } from '../../types/bosses';
 import { PROTOTYPE_THREATS } from './prototype-threats';
+import { ACT_PROGRESSION_THREATS } from './prototype-act-progression';
 import { getBossDefinitionById } from './boss-registry';
 
 /** 当前 Threat 数据模式（与 Boss 保持一致）。 */
@@ -15,7 +16,10 @@ export const THREAT_DATA_MODE: DataMode = 'prototype';
 export const THREAT_DEFAULT_PRIORITY = 30;
 
 /** 全部 Threat 定义。 */
-export const THREAT_REGISTRY: BossThreatDefinition[] = [...PROTOTYPE_THREATS];
+export const THREAT_REGISTRY: BossThreatDefinition[] = [
+  ...PROTOTYPE_THREATS,
+  ...ACT_PROGRESSION_THREATS,
+];
 
 /** 按 id 取 Threat。 */
 export function getThreatById(threatId: string): BossThreatDefinition | undefined {

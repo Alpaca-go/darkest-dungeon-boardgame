@@ -225,6 +225,12 @@ export interface CurioDefinition {
 /** 地牢状态。 */
 export interface DungeonState {
   questId: string;
+  /**
+   * 任务运行 id（Phase 11A.1 §20 幂等键用）。
+   * 同一 questId 在不同 Act 重复游玩时必须用不同 questRunId，
+   * 才能让 standard-complete 事务幂等地「只 +1」一次。
+   */
+  questRunId: string;
   currentRoomId: string;
   previousRoomId: string | null;
   rooms: DungeonRoom[];
@@ -724,6 +730,13 @@ export interface CampaignState {
   bossSummonHistory: BossSummonRecord[];
   /** 已执行的 Boss / Threat 域事务 id（幂等保护，§22；保留最近 200 条）。 */
   processedBossTransactionIds: string[];
+  // ---- Phase 11A.1：Campaign Orchestration 事务簿记（§20；保留最近 100 条） ----
+  /**
+   * 已执行的 Campaign 编排层事务 id（幂等保护，§20）。
+   * 涵盖 act-start、standard-complete、boss-victory、act-four-unlock 等。
+   * 重复调用同一事务必须原样返回，绝不二次推进。
+   */
+  processedCampaignTransactionIds: string[];
   // ---- Phase 10A：Darkest Dungeon Act IV ----
   /**
    * Act IV 运行时（Phase 10A §5）。

@@ -8,7 +8,7 @@
 
 | 项 | 值 |
 | --- | --- |
-| Node | `v22.22.2` |
+| Node | `v24.20.0` |
 | 平台 | `win32` |
 | measuredAt | `1970-01-01T00:00:00.000Z` |
 
@@ -16,12 +16,12 @@
 
 | 步骤 | 次数 | avg | min | max | p95 | 备注 |
 | --- | --- | --- | --- | --- | --- | --- |
-| New Campaign 初始化 | 20 | 0.123 ms | 0.008 ms | 1.715 ms | 1.715 ms |
-| Quest Setup | 10 | 2.832 ms | 1.353 ms | 9.648 ms | 9.648 ms |
-| Battle Setup | 10 | 3.037 ms | 1.872 ms | 7.096 ms | 7.096 ms |
-| Save | 50 | 0.003 ms | 0.001 ms | 0.025 ms | 0.006 ms | 20145 B |
-| Load | 50 | 0.255 ms | 0.214 ms | 0.49 ms | 0.422 ms |
-| Form Transition | 10 | 0.574 ms | 0.341 ms | 1.604 ms | 1.604 ms | 机制级 |
+| New Campaign 初始化 | 20 | 0.416 ms | 0.005 ms | 4.689 ms | 4.689 ms |
+| Quest Setup | 10 | 3.643 ms | 1.539 ms | 9.249 ms | 9.249 ms |
+| Battle Setup | 10 | 4.055 ms | 2.112 ms | 14.452 ms | 14.452 ms |
+| Save | 50 | 0.004 ms | 0.001 ms | 0.05 ms | 0.022 ms | 21566 B |
+| Load | 50 | 0.314 ms | 0.197 ms | 3.798 ms | 0.486 ms |
+| Form Transition | 10 | 0.602 ms | 0.291 ms | 2.555 ms | 2.555 ms | 机制级 |
 
 > **Form Transition 为机制级测量**：正式四 Act 主循环在 Act I 断裂（ISSUE-P0-001），
 > 无法通过自然游玩到达 Final Encounter；此处复用 Phase 10E 调试面板同款正式引擎入口把战役推到
@@ -32,13 +32,13 @@
 
 | 指标 | 值 |
 | --- | --- |
-| 完整 Run 事件数 | 140 |
-| 最大 Save 大小 (B) | 88403 |
-| 最大 Ledger（待处理事务） | 29 |
+| 完整 Run 事件数 | 104 |
+| 最大 Save 大小 (B) | 77834 |
+| 最大 Ledger（待处理事务） | 33 |
 | 峰值 Actor（英雄+怪物） | 7 |
 | 峰值 Initiative（先攻序长度） | 7 |
 
-> 完整 Run 在正式路径上仅能跑到 Act I（完成 10 个任务后停在 campaign-over），以下为**该可达 Run**的真实极值，不代表完整 11-Quest 全链路。
+> 完整 Run 在正式路径上仅能跑到 Act I（完成 9 个任务后停在 quest-select），以下为**该可达 Run**的真实极值，不代表完整 11-Quest 全链路。
 
 ## 3. 工程门禁（§32 收尾要求）
 
@@ -53,7 +53,7 @@
 
 - **不重复监听器膨胀**：浏览器/React 维度，node 侧无法测量，标记 ⚪。
 - **无指数级 Save 膨胀**：以 Save/Load ×100 前后快照体积对比验证。
-- **Form Transition 无泄漏**：完整 defeat+transition 链走完后，`processedTransactionIds` 中每条事务 id 仅提交一次（切换幂等，重跑不产生重复），不存在随链增长而膨胀的泄漏。
+- **Form Transition 无泄漏**：完整 defeat+transition 链走完后，`processedTransactionIds` 不重复且受 Form 数上界约束。
 - **无长时无响应命令**：各步骤单次 avg 耗时均须低于预算（见步骤预算行）。
 
 ## 4. 备注

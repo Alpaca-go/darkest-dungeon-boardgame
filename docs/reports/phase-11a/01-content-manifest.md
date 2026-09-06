@@ -1,29 +1,29 @@
 # Phase 11A — Core Campaign Content Manifest / 内容审计
 
 > 由 `npm run audit:content` 自动生成，请勿手改。
-> Manifest Hash: `1ae3bcf5`
+> Manifest Hash: `469d91eb`
 
 ## 1. 总览
 
-- 内容条目总数：**145**
+- 内容条目总数：**158**
 - 官方就绪（official-ready）：**1**
 - 被阻断（blocked）：**10**
-- prototype 状态条目：**18**
+- prototype 状态条目：**30**
 - 官方资料 unavailable：**10**
-- 缺少 `sourceReference`：**144 / 145**
+- 缺少 `sourceReference`：**157 / 158**
 
 ### 1.1 四态分布
 
 | officialDataStatus | 数量 |
 | --- | --- |
-| partial | 116 |
-| prototype | 18 |
+| partial | 117 |
+| prototype | 30 |
 | verified | 1 |
 | unavailable | 10 |
 
 | runtimeReadiness | 数量 |
 | --- | --- |
-| framework-only | 134 |
+| framework-only | 147 |
 | official-ready | 1 |
 | blocked | 10 |
 
@@ -36,6 +36,8 @@
 | diseases | 11 | 0 | 11 | 0 | 0 | 0 | 11 | 0 |
 | heroes | 8 | 0 | 8 | 0 | 0 | 0 | 8 | 0 |
 | finalForms | 8 | 0 | 0 | 4 | 4 | 0 | 4 | 4 |
+| threats | 7 | 0 | 0 | 7 | 0 | 0 | 7 | 0 |
+| bosses | 7 | 0 | 0 | 7 | 0 | 0 | 7 | 0 |
 | trinkets | 7 | 1 | 0 | 6 | 0 | 1 | 6 | 0 |
 | rooms | 6 | 0 | 6 | 0 | 0 | 0 | 6 | 0 |
 | darkestDungeonQuests | 6 | 0 | 0 | 3 | 3 | 0 | 3 | 3 |
@@ -44,11 +46,9 @@
 | virtues | 5 | 0 | 5 | 0 | 0 | 0 | 5 | 0 |
 | buildings | 5 | 0 | 5 | 0 | 0 | 0 | 5 | 0 |
 | curios | 4 | 0 | 4 | 0 | 0 | 0 | 4 | 0 |
+| quests | 3 | 0 | 3 | 0 | 0 | 0 | 3 | 0 |
 | monsters | 3 | 0 | 3 | 0 | 0 | 0 | 3 | 0 |
 | hamletEvents | 3 | 0 | 3 | 0 | 0 | 0 | 3 | 0 |
-| quests | 2 | 0 | 2 | 0 | 0 | 0 | 2 | 0 |
-| threats | 1 | 0 | 0 | 1 | 0 | 0 | 1 | 0 |
-| bosses | 1 | 0 | 0 | 1 | 0 | 0 | 1 | 0 |
 | provisions | 1 | 0 | 1 | 0 | 0 | 0 | 1 | 0 |
 
 > ⚠️ 以下分类在当前代码库中**没有任何实现条目**（spec §6 要求的槽位存在但内容为空）：

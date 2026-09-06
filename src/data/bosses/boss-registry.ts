@@ -8,6 +8,7 @@
 import type { DataMode, RegistryValidationIssue } from '../../types/progression';
 import type { BossDefinition, BossSkillDefinition, CampaignLevel } from '../../types/bosses';
 import { PROTOTYPE_BOSSES } from './prototype-bosses';
+import { ACT_PROGRESSION_BOSSES } from './prototype-act-progression';
 
 /**
  * 当前 Boss 数据模式。
@@ -17,7 +18,10 @@ import { PROTOTYPE_BOSSES } from './prototype-bosses';
 export const BOSS_DATA_MODE: DataMode = 'prototype';
 
 /** 全部 Boss 定义（正式 + 原型）。 */
-export const BOSS_REGISTRY: BossDefinition[] = [...PROTOTYPE_BOSSES];
+export const BOSS_REGISTRY: BossDefinition[] = [
+  ...PROTOTYPE_BOSSES,
+  ...ACT_PROGRESSION_BOSSES,
+];
 
 /** 按 id 取 Boss 定义。 */
 export function getBossDefinitionById(bossId: string): BossDefinition | undefined {

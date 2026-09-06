@@ -80,8 +80,15 @@ export const STORAGE_KEY = 'dd-web-prototype-save-v1';
  *      Impending Doom Forecast（d10 先保存后展示）。旧存档一律补 null，
  *      迁移**不代掷**任何随机数；已存在则过 sanitizeFinalFormRuntimeState 净化。
  *      硬约束 1：仍不新增 CampaignState 顶层字段。
+ * v17（Phase 11A.1 — Campaign Orchestration Repair）：CampaignState 顶层新增
+ *      `processedCampaignTransactionIds: string[]`（§20 Campaign 编排层事务簿记，
+ *      保留最近 100 条）。DungeonState 顶层新增 `questRunId: string`（§20 Standard
+ *      Quest 完成事务幂等键）。Phase 9A 的 CampaignProgressState 已存在 actStartTransactionIds。
+ *      旧存档：processedCampaignTransactionIds 默认为 `[]`，DungeonState.questRunId 在
+ *      Load 后由存档数据自行补齐（如缺失则视为空字符串，等待下次 selectQuest 重新生成）。
+ *      迁移**不**根据 questCount 推断 Act，**不**代掷任何随机数，**不**触发 Threat Draw。
  */
-export const SAVE_VERSION = 16;
+export const SAVE_VERSION = 17;
 
 /**
  * v2 存档文件结构。
@@ -107,7 +114,7 @@ interface SaveEnvelopeV1 {
 }
 
 /** 可被迁移到当前版本的历史存档版本号。 */
-const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 
 /** 读档结果：区分正常 / 无存档 / 损坏 / 版本不支持。 */
 export type LoadStatus = 'ok' | 'empty' | 'corrupt' | 'unsupported';
@@ -762,6 +769,12 @@ export function migrateCampaignToV6(campaign: CampaignState): CampaignState {
       ),
     };
   }
+  // Phase 11A.1 §20：DungeonState 顶层新增 questRunId。旧存档缺失时填空字符串，
+  // 下次 selectQuest 会由 generateDungeon 重新生成。
+  if (dungeon && typeof (dungeon as { questRunId?: string }).questRunId !== 'string') {
+    changed = true;
+    dungeon = { ...dungeon, questRunId: `qrun-migrated-${campaign.id ?? 'save'}` };
+  }
 
   const anyC = campaign as CampaignState & Record<string, unknown>;
   let hamlet = campaign.hamlet;
@@ -1201,6 +1214,35 @@ export function migrateCampaignToV16(campaign: CampaignState): CampaignState {
   return { ...campaign, saveVersion: SAVE_VERSION, actFourState };
 }
 
+/**
+ * Phase 11A.1 §20：v16 → v17 迁移。
+ *
+ * 新增顶层字段：
+ * - `processedCampaignTransactionIds: string[]`：Campaign 编排层事务簿记（act-start、
+ *   standard-complete、boss-victory、act-four-unlock 等）。旧存档一律补 `[]`。
+ * - `DungeonState.questRunId: string`：Standard Quest 完成事务的幂等键；缺失时填空串
+ *   （首次返回 Hamlet 时由 orchestrator 重新生成 questRunId）。
+ *
+ * 严格约束（dev doc §19）：
+ * - 迁移不根据 questCount 推断 Act；
+ * - 迁移不代掷任何随机数；
+ * - 迁移不触发 Threat Draw；
+ * - 迁移不重建 defeatedBossFamilyIds。
+ */
+export function migrateCampaignToV17(campaign: CampaignState): CampaignState {
+  const anyC = campaign as CampaignState & Record<string, unknown>;
+  const rawTx = anyC.processedCampaignTransactionIds;
+  const processedCampaignTransactionIds: string[] = Array.isArray(rawTx)
+    ? rawTx.filter((x): x is string => typeof x === 'string').slice(-100)
+    : [];
+  // 兼容补 DungeonState.questRunId（不在 CampaignState 顶层，但 restore 路径会处理）。
+  return {
+    ...campaign,
+    saveVersion: SAVE_VERSION,
+    processedCampaignTransactionIds,
+  };
+}
+
 /** 净化已存在的 campaignProgress（补缺字段 / clamp / 去掉非法类型），不重新随机。 */
 function sanitizeCampaignProgress(raw: CampaignProgressState): CampaignProgressState {
   const base = createInitialCampaignProgress({
@@ -1243,18 +1285,20 @@ function sanitizeCampaignProgress(raw: CampaignProgressState): CampaignProgressS
  * 将战役迁移到当前最新版本
  * （v3 → v8 = Phase 9A → v9 = Phase 9C → v10 = Phase 9D → v11 = Phase 9E → v12 = Phase 10A
  *  → v13 = Phase 10B Templars → v14 = Phase 10C Mammoth Cyst → v15 = Phase 10D Shuffling Horror
- *  → v16 = Phase 10E Final Encounter 四形态）。
+ *  → v16 = Phase 10E Final Encounter 四形态 → v17 = Phase 11A.1 Campaign Orchestration）。
  */
 export function migrateCampaignToLatest(campaign: CampaignState): CampaignState {
-  return migrateCampaignToV16(
-    migrateCampaignToV15(
-      migrateCampaignToV14(
-        migrateCampaignToV13(
-          migrateCampaignToV12(
-            migrateCampaignToV8(
-              migrateCampaignToV7(
-                migrateCampaignToV6(
-                  migrateCampaignToV5(migrateCampaignToV4(migrateCampaignToV3(campaign))),
+  return migrateCampaignToV17(
+    migrateCampaignToV16(
+      migrateCampaignToV15(
+        migrateCampaignToV14(
+          migrateCampaignToV13(
+            migrateCampaignToV12(
+              migrateCampaignToV8(
+                migrateCampaignToV7(
+                  migrateCampaignToV6(
+                    migrateCampaignToV5(migrateCampaignToV4(migrateCampaignToV3(campaign))),
+                  ),
                 ),
               ),
             ),

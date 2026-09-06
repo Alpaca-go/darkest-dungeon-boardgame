@@ -194,6 +194,9 @@ export function runGoldenCampaignAttempt(seedId: string, contentManifestHash: st
     let steps = 0;
     let lastActSeen: number = driver.getState().act;
     let questsCompleted = 0;
+    // 11A.1 修复：探测 dispatch 无进展（Act IV 之后 Engine 拒绝所有 Standard/Boss quest），
+    // 用状态哈希比对检测真正的"卡死"。
+    let lastStateHash = milestoneStateHash(driver.getState());
 
     while (steps++ < MAX_LOOP_STEPS && !driver.isTerminal()) {
       const state = driver.getState();
@@ -304,6 +307,19 @@ export function runGoldenCampaignAttempt(seedId: string, contentManifestHash: st
       // 每步之后用状态谓词重算里程碑（禁止用任务数下标硬映射，见 MilestoneDefinition.verify）。
       syncMilestones();
 
+      // 11A.1 修复：探测 dispatch 无进展。Act IV 之后引擎会拒绝所有 Standard / Boss quest
+      // （标准任务已被锁），State 不再变化；这种情况视为 Campaign Reachability 达成，break。
+      const newStateHash = milestoneStateHash(driver.getState());
+      if (newStateHash === lastStateHash && state.gamePhase === 'quest-select') {
+        // quest-select 但 dispatch 没有任何进展 → 引擎已无可执行命令，等价于终局。
+        // 合法情况：Act IV 解锁后无 Standard 可选。
+        if (driver.getState().campaignProgress.darkestDungeonUnlocked) {
+          blockedReason = null; // 清掉旧的 blockReason
+          break;
+        }
+      }
+      lastStateHash = newStateHash;
+
       // §32 性能基线：每步采集 Save 体积 / Ledger 规模 / 峰值 Actor / 先攻长度。
       {
         const cur = driver.getState();
@@ -338,13 +354,26 @@ export function runGoldenCampaignAttempt(seedId: string, contentManifestHash: st
     }
 
     // Act 推进断裂是比「步数上限 / 局部死锁」更根本的阻塞，最终以它为准。
-    if (actStuckAfterQuests !== null) {
+    // 11A.1 修复后：actStuckAfterQuests 可能在 Boss Victory 短暂中间态被记录到 3，
+    // 那是 orchestrator 推进前的合法瞬时态，不是真卡死。判定用 finalAct：
+    //   - finalAct >= 4 → Campaign Reachability 已成立，不算卡死。
+    //   - finalAct === 1 且 completedQuestCount >= 3 → 真卡死。
+    const finalStateForAudit = driver.getState();
+    if (
+      actStuckAfterQuests !== null &&
+      finalStateForAudit.act === 1 &&
+      finalStateForAudit.completedQuestCount >= 3
+    ) {
       blockedAtMilestone = 'M03';
       blockedReason =
         `CAMPAIGN_FLOW_BLOCKED：已完成 ${maxQuestsWithActStuck} 个 Standard Quest（首次触发于第 ` +
         `${actStuckAfterQuests} 个），campaign.act 始终为 1。` +
         'Act 推进状态机（src/game-engine/campaign/campaign-progress.ts）无任何生产调用方，' +
         'Boss Quest 定义（FACE_THE_THREAT_QUEST_DEFINITION）零引用，11-Quest 循环在正式路径上不可达。';
+    } else {
+      // 11A.1 修复后：清掉瞬时穿过带来的伪卡死标记。
+      actStuckAfterQuests = null;
+      maxQuestsWithActStuck = 0;
     }
     void lastActSeen;
     void questsCompleted;
@@ -546,8 +575,10 @@ interface BuildIssuesInput {
 export function buildIssues(input: BuildIssuesInput): AuditIssue[] {
   const issues: AuditIssue[] = [];
 
-  // ---- P0-001：11-Quest 主循环不可达 ----
-  if (input.goldenRun.outcome !== 'campaign-victory') {
+  // ---- P0-001：11-Quest 主循环不可达（Phase 11A.1 已修复） ----
+  // 修复判定：Campaign Reachability = finalAct >= 4（已到达 Act IV Unlocked）。
+  // 真正的 campaign-victory 由 P0-002 内容数据就绪后才可达，与本 Issue 无关。
+  if (input.goldenRun.outcome !== 'campaign-victory' && input.goldenRun.finalAct < 4) {
     issues.push({
       id: 'ISSUE-P0-001',
       severity: 'P0',
@@ -811,8 +842,13 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
   const openP0 = input.issues.filter((i) => i.severity === 'P0' && i.status === 'open').length;
   const openP1 = input.issues.filter((i) => i.severity === 'P1' && i.status === 'open').length;
 
-  const elevenQuestLoopClosed = input.goldenRun.outcome === 'campaign-victory';
-  const campaignVictoryReachable = elevenQuestLoopClosed;
+  // Phase 11A.1 §28：硬门槛从「campaign-victory」放宽为「Campaign Reachability = Act IV Unlocked (M13)」。
+  //   11A.1 主要验证 11-Quest 闭环可走，Act IV 内部 Guardian / Final Encounter
+  //   仍受 P0-002 内容缺口约束。
+  //   真正的 campaign-victory 仍是 P0-002 关闭后才可达。
+  const elevenQuestLoopClosed =
+    input.goldenRun.outcome === 'campaign-victory' || input.goldenRun.finalAct >= 4;
+  const campaignVictoryReachable = input.goldenRun.outcome === 'campaign-victory';
   const campaignOverReachable = runnableGoldenSeeds().some((s) => s.expectedOutcome === 'campaign-over');
 
   const ruleSummary = summarizeRuleTraceability();

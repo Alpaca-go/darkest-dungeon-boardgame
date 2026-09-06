@@ -1,13 +1,13 @@
 {
-  "manifestHash": "1ae3bcf5",
+  "manifestHash": "469d91eb",
   "summary": {
-    "total": 145,
+    "total": 158,
     "byCategory": {
       "heroes": 8,
       "heroSkills": 28,
-      "quests": 2,
-      "threats": 1,
-      "bosses": 1,
+      "quests": 3,
+      "threats": 7,
+      "bosses": 7,
       "monsters": 3,
       "rooms": 6,
       "curios": 4,
@@ -24,21 +24,21 @@
       "finalForms": 8
     },
     "byStatus": {
-      "partial": 116,
-      "prototype": 18,
+      "partial": 117,
+      "prototype": 30,
       "verified": 1,
       "unavailable": 10
     },
     "byReadiness": {
-      "framework-only": 134,
+      "framework-only": 147,
       "official-ready": 1,
       "blocked": 10
     },
     "officialReady": 1,
     "blocked": 10,
-    "prototype": 18,
+    "prototype": 30,
     "unavailable": 10,
-    "missingSourceReference": 144
+    "missingSourceReference": 157
   },
   "version": "1.0.0",
   "heroes": [
@@ -653,6 +653,22 @@
       "auditNotes": [
         "缺少 sourceReference；数据存在但未经规则书核实，不能判定为 verified"
       ]
+    },
+    {
+      "id": "face-the-threat",
+      "category": "quests",
+      "sourceFile": "src/data/quests.ts",
+      "officialDataStatus": "partial",
+      "runtimeReadiness": "framework-only",
+      "enabledInOfficialPool": false,
+      "definitionHash": "500315c8",
+      "dependencies": [],
+      "missingFields": [
+        "sourceReference"
+      ],
+      "auditNotes": [
+        "缺少 sourceReference；数据存在但未经规则书核实，不能判定为 verified"
+      ]
     }
   ],
   "threats": [
@@ -669,6 +685,90 @@
         "sourceReference"
       ],
       "auditNotes": []
+    },
+    {
+      "id": "prototype-necromancer-threat-level-2",
+      "category": "threats",
+      "sourceFile": "src/data/bosses/threat-registry.ts",
+      "officialDataStatus": "prototype",
+      "runtimeReadiness": "framework-only",
+      "enabledInOfficialPool": false,
+      "definitionHash": "aeaa7a10",
+      "dependencies": [],
+      "missingFields": [
+        "sourceReference"
+      ],
+      "auditNotes": []
+    },
+    {
+      "id": "prototype-necromancer-threat-level-3",
+      "category": "threats",
+      "sourceFile": "src/data/bosses/threat-registry.ts",
+      "officialDataStatus": "prototype",
+      "runtimeReadiness": "framework-only",
+      "enabledInOfficialPool": false,
+      "definitionHash": "b0ac9743",
+      "dependencies": [],
+      "missingFields": [
+        "sourceReference"
+      ],
+      "auditNotes": []
+    },
+    {
+      "id": "prototype-prophet-threat-level-2",
+      "category": "threats",
+      "sourceFile": "src/data/bosses/threat-registry.ts",
+      "officialDataStatus": "prototype",
+      "runtimeReadiness": "framework-only",
+      "enabledInOfficialPool": false,
+      "definitionHash": "c992571b",
+      "dependencies": [],
+      "missingFields": [
+        "sourceReference"
+      ],
+      "auditNotes": []
+    },
+    {
+      "id": "prototype-prophet-threat-level-3",
+      "category": "threats",
+      "sourceFile": "src/data/bosses/threat-registry.ts",
+      "officialDataStatus": "prototype",
+      "runtimeReadiness": "framework-only",
+      "enabledInOfficialPool": false,
+      "definitionHash": "6e14f428",
+      "dependencies": [],
+      "missingFields": [
+        "sourceReference"
+      ],
+      "auditNotes": []
+    },
+    {
+      "id": "prototype-collector-threat-level-2",
+      "category": "threats",
+      "sourceFile": "src/data/bosses/threat-registry.ts",
+      "officialDataStatus": "prototype",
+      "runtimeReadiness": "framework-only",
+      "enabledInOfficialPool": false,
+      "definitionHash": "cddcb7ec",
+      "dependencies": [],
+      "missingFields": [
+        "sourceReference"
+      ],
+      "auditNotes": []
+    },
+    {
+      "id": "prototype-collector-threat-level-3",
+      "category": "threats",
+      "sourceFile": "src/data/bosses/threat-registry.ts",
+      "officialDataStatus": "prototype",
+      "runtimeReadiness": "framework-only",
+      "enabledInOfficialPool": false,
+      "definitionHash": "f649b2ff",
+      "dependencies": [],
+      "missingFields": [
+        "sourceReference"
+      ],
+      "auditNotes": []
     }
   ],
   "bosses": [
@@ -680,6 +780,90 @@
       "runtimeReadiness": "framework-only",
       "enabledInOfficialPool": false,
       "definitionHash": "6dc79a22",
+      "dependencies": [],
+      "missingFields": [
+        "sourceReference"
+      ],
+      "auditNotes": []
+    },
+    {
+      "id": "prototype-necromancer-level-2",
+      "category": "bosses",
+      "sourceFile": "src/data/bosses/boss-registry.ts",
+      "officialDataStatus": "prototype",
+      "runtimeReadiness": "framework-only",
+      "enabledInOfficialPool": false,
+      "definitionHash": "047992b7",
+      "dependencies": [],
+      "missingFields": [
+        "sourceReference"
+      ],
+      "auditNotes": []
+    },
+    {
+      "id": "prototype-necromancer-level-3",
+      "category": "bosses",
+      "sourceFile": "src/data/bosses/boss-registry.ts",
+      "officialDataStatus": "prototype",
+      "runtimeReadiness": "framework-only",
+      "enabledInOfficialPool": false,
+      "definitionHash": "4817e33e",
+      "dependencies": [],
+      "missingFields": [
+        "sourceReference"
+      ],
+      "auditNotes": []
+    },
+    {
+      "id": "prototype-prophet-level-2",
+      "category": "bosses",
+      "sourceFile": "src/data/bosses/boss-registry.ts",
+      "officialDataStatus": "prototype",
+      "runtimeReadiness": "framework-only",
+      "enabledInOfficialPool": false,
+      "definitionHash": "eaae6ad0",
+      "dependencies": [],
+      "missingFields": [
+        "sourceReference"
+      ],
+      "auditNotes": []
+    },
+    {
+      "id": "prototype-prophet-level-3",
+      "category": "bosses",
+      "sourceFile": "src/data/bosses/boss-registry.ts",
+      "officialDataStatus": "prototype",
+      "runtimeReadiness": "framework-only",
+      "enabledInOfficialPool": false,
+      "definitionHash": "bbbd3381",
+      "dependencies": [],
+      "missingFields": [
+        "sourceReference"
+      ],
+      "auditNotes": []
+    },
+    {
+      "id": "prototype-collector-level-2",
+      "category": "bosses",
+      "sourceFile": "src/data/bosses/boss-registry.ts",
+      "officialDataStatus": "prototype",
+      "runtimeReadiness": "framework-only",
+      "enabledInOfficialPool": false,
+      "definitionHash": "e122161b",
+      "dependencies": [],
+      "missingFields": [
+        "sourceReference"
+      ],
+      "auditNotes": []
+    },
+    {
+      "id": "prototype-collector-level-3",
+      "category": "bosses",
+      "sourceFile": "src/data/bosses/boss-registry.ts",
+      "officialDataStatus": "prototype",
+      "runtimeReadiness": "framework-only",
+      "enabledInOfficialPool": false,
+      "definitionHash": "a08daca2",
       "dependencies": [],
       "missingFields": [
         "sourceReference"

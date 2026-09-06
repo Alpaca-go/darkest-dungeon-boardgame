@@ -1,31 +1,10 @@
 {
   "generatedAt": "1970-01-01T00:00:00.000Z",
-  "manifestHash": "1ae3bcf5",
-  "openP0": 2,
+  "manifestHash": "469d91eb",
+  "openP0": 1,
   "openP1": 3,
   "openP2": 2,
   "issues": [
-    {
-      "id": "ISSUE-P0-001",
-      "severity": "P0",
-      "domain": "campaign-flow",
-      "title": "11-Quest / 4-Act 主循环在正式引擎路径上不可达",
-      "description": "断链共 5 处（均由 campaign-flow.test.ts 静态扫描固化）：\n(1) Act 推进状态机 src/game-engine/campaign/campaign-progress.ts 中的 withActStarted / withStandardQuestCompleted / recomputeBossLock 等函数**没有任何生产调用方**（纯死代码，但函数本身逻辑正确 —— 缺的是接线不是实现）；\n(2) finishQuest / selectQuest 中 act 只出现初始化字面量 act: 1，从不推进；\n(3) Boss Quest 定义 FACE_THE_THREAT_QUEST_DEFINITION 零生产引用，玩家永远抽不到\"直面威胁\"；\n(4) 全仓不存在任何 act: 2 / act: 3 写入 —— **Act II 与 Act III 在生产代码中彻底不可达**；\n(5) 唯一能写 act: 4 的 unlockDarkestDungeonAct() 依赖 defeatedBossFamilyIds.length >= 3，而 defeatedBossFamilyIds 在生产代码里**从不追加**（只有初始化 []、存档反序列化，以及 dev 调试面板 ActFourDebugSection.tsx 硬塞 [necromancer, prophet, collector]）。即 Act IV 目前只能经调试面板进入，正式游玩路径不可达。\n结论：战役永远停留在 Act I，M03~M15 里程碑无法达成。",
-      "reproductionSeed": "golden-normal-success-01",
-      "reproductionCommands": [
-        "npm run test:golden",
-        "npm run audit:release-gate"
-      ],
-      "expected": "完成 2 个 Standard Quest 后 Boss Quest 解锁并强制；Boss 胜利后追加 defeatedBossFamilyIds 并 act 1 → 2 → 3；击败 3 个 Boss 家族后由正式流程（非调试面板）解锁 Act IV。",
-      "actual": "完成 10 个任务后 act 仍为 1，阶段停在 campaign-over。",
-      "status": "open",
-      "regressionTestIds": [
-        "golden-run.test.ts:11-quest-loop",
-        "campaign-flow.test.ts:act-advance",
-        "campaign-flow.test.ts:act-four-debug-only"
-      ],
-      "stateHash": "b3f522a2"
-    },
     {
       "id": "ISSUE-P0-002",
       "severity": "P0",
@@ -69,7 +48,7 @@
         "npm run test:golden"
       ],
       "expected": "事件序列、RNG 序列、最终 state hash 三者逐位一致。",
-      "actual": "firstDivergentEventIndex=0, rngMatch=true, hashA=2a6e3203, hashB=807cd6c0",
+      "actual": "firstDivergentEventIndex=0, rngMatch=true, hashA=9c61f34d, hashB=aacd229e",
       "status": "open",
       "regressionTestIds": [
         "golden-run.test.ts:replay-determinism"
@@ -80,12 +59,12 @@
       "severity": "P2",
       "domain": "content-governance",
       "title": "大量内容条目缺少 sourceReference",
-      "description": "144/145 条内容没有规则书出处，按 spec §6 一律不能判定为 verified / official-ready。",
+      "description": "157/158 条内容没有规则书出处，按 spec §6 一律不能判定为 verified / official-ready。",
       "reproductionCommands": [
         "npm run audit:content"
       ],
       "expected": "所有官方内容条目具备 sourceReference。",
-      "actual": "缺失 144 条。",
+      "actual": "缺失 157 条。",
       "status": "open",
       "regressionTestIds": [
         "content-manifest.test.ts:source-reference-coverage"
