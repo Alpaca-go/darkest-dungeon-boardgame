@@ -176,7 +176,9 @@ export interface ReleaseGateResult {
   productionCommandLayerPasses: boolean;
   ruleTraceabilityP0Complete: boolean;
   passed: boolean;
-  verdict: 'PASS' | 'CONDITIONAL' | 'FAIL';
+  // Phase 11A.2.3 §22：NOT-VERIFIED 表示 verification-results.json stale 或 critical E2E
+  // 未测量；必须先于 CONDITIONAL 判定（Content Blocked 不可遮住 Test Gate 失败）。
+  verdict: 'PASS' | 'CONDITIONAL' | 'FAIL' | 'NOT-VERIFIED';
   conclusion: string;
 }
 

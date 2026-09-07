@@ -540,6 +540,8 @@ export interface RunAuditOptions {
   unitPasses?: boolean;
   integrationPasses?: boolean;
   criticalE2EPasses?: boolean;
+  /** 11A.2.3 §22.2：verification-results.json 是否 fresh（未提供时按 stale 处理）。 */
+  verificationFresh?: boolean;
   /** RNG 源扫描结果由 node 侧注入（本模块保持纯净、不读文件系统）。 */
   mathRandomLeaksInOfficialPath?: number;
 }
@@ -946,23 +948,56 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
     conclusion: '',
   };
 
-  // 判定语法（spec §36）：
-  //   PASS        — core-campaign-official-ready
-  //   CONDITIONAL — framework-complete-content-blocked
-  //   FAIL        — campaign-flow-blocked
-  // Phase 11A.2 §28 / §47：先看 openP0 / openP1 内容缺口，再看 11-Quest 闭环（需 P0-002 关闭）。
+  // 判定语法（dev doc §22）：
+  //   1 engine deadlock → FAIL
+  //   2 verification stale / critical test fail → FAIL / NOT-VERIFIED
+  //   3 production command layer fail → FAIL
+  //   4 replay fail → FAIL
+  //   5 campaign unreachable → FAIL
+  //   6 only official-content P0 remains → CONDITIONAL
+  //   7 11 Quest blocked by P0-002 → CONDITIONAL
+  //   8 official content all ready → PASS
+  // 关键：Content Blocked (P0-002) 不能遮住 Test Gate 未完成（11A.2.3 §22）。
+  const verificationStale = !input.options.verificationFresh;
+  const criticalE2EUnmeasured = input.options.criticalE2EPasses !== true;
   if (gate.engineDeadlocks > 0) {
     gate.verdict = 'FAIL';
     gate.passed = false;
     gate.conclusion =
       'FAIL — engine-deadlock：仿真循环卡死（mental guard 上限 / 死循环）' +
       `（deadlock phase: ${input.goldenRun.deadlockPhase}）。`;
+  } else if (verificationStale) {
+    // 11A.2.3 §22.2: verification stale / unmeasured 必须先于 P0 缺口判定。
+    gate.verdict = 'NOT-VERIFIED';
+    gate.passed = false;
+    gate.conclusion = 'NOT-VERIFIED — verification-results.json stale or unmeasured；跑 npm run verify:phase11a2-3 重新生成。';
+  } else if (criticalE2EUnmeasured) {
+    // 11A.2.3 §22.2: critical test fail → NOT-VERIFIED。
+    gate.verdict = 'NOT-VERIFIED';
+    gate.passed = false;
+    gate.conclusion = 'NOT-VERIFIED — criticalE2EPasses=false；Playwright E2E 必须真实跑过 6 spec 才能算 verified。';
+  } else if (!productionCommandLayerPasses) {
+    // 11A.2.3 §22.3: production command layer fail → FAIL。
+    gate.verdict = 'FAIL';
+    gate.passed = false;
+    gate.conclusion = 'FAIL — production-command-layer：P1-006 关闭失败（Route Contract / Driver shim import / coverage 不达标）。';
+  } else if (!gate.replayDeterminismPasses) {
+    // 11A.2.3 §22.4: replay fail → FAIL。
+    gate.verdict = 'FAIL';
+    gate.passed = false;
+    gate.conclusion = 'FAIL — replay-determinism：同 seed + RuntimeSources A/B/C 不一致。';
+  } else if (!campaignOrchestrationReachable) {
+    // 11A.2.3 §22.5: campaign unreachable → FAIL。
+    gate.verdict = 'FAIL';
+    gate.passed = false;
+    gate.conclusion = `FAIL — campaign-flow-blocked：Campaign Orchestration 未达 Act IV Unlocked（finalAct=${input.goldenRun.finalAct}）。`;
   } else if (openP0 > 0) {
-    // P0 内容缺口未关闭 → 主链已可达但内容未就绪，CONDITIONAL。
+    // 11A.2.3 §22.6: only official-content P0 remains → CONDITIONAL。
+    // Content Blocked 不可遮住 Test Gate（已先判定）。
     gate.verdict = 'CONDITIONAL';
     gate.passed = false;
     gate.conclusion = `CONDITIONAL — framework-complete-content-blocked：主循环可闭环，但仍有 ${openP0} 个 P0 内容缺口。`;
-  } else if (!campaignOrchestrationReachable) {
+  } else if (!elevenQuestLoopClosed) {
     gate.verdict = 'FAIL';
     gate.passed = false;
     gate.conclusion = `FAIL — campaign-flow-blocked：Campaign Orchestration 未达 Act IV Unlocked（finalAct=${input.goldenRun.finalAct}）。`;
