@@ -138,19 +138,20 @@ function buildActProgressionBoss(input: ActProgressionBossInput): BossDefinition
 }
 
 // ---------- Necromancer Level 2 / 3 ----------
+// Phase 11A.2 §7：familyId 改为官方家族 ID（`necromancer`），不再使用
+// `prototype-necromancer-family`。Prototype 性质由 `officialDataStatus` +
+// `enabledInOfficialPool` 表达。
 const NECROMANCER_BOSS_LEVEL_2 = buildActProgressionBoss({
   bossId: 'prototype-necromancer-level-2',
   name: 'Necromancer（Level 2 原型 Harness）',
-  familyId: NECROMANCER_PROTOTYPE_BOSS_ID === NECROMANCER_PROTOTYPE_BOSS_ID
-    ? 'prototype-necromancer-family'
-    : 'prototype-necromancer-family',
+  familyId: NECROMANCER_FAMILY_ID,
   campaignLevel: 2,
   color: '#5a3a7a',
 });
 const NECROMANCER_BOSS_LEVEL_3 = buildActProgressionBoss({
   bossId: 'prototype-necromancer-level-3',
   name: 'Necromancer（Level 3 原型 Harness）',
-  familyId: 'prototype-necromancer-family',
+  familyId: NECROMANCER_FAMILY_ID,
   campaignLevel: 3,
   color: '#5a3a7a',
 });
@@ -159,14 +160,14 @@ const NECROMANCER_BOSS_LEVEL_3 = buildActProgressionBoss({
 const PROPHET_BOSS_LEVEL_2 = buildActProgressionBoss({
   bossId: 'prototype-prophet-level-2',
   name: 'Prophet（Level 2 原型 Harness）',
-  familyId: 'prototype-prophet-family',
+  familyId: PROPHET_FAMILY_ID,
   campaignLevel: 2,
   color: '#7a4a3a',
 });
 const PROPHET_BOSS_LEVEL_3 = buildActProgressionBoss({
   bossId: 'prototype-prophet-level-3',
   name: 'Prophet（Level 3 原型 Harness）',
-  familyId: 'prototype-prophet-family',
+  familyId: PROPHET_FAMILY_ID,
   campaignLevel: 3,
   color: '#7a4a3a',
 });
@@ -175,14 +176,14 @@ const PROPHET_BOSS_LEVEL_3 = buildActProgressionBoss({
 const COLLECTOR_BOSS_LEVEL_2 = buildActProgressionBoss({
   bossId: 'prototype-collector-level-2',
   name: 'Collector（Level 2 原型 Harness）',
-  familyId: 'prototype-collector-family',
+  familyId: COLLECTOR_FAMILY_ID,
   campaignLevel: 2,
   color: '#3a5a7a',
 });
 const COLLECTOR_BOSS_LEVEL_3 = buildActProgressionBoss({
   bossId: 'prototype-collector-level-3',
   name: 'Collector（Level 3 原型 Harness）',
-  familyId: 'prototype-collector-family',
+  familyId: COLLECTOR_FAMILY_ID,
   campaignLevel: 3,
   color: '#3a5a7a',
 });

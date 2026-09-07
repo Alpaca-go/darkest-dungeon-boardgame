@@ -37,18 +37,16 @@
 
 ## 2. RNG 决定性审计
 
-- 全库 `Math.random()` 命中：**1**
-- **官方路径（game-engine / data / store / components）`Math.random()` 泄漏：1**
-- 时间源（`Date.now()` / `new Date()`）命中：**8**
+- 全库 `Math.random()` 命中：**0**
+- **官方路径（game-engine / data / store / components）`Math.random()` 泄漏：0**
+- 时间源（`Date.now()` / `new Date()`）命中：**10**
 - Definition Hash 稳定：**✅**
-- 判定：**❌ FAIL**
+- 判定：**✅ PASS**
 
 | file | line | code |
 | --- | --- | --- |
-| `src/game-engine/random.ts` | 29 | `const rand = Math.random().toString(36).slice(2, 8);` |
+| _(无)_ | | |
 
-> **影响**：这些调用绕开了可注入随机源 `setRandomSource`，导致同 seed 的两次 replay 无法逐位复现。
-> Milestone Hash 必须先经 `stripVolatile()` 剥离 `id` / `createdAt` / `updatedAt` / `log` 才能比较（见 ISSUE-P1-001）。
 
 
 ## 3. 状态机迁移合法性

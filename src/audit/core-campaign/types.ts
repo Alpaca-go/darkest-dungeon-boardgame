@@ -160,6 +160,11 @@ export interface ReleaseGateResult {
   prototypeReferencesInOfficialPath: number;
   duplicateCommittedTransactions: number;
   engineDeadlocks: number;
+  // Phase 11A.2 §4.1：三个独立真相，禁止合并。
+  //   campaignOrchestrationReachable：Phase 11A.1 修复的「主链是否到达 Act IV Unlocked」
+  //   elevenQuestLoopClosed         ：完整 11-Quest 闭环（要求 Final Encounter Victory）
+  //   campaignVictoryReachable      ：真实 campaign-victory
+  campaignOrchestrationReachable: boolean;
   elevenQuestLoopClosed: boolean;
   campaignVictoryReachable: boolean;
   campaignOverReachable: boolean;
@@ -167,6 +172,8 @@ export interface ReleaseGateResult {
   threeSkippedFormsPass: boolean;
   fourRuinsBossesPass: boolean;
   saveResumeKeyNodesPass: boolean;
+  // Phase 11A.2 WP-B/D：Production Command Layer 取代 headless shim 后必须为 true。
+  productionCommandLayerPasses: boolean;
   ruleTraceabilityP0Complete: boolean;
   passed: boolean;
   verdict: 'PASS' | 'CONDITIONAL' | 'FAIL';

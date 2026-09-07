@@ -1,16 +1,10 @@
 {
-  "passed": false,
-  "mathRandomLeaks": 1,
-  "officialPathMathRandomLeaks": 1,
-  "timeSourceLeaks": 8,
+  "passed": true,
+  "mathRandomLeaks": 0,
+  "officialPathMathRandomLeaks": 0,
+  "timeSourceLeaks": 10,
   "definitionHashStable": true,
-  "officialFindings": [
-    {
-      "file": "src/game-engine/random.ts",
-      "line": 29,
-      "text": "const rand = Math.random().toString(36).slice(2, 8);"
-    }
-  ],
+  "officialFindings": [],
   "allFindings": [
     {
       "file": "src/components/dungeon/EventLog.tsx",
@@ -55,32 +49,39 @@
       "text": "savedAt: new Date().toISOString(),"
     },
     {
-      "file": "src/game-engine/random.ts",
-      "line": 5,
-      "category": "other",
-      "severity": "warning",
-      "text": "let _rng: () => number = Math.random; (legitimate default / injection point)"
-    },
-    {
-      "file": "src/game-engine/random.ts",
-      "line": 9,
-      "category": "other",
-      "severity": "warning",
-      "text": "_rng = fn ?? Math.random; (legitimate default / injection point)"
-    },
-    {
-      "file": "src/game-engine/random.ts",
-      "line": 29,
+      "file": "src/game-engine/runtime-sources.ts",
+      "line": 43,
       "category": "math-random",
-      "severity": "error",
-      "text": "const rand = Math.random().toString(36).slice(2, 8);"
+      "severity": "warning",
+      "text": "return Math.random(); (System Runtime Adapter — allowlist)"
     },
     {
-      "file": "src/game-engine/random.ts",
-      "line": 35,
+      "file": "src/game-engine/runtime-sources.ts",
+      "line": 49,
+      "category": "date-now",
+      "severity": "warning",
+      "text": "return Date.now(); (System Runtime Adapter — allowlist)"
+    },
+    {
+      "file": "src/game-engine/runtime-sources.ts",
+      "line": 52,
       "category": "new-date",
       "severity": "warning",
-      "text": "return new Date().toISOString();"
+      "text": "return new Date().toISOString(); (System Runtime Adapter — allowlist)"
+    },
+    {
+      "file": "src/game-engine/runtime-sources.ts",
+      "line": 58,
+      "category": "math-random",
+      "severity": "warning",
+      "text": "const rand = Math.random().toString(36).slice(2, 8); (System Runtime Adapter — allowlist)"
+    },
+    {
+      "file": "src/game-engine/runtime-sources.ts",
+      "line": 106,
+      "category": "new-date",
+      "severity": "warning",
+      "text": "const iso = new Date(this.nowMs()).toISOString(); (System Runtime Adapter — allowlist)"
     },
     {
       "file": "src/pages/HomePage.tsx",

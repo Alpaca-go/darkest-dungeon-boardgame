@@ -12,8 +12,8 @@
 | 完成任务数 | 9 |
 | 到达里程碑 | M00, M01, M02, M03, M04, M05, M06, M07, M08, M09 |
 | 阻断里程碑 | — |
-| 事件数 | 104 |
-| RNG 抽取次数 | 447 |
+| 事件数 | 97 |
+| RNG 抽取次数 | 337 |
 | 不变量违反 | 0 |
 | 重复事务 | 0 |
 | 死锁阶段 | — |
@@ -38,7 +38,6 @@
 - `resolveVictory`
 - `finishQuest`
 - `returnToHamlet`
-- `resolveReplacements`
 
 > 上述步骤在 `src/game-engine/**` 中**没有可调用的编排入口**，只存在于
 > `src/store/useGameStore.ts` / UI 页面。无头驱动必须在
@@ -48,16 +47,16 @@
 
 | ID | 里程碑 | 状态 | State Hash | Quest 数 | 依赖能力 |
 | --- | --- | --- | --- | --- | --- |
-| M00 | 新战役创建完成（4 英雄 + 默认技能） | ✅ 到达 | `1a6e84bb` | 0 | createNewCampaign / selectParty / applyDefaultLoadout |
-| M01 | Act I · Standard Quest 1 结算完成 | ✅ 到达 | `e0bc6a01` | 1 | selectQuest / finishQuest / startHamletPhase |
-| M02 | Act I · Standard Quest 2 结算完成 | ✅ 到达 | `1dec2cf6` | 2 | campaign-progress.withStandardQuestCompleted |
-| M03 | Act I · Boss Quest 胜利 → 进入 Act II | ✅ 到达 | `1352f39d` | 3 | campaign-progress.withActStarted + Boss Quest 可选中 |
-| M04 | Act II · Standard Quest 1 结算完成 | ✅ 到达 | `54aa9b4a` | 4 | Act 推进生效 |
-| M05 | Act II · Standard Quest 2 结算完成 | ✅ 到达 | `501a5094` | 5 | Act 推进生效 |
-| M06 | Act II · Boss Quest 胜利 → 进入 Act III | ✅ 到达 | `53ac5a97` | 6 | Act 推进生效 |
-| M07 | Act III · Standard Quest 1 结算完成 | ✅ 到达 | `3f7b3dd0` | 7 | Act 推进生效 |
-| M08 | Act III · Standard Quest 2 结算完成 | ✅ 到达 | `b832b935` | 8 | Act 推进生效 |
-| M09 | Act III · Boss Quest 胜利 → 第三 Threat 后 Hamlet | ✅ 到达 | `1b71a425` | 9 | Act 推进生效 |
+| M00 | 新战役创建完成（4 英雄 + 默认技能） | ✅ 到达 | `47c47cfe` | 0 | createNewCampaign / selectParty / applyDefaultLoadout |
+| M01 | Act I · Standard Quest 1 结算完成 | ✅ 到达 | `9044b877` | 1 | selectQuest / finishQuest / startHamletPhase |
+| M02 | Act I · Standard Quest 2 结算完成 | ✅ 到达 | `8e255121` | 2 | campaign-progress.withStandardQuestCompleted |
+| M03 | Act I · Boss Quest 胜利 → 进入 Act II | ✅ 到达 | `6a7b9bc6` | 3 | campaign-progress.withActStarted + Boss Quest 可选中 |
+| M04 | Act II · Standard Quest 1 结算完成 | ✅ 到达 | `d4c9d3e8` | 4 | Act 推进生效 |
+| M05 | Act II · Standard Quest 2 结算完成 | ✅ 到达 | `820a3984` | 5 | Act 推进生效 |
+| M06 | Act II · Boss Quest 胜利 → 进入 Act III | ✅ 到达 | `fd68a6d2` | 6 | Act 推进生效 |
+| M07 | Act III · Standard Quest 1 结算完成 | ✅ 到达 | `5ff5297a` | 7 | Act 推进生效 |
+| M08 | Act III · Standard Quest 2 结算完成 | ✅ 到达 | `a9dcb3a7` | 8 | Act 推进生效 |
+| M09 | Act III · Boss Quest 胜利 → 第三 Threat 后 Hamlet | ✅ 到达 | `c4a27c59` | 9 | Act 推进生效 |
 | M10 | Darkest Dungeon 解锁 + Guardian Quest 生成 | ❌ 未到达 | — | — | act-four unlock + createGuardianQuest |
 | M11 | Guardian 击败 → Final Hamlet | ❌ 未到达 | — | — | resolveGuardianVictory（官方数据缺失，仅 prototype harness） |
 | M12 | Final Hamlet 4 天完成 | ❌ 未到达 | — | — | startFinalHamlet / advanceFinalHamletDay |
@@ -92,13 +91,13 @@
 
 | 指标 | 值 |
 | --- | --- |
-| 两次运行完全一致 | ❌ |
-| 首个分叉事件下标 | 0 |
+| 两次运行完全一致 | ✅ |
+| 首个分叉事件下标 | -1 |
 | RNG 序列一致 | ✅ |
-| Bundle Hash A | `9c61f34d` |
-| Bundle Hash B | `aacd229e` |
+| Bundle Hash A | `94ec7ea4` |
+| Bundle Hash B | `94ec7ea4` |
 
-> ❌ 存在非决定性，见 ISSUE-P1-002。
+> Milestone Hash 在 `stripVolatile()`（剥离 `id` / `createdAt` / `updatedAt` / `log`）后可稳定复现。
 
 ## 4. 不变量违反明细
 

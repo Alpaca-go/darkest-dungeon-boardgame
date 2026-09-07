@@ -1,8 +1,8 @@
 {
-  "generatedAt": "1970-01-01T00:00:00.000Z",
+  "generatedAt": "2026-09-07T01:20:24.225Z",
   "manifestHash": "469d91eb",
   "openP0": 1,
-  "openP1": 3,
+  "openP1": 1,
   "openP2": 2,
   "issues": [
     {
@@ -19,39 +19,6 @@
       "status": "open",
       "regressionTestIds": [
         "content-manifest.test.ts:data-gate-closed"
-      ]
-    },
-    {
-      "id": "ISSUE-P1-001",
-      "severity": "P1",
-      "domain": "determinism",
-      "title": "createId() 直接使用 Math.random() / Date.now()，破坏 replay 可复现性",
-      "description": "src/game-engine/random.ts:29-30 的 createId() 绕开了可注入随机源 _rng，同时混入 Date.now()。任何包含新建 id 的状态都无法在同 seed 下逐位复现，Milestone Hash 必须先剥离这些字段才能比较（见 campaign-invariants.stripVolatile）。",
-      "reproductionCommands": [
-        "npm run audit:rules"
-      ],
-      "expected": "正式逻辑内 0 处 Math.random()；id 生成走可注入随机源。",
-      "actual": "官方路径检出 1 处 Math.random() 泄漏。",
-      "status": "open",
-      "regressionTestIds": [
-        "rng-audit.test.ts:no-math-random-in-official-path"
-      ]
-    },
-    {
-      "id": "ISSUE-P1-002",
-      "severity": "P1",
-      "domain": "determinism",
-      "title": "同一 seed 的两次 replay 不完全一致",
-      "description": "事件序列或 RNG 抽取序列在两次运行间发生分叉。",
-      "reproductionSeed": "golden-normal-success-01",
-      "reproductionCommands": [
-        "npm run test:golden"
-      ],
-      "expected": "事件序列、RNG 序列、最终 state hash 三者逐位一致。",
-      "actual": "firstDivergentEventIndex=0, rngMatch=true, hashA=9c61f34d, hashB=aacd229e",
-      "status": "open",
-      "regressionTestIds": [
-        "golden-run.test.ts:replay-determinism"
       ]
     },
     {
@@ -81,7 +48,7 @@
         "npm run test:golden"
       ],
       "expected": "所有 gamePhase 迁移与组合动作都由 game-engine 导出的纯函数负责，store 只做转发；删除 headless-shim.ts 后无头驱动仍能跑完整局。",
-      "actual": "Golden Run 中有 8 类步骤依赖 UI-store-shim：proceedToLoadout, proceedToQuests, moveToRoom, autoBattle, resolveVictory, finishQuest, returnToHamlet, resolveReplacements。",
+      "actual": "Golden Run 中有 7 类步骤依赖 UI-store-shim：proceedToLoadout, proceedToQuests, moveToRoom, autoBattle, resolveVictory, finishQuest, returnToHamlet。",
       "status": "open",
       "regressionTestIds": [
         "simulation-driver.test.ts:no-ui-store-shim-required"

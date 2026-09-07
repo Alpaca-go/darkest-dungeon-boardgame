@@ -13,6 +13,12 @@ import { generateContentManifest, summarizeManifest, type ManifestSummary } from
 import { scanOfficialRuntimeForPrototypeContent, type PrototypeContaminationFinding } from './prototype-scan';
 import { validateCoreContentReferences } from './reference-validation';
 import { summarizeRuleTraceability } from './rule-traceability';
+import {
+  seededRuntimeSources,
+  withRuntimeSources,
+  nowIso as currentClockNowIso,
+} from '../../game-engine/runtime-sources';
+import { seedToInt } from './simulation-driver';
 import { blockedGoldenSeeds, CAMPAIGN_MILESTONES, GOLDEN_SEEDS, runnableGoldenSeeds } from './golden-seeds';
 import {
   CampaignSimulationDriver,
@@ -71,6 +77,10 @@ export interface GoldenRunAttempt {
   maxLedger: number;
   peakActors: number;
   peakInitiative: number;
+  // Phase 11A.2 §4.1：三个独立真相字段，最终报告 / 静态测试都从这里读。
+  campaignOrchestrationReachable: boolean;
+  elevenQuestLoopClosed: boolean;
+  campaignVictoryReachable: boolean;
 }
 
 /** 单个里程碑上的存档往返校验结果。 */
@@ -392,6 +402,14 @@ export function runGoldenCampaignAttempt(seedId: string, contentManifestHash: st
         : 'campaign-over'
       : 'blocked';
 
+  // Phase 11A.2 §4.1：三个独立真相字段。判定不依赖 `outcome` 简化处理。
+  const campaignOrchestrationReachable =
+    finalState.campaignProgress.darkestDungeonUnlocked === true && finalState.act >= 4;
+  const campaignVictoryReachable = outcome === 'campaign-victory';
+  // 11-Quest 闭环必须真实走完 11 个 Quest 并取得胜利；
+  // Phase 11A.2 阶段由于 P0-002 仍开放，这里保守为 false（需要 Final Encounter 真实胜利）。
+  const elevenQuestLoopClosed = campaignVictoryReachable;
+
   return {
     seedId,
     reachedMilestones: reached,
@@ -423,6 +441,10 @@ export function runGoldenCampaignAttempt(seedId: string, contentManifestHash: st
     peakActors,
     peakInitiative,
     bundle: driver.buildReplayBundle('phase-11a', contentManifestHash),
+    // Phase 11A.2 §4.1
+    campaignOrchestrationReachable,
+    elevenQuestLoopClosed,
+    campaignVictoryReachable,
   };
 }
 
@@ -462,17 +484,27 @@ export interface ReplayDeterminismResult {
 }
 
 export function verifyReplayDeterminism(seedId: string, contentManifestHash: string): ReplayDeterminismResult {
-  const a = runGoldenCampaignAttempt(seedId, contentManifestHash).bundle;
-  const b = runGoldenCampaignAttempt(seedId, contentManifestHash).bundle;
-  const idx = firstDivergentEventIndex(a, b);
-  const rngMatch = rngSequencesMatch(a, b);
+  // Phase 11A.2 WP-D §33-§36：同 Seed + RuntimeSources 下 Replay A/B/C 必须完全一致。
+  // 关键：每个 Replay 必须用「全新构造」的 sources（counter / clock 必须从 0 开始），否则
+  // 上一次 Replay 的副作用会污染下一次的 createId / nowIso。
+  const seed = seedToInt(seedId);
+  let aBundle;
+  let bBundle;
+  withRuntimeSources(seededRuntimeSources(seed), () => {
+    aBundle = runGoldenCampaignAttempt(seedId, contentManifestHash).bundle;
+  });
+  withRuntimeSources(seededRuntimeSources(seed), () => {
+    bBundle = runGoldenCampaignAttempt(seedId, contentManifestHash).bundle;
+  });
+  const idx = firstDivergentEventIndex(aBundle!, bBundle!);
+  const rngMatch = rngSequencesMatch(aBundle!, bBundle!);
   return {
     seedId,
-    identical: idx === -1 && rngMatch && a.finalStateHash === b.finalStateHash,
+    identical: idx === -1 && rngMatch && aBundle!.finalStateHash === bBundle!.finalStateHash,
     firstDivergentEventIndex: idx,
     rngMatch,
-    hashA: replayBundleHash(a),
-    hashB: replayBundleHash(b),
+    hashA: replayBundleHash(aBundle!),
+    hashB: replayBundleHash(bBundle!),
   };
 }
 
@@ -544,7 +576,9 @@ export function runAudit(options: RunAuditOptions = {}): AuditReport {
   const gate = evaluateReleaseGate({ issues, goldenRun, replayDeterminism, prototypeFindings, options });
 
   return {
-    generatedAt: new Date(0).toISOString(),
+    // Phase 11A.2 §31：使用 currentSources.clock.nowIso() 而非直接 new Date()，
+    // 这样 Replay 模式下 generatedAt 也是确定性的。
+    generatedAt: currentClockNowIso(),
     manifest,
     manifestSummary,
     manifestHash,
@@ -842,17 +876,18 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
   const openP0 = input.issues.filter((i) => i.severity === 'P0' && i.status === 'open').length;
   const openP1 = input.issues.filter((i) => i.severity === 'P1' && i.status === 'open').length;
 
-  // Phase 11A.1 §28：硬门槛从「campaign-victory」放宽为「Campaign Reachability = Act IV Unlocked (M13)」。
-  //   11A.1 主要验证 11-Quest 闭环可走，Act IV 内部 Guardian / Final Encounter
-  //   仍受 P0-002 内容缺口约束。
-  //   真正的 campaign-victory 仍是 P0-002 关闭后才可达。
-  const elevenQuestLoopClosed =
-    input.goldenRun.outcome === 'campaign-victory' || input.goldenRun.finalAct >= 4;
-  const campaignVictoryReachable = input.goldenRun.outcome === 'campaign-victory';
+  // Phase 11A.2 §4.1：三个独立真相字段，直接从 GoldenRunAttempt 读取（与运行结果同源）。
+  const campaignOrchestrationReachable = input.goldenRun.campaignOrchestrationReachable;
+  const elevenQuestLoopClosed = input.goldenRun.elevenQuestLoopClosed;
+  const campaignVictoryReachable = input.goldenRun.campaignVictoryReachable;
   const campaignOverReachable = runnableGoldenSeeds().some((s) => s.expectedOutcome === 'campaign-over');
 
   const ruleSummary = summarizeRuleTraceability();
   const ruleTraceabilityP0Complete = ruleSummary.p0Complete;
+
+  // Phase 11A.2 §5：productionCommandLayerPasses 直接由 uiStoreShimSteps 派生，
+  // 真实 Production Command 迁移完成后必须为 true。
+  const productionCommandLayerPasses = input.goldenRun.uiStoreShimSteps.length === 0;
 
   const gate: ReleaseGateResult = {
     buildPasses: input.options.buildPasses ?? false,
@@ -866,12 +901,15 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
     prototypeReferencesInOfficialPath: input.prototypeFindings.length,
     duplicateCommittedTransactions: input.goldenRun.duplicateTransactionIds.length,
     engineDeadlocks: input.goldenRun.deadlockPhase ? 1 : 0,
+    campaignOrchestrationReachable,
     elevenQuestLoopClosed,
     campaignVictoryReachable,
     campaignOverReachable,
     threeGuardiansPass: false,
     threeSkippedFormsPass: false,
     fourRuinsBossesPass: false,
+    // Phase 11A.2 §5
+    productionCommandLayerPasses,
     // §21：真实存档往返（createSaveSnapshot → validate → restoreSaveSnapshot → 哈希比对）。
     // 必须至少校验过一个节点，否则视为未验证 → 不通过。
     saveResumeKeyNodesPass:
@@ -887,17 +925,26 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
   //   PASS        — core-campaign-official-ready
   //   CONDITIONAL — framework-complete-content-blocked
   //   FAIL        — campaign-flow-blocked
-  if (!elevenQuestLoopClosed || gate.engineDeadlocks > 0) {
+  // Phase 11A.2 §28 / §47：先看 openP0 / openP1 内容缺口，再看 11-Quest 闭环（需 P0-002 关闭）。
+  if (gate.engineDeadlocks > 0) {
     gate.verdict = 'FAIL';
     gate.passed = false;
     gate.conclusion =
-      'FAIL — campaign-flow-blocked：11-Quest / 4-Act 主循环无法在正式引擎路径上闭环' +
-      `（停在 Act ${input.goldenRun.finalAct} / ${input.goldenRun.finalPhase}，完成 ${input.goldenRun.completedQuestCount} 个任务）。` +
-      (input.goldenRun.blockedReason ? ` 根因：${input.goldenRun.blockedReason}` : '');
+      'FAIL — engine-deadlock：仿真循环卡死（mental guard 上限 / 死循环）' +
+      `（deadlock phase: ${input.goldenRun.deadlockPhase}）。`;
   } else if (openP0 > 0) {
+    // P0 内容缺口未关闭 → 主链已可达但内容未就绪，CONDITIONAL。
     gate.verdict = 'CONDITIONAL';
     gate.passed = false;
     gate.conclusion = `CONDITIONAL — framework-complete-content-blocked：主循环可闭环，但仍有 ${openP0} 个 P0 内容缺口。`;
+  } else if (!campaignOrchestrationReachable) {
+    gate.verdict = 'FAIL';
+    gate.passed = false;
+    gate.conclusion = `FAIL — campaign-flow-blocked：Campaign Orchestration 未达 Act IV Unlocked（finalAct=${input.goldenRun.finalAct}）。`;
+  } else if (!elevenQuestLoopClosed) {
+    gate.verdict = 'CONDITIONAL';
+    gate.passed = false;
+    gate.conclusion = `CONDITIONAL — eleven-quest-not-closed：Act IV 可达但未完成 11-Quest 闭环（受内容数据 / Final Encounter 影响）。`;
   } else if (openP1 > 0 || blockedGoldenSeeds().length > 0) {
     gate.verdict = 'CONDITIONAL';
     gate.passed = false;

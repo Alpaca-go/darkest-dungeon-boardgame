@@ -17,10 +17,13 @@ const rng = runRngAudit(join(REPO_ROOT, 'src'));
 
 // 官方路径 = src/ 下排除 audit / 测试 / e2e 的文件。
 const OFFICIAL_PATH = /[\\/](game-engine|data|store|components)[\\/]/;
-const officialFindings = rng.findings.filter(
-  (f) => OFFICIAL_PATH.test(f.file) && !/\.test\.tsx?$/.test(f.file),
+const officialMathRandom = rng.findings.filter(
+  (f) =>
+    f.category === 'math-random' &&
+    OFFICIAL_PATH.test(f.file) &&
+    !/\.test\.tsx?$/.test(f.file) &&
+    !f.allowlisted,
 );
-const officialMathRandom = officialFindings.filter((f) => f.category === 'math-random');
 
 const transitionChecks = [
   ...LEGAL_TRANSITIONS.map(([from, event, to]) => validateCampaignTransition({ from, event, to })),

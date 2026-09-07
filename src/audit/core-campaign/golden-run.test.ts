@@ -94,11 +94,13 @@ describe('golden-run', () => {
     ).not.toContain('CAMPAIGN_FLOW_BLOCKED');
   });
 
-  it('replay-determinism [KNOWN DEFECT ISSUE-P1-002]: 同 seed 两次运行不完全一致', () => {
+  it('replay-determinism [ISSUE-P1-002 CLOSED]: 同 Seed + RuntimeSources Replay A/B/C 完全一致', () => {
     const det = verifyReplayDeterminism(SEED, manifestHash);
-    // 期望行为（修复 createId 的 Math.random/Date.now 之后）：identical === true。
-    expect(det.identical).toBe(false);
-    expect(det.firstDivergentEventIndex).toBeGreaterThanOrEqual(0);
+    // Phase 11A.2 §36：firstDivergentEventIndex === -1, rngMatch === true, hash 一致
+    expect(det.firstDivergentEventIndex).toBe(-1);
+    expect(det.rngMatch).toBe(true);
+    expect(det.hashA).toBe(det.hashB);
+    expect(det.identical).toBe(true);
   }, 120_000);
 });
 

@@ -25,7 +25,11 @@ function envFlag(name: string): boolean | undefined {
 const OFFICIAL_PATH = /[\\/](game-engine|data|store|components)[\\/]/;
 const rng = runRngAudit(join(REPO_ROOT, 'src'));
 const officialMathRandom = rng.findings.filter(
-  (f) => f.category === 'math-random' && OFFICIAL_PATH.test(f.file) && !/\.test\.tsx?$/.test(f.file),
+  (f) =>
+    f.category === 'math-random' &&
+    OFFICIAL_PATH.test(f.file) &&
+    !/\.test\.tsx?$/.test(f.file) &&
+    !f.allowlisted,
 ).length;
 
 const report = runAudit({

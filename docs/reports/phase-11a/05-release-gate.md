@@ -10,13 +10,13 @@
 
 | 门禁项 | 结果 |
 | --- | --- |
-| build 通过 | ✅ |
-| 单元测试通过 | ✅ |
+| build 通过 | ⚪ 未验证 |
+| 单元测试通过 | ⚪ 未验证 |
 | 集成测试通过 | ⚪ 未验证 |
 | 关键 E2E 通过 | ⚪ 未验证 |
-| Golden Campaign 通过 | ✅ |
-| Replay 决定性 | ❌ |
-| 11-Quest 循环闭环 | ✅ |
+| Golden Campaign 通过 | ❌ |
+| Replay 决定性 | ✅ |
+| 11-Quest 循环闭环 | ❌ |
 | Campaign Victory 可达 | ❌ |
 | Campaign Over 可达 | ✅ |
 | 3 Guardian 全通 | ❌ (官方数据 unavailable) |
@@ -25,7 +25,7 @@
 | Save/Resume 关键节点 | ✅ 10/10 通过（⚠️ 覆盖率仅 10/16 里程碑，M03+ 因 Act 推进断裂不可达，未被验证） |
 | P0 规则追溯完整 | ❌ |
 | open P0 | 1 |
-| open P1 | 3 |
+| open P1 | 1 |
 | 官方路径 prototype 引用 | 0 |
 | 重复提交事务 | 0 |
 | 引擎死锁 | 0 |

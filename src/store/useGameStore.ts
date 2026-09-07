@@ -6,33 +6,17 @@ import {
   equipSkill as engineEquipSkill,
   applyDefaultLoadout as engineApplyDefaultLoadout,
   selectQuest as engineSelectQuest,
-  canProceedToLoadout,
-  isLoadoutComplete,
 } from '../game-engine/campaign';
 import {
   scoutDungeon,
-  moveToRoom as engineMoveToRoom,
   canScout,
-  canMoveTo,
-  retreatFromBattle,
 } from '../game-engine/dungeon';
 import {
   heroMove as engineHeroMove,
   endHeroTurn as engineEndHeroTurn,
-  resolveVictory as engineResolveVictory,
-  resumeTurnAfterMentalCheck,
 } from '../game-engine/battle';
-import {
-  processBattleStressEvents,
-  resolveTurnStartMentalEffect,
-} from '../game-engine/mental-effects';
 import { applyStress as engineApplyStress, recoverStress as engineRecoverStress } from '../game-engine/stress';
 import {
-  finishQuest,
-  failQuestFromBattle,
-} from '../game-engine/quest-result';
-import {
-  startHamletPhase,
   visitHamletBuilding,
   visitAbbey as engineVisitAbbey,
   skipHeroAction,
@@ -41,8 +25,20 @@ import {
 // ---- Phase 11A.1：Campaign Orchestration 入口 ----
 import {
   engineChooseQuest,
-  finalizeQuestReturnToHamlet,
 } from '../game-engine/campaign/campaign-orchestrator';
+// ---- Phase 11A.2 WP-B：Production Commands（Store 不再自己组合编排） ----
+import {
+  proceedCampaignToLoadout,
+  proceedCampaignToQuestSelect,
+  enterDungeonRoom,
+  settleBattleState,
+  commitBattleVictory,
+  commitBattleRetreat,
+  commitLeaveDungeon,
+  commitQuestFailureFromDefeat,
+  commitReturnToHamlet,
+  resolveReplacementsFlow,
+} from '../game-engine/commands';
 import {
   acquireQuirk as engineAcquireQuirk,
   resolveQuirkDecision as engineResolveQuirkDecision,
@@ -53,10 +49,6 @@ import {
   acquireDisease as engineAcquireDisease,
   finalizeDiseaseTransaction,
 } from '../game-engine/diseases/acquire-disease';
-import {
-  processBattleDiseaseInfections,
-  processBattleRuleEvents,
-} from '../game-engine/diseases/battle-bridge';
 import {
   useSanitariumRemoveDisease as engineRemoveDisease,
   sanitariumRemoveDiseaseError,
@@ -85,11 +77,10 @@ import {
 } from '../game-engine/save';
 import { resolveDamage as engineResolveDamage } from '../game-engine/damage';
 import { resolveHealing as engineResolveHealing } from '../game-engine/healing';
-import { killCampaignHero, processBattleDeaths } from '../game-engine/hero-death';
+import { killCampaignHero } from '../game-engine/hero-death';
 import type { KillHeroCommand } from '../game-engine/hero-death';
 import {
   applyQuestXpToStagecoach as engineApplyQuestXp,
-  evaluateReplacementFlow,
   failCampaign as engineFailCampaign,
   unconfirmedSlotCount,
 } from '../game-engine/stagecoach';
@@ -105,12 +96,10 @@ import type { DamageCommand, NomadWagonVisitCommand } from '../types';
 import {
   beginHeroSkillAction,
   resolveTrinketOpportunity,
-  openBattleTurnStartWindow,
-  openRoomEnteredWindows,
 } from '../game-engine/trinkets/battle-trinket-bridge';
 import {
-  resolveTrinketAllocation as engineResolveTrinketAllocation,
   discardTrinket as engineDiscardTrinket,
+  resolveTrinketAllocation as engineResolveTrinketAllocation,
 } from '../game-engine/trinkets/allocate-trinket';
 import type { TrinketAllocationChoice } from '../game-engine/trinkets/allocate-trinket';
 import { transferTrinket as engineTransferTrinket } from '../game-engine/trinkets/transfer-trinket';
@@ -129,7 +118,6 @@ interface UiState {
   /** 战斗中当前选中的技能（目标选择前的临时态）。 */
   battleSkillId: string | null;
 }
-
 interface GameStore {
   campaign: CampaignState | null;
   ui: UiState;
@@ -278,72 +266,11 @@ const EMPTY_UI: UiState = {
 // 初始化时尝试从 localStorage 恢复战役（刷新可恢复进度）。
 const initialCampaign = loadCampaign();
 
-/**
- * Phase 6：当替补流程尚未处理而游戏阶段推进时，
- * 将 pendingReplacement 的 resumePhase 重定向到新的返回阶段。
- */
-function retargetPendingReplacement(
-  c: CampaignState,
-  resumePhase: 'dungeon-explore' | 'quest-result' | 'hamlet'
-): CampaignState {
-  const pending = c.stagecoach.pendingReplacement;
-  if (!pending || pending.resolved || pending.resumePhase === resumePhase) return c;
-  return {
-    ...c,
-    stagecoach: {
-      ...c.stagecoach,
-      pendingReplacement: { ...pending, resumePhase },
-    },
-  };
-}
-
 export const useGameStore = create<GameStore>((set, get) => {
   /** 写入存档并应用到状态。所有重要变更都经过此方法以保证自动保存。 */
   const commit = (next: CampaignState): void => {
     saveCampaign(next);
     set({ campaign: next });
-  };
-
-  /**
-   * Phase 7：战斗状态统一结算（每次战斗引擎推进后、commit 前调用）。
-   * 顺序（文档 11.1 / 11.4）：
-   * 1. processBattleDeaths —— 永久死亡同步到 Campaign（恰好一次）；
-   * 2. processBattleStressEvents —— 消费战斗压力事件（阈值 → Resolve Test / Heart Attack）；
-   * 3. pendingMentalCheck 循环 —— 回合暂停时执行精神检定并恢复回合；
-   *    恢复可能推进到下一个需要检定的英雄，因此循环处理（防御上限 50 次）。
-   */
-  const settleBattle = (c: CampaignState): CampaignState => {
-    let next = processBattleDeaths(c);
-    next = processBattleStressEvents(next);
-    // Phase 8B：战斗排队的规则事件（Lethargy / Vertigo）与感染
-    next = processBattleRuleEvents(next);
-    next = processBattleDiseaseInfections(next);
-    next = processBattleDeaths(next);
-    let guard = 0;
-    while (
-      next.battle &&
-      next.battle.status === 'active' &&
-      next.battle.pendingMentalCheck &&
-      guard < 50
-    ) {
-      guard += 1;
-      // 检定（结果先落地存档数据，UI 之后只读展示）
-      next = resolveTurnStartMentalEffect(next).campaign;
-      // 检定期间可能已死亡同步 / 产生新的压力事件
-      next = processBattleDeaths(next);
-      next = processBattleStressEvents(next);
-      if (!next.battle) break;
-      // 恢复回合（英雄死亡 → 推进；Stun → 跳过；AP 扣光 → 自动结束）
-      next = { ...next, battle: resumeTurnAfterMentalCheck(next.battle) };
-      next = processBattleDeaths(next);
-      next = processBattleStressEvents(next);
-      next = processBattleRuleEvents(next);
-      next = processBattleDiseaseInfections(next);
-    }
-    // Phase 8C：战斗推进后为当前出手英雄开 hero-turn-start 窗口（幂等；
-    // 精神检定暂停 / 冻结动作存在 / 敌方回合时引擎内部自动跳过）。
-    next = openBattleTurnStartWindow(next);
-    return next;
   };
 
   return {
@@ -430,24 +357,23 @@ export const useGameStore = create<GameStore>((set, get) => {
 
     proceedToLoadout: () => {
       const c = get().campaign;
-      if (!c || !canProceedToLoadout(c)) return;
-      commit({ ...c, gamePhase: 'skill-loadout' });
+      if (!c) return;
+      commit(proceedCampaignToLoadout(c));
     },
 
     proceedToQuests: () => {
       const c = get().campaign;
-      if (!c || !isLoadoutComplete(c)) return;
-      commit({ ...c, gamePhase: 'quest-select' });
+      if (!c) return;
+      commit(proceedCampaignToQuestSelect(c));
     },
 
     chooseQuest: (questId) => {
       const c = get().campaign;
       if (!c) return;
-      // Phase 11A.1：先走 engineChooseQuest 初始化 Act / Threat + 门控，
+      // Phase 11A.1 + 11A.2：先走 engineChooseQuest 初始化 Act / Threat + 门控，
       // 再委托 selectQuest 生成地牢。
       const gate = engineChooseQuest(c, questId);
       if (!gate.ok) {
-        // 门控拒绝：原样落盘 + 日志（不写脏数据）。
         return;
       }
       commit(engineSelectQuest(gate.campaign, questId));
@@ -461,15 +387,11 @@ export const useGameStore = create<GameStore>((set, get) => {
 
     moveToRoom: (roomId) => {
       const c = get().campaign;
-      if (!c || !c.dungeon || !canMoveTo(c.dungeon, roomId)) return;
-      let next = engineMoveToRoom(c, roomId);
-      // Phase 7：进入战斗房间时首个英雄可能立即需要精神检定
-      if (next.battle) next = settleBattle(next);
-      // Phase 8C：非战斗房间为全体存活英雄开 room-entered 窗口（幂等）
-      next = openRoomEnteredWindows(next, roomId);
-      // Phase 6：探索伤害可能导致永久死亡 → 判定替补流程（战斗阶段不打断，胜利结算后再判）
-      if (next.gamePhase === 'dungeon-explore') next = evaluateReplacementFlow(next);
-      commit(next);
+      if (!c) return;
+      // Phase 11A.2 WP-B：进入房间 → settleBattleState → openRoomEnteredWindows → evaluateReplacementFlow
+      const result = enterDungeonRoom(c, roomId);
+      if (!result.ok) return;
+      commit(result.campaign);
     },
 
     useProvision: (type, _heroId) => {
@@ -493,8 +415,9 @@ export const useGameStore = create<GameStore>((set, get) => {
       const battle = engineHeroMove(c.battle, c.battle.activeActorId, dir);
       if (battle === c.battle) return;
       set((st) => ({ ui: { ...st.ui, battleSkillId: null } }));
-      // Phase 6/7：每次战斗 commit 前统一结算（死亡同步 + 压力事件 + 精神检定）
-      commit(settleBattle({ ...c, battle }));
+      // Phase 11A.2 WP-B：每次战斗 commit 前统一走 settleBattleState
+      const settled = settleBattleState({ ...c, battle });
+      commit(settled.campaign);
     },
 
     battleUseSkill: (targetId) => {
@@ -507,7 +430,12 @@ export const useGameStore = create<GameStore>((set, get) => {
       if (error) return;
       set((st) => ({ ui: { ...st.ui, battleSkillId: null } }));
       // 冻结中不跑 settleBattle（动作尚未执行）；直接落盘保证刷新可恢复。
-      commit(paused ? next : settleBattle(next));
+      if (paused) {
+        commit(next);
+      } else {
+        const settled = settleBattleState(next);
+        commit(settled.campaign);
+      }
     },
 
     battleEndTurn: () => {
@@ -515,7 +443,8 @@ export const useGameStore = create<GameStore>((set, get) => {
       if (!c?.battle || c.battle.status !== 'active' || !c.battle.activeActorId) return;
       set((st) => ({ ui: { ...st.ui, battleSkillId: null } }));
       const battle = engineEndHeroTurn(c.battle, c.battle.activeActorId);
-      commit(settleBattle({ ...c, battle }));
+      const settled = settleBattleState({ ...c, battle });
+      commit(settled.campaign);
     },
 
     // 胜利结算：房间 cleared + Gold + 同步英雄状态 + 返回地牢；有阵亡 → 替补流程。
@@ -523,10 +452,9 @@ export const useGameStore = create<GameStore>((set, get) => {
       const c = get().campaign;
       if (!c?.battle || c.battle.status !== 'victory') return;
       set((st) => ({ ui: { ...st.ui, battleSkillId: null } }));
-      let next = settleBattle(c);
-      next = engineResolveVictory(next);
-      next = evaluateReplacementFlow(next);
-      commit(next);
+      // Phase 11A.2 WP-B：settleBattleState → engineResolveVictory → evaluateReplacementFlow
+      const settled = commitBattleVictory(c);
+      commit(settled.campaign);
     },
 
     // 战败/撤退：清除战斗，房间保持未清除，返回地牢。
@@ -534,58 +462,48 @@ export const useGameStore = create<GameStore>((set, get) => {
       const c = get().campaign;
       if (!c?.battle) return;
       set((st) => ({ ui: { ...st.ui, battleSkillId: null } }));
-      // Phase 7：撤退前消费剩余压力事件与死亡同步，避免清除战斗时丢失
-      commit(retreatFromBattle(settleBattle(c)));
+      // Phase 11A.2 WP-B：settleBattleState → retreatFromBattle
+      const settled = commitBattleRetreat(c);
+      commit(settled.campaign);
     },
 
-    // ---- Phase 4：结算与 Hamlet（全部委托 game-engine，经 commit 自动保存） ----
+    // ---- Phase 4：结算与 Hamlet（全部委托 game-engine Production Command） ----
     leaveDungeon: () => {
       const c = get().campaign;
-      if (!c || c.gamePhase !== 'dungeon-explore' || !c.dungeon) return;
-      let next = finishQuest(c, 'left');
-      if (next === c) return;
-      // Phase 6：仍有未确认替补 → 切换 resumePhase 到 quest-result 再判定
-      next = retargetPendingReplacement(next, 'quest-result');
-      next = evaluateReplacementFlow(next);
-      commit(next);
+      if (!c) return;
+      // Phase 11A.2 WP-B：commitLeaveDungeon（finishQuest + retargetPendingReplacement + evaluateReplacementFlow）
+      const result = commitLeaveDungeon(c);
+      if (!result.ok) return;
+      commit(result.campaign);
     },
 
     failQuestFromDefeat: () => {
       const c = get().campaign;
-      if (!c?.battle || c.battle.status !== 'defeat') return;
-      let next = settleBattle(c);
-      next = failQuestFromBattle(next);
-      if (next === c) return;
-      next = retargetPendingReplacement(next, 'quest-result');
-      next = evaluateReplacementFlow(next);
-      commit(next);
+      if (!c) return;
+      // Phase 11A.2 WP-B：commitQuestFailureFromDefeat
+      const result = commitQuestFailureFromDefeat(c);
+      if (!result.ok) return;
+      commit(result.campaign);
     },
 
     returnToHamlet: () => {
       const c = get().campaign;
       if (!c) return;
-      // Phase 11A.1 §9：返回 Hamlet 是一次性事务，调用 finalizeQuestReturnToHamlet
-      // 推进 Campaign Progress（Standard 完成计数 / Boss 胜利 / Act 推进 / Act IV 解锁）。
+      // Phase 11A.2 WP-B：commitReturnToHamlet（finalizeQuestReturnToHamlet + Trinket + startHamletPhase + retarget + replacement）
       const summary = c.lastQuestResult;
       const questId = summary?.questId ?? c.currentQuestId ?? '';
-      let afterCampaign = c;
-      if (questId) {
-        const dungeon = c.dungeon;
-        const questRunId = dungeon?.questRunId ?? `${questId}:no-run`;
-        const result = finalizeQuestReturnToHamlet(c, {
-          questId,
-          questRunId,
-          questOutcome: summary?.outcome ?? 'incomplete',
-        });
-        if (result.ok) {
-          afterCampaign = result.campaign;
-        }
-      }
-      let next = startHamletPhase(afterCampaign);
-      if (next === afterCampaign) return;
-      next = retargetPendingReplacement(next, 'hamlet');
-      next = evaluateReplacementFlow(next);
-      commit(next);
+      // questRunId 在 dungeon 已被 resolveVictory 清空时使用
+      // 「act + questId + 事件计数」派生一个稳定唯一 id，避免多个 Boss 共享事务键。
+      const actKey = c.campaignProgress.act;
+      const questRunId =
+        c.dungeon?.questRunId ?? `${questId}:act${actKey}:${Date.now()}`;
+      const result = commitReturnToHamlet(c, {
+        questId,
+        questRunId,
+        questOutcome: summary?.outcome ?? 'incomplete',
+      });
+      if (!result.ok) return;
+      commit(result.campaign);
     },
 
     visitBuilding: (heroId, buildingId) => {
@@ -640,9 +558,8 @@ export const useGameStore = create<GameStore>((set, get) => {
     openReplacementFlow: () => {
       const c = get().campaign;
       if (!c || unconfirmedSlotCount(c) === 0) return;
-      const next = evaluateReplacementFlow(c);
-      if (next === c) return;
-      commit(next);
+      // Phase 11A.2 WP-B：用 Golden 确定性策略驱动的 Production Command
+      commit(resolveReplacementsFlow(c));
     },
 
     // ---- Phase 6：替补流程 ----
@@ -716,8 +633,12 @@ export const useGameStore = create<GameStore>((set, get) => {
         battleId: c.battle?.battleId,
       });
       if (next === c) return;
-      // 阈值可能触发 Heart Attack → 同步战斗死亡
-      if (next.battle) next = processBattleDeaths(next);
+      // 阈值可能触发 Heart Attack → 走 settleBattleState
+      if (next.battle) {
+        const settled = settleBattleState(next);
+        commit(settled.campaign);
+        return;
+      }
       commit(next);
     },
 
@@ -767,10 +688,10 @@ export const useGameStore = create<GameStore>((set, get) => {
       });
       let next = acquired;
       if (next === c) return;
-      // 疯狂死亡可能导致队伍减员 → 走替补流程判定
-      if (outcome === 'madness-death') {
-        if (next.battle) next = processBattleDeaths(next);
-        next = evaluateReplacementFlow(next);
+      // 疯狂死亡可能导致队伍减员 → 走 settleBattleState
+      if (outcome === 'madness-death' && next.battle) {
+        const settled = settleBattleState(next);
+        next = settled.campaign;
       }
       // Disease 替换引发的 Quirk 决策一旦结清，收尾事务
       next = finalizeDiseaseTransaction(next);
@@ -815,10 +736,10 @@ export const useGameStore = create<GameStore>((set, get) => {
       });
       let next = acquired;
       if (next === c) return;
-      // 替换 Disease 时抽到的负面 Quirk 可能触发 Madness Death → 走替补流程
-      if (outcome === 'replaced-hero-died') {
-        if (next.battle) next = processBattleDeaths(next);
-        next = evaluateReplacementFlow(next);
+      // 替换 Disease 时抽到的负面 Quirk 可能触发 Madness Death
+      if (outcome === 'replaced-hero-died' && next.battle) {
+        const settled = settleBattleState(next);
+        next = settled.campaign;
       }
       commit(next);
     },
@@ -829,7 +750,7 @@ export const useGameStore = create<GameStore>((set, get) => {
       const { campaign: next, error } = engineInteractWithCurio(c, heroId);
       if (error || next === c) return;
       // Curio 感染可能触发 Madness Death（替换 Disease → 第 4 个负面 Quirk）
-      commit(evaluateReplacementFlow(next));
+      commit(resolveReplacementsFlow(next));
     },
 
     acknowledgeDiseaseAcquisition: () => {
@@ -887,10 +808,13 @@ export const useGameStore = create<GameStore>((set, get) => {
       const { campaign: resolved, error } = resolveTrinketOpportunity(c, opportunityId, 'use');
       if (error || resolved === c) return;
       let next = resolved;
-      // 使用效果（自伤等）或恢复执行的冻结动作都可能改变战斗状态 → 统一结算
-      if (next.battle) next = settleBattle(next);
-      // 非战斗场景的自伤可能导致永久死亡 → 替补流程判定
-      if (next.gamePhase === 'dungeon-explore') next = evaluateReplacementFlow(next);
+      // 使用效果（自伤等）或恢复执行的冻结动作都可能改变战斗状态 → 走 settleBattleState
+      if (next.battle) {
+        const settled = settleBattleState(next);
+        next = settled.campaign;
+      }
+      // 非战斗场景的自伤可能导致永久死亡 → 走 resolveReplacementsFlow
+      if (next.gamePhase === 'dungeon-explore') next = resolveReplacementsFlow(next);
       commit(next);
     },
 
@@ -900,7 +824,10 @@ export const useGameStore = create<GameStore>((set, get) => {
       const { campaign: resolved, error } = resolveTrinketOpportunity(c, opportunityId, 'decline');
       if (error || resolved === c) return;
       let next = resolved;
-      if (next.battle) next = settleBattle(next);
+      if (next.battle) {
+        const settled = settleBattleState(next);
+        next = settled.campaign;
+      }
       commit(next);
     },
 

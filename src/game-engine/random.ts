@@ -1,66 +1,115 @@
-// 随机工具集中管理随机行为，便于未来加入固定 seed 与测试。
-// 所有随机行为统一通过可注入的随机源（_rng），测试时可 setRandomSource 固定结果。
+// Phase 11A.2 §29 — random.ts 作为兼容 facade。
+//
+// 现有调用 API（rollDie / d10 / randInt / pick / shuffle / createId / nowIso）
+// 全部委托给 RuntimeSources（src/game-engine/runtime-sources.ts）。
+//
+// 这样不要求一次性修改全仓 import。
 
-/** 内部随机源：默认 Math.random，测试时可被替换。 */
-let _rng: () => number = Math.random;
+import {
+  randomNext as _randomNext,
+  nowIso as _nowIso,
+  createId as _createId,
+  type RandomSource,
+  productionRuntimeSources,
+  seededRuntimeSources,
+  withRuntimeSources,
+  getRuntimeSources,
+  setRuntimeSources,
+  SeededRandom,
+  DeterministicClock,
+  DeterministicCounterIdSource,
+  SystemRandom,
+  SystemClock,
+  ProductionIdSource,
+  type RuntimeSources,
+  type ClockSource,
+  type IdSource,
+} from './runtime-sources';
 
-/** 注入固定随机源（返回 [0,1) 的浮点数），便于测试断言。传 null 恢复默认。 */
-export function setRandomSource(fn: (() => number) | null): void {
-  _rng = fn ?? Math.random;
+// ---------------------------------------------------------------------------
+// 兼容 facade
+// ---------------------------------------------------------------------------
+
+/** 兼容 facade：随机数（[0, 1)）。 */
+export function random(): number {
+  return _randomNext();
 }
 
-/**
- * 创建确定性伪随机源（mulberry32）。
- * 用于 E2E 与调试：同一 seed 产生完全相同的随机序列。
- */
-export function createSeededRandom(seed: number): () => number {
-  let a = seed >>> 0;
-  return () => {
-    a |= 0;
-    a = (a + 0x6d2b79f5) | 0;
-    let t = Math.imul(a ^ (a >>> 15), 1 | a);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
-
-/** 生成带前缀的唯一 id。 */
-export function createId(prefix = 'id'): string {
-  const rand = Math.random().toString(36).slice(2, 8);
-  return `${prefix}_${Date.now().toString(36)}_${rand}`;
-}
-
-/** 当前 ISO 时间戳。 */
-export function nowIso(): string {
-  return new Date().toISOString();
-}
-
-/** 返回 [1, sides] 的闭区间整数（掷骰）。 */
+/** 兼容 facade：返回 [1, sides] 的闭区间整数（掷骰）。 */
 export function rollDie(sides: number): number {
-  return 1 + Math.floor(_rng() * sides);
+  return 1 + Math.floor(_randomNext() * sides);
 }
 
-/** 掷 d10（1..10）。自然 10 视为暴击由调用方判定。 */
+/** 兼容 facade：掷 d10（1..10）。 */
 export function d10(): number {
   return rollDie(10);
 }
 
-/** 闭区间整数随机 [min, max]。 */
+/** 兼容 facade：闭区间整数随机 [min, max]。 */
 export function randInt(min: number, max: number): number {
-  return Math.floor(_rng() * (max - min + 1)) + min;
+  return Math.floor(_randomNext() * (max - min + 1)) + min;
 }
 
-/** 从数组中随机取一个元素。 */
+/** 兼容 facade：从数组中随机取一个元素。 */
 export function pick<T>(arr: readonly T[]): T {
-  return arr[Math.floor(_rng() * arr.length)];
+  return arr[Math.floor(_randomNext() * arr.length)];
 }
 
-/** 返回数组的浅拷贝随机打乱结果（Fisher-Yates）。 */
+/** 兼容 facade：返回数组的浅拷贝随机打乱结果（Fisher-Yates）。 */
 export function shuffle<T>(arr: readonly T[]): T[] {
   const out = arr.slice();
   for (let i = out.length - 1; i > 0; i--) {
-    const j = Math.floor(_rng() * (i + 1));
+    const j = Math.floor(_randomNext() * (i + 1));
     [out[i], out[j]] = [out[j], out[i]];
   }
   return out;
 }
+
+/** 兼容 facade：生成带前缀的唯一 id。委托 RuntimeSources。 */
+export function createId(prefix: string = 'id'): string {
+  return _createId(prefix);
+}
+
+/** 兼容 facade：当前 ISO 时间。委托 RuntimeSources。 */
+export function nowIso(): string {
+  return _nowIso();
+}
+
+/** 兼容 facade：把 seed 转成 SeededRandom 函数。11A.1 兼容。 */
+export function createSeededRandom(seed: number): () => number {
+  const rng = new SeededRandom(seed);
+  return () => rng.next();
+}
+
+/** 兼容 facade：直接替换 Runtime Source。 */
+export function setRandomSource(fn: (() => number) | RandomSource | null): void {
+  if (fn === null) {
+    setRuntimeSources(productionRuntimeSources());
+    return;
+  }
+  const randomSource: RandomSource =
+    typeof (fn as RandomSource).next === 'function'
+      ? (fn as RandomSource)
+      : { next: fn as () => number };
+  const current = getRuntimeSources();
+  setRuntimeSources({ ...current, random: randomSource });
+}
+
+// 重新导出
+export {
+  productionRuntimeSources,
+  seededRuntimeSources,
+  withRuntimeSources,
+  getRuntimeSources,
+  setRuntimeSources,
+  SeededRandom,
+  DeterministicClock,
+  DeterministicCounterIdSource,
+  SystemRandom,
+  SystemClock,
+  ProductionIdSource,
+  type RuntimeSources,
+  type RandomSource,
+  type ClockSource,
+  type IdSource,
+};

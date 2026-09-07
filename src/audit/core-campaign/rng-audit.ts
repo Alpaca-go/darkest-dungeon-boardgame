@@ -13,6 +13,8 @@ export interface RngAuditFinding {
   text: string;
   severity: 'error' | 'warning';
   category: 'math-random' | 'date-now' | 'new-date' | 'other';
+  /** Phase 11A.2 §31：标记为 System Runtime Adapter allowlist；不阻塞 pass。 */
+  allowlisted?: boolean;
 }
 
 function walk(dir: string, acc: string[]): void {
@@ -80,6 +82,10 @@ function scanFile(path: string, findings: RngAuditFinding[]): void {
   } catch {
     return;
   }
+  // Phase 11A.2 §31：System Runtime Adapter（src/game-engine/runtime-sources.ts 内的
+  // SystemRandom / SystemClock / ProductionIdSource）允许直接使用 Math.random /
+  // Date.now / new Date —— 它们是「唯一受信任的入口」。所有其它代码必须走 RuntimeSources facade。
+  const isSystemRuntimeAdapter = /runtime-sources\.ts$/.test(path);
   const lines = content.split('\n');
   lines.forEach((line, idx) => {
     const ln = idx + 1;
@@ -91,13 +97,24 @@ function scanFile(path: string, findings: RngAuditFinding[]): void {
     const isInjectionPoint = /_rng\s*(:[^=]*)?=|setRandomSource/.test(stripped);
 
     if (/Math\.random\s*\(/.test(stripped)) {
-      findings.push({
-        file: path,
-        line: ln,
-        text: isInjectionPoint ? `${line.trim()} (legitimate default / injection point)` : line.trim(),
-        severity: isInjectionPoint ? 'warning' : 'error',
-        category: isInjectionPoint ? 'other' : 'math-random',
-      });
+      if (isSystemRuntimeAdapter) {
+        findings.push({
+          file: path,
+          line: ln,
+          text: `${line.trim()} (System Runtime Adapter — allowlist)`,
+          severity: 'warning',
+          category: 'math-random',
+          allowlisted: true,
+        });
+      } else {
+        findings.push({
+          file: path,
+          line: ln,
+          text: isInjectionPoint ? `${line.trim()} (legitimate default / injection point)` : line.trim(),
+          severity: isInjectionPoint ? 'warning' : 'error',
+          category: isInjectionPoint ? 'other' : 'math-random',
+        });
+      }
     } else if (/\bMath\.random\b/.test(stripped)) {
       // 以函数引用形式出现（未立即调用），只可能是注入点默认值。
       findings.push({
@@ -109,10 +126,32 @@ function scanFile(path: string, findings: RngAuditFinding[]): void {
       });
     }
     if (/\bDate\.now\s*\(/.test(stripped)) {
-      findings.push({ file: path, line: ln, text: line.trim(), severity: 'warning', category: 'date-now' });
+      if (isSystemRuntimeAdapter) {
+        findings.push({
+          file: path,
+          line: ln,
+          text: `${line.trim()} (System Runtime Adapter — allowlist)`,
+          severity: 'warning',
+          category: 'date-now',
+          allowlisted: true,
+        });
+      } else {
+        findings.push({ file: path, line: ln, text: line.trim(), severity: 'warning', category: 'date-now' });
+      }
     }
     if (/\bnew\s+Date\s*\(/.test(stripped)) {
-      findings.push({ file: path, line: ln, text: line.trim(), severity: 'warning', category: 'new-date' });
+      if (isSystemRuntimeAdapter) {
+        findings.push({
+          file: path,
+          line: ln,
+          text: `${line.trim()} (System Runtime Adapter — allowlist)`,
+          severity: 'warning',
+          category: 'new-date',
+          allowlisted: true,
+        });
+      } else {
+        findings.push({ file: path, line: ln, text: line.trim(), severity: 'warning', category: 'new-date' });
+      }
     }
   });
 }
@@ -147,11 +186,15 @@ export function runRngAudit(rootDir?: string): RngAuditReport {
   const findings = auditRngSources(rootDir);
   const timeLeaks = findings.filter((f) => f.category === 'date-now' || f.category === 'new-date').length;
   const def = verifyDefinitionHashStability();
+  // Phase 11A.2 §31：System Runtime Adapter（src/game-engine/runtime-sources.ts）
+  // 允许直接使用 Math.random / Date.now / new Date，但所有其它代码必须走 RuntimeSources facade。
+  // 这里过滤掉 allowlist 项。
+  const blockingFindings = findings.filter((f) => !f.allowlisted);
   // Official-path Math.random leak is a hard error -> blocks pass.
-  const realMathRandom = findings.filter((f) => f.category === 'math-random').length;
+  const realMathRandom = blockingFindings.filter((f) => f.category === 'math-random').length;
   return {
-    errorCount: findings.filter((f) => f.severity === 'error').length,
-    warningCount: findings.filter((f) => f.severity === 'warning').length,
+    errorCount: blockingFindings.filter((f) => f.severity === 'error').length,
+    warningCount: blockingFindings.filter((f) => f.severity === 'warning').length,
     mathRandomLeaks: realMathRandom,
     timeSourceLeaks: timeLeaks,
     findings,
