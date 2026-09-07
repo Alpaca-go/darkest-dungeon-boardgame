@@ -8,6 +8,10 @@
 
 import { readFileSync, readdirSync, statSync, existsSync } from 'fs';
 import { join } from 'path';
+import {
+  runGameCommandRouteAudit,
+  type GameCommandRouteAuditResult,
+} from './game-command-route-contract';
 
 const SRC = join(process.cwd(), 'src');
 
@@ -17,10 +21,16 @@ export interface ProductionCommandAuditResult {
   headlessShimFileExists: boolean;
   /** simulation-driver.ts 中引用 headless-shim 的次数。 */
   simulationDriverShimImportCount: number;
-  /** Driver dispatch 中使用 Production Commands 的高比例数量。 */
+  /** Driver dispatch case body 引用 production command 名字的 case 数（诊断字段；11A.2.3 §3 起不再参与 gate）。 */
   simulationDriverProductionCommandCoverage: number;
-  /** Driver high-level dispatch 的总 case 数。 */
+  /** Driver high-level dispatch 的总 case 数（诊断字段）。 */
   simulationDriverTotalHighLevelDispatches: number;
+  /** Route Contract 统计（11A.2.3 §3 替代 coverage >= N 假修复）。 */
+  commandRouteExpectedCount: number;
+  commandRouteClassifiedCount: number;
+  commandRouteValidatedCount: number;
+  unclassifiedCommands: string[];
+  routeViolations: string[];
   /** Store 直接 import 原子编排步骤的函数名列表。 */
   storeDirectAtomicOrchestrationLeaks: string[];
   /** Driver 直接 import 原子编排步骤的函数名列表。 */
@@ -33,6 +43,8 @@ export interface ProductionCommandAuditResult {
   differentialPasses: boolean;
   /** Test Policy 是否仅通过 Production Commands 改 State。 */
   testPolicyBoundaryPasses: boolean;
+  /** 详细 route 表（commandType → { routeKind, validated }）。 */
+  routeDetails: GameCommandRouteAuditResult['details'];
   /** 结构化判定。 */
   productionCommandLayerPasses: boolean;
 }
@@ -173,7 +185,9 @@ export function runProductionCommandAudit(): ProductionCommandAuditResult {
     findTermInText(driverText, fn),
   );
 
-  // 4. Driver dispatch coverage
+  // 4. Driver dispatch coverage（11A.2.3 §3 起由 Route Contract 主导；保留为诊断字段）
+  // 注意：countDriverDispatches / countProductionCommandUsage 在 Route Contract 引入后
+  // 不再参与 gate 判定，但仍可用于诊断输出。
   const simulationDriverTotalHighLevelDispatches = countDriverDispatches(driverText);
   const simulationDriverProductionCommandCoverage = countProductionCommandUsage(driverText);
 
@@ -192,25 +206,28 @@ export function runProductionCommandAudit(): ProductionCommandAuditResult {
   // 6. Test Policy boundary
   const testPolicyBoundaryPasses = checkPolicyBoundary();
 
-  // 7. productionCommandLayerPasses：结构化判定
-  //   - shim 文件不存在（WP-D 完成）
-  //   - Driver 无 shim import（WP-C 完成）
-  //   - Store / Driver 无 atomic orchestration 直接 import
-  //   - Driver dispatch coverage 达到 dev doc §16 列出的 3 个核心迁移点 + 现有 wrapper 数
-  //     （proceedToLoadout / proceedToQuests / moveToRoom / autoBattle /
-  //      resolveVictory / finishQuest / returnToHamlet / resolveReplacements 共 7 项）
-  //   - Differential D-01..D-14 全实现
-  //   - Test Policy 不直接改 State
-  // 注：未达到 12/12 的 command case（selectParty / applyDefaultLoadout / chooseQuest /
-  //   scout / skipAllHeroActions / endHamletDay）使用单步 engine 函数，暂无 production
-  //   wrapper 需求；后续如需提升，可在 dev doc §47 列为 backlog。
-  const MIN_DRIVER_PRODUCTION_COVERAGE = 7;
+  // 7. GameCommand Route Contract（11A.2.3 §3 替代 MIN_DRIVER_PRODUCTION_COVERAGE）
+  // 严禁 coverage >= N 假修复：每个 GameCommand 必须 exactly one route 且静态验证真实调用。
+  const routeAudit = runGameCommandRouteAudit();
+  const routeCoveragePasses =
+    routeAudit.commandRouteClassifiedCount === routeAudit.commandRouteExpectedCount &&
+    routeAudit.unclassifiedCommands.length === 0 &&
+    routeAudit.routeViolations.length === 0;
+
+  // 8. productionCommandLayerPasses：结构化判定（11A.2.3 §5）
+  //   - shim absent
+  //   - Driver shim imports 0
+  //   - Route 100% classified
+  //   - Route 100% validated
+  //   - no orchestration leaks
+  //   - command contract pass
+  //   - test policy boundary pass
   const productionCommandLayerPasses =
     !headlessShimFileExists &&
     simulationDriverShimImportCount === 0 &&
+    routeCoveragePasses &&
     storeDirectAtomicOrchestrationLeaks.length === 0 &&
     driverDirectAtomicOrchestrationLeaks.length === 0 &&
-    simulationDriverProductionCommandCoverage >= MIN_DRIVER_PRODUCTION_COVERAGE &&
     differentialPasses &&
     testPolicyBoundaryPasses;
 
@@ -219,12 +236,18 @@ export function runProductionCommandAudit(): ProductionCommandAuditResult {
     simulationDriverShimImportCount,
     simulationDriverProductionCommandCoverage,
     simulationDriverTotalHighLevelDispatches,
+    commandRouteExpectedCount: routeAudit.commandRouteExpectedCount,
+    commandRouteClassifiedCount: routeAudit.commandRouteClassifiedCount,
+    commandRouteValidatedCount: routeAudit.commandRouteValidatedCount,
+    unclassifiedCommands: routeAudit.unclassifiedCommands,
+    routeViolations: routeAudit.routeViolations,
     storeDirectAtomicOrchestrationLeaks,
     driverDirectAtomicOrchestrationLeaks,
     differentialExpectedCount,
     differentialImplementedCount,
     differentialPasses,
     testPolicyBoundaryPasses,
+    routeDetails: routeAudit.details,
     productionCommandLayerPasses,
   };
 }

@@ -13,6 +13,8 @@ import { startHamletPhase, hamletEntryBlockedByTrinkets } from '../hamlet';
 import { evaluateReplacementFlow } from '../stagecoach';
 import { retargetPendingReplacement } from './replacement';
 import { finalizeQuestReturnToHamlet } from '../campaign/campaign-orchestrator';
+import { selectQuest } from '../campaign';
+import { engineChooseQuest } from '../campaign/campaign-orchestrator';
 
 export type QuestCommandError =
   | 'already-resolved'
@@ -142,4 +144,36 @@ export function commitReturnToHamlet(
   after = evaluateReplacementFlow(after);
 
   return { ok: true, campaign: after, error: null, outcomeApplied: input.questOutcome };
+}
+
+// ---------------------------------------------------------------------------
+// 4. commitQuestSelection（Phase 11A.2.3 §4 收口）
+// ---------------------------------------------------------------------------
+
+/** commitQuestSelection 返回值（与 commitLeaveDungeon / commitQuestFailureFromDefeat 同一家族）。 */
+export interface QuestSelectionResult {
+  ok: boolean;
+  campaign: CampaignState;
+  error: string | null;
+}
+
+/**
+ * 一次性组合：
+ *   1. engineChooseQuest（Campaign Orchestrator 推进：初始化 Act / Threat + 门控）
+ *   2. selectQuest（生成 dungeon + 副本任务）
+ *
+ * dev doc §4：原 Store / Driver 都自行拼 `engineChooseQuest + selectQuest` 两步。
+ * 收口为单一 Production Command 后，Store 与 Driver 共用入口。
+ */
+export function commitQuestSelection(
+  campaign: CampaignState,
+  questId: string,
+  options?: { now?: string },
+): QuestSelectionResult {
+  const gate = engineChooseQuest(campaign, questId, options);
+  if (!gate.ok) {
+    return { ok: false, campaign, error: 'no-active-quest' };
+  }
+  const next = selectQuest(gate.campaign, questId);
+  return { ok: true, campaign: next, error: null };
 }

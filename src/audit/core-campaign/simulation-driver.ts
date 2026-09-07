@@ -15,7 +15,6 @@ import {
   createNewCampaign,
   isLoadoutComplete,
   selectParty,
-  selectQuest,
 } from '../../game-engine/campaign';
 import { type QuestEndReason } from '../../game-engine/quest-result';
 import { canEndHamletDay, endHamletDay, skipHeroAction } from '../../game-engine/hamlet';
@@ -25,12 +24,11 @@ import { beginHeroSkillAction } from '../../game-engine/trinkets/battle-trinket-
 // Phase 11A.2.2 §20：Driver 不得 import headless-shim；shim 仅服务于 Test Policy / Differential 旧 fallback。
 import { createSaveSnapshot, restoreSaveSnapshot, validateSaveFile } from '../../game-engine/save';
 import { createSeededRandom, setRandomSource } from '../../game-engine/random';
-// Phase 11A.1 §16.1：chooseQuest 路径走 Campaign Orchestrator 入口。
-import { engineChooseQuest } from '../../game-engine/campaign/campaign-orchestrator';
 // Phase 11A.2.2 §16 / §17 / §18 / §19：Driver 完全使用 Production Commands。
 //   - autoBattle      → settleBattleState + declineAllTrinketOpportunities
 //   - resolveVictory  → commitBattleVictory
 //   - returnToHamlet  → commitReturnToHamlet（trinket 决策走 Test Policy callback）
+// Phase 11A.2.3 §4：chooseQuest 收口为 commitQuestSelection（替代 driver 内部拼两步）。
 import {
   proceedCampaignToLoadout,
   proceedCampaignToQuestSelect,
@@ -38,6 +36,7 @@ import {
   commitLeaveDungeon,
   commitQuestFailureFromDefeat,
   commitReturnToHamlet,
+  commitQuestSelection,
   resolveReplacementsFlow,
   settleBattleState,
   commitBattleVictory,
@@ -311,12 +310,11 @@ export class CampaignSimulationDriver {
           () => proceedCampaignToQuestSelect(this.state),
         );
       case 'chooseQuest':
-        // Phase 11A.1 §16.1：先走 engineChooseQuest（初始化 Act / Threat + 门控），
-        // 再委托给 selectQuest 生成地牢。
+        // Phase 11A.2.3 §4：commitQuestSelection 是单一 Production Command 入口，
+        // 内部完成 engineChooseQuest + selectQuest 两步；Store 与 Driver 共用。
         return this.commit('chooseQuest', `chooseQuest:${command.questId}`, () => {
-          const gate = engineChooseQuest(this.state, command.questId);
-          if (!gate.ok) return this.state;
-          return selectQuest(gate.campaign, command.questId);
+          const r = commitQuestSelection(this.state, command.questId);
+          return r.ok ? r.campaign : this.state;
         });
       case 'scout':
         return this.commit('scout', 'scout', () =>

@@ -705,7 +705,9 @@ export function buildIssues(input: BuildIssuesInput): AuditIssue[] {
     const actual = [
       `headless shim exists = ${pca?.headlessShimFileExists}`,
       `driver shim imports = ${pca?.simulationDriverShimImportCount}`,
-      `driver coverage = ${pca?.simulationDriverProductionCommandCoverage}/${pca?.simulationDriverTotalHighLevelDispatches}`,
+      `route classified = ${pca?.commandRouteClassifiedCount}/${pca?.commandRouteExpectedCount}`,
+      `route violations = [${pca?.routeViolations.join(', ')}]`,
+      `unclassified = [${pca?.unclassifiedCommands.join(', ')}]`,
       `differential coverage = ${pca?.differentialImplementedCount}/${pca?.differentialExpectedCount}`,
       `store atomic leaks = [${pca?.storeDirectAtomicOrchestrationLeaks.join(', ')}]`,
       `driver atomic leaks = [${pca?.driverDirectAtomicOrchestrationLeaks.join(', ')}]`,

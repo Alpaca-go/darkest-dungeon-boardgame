@@ -5,7 +5,6 @@ import {
   createHeroInstance,
   equipSkill as engineEquipSkill,
   applyDefaultLoadout as engineApplyDefaultLoadout,
-  selectQuest as engineSelectQuest,
 } from '../game-engine/campaign';
 import {
   scoutDungeon,
@@ -22,11 +21,7 @@ import {
   skipHeroAction,
   endHamletDay as engineEndHamletDay,
 } from '../game-engine/hamlet';
-// ---- Phase 11A.1：Campaign Orchestration 入口 ----
-import {
-  engineChooseQuest,
-} from '../game-engine/campaign/campaign-orchestrator';
-// ---- Phase 11A.2 WP-B：Production Commands（Store 不再自己组合编排） ----
+// ---- Phase 11A.2.3 §4：chooseQuest 收口为 commitQuestSelection（Store 不再自己组合编排） ----
 import {
   proceedCampaignToLoadout,
   proceedCampaignToQuestSelect,
@@ -37,6 +32,7 @@ import {
   commitLeaveDungeon,
   commitQuestFailureFromDefeat,
   commitReturnToHamlet,
+  commitQuestSelection,
   resolveReplacementsFlow,
   resolveAllPendingTrinketAllocations,
 } from '../game-engine/commands';
@@ -371,13 +367,13 @@ export const useGameStore = create<GameStore>((set, get) => {
     chooseQuest: (questId) => {
       const c = get().campaign;
       if (!c) return;
-      // Phase 11A.1 + 11A.2：先走 engineChooseQuest 初始化 Act / Threat + 门控，
-      // 再委托 selectQuest 生成地牢。
-      const gate = engineChooseQuest(c, questId);
-      if (!gate.ok) {
+      // Phase 11A.2.3 §4：commitQuestSelection 收口为单一 Production Command 入口，
+      // 内部完成 engineChooseQuest + selectQuest 两步；Store 与 Driver 共用。
+      const r = commitQuestSelection(c, questId);
+      if (!r.ok) {
         return;
       }
-      commit(engineSelectQuest(gate.campaign, questId));
+      commit(r.campaign);
     },
 
     scout: () => {

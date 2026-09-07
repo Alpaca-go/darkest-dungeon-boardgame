@@ -28,8 +28,10 @@ export {
   commitLeaveDungeon,
   commitQuestFailureFromDefeat,
   commitReturnToHamlet,
+  commitQuestSelection,
   type QuestCommandError,
   type QuestCommandResult,
+  type QuestSelectionResult,
   type ReturnToHamletInput,
   type ReturnToHamletResult,
 } from './quest';
