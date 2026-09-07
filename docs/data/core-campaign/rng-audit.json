@@ -2,7 +2,7 @@
   "passed": true,
   "mathRandomLeaks": 0,
   "officialPathMathRandomLeaks": 0,
-  "timeSourceLeaks": 10,
+  "timeSourceLeaks": 12,
   "definitionHashStable": true,
   "officialFindings": [],
   "allFindings": [
@@ -82,6 +82,20 @@
       "category": "new-date",
       "severity": "warning",
       "text": "const iso = new Date(this.nowMs()).toISOString(); (System Runtime Adapter — allowlist)"
+    },
+    {
+      "file": "src/integration/core-campaign/integration.test.ts",
+      "line": 206,
+      "category": "new-date",
+      "severity": "warning",
+      "text": "createdAt: new Date().toISOString(),"
+    },
+    {
+      "file": "src/integration/core-campaign/integration.test.ts",
+      "line": 237,
+      "category": "new-date",
+      "severity": "warning",
+      "text": "acquiredAt: new Date().toISOString(),"
     },
     {
       "file": "src/pages/HomePage.tsx",

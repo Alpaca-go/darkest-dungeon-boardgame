@@ -39,7 +39,7 @@
 
 - 全库 `Math.random()` 命中：**0**
 - **官方路径（game-engine / data / store / components）`Math.random()` 泄漏：0**
-- 时间源（`Date.now()` / `new Date()`）命中：**10**
+- 时间源（`Date.now()` / `new Date()`）命中：**12**
 - Definition Hash 稳定：**✅**
 - 判定：**✅ PASS**
 
