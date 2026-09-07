@@ -124,4 +124,16 @@ describe('GameCommand Route Contract (Phase 11A.2.3 §3 + §6)', () => {
       seen.add(d.commandType);
     }
   });
+
+  it('RC-11 (Phase 11A.2.3R §7): 每个 contract 的 expectedImportFrom 必须在 Driver 顶部 import 列表中真出现（15/15 import source validated）', () => {
+    const audit = runGameCommandRouteAudit();
+    // 所有有 expectedImportFrom 的 contract 必须 import 真出现
+    const requiredFragments = GAME_COMMAND_ROUTE_CONTRACT.filter((c) => c.expectedImportFrom).map(
+      (c) => `${c.commandType}→${c.expectedImportFrom}`,
+    );
+    expect(
+      audit.importSourceViolations,
+      `expectedImportFrom 未在 driver imports 出现: [${audit.importSourceViolations.join(', ')}] / 总共 [${requiredFragments.join(', ')}]`,
+    ).toEqual([]);
+  });
 });

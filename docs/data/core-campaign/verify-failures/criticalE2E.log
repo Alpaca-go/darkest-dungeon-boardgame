@@ -1,0 +1,29 @@
+# criticalE2E: npx playwright test e2e/phase11a2-critical-campaign.spec.ts --reporter=basic
+# exitCode=1 durationMs=3579 at=2026-09-07T15:51:17.746Z
+
+=== STDOUT (tail) ===
+
+
+=== STDERR (tail) ===
+Error: Cannot find module 'basic'
+Require stack:
+- D:\darkest-dungoen-boardgame\node_modules\playwright\lib\cli\testActions.js
+- D:\darkest-dungoen-boardgame\node_modules\playwright\lib\program.js
+- D:\darkest-dungoen-boardgame\node_modules\@playwright\test\cli.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1564:15)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1118:27)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1169:12)
+    at require.resolve (node:internal/modules/helpers:175:31)
+    at resolveReporter (D:\darkest-dungoen-boardgame\node_modules\playwright\lib\cli\testActions.js:206:18)
+    at D:\darkest-dungoen-boardgame\node_modules\playwright\lib\cli\testActions.js:167:42
+    at Array.map (<anonymous>)
+    at resolveReporterOption (D:\darkest-dungoen-boardgame\node_modules\playwright\lib\cli\testActions.js:167:30)
+    at overridesFromOptions (D:\darkest-dungoen-boardgame\node_modules\playwright\lib\cli\testActions.js:130:15)
+    at runTests (D:\darkest-dungoen-boardgame\node_modules\playwright\lib\cli\testActions.js:44:24) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'D:\\darkest-dungoen-boardgame\\node_modules\\playwright\\lib\\cli\\testActions.js',
+    'D:\\darkest-dungoen-boardgame\\node_modules\\playwright\\lib\\program.js',
+    'D:\\darkest-dungoen-boardgame\\node_modules\\@playwright\\test\\cli.js'
+  ]
+}

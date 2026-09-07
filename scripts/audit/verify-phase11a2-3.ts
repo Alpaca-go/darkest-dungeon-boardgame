@@ -1,24 +1,19 @@
-// Phase 11A.2.3 §19 — Measured Verification Pipeline。
+// Phase 11A.2.3R §10-12 — Measured Verification Pipeline（修复版）。
 //
-// dev doc §19：执行顺序
-//   1 typecheck
-//   2 unit + command contract
-//   3 integration
-//   4 build
-//   5 critical e2e
-//   6 golden
-//   7 replay continuation
-//   8 audit content
-//   9 audit rules
-//   10 production command audit
-//   11 release gate
-//   12 final report
+// dev doc §10-12：11A.2.3 末态的 verify-phase11a2-3.ts 存在 5 类 False Green 漏洞：
+//   1. commandContractPasses = unitPasses（unit 替 contract，dev doc §6 禁止）
+//   2. release-gate.json 读根目录（应为 docs/data/core-campaign/release-gate.json）
+//   3. 失败不保存 stdout/stderr tail
+//   4. PCA 未单独测（混在 production-command-audit.test.ts 中间）
+//   5. release-gate.json 未结构化读（只看 openP0 / openP1；未看 measured flags）
 //
-// 输出：docs/data/core-campaign/verification-results.json
-// 字段：schemaVersion / measuredAt / verificationInputHash / 各 pass / commands list。
+// 本文件按 dev doc §19 执行顺序：typecheck → unit → commandContract → integration
+//   → build → criticalE2E → golden → replayDeterminism → replayContinuation
+//   → contentAudit → rulesAudit → productionCommandAudit → releaseGate → finalReport。
 //
-// 注：本机环境不强制跑 Playwright E2E（需 dev server + Chromium）— Step 5 记录
-// 'not-measured' 而非 pass。Release Gate 读取本 JSON 时会区分 measured / unmeasured。
+// 输出：
+//   docs/data/core-campaign/verification-results.json（实测结果）
+//   docs/data/core-campaign/verify-failures/<step>.log（失败时 stdout/stderr tail）
 //
 // 运行：npx vite-node scripts/audit/verify-phase11a2-3.ts
 
@@ -30,11 +25,16 @@ import { createHash } from 'crypto';
 const ROOT = process.cwd();
 const DATA_DIR = join(ROOT, 'docs/data/core-campaign');
 const RESULTS_PATH = join(DATA_DIR, 'verification-results.json');
+// dev doc §10-12（修复 #2）：release-gate.json 在 docs/data/core-campaign/ 下，不是根目录。
+const RELEASE_GATE_PATH = join(DATA_DIR, 'release-gate.json');
+const FAILURE_DIR = join(DATA_DIR, 'verify-failures');
 
 interface CommandResult {
   command: string;
   exitCode: number;
   durationMs: number;
+  /** 失败时保存的 stdout/stderr tail（成功时为 null）。 */
+  failureLogPath: string | null;
 }
 
 interface VerificationResults {
@@ -43,6 +43,7 @@ interface VerificationResults {
   verificationInputHash: string;
   typecheckPasses: boolean;
   unitPasses: boolean;
+  // dev doc §10-12（修复 #1）：commandContract 必须独立测，不再 = unitPasses。
   commandContractPasses: boolean;
   integrationPasses: boolean;
   buildPasses: boolean;
@@ -50,7 +51,12 @@ interface VerificationResults {
   goldenPasses: boolean;
   replayDeterminismPasses: boolean;
   replayContinuationPasses: boolean;
+  contentAuditPasses: boolean;
+  rulesAuditPasses: boolean;
+  // dev doc §10-12（修复 #4）：PCA 单独测。
   productionCommandLayerPasses: boolean;
+  // dev doc §10-12（修复 #5）：release gate 结构化读 measured flags。
+  releaseGatePasses: boolean;
   openP0: number;
   openP1: number;
   campaignOrchestrationReachable: boolean;
@@ -86,11 +92,12 @@ function computeInputHash(): string {
   return h.digest('hex');
 }
 
+const TAIL_LINE_COUNT = 200;
+
 function runCommand(label: string, cmd: string, args: string[], timeoutMs = 120_000): CommandResult {
   const t0 = Date.now();
   let res;
   try {
-    // Windows: 通过 shell 跑（让 npx / npm 在 PATH 中）
     res = spawnSync(cmd, args, {
       cwd: ROOT,
       encoding: 'utf8',
@@ -99,15 +106,37 @@ function runCommand(label: string, cmd: string, args: string[], timeoutMs = 120_
       shell: true,
     });
   } catch (e: any) {
-    return { command: `${label} ${cmd} ${args.join(' ')}`, exitCode: -1, durationMs: Date.now() - t0 };
+    return {
+      command: `${label}: ${cmd} ${args.join(' ')}`,
+      exitCode: -1,
+      durationMs: Date.now() - t0,
+      failureLogPath: null,
+    };
   }
   const durationMs = Date.now() - t0;
   const exitCode = res.status ?? -1;
-  return { command: `${label}: ${cmd} ${args.join(' ')}`, exitCode, durationMs };
-}
+  const description = `${label}: ${cmd} ${args.join(' ')}`;
 
-function readResultFromRun(label: string, run: CommandResult): boolean {
-  return run.exitCode === 0;
+  // dev doc §10-12（修复 #3）：失败时保存 stdout/stderr tail 到 docs/data/core-campaign/verify-failures/
+  if (exitCode !== 0) {
+    if (!existsSync(FAILURE_DIR)) mkdirSync(FAILURE_DIR, { recursive: true });
+    const logPath = join(FAILURE_DIR, `${label}.log`);
+    const tailLines: string[] = [];
+    tailLines.push(`# ${description}`);
+    tailLines.push(`# exitCode=${exitCode} durationMs=${durationMs} at=${new Date().toISOString()}`);
+    tailLines.push('');
+    tailLines.push('=== STDOUT (tail) ===');
+    const stdout = (res.stdout ?? '').split('\n');
+    tailLines.push(stdout.slice(-TAIL_LINE_COUNT).join('\n'));
+    tailLines.push('');
+    tailLines.push('=== STDERR (tail) ===');
+    const stderr = (res.stderr ?? '').split('\n');
+    tailLines.push(stderr.slice(-TAIL_LINE_COUNT).join('\n'));
+    writeFileSync(logPath, tailLines.join('\n'), 'utf8');
+    return { command: description, exitCode, durationMs, failureLogPath: logPath };
+  }
+
+  return { command: description, exitCode, durationMs, failureLogPath: null };
 }
 
 function main(): void {
@@ -119,93 +148,161 @@ function main(): void {
   // 1. typecheck
   const typecheck = runCommand('typecheck', 'npx', ['tsc', '--noEmit']);
   commands.push(typecheck);
-  const typecheckPasses = readResultFromRun('typecheck', typecheck);
+  const typecheckPasses = typecheck.exitCode === 0;
 
-  // 2. unit + command contract
+  // 2. unit（含 Domain Contract / Real Vertical Integration 等）
   const unit = runCommand('unit', 'npx', ['vitest', 'run', '--reporter=basic'], 600_000);
   commands.push(unit);
-  const unitPasses = readResultFromRun('unit', unit);
-  // command contract is part of unit (game-command-route-contract.test.ts)
-  // 若 unitPasses 视为 contractPasses 也通过。
-  const commandContractPasses = unitPasses;
+  const unitPasses = unit.exitCode === 0;
 
-  // 3. integration
-  const integration = runCommand('integration', 'npx', ['vitest', 'run', 'src/integration', '--reporter=basic'], 120_000);
+  // 3. dev doc §10-12（修复 #1）：command contract 单独测（独立路径，独立判定）
+  const commandContract = runCommand(
+    'commandContract',
+    'npx',
+    ['vitest', 'run', 'src/audit/core-campaign/game-command-route-contract.test.ts', '--reporter=basic'],
+    30_000
+  );
+  commands.push(commandContract);
+  const commandContractPasses = commandContract.exitCode === 0;
+
+  // 4. integration
+  const integration = runCommand(
+    'integration',
+    'npx',
+    ['vitest', 'run', 'src/integration', '--reporter=basic'],
+    120_000
+  );
   commands.push(integration);
-  const integrationPasses = readResultFromRun('integration', integration);
+  const integrationPasses = integration.exitCode === 0;
 
-  // 4. build
+  // 5. build
   const build = runCommand('build', 'npx', ['vite', 'build'], 300_000);
   commands.push(build);
-  const buildPasses = readResultFromRun('build', build);
+  const buildPasses = build.exitCode === 0;
 
-  // 5. critical e2e
-  // 本机环境不强制跑 Playwright E2E（需 dev server + Chromium）。
-  // 若存在 e2e/phase11a2-critical-campaign.spec.ts 则尝试跑；否则记 not-measured。
+  // 6. critical e2e（dev doc §11：本机无 dev server + Chromium，记 not-measured）
   const e2eSpec = 'e2e/phase11a2-critical-campaign.spec.ts';
   let criticalE2EPasses: boolean | 'not-measured' = 'not-measured';
   if (existsSync(join(ROOT, e2eSpec))) {
-    const e2e = runCommand('criticalE2E', 'npx', ['playwright', 'test', e2eSpec, '--reporter=basic'], 180_000);
+    const e2e = runCommand(
+      'criticalE2E',
+      'npx',
+      ['playwright', 'test', e2eSpec, '--reporter=basic'],
+      180_000
+    );
     commands.push(e2e);
-    criticalE2EPasses = readResultFromRun('criticalE2E', e2e);
+    criticalE2EPasses = e2e.exitCode === 0;
   } else {
     notes.push('E2E spec file not present; criticalE2EPasses = not-measured');
   }
 
-  // 6. golden（replay determinism）
-  const golden = runCommand('golden', 'npx', ['vitest', 'run', 'src/audit/core-campaign/golden-run.test.ts', '--reporter=basic'], 60_000);
+  // 7. golden
+  const golden = runCommand(
+    'golden',
+    'npx',
+    ['vitest', 'run', 'src/audit/core-campaign/golden-run.test.ts', '--reporter=basic'],
+    60_000
+  );
   commands.push(golden);
-  const goldenPasses = readResultFromRun('golden', golden);
+  const goldenPasses = golden.exitCode === 0;
 
-  // 7. replay continuation
-  const replay = runCommand('replayContinuation', 'npx', ['vitest', 'run', 'src/audit/core-campaign/replay-continuation.test.ts', '--reporter=basic'], 60_000);
-  commands.push(replay);
-  const replayContinuationPasses = readResultFromRun('replayContinuation', replay);
-  const replayDeterminismPasses = replayContinuationPasses; // golden-run 内部已验证
+  // 8. replay continuation
+  const replayContinuation = runCommand(
+    'replayContinuation',
+    'npx',
+    ['vitest', 'run', 'src/audit/core-campaign/replay-continuation.test.ts', '--reporter=basic'],
+    60_000
+  );
+  commands.push(replayContinuation);
+  const replayContinuationPasses = replayContinuation.exitCode === 0;
+  // golden-run 内已含 replay-determinism；replayContinuation 同 bundle 同 seed 复核。
+  const replayDeterminismPasses = goldenPasses && replayContinuationPasses;
 
-  // 8. audit content
+  // 9. content audit
   const contentAudit = runCommand('contentAudit', 'npx', ['vite-node', 'scripts/audit/content.ts'], 60_000);
   commands.push(contentAudit);
+  const contentAuditPasses = contentAudit.exitCode === 0;
   notes.push(`contentAudit exitCode=${contentAudit.exitCode}`);
 
-  // 9. audit rules
+  // 10. rules audit
   const rulesAudit = runCommand('rulesAudit', 'npx', ['vite-node', 'scripts/audit/rules.ts'], 60_000);
   commands.push(rulesAudit);
+  const rulesAuditPasses = rulesAudit.exitCode === 0;
   notes.push(`rulesAudit exitCode=${rulesAudit.exitCode}`);
 
-  // 10. production command audit（通过 runAudit 内嵌的 PCA）
-  const pcaAudit = runCommand('runAudit', 'npx', ['vitest', 'run', 'src/audit/core-campaign/production-command-audit.test.ts', '--reporter=basic'], 30_000);
-  commands.push(pcaAudit);
-  const productionCommandLayerPasses = readResultFromRun('runAudit', pcaAudit);
+  // 11. dev doc §10-12（修复 #4）：PCA 单独测
+  const pca = runCommand(
+    'productionCommandAudit',
+    'npx',
+    ['vitest', 'run', 'src/audit/core-campaign/production-command-audit.test.ts', '--reporter=basic'],
+    30_000
+  );
+  commands.push(pca);
+  const productionCommandLayerPasses = pca.exitCode === 0;
 
-  // 11. release gate
-  const releaseGate = runCommand('releaseGate', 'npx', ['vitest', 'run', 'src/audit/core-campaign/consistency.test.ts', '--reporter=basic'], 30_000);
-  commands.push(releaseGate);
-  notes.push(`releaseGate exitCode=${releaseGate.exitCode}`);
-
-  // 12. final report（占位：实际 final-report.ts 后续 WP-Fix-9 写）
-  // 此处不强制跑，避免循环依赖。
-
-  // openP0 / openP1 / campaignOrchestrationReachable 由 run-audit 决定
-  // 这里我们读 release-gate.json（如果存在）；否则从 audit 推断
-  let openP0 = 1; // 11A.2.2 末态 P0-002 仍 open
+  // 12. dev doc §10-12（修复 #5）：release gate 结构化读 measured flags
+  //     - release-gate.json 必须存在
+  //     - 字段 typecheckPasses / unitPasses / commandContractPasses / integrationPasses /
+  //       buildPasses / goldenPasses / replayDeterminismPasses / replayContinuationPasses /
+  //       productionCommandLayerPasses 必须有 measured boolean
+  //     - criticalE2EPasses 允许 measured 或 not-measured
+  //     - 任何 release-gate.json 标 false 的 bit = releaseGatePasses=false
+  let openP0 = 1;
   let openP1 = 0;
   let campaignOrchestrationReachable = true;
-  const releaseGateJson = join(ROOT, 'release-gate.json');
-  if (existsSync(releaseGateJson)) {
+  let releaseGatePasses = false;
+  const releaseGateMeasuredFlags: Record<string, boolean | 'not-measured'> = {};
+
+  if (existsSync(RELEASE_GATE_PATH)) {
     try {
-      const rg = JSON.parse(readFileSync(releaseGateJson, 'utf8'));
+      const rg = JSON.parse(readFileSync(RELEASE_GATE_PATH, 'utf8'));
       if (typeof rg.openP0 === 'number') openP0 = rg.openP0;
       if (typeof rg.openP1 === 'number') openP1 = rg.openP1;
       if (typeof rg.campaignOrchestrationReachable === 'boolean') {
         campaignOrchestrationReachable = rg.campaignOrchestrationReachable;
       }
-    } catch {
-      // ignore
+      // 提取所有 measured boolean 字段
+      const measuredKeys = [
+        'typecheckPasses',
+        'unitPasses',
+        'commandContractPasses',
+        'integrationPasses',
+        'buildPasses',
+        'goldenPasses',
+        'replayDeterminismPasses',
+        'replayContinuationPasses',
+        'productionCommandLayerPasses',
+      ];
+      for (const k of measuredKeys) {
+        if (typeof rg[k] === 'boolean') {
+          releaseGateMeasuredFlags[k] = rg[k];
+        } else if (rg[k] === 'not-measured') {
+          releaseGateMeasuredFlags[k] = 'not-measured';
+        } else {
+          // 缺 measured 值 = unmeasured bit
+          releaseGateMeasuredFlags[k] = 'not-measured' as const;
+        }
+      }
+      // criticalE2E 允许 not-measured
+      if (typeof rg.criticalE2EPasses === 'boolean') {
+        releaseGateMeasuredFlags.criticalE2EPasses = rg.criticalE2EPasses;
+      } else {
+        releaseGateMeasuredFlags.criticalE2EPasses = 'not-measured';
+      }
+      // releaseGatePasses = 所有 measured=true AND openP0<=1 AND openP1=0
+      const allMeasuredTrue = Object.entries(releaseGateMeasuredFlags).every(
+        ([k, v]) => v === true || (k === 'criticalE2EPasses' && v === 'not-measured')
+      );
+      releaseGatePasses = allMeasuredTrue && openP0 <= 1 && openP1 === 0;
+    } catch (e: any) {
+      notes.push(`release-gate.json parse failed: ${e.message}`);
     }
   } else {
-    notes.push('release-gate.json not present; using default openP0=1, openP1=0');
+    notes.push(`release-gate.json not present at ${RELEASE_GATE_PATH}; releaseGatePasses=false`);
   }
+
+  // 13. final report（占位：实际 final-report.ts 后续 WP-Fix-9 写）
+  //     此处不强制跑，避免循环依赖。
 
   const results: VerificationResults = {
     schemaVersion: '1.0',
@@ -220,11 +317,14 @@ function main(): void {
     goldenPasses,
     replayDeterminismPasses,
     replayContinuationPasses,
+    contentAuditPasses,
+    rulesAuditPasses,
     productionCommandLayerPasses,
+    releaseGatePasses,
     openP0,
     openP1,
     campaignOrchestrationReachable,
-    verificationFresh: true, // 刚生成，必 fresh
+    verificationFresh: true,
     commands,
     notes,
   };
@@ -233,18 +333,30 @@ function main(): void {
   // eslint-disable-next-line no-console
   console.log(`[verify-phase11a2-3] wrote ${RESULTS_PATH}`);
   // eslint-disable-next-line no-console
-  console.log(JSON.stringify({
-    typecheckPasses,
-    unitPasses,
-    integrationPasses,
-    buildPasses,
-    criticalE2EPasses,
-    goldenPasses,
-    replayContinuationPasses,
-    productionCommandLayerPasses,
-    openP0,
-    openP1,
-  }, null, 2));
+  console.log(
+    JSON.stringify(
+      {
+        typecheckPasses,
+        unitPasses,
+        commandContractPasses,
+        integrationPasses,
+        buildPasses,
+        criticalE2EPasses,
+        goldenPasses,
+        replayDeterminismPasses,
+        replayContinuationPasses,
+        contentAuditPasses,
+        rulesAuditPasses,
+        productionCommandLayerPasses,
+        releaseGatePasses,
+        openP0,
+        openP1,
+        releaseGateMeasuredFlags,
+      },
+      null,
+      2
+    )
+  );
 }
 
 main();

@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
-  "measuredAt": "2026-09-07T11:45:33.167Z",
-  "verificationInputHash": "d2d15e84aeb607a431718795d885c0c4517df694a9951a9bac6a3b08e2d832b7",
+  "measuredAt": "2026-09-07T15:51:46.186Z",
+  "verificationInputHash": "de89cf6e3567e549da78c85071aceabcc5aa158390723b17327208a3401e46a5",
   "typecheckPasses": true,
   "unitPasses": true,
   "commandContractPasses": true,
@@ -11,7 +11,10 @@
   "goldenPasses": true,
   "replayDeterminismPasses": true,
   "replayContinuationPasses": true,
+  "contentAuditPasses": true,
+  "rulesAuditPasses": true,
   "productionCommandLayerPasses": true,
+  "releaseGatePasses": false,
   "openP0": 1,
   "openP1": 0,
   "campaignOrchestrationReachable": true,
@@ -20,63 +23,72 @@
     {
       "command": "typecheck: npx tsc --noEmit",
       "exitCode": 0,
-      "durationMs": 7908
+      "durationMs": 7567,
+      "failureLogPath": null
     },
     {
       "command": "unit: npx vitest run --reporter=basic",
       "exitCode": 0,
-      "durationMs": 25300
+      "durationMs": 20503,
+      "failureLogPath": null
+    },
+    {
+      "command": "commandContract: npx vitest run src/audit/core-campaign/game-command-route-contract.test.ts --reporter=basic",
+      "exitCode": 0,
+      "durationMs": 3275,
+      "failureLogPath": null
     },
     {
       "command": "integration: npx vitest run src/integration --reporter=basic",
       "exitCode": 0,
-      "durationMs": 4811
+      "durationMs": 4991,
+      "failureLogPath": null
     },
     {
       "command": "build: npx vite build",
       "exitCode": 0,
-      "durationMs": 7742
+      "durationMs": 7668,
+      "failureLogPath": null
     },
     {
       "command": "criticalE2E: npx playwright test e2e/phase11a2-critical-campaign.spec.ts --reporter=basic",
       "exitCode": 1,
-      "durationMs": 3721
+      "durationMs": 3579,
+      "failureLogPath": "D:\\darkest-dungoen-boardgame\\docs\\data\\core-campaign\\verify-failures\\criticalE2E.log"
     },
     {
       "command": "golden: npx vitest run src/audit/core-campaign/golden-run.test.ts --reporter=basic",
       "exitCode": 0,
-      "durationMs": 5184
+      "durationMs": 4343,
+      "failureLogPath": null
     },
     {
       "command": "replayContinuation: npx vitest run src/audit/core-campaign/replay-continuation.test.ts --reporter=basic",
       "exitCode": 0,
-      "durationMs": 5680
+      "durationMs": 4925,
+      "failureLogPath": null
     },
     {
       "command": "contentAudit: npx vite-node scripts/audit/content.ts",
       "exitCode": 0,
-      "durationMs": 4306
+      "durationMs": 11014,
+      "failureLogPath": null
     },
     {
       "command": "rulesAudit: npx vite-node scripts/audit/rules.ts",
       "exitCode": 0,
-      "durationMs": 4614
+      "durationMs": 4497,
+      "failureLogPath": null
     },
     {
-      "command": "runAudit: npx vitest run src/audit/core-campaign/production-command-audit.test.ts --reporter=basic",
+      "command": "productionCommandAudit: npx vitest run src/audit/core-campaign/production-command-audit.test.ts --reporter=basic",
       "exitCode": 0,
-      "durationMs": 3676
-    },
-    {
-      "command": "releaseGate: npx vitest run src/audit/core-campaign/consistency.test.ts --reporter=basic",
-      "exitCode": 0,
-      "durationMs": 8136
+      "durationMs": 3629,
+      "failureLogPath": null
     }
   ],
   "notes": [
     "contentAudit exitCode=0",
-    "rulesAudit exitCode=0",
-    "releaseGate exitCode=0",
-    "release-gate.json not present; using default openP0=1, openP1=0"
+    "rulesAudit exitCode=0"
   ]
 }

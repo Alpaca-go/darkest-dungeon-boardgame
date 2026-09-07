@@ -116,7 +116,7 @@ export const GAME_COMMAND_ROUTE_CONTRACT: GameCommandRouteContract[] = [
     commandType: 'autoBattle',
     routeKind: 'test-policy',
     expectedEntryPoint: 'autoPlayBattle',
-    expectedImportFrom: 'audit/core-campaign/simulation-driver',
+    // autoPlayBattle 定义在 simulation-driver.ts 自身；test-policy 入口不需要跨文件 import。
     reason: '11A.2.2 §19：driver 一律选择「首个合法目标」（确定性 policy），内部走 settleBattleState + declineAllTrinketOpportunities（Production Command）。',
   },
   {
@@ -226,6 +226,12 @@ export interface GameCommandRouteAuditResult {
   unclassifiedCommands: string[];
   /** 登记但 Driver case body 未引用 expected entry point 的 GameCommand。 */
   routeViolations: string[];
+  /**
+   * 登记但 expectedImportFrom 在 Driver 顶部 import 列表中未出现的 GameCommand。
+   * dev doc §7：15/15 import source validated — Driver 真的从声明的模块 import，
+   * 防止「expectedImportFrom 写什么都说得通」的假绿。
+   */
+  importSourceViolations: string[];
   /** 详细登记表（commandType → { routeKind, ok }）。 */
   details: Array<{ commandType: string; routeKind: GameCommandRouteKind; validated: boolean }>;
 }
@@ -240,6 +246,23 @@ export function runGameCommandRouteAudit(): GameCommandRouteAuditResult {
   const details: GameCommandRouteAuditResult['details'] = [];
   const unclassifiedCommands: string[] = [];
   const routeViolations: string[] = [];
+  const importSourceViolations: string[] = [];
+
+  // 0. 提取 driver 所有 import path（dev doc §7：expectedImportFrom 验证）
+  const importRe = /from\s+['"]([^'"]+)['"]/g;
+  const driverImports = new Set<string>();
+  for (const m of driverText.matchAll(importRe)) {
+    driverImports.add(m[1]);
+  }
+  const importPathMatch = (importPath: string, expectedFragment: string): boolean => {
+    // importPath 可能为相对或绝对（已含 /commands 等 fragment）
+    return importPath.includes(expectedFragment);
+  };
+  const expectedImportFragment = (contract: GameCommandRouteContract): string | null => {
+    if (!contract.expectedImportFrom) return null;
+    // 'game-engine/commands' → '/commands'（与 import 路径比较时统一为相对 / 含 fragment）
+    return contract.expectedImportFrom;
+  };
 
   // 1. 从 driver text 提取所有 case 'xxx' 中的 commandType（驼峰）
   const caseRe = /case\s+['"]([a-zA-Z][a-zA-Z]*)['"]\s*:/g;
@@ -263,6 +286,14 @@ export function runGameCommandRouteAudit(): GameCommandRouteAuditResult {
     if (!validated) {
       routeViolations.push(t);
     }
+    // 2b. import source 验证（dev doc §7）
+    const fragment = expectedImportFragment(contract);
+    if (fragment) {
+      const importOk = Array.from(driverImports).some((p) => importPathMatch(p, fragment));
+      if (!importOk) {
+        importSourceViolations.push(t);
+      }
+    }
     details.push({
       commandType: t,
       routeKind: contract.routeKind,
@@ -278,6 +309,7 @@ export function runGameCommandRouteAudit(): GameCommandRouteAuditResult {
     commandRouteValidatedCount: details.filter((d) => d.validated).length,
     unclassifiedCommands,
     routeViolations,
+    importSourceViolations,
     details,
   };
 }
@@ -292,7 +324,8 @@ export function runFullProductionCommandAudit() {
   const commandContractPasses =
     route.commandRouteClassifiedCount === route.commandRouteExpectedCount &&
     route.unclassifiedCommands.length === 0 &&
-    route.routeViolations.length === 0;
+    route.routeViolations.length === 0 &&
+    route.importSourceViolations.length === 0;
   return {
     route,
     pca,
