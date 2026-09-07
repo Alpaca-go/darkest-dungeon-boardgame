@@ -41,16 +41,16 @@ _无_
 
 | ID | 里程碑 | 状态 | State Hash | Quest 数 | 依赖能力 |
 | --- | --- | --- | --- | --- | --- |
-| M00 | 新战役创建完成（4 英雄 + 默认技能） | ✅ 到达 | `6c6c5e37` | 0 | createNewCampaign / selectParty / applyDefaultLoadout |
-| M01 | Act I · Standard Quest 1 结算完成 | ✅ 到达 | `9ab7118d` | 1 | selectQuest / finishQuest / startHamletPhase |
-| M02 | Act I · Standard Quest 2 结算完成 | ✅ 到达 | `3ddaf8ae` | 2 | campaign-progress.withStandardQuestCompleted |
-| M03 | Act I · Boss Quest 胜利 → 进入 Act II | ✅ 到达 | `779a3f99` | 3 | campaign-progress.withActStarted + Boss Quest 可选中 |
-| M04 | Act II · Standard Quest 1 结算完成 | ✅ 到达 | `47737253` | 4 | Act 推进生效 |
-| M05 | Act II · Standard Quest 2 结算完成 | ✅ 到达 | `feced665` | 5 | Act 推进生效 |
-| M06 | Act II · Boss Quest 胜利 → 进入 Act III | ✅ 到达 | `4b8edff6` | 6 | Act 推进生效 |
-| M07 | Act III · Standard Quest 1 结算完成 | ✅ 到达 | `013b3725` | 7 | Act 推进生效 |
-| M08 | Act III · Standard Quest 2 结算完成 | ✅ 到达 | `e53cb2cc` | 8 | Act 推进生效 |
-| M09 | Act III · Boss Quest 胜利 → 第三 Threat 后 Hamlet | ✅ 到达 | `aabc5a9f` | 9 | Act 推进生效 |
+| M00 | 新战役创建完成（4 英雄 + 默认技能） | ✅ 到达 | `334cafc6` | 0 | createNewCampaign / selectParty / applyDefaultLoadout |
+| M01 | Act I · Standard Quest 1 结算完成 | ✅ 到达 | `bd9cfc9d` | 1 | selectQuest / finishQuest / startHamletPhase |
+| M02 | Act I · Standard Quest 2 结算完成 | ✅ 到达 | `15dceb31` | 2 | campaign-progress.withStandardQuestCompleted |
+| M03 | Act I · Boss Quest 胜利 → 进入 Act II | ✅ 到达 | `ba852730` | 3 | campaign-progress.withActStarted + Boss Quest 可选中 |
+| M04 | Act II · Standard Quest 1 结算完成 | ✅ 到达 | `050aaae2` | 4 | Act 推进生效 |
+| M05 | Act II · Standard Quest 2 结算完成 | ✅ 到达 | `c8792978` | 5 | Act 推进生效 |
+| M06 | Act II · Boss Quest 胜利 → 进入 Act III | ✅ 到达 | `c69b3f7f` | 6 | Act 推进生效 |
+| M07 | Act III · Standard Quest 1 结算完成 | ✅ 到达 | `c7b420e7` | 7 | Act 推进生效 |
+| M08 | Act III · Standard Quest 2 结算完成 | ✅ 到达 | `18c08675` | 8 | Act 推进生效 |
+| M09 | Act III · Boss Quest 胜利 → 第三 Threat 后 Hamlet | ✅ 到达 | `cfc2e16f` | 9 | Act 推进生效 |
 | M10 | Darkest Dungeon 解锁 + Guardian Quest 生成 | ❌ 未到达 | — | — | act-four unlock + createGuardianQuest |
 | M11 | Guardian 击败 → Final Hamlet | ❌ 未到达 | — | — | resolveGuardianVictory（官方数据缺失，仅 prototype harness） |
 | M12 | Final Hamlet 4 天完成 | ❌ 未到达 | — | — | startFinalHamlet / advanceFinalHamletDay |
@@ -88,8 +88,8 @@ _无_
 | 两次运行完全一致 | ✅ |
 | 首个分叉事件下标 | -1 |
 | RNG 序列一致 | ✅ |
-| Bundle Hash A | `94ec7ea4` |
-| Bundle Hash B | `94ec7ea4` |
+| Bundle Hash A | `3c9b75af` |
+| Bundle Hash B | `3c9b75af` |
 
 > Milestone Hash 在 `stripVolatile()`（剥离 `id` / `createdAt` / `updatedAt` / `log`）后可稳定复现。
 

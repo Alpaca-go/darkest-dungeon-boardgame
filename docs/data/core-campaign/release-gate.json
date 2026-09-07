@@ -1,7 +1,9 @@
 {
-  "buildPasses": false,
-  "unitPasses": false,
-  "integrationPasses": false,
+  "buildPasses": true,
+  "unitPasses": true,
+  "integrationPasses": true,
+  "commandContractPasses": true,
+  "replayContinuationPasses": true,
   "criticalE2EPasses": false,
   "goldenCampaignPasses": false,
   "replayDeterminismPasses": true,
@@ -21,14 +23,9 @@
   "saveResumeKeyNodesPass": true,
   "ruleTraceabilityP0Complete": false,
   "passed": false,
-  "verdict": "CONDITIONAL",
-  "conclusion": "CONDITIONAL — framework-complete-content-blocked：主循环可闭环，但仍有 1 个 P0 内容缺口。",
-  "unmeasuredGateBits": [
-    "buildPasses",
-    "unitPasses",
-    "integrationPasses",
-    "criticalE2EPasses"
-  ],
+  "verdict": "NOT-VERIFIED",
+  "conclusion": "NOT-VERIFIED — criticalE2EPasses=false；Playwright E2E 必须真实跑过 6 spec 才能算 verified。",
+  "unmeasuredGateBits": [],
   "dataGates": {
     "officialGuardianPoolEnabled": false,
     "officialFinalEncounterEnabled": false,

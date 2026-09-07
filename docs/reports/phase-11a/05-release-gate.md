@@ -4,7 +4,7 @@
 
 ## 最终判定
 
-# CONDITIONAL — framework-complete-content-blocked：主循环可闭环，但仍有 1 个 P0 内容缺口。
+# NOT-VERIFIED — criticalE2EPasses=false；Playwright E2E 必须真实跑过 6 spec 才能算 verified。
 
 ## 门禁明细
 

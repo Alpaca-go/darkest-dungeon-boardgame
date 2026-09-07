@@ -32,11 +32,43 @@ const officialMathRandom = rng.findings.filter(
     !f.allowlisted,
 ).length;
 
+// 11A.2.3R §10-12（dev doc fix #5）：audit:release-gate 必须从 docs/data/core-campaign/verification-results.json
+// 读实测 flags 注入 runAudit，不再只用 env 兜底（env 仍允许覆盖 verification-results.json）。
+import { readFileSync, existsSync } from 'fs';
+const VERIFICATION_RESULTS = join(REPO_ROOT, 'docs/data/core-campaign/verification-results.json');
+interface VerificationResults {
+  buildPasses?: boolean;
+  unitPasses?: boolean;
+  integrationPasses?: boolean;
+  criticalE2EPasses?: boolean | 'not-measured';
+  commandContractPasses?: boolean;
+  replayContinuationPasses?: boolean;
+  goldenPasses?: boolean;
+  replayDeterminismPasses?: boolean;
+  productionCommandLayerPasses?: boolean;
+  verificationFresh?: boolean;
+  openP0?: number;
+  openP1?: number;
+  campaignOrchestrationReachable?: boolean;
+}
+function readVerificationResults(): VerificationResults | null {
+  if (!existsSync(VERIFICATION_RESULTS)) return null;
+  try {
+    return JSON.parse(readFileSync(VERIFICATION_RESULTS, 'utf8'));
+  } catch {
+    return null;
+  }
+}
+const vr = readVerificationResults();
+
 const report = runAudit({
-  buildPasses: envFlag('PHASE11A_BUILD'),
-  unitPasses: envFlag('PHASE11A_UNIT'),
-  integrationPasses: envFlag('PHASE11A_INTEGRATION'),
-  criticalE2EPasses: envFlag('PHASE11A_E2E'),
+  buildPasses: envFlag('PHASE11A_BUILD') ?? vr?.buildPasses,
+  unitPasses: envFlag('PHASE11A_UNIT') ?? vr?.unitPasses,
+  integrationPasses: envFlag('PHASE11A_INTEGRATION') ?? vr?.integrationPasses,
+  criticalE2EPasses: envFlag('PHASE11A_E2E') ?? (vr?.criticalE2EPasses === true),
+  commandContractPasses: vr?.commandContractPasses,
+  replayContinuationPasses: vr?.replayContinuationPasses,
+  verificationFresh: vr?.verificationFresh,
   mathRandomLeaksInOfficialPath: officialMathRandom,
 });
 
@@ -98,16 +130,15 @@ written.push(
  * 但直接把 false 呈现成 ❌ 会反向失真 —— 读者会以为 build 真的挂了。
  * 这里把「env flag 未提供」的位单独记下来，报告侧渲染成「⚪ 未验证」。
  */
-const unmeasuredGateBits = (
-  [
-    ['buildPasses', 'PHASE11A_BUILD'],
-    ['unitPasses', 'PHASE11A_UNIT'],
-    ['integrationPasses', 'PHASE11A_INTEGRATION'],
-    ['criticalE2EPasses', 'PHASE11A_E2E'],
-  ] as const
-)
-  .filter(([, env]) => envFlag(env) === undefined)
-  .map(([bit]) => bit);
+const unmeasuredGateBits: string[] = [];
+if (envFlag('PHASE11A_BUILD') === undefined && vr?.buildPasses === undefined) unmeasuredGateBits.push('buildPasses');
+if (envFlag('PHASE11A_UNIT') === undefined && vr?.unitPasses === undefined) unmeasuredGateBits.push('unitPasses');
+if (envFlag('PHASE11A_INTEGRATION') === undefined && vr?.integrationPasses === undefined) unmeasuredGateBits.push('integrationPasses');
+if (envFlag('PHASE11A_E2E') === undefined && vr?.criticalE2EPasses === undefined) unmeasuredGateBits.push('criticalE2EPasses');
+// 11A.2.3R §10-12：command contract / replay continuation 仅从 verification-results.json 注入
+// （无 env 兜底），缺字段 → unmeasured。
+if (vr?.commandContractPasses === undefined) unmeasuredGateBits.push('commandContractPasses');
+if (vr?.replayContinuationPasses === undefined) unmeasuredGateBits.push('replayContinuationPasses');
 
 written.push(
   writeJson('release-gate.json', { ...gate, unmeasuredGateBits, dataGates, ruleSummary }),

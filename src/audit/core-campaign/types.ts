@@ -153,6 +153,16 @@ export interface ReleaseGateResult {
   unitPasses: boolean;
   integrationPasses: boolean;
   criticalE2EPasses: boolean;
+  /**
+   * 11A.2.3R §10-12（dev doc fix #1）：command contract 独立 measured。
+   * 由 verify-phase11a2-3.ts 独立跑 game-command-route-contract.test.ts 后注入。
+   */
+  commandContractPasses: boolean;
+  /**
+   * 11A.2.3R §10-12：Replay Continuation（RC-C-01..05）独立 measured。
+   * 与 replayDeterminismPasses 区分：后者只验 A/B 同 seed 一致；前者验 real replay continuation。
+   */
+  replayContinuationPasses: boolean;
   goldenCampaignPasses: boolean;
   replayDeterminismPasses: boolean;
   openP0: number;

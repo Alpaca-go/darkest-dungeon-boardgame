@@ -540,6 +540,16 @@ export interface RunAuditOptions {
   unitPasses?: boolean;
   integrationPasses?: boolean;
   criticalE2EPasses?: boolean;
+  /**
+   * 11A.2.3R §10-12（dev doc fix #1）：command contract 不再 = unit，独立 measured。
+   * verification-results.json.commandContractPasses 注入。
+   */
+  commandContractPasses?: boolean;
+  /**
+   * 11A.2.3R §10-12：Replay Continuation 独立 measured（与 replayDeterminism 区分）。
+   * verification-results.json.replayContinuationPasses 注入。
+   */
+  replayContinuationPasses?: boolean;
   /** 11A.2.3 §22.2：verification-results.json 是否 fresh（未提供时按 stale 处理）。 */
   verificationFresh?: boolean;
   /** RNG 源扫描结果由 node 侧注入（本模块保持纯净、不读文件系统）。 */
@@ -920,6 +930,8 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
     buildPasses: input.options.buildPasses ?? false,
     unitPasses: input.options.unitPasses ?? false,
     integrationPasses: input.options.integrationPasses ?? false,
+    commandContractPasses: input.options.commandContractPasses ?? false,
+    replayContinuationPasses: input.options.replayContinuationPasses ?? false,
     criticalE2EPasses: input.options.criticalE2EPasses ?? false,
     goldenCampaignPasses: elevenQuestLoopClosed,
     replayDeterminismPasses: input.replayDeterminism.identical,
@@ -960,6 +972,10 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
   // 关键：Content Blocked (P0-002) 不能遮住 Test Gate 未完成（11A.2.3 §22）。
   const verificationStale = !input.options.verificationFresh;
   const criticalE2EUnmeasured = input.options.criticalE2EPasses !== true;
+  // 11A.2.3R §10-12（dev doc fix #1 + #4）：command contract + replay continuation 独立 measured，
+  // 任一未注入或 fail → NOT-VERIFIED。
+  const commandContractUnmeasured = input.options.commandContractPasses !== true;
+  const replayContinuationUnmeasured = input.options.replayContinuationPasses !== true;
   if (gate.engineDeadlocks > 0) {
     gate.verdict = 'FAIL';
     gate.passed = false;
@@ -976,6 +992,16 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
     gate.verdict = 'NOT-VERIFIED';
     gate.passed = false;
     gate.conclusion = 'NOT-VERIFIED — criticalE2EPasses=false；Playwright E2E 必须真实跑过 6 spec 才能算 verified。';
+  } else if (commandContractUnmeasured) {
+    // 11A.2.3R §10-12 fix #1：command contract 必须独立 measured（dev doc 明确禁止 unitPasses 替 commandContractPasses）。
+    gate.verdict = 'NOT-VERIFIED';
+    gate.passed = false;
+    gate.conclusion = 'NOT-VERIFIED — commandContractPasses=false / unmeasured；verify-phase11a2-3 必须独立跑 game-command-route-contract.test.ts。';
+  } else if (replayContinuationUnmeasured) {
+    // 11A.2.3R §10-12：Replay Continuation（RC-C-01..05）必须独立 measured。
+    gate.verdict = 'NOT-VERIFIED';
+    gate.passed = false;
+    gate.conclusion = 'NOT-VERIFIED — replayContinuationPasses=false / unmeasured；verify-phase11a2-3 必须独立跑 replay-continuation.test.ts。';
   } else if (!productionCommandLayerPasses) {
     // 11A.2.3 §22.3: production command layer fail → FAIL。
     gate.verdict = 'FAIL';
