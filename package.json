@@ -9,6 +9,8 @@
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
+    "test:integration": "vitest run src/integration",
+    "test:e2e:critical": "playwright test e2e/phase11a2-critical-campaign.spec.ts",
     "audit:content": "vite-node scripts/audit/content.ts",
     "audit:rules": "vite-node scripts/audit/rules.ts",
     "audit:release-gate": "vite-node scripts/audit/release-gate.ts",
