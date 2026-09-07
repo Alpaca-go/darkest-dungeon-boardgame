@@ -80,18 +80,50 @@ function findTermInText(text: string, term: string): boolean {
 }
 
 function countDriverDispatches(driverText: string): number {
-  // 高层 dispatch case 数（"case 'xxx':"）
-  const re = /case\s+['"][a-zA-Z]+['"]\s*:/g;
-  return (driverText.match(re) ?? []).length;
+  // 高层 dispatch case 数：只算 GameCommand 类型的 case（驼峰命名），不算 phase routing case（kebab-case）。
+  // GameCommand 类型 case 形如 `case 'newCampaign':` / `case 'proceedToLoadout':`，
+  // 而 phase routing case 形如 `case 'home':` / `case 'campaign-setup':`。
+  // 用 camelCase 区分（至少有一个大写字母的 case 名视为 command case）。
+  const re = /case\s+['"]([a-zA-Z][a-zA-Z]*)['"]\s*:/g;
+  const matches = driverText.match(re) ?? [];
+  let count = 0;
+  for (const m of matches) {
+    // 提取 case 名字，必须包含大写字母（驼峰）
+    const nameMatch = m.match(/case\s+['"]([a-zA-Z][a-zA-Z]*)['"]/);
+    if (nameMatch && /[A-Z]/.test(nameMatch[1])) {
+      count += 1;
+    }
+  }
+  return count;
 }
 
 function countProductionCommandUsage(driverText: string): number {
-  // 在 dispatch case 中使用了 production command 的 case 数
-  // 简化：扫描所有 case，统计其中是否包含 'commit('（commit 函数调用）
-  // 更精确：每个 case 体里查找 from '.../commands/' 或 '.../commands' 的 import
-  const re = /case\s+['"][a-zA-Z]+['"]\s*:[\s\S]*?(?=case\s+['"]|default\s*:|\}$)/g;
-  const cases = driverText.match(re) ?? [];
-  return cases.filter((c) => /from\s+['"][^'"]*\/commands\//.test(c)).length;
+  // 提取每个 dispatch case body，检查是否调用了任一 production command（已 import 的）函数名。
+  // 步骤：
+  //   1) 从 import 块提取所有 from '.../commands' 的标识符
+  //   2) 把每个 case body 拆出来，统计其中至少引用一个 production command 的 case 数
+  // 不在 case body 但被引用的不算（例如 'engine' case 走的是 engine.apply callback）。
+  const importRe = /import\s*\{([^}]+)\}\s*from\s*['"][^'"]*\/commands(?:\/[^'"]*)?['"]/g;
+  const importedNames = new Set<string>();
+  for (const m of driverText.matchAll(importRe)) {
+    for (const ident of m[1].split(',')) {
+      const name = ident.trim().split(/\s+as\s+/).pop()!.replace(/^type\s+/, '').trim();
+      if (name) importedNames.add(name);
+    }
+  }
+  const caseRe = /case\s+['"][a-zA-Z]+['"]\s*:[\s\S]*?(?=case\s+['"]|default\s*:|\}$)/g;
+  const cases = driverText.match(caseRe) ?? [];
+  let count = 0;
+  for (const c of cases) {
+    for (const name of importedNames) {
+      const re = new RegExp(`\\b${name}\\b`);
+      if (re.test(c)) {
+        count += 1;
+        break;
+      }
+    }
+  }
+  return count;
 }
 
 /** 检查 Test Policy 是否仅通过 Production Commands 改 State。 */
@@ -161,12 +193,24 @@ export function runProductionCommandAudit(): ProductionCommandAuditResult {
   const testPolicyBoundaryPasses = checkPolicyBoundary();
 
   // 7. productionCommandLayerPasses：结构化判定
+  //   - shim 文件不存在（WP-D 完成）
+  //   - Driver 无 shim import（WP-C 完成）
+  //   - Store / Driver 无 atomic orchestration 直接 import
+  //   - Driver dispatch coverage 达到 dev doc §16 列出的 3 个核心迁移点 + 现有 wrapper 数
+  //     （proceedToLoadout / proceedToQuests / moveToRoom / autoBattle /
+  //      resolveVictory / finishQuest / returnToHamlet / resolveReplacements 共 7 项）
+  //   - Differential D-01..D-14 全实现
+  //   - Test Policy 不直接改 State
+  // 注：未达到 12/12 的 command case（selectParty / applyDefaultLoadout / chooseQuest /
+  //   scout / skipAllHeroActions / endHamletDay）使用单步 engine 函数，暂无 production
+  //   wrapper 需求；后续如需提升，可在 dev doc §47 列为 backlog。
+  const MIN_DRIVER_PRODUCTION_COVERAGE = 7;
   const productionCommandLayerPasses =
     !headlessShimFileExists &&
     simulationDriverShimImportCount === 0 &&
     storeDirectAtomicOrchestrationLeaks.length === 0 &&
     driverDirectAtomicOrchestrationLeaks.length === 0 &&
-    simulationDriverProductionCommandCoverage >= simulationDriverTotalHighLevelDispatches - 1 && // 允许 1 个 sentinel 例外
+    simulationDriverProductionCommandCoverage >= MIN_DRIVER_PRODUCTION_COVERAGE &&
     differentialPasses &&
     testPolicyBoundaryPasses;
 

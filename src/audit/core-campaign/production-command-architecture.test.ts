@@ -57,13 +57,20 @@ describe('Production Command Architecture (Phase 11A.2.1 §43)', () => {
     expect(driverText).not.toMatch(/\bshimResolveReplacements\b/);
   });
 
-  it('25. headless-shim 文件在 P1-006 完全关闭前保留为 Test Policy Helper（标注）', () => {
-    // dev doc 要求 shim 不存在；11A.2.1 partial 仍保留。
-    // 此处只验证：headless-shim.ts 在 src/audit/core-campaign/ 存在并有 shimResolveVictory + shimReturnToHamlet 包装。
+  it('25. headless-shim.ts 已删除（Phase 11A.2.2 §21）', () => {
+    // dev doc §21：Differential 14/14 全过后删除 headless-shim.ts。
+    // 这里断言：headless-shim.ts 在 src/audit/core-campaign/ 不再存在；
+    // 全仓搜索 shimResolveVictory / shimReturnToHamlet / settleBattleHeadless 等
+    // 标识符在 runtime code（src/store, src/audit/core-campaign/simulation-driver.ts）
+    // 中应 = 0。
     const shimPath = join(SRC, 'audit/core-campaign/headless-shim.ts');
-    const shimText = readFileSync(shimPath, 'utf8');
-    expect(shimText).toMatch(/export function shimResolveVictory/);
-    expect(shimText).toMatch(/export function shimReturnToHamlet/);
+    expect(() => readFileSync(shimPath, 'utf8')).toThrow();
+    // Driver 不应再出现 shim 高层标识符
+    const driverText = readFileSync(join(SRC, 'audit/core-campaign/simulation-driver.ts'), 'utf8');
+    expect(driverText).not.toMatch(/shimResolveVictory/);
+    expect(driverText).not.toMatch(/shimReturnToHamlet/);
+    expect(driverText).not.toMatch(/settleBattleHeadless/);
+    expect(driverText).not.toMatch(/declineAllTrinketOpportunitiesHeadless/);
   });
 
   it('26. ui-store-shim runtime marker 不再出现在 commit() 调用', () => {
