@@ -10,16 +10,14 @@
 import { describe, expect, it } from 'vitest';
 import { stableHashState } from './types';
 import { generateContentManifest } from './content-manifest';
-import { runAudit, type AuditReport, evaluateReleaseGate, buildIssues, type RunAuditOptions } from './run-audit';
+import { runAudit, type AuditReport, type RunAuditOptions } from './run-audit';
 import { runProductionCommandAudit } from './production-command-audit';
-import { runGoldenCampaignAttempt, verifyReplayDeterminism } from './run-audit';
 
 const BASE_OPTIONS: RunAuditOptions = {
   buildPasses: true,
   unitPasses: true,
   integrationPasses: true,
   criticalE2EPasses: false, // C-07 E2E 暂未做（WP-G 待 Playwright E2E）
-  verificationInputHash: 'consistency-test-hash',
 };
 
 describe('Consistency Tests C-01..C-10 (Phase 11A.2.2 §36)', () => {

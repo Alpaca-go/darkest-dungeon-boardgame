@@ -27,15 +27,12 @@ import {
   commitLeaveDungeon,
   commitReturnToHamlet,
   commitBattleVictory,
-  commitQuestFailureFromDefeat,
   resolveReplacementsFlow,
   declineAllTrinketOpportunities,
   resolveAllPendingTrinketAllocations,
   settleBattleState,
 } from '../../game-engine/commands';
 import { selectQuest } from '../../game-engine/campaign';
-import { endHamletDay, skipHeroAction } from '../../game-engine/hamlet';
-import { canScout, scoutDungeon } from '../../game-engine/dungeon';
 
 function withSeeded<T>(seedId: string, fn: () => T): T {
   return withRuntimeSources(seededRuntimeSources(seedToInt(seedId)), fn);
