@@ -1,11 +1,16 @@
-// Phase 11A.2 §18, §21 — Replacement Production Commands。
+// Phase 11A.2.1 — Replacement Production Commands（Finding B + E 修复）。
 //
 // 职责：
-//   - retargetPendingReplacement（§18 正式导出；从 Store 私有迁出）
+//   - retargetPendingReplacement（§18 正式导出；唯一权威实现，quest commands 复用）
 //   - resolveReplacementsFlow（§21：用 Golden 确定性策略驱动 replacement 循环）
 //
-// Store / Simulation Driver 都引用本模块的 retargetPendingReplacement。
-import type { CampaignState, HeroInstance } from '../../types';
+// 修复点：
+//   - 之前 resolveReplacementsFlow 使用 `before.id` 作为 slotId，但官方 API 是
+//     `findSlot(campaign, slotId)` 通过 `s.deadCampaignHeroId === slotId` 查找，
+//     必须逐个 slot 处理，使用 `slot.deadCampaignHeroId`。
+//   - retargetPendingReplacement 唯一权威实现（在 commands/）；
+//     commands/quest.ts 内部不再有 retargetPendingReplacementInternal。
+import type { CampaignState, HeroInstance, ReplacementSlot } from '../../types';
 import {
   selectReplacementHero as engineSelectReplacementHero,
   confirmReplacement as engineConfirmReplacement,
@@ -17,7 +22,7 @@ import { HEROES } from '../../data/heroes';
 export type ReplacementResumePhase = 'dungeon-explore' | 'quest-result' | 'hamlet';
 
 // ---------------------------------------------------------------------------
-// 1. retargetPendingReplacement（§18）
+// 1. retargetPendingReplacement（§18 唯一权威实现）
 // ---------------------------------------------------------------------------
 
 /**
@@ -42,15 +47,11 @@ export function retargetPendingReplacement(
 }
 
 // ---------------------------------------------------------------------------
-// 2. resolveReplacementsFlow（§21）
+// 2. resolveReplacementsFlow（§21 + Finding B 修复）
 //
-// 保留单槽位原子规则（selectReplacementHero / confirmReplacement /
-// completeReplacementFlow）。Golden Driver 使用 DeterministicReplacementPolicy：
-//   - 选人：取数据中第一个未在役的 Hero；
-//   - confirm：不加升级；
-//   - 循环直到所有槽位解决。
-//
-// 真实玩家流程不走本函数；本函数只用于 headless 模拟 / 集成测试。
+// 修复前：用 `before.id`（PendingReplacementState.id）当 slotId。
+//          官方 `findSlot()` 用 `s.deadCampaignHeroId === slotId`，所以调用必然找不到 slot。
+// 修复后：逐个 slot 处理，对每个未确认的 slot 用 `slot.deadCampaignHeroId` 调用原子 API。
 // ---------------------------------------------------------------------------
 
 export interface DeterministicReplacementPolicy {
@@ -72,6 +73,17 @@ function defaultPickHero(campaign: CampaignState): string | null {
   return null;
 }
 
+/** 找到第一个未确认的 slot。 */
+function findUnconfirmedSlot(
+  slots: ReplacementSlot[] | undefined,
+): ReplacementSlot | null {
+  if (!slots) return null;
+  for (const s of slots) {
+    if (!s.confirmed) return s;
+  }
+  return null;
+}
+
 export function resolveReplacementsFlow(
   campaign: CampaignState,
   policy: DeterministicReplacementPolicy = defaultPolicy,
@@ -82,7 +94,10 @@ export function resolveReplacementsFlow(
   while (round++ < maxRounds) {
     const before = next.stagecoach.pendingReplacement;
     if (!before || before.resolved) break;
-    const slotId = before.id;
+    // 找到第一个未确认的 slot（按 dev doc §5 B 修复点）
+    const slot = findUnconfirmedSlot(before.slots);
+    if (!slot) break;
+    const slotId = slot.deadCampaignHeroId; // 官方 API 用 deadCampaignHeroId
     const heroId = (policy.pickHero ?? defaultPickHero)(next);
     if (!heroId) break;
     let step = engineSelectReplacementHero(next, slotId, heroId);

@@ -5,7 +5,7 @@
 | 等级 | 数量 |
 | --- | --- |
 | P0 open | 1 |
-| P1 open | 1 |
+| P1 open | 0 |
 | P2 open | 2 |
 
 ---
@@ -33,20 +33,6 @@
 - **实际**：缺失 157 条。
 - **复现命令**：`npm run audit:content`
 - **回归测试**：`content-manifest.test.ts:source-reference-coverage`
-
----
-
-## ISSUE-P1-006 · P1 · architecture
-
-**战役编排层只存在于 UI store / 页面，game-engine 缺少对应入口**
-
-- **状态**：open
-- **描述**：战役状态机被劈成两半：game-engine 只导出「原子步骤」，把它们串起来的编排层写在 src/store/useGameStore.ts 与 UI 页面里，且没有任何引擎侧导出。已实测到的缺口包括：① gamePhase 的 campaign-setup → skill-loadout → quest-select 迁移（store proceedToLoadout/proceedToQuests，引擎只有守卫 canProceedToLoadout()/isLoadoutComplete()）；② settleBattle 的 6 步战斗结算流水线（store:310-341，模块私有闭包）；③ moveToRoom / resolveVictory / leaveDungeon / failQuestFromDefeat / returnToHamlet 的组合动作；④ Trinket before-attack-roll 机会的批量结清（不结清则 pendingAction 永久冻结）；⑤ pendingTrinketAllocations 的批量结清（不结清则 startHamletPhase 静默返回原 state）；⑥ retargetPendingReplacement（store 模块私有函数，引擎无等价导出）；⑦ 替补流程「遍历所有未确认槽位」的循环（只在 ReplacementPage）。结果：任何无头驱动（Simulation Driver / Golden Run / Replay / 回归测试）都必须复制一份 UI 逻辑（见 src/audit/core-campaign/headless-shim.ts），存在长期不同步风险。
-- **期望**：所有 gamePhase 迁移与组合动作都由 game-engine 导出的纯函数负责，store 只做转发；删除 headless-shim.ts 后无头驱动仍能跑完整局。
-- **实际**：Golden Run 中有 7 类步骤依赖 UI-store-shim：proceedToLoadout, proceedToQuests, moveToRoom, autoBattle, resolveVictory, finishQuest, returnToHamlet。
-- **复现 seed**：`golden-normal-success-01`
-- **复现命令**：`npm run test:golden`
-- **回归测试**：`simulation-driver.test.ts:no-ui-store-shim-required`
 
 ---
 

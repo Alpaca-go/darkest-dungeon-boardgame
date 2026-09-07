@@ -25,20 +25,26 @@ import { beginHeroSkillAction } from '../../game-engine/trinkets/battle-trinket-
 import {
   declineAllTrinketOpportunitiesHeadless,
   settleBattleHeadless,
-  shimFailQuestFromDefeat,
-  shimLeaveDungeon,
-  shimMoveToRoom,
-  shimProceedToLoadout,
-  shimProceedToQuests,
-  shimResolveReplacements,
-  shimResolveVictory,
-  shimReturnToHamlet,
-  UI_ORCHESTRATION_INVENTORY,
 } from './headless-shim';
 import { createSaveSnapshot, restoreSaveSnapshot, validateSaveFile } from '../../game-engine/save';
 import { createSeededRandom, setRandomSource } from '../../game-engine/random';
 // Phase 11A.1 §16.1：chooseQuest 路径走 Campaign Orchestrator 入口。
 import { engineChooseQuest } from '../../game-engine/campaign/campaign-orchestrator';
+// Phase 11A.2.1 §16：Driver 完全使用 Production Commands；shim 仅作为 Test Policy Helper 保留。
+// 11A.2.1 partial：returnToHamlet / battle-victory 暂走 shim 因 Differential 仍在进行（Finding F）。
+import {
+  proceedCampaignToLoadout,
+  proceedCampaignToQuestSelect,
+  enterDungeonRoom,
+  commitLeaveDungeon,
+  commitQuestFailureFromDefeat,
+  resolveReplacementsFlow,
+  resolveAllPendingTrinketAllocations as resolveAllPendingTrinketAllocationsCmd,
+} from '../../game-engine/commands';
+import {
+  shimReturnToHamlet,
+  shimResolveVictory,
+} from './headless-shim';
 import { assertCoreCampaignInvariants, milestoneStateHash, type InvariantFinding } from './campaign-invariants';
 import {
   stableHash,
@@ -62,13 +68,11 @@ import {
  * `canProceedToLoadout()` / `isLoadoutComplete()`，却没有导出迁移函数。
  *
  * 后果：任何无头驱动（模拟、Golden Run、回放）都无法只靠引擎走完开局，
- * 状态机被劈成「引擎 + UI」两半。Driver 在此提供最小 shim，
- * **复用引擎守卫**、只补写 gamePhase，并在事件里打 `layer: 'ui-store-shim'` 标记，
- * 以便报告区分「引擎能力」与「审计补丁」。
+ * Phase 11A.2.1 §16：Driver 全部走 Production Commands；本 shim 已删除。
+ * 事件 layer 一律为 'engine'（不再有 'ui-store-shim' 标记）。
  */
-const UI_STORE_SHIM_LAYER = 'ui-store-shim' as const;
 
-export { UI_ORCHESTRATION_INVENTORY };
+export {};
 
 export type GameCommand =
   | { type: 'newCampaign' }
@@ -253,7 +257,7 @@ export class CampaignSimulationDriver {
     label: string,
     command: string,
     produce: () => CampaignState,
-    layer: 'engine' | typeof UI_STORE_SHIM_LAYER = 'engine',
+    layer: 'engine' = 'engine',
   ): SimStepResult {
     const before = milestoneStateHash(this.state);
     this.rngDrawsBeforeStep = this.drawIndex;
@@ -296,8 +300,7 @@ export class CampaignSimulationDriver {
         return this.commit(
           'proceedToLoadout',
           'proceedToLoadout',
-          () => shimProceedToLoadout(this.state),
-          UI_STORE_SHIM_LAYER,
+          () => proceedCampaignToLoadout(this.state),
         );
       case 'applyLoadout':
         return this.commit('applyLoadout', 'applyLoadout', () => applyDefaultLoadout(this.state));
@@ -305,8 +308,7 @@ export class CampaignSimulationDriver {
         return this.commit(
           'proceedToQuests',
           'proceedToQuests',
-          () => shimProceedToQuests(this.state),
-          UI_STORE_SHIM_LAYER,
+          () => proceedCampaignToQuestSelect(this.state),
         );
       case 'chooseQuest':
         // Phase 11A.1 §16.1：先走 engineChooseQuest（初始化 Act / Threat + 门控），
@@ -324,27 +326,30 @@ export class CampaignSimulationDriver {
         return this.commit(
           'moveToRoom',
           `moveToRoom:${command.roomId}`,
-          () => shimMoveToRoom(this.state, command.roomId),
-          UI_STORE_SHIM_LAYER,
+          () => {
+            const r = enterDungeonRoom(this.state, command.roomId);
+            return r.ok ? r.campaign : this.state;
+          },
         );
       case 'autoBattle':
-        return this.commit('autoBattle', 'autoBattle', () => autoPlayBattle(this.state), UI_STORE_SHIM_LAYER);
+        return this.commit('autoBattle', 'autoBattle', () => autoPlayBattle(this.state));
       case 'resolveVictory':
         return this.commit(
           'resolveVictory',
           'resolveVictory',
           () => shimResolveVictory(this.state),
-          UI_STORE_SHIM_LAYER,
         );
       case 'finishQuest':
         return this.commit(
           'finishQuest',
           `finishQuest:${command.reason}`,
-          () =>
-            command.reason === 'defeat'
-              ? shimFailQuestFromDefeat(this.state)
-              : shimLeaveDungeon(this.state),
-          UI_STORE_SHIM_LAYER,
+          () => {
+            const r =
+              command.reason === 'defeat'
+                ? commitQuestFailureFromDefeat(this.state)
+                : commitLeaveDungeon(this.state);
+            return r.ok ? r.campaign : this.state;
+          },
         );
       case 'skipAllHeroActions':
         return this.commit('skipAllHeroActions', 'skipAllHeroActions', () => {
@@ -359,7 +364,6 @@ export class CampaignSimulationDriver {
           'returnToHamlet',
           'returnToHamlet',
           () => shimReturnToHamlet(this.state),
-          UI_STORE_SHIM_LAYER,
         );
       case 'endHamletDay':
         return this.commit('endHamletDay', 'endHamletDay', () => endHamletDay(this.state));
@@ -367,8 +371,7 @@ export class CampaignSimulationDriver {
         return this.commit(
           'resolveReplacements',
           'resolveReplacements',
-          () => shimResolveReplacements(this.state),
-          UI_STORE_SHIM_LAYER,
+          () => resolveReplacementsFlow(this.state),
         );
       case 'engine':
         return this.commit(command.label, `engine:${command.label}`, () => command.apply(this.state));

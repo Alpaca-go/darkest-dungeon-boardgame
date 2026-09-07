@@ -29,7 +29,8 @@ export type BattleSettlementError =
   | 'mental-guard-exceeded'
   | 'battle-not-active'
   | 'battle-not-victory'
-  | 'battle-not-active-for-retreat';
+  | 'battle-not-active-for-retreat'
+  | 'battle-settlement-failed';
 
 export interface BattleSettlementResult {
   ok: boolean;
@@ -109,15 +110,21 @@ export function settleBattleState(
 
 /**
  * 战斗胜利正式入口：settleBattleState → engineResolveVictory → evaluateReplacementFlow。
+ * 与 Legacy Shim 顺序一致（dev doc §9 + §11）。
  * 不在 UI 自行组合。
  */
 export function commitBattleVictory(campaign: CampaignState): BattleSettlementResult {
   if (!campaign.battle || campaign.battle.status !== 'victory') {
     return { ok: false, campaign, error: 'battle-not-victory', mentalLoops: 0 };
   }
-  let next = engineResolveVictory(campaign);
+  // §11：terminal 状态也要先结算 effects（death/stress/rule/disease/mental）。
+  const settled = settleBattleState(campaign);
+  if (!settled.ok) {
+    return { ok: false, campaign: settled.campaign, error: 'battle-settlement-failed', mentalLoops: settled.mentalLoops };
+  }
+  let next = engineResolveVictory(settled.campaign);
   next = evaluateReplacementFlow(next);
-  return { ok: true, campaign: next, error: null, mentalLoops: 0 };
+  return { ok: true, campaign: next, error: null, mentalLoops: settled.mentalLoops };
 }
 
 // ---------------------------------------------------------------------------

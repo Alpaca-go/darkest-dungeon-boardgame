@@ -38,6 +38,7 @@ import {
   commitQuestFailureFromDefeat,
   commitReturnToHamlet,
   resolveReplacementsFlow,
+  resolveAllPendingTrinketAllocations,
 } from '../game-engine/commands';
 import {
   acquireQuirk as engineAcquireQuirk,
@@ -497,10 +498,15 @@ export const useGameStore = create<GameStore>((set, get) => {
       const actKey = c.campaignProgress.act;
       const questRunId =
         c.dungeon?.questRunId ?? `${questId}:act${actKey}:${Date.now()}`;
+      // Phase 11A.2.1 Finding D：必须为 unresolved Trinket Allocation 提供 resolver。
+      // 此处使用「清空所有 pending allocations」的兜底策略（只用于 Store 的 commit 路径），
+      // 真实玩家决策由 UI 弹窗或 Test Policy 决定；Engine 不会自动 assign。
       const result = commitReturnToHamlet(c, {
         questId,
         questRunId,
         questOutcome: summary?.outcome ?? 'incomplete',
+      }, {
+        resolveAllocations: (cand) => resolveAllPendingTrinketAllocations(cand),
       });
       if (!result.ok) return;
       commit(result.campaign);

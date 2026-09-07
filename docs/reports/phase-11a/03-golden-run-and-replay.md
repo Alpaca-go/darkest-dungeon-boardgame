@@ -31,13 +31,7 @@
 
 ### 1.2 不得不使用的 UI-store-shim 步骤（ISSUE-P1-006 证据）
 
-- `proceedToLoadout`
-- `proceedToQuests`
-- `moveToRoom`
-- `autoBattle`
-- `resolveVictory`
-- `finishQuest`
-- `returnToHamlet`
+_无_
 
 > 上述步骤在 `src/game-engine/**` 中**没有可调用的编排入口**，只存在于
 > `src/store/useGameStore.ts` / UI 页面。无头驱动必须在
@@ -47,16 +41,16 @@
 
 | ID | 里程碑 | 状态 | State Hash | Quest 数 | 依赖能力 |
 | --- | --- | --- | --- | --- | --- |
-| M00 | 新战役创建完成（4 英雄 + 默认技能） | ✅ 到达 | `47c47cfe` | 0 | createNewCampaign / selectParty / applyDefaultLoadout |
-| M01 | Act I · Standard Quest 1 结算完成 | ✅ 到达 | `9044b877` | 1 | selectQuest / finishQuest / startHamletPhase |
-| M02 | Act I · Standard Quest 2 结算完成 | ✅ 到达 | `8e255121` | 2 | campaign-progress.withStandardQuestCompleted |
-| M03 | Act I · Boss Quest 胜利 → 进入 Act II | ✅ 到达 | `6a7b9bc6` | 3 | campaign-progress.withActStarted + Boss Quest 可选中 |
-| M04 | Act II · Standard Quest 1 结算完成 | ✅ 到达 | `d4c9d3e8` | 4 | Act 推进生效 |
-| M05 | Act II · Standard Quest 2 结算完成 | ✅ 到达 | `820a3984` | 5 | Act 推进生效 |
-| M06 | Act II · Boss Quest 胜利 → 进入 Act III | ✅ 到达 | `fd68a6d2` | 6 | Act 推进生效 |
-| M07 | Act III · Standard Quest 1 结算完成 | ✅ 到达 | `5ff5297a` | 7 | Act 推进生效 |
-| M08 | Act III · Standard Quest 2 结算完成 | ✅ 到达 | `a9dcb3a7` | 8 | Act 推进生效 |
-| M09 | Act III · Boss Quest 胜利 → 第三 Threat 后 Hamlet | ✅ 到达 | `c4a27c59` | 9 | Act 推进生效 |
+| M00 | 新战役创建完成（4 英雄 + 默认技能） | ✅ 到达 | `6c6c5e37` | 0 | createNewCampaign / selectParty / applyDefaultLoadout |
+| M01 | Act I · Standard Quest 1 结算完成 | ✅ 到达 | `9ab7118d` | 1 | selectQuest / finishQuest / startHamletPhase |
+| M02 | Act I · Standard Quest 2 结算完成 | ✅ 到达 | `3ddaf8ae` | 2 | campaign-progress.withStandardQuestCompleted |
+| M03 | Act I · Boss Quest 胜利 → 进入 Act II | ✅ 到达 | `779a3f99` | 3 | campaign-progress.withActStarted + Boss Quest 可选中 |
+| M04 | Act II · Standard Quest 1 结算完成 | ✅ 到达 | `47737253` | 4 | Act 推进生效 |
+| M05 | Act II · Standard Quest 2 结算完成 | ✅ 到达 | `feced665` | 5 | Act 推进生效 |
+| M06 | Act II · Boss Quest 胜利 → 进入 Act III | ✅ 到达 | `4b8edff6` | 6 | Act 推进生效 |
+| M07 | Act III · Standard Quest 1 结算完成 | ✅ 到达 | `013b3725` | 7 | Act 推进生效 |
+| M08 | Act III · Standard Quest 2 结算完成 | ✅ 到达 | `e53cb2cc` | 8 | Act 推进生效 |
+| M09 | Act III · Boss Quest 胜利 → 第三 Threat 后 Hamlet | ✅ 到达 | `aabc5a9f` | 9 | Act 推进生效 |
 | M10 | Darkest Dungeon 解锁 + Guardian Quest 生成 | ❌ 未到达 | — | — | act-four unlock + createGuardianQuest |
 | M11 | Guardian 击败 → Final Hamlet | ❌ 未到达 | — | — | resolveGuardianVictory（官方数据缺失，仅 prototype harness） |
 | M12 | Final Hamlet 4 天完成 | ❌ 未到达 | — | — | startFinalHamlet / advanceFinalHamletDay |

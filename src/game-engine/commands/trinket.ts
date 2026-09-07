@@ -83,13 +83,20 @@ export function resolvePendingTrinketAllocations(
   return next;
 }
 
-/** 自动以 'assign' 策略结清全部 pending allocation（兼容 shim 的旧行为）。 */
+/**
+ * 自动以 'discard' 策略结清全部 pending allocation（Deterministic Trinket Policy 兜底）。
+ * Phase 11A.2.1 Finding C：移除非法 `'assign' as unknown as TrinketAllocationChoice'`
+ * 逃逸；不再自动 assign 到某个 hero（避免 Production Engine 替玩家做隐藏选择）。
+ *
+ * Production Engine 路径（Store）必须由 Test Policy 或 UI 显式提供 choice；
+ * 此 helper 仅用于 headless / Golden Run 的 deterministic fallback（dev doc §13）。
+ */
 export function resolveAllPendingTrinketAllocations(
   campaign: CampaignState,
   maxRounds = 30,
 ): CampaignState {
   const decisions: TrinketAllocationDecision[] = campaign.pendingTrinketAllocations.map(
-    (a) => ({ allocationId: a.allocationId, choice: 'assign' as unknown as TrinketAllocationChoice }),
+    (a) => ({ allocationId: a.allocationId, choice: { type: 'discard' } }),
   );
   return resolvePendingTrinketAllocations(campaign, decisions, maxRounds);
 }
