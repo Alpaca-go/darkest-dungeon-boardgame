@@ -19,6 +19,7 @@ import {
   nowIso as currentClockNowIso,
 } from '../../game-engine/runtime-sources';
 import { seedToInt } from './simulation-driver';
+import { runProductionCommandAudit } from './production-command-audit';
 import { blockedGoldenSeeds, CAMPAIGN_MILESTONES, GOLDEN_SEEDS, runnableGoldenSeeds } from './golden-seeds';
 import {
   CampaignSimulationDriver,
@@ -562,6 +563,7 @@ export function runAudit(options: RunAuditOptions = {}): AuditReport {
 
   const goldenRun = runGoldenCampaignAttempt('golden-normal-success-01', manifestHash);
   const replayDeterminism = verifyReplayDeterminism('golden-normal-success-01', manifestHash);
+  const pcaResultForBuild = runProductionCommandAudit();
 
   const issues = buildIssues({
     manifestSummary,
@@ -571,9 +573,11 @@ export function runAudit(options: RunAuditOptions = {}): AuditReport {
     goldenRun,
     replayDeterminism,
     mathRandomLeaksInOfficialPath: options.mathRandomLeaksInOfficialPath ?? 0,
+    pcaResult: pcaResultForBuild,
   });
 
-  const gate = evaluateReleaseGate({ issues, goldenRun, replayDeterminism, prototypeFindings, options });
+  const pcaResult = pcaResultForBuild;
+  const gate = evaluateReleaseGate({ issues, goldenRun, replayDeterminism, prototypeFindings, options, pcaResult });
 
   return {
     // Phase 11A.2 §31：使用 currentSources.clock.nowIso() 而非直接 new Date()，
@@ -604,6 +608,8 @@ interface BuildIssuesInput {
   goldenRun: GoldenRunAttempt;
   replayDeterminism: ReplayDeterminismResult;
   mathRandomLeaksInOfficialPath: number;
+  // Phase 11A.2.2 WP-A：P1-006 改用结构化 ProductionCommandAudit 计算。
+  pcaResult?: import('./production-command-audit').ProductionCommandAuditResult;
 }
 
 export function buildIssues(input: BuildIssuesInput): AuditIssue[] {
@@ -671,6 +677,9 @@ export function buildIssues(input: BuildIssuesInput): AuditIssue[] {
   }
 
   // ---- P1-001：createId() 使用 Math.random + Date.now ----
+  // Phase 11A.2.2 WP-A：此检查由结构化 ProductionCommandAudit 提供。
+  // 若允许列表中 System Runtime Adapter 之外的官方路径仍包含 Math.random()，则 P1-001 仍 open。
+  // 当前状态：allowlist 限定 runtime-sources.ts，故 input.mathRandomLeaksInOfficialPath = 0 → 关闭。
   if (input.mathRandomLeaksInOfficialPath > 0) {
     issues.push({
       id: 'ISSUE-P1-001',
@@ -686,6 +695,45 @@ export function buildIssues(input: BuildIssuesInput): AuditIssue[] {
       actual: `官方路径检出 ${input.mathRandomLeaksInOfficialPath} 处 Math.random() 泄漏。`,
       status: 'open',
       regressionTestIds: ['rng-audit.test.ts:no-math-random-in-official-path'],
+    });
+  }
+
+  // ---- P1-006：Production Command Layer 完整收口（Phase 11A.2.2 §7 / §8） ----
+  // Phase 11A.2.2 WP-A：不再依赖 uiStoreShimSteps；改用结构化 ProductionCommandAudit。
+  if (!input.pcaResult || !input.pcaResult.productionCommandLayerPasses) {
+    const pca = input.pcaResult;
+    const actual = [
+      `headless shim exists = ${pca?.headlessShimFileExists}`,
+      `driver shim imports = ${pca?.simulationDriverShimImportCount}`,
+      `driver coverage = ${pca?.simulationDriverProductionCommandCoverage}/${pca?.simulationDriverTotalHighLevelDispatches}`,
+      `differential coverage = ${pca?.differentialImplementedCount}/${pca?.differentialExpectedCount}`,
+      `store atomic leaks = [${pca?.storeDirectAtomicOrchestrationLeaks.join(', ')}]`,
+      `driver atomic leaks = [${pca?.driverDirectAtomicOrchestrationLeaks.join(', ')}]`,
+      `policy boundary = ${pca?.testPolicyBoundaryPasses}`,
+    ].join(' / ');
+    issues.push({
+      id: 'ISSUE-P1-006',
+      severity: 'P1',
+      domain: 'architecture',
+      title: 'Production Command Layer 未完全收口（Store / Driver 直接 import 原子编排 / shim 未删 / Differential 不全）',
+      description:
+        'Phase 11A.2.2 §5 改由结构化 ProductionCommandAudit 判定：' +
+        '!headlessShimFileExists && driverShimImportCount===0 && driverCoverage===driverTotal && ' +
+        '!storeAtomicLeaks && !driverAtomicLeaks && differentialPasses && policyBoundaryPasses。\n' +
+        '11A.2.1 用 event marker `uiStoreShimSteps=[]` 作为代理；11A.2.2 改用真实结构事实。\n' +
+        actual,
+      reproductionCommands: [
+        'npm run audit:release-gate',
+        'node -e "console.log(JSON.stringify(require(\'./production-command-audit\').runProductionCommandAudit()))"',
+      ],
+      expected: 'productionCommandLayerPasses === true（结构化计算）',
+      actual,
+      status: 'open',
+      regressionTestIds: [
+        'production-command-audit.test.ts:A-01..A-04',
+        'command-differential.test.ts:D-01..D-14',
+        'production-command-architecture.test.ts:24..29',
+      ],
     });
   }
 
@@ -790,36 +838,7 @@ export function buildIssues(input: BuildIssuesInput): AuditIssue[] {
     });
   }
 
-  // ---- P1-006：战役状态机泄漏进 UI 层 ----
-  if (input.goldenRun.uiStoreShimSteps.length > 0) {
-    issues.push({
-      id: 'ISSUE-P1-006',
-      severity: 'P1',
-      domain: 'architecture',
-      title: '战役编排层只存在于 UI store / 页面，game-engine 缺少对应入口',
-      description:
-        '战役状态机被劈成两半：game-engine 只导出「原子步骤」，把它们串起来的编排层写在 ' +
-        'src/store/useGameStore.ts 与 UI 页面里，且没有任何引擎侧导出。已实测到的缺口包括：' +
-        '① gamePhase 的 campaign-setup → skill-loadout → quest-select 迁移（store proceedToLoadout/proceedToQuests，' +
-        '引擎只有守卫 canProceedToLoadout()/isLoadoutComplete()）；' +
-        '② settleBattle 的 6 步战斗结算流水线（store:310-341，模块私有闭包）；' +
-        '③ moveToRoom / resolveVictory / leaveDungeon / failQuestFromDefeat / returnToHamlet 的组合动作；' +
-        '④ Trinket before-attack-roll 机会的批量结清（不结清则 pendingAction 永久冻结）；' +
-        '⑤ pendingTrinketAllocations 的批量结清（不结清则 startHamletPhase 静默返回原 state）；' +
-        '⑥ retargetPendingReplacement（store 模块私有函数，引擎无等价导出）；' +
-        '⑦ 替补流程「遍历所有未确认槽位」的循环（只在 ReplacementPage）。' +
-        '结果：任何无头驱动（Simulation Driver / Golden Run / Replay / 回归测试）都必须复制一份 UI 逻辑' +
-        '（见 src/audit/core-campaign/headless-shim.ts），存在长期不同步风险。',
-      reproductionSeed: input.goldenRun.seedId,
-      reproductionCommands: ['npm run test:golden'],
-      expected:
-        '所有 gamePhase 迁移与组合动作都由 game-engine 导出的纯函数负责，store 只做转发；' +
-        '删除 headless-shim.ts 后无头驱动仍能跑完整局。',
-      actual: `Golden Run 中有 ${input.goldenRun.uiStoreShimSteps.length} 类步骤依赖 UI-store-shim：${input.goldenRun.uiStoreShimSteps.join(', ')}。`,
-      status: 'open',
-      regressionTestIds: ['simulation-driver.test.ts:no-ui-store-shim-required'],
-    });
-  }
+  // ---- P1-006：旧版（基于 uiStoreShimSteps）已合并入上方的结构化 P1-006 块（Phase 11A.2.2 WP-A） ----
 
   // ---- P2-003：Hamlet 天数模型缺少可校验的总量 ----
   issues.push({
@@ -870,6 +889,7 @@ interface GateInput {
   replayDeterminism: ReplayDeterminismResult;
   prototypeFindings: PrototypeContaminationFinding[];
   options: RunAuditOptions;
+  pcaResult?: import('./production-command-audit').ProductionCommandAuditResult;
 }
 
 export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
@@ -880,14 +900,17 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
   const campaignOrchestrationReachable = input.goldenRun.campaignOrchestrationReachable;
   const elevenQuestLoopClosed = input.goldenRun.elevenQuestLoopClosed;
   const campaignVictoryReachable = input.goldenRun.campaignVictoryReachable;
+  // Phase 11A.2.2 WP-A：productionCommandLayerPasses 改由结构化 ProductionCommandAudit 计算。
+  const productionCommandLayerPasses = input.pcaResult
+    ? input.pcaResult.productionCommandLayerPasses
+    : false;
   const campaignOverReachable = runnableGoldenSeeds().some((s) => s.expectedOutcome === 'campaign-over');
 
   const ruleSummary = summarizeRuleTraceability();
   const ruleTraceabilityP0Complete = ruleSummary.p0Complete;
 
-  // Phase 11A.2 §5：productionCommandLayerPasses 直接由 uiStoreShimSteps 派生，
-  // 真实 Production Command 迁移完成后必须为 true。
-  const productionCommandLayerPasses = input.goldenRun.uiStoreShimSteps.length === 0;
+  // Phase 11A.2.2 WP-A：productionCommandLayerPasses 由结构化 ProductionCommandAudit 计算。
+  // 11A.2 §5 旧版依赖 uiStoreShimSteps 已被替换（P1-006 现读 pcaResult.productionCommandLayerPasses）。
 
   const gate: ReleaseGateResult = {
     buildPasses: input.options.buildPasses ?? false,

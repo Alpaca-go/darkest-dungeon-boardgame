@@ -10,34 +10,14 @@
 //
 // 本文件只断言"已迁移部分"的架构不变量；P1-006 close 留待完全迁移。
 
-import { readFileSync, readdirSync, statSync } from 'fs';
+import { readFileSync } from 'fs';
 import { join } from 'path';
 import { describe, expect, it } from 'vitest';
 
 const SRC = join(process.cwd(), 'src');
 
-function walk(dir: string, out: string[] = []): string[] {
-  for (const name of readdirSync(dir)) {
-    const p = join(dir, name);
-    if (statSync(p).isDirectory()) walk(p, out);
-    else if (/\.tsx?$/.test(p)) out.push(p);
-  }
-  return out;
-}
-
 function stripComments(text: string): string {
   return text.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:])\/\/.*$/gm, '$1');
-}
-
-function importsOf(file: string, identifier: string): string[] {
-  const hits: string[] = [];
-  const re = new RegExp(`\\b${identifier}\\b`);
-  for (const f of walk(SRC)) {
-    if (f === file) continue;
-    if (/\.test\.tsx?$/.test(f)) continue;
-    if (readFileSync(f, 'utf8').match(re)) hits.push(f);
-  }
-  return hits;
 }
 
 describe('Production Command Architecture (Phase 11A.2.1 §43)', () => {

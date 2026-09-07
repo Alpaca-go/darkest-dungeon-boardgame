@@ -39,7 +39,6 @@ import {
   commitLeaveDungeon,
   commitQuestFailureFromDefeat,
   resolveReplacementsFlow,
-  resolveAllPendingTrinketAllocations as resolveAllPendingTrinketAllocationsCmd,
 } from '../../game-engine/commands';
 import {
   shimReturnToHamlet,
