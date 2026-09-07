@@ -24,14 +24,15 @@ describe('Production Command Audit (Phase 11A.2.2 §8)', () => {
     }
   });
 
-  it('A-02: shim 删除后但 Driver 仍 import shim → P1-006 open', () => {
+  it('A-02: WP-C done — Driver shim import = 0, shim 文件仍存在（Differential fallback）', () => {
     const audit = runProductionCommandAudit();
     if (!existsSync(SHIM) && audit.simulationDriverShimImportCount > 0) {
+      // 极端状态：shim 删了 + driver 还在 import → P1-006 open
       expect(audit.productionCommandLayerPasses).toBe(false);
     }
-    // 当前状态：shim 仍存在
+    // WP-C 状态：shim 仍存在（供 Differential fallback），但 Driver 已不再 import shim。
     expect(existsSync(SHIM)).toBe(true);
-    expect(audit.simulationDriverShimImportCount).toBeGreaterThanOrEqual(1);
+    expect(audit.simulationDriverShimImportCount).toBe(0);
   });
 
   it('A-03: shim删除 + import=0 + differential full pass → command layer true', () => {

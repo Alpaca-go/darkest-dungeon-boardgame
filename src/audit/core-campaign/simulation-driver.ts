@@ -22,28 +22,29 @@ import { canEndHamletDay, endHamletDay, skipHeroAction } from '../../game-engine
 import { canScout, scoutDungeon } from '../../game-engine/dungeon';
 import { endHeroTurn, getActiveUnit, legalTargetsForActor } from '../../game-engine/battle';
 import { beginHeroSkillAction } from '../../game-engine/trinkets/battle-trinket-bridge';
-import {
-  declineAllTrinketOpportunitiesHeadless,
-  settleBattleHeadless,
-} from './headless-shim';
+// Phase 11A.2.2 §20：Driver 不得 import headless-shim；shim 仅服务于 Test Policy / Differential 旧 fallback。
 import { createSaveSnapshot, restoreSaveSnapshot, validateSaveFile } from '../../game-engine/save';
 import { createSeededRandom, setRandomSource } from '../../game-engine/random';
 // Phase 11A.1 §16.1：chooseQuest 路径走 Campaign Orchestrator 入口。
 import { engineChooseQuest } from '../../game-engine/campaign/campaign-orchestrator';
-// Phase 11A.2.1 §16：Driver 完全使用 Production Commands；shim 仅作为 Test Policy Helper 保留。
-// 11A.2.1 partial：returnToHamlet / battle-victory 暂走 shim 因 Differential 仍在进行（Finding F）。
+// Phase 11A.2.2 §16 / §17 / §18 / §19：Driver 完全使用 Production Commands。
+//   - autoBattle      → settleBattleState + declineAllTrinketOpportunities
+//   - resolveVictory  → commitBattleVictory
+//   - returnToHamlet  → commitReturnToHamlet（trinket 决策走 Test Policy callback）
 import {
   proceedCampaignToLoadout,
   proceedCampaignToQuestSelect,
   enterDungeonRoom,
   commitLeaveDungeon,
   commitQuestFailureFromDefeat,
+  commitReturnToHamlet,
   resolveReplacementsFlow,
+  settleBattleState,
+  commitBattleVictory,
+  declineAllTrinketOpportunities,
+  resolveAllPendingTrinketAllocations,
+  type ReturnToHamletInput,
 } from '../../game-engine/commands';
-import {
-  shimReturnToHamlet,
-  shimResolveVictory,
-} from './headless-shim';
 import { assertCoreCampaignInvariants, milestoneStateHash, type InvariantFinding } from './campaign-invariants';
 import {
   stableHash,
@@ -336,7 +337,7 @@ export class CampaignSimulationDriver {
         return this.commit(
           'resolveVictory',
           'resolveVictory',
-          () => shimResolveVictory(this.state),
+          () => commitBattleVictory(this.state).campaign,
         );
       case 'finishQuest':
         return this.commit(
@@ -362,7 +363,30 @@ export class CampaignSimulationDriver {
         return this.commit(
           'returnToHamlet',
           'returnToHamlet',
-          () => shimReturnToHamlet(this.state),
+          () => {
+            // §18：先由 Driver 提供 Trinket 决策 callback（Test Policy 注入式：拒绝全部饰品机会），
+            // 再走 commitReturnToHamlet 正式入口。Production Engine 不得自行清空 Trinket。
+            const summary = this.state.lastQuestResult;
+            const input: ReturnToHamletInput = {
+              questId: summary?.questId ?? this.state.currentQuestId ?? '',
+              questRunId:
+                this.state.dungeon?.questRunId ??
+                `${summary?.questId ?? this.state.currentQuestId ?? 'unknown'}:no-run`,
+              questOutcome: summary?.outcome ?? 'incomplete',
+            };
+            const resolveAllocations = (c: CampaignState): CampaignState | null => {
+              const pending = c.pendingTrinketAllocations.filter(
+                (a) => a.status === 'pending',
+              );
+              if (pending.length === 0) return c;
+              return resolveAllPendingTrinketAllocations(c);
+            };
+            const result = commitReturnToHamlet(this.state, input, {
+              resolveAllocations,
+            });
+            // 异常（trinket-pending-choice 等）保持 state 不变，交给上层判断。
+            return result.ok ? result.campaign : this.state;
+          },
         );
       case 'endHamletDay':
         return this.commit('endHamletDay', 'endHamletDay', () => endHamletDay(this.state));
@@ -438,7 +462,7 @@ export class CampaignSimulationDriver {
  *   英雄回合 → 遍历已装备技能，取第一个有合法目标的技能，打第一个目标；
  *              全部无合法目标 → endHeroTurn；
  *   怪物回合 → 由 battle.advanceTurn 内部自动执行（battle.ts:385），Driver 不介入。
- * 每一步之后跑 settleBattleHeadless（与 store 一致）。
+ * 每一步之后跑 settleBattleState（§19：Production Command；与 store 同一入口）。
  */
 export function autoPlayBattle(campaign: CampaignState, maxSteps = 400): CampaignState {
   let c = campaign;
@@ -447,7 +471,7 @@ export function autoPlayBattle(campaign: CampaignState, maxSteps = 400): Campaig
     let battle = c.battle;
     // 有冻结的 Trinket 决策时先结清（Driver 一律选择"不使用"，保持确定性）。
     if (battle.pendingAction) {
-      const resolved = declineAllTrinketOpportunitiesHeadless(c);
+      const resolved = declineAllTrinketOpportunities(c);
       if (resolved === c) break;
       c = resolved;
       if (!c.battle || c.battle.status !== 'active') break;
@@ -458,7 +482,10 @@ export function autoPlayBattle(campaign: CampaignState, maxSteps = 400): Campaig
     if (!actor) break;
     if (actor.side !== 'hero') {
       // 怪物回合正常应由 advanceTurn 内部消化；若卡住则结束该单位回合避免死循环。
-      const next = settleBattleHeadless({ ...c, battle: endHeroTurn(battle, actor.id) });
+      // §19：settleBattleState 即使 ok=false（mental-guard-exceeded / battle-not-active）
+      // 也必须接受 .campaign —— 后者正是 autoPlayBattle 的目标态。
+      const settled = settleBattleState({ ...c, battle: endHeroTurn(battle, actor.id) });
+      const next = settled.campaign;
       if (next.battle === battle) break;
       c = next;
       continue;
@@ -473,13 +500,21 @@ export function autoPlayBattle(campaign: CampaignState, maxSteps = 400): Campaig
       if (targets.length === 0) continue;
       const { campaign: next, error, paused } = beginHeroSkillAction(c, skillId, targets[0]);
       if (error) continue;
-      // paused = Trinket 窗口冻结了动作 → 立刻 decline 全部机会以恢复执行。
-      c = paused ? declineAllTrinketOpportunitiesHeadless(next) : settleBattleHeadless(next);
+      if (paused) {
+        // paused = Trinket 窗口冻结了动作 → 立刻 decline 全部机会以恢复执行。
+        c = declineAllTrinketOpportunities(next);
+      } else {
+        // §19：同上，接受 .campaign；mental-guard-exceeded 由 settleBattleState 内部
+        // 限制到 50 步，触发后 driver 仍走到 battle-not-active，外层 while 自然退出。
+        const settled = settleBattleState(next);
+        c = settled.campaign;
+      }
       acted = true;
       break;
     }
     if (!acted) {
-      const next = settleBattleHeadless({ ...c, battle: endHeroTurn(battle, actor.id) });
+      const settled = settleBattleState({ ...c, battle: endHeroTurn(battle, actor.id) });
+      const next = settled.campaign;
       if (next.battle === c.battle) break;
       c = next;
     }

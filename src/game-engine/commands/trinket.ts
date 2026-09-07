@@ -72,7 +72,9 @@ export function resolvePendingTrinketAllocations(
   let next: CampaignState = campaign;
   let guard = 0;
   while (guard++ < maxRounds) {
-    const pending = next.pendingTrinketAllocations;
+    // 仅处理 status='pending' 的条目；closeAllocation 仅设状态不删记录，
+    // 旧条目 status='discarded'/'resolved' 必须跳过，否则循环会重入幂等路径耗尽 rounds。
+    const pending = next.pendingTrinketAllocations.filter((a) => a.status === 'pending');
     if (pending.length === 0) break;
     const head: PendingTrinketAllocation = pending[0];
     const decision = decisions.find((d) => d.allocationId === head.allocationId);

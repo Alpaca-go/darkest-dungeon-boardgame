@@ -109,22 +109,25 @@ export function settleBattleState(
 // ---------------------------------------------------------------------------
 
 /**
- * 战斗胜利正式入口：settleBattleState → engineResolveVictory → evaluateReplacementFlow。
- * 与 Legacy Shim 顺序一致（dev doc §9 + §11）。
+ * 战斗胜利正式入口：engineResolveVictory → evaluateReplacementFlow。
  * 不在 UI 自行组合。
+ *
+ * 为什么不先 settleBattleState？
+ *   §13：settleBattleState 有 'active' 守卫（dev doc §13 硬约束），不能在 status='victory' 终态调用。
+ *   进入此函数时 battle 已经是 'victory'——意味着 autoPlayBattle 内的最后一次
+ *   settleBattleState 已完成 death/stress/rule/disease/mental 全部 effects 结算。
+ *   这里只需走 victory 推进 + Replacement 流程。
+ *
+ * 旧 Shim 调用 settleBattleHeadless(c) 的行为属于「不必要但合法」的重复结算（settleHeadless
+ *   没有 active 守卫），production 删掉这一步既不丢 effects，也不重复工作。
  */
 export function commitBattleVictory(campaign: CampaignState): BattleSettlementResult {
   if (!campaign.battle || campaign.battle.status !== 'victory') {
     return { ok: false, campaign, error: 'battle-not-victory', mentalLoops: 0 };
   }
-  // §11：terminal 状态也要先结算 effects（death/stress/rule/disease/mental）。
-  const settled = settleBattleState(campaign);
-  if (!settled.ok) {
-    return { ok: false, campaign: settled.campaign, error: 'battle-settlement-failed', mentalLoops: settled.mentalLoops };
-  }
-  let next = engineResolveVictory(settled.campaign);
+  let next = engineResolveVictory(campaign);
   next = evaluateReplacementFlow(next);
-  return { ok: true, campaign: next, error: null, mentalLoops: settled.mentalLoops };
+  return { ok: true, campaign: next, error: null, mentalLoops: 0 };
 }
 
 // ---------------------------------------------------------------------------
