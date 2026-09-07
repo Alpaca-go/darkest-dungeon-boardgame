@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "1.0",
+  "measuredAt": "2026-09-07T11:45:33.167Z",
+  "verificationInputHash": "d2d15e84aeb607a431718795d885c0c4517df694a9951a9bac6a3b08e2d832b7",
+  "typecheckPasses": true,
+  "unitPasses": true,
+  "commandContractPasses": true,
+  "integrationPasses": true,
+  "buildPasses": true,
+  "criticalE2EPasses": false,
+  "goldenPasses": true,
+  "replayDeterminismPasses": true,
+  "replayContinuationPasses": true,
+  "productionCommandLayerPasses": true,
+  "openP0": 1,
+  "openP1": 0,
+  "campaignOrchestrationReachable": true,
+  "verificationFresh": true,
+  "commands": [
+    {
+      "command": "typecheck: npx tsc --noEmit",
+      "exitCode": 0,
+      "durationMs": 7908
+    },
+    {
+      "command": "unit: npx vitest run --reporter=basic",
+      "exitCode": 0,
+      "durationMs": 25300
+    },
+    {
+      "command": "integration: npx vitest run src/integration --reporter=basic",
+      "exitCode": 0,
+      "durationMs": 4811
+    },
+    {
+      "command": "build: npx vite build",
+      "exitCode": 0,
+      "durationMs": 7742
+    },
+    {
+      "command": "criticalE2E: npx playwright test e2e/phase11a2-critical-campaign.spec.ts --reporter=basic",
+      "exitCode": 1,
+      "durationMs": 3721
+    },
+    {
+      "command": "golden: npx vitest run src/audit/core-campaign/golden-run.test.ts --reporter=basic",
+      "exitCode": 0,
+      "durationMs": 5184
+    },
+    {
+      "command": "replayContinuation: npx vitest run src/audit/core-campaign/replay-continuation.test.ts --reporter=basic",
+      "exitCode": 0,
+      "durationMs": 5680
+    },
+    {
+      "command": "contentAudit: npx vite-node scripts/audit/content.ts",
+      "exitCode": 0,
+      "durationMs": 4306
+    },
+    {
+      "command": "rulesAudit: npx vite-node scripts/audit/rules.ts",
+      "exitCode": 0,
+      "durationMs": 4614
+    },
+    {
+      "command": "runAudit: npx vitest run src/audit/core-campaign/production-command-audit.test.ts --reporter=basic",
+      "exitCode": 0,
+      "durationMs": 3676
+    },
+    {
+      "command": "releaseGate: npx vitest run src/audit/core-campaign/consistency.test.ts --reporter=basic",
+      "exitCode": 0,
+      "durationMs": 8136
+    }
+  ],
+  "notes": [
+    "contentAudit exitCode=0",
+    "rulesAudit exitCode=0",
+    "releaseGate exitCode=0",
+    "release-gate.json not present; using default openP0=1, openP1=0"
+  ]
+}

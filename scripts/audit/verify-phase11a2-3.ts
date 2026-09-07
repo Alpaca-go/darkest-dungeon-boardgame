@@ -90,11 +90,13 @@ function runCommand(label: string, cmd: string, args: string[], timeoutMs = 120_
   const t0 = Date.now();
   let res;
   try {
+    // Windows: 通过 shell 跑（让 npx / npm 在 PATH 中）
     res = spawnSync(cmd, args, {
       cwd: ROOT,
       encoding: 'utf8',
       timeout: timeoutMs,
       stdio: 'pipe',
+      shell: true,
     });
   } catch (e: any) {
     return { command: `${label} ${cmd} ${args.join(' ')}`, exitCode: -1, durationMs: Date.now() - t0 };
