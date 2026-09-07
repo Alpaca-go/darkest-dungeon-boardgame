@@ -27,7 +27,6 @@ import {
   commitLeaveDungeon,
   commitReturnToHamlet,
   commitBattleVictory,
-  resolveReplacementsFlow,
   resolveAllPendingTrinketAllocations,
   settleBattleState,
   enterDungeonRoom,
