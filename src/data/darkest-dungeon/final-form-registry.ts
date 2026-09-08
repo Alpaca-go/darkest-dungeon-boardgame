@@ -55,6 +55,22 @@ export function getFinalFormDisplayName(formId: FinalFormId): string {
 // 正式 Form（刻意留空 → Data Gate）
 // ---------------------------------------------------------------------------
 
+// Phase 11A.3 dev doc §17 / §25-29：rulebook-backed partial provenance。
+// 每个 official Form 写上已确认 structural rules 的 sourceReference
+// （即使数值未填，结构已经 verified）。
+function rulebookFormSourceReference(formId: FinalFormId): string {
+  switch (formId) {
+    case 'ancestor-first-form':
+      return 'DD_EN_COREBOX_RULES.pdf:p40（structural: stance / reflection count / initiative / guard / imperfect death 10 wounds）';
+    case 'ancestor-second-form':
+      return 'DD_EN_COREBOX_RULES.pdf:p41（structural: initiative 2 / 3× Absolute Nothingness untargetable + occupies Area / d10 teleport map 1-3:defensive,4-6:ranged,7-9:support,10:none）';
+    case 'gestating-heart':
+      return 'DD_EN_COREBOX_RULES.pdf:p41（structural: aggressive / 1 initiative / Sispersion adds 1 initiative / wounded reaction: Blight 2-3 turns + Heal 2）';
+    case 'heart-of-darkness':
+      return 'DD_EN_COREBOX_RULES.pdf:p41（structural: aggressive / 2 initiative / Impending Doom rolls at battle start + after completed action / defeat = campaign victory）';
+  }
+}
+
 export const OFFICIAL_FINAL_FORMS: FinalFormDefinition[] = FINAL_FORM_ORDER.map((formId) => ({
   id: `final-form-${formId}`,
   formId,
@@ -64,8 +80,11 @@ export const OFFICIAL_FINAL_FORMS: FinalFormDefinition[] = FINAL_FORM_ORDER.map(
   maxHp: null,
   skillIds: [],
   attendantActorDefinitionIds: [],
+  // Phase 11A.3 dev doc §17：保持 unavailable（卡面数值缺）
   officialDataStatus: 'unavailable',
   enabledInOfficialPool: false,
+  // Phase 11A.3 dev doc §9 / §17：把已 verified 的 rulebook structural provenance 写进 official。
+  sourceReference: rulebookFormSourceReference(formId),
 }));
 
 /** 正式 Final Encounter Room（所有 Form 共用；Area 未核对 → 空）。 */
@@ -76,6 +95,9 @@ export const OFFICIAL_FINAL_ENCOUNTER_ROOM: FinalEncounterRoomDefinition = {
   formAreaId: '',
   validAreaIds: [],
   officialDataStatus: 'unavailable',
+  // Phase 11A.3 dev doc §9 / §30：已 verified 的 structural rules。
+  sourceReference:
+    'DD_EN_COREBOX_RULES.pdf:p36（structural: same Room across all forms / no Rest / no Stance adjustment / new Initiative + Round on Form switch / Final Hamlet 4 days no Hamlet Event / no Dungeon Exploration + roll Provisions before Encounter）',
 };
 
 // ---------------------------------------------------------------------------

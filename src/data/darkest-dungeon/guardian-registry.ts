@@ -12,6 +12,11 @@ import type {
   DarkestDungeonGuardianFamily,
 } from '../../types/act-four';
 import type { RegistryValidationIssue } from '../../types/progression';
+import {
+  OFFICIAL_GUARDIAN_ASSEMBLY,
+  isAllGuardianFamiliesReady,
+  getAllGuardianFamilyGaps,
+} from './official-guardian-assembly';
 
 // ---------------------------------------------------------------------------
 // ID 常量
@@ -41,19 +46,15 @@ export const DARKEST_DUNGEON_PROTOTYPE_GUARDIAN_ACTOR_ID =
   'prototype-darkest-dungeon-guardian-actor';
 
 // ---------------------------------------------------------------------------
-// 正式 Guardian（刻意留空 → Data Gate）
+// 正式 Guardian（Phase 11A.3 dev doc §13-15：消费 OFFICIAL_GUARDIAN_ASSEMBLY）
+//
+// 禁止在 generic registry 中再手填 stub 数据；所有字段必须从
+// family-specific registry（Templars / Mammoth Cyst / Shuffling Horror）
+// 经由 official-guardian-assembly.ts 组装。
 // ---------------------------------------------------------------------------
 
 export const OFFICIAL_DARKEST_DUNGEON_GUARDIANS: DarkestDungeonGuardianDefinition[] =
-  DARKEST_DUNGEON_GUARDIAN_FAMILIES.map((family) => ({
-    id: `darkest-dungeon-guardian-${family}`,
-    family,
-    name: '',
-    roomDefinitionId: '',
-    actorDefinitionIds: [],
-    officialDataStatus: 'unavailable',
-    enabledInOfficialPool: false,
-  }));
+  OFFICIAL_GUARDIAN_ASSEMBLY;
 
 // ---------------------------------------------------------------------------
 // Prototype Guardian（harness）
@@ -125,9 +126,17 @@ export function validateDarkestDungeonGuardian(
   return { isComplete: missing.length === 0 && issues.length === 0, missing, issues };
 }
 
-/** official Guardian 池是否可用（三类全部齐备）。 */
+/**
+ * official Guardian 池是否可用。
+ *
+ * Phase 11A.3 dev doc §15：必须调用 family validators（Templars + Mammoth Cyst
+ * + Shuffling Horror）。任一 family 仍未 ready → pool false。
+ * 不再单看 name / roomDefinitionId / actor IDs 三字段（这会导致表面 ready
+ * 但实际 family validator 失败）。
+ */
 export function isDarkestDungeonOfficialGuardianPoolEnabled(): boolean {
   if (OFFICIAL_DARKEST_DUNGEON_GUARDIANS.length !== 3) return false;
+  if (!isAllGuardianFamiliesReady()) return false;
   return OFFICIAL_DARKEST_DUNGEON_GUARDIANS.every(
     (g) =>
       g.enabledInOfficialPool &&
@@ -137,14 +146,17 @@ export function isDarkestDungeonOfficialGuardianPoolEnabled(): boolean {
 }
 
 export function getDarkestDungeonGuardianDataGaps(): string[] {
-  const gaps: string[] = [];
+  // Phase 11A.3 dev doc §15：缺口必须真实反映 family validator 的判断
+  // （不再只是 generic 字段空字符串检查）。
+  const familyGaps = getAllGuardianFamilyGaps();
+  const localGaps: string[] = [];
   for (const guardian of OFFICIAL_DARKEST_DUNGEON_GUARDIANS) {
     const result = validateDarkestDungeonGuardian(guardian);
     if (!result.isComplete) {
-      gaps.push(`${guardian.id}（${[...result.missing, ...result.issues].join('；')}）`);
+      localGaps.push(`${guardian.id}（${[...result.missing, ...result.issues].join('；')}）`);
     }
   }
-  return gaps;
+  return [...localGaps, ...familyGaps];
 }
 
 export function validateDarkestDungeonGuardianRegistry(): RegistryValidationIssue[] {

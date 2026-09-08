@@ -1,29 +1,109 @@
-# criticalE2E: npx playwright test e2e/phase11a2-critical-campaign.spec.ts --reporter=basic
-# exitCode=1 durationMs=3579 at=2026-09-07T15:51:17.746Z
+# criticalE2E: npx playwright test e2e/phase11a2-critical-campaign.spec.ts
+# exitCode=1 durationMs=16446 at=2026-09-08T06:57:46.847Z
 
 === STDOUT (tail) ===
 
+Running 6 tests using 1 worker
+
+  x  1 e2e\phase11a2-critical-campaign.spec.ts:41:1 › E2E-01 New Campaign → Completed Standard → Hamlet (4ms)
+  x  2 e2e\phase11a2-critical-campaign.spec.ts:46:1 › E2E-02 Completed Standard ×2 → Boss Gate (2ms)
+  x  3 e2e\phase11a2-critical-campaign.spec.ts:55:1 › E2E-03 Boss Encounter → Victory → Act II (2ms)
+  x  4 e2e\phase11a2-critical-campaign.spec.ts:64:1 › E2E-04 Valid Replacement Scenario → Select → Confirm → Resume (2ms)
+  x  5 e2e\phase11a2-critical-campaign.spec.ts:76:1 › E2E-05 Gameplay Save → Reload → Continue → Product Action (2ms)
+  x  6 e2e\phase11a2-critical-campaign.spec.ts:95:1 › E2E-06 Act I → II → III → IV through nine completed quests (2ms)
+
+
+  1) e2e\phase11a2-critical-campaign.spec.ts:41:1 › E2E-01 New Campaign → Completed Standard → Hamlet 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\kyrie\AppData\Local\ms-playwright\chromium_headless_shell-1234\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: pw-out\main-1788850660245\phase11a2-critical-campaig-7afaf-Completed-Standard-→-Hamlet\error-context.md
+
+  2) e2e\phase11a2-critical-campaign.spec.ts:46:1 › E2E-02 Completed Standard ×2 → Boss Gate ───────
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\kyrie\AppData\Local\ms-playwright\chromium_headless_shell-1234\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: pw-out\main-1788850661557\phase11a2-critical-campaig-deb56-ted-Standard-×2-→-Boss-Gate\error-context.md
+
+  3) e2e\phase11a2-critical-campaign.spec.ts:55:1 › E2E-03 Boss Encounter → Victory → Act II ───────
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\kyrie\AppData\Local\ms-playwright\chromium_headless_shell-1234\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: pw-out\main-1788850662619\phase11a2-critical-campaig-b0e6d-ncounter-→-Victory-→-Act-II\error-context.md
+
+  4) e2e\phase11a2-critical-campaign.spec.ts:64:1 › E2E-04 Valid Replacement Scenario → Select → Confirm → Resume 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\kyrie\AppData\Local\ms-playwright\chromium_headless_shell-1234\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: pw-out\main-1788850663792\phase11a2-critical-campaig-1539c-→-Select-→-Confirm-→-Resume\error-context.md
+
+  5) e2e\phase11a2-critical-campaign.spec.ts:76:1 › E2E-05 Gameplay Save → Reload → Continue → Product Action 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\kyrie\AppData\Local\ms-playwright\chromium_headless_shell-1234\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: pw-out\main-1788850664906\phase11a2-critical-campaig-49e59-→-Continue-→-Product-Action\error-context.md
+
+  6) e2e\phase11a2-critical-campaign.spec.ts:95:1 › E2E-06 Act I → II → III → IV through nine completed quests 
+
+    Error: browserType.launch: Executable doesn't exist at C:\Users\kyrie\AppData\Local\ms-playwright\chromium_headless_shell-1234\chrome-headless-shell-win64\chrome-headless-shell.exe
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: pw-out\main-1788850665862\phase11a2-critical-campaig-1c78a-rough-nine-completed-quests\error-context.md
+
+  6 failed
+    e2e\phase11a2-critical-campaign.spec.ts:41:1 › E2E-01 New Campaign → Completed Standard → Hamlet 
+    e2e\phase11a2-critical-campaign.spec.ts:46:1 › E2E-02 Completed Standard ×2 → Boss Gate ────────
+    e2e\phase11a2-critical-campaign.spec.ts:55:1 › E2E-03 Boss Encounter → Victory → Act II ────────
+    e2e\phase11a2-critical-campaign.spec.ts:64:1 › E2E-04 Valid Replacement Scenario → Select → Confirm → Resume 
+    e2e\phase11a2-critical-campaign.spec.ts:76:1 › E2E-05 Gameplay Save → Reload → Continue → Product Action 
+    e2e\phase11a2-critical-campaign.spec.ts:95:1 › E2E-06 Act I → II → III → IV through nine completed quests 
+
 
 === STDERR (tail) ===
-Error: Cannot find module 'basic'
-Require stack:
-- D:\darkest-dungoen-boardgame\node_modules\playwright\lib\cli\testActions.js
-- D:\darkest-dungoen-boardgame\node_modules\playwright\lib\program.js
-- D:\darkest-dungoen-boardgame\node_modules\@playwright\test\cli.js
-    at Module._resolveFilename (node:internal/modules/cjs/loader:1564:15)
-    at wrapResolveFilename (node:internal/modules/cjs/loader:1118:27)
-    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1169:12)
-    at require.resolve (node:internal/modules/helpers:175:31)
-    at resolveReporter (D:\darkest-dungoen-boardgame\node_modules\playwright\lib\cli\testActions.js:206:18)
-    at D:\darkest-dungoen-boardgame\node_modules\playwright\lib\cli\testActions.js:167:42
-    at Array.map (<anonymous>)
-    at resolveReporterOption (D:\darkest-dungoen-boardgame\node_modules\playwright\lib\cli\testActions.js:167:30)
-    at overridesFromOptions (D:\darkest-dungoen-boardgame\node_modules\playwright\lib\cli\testActions.js:130:15)
-    at runTests (D:\darkest-dungoen-boardgame\node_modules\playwright\lib\cli\testActions.js:44:24) {
-  code: 'MODULE_NOT_FOUND',
-  requireStack: [
-    'D:\\darkest-dungoen-boardgame\\node_modules\\playwright\\lib\\cli\\testActions.js',
-    'D:\\darkest-dungoen-boardgame\\node_modules\\playwright\\lib\\program.js',
-    'D:\\darkest-dungoen-boardgame\\node_modules\\@playwright\\test\\cli.js'
-  ]
-}

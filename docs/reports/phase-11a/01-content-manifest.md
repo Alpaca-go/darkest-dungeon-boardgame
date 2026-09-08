@@ -1,31 +1,31 @@
 # Phase 11A — Core Campaign Content Manifest / 内容审计
 
 > 由 `npm run audit:content` 自动生成，请勿手改。
-> Manifest Hash: `469d91eb`
+> Manifest Hash: `8238339c`
 
 ## 1. 总览
 
 - 内容条目总数：**158**
 - 官方就绪（official-ready）：**1**
-- 被阻断（blocked）：**10**
+- 被阻断（blocked）：**7**
 - prototype 状态条目：**30**
-- 官方资料 unavailable：**10**
-- 缺少 `sourceReference`：**157 / 158**
+- 官方资料 unavailable：**7**
+- 缺少 `sourceReference`：**147 / 158**
 
 ### 1.1 四态分布
 
 | officialDataStatus | 数量 |
 | --- | --- |
-| partial | 117 |
+| partial | 120 |
 | prototype | 30 |
 | verified | 1 |
-| unavailable | 10 |
+| unavailable | 7 |
 
 | runtimeReadiness | 数量 |
 | --- | --- |
-| framework-only | 147 |
+| framework-only | 150 |
 | official-ready | 1 |
-| blocked | 10 |
+| blocked | 7 |
 
 ## 2. 分类明细
 
@@ -41,7 +41,7 @@
 | trinkets | 7 | 1 | 0 | 6 | 0 | 1 | 6 | 0 |
 | rooms | 6 | 0 | 6 | 0 | 0 | 0 | 6 | 0 |
 | darkestDungeonQuests | 6 | 0 | 0 | 3 | 3 | 0 | 3 | 3 |
-| guardians | 6 | 0 | 0 | 3 | 3 | 0 | 3 | 3 |
+| guardians | 6 | 0 | 3 | 3 | 0 | 0 | 6 | 0 |
 | afflictions | 5 | 0 | 5 | 0 | 0 | 0 | 5 | 0 |
 | virtues | 5 | 0 | 5 | 0 | 0 | 0 | 5 | 0 |
 | buildings | 5 | 0 | 5 | 0 | 0 | 0 | 5 | 0 |

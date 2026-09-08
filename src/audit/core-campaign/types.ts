@@ -192,8 +192,27 @@ export interface ReleaseGateResult {
   passed: boolean;
   // Phase 11A.2.3 §22：NOT-VERIFIED 表示 verification-results.json stale 或 critical E2E
   // 未测量；必须先于 CONDITIONAL 判定（Content Blocked 不可遮住 Test Gate 失败）。
-  verdict: 'PASS' | 'CONDITIONAL' | 'FAIL' | 'NOT-VERIFIED';
+  // Phase 11A.3 dev doc §1 / §38：新增 SOURCE-BLOCKED 终态，区分「资料缺失导致的
+  // 不可判定」与「资料齐但其他 fail」。Condition 由 run-audit.ts 决定。
+  verdict: 'PASS' | 'CONDITIONAL' | 'SOURCE-BLOCKED' | 'FAIL' | 'NOT-VERIFIED';
   conclusion: string;
+  // Phase 11A.3 dev doc §42：拆分 P2-001。
+  // globalMissingSourceReferences = 整个 content manifest 中缺 sourceReference 的条目数。
+  // officialPathMissingSourceReferences = 「会在 official path（formal 模式 / Production
+  // Command Layer 实际使用）上被读到的」且缺 sourceReference 的条目数；这是 11A.3
+  // PASS 判定的硬门槛。
+  globalMissingSourceReferences: number;
+  officialPathMissingSourceReferences: number;
+  // Phase 11A.3 dev doc §12：Source Gate 0 的机器可读信号（实时来自 source-readiness.json）。
+  sourceReadiness: {
+    allRequiredSourcesReady: boolean;
+    questCardsReady: boolean;
+    templarsReady: boolean;
+    mammothCystReady: boolean;
+    shufflingHorrorReady: boolean;
+    finalEncounterReady: boolean;
+    darkestDungeonMonsterDeckReady: boolean;
+  };
 }
 
 /** Deterministic FNV-1a 32-bit hash over a stable JSON representation. */

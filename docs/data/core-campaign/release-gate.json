@@ -1,7 +1,7 @@
 {
   "typecheckPasses": true,
-  "goldenTestPasses": true,
-  "canEnterPhase11A3": true,
+  "goldenTestPasses": false,
+  "canEnterPhase11A3": false,
   "onlyOpenP0": "ISSUE-P0-002",
   "buildPasses": true,
   "unitPasses": true,
@@ -27,19 +27,34 @@
   "saveResumeKeyNodesPass": true,
   "ruleTraceabilityP0Complete": false,
   "passed": false,
-  "verdict": "CONDITIONAL",
-  "conclusion": "CONDITIONAL — framework-complete-content-blocked：主循环可闭环，但仍有 1 个 P0 内容缺口。",
-  "runId": "ddd55180-aeba-445a-aec7-6cd193da0771",
-  "generatedAt": "2026-09-08T04:13:52.723Z",
-  "unmeasuredGateBits": [],
+  "verdict": "NOT-VERIFIED",
+  "conclusion": "NOT-VERIFIED — verification-results.json stale or unmeasured；跑 npm run verify:phase11a2-3 重新生成。",
+  "globalMissingSourceReferences": 147,
+  "officialPathMissingSourceReferences": 121,
+  "sourceReadiness": {
+    "allRequiredSourcesReady": false,
+    "questCardsReady": false,
+    "templarsReady": false,
+    "mammothCystReady": false,
+    "shufflingHorrorReady": false,
+    "finalEncounterReady": false,
+    "darkestDungeonMonsterDeckReady": false
+  },
+  "generatedAt": "2026-09-08T07:05:35.742Z",
+  "unmeasuredGateBits": [
+    "goldenTestPasses"
+  ],
   "dataGates": {
     "officialGuardianPoolEnabled": false,
     "officialFinalEncounterEnabled": false,
     "officialDarkestDungeonQuestPoolEnabled": false,
     "guardianDataGaps": [
-      "darkest-dungeon-guardian-templars（guardian-name:darkest-dungeon-guardian-templars；guardian-room:darkest-dungeon-guardian-templars；guardian-actors:darkest-dungeon-guardian-templars；Guardian darkest-dungeon-guardian-templars 数据缺失（unavailable）→ official 禁用）",
-      "darkest-dungeon-guardian-mammoth-cyst（guardian-name:darkest-dungeon-guardian-mammoth-cyst；guardian-room:darkest-dungeon-guardian-mammoth-cyst；guardian-actors:darkest-dungeon-guardian-mammoth-cyst；Guardian darkest-dungeon-guardian-mammoth-cyst 数据缺失（unavailable）→ official 禁用）",
-      "darkest-dungeon-guardian-shuffling-horror（guardian-name:darkest-dungeon-guardian-shuffling-horror；guardian-room:darkest-dungeon-guardian-shuffling-horror；guardian-actors:darkest-dungeon-guardian-shuffling-horror；Guardian darkest-dungeon-guardian-shuffling-horror 数据缺失（unavailable）→ official 禁用）"
+      "darkest-dungeon-guardian-templars（guardian-name:darkest-dungeon-guardian-templars；guardian-room:darkest-dungeon-guardian-templars；guardian-actors:darkest-dungeon-guardian-templars）",
+      "darkest-dungeon-guardian-mammoth-cyst（guardian-name:darkest-dungeon-guardian-mammoth-cyst；guardian-room:darkest-dungeon-guardian-mammoth-cyst；guardian-actors:darkest-dungeon-guardian-mammoth-cyst）",
+      "darkest-dungeon-guardian-shuffling-horror（guardian-name:darkest-dungeon-guardian-shuffling-horror；guardian-room:darkest-dungeon-guardian-shuffling-horror；guardian-actors:darkest-dungeon-guardian-shuffling-horror）",
+      "[templars] templar-impaler-battle-card（HP / Dodge / Resistance / Immunity 缺失）；templar-impaler-skills（d10 Skill Table 缺失，含 Body Slam 数值）；templar-warlord-battle-card（HP / Dodge / Resistance / Immunity 缺失）；templar-warlord-skills（d10 Skill Table 缺失）；spiked-pit-effects（Pit 定义与效果缺失）；spiked-pit-map（d10 → Pit 映射缺失）；templars-room-tile（Boss 固定 Area 缺失）；templars-room-card（Area 图 / 容量缺失）；templars-victory-condition（正式胜利条件缺失）；templars-encounter-member-area（成员固定 Area 缺失）",
+      "[mammoth-cyst] mammoth-cyst-battle-card（HP / Dodge / Resistance / Immunity 缺失）；mammoth-cyst-skills（d10 Skill Table 缺失，含普通攻击数值）；white-cell-stalk-battle-card（HP / Dodge / Resistance 缺失）；white-cell-stalk-skills（d10 Skill Table 缺失，含 Teleportation 数值）；mammoth-cyst-room-card（Area 图 / 容量缺失）；teleportation-d10-area-map（d10 → Area 映射缺失）；mammoth-cyst-room-tile（Cyst 固定 Area 缺失）；white-cell-stalk-spawn-policy（Conditional Summon 定义缺失）；guardian-victory-cleanup（正式胜利条件缺失）；white-cell-stalk-spawn-policy（Stalk Spawn Stance / Area 规则缺失）",
+      "[shuffling-horror] shuffling-horror.sourceReference（官方 Battle Card / Room Card 来源未绑定）；shuffling-horror.officialDataStatus !== \"verified\"（需官方 Battle Card / Room 全部补完）；shuffling-horror.roomDefinitionId（官方 Room Card 缺失）；shuffling-horror.actorDefinitionIds（官方 Actor 列表为空）；shuffling-horror.battleCards（Shuffling Horror / Cultist Priest / Malignant Growth 三张 Battle Card 的 maxHp / skills / 技能 d10 全部缺）；shuffling-horror.victoryRule（Guardian Victory Cleanup 数值 partial）"
     ],
     "finalEncounterDataGaps": [
       "final-form-ancestor-first-form（final-form-name:ancestor-first-form；final-form-hp:ancestor-first-form；final-form-skills:ancestor-first-form；Final Form ancestor-first-form 数据缺失（unavailable）→ official 禁用）",

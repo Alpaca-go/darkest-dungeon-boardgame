@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-08T04:13:52.723Z",
-  "manifestHash": "469d91eb",
+  "generatedAt": "2026-09-08T07:05:35.742Z",
+  "manifestHash": "8238339c",
   "openP0": 1,
   "openP1": 0,
   "openP2": 2,
@@ -10,7 +10,7 @@
       "severity": "P0",
       "domain": "content-data",
       "title": "Act IV 官方卡面数据缺失，官方池被 Data Gate 关闭",
-      "description": "Guardian 缺口 3 项、Final Encounter 缺口 5 项、Darkest Dungeon Quest 缺口 3 项。按硬约束 22，缺失数据一律标记 content-blocked，不得猜测补全。",
+      "description": "Guardian 缺口 6 项、Final Encounter 缺口 5 项、Darkest Dungeon Quest 缺口 3 项。按硬约束 22，缺失数据一律标记 content-blocked，不得猜测补全。",
       "reproductionCommands": [
         "npm run audit:content"
       ],
@@ -26,12 +26,12 @@
       "severity": "P2",
       "domain": "content-governance",
       "title": "大量内容条目缺少 sourceReference",
-      "description": "157/158 条内容没有规则书出处，按 spec §6 一律不能判定为 verified / official-ready。",
+      "description": "147/158 条内容没有规则书出处，按 spec §6 一律不能判定为 verified / official-ready。",
       "reproductionCommands": [
         "npm run audit:content"
       ],
       "expected": "所有官方内容条目具备 sourceReference。",
-      "actual": "缺失 157 条。",
+      "actual": "缺失 147 条。",
       "status": "open",
       "regressionTestIds": [
         "content-manifest.test.ts:source-reference-coverage"

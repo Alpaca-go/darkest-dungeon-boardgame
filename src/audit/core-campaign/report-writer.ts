@@ -11,7 +11,7 @@ import type { AuditIssue } from './types';
 
 /** Gate 状态（与 ReleaseGateResult 保持一致）。 */
 export interface ReportGate {
-  verdict: 'PASS' | 'CONDITIONAL' | 'FAIL';
+  verdict: 'PASS' | 'CONDITIONAL' | 'SOURCE-BLOCKED' | 'FAIL' | 'NOT-VERIFIED';
   conclusion: string;
   openP0: number;
   openP1: number;

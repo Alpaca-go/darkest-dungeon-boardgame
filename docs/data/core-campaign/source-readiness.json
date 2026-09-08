@@ -1,0 +1,48 @@
+{
+  "$schema": "phase-11a3/source-readiness.v1",
+  "generatedAt": "2026-09-08T12:00:00.000Z",
+  "phase": "11A.3",
+  "purpose": "Source Gate 0 (dev doc §12) 主真值源。机器生成的官方资料就绪信号；CI / 静态测试 / Release Gate 都从这里读取。",
+  "manifestRef": "docs/data/core-campaign/official-source-manifest.json",
+  "fieldProvenanceRef": "docs/data/core-campaign/official-field-provenance.json",
+  "tierA": {
+    "rulebook": "available",
+    "reference": "docs/DD_EN_COREBOX_RULES.pdf"
+  },
+  "tierB": {
+    "battleCards": "missing",
+    "questCards": "missing",
+    "roomCards": "missing",
+    "dungeonTiles": "missing",
+    "monsterDeck": "missing",
+    "officialErrata": "missing"
+  },
+  "gates": {
+    "questCardsReady": false,
+    "templarsReady": false,
+    "mammothCystReady": false,
+    "shufflingHorrorReady": false,
+    "finalEncounterReady": false,
+    "darkestDungeonMonsterDeckReady": false,
+    "allRequiredSourcesReady": false
+  },
+  "rationale": {
+    "questCardsReady": "3 张 Quest Card 全部 missing；name / guardianDefinitionId / skippedFinalFormId / firewoodCount / provisionPolicyId.cardSpecific 均无 source asset（见 official-source-manifest.json 中 quest-card-1/2/3）。",
+    "templarsReady": "Impaler / Warlord Battle Card 全字段无来源（HP / Dodge / Speed / Resistance / Accuracy / Damage / Crit / 技能 / d10）；Templars Room Card 全部 area / capacity / spikedPit / pitD10Map / pitExitRule 缺。",
+    "mammothCystReady": "Cyst 战斗卡 + White Cell Stalk 战斗卡 + Mammoth Cyst Room Card 全部缺；Teleportation d10 映射缺。",
+    "shufflingHorrorReady": "Horror / Cultist Priest / Malignant Growth 三张战斗卡全缺；Room Card 缺。",
+    "finalEncounterReady": "Ancestor Room Card 全字段缺；4 个 Form 战斗卡全缺；Darkest Dungeon Monster Deck 缺。",
+    "darkestDungeonMonsterDeckReady": "Deck composition / monsterDefinitionIds / drawPolicy 全部缺。Gestating Heart 的 Sispersion 抽牌源无权威组成。",
+    "allRequiredSourcesReady": "以上 6 个子 gate 全部 false。Phase 11A.3 必须停在 SOURCE-BLOCKED，禁止启用 official pool / 关闭 P0-002 / 生成 COMPLETE 报告。"
+  },
+  "impact": {
+    "canEnterPhase11B": false,
+    "canCloseP0_002": false,
+    "canEnableOfficialGuardianPool": false,
+    "canEnableOfficialFinalEncounter": false,
+    "canEnableOfficialDarkestDungeonQuestPool": false,
+    "canEnableOfficialDarkestDungeonMonsterDeck": false,
+    "verdict": "SOURCE-BLOCKED"
+  },
+  "nextAction": "等待用户补全以下资产后重跑 source-readiness：3 张 Quest Card + 7 张 Battle Card + 4 张 Room Card + 2 张 Dungeon Tile + Darkest Dungeon Monster Deck + Come Unto Your Maker。详见 docs/data/core-campaign/official-source-acquisition-checklist.md。"
+}

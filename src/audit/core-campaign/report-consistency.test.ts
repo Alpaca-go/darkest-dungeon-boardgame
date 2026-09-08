@@ -57,8 +57,9 @@ beforeAll(() => {
   };
 
   const gate: ReportGate = {
-    verdict: 'CONDITIONAL',
-    conclusion: 'CONDITIONAL — framework-complete-content-blocked',
+    // Phase 11A.3 dev doc §1 / §39：source-readiness 缺失时为 SOURCE-BLOCKED。
+    verdict: 'SOURCE-BLOCKED',
+    conclusion: 'SOURCE-BLOCKED — Phase 11A.3 阶段缺少官方 Battle/Quest/Room Card 资料',
     openP0: 0, // baseline 当前 P0-002 仍 open
     openP1: 0,
     openP2: 0,
@@ -120,7 +121,7 @@ describe('Report Consistency (Phase 11A.2 §9)', () => {
 
   it('55. gate 字段一致', () => {
     expect(md).toContain('Verdict');
-    expect(md).toContain('CONDITIONAL');
+    expect(md).toContain('SOURCE-BLOCKED');
   });
 
   it('56. replay 状态一致', () => {

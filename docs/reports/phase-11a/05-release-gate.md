@@ -4,16 +4,16 @@
 
 ## 最终判定
 
-# CONDITIONAL — framework-complete-content-blocked：主循环可闭环，但仍有 1 个 P0 内容缺口。
+# NOT-VERIFIED — verification-results.json stale or unmeasured；跑 npm run verify:phase11a2-3 重新生成。
 
 ## 门禁明细
 
 | 门禁项 | 结果 |
 | --- | --- |
-| build 通过 | ✅ |
-| 单元测试通过 | ✅ |
-| 集成测试通过 | ✅ |
-| 关键 E2E 通过 | ✅ |
+| build 通过 | ⚪ 未验证 |
+| 单元测试通过 | ⚪ 未验证 |
+| 集成测试通过 | ⚪ 未验证 |
+| 关键 E2E 通过 | ⚪ 未验证 |
 | Golden Campaign 通过 | ❌ |
 | Replay 决定性 | ✅ |
 | 11-Quest 循环闭环 | ❌ |
@@ -34,7 +34,7 @@
 
 | Gate | 开启 | 数据缺口 |
 | --- | --- | --- |
-| 官方 Guardian 池 | ❌ | 3 |
+| 官方 Guardian 池 | ❌ | 6 |
 | 官方 Final Encounter | ❌ | 5 |
 | 官方 Darkest Dungeon Quest 池 | ❌ | 3 |
 
@@ -46,4 +46,4 @@
 ## 内容治理
 
 - 内容条目：**158**，其中 official-ready **1**
-- 缺 `sourceReference`：**157**
+- 缺 `sourceReference`：**147**

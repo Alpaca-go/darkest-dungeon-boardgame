@@ -43,6 +43,13 @@ export const DARKEST_DUNGEON_QUEST_XP_REWARD = 3 as const;
 // 正式 Quest（刻意留空 → 驱动 Data Gate）
 // ---------------------------------------------------------------------------
 
+// Phase 11A.3 dev doc §17 / §19：把已 verified 的 rulebook facts 写进 official Quest
+// （structural: count=3 / roomCount=16 / xpReward=3 / draw one）。
+// 卡面字段（name / Guardian / Skipped Form / Firewood）必须留空 → 仍 unavailable。
+function officialQuestSourceReference(id: string): string {
+  return `DD_EN_COREBOX_RULES.pdf:p35（structural: count=3 / roomCount=16 / xpReward=3 / draw one / cancel one final form for ${id}）`;
+}
+
 function officialQuestStub(id: string): DarkestDungeonQuestDefinition {
   return {
     id,
@@ -59,6 +66,8 @@ function officialQuestStub(id: string): DarkestDungeonQuestDefinition {
     campaignFailureOnFailure: true,
     officialDataStatus: 'unavailable',
     enabledInOfficialPool: false,
+    // Phase 11A.3 dev doc §9 / §19：把已 verified 的 rulebook structural provenance 写进 official。
+    sourceReference: officialQuestSourceReference(id),
   };
 }
 

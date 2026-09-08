@@ -169,7 +169,35 @@ export interface ManifestSummary {
   prototype: number;
   unavailable: number;
   missingSourceReference: number;
+  // Phase 11A.3 dev doc §42：拆分 P2-001。
+  //   globalMissingSourceReferences：整个 content manifest 缺 sourceReference 的总数（保留旧语义）。
+  //   officialPathMissingSourceReferences：仅统计「会在 official path（formal 模式 / Production
+  //     Command Layer 实际使用）上被读到的」且缺 sourceReference 的条目数。
+  //     Phase 11A.3 PASS 硬门槛。
+  globalMissingSourceReferences: number;
+  officialPathMissingSourceReferences: number;
 }
+
+/**
+ * 「会在 official path 上被读到」的类别（Phase 11A.3 dev doc §33 / §42）。
+ * 这些是 formal 模式 / Production Command Layer 实际会实例化 / 引用的内容。
+ */
+const OFFICIAL_PATH_CATEGORIES: ReadonlySet<string> = new Set([
+  'darkestDungeonQuests',
+  'guardians',
+  'finalForms',
+  'quests',
+  'bosses',
+  'threats',
+  'monsters',
+  'heroSkills',
+  'trinkets',
+  'quirks',
+  'diseases',
+  'afflictions',
+  'virtues',
+  'provisions',
+]);
 
 export function summarizeManifest(m: CoreCampaignContentManifest): ManifestSummary {
   const all = [
@@ -186,6 +214,12 @@ export function summarizeManifest(m: CoreCampaignContentManifest): ManifestSumma
     byStatus[e.officialDataStatus] = (byStatus[e.officialDataStatus] ?? 0) + 1;
     byReadiness[e.runtimeReadiness] = (byReadiness[e.runtimeReadiness] ?? 0) + 1;
   }
+
+  const missingSourceEntries = all.filter((e) => e.missingFields.includes('sourceReference'));
+  const officialPathMissingEntries = missingSourceEntries.filter(
+    (e) => OFFICIAL_PATH_CATEGORIES.has(e.category),
+  );
+
   return {
     total: all.length,
     byCategory,
@@ -195,6 +229,8 @@ export function summarizeManifest(m: CoreCampaignContentManifest): ManifestSumma
     blocked: all.filter((e) => e.runtimeReadiness === 'blocked').length,
     prototype: all.filter((e) => e.officialDataStatus === 'prototype').length,
     unavailable: all.filter((e) => e.officialDataStatus === 'unavailable').length,
-    missingSourceReference: all.filter((e) => e.missingFields.includes('sourceReference')).length,
+    missingSourceReference: missingSourceEntries.length,
+    globalMissingSourceReferences: missingSourceEntries.length,
+    officialPathMissingSourceReferences: officialPathMissingEntries.length,
   };
 }

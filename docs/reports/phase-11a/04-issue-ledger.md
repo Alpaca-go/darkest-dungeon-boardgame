@@ -15,7 +15,7 @@
 **Act IV 官方卡面数据缺失，官方池被 Data Gate 关闭**
 
 - **状态**：open
-- **描述**：Guardian 缺口 3 项、Final Encounter 缺口 5 项、Darkest Dungeon Quest 缺口 3 项。按硬约束 22，缺失数据一律标记 content-blocked，不得猜测补全。
+- **描述**：Guardian 缺口 6 项、Final Encounter 缺口 5 项、Darkest Dungeon Quest 缺口 3 项。按硬约束 22，缺失数据一律标记 content-blocked，不得猜测补全。
 - **期望**：官方 Guardian / Final Form / Quest 数据齐备且 Data Gate 打开。
 - **实际**：isDarkestDungeonOfficialGuardianPoolEnabled()=false, isFinalEncounterOfficialEnabled()=false, isDarkestDungeonOfficialQuestPoolEnabled()=false
 - **复现命令**：`npm run audit:content`
@@ -28,9 +28,9 @@
 **大量内容条目缺少 sourceReference**
 
 - **状态**：open
-- **描述**：157/158 条内容没有规则书出处，按 spec §6 一律不能判定为 verified / official-ready。
+- **描述**：147/158 条内容没有规则书出处，按 spec §6 一律不能判定为 verified / official-ready。
 - **期望**：所有官方内容条目具备 sourceReference。
-- **实际**：缺失 157 条。
+- **实际**：缺失 147 条。
 - **复现命令**：`npm run audit:content`
 - **回归测试**：`content-manifest.test.ts:source-reference-coverage`
 

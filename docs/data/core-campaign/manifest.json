@@ -1,5 +1,5 @@
 {
-  "manifestHash": "469d91eb",
+  "manifestHash": "8238339c",
   "summary": {
     "total": 158,
     "byCategory": {
@@ -24,21 +24,23 @@
       "finalForms": 8
     },
     "byStatus": {
-      "partial": 117,
+      "partial": 120,
       "prototype": 30,
       "verified": 1,
-      "unavailable": 10
+      "unavailable": 7
     },
     "byReadiness": {
-      "framework-only": 147,
+      "framework-only": 150,
       "official-ready": 1,
-      "blocked": 10
+      "blocked": 7
     },
     "officialReady": 1,
-    "blocked": 10,
+    "blocked": 7,
     "prototype": 30,
-    "unavailable": 10,
-    "missingSourceReference": 157
+    "unavailable": 7,
+    "missingSourceReference": 147,
+    "globalMissingSourceReferences": 147,
+    "officialPathMissingSourceReferences": 121
   },
   "version": "1.0.0",
   "heroes": [
@@ -2244,42 +2246,39 @@
       "id": "darkest-dungeon-quest-1",
       "category": "darkestDungeonQuests",
       "sourceFile": "src/data/darkest-dungeon/quest-registry.ts",
+      "sourceReference": "DD_EN_COREBOX_RULES.pdf:p35（structural: count=3 / roomCount=16 / xpReward=3 / draw one / cancel one final form for darkest-dungeon-quest-1）",
       "officialDataStatus": "unavailable",
       "runtimeReadiness": "blocked",
       "enabledInOfficialPool": false,
       "definitionHash": "2d0f4931",
       "dependencies": [],
-      "missingFields": [
-        "sourceReference"
-      ],
+      "missingFields": [],
       "auditNotes": []
     },
     {
       "id": "darkest-dungeon-quest-2",
       "category": "darkestDungeonQuests",
       "sourceFile": "src/data/darkest-dungeon/quest-registry.ts",
+      "sourceReference": "DD_EN_COREBOX_RULES.pdf:p35（structural: count=3 / roomCount=16 / xpReward=3 / draw one / cancel one final form for darkest-dungeon-quest-2）",
       "officialDataStatus": "unavailable",
       "runtimeReadiness": "blocked",
       "enabledInOfficialPool": false,
       "definitionHash": "06dc6612",
       "dependencies": [],
-      "missingFields": [
-        "sourceReference"
-      ],
+      "missingFields": [],
       "auditNotes": []
     },
     {
       "id": "darkest-dungeon-quest-3",
       "category": "darkestDungeonQuests",
       "sourceFile": "src/data/darkest-dungeon/quest-registry.ts",
+      "sourceReference": "DD_EN_COREBOX_RULES.pdf:p35（structural: count=3 / roomCount=16 / xpReward=3 / draw one / cancel one final form for darkest-dungeon-quest-3）",
       "officialDataStatus": "unavailable",
       "runtimeReadiness": "blocked",
       "enabledInOfficialPool": false,
       "definitionHash": "7e2937e3",
       "dependencies": [],
-      "missingFields": [
-        "sourceReference"
-      ],
+      "missingFields": [],
       "auditNotes": []
     },
     {
@@ -2330,42 +2329,39 @@
       "id": "darkest-dungeon-guardian-templars",
       "category": "guardians",
       "sourceFile": "src/data/darkest-dungeon/guardian-registry.ts",
-      "officialDataStatus": "unavailable",
-      "runtimeReadiness": "blocked",
+      "sourceReference": "DD_EN_COREBOX_RULES.pdf:p39（仅 structural fields）",
+      "officialDataStatus": "partial",
+      "runtimeReadiness": "framework-only",
       "enabledInOfficialPool": false,
-      "definitionHash": "036d41c8",
+      "definitionHash": "f4e5e1d3",
       "dependencies": [],
-      "missingFields": [
-        "sourceReference"
-      ],
+      "missingFields": [],
       "auditNotes": []
     },
     {
       "id": "darkest-dungeon-guardian-mammoth-cyst",
       "category": "guardians",
       "sourceFile": "src/data/darkest-dungeon/guardian-registry.ts",
-      "officialDataStatus": "unavailable",
-      "runtimeReadiness": "blocked",
+      "sourceReference": "DD_EN_COREBOX_RULES.pdf:p39（仅 structural fields）",
+      "officialDataStatus": "partial",
+      "runtimeReadiness": "framework-only",
       "enabledInOfficialPool": false,
-      "definitionHash": "0e373dad",
+      "definitionHash": "e5e83c52",
       "dependencies": [],
-      "missingFields": [
-        "sourceReference"
-      ],
+      "missingFields": [],
       "auditNotes": []
     },
     {
       "id": "darkest-dungeon-guardian-shuffling-horror",
       "category": "guardians",
       "sourceFile": "src/data/darkest-dungeon/guardian-registry.ts",
-      "officialDataStatus": "unavailable",
-      "runtimeReadiness": "blocked",
+      "sourceReference": "DD_EN_COREBOX_RULES.pdf:p40（仅 structural fields）",
+      "officialDataStatus": "partial",
+      "runtimeReadiness": "framework-only",
       "enabledInOfficialPool": false,
-      "definitionHash": "b127dccb",
+      "definitionHash": "20196e60",
       "dependencies": [],
-      "missingFields": [
-        "sourceReference"
-      ],
+      "missingFields": [],
       "auditNotes": []
     },
     {
@@ -2416,56 +2412,52 @@
       "id": "final-form-ancestor-first-form",
       "category": "finalForms",
       "sourceFile": "src/data/darkest-dungeon/final-form-registry.ts",
+      "sourceReference": "DD_EN_COREBOX_RULES.pdf:p40（structural: stance / reflection count / initiative / guard / imperfect death 10 wounds）",
       "officialDataStatus": "unavailable",
       "runtimeReadiness": "blocked",
       "enabledInOfficialPool": false,
       "definitionHash": "1b37cd96",
       "dependencies": [],
-      "missingFields": [
-        "sourceReference"
-      ],
+      "missingFields": [],
       "auditNotes": []
     },
     {
       "id": "final-form-ancestor-second-form",
       "category": "finalForms",
       "sourceFile": "src/data/darkest-dungeon/final-form-registry.ts",
+      "sourceReference": "DD_EN_COREBOX_RULES.pdf:p41（structural: initiative 2 / 3× Absolute Nothingness untargetable + occupies Area / d10 teleport map 1-3:defensive,4-6:ranged,7-9:support,10:none）",
       "officialDataStatus": "unavailable",
       "runtimeReadiness": "blocked",
       "enabledInOfficialPool": false,
       "definitionHash": "b5b3fb8a",
       "dependencies": [],
-      "missingFields": [
-        "sourceReference"
-      ],
+      "missingFields": [],
       "auditNotes": []
     },
     {
       "id": "final-form-gestating-heart",
       "category": "finalForms",
       "sourceFile": "src/data/darkest-dungeon/final-form-registry.ts",
+      "sourceReference": "DD_EN_COREBOX_RULES.pdf:p41（structural: aggressive / 1 initiative / Sispersion adds 1 initiative / wounded reaction: Blight 2-3 turns + Heal 2）",
       "officialDataStatus": "unavailable",
       "runtimeReadiness": "blocked",
       "enabledInOfficialPool": false,
       "definitionHash": "72978c46",
       "dependencies": [],
-      "missingFields": [
-        "sourceReference"
-      ],
+      "missingFields": [],
       "auditNotes": []
     },
     {
       "id": "final-form-heart-of-darkness",
       "category": "finalForms",
       "sourceFile": "src/data/darkest-dungeon/final-form-registry.ts",
+      "sourceReference": "DD_EN_COREBOX_RULES.pdf:p41（structural: aggressive / 2 initiative / Impending Doom rolls at battle start + after completed action / defeat = campaign victory）",
       "officialDataStatus": "unavailable",
       "runtimeReadiness": "blocked",
       "enabledInOfficialPool": false,
       "definitionHash": "cd8bd135",
       "dependencies": [],
-      "missingFields": [
-        "sourceReference"
-      ],
+      "missingFields": [],
       "auditNotes": []
     },
     {
