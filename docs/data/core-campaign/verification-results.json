@@ -1,13 +1,14 @@
 {
   "schemaVersion": "phase-11a3-source-gate-final-acceptance.v1",
-  "measuredAt": "2026-09-08T11:26:59.436Z",
-  "verificationInputHash": "6e47b5e9589f5c49bb066df3f637332df72a607fb35094b9a7306f0687965ee5",
+  "runId": "ef157671-5e61-42c0-b676-0e3beb4be3db",
+  "measuredAt": "2026-09-08T14:50:15.885Z",
+  "verificationInputHash": "4a3132b80a0956e29569adaea2c50d804734473eaea7de605372f26b5987dc4d",
   "typecheckPasses": true,
   "unitPasses": true,
   "commandContractPasses": true,
   "integrationPasses": true,
   "buildPasses": true,
-  "criticalE2EPasses": true,
+  "criticalE2EPasses": false,
   "goldenPasses": true,
   "goldenTestPasses": true,
   "replayDeterminismPasses": true,
@@ -36,6 +37,8 @@
     "darkestDungeonMonsterDeckReady": false,
     "allRequiredSourcesReady": false
   },
+  "sourceReadinessRequiredMissingCount": 26,
+  "sourceReadinessOptionalMissingCount": 1,
   "sourceReadinessProvenanceAuditPasses": true,
   "sourceReadinessOfficialActFourRequiredSourceCount": 26,
   "sourceReadinessOfficialActFourMissingSourceRequirements": [
@@ -77,7 +80,7 @@
     "integrationPasses": true,
     "commandContractPasses": true,
     "replayContinuationPasses": true,
-    "criticalE2EPasses": true,
+    "criticalE2EPasses": false,
     "goldenCampaignPasses": false,
     "replayDeterminismPasses": true,
     "openP0": 1,
@@ -170,7 +173,9 @@
     "canBeginOfficialImport": false,
     "canCloseP0_002": false,
     "canEnterPhase11B": false,
-    "generatedAt": "2026-09-08T11:26:59.168Z",
+    "runId": "ef157671-5e61-42c0-b676-0e3beb4be3db",
+    "verificationInputHash": "4a3132b80a0956e29569adaea2c50d804734473eaea7de605372f26b5987dc4d",
+    "generatedAt": "2026-09-08T14:50:14.564Z",
     "unmeasuredGateBits": [],
     "dataGates": {
       "officialGuardianPoolEnabled": false,
@@ -219,86 +224,86 @@
     {
       "command": "typecheck",
       "exitCode": 0,
-      "durationMs": 7208,
+      "durationMs": 7823,
       "failureLogPath": null
     },
     {
       "command": "unit",
       "exitCode": 0,
-      "durationMs": 21815,
+      "durationMs": 28434,
       "failureLogPath": null
     },
     {
       "command": "commandContract",
       "exitCode": 0,
-      "durationMs": 3390,
+      "durationMs": 3803,
       "failureLogPath": null
     },
     {
       "command": "integration",
       "exitCode": 0,
-      "durationMs": 4107,
+      "durationMs": 5486,
       "failureLogPath": null
     },
     {
       "command": "build",
       "exitCode": 0,
-      "durationMs": 12093,
+      "durationMs": 14526,
       "failureLogPath": null
     },
     {
       "command": "criticalE2E",
-      "exitCode": 0,
-      "durationMs": 17415,
-      "failureLogPath": null
+      "exitCode": -1,
+      "durationMs": 1,
+      "failureLogPath": "D:\\darkest-dungoen-boardgame\\docs\\data\\core-campaign\\verify-failures\\criticalE2E.log"
     },
     {
       "command": "golden",
       "exitCode": 0,
-      "durationMs": 12931,
+      "durationMs": 17081,
       "failureLogPath": null
     },
     {
       "command": "replayContinuation",
       "exitCode": 0,
-      "durationMs": 4909,
+      "durationMs": 6438,
       "failureLogPath": null
     },
     {
       "command": "replayDeterminism",
       "exitCode": 0,
-      "durationMs": 4676,
+      "durationMs": 6317,
       "failureLogPath": null
     },
     {
       "command": "productionCommand",
       "exitCode": 0,
-      "durationMs": 3006,
+      "durationMs": 4249,
       "failureLogPath": null
     },
     {
       "command": "officialSource",
       "exitCode": 0,
-      "durationMs": 1987,
+      "durationMs": 2586,
       "failureLogPath": null
     },
     {
       "command": "contentAudit",
       "exitCode": 0,
-      "durationMs": 4009,
+      "durationMs": 5999,
       "failureLogPath": null
     },
     {
       "command": "rulesAudit",
       "exitCode": 0,
-      "durationMs": 3967,
+      "durationMs": 5684,
       "failureLogPath": null
     },
     {
       "command": "releaseGate",
-      "exitCode": 1,
-      "durationMs": 4583,
-      "failureLogPath": "D:\\darkest-dungoen-boardgame\\docs\\data\\core-campaign\\verify-failures\\releaseGate.log"
+      "exitCode": 0,
+      "durationMs": 11159,
+      "failureLogPath": null
     }
   ],
   "notes": []

@@ -173,14 +173,15 @@ export interface SourceReadinessResult {
 
 const TIER_A_RULEBOOK_PATH = 'docs/DD_EN_COREBOX_RULES.pdf';
 
-function checkTierARulebook(): SourceAuditError[] {
+function checkTierARulebook(repoRoot = process.cwd(), rulebookPathOverride?: string): SourceAuditError[] {
   const errors: SourceAuditError[] = [];
-  const exists = existsSync(TIER_A_RULEBOOK_PATH);
+  const rulebookPath = rulebookPathOverride ?? join(repoRoot, TIER_A_RULEBOOK_PATH);
+  const exists = existsSync(rulebookPath);
   // 一些 Windows / git LFS 环境下 statSync 可能 throw（permission 等），显式 catch
   let readable = false;
   if (exists) {
     try {
-      statSync(TIER_A_RULEBOOK_PATH);
+      statSync(rulebookPath);
       readable = true;
     } catch {
       readable = false;
@@ -190,7 +191,7 @@ function checkTierARulebook(): SourceAuditError[] {
     errors.push({
       code: 'tier-a-rulebook-missing',
       requirementId: 'tierA-rulebook',
-      message: `Tier A rulebook missing or unreadable: ${TIER_A_RULEBOOK_PATH}`,
+      message: `Tier A rulebook missing or unreadable: ${rulebookPath}`,
     });
   }
   return errors;
@@ -202,10 +203,14 @@ function checkTierARulebook(): SourceAuditError[] {
 
 const OFFICIAL_ROOT = 'docs/data/darkest-dungeon/official';
 
-function expandBraces(pattern: string): string[] {
-  if (!pattern.includes('*')) return [pattern];
+function expandBraces(pattern: string, repoRoot = process.cwd(), officialSourceRoot = join(repoRoot, OFFICIAL_ROOT)): string[] {
+  if (!pattern.includes('*')) {
+    if (pattern === TIER_A_RULEBOOK_PATH) return [join(repoRoot, pattern)];
+    const relPath = pattern.replace(/^docs\/data\/darkest-dungeon\/official\//, '');
+    return [join(officialSourceRoot, relPath)];
+  }
   const rel = pattern.replace(/^docs\/data\/darkest-dungeon\/official\//, '');
-  const dir = join(OFFICIAL_ROOT, rel.split('/').slice(0, -1).join('/'));
+  const dir = join(officialSourceRoot, rel.split('/').slice(0, -1).join('/'));
   const filenamePattern = rel.split('/').pop()!;
   if (!existsSync(dir)) return [];
   const files = readdirSync(dir).filter((f) => {
@@ -228,6 +233,8 @@ function discoverAndLoad(
   requirements: OfficialSourceRequirement[],
   errors: SourceAuditError[],
   seenAssetIds: Map<string, string>,
+  repoRoot = process.cwd(),
+  officialSourceRoot = join(repoRoot, OFFICIAL_ROOT),
 ): { entries: DiscoveryEntry[] } {
   const entries: DiscoveryEntry[] = [];
 
@@ -236,7 +243,7 @@ function discoverAndLoad(
       // Tier A 由 checkTierARulebook 单独处理
       continue;
     }
-    const paths = expandBraces(req.sourceFilePattern);
+    const paths = expandBraces(req.sourceFilePattern, repoRoot, officialSourceRoot);
     if (paths.length === 0) {
       entries.push({
         requirementId: req.requirementId,
@@ -249,6 +256,13 @@ function discoverAndLoad(
     // 其他 requirement 走严格 quantity
     const useQuantity = req.componentGroup !== 'dungeon-tile';
     const expectedCount = useQuantity ? req.quantity : paths.length;
+    if (useQuantity && paths.length > expectedCount) {
+      errors.push({
+        code: 'quantity-mismatch',
+        requirementId: req.requirementId,
+        message: `Expected exactly ${expectedCount} physical assets, found ${paths.length}`,
+      });
+    }
     if (paths.length < expectedCount) {
       // 资料部分缺失：把现有 path 试着 load，缺的部分当成 missing
       const partialDoc = paths[0] ? tryLoad(paths[0], errors, req, seenAssetIds) : null;
@@ -498,7 +512,7 @@ function resolveRequirement(
       reason: `no source file at ${req.sourceFilePattern}`,
     };
   }
-  if (documents.length < req.quantity) {
+  if (documents.length !== req.quantity) {
     return {
       requirementId: req.requirementId,
       status: 'partial',
@@ -512,22 +526,21 @@ function resolveRequirement(
   // 字段级 三重验证（dev doc §7）：value + provenance + sourceReference
   const missingFields: string[] = [];
   for (const field of req.requiredFields) {
-    let anyDocHasIt = false;
+    let allDocsHaveIt = true;
     let anyDocMissingValue = false;
+    let anyDocMissingProvenance = false;
     for (const doc of documents) {
       const value = getExtractedValue(doc.extractedFields, field);
       if (isEffectivelyMissing(value)) {
         anyDocMissingValue = true;
-      } else {
-        anyDocHasIt = true;
       }
       const prov = doc.fieldProvenance?.[field];
       if (!prov || prov.status !== 'verified' || !prov.sourceReference) {
-        // provenance 缺失 / 未 verified / 没 sourceReference
-        anyDocHasIt = false;
+        anyDocMissingProvenance = true;
       }
     }
-    if (!anyDocHasIt) {
+    allDocsHaveIt = !anyDocMissingValue && !anyDocMissingProvenance;
+    if (!allDocsHaveIt) {
       if (anyDocMissingValue) {
         missingFields.push(`${field}(missing-value)`);
       } else {
@@ -579,7 +592,7 @@ function computeProvenanceAudit(
     for (const field of req.requiredFields) {
       requiredFieldCount++;
       const docs = documentsByReq.get(r.requirementId) ?? [];
-      let anyVerified = false;
+      let verifiedForEveryAsset = docs.length === req.quantity;
       for (const doc of docs) {
         const value = getExtractedValue(doc.extractedFields, field);
         const prov = doc.fieldProvenance?.[field];
@@ -589,7 +602,7 @@ function computeProvenanceAudit(
           prov.sourceReference.trim() !== '' &&
           !isEffectivelyMissing(value)
         ) {
-          anyVerified = true;
+          // all physical assets must verify this field
         } else if (prov?.status === 'verified' && isEffectivelyMissing(value)) {
           missingValueCount++;
         } else if (!prov || prov.status !== 'verified') {
@@ -598,7 +611,16 @@ function computeProvenanceAudit(
           invalidSourceReferenceCount++;
         }
       }
-      if (anyVerified) verifiedRequiredFieldCount++;
+      if (!verifiedForEveryAsset || docs.some((doc) => {
+        const value = getExtractedValue(doc.extractedFields, field);
+        const prov = doc.fieldProvenance?.[field];
+        return isEffectivelyMissing(value) || prov?.status !== 'verified' || !prov.sourceReference?.trim();
+      })) {
+        verifiedForEveryAsset = false;
+      }
+      // requiredFieldCount is requirement-field cardinality; a field is verified
+      // only when every physical asset verifies it, but it still counts once.
+      if (verifiedForEveryAsset) verifiedRequiredFieldCount++;
     }
   }
   // componentMismatchCount: 来自 errors
@@ -628,13 +650,17 @@ export interface AuditOptions {
   injectDocuments?: Record<string, OfficialSourceDocument[]>;
   /** 测试 / 模拟用：覆盖 Tier A rulebook 存在性（默认 true = 存在）。 */
   injectRulebookMissing?: boolean;
+  /** 可替换的官方资料根目录，供临时夹具和 verifier 反例测试使用。 */
+  officialSourceRoot?: string;
+  /** 可替换的 Tier A rulebook 路径。 */
+  rulebookPath?: string;
 }
 
 export function runOfficialSourceAudit(options: AuditOptions = {}): {
   readiness: SourceReadinessResult;
   summary: OfficialSourceSummary;
 } {
-  void options.repoRoot;
+  const repoRoot = options.repoRoot ?? process.cwd();
 
   const allErrors: SourceAuditError[] = [];
   const documentsByReq = new Map<string, OfficialSourceDocument[]>();
@@ -668,9 +694,15 @@ export function runOfficialSourceAudit(options: AuditOptions = {}): {
     }
   } else {
     // 真实文件系统路径
-    const rulebookErrors = checkTierARulebook();
+    const rulebookErrors = checkTierARulebook(repoRoot, options.rulebookPath);
     allErrors.push(...rulebookErrors);
-    const { entries } = discoverAndLoad(OFFICIAL_SOURCE_REQUIREMENTS, allErrors, seenAssetIds);
+    const { entries } = discoverAndLoad(
+      OFFICIAL_SOURCE_REQUIREMENTS,
+      allErrors,
+      seenAssetIds,
+      repoRoot,
+      options.officialSourceRoot ?? join(repoRoot, OFFICIAL_ROOT),
+    );
     for (const e of entries) {
       const list = documentsByReq.get(e.requirementId) ?? [];
       if (e.document) list.push(e.document);

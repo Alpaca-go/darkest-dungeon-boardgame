@@ -11,6 +11,7 @@
 import { describe, expect, it } from 'vitest';
 import { runOfficialSourceAudit, type OfficialSourceDocument } from './official-source-audit';
 import { OFFICIAL_SOURCE_REQUIREMENTS } from './official-source-requirements';
+import { evaluatePhase11A3Status } from './phase11a3-status';
 
 // 最小 helper：构造一个完整的 synthetic fixture
 function makeDoc(requirementId: string, overrides: Partial<OfficialSourceDocument> = {}): OfficialSourceDocument {
@@ -66,9 +67,7 @@ describe('phase11a3 state machine (dev doc §14)', () => {
   it('S-01 required source missing → SOURCE-BLOCKED', () => {
     const { readiness } = runOfficialSourceAudit({ injectDocuments: {}, injectRulebookMissing: false });
     expect(readiness.outcome.kind).toBe('source-blocked');
-    // 在 release-gate 阶段：phase11A3Status === SOURCE-BLOCKED（仅有 P0-002 open + source 未 ready）
-    // 但这是 source-audit 输出；release-gate 才会给 phase11A3Status
-    // 这里只验 outcome.kind === source-blocked
+    expect(evaluatePhase11A3Status({ verifierHealthy: true, implementationPasses: true, sourceAuditPasses: true, allRequiredSourcesReady: false, elevenQuestLoopClosed: false, openP0: 1, openP1: 0, onlyOpenP0: 'ISSUE-P0-002' })).toBe('SOURCE-BLOCKED');
   });
 
   it('S-02 only optional errata missing → readiness.allRequiredSourcesReady=true (READY-FOR-OFFICIAL-IMPORT 入口)', () => {
@@ -78,7 +77,7 @@ describe('phase11a3 state machine (dev doc §14)', () => {
     });
     expect(readiness.gates.allRequiredSourcesReady).toBe(true);
     expect(readiness.outcome.kind).toBe('all-ready');
-    // 配合 run-audit 的 11 quest 仍 fail + P0-002 open → phase11A3Status = READY-FOR-OFFICIAL-IMPORT
+    expect(evaluatePhase11A3Status({ verifierHealthy: true, implementationPasses: true, sourceAuditPasses: true, allRequiredSourcesReady: true, elevenQuestLoopClosed: false, openP0: 1, openP1: 0, onlyOpenP0: 'ISSUE-P0-002' })).toBe('READY-FOR-OFFICIAL-IMPORT');
   });
 
   it('S-03 all required ready + P0-002 open → readiness 层面 outcome=all-ready（release-gate 决定 phase11A3Status）', () => {
@@ -98,13 +97,14 @@ describe('phase11a3 state machine (dev doc §14)', () => {
     });
     expect(readiness.auditPasses).toBe(false);
     expect(readiness.outcome.kind).toBe('source-audit-error');
+    expect(evaluatePhase11A3Status({ verifierHealthy: false, implementationPasses: true, sourceAuditPasses: false, allRequiredSourcesReady: false, elevenQuestLoopClosed: false, openP0: 1, openP1: 0, onlyOpenP0: 'ISSUE-P0-002' })).toBe('NOT-VERIFIED');
   });
 
   it('S-05 formal implementation fail → readiness 仍 SOURCE-BLOCKED（implementation 错由 run-audit 判定 IMPLEMENTATION-FAIL）', () => {
     // 真实 SOURCE-BLOCKED 阶段，audit pass，outcome=source-blocked
     const { readiness } = runOfficialSourceAudit({ injectDocuments: {}, injectRulebookMissing: false });
     expect(readiness.outcome.kind).toBe('source-blocked');
-    // run-audit 把它判成 SOURCE-BLOCKED verdict
+    expect(evaluatePhase11A3Status({ verifierHealthy: true, implementationPasses: false, sourceAuditPasses: true, allRequiredSourcesReady: false, elevenQuestLoopClosed: false, openP0: 1, openP1: 0, onlyOpenP0: 'ISSUE-P0-002' })).toBe('IMPLEMENTATION-FAIL');
   });
 
   it('S-06 formal campaign pass → readiness 全部 ready + all-required-ready=true', () => {
@@ -114,6 +114,7 @@ describe('phase11a3 state machine (dev doc §14)', () => {
     });
     expect(readiness.gates.allRequiredSourcesReady).toBe(true);
     expect(readiness.outcome.kind).toBe('all-ready');
+    expect(evaluatePhase11A3Status({ verifierHealthy: true, implementationPasses: true, sourceAuditPasses: true, allRequiredSourcesReady: true, elevenQuestLoopClosed: true, openP0: 0, openP1: 0, onlyOpenP0: null })).toBe('COMPLETE');
   });
 
   it('all 5 state values are valid in phase11A3Status type', () => {

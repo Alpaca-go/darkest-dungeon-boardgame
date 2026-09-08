@@ -15,6 +15,8 @@ import { describe, expect, it } from 'vitest';
 import { spawnSync } from 'child_process';
 import { existsSync, readFileSync } from 'fs';
 import { join } from 'path';
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'fs';
+import { tmpdir } from 'os';
 import { runOfficialSourceAudit, type OfficialSourceDocument } from './official-source-audit';
 import { OFFICIAL_SOURCE_REQUIREMENTS } from './official-source-requirements';
 
@@ -79,6 +81,26 @@ describe('CLI Exit Truth (dev doc §2)', () => {
     expect(readiness.auditErrors.some((e) => e.code === 'identity-mismatch')).toBe(true);
     // main() 会返回 1 → process.exit(1)
   });
+
+  it('CLI-02-real malformed source → 实际 CLI spawn 返回 1', () => {
+    const fixture = mkdtempSync(join(tmpdir(), 'phase11a3-source-'));
+    try {
+      mkdirSync(join(fixture, 'docs'), { recursive: true });
+      writeFileSync(join(fixture, 'docs', 'DD_EN_COREBOX_RULES.pdf'), 'fixture');
+      mkdirSync(join(fixture, 'docs', 'data', 'darkest-dungeon', 'official', 'quests'), { recursive: true });
+      writeFileSync(join(fixture, 'docs', 'data', 'darkest-dungeon', 'official', 'quests', 'darkest-dungeon-quest-1.json'), '{ malformed');
+      const r = spawnSync('npx', ['vite-node', 'scripts/audit/official-source.ts'], {
+        cwd: ROOT,
+        stdio: ['ignore', 'pipe', 'pipe'],
+        shell: true,
+        timeout: 60_000,
+        env: { ...process.env, PHASE11A3_REPO_ROOT: fixture },
+      });
+      expect(r.status).toBe(1);
+    } finally {
+      rmSync(fixture, { recursive: true, force: true });
+    }
+  }, 90_000);
 
   it('CLI-02b identity-mismatch → outcome=source-audit-error', () => {
     const badDoc = makeDoc('tierB-quest-1', {

@@ -29,7 +29,12 @@ import {
   tierOf,
 } from '../../src/audit/core-campaign/official-source-requirements';
 
-const DATA_DIR = 'docs/data/core-campaign';
+const REPO_ROOT = process.env.PHASE11A3_REPO_ROOT ?? process.cwd();
+const DATA_DIR = join(REPO_ROOT, 'docs/data/core-campaign');
+const OFFICIAL_SOURCE_ROOT = process.env.PHASE11A3_OFFICIAL_SOURCE_ROOT
+  ?? join(REPO_ROOT, 'docs/data/darkest-dungeon/official');
+const RULEBOOK_PATH = process.env.PHASE11A3_RULEBOOK_PATH
+  ?? join(REPO_ROOT, 'docs/DD_EN_COREBOX_RULES.pdf');
 
 function ensureDir(p: string): void {
   if (!existsSync(p)) mkdirSync(p, { recursive: true });
@@ -94,7 +99,9 @@ function writeManifest(resolvedByReq: Map<string, ResolvedRequirement>): string 
   summary.missingRequirements = OFFICIAL_SOURCE_REQUIREMENTS.filter(
     (r) => resolvedByReq.get(r.requirementId)?.status === 'missing' && r.componentGroup !== 'rulebook',
   ).length;
-  summary.auditPasses = true; // audit 跑通就能写产物
+  // Never overwrite the audit result in the serializer. Missing source is valid
+  // SOURCE-BLOCKED evidence; malformed source must remain auditPasses=false.
+  summary.auditPasses = summary.auditPasses;
 
   const requiredResolved = OFFICIAL_SOURCE_REQUIREMENTS.filter((r) => r.requiredForCompletion);
   const optionalResolved = OFFICIAL_SOURCE_REQUIREMENTS.filter((r) => !r.requiredForCompletion);
@@ -232,7 +239,7 @@ function writeReadiness(
     generatedAt: readiness.generatedAt,
     phase: '11A.3',
     tierA: {
-      rulebook: 'available',
+      rulebook: readiness.resolvedRequirements.find((r) => r.requirementId === 'tierA-rulebook')?.status ?? 'missing',
       reference: 'docs/DD_EN_COREBOX_RULES.pdf',
     },
     gates: readiness.gates,
@@ -294,7 +301,11 @@ function checkDrift(): string[] {
 
 function main(): number {
   ensureDir(DATA_DIR);
-  const { readiness, summary } = runOfficialSourceAudit();
+  const { readiness, summary } = runOfficialSourceAudit({
+    repoRoot: REPO_ROOT,
+    officialSourceRoot: OFFICIAL_SOURCE_ROOT,
+    rulebookPath: RULEBOOK_PATH,
+  });
 
   // dev doc §10：直接消费 resolvedRequirements 构建 map；不通过 blockers 推
   const resolvedByReq = new Map<string, ResolvedRequirement>();

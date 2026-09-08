@@ -15,6 +15,7 @@
     "audit:content": "vite-node scripts/audit/content.ts",
     "audit:rules": "vite-node scripts/audit/rules.ts",
     "audit:release-gate": "vite-node scripts/audit/release-gate.ts",
+    "audit:phase11a3-report": "vite-node scripts/audit/generate-phase11a3-report.ts",
     "audit:production-command": "vite-node scripts/audit/production-command.ts",
     "test:golden": "vitest run src/audit/core-campaign",
     "audit:all": "vite-node scripts/audit/all.ts",
