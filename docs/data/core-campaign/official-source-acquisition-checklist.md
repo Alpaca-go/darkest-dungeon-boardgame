@@ -1,4 +1,4 @@
-# Official Source Acquisition Checklist (Phase 11A.3 Source-Gate Integrity Repair)
+# Official Source Acquisition Checklist (Phase 11A.3 Source-Gate Final Acceptance)
 
 > 单一真值：`src/audit/core-campaign/official-source-requirements.ts`
 > 生成命令：`npm run audit:official-source`
@@ -22,70 +22,70 @@ Source-Gated：所有 Darkest Dungeon Act IV 官方数据必须来自下列 tier
 
 ## 1. Darkest Dungeon Quest (3 张 Quest Card)
 
-| requirementId | componentId | quantity | status | missing |
-| --- | --- | --- | --- | --- |
-| tierB-quest-1 | darkest-dungeon-quest-1 | 1 | missing | name, guardianDefinitionId, skippedFinalFormId, firewoodCount, provisionPolicyId.cardSpecific |
-| tierB-quest-2 | darkest-dungeon-quest-2 | 1 | missing | name, guardianDefinitionId, skippedFinalFormId, firewoodCount, provisionPolicyId.cardSpecific |
-| tierB-quest-3 | darkest-dungeon-quest-3 | 1 | missing | name, guardianDefinitionId, skippedFinalFormId, firewoodCount, provisionPolicyId.cardSpecific |
+| requirementId | componentId | quantity | required | status | missing |
+| --- | --- | --- | --- | --- | --- |
+| tierB-quest-1 | darkest-dungeon-quest-1 | 1 | Y | missing | name, guardianDefinitionId, skippedFinalFormId, firewoodCount, provisionPolicyId.cardSpecific |
+| tierB-quest-2 | darkest-dungeon-quest-2 | 1 | Y | missing | name, guardianDefinitionId, skippedFinalFormId, firewoodCount, provisionPolicyId.cardSpecific |
+| tierB-quest-3 | darkest-dungeon-quest-3 | 1 | Y | missing | name, guardianDefinitionId, skippedFinalFormId, firewoodCount, provisionPolicyId.cardSpecific |
 
 ## 2. Darkest Dungeon Dungeon Tiles (2 张)
 
-| requirementId | componentId | quantity | status | missing |
-| --- | --- | --- | --- | --- |
-| tierB-dd-dungeon-tile | darkest-dungeon-dungeon-tile | 2 | missing | tileGeometry, bossSlotPositions |
+| requirementId | componentId | quantity | required | status | missing |
+| --- | --- | --- | --- | --- | --- |
+| tierB-dd-dungeon-tile | darkest-dungeon-dungeon-tile | 2 | Y | missing | tileGeometry, bossSlotPositions |
 
 ## 3. Templars (Battle Cards + Room Card + Tile)
 
-| requirementId | componentId | quantity | status | missing |
-| --- | --- | --- | --- | --- |
-| tierB-templars-impaler | templar-impaler | 1 | missing | maxHp, dodge, speed, resistances, accuracy, damage, crit, skillIds, d10SkillTable |
-| tierB-templars-warlord | templar-warlord | 1 | missing | maxHp, dodge, speed, resistances, accuracy, damage, crit, skillIds, d10SkillTable |
-| tierB-templars-room | templars-room | 1 | missing | areaIds, areaCapacities, spikedPitPositions, pitD10Map, pitEntryEffects, pitExitRule, victoryCondition |
-| tierB-templars-room-tile | templars-room-tile | 1 | missing | tileGeometry |
+| requirementId | componentId | quantity | required | status | missing |
+| --- | --- | --- | --- | --- | --- |
+| tierB-templars-impaler | templar-impaler | 1 | Y | missing | maxHp, dodge, speed, resistances, accuracy, damage, crit, skillIds, d10SkillTable |
+| tierB-templars-warlord | templar-warlord | 1 | Y | missing | maxHp, dodge, speed, resistances, accuracy, damage, crit, skillIds, d10SkillTable |
+| tierB-templars-room | templars-room | 1 | Y | missing | areaIds, areaCapacities, spikedPitPositions, pitD10Map, pitEntryEffects, pitExitRule, victoryCondition |
+| tierB-templars-room-tile | templars-room-tile | 1 | Y | missing | tileGeometry |
 
 ## 4. Mammoth Cyst (Battle Cards + Room Card)
 
-| requirementId | componentId | quantity | status | missing |
-| --- | --- | --- | --- | --- |
-| tierB-mammoth-cyst | mammoth-cyst | 1 | missing | maxHp, dodge, speed, resistances, accuracy, damage, crit, skillIds, d10SkillTable |
-| tierB-white-cell-stalk | white-cell-stalk | 1 | missing | maxHp, dodge, speed, resistances, accuracy, damage, crit, skillIds, d10SkillTable, teleportationD10Map |
-| tierB-mammoth-cyst-room | mammoth-cyst-room | 1 | missing | areaIds, areaCapacities, teleportationD10Map, spawnStancePolicy, spawnAreaPolicy, victoryCondition |
+| requirementId | componentId | quantity | required | status | missing |
+| --- | --- | --- | --- | --- | --- |
+| tierB-mammoth-cyst | mammoth-cyst | 1 | Y | missing | maxHp, dodge, speed, resistances, accuracy, damage, crit, skillIds, d10SkillTable |
+| tierB-white-cell-stalk | white-cell-stalk | 1 | Y | missing | maxHp, dodge, speed, resistances, accuracy, damage, crit, skillIds, d10SkillTable, teleportationD10Map |
+| tierB-mammoth-cyst-room | mammoth-cyst-room | 1 | Y | missing | areaIds, areaCapacities, teleportationD10Map, spawnStancePolicy, spawnAreaPolicy, victoryCondition |
 
 ## 5. Shuffling Horror (Battle Cards + Room Card)
 
-| requirementId | componentId | quantity | status | missing |
-| --- | --- | --- | --- | --- |
-| tierB-shuffling-horror | shuffling-horror | 1 | missing | maxHp, dodge, speed, resistances, accuracy, damage, crit, skillIds, d10SkillTable |
-| tierB-cultist-priest | cultist-priest | 1 | missing | maxHp, dodge, speed, resistances, accuracy, damage, crit, skillIds, d10SkillTable |
-| tierB-malignant-growth | malignant-growth | 1 | missing | maxHp, dodge, speed, resistances, accuracy, damage, crit, skillIds, d10SkillTable |
-| tierB-shuffling-horror-room | shuffling-horror-room | 1 | missing | areaIds, areaCapacities, victoryCondition |
+| requirementId | componentId | quantity | required | status | missing |
+| --- | --- | --- | --- | --- | --- |
+| tierB-shuffling-horror | shuffling-horror | 1 | Y | missing | maxHp, dodge, speed, resistances, accuracy, damage, crit, skillIds, d10SkillTable |
+| tierB-cultist-priest | cultist-priest | 1 | Y | missing | maxHp, dodge, speed, resistances, accuracy, damage, crit, skillIds, d10SkillTable |
+| tierB-malignant-growth | malignant-growth | 1 | Y | missing | maxHp, dodge, speed, resistances, accuracy, damage, crit, skillIds, d10SkillTable |
+| tierB-shuffling-horror-room | shuffling-horror-room | 1 | Y | missing | areaIds, areaCapacities, victoryCondition |
 
 ## 6. Final Encounter (Room + Tile + 4 Form + Reflections + Absolute Nothingness + Come Unto Your Maker)
 
-| requirementId | componentId | quantity | status | missing |
-| --- | --- | --- | --- | --- |
-| tierB-ancestor-room | ancestor-room | 1 | missing | areaIds, areaCapacities, roomEffects, formAreaPlacement |
-| tierB-ancestor-room-tile | ancestor-room-tile | 1 | missing | tileGeometry |
-| tierB-ancestor-first-form | ancestor-first-form | 1 | missing | ancestor.maxHp, ancestor.skillIds, perfectReflection.maxHp, perfectReflection.skillIds, imperfectReflection.maxHp, imperfectReflection.skillIds, timeHealsAll.effect, vacantStanceFillSource |
-| tierB-perfect-reflection | perfect-reflection | 2 | missing | maxHp, skillIds |
-| tierB-imperfect-reflection | imperfect-reflection | 1 | missing | maxHp, skillIds |
-| tierB-ancestor-second-form | ancestor-second-form | 1 | missing | ancestor.maxHp, ancestor.skillIds, absoluteNothingness.areaIds |
-| tierB-absolute-nothingness | absolute-nothingness | 3 | missing | stance, areaId |
-| tierB-gestating-heart | gestating-heart | 1 | missing | maxHp, skillIds, d10SkillTable, lethalWoundTimingRuling |
-| tierB-heart-of-darkness | heart-of-darkness | 1 | missing | maxHp, skillIds, impendingDoomD10SkillMap |
-| tierB-come-unto-your-maker | come-unto-your-maker | 1 | missing | definition |
+| requirementId | componentId | quantity | required | status | missing |
+| --- | --- | --- | --- | --- | --- |
+| tierB-ancestor-room | ancestor-room | 1 | Y | missing | areaIds, areaCapacities, roomEffects, formAreaPlacement |
+| tierB-ancestor-room-tile | ancestor-room-tile | 1 | Y | missing | tileGeometry |
+| tierB-ancestor-first-form | ancestor-first-form | 1 | Y | missing | ancestor.maxHp, ancestor.skillIds, perfectReflection.maxHp, perfectReflection.skillIds, imperfectReflection.maxHp, imperfectReflection.skillIds, timeHealsAll.effect, vacantStanceFillSource |
+| tierB-perfect-reflection | perfect-reflection | 2 | Y | missing | maxHp, skillIds |
+| tierB-imperfect-reflection | imperfect-reflection | 1 | Y | missing | maxHp, skillIds |
+| tierB-ancestor-second-form | ancestor-second-form | 1 | Y | missing | ancestor.maxHp, ancestor.skillIds, absoluteNothingness.areaIds |
+| tierB-absolute-nothingness | absolute-nothingness | 3 | Y | missing | stance, areaId |
+| tierB-gestating-heart | gestating-heart | 1 | Y | missing | maxHp, skillIds, d10SkillTable, lethalWoundTimingRuling |
+| tierB-heart-of-darkness | heart-of-darkness | 1 | Y | missing | maxHp, skillIds, impendingDoomD10SkillMap |
+| tierB-come-unto-your-maker | come-unto-your-maker | 1 | Y | missing | definition |
 
 ## 7. Darkest Dungeon Monster Deck
 
-| requirementId | componentId | quantity | status | missing |
-| --- | --- | --- | --- | --- |
-| tierB-darkest-dungeon-monster-deck | darkest-dungeon-monster-deck | 1 | missing | deckComposition, monsterDefinitionIds, drawPolicy |
+| requirementId | componentId | quantity | required | status | missing |
+| --- | --- | --- | --- | --- | --- |
+| tierB-darkest-dungeon-monster-deck | darkest-dungeon-monster-deck | 1 | Y | missing | deckComposition, monsterDefinitionIds, drawPolicy |
 
 ## 8. Official Errata (optional)
 
-| requirementId | componentId | quantity | status | missing |
-| --- | --- | --- | --- | --- |
-| tierC-official-errata | official-errata | 1 | missing | — |
+| requirementId | componentId | quantity | required | status | missing |
+| --- | --- | --- | --- | --- | --- |
+| tierC-official-errata | official-errata | 1 | N | missing | — |
 
 ## 收到资料后
 

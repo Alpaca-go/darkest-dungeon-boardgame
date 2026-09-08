@@ -216,6 +216,42 @@ export interface ReleaseGateResult {
   // Act IV 范围来自 official-source-requirements.ts，不依赖 category allowlist。
   // Phase 11A.3 PASS 硬门槛：officialActFourMissingSourceReferences = 0。
   officialActFourMissingSourceReferences: number;
+  // Phase 11A.3 Source-Gate Final Acceptance Closure §13：canonical requirement 级别统计
+  officialActFourRequiredSourceCount: number;
+  officialActFourMissingSourceRequirements: string[];
+  officialActFourPartialSourceRequirements: string[];
+  // Phase 11A.3 Source-Gate Final Acceptance Closure §6：required/optional 分离
+  requiredMissingCount: number;
+  requiredPartialCount: number;
+  requiredAvailableCount: number;
+  optionalMissingCount: number;
+  optionalPartialCount: number;
+  // Phase 11A.3 Source-Gate Final Acceptance Closure §12：structured provenance audit
+  provenanceAudit: {
+    requiredFieldCount: number;
+    verifiedRequiredFieldCount: number;
+    missingValueCount: number;
+    missingProvenanceCount: number;
+    invalidSourceReferenceCount: number;
+    componentMismatchCount: number;
+    passes: boolean;
+  };
+  // Phase 11A.3 Source-Gate Final Acceptance Closure §15：real 9-combination matrix
+  officialGuardianMatrix: {
+    status: 'READY' | 'SOURCE-BLOCKED' | 'NOT-RUN' | 'FAIL';
+    combinationsExpected: number;
+    combinationsRun: number;
+    combinationsPassed: number;
+  };
+  officialSkippedFormMatrix: {
+    status: 'READY' | 'SOURCE-BLOCKED' | 'NOT-RUN' | 'FAIL';
+    combinationsExpected: number;
+    combinationsRun: number;
+    combinationsPassed: number;
+  };
+  // Phase 11A.3 Source-Gate Final Acceptance Closure §17：canBeginOfficialImport 由 source audit
+  // 输出；canEnterPhase11B 只能由 Phase 11A.3 COMPLETE 后由 release-gate 输出
+  canBeginOfficialImport: boolean;
   // Phase 11A.3 dev doc §12：Source Gate 0 的机器可读信号（实时来自 source-readiness.json）。
   sourceReadiness: {
     allRequiredSourcesReady: boolean;

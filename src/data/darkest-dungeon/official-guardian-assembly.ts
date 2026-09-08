@@ -1,7 +1,7 @@
-// Phase 11A.3 Source-Gate Integrity Repair dev doc §18-21：
+// Phase 11A.3 Source-Gate Final Acceptance Closure dev doc §16：
 // Official Guardian Registry Assembly。
 //
-// 设计（修复 Finding D）：
+// 设计：
 //   - 单一来源：所有 official Guardian 字段必须从 family-specific registry 组装
 //     （Templars / Mammoth Cyst / Shuffling Horror），不再手填 stub。
 //   - 通用「Official Guardian Pool Enabled」必须调用 family validators：
@@ -15,6 +15,12 @@
 //   - 防御循环：assembly 调 `validateXxxGuardian('formal')`（不调
 //     `isXxxOfficialEncounterEnabled()`，后者会读 encounter.enabledInOfficialPool，
 //     与 assembly 的 enabledInOfficialPool 字段解耦，无环）。
+//
+// Phase 11A.3 Source-Gate Final Acceptance Closure §16：
+//   抽 `assembleOfficialGuardian(family, validatedFamilyData)` 纯函数：
+//     纯函数不调真实 validators，接收 caller 提供的 validated data；用于 future-ready
+//     synthetic contract test（构造 complete synthetic fixture → assembly 输出 verified / enabled=true）。
+//   实际 OFFICIAL_GUARDIAN_ASSEMBLY 仍由 buildOfficialGuardianDefinition 从真实 validators 派生。
 
 import type { DarkestDungeonGuardianDefinition } from '../../types/act-four';
 import {
@@ -76,11 +82,100 @@ export function getAllGuardianFamilyReadiness(): GuardianFamilyReadiness[] {
 }
 
 // ---------------------------------------------------------------------------
+// Phase 11A.3 Source-Gate Final Acceptance Closure §16：
+// 纯函数 assembleOfficialGuardian
+// ---------------------------------------------------------------------------
+
+/**
+ * Caller 提供的 validated family data（从真实 validators 或 synthetic fixture）。
+ * 纯函数只读取这些字段，不调任何真实 IO / validators，避免循环依赖与 future-ready test
+ * 无法构造 complete 状态的难题。
+ */
+export interface ValidatedFamilyData {
+  ready: boolean;
+  /** 资料齐时填，非空。 */
+  name: string;
+  roomDefinitionId: string;
+  actorDefinitionIds: string[];
+  /** 资料齐时填完整 source reference 链。 */
+  sourceReference: string;
+}
+
+/** Templars Validated Data（dev doc §16：构造 complete synthetic fixture 用） */
+export function buildValidatedTemplarsData(): ValidatedFamilyData {
+  const ready = validateTemplarsGuardian('formal').isComplete;
+  return {
+    ready,
+    name: ready ? 'Templars' : '',
+    roomDefinitionId: ready ? 'templars-room' : '',
+    actorDefinitionIds: ready ? ['templar-impaler', 'templar-warlord'] : [],
+    sourceReference: ready
+      ? 'DD_EN_COREBOX_RULES.pdf:p39 + Templar Impaler / Warlord Battle Card + Templars Room Card'
+      : 'DD_EN_COREBOX_RULES.pdf:p39（仅 structural fields）',
+  };
+}
+
+export function buildValidatedMammothCystData(): ValidatedFamilyData {
+  const ready = validateMammothCystGuardian('formal').isComplete;
+  return {
+    ready,
+    name: ready ? 'Mammoth Cyst' : '',
+    roomDefinitionId: ready ? 'mammoth-cyst-room' : '',
+    actorDefinitionIds: ready ? ['mammoth-cyst', 'white-cell-stalk'] : [],
+    sourceReference: ready
+      ? 'DD_EN_COREBOX_RULES.pdf:p39 + Mammoth Cyst / White Cell Stalk Battle Card + Mammoth Cyst Room Card'
+      : 'DD_EN_COREBOX_RULES.pdf:p39（仅 structural fields）',
+  };
+}
+
+export function buildValidatedShufflingHorrorData(): ValidatedFamilyData {
+  const readiness = getShufflingHorrorOfficialReadiness();
+  const ready = readiness.ready;
+  return {
+    ready,
+    name: ready ? 'Shuffling Horror' : '',
+    roomDefinitionId: readiness.roomComplete ? 'shuffling-horror-room' : '',
+    actorDefinitionIds: readiness.roomComplete
+      ? ['shuffling-horror', 'cultist-priest', 'malignant-growth']
+      : [],
+    sourceReference: readiness.sourceComplete
+      ? 'DD_EN_COREBOX_RULES.pdf:p40 + Shuffling Horror / Cultist Priest / Malignant Growth Battle Card + Shuffling Horror Room Card'
+      : 'DD_EN_COREBOX_RULES.pdf:p40（仅 structural fields）',
+  };
+}
+
+/**
+ * 纯函数：根据 caller 提供的 validated data 组装一个 official Guardian Definition。
+ * 不调任何真实 IO / validators —— 用于 future-ready synthetic contract test 构造
+ * complete / incomplete 状态（dev doc §16）。
+ */
+export function assembleOfficialGuardian(
+  family: 'templars' | 'mammoth-cyst' | 'shuffling-horror',
+  data: ValidatedFamilyData,
+): DarkestDungeonGuardianDefinition {
+  const idMap: Record<typeof family, string> = {
+    'templars': 'darkest-dungeon-guardian-templars',
+    'mammoth-cyst': 'darkest-dungeon-guardian-mammoth-cyst',
+    'shuffling-horror': 'darkest-dungeon-guardian-shuffling-horror',
+  };
+  return {
+    id: idMap[family],
+    family,
+    name: data.name,
+    roomDefinitionId: data.roomDefinitionId,
+    actorDefinitionIds: data.actorDefinitionIds,
+    officialDataStatus: data.ready ? 'verified' : 'partial',
+    enabledInOfficialPool: data.ready,
+    sourceReference: data.sourceReference,
+  };
+}
+
+// ---------------------------------------------------------------------------
 // Official Guardian Definitions（dev doc §14：从 family-specific registries 组装）
 // ---------------------------------------------------------------------------
 
 /**
- * 组装一个 official Guardian Definition。
+ * 组装一个 official Guardian Definition（从真实 validators）。
  *
  * 严格遵守：
  *   - 不在 generic registry 中手填 name / roomDefinitionId / actorDefinitionIds
@@ -91,62 +186,12 @@ function buildOfficialGuardianDefinition(
   family: 'templars' | 'mammoth-cyst' | 'shuffling-horror',
 ): DarkestDungeonGuardianDefinition {
   if (family === 'templars') {
-    // Phase 11A.3 Source-Gate Integrity Repair §19：用 validateTemplarsGuardian（data only）
-    // 而非 isTemplarsOfficialEncounterEnabled（policy 包含 enabledInOfficialPool），
-    // 避免循环依赖。
-    const ready = validateTemplarsGuardian('formal').isComplete;
-    return {
-      id: 'darkest-dungeon-guardian-templars',
-      family,
-      // 资料齐备后才填 name；未齐时 name 留空 → validateDarkestDungeonGuardian 报 missing
-      name: ready ? 'Templars' : '',
-      roomDefinitionId: ready ? 'templars-room' : '',
-      actorDefinitionIds: ready
-        ? ['templar-impaler', 'templar-warlord']
-        : [],
-      // Phase 11A.3 Source-Gate Integrity Repair §19：enabledInOfficialPool = ready。
-      // 之前 hardcoded false 导致未来 source 齐备时 Pool 仍 false（dev doc §18 Finding D）。
-      // 现在 data complete 时自动 enable generic Pool。
-      officialDataStatus: ready ? 'verified' : 'partial',
-      enabledInOfficialPool: ready,
-      sourceReference: ready
-        ? 'DD_EN_COREBOX_RULES.pdf:p39 + Templar Impaler / Warlord Battle Card + Templars Room Card'
-        : 'DD_EN_COREBOX_RULES.pdf:p39（仅 structural fields）',
-    };
+    return assembleOfficialGuardian('templars', buildValidatedTemplarsData());
   }
   if (family === 'mammoth-cyst') {
-    // 同 Templars：用 validateMammothCystGuardian（data only）
-    const ready = validateMammothCystGuardian('formal').isComplete;
-    return {
-      id: 'darkest-dungeon-guardian-mammoth-cyst',
-      family,
-      name: ready ? 'Mammoth Cyst' : '',
-      roomDefinitionId: ready ? 'mammoth-cyst-room' : '',
-      actorDefinitionIds: ready ? ['mammoth-cyst', 'white-cell-stalk'] : [],
-      officialDataStatus: ready ? 'verified' : 'partial',
-      enabledInOfficialPool: ready,
-      sourceReference: ready
-        ? 'DD_EN_COREBOX_RULES.pdf:p39 + Mammoth Cyst / White Cell Stalk Battle Card + Mammoth Cyst Room Card'
-        : 'DD_EN_COREBOX_RULES.pdf:p39（仅 structural fields）',
-    };
+    return assembleOfficialGuardian('mammoth-cyst', buildValidatedMammothCystData());
   }
-  // shuffling-horror
-  const readiness = getShufflingHorrorOfficialReadiness();
-  const ready = readiness.ready;
-  return {
-    id: 'darkest-dungeon-guardian-shuffling-horror',
-    family,
-    name: ready ? 'Shuffling Horror' : '',
-    roomDefinitionId: readiness.roomComplete ? 'shuffling-horror-room' : '',
-    actorDefinitionIds: readiness.roomComplete
-      ? ['shuffling-horror', 'cultist-priest', 'malignant-growth']
-      : [],
-    officialDataStatus: readiness.officialVerified ? 'verified' : 'partial',
-    enabledInOfficialPool: ready,
-    sourceReference: readiness.sourceComplete
-      ? 'DD_EN_COREBOX_RULES.pdf:p40 + Shuffling Horror / Cultist Priest / Malignant Growth Battle Card + Shuffling Horror Room Card'
-      : 'DD_EN_COREBOX_RULES.pdf:p40（仅 structural fields）',
-  };
+  return assembleOfficialGuardian('shuffling-horror', buildValidatedShufflingHorrorData());
 }
 
 /** 三个 official Guardian Definitions（唯一组装入口；generic registry 只消费这里）。 */

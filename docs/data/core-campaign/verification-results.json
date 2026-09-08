@@ -1,7 +1,7 @@
 {
-  "schemaVersion": "phase-11a3-source-gate.v1",
-  "measuredAt": "2026-09-08T08:11:17.125Z",
-  "verificationInputHash": "90399b5ddf8126e39b68d1626a73eaad4d4633f6a1240907e146d6fed2ed1f5e",
+  "schemaVersion": "phase-11a3-source-gate-final-acceptance.v1",
+  "measuredAt": "2026-09-08T11:26:59.436Z",
+  "verificationInputHash": "6e47b5e9589f5c49bb066df3f637332df72a607fb35094b9a7306f0687965ee5",
   "typecheckPasses": true,
   "unitPasses": true,
   "commandContractPasses": true,
@@ -24,6 +24,7 @@
   "openP1": 0,
   "campaignOrchestrationReachable": true,
   "verificationFresh": true,
+  "unmeasuredGateBits": [],
   "consistencyErrors": [],
   "phase11A3Status": "SOURCE-BLOCKED",
   "sourceReadinessGates": {
@@ -35,6 +36,37 @@
     "darkestDungeonMonsterDeckReady": false,
     "allRequiredSourcesReady": false
   },
+  "sourceReadinessProvenanceAuditPasses": true,
+  "sourceReadinessOfficialActFourRequiredSourceCount": 26,
+  "sourceReadinessOfficialActFourMissingSourceRequirements": [
+    "tierB-quest-1",
+    "tierB-quest-2",
+    "tierB-quest-3",
+    "tierB-dd-dungeon-tile",
+    "tierB-templars-impaler",
+    "tierB-templars-warlord",
+    "tierB-templars-room",
+    "tierB-templars-room-tile",
+    "tierB-mammoth-cyst",
+    "tierB-white-cell-stalk",
+    "tierB-mammoth-cyst-room",
+    "tierB-shuffling-horror",
+    "tierB-cultist-priest",
+    "tierB-malignant-growth",
+    "tierB-shuffling-horror-room",
+    "tierB-ancestor-room",
+    "tierB-ancestor-room-tile",
+    "tierB-ancestor-first-form",
+    "tierB-perfect-reflection",
+    "tierB-imperfect-reflection",
+    "tierB-ancestor-second-form",
+    "tierB-absolute-nothingness",
+    "tierB-gestating-heart",
+    "tierB-heart-of-darkness",
+    "tierB-come-unto-your-maker",
+    "tierB-darkest-dungeon-monster-deck"
+  ],
+  "sourceReadinessOfficialActFourPartialSourceRequirements": [],
   "releaseGateSummary": {
     "typecheckPasses": true,
     "goldenTestPasses": true,
@@ -69,6 +101,62 @@
     "globalMissingSourceReferences": 147,
     "officialActFourMissingSourceReferences": 10,
     "officialPathMissingSourceReferences": 147,
+    "officialActFourRequiredSourceCount": 26,
+    "officialActFourMissingSourceRequirements": [
+      "tierB-quest-1",
+      "tierB-quest-2",
+      "tierB-quest-3",
+      "tierB-dd-dungeon-tile",
+      "tierB-templars-impaler",
+      "tierB-templars-warlord",
+      "tierB-templars-room",
+      "tierB-templars-room-tile",
+      "tierB-mammoth-cyst",
+      "tierB-white-cell-stalk",
+      "tierB-mammoth-cyst-room",
+      "tierB-shuffling-horror",
+      "tierB-cultist-priest",
+      "tierB-malignant-growth",
+      "tierB-shuffling-horror-room",
+      "tierB-ancestor-room",
+      "tierB-ancestor-room-tile",
+      "tierB-ancestor-first-form",
+      "tierB-perfect-reflection",
+      "tierB-imperfect-reflection",
+      "tierB-ancestor-second-form",
+      "tierB-absolute-nothingness",
+      "tierB-gestating-heart",
+      "tierB-heart-of-darkness",
+      "tierB-come-unto-your-maker",
+      "tierB-darkest-dungeon-monster-deck"
+    ],
+    "officialActFourPartialSourceRequirements": [],
+    "requiredMissingCount": 26,
+    "requiredPartialCount": 0,
+    "requiredAvailableCount": 0,
+    "optionalMissingCount": 1,
+    "optionalPartialCount": 0,
+    "provenanceAudit": {
+      "requiredFieldCount": 131,
+      "verifiedRequiredFieldCount": 0,
+      "missingValueCount": 0,
+      "missingProvenanceCount": 0,
+      "invalidSourceReferenceCount": 0,
+      "componentMismatchCount": 0,
+      "passes": true
+    },
+    "officialGuardianMatrix": {
+      "status": "SOURCE-BLOCKED",
+      "combinationsExpected": 9,
+      "combinationsRun": 0,
+      "combinationsPassed": 0
+    },
+    "officialSkippedFormMatrix": {
+      "status": "SOURCE-BLOCKED",
+      "combinationsExpected": 9,
+      "combinationsRun": 0,
+      "combinationsPassed": 0
+    },
     "sourceReadiness": {
       "allRequiredSourcesReady": false,
       "questCardsReady": false,
@@ -79,9 +167,10 @@
       "darkestDungeonMonsterDeckReady": false
     },
     "phase11A3Status": "SOURCE-BLOCKED",
+    "canBeginOfficialImport": false,
     "canCloseP0_002": false,
     "canEnterPhase11B": false,
-    "generatedAt": "2026-09-08T08:11:16.879Z",
+    "generatedAt": "2026-09-08T11:26:59.168Z",
     "unmeasuredGateBits": [],
     "dataGates": {
       "officialGuardianPoolEnabled": false,
@@ -123,83 +212,92 @@
       ]
     }
   },
+  "canCloseP0_002": false,
+  "canEnterPhase11B": false,
+  "canBeginOfficialImport": false,
   "commands": [
     {
       "command": "typecheck",
       "exitCode": 0,
-      "durationMs": 7377,
+      "durationMs": 7208,
       "failureLogPath": null
     },
     {
       "command": "unit",
       "exitCode": 0,
-      "durationMs": 19956,
+      "durationMs": 21815,
       "failureLogPath": null
     },
     {
       "command": "commandContract",
       "exitCode": 0,
-      "durationMs": 3272,
+      "durationMs": 3390,
       "failureLogPath": null
     },
     {
       "command": "integration",
       "exitCode": 0,
-      "durationMs": 4123,
+      "durationMs": 4107,
       "failureLogPath": null
     },
     {
       "command": "build",
       "exitCode": 0,
-      "durationMs": 12686,
+      "durationMs": 12093,
       "failureLogPath": null
     },
     {
       "command": "criticalE2E",
       "exitCode": 0,
-      "durationMs": 17668,
+      "durationMs": 17415,
       "failureLogPath": null
     },
     {
       "command": "golden",
       "exitCode": 0,
-      "durationMs": 11142,
+      "durationMs": 12931,
       "failureLogPath": null
     },
     {
       "command": "replayContinuation",
       "exitCode": 0,
-      "durationMs": 5099,
+      "durationMs": 4909,
+      "failureLogPath": null
+    },
+    {
+      "command": "replayDeterminism",
+      "exitCode": 0,
+      "durationMs": 4676,
       "failureLogPath": null
     },
     {
       "command": "productionCommand",
       "exitCode": 0,
-      "durationMs": 2985,
+      "durationMs": 3006,
       "failureLogPath": null
     },
     {
       "command": "officialSource",
       "exitCode": 0,
-      "durationMs": 2014,
+      "durationMs": 1987,
       "failureLogPath": null
     },
     {
       "command": "contentAudit",
       "exitCode": 0,
-      "durationMs": 3605,
+      "durationMs": 4009,
       "failureLogPath": null
     },
     {
       "command": "rulesAudit",
       "exitCode": 0,
-      "durationMs": 3701,
+      "durationMs": 3967,
       "failureLogPath": null
     },
     {
       "command": "releaseGate",
       "exitCode": 1,
-      "durationMs": 4334,
+      "durationMs": 4583,
       "failureLogPath": "D:\\darkest-dungoen-boardgame\\docs\\data\\core-campaign\\verify-failures\\releaseGate.log"
     }
   ],

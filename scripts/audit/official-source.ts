@@ -1,4 +1,4 @@
-// Phase 11A.3 Source-Gate Integrity Repair dev doc §11, §39-41：
+// Phase 11A.3 Source-Gate Final Acceptance Closure dev doc §10-11：
 // Official Source Audit 脚本。
 //
 // 单一入口：从 canonical requirements 派生所有 source 产物。
@@ -7,9 +7,13 @@
 //   - source-readiness.json
 //   - official-source-summary.json
 //
-// Exit code 语义（dev doc §39）：
+// Exit code 语义：
 //   0 = audit valid, even if source-blocked
 //   non-zero = malformed / contradictory source data (NOT-VERIFIED / SOURCE-AUDIT-ERROR)
+//
+// Phase 11A.3 SGIR Final Acceptance：所有 manifest / checklist / readiness / summary
+// 全部从 runOfficialSourceAudit().readiness.resolvedRequirements 直接消费，
+// 不再从 readiness.blockers 逆推状态（避免 partial 被错误写成 missing）。
 
 import { writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
@@ -18,6 +22,7 @@ import {
   runOfficialSourceAudit,
   readLegacySourceReadinessForDriftCheck,
   type OfficialSourceRequirement,
+  type ResolvedRequirement,
 } from '../../src/audit/core-campaign/official-source-audit';
 import {
   summarizeRequirements,
@@ -32,10 +37,10 @@ function ensureDir(p: string): void {
 
 function buildManifestEntry(
   req: OfficialSourceRequirement,
-  status: 'available' | 'partial' | 'missing' | 'invalid',
-  missingFields: string[],
-  reason: string,
+  resolved: ResolvedRequirement,
 ): Record<string, unknown> {
+  // dev doc §11：expectedSourcePattern 与 sourceReferences 分离
+  // 缺资料时 sourceReferences=[]，只写 expectedSourcePattern
   return {
     requirementId: req.requirementId,
     sourceId: `asset:${req.componentId}`,
@@ -45,41 +50,72 @@ function buildManifestEntry(
     quantity: req.quantity,
     requiredForCompletion: req.requiredForCompletion,
     tier: tierOf(req),
-    sourceReference: req.sourceFilePattern,
-    availability: status === 'available' ? 'available' : status === 'partial' ? 'partial' : 'missing',
+    /** dev doc §11：expected file path（不是 authoritative source）。 */
+    expectedSourcePattern: req.sourceFilePattern,
+    /** dev doc §11：资料齐备时填真实 sourceReference；缺资料 = []。 */
+    sourceReferences: resolved.sourceReferences,
+    /** 实际解析到的 source document 数量。 */
+    resolvedAssetCount: resolved.resolvedAssetCount,
+    /** dev doc §10：直接从 resolvedRequirement.status 取，不再统一 missing。 */
+    status: resolved.status,
+    availability: resolved.status === 'available'
+      ? 'available'
+      : resolved.status === 'partial'
+        ? 'partial'
+        : 'missing',
     verifiedFields: req.rulebookBackedFields,
-    missingFields: status === 'available' ? [] : missingFields,
-    reason,
+    missingFields: resolved.missingFields,
+    reason: resolved.reason,
     notes: req.notes,
   };
 }
 
-function writeManifest(resolved: Map<string, { status: string; missingFields: string[]; reason: string }>): string {
+function writeManifest(resolvedByReq: Map<string, ResolvedRequirement>): string {
   const tierA = OFFICIAL_SOURCE_REQUIREMENTS.filter((r) => tierOf(r) === 'A');
   const tierB = OFFICIAL_SOURCE_REQUIREMENTS.filter((r) => tierOf(r) === 'B');
   const tierC = OFFICIAL_SOURCE_REQUIREMENTS.filter((r) => tierOf(r) === 'C');
 
   const assets = OFFICIAL_SOURCE_REQUIREMENTS.map((req) => {
-    const r = resolved.get(req.requirementId)!;
-    return buildManifestEntry(req, r.status as 'available' | 'partial' | 'missing' | 'invalid', r.missingFields, r.reason);
+    const r = resolvedByReq.get(req.requirementId)!;
+    return buildManifestEntry(req, r);
   });
 
   // Summary 机器计算（dev doc §12）
   const summary = summarizeRequirements();
-  const allTierAReady = tierA.every((r) => resolved.get(r.requirementId)?.status === 'available');
+  const allTierAReady = tierA.every(
+    (r) => resolvedByReq.get(r.requirementId)?.status === 'available',
+  );
   summary.availableRequirements = OFFICIAL_SOURCE_REQUIREMENTS.filter(
-    (r) => resolved.get(r.requirementId)?.status === 'available',
+    (r) => resolvedByReq.get(r.requirementId)?.status === 'available',
   ).length;
   summary.partialRequirements = OFFICIAL_SOURCE_REQUIREMENTS.filter(
-    (r) => resolved.get(r.requirementId)?.status === 'partial',
+    (r) => resolvedByReq.get(r.requirementId)?.status === 'partial',
   ).length;
   summary.missingRequirements = OFFICIAL_SOURCE_REQUIREMENTS.filter(
-    (r) => resolved.get(r.requirementId)?.status === 'missing' && r.componentGroup !== 'rulebook',
+    (r) => resolvedByReq.get(r.requirementId)?.status === 'missing' && r.componentGroup !== 'rulebook',
   ).length;
   summary.auditPasses = true; // audit 跑通就能写产物
 
+  const requiredResolved = OFFICIAL_SOURCE_REQUIREMENTS.filter((r) => r.requiredForCompletion);
+  const optionalResolved = OFFICIAL_SOURCE_REQUIREMENTS.filter((r) => !r.requiredForCompletion);
+  summary.requiredAvailableCount = requiredResolved.filter(
+    (r) => resolvedByReq.get(r.requirementId)?.status === 'available',
+  ).length;
+  summary.requiredMissingCount = requiredResolved.filter(
+    (r) => resolvedByReq.get(r.requirementId)?.status === 'missing',
+  ).length;
+  summary.requiredPartialCount = requiredResolved.filter(
+    (r) => resolvedByReq.get(r.requirementId)?.status === 'partial',
+  ).length;
+  summary.optionalMissingCount = optionalResolved.filter(
+    (r) => resolvedByReq.get(r.requirementId)?.status === 'missing',
+  ).length;
+  summary.optionalPartialCount = optionalResolved.filter(
+    (r) => resolvedByReq.get(r.requirementId)?.status === 'partial',
+  ).length;
+
   const manifest = {
-    $schema: 'phase-11a3-source-gate-integrity-repair/official-source-manifest.v2',
+    $schema: 'phase-11a3-source-gate-final-acceptance/official-source-manifest.v3',
     generatedAt: new Date().toISOString(),
     phase: '11A.3',
     purpose: '派生自 canonical official-source-requirements.ts；禁止手写 summary count。',
@@ -109,9 +145,9 @@ function writeManifest(resolved: Map<string, { status: string; missingFields: st
   return path;
 }
 
-function writeChecklist(resolved: Map<string, { status: string; missingFields: string[]; reason: string }>): string {
+function writeChecklist(resolvedByReq: Map<string, ResolvedRequirement>): string {
   const lines: string[] = [];
-  lines.push('# Official Source Acquisition Checklist (Phase 11A.3 Source-Gate Integrity Repair)');
+  lines.push('# Official Source Acquisition Checklist (Phase 11A.3 Source-Gate Final Acceptance)');
   lines.push('');
   lines.push('> 单一真值：`src/audit/core-campaign/official-source-requirements.ts`');
   lines.push('> 生成命令：`npm run audit:official-source`');
@@ -151,12 +187,12 @@ function writeChecklist(resolved: Map<string, { status: string; missingFields: s
     if (items.length === 0) continue;
     lines.push(`## ${title}`);
     lines.push('');
-    lines.push('| requirementId | componentId | quantity | status | missing |');
-    lines.push('| --- | --- | --- | --- | --- |');
+    lines.push('| requirementId | componentId | quantity | required | status | missing |');
+    lines.push('| --- | --- | --- | --- | --- | --- |');
     for (const req of items) {
-      const r = resolved.get(req.requirementId)!;
+      const r = resolvedByReq.get(req.requirementId)!;
       const missing = r.missingFields.length > 0 ? r.missingFields.join(', ') : '—';
-      lines.push(`| ${req.requirementId} | ${req.componentId} | ${req.quantity} | ${r.status} | ${missing} |`);
+      lines.push(`| ${req.requirementId} | ${req.componentId} | ${req.quantity} | ${req.requiredForCompletion ? 'Y' : 'N'} | ${r.status} | ${missing} |`);
     }
     lines.push('');
   }
@@ -188,12 +224,11 @@ function writeSummary(summary: ReturnType<typeof summarizeRequirements>): string
 
 function writeReadiness(
   readiness: ReturnType<typeof runOfficialSourceAudit>['readiness'],
-  resolved: Map<string, { status: string; missingFields: string[]; reason: string }>,
 ): string {
   const path = join(DATA_DIR, 'source-readiness.json');
   // 旧 schema 兼容字段（向后兼容 run-audit 读取的字段）
   const data = {
-    $schema: 'phase-11a3-source-gate-integrity-repair/source-readiness.v2',
+    $schema: 'phase-11a3-source-gate-final-acceptance/source-readiness.v3',
     generatedAt: readiness.generatedAt,
     phase: '11A.3',
     tierA: {
@@ -201,25 +236,47 @@ function writeReadiness(
       reference: 'docs/DD_EN_COREBOX_RULES.pdf',
     },
     gates: readiness.gates,
+    // dev doc §6：rationale 区分 required/optional
     rationale: Object.fromEntries(
-      Array.from(resolved.entries()).map(([rid, r]) => [
-        rid,
+      readiness.resolvedRequirements.map((r) => [
+        r.requirementId,
         r.status === 'available' ? 'verified' : 'source-required',
       ]),
     ),
-    blockers: readiness.blockers,
-    auditPasses: readiness.auditPasses,
-    outcome: readiness.outcome,
-    // legacy 兼容
+    // dev doc §17：canEnterPhase11B 不由 source readiness 决定
+    // source readiness 只输出 canBeginOfficialImport
     impact: {
-      canEnterPhase11B: readiness.gates.allRequiredSourcesReady,
-      canCloseP0_002: readiness.gates.allRequiredSourcesReady,
+      canBeginOfficialImport: readiness.gates.allRequiredSourcesReady,
+      canCloseP0_002: false, // 终态判定由 release-gate 在 Phase 11A.3 COMPLETE 后才输出
       canEnableOfficialGuardianPool: readiness.gates.templarsReady && readiness.gates.mammothCystReady && readiness.gates.shufflingHorrorReady,
       canEnableOfficialFinalEncounter: readiness.gates.finalEncounterReady,
       canEnableOfficialDarkestDungeonQuestPool: readiness.gates.questCardsReady,
       canEnableOfficialDarkestDungeonMonsterDeck: readiness.gates.darkestDungeonMonsterDeckReady,
-      verdict: readiness.gates.allRequiredSourcesReady ? 'READY' : (readiness.outcome.kind === 'source-audit-error' ? 'SOURCE-AUDIT-ERROR' : 'SOURCE-BLOCKED'),
+      verdict: readiness.gates.allRequiredSourcesReady
+        ? 'READY'
+        : readiness.outcome.kind === 'source-audit-error'
+          ? 'SOURCE-AUDIT-ERROR'
+          : 'SOURCE-BLOCKED',
     },
+    blockers: readiness.blockers, // 保留兼容（不再被 generator 消费）
+    auditPasses: readiness.auditPasses,
+    outcome: readiness.outcome,
+    // dev doc §13：canonical Act IV scope
+    officialActFourRequiredSourceCount: OFFICIAL_SOURCE_REQUIREMENTS.filter((r) => r.requiredForCompletion).length,
+    officialActFourMissingSourceRequirements: readiness.resolvedRequirements
+      .filter((r) => {
+        const req = OFFICIAL_SOURCE_REQUIREMENTS.find((x) => x.requirementId === r.requirementId);
+        return req?.requiredForCompletion && r.status === 'missing';
+      })
+      .map((r) => r.requirementId),
+    officialActFourPartialSourceRequirements: readiness.resolvedRequirements
+      .filter((r) => {
+        const req = OFFICIAL_SOURCE_REQUIREMENTS.find((x) => x.requirementId === r.requirementId);
+        return req?.requiredForCompletion && r.status === 'partial';
+      })
+      .map((r) => r.requirementId),
+    // dev doc §12：structured provenanceAudit
+    provenanceAudit: readiness.provenanceAudit,
   };
   writeFileSync(path, JSON.stringify(data, null, 2) + '\n', 'utf-8');
   return path;
@@ -228,11 +285,9 @@ function writeReadiness(
 function checkDrift(): string[] {
   const legacy = readLegacySourceReadinessForDriftCheck();
   if (!legacy) return [];
-  // 仅做漂移警告，不影响 exit code
   const warnings: string[] = [];
-  // 旧 schema 没 quantity / schemaVersion 2 / auditPasses 等字段——记录但不报错
   if (typeof (legacy as unknown as Record<string, unknown>).schemaVersion === 'undefined') {
-    warnings.push('Legacy source-readiness.json detected (schema v1). Re-running audit:official-source regenerated it as v2.');
+    warnings.push('Legacy source-readiness.json detected (schema v1). Re-running audit:official-source regenerated it as v3.');
   }
   return warnings;
 }
@@ -241,40 +296,32 @@ function main(): number {
   ensureDir(DATA_DIR);
   const { readiness, summary } = runOfficialSourceAudit();
 
-  // Build resolved map (requirementId -> {status, missingFields, reason})
-  const resolved = new Map<string, { status: string; missingFields: string[]; reason: string }>();
-  for (const b of readiness.blockers) {
-    resolved.set(b.requirementId, {
-      status: 'missing',
-      missingFields: b.missingFields,
-      reason: b.reason,
-    });
-  }
-  // 补上 rulebook
-  resolved.set('tierA-rulebook', { status: 'available', missingFields: [], reason: 'Tier A rulebook present' });
-  // 补上 available 项
-  for (const req of OFFICIAL_SOURCE_REQUIREMENTS) {
-    if (!resolved.has(req.requirementId)) {
-      resolved.set(req.requirementId, { status: 'available', missingFields: [], reason: 'all required fields verified' });
-    }
+  // dev doc §10：直接消费 resolvedRequirements 构建 map；不通过 blockers 推
+  const resolvedByReq = new Map<string, ResolvedRequirement>();
+  for (const r of readiness.resolvedRequirements) {
+    resolvedByReq.set(r.requirementId, r);
   }
 
-  const manifestPath = writeManifest(resolved);
-  const checklistPath = writeChecklist(resolved);
-  const readinessPath = writeReadiness(readiness, resolved);
+  const manifestPath = writeManifest(resolvedByReq);
+  const checklistPath = writeChecklist(resolvedByReq);
+  const readinessPath = writeReadiness(readiness);
   const summaryPath = writeSummary(summary);
 
   console.log('====================');
   console.log('  audit:official-source');
   console.log('====================');
   console.log(`总 requirement     : ${readiness.requirementCount}`);
-  console.log(`Tier A (rulebook)  : available (1)`);
+  console.log(`Tier A (rulebook)  : ${resolvedByReq.get('tierA-rulebook')?.status ?? 'unknown'}`);
   console.log(`Tier B (cards/tile): ${summary.tierBRequirements} requirements`);
   console.log(`Tier C (errata)    : ${summary.tierCRequirements} requirements`);
   console.log(`available          : ${summary.availableRequirements}`);
   console.log(`partial            : ${summary.partialRequirements}`);
   console.log(`missing            : ${summary.missingRequirements}`);
+  console.log(`requiredMissingCount : ${summary.requiredMissingCount}`);
+  console.log(`requiredPartialCount : ${summary.requiredPartialCount}`);
+  console.log(`optionalMissingCount : ${summary.optionalMissingCount}`);
   console.log(`auditPasses        : ${readiness.auditPasses}`);
+  console.log(`provenanceAudit.passes: ${readiness.provenanceAudit.passes}`);
   console.log(`outcome            : ${readiness.outcome.kind}`);
   console.log(`allRequiredSourcesReady: ${readiness.gates.allRequiredSourcesReady}`);
   console.log('');
@@ -304,5 +351,7 @@ function main(): number {
 
 // Phase 11A.3 SGIR §39：vite-node 不设 `require.main === module`，所以直接执行。
 // 同样适用于 npm run audit:official-source 显式调用入口。
-main();
-process.exit(process.exitCode ?? 0);
+//
+// Phase 11A.3 Source-Gate Final Acceptance Closure §2（CLI Exit Truth）：
+//   必须真实把 main() 的 return code 传给 shell（之前用 process.exitCode ?? 0 会吞掉 1）。
+process.exit(main());

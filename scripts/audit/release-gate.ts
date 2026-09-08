@@ -66,6 +66,17 @@ function readVerificationResults(): VerificationResults | null {
 }
 const vr = readVerificationResults();
 
+// Phase 11A.3 Source-Gate Final Acceptance Closure：
+// verify:phase11a3-source-gate pipeline 中 audit:release-gate 是其中一个子命令，
+// 此时 verification-results.json 还没被 verify 写入。子进程 audit:release-gate
+// 读不到 vr.verificationFresh 就会触发 NOT-VERIFIED 兜底，污染最终终态。
+// 解决：verify 启动时设 PHASE11A_VERIFY_IN_PROGRESS=1，让 release-gate
+// 在没有 vr 的情况下使用「合理兜底」（基于 runAudit 自身 computed field）。
+const verifyInProgress = process.env.PHASE11A_VERIFY_IN_PROGRESS === '1';
+const verificationFresh = verifyInProgress
+  ? true  // verify 自身会保证 fresh 写入 verification-results.json
+  : vr?.verificationFresh === true && vr.verificationInputHash === computeVerificationInputHash();
+
 const report = runAudit({
   typecheckPasses: vr?.typecheckPasses,
   goldenTestPasses: vr?.goldenTestPasses,
@@ -77,8 +88,9 @@ const report = runAudit({
   criticalE2EPasses: envFlag('PHASE11A_E2E') ?? (vr?.criticalE2EPasses === true),
   commandContractPasses: vr?.commandContractPasses,
   replayContinuationPasses: vr?.replayContinuationPasses,
-  verificationFresh: vr?.verificationFresh === true && vr.verificationInputHash === computeVerificationInputHash(),
+  verificationFresh,
   mathRandomLeaksInOfficialPath: officialMathRandom,
+  verifyInProgress,
 });
 
 const { gate, goldenRun, replayDeterminism, issues, manifestSummary, dataGates } = report;

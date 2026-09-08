@@ -596,10 +596,26 @@ export interface OfficialSourceSummary {
   tierCRequirements: number;
   /** 资料齐备且所有 required fields 都有 provenance 的 requirement 数。 */
   availableRequirements: number;
-  /** 资料完全缺失的 requirement 数。 */
+  /** 资料完全缺失的 requirement 数（含 optional）。 */
   missingRequirements: number;
   /** 部分资料（如只有 rulebook-backed fields 而无 Tier B/C）的 requirement 数。 */
   partialRequirements: number;
+  // ─── Phase 11A.3 Source-Gate Final Acceptance Closure §6 ───
+  // requiredForCompletion 拆分：optional errata 不阻塞 allRequiredSourcesReady。
+  /** requiredForCompletion=true 的 requirement 数。 */
+  requiredRequirementCount: number;
+  /** requiredForCompletion=true 且 status=missing 的 requirement 数。 */
+  requiredMissingCount: number;
+  /** requiredForCompletion=true 且 status=partial 的 requirement 数。 */
+  requiredPartialCount: number;
+  /** requiredForCompletion=true 且 status=available 的 requirement 数。 */
+  requiredAvailableCount: number;
+  /** requiredForCompletion=false（如 errata）requirement 数。 */
+  optionalRequirementCount: number;
+  /** requiredForCompletion=false 且 status=missing 的 requirement 数。 */
+  optionalMissingCount: number;
+  /** requiredForCompletion=false 且 status=partial 的 requirement 数。 */
+  optionalPartialCount: number;
   /** audit 是否成功执行（不含 missing）。malformed / contradictory 走 auditPasses=false。 */
   auditPasses: boolean;
 }
@@ -616,6 +632,8 @@ export function summarizeRequirements(): OfficialSourceSummary {
   const tierB = OFFICIAL_SOURCE_REQUIREMENTS.filter((r) => tierOf(r) === 'B').length;
   const tierC = OFFICIAL_SOURCE_REQUIREMENTS.filter((r) => tierOf(r) === 'C').length;
   const physical = OFFICIAL_SOURCE_REQUIREMENTS.reduce((s, r) => s + r.quantity, 0);
+  const requiredRequirements = OFFICIAL_SOURCE_REQUIREMENTS.filter((r) => r.requiredForCompletion);
+  const optionalRequirements = OFFICIAL_SOURCE_REQUIREMENTS.filter((r) => !r.requiredForCompletion);
   return {
     totalRequirements: total,
     totalPhysicalAssets: physical,
@@ -625,6 +643,14 @@ export function summarizeRequirements(): OfficialSourceSummary {
     availableRequirements: 0, // 由 audit pass 填入
     missingRequirements: 0, // 由 audit pass 填入
     partialRequirements: 0, // 由 audit pass 填入
+    // Phase 11A.3 Source-Gate Final Acceptance Closure §6：required/optional 分离
+    requiredRequirementCount: requiredRequirements.length,
+    requiredMissingCount: 0, // 由 audit pass 填入
+    requiredPartialCount: 0, // 由 audit pass 填入
+    requiredAvailableCount: 0, // 由 audit pass 填入
+    optionalRequirementCount: optionalRequirements.length,
+    optionalMissingCount: 0, // 由 audit pass 填入
+    optionalPartialCount: 0, // 由 audit pass 填入
     auditPasses: false, // 由 audit pass 设置
   };
 }
@@ -637,11 +663,20 @@ export function getRequirementsByGroup(group: SourceComponentGroup): OfficialSou
   return OFFICIAL_SOURCE_REQUIREMENTS.filter((r) => r.componentGroup === group);
 }
 
-/** 11A.3 官方 Act IV 范围内的所有 requirementId（用于 officialActFourMissingSourceReferences）。 */
+/** 11A.3 官方 Act IV 范围内的所有 requirementId（requiredForCompletion=true）。 */
 export function getOfficialActFourRequirementIds(): Set<string> {
   return new Set(
     OFFICIAL_SOURCE_REQUIREMENTS
       .filter((r) => r.requiredForCompletion)
       .map((r) => r.requirementId),
   );
+}
+
+/**
+ * Phase 11A.3 Source-Gate Final Acceptance Closure §13：
+ * Act IV Source Scope 直接从 OFFICIAL_SOURCE_REQUIREMENTS.filter(requiredForCompletion)
+ * 计算，不再走 category allowlist（darkestDungeonQuests / guardians / finalForms）。
+ */
+export function getOfficialActFourRequirements(): OfficialSourceRequirement[] {
+  return OFFICIAL_SOURCE_REQUIREMENTS.filter((r) => r.requiredForCompletion);
 }

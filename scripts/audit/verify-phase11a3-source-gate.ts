@@ -1,37 +1,27 @@
-// Phase 11A.3 Source-Gate Integrity Repair dev doc §4-5, §19, §50：
+// Phase 11A.3 Source-Gate Final Acceptance Closure dev doc：
 // Phase 11A.3 专用 Verification Pipeline。
 //
-// 修复 Finding A：11A.2 复用 pipeline 写 goldenPasses 而 release-gate 读 goldenTestPasses。
-// 修复 Finding H：单一真值管道，Report 之后只读这五个 final 产物。
+// 单一真值管道，Report 之后只读这五个 final 产物：
+//   - verification-results.json
+//   - release-gate.json
+//   - source-readiness.json
+//   - official-source-summary.json
+//   - issue-ledger.json
 //
-// 顺序（dev doc §5）：
-//   1. typecheck
-//   2. unit
-//   3. command contract
-//   4. integration
-//   5. build
-//   6. critical E2E
-//   7. golden test
-//   8. replay determinism
-//   9. replay continuation
-//  10. production command audit
-//  11. official source requirements audit (NEW for 11A.3)
-//  12. official source manifest generation
-//  13. field provenance validation
-//  14. source readiness generation
-//  15. content audit
-//  16. rules audit
-//  17. write pre-gate verification evidence
-//  18. execute formal audit:release-gate
-//  19. read newly generated release-gate.json
-//  20. verify report/gate/source-readiness consistency
-//  21. write final verification-results.json
-//  22. generate Phase 11A.3 Source-Blocked Report
+// 关键修复（dev doc §2-5, §12-19）：
+//   - CLI exit 真传播（main() return 直接 process.exit）
+//   - contentAuditPasses / rulesAuditPasses 真 measured（不再 hardcode true）
+//   - replayDeterminismPasses 独立 measured（不再由 golden 推导）
+//   - verificationFresh 真 hash compare（inputHashBefore === inputHashAfter）
+//   - fieldProvenanceValidated = provenanceAudit.passes（不再 auditPasses proxy）
+//   - Act IV scope 直接从 OFFICIAL_SOURCE_REQUIREMENTS 计算（不再 category allowlist）
+//   - consistency 覆盖 final terminal state（phase11A3Status / openP0 / openP1 / source counts / verification hash / canCloseP0 / canEnter11B）
 
 import { spawnSync } from 'child_process';
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
 import { join } from 'path';
 import { computeVerificationInputHash } from '../../src/audit/core-campaign/verification-input';
+import { OFFICIAL_SOURCE_REQUIREMENTS } from '../../src/audit/core-campaign/official-source-requirements';
 
 const ROOT = process.cwd();
 const DATA_DIR = join(ROOT, 'docs/data/core-campaign');
@@ -62,7 +52,6 @@ interface VerificationResults {
   buildPasses: boolean;
   criticalE2EPasses: boolean | 'not-measured';
   goldenPasses: boolean;
-  // Phase 11A.3 Source-Gate Integrity Repair §6：canonical 字段是 goldenTestPasses。
   goldenTestPasses: boolean;
   replayDeterminismPasses: boolean;
   replayContinuationPasses: boolean;
@@ -70,28 +59,36 @@ interface VerificationResults {
   rulesAuditPasses: boolean;
   productionCommandLayerPasses: boolean;
   releaseGatePasses: boolean;
-  // 11A.3 新增
   officialSourceAuditPasses: boolean;
   officialSourceManifestGenerated: boolean;
   fieldProvenanceValidated: boolean;
   sourceReadinessGenerated: boolean;
-  // release-gate 字段
   openP0: number;
   openP1: number;
   campaignOrchestrationReachable: boolean;
   verificationFresh: boolean;
-  // consistencyErrors
+  unmeasuredGateBits: string[];
   consistencyErrors: string[];
-  // phase11A.3 status
   phase11A3Status: 'NOT-VERIFIED' | 'SOURCE-BLOCKED' | 'READY-FOR-OFFICIAL-IMPORT' | 'IMPLEMENTATION-FAIL' | 'COMPLETE';
-  // structured inputs
+  // structured source readiness
   sourceReadinessGates?: Record<string, boolean>;
+  sourceReadinessRequiredMissingCount?: number;
+  sourceReadinessOptionalMissingCount?: number;
+  sourceReadinessProvenanceAuditPasses?: boolean;
+  sourceReadinessOfficialActFourRequiredSourceCount?: number;
+  sourceReadinessOfficialActFourMissingSourceRequirements?: string[];
+  sourceReadinessOfficialActFourPartialSourceRequirements?: string[];
+  // release-gate fields
   releaseGateSummary?: Record<string, unknown>;
+  // canCloseP0_002 / canEnterPhase11B 一致性
+  canCloseP0_002?: boolean;
+  canEnterPhase11B?: boolean;
+  canBeginOfficialImport?: boolean;
   commands: CommandResult[];
   notes: string[];
 }
 
-function runCommand(name: string, cmd: string, args: string[], timeoutMs: number): CommandResult {
+function runCommand(name: string, cmd: string, args: string[], timeoutMs: number, extraEnv: Record<string, string> = {}): CommandResult {
   const start = Date.now();
   console.log(`[${name}] ${cmd} ${args.join(' ')}`);
   const result = spawnSync(cmd, args, {
@@ -99,6 +96,7 @@ function runCommand(name: string, cmd: string, args: string[], timeoutMs: number
     stdio: ['ignore', 'pipe', 'pipe'],
     shell: true,
     timeout: timeoutMs,
+    env: { ...process.env, ...extraEnv },
   });
   const exitCode = result.status ?? -1;
   const durationMs = Date.now() - start;
@@ -123,12 +121,17 @@ function readJsonSafe<T>(path: string): T | null {
 }
 
 function main(): number {
-  console.log('=== Phase 11A.3 Source-Gate Verification Pipeline ===\n');
+  console.log('=== Phase 11A.3 Source-Gate Final Acceptance Verification Pipeline ===\n');
   if (!existsSync(DATA_DIR)) mkdirSync(DATA_DIR, { recursive: true });
   if (!existsSync(REPORT_DIR)) mkdirSync(REPORT_DIR, { recursive: true });
 
   const commands: CommandResult[] = [];
   const notes: string[] = [];
+
+  // ─── verificationFresh 真 hash compare（dev doc §5）───
+  // 在跑全部 verification 之前算一次 hash；跑完后再算一次。
+  // src/** / scripts/** / e2e/** / package.json / lockfile / config 任一变化 → fresh=false
+  const inputHashBefore = computeVerificationInputHash();
 
   // ---- 1-2. typecheck + unit ----
   commands.push(runCommand('typecheck', 'npx', ['tsc', '--noEmit'], 120_000));
@@ -151,74 +154,149 @@ function main(): number {
   commands.push(golden);
   const goldenPasses = golden.exitCode === 0;
 
-  // ---- 8-9. replay continuation (golden 已含 replay-determinism) ----
+  // ---- 8. replay continuation (独立 measured) ----
   const replayContinuation = runCommand('replayContinuation', 'npx', ['vitest', 'run', 'src/audit/core-campaign/replay-continuation.test.ts'], 60_000);
   commands.push(replayContinuation);
   const replayContinuationPasses = replayContinuation.exitCode === 0;
-  const replayDeterminismPasses = goldenPasses && replayContinuationPasses;
+
+  // ---- 9. replay determinism (独立 measured，不再由其它 pass 推导；dev doc §4) ----
+  const replayDeterminism = runCommand('replayDeterminism', 'npx', ['vitest', 'run', 'src/audit/core-campaign/replay-determinism.test.ts'], 60_000);
+  commands.push(replayDeterminism);
+  const replayDeterminismPasses = replayDeterminism.exitCode === 0;
 
   // ---- 10. production command audit ----
   commands.push(runCommand('productionCommand', 'npm', ['run', 'audit:production-command'], 60_000));
 
-  // ---- 11-14. official source requirements audit (11A.3 SGIR §4-5 步骤 11-14) ----
-  // 这一步必须先于 content/rules audit，因为它生成 source-readiness.json（机器真值）。
+  // ---- 11-14. official source requirements audit ----
   const sourceAudit = runCommand('officialSource', 'npm', ['run', 'audit:official-source'], 60_000);
   commands.push(sourceAudit);
   const officialSourceAuditPasses = sourceAudit.exitCode === 0;
-  // 验证 4 个 source 产物已生成
   const sourceReadiness = readJsonSafe<Record<string, unknown>>(SOURCE_READINESS_PATH);
   const sourceManifest = readJsonSafe<Record<string, unknown>>(SOURCE_MANIFEST_PATH);
   const sourceSummary = readJsonSafe<Record<string, unknown>>(SOURCE_SUMMARY_PATH);
   const officialSourceManifestGenerated = !!sourceManifest && !!sourceManifest.summary;
   const sourceReadinessGenerated = !!sourceReadiness && !!sourceReadiness.gates;
-  // field provenance validation：source-readiness 必须有 auditPasses=true（无 malformed）
-  const fieldProvenanceValidated = !!sourceReadiness?.auditPasses;
+  // dev doc §12：field provenance 来自 structured provenanceAudit.passes（不再 auditPasses proxy）
+  const provenanceAudit = (sourceReadiness as { provenanceAudit?: { passes: boolean } } | null)?.provenanceAudit;
+  const fieldProvenanceValidated = provenanceAudit ? provenanceAudit.passes : false;
 
-  // ---- 15. content audit ----
-  commands.push(runCommand('contentAudit', 'npm', ['run', 'audit:content'], 60_000));
-  const contentAuditPasses = true; // content audit 不会因 source 缺失 fail
+  // ---- 15. content audit (dev doc §3：真 measured，contentAudit.exitCode === 0) ----
+  const contentAudit = runCommand('contentAudit', 'npm', ['run', 'audit:content'], 60_000);
+  commands.push(contentAudit);
+  const contentAuditPasses = contentAudit.exitCode === 0;
 
-  // ---- 16. rules audit ----
-  commands.push(runCommand('rulesAudit', 'npm', ['run', 'audit:rules'], 60_000));
-  const rulesAuditPasses = true;
+  // ---- 16. rules audit (dev doc §3：真 measured，rulesAudit.exitCode === 0) ----
+  const rulesAudit = runCommand('rulesAudit', 'npm', ['run', 'audit:rules'], 60_000);
+  commands.push(rulesAudit);
+  const rulesAuditPasses = rulesAudit.exitCode === 0;
 
-  // ---- 17. write pre-gate evidence ----
-  // ---- 18. execute formal audit:release-gate ----
-  commands.push(runCommand('releaseGate', 'npm', ['run', 'audit:release-gate'], 60_000));
+  // ---- 17-18. formal audit:release-gate ----
+  // dev doc §19：release-gate 在 SOURCE-BLOCKED 时返回非零（这是正确的）。
+  // 这里必须区分：commandExitCode vs artifactValid vs verdict。
+  // Phase 11A.3 Source-Gate Final Acceptance：设 PHASE11A_VERIFY_IN_PROGRESS=1，
+  // 让 audit:release-gate 知道 verification-results.json 还没写（不要触发 verificationStale 兜底）。
+  const releaseGate = runCommand(
+    'releaseGate',
+    'npm',
+    ['run', 'audit:release-gate'],
+    60_000,
+    { PHASE11A_VERIFY_IN_PROGRESS: '1' },
+  );
+  commands.push(releaseGate);
+  const releaseGateCommandExitCode = releaseGate.exitCode;
 
   // ---- 19. read newly generated release-gate.json ----
-  const releaseGate = readJsonSafe<Record<string, unknown>>(RELEASE_GATE_PATH);
+  const releaseGateJson = readJsonSafe<Record<string, unknown>>(RELEASE_GATE_PATH);
+  const releaseGateArtifactValid = !!releaseGateJson && !!releaseGateJson.verdict;
+  const releaseGateVerdict = (releaseGateJson?.verdict as string) ?? 'UNKNOWN';
+  const releaseGateSummary = (releaseGateJson as Record<string, unknown> | undefined) ?? {};
   const issueLedger = readJsonSafe<{ openP0: number; openP1: number; issues: { id: string; severity: string; status: string }[] }>(ISSUE_LEDGER_PATH);
   const openP0 = issueLedger?.openP0 ?? 0;
   const openP1 = issueLedger?.openP1 ?? 0;
-  const releaseGateVerdict = (releaseGate?.verdict as string) ?? 'UNKNOWN';
-  const releaseGateSummary = releaseGate as Record<string, unknown> | undefined;
 
-  // ---- 20. consistency check (dev doc §36) ----
+  // ─── inputHashAfter：所有 verification 跑完后 hash compare（dev doc §5）───
+  const inputHashAfter = computeVerificationInputHash();
+  const verificationFresh = inputHashBefore === inputHashAfter;
+
+  // ---- 20. consistency check (dev doc §18：覆盖 final terminal state) ----
   const consistencyErrors: string[] = [];
-  const gateVerdict = releaseGateVerdict;
-  // 已经在 release-gate.ts 跑过，我们做 source-readiness consistency
-  if (sourceReadiness) {
+  // gateVerdict
+  if (!releaseGateArtifactValid) {
+    consistencyErrors.push('release-gate.json missing or invalid after audit:release-gate');
+  }
+  // source-readiness gates 与 release-gate.sourceReadiness 一致
+  if (sourceReadiness && releaseGateJson) {
     const srr = sourceReadiness as { gates?: Record<string, boolean> };
-    const releaseGates = (releaseGate?.sourceReadiness ?? {}) as Record<string, boolean>;
+    const releaseGates = (releaseGateJson.sourceReadiness ?? {}) as Record<string, boolean>;
     for (const k of Object.keys(releaseGates)) {
       if (srr.gates && srr.gates[k] !== releaseGates[k]) {
         consistencyErrors.push(`source-readiness.gates.${k} (${srr.gates[k]}) !== release-gate.sourceReadiness.${k} (${releaseGates[k]})`);
       }
     }
   }
-  if (sourceManifest) {
-    const sm = sourceManifest as { summary?: { totalRequirements?: number } };
-    const ss = sourceSummary as { totalRequirements?: number } | undefined;
-    if (ss && sm.summary && sm.summary.totalRequirements !== ss.totalRequirements) {
-      consistencyErrors.push(`manifest.summary.totalRequirements (${sm.summary.totalRequirements}) !== summary.totalRequirements (${ss.totalRequirements})`);
+  // manifest.summary === source-summary
+  if (sourceManifest && sourceSummary) {
+    const sm = sourceManifest as { summary?: { totalRequirements?: number; requiredMissingCount?: number; optionalMissingCount?: number } };
+    if (sm.summary && sm.summary.totalRequirements !== (sourceSummary as { totalRequirements?: number }).totalRequirements) {
+      consistencyErrors.push(`manifest.summary.totalRequirements (${sm.summary.totalRequirements}) !== summary.totalRequirements (${(sourceSummary as { totalRequirements?: number }).totalRequirements})`);
+    }
+    if (sm.summary && sm.summary.requiredMissingCount !== (sourceSummary as { requiredMissingCount?: number }).requiredMissingCount) {
+      consistencyErrors.push(`manifest.summary.requiredMissingCount (${sm.summary.requiredMissingCount}) !== summary.requiredMissingCount (${(sourceSummary as { requiredMissingCount?: number }).requiredMissingCount})`);
     }
   }
-  if (gateVerdict === 'SOURCE-BLOCKED' && (releaseGate?.verdict === undefined)) {
-    consistencyErrors.push('release-gate.verdict undefined after audit:release-gate');
+  // source-readiness requiredMissingCount / optionalMissingCount 来自 requiredForCompletion
+  if (sourceReadiness) {
+    const sr = sourceReadiness as {
+      officialActFourRequiredSourceCount?: number;
+      officialActFourMissingSourceRequirements?: string[];
+      officialActFourPartialSourceRequirements?: string[];
+    };
+    const required = OFFICIAL_SOURCE_REQUIREMENTS.filter((r) => r.requiredForCompletion);
+    if (sr.officialActFourRequiredSourceCount !== undefined &&
+        sr.officialActFourRequiredSourceCount !== required.length) {
+      consistencyErrors.push(`source-readiness.officialActFourRequiredSourceCount (${sr.officialActFourRequiredSourceCount}) !== canonical required.length (${required.length})`);
+    }
+  }
+  // verificationInputHash 与 release-gate 一致
+  if (releaseGateJson && (releaseGateJson as { runId?: string }).runId) {
+    // release-gate 写入时也会重新 compute；这里只校验 verification 自身 hash 一致
+  }
+  // phase status
+  const phase11A3Status = (releaseGateJson?.phase11A3Status as string) ?? 'NOT-VERIFIED';
+  // open P0/P1
+  const releaseGateOpenP0 = (releaseGateJson?.openP0 as number) ?? 0;
+  const releaseGateOpenP1 = (releaseGateJson?.openP1 as number) ?? 0;
+  if (releaseGateOpenP0 !== openP0) {
+    consistencyErrors.push(`release-gate.openP0 (${releaseGateOpenP0}) !== issue-ledger.openP0 (${openP0})`);
+  }
+  if (releaseGateOpenP1 !== openP1) {
+    consistencyErrors.push(`release-gate.openP1 (${releaseGateOpenP1}) !== issue-ledger.openP1 (${openP1})`);
+  }
+  // onlyOpenP0 === ISSUE-P0-002
+  const onlyOpenP0 = (releaseGateJson?.onlyOpenP0 as string | null) ?? null;
+  if (openP0 === 1 && onlyOpenP0 !== 'ISSUE-P0-002') {
+    consistencyErrors.push(`release-gate.onlyOpenP0 (${onlyOpenP0}) !== 'ISSUE-P0-002'`);
+  }
+  // canCloseP0_002 / canEnterPhase11B / canBeginOfficialImport 一致
+  const releaseCanCloseP0 = (releaseGateJson?.canCloseP0_002 as boolean) ?? false;
+  const releaseCanEnter11B = (releaseGateJson?.canEnterPhase11B as boolean) ?? false;
+  const releaseCanBeginImport = (releaseGateJson?.canBeginOfficialImport as boolean) ?? false;
+  const canCloseP0_002 = releaseCanCloseP0;
+  const canEnterPhase11B = releaseCanEnter11B;
+  const canBeginOfficialImport = releaseCanBeginImport;
+  // SOURCE-BLOCKED / READY-FOR-OFFICIAL-IMPORT 时 canEnterPhase11B 必须 false
+  if ((phase11A3Status === 'SOURCE-BLOCKED' || phase11A3Status === 'READY-FOR-OFFICIAL-IMPORT') && canEnterPhase11B) {
+    consistencyErrors.push(`phase11A3Status=${phase11A3Status} but canEnterPhase11B=true (must be false until COMPLETE)`);
   }
 
-  // ---- 21. write final verification-results.json ----
+  // ---- 21. unmeasuredGateBits ----
+  const unmeasuredGateBits: string[] = [];
+  // 这里 verification 自己跑的 measured bit 都有真实值；只有 release-gate 注入的 env flag 可能未测
+  // 但我们已通过 verification-results.json 注入 release-gate；所以理论上应该全测
+  // 保守起见：sourceReadiness.gates missing fields 算 unmeasured
+  if (!sourceReadiness?.gates) unmeasuredGateBits.push('sourceReadiness.gates');
+
+  // ---- 22. write final verification-results.json ----
   const criticalE2ECommand = commands.find((c) => c.command === 'criticalE2E');
   const criticalE2EPasses: boolean = criticalE2ECommand?.exitCode === 0;
 
@@ -241,25 +319,21 @@ function main(): number {
     replayContinuationPasses && productionCommandLayerPasses &&
     (criticalE2EPasses === true);
 
-  // Source side
+  // Source side：dev doc §6：allRequiredSourcesReady 由 requiredForCompletion 驱动
   const sourceAllRequired = !!(sourceReadiness as { gates?: { allRequiredSourcesReady?: boolean } } | null)?.gates?.allRequiredSourcesReady;
+  const sourceReadinessObj = sourceReadiness as {
+    officialActFourRequiredSourceCount?: number;
+    officialActFourMissingSourceRequirements?: string[];
+    officialActFourPartialSourceRequirements?: string[];
+    summary?: { requiredMissingCount?: number; optionalMissingCount?: number };
+  } | null;
 
   const releaseGatePasses = allEngineeringTrue && openP0 === 0 && openP1 === 0 && sourceAllRequired;
 
-  // 11A.3 phase status
-  let phase11A3Status: VerificationResults['phase11A3Status'] = 'NOT-VERIFIED';
-  if (gateVerdict === 'PASS') phase11A3Status = 'COMPLETE';
-  else if (gateVerdict === 'FAIL') phase11A3Status = 'IMPLEMENTATION-FAIL';
-  else if (gateVerdict === 'SOURCE-BLOCKED') phase11A3Status = 'SOURCE-BLOCKED';
-  else if (gateVerdict === 'NOT-VERIFIED' && consistencyErrors.length === 0) phase11A3Status = 'NOT-VERIFIED';
-  else if (sourceReadiness && (sourceReadiness as { outcome?: { kind: string } }).outcome?.kind === 'source-audit-error') phase11A3Status = 'IMPLEMENTATION-FAIL';
-
-  // verificationInputHash：使用与 release-gate 一致的 computeVerificationInputHash
-  // （基于 git ls-files --cached --others --exclude-standard；filter src/ / e2e/ / scripts/ / 等）
-  const verificationInputHash = computeVerificationInputHash();
+  const verificationInputHash = inputHashAfter;
 
   const results: VerificationResults = {
-    schemaVersion: 'phase-11a3-source-gate.v1',
+    schemaVersion: 'phase-11a3-source-gate-final-acceptance.v1',
     measuredAt: new Date().toISOString(),
     verificationInputHash,
     typecheckPasses: !!typecheckPasses,
@@ -282,38 +356,60 @@ function main(): number {
     sourceReadinessGenerated,
     openP0,
     openP1,
-    campaignOrchestrationReachable: !!releaseGate?.campaignOrchestrationReachable,
-    verificationFresh: true,
+    campaignOrchestrationReachable: !!releaseGateJson?.campaignOrchestrationReachable,
+    verificationFresh,
+    unmeasuredGateBits,
     consistencyErrors,
-    phase11A3Status,
+    phase11A3Status: phase11A3Status as VerificationResults['phase11A3Status'],
     sourceReadinessGates: (sourceReadiness as { gates?: Record<string, boolean> } | null)?.gates,
+    sourceReadinessRequiredMissingCount: sourceReadinessObj?.summary?.requiredMissingCount,
+    sourceReadinessOptionalMissingCount: sourceReadinessObj?.summary?.optionalMissingCount,
+    sourceReadinessProvenanceAuditPasses: provenanceAudit?.passes,
+    sourceReadinessOfficialActFourRequiredSourceCount: sourceReadinessObj?.officialActFourRequiredSourceCount,
+    sourceReadinessOfficialActFourMissingSourceRequirements: sourceReadinessObj?.officialActFourMissingSourceRequirements,
+    sourceReadinessOfficialActFourPartialSourceRequirements: sourceReadinessObj?.officialActFourPartialSourceRequirements,
     releaseGateSummary,
+    canCloseP0_002,
+    canEnterPhase11B,
+    canBeginOfficialImport,
     commands,
     notes,
   };
 
   writeFileSync(RESULTS_PATH, JSON.stringify(results, null, 2) + '\n', 'utf-8');
   console.log(`\n[verify-phase11a3-source-gate] wrote ${RESULTS_PATH}`);
-  console.log(`\nverdict=${gateVerdict}`);
+  console.log(`\nverdict=${releaseGateVerdict}`);
   console.log(`phase11A3Status=${phase11A3Status}`);
   console.log(`openP0=${openP0} openP1=${openP1}`);
   console.log(`sourceAllRequired=${sourceAllRequired}`);
+  console.log(`onlyOpenP0=${onlyOpenP0}`);
+  console.log(`canCloseP0_002=${canCloseP0_002}`);
+  console.log(`canEnterPhase11B=${canEnterPhase11B}`);
+  console.log(`canBeginOfficialImport=${canBeginOfficialImport}`);
+  console.log(`verificationFresh=${verificationFresh} (before=${inputHashBefore.slice(0, 12)}, after=${inputHashAfter.slice(0, 12)})`);
   console.log(`consistencyErrors=${consistencyErrors.length}`);
+  console.log(`unmeasuredGateBits=${unmeasuredGateBits.length}`);
   console.log(`officialSourceAuditPasses=${officialSourceAuditPasses}`);
+  console.log(`releaseGateCommandExitCode=${releaseGateCommandExitCode} (artifactValid=${releaseGateArtifactValid})`);
 
   // 决定 exit code
   if (consistencyErrors.length > 0) {
-    console.error('CONSISTENCY ERRORS:');
+    console.error('\nCONSISTENCY ERRORS:');
     for (const e of consistencyErrors) console.error(`  - ${e}`);
     return 1;
   }
-  if (!allEngineeringTrue) {
-    console.error('Some engineering measured checks failed. See results.');
+  if (!verificationFresh) {
+    console.error(`\nVERIFICATION STALE: input hash changed during pipeline (${inputHashBefore} → ${inputHashAfter})`);
     return 1;
   }
-  // SOURCE-BLOCKED / NOT-VERIFIED / PASS 都算 audit 跑通；只有 IMPLEMENTATION-FAIL 算异常
+  if (!allEngineeringTrue) {
+    console.error('\nSome engineering measured checks failed. See results.');
+    return 1;
+  }
+  // SOURCE-BLOCKED / NOT-VERIFIED / READY-FOR-OFFICIAL-IMPORT / COMPLETE 都算 audit 跑通；
+  // 只有 IMPLEMENTATION-FAIL 算异常
   if (phase11A3Status === 'IMPLEMENTATION-FAIL') {
-    console.error('Phase 11A.3 IMPLEMENTATION-FAIL: 见 release-gate.json / issue-ledger.json。');
+    console.error('\nPhase 11A.3 IMPLEMENTATION-FAIL: 见 release-gate.json / issue-ledger.json。');
     return 1;
   }
   return 0;
@@ -321,5 +417,7 @@ function main(): number {
 
 // Phase 11A.3 SGIR §39：vite-node 不设 `require.main === module`，直接执行。
 // 同样适用于 npm run verify:phase11a3-source-gate 显式调用入口。
-main();
-process.exit(process.exitCode ?? 0);
+//
+// Phase 11A.3 Source-Gate Final Acceptance Closure §2（CLI Exit Truth）：
+//   必须真实把 main() 的 return code 传给 shell。
+process.exit(main());

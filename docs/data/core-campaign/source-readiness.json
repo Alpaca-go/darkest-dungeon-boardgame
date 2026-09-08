@@ -1,6 +1,6 @@
 {
-  "$schema": "phase-11a3-source-gate-integrity-repair/source-readiness.v2",
-  "generatedAt": "2026-09-08T08:11:05.275Z",
+  "$schema": "phase-11a3-source-gate-final-acceptance/source-readiness.v3",
+  "generatedAt": "2026-09-08T11:26:46.681Z",
   "phase": "11A.3",
   "tierA": {
     "rulebook": "available",
@@ -16,6 +16,7 @@
     "allRequiredSourcesReady": false
   },
   "rationale": {
+    "tierA-rulebook": "verified",
     "tierB-quest-1": "source-required",
     "tierB-quest-2": "source-required",
     "tierB-quest-3": "source-required",
@@ -42,8 +43,16 @@
     "tierB-heart-of-darkness": "source-required",
     "tierB-come-unto-your-maker": "source-required",
     "tierB-darkest-dungeon-monster-deck": "source-required",
-    "tierC-official-errata": "source-required",
-    "tierA-rulebook": "verified"
+    "tierC-official-errata": "source-required"
+  },
+  "impact": {
+    "canBeginOfficialImport": false,
+    "canCloseP0_002": false,
+    "canEnableOfficialGuardianPool": false,
+    "canEnableOfficialFinalEncounter": false,
+    "canEnableOfficialDarkestDungeonQuestPool": false,
+    "canEnableOfficialDarkestDungeonMonsterDeck": false,
+    "verdict": "SOURCE-BLOCKED"
   },
   "blockers": [
     {
@@ -368,18 +377,47 @@
       "tierB-gestating-heart",
       "tierB-heart-of-darkness",
       "tierB-come-unto-your-maker",
-      "tierB-darkest-dungeon-monster-deck",
-      "tierC-official-errata"
+      "tierB-darkest-dungeon-monster-deck"
     ],
     "partialRequirementIds": []
   },
-  "impact": {
-    "canEnterPhase11B": false,
-    "canCloseP0_002": false,
-    "canEnableOfficialGuardianPool": false,
-    "canEnableOfficialFinalEncounter": false,
-    "canEnableOfficialDarkestDungeonQuestPool": false,
-    "canEnableOfficialDarkestDungeonMonsterDeck": false,
-    "verdict": "SOURCE-BLOCKED"
+  "officialActFourRequiredSourceCount": 26,
+  "officialActFourMissingSourceRequirements": [
+    "tierB-quest-1",
+    "tierB-quest-2",
+    "tierB-quest-3",
+    "tierB-dd-dungeon-tile",
+    "tierB-templars-impaler",
+    "tierB-templars-warlord",
+    "tierB-templars-room",
+    "tierB-templars-room-tile",
+    "tierB-mammoth-cyst",
+    "tierB-white-cell-stalk",
+    "tierB-mammoth-cyst-room",
+    "tierB-shuffling-horror",
+    "tierB-cultist-priest",
+    "tierB-malignant-growth",
+    "tierB-shuffling-horror-room",
+    "tierB-ancestor-room",
+    "tierB-ancestor-room-tile",
+    "tierB-ancestor-first-form",
+    "tierB-perfect-reflection",
+    "tierB-imperfect-reflection",
+    "tierB-ancestor-second-form",
+    "tierB-absolute-nothingness",
+    "tierB-gestating-heart",
+    "tierB-heart-of-darkness",
+    "tierB-come-unto-your-maker",
+    "tierB-darkest-dungeon-monster-deck"
+  ],
+  "officialActFourPartialSourceRequirements": [],
+  "provenanceAudit": {
+    "requiredFieldCount": 131,
+    "verifiedRequiredFieldCount": 0,
+    "missingValueCount": 0,
+    "missingProvenanceCount": 0,
+    "invalidSourceReferenceCount": 0,
+    "componentMismatchCount": 0,
+    "passes": true
   }
 }
