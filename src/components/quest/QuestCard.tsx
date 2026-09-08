@@ -23,7 +23,7 @@ export default function QuestCard({ quest, selected, disabled, onClick }: QuestC
   ].join(' ');
 
   return (
-    <div className={cls} onClick={disabled ? undefined : onClick}>
+    <div data-testid={`quest-${quest.id}`} role="button" aria-disabled={!!disabled} tabIndex={disabled ? -1 : 0} onKeyDown={(e) => { if (!disabled && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); onClick?.(); } }} className={cls} onClick={disabled ? undefined : onClick}>
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-bold text-dd-text">{quest.name}</h3>
         <span className={`text-xs font-semibold ${DIFFICULTY_COLOR[quest.difficulty]}`}>

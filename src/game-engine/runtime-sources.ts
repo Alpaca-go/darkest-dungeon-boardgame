@@ -75,6 +75,8 @@ export function productionRuntimeSources(): RuntimeSources {
 /** SeededRandom：基于 mulberry32 算法的确定性 RNG。 */
 export class SeededRandom implements RandomSource {
   private state: number;
+  snapshot(): number { return this.state; }
+  restore(cursor: number): void { this.state = cursor; }
   constructor(seed: number) {
     this.state = (seed >>> 0) || 0x9e3779b9;
   }
@@ -92,6 +94,8 @@ export class SeededRandom implements RandomSource {
 export class DeterministicClock implements ClockSource {
   private currentMs: number;
   private tick: number;
+  snapshot(): number { return this.currentMs; }
+  restore(cursor: number): void { this.currentMs = cursor; this.tick = cursor; }
   constructor(epochMs: number = 0) {
     this.currentMs = epochMs;
     this.tick = 0;
@@ -112,6 +116,8 @@ export class DeterministicClock implements ClockSource {
 export class DeterministicCounterIdSource implements IdSource {
   private counter: number;
   private seed: number;
+  snapshot(): number { return this.counter; }
+  restore(cursor: number): void { this.counter = cursor; }
   constructor(seed: number = 0) {
     this.seed = seed >>> 0;
     this.counter = 0;

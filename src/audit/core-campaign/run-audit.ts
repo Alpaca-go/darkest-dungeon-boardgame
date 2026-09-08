@@ -49,7 +49,9 @@ import {
 // Golden Run 尝试（诚实：跑到哪里就报到哪里）
 // ---------------------------------------------------------------------------
 
+import type { CampaignReplayCheckpoint } from './checkpointable-campaign-runner';
 export interface GoldenRunAttempt {
+  checkpoint: CampaignReplayCheckpoint;
   seedId: string;
   reachedMilestones: string[];
   blockedAtMilestone: string | null;
@@ -145,9 +147,9 @@ function checkSaveResume(
  * 用 Simulation Driver 走**正式引擎路径**推进战役，直到通关或卡住。
  * 不使用任何 debug skip（硬约束 4）。
  */
-export function runGoldenCampaignAttempt(seedId: string, contentManifestHash: string): GoldenRunAttempt {
-  const driver = new CampaignSimulationDriver(seedId);
-  const reached: string[] = [];
+export function runGoldenCampaignAttempt(seedId: string, contentManifestHash: string, options: { until?: string; checkpoint?: CampaignReplayCheckpoint } = {}): GoldenRunAttempt {
+  const driver = new CampaignSimulationDriver(seedId, options.checkpoint);
+  const reached: string[] = options.checkpoint?.milestones.map(m => m.id) ?? [];
   const invariantErrors: string[] = [];
   let deadlockPhase: string | null = null;
   let blockedAtMilestone: string | null = null;
@@ -195,11 +197,13 @@ export function runGoldenCampaignAttempt(seedId: string, contentManifestHash: st
     // ---- M00：建立战役 + 选队 + 默认技能 ----
     // 注意 proceedToLoadout / proceedToQuests 是 UI-store-shim（引擎无入口，见 ISSUE-P1-006）。
     const heroIds = HEROES.slice(0, 4).map((h) => h.id);
+    if (!options.checkpoint) {
     track(driver.dispatch({ type: 'selectParty', heroIds }));
     track(driver.dispatch({ type: 'proceedToLoadout' }));
     track(driver.dispatch({ type: 'applyLoadout' }));
     track(driver.dispatch({ type: 'proceedToQuests' }));
     syncMilestones();
+    }
 
     // ---- 循环：选任务 → 结算 → 回 Hamlet → 结束一天 ----
     let steps = 0;
@@ -209,7 +213,7 @@ export function runGoldenCampaignAttempt(seedId: string, contentManifestHash: st
     // 用状态哈希比对检测真正的"卡死"。
     let lastStateHash = milestoneStateHash(driver.getState());
 
-    while (steps++ < MAX_LOOP_STEPS && !driver.isTerminal()) {
+    while (steps++ < MAX_LOOP_STEPS && !driver.isTerminal() && !(options.until && reached.includes(options.until))) {
       const state = driver.getState();
       const available = driver.getAvailableCommands();
       if (available.length === 0) {
@@ -413,6 +417,7 @@ export function runGoldenCampaignAttempt(seedId: string, contentManifestHash: st
 
   return {
     seedId,
+    checkpoint: driver.checkpoint(reached[reached.length - 1] ?? 'M00'),
     reachedMilestones: reached,
     blockedAtMilestone,
     blockedReason,
@@ -535,6 +540,10 @@ export interface AuditReport {
 }
 
 export interface RunAuditOptions {
+  typecheckPasses?: boolean;
+  goldenTestPasses?: boolean;
+  replayDeterminismPasses?: boolean;
+  productionCommandLayerPasses?: boolean;
   /** 外部（CI 脚本）注入的真实构建/测试结果；未提供时按未验证处理。 */
   buildPasses?: boolean;
   unitPasses?: boolean;
@@ -927,6 +936,10 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
   // 11A.2 §5 旧版依赖 uiStoreShimSteps 已被替换（P1-006 现读 pcaResult.productionCommandLayerPasses）。
 
   const gate: ReleaseGateResult = {
+    typecheckPasses: input.options.typecheckPasses ?? false,
+    goldenTestPasses: input.options.goldenTestPasses ?? false,
+    canEnterPhase11A3: false,
+    onlyOpenP0: openP0 === 1 ? input.issues.find(i => i.severity === 'P0' && i.status === 'open')!.id : null,
     buildPasses: input.options.buildPasses ?? false,
     unitPasses: input.options.unitPasses ?? false,
     integrationPasses: input.options.integrationPasses ?? false,
@@ -934,7 +947,7 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
     replayContinuationPasses: input.options.replayContinuationPasses ?? false,
     criticalE2EPasses: input.options.criticalE2EPasses ?? false,
     goldenCampaignPasses: elevenQuestLoopClosed,
-    replayDeterminismPasses: input.replayDeterminism.identical,
+    replayDeterminismPasses: input.replayDeterminism.identical && input.options.replayDeterminismPasses === true,
     openP0,
     openP1,
     prototypeReferencesInOfficialPath: input.prototypeFindings.length,
@@ -948,7 +961,7 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
     threeSkippedFormsPass: false,
     fourRuinsBossesPass: false,
     // Phase 11A.2 §5
-    productionCommandLayerPasses,
+    productionCommandLayerPasses: productionCommandLayerPasses && input.options.productionCommandLayerPasses === true,
     // §21：真实存档往返（createSaveSnapshot → validate → restoreSaveSnapshot → 哈希比对）。
     // 必须至少校验过一个节点，否则视为未验证 → 不通过。
     saveResumeKeyNodesPass:
@@ -1017,6 +1030,13 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
     gate.verdict = 'FAIL';
     gate.passed = false;
     gate.conclusion = `FAIL — campaign-flow-blocked：Campaign Orchestration 未达 Act IV Unlocked（finalAct=${input.goldenRun.finalAct}）。`;
+  } else if (![gate.typecheckPasses, gate.unitPasses, gate.buildPasses, gate.integrationPasses,
+    gate.goldenTestPasses, gate.productionCommandLayerPasses].every(Boolean)) {
+    gate.verdict = 'NOT-VERIFIED';
+    gate.conclusion = 'NOT-VERIFIED — required independent measured checks failed or missing';
+  } else if (openP1 > 0 || (openP0 > 0 && (openP0 !== 1 || gate.onlyOpenP0 !== 'ISSUE-P0-002'))) {
+    gate.verdict = 'FAIL';
+    gate.conclusion = 'FAIL — issues other than the accepted official content gap remain';
   } else if (openP0 > 0) {
     // 11A.2.3 §22.6: only official-content P0 remains → CONDITIONAL。
     // Content Blocked 不可遮住 Test Gate（已先判定）。
@@ -1041,6 +1061,7 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
     gate.conclusion = 'PASS — core-campaign-official-ready';
   }
 
+  gate.canEnterPhase11A3 = gate.verdict === 'CONDITIONAL' && gate.onlyOpenP0 === 'ISSUE-P0-002' && openP1 === 0;
   return gate;
 }
 

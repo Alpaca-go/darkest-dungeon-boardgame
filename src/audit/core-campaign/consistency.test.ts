@@ -44,10 +44,10 @@ describe('Consistency Tests C-01..C-10 (Phase 11A.2.2 §36)', () => {
     expect(report.gate.openP1).toBe(computedOpenP1);
   });
 
-  it('C-03: productionCommandLayerPasses = pcaResult.productionCommandLayerPasses', () => {
+  it('C-03: productionCommandLayerPasses requires structure and independent evidence', () => {
     const pca = runProductionCommandAudit();
     expect(report.gate.productionCommandLayerPasses).toBe(
-      pca.productionCommandLayerPasses,
+      pca.productionCommandLayerPasses && BASE_OPTIONS.productionCommandLayerPasses === true,
     );
   });
 
@@ -67,8 +67,8 @@ describe('Consistency Tests C-01..C-10 (Phase 11A.2.2 §36)', () => {
     expect(report.gate.criticalE2EPasses).toBe(BASE_OPTIONS.criticalE2EPasses);
   });
 
-  it('C-08: replayDeterminismPasses = replayDeterminism.identical', () => {
-    expect(report.gate.replayDeterminismPasses).toBe(report.replayDeterminism.identical);
+  it('C-08: replayDeterminismPasses requires replay and independent evidence', () => {
+    expect(report.gate.replayDeterminismPasses).toBe(report.replayDeterminism.identical && BASE_OPTIONS.replayDeterminismPasses === true);
   });
 
   it('C-09: campaignOrchestrationReachable = goldenRun.campaignOrchestrationReachable', () => {

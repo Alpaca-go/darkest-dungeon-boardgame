@@ -1,4 +1,5 @@
-import type { ReactNode } from 'react';
+import { lazy, Suspense, type ReactNode } from 'react';
+const E2ETestControls = import.meta.env.VITE_E2E_MODE === '1' ? lazy(() => import('../testing/e2e/e2e-test-controls')) : null;
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import GameShell from '../components/layout/GameShell';
 import { ROUTES } from './router';
@@ -24,6 +25,8 @@ function RouteGuard({ path, children }: { path: string; children: ReactNode }) {
 
 export default function App() {
   return (
+    <>
+    {E2ETestControls && <Suspense fallback={null}><E2ETestControls /></Suspense>}
     <Routes>
       <Route element={<GameShell />}>
         {ROUTES.map((r) => (
@@ -36,5 +39,6 @@ export default function App() {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>
+    </>
   );
 }

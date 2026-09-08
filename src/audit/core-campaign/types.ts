@@ -149,6 +149,10 @@ export interface CampaignReplayBundle {
 }
 
 export interface ReleaseGateResult {
+  typecheckPasses: boolean;
+  goldenTestPasses: boolean;
+  canEnterPhase11A3: boolean;
+  onlyOpenP0: string | null;
   buildPasses: boolean;
   unitPasses: boolean;
   integrationPasses: boolean;

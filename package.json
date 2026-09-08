@@ -18,7 +18,8 @@
     "test:golden": "vitest run src/audit/core-campaign",
     "audit:all": "vite-node scripts/audit/all.ts",
     "audit:final-report": "vite-node scripts/audit/final-report.ts",
-    "audit:performance-baseline": "vite-node scripts/audit/performance-baseline.ts"
+    "audit:performance-baseline": "vite-node scripts/audit/performance-baseline.ts",
+    "verify:phase11a2-final": "vite-node scripts/audit/verify-phase11a2-final.ts"
   },
   "dependencies": {
     "lucide-react": "^0.408.0",

@@ -187,7 +187,7 @@ function main(): void {
     const e2e = runCommand(
       'criticalE2E',
       'npx',
-      ['playwright', 'test', e2eSpec, '--reporter=basic'],
+      ['playwright', 'test', e2eSpec],
       180_000
     );
     commands.push(e2e);

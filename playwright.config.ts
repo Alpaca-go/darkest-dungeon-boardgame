@@ -29,7 +29,8 @@ export default defineConfig({
   webServer: {
     command: 'npm run dev -- --port 5199 --strictPort',
     url: 'http://localhost:5199',
-    reuseExistingServer: true,
+    reuseExistingServer: false,
+    env: { VITE_E2E_MODE: '1' },
     timeout: 90_000,
   },
 });

@@ -75,24 +75,24 @@
 
 ## 5. Golden Seed 矩阵
 
-- 可运行：**1**
-- 被阻断：**12**
+- 可运行：**2**
+- 被阻断：**11**
 
 | seedId | mode | expectedOutcome | runnable | blockedReason |
 | --- | --- | --- | --- | --- |
-| golden-normal-success-01 | normal | campaign-victory | ❌ | Act 推进状态机（campaign-progress.ts）无任何生产调用方，Boss Quest 定义零引用 → 11-Quest 循环在正式路径上不可达（ISSUE-P0-001） |
-| golden-save-resume-01 | save-resume | campaign-victory | ❌ | 依赖完整 11-Quest 循环；Save/Resume 本身可在已达成的里程碑上单独验证 |
-| golden-hero-death-replacement-01 | hero-death | campaign-victory | ❌ | 依赖完整 11-Quest 循环（英雄死亡/替补机制本身已实现并单测覆盖） |
+| golden-normal-success-01 | normal | campaign-victory | ❌ | ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked |
+| golden-save-resume-01 | save-resume | campaign-victory | ❌ | ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked |
+| golden-hero-death-replacement-01 | hero-death | campaign-victory | ❌ | ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked |
 | golden-stagecoach-exhaustion-01 | stagecoach-exhaustion | campaign-over | ✅ | — |
-| golden-boss-failure-01 | boss-failure | campaign-over | ❌ | Boss Quest 无法通过正式路径选中（FACE_THE_THREAT_QUEST_DEFINITION 零引用） |
-| golden-guardian-failure-01 | guardian-failure | campaign-over | ❌ | Guardian 官方数据 unavailable（Data Gate 关闭），仅 prototype harness 可跑 |
-| golden-final-failure-01 | final-failure | campaign-over | ❌ | Final Encounter 官方数据 unavailable（isFinalEncounterOfficialEnabled() === false） |
-| golden-templars-guardian | guardian | campaign-victory | ❌ | 官方 Guardian 数据缺失；prototype harness 已在 Phase 10B E2E 覆盖 |
-| golden-mammoth-cyst-guardian | guardian | campaign-victory | ❌ | 官方 Guardian 数据缺失；prototype harness 已在 Phase 10C E2E 覆盖 |
-| golden-shuffling-horror-guardian | guardian | campaign-victory | ❌ | 官方 Guardian 数据缺失；prototype harness 已在 Phase 10D E2E 覆盖 |
-| golden-skip-ancestor-first | skipped-form | campaign-victory | ❌ | Final Encounter 官方数据 unavailable；prototype harness 已在 Phase 10E E2E 覆盖 |
-| golden-skip-ancestor-second | skipped-form | campaign-victory | ❌ | Final Encounter 官方数据 unavailable；prototype harness 已在 Phase 10E E2E 覆盖 |
-| golden-skip-gestating-heart | skipped-form | campaign-victory | ❌ | Final Encounter 官方数据 unavailable；prototype harness 已在 Phase 10E E2E 覆盖 |
+| golden-boss-failure-01 | boss-failure | campaign-over | ✅ | — |
+| golden-guardian-failure-01 | guardian-failure | campaign-over | ❌ | ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked |
+| golden-final-failure-01 | final-failure | campaign-over | ❌ | ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked |
+| golden-templars-guardian | guardian | campaign-victory | ❌ | ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked |
+| golden-mammoth-cyst-guardian | guardian | campaign-victory | ❌ | ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked |
+| golden-shuffling-horror-guardian | guardian | campaign-victory | ❌ | ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked |
+| golden-skip-ancestor-first | skipped-form | campaign-victory | ❌ | ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked |
+| golden-skip-ancestor-second | skipped-form | campaign-victory | ❌ | ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked |
+| golden-skip-gestating-heart | skipped-form | campaign-victory | ❌ | ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked |
 
 ## 6. 结论
 

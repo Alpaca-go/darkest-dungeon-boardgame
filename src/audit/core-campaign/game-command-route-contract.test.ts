@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 // Phase 11A.2.3 §3 / §6 — GameCommand Route Contract 回归测试。
 //
 // dev doc §6：D-03..D-14 之前存在 `if (!precondition) return;` 的空 PASS。
@@ -137,3 +138,17 @@ describe('GameCommand Route Contract (Phase 11A.2.3 §3 + §6)', () => {
     ).toEqual([]);
   });
 });
+
+ it('RC-12: missing calls cannot be replaced by comments', () => {
+   const source = readFileSync('src/audit/core-campaign/simulation-driver.ts', 'utf8');
+   const broken = source.replace('() => proceedCampaignToLoadout(this.state)', '() => this.state /* proceedCampaignToLoadout */');
+   expect(runGameCommandRouteAudit(broken).routeViolations).toContain('proceedToLoadout');
+ });
+ it('RC-13: validates the actual imported symbol, not another import from the same module', () => {
+   const source = readFileSync('src/audit/core-campaign/simulation-driver.ts', 'utf8');
+   const broken = source.replace('  proceedCampaignToLoadout,', '') + "\nimport { proceedCampaignToLoadout } from './fake';";
+   expect(runGameCommandRouteAudit(broken).importSourceViolations).toContain('proceedToLoadout');
+ });
+ it('RC-14: lowercase commands are covered from the union', () => {
+   expect(runGameCommandRouteAudit().details.find(d => d.commandType === 'scout')?.validated).toBe(true);
+ });

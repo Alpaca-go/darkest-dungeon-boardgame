@@ -1,0 +1,24 @@
+
+> darkest-dungeon-web-prototype@0.1.0 audit:rules
+> vite-node scripts/audit/rules.ts
+
+
+====================
+  audit:rules
+====================
+P0 规则                : 15
+  implemented-and-tested: 7
+  implemented-not-tested: 5
+  data-missing          : 3
+P0 全覆盖              : NO
+官方路径 Math.random   : 0
+时间源命中             : 10
+迁移表自洽             : YES
+
+产物:
+  - docs/data/core-campaign/rule-traceability.json
+  - docs/data/core-campaign/rng-audit.json
+  - docs/data/core-campaign/state-transitions.json
+  - docs/reports/phase-11a/02-rule-traceability-and-rng.md
+
+

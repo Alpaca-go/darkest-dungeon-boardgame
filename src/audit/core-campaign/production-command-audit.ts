@@ -31,6 +31,7 @@ export interface ProductionCommandAuditResult {
   commandRouteValidatedCount: number;
   unclassifiedCommands: string[];
   routeViolations: string[];
+  importSourceViolations: string[];
   /** Store 直接 import 原子编排步骤的函数名列表。 */
   storeDirectAtomicOrchestrationLeaks: string[];
   /** Driver 直接 import 原子编排步骤的函数名列表。 */
@@ -212,7 +213,9 @@ export function runProductionCommandAudit(): ProductionCommandAuditResult {
   const routeCoveragePasses =
     routeAudit.commandRouteClassifiedCount === routeAudit.commandRouteExpectedCount &&
     routeAudit.unclassifiedCommands.length === 0 &&
-    routeAudit.routeViolations.length === 0;
+    routeAudit.routeViolations.length === 0 &&
+    routeAudit.importSourceViolations.length === 0 &&
+    routeAudit.commandRouteValidatedCount === routeAudit.commandRouteExpectedCount;
 
   // 8. productionCommandLayerPasses：结构化判定（11A.2.3 §5）
   //   - shim absent
@@ -241,6 +244,7 @@ export function runProductionCommandAudit(): ProductionCommandAuditResult {
     commandRouteValidatedCount: routeAudit.commandRouteValidatedCount,
     unclassifiedCommands: routeAudit.unclassifiedCommands,
     routeViolations: routeAudit.routeViolations,
+    importSourceViolations: routeAudit.importSourceViolations,
     storeDirectAtomicOrchestrationLeaks,
     driverDirectAtomicOrchestrationLeaks,
     differentialExpectedCount,

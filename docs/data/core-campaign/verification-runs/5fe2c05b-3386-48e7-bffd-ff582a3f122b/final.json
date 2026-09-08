@@ -1,0 +1,140 @@
+{
+  "schemaVersion": "2.0",
+  "runId": "5fe2c05b-3386-48e7-bffd-ff582a3f122b",
+  "measuredAt": "2026-09-08T00:12:50.730Z",
+  "verificationInputHash": "cc7403aa1a6b4836ccc13fa44014a6d1ddf4d42045dc8fd221bd76fb0b5adec8",
+  "typecheckPasses": true,
+  "unitPasses": true,
+  "commandContractPasses": true,
+  "integrationPasses": true,
+  "buildPasses": true,
+  "criticalE2EPasses": true,
+  "goldenTestPasses": true,
+  "replayDeterminismPasses": true,
+  "replayContinuationPasses": true,
+  "productSaveRoundTripPasses": true,
+  "contentAuditPasses": true,
+  "rulesAuditPasses": true,
+  "productionCommandTestsPasses": true,
+  "productionCommandLayerPasses": true,
+  "falseGreenGuardPasses": true,
+  "goldenPasses": true,
+  "verificationFresh": true,
+  "commands": [
+    {
+      "label": "typecheck",
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "durationMs": 6590,
+      "logPath": "docs\\data\\core-campaign\\verification-runs\\5fe2c05b-3386-48e7-bffd-ff582a3f122b\\typecheck.log"
+    },
+    {
+      "label": "unitPasses",
+      "command": "npx vitest run  --reporter=json --outputFile=docs\\data\\core-campaign\\verification-runs\\5fe2c05b-3386-48e7-bffd-ff582a3f122b\\unitPasses.json",
+      "exitCode": 0,
+      "durationMs": 19713,
+      "logPath": "docs\\data\\core-campaign\\verification-runs\\5fe2c05b-3386-48e7-bffd-ff582a3f122b\\unitPasses.log"
+    },
+    {
+      "label": "commandContractPasses",
+      "command": "npx vitest run src/audit/core-campaign/game-command-route-contract.test.ts --reporter=json --outputFile=docs\\data\\core-campaign\\verification-runs\\5fe2c05b-3386-48e7-bffd-ff582a3f122b\\commandContractPasses.json",
+      "exitCode": 0,
+      "durationMs": 3486,
+      "logPath": "docs\\data\\core-campaign\\verification-runs\\5fe2c05b-3386-48e7-bffd-ff582a3f122b\\commandContractPasses.log"
+    },
+    {
+      "label": "integrationPasses",
+      "command": "npx vitest run src/integration/core-campaign/integration.test.ts --reporter=json --outputFile=docs\\data\\core-campaign\\verification-runs\\5fe2c05b-3386-48e7-bffd-ff582a3f122b\\integrationPasses.json",
+      "exitCode": 0,
+      "durationMs": 4735,
+      "logPath": "docs\\data\\core-campaign\\verification-runs\\5fe2c05b-3386-48e7-bffd-ff582a3f122b\\integrationPasses.log"
+    },
+    {
+      "label": "build",
+      "command": "npm run build",
+      "exitCode": 0,
+      "durationMs": 13095,
+      "logPath": "docs\\data\\core-campaign\\verification-runs\\5fe2c05b-3386-48e7-bffd-ff582a3f122b\\build.log"
+    },
+    {
+      "label": "criticalE2E",
+      "command": "npx playwright test e2e/phase11a2-critical-campaign.spec.ts --reporter=list,json",
+      "exitCode": 0,
+      "durationMs": 18792,
+      "logPath": "docs\\data\\core-campaign\\verification-runs\\5fe2c05b-3386-48e7-bffd-ff582a3f122b\\criticalE2E.log"
+    },
+    {
+      "label": "goldenTestPasses",
+      "command": "npx vitest run src/audit/core-campaign/golden-run.test.ts --reporter=json --outputFile=docs\\data\\core-campaign\\verification-runs\\5fe2c05b-3386-48e7-bffd-ff582a3f122b\\goldenTestPasses.json",
+      "exitCode": 0,
+      "durationMs": 5236,
+      "logPath": "docs\\data\\core-campaign\\verification-runs\\5fe2c05b-3386-48e7-bffd-ff582a3f122b\\goldenTestPasses.log"
+    },
+    {
+      "label": "replayDeterminismPasses",
+      "command": "npx vitest run src/audit/core-campaign/replay-determinism.test.ts --reporter=json --outputFile=docs\\data\\core-campaign\\verification-runs\\5fe2c05b-3386-48e7-bffd-ff582a3f122b\\replayDeterminismPasses.json",
+      "exitCode": 0,
+      "durationMs": 4919,
+      "logPath": "docs\\data\\core-campaign\\verification-runs\\5fe2c05b-3386-48e7-bffd-ff582a3f122b\\replayDeterminismPasses.log"
+    },
+    {
+      "label": "replayContinuationPasses",
+      "command": "npx vitest run src/audit/core-campaign/replay-continuation.test.ts --reporter=json --outputFile=docs\\data\\core-campaign\\verification-runs\\5fe2c05b-3386-48e7-bffd-ff582a3f122b\\replayContinuationPasses.json",
+      "exitCode": 0,
+      "durationMs": 5025,
+      "logPath": "docs\\data\\core-campaign\\verification-runs\\5fe2c05b-3386-48e7-bffd-ff582a3f122b\\replayContinuationPasses.log"
+    },
+    {
+      "label": "productSaveRoundTripPasses",
+      "command": "npx vitest run src/audit/core-campaign/product-save-round-trip.test.ts --reporter=json --outputFile=docs\\data\\core-campaign\\verification-runs\\5fe2c05b-3386-48e7-bffd-ff582a3f122b\\productSaveRoundTripPasses.json",
+      "exitCode": 0,
+      "durationMs": 6468,
+      "logPath": "docs\\data\\core-campaign\\verification-runs\\5fe2c05b-3386-48e7-bffd-ff582a3f122b\\productSaveRoundTripPasses.log"
+    },
+    {
+      "label": "contentAudit",
+      "command": "npm run audit:content",
+      "exitCode": 0,
+      "durationMs": 3826,
+      "logPath": "docs\\data\\core-campaign\\verification-runs\\5fe2c05b-3386-48e7-bffd-ff582a3f122b\\contentAudit.log"
+    },
+    {
+      "label": "rulesAudit",
+      "command": "npm run audit:rules",
+      "exitCode": 0,
+      "durationMs": 3711,
+      "logPath": "docs\\data\\core-campaign\\verification-runs\\5fe2c05b-3386-48e7-bffd-ff582a3f122b\\rulesAudit.log"
+    },
+    {
+      "label": "productionCommandTestsPasses",
+      "command": "npx vitest run src/audit/core-campaign/production-command-audit.test.ts src/audit/core-campaign/command-differential.test.ts src/testing/e2e/e2e-harness-audit.test.ts --reporter=json --outputFile=docs\\data\\core-campaign\\verification-runs\\5fe2c05b-3386-48e7-bffd-ff582a3f122b\\productionCommandTestsPasses.json",
+      "exitCode": 0,
+      "durationMs": 4429,
+      "logPath": "docs\\data\\core-campaign\\verification-runs\\5fe2c05b-3386-48e7-bffd-ff582a3f122b\\productionCommandTestsPasses.log"
+    },
+    {
+      "label": "productionCommandAudit",
+      "command": "npx vite-node scripts/audit/production-command.ts",
+      "exitCode": 0,
+      "durationMs": 3326,
+      "logPath": "docs\\data\\core-campaign\\verification-runs\\5fe2c05b-3386-48e7-bffd-ff582a3f122b\\productionCommandAudit.log"
+    },
+    {
+      "label": "formalReleaseGate",
+      "command": "npm run audit:release-gate",
+      "exitCode": 1,
+      "durationMs": 4356,
+      "logPath": "docs\\data\\core-campaign\\verification-runs\\5fe2c05b-3386-48e7-bffd-ff582a3f122b\\formalReleaseGate.log"
+    }
+  ],
+  "consistencyErrors": [],
+  "releaseGatePasses": true,
+  "canEnterPhase11A3": true,
+  "status": "COMPLETE",
+  "verdict": "CONDITIONAL",
+  "openP0": 1,
+  "openP1": 0,
+  "onlyOpenP0": "ISSUE-P0-002",
+  "campaignOrchestrationReachable": true,
+  "unmeasuredGateBits": []
+}

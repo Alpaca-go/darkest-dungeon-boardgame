@@ -107,7 +107,7 @@
       ],
       "expectedOutcome": "campaign-victory",
       "runnable": false,
-      "blockedReason": "Act 推进状态机（campaign-progress.ts）无任何生产调用方，Boss Quest 定义零引用 → 11-Quest 循环在正式路径上不可达（ISSUE-P0-001）"
+      "blockedReason": "ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked"
     },
     {
       "id": "golden-save-resume-01",
@@ -134,7 +134,7 @@
       ],
       "expectedOutcome": "campaign-victory",
       "runnable": false,
-      "blockedReason": "依赖完整 11-Quest 循环；Save/Resume 本身可在已达成的里程碑上单独验证"
+      "blockedReason": "ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked"
     },
     {
       "id": "golden-hero-death-replacement-01",
@@ -161,7 +161,7 @@
       ],
       "expectedOutcome": "campaign-victory",
       "runnable": false,
-      "blockedReason": "依赖完整 11-Quest 循环（英雄死亡/替补机制本身已实现并单测覆盖）"
+      "blockedReason": "ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked"
     },
     {
       "id": "golden-stagecoach-exhaustion-01",
@@ -183,8 +183,7 @@
         "M00"
       ],
       "expectedOutcome": "campaign-over",
-      "runnable": false,
-      "blockedReason": "Boss Quest 无法通过正式路径选中（FACE_THE_THREAT_QUEST_DEFINITION 零引用）"
+      "runnable": true
     },
     {
       "id": "golden-guardian-failure-01",
@@ -197,7 +196,7 @@
       ],
       "expectedOutcome": "campaign-over",
       "runnable": false,
-      "blockedReason": "Guardian 官方数据 unavailable（Data Gate 关闭），仅 prototype harness 可跑"
+      "blockedReason": "ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked"
     },
     {
       "id": "golden-final-failure-01",
@@ -213,7 +212,7 @@
       ],
       "expectedOutcome": "campaign-over",
       "runnable": false,
-      "blockedReason": "Final Encounter 官方数据 unavailable（isFinalEncounterOfficialEnabled() === false）"
+      "blockedReason": "ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked"
     },
     {
       "id": "golden-templars-guardian",
@@ -227,7 +226,7 @@
       "expectedOutcome": "campaign-victory",
       "guardianFamily": "templars",
       "runnable": false,
-      "blockedReason": "官方 Guardian 数据缺失；prototype harness 已在 Phase 10B E2E 覆盖"
+      "blockedReason": "ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked"
     },
     {
       "id": "golden-mammoth-cyst-guardian",
@@ -241,7 +240,7 @@
       "expectedOutcome": "campaign-victory",
       "guardianFamily": "mammoth-cyst",
       "runnable": false,
-      "blockedReason": "官方 Guardian 数据缺失；prototype harness 已在 Phase 10C E2E 覆盖"
+      "blockedReason": "ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked"
     },
     {
       "id": "golden-shuffling-horror-guardian",
@@ -255,7 +254,7 @@
       "expectedOutcome": "campaign-victory",
       "guardianFamily": "shuffling-horror",
       "runnable": false,
-      "blockedReason": "官方 Guardian 数据缺失；prototype harness 已在 Phase 10D E2E 覆盖"
+      "blockedReason": "ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked"
     },
     {
       "id": "golden-skip-ancestor-first",
@@ -271,7 +270,7 @@
       "expectedOutcome": "campaign-victory",
       "skippedForm": "ancestor-first-form",
       "runnable": false,
-      "blockedReason": "Final Encounter 官方数据 unavailable；prototype harness 已在 Phase 10E E2E 覆盖"
+      "blockedReason": "ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked"
     },
     {
       "id": "golden-skip-ancestor-second",
@@ -287,7 +286,7 @@
       "expectedOutcome": "campaign-victory",
       "skippedForm": "ancestor-second-form",
       "runnable": false,
-      "blockedReason": "Final Encounter 官方数据 unavailable；prototype harness 已在 Phase 10E E2E 覆盖"
+      "blockedReason": "ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked"
     },
     {
       "id": "golden-skip-gestating-heart",
@@ -303,9 +302,9 @@
       "expectedOutcome": "campaign-victory",
       "skippedForm": "gestating-heart",
       "runnable": false,
-      "blockedReason": "Final Encounter 官方数据 unavailable；prototype harness 已在 Phase 10E E2E 覆盖"
+      "blockedReason": "ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked"
     }
   ],
-  "runnable": 1,
-  "blocked": 12
+  "runnable": 2,
+  "blocked": 11
 }

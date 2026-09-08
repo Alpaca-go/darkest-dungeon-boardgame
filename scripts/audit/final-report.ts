@@ -532,3 +532,7 @@ if (missingArtifacts.length > 0) {
 console.log('');
 console.log('产物:');
 console.log(`  - ${rel(out)}`);
+
+// Phase 11A.2 acceptance is determined by the measured final pipeline, not prose in legacy reports.
+const acceptance = loadJson<{ status?: string; canEnterPhase11A3?: boolean }>('verification-results.json');
+console.log('Phase 11A.2 acceptance:', acceptance?.status === 'COMPLETE' && acceptance.canEnterPhase11A3 === true ? 'COMPLETE (await independent audit)' : 'PARTIAL');

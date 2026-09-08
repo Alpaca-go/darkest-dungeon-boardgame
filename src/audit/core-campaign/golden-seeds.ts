@@ -82,13 +82,13 @@ export const CAMPAIGN_MILESTONES: MilestoneDefinition[] = [
     id: 'M01',
     label: 'Act I · Standard Quest 1 结算完成',
     requires: 'selectQuest / finishQuest / startHamletPhase',
-    verify: (c) => c.act === 1 && c.completedQuestCount >= 1,
+    verify: (c) => c.gamePhase === 'hamlet' && c.act === 1 && c.completedQuestCount >= 1,
   },
   {
     id: 'M02',
     label: 'Act I · Standard Quest 2 结算完成',
     requires: 'campaign-progress.withStandardQuestCompleted',
-    verify: (c) => c.act === 1 && c.completedQuestCount >= 2,
+    verify: (c) => c.gamePhase === 'hamlet' && c.act === 1 && c.campaignProgress.completedStandardQuestsThisAct === 2,
   },
   {
     id: 'M03',
@@ -192,8 +192,7 @@ export const GOLDEN_SEEDS: GoldenSeed[] = [
     expectedMilestones: MILESTONE_IDS,
     expectedOutcome: 'campaign-victory',
     runnable: false,
-    blockedReason:
-      'Act 推进状态机（campaign-progress.ts）无任何生产调用方，Boss Quest 定义零引用 → 11-Quest 循环在正式路径上不可达（ISSUE-P0-001）',
+    blockedReason: 'ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked',
   },
   {
     id: 'golden-save-resume-01',
@@ -203,7 +202,7 @@ export const GOLDEN_SEEDS: GoldenSeed[] = [
     expectedMilestones: MILESTONE_IDS,
     expectedOutcome: 'campaign-victory',
     runnable: false,
-    blockedReason: '依赖完整 11-Quest 循环；Save/Resume 本身可在已达成的里程碑上单独验证',
+    blockedReason: 'ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked',
   },
   {
     id: 'golden-hero-death-replacement-01',
@@ -213,7 +212,7 @@ export const GOLDEN_SEEDS: GoldenSeed[] = [
     expectedMilestones: MILESTONE_IDS,
     expectedOutcome: 'campaign-victory',
     runnable: false,
-    blockedReason: '依赖完整 11-Quest 循环（英雄死亡/替补机制本身已实现并单测覆盖）',
+    blockedReason: 'ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked',
   },
   {
     id: 'golden-stagecoach-exhaustion-01',
@@ -231,8 +230,7 @@ export const GOLDEN_SEEDS: GoldenSeed[] = [
     setupOverrides: {},
     expectedMilestones: ['M00'],
     expectedOutcome: 'campaign-over',
-    runnable: false,
-    blockedReason: 'Boss Quest 无法通过正式路径选中（FACE_THE_THREAT_QUEST_DEFINITION 零引用）',
+    runnable: true,
   },
   {
     id: 'golden-guardian-failure-01',
@@ -242,7 +240,7 @@ export const GOLDEN_SEEDS: GoldenSeed[] = [
     expectedMilestones: ['M00', 'M10'],
     expectedOutcome: 'campaign-over',
     runnable: false,
-    blockedReason: 'Guardian 官方数据 unavailable（Data Gate 关闭），仅 prototype harness 可跑',
+    blockedReason: 'ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked',
   },
   {
     id: 'golden-final-failure-01',
@@ -252,7 +250,7 @@ export const GOLDEN_SEEDS: GoldenSeed[] = [
     expectedMilestones: ['M00', 'M10', 'M11', 'M12', 'M13'],
     expectedOutcome: 'campaign-over',
     runnable: false,
-    blockedReason: 'Final Encounter 官方数据 unavailable（isFinalEncounterOfficialEnabled() === false）',
+    blockedReason: 'ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked',
   },
   {
     id: 'golden-templars-guardian',
@@ -263,7 +261,7 @@ export const GOLDEN_SEEDS: GoldenSeed[] = [
     expectedOutcome: 'campaign-victory',
     guardianFamily: 'templars',
     runnable: false,
-    blockedReason: '官方 Guardian 数据缺失；prototype harness 已在 Phase 10B E2E 覆盖',
+    blockedReason: 'ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked',
   },
   {
     id: 'golden-mammoth-cyst-guardian',
@@ -274,7 +272,7 @@ export const GOLDEN_SEEDS: GoldenSeed[] = [
     expectedOutcome: 'campaign-victory',
     guardianFamily: 'mammoth-cyst',
     runnable: false,
-    blockedReason: '官方 Guardian 数据缺失；prototype harness 已在 Phase 10C E2E 覆盖',
+    blockedReason: 'ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked',
   },
   {
     id: 'golden-shuffling-horror-guardian',
@@ -285,7 +283,7 @@ export const GOLDEN_SEEDS: GoldenSeed[] = [
     expectedOutcome: 'campaign-victory',
     guardianFamily: 'shuffling-horror',
     runnable: false,
-    blockedReason: '官方 Guardian 数据缺失；prototype harness 已在 Phase 10D E2E 覆盖',
+    blockedReason: 'ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked',
   },
   {
     id: 'golden-skip-ancestor-first',
@@ -296,7 +294,7 @@ export const GOLDEN_SEEDS: GoldenSeed[] = [
     expectedOutcome: 'campaign-victory',
     skippedForm: 'ancestor-first-form',
     runnable: false,
-    blockedReason: 'Final Encounter 官方数据 unavailable；prototype harness 已在 Phase 10E E2E 覆盖',
+    blockedReason: 'ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked',
   },
   {
     id: 'golden-skip-ancestor-second',
@@ -307,7 +305,7 @@ export const GOLDEN_SEEDS: GoldenSeed[] = [
     expectedOutcome: 'campaign-victory',
     skippedForm: 'ancestor-second-form',
     runnable: false,
-    blockedReason: 'Final Encounter 官方数据 unavailable；prototype harness 已在 Phase 10E E2E 覆盖',
+    blockedReason: 'ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked',
   },
   {
     id: 'golden-skip-gestating-heart',
@@ -318,7 +316,7 @@ export const GOLDEN_SEEDS: GoldenSeed[] = [
     expectedOutcome: 'campaign-victory',
     skippedForm: 'gestating-heart',
     runnable: false,
-    blockedReason: 'Final Encounter 官方数据 unavailable；prototype harness 已在 Phase 10E E2E 覆盖',
+    blockedReason: 'ISSUE-P0-002: Official Guardian / Final Encounter data unavailable; full official campaign remains blocked',
   },
 ];
 

@@ -4,16 +4,16 @@
 
 ## 最终判定
 
-# NOT-VERIFIED — criticalE2EPasses=false；Playwright E2E 必须真实跑过 6 spec 才能算 verified。
+# CONDITIONAL — framework-complete-content-blocked：主循环可闭环，但仍有 1 个 P0 内容缺口。
 
 ## 门禁明细
 
 | 门禁项 | 结果 |
 | --- | --- |
-| build 通过 | ⚪ 未验证 |
-| 单元测试通过 | ⚪ 未验证 |
-| 集成测试通过 | ⚪ 未验证 |
-| 关键 E2E 通过 | ⚪ 未验证 |
+| build 通过 | ✅ |
+| 单元测试通过 | ✅ |
+| 集成测试通过 | ✅ |
+| 关键 E2E 通过 | ✅ |
 | Golden Campaign 通过 | ❌ |
 | Replay 决定性 | ✅ |
 | 11-Quest 循环闭环 | ❌ |
@@ -21,8 +21,8 @@
 | Campaign Over 可达 | ✅ |
 | 3 Guardian 全通 | ❌ (官方数据 unavailable) |
 | 3 skipped-Form 全通 | ❌ (官方数据 unavailable) |
-| 4 Ruins Boss 全通 | ❌ (Boss Quest 不可选中) |
-| Save/Resume 关键节点 | ✅ 10/10 通过（⚠️ 覆盖率仅 10/16 里程碑，M03+ 因 Act 推进断裂不可达，未被验证） |
+| 4 Ruins Boss 全通 | ❌ (当前 Golden 路径未覆盖全部四个 Boss) |
+| Save/Resume 关键节点 | ✅ 10/10 通过（⚠️ 覆盖率仅 10/16 里程碑，未到达的官方 Act IV 内容节点不计入通过） |
 | P0 规则追溯完整 | ❌ |
 | open P0 | 1 |
 | open P1 | 0 |
@@ -40,8 +40,8 @@
 
 ## Golden Seed 可运行性
 
-- 可运行：**1 / 13**
-- 被阻断：**12**
+- 可运行：**2 / 13**
+- 被阻断：**11**
 
 ## 内容治理
 

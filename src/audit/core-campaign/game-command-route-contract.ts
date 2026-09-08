@@ -1,3 +1,4 @@
+import ts from 'typescript';
 // Phase 11A.2.3 §3 — GameCommand Route Contract。
 //
 // dev doc §3：每个 GameCommand 必须 exactly one route（无 unclassified / 无 duplicate）。
@@ -174,46 +175,7 @@ const DRIVER_PATH = 'src/audit/core-campaign/simulation-driver.ts';
  * dev doc §21：src/** e2e/** scripts/** package.json lockfile playwright.config.ts
  *             vite config tsconfig 全部纳入。排除 generated docs / dist / pw-out / coverage。
  */
-export function computeVerificationInputHash(extraExcludePatterns: string[] = []): string {
-  const { execSync } = require('child_process') as typeof import('child_process');
-  // 用 git ls-files 拿到所有 tracked files（保证 hash 跨环境一致）
-  const files = execSync('git ls-files', { encoding: 'utf8' })
-    .split('\n')
-    .filter((f) => f.length > 0)
-    .filter((f) => !f.includes('node_modules'))
-    .filter((f) => !f.startsWith('dist/'))
-    .filter((f) => !f.startsWith('pw-out/'))
-    .filter((f) => !f.startsWith('coverage/'))
-    .filter((f) => !f.includes('verification-results.json')) // 输出文件本身不计入
-    .filter((f) => !extraExcludePatterns.some((p) => f.includes(p)))
-    .sort();
-  // 简单稳定 hash：拼接 file:hash 行
-  const crypto = require('crypto') as typeof import('crypto');
-  const h = crypto.createHash('sha256');
-  for (const f of files) {
-    if (!existsSync(f)) continue;
-    const content = readFileSync(f);
-    h.update(f);
-    h.update('\0');
-    h.update(content);
-    h.update('\0');
-  }
-  return h.digest('hex');
-}
-
-/** Driver text 静态扫描：验证 case body 是否真调用了 expected entry point。 */
-function validateDriverRoute(driverText: string, contract: GameCommandRouteContract): boolean {
-  // 找 case 'commandType': 块（一直到下一个 case / default / 末尾）
-  const re = new RegExp(
-    `case\\s+['"]${contract.commandType}['"]\\s*:[\\s\\S]*?(?=case\\s+['"]|default\\s*:|\\}\\s*$)`,
-    'g',
-  );
-  const m = driverText.match(re);
-  if (!m || m.length === 0) return false;
-  const body = m[0];
-  // 真实引用：函数名必须出现至少一次（在 body 中）
-  return new RegExp(`\\b${contract.expectedEntryPoint}\\b`).test(body);
-}
+export { computeVerificationInputHash } from './verification-input';
 
 export interface GameCommandRouteAuditResult {
   /** GameCommand 全部 case 数（不含 'engine'）。 */
@@ -239,78 +201,77 @@ export interface GameCommandRouteAuditResult {
 /**
  * 主入口：扫描 Driver + 登记比对。
  */
-export function runGameCommandRouteAudit(): GameCommandRouteAuditResult {
+export function runGameCommandRouteAudit(sourceText?: string): GameCommandRouteAuditResult {
   const driverPath = join(process.cwd(), DRIVER_PATH);
-  const driverText = existsSync(driverPath) ? readFileSync(driverPath, 'utf8') : '';
-
+  const text = sourceText ?? (existsSync(driverPath) ? readFileSync(driverPath, 'utf8') : '');
+  const tree = ts.createSourceFile(driverPath, text, ts.ScriptTarget.Latest, true);
+  const imports = new Map<string, { path: string; exported: string }>();
+  const commands = new Set<string>();
+  const calls = new Map<string, Set<string>>();
+  const caseCounts = new Map<string, number>();
+  function visit(node: ts.Node) {
+    if (ts.isImportDeclaration(node) && ts.isStringLiteral(node.moduleSpecifier)
+      && node.importClause && !node.importClause.isTypeOnly) {
+      const bindings = node.importClause.namedBindings;
+      if (bindings && ts.isNamedImports(bindings)) for (const e of bindings.elements) {
+        if (!e.isTypeOnly) imports.set(e.name.text, { path: node.moduleSpecifier.text, exported: e.propertyName?.text ?? e.name.text });
+      }
+    }
+    if (ts.isTypeAliasDeclaration(node) && node.name.text === 'GameCommand' && ts.isUnionTypeNode(node.type)) {
+      for (const variant of node.type.types) if (ts.isTypeLiteralNode(variant)) {
+        for (const member of variant.members) if (ts.isPropertySignature(member) && member.name.getText(tree) === 'type'
+          && member.type && ts.isLiteralTypeNode(member.type) && ts.isStringLiteral(member.type.literal)) {
+          if (member.type.literal.text !== ENGINE_COMMAND_TYPE) commands.add(member.type.literal.text);
+        }
+      }
+    }
+    if (ts.isMethodDeclaration(node) && node.name.getText(tree) === 'dispatch') {
+      function dispatchVisit(child: ts.Node) {
+        if (ts.isCaseClause(child) && ts.isStringLiteral(child.expression)) {
+          const name = child.expression.text;
+          caseCounts.set(name, (caseCounts.get(name) ?? 0) + 1);
+          const entries = new Set<string>();
+          function collect(n: ts.Node) {
+            if (ts.isCallExpression(n) && ts.isIdentifier(n.expression)) entries.add(n.expression.text);
+            ts.forEachChild(n, collect);
+          }
+          child.statements.forEach(collect);
+          calls.set(name, entries);
+        }
+        ts.forEachChild(child, dispatchVisit);
+      }
+      ts.forEachChild(node, dispatchVisit);
+    }
+    ts.forEachChild(node, visit);
+  }
+  visit(tree);
   const details: GameCommandRouteAuditResult['details'] = [];
   const unclassifiedCommands: string[] = [];
   const routeViolations: string[] = [];
   const importSourceViolations: string[] = [];
-
-  // 0. 提取 driver 所有 import path（dev doc §7：expectedImportFrom 验证）
-  const importRe = /from\s+['"]([^'"]+)['"]/g;
-  const driverImports = new Set<string>();
-  for (const m of driverText.matchAll(importRe)) {
-    driverImports.add(m[1]);
-  }
-  const importPathMatch = (importPath: string, expectedFragment: string): boolean => {
-    // importPath 可能为相对或绝对（已含 /commands 等 fragment）
-    return importPath.includes(expectedFragment);
-  };
-  const expectedImportFragment = (contract: GameCommandRouteContract): string | null => {
-    if (!contract.expectedImportFrom) return null;
-    // 'game-engine/commands' → '/commands'（与 import 路径比较时统一为相对 / 含 fragment）
-    return contract.expectedImportFrom;
-  };
-
-  // 1. 从 driver text 提取所有 case 'xxx' 中的 commandType（驼峰）
-  const caseRe = /case\s+['"]([a-zA-Z][a-zA-Z]*)['"]\s*:/g;
-  const seenTypes = new Set<string>();
-  for (const m of driverText.matchAll(caseRe)) {
-    const name = m[1];
-    if (/[A-Z]/.test(name) && name !== ENGINE_COMMAND_TYPE) {
-      seenTypes.add(name);
-    }
-  }
-
-  // 2. 分类 + 验证
-  for (const t of seenTypes) {
-    const contract = GAME_COMMAND_ROUTE_CONTRACT.find((c) => c.commandType === t);
-    if (!contract) {
-      unclassifiedCommands.push(t);
-      details.push({ commandType: t, routeKind: 'engine-callback', validated: false });
+  for (const type of commands) {
+    const matches = GAME_COMMAND_ROUTE_CONTRACT.filter(c => c.commandType === type);
+    const contract = matches[0];
+    if (!contract || matches.length !== 1) {
+      unclassifiedCommands.push(type);
+      details.push({ commandType: type, routeKind: 'engine-callback', validated: false });
       continue;
     }
-    const validated = validateDriverRoute(driverText, contract);
-    if (!validated) {
-      routeViolations.push(t);
-    }
-    // 2b. import source 验证（dev doc §7）
-    const fragment = expectedImportFragment(contract);
-    if (fragment) {
-      const importOk = Array.from(driverImports).some((p) => importPathMatch(p, fragment));
-      if (!importOk) {
-        importSourceViolations.push(t);
-      }
-    }
-    details.push({
-      commandType: t,
-      routeKind: contract.routeKind,
-      validated,
-    });
+    const entry = contract.expectedEntryPoint;
+    const routeOk = caseCounts.get(type) === 1 && calls.get(type)?.has(entry) === true;
+    if (!routeOk) routeViolations.push(type);
+    const imported = imports.get(entry);
+    const importOk = !contract.expectedImportFrom || (!!imported && imported.exported === entry
+      && imported.path.replace(/\\/g, '/').endsWith('/' + contract.expectedImportFrom));
+    if (!importOk) importSourceViolations.push(type);
+    details.push({ commandType: type, routeKind: contract.routeKind, validated: routeOk && importOk });
   }
-
+  if (!commands.size) routeViolations.push('GameCommand union missing');
   return {
-    commandRouteExpectedCount: seenTypes.size,
-    commandRouteClassifiedCount: details.filter((d) =>
-      GAME_COMMAND_ROUTE_CONTRACT.some((c) => c.commandType === d.commandType),
-    ).length,
-    commandRouteValidatedCount: details.filter((d) => d.validated).length,
-    unclassifiedCommands,
-    routeViolations,
-    importSourceViolations,
-    details,
+    commandRouteExpectedCount: commands.size,
+    commandRouteClassifiedCount: commands.size - unclassifiedCommands.length,
+    commandRouteValidatedCount: details.filter(d => d.validated).length,
+    unclassifiedCommands, routeViolations, importSourceViolations, details,
   };
 }
 

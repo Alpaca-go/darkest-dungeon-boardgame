@@ -23,7 +23,9 @@ import { endHeroTurn, getActiveUnit, legalTargetsForActor } from '../../game-eng
 import { beginHeroSkillAction } from '../../game-engine/trinkets/battle-trinket-bridge';
 // Phase 11A.2.2 §20：Driver 不得 import headless-shim；shim 仅服务于 Test Policy / Differential 旧 fallback。
 import { createSaveSnapshot, restoreSaveSnapshot, validateSaveFile } from '../../game-engine/save';
-import { createSeededRandom, setRandomSource } from '../../game-engine/random';
+import { setRandomSource } from '../../game-engine/random';
+import { SeededRandom, DeterministicClock, DeterministicCounterIdSource, getRuntimeSources, setRuntimeSources } from '../../game-engine/runtime-sources';
+import type { CampaignReplayCheckpoint } from './checkpointable-campaign-runner';
 // Phase 11A.2.2 §16 / §17 / §18 / §19：Driver 完全使用 Production Commands。
 //   - autoBattle      → settleBattleState + declineAllTrinketOpportunities
 //   - resolveVictory  → commitBattleVictory
@@ -129,19 +131,33 @@ export class CampaignSimulationDriver {
   private readonly milestones: CampaignMilestoneHash[] = [];
   private drawIndex = 0;
   private rngDrawsBeforeStep = 0;
-  private readonly baseRng: () => number;
+  private readonly baseRng: SeededRandom;
+  private readonly clock = new DeterministicClock();
+  private readonly ids: DeterministicCounterIdSource;
+  private readonly previousSources = getRuntimeSources();
 
   readonly seedId: string;
   readonly campaignId: string;
   readonly initialStateHash: string;
 
-  constructor(seedId = 'sim-seed') {
+  constructor(seedId = 'sim-seed', checkpoint?: CampaignReplayCheckpoint) {
     this.seedId = seedId;
-    this.baseRng = createSeededRandom(seedToInt(seedId));
+    this.baseRng = new SeededRandom(seedToInt(seedId));
+    this.ids = new DeterministicCounterIdSource(seedToInt(seedId));
+    setRuntimeSources({ random: this.baseRng, clock: this.clock, ids: this.ids });
     this.installRng();
-    this.state = createNewCampaign();
+    this.state = checkpoint ? structuredClone(checkpoint.campaignState) : createNewCampaign();
+    if (checkpoint) {
+      this.baseRng.restore(checkpoint.runtimeSnapshot.randomCursor);
+      this.clock.restore(checkpoint.runtimeSnapshot.clockCursor);
+      this.ids.restore(checkpoint.runtimeSnapshot.idCursor);
+      this.drawIndex = checkpoint.rngDrawIndex;
+      this.events.push(...structuredClone(checkpoint.events));
+      this.rngSnapshots.push(...structuredClone(checkpoint.rngSnapshots));
+      this.milestones.push(...structuredClone(checkpoint.milestones));
+    }
     this.campaignId = this.state.id;
-    this.initialStateHash = milestoneStateHash(this.state);
+    this.initialStateHash = checkpoint?.initialStateHash ?? milestoneStateHash(this.state);
   }
 
   /**
@@ -150,7 +166,7 @@ export class CampaignSimulationDriver {
    */
   private installRng(): void {
     setRandomSource(() => {
-      const value = this.baseRng();
+      const value = this.baseRng.next();
       this.rngSnapshots.push({
         index: this.events.length,
         seedId: this.seedId,
@@ -163,7 +179,18 @@ export class CampaignSimulationDriver {
 
   /** 用完必须调用，避免污染后续测试的全局随机源。 */
   dispose(): void {
-    setRandomSource(null);
+    setRuntimeSources(this.previousSources);
+  }
+
+  checkpoint(milestoneId: string): CampaignReplayCheckpoint {
+    return structuredClone({
+      schemaVersion: 1, seedId: this.seedId, milestoneId,
+      campaignState: this.state, commandIndex: this.events.length,
+      eventIndex: this.events.length, rngDrawIndex: this.drawIndex,
+      runtimeSnapshot: { randomCursor: this.baseRng.snapshot(), clockCursor: this.clock.snapshot(), idCursor: this.ids.snapshot() },
+      stateHash: stableHashState(this.state), initialStateHash: this.initialStateHash,
+      events: this.events, rngSnapshots: this.rngSnapshots, milestones: this.milestones,
+    });
   }
 
   getState(): CampaignState {

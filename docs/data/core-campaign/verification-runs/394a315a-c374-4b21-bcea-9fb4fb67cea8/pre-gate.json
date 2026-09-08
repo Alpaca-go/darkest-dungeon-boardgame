@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "2.0",
+  "runId": "394a315a-c374-4b21-bcea-9fb4fb67cea8",
+  "measuredAt": "2026-09-08T00:10:01.121Z",
+  "verificationInputHash": "6fbbfc194f2c4dfe94e31ce3e0b98b00bed62645e8276d64abfa44a3ff40d6a5",
+  "typecheckPasses": true,
+  "unitPasses": true,
+  "commandContractPasses": true,
+  "integrationPasses": true,
+  "buildPasses": true,
+  "criticalE2EPasses": true,
+  "goldenTestPasses": true,
+  "replayDeterminismPasses": true,
+  "replayContinuationPasses": true,
+  "contentAuditPasses": true,
+  "rulesAuditPasses": true,
+  "productionCommandTestsPasses": true,
+  "productionCommandLayerPasses": true,
+  "falseGreenGuardPasses": true,
+  "goldenPasses": true,
+  "verificationFresh": true,
+  "commands": [
+    {
+      "label": "typecheck",
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "durationMs": 6402,
+      "logPath": "docs\\data\\core-campaign\\verification-runs\\394a315a-c374-4b21-bcea-9fb4fb67cea8\\typecheck.log"
+    },
+    {
+      "label": "unitPasses",
+      "command": "npx vitest run  --reporter=json --outputFile=docs\\data\\core-campaign\\verification-runs\\394a315a-c374-4b21-bcea-9fb4fb67cea8\\unitPasses.json",
+      "exitCode": 0,
+      "durationMs": 19891,
+      "logPath": "docs\\data\\core-campaign\\verification-runs\\394a315a-c374-4b21-bcea-9fb4fb67cea8\\unitPasses.log"
+    },
+    {
+      "label": "commandContractPasses",
+      "command": "npx vitest run src/audit/core-campaign/game-command-route-contract.test.ts --reporter=json --outputFile=docs\\data\\core-campaign\\verification-runs\\394a315a-c374-4b21-bcea-9fb4fb67cea8\\commandContractPasses.json",
+      "exitCode": 0,
+      "durationMs": 3462,
+      "logPath": "docs\\data\\core-campaign\\verification-runs\\394a315a-c374-4b21-bcea-9fb4fb67cea8\\commandContractPasses.log"
+    },
+    {
+      "label": "integrationPasses",
+      "command": "npx vitest run src/integration/core-campaign/integration.test.ts --reporter=json --outputFile=docs\\data\\core-campaign\\verification-runs\\394a315a-c374-4b21-bcea-9fb4fb67cea8\\integrationPasses.json",
+      "exitCode": 0,
+      "durationMs": 4848,
+      "logPath": "docs\\data\\core-campaign\\verification-runs\\394a315a-c374-4b21-bcea-9fb4fb67cea8\\integrationPasses.log"
+    },
+    {
+      "label": "build",
+      "command": "npm run build",
+      "exitCode": 0,
+      "durationMs": 12890,
+      "logPath": "docs\\data\\core-campaign\\verification-runs\\394a315a-c374-4b21-bcea-9fb4fb67cea8\\build.log"
+    },
+    {
+      "label": "criticalE2E",
+      "command": "npx playwright test e2e/phase11a2-critical-campaign.spec.ts --reporter=list,json",
+      "exitCode": 0,
+      "durationMs": 17560,
+      "logPath": "docs\\data\\core-campaign\\verification-runs\\394a315a-c374-4b21-bcea-9fb4fb67cea8\\criticalE2E.log"
+    },
+    {
+      "label": "goldenTestPasses",
+      "command": "npx vitest run src/audit/core-campaign/golden-run.test.ts --reporter=json --outputFile=docs\\data\\core-campaign\\verification-runs\\394a315a-c374-4b21-bcea-9fb4fb67cea8\\goldenTestPasses.json",
+      "exitCode": 0,
+      "durationMs": 5066,
+      "logPath": "docs\\data\\core-campaign\\verification-runs\\394a315a-c374-4b21-bcea-9fb4fb67cea8\\goldenTestPasses.log"
+    },
+    {
+      "label": "replayDeterminismPasses",
+      "command": "npx vitest run src/audit/core-campaign/replay-determinism.test.ts --reporter=json --outputFile=docs\\data\\core-campaign\\verification-runs\\394a315a-c374-4b21-bcea-9fb4fb67cea8\\replayDeterminismPasses.json",
+      "exitCode": 0,
+      "durationMs": 5022,
+      "logPath": "docs\\data\\core-campaign\\verification-runs\\394a315a-c374-4b21-bcea-9fb4fb67cea8\\replayDeterminismPasses.log"
+    },
+    {
+      "label": "replayContinuationPasses",
+      "command": "npx vitest run src/audit/core-campaign/replay-continuation.test.ts --reporter=json --outputFile=docs\\data\\core-campaign\\verification-runs\\394a315a-c374-4b21-bcea-9fb4fb67cea8\\replayContinuationPasses.json",
+      "exitCode": 0,
+      "durationMs": 5181,
+      "logPath": "docs\\data\\core-campaign\\verification-runs\\394a315a-c374-4b21-bcea-9fb4fb67cea8\\replayContinuationPasses.log"
+    },
+    {
+      "label": "contentAudit",
+      "command": "npm run audit:content",
+      "exitCode": 0,
+      "durationMs": 3713,
+      "logPath": "docs\\data\\core-campaign\\verification-runs\\394a315a-c374-4b21-bcea-9fb4fb67cea8\\contentAudit.log"
+    },
+    {
+      "label": "rulesAudit",
+      "command": "npm run audit:rules",
+      "exitCode": 0,
+      "durationMs": 3668,
+      "logPath": "docs\\data\\core-campaign\\verification-runs\\394a315a-c374-4b21-bcea-9fb4fb67cea8\\rulesAudit.log"
+    },
+    {
+      "label": "productionCommandTestsPasses",
+      "command": "npx vitest run src/audit/core-campaign/production-command-audit.test.ts src/audit/core-campaign/command-differential.test.ts src/testing/e2e/e2e-harness-audit.test.ts --reporter=json --outputFile=docs\\data\\core-campaign\\verification-runs\\394a315a-c374-4b21-bcea-9fb4fb67cea8\\productionCommandTestsPasses.json",
+      "exitCode": 0,
+      "durationMs": 4626,
+      "logPath": "docs\\data\\core-campaign\\verification-runs\\394a315a-c374-4b21-bcea-9fb4fb67cea8\\productionCommandTestsPasses.log"
+    },
+    {
+      "label": "productionCommandAudit",
+      "command": "npx vite-node scripts/audit/production-command.ts",
+      "exitCode": 0,
+      "durationMs": 3457,
+      "logPath": "docs\\data\\core-campaign\\verification-runs\\394a315a-c374-4b21-bcea-9fb4fb67cea8\\productionCommandAudit.log"
+    }
+  ]
+}

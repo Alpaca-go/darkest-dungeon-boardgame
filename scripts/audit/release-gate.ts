@@ -1,3 +1,4 @@
+import { computeVerificationInputHash } from '../../src/audit/core-campaign/verification-input';
 // Phase 11A — `npm run audit:release-gate`
 // 跑完整审计编排，落盘 Issue Ledger / Replay Bundle / Release Gate / 最终报告。
 //
@@ -37,6 +38,10 @@ const officialMathRandom = rng.findings.filter(
 import { readFileSync, existsSync } from 'fs';
 const VERIFICATION_RESULTS = join(REPO_ROOT, 'docs/data/core-campaign/verification-results.json');
 interface VerificationResults {
+  runId?: string;
+  verificationInputHash?: string;
+  typecheckPasses?: boolean;
+  goldenTestPasses?: boolean;
   buildPasses?: boolean;
   unitPasses?: boolean;
   integrationPasses?: boolean;
@@ -62,13 +67,17 @@ function readVerificationResults(): VerificationResults | null {
 const vr = readVerificationResults();
 
 const report = runAudit({
+  typecheckPasses: vr?.typecheckPasses,
+  goldenTestPasses: vr?.goldenTestPasses,
+  replayDeterminismPasses: vr?.replayDeterminismPasses,
+  productionCommandLayerPasses: vr?.productionCommandLayerPasses,
   buildPasses: envFlag('PHASE11A_BUILD') ?? vr?.buildPasses,
   unitPasses: envFlag('PHASE11A_UNIT') ?? vr?.unitPasses,
   integrationPasses: envFlag('PHASE11A_INTEGRATION') ?? vr?.integrationPasses,
   criticalE2EPasses: envFlag('PHASE11A_E2E') ?? (vr?.criticalE2EPasses === true),
   commandContractPasses: vr?.commandContractPasses,
   replayContinuationPasses: vr?.replayContinuationPasses,
-  verificationFresh: vr?.verificationFresh,
+  verificationFresh: vr?.verificationFresh === true && vr.verificationInputHash === computeVerificationInputHash(),
   mathRandomLeaksInOfficialPath: officialMathRandom,
 });
 
@@ -131,6 +140,9 @@ written.push(
  * 这里把「env flag 未提供」的位单独记下来，报告侧渲染成「⚪ 未验证」。
  */
 const unmeasuredGateBits: string[] = [];
+for (const key of ['typecheckPasses', 'goldenTestPasses', 'replayDeterminismPasses', 'productionCommandLayerPasses'] as const) {
+  if (typeof vr?.[key] !== 'boolean') unmeasuredGateBits.push(key);
+}
 if (envFlag('PHASE11A_BUILD') === undefined && vr?.buildPasses === undefined) unmeasuredGateBits.push('buildPasses');
 if (envFlag('PHASE11A_UNIT') === undefined && vr?.unitPasses === undefined) unmeasuredGateBits.push('unitPasses');
 if (envFlag('PHASE11A_INTEGRATION') === undefined && vr?.integrationPasses === undefined) unmeasuredGateBits.push('integrationPasses');
@@ -141,7 +153,7 @@ if (vr?.commandContractPasses === undefined) unmeasuredGateBits.push('commandCon
 if (vr?.replayContinuationPasses === undefined) unmeasuredGateBits.push('replayContinuationPasses');
 
 written.push(
-  writeJson('release-gate.json', { ...gate, unmeasuredGateBits, dataGates, ruleSummary }),
+  writeJson('release-gate.json', { ...gate, runId: vr?.runId, generatedAt: report.generatedAt, unmeasuredGateBits, dataGates, ruleSummary }),
 );
 
 // ---------------------------------------------------------------------------
@@ -189,7 +201,7 @@ ${goldenRun.blockedReason ? `> **阻断原因**：${goldenRun.blockedReason}\n` 
 本次 Golden Run **未使用任何 debug skip**（硬约束 4）：地牢逐房间推进、战斗逐技能释放
 （\`beginHeroSkillAction\`）、Trinket 机会逐个结清、英雄阵亡走 Stagecoach 替补正式入口。
 战役最终以 \`${goldenRun.finalPhase}\` 收束，说明**单 Act 内的纵向循环是通的**；
-真正的阻塞在于 Act 之间的横向推进（见阻断原因）。
+当前已到达 Act IV；完整官方战役仍受 ISSUE-P0-002 数据缺口阻断。
 
 ### 1.2 不得不使用的 UI-store-shim 步骤（ISSUE-P1-006 证据）
 
@@ -199,9 +211,7 @@ ${
     : goldenRun.uiStoreShimSteps.map((s) => `- \`${s}\``).join('\n')
 }
 
-> 上述步骤在 \`src/game-engine/**\` 中**没有可调用的编排入口**，只存在于
-> \`src/store/useGameStore.ts\` / UI 页面。无头驱动必须在
-> \`src/audit/core-campaign/headless-shim.ts\` 中逐行复刻，该文件的存在本身即为缺陷证据。
+> Driver 与 Store 共用 Production Commands；headless shim 已删除，结构化 PCA 产物记录实际路由和导入验证结果。
 
 ## 2. 16 里程碑覆盖
 
@@ -321,12 +331,12 @@ ${mdTable(
     ['Campaign Over 可达', gate.campaignOverReachable ? '✅' : '❌'],
     ['3 Guardian 全通', gate.threeGuardiansPass ? '✅' : '❌ (官方数据 unavailable)'],
     ['3 skipped-Form 全通', gate.threeSkippedFormsPass ? '✅' : '❌ (官方数据 unavailable)'],
-    ['4 Ruins Boss 全通', gate.fourRuinsBossesPass ? '✅' : '❌ (Boss Quest 不可选中)'],
+    ['4 Ruins Boss 全通', gate.fourRuinsBossesPass ? '✅' : '❌ (当前 Golden 路径未覆盖全部四个 Boss)'],
     [
       'Save/Resume 关键节点',
       `${gate.saveResumeKeyNodesPass ? '✅' : '❌'} ${goldenRun.saveResumeChecks.filter((c) => c.passed).length}/${goldenRun.saveResumeChecks.length} 通过` +
         `（⚠️ 覆盖率仅 ${goldenRun.saveResumeChecks.length}/${CAMPAIGN_MILESTONES.length} 里程碑，` +
-        `M03+ 因 Act 推进断裂不可达，未被验证）`,
+        `未到达的官方 Act IV 内容节点不计入通过）`,
     ],
     ['P0 规则追溯完整', gate.ruleTraceabilityP0Complete ? '✅' : '❌'],
     ['open P0', gate.openP0],
