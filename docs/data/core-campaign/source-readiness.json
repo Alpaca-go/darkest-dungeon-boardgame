@@ -1,21 +1,10 @@
 {
-  "$schema": "phase-11a3/source-readiness.v1",
-  "generatedAt": "2026-09-08T12:00:00.000Z",
+  "$schema": "phase-11a3-source-gate-integrity-repair/source-readiness.v2",
+  "generatedAt": "2026-09-08T08:11:05.275Z",
   "phase": "11A.3",
-  "purpose": "Source Gate 0 (dev doc §12) 主真值源。机器生成的官方资料就绪信号；CI / 静态测试 / Release Gate 都从这里读取。",
-  "manifestRef": "docs/data/core-campaign/official-source-manifest.json",
-  "fieldProvenanceRef": "docs/data/core-campaign/official-field-provenance.json",
   "tierA": {
     "rulebook": "available",
     "reference": "docs/DD_EN_COREBOX_RULES.pdf"
-  },
-  "tierB": {
-    "battleCards": "missing",
-    "questCards": "missing",
-    "roomCards": "missing",
-    "dungeonTiles": "missing",
-    "monsterDeck": "missing",
-    "officialErrata": "missing"
   },
   "gates": {
     "questCardsReady": false,
@@ -27,13 +16,362 @@
     "allRequiredSourcesReady": false
   },
   "rationale": {
-    "questCardsReady": "3 张 Quest Card 全部 missing；name / guardianDefinitionId / skippedFinalFormId / firewoodCount / provisionPolicyId.cardSpecific 均无 source asset（见 official-source-manifest.json 中 quest-card-1/2/3）。",
-    "templarsReady": "Impaler / Warlord Battle Card 全字段无来源（HP / Dodge / Speed / Resistance / Accuracy / Damage / Crit / 技能 / d10）；Templars Room Card 全部 area / capacity / spikedPit / pitD10Map / pitExitRule 缺。",
-    "mammothCystReady": "Cyst 战斗卡 + White Cell Stalk 战斗卡 + Mammoth Cyst Room Card 全部缺；Teleportation d10 映射缺。",
-    "shufflingHorrorReady": "Horror / Cultist Priest / Malignant Growth 三张战斗卡全缺；Room Card 缺。",
-    "finalEncounterReady": "Ancestor Room Card 全字段缺；4 个 Form 战斗卡全缺；Darkest Dungeon Monster Deck 缺。",
-    "darkestDungeonMonsterDeckReady": "Deck composition / monsterDefinitionIds / drawPolicy 全部缺。Gestating Heart 的 Sispersion 抽牌源无权威组成。",
-    "allRequiredSourcesReady": "以上 6 个子 gate 全部 false。Phase 11A.3 必须停在 SOURCE-BLOCKED，禁止启用 official pool / 关闭 P0-002 / 生成 COMPLETE 报告。"
+    "tierB-quest-1": "source-required",
+    "tierB-quest-2": "source-required",
+    "tierB-quest-3": "source-required",
+    "tierB-dd-dungeon-tile": "source-required",
+    "tierB-templars-impaler": "source-required",
+    "tierB-templars-warlord": "source-required",
+    "tierB-templars-room": "source-required",
+    "tierB-templars-room-tile": "source-required",
+    "tierB-mammoth-cyst": "source-required",
+    "tierB-white-cell-stalk": "source-required",
+    "tierB-mammoth-cyst-room": "source-required",
+    "tierB-shuffling-horror": "source-required",
+    "tierB-cultist-priest": "source-required",
+    "tierB-malignant-growth": "source-required",
+    "tierB-shuffling-horror-room": "source-required",
+    "tierB-ancestor-room": "source-required",
+    "tierB-ancestor-room-tile": "source-required",
+    "tierB-ancestor-first-form": "source-required",
+    "tierB-perfect-reflection": "source-required",
+    "tierB-imperfect-reflection": "source-required",
+    "tierB-ancestor-second-form": "source-required",
+    "tierB-absolute-nothingness": "source-required",
+    "tierB-gestating-heart": "source-required",
+    "tierB-heart-of-darkness": "source-required",
+    "tierB-come-unto-your-maker": "source-required",
+    "tierB-darkest-dungeon-monster-deck": "source-required",
+    "tierC-official-errata": "source-required",
+    "tierA-rulebook": "verified"
+  },
+  "blockers": [
+    {
+      "requirementId": "tierB-quest-1",
+      "missingFields": [
+        "name",
+        "guardianDefinitionId",
+        "skippedFinalFormId",
+        "firewoodCount",
+        "provisionPolicyId.cardSpecific"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/quests/darkest-dungeon-quest-1.json"
+    },
+    {
+      "requirementId": "tierB-quest-2",
+      "missingFields": [
+        "name",
+        "guardianDefinitionId",
+        "skippedFinalFormId",
+        "firewoodCount",
+        "provisionPolicyId.cardSpecific"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/quests/darkest-dungeon-quest-2.json"
+    },
+    {
+      "requirementId": "tierB-quest-3",
+      "missingFields": [
+        "name",
+        "guardianDefinitionId",
+        "skippedFinalFormId",
+        "firewoodCount",
+        "provisionPolicyId.cardSpecific"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/quests/darkest-dungeon-quest-3.json"
+    },
+    {
+      "requirementId": "tierB-dd-dungeon-tile",
+      "missingFields": [
+        "tileGeometry",
+        "bossSlotPositions"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/dungeon-tiles/dd-tile-*.json"
+    },
+    {
+      "requirementId": "tierB-templars-impaler",
+      "missingFields": [
+        "maxHp",
+        "dodge",
+        "speed",
+        "resistances",
+        "accuracy",
+        "damage",
+        "crit",
+        "skillIds",
+        "d10SkillTable"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/guardians/templars/impaler.json"
+    },
+    {
+      "requirementId": "tierB-templars-warlord",
+      "missingFields": [
+        "maxHp",
+        "dodge",
+        "speed",
+        "resistances",
+        "accuracy",
+        "damage",
+        "crit",
+        "skillIds",
+        "d10SkillTable"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/guardians/templars/warlord.json"
+    },
+    {
+      "requirementId": "tierB-templars-room",
+      "missingFields": [
+        "areaIds",
+        "areaCapacities",
+        "spikedPitPositions",
+        "pitD10Map",
+        "pitEntryEffects",
+        "pitExitRule",
+        "victoryCondition"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/guardians/templars/room.json"
+    },
+    {
+      "requirementId": "tierB-templars-room-tile",
+      "missingFields": [
+        "tileGeometry"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/guardians/templars/room-tile.json"
+    },
+    {
+      "requirementId": "tierB-mammoth-cyst",
+      "missingFields": [
+        "maxHp",
+        "dodge",
+        "speed",
+        "resistances",
+        "accuracy",
+        "damage",
+        "crit",
+        "skillIds",
+        "d10SkillTable"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/guardians/mammoth-cyst/cyst.json"
+    },
+    {
+      "requirementId": "tierB-white-cell-stalk",
+      "missingFields": [
+        "maxHp",
+        "dodge",
+        "speed",
+        "resistances",
+        "accuracy",
+        "damage",
+        "crit",
+        "skillIds",
+        "d10SkillTable",
+        "teleportationD10Map"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/guardians/mammoth-cyst/stalk.json"
+    },
+    {
+      "requirementId": "tierB-mammoth-cyst-room",
+      "missingFields": [
+        "areaIds",
+        "areaCapacities",
+        "teleportationD10Map",
+        "spawnStancePolicy",
+        "spawnAreaPolicy",
+        "victoryCondition"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/guardians/mammoth-cyst/room.json"
+    },
+    {
+      "requirementId": "tierB-shuffling-horror",
+      "missingFields": [
+        "maxHp",
+        "dodge",
+        "speed",
+        "resistances",
+        "accuracy",
+        "damage",
+        "crit",
+        "skillIds",
+        "d10SkillTable"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/guardians/shuffling-horror/horror.json"
+    },
+    {
+      "requirementId": "tierB-cultist-priest",
+      "missingFields": [
+        "maxHp",
+        "dodge",
+        "speed",
+        "resistances",
+        "accuracy",
+        "damage",
+        "crit",
+        "skillIds",
+        "d10SkillTable"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/guardians/shuffling-horror/cultist-priest.json"
+    },
+    {
+      "requirementId": "tierB-malignant-growth",
+      "missingFields": [
+        "maxHp",
+        "dodge",
+        "speed",
+        "resistances",
+        "accuracy",
+        "damage",
+        "crit",
+        "skillIds",
+        "d10SkillTable"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/guardians/shuffling-horror/malignant-growth.json"
+    },
+    {
+      "requirementId": "tierB-shuffling-horror-room",
+      "missingFields": [
+        "areaIds",
+        "areaCapacities",
+        "victoryCondition"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/guardians/shuffling-horror/room.json"
+    },
+    {
+      "requirementId": "tierB-ancestor-room",
+      "missingFields": [
+        "areaIds",
+        "areaCapacities",
+        "roomEffects",
+        "formAreaPlacement"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/final-encounter/room.json"
+    },
+    {
+      "requirementId": "tierB-ancestor-room-tile",
+      "missingFields": [
+        "tileGeometry"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/final-encounter/room-tile.json"
+    },
+    {
+      "requirementId": "tierB-ancestor-first-form",
+      "missingFields": [
+        "ancestor.maxHp",
+        "ancestor.skillIds",
+        "perfectReflection.maxHp",
+        "perfectReflection.skillIds",
+        "imperfectReflection.maxHp",
+        "imperfectReflection.skillIds",
+        "timeHealsAll.effect",
+        "vacantStanceFillSource"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/final-encounter/ancestor-first-form.json"
+    },
+    {
+      "requirementId": "tierB-perfect-reflection",
+      "missingFields": [
+        "maxHp",
+        "skillIds"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/final-encounter/perfect-reflection.json"
+    },
+    {
+      "requirementId": "tierB-imperfect-reflection",
+      "missingFields": [
+        "maxHp",
+        "skillIds"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/final-encounter/imperfect-reflection.json"
+    },
+    {
+      "requirementId": "tierB-ancestor-second-form",
+      "missingFields": [
+        "ancestor.maxHp",
+        "ancestor.skillIds",
+        "absoluteNothingness.areaIds"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/final-encounter/ancestor-second-form.json"
+    },
+    {
+      "requirementId": "tierB-absolute-nothingness",
+      "missingFields": [
+        "stance",
+        "areaId"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/final-encounter/absolute-nothingness-*.json"
+    },
+    {
+      "requirementId": "tierB-gestating-heart",
+      "missingFields": [
+        "maxHp",
+        "skillIds",
+        "d10SkillTable",
+        "lethalWoundTimingRuling"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/final-encounter/gestating-heart.json"
+    },
+    {
+      "requirementId": "tierB-heart-of-darkness",
+      "missingFields": [
+        "maxHp",
+        "skillIds",
+        "impendingDoomD10SkillMap"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/final-encounter/heart-of-darkness.json"
+    },
+    {
+      "requirementId": "tierB-come-unto-your-maker",
+      "missingFields": [
+        "definition"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/final-encounter/come-unto-your-maker.json"
+    },
+    {
+      "requirementId": "tierB-darkest-dungeon-monster-deck",
+      "missingFields": [
+        "deckComposition",
+        "monsterDefinitionIds",
+        "drawPolicy"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/monster-deck.json"
+    },
+    {
+      "requirementId": "tierC-official-errata",
+      "missingFields": [],
+      "reason": "optional, not provided"
+    }
+  ],
+  "auditPasses": true,
+  "outcome": {
+    "kind": "source-blocked",
+    "missingRequirementIds": [
+      "tierB-quest-1",
+      "tierB-quest-2",
+      "tierB-quest-3",
+      "tierB-dd-dungeon-tile",
+      "tierB-templars-impaler",
+      "tierB-templars-warlord",
+      "tierB-templars-room",
+      "tierB-templars-room-tile",
+      "tierB-mammoth-cyst",
+      "tierB-white-cell-stalk",
+      "tierB-mammoth-cyst-room",
+      "tierB-shuffling-horror",
+      "tierB-cultist-priest",
+      "tierB-malignant-growth",
+      "tierB-shuffling-horror-room",
+      "tierB-ancestor-room",
+      "tierB-ancestor-room-tile",
+      "tierB-ancestor-first-form",
+      "tierB-perfect-reflection",
+      "tierB-imperfect-reflection",
+      "tierB-ancestor-second-form",
+      "tierB-absolute-nothingness",
+      "tierB-gestating-heart",
+      "tierB-heart-of-darkness",
+      "tierB-come-unto-your-maker",
+      "tierB-darkest-dungeon-monster-deck",
+      "tierC-official-errata"
+    ],
+    "partialRequirementIds": []
   },
   "impact": {
     "canEnterPhase11B": false,
@@ -43,6 +381,5 @@
     "canEnableOfficialDarkestDungeonQuestPool": false,
     "canEnableOfficialDarkestDungeonMonsterDeck": false,
     "verdict": "SOURCE-BLOCKED"
-  },
-  "nextAction": "等待用户补全以下资产后重跑 source-readiness：3 张 Quest Card + 7 张 Battle Card + 4 张 Room Card + 2 张 Dungeon Tile + Darkest Dungeon Monster Deck + Come Unto Your Maker。详见 docs/data/core-campaign/official-source-acquisition-checklist.md。"
+  }
 }

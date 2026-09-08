@@ -1,7 +1,7 @@
 {
   "typecheckPasses": true,
-  "goldenTestPasses": false,
-  "canEnterPhase11A3": false,
+  "goldenTestPasses": true,
+  "canEnterPhase11A3": true,
   "onlyOpenP0": "ISSUE-P0-002",
   "buildPasses": true,
   "unitPasses": true,
@@ -27,10 +27,11 @@
   "saveResumeKeyNodesPass": true,
   "ruleTraceabilityP0Complete": false,
   "passed": false,
-  "verdict": "NOT-VERIFIED",
-  "conclusion": "NOT-VERIFIED — verification-results.json stale or unmeasured；跑 npm run verify:phase11a2-3 重新生成。",
+  "verdict": "SOURCE-BLOCKED",
+  "conclusion": "SOURCE-BLOCKED — Phase 11A.3 阶段缺少官方 Battle/Quest/Room Card / Tile / Monster Deck 资料；official data gates 全部 false，threeGuardiansPass=false / threeSkippedFormsPass=false / elevenQuestLoopClosed=false / campaignVictoryReachable=false。等待用户补全 source 资料后重跑 audit。",
   "globalMissingSourceReferences": 147,
-  "officialPathMissingSourceReferences": 121,
+  "officialActFourMissingSourceReferences": 10,
+  "officialPathMissingSourceReferences": 147,
   "sourceReadiness": {
     "allRequiredSourcesReady": false,
     "questCardsReady": false,
@@ -40,10 +41,11 @@
     "finalEncounterReady": false,
     "darkestDungeonMonsterDeckReady": false
   },
-  "generatedAt": "2026-09-08T07:05:35.742Z",
-  "unmeasuredGateBits": [
-    "goldenTestPasses"
-  ],
+  "phase11A3Status": "SOURCE-BLOCKED",
+  "canCloseP0_002": false,
+  "canEnterPhase11B": false,
+  "generatedAt": "2026-09-08T08:11:34.117Z",
+  "unmeasuredGateBits": [],
   "dataGates": {
     "officialGuardianPoolEnabled": false,
     "officialFinalEncounterEnabled": false,

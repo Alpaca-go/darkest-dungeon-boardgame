@@ -1,8 +1,8 @@
 {
-  "$schema": "phase-11a3/official-source-manifest.v1",
-  "generatedAt": "2026-09-08T12:00:00.000Z",
+  "$schema": "phase-11a3-source-gate-integrity-repair/official-source-manifest.v2",
+  "generatedAt": "2026-09-08T08:11:05.277Z",
   "phase": "11A.3",
-  "purpose": "机器可读的官方资产清单：每个 Darkest Dungeon 官方组件对应一张 manifest 记录，标记 availability / verified fields / missing fields。Source Gate 0 (dev doc §12) 的前置真值源。",
+  "purpose": "派生自 canonical official-source-requirements.ts；禁止手写 summary count。",
   "tierAReference": "docs/DD_EN_COREBOX_RULES.pdf",
   "tierBExcluded": [
     "电子游戏 Wiki",
@@ -12,17 +12,31 @@
     "AI 推测"
   ],
   "summary": {
-    "totalAssets": 17,
-    "available": 0,
-    "partial": 0,
-    "missing": 17,
-    "allRequiredSourcesReady": false
+    "totalRequirements": 28,
+    "totalPhysicalAssets": 32,
+    "tierARequirements": 1,
+    "tierBRequirements": 26,
+    "tierCRequirements": 1,
+    "availableRequirements": 1,
+    "missingRequirements": 27,
+    "partialRequirements": 0,
+    "auditPasses": true,
+    "tierAReady": true,
+    "tierARequirementsCount": 1,
+    "tierBRequirementsCount": 26,
+    "tierCRequirementsCount": 1,
+    "rulebookCountedInTotal": true
   },
   "assets": [
     {
-      "sourceId": "src:rulebook:corebox",
+      "requirementId": "tierA-rulebook",
+      "sourceId": "asset:DD_EN_COREBOX_RULES",
+      "componentGroup": "rulebook",
       "componentType": "rulebook",
       "componentId": "DD_EN_COREBOX_RULES",
+      "quantity": 1,
+      "requiredForCompletion": false,
+      "tier": "A",
       "sourceReference": "docs/DD_EN_COREBOX_RULES.pdf",
       "availability": "available",
       "verifiedFields": [
@@ -85,238 +99,691 @@
         "p41:heart-of-darkness.impendingDoomRollsAfterAction",
         "p41:heart-of-darkness.defeatIsCampaignVictory"
       ],
-      "missingFields": [
-        "Battle Card 字段（HP / Dodge / Speed / Resistance / Accuracy / Damage / Crit）",
-        "完整 d10 Skill Table",
-        "Room Tile 几何与 Area layout",
-        "Pit / Spiked Pit d10 → Area 精确映射",
-        "Pit 伤害 / 状态效果 / Pit Exit Rule",
-        "Quest Card 三张的官方 name / Guardian mapping / Skipped Form mapping / Firewood 详情",
-        "Final Room Area ID / capacity / Room effects / form area placement",
-        "Impending Doom d10 → Skill 完整映射",
-        "Come Unto Your Maker 卡面定义",
-        "Darkest Dungeon Monster Deck composition"
-      ],
-      "notes": "规则书只锁结构（数量 / 顺序 / 时机 / 触发 / d10 大范围）。所有具体数值 / 卡面 / Room 几何 / Pit 细节都必须来自 Tier B/C（卡面扫描 / Room Tile / 官方勘误）。仓库当前不持有任何 Tier B/C 资料。"
+      "missingFields": [],
+      "reason": "Tier A rulebook present",
+      "notes": "规则书只锁结构（数量 / 顺序 / 时机 / 触发 / d10 大范围）。所有具体数值 / 卡面 / Room 几何 / Pit 细节都必须来自 Tier B/C。"
     },
     {
-      "sourceId": "asset:quest-card-1",
+      "requirementId": "tierB-quest-1",
+      "sourceId": "asset:darkest-dungeon-quest-1",
+      "componentGroup": "quest",
       "componentType": "quest-card",
       "componentId": "darkest-dungeon-quest-1",
-      "sourceReference": null,
+      "quantity": 1,
+      "requiredForCompletion": true,
+      "tier": "B",
+      "sourceReference": "docs/data/darkest-dungeon/official/quests/darkest-dungeon-quest-1.json",
       "availability": "missing",
-      "verifiedFields": ["roomCount:16", "xpReward:3", "questType:darkest-dungeon-guardian"],
-      "missingFields": ["name", "guardianDefinitionId", "skippedFinalFormId", "firewoodCount", "provisionPolicyId.cardSpecific"],
-      "notes": "仓库仅有 docs/data/darkest-dungeon/darkest-dungeon-quest.template.json 空模板；无任何 Quest Card 扫描 / 提取数据。",
-      "requiredForCompletion": true
+      "verifiedFields": [
+        "roomCount:16",
+        "xpReward:3",
+        "questType:darkest-dungeon-guardian"
+      ],
+      "missingFields": [
+        "name",
+        "guardianDefinitionId",
+        "skippedFinalFormId",
+        "firewoodCount",
+        "provisionPolicyId.cardSpecific"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/quests/darkest-dungeon-quest-1.json",
+      "notes": "第 1 张 Quest Card。name / Guardian mapping / Skipped Form / Firewood 全部来自卡面，禁止从 prototype index 推断。"
     },
     {
-      "sourceId": "asset:quest-card-2",
+      "requirementId": "tierB-quest-2",
+      "sourceId": "asset:darkest-dungeon-quest-2",
+      "componentGroup": "quest",
       "componentType": "quest-card",
       "componentId": "darkest-dungeon-quest-2",
-      "sourceReference": null,
+      "quantity": 1,
+      "requiredForCompletion": true,
+      "tier": "B",
+      "sourceReference": "docs/data/darkest-dungeon/official/quests/darkest-dungeon-quest-2.json",
       "availability": "missing",
-      "verifiedFields": ["roomCount:16", "xpReward:3", "questType:darkest-dungeon-guardian"],
-      "missingFields": ["name", "guardianDefinitionId", "skippedFinalFormId", "firewoodCount", "provisionPolicyId.cardSpecific"],
-      "notes": "同 quest-card-1。",
-      "requiredForCompletion": true
+      "verifiedFields": [
+        "roomCount:16",
+        "xpReward:3",
+        "questType:darkest-dungeon-guardian"
+      ],
+      "missingFields": [
+        "name",
+        "guardianDefinitionId",
+        "skippedFinalFormId",
+        "firewoodCount",
+        "provisionPolicyId.cardSpecific"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/quests/darkest-dungeon-quest-2.json",
+      "notes": "第 2 张 Quest Card。name / Guardian mapping / Skipped Form / Firewood 全部来自卡面，禁止从 prototype index 推断。"
     },
     {
-      "sourceId": "asset:quest-card-3",
+      "requirementId": "tierB-quest-3",
+      "sourceId": "asset:darkest-dungeon-quest-3",
+      "componentGroup": "quest",
       "componentType": "quest-card",
       "componentId": "darkest-dungeon-quest-3",
-      "sourceReference": null,
+      "quantity": 1,
+      "requiredForCompletion": true,
+      "tier": "B",
+      "sourceReference": "docs/data/darkest-dungeon/official/quests/darkest-dungeon-quest-3.json",
       "availability": "missing",
-      "verifiedFields": ["roomCount:16", "xpReward:3", "questType:darkest-dungeon-guardian"],
-      "missingFields": ["name", "guardianDefinitionId", "skippedFinalFormId", "firewoodCount", "provisionPolicyId.cardSpecific"],
-      "notes": "同 quest-card-1。",
-      "requiredForCompletion": true
+      "verifiedFields": [
+        "roomCount:16",
+        "xpReward:3",
+        "questType:darkest-dungeon-guardian"
+      ],
+      "missingFields": [
+        "name",
+        "guardianDefinitionId",
+        "skippedFinalFormId",
+        "firewoodCount",
+        "provisionPolicyId.cardSpecific"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/quests/darkest-dungeon-quest-3.json",
+      "notes": "第 3 张 Quest Card。name / Guardian mapping / Skipped Form / Firewood 全部来自卡面，禁止从 prototype index 推断。"
     },
     {
-      "sourceId": "asset:dungeon-tile-dd",
+      "requirementId": "tierB-dd-dungeon-tile",
+      "sourceId": "asset:darkest-dungeon-dungeon-tile",
+      "componentGroup": "dungeon-tile",
       "componentType": "dungeon-tile",
       "componentId": "darkest-dungeon-dungeon-tile",
-      "sourceReference": null,
+      "quantity": 2,
+      "requiredForCompletion": true,
+      "tier": "B",
+      "sourceReference": "docs/data/darkest-dungeon/official/dungeon-tiles/dd-tile-*.json",
       "availability": "missing",
-      "verifiedFields": ["tileCount:2", "drawPolicy:random-1-of-2", "bossSlotCount:3"],
-      "missingFields": ["tileGeometry", "bossSlotPositions"],
-      "notes": "2 张 Darkest Dungeon 专用 Dungeon Tile 不在仓库；Boss Slot 位置 / tile 几何必须从 Tile 扫描补。"
+      "verifiedFields": [
+        "tileCount:2",
+        "drawPolicy:random-1-of-2",
+        "bossSlotCount:3"
+      ],
+      "missingFields": [
+        "tileGeometry",
+        "bossSlotPositions"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/dungeon-tiles/dd-tile-*.json",
+      "notes": "2 张 Darkest Dungeon 专用 Dungeon Tile。quantity 显式 = 2。"
     },
     {
-      "sourceId": "asset:templar-impaler-battle-card",
+      "requirementId": "tierB-templars-impaler",
+      "sourceId": "asset:templar-impaler",
+      "componentGroup": "templars",
       "componentType": "battle-card",
       "componentId": "templar-impaler",
-      "sourceReference": null,
+      "quantity": 1,
+      "requiredForCompletion": true,
+      "tier": "B",
+      "sourceReference": "docs/data/darkest-dungeon/official/guardians/templars/impaler.json",
       "availability": "missing",
-      "verifiedFields": ["requiredStance:aggressive", "initiativeCardCount:2", "bodySlamTriggersPitToss:true"],
-      "missingFields": ["maxHp", "dodge", "speed", "resistances", "accuracy", "damage", "crit", "skillIds", "d10SkillTable"],
-      "notes": "规则书 p39 仅给出 stance / initiative / Body Slam 触发；HP / 技能 / d10 必须从 Impaler 战斗卡补。",
-      "requiredForCompletion": true
+      "verifiedFields": [
+        "requiredStance:aggressive",
+        "initiativeCardCount:2",
+        "bodySlamTriggersPitToss:true"
+      ],
+      "missingFields": [
+        "maxHp",
+        "dodge",
+        "speed",
+        "resistances",
+        "accuracy",
+        "damage",
+        "crit",
+        "skillIds",
+        "d10SkillTable"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/guardians/templars/impaler.json",
+      "notes": "Templar Impaler 战斗卡。"
     },
     {
-      "sourceId": "asset:templar-warlord-battle-card",
+      "requirementId": "tierB-templars-warlord",
+      "sourceId": "asset:templar-warlord",
+      "componentGroup": "templars",
       "componentType": "battle-card",
       "componentId": "templar-warlord",
-      "sourceReference": null,
+      "quantity": 1,
+      "requiredForCompletion": true,
+      "tier": "B",
+      "sourceReference": "docs/data/darkest-dungeon/official/guardians/templars/warlord.json",
       "availability": "missing",
-      "verifiedFields": ["requiredStance:ranged", "initiativeCardCount:2"],
-      "missingFields": ["maxHp", "dodge", "speed", "resistances", "accuracy", "damage", "crit", "skillIds", "d10SkillTable"],
-      "notes": "同 templar-impaler。",
-      "requiredForCompletion": true
+      "verifiedFields": [
+        "requiredStance:ranged",
+        "initiativeCardCount:2"
+      ],
+      "missingFields": [
+        "maxHp",
+        "dodge",
+        "speed",
+        "resistances",
+        "accuracy",
+        "damage",
+        "crit",
+        "skillIds",
+        "d10SkillTable"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/guardians/templars/warlord.json",
+      "notes": "Templar Warlord 战斗卡。"
     },
     {
-      "sourceId": "asset:templars-room-card",
+      "requirementId": "tierB-templars-room",
+      "sourceId": "asset:templars-room",
+      "componentGroup": "templars",
       "componentType": "room-card",
       "componentId": "templars-room",
-      "sourceReference": null,
+      "quantity": 1,
+      "requiredForCompletion": true,
+      "tier": "B",
+      "sourceReference": "docs/data/darkest-dungeon/official/guardians/templars/room.json",
       "availability": "missing",
-      "verifiedFields": ["bodySlamHitTriggersPitToss"],
-      "missingFields": ["areaIds", "capacity", "spikedPitPositions", "pitD10Map", "pitEntryEffects", "pitExitRule"],
-      "notes": "Templars Room Card / Tile 均不在仓库；Spiked Pit d10 映射、Area 几何、Pit 进入/退出规则都必须从 Room Card + Tile 补。",
-      "requiredForCompletion": true
+      "verifiedFields": [
+        "bodySlamHitTriggersPitToss"
+      ],
+      "missingFields": [
+        "areaIds",
+        "areaCapacities",
+        "spikedPitPositions",
+        "pitD10Map",
+        "pitEntryEffects",
+        "pitExitRule",
+        "victoryCondition"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/guardians/templars/room.json",
+      "notes": "Templars Room Card。"
     },
     {
-      "sourceId": "asset:mammoth-cyst-battle-card",
+      "requirementId": "tierB-templars-room-tile",
+      "sourceId": "asset:templars-room-tile",
+      "componentGroup": "templars",
+      "componentType": "dungeon-tile",
+      "componentId": "templars-room-tile",
+      "quantity": 1,
+      "requiredForCompletion": true,
+      "tier": "B",
+      "sourceReference": "docs/data/darkest-dungeon/official/guardians/templars/room-tile.json",
+      "availability": "missing",
+      "verifiedFields": [],
+      "missingFields": [
+        "tileGeometry"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/guardians/templars/room-tile.json",
+      "notes": "Templars Room Tile 几何（如果 Room geometry 不在卡上）。"
+    },
+    {
+      "requirementId": "tierB-mammoth-cyst",
+      "sourceId": "asset:mammoth-cyst",
+      "componentGroup": "mammoth-cyst",
       "componentType": "battle-card",
       "componentId": "mammoth-cyst",
-      "sourceReference": null,
+      "quantity": 1,
+      "requiredForCompletion": true,
+      "tier": "B",
+      "sourceReference": "docs/data/darkest-dungeon/official/guardians/mammoth-cyst/cyst.json",
       "availability": "missing",
-      "verifiedFields": ["requiredStance:aggressive", "initiativeCardCount:2", "stalkSummonReplacesSkillWhenAbsent", "stalkSummonAdds2Initiative", "stalkTeleportationRollsD10"],
-      "missingFields": ["maxHp", "dodge", "speed", "resistances", "accuracy", "damage", "crit", "skillIds", "d10SkillTable", "stalkTeleportationD10Map"],
-      "notes": "Mammoth Cyst 战斗卡 + White Cell Stalk 战斗卡均缺。",
-      "requiredForCompletion": true
+      "verifiedFields": [
+        "requiredStance:aggressive",
+        "initiativeCardCount:2",
+        "stalkSummonWhenAbsent",
+        "stalkSummonAddsInitiativeCount",
+        "stalkTeleportationRollsD10"
+      ],
+      "missingFields": [
+        "maxHp",
+        "dodge",
+        "speed",
+        "resistances",
+        "accuracy",
+        "damage",
+        "crit",
+        "skillIds",
+        "d10SkillTable"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/guardians/mammoth-cyst/cyst.json",
+      "notes": "Mammoth Cyst 战斗卡。"
     },
     {
-      "sourceId": "asset:white-cell-stalk-battle-card",
+      "requirementId": "tierB-white-cell-stalk",
+      "sourceId": "asset:white-cell-stalk",
+      "componentGroup": "mammoth-cyst",
       "componentType": "battle-card",
       "componentId": "white-cell-stalk",
-      "sourceReference": null,
+      "quantity": 1,
+      "requiredForCompletion": true,
+      "tier": "B",
+      "sourceReference": "docs/data/darkest-dungeon/official/guardians/mammoth-cyst/stalk.json",
       "availability": "missing",
-      "verifiedFields": ["summonViaMammothCystTurn", "spawnStanceFromCystStance", "spawnAreaFromCystArea", "teleportationRollsD10"],
-      "missingFields": ["maxHp", "dodge", "speed", "resistances", "accuracy", "damage", "crit", "skillIds", "d10SkillTable", "teleportationD10Map"],
-      "notes": "Stalk 完整卡面字段无来源。",
-      "requiredForCompletion": true
+      "verifiedFields": [
+        "summonViaCystTurn",
+        "spawnStanceFromCyst",
+        "spawnAreaFromCyst",
+        "teleportationRollsD10"
+      ],
+      "missingFields": [
+        "maxHp",
+        "dodge",
+        "speed",
+        "resistances",
+        "accuracy",
+        "damage",
+        "crit",
+        "skillIds",
+        "d10SkillTable",
+        "teleportationD10Map"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/guardians/mammoth-cyst/stalk.json",
+      "notes": "White Cell Stalk 战斗卡。"
     },
     {
-      "sourceId": "asset:mammoth-cyst-room-card",
+      "requirementId": "tierB-mammoth-cyst-room",
+      "sourceId": "asset:mammoth-cyst-room",
+      "componentGroup": "mammoth-cyst",
       "componentType": "room-card",
       "componentId": "mammoth-cyst-room",
-      "sourceReference": null,
+      "quantity": 1,
+      "requiredForCompletion": true,
+      "tier": "B",
+      "sourceReference": "docs/data/darkest-dungeon/official/guardians/mammoth-cyst/room.json",
       "availability": "missing",
       "verifiedFields": [],
-      "missingFields": ["areaIds", "capacity", "teleportationD10Map", "spawnStancePolicy", "spawnAreaPolicy", "victoryCondition"],
-      "notes": "Mammoth Cyst Room 全部 area / capacity / 胜利条件无来源。",
-      "requiredForCompletion": true
+      "missingFields": [
+        "areaIds",
+        "areaCapacities",
+        "teleportationD10Map",
+        "spawnStancePolicy",
+        "spawnAreaPolicy",
+        "victoryCondition"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/guardians/mammoth-cyst/room.json",
+      "notes": "Mammoth Cyst Room Card。"
     },
     {
-      "sourceId": "asset:shuffling-horror-battle-card",
+      "requirementId": "tierB-shuffling-horror",
+      "sourceId": "asset:shuffling-horror",
+      "componentGroup": "shuffling-horror",
       "componentType": "battle-card",
       "componentId": "shuffling-horror",
-      "sourceReference": null,
+      "quantity": 1,
+      "requiredForCompletion": true,
+      "tier": "B",
+      "sourceReference": "docs/data/darkest-dungeon/official/guardians/shuffling-horror/horror.json",
       "availability": "missing",
-      "verifiedFields": ["requiredStance:aggressive", "initiativeCardCount:2", "echoingDisassemblySummonOrder:cultist-priest-then-malignant-growth", "summonAddsInitiative", "undulationsShufflesHeroStanceTokens"],
-      "missingFields": ["maxHp", "dodge", "speed", "resistances", "accuracy", "damage", "crit", "skillIds", "d10SkillTable"],
-      "notes": "Shuffling Horror 战斗卡不在仓库。",
-      "requiredForCompletion": true
+      "verifiedFields": [
+        "requiredStance:aggressive",
+        "initiativeCardCount:2",
+        "cultistPriestKeptAside",
+        "malignantGrowthKeptAside",
+        "echoingDisassemblySummonOrder",
+        "summonAddsInitiative",
+        "undulationsShufflesHeroStanceTokens"
+      ],
+      "missingFields": [
+        "maxHp",
+        "dodge",
+        "speed",
+        "resistances",
+        "accuracy",
+        "damage",
+        "crit",
+        "skillIds",
+        "d10SkillTable"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/guardians/shuffling-horror/horror.json",
+      "notes": "Shuffling Horror 战斗卡。"
     },
     {
-      "sourceId": "asset:cultist-priest-battle-card",
+      "requirementId": "tierB-cultist-priest",
+      "sourceId": "asset:cultist-priest",
+      "componentGroup": "shuffling-horror",
       "componentType": "battle-card",
       "componentId": "cultist-priest",
-      "sourceReference": null,
+      "quantity": 1,
+      "requiredForCompletion": true,
+      "tier": "B",
+      "sourceReference": "docs/data/darkest-dungeon/official/guardians/shuffling-horror/cultist-priest.json",
       "availability": "missing",
-      "verifiedFields": ["keptAsideInitially", "summonedByShufflingHorror"],
-      "missingFields": ["maxHp", "dodge", "speed", "resistances", "accuracy", "damage", "crit", "skillIds", "d10SkillTable"],
-      "notes": "Cultist Priest 战斗卡不在仓库。",
-      "requiredForCompletion": true
+      "verifiedFields": [
+        "keptAsideInitially",
+        "summonedByShufflingHorror"
+      ],
+      "missingFields": [
+        "maxHp",
+        "dodge",
+        "speed",
+        "resistances",
+        "accuracy",
+        "damage",
+        "crit",
+        "skillIds",
+        "d10SkillTable"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/guardians/shuffling-horror/cultist-priest.json",
+      "notes": "Cultist Priest 战斗卡。"
     },
     {
-      "sourceId": "asset:malignant-growth-battle-card",
+      "requirementId": "tierB-malignant-growth",
+      "sourceId": "asset:malignant-growth",
+      "componentGroup": "shuffling-horror",
       "componentType": "battle-card",
       "componentId": "malignant-growth",
-      "sourceReference": null,
+      "quantity": 1,
+      "requiredForCompletion": true,
+      "tier": "B",
+      "sourceReference": "docs/data/darkest-dungeon/official/guardians/shuffling-horror/malignant-growth.json",
       "availability": "missing",
-      "verifiedFields": ["keptAsideInitially", "summonedByShufflingHorror"],
-      "missingFields": ["maxHp", "dodge", "speed", "resistances", "accuracy", "damage", "crit", "skillIds", "d10SkillTable"],
-      "notes": "Malignant Growth 战斗卡不在仓库。",
-      "requiredForCompletion": true
+      "verifiedFields": [
+        "keptAsideInitially",
+        "summonedByShufflingHorror"
+      ],
+      "missingFields": [
+        "maxHp",
+        "dodge",
+        "speed",
+        "resistances",
+        "accuracy",
+        "damage",
+        "crit",
+        "skillIds",
+        "d10SkillTable"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/guardians/shuffling-horror/malignant-growth.json",
+      "notes": "Malignant Growth 战斗卡。"
     },
     {
-      "sourceId": "asset:shuffling-horror-room-card",
+      "requirementId": "tierB-shuffling-horror-room",
+      "sourceId": "asset:shuffling-horror-room",
+      "componentGroup": "shuffling-horror",
       "componentType": "room-card",
       "componentId": "shuffling-horror-room",
-      "sourceReference": null,
+      "quantity": 1,
+      "requiredForCompletion": true,
+      "tier": "B",
+      "sourceReference": "docs/data/darkest-dungeon/official/guardians/shuffling-horror/room.json",
       "availability": "missing",
       "verifiedFields": [],
-      "missingFields": ["areaIds", "capacity", "victoryCondition"],
-      "notes": "Shuffling Horror Room Card 缺。",
-      "requiredForCompletion": true
+      "missingFields": [
+        "areaIds",
+        "areaCapacities",
+        "victoryCondition"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/guardians/shuffling-horror/room.json",
+      "notes": "Shuffling Horror Room Card。"
     },
     {
-      "sourceId": "asset:ancestor-room-card",
+      "requirementId": "tierB-ancestor-room",
+      "sourceId": "asset:ancestor-room",
+      "componentGroup": "final-encounter",
       "componentType": "room-card",
       "componentId": "ancestor-room",
-      "sourceReference": null,
+      "quantity": 1,
+      "requiredForCompletion": true,
+      "tier": "B",
+      "sourceReference": "docs/data/darkest-dungeon/official/final-encounter/room.json",
       "availability": "missing",
-      "verifiedFields": ["sameRoomAcrossAllForms", "noRestOnFormSwitch", "noStanceAdjustmentOnFormSwitch", "newInitiativeAndRoundOnFormSwitch"],
-      "missingFields": ["areaIds", "capacity", "roomEffects", "formAreaPlacement"],
-      "notes": "Ancestor Room Card / Tile 缺；所有四个 Form 共用此 Room 但几何未知。",
-      "requiredForCompletion": true
+      "verifiedFields": [
+        "sameRoomAcrossAllForms",
+        "noRestOnFormSwitch",
+        "noStanceAdjustmentOnFormSwitch",
+        "newInitiativeAndRoundOnFormSwitch"
+      ],
+      "missingFields": [
+        "areaIds",
+        "areaCapacities",
+        "roomEffects",
+        "formAreaPlacement"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/final-encounter/room.json",
+      "notes": "Ancestor Room Card。"
     },
     {
-      "sourceId": "asset:ancestor-first-form-battle-card",
-      "componentType": "battle-card",
-      "componentId": "ancestor-first-form",
-      "sourceReference": null,
-      "availability": "missing",
-      "verifiedFields": ["requiredStance:aggressive", "perfectReflectionCount:2", "imperfectReflectionCount:1", "monsterInitiativeCardCount:4", "reflectionsAlwaysGuardAncestor", "imperfectDeathDeals10WoundsToAncestor", "reflectionDeathDoesNotReduceInitiative"],
-      "missingFields": ["ancestor.maxHp", "ancestor.skillIds", "perfectReflection.maxHp", "perfectReflection.skillIds", "imperfectReflection.maxHp", "imperfectReflection.skillIds", "timeHealsAll.effect", "vacantStanceFillSource"],
-      "notes": "Ancestor 1st Form 战斗卡 + 两张 Reflection 卡全缺。",
-      "requiredForCompletion": true
-    },
-    {
-      "sourceId": "asset:ancestor-second-form-battle-card",
-      "componentType": "battle-card",
-      "componentId": "ancestor-second-form",
-      "sourceReference": null,
-      "availability": "missing",
-      "verifiedFields": ["initiativeCardCount:2", "absoluteNothingnessCount:3", "absoluteNothingnessNotTargetable:true", "absoluteNothingnessOccupiesArea:true", "teleportD10Map:1-3:defensive,4-6:ranged,7-9:support,10:none"],
-      "missingFields": ["ancestor.maxHp", "ancestor.skillIds", "absoluteNothingness.areaIds"],
-      "notes": "Ancestor 2nd Form 战斗卡 + Absolute Nothingness 卡缺。",
-      "requiredForCompletion": true
-    },
-    {
-      "sourceId": "asset:gestating-heart-battle-card",
-      "componentType": "battle-card",
-      "componentId": "gestating-heart",
-      "sourceReference": null,
-      "availability": "missing",
-      "verifiedFields": ["requiredStance:aggressive", "initiativeCardCount:1", "sispersionAddsOneInitiative", "woundedReaction.blightTurns:2-or-3", "woundedReaction.healAmount:2"],
-      "missingFields": ["maxHp", "skillIds", "d10SkillTable", "lethalWoundTimingRuling", "darkestDungeonMonsterDeckComposition"],
-      "notes": "Gestating Heart 战斗卡缺；Sispersion 依赖的 Darkest Dungeon Monster Deck 组成也缺。致死 Wound 后 woundedReaction 是否触发缺乏权威 ruling，必须 source-required。",
-      "requiredForCompletion": true
-    },
-    {
-      "sourceId": "asset:heart-of-darkness-battle-card",
-      "componentType": "battle-card",
-      "componentId": "heart-of-darkness",
-      "sourceReference": null,
-      "availability": "missing",
-      "verifiedFields": ["requiredStance:aggressive", "initiativeCardCount:2", "impendingDoomRollsAtBattleStart", "impendingDoomRollsAfterCompletedAction", "impendingDoomForecastIsVisible", "impendingDoomDeterminesNextSkill", "defeatTriggersCampaignVictory"],
-      "missingFields": ["maxHp", "skillIds", "d10SkillMap", "comeUntoYourMaker.definition"],
-      "notes": "Heart of Darkness 战斗卡 + Impending Doom d10 → Skill 映射 + Come Unto Your Maker 卡面全缺。**绝对禁止**从电子游戏 Darkest Dungeon 的 Come Unto Your Maker 机制照搬。",
-      "requiredForCompletion": true
-    },
-    {
-      "sourceId": "asset:darkest-dungeon-monster-deck",
-      "componentType": "monster-card",
-      "componentId": "darkest-dungeon-monster-deck",
-      "sourceReference": null,
+      "requirementId": "tierB-ancestor-room-tile",
+      "sourceId": "asset:ancestor-room-tile",
+      "componentGroup": "final-encounter",
+      "componentType": "dungeon-tile",
+      "componentId": "ancestor-room-tile",
+      "quantity": 1,
+      "requiredForCompletion": true,
+      "tier": "B",
+      "sourceReference": "docs/data/darkest-dungeon/official/final-encounter/room-tile.json",
       "availability": "missing",
       "verifiedFields": [],
-      "missingFields": ["deckComposition", "monsterDefinitionIds", "drawPolicy", "sispersionSource"],
-      "notes": "Gestating Heart 的 Sispersion 抽牌源；目前完全无来源。无 deck 来源 → Final Encounter 整体仍 unavailable。",
-      "requiredForCompletion": true
+      "missingFields": [
+        "tileGeometry"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/final-encounter/room-tile.json",
+      "notes": "Ancestor Room Tile 几何。"
+    },
+    {
+      "requirementId": "tierB-ancestor-first-form",
+      "sourceId": "asset:ancestor-first-form",
+      "componentGroup": "final-encounter",
+      "componentType": "battle-card",
+      "componentId": "ancestor-first-form",
+      "quantity": 1,
+      "requiredForCompletion": true,
+      "tier": "B",
+      "sourceReference": "docs/data/darkest-dungeon/official/final-encounter/ancestor-first-form.json",
+      "availability": "missing",
+      "verifiedFields": [
+        "requiredStance:aggressive",
+        "perfectReflectionCount:2",
+        "imperfectReflectionCount:1",
+        "monsterInitiativeCardCount:4",
+        "reflectionsAlwaysGuardAncestor",
+        "imperfectDeathDeals10WoundsToAncestor",
+        "reflectionDeathDoesNotReduceInitiative"
+      ],
+      "missingFields": [
+        "ancestor.maxHp",
+        "ancestor.skillIds",
+        "perfectReflection.maxHp",
+        "perfectReflection.skillIds",
+        "imperfectReflection.maxHp",
+        "imperfectReflection.skillIds",
+        "timeHealsAll.effect",
+        "vacantStanceFillSource"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/final-encounter/ancestor-first-form.json",
+      "notes": "Ancestor 1st Form 战斗卡。"
+    },
+    {
+      "requirementId": "tierB-perfect-reflection",
+      "sourceId": "asset:perfect-reflection",
+      "componentGroup": "final-encounter",
+      "componentType": "special-card",
+      "componentId": "perfect-reflection",
+      "quantity": 2,
+      "requiredForCompletion": true,
+      "tier": "B",
+      "sourceReference": "docs/data/darkest-dungeon/official/final-encounter/perfect-reflection.json",
+      "availability": "missing",
+      "verifiedFields": [
+        "count:2",
+        "guardsAncestor"
+      ],
+      "missingFields": [
+        "maxHp",
+        "skillIds"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/final-encounter/perfect-reflection.json",
+      "notes": "Perfect Reflection 卡（quantity=2）。"
+    },
+    {
+      "requirementId": "tierB-imperfect-reflection",
+      "sourceId": "asset:imperfect-reflection",
+      "componentGroup": "final-encounter",
+      "componentType": "special-card",
+      "componentId": "imperfect-reflection",
+      "quantity": 1,
+      "requiredForCompletion": true,
+      "tier": "B",
+      "sourceReference": "docs/data/darkest-dungeon/official/final-encounter/imperfect-reflection.json",
+      "availability": "missing",
+      "verifiedFields": [
+        "count:1",
+        "deathDeals10WoundsToAncestor"
+      ],
+      "missingFields": [
+        "maxHp",
+        "skillIds"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/final-encounter/imperfect-reflection.json",
+      "notes": "Imperfect Reflection 卡。"
+    },
+    {
+      "requirementId": "tierB-ancestor-second-form",
+      "sourceId": "asset:ancestor-second-form",
+      "componentGroup": "final-encounter",
+      "componentType": "battle-card",
+      "componentId": "ancestor-second-form",
+      "quantity": 1,
+      "requiredForCompletion": true,
+      "tier": "B",
+      "sourceReference": "docs/data/darkest-dungeon/official/final-encounter/ancestor-second-form.json",
+      "availability": "missing",
+      "verifiedFields": [
+        "initiativeCardCount:2",
+        "absoluteNothingnessCount:3",
+        "absoluteNothingnessNotTargetable:true",
+        "absoluteNothingnessOccupiesArea:true",
+        "teleportD10Map"
+      ],
+      "missingFields": [
+        "ancestor.maxHp",
+        "ancestor.skillIds",
+        "absoluteNothingness.areaIds"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/final-encounter/ancestor-second-form.json",
+      "notes": "Ancestor 2nd Form 战斗卡。"
+    },
+    {
+      "requirementId": "tierB-absolute-nothingness",
+      "sourceId": "asset:absolute-nothingness",
+      "componentGroup": "final-encounter",
+      "componentType": "special-card",
+      "componentId": "absolute-nothingness",
+      "quantity": 3,
+      "requiredForCompletion": true,
+      "tier": "B",
+      "sourceReference": "docs/data/darkest-dungeon/official/final-encounter/absolute-nothingness-*.json",
+      "availability": "missing",
+      "verifiedFields": [
+        "count:3",
+        "untargetable:true",
+        "occupiesArea:true"
+      ],
+      "missingFields": [
+        "stance",
+        "areaId"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/final-encounter/absolute-nothingness-*.json",
+      "notes": "Absolute Nothingness 卡（quantity=3）。"
+    },
+    {
+      "requirementId": "tierB-gestating-heart",
+      "sourceId": "asset:gestating-heart",
+      "componentGroup": "final-encounter",
+      "componentType": "battle-card",
+      "componentId": "gestating-heart",
+      "quantity": 1,
+      "requiredForCompletion": true,
+      "tier": "B",
+      "sourceReference": "docs/data/darkest-dungeon/official/final-encounter/gestating-heart.json",
+      "availability": "missing",
+      "verifiedFields": [
+        "requiredStance:aggressive",
+        "initiativeCardCount:1",
+        "sispersionAddsOneInitiative",
+        "woundedReaction.blightTurns:2-or-3",
+        "woundedReaction.healAmount:2"
+      ],
+      "missingFields": [
+        "maxHp",
+        "skillIds",
+        "d10SkillTable",
+        "lethalWoundTimingRuling"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/final-encounter/gestating-heart.json",
+      "notes": "Gestating Heart 战斗卡。致死 Wound 后 woundedReaction 是否触发需官方 errata / FAQ ruling。"
+    },
+    {
+      "requirementId": "tierB-heart-of-darkness",
+      "sourceId": "asset:heart-of-darkness",
+      "componentGroup": "final-encounter",
+      "componentType": "battle-card",
+      "componentId": "heart-of-darkness",
+      "quantity": 1,
+      "requiredForCompletion": true,
+      "tier": "B",
+      "sourceReference": "docs/data/darkest-dungeon/official/final-encounter/heart-of-darkness.json",
+      "availability": "missing",
+      "verifiedFields": [
+        "requiredStance:aggressive",
+        "initiativeCardCount:2",
+        "impendingDoomRollsAtBattleStart",
+        "impendingDoomRollsAfterCompletedAction",
+        "impendingDoomForecastVisible",
+        "impendingDoomDeterminesNextSkill",
+        "defeatTriggersCampaignVictory"
+      ],
+      "missingFields": [
+        "maxHp",
+        "skillIds",
+        "impendingDoomD10SkillMap"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/final-encounter/heart-of-darkness.json",
+      "notes": "Heart of Darkness 战斗卡。**绝对禁止**从电子游戏 Darkest Dungeon 的 Come Unto Your Maker 机制照搬。"
+    },
+    {
+      "requirementId": "tierB-come-unto-your-maker",
+      "sourceId": "asset:come-unto-your-maker",
+      "componentGroup": "final-encounter",
+      "componentType": "special-card",
+      "componentId": "come-unto-your-maker",
+      "quantity": 1,
+      "requiredForCompletion": true,
+      "tier": "B",
+      "sourceReference": "docs/data/darkest-dungeon/official/final-encounter/come-unto-your-maker.json",
+      "availability": "missing",
+      "verifiedFields": [],
+      "missingFields": [
+        "definition"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/final-encounter/come-unto-your-maker.json",
+      "notes": "Come Unto Your Maker 卡（独立 card 来源，禁止电子游戏照搬）。"
+    },
+    {
+      "requirementId": "tierB-darkest-dungeon-monster-deck",
+      "sourceId": "asset:darkest-dungeon-monster-deck",
+      "componentGroup": "monster-deck",
+      "componentType": "monster-card",
+      "componentId": "darkest-dungeon-monster-deck",
+      "quantity": 1,
+      "requiredForCompletion": true,
+      "tier": "B",
+      "sourceReference": "docs/data/darkest-dungeon/official/monster-deck.json",
+      "availability": "missing",
+      "verifiedFields": [],
+      "missingFields": [
+        "deckComposition",
+        "monsterDefinitionIds",
+        "drawPolicy"
+      ],
+      "reason": "no source file at docs/data/darkest-dungeon/official/monster-deck.json",
+      "notes": "Darkest Dungeon Monster Deck 组成 + Sispersion 抽牌 policy。无来源 → Final Encounter 整体不可 enable。"
+    },
+    {
+      "requirementId": "tierC-official-errata",
+      "sourceId": "asset:official-errata",
+      "componentGroup": "official-errata",
+      "componentType": "official-errata",
+      "componentId": "official-errata",
+      "quantity": 1,
+      "requiredForCompletion": false,
+      "tier": "C",
+      "sourceReference": "docs/data/darkest-dungeon/official/errata/*.md",
+      "availability": "missing",
+      "verifiedFields": [],
+      "missingFields": [],
+      "reason": "optional, not provided",
+      "notes": "官方勘误 / FAQ。optional（仅在规则争议时必需）。"
     }
   ]
 }

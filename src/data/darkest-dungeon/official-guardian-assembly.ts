@@ -1,23 +1,28 @@
-// Phase 11A.3 dev doc §13-15：Official Guardian Registry Assembly。
+// Phase 11A.3 Source-Gate Integrity Repair dev doc §18-21：
+// Official Guardian Registry Assembly。
 //
-// 设计：
+// 设计（修复 Finding D）：
 //   - 单一来源：所有 official Guardian 字段必须从 family-specific registry 组装
 //     （Templars / Mammoth Cyst / Shuffling Horror），不再手填 stub。
-//   - Generic Guardian Registry（guardian-registry.ts）只能消费本 assembly，
-//     禁止在 guardian-registry.ts 再手填一份不同数据。
 //   - 通用「Official Guardian Pool Enabled」必须调用 family validators：
-//     Templars + Mammoth Cyst + Shuffling Horror 全部通过才 true。
-//   - 任一 family 不通过 → pool false，调用 getDarkestDungeonGuardianDataGaps()
-//     列出根因。
-//
-// Phase 11A.3 阶段：所有 family validator 仍因 Battle Card / Room Card 缺失返回
-// false；本文件主要建立「不再两套 official truth」的结构 + 把 family
-// validator 调用串起来。资料齐备后 source-of-truth 自然切换。
+//     Templars + Mammoth Cyst + Shuffling Horror 全部 ready 才 true。
+//   - 关键修复：assembly 之前 `enabledInOfficialPool: ready` 永远是 false，
+//     即使 family validator 全部通过。修法：
+//     a) 使用 `validateXxxGuardian('formal').isComplete`（data-completeness only，
+//        不依赖 `enabledInOfficialPool`），避免循环依赖。
+//     b) assembly 自己的 `enabledInOfficialPool = ready`：当 data complete 时
+//        generic Pool 自动 enable（不再永久 false）。
+//   - 防御循环：assembly 调 `validateXxxGuardian('formal')`（不调
+//     `isXxxOfficialEncounterEnabled()`，后者会读 encounter.enabledInOfficialPool，
+//     与 assembly 的 enabledInOfficialPool 字段解耦，无环）。
 
 import type { DarkestDungeonGuardianDefinition } from '../../types/act-four';
-import { isTemplarsOfficialEncounterEnabled, getTemplarsDataGaps } from './templars/templars-registry';
 import {
-  isMammothCystOfficialEncounterEnabled,
+  validateTemplarsGuardian,
+  getTemplarsDataGaps,
+} from './templars/templars-registry';
+import {
+  validateMammothCystGuardian,
   getMammothCystDataGaps,
 } from './mammoth-cyst/mammoth-cyst-registry';
 import { getShufflingHorrorOfficialReadiness } from './shuffling-horror/registry';
@@ -32,22 +37,27 @@ export interface GuardianFamilyReadiness {
   gaps: string[];
 }
 
+/** Templars family data-completeness（不依赖 enabledInOfficialPool，避免循环）。 */
 export function getTemplarsFamilyReadiness(): GuardianFamilyReadiness {
+  const dataComplete = validateTemplarsGuardian('formal').isComplete;
   return {
     family: 'templars',
-    ready: isTemplarsOfficialEncounterEnabled(),
-    gaps: getTemplarsDataGaps(),
+    ready: dataComplete,
+    gaps: dataComplete ? [] : getTemplarsDataGaps(),
   };
 }
 
+/** Mammoth Cyst family data-completeness（不依赖 enabledInOfficialPool）。 */
 export function getMammothCystFamilyReadiness(): GuardianFamilyReadiness {
+  const dataComplete = validateMammothCystGuardian('formal').isComplete;
   return {
     family: 'mammoth-cyst',
-    ready: isMammothCystOfficialEncounterEnabled(),
-    gaps: getMammothCystDataGaps(),
+    ready: dataComplete,
+    gaps: dataComplete ? [] : getMammothCystDataGaps(),
   };
 }
 
+/** Shuffling Horror family data-completeness（已有 getShufflingHorrorOfficialReadiness）。 */
 export function getShufflingHorrorFamilyReadiness(): GuardianFamilyReadiness {
   const readiness = getShufflingHorrorOfficialReadiness();
   return {
@@ -81,7 +91,10 @@ function buildOfficialGuardianDefinition(
   family: 'templars' | 'mammoth-cyst' | 'shuffling-horror',
 ): DarkestDungeonGuardianDefinition {
   if (family === 'templars') {
-    const ready = isTemplarsOfficialEncounterEnabled();
+    // Phase 11A.3 Source-Gate Integrity Repair §19：用 validateTemplarsGuardian（data only）
+    // 而非 isTemplarsOfficialEncounterEnabled（policy 包含 enabledInOfficialPool），
+    // 避免循环依赖。
+    const ready = validateTemplarsGuardian('formal').isComplete;
     return {
       id: 'darkest-dungeon-guardian-templars',
       family,
@@ -91,16 +104,19 @@ function buildOfficialGuardianDefinition(
       actorDefinitionIds: ready
         ? ['templar-impaler', 'templar-warlord']
         : [],
-      // Phase 11A.3 dev doc §17：partial 状态必须保持
+      // Phase 11A.3 Source-Gate Integrity Repair §19：enabledInOfficialPool = ready。
+      // 之前 hardcoded false 导致未来 source 齐备时 Pool 仍 false（dev doc §18 Finding D）。
+      // 现在 data complete 时自动 enable generic Pool。
       officialDataStatus: ready ? 'verified' : 'partial',
-      enabledInOfficialPool: false,
+      enabledInOfficialPool: ready,
       sourceReference: ready
         ? 'DD_EN_COREBOX_RULES.pdf:p39 + Templar Impaler / Warlord Battle Card + Templars Room Card'
         : 'DD_EN_COREBOX_RULES.pdf:p39（仅 structural fields）',
     };
   }
   if (family === 'mammoth-cyst') {
-    const ready = isMammothCystOfficialEncounterEnabled();
+    // 同 Templars：用 validateMammothCystGuardian（data only）
+    const ready = validateMammothCystGuardian('formal').isComplete;
     return {
       id: 'darkest-dungeon-guardian-mammoth-cyst',
       family,
@@ -108,7 +124,7 @@ function buildOfficialGuardianDefinition(
       roomDefinitionId: ready ? 'mammoth-cyst-room' : '',
       actorDefinitionIds: ready ? ['mammoth-cyst', 'white-cell-stalk'] : [],
       officialDataStatus: ready ? 'verified' : 'partial',
-      enabledInOfficialPool: false,
+      enabledInOfficialPool: ready,
       sourceReference: ready
         ? 'DD_EN_COREBOX_RULES.pdf:p39 + Mammoth Cyst / White Cell Stalk Battle Card + Mammoth Cyst Room Card'
         : 'DD_EN_COREBOX_RULES.pdf:p39（仅 structural fields）',
@@ -116,16 +132,17 @@ function buildOfficialGuardianDefinition(
   }
   // shuffling-horror
   const readiness = getShufflingHorrorOfficialReadiness();
+  const ready = readiness.ready;
   return {
     id: 'darkest-dungeon-guardian-shuffling-horror',
     family,
-    name: readiness.ready ? 'Shuffling Horror' : '',
+    name: ready ? 'Shuffling Horror' : '',
     roomDefinitionId: readiness.roomComplete ? 'shuffling-horror-room' : '',
     actorDefinitionIds: readiness.roomComplete
       ? ['shuffling-horror', 'cultist-priest', 'malignant-growth']
       : [],
     officialDataStatus: readiness.officialVerified ? 'verified' : 'partial',
-    enabledInOfficialPool: false,
+    enabledInOfficialPool: ready,
     sourceReference: readiness.sourceComplete
       ? 'DD_EN_COREBOX_RULES.pdf:p40 + Shuffling Horror / Cultist Priest / Malignant Growth Battle Card + Shuffling Horror Room Card'
       : 'DD_EN_COREBOX_RULES.pdf:p40（仅 structural fields）',

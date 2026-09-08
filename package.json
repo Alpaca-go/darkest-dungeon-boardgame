@@ -15,11 +15,14 @@
     "audit:content": "vite-node scripts/audit/content.ts",
     "audit:rules": "vite-node scripts/audit/rules.ts",
     "audit:release-gate": "vite-node scripts/audit/release-gate.ts",
+    "audit:production-command": "vite-node scripts/audit/production-command.ts",
     "test:golden": "vitest run src/audit/core-campaign",
     "audit:all": "vite-node scripts/audit/all.ts",
     "audit:final-report": "vite-node scripts/audit/final-report.ts",
     "audit:performance-baseline": "vite-node scripts/audit/performance-baseline.ts",
-    "verify:phase11a2-final": "vite-node scripts/audit/verify-phase11a2-final.ts"
+    "verify:phase11a2-final": "vite-node scripts/audit/verify-phase11a2-final.ts",
+    "audit:official-source": "vite-node scripts/audit/official-source.ts",
+    "verify:phase11a3-source-gate": "vite-node scripts/audit/verify-phase11a3-source-gate.ts"
   },
   "dependencies": {
     "lucide-react": "^0.408.0",

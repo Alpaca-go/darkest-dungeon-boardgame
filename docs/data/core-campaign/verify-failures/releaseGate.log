@@ -1,0 +1,33 @@
+STDOUT:
+
+> darkest-dungeon-web-prototype@0.1.0 audit:release-gate
+> vite-node scripts/audit/release-gate.ts
+
+
+======================
+  audit:release-gate
+======================
+判定: SOURCE-BLOCKED
+SOURCE-BLOCKED — Phase 11A.3 阶段缺少官方 Battle/Quest/Room Card / Tile / Monster Deck 资料；official data gates 全部 false，threeGuardiansPass=false / threeSkippedFormsPass=false / elevenQuestLoopClosed=false / campaignVictoryReachable=false。等待用户补全 source 资料后重跑 audit。
+
+open P0 / P1        : 1 / 0
+11-Quest 闭环       : NO
+Golden Run outcome  : blocked (act=4, quests=9)
+Replay 决定性       : YES
+里程碑到达          : 10/16
+官方路径 Math.random: 0
+
+产物:
+  - docs/data/core-campaign/issue-ledger.json
+  - docs/data/core-campaign/replay-bundle-golden-normal-success-01.json
+  - docs/data/core-campaign/golden-run.json
+  - docs/data/core-campaign/release-gate.json
+  - docs/reports/phase-11a/03-golden-run-and-replay.md
+  - docs/reports/phase-11a/04-issue-ledger.md
+  - docs/reports/phase-11a/05-release-gate.md
+
+退出码 1（judgement=SOURCE-BLOCKED）
+
+
+STDERR:
+

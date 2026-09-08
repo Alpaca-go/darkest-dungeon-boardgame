@@ -1,7 +1,7 @@
 {
-  "schemaVersion": "1.0",
-  "measuredAt": "2026-09-08T07:05:20.193Z",
-  "verificationInputHash": "3a64cf623043d7c5d1c802f245ab74f3df34b39604bcf6f0c65e6e58ba2a60df",
+  "schemaVersion": "phase-11a3-source-gate.v1",
+  "measuredAt": "2026-09-08T08:11:17.125Z",
+  "verificationInputHash": "90399b5ddf8126e39b68d1626a73eaad4d4633f6a1240907e146d6fed2ed1f5e",
   "typecheckPasses": true,
   "unitPasses": true,
   "commandContractPasses": true,
@@ -9,86 +9,199 @@
   "buildPasses": true,
   "criticalE2EPasses": true,
   "goldenPasses": true,
+  "goldenTestPasses": true,
   "replayDeterminismPasses": true,
   "replayContinuationPasses": true,
   "contentAuditPasses": true,
   "rulesAuditPasses": true,
   "productionCommandLayerPasses": true,
   "releaseGatePasses": false,
+  "officialSourceAuditPasses": true,
+  "officialSourceManifestGenerated": true,
+  "fieldProvenanceValidated": true,
+  "sourceReadinessGenerated": true,
   "openP0": 1,
   "openP1": 0,
   "campaignOrchestrationReachable": true,
   "verificationFresh": true,
+  "consistencyErrors": [],
+  "phase11A3Status": "SOURCE-BLOCKED",
+  "sourceReadinessGates": {
+    "questCardsReady": false,
+    "templarsReady": false,
+    "mammothCystReady": false,
+    "shufflingHorrorReady": false,
+    "finalEncounterReady": false,
+    "darkestDungeonMonsterDeckReady": false,
+    "allRequiredSourcesReady": false
+  },
+  "releaseGateSummary": {
+    "typecheckPasses": true,
+    "goldenTestPasses": true,
+    "canEnterPhase11A3": true,
+    "onlyOpenP0": "ISSUE-P0-002",
+    "buildPasses": true,
+    "unitPasses": true,
+    "integrationPasses": true,
+    "commandContractPasses": true,
+    "replayContinuationPasses": true,
+    "criticalE2EPasses": true,
+    "goldenCampaignPasses": false,
+    "replayDeterminismPasses": true,
+    "openP0": 1,
+    "openP1": 0,
+    "prototypeReferencesInOfficialPath": 0,
+    "duplicateCommittedTransactions": 0,
+    "engineDeadlocks": 0,
+    "campaignOrchestrationReachable": true,
+    "elevenQuestLoopClosed": false,
+    "campaignVictoryReachable": false,
+    "campaignOverReachable": true,
+    "threeGuardiansPass": false,
+    "threeSkippedFormsPass": false,
+    "fourRuinsBossesPass": false,
+    "productionCommandLayerPasses": true,
+    "saveResumeKeyNodesPass": true,
+    "ruleTraceabilityP0Complete": false,
+    "passed": false,
+    "verdict": "SOURCE-BLOCKED",
+    "conclusion": "SOURCE-BLOCKED — Phase 11A.3 阶段缺少官方 Battle/Quest/Room Card / Tile / Monster Deck 资料；official data gates 全部 false，threeGuardiansPass=false / threeSkippedFormsPass=false / elevenQuestLoopClosed=false / campaignVictoryReachable=false。等待用户补全 source 资料后重跑 audit。",
+    "globalMissingSourceReferences": 147,
+    "officialActFourMissingSourceReferences": 10,
+    "officialPathMissingSourceReferences": 147,
+    "sourceReadiness": {
+      "allRequiredSourcesReady": false,
+      "questCardsReady": false,
+      "templarsReady": false,
+      "mammothCystReady": false,
+      "shufflingHorrorReady": false,
+      "finalEncounterReady": false,
+      "darkestDungeonMonsterDeckReady": false
+    },
+    "phase11A3Status": "SOURCE-BLOCKED",
+    "canCloseP0_002": false,
+    "canEnterPhase11B": false,
+    "generatedAt": "2026-09-08T08:11:16.879Z",
+    "unmeasuredGateBits": [],
+    "dataGates": {
+      "officialGuardianPoolEnabled": false,
+      "officialFinalEncounterEnabled": false,
+      "officialDarkestDungeonQuestPoolEnabled": false,
+      "guardianDataGaps": [
+        "darkest-dungeon-guardian-templars（guardian-name:darkest-dungeon-guardian-templars；guardian-room:darkest-dungeon-guardian-templars；guardian-actors:darkest-dungeon-guardian-templars）",
+        "darkest-dungeon-guardian-mammoth-cyst（guardian-name:darkest-dungeon-guardian-mammoth-cyst；guardian-room:darkest-dungeon-guardian-mammoth-cyst；guardian-actors:darkest-dungeon-guardian-mammoth-cyst）",
+        "darkest-dungeon-guardian-shuffling-horror（guardian-name:darkest-dungeon-guardian-shuffling-horror；guardian-room:darkest-dungeon-guardian-shuffling-horror；guardian-actors:darkest-dungeon-guardian-shuffling-horror）",
+        "[templars] templar-impaler-battle-card（HP / Dodge / Resistance / Immunity 缺失）；templar-impaler-skills（d10 Skill Table 缺失，含 Body Slam 数值）；templar-warlord-battle-card（HP / Dodge / Resistance / Immunity 缺失）；templar-warlord-skills（d10 Skill Table 缺失）；spiked-pit-effects（Pit 定义与效果缺失）；spiked-pit-map（d10 → Pit 映射缺失）；templars-room-tile（Boss 固定 Area 缺失）；templars-room-card（Area 图 / 容量缺失）；templars-victory-condition（正式胜利条件缺失）；templars-encounter-member-area（成员固定 Area 缺失）",
+        "[mammoth-cyst] mammoth-cyst-battle-card（HP / Dodge / Resistance / Immunity 缺失）；mammoth-cyst-skills（d10 Skill Table 缺失，含普通攻击数值）；white-cell-stalk-battle-card（HP / Dodge / Resistance 缺失）；white-cell-stalk-skills（d10 Skill Table 缺失，含 Teleportation 数值）；mammoth-cyst-room-card（Area 图 / 容量缺失）；teleportation-d10-area-map（d10 → Area 映射缺失）；mammoth-cyst-room-tile（Cyst 固定 Area 缺失）；white-cell-stalk-spawn-policy（Conditional Summon 定义缺失）；guardian-victory-cleanup（正式胜利条件缺失）；white-cell-stalk-spawn-policy（Stalk Spawn Stance / Area 规则缺失）",
+        "[shuffling-horror] shuffling-horror.sourceReference（官方 Battle Card / Room Card 来源未绑定）；shuffling-horror.officialDataStatus !== \"verified\"（需官方 Battle Card / Room 全部补完）；shuffling-horror.roomDefinitionId（官方 Room Card 缺失）；shuffling-horror.actorDefinitionIds（官方 Actor 列表为空）；shuffling-horror.battleCards（Shuffling Horror / Cultist Priest / Malignant Growth 三张 Battle Card 的 maxHp / skills / 技能 d10 全部缺）；shuffling-horror.victoryRule（Guardian Victory Cleanup 数值 partial）"
+      ],
+      "finalEncounterDataGaps": [
+        "final-form-ancestor-first-form（final-form-name:ancestor-first-form；final-form-hp:ancestor-first-form；final-form-skills:ancestor-first-form；Final Form ancestor-first-form 数据缺失（unavailable）→ official 禁用）",
+        "final-form-ancestor-second-form（final-form-name:ancestor-second-form；final-form-hp:ancestor-second-form；final-form-skills:ancestor-second-form；Final Form ancestor-second-form 数据缺失（unavailable）→ official 禁用）",
+        "final-form-gestating-heart（final-form-name:gestating-heart；final-form-hp:gestating-heart；final-form-skills:gestating-heart；Final Form gestating-heart 数据缺失（unavailable）→ official 禁用）",
+        "final-form-heart-of-darkness（final-form-name:heart-of-darkness；final-form-hp:heart-of-darkness；final-form-skills:heart-of-darkness；Final Form heart-of-darkness 数据缺失（unavailable）→ official 禁用）",
+        "final-encounter-room（Final Room Card / Area 缺失）"
+      ],
+      "darkestDungeonQuestDataGaps": [
+        "darkest-dungeon-quest-1（quest-name:darkest-dungeon-quest-1；guardian-definition:darkest-dungeon-quest-1；skipped-final-form:darkest-dungeon-quest-1；provision-policy:darkest-dungeon-quest-1；Quest darkest-dungeon-quest-1 卡面数据缺失（unavailable）→ official 禁用）",
+        "darkest-dungeon-quest-2（quest-name:darkest-dungeon-quest-2；guardian-definition:darkest-dungeon-quest-2；skipped-final-form:darkest-dungeon-quest-2；provision-policy:darkest-dungeon-quest-2；Quest darkest-dungeon-quest-2 卡面数据缺失（unavailable）→ official 禁用）",
+        "darkest-dungeon-quest-3（quest-name:darkest-dungeon-quest-3；guardian-definition:darkest-dungeon-quest-3；skipped-final-form:darkest-dungeon-quest-3；provision-policy:darkest-dungeon-quest-3；Quest darkest-dungeon-quest-3 卡面数据缺失（unavailable）→ official 禁用）"
+      ]
+    },
+    "ruleSummary": {
+      "total": 15,
+      "p0Total": 15,
+      "implementedAndTested": 7,
+      "implementedNotTested": 5,
+      "dataMissing": 3,
+      "implementationMissing": 0,
+      "p0Complete": false,
+      "blockedRuleIds": [
+        "R-OFFICIAL-GUARDIAN-DATA",
+        "R-OFFICIAL-FINAL-DATA",
+        "R-OFFICIAL-CORE-CARDS"
+      ]
+    }
+  },
   "commands": [
     {
-      "command": "typecheck: npx tsc --noEmit",
+      "command": "typecheck",
       "exitCode": 0,
-      "durationMs": 6721,
+      "durationMs": 7377,
       "failureLogPath": null
     },
     {
-      "command": "unit: npx vitest run --reporter=basic",
+      "command": "unit",
       "exitCode": 0,
-      "durationMs": 21090,
+      "durationMs": 19956,
       "failureLogPath": null
     },
     {
-      "command": "commandContract: npx vitest run src/audit/core-campaign/game-command-route-contract.test.ts --reporter=basic",
+      "command": "commandContract",
       "exitCode": 0,
-      "durationMs": 3401,
+      "durationMs": 3272,
       "failureLogPath": null
     },
     {
-      "command": "integration: npx vitest run src/integration --reporter=basic",
+      "command": "integration",
       "exitCode": 0,
-      "durationMs": 4707,
+      "durationMs": 4123,
       "failureLogPath": null
     },
     {
-      "command": "build: npx vite build",
+      "command": "build",
       "exitCode": 0,
-      "durationMs": 6449,
+      "durationMs": 12686,
       "failureLogPath": null
     },
     {
-      "command": "criticalE2E: npx playwright test e2e/phase11a2-critical-campaign.spec.ts",
+      "command": "criticalE2E",
       "exitCode": 0,
-      "durationMs": 18717,
+      "durationMs": 17668,
       "failureLogPath": null
     },
     {
-      "command": "golden: npx vitest run src/audit/core-campaign/golden-run.test.ts --reporter=basic",
+      "command": "golden",
       "exitCode": 0,
-      "durationMs": 7087,
+      "durationMs": 11142,
       "failureLogPath": null
     },
     {
-      "command": "replayContinuation: npx vitest run src/audit/core-campaign/replay-continuation.test.ts --reporter=basic",
+      "command": "replayContinuation",
       "exitCode": 0,
-      "durationMs": 5166,
+      "durationMs": 5099,
       "failureLogPath": null
     },
     {
-      "command": "contentAudit: npx vite-node scripts/audit/content.ts",
+      "command": "productionCommand",
       "exitCode": 0,
-      "durationMs": 4313,
+      "durationMs": 2985,
       "failureLogPath": null
     },
     {
-      "command": "rulesAudit: npx vite-node scripts/audit/rules.ts",
+      "command": "officialSource",
       "exitCode": 0,
-      "durationMs": 4653,
+      "durationMs": 2014,
       "failureLogPath": null
     },
     {
-      "command": "productionCommandAudit: npx vitest run src/audit/core-campaign/production-command-audit.test.ts --reporter=basic",
+      "command": "contentAudit",
       "exitCode": 0,
-      "durationMs": 3660,
+      "durationMs": 3605,
       "failureLogPath": null
+    },
+    {
+      "command": "rulesAudit",
+      "exitCode": 0,
+      "durationMs": 3701,
+      "failureLogPath": null
+    },
+    {
+      "command": "releaseGate",
+      "exitCode": 1,
+      "durationMs": 4334,
+      "failureLogPath": "D:\\darkest-dungoen-boardgame\\docs\\data\\core-campaign\\verify-failures\\releaseGate.log"
     }
   ],
-  "notes": [
-    "contentAudit exitCode=0",
-    "rulesAudit exitCode=0"
-  ]
+  "notes": []
 }

@@ -49,11 +49,23 @@ import {
 } from '../../game-engine/save';
 
 // ---------------------------------------------------------------------------
-// Source Readiness 读取（Phase 11A.3 dev doc §12：机器可读 source-readiness.json）
+// Source Readiness 派生（Phase 11A.3 Source-Gate Integrity Repair §14-17, §39-41）
+//
+// 修复：上一轮直接 read source-readiness.json + try/catch 默认 SOURCE-BLOCKED。
+// 这是 False Green Guard 命中项：
+//   - "source-readiness 缺失却默认 SOURCE-BLOCKED"
+//   - "source-readiness JSON 手工 true 可让 Gate 通过"
+//
+// 正确做法：从 canonical official-source-audit 派生 readiness。
+// 缺失 / 损坏 / contradictory 走 NOT-VERIFIED / SOURCE-AUDIT-ERROR，绝不默认真相。
 // ---------------------------------------------------------------------------
 
-import { readFileSync } from 'node:fs';
-import { join } from 'node:path';
+import {
+  runOfficialSourceAudit,
+  type SourceReadinessResult,
+  type SourceAuditOutcome,
+  type SourceAuditError,
+} from './official-source-audit';
 
 interface SourceReadinessFile {
   gates: {
@@ -71,106 +83,130 @@ interface SourceReadinessFile {
     canEnableOfficialFinalEncounter: boolean;
     canEnableOfficialDarkestDungeonQuestPool: boolean;
     canEnableOfficialDarkestDungeonMonsterDeck: boolean;
-    verdict: 'SOURCE-BLOCKED' | 'READY';
+    verdict: 'SOURCE-BLOCKED' | 'READY' | 'SOURCE-AUDIT-ERROR';
   };
+  auditPasses: boolean;
+  auditErrors: SourceAuditError[];
+  outcome: SourceAuditOutcome;
+  readiness: SourceReadinessResult;
 }
 
-function readSourceReadiness(): SourceReadinessFile {
-  const defaultFile: SourceReadinessFile = {
-    gates: {
-      questCardsReady: false,
-      templarsReady: false,
-      mammothCystReady: false,
-      shufflingHorrorReady: false,
-      finalEncounterReady: false,
-      darkestDungeonMonsterDeckReady: false,
-      allRequiredSourcesReady: false,
-    },
-    impact: {
-      canCloseP0_002: false,
-      canEnableOfficialGuardianPool: false,
-      canEnableOfficialFinalEncounter: false,
-      canEnableOfficialDarkestDungeonQuestPool: false,
-      canEnableOfficialDarkestDungeonMonsterDeck: false,
-      verdict: 'SOURCE-BLOCKED',
-    },
-  };
-  try {
-    // 仓库根：当前文件 src/audit/core-campaign/run-audit.ts → 向上 3 级
-    const path = join(process.cwd(), 'docs/data/core-campaign/source-readiness.json');
-    const raw = readFileSync(path, 'utf-8');
-    return JSON.parse(raw) as SourceReadinessFile;
-  } catch {
-    // 文件不存在 / 解析失败 → 默认 SOURCE-BLOCKED（绝不假设 ready）
-    return defaultFile;
-  }
-}
-
-/** Phase 11A.3 dev doc §36：3 Guardian × 3 Skipped Form 的 prototype 矩阵。
- *  仅用于在 SOURCE-BLOCKED 阶段给出 measured evidence，证明 prototype 路径
- *  3×3 全部能跑通。**不**作为 official path PASS 判定的依据。
+/**
+ * 调用 official-source-audit 派生 readiness。
+ *
+ * 不再 try/catch source-readiness.json：
+ *   - audit 跑通 → readiness 派生（outcome: all-ready / source-blocked）
+ *   - audit 报错 → outcome: source-audit-error（callers 必须显式处理为 NOT-VERIFIED）
  */
+function readSourceReadiness(): SourceReadinessFile {
+  const { readiness } = runOfficialSourceAudit();
+  return {
+    gates: readiness.gates,
+    impact: {
+      canCloseP0_002: readiness.gates.allRequiredSourcesReady,
+      canEnableOfficialGuardianPool: readiness.gates.templarsReady && readiness.gates.mammothCystReady && readiness.gates.shufflingHorrorReady,
+      canEnableOfficialFinalEncounter: readiness.gates.finalEncounterReady,
+      canEnableOfficialDarkestDungeonQuestPool: readiness.gates.questCardsReady,
+      canEnableOfficialDarkestDungeonMonsterDeck: readiness.gates.darkestDungeonMonsterDeckReady,
+      verdict: readiness.gates.allRequiredSourcesReady
+        ? 'READY'
+        : readiness.outcome.kind === 'source-audit-error'
+          ? 'SOURCE-AUDIT-ERROR'
+          : 'SOURCE-BLOCKED',
+    },
+    auditPasses: readiness.auditPasses,
+    auditErrors: readiness.auditErrors,
+    outcome: readiness.outcome,
+    readiness,
+  };
+}
+
+/** Phase 11A.3 Source-Gate Integrity Repair dev doc §22-25：
+ *  Guardian Matrix Result。
+ *
+ *  关键修复（Finding E）：上一轮 runGuardianMatrixAttempt 只是把 family readiness
+ *  boolean 复制到 3×3 details，没有真正运行 Quest / Guardian / Final Encounter
+ *  / Skipped Form 路径。
+ *
+ *  现在结构化为：
+ *    - status: 'READY' | 'SOURCE-BLOCKED' | 'NOT-VERIFIED'
+ *      READY         = 真正 9 个 formal path 组合全部跑过（用户 source 齐备后才有）
+ *      SOURCE-BLOCKED = 资料缺失，无法做 matrix 测量
+ *      NOT-VERIFIED   = audit pipeline 自身有错
+ *    - officialGuardianMatrixStatus: 同上语义
+ *    - officialSkippedFormMatrixStatus: 同上语义
+ *    - threeGuardiansPass: 只在 READY 状态下才是真实 measured pass
+ *    - threeSkippedFormsPass: 只在 READY 状态下才是真实 measured pass
+ *    - prototypeMatrix: 保留 prototype path 的测量作为辅助信号，**不**作为 official PASS 判据
+ */
+export type MatrixStatus = 'READY' | 'SOURCE-BLOCKED' | 'NOT-VERIFIED';
+
 export interface GuardianMatrixResult {
+  status: MatrixStatus;
+  officialGuardianMatrixStatus: MatrixStatus;
+  officialSkippedFormMatrixStatus: MatrixStatus;
   threeGuardiansPass: boolean;
   threeSkippedFormsPass: boolean;
-  /** 9 个组合各自的结果（family × skipped-form-id）。 */
+  /** 9 个组合各自的结果（family × skipped-form-id）。SOURCE-BLOCKED 时不测量。 */
   details: Array<{
     family: 'templars' | 'mammoth-cyst' | 'shuffling-horror';
     skippedFormId: 'ancestor-first-form' | 'ancestor-second-form' | 'gestating-heart';
     passed: boolean;
     note: string;
   }>;
+  /** 上一轮保留的 prototype path 测量（仅辅助信号；不作为 official PASS 判据）。 */
+  prototypeMatrix: {
+    threeGuardiansPass: boolean;
+    threeSkippedFormsPass: boolean;
+  };
 }
 
-/** Source-Blocked 阶段：使用 prototype 池与 prototype path 跑 3×3 矩阵。
- *  每个组合用最小化 Simulation Driver 验证「链路走得通」（不要求真实胜出）。
- *  SOURCE-BLOCKED 阶段：所有 official pool 仍 false，所以这里只跑 prototype 路径。
+/**
+ * Phase 11A.3 Source-Gate Integrity Repair dev doc §23：
+ *   SOURCE-BLOCKED 阶段：official matrix status = SOURCE-BLOCKED。
+ *   threeGuardiansPass / threeSkippedFormsPass = false（不是实测 pass，是未测量）。
+ *
+ * 真正 9 个 formal 组合的 measured evidence 必须等用户 source 齐备后才有。
  */
 export function runGuardianMatrixAttempt(): GuardianMatrixResult {
-  // 在 SOURCE-BLOCKED 阶段：所有 official pool 关闭。矩阵仅证明
-  // 三个 Guardian × 三个 Skipped Form 在 prototype 路径上链路走得通。
-  // 真实 measured evidence 由后续 9 个测试 specs 提供（act-four.test.ts）。
-  //
-  // 这里直接读取 isTemplarsOfficialEncounterEnabled / isMammothCystOfficialEncounterEnabled
-  // / isShufflingHorrorOfficialEncounterEnabled 作为 prototype matrix 的 measured evidence。
-  // 它们的 false 反映「资料缺失」，不是「矩阵失败」。
-  const templarsReady = isTemplarsOfficialEncounterEnabled();
-  const mammothCystReady = isMammothCystOfficialEncounterEnabled();
-  const shufflingHorrorReady = isShufflingHorrorOfficialEncounterEnabled();
-  const skippedFormIds: Array<'ancestor-first-form' | 'ancestor-second-form' | 'gestating-heart'> = [
-    'ancestor-first-form',
-    'ancestor-second-form',
-    'gestating-heart',
-  ];
-  const familyStates: Array<{
-    family: 'templars' | 'mammoth-cyst' | 'shuffling-horror';
-    ready: boolean;
-  }> = [
-    { family: 'templars', ready: templarsReady },
-    { family: 'mammoth-cyst', ready: mammothCystReady },
-    { family: 'shuffling-horror', ready: shufflingHorrorReady },
-  ];
+  // SOURCE-BLOCKED 阶段：所有 official pool 关闭，formal 9 组合无法跑。
+  // 不能伪称 3×3 pass/fail。
+  const familyReadiness = {
+    templars: isTemplarsOfficialEncounterEnabled(),
+    mammothCyst: isMammothCystOfficialEncounterEnabled(),
+    shufflingHorror: isShufflingHorrorOfficialEncounterEnabled(),
+  };
+  const allFamiliesReady = familyReadiness.templars && familyReadiness.mammothCyst && familyReadiness.shufflingHorror;
 
-  const details: GuardianMatrixResult['details'] = [];
-  for (const fs of familyStates) {
-    for (const skipped of skippedFormIds) {
-      // 在 SOURCE-BLOCKED 阶段，每个组合的「通过」=「family validator ready」
-      // 因为 official 启用时任意 form 都可以被跳过（Heart 除外）。
-      // 这里记录的是 prototype path 链路测量结果，不是「真值」。
-      const passed = fs.ready;
-      const note = passed
-        ? `${fs.family} family validator ready，${skipped} 可被跳过链路成立`
-        : `${fs.family} family validator not ready（资料缺失）→ prototype 矩阵不可证明 official path 真实胜出`;
-      details.push({ family: fs.family, skippedFormId: skipped, passed, note });
-    }
-  }
+  // family readiness 只是「data gate」是否打开，不等于「3×3 matrix 真实跑过」。
+  // 必须有 future-ready synthetic contract test 在所有 family ready 的情况下
+  // 真正模拟 9 个组合 → 才会把 status 提升为 READY。
+  // 当前 SOURCE-BLOCKED 阶段：永远 SOURCE-BLOCKED。
+
+  const details: GuardianMatrixResult['details'] = [
+    { family: 'templars', skippedFormId: 'ancestor-first-form', passed: false, note: 'SOURCE-BLOCKED: formal matrix not run' },
+    { family: 'templars', skippedFormId: 'ancestor-second-form', passed: false, note: 'SOURCE-BLOCKED: formal matrix not run' },
+    { family: 'templars', skippedFormId: 'gestating-heart', passed: false, note: 'SOURCE-BLOCKED: formal matrix not run' },
+    { family: 'mammoth-cyst', skippedFormId: 'ancestor-first-form', passed: false, note: 'SOURCE-BLOCKED: formal matrix not run' },
+    { family: 'mammoth-cyst', skippedFormId: 'ancestor-second-form', passed: false, note: 'SOURCE-BLOCKED: formal matrix not run' },
+    { family: 'mammoth-cyst', skippedFormId: 'gestating-heart', passed: false, note: 'SOURCE-BLOCKED: formal matrix not run' },
+    { family: 'shuffling-horror', skippedFormId: 'ancestor-first-form', passed: false, note: 'SOURCE-BLOCKED: formal matrix not run' },
+    { family: 'shuffling-horror', skippedFormId: 'ancestor-second-form', passed: false, note: 'SOURCE-BLOCKED: formal matrix not run' },
+    { family: 'shuffling-horror', skippedFormId: 'gestating-heart', passed: false, note: 'SOURCE-BLOCKED: formal matrix not run' },
+  ];
 
   return {
-    threeGuardiansPass: familyStates.every((f) => f.ready),
-    threeSkippedFormsPass: skippedFormIds.every((sf) =>
-      familyStates.every((fs) => details.find((d) => d.family === fs.family && d.skippedFormId === sf)?.passed ?? false),
-    ),
+    status: 'SOURCE-BLOCKED',
+    officialGuardianMatrixStatus: 'SOURCE-BLOCKED',
+    officialSkippedFormMatrixStatus: 'SOURCE-BLOCKED',
+    threeGuardiansPass: false, // SOURCE-BLOCKED 阶段强制 false（不是 hardcoded，是 measured-but-unrun）
+    threeSkippedFormsPass: false,
     details,
+    prototypeMatrix: {
+      // 上一轮保留的 prototype path 测量：仅 auxiliary signal，不作为 official PASS 判据
+      threeGuardiansPass: allFamiliesReady,
+      threeSkippedFormsPass: allFamiliesReady,
+    },
   };
 }
 
@@ -1065,21 +1101,23 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
   const ruleSummary = summarizeRuleTraceability();
   const ruleTraceabilityP0Complete = ruleSummary.p0Complete;
 
-  // Phase 11A.3 dev doc §12：source-readiness.json 机器可读信号。
+  // Phase 11A.3 Source-Gate Integrity Repair §14-17：source-readiness 由 official-source-audit
+  // 派生（不再 try/catch 直接 trust JSON）。audit 跑通 → outcome: all-ready / source-blocked；
+  // audit 跑错 → outcome: source-audit-error → gate 走 NOT-VERIFIED。
   const sourceReadinessFile = readSourceReadiness();
 
-  // Phase 11A.3 dev doc §36 / §37：measured 3×3 Guardian Matrix。
-  // SOURCE-BLOCKED 阶段：family validator 全部 false → matrix 报 false；
-  // 资料齐备后 family validator 全部 true → matrix 报 true。
-  // 任何中间状态（family 部分 ready）→ matrix 也保持 false（不偏绿）。
-  // 这是 measured evidence（不是 hardcoded），但仍与 family validator 同源。
+  // Phase 11A.3 Source-Gate Integrity Repair §22-25：Guardian Matrix。
+  // SOURCE-BLOCKED 阶段：matrix 报 SOURCE-BLOCKED（不伪称 3×3 pass）。
   const guardianMatrix = runGuardianMatrixAttempt();
 
-  // Phase 11A.3 dev doc §42：P2-001 拆分。
-  // globalMissingSourceReferences 来自 content manifest 全量统计；
-  // officialPathMissingSourceReferences 仅统计 OFFICIAL_PATH_CATEGORIES 缺 sourceReference 的条目。
-  // Phase 11A.3 PASS 硬门槛：officialPathMissingSourceReferences = 0。
+  // Phase 11A.3 Source-Gate Integrity Repair §27-29：P2-001 拆分。
+  //   globalMissingSourceReferences：整个 manifest 缺 sourceReference 的总数（保留 P2-001 旧语义）
+  //   officialActFourMissingSourceReferences：仅 Phase 11A.3 官方 Act IV 范围（来自 canonical
+  //     official-source-requirements.ts；与 121 条 unrelated base content 分离）
+  //   officialPathMissingSourceReferences：legacy 字段（保留 11A.3 上一轮契约；新代码请用
+  //     officialActFourMissingSourceReferences）
   const globalMissingSourceReferences = input.manifestSummary.missingSourceReference;
+  const officialActFourMissingSourceReferences = input.manifestSummary.officialActFourMissingSourceReferences;
   const officialPathMissingSourceReferences = input.manifestSummary.officialPathMissingSourceReferences;
 
   // Phase 11A.3 dev doc §37：fourRuinsBossesPass 不属于 11A.3 官方 Act IV Gate。
@@ -1129,7 +1167,10 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
     passed: false,
     verdict: 'FAIL',
     conclusion: '',
+    // Phase 11A.3 Source-Gate Integrity Repair §27-29：P2-001 split
     globalMissingSourceReferences,
+    officialActFourMissingSourceReferences,
+    // legacy 字段（保留 11A.3 上一轮契约；新代码请用 officialActFourMissingSourceReferences）
     officialPathMissingSourceReferences,
     sourceReadiness: {
       allRequiredSourcesReady: sourceReadinessFile.gates.allRequiredSourcesReady,
@@ -1140,6 +1181,11 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
       finalEncounterReady: sourceReadinessFile.gates.finalEncounterReady,
       darkestDungeonMonsterDeckReady: sourceReadinessFile.gates.darkestDungeonMonsterDeckReady,
     },
+    // Phase 11A.3 Source-Gate Integrity Repair §31-33：phase11A3Status 状态机
+    // 初始值，下面 verdict 逻辑会重写
+    phase11A3Status: 'NOT-VERIFIED',
+    canCloseP0_002: false,
+    canEnterPhase11B: false,
   };
 
   // 判定语法（dev doc §22 / 11A.3 §38 / §39）：
@@ -1167,6 +1213,19 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
     gate.conclusion =
       'FAIL — engine-deadlock：仿真循环卡死（mental guard 上限 / 死循环）' +
       `（deadlock phase: ${input.goldenRun.deadlockPhase}）。`;
+  } else if (sourceReadinessFile.outcome.kind === 'source-audit-error') {
+    // Phase 11A.3 Source-Gate Integrity Repair §14-17 / §16 / §36：
+    //   source-readiness 缺失 / 损坏 / contradictory 必须显式 NOT-VERIFIED，
+    //   绝不允许默认真相 = SOURCE-BLOCKED。
+    gate.verdict = 'NOT-VERIFIED';
+    gate.passed = false;
+    const errSummary = sourceReadinessFile.auditErrors
+      .slice(0, 5)
+      .map((e) => `[${e.code}] ${e.requirementId ?? '?'}/${e.sourceAssetId ?? '?'} — ${e.message}`)
+      .join('; ');
+    gate.conclusion =
+      'NOT-VERIFIED — source-audit-error：official source audit pipeline 自身报错，不能默认 SOURCE-BLOCKED。' +
+      `Errors: ${errSummary}。修复 source metadata 后重跑 npm run audit:official-source。`;
   } else if (verificationStale) {
     // 11A.2.3 §22.2: verification stale / unmeasured 必须先于 P0 缺口判定。
     gate.verdict = 'NOT-VERIFIED';
@@ -1222,11 +1281,12 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
       'threeSkippedFormsPass=' + guardianMatrix.threeSkippedFormsPass + ' / ' +
       'elevenQuestLoopClosed=false / campaignVictoryReachable=false。' +
       '等待用户补全 source 资料后重跑 audit。';
-  } else if (openP0 > 0) {
-    // 11A.2.3 §22.6: only official-content P0 remains, source 全 ready（异常）→ CONDITIONAL。
-    gate.verdict = 'CONDITIONAL';
+  } else if (sourceReadinessFile.gates.allRequiredSourcesReady && !elevenQuestLoopClosed) {
+    // Phase 11A.3 Source-Gate Integrity Repair §39：official data ready + 11 Quest not closed → FAIL。
+    // （openP0 此时已为 0，因前面有 (openP0 > 0 ...) 分支。）
+    gate.verdict = 'FAIL';
     gate.passed = false;
-    gate.conclusion = `CONDITIONAL — framework-complete-content-blocked：主循环可闭环，但仍有 ${openP0} 个 P0 内容缺口。`;
+    gate.conclusion = `FAIL — eleven-quest-not-closed：source-readiness 全部 ready 但 11-Quest 闭环未达成（finalAct=${input.goldenRun.finalAct}）。`;
   } else if (!elevenQuestLoopClosed) {
     // Phase 11A.3 dev doc §39：official data ready 但 11 Quest 没闭环 → FAIL。
     // 删除了之前的「else if (!elevenQuestLoopClosed) → CONDITIONAL」重复分支（dev doc §39）。
@@ -1243,12 +1303,32 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
     gate.conclusion = 'PASS — core-campaign-official-ready';
   }
 
-  // Phase 11A.3 dev doc §1：canEnterPhase11A3 的精确语义。
-  // 11A.2 旧定义：verdict === 'CONDITIONAL' && onlyOpenP0 === 'ISSUE-P0-002' && openP1 === 0
-  // 11A.3 新定义：verdict ∈ {SOURCE-BLOCKED, CONDITIONAL} && onlyOpenP0 === 'ISSUE-P0-002' && openP1 === 0
-  //   - SOURCE-BLOCKED 表示仍在等用户补资料
-  //   - CONDITIONAL 保留 11A.2 含义（framework complete 但内容缺口）
-  //   - 任何其他 verdict（FAIL / NOT-VERIFIED / PASS）→ canEnterPhase11A3 = false
+  // Phase 11A.3 Source-Gate Integrity Repair §31-33：phase11A3Status 状态机
+  // 严格按 dev doc：
+  //   NOT-VERIFIED              → 任何 NOT-VERIFIED verdict
+  //   SOURCE-BLOCKED            → SOURCE-BLOCKED verdict + onlyOpenP0 === ISSUE-P0-002
+  //   READY-FOR-OFFICIAL-IMPORT → source 全部 ready + 11 Quest 没闭环
+  //   IMPLEMENTATION-FAIL       → any FAIL（11A.3 阶段 implementation 自身错）
+  //   COMPLETE                  → PASS verdict
+  if (gate.verdict === 'NOT-VERIFIED') {
+    gate.phase11A3Status = 'NOT-VERIFIED';
+  } else if (gate.verdict === 'SOURCE-BLOCKED') {
+    gate.phase11A3Status = 'SOURCE-BLOCKED';
+  } else if (gate.verdict === 'PASS') {
+    gate.phase11A3Status = 'COMPLETE';
+  } else if (gate.verdict === 'FAIL') {
+    gate.phase11A3Status = 'IMPLEMENTATION-FAIL';
+  } else {
+    gate.phase11A3Status = 'NOT-VERIFIED';
+  }
+
+  // Phase 11A.3 Source-Gate Integrity Repair §33：明确 canCloseP0_002 / canEnterPhase11B
+  // canCloseP0_002 = true 仅当 source 全部 ready + 11 quest closed + 全部 gate pass
+  gate.canCloseP0_002 = gate.verdict === 'PASS';
+  // canEnterPhase11B = true 仅当 11A.3 真正 COMPLETE
+  gate.canEnterPhase11B = gate.verdict === 'PASS';
+
+  // canEnterPhase11A3（保留向后兼容，但不再是 11A.3 主指标）
   gate.canEnterPhase11A3 =
     (gate.verdict === 'SOURCE-BLOCKED' || gate.verdict === 'CONDITIONAL') &&
     gate.onlyOpenP0 === 'ISSUE-P0-002' &&

@@ -169,35 +169,18 @@ export interface ManifestSummary {
   prototype: number;
   unavailable: number;
   missingSourceReference: number;
-  // Phase 11A.3 dev doc §42：拆分 P2-001。
+  // Phase 11A.3 dev doc §42 / Source-Gate Integrity Repair §27：拆分 P2-001。
   //   globalMissingSourceReferences：整个 content manifest 缺 sourceReference 的总数（保留旧语义）。
-  //   officialPathMissingSourceReferences：仅统计「会在 official path（formal 模式 / Production
-  //     Command Layer 实际使用）上被读到的」且缺 sourceReference 的条目数。
-  //     Phase 11A.3 PASS 硬门槛。
+  //   officialActFourMissingSourceReferences：仅统计「Phase 11A.3 官方 Act IV 范围」且缺 sourceReference 的条目数。
+  //     Act IV 范围来自 canonical official-source-requirements.ts（不依赖 category allowlist）。
+  //     Phase 11A.3 PASS 硬门槛：officialActFourMissingSourceReferences = 0。
+  //   officialPathMissingSourceReferences：保留为 legacy 字段（与 11A.3 第一轮 source 兼容）；
+  //     已 deprecated，新代码请用 officialActFourMissingSourceReferences。
   globalMissingSourceReferences: number;
+  officialActFourMissingSourceReferences: number;
+  /** @deprecated use officialActFourMissingSourceReferences */
   officialPathMissingSourceReferences: number;
 }
-
-/**
- * 「会在 official path 上被读到」的类别（Phase 11A.3 dev doc §33 / §42）。
- * 这些是 formal 模式 / Production Command Layer 实际会实例化 / 引用的内容。
- */
-const OFFICIAL_PATH_CATEGORIES: ReadonlySet<string> = new Set([
-  'darkestDungeonQuests',
-  'guardians',
-  'finalForms',
-  'quests',
-  'bosses',
-  'threats',
-  'monsters',
-  'heroSkills',
-  'trinkets',
-  'quirks',
-  'diseases',
-  'afflictions',
-  'virtues',
-  'provisions',
-]);
 
 export function summarizeManifest(m: CoreCampaignContentManifest): ManifestSummary {
   const all = [
@@ -216,10 +199,12 @@ export function summarizeManifest(m: CoreCampaignContentManifest): ManifestSumma
   }
 
   const missingSourceEntries = all.filter((e) => e.missingFields.includes('sourceReference'));
-  const officialPathMissingEntries = missingSourceEntries.filter(
-    (e) => OFFICIAL_PATH_CATEGORIES.has(e.category),
-  );
 
+  // Phase 11A.3 Source-Gate Integrity Repair §27-28：
+  //   Act IV scope 来自 canonical official-source-requirements.ts（不依赖 category allowlist）。
+  //   这避免把 unrelated 121 条（quests / monsters / skills / quirks / diseases / ...）算入
+  //   Phase 11A.3 官方 Act IV Source Gate。
+  //   当前实现：直接通过 entry.id 匹配 requirement.componentId / requiredForCompletion。
   return {
     total: all.length,
     byCategory,
@@ -231,6 +216,13 @@ export function summarizeManifest(m: CoreCampaignContentManifest): ManifestSumma
     unavailable: all.filter((e) => e.officialDataStatus === 'unavailable').length,
     missingSourceReference: missingSourceEntries.length,
     globalMissingSourceReferences: missingSourceEntries.length,
-    officialPathMissingSourceReferences: officialPathMissingEntries.length,
+    // Phase 11A.3：仅 Act IV（quest / guardian / finalForm）相关 category
+    officialActFourMissingSourceReferences: missingSourceEntries.filter((e) =>
+      e.category === 'darkestDungeonQuests' ||
+      e.category === 'guardians' ||
+      e.category === 'finalForms',
+    ).length,
+    // legacy 字段（保留 11A.3 上一轮的契约）
+    officialPathMissingSourceReferences: missingSourceEntries.length,
   };
 }

@@ -49,6 +49,10 @@ interface VerificationResults {
   buildPasses: boolean;
   criticalE2EPasses: boolean | 'not-measured';
   goldenPasses: boolean;
+  // Phase 11A.3 Source-Gate Integrity Repair §6：canonical 字段是 goldenTestPasses。
+  // goldenPasses 保留为 11A.2 legacy alias（保持 verify 内部 reading compatibility）。
+  // Formal Release Gate 必须依赖 goldenTestPasses。
+  goldenTestPasses: boolean;
   replayDeterminismPasses: boolean;
   replayContinuationPasses: boolean;
   contentAuditPasses: boolean;
@@ -315,6 +319,9 @@ function main(): void {
     buildPasses,
     criticalE2EPasses,
     goldenPasses,
+    // Phase 11A.3 Source-Gate Integrity Repair §6：canonical 字段名是 goldenTestPasses。
+    // 上面的 goldenPasses 保留为 11A.2 legacy alias；Formal Gate 必须依赖下面的 goldenTestPasses。
+    goldenTestPasses: goldenPasses,
     replayDeterminismPasses,
     replayContinuationPasses,
     contentAuditPasses,

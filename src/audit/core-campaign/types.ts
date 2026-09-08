@@ -190,6 +190,15 @@ export interface ReleaseGateResult {
   productionCommandLayerPasses: boolean;
   ruleTraceabilityP0Complete: boolean;
   passed: boolean;
+  // Phase 11A.3 Source-Gate Integrity Repair dev doc §31-33：phase11A3Status 状态机
+  //   NOT-VERIFIED             = audit pipeline 自身未跑 / pipeline 错
+  //   SOURCE-BLOCKED           = 资料缺失（仅 P0-002 缺口 + engineering gates 全部 pass）
+  //   READY-FOR-OFFICIAL-IMPORT = 用户 source 已 ready，待正式 import
+  //   IMPLEMENTATION-FAIL      = 11A.3 阶段 implementation 自身错
+  //   COMPLETE                 = 11A.3 终态：source ready + 11 quest closed + 全部 gate pass
+  phase11A3Status: 'NOT-VERIFIED' | 'SOURCE-BLOCKED' | 'READY-FOR-OFFICIAL-IMPORT' | 'IMPLEMENTATION-FAIL' | 'COMPLETE';
+  canCloseP0_002: boolean;
+  canEnterPhase11B: boolean;
   // Phase 11A.2.3 §22：NOT-VERIFIED 表示 verification-results.json stale 或 critical E2E
   // 未测量；必须先于 CONDITIONAL 判定（Content Blocked 不可遮住 Test Gate 失败）。
   // Phase 11A.3 dev doc §1 / §38：新增 SOURCE-BLOCKED 终态，区分「资料缺失导致的
@@ -203,6 +212,10 @@ export interface ReleaseGateResult {
   // PASS 判定的硬门槛。
   globalMissingSourceReferences: number;
   officialPathMissingSourceReferences: number;
+  // Phase 11A.3 Source-Gate Integrity Repair §27-29：新增 canonical Act IV scope 字段。
+  // Act IV 范围来自 official-source-requirements.ts，不依赖 category allowlist。
+  // Phase 11A.3 PASS 硬门槛：officialActFourMissingSourceReferences = 0。
+  officialActFourMissingSourceReferences: number;
   // Phase 11A.3 dev doc §12：Source Gate 0 的机器可读信号（实时来自 source-readiness.json）。
   sourceReadiness: {
     allRequiredSourcesReady: boolean;

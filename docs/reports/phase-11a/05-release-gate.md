@@ -4,7 +4,7 @@
 
 ## 最终判定
 
-# NOT-VERIFIED — verification-results.json stale or unmeasured；跑 npm run verify:phase11a2-3 重新生成。
+# SOURCE-BLOCKED — Phase 11A.3 阶段缺少官方 Battle/Quest/Room Card / Tile / Monster Deck 资料；official data gates 全部 false，threeGuardiansPass=false / threeSkippedFormsPass=false / elevenQuestLoopClosed=false / campaignVictoryReachable=false。等待用户补全 source 资料后重跑 audit。
 
 ## 门禁明细
 
