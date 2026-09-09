@@ -4,7 +4,7 @@
 
 ## 最终判定
 
-# NOT-VERIFIED — criticalE2EPasses=false；Playwright E2E 必须真实跑过 6 spec 才能算 verified。
+# SOURCE-BLOCKED — Phase 11A.3 阶段缺少官方 Battle/Quest/Room Card / Tile / Monster Deck 资料；official data gates 全部 false，threeGuardiansPass=false / threeSkippedFormsPass=false / elevenQuestLoopClosed=false / campaignVictoryReachable=false。等待用户补全 source 资料后重跑 audit。
 
 ## 门禁明细
 

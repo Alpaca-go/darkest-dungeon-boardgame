@@ -807,7 +807,12 @@ export function runOfficialSourceAudit(options: AuditOptions = {}): {
     }));
 
   // Input hash
-  const inputHash = computeAuditInputHash(resolved, allErrors);
+  const inputHash = computeAuditInputHash(
+    OFFICIAL_SOURCE_REQUIREMENTS,
+    documentsByReq,
+    allErrors,
+    options.rulebookPath ?? join(repoRoot, TIER_A_RULEBOOK_PATH),
+  );
 
   const invalidCount = resolved.filter((r) => r.status === 'invalid').length;
   const missingCount = summary.missingRequirements;
@@ -833,11 +838,31 @@ export function runOfficialSourceAudit(options: AuditOptions = {}): {
   return { readiness, summary, resolvedRequirements: resolved };
 }
 
-function computeAuditInputHash(resolved: ResolvedRequirement[], errors: SourceAuditError[]): string {
+function computeAuditInputHash(
+  requirements: OfficialSourceRequirement[],
+  documentsByReq: Map<string, OfficialSourceDocument[]>,
+  errors: SourceAuditError[],
+  rulebookPath: string,
+): string {
   const h = createHash('sha256');
-  h.update(JSON.stringify(resolved.map((r) => [r.requirementId, r.status, r.missingFields.length])));
+  // Hash canonical requirements and every source-bearing field, not only the
+  // completeness outcome. This makes a data/provenance edit observable even
+  // when its requirement remains "available".
+  h.update(JSON.stringify(requirements.map((r) => ({
+    requirementId: r.requirementId, componentId: r.componentId, componentType: r.componentType,
+    quantity: r.quantity, requiredFields: r.requiredFields, requiredForCompletion: r.requiredForCompletion,
+  })).sort((a, b) => a.requirementId.localeCompare(b.requirementId))));
   h.update('\0');
-  h.update(JSON.stringify(errors.map((e) => [e.code, e.requirementId, e.sourceAssetId])));
+  const documents = [...documentsByReq.entries()].flatMap(([requirementId, docs]) => docs.map((doc) => ({
+    requirementId, sourceAssetId: doc.sourceAssetId, componentId: doc.componentId,
+    sourceType: doc.sourceType, sourceReference: doc.sourceReference, checksum: doc.checksum ?? null,
+    extractedFields: doc.extractedFields, fieldProvenance: doc.fieldProvenance ?? {},
+  }))).sort((a, b) => `${a.requirementId}\0${a.sourceAssetId}`.localeCompare(`${b.requirementId}\0${b.sourceAssetId}`));
+  h.update(JSON.stringify(documents));
+  h.update('\0');
+  h.update(existsSync(rulebookPath) ? readFileSync(rulebookPath) : 'RULEBOOK-MISSING');
+  h.update('\0');
+  h.update(JSON.stringify(errors.map((e) => [e.code, e.requirementId, e.sourceAssetId]).sort()));
   h.update('\0');
   return h.digest('hex');
 }

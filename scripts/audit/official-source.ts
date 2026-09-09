@@ -82,40 +82,11 @@ function writeManifest(resolvedByReq: Map<string, ResolvedRequirement>, summary:
     return buildManifestEntry(req, r);
   });
 
-  // The audit result is computed once. Serializers must never recalculate it.
+  // The audit result is computed once. Serializers must never recalculate or
+  // mutate it: this file is deliberately a read-only projection layer.
   const allTierAReady = tierA.every(
     (r) => resolvedByReq.get(r.requirementId)?.status === 'available',
   );
-  summary.availableRequirements = OFFICIAL_SOURCE_REQUIREMENTS.filter(
-    (r) => resolvedByReq.get(r.requirementId)?.status === 'available',
-  ).length;
-  summary.partialRequirements = OFFICIAL_SOURCE_REQUIREMENTS.filter(
-    (r) => resolvedByReq.get(r.requirementId)?.status === 'partial',
-  ).length;
-  summary.missingRequirements = OFFICIAL_SOURCE_REQUIREMENTS.filter(
-    (r) => resolvedByReq.get(r.requirementId)?.status === 'missing' && r.componentGroup !== 'rulebook',
-  ).length;
-  // Never overwrite the audit result in the serializer. Missing source is valid
-  // SOURCE-BLOCKED evidence; malformed source must remain auditPasses=false.
-
-  const requiredResolved = OFFICIAL_SOURCE_REQUIREMENTS.filter((r) => r.requiredForCompletion);
-  const optionalResolved = OFFICIAL_SOURCE_REQUIREMENTS.filter((r) => !r.requiredForCompletion);
-  summary.requiredAvailableCount = requiredResolved.filter(
-    (r) => resolvedByReq.get(r.requirementId)?.status === 'available',
-  ).length;
-  summary.requiredMissingCount = requiredResolved.filter(
-    (r) => resolvedByReq.get(r.requirementId)?.status === 'missing',
-  ).length;
-  summary.requiredPartialCount = requiredResolved.filter(
-    (r) => resolvedByReq.get(r.requirementId)?.status === 'partial',
-  ).length;
-  summary.optionalMissingCount = optionalResolved.filter(
-    (r) => resolvedByReq.get(r.requirementId)?.status === 'missing',
-  ).length;
-  summary.optionalPartialCount = optionalResolved.filter(
-    (r) => resolvedByReq.get(r.requirementId)?.status === 'partial',
-  ).length;
-
   const manifest = {
     $schema: 'phase-11a3-source-gate-final-acceptance/official-source-manifest.v3',
     generatedAt: new Date().toISOString(),

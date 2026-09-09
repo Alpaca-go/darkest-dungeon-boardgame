@@ -1,9 +1,9 @@
 # Phase 11A.3 Source-Gate Final Acceptance Report
 
-- runId: `3aad15cb-21e9-49fc-b28a-62510f4c6632`
-- verificationInputHash: `e41ccc3592aff0659239f6d373d15c8b414b3dbf8f9dbd3b1ee25a6441f07487`
-- phase11A3Status: **NOT-VERIFIED**
-- release verdict: **NOT-VERIFIED**
+- runId: `cdefd219-d289-4bde-afa5-b4d2b36db8a5`
+- verificationInputHash: `06007b7e45ba0f82fe939a9d103ddbc35a7ef5929355a97225f285598b497554`
+- phase11A3Status: **SOURCE-BLOCKED**
+- release verdict: **SOURCE-BLOCKED**
 - requiredMissingCount: **26**
 - optionalMissingCount: **1**
 - allRequiredSourcesReady: **false**
@@ -16,8 +16,8 @@
 
 | Check | Result |
 | --- | --- |
-| engineeringRegressionPasses | false |
-| verifierHealthy | false |
+| engineeringRegressionPasses | true |
+| verifierHealthy | true |
 | verificationFresh | true |
 | officialSourceAuditPasses | true |
 | fieldProvenanceValidated | true |
