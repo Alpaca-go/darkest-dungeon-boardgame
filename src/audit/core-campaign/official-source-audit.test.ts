@@ -196,6 +196,24 @@ describe('official-source-audit (Phase 11A.3 Final Acceptance §6-§12)', () => 
     expect(readiness.gates.allRequiredSourcesReady).toBe(false);
   });
 
+  it('enforces dungeon-tile exact quantity and validates every asset', () => {
+    const id = 'tierB-dd-dungeon-tile';
+    const one = runOfficialSourceAudit({ injectDocuments: { [id]: [makeDoc(id)] } });
+    expect(one.readiness.resolvedRequirements.find((r) => r.requirementId === id)?.status).toBe('partial');
+
+    const incomplete = makeDocsForRequirement(id);
+    incomplete[1] = { ...incomplete[1]!, extractedFields: {} };
+    const two = runOfficialSourceAudit({ injectDocuments: { [id]: incomplete } });
+    expect(two.readiness.resolvedRequirements.find((r) => r.requirementId === id)?.status).toBe('partial');
+
+    const reversed = runOfficialSourceAudit({ injectDocuments: { [id]: [...makeDocsForRequirement(id)].reverse() } });
+    expect(reversed.readiness.resolvedRequirements.find((r) => r.requirementId === id)?.status).toBe('available');
+
+    const extra = runOfficialSourceAudit({ injectDocuments: { [id]: [...makeDocsForRequirement(id), makeDoc(id, { sourceAssetId: 'synthetic-extra-tile' })] } });
+    expect(extra.readiness.outcome.kind).toBe('source-audit-error');
+    expect(extra.readiness.auditErrors.some((e) => e.code === 'quantity-mismatch')).toBe(true);
+  });
+
   it('H. empty sourceReference → SOURCE-AUDIT-ERROR', () => {
     const badDoc = makeDoc('tierB-quest-1', { sourceReference: '' });
     const { readiness } = runOfficialSourceAudit({

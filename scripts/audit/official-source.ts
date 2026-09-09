@@ -24,10 +24,7 @@ import {
   type OfficialSourceRequirement,
   type ResolvedRequirement,
 } from '../../src/audit/core-campaign/official-source-audit';
-import {
-  summarizeRequirements,
-  tierOf,
-} from '../../src/audit/core-campaign/official-source-requirements';
+import { tierOf } from '../../src/audit/core-campaign/official-source-requirements';
 
 const REPO_ROOT = process.env.PHASE11A3_REPO_ROOT ?? process.cwd();
 const DATA_DIR = join(REPO_ROOT, 'docs/data/core-campaign');
@@ -75,7 +72,7 @@ function buildManifestEntry(
   };
 }
 
-function writeManifest(resolvedByReq: Map<string, ResolvedRequirement>): string {
+function writeManifest(resolvedByReq: Map<string, ResolvedRequirement>, summary: ReturnType<typeof runOfficialSourceAudit>['summary']): string {
   const tierA = OFFICIAL_SOURCE_REQUIREMENTS.filter((r) => tierOf(r) === 'A');
   const tierB = OFFICIAL_SOURCE_REQUIREMENTS.filter((r) => tierOf(r) === 'B');
   const tierC = OFFICIAL_SOURCE_REQUIREMENTS.filter((r) => tierOf(r) === 'C');
@@ -85,8 +82,7 @@ function writeManifest(resolvedByReq: Map<string, ResolvedRequirement>): string 
     return buildManifestEntry(req, r);
   });
 
-  // Summary 机器计算（dev doc §12）
-  const summary = summarizeRequirements();
+  // The audit result is computed once. Serializers must never recalculate it.
   const allTierAReady = tierA.every(
     (r) => resolvedByReq.get(r.requirementId)?.status === 'available',
   );
@@ -101,7 +97,6 @@ function writeManifest(resolvedByReq: Map<string, ResolvedRequirement>): string 
   ).length;
   // Never overwrite the audit result in the serializer. Missing source is valid
   // SOURCE-BLOCKED evidence; malformed source must remain auditPasses=false.
-  summary.auditPasses = summary.auditPasses;
 
   const requiredResolved = OFFICIAL_SOURCE_REQUIREMENTS.filter((r) => r.requiredForCompletion);
   const optionalResolved = OFFICIAL_SOURCE_REQUIREMENTS.filter((r) => !r.requiredForCompletion);
@@ -216,7 +211,7 @@ function writeChecklist(resolvedByReq: Map<string, ResolvedRequirement>): string
   return path;
 }
 
-function writeSummary(summary: ReturnType<typeof summarizeRequirements>): string {
+function writeSummary(summary: ReturnType<typeof runOfficialSourceAudit>['summary']): string {
   const path = join(DATA_DIR, 'official-source-summary.json');
   const data = {
     ...summary,
@@ -313,7 +308,7 @@ function main(): number {
     resolvedByReq.set(r.requirementId, r);
   }
 
-  const manifestPath = writeManifest(resolvedByReq);
+  const manifestPath = writeManifest(resolvedByReq, summary);
   const checklistPath = writeChecklist(resolvedByReq);
   const readinessPath = writeReadiness(readiness);
   const summaryPath = writeSummary(summary);

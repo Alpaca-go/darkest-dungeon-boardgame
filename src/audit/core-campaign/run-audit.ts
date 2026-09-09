@@ -67,6 +67,7 @@ import {
   type SourceAuditError,
 } from './official-source-audit';
 import { OFFICIAL_SOURCE_REQUIREMENTS } from './official-source-requirements';
+import { evaluatePhase11A3Status } from './phase11a3-status';
 
 interface SourceReadinessFile {
   gates: {
@@ -1282,17 +1283,14 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
   //   9 official data ready 且 11 Quest 闭环 → PASS
   // 关键：Content Blocked (P0-002) 不能遮住 Test Gate 未完成（11A.2.3 §22）。
   // 关键：fourRuinsBossesPass 不在 11A.3 PASS 判定内（dev doc §37）。
-  // Phase 11A.3 Source-Gate Final Acceptance Closure：
-  //   verifyInProgress=true 时（audit:release-gate 在 verify pipeline 中被调用），
-  //   所有 measured bit 视为「由 verify 自身在 pipeline 末尾写入 verification-results.json」，
-  //   所以 unmeasured / stale 不应触发 NOT-VERIFIED 兜底。
-  const measuredFromVerify = input.options.verifyInProgress === true;
-  const verificationStale = !measuredFromVerify && !input.options.verificationFresh;
-  const criticalE2EUnmeasured = !measuredFromVerify && input.options.criticalE2EPasses !== true;
+  // Pre-gate evidence is already measured during verification; it must not,
+  // however, turn a measured false into an unmeasured success.
+  const verificationStale = input.options.verificationFresh !== true;
+  const criticalE2EUnmeasured = input.options.criticalE2EPasses !== true;
   // 11A.2.3R §10-12（dev doc fix #1 + #4）：command contract + replay continuation 独立 measured，
   // 任一未注入或 fail → NOT-VERIFIED。
-  const commandContractUnmeasured = !measuredFromVerify && input.options.commandContractPasses !== true;
-  const replayContinuationUnmeasured = !measuredFromVerify && input.options.replayContinuationPasses !== true;
+  const commandContractUnmeasured = input.options.commandContractPasses !== true;
+  const replayContinuationUnmeasured = input.options.replayContinuationPasses !== true;
   if (gate.engineDeadlocks > 0) {
     gate.verdict = 'FAIL';
     gate.passed = false;
@@ -1390,30 +1388,23 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
     gate.conclusion = 'PASS — core-campaign-official-ready';
   }
 
-  // Phase 11A.3 Source-Gate Final Acceptance Closure §14：5 状态机
-  //   NOT-VERIFIED              → 任何 NOT-VERIFIED verdict
-  //   SOURCE-BLOCKED            → SOURCE-BLOCKED verdict + onlyOpenP0 === ISSUE-P0-002 + source 未 ready
-  //   READY-FOR-OFFICIAL-IMPORT → source 全部 ready + 11 Quest 没闭环 + 只 P0-002 open
-  //   IMPLEMENTATION-FAIL       → any FAIL（11A.3 阶段 implementation 自身错）
-  //   COMPLETE                  → PASS verdict
-  if (gate.verdict === 'NOT-VERIFIED') {
-    gate.phase11A3Status = 'NOT-VERIFIED';
-  } else if (gate.verdict === 'SOURCE-BLOCKED') {
-    // 区分 SOURCE-BLOCKED vs READY-FOR-OFFICIAL-IMPORT：
-    //   source 已全部 ready（即使 verdict 写为 SOURCE-BLOCKED）→ READY-FOR-OFFICIAL-IMPORT
-    //   否则 → SOURCE-BLOCKED
-    if (sourceReadinessFile.gates.allRequiredSourcesReady) {
-      gate.phase11A3Status = 'READY-FOR-OFFICIAL-IMPORT';
-    } else {
-      gate.phase11A3Status = 'SOURCE-BLOCKED';
-    }
-  } else if (gate.verdict === 'PASS') {
-    gate.phase11A3Status = 'COMPLETE';
-  } else if (gate.verdict === 'FAIL') {
-    gate.phase11A3Status = 'IMPLEMENTATION-FAIL';
-  } else {
-    gate.phase11A3Status = 'NOT-VERIFIED';
-  }
+  const engineeringGatePasses = [
+    gate.typecheckPasses, gate.unitPasses, gate.commandContractPasses,
+    gate.integrationPasses, gate.buildPasses, gate.criticalE2EPasses,
+    gate.goldenTestPasses, gate.replayDeterminismPasses,
+    gate.replayContinuationPasses, gate.productionCommandLayerPasses,
+  ].every(Boolean);
+  const verifierHealthy = engineeringGatePasses && sourceReadinessFile.auditPasses && input.options.verificationFresh === true;
+  gate.phase11A3Status = evaluatePhase11A3Status({
+    verifierHealthy,
+    implementationPasses: gate.verdict !== 'FAIL' && gate.verdict !== 'CONDITIONAL',
+    sourceAuditPasses: sourceReadinessFile.auditPasses,
+    allRequiredSourcesReady: sourceReadinessFile.gates.allRequiredSourcesReady,
+    elevenQuestLoopClosed,
+    openP0,
+    openP1,
+    onlyOpenP0: gate.onlyOpenP0,
+  });
 
   // Phase 11A.3 Source-Gate Final Acceptance Closure §17：
   //   canBeginOfficialImport：由 source readiness 输出（资料齐了就可以开始 import）

@@ -42,6 +42,14 @@ interface CommandResult {
   exitCode: number;
   durationMs: number;
   failureLogPath: string | null;
+  status: number | null;
+  signal: NodeJS.Signals | null;
+  errorName: string | null;
+  errorMessage: string | null;
+  errorCode: string | null;
+  stdoutTail: string;
+  stderrTail: string;
+  timedOut: boolean;
 }
 
 interface VerificationResults {
@@ -74,6 +82,8 @@ interface VerificationResults {
   unmeasuredGateBits: string[];
   consistencyErrors: string[];
   phase11A3Status: 'NOT-VERIFIED' | 'SOURCE-BLOCKED' | 'READY-FOR-OFFICIAL-IMPORT' | 'IMPLEMENTATION-FAIL' | 'COMPLETE';
+  engineeringRegressionPasses: boolean;
+  verifierHealthy: boolean;
   // structured source readiness
   sourceReadinessGates?: Record<string, boolean>;
   sourceReadinessRequiredMissingCount?: number;
@@ -98,27 +108,34 @@ function runCommand(name: string, cmd: string, args: string[], timeoutMs: number
   const result = spawnSync(cmd, args, {
     cwd: ROOT,
     stdio: ['ignore', 'pipe', 'pipe'],
-    // Avoid an intermediate shell for Playwright so its Vite child is reaped
-    // instead of leaving port 5199 occupied for the next verifier run.
-    shell: name === 'criticalE2E' ? false : true,
+    // npm/npx are Windows .cmd shims. Shell execution is required for those
+    // shims, while the E2E command itself remains the package-script contract.
+    shell: true,
     timeout: timeoutMs,
     env: { ...process.env, ...extraEnv },
   });
-  // Playwright can finish all tests while its Vite child keeps the shell alive;
-  // preserve the measured test result when captured output proves success.
-  const outputText = `${(result.stdout ?? '').toString()}\n${(result.stderr ?? '').toString()}`;
-  const timedOutAfterPassing = name === 'criticalE2E' && result.status === null && /\b6 passed\b/.test(outputText);
-  const exitCode = timedOutAfterPassing ? 0 : (result.status ?? -1);
+  const stdoutTail = (result.stdout ?? '').toString().slice(-2000);
+  const stderrTail = (result.stderr ?? '').toString().slice(-2000);
+  const exitCode = result.status ?? -1;
   const durationMs = Date.now() - start;
+  const spawnError = result.error as (Error & { code?: string }) | undefined;
+  const details = {
+    status: result.status,
+    signal: result.signal,
+    errorName: spawnError?.name ?? null,
+    errorMessage: spawnError?.message ?? null,
+    errorCode: typeof spawnError?.code === 'string' ? spawnError.code : null,
+    stdoutTail,
+    stderrTail,
+    timedOut: spawnError?.code === 'ETIMEDOUT',
+  };
   if (exitCode === 0) {
-    return { command: name, exitCode, durationMs, failureLogPath: null };
+    return { command: name, exitCode, durationMs, failureLogPath: null, ...details };
   }
   if (!existsSync(FAILURE_DIR)) mkdirSync(FAILURE_DIR, { recursive: true });
   const logPath = join(FAILURE_DIR, `${name}.log`);
-  const stdout = (result.stdout ?? '').toString().slice(-2000);
-  const stderr = (result.stderr ?? '').toString().slice(-2000);
-  writeFileSync(logPath, `STDOUT:\n${stdout}\n\nSTDERR:\n${stderr}\n`, 'utf-8');
-  return { command: name, exitCode, durationMs, failureLogPath: logPath };
+  writeFileSync(logPath, `STDOUT:\n${stdoutTail}\n\nSTDERR:\n${stderrTail}\n`, 'utf-8');
+  return { command: name, exitCode, durationMs, failureLogPath: logPath, ...details };
 }
 
 function readJsonSafe<T>(path: string): T | null {
@@ -162,10 +179,8 @@ function main(): number {
   // ---- 6. critical E2E ----
   commands.push(runCommand(
     'criticalE2E',
-    process.platform === 'win32' ? 'cmd.exe' : 'npx',
-    process.platform === 'win32'
-      ? ['/d', '/s', '/c', 'npx', 'playwright', 'test', 'e2e/phase11a2-critical-campaign.spec.ts']
-      : ['playwright', 'test', 'e2e/phase11a2-critical-campaign.spec.ts'],
+    process.platform === 'win32' ? 'npm.cmd' : 'npm',
+    ['run', 'test:e2e:critical'],
     180_000,
   ));
 
@@ -281,13 +296,19 @@ function main(): number {
   }
   // manifest.summary === source-summary
   if (sourceManifest && sourceSummary) {
-    const sm = sourceManifest as { summary?: { totalRequirements?: number; requiredMissingCount?: number; optionalMissingCount?: number } };
+    const sm = sourceManifest as { summary?: { totalRequirements?: number; requiredMissingCount?: number; optionalMissingCount?: number; auditPasses?: boolean } };
     if (sm.summary && sm.summary.totalRequirements !== (sourceSummary as { totalRequirements?: number }).totalRequirements) {
       consistencyErrors.push(`manifest.summary.totalRequirements (${sm.summary.totalRequirements}) !== summary.totalRequirements (${(sourceSummary as { totalRequirements?: number }).totalRequirements})`);
     }
     if (sm.summary && sm.summary.requiredMissingCount !== (sourceSummary as { requiredMissingCount?: number }).requiredMissingCount) {
       consistencyErrors.push(`manifest.summary.requiredMissingCount (${sm.summary.requiredMissingCount}) !== summary.requiredMissingCount (${(sourceSummary as { requiredMissingCount?: number }).requiredMissingCount})`);
     }
+    if (sm.summary && sm.summary.auditPasses !== (sourceSummary as { auditPasses?: boolean }).auditPasses) {
+      consistencyErrors.push(`manifest.summary.auditPasses (${sm.summary.auditPasses}) !== summary.auditPasses (${(sourceSummary as { auditPasses?: boolean }).auditPasses})`);
+    }
+  }
+  if (sourceReadiness && sourceSummary && (sourceReadiness as { auditPasses?: boolean }).auditPasses !== (sourceSummary as { auditPasses?: boolean }).auditPasses) {
+    consistencyErrors.push(`source-readiness.auditPasses (${(sourceReadiness as { auditPasses?: boolean }).auditPasses}) !== summary.auditPasses (${(sourceSummary as { auditPasses?: boolean }).auditPasses})`);
   }
   // source-readiness requiredMissingCount / optionalMissingCount 来自 requiredForCompletion
   if (sourceReadiness) {
@@ -367,6 +388,9 @@ function main(): number {
     (criticalE2EPasses === true) && contentAuditPasses && rulesAuditPasses &&
     officialSourceAuditPasses && officialSourceManifestGenerated && sourceReadinessGenerated &&
     fieldProvenanceValidated && releaseGateArtifactValid;
+  const engineeringRegressionPasses = typecheckPasses && unitPasses && commandContractPasses &&
+    integrationPasses && buildPasses && criticalE2EPasses && goldenPasses &&
+    replayDeterminismPasses && replayContinuationPasses && productionCommandLayerPasses;
 
   // Source side：dev doc §6：allRequiredSourcesReady 由 requiredForCompletion 驱动
   const sourceAllRequired = !!(sourceReadiness as { gates?: { allRequiredSourcesReady?: boolean } } | null)?.gates?.allRequiredSourcesReady;
@@ -414,6 +438,9 @@ function main(): number {
     unmeasuredGateBits,
     consistencyErrors,
     phase11A3Status: phase11A3Status as VerificationResults['phase11A3Status'],
+    engineeringRegressionPasses,
+    verifierHealthy: engineeringRegressionPasses && officialSourceAuditPasses &&
+      fieldProvenanceValidated && verificationFresh && unmeasuredGateBits.length === 0 && consistencyErrors.length === 0,
     sourceReadinessGates: (sourceReadiness as { gates?: Record<string, boolean> } | null)?.gates,
     sourceReadinessRequiredMissingCount: sourceSummaryObj?.requiredMissingCount,
     sourceReadinessOptionalMissingCount: sourceSummaryObj?.optionalMissingCount,
@@ -434,6 +461,10 @@ function main(): number {
   commands.push(reportGeneration);
   if (reportGeneration.exitCode !== 0) {
     consistencyErrors.push('final report generation failed');
+    results.verifierHealthy = false;
+    results.phase11A3Status = 'NOT-VERIFIED';
+    results.consistencyErrors = consistencyErrors;
+    writeFileSync(RESULTS_PATH, JSON.stringify(results, null, 2) + '\n', 'utf-8');
   }
   console.log(`\n[verify-phase11a3-source-gate] wrote ${RESULTS_PATH}`);
   console.log(`\nverdict=${releaseGateVerdict}`);

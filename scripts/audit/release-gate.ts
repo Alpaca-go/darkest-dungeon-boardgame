@@ -70,6 +70,7 @@ const verifyInProgress = process.env.PHASE11A_VERIFY_IN_PROGRESS === '1';
 const preGate = verifyInProgress && existsSync(PRE_GATE_EVIDENCE)
   ? (() => { try { return JSON.parse(readFileSync(PRE_GATE_EVIDENCE, 'utf8')) as VerificationResults; } catch { return null; } })()
   : null;
+const evidence = verifyInProgress ? preGate : vr;
 
 // Phase 11A.3 Source-Gate Final Acceptance Closure：
 // verify:phase11a3-source-gate pipeline 中 audit:release-gate 是其中一个子命令，
@@ -78,20 +79,20 @@ const preGate = verifyInProgress && existsSync(PRE_GATE_EVIDENCE)
 // 解决：verify 启动时设 PHASE11A_VERIFY_IN_PROGRESS=1，让 release-gate
 // 在没有 vr 的情况下使用「合理兜底」（基于 runAudit 自身 computed field）。
 const verificationFresh = verifyInProgress
-  ? preGate?.verificationFresh === true
+  ? evidence?.verificationFresh === true
   : vr?.verificationFresh === true && vr.verificationInputHash === computeVerificationInputHash();
 
 const report = runAudit({
-  typecheckPasses: (preGate ?? vr)?.typecheckPasses,
-  goldenTestPasses: (preGate ?? vr)?.goldenTestPasses,
-  replayDeterminismPasses: (preGate ?? vr)?.replayDeterminismPasses,
-  productionCommandLayerPasses: (preGate ?? vr)?.productionCommandLayerPasses,
-  buildPasses: envFlag('PHASE11A_BUILD') ?? (preGate ?? vr)?.buildPasses,
-  unitPasses: envFlag('PHASE11A_UNIT') ?? (preGate ?? vr)?.unitPasses,
-  integrationPasses: envFlag('PHASE11A_INTEGRATION') ?? (preGate ?? vr)?.integrationPasses,
-  criticalE2EPasses: envFlag('PHASE11A_E2E') ?? ((preGate ?? vr)?.criticalE2EPasses === true),
-  commandContractPasses: (preGate ?? vr)?.commandContractPasses,
-  replayContinuationPasses: (preGate ?? vr)?.replayContinuationPasses,
+  typecheckPasses: evidence?.typecheckPasses,
+  goldenTestPasses: evidence?.goldenTestPasses,
+  replayDeterminismPasses: evidence?.replayDeterminismPasses,
+  productionCommandLayerPasses: evidence?.productionCommandLayerPasses,
+  buildPasses: envFlag('PHASE11A_BUILD') ?? evidence?.buildPasses,
+  unitPasses: envFlag('PHASE11A_UNIT') ?? evidence?.unitPasses,
+  integrationPasses: envFlag('PHASE11A_INTEGRATION') ?? evidence?.integrationPasses,
+  criticalE2EPasses: envFlag('PHASE11A_E2E') ?? (evidence?.criticalE2EPasses === true),
+  commandContractPasses: evidence?.commandContractPasses,
+  replayContinuationPasses: evidence?.replayContinuationPasses,
   verificationFresh,
   mathRandomLeaksInOfficialPath: officialMathRandom,
   verifyInProgress,
@@ -157,19 +158,19 @@ written.push(
  */
 const unmeasuredGateBits: string[] = [];
 for (const key of ['typecheckPasses', 'goldenTestPasses', 'replayDeterminismPasses', 'productionCommandLayerPasses'] as const) {
-  if (typeof vr?.[key] !== 'boolean') unmeasuredGateBits.push(key);
+  if (typeof evidence?.[key] !== 'boolean') unmeasuredGateBits.push(key);
 }
-if (envFlag('PHASE11A_BUILD') === undefined && vr?.buildPasses === undefined) unmeasuredGateBits.push('buildPasses');
-if (envFlag('PHASE11A_UNIT') === undefined && vr?.unitPasses === undefined) unmeasuredGateBits.push('unitPasses');
-if (envFlag('PHASE11A_INTEGRATION') === undefined && vr?.integrationPasses === undefined) unmeasuredGateBits.push('integrationPasses');
-if (envFlag('PHASE11A_E2E') === undefined && vr?.criticalE2EPasses === undefined) unmeasuredGateBits.push('criticalE2EPasses');
+if (envFlag('PHASE11A_BUILD') === undefined && evidence?.buildPasses === undefined) unmeasuredGateBits.push('buildPasses');
+if (envFlag('PHASE11A_UNIT') === undefined && evidence?.unitPasses === undefined) unmeasuredGateBits.push('unitPasses');
+if (envFlag('PHASE11A_INTEGRATION') === undefined && evidence?.integrationPasses === undefined) unmeasuredGateBits.push('integrationPasses');
+if (envFlag('PHASE11A_E2E') === undefined && evidence?.criticalE2EPasses === undefined) unmeasuredGateBits.push('criticalE2EPasses');
 // 11A.2.3R §10-12：command contract / replay continuation 仅从 verification-results.json 注入
 // （无 env 兜底），缺字段 → unmeasured。
-if (vr?.commandContractPasses === undefined) unmeasuredGateBits.push('commandContractPasses');
-if (vr?.replayContinuationPasses === undefined) unmeasuredGateBits.push('replayContinuationPasses');
+if (evidence?.commandContractPasses === undefined) unmeasuredGateBits.push('commandContractPasses');
+if (evidence?.replayContinuationPasses === undefined) unmeasuredGateBits.push('replayContinuationPasses');
 
 written.push(
-  writeJson('release-gate.json', { ...gate, runId: preGate?.runId ?? vr?.runId, verificationInputHash: preGate?.verificationInputHash ?? vr?.verificationInputHash, generatedAt: report.generatedAt, unmeasuredGateBits, dataGates, ruleSummary }),
+  writeJson('release-gate.json', { ...gate, runId: evidence?.runId, verificationInputHash: evidence?.verificationInputHash, generatedAt: report.generatedAt, unmeasuredGateBits, dataGates, ruleSummary }),
 );
 
 // ---------------------------------------------------------------------------

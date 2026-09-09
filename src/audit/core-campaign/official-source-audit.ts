@@ -252,11 +252,9 @@ function discoverAndLoad(
       });
       continue;
     }
-    // quantity vs paths：tile pattern（dd-tile-*.json）允许 brace expansion 任意；
-    // 其他 requirement 走严格 quantity
-    const useQuantity = req.componentGroup !== 'dungeon-tile';
-    const expectedCount = useQuantity ? req.quantity : paths.length;
-    if (useQuantity && paths.length > expectedCount) {
+    // Every physical component, including dungeon tiles, has an exact canonical count.
+    const expectedCount = req.quantity;
+    if (paths.length > expectedCount) {
       errors.push({
         code: 'quantity-mismatch',
         requirementId: req.requirementId,
@@ -265,11 +263,10 @@ function discoverAndLoad(
     }
     if (paths.length < expectedCount) {
       // 资料部分缺失：把现有 path 试着 load，缺的部分当成 missing
-      const partialDoc = paths[0] ? tryLoad(paths[0], errors, req, seenAssetIds) : null;
-      entries.push({
+      for (const p of paths) entries.push({
         requirementId: req.requirementId,
-        sourcePath: paths[0] ?? '(none)',
-        document: partialDoc,
+        sourcePath: p,
+        document: tryLoad(p, errors, req, seenAssetIds),
       });
       continue;
     }
@@ -659,6 +656,7 @@ export interface AuditOptions {
 export function runOfficialSourceAudit(options: AuditOptions = {}): {
   readiness: SourceReadinessResult;
   summary: OfficialSourceSummary;
+  resolvedRequirements: ResolvedRequirement[];
 } {
   const repoRoot = options.repoRoot ?? process.cwd();
 
@@ -711,6 +709,16 @@ export function runOfficialSourceAudit(options: AuditOptions = {}): {
   }
 
   const rulebookMissing = allErrors.some((e) => e.code === 'tier-a-rulebook-missing');
+
+  for (const req of OFFICIAL_SOURCE_REQUIREMENTS) {
+    const count = (documentsByReq.get(req.requirementId) ?? []).length;
+    if (req.componentGroup !== 'rulebook' && count > req.quantity) {
+      allErrors.push({
+        code: 'quantity-mismatch', requirementId: req.requirementId,
+        message: `Expected exactly ${req.quantity} physical assets, found ${count}`,
+      });
+    }
+  }
 
   // Per-requirement resolution
   const resolved: ResolvedRequirement[] = [];
@@ -822,7 +830,7 @@ export function runOfficialSourceAudit(options: AuditOptions = {}): {
     outcome,
   };
 
-  return { readiness, summary };
+  return { readiness, summary, resolvedRequirements: resolved };
 }
 
 function computeAuditInputHash(resolved: ResolvedRequirement[], errors: SourceAuditError[]): string {
