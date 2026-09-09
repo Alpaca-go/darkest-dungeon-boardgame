@@ -2,12 +2,12 @@
 import { OFFICIAL_DARKEST_DUNGEON_QUESTS } from '../../data/darkest-dungeon/quest-registry';
 import { OFFICIAL_GUARDIAN_ASSEMBLY } from '../../data/darkest-dungeon/official-guardian-assembly';
 import { FINAL_FORM_ORDER, OFFICIAL_FINAL_FORMS, UNSKIPPABLE_FINAL_FORM_ID } from '../../data/darkest-dungeon/final-form-registry';
-import type { OfficialMatrixRunner, GuardianFamily, SkippedFormId } from './official-matrix-runner';
+import { registerFormalProductionRunner, type OfficialMatrixRunner, type GuardianFamily, type SkippedFormId } from './official-matrix-runner';
 import { isOfficialActFourImportReady } from './official-act-four-import-readiness';
 
-export function createProductionOfficialMatrixRunner(darkestDungeonMonsterDeckReady = false): OfficialMatrixRunner | undefined {
-  if (!isOfficialActFourImportReady({ darkestDungeonMonsterDeckReady })) return undefined;
-  return { evidenceKind: 'FORMAL-PRODUCTION' as const, runCombination(family: GuardianFamily, skippedFormId: SkippedFormId, mode: 'formal') {
+export function createProductionOfficialMatrixRunner(): OfficialMatrixRunner | undefined {
+  if (!isOfficialActFourImportReady()) return undefined;
+  return registerFormalProductionRunner({ runCombination(family: GuardianFamily, skippedFormId: SkippedFormId, mode: 'formal') {
     if (mode !== 'formal') throw new Error('Production matrix accepts formal mode only');
     const guardian = OFFICIAL_GUARDIAN_ASSEMBLY.find((item) => item.family === family);
     const quest = OFFICIAL_DARKEST_DUNGEON_QUESTS.find((item) => item.guardianDefinitionId === guardian?.id && item.skippedFinalFormId === skippedFormId);
@@ -16,5 +16,5 @@ export function createProductionOfficialMatrixRunner(darkestDungeonMonsterDeckRe
     const finalPathValid = finalPath.includes(UNSKIPPABLE_FINAL_FORM_ID) && finalPath.every((form) => OFFICIAL_FINAL_FORMS.some((item) => item.formId === form && item.enabledInOfficialPool));
     const passed = !!guardian?.enabledInOfficialPool && !!quest?.enabledInOfficialPool && noPrototype && finalPathValid;
     return { family, skippedFormId, status: passed ? 'PASS' as const : 'FAIL' as const, note: passed ? 'formal production registry path validated' : 'formal production mapping or final path invalid' };
-  }};
+  }});
 }

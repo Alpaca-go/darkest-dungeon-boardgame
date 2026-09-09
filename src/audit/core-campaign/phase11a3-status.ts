@@ -19,10 +19,14 @@ export interface Phase11A3StatusInput {
 /** Pure terminal-state evaluator. It never reads artifacts or infers missing data. */
 export function evaluatePhase11A3Status(input: Phase11A3StatusInput): Phase11A3Status {
   if (!input.verifierHealthy || !input.sourceAuditPasses) return 'NOT-VERIFIED';
-  if (!input.implementationPasses || input.openP1 > 0 || (input.openP0 > 0 && input.onlyOpenP0 !== 'ISSUE-P0-002')) {
+  if (!input.implementationPasses || input.openP1 > 0 ||
+    (input.openP0 > 0 && input.onlyOpenP0 !== 'ISSUE-P0-002')) return 'IMPLEMENTATION-FAIL';
+  if (!input.allRequiredSourcesReady) return 'SOURCE-BLOCKED';
+  // P0-002 may represent the pre-import transition, but never a completed
+  // campaign: the ledger must be closed before COMPLETE is possible.
+  if (input.openP0 > 0 && input.elevenQuestLoopClosed) {
     return 'IMPLEMENTATION-FAIL';
   }
-  if (!input.allRequiredSourcesReady) return 'SOURCE-BLOCKED';
   if (!input.elevenQuestLoopClosed) return 'READY-FOR-OFFICIAL-IMPORT';
   return 'COMPLETE';
 }

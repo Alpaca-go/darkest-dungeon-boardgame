@@ -68,7 +68,7 @@ import {
 } from './official-source-audit';
 import { OFFICIAL_SOURCE_REQUIREMENTS } from './official-source-requirements';
 import { evaluatePhase11A3Status } from './phase11a3-status';
-import { createOfficialMatrixRunner, type OfficialMatrixRunner } from './official-matrix-runner';
+import { createOfficialMatrixRunner, isRegisteredFormalProductionRunner, type OfficialMatrixRunner } from './official-matrix-runner';
 import { createProductionOfficialMatrixRunner } from './production-official-matrix-runner';
 import { isOfficialActFourImportReady } from './official-act-four-import-readiness';
 import { evaluatePhase11A3CompletionGate } from './phase11a3-completion-gate';
@@ -204,7 +204,7 @@ export function runGuardianMatrixAttempt(options: { sourceReady?: boolean; offic
     const result = executor.runCombination(family, skippedFormId, 'formal');
     return { family, skippedFormId, passed: result.status === 'PASS', note: result.note };
   }));
-  const evidenceKind = status === 'SOURCE-BLOCKED' ? 'SOURCE-BLOCKED' : (options.runner?.evidenceKind === 'FORMAL-PRODUCTION' ? 'FORMAL-PRODUCTION' : 'SYNTHETIC-CONTRACT');
+  const evidenceKind = status === 'SOURCE-BLOCKED' ? 'SOURCE-BLOCKED' : (isRegisteredFormalProductionRunner(options.runner) ? 'FORMAL-PRODUCTION' : 'SYNTHETIC-CONTRACT');
   const resolvedStatus: MatrixStatus = status === 'READY'
     ? (evidenceKind === 'FORMAL-PRODUCTION' && details.every((d) => d.passed) ? 'READY' : 'FAIL')
     : status;
@@ -1137,8 +1137,8 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
 
   // Phase 11A.3 Source-Gate Integrity Repair §22-25：Guardian Matrix。
   // SOURCE-BLOCKED 阶段：matrix 报 SOURCE-BLOCKED（不伪称 3×3 pass）。
-  const importReady = isOfficialActFourImportReady({ darkestDungeonMonsterDeckReady: sourceReadinessFile.gates.darkestDungeonMonsterDeckReady });
-  const productionRunner = createProductionOfficialMatrixRunner(sourceReadinessFile.gates.darkestDungeonMonsterDeckReady);
+  const importReady = isOfficialActFourImportReady();
+  const productionRunner = createProductionOfficialMatrixRunner();
   const guardianMatrix = runGuardianMatrixAttempt({
     runner: productionRunner,
   });
@@ -1432,7 +1432,7 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
   //   canCloseP0_002：Phase 11A.3 真正 COMPLETE 后才能关
   gate.canBeginOfficialImport = sourceReadinessFile.gates.allRequiredSourcesReady;
   gate.canCloseP0_002 = gate.verdict === 'PASS' && formalMatrixPasses;
-  gate.canEnterPhase11B = gate.verdict === 'PASS' && formalMatrixPasses;
+  gate.canEnterPhase11B = gate.verdict === 'PASS' && formalMatrixPasses && openP0 === 0 && openP1 === 0;
 
   // canEnterPhase11A3（保留向后兼容，但不再是 11A.3 主指标）
   gate.canEnterPhase11A3 =

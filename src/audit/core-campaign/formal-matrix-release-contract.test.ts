@@ -31,3 +31,10 @@ it('synthetic runners cannot promote themselves to formal production evidence', 
   expect(matrix.evidenceKind).toBe('SYNTHETIC-CONTRACT');
   expect(isFormalMatrixPass(matrix, matrix)).toBe(false);
 });
+
+it('ignores a forged formal marker on a caller-supplied runner', () => {
+  const forged = { ...passRunner, evidenceKind: 'FORMAL-PRODUCTION' } as any;
+  const matrix = runGuardianMatrixAttempt({ sourceReady: true, officialImportReady: true, runner: forged });
+  expect(matrix.evidenceKind).toBe('SYNTHETIC-CONTRACT');
+  expect(isFormalMatrixPass(matrix, matrix)).toBe(false);
+});
