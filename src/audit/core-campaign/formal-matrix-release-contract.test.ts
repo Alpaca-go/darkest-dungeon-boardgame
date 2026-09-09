@@ -14,7 +14,7 @@ describe('formal matrix lifecycle', () => {
   });
 
   it('runs all nine formal combinations after import and requires every pass', () => {
-    const result = runGuardianMatrixAttempt({ sourceReady: true, officialImportReady: true, runner: passRunner, evidenceKind: 'SYNTHETIC-CONTRACT' });
+    const result = runGuardianMatrixAttempt({ sourceReady: true, officialImportReady: true, runner: passRunner });
     expect(result.status).toBe('FAIL');
     expect(result.details).toHaveLength(9);
     expect(result.details.every((detail) => detail.passed)).toBe(true);
@@ -26,9 +26,8 @@ describe('formal matrix lifecycle', () => {
   });
 });
 
-it('accepts only a complete formal production matrix', () => {
-  const matrix = runGuardianMatrixAttempt({ sourceReady: true, officialImportReady: true, runner: passRunner, evidenceKind: 'FORMAL-PRODUCTION' });
-  expect(isFormalMatrixPass(matrix, matrix)).toBe(true);
-  const partial = { ...matrix, details: matrix.details.slice(0, 8) };
-  expect(isFormalMatrixPass(partial, partial)).toBe(false);
+it('synthetic runners cannot promote themselves to formal production evidence', () => {
+  const matrix = runGuardianMatrixAttempt({ sourceReady: true, officialImportReady: true, runner: passRunner });
+  expect(matrix.evidenceKind).toBe('SYNTHETIC-CONTRACT');
+  expect(isFormalMatrixPass(matrix, matrix)).toBe(false);
 });

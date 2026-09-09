@@ -3,6 +3,8 @@ export type SkippedFormId = 'ancestor-first-form' | 'ancestor-second-form' | 'ge
 export type MatrixCombinationResult = { family: GuardianFamily; skippedFormId: SkippedFormId; status: 'NOT-RUN' | 'PASS' | 'FAIL'; note: string };
 
 export interface OfficialMatrixRunner {
+  /** Set by the runner implementation, never by a matrix caller. */
+  readonly evidenceKind?: 'SYNTHETIC-CONTRACT' | 'FORMAL-PRODUCTION';
   runCombination(family: GuardianFamily, skippedFormId: SkippedFormId, mode: 'formal'): MatrixCombinationResult;
 }
 

@@ -70,6 +70,8 @@ import { OFFICIAL_SOURCE_REQUIREMENTS } from './official-source-requirements';
 import { evaluatePhase11A3Status } from './phase11a3-status';
 import { createOfficialMatrixRunner, type OfficialMatrixRunner } from './official-matrix-runner';
 import { createProductionOfficialMatrixRunner } from './production-official-matrix-runner';
+import { isOfficialActFourImportReady } from './official-act-four-import-readiness';
+import { evaluatePhase11A3CompletionGate } from './phase11a3-completion-gate';
 
 interface SourceReadinessFile {
   gates: {
@@ -190,7 +192,7 @@ export function isFormalMatrixPass(
  *   status 区分 SOURCE-BLOCKED / NOT-RUN / READY / FAIL；
  *   prototypeMatrix 改成纯 status 信号，不再 fake boolean。
  */
-export function runGuardianMatrixAttempt(options: { sourceReady?: boolean; officialImportReady?: boolean; runner?: OfficialMatrixRunner; evidenceKind?: GuardianMatrixResult['evidenceKind'] } = {}): GuardianMatrixResult {
+export function runGuardianMatrixAttempt(options: { sourceReady?: boolean; officialImportReady?: boolean; runner?: OfficialMatrixRunner } = {}): GuardianMatrixResult {
   const sourceReady = options.sourceReady ?? (isTemplarsOfficialEncounterEnabled() && isMammothCystOfficialEncounterEnabled() && isShufflingHorrorOfficialEncounterEnabled());
   const officialImportReady = options.officialImportReady ?? (isDarkestDungeonOfficialGuardianPoolEnabled() && isFinalEncounterOfficialEnabled() && isDarkestDungeonOfficialQuestPoolEnabled());
   const families = ['templars', 'mammoth-cyst', 'shuffling-horror'] as const;
@@ -202,7 +204,7 @@ export function runGuardianMatrixAttempt(options: { sourceReady?: boolean; offic
     const result = executor.runCombination(family, skippedFormId, 'formal');
     return { family, skippedFormId, passed: result.status === 'PASS', note: result.note };
   }));
-  const evidenceKind = status === 'SOURCE-BLOCKED' ? 'SOURCE-BLOCKED' : (options.evidenceKind ?? 'SYNTHETIC-CONTRACT');
+  const evidenceKind = status === 'SOURCE-BLOCKED' ? 'SOURCE-BLOCKED' : (options.runner?.evidenceKind === 'FORMAL-PRODUCTION' ? 'FORMAL-PRODUCTION' : 'SYNTHETIC-CONTRACT');
   const resolvedStatus: MatrixStatus = status === 'READY'
     ? (evidenceKind === 'FORMAL-PRODUCTION' && details.every((d) => d.passed) ? 'READY' : 'FAIL')
     : status;
@@ -1135,10 +1137,10 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
 
   // Phase 11A.3 Source-Gate Integrity Repair §22-25：Guardian Matrix。
   // SOURCE-BLOCKED 阶段：matrix 报 SOURCE-BLOCKED（不伪称 3×3 pass）。
-  const productionRunner = createProductionOfficialMatrixRunner();
+  const importReady = isOfficialActFourImportReady({ darkestDungeonMonsterDeckReady: sourceReadinessFile.gates.darkestDungeonMonsterDeckReady });
+  const productionRunner = createProductionOfficialMatrixRunner(sourceReadinessFile.gates.darkestDungeonMonsterDeckReady);
   const guardianMatrix = runGuardianMatrixAttempt({
     runner: productionRunner,
-    evidenceKind: productionRunner ? 'FORMAL-PRODUCTION' : undefined,
   });
   const formalMatrixPasses = isFormalMatrixPass(guardianMatrix, guardianMatrix);
 
@@ -1371,7 +1373,7 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
       'threeSkippedFormsPass=' + guardianMatrix.threeSkippedFormsPass + ' / ' +
       'elevenQuestLoopClosed=false / campaignVictoryReachable=false。' +
       '等待用户补全 source 资料后重跑 audit。';
-  } else if (sourceReadinessFile.gates.allRequiredSourcesReady && !isDarkestDungeonOfficialQuestPoolEnabled()) {
+  } else if (sourceReadinessFile.gates.allRequiredSourcesReady && !importReady) {
     // Phase 11A.3 Source-Gate Final Acceptance Closure §14：
     //   source 全部 ready + 11 Quest 没闭环 + 只 P0-002 open → READY-FOR-OFFICIAL-IMPORT
     //   （不是 IMPLEMENTATION-FAIL，因为 implementation 是对的，只是 official import 还没跑）
@@ -1402,7 +1404,18 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
     gate.replayContinuationPasses, gate.productionCommandLayerPasses,
   ].every(Boolean);
   const verifierHealthy = engineeringGatePasses && sourceReadinessFile.auditPasses && input.options.verificationFresh === true;
-  gate.phase11A3Status = evaluatePhase11A3Status({
+  const completionStatus = evaluatePhase11A3CompletionGate({
+    sourceReady: sourceReadinessFile.gates.allRequiredSourcesReady,
+    importReady,
+    matrixStatus: guardianMatrix.status === 'SOURCE-BLOCKED' ? 'SOURCE-BLOCKED' : guardianMatrix.status === 'NOT-RUN' ? 'NOT-RUN' : guardianMatrix.status === 'READY' ? 'READY' : 'FAIL',
+    combinationsExpected: 9,
+    combinationsRun: guardianMatrix.details.length,
+    combinationsPassed: guardianMatrix.details.filter((detail) => detail.passed).length,
+    evidenceKind: guardianMatrix.evidenceKind,
+    prototypeReferenceCount: input.prototypeFindings.length,
+    campaignVictoryReached: campaignVictoryReachable,
+  });
+  gate.phase11A3Status = completionStatus === 'COMPLETE' ? evaluatePhase11A3Status({
     verifierHealthy,
     implementationPasses: gate.verdict !== 'FAIL' && gate.verdict !== 'CONDITIONAL' && (!sourceReadinessFile.gates.allRequiredSourcesReady || formalMatrixPasses),
     sourceAuditPasses: sourceReadinessFile.auditPasses,
@@ -1411,7 +1424,7 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
     openP0,
     openP1,
     onlyOpenP0: gate.onlyOpenP0,
-  });
+  }) : completionStatus;
 
   // Phase 11A.3 Source-Gate Final Acceptance Closure §17：
   //   canBeginOfficialImport：由 source readiness 输出（资料齐了就可以开始 import）
