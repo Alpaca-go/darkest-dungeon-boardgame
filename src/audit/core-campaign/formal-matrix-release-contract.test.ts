@@ -38,3 +38,8 @@ it('ignores a forged formal marker on a caller-supplied runner', () => {
   expect(matrix.evidenceKind).toBe('SYNTHETIC-CONTRACT');
   expect(isFormalMatrixPass(matrix, matrix)).toBe(false);
 });
+
+it('does not expose a formal runner registration API', async () => {
+  const api = await import('./official-matrix-runner');
+  expect('registerFormalProductionRunner' in api).toBe(false);
+});

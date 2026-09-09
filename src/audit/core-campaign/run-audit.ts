@@ -68,10 +68,11 @@ import {
 } from './official-source-audit';
 import { OFFICIAL_SOURCE_REQUIREMENTS } from './official-source-requirements';
 import { evaluatePhase11A3Status } from './phase11a3-status';
-import { createOfficialMatrixRunner, isRegisteredFormalProductionRunner, type OfficialMatrixRunner } from './official-matrix-runner';
+import { createOfficialMatrixRunner, type OfficialMatrixRunner } from './official-matrix-runner';
 import { createProductionOfficialMatrixRunner } from './production-official-matrix-runner';
 import { isOfficialActFourImportReady } from './official-act-four-import-readiness';
 import { evaluatePhase11A3CompletionGate } from './phase11a3-completion-gate';
+import { runFormalProductionMatrix } from './production-official-matrix-execution';
 
 interface SourceReadinessFile {
   gates: {
@@ -204,16 +205,18 @@ export function runGuardianMatrixAttempt(options: { sourceReady?: boolean; offic
     const result = executor.runCombination(family, skippedFormId, 'formal');
     return { family, skippedFormId, passed: result.status === 'PASS', note: result.note };
   }));
-  const evidenceKind = status === 'SOURCE-BLOCKED' ? 'SOURCE-BLOCKED' : (isRegisteredFormalProductionRunner(options.runner) ? 'FORMAL-PRODUCTION' : 'SYNTHETIC-CONTRACT');
+  // This compatibility helper is contract-only.  Runtime formal evidence can
+  // only be produced by runFormalProductionMatrix(), never by a supplied runner.
+  const evidenceKind = status === 'SOURCE-BLOCKED' ? 'SOURCE-BLOCKED' : 'SYNTHETIC-CONTRACT';
   const resolvedStatus: MatrixStatus = status === 'READY'
-    ? (evidenceKind === 'FORMAL-PRODUCTION' && details.every((d) => d.passed) ? 'READY' : 'FAIL')
+    ? 'FAIL'
     : status;
   return {
     status: resolvedStatus,
     officialGuardianMatrixStatus: resolvedStatus,
     officialSkippedFormMatrixStatus: resolvedStatus,
-    threeGuardiansPass: resolvedStatus === 'READY',
-    threeSkippedFormsPass: resolvedStatus === 'READY',
+    threeGuardiansPass: false,
+    threeSkippedFormsPass: false,
     evidenceKind,
     details,
     prototypeMatrix: {
@@ -1142,7 +1145,10 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
   const guardianMatrix = runGuardianMatrixAttempt({
     runner: productionRunner,
   });
-  const formalMatrixPasses = isFormalMatrixPass(guardianMatrix, guardianMatrix);
+  const officialActFourFormalMatrix = runFormalProductionMatrix({
+    runId: 'runtime-audit', sourceInputHash: sourceReadinessFile.readiness.inputHash, verificationInputHash: 'pending-verification',
+  });
+  const formalMatrixPasses = officialActFourFormalMatrix.status === 'READY' && officialActFourFormalMatrix.combinationsPassed === 9;
 
   // Phase 11A.3 Source-Gate Integrity Repair §27-29：P2-001 拆分。
   //   globalMissingSourceReferences：整个 manifest 缺 sourceReference 的总数（保留 P2-001 旧语义）
@@ -1213,8 +1219,8 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
     // Phase 11A.3 dev doc §36 / §37：measured evidence（不再 hardcoded false）。
     // 由 family validator 推导：family 全部 ready → true；任一 family 不 ready → false。
     // 错误用法是 hardcode true（dev doc §45 明确禁止）。
-    threeGuardiansPass: guardianMatrix.threeGuardiansPass,
-    threeSkippedFormsPass: guardianMatrix.threeSkippedFormsPass,
+    threeGuardiansPass: Object.values(officialActFourFormalMatrix.guardianCoverage).every(Boolean),
+    threeSkippedFormsPass: Object.values(officialActFourFormalMatrix.skippedFormCoverage).every(Boolean),
     // Phase 11A.3 dev doc §37：fourRuinsBossesPass 不在 11A.3 官方 Act IV Gate 范围；
     // 保持 false 但**明确从 11A.3 PASS 判定中移除**（见下方判定语法注释）。
     fourRuinsBossesPass: false,
@@ -1248,18 +1254,18 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
     provenanceAudit: sourceReadinessFile.readiness.provenanceAudit,
     // Phase 11A.3 Source-Gate Final Acceptance Closure §15：real 9-combination matrix
     officialGuardianMatrix: {
-      status: guardianMatrix.status === 'NOT-VERIFIED' ? 'NOT-RUN' : guardianMatrix.status === 'READY' ? 'READY' : guardianMatrix.status === 'SOURCE-BLOCKED' ? 'SOURCE-BLOCKED' : 'FAIL',
+      status: officialActFourFormalMatrix.status,
       combinationsExpected: 9,
-      combinationsRun: ['READY', 'FAIL'].includes(guardianMatrix.status) ? guardianMatrix.details.length : 0,
-      combinationsPassed: guardianMatrix.details.filter((detail) => detail.passed).length,
-      evidenceKind: guardianMatrix.evidenceKind,
+      combinationsRun: officialActFourFormalMatrix.combinationsRun,
+      combinationsPassed: officialActFourFormalMatrix.combinationsPassed,
+      evidenceKind: officialActFourFormalMatrix.evidenceKind,
     },
     officialSkippedFormMatrix: {
-      status: guardianMatrix.status === 'NOT-VERIFIED' ? 'NOT-RUN' : guardianMatrix.status === 'READY' ? 'READY' : guardianMatrix.status === 'SOURCE-BLOCKED' ? 'SOURCE-BLOCKED' : 'FAIL',
+      status: officialActFourFormalMatrix.status,
       combinationsExpected: 9,
-      combinationsRun: ['READY', 'FAIL'].includes(guardianMatrix.status) ? guardianMatrix.details.length : 0,
-      combinationsPassed: guardianMatrix.details.filter((detail) => detail.passed).length,
-      evidenceKind: guardianMatrix.evidenceKind,
+      combinationsRun: officialActFourFormalMatrix.combinationsRun,
+      combinationsPassed: officialActFourFormalMatrix.combinationsPassed,
+      evidenceKind: officialActFourFormalMatrix.evidenceKind,
     },
     sourceReadiness: {
       allRequiredSourcesReady: sourceReadinessFile.gates.allRequiredSourcesReady,

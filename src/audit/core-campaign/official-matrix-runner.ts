@@ -5,10 +5,6 @@ export type MatrixCombinationResult = { family: GuardianFamily; skippedFormId: S
 export interface OfficialMatrixRunner {
   runCombination(family: GuardianFamily, skippedFormId: SkippedFormId, mode: 'formal'): MatrixCombinationResult;
 }
-const formalProductionRunners = new WeakSet<object>();
-/** Internal factory registration; callers cannot self-declare through the public runner shape. */
-export function registerFormalProductionRunner<T extends OfficialMatrixRunner>(runner: T): T { formalProductionRunners.add(runner); return runner; }
-export function isRegisteredFormalProductionRunner(runner: OfficialMatrixRunner | undefined): boolean { return !!runner && formalProductionRunners.has(runner); }
 
 export function createOfficialMatrixRunner(sourceReady: boolean, execute?: OfficialMatrixRunner): OfficialMatrixRunner {
   return {
