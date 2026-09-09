@@ -20,7 +20,7 @@ function main(): number {
   const readiness = artifacts['source-readiness.json'];
   const ledger = artifacts['issue-ledger.json'];
   if (vr.runId !== gate.runId || vr.verificationInputHash !== gate.verificationInputHash || vr.sourceInputHash !== readiness.sourceInputHash || vr.sourceInputHash !== gate.sourceInputHash) {
-    throw new Error('final artifact identity mismatch');
+    throw new Error(`final artifact identity mismatch: verification(run=${vr.runId}, verify=${vr.verificationInputHash}, source=${vr.sourceInputHash}) gate(run=${gate.runId}, verify=${gate.verificationInputHash}, source=${gate.sourceInputHash}) readiness(source=${readiness.sourceInputHash})`);
   }
   mkdirSync(reportDir, { recursive: true });
   const lines = [
