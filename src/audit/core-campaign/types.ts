@@ -157,6 +157,7 @@ export interface ReleaseGateResult {
   unitPasses: boolean;
   integrationPasses: boolean;
   criticalE2EPasses: boolean;
+  criticalE2ELifecyclePasses: boolean;
   /**
    * 11A.2.3R §10-12（dev doc fix #1）：command contract 独立 measured。
    * 由 verify-phase11a2-3.ts 独立跑 game-command-route-contract.test.ts 后注入。
@@ -242,12 +243,14 @@ export interface ReleaseGateResult {
     combinationsExpected: number;
     combinationsRun: number;
     combinationsPassed: number;
+    evidenceKind: 'SOURCE-BLOCKED' | 'SYNTHETIC-CONTRACT' | 'FORMAL-PRODUCTION';
   };
   officialSkippedFormMatrix: {
     status: 'READY' | 'SOURCE-BLOCKED' | 'NOT-RUN' | 'FAIL';
     combinationsExpected: number;
     combinationsRun: number;
     combinationsPassed: number;
+    evidenceKind: 'SOURCE-BLOCKED' | 'SYNTHETIC-CONTRACT' | 'FORMAL-PRODUCTION';
   };
   // Phase 11A.3 Source-Gate Final Acceptance Closure §17：canBeginOfficialImport 由 source audit
   // 输出；canEnterPhase11B 只能由 Phase 11A.3 COMPLETE 后由 release-gate 输出

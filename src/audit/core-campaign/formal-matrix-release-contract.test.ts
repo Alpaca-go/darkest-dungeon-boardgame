@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { runGuardianMatrixAttempt } from './run-audit';
+import { isFormalMatrixPass, runGuardianMatrixAttempt } from './run-audit';
 import type { OfficialMatrixRunner } from './official-matrix-runner';
 
 const passRunner: OfficialMatrixRunner = { runCombination: (family, skippedFormId) => ({ family, skippedFormId, status: 'PASS', note: 'formal fixture' }) };
@@ -14,8 +14,8 @@ describe('formal matrix lifecycle', () => {
   });
 
   it('runs all nine formal combinations after import and requires every pass', () => {
-    const result = runGuardianMatrixAttempt({ sourceReady: true, officialImportReady: true, runner: passRunner });
-    expect(result.status).toBe('READY');
+    const result = runGuardianMatrixAttempt({ sourceReady: true, officialImportReady: true, runner: passRunner, evidenceKind: 'SYNTHETIC-CONTRACT' });
+    expect(result.status).toBe('FAIL');
     expect(result.details).toHaveLength(9);
     expect(result.details.every((detail) => detail.passed)).toBe(true);
   });
@@ -24,4 +24,11 @@ describe('formal matrix lifecycle', () => {
     const result = runGuardianMatrixAttempt({ sourceReady: true, officialImportReady: true, runner: { runCombination: (family, skippedFormId) => ({ family, skippedFormId, status: family === 'templars' ? 'FAIL' : 'PASS', note: 'fixture' }) } });
     expect(result.status).toBe('FAIL');
   });
+});
+
+it('accepts only a complete formal production matrix', () => {
+  const matrix = runGuardianMatrixAttempt({ sourceReady: true, officialImportReady: true, runner: passRunner, evidenceKind: 'FORMAL-PRODUCTION' });
+  expect(isFormalMatrixPass(matrix, matrix)).toBe(true);
+  const partial = { ...matrix, details: matrix.details.slice(0, 8) };
+  expect(isFormalMatrixPass(partial, partial)).toBe(false);
 });

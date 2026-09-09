@@ -242,6 +242,7 @@ function main(): number {
     integrationPasses: commandPass('integration'),
     buildPasses: commandPass('build'),
     criticalE2EPasses: commandPass('criticalE2E'),
+    criticalE2ELifecyclePasses: commandPass('criticalE2ELifecycle'),
     goldenTestPasses: goldenPasses,
     replayDeterminismPasses,
     replayContinuationPasses,
@@ -274,7 +275,7 @@ function main(): number {
   // ---- 19. read newly generated release-gate.json ----
   const releaseGateJson = readJsonSafe<Record<string, unknown>>(RELEASE_GATE_PATH);
   const releaseGateArtifactValid = !!releaseGateJson && !!releaseGateJson.verdict &&
-    releaseGateJson.runId === runId && releaseGateJson.verificationInputHash === inputHashBefore;
+    releaseGateJson.runId === runId && releaseGateJson.verificationInputHash === inputHashBefore && releaseGateJson.sourceInputHash === sourceInputHash;
   const releaseGateVerdict = (releaseGateJson?.verdict as string) ?? 'UNKNOWN';
   const releaseGateSummary = (releaseGateJson as Record<string, unknown> | undefined) ?? {};
   const issueLedger = readJsonSafe<{ openP0: number; openP1: number; issues: { id: string; severity: string; status: string }[] }>(ISSUE_LEDGER_PATH);
@@ -290,6 +291,9 @@ function main(): number {
   // gateVerdict
   if (!releaseGateArtifactValid) {
     consistencyErrors.push('release-gate.json missing or invalid after audit:release-gate');
+  }
+  for (const [name, artifact] of [['source-readiness', sourceReadiness], ['pre-gate', preGate], ['release-gate', releaseGateJson]] as const) {
+    if ((artifact as { sourceInputHash?: string } | null)?.sourceInputHash !== sourceInputHash) consistencyErrors.push(`${name}.sourceInputHash mismatch`);
   }
   // source-readiness gates 与 release-gate.sourceReadiness 一致
   if (sourceReadiness && releaseGateJson) {
@@ -412,7 +416,9 @@ function main(): number {
     optionalMissingCount?: number;
   } | null;
 
-  const releaseGatePasses = allEngineeringTrue && openP0 === 0 && openP1 === 0 && sourceAllRequired;
+  const formalMatrixPasses = releaseGateJson?.officialGuardianMatrix && releaseGateJson?.officialSkippedFormMatrix &&
+    [releaseGateJson.officialGuardianMatrix, releaseGateJson.officialSkippedFormMatrix].every((matrix: any) => matrix.status === 'READY' && matrix.combinationsExpected === 9 && matrix.combinationsRun === 9 && matrix.combinationsPassed === 9 && matrix.evidenceKind === 'FORMAL-PRODUCTION');
+  const releaseGatePasses = allEngineeringTrue && openP0 === 0 && openP1 === 0 && sourceAllRequired && !!formalMatrixPasses;
 
   const verificationInputHash = inputHashAfter;
 

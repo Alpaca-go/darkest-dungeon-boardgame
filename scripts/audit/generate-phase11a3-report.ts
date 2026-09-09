@@ -19,7 +19,7 @@ function main(): number {
   const summary = artifacts['official-source-summary.json'];
   const readiness = artifacts['source-readiness.json'];
   const ledger = artifacts['issue-ledger.json'];
-  if (vr.runId !== gate.runId || vr.verificationInputHash !== gate.verificationInputHash) {
+  if (vr.runId !== gate.runId || vr.verificationInputHash !== gate.verificationInputHash || vr.sourceInputHash !== readiness.sourceInputHash || vr.sourceInputHash !== gate.sourceInputHash) {
     throw new Error('final artifact identity mismatch');
   }
   mkdirSync(reportDir, { recursive: true });
@@ -27,6 +27,7 @@ function main(): number {
     '# Phase 11A.3 Source-Gate Final Acceptance Report', '',
     `- runId: \`${vr.runId}\``,
     `- verificationInputHash: \`${vr.verificationInputHash}\``,
+    `- sourceInputHash: \`${vr.sourceInputHash}\``,
     `- phase11A3Status: **${vr.phase11A3Status}**`,
     `- release verdict: **${gate.verdict ?? 'UNKNOWN'}**`,
     `- requiredMissingCount: **${summary.requiredMissingCount ?? 'UNKNOWN'}**`,

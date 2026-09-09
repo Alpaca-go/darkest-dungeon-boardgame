@@ -47,6 +47,8 @@ interface VerificationResults {
   unitPasses?: boolean;
   integrationPasses?: boolean;
   criticalE2EPasses?: boolean | 'not-measured';
+  criticalE2ELifecyclePasses?: boolean;
+  sourceInputHash?: string;
   commandContractPasses?: boolean;
   replayContinuationPasses?: boolean;
   goldenPasses?: boolean;
@@ -91,6 +93,7 @@ const report = runAudit({
   unitPasses: envFlag('PHASE11A_UNIT') ?? evidence?.unitPasses,
   integrationPasses: envFlag('PHASE11A_INTEGRATION') ?? evidence?.integrationPasses,
   criticalE2EPasses: envFlag('PHASE11A_E2E') ?? (evidence?.criticalE2EPasses === true),
+  criticalE2ELifecyclePasses: evidence?.criticalE2ELifecyclePasses,
   commandContractPasses: evidence?.commandContractPasses,
   replayContinuationPasses: evidence?.replayContinuationPasses,
   verificationFresh,
@@ -164,13 +167,14 @@ if (envFlag('PHASE11A_BUILD') === undefined && evidence?.buildPasses === undefin
 if (envFlag('PHASE11A_UNIT') === undefined && evidence?.unitPasses === undefined) unmeasuredGateBits.push('unitPasses');
 if (envFlag('PHASE11A_INTEGRATION') === undefined && evidence?.integrationPasses === undefined) unmeasuredGateBits.push('integrationPasses');
 if (envFlag('PHASE11A_E2E') === undefined && evidence?.criticalE2EPasses === undefined) unmeasuredGateBits.push('criticalE2EPasses');
+if (evidence?.criticalE2ELifecyclePasses === undefined) unmeasuredGateBits.push('criticalE2ELifecyclePasses');
 // 11A.2.3R §10-12：command contract / replay continuation 仅从 verification-results.json 注入
 // （无 env 兜底），缺字段 → unmeasured。
 if (evidence?.commandContractPasses === undefined) unmeasuredGateBits.push('commandContractPasses');
 if (evidence?.replayContinuationPasses === undefined) unmeasuredGateBits.push('replayContinuationPasses');
 
 written.push(
-  writeJson('release-gate.json', { ...gate, runId: evidence?.runId, verificationInputHash: evidence?.verificationInputHash, generatedAt: report.generatedAt, unmeasuredGateBits, dataGates, ruleSummary }),
+  writeJson('release-gate.json', { ...gate, runId: evidence?.runId, verificationInputHash: evidence?.verificationInputHash, sourceInputHash: evidence?.sourceInputHash, generatedAt: report.generatedAt, unmeasuredGateBits, dataGates, ruleSummary }),
 );
 
 // ---------------------------------------------------------------------------

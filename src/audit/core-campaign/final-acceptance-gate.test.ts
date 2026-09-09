@@ -3,7 +3,7 @@ import { evaluateReleaseGate, runAudit, type RunAuditOptions } from './run-audit
 import { runProductionCommandAudit } from './production-command-audit';
 const measured: RunAuditOptions = {
   typecheckPasses: true, unitPasses: true, buildPasses: true, integrationPasses: true,
-  criticalE2EPasses: true, commandContractPasses: true, goldenTestPasses: true,
+  criticalE2EPasses: true, criticalE2ELifecyclePasses: true, commandContractPasses: true, goldenTestPasses: true,
   replayDeterminismPasses: true, replayContinuationPasses: true, productionCommandLayerPasses: true,
   verificationFresh: true,
 };

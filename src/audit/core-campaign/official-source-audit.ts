@@ -838,7 +838,7 @@ export function runOfficialSourceAudit(options: AuditOptions = {}): {
   return { readiness, summary, resolvedRequirements: resolved };
 }
 
-function computeAuditInputHash(
+export function computeAuditInputHash(
   requirements: OfficialSourceRequirement[],
   documentsByReq: Map<string, OfficialSourceDocument[]>,
   errors: SourceAuditError[],

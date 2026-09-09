@@ -8,6 +8,7 @@ export interface Phase11A3PreGateEvidence {
   integrationPasses: boolean;
   buildPasses: boolean;
   criticalE2EPasses: boolean;
+  criticalE2ELifecyclePasses: boolean;
   goldenTestPasses: boolean;
   replayDeterminismPasses: boolean;
   replayContinuationPasses: boolean;

@@ -69,6 +69,7 @@ import {
 import { OFFICIAL_SOURCE_REQUIREMENTS } from './official-source-requirements';
 import { evaluatePhase11A3Status } from './phase11a3-status';
 import { createOfficialMatrixRunner, type OfficialMatrixRunner } from './official-matrix-runner';
+import { createProductionOfficialMatrixRunner } from './production-official-matrix-runner';
 
 interface SourceReadinessFile {
   gates: {
@@ -150,6 +151,7 @@ export interface GuardianMatrixResult {
   officialSkippedFormMatrixStatus: MatrixStatus;
   threeGuardiansPass: boolean;
   threeSkippedFormsPass: boolean;
+  evidenceKind: 'SOURCE-BLOCKED' | 'SYNTHETIC-CONTRACT' | 'FORMAL-PRODUCTION';
   /** 9 个组合各自的结果（family × skipped-form-id）。SOURCE-BLOCKED 时不测量。 */
   details: Array<{
     family: 'templars' | 'mammoth-cyst' | 'shuffling-horror';
@@ -168,6 +170,15 @@ export interface GuardianMatrixResult {
   };
 }
 
+export function isFormalMatrixPass(
+  guardianMatrix: Pick<GuardianMatrixResult, 'status' | 'details' | 'evidenceKind'>,
+  skippedFormMatrix: Pick<GuardianMatrixResult, 'status' | 'details' | 'evidenceKind'>,
+): boolean {
+  const passes = (matrix: Pick<GuardianMatrixResult, 'status' | 'details' | 'evidenceKind'>) =>
+    matrix.evidenceKind === 'FORMAL-PRODUCTION' && matrix.status === 'READY' && matrix.details.length === 9 && matrix.details.every((detail) => detail.passed);
+  return passes(guardianMatrix) && passes(skippedFormMatrix);
+}
+
 /**
  * Phase 11A.3 Source-Gate Integrity Repair dev doc §23：
  *   SOURCE-BLOCKED 阶段：official matrix status = SOURCE-BLOCKED。
@@ -179,7 +190,7 @@ export interface GuardianMatrixResult {
  *   status 区分 SOURCE-BLOCKED / NOT-RUN / READY / FAIL；
  *   prototypeMatrix 改成纯 status 信号，不再 fake boolean。
  */
-export function runGuardianMatrixAttempt(options: { sourceReady?: boolean; officialImportReady?: boolean; runner?: OfficialMatrixRunner } = {}): GuardianMatrixResult {
+export function runGuardianMatrixAttempt(options: { sourceReady?: boolean; officialImportReady?: boolean; runner?: OfficialMatrixRunner; evidenceKind?: GuardianMatrixResult['evidenceKind'] } = {}): GuardianMatrixResult {
   const sourceReady = options.sourceReady ?? (isTemplarsOfficialEncounterEnabled() && isMammothCystOfficialEncounterEnabled() && isShufflingHorrorOfficialEncounterEnabled());
   const officialImportReady = options.officialImportReady ?? (isDarkestDungeonOfficialGuardianPoolEnabled() && isFinalEncounterOfficialEnabled() && isDarkestDungeonOfficialQuestPoolEnabled());
   const families = ['templars', 'mammoth-cyst', 'shuffling-horror'] as const;
@@ -191,13 +202,17 @@ export function runGuardianMatrixAttempt(options: { sourceReady?: boolean; offic
     const result = executor.runCombination(family, skippedFormId, 'formal');
     return { family, skippedFormId, passed: result.status === 'PASS', note: result.note };
   }));
-  const resolvedStatus: MatrixStatus = status === 'READY' ? (details.every((d) => d.passed) ? 'READY' : 'FAIL') : status;
+  const evidenceKind = status === 'SOURCE-BLOCKED' ? 'SOURCE-BLOCKED' : (options.evidenceKind ?? 'SYNTHETIC-CONTRACT');
+  const resolvedStatus: MatrixStatus = status === 'READY'
+    ? (evidenceKind === 'FORMAL-PRODUCTION' && details.every((d) => d.passed) ? 'READY' : 'FAIL')
+    : status;
   return {
     status: resolvedStatus,
     officialGuardianMatrixStatus: resolvedStatus,
     officialSkippedFormMatrixStatus: resolvedStatus,
     threeGuardiansPass: resolvedStatus === 'READY',
     threeSkippedFormsPass: resolvedStatus === 'READY',
+    evidenceKind,
     details,
     prototypeMatrix: {
       status: 'NOT-RUN',
@@ -711,6 +726,7 @@ export interface RunAuditOptions {
   unitPasses?: boolean;
   integrationPasses?: boolean;
   criticalE2EPasses?: boolean;
+  criticalE2ELifecyclePasses?: boolean;
   /**
    * 11A.2.3R §10-12（dev doc fix #1）：command contract 不再 = unit，独立 measured。
    * verification-results.json.commandContractPasses 注入。
@@ -1119,7 +1135,12 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
 
   // Phase 11A.3 Source-Gate Integrity Repair §22-25：Guardian Matrix。
   // SOURCE-BLOCKED 阶段：matrix 报 SOURCE-BLOCKED（不伪称 3×3 pass）。
-  const guardianMatrix = runGuardianMatrixAttempt();
+  const productionRunner = createProductionOfficialMatrixRunner();
+  const guardianMatrix = runGuardianMatrixAttempt({
+    runner: productionRunner,
+    evidenceKind: productionRunner ? 'FORMAL-PRODUCTION' : undefined,
+  });
+  const formalMatrixPasses = isFormalMatrixPass(guardianMatrix, guardianMatrix);
 
   // Phase 11A.3 Source-Gate Integrity Repair §27-29：P2-001 拆分。
   //   globalMissingSourceReferences：整个 manifest 缺 sourceReference 的总数（保留 P2-001 旧语义）
@@ -1175,6 +1196,7 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
     commandContractPasses: input.options.commandContractPasses ?? false,
     replayContinuationPasses: input.options.replayContinuationPasses ?? false,
     criticalE2EPasses: input.options.criticalE2EPasses ?? false,
+    criticalE2ELifecyclePasses: input.options.criticalE2ELifecyclePasses ?? false,
     goldenCampaignPasses: elevenQuestLoopClosed,
     replayDeterminismPasses: input.replayDeterminism.identical && input.options.replayDeterminismPasses === true,
     openP0,
@@ -1226,14 +1248,16 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
     officialGuardianMatrix: {
       status: guardianMatrix.status === 'NOT-VERIFIED' ? 'NOT-RUN' : guardianMatrix.status === 'READY' ? 'READY' : guardianMatrix.status === 'SOURCE-BLOCKED' ? 'SOURCE-BLOCKED' : 'FAIL',
       combinationsExpected: 9,
-      combinationsRun: guardianMatrix.status === 'READY' ? 9 : 0,
-      combinationsPassed: guardianMatrix.status === 'READY' ? (guardianMatrix.threeGuardiansPass ? 9 : 0) : 0,
+      combinationsRun: ['READY', 'FAIL'].includes(guardianMatrix.status) ? guardianMatrix.details.length : 0,
+      combinationsPassed: guardianMatrix.details.filter((detail) => detail.passed).length,
+      evidenceKind: guardianMatrix.evidenceKind,
     },
     officialSkippedFormMatrix: {
       status: guardianMatrix.status === 'NOT-VERIFIED' ? 'NOT-RUN' : guardianMatrix.status === 'READY' ? 'READY' : guardianMatrix.status === 'SOURCE-BLOCKED' ? 'SOURCE-BLOCKED' : 'FAIL',
       combinationsExpected: 9,
-      combinationsRun: guardianMatrix.status === 'READY' ? 9 : 0,
-      combinationsPassed: guardianMatrix.status === 'READY' ? (guardianMatrix.threeSkippedFormsPass ? 9 : 0) : 0,
+      combinationsRun: ['READY', 'FAIL'].includes(guardianMatrix.status) ? guardianMatrix.details.length : 0,
+      combinationsPassed: guardianMatrix.details.filter((detail) => detail.passed).length,
+      evidenceKind: guardianMatrix.evidenceKind,
     },
     sourceReadiness: {
       allRequiredSourcesReady: sourceReadinessFile.gates.allRequiredSourcesReady,
@@ -1268,7 +1292,7 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
   // Pre-gate evidence is already measured during verification; it must not,
   // however, turn a measured false into an unmeasured success.
   const verificationStale = input.options.verificationFresh !== true;
-  const criticalE2EUnmeasured = input.options.criticalE2EPasses !== true;
+  const criticalE2EUnmeasured = input.options.criticalE2EPasses !== true || input.options.criticalE2ELifecyclePasses !== true;
   // 11A.2.3R §10-12（dev doc fix #1 + #4）：command contract + replay continuation 独立 measured，
   // 任一未注入或 fail → NOT-VERIFIED。
   const commandContractUnmeasured = input.options.commandContractPasses !== true;
@@ -1347,19 +1371,19 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
       'threeSkippedFormsPass=' + guardianMatrix.threeSkippedFormsPass + ' / ' +
       'elevenQuestLoopClosed=false / campaignVictoryReachable=false。' +
       '等待用户补全 source 资料后重跑 audit。';
-  } else if (sourceReadinessFile.gates.allRequiredSourcesReady && !elevenQuestLoopClosed) {
+  } else if (sourceReadinessFile.gates.allRequiredSourcesReady && !isDarkestDungeonOfficialQuestPoolEnabled()) {
     // Phase 11A.3 Source-Gate Final Acceptance Closure §14：
     //   source 全部 ready + 11 Quest 没闭环 + 只 P0-002 open → READY-FOR-OFFICIAL-IMPORT
     //   （不是 IMPLEMENTATION-FAIL，因为 implementation 是对的，只是 official import 还没跑）
     gate.verdict = 'SOURCE-BLOCKED'; // 暂用 SOURCE-BLOCKED 容器；phase11A3Status 会改成 READY-FOR-OFFICIAL-IMPORT
     gate.passed = false;
     gate.conclusion = `READY-FOR-OFFICIAL-IMPORT — all required source ready + 11-Quest not closed（finalAct=${input.goldenRun.finalAct}）。请执行 official data import 后重跑 audit。`;
-  } else if (!elevenQuestLoopClosed) {
+  } else if (!formalMatrixPasses || !elevenQuestLoopClosed) {
     // Phase 11A.3 dev doc §39：official data ready 但 11 Quest 没闭环 → FAIL。
     // 删除了之前的「else if (!elevenQuestLoopClosed) → CONDITIONAL」重复分支（dev doc §39）。
     gate.verdict = 'FAIL';
     gate.passed = false;
-    gate.conclusion = `FAIL — eleven-quest-not-closed：source-readiness 全部 ready 但 11-Quest 闭环未达成（finalAct=${input.goldenRun.finalAct}）。`;
+    gate.conclusion = `FAIL — formal-matrix-or-eleven-quest-not-closed：formalMatrixPasses=${formalMatrixPasses}，11-Quest 闭环=${elevenQuestLoopClosed}。`;
   } else if (openP1 > 0 || blockedGoldenSeeds().length > 0) {
     gate.verdict = 'CONDITIONAL';
     gate.passed = false;
@@ -1373,13 +1397,14 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
   const engineeringGatePasses = [
     gate.typecheckPasses, gate.unitPasses, gate.commandContractPasses,
     gate.integrationPasses, gate.buildPasses, gate.criticalE2EPasses,
+    gate.criticalE2ELifecyclePasses,
     gate.goldenTestPasses, gate.replayDeterminismPasses,
     gate.replayContinuationPasses, gate.productionCommandLayerPasses,
   ].every(Boolean);
   const verifierHealthy = engineeringGatePasses && sourceReadinessFile.auditPasses && input.options.verificationFresh === true;
   gate.phase11A3Status = evaluatePhase11A3Status({
     verifierHealthy,
-    implementationPasses: gate.verdict !== 'FAIL' && gate.verdict !== 'CONDITIONAL',
+    implementationPasses: gate.verdict !== 'FAIL' && gate.verdict !== 'CONDITIONAL' && (!sourceReadinessFile.gates.allRequiredSourcesReady || formalMatrixPasses),
     sourceAuditPasses: sourceReadinessFile.auditPasses,
     allRequiredSourcesReady: sourceReadinessFile.gates.allRequiredSourcesReady,
     elevenQuestLoopClosed,
@@ -1393,8 +1418,8 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
   //   canEnterPhase11B：只能由 Phase 11A.3 COMPLETE 后由 release-gate 输出
   //   canCloseP0_002：Phase 11A.3 真正 COMPLETE 后才能关
   gate.canBeginOfficialImport = sourceReadinessFile.gates.allRequiredSourcesReady;
-  gate.canCloseP0_002 = gate.verdict === 'PASS';
-  gate.canEnterPhase11B = gate.verdict === 'PASS';
+  gate.canCloseP0_002 = gate.verdict === 'PASS' && formalMatrixPasses;
+  gate.canEnterPhase11B = gate.verdict === 'PASS' && formalMatrixPasses;
 
   // canEnterPhase11A3（保留向后兼容，但不再是 11A.3 主指标）
   gate.canEnterPhase11A3 =
