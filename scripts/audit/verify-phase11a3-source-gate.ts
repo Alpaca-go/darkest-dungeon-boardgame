@@ -23,7 +23,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync, unlinkSync } from '
 import { join } from 'path';
 import { computeVerificationInputHash } from '../../src/audit/core-campaign/verification-input';
 import { OFFICIAL_SOURCE_REQUIREMENTS } from '../../src/audit/core-campaign/official-source-requirements';
-import type { Phase11A3PreGateEvidence } from '../../src/audit/core-campaign/verification-evidence';
+import { evaluateVerificationCliExit, type Phase11A3PreGateEvidence } from '../../src/audit/core-campaign/verification-evidence';
 
 const ROOT = process.cwd();
 const DATA_DIR = join(ROOT, 'docs/data/core-campaign');
@@ -35,7 +35,7 @@ const SOURCE_MANIFEST_PATH = join(DATA_DIR, 'official-source-manifest.json');
 const SOURCE_SUMMARY_PATH = join(DATA_DIR, 'official-source-summary.json');
 const ISSUE_LEDGER_PATH = join(DATA_DIR, 'issue-ledger.json');
 const REPORT_DIR = join(ROOT, 'docs/reports/phase-11a3');
-const FAILURE_DIR = join(DATA_DIR, 'verify-failures');
+const RUNS_DIR = join(DATA_DIR, 'verification-runs');
 
 interface CommandResult {
   command: string;
@@ -63,6 +63,8 @@ interface VerificationResults {
   integrationPasses: boolean;
   buildPasses: boolean;
   criticalE2EPasses: boolean | 'not-measured';
+  criticalE2ELifecyclePasses: boolean;
+  sourceInputHash: string;
   goldenPasses: boolean;
   goldenTestPasses: boolean;
   replayDeterminismPasses: boolean;
@@ -102,7 +104,7 @@ interface VerificationResults {
   notes: string[];
 }
 
-function runCommand(name: string, cmd: string, args: string[], timeoutMs: number, extraEnv: Record<string, string> = {}): CommandResult {
+function runCommand(name: string, cmd: string, args: string[], timeoutMs: number, extraEnv: Record<string, string> = {}, failureDir = RUNS_DIR): CommandResult {
   const start = Date.now();
   console.log(`[${name}] ${cmd} ${args.join(' ')}`);
   const result = spawnSync(cmd, args, {
@@ -132,8 +134,8 @@ function runCommand(name: string, cmd: string, args: string[], timeoutMs: number
   if (exitCode === 0) {
     return { command: name, exitCode, durationMs, failureLogPath: null, ...details };
   }
-  if (!existsSync(FAILURE_DIR)) mkdirSync(FAILURE_DIR, { recursive: true });
-  const logPath = join(FAILURE_DIR, `${name}.log`);
+  if (!existsSync(failureDir)) mkdirSync(failureDir, { recursive: true });
+  const logPath = join(failureDir, `${name}.log`);
   writeFileSync(logPath, `STDOUT:\n${stdoutTail}\n\nSTDERR:\n${stderrTail}\n`, 'utf-8');
   return { command: name, exitCode, durationMs, failureLogPath: logPath, ...details };
 }
@@ -155,6 +157,7 @@ function main(): number {
   const commands: CommandResult[] = [];
   const notes: string[] = [];
   const runId = randomUUID();
+  const failureDir = join(RUNS_DIR, runId, 'logs');
   if (existsSync(RELEASE_GATE_PATH)) unlinkSync(RELEASE_GATE_PATH);
   if (existsSync(PRE_GATE_PATH)) unlinkSync(PRE_GATE_PATH);
 
@@ -164,8 +167,8 @@ function main(): number {
   const inputHashBefore = computeVerificationInputHash();
 
   // ---- 1-2. typecheck + unit ----
-  commands.push(runCommand('typecheck', 'npx', ['tsc', '--noEmit'], 120_000));
-  commands.push(runCommand('unit', 'npx', ['vitest', 'run', '--reporter=default'], 300_000));
+  commands.push(runCommand('typecheck', 'npx', ['tsc', '--noEmit'], 120_000, {}, failureDir));
+  commands.push(runCommand('unit', 'npx', ['vitest', 'run', '--reporter=default'], 300_000, {}, failureDir));
 
   // ---- 3. command contract ----
   commands.push(runCommand('commandContract', 'npx', ['vitest', 'run', 'src/audit/core-campaign/game-command-route-contract.test.ts'], 60_000));
@@ -181,8 +184,10 @@ function main(): number {
     'criticalE2E',
     process.platform === 'win32' ? 'npm.cmd' : 'npm',
     ['run', 'test:e2e:critical'],
-    180_000,
+    180_000, {}, failureDir,
   ));
+  const criticalE2ELifecycle = runCommand('criticalE2ELifecycle', 'npm', ['run', 'test:e2e:lifecycle'], 180_000, {}, failureDir);
+  commands.push(criticalE2ELifecycle);
 
   // ---- 7. golden test ----
   const golden = runCommand('golden', 'npx', ['vitest', 'run', 'src/audit/core-campaign'], 120_000);
@@ -211,6 +216,7 @@ function main(): number {
   const sourceSummary = readJsonSafe<Record<string, unknown>>(SOURCE_SUMMARY_PATH);
   const officialSourceManifestGenerated = !!sourceManifest && !!sourceManifest.summary;
   const sourceReadinessGenerated = !!sourceReadiness && !!sourceReadiness.gates;
+  const sourceInputHash = (sourceReadiness as { sourceInputHash?: string } | null)?.sourceInputHash ?? '';
   // dev doc §12：field provenance 来自 structured provenanceAudit.passes（不再 auditPasses proxy）
   const provenanceAudit = (sourceReadiness as { provenanceAudit?: { passes: boolean } } | null)?.provenanceAudit;
   const fieldProvenanceValidated = provenanceAudit ? provenanceAudit.passes : false;
@@ -229,6 +235,7 @@ function main(): number {
   const preGate: Phase11A3PreGateEvidence = {
     runId,
     verificationInputHash: inputHashBefore,
+    sourceInputHash,
     typecheckPasses: commandPass('typecheck'),
     unitPasses: commandPass('unit'),
     commandContractPasses: commandPass('commandContract'),
@@ -367,6 +374,7 @@ function main(): number {
   // ---- 22. write final verification-results.json ----
   const criticalE2ECommand = commands.find((c) => c.command === 'criticalE2E');
   const criticalE2EPasses: boolean = criticalE2ECommand?.exitCode === 0;
+  const criticalE2ELifecyclePasses = criticalE2ELifecycle.exitCode === 0;
 
   const typecheckCommand = commands.find((c) => c.command === 'typecheck');
   const unitCommand = commands.find((c) => c.command === 'unit');
@@ -385,11 +393,11 @@ function main(): number {
   const allEngineeringTrue = typecheckPasses && unitPasses && commandContractPasses &&
     integrationPasses && buildPasses && goldenPasses && replayDeterminismPasses &&
     replayContinuationPasses && productionCommandLayerPasses &&
-    (criticalE2EPasses === true) && contentAuditPasses && rulesAuditPasses &&
+    (criticalE2EPasses === true) && criticalE2ELifecyclePasses && contentAuditPasses && rulesAuditPasses &&
     officialSourceAuditPasses && officialSourceManifestGenerated && sourceReadinessGenerated &&
     fieldProvenanceValidated && releaseGateArtifactValid;
   const engineeringRegressionPasses = typecheckPasses && unitPasses && commandContractPasses &&
-    integrationPasses && buildPasses && criticalE2EPasses && goldenPasses &&
+    integrationPasses && buildPasses && criticalE2EPasses && criticalE2ELifecyclePasses && goldenPasses &&
     replayDeterminismPasses && replayContinuationPasses && productionCommandLayerPasses;
 
   // Source side：dev doc §6：allRequiredSourcesReady 由 requiredForCompletion 驱动
@@ -419,6 +427,8 @@ function main(): number {
     integrationPasses: !!integrationPasses,
     buildPasses: !!buildPasses,
     criticalE2EPasses: criticalE2EPasses === true,
+    criticalE2ELifecyclePasses,
+    sourceInputHash,
     goldenPasses,
     goldenTestPasses: goldenPasses, // canonical 11A.3 field
     replayDeterminismPasses,
@@ -457,15 +467,19 @@ function main(): number {
   };
 
   writeFileSync(RESULTS_PATH, JSON.stringify(results, null, 2) + '\n', 'utf-8');
-  const reportGeneration = runCommand('finalReport', 'npm', ['run', 'audit:phase11a3-report'], 60_000);
+  const reportGeneration = runCommand('finalReport', 'npm', ['run', 'audit:phase11a3-report'], 60_000, {}, failureDir);
   commands.push(reportGeneration);
   if (reportGeneration.exitCode !== 0) {
     consistencyErrors.push('final report generation failed');
     results.verifierHealthy = false;
     results.phase11A3Status = 'NOT-VERIFIED';
     results.consistencyErrors = consistencyErrors;
-    writeFileSync(RESULTS_PATH, JSON.stringify(results, null, 2) + '\n', 'utf-8');
   }
+  // Final evidence includes report generation itself; it is the last publish.
+  results.commands = commands;
+  results.consistencyErrors = consistencyErrors;
+  results.verifierHealthy = results.engineeringRegressionPasses && officialSourceAuditPasses && fieldProvenanceValidated && verificationFresh && unmeasuredGateBits.length === 0 && consistencyErrors.length === 0 && reportGeneration.exitCode === 0;
+  writeFileSync(RESULTS_PATH, JSON.stringify(results, null, 2) + '\n', 'utf-8');
   console.log(`\n[verify-phase11a3-source-gate] wrote ${RESULTS_PATH}`);
   console.log(`\nverdict=${releaseGateVerdict}`);
   console.log(`phase11A3Status=${phase11A3Status}`);
@@ -482,26 +496,13 @@ function main(): number {
   console.log(`releaseGateCommandExitCode=${releaseGateCommandExitCode} (artifactValid=${releaseGateArtifactValid})`);
 
   // 决定 exit code
-  if (consistencyErrors.length > 0) {
+  const terminalExit = evaluateVerificationCliExit({ verifierHealthy: results.verifierHealthy, phase11A3Status: results.phase11A3Status });
+  if (terminalExit === 1) {
     console.error('\nCONSISTENCY ERRORS:');
     for (const e of consistencyErrors) console.error(`  - ${e}`);
-    return 1;
+    console.error('\nVerification terminal contract rejected this result.');
   }
-  if (!verificationFresh) {
-    console.error(`\nVERIFICATION STALE: input hash changed during pipeline (${inputHashBefore} → ${inputHashAfter})`);
-    return 1;
-  }
-  if (!allEngineeringTrue) {
-    console.error('\nSome engineering measured checks failed. See results.');
-    return 1;
-  }
-  // SOURCE-BLOCKED / NOT-VERIFIED / READY-FOR-OFFICIAL-IMPORT / COMPLETE 都算 audit 跑通；
-  // 只有 IMPLEMENTATION-FAIL 算异常
-  if (phase11A3Status === 'IMPLEMENTATION-FAIL') {
-    console.error('\nPhase 11A.3 IMPLEMENTATION-FAIL: 见 release-gate.json / issue-ledger.json。');
-    return 1;
-  }
-  return 0;
+  return terminalExit;
 }
 
 // Phase 11A.3 SGIR §39：vite-node 不设 `require.main === module`，直接执行。

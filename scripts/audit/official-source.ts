@@ -203,6 +203,7 @@ function writeReadiness(
   const data = {
     $schema: 'phase-11a3-source-gate-final-acceptance/source-readiness.v3',
     generatedAt: readiness.generatedAt,
+    sourceInputHash: readiness.inputHash,
     phase: '11A.3',
     tierA: {
       rulebook: readiness.resolvedRequirements.find((r) => r.requirementId === 'tierA-rulebook')?.status ?? 'missing',
@@ -213,7 +214,7 @@ function writeReadiness(
     rationale: Object.fromEntries(
       readiness.resolvedRequirements.map((r) => [
         r.requirementId,
-        r.status === 'available' ? 'verified' : 'source-required',
+        r.status === 'available' ? 'verified' : (OFFICIAL_SOURCE_REQUIREMENTS.find((req) => req.requirementId === r.requirementId)?.requiredForCompletion ? 'source-required' : 'optional-source-missing'),
       ]),
     ),
     // dev doc §17：canEnterPhase11B 不由 source readiness 决定

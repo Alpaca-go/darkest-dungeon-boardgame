@@ -1,6 +1,7 @@
 export interface Phase11A3PreGateEvidence {
   runId: string;
   verificationInputHash: string;
+  sourceInputHash: string;
   typecheckPasses: boolean;
   unitPasses: boolean;
   commandContractPasses: boolean;
@@ -18,6 +19,13 @@ export interface Phase11A3PreGateEvidence {
   fieldProvenanceValidated: boolean;
   contentAuditPasses: boolean;
   rulesAuditPasses: boolean;
+}
+
+export function evaluateVerificationCliExit(input: {
+  verifierHealthy: boolean;
+  phase11A3Status: 'NOT-VERIFIED' | 'SOURCE-BLOCKED' | 'READY-FOR-OFFICIAL-IMPORT' | 'IMPLEMENTATION-FAIL' | 'COMPLETE';
+}): 0 | 1 {
+  return input.verifierHealthy && ['SOURCE-BLOCKED', 'READY-FOR-OFFICIAL-IMPORT', 'COMPLETE'].includes(input.phase11A3Status) ? 0 : 1;
 }
 
 export function validateEvidenceIdentity(

@@ -68,6 +68,7 @@ import {
 } from './official-source-audit';
 import { OFFICIAL_SOURCE_REQUIREMENTS } from './official-source-requirements';
 import { evaluatePhase11A3Status } from './phase11a3-status';
+import { createOfficialMatrixRunner, type OfficialMatrixRunner } from './official-matrix-runner';
 
 interface SourceReadinessFile {
   gates: {
@@ -141,7 +142,7 @@ function readSourceReadiness(): SourceReadinessFile {
  *    - threeSkippedFormsPass: 只在 READY 状态下才是真实 measured pass
  *    - prototypeMatrix: 保留 prototype path 的测量作为辅助信号，**不**作为 official PASS 判据
  */
-export type MatrixStatus = 'READY' | 'SOURCE-BLOCKED' | 'NOT-VERIFIED';
+export type MatrixStatus = 'READY' | 'FAIL' | 'SOURCE-BLOCKED' | 'NOT-RUN' | 'NOT-VERIFIED';
 
 export interface GuardianMatrixResult {
   status: MatrixStatus;
@@ -178,46 +179,27 @@ export interface GuardianMatrixResult {
  *   status 区分 SOURCE-BLOCKED / NOT-RUN / READY / FAIL；
  *   prototypeMatrix 改成纯 status 信号，不再 fake boolean。
  */
-export function runGuardianMatrixAttempt(): GuardianMatrixResult {
-  // SOURCE-BLOCKED 阶段：所有 official pool 关闭，formal 9 组合无法跑。
-  // 不能伪称 3×3 pass/fail。
-  const familyReadiness = {
-    templars: isTemplarsOfficialEncounterEnabled(),
-    mammothCyst: isMammothCystOfficialEncounterEnabled(),
-    shufflingHorror: isShufflingHorrorOfficialEncounterEnabled(),
-  };
-  // 保留 family readiness 计算以扩展未来用例；目前不参与任何 decision
-  void familyReadiness;
-
-  // family readiness 只是「data gate」是否打开，不等于「3×3 matrix 真实跑过」。
-  // 必须有 future-ready synthetic contract test 在所有 family ready 的情况下
-  // 真正模拟 9 个组合 → 才会把 status 提升为 READY。
-  // 当前 SOURCE-BLOCKED 阶段：永远 SOURCE-BLOCKED（不是 NOT-RUN — 是 source-blocked 阻断）。
-
-  const details: GuardianMatrixResult['details'] = [
-    { family: 'templars', skippedFormId: 'ancestor-first-form', passed: false, note: 'SOURCE-BLOCKED: formal matrix not run' },
-    { family: 'templars', skippedFormId: 'ancestor-second-form', passed: false, note: 'SOURCE-BLOCKED: formal matrix not run' },
-    { family: 'templars', skippedFormId: 'gestating-heart', passed: false, note: 'SOURCE-BLOCKED: formal matrix not run' },
-    { family: 'mammoth-cyst', skippedFormId: 'ancestor-first-form', passed: false, note: 'SOURCE-BLOCKED: formal matrix not run' },
-    { family: 'mammoth-cyst', skippedFormId: 'ancestor-second-form', passed: false, note: 'SOURCE-BLOCKED: formal matrix not run' },
-    { family: 'mammoth-cyst', skippedFormId: 'gestating-heart', passed: false, note: 'SOURCE-BLOCKED: formal matrix not run' },
-    { family: 'shuffling-horror', skippedFormId: 'ancestor-first-form', passed: false, note: 'SOURCE-BLOCKED: formal matrix not run' },
-    { family: 'shuffling-horror', skippedFormId: 'ancestor-second-form', passed: false, note: 'SOURCE-BLOCKED: formal matrix not run' },
-    { family: 'shuffling-horror', skippedFormId: 'gestating-heart', passed: false, note: 'SOURCE-BLOCKED: formal matrix not run' },
-  ];
-
+export function runGuardianMatrixAttempt(options: { sourceReady?: boolean; officialImportReady?: boolean; runner?: OfficialMatrixRunner } = {}): GuardianMatrixResult {
+  const sourceReady = options.sourceReady ?? (isTemplarsOfficialEncounterEnabled() && isMammothCystOfficialEncounterEnabled() && isShufflingHorrorOfficialEncounterEnabled());
+  const officialImportReady = options.officialImportReady ?? (isDarkestDungeonOfficialGuardianPoolEnabled() && isFinalEncounterOfficialEnabled() && isDarkestDungeonOfficialQuestPoolEnabled());
+  const families = ['templars', 'mammoth-cyst', 'shuffling-horror'] as const;
+  const forms = ['ancestor-first-form', 'ancestor-second-form', 'gestating-heart'] as const;
+  const status: MatrixStatus = !sourceReady ? 'SOURCE-BLOCKED' : !officialImportReady ? 'NOT-RUN' : 'READY';
+  const executor = createOfficialMatrixRunner(sourceReady, officialImportReady ? options.runner : undefined);
+  const details = families.flatMap((family) => forms.map((skippedFormId) => {
+    if (status !== 'READY') return { family, skippedFormId, passed: false, note: `${status}: formal matrix not run` };
+    const result = executor.runCombination(family, skippedFormId, 'formal');
+    return { family, skippedFormId, passed: result.status === 'PASS', note: result.note };
+  }));
+  const resolvedStatus: MatrixStatus = status === 'READY' ? (details.every((d) => d.passed) ? 'READY' : 'FAIL') : status;
   return {
-    status: 'SOURCE-BLOCKED',
-    officialGuardianMatrixStatus: 'SOURCE-BLOCKED',
-    officialSkippedFormMatrixStatus: 'SOURCE-BLOCKED',
-    threeGuardiansPass: false, // SOURCE-BLOCKED 阶段强制 false（不是 hardcoded，是 measured-but-unrun）
-    threeSkippedFormsPass: false,
+    status: resolvedStatus,
+    officialGuardianMatrixStatus: resolvedStatus,
+    officialSkippedFormMatrixStatus: resolvedStatus,
+    threeGuardiansPass: resolvedStatus === 'READY',
+    threeSkippedFormsPass: resolvedStatus === 'READY',
     details,
     prototypeMatrix: {
-      // Phase 11A.3 Source-Gate Final Acceptance Closure §15：
-      //   prototype path 信号改用 status 而非 fake boolean。
-      //   family validators 全部 ready → status='NOT-RUN'（仅 prototype signal）
-      //   否则 → status='NOT-RUN' 也行（prototype path 不构成 official pass）
       status: 'NOT-RUN',
       threeGuardiansPass: false,
       threeSkippedFormsPass: false,
