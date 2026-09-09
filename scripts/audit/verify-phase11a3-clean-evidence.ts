@@ -5,6 +5,7 @@ import { join } from 'node:path';
 
 const root = process.cwd();
 const temp = mkdtempSync(join(root, '.phase11a3-clean-'));
+const tierARulebook = join(root, 'docs/DD_EN_COREBOX_RULES.pdf');
 const data = join(temp, 'docs/data/core-campaign');
 const artifacts = ['verification-results.json', 'release-gate.json', 'phase11a3-pre-gate-evidence.json', 'issue-ledger.json'];
 function remove(path: string) { if (existsSync(path)) unlinkSync(path); }
@@ -13,7 +14,26 @@ try {
   for (const name of artifacts) remove(join(data, name));
   remove(join(temp, 'docs/reports/phase-11a3/phase-11a3-source-gate-final-acceptance-report.md'));
   const npm = process.platform === 'win32' ? 'npm.cmd' : 'npm';
-  const result = spawnSync(npm, ['run', 'verify:phase11a3-source-gate'], { cwd: temp, stdio: 'inherit', shell: process.platform === 'win32' });
+  // The Tier-A rulebook is an intentionally ignored, user-supplied source asset.
+  // A detached worktree contains committed code only, so pass its immutable input
+  // path explicitly rather than misclassifying a valid SOURCE-BLOCKED rebuild as
+  // a source-audit error simply because Git does not version the PDF.
+  if (!existsSync(tierARulebook)) throw new Error(`Tier A rulebook missing: ${tierARulebook}`);
+  // On Windows, invoking npm.cmd with `shell: true` may return before npm's
+  // child process exits. Use cmd.exe as the executable instead, so spawnSync
+  // owns the complete process and cannot report a premature clean-check pass.
+  const command = process.platform === 'win32'
+    ? process.env.ComSpec ?? 'cmd.exe'
+    : npm;
+  const args = process.platform === 'win32'
+    ? ['/d', '/s', '/c', `${npm} run verify:phase11a3-source-gate`]
+    : ['run', 'verify:phase11a3-source-gate'];
+  const result = spawnSync(command, args, {
+    cwd: temp,
+    stdio: 'inherit',
+    shell: false,
+    env: { ...process.env, PHASE11A3_RULEBOOK_PATH: tierARulebook },
+  });
   if (result.status !== 0) throw new Error(`clean verifier exited ${result.status}`);
   const verification = JSON.parse(readFileSync(join(data, 'verification-results.json'), 'utf8'));
   const gate = JSON.parse(readFileSync(join(data, 'release-gate.json'), 'utf8'));
