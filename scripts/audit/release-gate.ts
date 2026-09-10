@@ -84,6 +84,17 @@ const verificationFresh = verifyInProgress
   ? evidence?.verificationFresh === true
   : vr?.verificationFresh === true && vr.verificationInputHash === computeVerificationInputHash();
 
+// Keep the nested Source Audit on exactly the same input contract as
+// audit:official-source. This matters in Clean Evidence worktrees, where the
+// checked-out repository intentionally has no local Tier-A rulebook.
+const sourceAuditOptions = {
+  repoRoot: process.env.PHASE11A3_REPO_ROOT ?? REPO_ROOT,
+  officialSourceRoot: process.env.PHASE11A3_OFFICIAL_SOURCE_ROOT
+    ?? join(REPO_ROOT, 'docs/data/darkest-dungeon/official'),
+  rulebookPath: process.env.PHASE11A3_RULEBOOK_PATH
+    ?? join(REPO_ROOT, 'docs/DD_EN_COREBOX_RULES.pdf'),
+};
+
 const report = runAudit({
   typecheckPasses: evidence?.typecheckPasses,
   goldenTestPasses: evidence?.goldenTestPasses,
@@ -99,6 +110,7 @@ const report = runAudit({
   verificationFresh,
   mathRandomLeaksInOfficialPath: officialMathRandom,
   verifyInProgress,
+  sourceAuditOptions,
 });
 
 const { gate, goldenRun, replayDeterminism, issues, manifestSummary, dataGates } = report;

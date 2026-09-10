@@ -62,6 +62,7 @@ import {
 
 import {
   runOfficialSourceAudit,
+  type AuditOptions,
   type SourceReadinessResult,
   type SourceAuditOutcome,
   type SourceAuditError,
@@ -105,8 +106,8 @@ interface SourceReadinessFile {
  *   - audit 跑通 → readiness 派生（outcome: all-ready / source-blocked）
  *   - audit 报错 → outcome: source-audit-error（callers 必须显式处理为 NOT-VERIFIED）
  */
-function readSourceReadiness(): SourceReadinessFile {
-  const { readiness } = runOfficialSourceAudit();
+function readSourceReadiness(sourceAuditOptions?: AuditOptions): SourceReadinessFile {
+  const { readiness } = runOfficialSourceAudit(sourceAuditOptions);
   return {
     gates: readiness.gates,
     impact: {
@@ -760,6 +761,11 @@ export interface RunAuditOptions {
    *   因为 verify 一定会在 pipeline 末尾把真实 measured bit 写入 verification-results.json。
    */
   verifyInProgress?: boolean;
+  /**
+   * Source Audit 的单一输入契约。release-gate 内部审计必须与
+   * audit:official-source 使用完全一致的 repo / official source / rulebook 路径。
+   */
+  sourceAuditOptions?: AuditOptions;
 }
 
 export function runAudit(options: RunAuditOptions = {}): AuditReport {
@@ -1136,7 +1142,7 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
   // Phase 11A.3 Source-Gate Integrity Repair §14-17：source-readiness 由 official-source-audit
   // 派生（不再 try/catch 直接 trust JSON）。audit 跑通 → outcome: all-ready / source-blocked；
   // audit 跑错 → outcome: source-audit-error → gate 走 NOT-VERIFIED。
-  const sourceReadinessFile = readSourceReadiness();
+  const sourceReadinessFile = readSourceReadiness(input.options.sourceAuditOptions);
 
   // Phase 11A.3 Source-Gate Integrity Repair §22-25：Guardian Matrix。
   // SOURCE-BLOCKED 阶段：matrix 报 SOURCE-BLOCKED（不伪称 3×3 pass）。
@@ -1431,6 +1437,12 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
     openP1,
     onlyOpenP0: gate.onlyOpenP0,
   }) : completionStatus;
+
+  // Source audit 自身异常时，业务状态也必须与 verdict 一致。不能让后续
+  // completion gate 把 NOT-VERIFIED 覆盖成 SOURCE-BLOCKED。
+  if (sourceReadinessFile.outcome.kind === 'source-audit-error') {
+    gate.phase11A3Status = 'NOT-VERIFIED';
+  }
 
   // Phase 11A.3 Source-Gate Final Acceptance Closure §17：
   //   canBeginOfficialImport：由 source readiness 输出（资料齐了就可以开始 import）
