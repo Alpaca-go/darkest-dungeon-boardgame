@@ -1438,9 +1438,10 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
     onlyOpenP0: gate.onlyOpenP0,
   }) : completionStatus;
 
-  // Source audit 自身异常时，业务状态也必须与 verdict 一致。不能让后续
-  // completion gate 把 NOT-VERIFIED 覆盖成 SOURCE-BLOCKED。
-  if (sourceReadinessFile.outcome.kind === 'source-audit-error') {
+  // Any NOT-VERIFIED verdict must have an equally strict terminal phase. This
+  // prevents any later completion calculation from describing a failed audit
+  // as SOURCE-BLOCKED.
+  if (gate.verdict === 'NOT-VERIFIED') {
     gate.phase11A3Status = 'NOT-VERIFIED';
   }
 
@@ -1451,6 +1452,11 @@ export function evaluateReleaseGate(input: GateInput): ReleaseGateResult {
   gate.canBeginOfficialImport = sourceReadinessFile.gates.allRequiredSourcesReady;
   gate.canCloseP0_002 = gate.verdict === 'PASS' && formalMatrixPasses;
   gate.canEnterPhase11B = gate.verdict === 'PASS' && formalMatrixPasses && openP0 === 0 && openP1 === 0;
+  if (gate.verdict === 'NOT-VERIFIED') {
+    gate.canBeginOfficialImport = false;
+    gate.canCloseP0_002 = false;
+    gate.canEnterPhase11B = false;
+  }
 
   // canEnterPhase11A3（保留向后兼容，但不再是 11A.3 主指标）
   gate.canEnterPhase11A3 =

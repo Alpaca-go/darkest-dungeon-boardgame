@@ -34,4 +34,12 @@ describe('Final acceptance rejects false green evidence', () => {
     const issues = report.issues.map(i => i.id === 'ISSUE-P0-002' ? { ...i, id: 'OTHER-P0' } : i);
     expect(evaluateReleaseGate({ ...input, issues }).verdict).toBe('FAIL');
   });
+  it('NOT-VERIFIED terminal truth cannot retain SOURCE-BLOCKED phase or permissions', () => {
+    const gate = evaluateReleaseGate({ ...input, options: { ...measured, verificationFresh: false } });
+    expect(gate.verdict).toBe('NOT-VERIFIED');
+    expect(gate.phase11A3Status).toBe('NOT-VERIFIED');
+    expect(gate.canBeginOfficialImport).toBe(false);
+    expect(gate.canCloseP0_002).toBe(false);
+    expect(gate.canEnterPhase11B).toBe(false);
+  });
 });

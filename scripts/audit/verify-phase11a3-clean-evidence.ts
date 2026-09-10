@@ -2,6 +2,7 @@
 import { execFileSync, spawnSync } from 'node:child_process';
 import { existsSync, mkdtempSync, readFileSync, rmSync, symlinkSync, unlinkSync } from 'node:fs';
 import { join } from 'node:path';
+import { formatCleanFailureDiagnostic, preserveCleanFailureDiagnostics } from './clean-evidence-diagnostics';
 
 const root = process.cwd();
 const temp = mkdtempSync(join(root, '.phase11a3-clean-'));
@@ -40,7 +41,15 @@ try {
     shell: false,
     env: { ...process.env, PHASE11A3_RULEBOOK_PATH: tierARulebook },
   });
-  if (result.status !== 0) throw new Error(`clean verifier exited ${result.status}`);
+  if (result.status !== 0) {
+    const diagnostic = preserveCleanFailureDiagnostics({
+      root,
+      temp,
+      childExitCode: result.status ?? -1,
+    });
+    console.error(formatCleanFailureDiagnostic(diagnostic));
+    throw new Error(`clean verifier exited ${result.status}`);
+  }
   const verification = JSON.parse(readFileSync(join(data, 'verification-results.json'), 'utf8'));
   const gate = JSON.parse(readFileSync(join(data, 'release-gate.json'), 'utf8'));
   if (!verification.runId || verification.runId !== gate.runId || verification.sourceInputHash !== gate.sourceInputHash || verification.verificationInputHash !== gate.verificationInputHash) throw new Error('clean evidence identity mismatch');
