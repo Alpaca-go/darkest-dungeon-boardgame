@@ -2,6 +2,7 @@
 
 Baseline: `ae2051acd07ce551f95db48752f4583631486855` on
 `phase-11a3-infrastructure-freeze-publication`.
+Implementation commit: `fc8172d6d783d3c457ad828cf5a0a4c491c53a3a`.
 
 This branch introduces only a community-reference provenance/data binding
 namespace.  It does not change the Official Source Gate, official requirement
