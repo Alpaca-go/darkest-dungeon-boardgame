@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "phase11a3-community-reference-binding-manifest.v1",
+  "authority": "COMMUNITY_RETAIL_REFERENCE",
+  "sourceEdition": "antha-complete-edition",
+  "records": ["quests", "guardians", "rooms", "dungeonTiles", "finalEncounter", "monsterDeck"],
+  "sourceLocalIdPolicy": "Every source-local identity has an explicit basis. No source-local value is treated as a repository or prototype ID by implication.",
+  "geometryPolicy": "All room and dungeon-tile geometry is source-local schematic data; it is not runtime collision, pathfinding, or world-transform data.",
+  "officialPoolPolicy": "All community records have enabledInOfficialPool=false.",
+  "unboundSourceLocalIds": []
+}
