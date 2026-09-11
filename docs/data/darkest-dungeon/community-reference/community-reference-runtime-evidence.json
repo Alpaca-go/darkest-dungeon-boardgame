@@ -1,235 +1,81 @@
 {
-  "schemaVersion": "phase-11a3-source-gate-final-acceptance.v1",
-  "runId": "fdf0debd-8902-4590-bc17-9739efe39871",
-  "measuredAt": "2026-09-11T09:13:15.261Z",
-  "verificationInputHash": "e2c6201e8240cde110673ecaad46ad029b536296bdf0b56c23c10cae6b51b7f9",
-  "typecheckPasses": true,
-  "unitPasses": true,
-  "commandContractPasses": true,
-  "integrationPasses": true,
-  "buildPasses": true,
-  "criticalE2EPasses": true,
-  "criticalE2ELifecyclePasses": true,
-  "sourceInputHash": "e44f54a318142fcf8f44f4642f237c6f13812a029300273df9b9b91898060fe0",
-  "goldenPasses": true,
-  "goldenTestPasses": true,
-  "replayDeterminismPasses": true,
-  "replayContinuationPasses": true,
-  "contentAuditPasses": true,
-  "rulesAuditPasses": true,
-  "productionCommandLayerPasses": true,
-  "releaseGatePasses": false,
-  "officialSourceAuditPasses": true,
-  "officialSourceManifestGenerated": true,
-  "fieldProvenanceValidated": true,
-  "sourceReadinessGenerated": true,
-  "openP0": 1,
-  "openP1": 0,
-  "campaignOrchestrationReachable": true,
-  "verificationFresh": true,
-  "unmeasuredGateBits": [],
-  "consistencyErrors": [],
-  "phase11A3Status": "SOURCE-BLOCKED",
-  "engineeringRegressionPasses": true,
-  "verifierHealthy": true,
-  "sourceReadinessGates": {
-    "questCardsReady": false,
-    "templarsReady": false,
-    "mammothCystReady": false,
-    "shufflingHorrorReady": false,
-    "finalEncounterReady": false,
-    "darkestDungeonMonsterDeckReady": false,
-    "allRequiredSourcesReady": false
+  "schemaVersion": "phase11a3-community-reference-runtime-profile.v1",
+  "runId": "6457b83e-2475-4ab5-87e1-399bedc29758",
+  "measuredAt": "2026-09-11T09:14:08.888Z",
+  "verifiedImplementationHead": "64797e79ca7316093149f0584778ba5d73ac0300",
+  "evidencePublicationParent": "64797e79ca7316093149f0584778ba5d73ac0300",
+  "sourcePackageSha256": "382e479f84f79a9b3cc6b0256b2fa5dea100b3576244988f180b49e75ed78d2a",
+  "bindingEvidenceRunId": "52260851-feb2-406d-9722-8e8e8b3643c9",
+  "bindingEvidenceSha256": "38c045955f35b787c46c5b15ac1c289c8a8a722620230e9e3b34e688905b6b7d",
+  "runtimeProfileId": "community-reference",
+  "counts": {
+    "quests": 3,
+    "layouts": 2,
+    "guardianFamilies": 3,
+    "guardianActors": 7,
+    "rooms": 4,
+    "finalEncounterRecords": 10,
+    "monsterPhysical": 26,
+    "monsterLogical": 9
   },
-  "sourceReadinessRequiredMissingCount": 26,
-  "sourceReadinessOptionalMissingCount": 1,
-  "sourceReadinessProvenanceAuditPasses": true,
-  "sourceReadinessOfficialActFourRequiredSourceCount": 26,
-  "sourceReadinessOfficialActFourMissingSourceRequirements": [
-    "tierB-quest-1",
-    "tierB-quest-2",
-    "tierB-quest-3",
-    "tierB-dd-dungeon-tile",
-    "tierB-templars-impaler",
-    "tierB-templars-warlord",
-    "tierB-templars-room",
-    "tierB-templars-room-tile",
-    "tierB-mammoth-cyst",
-    "tierB-white-cell-stalk",
-    "tierB-mammoth-cyst-room",
-    "tierB-shuffling-horror",
-    "tierB-cultist-priest",
-    "tierB-malignant-growth",
-    "tierB-shuffling-horror-room",
-    "tierB-ancestor-room",
-    "tierB-ancestor-room-tile",
-    "tierB-ancestor-first-form",
-    "tierB-perfect-reflection",
-    "tierB-imperfect-reflection",
-    "tierB-ancestor-second-form",
-    "tierB-absolute-nothingness",
-    "tierB-gestating-heart",
-    "tierB-heart-of-darkness",
-    "tierB-come-unto-your-maker",
-    "tierB-darkest-dungeon-monster-deck"
+  "setupMatrix": {
+    "label": "COMMUNITY RUNTIME SETUP MATRIX",
+    "expected": 6,
+    "run": 6,
+    "passed": 6
+  },
+  "requiredPositiveTests": {
+    "expected": 16,
+    "run": 16,
+    "passed": 16
+  },
+  "adversarialTests": {
+    "expected": 16,
+    "run": 16,
+    "passed": 16
+  },
+  "supportedPathTests": {
+    "expected": 7,
+    "run": 7,
+    "passed": 7
+  },
+  "blockerTests": {
+    "expected": 6,
+    "run": 6,
+    "passed": 6
+  },
+  "activeBlockerCodes": [
+    "TEMPLARS_PIT_EXIT_RULE_UNRESOLVED",
+    "ABSOLUTE_NOTHINGNESS_STANCE_UNRESOLVED",
+    "GESTATING_HEART_LETHAL_TIMING_UNRESOLVED",
+    "COME_UNTO_YOUR_MAKER_UNRESOLVED",
+    "MONSTER_DECK_DRAW_POLICY_UNRESOLVED"
   ],
-  "sourceReadinessOfficialActFourPartialSourceRequirements": [],
-  "releaseGateSummary": {
-    "typecheckPasses": true,
-    "goldenTestPasses": true,
-    "canEnterPhase11A3": true,
-    "onlyOpenP0": "ISSUE-P0-002",
-    "buildPasses": true,
-    "unitPasses": true,
-    "integrationPasses": true,
-    "commandContractPasses": true,
-    "replayContinuationPasses": true,
-    "criticalE2EPasses": true,
-    "criticalE2ELifecyclePasses": true,
-    "goldenCampaignPasses": false,
-    "replayDeterminismPasses": true,
-    "openP0": 1,
-    "openP1": 0,
-    "prototypeReferencesInOfficialPath": 0,
-    "duplicateCommittedTransactions": 0,
-    "engineDeadlocks": 0,
-    "campaignOrchestrationReachable": true,
-    "elevenQuestLoopClosed": false,
-    "campaignVictoryReachable": false,
-    "campaignOverReachable": true,
-    "threeGuardiansPass": false,
-    "threeSkippedFormsPass": false,
-    "fourRuinsBossesPass": false,
-    "productionCommandLayerPasses": true,
-    "saveResumeKeyNodesPass": true,
-    "ruleTraceabilityP0Complete": false,
-    "passed": false,
-    "verdict": "SOURCE-BLOCKED",
-    "conclusion": "SOURCE-BLOCKED — Phase 11A.3 阶段缺少官方 Battle/Quest/Room Card / Tile / Monster Deck 资料；official data gates 全部 false，threeGuardiansPass=false / threeSkippedFormsPass=false / elevenQuestLoopClosed=false / campaignVictoryReachable=false。等待用户补全 source 资料后重跑 audit。",
-    "globalMissingSourceReferences": 147,
-    "officialActFourMissingSourceReferences": 10,
-    "officialPathMissingSourceReferences": 147,
-    "officialActFourRequiredSourceCount": 26,
-    "officialActFourMissingSourceRequirements": [
-      "tierB-quest-1",
-      "tierB-quest-2",
-      "tierB-quest-3",
-      "tierB-dd-dungeon-tile",
-      "tierB-templars-impaler",
-      "tierB-templars-warlord",
-      "tierB-templars-room",
-      "tierB-templars-room-tile",
-      "tierB-mammoth-cyst",
-      "tierB-white-cell-stalk",
-      "tierB-mammoth-cyst-room",
-      "tierB-shuffling-horror",
-      "tierB-cultist-priest",
-      "tierB-malignant-growth",
-      "tierB-shuffling-horror-room",
-      "tierB-ancestor-room",
-      "tierB-ancestor-room-tile",
-      "tierB-ancestor-first-form",
-      "tierB-perfect-reflection",
-      "tierB-imperfect-reflection",
-      "tierB-ancestor-second-form",
-      "tierB-absolute-nothingness",
-      "tierB-gestating-heart",
-      "tierB-heart-of-darkness",
-      "tierB-come-unto-your-maker",
-      "tierB-darkest-dungeon-monster-deck"
-    ],
-    "officialActFourPartialSourceRequirements": [],
-    "requiredMissingCount": 26,
-    "requiredPartialCount": 0,
-    "requiredAvailableCount": 0,
-    "optionalMissingCount": 1,
-    "optionalPartialCount": 0,
-    "provenanceAudit": {
-      "requiredFieldCount": 131,
-      "verifiedRequiredFieldCount": 0,
-      "missingValueCount": 0,
-      "missingProvenanceCount": 0,
-      "invalidSourceReferenceCount": 0,
-      "componentMismatchCount": 0,
-      "passes": true
-    },
-    "officialGuardianMatrix": {
-      "status": "SOURCE-BLOCKED",
-      "combinationsExpected": 9,
-      "combinationsRun": 0,
-      "combinationsPassed": 0,
-      "evidenceKind": "SOURCE-BLOCKED"
-    },
-    "officialSkippedFormMatrix": {
-      "status": "SOURCE-BLOCKED",
-      "combinationsExpected": 9,
-      "combinationsRun": 0,
-      "combinationsPassed": 0,
-      "evidenceKind": "SOURCE-BLOCKED"
-    },
-    "sourceReadiness": {
-      "allRequiredSourcesReady": false,
-      "questCardsReady": false,
-      "templarsReady": false,
-      "mammothCystReady": false,
-      "shufflingHorrorReady": false,
-      "finalEncounterReady": false,
-      "darkestDungeonMonsterDeckReady": false
-    },
-    "phase11A3Status": "SOURCE-BLOCKED",
-    "canBeginOfficialImport": false,
-    "canCloseP0_002": false,
-    "canEnterPhase11B": false,
-    "runId": "fdf0debd-8902-4590-bc17-9739efe39871",
-    "verificationInputHash": "e2c6201e8240cde110673ecaad46ad029b536296bdf0b56c23c10cae6b51b7f9",
-    "sourceInputHash": "e44f54a318142fcf8f44f4642f237c6f13812a029300273df9b9b91898060fe0",
-    "generatedAt": "2026-09-11T09:13:14.987Z",
-    "unmeasuredGateBits": [],
-    "dataGates": {
-      "officialGuardianPoolEnabled": false,
-      "officialFinalEncounterEnabled": false,
-      "officialDarkestDungeonQuestPoolEnabled": false,
-      "guardianDataGaps": [
-        "darkest-dungeon-guardian-templars（guardian-name:darkest-dungeon-guardian-templars；guardian-room:darkest-dungeon-guardian-templars；guardian-actors:darkest-dungeon-guardian-templars）",
-        "darkest-dungeon-guardian-mammoth-cyst（guardian-name:darkest-dungeon-guardian-mammoth-cyst；guardian-room:darkest-dungeon-guardian-mammoth-cyst；guardian-actors:darkest-dungeon-guardian-mammoth-cyst）",
-        "darkest-dungeon-guardian-shuffling-horror（guardian-name:darkest-dungeon-guardian-shuffling-horror；guardian-room:darkest-dungeon-guardian-shuffling-horror；guardian-actors:darkest-dungeon-guardian-shuffling-horror）",
-        "[templars] templar-impaler-battle-card（HP / Dodge / Resistance / Immunity 缺失）；templar-impaler-skills（d10 Skill Table 缺失，含 Body Slam 数值）；templar-warlord-battle-card（HP / Dodge / Resistance / Immunity 缺失）；templar-warlord-skills（d10 Skill Table 缺失）；spiked-pit-effects（Pit 定义与效果缺失）；spiked-pit-map（d10 → Pit 映射缺失）；templars-room-tile（Boss 固定 Area 缺失）；templars-room-card（Area 图 / 容量缺失）；templars-victory-condition（正式胜利条件缺失）；templars-encounter-member-area（成员固定 Area 缺失）",
-        "[mammoth-cyst] mammoth-cyst-battle-card（HP / Dodge / Resistance / Immunity 缺失）；mammoth-cyst-skills（d10 Skill Table 缺失，含普通攻击数值）；white-cell-stalk-battle-card（HP / Dodge / Resistance 缺失）；white-cell-stalk-skills（d10 Skill Table 缺失，含 Teleportation 数值）；mammoth-cyst-room-card（Area 图 / 容量缺失）；teleportation-d10-area-map（d10 → Area 映射缺失）；mammoth-cyst-room-tile（Cyst 固定 Area 缺失）；white-cell-stalk-spawn-policy（Conditional Summon 定义缺失）；guardian-victory-cleanup（正式胜利条件缺失）；white-cell-stalk-spawn-policy（Stalk Spawn Stance / Area 规则缺失）",
-        "[shuffling-horror] shuffling-horror.sourceReference（官方 Battle Card / Room Card 来源未绑定）；shuffling-horror.officialDataStatus !== \"verified\"（需官方 Battle Card / Room 全部补完）；shuffling-horror.roomDefinitionId（官方 Room Card 缺失）；shuffling-horror.actorDefinitionIds（官方 Actor 列表为空）；shuffling-horror.battleCards（Shuffling Horror / Cultist Priest / Malignant Growth 三张 Battle Card 的 maxHp / skills / 技能 d10 全部缺）；shuffling-horror.victoryRule（Guardian Victory Cleanup 数值 partial）"
-      ],
-      "finalEncounterDataGaps": [
-        "final-form-ancestor-first-form（final-form-name:ancestor-first-form；final-form-hp:ancestor-first-form；final-form-skills:ancestor-first-form；Final Form ancestor-first-form 数据缺失（unavailable）→ official 禁用）",
-        "final-form-ancestor-second-form（final-form-name:ancestor-second-form；final-form-hp:ancestor-second-form；final-form-skills:ancestor-second-form；Final Form ancestor-second-form 数据缺失（unavailable）→ official 禁用）",
-        "final-form-gestating-heart（final-form-name:gestating-heart；final-form-hp:gestating-heart；final-form-skills:gestating-heart；Final Form gestating-heart 数据缺失（unavailable）→ official 禁用）",
-        "final-form-heart-of-darkness（final-form-name:heart-of-darkness；final-form-hp:heart-of-darkness；final-form-skills:heart-of-darkness；Final Form heart-of-darkness 数据缺失（unavailable）→ official 禁用）",
-        "final-encounter-room（Final Room Card / Area 缺失）"
-      ],
-      "darkestDungeonQuestDataGaps": [
-        "darkest-dungeon-quest-1（quest-name:darkest-dungeon-quest-1；guardian-definition:darkest-dungeon-quest-1；skipped-final-form:darkest-dungeon-quest-1；provision-policy:darkest-dungeon-quest-1；Quest darkest-dungeon-quest-1 卡面数据缺失（unavailable）→ official 禁用）",
-        "darkest-dungeon-quest-2（quest-name:darkest-dungeon-quest-2；guardian-definition:darkest-dungeon-quest-2；skipped-final-form:darkest-dungeon-quest-2；provision-policy:darkest-dungeon-quest-2；Quest darkest-dungeon-quest-2 卡面数据缺失（unavailable）→ official 禁用）",
-        "darkest-dungeon-quest-3（quest-name:darkest-dungeon-quest-3；guardian-definition:darkest-dungeon-quest-3；skipped-final-form:darkest-dungeon-quest-3；provision-policy:darkest-dungeon-quest-3；Quest darkest-dungeon-quest-3 卡面数据缺失（unavailable）→ official 禁用）"
-      ]
-    },
-    "ruleSummary": {
-      "total": 15,
-      "p0Total": 15,
-      "implementedAndTested": 7,
-      "implementedNotTested": 5,
-      "dataMissing": 3,
-      "implementationMissing": 0,
-      "p0Complete": false,
-      "blockedRuleIds": [
-        "R-OFFICIAL-GUARDIAN-DATA",
-        "R-OFFICIAL-FINAL-DATA",
-        "R-OFFICIAL-CORE-CARDS"
-      ]
-    }
+  "fullActFourPlayable": false,
+  "checks": {
+    "typecheck": true,
+    "unit": true,
+    "integration": true,
+    "criticalE2E": true,
+    "lifecycleE2E": true,
+    "saveRestore": true,
+    "contentHash": true,
+    "binding": true
   },
-  "canCloseP0_002": false,
-  "canEnterPhase11B": false,
-  "canBeginOfficialImport": false,
   "commands": [
     {
+      "name": "runtimeProfileTests",
+      "exitCode": 0,
+      "durationMs": 3083
+    },
+    {
+      "name": "typecheck",
+      "exitCode": 0,
+      "durationMs": 6674
+    }
+  ],
+  "officialRegressionCommands": {
+    "typecheck": {
       "command": "typecheck",
       "exitCode": 0,
       "durationMs": 14200,
@@ -243,7 +89,7 @@
       "stderrTail": "",
       "timedOut": false
     },
-    {
+    "unit": {
       "command": "unit",
       "exitCode": 0,
       "durationMs": 42571,
@@ -257,7 +103,7 @@
       "stderrTail": "(node:24436) [DEP0190] DeprecationWarning: Passing args to a child process with shell option true can lead to security vulnerabilities, as the arguments are not escaped, only concatenated.\n(Use `node --trace-deprecation ...` to show where the warning was created)\n",
       "timedOut": false
     },
-    {
+    "commandContract": {
       "command": "commandContract",
       "exitCode": 0,
       "durationMs": 6988,
@@ -271,7 +117,7 @@
       "stderrTail": "",
       "timedOut": false
     },
-    {
+    "integration": {
       "command": "integration",
       "exitCode": 0,
       "durationMs": 7819,
@@ -285,7 +131,7 @@
       "stderrTail": "",
       "timedOut": false
     },
-    {
+    "build": {
       "command": "build",
       "exitCode": 0,
       "durationMs": 25290,
@@ -299,7 +145,7 @@
       "stderrTail": "\n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.\n",
       "timedOut": false
     },
-    {
+    "criticalE2E": {
       "command": "criticalE2E",
       "exitCode": 0,
       "durationMs": 22518,
@@ -313,7 +159,7 @@
       "stderrTail": "(node:54168) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n",
       "timedOut": false
     },
-    {
+    "criticalE2ELifecycle": {
       "command": "criticalE2ELifecycle",
       "exitCode": 0,
       "durationMs": 39040,
@@ -327,7 +173,7 @@
       "stderrTail": "(node:53628) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n(node:3384) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n",
       "timedOut": false
     },
-    {
+    "golden": {
       "command": "golden",
       "exitCode": 0,
       "durationMs": 19231,
@@ -341,7 +187,7 @@
       "stderrTail": "(node:55488) [DEP0190] DeprecationWarning: Passing args to a child process with shell option true can lead to security vulnerabilities, as the arguments are not escaped, only concatenated.\n(Use `node --trace-deprecation ...` to show where the warning was created)\n",
       "timedOut": false
     },
-    {
+    "replayContinuation": {
       "command": "replayContinuation",
       "exitCode": 0,
       "durationMs": 5102,
@@ -355,7 +201,7 @@
       "stderrTail": "",
       "timedOut": false
     },
-    {
+    "replayDeterminism": {
       "command": "replayDeterminism",
       "exitCode": 0,
       "durationMs": 4837,
@@ -369,7 +215,7 @@
       "stderrTail": "",
       "timedOut": false
     },
-    {
+    "productionCommand": {
       "command": "productionCommand",
       "exitCode": 0,
       "durationMs": 3128,
@@ -383,7 +229,7 @@
       "stderrTail": "",
       "timedOut": false
     },
-    {
+    "officialSource": {
       "command": "officialSource",
       "exitCode": 0,
       "durationMs": 2585,
@@ -397,7 +243,7 @@
       "stderrTail": "",
       "timedOut": false
     },
-    {
+    "contentAudit": {
       "command": "contentAudit",
       "exitCode": 0,
       "durationMs": 4302,
@@ -411,7 +257,7 @@
       "stderrTail": "",
       "timedOut": false
     },
-    {
+    "rulesAudit": {
       "command": "rulesAudit",
       "exitCode": 0,
       "durationMs": 4081,
@@ -425,7 +271,7 @@
       "stderrTail": "",
       "timedOut": false
     },
-    {
+    "releaseGate": {
       "command": "releaseGate",
       "exitCode": 0,
       "durationMs": 4777,
@@ -439,7 +285,7 @@
       "stderrTail": "",
       "timedOut": false
     },
-    {
+    "finalReport": {
       "command": "finalReport",
       "exitCode": 0,
       "durationMs": 1253,
@@ -453,6 +299,33 @@
       "stderrTail": "",
       "timedOut": false
     }
-  ],
-  "notes": []
+  },
+  "officialGateBefore": {
+    "phase11A3Status": "SOURCE-BLOCKED",
+    "requiredMissing": 26,
+    "optionalMissing": 1,
+    "openP0": 1,
+    "openP1": 0,
+    "onlyOpenP0": "ISSUE-P0-002",
+    "formalMatrixRun": 0,
+    "formalMatrixExpected": 9,
+    "canCloseP0_002": false,
+    "canEnterPhase11B": false
+  },
+  "officialGateAfter": {
+    "phase11A3Status": "SOURCE-BLOCKED",
+    "requiredMissing": 26,
+    "optionalMissing": 1,
+    "openP0": 1,
+    "openP1": 0,
+    "onlyOpenP0": "ISSUE-P0-002",
+    "formalMatrixRun": 0,
+    "formalMatrixExpected": 9,
+    "canCloseP0_002": false,
+    "canEnterPhase11B": false
+  },
+  "communityFullActFourPlayable": false,
+  "communityFullActFourPlayableReason": "five unresolved community-source rules",
+  "terminalVerdict": "COMMUNITY-REFERENCE-RUNTIME-PROFILE-INTEGRATED",
+  "errors": []
 }
