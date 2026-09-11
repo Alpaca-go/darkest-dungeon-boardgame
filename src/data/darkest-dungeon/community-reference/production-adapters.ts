@@ -15,7 +15,6 @@ const reference = (requirementId: string, field: string): string =>
 const id = (local: string): string => `community-dd-${local}`;
 export const requireCommunityNumber = (candidate: unknown, path: string): number => {
   if (typeof candidate === 'number' && Number.isFinite(candidate)) return candidate;
-  if (typeof candidate === 'string' && candidate.startsWith('not printed')) return 0;
   throw new Error(`Missing confirmed Community numeric field: ${path}`);
 };
 const rollsFor = (table: SourceD10, stance: string, printedNumber: number): number[] =>
@@ -89,9 +88,17 @@ function mammothSkills(requirementId: string, stance: string): MammothCystSkillD
   const damage = value<Record<string, unknown>>(requirementId, 'damage');
   const d10 = value<SourceD10>(requirementId, 'd10SkillTable');
   return skills.map((skill) => {
-    const skillAccuracy = requireCommunityNumber(accuracy[skill.sourceLocalSkillId], `${requirementId}.accuracy.${skill.sourceLocalSkillId}`);
-    const skillDamage = requireCommunityNumber(damage[skill.sourceLocalSkillId], `${requirementId}.damage.${skill.sourceLocalSkillId}`);
-    return { id: id(`skill-${skill.sourceLocalSkillId}`), actorDefinitionId: actorId, name: skill.printedName, d10Rolls: rollsFor(d10, stance, skill.printedNumber) as MammothRoll[], usableFromAreaIds: [], targetSide: skill.sourceLocalSkillId === 'revivify' ? 'self' : skill.sourceLocalSkillId === 'reconstitute' ? 'ally' : 'enemy', targetKind: skill.sourceLocalSkillId === 'revivify' || skill.sourceLocalSkillId === 'reconstitute' ? 'monster' : 'hero', accuracy: skillAccuracy, minDamage: skillDamage, maxDamage: skillDamage, stress: 0, triggersTeleportation: skill.sourceLocalSkillId === 'teleport', teleportationMapId: skill.sourceLocalSkillId === 'teleport' ? id('mammoth-cyst-teleport-map') : undefined, rollPolicy: 'definition-driven', requiresHit: skillAccuracy > 0 ? true : null, description: `Community retail card action: ${skill.printedName}`, officialDataStatus: 'partial', sourceReference: reference(requirementId, 'skillIds') };
+    const localId = skill.sourceLocalSkillId;
+    const specialEffect = localId === 'revivify'
+      ? { type: 'heal-monster' as const, amount: 15, target: 'self' as const }
+      : localId === 'reconstitute'
+        ? { type: 'heal-monster' as const, amount: 14, target: 'ally' as const }
+        : localId === 'teleport'
+          ? { type: 'teleport-hero' as const }
+          : null;
+    const skillAccuracy = specialEffect?.type === 'heal-monster' ? null : requireCommunityNumber(accuracy[localId], `${requirementId}.accuracy.${localId}`);
+    const skillDamage = specialEffect ? null : requireCommunityNumber(damage[localId], `${requirementId}.damage.${localId}`);
+    return { id: id(`skill-${localId}`), actorDefinitionId: actorId, name: skill.printedName, d10Rolls: rollsFor(d10, stance, skill.printedNumber) as MammothRoll[], usableFromAreaIds: [], targetSide: localId === 'revivify' ? 'self' : localId === 'reconstitute' ? 'ally' : 'enemy', targetKind: localId === 'revivify' || localId === 'reconstitute' ? 'monster' : 'hero', accuracy: skillAccuracy, minDamage: skillDamage, maxDamage: skillDamage, stress: 0, specialEffect, triggersTeleportation: localId === 'teleport', teleportationMapId: localId === 'teleport' ? id('mammoth-cyst-teleport-map') : undefined, rollPolicy: 'definition-driven', requiresHit: specialEffect?.type === 'heal-monster' ? false : true, description: `Community retail card action: ${skill.printedName}`, officialDataStatus: 'partial', sourceReference: reference(requirementId, 'skillIds') };
   });
 }
 export const COMMUNITY_MAMMOTH_CYST: MammothCystActorDefinition = { id: id('mammoth-cyst'), actorType: 'boss', name: 'Mammoth Cyst', campaignLevel: 3, requiredStance: 'aggressive', actionsPerRound: 2, stats: actorStats('tierB-mammoth-cyst'), skills: mammothSkills('tierB-mammoth-cyst', 'aggressive'), color: '#991b1b', officialDataStatus: 'partial', sourceReference: reference('tierB-mammoth-cyst', 'maxHp'), enabledInOfficialPool: false };
@@ -156,6 +163,11 @@ export function validateCommunityMammothDefinitions(input: {
   if (Object.keys(input.room.teleportationD10Map).length !== 10 || Object.values(input.room.teleportationD10Map).some((areaId) => !input.room.validAreaIds.includes(areaId))) issues.push('room.teleportationD10Map');
   if (Object.values(input.room.stanceAreaMap).some((areaId) => areaId && !input.room.validAreaIds.includes(areaId))) issues.push('room.stanceAreaMap');
   if (input.summon.initiativeCardsToAdd !== 2 || input.summon.maxAlive !== 1 || !input.summon.replacesNormalSkill) issues.push('summon.policy');
+  const revivify = input.cyst.skills.find((skill) => skill.id.endsWith('revivify'))?.specialEffect;
+  const reconstitute = input.stalk.skills.find((skill) => skill.id.endsWith('reconstitute'))?.specialEffect;
+  if (revivify?.type !== 'heal-monster' || revivify.amount !== 15) issues.push('cyst.revivify');
+  if (reconstitute?.type !== 'heal-monster' || reconstitute.amount !== 14) issues.push('stalk.reconstitute');
+  if (input.stalk.skills.find((skill) => skill.id.endsWith('teleport'))?.specialEffect?.type !== 'teleport-hero') issues.push('stalk.teleport');
   return { isComplete: missing.length === 0 && issues.length === 0, missing, issues, knownBlockers: ['GUARDIAN_RESISTANCE_ENGINE_UNSUPPORTED', 'GUARDIAN_CRIT_ENGINE_UNSUPPORTED', 'GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED'] };
 }
 

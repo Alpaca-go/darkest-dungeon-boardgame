@@ -65,10 +65,15 @@ export interface MammothCystSkillDefinition {
   usableFromAreaIds: string[];
   targetSide: 'enemy' | 'ally' | 'self';
   targetKind: 'hero' | 'monster' | 'any';
-  accuracy: number;
-  minDamage: number;
-  maxDamage: number;
+  accuracy: number | null;
+  minDamage: number | null;
+  maxDamage: number | null;
   stress: number;
+  /** Source-confirmed non-attack effect; null means a normal damage/stress skill. */
+  specialEffect?:
+    | { type: 'heal-monster'; amount: number; target: 'self' | 'ally' }
+    | { type: 'teleport-hero' }
+    | null;
   /**
    * §17：该 Skill 是否触发 Teleportation 链路。
    * 仅 Stalk 的 Teleportation Skill 为 true；且必须由正式 Skill Selection 触发。

@@ -32,6 +32,16 @@ export function applyBattleUnitHealing(
   };
 }
 
+/** Shared healing primitive for non-Hero actors that use hp/maxHp state. */
+export function applyActorHealing<T extends { hp: number; maxHp: number; isAlive: boolean }>(
+  actor: T,
+  amount: number,
+): { actor: T; healed: number } {
+  if (!actor.isAlive || amount <= 0) return { actor, healed: 0 };
+  const hp = Math.min(actor.maxHp, actor.hp + Math.floor(amount));
+  return { actor: hp === actor.hp ? actor : { ...actor, hp }, healed: hp - actor.hp };
+}
+
 /**
  * Campaign 英雄治疗入口（Sanitarium 等非战斗治疗）。
  * 死亡英雄不可治疗；恢复 >= 1 HP 时离开 Death's Door。

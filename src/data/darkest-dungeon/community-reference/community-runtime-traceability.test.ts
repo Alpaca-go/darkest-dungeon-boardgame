@@ -1,21 +1,29 @@
 import { describe, expect, it } from 'vitest';
-import { communityRequirement, COMMUNITY_RUNTIME_BLOCKERS } from './runtime-profile';
-import { COMMUNITY_RUNTIME_FIELD_COVERAGE, runtimeFieldCoverageTotals, validateCommunityRuntimeFieldCoverage } from './runtime-field-coverage';
+import {
+  COMMUNITY_RUNTIME_PROJECTION_ENVIRONMENT,
+  COMMUNITY_RUNTIME_PROJECTION_PROOFS,
+  runtimeFieldCoverageTotals,
+  validateCommunityRuntimeProjectionProofs,
+} from './runtime-field-coverage';
 
-const runtimeEntries = COMMUNITY_RUNTIME_FIELD_COVERAGE.filter((entry) => entry.runtimeClassification === 'consumed' || entry.runtimeClassification.endsWith('blocker'));
+const consumed = COMMUNITY_RUNTIME_PROJECTION_PROOFS.filter(proof => proof.classification === 'consumed');
 
-describe('Community runtime field coverage', () => {
-  it('FC01 classifies every normalized field with no unclassified entries', () => { expect(COMMUNITY_RUNTIME_FIELD_COVERAGE).toHaveLength(131); expect(validateCommunityRuntimeFieldCoverage()).toEqual([]); expect(runtimeFieldCoverageTotals().unclassified).toBe(0); });
-  it('FC02 derives totals from the ledger', () => expect(Object.values(runtimeFieldCoverageTotals()).filter((value): value is number => typeof value === 'number').slice(1, 6).reduce((sum, value) => sum + value, 0)).toBe(131));
+describe('Community semantic projection truth gate', () => {
+  it('FC01 classifies every source field and resolves every consumed selector', () => {
+    expect(validateCommunityRuntimeProjectionProofs()).toEqual([]);
+    expect(runtimeFieldCoverageTotals()).toMatchObject({ unclassified: 0, runtimeSelectorMissing: 0 });
+  });
+  it('FC02 derives semantic-leaf totals from executable proofs', () => {
+    const totals = runtimeFieldCoverageTotals();
+    expect(totals.total).toBe(COMMUNITY_RUNTIME_PROJECTION_PROOFS.length);
+    expect(totals.runtimeSelectorExpected).toBe(consumed.length);
+  });
 });
 
-describe('Community semantic traceability matrix', () => {
-  it.each(runtimeEntries.map((entry) => [entry.requirementId, entry.field] as const))('TRACE %s.%s normalized value reaches classified runtime target', (requirementId, field) => {
-    const entry = COMMUNITY_RUNTIME_FIELD_COVERAGE.find((candidate) => candidate.requirementId === requirementId && candidate.field === field)!;
-    const source = communityRequirement(requirementId).fields[field];
-    expect(entry.sourceReference).toEqual(source.sourceReference);
-    expect(entry.runtimeTarget).not.toBe('UNCLASSIFIED_SOURCE_BLOCKER');
-    if (entry.runtimeClassification === 'consumed') expect(entry.runtimeValueHash).toBe(entry.sourceValueHash);
-    else expect(COMMUNITY_RUNTIME_BLOCKERS.some((blocker) => blocker.code === entry.blockerCode)).toBe(true);
+describe('independent source-to-runtime semantic comparisons', () => {
+  it.each(consumed.map(proof => [proof.requirementId, proof.sourcePath, proof] as const))('TRACE %s.%s', (_requirementId, _sourcePath, proof) => {
+    const source = proof.normalizeSource(proof.sourceSelector());
+    const runtime = proof.normalizeRuntime(proof.runtimeSelector!(COMMUNITY_RUNTIME_PROJECTION_ENVIRONMENT));
+    expect(runtime).toEqual(source);
   });
 });

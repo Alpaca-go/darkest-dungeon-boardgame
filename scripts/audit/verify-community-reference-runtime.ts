@@ -72,7 +72,7 @@ function structuredE2e(expected: number): StructuredResult {
 
 const inputIndex = process.argv.indexOf('--input');
 const canonicalInput = inputIndex >= 0 ? process.argv[inputIndex + 1] : undefined;
-const runtimeRelevantFields = COMMUNITY_RUNTIME_FIELD_COVERAGE.filter((entry) => entry.runtimeClassification === 'consumed' || entry.runtimeClassification.endsWith('blocker')).length;
+const consumedSemanticLeaves = COMMUNITY_RUNTIME_FIELD_COVERAGE.filter((entry) => entry.classification === 'consumed').length;
 const structured = [
   structuredVitest('validators', 'src/data/darkest-dungeon/community-reference/community-runtime-validator.test.ts', 3),
   structuredVitest('setup', 'src/data/darkest-dungeon/community-reference/community-runtime-setup.test.ts', 6),
@@ -82,8 +82,9 @@ const structured = [
   structuredVitest('finalEncounter', 'src/data/darkest-dungeon/community-reference/community-runtime-final.test.ts', 12),
   structuredVitest('monster', 'src/data/darkest-dungeon/community-reference/community-runtime-monster.test.ts', 7),
   structuredVitest('saveReplay', 'src/data/darkest-dungeon/community-reference/community-runtime-save-replay.test.ts', 12),
-  structuredVitest('traceability', 'src/data/darkest-dungeon/community-reference/community-runtime-traceability.test.ts', runtimeRelevantFields + 2),
+  structuredVitest('traceability', 'src/data/darkest-dungeon/community-reference/community-runtime-traceability.test.ts', consumedSemanticLeaves + 2),
   structuredVitest('adversarial', 'src/data/darkest-dungeon/community-reference/community-runtime-adversarial.test.ts', 20),
+  structuredVitest('truthGate', 'src/data/darkest-dungeon/community-reference/community-runtime-truth-gate.test.ts', 15),
   structuredE2e(3),
 ];
 const commands: CommandResult[] = [
@@ -122,7 +123,7 @@ if (binding.inputPackageSha256 !== COMMUNITY_REFERENCE_RUNTIME_PROFILE.sourcePac
 const physicalMonsters = COMMUNITY_REFERENCE_RUNTIME_PROFILE.monsterComposition.reduce((total, item) => total + item.physicalInstances.length, 0);
 const coverageTotals = runtimeFieldCoverageTotals() as ReturnType<typeof runtimeFieldCoverageTotals> & Record<string, number>;
 const evidence = {
-  schemaVersion: 'phase11a3-community-reference-runtime-final-acceptance.v1',
+  schemaVersion: 'phase11a3-community-runtime-acceptance-truth-gate.v1',
   runId: randomUUID(),
   measuredAt: new Date().toISOString(),
   verifiedImplementationHead,
@@ -136,22 +137,32 @@ const evidence = {
   runtimeAdapterVersion: COMMUNITY_REFERENCE_RUNTIME_PROFILE.runtimeAdapterVersion,
   contentHash: COMMUNITY_REFERENCE_RUNTIME_PROFILE.contentHash,
   counts: { quests: COMMUNITY_REFERENCE_RUNTIME_PROFILE.quests.length, layouts: COMMUNITY_REFERENCE_RUNTIME_PROFILE.layouts.length, guardianFamilies: COMMUNITY_REFERENCE_RUNTIME_PROFILE.guardianFamilies.length, guardianActors: COMMUNITY_REFERENCE_RUNTIME_PROFILE.guardianActors.length, rooms: COMMUNITY_REFERENCE_RUNTIME_PROFILE.rooms.length, finalEncounterRecords: COMMUNITY_REFERENCE_RUNTIME_PROFILE.finalEncounterRecords.length, monsterPhysical: physicalMonsters, monsterLogical: COMMUNITY_REFERENCE_RUNTIME_PROFILE.monsterComposition.length },
-  fieldCoverage: coverageTotals,
+  semanticLeafCoverage: {
+    total: coverageTotals.total,
+    consumed: coverageTotals.consumed,
+    sourceBlocked: coverageTotals['explicit-source-blocker'],
+    engineBlocked: coverageTotals['engine-unsupported-blocker'],
+    displayOnly: coverageTotals['display-only'],
+    notRuntimeRelevant: coverageTotals['not-runtime-relevant'],
+    unclassified: coverageTotals.unclassified,
+  },
+  runtimeSelectorCoverage: { expected: coverageTotals.runtimeSelectorExpected, resolved: coverageTotals.runtimeSelectorResolved, missing: coverageTotals.runtimeSelectorMissing },
   testGroups: Object.fromEntries(structured.map((group) => [group.name, group])),
   blockerInventory: { sourceLevel: COMMUNITY_RUNTIME_BLOCKERS.filter((item) => item.classification === 'source-level').length, runtimeOnly: COMMUNITY_RUNTIME_BLOCKERS.filter((item) => item.classification === 'runtime-only').length, total: COMMUNITY_RUNTIME_BLOCKERS.length },
+  activeBlockers: COMMUNITY_RUNTIME_BLOCKERS,
   activeBlockerCodes: COMMUNITY_RUNTIME_BLOCKERS.map((item) => item.code),
   commands,
   officialGateBefore: expectedOfficialTruth,
   officialGateAfter: officialTruth,
   communityFullActFourPlayable: false,
   communityFullActFourPlayableReason: `${COMMUNITY_RUNTIME_BLOCKERS.length} active source/runtime blockers`,
-  terminalVerdict: errors.length === 0 ? 'COMMUNITY-REFERENCE-RUNTIME-ACCEPTED' : 'COMMUNITY-REFERENCE-RUNTIME-FINAL-ACCEPTANCE-BLOCKED',
+  terminalVerdict: errors.length === 0 ? 'COMMUNITY-REFERENCE-RUNTIME-ACCEPTED' : 'COMMUNITY-REFERENCE-RUNTIME-ACCEPTANCE-TRUTH-BLOCKED',
   errors,
 };
 
 mkdirSync(dirname(EVIDENCE_PATH), { recursive: true });
 mkdirSync(dirname(REPORT_PATH), { recursive: true });
-writeFileSync(COVERAGE_PATH, `${JSON.stringify({ schemaVersion: 'phase11a3-community-runtime-field-coverage.v1', generatedAt: evidence.measuredAt, verifiedImplementationHead, totals: coverageTotals, entries: COMMUNITY_RUNTIME_FIELD_COVERAGE }, null, 2)}\n`);
+writeFileSync(COVERAGE_PATH, `${JSON.stringify({ schemaVersion: 'phase11a3-community-runtime-semantic-leaf-coverage.v2', generatedAt: evidence.measuredAt, verifiedImplementationHead, totals: coverageTotals, entries: COMMUNITY_RUNTIME_FIELD_COVERAGE }, null, 2)}\n`);
 writeFileSync(EVIDENCE_PATH, `${JSON.stringify(evidence, null, 2)}\n`);
 const groupSummary = structured.map((group) => `- ${group.name}: ${group.passed}/${group.expected} passed; discovered=${group.discovered}, run=${group.run}, failed=${group.failed}, skipped=${group.skipped}, todo=${group.todo}.`).join('\n');
 writeFileSync(REPORT_PATH, `# Phase 11A.3 Community Reference Runtime Final Acceptance Report\n\n- Terminal verdict: **${evidence.terminalVerdict}**\n- Verified implementation head: \`${verifiedImplementationHead}\`\n- Runtime profile: \`${evidence.runtimeProfileId}\`\n- Source package SHA-256: \`${evidence.sourcePackageSha256}\`\n- Content hash: \`${evidence.contentHash}\`\n- Field coverage: ${coverageTotals.total} total; ${coverageTotals.consumed} consumed, ${coverageTotals['explicit-source-blocker']} source-blocked, ${coverageTotals['engine-unsupported-blocker']} engine-blocked, ${coverageTotals['display-only']} display-only, ${coverageTotals['not-runtime-relevant']} not-runtime-relevant, ${coverageTotals.unclassified} unclassified.\n\n## Exact test counts\n\n${groupSummary}\n\n- Active blockers: ${evidence.blockerInventory.sourceLevel} source-level + ${evidence.blockerInventory.runtimeOnly} runtime-only = ${evidence.blockerInventory.total}.\n- Official Source Gate: \`SOURCE-BLOCKED\`; requiredMissing=26, optionalMissing=1, onlyOpenP0=\`ISSUE-P0-002\`, Formal Matrix=0/9, canCloseP0_002=false, canEnterPhase11B=false.\n- Community full Act IV playable: **false**.\n\n## Active blockers\n\n${evidence.activeBlockerCodes.map((code) => `- \`${code}\``).join('\n')}\n\nThis acceptance does not alter Official Source Gate semantics, close ISSUE-P0-002, enter Phase 11B, replace art assets, or fill unresolved rules from Prototype or videogame sources.\n`);

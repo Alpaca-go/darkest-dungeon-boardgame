@@ -4,7 +4,7 @@ import bindingEvidenceJson from '../../../../docs/data/darkest-dungeon/community
 import { COMMUNITY_DATASET, monsterComposition } from './data';
 
 export const COMMUNITY_REFERENCE_PROFILE_ID = 'community-reference' as const;
-export const COMMUNITY_RUNTIME_ADAPTER_VERSION = 'phase11a3-community-runtime-adapter.v3' as const;
+export const COMMUNITY_RUNTIME_ADAPTER_VERSION = 'phase11a3-community-runtime-adapter.v4' as const;
 export const COMMUNITY_REFERENCE_SOURCE_SHA256 = COMMUNITY_DATASET.corpus.sourcePackageSha256;
 
 export type CommunityRuntimeBlockerCode =
@@ -19,15 +19,25 @@ export type CommunityRuntimeBlockerCode =
   | 'GUARDIAN_CRIT_ENGINE_UNSUPPORTED'
   | 'GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED'
   | 'TEMPLARS_AREA_ADJACENCY_UNRESOLVED'
-  | 'SHUFFLING_INITIAL_AREA_UNRESOLVED';
+  | 'SHUFFLING_INITIAL_AREA_UNRESOLVED'
+  | 'MAMMOTH_STALK_NO_SPACE_RESOLUTION_ENGINE_UNSUPPORTED'
+  | 'QUEST_CARD_PROVISION_POLICY_ENGINE_UNSUPPORTED'
+  | 'FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED'
+  | 'FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED'
+  | 'GUARDIAN_VICTORY_POLICY_ENGINE_UNSUPPORTED';
 export interface CommunityRuntimeBlocker {
   code: CommunityRuntimeBlockerCode;
   requirementId: string;
   field: string;
+  sourcePath: string;
+  runtimeDependency: string;
+  firstBlockingFunction: string;
+  tests: string[];
+  proofKind: 'semantic-leaf' | 'capability-level';
   classification: 'source-level' | 'runtime-only';
   sourceAuthority: 'COMMUNITY_RETAIL_REFERENCE';
 }
-const blocker = (code: CommunityRuntimeBlockerCode, requirementId: string, field: string, classification: CommunityRuntimeBlocker['classification']): CommunityRuntimeBlocker => ({ code, requirementId, field, classification, sourceAuthority: 'COMMUNITY_RETAIL_REFERENCE' });
+const blocker = (code: CommunityRuntimeBlockerCode, requirementId: string, field: string, classification: CommunityRuntimeBlocker['classification'], runtimeDependency = field, firstBlockingFunction = 'blockCommunityOperation'): CommunityRuntimeBlocker => ({ code, requirementId, field, sourcePath: field, runtimeDependency, firstBlockingFunction, tests: [`BLOCK:${code}`], proofKind: requirementId.startsWith('runtime-') ? 'capability-level' : 'semantic-leaf', classification, sourceAuthority: 'COMMUNITY_RETAIL_REFERENCE' });
 export const COMMUNITY_RUNTIME_BLOCKERS = [
   blocker('TEMPLARS_PIT_EXIT_RULE_UNRESOLVED', 'tierB-templars-room', 'pitExitRule', 'source-level'),
   blocker('ABSOLUTE_NOTHINGNESS_STANCE_UNRESOLVED', 'tierB-absolute-nothingness', 'stance', 'source-level'),
@@ -41,6 +51,11 @@ export const COMMUNITY_RUNTIME_BLOCKERS = [
   blocker('GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED', 'runtime-guardian-combat', 'specialSkillEffectResolution', 'runtime-only'),
   blocker('TEMPLARS_AREA_ADJACENCY_UNRESOLVED', 'runtime-templars-room', 'areaAdjacency', 'runtime-only'),
   blocker('SHUFFLING_INITIAL_AREA_UNRESOLVED', 'runtime-shuffling-horror-room', 'initialArea', 'runtime-only'),
+  blocker('MAMMOTH_STALK_NO_SPACE_RESOLUTION_ENGINE_UNSUPPORTED', 'tierB-mammoth-cyst-room', 'spawnAreaPolicy.noSpace', 'runtime-only', 'room area adjacency / nearest-available displacement', 'summonWhiteCellStalk'),
+  blocker('QUEST_CARD_PROVISION_POLICY_ENGINE_UNSUPPORTED', 'runtime-community-quest', 'provisionPolicyId.cardSpecific', 'runtime-only', 'card-specific provision policy execution', 'startDarkestDungeonQuest'),
+  blocker('FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED', 'runtime-community-final', 'd10SkillTable', 'runtime-only', 'Final Form d10 skill execution', 'resolveFinalFormAction'),
+  blocker('FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED', 'runtime-community-final', 'roomEffects.encounterContext', 'runtime-only', 'source-projected room transition policy', 'transitionToNextFinalForm'),
+  blocker('GUARDIAN_VICTORY_POLICY_ENGINE_UNSUPPORTED', 'runtime-community-guardian', 'victoryCondition', 'runtime-only', 'source-projected Guardian victory policy', 'resolveGuardianVictory'),
 ] as const;
 
 export function communityRequirement(requirementId: string) {

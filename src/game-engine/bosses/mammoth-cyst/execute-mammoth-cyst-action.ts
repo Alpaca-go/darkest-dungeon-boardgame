@@ -17,6 +17,7 @@ import type {
   WhiteCellStalkSummonRecord,
 } from '../../../types/mammoth-cyst';
 import { resolveDamage } from '../../damage';
+import { applyActorHealing } from '../../healing';
 import { applyStress } from '../../stress';
 import { pushLog } from '../../log';
 import { nowIso } from '../../random';
@@ -30,10 +31,12 @@ import { summonWhiteCellStalk } from './summon-white-cell-stalk';
 import { resolveWhiteCellStalkTeleportation } from './resolve-teleportation';
 
 export interface ExecuteMammothCystActionOptions {
-  mode?: DataMode;
+  mode?: DataMode | 'community-reference';
   rng: () => number;
   /** Teleportation / 普通攻击的目标 Hero（由调用方按 Boss AI 或调试面板指定）。 */
   targetHeroId?: string;
+  /** Required for a source-confirmed allied Monster heal such as Reconstitute. */
+  targetMonsterActorId?: string;
   now?: string;
 }
 
@@ -70,7 +73,7 @@ export function executeMammothCystAction(
   options: ExecuteMammothCystActionOptions,
 ): ExecuteMammothCystActionResult {
   const state = campaign.actFourState.mammothCystEncounterState;
-  const mode: DataMode = options.mode ?? 'prototype';
+  const mode: DataMode | 'community-reference' = options.mode ?? 'prototype';
   const now = options.now ?? nowIso();
 
   const base: ExecuteMammothCystActionResult = {
@@ -141,6 +144,18 @@ export function executeMammothCystAction(
   };
   const skill = rolled.skill;
   const actor = getMammothCystActorState(rolled.state, card.actorId);
+
+  // ---- Source-confirmed non-attack healing (shared healing primitive) ----
+  if (skill.specialEffect?.type === 'heal-monster') {
+    const targetId = skill.specialEffect.target === 'self' ? card.actorId : options.targetMonsterActorId;
+    if (!targetId) return { ...base, campaign: working, state: rolled.state, actionType: 'normal-skill', skillRoll: rolled.record, skill, reason: `${skill.name} requires a Monster target` };
+    const target = rolled.state.actorStates.find((candidate) => candidate.actorId === targetId);
+    if (!target || !target.isAlive) return { ...base, campaign: working, state: rolled.state, actionType: 'normal-skill', skillRoll: rolled.record, skill, reason: `Monster target ${targetId} is unavailable` };
+    const healed = applyActorHealing(target, skill.specialEffect.amount);
+    const nextState = { ...rolled.state, actorStates: rolled.state.actorStates.map((candidate) => candidate.actorId === targetId ? healed.actor : candidate) };
+    working = pushLog({ ...working, actFourState: { ...working.actFourState, mammothCystEncounterState: nextState } }, `${actor?.name ?? 'Monster'} uses ${skill.name}: ${target.name} heals ${healed.healed} HP.`, 'success');
+    return { ...base, ok: true, campaign: working, state: nextState, actionType: 'normal-skill', skillRoll: rolled.record, skill, reason: null };
+  }
 
   // ---- Teleportation 分支（硬约束 13：只由正式 Skill 触发）----
   if (skill.triggersTeleportation) {
@@ -217,7 +232,7 @@ export function executeMammothCystAction(
   // 命中判定：requiresHit=true 时掷 d10 与 accuracy 比较（沿用既有 d10 命中语义）。
   let hit = true;
   let hitRoll: number | null = null;
-  if (skill.requiresHit) {
+  if (skill.requiresHit && skill.accuracy !== null) {
     hitRoll = rollD10(options.rng);
     hit = hitRoll === 10 || hitRoll <= skill.accuracy;
   }
@@ -225,7 +240,7 @@ export function executeMammothCystAction(
   let damageDealt = 0;
   let stressDealt = 0;
 
-  if (hit && skill.maxDamage > 0) {
+  if (hit && skill.maxDamage !== null && skill.minDamage !== null && skill.maxDamage > 0) {
     // 伤害量：min—max 间由注入 rng 决定（禁止 Math.random）。
     const span = Math.max(0, skill.maxDamage - skill.minDamage);
     const amount = skill.minDamage + Math.floor(options.rng() * (span + 1));

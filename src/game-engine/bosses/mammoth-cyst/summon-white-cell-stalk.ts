@@ -40,6 +40,7 @@ import {
   withProcessedMammothCystTransaction,
 } from './mammoth-cyst-runtime';
 import { decideMammothCystAction } from './mammoth-cyst-action-override';
+import type { CommunityRuntimeBlockerCode } from '../../../data/darkest-dungeon/community-reference/runtime-profile';
 
 /** 通用「第一处空 Stance」的检查顺序（规则书 Stance Tracker 自上而下）。 */
 export const STANCE_ORDER: MonsterStance[] = ['aggressive', 'ranged', 'defensive', 'support'];
@@ -186,6 +187,7 @@ export interface SummonWhiteCellStalkResult {
   /** 回滚标记：true 表示中途失败且已整体回滚（campaign / state 保持召唤前）。 */
   rolledBack: boolean;
   reason: string | null;
+  blockerCode?: CommunityRuntimeBlockerCode;
 }
 
 /**
@@ -256,6 +258,7 @@ export function summonWhiteCellStalk(
   const space = resolveWhiteCellStalkSpawnSpace(state, room);
   if (!space.ok || !space.stance || !space.areaId) {
     // 解析失败 → 整体放弃，不创建任何单位、不加任何卡。
+    const noSpaceBlocker = mode === 'community-reference' && /已满/.test(space.reason ?? '');
     return {
       ok: false,
       campaign,
@@ -264,7 +267,8 @@ export function summonWhiteCellStalk(
       initiativeCards: [],
       alreadySummoned: false,
       rolledBack: true,
-      reason: space.reason,
+      reason: noSpaceBlocker ? 'MAMMOTH_STALK_NO_SPACE_RESOLUTION_ENGINE_UNSUPPORTED' : space.reason,
+      blockerCode: noSpaceBlocker ? 'MAMMOTH_STALK_NO_SPACE_RESOLUTION_ENGINE_UNSUPPORTED' : undefined,
     };
   }
 
