@@ -25,7 +25,7 @@
     "verify:phase11a2-final": "vite-node scripts/audit/verify-phase11a2-final.ts",
     "audit:official-source": "vite-node scripts/audit/official-source.ts",
     "verify:phase11a3-source-gate": "vite-node scripts/audit/verify-phase11a3-source-gate.ts",
-    "generate:community-reference-normalized": "node scripts/audit/generate-community-reference-normalized.mjs --input $npm_config_input",
+    "generate:community-reference-normalized": "node scripts/audit/generate-community-reference-normalized.mjs",
     "verify:community-reference-binding": "vite-node scripts/audit/verify-community-reference-binding.ts",
     "verify:phase11a3-clean-evidence": "vite-node scripts/audit/verify-phase11a3-clean-evidence.ts",
     "verify:phase11a3-infrastructure-acceptance": "vite-node scripts/audit/verify-phase11a3-infrastructure-acceptance.ts"

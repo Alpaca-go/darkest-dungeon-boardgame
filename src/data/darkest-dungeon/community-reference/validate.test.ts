@@ -1,11 +1,31 @@
 import { describe, expect, it } from 'vitest';
-import { COMMUNITY_BINDINGS, COMMUNITY_MONSTER_DECK, COMMUNITY_QUESTS } from './data';
-import { validateCommunityReference } from './validate';
-
-describe('community reference binding', () => {
-  it('accepts the audited community-only binding', () => expect(validateCommunityReference()).toEqual([]));
-  it('rejects official authority', () => expect(validateCommunityReference({ authority: 'OFFICIAL_RETAIL_VERIFIED', records: [], bindings: [], monsterDeck: COMMUNITY_MONSTER_DECK } as never)).not.toEqual([]));
-  it('rejects a guessed blocked value', () => { const deck = { ...COMMUNITY_MONSTER_DECK, drawPolicy: { ...COMMUNITY_MONSTER_DECK.drawPolicy, value: 'DeckIDs order' } }; expect(validateCommunityReference({ authority: 'COMMUNITY_RETAIL_REFERENCE', records: [], bindings: COMMUNITY_BINDINGS, monsterDeck: deck } as never)).not.toEqual([]); });
-  it('uses title-bound quests, not ordinal-only bindings', () => expect(COMMUNITY_QUESTS.map(q => q.id)).not.toContain('quest-1'));
-  it('rejects prototype target without a binding basis', () => expect(validateCommunityReference({ authority: 'COMMUNITY_RETAIL_REFERENCE', records: [], bindings: [{ sourceLocalId: 'x', repositoryId: 'prototype-x', bindingBasis: '', sourceReference: [] }], monsterDeck: COMMUNITY_MONSTER_DECK } as never)).not.toEqual([]));
+import { COMMUNITY_DATASET } from './data';
+import { validateCommunityReference, validateEvidenceIdentity, validateRegenerationParity, type CommunityDataset } from './validate';
+const clone = (): CommunityDataset => structuredClone(COMMUNITY_DATASET) as CommunityDataset;
+const fails = (mutate: (data: CommunityDataset) => void) => { const data = clone(); mutate(data); expect(validateCommunityReference(data).length).toBeGreaterThan(0); };
+const field = (data: CommunityDataset, requirementId: string, key: string) => data.corpus.requirements.find(r => r.requirementId === requirementId)!.fields[key];
+describe('community reference final acceptance mutations', () => {
+  it('accepts the complete caller-supplied dataset', () => expect(validateCommunityReference(clone())).toEqual([]));
+  it('T01 remove requirement', () => fails(d => { d.corpus.requirements.pop(); }));
+  it('T02 duplicate requirement ID', () => fails(d => { d.corpus.requirements[1].requirementId=d.corpus.requirements[0].requirementId; }));
+  it('T03 remove required field', () => fails(d => { delete d.corpus.requirements[0].fields.name; }));
+  it('T04 eligible to unresolved', () => fails(d => { const f=field(d,'tierB-quest-1','name'); f.value=null; f.evidenceType='unresolved'; f.eligibleForPendingImport=false; }));
+  it('T05 unknown asset ref', () => fails(d => { field(d,'tierB-quest-1','name').sourceReference=['asset:unknown:face']; }));
+  it('T06 unknown tts ref', () => fails(d => { field(d,'tierB-quest-1','name').sourceReference=['tts:unknown']; }));
+  it('T07 authority escalation', () => fails(d => { d.corpus.sourceAuthority='OFFICIAL_RETAIL_VERIFIED'; }));
+  it('T08 official pool enablement', () => fails(d => { (d.guardians[0] as unknown as {enabledInOfficialPool:boolean}).enabledInOfficialPool=true; }));
+  it('T09 guessed pit exit', () => fails(d => { field(d,'tierB-templars-room','pitExitRule').value='guess'; }));
+  it('T10 guessed Absolute Nothingness stance', () => fails(d => { field(d,'tierB-absolute-nothingness','stance').value='aggressive'; }));
+  it('T11 guessed Gestating Heart timing', () => fails(d => { field(d,'tierB-gestating-heart','lethalWoundTimingRuling').value='guess'; }));
+  it('T12 videogame Come Unto Your Maker', () => fails(d => { field(d,'tierB-come-unto-your-maker','definition').value='videogame sacrifice'; }));
+  it('T13 DeckIDs draw policy', () => fails(d => { field(d,'tierB-darkest-dungeon-monster-deck','drawPolicy').value='DeckIDs order'; }));
+  it('T14 ordinal-only Quest ID', () => fails(d => { d.quests[0].id='community-dd-quest-1'; }));
+  it('T15 prototype target without basis', () => fails(d => { d.bindings[0].repositoryId='prototype-nearest'; d.bindings[0].bindingBasis=''; }));
+  it('T16 remove expected binding', () => fails(d => { d.bindings.pop(); }));
+  it('T17 collapse duplicate physical instances', () => fails(d => { d.corpus.requirements.find(r=>r.requirementId==='tierB-cultist-priest')!.assets.splice(1); }));
+  it('T18 remove Monster physical card', () => fails(d => { const v=field(d,'tierB-darkest-dungeon-monster-deck','deckComposition').value as {composition:Array<{members:unknown[]}>}; v.composition[0].members.pop(); }));
+  it('T19 remove Tile graph node', () => fails(d => { const v=field(d,'tierB-dd-dungeon-tile','tileGeometry').value as Array<{roomSlots:unknown[]}>; v[0].roomSlots.pop(); }));
+  it('T20 caller mutation is inspected', () => fails(d => { field(d,'tierB-absolute-nothingness','stance').value='caller mutation'; }));
+  it('T21 regenerated artifact drift fails', () => expect(validateRegenerationParity({normalized:'aaa'},{normalized:'bbb'})).not.toEqual([]));
+  it('T22 stale evidence SHA fails', () => expect(validateEvidenceIdentity({verifiedImplementationHead:'parent'},'implementation')).not.toEqual([]));
 });

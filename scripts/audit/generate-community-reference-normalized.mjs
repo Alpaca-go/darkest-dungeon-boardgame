@@ -5,15 +5,18 @@ import { dirname, resolve } from 'node:path';
 const inputFlag = process.argv.indexOf('--input');
 if (inputFlag < 0 || !process.argv[inputFlag + 1]) throw new Error('Usage: node scripts/audit/generate-community-reference-normalized.mjs --input <Astra intake package>');
 const input = resolve(process.argv[inputFlag + 1]);
-const out = resolve('docs/data/darkest-dungeon/community-reference/antha-complete-edition');
+const outFlag = process.argv.indexOf('--out');
+const out = resolve(outFlag >= 0 && process.argv[outFlag + 1] ? process.argv[outFlag + 1] : 'docs/data/darkest-dungeon/community-reference/antha-complete-edition');
 const pkg = JSON.parse(readFileSync(input, 'utf8'));
 const hash = createHash('sha256').update(readFileSync(input)).digest('hex');
 const refs = new Map();
 const add = (key, kind, detail) => { if (!refs.has(key)) refs.set(key, { key, kind, detail }); };
 for (const requirement of pkg.requirements) {
   for (const asset of requirement.assets ?? []) {
-    add(asset.sourceObjectReference, 'tts-object', { guid: asset.guid, cardId: asset.cardId, ttsPath: asset.ttsPath });
-    for (const ref of asset.renderReferences ?? []) add(ref, 'render-asset', { guid: asset.guid, cardId: asset.cardId });
+    const renders = asset.renders?.map(({ side, url, cropBox, sourceImageSha256, renderedCropSha256 }) => ({ side, url, cropBox, sourceImageSha256, renderedCropSha256 }));
+    const canonical = { guid: asset.guid, cardId: asset.cardId, ttsPath: asset.ttsPath, customDeck: asset.customDeck, customImage: asset.customImage, renders };
+    add(asset.sourceObjectReference, 'tts-object', canonical);
+    for (const ref of asset.renderReferences ?? []) add(ref, 'render-asset', canonical);
   }
   for (const field of Object.values(requirement.fields)) for (const ref of field.sourceReference ?? []) {
     if (ref.startsWith('rulebook:')) add(ref, 'rulebook-page', { page: Number(ref.slice(9)) });
@@ -26,7 +29,7 @@ const collect = (value, kind, sourceReference, requirementId) => {
   if (Array.isArray(value)) return value.forEach(v => collect(v, kind, sourceReference, requirementId));
   if (!value || typeof value !== 'object') return;
   for (const [key, v] of Object.entries(value)) {
-    if (/sourceLocal(Id|SkillId|SlotId)|areaId|mappedComponentIds|printedBossNames|guid|cardId/i.test(key)) {
+    if (/sourceLocal(Id|SkillId|SlotId|MonsterDefinitionId)|areaId|mappedComponentIds|printedBossNames|guid|cardId/i.test(key)) {
       for (const id of Array.isArray(v) ? v : [v]) if (typeof id === 'string' || typeof id === 'number') { const sourceLocalId = String(id); expected.set(`${key}:${sourceLocalId}`, { sourceLocalId, sourceKind: key, sourceReference, requirementId }); bindings.push({ sourceLocalId, sourceKind: key, repositoryId: `community-dd-${sourceLocalId.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`, bindingBasis: 'exact source-local identity retained in normalized intake; community-reference ID created', sourceReference, requirementId }); }
     }
     collect(v, key, sourceReference, requirementId);
