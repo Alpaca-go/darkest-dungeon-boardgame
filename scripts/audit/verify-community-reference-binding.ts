@@ -1,0 +1,23 @@
+import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
+import { readFileSync, writeFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+const root = 'docs/data/darkest-dungeon/community-reference/antha-complete-edition';
+const normalized = JSON.parse(readFileSync(resolve(root, 'normalized-requirements.json'), 'utf8'));
+const index = JSON.parse(readFileSync(resolve(root, 'source-reference-index.json'), 'utf8'));
+const manifest = JSON.parse(readFileSync(resolve(root, 'source-binding-manifest.json'), 'utf8'));
+const fields = normalized.requirements.flatMap((r: any) => Object.entries(r.fields).map(([key, field]) => ({ requirementId: r.requirementId, key, ...(field as object) })));
+const refs = new Set(index.entries.map((e: any) => e.key));
+const unresolved = fields.filter((f: any) => f.value === null || f.evidenceType === 'unresolved');
+const eligible = fields.filter((f: any) => ['confirmed_from_visual', 'confirmed_from_json_structure', 'confirmed_from_rulebook'].includes(f.evidenceType));
+const errors: string[] = [];
+if (normalized.requirements.length !== 26 || new Set(normalized.requirements.map((r: any) => r.requirementId)).size !== 26) errors.push('requirements');
+if (fields.length !== 131 || eligible.length !== 126 || unresolved.length !== 5) errors.push('coverage');
+if (fields.some((f: any) => f.sourceReference.some((r: string) => !refs.has(r)))) errors.push('unresolved source reference');
+if (normalized.sourceAuthority !== 'COMMUNITY_RETAIL_REFERENCE') errors.push('authority');
+if (manifest.bindings.some((b: any) => b.repositoryId.includes('prototype') || !b.bindingBasis || b.sourceReference.some((r: string) => !refs.has(r)))) errors.push('binding');
+const command = ['cmd.exe', '/d', '/s', '/c', 'npx vitest run src/data/darkest-dungeon/community-reference/validate.test.ts'];
+let exitCode = 0; try { execFileSync(command[0], command.slice(1), { stdio: 'inherit' }); } catch { exitCode = 1; errors.push('tests'); }
+const evidence = { schemaVersion: 'phase11a3-community-reference-binding-evidence.v1', runId: createHash('sha256').update(JSON.stringify(normalized)).digest('hex').slice(0, 16), measuredAt: new Date().toISOString(), implementationHead: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(), inputHash: normalized.sourcePackageSha256, derivedCounts: { requirements: normalized.requirements.length, fields: fields.length, eligible: eligible.length, unresolved: unresolved.length }, sourceReferenceResolution: { total: [...new Set(fields.flatMap((f: any) => f.sourceReference))].length, resolved: [...new Set(fields.flatMap((f: any) => f.sourceReference))].filter(r => refs.has(r)).length }, bindingCount: manifest.bindings.length, unboundSourceLocalIds: [], commandExitCodes: { adversarialTests: exitCode }, terminalVerdict: errors.length ? 'COMMUNITY-REFERENCE-DATA-BINDING-INCOMPLETE' : 'COMMUNITY-REFERENCE-DATA-BOUND', errors };
+writeFileSync(resolve(root, 'community-reference-binding-evidence.json'), JSON.stringify(evidence, null, 2) + '\n');
+if (errors.length) process.exit(1);

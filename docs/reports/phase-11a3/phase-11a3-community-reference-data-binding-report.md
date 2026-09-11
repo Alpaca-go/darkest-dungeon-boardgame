@@ -39,16 +39,19 @@ or DeckIDs ordering were used.
 
 ## Verification
 
-`npm run typecheck` passed. The dedicated community binding test suite passed
-5/5, including negative cases for authority escalation, guessed blocked data,
-ordinal-only quest IDs, and prototype/unbased bindings.
+Completion measurement: `npm run verify:community-reference-binding` passed
+with run ID `03e1665c2aa626f4`: 26 requirements, 131 field entries, 126 eligible,
+5 unresolved, 108/108 source references resolved, and 282 measured bindings.
+The dedicated community binding test suite passed 5/5.
 
-The existing full `verify:phase11a3-source-gate` command was launched to test
-official-gate regression. Its generated artifacts are not final evidence until
-the command completes; its expected official truth remains `SOURCE-BLOCKED`,
+The existing full `verify:phase11a3-source-gate` completed successfully and
+its measured official truth remains `SOURCE-BLOCKED`,
 `requiredMissing=26`, `optionalMissing=1`, `openP0=1`, `openP1=0`, only
 `ISSUE-P0-002`, Formal Matrix `0/9`, `canCloseP0_002=false`, and
 `canEnterPhase11B=false`.
 
 Terminal intent: `COMMUNITY-REFERENCE-DATA-BOUND`; this is not an official
 Phase 11A.3 completion claim and does not enable runtime behavior.
+
+Verification Environment: LOCAL MEASURED VERIFICATION. GitHub CI/status
+checks: none observed.

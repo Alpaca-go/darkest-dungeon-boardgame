@@ -1,10 +1,4294 @@
 {
-  "schemaVersion": "phase11a3-community-reference-binding-manifest.v1",
-  "authority": "COMMUNITY_RETAIL_REFERENCE",
-  "sourceEdition": "antha-complete-edition",
-  "records": ["quests", "guardians", "rooms", "dungeonTiles", "finalEncounter", "monsterDeck"],
-  "sourceLocalIdPolicy": "Every source-local identity has an explicit basis. No source-local value is treated as a repository or prototype ID by implication.",
-  "geometryPolicy": "All room and dungeon-tile geometry is source-local schematic data; it is not runtime collision, pathfinding, or world-transform data.",
-  "officialPoolPolicy": "All community records have enabledInOfficialPool=false.",
+  "schemaVersion": "phase11a3-community-reference-binding-manifest.v2",
+  "bindings": [
+    {
+      "sourceLocalId": "Shuffling Horror",
+      "sourceKind": "printedBossNames",
+      "repositoryId": "community-dd-shuffling-horror",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:735bc3:face"
+      ],
+      "requirementId": "tierB-quest-1"
+    },
+    {
+      "sourceLocalId": "shuffling-horror",
+      "sourceKind": "mappedComponentIds",
+      "repositoryId": "community-dd-shuffling-horror",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:735bc3:face"
+      ],
+      "requirementId": "tierB-quest-1"
+    },
+    {
+      "sourceLocalId": "Templar Impaler",
+      "sourceKind": "printedBossNames",
+      "repositoryId": "community-dd-templar-impaler",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:083199:face"
+      ],
+      "requirementId": "tierB-quest-2"
+    },
+    {
+      "sourceLocalId": "Templar Warlord",
+      "sourceKind": "printedBossNames",
+      "repositoryId": "community-dd-templar-warlord",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:083199:face"
+      ],
+      "requirementId": "tierB-quest-2"
+    },
+    {
+      "sourceLocalId": "templar-impaler",
+      "sourceKind": "mappedComponentIds",
+      "repositoryId": "community-dd-templar-impaler",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:083199:face"
+      ],
+      "requirementId": "tierB-quest-2"
+    },
+    {
+      "sourceLocalId": "templar-warlord",
+      "sourceKind": "mappedComponentIds",
+      "repositoryId": "community-dd-templar-warlord",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:083199:face"
+      ],
+      "requirementId": "tierB-quest-2"
+    },
+    {
+      "sourceLocalId": "Mammoth Cyst",
+      "sourceKind": "printedBossNames",
+      "repositoryId": "community-dd-mammoth-cyst",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:6555d3:face"
+      ],
+      "requirementId": "tierB-quest-3"
+    },
+    {
+      "sourceLocalId": "White Cell Stalk",
+      "sourceKind": "printedBossNames",
+      "repositoryId": "community-dd-white-cell-stalk",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:6555d3:face"
+      ],
+      "requirementId": "tierB-quest-3"
+    },
+    {
+      "sourceLocalId": "mammoth-cyst",
+      "sourceKind": "mappedComponentIds",
+      "repositoryId": "community-dd-mammoth-cyst",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:6555d3:face"
+      ],
+      "requirementId": "tierB-quest-3"
+    },
+    {
+      "sourceLocalId": "white-cell-stalk",
+      "sourceKind": "mappedComponentIds",
+      "repositoryId": "community-dd-white-cell-stalk",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:6555d3:face"
+      ],
+      "requirementId": "tierB-quest-3"
+    },
+    {
+      "sourceLocalId": "4ced96",
+      "sourceKind": "sourceTileGuid",
+      "repositoryId": "community-dd-4ced96",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "c4r0",
+      "sourceKind": "sourceLocalSlotId",
+      "repositoryId": "community-dd-c4r0",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "c1r1",
+      "sourceKind": "sourceLocalSlotId",
+      "repositoryId": "community-dd-c1r1",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "c2r1",
+      "sourceKind": "sourceLocalSlotId",
+      "repositoryId": "community-dd-c2r1",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "c4r1",
+      "sourceKind": "sourceLocalSlotId",
+      "repositoryId": "community-dd-c4r1",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "c3r2",
+      "sourceKind": "sourceLocalSlotId",
+      "repositoryId": "community-dd-c3r2",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "c4r2",
+      "sourceKind": "sourceLocalSlotId",
+      "repositoryId": "community-dd-c4r2",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "c5r2",
+      "sourceKind": "sourceLocalSlotId",
+      "repositoryId": "community-dd-c5r2",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "c2r3",
+      "sourceKind": "sourceLocalSlotId",
+      "repositoryId": "community-dd-c2r3",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "c3r3",
+      "sourceKind": "sourceLocalSlotId",
+      "repositoryId": "community-dd-c3r3",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "c1r4",
+      "sourceKind": "sourceLocalSlotId",
+      "repositoryId": "community-dd-c1r4",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "c2r4",
+      "sourceKind": "sourceLocalSlotId",
+      "repositoryId": "community-dd-c2r4",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "c3r4",
+      "sourceKind": "sourceLocalSlotId",
+      "repositoryId": "community-dd-c3r4",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "c4r4",
+      "sourceKind": "sourceLocalSlotId",
+      "repositoryId": "community-dd-c4r4",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "c5r4",
+      "sourceKind": "sourceLocalSlotId",
+      "repositoryId": "community-dd-c5r4",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "c2r5",
+      "sourceKind": "sourceLocalSlotId",
+      "repositoryId": "community-dd-c2r5",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "c4r5",
+      "sourceKind": "sourceLocalSlotId",
+      "repositoryId": "community-dd-c4r5",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "d10a24",
+      "sourceKind": "sourceTileGuid",
+      "repositoryId": "community-dd-d10a24",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "c2r0",
+      "sourceKind": "sourceLocalSlotId",
+      "repositoryId": "community-dd-c2r0",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "c3r0",
+      "sourceKind": "sourceLocalSlotId",
+      "repositoryId": "community-dd-c3r0",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "c4r0",
+      "sourceKind": "sourceLocalSlotId",
+      "repositoryId": "community-dd-c4r0",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "c2r1",
+      "sourceKind": "sourceLocalSlotId",
+      "repositoryId": "community-dd-c2r1",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "c3r1",
+      "sourceKind": "sourceLocalSlotId",
+      "repositoryId": "community-dd-c3r1",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "c2r2",
+      "sourceKind": "sourceLocalSlotId",
+      "repositoryId": "community-dd-c2r2",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "c3r2",
+      "sourceKind": "sourceLocalSlotId",
+      "repositoryId": "community-dd-c3r2",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "c4r2",
+      "sourceKind": "sourceLocalSlotId",
+      "repositoryId": "community-dd-c4r2",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "c1r3",
+      "sourceKind": "sourceLocalSlotId",
+      "repositoryId": "community-dd-c1r3",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "c2r3",
+      "sourceKind": "sourceLocalSlotId",
+      "repositoryId": "community-dd-c2r3",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "c3r3",
+      "sourceKind": "sourceLocalSlotId",
+      "repositoryId": "community-dd-c3r3",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "c4r3",
+      "sourceKind": "sourceLocalSlotId",
+      "repositoryId": "community-dd-c4r3",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "c5r3",
+      "sourceKind": "sourceLocalSlotId",
+      "repositoryId": "community-dd-c5r3",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "c1r4",
+      "sourceKind": "sourceLocalSlotId",
+      "repositoryId": "community-dd-c1r4",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "c3r4",
+      "sourceKind": "sourceLocalSlotId",
+      "repositoryId": "community-dd-c3r4",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "c5r4",
+      "sourceKind": "sourceLocalSlotId",
+      "repositoryId": "community-dd-c5r4",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:4ced96:imageUrl",
+        "asset:d10a24:imageUrl",
+        "rulebook:36"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "torment",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-torment",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:efa5a4:face"
+      ],
+      "requirementId": "tierB-templars-impaler"
+    },
+    {
+      "sourceLocalId": "body-slam",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-body-slam",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:efa5a4:face"
+      ],
+      "requirementId": "tierB-templars-impaler"
+    },
+    {
+      "sourceLocalId": "revelation",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-revelation",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:efa5a4:face"
+      ],
+      "requirementId": "tierB-templars-impaler"
+    },
+    {
+      "sourceLocalId": "torment",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-torment",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:f88d6a:face"
+      ],
+      "requirementId": "tierB-templars-warlord"
+    },
+    {
+      "sourceLocalId": "stinger-shot",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-stinger-shot",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:f88d6a:face"
+      ],
+      "requirementId": "tierB-templars-warlord"
+    },
+    {
+      "sourceLocalId": "revelation",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-revelation",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:f88d6a:face"
+      ],
+      "requirementId": "tierB-templars-warlord"
+    },
+    {
+      "sourceLocalId": "r9-pit-1-2",
+      "sourceKind": "sourceLocalAreaId",
+      "repositoryId": "community-dd-r9-pit-1-2",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:afa508:face",
+        "asset:7a3fa9:imageUrl"
+      ],
+      "requirementId": "tierB-templars-room"
+    },
+    {
+      "sourceLocalId": "r9-pit-3-4",
+      "sourceKind": "sourceLocalAreaId",
+      "repositoryId": "community-dd-r9-pit-3-4",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:afa508:face",
+        "asset:7a3fa9:imageUrl"
+      ],
+      "requirementId": "tierB-templars-room"
+    },
+    {
+      "sourceLocalId": "r9-pit-5-6",
+      "sourceKind": "sourceLocalAreaId",
+      "repositoryId": "community-dd-r9-pit-5-6",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:afa508:face",
+        "asset:7a3fa9:imageUrl"
+      ],
+      "requirementId": "tierB-templars-room"
+    },
+    {
+      "sourceLocalId": "r9-pit-7-8",
+      "sourceKind": "sourceLocalAreaId",
+      "repositoryId": "community-dd-r9-pit-7-8",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:afa508:face",
+        "asset:7a3fa9:imageUrl"
+      ],
+      "requirementId": "tierB-templars-room"
+    },
+    {
+      "sourceLocalId": "r9-pit-9-10",
+      "sourceKind": "sourceLocalAreaId",
+      "repositoryId": "community-dd-r9-pit-9-10",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:afa508:face",
+        "asset:7a3fa9:imageUrl"
+      ],
+      "requirementId": "tierB-templars-room"
+    },
+    {
+      "sourceLocalId": "7a3fa9",
+      "sourceKind": "sourceTileGuid",
+      "repositoryId": "community-dd-7a3fa9",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:afa508:face",
+        "asset:7a3fa9:imageUrl"
+      ],
+      "requirementId": "tierB-templars-room-tile"
+    },
+    {
+      "sourceLocalId": "r9-NW",
+      "sourceKind": "sourceLocalAreaId",
+      "repositoryId": "community-dd-r9-nw",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:afa508:face",
+        "asset:7a3fa9:imageUrl"
+      ],
+      "requirementId": "tierB-templars-room-tile"
+    },
+    {
+      "sourceLocalId": "r9-N",
+      "sourceKind": "sourceLocalAreaId",
+      "repositoryId": "community-dd-r9-n",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:afa508:face",
+        "asset:7a3fa9:imageUrl"
+      ],
+      "requirementId": "tierB-templars-room-tile"
+    },
+    {
+      "sourceLocalId": "r9-NE",
+      "sourceKind": "sourceLocalAreaId",
+      "repositoryId": "community-dd-r9-ne",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:afa508:face",
+        "asset:7a3fa9:imageUrl"
+      ],
+      "requirementId": "tierB-templars-room-tile"
+    },
+    {
+      "sourceLocalId": "r9-W",
+      "sourceKind": "sourceLocalAreaId",
+      "repositoryId": "community-dd-r9-w",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:afa508:face",
+        "asset:7a3fa9:imageUrl"
+      ],
+      "requirementId": "tierB-templars-room-tile"
+    },
+    {
+      "sourceLocalId": "r9-C",
+      "sourceKind": "sourceLocalAreaId",
+      "repositoryId": "community-dd-r9-c",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:afa508:face",
+        "asset:7a3fa9:imageUrl"
+      ],
+      "requirementId": "tierB-templars-room-tile"
+    },
+    {
+      "sourceLocalId": "r9-E",
+      "sourceKind": "sourceLocalAreaId",
+      "repositoryId": "community-dd-r9-e",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:afa508:face",
+        "asset:7a3fa9:imageUrl"
+      ],
+      "requirementId": "tierB-templars-room-tile"
+    },
+    {
+      "sourceLocalId": "r9-SW",
+      "sourceKind": "sourceLocalAreaId",
+      "repositoryId": "community-dd-r9-sw",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:afa508:face",
+        "asset:7a3fa9:imageUrl"
+      ],
+      "requirementId": "tierB-templars-room-tile"
+    },
+    {
+      "sourceLocalId": "r9-SE",
+      "sourceKind": "sourceLocalAreaId",
+      "repositoryId": "community-dd-r9-se",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:afa508:face",
+        "asset:7a3fa9:imageUrl"
+      ],
+      "requirementId": "tierB-templars-room-tile"
+    },
+    {
+      "sourceLocalId": "r9-S",
+      "sourceKind": "sourceLocalAreaId",
+      "repositoryId": "community-dd-r9-s",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:afa508:face",
+        "asset:7a3fa9:imageUrl"
+      ],
+      "requirementId": "tierB-templars-room-tile"
+    },
+    {
+      "sourceLocalId": "r9-pit-1-2",
+      "sourceKind": "sourceLocalAreaId",
+      "repositoryId": "community-dd-r9-pit-1-2",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:afa508:face",
+        "asset:7a3fa9:imageUrl"
+      ],
+      "requirementId": "tierB-templars-room-tile"
+    },
+    {
+      "sourceLocalId": "r9-pit-3-4",
+      "sourceKind": "sourceLocalAreaId",
+      "repositoryId": "community-dd-r9-pit-3-4",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:afa508:face",
+        "asset:7a3fa9:imageUrl"
+      ],
+      "requirementId": "tierB-templars-room-tile"
+    },
+    {
+      "sourceLocalId": "r9-pit-5-6",
+      "sourceKind": "sourceLocalAreaId",
+      "repositoryId": "community-dd-r9-pit-5-6",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:afa508:face",
+        "asset:7a3fa9:imageUrl"
+      ],
+      "requirementId": "tierB-templars-room-tile"
+    },
+    {
+      "sourceLocalId": "r9-pit-7-8",
+      "sourceKind": "sourceLocalAreaId",
+      "repositoryId": "community-dd-r9-pit-7-8",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:afa508:face",
+        "asset:7a3fa9:imageUrl"
+      ],
+      "requirementId": "tierB-templars-room-tile"
+    },
+    {
+      "sourceLocalId": "r9-pit-9-10",
+      "sourceKind": "sourceLocalAreaId",
+      "repositoryId": "community-dd-r9-pit-9-10",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:afa508:face",
+        "asset:7a3fa9:imageUrl"
+      ],
+      "requirementId": "tierB-templars-room-tile"
+    },
+    {
+      "sourceLocalId": "bulging-gaze",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-bulging-gaze",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:c4a35e:face"
+      ],
+      "requirementId": "tierB-mammoth-cyst"
+    },
+    {
+      "sourceLocalId": "digestion",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-digestion",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:c4a35e:face"
+      ],
+      "requirementId": "tierB-mammoth-cyst"
+    },
+    {
+      "sourceLocalId": "revivify",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-revivify",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:c4a35e:face"
+      ],
+      "requirementId": "tierB-mammoth-cyst"
+    },
+    {
+      "sourceLocalId": "reconstitute",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-reconstitute",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:1fb052:face"
+      ],
+      "requirementId": "tierB-white-cell-stalk"
+    },
+    {
+      "sourceLocalId": "displace",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-displace",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:1fb052:face"
+      ],
+      "requirementId": "tierB-white-cell-stalk"
+    },
+    {
+      "sourceLocalId": "teleport",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-teleport",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:1fb052:face"
+      ],
+      "requirementId": "tierB-white-cell-stalk"
+    },
+    {
+      "sourceLocalId": "lacerate",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-lacerate",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:ccf3dc:face"
+      ],
+      "requirementId": "tierB-shuffling-horror"
+    },
+    {
+      "sourceLocalId": "undulations",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-undulations",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:ccf3dc:face"
+      ],
+      "requirementId": "tierB-shuffling-horror"
+    },
+    {
+      "sourceLocalId": "echoing-disassembly",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-echoing-disassembly",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:ccf3dc:face"
+      ],
+      "requirementId": "tierB-shuffling-horror"
+    },
+    {
+      "sourceLocalId": "death-lash",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-death-lash",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:1b261d:face",
+        "asset:36d6ad:face",
+        "asset:0ba2f8:face"
+      ],
+      "requirementId": "tierB-cultist-priest"
+    },
+    {
+      "sourceLocalId": "the-finger",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-the-finger",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:1b261d:face",
+        "asset:36d6ad:face",
+        "asset:0ba2f8:face"
+      ],
+      "requirementId": "tierB-cultist-priest"
+    },
+    {
+      "sourceLocalId": "maul-the-flesh",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-maul-the-flesh",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:a34fbd:face",
+        "asset:4a8b06:face",
+        "asset:f06594:face"
+      ],
+      "requirementId": "tierB-malignant-growth"
+    },
+    {
+      "sourceLocalId": "daze-the-mind",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-daze-the-mind",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:a34fbd:face",
+        "asset:4a8b06:face",
+        "asset:f06594:face"
+      ],
+      "requirementId": "tierB-malignant-growth"
+    },
+    {
+      "sourceLocalId": "bc9c87",
+      "sourceKind": "sourceTileGuid",
+      "repositoryId": "community-dd-bc9c87",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:e3fc86:face",
+        "asset:bc9c87:secondaryUrl"
+      ],
+      "requirementId": "tierB-ancestor-room-tile"
+    },
+    {
+      "sourceLocalId": "r12-NW",
+      "sourceKind": "sourceLocalAreaId",
+      "repositoryId": "community-dd-r12-nw",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:e3fc86:face",
+        "asset:bc9c87:secondaryUrl"
+      ],
+      "requirementId": "tierB-ancestor-room-tile"
+    },
+    {
+      "sourceLocalId": "r12-N",
+      "sourceKind": "sourceLocalAreaId",
+      "repositoryId": "community-dd-r12-n",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:e3fc86:face",
+        "asset:bc9c87:secondaryUrl"
+      ],
+      "requirementId": "tierB-ancestor-room-tile"
+    },
+    {
+      "sourceLocalId": "r12-NE",
+      "sourceKind": "sourceLocalAreaId",
+      "repositoryId": "community-dd-r12-ne",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:e3fc86:face",
+        "asset:bc9c87:secondaryUrl"
+      ],
+      "requirementId": "tierB-ancestor-room-tile"
+    },
+    {
+      "sourceLocalId": "r12-inner-W",
+      "sourceKind": "sourceLocalAreaId",
+      "repositoryId": "community-dd-r12-inner-w",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:e3fc86:face",
+        "asset:bc9c87:secondaryUrl"
+      ],
+      "requirementId": "tierB-ancestor-room-tile"
+    },
+    {
+      "sourceLocalId": "r12-C",
+      "sourceKind": "sourceLocalAreaId",
+      "repositoryId": "community-dd-r12-c",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:e3fc86:face",
+        "asset:bc9c87:secondaryUrl"
+      ],
+      "requirementId": "tierB-ancestor-room-tile"
+    },
+    {
+      "sourceLocalId": "r12-E",
+      "sourceKind": "sourceLocalAreaId",
+      "repositoryId": "community-dd-r12-e",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:e3fc86:face",
+        "asset:bc9c87:secondaryUrl"
+      ],
+      "requirementId": "tierB-ancestor-room-tile"
+    },
+    {
+      "sourceLocalId": "r12-W",
+      "sourceKind": "sourceLocalAreaId",
+      "repositoryId": "community-dd-r12-w",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:e3fc86:face",
+        "asset:bc9c87:secondaryUrl"
+      ],
+      "requirementId": "tierB-ancestor-room-tile"
+    },
+    {
+      "sourceLocalId": "r12-SW",
+      "sourceKind": "sourceLocalAreaId",
+      "repositoryId": "community-dd-r12-sw",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:e3fc86:face",
+        "asset:bc9c87:secondaryUrl"
+      ],
+      "requirementId": "tierB-ancestor-room-tile"
+    },
+    {
+      "sourceLocalId": "r12-S",
+      "sourceKind": "sourceLocalAreaId",
+      "repositoryId": "community-dd-r12-s",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:e3fc86:face",
+        "asset:bc9c87:secondaryUrl"
+      ],
+      "requirementId": "tierB-ancestor-room-tile"
+    },
+    {
+      "sourceLocalId": "r12-inner-SE",
+      "sourceKind": "sourceLocalAreaId",
+      "repositoryId": "community-dd-r12-inner-se",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:e3fc86:face",
+        "asset:bc9c87:secondaryUrl"
+      ],
+      "requirementId": "tierB-ancestor-room-tile"
+    },
+    {
+      "sourceLocalId": "r12-SE",
+      "sourceKind": "sourceLocalAreaId",
+      "repositoryId": "community-dd-r12-se",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:e3fc86:face",
+        "asset:bc9c87:secondaryUrl"
+      ],
+      "requirementId": "tierB-ancestor-room-tile"
+    },
+    {
+      "sourceLocalId": "perfect-replication",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-perfect-replication",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:d99c50:face"
+      ],
+      "requirementId": "tierB-ancestor-first-form"
+    },
+    {
+      "sourceLocalId": "imperfect-reproduction",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-imperfect-reproduction",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:d99c50:face"
+      ],
+      "requirementId": "tierB-ancestor-first-form"
+    },
+    {
+      "sourceLocalId": "time-heals-all",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-time-heals-all",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:d99c50:face"
+      ],
+      "requirementId": "tierB-ancestor-first-form"
+    },
+    {
+      "sourceLocalId": "reunion",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-reunion",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:695dfa:face"
+      ],
+      "requirementId": "tierB-ancestor-first-form"
+    },
+    {
+      "sourceLocalId": "we-are-the-same",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-we-are-the-same",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:695dfa:face"
+      ],
+      "requirementId": "tierB-ancestor-first-form"
+    },
+    {
+      "sourceLocalId": "it-chooses",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-it-chooses",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:adff9c:face"
+      ],
+      "requirementId": "tierB-ancestor-first-form"
+    },
+    {
+      "sourceLocalId": "we-are-the-same",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-we-are-the-same",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:adff9c:face"
+      ],
+      "requirementId": "tierB-ancestor-first-form"
+    },
+    {
+      "sourceLocalId": "reunion",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-reunion",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:695dfa:face",
+        "asset:4a0ff9:face",
+        "asset:e75d33:face"
+      ],
+      "requirementId": "tierB-perfect-reflection"
+    },
+    {
+      "sourceLocalId": "we-are-the-same",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-we-are-the-same",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:695dfa:face",
+        "asset:4a0ff9:face",
+        "asset:e75d33:face"
+      ],
+      "requirementId": "tierB-perfect-reflection"
+    },
+    {
+      "sourceLocalId": "it-chooses",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-it-chooses",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:adff9c:face",
+        "asset:d57825:face",
+        "asset:95ec7b:face"
+      ],
+      "requirementId": "tierB-imperfect-reflection"
+    },
+    {
+      "sourceLocalId": "we-are-the-same",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-we-are-the-same",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:adff9c:face",
+        "asset:d57825:face",
+        "asset:95ec7b:face"
+      ],
+      "requirementId": "tierB-imperfect-reflection"
+    },
+    {
+      "sourceLocalId": "refashion-them",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-refashion-them",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:1825b7:face"
+      ],
+      "requirementId": "tierB-ancestor-second-form"
+    },
+    {
+      "sourceLocalId": "unmake-them-all",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-unmake-them-all",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:1825b7:face"
+      ],
+      "requirementId": "tierB-ancestor-second-form"
+    },
+    {
+      "sourceLocalId": "embrace-futility",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-embrace-futility",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:1825b7:face"
+      ],
+      "requirementId": "tierB-ancestor-second-form"
+    },
+    {
+      "sourceLocalId": "dispersion",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-dispersion",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:eed6cd:face"
+      ],
+      "requirementId": "tierB-gestating-heart"
+    },
+    {
+      "sourceLocalId": "know-this",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-know-this",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:21bbaf:face"
+      ],
+      "requirementId": "tierB-heart-of-darkness"
+    },
+    {
+      "sourceLocalId": "puncture",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-puncture",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:21bbaf:face"
+      ],
+      "requirementId": "tierB-heart-of-darkness"
+    },
+    {
+      "sourceLocalId": "dissolution",
+      "sourceKind": "sourceLocalSkillId",
+      "repositoryId": "community-dd-dissolution",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "asset:21bbaf:face"
+      ],
+      "requirementId": "tierB-heart-of-darkness"
+    },
+    {
+      "sourceLocalId": "a0b399",
+      "sourceKind": "guid",
+      "repositoryId": "community-dd-a0b399",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "46032",
+      "sourceKind": "cardId",
+      "repositoryId": "community-dd-46032",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "4f2825",
+      "sourceKind": "guid",
+      "repositoryId": "community-dd-4f2825",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "46031",
+      "sourceKind": "cardId",
+      "repositoryId": "community-dd-46031",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "351f3c",
+      "sourceKind": "guid",
+      "repositoryId": "community-dd-351f3c",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "46033",
+      "sourceKind": "cardId",
+      "repositoryId": "community-dd-46033",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "9d16dc",
+      "sourceKind": "guid",
+      "repositoryId": "community-dd-9d16dc",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "46013",
+      "sourceKind": "cardId",
+      "repositoryId": "community-dd-46013",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "15687c",
+      "sourceKind": "guid",
+      "repositoryId": "community-dd-15687c",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "46012",
+      "sourceKind": "cardId",
+      "repositoryId": "community-dd-46012",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "849849",
+      "sourceKind": "guid",
+      "repositoryId": "community-dd-849849",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "46011",
+      "sourceKind": "cardId",
+      "repositoryId": "community-dd-46011",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "23df79",
+      "sourceKind": "guid",
+      "repositoryId": "community-dd-23df79",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "46016",
+      "sourceKind": "cardId",
+      "repositoryId": "community-dd-46016",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "4cba93",
+      "sourceKind": "guid",
+      "repositoryId": "community-dd-4cba93",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "46015",
+      "sourceKind": "cardId",
+      "repositoryId": "community-dd-46015",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "2037a8",
+      "sourceKind": "guid",
+      "repositoryId": "community-dd-2037a8",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "46014",
+      "sourceKind": "cardId",
+      "repositoryId": "community-dd-46014",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "36d6ad",
+      "sourceKind": "guid",
+      "repositoryId": "community-dd-36d6ad",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "46021",
+      "sourceKind": "cardId",
+      "repositoryId": "community-dd-46021",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "1b261d",
+      "sourceKind": "guid",
+      "repositoryId": "community-dd-1b261d",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "46020",
+      "sourceKind": "cardId",
+      "repositoryId": "community-dd-46020",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "0ba2f8",
+      "sourceKind": "guid",
+      "repositoryId": "community-dd-0ba2f8",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "46022",
+      "sourceKind": "cardId",
+      "repositoryId": "community-dd-46022",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "014fb5",
+      "sourceKind": "guid",
+      "repositoryId": "community-dd-014fb5",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "46035",
+      "sourceKind": "cardId",
+      "repositoryId": "community-dd-46035",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "861ed6",
+      "sourceKind": "guid",
+      "repositoryId": "community-dd-861ed6",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "46034",
+      "sourceKind": "cardId",
+      "repositoryId": "community-dd-46034",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "ed4bc0",
+      "sourceKind": "guid",
+      "repositoryId": "community-dd-ed4bc0",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "46036",
+      "sourceKind": "cardId",
+      "repositoryId": "community-dd-46036",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "dc3db6",
+      "sourceKind": "guid",
+      "repositoryId": "community-dd-dc3db6",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "46027",
+      "sourceKind": "cardId",
+      "repositoryId": "community-dd-46027",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "b2ab62",
+      "sourceKind": "guid",
+      "repositoryId": "community-dd-b2ab62",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "46026",
+      "sourceKind": "cardId",
+      "repositoryId": "community-dd-46026",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "4a8b06",
+      "sourceKind": "guid",
+      "repositoryId": "community-dd-4a8b06",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "46024",
+      "sourceKind": "cardId",
+      "repositoryId": "community-dd-46024",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "a34fbd",
+      "sourceKind": "guid",
+      "repositoryId": "community-dd-a34fbd",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "46023",
+      "sourceKind": "cardId",
+      "repositoryId": "community-dd-46023",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "f06594",
+      "sourceKind": "guid",
+      "repositoryId": "community-dd-f06594",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "46025",
+      "sourceKind": "cardId",
+      "repositoryId": "community-dd-46025",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "c6f26c",
+      "sourceKind": "guid",
+      "repositoryId": "community-dd-c6f26c",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "46028",
+      "sourceKind": "cardId",
+      "repositoryId": "community-dd-46028",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "1b182b",
+      "sourceKind": "guid",
+      "repositoryId": "community-dd-1b182b",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "46030",
+      "sourceKind": "cardId",
+      "repositoryId": "community-dd-46030",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "47d664",
+      "sourceKind": "guid",
+      "repositoryId": "community-dd-47d664",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "46029",
+      "sourceKind": "cardId",
+      "repositoryId": "community-dd-46029",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "6c46af",
+      "sourceKind": "guid",
+      "repositoryId": "community-dd-6c46af",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "46018",
+      "sourceKind": "cardId",
+      "repositoryId": "community-dd-46018",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "42cb11",
+      "sourceKind": "guid",
+      "repositoryId": "community-dd-42cb11",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "46017",
+      "sourceKind": "cardId",
+      "repositoryId": "community-dd-46017",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "ec3703",
+      "sourceKind": "guid",
+      "repositoryId": "community-dd-ec3703",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "46019",
+      "sourceKind": "cardId",
+      "repositoryId": "community-dd-46019",
+      "bindingBasis": "exact source-local identity retained in normalized intake; community-reference ID created",
+      "sourceReference": [
+        "tts:02ef1c",
+        "tts:014fb5",
+        "tts:861ed6",
+        "tts:ed4bc0",
+        "tts:a0b399",
+        "tts:4f2825",
+        "tts:351f3c",
+        "tts:c6f26c",
+        "tts:1b182b",
+        "tts:47d664",
+        "tts:dc3db6",
+        "tts:b2ab62",
+        "tts:4a8b06",
+        "tts:a34fbd",
+        "tts:f06594",
+        "tts:36d6ad",
+        "tts:1b261d",
+        "tts:0ba2f8",
+        "tts:6c46af",
+        "tts:42cb11",
+        "tts:ec3703",
+        "tts:23df79",
+        "tts:4cba93",
+        "tts:2037a8",
+        "tts:9d16dc",
+        "tts:15687c",
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "735bc3",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-735bc3",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:735bc3"
+      ],
+      "requirementId": "tierB-quest-1"
+    },
+    {
+      "sourceLocalId": "083199",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-083199",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:083199"
+      ],
+      "requirementId": "tierB-quest-2"
+    },
+    {
+      "sourceLocalId": "6555d3",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-6555d3",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:6555d3"
+      ],
+      "requirementId": "tierB-quest-3"
+    },
+    {
+      "sourceLocalId": "4ced96",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-4ced96",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:4ced96"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "d10a24",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-d10a24",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:d10a24"
+      ],
+      "requirementId": "tierB-dd-dungeon-tile"
+    },
+    {
+      "sourceLocalId": "efa5a4",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-efa5a4",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:efa5a4"
+      ],
+      "requirementId": "tierB-templars-impaler"
+    },
+    {
+      "sourceLocalId": "f88d6a",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-f88d6a",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:f88d6a"
+      ],
+      "requirementId": "tierB-templars-warlord"
+    },
+    {
+      "sourceLocalId": "ad6c7d",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-ad6c7d",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:ad6c7d"
+      ],
+      "requirementId": "tierB-templars-room"
+    },
+    {
+      "sourceLocalId": "e24559",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-e24559",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:e24559"
+      ],
+      "requirementId": "tierB-templars-room"
+    },
+    {
+      "sourceLocalId": "5a2fdf",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-5a2fdf",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:5a2fdf"
+      ],
+      "requirementId": "tierB-templars-room"
+    },
+    {
+      "sourceLocalId": "f236b8",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-f236b8",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:f236b8"
+      ],
+      "requirementId": "tierB-templars-room"
+    },
+    {
+      "sourceLocalId": "afa508",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-afa508",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:afa508"
+      ],
+      "requirementId": "tierB-templars-room"
+    },
+    {
+      "sourceLocalId": "7a3fa9",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-7a3fa9",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:7a3fa9"
+      ],
+      "requirementId": "tierB-templars-room"
+    },
+    {
+      "sourceLocalId": "083199",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-083199",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:083199"
+      ],
+      "requirementId": "tierB-templars-room"
+    },
+    {
+      "sourceLocalId": "bc9c87",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-bc9c87",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:bc9c87"
+      ],
+      "requirementId": "tierB-templars-room-tile"
+    },
+    {
+      "sourceLocalId": "7a3fa9",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-7a3fa9",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:7a3fa9"
+      ],
+      "requirementId": "tierB-templars-room-tile"
+    },
+    {
+      "sourceLocalId": "d59e73",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-d59e73",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:d59e73"
+      ],
+      "requirementId": "tierB-templars-room-tile"
+    },
+    {
+      "sourceLocalId": "813724",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-813724",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:813724"
+      ],
+      "requirementId": "tierB-templars-room-tile"
+    },
+    {
+      "sourceLocalId": "d596fb",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-d596fb",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:d596fb"
+      ],
+      "requirementId": "tierB-templars-room-tile"
+    },
+    {
+      "sourceLocalId": "939435",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-939435",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:939435"
+      ],
+      "requirementId": "tierB-templars-room-tile"
+    },
+    {
+      "sourceLocalId": "afa508",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-afa508",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:afa508"
+      ],
+      "requirementId": "tierB-templars-room-tile"
+    },
+    {
+      "sourceLocalId": "c4a35e",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-c4a35e",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:c4a35e"
+      ],
+      "requirementId": "tierB-mammoth-cyst"
+    },
+    {
+      "sourceLocalId": "1fb052",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-1fb052",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:1fb052"
+      ],
+      "requirementId": "tierB-white-cell-stalk"
+    },
+    {
+      "sourceLocalId": "bb91b0",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-bb91b0",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:bb91b0"
+      ],
+      "requirementId": "tierB-white-cell-stalk"
+    },
+    {
+      "sourceLocalId": "bc9c87",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-bc9c87",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:bc9c87"
+      ],
+      "requirementId": "tierB-white-cell-stalk"
+    },
+    {
+      "sourceLocalId": "a9ab77",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-a9ab77",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:a9ab77"
+      ],
+      "requirementId": "tierB-white-cell-stalk"
+    },
+    {
+      "sourceLocalId": "eb35cd",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-eb35cd",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:eb35cd"
+      ],
+      "requirementId": "tierB-mammoth-cyst-room"
+    },
+    {
+      "sourceLocalId": "e4246d",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-e4246d",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:e4246d"
+      ],
+      "requirementId": "tierB-mammoth-cyst-room"
+    },
+    {
+      "sourceLocalId": "a9ab77",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-a9ab77",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:a9ab77"
+      ],
+      "requirementId": "tierB-mammoth-cyst-room"
+    },
+    {
+      "sourceLocalId": "a7bbae",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-a7bbae",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:a7bbae"
+      ],
+      "requirementId": "tierB-mammoth-cyst-room"
+    },
+    {
+      "sourceLocalId": "12e30f",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-12e30f",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:12e30f"
+      ],
+      "requirementId": "tierB-mammoth-cyst-room"
+    },
+    {
+      "sourceLocalId": "bb91b0",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-bb91b0",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:bb91b0"
+      ],
+      "requirementId": "tierB-mammoth-cyst-room"
+    },
+    {
+      "sourceLocalId": "bc9c87",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-bc9c87",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:bc9c87"
+      ],
+      "requirementId": "tierB-mammoth-cyst-room"
+    },
+    {
+      "sourceLocalId": "6555d3",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-6555d3",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:6555d3"
+      ],
+      "requirementId": "tierB-mammoth-cyst-room"
+    },
+    {
+      "sourceLocalId": "ccf3dc",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-ccf3dc",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:ccf3dc"
+      ],
+      "requirementId": "tierB-shuffling-horror"
+    },
+    {
+      "sourceLocalId": "36d6ad",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-36d6ad",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:36d6ad"
+      ],
+      "requirementId": "tierB-cultist-priest"
+    },
+    {
+      "sourceLocalId": "1b261d",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-1b261d",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:1b261d"
+      ],
+      "requirementId": "tierB-cultist-priest"
+    },
+    {
+      "sourceLocalId": "0ba2f8",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-0ba2f8",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:0ba2f8"
+      ],
+      "requirementId": "tierB-cultist-priest"
+    },
+    {
+      "sourceLocalId": "4a8b06",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-4a8b06",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:4a8b06"
+      ],
+      "requirementId": "tierB-malignant-growth"
+    },
+    {
+      "sourceLocalId": "a34fbd",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-a34fbd",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:a34fbd"
+      ],
+      "requirementId": "tierB-malignant-growth"
+    },
+    {
+      "sourceLocalId": "f06594",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-f06594",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:f06594"
+      ],
+      "requirementId": "tierB-malignant-growth"
+    },
+    {
+      "sourceLocalId": "654bdc",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-654bdc",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:654bdc"
+      ],
+      "requirementId": "tierB-shuffling-horror-room"
+    },
+    {
+      "sourceLocalId": "450ace",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-450ace",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:450ace"
+      ],
+      "requirementId": "tierB-shuffling-horror-room"
+    },
+    {
+      "sourceLocalId": "9a87c7",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-9a87c7",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:9a87c7"
+      ],
+      "requirementId": "tierB-shuffling-horror-room"
+    },
+    {
+      "sourceLocalId": "7a3fa9",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-7a3fa9",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:7a3fa9"
+      ],
+      "requirementId": "tierB-shuffling-horror-room"
+    },
+    {
+      "sourceLocalId": "735bc3",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-735bc3",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:735bc3"
+      ],
+      "requirementId": "tierB-shuffling-horror-room"
+    },
+    {
+      "sourceLocalId": "5e5515",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-5e5515",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:5e5515"
+      ],
+      "requirementId": "tierB-ancestor-room"
+    },
+    {
+      "sourceLocalId": "4cd186",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-4cd186",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:4cd186"
+      ],
+      "requirementId": "tierB-ancestor-room"
+    },
+    {
+      "sourceLocalId": "e3fc86",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-e3fc86",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:e3fc86"
+      ],
+      "requirementId": "tierB-ancestor-room"
+    },
+    {
+      "sourceLocalId": "bc9c87",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-bc9c87",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:bc9c87"
+      ],
+      "requirementId": "tierB-ancestor-room"
+    },
+    {
+      "sourceLocalId": "bc9c87",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-bc9c87",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:bc9c87"
+      ],
+      "requirementId": "tierB-ancestor-room-tile"
+    },
+    {
+      "sourceLocalId": "7a3fa9",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-7a3fa9",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:7a3fa9"
+      ],
+      "requirementId": "tierB-ancestor-room-tile"
+    },
+    {
+      "sourceLocalId": "d59e73",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-d59e73",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:d59e73"
+      ],
+      "requirementId": "tierB-ancestor-room-tile"
+    },
+    {
+      "sourceLocalId": "813724",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-813724",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:813724"
+      ],
+      "requirementId": "tierB-ancestor-room-tile"
+    },
+    {
+      "sourceLocalId": "d596fb",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-d596fb",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:d596fb"
+      ],
+      "requirementId": "tierB-ancestor-room-tile"
+    },
+    {
+      "sourceLocalId": "939435",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-939435",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:939435"
+      ],
+      "requirementId": "tierB-ancestor-room-tile"
+    },
+    {
+      "sourceLocalId": "e3fc86",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-e3fc86",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:e3fc86"
+      ],
+      "requirementId": "tierB-ancestor-room-tile"
+    },
+    {
+      "sourceLocalId": "d99c50",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-d99c50",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:d99c50"
+      ],
+      "requirementId": "tierB-ancestor-first-form"
+    },
+    {
+      "sourceLocalId": "695dfa",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-695dfa",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:695dfa"
+      ],
+      "requirementId": "tierB-ancestor-first-form"
+    },
+    {
+      "sourceLocalId": "adff9c",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-adff9c",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:adff9c"
+      ],
+      "requirementId": "tierB-ancestor-first-form"
+    },
+    {
+      "sourceLocalId": "5e5515",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-5e5515",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:5e5515"
+      ],
+      "requirementId": "tierB-ancestor-first-form"
+    },
+    {
+      "sourceLocalId": "4a0ff9",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-4a0ff9",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:4a0ff9"
+      ],
+      "requirementId": "tierB-perfect-reflection"
+    },
+    {
+      "sourceLocalId": "695dfa",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-695dfa",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:695dfa"
+      ],
+      "requirementId": "tierB-perfect-reflection"
+    },
+    {
+      "sourceLocalId": "e75d33",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-e75d33",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:e75d33"
+      ],
+      "requirementId": "tierB-perfect-reflection"
+    },
+    {
+      "sourceLocalId": "adff9c",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-adff9c",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:adff9c"
+      ],
+      "requirementId": "tierB-imperfect-reflection"
+    },
+    {
+      "sourceLocalId": "d57825",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-d57825",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:d57825"
+      ],
+      "requirementId": "tierB-imperfect-reflection"
+    },
+    {
+      "sourceLocalId": "95ec7b",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-95ec7b",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:95ec7b"
+      ],
+      "requirementId": "tierB-imperfect-reflection"
+    },
+    {
+      "sourceLocalId": "1825b7",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-1825b7",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:1825b7"
+      ],
+      "requirementId": "tierB-ancestor-second-form"
+    },
+    {
+      "sourceLocalId": "e3fc86",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-e3fc86",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:e3fc86"
+      ],
+      "requirementId": "tierB-ancestor-second-form"
+    },
+    {
+      "sourceLocalId": "bc9c87",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-bc9c87",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:bc9c87"
+      ],
+      "requirementId": "tierB-ancestor-second-form"
+    },
+    {
+      "sourceLocalId": "4cd186",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-4cd186",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:4cd186"
+      ],
+      "requirementId": "tierB-ancestor-second-form"
+    },
+    {
+      "sourceLocalId": "4c0e88",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-4c0e88",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:4c0e88"
+      ],
+      "requirementId": "tierB-absolute-nothingness"
+    },
+    {
+      "sourceLocalId": "db000a",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-db000a",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:db000a"
+      ],
+      "requirementId": "tierB-absolute-nothingness"
+    },
+    {
+      "sourceLocalId": "aff870",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-aff870",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:aff870"
+      ],
+      "requirementId": "tierB-absolute-nothingness"
+    },
+    {
+      "sourceLocalId": "e3fc86",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-e3fc86",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:e3fc86"
+      ],
+      "requirementId": "tierB-absolute-nothingness"
+    },
+    {
+      "sourceLocalId": "bc9c87",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-bc9c87",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:bc9c87"
+      ],
+      "requirementId": "tierB-absolute-nothingness"
+    },
+    {
+      "sourceLocalId": "4cd186",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-4cd186",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:4cd186"
+      ],
+      "requirementId": "tierB-absolute-nothingness"
+    },
+    {
+      "sourceLocalId": "eed6cd",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-eed6cd",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:eed6cd"
+      ],
+      "requirementId": "tierB-gestating-heart"
+    },
+    {
+      "sourceLocalId": "a7bbae",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-a7bbae",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:a7bbae"
+      ],
+      "requirementId": "tierB-gestating-heart"
+    },
+    {
+      "sourceLocalId": "bdaf2b",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-bdaf2b",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:bdaf2b"
+      ],
+      "requirementId": "tierB-gestating-heart"
+    },
+    {
+      "sourceLocalId": "21bbaf",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-21bbaf",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:21bbaf"
+      ],
+      "requirementId": "tierB-heart-of-darkness"
+    },
+    {
+      "sourceLocalId": "12e30f",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-12e30f",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:12e30f"
+      ],
+      "requirementId": "tierB-heart-of-darkness"
+    },
+    {
+      "sourceLocalId": "d09f50",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-d09f50",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:d09f50"
+      ],
+      "requirementId": "tierB-heart-of-darkness"
+    },
+    {
+      "sourceLocalId": "5e5515",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-5e5515",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:5e5515"
+      ],
+      "requirementId": "tierB-come-unto-your-maker"
+    },
+    {
+      "sourceLocalId": "4cd186",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-4cd186",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:4cd186"
+      ],
+      "requirementId": "tierB-come-unto-your-maker"
+    },
+    {
+      "sourceLocalId": "e3fc86",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-e3fc86",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:e3fc86"
+      ],
+      "requirementId": "tierB-come-unto-your-maker"
+    },
+    {
+      "sourceLocalId": "21bbaf",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-21bbaf",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:21bbaf"
+      ],
+      "requirementId": "tierB-come-unto-your-maker"
+    },
+    {
+      "sourceLocalId": "12e30f",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-12e30f",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:12e30f"
+      ],
+      "requirementId": "tierB-come-unto-your-maker"
+    },
+    {
+      "sourceLocalId": "bdaf2b",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-bdaf2b",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:bdaf2b"
+      ],
+      "requirementId": "tierB-come-unto-your-maker"
+    },
+    {
+      "sourceLocalId": "d09f50",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-d09f50",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:d09f50"
+      ],
+      "requirementId": "tierB-come-unto-your-maker"
+    },
+    {
+      "sourceLocalId": "02ef1c",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-02ef1c",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:02ef1c"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "014fb5",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-014fb5",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:014fb5"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "861ed6",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-861ed6",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:861ed6"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "ed4bc0",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-ed4bc0",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:ed4bc0"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "a0b399",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-a0b399",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:a0b399"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "4f2825",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-4f2825",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:4f2825"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "351f3c",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-351f3c",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:351f3c"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "c6f26c",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-c6f26c",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:c6f26c"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "1b182b",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-1b182b",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:1b182b"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "47d664",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-47d664",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:47d664"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "dc3db6",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-dc3db6",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:dc3db6"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "b2ab62",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-b2ab62",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:b2ab62"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "4a8b06",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-4a8b06",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:4a8b06"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "a34fbd",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-a34fbd",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:a34fbd"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "f06594",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-f06594",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:f06594"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "36d6ad",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-36d6ad",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:36d6ad"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "1b261d",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-1b261d",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:1b261d"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "0ba2f8",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-0ba2f8",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:0ba2f8"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "6c46af",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-6c46af",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:6c46af"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "42cb11",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-42cb11",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:42cb11"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "ec3703",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-ec3703",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:ec3703"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "23df79",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-23df79",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:23df79"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "4cba93",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-4cba93",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:4cba93"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "2037a8",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-2037a8",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:2037a8"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "9d16dc",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-9d16dc",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:9d16dc"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "15687c",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-15687c",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:15687c"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    },
+    {
+      "sourceLocalId": "849849",
+      "sourceKind": "physical-guid",
+      "repositoryId": "community-dd-physical-849849",
+      "bindingBasis": "exact TTS GUID",
+      "sourceReference": [
+        "tts:849849"
+      ],
+      "requirementId": "tierB-darkest-dungeon-monster-deck"
+    }
+  ],
   "unboundSourceLocalIds": []
 }
