@@ -12,6 +12,8 @@
 
 import type { ProvisionPool } from '../../types';
 import type { RegistryValidationIssue } from '../../types/progression';
+import type { ActFourRuntimeProfileId } from '../../types/act-four';
+import { COMMUNITY_REFERENCE_RUNTIME_PROFILE } from './community-reference/runtime-profile';
 
 // ---------------------------------------------------------------------------
 // 固定 ID / 常量
@@ -138,13 +140,20 @@ export interface DarkestDungeonContentSource {
 }
 
 export function getDarkestDungeonContentSource(
-  mode: 'formal' | 'prototype' = 'prototype',
+  mode: ActFourRuntimeProfileId = 'prototype',
 ): DarkestDungeonContentSource {
   if (mode === 'formal') {
     return {
       monsterDefinitionIds: OFFICIAL_DARKEST_DUNGEON_MONSTER_IDS,
       roomCardDefinitionIds: OFFICIAL_DARKEST_DUNGEON_ROOM_CARD_IDS,
       roomTileDefinitionIds: OFFICIAL_DARKEST_DUNGEON_ROOM_TILE_IDS,
+    };
+  }
+  if (mode === 'community-reference') {
+    return {
+      monsterDefinitionIds: COMMUNITY_REFERENCE_RUNTIME_PROFILE.monsterComposition.map(m => m.id),
+      roomCardDefinitionIds: COMMUNITY_REFERENCE_RUNTIME_PROFILE.rooms.map(r => r.id),
+      roomTileDefinitionIds: COMMUNITY_REFERENCE_RUNTIME_PROFILE.layouts.map(l => l.id),
     };
   }
   return {

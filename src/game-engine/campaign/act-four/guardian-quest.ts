@@ -238,7 +238,7 @@ export function startGuardianBattle(
 
   if (isTemplarsEncounter) {
     const setup = setupTemplarsEncounter(campaignAfter, {
-      mode: options?.mode ?? 'prototype',
+      mode: (options?.mode ?? 'prototype') === 'prototype' ? 'prototype' : 'formal',
       rng: options?.rng,
       seed: options?.seed,
       now: options?.now,
@@ -266,7 +266,7 @@ export function startGuardianBattle(
 
   if (isMammothCystEncounter) {
     const setup = setupMammothCystEncounter(campaignAfter, {
-      mode: options?.mode ?? 'prototype',
+      mode: (options?.mode ?? 'prototype') === 'prototype' ? 'prototype' : 'formal',
       rng: options?.rng,
       seed: options?.seed,
       now: options?.now,
@@ -291,7 +291,7 @@ export function startGuardianBattle(
 
   if (isShufflingHorrorEncounter) {
     const setup = setupShufflingHorrorEncounter(campaignAfter, {
-      mode: options?.mode ?? 'prototype',
+      mode: (options?.mode ?? 'prototype') === 'prototype' ? 'prototype' : 'formal',
       rng: options?.rng,
       seed: options?.seed,
       now: options?.now,

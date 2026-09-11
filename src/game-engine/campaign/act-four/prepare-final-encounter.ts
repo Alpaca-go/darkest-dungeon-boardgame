@@ -78,7 +78,7 @@ export function rollFinalProvisions(
   transactionId: string,
   now: string,
 ): RollFinalProvisionsResult {
-  const policy = getFinalProvisionPolicy(mode);
+  const policy = getFinalProvisionPolicy(mode === 'prototype' ? 'prototype' : 'formal');
   const rolls: Record<string, number> = {};
   const granted: Record<string, number> = {};
   const provisions: ProvisionPool = { ...current };
@@ -200,7 +200,7 @@ export function prepareFinalEncounter(
     }
   }
 
-  const policy = getFinalProvisionPolicy(mode);
+  const policy = getFinalProvisionPolicy(mode === 'prototype' ? 'prototype' : 'formal');
   const policyValidation = validateFinalProvisionPolicy(policy);
   if (!policyValidation.isComplete) {
     return prepFail(
@@ -209,7 +209,7 @@ export function prepareFinalEncounter(
     );
   }
 
-  const room = getFinalEncounterRoom(mode);
+  const room = getFinalEncounterRoom(mode === 'prototype' ? 'prototype' : 'formal');
   if (!room.formAreaId || room.validAreaIds.length === 0) {
     return prepFail(campaign, 'Final Encounter Room 数据不完整（Area 缺失）');
   }

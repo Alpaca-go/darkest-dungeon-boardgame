@@ -101,6 +101,7 @@ export function activateDarkestDungeonContentSet(
   const now = options?.now ?? nowIso();
   const runtime: LocationContentRuntime = {
     locationId: DARKEST_DUNGEON_LOCATION_ID,
+    runtimeProfileId: mode,
 
     monsterDefinitionIds: [...source.monsterDefinitionIds],
     roomCardDefinitionIds: [...source.roomCardDefinitionIds],

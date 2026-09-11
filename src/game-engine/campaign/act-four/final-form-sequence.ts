@@ -217,7 +217,7 @@ export function startFinalEncounter(
   // Phase 10E：建立第一个 Form 的机制运行时。数据缺口（Data Gate）一律拒绝出场，
   // 避免出现「Boss 站在场上但机制不生效」的半成品状态。
   const mechanicsSetup = setupFinalFormRuntime(state.finalFormRuntimeState, encounter.id, formId, {
-    mode,
+    mode: mode === 'prototype' ? 'prototype' : 'formal',
     rng,
     now,
   });

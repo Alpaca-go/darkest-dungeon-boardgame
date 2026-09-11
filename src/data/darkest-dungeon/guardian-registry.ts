@@ -17,6 +17,8 @@ import {
   isAllGuardianFamiliesReady,
   getAllGuardianFamilyGaps,
 } from './official-guardian-assembly';
+import type { ActFourRuntimeProfileId } from '../../types/act-four';
+import { COMMUNITY_RUNTIME_GUARDIANS } from './community-reference/runtime-profile';
 
 // ---------------------------------------------------------------------------
 // ID 常量
@@ -88,16 +90,17 @@ export function getDarkestDungeonGuardianById(
 ): DarkestDungeonGuardianDefinition | undefined {
   return (
     PROTOTYPE_DARKEST_DUNGEON_GUARDIANS.find((g) => g.id === guardianId) ??
+    COMMUNITY_RUNTIME_GUARDIANS.find((g) => g.id === guardianId) ??
     OFFICIAL_DARKEST_DUNGEON_GUARDIANS.find((g) => g.id === guardianId)
   );
 }
 
 export function getDarkestDungeonGuardianPool(
-  mode: 'formal' | 'prototype' = 'prototype',
+  mode: ActFourRuntimeProfileId = 'prototype',
 ): DarkestDungeonGuardianDefinition[] {
   return mode === 'formal'
     ? OFFICIAL_DARKEST_DUNGEON_GUARDIANS
-    : PROTOTYPE_DARKEST_DUNGEON_GUARDIANS;
+    : mode === 'community-reference' ? COMMUNITY_RUNTIME_GUARDIANS : PROTOTYPE_DARKEST_DUNGEON_GUARDIANS;
 }
 
 // ---------------------------------------------------------------------------

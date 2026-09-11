@@ -101,7 +101,7 @@ export function resolveExcavationSiteRoom(
   if (mode === 'formal' && !isProvisionDieMapEnabled()) {
     return excFail(campaign, 'Provision Die 骰面映射缺失，正式 Excavation 结算已禁用');
   }
-  const faceMap = getProvisionDieFaceMap(mode);
+  const faceMap = getProvisionDieFaceMap(mode === 'prototype' ? 'prototype' : 'formal');
 
   // ---- 步骤 3：每名「当前」Party Hero 掷 1 个 ----
   // dead / removed Hero 不掷（§12 Provision Dice）。

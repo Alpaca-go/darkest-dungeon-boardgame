@@ -4,7 +4,8 @@
 // 一个「聚合 Gate + 缺口清单 + Registry 自检 + 内容指纹」的单一入口，
 // 供审计报告、Debug 面板、存档快照与单测共用同一结论。
 
-import type { DarkestDungeonDataAuditSnapshot } from '../../types/act-four';
+import type { ActFourRuntimeProfileId, DarkestDungeonDataAuditSnapshot } from '../../types/act-four';
+import { COMMUNITY_REFERENCE_CONTENT_HASH } from './community-reference/runtime-profile';
 import type { RegistryValidationIssue } from '../../types/progression';
 import {
   getDarkestDungeonQuestDataGaps,
@@ -98,8 +99,9 @@ export function stableHash(input: string): string {
  * 输入包含正式 + prototype 的 ID 集合与数据状态，任一定义变化都会改变 hash。
  */
 export function computeDarkestDungeonContentHash(
-  mode: 'formal' | 'prototype' = 'prototype',
+  mode: ActFourRuntimeProfileId = 'prototype',
 ): string {
+  if (mode === 'community-reference') return COMMUNITY_REFERENCE_CONTENT_HASH;
   const questIds = (
     mode === 'formal' ? OFFICIAL_DARKEST_DUNGEON_QUESTS : PROTOTYPE_DARKEST_DUNGEON_QUESTS
   )
@@ -132,7 +134,7 @@ export function computeDarkestDungeonContentHash(
 
 export function buildDarkestDungeonDataAuditSnapshot(
   now: string,
-  mode: 'formal' | 'prototype' = 'prototype',
+  mode: ActFourRuntimeProfileId = 'prototype',
 ): DarkestDungeonDataAuditSnapshot {
   return {
     officialActFourEnabled: isDarkestDungeonOfficialActFourEnabled(),

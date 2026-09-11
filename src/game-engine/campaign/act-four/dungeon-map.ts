@@ -113,6 +113,7 @@ export function drawDarkestDungeonLayout(
 
   const now = options.now ?? nowIso();
   const record: DarkestDungeonLayoutDrawRecord = {
+    runtimeProfileId: mode,
     transactionId,
     candidateLayoutIds: pool.map((l) => l.id),
     selectedLayoutId: selected.id,

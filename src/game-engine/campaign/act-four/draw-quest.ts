@@ -13,6 +13,7 @@
 
 import type { CampaignState } from '../../../types';
 import type {
+  ActFourRuntimeProfileId,
   ActFourState,
   DarkestDungeonQuestDefinition,
   DarkestDungeonQuestDrawRecord,
@@ -36,7 +37,7 @@ import {
 } from './act-four-state';
 import { pickIndex, rngStateId } from './rng';
 
-export type ActFourContentMode = 'formal' | 'prototype';
+export type ActFourContentMode = ActFourRuntimeProfileId;
 
 export interface DrawDarkestDungeonQuestOptions {
   rng: () => number;
@@ -77,7 +78,9 @@ export function drawDarkestDungeonQuest(
       ok: existing !== null,
       campaign,
       record: existing,
-      quest: existing ? findQuest(existing.selectedQuestId, mode) : null,
+      quest: existing
+        ? findQuest(existing.selectedQuestId, existing.runtimeProfileId ?? mode)
+        : null,
       alreadyDrawn: true,
       reason: existing ? null : '事务已处理但缺少抽取记录（存档损坏）',
     };
@@ -120,6 +123,7 @@ export function drawDarkestDungeonQuest(
 
   const now = options.now ?? nowIso();
   const record: DarkestDungeonQuestDrawRecord = {
+    runtimeProfileId: mode,
     transactionId,
     candidateQuestIds: pool.map((q) => q.id),
     selectedQuestId: selected.id,

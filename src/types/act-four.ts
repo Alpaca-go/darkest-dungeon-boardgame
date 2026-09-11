@@ -31,6 +31,7 @@ import type { FinalFormRuntimeState } from './final-forms';
 
 /** Act IV 数据可信度（与项目统一四态一致）。 */
 export type ActFourDataStatus = DataCredibility;
+export type ActFourRuntimeProfileId = 'formal' | 'prototype' | 'community-reference';
 
 /** Darkest Dungeon 的 Location ID（固定单值）。 */
 export const DARKEST_DUNGEON_LOCATION_ID = 'darkest-dungeon' as const;
@@ -103,6 +104,8 @@ export interface DarkestDungeonQuestDefinition {
 
 /** Quest 抽取记录（先保存后展示，刷新不重抽）。 */
 export interface DarkestDungeonQuestDrawRecord {
+  /** Runtime profile that produced this immutable draw (absent on legacy saves). */
+  runtimeProfileId?: ActFourRuntimeProfileId;
   transactionId: string;
   /** 参与抽取的候选池（用于审计「三选一」）。 */
   candidateQuestIds: string[];
@@ -125,6 +128,8 @@ export interface DarkestDungeonQuestDrawRecord {
  */
 export interface LocationContentRuntime {
   locationId: DarkestDungeonLocationId;
+  /** Optional for backward-compatible saves; old saves predate runtime profiles. */
+  runtimeProfileId?: ActFourRuntimeProfileId;
 
   monsterDefinitionIds: string[];
   roomCardDefinitionIds: string[];
@@ -193,6 +198,8 @@ export interface DarkestDungeonLayoutDefinition {
 
 /** Layout 抽取记录（先保存，刷新不重抽）。 */
 export interface DarkestDungeonLayoutDrawRecord {
+  /** Runtime profile that produced this immutable draw (absent on legacy saves). */
+  runtimeProfileId?: ActFourRuntimeProfileId;
   transactionId: string;
   candidateLayoutIds: string[];
   selectedLayoutId: string;

@@ -16,6 +16,8 @@ import type {
   SkippableFinalFormId,
 } from '../../types/final-encounter';
 import type { RegistryValidationIssue } from '../../types/progression';
+import type { ActFourRuntimeProfileId } from '../../types/act-four';
+import { COMMUNITY_RUNTIME_FINAL_FORMS } from './community-reference/runtime-profile';
 
 // ---------------------------------------------------------------------------
 // §18 固定顺序
@@ -172,14 +174,14 @@ export const DEFAULT_FORM_TRANSITION_POLICY: FormTransitionPolicy = {
 // ---------------------------------------------------------------------------
 
 export function getFinalFormPool(
-  mode: 'formal' | 'prototype' = 'prototype',
+  mode: ActFourRuntimeProfileId = 'prototype',
 ): FinalFormDefinition[] {
-  return mode === 'formal' ? OFFICIAL_FINAL_FORMS : PROTOTYPE_FINAL_FORMS;
+  return mode === 'formal' ? OFFICIAL_FINAL_FORMS : mode === 'community-reference' ? COMMUNITY_RUNTIME_FINAL_FORMS : PROTOTYPE_FINAL_FORMS;
 }
 
 export function getFinalFormDefinition(
   formId: FinalFormId,
-  mode: 'formal' | 'prototype' = 'prototype',
+  mode: ActFourRuntimeProfileId = 'prototype',
 ): FinalFormDefinition | undefined {
   return getFinalFormPool(mode).find((f) => f.formId === formId);
 }

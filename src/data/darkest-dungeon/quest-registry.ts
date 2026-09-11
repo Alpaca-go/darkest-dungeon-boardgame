@@ -16,6 +16,8 @@ import {
   DARKEST_DUNGEON_PROTOTYPE_GUARDIAN_ID,
   DARKEST_DUNGEON_PROTOTYPE_GUARDIAN_IDS,
 } from './guardian-registry';
+import type { ActFourRuntimeProfileId } from '../../types/act-four';
+import { COMMUNITY_RUNTIME_QUESTS } from './community-reference/runtime-profile';
 
 // ---------------------------------------------------------------------------
 // ID 常量
@@ -109,9 +111,9 @@ export const PROTOTYPE_DARKEST_DUNGEON_QUESTS: DarkestDungeonQuestDefinition[] =
 // ---------------------------------------------------------------------------
 
 export function getDarkestDungeonQuestPool(
-  mode: 'formal' | 'prototype' = 'prototype',
+  mode: ActFourRuntimeProfileId = 'prototype',
 ): DarkestDungeonQuestDefinition[] {
-  return mode === 'formal' ? OFFICIAL_DARKEST_DUNGEON_QUESTS : PROTOTYPE_DARKEST_DUNGEON_QUESTS;
+  return mode === 'formal' ? OFFICIAL_DARKEST_DUNGEON_QUESTS : mode === 'community-reference' ? COMMUNITY_RUNTIME_QUESTS : PROTOTYPE_DARKEST_DUNGEON_QUESTS;
 }
 
 export function getDarkestDungeonQuestById(
@@ -119,6 +121,7 @@ export function getDarkestDungeonQuestById(
 ): DarkestDungeonQuestDefinition | undefined {
   return (
     PROTOTYPE_DARKEST_DUNGEON_QUESTS.find((q) => q.id === questId) ??
+    COMMUNITY_RUNTIME_QUESTS.find((q) => q.id === questId) ??
     OFFICIAL_DARKEST_DUNGEON_QUESTS.find((q) => q.id === questId)
   );
 }

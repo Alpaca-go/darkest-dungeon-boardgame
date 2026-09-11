@@ -12,6 +12,8 @@ import type {
   DarkestDungeonLayoutDefinition,
 } from '../../types/act-four';
 import type { RegistryValidationIssue } from '../../types/progression';
+import type { ActFourRuntimeProfileId } from '../../types/act-four';
+import { COMMUNITY_RUNTIME_LAYOUTS } from './community-reference/runtime-profile';
 
 /** 规则固定：16 Room Slot / 3 Boss Slot。 */
 export const DARKEST_DUNGEON_ROOM_SLOT_COUNT = 16 as const;
@@ -150,9 +152,9 @@ export const PROTOTYPE_DARKEST_DUNGEON_LAYOUTS: DarkestDungeonLayoutDefinition[]
 // ---------------------------------------------------------------------------
 
 export function getDarkestDungeonLayoutPool(
-  mode: 'formal' | 'prototype' = 'prototype',
+  mode: ActFourRuntimeProfileId = 'prototype',
 ): DarkestDungeonLayoutDefinition[] {
-  return mode === 'formal' ? OFFICIAL_DARKEST_DUNGEON_LAYOUTS : PROTOTYPE_DARKEST_DUNGEON_LAYOUTS;
+  return mode === 'formal' ? OFFICIAL_DARKEST_DUNGEON_LAYOUTS : mode === 'community-reference' ? COMMUNITY_RUNTIME_LAYOUTS : PROTOTYPE_DARKEST_DUNGEON_LAYOUTS;
 }
 
 export function getDarkestDungeonLayoutById(
@@ -160,6 +162,7 @@ export function getDarkestDungeonLayoutById(
 ): DarkestDungeonLayoutDefinition | undefined {
   return (
     PROTOTYPE_DARKEST_DUNGEON_LAYOUTS.find((l) => l.id === layoutId) ??
+    COMMUNITY_RUNTIME_LAYOUTS.find((l) => l.id === layoutId) ??
     OFFICIAL_DARKEST_DUNGEON_LAYOUTS.find((l) => l.id === layoutId)
   );
 }
