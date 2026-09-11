@@ -2,7 +2,7 @@
 
 Baseline: `ae2051acd07ce551f95db48752f4583631486855` on
 `phase-11a3-infrastructure-freeze-publication`.
-Implementation commit: `fc8172d6d783d3c457ad828cf5a0a4c491c53a3a`.
+Verified implementation commit: `9998840cb9a9c55bcf2ea4b9650d17fa072fd5f2`.
 
 This branch introduces only a community-reference provenance/data binding
 namespace.  It does not change the Official Source Gate, official requirement
@@ -41,7 +41,8 @@ or DeckIDs ordering were used.
 
 Completion measurement: `npm run verify:community-reference-binding` passed
 with run ID `03e1665c2aa626f4`: 26 requirements, 131 field entries, 126 eligible,
-5 unresolved, 108/108 source references resolved, and 282 measured bindings.
+5 unresolved, 108/108 source references resolved, 219 expected source-local
+identities, 282 measured bindings, and no unbound IDs.
 The dedicated community binding test suite passed 5/5.
 
 The existing full `verify:phase11a3-source-gate` completed successfully and
