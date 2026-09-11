@@ -1,24 +1,84 @@
 {
-  "schemaVersion": "phase11a3-community-reference-binding-evidence.v2",
-  "runId": "03e1665c2aa626f4",
-  "measuredAt": "2026-09-11T01:00:48.950Z",
-  "implementationHead": "9998840cb9a9c55bcf2ea4b9650d17fa072fd5f2",
-  "inputHash": "382e479f84f79a9b3cc6b0256b2fa5dea100b3576244988f180b49e75ed78d2a",
+  "schemaVersion": "phase11a3-community-reference-final-acceptance.v1",
+  "runId": "6c795187-aa78-4d51-88ea-db31e5d6eb48",
+  "measuredAt": "2026-09-11T01:32:25.855Z",
+  "verifiedImplementationHead": "42b869db66995dbabbd6a24b820e38f2f939291c",
+  "evidencePublicationParent": "42b869db66995dbabbd6a24b820e38f2f939291c",
+  "inputPackageSha256": "382e479f84f79a9b3cc6b0256b2fa5dea100b3576244988f180b49e75ed78d2a",
+  "committedArtifactHashes": {
+    "normalized-requirements.json": "82e3f9794c81d021c158610ff47411a7ef0af7d68efe3d23631d9a7e68793562",
+    "source-reference-index.json": "9c8daabe85c7b5cb4feb2f5d0d65dd7a812fff4c508946bf254c4f5d57879936",
+    "source-binding-manifest.json": "30e383ae71d1ef00041276e081ced74156865d3cae3f3e17b3c1e29dfcd773b8"
+  },
+  "regeneratedArtifactHashes": {
+    "normalized-requirements.json": "82e3f9794c81d021c158610ff47411a7ef0af7d68efe3d23631d9a7e68793562",
+    "source-reference-index.json": "9c8daabe85c7b5cb4feb2f5d0d65dd7a812fff4c508946bf254c4f5d57879936",
+    "source-binding-manifest.json": "30e383ae71d1ef00041276e081ced74156865d3cae3f3e17b3c1e29dfcd773b8"
+  },
+  "regenerationParity": true,
   "derivedCounts": {
     "requirements": 26,
     "fields": 131,
     "eligible": 126,
     "unresolved": 5
   },
-  "sourceReferenceResolution": {
+  "sourceReferences": {
     "total": 108,
-    "resolved": 108
+    "resolved": 108,
+    "unresolved": 0
   },
-  "bindingCount": 282,
-  "expectedBindingCount": 219,
-  "unboundSourceLocalIds": [],
-  "commandExitCodes": {
-    "adversarialTests": 0
+  "bindings": {
+    "expected": 228,
+    "actual": 228,
+    "unbound": [],
+    "unexpected": []
+  },
+  "typedProjections": {
+    "quests": 3,
+    "guardians": 7,
+    "rooms": 4,
+    "dungeonTiles": 2,
+    "finalEncounter": 10,
+    "monsterPhysical": 26,
+    "monsterLogical": 9
+  },
+  "blockedFields": [
+    "tierB-templars-room.pitExitRule",
+    "tierB-absolute-nothingness.stance",
+    "tierB-gestating-heart.lethalWoundTimingRuling",
+    "tierB-come-unto-your-maker.definition",
+    "tierB-darkest-dungeon-monster-deck.drawPolicy"
+  ],
+  "adversarialTests": {
+    "expected": 22,
+    "run": 22,
+    "passed": 22
+  },
+  "typecheckPasses": true,
+  "commands": {
+    "regeneration": {
+      "exitCode": 0
+    },
+    "adversarialTests": {
+      "exitCode": 0
+    },
+    "typecheck": {
+      "exitCode": 0
+    }
+  },
+  "officialGate": {
+    "runId": "64f22f90-98bd-4846-a620-7f721949589c",
+    "measuredAt": "2026-09-11T01:31:51.946Z",
+    "phase11A3Status": "SOURCE-BLOCKED",
+    "requiredMissing": 26,
+    "optionalMissing": 1,
+    "openP0": 1,
+    "openP1": 0,
+    "onlyOpenP0": "ISSUE-P0-002",
+    "formalMatrixRun": 0,
+    "formalMatrixExpected": 9,
+    "canCloseP0_002": false,
+    "canEnterPhase11B": false
   },
   "terminalVerdict": "COMMUNITY-REFERENCE-DATA-BOUND",
   "errors": []

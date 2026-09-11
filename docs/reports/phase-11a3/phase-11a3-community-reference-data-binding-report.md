@@ -2,7 +2,9 @@
 
 Baseline: `ae2051acd07ce551f95db48752f4583631486855` on
 `phase-11a3-infrastructure-freeze-publication`.
-Verified implementation commit: `9998840cb9a9c55bcf2ea4b9650d17fa072fd5f2`.
+Verified implementation commit: `42b869db66995dbabbd6a24b820e38f2f939291c`.
+Evidence publication: this report's commit, whose direct parent is the verified
+implementation commit above.
 
 This branch introduces only a community-reference provenance/data binding
 namespace.  It does not change the Official Source Gate, official requirement
@@ -39,13 +41,19 @@ or DeckIDs ordering were used.
 
 ## Verification
 
-Completion measurement: `npm run verify:community-reference-binding` passed
-with run ID `03e1665c2aa626f4`: 26 requirements, 131 field entries, 126 eligible,
-5 unresolved, 108/108 source references resolved, 219 expected source-local
-identities, 282 measured bindings, and no unbound IDs.
-The dedicated community binding test suite passed 5/5.
+Completion measurement: `npm run verify:community-reference-binding -- --input
+<canonical-intake>` passed with run ID
+`6c795187-aa78-4d51-88ea-db31e5d6eb48`. Deterministic regeneration parity
+passed; 26 requirements, 131 field entries, 126 eligible, 5 unresolved, and
+108/108 source references were measured. The independent binding comparison
+measured 228 expected and 228 actual unique bindings, with zero unbound and
+zero unexpected IDs. Typed projections measured 3 Quests, 7 Guardians,
+4 Rooms, 2 Dungeon Tiles, 10 Final Encounter records, 26 physical Monster
+cards, and 9 logical Monster identities. The required adversarial suite passed
+22/22 and targeted typecheck passed.
 
-The existing full `verify:phase11a3-source-gate` completed successfully and
+The fresh full `verify:phase11a3-source-gate` run
+`64f22f90-98bd-4846-a620-7f721949589c` completed successfully and
 its measured official truth remains `SOURCE-BLOCKED`,
 `requiredMissing=26`, `optionalMissing=1`, `openP0=1`, `openP1=0`, only
 `ISSUE-P0-002`, Formal Matrix `0/9`, `canCloseP0_002=false`, and
