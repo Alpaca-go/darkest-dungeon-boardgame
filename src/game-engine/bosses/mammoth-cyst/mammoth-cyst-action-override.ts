@@ -19,6 +19,7 @@ import type {
   MammothCystInitiativeCard,
 } from '../../../types/mammoth-cyst';
 import { getMammothCystSummonDefinition } from '../../../data/darkest-dungeon/mammoth-cyst/mammoth-cyst-registry';
+import { COMMUNITY_MAMMOTH_CYST_SUMMON } from '../../../data/darkest-dungeon/community-reference/production-adapters';
 import { getAliveWhiteCellStalkCount, getMammothCystActorState } from './mammoth-cyst-runtime';
 
 /** Cyst 一次行动的最终类型。 */
@@ -63,7 +64,7 @@ export function isConditionalSummonConditionMet(
 export function decideMammothCystAction(
   state: MammothCystEncounterState,
   card: MammothCystInitiativeCard,
-  mode: DataMode = 'prototype',
+  mode: DataMode | 'community-reference' = 'prototype',
 ): MammothCystActionDecision {
   const aliveStalkCount = getAliveWhiteCellStalkCount(state);
   const base = {
@@ -105,7 +106,7 @@ export function decideMammothCystAction(
     };
   }
 
-  const summon = getMammothCystSummonDefinition(mode);
+  const summon = mode === 'community-reference' ? COMMUNITY_MAMMOTH_CYST_SUMMON : getMammothCystSummonDefinition(mode);
   if (!summon) {
     // 正式 Summon Definition 缺失 → 不推测，退回普通 Skill（official 早已被 Data Gate 禁用）。
     return {

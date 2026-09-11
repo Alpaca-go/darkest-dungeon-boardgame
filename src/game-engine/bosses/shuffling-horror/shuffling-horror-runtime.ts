@@ -39,6 +39,7 @@ import { PROTOTYPE_SHUFFLING_HORROR_AREA_MAP } from '../../../data/darkest-dunge
 import {
   COMMUNITY_SHUFFLING_ACTORS,
   COMMUNITY_SHUFFLING_ROOM,
+  validateCommunityShufflingDefinitions,
   type CommunityShufflingActorSpec,
 } from '../../../data/darkest-dungeon/community-reference/production-adapters';
 import { makeHeroUnit } from '../../battle';
@@ -128,7 +129,7 @@ export function buildShufflingHorrorActorState(
     generation,
     stances: inReserve ? [] : [spec.requiredStance as MonsterStance],
     areaId: inReserve ? null : mode === 'community-reference'
-      ? COMMUNITY_SHUFFLING_ROOM.areaIds.find((areaId) => areaId === 'r10-S') ?? null
+      ? null
       : PROTOTYPE_SHUFFLING_HORROR_AREA_MAP[spec.requiredStance as MonsterStance],
     inReserve,
     actionBudgetUsedThisRound: 0,
@@ -233,6 +234,12 @@ export function setupShufflingHorrorEncounter(
       campaign,
       'official Shuffling Horror 数据缺失（Battle Card / Room / Echoing / Undulations / Victory），正式 Shuffling Horror 战斗已禁用',
     );
+  }
+  if (mode === 'community-reference') {
+    const validation = validateCommunityShufflingDefinitions();
+    if (!validation.isComplete) {
+      return setupFail(campaign, `Community Shuffling Horror 数据无效：${[...validation.missing, ...validation.issues].join('；')}`);
+    }
   }
 
   const guardian = getDarkestDungeonGuardianById(quest.guardianDefinitionId);

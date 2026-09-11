@@ -336,10 +336,14 @@ export interface AncestorFirstFormMechanics {
   /** Stance 全满时使用的 Skill ID；效果本体缺失 → skillDefined = false。 */
   fullStanceSkillId: string;
   fullStanceSkillDefined: boolean;
+  /** Community card projection; execution still uses the shared Skill pipeline. */
+  fullStanceSkillEffect?: { heal: number; target: string; range: number; trigger: string };
 
   /** 有空位时的补位解析器；补位来源未知 → fillKind = null。 */
   vacantStanceResolverId: string;
   vacantStanceFillKind: ReflectionKind | null;
+  /** Community card d10 mapping when a single fixed fill kind cannot represent the card. */
+  vacantStanceD10Map?: Record<number, ReflectionKind>;
 
   reflectionCards: ReflectionCardDefinition[];
 

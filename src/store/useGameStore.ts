@@ -106,6 +106,10 @@ import {
   commitNomadWagonVisit as engineCommitNomadWagonVisit,
 } from '../game-engine/nomad-wagon';
 import { routeForPhase as guardRouteForPhase } from '../app/route-guards';
+import { drawDarkestDungeonQuest } from '../game-engine/campaign/act-four/draw-quest';
+import { activateDarkestDungeonContentSet } from '../game-engine/campaign/act-four/content-runtime';
+import { buildDarkestDungeonMap, drawDarkestDungeonLayout } from '../game-engine/campaign/act-four/dungeon-map';
+import { createGuardianQuest, startGuardianBattle } from '../game-engine/campaign/act-four/guardian-quest';
 
 // UI 临时状态（不持久化）。
 interface UiState {
@@ -131,6 +135,8 @@ interface GameStore {
   exportSave(): string | null;
   /** 导入存档 JSON；成功返回 null，失败返回错误信息（不覆盖现有存档）。 */
   importSave(json: string): string | null;
+  /** 从 Final-Hamlet 前检查点通过正式命令链进入 Community Guardian。 */
+  enterCommunityReferenceGuardian(questRoll?: number): string | null;
 
   // ---- Phase 2：战役准备 ----
   chooseHero(heroId: string): void;
@@ -314,6 +320,26 @@ export const useGameStore = create<GameStore>((set, get) => {
       const { error, campaign } = importSaveString(json);
       if (error) return error; // 验证失败：不覆盖现有存档与内存状态
       set({ campaign, ui: { ...EMPTY_UI } });
+      return null;
+    },
+
+    enterCommunityReferenceGuardian: (questRoll = 0) => {
+      const current = get().campaign;
+      if (!current) return 'No campaign checkpoint';
+      if (!Number.isFinite(questRoll) || questRoll < 0 || questRoll >= 1) return 'Invalid Community Quest roll';
+      const quest = drawDarkestDungeonQuest(current, { mode: 'community-reference', rng: () => questRoll });
+      if (!quest.ok) return quest.reason;
+      const content = activateDarkestDungeonContentSet(quest.campaign, { mode: 'community-reference' });
+      if (!content.ok) return content.reason;
+      const layout = drawDarkestDungeonLayout(content.campaign, { mode: 'community-reference', rng: () => 0 });
+      if (!layout.ok) return layout.reason;
+      const map = buildDarkestDungeonMap(layout.campaign, { mode: 'community-reference', rng: () => 0.25 });
+      if (!map.ok) return map.reason;
+      const created = createGuardianQuest(map.campaign, { mode: 'community-reference' });
+      if (!created.ok || !created.quest) return created.reason;
+      const started = startGuardianBattle(created.campaign, created.quest.objectiveRoomId, { mode: 'community-reference', rng: () => 0.25 });
+      if (!started.ok) return started.reason;
+      commit(started.campaign);
       return null;
     },
 

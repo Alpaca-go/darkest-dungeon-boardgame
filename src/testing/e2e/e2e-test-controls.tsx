@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGameStore, routeForPhase } from '../../store/useGameStore';
-import { playUntil, runCommunityReferenceSetup } from './e2e-player-harness';
+import { buildCommunityReferenceCheckpoint, playUntil } from './e2e-player-harness';
 import { canSelectBossQuest, canSelectStandardQuest } from '../../game-engine/campaign/campaign-progress';
 import { stableHashState } from '../../audit/core-campaign/types';
 
@@ -17,10 +17,19 @@ export default function E2ETestControls() {
       if (c) navigate(routeForPhase(c.gamePhase));
     } catch (e) { setError(String(e)); }
   };
+  const enterCommunity = (questRoll: number) => {
+    try {
+      useGameStore.getState().replaceCampaign(buildCommunityReferenceCheckpoint());
+      const failure = useGameStore.getState().enterCommunityReferenceGuardian(questRoll);
+      if (failure) throw new Error(failure);
+    } catch (e) { setError(String(e)); }
+  };
   return <aside data-testid="e2e-controls" style={{ position: 'relative', zIndex: 10000, background: '#171717' }}>
     <button data-testid="e2e-complete-quest" onClick={() => run('quest-result')}>E2E: Play quest</button>
     <button data-testid="e2e-finish-hamlet" onClick={() => run('quest-select')}>E2E: Finish preparation</button>
-    <button data-testid="e2e-community-reference" onClick={() => { try { useGameStore.getState().replaceCampaign(runCommunityReferenceSetup()); } catch (e) { setError(String(e)); } }}>E2E: Community Reference</button>
+    <button data-testid="e2e-community-shuffling-horror" onClick={() => enterCommunity(0)}>E2E: Community Shuffling Horror</button>
+    <button data-testid="e2e-community-templars" onClick={() => enterCommunity(0.34)}>E2E: Community Templars</button>
+    <button data-testid="e2e-community-mammoth-cyst" onClick={() => enterCommunity(0.67)}>E2E: Community Mammoth Cyst</button>
     <output data-testid="e2e-error">{error}</output>
     <output data-testid="e2e-state">{JSON.stringify(campaign ? {
       hash: stableHashState({ ...campaign, updatedAt: undefined }), phase: campaign.gamePhase,
@@ -36,6 +45,9 @@ export default function E2ETestControls() {
       livingHeroes: campaign.heroes.filter(h => h.isAlive).length,
       waitingTokens: campaign.stagecoach.waitingTokens,
       runtimeProfileId: campaign.actFourState.contentRuntime?.runtimeProfileId,
+      guardianDefinitionId: campaign.actFourState.guardianDefinitionId,
+      templarActorDefinitionIds: campaign.actFourState.templarsEncounterState?.actorStates.map(actor => actor.actorDefinitionId),
+      mammothActorDefinitionIds: campaign.actFourState.mammothCystEncounterState?.actorStates.map(actor => actor.actorDefinitionId),
       shufflingActorIds: campaign.actFourState.shufflingHorrorEncounterState?.actors.map(actor => actor.actorId),
     } : null)}</output>
   </aside>;

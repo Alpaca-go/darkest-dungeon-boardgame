@@ -36,6 +36,7 @@ import {
   COMMUNITY_TEMPLARS_ENCOUNTER,
   COMMUNITY_TEMPLARS_ROOM,
   COMMUNITY_TEMPLARS_VICTORY,
+  validateCommunityTemplarsDefinitions,
 } from '../../../data/darkest-dungeon/community-reference/production-adapters';
 import {
   buildTemplarsDataAudit,
@@ -334,7 +335,7 @@ export function setupTemplarsEncounter(
       'official Templars 数据缺失（Boss Card / Room Map / Pit Effect / Victory Rule），正式 Templars 战斗已禁用',
     );
   }
-  const validation = mode === 'community-reference' ? { isComplete: true, missing: [], issues: [] } : validateTemplarsGuardian(mode);
+  const validation = mode === 'community-reference' ? validateCommunityTemplarsDefinitions() : validateTemplarsGuardian(mode);
   if (!validation.isComplete) {
     return setupFail(
       campaign,

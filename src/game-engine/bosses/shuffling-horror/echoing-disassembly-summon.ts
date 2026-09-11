@@ -79,6 +79,16 @@ export function resolveEchoingDisassembly(
   state: ShufflingHorrorEncounterState,
   sourceCardId: string,
 ): EchoingDisassemblyResult {
+  if (state.mode === 'community-reference') {
+    return {
+      ok: false,
+      state,
+      summonedRoles: [],
+      summonedActorIds: [],
+      addedCardIds: [],
+      reason: 'SHUFFLING_INITIAL_AREA_UNRESOLVED',
+    };
+  }
   const battleId = state.guardianBattleId;
   const missing = getMissingSummonRoles(state);
 

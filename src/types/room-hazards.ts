@@ -44,6 +44,9 @@ export interface RoomHazardEffectDefinition {
   amount?: number;
   /** condition / custom 的目标定义 id。 */
   effectDefinitionId?: string;
+  /** condition 效果的正式状态与持续回合；缺失时不得由运行时猜测。 */
+  condition?: 'bleed' | 'blight';
+  duration?: number;
   description: string;
   officialDataStatus: RoomHazardDataStatus;
   sourceReference?: string;

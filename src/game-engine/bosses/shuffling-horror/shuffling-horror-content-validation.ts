@@ -227,7 +227,7 @@ export function sanitizeShufflingHorrorEncounterState(raw: unknown): ShufflingHo
   return {
     family: 'shuffling-horror',
     guardianBattleId: r.guardianBattleId,
-    mode: r.mode === 'formal' ? 'formal' : 'prototype',
+    mode: r.mode === 'formal' || r.mode === 'community-reference' ? r.mode : 'prototype',
     round: num(r.round),
     actors,
     initiativeDrawPile: drawPile,

@@ -19,6 +19,7 @@ import { resolveDamage } from '../damage';
 import { applyStress } from '../stress';
 import { pushLog } from '../log';
 import { createId, nowIso } from '../random';
+import { applyConditionToHero, createRuleEventContext } from '../quirks';
 import { hasResolvedTrigger, hazardTriggerKey, withResolvedTrigger } from './spiked-pit';
 
 export interface ResolveRoomHazardTriggerParams {
@@ -176,7 +177,22 @@ export function resolveRoomHazardTrigger(
       continue;
     }
 
-    // condition / custom：登记但不自创语义（无资料 → 不施加任何数值）。
+    if (effect.kind === 'condition' && effect.condition && (effect.amount ?? 0) > 0
+      && typeof effect.duration === 'number' && effect.duration > 0) {
+      campaign = applyConditionToHero(
+        campaign,
+        actorId,
+        effect.condition,
+        effect.amount!,
+        effect.duration,
+        effect.description,
+        createRuleEventContext(),
+      );
+      appliedEffectIds.push(effect.id);
+      continue;
+    }
+
+    // 未完整定义的 condition / custom：登记但不自创语义。
     appliedEffectIds.push(effect.id);
   }
 

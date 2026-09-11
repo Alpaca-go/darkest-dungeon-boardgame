@@ -13,7 +13,9 @@ const vite = spawn(process.execPath, [resolve(root, 'node_modules/vite/bin/vite.
 let result;
 try {
   if (!await waitForPort(true, 30_000)) throw new Error('Vite did not start');
-  result = await run(process.execPath, [resolve(root, 'node_modules/@playwright/test/cli.js'), 'test', '--config=playwright.critical.config.ts', 'e2e/phase11a3-community-reference.spec.ts']);
+  const args = [resolve(root, 'node_modules/@playwright/test/cli.js'), 'test', '--config=playwright.critical.config.ts', 'e2e/phase11a3-community-reference.spec.ts'];
+  if (process.env.COMMUNITY_E2E_JSON_PATH) args.push('--reporter=json');
+  result = await run(process.execPath, args);
 } finally {
   if (vite.exitCode === null) vite.kill('SIGTERM');
   if (!await waitForPort(false, 15_000) && vite.exitCode === null) vite.kill('SIGKILL');

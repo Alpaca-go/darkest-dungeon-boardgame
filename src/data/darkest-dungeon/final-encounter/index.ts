@@ -60,13 +60,42 @@ const communitySkillIds = (requirementId: string, field: string) => (communityVa
 const ancestorAreas = communityValue<string[]>('tierB-ancestor-room', 'areaIds');
 const ancestorCapacities = communityValue<Record<string, number>>('tierB-ancestor-room', 'areaCapacities');
 const nothingnessAreas = communityValue<Record<'defensive' | 'ranged' | 'support', string>>('tierB-ancestor-second-form', 'absoluteNothingness.areaIds');
+const timeHealsAll = communityValue<{ heal: number; target: string; range: number; trigger: string }>('tierB-ancestor-first-form', 'timeHealsAll.effect');
 const COMMUNITY_ANCESTOR_ROOM: AncestorRoomAreaDefinition = { id: 'community-dd-ancestor-room', stanceAreaMap: { aggressive: 'r12-C', ...nothingnessAreas }, validAreaIds: ancestorAreas, areaCapacities: ancestorCapacities, officialDataStatus: 'partial', sourceReference: communityRef('tierB-ancestor-room', 'formAreaPlacement') };
-const COMMUNITY_ANCESTOR_FIRST: AncestorFirstFormMechanics = { ...OFFICIAL_ANCESTOR_FIRST_FORM_MECHANICS, id: 'community-dd-ancestor-first-form-mechanics', fullStanceSkillId: 'community-dd-skill-time-heals-all', fullStanceSkillDefined: true, vacantStanceResolverId: 'community-dd-ancestor-reflection-table', reflectionCards: [{ kind: 'perfect', maxWounds: communityValue('tierB-ancestor-first-form', 'perfectReflection.maxHp'), skillIds: communitySkillIds('tierB-ancestor-first-form', 'perfectReflection.skillIds') }, { kind: 'imperfect', maxWounds: communityValue('tierB-ancestor-first-form', 'imperfectReflection.maxHp'), skillIds: communitySkillIds('tierB-ancestor-first-form', 'imperfectReflection.skillIds') }], officialDataStatus: 'partial', sourceReference: communityRef('tierB-ancestor-first-form', 'vacantStanceFillSource'), enabledInOfficialPool: false };
-const COMMUNITY_ANCESTOR_SECOND: AncestorSecondFormMechanics = { ...OFFICIAL_ANCESTOR_SECOND_FORM_MECHANICS, id: 'community-dd-ancestor-second-form-mechanics', absoluteNothingness: (['defensive', 'ranged', 'support'] as const).map((linkedStance) => ({ linkedStance, areaId: nothingnessAreas[linkedStance] })), officialDataStatus: 'partial', sourceReference: communityRef('tierB-ancestor-second-form', 'absoluteNothingness.areaIds'), enabledInOfficialPool: false };
-const COMMUNITY_GESTATING_HEART: GestatingHeartMechanics = { ...OFFICIAL_GESTATING_HEART_MECHANICS, id: 'community-dd-gestating-heart-mechanics', monsterDeckId: 'community-dd-monster-deck', monsterDefinitionIds: COMMUNITY_RUNTIME_MONSTER_COMPOSITION.map((monster) => monster.id), officialDataStatus: 'partial', sourceReference: communityRef('tierB-gestating-heart', 'skillIds'), enabledInOfficialPool: false };
+const COMMUNITY_ANCESTOR_FIRST: AncestorFirstFormMechanics = {
+  id: 'community-dd-ancestor-first-form-mechanics', formId: 'ancestor-first-form',
+  perfectReflectionCount: 2, imperfectReflectionCount: 1,
+  randomizeAcrossStances: ['defensive', 'ranged', 'support'], initiativeCardCount: 4,
+  allocationPolicy: 'reflection-first-then-ancestor', preserveCardCountAfterReflectionDeath: true,
+  guardPolicy: 'reflections-always-guard-ancestor', imperfectDeathWounds: 10,
+  fullStanceSkillId: 'community-dd-skill-time-heals-all', fullStanceSkillDefined: true,
+  fullStanceSkillEffect: timeHealsAll,
+  vacantStanceResolverId: 'community-dd-ancestor-reflection-table', vacantStanceFillKind: null,
+  vacantStanceD10Map: { 1: 'perfect', 2: 'perfect', 3: 'perfect', 4: 'imperfect', 5: 'imperfect', 6: 'imperfect', 7: 'imperfect', 8: 'imperfect', 9: 'imperfect', 10: 'imperfect' },
+  reflectionCards: [{ kind: 'perfect', maxWounds: communityValue('tierB-ancestor-first-form', 'perfectReflection.maxHp'), skillIds: communitySkillIds('tierB-ancestor-first-form', 'perfectReflection.skillIds') }, { kind: 'imperfect', maxWounds: communityValue('tierB-ancestor-first-form', 'imperfectReflection.maxHp'), skillIds: communitySkillIds('tierB-ancestor-first-form', 'imperfectReflection.skillIds') }],
+  officialDataStatus: 'partial', sourceReference: communityRef('tierB-ancestor-first-form', 'vacantStanceFillSource'), enabledInOfficialPool: false,
+};
+const COMMUNITY_ANCESTOR_SECOND: AncestorSecondFormMechanics = {
+  id: 'community-dd-ancestor-second-form-mechanics', formId: 'ancestor-second-form', initiativeCardCount: 2,
+  absoluteNothingness: (['defensive', 'ranged', 'support'] as const).map((linkedStance) => ({ linkedStance, areaId: nothingnessAreas[linkedStance] })),
+  actionEndTeleportMap: { 1: 'defensive', 2: 'defensive', 3: 'defensive', 4: 'ranged', 5: 'ranged', 6: 'ranged', 7: 'support', 8: 'support', 9: 'support', 10: null },
+  capacityPolicy: 'definition-driven', officialDataStatus: 'partial', sourceReference: communityRef('tierB-ancestor-second-form', 'absoluteNothingness.areaIds'), enabledInOfficialPool: false,
+};
+const COMMUNITY_GESTATING_HEART: GestatingHeartMechanics = {
+  id: 'community-dd-gestating-heart-mechanics', formId: 'gestating-heart', initiativeCardCount: 1,
+  monsterDeckId: 'community-dd-monster-deck', monsterDefinitionIds: COMMUNITY_RUNTIME_MONSTER_COMPOSITION.map((monster) => monster.id),
+  sispersion: { summonCount: 1, selectionPolicy: 'random', stancePolicy: 'next-available-stance', initiativeCardsToAdd: 1 },
+  woundedReaction: { trigger: 'hero-attack-applied-wounds', blightPotency: 2, blightDurationTurns: 3, heal: 2, triggersAfterLethalWound: null },
+  officialDataStatus: 'partial', sourceReference: communityRef('tierB-gestating-heart', 'skillIds'), enabledInOfficialPool: false,
+};
 const heartSkills = communityValue<Array<{ sourceLocalSkillId: string; printedName: string }>>('tierB-heart-of-darkness', 'skillIds');
 const heartSkillId = (name: string) => `community-dd-skill-${heartSkills.find((skill) => skill.printedName === name)?.sourceLocalSkillId ?? ''}`;
-const COMMUNITY_HEART_OF_DARKNESS: HeartOfDarknessMechanics = { ...OFFICIAL_HEART_OF_DARKNESS_MECHANICS, id: 'community-dd-heart-of-darkness-mechanics', impendingDoom: { ...OFFICIAL_HEART_OF_DARKNESS_MECHANICS.impendingDoom, d10SkillMap: { 1: heartSkillId('Know This'), 2: heartSkillId('Know This'), 3: heartSkillId('Know This'), 4: heartSkillId('Know This'), 5: heartSkillId('Puncture'), 6: heartSkillId('Puncture'), 7: heartSkillId('Puncture'), 8: heartSkillId('Dissolution'), 9: heartSkillId('Dissolution'), 10: heartSkillId('Dissolution') } }, skillIds: heartSkills.map((skill) => `community-dd-skill-${skill.sourceLocalSkillId}`), comeUntoYourMakerEnabled: false, officialDataStatus: 'partial', sourceReference: communityRef('tierB-heart-of-darkness', 'impendingDoomD10SkillMap'), enabledInOfficialPool: false };
+const COMMUNITY_HEART_OF_DARKNESS: HeartOfDarknessMechanics = {
+  id: 'community-dd-heart-of-darkness-mechanics', formId: 'heart-of-darkness', initiativeCardCount: 2, cannotBeSkipped: true,
+  impendingDoom: { triggerAtBattleStart: true, triggerAfterCompletedAction: true, forecastVisibleToPlayers: true, consumeForecastOnTurn: true, d10SkillMap: { 1: heartSkillId('Know This'), 2: heartSkillId('Know This'), 3: heartSkillId('Know This'), 4: heartSkillId('Know This'), 5: heartSkillId('Puncture'), 6: heartSkillId('Puncture'), 7: heartSkillId('Puncture'), 8: heartSkillId('Dissolution'), 9: heartSkillId('Dissolution'), 10: heartSkillId('Dissolution') } },
+  skillIds: heartSkills.map((skill) => `community-dd-skill-${skill.sourceLocalSkillId}`), comeUntoYourMakerEnabled: false,
+  victoryPolicy: 'campaign-victory', officialDataStatus: 'partial', sourceReference: communityRef('tierB-heart-of-darkness', 'impendingDoomD10SkillMap'), enabledInOfficialPool: false,
+};
 
 // ---------------------------------------------------------------------------
 // 取数

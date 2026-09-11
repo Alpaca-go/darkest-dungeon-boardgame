@@ -36,6 +36,7 @@ import {
   COMMUNITY_MAMMOTH_CYST_GUARDIAN,
   COMMUNITY_MAMMOTH_CYST_ROOM,
   COMMUNITY_WHITE_CELL_STALK,
+  validateCommunityMammothDefinitions,
 } from '../../../data/darkest-dungeon/community-reference/production-adapters';
 import type { SpikedPitRuntime } from '../../../types/room-hazards';
 import {
@@ -346,7 +347,7 @@ export function setupMammothCystEncounter(
       'official Mammoth Cyst 数据缺失（Battle Card / Spawn Policy / d10 Area Map / Capacity / Victory），正式 Mammoth Cyst 战斗已禁用',
     );
   }
-  const validation = mode === 'community-reference' ? { isComplete: true, missing: [], issues: [] } : validateMammothCystGuardian(mode);
+  const validation = mode === 'community-reference' ? validateCommunityMammothDefinitions() : validateMammothCystGuardian(mode);
   if (!validation.isComplete) {
     return setupFail(
       campaign,

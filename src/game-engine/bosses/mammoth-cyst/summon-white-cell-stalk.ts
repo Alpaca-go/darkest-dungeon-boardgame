@@ -168,7 +168,7 @@ function fail(eventIds: string[], reason: string): SpawnSpaceResolution {
 // ---------------------------------------------------------------------------
 
 export interface SummonWhiteCellStalkOptions {
-  mode?: DataMode;
+  mode?: DataMode | 'community-reference';
   rng?: () => number;
   now?: string;
   /** 触发本次召唤的 Cyst 行动事件 id（通常为该次行动的 Initiative Card id）。 */
@@ -208,7 +208,7 @@ export function summonWhiteCellStalk(
 ): SummonWhiteCellStalkResult {
   const actFour = campaign.actFourState;
   const state = actFour.mammothCystEncounterState;
-  const mode: DataMode = options.mode ?? 'prototype';
+  const mode: DataMode | 'community-reference' = options.mode ?? 'prototype';
 
   if (!state) return summonFail(campaign, 'Mammoth Cyst Encounter 尚未 Setup');
 

@@ -13,7 +13,11 @@ const value = <T>(requirementId: string, field: string): T =>
 const reference = (requirementId: string, field: string): string =>
   communityRequirement(requirementId).fields[field].sourceReference.join(',');
 const id = (local: string): string => `community-dd-${local}`;
-const numeric = (candidate: unknown): number => typeof candidate === 'number' ? candidate : 0;
+export const requireCommunityNumber = (candidate: unknown, path: string): number => {
+  if (typeof candidate === 'number' && Number.isFinite(candidate)) return candidate;
+  if (typeof candidate === 'string' && candidate.startsWith('not printed')) return 0;
+  throw new Error(`Missing confirmed Community numeric field: ${path}`);
+};
 const rollsFor = (table: SourceD10, stance: string, printedNumber: number): number[] =>
   table.find((entry) => entry.stances.includes(stance))?.ranges.find((entry) => entry.printedSkillNumber === printedNumber)?.rolls ?? [];
 
@@ -41,8 +45,8 @@ function templarActor(requirementId: string, role: 'impaler' | 'warlord', stance
     id: id(`skill-${role}-${skill.sourceLocalSkillId}`), actorDefinitionId: actorId,
     name: skill.printedName, d10Rolls: rollsFor(d10, stance, skill.printedNumber) as TemplarRoll[],
     usableFromAreaIds: [], targetSide: 'enemy', targetKind: 'hero',
-    accuracy: numeric(accuracy[skill.sourceLocalSkillId]), minDamage: numeric(damage[skill.sourceLocalSkillId]),
-    maxDamage: numeric(damage[skill.sourceLocalSkillId]), stress: 0,
+    accuracy: requireCommunityNumber(accuracy[skill.sourceLocalSkillId], `${requirementId}.accuracy.${skill.sourceLocalSkillId}`), minDamage: requireCommunityNumber(damage[skill.sourceLocalSkillId], `${requirementId}.damage.${skill.sourceLocalSkillId}`),
+    maxDamage: requireCommunityNumber(damage[skill.sourceLocalSkillId], `${requirementId}.damage.${skill.sourceLocalSkillId}`), stress: 0,
     onHitEffects: skill.sourceLocalSkillId === 'body-slam' ? [{ type: 'trigger-pit-toss', target: 'hit-hero' }] : [],
     effectSequence: null, description: `Community retail card action: ${skill.printedName}`,
     officialDataStatus: 'partial', sourceReference: reference(requirementId, 'skillIds'),
@@ -65,7 +69,7 @@ export const COMMUNITY_TEMPLARS_ROOM: TemplarsRoomDefinition = {
   warlordPlacement: { stance: 'ranged', areaId: templarAreaFor('monster:ranged') },
   heroPlacementRules: [{ rule: 'room-card-defined' }], validAreaIds: templarAreas, areaCapacities: templarCaps,
   areaGraph: { areas: templarAreas, edges: [] },
-  spikedPits: pitAreas.map((areaId) => ({ id: id(`spiked-pit-${areaId}`), areaId, targetable: false, hasHp: false, hasInitiative: false, capacityPolicy: 'normal-area-capacity', entryEffects: [{ id: id(`pit-entry-${areaId}`), kind: 'damage', amount: 5, description: 'Community retail Templars pit entry damage; bleed remains in the source record.', officialDataStatus: 'partial', sourceReference: reference('tierB-templars-room', 'pitEntryEffects') }], endTurnEffects: [], conditionTriggeredEffects: [], officialDataStatus: 'partial' })),
+  spikedPits: pitAreas.map((areaId) => ({ id: id(`spiked-pit-${areaId}`), areaId, targetable: false, hasHp: false, hasInitiative: false, capacityPolicy: 'normal-area-capacity', entryEffects: [{ id: id(`pit-entry-damage-${areaId}`), kind: 'damage', amount: 5, description: 'Community retail Templars pit entry damage.', officialDataStatus: 'partial', sourceReference: reference('tierB-templars-room', 'pitEntryEffects') }, { id: id(`pit-entry-bleed-${areaId}`), kind: 'condition', condition: 'bleed', amount: 3, duration: 3, description: 'Community retail Templars pit entry Bleed 3 for 3 turns.', officialDataStatus: 'partial', sourceReference: reference('tierB-templars-room', 'pitEntryEffects') }], endTurnEffects: [], conditionTriggeredEffects: [], officialDataStatus: 'partial' })),
   pitTossD10Map: Object.fromEntries(Object.entries(sourcePitMap).map(([roll, areaId]) => [roll, id(`spiked-pit-${areaId}`)])) as Record<TemplarRoll, string>,
   roomEffects: [], officialDataStatus: 'partial', sourceReference: reference('tierB-templars-room', 'areaIds'),
 };
@@ -84,7 +88,11 @@ function mammothSkills(requirementId: string, stance: string): MammothCystSkillD
   const accuracy = value<Record<string, unknown>>(requirementId, 'accuracy');
   const damage = value<Record<string, unknown>>(requirementId, 'damage');
   const d10 = value<SourceD10>(requirementId, 'd10SkillTable');
-  return skills.map((skill) => ({ id: id(`skill-${skill.sourceLocalSkillId}`), actorDefinitionId: actorId, name: skill.printedName, d10Rolls: rollsFor(d10, stance, skill.printedNumber) as MammothRoll[], usableFromAreaIds: [], targetSide: skill.sourceLocalSkillId === 'reconstitute' || skill.sourceLocalSkillId === 'revivify' ? 'ally' : 'enemy', targetKind: skill.sourceLocalSkillId === 'reconstitute' || skill.sourceLocalSkillId === 'revivify' ? 'monster' : 'hero', accuracy: numeric(accuracy[skill.sourceLocalSkillId]), minDamage: numeric(damage[skill.sourceLocalSkillId]), maxDamage: numeric(damage[skill.sourceLocalSkillId]), stress: 0, triggersTeleportation: skill.sourceLocalSkillId === 'teleport', teleportationMapId: skill.sourceLocalSkillId === 'teleport' ? id('mammoth-cyst-teleport-map') : undefined, rollPolicy: 'definition-driven', requiresHit: numeric(accuracy[skill.sourceLocalSkillId]) > 0 ? true : null, description: `Community retail card action: ${skill.printedName}`, officialDataStatus: 'partial', sourceReference: reference(requirementId, 'skillIds') }));
+  return skills.map((skill) => {
+    const skillAccuracy = requireCommunityNumber(accuracy[skill.sourceLocalSkillId], `${requirementId}.accuracy.${skill.sourceLocalSkillId}`);
+    const skillDamage = requireCommunityNumber(damage[skill.sourceLocalSkillId], `${requirementId}.damage.${skill.sourceLocalSkillId}`);
+    return { id: id(`skill-${skill.sourceLocalSkillId}`), actorDefinitionId: actorId, name: skill.printedName, d10Rolls: rollsFor(d10, stance, skill.printedNumber) as MammothRoll[], usableFromAreaIds: [], targetSide: skill.sourceLocalSkillId === 'revivify' ? 'self' : skill.sourceLocalSkillId === 'reconstitute' ? 'ally' : 'enemy', targetKind: skill.sourceLocalSkillId === 'revivify' || skill.sourceLocalSkillId === 'reconstitute' ? 'monster' : 'hero', accuracy: skillAccuracy, minDamage: skillDamage, maxDamage: skillDamage, stress: 0, triggersTeleportation: skill.sourceLocalSkillId === 'teleport', teleportationMapId: skill.sourceLocalSkillId === 'teleport' ? id('mammoth-cyst-teleport-map') : undefined, rollPolicy: 'definition-driven', requiresHit: skillAccuracy > 0 ? true : null, description: `Community retail card action: ${skill.printedName}`, officialDataStatus: 'partial', sourceReference: reference(requirementId, 'skillIds') };
+  });
 }
 export const COMMUNITY_MAMMOTH_CYST: MammothCystActorDefinition = { id: id('mammoth-cyst'), actorType: 'boss', name: 'Mammoth Cyst', campaignLevel: 3, requiredStance: 'aggressive', actionsPerRound: 2, stats: actorStats('tierB-mammoth-cyst'), skills: mammothSkills('tierB-mammoth-cyst', 'aggressive'), color: '#991b1b', officialDataStatus: 'partial', sourceReference: reference('tierB-mammoth-cyst', 'maxHp'), enabledInOfficialPool: false };
 export const COMMUNITY_WHITE_CELL_STALK: WhiteCellStalkActorDefinition = { id: id('white-cell-stalk'), actorType: 'boss-minion', name: 'White Cell Stalk', campaignLevel: 3, requiredStance: null, actionsPerRound: 2, stats: actorStats('tierB-white-cell-stalk'), skills: mammothSkills('tierB-white-cell-stalk', 'aggressive'), color: '#f5f5f4', officialDataStatus: 'partial', sourceReference: reference('tierB-white-cell-stalk', 'maxHp'), enabledInOfficialPool: false };
@@ -94,7 +102,68 @@ export const COMMUNITY_MAMMOTH_CYST_ROOM: MammothCystRoomDefinition = { id: id('
 export const COMMUNITY_MAMMOTH_CYST_GUARDIAN: MammothCystGuardianDefinition = { id: id('mammoth-cyst-encounter'), guardianFamilyId: 'mammoth-cyst', bossActorDefinitionId: COMMUNITY_MAMMOTH_CYST.id, linkedActorDefinitionId: COMMUNITY_WHITE_CELL_STALK.id, roomDefinitionId: COMMUNITY_MAMMOTH_CYST_ROOM.id, conditionalSummonDefinitionId: id('mammoth-cyst-summon'), victoryCondition: 'boss-defeated', cleanupPolicy: 'remove-linked-actors-on-boss-victory', officialDataStatus: 'partial', sourceReference: reference('tierB-mammoth-cyst-room', 'victoryCondition'), enabledInOfficialPool: false };
 export const COMMUNITY_MAMMOTH_CYST_SUMMON: ConditionalLinkedActorSummon = { id: id('mammoth-cyst-summon'), sourceActorDefinitionId: COMMUNITY_MAMMOTH_CYST.id, linkedActorDefinitionId: COMMUNITY_WHITE_CELL_STALK.id, condition: { type: 'no-alive-actors-with-tag', tag: 'white-cell-stalk' }, replacesNormalSkill: true, initiativeCardsToAdd: 2, maxAlive: 1, resummonPolicy: 'on-source-turn-when-none-alive' };
 
-export interface CommunityShufflingActorSpec { role: ShufflingHorrorRole; actorDefinitionId: string; name: string; requiredStance: MonsterStance | null; actionsPerRound: number; startsInReserve: boolean; maxHp: number; speed: number; skillIds: string[] }
-const shufflingActor = (requirementId: string, role: ShufflingHorrorRole, name: string, reserve: boolean): CommunityShufflingActorSpec => ({ role, actorDefinitionId: id(requirementId.replace(/^tierB-/, '')), name, requiredStance: reserve ? null : 'aggressive', actionsPerRound: role === 'horror' ? 2 : 1, startsInReserve: reserve, maxHp: value(requirementId, 'maxHp'), speed: value(requirementId, 'speed'), skillIds: value<SourceSkill[]>(requirementId, 'skillIds').map((skill) => id(`skill-${skill.sourceLocalSkillId}`)) });
+export interface CommunityShufflingActorSpec { role: ShufflingHorrorRole; actorDefinitionId: string; name: string; requiredStance: MonsterStance | null; actionsPerRound: number; startsInReserve: boolean; maxHp: number; dodge: number; speed: number; resistances: ResistanceSource; accuracy: Record<string, unknown>; damage: Record<string, unknown>; crit: Record<string, unknown>; d10SkillTable: SourceD10; skillIds: string[] }
+const shufflingActor = (requirementId: string, role: ShufflingHorrorRole, name: string, reserve: boolean): CommunityShufflingActorSpec => ({ role, actorDefinitionId: id(requirementId.replace(/^tierB-/, '')), name, requiredStance: reserve ? null : 'aggressive', actionsPerRound: role === 'horror' ? 2 : 1, startsInReserve: reserve, maxHp: value(requirementId, 'maxHp'), dodge: value(requirementId, 'dodge'), speed: value(requirementId, 'speed'), resistances: value(requirementId, 'resistances'), accuracy: value(requirementId, 'accuracy'), damage: value(requirementId, 'damage'), crit: value(requirementId, 'crit'), d10SkillTable: value(requirementId, 'd10SkillTable'), skillIds: value<SourceSkill[]>(requirementId, 'skillIds').map((skill) => id(`skill-${skill.sourceLocalSkillId}`)) });
 export const COMMUNITY_SHUFFLING_ACTORS: CommunityShufflingActorSpec[] = [shufflingActor('tierB-shuffling-horror', 'horror', 'Shuffling Horror', false), shufflingActor('tierB-cultist-priest', 'cultist-priest', 'Cultist Priest', true), shufflingActor('tierB-malignant-growth', 'malignant-growth', 'Malignant Growth', true)];
 export const COMMUNITY_SHUFFLING_ROOM = { id: id('shuffling-horror-room'), areaIds: value<string[]>('tierB-shuffling-horror-room', 'areaIds'), areaCapacities: value<Record<string, number>>('tierB-shuffling-horror-room', 'areaCapacities'), sourceReference: reference('tierB-shuffling-horror-room', 'areaIds') };
+
+export interface CommunityDefinitionValidation {
+  isComplete: boolean;
+  missing: string[];
+  issues: string[];
+  knownBlockers: string[];
+}
+
+const d10Complete = (skills: Array<{ d10Rolls: number[] }>): boolean => {
+  const rolls = skills.flatMap((skill) => skill.d10Rolls).sort((a, b) => a - b);
+  return rolls.length === 10 && rolls.every((roll, index) => roll === index + 1);
+};
+
+export function validateCommunityTemplarsDefinitions(input: {
+  encounter: DualBossEncounterDefinition;
+  impaler: TemplarActorDefinition;
+  warlord: TemplarActorDefinition;
+  room: TemplarsRoomDefinition;
+} = { encounter: COMMUNITY_TEMPLARS_ENCOUNTER, impaler: COMMUNITY_TEMPLAR_IMPALER, warlord: COMMUNITY_TEMPLAR_WARLORD, room: COMMUNITY_TEMPLARS_ROOM }): CommunityDefinitionValidation {
+  const missing: string[] = [];
+  const issues: string[] = [];
+  for (const actor of [input.impaler, input.warlord]) {
+    if (!actor.stats || !Number.isFinite(actor.stats.maxHp) || !Number.isFinite(actor.stats.dodge) || !Number.isFinite(actor.stats.speed)) missing.push(`${actor.id}.stats`);
+    if (actor.skills.length !== 3 || !d10Complete(actor.skills)) issues.push(`${actor.id}.d10SkillTable`);
+    if (actor.skills.some((skill) => !Number.isFinite(skill.accuracy) || !Number.isFinite(skill.minDamage) || !Number.isFinite(skill.maxDamage))) issues.push(`${actor.id}.combatNumbers`);
+  }
+  if (input.encounter.bossMembers.length !== 2 || input.encounter.bossMembers.some((member) => ![input.impaler.id, input.warlord.id].includes(member.actorDefinitionId))) issues.push('encounter.actorBindings');
+  if (input.room.validAreaIds.length !== Object.keys(input.room.areaCapacities).length || input.room.validAreaIds.some((areaId) => !Number.isFinite(input.room.areaCapacities[areaId]))) issues.push('room.areaCapacities');
+  if (Object.keys(input.room.pitTossD10Map).length !== 10 || Object.values(input.room.pitTossD10Map).some((pitId) => !input.room.spikedPits.some((pit) => pit.id === pitId))) issues.push('room.pitD10Map');
+  if (input.room.spikedPits.some((pit) => !pit.entryEffects.some((effect) => effect.kind === 'damage' && effect.amount === 5) || !pit.entryEffects.some((effect) => effect.kind === 'condition' && effect.condition === 'bleed' && effect.amount === 3 && effect.duration === 3))) issues.push('room.pitEntryEffects');
+  return { isComplete: missing.length === 0 && issues.length === 0, missing, issues, knownBlockers: ['TEMPLARS_PIT_EXIT_RULE_UNRESOLVED', 'TEMPLARS_AREA_ADJACENCY_UNRESOLVED', 'GUARDIAN_RESISTANCE_ENGINE_UNSUPPORTED', 'GUARDIAN_CRIT_ENGINE_UNSUPPORTED'] };
+}
+
+export function validateCommunityMammothDefinitions(input: {
+  guardian: MammothCystGuardianDefinition;
+  cyst: MammothCystActorDefinition;
+  stalk: WhiteCellStalkActorDefinition;
+  room: MammothCystRoomDefinition;
+  summon: ConditionalLinkedActorSummon;
+} = { guardian: COMMUNITY_MAMMOTH_CYST_GUARDIAN, cyst: COMMUNITY_MAMMOTH_CYST, stalk: COMMUNITY_WHITE_CELL_STALK, room: COMMUNITY_MAMMOTH_CYST_ROOM, summon: COMMUNITY_MAMMOTH_CYST_SUMMON }): CommunityDefinitionValidation {
+  const missing: string[] = [];
+  const issues: string[] = [];
+  for (const actor of [input.cyst, input.stalk]) {
+    if (!actor.stats || !Number.isFinite(actor.stats.maxHp) || !Number.isFinite(actor.stats.dodge) || !Number.isFinite(actor.stats.speed)) missing.push(`${actor.id}.stats`);
+    if (actor.skills.length !== 3 || !d10Complete(actor.skills)) issues.push(`${actor.id}.d10SkillTable`);
+  }
+  if (input.guardian.bossActorDefinitionId !== input.cyst.id || input.guardian.linkedActorDefinitionId !== input.stalk.id || input.guardian.conditionalSummonDefinitionId !== input.summon.id) issues.push('guardian.actorBindings');
+  if (Object.keys(input.room.teleportationD10Map).length !== 10 || Object.values(input.room.teleportationD10Map).some((areaId) => !input.room.validAreaIds.includes(areaId))) issues.push('room.teleportationD10Map');
+  if (Object.values(input.room.stanceAreaMap).some((areaId) => areaId && !input.room.validAreaIds.includes(areaId))) issues.push('room.stanceAreaMap');
+  if (input.summon.initiativeCardsToAdd !== 2 || input.summon.maxAlive !== 1 || !input.summon.replacesNormalSkill) issues.push('summon.policy');
+  return { isComplete: missing.length === 0 && issues.length === 0, missing, issues, knownBlockers: ['GUARDIAN_RESISTANCE_ENGINE_UNSUPPORTED', 'GUARDIAN_CRIT_ENGINE_UNSUPPORTED', 'GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED'] };
+}
+
+export function validateCommunityShufflingDefinitions(specs = COMMUNITY_SHUFFLING_ACTORS, room = COMMUNITY_SHUFFLING_ROOM): CommunityDefinitionValidation {
+  const missing: string[] = [];
+  const issues: string[] = [];
+  if (specs.length !== 3 || new Set(specs.map((spec) => spec.role)).size !== 3) issues.push('actors.roles');
+  if (specs.some((spec) => !Number.isFinite(spec.maxHp) || !Number.isFinite(spec.speed) || spec.skillIds.length < 2)) missing.push('actors.combatFields');
+  if (room.areaIds.length !== Object.keys(room.areaCapacities).length || room.areaIds.some((areaId) => !Number.isFinite(room.areaCapacities[areaId]))) issues.push('room.areaCapacities');
+  return { isComplete: missing.length === 0 && issues.length === 0, missing, issues, knownBlockers: ['SHUFFLING_INITIAL_AREA_UNRESOLVED', 'GUARDIAN_RESISTANCE_ENGINE_UNSUPPORTED', 'GUARDIAN_CRIT_ENGINE_UNSUPPORTED'] };
+}

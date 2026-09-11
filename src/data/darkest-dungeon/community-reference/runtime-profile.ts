@@ -4,7 +4,7 @@ import bindingEvidenceJson from '../../../../docs/data/darkest-dungeon/community
 import { COMMUNITY_DATASET, monsterComposition } from './data';
 
 export const COMMUNITY_REFERENCE_PROFILE_ID = 'community-reference' as const;
-export const COMMUNITY_RUNTIME_ADAPTER_VERSION = 'phase11a3-community-runtime-adapter.v2' as const;
+export const COMMUNITY_RUNTIME_ADAPTER_VERSION = 'phase11a3-community-runtime-adapter.v3' as const;
 export const COMMUNITY_REFERENCE_SOURCE_SHA256 = COMMUNITY_DATASET.corpus.sourcePackageSha256;
 
 export type CommunityRuntimeBlockerCode =
@@ -14,7 +14,12 @@ export type CommunityRuntimeBlockerCode =
   | 'COME_UNTO_YOUR_MAKER_UNRESOLVED'
   | 'MONSTER_DECK_DRAW_POLICY_UNRESOLVED'
   | 'EXCAVATION_PROVISION_DIE_MAP_UNRESOLVED'
-  | 'FINAL_PROVISION_POLICY_UNRESOLVED';
+  | 'FINAL_PROVISION_POLICY_UNRESOLVED'
+  | 'GUARDIAN_RESISTANCE_ENGINE_UNSUPPORTED'
+  | 'GUARDIAN_CRIT_ENGINE_UNSUPPORTED'
+  | 'GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED'
+  | 'TEMPLARS_AREA_ADJACENCY_UNRESOLVED'
+  | 'SHUFFLING_INITIAL_AREA_UNRESOLVED';
 export interface CommunityRuntimeBlocker {
   code: CommunityRuntimeBlockerCode;
   requirementId: string;
@@ -31,6 +36,11 @@ export const COMMUNITY_RUNTIME_BLOCKERS = [
   blocker('MONSTER_DECK_DRAW_POLICY_UNRESOLVED', 'tierB-darkest-dungeon-monster-deck', 'drawPolicy', 'source-level'),
   blocker('EXCAVATION_PROVISION_DIE_MAP_UNRESOLVED', 'runtime-excavation-provision-die', 'faceMap', 'runtime-only'),
   blocker('FINAL_PROVISION_POLICY_UNRESOLVED', 'runtime-final-provision-policy', 'grantTable', 'runtime-only'),
+  blocker('GUARDIAN_RESISTANCE_ENGINE_UNSUPPORTED', 'runtime-guardian-combat', 'categoricalResistanceResolution', 'runtime-only'),
+  blocker('GUARDIAN_CRIT_ENGINE_UNSUPPORTED', 'runtime-guardian-combat', 'criticalHitResolution', 'runtime-only'),
+  blocker('GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED', 'runtime-guardian-combat', 'specialSkillEffectResolution', 'runtime-only'),
+  blocker('TEMPLARS_AREA_ADJACENCY_UNRESOLVED', 'runtime-templars-room', 'areaAdjacency', 'runtime-only'),
+  blocker('SHUFFLING_INITIAL_AREA_UNRESOLVED', 'runtime-shuffling-horror-room', 'initialArea', 'runtime-only'),
 ] as const;
 
 export function communityRequirement(requirementId: string) {
