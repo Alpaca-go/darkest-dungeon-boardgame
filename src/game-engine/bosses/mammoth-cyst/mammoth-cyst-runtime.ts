@@ -14,7 +14,7 @@
 // - RNG 一律注入（禁止 Math.random）。
 
 import type { BattleState, BattleUnit, CampaignState } from '../../../types';
-import type { DataMode } from '../../../types/progression';
+import type { ActFourRuntimeProfileId } from '../../../types/act-four';
 import type {
   D10Roll,
   MammothCystActorDefinition,
@@ -31,6 +31,12 @@ import type {
   MonsterStance,
   WhiteCellStalkActorDefinition,
 } from '../../../types/mammoth-cyst';
+import {
+  COMMUNITY_MAMMOTH_CYST,
+  COMMUNITY_MAMMOTH_CYST_GUARDIAN,
+  COMMUNITY_MAMMOTH_CYST_ROOM,
+  COMMUNITY_WHITE_CELL_STALK,
+} from '../../../data/darkest-dungeon/community-reference/production-adapters';
 import type { SpikedPitRuntime } from '../../../types/room-hazards';
 import {
   buildMammothCystDataAudit,
@@ -289,7 +295,7 @@ export function buildMammothCystBattle(
 // ---------------------------------------------------------------------------
 
 export interface SetupMammothCystEncounterOptions {
-  mode?: DataMode;
+  mode?: ActFourRuntimeProfileId;
   rng?: () => number;
   seed?: number;
   now?: string;
@@ -317,7 +323,7 @@ export function setupMammothCystEncounter(
 ): SetupMammothCystEncounterResult {
   const actFour = campaign.actFourState;
   const quest = actFour.guardianQuestState;
-  const mode: DataMode = options?.mode ?? 'prototype';
+  const mode: ActFourRuntimeProfileId = options?.mode ?? 'prototype';
 
   if (!quest) return setupFail(campaign, 'Guardian Quest 尚未创建');
   if (!quest.guardianBattleId) return setupFail(campaign, 'Guardian Battle 尚未开始');
@@ -340,7 +346,7 @@ export function setupMammothCystEncounter(
       'official Mammoth Cyst 数据缺失（Battle Card / Spawn Policy / d10 Area Map / Capacity / Victory），正式 Mammoth Cyst 战斗已禁用',
     );
   }
-  const validation = validateMammothCystGuardian(mode);
+  const validation = mode === 'community-reference' ? { isComplete: true, missing: [], issues: [] } : validateMammothCystGuardian(mode);
   if (!validation.isComplete) {
     return setupFail(
       campaign,
@@ -348,10 +354,10 @@ export function setupMammothCystEncounter(
     );
   }
 
-  const guardianDef = getMammothCystGuardianDefinition(mode);
-  const cystDef = getMammothCystActorDefinition(mode);
-  const stalkDef = getWhiteCellStalkActorDefinition(mode);
-  const room = getMammothCystRoomDefinition(mode);
+  const guardianDef = mode === 'community-reference' ? COMMUNITY_MAMMOTH_CYST_GUARDIAN : getMammothCystGuardianDefinition(mode);
+  const cystDef = mode === 'community-reference' ? COMMUNITY_MAMMOTH_CYST : getMammothCystActorDefinition(mode);
+  const stalkDef = mode === 'community-reference' ? COMMUNITY_WHITE_CELL_STALK : getWhiteCellStalkActorDefinition(mode);
+  const room = mode === 'community-reference' ? COMMUNITY_MAMMOTH_CYST_ROOM : getMammothCystRoomDefinition(mode);
 
   const { placements, reason: placementReason } = buildHeroPlacements(campaign, room);
   if (placementReason) return setupFail(campaign, placementReason);

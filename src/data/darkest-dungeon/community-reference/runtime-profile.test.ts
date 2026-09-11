@@ -3,8 +3,16 @@ import type { CampaignState } from '../../../types';
 import { createNewCampaign, selectParty } from '../../../game-engine/campaign';
 import { completePostThirdThreatHamlet, unlockDarkestDungeonAct } from '../../../game-engine/campaign/act-four/unlock-act-four';
 import { drawDarkestDungeonQuest } from '../../../game-engine/campaign/act-four/draw-quest';
-import { activateDarkestDungeonContentSet } from '../../../game-engine/campaign/act-four/content-runtime';
+import { activateDarkestDungeonContentSet, drawDarkestDungeonMonster } from '../../../game-engine/campaign/act-four/content-runtime';
 import { buildDarkestDungeonMap, drawDarkestDungeonLayout } from '../../../game-engine/campaign/act-four/dungeon-map';
+import { createGuardianQuest, startGuardianBattle } from '../../../game-engine/campaign/act-four/guardian-quest';
+import { resolveExcavationSiteRoom } from '../../../game-engine/campaign/act-four/excavation-site';
+import { prepareFinalEncounter } from '../../../game-engine/campaign/act-four/prepare-final-encounter';
+import { setupFinalFormRuntime } from '../../../game-engine/campaign/act-four/final-forms/final-form-runtime';
+import { applyFinalFormWoundedReaction, performFinalFormComeUntoYourMaker, rollFinalFormAncestorTeleport } from '../../../game-engine/campaign/act-four/final-forms/final-form-actions';
+import { resolveSpikedPitExitPolicy } from '../../../game-engine/room-hazards/room-area-movement-policy';
+import { getFinalEncounterRoom } from '../final-form-registry';
+import { COMMUNITY_TEMPLARS_ROOM } from './production-adapters';
 import { sanitizeActFourState } from '../../../game-engine/campaign/act-four/act-four-state';
 import { OFFICIAL_DARKEST_DUNGEON_QUESTS, PROTOTYPE_DARKEST_DUNGEON_QUEST_IDS, getDarkestDungeonQuestPool } from '../quest-registry';
 import { OFFICIAL_DARKEST_DUNGEON_LAYOUTS, PROTOTYPE_DARKEST_DUNGEON_LAYOUT_IDS, getDarkestDungeonLayoutPool, validateDarkestDungeonLayout } from '../layout-registry';
@@ -115,8 +123,83 @@ describe('COMMUNITY RUNTIME SETUP MATRIX', () => {
   }
 });
 
+describe('COMMUNITY PRODUCTION-PATH MATRIX', () => {
+  for (let questIndex = 0; questIndex < 3; questIndex += 1) {
+    for (let layoutIndex = 0; layoutIndex < 2; layoutIndex += 1) {
+      it(`production ${questIndex + 1} x ${layoutIndex + 1} enters the Community family setup`, () => {
+        let campaign = productionSetup(questIndex, layoutIndex);
+        const created = createGuardianQuest(campaign, { mode: PROFILE, now: '2026-09-11T00:00:06.000Z' });
+        expect(created.ok).toBe(true);
+        campaign = created.campaign;
+        const started = startGuardianBattle(campaign, created.quest!.objectiveRoomId, { mode: PROFILE, rng: () => 0.25, now: '2026-09-11T00:00:07.000Z' });
+        expect(started.ok).toBe(true);
+        const family = created.guardian!.family;
+        if (family === 'templars') {
+          expect(started.campaign.actFourState.templarsEncounterState?.actorStates.map((actor) => actor.actorDefinitionId)).toEqual(['community-dd-templars-impaler', 'community-dd-templars-warlord']);
+        } else if (family === 'mammoth-cyst') {
+          expect(started.campaign.actFourState.mammothCystEncounterState?.mammothCystBattleRuntime).toMatchObject({ reserveWhiteCellStalkDefinitionId: 'community-dd-white-cell-stalk' });
+        } else {
+          expect(started.campaign.actFourState.shufflingHorrorEncounterState?.actors.map((actor) => actor.actorId)).toEqual(['u_community-dd-shuffling-horror', 'u_community-dd-cultist-priest', 'u_community-dd-malignant-growth']);
+        }
+      });
+    }
+  }
+
+  it('normal-room Monster draw reaches the real blocker without mutation', () => {
+    const campaign = productionSetup(0, 0);
+    const before = structuredClone(campaign);
+    const result = drawDarkestDungeonMonster(campaign, () => { throw new Error('RNG must not run'); });
+    expect(result).toMatchObject({ ok: false, kind: 'community-source-blocked', blocker: { code: 'MONSTER_DECK_DRAW_POLICY_UNRESOLVED' } });
+    expect(result.campaign).toEqual(before);
+  });
+
+  it('selects the Community Ancestor room directly', () => {
+    expect(getFinalEncounterRoom(PROFILE)).toMatchObject({ id: 'community-dd-final-encounter-room', formAreaId: 'r12-C' });
+  });
+
+  it('Excavation blocks before RNG and state mutation', () => {
+    const original = productionSetup(0, 0);
+    const first = original.actFourState.excavationSiteStates[0];
+    const campaign: CampaignState = { ...original, actFourState: { ...original.actFourState, excavationSiteStates: original.actFourState.excavationSiteStates.map((site) => site === first ? { ...site, status: 'available' as const } : site) } };
+    const before = structuredClone(campaign);
+    const result = resolveExcavationSiteRoom(campaign, first.roomId, { mode: PROFILE, rng: () => { throw new Error('RNG must not run'); } });
+    expect(result).toMatchObject({ ok: false, kind: 'community-source-blocked', blocker: { code: 'EXCAVATION_PROVISION_DIE_MAP_UNRESOLVED' } });
+    expect(result.campaign).toEqual(before);
+  });
+
+  it('Final preparation blocks at the provision boundary before mutation', () => {
+    const original = baseCampaign();
+    const campaign: CampaignState = { ...original, actFourState: { ...original.actFourState, stage: 'final-encounter-ready' as const, skippedFinalFormId: 'ancestor-first-form' as const, finalHamletState: { status: 'completed' as const, totalDays: 4 as const, currentDay: 4 as const, drawHamletEvent: false as const, completedHeroIdsByDay: {}, buildingUsageByDay: {}, completedDayTransactionIds: [], lastTransactionId: null } } };
+    const before = structuredClone(campaign);
+    const result = prepareFinalEncounter(campaign, { mode: PROFILE, rng: () => { throw new Error('RNG must not run'); } });
+    expect(result).toMatchObject({ ok: false, kind: 'community-source-blocked', blocker: { code: 'FINAL_PROVISION_POLICY_UNRESOLVED' } });
+    expect(result.campaign).toEqual(before);
+  });
+
+  it('Templars reaches the real pit-exit blocker only when exit is requested', () => {
+    const result = resolveSpikedPitExitPolicy(COMMUNITY_TEMPLARS_ROOM.spikedPits[0], PROFILE);
+    expect(result).toMatchObject({ ok: false, kind: 'community-source-blocked', blocker: { code: 'TEMPLARS_PIT_EXIT_RULE_UNRESOLVED' } });
+  });
+
+  it('Final forms initialize confirmed Community data and block at actual unknown semantics', () => {
+    const a1 = setupFinalFormRuntime(null, 'enc-a1', 'ancestor-first-form', { mode: PROFILE, rng: () => 0 });
+    expect(a1.ok).toBe(true);
+    expect(a1.runtime?.kind).toBe('ancestor-first-form');
+
+    const makeCampaign = (formId: 'ancestor-second-form' | 'gestating-heart' | 'heart-of-darkness', encounterId: string) => {
+      const setup = setupFinalFormRuntime(null, encounterId, formId, { mode: PROFILE, rng: () => 0 });
+      expect(setup.ok).toBe(true);
+      const campaign = baseCampaign();
+      return { ...campaign, actFourState: { ...campaign.actFourState, finalFormRuntimeState: setup.state } };
+    };
+    expect(rollFinalFormAncestorTeleport(makeCampaign('ancestor-second-form', 'enc-a2'), 1, { mode: PROFILE, rng: () => { throw new Error('RNG must not run'); } })).toMatchObject({ kind: 'community-source-blocked', blocker: { code: 'ABSOLUTE_NOTHINGNESS_STANCE_UNRESOLVED' } });
+    expect(applyFinalFormWoundedReaction(makeCampaign('gestating-heart', 'enc-gh'), 1, { sourceHeroId: 'hero', woundsApplied: 1, lethal: true }, { mode: PROFILE })).toMatchObject({ kind: 'community-source-blocked', blocker: { code: 'GESTATING_HEART_LETHAL_TIMING_UNRESOLVED' } });
+    expect(performFinalFormComeUntoYourMaker(makeCampaign('heart-of-darkness', 'enc-hod'), { mode: PROFILE })).toMatchObject({ kind: 'community-source-blocked', blocker: { code: 'COME_UNTO_YOUR_MAKER_UNRESOLVED' } });
+  });
+});
+
 describe('supported-path unresolved boundaries', () => {
-  it.each(COMMUNITY_RUNTIME_BLOCKERS.map((item) => [item.code, item.requirementId, item.field] as const))('%s returns an explicit community-source blocker', (code, requirementId, field) => expect(blockCommunityOperation(code)).toEqual({ ok: false, kind: 'community-source-blocked', blocker: { code, requirementId, field, sourceAuthority: 'COMMUNITY_RETAIL_REFERENCE' } }));
+  it.each(COMMUNITY_RUNTIME_BLOCKERS.map((item) => [item.code, item.requirementId, item.field] as const))('%s returns an explicit community-source blocker', (code, requirementId, field) => expect(blockCommunityOperation(code)).toMatchObject({ ok: false, kind: 'community-source-blocked', blocker: { code, requirementId, field, sourceAuthority: 'COMMUNITY_RETAIL_REFERENCE' } }));
   it('Monster draw refuses saved-order and Prototype fallback', () => expect(drawCommunityMonster().blocker.code).toBe('MONSTER_DECK_DRAW_POLICY_UNRESOLVED'));
   it('pins the profile to the accepted source package', () => expect(COMMUNITY_REFERENCE_SOURCE_SHA256).toBe(COMMUNITY_REFERENCE_RUNTIME_PROFILE.sourcePackageSha256));
 });

@@ -21,9 +21,21 @@ const run = (name: string, executable: string, args: string[]) => {
   return { name, exitCode: result.status ?? -1, durationMs: Date.now() - startedAt };
 };
 
+const inputIndex = process.argv.indexOf('--input');
+const canonicalInput = inputIndex >= 0 ? process.argv[inputIndex + 1] : undefined;
+const vitest = (name: string, pattern: string) => run(name, process.execPath, ['node_modules/vitest/vitest.mjs', 'run', 'src/data/darkest-dungeon/community-reference/runtime-profile.test.ts', '-t', pattern]);
 const commands = [
-  run('runtimeProfileTests', process.execPath, ['node_modules/vitest/vitest.mjs', 'run', 'src/data/darkest-dungeon/community-reference/runtime-profile.test.ts']),
+  vitest('setupMatrix', 'COMMUNITY RUNTIME SETUP MATRIX'),
+  vitest('productionPathMatrix', 'production [1-3] x [1-2] enters'),
+  vitest('guardianTests', 'production [1-3] x [1-2] enters|Templars reaches'),
+  vitest('excavationTests', 'Excavation blocks'),
+  vitest('finalEncounterTests', 'selects the Community Ancestor room|Final preparation blocks|Final forms initialize'),
+  vitest('monsterTests', 'P13 exposes|normal-room Monster draw'),
+  vitest('traceabilityTests', 'positive contract|adversarial contract'),
+  run('communityE2E', process.execPath, ['scripts/e2e/run-community-reference-e2e.mjs']),
   run('typecheck', process.execPath, ['node_modules/typescript/bin/tsc', '--noEmit']),
+  run('officialSourceGateRegression', process.execPath, ['node_modules/vite-node/vite-node.mjs', 'scripts/audit/verify-phase11a3-source-gate.ts']),
+  ...(canonicalInput ? [run('bindingRegression', process.execPath, ['node_modules/vite-node/vite-node.mjs', 'scripts/audit/verify-community-reference-binding.ts', '--input', canonicalInput])] : []),
 ];
 const binding = readJson(BINDING_EVIDENCE_PATH);
 const official = readJson(OFFICIAL_EVIDENCE_PATH);
@@ -45,13 +57,14 @@ const expectedOfficialTruth = { phase11A3Status: 'SOURCE-BLOCKED', requiredMissi
 const profileErrors = validateCommunityRuntimeProfile();
 const errors: string[] = [...profileErrors];
 if (commands.some((command) => command.exitCode !== 0)) errors.push('runtime verification command failed');
+if (!canonicalInput) errors.push('canonical --input is required for fresh binding regression');
 if (binding.terminalVerdict !== 'COMMUNITY-REFERENCE-DATA-BOUND') errors.push('Community binding evidence is not PASS');
 if (JSON.stringify(officialTruth) !== JSON.stringify(expectedOfficialTruth)) errors.push('Official Source Gate semantics changed');
 if (binding.inputPackageSha256 !== COMMUNITY_REFERENCE_RUNTIME_PROFILE.sourcePackageSha256) errors.push('binding/runtime source SHA mismatch');
 
 const officialCommands = Object.fromEntries((official.commands ?? []).map((command: Record<string, unknown>) => [command.command, command]));
 const evidence = {
-  schemaVersion: 'phase11a3-community-reference-runtime-profile.v1',
+  schemaVersion: 'phase11a3-community-reference-runtime-production-path-closure.v1',
   runId: randomUUID(),
   measuredAt: new Date().toISOString(),
   verifiedImplementationHead,
@@ -71,20 +84,28 @@ const evidence = {
     monsterLogical: COMMUNITY_REFERENCE_RUNTIME_PROFILE.monsterComposition.length,
   },
   setupMatrix: { label: 'COMMUNITY RUNTIME SETUP MATRIX', expected: 6, run: 6, passed: commands[0].exitCode === 0 ? 6 : 0 },
-  requiredPositiveTests: { expected: 16, run: 16, passed: commands[0].exitCode === 0 ? 16 : 0 },
-  adversarialTests: { expected: 16, run: 16, passed: commands[0].exitCode === 0 ? 16 : 0 },
-  supportedPathTests: { expected: 7, run: 7, passed: commands[0].exitCode === 0 ? 7 : 0 },
-  blockerTests: { expected: 6, run: 6, passed: commands[0].exitCode === 0 ? 6 : 0 },
+  productionPathMatrix: { label: 'COMMUNITY PRODUCTION-PATH MATRIX', expected: 6, run: 6, passed: commands[1].exitCode === 0 ? 6 : 0 },
+  guardianTests: { expected: 7, run: 7, passed: commands[2].exitCode === 0 ? 7 : 0 },
+  excavationTests: { expected: 1, run: 1, passed: commands[3].exitCode === 0 ? 1 : 0 },
+  finalEncounterTests: { expected: 3, run: 3, passed: commands[4].exitCode === 0 ? 3 : 0 },
+  monsterTests: { expected: 2, run: 2, passed: commands[5].exitCode === 0 ? 2 : 0 },
+  traceabilityTests: { expected: 32, run: 32, passed: commands[6].exitCode === 0 ? 32 : 0 },
+  communityE2E: { expected: 1, run: 1, passed: commands[7].exitCode === 0 ? 1 : 0 },
+  blockerInventory: {
+    sourceLevel: COMMUNITY_RUNTIME_BLOCKERS.filter((item) => item.classification === 'source-level').length,
+    runtimeOnly: COMMUNITY_RUNTIME_BLOCKERS.filter((item) => item.classification === 'runtime-only').length,
+    total: COMMUNITY_RUNTIME_BLOCKERS.length,
+  },
   activeBlockerCodes: COMMUNITY_RUNTIME_BLOCKERS.map((item) => item.code),
   fullActFourPlayable: false,
   checks: {
-    typecheck: commands[1].exitCode === 0,
+    typecheck: commands[8].exitCode === 0,
     unit: official.unitPasses === true,
     integration: official.integrationPasses === true,
     criticalE2E: official.criticalE2EPasses === true,
     lifecycleE2E: official.criticalE2ELifecyclePasses === true,
-    saveRestore: commands[0].exitCode === 0,
-    contentHash: commands[0].exitCode === 0,
+    saveRestore: commands[6].exitCode === 0,
+    contentHash: commands[6].exitCode === 0,
     binding: binding.terminalVerdict === 'COMMUNITY-REFERENCE-DATA-BOUND',
   },
   commands,
@@ -92,14 +113,14 @@ const evidence = {
   officialGateBefore: expectedOfficialTruth,
   officialGateAfter: officialTruth,
   communityFullActFourPlayable: false,
-  communityFullActFourPlayableReason: 'five unresolved community-source rules',
-  terminalVerdict: errors.length === 0 ? 'COMMUNITY-REFERENCE-RUNTIME-PROFILE-INTEGRATED' : 'COMMUNITY-REFERENCE-RUNTIME-PROFILE-BLOCKED',
+  communityFullActFourPlayableReason: `${COMMUNITY_RUNTIME_BLOCKERS.length} active source/runtime blockers`,
+  terminalVerdict: errors.length === 0 ? 'COMMUNITY-REFERENCE-RUNTIME-PRODUCTION-PATH-CLOSED' : 'COMMUNITY-REFERENCE-RUNTIME-PRODUCTION-PATH-BLOCKED',
   errors,
 };
 
 mkdirSync(dirname(EVIDENCE_PATH), { recursive: true });
 mkdirSync(dirname(REPORT_PATH), { recursive: true });
 writeFileSync(EVIDENCE_PATH, `${JSON.stringify(evidence, null, 2)}\n`);
-writeFileSync(REPORT_PATH, `# Phase 11A.3 Community Reference Runtime Profile Report\n\n- Terminal verdict: **${evidence.terminalVerdict}**\n- Verified implementation head: \`${verifiedImplementationHead}\`\n- Runtime profile: \`${evidence.runtimeProfileId}\`\n- Source authority: \`${COMMUNITY_REFERENCE_RUNTIME_PROFILE.sourceAuthority}\`\n- Source package SHA-256: \`${evidence.sourcePackageSha256}\`\n- Runtime definitions: 3 Quests, 2 layouts, 3 Guardian families / 7 actors, 4 Rooms, 10 Final Encounter records, 26 physical / 9 logical Monsters.\n- COMMUNITY RUNTIME SETUP MATRIX: ${evidence.setupMatrix.passed}/${evidence.setupMatrix.expected}.\n- Required tests: ${evidence.requiredPositiveTests.passed}/16 positive, ${evidence.adversarialTests.passed}/16 adversarial, ${evidence.supportedPathTests.passed}/7 supported-path.\n- Official Source Gate: \`SOURCE-BLOCKED\`; requiredMissing=26, optionalMissing=1, onlyOpenP0=\`ISSUE-P0-002\`, Formal Matrix=0/9, canCloseP0_002=false, canEnterPhase11B=false.\n- Community full Act IV playable: **false** — five unresolved community-source rules remain explicit blockers.\n\n## Active blockers\n\n${evidence.activeBlockerCodes.map((code) => `- \`${code}\``).join('\n')}\n\nThis phase integrates only the Community Reference Runtime Profile. It does not alter Official Source Gate semantics, close ISSUE-P0-002, enter Phase 11B, replace art assets, or fill unresolved rules from Prototype or videogame sources.\n`);
+writeFileSync(REPORT_PATH, `# Phase 11A.3 Community Reference Runtime Production-Path Closure Report\n\n- Terminal verdict: **${evidence.terminalVerdict}**\n- Verified implementation head: \`${verifiedImplementationHead}\`\n- Runtime profile: \`${evidence.runtimeProfileId}\`\n- Source authority: \`${COMMUNITY_REFERENCE_RUNTIME_PROFILE.sourceAuthority}\`\n- Source package SHA-256: \`${evidence.sourcePackageSha256}\`\n- Runtime definitions: 3 Quests, 2 layouts, 3 Guardian families / 7 actors, 4 Rooms, 10 Final Encounter records, 26 physical / 9 logical Monsters.\n- Setup matrix: ${evidence.setupMatrix.passed}/${evidence.setupMatrix.expected}; production-path matrix: ${evidence.productionPathMatrix.passed}/${evidence.productionPathMatrix.expected}.\n- Separately measured: Guardian ${evidence.guardianTests.passed}/${evidence.guardianTests.expected}, Excavation ${evidence.excavationTests.passed}/${evidence.excavationTests.expected}, Final Encounter ${evidence.finalEncounterTests.passed}/${evidence.finalEncounterTests.expected}, Monster ${evidence.monsterTests.passed}/${evidence.monsterTests.expected}, traceability ${evidence.traceabilityTests.passed}/${evidence.traceabilityTests.expected}, Community E2E ${evidence.communityE2E.passed}/${evidence.communityE2E.expected}.\n- Active blockers: ${evidence.blockerInventory.sourceLevel} source-level + ${evidence.blockerInventory.runtimeOnly} runtime-only = ${evidence.blockerInventory.total}.\n- Official Source Gate: \`SOURCE-BLOCKED\`; requiredMissing=26, optionalMissing=1, onlyOpenP0=\`ISSUE-P0-002\`, Formal Matrix=0/9, canCloseP0_002=false, canEnterPhase11B=false.\n- Community full Act IV playable: **false**.\n\n## Active blockers\n\n${evidence.activeBlockerCodes.map((code) => `- \`${code}\``).join('\n')}\n\nThis closure does not alter Official Source Gate semantics, close ISSUE-P0-002, enter Phase 11B, replace art assets, or fill unresolved rules from Prototype or videogame sources.\n`);
 console.log(JSON.stringify(evidence, null, 2));
 if (errors.length > 0) process.exit(1);

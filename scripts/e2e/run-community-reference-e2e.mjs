@@ -1,0 +1,21 @@
+import { spawn } from 'node:child_process';
+import { createConnection } from 'node:net';
+import { setTimeout as delay } from 'node:timers/promises';
+import { resolve } from 'node:path';
+
+const root = process.cwd();
+const port = 5199;
+const portOpen = () => new Promise((done) => { const socket = createConnection({ host: '127.0.0.1', port }); socket.once('connect', () => { socket.destroy(); done(true); }); socket.once('error', () => done(false)); });
+const waitForPort = async (want, timeout) => { const until = Date.now() + timeout; while (Date.now() < until) { if (await portOpen() === want) return true; await delay(100); } return false; };
+const run = (command, args) => new Promise((done, fail) => { const child = spawn(command, args, { cwd: root, env: process.env, stdio: 'inherit', shell: false }); child.once('error', fail); child.once('exit', (code, signal) => done({ code, signal })); });
+if (await portOpen()) throw new Error(`port ${port} is already listening`);
+const vite = spawn(process.execPath, [resolve(root, 'node_modules/vite/bin/vite.js'), '--host', '127.0.0.1', '--port', String(port), '--strictPort'], { cwd: root, env: { ...process.env, VITE_E2E_MODE: '1' }, stdio: 'inherit', shell: false });
+let result;
+try {
+  if (!await waitForPort(true, 30_000)) throw new Error('Vite did not start');
+  result = await run(process.execPath, [resolve(root, 'node_modules/@playwright/test/cli.js'), 'test', '--config=playwright.critical.config.ts', 'e2e/phase11a3-community-reference.spec.ts']);
+} finally {
+  if (vite.exitCode === null) vite.kill('SIGTERM');
+  if (!await waitForPort(false, 15_000) && vite.exitCode === null) vite.kill('SIGKILL');
+}
+if (result?.code !== 0 || result?.signal) process.exitCode = 1;

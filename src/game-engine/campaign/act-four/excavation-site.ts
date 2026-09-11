@@ -36,6 +36,10 @@ import { pushLog } from '../../log';
 import type { ActFourContentMode } from './draw-quest';
 import { actFourTransactionIds, hasProcessedActFourTransaction, withProcessedActFourTransaction } from './act-four-state';
 import { rollProvisionDie } from './rng';
+import {
+  blockCommunityOperation,
+  type CommunityRuntimeBlocker,
+} from '../../../data/darkest-dungeon/community-reference/runtime-profile';
 
 // ---------------------------------------------------------------------------
 // 步骤 1—8：进入 Room → 掷 Provision Dice → 开启免费 Rest
@@ -57,6 +61,8 @@ export interface ResolveExcavationResult {
   gained: Partial<ProvisionPool>;
   alreadyResolved: boolean;
   reason: string | null;
+  kind?: 'community-source-blocked';
+  blocker?: CommunityRuntimeBlocker;
 }
 
 /**
@@ -97,11 +103,16 @@ export function resolveExcavationSiteRoom(
   if (site.status === 'cleared') return excFail(campaign, `Room ${roomId} 已清除`);
   if (site.status === 'unrevealed') return excFail(campaign, `Room ${roomId} 尚未揭示`);
 
+  if (mode === 'community-reference') {
+    const blocked = blockCommunityOperation('EXCAVATION_PROVISION_DIE_MAP_UNRESOLVED');
+    return { ...excFail(campaign, blocked.blocker.code), ...blocked };
+  }
+
   // ---- Data Gate：正式骰面映射缺失时 formal 模式拒绝（硬约束 19）----
   if (mode === 'formal' && !isProvisionDieMapEnabled()) {
     return excFail(campaign, 'Provision Die 骰面映射缺失，正式 Excavation 结算已禁用');
   }
-  const faceMap = getProvisionDieFaceMap(mode === 'prototype' ? 'prototype' : 'formal');
+  const faceMap = getProvisionDieFaceMap(mode);
 
   // ---- 步骤 3：每名「当前」Party Hero 掷 1 个 ----
   // dead / removed Hero 不掷（§12 Provision Dice）。

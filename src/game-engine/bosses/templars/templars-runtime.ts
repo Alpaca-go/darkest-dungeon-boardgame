@@ -15,7 +15,7 @@
 // - RNG 一律注入（禁止 Math.random）。
 
 import type { BattleState, BattleUnit, CampaignState } from '../../../types';
-import type { DataMode } from '../../../types/progression';
+import type { ActFourRuntimeProfileId } from '../../../types/act-four';
 import type {
   D10Roll,
   TemplarActorDefinition,
@@ -30,6 +30,13 @@ import type {
   TemplarsRoomDefinition,
 } from '../../../types/templars';
 import type { TemplarRole } from '../../../types/dual-boss';
+import {
+  COMMUNITY_TEMPLAR_IMPALER,
+  COMMUNITY_TEMPLAR_WARLORD,
+  COMMUNITY_TEMPLARS_ENCOUNTER,
+  COMMUNITY_TEMPLARS_ROOM,
+  COMMUNITY_TEMPLARS_VICTORY,
+} from '../../../data/darkest-dungeon/community-reference/production-adapters';
 import {
   buildTemplarsDataAudit,
   getTemplarImpalerDefinition,
@@ -276,7 +283,7 @@ export function buildTemplarsBattle(
 // ---------------------------------------------------------------------------
 
 export interface SetupTemplarsEncounterOptions {
-  mode?: DataMode;
+  mode?: ActFourRuntimeProfileId;
   rng?: () => number;
   seed?: number;
   now?: string;
@@ -304,7 +311,7 @@ export function setupTemplarsEncounter(
 ): SetupTemplarsEncounterResult {
   const actFour = campaign.actFourState;
   const quest = actFour.guardianQuestState;
-  const mode: DataMode = options?.mode ?? 'prototype';
+  const mode: ActFourRuntimeProfileId = options?.mode ?? 'prototype';
 
   if (!quest) return setupFail(campaign, 'Guardian Quest 尚未创建');
   if (!quest.guardianBattleId) return setupFail(campaign, 'Guardian Battle 尚未开始');
@@ -327,7 +334,7 @@ export function setupTemplarsEncounter(
       'official Templars 数据缺失（Boss Card / Room Map / Pit Effect / Victory Rule），正式 Templars 战斗已禁用',
     );
   }
-  const validation = validateTemplarsGuardian(mode);
+  const validation = mode === 'community-reference' ? { isComplete: true, missing: [], issues: [] } : validateTemplarsGuardian(mode);
   if (!validation.isComplete) {
     return setupFail(
       campaign,
@@ -335,11 +342,11 @@ export function setupTemplarsEncounter(
     );
   }
 
-  const encounterDef = getTemplarsGuardianDefinition(mode);
-  const impalerDef = getTemplarImpalerDefinition(mode);
-  const warlordDef = getTemplarWarlordDefinition(mode);
-  const room = getTemplarsRoomDefinition(mode);
-  const victoryRule = getTemplarsVictoryRule(mode);
+  const encounterDef = mode === 'community-reference' ? COMMUNITY_TEMPLARS_ENCOUNTER : getTemplarsGuardianDefinition(mode);
+  const impalerDef = mode === 'community-reference' ? COMMUNITY_TEMPLAR_IMPALER : getTemplarImpalerDefinition(mode);
+  const warlordDef = mode === 'community-reference' ? COMMUNITY_TEMPLAR_WARLORD : getTemplarWarlordDefinition(mode);
+  const room = mode === 'community-reference' ? COMMUNITY_TEMPLARS_ROOM : getTemplarsRoomDefinition(mode);
+  const victoryRule = mode === 'community-reference' ? COMMUNITY_TEMPLARS_VICTORY : getTemplarsVictoryRule(mode);
 
   const impalerMember = encounterDef.bossMembers.find((m) => m.role === 'impaler');
   const warlordMember = encounterDef.bossMembers.find((m) => m.role === 'warlord');

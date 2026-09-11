@@ -58,6 +58,7 @@ import {
   consumeImpendingDoomForecast,
   generateNextImpendingDoomForecast,
 } from './heart-of-darkness';
+import { blockCommunityOperation, type CommunityRuntimeBlocker } from '../../../../data/darkest-dungeon/community-reference/runtime-profile';
 
 // ---------------------------------------------------------------------------
 // 公共入参 / 内部 helper
@@ -325,6 +326,8 @@ export interface AncestorTeleportActionResult {
   record: AncestorTeleportRecord | null;
   alreadyProcessed: boolean;
   reason: string | null;
+  kind?: 'community-source-blocked';
+  blocker?: CommunityRuntimeBlocker;
 }
 
 /** Ancestor Action 结束后的 d10 传送（硬约束 13 / 14 / 25）。 */
@@ -341,6 +344,10 @@ export function rollFinalFormAncestorTeleport(
   );
   if (!ctx.ok || !ctx.state || !ctx.runtime) {
     return { ok: false, campaign, record: null, alreadyProcessed: false, reason: ctx.reason };
+  }
+  if (ctx.mode === 'community-reference') {
+    const blocked = blockCommunityOperation('ABSOLUTE_NOTHINGNESS_STANCE_UNRESOLVED');
+    return { campaign, record: null, alreadyProcessed: false, reason: blocked.blocker.code, ...blocked };
   }
 
   const encounterId = ctx.state.encounterId;
@@ -481,6 +488,8 @@ export interface WoundedReactionActionResult {
   } | null;
   alreadyProcessed: boolean;
   reason: string | null;
+  kind?: 'community-source-blocked';
+  blocker?: CommunityRuntimeBlocker;
 }
 
 /** Gestating Reaction（硬约束 17：仅在实际造成 Wounds 时触发）。 */
@@ -501,6 +510,10 @@ export function applyFinalFormWoundedReaction(
       alreadyProcessed: false,
       reason: ctx.reason,
     };
+  }
+  if (ctx.mode === 'community-reference' && input.lethal) {
+    const blocked = blockCommunityOperation('GESTATING_HEART_LETHAL_TIMING_UNRESOLVED');
+    return { campaign, triggered: false, record: null, effect: null, alreadyProcessed: false, reason: blocked.blocker.code, ...blocked };
   }
 
   const encounterId = ctx.state.encounterId;
@@ -688,4 +701,17 @@ export function generateFinalFormImpendingDoom(
     alreadyProcessed: result.alreadyProcessed,
     reason: result.reason,
   };
+}
+
+/** Real Heart-of-Darkness boundary for the unresolved Come Unto Your Maker rule. */
+export function performFinalFormComeUntoYourMaker(
+  campaign: CampaignState,
+  options?: FinalFormActionOptions,
+): { ok: false; campaign: CampaignState; reason: string; kind?: 'community-source-blocked'; blocker?: CommunityRuntimeBlocker } {
+  const ctx = resolveContext<HeartOfDarknessRuntime>(campaign, 'heart-of-darkness', options, 0x10e08);
+  if (ctx.mode === 'community-reference') {
+    const blocked = blockCommunityOperation('COME_UNTO_YOUR_MAKER_UNRESOLVED');
+    return { campaign, reason: blocked.blocker.code, ...blocked };
+  }
+  return { ok: false, campaign, reason: ctx.reason ?? 'Come Unto Your Maker is unavailable' };
 }

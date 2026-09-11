@@ -1,6 +1,30 @@
 import { useGameStore } from '../../store/useGameStore';
 import { getActiveUnit, legalTargetsForActor, heroSkillActionError } from '../../game-engine/battle';
 import { getReplacementCandidates } from '../../game-engine/stagecoach';
+import { createNewCampaign, selectParty } from '../../game-engine/campaign';
+import { completePostThirdThreatHamlet, unlockDarkestDungeonAct } from '../../game-engine/campaign/act-four/unlock-act-four';
+import { drawDarkestDungeonQuest } from '../../game-engine/campaign/act-four/draw-quest';
+import { activateDarkestDungeonContentSet } from '../../game-engine/campaign/act-four/content-runtime';
+import { buildDarkestDungeonMap, drawDarkestDungeonLayout } from '../../game-engine/campaign/act-four/dungeon-map';
+import { createGuardianQuest, startGuardianBattle } from '../../game-engine/campaign/act-four/guardian-quest';
+import type { CampaignState } from '../../types';
+
+export function runCommunityReferenceSetup(): CampaignState {
+  if (import.meta.env.VITE_E2E_MODE !== '1') throw new Error('E2E mode required');
+  let campaign = selectParty(createNewCampaign(), ['crusader', 'vestal', 'highwayman', 'hellion']);
+  campaign = { ...campaign, campaignProgress: { ...campaign.campaignProgress, defeatedBossFamilyIds: ['necromancer', 'prophet', 'collector'] } };
+  campaign = unlockDarkestDungeonAct(campaign, { now: '2026-09-11T00:00:00.000Z' }).campaign;
+  campaign = completePostThirdThreatHamlet(campaign, { now: '2026-09-11T00:00:01.000Z' }).campaign;
+  campaign = drawDarkestDungeonQuest(campaign, { mode: 'community-reference', rng: () => 0, now: '2026-09-11T00:00:02.000Z' }).campaign;
+  campaign = activateDarkestDungeonContentSet(campaign, { mode: 'community-reference', now: '2026-09-11T00:00:03.000Z' }).campaign;
+  campaign = drawDarkestDungeonLayout(campaign, { mode: 'community-reference', rng: () => 0, now: '2026-09-11T00:00:04.000Z' }).campaign;
+  campaign = buildDarkestDungeonMap(campaign, { mode: 'community-reference', rng: () => 0.25, now: '2026-09-11T00:00:05.000Z' }).campaign;
+  const created = createGuardianQuest(campaign, { mode: 'community-reference', now: '2026-09-11T00:00:06.000Z' });
+  const started = startGuardianBattle(created.campaign, created.quest!.objectiveRoomId, { mode: 'community-reference', rng: () => 0.25, now: '2026-09-11T00:00:07.000Z' });
+  if (!started.ok) throw new Error(started.reason ?? 'Community Guardian setup failed');
+  return started.campaign;
+}
+
 
 /** Player decisions only: every write is a public product action. */
 export function playNextLegalAction(): void {
@@ -70,3 +94,5 @@ export function playUntil(target: 'quest-result' | 'quest-select'): void {
   }
   throw new Error('Player step limit exceeded');
 }
+
+// E2E harness exports only production-command orchestration helpers.

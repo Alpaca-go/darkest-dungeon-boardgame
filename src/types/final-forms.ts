@@ -275,7 +275,7 @@ export interface FinalFormRuntimeState {
   runtimes: Partial<Record<FinalFormId, FinalFormRuntime>>;
 
   /** 内容模式（prototype harness / formal）。 */
-  contentMode: 'formal' | 'prototype';
+  contentMode: 'formal' | 'prototype' | 'community-reference';
   /** 生成时的数据可信度快照。 */
   dataStatus: FinalFormDataStatus;
 

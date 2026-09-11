@@ -17,7 +17,7 @@ import type {
 } from '../../types/final-encounter';
 import type { RegistryValidationIssue } from '../../types/progression';
 import type { ActFourRuntimeProfileId } from '../../types/act-four';
-import { COMMUNITY_RUNTIME_FINAL_FORMS } from './community-reference/runtime-profile';
+import { COMMUNITY_RUNTIME_FINAL_FORMS, communityRequirement } from './community-reference/runtime-profile';
 
 // ---------------------------------------------------------------------------
 // §18 固定顺序
@@ -147,6 +147,18 @@ export const PROTOTYPE_FINAL_ENCOUNTER_ROOM: FinalEncounterRoomDefinition = {
   officialDataStatus: 'prototype',
 };
 
+const communityAncestorRoom = communityRequirement('tierB-ancestor-room');
+const communityAncestorPlacement = communityAncestorRoom.fields.formAreaPlacement.value as { ancestorFirstForm: string };
+export const COMMUNITY_FINAL_ENCOUNTER_ROOM: FinalEncounterRoomDefinition = {
+  id: 'community-dd-final-encounter-room',
+  name: 'Community Ancestor Room',
+  heroPlacementRule: 'first-empty-stance',
+  formAreaId: communityAncestorPlacement.ancestorFirstForm.split(' ')[0],
+  validAreaIds: [...(communityAncestorRoom.fields.areaIds.value as string[])],
+  officialDataStatus: 'partial',
+  sourceReference: communityAncestorRoom.fields.formAreaPlacement.sourceReference.join(','),
+};
+
 // ---------------------------------------------------------------------------
 // §20 跨 Form 状态策略（集中定义，不散落 if）
 // ---------------------------------------------------------------------------
@@ -187,9 +199,9 @@ export function getFinalFormDefinition(
 }
 
 export function getFinalEncounterRoom(
-  mode: 'formal' | 'prototype' = 'prototype',
+  mode: ActFourRuntimeProfileId = 'prototype',
 ): FinalEncounterRoomDefinition {
-  return mode === 'formal' ? OFFICIAL_FINAL_ENCOUNTER_ROOM : PROTOTYPE_FINAL_ENCOUNTER_ROOM;
+  return mode === 'formal' ? OFFICIAL_FINAL_ENCOUNTER_ROOM : mode === 'community-reference' ? COMMUNITY_FINAL_ENCOUNTER_ROOM : PROTOTYPE_FINAL_ENCOUNTER_ROOM;
 }
 
 /** 类型守卫：给定值是否为合法的可跳过 Form。 */

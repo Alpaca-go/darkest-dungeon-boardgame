@@ -150,7 +150,7 @@ export interface ShufflingHorrorSnapshot {
 export interface ShufflingHorrorEncounterState {
   family: 'shuffling-horror';
   guardianBattleId: string;
-  mode: 'prototype' | 'formal';
+  mode: 'prototype' | 'formal' | 'community-reference';
   round: number;
 
   actors: ShufflingHorrorActorState[];

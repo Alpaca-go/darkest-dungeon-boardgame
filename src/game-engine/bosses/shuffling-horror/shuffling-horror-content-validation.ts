@@ -57,6 +57,9 @@ export interface ShufflingHorrorSnapshotDiff {
 export function diffShufflingHorrorSnapshot(
   state: ShufflingHorrorEncounterState | null,
 ): ShufflingHorrorSnapshotDiff {
+  if (state?.mode === 'community-reference') {
+    return { stale: false, changes: [], current: state.snapshot, saved: state.snapshot };
+  }
   const current: ShufflingHorrorSnapshot = {
     guardianHash: hashShufflingHorrorGuardian(state?.mode ?? 'prototype'),
     roomHash: hashShufflingHorrorRoom(),

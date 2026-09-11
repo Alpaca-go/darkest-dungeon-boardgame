@@ -34,6 +34,7 @@ import {
   hasProcessedActFourTransaction,
   withProcessedActFourTransaction,
 } from './act-four-state';
+import { blockCommunityOperation, type CommunityRuntimeBlocker } from '../../../data/darkest-dungeon/community-reference/runtime-profile';
 
 export interface ActivateContentSetOptions {
   mode?: ActFourContentMode;
@@ -147,6 +148,32 @@ export function isDarkestDungeonContentActive(state: ActFourState): boolean {
 /** 当前 Monster 池（未激活时返回空数组，调用方回落到既有 Location 逻辑）。 */
 export function getActiveMonsterPool(state: ActFourState): string[] {
   return state.contentRuntime?.monsterDefinitionIds ?? [];
+}
+
+export interface DrawDarkestDungeonMonsterResult {
+  ok: boolean;
+  campaign: CampaignState;
+  monsterDefinitionId: string | null;
+  reason: string | null;
+  kind?: 'community-source-blocked';
+  blocker?: CommunityRuntimeBlocker;
+}
+
+/** Normal-room production draw seam. Community composition is known, ordering is not. */
+export function drawDarkestDungeonMonster(
+  campaign: CampaignState,
+  rng: () => number,
+): DrawDarkestDungeonMonsterResult {
+  const runtime = campaign.actFourState.contentRuntime;
+  if (!runtime) return { ok: false, campaign, monsterDefinitionId: null, reason: 'Darkest Dungeon content is not active' };
+  if (runtime.runtimeProfileId === 'community-reference') {
+    const blocked = blockCommunityOperation('MONSTER_DECK_DRAW_POLICY_UNRESOLVED');
+    return { campaign, monsterDefinitionId: null, reason: blocked.blocker.code, ...blocked };
+  }
+  const pool = runtime.monsterDefinitionIds;
+  if (pool.length === 0) return { ok: false, campaign, monsterDefinitionId: null, reason: 'Monster Deck 为空' };
+  const index = Math.min(pool.length - 1, Math.max(0, Math.floor(rng() * pool.length)));
+  return { ok: true, campaign, monsterDefinitionId: pool[index], reason: null };
 }
 
 /** 规则 7：Darkest Dungeon 内所有 Monster 的等级恒为 III。 */

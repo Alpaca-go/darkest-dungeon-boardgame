@@ -16,6 +16,7 @@ import type {
 } from '../../../types/final-forms';
 import type { FinalFormId } from '../../../types/final-encounter';
 import type { RegistryValidationIssue } from '../../../types/progression';
+import { communityRequirement, COMMUNITY_RUNTIME_MONSTER_COMPOSITION } from '../community-reference/runtime-profile';
 
 import {
   OFFICIAL_ANCESTOR_FIRST_FORM_MECHANICS,
@@ -51,7 +52,21 @@ export * from './gestating-heart';
 export * from './heart-of-darkness';
 export * from './ancestor-room';
 
-export type FinalMechanicsMode = 'formal' | 'prototype';
+export type FinalMechanicsMode = 'formal' | 'prototype' | 'community-reference';
+
+const communityValue = <T>(requirementId: string, field: string): T => communityRequirement(requirementId).fields[field].value as T;
+const communityRef = (requirementId: string, field: string): string => communityRequirement(requirementId).fields[field].sourceReference.join(',');
+const communitySkillIds = (requirementId: string, field: string) => (communityValue<Array<{ sourceLocalSkillId: string }>>(requirementId, field) ?? []).map((skill) => `community-dd-skill-${skill.sourceLocalSkillId}`);
+const ancestorAreas = communityValue<string[]>('tierB-ancestor-room', 'areaIds');
+const ancestorCapacities = communityValue<Record<string, number>>('tierB-ancestor-room', 'areaCapacities');
+const nothingnessAreas = communityValue<Record<'defensive' | 'ranged' | 'support', string>>('tierB-ancestor-second-form', 'absoluteNothingness.areaIds');
+const COMMUNITY_ANCESTOR_ROOM: AncestorRoomAreaDefinition = { id: 'community-dd-ancestor-room', stanceAreaMap: { aggressive: 'r12-C', ...nothingnessAreas }, validAreaIds: ancestorAreas, areaCapacities: ancestorCapacities, officialDataStatus: 'partial', sourceReference: communityRef('tierB-ancestor-room', 'formAreaPlacement') };
+const COMMUNITY_ANCESTOR_FIRST: AncestorFirstFormMechanics = { ...OFFICIAL_ANCESTOR_FIRST_FORM_MECHANICS, id: 'community-dd-ancestor-first-form-mechanics', fullStanceSkillId: 'community-dd-skill-time-heals-all', fullStanceSkillDefined: true, vacantStanceResolverId: 'community-dd-ancestor-reflection-table', reflectionCards: [{ kind: 'perfect', maxWounds: communityValue('tierB-ancestor-first-form', 'perfectReflection.maxHp'), skillIds: communitySkillIds('tierB-ancestor-first-form', 'perfectReflection.skillIds') }, { kind: 'imperfect', maxWounds: communityValue('tierB-ancestor-first-form', 'imperfectReflection.maxHp'), skillIds: communitySkillIds('tierB-ancestor-first-form', 'imperfectReflection.skillIds') }], officialDataStatus: 'partial', sourceReference: communityRef('tierB-ancestor-first-form', 'vacantStanceFillSource'), enabledInOfficialPool: false };
+const COMMUNITY_ANCESTOR_SECOND: AncestorSecondFormMechanics = { ...OFFICIAL_ANCESTOR_SECOND_FORM_MECHANICS, id: 'community-dd-ancestor-second-form-mechanics', absoluteNothingness: (['defensive', 'ranged', 'support'] as const).map((linkedStance) => ({ linkedStance, areaId: nothingnessAreas[linkedStance] })), officialDataStatus: 'partial', sourceReference: communityRef('tierB-ancestor-second-form', 'absoluteNothingness.areaIds'), enabledInOfficialPool: false };
+const COMMUNITY_GESTATING_HEART: GestatingHeartMechanics = { ...OFFICIAL_GESTATING_HEART_MECHANICS, id: 'community-dd-gestating-heart-mechanics', monsterDeckId: 'community-dd-monster-deck', monsterDefinitionIds: COMMUNITY_RUNTIME_MONSTER_COMPOSITION.map((monster) => monster.id), officialDataStatus: 'partial', sourceReference: communityRef('tierB-gestating-heart', 'skillIds'), enabledInOfficialPool: false };
+const heartSkills = communityValue<Array<{ sourceLocalSkillId: string; printedName: string }>>('tierB-heart-of-darkness', 'skillIds');
+const heartSkillId = (name: string) => `community-dd-skill-${heartSkills.find((skill) => skill.printedName === name)?.sourceLocalSkillId ?? ''}`;
+const COMMUNITY_HEART_OF_DARKNESS: HeartOfDarknessMechanics = { ...OFFICIAL_HEART_OF_DARKNESS_MECHANICS, id: 'community-dd-heart-of-darkness-mechanics', impendingDoom: { ...OFFICIAL_HEART_OF_DARKNESS_MECHANICS.impendingDoom, d10SkillMap: { 1: heartSkillId('Know This'), 2: heartSkillId('Know This'), 3: heartSkillId('Know This'), 4: heartSkillId('Know This'), 5: heartSkillId('Puncture'), 6: heartSkillId('Puncture'), 7: heartSkillId('Puncture'), 8: heartSkillId('Dissolution'), 9: heartSkillId('Dissolution'), 10: heartSkillId('Dissolution') } }, skillIds: heartSkills.map((skill) => `community-dd-skill-${skill.sourceLocalSkillId}`), comeUntoYourMakerEnabled: false, officialDataStatus: 'partial', sourceReference: communityRef('tierB-heart-of-darkness', 'impendingDoomD10SkillMap'), enabledInOfficialPool: false };
 
 // ---------------------------------------------------------------------------
 // 取数
@@ -62,7 +77,7 @@ export function getAncestorFirstFormMechanics(
 ): AncestorFirstFormMechanics {
   return mode === 'formal'
     ? OFFICIAL_ANCESTOR_FIRST_FORM_MECHANICS
-    : PROTOTYPE_ANCESTOR_FIRST_FORM_MECHANICS;
+    : mode === 'community-reference' ? COMMUNITY_ANCESTOR_FIRST : PROTOTYPE_ANCESTOR_FIRST_FORM_MECHANICS;
 }
 
 export function getAncestorSecondFormMechanics(
@@ -70,13 +85,13 @@ export function getAncestorSecondFormMechanics(
 ): AncestorSecondFormMechanics {
   return mode === 'formal'
     ? OFFICIAL_ANCESTOR_SECOND_FORM_MECHANICS
-    : PROTOTYPE_ANCESTOR_SECOND_FORM_MECHANICS;
+    : mode === 'community-reference' ? COMMUNITY_ANCESTOR_SECOND : PROTOTYPE_ANCESTOR_SECOND_FORM_MECHANICS;
 }
 
 export function getGestatingHeartMechanics(
   mode: FinalMechanicsMode = 'prototype',
 ): GestatingHeartMechanics {
-  return mode === 'formal' ? OFFICIAL_GESTATING_HEART_MECHANICS : PROTOTYPE_GESTATING_HEART_MECHANICS;
+  return mode === 'formal' ? OFFICIAL_GESTATING_HEART_MECHANICS : mode === 'community-reference' ? COMMUNITY_GESTATING_HEART : PROTOTYPE_GESTATING_HEART_MECHANICS;
 }
 
 export function getHeartOfDarknessMechanics(
@@ -84,7 +99,7 @@ export function getHeartOfDarknessMechanics(
 ): HeartOfDarknessMechanics {
   return mode === 'formal'
     ? OFFICIAL_HEART_OF_DARKNESS_MECHANICS
-    : PROTOTYPE_HEART_OF_DARKNESS_MECHANICS;
+    : mode === 'community-reference' ? COMMUNITY_HEART_OF_DARKNESS : PROTOTYPE_HEART_OF_DARKNESS_MECHANICS;
 }
 
 /** 按 Form ID 取机制定义（四个 Form 的统一入口）。 */
@@ -134,7 +149,7 @@ export function validateFinalFormMechanics(
 export function getAncestorRoomAreaDefinition(
   mode: FinalMechanicsMode = 'prototype',
 ): AncestorRoomAreaDefinition {
-  return getAncestorRoomAreas(mode);
+  return mode === 'community-reference' ? COMMUNITY_ANCESTOR_ROOM : getAncestorRoomAreas(mode);
 }
 
 /**

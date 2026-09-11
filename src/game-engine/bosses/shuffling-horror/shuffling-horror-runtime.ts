@@ -36,6 +36,11 @@ import {
 } from '../../../data/darkest-dungeon/shuffling-horror/registry';
 import { SHUFFLING_HORROR_STANCE_PRIORITY } from '../../../data/darkest-dungeon/shuffling-horror/ids';
 import { PROTOTYPE_SHUFFLING_HORROR_AREA_MAP } from '../../../data/darkest-dungeon/shuffling-horror/ids';
+import {
+  COMMUNITY_SHUFFLING_ACTORS,
+  COMMUNITY_SHUFFLING_ROOM,
+  type CommunityShufflingActorSpec,
+} from '../../../data/darkest-dungeon/community-reference/production-adapters';
 import { makeHeroUnit } from '../../battle';
 import { pushLog } from '../../log';
 import { nowIso } from '../../random';
@@ -90,7 +95,7 @@ export function withProcessedShufflingHorrorTransaction(
 // ---------------------------------------------------------------------------
 
 export interface SetupShufflingHorrorEncounterOptions {
-  mode?: 'formal' | 'prototype';
+  mode?: 'formal' | 'prototype' | 'community-reference';
   rng?: () => number;
   seed?: number;
   now?: string;
@@ -108,8 +113,12 @@ export interface SetupShufflingHorrorEncounterResult {
 export function buildShufflingHorrorActorState(
   role: ShufflingHorrorRole,
   generation: number,
+  mode: 'formal' | 'prototype' | 'community-reference' = 'prototype',
 ): ShufflingHorrorActorState {
-  const spec = getShufflingHorrorActorSpec(role);
+  const spec = (mode === 'community-reference'
+    ? COMMUNITY_SHUFFLING_ACTORS.find((actor) => actor.role === role)
+    : getShufflingHorrorActorSpec(role)) as CommunityShufflingActorSpec;
+  if (!spec) throw new Error(`未定义的 Community Shuffling Horror 角色：${role}`);
   const inReserve = spec.startsInReserve;
   return {
     actorId: `u_${spec.actorDefinitionId}`,
@@ -118,7 +127,9 @@ export function buildShufflingHorrorActorState(
     alive: true,
     generation,
     stances: inReserve ? [] : [spec.requiredStance as MonsterStance],
-    areaId: inReserve ? null : PROTOTYPE_SHUFFLING_HORROR_AREA_MAP[spec.requiredStance as MonsterStance],
+    areaId: inReserve ? null : mode === 'community-reference'
+      ? COMMUNITY_SHUFFLING_ROOM.areaIds.find((areaId) => areaId === 'r10-S') ?? null
+      : PROTOTYPE_SHUFFLING_HORROR_AREA_MAP[spec.requiredStance as MonsterStance],
     inReserve,
     actionBudgetUsedThisRound: 0,
     actionBudgetMaxThisRound: spec.actionsPerRound,
@@ -126,8 +137,11 @@ export function buildShufflingHorrorActorState(
 }
 
 /** 构建 Horror 的战斗单位（进入 BattleState.monsters）。 */
-export function buildShufflingHorrorBattleUnit(): BattleUnit {
-  const spec = getShufflingHorrorActorSpec('horror');
+export function buildShufflingHorrorBattleUnit(mode: 'formal' | 'prototype' | 'community-reference' = 'prototype'): BattleUnit {
+  const spec = (mode === 'community-reference'
+    ? COMMUNITY_SHUFFLING_ACTORS.find((actor) => actor.role === 'horror')
+    : getShufflingHorrorActorSpec('horror')) as CommunityShufflingActorSpec;
+  if (!spec) throw new Error('未定义 Community Shuffling Horror');
   const id = `u_${spec.actorDefinitionId}`;
   return {
     id,
@@ -138,7 +152,7 @@ export function buildShufflingHorrorBattleUnit(): BattleUnit {
     hp: spec.maxHp,
     stress: 0,
     position: SHUFFLING_HORROR_BATTLE_POSITION,
-    speed: 4,
+    speed: 'speed' in spec ? spec.speed : 4,
     stance: 'aggressive',
     isAlive: spec.maxHp > 0,
     atDeathsDoor: false,
@@ -150,7 +164,7 @@ export function buildShufflingHorrorBattleUnit(): BattleUnit {
     buffs: [],
     debuffs: [],
     actionPoints: 0,
-    monsterSkillIds: [],
+    monsterSkillIds: 'skillIds' in spec ? [...spec.skillIds] : [],
     resolveTestedThisQuest: false,
     resolveState: 'normal',
     virtueId: null,
@@ -164,8 +178,12 @@ export function buildShufflingHorrorBattleUnit(): BattleUnit {
 // ---------------------------------------------------------------------------
 
 export function buildShufflingHorrorSnapshot(
-  mode: 'formal' | 'prototype' = 'prototype',
+  mode: 'formal' | 'prototype' | 'community-reference' = 'prototype',
 ): ShufflingHorrorSnapshot {
+  if (mode === 'community-reference') {
+    const stable = (value: unknown) => JSON.stringify(value);
+    return { guardianHash: stable('community-shuffling-horror'), roomHash: stable(COMMUNITY_SHUFFLING_ROOM), actorsHash: stable(COMMUNITY_SHUFFLING_ACTORS), initiativePolicyHash: hashShufflingHorrorInitiativePolicy(), undulationsHash: hashShufflingHorrorUndulations() };
+  }
   return {
     guardianHash: hashShufflingHorrorGuardian(mode),
     roomHash: hashShufflingHorrorRoom(),
@@ -194,7 +212,7 @@ export function setupShufflingHorrorEncounter(
 ): SetupShufflingHorrorEncounterResult {
   const actFour = campaign.actFourState;
   const quest = actFour.guardianQuestState;
-  const mode: 'formal' | 'prototype' = options?.mode ?? 'prototype';
+  const mode: 'formal' | 'prototype' | 'community-reference' = options?.mode ?? 'prototype';
 
   if (!quest) return setupFail(campaign, 'Guardian Quest 尚未创建');
   if (!quest.guardianBattleId) return setupFail(campaign, 'Guardian Battle 尚未开始');
@@ -225,12 +243,13 @@ export function setupShufflingHorrorEncounter(
   const now = options?.now ?? nowIso();
   const rng = options?.rng ?? createSeededRng(options?.seed ?? 0x10d5f);
   const battleId = quest.guardianBattleId;
-  const transactionId = shufflingHorrorTransactionIds.roomSetup(quest.id, PROTOTYPE_SHUFFLING_HORROR_ROOM_ID);
+  const roomId = mode === 'community-reference' ? COMMUNITY_SHUFFLING_ROOM.id : PROTOTYPE_SHUFFLING_HORROR_ROOM_ID;
+  const transactionId = shufflingHorrorTransactionIds.roomSetup(quest.id, roomId);
 
   // ---- 创建 Horror（Aggressive），Priest/Growth 在 Reserve ----
-  const horror = buildShufflingHorrorActorState('horror', 1);
-  const priest = buildShufflingHorrorActorState('cultist-priest', 1);
-  const growth = buildShufflingHorrorActorState('malignant-growth', 1);
+  const horror = buildShufflingHorrorActorState('horror', 1, mode);
+  const priest = buildShufflingHorrorActorState('cultist-priest', 1, mode);
+  const growth = buildShufflingHorrorActorState('malignant-growth', 1, mode);
   const actors = [horror, priest, growth];
 
   // ---- Stance Priority Tracker：初始仅 Aggressive 被 Horror 占据 ----
@@ -266,9 +285,11 @@ export function setupShufflingHorrorEncounter(
   const heroStanceAssignments = aliveHeroes.map((h, i) => ({
     heroId: h.instanceId,
     stance: SHUFFLING_HORROR_STANCE_PRIORITY[i % SHUFFLING_HORROR_STANCE_PRIORITY.length],
-    areaId: PROTOTYPE_SHUFFLING_HORROR_AREA_MAP[
-      SHUFFLING_HORROR_STANCE_PRIORITY[i % SHUFFLING_HORROR_STANCE_PRIORITY.length]
-    ],
+    areaId: mode === 'community-reference'
+      ? COMMUNITY_SHUFFLING_ROOM.areaIds[i % COMMUNITY_SHUFFLING_ROOM.areaIds.length]
+      : PROTOTYPE_SHUFFLING_HORROR_AREA_MAP[
+          SHUFFLING_HORROR_STANCE_PRIORITY[i % SHUFFLING_HORROR_STANCE_PRIORITY.length]
+        ],
     hasActedThisRound: false,
   }));
   const heroBudget: HeroRoundActionBudget = {
@@ -299,7 +320,7 @@ export function setupShufflingHorrorEncounter(
   void HISTORY_LIMIT;
 
   // ---- 把 Horror 真正进入 BattleState（复用既有 Battle 引擎，硬约束 1）----
-  const horrorUnit = buildShufflingHorrorBattleUnit();
+  const horrorUnit = buildShufflingHorrorBattleUnit(mode);
   const heroUnits = aliveHeroes.map((h, i) => makeHeroUnit(h, i, campaign));
   const battle = campaign.battle
     ? {

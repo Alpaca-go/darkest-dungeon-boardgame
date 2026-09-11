@@ -1,6 +1,6 @@
-import normalizedJson from '../../../../docs/data/darkest-dungeon/community-reference/antha-complete-edition/normalized-requirements.json';
-import sourceIndexJson from '../../../../docs/data/darkest-dungeon/community-reference/antha-complete-edition/source-reference-index.json';
-import bindingManifestJson from '../../../../docs/data/darkest-dungeon/community-reference/antha-complete-edition/source-binding-manifest.json';
+import normalizedJson from '../../../../docs/data/darkest-dungeon/community-reference/antha-complete-edition/normalized-requirements.json' with { type: 'json' };
+import sourceIndexJson from '../../../../docs/data/darkest-dungeon/community-reference/antha-complete-edition/source-reference-index.json' with { type: 'json' };
+import bindingManifestJson from '../../../../docs/data/darkest-dungeon/community-reference/antha-complete-edition/source-binding-manifest.json' with { type: 'json' };
 
 export interface NormalizedField { value: unknown; evidenceType: string; sourceReference: string[]; confidence: string; eligibleForPendingImport: boolean; status: string }
 export interface NormalizedAsset { guid: string; cardId?: number | null; nickname?: string; objectType: string; ttsPath: string; sourceObjectReference: string; renderReferences?: string[]; customDeck?: Record<string, unknown>; customImage?: Record<string, unknown> }

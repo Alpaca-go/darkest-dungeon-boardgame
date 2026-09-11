@@ -268,7 +268,7 @@ export function transitionToNextFinalForm(
     state.finalFormRuntimeState,
     encounter.id,
     pending.toFormId,
-    { mode: mode === 'prototype' ? 'prototype' : 'formal', rng, now },
+    { mode, rng, now },
   );
   if (!mechanicsSetup.ok) {
     return transFail(

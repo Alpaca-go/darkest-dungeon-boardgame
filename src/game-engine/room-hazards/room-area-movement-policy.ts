@@ -4,6 +4,8 @@
 // 未知项一律用 'definition-driven' 表达，并由 Data Gate 阻止 official battle。
 
 import type { RoomAreaMovementPolicy, SpikedPitDefinition } from '../../types/room-hazards';
+import { blockCommunityOperation, type CommunityRuntimeBlocker } from '../../data/darkest-dungeon/community-reference/runtime-profile';
+import type { ActFourRuntimeProfileId } from '../../types/act-four';
 
 /**
  * 未知策略（正式资料缺失时的默认值）。
@@ -54,4 +56,15 @@ export function canForceEnter(pit: SpikedPitDefinition, currentOccupants: number
 /** Exit Rule 是否有资料来源（缺失 → official 禁用，§19）。 */
 export function hasExitRule(pit: SpikedPitDefinition): boolean {
   return Boolean(pit.exitRuleDefinitionId);
+}
+
+/** Production boundary used when a hero actually attempts to leave a pit. */
+export function resolveSpikedPitExitPolicy(
+  pit: SpikedPitDefinition,
+  mode: ActFourRuntimeProfileId,
+): { ok: true; policy: RoomAreaMovementPolicy } | { ok: false; kind: 'community-source-blocked'; blocker: CommunityRuntimeBlocker } {
+  if (mode === 'community-reference' && !pit.exitRuleDefinitionId) {
+    return blockCommunityOperation('TEMPLARS_PIT_EXIT_RULE_UNRESOLVED');
+  }
+  return { ok: true, policy: getSpikedPitMovementPolicy(pit) };
 }

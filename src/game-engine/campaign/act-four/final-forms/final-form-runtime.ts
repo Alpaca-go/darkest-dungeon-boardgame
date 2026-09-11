@@ -53,7 +53,7 @@ export function createFinalFormRuntimeState(
     activeFormId: null,
     runtimes: {},
     contentMode: mode,
-    dataStatus: mode === 'formal' ? 'partial' : 'prototype',
+    dataStatus: mode === 'prototype' ? 'prototype' : 'partial',
     processedTransactionIds: [],
     lastTransactionId: null,
   };
@@ -133,6 +133,10 @@ export function setupFinalFormRuntime(
 
   const mechanicsResult = validateFinalFormMechanics(mechanics);
   if (!mechanicsResult.isComplete) {
+    if (mode === 'community-reference') {
+      // Community mechanics may carry a known, operation-local blocker. They are
+      // allowed to initialize; the action that first needs the unknown value fails closed.
+    } else {
     return {
       ok: false,
       state: current,
@@ -143,6 +147,7 @@ export function setupFinalFormRuntime(
         ...mechanicsResult.issues,
       ].join('；')}`,
     };
+    }
   }
   const roomResult = validateAncestorRoomAreas(room);
   if (!roomResult.isComplete) {
@@ -245,7 +250,7 @@ export function sanitizeFinalFormRuntimeState(raw: unknown): FinalFormRuntimeSta
   const encounterId = typeof r.encounterId === 'string' ? r.encounterId : '';
   if (!encounterId) return null;
 
-  const contentMode: FinalMechanicsMode = r.contentMode === 'formal' ? 'formal' : 'prototype';
+  const contentMode: FinalMechanicsMode = r.contentMode === 'formal' || r.contentMode === 'community-reference' ? r.contentMode : 'prototype';
 
   const runtimes: Partial<Record<FinalFormId, FinalFormRuntime>> = {};
   const rawRuntimes = (r.runtimes ?? {}) as Record<string, unknown>;

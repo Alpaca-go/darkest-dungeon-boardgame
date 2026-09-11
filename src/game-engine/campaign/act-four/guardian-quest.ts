@@ -42,6 +42,7 @@ import { failCampaign } from '../../stagecoach';
 import { pushLog } from '../../log';
 import { createId, nowIso } from '../../random';
 import type { ActFourContentMode } from './draw-quest';
+import type { CommunityRuntimeBlocker } from '../../../data/darkest-dungeon/community-reference/runtime-profile';
 import {
   actFourTransactionIds,
   hasProcessedActFourTransaction,
@@ -157,6 +158,8 @@ export interface StartGuardianBattleResult {
   battleId: string | null;
   alreadyStarted: boolean;
   reason: string | null;
+  kind?: 'community-source-blocked';
+  blocker?: CommunityRuntimeBlocker;
   /** Phase 10B：该 Guardian 是否为 Templars 家族（触发双 Boss Setup）。 */
   isTemplarsEncounter?: boolean;
   /** Phase 10B：Templars Setup 失败原因（Setup 失败不回滚 Battle 创建，仅降级为普通 Boss Battle）。 */
@@ -238,13 +241,15 @@ export function startGuardianBattle(
 
   if (isTemplarsEncounter) {
     const setup = setupTemplarsEncounter(campaignAfter, {
-      mode: (options?.mode ?? 'prototype') === 'prototype' ? 'prototype' : 'formal',
+      mode: options?.mode ?? 'prototype',
       rng: options?.rng,
       seed: options?.seed,
       now: options?.now,
     });
     if (setup.ok) {
       campaignAfter = setup.campaign;
+    } else if (options?.mode === 'community-reference') {
+      return { ok: false, campaign, battleId: null, alreadyStarted: false, reason: setup.reason, isTemplarsEncounter, templarsSetupReason: setup.reason };
     } else {
       // Setup 失败（多为 official Data Gate 拦截）不回滚 Battle 创建，
       // 也不静默吞掉：降级为普通 Boss Battle 并把原因透出给 UI / Debug（§22）。
@@ -266,13 +271,15 @@ export function startGuardianBattle(
 
   if (isMammothCystEncounter) {
     const setup = setupMammothCystEncounter(campaignAfter, {
-      mode: (options?.mode ?? 'prototype') === 'prototype' ? 'prototype' : 'formal',
+      mode: options?.mode ?? 'prototype',
       rng: options?.rng,
       seed: options?.seed,
       now: options?.now,
     });
     if (setup.ok) {
       campaignAfter = setup.campaign;
+    } else if (options?.mode === 'community-reference') {
+      return { ok: false, campaign, battleId: null, alreadyStarted: false, reason: setup.reason, isMammothCystEncounter, mammothCystSetupReason: setup.reason };
     } else {
       // Setup 失败（多为 official Data Gate 拦截）不回滚 Battle 创建，
       // 降级为普通 Boss Battle 并把原因透出给 UI / Debug（§3）。
@@ -291,13 +298,15 @@ export function startGuardianBattle(
 
   if (isShufflingHorrorEncounter) {
     const setup = setupShufflingHorrorEncounter(campaignAfter, {
-      mode: (options?.mode ?? 'prototype') === 'prototype' ? 'prototype' : 'formal',
+      mode: options?.mode ?? 'prototype',
       rng: options?.rng,
       seed: options?.seed,
       now: options?.now,
     });
     if (setup.ok) {
       campaignAfter = setup.campaign;
+    } else if (options?.mode === 'community-reference') {
+      return { ok: false, campaign, battleId: null, alreadyStarted: false, reason: setup.reason, isShufflingHorrorEncounter, shufflingHorrorSetupReason: setup.reason };
     } else {
       shufflingHorrorSetupReason = setup.reason;
       campaignAfter = pushLog(

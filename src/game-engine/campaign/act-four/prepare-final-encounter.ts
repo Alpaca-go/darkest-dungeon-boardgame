@@ -45,6 +45,10 @@ import {
   withProcessedActFourTransaction,
 } from './act-four-state';
 import { createSeededRng } from './rng';
+import {
+  blockCommunityOperation,
+  type CommunityRuntimeBlocker,
+} from '../../../data/darkest-dungeon/community-reference/runtime-profile';
 
 // ---------------------------------------------------------------------------
 // §18 Form 顺序推导
@@ -118,6 +122,8 @@ export interface PrepareFinalEncounterResult {
   provisionRecord: FinalProvisionRecord | null;
   alreadyPrepared: boolean;
   reason: string | null;
+  kind?: 'community-source-blocked';
+  blocker?: CommunityRuntimeBlocker;
 }
 
 /**
@@ -172,6 +178,11 @@ export function prepareFinalEncounter(
     return prepFail(campaign, `非法的 Skipped Final Form：${skipped}（Heart of Darkness 不可跳过）`);
   }
 
+  if (mode === 'community-reference') {
+    const blocked = blockCommunityOperation('FINAL_PROVISION_POLICY_UNRESOLVED');
+    return { ...prepFail(campaign, blocked.blocker.code), ...blocked };
+  }
+
   // ---- 3. Data Gate（硬约束 19）----
   if (mode === 'formal') {
     if (!isFinalEncounterOfficialEnabled()) {
@@ -200,7 +211,7 @@ export function prepareFinalEncounter(
     }
   }
 
-  const policy = getFinalProvisionPolicy(mode === 'prototype' ? 'prototype' : 'formal');
+  const policy = getFinalProvisionPolicy(mode);
   const policyValidation = validateFinalProvisionPolicy(policy);
   if (!policyValidation.isComplete) {
     return prepFail(
@@ -209,7 +220,7 @@ export function prepareFinalEncounter(
     );
   }
 
-  const room = getFinalEncounterRoom(mode === 'prototype' ? 'prototype' : 'formal');
+  const room = getFinalEncounterRoom(mode);
   if (!room.formAreaId || room.validAreaIds.length === 0) {
     return prepFail(campaign, 'Final Encounter Room 数据不完整（Area 缺失）');
   }
