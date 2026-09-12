@@ -1,0 +1,477 @@
+{
+  "schemaVersion": "phase11a3-community-visual-asset-inventory.v1",
+  "generatedAt": "2026-09-12T15:56:23+08:00",
+  "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE",
+  "sourceEdition": "antha-complete-edition",
+  "workshopId": "3657612854",
+  "summary": {
+    "total": 26,
+    "ready": 16,
+    "mappedUnrendered": 8,
+    "sourceMissing": 2,
+    "notApplicable": 0
+  },
+  "groups": {
+    "quest": {
+      "total": 3,
+      "ready": 3,
+      "mappedUnrendered": 0,
+      "sourceMissing": 0
+    },
+    "dungeon-tile": {
+      "total": 1,
+      "ready": 0,
+      "mappedUnrendered": 1,
+      "sourceMissing": 0
+    },
+    "guardians": {
+      "total": 10,
+      "ready": 7,
+      "mappedUnrendered": 3,
+      "sourceMissing": 0
+    },
+    "final-encounter": {
+      "total": 9,
+      "ready": 6,
+      "mappedUnrendered": 1,
+      "sourceMissing": 2
+    },
+    "monster-deck": {
+      "total": 1,
+      "ready": 0,
+      "mappedUnrendered": 1,
+      "sourceMissing": 0
+    },
+    "room-tile": {
+      "total": 2,
+      "ready": 0,
+      "mappedUnrendered": 2,
+      "sourceMissing": 0
+    }
+  },
+  "items": [
+    {
+      "requirementId": "tierB-quest-1",
+      "runtimeEntityId": "community-dd-quest-we-are-the-flame",
+      "assetKind": "quest-card-front",
+      "status": "ready",
+      "productSurface": "DarkestDungeonQuestReveal",
+      "selection": {
+        "strategy": "DIRECT_NAMED_CARD",
+        "guid": "735bc3",
+        "cardId": 44515,
+        "deckId": "445",
+        "cardIndex": 15,
+        "numWidth": 10,
+        "numHeight": 4
+      },
+      "fieldName": "We Are The Flame"
+    },
+    {
+      "requirementId": "tierB-quest-2",
+      "runtimeEntityId": "community-dd-quest-light-the-way",
+      "assetKind": "quest-card-front",
+      "status": "ready",
+      "productSurface": "DarkestDungeonQuestReveal",
+      "selection": {
+        "strategy": "DIRECT_NAMED_CARD",
+        "guid": "083199",
+        "cardId": 44516,
+        "deckId": "445",
+        "cardIndex": 16,
+        "numWidth": 10,
+        "numHeight": 4
+      },
+      "fieldName": "Light the Way"
+    },
+    {
+      "requirementId": "tierB-quest-3",
+      "runtimeEntityId": "community-dd-quest-belly-of-the-beast",
+      "assetKind": "quest-card-front",
+      "status": "ready",
+      "productSurface": "DarkestDungeonQuestReveal",
+      "selection": {
+        "strategy": "DIRECT_NAMED_CARD",
+        "guid": "6555d3",
+        "cardId": 44517,
+        "deckId": "445",
+        "cardIndex": 17,
+        "numWidth": 10,
+        "numHeight": 4
+      },
+      "fieldName": "Belly of the Beast"
+    },
+    {
+      "requirementId": "tierB-dd-dungeon-tile",
+      "runtimeEntityId": "community-dd-dungeon-tile",
+      "assetKind": "dungeon-tile",
+      "status": "mapped-unrendered",
+      "productSurface": "none (Runtime layout topology is authoritative from frozen Community Runtime; tile images are recorded for contact sheet only)",
+      "selection": {
+        "strategy": "DIRECT_QUANTITY_MATCH",
+        "tiles": [
+          { "guid": "4ced96", "imageUrl": "https://steamusercontent-a.akamaihd.net/ugc/18153630558740090023/DE4A6739065E1A5F37C6A6E9CF9621472E7291AD/" },
+          { "guid": "d10a24", "imageUrl": "https://steamusercontent-a.akamaihd.net/ugc/14056689639152204527/8DF07B591F565C87BBB74EF80E7620AE31032A93/" }
+        ]
+      }
+    },
+    {
+      "requirementId": "tierB-templars-impaler",
+      "runtimeEntityId": "community-dd-templars-impaler",
+      "assetKind": "guardian-battle-card",
+      "status": "ready",
+      "productSurface": "TemplarsEncounterPanel",
+      "selection": {
+        "strategy": "DIRECT_NAMED_CARD",
+        "guid": "efa5a4",
+        "cardId": 46614,
+        "deckId": "466",
+        "cardIndex": 14,
+        "numWidth": 5,
+        "numHeight": 5
+      }
+    },
+    {
+      "requirementId": "tierB-templars-warlord",
+      "runtimeEntityId": "community-dd-templars-warlord",
+      "assetKind": "guardian-battle-card",
+      "status": "ready",
+      "productSurface": "TemplarsEncounterPanel",
+      "selection": {
+        "strategy": "DIRECT_NAMED_CARD",
+        "guid": "f88d6a",
+        "cardId": 46613,
+        "deckId": "466",
+        "cardIndex": 13,
+        "numWidth": 5,
+        "numHeight": 5
+      }
+    },
+    {
+      "requirementId": "tierB-templars-room",
+      "runtimeEntityId": "community-dd-templars-room",
+      "assetKind": "guardian-room-card",
+      "status": "mapped-unrendered",
+      "productSurface": "none (no product surface renders Guardian room visuals; TemplarsEncounterPanel renders battle actors only)",
+      "selection": {
+        "strategy": "CANDIDATE_SET_NEEDS_IMAGE",
+        "firstPhysical": { "guid": "ad6c7d", "cardId": 42024, "deckId": "420", "cardIndex": 24, "numWidth": 10, "numHeight": 4 },
+        "allPhysical": [
+          { "guid": "ad6c7d", "cardId": 42024 },
+          { "guid": "e24559", "cardId": 42025 },
+          { "guid": "5a2fdf", "cardId": 42026 },
+          { "guid": "f236b8", "cardId": 42027 }
+        ]
+      }
+    },
+    {
+      "requirementId": "tierB-templars-room-tile",
+      "runtimeEntityId": "community-dd-templars-room-tile",
+      "assetKind": "guardian-room-tile",
+      "status": "mapped-unrendered",
+      "productSurface": "none (no product surface renders Guardian room-tile visuals)",
+      "selection": {
+        "strategy": "CANDIDATE_TILE_SET_NEEDS_IMAGE",
+        "tiles": [
+          { "guid": "bc9c87", "nickname": "11-12", "imageUrl": "https://steamusercontent-a.akamaihd.net/ugc/12907387505248994134/99CA3B92B205E9924DAC3BDE2FE1674882C7881D/" },
+          { "guid": "7a3fa9", "nickname": "9-10", "imageUrl": "https://steamusercontent-a.akamaihd.net/ugc/18432412340859063681/5CC5729080F4DA7F0597B496A160A0BF2BCB5EA3/" },
+          { "guid": "d59e73", "nickname": "7-8", "imageUrl": "https://steamusercontent-a.akamaihd.net/ugc/15168120619393754933/B1056B83C2601A8048F37D3DFD48B4C68AB79333/" },
+          { "guid": "813724", "nickname": "5-6", "imageUrl": "https://steamusercontent-a.akamaihd.net/ugc/11016923967818423472/AC803AAF5A0024986B567C520B4E7A719E176767/" },
+          { "guid": "d596fb", "nickname": "3-4", "imageUrl": "https://steamusercontent-a.akamaihd.net/ugc/16614996847568037176/DEF794AC5A9B5E88A8F90835DDB9AE1EA5AB7782/" },
+          { "guid": "939435", "nickname": "1-2", "imageUrl": "https://steamusercontent-a.akamaihd.net/ugc/16985604518288947892/585C3DA37B923BD0E64D521C56A37D16EC81D8D0/" }
+        ]
+      }
+    },
+    {
+      "requirementId": "tierB-mammoth-cyst",
+      "runtimeEntityId": "community-dd-mammoth-cyst",
+      "assetKind": "guardian-battle-card",
+      "status": "ready",
+      "productSurface": "MammothCystEncounterPanel",
+      "selection": {
+        "strategy": "DIRECT_NAMED_CARD",
+        "guid": "c4a35e",
+        "cardId": 46615,
+        "deckId": "466",
+        "cardIndex": 15,
+        "numWidth": 5,
+        "numHeight": 5
+      }
+    },
+    {
+      "requirementId": "tierB-white-cell-stalk",
+      "runtimeEntityId": "community-dd-white-cell-stalk",
+      "assetKind": "guardian-battle-card",
+      "status": "ready",
+      "productSurface": "MammothCystEncounterPanel",
+      "selection": {
+        "strategy": "DIRECT_NAMED_CARD",
+        "guid": "1fb052",
+        "cardId": 46052,
+        "deckId": "460",
+        "cardIndex": 52,
+        "numWidth": 10,
+        "numHeight": 7
+      }
+    },
+    {
+      "requirementId": "tierB-mammoth-cyst-room",
+      "runtimeEntityId": "community-dd-mammoth-cyst-room",
+      "assetKind": "guardian-room-card",
+      "status": "mapped-unrendered",
+      "productSurface": "none (no product surface renders Guardian room visuals)",
+      "selection": {
+        "strategy": "CANDIDATE_SET_NEEDS_IMAGE",
+        "firstPhysical": { "guid": "eb35cd", "cardId": 42028, "deckId": "420", "cardIndex": 28, "numWidth": 10, "numHeight": 4 },
+        "allPhysical": [
+          { "guid": "eb35cd", "cardId": 42028 },
+          { "guid": "e4246d", "cardId": 42029 },
+          { "guid": "a9ab77", "cardId": 42030 },
+          { "guid": "a7bbae", "cardId": 42035 },
+          { "guid": "12e30f", "cardId": 42036 }
+        ]
+      }
+    },
+    {
+      "requirementId": "tierB-shuffling-horror",
+      "runtimeEntityId": "community-dd-shuffling-horror",
+      "assetKind": "guardian-battle-card",
+      "status": "ready",
+      "productSurface": "ShufflingHorrorEncounterPanel",
+      "selection": {
+        "strategy": "DIRECT_NAMED_CARD",
+        "guid": "ccf3dc",
+        "cardId": 46616,
+        "deckId": "466",
+        "cardIndex": 16,
+        "numWidth": 5,
+        "numHeight": 5
+      }
+    },
+    {
+      "requirementId": "tierB-cultist-priest",
+      "runtimeEntityId": "community-dd-cultist-priest",
+      "assetKind": "guardian-battle-card",
+      "status": "ready",
+      "productSurface": "ShufflingHorrorEncounterPanel",
+      "selection": {
+        "strategy": "MULTI_VARIANT_NEEDS_DISAMBIGUATION",
+        "firstPhysical": { "guid": "36d6ad", "cardId": 46021, "deckId": "460", "cardIndex": 21, "numWidth": 10, "numHeight": 7 },
+        "allPhysical": [
+          { "guid": "36d6ad", "cardId": 46021 },
+          { "guid": "1b261d", "cardId": 46020 },
+          { "guid": "0ba2f8", "cardId": 46022 }
+        ]
+      }
+    },
+    {
+      "requirementId": "tierB-malignant-growth",
+      "runtimeEntityId": "community-dd-malignant-growth",
+      "assetKind": "guardian-battle-card",
+      "status": "ready",
+      "productSurface": "ShufflingHorrorEncounterPanel",
+      "selection": {
+        "strategy": "MULTI_VARIANT_NEEDS_DISAMBIGUATION",
+        "firstPhysical": { "guid": "4a8b06", "cardId": 46024, "deckId": "460", "cardIndex": 24, "numWidth": 10, "numHeight": 7 },
+        "allPhysical": [
+          { "guid": "4a8b06", "cardId": 46024 },
+          { "guid": "a34fbd", "cardId": 46023 },
+          { "guid": "f06594", "cardId": 46025 }
+        ]
+      }
+    },
+    {
+      "requirementId": "tierB-shuffling-horror-room",
+      "runtimeEntityId": "community-dd-shuffling-horror-room",
+      "assetKind": "guardian-room-card",
+      "status": "mapped-unrendered",
+      "productSurface": "none (no product surface renders Guardian room visuals)",
+      "selection": {
+        "strategy": "CANDIDATE_SET_NEEDS_IMAGE",
+        "firstPhysical": { "guid": "654bdc", "cardId": 42031, "deckId": "420", "cardIndex": 31, "numWidth": 10, "numHeight": 4 },
+        "allPhysical": [
+          { "guid": "654bdc", "cardId": 42031 },
+          { "guid": "450ace", "cardId": 42032 }
+        ]
+      }
+    },
+    {
+      "requirementId": "tierB-ancestor-room",
+      "runtimeEntityId": "community-dd-ancestor-room",
+      "assetKind": "guardian-room-card",
+      "status": "mapped-unrendered",
+      "productSurface": "none (no product surface renders Guardian room visuals; FinalEncounterHeader shows the encounter frame only)",
+      "selection": {
+        "strategy": "CANDIDATE_SET_NEEDS_IMAGE",
+        "firstPhysical": { "guid": "5e5515", "cardId": 42033, "deckId": "420", "cardIndex": 33, "numWidth": 10, "numHeight": 4 },
+        "allPhysical": [
+          { "guid": "5e5515", "cardId": 42033 },
+          { "guid": "4cd186", "cardId": 42034 }
+        ]
+      }
+    },
+    {
+      "requirementId": "tierB-ancestor-room-tile",
+      "runtimeEntityId": "community-dd-ancestor-room-tile",
+      "assetKind": "guardian-room-tile",
+      "status": "mapped-unrendered",
+      "productSurface": "none (no product surface renders Guardian room-tile visuals)",
+      "selection": {
+        "strategy": "CANDIDATE_TILE_SET_NEEDS_IMAGE",
+        "tiles": [
+          { "guid": "bc9c87", "nickname": "11-12", "imageUrl": "https://steamusercontent-a.akamaihd.net/ugc/12907387505248994134/99CA3B92B205E9924DAC3BDE2FE1674882C7881D/" },
+          { "guid": "7a3fa9", "nickname": "9-10", "imageUrl": "https://steamusercontent-a.akamaihd.net/ugc/18432412340859063681/5CC5729080F4DA7F0597B496A160A0BF2BCB5EA3/" },
+          { "guid": "d59e73", "nickname": "7-8", "imageUrl": "https://steamusercontent-a.akamaihd.net/ugc/15168120619393754933/B1056B83C2601A8048F37D3DFD48B4C68AB79333/" },
+          { "guid": "813724", "nickname": "5-6", "imageUrl": "https://steamusercontent-a.akamaihd.net/ugc/11016923967818423472/AC803AAF5A0024986B567C520B4E7A719E176767/" },
+          { "guid": "d596fb", "nickname": "3-4", "imageUrl": "https://steamusercontent-a.akamaihd.net/ugc/16614996847568037176/DEF794AC5A9B5E88A8F90835DDB9AE1EA5AB7782/" },
+          { "guid": "939435", "nickname": "1-2", "imageUrl": "https://steamusercontent-a.akamaihd.net/ugc/16985604518288947892/585C3DA37B923BD0E64D521C56A37D16EC81D8D0/" }
+        ]
+      }
+    },
+    {
+      "requirementId": "tierB-ancestor-first-form",
+      "runtimeEntityId": "community-dd-ancestor-first-form",
+      "assetKind": "final-form-card",
+      "status": "ready",
+      "productSurface": "FinalFormMechanicsPanel",
+      "selection": {
+        "strategy": "DIRECT_NAMED_CARD",
+        "guid": "d99c50",
+        "cardId": 46053,
+        "deckId": "460",
+        "cardIndex": 53,
+        "numWidth": 10,
+        "numHeight": 7
+      }
+    },
+    {
+      "requirementId": "tierB-perfect-reflection",
+      "runtimeEntityId": "community-dd-perfect-reflection",
+      "assetKind": "final-form-card",
+      "status": "ready",
+      "productSurface": "FinalFormMechanicsPanel",
+      "selection": {
+        "strategy": "MULTI_VARIANT_NEEDS_DISAMBIGUATION",
+        "firstPhysical": { "guid": "4a0ff9", "cardId": 46055, "deckId": "460", "cardIndex": 55, "numWidth": 10, "numHeight": 7 },
+        "allPhysical": [
+          { "guid": "4a0ff9", "cardId": 46055 },
+          { "guid": "695dfa", "cardId": 46054 },
+          { "guid": "e75d33", "cardId": 46056 }
+        ]
+      }
+    },
+    {
+      "requirementId": "tierB-imperfect-reflection",
+      "runtimeEntityId": "community-dd-imperfect-reflection",
+      "assetKind": "final-form-card",
+      "status": "ready",
+      "productSurface": "FinalFormMechanicsPanel",
+      "selection": {
+        "strategy": "MULTI_VARIANT_NEEDS_DISAMBIGUATION",
+        "firstPhysical": { "guid": "adff9c", "cardId": 46057, "deckId": "460", "cardIndex": 57, "numWidth": 10, "numHeight": 7 },
+        "allPhysical": [
+          { "guid": "adff9c", "cardId": 46057 },
+          { "guid": "d57825", "cardId": 46058 },
+          { "guid": "95ec7b", "cardId": 46059 }
+        ]
+      }
+    },
+    {
+      "requirementId": "tierB-ancestor-second-form",
+      "runtimeEntityId": "community-dd-ancestor-second-form",
+      "assetKind": "final-form-card",
+      "status": "ready",
+      "productSurface": "FinalFormMechanicsPanel",
+      "selection": {
+        "strategy": "DIRECT_NAMED_CARD",
+        "guid": "1825b7",
+        "cardId": 46617,
+        "deckId": "466",
+        "cardIndex": 17,
+        "numWidth": 5,
+        "numHeight": 5
+      }
+    },
+    {
+      "requirementId": "tierB-absolute-nothingness",
+      "runtimeEntityId": "community-dd-absolute-nothingness",
+      "assetKind": "final-form-card",
+      "status": "source-missing",
+      "productSurface": "FinalFormMechanicsPanel (will render explicit source-missing state)",
+      "selection": {
+        "strategy": "OBJECT_PRESENT_TYPE_MISMATCH",
+        "reason": "Only Custom_Model 3D assets exist in the accepted intake; no 2D card art is mapped. Per dev doc, do not invent a 2D card from a TTS model.",
+        "guids": ["4c0e88", "db000a", "aff870"]
+      }
+    },
+    {
+      "requirementId": "tierB-gestating-heart",
+      "runtimeEntityId": "community-dd-gestating-heart",
+      "assetKind": "final-form-card",
+      "status": "ready",
+      "productSurface": "FinalFormMechanicsPanel",
+      "selection": {
+        "strategy": "DIRECT_NAMED_CARD",
+        "guid": "eed6cd",
+        "cardId": 46618,
+        "deckId": "466",
+        "cardIndex": 18,
+        "numWidth": 5,
+        "numHeight": 5
+      }
+    },
+    {
+      "requirementId": "tierB-heart-of-darkness",
+      "runtimeEntityId": "community-dd-heart-of-darkness",
+      "assetKind": "final-form-card",
+      "status": "ready",
+      "productSurface": "FinalFormMechanicsPanel",
+      "selection": {
+        "strategy": "DIRECT_NAMED_CARD",
+        "guid": "21bbaf",
+        "cardId": 46619,
+        "deckId": "466",
+        "cardIndex": 19,
+        "numWidth": 5,
+        "numHeight": 5
+      }
+    },
+    {
+      "requirementId": "tierB-come-unto-your-maker",
+      "runtimeEntityId": "community-dd-come-unto-your-maker",
+      "assetKind": "final-form-card",
+      "status": "source-missing",
+      "productSurface": "FinalFormMechanicsPanel (will render explicit source-missing state)",
+      "selection": {
+        "strategy": "NO_NAMED_MATCH_CANDIDATE_SET",
+        "reason": "Intake status=unresolved. Candidate set contains other Final Encounter cards but no independently confirmed identity. Per dev doc, do not fabricate visual identity.",
+        "guids": ["5e5515", "4cd186", "e3fc86", "21bbaf", "12e30f", "bdaf2b", "d09f50"]
+      }
+    },
+    {
+      "requirementId": "tierB-darkest-dungeon-monster-deck",
+      "runtimeEntityId": "community-dd-darkest-dungeon-monster-deck",
+      "assetKind": "monster-deck",
+      "status": "mapped-unrendered",
+      "productSurface": "none (no product surface currently renders the DD Monster Deck; 26 visuals are vendored for future monster-deck presentation and contact sheet only)",
+      "selection": {
+        "strategy": "DIRECT_DECK_PARTIAL_FIELDS",
+        "deckId": "460",
+        "numWidth": 10,
+        "numHeight": 7,
+        "deckMemberCount": 26,
+        "members": [
+          { "logicalName": "Ascended Brawler", "cardIds": [46011, 46012, 46013], "guids": ["849849", "15687c", "9d16dc"] },
+          { "logicalName": "Ascended Witch", "cardIds": [46014, 46015, 46016], "guids": ["2037a8", "4cba93", "23df79"] },
+          { "logicalName": "Rapturous Cultist", "cardIds": [46017, 46018, 46019], "guids": ["42cb11", "6c46af", "ec3703"] },
+          { "logicalName": "Cultist Priest", "cardIds": [46020, 46021, 46022], "guids": ["1b261d", "36d6ad", "0ba2f8"] },
+          { "logicalName": "Malignant Growth", "cardIds": [46023, 46024, 46025], "guids": ["a34fbd", "4a8b06", "f06594"] },
+          { "logicalName": "Flesh Hound", "cardIds": [46026, 46027], "guids": ["b2ab62", "dc3db6"] },
+          { "logicalName": "Polyp", "cardIds": [46028, 46029, 46030], "guids": ["c6f26c", "47d664", "1b182b"] },
+          { "logicalName": "Antibody", "cardIds": [46031, 46032, 46033], "guids": ["4f2825", "a0b399", "351f3c"] },
+          { "logicalName": "Defensive Growth", "cardIds": [46034, 46035, 46036], "guids": ["861ed6", "014fb5", "ed4bc0"] }
+        ]
+      }
+    }
+  ]
+}

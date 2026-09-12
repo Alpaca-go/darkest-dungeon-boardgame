@@ -17,6 +17,7 @@
 
 import type { MammothCystActorState, MammothCystEncounterState } from '../../types/mammoth-cyst';
 import { getMammothCystAvailabilityReport } from '../../game-engine/bosses/mammoth-cyst/mammoth-cyst-content-validation';
+import CommunityVisual from './CommunityVisual';
 
 interface Props {
   state: MammothCystEncounterState | null;
@@ -231,6 +232,15 @@ function ActorCard({
       </div>
       <div className="text-dd-muted">
         Area {actor.areaId || '—'} · 每轮 {actor.actionsPerRound} 次行动
+      </div>
+      <div className="mt-2">
+        <CommunityVisual
+          runtimeEntityId={actor.owner === 'mammoth-cyst' ? 'community-dd-mammoth-cyst' : 'community-dd-white-cell-stalk'}
+          assetKind="guardian-battle-card"
+          alt={`Community ${actor.name}`}
+          className="w-full h-auto max-h-48 rounded border border-dd-border"
+          testId={`mammoth-cyst-visual-${actor.owner}`}
+        />
       </div>
     </div>
   );

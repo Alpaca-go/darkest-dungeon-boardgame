@@ -23,6 +23,7 @@ import type {
   ShufflingHorrorRole,
 } from '../../types/shuffling-horror';
 import { getShufflingHorrorAvailabilityReport } from '../../game-engine/bosses/shuffling-horror/shuffling-horror-content-validation';
+import CommunityVisual from './CommunityVisual';
 
 interface Props {
   state: ShufflingHorrorEncounterState | null;
@@ -272,6 +273,11 @@ function ActorCard({
   }
   const used = budget.monsterBudget.perRoleUsed[role] ?? 0;
   const max = budget.monsterBudget.perRoleMax[role] ?? 0;
+  const visualEntityId = role === 'horror'
+    ? 'community-dd-shuffling-horror'
+    : role === 'cultist-priest'
+      ? 'community-dd-cultist-priest'
+      : 'community-dd-malignant-growth';
   return (
     <div
       className={`rounded border p-2 ${actor.alive ? 'border-dd-border' : 'border-dd-border/50 opacity-60'}`}
@@ -287,6 +293,15 @@ function ActorCard({
       <div className="text-dd-muted">Area {actor.areaId || '—'} · 第 {actor.generation} 代</div>
       <div className="text-dd-muted" data-testid={`${testId}-budget`}>
         本轮行动 {used} / {max}
+      </div>
+      <div className="mt-2">
+        <CommunityVisual
+          runtimeEntityId={visualEntityId}
+          assetKind="guardian-battle-card"
+          alt={`Community ${ROLE_LABEL[role]}`}
+          className="w-full h-auto max-h-48 rounded border border-dd-border"
+          testId={`shuffling-horror-visual-${role}`}
+        />
       </div>
     </div>
   );

@@ -28,6 +28,7 @@ import {
   getFinalEncounterMechanicsGaps,
   isFinalEncounterMechanicsOfficialEnabled,
 } from '../../data/darkest-dungeon/final-encounter';
+import CommunityVisual from './CommunityVisual';
 
 interface Props {
   state: FinalFormRuntimeState | null;
@@ -38,6 +39,13 @@ const FORM_LABEL: Record<FinalFormId, string> = {
   'ancestor-second-form': 'Ancestor · 2nd Form',
   'gestating-heart': 'Gestating Heart',
   'heart-of-darkness': 'Heart of Darkness',
+};
+
+const FORM_VISUAL_ENTITY_ID: Record<FinalFormId, string> = {
+  'ancestor-first-form': 'community-dd-ancestor-first-form',
+  'ancestor-second-form': 'community-dd-ancestor-second-form',
+  'gestating-heart': 'community-dd-gestating-heart',
+  'heart-of-darkness': 'community-dd-heart-of-darkness',
 };
 
 const FORM_ORDER: FinalFormId[] = [
@@ -123,6 +131,15 @@ function FormBlock({
         <span className="text-[10px] text-dd-muted" data-testid={`final-form-initiative-${formId}`}>
           Initiative Card × {runtime.initiativeCardCount}
         </span>
+      </div>
+      <div className="mb-1 max-w-[120px]">
+        <CommunityVisual
+          runtimeEntityId={FORM_VISUAL_ENTITY_ID[formId]}
+          assetKind="final-form-card"
+          alt={`Community ${FORM_LABEL[formId]}`}
+          className="w-full h-auto rounded border border-dd-border"
+          testId={`final-form-visual-${formId}`}
+        />
       </div>
 
       {runtime.kind === 'ancestor-first-form' && <FirstFormBody runtime={runtime} />}

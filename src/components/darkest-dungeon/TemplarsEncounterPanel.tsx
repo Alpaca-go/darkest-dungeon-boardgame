@@ -14,6 +14,7 @@
 
 import type { TemplarsEncounterState } from '../../types/templars';
 import { getTemplarsAvailabilityReport } from '../../game-engine/bosses/templars/templars-content-validation';
+import CommunityVisual from './CommunityVisual';
 
 interface Props {
   state: TemplarsEncounterState | null;
@@ -174,6 +175,15 @@ function TemplarCard({
         HP {actor.hp} / {actor.maxHp} · Stance {actor.stance}
       </div>
       <div className="text-dd-muted">Area {actor.areaId || '—'}</div>
+      <div className="mt-2">
+        <CommunityVisual
+          runtimeEntityId={actor.role === 'impaler' ? 'community-dd-templars-impaler' : 'community-dd-templars-warlord'}
+          assetKind="guardian-battle-card"
+          alt={`Community ${actor.name}`}
+          className="w-full h-auto max-h-48 rounded border border-dd-border"
+          testId={`templar-visual-${actor.role}`}
+        />
+      </div>
     </div>
   );
 }

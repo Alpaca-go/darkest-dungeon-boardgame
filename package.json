@@ -30,7 +30,10 @@
     "verify:community-reference-binding": "vite-node scripts/audit/verify-community-reference-binding.ts",
     "verify:community-reference-runtime": "vite-node scripts/audit/verify-community-reference-runtime.ts",
     "verify:phase11a3-clean-evidence": "vite-node scripts/audit/verify-phase11a3-clean-evidence.ts",
-    "verify:phase11a3-infrastructure-acceptance": "vite-node scripts/audit/verify-phase11a3-infrastructure-acceptance.ts"
+    "verify:phase11a3-infrastructure-acceptance": "vite-node scripts/audit/verify-phase11a3-infrastructure-acceptance.ts",
+    "verify:community-visual-assets": "node --experimental-strip-types scripts/audit/verify-community-visual-assets.mts",
+    "verify:community-visual-assets:adversarial": "node --experimental-strip-types scripts/audit/verify-community-visual-assets.mts --adversarial",
+    "import:community-reference-assets": "node scripts/assets/import-community-reference-assets.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.408.0",
@@ -48,6 +51,7 @@
     "autoprefixer": "^10.4.20",
     "jsdom": "^25.0.1",
     "postcss": "^8.4.47",
+    "sharp": "^0.35.4",
     "tailwindcss": "^3.4.13",
     "typescript": "^5.5.4",
     "vite": "^5.4.8",
