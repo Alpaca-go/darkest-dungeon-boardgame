@@ -1,10 +1,13 @@
-# Phase 11A.3 Community Reference Runtime Final Acceptance Report
+# Phase 11A.3 Community Runtime Freeze Evidence Closure Report
 
-- Terminal verdict: **COMMUNITY-REFERENCE-RUNTIME-ACCEPTED**
-- Verified implementation head: `589d333fa66b0f5e1c3dd55ef099e3370a12003c`
+- Terminal verdict: **COMMUNITY-REFERENCE-RUNTIME-FROZEN**
+- Verified implementation head: `72590fff70a55cc301ae301e87ef2e64e95744bc`
 - Runtime profile: `community-reference`
 - Source package SHA-256: `382e479f84f79a9b3cc6b0256b2fa5dea100b3576244988f180b49e75ed78d2a`
 - Content hash: `bb161c8b`
+- Layout topology proof: `dd-layout-topology.v2`
+- Source mutation detection: 8/8.
+- Runtime mutation detection: 2/2.
 - Field coverage: 160 total; 125 consumed, 5 source-blocked, 21 engine-blocked, 7 display-only, 2 not-runtime-relevant, 0 unclassified.
 
 ## Exact test counts
@@ -20,6 +23,7 @@
 - traceability: 127/127 passed; discovered=127, run=127, failed=0, skipped=0, todo=0.
 - adversarial: 20/20 passed; discovered=20, run=20, failed=0, skipped=0, todo=0.
 - truthGate: 15/15 passed; discovered=15, run=15, failed=0, skipped=0, todo=0.
+- freezeEvidence: 12/12 passed; discovered=12, run=12, failed=0, skipped=0, todo=0.
 - communityE2E: 3/3 passed; discovered=3, run=3, failed=0, skipped=0, todo=0.
 
 - Active blockers: 5 source-level + 12 runtime-only = 17.
@@ -46,4 +50,4 @@
 - `FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED`
 - `GUARDIAN_VICTORY_POLICY_ENGINE_UNSUPPORTED`
 
-This acceptance does not alter Official Source Gate semantics, close ISSUE-P0-002, enter Phase 11B, replace art assets, or fill unresolved rules from Prototype or videogame sources.
+This freeze does not alter Official Source Gate semantics, close ISSUE-P0-002, enter Phase 11B, replace art assets, or fill unresolved rules from Prototype or videogame sources.
