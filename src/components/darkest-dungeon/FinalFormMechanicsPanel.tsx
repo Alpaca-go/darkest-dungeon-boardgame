@@ -97,6 +97,7 @@ export default function FinalFormMechanicsPanel({ state }: Props) {
             formId={formId}
             runtime={state.runtimes[formId] as FinalFormRuntime}
             active={state.activeFormId === formId}
+            profileId={state.contentMode}
           />
         ))}
       </div>
@@ -110,10 +111,12 @@ function FormBlock({
   formId,
   runtime,
   active,
+  profileId,
 }: {
   formId: FinalFormId;
   runtime: FinalFormRuntime;
   active: boolean;
+  profileId: FinalFormRuntimeState['contentMode'];
 }) {
   return (
     <div
@@ -139,6 +142,7 @@ function FormBlock({
           alt={`Community ${FORM_LABEL[formId]}`}
           className="w-full h-auto rounded border border-dd-border"
           testId={`final-form-visual-${formId}`}
+          profileId={profileId}
         />
       </div>
 

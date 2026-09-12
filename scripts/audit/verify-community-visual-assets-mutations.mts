@@ -83,7 +83,7 @@ async function main() {
 async function runVerify(): Promise<{ failed: boolean; output: string }> {
   // Use the verify script directly via node strip-types
   const r = spawnSync(process.execPath, [
-    resolve(repoRoot, 'scripts/audit/verify-community-visual-assets.mts'),
+    resolve(repoRoot, 'scripts/audit/verify-community-visual-assets.mjs'),
     '--skip-vitest',
   ], { cwd: repoRoot, encoding: 'utf8', env: { ...process.env, PHASE_11A3_TTS_PATH: TTS_PATH } });
   const failed = (r.status ?? 0) !== 0;

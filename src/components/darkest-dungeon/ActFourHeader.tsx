@@ -23,6 +23,7 @@ export default function ActFourHeader() {
   const a4 = campaign.actFourState;
   const inFinalEncounter =
     a4.stage === 'final-encounter-ready' || a4.stage === 'final-encounter-active';
+  const profileId = a4.contentRuntime?.runtimeProfileId ?? a4.questDrawRecord?.runtimeProfileId ?? 'prototype';
 
   return (
     <div
@@ -43,6 +44,7 @@ export default function ActFourHeader() {
           <TemplarsEncounterPanel
             state={a4.templarsEncounterState}
             heroNames={Object.fromEntries(campaign.heroes.map((h) => [h.instanceId, h.heroId]))}
+            profileId={profileId}
           />
         )}
         {/* Phase 10C §24：Mammoth Cyst 遭遇进行中时显示只读面板
@@ -51,6 +53,7 @@ export default function ActFourHeader() {
           <MammothCystEncounterPanel
             state={a4.mammothCystEncounterState}
             heroNames={Object.fromEntries(campaign.heroes.map((h) => [h.instanceId, h.heroId]))}
+            profileId={profileId}
           />
         )}
         {/* Phase 10D §24：Shuffling Horror 遭遇进行中时显示只读面板

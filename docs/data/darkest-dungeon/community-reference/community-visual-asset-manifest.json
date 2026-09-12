@@ -1,30 +1,43 @@
 {
-  "schemaVersion": "phase11a3-community-visual-asset-manifest.v1",
+  "schemaVersion": "phase11a3-community-visual-asset-manifest.v2",
   "generatedAt": "2026-09-12T07:56:23.000Z",
   "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE",
   "sourceEdition": "antha-complete-edition",
   "workshopId": "3657612854",
-  "inputs": {
-    "intakePath": "C:/Users/kyrie/.minimax/v2/assets/2026/09/12/15-56-18-813-asset_20260912-155618-813_382e479f84f7_f8fd8e84-Phase11A3_CompleteEdition_Source_Intake_Package.json",
-    "intakeSha256": "382e479f84f79a9b3cc6b0256b2fa5dea100b3576244988f180b49e75ed78d2a",
-    "ttsPath": "C:/Users/kyrie/.minimax/v2/assets/2026/09/12/15-56-18-934-asset_20260912-155618-934_d2fe21a6aa29_7ee32e22-3657612854.json",
-    "ttsSha256": "d2fe21a6aa294f80fb47e56677c3a74090c3dc131361d798dfde709f6a3a64a2",
-    "inventoryPath": "docs/data/darkest-dungeon/community-reference/asset-inventory.json",
-    "inventorySha256": "9f8bb7a62c86ec4f4c861d8867372f8f6323cdd66e1b50659fceb2024238ea59"
-  },
+  "inputs": [
+    {
+      "role": "source-intake",
+      "name": "Phase11A3_CompleteEdition_Source_Intake_Package.json",
+      "sha256": "382e479f84f79a9b3cc6b0256b2fa5dea100b3576244988f180b49e75ed78d2a"
+    },
+    {
+      "role": "tts-save",
+      "name": "3657612854.json",
+      "sha256": "d2fe21a6aa294f80fb47e56677c3a74090c3dc131361d798dfde709f6a3a64a2"
+    },
+    {
+      "role": "asset-inventory",
+      "name": "asset-inventory.json",
+      "sha256": "1419c93ca3f77421a1242d0c14491b2f83020eac1d5366f8c8fc9e7228fdfff3"
+    },
+    {
+      "role": "visual-identity-lock",
+      "name": "community-visual-identity-lock.json",
+      "sha256": "30dadeb61a820867c3198f7049463ce4f394229bf3977794e6357d1c646311a6"
+    }
+  ],
   "counts": {
-    "total": 26,
-    "ready": 33,
+    "total": 28,
+    "ready": 35,
     "mappedUnrendered": 2,
     "sourceMissing": 2,
     "notApplicable": 0
   },
   "importer": {
-    "cacheDir": ".artifacts/community-reference-assets/raw",
-    "downloadedSheets": 0,
-    "cachedSheets": 33,
-    "totalLocalBytes": 15663268,
-    "uniqueSheets": 0
+    "downloads": 0,
+    "cacheHits": 35,
+    "totalLocalBytes": 20644417,
+    "uniqueSourceUrls": 10
   },
   "assets": [
     {
@@ -55,6 +68,8 @@
       ],
       "guid": "d99c50",
       "cardId": 46053,
+      "sourceSide": "face",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/6/ContainedObjects/1/ContainedObjects/4/ContainedObjects/3",
       "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/12527161326538095503/4AEA9541438F4E2B6389D9BFC6940942BDFC0F17/",
       "sourceSha256": "ced2bb15c733bf0aaa1711696d5ce7d10b6ef12f58adb5999a0f47b873671c01",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/final-encounter/ancestor-first-form.front.png",
@@ -84,28 +99,30 @@
       "productSurface": "contact-sheet-only",
       "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE",
       "sourceReference": [
-        "asset:5e5515:face"
+        "asset:e3fc86:face"
       ],
-      "guid": "5e5515",
-      "cardId": 42033,
-      "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/10854828983918674982/370A3ADC515B68B742441138B1F34A7777B3D781/",
-      "sourceSha256": "d09343e9f6a56e6ef7abe9298e5feb8351b9f00e7d132afdf8cc1797a189e409",
+      "guid": "e3fc86",
+      "cardId": 44724,
+      "sourceSide": "face",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/1/ContainedObjects/0",
+      "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/14650257961976472599/445EF67B8C222C8A53D77851BDE565AE244DB926/",
+      "sourceSha256": "577b9ac5db685cc37684331231914156e8adebc16fb822d230af52e16e876174",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/rooms/ancestor-room.front.png",
-      "localSha256": "7a27a3afcf5febeca89367100a74a1a8c110b0167ddfca452603679670c22a65",
-      "width": 590,
-      "height": 980,
+      "localSha256": "107a44295dbdbe73aedbbd9870078bc1cd5133b3faf31d2e2eaa1758bec9672d",
+      "width": 530,
+      "height": 730,
       "crop": {
         "kind": "custom-deck-cell",
-        "deckId": "420",
-        "cardIndex": 33,
-        "numWidth": 10,
-        "numHeight": 4,
-        "sheetWidth": 5900,
-        "sheetHeight": 3920,
-        "cellWidth": 590,
-        "cellHeight": 980,
-        "left": 1770,
-        "top": 2940
+        "deckId": "447",
+        "cardIndex": 24,
+        "numWidth": 6,
+        "numHeight": 6,
+        "sheetWidth": 3180,
+        "sheetHeight": 4380,
+        "cellWidth": 530,
+        "cellHeight": 730,
+        "left": 0,
+        "top": 2920
       }
     },
     {
@@ -117,14 +134,16 @@
       "productSurface": "contact-sheet-only",
       "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE",
       "sourceReference": [
-        "asset:bc9c87:imageUrl"
+        "asset:bc9c87:secondaryUrl"
       ],
       "guid": "bc9c87",
       "cardId": null,
-      "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/12907387505248994134/99CA3B92B205E9924DAC3BDE2FE1674882C7881D/",
-      "sourceSha256": "9b4132eed81f2637b407b02f0ee7b11f37c1a096e3b1486b5ba221ed95e096f9",
+      "sourceSide": "secondaryUrl",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/7/ContainedObjects/0",
+      "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/11946661968609043341/C8166850B124429F8E4643D532FE259F1DDDD115/",
+      "sourceSha256": "42f2681494973fecf3a273edbaf2a2f0f0ef206b16d074bc9caedba58826b571",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/rooms/ancestor-room-tile.front.png",
-      "localSha256": "9b4132eed81f2637b407b02f0ee7b11f37c1a096e3b1486b5ba221ed95e096f9",
+      "localSha256": "42f2681494973fecf3a273edbaf2a2f0f0ef206b16d074bc9caedba58826b571",
       "width": 2150,
       "height": 2150,
       "crop": {
@@ -144,6 +163,8 @@
       ],
       "guid": "1825b7",
       "cardId": 46617,
+      "sourceSide": "face",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/6/ContainedObjects/1/ContainedObjects/4/ContainedObjects/2",
       "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/15424415349197047542/360B0B450F5A7AA166D1E89A8471CFB66A2EFD6E/",
       "sourceSha256": "5d83089f66555e3a6f3df5ebb6ab4b439dbb6fe47c54b419033dff57f3df00f8",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/final-encounter/ancestor-second-form.front.png",
@@ -196,6 +217,8 @@
       ],
       "guid": "36d6ad",
       "cardId": 46021,
+      "sourceSide": "face",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/14",
       "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/12527161326538095503/4AEA9541438F4E2B6389D9BFC6940942BDFC0F17/",
       "sourceSha256": "ced2bb15c733bf0aaa1711696d5ce7d10b6ef12f58adb5999a0f47b873671c01",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/guardians/cultist-priest.front.png",
@@ -214,7 +237,51 @@
         "cellHeight": 970,
         "left": 570,
         "top": 1940
-      }
+      },
+      "physicalInstances": [
+        {
+          "GUID": "36d6ad",
+          "CardID": 46021,
+          "sourceReference": "asset:36d6ad:face",
+          "visualAssetId": "community-dd-cultist-priest-guardian-battle-card",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/guardians/cultist-priest.front.png",
+          "crop": {
+            "cardIndex": 21,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "f61672f5473e7333a340a0aaf67cb0b36d4241268260bb95ed3fcb394392d78a",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/14"
+        },
+        {
+          "GUID": "1b261d",
+          "CardID": 46020,
+          "sourceReference": "asset:1b261d:face",
+          "visualAssetId": "community-dd-cultist-priest-guardian-battle-card-1b261d",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/guardians/cultist-priest-1b261d.front.png",
+          "crop": {
+            "cardIndex": 20,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "759f0b292c7d80eb2ad5ee56a0052bf3ca66926174b495f22f2a7517fb7bf5d9",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/15"
+        },
+        {
+          "GUID": "0ba2f8",
+          "CardID": 46022,
+          "sourceReference": "asset:0ba2f8:face",
+          "visualAssetId": "community-dd-cultist-priest-guardian-battle-card-0ba2f8",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/guardians/cultist-priest-0ba2f8.front.png",
+          "crop": {
+            "cardIndex": 22,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "e3c28f10061aa64aa91aeadcfdf109d63ede48e3b4ea3f91ef54711446a9d4cf",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/16"
+        }
+      ]
     },
     {
       "assetId": "community-dd-darkest-dungeon-monster-deck-monster-deck",
@@ -227,10 +294,10 @@
       "sourceReferences": []
     },
     {
-      "assetId": "community-dd-dungeon-tile-4ced96-dungeon-tile",
+      "assetId": "community-dd-dungeon-tile-4ced96-guardian-room-tile",
       "runtimeEntityId": "community-dd-dungeon-tile-4ced96",
       "requirementId": "tierB-dd-dungeon-tile:4ced96",
-      "assetKind": "dungeon-tile",
+      "assetKind": "guardian-room-tile",
       "status": "ready",
       "productSurface": "contact-sheet-only",
       "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE",
@@ -239,6 +306,8 @@
       ],
       "guid": "4ced96",
       "cardId": null,
+      "sourceSide": "imageUrl",
+      "ttsObjectPath": "ObjectStates/69/ContainedObjects/0",
       "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/18153630558740090023/DE4A6739065E1A5F37C6A6E9CF9621472E7291AD/",
       "sourceSha256": "3097c0fa16a680fd2d26ce7f4275b029b55767afc78802a9aeb9c2a87dea7b86",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/rooms/dungeon-tile-4ced96.front.png",
@@ -250,10 +319,10 @@
       }
     },
     {
-      "assetId": "community-dd-dungeon-tile-d10a24-dungeon-tile",
+      "assetId": "community-dd-dungeon-tile-d10a24-guardian-room-tile",
       "runtimeEntityId": "community-dd-dungeon-tile-d10a24",
       "requirementId": "tierB-dd-dungeon-tile:d10a24",
-      "assetKind": "dungeon-tile",
+      "assetKind": "guardian-room-tile",
       "status": "ready",
       "productSurface": "contact-sheet-only",
       "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE",
@@ -262,6 +331,8 @@
       ],
       "guid": "d10a24",
       "cardId": null,
+      "sourceSide": "imageUrl",
+      "ttsObjectPath": "ObjectStates/69/ContainedObjects/1",
       "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/14056689639152204527/8DF07B591F565C87BBB74EF80E7620AE31032A93/",
       "sourceSha256": "acd05c0a13121dbd27ac9d952f15d77dee9d95dae1256cf9441498f00b5221d0",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/rooms/dungeon-tile-d10a24.front.png",
@@ -298,6 +369,8 @@
       ],
       "guid": "eed6cd",
       "cardId": 46618,
+      "sourceSide": "face",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/6/ContainedObjects/1/ContainedObjects/0/ContainedObjects/1/ContainedObjects/0",
       "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/15424415349197047542/360B0B450F5A7AA166D1E89A8471CFB66A2EFD6E/",
       "sourceSha256": "5d83089f66555e3a6f3df5ebb6ab4b439dbb6fe47c54b419033dff57f3df00f8",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/final-encounter/gestating-heart.front.png",
@@ -331,6 +404,8 @@
       ],
       "guid": "21bbaf",
       "cardId": 46619,
+      "sourceSide": "face",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/6/ContainedObjects/1/ContainedObjects/0/ContainedObjects/1/ContainedObjects/1",
       "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/15424415349197047542/360B0B450F5A7AA166D1E89A8471CFB66A2EFD6E/",
       "sourceSha256": "5d83089f66555e3a6f3df5ebb6ab4b439dbb6fe47c54b419033dff57f3df00f8",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/final-encounter/heart-of-darkness.front.png",
@@ -364,6 +439,8 @@
       ],
       "guid": "adff9c",
       "cardId": 46057,
+      "sourceSide": "face",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/6/ContainedObjects/1/ContainedObjects/4/ContainedObjects/4/ContainedObjects/0",
       "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/12527161326538095503/4AEA9541438F4E2B6389D9BFC6940942BDFC0F17/",
       "sourceSha256": "ced2bb15c733bf0aaa1711696d5ce7d10b6ef12f58adb5999a0f47b873671c01",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/final-encounter/imperfect-reflection.front.png",
@@ -382,7 +459,51 @@
         "cellHeight": 970,
         "left": 3990,
         "top": 4850
-      }
+      },
+      "physicalInstances": [
+        {
+          "GUID": "adff9c",
+          "CardID": 46057,
+          "sourceReference": "asset:adff9c:face",
+          "visualAssetId": "community-dd-imperfect-reflection-final-form-card",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/final-encounter/imperfect-reflection.front.png",
+          "crop": {
+            "cardIndex": 57,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "81fea3ef8a2f04dad6820551a700fd5fa6c42ae6f2cdbed96431e5ff316fea38",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/6/ContainedObjects/1/ContainedObjects/4/ContainedObjects/4/ContainedObjects/0"
+        },
+        {
+          "GUID": "d57825",
+          "CardID": 46058,
+          "sourceReference": "asset:d57825:face",
+          "visualAssetId": "community-dd-imperfect-reflection-final-form-card-d57825",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/final-encounter/imperfect-reflection-d57825.front.png",
+          "crop": {
+            "cardIndex": 58,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "ac215a17858927889a9494c8810744a17d364a8c1a305e9674dfe55764b2c06d",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/6/ContainedObjects/1/ContainedObjects/4/ContainedObjects/4/ContainedObjects/1"
+        },
+        {
+          "GUID": "95ec7b",
+          "CardID": 46059,
+          "sourceReference": "asset:95ec7b:face",
+          "visualAssetId": "community-dd-imperfect-reflection-final-form-card-95ec7b",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/final-encounter/imperfect-reflection-95ec7b.front.png",
+          "crop": {
+            "cardIndex": 59,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "47516b665813b3a2060491d0506c461f5ee2930267be652e94a2d874787576f3",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/6/ContainedObjects/1/ContainedObjects/4/ContainedObjects/4/ContainedObjects/2"
+        }
+      ]
     },
     {
       "assetId": "community-dd-malignant-growth-guardian-battle-card",
@@ -397,6 +518,8 @@
       ],
       "guid": "4a8b06",
       "cardId": 46024,
+      "sourceSide": "face",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/11",
       "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/12527161326538095503/4AEA9541438F4E2B6389D9BFC6940942BDFC0F17/",
       "sourceSha256": "ced2bb15c733bf0aaa1711696d5ce7d10b6ef12f58adb5999a0f47b873671c01",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/guardians/malignant-growth.front.png",
@@ -415,7 +538,51 @@
         "cellHeight": 970,
         "left": 2280,
         "top": 1940
-      }
+      },
+      "physicalInstances": [
+        {
+          "GUID": "4a8b06",
+          "CardID": 46024,
+          "sourceReference": "asset:4a8b06:face",
+          "visualAssetId": "community-dd-malignant-growth-guardian-battle-card",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/guardians/malignant-growth.front.png",
+          "crop": {
+            "cardIndex": 24,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "c9866f899ffe3c82e767dc1482213e6dea94b9b6af7fa125d158701595d080a1",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/11"
+        },
+        {
+          "GUID": "a34fbd",
+          "CardID": 46023,
+          "sourceReference": "asset:a34fbd:face",
+          "visualAssetId": "community-dd-malignant-growth-guardian-battle-card-a34fbd",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/guardians/malignant-growth-a34fbd.front.png",
+          "crop": {
+            "cardIndex": 23,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "6f00aed7f76b6371dbf327d7f3d2d70a9b135ec56a329dc9976399c95e9e5ccb",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/12"
+        },
+        {
+          "GUID": "f06594",
+          "CardID": 46025,
+          "sourceReference": "asset:f06594:face",
+          "visualAssetId": "community-dd-malignant-growth-guardian-battle-card-f06594",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/guardians/malignant-growth-f06594.front.png",
+          "crop": {
+            "cardIndex": 25,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "71b83747db13919182549fad6175580b6e40062c6280a64e06f5d66e6a7d2ac8",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/13"
+        }
+      ]
     },
     {
       "assetId": "community-dd-mammoth-cyst-guardian-battle-card",
@@ -430,6 +597,8 @@
       ],
       "guid": "c4a35e",
       "cardId": 46615,
+      "sourceSide": "face",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/6/ContainedObjects/1/ContainedObjects/1/ContainedObjects/3",
       "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/15424415349197047542/360B0B450F5A7AA166D1E89A8471CFB66A2EFD6E/",
       "sourceSha256": "5d83089f66555e3a6f3df5ebb6ab4b439dbb6fe47c54b419033dff57f3df00f8",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/guardians/mammoth-cyst.front.png",
@@ -459,28 +628,55 @@
       "productSurface": "contact-sheet-only",
       "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE",
       "sourceReference": [
-        "asset:eb35cd:face"
+        "asset:bb91b0:face"
       ],
-      "guid": "eb35cd",
-      "cardId": 42028,
-      "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/10854828983918674982/370A3ADC515B68B742441138B1F34A7777B3D781/",
-      "sourceSha256": "d09343e9f6a56e6ef7abe9298e5feb8351b9f00e7d132afdf8cc1797a189e409",
+      "guid": "bb91b0",
+      "cardId": 44723,
+      "sourceSide": "face",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/1/ContainedObjects/1",
+      "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/14650257961976472599/445EF67B8C222C8A53D77851BDE565AE244DB926/",
+      "sourceSha256": "577b9ac5db685cc37684331231914156e8adebc16fb822d230af52e16e876174",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/rooms/mammoth-cyst-room.front.png",
-      "localSha256": "3c27bee0488ed179d0dd5d56d99b8761d007e73aff93bf490829704cb52b575d",
-      "width": 590,
-      "height": 980,
+      "localSha256": "0e79f94895a2ea64cd262f72399ab5bee627cea15d08f4e38485428058170c31",
+      "width": 530,
+      "height": 730,
       "crop": {
         "kind": "custom-deck-cell",
-        "deckId": "420",
-        "cardIndex": 28,
-        "numWidth": 10,
-        "numHeight": 4,
-        "sheetWidth": 5900,
-        "sheetHeight": 3920,
-        "cellWidth": 590,
-        "cellHeight": 980,
-        "left": 4720,
-        "top": 1960
+        "deckId": "447",
+        "cardIndex": 23,
+        "numWidth": 6,
+        "numHeight": 6,
+        "sheetWidth": 3180,
+        "sheetHeight": 4380,
+        "cellWidth": 530,
+        "cellHeight": 730,
+        "left": 2650,
+        "top": 2190
+      }
+    },
+    {
+      "assetId": "community-dd-mammoth-cyst-room-tile-guardian-room-tile",
+      "runtimeEntityId": "community-dd-mammoth-cyst-room-tile",
+      "requirementId": "tierB-mammoth-cyst-room",
+      "assetKind": "guardian-room-tile",
+      "status": "ready",
+      "productSurface": "contact-sheet-only",
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE",
+      "sourceReference": [
+        "asset:bc9c87:imageUrl"
+      ],
+      "guid": "bc9c87",
+      "cardId": null,
+      "sourceSide": "imageUrl",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/7/ContainedObjects/0",
+      "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/12907387505248994134/99CA3B92B205E9924DAC3BDE2FE1674882C7881D/",
+      "sourceSha256": "9b4132eed81f2637b407b02f0ee7b11f37c1a096e3b1486b5ba221ed95e096f9",
+      "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/rooms/mammoth-cyst-room-tile.front.png",
+      "localSha256": "9b4132eed81f2637b407b02f0ee7b11f37c1a096e3b1486b5ba221ed95e096f9",
+      "width": 2150,
+      "height": 2150,
+      "crop": {
+        "kind": "tile-image"
       }
     },
     {
@@ -496,6 +692,8 @@
       ],
       "guid": "4f2825",
       "cardId": 46031,
+      "sourceSide": "face",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/4",
       "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/12527161326538095503/4AEA9541438F4E2B6389D9BFC6940942BDFC0F17/",
       "sourceSha256": "ced2bb15c733bf0aaa1711696d5ce7d10b6ef12f58adb5999a0f47b873671c01",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-antibody.front.png",
@@ -514,7 +712,51 @@
         "cellHeight": 970,
         "left": 570,
         "top": 2910
-      }
+      },
+      "physicalInstances": [
+        {
+          "GUID": "4f2825",
+          "CardID": 46031,
+          "sourceReference": "asset:4f2825:face",
+          "visualAssetId": "community-dd-monster-antibody-monster-deck-card",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-antibody.front.png",
+          "crop": {
+            "cardIndex": 31,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "10f623b4b345f52220c5cc48ef6b73f082cf283a833bfeffb89dbe886c27de42",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/4"
+        },
+        {
+          "GUID": "a0b399",
+          "CardID": 46032,
+          "sourceReference": "asset:a0b399:face",
+          "visualAssetId": "community-dd-monster-antibody-monster-deck-card-a0b399",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-antibody-a0b399.front.png",
+          "crop": {
+            "cardIndex": 32,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "0bce3d16d99bd9a43d709e914a20ae1fcfd20a88f78b932766ec1586b807b62c",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/3"
+        },
+        {
+          "GUID": "351f3c",
+          "CardID": 46033,
+          "sourceReference": "asset:351f3c:face",
+          "visualAssetId": "community-dd-monster-antibody-monster-deck-card-351f3c",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-antibody-351f3c.front.png",
+          "crop": {
+            "cardIndex": 33,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "5db645df50176d513007b9e6e217e1cd660648b36f049e40f983d5e50d86be88",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/5"
+        }
+      ]
     },
     {
       "assetId": "community-dd-monster-ascended-brawler-monster-deck-card",
@@ -529,6 +771,8 @@
       ],
       "guid": "849849",
       "cardId": 46011,
+      "sourceSide": "face",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/25",
       "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/12527161326538095503/4AEA9541438F4E2B6389D9BFC6940942BDFC0F17/",
       "sourceSha256": "ced2bb15c733bf0aaa1711696d5ce7d10b6ef12f58adb5999a0f47b873671c01",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-ascended-brawler.front.png",
@@ -547,7 +791,51 @@
         "cellHeight": 970,
         "left": 570,
         "top": 970
-      }
+      },
+      "physicalInstances": [
+        {
+          "GUID": "849849",
+          "CardID": 46011,
+          "sourceReference": "asset:849849:face",
+          "visualAssetId": "community-dd-monster-ascended-brawler-monster-deck-card",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-ascended-brawler.front.png",
+          "crop": {
+            "cardIndex": 11,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "54da629b3d5390ceede746493f812e551fa87c4961383e5e3867d640be80e62d",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/25"
+        },
+        {
+          "GUID": "15687c",
+          "CardID": 46012,
+          "sourceReference": "asset:15687c:face",
+          "visualAssetId": "community-dd-monster-ascended-brawler-monster-deck-card-15687c",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-ascended-brawler-15687c.front.png",
+          "crop": {
+            "cardIndex": 12,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "9250d93a8540f38239f2dfb2abdd39533e544aa452bdb5c586ad6da4d6e5c5e1",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/24"
+        },
+        {
+          "GUID": "9d16dc",
+          "CardID": 46013,
+          "sourceReference": "asset:9d16dc:face",
+          "visualAssetId": "community-dd-monster-ascended-brawler-monster-deck-card-9d16dc",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-ascended-brawler-9d16dc.front.png",
+          "crop": {
+            "cardIndex": 13,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "886fe8c3e004606427f90dfa0e49d1ac628304c3e443474d3e83026d59b0f62f",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/23"
+        }
+      ]
     },
     {
       "assetId": "community-dd-monster-ascended-witch-monster-deck-card",
@@ -562,6 +850,8 @@
       ],
       "guid": "2037a8",
       "cardId": 46014,
+      "sourceSide": "face",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/22",
       "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/12527161326538095503/4AEA9541438F4E2B6389D9BFC6940942BDFC0F17/",
       "sourceSha256": "ced2bb15c733bf0aaa1711696d5ce7d10b6ef12f58adb5999a0f47b873671c01",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-ascended-witch.front.png",
@@ -580,7 +870,51 @@
         "cellHeight": 970,
         "left": 2280,
         "top": 970
-      }
+      },
+      "physicalInstances": [
+        {
+          "GUID": "2037a8",
+          "CardID": 46014,
+          "sourceReference": "asset:2037a8:face",
+          "visualAssetId": "community-dd-monster-ascended-witch-monster-deck-card",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-ascended-witch.front.png",
+          "crop": {
+            "cardIndex": 14,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "d41e0a0034e643188726b7e7a61a7da0255f4b514763d9d5b9bdef4d8958539b",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/22"
+        },
+        {
+          "GUID": "4cba93",
+          "CardID": 46015,
+          "sourceReference": "asset:4cba93:face",
+          "visualAssetId": "community-dd-monster-ascended-witch-monster-deck-card-4cba93",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-ascended-witch-4cba93.front.png",
+          "crop": {
+            "cardIndex": 15,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "0c868475358dc06674b5b99b997b8a770c56988b6f8fcd2563f20176e5667a58",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/21"
+        },
+        {
+          "GUID": "23df79",
+          "CardID": 46016,
+          "sourceReference": "asset:23df79:face",
+          "visualAssetId": "community-dd-monster-ascended-witch-monster-deck-card-23df79",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-ascended-witch-23df79.front.png",
+          "crop": {
+            "cardIndex": 16,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "0ef116973f4faa23d68e9748a4b0f946dd64ec42cbd70af4e610b5c04efe30c4",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/20"
+        }
+      ]
     },
     {
       "assetId": "community-dd-monster-cultist-priest-monster-deck-card",
@@ -595,6 +929,8 @@
       ],
       "guid": "1b261d",
       "cardId": 46020,
+      "sourceSide": "face",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/15",
       "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/12527161326538095503/4AEA9541438F4E2B6389D9BFC6940942BDFC0F17/",
       "sourceSha256": "ced2bb15c733bf0aaa1711696d5ce7d10b6ef12f58adb5999a0f47b873671c01",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-cultist-priest.front.png",
@@ -613,7 +949,51 @@
         "cellHeight": 970,
         "left": 0,
         "top": 1940
-      }
+      },
+      "physicalInstances": [
+        {
+          "GUID": "1b261d",
+          "CardID": 46020,
+          "sourceReference": "asset:1b261d:face",
+          "visualAssetId": "community-dd-monster-cultist-priest-monster-deck-card",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-cultist-priest.front.png",
+          "crop": {
+            "cardIndex": 20,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "759f0b292c7d80eb2ad5ee56a0052bf3ca66926174b495f22f2a7517fb7bf5d9",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/15"
+        },
+        {
+          "GUID": "36d6ad",
+          "CardID": 46021,
+          "sourceReference": "asset:36d6ad:face",
+          "visualAssetId": "community-dd-monster-cultist-priest-monster-deck-card-36d6ad",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-cultist-priest-36d6ad.front.png",
+          "crop": {
+            "cardIndex": 21,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "f61672f5473e7333a340a0aaf67cb0b36d4241268260bb95ed3fcb394392d78a",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/14"
+        },
+        {
+          "GUID": "0ba2f8",
+          "CardID": 46022,
+          "sourceReference": "asset:0ba2f8:face",
+          "visualAssetId": "community-dd-monster-cultist-priest-monster-deck-card-0ba2f8",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-cultist-priest-0ba2f8.front.png",
+          "crop": {
+            "cardIndex": 22,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "e3c28f10061aa64aa91aeadcfdf109d63ede48e3b4ea3f91ef54711446a9d4cf",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/16"
+        }
+      ]
     },
     {
       "assetId": "community-dd-monster-defensive-growth-monster-deck-card",
@@ -628,6 +1008,8 @@
       ],
       "guid": "861ed6",
       "cardId": 46034,
+      "sourceSide": "face",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/1",
       "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/12527161326538095503/4AEA9541438F4E2B6389D9BFC6940942BDFC0F17/",
       "sourceSha256": "ced2bb15c733bf0aaa1711696d5ce7d10b6ef12f58adb5999a0f47b873671c01",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-defensive-growth.front.png",
@@ -646,7 +1028,51 @@
         "cellHeight": 970,
         "left": 2280,
         "top": 2910
-      }
+      },
+      "physicalInstances": [
+        {
+          "GUID": "861ed6",
+          "CardID": 46034,
+          "sourceReference": "asset:861ed6:face",
+          "visualAssetId": "community-dd-monster-defensive-growth-monster-deck-card",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-defensive-growth.front.png",
+          "crop": {
+            "cardIndex": 34,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "562b9b582224addf8113152550a2c1b10455ef2ca79060c8ddbcf0e4a1ffd521",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/1"
+        },
+        {
+          "GUID": "014fb5",
+          "CardID": 46035,
+          "sourceReference": "asset:014fb5:face",
+          "visualAssetId": "community-dd-monster-defensive-growth-monster-deck-card-014fb5",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-defensive-growth-014fb5.front.png",
+          "crop": {
+            "cardIndex": 35,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "d167a63ccea639a21489c081ce3640c891577346207562610f321fc229f0ee56",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/0"
+        },
+        {
+          "GUID": "ed4bc0",
+          "CardID": 46036,
+          "sourceReference": "asset:ed4bc0:face",
+          "visualAssetId": "community-dd-monster-defensive-growth-monster-deck-card-ed4bc0",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-defensive-growth-ed4bc0.front.png",
+          "crop": {
+            "cardIndex": 36,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "97c86316dd169a298d2488cb5764e8eccf00e4d032ef2aea14f99d91675f4a82",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/2"
+        }
+      ]
     },
     {
       "assetId": "community-dd-monster-flesh-hound-monster-deck-card",
@@ -661,6 +1087,8 @@
       ],
       "guid": "b2ab62",
       "cardId": 46026,
+      "sourceSide": "face",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/10",
       "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/12527161326538095503/4AEA9541438F4E2B6389D9BFC6940942BDFC0F17/",
       "sourceSha256": "ced2bb15c733bf0aaa1711696d5ce7d10b6ef12f58adb5999a0f47b873671c01",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-flesh-hound.front.png",
@@ -679,7 +1107,37 @@
         "cellHeight": 970,
         "left": 3420,
         "top": 1940
-      }
+      },
+      "physicalInstances": [
+        {
+          "GUID": "b2ab62",
+          "CardID": 46026,
+          "sourceReference": "asset:b2ab62:face",
+          "visualAssetId": "community-dd-monster-flesh-hound-monster-deck-card",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-flesh-hound.front.png",
+          "crop": {
+            "cardIndex": 26,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "36264c4ac33744d3043f44e566045a1487ffa1d83c15780f69b23a07af823577",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/10"
+        },
+        {
+          "GUID": "dc3db6",
+          "CardID": 46027,
+          "sourceReference": "asset:dc3db6:face",
+          "visualAssetId": "community-dd-monster-flesh-hound-monster-deck-card-dc3db6",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-flesh-hound-dc3db6.front.png",
+          "crop": {
+            "cardIndex": 27,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "bd28890414cc19ecf0725f0d2beaa1e1a9356e20daf9162c193e5fb8c6977014",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/9"
+        }
+      ]
     },
     {
       "assetId": "community-dd-monster-malignant-growth-monster-deck-card",
@@ -694,6 +1152,8 @@
       ],
       "guid": "a34fbd",
       "cardId": 46023,
+      "sourceSide": "face",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/12",
       "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/12527161326538095503/4AEA9541438F4E2B6389D9BFC6940942BDFC0F17/",
       "sourceSha256": "ced2bb15c733bf0aaa1711696d5ce7d10b6ef12f58adb5999a0f47b873671c01",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-malignant-growth.front.png",
@@ -712,7 +1172,51 @@
         "cellHeight": 970,
         "left": 1710,
         "top": 1940
-      }
+      },
+      "physicalInstances": [
+        {
+          "GUID": "a34fbd",
+          "CardID": 46023,
+          "sourceReference": "asset:a34fbd:face",
+          "visualAssetId": "community-dd-monster-malignant-growth-monster-deck-card",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-malignant-growth.front.png",
+          "crop": {
+            "cardIndex": 23,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "6f00aed7f76b6371dbf327d7f3d2d70a9b135ec56a329dc9976399c95e9e5ccb",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/12"
+        },
+        {
+          "GUID": "4a8b06",
+          "CardID": 46024,
+          "sourceReference": "asset:4a8b06:face",
+          "visualAssetId": "community-dd-monster-malignant-growth-monster-deck-card-4a8b06",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-malignant-growth-4a8b06.front.png",
+          "crop": {
+            "cardIndex": 24,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "c9866f899ffe3c82e767dc1482213e6dea94b9b6af7fa125d158701595d080a1",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/11"
+        },
+        {
+          "GUID": "f06594",
+          "CardID": 46025,
+          "sourceReference": "asset:f06594:face",
+          "visualAssetId": "community-dd-monster-malignant-growth-monster-deck-card-f06594",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-malignant-growth-f06594.front.png",
+          "crop": {
+            "cardIndex": 25,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "71b83747db13919182549fad6175580b6e40062c6280a64e06f5d66e6a7d2ac8",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/13"
+        }
+      ]
     },
     {
       "assetId": "community-dd-monster-polyp-monster-deck-card",
@@ -727,6 +1231,8 @@
       ],
       "guid": "c6f26c",
       "cardId": 46028,
+      "sourceSide": "face",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/6",
       "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/12527161326538095503/4AEA9541438F4E2B6389D9BFC6940942BDFC0F17/",
       "sourceSha256": "ced2bb15c733bf0aaa1711696d5ce7d10b6ef12f58adb5999a0f47b873671c01",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-polyp.front.png",
@@ -745,7 +1251,51 @@
         "cellHeight": 970,
         "left": 4560,
         "top": 1940
-      }
+      },
+      "physicalInstances": [
+        {
+          "GUID": "c6f26c",
+          "CardID": 46028,
+          "sourceReference": "asset:c6f26c:face",
+          "visualAssetId": "community-dd-monster-polyp-monster-deck-card",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-polyp.front.png",
+          "crop": {
+            "cardIndex": 28,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "69c22d4edbed08665f7eeb31460f40d3f03a7314fbc43136c85424d0742dbbfc",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/6"
+        },
+        {
+          "GUID": "47d664",
+          "CardID": 46029,
+          "sourceReference": "asset:47d664:face",
+          "visualAssetId": "community-dd-monster-polyp-monster-deck-card-47d664",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-polyp-47d664.front.png",
+          "crop": {
+            "cardIndex": 29,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "1f822483345e6036bf6485fd5c44952200248e76e376882a991e90ea4bb8d4ea",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/8"
+        },
+        {
+          "GUID": "1b182b",
+          "CardID": 46030,
+          "sourceReference": "asset:1b182b:face",
+          "visualAssetId": "community-dd-monster-polyp-monster-deck-card-1b182b",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-polyp-1b182b.front.png",
+          "crop": {
+            "cardIndex": 30,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "939c2378cc555c5c59caa3d5b562dd02ca15f64911da9a0d1410c271eb391850",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/7"
+        }
+      ]
     },
     {
       "assetId": "community-dd-monster-rapturous-cultist-monster-deck-card",
@@ -760,6 +1310,8 @@
       ],
       "guid": "42cb11",
       "cardId": 46017,
+      "sourceSide": "face",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/18",
       "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/12527161326538095503/4AEA9541438F4E2B6389D9BFC6940942BDFC0F17/",
       "sourceSha256": "ced2bb15c733bf0aaa1711696d5ce7d10b6ef12f58adb5999a0f47b873671c01",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-rapturous-cultist.front.png",
@@ -778,7 +1330,51 @@
         "cellHeight": 970,
         "left": 3990,
         "top": 970
-      }
+      },
+      "physicalInstances": [
+        {
+          "GUID": "42cb11",
+          "CardID": 46017,
+          "sourceReference": "asset:42cb11:face",
+          "visualAssetId": "community-dd-monster-rapturous-cultist-monster-deck-card",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-rapturous-cultist.front.png",
+          "crop": {
+            "cardIndex": 17,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "63cd566277f1a8fd9d335a5d96c3104286098858269f2455983be247063245a4",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/18"
+        },
+        {
+          "GUID": "6c46af",
+          "CardID": 46018,
+          "sourceReference": "asset:6c46af:face",
+          "visualAssetId": "community-dd-monster-rapturous-cultist-monster-deck-card-6c46af",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-rapturous-cultist-6c46af.front.png",
+          "crop": {
+            "cardIndex": 18,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "0b873f87f530e5cc20afe5d4b024fe70da9ac8a10bd145a97f3187ecf7b0edfc",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/17"
+        },
+        {
+          "GUID": "ec3703",
+          "CardID": 46019,
+          "sourceReference": "asset:ec3703:face",
+          "visualAssetId": "community-dd-monster-rapturous-cultist-monster-deck-card-ec3703",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/monster-deck/monster-rapturous-cultist-ec3703.front.png",
+          "crop": {
+            "cardIndex": 19,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "f98133b072936a8b8d675dd560952ecd51c928d6e8fceb89a26ae9c7d2557b4d",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/5/ContainedObjects/0/ContainedObjects/0/ContainedObjects/19"
+        }
+      ]
     },
     {
       "assetId": "community-dd-perfect-reflection-final-form-card",
@@ -793,6 +1389,8 @@
       ],
       "guid": "4a0ff9",
       "cardId": 46055,
+      "sourceSide": "face",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/6/ContainedObjects/1/ContainedObjects/4/ContainedObjects/5/ContainedObjects/0",
       "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/12527161326538095503/4AEA9541438F4E2B6389D9BFC6940942BDFC0F17/",
       "sourceSha256": "ced2bb15c733bf0aaa1711696d5ce7d10b6ef12f58adb5999a0f47b873671c01",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/final-encounter/perfect-reflection.front.png",
@@ -811,7 +1409,51 @@
         "cellHeight": 970,
         "left": 2850,
         "top": 4850
-      }
+      },
+      "physicalInstances": [
+        {
+          "GUID": "4a0ff9",
+          "CardID": 46055,
+          "sourceReference": "asset:4a0ff9:face",
+          "visualAssetId": "community-dd-perfect-reflection-final-form-card",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/final-encounter/perfect-reflection.front.png",
+          "crop": {
+            "cardIndex": 55,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "39807998a4c1f1d0c8529f2c11749065d4f2148167c351685145c76b5e47f936",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/6/ContainedObjects/1/ContainedObjects/4/ContainedObjects/5/ContainedObjects/0"
+        },
+        {
+          "GUID": "695dfa",
+          "CardID": 46054,
+          "sourceReference": "asset:695dfa:face",
+          "visualAssetId": "community-dd-perfect-reflection-final-form-card-695dfa",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/final-encounter/perfect-reflection-695dfa.front.png",
+          "crop": {
+            "cardIndex": 54,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "6c0be64a575a5a5ff1736928407b4a909faf1758a6592c2961e784f0fa2c1e2f",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/6/ContainedObjects/1/ContainedObjects/4/ContainedObjects/5/ContainedObjects/1"
+        },
+        {
+          "GUID": "e75d33",
+          "CardID": 46056,
+          "sourceReference": "asset:e75d33:face",
+          "visualAssetId": "community-dd-perfect-reflection-final-form-card-e75d33",
+          "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/final-encounter/perfect-reflection-e75d33.front.png",
+          "crop": {
+            "cardIndex": 56,
+            "numWidth": 10,
+            "numHeight": 7
+          },
+          "localSha256": "8c5d126a9d77ccd079e0970367292fbd0ab6cdf5c4d942ce7f6091f2a11e60a1",
+          "ttsObjectPath": "ObjectStates/47/ContainedObjects/6/ContainedObjects/1/ContainedObjects/4/ContainedObjects/5/ContainedObjects/2"
+        }
+      ]
     },
     {
       "assetId": "community-dd-quest-belly-of-the-beast-quest-card-front",
@@ -826,6 +1468,8 @@
       ],
       "guid": "6555d3",
       "cardId": 44517,
+      "sourceSide": "face",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/4/ContainedObjects/2/ContainedObjects/2",
       "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/15513148799249388830/70C0BC89CA4160B5E6A0449DEDC8B57529AB5839/",
       "sourceSha256": "822994ad2605917efd28082d20bac7ef979d2d2262c4764df568834caa76a0a8",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/quests/quest-belly-of-the-beast.front.png",
@@ -859,6 +1503,8 @@
       ],
       "guid": "083199",
       "cardId": 44516,
+      "sourceSide": "face",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/4/ContainedObjects/2/ContainedObjects/1",
       "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/15513148799249388830/70C0BC89CA4160B5E6A0449DEDC8B57529AB5839/",
       "sourceSha256": "822994ad2605917efd28082d20bac7ef979d2d2262c4764df568834caa76a0a8",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/quests/quest-light-the-way.front.png",
@@ -892,6 +1538,8 @@
       ],
       "guid": "735bc3",
       "cardId": 44515,
+      "sourceSide": "face",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/4/ContainedObjects/2/ContainedObjects/0",
       "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/15513148799249388830/70C0BC89CA4160B5E6A0449DEDC8B57529AB5839/",
       "sourceSha256": "822994ad2605917efd28082d20bac7ef979d2d2262c4764df568834caa76a0a8",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/quests/quest-we-are-the-flame.front.png",
@@ -925,6 +1573,8 @@
       ],
       "guid": "ccf3dc",
       "cardId": 46616,
+      "sourceSide": "face",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/6/ContainedObjects/1/ContainedObjects/2/ContainedObjects/2",
       "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/15424415349197047542/360B0B450F5A7AA166D1E89A8471CFB66A2EFD6E/",
       "sourceSha256": "5d83089f66555e3a6f3df5ebb6ab4b439dbb6fe47c54b419033dff57f3df00f8",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/guardians/shuffling-horror.front.png",
@@ -954,28 +1604,55 @@
       "productSurface": "contact-sheet-only",
       "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE",
       "sourceReference": [
-        "asset:654bdc:face"
+        "asset:9a87c7:face"
       ],
-      "guid": "654bdc",
-      "cardId": 42031,
-      "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/10854828983918674982/370A3ADC515B68B742441138B1F34A7777B3D781/",
-      "sourceSha256": "d09343e9f6a56e6ef7abe9298e5feb8351b9f00e7d132afdf8cc1797a189e409",
+      "guid": "9a87c7",
+      "cardId": 44722,
+      "sourceSide": "face",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/1/ContainedObjects/2",
+      "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/14650257961976472599/445EF67B8C222C8A53D77851BDE565AE244DB926/",
+      "sourceSha256": "577b9ac5db685cc37684331231914156e8adebc16fb822d230af52e16e876174",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/rooms/shuffling-horror-room.front.png",
-      "localSha256": "a8fd00e0d992faaf9ca5070c4d4f15a89107d14c7ec5d776ab1ef43cd647416a",
-      "width": 590,
-      "height": 980,
+      "localSha256": "0db60fe1dcd1334b443f9d272ef807efc3a2bd55db09a9b81b3ad516f6b06563",
+      "width": 530,
+      "height": 730,
       "crop": {
         "kind": "custom-deck-cell",
-        "deckId": "420",
-        "cardIndex": 31,
-        "numWidth": 10,
-        "numHeight": 4,
-        "sheetWidth": 5900,
-        "sheetHeight": 3920,
-        "cellWidth": 590,
-        "cellHeight": 980,
-        "left": 590,
-        "top": 2940
+        "deckId": "447",
+        "cardIndex": 22,
+        "numWidth": 6,
+        "numHeight": 6,
+        "sheetWidth": 3180,
+        "sheetHeight": 4380,
+        "cellWidth": 530,
+        "cellHeight": 730,
+        "left": 2120,
+        "top": 2190
+      }
+    },
+    {
+      "assetId": "community-dd-shuffling-horror-room-tile-guardian-room-tile",
+      "runtimeEntityId": "community-dd-shuffling-horror-room-tile",
+      "requirementId": "tierB-shuffling-horror-room",
+      "assetKind": "guardian-room-tile",
+      "status": "ready",
+      "productSurface": "contact-sheet-only",
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE",
+      "sourceReference": [
+        "asset:7a3fa9:secondaryUrl"
+      ],
+      "guid": "7a3fa9",
+      "cardId": null,
+      "sourceSide": "secondaryUrl",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/7/ContainedObjects/1",
+      "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/9687650273273941687/FD359BC45C4247D42428C0BDA44521B2BFF81A0C/",
+      "sourceSha256": "c03f46c1fc764ed515bfbe7a78133091b7a5e47b43ef2d8df1e5362592872d5d",
+      "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/rooms/shuffling-horror-room-tile.front.png",
+      "localSha256": "c03f46c1fc764ed515bfbe7a78133091b7a5e47b43ef2d8df1e5362592872d5d",
+      "width": 2150,
+      "height": 2150,
+      "crop": {
+        "kind": "tile-image"
       }
     },
     {
@@ -991,6 +1668,8 @@
       ],
       "guid": "efa5a4",
       "cardId": 46614,
+      "sourceSide": "face",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/6/ContainedObjects/1/ContainedObjects/3/ContainedObjects/3",
       "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/15424415349197047542/360B0B450F5A7AA166D1E89A8471CFB66A2EFD6E/",
       "sourceSha256": "5d83089f66555e3a6f3df5ebb6ab4b439dbb6fe47c54b419033dff57f3df00f8",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/guardians/templars-impaler.front.png",
@@ -1020,28 +1699,30 @@
       "productSurface": "contact-sheet-only",
       "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE",
       "sourceReference": [
-        "asset:ad6c7d:face"
+        "asset:afa508:face"
       ],
-      "guid": "ad6c7d",
-      "cardId": 42024,
-      "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/10854828983918674982/370A3ADC515B68B742441138B1F34A7777B3D781/",
-      "sourceSha256": "d09343e9f6a56e6ef7abe9298e5feb8351b9f00e7d132afdf8cc1797a189e409",
+      "guid": "afa508",
+      "cardId": 44721,
+      "sourceSide": "face",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/1/ContainedObjects/3",
+      "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/14650257961976472599/445EF67B8C222C8A53D77851BDE565AE244DB926/",
+      "sourceSha256": "577b9ac5db685cc37684331231914156e8adebc16fb822d230af52e16e876174",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/rooms/templars-room.front.png",
-      "localSha256": "7afbda0bb88399f1d46e3157e238e469bef974b0bb362f1b523510afbdeca191",
-      "width": 590,
-      "height": 980,
+      "localSha256": "767074c4707fe1797b8a832eb24f78a199a8c54a2abcf874d97c1e79e1cf0672",
+      "width": 530,
+      "height": 730,
       "crop": {
         "kind": "custom-deck-cell",
-        "deckId": "420",
-        "cardIndex": 24,
-        "numWidth": 10,
-        "numHeight": 4,
-        "sheetWidth": 5900,
-        "sheetHeight": 3920,
-        "cellWidth": 590,
-        "cellHeight": 980,
-        "left": 2360,
-        "top": 1960
+        "deckId": "447",
+        "cardIndex": 21,
+        "numWidth": 6,
+        "numHeight": 6,
+        "sheetWidth": 3180,
+        "sheetHeight": 4380,
+        "cellWidth": 530,
+        "cellHeight": 730,
+        "left": 1590,
+        "top": 2190
       }
     },
     {
@@ -1053,14 +1734,16 @@
       "productSurface": "contact-sheet-only",
       "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE",
       "sourceReference": [
-        "asset:bc9c87:imageUrl"
+        "asset:7a3fa9:imageUrl"
       ],
-      "guid": "bc9c87",
+      "guid": "7a3fa9",
       "cardId": null,
-      "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/12907387505248994134/99CA3B92B205E9924DAC3BDE2FE1674882C7881D/",
-      "sourceSha256": "9b4132eed81f2637b407b02f0ee7b11f37c1a096e3b1486b5ba221ed95e096f9",
+      "sourceSide": "imageUrl",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/7/ContainedObjects/1",
+      "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/18432412340859063681/5CC5729080F4DA7F0597B496A160A0BF2BCB5EA3/",
+      "sourceSha256": "c684b4ed7a1ba869efed9d4dc19cacb2365bbee23429db6e67f5ab3871f82d05",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/rooms/templars-room-tile.front.png",
-      "localSha256": "9b4132eed81f2637b407b02f0ee7b11f37c1a096e3b1486b5ba221ed95e096f9",
+      "localSha256": "c684b4ed7a1ba869efed9d4dc19cacb2365bbee23429db6e67f5ab3871f82d05",
       "width": 2150,
       "height": 2150,
       "crop": {
@@ -1080,6 +1763,8 @@
       ],
       "guid": "f88d6a",
       "cardId": 46613,
+      "sourceSide": "face",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/6/ContainedObjects/1/ContainedObjects/3/ContainedObjects/4",
       "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/15424415349197047542/360B0B450F5A7AA166D1E89A8471CFB66A2EFD6E/",
       "sourceSha256": "5d83089f66555e3a6f3df5ebb6ab4b439dbb6fe47c54b419033dff57f3df00f8",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/guardians/templars-warlord.front.png",
@@ -1113,6 +1798,8 @@
       ],
       "guid": "1fb052",
       "cardId": 46052,
+      "sourceSide": "face",
+      "ttsObjectPath": "ObjectStates/47/ContainedObjects/6/ContainedObjects/1/ContainedObjects/1/ContainedObjects/2",
       "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/12527161326538095503/4AEA9541438F4E2B6389D9BFC6940942BDFC0F17/",
       "sourceSha256": "ced2bb15c733bf0aaa1711696d5ce7d10b6ef12f58adb5999a0f47b873671c01",
       "localPath": "src/assets/darkest-dungeon/community-reference/antha-complete-edition/guardians/white-cell-stalk.front.png",
@@ -1134,5 +1821,7 @@
       }
     }
   ],
-  "manifestSha256": "6e6c346d679966317e1207696c0494b3e70d41810df62d86e38d907bb1432a17"
+  "manifestContentSha256": "a3c6161179e76e255392b6329d0842c1200e84999388003f839cdb14f413b72d",
+  "manifestFileSha256": "a5ede8b00305dac4da60539c6f30ac6ca80e1592a37d24598b55c9055f09e69a",
+  "hashProtocol": "content=stable JSON without hash fields and cache/download counters; file=pretty JSON with manifestContentSha256 and without manifestFileSha256/hashProtocol"
 }

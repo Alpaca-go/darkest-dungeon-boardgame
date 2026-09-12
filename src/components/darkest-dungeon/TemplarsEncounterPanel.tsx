@@ -15,14 +15,16 @@
 import type { TemplarsEncounterState } from '../../types/templars';
 import { getTemplarsAvailabilityReport } from '../../game-engine/bosses/templars/templars-content-validation';
 import CommunityVisual from './CommunityVisual';
+import type { ActFourRuntimeProfileId } from '../../types/act-four';
 
 interface Props {
   state: TemplarsEncounterState | null;
   /** 英雄 instanceId → 展示名，用于 Pit / 站位区显示。 */
   heroNames?: Record<string, string>;
+  profileId: ActFourRuntimeProfileId;
 }
 
-export default function TemplarsEncounterPanel({ state, heroNames }: Props) {
+export default function TemplarsEncounterPanel({ state, heroNames, profileId }: Props) {
   if (!state) return null;
 
   const runtime = state.templarsBattleRuntime;
@@ -44,8 +46,8 @@ export default function TemplarsEncounterPanel({ state, heroNames }: Props) {
 
       {/* ---- §25.1 两名 Templar 独立展示（绝不合并）---- */}
       <div className="mb-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
-        <TemplarCard actor={impaler} fallbackLabel="Impaler" />
-        <TemplarCard actor={warlord} fallbackLabel="Warlord" />
+        <TemplarCard actor={impaler} fallbackLabel="Impaler" profileId={profileId} />
+        <TemplarCard actor={warlord} fallbackLabel="Warlord" profileId={profileId} />
       </div>
 
       {/* ---- §25.2 Initiative 2 + 2 归属 ---- */}
@@ -142,7 +144,7 @@ export default function TemplarsEncounterPanel({ state, heroNames }: Props) {
         </ul>
       </div>
 
-      <TemplarsDataGateNote />
+      <TemplarsDataGateNote profileId={profileId} />
     </section>
   );
 }
@@ -151,9 +153,11 @@ export default function TemplarsEncounterPanel({ state, heroNames }: Props) {
 function TemplarCard({
   actor,
   fallbackLabel,
+  profileId,
 }: {
   actor: { actorId: string; name: string; role: string; hp: number; maxHp: number; isAlive: boolean; stance: string; areaId: string } | null;
   fallbackLabel: string;
+  profileId: ActFourRuntimeProfileId;
 }) {
   if (!actor) {
     return (
@@ -182,6 +186,7 @@ function TemplarCard({
           alt={`Community ${actor.name}`}
           className="w-full h-auto max-h-48 rounded border border-dd-border"
           testId={`templar-visual-${actor.role}`}
+          profileId={profileId}
         />
       </div>
     </div>
@@ -189,7 +194,7 @@ function TemplarCard({
 }
 
 /** §22：official 未启用时说明「因缺哪些资料而禁用」。 */
-export function TemplarsDataGateNote() {
+export function TemplarsDataGateNote({ profileId = 'prototype' }: { profileId?: ActFourRuntimeProfileId } = {}) {
   const report = getTemplarsAvailabilityReport();
   if (report.officialEnabled) return null;
   return (
@@ -197,7 +202,7 @@ export function TemplarsDataGateNote() {
       正式 The Templars 内容当前不可用（{report.gaps.length} 项资料缺失）：
       {report.gaps.slice(0, 4).join('；')}
       {report.gaps.length > 4 ? ' …' : ''}
-      。当前显示的是 prototype harness 数值，不代表正式规则。
+      。{profileId === 'community-reference' ? '当前显示 Community retail-reference 数据/图像，仍不代表官方零售验证。' : profileId === 'formal' ? '当前请求 Formal profile；缺失项未被 Community 数据替代。' : '当前显示的是 prototype harness 数值，不代表正式规则。'}
     </p>
   );
 }

@@ -18,14 +18,16 @@
 import type { MammothCystActorState, MammothCystEncounterState } from '../../types/mammoth-cyst';
 import { getMammothCystAvailabilityReport } from '../../game-engine/bosses/mammoth-cyst/mammoth-cyst-content-validation';
 import CommunityVisual from './CommunityVisual';
+import type { ActFourRuntimeProfileId } from '../../types/act-four';
 
 interface Props {
   state: MammothCystEncounterState | null;
   /** 英雄 instanceId → 展示名，用于站位 / 传送区显示。 */
   heroNames?: Record<string, string>;
+  profileId: ActFourRuntimeProfileId;
 }
 
-export default function MammothCystEncounterPanel({ state, heroNames }: Props) {
+export default function MammothCystEncounterPanel({ state, heroNames, profileId }: Props) {
   if (!state) return null;
 
   const runtime = state.mammothCystBattleRuntime;
@@ -55,12 +57,13 @@ export default function MammothCystEncounterPanel({ state, heroNames }: Props) {
 
       {/* ---- §24.1 / §24.3 Cyst 与 Stalk 各自独立展示 ---- */}
       <div className="mb-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
-        <ActorCard actor={cyst} fallbackLabel="Mammoth Cyst" testId="mammoth-cyst-actor-boss" />
+        <ActorCard actor={cyst} fallbackLabel="Mammoth Cyst" testId="mammoth-cyst-actor-boss" profileId={profileId} />
         {stalk ? (
           <ActorCard
             actor={stalk}
             fallbackLabel="White Cell Stalk"
             testId="mammoth-cyst-actor-stalk"
+            profileId={profileId}
           />
         ) : (
           <div
@@ -177,7 +180,7 @@ export default function MammothCystEncounterPanel({ state, heroNames }: Props) {
         </ul>
       </div>
 
-      <MammothCystDataGateNote />
+      <MammothCystDataGateNote profileId={profileId} />
     </section>
   );
 }
@@ -204,10 +207,12 @@ function ActorCard({
   actor,
   fallbackLabel,
   testId,
+  profileId,
 }: {
   actor: MammothCystActorState | null;
   fallbackLabel: string;
   testId: string;
+  profileId: ActFourRuntimeProfileId;
 }) {
   if (!actor) {
     return (
@@ -240,6 +245,7 @@ function ActorCard({
           alt={`Community ${actor.name}`}
           className="w-full h-auto max-h-48 rounded border border-dd-border"
           testId={`mammoth-cyst-visual-${actor.owner}`}
+          profileId={profileId}
         />
       </div>
     </div>
@@ -247,7 +253,7 @@ function ActorCard({
 }
 
 /** §3：official 未启用时说明「因缺哪些资料而禁用」。 */
-export function MammothCystDataGateNote() {
+export function MammothCystDataGateNote({ profileId = 'prototype' }: { profileId?: ActFourRuntimeProfileId } = {}) {
   const report = getMammothCystAvailabilityReport();
   if (report.officialEnabled) return null;
   return (
@@ -258,7 +264,7 @@ export function MammothCystDataGateNote() {
       正式 Mammoth Cyst 内容当前不可用（{report.gaps.length} 项资料缺失）：
       {report.gaps.slice(0, 4).join('；')}
       {report.gaps.length > 4 ? ' …' : ''}
-      。当前显示的是 prototype harness 数值，不代表正式规则。
+      。{profileId === 'community-reference' ? '当前显示 Community retail-reference 数据/图像，仍不代表官方零售验证。' : profileId === 'formal' ? '当前请求 Formal profile；缺失项未被 Community 数据替代。' : '当前显示的是 prototype harness 数值，不代表正式规则。'}
     </p>
   );
 }

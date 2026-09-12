@@ -5,9 +5,9 @@
   "sourceEdition": "antha-complete-edition",
   "workshopId": "3657612854",
   "summary": {
-    "total": 26,
+    "total": 28,
     "ready": 16,
-    "mappedUnrendered": 8,
+    "mappedUnrendered": 10,
     "sourceMissing": 2,
     "notApplicable": 0
   },
@@ -43,7 +43,7 @@
       "sourceMissing": 0
     },
     "room-tile": {
-      "total": 2,
+      "total": 4,
       "ready": 0,
       "mappedUnrendered": 2,
       "sourceMissing": 0
@@ -154,14 +154,8 @@
       "status": "mapped-unrendered",
       "productSurface": "none (no product surface renders Guardian room visuals; TemplarsEncounterPanel renders battle actors only)",
       "selection": {
-        "strategy": "CANDIDATE_SET_NEEDS_IMAGE",
-        "firstPhysical": { "guid": "ad6c7d", "cardId": 42024, "deckId": "420", "cardIndex": 24, "numWidth": 10, "numHeight": 4 },
-        "allPhysical": [
-          { "guid": "ad6c7d", "cardId": 42024 },
-          { "guid": "e24559", "cardId": 42025 },
-          { "guid": "5a2fdf", "cardId": 42026 },
-          { "guid": "f236b8", "cardId": 42027 }
-        ]
+        "strategy": "DIRECT_NAMED_CARD",
+        "guid": "afa508", "cardId": 44721, "deckId": "447", "cardIndex": 21, "numWidth": 6, "numHeight": 6
       }
     },
     {
@@ -171,15 +165,9 @@
       "status": "mapped-unrendered",
       "productSurface": "none (no product surface renders Guardian room-tile visuals)",
       "selection": {
-        "strategy": "CANDIDATE_TILE_SET_NEEDS_IMAGE",
-        "tiles": [
-          { "guid": "bc9c87", "nickname": "11-12", "imageUrl": "https://steamusercontent-a.akamaihd.net/ugc/12907387505248994134/99CA3B92B205E9924DAC3BDE2FE1674882C7881D/" },
-          { "guid": "7a3fa9", "nickname": "9-10", "imageUrl": "https://steamusercontent-a.akamaihd.net/ugc/18432412340859063681/5CC5729080F4DA7F0597B496A160A0BF2BCB5EA3/" },
-          { "guid": "d59e73", "nickname": "7-8", "imageUrl": "https://steamusercontent-a.akamaihd.net/ugc/15168120619393754933/B1056B83C2601A8048F37D3DFD48B4C68AB79333/" },
-          { "guid": "813724", "nickname": "5-6", "imageUrl": "https://steamusercontent-a.akamaihd.net/ugc/11016923967818423472/AC803AAF5A0024986B567C520B4E7A719E176767/" },
-          { "guid": "d596fb", "nickname": "3-4", "imageUrl": "https://steamusercontent-a.akamaihd.net/ugc/16614996847568037176/DEF794AC5A9B5E88A8F90835DDB9AE1EA5AB7782/" },
-          { "guid": "939435", "nickname": "1-2", "imageUrl": "https://steamusercontent-a.akamaihd.net/ugc/16985604518288947892/585C3DA37B923BD0E64D521C56A37D16EC81D8D0/" }
-        ]
+        "strategy": "TILE_IMAGE",
+        "guid": "7a3fa9", "nickname": "9-10", "sourceSide": "imageUrl",
+        "imageUrl": "https://steamusercontent-a.akamaihd.net/ugc/18432412340859063681/5CC5729080F4DA7F0597B496A160A0BF2BCB5EA3/"
       }
     },
     {
@@ -221,15 +209,20 @@
       "status": "mapped-unrendered",
       "productSurface": "none (no product surface renders Guardian room visuals)",
       "selection": {
-        "strategy": "CANDIDATE_SET_NEEDS_IMAGE",
-        "firstPhysical": { "guid": "eb35cd", "cardId": 42028, "deckId": "420", "cardIndex": 28, "numWidth": 10, "numHeight": 4 },
-        "allPhysical": [
-          { "guid": "eb35cd", "cardId": 42028 },
-          { "guid": "e4246d", "cardId": 42029 },
-          { "guid": "a9ab77", "cardId": 42030 },
-          { "guid": "a7bbae", "cardId": 42035 },
-          { "guid": "12e30f", "cardId": 42036 }
-        ]
+        "strategy": "DIRECT_NAMED_CARD",
+        "guid": "bb91b0", "cardId": 44723, "deckId": "447", "cardIndex": 23, "numWidth": 6, "numHeight": 6
+      }
+    },
+    {
+      "requirementId": "tierB-mammoth-cyst-room",
+      "runtimeEntityId": "community-dd-mammoth-cyst-room-tile",
+      "assetKind": "guardian-room-tile",
+      "status": "mapped-unrendered",
+      "productSurface": "none (no product surface renders Guardian room-tile visuals)",
+      "selection": {
+        "strategy": "TILE_IMAGE",
+        "guid": "bc9c87", "nickname": "11-12", "sourceSide": "imageUrl",
+        "imageUrl": "https://steamusercontent-a.akamaihd.net/ugc/12907387505248994134/99CA3B92B205E9924DAC3BDE2FE1674882C7881D/"
       }
     },
     {
@@ -256,7 +249,7 @@
       "productSurface": "ShufflingHorrorEncounterPanel",
       "selection": {
         "strategy": "MULTI_VARIANT_NEEDS_DISAMBIGUATION",
-        "firstPhysical": { "guid": "36d6ad", "cardId": 46021, "deckId": "460", "cardIndex": 21, "numWidth": 10, "numHeight": 7 },
+        "visualRepresentative": { "guid": "36d6ad", "cardId": 46021, "deckId": "460", "cardIndex": 21, "numWidth": 10, "numHeight": 7 },
         "allPhysical": [
           { "guid": "36d6ad", "cardId": 46021 },
           { "guid": "1b261d", "cardId": 46020 },
@@ -272,7 +265,7 @@
       "productSurface": "ShufflingHorrorEncounterPanel",
       "selection": {
         "strategy": "MULTI_VARIANT_NEEDS_DISAMBIGUATION",
-        "firstPhysical": { "guid": "4a8b06", "cardId": 46024, "deckId": "460", "cardIndex": 24, "numWidth": 10, "numHeight": 7 },
+        "visualRepresentative": { "guid": "4a8b06", "cardId": 46024, "deckId": "460", "cardIndex": 24, "numWidth": 10, "numHeight": 7 },
         "allPhysical": [
           { "guid": "4a8b06", "cardId": 46024 },
           { "guid": "a34fbd", "cardId": 46023 },
@@ -287,12 +280,20 @@
       "status": "mapped-unrendered",
       "productSurface": "none (no product surface renders Guardian room visuals)",
       "selection": {
-        "strategy": "CANDIDATE_SET_NEEDS_IMAGE",
-        "firstPhysical": { "guid": "654bdc", "cardId": 42031, "deckId": "420", "cardIndex": 31, "numWidth": 10, "numHeight": 4 },
-        "allPhysical": [
-          { "guid": "654bdc", "cardId": 42031 },
-          { "guid": "450ace", "cardId": 42032 }
-        ]
+        "strategy": "DIRECT_NAMED_CARD",
+        "guid": "9a87c7", "cardId": 44722, "deckId": "447", "cardIndex": 22, "numWidth": 6, "numHeight": 6
+      }
+    },
+    {
+      "requirementId": "tierB-shuffling-horror-room",
+      "runtimeEntityId": "community-dd-shuffling-horror-room-tile",
+      "assetKind": "guardian-room-tile",
+      "status": "mapped-unrendered",
+      "productSurface": "none (no product surface renders Guardian room-tile visuals)",
+      "selection": {
+        "strategy": "TILE_IMAGE",
+        "guid": "7a3fa9", "nickname": "9-10", "sourceSide": "secondaryUrl",
+        "imageUrl": "https://steamusercontent-a.akamaihd.net/ugc/9687650273273941687/FD359BC45C4247D42428C0BDA44521B2BFF81A0C/"
       }
     },
     {
@@ -302,12 +303,8 @@
       "status": "mapped-unrendered",
       "productSurface": "none (no product surface renders Guardian room visuals; FinalEncounterHeader shows the encounter frame only)",
       "selection": {
-        "strategy": "CANDIDATE_SET_NEEDS_IMAGE",
-        "firstPhysical": { "guid": "5e5515", "cardId": 42033, "deckId": "420", "cardIndex": 33, "numWidth": 10, "numHeight": 4 },
-        "allPhysical": [
-          { "guid": "5e5515", "cardId": 42033 },
-          { "guid": "4cd186", "cardId": 42034 }
-        ]
+        "strategy": "DIRECT_NAMED_CARD",
+        "guid": "e3fc86", "cardId": 44724, "deckId": "447", "cardIndex": 24, "numWidth": 6, "numHeight": 6
       }
     },
     {
@@ -317,15 +314,9 @@
       "status": "mapped-unrendered",
       "productSurface": "none (no product surface renders Guardian room-tile visuals)",
       "selection": {
-        "strategy": "CANDIDATE_TILE_SET_NEEDS_IMAGE",
-        "tiles": [
-          { "guid": "bc9c87", "nickname": "11-12", "imageUrl": "https://steamusercontent-a.akamaihd.net/ugc/12907387505248994134/99CA3B92B205E9924DAC3BDE2FE1674882C7881D/" },
-          { "guid": "7a3fa9", "nickname": "9-10", "imageUrl": "https://steamusercontent-a.akamaihd.net/ugc/18432412340859063681/5CC5729080F4DA7F0597B496A160A0BF2BCB5EA3/" },
-          { "guid": "d59e73", "nickname": "7-8", "imageUrl": "https://steamusercontent-a.akamaihd.net/ugc/15168120619393754933/B1056B83C2601A8048F37D3DFD48B4C68AB79333/" },
-          { "guid": "813724", "nickname": "5-6", "imageUrl": "https://steamusercontent-a.akamaihd.net/ugc/11016923967818423472/AC803AAF5A0024986B567C520B4E7A719E176767/" },
-          { "guid": "d596fb", "nickname": "3-4", "imageUrl": "https://steamusercontent-a.akamaihd.net/ugc/16614996847568037176/DEF794AC5A9B5E88A8F90835DDB9AE1EA5AB7782/" },
-          { "guid": "939435", "nickname": "1-2", "imageUrl": "https://steamusercontent-a.akamaihd.net/ugc/16985604518288947892/585C3DA37B923BD0E64D521C56A37D16EC81D8D0/" }
-        ]
+        "strategy": "TILE_IMAGE",
+        "guid": "bc9c87", "nickname": "11-12", "sourceSide": "secondaryUrl",
+        "imageUrl": "https://steamusercontent-a.akamaihd.net/ugc/11946661968609043341/C8166850B124429F8E4643D532FE259F1DDDD115/"
       }
     },
     {
@@ -352,7 +343,7 @@
       "productSurface": "FinalFormMechanicsPanel",
       "selection": {
         "strategy": "MULTI_VARIANT_NEEDS_DISAMBIGUATION",
-        "firstPhysical": { "guid": "4a0ff9", "cardId": 46055, "deckId": "460", "cardIndex": 55, "numWidth": 10, "numHeight": 7 },
+        "visualRepresentative": { "guid": "4a0ff9", "cardId": 46055, "deckId": "460", "cardIndex": 55, "numWidth": 10, "numHeight": 7 },
         "allPhysical": [
           { "guid": "4a0ff9", "cardId": 46055 },
           { "guid": "695dfa", "cardId": 46054 },
@@ -368,7 +359,7 @@
       "productSurface": "FinalFormMechanicsPanel",
       "selection": {
         "strategy": "MULTI_VARIANT_NEEDS_DISAMBIGUATION",
-        "firstPhysical": { "guid": "adff9c", "cardId": 46057, "deckId": "460", "cardIndex": 57, "numWidth": 10, "numHeight": 7 },
+        "visualRepresentative": { "guid": "adff9c", "cardId": 46057, "deckId": "460", "cardIndex": 57, "numWidth": 10, "numHeight": 7 },
         "allPhysical": [
           { "guid": "adff9c", "cardId": 46057 },
           { "guid": "d57825", "cardId": 46058 },

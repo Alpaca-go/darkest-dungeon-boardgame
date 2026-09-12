@@ -49,11 +49,11 @@ export default function DarkestDungeonQuestReveal() {
             alt={`Community Quest Card ${questVisualId}`}
             className="w-full h-auto rounded border border-dd-border"
             testId={`dd-quest-reveal-card-${questVisualId}`}
+            profileId={record.runtimeProfileId ?? 'prototype'}
           />
         </div>
       )}
     </div>
   );
 }
-
 

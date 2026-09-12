@@ -13,6 +13,7 @@
     "test:e2e:critical": "node scripts/e2e/run-critical-e2e.mjs",
     "test:e2e:lifecycle": "node scripts/e2e/run-critical-e2e.mjs && node scripts/e2e/run-critical-e2e.mjs",
     "test:e2e:community-reference": "node scripts/e2e/run-community-reference-e2e.mjs",
+    "test:e2e:community-visual-smoke": "node scripts/e2e/run-community-visual-smoke.mjs",
     "verify:phase11a2-3": "vite-node scripts/audit/verify-phase11a2-3.ts",
     "audit:content": "vite-node scripts/audit/content.ts",
     "audit:rules": "vite-node scripts/audit/rules.ts",
@@ -31,8 +32,8 @@
     "verify:community-reference-runtime": "vite-node scripts/audit/verify-community-reference-runtime.ts",
     "verify:phase11a3-clean-evidence": "vite-node scripts/audit/verify-phase11a3-clean-evidence.ts",
     "verify:phase11a3-infrastructure-acceptance": "vite-node scripts/audit/verify-phase11a3-infrastructure-acceptance.ts",
-    "verify:community-visual-assets": "node --experimental-strip-types scripts/audit/verify-community-visual-assets.mts",
-    "verify:community-visual-assets:adversarial": "node --experimental-strip-types scripts/audit/verify-community-visual-assets.mts --adversarial",
+    "verify:community-visual-assets": "node scripts/audit/verify-community-visual-assets.mjs",
+    "verify:community-visual-assets:adversarial": "node scripts/audit/verify-community-visual-assets.mjs --adversarial",
     "import:community-reference-assets": "node scripts/assets/import-community-reference-assets.mjs"
   },
   "dependencies": {

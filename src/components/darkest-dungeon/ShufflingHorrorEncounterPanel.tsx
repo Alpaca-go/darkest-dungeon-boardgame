@@ -77,18 +77,20 @@ export default function ShufflingHorrorEncounterPanel({ state, heroNames }: Prop
 
       {/* ---- §24.1 / §24.3 三名 Actor 各自独立展示 ---- */}
       <div className="mb-3 grid grid-cols-1 gap-2 sm:grid-cols-3">
-        <ActorCard actor={horror} role="horror" budget={state} testId="shuffling-horror-actor-boss" />
+        <ActorCard actor={horror} role="horror" budget={state} testId="shuffling-horror-actor-boss" profileId={state.mode} />
         <ActorCard
           actor={priest}
           role="cultist-priest"
           budget={state}
           testId="shuffling-horror-actor-priest"
+          profileId={state.mode}
         />
         <ActorCard
           actor={growth}
           role="malignant-growth"
           budget={state}
           testId="shuffling-horror-actor-growth"
+          profileId={state.mode}
         />
       </div>
 
@@ -233,7 +235,7 @@ export default function ShufflingHorrorEncounterPanel({ state, heroNames }: Prop
         </div>
       ) : null}
 
-      <ShufflingHorrorDataGateNote />
+      <ShufflingHorrorDataGateNote profileId={state.mode} />
     </section>
   );
 }
@@ -244,11 +246,13 @@ function ActorCard({
   role,
   budget,
   testId,
+  profileId,
 }: {
   actor: ShufflingHorrorActorState | null;
   role: ShufflingHorrorRole;
   budget: ShufflingHorrorEncounterState;
   testId: string;
+  profileId: ShufflingHorrorEncounterState['mode'];
 }) {
   if (!actor) {
     return (
@@ -301,6 +305,7 @@ function ActorCard({
           alt={`Community ${ROLE_LABEL[role]}`}
           className="w-full h-auto max-h-48 rounded border border-dd-border"
           testId={`shuffling-horror-visual-${role}`}
+          profileId={profileId}
         />
       </div>
     </div>
@@ -308,7 +313,7 @@ function ActorCard({
 }
 
 /** §3：official 未启用时说明「因缺哪些资料而禁用」。 */
-export function ShufflingHorrorDataGateNote() {
+export function ShufflingHorrorDataGateNote({ profileId = 'prototype' }: { profileId?: ShufflingHorrorEncounterState['mode'] } = {}) {
   const report = getShufflingHorrorAvailabilityReport();
   if (report.officialEnabled) return null;
   return (
@@ -319,7 +324,7 @@ export function ShufflingHorrorDataGateNote() {
       正式 Shuffling Horror 内容当前不可用（{report.gaps.length} 项资料缺失）：
       {report.gaps.slice(0, 4).join('；')}
       {report.gaps.length > 4 ? ' …' : ''}
-      。当前显示的是 prototype harness 数值，不代表正式规则。
+      。{profileId === 'community-reference' ? '当前显示 Community retail-reference 数据/图像，仍不代表官方零售验证。' : profileId === 'formal' ? '当前请求 Formal profile；缺失项未被 Community 数据替代。' : '当前显示的是 prototype harness 数值，不代表正式规则。'}
     </p>
   );
 }

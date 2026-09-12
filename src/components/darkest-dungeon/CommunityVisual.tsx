@@ -26,7 +26,7 @@ import {
   type CommunityVisualAssetResolved,
   type CommunityVisualAssetMissing,
 } from '../../data/darkest-dungeon/community-reference/visual-assets';
-import { COMMUNITY_REFERENCE_PROFILE_ID } from '../../data/darkest-dungeon/community-reference/runtime-profile';
+import type { ActFourRuntimeProfileId } from '../../types/act-four';
 
 interface Props {
   runtimeEntityId: string;
@@ -36,21 +36,19 @@ interface Props {
   alt?: string;
   /** Optional CSS class for the rendered <img>. */
   className?: string;
-  /** Force a profile other than community-reference for testing. Defaults
-   *  to community-reference (the only supported profile). */
-  profileId?: string | null;
+  /** Actual product runtime profile. Required so product callsites cannot
+   *  silently opt into Community art. */
+  profileId: ActFourRuntimeProfileId;
   /** Test id for E2E; defaults to cv-<runtimeEntityId>-<assetKind>. */
   testId?: string;
 }
-
-const DEFAULT_PROFILE = COMMUNITY_REFERENCE_PROFILE_ID;
 
 export default function CommunityVisual({
   runtimeEntityId,
   assetKind,
   alt,
   className,
-  profileId = DEFAULT_PROFILE,
+  profileId,
   testId,
 }: Props) {
   const result: CommunityVisualAssetResult | null = useMemo(

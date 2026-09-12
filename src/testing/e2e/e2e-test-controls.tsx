@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGameStore, routeForPhase } from '../../store/useGameStore';
 import { buildCommunityReferenceCheckpoint, playUntil } from './e2e-player-harness';
+import { createCommunityFinalScenario } from '../scenarios/community-runtime-scenario';
 import { canSelectBossQuest, canSelectStandardQuest } from '../../game-engine/campaign/campaign-progress';
 import { stableHashState } from '../../audit/core-campaign/types';
 
@@ -30,6 +31,7 @@ export default function E2ETestControls() {
     <button data-testid="e2e-community-shuffling-horror" onClick={() => enterCommunity(0)}>E2E: Community Shuffling Horror</button>
     <button data-testid="e2e-community-templars" onClick={() => enterCommunity(0.34)}>E2E: Community Templars</button>
     <button data-testid="e2e-community-mammoth-cyst" onClick={() => enterCommunity(0.67)}>E2E: Community Mammoth Cyst</button>
+    <button data-testid="e2e-community-final" onClick={() => useGameStore.getState().replaceCampaign(createCommunityFinalScenario())}>E2E: Community Final</button>
     <output data-testid="e2e-error">{error}</output>
     <output data-testid="e2e-state">{JSON.stringify(campaign ? {
       hash: stableHashState({ ...campaign, updatedAt: undefined }), phase: campaign.gamePhase,

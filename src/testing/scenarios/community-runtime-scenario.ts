@@ -5,6 +5,8 @@ import { drawDarkestDungeonQuest } from '../../game-engine/campaign/act-four/dra
 import { activateDarkestDungeonContentSet } from '../../game-engine/campaign/act-four/content-runtime';
 import { buildDarkestDungeonMap, drawDarkestDungeonLayout } from '../../game-engine/campaign/act-four/dungeon-map';
 import { createGuardianQuest, startGuardianBattle } from '../../game-engine/campaign/act-four/guardian-quest';
+import { setupFinalFormRuntime } from '../../game-engine/campaign/act-four/final-forms/final-form-runtime';
+import type { FinalFormId } from '../../types/final-encounter';
 
 const HERO_IDS = ['crusader', 'vestal', 'highwayman', 'hellion'];
 
@@ -29,4 +31,22 @@ export function createCommunityGuardianScenario(questIndex: 0 | 1 | 2, layoutInd
   const started = startGuardianBattle(created.campaign, created.quest.objectiveRoomId, { mode: 'community-reference', rng: () => 0.25, now: '2026-09-11T00:00:07.000Z' });
   if (!started.ok) throw new Error(started.reason ?? 'Community Guardian setup failed');
   return started.campaign;
+}
+
+export function createCommunityFinalScenario(): CampaignState {
+  const campaign = createCommunityCheckpoint();
+  let state = null;
+  for (const formId of ['ancestor-first-form', 'ancestor-second-form', 'gestating-heart', 'heart-of-darkness'] as FinalFormId[]) {
+    const result = setupFinalFormRuntime(state, 'e2e-community-final', formId, { mode: 'community-reference', seed: 11 });
+    if (!result.ok || !result.state) throw new Error(result.reason ?? `Community Final setup failed: ${formId}`);
+    state = result.state;
+  }
+  return {
+    ...campaign,
+    actFourState: {
+      ...campaign.actFourState,
+      stage: 'final-encounter-active',
+      finalFormRuntimeState: state,
+    },
+  };
 }
