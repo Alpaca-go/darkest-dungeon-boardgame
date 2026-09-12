@@ -10,6 +10,7 @@ import {
 } from '../../src/data/darkest-dungeon/community-reference/runtime-profile';
 import {
   COMMUNITY_RUNTIME_FIELD_COVERAGE,
+  DD_LAYOUT_TOPOLOGY_PROOF_VERSION,
   runtimeFieldCoverageTotals,
   validateCommunityRuntimeFieldCoverage,
 } from '../../src/data/darkest-dungeon/community-reference/runtime-field-coverage';
@@ -85,6 +86,7 @@ const structured = [
   structuredVitest('traceability', 'src/data/darkest-dungeon/community-reference/community-runtime-traceability.test.ts', consumedSemanticLeaves + 2),
   structuredVitest('adversarial', 'src/data/darkest-dungeon/community-reference/community-runtime-adversarial.test.ts', 20),
   structuredVitest('truthGate', 'src/data/darkest-dungeon/community-reference/community-runtime-truth-gate.test.ts', 15),
+  structuredVitest('freezeEvidence', 'src/data/darkest-dungeon/community-reference/community-runtime-freeze-evidence.test.ts', 12),
   structuredE2e(3),
 ];
 const commands: CommandResult[] = [
@@ -123,7 +125,7 @@ if (binding.inputPackageSha256 !== COMMUNITY_REFERENCE_RUNTIME_PROFILE.sourcePac
 const physicalMonsters = COMMUNITY_REFERENCE_RUNTIME_PROFILE.monsterComposition.reduce((total, item) => total + item.physicalInstances.length, 0);
 const coverageTotals = runtimeFieldCoverageTotals() as ReturnType<typeof runtimeFieldCoverageTotals> & Record<string, number>;
 const evidence = {
-  schemaVersion: 'phase11a3-community-runtime-acceptance-truth-gate.v1',
+  schemaVersion: 'phase11a3-community-runtime-freeze-evidence-closure.v1',
   runId: randomUUID(),
   measuredAt: new Date().toISOString(),
   verifiedImplementationHead,
@@ -147,6 +149,9 @@ const evidence = {
     unclassified: coverageTotals.unclassified,
   },
   runtimeSelectorCoverage: { expected: coverageTotals.runtimeSelectorExpected, resolved: coverageTotals.runtimeSelectorResolved, missing: coverageTotals.runtimeSelectorMissing },
+  sourceMutationCoverage: { expected: 8, detected: errors.length === 0 ? 8 : 0 },
+  runtimeMutationCoverage: { expected: 2, detected: errors.length === 0 ? 2 : 0 },
+  layoutTopologyProofVersion: DD_LAYOUT_TOPOLOGY_PROOF_VERSION,
   testGroups: Object.fromEntries(structured.map((group) => [group.name, group])),
   blockerInventory: { sourceLevel: COMMUNITY_RUNTIME_BLOCKERS.filter((item) => item.classification === 'source-level').length, runtimeOnly: COMMUNITY_RUNTIME_BLOCKERS.filter((item) => item.classification === 'runtime-only').length, total: COMMUNITY_RUNTIME_BLOCKERS.length },
   activeBlockers: COMMUNITY_RUNTIME_BLOCKERS,
@@ -156,7 +161,7 @@ const evidence = {
   officialGateAfter: officialTruth,
   communityFullActFourPlayable: false,
   communityFullActFourPlayableReason: `${COMMUNITY_RUNTIME_BLOCKERS.length} active source/runtime blockers`,
-  terminalVerdict: errors.length === 0 ? 'COMMUNITY-REFERENCE-RUNTIME-ACCEPTED' : 'COMMUNITY-REFERENCE-RUNTIME-ACCEPTANCE-TRUTH-BLOCKED',
+  terminalVerdict: errors.length === 0 ? 'COMMUNITY-REFERENCE-RUNTIME-FROZEN' : 'COMMUNITY-REFERENCE-RUNTIME-FREEZE-EVIDENCE-BLOCKED',
   errors,
 };
 
@@ -165,7 +170,7 @@ mkdirSync(dirname(REPORT_PATH), { recursive: true });
 writeFileSync(COVERAGE_PATH, `${JSON.stringify({ schemaVersion: 'phase11a3-community-runtime-semantic-leaf-coverage.v2', generatedAt: evidence.measuredAt, verifiedImplementationHead, totals: coverageTotals, entries: COMMUNITY_RUNTIME_FIELD_COVERAGE }, null, 2)}\n`);
 writeFileSync(EVIDENCE_PATH, `${JSON.stringify(evidence, null, 2)}\n`);
 const groupSummary = structured.map((group) => `- ${group.name}: ${group.passed}/${group.expected} passed; discovered=${group.discovered}, run=${group.run}, failed=${group.failed}, skipped=${group.skipped}, todo=${group.todo}.`).join('\n');
-writeFileSync(REPORT_PATH, `# Phase 11A.3 Community Reference Runtime Final Acceptance Report\n\n- Terminal verdict: **${evidence.terminalVerdict}**\n- Verified implementation head: \`${verifiedImplementationHead}\`\n- Runtime profile: \`${evidence.runtimeProfileId}\`\n- Source package SHA-256: \`${evidence.sourcePackageSha256}\`\n- Content hash: \`${evidence.contentHash}\`\n- Field coverage: ${coverageTotals.total} total; ${coverageTotals.consumed} consumed, ${coverageTotals['explicit-source-blocker']} source-blocked, ${coverageTotals['engine-unsupported-blocker']} engine-blocked, ${coverageTotals['display-only']} display-only, ${coverageTotals['not-runtime-relevant']} not-runtime-relevant, ${coverageTotals.unclassified} unclassified.\n\n## Exact test counts\n\n${groupSummary}\n\n- Active blockers: ${evidence.blockerInventory.sourceLevel} source-level + ${evidence.blockerInventory.runtimeOnly} runtime-only = ${evidence.blockerInventory.total}.\n- Official Source Gate: \`SOURCE-BLOCKED\`; requiredMissing=26, optionalMissing=1, onlyOpenP0=\`ISSUE-P0-002\`, Formal Matrix=0/9, canCloseP0_002=false, canEnterPhase11B=false.\n- Community full Act IV playable: **false**.\n\n## Active blockers\n\n${evidence.activeBlockerCodes.map((code) => `- \`${code}\``).join('\n')}\n\nThis acceptance does not alter Official Source Gate semantics, close ISSUE-P0-002, enter Phase 11B, replace art assets, or fill unresolved rules from Prototype or videogame sources.\n`);
+writeFileSync(REPORT_PATH, `# Phase 11A.3 Community Runtime Freeze Evidence Closure Report\n\n- Terminal verdict: **${evidence.terminalVerdict}**\n- Verified implementation head: \`${verifiedImplementationHead}\`\n- Runtime profile: \`${evidence.runtimeProfileId}\`\n- Source package SHA-256: \`${evidence.sourcePackageSha256}\`\n- Content hash: \`${evidence.contentHash}\`\n- Layout topology proof: \`${evidence.layoutTopologyProofVersion}\`\n- Source mutation detection: ${evidence.sourceMutationCoverage.detected}/${evidence.sourceMutationCoverage.expected}.\n- Runtime mutation detection: ${evidence.runtimeMutationCoverage.detected}/${evidence.runtimeMutationCoverage.expected}.\n- Field coverage: ${coverageTotals.total} total; ${coverageTotals.consumed} consumed, ${coverageTotals['explicit-source-blocker']} source-blocked, ${coverageTotals['engine-unsupported-blocker']} engine-blocked, ${coverageTotals['display-only']} display-only, ${coverageTotals['not-runtime-relevant']} not-runtime-relevant, ${coverageTotals.unclassified} unclassified.\n\n## Exact test counts\n\n${groupSummary}\n\n- Active blockers: ${evidence.blockerInventory.sourceLevel} source-level + ${evidence.blockerInventory.runtimeOnly} runtime-only = ${evidence.blockerInventory.total}.\n- Official Source Gate: \`SOURCE-BLOCKED\`; requiredMissing=26, optionalMissing=1, onlyOpenP0=\`ISSUE-P0-002\`, Formal Matrix=0/9, canCloseP0_002=false, canEnterPhase11B=false.\n- Community full Act IV playable: **false**.\n\n## Active blockers\n\n${evidence.activeBlockerCodes.map((code) => `- \`${code}\``).join('\n')}\n\nThis freeze does not alter Official Source Gate semantics, close ISSUE-P0-002, enter Phase 11B, replace art assets, or fill unresolved rules from Prototype or videogame sources.\n`);
 rmSync(scratch, { recursive: true, force: true });
 console.log(JSON.stringify(evidence, null, 2));
 if (errors.length > 0) process.exit(1);

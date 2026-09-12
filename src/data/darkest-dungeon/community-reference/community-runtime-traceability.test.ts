@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   COMMUNITY_RUNTIME_PROJECTION_ENVIRONMENT,
   COMMUNITY_RUNTIME_PROJECTION_PROOFS,
+  COMMUNITY_SOURCE_PROJECTION_ENVIRONMENT,
   runtimeFieldCoverageTotals,
   validateCommunityRuntimeProjectionProofs,
 } from './runtime-field-coverage';
@@ -22,7 +23,7 @@ describe('Community semantic projection truth gate', () => {
 
 describe('independent source-to-runtime semantic comparisons', () => {
   it.each(consumed.map(proof => [proof.requirementId, proof.sourcePath, proof] as const))('TRACE %s.%s', (_requirementId, _sourcePath, proof) => {
-    const source = proof.normalizeSource(proof.sourceSelector());
+    const source = proof.normalizeSource(proof.sourceSelector(COMMUNITY_SOURCE_PROJECTION_ENVIRONMENT));
     const runtime = proof.normalizeRuntime(proof.runtimeSelector!(COMMUNITY_RUNTIME_PROJECTION_ENVIRONMENT));
     expect(runtime).toEqual(source);
   });
