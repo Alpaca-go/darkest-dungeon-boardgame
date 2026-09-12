@@ -1,7 +1,7 @@
 # Phase 11A.3 Community Runtime Freeze Evidence Closure Report
 
 - Terminal verdict: **COMMUNITY-REFERENCE-RUNTIME-FROZEN**
-- Verified implementation head: `72590fff70a55cc301ae301e87ef2e64e95744bc`
+- Verified implementation head: `58f16280ef228091754eb6de59d49de881e487f1`
 - Runtime profile: `community-reference`
 - Source package SHA-256: `382e479f84f79a9b3cc6b0256b2fa5dea100b3576244988f180b49e75ed78d2a`
 - Content hash: `bb161c8b`
