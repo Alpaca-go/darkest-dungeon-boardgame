@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "phase11a3-community-engine-capability-closure.v1",
+  "generatedAt": "2026-09-12T14:54:51.481Z",
+  "terminalStatus": "COMMUNITY-SOURCE-BACKED-ENGINE-CAPABILITIES-CLOSED",
+  "triage": {
+    "runtimeOnlyBefore": 12,
+    "sourceBacked": 6,
+    "sourceGaps": 6
+  },
+  "closure": {
+    "attempted": 6,
+    "successful": 6,
+    "closedCodes": [
+      "GUARDIAN_RESISTANCE_ENGINE_UNSUPPORTED",
+      "GUARDIAN_CRIT_ENGINE_UNSUPPORTED",
+      "QUEST_CARD_PROVISION_POLICY_ENGINE_UNSUPPORTED",
+      "FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED",
+      "FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED",
+      "GUARDIAN_VICTORY_POLICY_ENGINE_UNSUPPORTED"
+    ]
+  },
+  "remaining": {
+    "total": 11,
+    "sourceLevel": 5,
+    "runtimeSourceGaps": 6,
+    "codes": [
+      "TEMPLARS_PIT_EXIT_RULE_UNRESOLVED",
+      "ABSOLUTE_NOTHINGNESS_STANCE_UNRESOLVED",
+      "GESTATING_HEART_LETHAL_TIMING_UNRESOLVED",
+      "COME_UNTO_YOUR_MAKER_UNRESOLVED",
+      "MONSTER_DECK_DRAW_POLICY_UNRESOLVED",
+      "EXCAVATION_PROVISION_DIE_MAP_UNRESOLVED",
+      "FINAL_PROVISION_POLICY_UNRESOLVED",
+      "GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED",
+      "TEMPLARS_AREA_ADJACENCY_UNRESOLVED",
+      "SHUFFLING_INITIAL_AREA_UNRESOLVED",
+      "MAMMOTH_STALK_NO_SPACE_RESOLUTION_ENGINE_UNSUPPORTED"
+    ]
+  },
+  "fieldCoverage": {
+    "total": 160,
+    "consumed": 145,
+    "explicit-source-blocker": 5,
+    "engine-unsupported-blocker": 1,
+    "display-only": 7,
+    "not-runtime-relevant": 2,
+    "unclassified": 0,
+    "runtimeSelectorExpected": 145,
+    "runtimeSelectorResolved": 145,
+    "runtimeSelectorMissing": 0
+  },
+  "commands": [
+    {
+      "name": "typecheck",
+      "exitCode": 0,
+      "durationMs": 7582
+    },
+    {
+      "name": "capabilityTests",
+      "exitCode": 0,
+      "durationMs": 3355
+    },
+    {
+      "name": "adversarialTests",
+      "exitCode": 0,
+      "durationMs": 3096
+    },
+    {
+      "name": "bindingGate",
+      "exitCode": 0,
+      "durationMs": 12238
+    },
+    {
+      "name": "runtimeGate",
+      "exitCode": 0,
+      "durationMs": 324082
+    },
+    {
+      "name": "visualGate",
+      "exitCode": 0,
+      "durationMs": 17756
+    },
+    {
+      "name": "officialSourceGate",
+      "exitCode": 0,
+      "durationMs": 222974
+    }
+  ],
+  "officialTruthInvariant": {
+    "status": "SOURCE-BLOCKED",
+    "complete": 26,
+    "partial": 1,
+    "issue": "ISSUE-P0-002",
+    "formal": "0/9",
+    "canEnterPhase11B": false
+  },
+  "failures": []
+}

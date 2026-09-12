@@ -86,8 +86,8 @@ _无_
 | 两次运行完全一致 | ✅ |
 | 首个分叉事件下标 | -1 |
 | RNG 序列一致 | ✅ |
-| Bundle Hash A | `d99241fe` |
-| Bundle Hash B | `d99241fe` |
+| Bundle Hash A | `02e9bf2e` |
+| Bundle Hash B | `02e9bf2e` |
 
 > Milestone Hash 在 `stripVolatile()`（剥离 `id` / `createdAt` / `updatedAt` / `log`）后可稳定复现。
 

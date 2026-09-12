@@ -1,14 +1,14 @@
 # Phase 11A.3 Community Runtime Freeze Evidence Closure Report
 
 - Terminal verdict: **COMMUNITY-REFERENCE-RUNTIME-FROZEN**
-- Verified implementation head: `58f16280ef228091754eb6de59d49de881e487f1`
+- Verified implementation head: `c51b53d264438fa5b7470e01e54be5c3dfb39c5d`
 - Runtime profile: `community-reference`
 - Source package SHA-256: `382e479f84f79a9b3cc6b0256b2fa5dea100b3576244988f180b49e75ed78d2a`
-- Content hash: `bb161c8b`
+- Content hash: `6e170e7d`
 - Layout topology proof: `dd-layout-topology.v2`
 - Source mutation detection: 8/8.
 - Runtime mutation detection: 2/2.
-- Field coverage: 160 total; 125 consumed, 5 source-blocked, 21 engine-blocked, 7 display-only, 2 not-runtime-relevant, 0 unclassified.
+- Field coverage: 160 total; 145 consumed, 5 source-blocked, 1 engine-blocked, 7 display-only, 2 not-runtime-relevant, 0 unclassified.
 
 ## Exact test counts
 
@@ -20,13 +20,13 @@
 - finalEncounter: 12/12 passed; discovered=12, run=12, failed=0, skipped=0, todo=0.
 - monster: 7/7 passed; discovered=7, run=7, failed=0, skipped=0, todo=0.
 - saveReplay: 12/12 passed; discovered=12, run=12, failed=0, skipped=0, todo=0.
-- traceability: 127/127 passed; discovered=127, run=127, failed=0, skipped=0, todo=0.
+- traceability: 147/147 passed; discovered=147, run=147, failed=0, skipped=0, todo=0.
 - adversarial: 20/20 passed; discovered=20, run=20, failed=0, skipped=0, todo=0.
 - truthGate: 15/15 passed; discovered=15, run=15, failed=0, skipped=0, todo=0.
 - freezeEvidence: 12/12 passed; discovered=12, run=12, failed=0, skipped=0, todo=0.
 - communityE2E: 3/3 passed; discovered=3, run=3, failed=0, skipped=0, todo=0.
 
-- Active blockers: 5 source-level + 12 runtime-only = 17.
+- Active blockers: 5 source-level + 6 runtime-only = 11.
 - Official Source Gate: `SOURCE-BLOCKED`; requiredMissing=26, optionalMissing=1, onlyOpenP0=`ISSUE-P0-002`, Formal Matrix=0/9, canCloseP0_002=false, canEnterPhase11B=false.
 - Community full Act IV playable: **false**.
 
@@ -39,15 +39,9 @@
 - `MONSTER_DECK_DRAW_POLICY_UNRESOLVED`
 - `EXCAVATION_PROVISION_DIE_MAP_UNRESOLVED`
 - `FINAL_PROVISION_POLICY_UNRESOLVED`
-- `GUARDIAN_RESISTANCE_ENGINE_UNSUPPORTED`
-- `GUARDIAN_CRIT_ENGINE_UNSUPPORTED`
 - `GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED`
 - `TEMPLARS_AREA_ADJACENCY_UNRESOLVED`
 - `SHUFFLING_INITIAL_AREA_UNRESOLVED`
 - `MAMMOTH_STALK_NO_SPACE_RESOLUTION_ENGINE_UNSUPPORTED`
-- `QUEST_CARD_PROVISION_POLICY_ENGINE_UNSUPPORTED`
-- `FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED`
-- `FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED`
-- `GUARDIAN_VICTORY_POLICY_ENGINE_UNSUPPORTED`
 
 This freeze does not alter Official Source Gate semantics, close ISSUE-P0-002, enter Phase 11B, replace art assets, or fill unresolved rules from Prototype or videogame sources.
