@@ -1,11 +1,11 @@
 # Phase 11A.3 Community Reference Runtime Final Acceptance Report
 
 - Terminal verdict: **COMMUNITY-REFERENCE-RUNTIME-ACCEPTED**
-- Verified implementation head: `5e755668c62e521e905adda93536c790f53017a0`
+- Verified implementation head: `589d333fa66b0f5e1c3dd55ef099e3370a12003c`
 - Runtime profile: `community-reference`
 - Source package SHA-256: `382e479f84f79a9b3cc6b0256b2fa5dea100b3576244988f180b49e75ed78d2a`
-- Content hash: `fdafaf14`
-- Field coverage: 131 total; 107 consumed, 5 source-blocked, 14 engine-blocked, 5 display-only, 0 not-runtime-relevant, 0 unclassified.
+- Content hash: `bb161c8b`
+- Field coverage: 160 total; 125 consumed, 5 source-blocked, 21 engine-blocked, 7 display-only, 2 not-runtime-relevant, 0 unclassified.
 
 ## Exact test counts
 
@@ -17,11 +17,12 @@
 - finalEncounter: 12/12 passed; discovered=12, run=12, failed=0, skipped=0, todo=0.
 - monster: 7/7 passed; discovered=7, run=7, failed=0, skipped=0, todo=0.
 - saveReplay: 12/12 passed; discovered=12, run=12, failed=0, skipped=0, todo=0.
-- traceability: 128/128 passed; discovered=128, run=128, failed=0, skipped=0, todo=0.
+- traceability: 127/127 passed; discovered=127, run=127, failed=0, skipped=0, todo=0.
 - adversarial: 20/20 passed; discovered=20, run=20, failed=0, skipped=0, todo=0.
+- truthGate: 15/15 passed; discovered=15, run=15, failed=0, skipped=0, todo=0.
 - communityE2E: 3/3 passed; discovered=3, run=3, failed=0, skipped=0, todo=0.
 
-- Active blockers: 5 source-level + 7 runtime-only = 12.
+- Active blockers: 5 source-level + 12 runtime-only = 17.
 - Official Source Gate: `SOURCE-BLOCKED`; requiredMissing=26, optionalMissing=1, onlyOpenP0=`ISSUE-P0-002`, Formal Matrix=0/9, canCloseP0_002=false, canEnterPhase11B=false.
 - Community full Act IV playable: **false**.
 
@@ -39,5 +40,10 @@
 - `GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED`
 - `TEMPLARS_AREA_ADJACENCY_UNRESOLVED`
 - `SHUFFLING_INITIAL_AREA_UNRESOLVED`
+- `MAMMOTH_STALK_NO_SPACE_RESOLUTION_ENGINE_UNSUPPORTED`
+- `QUEST_CARD_PROVISION_POLICY_ENGINE_UNSUPPORTED`
+- `FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED`
+- `FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED`
+- `GUARDIAN_VICTORY_POLICY_ENGINE_UNSUPPORTED`
 
 This acceptance does not alter Official Source Gate semantics, close ISSUE-P0-002, enter Phase 11B, replace art assets, or fill unresolved rules from Prototype or videogame sources.

@@ -1,17 +1,17 @@
 {
-  "schemaVersion": "phase11a3-community-reference-runtime-final-acceptance.v1",
-  "runId": "cee2d687-3694-401a-9367-c20888d9d8bc",
-  "measuredAt": "2026-09-11T14:54:40.338Z",
-  "verifiedImplementationHead": "5e755668c62e521e905adda93536c790f53017a0",
-  "evidencePublicationParent": "5e755668c62e521e905adda93536c790f53017a0",
+  "schemaVersion": "phase11a3-community-runtime-acceptance-truth-gate.v1",
+  "runId": "638b286d-93a5-46fa-a649-57cdf7d964b8",
+  "measuredAt": "2026-09-11T15:36:26.527Z",
+  "verifiedImplementationHead": "589d333fa66b0f5e1c3dd55ef099e3370a12003c",
+  "evidencePublicationParent": "589d333fa66b0f5e1c3dd55ef099e3370a12003c",
   "sourcePackageSha256": "382e479f84f79a9b3cc6b0256b2fa5dea100b3576244988f180b49e75ed78d2a",
   "normalizedRequirementsSha256": "82e3f9794c81d021c158610ff47411a7ef0af7d68efe3d23631d9a7e68793562",
   "sourceBindingManifestSha256": "30e383ae71d1ef00041276e081ced74156865d3cae3f3e17b3c1e29dfcd773b8",
-  "bindingEvidenceRunId": "88018efb-72d2-4237-bf47-fda0effbe868",
-  "bindingEvidenceSha256": "ba98ed88e7ea8e6a66a888635b373242c9f578b797b81ab4fe1d57e289ca5edf",
+  "bindingEvidenceRunId": "615018cf-e81f-4733-8ff8-981e0babc3f2",
+  "bindingEvidenceSha256": "363054ce9aa77cba3b172a3a4b3825553b3fe447503b0af1c3066d6309339b7c",
   "runtimeProfileId": "community-reference",
-  "runtimeAdapterVersion": "phase11a3-community-runtime-adapter.v3",
-  "contentHash": "fdafaf14",
+  "runtimeAdapterVersion": "phase11a3-community-runtime-adapter.v4",
+  "contentHash": "bb161c8b",
   "counts": {
     "quests": 3,
     "layouts": 2,
@@ -22,20 +22,25 @@
     "monsterPhysical": 26,
     "monsterLogical": 9
   },
-  "fieldCoverage": {
-    "total": 131,
-    "consumed": 107,
-    "explicit-source-blocker": 5,
-    "engine-unsupported-blocker": 14,
-    "display-only": 5,
-    "not-runtime-relevant": 0,
+  "semanticLeafCoverage": {
+    "total": 160,
+    "consumed": 125,
+    "sourceBlocked": 5,
+    "engineBlocked": 21,
+    "displayOnly": 7,
+    "notRuntimeRelevant": 2,
     "unclassified": 0
+  },
+  "runtimeSelectorCoverage": {
+    "expected": 125,
+    "resolved": 125,
+    "missing": 0
   },
   "testGroups": {
     "validators": {
       "name": "validators",
       "exitCode": 0,
-      "durationMs": 3954,
+      "durationMs": 1895,
       "expected": 3,
       "discovered": 3,
       "run": 3,
@@ -47,7 +52,7 @@
     "setup": {
       "name": "setup",
       "exitCode": 0,
-      "durationMs": 3850,
+      "durationMs": 3004,
       "expected": 6,
       "discovered": 6,
       "run": 6,
@@ -59,7 +64,7 @@
     "production": {
       "name": "production",
       "exitCode": 0,
-      "durationMs": 3697,
+      "durationMs": 2953,
       "expected": 6,
       "discovered": 6,
       "run": 6,
@@ -71,7 +76,7 @@
     "guardian": {
       "name": "guardian",
       "exitCode": 0,
-      "durationMs": 4484,
+      "durationMs": 2851,
       "expected": 16,
       "discovered": 16,
       "run": 16,
@@ -83,7 +88,7 @@
     "excavation": {
       "name": "excavation",
       "exitCode": 0,
-      "durationMs": 3609,
+      "durationMs": 2773,
       "expected": 6,
       "discovered": 6,
       "run": 6,
@@ -95,7 +100,7 @@
     "finalEncounter": {
       "name": "finalEncounter",
       "exitCode": 0,
-      "durationMs": 4993,
+      "durationMs": 2908,
       "expected": 12,
       "discovered": 12,
       "run": 12,
@@ -107,7 +112,7 @@
     "monster": {
       "name": "monster",
       "exitCode": 0,
-      "durationMs": 5859,
+      "durationMs": 2980,
       "expected": 7,
       "discovered": 7,
       "run": 7,
@@ -119,7 +124,7 @@
     "saveReplay": {
       "name": "saveReplay",
       "exitCode": 0,
-      "durationMs": 4806,
+      "durationMs": 3020,
       "expected": 12,
       "discovered": 12,
       "run": 12,
@@ -131,11 +136,11 @@
     "traceability": {
       "name": "traceability",
       "exitCode": 0,
-      "durationMs": 2516,
-      "expected": 128,
-      "discovered": 128,
-      "run": 128,
-      "passed": 128,
+      "durationMs": 2052,
+      "expected": 127,
+      "discovered": 127,
+      "run": 127,
+      "passed": 127,
       "failed": 0,
       "skipped": 0,
       "todo": 0
@@ -143,7 +148,7 @@
     "adversarial": {
       "name": "adversarial",
       "exitCode": 0,
-      "durationMs": 5098,
+      "durationMs": 2900,
       "expected": 20,
       "discovered": 20,
       "run": 20,
@@ -152,10 +157,22 @@
       "skipped": 0,
       "todo": 0
     },
+    "truthGate": {
+      "name": "truthGate",
+      "exitCode": 0,
+      "durationMs": 2990,
+      "expected": 15,
+      "discovered": 15,
+      "run": 15,
+      "passed": 15,
+      "failed": 0,
+      "skipped": 0,
+      "todo": 0
+    },
     "communityE2E": {
       "name": "communityE2E",
       "exitCode": 0,
-      "durationMs": 11643,
+      "durationMs": 6919,
       "expected": 3,
       "discovered": 3,
       "run": 3,
@@ -167,9 +184,249 @@
   },
   "blockerInventory": {
     "sourceLevel": 5,
-    "runtimeOnly": 7,
-    "total": 12
+    "runtimeOnly": 12,
+    "total": 17
   },
+  "activeBlockers": [
+    {
+      "code": "TEMPLARS_PIT_EXIT_RULE_UNRESOLVED",
+      "requirementId": "tierB-templars-room",
+      "field": "pitExitRule",
+      "sourcePath": "pitExitRule",
+      "runtimeDependency": "pitExitRule",
+      "firstBlockingFunction": "blockCommunityOperation",
+      "tests": [
+        "BLOCK:TEMPLARS_PIT_EXIT_RULE_UNRESOLVED"
+      ],
+      "proofKind": "semantic-leaf",
+      "classification": "source-level",
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
+    },
+    {
+      "code": "ABSOLUTE_NOTHINGNESS_STANCE_UNRESOLVED",
+      "requirementId": "tierB-absolute-nothingness",
+      "field": "stance",
+      "sourcePath": "stance",
+      "runtimeDependency": "stance",
+      "firstBlockingFunction": "blockCommunityOperation",
+      "tests": [
+        "BLOCK:ABSOLUTE_NOTHINGNESS_STANCE_UNRESOLVED"
+      ],
+      "proofKind": "semantic-leaf",
+      "classification": "source-level",
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
+    },
+    {
+      "code": "GESTATING_HEART_LETHAL_TIMING_UNRESOLVED",
+      "requirementId": "tierB-gestating-heart",
+      "field": "lethalWoundTimingRuling",
+      "sourcePath": "lethalWoundTimingRuling",
+      "runtimeDependency": "lethalWoundTimingRuling",
+      "firstBlockingFunction": "blockCommunityOperation",
+      "tests": [
+        "BLOCK:GESTATING_HEART_LETHAL_TIMING_UNRESOLVED"
+      ],
+      "proofKind": "semantic-leaf",
+      "classification": "source-level",
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
+    },
+    {
+      "code": "COME_UNTO_YOUR_MAKER_UNRESOLVED",
+      "requirementId": "tierB-come-unto-your-maker",
+      "field": "definition",
+      "sourcePath": "definition",
+      "runtimeDependency": "definition",
+      "firstBlockingFunction": "blockCommunityOperation",
+      "tests": [
+        "BLOCK:COME_UNTO_YOUR_MAKER_UNRESOLVED"
+      ],
+      "proofKind": "semantic-leaf",
+      "classification": "source-level",
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
+    },
+    {
+      "code": "MONSTER_DECK_DRAW_POLICY_UNRESOLVED",
+      "requirementId": "tierB-darkest-dungeon-monster-deck",
+      "field": "drawPolicy",
+      "sourcePath": "drawPolicy",
+      "runtimeDependency": "drawPolicy",
+      "firstBlockingFunction": "blockCommunityOperation",
+      "tests": [
+        "BLOCK:MONSTER_DECK_DRAW_POLICY_UNRESOLVED"
+      ],
+      "proofKind": "semantic-leaf",
+      "classification": "source-level",
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
+    },
+    {
+      "code": "EXCAVATION_PROVISION_DIE_MAP_UNRESOLVED",
+      "requirementId": "runtime-excavation-provision-die",
+      "field": "faceMap",
+      "sourcePath": "faceMap",
+      "runtimeDependency": "faceMap",
+      "firstBlockingFunction": "blockCommunityOperation",
+      "tests": [
+        "BLOCK:EXCAVATION_PROVISION_DIE_MAP_UNRESOLVED"
+      ],
+      "proofKind": "capability-level",
+      "classification": "runtime-only",
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
+    },
+    {
+      "code": "FINAL_PROVISION_POLICY_UNRESOLVED",
+      "requirementId": "runtime-final-provision-policy",
+      "field": "grantTable",
+      "sourcePath": "grantTable",
+      "runtimeDependency": "grantTable",
+      "firstBlockingFunction": "blockCommunityOperation",
+      "tests": [
+        "BLOCK:FINAL_PROVISION_POLICY_UNRESOLVED"
+      ],
+      "proofKind": "capability-level",
+      "classification": "runtime-only",
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
+    },
+    {
+      "code": "GUARDIAN_RESISTANCE_ENGINE_UNSUPPORTED",
+      "requirementId": "runtime-guardian-combat",
+      "field": "categoricalResistanceResolution",
+      "sourcePath": "categoricalResistanceResolution",
+      "runtimeDependency": "categoricalResistanceResolution",
+      "firstBlockingFunction": "blockCommunityOperation",
+      "tests": [
+        "BLOCK:GUARDIAN_RESISTANCE_ENGINE_UNSUPPORTED"
+      ],
+      "proofKind": "capability-level",
+      "classification": "runtime-only",
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
+    },
+    {
+      "code": "GUARDIAN_CRIT_ENGINE_UNSUPPORTED",
+      "requirementId": "runtime-guardian-combat",
+      "field": "criticalHitResolution",
+      "sourcePath": "criticalHitResolution",
+      "runtimeDependency": "criticalHitResolution",
+      "firstBlockingFunction": "blockCommunityOperation",
+      "tests": [
+        "BLOCK:GUARDIAN_CRIT_ENGINE_UNSUPPORTED"
+      ],
+      "proofKind": "capability-level",
+      "classification": "runtime-only",
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
+    },
+    {
+      "code": "GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED",
+      "requirementId": "runtime-guardian-combat",
+      "field": "specialSkillEffectResolution",
+      "sourcePath": "specialSkillEffectResolution",
+      "runtimeDependency": "specialSkillEffectResolution",
+      "firstBlockingFunction": "blockCommunityOperation",
+      "tests": [
+        "BLOCK:GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED"
+      ],
+      "proofKind": "capability-level",
+      "classification": "runtime-only",
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
+    },
+    {
+      "code": "TEMPLARS_AREA_ADJACENCY_UNRESOLVED",
+      "requirementId": "runtime-templars-room",
+      "field": "areaAdjacency",
+      "sourcePath": "areaAdjacency",
+      "runtimeDependency": "areaAdjacency",
+      "firstBlockingFunction": "blockCommunityOperation",
+      "tests": [
+        "BLOCK:TEMPLARS_AREA_ADJACENCY_UNRESOLVED"
+      ],
+      "proofKind": "capability-level",
+      "classification": "runtime-only",
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
+    },
+    {
+      "code": "SHUFFLING_INITIAL_AREA_UNRESOLVED",
+      "requirementId": "runtime-shuffling-horror-room",
+      "field": "initialArea",
+      "sourcePath": "initialArea",
+      "runtimeDependency": "initialArea",
+      "firstBlockingFunction": "blockCommunityOperation",
+      "tests": [
+        "BLOCK:SHUFFLING_INITIAL_AREA_UNRESOLVED"
+      ],
+      "proofKind": "capability-level",
+      "classification": "runtime-only",
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
+    },
+    {
+      "code": "MAMMOTH_STALK_NO_SPACE_RESOLUTION_ENGINE_UNSUPPORTED",
+      "requirementId": "tierB-mammoth-cyst-room",
+      "field": "spawnAreaPolicy.noSpace",
+      "sourcePath": "spawnAreaPolicy.noSpace",
+      "runtimeDependency": "room area adjacency / nearest-available displacement",
+      "firstBlockingFunction": "summonWhiteCellStalk",
+      "tests": [
+        "BLOCK:MAMMOTH_STALK_NO_SPACE_RESOLUTION_ENGINE_UNSUPPORTED"
+      ],
+      "proofKind": "semantic-leaf",
+      "classification": "runtime-only",
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
+    },
+    {
+      "code": "QUEST_CARD_PROVISION_POLICY_ENGINE_UNSUPPORTED",
+      "requirementId": "runtime-community-quest",
+      "field": "provisionPolicyId.cardSpecific",
+      "sourcePath": "provisionPolicyId.cardSpecific",
+      "runtimeDependency": "card-specific provision policy execution",
+      "firstBlockingFunction": "startDarkestDungeonQuest",
+      "tests": [
+        "BLOCK:QUEST_CARD_PROVISION_POLICY_ENGINE_UNSUPPORTED"
+      ],
+      "proofKind": "capability-level",
+      "classification": "runtime-only",
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
+    },
+    {
+      "code": "FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED",
+      "requirementId": "runtime-community-final",
+      "field": "d10SkillTable",
+      "sourcePath": "d10SkillTable",
+      "runtimeDependency": "Final Form d10 skill execution",
+      "firstBlockingFunction": "resolveFinalFormAction",
+      "tests": [
+        "BLOCK:FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED"
+      ],
+      "proofKind": "capability-level",
+      "classification": "runtime-only",
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
+    },
+    {
+      "code": "FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED",
+      "requirementId": "runtime-community-final",
+      "field": "roomEffects.encounterContext",
+      "sourcePath": "roomEffects.encounterContext",
+      "runtimeDependency": "source-projected room transition policy",
+      "firstBlockingFunction": "transitionToNextFinalForm",
+      "tests": [
+        "BLOCK:FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED"
+      ],
+      "proofKind": "capability-level",
+      "classification": "runtime-only",
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
+    },
+    {
+      "code": "GUARDIAN_VICTORY_POLICY_ENGINE_UNSUPPORTED",
+      "requirementId": "runtime-community-guardian",
+      "field": "victoryCondition",
+      "sourcePath": "victoryCondition",
+      "runtimeDependency": "source-projected Guardian victory policy",
+      "firstBlockingFunction": "resolveGuardianVictory",
+      "tests": [
+        "BLOCK:GUARDIAN_VICTORY_POLICY_ENGINE_UNSUPPORTED"
+      ],
+      "proofKind": "capability-level",
+      "classification": "runtime-only",
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
+    }
+  ],
   "activeBlockerCodes": [
     "TEMPLARS_PIT_EXIT_RULE_UNRESOLVED",
     "ABSOLUTE_NOTHINGNESS_STANCE_UNRESOLVED",
@@ -182,28 +439,33 @@
     "GUARDIAN_CRIT_ENGINE_UNSUPPORTED",
     "GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED",
     "TEMPLARS_AREA_ADJACENCY_UNRESOLVED",
-    "SHUFFLING_INITIAL_AREA_UNRESOLVED"
+    "SHUFFLING_INITIAL_AREA_UNRESOLVED",
+    "MAMMOTH_STALK_NO_SPACE_RESOLUTION_ENGINE_UNSUPPORTED",
+    "QUEST_CARD_PROVISION_POLICY_ENGINE_UNSUPPORTED",
+    "FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED",
+    "FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED",
+    "GUARDIAN_VICTORY_POLICY_ENGINE_UNSUPPORTED"
   ],
   "commands": [
     {
       "name": "typecheck",
       "exitCode": 0,
-      "durationMs": 14112
+      "durationMs": 6545
     },
     {
       "name": "build",
       "exitCode": 0,
-      "durationMs": 8025
+      "durationMs": 5261
     },
     {
       "name": "officialSourceGateRegression",
       "exitCode": 0,
-      "durationMs": 286469
+      "durationMs": 181511
     },
     {
       "name": "bindingRegression",
       "exitCode": 0,
-      "durationMs": 15977
+      "durationMs": 11117
     }
   ],
   "officialGateBefore": {
@@ -231,7 +493,7 @@
     "canEnterPhase11B": false
   },
   "communityFullActFourPlayable": false,
-  "communityFullActFourPlayableReason": "12 active source/runtime blockers",
+  "communityFullActFourPlayableReason": "17 active source/runtime blockers",
   "terminalVerdict": "COMMUNITY-REFERENCE-RUNTIME-ACCEPTED",
   "errors": []
 }

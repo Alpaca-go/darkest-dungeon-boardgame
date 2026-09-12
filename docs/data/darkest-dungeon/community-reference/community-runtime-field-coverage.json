@@ -1,69 +1,72 @@
 {
-  "schemaVersion": "phase11a3-community-runtime-field-coverage.v1",
-  "generatedAt": "2026-09-11T14:54:40.338Z",
-  "verifiedImplementationHead": "5e755668c62e521e905adda93536c790f53017a0",
+  "schemaVersion": "phase11a3-community-runtime-semantic-leaf-coverage.v2",
+  "generatedAt": "2026-09-11T15:36:26.527Z",
+  "verifiedImplementationHead": "589d333fa66b0f5e1c3dd55ef099e3370a12003c",
   "totals": {
-    "total": 131,
-    "consumed": 107,
+    "total": 160,
+    "consumed": 125,
     "explicit-source-blocker": 5,
-    "engine-unsupported-blocker": 14,
-    "display-only": 5,
-    "not-runtime-relevant": 0,
-    "unclassified": 0
+    "engine-unsupported-blocker": 21,
+    "display-only": 7,
+    "not-runtime-relevant": 2,
+    "unclassified": 0,
+    "runtimeSelectorExpected": 125,
+    "runtimeSelectorResolved": 125,
+    "runtimeSelectorMissing": 0
   },
   "entries": [
     {
       "requirementId": "tierB-quest-1",
-      "field": "name",
-      "sourceStatus": "confirmed",
+      "sourcePath": "name",
+      "classification": "display-only",
       "sourceReference": [
         "asset:735bc3:face"
       ],
       "sourceValueHash": "a52d4dc3",
-      "runtimeValueHash": "a52d4dc3",
-      "runtimeClassification": "display-only",
-      "runtimeTarget": "communityDisplay.tierB-quest-1.name",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
-        "CLASSIFY:tierB-quest-1.name"
+        "TRACE:tierB-quest-1.name"
       ]
     },
     {
       "requirementId": "tierB-quest-1",
-      "field": "guardianDefinitionId",
-      "sourceStatus": "confirmed",
+      "sourcePath": "guardianDefinitionId",
+      "classification": "consumed",
       "sourceReference": [
         "asset:735bc3:face"
       ],
-      "sourceValueHash": "9e4bb679",
-      "runtimeValueHash": "9e4bb679",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-quest-1.guardianDefinitionId",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "92ee4ad8",
+      "runtimeValueHash": "92ee4ad8",
+      "runtimeSelectorId": "quest.guardianDefinitionId",
+      "normalizerId": "guardian-family.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-quest-1.guardianDefinitionId"
       ]
     },
     {
       "requirementId": "tierB-quest-1",
-      "field": "skippedFinalFormId",
-      "sourceStatus": "confirmed",
+      "sourcePath": "skippedFinalFormId",
+      "classification": "consumed",
       "sourceReference": [
         "asset:735bc3:face"
       ],
       "sourceValueHash": "a189d0b2",
       "runtimeValueHash": "a189d0b2",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-quest-1.skippedFinalFormId",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "quest.skippedFinalFormId",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-quest-1.skippedFinalFormId"
       ]
     },
     {
       "requirementId": "tierB-quest-1",
-      "field": "firewoodCount",
-      "sourceStatus": "confirmed",
+      "sourcePath": "firewoodCount",
+      "classification": "consumed",
       "sourceReference": [
         "asset:735bc3:face",
         "rulebook:11",
@@ -71,84 +74,84 @@
       ],
       "sourceValueHash": "0002b5d6",
       "runtimeValueHash": "0002b5d6",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-quest-1.firewoodCount",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "quest.firewoodCount",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-quest-1.firewoodCount"
       ]
     },
     {
       "requirementId": "tierB-quest-1",
-      "field": "provisionPolicyId.cardSpecific",
-      "sourceStatus": "confirmed",
+      "sourcePath": "provisionPolicyId.cardSpecific",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "asset:735bc3:face",
         "asset:735bc3:back",
         "rulebook:12",
         "rulebook:36"
       ],
-      "sourceValueHash": "b9e564c8",
-      "runtimeValueHash": "b9e564c8",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-quest-1.provisionPolicyId.cardSpecific",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "34f85588",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "QUEST_CARD_PROVISION_POLICY_ENGINE_UNSUPPORTED",
       "tests": [
         "TRACE:tierB-quest-1.provisionPolicyId.cardSpecific"
       ]
     },
     {
       "requirementId": "tierB-quest-2",
-      "field": "name",
-      "sourceStatus": "confirmed",
+      "sourcePath": "name",
+      "classification": "display-only",
       "sourceReference": [
         "asset:083199:face"
       ],
       "sourceValueHash": "f3247c93",
-      "runtimeValueHash": "f3247c93",
-      "runtimeClassification": "display-only",
-      "runtimeTarget": "communityDisplay.tierB-quest-2.name",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
-        "CLASSIFY:tierB-quest-2.name"
+        "TRACE:tierB-quest-2.name"
       ]
     },
     {
       "requirementId": "tierB-quest-2",
-      "field": "guardianDefinitionId",
-      "sourceStatus": "confirmed",
+      "sourcePath": "guardianDefinitionId",
+      "classification": "consumed",
       "sourceReference": [
         "asset:083199:face"
       ],
-      "sourceValueHash": "2d06e180",
-      "runtimeValueHash": "2d06e180",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-quest-2.guardianDefinitionId",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "91187691",
+      "runtimeValueHash": "91187691",
+      "runtimeSelectorId": "quest.guardianDefinitionId",
+      "normalizerId": "guardian-family.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-quest-2.guardianDefinitionId"
       ]
     },
     {
       "requirementId": "tierB-quest-2",
-      "field": "skippedFinalFormId",
-      "sourceStatus": "confirmed",
+      "sourcePath": "skippedFinalFormId",
+      "classification": "consumed",
       "sourceReference": [
         "asset:083199:face"
       ],
       "sourceValueHash": "b8af233e",
       "runtimeValueHash": "b8af233e",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-quest-2.skippedFinalFormId",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "quest.skippedFinalFormId",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-quest-2.skippedFinalFormId"
       ]
     },
     {
       "requirementId": "tierB-quest-2",
-      "field": "firewoodCount",
-      "sourceStatus": "confirmed",
+      "sourcePath": "firewoodCount",
+      "classification": "consumed",
       "sourceReference": [
         "asset:083199:face",
         "rulebook:11",
@@ -156,84 +159,84 @@
       ],
       "sourceValueHash": "0002b5d6",
       "runtimeValueHash": "0002b5d6",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-quest-2.firewoodCount",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "quest.firewoodCount",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-quest-2.firewoodCount"
       ]
     },
     {
       "requirementId": "tierB-quest-2",
-      "field": "provisionPolicyId.cardSpecific",
-      "sourceStatus": "confirmed",
+      "sourcePath": "provisionPolicyId.cardSpecific",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "asset:083199:face",
         "asset:083199:back",
         "rulebook:12",
         "rulebook:36"
       ],
-      "sourceValueHash": "b9e564c8",
-      "runtimeValueHash": "b9e564c8",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-quest-2.provisionPolicyId.cardSpecific",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "34f85588",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "QUEST_CARD_PROVISION_POLICY_ENGINE_UNSUPPORTED",
       "tests": [
         "TRACE:tierB-quest-2.provisionPolicyId.cardSpecific"
       ]
     },
     {
       "requirementId": "tierB-quest-3",
-      "field": "name",
-      "sourceStatus": "confirmed",
+      "sourcePath": "name",
+      "classification": "display-only",
       "sourceReference": [
         "asset:6555d3:face"
       ],
       "sourceValueHash": "2dd76746",
-      "runtimeValueHash": "2dd76746",
-      "runtimeClassification": "display-only",
-      "runtimeTarget": "communityDisplay.tierB-quest-3.name",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
-        "CLASSIFY:tierB-quest-3.name"
+        "TRACE:tierB-quest-3.name"
       ]
     },
     {
       "requirementId": "tierB-quest-3",
-      "field": "guardianDefinitionId",
-      "sourceStatus": "confirmed",
+      "sourcePath": "guardianDefinitionId",
+      "classification": "consumed",
       "sourceReference": [
         "asset:6555d3:face"
       ],
-      "sourceValueHash": "e3563a7b",
-      "runtimeValueHash": "e3563a7b",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-quest-3.guardianDefinitionId",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "09421aac",
+      "runtimeValueHash": "09421aac",
+      "runtimeSelectorId": "quest.guardianDefinitionId",
+      "normalizerId": "guardian-family.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-quest-3.guardianDefinitionId"
       ]
     },
     {
       "requirementId": "tierB-quest-3",
-      "field": "skippedFinalFormId",
-      "sourceStatus": "confirmed",
+      "sourcePath": "skippedFinalFormId",
+      "classification": "consumed",
       "sourceReference": [
         "asset:6555d3:face"
       ],
       "sourceValueHash": "22195df0",
       "runtimeValueHash": "22195df0",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-quest-3.skippedFinalFormId",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "quest.skippedFinalFormId",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-quest-3.skippedFinalFormId"
       ]
     },
     {
       "requirementId": "tierB-quest-3",
-      "field": "firewoodCount",
-      "sourceStatus": "confirmed",
+      "sourcePath": "firewoodCount",
+      "classification": "consumed",
       "sourceReference": [
         "asset:6555d3:face",
         "rulebook:11",
@@ -241,462 +244,618 @@
       ],
       "sourceValueHash": "0002b5d6",
       "runtimeValueHash": "0002b5d6",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-quest-3.firewoodCount",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "quest.firewoodCount",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-quest-3.firewoodCount"
       ]
     },
     {
       "requirementId": "tierB-quest-3",
-      "field": "provisionPolicyId.cardSpecific",
-      "sourceStatus": "confirmed",
+      "sourcePath": "provisionPolicyId.cardSpecific",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "asset:6555d3:face",
         "asset:6555d3:back",
         "rulebook:12",
         "rulebook:36"
       ],
-      "sourceValueHash": "b9e564c8",
-      "runtimeValueHash": "b9e564c8",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-quest-3.provisionPolicyId.cardSpecific",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "34f85588",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "QUEST_CARD_PROVISION_POLICY_ENGINE_UNSUPPORTED",
       "tests": [
         "TRACE:tierB-quest-3.provisionPolicyId.cardSpecific"
       ]
     },
     {
       "requirementId": "tierB-dd-dungeon-tile",
-      "field": "tileGeometry",
-      "sourceStatus": "confirmed",
+      "sourcePath": "tileGeometry",
+      "classification": "consumed",
       "sourceReference": [
         "asset:4ced96:imageUrl",
         "asset:d10a24:imageUrl",
         "rulebook:36"
       ],
-      "sourceValueHash": "8ffe05b4",
-      "runtimeValueHash": "8ffe05b4",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-dd-dungeon-tile.tileGeometry",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "288cf5c9",
+      "runtimeValueHash": "288cf5c9",
+      "runtimeSelectorId": "layout.topology",
+      "normalizerId": "layout-topology.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-dd-dungeon-tile.tileGeometry"
       ]
     },
     {
       "requirementId": "tierB-dd-dungeon-tile",
-      "field": "bossSlotPositions",
-      "sourceStatus": "confirmed",
+      "sourcePath": "bossSlotPositions",
+      "classification": "display-only",
       "sourceReference": [
         "asset:4ced96:imageUrl",
         "asset:d10a24:imageUrl",
         "rulebook:36"
       ],
       "sourceValueHash": "a7e3108c",
-      "runtimeValueHash": "a7e3108c",
-      "runtimeClassification": "display-only",
-      "runtimeTarget": "communityDisplay.tierB-dd-dungeon-tile.bossSlotPositions",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
-        "CLASSIFY:tierB-dd-dungeon-tile.bossSlotPositions"
+        "TRACE:tierB-dd-dungeon-tile.bossSlotPositions"
       ]
     },
     {
       "requirementId": "tierB-templars-impaler",
-      "field": "maxHp",
-      "sourceStatus": "confirmed",
+      "sourcePath": "maxHp",
+      "classification": "consumed",
       "sourceReference": [
         "asset:efa5a4:face"
       ],
       "sourceValueHash": "00597193",
       "runtimeValueHash": "00597193",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-templars-impaler.maxHp",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "actor.maxHp",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-templars-impaler.maxHp"
       ]
     },
     {
       "requirementId": "tierB-templars-impaler",
-      "field": "dodge",
-      "sourceStatus": "confirmed",
+      "sourcePath": "dodge",
+      "classification": "consumed",
       "sourceReference": [
         "asset:efa5a4:face",
         "rulebook:24"
       ],
       "sourceValueHash": "0002b5d8",
       "runtimeValueHash": "0002b5d8",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-templars-impaler.dodge",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "actor.dodge",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-templars-impaler.dodge"
       ]
     },
     {
       "requirementId": "tierB-templars-impaler",
-      "field": "speed",
-      "sourceStatus": "confirmed",
+      "sourcePath": "speed",
+      "classification": "consumed",
       "sourceReference": [
         "asset:efa5a4:face",
         "rulebook:24"
       ],
       "sourceValueHash": "0002b5d7",
       "runtimeValueHash": "0002b5d7",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-templars-impaler.speed",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "actor.speed",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-templars-impaler.speed"
       ]
     },
     {
       "requirementId": "tierB-templars-impaler",
-      "field": "resistances",
-      "sourceStatus": "confirmed",
+      "sourcePath": "resistances",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "asset:efa5a4:face",
         "rulebook:20",
         "rulebook:21"
       ],
-      "sourceValueHash": "25ace37e",
-      "runtimeValueHash": "25ace37e",
-      "runtimeClassification": "engine-unsupported-blocker",
-      "runtimeTarget": "communityCombatSemantics.categoricalResistances",
-      "validator": "validateCommunityCombatSemantics",
+      "sourceValueHash": "9cdc22be",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "GUARDIAN_RESISTANCE_ENGINE_UNSUPPORTED",
       "tests": [
-        "TRACE:tierB-templars-impaler.resistances",
-        "BLOCK:tierB-templars-impaler.resistances"
-      ],
-      "blockerCode": "GUARDIAN_RESISTANCE_ENGINE_UNSUPPORTED"
-    },
-    {
-      "requirementId": "tierB-templars-impaler",
-      "field": "accuracy",
-      "sourceStatus": "confirmed",
-      "sourceReference": [
-        "asset:efa5a4:face"
-      ],
-      "sourceValueHash": "285fe13f",
-      "runtimeValueHash": "285fe13f",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-templars-impaler.accuracy",
-      "validator": "validateCommunityRuntimeFieldCoverage",
-      "tests": [
-        "TRACE:tierB-templars-impaler.accuracy"
+        "TRACE:tierB-templars-impaler.resistances"
       ]
     },
     {
       "requirementId": "tierB-templars-impaler",
-      "field": "damage",
-      "sourceStatus": "confirmed",
+      "sourcePath": "accuracy.torment",
+      "classification": "consumed",
       "sourceReference": [
         "asset:efa5a4:face"
       ],
-      "sourceValueHash": "63499652",
-      "runtimeValueHash": "63499652",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-templars-impaler.damage",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "005970c7",
+      "runtimeValueHash": "005970c7",
+      "runtimeSelectorId": "actor.skill.torment.accuracy",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
-        "TRACE:tierB-templars-impaler.damage"
+        "TRACE:tierB-templars-impaler.accuracy.torment"
       ]
     },
     {
       "requirementId": "tierB-templars-impaler",
-      "field": "crit",
-      "sourceStatus": "confirmed",
+      "sourcePath": "accuracy.body-slam",
+      "classification": "consumed",
       "sourceReference": [
         "asset:efa5a4:face"
       ],
-      "sourceValueHash": "108d1e12",
-      "runtimeValueHash": "108d1e12",
-      "runtimeClassification": "engine-unsupported-blocker",
-      "runtimeTarget": "communityCombatSemantics.criticalHits",
-      "validator": "validateCommunityCombatSemantics",
+      "sourceValueHash": "005970c7",
+      "runtimeValueHash": "005970c7",
+      "runtimeSelectorId": "actor.skill.body-slam.accuracy",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
-        "TRACE:tierB-templars-impaler.crit",
-        "BLOCK:tierB-templars-impaler.crit"
-      ],
-      "blockerCode": "GUARDIAN_CRIT_ENGINE_UNSUPPORTED"
+        "TRACE:tierB-templars-impaler.accuracy.body-slam"
+      ]
     },
     {
       "requirementId": "tierB-templars-impaler",
-      "field": "skillIds",
-      "sourceStatus": "confirmed",
+      "sourcePath": "accuracy.revelation",
+      "classification": "consumed",
       "sourceReference": [
         "asset:efa5a4:face"
       ],
-      "sourceValueHash": "24869fc2",
-      "runtimeValueHash": "24869fc2",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-templars-impaler.skillIds",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "005970c7",
+      "runtimeValueHash": "005970c7",
+      "runtimeSelectorId": "actor.skill.revelation.accuracy",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-templars-impaler.accuracy.revelation"
+      ]
+    },
+    {
+      "requirementId": "tierB-templars-impaler",
+      "sourcePath": "damage.torment",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:efa5a4:face"
+      ],
+      "sourceValueHash": "005970c6",
+      "runtimeValueHash": "005970c6",
+      "runtimeSelectorId": "actor.skill.torment.damage",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-templars-impaler.damage.torment"
+      ]
+    },
+    {
+      "requirementId": "tierB-templars-impaler",
+      "sourcePath": "damage.body-slam",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:efa5a4:face"
+      ],
+      "sourceValueHash": "0002b5db",
+      "runtimeValueHash": "0002b5db",
+      "runtimeSelectorId": "actor.skill.body-slam.damage",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-templars-impaler.damage.body-slam"
+      ]
+    },
+    {
+      "requirementId": "tierB-templars-impaler",
+      "sourcePath": "damage.revelation",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:efa5a4:face"
+      ],
+      "sourceValueHash": "005970e7",
+      "runtimeValueHash": "005970e7",
+      "runtimeSelectorId": "actor.skill.revelation.damage",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-templars-impaler.damage.revelation"
+      ]
+    },
+    {
+      "requirementId": "tierB-templars-impaler",
+      "sourcePath": "crit",
+      "classification": "engine-unsupported-blocker",
+      "sourceReference": [
+        "asset:efa5a4:face"
+      ],
+      "sourceValueHash": "a6cada32",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "GUARDIAN_CRIT_ENGINE_UNSUPPORTED",
+      "tests": [
+        "TRACE:tierB-templars-impaler.crit"
+      ]
+    },
+    {
+      "requirementId": "tierB-templars-impaler",
+      "sourcePath": "skillIds",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:efa5a4:face"
+      ],
+      "sourceValueHash": "f1734e4b",
+      "runtimeValueHash": "f1734e4b",
+      "runtimeSelectorId": "actor.skillIds",
+      "normalizerId": "local-skill-ids.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-templars-impaler.skillIds"
       ]
     },
     {
       "requirementId": "tierB-templars-impaler",
-      "field": "d10SkillTable",
-      "sourceStatus": "confirmed",
+      "sourcePath": "d10SkillTable",
+      "classification": "consumed",
       "sourceReference": [
         "asset:efa5a4:face"
       ],
-      "sourceValueHash": "ee7dc222",
-      "runtimeValueHash": "ee7dc222",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-templars-impaler.d10SkillTable",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "afc4028d",
+      "runtimeValueHash": "afc4028d",
+      "runtimeSelectorId": "actor.d10Rolls",
+      "normalizerId": "d10-by-local-skill.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-templars-impaler.d10SkillTable"
       ]
     },
     {
       "requirementId": "tierB-templars-warlord",
-      "field": "maxHp",
-      "sourceStatus": "confirmed",
+      "sourcePath": "maxHp",
+      "classification": "consumed",
       "sourceReference": [
         "asset:f88d6a:face"
       ],
       "sourceValueHash": "00597171",
       "runtimeValueHash": "00597171",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-templars-warlord.maxHp",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "actor.maxHp",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-templars-warlord.maxHp"
       ]
     },
     {
       "requirementId": "tierB-templars-warlord",
-      "field": "dodge",
-      "sourceStatus": "confirmed",
+      "sourcePath": "dodge",
+      "classification": "consumed",
       "sourceReference": [
         "asset:f88d6a:face",
         "rulebook:24"
       ],
       "sourceValueHash": "0002b5d8",
       "runtimeValueHash": "0002b5d8",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-templars-warlord.dodge",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "actor.dodge",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-templars-warlord.dodge"
       ]
     },
     {
       "requirementId": "tierB-templars-warlord",
-      "field": "speed",
-      "sourceStatus": "confirmed",
+      "sourcePath": "speed",
+      "classification": "consumed",
       "sourceReference": [
         "asset:f88d6a:face",
         "rulebook:24"
       ],
       "sourceValueHash": "0002b5d7",
       "runtimeValueHash": "0002b5d7",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-templars-warlord.speed",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "actor.speed",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-templars-warlord.speed"
       ]
     },
     {
       "requirementId": "tierB-templars-warlord",
-      "field": "resistances",
-      "sourceStatus": "confirmed",
+      "sourcePath": "resistances",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "asset:f88d6a:face",
         "rulebook:20",
         "rulebook:21"
       ],
-      "sourceValueHash": "25ace37e",
-      "runtimeValueHash": "25ace37e",
-      "runtimeClassification": "engine-unsupported-blocker",
-      "runtimeTarget": "communityCombatSemantics.categoricalResistances",
-      "validator": "validateCommunityCombatSemantics",
+      "sourceValueHash": "9cdc22be",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "GUARDIAN_RESISTANCE_ENGINE_UNSUPPORTED",
       "tests": [
-        "TRACE:tierB-templars-warlord.resistances",
-        "BLOCK:tierB-templars-warlord.resistances"
-      ],
-      "blockerCode": "GUARDIAN_RESISTANCE_ENGINE_UNSUPPORTED"
-    },
-    {
-      "requirementId": "tierB-templars-warlord",
-      "field": "accuracy",
-      "sourceStatus": "confirmed",
-      "sourceReference": [
-        "asset:f88d6a:face"
-      ],
-      "sourceValueHash": "9919c7fe",
-      "runtimeValueHash": "9919c7fe",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-templars-warlord.accuracy",
-      "validator": "validateCommunityRuntimeFieldCoverage",
-      "tests": [
-        "TRACE:tierB-templars-warlord.accuracy"
+        "TRACE:tierB-templars-warlord.resistances"
       ]
     },
     {
       "requirementId": "tierB-templars-warlord",
-      "field": "damage",
-      "sourceStatus": "confirmed",
+      "sourcePath": "accuracy.torment",
+      "classification": "consumed",
       "sourceReference": [
         "asset:f88d6a:face"
       ],
-      "sourceValueHash": "505a8734",
-      "runtimeValueHash": "505a8734",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-templars-warlord.damage",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "005970c7",
+      "runtimeValueHash": "005970c7",
+      "runtimeSelectorId": "actor.skill.torment.accuracy",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
-        "TRACE:tierB-templars-warlord.damage"
+        "TRACE:tierB-templars-warlord.accuracy.torment"
       ]
     },
     {
       "requirementId": "tierB-templars-warlord",
-      "field": "crit",
-      "sourceStatus": "confirmed",
+      "sourcePath": "accuracy.stinger-shot",
+      "classification": "consumed",
       "sourceReference": [
         "asset:f88d6a:face"
       ],
-      "sourceValueHash": "bf4fd55d",
-      "runtimeValueHash": "bf4fd55d",
-      "runtimeClassification": "engine-unsupported-blocker",
-      "runtimeTarget": "communityCombatSemantics.criticalHits",
-      "validator": "validateCommunityCombatSemantics",
+      "sourceValueHash": "005970c7",
+      "runtimeValueHash": "005970c7",
+      "runtimeSelectorId": "actor.skill.stinger-shot.accuracy",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
-        "TRACE:tierB-templars-warlord.crit",
-        "BLOCK:tierB-templars-warlord.crit"
-      ],
-      "blockerCode": "GUARDIAN_CRIT_ENGINE_UNSUPPORTED"
+        "TRACE:tierB-templars-warlord.accuracy.stinger-shot"
+      ]
     },
     {
       "requirementId": "tierB-templars-warlord",
-      "field": "skillIds",
-      "sourceStatus": "confirmed",
+      "sourcePath": "accuracy.revelation",
+      "classification": "consumed",
       "sourceReference": [
         "asset:f88d6a:face"
       ],
-      "sourceValueHash": "b4bf7680",
-      "runtimeValueHash": "b4bf7680",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-templars-warlord.skillIds",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "005970c7",
+      "runtimeValueHash": "005970c7",
+      "runtimeSelectorId": "actor.skill.revelation.accuracy",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-templars-warlord.accuracy.revelation"
+      ]
+    },
+    {
+      "requirementId": "tierB-templars-warlord",
+      "sourcePath": "damage.torment",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:f88d6a:face"
+      ],
+      "sourceValueHash": "005970c6",
+      "runtimeValueHash": "005970c6",
+      "runtimeSelectorId": "actor.skill.torment.damage",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-templars-warlord.damage.torment"
+      ]
+    },
+    {
+      "requirementId": "tierB-templars-warlord",
+      "sourcePath": "damage.stinger-shot",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:f88d6a:face"
+      ],
+      "sourceValueHash": "0002b5de",
+      "runtimeValueHash": "0002b5de",
+      "runtimeSelectorId": "actor.skill.stinger-shot.damage",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-templars-warlord.damage.stinger-shot"
+      ]
+    },
+    {
+      "requirementId": "tierB-templars-warlord",
+      "sourcePath": "damage.revelation",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:f88d6a:face"
+      ],
+      "sourceValueHash": "005970e7",
+      "runtimeValueHash": "005970e7",
+      "runtimeSelectorId": "actor.skill.revelation.damage",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-templars-warlord.damage.revelation"
+      ]
+    },
+    {
+      "requirementId": "tierB-templars-warlord",
+      "sourcePath": "crit",
+      "classification": "engine-unsupported-blocker",
+      "sourceReference": [
+        "asset:f88d6a:face"
+      ],
+      "sourceValueHash": "263756dd",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "GUARDIAN_CRIT_ENGINE_UNSUPPORTED",
+      "tests": [
+        "TRACE:tierB-templars-warlord.crit"
+      ]
+    },
+    {
+      "requirementId": "tierB-templars-warlord",
+      "sourcePath": "skillIds",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:f88d6a:face"
+      ],
+      "sourceValueHash": "0eb30b4a",
+      "runtimeValueHash": "0eb30b4a",
+      "runtimeSelectorId": "actor.skillIds",
+      "normalizerId": "local-skill-ids.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-templars-warlord.skillIds"
       ]
     },
     {
       "requirementId": "tierB-templars-warlord",
-      "field": "d10SkillTable",
-      "sourceStatus": "confirmed",
+      "sourcePath": "d10SkillTable",
+      "classification": "consumed",
       "sourceReference": [
         "asset:f88d6a:face"
       ],
-      "sourceValueHash": "bb598a02",
-      "runtimeValueHash": "bb598a02",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-templars-warlord.d10SkillTable",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "4e5e6407",
+      "runtimeValueHash": "4e5e6407",
+      "runtimeSelectorId": "actor.d10Rolls",
+      "normalizerId": "d10-by-local-skill.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-templars-warlord.d10SkillTable"
       ]
     },
     {
       "requirementId": "tierB-templars-room",
-      "field": "areaIds",
-      "sourceStatus": "partial",
+      "sourcePath": "areaIds",
+      "classification": "consumed",
       "sourceReference": [
         "asset:afa508:face",
         "asset:7a3fa9:imageUrl"
       ],
       "sourceValueHash": "e9d84cbc",
       "runtimeValueHash": "e9d84cbc",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-templars-room.areaIds",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "templarsRoom.validAreaIds",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-templars-room.areaIds"
       ]
     },
     {
       "requirementId": "tierB-templars-room",
-      "field": "areaCapacities",
-      "sourceStatus": "partial",
+      "sourcePath": "areaCapacities",
+      "classification": "consumed",
       "sourceReference": [
         "asset:afa508:face",
         "asset:7a3fa9:imageUrl"
       ],
-      "sourceValueHash": "b9dc41c8",
-      "runtimeValueHash": "b9dc41c8",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-templars-room.areaCapacities",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "ba73d368",
+      "runtimeValueHash": "ba73d368",
+      "runtimeSelectorId": "templarsRoom.areaCapacities",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-templars-room.areaCapacities"
       ]
     },
     {
       "requirementId": "tierB-templars-room",
-      "field": "spikedPitPositions",
-      "sourceStatus": "partial",
+      "sourcePath": "spikedPitPositions",
+      "classification": "display-only",
       "sourceReference": [
         "asset:afa508:face",
         "asset:7a3fa9:imageUrl"
       ],
-      "sourceValueHash": "2ae10b92",
-      "runtimeValueHash": "2ae10b92",
-      "runtimeClassification": "display-only",
-      "runtimeTarget": "communityDisplay.tierB-templars-room.spikedPitPositions",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "e13ecb92",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
-        "CLASSIFY:tierB-templars-room.spikedPitPositions"
+        "TRACE:tierB-templars-room.spikedPitPositions"
       ]
     },
     {
       "requirementId": "tierB-templars-room",
-      "field": "pitD10Map",
-      "sourceStatus": "partial",
+      "sourcePath": "pitD10Map",
+      "classification": "consumed",
       "sourceReference": [
         "asset:afa508:face",
         "asset:7a3fa9:imageUrl"
       ],
       "sourceValueHash": "b52edc0d",
       "runtimeValueHash": "b52edc0d",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-templars-room.pitD10Map",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "templarsRoom.pitTossD10Map",
+      "normalizerId": "pit-local-id.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-templars-room.pitD10Map"
       ]
     },
     {
       "requirementId": "tierB-templars-room",
-      "field": "pitEntryEffects",
-      "sourceStatus": "partial",
+      "sourcePath": "pitEntryEffects.damage",
+      "classification": "consumed",
       "sourceReference": [
         "asset:afa508:face",
         "asset:f236b8:face",
         "rulebook:39"
       ],
-      "sourceValueHash": "955cc778",
-      "runtimeValueHash": "955cc778",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-templars-room.pitEntryEffects",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "0002b5da",
+      "runtimeValueHash": "0002b5da",
+      "runtimeSelectorId": "templarsRoom.pit.damage",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
-        "TRACE:tierB-templars-room.pitEntryEffects"
+        "TRACE:tierB-templars-room.pitEntryEffects.damage"
       ]
     },
     {
       "requirementId": "tierB-templars-room",
-      "field": "pitExitRule",
-      "sourceStatus": "unresolved",
+      "sourcePath": "pitEntryEffects.bleed",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:afa508:face",
+        "asset:f236b8:face",
+        "rulebook:39"
+      ],
+      "sourceValueHash": "8a60c21b",
+      "runtimeValueHash": "8a60c21b",
+      "runtimeSelectorId": "templarsRoom.pit.bleed",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-templars-room.pitEntryEffects.bleed"
+      ]
+    },
+    {
+      "requirementId": "tierB-templars-room",
+      "sourcePath": "pitEntryEffects.pitToss",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:afa508:face",
+        "asset:f236b8:face",
+        "rulebook:39"
+      ],
+      "sourceValueHash": "7c9e9fe5",
+      "runtimeValueHash": "7c9e9fe5",
+      "runtimeSelectorId": "templar.bodySlam.pitToss",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-templars-room.pitEntryEffects.pitToss"
+      ]
+    },
+    {
+      "requirementId": "tierB-templars-room",
+      "sourcePath": "pitExitRule",
+      "classification": "explicit-source-blocker",
       "sourceReference": [
         "asset:afa508:face",
         "asset:7a3fa9:imageUrl",
@@ -705,355 +864,474 @@
       ],
       "sourceValueHash": "7c9b6140",
       "runtimeValueHash": null,
-      "runtimeClassification": "explicit-source-blocker",
-      "runtimeTarget": "COMMUNITY_RUNTIME_BLOCKERS.TEMPLARS_PIT_EXIT_RULE_UNRESOLVED",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "TEMPLARS_PIT_EXIT_RULE_UNRESOLVED",
       "tests": [
         "BLOCK:tierB-templars-room.pitExitRule"
-      ],
-      "blockerCode": "TEMPLARS_PIT_EXIT_RULE_UNRESOLVED"
+      ]
     },
     {
       "requirementId": "tierB-templars-room",
-      "field": "victoryCondition",
-      "sourceStatus": "partial",
+      "sourcePath": "victoryCondition",
+      "classification": "consumed",
       "sourceReference": [
         "asset:083199:face"
       ],
-      "sourceValueHash": "12e2d5b2",
-      "runtimeValueHash": "12e2d5b2",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-templars-room.victoryCondition",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "89b2279d",
+      "runtimeValueHash": "89b2279d",
+      "runtimeSelectorId": "templarsEncounter.victoryCondition",
+      "normalizerId": "templar-victory.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-templars-room.victoryCondition"
       ]
     },
     {
       "requirementId": "tierB-templars-room-tile",
-      "field": "tileGeometry",
-      "sourceStatus": "confirmed",
+      "sourcePath": "tileGeometry",
+      "classification": "display-only",
       "sourceReference": [
         "asset:afa508:face",
         "asset:7a3fa9:imageUrl"
       ],
-      "sourceValueHash": "c89ebb0a",
-      "runtimeValueHash": "c89ebb0a",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-templars-room-tile.tileGeometry",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "6921ea0a",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-templars-room-tile.tileGeometry"
       ]
     },
     {
       "requirementId": "tierB-mammoth-cyst",
-      "field": "maxHp",
-      "sourceStatus": "confirmed",
+      "sourcePath": "maxHp",
+      "classification": "consumed",
       "sourceReference": [
         "asset:c4a35e:face"
       ],
       "sourceValueHash": "0b8789bf",
       "runtimeValueHash": "0b8789bf",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-mammoth-cyst.maxHp",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "actor.maxHp",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-mammoth-cyst.maxHp"
       ]
     },
     {
       "requirementId": "tierB-mammoth-cyst",
-      "field": "dodge",
-      "sourceStatus": "confirmed",
+      "sourcePath": "dodge",
+      "classification": "consumed",
       "sourceReference": [
         "asset:c4a35e:face",
         "rulebook:24"
       ],
       "sourceValueHash": "0002b5d8",
       "runtimeValueHash": "0002b5d8",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-mammoth-cyst.dodge",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "actor.dodge",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-mammoth-cyst.dodge"
       ]
     },
     {
       "requirementId": "tierB-mammoth-cyst",
-      "field": "speed",
-      "sourceStatus": "confirmed",
+      "sourcePath": "speed",
+      "classification": "consumed",
       "sourceReference": [
         "asset:c4a35e:face",
         "rulebook:24"
       ],
       "sourceValueHash": "0002b5d6",
       "runtimeValueHash": "0002b5d6",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-mammoth-cyst.speed",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "actor.speed",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-mammoth-cyst.speed"
       ]
     },
     {
       "requirementId": "tierB-mammoth-cyst",
-      "field": "resistances",
-      "sourceStatus": "confirmed",
+      "sourcePath": "resistances",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "asset:c4a35e:face",
         "rulebook:20",
         "rulebook:21"
       ],
-      "sourceValueHash": "1fdb254c",
-      "runtimeValueHash": "1fdb254c",
-      "runtimeClassification": "engine-unsupported-blocker",
-      "runtimeTarget": "communityCombatSemantics.categoricalResistances",
-      "validator": "validateCommunityCombatSemantics",
+      "sourceValueHash": "b9c5000c",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "GUARDIAN_RESISTANCE_ENGINE_UNSUPPORTED",
       "tests": [
-        "TRACE:tierB-mammoth-cyst.resistances",
-        "BLOCK:tierB-mammoth-cyst.resistances"
-      ],
-      "blockerCode": "GUARDIAN_RESISTANCE_ENGINE_UNSUPPORTED"
-    },
-    {
-      "requirementId": "tierB-mammoth-cyst",
-      "field": "accuracy",
-      "sourceStatus": "confirmed",
-      "sourceReference": [
-        "asset:c4a35e:face"
-      ],
-      "sourceValueHash": "ab498e76",
-      "runtimeValueHash": "ab498e76",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-mammoth-cyst.accuracy",
-      "validator": "validateCommunityRuntimeFieldCoverage",
-      "tests": [
-        "TRACE:tierB-mammoth-cyst.accuracy"
+        "TRACE:tierB-mammoth-cyst.resistances"
       ]
     },
     {
       "requirementId": "tierB-mammoth-cyst",
-      "field": "damage",
-      "sourceStatus": "confirmed",
+      "sourcePath": "accuracy.bulging-gaze",
+      "classification": "consumed",
       "sourceReference": [
         "asset:c4a35e:face"
       ],
-      "sourceValueHash": "a3922305",
-      "runtimeValueHash": "a3922305",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-mammoth-cyst.damage",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "005970c8",
+      "runtimeValueHash": "005970c8",
+      "runtimeSelectorId": "actor.skill.bulging-gaze.accuracy",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
-        "TRACE:tierB-mammoth-cyst.damage"
+        "TRACE:tierB-mammoth-cyst.accuracy.bulging-gaze"
       ]
     },
     {
       "requirementId": "tierB-mammoth-cyst",
-      "field": "crit",
-      "sourceStatus": "confirmed",
+      "sourcePath": "accuracy.digestion",
+      "classification": "consumed",
       "sourceReference": [
         "asset:c4a35e:face"
       ],
-      "sourceValueHash": "23966b8f",
-      "runtimeValueHash": "23966b8f",
-      "runtimeClassification": "engine-unsupported-blocker",
-      "runtimeTarget": "communityCombatSemantics.criticalHits",
-      "validator": "validateCommunityCombatSemantics",
+      "sourceValueHash": "005970c8",
+      "runtimeValueHash": "005970c8",
+      "runtimeSelectorId": "actor.skill.digestion.accuracy",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
-        "TRACE:tierB-mammoth-cyst.crit",
-        "BLOCK:tierB-mammoth-cyst.crit"
-      ],
-      "blockerCode": "GUARDIAN_CRIT_ENGINE_UNSUPPORTED"
+        "TRACE:tierB-mammoth-cyst.accuracy.digestion"
+      ]
     },
     {
       "requirementId": "tierB-mammoth-cyst",
-      "field": "skillIds",
-      "sourceStatus": "confirmed",
+      "sourcePath": "accuracy.revivify",
+      "classification": "not-runtime-relevant",
       "sourceReference": [
         "asset:c4a35e:face"
       ],
-      "sourceValueHash": "b99918ba",
-      "runtimeValueHash": "b99918ba",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-mammoth-cyst.skillIds",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "d8e8eab0",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-mammoth-cyst.accuracy.revivify"
+      ]
+    },
+    {
+      "requirementId": "tierB-mammoth-cyst",
+      "sourcePath": "damage.bulging-gaze",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:c4a35e:face"
+      ],
+      "sourceValueHash": "005970c7",
+      "runtimeValueHash": "005970c7",
+      "runtimeSelectorId": "actor.skill.bulging-gaze.damage",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-mammoth-cyst.damage.bulging-gaze"
+      ]
+    },
+    {
+      "requirementId": "tierB-mammoth-cyst",
+      "sourcePath": "damage.digestion",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:c4a35e:face"
+      ],
+      "sourceValueHash": "005970c6",
+      "runtimeValueHash": "005970c6",
+      "runtimeSelectorId": "actor.skill.digestion.damage",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-mammoth-cyst.damage.digestion"
+      ]
+    },
+    {
+      "requirementId": "tierB-mammoth-cyst",
+      "sourcePath": "damage.revivify",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:c4a35e:face"
+      ],
+      "sourceValueHash": "4aa86754",
+      "runtimeValueHash": "4aa86754",
+      "runtimeSelectorId": "actor.skill.revivify.damage",
+      "normalizerId": "special-effect.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-mammoth-cyst.damage.revivify"
+      ]
+    },
+    {
+      "requirementId": "tierB-mammoth-cyst",
+      "sourcePath": "crit",
+      "classification": "engine-unsupported-blocker",
+      "sourceReference": [
+        "asset:c4a35e:face"
+      ],
+      "sourceValueHash": "7ee31e0f",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "GUARDIAN_CRIT_ENGINE_UNSUPPORTED",
+      "tests": [
+        "TRACE:tierB-mammoth-cyst.crit"
+      ]
+    },
+    {
+      "requirementId": "tierB-mammoth-cyst",
+      "sourcePath": "skillIds",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:c4a35e:face"
+      ],
+      "sourceValueHash": "4d55de77",
+      "runtimeValueHash": "4d55de77",
+      "runtimeSelectorId": "actor.skillIds",
+      "normalizerId": "local-skill-ids.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-mammoth-cyst.skillIds"
       ]
     },
     {
       "requirementId": "tierB-mammoth-cyst",
-      "field": "d10SkillTable",
-      "sourceStatus": "confirmed",
+      "sourcePath": "d10SkillTable",
+      "classification": "consumed",
       "sourceReference": [
         "asset:c4a35e:face"
       ],
-      "sourceValueHash": "b6ffb8cf",
-      "runtimeValueHash": "b6ffb8cf",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-mammoth-cyst.d10SkillTable",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "55415a69",
+      "runtimeValueHash": "55415a69",
+      "runtimeSelectorId": "actor.d10Rolls",
+      "normalizerId": "d10-by-local-skill.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-mammoth-cyst.d10SkillTable"
       ]
     },
     {
       "requirementId": "tierB-white-cell-stalk",
-      "field": "maxHp",
-      "sourceStatus": "confirmed",
+      "sourcePath": "maxHp",
+      "classification": "consumed",
       "sourceReference": [
         "asset:1fb052:face"
       ],
       "sourceValueHash": "005970cc",
       "runtimeValueHash": "005970cc",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-white-cell-stalk.maxHp",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "actor.maxHp",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-white-cell-stalk.maxHp"
       ]
     },
     {
       "requirementId": "tierB-white-cell-stalk",
-      "field": "dodge",
-      "sourceStatus": "confirmed",
+      "sourcePath": "dodge",
+      "classification": "consumed",
       "sourceReference": [
         "asset:1fb052:face",
         "rulebook:24"
       ],
       "sourceValueHash": "0002b5d9",
       "runtimeValueHash": "0002b5d9",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-white-cell-stalk.dodge",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "actor.dodge",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-white-cell-stalk.dodge"
       ]
     },
     {
       "requirementId": "tierB-white-cell-stalk",
-      "field": "speed",
-      "sourceStatus": "confirmed",
+      "sourcePath": "speed",
+      "classification": "consumed",
       "sourceReference": [
         "asset:1fb052:face",
         "rulebook:24"
       ],
       "sourceValueHash": "0002b5d8",
       "runtimeValueHash": "0002b5d8",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-white-cell-stalk.speed",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "actor.speed",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-white-cell-stalk.speed"
       ]
     },
     {
       "requirementId": "tierB-white-cell-stalk",
-      "field": "resistances",
-      "sourceStatus": "confirmed",
+      "sourcePath": "resistances",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "asset:1fb052:face",
         "rulebook:20",
         "rulebook:21"
       ],
-      "sourceValueHash": "e839aba3",
-      "runtimeValueHash": "e839aba3",
-      "runtimeClassification": "engine-unsupported-blocker",
-      "runtimeTarget": "communityCombatSemantics.categoricalResistances",
-      "validator": "validateCommunityCombatSemantics",
+      "sourceValueHash": "a9ace823",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "GUARDIAN_RESISTANCE_ENGINE_UNSUPPORTED",
       "tests": [
-        "TRACE:tierB-white-cell-stalk.resistances",
-        "BLOCK:tierB-white-cell-stalk.resistances"
-      ],
-      "blockerCode": "GUARDIAN_RESISTANCE_ENGINE_UNSUPPORTED"
-    },
-    {
-      "requirementId": "tierB-white-cell-stalk",
-      "field": "accuracy",
-      "sourceStatus": "confirmed",
-      "sourceReference": [
-        "asset:1fb052:face"
-      ],
-      "sourceValueHash": "6cc90edd",
-      "runtimeValueHash": "6cc90edd",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-white-cell-stalk.accuracy",
-      "validator": "validateCommunityRuntimeFieldCoverage",
-      "tests": [
-        "TRACE:tierB-white-cell-stalk.accuracy"
+        "TRACE:tierB-white-cell-stalk.resistances"
       ]
     },
     {
       "requirementId": "tierB-white-cell-stalk",
-      "field": "damage",
-      "sourceStatus": "confirmed",
+      "sourcePath": "accuracy.reconstitute",
+      "classification": "not-runtime-relevant",
       "sourceReference": [
         "asset:1fb052:face"
       ],
-      "sourceValueHash": "31ca7bc2",
-      "runtimeValueHash": "31ca7bc2",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-white-cell-stalk.damage",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "d8e8eab0",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
-        "TRACE:tierB-white-cell-stalk.damage"
+        "TRACE:tierB-white-cell-stalk.accuracy.reconstitute"
       ]
     },
     {
       "requirementId": "tierB-white-cell-stalk",
-      "field": "crit",
-      "sourceStatus": "confirmed",
+      "sourcePath": "accuracy.displace",
+      "classification": "consumed",
       "sourceReference": [
         "asset:1fb052:face"
       ],
-      "sourceValueHash": "495e85e0",
-      "runtimeValueHash": "495e85e0",
-      "runtimeClassification": "engine-unsupported-blocker",
-      "runtimeTarget": "communityCombatSemantics.criticalHits",
-      "validator": "validateCommunityCombatSemantics",
+      "sourceValueHash": "005970c8",
+      "runtimeValueHash": "005970c8",
+      "runtimeSelectorId": "actor.skill.displace.accuracy",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
-        "TRACE:tierB-white-cell-stalk.crit",
-        "BLOCK:tierB-white-cell-stalk.crit"
-      ],
-      "blockerCode": "GUARDIAN_CRIT_ENGINE_UNSUPPORTED"
+        "TRACE:tierB-white-cell-stalk.accuracy.displace"
+      ]
     },
     {
       "requirementId": "tierB-white-cell-stalk",
-      "field": "skillIds",
-      "sourceStatus": "confirmed",
+      "sourcePath": "accuracy.teleport",
+      "classification": "consumed",
       "sourceReference": [
         "asset:1fb052:face"
       ],
-      "sourceValueHash": "299f9495",
-      "runtimeValueHash": "299f9495",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-white-cell-stalk.skillIds",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "005970c8",
+      "runtimeValueHash": "005970c8",
+      "runtimeSelectorId": "actor.skill.teleport.accuracy",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-white-cell-stalk.accuracy.teleport"
+      ]
+    },
+    {
+      "requirementId": "tierB-white-cell-stalk",
+      "sourcePath": "damage.reconstitute",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:1fb052:face"
+      ],
+      "sourceValueHash": "7bbef073",
+      "runtimeValueHash": "7bbef073",
+      "runtimeSelectorId": "actor.skill.reconstitute.damage",
+      "normalizerId": "special-effect.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-white-cell-stalk.damage.reconstitute"
+      ]
+    },
+    {
+      "requirementId": "tierB-white-cell-stalk",
+      "sourcePath": "damage.displace",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:1fb052:face"
+      ],
+      "sourceValueHash": "0002b5d7",
+      "runtimeValueHash": "0002b5d7",
+      "runtimeSelectorId": "actor.skill.displace.damage",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-white-cell-stalk.damage.displace"
+      ]
+    },
+    {
+      "requirementId": "tierB-white-cell-stalk",
+      "sourcePath": "damage.teleport",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:1fb052:face"
+      ],
+      "sourceValueHash": "eda0148b",
+      "runtimeValueHash": "eda0148b",
+      "runtimeSelectorId": "actor.skill.teleport.damage",
+      "normalizerId": "special-effect.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-white-cell-stalk.damage.teleport"
+      ]
+    },
+    {
+      "requirementId": "tierB-white-cell-stalk",
+      "sourcePath": "crit",
+      "classification": "engine-unsupported-blocker",
+      "sourceReference": [
+        "asset:1fb052:face"
+      ],
+      "sourceValueHash": "476c0d80",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "GUARDIAN_CRIT_ENGINE_UNSUPPORTED",
+      "tests": [
+        "TRACE:tierB-white-cell-stalk.crit"
+      ]
+    },
+    {
+      "requirementId": "tierB-white-cell-stalk",
+      "sourcePath": "skillIds",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:1fb052:face"
+      ],
+      "sourceValueHash": "9fba701e",
+      "runtimeValueHash": "9fba701e",
+      "runtimeSelectorId": "actor.skillIds",
+      "normalizerId": "local-skill-ids.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-white-cell-stalk.skillIds"
       ]
     },
     {
       "requirementId": "tierB-white-cell-stalk",
-      "field": "d10SkillTable",
-      "sourceStatus": "confirmed",
+      "sourcePath": "d10SkillTable",
+      "classification": "consumed",
       "sourceReference": [
         "asset:1fb052:face"
       ],
-      "sourceValueHash": "46922d0f",
-      "runtimeValueHash": "46922d0f",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-white-cell-stalk.d10SkillTable",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "0920c975",
+      "runtimeValueHash": "0920c975",
+      "runtimeSelectorId": "actor.d10Rolls",
+      "normalizerId": "d10-by-local-skill.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-white-cell-stalk.d10SkillTable"
       ]
     },
     {
       "requirementId": "tierB-white-cell-stalk",
-      "field": "teleportationD10Map",
-      "sourceStatus": "confirmed",
+      "sourcePath": "teleportationD10Map",
+      "classification": "consumed",
       "sourceReference": [
         "asset:bb91b0:face",
         "asset:bc9c87:imageUrl",
@@ -1062,51 +1340,51 @@
       ],
       "sourceValueHash": "c9ca2cdb",
       "runtimeValueHash": "c9ca2cdb",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-white-cell-stalk.teleportationD10Map",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "mammothRoom.teleportationD10Map",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-white-cell-stalk.teleportationD10Map"
       ]
     },
     {
       "requirementId": "tierB-mammoth-cyst-room",
-      "field": "areaIds",
-      "sourceStatus": "confirmed",
+      "sourcePath": "areaIds",
+      "classification": "consumed",
       "sourceReference": [
         "asset:bb91b0:face",
         "asset:bc9c87:imageUrl"
       ],
       "sourceValueHash": "9eb1acb1",
       "runtimeValueHash": "9eb1acb1",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-mammoth-cyst-room.areaIds",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "mammothRoom.validAreaIds",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-mammoth-cyst-room.areaIds"
       ]
     },
     {
       "requirementId": "tierB-mammoth-cyst-room",
-      "field": "areaCapacities",
-      "sourceStatus": "confirmed",
+      "sourcePath": "areaCapacities",
+      "classification": "consumed",
       "sourceReference": [
         "asset:bb91b0:face",
         "asset:bc9c87:imageUrl"
       ],
-      "sourceValueHash": "109c080b",
-      "runtimeValueHash": "109c080b",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-mammoth-cyst-room.areaCapacities",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "7e00deab",
+      "runtimeValueHash": "7e00deab",
+      "runtimeSelectorId": "mammothRoom.areaCapacities",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-mammoth-cyst-room.areaCapacities"
       ]
     },
     {
       "requirementId": "tierB-mammoth-cyst-room",
-      "field": "teleportationD10Map",
-      "sourceStatus": "confirmed",
+      "sourcePath": "teleportationD10Map",
+      "classification": "consumed",
       "sourceReference": [
         "asset:bb91b0:face",
         "asset:bc9c87:imageUrl",
@@ -1115,223 +1393,340 @@
       ],
       "sourceValueHash": "c9ca2cdb",
       "runtimeValueHash": "c9ca2cdb",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-mammoth-cyst-room.teleportationD10Map",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "mammothRoom.teleportationD10Map",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-mammoth-cyst-room.teleportationD10Map"
       ]
     },
     {
       "requirementId": "tierB-mammoth-cyst-room",
-      "field": "spawnStancePolicy",
-      "sourceStatus": "confirmed",
+      "sourcePath": "spawnStancePolicy",
+      "classification": "consumed",
       "sourceReference": [
         "rulebook:31",
         "rulebook:39",
         "asset:e4246d:face"
       ],
-      "sourceValueHash": "3dde93c9",
-      "runtimeValueHash": "3dde93c9",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-mammoth-cyst-room.spawnStancePolicy",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "1ea1d9ee",
+      "runtimeValueHash": "1ea1d9ee",
+      "runtimeSelectorId": "mammothSummon.policy",
+      "normalizerId": "mammoth-summon-policy.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-mammoth-cyst-room.spawnStancePolicy"
       ]
     },
     {
       "requirementId": "tierB-mammoth-cyst-room",
-      "field": "spawnAreaPolicy",
-      "sourceStatus": "confirmed",
+      "sourcePath": "spawnAreaPolicy.mammothInitialArea",
+      "classification": "consumed",
       "sourceReference": [
         "rulebook:31",
         "rulebook:39",
         "asset:bb91b0:face",
         "asset:bc9c87:imageUrl"
       ],
-      "sourceValueHash": "e374a477",
-      "runtimeValueHash": "e374a477",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-mammoth-cyst-room.spawnAreaPolicy",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "4a7a203d",
+      "runtimeValueHash": "4a7a203d",
+      "runtimeSelectorId": "mammothRoom.spawnAreaPolicy.mammothInitialArea",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
-        "TRACE:tierB-mammoth-cyst-room.spawnAreaPolicy"
+        "TRACE:tierB-mammoth-cyst-room.spawnAreaPolicy.mammothInitialArea"
       ]
     },
     {
       "requirementId": "tierB-mammoth-cyst-room",
-      "field": "victoryCondition",
-      "sourceStatus": "confirmed",
+      "sourcePath": "spawnAreaPolicy.summonPlacement",
+      "classification": "consumed",
+      "sourceReference": [
+        "rulebook:31",
+        "rulebook:39",
+        "asset:bb91b0:face",
+        "asset:bc9c87:imageUrl"
+      ],
+      "sourceValueHash": "87419df7",
+      "runtimeValueHash": "87419df7",
+      "runtimeSelectorId": "mammothRoom.spawnAreaPolicy.summonPlacement",
+      "normalizerId": "spawn-area-policy.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-mammoth-cyst-room.spawnAreaPolicy.summonPlacement"
+      ]
+    },
+    {
+      "requirementId": "tierB-mammoth-cyst-room",
+      "sourcePath": "spawnAreaPolicy.stanceToArea",
+      "classification": "consumed",
+      "sourceReference": [
+        "rulebook:31",
+        "rulebook:39",
+        "asset:bb91b0:face",
+        "asset:bc9c87:imageUrl"
+      ],
+      "sourceValueHash": "9b9ce090",
+      "runtimeValueHash": "9b9ce090",
+      "runtimeSelectorId": "mammothRoom.spawnAreaPolicy.stanceToArea",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-mammoth-cyst-room.spawnAreaPolicy.stanceToArea"
+      ]
+    },
+    {
+      "requirementId": "tierB-mammoth-cyst-room",
+      "sourcePath": "spawnAreaPolicy.noSpace",
+      "classification": "engine-unsupported-blocker",
+      "sourceReference": [
+        "rulebook:31",
+        "rulebook:39",
+        "asset:bb91b0:face",
+        "asset:bc9c87:imageUrl"
+      ],
+      "sourceValueHash": "2ddab122",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "MAMMOTH_STALK_NO_SPACE_RESOLUTION_ENGINE_UNSUPPORTED",
+      "tests": [
+        "TRACE:tierB-mammoth-cyst-room.spawnAreaPolicy.noSpace"
+      ]
+    },
+    {
+      "requirementId": "tierB-mammoth-cyst-room",
+      "sourcePath": "victoryCondition",
+      "classification": "consumed",
       "sourceReference": [
         "rulebook:30",
         "asset:6555d3:face"
       ],
-      "sourceValueHash": "8c240b00",
-      "runtimeValueHash": "8c240b00",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-mammoth-cyst-room.victoryCondition",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "2ce4964e",
+      "runtimeValueHash": "2ce4964e",
+      "runtimeSelectorId": "mammothGuardian.victory",
+      "normalizerId": "mammoth-victory.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-mammoth-cyst-room.victoryCondition"
       ]
     },
     {
       "requirementId": "tierB-shuffling-horror",
-      "field": "maxHp",
-      "sourceStatus": "confirmed",
+      "sourcePath": "maxHp",
+      "classification": "consumed",
       "sourceReference": [
         "asset:ccf3dc:face"
       ],
       "sourceValueHash": "0b8789bf",
       "runtimeValueHash": "0b8789bf",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-shuffling-horror.maxHp",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "actor.maxHp",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-shuffling-horror.maxHp"
       ]
     },
     {
       "requirementId": "tierB-shuffling-horror",
-      "field": "dodge",
-      "sourceStatus": "confirmed",
+      "sourcePath": "dodge",
+      "classification": "consumed",
       "sourceReference": [
         "asset:ccf3dc:face",
         "rulebook:24"
       ],
       "sourceValueHash": "0002b5d8",
       "runtimeValueHash": "0002b5d8",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-shuffling-horror.dodge",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "actor.dodge",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-shuffling-horror.dodge"
       ]
     },
     {
       "requirementId": "tierB-shuffling-horror",
-      "field": "speed",
-      "sourceStatus": "confirmed",
+      "sourcePath": "speed",
+      "classification": "consumed",
       "sourceReference": [
         "asset:ccf3dc:face",
         "rulebook:24"
       ],
       "sourceValueHash": "0002b5d6",
       "runtimeValueHash": "0002b5d6",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-shuffling-horror.speed",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "actor.speed",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-shuffling-horror.speed"
       ]
     },
     {
       "requirementId": "tierB-shuffling-horror",
-      "field": "resistances",
-      "sourceStatus": "confirmed",
+      "sourcePath": "resistances",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "asset:ccf3dc:face",
         "rulebook:20",
         "rulebook:21"
       ],
-      "sourceValueHash": "1fdb254c",
-      "runtimeValueHash": "1fdb254c",
-      "runtimeClassification": "engine-unsupported-blocker",
-      "runtimeTarget": "communityCombatSemantics.categoricalResistances",
-      "validator": "validateCommunityCombatSemantics",
+      "sourceValueHash": "b9c5000c",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "GUARDIAN_RESISTANCE_ENGINE_UNSUPPORTED",
       "tests": [
-        "TRACE:tierB-shuffling-horror.resistances",
-        "BLOCK:tierB-shuffling-horror.resistances"
-      ],
-      "blockerCode": "GUARDIAN_RESISTANCE_ENGINE_UNSUPPORTED"
-    },
-    {
-      "requirementId": "tierB-shuffling-horror",
-      "field": "accuracy",
-      "sourceStatus": "confirmed",
-      "sourceReference": [
-        "asset:ccf3dc:face"
-      ],
-      "sourceValueHash": "20b52a37",
-      "runtimeValueHash": "20b52a37",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-shuffling-horror.accuracy",
-      "validator": "validateCommunityRuntimeFieldCoverage",
-      "tests": [
-        "TRACE:tierB-shuffling-horror.accuracy"
+        "TRACE:tierB-shuffling-horror.resistances"
       ]
     },
     {
       "requirementId": "tierB-shuffling-horror",
-      "field": "damage",
-      "sourceStatus": "confirmed",
+      "sourcePath": "accuracy.lacerate",
+      "classification": "consumed",
       "sourceReference": [
         "asset:ccf3dc:face"
       ],
-      "sourceValueHash": "562764ca",
-      "runtimeValueHash": "562764ca",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-shuffling-horror.damage",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "005970c7",
+      "runtimeValueHash": "005970c7",
+      "runtimeSelectorId": "actor.skill.lacerate.accuracy",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
-        "TRACE:tierB-shuffling-horror.damage"
+        "TRACE:tierB-shuffling-horror.accuracy.lacerate"
       ]
     },
     {
       "requirementId": "tierB-shuffling-horror",
-      "field": "crit",
-      "sourceStatus": "confirmed",
+      "sourcePath": "accuracy.undulations",
+      "classification": "consumed",
       "sourceReference": [
         "asset:ccf3dc:face"
       ],
-      "sourceValueHash": "8992606e",
-      "runtimeValueHash": "8992606e",
-      "runtimeClassification": "engine-unsupported-blocker",
-      "runtimeTarget": "communityCombatSemantics.criticalHits",
-      "validator": "validateCommunityCombatSemantics",
+      "sourceValueHash": "005970c7",
+      "runtimeValueHash": "005970c7",
+      "runtimeSelectorId": "actor.skill.undulations.accuracy",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
-        "TRACE:tierB-shuffling-horror.crit",
-        "BLOCK:tierB-shuffling-horror.crit"
-      ],
-      "blockerCode": "GUARDIAN_CRIT_ENGINE_UNSUPPORTED"
+        "TRACE:tierB-shuffling-horror.accuracy.undulations"
+      ]
     },
     {
       "requirementId": "tierB-shuffling-horror",
-      "field": "skillIds",
-      "sourceStatus": "confirmed",
+      "sourcePath": "accuracy.echoing-disassembly",
+      "classification": "consumed",
       "sourceReference": [
         "asset:ccf3dc:face"
       ],
-      "sourceValueHash": "968cb0f0",
-      "runtimeValueHash": "968cb0f0",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-shuffling-horror.skillIds",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "005970c8",
+      "runtimeValueHash": "005970c8",
+      "runtimeSelectorId": "actor.skill.echoing-disassembly.accuracy",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-shuffling-horror.accuracy.echoing-disassembly"
+      ]
+    },
+    {
+      "requirementId": "tierB-shuffling-horror",
+      "sourcePath": "damage.lacerate",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:ccf3dc:face"
+      ],
+      "sourceValueHash": "0002b5dc",
+      "runtimeValueHash": "0002b5dc",
+      "runtimeSelectorId": "actor.skill.lacerate.damage",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-shuffling-horror.damage.lacerate"
+      ]
+    },
+    {
+      "requirementId": "tierB-shuffling-horror",
+      "sourcePath": "damage.undulations",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:ccf3dc:face"
+      ],
+      "sourceValueHash": "0002b5d6",
+      "runtimeValueHash": "0002b5d6",
+      "runtimeSelectorId": "actor.skill.undulations.damage",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-shuffling-horror.damage.undulations"
+      ]
+    },
+    {
+      "requirementId": "tierB-shuffling-horror",
+      "sourcePath": "damage.echoing-disassembly",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:ccf3dc:face"
+      ],
+      "sourceValueHash": "0002b5d7",
+      "runtimeValueHash": "0002b5d7",
+      "runtimeSelectorId": "actor.skill.echoing-disassembly.damage",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-shuffling-horror.damage.echoing-disassembly"
+      ]
+    },
+    {
+      "requirementId": "tierB-shuffling-horror",
+      "sourcePath": "crit",
+      "classification": "engine-unsupported-blocker",
+      "sourceReference": [
+        "asset:ccf3dc:face"
+      ],
+      "sourceValueHash": "dae30c0e",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "GUARDIAN_CRIT_ENGINE_UNSUPPORTED",
+      "tests": [
+        "TRACE:tierB-shuffling-horror.crit"
+      ]
+    },
+    {
+      "requirementId": "tierB-shuffling-horror",
+      "sourcePath": "skillIds",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:ccf3dc:face"
+      ],
+      "sourceValueHash": "02163142",
+      "runtimeValueHash": "02163142",
+      "runtimeSelectorId": "actor.skillIds",
+      "normalizerId": "local-skill-ids.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-shuffling-horror.skillIds"
       ]
     },
     {
       "requirementId": "tierB-shuffling-horror",
-      "field": "d10SkillTable",
-      "sourceStatus": "confirmed",
+      "sourcePath": "d10SkillTable",
+      "classification": "consumed",
       "sourceReference": [
         "asset:ccf3dc:face"
       ],
-      "sourceValueHash": "53dd705a",
-      "runtimeValueHash": "53dd705a",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-shuffling-horror.d10SkillTable",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "4ec0bca2",
+      "runtimeValueHash": "4ec0bca2",
+      "runtimeSelectorId": "actor.d10Rolls",
+      "normalizerId": "d10-by-local-skill.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-shuffling-horror.d10SkillTable"
       ]
     },
     {
       "requirementId": "tierB-cultist-priest",
-      "field": "maxHp",
-      "sourceStatus": "confirmed",
+      "sourcePath": "maxHp",
+      "classification": "consumed",
       "sourceReference": [
         "asset:1b261d:face",
         "asset:36d6ad:face",
@@ -1339,17 +1734,17 @@
       ],
       "sourceValueHash": "005970ed",
       "runtimeValueHash": "005970ed",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-cultist-priest.maxHp",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "actor.maxHp",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-cultist-priest.maxHp"
       ]
     },
     {
       "requirementId": "tierB-cultist-priest",
-      "field": "dodge",
-      "sourceStatus": "confirmed",
+      "sourcePath": "dodge",
+      "classification": "consumed",
       "sourceReference": [
         "asset:1b261d:face",
         "rulebook:24",
@@ -1358,17 +1753,17 @@
       ],
       "sourceValueHash": "0002b5d8",
       "runtimeValueHash": "0002b5d8",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-cultist-priest.dodge",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "actor.dodge",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-cultist-priest.dodge"
       ]
     },
     {
       "requirementId": "tierB-cultist-priest",
-      "field": "speed",
-      "sourceStatus": "confirmed",
+      "sourcePath": "speed",
+      "classification": "consumed",
       "sourceReference": [
         "asset:1b261d:face",
         "rulebook:24",
@@ -1377,17 +1772,17 @@
       ],
       "sourceValueHash": "0002b5d7",
       "runtimeValueHash": "0002b5d7",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-cultist-priest.speed",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "actor.speed",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-cultist-priest.speed"
       ]
     },
     {
       "requirementId": "tierB-cultist-priest",
-      "field": "resistances",
-      "sourceStatus": "confirmed",
+      "sourcePath": "resistances",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "asset:1b261d:face",
         "rulebook:20",
@@ -1395,113 +1790,145 @@
         "asset:36d6ad:face",
         "asset:0ba2f8:face"
       ],
-      "sourceValueHash": "e839aba3",
-      "runtimeValueHash": "e839aba3",
-      "runtimeClassification": "engine-unsupported-blocker",
-      "runtimeTarget": "communityCombatSemantics.categoricalResistances",
-      "validator": "validateCommunityCombatSemantics",
+      "sourceValueHash": "a9ace823",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "GUARDIAN_RESISTANCE_ENGINE_UNSUPPORTED",
       "tests": [
-        "TRACE:tierB-cultist-priest.resistances",
-        "BLOCK:tierB-cultist-priest.resistances"
-      ],
-      "blockerCode": "GUARDIAN_RESISTANCE_ENGINE_UNSUPPORTED"
-    },
-    {
-      "requirementId": "tierB-cultist-priest",
-      "field": "accuracy",
-      "sourceStatus": "confirmed",
-      "sourceReference": [
-        "asset:1b261d:face",
-        "asset:36d6ad:face",
-        "asset:0ba2f8:face"
-      ],
-      "sourceValueHash": "02f29f0d",
-      "runtimeValueHash": "02f29f0d",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-cultist-priest.accuracy",
-      "validator": "validateCommunityRuntimeFieldCoverage",
-      "tests": [
-        "TRACE:tierB-cultist-priest.accuracy"
+        "TRACE:tierB-cultist-priest.resistances"
       ]
     },
     {
       "requirementId": "tierB-cultist-priest",
-      "field": "damage",
-      "sourceStatus": "confirmed",
+      "sourcePath": "accuracy.death-lash",
+      "classification": "consumed",
       "sourceReference": [
         "asset:1b261d:face",
         "asset:36d6ad:face",
         "asset:0ba2f8:face"
       ],
-      "sourceValueHash": "26992021",
-      "runtimeValueHash": "26992021",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-cultist-priest.damage",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "005970c7",
+      "runtimeValueHash": "005970c7",
+      "runtimeSelectorId": "actor.skill.death-lash.accuracy",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
-        "TRACE:tierB-cultist-priest.damage"
+        "TRACE:tierB-cultist-priest.accuracy.death-lash"
       ]
     },
     {
       "requirementId": "tierB-cultist-priest",
-      "field": "crit",
-      "sourceStatus": "confirmed",
+      "sourcePath": "accuracy.the-finger",
+      "classification": "consumed",
       "sourceReference": [
         "asset:1b261d:face",
         "asset:36d6ad:face",
         "asset:0ba2f8:face"
       ],
-      "sourceValueHash": "ec044222",
-      "runtimeValueHash": "ec044222",
-      "runtimeClassification": "engine-unsupported-blocker",
-      "runtimeTarget": "communityCombatSemantics.criticalHits",
-      "validator": "validateCommunityCombatSemantics",
+      "sourceValueHash": "005970c7",
+      "runtimeValueHash": "005970c7",
+      "runtimeSelectorId": "actor.skill.the-finger.accuracy",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
-        "TRACE:tierB-cultist-priest.crit",
-        "BLOCK:tierB-cultist-priest.crit"
-      ],
-      "blockerCode": "GUARDIAN_CRIT_ENGINE_UNSUPPORTED"
+        "TRACE:tierB-cultist-priest.accuracy.the-finger"
+      ]
     },
     {
       "requirementId": "tierB-cultist-priest",
-      "field": "skillIds",
-      "sourceStatus": "confirmed",
+      "sourcePath": "damage.death-lash",
+      "classification": "consumed",
       "sourceReference": [
         "asset:1b261d:face",
         "asset:36d6ad:face",
         "asset:0ba2f8:face"
       ],
-      "sourceValueHash": "302a5a3a",
-      "runtimeValueHash": "302a5a3a",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-cultist-priest.skillIds",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "0002b5db",
+      "runtimeValueHash": "0002b5db",
+      "runtimeSelectorId": "actor.skill.death-lash.damage",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-cultist-priest.damage.death-lash"
+      ]
+    },
+    {
+      "requirementId": "tierB-cultist-priest",
+      "sourcePath": "damage.the-finger",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:1b261d:face",
+        "asset:36d6ad:face",
+        "asset:0ba2f8:face"
+      ],
+      "sourceValueHash": "005970c7",
+      "runtimeValueHash": "005970c7",
+      "runtimeSelectorId": "actor.skill.the-finger.damage",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-cultist-priest.damage.the-finger"
+      ]
+    },
+    {
+      "requirementId": "tierB-cultist-priest",
+      "sourcePath": "crit",
+      "classification": "engine-unsupported-blocker",
+      "sourceReference": [
+        "asset:1b261d:face",
+        "asset:36d6ad:face",
+        "asset:0ba2f8:face"
+      ],
+      "sourceValueHash": "41ab91a2",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "GUARDIAN_CRIT_ENGINE_UNSUPPORTED",
+      "tests": [
+        "TRACE:tierB-cultist-priest.crit"
+      ]
+    },
+    {
+      "requirementId": "tierB-cultist-priest",
+      "sourcePath": "skillIds",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:1b261d:face",
+        "asset:36d6ad:face",
+        "asset:0ba2f8:face"
+      ],
+      "sourceValueHash": "59e35cb5",
+      "runtimeValueHash": "59e35cb5",
+      "runtimeSelectorId": "actor.skillIds",
+      "normalizerId": "local-skill-ids.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-cultist-priest.skillIds"
       ]
     },
     {
       "requirementId": "tierB-cultist-priest",
-      "field": "d10SkillTable",
-      "sourceStatus": "confirmed",
+      "sourcePath": "d10SkillTable",
+      "classification": "consumed",
       "sourceReference": [
         "asset:1b261d:face",
         "asset:36d6ad:face",
         "asset:0ba2f8:face"
       ],
-      "sourceValueHash": "d4433ffa",
-      "runtimeValueHash": "d4433ffa",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-cultist-priest.d10SkillTable",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "a7a3227f",
+      "runtimeValueHash": "a7a3227f",
+      "runtimeSelectorId": "actor.d10Rolls",
+      "normalizerId": "d10-by-local-skill.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-cultist-priest.d10SkillTable"
       ]
     },
     {
       "requirementId": "tierB-malignant-growth",
-      "field": "maxHp",
-      "sourceStatus": "confirmed",
+      "sourcePath": "maxHp",
+      "classification": "consumed",
       "sourceReference": [
         "asset:a34fbd:face",
         "asset:4a8b06:face",
@@ -1509,17 +1936,17 @@
       ],
       "sourceValueHash": "005970ef",
       "runtimeValueHash": "005970ef",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-malignant-growth.maxHp",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "actor.maxHp",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-malignant-growth.maxHp"
       ]
     },
     {
       "requirementId": "tierB-malignant-growth",
-      "field": "dodge",
-      "sourceStatus": "confirmed",
+      "sourcePath": "dodge",
+      "classification": "consumed",
       "sourceReference": [
         "asset:a34fbd:face",
         "rulebook:24",
@@ -1528,17 +1955,17 @@
       ],
       "sourceValueHash": "0002b5d7",
       "runtimeValueHash": "0002b5d7",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-malignant-growth.dodge",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "actor.dodge",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-malignant-growth.dodge"
       ]
     },
     {
       "requirementId": "tierB-malignant-growth",
-      "field": "speed",
-      "sourceStatus": "confirmed",
+      "sourcePath": "speed",
+      "classification": "consumed",
       "sourceReference": [
         "asset:a34fbd:face",
         "rulebook:24",
@@ -1547,17 +1974,17 @@
       ],
       "sourceValueHash": "0002b5d6",
       "runtimeValueHash": "0002b5d6",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-malignant-growth.speed",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "actor.speed",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-malignant-growth.speed"
       ]
     },
     {
       "requirementId": "tierB-malignant-growth",
-      "field": "resistances",
-      "sourceStatus": "confirmed",
+      "sourcePath": "resistances",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "asset:a34fbd:face",
         "rulebook:20",
@@ -1565,383 +1992,415 @@
         "asset:4a8b06:face",
         "asset:f06594:face"
       ],
-      "sourceValueHash": "e839aba3",
-      "runtimeValueHash": "e839aba3",
-      "runtimeClassification": "engine-unsupported-blocker",
-      "runtimeTarget": "communityCombatSemantics.categoricalResistances",
-      "validator": "validateCommunityCombatSemantics",
+      "sourceValueHash": "a9ace823",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "GUARDIAN_RESISTANCE_ENGINE_UNSUPPORTED",
       "tests": [
-        "TRACE:tierB-malignant-growth.resistances",
-        "BLOCK:tierB-malignant-growth.resistances"
-      ],
-      "blockerCode": "GUARDIAN_RESISTANCE_ENGINE_UNSUPPORTED"
-    },
-    {
-      "requirementId": "tierB-malignant-growth",
-      "field": "accuracy",
-      "sourceStatus": "confirmed",
-      "sourceReference": [
-        "asset:a34fbd:face",
-        "asset:4a8b06:face",
-        "asset:f06594:face"
-      ],
-      "sourceValueHash": "2625444b",
-      "runtimeValueHash": "2625444b",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-malignant-growth.accuracy",
-      "validator": "validateCommunityRuntimeFieldCoverage",
-      "tests": [
-        "TRACE:tierB-malignant-growth.accuracy"
+        "TRACE:tierB-malignant-growth.resistances"
       ]
     },
     {
       "requirementId": "tierB-malignant-growth",
-      "field": "damage",
-      "sourceStatus": "confirmed",
+      "sourcePath": "accuracy.maul-the-flesh",
+      "classification": "consumed",
       "sourceReference": [
         "asset:a34fbd:face",
         "asset:4a8b06:face",
         "asset:f06594:face"
       ],
-      "sourceValueHash": "41ac3160",
-      "runtimeValueHash": "41ac3160",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-malignant-growth.damage",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "005970c6",
+      "runtimeValueHash": "005970c6",
+      "runtimeSelectorId": "actor.skill.maul-the-flesh.accuracy",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
-        "TRACE:tierB-malignant-growth.damage"
+        "TRACE:tierB-malignant-growth.accuracy.maul-the-flesh"
       ]
     },
     {
       "requirementId": "tierB-malignant-growth",
-      "field": "crit",
-      "sourceStatus": "confirmed",
+      "sourcePath": "accuracy.daze-the-mind",
+      "classification": "consumed",
       "sourceReference": [
         "asset:a34fbd:face",
         "asset:4a8b06:face",
         "asset:f06594:face"
       ],
-      "sourceValueHash": "c90fe9aa",
-      "runtimeValueHash": "c90fe9aa",
-      "runtimeClassification": "engine-unsupported-blocker",
-      "runtimeTarget": "communityCombatSemantics.criticalHits",
-      "validator": "validateCommunityCombatSemantics",
+      "sourceValueHash": "005970c7",
+      "runtimeValueHash": "005970c7",
+      "runtimeSelectorId": "actor.skill.daze-the-mind.accuracy",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
-        "TRACE:tierB-malignant-growth.crit",
-        "BLOCK:tierB-malignant-growth.crit"
-      ],
-      "blockerCode": "GUARDIAN_CRIT_ENGINE_UNSUPPORTED"
+        "TRACE:tierB-malignant-growth.accuracy.daze-the-mind"
+      ]
     },
     {
       "requirementId": "tierB-malignant-growth",
-      "field": "skillIds",
-      "sourceStatus": "confirmed",
+      "sourcePath": "damage.maul-the-flesh",
+      "classification": "consumed",
       "sourceReference": [
         "asset:a34fbd:face",
         "asset:4a8b06:face",
         "asset:f06594:face"
       ],
-      "sourceValueHash": "1262099e",
-      "runtimeValueHash": "1262099e",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-malignant-growth.skillIds",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "005970c7",
+      "runtimeValueHash": "005970c7",
+      "runtimeSelectorId": "actor.skill.maul-the-flesh.damage",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-malignant-growth.damage.maul-the-flesh"
+      ]
+    },
+    {
+      "requirementId": "tierB-malignant-growth",
+      "sourcePath": "damage.daze-the-mind",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:a34fbd:face",
+        "asset:4a8b06:face",
+        "asset:f06594:face"
+      ],
+      "sourceValueHash": "0002b5db",
+      "runtimeValueHash": "0002b5db",
+      "runtimeSelectorId": "actor.skill.daze-the-mind.damage",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-malignant-growth.damage.daze-the-mind"
+      ]
+    },
+    {
+      "requirementId": "tierB-malignant-growth",
+      "sourcePath": "crit",
+      "classification": "engine-unsupported-blocker",
+      "sourceReference": [
+        "asset:a34fbd:face",
+        "asset:4a8b06:face",
+        "asset:f06594:face"
+      ],
+      "sourceValueHash": "8c86748a",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "GUARDIAN_CRIT_ENGINE_UNSUPPORTED",
+      "tests": [
+        "TRACE:tierB-malignant-growth.crit"
+      ]
+    },
+    {
+      "requirementId": "tierB-malignant-growth",
+      "sourcePath": "skillIds",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:a34fbd:face",
+        "asset:4a8b06:face",
+        "asset:f06594:face"
+      ],
+      "sourceValueHash": "80ed5df4",
+      "runtimeValueHash": "80ed5df4",
+      "runtimeSelectorId": "actor.skillIds",
+      "normalizerId": "local-skill-ids.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-malignant-growth.skillIds"
       ]
     },
     {
       "requirementId": "tierB-malignant-growth",
-      "field": "d10SkillTable",
-      "sourceStatus": "confirmed",
+      "sourcePath": "d10SkillTable",
+      "classification": "consumed",
       "sourceReference": [
         "asset:a34fbd:face",
         "asset:4a8b06:face",
         "asset:f06594:face"
       ],
-      "sourceValueHash": "f45803fa",
-      "runtimeValueHash": "f45803fa",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-malignant-growth.d10SkillTable",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "0fa61ea8",
+      "runtimeValueHash": "0fa61ea8",
+      "runtimeSelectorId": "actor.d10Rolls",
+      "normalizerId": "d10-by-local-skill.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-malignant-growth.d10SkillTable"
       ]
     },
     {
       "requirementId": "tierB-shuffling-horror-room",
-      "field": "areaIds",
-      "sourceStatus": "confirmed",
+      "sourcePath": "areaIds",
+      "classification": "consumed",
       "sourceReference": [
         "asset:9a87c7:face",
         "asset:7a3fa9:secondaryUrl"
       ],
       "sourceValueHash": "0d9cda1b",
       "runtimeValueHash": "0d9cda1b",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-shuffling-horror-room.areaIds",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "shufflingRoom.areaIds",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-shuffling-horror-room.areaIds"
       ]
     },
     {
       "requirementId": "tierB-shuffling-horror-room",
-      "field": "areaCapacities",
-      "sourceStatus": "confirmed",
+      "sourcePath": "areaCapacities",
+      "classification": "consumed",
       "sourceReference": [
         "asset:9a87c7:face",
         "asset:7a3fa9:secondaryUrl"
       ],
-      "sourceValueHash": "1a06de6e",
-      "runtimeValueHash": "1a06de6e",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-shuffling-horror-room.areaCapacities",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "fb4a8c0e",
+      "runtimeValueHash": "fb4a8c0e",
+      "runtimeSelectorId": "shufflingRoom.areaCapacities",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-shuffling-horror-room.areaCapacities"
       ]
     },
     {
       "requirementId": "tierB-shuffling-horror-room",
-      "field": "victoryCondition",
-      "sourceStatus": "confirmed",
+      "sourcePath": "victoryCondition",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "rulebook:30",
         "asset:735bc3:face"
       ],
       "sourceValueHash": "934c1813",
-      "runtimeValueHash": "934c1813",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-shuffling-horror-room.victoryCondition",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "GUARDIAN_VICTORY_POLICY_ENGINE_UNSUPPORTED",
       "tests": [
         "TRACE:tierB-shuffling-horror-room.victoryCondition"
       ]
     },
     {
       "requirementId": "tierB-ancestor-room",
-      "field": "areaIds",
-      "sourceStatus": "confirmed",
+      "sourcePath": "areaIds",
+      "classification": "consumed",
       "sourceReference": [
         "asset:e3fc86:face",
         "asset:bc9c87:secondaryUrl"
       ],
       "sourceValueHash": "d7255432",
       "runtimeValueHash": "d7255432",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-ancestor-room.areaIds",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "ancestorRoom.validAreaIds",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-ancestor-room.areaIds"
       ]
     },
     {
       "requirementId": "tierB-ancestor-room",
-      "field": "areaCapacities",
-      "sourceStatus": "confirmed",
+      "sourcePath": "areaCapacities",
+      "classification": "consumed",
       "sourceReference": [
         "asset:e3fc86:face",
         "asset:bc9c87:secondaryUrl"
       ],
-      "sourceValueHash": "fad102e1",
-      "runtimeValueHash": "fad102e1",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-ancestor-room.areaCapacities",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "cda00ae1",
+      "runtimeValueHash": "cda00ae1",
+      "runtimeSelectorId": "ancestorRoom.areaCapacities",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-ancestor-room.areaCapacities"
       ]
     },
     {
       "requirementId": "tierB-ancestor-room",
-      "field": "roomEffects",
-      "sourceStatus": "confirmed",
+      "sourcePath": "roomEffects",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "asset:e3fc86:face",
         "rulebook:36",
         "rulebook:40"
       ],
-      "sourceValueHash": "ff139ccc",
-      "runtimeValueHash": "ff139ccc",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-ancestor-room.roomEffects",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "d5e30e2c",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED",
       "tests": [
         "TRACE:tierB-ancestor-room.roomEffects"
       ]
     },
     {
       "requirementId": "tierB-ancestor-room",
-      "field": "formAreaPlacement",
-      "sourceStatus": "confirmed",
+      "sourcePath": "formAreaPlacement",
+      "classification": "consumed",
       "sourceReference": [
         "asset:bc9c87:secondaryUrl",
         "rulebook:40",
         "rulebook:41"
       ],
-      "sourceValueHash": "b181046c",
-      "runtimeValueHash": "b181046c",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-ancestor-room.formAreaPlacement",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "3f2387b1",
+      "runtimeValueHash": "3f2387b1",
+      "runtimeSelectorId": "ancestorRoom.stanceAreaMap",
+      "normalizerId": "ancestor-stance-area-map.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-ancestor-room.formAreaPlacement"
       ]
     },
     {
       "requirementId": "tierB-ancestor-room-tile",
-      "field": "tileGeometry",
-      "sourceStatus": "confirmed",
+      "sourcePath": "tileGeometry",
+      "classification": "display-only",
       "sourceReference": [
         "asset:e3fc86:face",
         "asset:bc9c87:secondaryUrl"
       ],
-      "sourceValueHash": "29f96e8b",
-      "runtimeValueHash": "29f96e8b",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-ancestor-room-tile.tileGeometry",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "e833734b",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-ancestor-room-tile.tileGeometry"
       ]
     },
     {
       "requirementId": "tierB-ancestor-first-form",
-      "field": "ancestor.maxHp",
-      "sourceStatus": "confirmed",
+      "sourcePath": "ancestor.maxHp",
+      "classification": "consumed",
       "sourceReference": [
         "asset:d99c50:face"
       ],
       "sourceValueHash": "0059714a",
       "runtimeValueHash": "0059714a",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-ancestor-first-form.ancestor.maxHp",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "finalForm.ancestor-first-form.hp",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-ancestor-first-form.ancestor.maxHp"
       ]
     },
     {
       "requirementId": "tierB-ancestor-first-form",
-      "field": "ancestor.skillIds",
-      "sourceStatus": "confirmed",
+      "sourcePath": "ancestor.skillIds",
+      "classification": "consumed",
       "sourceReference": [
         "asset:d99c50:face"
       ],
-      "sourceValueHash": "8d314319",
-      "runtimeValueHash": "8d314319",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-ancestor-first-form.ancestor.skillIds",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "207bb2ea",
+      "runtimeValueHash": "207bb2ea",
+      "runtimeSelectorId": "finalForm.ancestor-first-form.skills",
+      "normalizerId": "local-skill-ids.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-ancestor-first-form.ancestor.skillIds"
       ]
     },
     {
       "requirementId": "tierB-ancestor-first-form",
-      "field": "perfectReflection.maxHp",
-      "sourceStatus": "confirmed",
+      "sourcePath": "perfectReflection.maxHp",
+      "classification": "consumed",
       "sourceReference": [
         "asset:695dfa:face"
       ],
       "sourceValueHash": "005970eb",
       "runtimeValueHash": "005970eb",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-ancestor-first-form.perfectReflection.maxHp",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "ancestorFirst.perfect.maxWounds",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-ancestor-first-form.perfectReflection.maxHp"
       ]
     },
     {
       "requirementId": "tierB-ancestor-first-form",
-      "field": "perfectReflection.skillIds",
-      "sourceStatus": "confirmed",
+      "sourcePath": "perfectReflection.skillIds",
+      "classification": "consumed",
       "sourceReference": [
         "asset:695dfa:face"
       ],
-      "sourceValueHash": "cac83fa9",
-      "runtimeValueHash": "cac83fa9",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-ancestor-first-form.perfectReflection.skillIds",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "f6957413",
+      "runtimeValueHash": "f6957413",
+      "runtimeSelectorId": "ancestorFirst.perfect.skillIds",
+      "normalizerId": "local-skill-ids.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-ancestor-first-form.perfectReflection.skillIds"
       ]
     },
     {
       "requirementId": "tierB-ancestor-first-form",
-      "field": "imperfectReflection.maxHp",
-      "sourceStatus": "confirmed",
+      "sourcePath": "imperfectReflection.maxHp",
+      "classification": "consumed",
       "sourceReference": [
         "asset:adff9c:face"
       ],
       "sourceValueHash": "005970cf",
       "runtimeValueHash": "005970cf",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-ancestor-first-form.imperfectReflection.maxHp",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "ancestorFirst.imperfect.maxWounds",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-ancestor-first-form.imperfectReflection.maxHp"
       ]
     },
     {
       "requirementId": "tierB-ancestor-first-form",
-      "field": "imperfectReflection.skillIds",
-      "sourceStatus": "confirmed",
+      "sourcePath": "imperfectReflection.skillIds",
+      "classification": "consumed",
       "sourceReference": [
         "asset:adff9c:face"
       ],
-      "sourceValueHash": "b5013ef8",
-      "runtimeValueHash": "b5013ef8",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-ancestor-first-form.imperfectReflection.skillIds",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "27abff91",
+      "runtimeValueHash": "27abff91",
+      "runtimeSelectorId": "ancestorFirst.imperfect.skillIds",
+      "normalizerId": "local-skill-ids.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-ancestor-first-form.imperfectReflection.skillIds"
       ]
     },
     {
       "requirementId": "tierB-ancestor-first-form",
-      "field": "timeHealsAll.effect",
-      "sourceStatus": "confirmed",
+      "sourcePath": "timeHealsAll.effect",
+      "classification": "consumed",
       "sourceReference": [
         "asset:d99c50:face",
         "asset:5e5515:face",
         "rulebook:40"
       ],
-      "sourceValueHash": "5d711ccf",
-      "runtimeValueHash": "5d711ccf",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-ancestor-first-form.timeHealsAll.effect",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "8188e14f",
+      "runtimeValueHash": "8188e14f",
+      "runtimeSelectorId": "ancestorFirst.fullStanceSkillEffect",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-ancestor-first-form.timeHealsAll.effect"
       ]
     },
     {
       "requirementId": "tierB-ancestor-first-form",
-      "field": "vacantStanceFillSource",
-      "sourceStatus": "confirmed",
+      "sourcePath": "vacantStanceFillSource",
+      "classification": "consumed",
       "sourceReference": [
         "asset:d99c50:face",
         "asset:5e5515:face",
         "rulebook:40"
       ],
-      "sourceValueHash": "abc54b68",
-      "runtimeValueHash": "abc54b68",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-ancestor-first-form.vacantStanceFillSource",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "095f27af",
+      "runtimeValueHash": "095f27af",
+      "runtimeSelectorId": "ancestorFirst.vacantStanceD10Map",
+      "normalizerId": "reflection-d10-map.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-ancestor-first-form.vacantStanceFillSource"
       ]
     },
     {
       "requirementId": "tierB-perfect-reflection",
-      "field": "maxHp",
-      "sourceStatus": "confirmed",
+      "sourcePath": "maxHp",
+      "classification": "consumed",
       "sourceReference": [
         "asset:695dfa:face",
         "asset:4a0ff9:face",
@@ -1949,35 +2408,35 @@
       ],
       "sourceValueHash": "005970eb",
       "runtimeValueHash": "005970eb",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-perfect-reflection.maxHp",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "ancestorFirst.perfect.maxWounds",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-perfect-reflection.maxHp"
       ]
     },
     {
       "requirementId": "tierB-perfect-reflection",
-      "field": "skillIds",
-      "sourceStatus": "confirmed",
+      "sourcePath": "skillIds",
+      "classification": "consumed",
       "sourceReference": [
         "asset:695dfa:face",
         "asset:4a0ff9:face",
         "asset:e75d33:face"
       ],
-      "sourceValueHash": "cac83fa9",
-      "runtimeValueHash": "cac83fa9",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-perfect-reflection.skillIds",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "f6957413",
+      "runtimeValueHash": "f6957413",
+      "runtimeSelectorId": "ancestorFirst.perfect.skillIds",
+      "normalizerId": "local-skill-ids.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-perfect-reflection.skillIds"
       ]
     },
     {
       "requirementId": "tierB-imperfect-reflection",
-      "field": "maxHp",
-      "sourceStatus": "confirmed",
+      "sourcePath": "maxHp",
+      "classification": "consumed",
       "sourceReference": [
         "asset:adff9c:face",
         "asset:d57825:face",
@@ -1985,84 +2444,84 @@
       ],
       "sourceValueHash": "005970cf",
       "runtimeValueHash": "005970cf",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-imperfect-reflection.maxHp",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "ancestorFirst.imperfect.maxWounds",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-imperfect-reflection.maxHp"
       ]
     },
     {
       "requirementId": "tierB-imperfect-reflection",
-      "field": "skillIds",
-      "sourceStatus": "confirmed",
+      "sourcePath": "skillIds",
+      "classification": "consumed",
       "sourceReference": [
         "asset:adff9c:face",
         "asset:d57825:face",
         "asset:95ec7b:face"
       ],
-      "sourceValueHash": "b5013ef8",
-      "runtimeValueHash": "b5013ef8",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-imperfect-reflection.skillIds",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "27abff91",
+      "runtimeValueHash": "27abff91",
+      "runtimeSelectorId": "ancestorFirst.imperfect.skillIds",
+      "normalizerId": "local-skill-ids.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-imperfect-reflection.skillIds"
       ]
     },
     {
       "requirementId": "tierB-ancestor-second-form",
-      "field": "ancestor.maxHp",
-      "sourceStatus": "confirmed",
+      "sourcePath": "ancestor.maxHp",
+      "classification": "consumed",
       "sourceReference": [
         "asset:1825b7:face"
       ],
       "sourceValueHash": "0b878a82",
       "runtimeValueHash": "0b878a82",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-ancestor-second-form.ancestor.maxHp",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "finalForm.ancestor-second-form.hp",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-ancestor-second-form.ancestor.maxHp"
       ]
     },
     {
       "requirementId": "tierB-ancestor-second-form",
-      "field": "ancestor.skillIds",
-      "sourceStatus": "confirmed",
+      "sourcePath": "ancestor.skillIds",
+      "classification": "consumed",
       "sourceReference": [
         "asset:1825b7:face"
       ],
-      "sourceValueHash": "65dafdeb",
-      "runtimeValueHash": "65dafdeb",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-ancestor-second-form.ancestor.skillIds",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "b095d253",
+      "runtimeValueHash": "b095d253",
+      "runtimeSelectorId": "finalForm.ancestor-second-form.skills",
+      "normalizerId": "local-skill-ids.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-ancestor-second-form.ancestor.skillIds"
       ]
     },
     {
       "requirementId": "tierB-ancestor-second-form",
-      "field": "absoluteNothingness.areaIds",
-      "sourceStatus": "confirmed",
+      "sourcePath": "absoluteNothingness.areaIds",
+      "classification": "consumed",
       "sourceReference": [
         "asset:bc9c87:secondaryUrl",
         "rulebook:40"
       ],
       "sourceValueHash": "14c389ce",
       "runtimeValueHash": "14c389ce",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-ancestor-second-form.absoluteNothingness.areaIds",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "ancestorSecond.absoluteNothingness",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-ancestor-second-form.absoluteNothingness.areaIds"
       ]
     },
     {
       "requirementId": "tierB-absolute-nothingness",
-      "field": "stance",
-      "sourceStatus": "unresolved",
+      "sourcePath": "stance",
+      "classification": "explicit-source-blocker",
       "sourceReference": [
         "rulebook:40",
         "rulebook:41",
@@ -2070,18 +2529,17 @@
       ],
       "sourceValueHash": "7c9b6140",
       "runtimeValueHash": null,
-      "runtimeClassification": "explicit-source-blocker",
-      "runtimeTarget": "COMMUNITY_RUNTIME_BLOCKERS.ABSOLUTE_NOTHINGNESS_STANCE_UNRESOLVED",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "ABSOLUTE_NOTHINGNESS_STANCE_UNRESOLVED",
       "tests": [
         "BLOCK:tierB-absolute-nothingness.stance"
-      ],
-      "blockerCode": "ABSOLUTE_NOTHINGNESS_STANCE_UNRESOLVED"
+      ]
     },
     {
       "requirementId": "tierB-absolute-nothingness",
-      "field": "areaId",
-      "sourceStatus": "partial",
+      "sourcePath": "areaId",
+      "classification": "consumed",
       "sourceReference": [
         "asset:bc9c87:secondaryUrl",
         "rulebook:40",
@@ -2089,65 +2547,65 @@
       ],
       "sourceValueHash": "14c389ce",
       "runtimeValueHash": "14c389ce",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-absolute-nothingness.areaId",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "ancestorSecond.absoluteNothingness.areaIds",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-absolute-nothingness.areaId"
       ]
     },
     {
       "requirementId": "tierB-gestating-heart",
-      "field": "maxHp",
-      "sourceStatus": "partial",
+      "sourcePath": "maxHp",
+      "classification": "consumed",
       "sourceReference": [
         "asset:eed6cd:face"
       ],
       "sourceValueHash": "0b8789b6",
       "runtimeValueHash": "0b8789b6",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-gestating-heart.maxHp",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "finalForm.gestating-heart.hp",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-gestating-heart.maxHp"
       ]
     },
     {
       "requirementId": "tierB-gestating-heart",
-      "field": "skillIds",
-      "sourceStatus": "partial",
+      "sourcePath": "skillIds",
+      "classification": "consumed",
       "sourceReference": [
         "asset:eed6cd:face"
       ],
-      "sourceValueHash": "fd6ddb1e",
-      "runtimeValueHash": "fd6ddb1e",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-gestating-heart.skillIds",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "d1753ba1",
+      "runtimeValueHash": "d1753ba1",
+      "runtimeSelectorId": "finalForm.gestating-heart.skills",
+      "normalizerId": "local-skill-ids.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-gestating-heart.skillIds"
       ]
     },
     {
       "requirementId": "tierB-gestating-heart",
-      "field": "d10SkillTable",
-      "sourceStatus": "partial",
+      "sourcePath": "d10SkillTable",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "asset:eed6cd:face"
       ],
-      "sourceValueHash": "3d74634c",
-      "runtimeValueHash": "3d74634c",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-gestating-heart.d10SkillTable",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "0bc71f0c",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED",
       "tests": [
         "TRACE:tierB-gestating-heart.d10SkillTable"
       ]
     },
     {
       "requirementId": "tierB-gestating-heart",
-      "field": "lethalWoundTimingRuling",
-      "sourceStatus": "unresolved",
+      "sourcePath": "lethalWoundTimingRuling",
+      "classification": "explicit-source-blocker",
       "sourceReference": [
         "asset:eed6cd:face",
         "asset:a7bbae:face",
@@ -2156,68 +2614,67 @@
       ],
       "sourceValueHash": "7c9b6140",
       "runtimeValueHash": null,
-      "runtimeClassification": "explicit-source-blocker",
-      "runtimeTarget": "COMMUNITY_RUNTIME_BLOCKERS.GESTATING_HEART_LETHAL_TIMING_UNRESOLVED",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "GESTATING_HEART_LETHAL_TIMING_UNRESOLVED",
       "tests": [
         "BLOCK:tierB-gestating-heart.lethalWoundTimingRuling"
-      ],
-      "blockerCode": "GESTATING_HEART_LETHAL_TIMING_UNRESOLVED"
+      ]
     },
     {
       "requirementId": "tierB-heart-of-darkness",
-      "field": "maxHp",
-      "sourceStatus": "confirmed",
+      "sourcePath": "maxHp",
+      "classification": "consumed",
       "sourceReference": [
         "asset:21bbaf:face"
       ],
       "sourceValueHash": "0b878e9c",
       "runtimeValueHash": "0b878e9c",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-heart-of-darkness.maxHp",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": "finalForm.heart-of-darkness.hp",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-heart-of-darkness.maxHp"
       ]
     },
     {
       "requirementId": "tierB-heart-of-darkness",
-      "field": "skillIds",
-      "sourceStatus": "confirmed",
+      "sourcePath": "skillIds",
+      "classification": "consumed",
       "sourceReference": [
         "asset:21bbaf:face"
       ],
-      "sourceValueHash": "38d95e5c",
-      "runtimeValueHash": "38d95e5c",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-heart-of-darkness.skillIds",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "8d16cbf8",
+      "runtimeValueHash": "8d16cbf8",
+      "runtimeSelectorId": "finalForm.heart-of-darkness.skills",
+      "normalizerId": "local-skill-ids.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-heart-of-darkness.skillIds"
       ]
     },
     {
       "requirementId": "tierB-heart-of-darkness",
-      "field": "impendingDoomD10SkillMap",
-      "sourceStatus": "confirmed",
+      "sourcePath": "impendingDoomD10SkillMap",
+      "classification": "consumed",
       "sourceReference": [
         "asset:21bbaf:face",
         "asset:12e30f:face",
         "rulebook:41"
       ],
-      "sourceValueHash": "b8e64717",
-      "runtimeValueHash": "b8e64717",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-heart-of-darkness.impendingDoomD10SkillMap",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "aa923384",
+      "runtimeValueHash": "aa923384",
+      "runtimeSelectorId": "heartOfDarkness.impendingDoom.d10SkillMap",
+      "normalizerId": "final-d10-local-skill.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-heart-of-darkness.impendingDoomD10SkillMap"
       ]
     },
     {
       "requirementId": "tierB-come-unto-your-maker",
-      "field": "definition",
-      "sourceStatus": "unresolved",
+      "sourcePath": "definition",
+      "classification": "explicit-source-blocker",
       "sourceReference": [
         "asset:5e5515:face",
         "asset:4cd186:face",
@@ -2231,18 +2688,17 @@
       ],
       "sourceValueHash": "7c9b6140",
       "runtimeValueHash": null,
-      "runtimeClassification": "explicit-source-blocker",
-      "runtimeTarget": "COMMUNITY_RUNTIME_BLOCKERS.COME_UNTO_YOUR_MAKER_UNRESOLVED",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "COME_UNTO_YOUR_MAKER_UNRESOLVED",
       "tests": [
         "BLOCK:tierB-come-unto-your-maker.definition"
-      ],
-      "blockerCode": "COME_UNTO_YOUR_MAKER_UNRESOLVED"
+      ]
     },
     {
       "requirementId": "tierB-darkest-dungeon-monster-deck",
-      "field": "deckComposition",
-      "sourceStatus": "partial",
+      "sourcePath": "deckComposition",
+      "classification": "consumed",
       "sourceReference": [
         "tts:02ef1c",
         "tts:014fb5",
@@ -2272,19 +2728,19 @@
         "tts:15687c",
         "tts:849849"
       ],
-      "sourceValueHash": "8febbbc7",
-      "runtimeValueHash": "8febbbc7",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-darkest-dungeon-monster-deck.deckComposition",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "9439e1b2",
+      "runtimeValueHash": "9439e1b2",
+      "runtimeSelectorId": "profile.monsterComposition.physicalInstances",
+      "normalizerId": "monster-composition.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-darkest-dungeon-monster-deck.deckComposition"
       ]
     },
     {
       "requirementId": "tierB-darkest-dungeon-monster-deck",
-      "field": "monsterDefinitionIds",
-      "sourceStatus": "partial",
+      "sourcePath": "monsterDefinitionIds",
+      "classification": "consumed",
       "sourceReference": [
         "tts:02ef1c",
         "asset:014fb5:face",
@@ -2314,19 +2770,19 @@
         "asset:15687c:face",
         "asset:849849:face"
       ],
-      "sourceValueHash": "4ad38fb9",
-      "runtimeValueHash": "4ad38fb9",
-      "runtimeClassification": "consumed",
-      "runtimeTarget": "communityRuntimeProjection.tierB-darkest-dungeon-monster-deck.monsterDefinitionIds",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "sourceValueHash": "47c8e23c",
+      "runtimeValueHash": "47c8e23c",
+      "runtimeSelectorId": "profile.monsterComposition.ids",
+      "normalizerId": "monster-local-ids.v1",
+      "blockerCode": null,
       "tests": [
         "TRACE:tierB-darkest-dungeon-monster-deck.monsterDefinitionIds"
       ]
     },
     {
       "requirementId": "tierB-darkest-dungeon-monster-deck",
-      "field": "drawPolicy",
-      "sourceStatus": "unresolved",
+      "sourcePath": "drawPolicy",
+      "classification": "explicit-source-blocker",
       "sourceReference": [
         "rulebook:17",
         "rulebook:35",
@@ -2335,13 +2791,12 @@
       ],
       "sourceValueHash": "7c9b6140",
       "runtimeValueHash": null,
-      "runtimeClassification": "explicit-source-blocker",
-      "runtimeTarget": "COMMUNITY_RUNTIME_BLOCKERS.MONSTER_DECK_DRAW_POLICY_UNRESOLVED",
-      "validator": "validateCommunityRuntimeFieldCoverage",
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "MONSTER_DECK_DRAW_POLICY_UNRESOLVED",
       "tests": [
         "BLOCK:tierB-darkest-dungeon-monster-deck.drawPolicy"
-      ],
-      "blockerCode": "MONSTER_DECK_DRAW_POLICY_UNRESOLVED"
+      ]
     }
   ]
 }
