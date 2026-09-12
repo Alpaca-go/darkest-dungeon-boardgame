@@ -38,6 +38,7 @@ export interface TemplarActorStats {
   dodge: number;
   speed: number;
   resistances: Record<string, number>;
+  categoricalResistances?: Array<'bleed' | 'blight' | 'stun' | 'mark'>;
   immunities: string[];
   size: number;
 }

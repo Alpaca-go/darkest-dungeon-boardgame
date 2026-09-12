@@ -11,6 +11,7 @@ import type { CampaignState } from '../../../types';
 import type { DataMode } from '../../../types/progression';
 import type {
   MammothCystEncounterState,
+  D10Roll,
   MammothCystSkillDefinition,
   MammothCystSkillRollRecord,
   TeleportationRecord,
@@ -29,6 +30,7 @@ import {
 import { decideMammothCystAction } from './mammoth-cyst-action-override';
 import { summonWhiteCellStalk } from './summon-white-cell-stalk';
 import { resolveWhiteCellStalkTeleportation } from './resolve-teleportation';
+import { resolveCommunityGuardianCritical } from '../../campaign/act-four/community-engine-capabilities';
 
 export interface ExecuteMammothCystActionOptions {
   mode?: DataMode | 'community-reference';
@@ -232,9 +234,30 @@ export function executeMammothCystAction(
   // 命中判定：requiresHit=true 时掷 d10 与 accuracy 比较（沿用既有 d10 命中语义）。
   let hit = true;
   let hitRoll: number | null = null;
-  if (skill.requiresHit && skill.accuracy !== null) {
+  let critical = false;
+  let resolvedAttackDamage: number | null = null;
+  let actionRecord = rolled.record;
+  if (mode === 'community-reference' && rolled.record.attackRoll !== undefined) {
+    hitRoll = rolled.record.attackRoll;
+    hit = rolled.record.hit ?? false;
+    critical = rolled.record.critical ?? false;
+    resolvedAttackDamage = rolled.record.resolvedDamage ?? 0;
+  } else if (skill.requiresHit && skill.accuracy !== null) {
     hitRoll = rollD10(options.rng);
-    hit = hitRoll === 10 || hitRoll <= skill.accuracy;
+    if (mode === 'community-reference') {
+      const requirementId = card.owner === 'mammoth-cyst' ? 'tierB-mammoth-cyst' : 'tierB-white-cell-stalk';
+      const localSkillId = skill.id.replace(/^community-dd-skill-/, '');
+      const normalDamage = skill.minDamage ?? 0;
+      const outcome = resolveCommunityGuardianCritical(requirementId, localSkillId, hitRoll, skill.accuracy, normalDamage);
+      hit = outcome.hit;
+      critical = outcome.critical;
+      resolvedAttackDamage = outcome.damage;
+      actionRecord = { ...rolled.record, attackRoll: hitRoll as D10Roll, hit, critical, resolvedDamage: resolvedAttackDamage };
+      const persistedState = { ...rolled.state, skillRolls: rolled.state.skillRolls.map((record) => record.transactionId === actionRecord.transactionId ? actionRecord : record) };
+      working = { ...working, actFourState: { ...working.actFourState, mammothCystEncounterState: persistedState } };
+    } else {
+      hit = hitRoll === 10 || hitRoll <= skill.accuracy;
+    }
   }
 
   let damageDealt = 0;
@@ -243,7 +266,7 @@ export function executeMammothCystAction(
   if (hit && skill.maxDamage !== null && skill.minDamage !== null && skill.maxDamage > 0) {
     // 伤害量：min—max 间由注入 rng 决定（禁止 Math.random）。
     const span = Math.max(0, skill.maxDamage - skill.minDamage);
-    const amount = skill.minDamage + Math.floor(options.rng() * (span + 1));
+    const amount = resolvedAttackDamage ?? (skill.minDamage + Math.floor(options.rng() * (span + 1)));
     if (amount > 0) {
       const out = resolveDamage(working, {
         targetId: options.targetHeroId,
@@ -274,7 +297,7 @@ export function executeMammothCystAction(
   working = pushLog(
     working,
     hit
-      ? `${actor?.name ?? '怪物'} 使用 ${skill.name}（d10=${rolled.record.roll}${
+      ? `${actor?.name ?? '怪物'} 使用 ${skill.name}${critical ? '（暴击）' : ''}（d10=${rolled.record.roll}${
           hitRoll !== null ? `，命中骰 ${hitRoll}` : ''
         }）：对 ${hero.name} 造成 ${damageDealt} 伤害、${stressDealt} 压力。`
       : `${actor?.name ?? '怪物'} 的 ${skill.name} 未命中 ${hero.name}（命中骰 ${hitRoll}）。`,
@@ -287,7 +310,7 @@ export function executeMammothCystAction(
     campaign: working,
     state: working.actFourState.mammothCystEncounterState,
     actionType: 'normal-skill',
-    skillRoll: rolled.record,
+    skillRoll: actionRecord,
     skill,
     damageDealt,
     stressDealt,

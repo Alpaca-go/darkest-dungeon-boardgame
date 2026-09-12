@@ -141,6 +141,8 @@ export function buildTemplarUnit(def: TemplarActorDefinition, position: number):
     debuffs: [],
     actionPoints: 0,
     monsterSkillIds: def.skills.map((s) => s.id),
+    categoricalResistances: stats?.categoricalResistances,
+    immunities: stats?.immunities,
     // 怪物不参与精神系统。
     resolveTestedThisQuest: false,
     resolveState: 'normal',

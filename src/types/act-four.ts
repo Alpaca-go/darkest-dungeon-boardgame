@@ -114,8 +114,25 @@ export interface DarkestDungeonQuestDrawRecord {
   skippedFinalFormId: SkippableFinalFormId;
   /** 本 Campaign 不再使用的另外两张。 */
   discardedQuestIds: string[];
+  /** Community retail rule: two Provision Dice per living Hero, persisted for replay. */
+  provisionRoll?: CommunityQuestProvisionRecord;
   rngStateId: string;
   drawnAt: string;
+}
+
+export type CommunityProvisionFace = keyof import('./index').ProvisionPool | 'wild';
+export interface CommunityQuestProvisionDieRecord {
+  heroId: string;
+  dieIndex: 0 | 1;
+  roll: number;
+  rolledFace: CommunityProvisionFace;
+  selectedFace: keyof import('./index').ProvisionPool;
+  acceptedIntoPool: boolean;
+}
+export interface CommunityQuestProvisionRecord {
+  policyId: string;
+  dice: CommunityQuestProvisionDieRecord[];
+  poolMaximum: 16;
 }
 
 // ---------------------------------------------------------------------------

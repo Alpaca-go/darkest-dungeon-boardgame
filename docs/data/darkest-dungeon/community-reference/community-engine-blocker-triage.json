@@ -1,0 +1,201 @@
+{
+  "schemaVersion": "phase11a3-community-engine-blocker-triage.v1",
+  "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE",
+  "sourceEdition": "antha-complete-edition",
+  "verifiedBaseHead": "0ae03e1c9f7063574238b570721ad3fd76f77764",
+  "runtimeOnlyBlockersBefore": 12,
+  "sourceBackedEngineCount": 6,
+  "sourceGapCount": 6,
+  "entries": [
+    {
+      "blockerCode": "EXCAVATION_PROVISION_DIE_MAP_UNRESOLVED",
+      "requirementId": "runtime-excavation-provision-die",
+      "semanticPath": "faceMap",
+      "sourceEvidence": [],
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE",
+      "semanticComplete": false,
+      "engineCapabilityMissing": false,
+      "resolutionClass": "source-gap",
+      "implementationTarget": null,
+      "tests": ["community-runtime-excavation.test.ts:E01", "community-runtime-excavation.test.ts:E05"]
+    },
+    {
+      "blockerCode": "FINAL_PROVISION_POLICY_UNRESOLVED",
+      "requirementId": "runtime-final-provision-policy",
+      "semanticPath": "grantTable",
+      "sourceEvidence": [],
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE",
+      "semanticComplete": false,
+      "engineCapabilityMissing": false,
+      "resolutionClass": "source-gap",
+      "implementationTarget": null,
+      "tests": ["community-runtime-final.test.ts:F03"]
+    },
+    {
+      "blockerCode": "GUARDIAN_RESISTANCE_ENGINE_UNSUPPORTED",
+      "requirementId": "runtime-guardian-combat",
+      "semanticPath": "categoricalResistanceResolution",
+      "sourceEvidence": [
+        "tierB-templars-impaler.resistances",
+        "tierB-templars-warlord.resistances",
+        "tierB-mammoth-cyst.resistances",
+        "tierB-white-cell-stalk.resistances",
+        "tierB-shuffling-horror.resistances",
+        "tierB-cultist-priest.resistances",
+        "tierB-malignant-growth.resistances",
+        "rulebook:20",
+        "rulebook:21"
+      ],
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE",
+      "semanticComplete": true,
+      "engineCapabilityMissing": true,
+      "resolutionClass": "source-backed-engine",
+      "implementationTarget": "shared Guardian categorical status resolution",
+      "tests": ["community-engine-capability-closure.test.ts:resistance", "community-engine-capability-save-replay.test.ts:resistance"]
+    },
+    {
+      "blockerCode": "GUARDIAN_CRIT_ENGINE_UNSUPPORTED",
+      "requirementId": "runtime-guardian-combat",
+      "semanticPath": "criticalHitResolution",
+      "sourceEvidence": [
+        "tierB-templars-impaler.crit",
+        "tierB-templars-warlord.crit",
+        "tierB-mammoth-cyst.crit",
+        "tierB-white-cell-stalk.crit",
+        "tierB-shuffling-horror.crit",
+        "tierB-cultist-priest.crit",
+        "tierB-malignant-growth.crit"
+      ],
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE",
+      "semanticComplete": true,
+      "engineCapabilityMissing": true,
+      "resolutionClass": "source-backed-engine",
+      "implementationTarget": "shared Guardian printed critical threshold/damage resolution",
+      "tests": ["community-engine-capability-closure.test.ts:critical", "community-engine-capability-save-replay.test.ts:critical"]
+    },
+    {
+      "blockerCode": "GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED",
+      "requirementId": "runtime-guardian-combat",
+      "semanticPath": "specialSkillEffectResolution",
+      "sourceEvidence": [
+        "tierB-templars-impaler.skillIds",
+        "tierB-templars-warlord.skillIds",
+        "tierB-mammoth-cyst.skillIds",
+        "tierB-white-cell-stalk.skillIds",
+        "tierB-shuffling-horror.skillIds",
+        "tierB-cultist-priest.skillIds",
+        "tierB-malignant-growth.skillIds"
+      ],
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE",
+      "semanticComplete": false,
+      "engineCapabilityMissing": false,
+      "resolutionClass": "source-gap",
+      "implementationTarget": null,
+      "tests": ["community-engine-capability-adversarial.test.ts:A03"]
+    },
+    {
+      "blockerCode": "TEMPLARS_AREA_ADJACENCY_UNRESOLVED",
+      "requirementId": "runtime-templars-room",
+      "semanticPath": "areaAdjacency",
+      "sourceEvidence": ["tierB-templars-room.areaIds", "tierB-templars-room.areaCapacities"],
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE",
+      "semanticComplete": false,
+      "engineCapabilityMissing": false,
+      "resolutionClass": "source-gap",
+      "implementationTarget": null,
+      "tests": ["community-runtime-adversarial.test.ts:A07"]
+    },
+    {
+      "blockerCode": "SHUFFLING_INITIAL_AREA_UNRESOLVED",
+      "requirementId": "runtime-shuffling-horror-room",
+      "semanticPath": "initialArea",
+      "sourceEvidence": ["tierB-shuffling-horror-room.areaIds", "tierB-shuffling-horror-room.areaCapacities"],
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE",
+      "semanticComplete": false,
+      "engineCapabilityMissing": false,
+      "resolutionClass": "source-gap",
+      "implementationTarget": null,
+      "tests": ["community-runtime-save-replay.test.ts:SR11"]
+    },
+    {
+      "blockerCode": "MAMMOTH_STALK_NO_SPACE_RESOLUTION_ENGINE_UNSUPPORTED",
+      "requirementId": "tierB-mammoth-cyst-room",
+      "semanticPath": "spawnAreaPolicy.noSpace",
+      "sourceEvidence": [
+        "tierB-mammoth-cyst-room.spawnAreaPolicy.noSpace",
+        "rulebook:31",
+        "rulebook:39",
+        "asset:bb91b0:face",
+        "asset:bc9c87:imageUrl"
+      ],
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE",
+      "semanticComplete": false,
+      "engineCapabilityMissing": true,
+      "resolutionClass": "source-gap",
+      "implementationTarget": null,
+      "tests": ["community-runtime-truth-gate.test.ts:no-space"]
+    },
+    {
+      "blockerCode": "QUEST_CARD_PROVISION_POLICY_ENGINE_UNSUPPORTED",
+      "requirementId": "runtime-community-quest",
+      "semanticPath": "provisionPolicyId.cardSpecific",
+      "sourceEvidence": [
+        "tierB-quest-1.provisionPolicyId.cardSpecific",
+        "tierB-quest-2.provisionPolicyId.cardSpecific",
+        "tierB-quest-3.provisionPolicyId.cardSpecific",
+        "rulebook:12",
+        "rulebook:36"
+      ],
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE",
+      "semanticComplete": true,
+      "engineCapabilityMissing": true,
+      "resolutionClass": "source-backed-engine",
+      "implementationTarget": "Community Quest start provision-policy selection",
+      "tests": ["community-engine-capability-closure.test.ts:quest-provision", "community-engine-capability-save-replay.test.ts:quest-provision"]
+    },
+    {
+      "blockerCode": "FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED",
+      "requirementId": "runtime-community-final",
+      "semanticPath": "d10SkillTable",
+      "sourceEvidence": ["tierB-gestating-heart.d10SkillTable", "asset:eed6cd:face"],
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE",
+      "semanticComplete": true,
+      "engineCapabilityMissing": true,
+      "resolutionClass": "source-backed-engine",
+      "implementationTarget": "existing Final action engine deterministic printed-skill selection",
+      "tests": ["community-engine-capability-closure.test.ts:final-skill", "community-engine-capability-save-replay.test.ts:final-skill"]
+    },
+    {
+      "blockerCode": "FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED",
+      "requirementId": "runtime-community-final",
+      "semanticPath": "roomEffects.encounterContext",
+      "sourceEvidence": ["tierB-ancestor-room.roomEffects.encounterContext", "rulebook:36", "rulebook:40", "asset:e3fc86:face"],
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE",
+      "semanticComplete": true,
+      "engineCapabilityMissing": true,
+      "resolutionClass": "source-backed-engine",
+      "implementationTarget": "existing Final form transition transaction",
+      "tests": ["community-engine-capability-closure.test.ts:final-transition", "community-engine-capability-save-replay.test.ts:final-transition"]
+    },
+    {
+      "blockerCode": "GUARDIAN_VICTORY_POLICY_ENGINE_UNSUPPORTED",
+      "requirementId": "runtime-community-guardian",
+      "semanticPath": "victoryCondition",
+      "sourceEvidence": [
+        "tierB-templars-room.victoryCondition",
+        "tierB-mammoth-cyst-room.victoryCondition",
+        "tierB-shuffling-horror-room.victoryCondition",
+        "rulebook:30",
+        "asset:083199:face",
+        "asset:6555d3:face",
+        "asset:735bc3:face"
+      ],
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE",
+      "semanticComplete": true,
+      "engineCapabilityMissing": true,
+      "resolutionClass": "source-backed-engine",
+      "implementationTarget": "shared idempotent Guardian victory policy dispatcher",
+      "tests": ["community-engine-capability-closure.test.ts:guardian-victory", "community-engine-capability-save-replay.test.ts:guardian-victory"]
+    }
+  ]
+}

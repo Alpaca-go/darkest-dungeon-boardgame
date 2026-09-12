@@ -148,6 +148,8 @@ export function buildMammothCystUnit(
     debuffs: [],
     actionPoints: 0,
     monsterSkillIds: def.skills.map((s) => s.id),
+    categoricalResistances: stats?.categoricalResistances,
+    immunities: stats?.immunities,
     resolveTestedThisQuest: false,
     resolveState: 'normal',
     virtueId: null,

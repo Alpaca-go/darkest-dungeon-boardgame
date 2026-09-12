@@ -166,6 +166,10 @@ export function buildShufflingHorrorBattleUnit(mode: 'formal' | 'prototype' | 'c
     debuffs: [],
     actionPoints: 0,
     monsterSkillIds: 'skillIds' in spec ? [...spec.skillIds] : [],
+    categoricalResistances: 'resistances' in spec
+      ? spec.resistances.resistantTo.filter((item): item is 'bleed' | 'blight' | 'stun' | 'mark' => ['bleed', 'blight', 'stun', 'mark'].includes(item))
+      : undefined,
+    immunities: 'resistances' in spec ? [...spec.resistances.immuneTo] : undefined,
     resolveTestedThisQuest: false,
     resolveState: 'normal',
     virtueId: null,

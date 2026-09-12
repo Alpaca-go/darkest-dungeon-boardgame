@@ -4,7 +4,7 @@ import bindingEvidenceJson from '../../../../docs/data/darkest-dungeon/community
 import { COMMUNITY_DATASET, monsterComposition } from './data';
 
 export const COMMUNITY_REFERENCE_PROFILE_ID = 'community-reference' as const;
-export const COMMUNITY_RUNTIME_ADAPTER_VERSION = 'phase11a3-community-runtime-adapter.v4' as const;
+export const COMMUNITY_RUNTIME_ADAPTER_VERSION = 'phase11a3-community-runtime-adapter.v5' as const;
 export const COMMUNITY_REFERENCE_SOURCE_SHA256 = COMMUNITY_DATASET.corpus.sourcePackageSha256;
 
 export type CommunityRuntimeBlockerCode =
@@ -46,16 +46,10 @@ export const COMMUNITY_RUNTIME_BLOCKERS = [
   blocker('MONSTER_DECK_DRAW_POLICY_UNRESOLVED', 'tierB-darkest-dungeon-monster-deck', 'drawPolicy', 'source-level'),
   blocker('EXCAVATION_PROVISION_DIE_MAP_UNRESOLVED', 'runtime-excavation-provision-die', 'faceMap', 'runtime-only'),
   blocker('FINAL_PROVISION_POLICY_UNRESOLVED', 'runtime-final-provision-policy', 'grantTable', 'runtime-only'),
-  blocker('GUARDIAN_RESISTANCE_ENGINE_UNSUPPORTED', 'runtime-guardian-combat', 'categoricalResistanceResolution', 'runtime-only'),
-  blocker('GUARDIAN_CRIT_ENGINE_UNSUPPORTED', 'runtime-guardian-combat', 'criticalHitResolution', 'runtime-only'),
   blocker('GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED', 'runtime-guardian-combat', 'specialSkillEffectResolution', 'runtime-only'),
   blocker('TEMPLARS_AREA_ADJACENCY_UNRESOLVED', 'runtime-templars-room', 'areaAdjacency', 'runtime-only'),
   blocker('SHUFFLING_INITIAL_AREA_UNRESOLVED', 'runtime-shuffling-horror-room', 'initialArea', 'runtime-only'),
   blocker('MAMMOTH_STALK_NO_SPACE_RESOLUTION_ENGINE_UNSUPPORTED', 'tierB-mammoth-cyst-room', 'spawnAreaPolicy.noSpace', 'runtime-only', 'room area adjacency / nearest-available displacement', 'summonWhiteCellStalk'),
-  blocker('QUEST_CARD_PROVISION_POLICY_ENGINE_UNSUPPORTED', 'runtime-community-quest', 'provisionPolicyId.cardSpecific', 'runtime-only', 'card-specific provision policy execution', 'startDarkestDungeonQuest'),
-  blocker('FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED', 'runtime-community-final', 'd10SkillTable', 'runtime-only', 'Final Form d10 skill execution', 'resolveFinalFormAction'),
-  blocker('FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED', 'runtime-community-final', 'roomEffects.encounterContext', 'runtime-only', 'source-projected room transition policy', 'transitionToNextFinalForm'),
-  blocker('GUARDIAN_VICTORY_POLICY_ENGINE_UNSUPPORTED', 'runtime-community-guardian', 'victoryCondition', 'runtime-only', 'source-projected Guardian victory policy', 'resolveGuardianVictory'),
 ] as const;
 
 export function communityRequirement(requirementId: string) {

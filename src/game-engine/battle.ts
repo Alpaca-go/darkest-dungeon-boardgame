@@ -613,7 +613,13 @@ export function heroUseSkill(
       const outcome = applyBattleUnitDamage(tgt, totalDamage);
       tgt = outcome.unit;
       if (outcome.heroDied) tgt = { ...tgt, deathCause: 'deathblow-attack' };
-      if (tgt.isAlive && skill.applyEffects?.length) tgt = applyEffects(tgt, skill.applyEffects);
+      if (tgt.isAlive && skill.applyEffects?.length) {
+        const eff = applyEffectsWithResistance(tgt, skill.applyEffects);
+        tgt = eff.unit;
+        if (eff.blocked.length > 0) {
+          s = pushBattleLog(s, `${tgt.name} 的抗性调整了部分效果${describeBlockedEffects(eff.blocked)}。`, 'success');
+        }
+      }
       const effNote = skill.applyEffects?.length
         ? `（施加 ${skill.applyEffects.map((e) => e.type).join('/')}）`
         : '';

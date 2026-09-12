@@ -77,6 +77,8 @@ export type StatusEffectType = 'bleed' | 'blight' | 'stun' | 'mark';
 export interface ActiveEffect {
   type: StatusEffectType;
   amount: number;
+  /** Optional source-backed duration. Legacy effects omit this and retain stack-count behavior. */
+  durationTurns?: number;
 }
 
 /** 战斗总状态。 */
@@ -315,6 +317,10 @@ export interface BattleUnit {
   resistances?: HeroResistanceProfile;
   /** 由 Hero Level Registry 派生的免疫状态列表（如 'stun'）。 */
   immunities?: string[];
+  /** Board-game categorical resistance: reduce matching Condition duration by one turn. */
+  categoricalResistances?: StatusEffectType[];
+  /** Source-backed duration bookkeeping, separate from Bleed/Blight potency. */
+  conditionDurations?: Partial<Record<StatusEffectType, number>>;
   // ---- Phase 8C：Trinket 快照（仅英雄；获取/翻面等权威状态始终在战役英雄上） ----
   /** 该英雄已装备 Trinket 的实例 id（战斗内查找开窗机会用）。 */
   equippedTrinketInstanceIds?: string[];

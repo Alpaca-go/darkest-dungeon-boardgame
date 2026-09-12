@@ -26,9 +26,8 @@ function actorStats(requirementId: string) {
     maxHp: value<number>(requirementId, 'maxHp'),
     dodge: value<number>(requirementId, 'dodge'),
     speed: value<number>(requirementId, 'speed'),
-    // The engine's legacy numeric resistance table cannot represent the retail card's
-    // categorical resistance icons. Preserve only source-confirmed immunities here.
     resistances: {},
+    categoricalResistances: resistance.resistantTo.filter((item): item is 'bleed' | 'blight' | 'stun' | 'mark' => ['bleed', 'blight', 'stun', 'mark'].includes(item)),
     immunities: [...resistance.immuneTo],
     size: 1,
   };
@@ -143,7 +142,7 @@ export function validateCommunityTemplarsDefinitions(input: {
   if (input.room.validAreaIds.length !== Object.keys(input.room.areaCapacities).length || input.room.validAreaIds.some((areaId) => !Number.isFinite(input.room.areaCapacities[areaId]))) issues.push('room.areaCapacities');
   if (Object.keys(input.room.pitTossD10Map).length !== 10 || Object.values(input.room.pitTossD10Map).some((pitId) => !input.room.spikedPits.some((pit) => pit.id === pitId))) issues.push('room.pitD10Map');
   if (input.room.spikedPits.some((pit) => !pit.entryEffects.some((effect) => effect.kind === 'damage' && effect.amount === 5) || !pit.entryEffects.some((effect) => effect.kind === 'condition' && effect.condition === 'bleed' && effect.amount === 3 && effect.duration === 3))) issues.push('room.pitEntryEffects');
-  return { isComplete: missing.length === 0 && issues.length === 0, missing, issues, knownBlockers: ['TEMPLARS_PIT_EXIT_RULE_UNRESOLVED', 'TEMPLARS_AREA_ADJACENCY_UNRESOLVED', 'GUARDIAN_RESISTANCE_ENGINE_UNSUPPORTED', 'GUARDIAN_CRIT_ENGINE_UNSUPPORTED'] };
+  return { isComplete: missing.length === 0 && issues.length === 0, missing, issues, knownBlockers: ['TEMPLARS_PIT_EXIT_RULE_UNRESOLVED', 'TEMPLARS_AREA_ADJACENCY_UNRESOLVED'] };
 }
 
 export function validateCommunityMammothDefinitions(input: {
@@ -168,7 +167,7 @@ export function validateCommunityMammothDefinitions(input: {
   if (revivify?.type !== 'heal-monster' || revivify.amount !== 15) issues.push('cyst.revivify');
   if (reconstitute?.type !== 'heal-monster' || reconstitute.amount !== 14) issues.push('stalk.reconstitute');
   if (input.stalk.skills.find((skill) => skill.id.endsWith('teleport'))?.specialEffect?.type !== 'teleport-hero') issues.push('stalk.teleport');
-  return { isComplete: missing.length === 0 && issues.length === 0, missing, issues, knownBlockers: ['GUARDIAN_RESISTANCE_ENGINE_UNSUPPORTED', 'GUARDIAN_CRIT_ENGINE_UNSUPPORTED', 'GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED'] };
+  return { isComplete: missing.length === 0 && issues.length === 0, missing, issues, knownBlockers: ['GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED'] };
 }
 
 export function validateCommunityShufflingDefinitions(specs = COMMUNITY_SHUFFLING_ACTORS, room = COMMUNITY_SHUFFLING_ROOM): CommunityDefinitionValidation {
@@ -177,5 +176,5 @@ export function validateCommunityShufflingDefinitions(specs = COMMUNITY_SHUFFLIN
   if (specs.length !== 3 || new Set(specs.map((spec) => spec.role)).size !== 3) issues.push('actors.roles');
   if (specs.some((spec) => !Number.isFinite(spec.maxHp) || !Number.isFinite(spec.speed) || spec.skillIds.length < 2)) missing.push('actors.combatFields');
   if (room.areaIds.length !== Object.keys(room.areaCapacities).length || room.areaIds.some((areaId) => !Number.isFinite(room.areaCapacities[areaId]))) issues.push('room.areaCapacities');
-  return { isComplete: missing.length === 0 && issues.length === 0, missing, issues, knownBlockers: ['SHUFFLING_INITIAL_AREA_UNRESOLVED', 'GUARDIAN_RESISTANCE_ENGINE_UNSUPPORTED', 'GUARDIAN_CRIT_ENGINE_UNSUPPORTED'] };
+  return { isComplete: missing.length === 0 && issues.length === 0, missing, issues, knownBlockers: ['SHUFFLING_INITIAL_AREA_UNRESOLVED'] };
 }

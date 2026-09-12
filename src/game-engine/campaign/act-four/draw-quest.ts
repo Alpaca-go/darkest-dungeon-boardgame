@@ -36,6 +36,8 @@ import {
   withProcessedActFourTransaction,
 } from './act-four-state';
 import { pickIndex, rngStateId } from './rng';
+import { rollCommunityQuestProvisions } from './community-engine-capabilities';
+import type { ProvisionPool } from '../../../types';
 
 export type ActFourContentMode = ActFourRuntimeProfileId;
 
@@ -45,6 +47,7 @@ export interface DrawDarkestDungeonQuestOptions {
   mode?: ActFourContentMode;
   seedLabel?: string;
   now?: string;
+  chooseWildProvision?: (heroId: string, dieIndex: 0 | 1) => keyof ProvisionPool;
 }
 
 export interface DrawDarkestDungeonQuestResult {
@@ -121,6 +124,17 @@ export function drawDarkestDungeonQuest(
     return fail(campaign, 'Heart of Darkness 不可被取消（硬约束 13）');
   }
 
+  const provisionResult = mode === 'community-reference'
+    ? rollCommunityQuestProvisions(
+        campaign.provisions,
+        selected.provisionPolicyId,
+        campaign.heroes.filter((hero) => hero.isAlive && !hero.dead).map((hero) => hero.instanceId),
+        options.rng,
+        options.chooseWildProvision,
+      )
+    : null;
+  if (provisionResult && !provisionResult.ok) return fail(campaign, provisionResult.reason);
+
   const now = options.now ?? nowIso();
   const record: DarkestDungeonQuestDrawRecord = {
     runtimeProfileId: mode,
@@ -130,6 +144,7 @@ export function drawDarkestDungeonQuest(
     guardianDefinitionId: selected.guardianDefinitionId,
     skippedFinalFormId: skipped as SkippableFinalFormId,
     discardedQuestIds: pool.filter((q) => q.id !== selected.id).map((q) => q.id),
+    provisionRoll: provisionResult?.record,
     rngStateId: rngStateId(options.seedLabel ?? `dd-quest-draw:${campaign.id}`, index),
     drawnAt: now,
   };
@@ -147,7 +162,12 @@ export function drawDarkestDungeonQuest(
   next = withActFourStage(next, 'guardian-dungeon-active', `${transactionId}:stage`);
 
   const guardian = getDarkestDungeonGuardianById(selected.guardianDefinitionId);
-  let nextCampaign: CampaignState = { ...campaign, actFourState: next, updatedAt: now };
+  let nextCampaign: CampaignState = {
+    ...campaign,
+    provisions: provisionResult?.provisions ?? campaign.provisions,
+    actFourState: next,
+    updatedAt: now,
+  };
   nextCampaign = pushLog(
     nextCampaign,
     `抽取 Darkest Dungeon Quest：${selected.name}（16 Rooms / 3 XP）。`,

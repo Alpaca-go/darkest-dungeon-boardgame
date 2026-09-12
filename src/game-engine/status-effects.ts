@@ -5,15 +5,18 @@ import { rollDie } from './random';
 
 /** 给单位施加一个状态效果（返回新单位，不修改原对象）。 */
 export function applyEffectToUnit(unit: BattleUnit, effect: ActiveEffect): BattleUnit {
+  const withDuration = (next: BattleUnit): BattleUnit => effect.durationTurns === undefined
+    ? next
+    : { ...next, conditionDurations: { ...next.conditionDurations, [effect.type]: Math.max(next.conditionDurations?.[effect.type] ?? 0, effect.durationTurns) } };
   switch (effect.type) {
     case 'stun':
-      return { ...unit, stunned: unit.stunned + effect.amount };
+      return withDuration({ ...unit, stunned: unit.stunned + effect.amount });
     case 'bleed':
-      return { ...unit, bleed: unit.bleed + effect.amount };
+      return withDuration({ ...unit, bleed: unit.bleed + effect.amount });
     case 'blight':
-      return { ...unit, blight: unit.blight + effect.amount };
+      return withDuration({ ...unit, blight: unit.blight + effect.amount });
     case 'mark':
-      return { ...unit, marked: true };
+      return withDuration({ ...unit, marked: true });
     default:
       return unit;
   }
@@ -51,6 +54,9 @@ export interface BlockedEffectRecord {
   roll?: number;
   /** 该项抗性百分比（immune 时为 undefined）。 */
   resistance?: number;
+  /** Categorical resistance has no d100 roll; it shortens duration by one turn. */
+  durationReducedFrom?: number;
+  durationReducedTo?: number;
 }
 
 export interface ApplyEffectsWithResistanceResult {
@@ -68,6 +74,7 @@ export function applyEffectsWithResistance(
 ): ApplyEffectsWithResistanceResult {
   if (!effects || effects.length === 0) return { unit, blocked: [] };
   const immunities = unit.immunities ?? [];
+  const categoricalResistances = unit.categoricalResistances ?? [];
   const resistances = unit.resistances;
   const blocked: BlockedEffectRecord[] = [];
   let next = unit;
@@ -75,6 +82,13 @@ export function applyEffectsWithResistance(
   for (const effect of effects) {
     if (immunities.includes(effect.type)) {
       blocked.push({ type: effect.type, reason: 'immune' });
+      continue;
+    }
+    if (categoricalResistances.includes(effect.type)) {
+      const from = effect.durationTurns ?? effect.amount;
+      const to = Math.max(0, from - 1);
+      blocked.push({ type: effect.type, reason: 'resisted', durationReducedFrom: from, durationReducedTo: to });
+      if (to > 0) next = applyEffectToUnit(next, { ...effect, durationTurns: to });
       continue;
     }
     const key = RESIST_KEY_BY_EFFECT[effect.type];
@@ -97,7 +111,9 @@ export function describeBlockedEffects(blocked: BlockedEffectRecord[]): string {
   const parts = blocked.map((b) =>
     b.reason === 'immune'
       ? `${b.type} 被免疫`
-      : `${b.type} 被抵抗（d100=${b.roll} ≤ ${b.resistance}）`
+      : b.durationReducedFrom !== undefined
+        ? `${b.type} 持续时间 ${b.durationReducedFrom}→${b.durationReducedTo}`
+        : `${b.type} 被抵抗（d100=${b.roll} ≤ ${b.resistance}）`
   );
   return `（${parts.join('，')}）`;
 }
@@ -128,6 +144,8 @@ export function resolveStartOfTurnConditions(unit: BattleUnit, light = 0): Start
   let next = unit;
   const rawBleed = next.bleed > 0 ? next.bleed : 0;
   const rawBlight = next.blight > 0 ? next.blight : 0;
+  const bleedDuration = next.conditionDurations?.bleed;
+  const blightDuration = next.conditionDurations?.blight;
 
   // Phase 8A：Clotter / Thick Blooded 等按伤害来源分别修正，再合并为同一批次
   const isHero = next.side === 'hero';
@@ -153,12 +171,22 @@ export function resolveStartOfTurnConditions(unit: BattleUnit, light = 0): Start
 
   // 分别减少层数（伤害合并结算，层数各自 -1；即使被修正到 0 也要正常衰减）
   if (rawBleed > 0) {
-    next = { ...next, bleed: Math.max(0, next.bleed - 1) };
-    messages.push(`${next.name} 受到 Bleed 伤害 ${bleedDmg}（剩余 ${next.bleed}）。`);
+    const remaining = bleedDuration === undefined ? Math.max(0, next.bleed - 1) : Math.max(0, bleedDuration - 1);
+    next = {
+      ...next,
+      bleed: bleedDuration === undefined || remaining > 0 ? (bleedDuration === undefined ? remaining : next.bleed) : 0,
+      ...(bleedDuration === undefined ? {} : { conditionDurations: { ...next.conditionDurations, bleed: remaining } }),
+    };
+    messages.push(`${next.name} 受到 Bleed 伤害 ${bleedDmg}（剩余 ${remaining} 回合）。`);
   }
   if (rawBlight > 0) {
-    next = { ...next, blight: Math.max(0, next.blight - 1) };
-    messages.push(`${next.name} 受到 Blight 伤害 ${blightDmg}（剩余 ${next.blight}）。`);
+    const remaining = blightDuration === undefined ? Math.max(0, next.blight - 1) : Math.max(0, blightDuration - 1);
+    next = {
+      ...next,
+      blight: blightDuration === undefined || remaining > 0 ? (blightDuration === undefined ? remaining : next.blight) : 0,
+      ...(blightDuration === undefined ? {} : { conditionDurations: { ...next.conditionDurations, blight: remaining } }),
+    };
+    messages.push(`${next.name} 受到 Blight 伤害 ${blightDmg}（剩余 ${remaining} 回合）。`);
   }
 
   if (total <= 0) {
@@ -204,5 +232,12 @@ export function applyStartOfTurn(unit: BattleUnit): { unit: BattleUnit; messages
 
 /** Stun 跳过：行动结束后移除一层 Stun。 */
 export function tickStun(unit: BattleUnit): BattleUnit {
-  return { ...unit, stunned: Math.max(0, unit.stunned - 1) };
+  const duration = unit.conditionDurations?.stun;
+  if (duration === undefined) return { ...unit, stunned: Math.max(0, unit.stunned - 1) };
+  const remaining = Math.max(0, duration - 1);
+  return {
+    ...unit,
+    stunned: remaining > 0 ? unit.stunned : 0,
+    conditionDurations: { ...unit.conditionDurations, stun: remaining },
+  };
 }

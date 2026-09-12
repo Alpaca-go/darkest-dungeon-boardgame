@@ -51,6 +51,7 @@ export interface MammothCystActorStats {
   dodge: number;
   speed: number;
   resistances: Record<string, number>;
+  categoricalResistances?: Array<'bleed' | 'blight' | 'stun' | 'mark'>;
   immunities: string[];
   size: number;
 }
@@ -329,6 +330,11 @@ export interface MammothCystSkillRollRecord {
   owner: MammothCystInitiativeOwner;
   roll: D10Roll;
   selectedSkillId: string;
+  /** Saved attack outcome for source-backed Community critical resolution. */
+  attackRoll?: D10Roll;
+  hit?: boolean;
+  critical?: boolean;
+  resolvedDamage?: number;
   transactionId: string;
   createdAt: string;
 }
