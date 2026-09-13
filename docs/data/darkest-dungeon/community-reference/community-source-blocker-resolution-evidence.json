@@ -1,0 +1,370 @@
+{
+  "schemaVersion": "phase11a3-community-source-blocker-resolution-evidence.v1",
+  "runId": "1933a1c7-2507-4541-bc7a-dbf21e12a0d1",
+  "measuredAt": "2026-09-13T09:29:05.479Z",
+  "verificationScope": "LOCAL MEASURED VERIFICATION",
+  "verifiedBaseHead": "8bb3b23fd3ab10b8258cee6f54328595447022f6",
+  "verifiedImplementationHead": "32aeb5bf261f1ea9ca05972b2a71676d52e42794",
+  "evidencePublicationParent": "32aeb5bf261f1ea9ca05972b2a71676d52e42794",
+  "dossier": {
+    "path": "docs/data/darkest-dungeon/community-reference/community-source-blocker-resolution.json",
+    "sha256": "58464802f4fe67a247df51d15a0cb40886dcd5351e4fc32979d2534f32ed6daa",
+    "resolutionRunId": "phase11a3-source-resolution-2026-09-13-r1"
+  },
+  "supplement": {
+    "path": "docs/data/darkest-dungeon/community-reference/community-source-resolution-supplement.json",
+    "sha256": "0993f2450e95cd77fdc31cfeab6b1c540ffc599f0ff217d1cef3bc68062556c8",
+    "resolutionRunId": "phase11a3-source-resolution-2026-09-13-r1",
+    "runtimeConsumptionAuthorized": false
+  },
+  "canonicalInputs": {
+    "intakeSha256": "382e479f84f79a9b3cc6b0256b2fa5dea100b3576244988f180b49e75ed78d2a",
+    "ttsSha256": "d2fe21a6aa294f80fb47e56677c3a74090c3dc131361d798dfde709f6a3a64a2"
+  },
+  "targets": [
+    {
+      "blockerCode": "FINAL_PROVISION_POLICY_UNRESOLVED",
+      "verdict": "resolved",
+      "sourceAuthority": [
+        "OFFICIAL_RULEBOOK"
+      ],
+      "sourceReferences": [
+        "rulebook:10",
+        "rulebook:12",
+        "rulebook:36"
+      ],
+      "runtimeDependencies": [
+        "Persist rolled faces, post-wild faces, player choices, pool before/after and an idempotent transaction receipt; consume only in the later playable-closure branch."
+      ],
+      "requiresAstraReview": false
+    },
+    {
+      "blockerCode": "MONSTER_DECK_DRAW_POLICY_UNRESOLVED",
+      "verdict": "resolved",
+      "sourceAuthority": [
+        "COMMUNITY_RETAIL_REFERENCE",
+        "OFFICIAL_RULEBOOK"
+      ],
+      "sourceReferences": [
+        "tts:02ef1c",
+        "rulebook:17",
+        "rulebook:25",
+        "rulebook:30",
+        "rulebook:31",
+        "rulebook:35",
+        "rulebook:41"
+      ],
+      "runtimeDependencies": [
+        "Physical-card instance deck state",
+        "deterministic shuffle/draw receipts",
+        "Front/Back and Large placement",
+        "used-card return transaction"
+      ],
+      "requiresAstraReview": false
+    },
+    {
+      "blockerCode": "SHUFFLING_INITIAL_AREA_UNRESOLVED",
+      "verdict": "resolved",
+      "sourceAuthority": [
+        "COMMUNITY_RETAIL_REFERENCE",
+        "OFFICIAL_RULEBOOK"
+      ],
+      "sourceReferences": [
+        "asset:9a87c7:face",
+        "asset:7a3fa9:secondaryUrl",
+        "asset:450ace:face",
+        "rulebook:16",
+        "rulebook:31",
+        "rulebook:40"
+      ],
+      "runtimeDependencies": [
+        "Bind source-local Room 10 stance markers to runtime area IDs",
+        "summon placement and resistance",
+        "linked-victory cleanup"
+      ],
+      "requiresAstraReview": false
+    },
+    {
+      "blockerCode": "TEMPLARS_AREA_ADJACENCY_UNRESOLVED",
+      "verdict": "partially-resolved",
+      "sourceAuthority": [
+        "COMMUNITY_RETAIL_REFERENCE",
+        "OFFICIAL_RULEBOOK"
+      ],
+      "sourceReferences": [
+        "asset:afa508:face",
+        "asset:7a3fa9:imageUrl",
+        "rulebook:18",
+        "rulebook:19",
+        "rulebook:39"
+      ],
+      "runtimeDependencies": [
+        "Accepted normative topology/adjacency ruling",
+        "Pit exit destination legality",
+        "range and path-distance calculation"
+      ],
+      "requiresAstraReview": false
+    },
+    {
+      "blockerCode": "EXCAVATION_PROVISION_DIE_MAP_UNRESOLVED",
+      "verdict": "resolved",
+      "sourceAuthority": [
+        "OFFICIAL_RULEBOOK"
+      ],
+      "sourceReferences": [
+        "rulebook:10",
+        "rulebook:12",
+        "rulebook:36"
+      ],
+      "runtimeDependencies": [
+        "Persist per-Hero roll and Wild choice",
+        "idempotent pool grant",
+        "pool-cap handling"
+      ],
+      "requiresAstraReview": false
+    },
+    {
+      "blockerCode": "TEMPLARS_PIT_EXIT_RULE_UNRESOLVED",
+      "verdict": "unresolved",
+      "sourceAuthority": [
+        "COMMUNITY_RETAIL_REFERENCE",
+        "OFFICIAL_RULEBOOK"
+      ],
+      "sourceReferences": [
+        "asset:afa508:face",
+        "asset:7a3fa9:imageUrl",
+        "asset:f236b8:face",
+        "rulebook:18",
+        "rulebook:21",
+        "rulebook:39"
+      ],
+      "runtimeDependencies": [
+        "Accepted pit-exit ruling",
+        "TEMPLARS_AREA_ADJACENCY_UNRESOLVED"
+      ],
+      "requiresAstraReview": false
+    },
+    {
+      "blockerCode": "GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED",
+      "verdict": "partially-resolved",
+      "sourceAuthority": [
+        "COMMUNITY_RETAIL_REFERENCE",
+        "OFFICIAL_RULEBOOK"
+      ],
+      "sourceReferences": [
+        "asset:efa5a4:face",
+        "asset:f88d6a:face",
+        "asset:c4a35e:face",
+        "asset:1fb052:face",
+        "asset:ccf3dc:face",
+        "asset:1b261d:face",
+        "asset:a34fbd:face",
+        "asset:f236b8:face",
+        "asset:e4246d:face",
+        "asset:a9ab77:face",
+        "asset:450ace:face",
+        "rulebook:20",
+        "rulebook:21",
+        "rulebook:31",
+        "rulebook:39",
+        "rulebook:40"
+      ],
+      "runtimeDependencies": [
+        "No runtime implementation in this branch",
+        "TEMPLARS_AREA_ADJACENCY_UNRESOLVED",
+        "TEMPLARS_PIT_EXIT_RULE_UNRESOLVED",
+        "SHUFFLING_SUMMON_RESISTANCE_ENGINE_UNSUPPORTED",
+        "SHUFFLING_LINKED_VICTORY_CLEANUP_ENGINE_UNSUPPORTED"
+      ],
+      "requiresAstraReview": false
+    },
+    {
+      "blockerCode": "MAMMOTH_STALK_NO_SPACE_RESOLUTION_ENGINE_UNSUPPORTED",
+      "verdict": "partially-resolved",
+      "sourceAuthority": [
+        "COMMUNITY_RETAIL_REFERENCE",
+        "OFFICIAL_RULEBOOK"
+      ],
+      "sourceReferences": [
+        "asset:bb91b0:face",
+        "asset:bc9c87:imageUrl",
+        "rulebook:21",
+        "rulebook:24",
+        "rulebook:31",
+        "rulebook:39"
+      ],
+      "runtimeDependencies": [
+        "Normative Room 11 adjacency/path metric",
+        "destination tie-breaking policy",
+        "atomic displacement plus summon transaction"
+      ],
+      "requiresAstraReview": false
+    },
+    {
+      "blockerCode": "ABSOLUTE_NOTHINGNESS_STANCE_UNRESOLVED",
+      "verdict": "resolved",
+      "sourceAuthority": [
+        "COMMUNITY_RETAIL_REFERENCE",
+        "OFFICIAL_RULEBOOK"
+      ],
+      "sourceReferences": [
+        "tts:4c0e88",
+        "tts:db000a",
+        "tts:aff870",
+        "asset:bc9c87:secondaryUrl",
+        "asset:4cd186:face",
+        "rulebook:40",
+        "rulebook:41"
+      ],
+      "runtimeDependencies": [
+        "Represent as non-acting room occupants rather than synthetic Battle Cards",
+        "area capacity accounting",
+        "second-form cleanup"
+      ],
+      "requiresAstraReview": false
+    },
+    {
+      "blockerCode": "GESTATING_HEART_LETHAL_TIMING_UNRESOLVED",
+      "verdict": "partially-resolved",
+      "sourceAuthority": [
+        "COMMUNITY_RETAIL_REFERENCE",
+        "OFFICIAL_RULEBOOK"
+      ],
+      "sourceReferences": [
+        "asset:eed6cd:face",
+        "asset:a7bbae:face",
+        "rulebook:20",
+        "rulebook:24",
+        "rulebook:36",
+        "rulebook:40",
+        "rulebook:41"
+      ],
+      "runtimeDependencies": [
+        "Accepted lethal-timing ruling or errata",
+        "atomic attack/reaction/defeat transition ordering"
+      ],
+      "requiresAstraReview": false
+    },
+    {
+      "blockerCode": "COME_UNTO_YOUR_MAKER_UNRESOLVED",
+      "verdict": "unresolved",
+      "sourceAuthority": [
+        "COMMUNITY_RETAIL_REFERENCE",
+        "OFFICIAL_RULEBOOK"
+      ],
+      "sourceReferences": [
+        "asset:5e5515:face",
+        "asset:4cd186:face",
+        "asset:e3fc86:face",
+        "asset:eed6cd:face",
+        "asset:21bbaf:face",
+        "asset:a7bbae:face",
+        "asset:12e30f:face",
+        "asset:bdaf2b:face",
+        "asset:d09f50:face",
+        "rulebook:36",
+        "rulebook:40",
+        "rulebook:41"
+      ],
+      "runtimeDependencies": [
+        "Accepted tabletop card/rule/errata identity and text"
+      ],
+      "requiresAstraReview": false
+    }
+  ],
+  "counts": {
+    "targets": 11,
+    "resolved": 5,
+    "partiallyResolved": 4,
+    "unresolved": 2,
+    "conflicting": 0,
+    "astraReviewRequired": 0
+  },
+  "adversarialTests": {
+    "expected": 12,
+    "discovered": 12,
+    "run": 12,
+    "passed": 12,
+    "failed": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "commands": [
+    {
+      "name": "engine-capability-final-acceptance",
+      "exitCode": 0,
+      "durationMs": 512831,
+      "log": "docs/reports/phase-11a3/source-blocker-resolution/engine-capability-final-acceptance.log",
+      "logSha256": "9c16437a365594a4696f1de76956c342a9151a3039490dde7581a88e0d03c9dc"
+    },
+    {
+      "name": "source-integrity-adversarial",
+      "exitCode": 0,
+      "durationMs": 1625,
+      "log": "docs/reports/phase-11a3/source-blocker-resolution/source-integrity-adversarial.log",
+      "logSha256": "dad3f85e3920f7c2590ec6bd49e5a0a67da9ad6aee2c3081b2aac4b4800088cf"
+    },
+    {
+      "name": "typecheck",
+      "exitCode": 0,
+      "durationMs": 7239,
+      "log": "docs/reports/phase-11a3/source-blocker-resolution/typecheck.log",
+      "logSha256": "75a11da44c802486bc6f65640aa48a730f0f684c5c07a42ba3cd1735eb3fb070"
+    },
+    {
+      "name": "build",
+      "exitCode": 0,
+      "durationMs": 7167,
+      "log": "docs/reports/phase-11a3/source-blocker-resolution/build.log",
+      "logSha256": "500b8956db672174b5b465843d66bc1f2451fb40aea3c629011cef22c5cd6263"
+    }
+  ],
+  "regressions": {
+    "binding": {
+      "verdict": "COMMUNITY-REFERENCE-DATA-BOUND",
+      "runId": "a2597086-c8bf-4f27-8cb5-15be737e66e6",
+      "sha256": "e26cf62d8ef33b4d729227c7c6fe5347e56bc8f3781b95d9c9b6a19e0963f026"
+    },
+    "runtime": {
+      "verdict": "COMMUNITY-REFERENCE-RUNTIME-FROZEN",
+      "runId": "a9b88133-e24d-47f8-87fe-7d6a4b28f9fd",
+      "sha256": "fe6303c255886617feaa226bf87abf2514324f6bc2c7c4f11d8ef5283cb5d9e0"
+    },
+    "visual": {
+      "verdict": "COMMUNITY-VISUAL-ASSETS-ACCEPTED",
+      "runId": "4f659422-c918-45f3-ae25-e5600452db46",
+      "sha256": "71e9051ed74a55917c85048d4f8a57ab2afa37027b2f6d1262d817552ec76c70"
+    },
+    "engineCapabilityFinalAcceptance": {
+      "verdict": "COMMUNITY-SOURCE-BACKED-ENGINE-CAPABILITIES-ACCEPTED",
+      "runId": "14785b6b-64e8-4013-806c-99945654d41c",
+      "sha256": "e5513ea0f7664e3995e28013e5a63798c297e29e248e74c60476da8be3b6ea25"
+    },
+    "official": {
+      "verdict": "SOURCE-BLOCKED",
+      "runId": "1a0b7b2e-08ed-4f94-8ded-7b5bd95a2160",
+      "sha256": "a08f6c3e0e3325f6b3ea33ec8b9d2023594f2736e7e2f2265b9272dc7c99bc06",
+      "requiredMissing": 26,
+      "optionalMissing": 1,
+      "openP0": 1,
+      "openP1": 0,
+      "onlyOpenP0": "ISSUE-P0-002",
+      "formalMatrix": 0,
+      "canCloseP0_002": false,
+      "canEnterPhase11B": false
+    }
+  },
+  "implementationFiles": [
+    "docs/data/darkest-dungeon/community-reference/community-source-blocker-resolution.json",
+    "docs/data/darkest-dungeon/community-reference/community-source-resolution-supplement.json",
+    "package.json",
+    "scripts/audit/verify-community-source-blocker-resolution.ts",
+    "src/data/darkest-dungeon/community-reference/source-resolution.test.ts",
+    "src/data/darkest-dungeon/community-reference/source-resolution.ts"
+  ],
+  "forbiddenImplementationFiles": [],
+  "communityFullActFourPlayable": false,
+  "phase11BEntered": false,
+  "terminalVerdict": "COMMUNITY-SOURCE-BLOCKERS-RESEARCHED",
+  "failures": []
+}

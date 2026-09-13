@@ -1,14 +1,14 @@
 {
   "schemaVersion": "phase11a3-community-runtime-freeze-evidence-closure.v1",
-  "runId": "1d7d028f-5c91-45ec-a270-373dfded5cbf",
-  "measuredAt": "2026-09-13T07:44:07.084Z",
-  "verifiedImplementationHead": "0f7ee7a8d8cc82bd40a6efadd3ce63541e8ad3eb",
-  "evidencePublicationParent": "0f7ee7a8d8cc82bd40a6efadd3ce63541e8ad3eb",
+  "runId": "a9b88133-e24d-47f8-87fe-7d6a4b28f9fd",
+  "measuredAt": "2026-09-13T09:25:22.187Z",
+  "verifiedImplementationHead": "32aeb5bf261f1ea9ca05972b2a71676d52e42794",
+  "evidencePublicationParent": "32aeb5bf261f1ea9ca05972b2a71676d52e42794",
   "sourcePackageSha256": "382e479f84f79a9b3cc6b0256b2fa5dea100b3576244988f180b49e75ed78d2a",
   "normalizedRequirementsSha256": "82e3f9794c81d021c158610ff47411a7ef0af7d68efe3d23631d9a7e68793562",
   "sourceBindingManifestSha256": "30e383ae71d1ef00041276e081ced74156865d3cae3f3e17b3c1e29dfcd773b8",
-  "bindingEvidenceRunId": "83ed25fd-3eba-4cf6-8dc6-ace25bed2854",
-  "bindingEvidenceSha256": "af411cc55c753152325405d0239487ea46a9c3673a822caf1145270c66da1549",
+  "bindingEvidenceRunId": "a2597086-c8bf-4f27-8cb5-15be737e66e6",
+  "bindingEvidenceSha256": "e26cf62d8ef33b4d729227c7c6fe5347e56bc8f3781b95d9c9b6a19e0963f026",
   "runtimeProfileId": "community-reference",
   "runtimeAdapterVersion": "phase11a3-community-runtime-adapter.v6",
   "contentHash": "7e6178d5",
@@ -49,7 +49,7 @@
     "validators": {
       "name": "validators",
       "exitCode": 0,
-      "durationMs": 1649,
+      "durationMs": 1933,
       "expected": 3,
       "discovered": 3,
       "run": 3,
@@ -61,7 +61,7 @@
     "setup": {
       "name": "setup",
       "exitCode": 0,
-      "durationMs": 2589,
+      "durationMs": 2764,
       "expected": 6,
       "discovered": 6,
       "run": 6,
@@ -73,7 +73,7 @@
     "production": {
       "name": "production",
       "exitCode": 0,
-      "durationMs": 2579,
+      "durationMs": 2725,
       "expected": 6,
       "discovered": 6,
       "run": 6,
@@ -85,7 +85,7 @@
     "guardian": {
       "name": "guardian",
       "exitCode": 0,
-      "durationMs": 2645,
+      "durationMs": 2834,
       "expected": 16,
       "discovered": 16,
       "run": 16,
@@ -97,7 +97,7 @@
     "excavation": {
       "name": "excavation",
       "exitCode": 0,
-      "durationMs": 2551,
+      "durationMs": 2772,
       "expected": 6,
       "discovered": 6,
       "run": 6,
@@ -109,7 +109,7 @@
     "finalEncounter": {
       "name": "finalEncounter",
       "exitCode": 0,
-      "durationMs": 2597,
+      "durationMs": 2776,
       "expected": 12,
       "discovered": 12,
       "run": 12,
@@ -121,7 +121,7 @@
     "monster": {
       "name": "monster",
       "exitCode": 0,
-      "durationMs": 2653,
+      "durationMs": 2762,
       "expected": 7,
       "discovered": 7,
       "run": 7,
@@ -133,7 +133,7 @@
     "saveReplay": {
       "name": "saveReplay",
       "exitCode": 0,
-      "durationMs": 2768,
+      "durationMs": 2983,
       "expected": 12,
       "discovered": 12,
       "run": 12,
@@ -145,7 +145,7 @@
     "traceability": {
       "name": "traceability",
       "exitCode": 0,
-      "durationMs": 2159,
+      "durationMs": 2181,
       "expected": 139,
       "discovered": 139,
       "run": 139,
@@ -157,7 +157,7 @@
     "adversarial": {
       "name": "adversarial",
       "exitCode": 0,
-      "durationMs": 3124,
+      "durationMs": 3026,
       "expected": 20,
       "discovered": 20,
       "run": 20,
@@ -169,7 +169,7 @@
     "truthGate": {
       "name": "truthGate",
       "exitCode": 0,
-      "durationMs": 3116,
+      "durationMs": 2916,
       "expected": 15,
       "discovered": 15,
       "run": 15,
@@ -181,7 +181,7 @@
     "freezeEvidence": {
       "name": "freezeEvidence",
       "exitCode": 0,
-      "durationMs": 2152,
+      "durationMs": 2066,
       "expected": 12,
       "discovered": 12,
       "run": 12,
@@ -193,7 +193,7 @@
     "communityE2E": {
       "name": "communityE2E",
       "exitCode": 0,
-      "durationMs": 14929,
+      "durationMs": 11485,
       "expected": 3,
       "discovered": 3,
       "run": 3,
@@ -486,22 +486,22 @@
     {
       "name": "typecheck",
       "exitCode": 0,
-      "durationMs": 8354
+      "durationMs": 6949
     },
     {
       "name": "build",
       "exitCode": 0,
-      "durationMs": 7226
+      "durationMs": 7387
     },
     {
       "name": "officialSourceGateRegression",
       "exitCode": 0,
-      "durationMs": 187246
+      "durationMs": 190877
     },
     {
       "name": "bindingRegression",
       "exitCode": 0,
-      "durationMs": 10303
+      "durationMs": 10793
     }
   ],
   "officialGateBefore": {
