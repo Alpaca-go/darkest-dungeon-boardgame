@@ -24,6 +24,7 @@ import { applyBattleUnitHealing } from './healing';
 import {
   applyEffects,
   applyEffectsWithResistance,
+  applyStatusEffectEvent,
   describeBlockedEffects,
   resolveStartOfTurnConditions,
   tickStun,
@@ -337,7 +338,7 @@ export function advanceTurn(state: BattleState): BattleState {
     if (idx >= s.initiativeOrder.length) {
       // 本轮行动列表耗尽 → 进入下一轮
       s = { ...s, round: s.round + 1 };
-      if (s.round > s.maxRounds) {
+      if (s.roundLimitPolicy !== 'not-counted' && s.round > s.maxRounds) {
         s = pushBattleLog(s, `第 ${s.maxRounds} 轮结束，怪物仍未清除，小队被迫撤退。`, 'danger');
         return { ...s, status: 'defeat' };
       }
@@ -535,6 +536,7 @@ export function heroSkillActionError(
   if (!isSkillUsableFrom(actor, skill)) return `无法从当前站位释放 ${skill.name}。`;
   const target = findUnit(state, targetId);
   if (!target || !isLegalTarget(actor, target, skill)) return '目标不合法。';
+  if (skill.moveTarget && target.sourceId.startsWith('community-dd-')) return 'GUARDIAN_SHUFFLE_RESISTANCE_ENGINE_UNSUPPORTED';
   return null;
 }
 
@@ -561,6 +563,7 @@ export function heroUseSkill(
   }
   const target = findUnit(state, targetId);
   if (!target || !isLegalTarget(actor, target, skill)) return state;
+  if (skill.moveTarget && target.sourceId.startsWith('community-dd-')) return pushBattleLog(state, 'GUARDIAN_SHUFFLE_RESISTANCE_ENGINE_UNSUPPORTED', 'warning');
 
   let s = state;
   let tgt: BattleUnit = target;
@@ -614,8 +617,10 @@ export function heroUseSkill(
       tgt = outcome.unit;
       if (outcome.heroDied) tgt = { ...tgt, deathCause: 'deathblow-attack' };
       if (tgt.isAlive && skill.applyEffects?.length) {
-        const eff = applyEffectsWithResistance(tgt, skill.applyEffects);
-        tgt = eff.unit;
+        const eventId = `skill-effects:${state.battleId}:${state.round}:${state.initiativeIndex}:${unitId}:${state.currentActionPoints}`;
+        s = applyStatusEffectEvent(setUnit(s, tgt), tgt.id, skill.applyEffects, eventId);
+        tgt = findUnit(s, tgt.id)!;
+        const eff = { blocked: s.statusEffectEvents!.find(event => event.eventId === eventId)!.blocked };
         if (eff.blocked.length > 0) {
           s = pushBattleLog(s, `${tgt.name} 的抗性调整了部分效果${describeBlockedEffects(eff.blocked)}。`, 'success');
         }
@@ -719,6 +724,8 @@ function tryMonsterMove(state: BattleState, monsterId: string): BattleState {
 export function runMonsterTurn(state: BattleState, monsterId: string): BattleState {
   const monster = findUnit(state, monsterId);
   if (!monster || !monster.isAlive || monster.side !== 'monster') return state;
+  if (/^community-dd-templars-/.test(monster.sourceId)) return pushBattleLog(state, 'TEMPLARS_CRIT_ENGINE_UNSUPPORTED', 'warning');
+  if (/^community-dd-(shuffling-horror|cultist-priest|malignant-growth)$/.test(monster.sourceId)) return pushBattleLog(state, 'SHUFFLING_CRIT_ENGINE_UNSUPPORTED', 'warning');
 
   const action = chooseMonsterAction(state, monster);
   if (!action) {

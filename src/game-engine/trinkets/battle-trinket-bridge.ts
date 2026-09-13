@@ -19,6 +19,7 @@ import type { TrinketActionBonuses } from '../battle';
 import { openTrinketWindow, openOpportunities, findOpportunity } from './trinket-opportunities';
 import { useTrinket, declineTrinketUse, sumModifiers } from './use-trinket';
 import { findHero } from './trinket-state';
+import { synchronizeCommunityGuardianDeaths } from '../campaign/act-four/community-guardian-battle';
 
 // ---------------------------------------------------------------------------
 // before-attack-roll：冻结与恢复
@@ -94,7 +95,7 @@ export function beginHeroSkillAction(
 
   // 无机会 → 直接执行（零加成）
   const resolved = heroUseSkill(next.battle!, actorUnitId, skillId, targetId);
-  return { campaign: { ...next, battle: resolved }, error: null, paused: false };
+  return { campaign: synchronizeCommunityGuardianDeaths({ ...next, battle: resolved }), error: null, paused: false };
 }
 
 /** 执行冻结动作并清空 pendingAction（内部；机会结清后调用）。 */
@@ -108,7 +109,7 @@ function resumePendingAction(campaign: CampaignState): CampaignState {
     damage: pa.damageBonus,
   };
   const resolved = heroUseSkill(battle, pa.actorUnitId, pa.skillId, pa.targetId, bonuses);
-  return { ...campaign, battle: { ...resolved, pendingAction: null } };
+  return synchronizeCommunityGuardianDeaths({ ...campaign, battle: { ...resolved, pendingAction: null } });
 }
 
 export interface ResolveOpportunityResult {

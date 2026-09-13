@@ -74,7 +74,9 @@ describe('Community Runtime freeze evidence mutations', () => {
   it('F10 mutate Ancestor source vacantStanceFillSource -> traceability FAIL', () => {
     const value = clone(fieldValue('tierB-ancestor-first-form', 'vacantStanceFillSource')) as any;
     value.skills[0].summons = 'Imperfect Reflection';
-    expect(mismatch(sourceWith('tierB-ancestor-first-form.vacantStanceFillSource', value))).toContain('runtime semantic mismatch tierB-ancestor-first-form.vacantStanceFillSource');
+    const proof = COMMUNITY_RUNTIME_PROJECTION_PROOFS.find(item => item.requirementId === 'tierB-ancestor-first-form' && item.sourcePath === 'vacantStanceFillSource')!;
+    expect(proof.classification).toBe('engine-unsupported-blocker');
+    expect(validateCommunityRuntimeProjectionProofs(COMMUNITY_RUNTIME_PROJECTION_PROOFS, COMMUNITY_RUNTIME_PROJECTION_ENVIRONMENT, COMMUNITY_RUNTIME_BLOCKERS.filter(item => item.code !== proof.blockerCode), sourceWith('tierB-ancestor-first-form.vacantStanceFillSource', value)).join()).toContain('invalid blocker proof');
   });
 
   it('F11 hard-coded source normalizer fixture -> validator FAIL', () => {

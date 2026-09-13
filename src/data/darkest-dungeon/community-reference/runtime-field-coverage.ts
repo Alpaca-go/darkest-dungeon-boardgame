@@ -23,10 +23,7 @@ import {
   getHeartOfDarknessMechanics,
 } from '../final-encounter';
 import {
-  COMMUNITY_FINAL_TRANSITION_POLICY,
-  COMMUNITY_GESTATING_SKILL_SELECTION,
   COMMUNITY_GUARDIAN_CRITICAL_POLICY,
-  COMMUNITY_GUARDIAN_RESISTANCE_POLICY,
   COMMUNITY_GUARDIAN_VICTORY_POLICIES,
   COMMUNITY_QUEST_PROVISION_POLICY,
 } from '../../../game-engine/campaign/act-four/community-engine-capabilities';
@@ -252,8 +249,31 @@ for (const req of NORMALIZED_CORPUS.requirements) {
     }
 
     if (combatIds.has(req.requirementId)) {
-      if (field === 'resistances') { add(req.requirementId, field, 'consumed', { field, runtimeSelectorId: 'guardian.resistancePolicy', runtimeSelector: () => COMMUNITY_GUARDIAN_RESISTANCE_POLICY[req.requirementId as keyof typeof COMMUNITY_GUARDIAN_RESISTANCE_POLICY] }); continue; }
-      if (field === 'crit') { add(req.requirementId, field, 'consumed', { field, runtimeSelectorId: 'guardian.criticalPolicy', runtimeSelector: () => COMMUNITY_GUARDIAN_CRITICAL_POLICY[req.requirementId as keyof typeof COMMUNITY_GUARDIAN_CRITICAL_POLICY] }); continue; }
+      if (field === 'resistances') {
+        for (const category of ['bleed', 'blight', 'stun', 'shuffle']) {
+          const blocked = category === 'shuffle' ? 'GUARDIAN_SHUFFLE_RESISTANCE_ENGINE_UNSUPPORTED' : ['tierB-cultist-priest', 'tierB-malignant-growth'].includes(req.requirementId) ? 'SHUFFLING_SUMMON_RESISTANCE_ENGINE_UNSUPPORTED' : undefined;
+          const projection = (policy: any) => ({ resistant: policy.resistantTo.includes(category), immune: policy.immuneTo.includes(category) });
+          add(req.requirementId, `${field}.${category}`, blocked ? 'engine-unsupported-blocker' : 'consumed', {
+            field, blockerCode: blocked, sourceSelector: env => projection(sourceValue(req.requirementId, field, env)),
+            ...(!blocked ? { runtimeSelectorId: `guardian.BattleUnit.${category}`, runtimeSelector: (env: CommunityRuntimeProjectionEnvironment) => {
+              const actor = actorFor(req.requirementId, env);
+              return actor.stats ? { resistant: actor.stats.categoricalResistances.includes(category), immune: actor.stats.immunities.includes(category) } : projection(actor.resistances);
+            } } : {}),
+          });
+        }
+        continue;
+      }
+      if (field === 'crit') {
+        for (const [skill, printed] of Object.entries(sourceValue(req.requirementId, field) as Record<string, any>)) {
+          const blocked = req.requirementId.startsWith('tierB-templars-') ? 'TEMPLARS_CRIT_ENGINE_UNSUPPORTED' : ['tierB-shuffling-horror', 'tierB-cultist-priest', 'tierB-malignant-growth'].includes(req.requirementId) ? 'SHUFFLING_CRIT_ENGINE_UNSUPPORTED' : undefined;
+          const relevant = typeof printed.threshold === 'number';
+          add(req.requirementId, `${field}.${skill}`, !relevant ? 'not-runtime-relevant' : blocked ? 'engine-unsupported-blocker' : 'consumed', {
+            field, sourceSelector: env => sourceSubValue(req.requirementId, field, skill, env), blockerCode: relevant ? blocked : undefined,
+            ...(relevant && !blocked ? { runtimeSelectorId: `executeMammothCystAction.${skill}.printedCritical`, runtimeSelector: () => COMMUNITY_GUARDIAN_CRITICAL_POLICY[req.requirementId as keyof typeof COMMUNITY_GUARDIAN_CRITICAL_POLICY][skill] } : {}),
+          });
+        }
+        continue;
+      }
       if (['maxHp','dodge','speed'].includes(field)) { add(req.requirementId, field, 'consumed', { field, runtimeSelectorId: `actor.${field}`, runtimeSelector: env => actorFor(req.requirementId, env).stats?.[field] ?? actorFor(req.requirementId, env)[field] }); continue; }
       if (field === 'skillIds') { add(req.requirementId, field, 'consumed', { field, runtimeSelectorId: 'actor.skillIds', runtimeSelector: env => { const actor = actorFor(req.requirementId, env); return (actor.skills?.map((skill: any) => skill.id) ?? actor.skillIds).map((id: string) => actorSkillLocalId(req.requirementId, id)); }, normalizeSource: value => (value as any[]).map(skill => skill.sourceLocalSkillId), normalizerId: 'local-skill-ids.v1' }); continue; }
       if (field === 'd10SkillTable') { add(req.requirementId, field, 'consumed', { field, sourceSelector: () => sourceD10Map(req.requirementId), runtimeSelectorId: 'actor.d10Rolls', runtimeSelector: env => runtimeD10Map(req.requirementId, env), normalizerId: 'd10-by-local-skill.v1' }); continue; }
@@ -291,10 +311,23 @@ for (const req of NORMALIZED_CORPUS.requirements) {
     if (req.requirementId === 'tierB-shuffling-horror-room') {
       if (field === 'areaIds') add(req.requirementId, field, 'consumed', { field, runtimeSelectorId: 'shufflingRoom.areaIds', runtimeSelector: env => env.shufflingRoom.areaIds });
       else if (field === 'areaCapacities') add(req.requirementId, field, 'consumed', { field, runtimeSelectorId: 'shufflingRoom.areaCapacities', runtimeSelector: env => env.shufflingRoom.areaCapacities });
-      else add(req.requirementId, field, 'consumed', { field, runtimeSelectorId: 'shufflingGuardian.victory', runtimeSelector: () => COMMUNITY_GUARDIAN_VICTORY_POLICIES['shuffling-horror'], normalizeSource: (value: any) => ({ objective: /defeat shuffling horror/i.test(value.objective) ? 'boss-defeated' : value.objective, cleanup: /remove other monsters/i.test(value.remainingMonsters) ? 'remove-linked-actors-on-boss-victory' : value.remainingMonsters, roundLimit: /do not count/i.test(value.roundLimit) ? 'not-counted' : value.roundLimit }), normalizerId: 'shuffling-victory.v1' });
+      else if (field === 'victoryCondition') {
+        add(req.requirementId, 'victoryCondition.objective', 'consumed', { field, sourceSelector: env => sourceSubValue(req.requirementId, field, 'objective', env), runtimeSelectorId: 'shufflingGuardian.victory.objective', runtimeSelector: () => COMMUNITY_GUARDIAN_VICTORY_POLICIES['shuffling-horror'].objective, normalizeSource: value => /defeat shuffling horror/i.test(String(value)) ? 'boss-defeated' : value });
+        add(req.requirementId, 'victoryCondition.roundLimit', 'consumed', { field, sourceSelector: env => sourceSubValue(req.requirementId, field, 'roundLimit', env), runtimeSelectorId: 'shufflingGuardian.victory.roundLimit', runtimeSelector: () => COMMUNITY_GUARDIAN_VICTORY_POLICIES['shuffling-horror'].roundLimit, normalizeSource: value => /do not count/i.test(String(value)) ? 'not-counted' : value });
+        add(req.requirementId, 'victoryCondition.remainingMonsters', 'engine-unsupported-blocker', { field, sourceSelector: env => sourceSubValue(req.requirementId, field, 'remainingMonsters', env), blockerCode: 'SHUFFLING_LINKED_VICTORY_CLEANUP_ENGINE_UNSUPPORTED' });
+      }
       continue;
     }
 
+    // Definition projection is not proof of a Community prepare/start/skill transaction.
+    if (req.componentGroup === 'final-encounter' && (/skillIds|d10SkillTable|impendingDoomD10SkillMap|vacantStanceFillSource|timeHealsAll\.effect/.test(field))) {
+      add(req.requirementId, field, 'engine-unsupported-blocker', { field, blockerCode: 'FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED' });
+      continue;
+    }
+    if (req.requirementId === 'tierB-ancestor-room' && field === 'roomEffects') {
+      add(req.requirementId, field, 'engine-unsupported-blocker', { field, blockerCode: 'FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED' });
+      continue;
+    }
     const finalForm = (env: CommunityRuntimeProjectionEnvironment, formId: string) => env.profile.finalForms.find(form => form.formId === formId)!;
     const finalMap: Record<string, { form: string; kind: 'hp' | 'skills' }> = {
       'tierB-ancestor-first-form.ancestor.maxHp': { form: 'ancestor-first-form', kind: 'hp' }, 'tierB-ancestor-first-form.ancestor.skillIds': { form: 'ancestor-first-form', kind: 'skills' },
@@ -308,7 +341,6 @@ for (const req of NORMALIZED_CORPUS.requirements) {
       if (field === 'areaIds') add(req.requirementId, field, 'consumed', { field, runtimeSelectorId: 'ancestorRoom.validAreaIds', runtimeSelector: env => env.ancestorRoom.validAreaIds });
       else if (field === 'areaCapacities') add(req.requirementId, field, 'consumed', { field, runtimeSelectorId: 'ancestorRoom.areaCapacities', runtimeSelector: env => env.ancestorRoom.areaCapacities });
       else if (field === 'formAreaPlacement') add(req.requirementId, field, 'consumed', { field, runtimeSelectorId: 'ancestorRoom.stanceAreaMap', runtimeSelector: env => env.ancestorRoom.stanceAreaMap, normalizeSource: normalizeAncestorPlacement, normalizerId: 'ancestor-stance-area-map.v2' });
-      else add(req.requirementId, field, 'consumed', { field, runtimeSelectorId: 'final.transitionPolicy', runtimeSelector: () => COMMUNITY_FINAL_TRANSITION_POLICY, normalizeSource: (value: any) => { const text = `${value.roomSpecificPrintedRules ?? ''} ${value.encounterContext ?? ''}`; return { fixedOrder: /next form begins/i.test(text), questSelectedSkip: /all final forms/i.test(text), heartOfDarknessUnskippable: /all final forms/i.test(text), preserveEncounterRoom: /all final forms use this room/i.test(text), preserveHeroLifeStressStance: /without rest or changing stances/i.test(text), rebuildInitiative: /defeated form ends its battle.*next form begins/i.test(text) }; }, normalizerId: 'final-transition-policy.v1' });
       continue;
     }
 
@@ -316,7 +348,6 @@ for (const req of NORMALIZED_CORPUS.requirements) {
       if (field === 'perfectReflection.maxHp') add(req.requirementId, field, 'consumed', { field, runtimeSelectorId: 'ancestorFirst.perfect.maxWounds', runtimeSelector: env => env.ancestorFirst.reflectionCards.find(card => card.kind === 'perfect')?.maxWounds });
       else if (field === 'imperfectReflection.maxHp') add(req.requirementId, field, 'consumed', { field, runtimeSelectorId: 'ancestorFirst.imperfect.maxWounds', runtimeSelector: env => env.ancestorFirst.reflectionCards.find(card => card.kind === 'imperfect')?.maxWounds });
       else if (field.endsWith('.skillIds')) { const kind = field.startsWith('perfect') ? 'perfect' : 'imperfect'; add(req.requirementId, field, 'consumed', { field, runtimeSelectorId: `ancestorFirst.${kind}.skillIds`, runtimeSelector: env => env.ancestorFirst.reflectionCards.find(card => card.kind === kind)?.skillIds.map(localSkillId), normalizeSource: value => (value as any[]).map(skill => skill.sourceLocalSkillId), normalizerId: 'local-skill-ids.v1' }); }
-      else if (field === 'timeHealsAll.effect') add(req.requirementId, field, 'consumed', { field, runtimeSelectorId: 'ancestorFirst.fullStanceSkillEffect', runtimeSelector: env => env.ancestorFirst.fullStanceSkillEffect });
       else if (field === 'vacantStanceFillSource') add(req.requirementId, field, 'consumed', { field, runtimeSelectorId: 'ancestorFirst.vacantStanceD10Map', runtimeSelector: env => env.ancestorFirst.vacantStanceD10Map, normalizeSource: normalizeVacantStanceFill, normalizerId: 'reflection-d10-map.v2' });
       continue;
     }
@@ -324,7 +355,6 @@ for (const req of NORMALIZED_CORPUS.requirements) {
     if (req.requirementId === 'tierB-perfect-reflection' || req.requirementId === 'tierB-imperfect-reflection') { const kind = req.requirementId.includes('imperfect') ? 'imperfect' : 'perfect'; if (field === 'maxHp') add(req.requirementId, field, 'consumed', { field, runtimeSelectorId: `ancestorFirst.${kind}.maxWounds`, runtimeSelector: env => env.ancestorFirst.reflectionCards.find(card => card.kind === kind)?.maxWounds }); else add(req.requirementId, field, 'consumed', { field, runtimeSelectorId: `ancestorFirst.${kind}.skillIds`, runtimeSelector: env => env.ancestorFirst.reflectionCards.find(card => card.kind === kind)?.skillIds.map(localSkillId), normalizeSource: value => (value as any[]).map(skill => skill.sourceLocalSkillId), normalizerId: 'local-skill-ids.v1' }); continue; }
     if (req.requirementId === 'tierB-ancestor-second-form' && field === 'absoluteNothingness.areaIds') { add(req.requirementId, field, 'consumed', { field, runtimeSelectorId: 'ancestorSecond.absoluteNothingness', runtimeSelector: env => Object.fromEntries(env.ancestorSecond.absoluteNothingness.map(item => [item.linkedStance, item.areaId])) }); continue; }
     if (req.requirementId === 'tierB-absolute-nothingness' && field === 'areaId') { add(req.requirementId, field, 'consumed', { field, runtimeSelectorId: 'ancestorSecond.absoluteNothingness.areaIds', runtimeSelector: env => Object.fromEntries(env.ancestorSecond.absoluteNothingness.map(item => [item.linkedStance, item.areaId])) }); continue; }
-    if (req.requirementId === 'tierB-gestating-heart' && field === 'd10SkillTable') { add(req.requirementId, field, 'consumed', { field, runtimeSelectorId: 'gestating.skillSelection', runtimeSelector: () => COMMUNITY_GESTATING_SKILL_SELECTION, normalizeSource: (value: any) => ({ dieRollRequired: value.dieRollRequired, printedSkillNumber: 1, localSkillId: 'dispersion' }), normalizerId: 'gestating-skill-selection.v1' }); continue; }
     if (req.requirementId === 'tierB-heart-of-darkness' && field === 'impendingDoomD10SkillMap') { add(req.requirementId, field, 'consumed', { field, runtimeSelectorId: 'heartOfDarkness.impendingDoom.d10SkillMap', runtimeSelector: env => Object.fromEntries(Object.entries(env.heartOfDarkness.impendingDoom.d10SkillMap).map(([roll,id]) => [roll, localSkillId(id)])), normalizeSource: value => { const source = value as Record<string,string>; const names = sourceValue(req.requirementId, 'skillIds') as Array<{ sourceLocalSkillId: string; printedName: string }>; const id = (name: string) => names.find(skill => skill.printedName === name)?.sourceLocalSkillId; return { 1:id(source.rolls1to4),2:id(source.rolls1to4),3:id(source.rolls1to4),4:id(source.rolls1to4),5:id(source.rolls5to7),6:id(source.rolls5to7),7:id(source.rolls5to7),8:id(source.rolls8to10),9:id(source.rolls8to10),10:id(source.rolls8to10) }; }, normalizerId: 'final-d10-local-skill.v1' }); continue; }
     if (req.requirementId === 'tierB-darkest-dungeon-monster-deck') {
       if (field === 'deckComposition') add(req.requirementId, field, 'consumed', { field, runtimeSelectorId: 'profile.monsterComposition.physicalInstances', runtimeSelector: env => env.profile.monsterComposition.map(monster => ({ sourceLocalMonsterDefinitionId: monster.sourceLocalMonsterDefinitionId, count: monster.physicalInstances.length, members: monster.physicalInstances.map(member => ({ guid: member.guid, cardId: member.cardId })) })), normalizeSource: value => (value as any).composition.map((monster: any) => ({ sourceLocalMonsterDefinitionId: monster.sourceLocalMonsterDefinitionId, count: monster.count, members: monster.members })), normalizerId: 'monster-composition.v1' });

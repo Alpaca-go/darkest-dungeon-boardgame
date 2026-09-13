@@ -98,6 +98,13 @@ export function executeMammothCystAction(
   const card = state.initiativeCards.find((c) => c.id === initiativeCardId);
   if (!card) return { ...base, reason: `找不到 Initiative Card ${initiativeCardId}` };
 
+  const saved = state.skillRolls.find(record => record.initiativeCardId === initiativeCardId);
+  if (mode === 'community-reference' && saved?.executionCompleted) {
+    if (saved.targetHeroId !== options.targetHeroId) return { ...base, reason: 'Saved Community attack target mismatch' };
+    const definition = saved.owner === 'mammoth-cyst' ? state.snapshot.mammothCyst : state.snapshot.whiteCellStalk;
+    return { ...base, ok: true, actionType: 'normal-skill', skillRoll: saved, skill: definition.skills.find(skill => skill.id === saved.selectedSkillId) ?? null, damageDealt: saved.damageDealt ?? 0, stressDealt: saved.stressDealt ?? 0 };
+  }
+
   const decision = decideMammothCystAction(state, card, mode);
   if (!decision.ok) return { ...base, reason: decision.reason };
 
@@ -252,7 +259,7 @@ export function executeMammothCystAction(
       hit = outcome.hit;
       critical = outcome.critical;
       resolvedAttackDamage = outcome.damage;
-      actionRecord = { ...rolled.record, attackRoll: hitRoll as D10Roll, hit, critical, resolvedDamage: resolvedAttackDamage };
+      actionRecord = { ...rolled.record, attackRoll: hitRoll as D10Roll, hit, critical, resolvedDamage: resolvedAttackDamage, targetHeroId: options.targetHeroId };
       const persistedState = { ...rolled.state, skillRolls: rolled.state.skillRolls.map((record) => record.transactionId === actionRecord.transactionId ? actionRecord : record) };
       working = { ...working, actFourState: { ...working.actFourState, mammothCystEncounterState: persistedState } };
     } else {
@@ -292,6 +299,12 @@ export function executeMammothCystAction(
     });
     working = out.campaign;
     stressDealt = out.result.appliedAmount;
+  }
+
+  if (mode === 'community-reference') {
+    actionRecord = { ...actionRecord, targetHeroId: options.targetHeroId, executionCompleted: true, damageDealt, stressDealt };
+    const completed = working.actFourState.mammothCystEncounterState!;
+    working = { ...working, actFourState: { ...working.actFourState, mammothCystEncounterState: { ...completed, skillRolls: completed.skillRolls.map(record => record.transactionId === actionRecord.transactionId ? actionRecord : record) } } };
   }
 
   working = pushLog(

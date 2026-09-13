@@ -1,3 +1,5 @@
+> SUPERSEDED: historical unaccepted closure claim. Current decision is in phase-11a3-community-engine-capability-final-acceptance-report.md.
+
 # Phase 11A.3 Community Source-Backed Engine Capability Closure
 
 - Terminal status: **COMMUNITY-SOURCE-BACKED-ENGINE-CAPABILITIES-CLOSED**

@@ -334,7 +334,11 @@ export interface MammothCystSkillRollRecord {
   attackRoll?: D10Roll;
   hit?: boolean;
   critical?: boolean;
-  resolvedDamage?: number;
+    resolvedDamage?: number;
+    targetHeroId?: string;
+    executionCompleted?: boolean;
+    damageDealt?: number;
+    stressDealt?: number;
   transactionId: string;
   createdAt: string;
 }

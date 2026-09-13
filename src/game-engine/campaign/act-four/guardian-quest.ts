@@ -317,6 +317,9 @@ export function startGuardianBattle(
     }
   }
 
+  if (options?.mode === 'community-reference' && campaignAfter.battle) {
+    campaignAfter = { ...campaignAfter, battle: { ...campaignAfter.battle, roundLimitPolicy: 'not-counted' } };
+  }
   return {
     ok: true,
     campaign: campaignAfter,

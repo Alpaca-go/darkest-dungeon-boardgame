@@ -21,6 +21,7 @@ import {
 import { resumeTurnAfterMentalCheck } from '../battle';
 import { openBattleTurnStartWindow } from '../trinkets/battle-trinket-bridge';
 import { evaluateReplacementFlow } from '../stagecoach';
+import { commitCommunityGuardianVictory, isCommunityGuardianBattle, synchronizeCommunityGuardianDeaths } from '../campaign/act-four/community-guardian-battle';
 
 /** Mental Loop Guard 上限（防止 0 HP / 0 AP 死循环）。 */
 export const BATTLE_MENTAL_GUARD_LIMIT = 50;
@@ -70,7 +71,7 @@ export function settleBattleState(
 
   const limit = options?.mentalGuardLimit ?? BATTLE_MENTAL_GUARD_LIMIT;
 
-  let next: CampaignState = campaign;
+  let next: CampaignState = synchronizeCommunityGuardianDeaths(campaign);
   next = processBattleDeaths(next);
   next = processBattleStressEvents(next);
   next = processBattleRuleEvents(next);
@@ -122,6 +123,10 @@ export function settleBattleState(
  *   没有 active 守卫），production 删掉这一步既不丢 effects，也不重复工作。
  */
 export function commitBattleVictory(campaign: CampaignState): BattleSettlementResult {
+  if (isCommunityGuardianBattle(campaign)) {
+    const result = commitCommunityGuardianVictory(campaign);
+    return { ok: result.ok, campaign: result.campaign, error: result.ok ? null : 'battle-not-victory', mentalLoops: 0 };
+  }
   if (!campaign.battle || campaign.battle.status !== 'victory') {
     return { ok: false, campaign, error: 'battle-not-victory', mentalLoops: 0 };
   }

@@ -1,10 +1,11 @@
-import { createHash } from 'node:crypto';
+import { createHash, randomUUID } from 'node:crypto';
 import { createReadStream, existsSync } from 'node:fs';
-import { mkdir, readFile, rm } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
 import { dirname, join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { pipeline } from 'node:stream/promises';
-import { spawnSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import sharp from 'sharp';
 
 const repoRoot=resolve(dirname(fileURLToPath(import.meta.url)),'..','..');
@@ -14,7 +15,8 @@ const arg=(name)=>{const i=process.argv.indexOf(name);return i>=0?process.argv[i
 const intakePath=process.env.PHASE_11A3_INTAKE_PATH||arg('--intake'), ttsPath=process.env.PHASE_11A3_TTS_PATH||arg('--tts');
 const adversarial=process.argv.includes('--adversarial'), skipVitest=process.argv.includes('--skip-vitest'), skipImporter=process.argv.includes('--skip-importer');
 const hex64=/^[a-f0-9]{64}$/; let failures=0, passes=0;
-const pass=(m)=>{passes++;console.log(`PASS ${m}`)}, fail=(m)=>{failures++;console.error(`FAIL ${m}`)}, check=(c,m)=>c?pass(m):fail(m);
+const checks=[]; let testEvidence=null;
+const pass=(m)=>{passes++;checks.push({name:m,passed:true});console.log(`PASS ${m}`)}, fail=(m)=>{failures++;checks.push({name:m,passed:false});console.error(`FAIL ${m}`)}, check=(c,m)=>c?pass(m):fail(m);
 function stable(value){if(value===null||typeof value!=='object')return JSON.stringify(value);if(Array.isArray(value))return '['+value.map(stable).join(',')+']';return '{'+Object.keys(value).sort().map(k=>JSON.stringify(k)+':'+stable(value[k])).join(',')+'}'}
 const sha=(v)=>createHash('sha256').update(v).digest('hex');
 function contentView(m){const c=structuredClone(m);delete c.manifestContentSha256;delete c.manifestFileSha256;delete c.hashProtocol;if(c.importer){delete c.importer.downloads;delete c.importer.cacheHits}return c}
@@ -49,8 +51,19 @@ async function main(){
  check(manifest.importer.uniqueSourceUrls===new Set(manifest.assets.filter(a=>a.status==='ready').map(a=>a.sourceUrl)).size&&Number.isInteger(manifest.importer.cacheHits)&&Number.isInteger(manifest.importer.downloads),'V15 source URL/cache/download metrics separated');
  check(inventory.items.length===inventory.summary.total&&manifest.counts.total===inventory.summary.total,'V16 inventory/manifest counts agree');
  check(['community-dd-absolute-nothingness','community-dd-come-unto-your-maker'].every(id=>manifest.assets.some(a=>a.runtimeEntityId===id&&a.status==='source-missing')),'V17 source-missing truth retained');
- if(!skipVitest){const r=spawnSync(process.execPath,[join(repoRoot,'node_modules/vitest/vitest.mjs'),'run','src/data/darkest-dungeon/community-reference/community-visual-asset-resolver.test.ts','src/components/darkest-dungeon/community-visual-profile-isolation.test.tsx'],{cwd:repoRoot,encoding:'utf8'});check(r.status===0,`V18 resolver + product profile tests${r.status===0?'':`\n${r.stdout}\n${r.stderr}`}`)}
+ if(!skipVitest){
+   const scratch=await mkdtemp(join(tmpdir(),'community-visual-tests-')),report=join(scratch,'vitest.json');
+   const r=spawnSync(process.execPath,[join(repoRoot,'node_modules/vitest/vitest.mjs'),'run','src/data/darkest-dungeon/community-reference/community-visual-asset-resolver.test.ts','src/components/darkest-dungeon/community-visual-profile-isolation.test.tsx','--reporter=json',`--outputFile=${report}`],{cwd:repoRoot,encoding:'utf8'});
+   const results=JSON.parse(await readFile(report,'utf8')).testResults.flatMap(s=>s.assertionResults.map(t=>({file:s.name,title:t.fullName,status:t.status})));
+   const count=(...statuses)=>results.filter(t=>statuses.includes(t.status)).length;
+   testEvidence={expected:18,discovered:results.length,run:count('passed','failed'),passed:count('passed'),failed:count('failed'),skipped:count('pending','skipped','disabled'),todo:count('todo'),tests:results};
+   check(r.status===0&&testEvidence.discovered===18&&testEvidence.run===18&&testEvidence.passed===18&&testEvidence.failed===0&&testEvidence.skipped===0&&testEvidence.todo===0,`V18 resolver + product profile tests${r.status===0?'':`\n${r.stdout}\n${r.stderr}`}`);
+ }
  if(!skipImporter)await verifyImporter(manifest,intakePath,ttsPath);if(adversarial)runAdversarial(manifest,lock,tts);
+ if(arg('--evidence')) {
+   const evidence={runId:randomUUID(),measuredAt:new Date().toISOString(),verifiedImplementationHead:execFileSync('git',['rev-parse','HEAD'],{cwd:repoRoot,encoding:'utf8'}).trim(),manifestContentSha256:manifest.manifestContentSha256,manifestFileSha256:manifest.manifestFileSha256,checks,testEvidence,passed:passes,failed:failures,skipped:skipVitest||skipImporter,terminalVerdict:failures===0&&!skipVitest&&!skipImporter?'COMMUNITY-VISUAL-ASSETS-ACCEPTED':'FAILED'};
+   await writeFile(resolve(arg('--evidence')),JSON.stringify(evidence,null,2)+'\n');
+ }
  console.log(`--- ${failures?'FAIL':'PASS'} ${passes} passed / ${failures} failed ---`);process.exitCode=failures?1:0;
 }
 async function verifyImporter(manifest,intake,tts){const sandbox=join(repoRoot,'.artifacts/phase-11a3-final-acceptance/determinism');await rm(sandbox,{recursive:true,force:true});await mkdir(sandbox,{recursive:true});const r=spawnSync(process.execPath,[join(repoRoot,'scripts/assets/import-community-reference-assets.mjs'),'--intake',intake,'--tts',tts,'--out',join(sandbox,'assets'),'--manifest',join(sandbox,'manifest.json'),'--cache',join(repoRoot,'.artifacts/community-reference-assets/raw'),'--skip-download'],{cwd:repoRoot,encoding:'utf8'});if(r.status!==0){fail(`V19 importer rerun failed\n${r.stdout}\n${r.stderr}`);return}const rerun=JSON.parse(await readFile(join(sandbox,'manifest.json'),'utf8'));check(rerun.manifestContentSha256===manifest.manifestContentSha256&&JSON.stringify(rerun.assets)===JSON.stringify(manifest.assets),'V19 path/cache-independent canonical hash and deterministic assets')}
@@ -60,7 +73,7 @@ function runAdversarial(manifest,lock,tts){
  {const m=structuredClone(manifest);m.assets.find(a=>a.assetKind==='monster-deck-card').physicalInstances.pop();check(m.assets.filter(a=>a.assetKind==='monster-deck-card').flatMap(a=>a.physicalInstances).length!==26,'I09 removed physical instance rejected')}
  {const original=manifest.assets.find(a=>a.assetKind==='monster-deck-card').physicalInstances;const m=structuredClone(original);m[1].visualAssetId=m[0].visualAssetId;check(original[0].localSha256!==original[1].localSha256&&physicalErrors(m).length>0,'I10 unequal crops forcibly sharing one visual rejected')}
  for(const field of ['manifestContentSha256','manifestFileSha256']){const m=structuredClone(manifest);delete m[field];check(!hex64.test(m[field]||''),`H01 ${field} missing rejected`)}
- const card=lock.entries.find(e=>e.runtimeEntityId==='community-dd-templars-room').canonicalSourceReferences[0],tile=lock.entries.find(e=>e.runtimeEntityId==='community-dd-ancestor-room-tile').canonicalSourceReferences[0];const tests=[['T01',{},card],['T02',structuredClone(tts),card],['T03',structuredClone(tts),card],['T04',structuredClone(tts),tile],['T05',structuredClone(tts),card]];at(tests[1][1],card.ttsObjectPath).GUID='ffffff';at(tests[2][1],card.ttsObjectPath).CustomDeck[card.deckId].FaceURL='wrong';at(tests[3][1],tile.ttsObjectPath).CustomImage.ImageSecondaryURL='wrong';at(tests[4][1],card.ttsObjectPath).CustomDeck[card.deckId].NumWidth=99;for(const [id,v,r] of tests)check(!verifyTts(v,r),`${id} incorrect TTS provenance rejected`);check(true,'P01-P07 executed by product-level Vitest suite')
+ const card=lock.entries.find(e=>e.runtimeEntityId==='community-dd-templars-room').canonicalSourceReferences[0],tile=lock.entries.find(e=>e.runtimeEntityId==='community-dd-ancestor-room-tile').canonicalSourceReferences[0];const tests=[['T01',{},card],['T02',structuredClone(tts),card],['T03',structuredClone(tts),card],['T04',structuredClone(tts),tile],['T05',structuredClone(tts),card]];at(tests[1][1],card.ttsObjectPath).GUID='ffffff';at(tests[2][1],card.ttsObjectPath).CustomDeck[card.deckId].FaceURL='wrong';at(tests[3][1],tile.ttsObjectPath).CustomImage.ImageSecondaryURL='wrong';at(tests[4][1],card.ttsObjectPath).CustomDeck[card.deckId].NumWidth=99;for(const [id,v,r] of tests)check(!verifyTts(v,r),`${id} incorrect TTS provenance rejected`)
 }
 async function shaFile(path){const h=createHash('sha256');await pipeline(createReadStream(path),h);return h.digest('hex')}
 main().catch(e=>{console.error(e.stack||e);process.exit(1)});

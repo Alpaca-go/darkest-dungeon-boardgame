@@ -7,7 +7,7 @@
 // 关键算法（§12 verified）：Monster Initiative Opportunity 卡**抽卡时**按
 // [Stance Priority 最靠前 + 剩余行动 > 0 + 存活] 动态解析出真正行动的 Monster。
 
-import type { BattleUnit, CampaignState } from '../../../types';
+import type { BattleState, BattleUnit, CampaignState } from '../../../types';
 import type {
   HeroRoundActionBudget,
   MonsterInitiativeOpportunityCard,
@@ -333,7 +333,7 @@ export function setupShufflingHorrorEncounter(
   // ---- 把 Horror 真正进入 BattleState（复用既有 Battle 引擎，硬约束 1）----
   const horrorUnit = buildShufflingHorrorBattleUnit(mode);
   const heroUnits = aliveHeroes.map((h, i) => makeHeroUnit(h, i, campaign));
-  const battle = campaign.battle
+  const battle: BattleState | null = campaign.battle
     ? {
         ...campaign.battle,
         monsters: [...campaign.battle.monsters, horrorUnit],
@@ -344,11 +344,19 @@ export function setupShufflingHorrorEncounter(
           [...heroUnits, horrorUnit].filter((u) => u.isAlive).map((u) => u.id),
         ),
       }
-    : campaign.battle;
+    : mode === 'community-reference' ? {
+        battleId, status: 'active', round: 1, maxRounds: 8, roundLimitPolicy: 'not-counted',
+        heroes: heroUnits, monsters: [horrorUnit],
+        initiativeOrder: shuffleWithRng(rng, [...heroUnits, horrorUnit].filter(unit => unit.isAlive).map(unit => unit.id)),
+        initiativeIndex: -1, activeActorId: null, currentActionPoints: 0,
+        selectedSkillId: null, selectedTargetId: null, battleLog: [],
+        sourceRoomId: roomId, rewards: { gold: 0 }, light: campaign.light,
+      } : campaign.battle;
 
   const nextCampaign: CampaignState = {
     ...campaign,
     battle,
+    ...(mode === 'community-reference' ? { gamePhase: 'battle' as const } : {}),
     actFourState: { ...actFour, shufflingHorrorEncounterState: state },
     updatedAt: now,
   };

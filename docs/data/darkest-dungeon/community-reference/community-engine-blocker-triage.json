@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "phase11a3-community-engine-blocker-triage.v1",
+  "schemaVersion": "phase11a3-community-engine-blocker-triage.v2",
   "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE",
   "sourceEdition": "antha-complete-edition",
   "verifiedBaseHead": "0ae03e1c9f7063574238b570721ad3fd76f77764",
@@ -17,7 +17,10 @@
       "engineCapabilityMissing": false,
       "resolutionClass": "source-gap",
       "implementationTarget": null,
-      "tests": ["community-runtime-excavation.test.ts:E01", "community-runtime-excavation.test.ts:E05"]
+      "tests": [
+        "community-runtime-excavation.test.ts:E01",
+        "community-runtime-excavation.test.ts:E05"
+      ]
     },
     {
       "blockerCode": "FINAL_PROVISION_POLICY_UNRESOLVED",
@@ -29,7 +32,9 @@
       "engineCapabilityMissing": false,
       "resolutionClass": "source-gap",
       "implementationTarget": null,
-      "tests": ["community-runtime-final.test.ts:F03"]
+      "tests": [
+        "community-runtime-final.test.ts:F03"
+      ]
     },
     {
       "blockerCode": "GUARDIAN_RESISTANCE_ENGINE_UNSUPPORTED",
@@ -51,7 +56,16 @@
       "engineCapabilityMissing": true,
       "resolutionClass": "source-backed-engine",
       "implementationTarget": "shared Guardian categorical status resolution",
-      "tests": ["community-engine-capability-closure.test.ts:resistance", "community-engine-capability-save-replay.test.ts:resistance"]
+      "tests": [
+        "community-engine-capability-production.test.ts:P-resistance-templars-impaler-blight",
+        "community-engine-capability-production.test.ts:P-resistance-templars-warlord-blight",
+        "community-engine-capability-production.test.ts:P-resistance-mammoth-cyst-stun",
+        "community-engine-capability-production.test.ts:P-resistance-white-cell-stalk-bleed",
+        "community-engine-capability-production.test.ts:P-resistance-shuffling-horror-stun",
+        "community-engine-capability-save-replay.test.ts:SR-resistance-templars-impaler",
+        "community-engine-capability-save-replay.test.ts:SR-resistance-mammoth-cyst",
+        "community-engine-capability-save-replay.test.ts:SR-resistance-shuffling-horror"
+      ]
     },
     {
       "blockerCode": "GUARDIAN_CRIT_ENGINE_UNSUPPORTED",
@@ -71,7 +85,14 @@
       "engineCapabilityMissing": true,
       "resolutionClass": "source-backed-engine",
       "implementationTarget": "shared Guardian printed critical threshold/damage resolution",
-      "tests": ["community-engine-capability-closure.test.ts:critical", "community-engine-capability-save-replay.test.ts:critical"]
+      "tests": [
+        "community-engine-capability-production.test.ts:P-critical-mammoth-cyst-1",
+        "community-engine-capability-production.test.ts:P-critical-mammoth-cyst-6",
+        "community-engine-capability-production.test.ts:P-critical-white-cell-stalk-5",
+        "community-engine-capability-production.test.ts:P-critical-blocked-templars-impaler",
+        "community-engine-capability-production.test.ts:P-critical-blocked-shuffling-horror",
+        "community-engine-capability-save-replay.test.ts:SR-critical-mammoth-cyst-6"
+      ]
     },
     {
       "blockerCode": "GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED",
@@ -91,31 +112,43 @@
       "engineCapabilityMissing": false,
       "resolutionClass": "source-gap",
       "implementationTarget": null,
-      "tests": ["community-engine-capability-adversarial.test.ts:A03"]
+      "tests": [
+        "community-engine-capability-adversarial.test.ts:A11"
+      ]
     },
     {
       "blockerCode": "TEMPLARS_AREA_ADJACENCY_UNRESOLVED",
       "requirementId": "runtime-templars-room",
       "semanticPath": "areaAdjacency",
-      "sourceEvidence": ["tierB-templars-room.areaIds", "tierB-templars-room.areaCapacities"],
+      "sourceEvidence": [
+        "tierB-templars-room.areaIds",
+        "tierB-templars-room.areaCapacities"
+      ],
       "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE",
       "semanticComplete": false,
       "engineCapabilityMissing": false,
       "resolutionClass": "source-gap",
       "implementationTarget": null,
-      "tests": ["community-runtime-adversarial.test.ts:A07"]
+      "tests": [
+        "community-runtime-adversarial.test.ts:A07"
+      ]
     },
     {
       "blockerCode": "SHUFFLING_INITIAL_AREA_UNRESOLVED",
       "requirementId": "runtime-shuffling-horror-room",
       "semanticPath": "initialArea",
-      "sourceEvidence": ["tierB-shuffling-horror-room.areaIds", "tierB-shuffling-horror-room.areaCapacities"],
+      "sourceEvidence": [
+        "tierB-shuffling-horror-room.areaIds",
+        "tierB-shuffling-horror-room.areaCapacities"
+      ],
       "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE",
       "semanticComplete": false,
       "engineCapabilityMissing": false,
       "resolutionClass": "source-gap",
       "implementationTarget": null,
-      "tests": ["community-runtime-save-replay.test.ts:SR11"]
+      "tests": [
+        "community-runtime-save-replay.test.ts:SR11"
+      ]
     },
     {
       "blockerCode": "MAMMOTH_STALK_NO_SPACE_RESOLUTION_ENGINE_UNSUPPORTED",
@@ -133,7 +166,10 @@
       "engineCapabilityMissing": true,
       "resolutionClass": "source-gap",
       "implementationTarget": null,
-      "tests": ["community-runtime-truth-gate.test.ts:no-space"]
+      "tests": [
+        "community-runtime-truth-gate.test.ts:T14",
+        "community-runtime-truth-gate.test.ts:T15"
+      ]
     },
     {
       "blockerCode": "QUEST_CARD_PROVISION_POLICY_ENGINE_UNSUPPORTED",
@@ -151,31 +187,50 @@
       "engineCapabilityMissing": true,
       "resolutionClass": "source-backed-engine",
       "implementationTarget": "Community Quest start provision-policy selection",
-      "tests": ["community-engine-capability-closure.test.ts:quest-provision", "community-engine-capability-save-replay.test.ts:quest-provision"]
+      "tests": [
+        "community-engine-capability-production.test.ts:P-quest-provision",
+        "community-engine-capability-production.test.ts:P-quest-isolation",
+        "community-engine-capability-production.test.ts:P-quest-living",
+        "community-engine-capability-save-replay.test.ts:SR-quest-provision"
+      ]
     },
     {
       "blockerCode": "FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED",
       "requirementId": "runtime-community-final",
       "semanticPath": "d10SkillTable",
-      "sourceEvidence": ["tierB-gestating-heart.d10SkillTable", "asset:eed6cd:face"],
+      "sourceEvidence": [
+        "tierB-gestating-heart.d10SkillTable",
+        "asset:eed6cd:face"
+      ],
       "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE",
       "semanticComplete": true,
       "engineCapabilityMissing": true,
       "resolutionClass": "source-backed-engine",
       "implementationTarget": "existing Final action engine deterministic printed-skill selection",
-      "tests": ["community-engine-capability-closure.test.ts:final-skill", "community-engine-capability-save-replay.test.ts:final-skill"]
+      "tests": [
+        "community-engine-capability-production.test.ts:P-final-skill",
+        "community-engine-capability-save-replay.test.ts:SR-final-skill"
+      ]
     },
     {
       "blockerCode": "FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED",
       "requirementId": "runtime-community-final",
       "semanticPath": "roomEffects.encounterContext",
-      "sourceEvidence": ["tierB-ancestor-room.roomEffects.encounterContext", "rulebook:36", "rulebook:40", "asset:e3fc86:face"],
+      "sourceEvidence": [
+        "tierB-ancestor-room.roomEffects.encounterContext",
+        "rulebook:36",
+        "rulebook:40",
+        "asset:e3fc86:face"
+      ],
       "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE",
       "semanticComplete": true,
       "engineCapabilityMissing": true,
       "resolutionClass": "source-backed-engine",
       "implementationTarget": "existing Final form transition transaction",
-      "tests": ["community-engine-capability-closure.test.ts:final-transition", "community-engine-capability-save-replay.test.ts:final-transition"]
+      "tests": [
+        "community-engine-capability-production.test.ts:P-final-transition",
+        "community-engine-capability-save-replay.test.ts:SR-final-transition"
+      ]
     },
     {
       "blockerCode": "GUARDIAN_VICTORY_POLICY_ENGINE_UNSUPPORTED",
@@ -195,7 +250,52 @@
       "engineCapabilityMissing": true,
       "resolutionClass": "source-backed-engine",
       "implementationTarget": "shared idempotent Guardian victory policy dispatcher",
-      "tests": ["community-engine-capability-closure.test.ts:guardian-victory", "community-engine-capability-save-replay.test.ts:guardian-victory"]
+      "tests": [
+        "community-engine-capability-production.test.ts:P-victory-templars",
+        "community-engine-capability-production.test.ts:P-victory-mammoth",
+        "community-engine-capability-production.test.ts:P-victory-shuffling",
+        "community-engine-capability-save-replay.test.ts:SR-victory-templars",
+        "community-engine-capability-save-replay.test.ts:SR-victory-mammoth",
+        "community-engine-capability-save-replay.test.ts:SR-victory-shuffling"
+      ]
+    }
+  ],
+  "acceptanceEvidence": "community-engine-capability-final-acceptance-evidence.json",
+  "splitBlockers": [
+    {
+      "blockerCode": "TEMPLARS_CRIT_ENGINE_UNSUPPORTED",
+      "supersedesClaim": "GUARDIAN_CRIT_ENGINE_UNSUPPORTED",
+      "tests": [
+        "community-engine-capability-production.test.ts:P-critical-blocked-templars-impaler"
+      ]
+    },
+    {
+      "blockerCode": "SHUFFLING_CRIT_ENGINE_UNSUPPORTED",
+      "supersedesClaim": "GUARDIAN_CRIT_ENGINE_UNSUPPORTED",
+      "tests": [
+        "community-engine-capability-production.test.ts:P-critical-blocked-shuffling-horror"
+      ]
+    },
+    {
+      "blockerCode": "GUARDIAN_SHUFFLE_RESISTANCE_ENGINE_UNSUPPORTED",
+      "supersedesClaim": "GUARDIAN_RESISTANCE_ENGINE_UNSUPPORTED",
+      "tests": [
+        "community-engine-capability-adversarial.test.ts:A23"
+      ]
+    },
+    {
+      "blockerCode": "SHUFFLING_SUMMON_RESISTANCE_ENGINE_UNSUPPORTED",
+      "supersedesClaim": "GUARDIAN_RESISTANCE_ENGINE_UNSUPPORTED",
+      "tests": [
+        "community-engine-capability-save-replay.test.ts:SR-shuffling-deployed-blocker"
+      ]
+    },
+    {
+      "blockerCode": "SHUFFLING_LINKED_VICTORY_CLEANUP_ENGINE_UNSUPPORTED",
+      "supersedesClaim": "GUARDIAN_VICTORY_POLICY_ENGINE_UNSUPPORTED",
+      "tests": [
+        "community-engine-capability-save-replay.test.ts:SR-shuffling-deployed-blocker"
+      ]
     }
   ]
 }

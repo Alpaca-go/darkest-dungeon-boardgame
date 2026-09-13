@@ -1,4 +1,4 @@
-import type { ActiveEffect, BattleUnit, HeroResistanceProfile } from '../types';
+import type { ActiveEffect, BattleState, BattleUnit, HeroResistanceProfile } from '../types';
 import { applyBattleUnitDamage, type BattleDamageOutcome } from './damage';
 import { applyQuirkModifiersRaw, describeModifierApplications } from './quirk-passives';
 import { rollDie } from './random';
@@ -103,6 +103,24 @@ export function applyEffectsWithResistance(
     next = applyEffectToUnit(next, effect);
   }
   return { unit: next, blocked };
+}
+
+/** The same effect transaction is used by skill execution and saved-event replay. */
+export function applyStatusEffectEvent(state: BattleState, targetId: string, effects: ActiveEffect[], eventId: string): BattleState {
+  const prior = state.statusEffectEvents?.find(event => event.eventId === eventId);
+  if (prior) {
+    if (prior.targetId !== targetId || JSON.stringify(prior.effects) !== JSON.stringify(effects)) throw new Error('Status effect event payload mismatch');
+    return state;
+  }
+  const target = [...state.heroes, ...state.monsters].find(unit => unit.id === targetId);
+  if (!target || !target.isAlive) throw new Error('Status effect target is unavailable');
+  const result = applyEffectsWithResistance(target, effects);
+  return {
+    ...state,
+    heroes: state.heroes.map(unit => unit.id === targetId ? result.unit : unit),
+    monsters: state.monsters.map(unit => unit.id === targetId ? result.unit : unit),
+    statusEffectEvents: [...(state.statusEffectEvents ?? []), { eventId, targetId, effects: structuredClone(effects), blocked: result.blocked }],
+  };
 }
 
 /** 把拦截记录格式化为战斗日志片段（无拦截时返回空串）。 */

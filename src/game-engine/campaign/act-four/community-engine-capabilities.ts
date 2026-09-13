@@ -105,7 +105,7 @@ export function rollCommunityQuestProvisions(
       const roll = Math.min(6, Math.max(1, Math.floor(rng() * 6) + 1));
       const rolledFace = PROVISION_FACES[roll - 1];
       const selectedFace = rolledFace === 'wild' ? chooseWild?.(heroId, dieIndex) : rolledFace;
-      if (!selectedFace) return { ok: false, reason: `Wild Provision choice required for ${heroId} die ${dieIndex + 1}` };
+      if (!selectedFace || !Object.prototype.hasOwnProperty.call(current, selectedFace)) return { ok: false, reason: `Wild Provision choice required for ${heroId} die ${dieIndex + 1}` };
       const acceptedIntoPool = Object.values(provisions).reduce((sum, count) => sum + count, 0) < 16;
       if (acceptedIntoPool) provisions[selectedFace] += 1;
       dice.push({ heroId, dieIndex, roll, rolledFace, selectedFace, acceptedIntoPool });

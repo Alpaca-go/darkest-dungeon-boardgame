@@ -357,6 +357,14 @@ export interface BattleStressEvent {
 
 /** 战斗状态。 */
 export interface BattleState {
+  /** Source-backed Guardian rooms do not use the ordinary round timeout. */
+  roundLimitPolicy?: 'not-counted';
+  statusEffectEvents?: Array<{
+    eventId: string;
+    targetId: string;
+    effects: ActiveEffect[];
+    blocked: Array<{ type: ActiveEffect['type']; reason: 'immune' | 'resisted'; durationReducedFrom?: number; durationReducedTo?: number }>;
+  }>;
   battleId: string;
   status: BattleStatus;
   round: number;
