@@ -1,0 +1,261 @@
+{
+  "schemaVersion": "phase11a3-community-source-blocker-resolution.v1",
+  "resolutionRunId": "phase11a3-source-resolution-2026-09-13-r1",
+  "sourceEdition": "antha-complete-edition",
+  "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE",
+  "baselineHead": "8bb3b23fd3ab10b8258cee6f54328595447022f6",
+  "terminalState": "COMMUNITY-SOURCE-BLOCKERS-RESEARCHED",
+  "scope": "Source research and provenance resolution only. No resolved value is wired into production gameplay.",
+  "inputs": [
+    { "name": "Phase11A3_CompleteEdition_Source_Intake_Package.json", "sha256": "382e479f84f79a9b3cc6b0256b2fa5dea100b3576244988f180b49e75ed78d2a", "authority": "COMMUNITY_RETAIL_REFERENCE" },
+    { "name": "Phase11A3_CompleteEdition_Source_Extraction_Audit_Report.md", "sha256": "53bde7d1e181fbc536ae81de0113c800f94a34bf7292572adf5ff5129bfa9cbb", "authority": "COMMUNITY_RETAIL_REFERENCE" },
+    { "name": "3657612854.json", "sha256": "d2fe21a6aa294f80fb47e56677c3a74090c3dc131361d798dfde709f6a3a64a2", "authority": "COMMUNITY_RETAIL_REFERENCE" },
+    { "name": "DD_EN_COREBOX_RULES.pdf", "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae", "authority": "OFFICIAL_RULEBOOK" }
+  ],
+  "summary": { "targets": 11, "resolved": 5, "partiallyResolved": 4, "unresolved": 2, "conflicting": 0, "astraReviewRequired": 0 },
+  "targets": [
+    {
+      "blockerCode": "FINAL_PROVISION_POLICY_UNRESOLVED",
+      "semanticQuestion": "What exact provision procedure applies before the Final Encounter?",
+      "currentState": "The runtime deliberately blocks before rolling; the prior intake recorded only that a roll occurs.",
+      "searchedSources": ["accepted normalized requirements and source index", "TTS provision dice and aid-card objects", "accepted canonical quest assets", "Core Rulebook pp. 10, 12, 36", "Official Demo overlap (not available)", "external discovery sources (not needed)"],
+      "sourceFindings": [
+        { "source": "rulebook:36", "finding": "The Final Encounter explicitly says to roll for Provisions before the fight." },
+        { "source": "rulebook:12", "finding": "Roll two Provision Dice per Hero; each player resolves their own wilds; all dice enter a common pool capped at 16." },
+        { "source": "rulebook:10", "finding": "The component pool contains 16 Provision Dice." }
+      ],
+      "verdict": "resolved",
+      "resolvedValue": { "dicePerHero": 2, "rollers": "each player rolls two dice for their Hero", "dieFaces": ["food", "bandage", "potion", "torch", "tool", "wild"], "grantTable": { "food": 1, "bandage": 1, "potion": 1, "torch": 1, "tool": 1 }, "wild": "the player who rolled it turns that die to any provision side", "pool": { "kind": "shared", "maximumDice": 16, "overflow": "do not exceed 16" }, "timing": "after the final Hamlet preparation and before the Final Encounter begins" },
+      "resolvedSemantics": { "complete": true, "leaves": ["dice count", "roller ownership", "six die faces", "one-die-per-face grant", "wild choice", "shared pool cap", "pre-fight timing", "save/replay receipt requirements"] },
+      "sourceAuthority": ["OFFICIAL_RULEBOOK"],
+      "sourceReferences": ["rulebook:10", "rulebook:12", "rulebook:36"],
+      "confidence": "high",
+      "requiresAstraReview": false,
+      "runtimeDependencies": ["Persist rolled faces, post-wild faces, player choices, pool before/after and an idempotent transaction receipt; consume only in the later playable-closure branch."],
+      "notes": "This conclusion applies the explicitly referenced standard Roll for Provisions procedure; it does not copy the Prototype final policy."
+    },
+    {
+      "blockerCode": "MONSTER_DECK_DRAW_POLICY_UNRESOLVED",
+      "semanticQuestion": "What physical deck procedure governs Darkest Dungeon encounter draws and returns?",
+      "currentState": "Composition was known (26 physical cards / 9 identities), but saved DeckIDs order was correctly rejected as draw policy.",
+      "searchedSources": ["accepted monster-deck requirement and source index", "TTS deck GUID 02ef1c and all 26 contained cards", "accepted canonical monster card images", "Core Rulebook pp. 10, 17, 25, 31, 35, 41", "Official Demo overlap (not available)", "external discovery sources (not needed)"],
+      "sourceFindings": [
+        { "source": "rulebook:35", "finding": "At Act IV, remove prior Monster cards, bring in Darkest Dungeon cards and shuffle them into the Monster deck." },
+        { "source": "rulebook:17", "finding": "Draw from the physical deck until Stance slots are filled; Front fills from Aggressive, Back from Support; duplicate names are allowed and distinguished by token color; Large monsters occupy two slots and have an explicit overflow replacement rule." },
+        { "source": "rulebook:25", "finding": "At Battle End, shuffle every Monster card used in that battle back into the Monster deck." },
+        { "source": "rulebook:41", "finding": "Gestating Heart summons a random Darkest Dungeon Monster into the next available Stance." },
+        { "source": "tts:02ef1c", "finding": "The physical deck contains 26 cards across nine printed identities; DeckIDs serialization order is not used." }
+      ],
+      "verdict": "resolved",
+      "resolvedValue": { "physicalDeck": true, "setup": "shuffle the 26 Darkest Dungeon Monster cards when Act IV begins", "ordinaryEncounterDraw": "draw the top physical card repeatedly until all four Monster Stance slots are filled", "frontBackPlacement": { "front": "first empty slot from Aggressive toward Support", "back": "first empty slot from Support toward Aggressive" }, "duplicates": "allowed as distinct physical cards; use printed token colors to distinguish duplicate names", "largeMonster": "occupies two slots; if it cannot fit after three Monsters were drawn, discard the last non-large Monster drawn, shift as needed, and place the Large Monster", "return": "at Battle End shuffle all Monster cards used in Battle back into the deck", "reshuffle": "Battle End return-and-shuffle; no saved-order or logical-identity reshuffle", "gestatingSummon": "select a random physical Darkest Dungeon Monster for the next available Stance; normal summon full-Stance rule prevents a summon when no Stance is available", "encounterComposition": "the physical draw and Front/Back/Large placement procedure determines composition" },
+      "resolvedSemantics": { "complete": true, "leaves": ["physical shuffle", "top-card draw", "draw count/stop condition", "Front/Back placement", "duplicates", "Large overflow", "post-battle return", "reshuffle timing", "Gestating summon", "encounter composition"] },
+      "sourceAuthority": ["COMMUNITY_RETAIL_REFERENCE", "OFFICIAL_RULEBOOK"],
+      "sourceReferences": ["tts:02ef1c", "rulebook:17", "rulebook:25", "rulebook:30", "rulebook:31", "rulebook:35", "rulebook:41"],
+      "confidence": "high",
+      "requiresAstraReview": false,
+      "runtimeDependencies": ["Physical-card instance deck state", "deterministic shuffle/draw receipts", "Front/Back and Large placement", "used-card return transaction"],
+      "notes": "Uniform selection among nine logical identities and serialized DeckIDs order remain forbidden. The rulebook's random Gestating summon is not evidence for equal identity weighting."
+    },
+    {
+      "blockerCode": "SHUFFLING_INITIAL_AREA_UNRESOLVED",
+      "semanticQuestion": "Where do the Horror, its linked summons and Heroes begin?",
+      "currentState": "Room areas and capacities were accepted, but the runtime stopped before assigning the Horror's initial area.",
+      "searchedSources": ["accepted Shuffling requirements", "TTS Shuffling bag and GUIDs", "canonical Room 10 card/tile and battle cards", "Core Rulebook pp. 16, 31, 40", "Official Demo overlap (not available)"],
+      "sourceFindings": [
+        { "source": "rulebook:40", "finding": "Place Shuffling Horror in Aggressive Stance on both tracker and corresponding Room Tile area; Priest and Growth remain off-board until summoned." },
+        { "source": "rulebook:31", "finding": "A summoned Monster uses the first empty Stance and corresponding Room Tile area unless a Boss says otherwise." },
+        { "source": "rulebook:16", "finding": "Hero miniatures use the Room Tile areas corresponding to their selected Hero Stances." }
+      ],
+      "verdict": "resolved",
+      "resolvedValue": { "horror": { "stance": "aggressive", "area": "Room 10 Monster Aggressive marker area (source-local r10-SW)" }, "cultistPriest": { "initialState": "reserve/off-board", "deployment": "first empty Monster Stance and corresponding area when Echoing Disassembly summons it" }, "malignantGrowth": { "initialState": "reserve/off-board", "deployment": "next first empty Monster Stance and corresponding area when Echoing Disassembly summons it after Priest" }, "heroes": "place each Hero in the Room 10 area corresponding to that Hero's selected Stance" },
+      "resolvedSemantics": { "complete": true, "leaves": ["Horror stance and area", "Priest reserve/deployment", "Growth reserve/deployment", "Hero stance-area placement"] },
+      "sourceAuthority": ["COMMUNITY_RETAIL_REFERENCE", "OFFICIAL_RULEBOOK"],
+      "sourceReferences": ["asset:9a87c7:face", "asset:7a3fa9:secondaryUrl", "asset:450ace:face", "rulebook:16", "rulebook:31", "rulebook:40"],
+      "confidence": "high",
+      "requiresAstraReview": false,
+      "runtimeDependencies": ["Bind source-local Room 10 stance markers to runtime area IDs", "summon placement and resistance", "linked-victory cleanup"],
+      "notes": "The reserve actors have no initial area. This is a sourced absence, not a default placement."
+    },
+    {
+      "blockerCode": "TEMPLARS_AREA_ADJACENCY_UNRESOLVED",
+      "semanticQuestion": "What is the complete traversable adjacency graph for Room 9, including five inset pits?",
+      "currentState": "Fourteen source-local areas, capacities, pit locations and marker positions are known; no accepted textual adjacency convention was found.",
+      "searchedSources": ["accepted Room 9 normalized geometry", "TTS GUID afa508 and tile GUID 7a3fa9", "canonical Room 9 card and tile", "Core Rulebook pp. 16, 18, 19, 21, 24, 39", "Official Demo overlap (not available)", "external discovery sources (not used as proof)"],
+      "sourceFindings": [
+        { "source": "asset:7a3fa9:imageUrl", "finding": "Artwork visibly partitions nine ordinary areas and five capacity-one inset pits and shows stance markers/entrances." },
+        { "source": "rulebook:18", "finding": "Movement counts Areas by Speed but does not define whether touching corners, openings, or inset pit borders create edges." },
+        { "source": "rulebook:39", "finding": "Pit Toss places a target into a rolled pit but does not define an edge out of that pit." }
+      ],
+      "verdict": "partially-resolved",
+      "resolvedValue": { "areas": 14, "ordinaryAreas": 9, "pits": 5, "pitCapacity": 1, "knownMarkers": "Hero/Monster stance markers and two edge entrances are visually identified", "adjacencyGraph": null },
+      "resolvedSemantics": { "complete": false, "resolvedLeaves": ["area inventory", "capacities", "pit identity", "marker locations"], "missingLeaves": ["normative edge convention", "complete ordinary-area edges", "pit entrance/exit edges", "corner-touch rule"] },
+      "sourceAuthority": ["COMMUNITY_RETAIL_REFERENCE", "OFFICIAL_RULEBOOK"],
+      "sourceReferences": ["asset:afa508:face", "asset:7a3fa9:imageUrl", "rulebook:18", "rulebook:19", "rulebook:39"],
+      "confidence": "medium",
+      "requiresAstraReview": false,
+      "runtimeDependencies": ["Accepted normative topology/adjacency ruling", "Pit exit destination legality", "range and path-distance calculation"],
+      "notes": "A graph traced only from artwork would violate the execution contract; therefore no edge list is promoted."
+    },
+    {
+      "blockerCode": "EXCAVATION_PROVISION_DIE_MAP_UNRESOLVED",
+      "semanticQuestion": "What does each Excavation Site provision die grant and how is it added to the pool?",
+      "currentState": "The Room timing was known, but the runtime-specific face map was empty.",
+      "searchedSources": ["accepted normalized/intake data", "TTS provision dice", "accepted DD room assets", "Core Rulebook pp. 10, 12, 36", "Official Demo overlap (not available)"],
+      "sourceFindings": [
+        { "source": "rulebook:36", "finding": "On entering an Excavation Site, each Hero immediately rolls one Provision die and adds it to the pool." },
+        { "source": "rulebook:12", "finding": "Provision dice faces are Food, Bandage, Potion, Torch, Tool and Wild; Wild is turned to a chosen provision side and the common pool cannot exceed 16 dice." }
+      ],
+      "verdict": "resolved",
+      "resolvedValue": { "dicePerHero": 1, "rollers": "each Hero/player", "timing": "immediately on entering the Excavation Site, before its free Rest is completed", "faceMap": { "food": { "provision": "food", "quantity": 1 }, "bandage": { "provision": "bandage", "quantity": 1 }, "potion": { "provision": "potion", "quantity": 1 }, "torch": { "provision": "torch", "quantity": 1 }, "tool": { "provision": "tool", "quantity": 1 }, "wild": { "choice": ["food", "bandage", "potion", "torch", "tool"], "quantity": 1 } }, "pool": { "kind": "shared", "maximumDice": 16 } },
+      "resolvedSemantics": { "complete": true, "leaves": ["one die per Hero", "entry timing", "six-face map", "wild choice", "shared pool", "pool cap"] },
+      "sourceAuthority": ["OFFICIAL_RULEBOOK"],
+      "sourceReferences": ["rulebook:10", "rulebook:12", "rulebook:36"],
+      "confidence": "high",
+      "requiresAstraReview": false,
+      "runtimeDependencies": ["Persist per-Hero roll and Wild choice", "idempotent pool grant", "pool-cap handling"],
+      "notes": "The Final and Excavation procedures are recorded separately. Their shared face map is sourced from the same physical Provision Die rules, not assumed by equality."
+    },
+    {
+      "blockerCode": "TEMPLARS_PIT_EXIT_RULE_UNRESOLVED",
+      "semanticQuestion": "How, when and to where does a Hero leave a spiked pit?",
+      "currentState": "Pit entry, capacity and damage/Bleed are known; exit was absent from the intake.",
+      "searchedSources": ["accepted Room 9 requirement", "TTS Room 9 and Pit Toss objects", "canonical Room 9 card/tile and Templar ability cards", "Core Rulebook pp. 18, 21, 39", "Official Demo overlap (not available)", "external discovery sources (no accepted underlying source located)"],
+      "sourceFindings": [
+        { "source": "asset:afa508:face", "finding": "The Room card defines entry triggers and consequences only." },
+        { "source": "asset:f236b8:face", "finding": "Pit Toss defines placement and no-space ignore behavior only." },
+        { "source": "rulebook:18", "finding": "Generic Move rules exist, but the contract forbids inferring a pit-specific exit rule from them." }
+      ],
+      "verdict": "unresolved",
+      "resolvedValue": null,
+      "resolvedSemantics": { "complete": false, "missingLeaves": ["exit method", "action/resource cost", "legal destination", "movement restrictions", "timing", "relationship to normal movement"] },
+      "sourceAuthority": ["COMMUNITY_RETAIL_REFERENCE", "OFFICIAL_RULEBOOK"],
+      "sourceReferences": ["asset:afa508:face", "asset:7a3fa9:imageUrl", "asset:f236b8:face", "rulebook:18", "rulebook:21", "rulebook:39"],
+      "confidence": "low",
+      "requiresAstraReview": false,
+      "runtimeDependencies": ["Accepted pit-exit ruling", "TEMPLARS_AREA_ADJACENCY_UNRESOLVED"],
+      "notes": "No rule is guessed; ordinary movement is not promoted into a pit rule."
+    },
+    {
+      "blockerCode": "GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED",
+      "semanticQuestion": "Which Guardian special-effect leaves are source-complete, which engine primitives exist, and which leaves depend on other blockers?",
+      "currentState": "Prior intake captured skill names/numbers and core combat values, while the aggregate special-skill blocker had no leaf inventory.",
+      "searchedSources": ["accepted Guardian normalized requirements", "TTS battle/ability GUIDs", "seven canonical Guardian battle cards and three ability cards", "Core Rulebook pp. 20, 21, 31, 39, 40", "current engine capability evidence", "Official Demo overlap (not available)"],
+      "sourceFindings": [
+        { "source": "guardian-card-set", "finding": "Damage, healing, Bleed, Blight, Stun, Buff/Debuff, Stress, Push, Teleport, Pit Toss and stance-shuffle icons/text are readable with pp. 20-21 conventions." },
+        { "source": "asset:450ace:face", "finding": "Echoing Disassembly's conditional Priest-then-Growth summon order is explicit." },
+        { "source": "engine-final-acceptance", "finding": "Healing, Mammoth teleport, Pit Toss and Undulations primitives exist; other production wiring remains narrow/partial." }
+      ],
+      "verdict": "partially-resolved",
+      "resolvedValue": {
+        "leafInventory": [
+          { "actor": "templar-impaler", "skill": "Torment", "semanticLeaf": "damage attack", "sourceComplete": true, "enginePrimitiveAvailable": true, "dependsOn": [] },
+          { "actor": "templar-impaler", "skill": "Body Slam", "semanticLeaf": "on-hit Stun 2 turns then Pit Toss", "sourceComplete": true, "enginePrimitiveAvailable": true, "dependsOn": ["TEMPLARS_AREA_ADJACENCY_UNRESOLVED", "TEMPLARS_PIT_EXIT_RULE_UNRESOLVED"] },
+          { "actor": "templar-impaler", "skill": "Revelation", "semanticLeaf": "target suffers +2 Stress after hit", "sourceComplete": true, "enginePrimitiveAvailable": true, "dependsOn": [] },
+          { "actor": "templar-warlord", "skill": "Torment", "semanticLeaf": "damage attack", "sourceComplete": true, "enginePrimitiveAvailable": true, "dependsOn": [] },
+          { "actor": "templar-warlord", "skill": "Stinger Shot", "semanticLeaf": "Blight 3 for 3 turns and Debuff 2 turns after hit", "sourceComplete": true, "enginePrimitiveAvailable": true, "dependsOn": [] },
+          { "actor": "templar-warlord", "skill": "Revelation", "semanticLeaf": "target suffers +2 Stress after hit", "sourceComplete": true, "enginePrimitiveAvailable": true, "dependsOn": [] },
+          { "actor": "mammoth-cyst", "skill": "Bulging Gaze", "semanticLeaf": "Debuff 1 turn and +1 Stress after hit", "sourceComplete": true, "enginePrimitiveAvailable": true, "dependsOn": [] },
+          { "actor": "mammoth-cyst", "skill": "Digestion", "semanticLeaf": "Blight 3 for 2 turns after hit", "sourceComplete": true, "enginePrimitiveAvailable": true, "dependsOn": [] },
+          { "actor": "mammoth-cyst", "skill": "Revivify", "semanticLeaf": "self Buff 2 turns and heal 15", "sourceComplete": true, "enginePrimitiveAvailable": true, "dependsOn": [] },
+          { "actor": "white-cell-stalk", "skill": "Reconstitute", "semanticLeaf": "heal Mammoth Cyst 14 and Buff it for 2 turns", "sourceComplete": true, "enginePrimitiveAvailable": true, "dependsOn": [] },
+          { "actor": "white-cell-stalk", "skill": "Displace", "semanticLeaf": "Debuff 2 turns and Push 2 after hit", "sourceComplete": true, "enginePrimitiveAvailable": false, "dependsOn": ["room topology/path movement"] },
+          { "actor": "white-cell-stalk", "skill": "Teleport", "semanticLeaf": "target suffers +2 Stress and teleports by Room 11 d10 map after hit", "sourceComplete": true, "enginePrimitiveAvailable": true, "dependsOn": [] },
+          { "actor": "shuffling-horror", "skill": "Lacerate", "semanticLeaf": "Bleed 3 for 3 turns after hit", "sourceComplete": true, "enginePrimitiveAvailable": true, "dependsOn": [] },
+          { "actor": "shuffling-horror", "skill": "Undulations", "semanticLeaf": "randomly permute all Hero Stances from Aggressive to Support", "sourceComplete": true, "enginePrimitiveAvailable": true, "dependsOn": [] },
+          { "actor": "shuffling-horror", "skill": "Echoing Disassembly", "semanticLeaf": "conditional Priest then Growth summon; attack also prints Stress +2 and Light -1", "sourceComplete": true, "enginePrimitiveAvailable": false, "dependsOn": ["SHUFFLING_INITIAL_AREA_UNRESOLVED", "SHUFFLING_SUMMON_RESISTANCE_ENGINE_UNSUPPORTED"] },
+          { "actor": "cultist-priest", "skill": "Death Lash", "semanticLeaf": "Debuff 1 turn and +1 Stress after hit", "sourceComplete": true, "enginePrimitiveAvailable": true, "dependsOn": [] },
+          { "actor": "cultist-priest", "skill": "The Finger", "semanticLeaf": "Bleed 3 for 3 turns, +2 Stress and +5 damage versus Marked after hit", "sourceComplete": true, "enginePrimitiveAvailable": false, "dependsOn": ["conditional damage modifier"] },
+          { "actor": "malignant-growth", "skill": "Maul the Flesh", "semanticLeaf": "Bleed 2 for 3 turns after hit", "sourceComplete": true, "enginePrimitiveAvailable": true, "dependsOn": [] },
+          { "actor": "malignant-growth", "skill": "Daze the Mind", "semanticLeaf": "Stun 2 turns after hit", "sourceComplete": true, "enginePrimitiveAvailable": true, "dependsOn": [] }
+        ]
+      },
+      "resolvedSemantics": { "complete": false, "resolvedLeaves": 19, "missingLeaves": ["production orchestration for all 19 leaves", "Displace path choice", "The Finger conditional modifier integration", "deployed Shuffling summon resistance/cleanup"] },
+      "sourceAuthority": ["COMMUNITY_RETAIL_REFERENCE", "OFFICIAL_RULEBOOK"],
+      "sourceReferences": ["asset:efa5a4:face", "asset:f88d6a:face", "asset:c4a35e:face", "asset:1fb052:face", "asset:ccf3dc:face", "asset:1b261d:face", "asset:a34fbd:face", "asset:f236b8:face", "asset:e4246d:face", "asset:a9ab77:face", "asset:450ace:face", "rulebook:20", "rulebook:21", "rulebook:31", "rulebook:39", "rulebook:40"],
+      "confidence": "high",
+      "requiresAstraReview": false,
+      "runtimeDependencies": ["No runtime implementation in this branch", "TEMPLARS_AREA_ADJACENCY_UNRESOLVED", "TEMPLARS_PIT_EXIT_RULE_UNRESOLVED", "SHUFFLING_SUMMON_RESISTANCE_ENGINE_UNSUPPORTED", "SHUFFLING_LINKED_VICTORY_CLEANUP_ENGINE_UNSUPPORTED"],
+      "notes": "Source completeness and engine availability are deliberately separate. Existing Prototype behavior was not used as source evidence."
+    },
+    {
+      "blockerCode": "MAMMOTH_STALK_NO_SPACE_RESOLUTION_ENGINE_UNSUPPORTED",
+      "semanticQuestion": "How is no-space displacement resolved when White Cell Stalk is summoned?",
+      "currentState": "The prior intake quoted the generic summon rule, but exact path/tie behavior and runtime topology were not complete.",
+      "searchedSources": ["accepted Mammoth Room requirement", "TTS Mammoth/Stalk objects", "canonical Room 11 card/tile", "Core Rulebook pp. 21, 24, 31, 39", "current engine capability evidence", "Official Demo overlap (not available)"],
+      "sourceFindings": [
+        { "source": "rulebook:31", "finding": "If the spawn area lacks space, move a Hero to the nearest available Area; if Monsters fully occupy it, players choose which Monster to move to the nearest available Area." },
+        { "source": "rulebook:24", "finding": "When more than one eligible Area exists for ordinary Monster movement, the targeted player decides, but this text does not expressly govern summon displacement." },
+        { "source": "asset:bc9c87:imageUrl", "finding": "Room 11 geometry is visible, but no normative tie-break or path-distance text is printed." }
+      ],
+      "verdict": "partially-resolved",
+      "resolvedValue": { "heroDisplacement": "a Hero must move to the nearest available Area", "monsterDisplacement": "if Monsters fully occupy the spawn area, players choose which Monster to move to the nearest available Area", "playerChoice": "players choose the displaced Monster only", "tieBreaking": null, "pathDistanceDefinition": null },
+      "resolvedSemantics": { "complete": false, "resolvedLeaves": ["Hero displacement", "Monster displacement", "choice of displaced Monster"], "missingLeaves": ["destination tie-break", "path-distance metric", "complete normative Room 11 adjacency"] },
+      "sourceAuthority": ["COMMUNITY_RETAIL_REFERENCE", "OFFICIAL_RULEBOOK"],
+      "sourceReferences": ["asset:bb91b0:face", "asset:bc9c87:imageUrl", "rulebook:21", "rulebook:24", "rulebook:31", "rulebook:39"],
+      "confidence": "medium",
+      "requiresAstraReview": false,
+      "runtimeDependencies": ["Normative Room 11 adjacency/path metric", "destination tie-breaking policy", "atomic displacement plus summon transaction"],
+      "notes": "The general targeted-player movement choice on p.24 is not silently extended to summon-displacement destination ties."
+    },
+    {
+      "blockerCode": "ABSOLUTE_NOTHINGNESS_STANCE_UNRESOLVED",
+      "semanticQuestion": "Are Absolute Nothingness miniatures Stance Tracker actors, and what placement/target/turn/movement semantics apply?",
+      "currentState": "The intake treated a required 'stance' field as ambiguous even though area placement was known.",
+      "searchedSources": ["accepted Final requirements", "three TTS model GUIDs", "canonical Ancestor Room tile and second-form ability/battle assets", "Core Rulebook pp. 40-41", "Official Demo overlap (not available)", "external discovery sources (not needed)"],
+      "sourceFindings": [
+        { "source": "rulebook:40", "finding": "Only the Ancestor second-form Battle Card is placed in Aggressive Stance; the three Nothingness miniatures are placed directly in Defense/Ranged/Support marked Room areas." },
+        { "source": "rulebook:41", "finding": "They are untargetable, occupy one space each, receive no Initiative card, and are removed when the second form is defeated." },
+        { "source": "tts-models", "finding": "GUIDs 4c0e88, db000a and aff870 are Custom_Model objects with no Battle Card or script metadata." }
+      ],
+      "verdict": "resolved",
+      "resolvedValue": { "stanceTrackerStance": null, "classification": "room occupancy miniature, not an independent Stance Tracker actor", "placement": ["Monster Defense-marked area", "Monster Ranged-marked area", "Monster Support-marked area"], "count": 3, "capacity": "occupies one area space each", "targetable": false, "initiativeCards": 0, "turns": "none", "movement": "no source-defined movement procedure", "removal": "remove all when Ancestor second form is defeated" },
+      "resolvedSemantics": { "complete": true, "leaves": ["non-stance classification", "three placements", "space occupancy", "untargetability", "no initiative/turn", "no movement procedure", "removal timing"] },
+      "sourceAuthority": ["COMMUNITY_RETAIL_REFERENCE", "OFFICIAL_RULEBOOK"],
+      "sourceReferences": ["tts:4c0e88", "tts:db000a", "tts:aff870", "asset:bc9c87:secondaryUrl", "asset:4cd186:face", "rulebook:40", "rulebook:41"],
+      "confidence": "high",
+      "requiresAstraReview": false,
+      "runtimeDependencies": ["Represent as non-acting room occupants rather than synthetic Battle Cards", "area capacity accounting", "second-form cleanup"],
+      "notes": "Null stance is the resolved source value; it must not be replaced with a guessed tracker stance."
+    },
+    {
+      "blockerCode": "GESTATING_HEART_LETHAL_TIMING_UNRESOLVED",
+      "semanticQuestion": "What is the exact ordering of Ichor, lethal damage, cleanup and form transition?",
+      "currentState": "The card/rulebook define Ichor and defeat cleanup separately but do not provide a lethal-hit timing ruling.",
+      "searchedSources": ["accepted Gestating Heart requirement", "TTS Battle and Ability card objects", "canonical Gestating Heart assets", "Core Rulebook pp. 20, 24, 36, 40-41", "Official Demo overlap (not available)", "external discovery sources (no accepted ruling located)"],
+      "sourceFindings": [
+        { "source": "rulebook:41", "finding": "A Hero who attacks and Wounds the Heart suffers Blight 2 for 3 turns and the Heart heals 2; on defeat remove all other Monsters/Monster Initiative and prepare the next phase." },
+        { "source": "rulebook:20", "finding": "Target effects normally occur after other effects of a Skill, but Ichor is a defender reaction and the rule does not explicitly order a lethal case." },
+        { "source": "asset:a7bbae:face", "finding": "The ability card repeats Ichor without a lethal exception or ordering clause." }
+      ],
+      "verdict": "partially-resolved",
+      "resolvedValue": { "woundedReaction": { "trigger": "a Hero attacks and Wounds the Gestating Heart", "heroEffect": "Blight 2 for 3 turns", "heartEffect": "heal 2" }, "defeatCleanup": "remove all other Monsters and Monster Initiative Cards, then prepare the next phase", "lethalOrdering": null, "pendingEffectsOrdering": null },
+      "resolvedSemantics": { "complete": false, "resolvedLeaves": ["Ichor trigger and values", "defeat cleanup", "form-transition preparation"], "missingLeaves": ["Ichor versus lethal defeat order", "whether lethal can be reversed by heal 2", "pending attack/effect completion", "Death's Door interactions"] },
+      "sourceAuthority": ["COMMUNITY_RETAIL_REFERENCE", "OFFICIAL_RULEBOOK"],
+      "sourceReferences": ["asset:eed6cd:face", "asset:a7bbae:face", "rulebook:20", "rulebook:24", "rulebook:36", "rulebook:40", "rulebook:41"],
+      "confidence": "medium",
+      "requiresAstraReview": false,
+      "runtimeDependencies": ["Accepted lethal-timing ruling or errata", "atomic attack/reaction/defeat transition ordering"],
+      "notes": "The absence of a printed exception is not treated as permission to invent a lethal ordering."
+    },
+    {
+      "blockerCode": "COME_UNTO_YOUR_MAKER_UNRESOLVED",
+      "semanticQuestion": "What is the tabletop definition of Come Unto Your Maker?",
+      "currentState": "No accepted tabletop component or rulebook passage with this title was identified by the prior audit.",
+      "searchedSources": ["accepted Final requirements and all cited source refs", "recursive TTS nickname/description/GMNotes/Lua search", "canonical Ancestor/Heart battle, ability, room and bag assets", "Core Rulebook pp. 36, 40-41", "Official Demo overlap (not available)", "external community references (discovery-only; none promoted)"],
+      "sourceFindings": [
+        { "source": "tts-search", "finding": "No matching title or definition exists in object metadata or Lua; 42033/42034 and 47100/47200 are different ability cards." },
+        { "source": "rulebook:40-41", "finding": "The complete printed Final Encounter section contains no Come Unto Your Maker definition." },
+        { "source": "accepted-assets", "finding": "Ancestor Room, four form Battle/Ability cards and Heart bag overlap do not contain the title." }
+      ],
+      "verdict": "unresolved",
+      "resolvedValue": null,
+      "resolvedSemantics": { "complete": false, "missingLeaves": ["tabletop trigger", "targets", "choice procedure", "effect", "timing", "source component identity"] },
+      "sourceAuthority": ["COMMUNITY_RETAIL_REFERENCE", "OFFICIAL_RULEBOOK"],
+      "sourceReferences": ["asset:5e5515:face", "asset:4cd186:face", "asset:e3fc86:face", "asset:eed6cd:face", "asset:21bbaf:face", "asset:a7bbae:face", "asset:12e30f:face", "asset:bdaf2b:face", "asset:d09f50:face", "rulebook:36", "rulebook:40", "rulebook:41"],
+      "confidence": "low",
+      "requiresAstraReview": false,
+      "runtimeDependencies": ["Accepted tabletop card/rule/errata identity and text"],
+      "notes": "The videogame ability is explicitly excluded. This is not a claim that every physical edition lacks the component."
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "schemaVersion": "phase11a3-community-source-resolution-supplement.v1",
+  "resolutionRunId": "phase11a3-source-resolution-2026-09-13-r1",
+  "sourceEdition": "antha-complete-edition",
+  "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE",
+  "historicalEvidenceMutation": false,
+  "runtimeConsumptionAuthorized": false,
+  "semantics": [
+    {
+      "semanticId": "community-final-provision-policy-v1",
+      "blockerCode": "FINAL_PROVISION_POLICY_UNRESOLVED",
+      "requirementId": "runtime-final-provision-policy",
+      "leafPath": "procedure",
+      "resolvedValue": { "dicePerHero": 2, "faces": ["food", "bandage", "potion", "torch", "tool", "wild"], "wild": "roller chooses one non-wild face", "poolMaximum": 16, "timing": "before Final Encounter" },
+      "sourceAuthority": ["OFFICIAL_RULEBOOK"],
+      "sourceReference": ["rulebook:10", "rulebook:12", "rulebook:36"],
+      "guid": [], "cardId": [], "printedPage": [10, 12, 36], "assetIdentity": [],
+      "sourceSha256": [{ "sourceReference": "DD_EN_COREBOX_RULES.pdf", "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae" }],
+      "resolutionRunId": "phase11a3-source-resolution-2026-09-13-r1"
+    },
+    {
+      "semanticId": "community-dd-monster-physical-draw-policy-v1",
+      "blockerCode": "MONSTER_DECK_DRAW_POLICY_UNRESOLVED",
+      "requirementId": "tierB-darkest-dungeon-monster-deck",
+      "leafPath": "drawPolicy",
+      "resolvedValue": { "deckSize": 26, "shuffleAtActFourStart": true, "draw": "top physical cards until four Stance slots are filled", "duplicates": "distinct physical copies allowed", "largeUsesTwoSlots": true, "usedCards": "shuffle back at Battle End", "savedDeckIdsArePolicy": false, "uniformLogicalIdentity": false },
+      "sourceAuthority": ["COMMUNITY_RETAIL_REFERENCE", "OFFICIAL_RULEBOOK"],
+      "sourceReference": ["tts:02ef1c", "rulebook:17", "rulebook:25", "rulebook:35", "rulebook:41"],
+      "guid": ["02ef1c"], "cardId": [], "printedPage": [17, 25, 35, 41], "assetIdentity": ["Darkest Dungeon physical Monster deck"],
+      "sourceSha256": [{ "sourceReference": "3657612854.json", "sha256": "d2fe21a6aa294f80fb47e56677c3a74090c3dc131361d798dfde709f6a3a64a2" }, { "sourceReference": "DD_EN_COREBOX_RULES.pdf", "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae" }],
+      "resolutionRunId": "phase11a3-source-resolution-2026-09-13-r1"
+    },
+    {
+      "semanticId": "community-shuffling-initial-deployment-v1",
+      "blockerCode": "SHUFFLING_INITIAL_AREA_UNRESOLVED",
+      "requirementId": "runtime-shuffling-horror-room",
+      "leafPath": "initialArea",
+      "resolvedValue": { "horror": "Aggressive / r10-SW", "cultistPriest": "reserve until summoned", "malignantGrowth": "reserve until summoned", "heroes": "areas matching selected Hero Stances" },
+      "sourceAuthority": ["COMMUNITY_RETAIL_REFERENCE", "OFFICIAL_RULEBOOK"],
+      "sourceReference": ["asset:9a87c7:face", "asset:7a3fa9:secondaryUrl", "asset:450ace:face", "rulebook:16", "rulebook:31", "rulebook:40"],
+      "guid": ["9a87c7", "7a3fa9", "450ace"], "cardId": [44722, 42032], "printedPage": [16, 31, 40], "assetIdentity": ["Room 10 card", "Room 10 tile", "Shuffling Horror ability card"],
+      "sourceSha256": [{ "sourceReference": "asset:9a87c7:face", "sha256": "0db60fe1dcd1334b443f9d272ef807efc3a2bd55db09a9b81b3ad516f6b06563" }, { "sourceReference": "asset:7a3fa9:secondaryUrl", "sha256": "c03f46c1fc764ed515bfbe7a78133091b7a5e47b43ef2d8df1e5362592872d5d" }, { "sourceReference": "asset:450ace:face", "sha256": "82f6e0cfe4ed82c02afee743f00bb15427a5c5fbbd1c36e3b10ee93d1a2615da" }, { "sourceReference": "DD_EN_COREBOX_RULES.pdf", "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae" }],
+      "resolutionRunId": "phase11a3-source-resolution-2026-09-13-r1"
+    },
+    {
+      "semanticId": "community-excavation-provision-procedure-v1",
+      "blockerCode": "EXCAVATION_PROVISION_DIE_MAP_UNRESOLVED",
+      "requirementId": "runtime-excavation-provision-die",
+      "leafPath": "faceMapAndProcedure",
+      "resolvedValue": { "dicePerHero": 1, "faces": ["food", "bandage", "potion", "torch", "tool", "wild"], "wild": "roller chooses one non-wild face", "poolMaximum": 16, "timing": "immediately on Excavation Site entry" },
+      "sourceAuthority": ["OFFICIAL_RULEBOOK"],
+      "sourceReference": ["rulebook:10", "rulebook:12", "rulebook:36"],
+      "guid": [], "cardId": [], "printedPage": [10, 12, 36], "assetIdentity": [],
+      "sourceSha256": [{ "sourceReference": "DD_EN_COREBOX_RULES.pdf", "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae" }],
+      "resolutionRunId": "phase11a3-source-resolution-2026-09-13-r1"
+    },
+    {
+      "semanticId": "community-guardian-special-skill-leaf-inventory-v1",
+      "blockerCode": "GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED",
+      "requirementId": "runtime-guardian-combat",
+      "leafPath": "specialSkillEffectResolution.leafInventory",
+      "resolvedValue": {
+        "aggregateVerdict": "partially-resolved",
+        "leafInventory": [
+          { "actor": "templar-impaler", "skill": "Torment", "semanticLeaf": "damage attack", "sourceComplete": true, "enginePrimitiveAvailable": true, "dependsOn": [] },
+          { "actor": "templar-impaler", "skill": "Body Slam", "semanticLeaf": "on-hit Stun 2 turns then Pit Toss", "sourceComplete": true, "enginePrimitiveAvailable": true, "dependsOn": ["TEMPLARS_AREA_ADJACENCY_UNRESOLVED", "TEMPLARS_PIT_EXIT_RULE_UNRESOLVED"] },
+          { "actor": "templar-impaler", "skill": "Revelation", "semanticLeaf": "target suffers +2 Stress after hit", "sourceComplete": true, "enginePrimitiveAvailable": true, "dependsOn": [] },
+          { "actor": "templar-warlord", "skill": "Torment", "semanticLeaf": "damage attack", "sourceComplete": true, "enginePrimitiveAvailable": true, "dependsOn": [] },
+          { "actor": "templar-warlord", "skill": "Stinger Shot", "semanticLeaf": "Blight 3 for 3 turns and Debuff 2 turns after hit", "sourceComplete": true, "enginePrimitiveAvailable": true, "dependsOn": [] },
+          { "actor": "templar-warlord", "skill": "Revelation", "semanticLeaf": "target suffers +2 Stress after hit", "sourceComplete": true, "enginePrimitiveAvailable": true, "dependsOn": [] },
+          { "actor": "mammoth-cyst", "skill": "Bulging Gaze", "semanticLeaf": "Debuff 1 turn and +1 Stress after hit", "sourceComplete": true, "enginePrimitiveAvailable": true, "dependsOn": [] },
+          { "actor": "mammoth-cyst", "skill": "Digestion", "semanticLeaf": "Blight 3 for 2 turns after hit", "sourceComplete": true, "enginePrimitiveAvailable": true, "dependsOn": [] },
+          { "actor": "mammoth-cyst", "skill": "Revivify", "semanticLeaf": "self Buff 2 turns and heal 15", "sourceComplete": true, "enginePrimitiveAvailable": true, "dependsOn": [] },
+          { "actor": "white-cell-stalk", "skill": "Reconstitute", "semanticLeaf": "heal Mammoth Cyst 14 and Buff it for 2 turns", "sourceComplete": true, "enginePrimitiveAvailable": true, "dependsOn": [] },
+          { "actor": "white-cell-stalk", "skill": "Displace", "semanticLeaf": "Debuff 2 turns and Push 2 after hit", "sourceComplete": true, "enginePrimitiveAvailable": false, "dependsOn": ["room topology/path movement"] },
+          { "actor": "white-cell-stalk", "skill": "Teleport", "semanticLeaf": "target suffers +2 Stress and teleports by Room 11 d10 map after hit", "sourceComplete": true, "enginePrimitiveAvailable": true, "dependsOn": [] },
+          { "actor": "shuffling-horror", "skill": "Lacerate", "semanticLeaf": "Bleed 3 for 3 turns after hit", "sourceComplete": true, "enginePrimitiveAvailable": true, "dependsOn": [] },
+          { "actor": "shuffling-horror", "skill": "Undulations", "semanticLeaf": "randomly permute all Hero Stances from Aggressive to Support", "sourceComplete": true, "enginePrimitiveAvailable": true, "dependsOn": [] },
+          { "actor": "shuffling-horror", "skill": "Echoing Disassembly", "semanticLeaf": "conditional Priest then Growth summon; attack also prints Stress +2 and Light -1", "sourceComplete": true, "enginePrimitiveAvailable": false, "dependsOn": ["SHUFFLING_INITIAL_AREA_UNRESOLVED", "SHUFFLING_SUMMON_RESISTANCE_ENGINE_UNSUPPORTED"] },
+          { "actor": "cultist-priest", "skill": "Death Lash", "semanticLeaf": "Debuff 1 turn and +1 Stress after hit", "sourceComplete": true, "enginePrimitiveAvailable": true, "dependsOn": [] },
+          { "actor": "cultist-priest", "skill": "The Finger", "semanticLeaf": "Bleed 3 for 3 turns, +2 Stress and +5 damage versus Marked after hit", "sourceComplete": true, "enginePrimitiveAvailable": false, "dependsOn": ["conditional damage modifier"] },
+          { "actor": "malignant-growth", "skill": "Maul the Flesh", "semanticLeaf": "Bleed 2 for 3 turns after hit", "sourceComplete": true, "enginePrimitiveAvailable": true, "dependsOn": [] },
+          { "actor": "malignant-growth", "skill": "Daze the Mind", "semanticLeaf": "Stun 2 turns after hit", "sourceComplete": true, "enginePrimitiveAvailable": true, "dependsOn": [] }
+        ]
+      },
+      "sourceAuthority": ["COMMUNITY_RETAIL_REFERENCE", "OFFICIAL_RULEBOOK"],
+      "sourceReference": ["asset:efa5a4:face", "asset:f88d6a:face", "asset:c4a35e:face", "asset:1fb052:face", "asset:ccf3dc:face", "asset:1b261d:face", "asset:a34fbd:face", "asset:450ace:face", "rulebook:20", "rulebook:21", "rulebook:39", "rulebook:40"],
+      "guid": ["efa5a4", "f88d6a", "c4a35e", "1fb052", "ccf3dc", "1b261d", "a34fbd", "450ace"], "cardId": [46614, 46613, 46615, 46052, 46616, 46020, 46023, 42032], "printedPage": [20, 21, 39, 40], "assetIdentity": ["seven Guardian Battle Cards", "Shuffling Horror ability card"],
+      "sourceSha256": [{ "sourceReference": "asset:efa5a4:face", "sha256": "2f2160afe51e9dd10021ccdf648ccbaaafa493f77010f41761b7b72be6514e8f" }, { "sourceReference": "asset:f88d6a:face", "sha256": "5625a82cc8c32c581e21b9fd0b892f16a915357173ccff809982d87ed484a803" }, { "sourceReference": "asset:c4a35e:face", "sha256": "9d797102e3f87ba392f52b00ca7ccd10e5be6d415209c65ddde6e1d156145c2b" }, { "sourceReference": "asset:1fb052:face", "sha256": "7b4723eef6b42a2040a7a343c9d77d4083031d8a2dcc2ee8ce292ee27cb7c043" }, { "sourceReference": "asset:ccf3dc:face", "sha256": "57816b6dfc68ca12f0cca4fbd530ae933afb95b0eb83d9ccc4e3dce89457158c" }, { "sourceReference": "asset:1b261d:face", "sha256": "206ea40f8f2df6828f09c3be92d698a6a1985efc2eea0ac96e6fa1c0d33bb764" }, { "sourceReference": "asset:a34fbd:face", "sha256": "ea407043b77016d806788cd105f05c315427a106936a3bf9ea7f8f588db18247" }, { "sourceReference": "asset:450ace:face", "sha256": "82f6e0cfe4ed82c02afee743f00bb15427a5c5fbbd1c36e3b10ee93d1a2615da" }, { "sourceReference": "DD_EN_COREBOX_RULES.pdf", "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae" }],
+      "resolutionRunId": "phase11a3-source-resolution-2026-09-13-r1"
+    },
+    {
+      "semanticId": "community-mammoth-no-space-known-leaves-v1",
+      "blockerCode": "MAMMOTH_STALK_NO_SPACE_RESOLUTION_ENGINE_UNSUPPORTED",
+      "requirementId": "tierB-mammoth-cyst-room",
+      "leafPath": "spawnAreaPolicy.noSpace.knownLeaves",
+      "resolvedValue": { "hero": "move a Hero to nearest available Area", "monster": "players choose which Monster to move to nearest available Area", "destinationTieBreak": null, "pathMetric": null },
+      "sourceAuthority": ["COMMUNITY_RETAIL_REFERENCE", "OFFICIAL_RULEBOOK"],
+      "sourceReference": ["asset:bb91b0:face", "asset:bc9c87:imageUrl", "rulebook:31", "rulebook:39"],
+      "guid": ["bb91b0", "bc9c87"], "cardId": [44723], "printedPage": [31, 39], "assetIdentity": ["Room 11 card", "Room 11 tile"],
+      "sourceSha256": [{ "sourceReference": "asset:bb91b0:face", "sha256": "0ded512e4c4d710ced7dcf583f90ec0f291ba38996cb2be61ad6f34b4c0dccc9" }, { "sourceReference": "asset:bc9c87:imageUrl", "sha256": "9b4132eed81f2637b407b02f0ee7b11f37c1a096e3b1486b5ba221ed95e096f9" }, { "sourceReference": "DD_EN_COREBOX_RULES.pdf", "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae" }],
+      "resolutionRunId": "phase11a3-source-resolution-2026-09-13-r1"
+    },
+    {
+      "semanticId": "community-absolute-nothingness-non-stance-occupant-v1",
+      "blockerCode": "ABSOLUTE_NOTHINGNESS_STANCE_UNRESOLVED",
+      "requirementId": "tierB-absolute-nothingness",
+      "leafPath": "stance",
+      "resolvedValue": { "stanceTrackerStance": null, "kind": "room occupancy miniature", "areas": ["monster-defense", "monster-ranged", "monster-support"], "targetable": false, "occupancy": 1, "initiativeCards": 0, "turns": "none", "movementProcedure": null },
+      "sourceAuthority": ["COMMUNITY_RETAIL_REFERENCE", "OFFICIAL_RULEBOOK"],
+      "sourceReference": ["tts:4c0e88", "tts:db000a", "tts:aff870", "asset:bc9c87:secondaryUrl", "rulebook:40", "rulebook:41"],
+      "guid": ["4c0e88", "db000a", "aff870", "bc9c87"], "cardId": [], "printedPage": [40, 41], "assetIdentity": ["three Absolute Nothingness models", "Ancestor Room tile"],
+      "sourceSha256": [{ "sourceReference": "asset:bc9c87:secondaryUrl", "sha256": "42f2681494973fecf3a273edbaf2a2f0f0ef206b16d074bc9caedba58826b571" }, { "sourceReference": "3657612854.json", "sha256": "d2fe21a6aa294f80fb47e56677c3a74090c3dc131361d798dfde709f6a3a64a2" }, { "sourceReference": "DD_EN_COREBOX_RULES.pdf", "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae" }],
+      "resolutionRunId": "phase11a3-source-resolution-2026-09-13-r1"
+    },
+    {
+      "semanticId": "community-gestating-heart-known-timing-leaves-v1",
+      "blockerCode": "GESTATING_HEART_LETHAL_TIMING_UNRESOLVED",
+      "requirementId": "tierB-gestating-heart",
+      "leafPath": "lethalWoundTimingRuling.knownLeaves",
+      "resolvedValue": { "woundedReaction": "attacking Hero suffers Blight 2/3 turns; Heart heals 2", "defeatCleanup": "remove all other Monsters and Monster Initiative Cards", "lethalOrdering": null },
+      "sourceAuthority": ["COMMUNITY_RETAIL_REFERENCE", "OFFICIAL_RULEBOOK"],
+      "sourceReference": ["asset:eed6cd:face", "asset:a7bbae:face", "rulebook:40", "rulebook:41"],
+      "guid": ["eed6cd", "a7bbae"], "cardId": [46618, 42035], "printedPage": [40, 41], "assetIdentity": ["Gestating Heart Battle Card", "Gestating Heart ability card"],
+      "sourceSha256": [{ "sourceReference": "asset:eed6cd:face", "sha256": "f7dd6ca8d8cb0828172d1090d339174be3d539638681cd1a070f0d3d4b03967c" }, { "sourceReference": "asset:a7bbae:face", "sha256": "962a01f8a0ecc16c2d834c7d186e17694a1b6d9a62d77ac778fb3af56fe36aef" }, { "sourceReference": "DD_EN_COREBOX_RULES.pdf", "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae" }],
+      "resolutionRunId": "phase11a3-source-resolution-2026-09-13-r1"
+    }
+  ]
+}
