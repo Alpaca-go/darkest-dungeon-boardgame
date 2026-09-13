@@ -1,0 +1,190 @@
+{
+  "runId": "5f05c031-3999-47ee-9bbf-8b603ff965f9",
+  "measuredAt": "2026-09-13T07:44:22.075Z",
+  "verifiedImplementationHead": "0f7ee7a8d8cc82bd40a6efadd3ce63541e8ad3eb",
+  "manifestContentSha256": "a3c6161179e76e255392b6329d0842c1200e84999388003f839cdb14f413b72d",
+  "manifestFileSha256": "a5ede8b00305dac4da60539c6f30ac6ca80e1592a37d24598b55c9055f09e69a",
+  "checks": [
+    {
+      "name": "V01 manifest schema v2",
+      "passed": true
+    },
+    {
+      "name": "V02 Community authority remains isolated",
+      "passed": true
+    },
+    {
+      "name": "V03 manifestContentSha256 present, fresh, exact",
+      "passed": true
+    },
+    {
+      "name": "V04 manifestFileSha256 present, fresh, exact projection",
+      "passed": true
+    },
+    {
+      "name": "V05 canonical inputs have logical names/hashes and no machine paths",
+      "passed": true
+    },
+    {
+      "name": "V06 supplied canonical input bytes match manifest",
+      "passed": true
+    },
+    {
+      "name": "V07 exact requirement/runtime/kind identity lock",
+      "passed": true
+    },
+    {
+      "name": "V08 object-specific TTS provenance 54/54",
+      "passed": true
+    },
+    {
+      "name": "V09 local decode/dimension/SHA for 35 ready assets",
+      "passed": true
+    },
+    {
+      "name": "V10 canonical Room Cards 4/4",
+      "passed": true
+    },
+    {
+      "name": "V11 canonical Room Tile sides 4/4",
+      "passed": true
+    },
+    {
+      "name": "V12 Monster logical visuals 9/9",
+      "passed": true
+    },
+    {
+      "name": "V13 Monster physical provenance 26/26, unmapped=0",
+      "passed": true
+    },
+    {
+      "name": "V14 Monster source/crop/hash/visual mappings 26/26 with verified deduplication",
+      "passed": true
+    },
+    {
+      "name": "V15 source URL/cache/download metrics separated",
+      "passed": true
+    },
+    {
+      "name": "V16 inventory/manifest counts agree",
+      "passed": true
+    },
+    {
+      "name": "V17 source-missing truth retained",
+      "passed": true
+    },
+    {
+      "name": "V18 resolver + product profile tests",
+      "passed": true
+    },
+    {
+      "name": "V19 path/cache-independent canonical hash and deterministic assets",
+      "passed": true
+    }
+  ],
+  "testEvidence": {
+    "expected": 18,
+    "discovered": 18,
+    "run": 18,
+    "passed": 18,
+    "failed": 0,
+    "skipped": 0,
+    "todo": 0,
+    "tests": [
+      {
+        "file": "D:/darkest-dungoen-boardgame-acceptance-verification/src/components/darkest-dungeon/community-visual-profile-isolation.test.tsx",
+        "title": "product-level Community visual profile isolation P01/P02 Quest reveal in prototype does not render Community art",
+        "status": "passed"
+      },
+      {
+        "file": "D:/darkest-dungoen-boardgame-acceptance-verification/src/components/darkest-dungeon/community-visual-profile-isolation.test.tsx",
+        "title": "product-level Community visual profile isolation P01/P02 Quest reveal in formal does not render Community art",
+        "status": "passed"
+      },
+      {
+        "file": "D:/darkest-dungoen-boardgame-acceptance-verification/src/components/darkest-dungeon/community-visual-profile-isolation.test.tsx",
+        "title": "product-level Community visual profile isolation P03 Prototype Templars panel does not render Community art",
+        "status": "passed"
+      },
+      {
+        "file": "D:/darkest-dungoen-boardgame-acceptance-verification/src/components/darkest-dungeon/community-visual-profile-isolation.test.tsx",
+        "title": "product-level Community visual profile isolation P04 Prototype Mammoth panel does not render Community art",
+        "status": "passed"
+      },
+      {
+        "file": "D:/darkest-dungoen-boardgame-acceptance-verification/src/components/darkest-dungeon/community-visual-profile-isolation.test.tsx",
+        "title": "product-level Community visual profile isolation P05 Prototype Shuffling panel does not render Community art",
+        "status": "passed"
+      },
+      {
+        "file": "D:/darkest-dungoen-boardgame-acceptance-verification/src/components/darkest-dungeon/community-visual-profile-isolation.test.tsx",
+        "title": "product-level Community visual profile isolation P06 non-Community Final panel does not render Community art",
+        "status": "passed"
+      },
+      {
+        "file": "D:/darkest-dungoen-boardgame-acceptance-verification/src/components/darkest-dungeon/community-visual-profile-isolation.test.tsx",
+        "title": "product-level Community visual profile isolation P07 every product CommunityVisual callsite passes profileId",
+        "status": "passed"
+      },
+      {
+        "file": "D:/darkest-dungoen-boardgame-acceptance-verification/src/components/darkest-dungeon/community-visual-profile-isolation.test.tsx",
+        "title": "product-level Community visual profile isolation Community profile renders art in the real Templars product panel",
+        "status": "passed"
+      },
+      {
+        "file": "D:/darkest-dungoen-boardgame-acceptance-verification/src/data/darkest-dungeon/community-reference/community-visual-asset-resolver.test.ts",
+        "title": "community visual asset resolver (Phase 11A.3) V07 returns ready for the 16 expected Community runtime entities",
+        "status": "passed"
+      },
+      {
+        "file": "D:/darkest-dungoen-boardgame-acceptance-verification/src/data/darkest-dungeon/community-reference/community-visual-asset-resolver.test.ts",
+        "title": "community visual asset resolver (Phase 11A.3) V08 returns source-missing for absolute-nothingness and come-unto-your-maker",
+        "status": "passed"
+      },
+      {
+        "file": "D:/darkest-dungoen-boardgame-acceptance-verification/src/data/darkest-dungeon/community-reference/community-visual-asset-resolver.test.ts",
+        "title": "community visual asset resolver (Phase 11A.3) V09 returns null for unknown runtimeEntityId",
+        "status": "passed"
+      },
+      {
+        "file": "D:/darkest-dungoen-boardgame-acceptance-verification/src/data/darkest-dungeon/community-reference/community-visual-asset-resolver.test.ts",
+        "title": "community visual asset resolver (Phase 11A.3) V10 returns null when profileId is not community-reference",
+        "status": "passed"
+      },
+      {
+        "file": "D:/darkest-dungoen-boardgame-acceptance-verification/src/data/darkest-dungeon/community-reference/community-visual-asset-resolver.test.ts",
+        "title": "community visual asset resolver (Phase 11A.3) V11 no manifest entry has sourceAuthority other than COMMUNITY_RETAIL_REFERENCE",
+        "status": "passed"
+      },
+      {
+        "file": "D:/darkest-dungoen-boardgame-acceptance-verification/src/data/darkest-dungeon/community-reference/community-visual-asset-resolver.test.ts",
+        "title": "community visual asset resolver (Phase 11A.3) V12 every ready entry has consistent crop metadata (cellWidth*numWidth <= sheetWidth)",
+        "status": "passed"
+      },
+      {
+        "file": "D:/darkest-dungoen-boardgame-acceptance-verification/src/data/darkest-dungeon/community-reference/community-visual-asset-resolver.test.ts",
+        "title": "community visual asset resolver (Phase 11A.3) V13 importCommunityVisualAsset URL starts with src/assets/darkest-dungeon/community-reference/antha-complete-edition/",
+        "status": "passed"
+      },
+      {
+        "file": "D:/darkest-dungoen-boardgame-acceptance-verification/src/data/darkest-dungeon/community-reference/community-visual-asset-resolver.test.ts",
+        "title": "community visual asset resolver (Phase 11A.3) V14 communityComponentIdToVisualId maps slot ids to visual runtime entity ids",
+        "status": "passed"
+      },
+      {
+        "file": "D:/darkest-dungoen-boardgame-acceptance-verification/src/data/darkest-dungeon/community-reference/community-visual-asset-resolver.test.ts",
+        "title": "community visual asset resolver (Phase 11A.3) V15 every entry has a unique assetId",
+        "status": "passed"
+      },
+      {
+        "file": "D:/darkest-dungoen-boardgame-acceptance-verification/src/data/darkest-dungeon/community-reference/community-visual-asset-resolver.test.ts",
+        "title": "community visual asset resolver (Phase 11A.3) V16 every ready entry has a unique (runtimeEntityId, assetKind) pair",
+        "status": "passed"
+      }
+    ]
+  },
+  "passed": 19,
+  "failed": 0,
+  "skipped": false,
+  "terminalVerdict": "COMMUNITY-VISUAL-ASSETS-ACCEPTED"
+}

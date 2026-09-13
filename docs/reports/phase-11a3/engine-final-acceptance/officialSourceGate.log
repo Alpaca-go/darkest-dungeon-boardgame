@@ -1,0 +1,36 @@
+=== Phase 11A.3 Source-Gate Final Acceptance Verification Pipeline ===
+
+[typecheck] npx tsc --noEmit
+[unit] npx vitest run --reporter=default
+[commandContract] npx vitest run src/audit/core-campaign/game-command-route-contract.test.ts
+[integration] npm run test:integration
+[build] npm run build
+[criticalE2E] npm.cmd run test:e2e:critical
+[criticalE2ELifecycle] npm run test:e2e:lifecycle
+[golden] npx vitest run src/audit/core-campaign
+[replayContinuation] npx vitest run src/audit/core-campaign/replay-continuation.test.ts
+[replayDeterminism] npx vitest run src/audit/core-campaign/replay-determinism.test.ts
+[productionCommand] npm run audit:production-command
+[officialSource] npm run audit:official-source
+[contentAudit] npm run audit:content
+[rulesAudit] npm run audit:rules
+[releaseGate] npm run audit:release-gate
+[finalReport] npm run audit:phase11a3-report
+
+[verify-phase11a3-source-gate] wrote D:\darkest-dungoen-boardgame-acceptance-verification\docs\data\core-campaign\verification-results.json
+
+verdict=SOURCE-BLOCKED
+phase11A3Status=SOURCE-BLOCKED
+openP0=1 openP1=0
+sourceAllRequired=false
+onlyOpenP0=ISSUE-P0-002
+canCloseP0_002=false
+canEnterPhase11B=false
+canBeginOfficialImport=false
+verificationFresh=true (before=bf741381b036, after=bf741381b036)
+consistencyErrors=0
+unmeasuredGateBits=0
+officialSourceAuditPasses=true
+releaseGateCommandExitCode=0 (artifactValid=true)
+
+

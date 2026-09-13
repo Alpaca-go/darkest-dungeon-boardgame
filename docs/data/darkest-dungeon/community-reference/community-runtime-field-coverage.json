@@ -1,17 +1,17 @@
 {
   "schemaVersion": "phase11a3-community-runtime-semantic-leaf-coverage.v2",
-  "generatedAt": "2026-09-12T14:50:50.554Z",
-  "verifiedImplementationHead": "c51b53d264438fa5b7470e01e54be5c3dfb39c5d",
+  "generatedAt": "2026-09-13T07:44:07.084Z",
+  "verifiedImplementationHead": "0f7ee7a8d8cc82bd40a6efadd3ce63541e8ad3eb",
   "totals": {
-    "total": 160,
-    "consumed": 145,
+    "total": 195,
+    "consumed": 137,
     "explicit-source-blocker": 5,
-    "engine-unsupported-blocker": 1,
+    "engine-unsupported-blocker": 41,
     "display-only": 7,
-    "not-runtime-relevant": 2,
+    "not-runtime-relevant": 5,
     "unclassified": 0,
-    "runtimeSelectorExpected": 145,
-    "runtimeSelectorResolved": 145,
+    "runtimeSelectorExpected": 137,
+    "runtimeSelectorResolved": 137,
     "runtimeSelectorMissing": 0
   },
   "entries": [
@@ -358,20 +358,74 @@
     },
     {
       "requirementId": "tierB-templars-impaler",
-      "sourcePath": "resistances",
+      "sourcePath": "resistances.bleed",
       "classification": "consumed",
       "sourceReference": [
         "asset:efa5a4:face",
         "rulebook:20",
         "rulebook:21"
       ],
-      "sourceValueHash": "9cdc22be",
-      "runtimeValueHash": "9cdc22be",
-      "runtimeSelectorId": "guardian.resistancePolicy",
+      "sourceValueHash": "677c9603",
+      "runtimeValueHash": "677c9603",
+      "runtimeSelectorId": "guardian.BattleUnit.bleed",
       "normalizerId": "identity.v1",
       "blockerCode": null,
       "tests": [
-        "TRACE:tierB-templars-impaler.resistances"
+        "TRACE:tierB-templars-impaler.resistances.bleed"
+      ]
+    },
+    {
+      "requirementId": "tierB-templars-impaler",
+      "sourcePath": "resistances.blight",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:efa5a4:face",
+        "rulebook:20",
+        "rulebook:21"
+      ],
+      "sourceValueHash": "ece3cad8",
+      "runtimeValueHash": "ece3cad8",
+      "runtimeSelectorId": "guardian.BattleUnit.blight",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-templars-impaler.resistances.blight"
+      ]
+    },
+    {
+      "requirementId": "tierB-templars-impaler",
+      "sourcePath": "resistances.stun",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:efa5a4:face",
+        "rulebook:20",
+        "rulebook:21"
+      ],
+      "sourceValueHash": "677c9603",
+      "runtimeValueHash": "677c9603",
+      "runtimeSelectorId": "guardian.BattleUnit.stun",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-templars-impaler.resistances.stun"
+      ]
+    },
+    {
+      "requirementId": "tierB-templars-impaler",
+      "sourcePath": "resistances.shuffle",
+      "classification": "engine-unsupported-blocker",
+      "sourceReference": [
+        "asset:efa5a4:face",
+        "rulebook:20",
+        "rulebook:21"
+      ],
+      "sourceValueHash": "ece3cad8",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "GUARDIAN_SHUFFLE_RESISTANCE_ENGINE_UNSUPPORTED",
+      "tests": [
+        "TRACE:tierB-templars-impaler.resistances.shuffle"
       ]
     },
     {
@@ -472,18 +526,50 @@
     },
     {
       "requirementId": "tierB-templars-impaler",
-      "sourcePath": "crit",
-      "classification": "consumed",
+      "sourcePath": "crit.torment",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "asset:efa5a4:face"
       ],
-      "sourceValueHash": "a6cada32",
-      "runtimeValueHash": "a6cada32",
-      "runtimeSelectorId": "guardian.criticalPolicy",
+      "sourceValueHash": "f7ad6a08",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
       "normalizerId": "identity.v1",
-      "blockerCode": null,
+      "blockerCode": "TEMPLARS_CRIT_ENGINE_UNSUPPORTED",
       "tests": [
-        "TRACE:tierB-templars-impaler.crit"
+        "TRACE:tierB-templars-impaler.crit.torment"
+      ]
+    },
+    {
+      "requirementId": "tierB-templars-impaler",
+      "sourcePath": "crit.body-slam",
+      "classification": "engine-unsupported-blocker",
+      "sourceReference": [
+        "asset:efa5a4:face"
+      ],
+      "sourceValueHash": "0670ffdc",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "TEMPLARS_CRIT_ENGINE_UNSUPPORTED",
+      "tests": [
+        "TRACE:tierB-templars-impaler.crit.body-slam"
+      ]
+    },
+    {
+      "requirementId": "tierB-templars-impaler",
+      "sourcePath": "crit.revelation",
+      "classification": "engine-unsupported-blocker",
+      "sourceReference": [
+        "asset:efa5a4:face"
+      ],
+      "sourceValueHash": "e0577084",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "TEMPLARS_CRIT_ENGINE_UNSUPPORTED",
+      "tests": [
+        "TRACE:tierB-templars-impaler.crit.revelation"
       ]
     },
     {
@@ -570,20 +656,74 @@
     },
     {
       "requirementId": "tierB-templars-warlord",
-      "sourcePath": "resistances",
+      "sourcePath": "resistances.bleed",
       "classification": "consumed",
       "sourceReference": [
         "asset:f88d6a:face",
         "rulebook:20",
         "rulebook:21"
       ],
-      "sourceValueHash": "9cdc22be",
-      "runtimeValueHash": "9cdc22be",
-      "runtimeSelectorId": "guardian.resistancePolicy",
+      "sourceValueHash": "677c9603",
+      "runtimeValueHash": "677c9603",
+      "runtimeSelectorId": "guardian.BattleUnit.bleed",
       "normalizerId": "identity.v1",
       "blockerCode": null,
       "tests": [
-        "TRACE:tierB-templars-warlord.resistances"
+        "TRACE:tierB-templars-warlord.resistances.bleed"
+      ]
+    },
+    {
+      "requirementId": "tierB-templars-warlord",
+      "sourcePath": "resistances.blight",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:f88d6a:face",
+        "rulebook:20",
+        "rulebook:21"
+      ],
+      "sourceValueHash": "ece3cad8",
+      "runtimeValueHash": "ece3cad8",
+      "runtimeSelectorId": "guardian.BattleUnit.blight",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-templars-warlord.resistances.blight"
+      ]
+    },
+    {
+      "requirementId": "tierB-templars-warlord",
+      "sourcePath": "resistances.stun",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:f88d6a:face",
+        "rulebook:20",
+        "rulebook:21"
+      ],
+      "sourceValueHash": "677c9603",
+      "runtimeValueHash": "677c9603",
+      "runtimeSelectorId": "guardian.BattleUnit.stun",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-templars-warlord.resistances.stun"
+      ]
+    },
+    {
+      "requirementId": "tierB-templars-warlord",
+      "sourcePath": "resistances.shuffle",
+      "classification": "engine-unsupported-blocker",
+      "sourceReference": [
+        "asset:f88d6a:face",
+        "rulebook:20",
+        "rulebook:21"
+      ],
+      "sourceValueHash": "ece3cad8",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "GUARDIAN_SHUFFLE_RESISTANCE_ENGINE_UNSUPPORTED",
+      "tests": [
+        "TRACE:tierB-templars-warlord.resistances.shuffle"
       ]
     },
     {
@@ -684,18 +824,50 @@
     },
     {
       "requirementId": "tierB-templars-warlord",
-      "sourcePath": "crit",
-      "classification": "consumed",
+      "sourcePath": "crit.torment",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "asset:f88d6a:face"
       ],
-      "sourceValueHash": "263756dd",
-      "runtimeValueHash": "263756dd",
-      "runtimeSelectorId": "guardian.criticalPolicy",
+      "sourceValueHash": "f7ad6a08",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
       "normalizerId": "identity.v1",
-      "blockerCode": null,
+      "blockerCode": "TEMPLARS_CRIT_ENGINE_UNSUPPORTED",
       "tests": [
-        "TRACE:tierB-templars-warlord.crit"
+        "TRACE:tierB-templars-warlord.crit.torment"
+      ]
+    },
+    {
+      "requirementId": "tierB-templars-warlord",
+      "sourcePath": "crit.stinger-shot",
+      "classification": "engine-unsupported-blocker",
+      "sourceReference": [
+        "asset:f88d6a:face"
+      ],
+      "sourceValueHash": "eb784448",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "TEMPLARS_CRIT_ENGINE_UNSUPPORTED",
+      "tests": [
+        "TRACE:tierB-templars-warlord.crit.stinger-shot"
+      ]
+    },
+    {
+      "requirementId": "tierB-templars-warlord",
+      "sourcePath": "crit.revelation",
+      "classification": "engine-unsupported-blocker",
+      "sourceReference": [
+        "asset:f88d6a:face"
+      ],
+      "sourceValueHash": "e0577084",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "TEMPLARS_CRIT_ENGINE_UNSUPPORTED",
+      "tests": [
+        "TRACE:tierB-templars-warlord.crit.revelation"
       ]
     },
     {
@@ -956,20 +1128,74 @@
     },
     {
       "requirementId": "tierB-mammoth-cyst",
-      "sourcePath": "resistances",
+      "sourcePath": "resistances.bleed",
       "classification": "consumed",
       "sourceReference": [
         "asset:c4a35e:face",
         "rulebook:20",
         "rulebook:21"
       ],
-      "sourceValueHash": "b9c5000c",
-      "runtimeValueHash": "b9c5000c",
-      "runtimeSelectorId": "guardian.resistancePolicy",
+      "sourceValueHash": "677c9603",
+      "runtimeValueHash": "677c9603",
+      "runtimeSelectorId": "guardian.BattleUnit.bleed",
       "normalizerId": "identity.v1",
       "blockerCode": null,
       "tests": [
-        "TRACE:tierB-mammoth-cyst.resistances"
+        "TRACE:tierB-mammoth-cyst.resistances.bleed"
+      ]
+    },
+    {
+      "requirementId": "tierB-mammoth-cyst",
+      "sourcePath": "resistances.blight",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:c4a35e:face",
+        "rulebook:20",
+        "rulebook:21"
+      ],
+      "sourceValueHash": "ece3cad8",
+      "runtimeValueHash": "ece3cad8",
+      "runtimeSelectorId": "guardian.BattleUnit.blight",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-mammoth-cyst.resistances.blight"
+      ]
+    },
+    {
+      "requirementId": "tierB-mammoth-cyst",
+      "sourcePath": "resistances.stun",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:c4a35e:face",
+        "rulebook:20",
+        "rulebook:21"
+      ],
+      "sourceValueHash": "a5c2b458",
+      "runtimeValueHash": "a5c2b458",
+      "runtimeSelectorId": "guardian.BattleUnit.stun",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-mammoth-cyst.resistances.stun"
+      ]
+    },
+    {
+      "requirementId": "tierB-mammoth-cyst",
+      "sourcePath": "resistances.shuffle",
+      "classification": "engine-unsupported-blocker",
+      "sourceReference": [
+        "asset:c4a35e:face",
+        "rulebook:20",
+        "rulebook:21"
+      ],
+      "sourceValueHash": "ece3cad8",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "GUARDIAN_SHUFFLE_RESISTANCE_ENGINE_UNSUPPORTED",
+      "tests": [
+        "TRACE:tierB-mammoth-cyst.resistances.shuffle"
       ]
     },
     {
@@ -1070,18 +1296,50 @@
     },
     {
       "requirementId": "tierB-mammoth-cyst",
-      "sourcePath": "crit",
+      "sourcePath": "crit.bulging-gaze",
       "classification": "consumed",
       "sourceReference": [
         "asset:c4a35e:face"
       ],
-      "sourceValueHash": "7ee31e0f",
-      "runtimeValueHash": "7ee31e0f",
-      "runtimeSelectorId": "guardian.criticalPolicy",
+      "sourceValueHash": "eb784406",
+      "runtimeValueHash": "eb784406",
+      "runtimeSelectorId": "executeMammothCystAction.bulging-gaze.printedCritical",
       "normalizerId": "identity.v1",
       "blockerCode": null,
       "tests": [
-        "TRACE:tierB-mammoth-cyst.crit"
+        "TRACE:tierB-mammoth-cyst.crit.bulging-gaze"
+      ]
+    },
+    {
+      "requirementId": "tierB-mammoth-cyst",
+      "sourcePath": "crit.digestion",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:c4a35e:face"
+      ],
+      "sourceValueHash": "2882018c",
+      "runtimeValueHash": "2882018c",
+      "runtimeSelectorId": "executeMammothCystAction.digestion.printedCritical",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-mammoth-cyst.crit.digestion"
+      ]
+    },
+    {
+      "requirementId": "tierB-mammoth-cyst",
+      "sourcePath": "crit.revivify",
+      "classification": "not-runtime-relevant",
+      "sourceReference": [
+        "asset:c4a35e:face"
+      ],
+      "sourceValueHash": "fa867167",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-mammoth-cyst.crit.revivify"
       ]
     },
     {
@@ -1168,20 +1426,74 @@
     },
     {
       "requirementId": "tierB-white-cell-stalk",
-      "sourcePath": "resistances",
+      "sourcePath": "resistances.bleed",
       "classification": "consumed",
       "sourceReference": [
         "asset:1fb052:face",
         "rulebook:20",
         "rulebook:21"
       ],
-      "sourceValueHash": "a9ace823",
-      "runtimeValueHash": "a9ace823",
-      "runtimeSelectorId": "guardian.resistancePolicy",
+      "sourceValueHash": "ece3cad8",
+      "runtimeValueHash": "ece3cad8",
+      "runtimeSelectorId": "guardian.BattleUnit.bleed",
       "normalizerId": "identity.v1",
       "blockerCode": null,
       "tests": [
-        "TRACE:tierB-white-cell-stalk.resistances"
+        "TRACE:tierB-white-cell-stalk.resistances.bleed"
+      ]
+    },
+    {
+      "requirementId": "tierB-white-cell-stalk",
+      "sourcePath": "resistances.blight",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:1fb052:face",
+        "rulebook:20",
+        "rulebook:21"
+      ],
+      "sourceValueHash": "677c9603",
+      "runtimeValueHash": "677c9603",
+      "runtimeSelectorId": "guardian.BattleUnit.blight",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-white-cell-stalk.resistances.blight"
+      ]
+    },
+    {
+      "requirementId": "tierB-white-cell-stalk",
+      "sourcePath": "resistances.stun",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:1fb052:face",
+        "rulebook:20",
+        "rulebook:21"
+      ],
+      "sourceValueHash": "677c9603",
+      "runtimeValueHash": "677c9603",
+      "runtimeSelectorId": "guardian.BattleUnit.stun",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-white-cell-stalk.resistances.stun"
+      ]
+    },
+    {
+      "requirementId": "tierB-white-cell-stalk",
+      "sourcePath": "resistances.shuffle",
+      "classification": "engine-unsupported-blocker",
+      "sourceReference": [
+        "asset:1fb052:face",
+        "rulebook:20",
+        "rulebook:21"
+      ],
+      "sourceValueHash": "677c9603",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "GUARDIAN_SHUFFLE_RESISTANCE_ENGINE_UNSUPPORTED",
+      "tests": [
+        "TRACE:tierB-white-cell-stalk.resistances.shuffle"
       ]
     },
     {
@@ -1282,18 +1594,50 @@
     },
     {
       "requirementId": "tierB-white-cell-stalk",
-      "sourcePath": "crit",
+      "sourcePath": "crit.reconstitute",
+      "classification": "not-runtime-relevant",
+      "sourceReference": [
+        "asset:1fb052:face"
+      ],
+      "sourceValueHash": "fa867167",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-white-cell-stalk.crit.reconstitute"
+      ]
+    },
+    {
+      "requirementId": "tierB-white-cell-stalk",
+      "sourcePath": "crit.displace",
       "classification": "consumed",
       "sourceReference": [
         "asset:1fb052:face"
       ],
-      "sourceValueHash": "476c0d80",
-      "runtimeValueHash": "476c0d80",
-      "runtimeSelectorId": "guardian.criticalPolicy",
+      "sourceValueHash": "c9674235",
+      "runtimeValueHash": "c9674235",
+      "runtimeSelectorId": "executeMammothCystAction.displace.printedCritical",
       "normalizerId": "identity.v1",
       "blockerCode": null,
       "tests": [
-        "TRACE:tierB-white-cell-stalk.crit"
+        "TRACE:tierB-white-cell-stalk.crit.displace"
+      ]
+    },
+    {
+      "requirementId": "tierB-white-cell-stalk",
+      "sourcePath": "crit.teleport",
+      "classification": "not-runtime-relevant",
+      "sourceReference": [
+        "asset:1fb052:face"
+      ],
+      "sourceValueHash": "fa867167",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-white-cell-stalk.crit.teleport"
       ]
     },
     {
@@ -1563,20 +1907,74 @@
     },
     {
       "requirementId": "tierB-shuffling-horror",
-      "sourcePath": "resistances",
+      "sourcePath": "resistances.bleed",
       "classification": "consumed",
       "sourceReference": [
         "asset:ccf3dc:face",
         "rulebook:20",
         "rulebook:21"
       ],
-      "sourceValueHash": "b9c5000c",
-      "runtimeValueHash": "b9c5000c",
-      "runtimeSelectorId": "guardian.resistancePolicy",
+      "sourceValueHash": "677c9603",
+      "runtimeValueHash": "677c9603",
+      "runtimeSelectorId": "guardian.BattleUnit.bleed",
       "normalizerId": "identity.v1",
       "blockerCode": null,
       "tests": [
-        "TRACE:tierB-shuffling-horror.resistances"
+        "TRACE:tierB-shuffling-horror.resistances.bleed"
+      ]
+    },
+    {
+      "requirementId": "tierB-shuffling-horror",
+      "sourcePath": "resistances.blight",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:ccf3dc:face",
+        "rulebook:20",
+        "rulebook:21"
+      ],
+      "sourceValueHash": "ece3cad8",
+      "runtimeValueHash": "ece3cad8",
+      "runtimeSelectorId": "guardian.BattleUnit.blight",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-shuffling-horror.resistances.blight"
+      ]
+    },
+    {
+      "requirementId": "tierB-shuffling-horror",
+      "sourcePath": "resistances.stun",
+      "classification": "consumed",
+      "sourceReference": [
+        "asset:ccf3dc:face",
+        "rulebook:20",
+        "rulebook:21"
+      ],
+      "sourceValueHash": "a5c2b458",
+      "runtimeValueHash": "a5c2b458",
+      "runtimeSelectorId": "guardian.BattleUnit.stun",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-shuffling-horror.resistances.stun"
+      ]
+    },
+    {
+      "requirementId": "tierB-shuffling-horror",
+      "sourcePath": "resistances.shuffle",
+      "classification": "engine-unsupported-blocker",
+      "sourceReference": [
+        "asset:ccf3dc:face",
+        "rulebook:20",
+        "rulebook:21"
+      ],
+      "sourceValueHash": "ece3cad8",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "GUARDIAN_SHUFFLE_RESISTANCE_ENGINE_UNSUPPORTED",
+      "tests": [
+        "TRACE:tierB-shuffling-horror.resistances.shuffle"
       ]
     },
     {
@@ -1677,18 +2075,50 @@
     },
     {
       "requirementId": "tierB-shuffling-horror",
-      "sourcePath": "crit",
-      "classification": "consumed",
+      "sourcePath": "crit.lacerate",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "asset:ccf3dc:face"
       ],
-      "sourceValueHash": "dae30c0e",
-      "runtimeValueHash": "dae30c0e",
-      "runtimeSelectorId": "guardian.criticalPolicy",
+      "sourceValueHash": "c6d8d284",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
       "normalizerId": "identity.v1",
-      "blockerCode": null,
+      "blockerCode": "SHUFFLING_CRIT_ENGINE_UNSUPPORTED",
       "tests": [
-        "TRACE:tierB-shuffling-horror.crit"
+        "TRACE:tierB-shuffling-horror.crit.lacerate"
+      ]
+    },
+    {
+      "requirementId": "tierB-shuffling-horror",
+      "sourcePath": "crit.undulations",
+      "classification": "engine-unsupported-blocker",
+      "sourceReference": [
+        "asset:ccf3dc:face"
+      ],
+      "sourceValueHash": "b0fcf673",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "SHUFFLING_CRIT_ENGINE_UNSUPPORTED",
+      "tests": [
+        "TRACE:tierB-shuffling-horror.crit.undulations"
+      ]
+    },
+    {
+      "requirementId": "tierB-shuffling-horror",
+      "sourcePath": "crit.echoing-disassembly",
+      "classification": "engine-unsupported-blocker",
+      "sourceReference": [
+        "asset:ccf3dc:face"
+      ],
+      "sourceValueHash": "c9674256",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "SHUFFLING_CRIT_ENGINE_UNSUPPORTED",
+      "tests": [
+        "TRACE:tierB-shuffling-horror.crit.echoing-disassembly"
       ]
     },
     {
@@ -1781,8 +2211,8 @@
     },
     {
       "requirementId": "tierB-cultist-priest",
-      "sourcePath": "resistances",
-      "classification": "consumed",
+      "sourcePath": "resistances.bleed",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "asset:1b261d:face",
         "rulebook:20",
@@ -1790,13 +2220,73 @@
         "asset:36d6ad:face",
         "asset:0ba2f8:face"
       ],
-      "sourceValueHash": "a9ace823",
-      "runtimeValueHash": "a9ace823",
-      "runtimeSelectorId": "guardian.resistancePolicy",
+      "sourceValueHash": "ece3cad8",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
       "normalizerId": "identity.v1",
-      "blockerCode": null,
+      "blockerCode": "SHUFFLING_SUMMON_RESISTANCE_ENGINE_UNSUPPORTED",
       "tests": [
-        "TRACE:tierB-cultist-priest.resistances"
+        "TRACE:tierB-cultist-priest.resistances.bleed"
+      ]
+    },
+    {
+      "requirementId": "tierB-cultist-priest",
+      "sourcePath": "resistances.blight",
+      "classification": "engine-unsupported-blocker",
+      "sourceReference": [
+        "asset:1b261d:face",
+        "rulebook:20",
+        "rulebook:21",
+        "asset:36d6ad:face",
+        "asset:0ba2f8:face"
+      ],
+      "sourceValueHash": "677c9603",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "SHUFFLING_SUMMON_RESISTANCE_ENGINE_UNSUPPORTED",
+      "tests": [
+        "TRACE:tierB-cultist-priest.resistances.blight"
+      ]
+    },
+    {
+      "requirementId": "tierB-cultist-priest",
+      "sourcePath": "resistances.stun",
+      "classification": "engine-unsupported-blocker",
+      "sourceReference": [
+        "asset:1b261d:face",
+        "rulebook:20",
+        "rulebook:21",
+        "asset:36d6ad:face",
+        "asset:0ba2f8:face"
+      ],
+      "sourceValueHash": "677c9603",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "SHUFFLING_SUMMON_RESISTANCE_ENGINE_UNSUPPORTED",
+      "tests": [
+        "TRACE:tierB-cultist-priest.resistances.stun"
+      ]
+    },
+    {
+      "requirementId": "tierB-cultist-priest",
+      "sourcePath": "resistances.shuffle",
+      "classification": "engine-unsupported-blocker",
+      "sourceReference": [
+        "asset:1b261d:face",
+        "rulebook:20",
+        "rulebook:21",
+        "asset:36d6ad:face",
+        "asset:0ba2f8:face"
+      ],
+      "sourceValueHash": "677c9603",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "GUARDIAN_SHUFFLE_RESISTANCE_ENGINE_UNSUPPORTED",
+      "tests": [
+        "TRACE:tierB-cultist-priest.resistances.shuffle"
       ]
     },
     {
@@ -1873,20 +2363,38 @@
     },
     {
       "requirementId": "tierB-cultist-priest",
-      "sourcePath": "crit",
-      "classification": "consumed",
+      "sourcePath": "crit.death-lash",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "asset:1b261d:face",
         "asset:36d6ad:face",
         "asset:0ba2f8:face"
       ],
-      "sourceValueHash": "41ab91a2",
-      "runtimeValueHash": "41ab91a2",
-      "runtimeSelectorId": "guardian.criticalPolicy",
+      "sourceValueHash": "fa3bd9da",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
       "normalizerId": "identity.v1",
-      "blockerCode": null,
+      "blockerCode": "SHUFFLING_CRIT_ENGINE_UNSUPPORTED",
       "tests": [
-        "TRACE:tierB-cultist-priest.crit"
+        "TRACE:tierB-cultist-priest.crit.death-lash"
+      ]
+    },
+    {
+      "requirementId": "tierB-cultist-priest",
+      "sourcePath": "crit.the-finger",
+      "classification": "engine-unsupported-blocker",
+      "sourceReference": [
+        "asset:1b261d:face",
+        "asset:36d6ad:face",
+        "asset:0ba2f8:face"
+      ],
+      "sourceValueHash": "f7ad6a29",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "SHUFFLING_CRIT_ENGINE_UNSUPPORTED",
+      "tests": [
+        "TRACE:tierB-cultist-priest.crit.the-finger"
       ]
     },
     {
@@ -1983,8 +2491,8 @@
     },
     {
       "requirementId": "tierB-malignant-growth",
-      "sourcePath": "resistances",
-      "classification": "consumed",
+      "sourcePath": "resistances.bleed",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "asset:a34fbd:face",
         "rulebook:20",
@@ -1992,13 +2500,73 @@
         "asset:4a8b06:face",
         "asset:f06594:face"
       ],
-      "sourceValueHash": "a9ace823",
-      "runtimeValueHash": "a9ace823",
-      "runtimeSelectorId": "guardian.resistancePolicy",
+      "sourceValueHash": "ece3cad8",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
       "normalizerId": "identity.v1",
-      "blockerCode": null,
+      "blockerCode": "SHUFFLING_SUMMON_RESISTANCE_ENGINE_UNSUPPORTED",
       "tests": [
-        "TRACE:tierB-malignant-growth.resistances"
+        "TRACE:tierB-malignant-growth.resistances.bleed"
+      ]
+    },
+    {
+      "requirementId": "tierB-malignant-growth",
+      "sourcePath": "resistances.blight",
+      "classification": "engine-unsupported-blocker",
+      "sourceReference": [
+        "asset:a34fbd:face",
+        "rulebook:20",
+        "rulebook:21",
+        "asset:4a8b06:face",
+        "asset:f06594:face"
+      ],
+      "sourceValueHash": "677c9603",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "SHUFFLING_SUMMON_RESISTANCE_ENGINE_UNSUPPORTED",
+      "tests": [
+        "TRACE:tierB-malignant-growth.resistances.blight"
+      ]
+    },
+    {
+      "requirementId": "tierB-malignant-growth",
+      "sourcePath": "resistances.stun",
+      "classification": "engine-unsupported-blocker",
+      "sourceReference": [
+        "asset:a34fbd:face",
+        "rulebook:20",
+        "rulebook:21",
+        "asset:4a8b06:face",
+        "asset:f06594:face"
+      ],
+      "sourceValueHash": "677c9603",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "SHUFFLING_SUMMON_RESISTANCE_ENGINE_UNSUPPORTED",
+      "tests": [
+        "TRACE:tierB-malignant-growth.resistances.stun"
+      ]
+    },
+    {
+      "requirementId": "tierB-malignant-growth",
+      "sourcePath": "resistances.shuffle",
+      "classification": "engine-unsupported-blocker",
+      "sourceReference": [
+        "asset:a34fbd:face",
+        "rulebook:20",
+        "rulebook:21",
+        "asset:4a8b06:face",
+        "asset:f06594:face"
+      ],
+      "sourceValueHash": "677c9603",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "GUARDIAN_SHUFFLE_RESISTANCE_ENGINE_UNSUPPORTED",
+      "tests": [
+        "TRACE:tierB-malignant-growth.resistances.shuffle"
       ]
     },
     {
@@ -2075,20 +2643,38 @@
     },
     {
       "requirementId": "tierB-malignant-growth",
-      "sourcePath": "crit",
-      "classification": "consumed",
+      "sourcePath": "crit.maul-the-flesh",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "asset:a34fbd:face",
         "asset:4a8b06:face",
         "asset:f06594:face"
       ],
-      "sourceValueHash": "8c86748a",
-      "runtimeValueHash": "8c86748a",
-      "runtimeSelectorId": "guardian.criticalPolicy",
+      "sourceValueHash": "03e28fe9",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
       "normalizerId": "identity.v1",
-      "blockerCode": null,
+      "blockerCode": "SHUFFLING_CRIT_ENGINE_UNSUPPORTED",
       "tests": [
-        "TRACE:tierB-malignant-growth.crit"
+        "TRACE:tierB-malignant-growth.crit.maul-the-flesh"
+      ]
+    },
+    {
+      "requirementId": "tierB-malignant-growth",
+      "sourcePath": "crit.daze-the-mind",
+      "classification": "engine-unsupported-blocker",
+      "sourceReference": [
+        "asset:a34fbd:face",
+        "asset:4a8b06:face",
+        "asset:f06594:face"
+      ],
+      "sourceValueHash": "baa3aca3",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "SHUFFLING_CRIT_ENGINE_UNSUPPORTED",
+      "tests": [
+        "TRACE:tierB-malignant-growth.crit.daze-the-mind"
       ]
     },
     {
@@ -2163,19 +2749,53 @@
     },
     {
       "requirementId": "tierB-shuffling-horror-room",
-      "sourcePath": "victoryCondition",
+      "sourcePath": "victoryCondition.objective",
       "classification": "consumed",
       "sourceReference": [
         "rulebook:30",
         "asset:735bc3:face"
       ],
-      "sourceValueHash": "8baa54e1",
-      "runtimeValueHash": "8baa54e1",
-      "runtimeSelectorId": "shufflingGuardian.victory",
-      "normalizerId": "shuffling-victory.v1",
+      "sourceValueHash": "523fd33f",
+      "runtimeValueHash": "523fd33f",
+      "runtimeSelectorId": "shufflingGuardian.victory.objective",
+      "normalizerId": "identity.v1",
       "blockerCode": null,
       "tests": [
-        "TRACE:tierB-shuffling-horror-room.victoryCondition"
+        "TRACE:tierB-shuffling-horror-room.victoryCondition.objective"
+      ]
+    },
+    {
+      "requirementId": "tierB-shuffling-horror-room",
+      "sourcePath": "victoryCondition.roundLimit",
+      "classification": "consumed",
+      "sourceReference": [
+        "rulebook:30",
+        "asset:735bc3:face"
+      ],
+      "sourceValueHash": "f8f20999",
+      "runtimeValueHash": "f8f20999",
+      "runtimeSelectorId": "shufflingGuardian.victory.roundLimit",
+      "normalizerId": "identity.v1",
+      "blockerCode": null,
+      "tests": [
+        "TRACE:tierB-shuffling-horror-room.victoryCondition.roundLimit"
+      ]
+    },
+    {
+      "requirementId": "tierB-shuffling-horror-room",
+      "sourcePath": "victoryCondition.remainingMonsters",
+      "classification": "engine-unsupported-blocker",
+      "sourceReference": [
+        "rulebook:30",
+        "asset:735bc3:face"
+      ],
+      "sourceValueHash": "25c64ea9",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "SHUFFLING_LINKED_VICTORY_CLEANUP_ENGINE_UNSUPPORTED",
+      "tests": [
+        "TRACE:tierB-shuffling-horror-room.victoryCondition.remainingMonsters"
       ]
     },
     {
@@ -2215,17 +2835,17 @@
     {
       "requirementId": "tierB-ancestor-room",
       "sourcePath": "roomEffects",
-      "classification": "consumed",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "asset:e3fc86:face",
         "rulebook:36",
         "rulebook:40"
       ],
-      "sourceValueHash": "373a9922",
-      "runtimeValueHash": "373a9922",
-      "runtimeSelectorId": "final.transitionPolicy",
-      "normalizerId": "final-transition-policy.v1",
-      "blockerCode": null,
+      "sourceValueHash": "d5e30e2c",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED",
       "tests": [
         "TRACE:tierB-ancestor-room.roomEffects"
       ]
@@ -2284,15 +2904,15 @@
     {
       "requirementId": "tierB-ancestor-first-form",
       "sourcePath": "ancestor.skillIds",
-      "classification": "consumed",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "asset:d99c50:face"
       ],
-      "sourceValueHash": "207bb2ea",
-      "runtimeValueHash": "207bb2ea",
-      "runtimeSelectorId": "finalForm.ancestor-first-form.skills",
-      "normalizerId": "local-skill-ids.v1",
-      "blockerCode": null,
+      "sourceValueHash": "5a17ddf9",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED",
       "tests": [
         "TRACE:tierB-ancestor-first-form.ancestor.skillIds"
       ]
@@ -2316,15 +2936,15 @@
     {
       "requirementId": "tierB-ancestor-first-form",
       "sourcePath": "perfectReflection.skillIds",
-      "classification": "consumed",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "asset:695dfa:face"
       ],
-      "sourceValueHash": "f6957413",
-      "runtimeValueHash": "f6957413",
-      "runtimeSelectorId": "ancestorFirst.perfect.skillIds",
-      "normalizerId": "local-skill-ids.v1",
-      "blockerCode": null,
+      "sourceValueHash": "7f2e05e9",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED",
       "tests": [
         "TRACE:tierB-ancestor-first-form.perfectReflection.skillIds"
       ]
@@ -2348,15 +2968,15 @@
     {
       "requirementId": "tierB-ancestor-first-form",
       "sourcePath": "imperfectReflection.skillIds",
-      "classification": "consumed",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "asset:adff9c:face"
       ],
-      "sourceValueHash": "27abff91",
-      "runtimeValueHash": "27abff91",
-      "runtimeSelectorId": "ancestorFirst.imperfect.skillIds",
-      "normalizerId": "local-skill-ids.v1",
-      "blockerCode": null,
+      "sourceValueHash": "713c0c18",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED",
       "tests": [
         "TRACE:tierB-ancestor-first-form.imperfectReflection.skillIds"
       ]
@@ -2364,17 +2984,17 @@
     {
       "requirementId": "tierB-ancestor-first-form",
       "sourcePath": "timeHealsAll.effect",
-      "classification": "consumed",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "asset:d99c50:face",
         "asset:5e5515:face",
         "rulebook:40"
       ],
       "sourceValueHash": "8188e14f",
-      "runtimeValueHash": "8188e14f",
-      "runtimeSelectorId": "ancestorFirst.fullStanceSkillEffect",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
       "normalizerId": "identity.v1",
-      "blockerCode": null,
+      "blockerCode": "FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED",
       "tests": [
         "TRACE:tierB-ancestor-first-form.timeHealsAll.effect"
       ]
@@ -2382,17 +3002,17 @@
     {
       "requirementId": "tierB-ancestor-first-form",
       "sourcePath": "vacantStanceFillSource",
-      "classification": "consumed",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "asset:d99c50:face",
         "asset:5e5515:face",
         "rulebook:40"
       ],
-      "sourceValueHash": "095f27af",
-      "runtimeValueHash": "095f27af",
-      "runtimeSelectorId": "ancestorFirst.vacantStanceD10Map",
-      "normalizerId": "reflection-d10-map.v2",
-      "blockerCode": null,
+      "sourceValueHash": "a306a168",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED",
       "tests": [
         "TRACE:tierB-ancestor-first-form.vacantStanceFillSource"
       ]
@@ -2418,17 +3038,17 @@
     {
       "requirementId": "tierB-perfect-reflection",
       "sourcePath": "skillIds",
-      "classification": "consumed",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "asset:695dfa:face",
         "asset:4a0ff9:face",
         "asset:e75d33:face"
       ],
-      "sourceValueHash": "f6957413",
-      "runtimeValueHash": "f6957413",
-      "runtimeSelectorId": "ancestorFirst.perfect.skillIds",
-      "normalizerId": "local-skill-ids.v1",
-      "blockerCode": null,
+      "sourceValueHash": "7f2e05e9",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED",
       "tests": [
         "TRACE:tierB-perfect-reflection.skillIds"
       ]
@@ -2454,17 +3074,17 @@
     {
       "requirementId": "tierB-imperfect-reflection",
       "sourcePath": "skillIds",
-      "classification": "consumed",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "asset:adff9c:face",
         "asset:d57825:face",
         "asset:95ec7b:face"
       ],
-      "sourceValueHash": "27abff91",
-      "runtimeValueHash": "27abff91",
-      "runtimeSelectorId": "ancestorFirst.imperfect.skillIds",
-      "normalizerId": "local-skill-ids.v1",
-      "blockerCode": null,
+      "sourceValueHash": "713c0c18",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED",
       "tests": [
         "TRACE:tierB-imperfect-reflection.skillIds"
       ]
@@ -2488,15 +3108,15 @@
     {
       "requirementId": "tierB-ancestor-second-form",
       "sourcePath": "ancestor.skillIds",
-      "classification": "consumed",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "asset:1825b7:face"
       ],
-      "sourceValueHash": "b095d253",
-      "runtimeValueHash": "b095d253",
-      "runtimeSelectorId": "finalForm.ancestor-second-form.skills",
-      "normalizerId": "local-skill-ids.v1",
-      "blockerCode": null,
+      "sourceValueHash": "50e4e36b",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED",
       "tests": [
         "TRACE:tierB-ancestor-second-form.ancestor.skillIds"
       ]
@@ -2573,15 +3193,15 @@
     {
       "requirementId": "tierB-gestating-heart",
       "sourcePath": "skillIds",
-      "classification": "consumed",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "asset:eed6cd:face"
       ],
-      "sourceValueHash": "d1753ba1",
-      "runtimeValueHash": "d1753ba1",
-      "runtimeSelectorId": "finalForm.gestating-heart.skills",
-      "normalizerId": "local-skill-ids.v1",
-      "blockerCode": null,
+      "sourceValueHash": "f28c9f1e",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED",
       "tests": [
         "TRACE:tierB-gestating-heart.skillIds"
       ]
@@ -2589,15 +3209,15 @@
     {
       "requirementId": "tierB-gestating-heart",
       "sourcePath": "d10SkillTable",
-      "classification": "consumed",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "asset:eed6cd:face"
       ],
-      "sourceValueHash": "189d2fd0",
-      "runtimeValueHash": "189d2fd0",
-      "runtimeSelectorId": "gestating.skillSelection",
-      "normalizerId": "gestating-skill-selection.v1",
-      "blockerCode": null,
+      "sourceValueHash": "0bc71f0c",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED",
       "tests": [
         "TRACE:tierB-gestating-heart.d10SkillTable"
       ]
@@ -2640,15 +3260,15 @@
     {
       "requirementId": "tierB-heart-of-darkness",
       "sourcePath": "skillIds",
-      "classification": "consumed",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "asset:21bbaf:face"
       ],
-      "sourceValueHash": "8d16cbf8",
-      "runtimeValueHash": "8d16cbf8",
-      "runtimeSelectorId": "finalForm.heart-of-darkness.skills",
-      "normalizerId": "local-skill-ids.v1",
-      "blockerCode": null,
+      "sourceValueHash": "e493979c",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED",
       "tests": [
         "TRACE:tierB-heart-of-darkness.skillIds"
       ]
@@ -2656,17 +3276,17 @@
     {
       "requirementId": "tierB-heart-of-darkness",
       "sourcePath": "impendingDoomD10SkillMap",
-      "classification": "consumed",
+      "classification": "engine-unsupported-blocker",
       "sourceReference": [
         "asset:21bbaf:face",
         "asset:12e30f:face",
         "rulebook:41"
       ],
-      "sourceValueHash": "aa923384",
-      "runtimeValueHash": "aa923384",
-      "runtimeSelectorId": "heartOfDarkness.impendingDoom.d10SkillMap",
-      "normalizerId": "final-d10-local-skill.v1",
-      "blockerCode": null,
+      "sourceValueHash": "b8e64717",
+      "runtimeValueHash": null,
+      "runtimeSelectorId": null,
+      "normalizerId": "identity.v1",
+      "blockerCode": "FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED",
       "tests": [
         "TRACE:tierB-heart-of-darkness.impendingDoomD10SkillMap"
       ]

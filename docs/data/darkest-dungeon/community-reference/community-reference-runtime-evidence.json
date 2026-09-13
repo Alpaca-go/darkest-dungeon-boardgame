@@ -1,17 +1,17 @@
 {
   "schemaVersion": "phase11a3-community-runtime-freeze-evidence-closure.v1",
-  "runId": "4fe1a0f5-a637-4fb5-b1fe-0fa3ee540187",
-  "measuredAt": "2026-09-12T14:50:50.554Z",
-  "verifiedImplementationHead": "c51b53d264438fa5b7470e01e54be5c3dfb39c5d",
-  "evidencePublicationParent": "c51b53d264438fa5b7470e01e54be5c3dfb39c5d",
+  "runId": "1d7d028f-5c91-45ec-a270-373dfded5cbf",
+  "measuredAt": "2026-09-13T07:44:07.084Z",
+  "verifiedImplementationHead": "0f7ee7a8d8cc82bd40a6efadd3ce63541e8ad3eb",
+  "evidencePublicationParent": "0f7ee7a8d8cc82bd40a6efadd3ce63541e8ad3eb",
   "sourcePackageSha256": "382e479f84f79a9b3cc6b0256b2fa5dea100b3576244988f180b49e75ed78d2a",
   "normalizedRequirementsSha256": "82e3f9794c81d021c158610ff47411a7ef0af7d68efe3d23631d9a7e68793562",
   "sourceBindingManifestSha256": "30e383ae71d1ef00041276e081ced74156865d3cae3f3e17b3c1e29dfcd773b8",
-  "bindingEvidenceRunId": "864ed74f-b9a4-4d33-8c03-9a9a57732eef",
-  "bindingEvidenceSha256": "99862dc017d8a5eff09209b81bb059e63cbbbe4409189a8a632d93e1136d94c7",
+  "bindingEvidenceRunId": "83ed25fd-3eba-4cf6-8dc6-ace25bed2854",
+  "bindingEvidenceSha256": "af411cc55c753152325405d0239487ea46a9c3673a822caf1145270c66da1549",
   "runtimeProfileId": "community-reference",
-  "runtimeAdapterVersion": "phase11a3-community-runtime-adapter.v5",
-  "contentHash": "6e170e7d",
+  "runtimeAdapterVersion": "phase11a3-community-runtime-adapter.v6",
+  "contentHash": "7e6178d5",
   "counts": {
     "quests": 3,
     "layouts": 2,
@@ -23,17 +23,17 @@
     "monsterLogical": 9
   },
   "semanticLeafCoverage": {
-    "total": 160,
-    "consumed": 145,
+    "total": 195,
+    "consumed": 137,
     "sourceBlocked": 5,
-    "engineBlocked": 1,
+    "engineBlocked": 41,
     "displayOnly": 7,
-    "notRuntimeRelevant": 2,
+    "notRuntimeRelevant": 5,
     "unclassified": 0
   },
   "runtimeSelectorCoverage": {
-    "expected": 145,
-    "resolved": 145,
+    "expected": 137,
+    "resolved": 137,
     "missing": 0
   },
   "sourceMutationCoverage": {
@@ -49,7 +49,7 @@
     "validators": {
       "name": "validators",
       "exitCode": 0,
-      "durationMs": 2092,
+      "durationMs": 1649,
       "expected": 3,
       "discovered": 3,
       "run": 3,
@@ -61,7 +61,7 @@
     "setup": {
       "name": "setup",
       "exitCode": 0,
-      "durationMs": 3172,
+      "durationMs": 2589,
       "expected": 6,
       "discovered": 6,
       "run": 6,
@@ -73,7 +73,7 @@
     "production": {
       "name": "production",
       "exitCode": 0,
-      "durationMs": 3127,
+      "durationMs": 2579,
       "expected": 6,
       "discovered": 6,
       "run": 6,
@@ -85,7 +85,7 @@
     "guardian": {
       "name": "guardian",
       "exitCode": 0,
-      "durationMs": 3163,
+      "durationMs": 2645,
       "expected": 16,
       "discovered": 16,
       "run": 16,
@@ -97,7 +97,7 @@
     "excavation": {
       "name": "excavation",
       "exitCode": 0,
-      "durationMs": 3118,
+      "durationMs": 2551,
       "expected": 6,
       "discovered": 6,
       "run": 6,
@@ -109,7 +109,7 @@
     "finalEncounter": {
       "name": "finalEncounter",
       "exitCode": 0,
-      "durationMs": 3280,
+      "durationMs": 2597,
       "expected": 12,
       "discovered": 12,
       "run": 12,
@@ -121,7 +121,7 @@
     "monster": {
       "name": "monster",
       "exitCode": 0,
-      "durationMs": 3199,
+      "durationMs": 2653,
       "expected": 7,
       "discovered": 7,
       "run": 7,
@@ -133,7 +133,7 @@
     "saveReplay": {
       "name": "saveReplay",
       "exitCode": 0,
-      "durationMs": 3124,
+      "durationMs": 2768,
       "expected": 12,
       "discovered": 12,
       "run": 12,
@@ -145,11 +145,11 @@
     "traceability": {
       "name": "traceability",
       "exitCode": 0,
-      "durationMs": 2307,
-      "expected": 147,
-      "discovered": 147,
-      "run": 147,
-      "passed": 147,
+      "durationMs": 2159,
+      "expected": 139,
+      "discovered": 139,
+      "run": 139,
+      "passed": 139,
       "failed": 0,
       "skipped": 0,
       "todo": 0
@@ -157,7 +157,7 @@
     "adversarial": {
       "name": "adversarial",
       "exitCode": 0,
-      "durationMs": 3248,
+      "durationMs": 3124,
       "expected": 20,
       "discovered": 20,
       "run": 20,
@@ -169,7 +169,7 @@
     "truthGate": {
       "name": "truthGate",
       "exitCode": 0,
-      "durationMs": 3317,
+      "durationMs": 3116,
       "expected": 15,
       "discovered": 15,
       "run": 15,
@@ -181,7 +181,7 @@
     "freezeEvidence": {
       "name": "freezeEvidence",
       "exitCode": 0,
-      "durationMs": 2341,
+      "durationMs": 2152,
       "expected": 12,
       "discovered": 12,
       "run": 12,
@@ -193,7 +193,7 @@
     "communityE2E": {
       "name": "communityE2E",
       "exitCode": 0,
-      "durationMs": 14907,
+      "durationMs": 14929,
       "expected": 3,
       "discovered": 3,
       "run": 3,
@@ -205,10 +205,108 @@
   },
   "blockerInventory": {
     "sourceLevel": 5,
-    "runtimeOnly": 6,
-    "total": 11
+    "runtimeOnly": 13,
+    "total": 18
   },
   "activeBlockers": [
+    {
+      "code": "TEMPLARS_CRIT_ENGINE_UNSUPPORTED",
+      "requirementId": "runtime-templars-combat",
+      "field": "crit.templarImpalerAndWarlord",
+      "sourcePath": "crit.templarImpalerAndWarlord",
+      "runtimeDependency": "printed critical damage in Templar attacks",
+      "firstBlockingFunction": "runMonsterTurn",
+      "tests": [
+        "BLOCK:TEMPLARS_CRIT_ENGINE_UNSUPPORTED"
+      ],
+      "proofKind": "capability-level",
+      "classification": "runtime-only",
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
+    },
+    {
+      "code": "SHUFFLING_CRIT_ENGINE_UNSUPPORTED",
+      "requirementId": "runtime-shuffling-combat",
+      "field": "crit.horrorPriestAndGrowth",
+      "sourcePath": "crit.horrorPriestAndGrowth",
+      "runtimeDependency": "printed critical damage in Shuffling family attacks",
+      "firstBlockingFunction": "runMonsterTurn",
+      "tests": [
+        "BLOCK:SHUFFLING_CRIT_ENGINE_UNSUPPORTED"
+      ],
+      "proofKind": "capability-level",
+      "classification": "runtime-only",
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
+    },
+    {
+      "code": "GUARDIAN_SHUFFLE_RESISTANCE_ENGINE_UNSUPPORTED",
+      "requirementId": "runtime-guardian-combat",
+      "field": "resistances.shuffle",
+      "sourcePath": "resistances.shuffle",
+      "runtimeDependency": "categorical resistance in board movement",
+      "firstBlockingFunction": "heroSkillActionError",
+      "tests": [
+        "BLOCK:GUARDIAN_SHUFFLE_RESISTANCE_ENGINE_UNSUPPORTED"
+      ],
+      "proofKind": "capability-level",
+      "classification": "runtime-only",
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
+    },
+    {
+      "code": "SHUFFLING_SUMMON_RESISTANCE_ENGINE_UNSUPPORTED",
+      "requirementId": "runtime-shuffling-combat",
+      "field": "resistances.priestAndGrowth",
+      "sourcePath": "resistances.priestAndGrowth",
+      "runtimeDependency": "summoned Priest/Growth BattleUnit status effect application",
+      "firstBlockingFunction": "resolveEchoingDisassembly",
+      "tests": [
+        "BLOCK:SHUFFLING_SUMMON_RESISTANCE_ENGINE_UNSUPPORTED"
+      ],
+      "proofKind": "capability-level",
+      "classification": "runtime-only",
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
+    },
+    {
+      "code": "SHUFFLING_LINKED_VICTORY_CLEANUP_ENGINE_UNSUPPORTED",
+      "requirementId": "tierB-shuffling-horror-room",
+      "field": "victoryCondition.remainingMonsters",
+      "sourcePath": "victoryCondition.remainingMonsters",
+      "runtimeDependency": "cleanup of deployed Priest/Growth BattleUnits; reserve cleanup alone is partial",
+      "firstBlockingFunction": "resolveEchoingDisassembly",
+      "tests": [
+        "BLOCK:SHUFFLING_LINKED_VICTORY_CLEANUP_ENGINE_UNSUPPORTED"
+      ],
+      "proofKind": "semantic-leaf",
+      "classification": "runtime-only",
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
+    },
+    {
+      "code": "FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED",
+      "requirementId": "runtime-community-final",
+      "field": "printedSkillSelection",
+      "sourcePath": "printedSkillSelection",
+      "runtimeDependency": "all normalized Final skill/d10 leaves through Community prepare/start/action/save",
+      "firstBlockingFunction": "prepareFinalEncounter",
+      "tests": [
+        "BLOCK:FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED"
+      ],
+      "proofKind": "capability-level",
+      "classification": "runtime-only",
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
+    },
+    {
+      "code": "FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED",
+      "requirementId": "tierB-ancestor-room",
+      "field": "roomEffects",
+      "sourcePath": "roomEffects",
+      "runtimeDependency": "production-reachable Community transition without injecting Final state",
+      "firstBlockingFunction": "prepareFinalEncounter",
+      "tests": [
+        "BLOCK:FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED"
+      ],
+      "proofKind": "semantic-leaf",
+      "classification": "runtime-only",
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
+    },
     {
       "code": "TEMPLARS_PIT_EXIT_RULE_UNRESOLVED",
       "requirementId": "tierB-templars-room",
@@ -365,6 +463,13 @@
     }
   ],
   "activeBlockerCodes": [
+    "TEMPLARS_CRIT_ENGINE_UNSUPPORTED",
+    "SHUFFLING_CRIT_ENGINE_UNSUPPORTED",
+    "GUARDIAN_SHUFFLE_RESISTANCE_ENGINE_UNSUPPORTED",
+    "SHUFFLING_SUMMON_RESISTANCE_ENGINE_UNSUPPORTED",
+    "SHUFFLING_LINKED_VICTORY_CLEANUP_ENGINE_UNSUPPORTED",
+    "FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED",
+    "FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED",
     "TEMPLARS_PIT_EXIT_RULE_UNRESOLVED",
     "ABSOLUTE_NOTHINGNESS_STANCE_UNRESOLVED",
     "GESTATING_HEART_LETHAL_TIMING_UNRESOLVED",
@@ -381,22 +486,22 @@
     {
       "name": "typecheck",
       "exitCode": 0,
-      "durationMs": 7525
+      "durationMs": 8354
     },
     {
       "name": "build",
       "exitCode": 0,
-      "durationMs": 16654
+      "durationMs": 7226
     },
     {
       "name": "officialSourceGateRegression",
       "exitCode": 0,
-      "durationMs": 233562
+      "durationMs": 187246
     },
     {
       "name": "bindingRegression",
       "exitCode": 0,
-      "durationMs": 13167
+      "durationMs": 10303
     }
   ],
   "officialGateBefore": {
@@ -424,7 +529,7 @@
     "canEnterPhase11B": false
   },
   "communityFullActFourPlayable": false,
-  "communityFullActFourPlayableReason": "11 active source/runtime blockers",
+  "communityFullActFourPlayableReason": "18 active source/runtime blockers",
   "terminalVerdict": "COMMUNITY-REFERENCE-RUNTIME-FROZEN",
   "errors": []
 }
