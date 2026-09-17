@@ -16,5 +16,6 @@ export default defineConfig({
     baseURL: 'http://127.0.0.1:5199',
     viewport: { width: 1280, height: 720 },
     trace: 'off',
+    ...(process.env.PLAYWRIGHT_CHANNEL ? { channel: process.env.PLAYWRIGHT_CHANNEL } : {}),
   },
 });

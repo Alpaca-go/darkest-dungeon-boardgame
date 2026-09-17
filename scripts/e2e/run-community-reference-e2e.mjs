@@ -4,6 +4,7 @@ import { setTimeout as delay } from 'node:timers/promises';
 import { resolve } from 'node:path';
 
 const root = process.cwd();
+process.env.PLAYWRIGHT_CHANNEL = process.env.PLAYWRIGHT_CHANNEL || 'chrome';
 const port = 5199;
 const portOpen = () => new Promise((done) => { const socket = createConnection({ host: '127.0.0.1', port }); socket.once('connect', () => { socket.destroy(); done(true); }); socket.once('error', () => done(false)); });
 const waitForPort = async (want, timeout) => { const until = Date.now() + timeout; while (Date.now() < until) { if (await portOpen() === want) return true; await delay(100); } return false; };

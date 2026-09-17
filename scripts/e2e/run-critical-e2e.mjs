@@ -5,6 +5,7 @@ import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const root = process.cwd();
+process.env.PLAYWRIGHT_CHANNEL = process.env.PLAYWRIGHT_CHANNEL || 'chrome';
 const port = 5199;
 const viteCli = resolve(root, 'node_modules/vite/bin/vite.js');
 const playwrightCli = resolve(root, 'node_modules/@playwright/test/cli.js');

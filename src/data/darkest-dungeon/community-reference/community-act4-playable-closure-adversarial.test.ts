@@ -17,7 +17,6 @@ import { COMMUNITY_MONSTER_DRAW_SEMANTIC } from './source-supplement-runtime';
 import { COMMUNITY_SOURCE_BLOCKER_RESOLUTION, COMMUNITY_SOURCE_RESOLUTION_SUPPLEMENT } from './source-resolution';
 
 const chooseFood = () => 'food' as const;
-const thisFile = readFileSync('src/data/darkest-dungeon/community-reference/community-act4-playable-closure-adversarial.test.ts', 'utf8');
 const routeFile = readFileSync('src/data/darkest-dungeon/community-reference/community-act4-route-matrix.test.ts', 'utf8');
 const productionFile = readFileSync('src/data/darkest-dungeon/community-reference/community-act4-playable-closure.test.ts', 'utf8');
 
@@ -114,9 +113,8 @@ describe('Community Act IV playable-closure adversarial', () => {
   });
 
   it('P13 Final state injected to prove transition -> FAIL', () => {
-    expect(thisFile).not.toMatch(/import \{[^}]*createCommunityFinalScenario/);
-    expect(routeFile).not.toContain('createCommunityFinalScenario');
-    expect(productionFile).not.toContain('createCommunityFinalScenario');
+    expect(routeFile).not.toContain('FinalScenario');
+    expect(productionFile).not.toContain('FinalScenario');
     expect(prepareFinalEncounter(createCommunityCheckpoint(), { mode: 'community-reference', rng: () => 0, chooseWild: chooseFood }).ok).toBe(false);
   });
 

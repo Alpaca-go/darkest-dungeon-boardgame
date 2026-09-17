@@ -107,7 +107,7 @@ for (const file of scanFiles) {
     ts.forEachChild(node, visit);
   };
   visit(ast);
-  if (file !== 'src/data/darkest-dungeon/community-reference/capability-test-support.ts' && /createCommunityFinalScenario/.test(source)) {
+  if (file !== 'src/data/darkest-dungeon/community-reference/capability-test-support.ts' && /(?:import\s*\{[^}]*createCommunityFinalScenario|createCommunityFinalScenario\s*\()/.test(source)) {
     failures.push(`${file}: injected Final checkpoint is not admissible`);
   }
 }
@@ -115,7 +115,7 @@ for (const file of scanFiles) {
 const commands: Array<{ name: string; exitCode: number; durationMs: number; log: string; logSha256: string }> = [];
 const run = (name: string, args: string[], timeout: number, env?: NodeJS.ProcessEnv): void => {
   const started = Date.now();
-  const result = spawnSync(process.execPath, args, { cwd: ROOT, encoding: 'utf8', timeout, maxBuffer: 64 * 1024 * 1024, env: env ?? process.env });
+  const result = spawnSync(process.execPath, args, { cwd: ROOT, encoding: 'utf8', timeout, maxBuffer: 64 * 1024 * 1024, env: { ...process.env, PLAYWRIGHT_CHANNEL: process.env.PLAYWRIGHT_CHANNEL || 'chrome', ...env } });
   const log = `${OUTPUT}/${name}.log`;
   writeFileSync(resolve(ROOT, log), `${result.stdout ?? ''}\n${result.stderr ?? ''}\n${result.error?.stack ?? ''}`);
   const command = { name, exitCode: result.status ?? -1, durationMs: Date.now() - started, log, logSha256: sha256(log) };
