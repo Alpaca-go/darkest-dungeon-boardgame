@@ -1,5 +1,5 @@
-import dossierJson from '../../../../docs/data/darkest-dungeon/community-reference/community-source-blocker-resolution.json';
-import supplementJson from '../../../../docs/data/darkest-dungeon/community-reference/community-source-resolution-supplement.json';
+import dossierJson from '../../../../docs/data/darkest-dungeon/community-reference/community-source-blocker-resolution.json' with { type: 'json' };
+import supplementJson from '../../../../docs/data/darkest-dungeon/community-reference/community-source-resolution-supplement.json' with { type: 'json' };
 
 export type CommunitySourceResolutionVerdict = 'resolved' | 'partially-resolved' | 'unresolved' | 'conflicting';
 
