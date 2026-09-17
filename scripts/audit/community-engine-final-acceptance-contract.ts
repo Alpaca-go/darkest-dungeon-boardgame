@@ -11,20 +11,21 @@ export const SUITES = {
   adversarial: `${SUITE_DIR}community-engine-capability-adversarial.test.ts`,
 };
 const actors = ['templars-impaler', 'templars-warlord', 'mammoth-cyst', 'white-cell-stalk', 'shuffling-horror'];
+const summoned = ['cultist-priest', 'malignant-growth'];
 export const EXPECTED_TEST_IDS = {
   production: [
-    ...actors.flatMap(actor => ['bleed', 'blight', 'stun'].map(category => `P-resistance-${actor}-${category}`)),
+    ...[...actors, ...summoned].flatMap(actor => ['bleed', 'blight', 'stun', 'shuffle'].map(category => `P-resistance-${actor}-${category}`)),
     ...[0, 1, 2].map(index => `P-skill-resistance-${index}`),
     'P-critical-mammoth-cyst-1', 'P-critical-mammoth-cyst-6', 'P-critical-white-cell-stalk-5',
-    ...['templars-impaler', 'templars-warlord', 'shuffling-horror'].map(actor => `P-critical-blocked-${actor}`),
+    ...['templars-impaler', 'templars-warlord', 'shuffling-horror', 'cultist-priest', 'malignant-growth'].map(actor => `P-critical-${actor}-5`),
     'P-quest-provision', 'P-quest-isolation', 'P-quest-living', 'P-final-skill', 'P-final-transition',
     'P-victory-templars', 'P-victory-mammoth', 'P-victory-shuffling',
     ...[0, 1, 2].map(index => `P-round-limit-${index}`),
   ],
   saveReplay: [
-    ...actors.map(actor => `SR-resistance-${actor}`),
+    ...[...actors, ...summoned].map(actor => `SR-resistance-${actor}`),
     'SR-critical-mammoth-cyst-1', 'SR-critical-mammoth-cyst-6', 'SR-critical-white-cell-stalk-5',
-    ...['templars-impaler', 'templars-warlord', 'shuffling-horror'].map(actor => `SR-critical-blocked-${actor}`),
+    ...['templars-impaler', 'templars-warlord', 'shuffling-horror', 'cultist-priest', 'malignant-growth'].map(actor => `SR-critical-${actor}-5`),
     'SR-quest-provision', 'SR-final-skill', 'SR-final-transition',
     'SR-victory-templars', 'SR-victory-mammoth', 'SR-victory-shuffling', 'SR-shuffling-deployed-blocker',
   ],

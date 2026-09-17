@@ -14,15 +14,16 @@ import { finalReady } from './capability-test-support';
 const chooseFood = () => 'food' as const;
 
 describe('Community Act IV three-route matrix', () => {
-  it('R1 We Are The Flame / Shuffling stops at Room 10 non-aggressive area split', () => {
+  it('R1 We Are The Flame / Shuffling deploys Room 10 stance areas and summons Priest before Growth', () => {
     const campaign = createCommunityGuardianScenario(0);
     expect(campaign.actFourState.questDrawRecord?.selectedQuestId).toBe(COMMUNITY_RUNTIME_QUESTS[0].id);
     expect(COMMUNITY_RUNTIME_QUESTS[0].name).toBe('We Are The Flame');
     expect(campaign.actFourState.skippedFinalFormId).toBe('ancestor-second-form');
-    expect(campaign.actFourState.shufflingHorrorEncounterState?.actors.find((actor) => actor.role === 'horror')?.areaId).toBe('r10-SW');
+    expect(campaign.actFourState.shufflingHorrorEncounterState?.actors.find((actor) => actor.role === 'horror')?.areaId).toBe('r10-S');
     const echoing = resolveEchoingDisassembly(campaign.actFourState.shufflingHorrorEncounterState!, 'r1');
-    expect(echoing).toMatchObject({ ok: false, reason: 'SHUFFLING_ROOM10_NON_AGGRESSIVE_STANCE_AREA_UNRESOLVED', summonedRoles: [] });
-    expect(echoing.state.actors.filter((actor) => actor.role !== 'horror').every((actor) => actor.inReserve)).toBe(true);
+    expect(echoing.ok).toBe(true);
+    expect(echoing.summonedRoles).toEqual(['cultist-priest', 'malignant-growth']);
+    expect(echoing.state.actors.filter((actor) => actor.role !== 'horror').every((actor) => !actor.inReserve && actor.areaId)).toBe(true);
   });
 
   it('R2 Light the Way / Templars surfaces Pit exit rather than a golden-path bypass', () => {

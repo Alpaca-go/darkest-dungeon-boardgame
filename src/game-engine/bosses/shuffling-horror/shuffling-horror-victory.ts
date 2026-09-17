@@ -93,6 +93,14 @@ export function resolveShufflingHorrorEncounterVictory(
 
   let staged: CampaignState = {
     ...campaign,
+    battle: campaign.battle
+      ? {
+          ...campaign.battle,
+          monsters: campaign.battle.monsters.map((monster) =>
+            cleanedLinkedActorIds.includes(monster.id) ? { ...monster, hp: 0, isAlive: false } : monster,
+          ),
+        }
+      : campaign.battle,
     actFourState: { ...actFour, shufflingHorrorEncounterState: stagedState },
     updatedAt: now,
   };

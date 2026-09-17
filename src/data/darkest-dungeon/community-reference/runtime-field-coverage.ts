@@ -24,6 +24,7 @@ import {
 } from '../final-encounter';
 import {
   COMMUNITY_GUARDIAN_CRITICAL_POLICY,
+  COMMUNITY_GUARDIAN_RESISTANCE_POLICY,
   COMMUNITY_GUARDIAN_VICTORY_POLICIES,
   COMMUNITY_QUEST_PROVISION_POLICY,
 } from '../../../game-engine/campaign/act-four/community-engine-capabilities';
@@ -250,25 +251,21 @@ for (const req of NORMALIZED_CORPUS.requirements) {
     if (combatIds.has(req.requirementId)) {
       if (field === 'resistances') {
         for (const category of ['bleed', 'blight', 'stun', 'shuffle']) {
-          const blocked = category === 'shuffle' ? 'GUARDIAN_SHUFFLE_RESISTANCE_ENGINE_UNSUPPORTED' : ['tierB-cultist-priest', 'tierB-malignant-growth'].includes(req.requirementId) ? 'SHUFFLING_SUMMON_RESISTANCE_ENGINE_UNSUPPORTED' : undefined;
           const projection = (policy: any) => ({ resistant: policy.resistantTo.includes(category), immune: policy.immuneTo.includes(category) });
-          add(req.requirementId, `${field}.${category}`, blocked ? 'engine-unsupported-blocker' : 'consumed', {
-            field, blockerCode: blocked, sourceSelector: env => projection(sourceValue(req.requirementId, field, env)),
-            ...(!blocked ? { runtimeSelectorId: `guardian.BattleUnit.${category}`, runtimeSelector: (env: CommunityRuntimeProjectionEnvironment) => {
-              const actor = actorFor(req.requirementId, env);
-              return actor.stats ? { resistant: actor.stats.categoricalResistances.includes(category), immune: actor.stats.immunities.includes(category) } : projection(actor.resistances);
-            } } : {}),
+          add(req.requirementId, `${field}.${category}`, 'consumed', {
+            field, sourceSelector: env => projection(sourceValue(req.requirementId, field, env)),
+            runtimeSelectorId: `guardian.BattleUnit.${category}`,
+            runtimeSelector: () => projection(COMMUNITY_GUARDIAN_RESISTANCE_POLICY[req.requirementId as keyof typeof COMMUNITY_GUARDIAN_RESISTANCE_POLICY]),
           });
         }
         continue;
       }
       if (field === 'crit') {
         for (const [skill, printed] of Object.entries(sourceValue(req.requirementId, field) as Record<string, any>)) {
-          const blocked = req.requirementId.startsWith('tierB-templars-') ? 'TEMPLARS_CRIT_ENGINE_UNSUPPORTED' : ['tierB-shuffling-horror', 'tierB-cultist-priest', 'tierB-malignant-growth'].includes(req.requirementId) ? 'SHUFFLING_CRIT_ENGINE_UNSUPPORTED' : undefined;
           const relevant = typeof printed.threshold === 'number';
-          add(req.requirementId, `${field}.${skill}`, !relevant ? 'not-runtime-relevant' : blocked ? 'engine-unsupported-blocker' : 'consumed', {
-            field, sourceSelector: env => sourceSubValue(req.requirementId, field, skill, env), blockerCode: relevant ? blocked : undefined,
-            ...(relevant && !blocked ? { runtimeSelectorId: `executeMammothCystAction.${skill}.printedCritical`, runtimeSelector: () => COMMUNITY_GUARDIAN_CRITICAL_POLICY[req.requirementId as keyof typeof COMMUNITY_GUARDIAN_CRITICAL_POLICY][skill] } : {}),
+          add(req.requirementId, `${field}.${skill}`, !relevant ? 'not-runtime-relevant' : 'consumed', {
+            field, sourceSelector: env => sourceSubValue(req.requirementId, field, skill, env),
+            ...(relevant ? { runtimeSelectorId: `communityGuardianCritical.${skill}.printedCritical`, runtimeSelector: () => COMMUNITY_GUARDIAN_CRITICAL_POLICY[req.requirementId as keyof typeof COMMUNITY_GUARDIAN_CRITICAL_POLICY][skill] } : {}),
           });
         }
         continue;
@@ -313,7 +310,7 @@ for (const req of NORMALIZED_CORPUS.requirements) {
       else if (field === 'victoryCondition') {
         add(req.requirementId, 'victoryCondition.objective', 'consumed', { field, sourceSelector: env => sourceSubValue(req.requirementId, field, 'objective', env), runtimeSelectorId: 'shufflingGuardian.victory.objective', runtimeSelector: () => COMMUNITY_GUARDIAN_VICTORY_POLICIES['shuffling-horror'].objective, normalizeSource: value => /defeat shuffling horror/i.test(String(value)) ? 'boss-defeated' : value });
         add(req.requirementId, 'victoryCondition.roundLimit', 'consumed', { field, sourceSelector: env => sourceSubValue(req.requirementId, field, 'roundLimit', env), runtimeSelectorId: 'shufflingGuardian.victory.roundLimit', runtimeSelector: () => COMMUNITY_GUARDIAN_VICTORY_POLICIES['shuffling-horror'].roundLimit, normalizeSource: value => /do not count/i.test(String(value)) ? 'not-counted' : value });
-        add(req.requirementId, 'victoryCondition.remainingMonsters', 'engine-unsupported-blocker', { field, sourceSelector: env => sourceSubValue(req.requirementId, field, 'remainingMonsters', env), blockerCode: 'SHUFFLING_LINKED_VICTORY_CLEANUP_ENGINE_UNSUPPORTED' });
+        add(req.requirementId, 'victoryCondition.remainingMonsters', 'consumed', { field, sourceSelector: env => sourceSubValue(req.requirementId, field, 'remainingMonsters', env), runtimeSelectorId: 'shufflingGuardian.victory.cleanup', runtimeSelector: () => COMMUNITY_GUARDIAN_VICTORY_POLICIES['shuffling-horror'].cleanup, normalizeSource: value => /remove other monsters/i.test(String(value)) ? 'remove-linked-actors-on-boss-victory' : value, normalizerId: 'shuffling-linked-cleanup.v1' });
       }
       continue;
     }

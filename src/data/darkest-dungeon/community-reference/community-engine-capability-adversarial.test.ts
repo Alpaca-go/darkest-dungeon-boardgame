@@ -3,7 +3,6 @@ import { capabilityAssessments, EXPECTED_TEST_IDS, resolveTestReference, SUITES,
 import { runProductionMutation } from '../../../../scripts/audit/community-engine-production-mutations';
 import { COMMUNITY_RUNTIME_FIELD_COVERAGE } from './runtime-field-coverage';
 import { COMMUNITY_RUNTIME_BLOCKERS } from './runtime-profile';
-import { resolveCommunityGuardianCritical } from '../../../game-engine/campaign/act-four/community-engine-capabilities';
 import { createCommunityCheckpoint } from '../../../testing/scenarios/community-runtime-scenario';
 import { drawDarkestDungeonQuest } from '../../../game-engine/campaign/act-four/draw-quest';
 import { executeMammothCystAction } from '../../../game-engine/bosses/mammoth-cyst/execute-mammoth-cyst-action';
@@ -20,7 +19,7 @@ describe('Community final acceptance rejects false green proofs', () => {
   it('A02 rejects a nonexistent named test in a real file', () => expect(() => resolveTestReference(`${SUITES.production}:missing`, fixtureRows())).toThrow('named test'));
   it('A03 rejects an accepted capability without production proof', () => expect(capabilityAssessments(fixtureRows().filter(row => !row.title.startsWith('P-quest-provision '))).errors.join()).toContain('P-quest-provision'));
   it('A04 rejects an accepted capability without whole-save proof', () => expect(capabilityAssessments(fixtureRows().filter(row => !row.title.startsWith('SR-quest-provision '))).errors.join()).toContain('SR-quest-provision'));
-  it('A05 removed blocker is not implementation evidence', () => expect(capabilityAssessments(fixtureRows(), COMMUNITY_RUNTIME_FIELD_COVERAGE, COMMUNITY_RUNTIME_BLOCKERS.filter(blocker => blocker.code !== 'TEMPLARS_CRIT_ENGINE_UNSUPPORTED')).errors).toContain('critical: unsupported semantic has no active blocker'));
+  it('A05 removed blocker is not implementation evidence', () => expect(capabilityAssessments(fixtureRows(), COMMUNITY_RUNTIME_FIELD_COVERAGE, COMMUNITY_RUNTIME_BLOCKERS.filter(blocker => blocker.code !== 'FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED')).errors).toContain('final-skill: unsupported semantic has no active blocker'));
   it('A06 fewer discovered tests cannot pass with exit zero', () => { const rows = fixtureRows().filter(row => row.file.endsWith(SUITES.production)).slice(1); expect(validateTestGroup(rows, EXPECTED_TEST_IDS.production)).toContain('discovered != expected'); });
   it('A07 skipped test is not a completed proof', () => { const rows = fixtureRows().filter(row => row.file.endsWith(SUITES.production)); rows[0].status = 'pending'; expect(validateTestGroup(rows, EXPECTED_TEST_IDS.production)).toContain('skipped != 0'); });
   it('A08 todo test is not a completed proof', () => { const rows = fixtureRows().filter(row => row.file.endsWith(SUITES.production)); rows[0].status = 'todo'; expect(testCounts(rows, rows.length).todo).toBe(1); expect(validateTestGroup(rows, EXPECTED_TEST_IDS.production)).toContain('todo != 0'); });
@@ -48,16 +47,14 @@ describe('Community final acceptance rejects false green proofs', () => {
     const result = runProductionMutation('src/game-engine/campaign/act-four/community-guardian-battle.ts', `if (state.${property}) return ${resolver}(next);`, `if (state.${property}) return { ok: true, campaign: next, reason: null };`, test);
     expect(result.discovered, result.diagnostics).toBe(1); expect(result.failed, result.diagnostics).toBe(1); expect(result.exitCode).not.toBe(0);
   }, 100_000);
-  it('A17 passing Templars critical helper cannot close its unsupported production leaf', () => {
-    expect(resolveCommunityGuardianCritical('tierB-templars-impaler', 'torment', 1, 10, 3).critical).toBe(true);
-    const forged = COMMUNITY_RUNTIME_FIELD_COVERAGE.map(leaf => leaf.blockerCode === 'TEMPLARS_CRIT_ENGINE_UNSUPPORTED' ? { ...leaf, classification: 'consumed' as const, blockerCode: null, runtimeSelectorId: 'forged.helper' } : leaf);
-    expect(capabilityAssessments(fixtureRows(), forged).errors.join()).toContain('P-critical-templars');
-  });
-  it('A18 passing Shuffling critical helper cannot close its unsupported production leaf', () => {
-    expect(resolveCommunityGuardianCritical('tierB-shuffling-horror', 'lacerate', 1, 10, 3).critical).toBe(true);
-    const forged = COMMUNITY_RUNTIME_FIELD_COVERAGE.map(leaf => leaf.blockerCode === 'SHUFFLING_CRIT_ENGINE_UNSUPPORTED' ? { ...leaf, classification: 'consumed' as const, blockerCode: null, runtimeSelectorId: 'forged.helper' } : leaf);
-    expect(capabilityAssessments(fixtureRows(), forged).errors.join()).toContain('P-critical-shuffling');
-  });
+  it('A17 removing the production Templars critical hook fails the real attack case', () => {
+    const result = runProductionMutation('src/game-engine/campaign/act-four/community-guardian-combat.ts', 'const outcome = resolveCommunityGuardianCritical(requirementId, localSkill, attackRoll, skill.accuracy ?? 7, skill.minDamage ?? 0);', 'const outcome = { hit: true, critical: false, damage: skill.minDamage ?? 0 };', 'P-critical-templars-impaler-5');
+    expect(result.discovered, result.diagnostics).toBe(1); expect(result.failed, result.diagnostics).toBe(1); expect(result.exitCode).not.toBe(0);
+  }, 100_000);
+  it('A18 removing the production Shuffling critical hook fails the real attack case', () => {
+    const result = runProductionMutation('src/game-engine/campaign/act-four/community-guardian-combat.ts', 'const outcome = resolveCommunityGuardianCritical(requirementId, localSkill, attackRoll, skill.accuracy ?? 7, skill.minDamage ?? 0);', 'const outcome = { hit: true, critical: false, damage: 0 };', 'P-critical-shuffling-horror-5');
+    expect(result.discovered, result.diagnostics).toBe(1); expect(result.failed, result.diagnostics).toBe(1); expect(result.exitCode).not.toBe(0);
+  }, 100_000);
   it('A19 a transition policy constant cannot replace production transition and save proof', () => {
     const forged = COMMUNITY_RUNTIME_FIELD_COVERAGE.map(leaf => leaf.blockerCode === 'FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED' ? { ...leaf, classification: 'consumed' as const, blockerCode: null, runtimeSelectorId: 'constant' } : leaf);
     expect(capabilityAssessments(fixtureRows(), forged).errors).toContain('final-transition: missing production/save proof contract');
@@ -78,12 +75,13 @@ describe('Community final acceptance rejects false green proofs', () => {
     const result = executeMammothCystAction(restored, first.cardId, { mode: 'community-reference', targetHeroId: restored.heroes[1].instanceId, rng: noRng });
     expect(result.ok).toBe(false); expect(result.reason).toContain('target mismatch'); expect(result.campaign).toBe(restored);
   });
-  it('A23 unsupported shuffle blocks before movement damage and RNG', () => {
+  it('A23 shuffle resistance reduces movement instead of blocking the skill', () => {
     const campaign = scenario('mammoth-cyst'); let battle = advanceTurn(campaign.battle!);
     for (let step = 0; step < 8 && battle.heroes.find(unit => unit.id === battle.activeActorId)!.position > 2; step++) battle = endHeroTurn(battle, battle.activeActorId!);
-    const actor = battle.activeActorId!; const target = battle.monsters[0].id; setRandomSource(noRng);
-    expect(heroSkillActionError(battle, actor, 'hellion-bash', target)).toBe('GUARDIAN_SHUFFLE_RESISTANCE_ENGINE_UNSUPPORTED');
+    const actor = battle.activeActorId!; const target = battle.monsters[0].id;
+    expect(heroSkillActionError(battle, actor, 'hellion-bash', target)).toBeNull();
     const result = heroUseSkill(battle, actor, 'hellion-bash', target);
-    expect(result.monsters).toEqual(battle.monsters); expect(result.currentActionPoints).toBe(battle.currentActionPoints);
+    expect(result.currentActionPoints).toBeLessThan(battle.currentActionPoints);
+    expect(result.monsters.find(unit => unit.id === target)!.position).toBe(battle.monsters.find(unit => unit.id === target)!.position);
   });
 });

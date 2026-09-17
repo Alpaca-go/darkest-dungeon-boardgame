@@ -1,16 +1,28 @@
 import { expect } from 'vitest';
 import type { CampaignState } from '../../../types';
 import { createCommunityGuardianScenario } from '../../../testing/scenarios/community-runtime-scenario';
-import { advanceTurn, endHeroTurn } from '../../../game-engine/battle';
+import { advanceTurn, endHeroTurn, runMonsterTurn } from '../../../game-engine/battle';
 import { beginHeroSkillAction } from '../../../game-engine/trinkets/battle-trinket-bridge';
 import { commitBattleVictory } from '../../../game-engine/commands/battle';
 import { executeMammothCystAction } from '../../../game-engine/bosses/mammoth-cyst/execute-mammoth-cyst-action';
+import { resolveEchoingDisassembly } from '../../../game-engine/bosses/shuffling-horror/echoing-disassembly-summon';
+import { appendShufflingSummonBattleUnits } from '../../../game-engine/bosses/shuffling-horror/shuffling-horror-runtime';
 import { createSaveSnapshot, migrateSaveFile, restoreSaveSnapshot, validateSaveFile } from '../../../game-engine/save';
 import { startFinalHamlet, advanceFinalHamletDay } from '../../../game-engine/campaign/act-four/final-hamlet';
+import { setRandomSource } from '../../../game-engine/random';
 
 export const noRng = (): never => { throw new Error('Unexpected RNG consumption'); };
 export const actors = ['templars-impaler', 'templars-warlord', 'mammoth-cyst', 'white-cell-stalk', 'shuffling-horror'] as const;
+export const summonedActors = ['cultist-priest', 'malignant-growth'] as const;
 export type Actor = typeof actors[number];
+export type CombatActor = Actor | typeof summonedActors[number];
+export function scriptedD10(...rolls: number[]) {
+  const queue = [...rolls];
+  setRandomSource(() => {
+    if (queue.length === 0) return 0.49;
+    return (queue.shift()! - 0.5) / 10;
+  });
+}
 export function reload(campaign: CampaignState): CampaignState {
   const file = migrateSaveFile(JSON.parse(JSON.stringify(createSaveSnapshot(campaign))));
   expect(file).not.toBeNull();
@@ -24,10 +36,20 @@ export function scenario(actor: Actor): CampaignState {
   expect(campaign.battle).not.toBeNull();
   return campaign;
 }
-export function targetId(campaign: CampaignState, actor: Actor): string {
+export function targetId(campaign: CampaignState, actor: CombatActor): string {
   const unit = campaign.battle!.monsters.find(unit => unit.sourceId === `community-dd-${actor}`);
   expect(unit).toBeDefined();
   return unit!.id;
+}
+export function deployShufflingSummons(campaign = createCommunityGuardianScenario(0)): CampaignState {
+  const echo = resolveEchoingDisassembly(campaign.actFourState.shufflingHorrorEncounterState!, 'capability-echo');
+  expect(echo.ok, echo.reason ?? '').toBe(true);
+  expect(echo.summonedRoles).toEqual(['cultist-priest', 'malignant-growth']);
+  return {
+    ...campaign,
+    battle: appendShufflingSummonBattleUnits(campaign.battle!, echo.state, echo.summonedRoles),
+    actFourState: { ...campaign.actFourState, shufflingHorrorEncounterState: echo.state },
+  };
 }
 export function summon(campaign = createCommunityGuardianScenario(2)): CampaignState {
   const card = campaign.actFourState.mammothCystEncounterState!.initiativeCards.find(card => card.owner === 'mammoth-cyst')!;
@@ -51,6 +73,16 @@ export function attack(actor: 'mammoth-cyst' | 'white-cell-stalk', skillRoll: nu
   expect(rolls).toEqual([]);
   return { before: campaign, result, cardId: card.id, heroId };
 }
+export function communityAttack(actor: Exclude<CombatActor, 'mammoth-cyst' | 'white-cell-stalk'>, skillRoll: number, hitRoll: number) {
+  const campaign = summonedActors.includes(actor as typeof summonedActors[number]) ? deployShufflingSummons() : scenario(actor as Actor);
+  const hero = campaign.battle!.heroes.find(unit => unit.isAlive)!;
+  scriptedD10(skillRoll, hitRoll);
+  const result = runMonsterTurn(campaign.battle!, targetId(campaign, actor));
+  const event = result.communityAttackEvents?.at(-1);
+  expect(event).toBeDefined();
+  expect(event!.attackRoll).toBe(hitRoll);
+  return { before: campaign.battle!, result, heroId: hero.id, campaign: { ...campaign, battle: result } };
+}
 
 /** Play registered Hero skills from a real setup, without editing HP/actor/transaction state. */
 export function defeatWithHeroSkills(campaign: CampaignState, actor: Actor): CampaignState {
@@ -72,7 +104,7 @@ export function defeatWithHeroSkills(campaign: CampaignState, actor: Actor): Cam
   return next;
 }
 export function win(index: 0 | 1 | 2): CampaignState {
-  let campaign = index === 2 ? summon() : createCommunityGuardianScenario(index);
+  let campaign = index === 2 ? summon() : index === 0 ? deployShufflingSummons() : createCommunityGuardianScenario(index);
   const targets: Actor[] = index === 1 ? ['templars-impaler', 'templars-warlord'] : index === 2 ? ['mammoth-cyst'] : ['shuffling-horror'];
   for (const actor of targets) campaign = defeatWithHeroSkills(campaign, actor);
   const result = commitBattleVictory(campaign);

@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { actors, attack, defeatWithHeroSkills, finalReady, noRng, reload, scenario, targetId, win } from './capability-test-support';
+import { actors, attack, communityAttack, defeatWithHeroSkills, deployShufflingSummons, finalReady, noRng, reload, scenario, summonedActors, targetId, win } from './capability-test-support';
 import { applyStatusEffectEvent, resolveStartOfTurnConditions, tickStun } from '../../../game-engine/status-effects';
 import { runMonsterTurn } from '../../../game-engine/battle';
 import { executeMammothCystAction } from '../../../game-engine/bosses/mammoth-cyst/execute-mammoth-cyst-action';
@@ -10,13 +10,12 @@ import { transitionToNextFinalForm } from '../../../game-engine/campaign/act-fou
 import { performFinalFormSispersion } from '../../../game-engine/campaign/act-four/final-forms/final-form-actions';
 import { commitBattleVictory } from '../../../game-engine/commands/battle';
 import { seededRuntimeSources, setRuntimeSources, setRandomSource } from '../../../game-engine/random';
-import { resolveEchoingDisassembly } from '../../../game-engine/bosses/shuffling-horror/echoing-disassembly-summon';
 beforeEach(() => { setRuntimeSources(seededRuntimeSources(1203)); setRandomSource(() => 0.49); });
 afterEach(() => setRandomSource(null));
 
 describe('Community capability whole SaveFile replay acceptance', () => {
-  for (const actor of actors) it(`SR-resistance-${actor} effect events survive migration and replay without duplicate stacks`, () => {
-    const before = reload(scenario(actor)); const id = targetId(before, actor);
+  for (const actor of [...actors, ...summonedActors]) it(`SR-resistance-${actor} effect events survive migration and replay without duplicate stacks`, () => {
+    const before = reload(summonedActors.includes(actor as typeof summonedActors[number]) ? deployShufflingSummons() : scenario(actor as typeof actors[number])); const id = targetId(before, actor);
     const effects = [{ type: 'bleed' as const, amount: 3, durationTurns: 2 }, { type: 'blight' as const, amount: 3, durationTurns: 2 }, { type: 'stun' as const, amount: 3, durationTurns: 2 }];
     const battle = applyStatusEffectEvent(before.battle!, id, effects, 'resistance-event');
     const restored = reload({ ...before, battle }); setRandomSource(noRng);
@@ -36,11 +35,12 @@ describe('Community capability whole SaveFile replay acceptance', () => {
     expect(result.damageDealt).toBe(first.result.damageDealt);
     expect(result.campaign.processedDamageEventIds).toEqual(first.result.campaign.processedDamageEventIds);
   });
-  for (const actor of ['templars-impaler', 'templars-warlord', 'shuffling-horror'] as const) it(`SR-critical-blocked-${actor} reload cannot manufacture an unsupported attack`, () => {
-    const before = scenario(actor); const restored = reload(before); setRandomSource(noRng);
+  for (const actor of ['templars-impaler', 'templars-warlord', 'shuffling-horror', 'cultist-priest', 'malignant-growth'] as const) it(`SR-critical-${actor}-5 saved printed roll damage and exact target replay without RNG`, () => {
+    const first = communityAttack(actor, 5, 1);
+    const restored = reload(first.campaign); setRandomSource(noRng);
     const result = runMonsterTurn(restored.battle!, targetId(restored, actor));
-    expect(result.heroes).toEqual(restored.battle!.heroes);
-    expect(result.battleLog.at(-1)?.message).toContain('CRIT_ENGINE_UNSUPPORTED');
+    expect(result.communityAttackEvents).toEqual(first.result.communityAttackEvents);
+    expect(result.heroes.map(hero => hero.hp)).toEqual(first.result.heroes.map(hero => hero.hp));
   });
   it('SR-quest-provision saved exact Wild choices and pool replay with no RNG or duplicate grants', () => {
     const initial = reload(createCommunityCheckpoint()); const dice = [0, ...Array(8).fill(0.99)];
@@ -85,9 +85,10 @@ describe('Community capability whole SaveFile replay acceptance', () => {
     expect(result.campaign.battle!.monsters.every(unit => !unit.isAlive)).toBe(true);
   });
   it('SR-shuffling-deployed-blocker save cannot bypass missing placement to fabricate linked cleanup proof', () => {
-    const before = reload(createCommunityGuardianScenario(0)); setRandomSource(noRng);
+    const before = reload(deployShufflingSummons());
     const state = before.actFourState.shufflingHorrorEncounterState!;
-    expect(resolveEchoingDisassembly(state, 'deployed-cleanup-proof')).toMatchObject({ ok: false, reason: 'SHUFFLING_ROOM10_NON_AGGRESSIVE_STANCE_AREA_UNRESOLVED', state });
+    expect(state.actors.filter(actor => actor.role !== 'horror').every(actor => !actor.inReserve && actor.areaId)).toBe(true);
     expect(reload(before).actFourState.shufflingHorrorEncounterState).toEqual(state);
+    expect(before.battle!.monsters.some(unit => unit.sourceId === 'community-dd-cultist-priest')).toBe(true);
   });
 });

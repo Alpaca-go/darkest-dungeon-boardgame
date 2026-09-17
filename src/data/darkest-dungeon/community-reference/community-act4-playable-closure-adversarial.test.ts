@@ -81,17 +81,16 @@ describe('Community Act IV playable-closure adversarial', () => {
     const state = createCommunityGuardianScenario(0).actFourState.shufflingHorrorEncounterState!;
     expect(getMissingSummonRoles(state)).toEqual(['cultist-priest', 'malignant-growth']);
     const echoing = resolveEchoingDisassembly(state, 'p09');
-    expect(echoing.ok).toBe(false);
-    expect(echoing.summonedRoles).toEqual([]);
-    expect(echoing.state.actors).toEqual(state.actors);
+    expect(echoing.ok).toBe(true);
+    expect(echoing.summonedRoles).toEqual(['cultist-priest', 'malignant-growth']);
+    expect(echoing.state.actors.find((actor) => actor.role === 'cultist-priest')?.inReserve).toBe(false);
   });
 
   it('P10 deployed Shuffling linked actor survives victory cleanup -> FAIL', () => {
-    const setup = createCommunityGuardianScenario(0).actFourState.shufflingHorrorEncounterState!;
-    expect(setup.actors.filter((actor) => actor.role !== 'horror' && !actor.inReserve)).toEqual([]);
     const victory = win(0);
     expect(victory.actFourState.shufflingHorrorEncounterState!.actors.every((actor) => !actor.alive)).toBe(true);
-    expect(COMMUNITY_RUNTIME_BLOCKERS.some((blocker) => blocker.code === 'SHUFFLING_LINKED_VICTORY_CLEANUP_ENGINE_UNSUPPORTED')).toBe(true);
+    expect(victory.battle!.monsters.filter((unit) => unit.sourceId.startsWith('community-dd-')).every((unit) => !unit.isAlive)).toBe(true);
+    expect(COMMUNITY_RUNTIME_BLOCKERS.some((blocker) => blocker.code === 'SHUFFLING_LINKED_VICTORY_CLEANUP_ENGINE_UNSUPPORTED')).toBe(false);
   });
 
   it('P11 Nothingness receives Initiative/turn -> FAIL', () => {
@@ -153,7 +152,7 @@ describe('Community Act IV playable-closure adversarial', () => {
 
   it('P20 route matrix hides a reachable blocker -> FAIL', () => {
     expect(COMMUNITY_REFERENCE_RUNTIME_PROFILE.runtimeBlockers.length).toBeGreaterThan(0);
-    expect(routeFile).toContain('SHUFFLING_ROOM10_NON_AGGRESSIVE_STANCE_AREA_UNRESOLVED');
     expect(routeFile).toContain('TEMPLARS_PIT_EXIT_RULE_UNRESOLVED');
+    expect(routeFile).toContain('TEMPLARS_AREA_ADJACENCY_UNRESOLVED');
   });
 });

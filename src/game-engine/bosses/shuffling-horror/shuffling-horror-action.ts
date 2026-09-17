@@ -17,6 +17,7 @@ import { pushLog } from '../../log';
 import { nowIso } from '../../random';
 import { createSeededRng } from '../../campaign/act-four/rng';
 import {
+  appendShufflingSummonBattleUnits,
   getMissingSummonRoles,
   hasProcessedShufflingHorrorTransaction,
   resolveMonsterInitiativeCardById,
@@ -191,6 +192,9 @@ export function executeShufflingHorrorAction(
 
   const nextCampaign: CampaignState = {
     ...campaign,
+    battle: campaign.battle && decision.decision === 'echoing-disassembly'
+      ? appendShufflingSummonBattleUnits(campaign.battle, nextState, summonedRoles)
+      : campaign.battle,
     actFourState: { ...actFour, shufflingHorrorEncounterState: nextState },
     updatedAt: now,
   };

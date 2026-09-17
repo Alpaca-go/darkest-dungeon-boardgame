@@ -5,7 +5,8 @@ import { drawDarkestDungeonQuest } from '../../../game-engine/campaign/act-four/
 import { resolveExcavationSiteRoom } from '../../../game-engine/campaign/act-four/excavation-site';
 import { prepareFinalEncounter } from '../../../game-engine/campaign/act-four/prepare-final-encounter';
 import { finalReady, reload } from './capability-test-support';
-import { COMMUNITY_HORROR_INITIAL_AREA_ID, COMMUNITY_MONSTER_DRAW_SEMANTIC } from './source-supplement-runtime';
+import { COMMUNITY_ROOM10_STANCE_AREAS } from './community-source-geometry';
+import { COMMUNITY_MONSTER_DRAW_SEMANTIC } from './source-supplement-runtime';
 import { COMMUNITY_SOURCE_RESOLUTION_SUPPLEMENT } from './source-resolution';
 import { COMMUNITY_RUNTIME_BLOCKERS } from './runtime-profile';
 import { setupFinalFormRuntime } from '../../../game-engine/campaign/act-four/final-forms/final-form-runtime';
@@ -69,13 +70,13 @@ describe('Community Act IV playable-closure production', () => {
     expect(replay.actFourState.contentRuntime!.physicalMonsterDeck).toEqual(deck);
   });
 
-  it('PC07 Horror deploys Aggressive r10-SW with Priest and Growth in reserve', () => {
+  it('PC07 Horror deploys Aggressive r10-S with Priest and Growth in reserve', () => {
     const state = createCommunityGuardianScenario(0).actFourState.shufflingHorrorEncounterState!;
     const horror = state.actors.find((actor) => actor.role === 'horror')!;
-    expect(horror.areaId).toBe(COMMUNITY_HORROR_INITIAL_AREA_ID);
+    expect(horror.areaId).toBe(COMMUNITY_ROOM10_STANCE_AREAS.monster.aggressive);
     expect(horror.stances).toEqual(['aggressive']);
     expect(state.actors.filter((actor) => actor.role !== 'horror').every((actor) => actor.inReserve && actor.areaId === null)).toBe(true);
-    expect(state.heroStanceAssignments.filter((hero) => hero.stance === 'aggressive').every((hero) => hero.areaId === COMMUNITY_HORROR_INITIAL_AREA_ID)).toBe(true);
+    expect(state.heroStanceAssignments.filter((hero) => hero.stance === 'aggressive').every((hero) => hero.areaId === COMMUNITY_ROOM10_STANCE_AREAS.hero.aggressive)).toBe(true);
   });
 
   it('PC08 Excavation uses a separate transaction and then opens free Rest', () => {
@@ -114,7 +115,7 @@ describe('Community Act IV playable-closure production', () => {
   });
 
   it('PC11 remaining source blockers stay explicit', () => {
-    const remaining = ['TEMPLARS_PIT_EXIT_RULE_UNRESOLVED', 'GESTATING_HEART_LETHAL_TIMING_UNRESOLVED', 'COME_UNTO_YOUR_MAKER_UNRESOLVED', 'MONSTER_CARD_FRONT_BACK_SIZE_UNRESOLVED', 'SHUFFLING_ROOM10_NON_AGGRESSIVE_STANCE_AREA_UNRESOLVED'];
+    const remaining = ['TEMPLARS_PIT_EXIT_RULE_UNRESOLVED', 'GESTATING_HEART_LETHAL_TIMING_UNRESOLVED', 'COME_UNTO_YOUR_MAKER_UNRESOLVED', 'MONSTER_CARD_FRONT_BACK_SIZE_UNRESOLVED'];
     expect(remaining.every((code) => COMMUNITY_RUNTIME_BLOCKERS.some((blocker) => blocker.code === code))).toBe(true);
   });
 });

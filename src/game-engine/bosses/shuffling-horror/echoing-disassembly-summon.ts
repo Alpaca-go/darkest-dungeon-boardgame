@@ -18,6 +18,7 @@ import type {
   ShufflingHorrorRole,
 } from '../../../types/shuffling-horror';
 import { createId } from '../../random';
+import { COMMUNITY_ROOM10_STANCE_AREAS } from '../../../data/darkest-dungeon/community-reference/community-source-geometry';
 import {
   PROTOTYPE_SHUFFLING_HORROR_AREA_MAP,
   SHUFFLING_HORROR_STANCE_PRIORITY,
@@ -79,16 +80,6 @@ export function resolveEchoingDisassembly(
   state: ShufflingHorrorEncounterState,
   sourceCardId: string,
 ): EchoingDisassemblyResult {
-  if (state.mode === 'community-reference') {
-    return {
-      ok: false,
-      state,
-      summonedRoles: [],
-      summonedActorIds: [],
-      addedCardIds: [],
-      reason: 'SHUFFLING_ROOM10_NON_AGGRESSIVE_STANCE_AREA_UNRESOLVED',
-    };
-  }
   const battleId = state.guardianBattleId;
   const missing = getMissingSummonRoles(state);
 
@@ -113,7 +104,13 @@ export function resolveEchoingDisassembly(
       };
     }
     occ[stance] = `plan-${role}`;
-    plan.push({ role, stance, areaId: PROTOTYPE_SHUFFLING_HORROR_AREA_MAP[stance] });
+    plan.push({
+      role,
+      stance,
+      areaId: state.mode === 'community-reference'
+        ? COMMUNITY_ROOM10_STANCE_AREAS.monster[stance]
+        : PROTOTYPE_SHUFFLING_HORROR_AREA_MAP[stance],
+    });
   }
 
   // ---- 提交：激活 Actor ----

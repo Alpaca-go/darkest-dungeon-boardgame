@@ -42,14 +42,14 @@ import {
   validateCommunityShufflingDefinitions,
   type CommunityShufflingActorSpec,
 } from '../../../data/darkest-dungeon/community-reference/production-adapters';
-import { COMMUNITY_HORROR_INITIAL_AREA_ID } from '../../../data/darkest-dungeon/community-reference/source-supplement-runtime';
+import { COMMUNITY_ROOM10_STANCE_AREAS } from '../../../data/darkest-dungeon/community-reference/community-source-geometry';
 import { makeHeroUnit } from '../../battle';
 import { pushLog } from '../../log';
 import { nowIso } from '../../random';
 import { createSeededRng, shuffleWithRng } from '../../campaign/act-four/rng';
 
-if (!COMMUNITY_SHUFFLING_ROOM.areaIds.includes(COMMUNITY_HORROR_INITIAL_AREA_ID)) {
-  throw new Error('Accepted Horror area r10-SW is missing from Community Room 10');
+if (!COMMUNITY_SHUFFLING_ROOM.areaIds.includes(COMMUNITY_ROOM10_STANCE_AREAS.monster.aggressive)) {
+  throw new Error('Accepted Horror area r10-S is missing from Community Room 10');
 }
 
 // ---------------------------------------------------------------------------
@@ -134,7 +134,7 @@ export function buildShufflingHorrorActorState(
     generation,
     stances: inReserve ? [] : [spec.requiredStance as MonsterStance],
     areaId: inReserve ? null : mode === 'community-reference'
-      ? COMMUNITY_HORROR_INITIAL_AREA_ID
+      ? COMMUNITY_ROOM10_STANCE_AREAS.monster[spec.requiredStance as MonsterStance]
       : PROTOTYPE_SHUFFLING_HORROR_AREA_MAP[spec.requiredStance as MonsterStance],
     inReserve,
     actionBudgetUsedThisRound: 0,
@@ -142,13 +142,17 @@ export function buildShufflingHorrorActorState(
   };
 }
 
-/** 构建 Horror 的战斗单位（进入 BattleState.monsters）。 */
-export function buildShufflingHorrorBattleUnit(mode: 'formal' | 'prototype' | 'community-reference' = 'prototype'): BattleUnit {
+/** 构建 Horror / 召唤物的战斗单位（进入 BattleState.monsters）。 */
+export function buildShufflingHorrorBattleUnit(
+  mode: 'formal' | 'prototype' | 'community-reference' = 'prototype',
+  role: ShufflingHorrorRole = 'horror',
+): BattleUnit {
   const spec = (mode === 'community-reference'
-    ? COMMUNITY_SHUFFLING_ACTORS.find((actor) => actor.role === 'horror')
-    : getShufflingHorrorActorSpec('horror')) as CommunityShufflingActorSpec;
-  if (!spec) throw new Error('未定义 Community Shuffling Horror');
+    ? COMMUNITY_SHUFFLING_ACTORS.find((actor) => actor.role === role)
+    : getShufflingHorrorActorSpec(role)) as CommunityShufflingActorSpec;
+  if (!spec) throw new Error(`未定义 Community Shuffling Horror 角色：${role}`);
   const id = `u_${spec.actorDefinitionId}`;
+  const position = role === 'horror' ? SHUFFLING_HORROR_BATTLE_POSITION : role === 'cultist-priest' ? 2 : 3;
   return {
     id,
     name: spec.name,
@@ -157,9 +161,9 @@ export function buildShufflingHorrorBattleUnit(mode: 'formal' | 'prototype' | 'c
     maxHp: spec.maxHp,
     hp: spec.maxHp,
     stress: 0,
-    position: SHUFFLING_HORROR_BATTLE_POSITION,
+    position,
     speed: 'speed' in spec ? spec.speed : 4,
-    stance: 'aggressive',
+    stance: role === 'horror' ? 'aggressive' : role === 'cultist-priest' ? 'defensive' : 'ranged',
     isAlive: spec.maxHp > 0,
     atDeathsDoor: false,
     deathblowRollCount: 0,
@@ -181,6 +185,23 @@ export function buildShufflingHorrorBattleUnit(mode: 'formal' | 'prototype' | 'c
     afflictionId: null,
     mentalEffectResolvedTurnId: null,
   };
+}
+
+export function appendShufflingSummonBattleUnits(
+  battle: BattleState,
+  state: ShufflingHorrorEncounterState,
+  roles: ShufflingHorrorRole[],
+): BattleState {
+  let monsters = [...battle.monsters];
+  for (const role of roles) {
+    const actor = state.actors.find((item) => item.role === role);
+    if (!actor) continue;
+    const unit = { ...buildShufflingHorrorBattleUnit(state.mode, role), id: actor.actorId, isAlive: actor.alive, hp: actor.alive ? (buildShufflingHorrorBattleUnit(state.mode, role).maxHp) : 0 };
+    monsters = monsters.some((monster) => monster.id === unit.id)
+      ? monsters.map((monster) => monster.id === unit.id ? unit : monster)
+      : [...monsters, unit];
+  }
+  return { ...battle, monsters };
 }
 
 // ---------------------------------------------------------------------------
@@ -304,7 +325,7 @@ export function setupShufflingHorrorEncounter(
       heroId: h.instanceId,
       stance,
       areaId: mode === 'community-reference'
-        ? (stance === 'aggressive' ? COMMUNITY_HORROR_INITIAL_AREA_ID : '')
+        ? COMMUNITY_ROOM10_STANCE_AREAS.hero[stance]
         : PROTOTYPE_SHUFFLING_HORROR_AREA_MAP[stance],
       hasActedThisRound: false,
     };

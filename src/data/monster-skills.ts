@@ -102,8 +102,10 @@ export const MONSTER_SKILLS: MonsterSkillDefinition[] = [
   },
 ];
 
+import { communityGuardianMonsterSkills } from '../game-engine/campaign/act-four/community-guardian-combat';
+
 export function getMonsterSkillById(id: string): MonsterSkillDefinition | undefined {
-  return MONSTER_SKILLS.find((s) => s.id === id);
+  return MONSTER_SKILLS.find((s) => s.id === id) ?? communityGuardianMonsterSkills().find((s) => s.id === id);
 }
 
 export function getMonsterSkills(monsterId: string): MonsterSkillDefinition[] {

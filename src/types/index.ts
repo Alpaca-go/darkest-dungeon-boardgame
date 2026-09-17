@@ -365,6 +365,17 @@ export interface BattleState {
     effects: ActiveEffect[];
     blocked: Array<{ type: ActiveEffect['type']; reason: 'immune' | 'resisted'; durationReducedFrom?: number; durationReducedTo?: number }>;
   }>;
+  communityAttackEvents?: Array<{
+    eventId: string;
+    monsterId: string;
+    skillId: string;
+    targetId: string;
+    skillRoll: number;
+    attackRoll: number;
+    hit: boolean;
+    critical: boolean;
+    damage: number;
+  }>;
   battleId: string;
   status: BattleStatus;
   round: number;

@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { actors, attack, defeatWithHeroSkills, finalReady, noRng, scenario, summon, targetId, win } from './capability-test-support';
+import { actors, attack, communityAttack, defeatWithHeroSkills, deployShufflingSummons, finalReady, noRng, scenario, summonedActors, summon, targetId, win } from './capability-test-support';
 import { applyStatusEffectEvent } from '../../../game-engine/status-effects';
-import { advanceTurn, endHeroTurn, heroUseSkill, runMonsterTurn } from '../../../game-engine/battle';
+import { advanceTurn, endHeroTurn, heroUseSkill } from '../../../game-engine/battle';
 import { commitBattleVictory } from '../../../game-engine/commands/battle';
 import { createCommunityCheckpoint, createCommunityGuardianScenario } from '../../../testing/scenarios/community-runtime-scenario';
 import { drawDarkestDungeonQuest } from '../../../game-engine/campaign/act-four/draw-quest';
@@ -17,9 +17,9 @@ beforeEach(() => { setRuntimeSources(seededRuntimeSources(1203)); setRandomSourc
 afterEach(() => setRandomSource(null));
 
 describe('Community capability production acceptance', () => {
-  for (const actor of actors) for (const category of ['bleed', 'blight', 'stun'] as const) {
+  for (const actor of [...actors, ...summonedActors]) for (const category of ['bleed', 'blight', 'stun'] as const) {
     it(`P-resistance-${actor}-${category} applies actual BattleUnit effects through the shared skill pipeline`, () => {
-      const campaign = scenario(actor);
+      const campaign = summonedActors.includes(actor as typeof summonedActors[number]) ? deployShufflingSummons() : scenario(actor as typeof actors[number]);
       const unit = campaign.battle!.monsters.find(unit => unit.id === targetId(campaign, actor))!;
       const policy = requirement(`tierB-${actor}`).fields.resistances.value as { resistantTo: string[]; immuneTo: string[] };
       expect(unit.categoricalResistances).toEqual(policy.resistantTo.filter(value => value !== 'shuffle'));
@@ -32,6 +32,24 @@ describe('Community capability production acceptance', () => {
       expect(result.statusEffectEvents![0].blocked).toEqual(policy.immuneTo.includes(category) ? [{ type: category, reason: 'immune' }] : policy.resistantTo.includes(category) ? [{ type: category, reason: 'resisted', durationReducedFrom: 2, durationReducedTo: 1 }] : []);
     });
   }
+  for (const actor of [...actors, ...summonedActors]) it(`P-resistance-${actor}-shuffle applies reduced board movement instead of a categorical engine block`, () => {
+    const campaign = summonedActors.includes(actor as typeof summonedActors[number]) ? deployShufflingSummons() : scenario(actor as typeof actors[number]);
+    let battle = advanceTurn(campaign.battle!);
+    for (let step = 0; step < 8 && battle.heroes.find(unit => unit.id === battle.activeActorId)!.position > 2; step++) battle = endHeroTurn(battle, battle.activeActorId!);
+    const actorId = battle.activeActorId!;
+    const target = targetId({ ...campaign, battle }, actor);
+    const positioned = [1, 2].includes(battle.monsters.find(unit => unit.id === target)!.position)
+      ? battle
+      : { ...battle, monsters: battle.monsters.map(unit => unit.id === target ? { ...unit, position: 2 } : unit.id !== target && unit.position === 2 ? { ...unit, position: 4 } : unit) };
+    const before = positioned.monsters.find(unit => unit.id === target)!.position;
+    const policy = requirement(`tierB-${actor}`).fields.resistances.value as { resistantTo: string[]; immuneTo: string[] };
+    const next = heroUseSkill(positioned, actorId, 'hellion-bash', target);
+    expect(next.currentActionPoints).toBeLessThan(positioned.currentActionPoints);
+    expect(next.battleLog.at(-1)?.message).not.toContain('ENGINE_UNSUPPORTED');
+    const after = next.monsters.find(unit => unit.id === target)!.position;
+    if (policy.immuneTo.includes('shuffle') || policy.resistantTo.includes('shuffle')) expect(after).toBe(before);
+    else expect(after === before || after === Math.min(4, before + 1)).toBe(true);
+  });
   for (const index of [0, 1, 2] as const) it(`P-skill-resistance-${index} registered Hero skill reaches the effect transaction`, () => {
     const campaign = createCommunityGuardianScenario(index);
     let battle = advanceTurn(campaign.battle!);
@@ -51,12 +69,11 @@ describe('Community capability production acceptance', () => {
       expect(result.campaign.processedDamageEventIds).toHaveLength(before.processedDamageEventIds.length + 1);
     });
   }
-  for (const actor of ['templars-impaler', 'templars-warlord', 'shuffling-horror'] as const) it(`P-critical-blocked-${actor} unsupported production attack fails before RNG`, () => {
-    const campaign = scenario(actor); setRandomSource(noRng);
-    const next = runMonsterTurn(campaign.battle!, targetId(campaign, actor));
-    expect(next.monsters).toEqual(campaign.battle!.monsters);
-    expect(next.heroes).toEqual(campaign.battle!.heroes);
-    expect(next.battleLog.at(-1)?.message).toContain(actor.startsWith('templars') ? 'TEMPLARS_CRIT_ENGINE_UNSUPPORTED' : 'SHUFFLING_CRIT_ENGINE_UNSUPPORTED');
+  for (const actor of ['templars-impaler', 'templars-warlord', 'shuffling-horror', 'cultist-priest', 'malignant-growth'] as const) it(`P-critical-${actor}-5 printed attack outcome reaches the BattleUnit damage pipeline`, () => {
+    const { before, result, heroId } = communityAttack(actor, 5, 1);
+    const event = result.communityAttackEvents!.at(-1)!;
+    expect(event).toMatchObject({ attackRoll: 1, targetId: heroId, hit: true, critical: true });
+    expect(result.heroes.find(hero => hero.id === heroId)!.hp).toBeLessThan(before.heroes.find(hero => hero.id === heroId)!.hp);
   });
   it('P-quest-provision exact per-Hero die records are committed with the pool', () => {
     const campaign = createCommunityCheckpoint(); const rolls = [0, ...Array(8).fill(0.99)];
@@ -130,6 +147,7 @@ describe('Community capability production acceptance', () => {
     const victory = win(0);
     expect(victory.actFourState.shufflingHorrorEncounterState!.actors.every(actor => !actor.alive)).toBe(true);
     expect(victory.actFourState.shufflingHorrorEncounterState!.initiativeDrawPile).toEqual([]);
-    expect(COMMUNITY_RUNTIME_FIELD_COVERAGE.find(leaf => leaf.requirementId === 'tierB-shuffling-horror-room' && leaf.sourcePath === 'victoryCondition.remainingMonsters')?.blockerCode).toBe('SHUFFLING_LINKED_VICTORY_CLEANUP_ENGINE_UNSUPPORTED');
+    expect(victory.battle!.monsters.filter(unit => unit.sourceId.startsWith('community-dd-')).every(unit => !unit.isAlive)).toBe(true);
+    expect(COMMUNITY_RUNTIME_FIELD_COVERAGE.find(leaf => leaf.requirementId === 'tierB-shuffling-horror-room' && leaf.sourcePath === 'victoryCondition.remainingMonsters')?.classification).toBe('consumed');
   });
 });

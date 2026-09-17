@@ -39,6 +39,7 @@ import {
   getHeroResistances,
 } from './progression/upgrade-core';
 import { chooseMonsterAction } from './monster-ai';
+import { isCommunityGuardianUnit, resolveCommunityShuffleMovement, runCommunityGuardianMonsterTurn } from './campaign/act-four/community-guardian-combat';
 import { pushLog } from './log';
 import {
   applyQuirkModifiersRaw,
@@ -538,7 +539,6 @@ export function heroSkillActionError(
   if (!isSkillUsableFrom(actor, skill)) return `无法从当前站位释放 ${skill.name}。`;
   const target = findUnit(state, targetId);
   if (!target || !isLegalTarget(actor, target, skill)) return '目标不合法。';
-  if (skill.moveTarget && target.sourceId.startsWith('community-dd-')) return 'GUARDIAN_SHUFFLE_RESISTANCE_ENGINE_UNSUPPORTED';
   return null;
 }
 
@@ -565,7 +565,6 @@ export function heroUseSkill(
   }
   const target = findUnit(state, targetId);
   if (!target || !isLegalTarget(actor, target, skill)) return state;
-  if (skill.moveTarget && target.sourceId.startsWith('community-dd-')) return pushBattleLog(state, 'GUARDIAN_SHUFFLE_RESISTANCE_ENGINE_UNSUPPORTED', 'warning');
 
   let s = state;
   let tgt: BattleUnit = target;
@@ -680,8 +679,9 @@ export function heroUseSkill(
     }
   }
   if (skill.moveTarget && skill.targetSide === 'enemy') {
-    const np = clamp(tgt.position + skill.moveTarget, 1, 4);
-    if (!s.monsters.some((m) => m.id !== tgt.id && m.position === np)) {
+    const distance = resolveCommunityShuffleMovement(tgt, skill.moveTarget);
+    const np = clamp(tgt.position + distance, 1, 4);
+    if (distance !== 0 && !s.monsters.some((m) => m.id !== tgt.id && m.position === np)) {
       tgt = { ...tgt, position: np };
     }
   }
@@ -726,8 +726,13 @@ function tryMonsterMove(state: BattleState, monsterId: string): BattleState {
 export function runMonsterTurn(state: BattleState, monsterId: string): BattleState {
   const monster = findUnit(state, monsterId);
   if (!monster || !monster.isAlive || monster.side !== 'monster') return state;
-  if (/^community-dd-templars-/.test(monster.sourceId)) return pushBattleLog(state, 'TEMPLARS_CRIT_ENGINE_UNSUPPORTED', 'warning');
-  if (/^community-dd-(shuffling-horror|cultist-priest|malignant-growth)$/.test(monster.sourceId)) return pushBattleLog(state, 'SHUFFLING_CRIT_ENGINE_UNSUPPORTED', 'warning');
+  if (
+    isCommunityGuardianUnit(monster) &&
+    monster.sourceId !== 'community-dd-mammoth-cyst' &&
+    monster.sourceId !== 'community-dd-white-cell-stalk'
+  ) {
+    return runCommunityGuardianMonsterTurn(state, monster);
+  }
 
   const action = chooseMonsterAction(state, monster);
   if (!action) {

@@ -9,11 +9,6 @@ export const COMMUNITY_RUNTIME_ADAPTER_VERSION = 'phase11a3-community-act4-playa
 export const COMMUNITY_REFERENCE_SOURCE_SHA256 = COMMUNITY_DATASET.corpus.sourcePackageSha256;
 
 export type CommunityRuntimeBlockerCode =
-  | 'TEMPLARS_CRIT_ENGINE_UNSUPPORTED'
-  | 'SHUFFLING_CRIT_ENGINE_UNSUPPORTED'
-  | 'GUARDIAN_SHUFFLE_RESISTANCE_ENGINE_UNSUPPORTED'
-  | 'SHUFFLING_SUMMON_RESISTANCE_ENGINE_UNSUPPORTED'
-  | 'SHUFFLING_LINKED_VICTORY_CLEANUP_ENGINE_UNSUPPORTED'
   | 'TEMPLARS_PIT_EXIT_RULE_UNRESOLVED'
   | 'GESTATING_HEART_LETHAL_TIMING_UNRESOLVED'
   | 'COME_UNTO_YOUR_MAKER_UNRESOLVED'
@@ -22,7 +17,6 @@ export type CommunityRuntimeBlockerCode =
   | 'GUARDIAN_CRIT_ENGINE_UNSUPPORTED'
   | 'GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED'
   | 'TEMPLARS_AREA_ADJACENCY_UNRESOLVED'
-  | 'SHUFFLING_ROOM10_NON_AGGRESSIVE_STANCE_AREA_UNRESOLVED'
   | 'MAMMOTH_STALK_NO_SPACE_RESOLUTION_ENGINE_UNSUPPORTED'
   | 'QUEST_CARD_PROVISION_POLICY_ENGINE_UNSUPPORTED'
   | 'FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED'
@@ -42,11 +36,6 @@ export interface CommunityRuntimeBlocker {
 }
 const blocker = (code: CommunityRuntimeBlockerCode, requirementId: string, field: string, classification: CommunityRuntimeBlocker['classification'], runtimeDependency = field, firstBlockingFunction = 'blockCommunityOperation'): CommunityRuntimeBlocker => ({ code, requirementId, field, sourcePath: field, runtimeDependency, firstBlockingFunction, tests: [`BLOCK:${code}`], proofKind: requirementId.startsWith('runtime-') ? 'capability-level' : 'semantic-leaf', classification, sourceAuthority: 'COMMUNITY_RETAIL_REFERENCE' });
 export const COMMUNITY_RUNTIME_BLOCKERS = [
-  blocker('TEMPLARS_CRIT_ENGINE_UNSUPPORTED', 'runtime-templars-combat', 'crit.templarImpalerAndWarlord', 'runtime-only', 'printed critical damage in Templar attacks', 'runMonsterTurn'),
-  blocker('SHUFFLING_CRIT_ENGINE_UNSUPPORTED', 'runtime-shuffling-combat', 'crit.horrorPriestAndGrowth', 'runtime-only', 'printed critical damage in Shuffling family attacks', 'runMonsterTurn'),
-  blocker('GUARDIAN_SHUFFLE_RESISTANCE_ENGINE_UNSUPPORTED', 'runtime-guardian-combat', 'resistances.shuffle', 'runtime-only', 'categorical resistance in board movement', 'heroSkillActionError'),
-  blocker('SHUFFLING_SUMMON_RESISTANCE_ENGINE_UNSUPPORTED', 'runtime-shuffling-combat', 'resistances.priestAndGrowth', 'runtime-only', 'summoned Priest/Growth BattleUnit status effect application', 'resolveEchoingDisassembly'),
-  blocker('SHUFFLING_LINKED_VICTORY_CLEANUP_ENGINE_UNSUPPORTED', 'tierB-shuffling-horror-room', 'victoryCondition.remainingMonsters', 'runtime-only', 'cleanup of deployed Priest/Growth BattleUnits; reserve cleanup alone is partial', 'resolveEchoingDisassembly'),
   blocker('FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED', 'runtime-community-final', 'printedSkillSelection', 'runtime-only', 'all normalized Final skill/d10 leaves through Community prepare/start/action/save', 'prepareFinalEncounter'),
   blocker('FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED', 'tierB-ancestor-room', 'roomEffects', 'runtime-only', 'production-reachable Community transition without injecting Final state', 'prepareFinalEncounter'),
   blocker('TEMPLARS_PIT_EXIT_RULE_UNRESOLVED', 'tierB-templars-room', 'pitExitRule', 'source-level'),
@@ -55,7 +44,6 @@ export const COMMUNITY_RUNTIME_BLOCKERS = [
   blocker('MONSTER_CARD_FRONT_BACK_SIZE_UNRESOLVED', 'tierB-darkest-dungeon-monster-deck', 'drawPolicy', 'source-level', 'per-card Front/Back/Large size for four-slot fill', 'drawDarkestDungeonMonster'),
   blocker('GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED', 'runtime-guardian-combat', 'specialSkillEffectResolution', 'runtime-only'),
   blocker('TEMPLARS_AREA_ADJACENCY_UNRESOLVED', 'runtime-templars-room', 'areaAdjacency', 'runtime-only'),
-  blocker('SHUFFLING_ROOM10_NON_AGGRESSIVE_STANCE_AREA_UNRESOLVED', 'runtime-shuffling-horror-room', 'initialArea', 'runtime-only', 'Room 10 non-aggressive Priest/Growth/Hero area map', 'resolveEchoingDisassembly'),
   blocker('MAMMOTH_STALK_NO_SPACE_RESOLUTION_ENGINE_UNSUPPORTED', 'tierB-mammoth-cyst-room', 'spawnAreaPolicy.noSpace', 'runtime-only', 'room area adjacency / nearest-available displacement', 'summonWhiteCellStalk'),
 ] as const;
 

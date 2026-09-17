@@ -41,7 +41,6 @@ const CLOSED = [
 ];
 const SPLIT = [
   'MONSTER_CARD_FRONT_BACK_SIZE_UNRESOLVED',
-  'SHUFFLING_ROOM10_NON_AGGRESSIVE_STANCE_AREA_UNRESOLVED',
 ];
 const SUITES = {
   production: { file: 'src/data/darkest-dungeon/community-reference/community-act4-playable-closure.test.ts', expected: 11 },
@@ -220,7 +219,7 @@ if (relevance.items.find((item: { blockerCode: string }) => item.blockerCode ===
 
 const remainingBlockers = COMMUNITY_RUNTIME_BLOCKERS.map((blocker) => blocker.code);
 const routeMatrix = {
-  'We Are The Flame': { guardian: 'shuffling-horror', skip: 'ancestor-second-form', stopsAt: 'SHUFFLING_ROOM10_NON_AGGRESSIVE_STANCE_AREA_UNRESOLVED' },
+  'We Are The Flame': { guardian: 'shuffling-horror', skip: 'ancestor-second-form', stopsAt: 'FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED|FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED' },
   'Light the Way': { guardian: 'templars', skip: 'ancestor-first-form', stopsAt: 'TEMPLARS_PIT_EXIT_RULE_UNRESOLVED' },
   'Belly of the Beast': { guardian: 'mammoth-cyst', skip: 'gestating-heart', stopsAt: 'FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED|FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED|COME_UNTO_YOUR_MAKER_UNRESOLVED' },
 };
@@ -292,7 +291,7 @@ ${remainingBlockers.map((code) => `- ${code}`).join('\n')}
 
 | Quest | Guardian | Skipped form | Exact stop |
 | --- | --- | --- | --- |
-| We Are The Flame | Shuffling Horror | Ancestor second form | SHUFFLING_ROOM10_NON_AGGRESSIVE_STANCE_AREA_UNRESOLVED |
+| We Are The Flame | Shuffling Horror | Ancestor second form | FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED |
 | Light the Way | Templars | Ancestor first form | TEMPLARS_PIT_EXIT_RULE_UNRESOLVED |
 | Belly of the Beast | Mammoth Cyst | Gestating Heart | Final skill/transition after real Final Provision |
 
