@@ -86,7 +86,7 @@ export function resolveEchoingDisassembly(
       summonedRoles: [],
       summonedActorIds: [],
       addedCardIds: [],
-      reason: 'SHUFFLING_INITIAL_AREA_UNRESOLVED',
+      reason: 'SHUFFLING_ROOM10_NON_AGGRESSIVE_STANCE_AREA_UNRESOLVED',
     };
   }
   const battleId = state.guardianBattleId;

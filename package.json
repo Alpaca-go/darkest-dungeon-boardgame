@@ -37,7 +37,9 @@
     "verify:community-visual-assets:adversarial": "node scripts/audit/verify-community-visual-assets.mjs --adversarial",
     "import:community-reference-assets": "node scripts/assets/import-community-reference-assets.mjs",
     "verify:community-engine-capability-final-acceptance": "vite-node scripts/audit/verify-community-engine-capability-final-acceptance.ts",
-    "verify:community-source-blocker-resolution": "vite-node scripts/audit/verify-community-source-blocker-resolution.ts"
+    "verify:community-source-blocker-resolution": "vite-node scripts/audit/verify-community-source-blocker-resolution.ts",
+    "verify:community-act4-playable-closure": "vite-node scripts/audit/verify-community-act4-playable-closure.ts",
+    "test:e2e:community-act4-playable-closure": "node scripts/e2e/run-community-act4-playable-closure-e2e.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.408.0",

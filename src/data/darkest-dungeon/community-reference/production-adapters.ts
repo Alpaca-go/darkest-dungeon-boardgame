@@ -176,5 +176,5 @@ export function validateCommunityShufflingDefinitions(specs = COMMUNITY_SHUFFLIN
   if (specs.length !== 3 || new Set(specs.map((spec) => spec.role)).size !== 3) issues.push('actors.roles');
   if (specs.some((spec) => !Number.isFinite(spec.maxHp) || !Number.isFinite(spec.speed) || spec.skillIds.length < 2)) missing.push('actors.combatFields');
   if (room.areaIds.length !== Object.keys(room.areaCapacities).length || room.areaIds.some((areaId) => !Number.isFinite(room.areaCapacities[areaId]))) issues.push('room.areaCapacities');
-  return { isComplete: missing.length === 0 && issues.length === 0, missing, issues, knownBlockers: ['SHUFFLING_INITIAL_AREA_UNRESOLVED'] };
+  return { isComplete: missing.length === 0 && issues.length === 0, missing, issues, knownBlockers: ['SHUFFLING_ROOM10_NON_AGGRESSIVE_STANCE_AREA_UNRESOLVED'] };
 }

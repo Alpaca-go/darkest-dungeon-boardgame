@@ -6,6 +6,8 @@ import { resolveMammothCystActorDefeat } from '../../bosses/mammoth-cyst/white-c
 import { resolveMammothCystEncounterVictory } from '../../bosses/mammoth-cyst/mammoth-cyst-victory';
 import { resolveShufflingHorrorActorDefeat } from '../../bosses/shuffling-horror/shuffling-horror-death';
 import { resolveShufflingHorrorEncounterVictory } from '../../bosses/shuffling-horror/shuffling-horror-victory';
+import { returnCommunityPhysicalMonstersFromBattle } from './community-physical-monster-deck';
+import { createSeededRng } from './rng';
 
 export const isCommunityGuardianBattle = (campaign: CampaignState): boolean =>
   campaign.actFourState.contentRuntime?.runtimeProfileId === 'community-reference' &&
@@ -32,8 +34,17 @@ export function synchronizeCommunityGuardianDeaths(campaign: CampaignState): Cam
 export function commitCommunityGuardianVictory(campaign: CampaignState): { ok: boolean; campaign: CampaignState; reason: string | null } {
   const next = synchronizeCommunityGuardianDeaths(campaign);
   const state = next.actFourState;
-  if (state.templarsEncounterState) return resolveTemplarsEncounterVictory(next);
-  if (state.mammothCystEncounterState) return resolveMammothCystEncounterVictory(next);
-  if (state.shufflingHorrorEncounterState) return resolveShufflingHorrorEncounterVictory(next);
-  return { ok: false, campaign, reason: 'Missing Community Guardian encounter' };
+  const result = (() => {
+    if (state.templarsEncounterState) return resolveTemplarsEncounterVictory(next);
+    if (state.mammothCystEncounterState) return resolveMammothCystEncounterVictory(next);
+    if (state.shufflingHorrorEncounterState) return resolveShufflingHorrorEncounterVictory(next);
+    return { ok: false as const, campaign, reason: 'Missing Community Guardian encounter' };
+  })();
+  if (!result.ok) return { ok: false, campaign: result.campaign, reason: 'reason' in result ? String(result.reason ?? 'Community Guardian victory rejected') : 'Community Guardian victory rejected' };
+  const battleId = next.actFourState.guardianQuestState?.guardianBattleId ?? next.battle?.battleId ?? next.id;
+  return {
+    ok: true,
+    campaign: returnCommunityPhysicalMonstersFromBattle(result.campaign, createSeededRng(0x11a327), `dd-monster-return:${battleId}`),
+    reason: null,
+  };
 }

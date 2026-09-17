@@ -52,6 +52,7 @@ export function setupAncestorSecondFormRuntime(
     linkedStance: n.linkedStance,
     // 硬约束 3：Area 以共用 Room 为准。
     areaId: resolveStanceAreaId(room, n.linkedStance) || n.areaId,
+    stanceTrackerStance: null,
     // 硬约束 12：字面量锁死，任何分支都不得把它变成可选目标。
     targetable: false,
     occupiesAreaSpace: true,

@@ -42,10 +42,15 @@ import {
   validateCommunityShufflingDefinitions,
   type CommunityShufflingActorSpec,
 } from '../../../data/darkest-dungeon/community-reference/production-adapters';
+import { COMMUNITY_HORROR_INITIAL_AREA_ID } from '../../../data/darkest-dungeon/community-reference/source-supplement-runtime';
 import { makeHeroUnit } from '../../battle';
 import { pushLog } from '../../log';
 import { nowIso } from '../../random';
 import { createSeededRng, shuffleWithRng } from '../../campaign/act-four/rng';
+
+if (!COMMUNITY_SHUFFLING_ROOM.areaIds.includes(COMMUNITY_HORROR_INITIAL_AREA_ID)) {
+  throw new Error('Accepted Horror area r10-SW is missing from Community Room 10');
+}
 
 // ---------------------------------------------------------------------------
 // 常量 / 幂等键
@@ -129,7 +134,7 @@ export function buildShufflingHorrorActorState(
     generation,
     stances: inReserve ? [] : [spec.requiredStance as MonsterStance],
     areaId: inReserve ? null : mode === 'community-reference'
-      ? null
+      ? COMMUNITY_HORROR_INITIAL_AREA_ID
       : PROTOTYPE_SHUFFLING_HORROR_AREA_MAP[spec.requiredStance as MonsterStance],
     inReserve,
     actionBudgetUsedThisRound: 0,
@@ -293,16 +298,17 @@ export function setupShufflingHorrorEncounter(
 
   // ---- Hero Stance 排列 + Hero Round Action Budget（硬约束 22/23）----
   const aliveHeroes = campaign.heroes.filter((h) => !h.dead);
-  const heroStanceAssignments = aliveHeroes.map((h, i) => ({
-    heroId: h.instanceId,
-    stance: SHUFFLING_HORROR_STANCE_PRIORITY[i % SHUFFLING_HORROR_STANCE_PRIORITY.length],
-    areaId: mode === 'community-reference'
-      ? COMMUNITY_SHUFFLING_ROOM.areaIds[i % COMMUNITY_SHUFFLING_ROOM.areaIds.length]
-      : PROTOTYPE_SHUFFLING_HORROR_AREA_MAP[
-          SHUFFLING_HORROR_STANCE_PRIORITY[i % SHUFFLING_HORROR_STANCE_PRIORITY.length]
-        ],
-    hasActedThisRound: false,
-  }));
+  const heroStanceAssignments = aliveHeroes.map((h, i) => {
+    const stance = SHUFFLING_HORROR_STANCE_PRIORITY[i % SHUFFLING_HORROR_STANCE_PRIORITY.length];
+    return {
+      heroId: h.instanceId,
+      stance,
+      areaId: mode === 'community-reference'
+        ? (stance === 'aggressive' ? COMMUNITY_HORROR_INITIAL_AREA_ID : '')
+        : PROTOTYPE_SHUFFLING_HORROR_AREA_MAP[stance],
+      hasActedThisRound: false,
+    };
+  });
   const heroBudget: HeroRoundActionBudget = {
     round: round0,
     perHeroMax: Object.fromEntries(aliveHeroes.map((h) => [h.instanceId, 1])),

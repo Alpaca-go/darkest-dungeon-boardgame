@@ -135,6 +135,30 @@ export interface CommunityQuestProvisionRecord {
   poolMaximum: 16;
 }
 
+export interface CommunityPhysicalMonsterDrawRecord {
+  instanceId: string;
+  definitionId: string;
+  transactionId: string;
+}
+
+export interface CommunityPhysicalMonsterReturnRecord {
+  transactionId: string;
+  returnedInstanceIds: string[];
+  drawPileAfter: string[];
+}
+
+export interface CommunityPhysicalMonsterDeckState {
+  instanceIds: string[];
+  drawPile: string[];
+  usedPile: string[];
+  inBattle: string[];
+  instanceToDefinitionId: Record<string, string>;
+  shuffleTransactionId: string;
+  shuffleReceipt: { order: string[]; at: string };
+  drawHistory: CommunityPhysicalMonsterDrawRecord[];
+  returnHistory: CommunityPhysicalMonsterReturnRecord[];
+}
+
 // ---------------------------------------------------------------------------
 // §8 Location Content Runtime
 // ---------------------------------------------------------------------------
@@ -179,6 +203,9 @@ export interface LocationContentRuntime {
   /** 切换事务（幂等）。 */
   transactionId: string;
   activatedAt: string;
+
+  /** Community Act IV physical Monster deck; absent on Prototype/Formal and legacy saves. */
+  physicalMonsterDeck?: CommunityPhysicalMonsterDeckState;
 }
 
 // ---------------------------------------------------------------------------
@@ -270,6 +297,9 @@ export interface ExcavationSiteRoomState {
 
   /** heroId → Provision Die 结果（先保存，刷新不重掷）。 */
   provisionRolls: Record<string, number>;
+
+  /** Community retail receipt (raw face, Wild choice, pool accept/reject). */
+  communityProvision?: CommunityQuestProvisionRecord;
 
   /** 免费 Rest 会话（8 Resting Points，不消耗 Firewood）。 */
   restSession: ExcavationRestSessionState | null;

@@ -8,6 +8,8 @@ import type {
   SkillDefinition,
 } from '../types';
 import { createId, d10, nowIso } from './random';
+import { returnCommunityPhysicalMonstersFromBattle } from './campaign/act-four/community-physical-monster-deck';
+import { createSeededRng } from './campaign/act-four/rng';
 import { getSkillById } from '../data/skills';
 import { getMonsterSkillById } from '../data/monster-skills';
 import { buildEncounter } from '../data/battle-encounters';
@@ -890,7 +892,12 @@ export function resolveVictory(campaign: CampaignState): CampaignState {
     c = { ...c, dungeon };
   }
 
-  return { ...c, battle: null, gamePhase: 'dungeon-explore' };
+  const returnSeed = Array.from(b.battleId).reduce((hash, char) => (hash + char.charCodeAt(0) * 17) >>> 0, 0x11a326);
+  return returnCommunityPhysicalMonstersFromBattle(
+    { ...c, battle: null, gamePhase: 'dungeon-explore' },
+    createSeededRng(returnSeed),
+    `dd-monster-return:${b.battleId}`,
+  );
 }
 
 /** 失败：保留 battle（status=defeat）以便展示，调用方负责导航。 */

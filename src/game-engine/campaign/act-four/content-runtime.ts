@@ -34,11 +34,15 @@ import {
   hasProcessedActFourTransaction,
   withProcessedActFourTransaction,
 } from './act-four-state';
-import { blockCommunityOperation, type CommunityRuntimeBlocker } from '../../../data/darkest-dungeon/community-reference/runtime-profile';
+import { createSeededRng } from './rng';
+import type { CommunityRuntimeBlocker } from '../../../data/darkest-dungeon/community-reference/runtime-profile';
+import { createShuffledCommunityPhysicalMonsterDeck, drawCommunityPhysicalMonster } from './community-physical-monster-deck';
 
 export interface ActivateContentSetOptions {
   mode?: ActFourContentMode;
   now?: string;
+  rng?: () => number;
+  seed?: number;
 }
 
 export interface ActivateContentSetResult {
@@ -123,6 +127,13 @@ export function activateDarkestDungeonContentSet(
 
     transactionId,
     activatedAt: now,
+    physicalMonsterDeck: mode === 'community-reference'
+      ? createShuffledCommunityPhysicalMonsterDeck(
+          options?.rng ?? createSeededRng(options?.seed ?? 0x11a326),
+          `${transactionId}:physical-deck-shuffle`,
+          now,
+        )
+      : undefined,
   };
 
   const next = withProcessedActFourTransaction({ ...state, contentRuntime: runtime }, transactionId);
@@ -167,8 +178,10 @@ export function drawDarkestDungeonMonster(
   const runtime = campaign.actFourState.contentRuntime;
   if (!runtime) return { ok: false, campaign, monsterDefinitionId: null, reason: 'Darkest Dungeon content is not active' };
   if (runtime.runtimeProfileId === 'community-reference') {
-    const blocked = blockCommunityOperation('MONSTER_DECK_DRAW_POLICY_UNRESOLVED');
-    return { campaign, monsterDefinitionId: null, reason: blocked.blocker.code, ...blocked };
+    const transactionId = `dd-monster-draw:${campaign.id}:${runtime.physicalMonsterDeck?.drawHistory.length ?? 0}`;
+    const drawn = drawCommunityPhysicalMonster(campaign, transactionId);
+    if (!drawn.ok) return { ok: false, campaign, monsterDefinitionId: null, reason: drawn.reason };
+    return { ok: true, campaign: drawn.campaign, monsterDefinitionId: drawn.monsterDefinitionId, reason: null };
   }
   const pool = runtime.monsterDefinitionIds;
   if (pool.length === 0) return { ok: false, campaign, monsterDefinitionId: null, reason: 'Monster Deck 为空' };

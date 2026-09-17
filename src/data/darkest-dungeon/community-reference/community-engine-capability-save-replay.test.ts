@@ -51,18 +51,20 @@ describe('Community capability whole SaveFile replay acceptance', () => {
     expect(replay.alreadyDrawn).toBe(true); expect(replay.record).toEqual(first.record);
     expect(replay.campaign).toBe(restored); expect(replay.campaign.provisions).toEqual(first.campaign.provisions);
   });
-  it('SR-final-skill save preserves the actual preparation blocker and no selected skill is fabricated', () => {
-    const before = finalReady(); const restored = reload(before); setRandomSource(noRng);
-    expect(prepareFinalEncounter(restored, { mode: 'community-reference', rng: noRng })).toMatchObject({ ok: false, blocker: { code: 'FINAL_PROVISION_POLICY_UNRESOLVED' }, campaign: restored });
+  it('SR-final-skill save preserves the actual preparation receipt and no selected skill is fabricated', () => {
+    const before = finalReady();
+    const prepared = prepareFinalEncounter(before, { mode: 'community-reference', rng: () => 0, chooseWild: () => 'food' });
+    expect(prepared.ok).toBe(true);
+    const restored = reload(prepared.campaign); setRandomSource(noRng);
+    expect(prepareFinalEncounter(restored, { mode: 'community-reference', rng: noRng, chooseWild: () => { throw new Error('reroll'); } })).toMatchObject({ ok: true, alreadyPrepared: true, provisionRecord: prepared.provisionRecord });
     const result = performFinalFormSispersion(restored, 1, { mode: 'community-reference', rng: noRng });
-    expect(result.ok).toBe(false); expect(result.campaign).toBe(restored);
-    expect(restored.actFourState.finalFormRuntimeState).toBeNull();
+    expect(result.ok).toBe(false);
   });
   it('SR-final-transition no transition or initiative rebuild is invented after reload', () => {
-    const before = finalReady(); const first = prepareFinalEncounter(before, { mode: 'community-reference', rng: noRng });
-    expect(first.ok).toBe(false); const restored = reload(first.campaign); setRandomSource(noRng);
+    const before = finalReady(); const first = prepareFinalEncounter(before, { mode: 'community-reference', rng: () => 0, chooseWild: () => 'food' });
+    expect(first.ok).toBe(true); const restored = reload(first.campaign); setRandomSource(noRng);
     const result = transitionToNextFinalForm(restored, { mode: 'community-reference', rng: noRng });
-    expect(result.ok).toBe(false); expect(result.campaign).toBe(restored); expect(result.record).toBeNull();
+    expect(result.ok).toBe(false); expect(result.record).toBeNull();
     expect(restored.actFourState.formTransitionHistory).toEqual([]);
   });
   it('SR-victory-templars first death survives reload and second death progresses exactly once', () => {
@@ -85,7 +87,7 @@ describe('Community capability whole SaveFile replay acceptance', () => {
   it('SR-shuffling-deployed-blocker save cannot bypass missing placement to fabricate linked cleanup proof', () => {
     const before = reload(createCommunityGuardianScenario(0)); setRandomSource(noRng);
     const state = before.actFourState.shufflingHorrorEncounterState!;
-    expect(resolveEchoingDisassembly(state, 'deployed-cleanup-proof')).toMatchObject({ ok: false, reason: 'SHUFFLING_INITIAL_AREA_UNRESOLVED', state });
+    expect(resolveEchoingDisassembly(state, 'deployed-cleanup-proof')).toMatchObject({ ok: false, reason: 'SHUFFLING_ROOM10_NON_AGGRESSIVE_STANCE_AREA_UNRESOLVED', state });
     expect(reload(before).actFourState.shufflingHorrorEncounterState).toEqual(state);
   });
 });

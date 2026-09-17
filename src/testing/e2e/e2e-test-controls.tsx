@@ -51,6 +51,8 @@ export default function E2ETestControls() {
       templarActorDefinitionIds: campaign.actFourState.templarsEncounterState?.actorStates.map(actor => actor.actorDefinitionId),
       mammothActorDefinitionIds: campaign.actFourState.mammothCystEncounterState?.actorStates.map(actor => actor.actorDefinitionId),
       shufflingActorIds: campaign.actFourState.shufflingHorrorEncounterState?.actors.map(actor => actor.actorId),
+      physicalMonsterCount: campaign.actFourState.contentRuntime?.physicalMonsterDeck?.instanceIds.length ?? 0,
+      horrorAreaId: campaign.actFourState.shufflingHorrorEncounterState?.actors.find(actor => actor.role === 'horror')?.areaId ?? null,
     } : null)}</output>
   </aside>;
 }

@@ -114,6 +114,8 @@ export interface FinalProvisionRecord {
   /** 结算后写入公共 Provision Pool 的增量。 */
   granted: Record<string, number>;
   rolledAt: string;
+  /** Community retail per-die receipt; absent on Prototype/Formal. */
+  communityProvision?: import('./act-four').CommunityQuestProvisionRecord;
 }
 
 // ---------------------------------------------------------------------------

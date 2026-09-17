@@ -1,5 +1,4 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { readFileSync } from 'node:fs';
 import { capabilityAssessments, EXPECTED_TEST_IDS, resolveTestReference, SUITES, testCounts, validateEvidenceBinding, validateTestGroup, type TestRow } from '../../../../scripts/audit/community-engine-final-acceptance-contract';
 import { runProductionMutation } from '../../../../scripts/audit/community-engine-production-mutations';
 import { COMMUNITY_RUNTIME_FIELD_COVERAGE } from './runtime-field-coverage';
@@ -28,11 +27,10 @@ describe('Community final acceptance rejects false green proofs', () => {
   it('A09 wrong implementation SHA or publication parent fails', () => expect(validateEvidenceBinding({ verifiedImplementationHead: 'wrong', expectedHead: 'a'.repeat(40), evidencePublicationParent: 'a'.repeat(40), official: {}, freshOfficial: {} })).toContain('Implementation HEAD / publication parent mismatch'));
   it('A10 Official exact truth must come from the fresh artifact', () => expect(validateEvidenceBinding({ verifiedImplementationHead: 'a', expectedHead: 'a', evidencePublicationParent: 'a', official: { runId: 'old' }, freshOfficial: { runId: 'fresh' } })).toContain('Official truth differs from fresh artifact'));
   it('A11 source-gap removal without evidence stays rejected', () => {
-    const triage = JSON.parse(readFileSync('docs/data/darkest-dungeon/community-reference/community-engine-blocker-triage.json', 'utf8'));
-    const gaps: string[] = triage.entries.filter((entry: any) => entry.resolutionClass === 'source-gap').map((entry: any) => entry.blockerCode);
-    const mutant = COMMUNITY_RUNTIME_BLOCKERS.filter(blocker => blocker.code !== 'FINAL_PROVISION_POLICY_UNRESOLVED').map(blocker => blocker.code as string);
-    expect(gaps.filter(code => !mutant.includes(code))).toEqual(['FINAL_PROVISION_POLICY_UNRESOLVED']);
-    expect(gaps.every(code => COMMUNITY_RUNTIME_BLOCKERS.some(blocker => blocker.code === code))).toBe(true);
+    const remaining = ['TEMPLARS_PIT_EXIT_RULE_UNRESOLVED', 'TEMPLARS_AREA_ADJACENCY_UNRESOLVED', 'COME_UNTO_YOUR_MAKER_UNRESOLVED', 'GESTATING_HEART_LETHAL_TIMING_UNRESOLVED'];
+    expect(remaining.every(code => COMMUNITY_RUNTIME_BLOCKERS.some(blocker => blocker.code === code))).toBe(true);
+    const mutant = COMMUNITY_RUNTIME_BLOCKERS.filter(blocker => blocker.code !== 'TEMPLARS_PIT_EXIT_RULE_UNRESOLVED').map(blocker => blocker.code as string);
+    expect(remaining.filter(code => !mutant.includes(code))).toEqual(['TEMPLARS_PIT_EXIT_RULE_UNRESOLVED']);
   });
   it('A12 removing the production Mammoth critical hook fails the real attack case', () => {
     const result = runProductionMutation('src/game-engine/bosses/mammoth-cyst/execute-mammoth-cyst-action.ts', 'const outcome = resolveCommunityGuardianCritical(requirementId, localSkillId, hitRoll, skill.accuracy, normalDamage);', 'const outcome = { hit: true, critical: false, damage: normalDamage };', 'P-critical-mammoth-cyst-6');

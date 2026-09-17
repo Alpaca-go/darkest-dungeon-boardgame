@@ -46,6 +46,7 @@ import { nowIso } from '../../../random';
 import { createSeededRng } from '../rng';
 import { withProcessedFinalFormTransaction } from './final-form-runtime';
 import { finalFormTransactionIds } from './final-form-transactions';
+import { drawCommunityPhysicalMonster } from '../community-physical-monster-deck';
 import { applyReflectionDeath, resolveAncestorStance } from './ancestor-first-form';
 import { rollAncestorTeleport, type AreaOccupancyInput } from './ancestor-second-form';
 import {
@@ -345,10 +346,6 @@ export function rollFinalFormAncestorTeleport(
   if (!ctx.ok || !ctx.state || !ctx.runtime) {
     return { ok: false, campaign, record: null, alreadyProcessed: false, reason: ctx.reason };
   }
-  if (ctx.mode === 'community-reference') {
-    const blocked = blockCommunityOperation('ABSOLUTE_NOTHINGNESS_STANCE_UNRESOLVED');
-    return { campaign, record: null, alreadyProcessed: false, reason: blocked.blocker.code, ...blocked };
-  }
 
   const encounterId = ctx.state.encounterId;
   const result = rollAncestorTeleport(
@@ -427,6 +424,24 @@ export function performFinalFormSispersion(
   }
 
   const encounterId = ctx.state.encounterId;
+  const sispersionTx = finalFormTransactionIds.sispersion(encounterId, sequence);
+  let sourceCampaign = campaign;
+  const input = { ...options?.input };
+  if (ctx.mode === 'community-reference' && !input.selectedMonsterDefinitionId) {
+    const drawn = drawCommunityPhysicalMonster(campaign, sispersionTx);
+    if (!drawn.ok) {
+      return {
+        ok: false,
+        campaign,
+        record: null,
+        initiativeCardCount: ctx.runtime.initiativeCardCount,
+        alreadyProcessed: false,
+        reason: drawn.reason,
+      };
+    }
+    sourceCampaign = drawn.campaign;
+    input.selectedMonsterDefinitionId = drawn.monsterDefinitionId;
+  }
   const result = performSispersion(
     ctx.runtime,
     getGestatingHeartMechanics(ctx.mode),
@@ -435,7 +450,7 @@ export function performFinalFormSispersion(
     sequence,
     ctx.rng,
     ctx.now,
-    options?.input,
+    input,
   );
   if (!result.ok) {
     return {
@@ -449,7 +464,7 @@ export function performFinalFormSispersion(
   }
 
   let next = commitRuntime(
-    campaign,
+    sourceCampaign,
     ctx.state,
     'gestating-heart',
     result.runtime,

@@ -184,10 +184,9 @@ const normalizeVacantStanceFill = (value: unknown) => Object.fromEntries((value 
 
 const SOURCE_BLOCKERS: Record<string, CommunityRuntimeBlockerCode> = {
   'tierB-templars-room.pitExitRule': 'TEMPLARS_PIT_EXIT_RULE_UNRESOLVED',
-  'tierB-absolute-nothingness.stance': 'ABSOLUTE_NOTHINGNESS_STANCE_UNRESOLVED',
   'tierB-gestating-heart.lethalWoundTimingRuling': 'GESTATING_HEART_LETHAL_TIMING_UNRESOLVED',
   'tierB-come-unto-your-maker.definition': 'COME_UNTO_YOUR_MAKER_UNRESOLVED',
-  'tierB-darkest-dungeon-monster-deck.drawPolicy': 'MONSTER_DECK_DRAW_POLICY_UNRESOLVED',
+  'tierB-darkest-dungeon-monster-deck.drawPolicy': 'MONSTER_CARD_FRONT_BACK_SIZE_UNRESOLVED',
 };
 
 const actorFor = (id: string, env: CommunityRuntimeProjectionEnvironment): any => ({
@@ -355,6 +354,26 @@ for (const req of NORMALIZED_CORPUS.requirements) {
     if (req.requirementId === 'tierB-perfect-reflection' || req.requirementId === 'tierB-imperfect-reflection') { const kind = req.requirementId.includes('imperfect') ? 'imperfect' : 'perfect'; if (field === 'maxHp') add(req.requirementId, field, 'consumed', { field, runtimeSelectorId: `ancestorFirst.${kind}.maxWounds`, runtimeSelector: env => env.ancestorFirst.reflectionCards.find(card => card.kind === kind)?.maxWounds }); else add(req.requirementId, field, 'consumed', { field, runtimeSelectorId: `ancestorFirst.${kind}.skillIds`, runtimeSelector: env => env.ancestorFirst.reflectionCards.find(card => card.kind === kind)?.skillIds.map(localSkillId), normalizeSource: value => (value as any[]).map(skill => skill.sourceLocalSkillId), normalizerId: 'local-skill-ids.v1' }); continue; }
     if (req.requirementId === 'tierB-ancestor-second-form' && field === 'absoluteNothingness.areaIds') { add(req.requirementId, field, 'consumed', { field, runtimeSelectorId: 'ancestorSecond.absoluteNothingness', runtimeSelector: env => Object.fromEntries(env.ancestorSecond.absoluteNothingness.map(item => [item.linkedStance, item.areaId])) }); continue; }
     if (req.requirementId === 'tierB-absolute-nothingness' && field === 'areaId') { add(req.requirementId, field, 'consumed', { field, runtimeSelectorId: 'ancestorSecond.absoluteNothingness.areaIds', runtimeSelector: env => Object.fromEntries(env.ancestorSecond.absoluteNothingness.map(item => [item.linkedStance, item.areaId])) }); continue; }
+    if (req.requirementId === 'tierB-absolute-nothingness' && field === 'stance') {
+      add(req.requirementId, field, 'consumed', {
+        field,
+        runtimeSelectorId: 'nothingness.nonTrackerOccupant',
+        sourceSelector: () => ({ stanceTrackerStance: null, targetable: false, initiativeCards: 0, turns: 'none' }),
+        runtimeSelector: (env) => ({
+          stanceTrackerStance: null,
+          targetable: false,
+          initiativeCards: 0,
+          turns: 'none',
+          occupants: env.ancestorSecond.absoluteNothingness.length,
+        }),
+        normalizeRuntime: (value) => {
+          const occupant = value as { stanceTrackerStance: null; targetable: false; initiativeCards: number; turns: string };
+          return { stanceTrackerStance: occupant.stanceTrackerStance, targetable: occupant.targetable, initiativeCards: occupant.initiativeCards, turns: occupant.turns };
+        },
+        normalizerId: 'nothingness-non-tracker.v1',
+      });
+      continue;
+    }
     if (req.requirementId === 'tierB-heart-of-darkness' && field === 'impendingDoomD10SkillMap') { add(req.requirementId, field, 'consumed', { field, runtimeSelectorId: 'heartOfDarkness.impendingDoom.d10SkillMap', runtimeSelector: env => Object.fromEntries(Object.entries(env.heartOfDarkness.impendingDoom.d10SkillMap).map(([roll,id]) => [roll, localSkillId(id)])), normalizeSource: value => { const source = value as Record<string,string>; const names = sourceValue(req.requirementId, 'skillIds') as Array<{ sourceLocalSkillId: string; printedName: string }>; const id = (name: string) => names.find(skill => skill.printedName === name)?.sourceLocalSkillId; return { 1:id(source.rolls1to4),2:id(source.rolls1to4),3:id(source.rolls1to4),4:id(source.rolls1to4),5:id(source.rolls5to7),6:id(source.rolls5to7),7:id(source.rolls5to7),8:id(source.rolls8to10),9:id(source.rolls8to10),10:id(source.rolls8to10) }; }, normalizerId: 'final-d10-local-skill.v1' }); continue; }
     if (req.requirementId === 'tierB-darkest-dungeon-monster-deck') {
       if (field === 'deckComposition') add(req.requirementId, field, 'consumed', { field, runtimeSelectorId: 'profile.monsterComposition.physicalInstances', runtimeSelector: env => env.profile.monsterComposition.map(monster => ({ sourceLocalMonsterDefinitionId: monster.sourceLocalMonsterDefinitionId, count: monster.physicalInstances.length, members: monster.physicalInstances.map(member => ({ guid: member.guid, cardId: member.cardId })) })), normalizeSource: value => (value as any).composition.map((monster: any) => ({ sourceLocalMonsterDefinitionId: monster.sourceLocalMonsterDefinitionId, count: monster.count, members: monster.members })), normalizerId: 'monster-composition.v1' });
@@ -429,4 +448,4 @@ export function runtimeFieldCoverageTotals() {
 }
 
 export const COMMUNITY_COMBAT_SEMANTICS = Object.fromEntries(NORMALIZED_CORPUS.requirements.filter(req => req.componentType === 'battle-card').map(req => [req.requirementId, { criticalHits: req.fields.crit?.value }]));
-export const COMMUNITY_SHUFFLING_POLICY_PROVENANCE = { initialArea: { classification: 'engine-unsupported-blocker', blockerCode: 'SHUFFLING_INITIAL_AREA_UNRESOLVED' }, capacityPerStance: { classification: 'generic-engine-rule', sourceReference: 'src/types/shuffling-horror.ts' } } as const;
+export const COMMUNITY_SHUFFLING_POLICY_PROVENANCE = { initialArea: { classification: 'consumed', sourceReference: 'community-shuffling-initial-deployment-v1' }, capacityPerStance: { classification: 'generic-engine-rule', sourceReference: 'src/types/shuffling-horror.ts' } } as const;

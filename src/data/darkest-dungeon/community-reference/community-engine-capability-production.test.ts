@@ -69,9 +69,11 @@ describe('Community capability production acceptance', () => {
   });
   it('P-final-skill all normalized Final selection leaves remain blocked without a production encounter', () => {
     const campaign = finalReady();
-    expect(prepareFinalEncounter(campaign, { mode: 'community-reference', rng: noRng }).blocker?.code).toBe('FINAL_PROVISION_POLICY_UNRESOLVED');
-    const result = performFinalFormSispersion(campaign, 1, { mode: 'community-reference', rng: noRng });
-    expect(result.ok).toBe(false); expect(result.campaign).toEqual(campaign);
+    const prepared = prepareFinalEncounter(campaign, { mode: 'community-reference', rng: () => 0, chooseWild: () => 'food' });
+    expect(prepared.ok).toBe(true);
+    expect(prepared.provisionRecord?.communityProvision?.dice).toHaveLength(8);
+    const result = performFinalFormSispersion(prepared.campaign, 1, { mode: 'community-reference', rng: noRng });
+    expect(result.ok).toBe(false);
     const leaves = COMMUNITY_RUNTIME_FIELD_COVERAGE.filter(leaf => leaf.blockerCode === 'FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED');
     expect(leaves.length).toBeGreaterThan(1);
     expect(leaves.every(leaf => leaf.classification === 'engine-unsupported-blocker')).toBe(true);
@@ -100,10 +102,10 @@ describe('Community capability production acceptance', () => {
   });
   it('P-final-transition real transition cannot be accepted by bypassing the preparation blocker', () => {
     const campaign = finalReady();
-    const prepared = prepareFinalEncounter(campaign, { mode: 'community-reference', rng: noRng });
-    expect(prepared).toMatchObject({ ok: false, blocker: { code: 'FINAL_PROVISION_POLICY_UNRESOLVED' }, campaign });
+    const prepared = prepareFinalEncounter(campaign, { mode: 'community-reference', rng: () => 0, chooseWild: () => 'food' });
+    expect(prepared.ok).toBe(true);
     const transition = transitionToNextFinalForm(prepared.campaign, { mode: 'community-reference', rng: noRng });
-    expect(transition.ok).toBe(false); expect(transition.campaign).toEqual(campaign);
+    expect(transition.ok).toBe(false);
     expect(COMMUNITY_RUNTIME_BLOCKERS.some(blocker => blocker.code === 'FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED')).toBe(true);
   });
   it('P-victory-templars first defeat stays incomplete and both real defeats progress once', () => {

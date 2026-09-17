@@ -36,10 +36,8 @@ import { pushLog } from '../../log';
 import type { ActFourContentMode } from './draw-quest';
 import { actFourTransactionIds, hasProcessedActFourTransaction, withProcessedActFourTransaction } from './act-four-state';
 import { rollProvisionDie } from './rng';
-import {
-  blockCommunityOperation,
-  type CommunityRuntimeBlocker,
-} from '../../../data/darkest-dungeon/community-reference/runtime-profile';
+import type { CommunityRuntimeBlocker } from '../../../data/darkest-dungeon/community-reference/runtime-profile';
+import { grantedFromCommunityProvision, rollCommunityProvisionDice, type CommunityWildChooser } from './community-provision-runtime';
 
 // ---------------------------------------------------------------------------
 // 步骤 1—8：进入 Room → 掷 Provision Dice → 开启免费 Rest
@@ -49,6 +47,7 @@ export interface ResolveExcavationOptions {
   rng: () => number;
   mode?: ActFourContentMode;
   now?: string;
+  chooseWild?: CommunityWildChooser;
 }
 
 export interface ResolveExcavationResult {
@@ -103,38 +102,48 @@ export function resolveExcavationSiteRoom(
   if (site.status === 'cleared') return excFail(campaign, `Room ${roomId} 已清除`);
   if (site.status === 'unrevealed') return excFail(campaign, `Room ${roomId} 尚未揭示`);
 
-  if (mode === 'community-reference') {
-    const blocked = blockCommunityOperation('EXCAVATION_PROVISION_DIE_MAP_UNRESOLVED');
-    return { ...excFail(campaign, blocked.blocker.code), ...blocked };
-  }
-
-  // ---- Data Gate：正式骰面映射缺失时 formal 模式拒绝（硬约束 19）----
-  if (mode === 'formal' && !isProvisionDieMapEnabled()) {
-    return excFail(campaign, 'Provision Die 骰面映射缺失，正式 Excavation 结算已禁用');
-  }
-  const faceMap = getProvisionDieFaceMap(mode);
-
-  // ---- 步骤 3：每名「当前」Party Hero 掷 1 个 ----
-  // dead / removed Hero 不掷（§12 Provision Dice）。
+  const now = options.now ?? nowIso();
   const heroes = campaign.heroes.filter((h) => !h.dead && h.isAlive !== false);
   if (heroes.length === 0) return excFail(campaign, '队伍中没有可掷骰的英雄');
 
-  const rolls: Record<string, number> = {};
-  const gained: Partial<ProvisionPool> = {};
-  for (const hero of heroes) {
-    const face = rollProvisionDie(options.rng);
-    rolls[hero.instanceId] = face;
-    const provision = faceMap[face];
-    if (provision) {
-      gained[provision] = (gained[provision] ?? 0) + 1;
-    }
-  }
+  let rolls: Record<string, number> = {};
+  let gained: Partial<ProvisionPool> = {};
+  let provisions: ProvisionPool = { ...campaign.provisions };
+  let communityProvision: import('../../../types/act-four').CommunityQuestProvisionRecord | undefined;
 
-  // ---- 步骤 5：加入公共 Provision Pool ----
-  const provisions: ProvisionPool = { ...campaign.provisions };
-  (Object.keys(gained) as (keyof ProvisionPool)[]).forEach((key) => {
-    provisions[key] = (provisions[key] ?? 0) + (gained[key] ?? 0);
-  });
+  if (mode === 'community-reference') {
+    const rolled = rollCommunityProvisionDice(
+      campaign.provisions,
+      `community-excavation-provision:${questId}:${roomId}`,
+      heroes.map((hero) => hero.instanceId),
+      1,
+      options.rng,
+      options.chooseWild,
+    );
+    if (!rolled.ok) return excFail(campaign, rolled.reason);
+    communityProvision = rolled.record;
+    provisions = rolled.provisions;
+    rolls = Object.fromEntries(rolled.record.dice.map((die) => [die.heroId, die.roll]));
+    gained = grantedFromCommunityProvision(rolled.record);
+  } else {
+    // ---- Data Gate：正式骰面映射缺失时 formal 模式拒绝（硬约束 19）----
+    if (mode === 'formal' && !isProvisionDieMapEnabled()) {
+      return excFail(campaign, 'Provision Die 骰面映射缺失，正式 Excavation 结算已禁用');
+    }
+    const faceMap = getProvisionDieFaceMap(mode);
+
+    for (const hero of heroes) {
+      const face = rollProvisionDie(options.rng);
+      rolls[hero.instanceId] = face;
+      const provision = faceMap[face];
+      if (provision) {
+        gained[provision] = (gained[provision] ?? 0) + 1;
+      }
+    }
+    (Object.keys(gained) as (keyof ProvisionPool)[]).forEach((key) => {
+      provisions[key] = (provisions[key] ?? 0) + (gained[key] ?? 0);
+    });
+  }
 
   // ---- 步骤 6—8：创建免费 Rest Session（8 点、不消耗 Firewood）----
   const restTransactionId = actFourTransactionIds.excavationRest(questId, roomId);
@@ -154,10 +163,10 @@ export function resolveExcavationSiteRoom(
     status: 'resolving-rest',
     provisionRollTransactionId: transactionId,
     provisionRolls: rolls,
+    communityProvision,
     restSession,
   };
 
-  const now = options.now ?? nowIso();
   const nextState = withProcessedActFourTransaction(
     {
       ...state,

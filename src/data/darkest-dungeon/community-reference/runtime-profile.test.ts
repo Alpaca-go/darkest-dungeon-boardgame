@@ -91,10 +91,10 @@ describe('Community Reference Runtime Profile adversarial contract', () => {
   it('N02 rejects an official-enabled Community Guardian', () => { const profile = cloneProfile(); (profile.guardianFamilies[0] as { enabledInOfficialPool: boolean }).enabledInOfficialPool = true; expect(validateCommunityRuntimeProfile(profile)).not.toEqual([]); });
   it('N03 rejects a Community Final Form masquerading as official verified', () => { const profile = cloneProfile(); (profile.finalForms[0] as { officialDataStatus: string }).officialDataStatus = 'verified'; expect(validateCommunityRuntimeProfile(profile)).not.toEqual([]); });
   it('N04 rejects a guessed Templars pit-exit rule', () => { const profile = cloneProfile(); profile.unresolvedRules.TEMPLARS_PIT_EXIT_RULE_UNRESOLVED = 'generic movement'; expect(validateCommunityRuntimeProfile(profile)).not.toEqual([]); });
-  it('N05 rejects a default Absolute Nothingness stance', () => { const profile = cloneProfile(); profile.unresolvedRules.ABSOLUTE_NOTHINGNESS_STANCE_UNRESOLVED = 'defensive'; expect(validateCommunityRuntimeProfile(profile)).not.toEqual([]); });
+  it('N05 rejects a default Absolute Nothingness stance', () => { expect(COMMUNITY_RUNTIME_BLOCKERS.some((item) => item.code === 'ABSOLUTE_NOTHINGNESS_STANCE_UNRESOLVED' as never)).toBe(false); expect(JSON.stringify(COMMUNITY_REFERENCE_RUNTIME_PROFILE.unresolvedRules)).not.toContain('ABSOLUTE_NOTHINGNESS_STANCE_UNRESOLVED'); });
   it('N06 rejects guessed Gestating Heart lethal timing', () => { const profile = cloneProfile(); profile.unresolvedRules.GESTATING_HEART_LETHAL_TIMING_UNRESOLVED = 'immediate'; expect(validateCommunityRuntimeProfile(profile)).not.toEqual([]); });
   it('N07 rejects a videogame Come Unto Your Maker definition', () => { const profile = cloneProfile(); profile.unresolvedRules.COME_UNTO_YOUR_MAKER_UNRESOLVED = { source: 'videogame' }; expect(validateCommunityRuntimeProfile(profile)).not.toEqual([]); });
-  it('N08 rejects treating saved DeckIDs order as draw policy', () => { const profile = cloneProfile(); profile.unresolvedRules.MONSTER_DECK_DRAW_POLICY_UNRESOLVED = 'saved DeckIDs order'; expect(validateCommunityRuntimeProfile(profile)).not.toEqual([]); });
+  it('N08 rejects treating saved DeckIDs order as draw policy', () => { expect(JSON.stringify(COMMUNITY_REFERENCE_RUNTIME_PROFILE.monsterComposition)).not.toContain('savedDeckIds'); expect(COMMUNITY_REFERENCE_RUNTIME_PROFILE.capabilities.monsterDeck.randomDraw).not.toBe('prototype'); });
   it('N09 rejects Prototype Monster policy fallback', () => { const profile = cloneProfile(); (profile.capabilities.monsterDeck as { randomDraw: string }).randomDraw = 'prototype'; expect(validateCommunityRuntimeProfile(profile)).not.toEqual([]); });
   it('N10 prevents Quest redraw after reload', () => { const campaign = productionSetup(2, 0); const replay = drawDarkestDungeonQuest({ ...campaign, actFourState: sanitizeActFourState(JSON.parse(JSON.stringify(campaign.actFourState))) }, { mode: PROFILE, rng: () => 0 }); expect(replay.record).toEqual(campaign.actFourState.questDrawRecord); });
   it('N11 prevents skipped Final Form rerandomization', () => { const campaign = productionSetup(1, 0); const replay = drawDarkestDungeonQuest(campaign, { mode: PROFILE, rng: () => 0.99 }); expect(replay.record?.skippedFinalFormId).toBe('ancestor-first-form'); });
@@ -145,34 +145,38 @@ describe('COMMUNITY PRODUCTION-PATH MATRIX', () => {
     }
   }
 
-  it('normal-room Monster draw reaches the real blocker without mutation', () => {
+  it('normal-room Monster draw uses a physical instance without logical-uniform selection', () => {
     const campaign = productionSetup(0, 0);
-    const before = structuredClone(campaign);
+    const before = campaign.actFourState.contentRuntime?.physicalMonsterDeck?.drawPile ?? [];
     const result = drawDarkestDungeonMonster(campaign, () => { throw new Error('RNG must not run'); });
-    expect(result).toMatchObject({ ok: false, kind: 'community-source-blocked', blocker: { code: 'MONSTER_DECK_DRAW_POLICY_UNRESOLVED' } });
-    expect(result.campaign).toEqual(before);
+    expect(result.ok).toBe(true);
+    expect(result.monsterDefinitionId?.startsWith('community-dd-monster-')).toBe(true);
+    expect(result.campaign.actFourState.contentRuntime?.physicalMonsterDeck?.drawPile).toEqual(before.slice(1));
+    expect(result.campaign.actFourState.contentRuntime?.physicalMonsterDeck?.inBattle).toHaveLength(1);
   });
 
   it('selects the Community Ancestor room directly', () => {
     expect(getFinalEncounterRoom(PROFILE)).toMatchObject({ id: 'community-dd-final-encounter-room', formAreaId: 'r12-C' });
   });
 
-  it('Excavation blocks before RNG and state mutation', () => {
+  it('Excavation refuses to roll without an explicit Wild chooser', () => {
     const original = productionSetup(0, 0);
     const first = original.actFourState.excavationSiteStates[0];
     const campaign: CampaignState = { ...original, actFourState: { ...original.actFourState, excavationSiteStates: original.actFourState.excavationSiteStates.map((site) => site === first ? { ...site, status: 'available' as const } : site) } };
     const before = structuredClone(campaign);
     const result = resolveExcavationSiteRoom(campaign, first.roomId, { mode: PROFILE, rng: () => { throw new Error('RNG must not run'); } });
-    expect(result).toMatchObject({ ok: false, kind: 'community-source-blocked', blocker: { code: 'EXCAVATION_PROVISION_DIE_MAP_UNRESOLVED' } });
+    expect(result.ok).toBe(false);
+    expect(result.reason).toContain('Wild');
     expect(result.campaign).toEqual(before);
   });
 
-  it('Final preparation blocks at the provision boundary before mutation', () => {
+  it('Final preparation refuses to roll without an explicit Wild chooser', () => {
     const original = baseCampaign();
     const campaign: CampaignState = { ...original, actFourState: { ...original.actFourState, stage: 'final-encounter-ready' as const, skippedFinalFormId: 'ancestor-first-form' as const, finalHamletState: { status: 'completed' as const, totalDays: 4 as const, currentDay: 4 as const, drawHamletEvent: false as const, completedHeroIdsByDay: {}, buildingUsageByDay: {}, completedDayTransactionIds: [], lastTransactionId: null } } };
     const before = structuredClone(campaign);
     const result = prepareFinalEncounter(campaign, { mode: PROFILE, rng: () => { throw new Error('RNG must not run'); } });
-    expect(result).toMatchObject({ ok: false, kind: 'community-source-blocked', blocker: { code: 'FINAL_PROVISION_POLICY_UNRESOLVED' } });
+    expect(result.ok).toBe(false);
+    expect(result.reason).toContain('Wild');
     expect(result.campaign).toEqual(before);
   });
 
@@ -192,7 +196,10 @@ describe('COMMUNITY PRODUCTION-PATH MATRIX', () => {
       const campaign = baseCampaign();
       return { ...campaign, actFourState: { ...campaign.actFourState, finalFormRuntimeState: setup.state } };
     };
-    expect(rollFinalFormAncestorTeleport(makeCampaign('ancestor-second-form', 'enc-a2'), 1, { mode: PROFILE, rng: () => { throw new Error('RNG must not run'); } })).toMatchObject({ kind: 'community-source-blocked', blocker: { code: 'ABSOLUTE_NOTHINGNESS_STANCE_UNRESOLVED' } });
+    const ancestorSecond = makeCampaign('ancestor-second-form', 'enc-a2');
+    const teleport = rollFinalFormAncestorTeleport(ancestorSecond, 1, { mode: PROFILE, rng: () => 0 });
+    expect(teleport.ok).toBe(true);
+    expect(ancestorSecond.actFourState.finalFormRuntimeState?.runtimes['ancestor-second-form']).toMatchObject({ kind: 'ancestor-second-form' });
     expect(applyFinalFormWoundedReaction(makeCampaign('gestating-heart', 'enc-gh'), 1, { sourceHeroId: 'hero', woundsApplied: 1, lethal: true }, { mode: PROFILE })).toMatchObject({ kind: 'community-source-blocked', blocker: { code: 'GESTATING_HEART_LETHAL_TIMING_UNRESOLVED' } });
     expect(performFinalFormComeUntoYourMaker(makeCampaign('heart-of-darkness', 'enc-hod'), { mode: PROFILE })).toMatchObject({ kind: 'community-source-blocked', blocker: { code: 'COME_UNTO_YOUR_MAKER_UNRESOLVED' } });
   });
@@ -200,6 +207,6 @@ describe('COMMUNITY PRODUCTION-PATH MATRIX', () => {
 
 describe('supported-path unresolved boundaries', () => {
   it.each(COMMUNITY_RUNTIME_BLOCKERS.map((item) => [item.code, item.requirementId, item.field] as const))('%s returns an explicit community-source blocker', (code, requirementId, field) => expect(blockCommunityOperation(code)).toMatchObject({ ok: false, kind: 'community-source-blocked', blocker: { code, requirementId, field, sourceAuthority: 'COMMUNITY_RETAIL_REFERENCE' } }));
-  it('Monster draw refuses saved-order and Prototype fallback', () => expect(drawCommunityMonster().blocker.code).toBe('MONSTER_DECK_DRAW_POLICY_UNRESOLVED'));
+  it('Monster draw refuses saved-order and Prototype fallback', () => expect(drawCommunityMonster(productionSetup(0, 0)).blocker.code).toBe('MONSTER_CARD_FRONT_BACK_SIZE_UNRESOLVED'));
   it('pins the profile to the accepted source package', () => expect(COMMUNITY_REFERENCE_SOURCE_SHA256).toBe(COMMUNITY_REFERENCE_RUNTIME_PROFILE.sourcePackageSha256));
 });

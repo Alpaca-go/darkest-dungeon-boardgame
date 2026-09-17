@@ -125,6 +125,8 @@ export interface AbsoluteNothingnessState {
   linkedStance: NonAggressiveStance;
   /** 所占 Area；官方 Room 缺失 → 空串（驱动 Data Gate）。 */
   areaId: string;
+  /** Occupies a Room area, never a Stance Tracker actor slot. */
+  stanceTrackerStance: null;
   targetable: false;
   occupiesAreaSpace: true;
 }

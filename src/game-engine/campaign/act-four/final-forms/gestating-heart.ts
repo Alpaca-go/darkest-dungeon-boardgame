@@ -52,6 +52,8 @@ export interface SispersionInput {
   occupancyByArea?: Record<string, number>;
   /** 已被 Heart 本体占用的 Stance（默认 aggressive）。 */
   occupiedStances?: Stance[];
+  /** Community physical-deck selection; never a uniform logical identity pick. */
+  selectedMonsterDefinitionId?: string;
 }
 
 export interface SispersionResult {
@@ -136,7 +138,8 @@ export function performSispersion(
   const remaining = mech.monsterDefinitionIds.filter(
     (id) => !runtime.drawnMonsterDefinitionIds.includes(id),
   );
-  if (remaining.length === 0) {
+  const selected = input?.selectedMonsterDefinitionId;
+  if (!selected && remaining.length === 0) {
     return {
       ok: false,
       runtime,
@@ -159,8 +162,7 @@ export function performSispersion(
     };
   }
 
-  const index = pickIndex(rng, remaining.length);
-  const monsterDefinitionId = remaining[index];
+  const monsterDefinitionId = selected ?? remaining[pickIndex(rng, remaining.length)];
   const actorId = `sispersion-${sequence}-${monsterDefinitionId}`;
 
   const record: SispersionSummonRecord = {

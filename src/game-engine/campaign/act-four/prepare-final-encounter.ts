@@ -45,10 +45,8 @@ import {
   withProcessedActFourTransaction,
 } from './act-four-state';
 import { createSeededRng } from './rng';
-import {
-  blockCommunityOperation,
-  type CommunityRuntimeBlocker,
-} from '../../../data/darkest-dungeon/community-reference/runtime-profile';
+import type { CommunityRuntimeBlocker } from '../../../data/darkest-dungeon/community-reference/runtime-profile';
+import { grantedFromCommunityProvision, rollCommunityProvisionDice, type CommunityWildChooser } from './community-provision-runtime';
 
 // ---------------------------------------------------------------------------
 // §18 Form 顺序推导
@@ -111,6 +109,7 @@ export interface PrepareFinalEncounterOptions {
   rng?: () => number;
   seed?: number;
   now?: string;
+  chooseWild?: CommunityWildChooser;
 }
 
 export interface PrepareFinalEncounterResult {
@@ -178,11 +177,6 @@ export function prepareFinalEncounter(
     return prepFail(campaign, `非法的 Skipped Final Form：${skipped}（Heart of Darkness 不可跳过）`);
   }
 
-  if (mode === 'community-reference') {
-    const blocked = blockCommunityOperation('FINAL_PROVISION_POLICY_UNRESOLVED');
-    return { ...prepFail(campaign, blocked.blocker.code), ...blocked };
-  }
-
   // ---- 3. Data Gate（硬约束 19）----
   if (mode === 'formal') {
     if (!isFinalEncounterOfficialEnabled()) {
@@ -211,13 +205,15 @@ export function prepareFinalEncounter(
     }
   }
 
-  const policy = getFinalProvisionPolicy(mode);
-  const policyValidation = validateFinalProvisionPolicy(policy);
-  if (!policyValidation.isComplete) {
-    return prepFail(
-      campaign,
-      `Final Provision 策略不完整：${[...policyValidation.missing, ...policyValidation.issues].join('；')}`,
-    );
+  if (mode !== 'community-reference') {
+    const policy = getFinalProvisionPolicy(mode);
+    const policyValidation = validateFinalProvisionPolicy(policy);
+    if (!policyValidation.isComplete) {
+      return prepFail(
+        campaign,
+        `Final Provision 策略不完整：${[...policyValidation.missing, ...policyValidation.issues].join('；')}`,
+      );
+    }
   }
 
   const room = getFinalEncounterRoom(mode);
@@ -228,13 +224,33 @@ export function prepareFinalEncounter(
   // ---- 4. Roll for Provisions（先保存后展示）----
   const now = options?.now ?? nowIso();
   const rng = options?.rng ?? createSeededRng(options?.seed ?? 0x10a17);
-  const { record, provisions } = rollFinalProvisions(
-    campaign.provisions,
-    mode,
-    rng,
-    transactionId,
-    now,
-  );
+  let record: FinalProvisionRecord;
+  let provisions: ProvisionPool;
+  if (mode === 'community-reference') {
+    const livingHeroIds = campaign.heroes.filter((hero) => !hero.dead && hero.isAlive !== false).map((hero) => hero.instanceId);
+    if (livingHeroIds.length === 0) return prepFail(campaign, '队伍中没有可掷骰的英雄');
+    const rolled = rollCommunityProvisionDice(
+      campaign.provisions,
+      'community-final-provision-policy-v1',
+      livingHeroIds,
+      2,
+      rng,
+      options?.chooseWild,
+    );
+    if (!rolled.ok) return prepFail(campaign, rolled.reason);
+    record = {
+      transactionId,
+      rolls: Object.fromEntries(rolled.record.dice.map((die) => [`${die.heroId}:${die.dieIndex}`, die.roll])),
+      granted: grantedFromCommunityProvision(rolled.record),
+      rolledAt: now,
+      communityProvision: rolled.record,
+    };
+    provisions = rolled.provisions;
+  } else {
+    const rolled = rollFinalProvisions(campaign.provisions, mode, rng, transactionId, now);
+    record = rolled.record;
+    provisions = rolled.provisions;
+  }
 
   // ---- 5. 构建 FinalEncounterState ----
   const encounter: FinalEncounterState = {
