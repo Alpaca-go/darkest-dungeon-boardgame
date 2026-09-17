@@ -1,17 +1,17 @@
 {
   "schemaVersion": "phase11a3-community-runtime-semantic-leaf-coverage.v2",
-  "generatedAt": "2026-09-13T09:25:22.187Z",
-  "verifiedImplementationHead": "32aeb5bf261f1ea9ca05972b2a71676d52e42794",
+  "generatedAt": "2026-09-17T11:44:59.047Z",
+  "verifiedImplementationHead": "1e585558946b84e16719e4b91f3235be15234a0d",
   "totals": {
     "total": 195,
-    "consumed": 137,
-    "explicit-source-blocker": 5,
+    "consumed": 138,
+    "explicit-source-blocker": 4,
     "engine-unsupported-blocker": 41,
     "display-only": 7,
     "not-runtime-relevant": 5,
     "unclassified": 0,
-    "runtimeSelectorExpected": 137,
-    "runtimeSelectorResolved": 137,
+    "runtimeSelectorExpected": 138,
+    "runtimeSelectorResolved": 138,
     "runtimeSelectorMissing": 0
   },
   "entries": [
@@ -3141,19 +3141,19 @@
     {
       "requirementId": "tierB-absolute-nothingness",
       "sourcePath": "stance",
-      "classification": "explicit-source-blocker",
+      "classification": "consumed",
       "sourceReference": [
         "rulebook:40",
         "rulebook:41",
         "asset:4cd186:face"
       ],
-      "sourceValueHash": "7c9b6140",
-      "runtimeValueHash": null,
-      "runtimeSelectorId": null,
-      "normalizerId": "identity.v1",
-      "blockerCode": "ABSOLUTE_NOTHINGNESS_STANCE_UNRESOLVED",
+      "sourceValueHash": "a7f95e65",
+      "runtimeValueHash": "a7f95e65",
+      "runtimeSelectorId": "nothingness.nonTrackerOccupant",
+      "normalizerId": "nothingness-non-tracker.v1",
+      "blockerCode": null,
       "tests": [
-        "BLOCK:tierB-absolute-nothingness.stance"
+        "TRACE:tierB-absolute-nothingness.stance"
       ]
     },
     {
@@ -3413,7 +3413,7 @@
       "runtimeValueHash": null,
       "runtimeSelectorId": null,
       "normalizerId": "identity.v1",
-      "blockerCode": "MONSTER_DECK_DRAW_POLICY_UNRESOLVED",
+      "blockerCode": "MONSTER_CARD_FRONT_BACK_SIZE_UNRESOLVED",
       "tests": [
         "BLOCK:tierB-darkest-dungeon-monster-deck.drawPolicy"
       ]

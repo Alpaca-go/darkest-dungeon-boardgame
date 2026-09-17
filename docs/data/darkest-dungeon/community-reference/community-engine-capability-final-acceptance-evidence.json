@@ -1,13 +1,13 @@
 {
   "schemaVersion": "phase11a3-community-engine-capability-final-acceptance.v1",
-  "runId": "14785b6b-64e8-4013-806c-99945654d41c",
-  "measuredAt": "2026-09-13T09:28:49.095Z",
+  "runId": "7c6bde24-47e1-4e0c-b1f1-bbcb49b366ec",
+  "measuredAt": "2026-09-17T11:49:20.148Z",
   "verificationScope": "LOCAL MEASURED VERIFICATION",
   "verifiedBaseHead": "8a3f7b2dbbadfb1b921287fb6c23c36e3d4d644f",
-  "verifiedImplementationHead": "32aeb5bf261f1ea9ca05972b2a71676d52e42794",
-  "evidencePublicationParent": "32aeb5bf261f1ea9ca05972b2a71676d52e42794",
+  "verifiedImplementationHead": "1e585558946b84e16719e4b91f3235be15234a0d",
+  "evidencePublicationParent": "1e585558946b84e16719e4b91f3235be15234a0d",
   "publicationContract": "Acceptance is valid only at a clean evidence-only direct child; run --check-publication to attest the actual commit relationship.",
-  "verificationInputHash": "c6efb5113e004bf1ec2b0a57bcd3ff95f86252bdbef68a647935f28e8b3eff3a",
+  "verificationInputHash": "3d8f093fea09bdb71699a1329665107cc03d785f6100ebc6024d0fa8354f5221",
   "canonicalInputSha256": "382e479f84f79a9b3cc6b0256b2fa5dea100b3576244988f180b49e75ed78d2a",
   "ttsSha256": "d2fe21a6aa294f80fb47e56677c3a74090c3dc131361d798dfde709f6a3a64a2",
   "capabilities": [
@@ -1283,6 +1283,34 @@
       "proofKind": "semantic-leaf",
       "classification": "runtime-only",
       "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
+    },
+    {
+      "code": "MONSTER_CARD_FRONT_BACK_SIZE_UNRESOLVED",
+      "requirementId": "tierB-darkest-dungeon-monster-deck",
+      "field": "drawPolicy",
+      "sourcePath": "drawPolicy",
+      "runtimeDependency": "per-card Front/Back/Large size for four-slot fill",
+      "firstBlockingFunction": "drawDarkestDungeonMonster",
+      "tests": [
+        "BLOCK:MONSTER_CARD_FRONT_BACK_SIZE_UNRESOLVED"
+      ],
+      "proofKind": "semantic-leaf",
+      "classification": "source-level",
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
+    },
+    {
+      "code": "SHUFFLING_ROOM10_NON_AGGRESSIVE_STANCE_AREA_UNRESOLVED",
+      "requirementId": "runtime-shuffling-horror-room",
+      "field": "initialArea",
+      "sourcePath": "initialArea",
+      "runtimeDependency": "Room 10 non-aggressive Priest/Growth/Hero area map",
+      "firstBlockingFunction": "resolveEchoingDisassembly",
+      "tests": [
+        "BLOCK:SHUFFLING_ROOM10_NON_AGGRESSIVE_STANCE_AREA_UNRESOLVED"
+      ],
+      "proofKind": "capability-level",
+      "classification": "runtime-only",
+      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
     }
   ],
   "remainingBlockers": [
@@ -1399,20 +1427,6 @@
       "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
     },
     {
-      "code": "ABSOLUTE_NOTHINGNESS_STANCE_UNRESOLVED",
-      "requirementId": "tierB-absolute-nothingness",
-      "field": "stance",
-      "sourcePath": "stance",
-      "runtimeDependency": "stance",
-      "firstBlockingFunction": "blockCommunityOperation",
-      "tests": [
-        "BLOCK:ABSOLUTE_NOTHINGNESS_STANCE_UNRESOLVED"
-      ],
-      "proofKind": "semantic-leaf",
-      "classification": "source-level",
-      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
-    },
-    {
       "code": "GESTATING_HEART_LETHAL_TIMING_UNRESOLVED",
       "requirementId": "tierB-gestating-heart",
       "field": "lethalWoundTimingRuling",
@@ -1441,45 +1455,17 @@
       "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
     },
     {
-      "code": "MONSTER_DECK_DRAW_POLICY_UNRESOLVED",
+      "code": "MONSTER_CARD_FRONT_BACK_SIZE_UNRESOLVED",
       "requirementId": "tierB-darkest-dungeon-monster-deck",
       "field": "drawPolicy",
       "sourcePath": "drawPolicy",
-      "runtimeDependency": "drawPolicy",
-      "firstBlockingFunction": "blockCommunityOperation",
+      "runtimeDependency": "per-card Front/Back/Large size for four-slot fill",
+      "firstBlockingFunction": "drawDarkestDungeonMonster",
       "tests": [
-        "BLOCK:MONSTER_DECK_DRAW_POLICY_UNRESOLVED"
+        "BLOCK:MONSTER_CARD_FRONT_BACK_SIZE_UNRESOLVED"
       ],
       "proofKind": "semantic-leaf",
       "classification": "source-level",
-      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
-    },
-    {
-      "code": "EXCAVATION_PROVISION_DIE_MAP_UNRESOLVED",
-      "requirementId": "runtime-excavation-provision-die",
-      "field": "faceMap",
-      "sourcePath": "faceMap",
-      "runtimeDependency": "faceMap",
-      "firstBlockingFunction": "blockCommunityOperation",
-      "tests": [
-        "BLOCK:EXCAVATION_PROVISION_DIE_MAP_UNRESOLVED"
-      ],
-      "proofKind": "capability-level",
-      "classification": "runtime-only",
-      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
-    },
-    {
-      "code": "FINAL_PROVISION_POLICY_UNRESOLVED",
-      "requirementId": "runtime-final-provision-policy",
-      "field": "grantTable",
-      "sourcePath": "grantTable",
-      "runtimeDependency": "grantTable",
-      "firstBlockingFunction": "blockCommunityOperation",
-      "tests": [
-        "BLOCK:FINAL_PROVISION_POLICY_UNRESOLVED"
-      ],
-      "proofKind": "capability-level",
-      "classification": "runtime-only",
       "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
     },
     {
@@ -1511,14 +1497,14 @@
       "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
     },
     {
-      "code": "SHUFFLING_INITIAL_AREA_UNRESOLVED",
+      "code": "SHUFFLING_ROOM10_NON_AGGRESSIVE_STANCE_AREA_UNRESOLVED",
       "requirementId": "runtime-shuffling-horror-room",
       "field": "initialArea",
       "sourcePath": "initialArea",
-      "runtimeDependency": "initialArea",
-      "firstBlockingFunction": "blockCommunityOperation",
+      "runtimeDependency": "Room 10 non-aggressive Priest/Growth/Hero area map",
+      "firstBlockingFunction": "resolveEchoingDisassembly",
       "tests": [
-        "BLOCK:SHUFFLING_INITIAL_AREA_UNRESOLVED"
+        "BLOCK:SHUFFLING_ROOM10_NON_AGGRESSIVE_STANCE_AREA_UNRESOLVED"
       ],
       "proofKind": "capability-level",
       "classification": "runtime-only",
@@ -1541,14 +1527,14 @@
   ],
   "fieldCoverage": {
     "total": 195,
-    "consumed": 137,
-    "explicit-source-blocker": 5,
+    "consumed": 138,
+    "explicit-source-blocker": 4,
     "engine-unsupported-blocker": 41,
     "display-only": 7,
     "not-runtime-relevant": 5,
     "unclassified": 0,
-    "runtimeSelectorExpected": 137,
-    "runtimeSelectorResolved": 137,
+    "runtimeSelectorExpected": 138,
+    "runtimeSelectorResolved": 138,
     "runtimeSelectorMissing": 0
   },
   "fieldCoverageLeaves": [
@@ -4678,19 +4664,19 @@
     {
       "requirementId": "tierB-absolute-nothingness",
       "sourcePath": "stance",
-      "classification": "explicit-source-blocker",
+      "classification": "consumed",
       "sourceReference": [
         "rulebook:40",
         "rulebook:41",
         "asset:4cd186:face"
       ],
-      "sourceValueHash": "7c9b6140",
-      "runtimeValueHash": null,
-      "runtimeSelectorId": null,
-      "normalizerId": "identity.v1",
-      "blockerCode": "ABSOLUTE_NOTHINGNESS_STANCE_UNRESOLVED",
+      "sourceValueHash": "a7f95e65",
+      "runtimeValueHash": "a7f95e65",
+      "runtimeSelectorId": "nothingness.nonTrackerOccupant",
+      "normalizerId": "nothingness-non-tracker.v1",
+      "blockerCode": null,
       "tests": [
-        "BLOCK:tierB-absolute-nothingness.stance"
+        "TRACE:tierB-absolute-nothingness.stance"
       ]
     },
     {
@@ -4950,7 +4936,7 @@
       "runtimeValueHash": null,
       "runtimeSelectorId": null,
       "normalizerId": "identity.v1",
-      "blockerCode": "MONSTER_DECK_DRAW_POLICY_UNRESOLVED",
+      "blockerCode": "MONSTER_CARD_FRONT_BACK_SIZE_UNRESOLVED",
       "tests": [
         "BLOCK:tierB-darkest-dungeon-monster-deck.drawPolicy"
       ]
@@ -4966,7 +4952,7 @@
       "skipped": 0,
       "todo": 0,
       "reporter": "docs/reports/phase-11a3/engine-final-acceptance/production.vitest.json",
-      "sha256": "8aa06150dbefb470e4b6a9cc15d337a00d74762fe605f9581c3462e10d16518f",
+      "sha256": "cee666234dc9a9f211ec93903620b209374174d8005424ddaf628e6e9e928524",
       "tests": [
         {
           "file": "D:/darkest-dungoen-boardgame/src/data/darkest-dungeon/community-reference/community-engine-capability-production.test.ts",
@@ -5189,7 +5175,7 @@
       "skipped": 0,
       "todo": 0,
       "reporter": "docs/reports/phase-11a3/engine-final-acceptance/saveReplay.vitest.json",
-      "sha256": "f3bce4a3a102de9f605fcca6d8fd0cdc54dbf3c1c808f1efe0910ec6e1262655",
+      "sha256": "907748bc2469aa42c3eba270e0becc7eefc0c660f273e602bd86d11799f47081",
       "tests": [
         {
           "file": "D:/darkest-dungoen-boardgame/src/data/darkest-dungeon/community-reference/community-engine-capability-save-replay.test.ts",
@@ -5265,8 +5251,8 @@
         },
         {
           "file": "D:/darkest-dungoen-boardgame/src/data/darkest-dungeon/community-reference/community-engine-capability-save-replay.test.ts",
-          "title": "SR-final-skill save preserves the actual preparation blocker and no selected skill is fabricated",
-          "fullName": "Community capability whole SaveFile replay acceptance SR-final-skill save preserves the actual preparation blocker and no selected skill is fabricated",
+          "title": "SR-final-skill save preserves the actual preparation receipt and no selected skill is fabricated",
+          "fullName": "Community capability whole SaveFile replay acceptance SR-final-skill save preserves the actual preparation receipt and no selected skill is fabricated",
           "status": "passed"
         },
         {
@@ -5310,7 +5296,7 @@
       "skipped": 0,
       "todo": 0,
       "reporter": "docs/reports/phase-11a3/engine-final-acceptance/adversarial.vitest.json",
-      "sha256": "ba77fc25fc8ab40babb2ac2da53b397fa4712aa91884249f5e430720e823a155",
+      "sha256": "97834a61e73a17bec1c668e25f49b2af2606ebc1ec535ae92662ea52c1d34755",
       "tests": [
         {
           "file": "D:/darkest-dungoen-boardgame/src/data/darkest-dungeon/community-reference/community-engine-capability-adversarial.test.ts",
@@ -5461,7 +5447,7 @@
       "skipped": 0,
       "todo": 0,
       "reporter": "docs/reports/phase-11a3/engine-final-acceptance/triage.vitest.json",
-      "sha256": "d0357e33fd690da8b57fb6cae24078393d833ec29b0225a60bfe84bf5eddfd6a"
+      "sha256": "b8bbe2c86876b43562ca4c0c136c688a8aa65bff3d8b6fb98142d33b30923c53"
     }
   },
   "triageProofReferences": [
@@ -5712,8 +5698,8 @@
       "reference": "community-engine-capability-save-replay.test.ts:SR-final-skill",
       "test": {
         "file": "D:/darkest-dungoen-boardgame/src/data/darkest-dungeon/community-reference/community-engine-capability-save-replay.test.ts",
-        "title": "SR-final-skill save preserves the actual preparation blocker and no selected skill is fabricated",
-        "fullName": "Community capability whole SaveFile replay acceptance SR-final-skill save preserves the actual preparation blocker and no selected skill is fabricated",
+        "title": "SR-final-skill save preserves the actual preparation receipt and no selected skill is fabricated",
+        "fullName": "Community capability whole SaveFile replay acceptance SR-final-skill save preserves the actual preparation receipt and no selected skill is fabricated",
         "status": "passed"
       }
     },
@@ -5846,7 +5832,7 @@
         "--outputFile=docs/reports/phase-11a3/engine-final-acceptance/production.vitest.json"
       ],
       "exitCode": 0,
-      "durationMs": 3133,
+      "durationMs": 3693,
       "log": "docs/reports/phase-11a3/engine-final-acceptance/production.log",
       "logSha256": "3a2b9018ee6c4667786792b9e1c018e093a48353b3097952b0bbd39913cd4484",
       "error": null
@@ -5861,7 +5847,7 @@
         "--outputFile=docs/reports/phase-11a3/engine-final-acceptance/saveReplay.vitest.json"
       ],
       "exitCode": 0,
-      "durationMs": 3085,
+      "durationMs": 3907,
       "log": "docs/reports/phase-11a3/engine-final-acceptance/saveReplay.log",
       "logSha256": "6695ff36cf123dabc084402212acdaebc06deaf7101c8537ac1933d5b05d6e1b",
       "error": null
@@ -5876,7 +5862,7 @@
         "--outputFile=docs/reports/phase-11a3/engine-final-acceptance/adversarial.vitest.json"
       ],
       "exitCode": 0,
-      "durationMs": 18111,
+      "durationMs": 19717,
       "log": "docs/reports/phase-11a3/engine-final-acceptance/adversarial.log",
       "logSha256": "4740da0b74b8c58c2159833033a53502d7f2752eba5968f52c20b30736f3f16d",
       "error": null
@@ -5895,7 +5881,7 @@
         "--outputFile=docs/reports/phase-11a3/engine-final-acceptance/triage.vitest.json"
       ],
       "exitCode": 0,
-      "durationMs": 3135,
+      "durationMs": 4063,
       "log": "docs/reports/phase-11a3/engine-final-acceptance/triageProofs.log",
       "logSha256": "09df14ea9c033ccc19f4e81e0dbc12386f287011774696a448e3cca56ae9f792",
       "error": null
@@ -5907,7 +5893,7 @@
         "--noEmit"
       ],
       "exitCode": 0,
-      "durationMs": 7029,
+      "durationMs": 9022,
       "log": "docs/reports/phase-11a3/engine-final-acceptance/typecheck.log",
       "logSha256": "75a11da44c802486bc6f65640aa48a730f0f684c5c07a42ba3cd1735eb3fb070",
       "error": null
@@ -5919,9 +5905,9 @@
         "build"
       ],
       "exitCode": 0,
-      "durationMs": 6981,
+      "durationMs": 8123,
       "log": "docs/reports/phase-11a3/engine-final-acceptance/build.log",
-      "logSha256": "9ffbd970496820021a83d5ba31c7e479d8be894902bd1a4e56c58b593726dcd7",
+      "logSha256": "7352894944c46c2847d2fa886b7c2a38955bad20fb35a1ee08cd5c784f850da4",
       "error": null
     },
     {
@@ -5933,9 +5919,9 @@
         "C:\\Users\\kyrie\\.codex\\visualizations\\2026\\09\\10\\01a08ba7-2f12-7b02-9298-a8d8ae3a3913\\phase11a3-audit\\Phase11A3_CompleteEdition_Source_Intake_Package.json"
       ],
       "exitCode": 0,
-      "durationMs": 261483,
+      "durationMs": 322246,
       "log": "docs/reports/phase-11a3/engine-final-acceptance/runtimeGate.log",
-      "logSha256": "ed4cc9f9bb4d0701892b111cdb16026d11534a98592429ae3185fdaed7f83c18",
+      "logSha256": "b755da9bdd155d0690eb5e9953cf8610922934737eebbca20d98ab3459be9ce2",
       "error": null
     },
     {
@@ -5950,7 +5936,7 @@
         "docs/data/darkest-dungeon/community-reference/community-visual-assets-fresh-evidence.json"
       ],
       "exitCode": 0,
-      "durationMs": 14511,
+      "durationMs": 16673,
       "log": "docs/reports/phase-11a3/engine-final-acceptance/visualGate.log",
       "logSha256": "d4ae16ed40da1a3ea99ccfcef5b471b9107db5ab7478334b78698076a8d7d2c9",
       "error": null
@@ -5962,41 +5948,41 @@
         "scripts/audit/verify-phase11a3-source-gate.ts"
       ],
       "exitCode": 0,
-      "durationMs": 192070,
+      "durationMs": 244034,
       "log": "docs/reports/phase-11a3/engine-final-acceptance/officialSourceGate.log",
-      "logSha256": "2d9e3ceb425bc4d838e285adcb014d773db4e910fd029eef78a1785532d9607b",
+      "logSha256": "fd5541a80d64791f34d72c3f81db011cad3b51c6faf4b9380f63799b4384ce34",
       "error": null
     }
   ],
   "runtimeGate": {
     "path": "docs/data/darkest-dungeon/community-reference/community-reference-runtime-evidence.json",
-    "sha256": "fe6303c255886617feaa226bf87abf2514324f6bc2c7c4f11d8ef5283cb5d9e0",
-    "runId": "a9b88133-e24d-47f8-87fe-7d6a4b28f9fd",
-    "measuredAt": "2026-09-13T09:25:22.187Z",
-    "verifiedImplementationHead": "32aeb5bf261f1ea9ca05972b2a71676d52e42794",
+    "sha256": "620c6237f7de7c19e9d1346a7380aaa13d4491f5f1f031c7ae63a6bd7b330fa2",
+    "runId": "ac381ad2-dfac-489f-90a9-024acfd61206",
+    "measuredAt": "2026-09-17T11:44:59.047Z",
+    "verifiedImplementationHead": "1e585558946b84e16719e4b91f3235be15234a0d",
     "result": "COMMUNITY-REFERENCE-RUNTIME-FROZEN"
   },
   "bindingGate": {
     "path": "docs/data/darkest-dungeon/community-reference/antha-complete-edition/community-reference-binding-evidence.json",
-    "sha256": "e26cf62d8ef33b4d729227c7c6fe5347e56bc8f3781b95d9c9b6a19e0963f026",
-    "runId": "a2597086-c8bf-4f27-8cb5-15be737e66e6",
-    "measuredAt": "2026-09-13T09:25:22.039Z",
-    "verifiedImplementationHead": "32aeb5bf261f1ea9ca05972b2a71676d52e42794",
+    "sha256": "65f477ad70be7c0fdb21ece57f1afa1ae6f2c7fc74ba93a656223c49086820f9",
+    "runId": "f5c59a29-3c78-4731-a4e1-6e2b7ef3d28c",
+    "measuredAt": "2026-09-17T11:44:58.889Z",
+    "verifiedImplementationHead": "1e585558946b84e16719e4b91f3235be15234a0d",
     "result": "COMMUNITY-REFERENCE-DATA-BOUND"
   },
   "visualGate": {
     "path": "docs/data/darkest-dungeon/community-reference/community-visual-assets-fresh-evidence.json",
-    "sha256": "71e9051ed74a55917c85048d4f8a57ab2afa37027b2f6d1262d817552ec76c70",
-    "runId": "4f659422-c918-45f3-ae25-e5600452db46",
-    "measuredAt": "2026-09-13T09:25:36.731Z",
-    "verifiedImplementationHead": "32aeb5bf261f1ea9ca05972b2a71676d52e42794",
+    "sha256": "ea2452168366547082dd227241d349f9416aaae4e2185ddfb5860cb23600de28",
+    "runId": "d07bc1fb-e02a-47fc-a908-af5594226b97",
+    "measuredAt": "2026-09-17T11:45:15.773Z",
+    "verifiedImplementationHead": "1e585558946b84e16719e4b91f3235be15234a0d",
     "result": "COMMUNITY-VISUAL-ASSETS-ACCEPTED"
   },
   "officialGate": {
     "path": "docs/data/core-campaign/verification-results.json",
-    "sha256": "a08f6c3e0e3325f6b3ea33ec8b9d2023594f2736e7e2f2265b9272dc7c99bc06",
-    "runId": "1a0b7b2e-08ed-4f94-8ded-7b5bd95a2160",
-    "measuredAt": "2026-09-13T09:28:47.508Z",
+    "sha256": "c4f95ae24fccd779e22cb07e84cd4a920c19584a35f7ec6aea5c7df29c5e4fc9",
+    "runId": "417e10a6-73d0-4930-b8b3-8f77c260521d",
+    "measuredAt": "2026-09-17T11:49:18.293Z",
     "result": "SOURCE-BLOCKED",
     "truth": {
       "status": "SOURCE-BLOCKED",
@@ -6015,7 +6001,7 @@
       "canCloseP0_002": false,
       "canEnterPhase11B": false
     },
-    "verificationInputHash": "c6efb5113e004bf1ec2b0a57bcd3ff95f86252bdbef68a647935f28e8b3eff3a"
+    "verificationInputHash": "3d8f093fea09bdb71699a1329665107cc03d785f6100ebc6024d0fa8354f5221"
   },
   "COMMUNITY-FULL-ACT-IV-PLAYABLE": false,
   "terminalVerdict": "COMMUNITY-SOURCE-BACKED-ENGINE-CAPABILITIES-ACCEPTED",
