@@ -90,7 +90,7 @@ describe('Community Act IV playable-closure adversarial', () => {
     const victory = win(0);
     expect(victory.actFourState.shufflingHorrorEncounterState!.actors.every((actor) => !actor.alive)).toBe(true);
     expect(victory.battle!.monsters.filter((unit) => unit.sourceId.startsWith('community-dd-')).every((unit) => !unit.isAlive)).toBe(true);
-    expect(COMMUNITY_RUNTIME_BLOCKERS.some((blocker) => blocker.code === 'SHUFFLING_LINKED_VICTORY_CLEANUP_ENGINE_UNSUPPORTED')).toBe(false);
+    expect(COMMUNITY_RUNTIME_BLOCKERS.map((blocker) => blocker.code)).not.toContain('SHUFFLING_LINKED_VICTORY_CLEANUP_ENGINE_UNSUPPORTED');
   });
 
   it('P11 Nothingness receives Initiative/turn -> FAIL', () => {

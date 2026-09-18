@@ -55,10 +55,6 @@ const SKILL_STRESS: Record<string, number> = {
   teleport: 2,
 };
 
-function localSkillId(skillId: string): string {
-  return skillId.replace(/^community-dd-skill-(?:impaler-|warlord-)?/, '');
-}
-
 function skillNumberToId(requirementId: string, printedNumber: number): string {
   const skills = requirement(requirementId).fields.skillIds.value as Array<{ sourceLocalSkillId: string; printedNumber: number }>;
   const found = skills.find((skill) => skill.printedNumber === printedNumber);
