@@ -258,7 +258,7 @@ export function runCommunityGuardianMonsterTurn(state: BattleState, monster: Bat
     !isHeroAttack
       ? `${monster.name} 使用 ${skill.name}。`
       : outcome.hit
-        ? `${monster.name} 使用 ${skill.name}${outcome.critical ? '（暴击）' : ''}，掷 ${attackRoll} 命中 ${target.name}，造成 ${outcome.damage} 伤害。`
+        ? `${monster.name} 使用 ${skill.name}${outcome.critical ? '（暴击）' : ''}，掷 ${attackRoll} 命中 ${target.name}，造成 ${damage} 伤害。`
         : `${monster.name} 使用 ${skill.name}，掷 ${attackRoll} 未命中 ${target.name}。`,
     outcome.hit ? 'danger' : 'info',
   );

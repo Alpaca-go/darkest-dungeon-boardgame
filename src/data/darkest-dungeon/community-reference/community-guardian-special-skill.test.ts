@@ -3,7 +3,6 @@ import { attack, communityAttack, deployShufflingSummons, reload, scriptedD10, s
 import {
   applyCommunityGuardianSpecialSkill,
   communitySpecialSkillLeaf,
-  markedBonusDamage,
 } from '../../../game-engine/campaign/act-four/community-guardian-special-skills';
 import { getCommunityHeroRoomArea } from '../../../game-engine/campaign/act-four/community-guardian-room-state';
 import { shouldForceCommunityEchoingDisassembly } from '../../../game-engine/campaign/act-four/community-guardian-combat';
@@ -105,25 +104,71 @@ describe('Community Guardian special skill production', () => {
     expect(result.heroes.find((unit) => unit.id === hero.id)!.bleed).toBe(3);
   });
 
-  it('The Finger marked bonus enters the damage pipeline', () => {
-    expect(communitySpecialSkillLeaf('the-finger')).toMatchObject({ markedBonusDamage: 5 });
-    const { before, heroId } = communityAttack('cultist-priest', 8, 1);
-    const hero = before.heroes.find((unit) => unit.id === heroId)!;
-    expect(markedBonusDamage('the-finger', { ...hero, marked: false })).toBe(0);
-    expect(markedBonusDamage('the-finger', { ...hero, marked: true })).toBe(5);
+  it('The Finger Marked Hero Monster Turn adds exactly +5 damage with Bleed and Stress', () => {
+    // Cultist Priest aggressive：rolls 7–10 → The Finger（damage 15, Acc 11 → d10 必中）。
+    // 必须经 runMonsterTurn 生产路径；禁止 markedBonusDamage / applyCommunityGuardianSpecialSkill 作为最终证据。
+    const campaign = deployShufflingSummons();
+    const hero = campaign.battle!.heroes.find((unit) => unit.isAlive)!;
     const markedBattle = {
-      ...before,
-      heroes: before.heroes.map((unit) => (unit.id === heroId ? { ...unit, marked: true } : unit)),
+      ...campaign.battle!,
+      heroes: campaign.battle!.heroes.map((unit) => (unit.id === hero.id ? { ...unit, marked: true } : unit)),
     };
-    const special = applyCommunityGuardianSpecialSkill(
-      markedBattle,
-      markedBattle.monsters.find((unit) => unit.sourceId === 'community-dd-cultist-priest')!,
-      markedBattle.heroes.find((unit) => unit.id === heroId)!,
-      'the-finger',
-      'finger-test',
-      true,
-    );
-    expect(special.markedBonus).toBe(5);
+    const beforeHp = markedBattle.heroes.find((unit) => unit.id === hero.id)!.hp;
+    const beforeStress = markedBattle.heroes.find((unit) => unit.id === hero.id)!.stress;
+    scriptedD10(8, 1);
+    const result = runMonsterTurn(markedBattle, targetId(campaign, 'cultist-priest'));
+    const event = result.communityAttackEvents!.at(-1)!;
+    expect(event.skillId).toContain('the-finger');
+    expect(event.hit).toBe(true);
+    expect(event.markedBonusDamage).toBe(5);
+    expect(event.damage).toBe(15 + 5);
+    const after = result.heroes.find((unit) => unit.id === hero.id)!;
+    expect(beforeHp - after.hp).toBe(20);
+    expect(after.bleed).toBe(3);
+    expect(after.stress - beforeStress).toBe(2);
+    const log = result.battleLog.find((entry) => entry.message.includes('The Finger') || entry.message.includes('the-finger') || /造成 \d+ 伤害/.test(entry.message));
+    expect(log?.message).toContain('造成 20 伤害');
+    expect(event.damage).toBe(20);
+  });
+
+  it('The Finger Unmarked Hero Monster Turn deals base damage with zero marked bonus', () => {
+    const campaign = deployShufflingSummons();
+    const hero = campaign.battle!.heroes.find((unit) => unit.isAlive)!;
+    expect(hero.marked).toBeFalsy();
+    const beforeHp = hero.hp;
+    const beforeStress = hero.stress;
+    scriptedD10(8, 1);
+    const result = runMonsterTurn(campaign.battle!, targetId(campaign, 'cultist-priest'));
+    const event = result.communityAttackEvents!.at(-1)!;
+    expect(event.skillId).toContain('the-finger');
+    expect(event.hit).toBe(true);
+    expect(event.markedBonusDamage).toBe(0);
+    expect(event.damage).toBe(15);
+    const after = result.heroes.find((unit) => unit.id === hero.id)!;
+    expect(beforeHp - after.hp).toBe(15);
+    expect(after.bleed).toBe(3);
+    expect(after.stress - beforeStress).toBe(2);
+  });
+
+  it('The Finger Marked vs Unmarked damage delta is exactly 5 on the Monster Turn path', () => {
+    const base = deployShufflingSummons();
+    const heroId = base.battle!.heroes.find((unit) => unit.isAlive)!.id;
+    const priestId = targetId(base, 'cultist-priest');
+
+    scriptedD10(8, 1);
+    const unmarked = runMonsterTurn(base.battle!, priestId);
+    const unmarkedDamage = unmarked.communityAttackEvents!.at(-1)!.damage;
+
+    const markedBattle = {
+      ...base.battle!,
+      heroes: base.battle!.heroes.map((unit) => (unit.id === heroId ? { ...unit, marked: true } : unit)),
+    };
+    scriptedD10(8, 1);
+    const marked = runMonsterTurn(markedBattle, priestId);
+    const markedDamage = marked.communityAttackEvents!.at(-1)!.damage;
+    expect(marked.communityAttackEvents!.at(-1)!.markedBonusDamage).toBe(5);
+    expect(unmarked.communityAttackEvents!.at(-1)!.markedBonusDamage).toBe(0);
+    expect(markedDamage - unmarkedDamage).toBe(5);
   });
 
   it('Undulations production Monster Turn redistributes living Heroes onto Stance slots', () => {
@@ -304,7 +349,7 @@ describe('Community Guardian special skill production', () => {
     const card = state.initiativeCards.find((item) => item.owner === 'white-cell-stalk')!;
     const heroId = campaign.heroes[0].instanceId;
     const beforeArea = state.heroPlacements.find((p) => p.heroId === heroId)?.areaId;
-    const rolls = [8, 1, 1]; // skill → Teleport, hit, Room 11 map
+    const rolls = [8, 1, 9]; // skill → Teleport, hit, Room 11 map away from start
     const result = executeMammothCystAction(campaign, card.id, {
       mode: 'community-reference',
       targetHeroId: heroId,
@@ -322,6 +367,7 @@ describe('Community Guardian special skill production', () => {
     expect(result.teleportation!.targetAreaId).toBeTruthy();
     const afterArea = result.state!.heroPlacements.find((p) => p.heroId === heroId)?.areaId;
     expect(afterArea).toBe(result.teleportation!.targetAreaId);
+    expect(afterArea).not.toBe(beforeArea);
     expect(result.teleportation!.originalAreaId).toBe(beforeArea);
     expect(rolls).toEqual([]);
   });
