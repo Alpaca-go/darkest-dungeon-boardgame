@@ -1,11 +1,11 @@
 {
   "schemaVersion": "phase11a3-community-act4-playable-closure.v1",
-  "runId": "14c29c6b-8046-4fcd-a435-ca13f8e3ab6c",
-  "measuredAt": "2026-09-17T11:50:18.594Z",
+  "runId": "60a41bb3-c61c-4062-8a95-8925241daeff",
+  "measuredAt": "2026-09-18T03:45:02.838Z",
   "verificationScope": "LOCAL MEASURED VERIFICATION",
   "verifiedBaseHead": "902df2021d0626fa7762cf00cca2527e4f525516",
-  "verifiedImplementationHead": "1e585558946b84e16719e4b91f3235be15234a0d",
-  "evidencePublicationParent": "1e585558946b84e16719e4b91f3235be15234a0d",
+  "verifiedImplementationHead": "1015b83c414349c2429efeab9fc921f1154d5772",
+  "evidencePublicationParent": "1015b83c414349c2429efeab9fc921f1154d5772",
   "sourceSupplementSha256": "0993f2450e95cd77fdc31cfeab6b1c540ffc599f0ff217d1cef3bc68062556c8",
   "sourceSupplementRuntimeConsumptionAuthorized": false,
   "closedBlockers": [
@@ -16,15 +16,9 @@
     "ABSOLUTE_NOTHINGNESS_STANCE_UNRESOLVED"
   ],
   "splitBlockers": [
-    "MONSTER_CARD_FRONT_BACK_SIZE_UNRESOLVED",
-    "SHUFFLING_ROOM10_NON_AGGRESSIVE_STANCE_AREA_UNRESOLVED"
+    "MONSTER_CARD_FRONT_BACK_SIZE_UNRESOLVED"
   ],
   "remainingBlockers": [
-    "TEMPLARS_CRIT_ENGINE_UNSUPPORTED",
-    "SHUFFLING_CRIT_ENGINE_UNSUPPORTED",
-    "GUARDIAN_SHUFFLE_RESISTANCE_ENGINE_UNSUPPORTED",
-    "SHUFFLING_SUMMON_RESISTANCE_ENGINE_UNSUPPORTED",
-    "SHUFFLING_LINKED_VICTORY_CLEANUP_ENGINE_UNSUPPORTED",
     "FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED",
     "FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED",
     "TEMPLARS_PIT_EXIT_RULE_UNRESOLVED",
@@ -33,14 +27,13 @@
     "MONSTER_CARD_FRONT_BACK_SIZE_UNRESOLVED",
     "GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED",
     "TEMPLARS_AREA_ADJACENCY_UNRESOLVED",
-    "SHUFFLING_ROOM10_NON_AGGRESSIVE_STANCE_AREA_UNRESOLVED",
     "MAMMOTH_STALK_NO_SPACE_RESOLUTION_ENGINE_UNSUPPORTED"
   ],
   "routeMatrix": {
     "We Are The Flame": {
       "guardian": "shuffling-horror",
       "skip": "ancestor-second-form",
-      "stopsAt": "SHUFFLING_ROOM10_NON_AGGRESSIVE_STANCE_AREA_UNRESOLVED"
+      "stopsAt": "FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED|FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED"
     },
     "Light the Way": {
       "guardian": "templars",
@@ -65,7 +58,7 @@
     "skipped": 0,
     "todo": 0,
     "reporter": "docs/reports/phase-11a3/act4-playable-closure/saveReplay.vitest.json",
-    "sha256": "9d5cba33f0c50876cf0410a7b52771bda2d5a33dec716f03f79b89a8988835f1"
+    "sha256": "62fce4c97675fb4f398d3213f1768d3500f923c0cefce287743302fb53aaf848"
   },
   "physicalMonsterDeck": {
     "expected": 26,
@@ -81,7 +74,7 @@
       "skipped": 0,
       "todo": 0,
       "reporter": "docs/reports/phase-11a3/act4-playable-closure/production.vitest.json",
-      "sha256": "6c8f49eeabcca65e988ea817615d77a1329be682e2f261da792d6788f3030310"
+      "sha256": "5ce0223c325d791be6bc3e765c30ff63f1418d10cdc039ecc4b926f6a62cd8c5"
     },
     "routeMatrix": {
       "expected": 5,
@@ -92,7 +85,7 @@
       "skipped": 0,
       "todo": 0,
       "reporter": "docs/reports/phase-11a3/act4-playable-closure/routeMatrix.vitest.json",
-      "sha256": "0fef77bb487042e09d9fcf0d70c42fbb2ae14efb7db3056a493cf646e4bd4c34"
+      "sha256": "ada688a04c56907cc6e9294402bb268acdc414b71dadd4fbc1c35b7c23befa23"
     },
     "adversarial": {
       "expected": 20,
@@ -103,7 +96,7 @@
       "skipped": 0,
       "todo": 0,
       "reporter": "docs/reports/phase-11a3/act4-playable-closure/adversarial.vitest.json",
-      "sha256": "66ae8b9e5cbb58d548286eae7d9553273e07b8e2d1156b91c29b50e294946258"
+      "sha256": "830c902e7074e6c765915fd8f037f529654e43e331ecdc52b67f0d71f23ae854"
     },
     "saveReplay": {
       "expected": 7,
@@ -114,7 +107,7 @@
       "skipped": 0,
       "todo": 0,
       "reporter": "docs/reports/phase-11a3/act4-playable-closure/saveReplay.vitest.json",
-      "sha256": "9d5cba33f0c50876cf0410a7b52771bda2d5a33dec716f03f79b89a8988835f1"
+      "sha256": "62fce4c97675fb4f398d3213f1768d3500f923c0cefce287743302fb53aaf848"
     },
     "frozenExcavation": {
       "expected": 6,
@@ -125,7 +118,7 @@
       "skipped": 0,
       "todo": 0,
       "reporter": "docs/reports/phase-11a3/act4-playable-closure/frozenExcavation.vitest.json",
-      "sha256": "d80636d9d1a703066d0eea1811a0423b55007e644bd090e406c4ec24add97e54"
+      "sha256": "4ea3a24a077358b585ef2440ed70df72bdf5b91f13e53f034cf5a2a9d4eb580c"
     },
     "frozenFinal": {
       "expected": 12,
@@ -136,7 +129,7 @@
       "skipped": 0,
       "todo": 0,
       "reporter": "docs/reports/phase-11a3/act4-playable-closure/frozenFinal.vitest.json",
-      "sha256": "62c7e1a69ec8e5f150e4ff106d2dadd3a8475c8f719357c24b9c5bf4a0619676"
+      "sha256": "cc267f11c1de98a585d730434296e1eeffaf1c75ea67e96521ce2cdf7abde300"
     },
     "frozenMonster": {
       "expected": 7,
@@ -147,7 +140,7 @@
       "skipped": 0,
       "todo": 0,
       "reporter": "docs/reports/phase-11a3/act4-playable-closure/frozenMonster.vitest.json",
-      "sha256": "d65fbe0ff7fd76abf3e91b894d4f7af3731086650dd19c44bc5f781db2992149"
+      "sha256": "ae6e2ef2e398efac1aaf739167d88033b743e36f4b6d0f7f159b0bb9561824e3"
     },
     "frozenSaveReplay": {
       "expected": 12,
@@ -158,7 +151,7 @@
       "skipped": 0,
       "todo": 0,
       "reporter": "docs/reports/phase-11a3/act4-playable-closure/frozenSaveReplay.vitest.json",
-      "sha256": "716fa886815e97c7cb7148f2ee5e16c7216a0b724e3e1bfc0c6a8764b36c0dd7"
+      "sha256": "4a09deb1434f89f610f4d26f5c4fc14413c852da9fd2a115b63d690a378725b8"
     },
     "e2e": {
       "expected": 3,
@@ -169,58 +162,58 @@
       "skipped": 0,
       "todo": 0,
       "reporter": "docs/reports/phase-11a3/act4-playable-closure/playable-closure-e2e.json",
-      "sha256": "a74eff059cb5d69561b89c2ef437976a850b0abf059f90d71d7fd7faf99a1405"
+      "sha256": "2ac3ee9f70687c1b636bf9705d400595aba66918beb0e5231d5d946f723c5e4c"
     }
   },
   "manualPlaytestCandidate": false,
   "fullActFourPlayable": false,
   "runtimeFieldCoverage": {
     "total": 195,
-    "consumed": 138,
+    "consumed": 165,
     "explicit-source-blocker": 4,
-    "engine-unsupported-blocker": 41,
+    "engine-unsupported-blocker": 14,
     "display-only": 7,
     "not-runtime-relevant": 5,
     "unclassified": 0,
-    "runtimeSelectorExpected": 138,
-    "runtimeSelectorResolved": 138,
+    "runtimeSelectorExpected": 165,
+    "runtimeSelectorResolved": 165,
     "runtimeSelectorMissing": 0
   },
   "runtimeRelevance": {
     "path": "docs/data/darkest-dungeon/community-reference/community-act4-runtime-relevance.json",
-    "sha256": "d0cb348850f016b180d522a9be356b5dd99c253239f18108b1542788e259a85a"
+    "sha256": "e205ec27815001a2e688fcff89ff3f746ea1d7befcf4445caad2fdfdabd57677"
   },
   "gates": {
     "binding": {
       "path": "docs/data/darkest-dungeon/community-reference/antha-complete-edition/community-reference-binding-evidence.json",
-      "sha256": "65f477ad70be7c0fdb21ece57f1afa1ae6f2c7fc74ba93a656223c49086820f9",
-      "runId": "f5c59a29-3c78-4731-a4e1-6e2b7ef3d28c",
-      "measuredAt": "2026-09-17T11:44:58.889Z",
-      "verifiedImplementationHead": "1e585558946b84e16719e4b91f3235be15234a0d",
+      "sha256": "5af073decaf10c5620e4f6c769a819c034266627f257dcc98c9aa1aea2b681b9",
+      "runId": "c9a4180c-4f38-4a43-9dce-4fb504a9a205",
+      "measuredAt": "2026-09-18T03:40:11.604Z",
+      "verifiedImplementationHead": "1015b83c414349c2429efeab9fc921f1154d5772",
       "result": "COMMUNITY-REFERENCE-DATA-BOUND"
     },
     "runtime": {
       "path": "docs/data/darkest-dungeon/community-reference/community-reference-runtime-evidence.json",
-      "sha256": "620c6237f7de7c19e9d1346a7380aaa13d4491f5f1f031c7ae63a6bd7b330fa2",
-      "runId": "ac381ad2-dfac-489f-90a9-024acfd61206",
-      "measuredAt": "2026-09-17T11:44:59.047Z",
-      "verifiedImplementationHead": "1e585558946b84e16719e4b91f3235be15234a0d",
+      "sha256": "215826edb3a5016d718e7db8efdc358ea1255a94aae29c99506fa3d25707b266",
+      "runId": "f7ae4232-8bb9-441d-a134-c51e59c63894",
+      "measuredAt": "2026-09-18T03:40:11.774Z",
+      "verifiedImplementationHead": "1015b83c414349c2429efeab9fc921f1154d5772",
       "result": "COMMUNITY-REFERENCE-RUNTIME-FROZEN"
     },
     "visual": {
       "path": "docs/data/darkest-dungeon/community-reference/community-visual-assets-fresh-evidence.json",
-      "sha256": "ea2452168366547082dd227241d349f9416aaae4e2185ddfb5860cb23600de28",
-      "runId": "d07bc1fb-e02a-47fc-a908-af5594226b97",
-      "measuredAt": "2026-09-17T11:45:15.773Z",
-      "verifiedImplementationHead": "1e585558946b84e16719e4b91f3235be15234a0d",
+      "sha256": "0a3b837fe1a033de1df81325725eb887bbbd48a489d321e9ae576fbff39d3ffb",
+      "runId": "0596fbea-5d7e-4dab-bb7a-241585681df2",
+      "measuredAt": "2026-09-18T03:40:27.638Z",
+      "verifiedImplementationHead": "1015b83c414349c2429efeab9fc921f1154d5772",
       "result": "COMMUNITY-VISUAL-ASSETS-ACCEPTED"
     },
     "engineCapability": {
       "path": "docs/data/darkest-dungeon/community-reference/community-engine-capability-final-acceptance-evidence.json",
-      "sha256": "b6a84fe6e37d265c160ed3867c9ae360b8cde6d05adfea38b801ee9578b0256e",
-      "runId": "7c6bde24-47e1-4e0c-b1f1-bbcb49b366ec",
-      "measuredAt": "2026-09-17T11:49:20.148Z",
-      "verifiedImplementationHead": "1e585558946b84e16719e4b91f3235be15234a0d",
+      "sha256": "fd9c821cde7fb014c19a29fe91638ee3bbd68d1be2770b9b83973d75168ddb1b",
+      "runId": "b0911304-edd4-48db-839d-6da6b5dbba5b",
+      "measuredAt": "2026-09-18T03:44:10.646Z",
+      "verifiedImplementationHead": "1015b83c414349c2429efeab9fc921f1154d5772",
       "result": "COMMUNITY-SOURCE-BACKED-ENGINE-CAPABILITIES-ACCEPTED"
     },
     "sourceResearch": {
@@ -233,9 +226,9 @@
     },
     "official": {
       "path": "docs/data/core-campaign/verification-results.json",
-      "sha256": "c4f95ae24fccd779e22cb07e84cd4a920c19584a35f7ec6aea5c7df29c5e4fc9",
-      "runId": "417e10a6-73d0-4930-b8b3-8f77c260521d",
-      "measuredAt": "2026-09-17T11:49:18.293Z",
+      "sha256": "2b4ace5798792a7e3746f9f39ba5d267df139aadf3a4bebb663df9875da516c6",
+      "runId": "2820ff60-895a-4464-b782-39e1d8f7fd46",
+      "measuredAt": "2026-09-18T03:44:09.135Z",
       "result": "SOURCE-BLOCKED"
     }
   },
@@ -247,86 +240,86 @@
     {
       "name": "engine-capability-final-acceptance",
       "exitCode": 0,
-      "durationMs": 635251,
+      "durationMs": 622812,
       "log": "docs/reports/phase-11a3/act4-playable-closure/engine-capability-final-acceptance.log",
-      "logSha256": "9c16437a365594a4696f1de76956c342a9151a3039490dde7581a88e0d03c9dc"
+      "logSha256": "b2e2f4260fe510c0f6bfc0e5803d3753f2c7975a7370a8976a079b92c40cb385"
     },
     {
       "name": "production",
       "exitCode": 0,
-      "durationMs": 3543,
+      "durationMs": 2924,
       "log": "docs/reports/phase-11a3/act4-playable-closure/production.log",
       "logSha256": "9346ee6e93eac072bcd4299b46b62966134092ca1763654afa0193e18ec933b6"
     },
     {
       "name": "routeMatrix",
       "exitCode": 0,
-      "durationMs": 3544,
+      "durationMs": 2935,
       "log": "docs/reports/phase-11a3/act4-playable-closure/routeMatrix.log",
       "logSha256": "2d22f82b6e6f13c5b27e3cde7d4c18989a122e1a2538edc9c9012e95b3b885fb"
     },
     {
       "name": "adversarial",
       "exitCode": 0,
-      "durationMs": 3403,
+      "durationMs": 3106,
       "log": "docs/reports/phase-11a3/act4-playable-closure/adversarial.log",
       "logSha256": "ebb6d8693a144d556e748936f3e15c44c16ea2a35fa32d1175b516d1adcb2db1"
     },
     {
       "name": "saveReplay",
       "exitCode": 0,
-      "durationMs": 3490,
+      "durationMs": 2883,
       "log": "docs/reports/phase-11a3/act4-playable-closure/saveReplay.log",
       "logSha256": "a7b34ed5fc79076c1357761abe48c5e8ea22655e0054e5ecb2f0bb5fc251cca1"
     },
     {
       "name": "frozenExcavation",
       "exitCode": 0,
-      "durationMs": 3226,
+      "durationMs": 2711,
       "log": "docs/reports/phase-11a3/act4-playable-closure/frozenExcavation.log",
       "logSha256": "9680d5e368e5693e2b98e7f7353c7b06d507c17bb33dd2902a2c7633ed2f1fc8"
     },
     {
       "name": "frozenFinal",
       "exitCode": 0,
-      "durationMs": 3155,
+      "durationMs": 2810,
       "log": "docs/reports/phase-11a3/act4-playable-closure/frozenFinal.log",
       "logSha256": "20da27a2854355be46240b6489a37230d909c8171f547fb46eaa699159985b26"
     },
     {
       "name": "frozenMonster",
       "exitCode": 0,
-      "durationMs": 3111,
+      "durationMs": 2763,
       "log": "docs/reports/phase-11a3/act4-playable-closure/frozenMonster.log",
       "logSha256": "ef15866c5ad06cdd4034324ee5646291bca14e46b60422abcb2881d95ef36b56"
     },
     {
       "name": "frozenSaveReplay",
       "exitCode": 0,
-      "durationMs": 3335,
+      "durationMs": 2832,
       "log": "docs/reports/phase-11a3/act4-playable-closure/frozenSaveReplay.log",
       "logSha256": "0529876dadc44f78a09681ec413dc096550d182d9f7f9c2847efa31d9fb23976"
     },
     {
       "name": "typecheck",
       "exitCode": 0,
-      "durationMs": 8362,
+      "durationMs": 7660,
       "log": "docs/reports/phase-11a3/act4-playable-closure/typecheck.log",
       "logSha256": "75a11da44c802486bc6f65640aa48a730f0f684c5c07a42ba3cd1735eb3fb070"
     },
     {
       "name": "build",
       "exitCode": 0,
-      "durationMs": 8046,
+      "durationMs": 9444,
       "log": "docs/reports/phase-11a3/act4-playable-closure/build.log",
-      "logSha256": "bd9a53b84a73bcd27fc1faa4bbcf934498f92f38f587a00831a6587560050096"
+      "logSha256": "24238d47e7899c80c2363ab8aa626a330f9db3c11ce3d5667ed28c6ee23562bb"
     },
     {
       "name": "playableClosureE2E",
       "exitCode": 0,
-      "durationMs": 14860,
+      "durationMs": 11802,
       "log": "docs/reports/phase-11a3/act4-playable-closure/playableClosureE2E.log",
-      "logSha256": "66b8c879af927eca0c3afb5b38675ce2f1029d17e01d3861c6fb3021bf64f28a"
+      "logSha256": "cfee15e5d76fd6f656f512ace20b3295135071ab5eb175c1f59407b8910798c4"
     }
   ],
   "communityFullActFourPlayable": false,

@@ -1,17 +1,17 @@
 {
   "schemaVersion": "phase11a3-community-runtime-freeze-evidence-closure.v1",
-  "runId": "ac381ad2-dfac-489f-90a9-024acfd61206",
-  "measuredAt": "2026-09-17T11:44:59.047Z",
-  "verifiedImplementationHead": "1e585558946b84e16719e4b91f3235be15234a0d",
-  "evidencePublicationParent": "1e585558946b84e16719e4b91f3235be15234a0d",
+  "runId": "f7ae4232-8bb9-441d-a134-c51e59c63894",
+  "measuredAt": "2026-09-18T03:40:11.774Z",
+  "verifiedImplementationHead": "1015b83c414349c2429efeab9fc921f1154d5772",
+  "evidencePublicationParent": "1015b83c414349c2429efeab9fc921f1154d5772",
   "sourcePackageSha256": "382e479f84f79a9b3cc6b0256b2fa5dea100b3576244988f180b49e75ed78d2a",
   "normalizedRequirementsSha256": "82e3f9794c81d021c158610ff47411a7ef0af7d68efe3d23631d9a7e68793562",
   "sourceBindingManifestSha256": "30e383ae71d1ef00041276e081ced74156865d3cae3f3e17b3c1e29dfcd773b8",
-  "bindingEvidenceRunId": "f5c59a29-3c78-4731-a4e1-6e2b7ef3d28c",
-  "bindingEvidenceSha256": "65f477ad70be7c0fdb21ece57f1afa1ae6f2c7fc74ba93a656223c49086820f9",
+  "bindingEvidenceRunId": "c9a4180c-4f38-4a43-9dce-4fb504a9a205",
+  "bindingEvidenceSha256": "5af073decaf10c5620e4f6c769a819c034266627f257dcc98c9aa1aea2b681b9",
   "runtimeProfileId": "community-reference",
   "runtimeAdapterVersion": "phase11a3-community-act4-playable-closure.v1",
-  "contentHash": "ab6dfd24",
+  "contentHash": "1271eedf",
   "counts": {
     "quests": 3,
     "layouts": 2,
@@ -24,16 +24,16 @@
   },
   "semanticLeafCoverage": {
     "total": 195,
-    "consumed": 138,
+    "consumed": 165,
     "sourceBlocked": 4,
-    "engineBlocked": 41,
+    "engineBlocked": 14,
     "displayOnly": 7,
     "notRuntimeRelevant": 5,
     "unclassified": 0
   },
   "runtimeSelectorCoverage": {
-    "expected": 138,
-    "resolved": 138,
+    "expected": 165,
+    "resolved": 165,
     "missing": 0
   },
   "sourceMutationCoverage": {
@@ -49,7 +49,7 @@
     "validators": {
       "name": "validators",
       "exitCode": 0,
-      "durationMs": 1932,
+      "durationMs": 1735,
       "expected": 3,
       "discovered": 3,
       "run": 3,
@@ -61,7 +61,7 @@
     "setup": {
       "name": "setup",
       "exitCode": 0,
-      "durationMs": 2886,
+      "durationMs": 3082,
       "expected": 6,
       "discovered": 6,
       "run": 6,
@@ -73,7 +73,7 @@
     "production": {
       "name": "production",
       "exitCode": 0,
-      "durationMs": 2928,
+      "durationMs": 3001,
       "expected": 6,
       "discovered": 6,
       "run": 6,
@@ -85,7 +85,7 @@
     "guardian": {
       "name": "guardian",
       "exitCode": 0,
-      "durationMs": 3033,
+      "durationMs": 2678,
       "expected": 16,
       "discovered": 16,
       "run": 16,
@@ -97,7 +97,7 @@
     "excavation": {
       "name": "excavation",
       "exitCode": 0,
-      "durationMs": 2964,
+      "durationMs": 3160,
       "expected": 6,
       "discovered": 6,
       "run": 6,
@@ -109,7 +109,7 @@
     "finalEncounter": {
       "name": "finalEncounter",
       "exitCode": 0,
-      "durationMs": 3088,
+      "durationMs": 3004,
       "expected": 12,
       "discovered": 12,
       "run": 12,
@@ -121,7 +121,7 @@
     "monster": {
       "name": "monster",
       "exitCode": 0,
-      "durationMs": 3087,
+      "durationMs": 2754,
       "expected": 7,
       "discovered": 7,
       "run": 7,
@@ -133,7 +133,7 @@
     "saveReplay": {
       "name": "saveReplay",
       "exitCode": 0,
-      "durationMs": 2981,
+      "durationMs": 2753,
       "expected": 12,
       "discovered": 12,
       "run": 12,
@@ -145,11 +145,11 @@
     "traceability": {
       "name": "traceability",
       "exitCode": 0,
-      "durationMs": 2154,
-      "expected": 140,
-      "discovered": 140,
-      "run": 140,
-      "passed": 140,
+      "durationMs": 2016,
+      "expected": 167,
+      "discovered": 167,
+      "run": 167,
+      "passed": 167,
       "failed": 0,
       "skipped": 0,
       "todo": 0
@@ -157,7 +157,7 @@
     "adversarial": {
       "name": "adversarial",
       "exitCode": 0,
-      "durationMs": 3178,
+      "durationMs": 2875,
       "expected": 20,
       "discovered": 20,
       "run": 20,
@@ -169,7 +169,7 @@
     "truthGate": {
       "name": "truthGate",
       "exitCode": 0,
-      "durationMs": 3138,
+      "durationMs": 2887,
       "expected": 15,
       "discovered": 15,
       "run": 15,
@@ -181,7 +181,7 @@
     "freezeEvidence": {
       "name": "freezeEvidence",
       "exitCode": 0,
-      "durationMs": 2165,
+      "durationMs": 2019,
       "expected": 12,
       "discovered": 12,
       "run": 12,
@@ -193,7 +193,7 @@
     "communityE2E": {
       "name": "communityE2E",
       "exitCode": 0,
-      "durationMs": 14875,
+      "durationMs": 13774,
       "expected": 3,
       "discovered": 3,
       "run": 3,
@@ -205,80 +205,10 @@
   },
   "blockerInventory": {
     "sourceLevel": 4,
-    "runtimeOnly": 11,
-    "total": 15
+    "runtimeOnly": 5,
+    "total": 9
   },
   "activeBlockers": [
-    {
-      "code": "TEMPLARS_CRIT_ENGINE_UNSUPPORTED",
-      "requirementId": "runtime-templars-combat",
-      "field": "crit.templarImpalerAndWarlord",
-      "sourcePath": "crit.templarImpalerAndWarlord",
-      "runtimeDependency": "printed critical damage in Templar attacks",
-      "firstBlockingFunction": "runMonsterTurn",
-      "tests": [
-        "BLOCK:TEMPLARS_CRIT_ENGINE_UNSUPPORTED"
-      ],
-      "proofKind": "capability-level",
-      "classification": "runtime-only",
-      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
-    },
-    {
-      "code": "SHUFFLING_CRIT_ENGINE_UNSUPPORTED",
-      "requirementId": "runtime-shuffling-combat",
-      "field": "crit.horrorPriestAndGrowth",
-      "sourcePath": "crit.horrorPriestAndGrowth",
-      "runtimeDependency": "printed critical damage in Shuffling family attacks",
-      "firstBlockingFunction": "runMonsterTurn",
-      "tests": [
-        "BLOCK:SHUFFLING_CRIT_ENGINE_UNSUPPORTED"
-      ],
-      "proofKind": "capability-level",
-      "classification": "runtime-only",
-      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
-    },
-    {
-      "code": "GUARDIAN_SHUFFLE_RESISTANCE_ENGINE_UNSUPPORTED",
-      "requirementId": "runtime-guardian-combat",
-      "field": "resistances.shuffle",
-      "sourcePath": "resistances.shuffle",
-      "runtimeDependency": "categorical resistance in board movement",
-      "firstBlockingFunction": "heroSkillActionError",
-      "tests": [
-        "BLOCK:GUARDIAN_SHUFFLE_RESISTANCE_ENGINE_UNSUPPORTED"
-      ],
-      "proofKind": "capability-level",
-      "classification": "runtime-only",
-      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
-    },
-    {
-      "code": "SHUFFLING_SUMMON_RESISTANCE_ENGINE_UNSUPPORTED",
-      "requirementId": "runtime-shuffling-combat",
-      "field": "resistances.priestAndGrowth",
-      "sourcePath": "resistances.priestAndGrowth",
-      "runtimeDependency": "summoned Priest/Growth BattleUnit status effect application",
-      "firstBlockingFunction": "resolveEchoingDisassembly",
-      "tests": [
-        "BLOCK:SHUFFLING_SUMMON_RESISTANCE_ENGINE_UNSUPPORTED"
-      ],
-      "proofKind": "capability-level",
-      "classification": "runtime-only",
-      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
-    },
-    {
-      "code": "SHUFFLING_LINKED_VICTORY_CLEANUP_ENGINE_UNSUPPORTED",
-      "requirementId": "tierB-shuffling-horror-room",
-      "field": "victoryCondition.remainingMonsters",
-      "sourcePath": "victoryCondition.remainingMonsters",
-      "runtimeDependency": "cleanup of deployed Priest/Growth BattleUnits; reserve cleanup alone is partial",
-      "firstBlockingFunction": "resolveEchoingDisassembly",
-      "tests": [
-        "BLOCK:SHUFFLING_LINKED_VICTORY_CLEANUP_ENGINE_UNSUPPORTED"
-      ],
-      "proofKind": "semantic-leaf",
-      "classification": "runtime-only",
-      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
-    },
     {
       "code": "FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED",
       "requirementId": "runtime-community-final",
@@ -392,20 +322,6 @@
       "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
     },
     {
-      "code": "SHUFFLING_ROOM10_NON_AGGRESSIVE_STANCE_AREA_UNRESOLVED",
-      "requirementId": "runtime-shuffling-horror-room",
-      "field": "initialArea",
-      "sourcePath": "initialArea",
-      "runtimeDependency": "Room 10 non-aggressive Priest/Growth/Hero area map",
-      "firstBlockingFunction": "resolveEchoingDisassembly",
-      "tests": [
-        "BLOCK:SHUFFLING_ROOM10_NON_AGGRESSIVE_STANCE_AREA_UNRESOLVED"
-      ],
-      "proofKind": "capability-level",
-      "classification": "runtime-only",
-      "sourceAuthority": "COMMUNITY_RETAIL_REFERENCE"
-    },
-    {
       "code": "MAMMOTH_STALK_NO_SPACE_RESOLUTION_ENGINE_UNSUPPORTED",
       "requirementId": "tierB-mammoth-cyst-room",
       "field": "spawnAreaPolicy.noSpace",
@@ -421,11 +337,6 @@
     }
   ],
   "activeBlockerCodes": [
-    "TEMPLARS_CRIT_ENGINE_UNSUPPORTED",
-    "SHUFFLING_CRIT_ENGINE_UNSUPPORTED",
-    "GUARDIAN_SHUFFLE_RESISTANCE_ENGINE_UNSUPPORTED",
-    "SHUFFLING_SUMMON_RESISTANCE_ENGINE_UNSUPPORTED",
-    "SHUFFLING_LINKED_VICTORY_CLEANUP_ENGINE_UNSUPPORTED",
     "FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED",
     "FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED",
     "TEMPLARS_PIT_EXIT_RULE_UNRESOLVED",
@@ -434,29 +345,28 @@
     "MONSTER_CARD_FRONT_BACK_SIZE_UNRESOLVED",
     "GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED",
     "TEMPLARS_AREA_ADJACENCY_UNRESOLVED",
-    "SHUFFLING_ROOM10_NON_AGGRESSIVE_STANCE_AREA_UNRESOLVED",
     "MAMMOTH_STALK_NO_SPACE_RESOLUTION_ENGINE_UNSUPPORTED"
   ],
   "commands": [
     {
       "name": "typecheck",
       "exitCode": 0,
-      "durationMs": 8416
+      "durationMs": 7598
     },
     {
       "name": "build",
       "exitCode": 0,
-      "durationMs": 8384
+      "durationMs": 7630
     },
     {
       "name": "officialSourceGateRegression",
       "exitCode": 0,
-      "durationMs": 240492
+      "durationMs": 228248
     },
     {
       "name": "bindingRegression",
       "exitCode": 0,
-      "durationMs": 14013
+      "durationMs": 12079
     }
   ],
   "officialGateBefore": {
@@ -484,7 +394,7 @@
     "canEnterPhase11B": false
   },
   "communityFullActFourPlayable": false,
-  "communityFullActFourPlayableReason": "15 active source/runtime blockers",
+  "communityFullActFourPlayableReason": "9 active source/runtime blockers",
   "terminalVerdict": "COMMUNITY-REFERENCE-RUNTIME-FROZEN",
   "errors": []
 }
