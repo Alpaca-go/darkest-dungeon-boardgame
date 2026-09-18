@@ -4,7 +4,6 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { COMMUNITY_RUNTIME_BLOCKERS } from './runtime-profile';
-import { communityFinalSkillCoverageReport } from './community-final-skill-coverage';
 
 const PRODUCTION = 'src/data/darkest-dungeon/community-reference/community-final-production.test.ts';
 const SAVE = 'src/data/darkest-dungeon/community-reference/community-final-encounter-save-replay.test.ts';
@@ -74,13 +73,15 @@ export default { ...base, root: ${JSON.stringify(root)}, plugins: [...base.plugi
 }
 
 describe('Community Final encounter mutation gate', () => {
-  it('keeps exactly the three remaining source blockers', () => {
+  it('keeps the three source blockers plus the two R2A re-opened Final runtime blockers', () => {
     expect(COMMUNITY_RUNTIME_BLOCKERS.map((blocker) => blocker.code)).toEqual([
       'TEMPLARS_PIT_EXIT_RULE_UNRESOLVED',
       'GESTATING_HEART_LETHAL_TIMING_UNRESOLVED',
       'COME_UNTO_YOUR_MAKER_UNRESOLVED',
+      // Phase 11A.4R2A WP-0：R2 关闭被认定为 false-green，真实验收前保持打开。
+      'FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED',
+      'FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED',
     ]);
-    expect(communityFinalSkillCoverageReport().equal).toBe(true);
   });
 
   it('Ancestor Reflection stance rerolls after reload', () => {

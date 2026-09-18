@@ -91,8 +91,11 @@ describe('Community Guardian / Room R1 adversarial mutation gate (WP-7)', () => 
       'TEMPLARS_PIT_EXIT_RULE_UNRESOLVED',
       'GESTATING_HEART_LETHAL_TIMING_UNRESOLVED',
       'COME_UNTO_YOUR_MAKER_UNRESOLVED',
+      // Phase 11A.4R2A WP-0：Final runtime 两个 blocker 在修复验收期间重新打开。
+      'FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED',
+      'FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED',
     ]);
-    expect(codes).toHaveLength(3);
+    expect(codes).toHaveLength(5);
   });
 
   it('rejects helper-direct as a production entry for coverage closure', () => {

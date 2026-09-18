@@ -132,14 +132,17 @@ describe('Community Act IV playable-closure production', () => {
     expect(restored.actFourState.contentRuntime?.physicalMonsterDeck).toEqual(content.campaign.actFourState.contentRuntime?.physicalMonsterDeck);
   });
 
-  it('PC11 remaining runtime blockers stay exactly the accepted three source blockers', () => {
+  it('PC11 remaining runtime blockers stay explicit (R2A re-opened Final runtime blockers)', () => {
     const codes = COMMUNITY_RUNTIME_BLOCKERS.map((blocker) => blocker.code);
     expect(codes).toEqual([
       'TEMPLARS_PIT_EXIT_RULE_UNRESOLVED',
       'GESTATING_HEART_LETHAL_TIMING_UNRESOLVED',
       'COME_UNTO_YOUR_MAKER_UNRESOLVED',
+      // Phase 11A.4R2A WP-0：R2 的关闭被认定为 false-green，修复验收期间重新打开。
+      'FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED',
+      'FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED',
     ]);
-    expect(codes).toHaveLength(3);
+    expect(codes).toHaveLength(5);
     expect(COMMUNITY_RUNTIME_BLOCKERS.some((blocker) => blocker.code === 'MONSTER_CARD_FRONT_BACK_SIZE_UNRESOLVED')).toBe(false);
     expect(COMMUNITY_RUNTIME_BLOCKERS.some((blocker) => blocker.code === 'GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED')).toBe(false);
   });

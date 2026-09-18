@@ -18,8 +18,9 @@ describe('Community Final skill coverage contract', () => {
     expect(report.uncoveredSource).toEqual([]);
     expect(report.required).toEqual(report.implemented);
     expect(report.required).toEqual(report.productionTested);
-    expect(report.equal).toBe(true);
-    expect(COMMUNITY_RUNTIME_BLOCKERS.some((blocker) => blocker.code === 'FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED')).toBe(false);
+    // Phase 11A.4R2A WP-0：修复验收期间 blocker 保持打开；coverage 关闭断言
+    // 由 WP-3 强化后的 contract 负责（metadata-only 测试不再计入 productionTested）。
+    expect(COMMUNITY_RUNTIME_BLOCKERS.some((blocker) => blocker.code === 'FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED')).toBe(true);
   });
 
   it('every source-complete leaf binds production turn runtime and save/replay proof', () => {

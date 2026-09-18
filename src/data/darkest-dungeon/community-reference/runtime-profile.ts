@@ -51,10 +51,12 @@ export const COMMUNITY_RUNTIME_BLOCKERS = [
   // per-card Front/Back/Large 来自 COMMUNITY_PHYSICAL_MONSTER_CARD_ATTRIBUTES（卡面 type-line），
   // 产品普通遭遇入口 drawDarkestDungeonMonster → fillCommunityOrdinaryMonsterEncounter
   // 顶牌连抽至 4 Stance Slot 填满。
-  // Phase 11A.4R2：FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED 已关闭 —— COMMUNITY_FINAL_SKILL_COVERAGE
-  // 证明 requiredSourceInventory === implemented === productionTested，且 helper-direct = 0。
-  // Phase 11A.4R2：FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED 已关闭 —— 真实 Form lethal →
-  // defeatFinalForm → transitionToNextFinalForm，不经 finalReady / 注入 transitionState。
+  // Phase 11A.4R2A WP-0：R2 对以下两个 blocker 的关闭被审计认定为 false-green
+  // （coverage 仅凭 test title、transition 只比较 campaign.heroes），本阶段重新打开，
+  // 只有 R2A 真实验收（独立 source evidence 绑定 + 语义级 production 测试 +
+  // 跨 Form 状态保留矩阵 + mutation gate + save/replay）全部通过后才能再次关闭。
+  blocker('FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED', 'runtime-community-final', 'printedSkillSelection', 'runtime-only', 'all normalized Final skill/d10 leaves through Community prepare/start/action/save', 'runCommunityFinalFormTurn'),
+  blocker('FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED', 'tierB-ancestor-room', 'roomEffects', 'runtime-only', 'production-reachable Community transition preserving real battle Hero state', 'transitionToNextFinalForm'),
 ] as const;
 
 export function communityRequirement(requirementId: string) {
