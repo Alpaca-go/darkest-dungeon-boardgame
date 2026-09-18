@@ -1,0 +1,218 @@
+{
+  "schemaVersion": "phase11a4r2a-community-final-runtime-acceptance.v1",
+  "runId": "b5a6b270-7c3a-4591-ba5b-f80d417a6604",
+  "measuredAt": "2026-09-18T16:01:22.852Z",
+  "verificationScope": "LOCAL MEASURED VERIFICATION",
+  "verifiedImplementationHead": "672f003305f81761108ee9c2ffe86283a240cbf5",
+  "evidencePublicationParent": "672f003305f81761108ee9c2ffe86283a240cbf5",
+  "evidencePublicationCommit": null,
+  "terminalVerdict": "COMMUNITY-FINAL-RUNTIME-IMPLEMENTATION-ACCEPTED",
+  "sourceBlocked": [
+    "TEMPLARS_PIT_EXIT_RULE_UNRESOLVED",
+    "GESTATING_HEART_LETHAL_TIMING_UNRESOLVED",
+    "COME_UNTO_YOUR_MAKER_UNRESOLVED"
+  ],
+  "activeRuntimeBlockers": [
+    "TEMPLARS_PIT_EXIT_RULE_UNRESOLVED",
+    "GESTATING_HEART_LETHAL_TIMING_UNRESOLVED",
+    "COME_UNTO_YOUR_MAKER_UNRESOLVED"
+  ],
+  "expectedRuntimeBlockers": [
+    "TEMPLARS_PIT_EXIT_RULE_UNRESOLVED",
+    "GESTATING_HEART_LETHAL_TIMING_UNRESOLVED",
+    "COME_UNTO_YOUR_MAKER_UNRESOLVED"
+  ],
+  "flags": {
+    "manualPlaytestCandidate": false,
+    "fullActFourPlayable": false,
+    "canEnterPhase11B": false
+  },
+  "structuredTestGroups": {
+    "sourceEvidenceBinding": {
+      "expected": 9,
+      "discovered": 9,
+      "run": 9,
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "todo": 0,
+      "reporter": "docs/reports/phase-11a4r2a/sourceEvidenceBinding.vitest.json",
+      "sha256": "912905caec054382be3acf91aa6cc661783822499d6d1c19b4c82782244be655"
+    },
+    "finalSkillCoverage": {
+      "expected": 5,
+      "discovered": 5,
+      "run": 5,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "todo": 0,
+      "reporter": "docs/reports/phase-11a4r2a/finalSkillCoverage.vitest.json",
+      "sha256": "ebbade711836fdd1cf3699c10a753802e6ffb4097f696838f653b4a726591ad6"
+    },
+    "finalProduction": {
+      "expected": 25,
+      "discovered": 25,
+      "run": 25,
+      "passed": 25,
+      "failed": 0,
+      "skipped": 0,
+      "todo": 0,
+      "reporter": "docs/reports/phase-11a4r2a/finalProduction.vitest.json",
+      "sha256": "25e09507eec2ca3fe495b2cfd68690fea2906515cebe3e89c09176c9a04e2962"
+    },
+    "finalTransitionProduction": {
+      "expected": 2,
+      "discovered": 2,
+      "run": 2,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "todo": 0,
+      "reporter": "docs/reports/phase-11a4r2a/finalTransitionProduction.vitest.json",
+      "sha256": "ab7546c920cd913a196675289d61a191a47ab212fb9fa0e1c2cdfb6c6d03800a"
+    },
+    "finalSaveReplay": {
+      "expected": 18,
+      "discovered": 18,
+      "run": 18,
+      "passed": 18,
+      "failed": 0,
+      "skipped": 0,
+      "todo": 0,
+      "reporter": "docs/reports/phase-11a4r2a/finalSaveReplay.vitest.json",
+      "sha256": "d757df1becb4b0c7e4419020c3bd631edc490a46753347ca8639b24638d0f1e6"
+    },
+    "finalAdversarial": {
+      "expected": 41,
+      "discovered": 41,
+      "run": 41,
+      "passed": 41,
+      "failed": 0,
+      "skipped": 0,
+      "todo": 0,
+      "reporter": "docs/reports/phase-11a4r2a/finalAdversarial.vitest.json",
+      "sha256": "83534821d8df0162767290d6a014149f1c9a76d9100723e60534cb1eb119e236"
+    },
+    "segmentRouteMatrix": {
+      "expected": 5,
+      "discovered": 5,
+      "run": 5,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "todo": 0,
+      "reporter": "docs/reports/phase-11a4r2a/segmentRouteMatrix.vitest.json",
+      "sha256": "89d281116594fc7030b3005404f193970f025f038ed2b854df0346797c9179de"
+    },
+    "frozenFinal": {
+      "expected": 12,
+      "discovered": 12,
+      "run": 12,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "todo": 0,
+      "reporter": "docs/reports/phase-11a4r2a/frozenFinal.vitest.json",
+      "sha256": "091d0163d1418fd9bb4e68931199b83c03c65f34058111c090312cf37f3b6211"
+    }
+  },
+  "e2e": {
+    "expected": 3,
+    "discovered": 3,
+    "run": 3,
+    "passed": 3,
+    "failed": 0,
+    "skipped": 0,
+    "reporter": "docs/reports/phase-11a4r2a/community-act4-playable-closure-e2e.json",
+    "sha256": "97275f5ea214c9eabb6d5e376ae5df313334997a935242b9a16e90671d77bfa2"
+  },
+  "commands": [
+    {
+      "name": "typecheck",
+      "exitCode": 0,
+      "durationMs": 8080,
+      "log": "docs/reports/phase-11a4r2a/typecheck.log",
+      "logSha256": "75a11da44c802486bc6f65640aa48a730f0f684c5c07a42ba3cd1735eb3fb070"
+    },
+    {
+      "name": "sourceEvidenceBinding",
+      "exitCode": 0,
+      "durationMs": 1691,
+      "log": "docs/reports/phase-11a4r2a/sourceEvidenceBinding.log",
+      "logSha256": "c63bfd60a1486ed70ccc504aaa0fb9a379b4162e99883d92fce7d181f8e9ba5e"
+    },
+    {
+      "name": "finalSkillCoverage",
+      "exitCode": 0,
+      "durationMs": 1942,
+      "log": "docs/reports/phase-11a4r2a/finalSkillCoverage.log",
+      "logSha256": "150afeb32f723f3910f7eae99f66775eb5f595ee2d674246cc58277461a2bd7d"
+    },
+    {
+      "name": "finalProduction",
+      "exitCode": 0,
+      "durationMs": 3581,
+      "log": "docs/reports/phase-11a4r2a/finalProduction.log",
+      "logSha256": "071d943fdd671b42e1c1e0ff7764c57cc470bac64362768926ddcc49382367ef"
+    },
+    {
+      "name": "finalTransitionProduction",
+      "exitCode": 0,
+      "durationMs": 3960,
+      "log": "docs/reports/phase-11a4r2a/finalTransitionProduction.log",
+      "logSha256": "5b6a4b711ca9fbdb5c28a9c4a9ecf3441f0a74f9c9be43e8b2a97b97b4e1f7f3"
+    },
+    {
+      "name": "finalSaveReplay",
+      "exitCode": 0,
+      "durationMs": 3458,
+      "log": "docs/reports/phase-11a4r2a/finalSaveReplay.log",
+      "logSha256": "672af5421626750f89a23a005f452279a510779c549c5b13cf3012bc0f978e2f"
+    },
+    {
+      "name": "finalAdversarial",
+      "exitCode": 0,
+      "durationMs": 140502,
+      "log": "docs/reports/phase-11a4r2a/finalAdversarial.log",
+      "logSha256": "2d908b62124815f2494d0c44137dbea6c067b05fef58a1a077aacaa892382e95"
+    },
+    {
+      "name": "segmentRouteMatrix",
+      "exitCode": 0,
+      "durationMs": 3755,
+      "log": "docs/reports/phase-11a4r2a/segmentRouteMatrix.log",
+      "logSha256": "0111ae0cf7b6e2dd4e72fa4ae207aee1322c20bbc59c8786b834a2a045961eb3"
+    },
+    {
+      "name": "frozenFinal",
+      "exitCode": 0,
+      "durationMs": 3533,
+      "log": "docs/reports/phase-11a4r2a/frozenFinal.log",
+      "logSha256": "d11df47e956bbf1e2dce24f5dc4dfc8a7ebfe1192273f1a209bf6c66ad5f3c06"
+    },
+    {
+      "name": "build",
+      "exitCode": 0,
+      "durationMs": 10619,
+      "log": "docs/reports/phase-11a4r2a/build.log",
+      "logSha256": "e512101b6aadf823e8645aafa0929ab9b0fd88a86e0ce6c1eb6f569ea15bb34a"
+    },
+    {
+      "name": "browserE2E",
+      "exitCode": 0,
+      "durationMs": 16651,
+      "log": "docs/reports/phase-11a4r2a/browserE2E.log",
+      "logSha256": "d7df2c099d8bd185558381b76c59c7cab9539237a066440688322bddd85bb058"
+    }
+  ],
+  "failures": [],
+  "acceptanceNotes": [
+    "R2A repaired the R2 false-green: FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED and FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED were re-opened (WP-0) and re-closed only after independent source evidence binding, hardened coverage contract (no metadata-only proofs), source-backed range/target semantics, shared mark/stress pipelines, cross-form hero combat state preservation, transition + leaf-level mutation gates, and the extended save/replay matrix all passed.",
+    "R2A acceptance complete when terminalVerdict is COMMUNITY-FINAL-RUNTIME-IMPLEMENTATION-ACCEPTED.",
+    "Remaining SOURCE-BLOCKED rules: TEMPLARS_PIT_EXIT_RULE_UNRESOLVED, GESTATING_HEART_LETHAL_TIMING_UNRESOLVED, COME_UNTO_YOUR_MAKER_UNRESOLVED.",
+    "Route matrix evidence is Guardian->Final segment integration, NOT full Quest->Campaign route acceptance; full route acceptance is reserved for R3.",
+    "This evidence is LOCAL MEASURED VERIFICATION; it does not claim CI green.",
+    "Do not start Phase 11B or R3 Full Route Acceptance until remaining source blockers are resolved from accepted sources or product policy. STOP for independent audit."
+  ]
+}
