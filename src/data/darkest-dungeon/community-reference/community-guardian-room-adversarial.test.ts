@@ -14,7 +14,7 @@ const SPECIAL_SKILL_SUITE = 'src/data/darkest-dungeon/community-reference/commun
 const PLACEMENT_SUITE = 'src/data/darkest-dungeon/community-reference/community-physical-monster-placement-production.test.ts';
 const SAVE_REPLAY_SUITE = 'src/data/darkest-dungeon/community-reference/community-guardian-room-save-replay.test.ts';
 const TARGETING_SUITE = 'src/data/darkest-dungeon/community-reference/community-monster-targeting-adversarial.test.ts';
-const read = (path: string) => readFileSync(path, 'utf8');
+const read = (path: string, _encoding?: BufferEncoding) => readFileSync(path, 'utf8');
 
 function runGuardianMutation(
   edits: Array<{ file: string; from: string; to: string }> | string,

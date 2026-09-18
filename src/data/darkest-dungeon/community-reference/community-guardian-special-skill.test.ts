@@ -2,7 +2,6 @@ import { describe, expect, it } from 'vitest';
 import { attack, communityAttack, deployShufflingSummons, reload, scriptedD10, scenario, summon, targetId } from './capability-test-support';
 import {
   applyCommunityGuardianSpecialSkill,
-  communitySpecialSkillLeaf,
 } from '../../../game-engine/campaign/act-four/community-guardian-special-skills';
 import { getCommunityHeroRoomArea } from '../../../game-engine/campaign/act-four/community-guardian-room-state';
 import { shouldForceCommunityEchoingDisassembly } from '../../../game-engine/campaign/act-four/community-guardian-combat';
