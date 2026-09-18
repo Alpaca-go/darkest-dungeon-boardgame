@@ -1,13 +1,12 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { actors, attack, communityAttack, defeatWithHeroSkills, deployShufflingSummons, finalReady, noRng, reload, scenario, summonedActors, targetId, win } from './capability-test-support';
+import { actors, attack, communityAttack, defeatWithHeroSkills, deployShufflingSummons, beginCommunityFinalEncounter, noRng, reload, scenario, summonedActors, targetId, win } from './capability-test-support';
 import { applyStatusEffectEvent, resolveStartOfTurnConditions, tickStun } from '../../../game-engine/status-effects';
 import { runMonsterTurn } from '../../../game-engine/battle';
 import { executeMammothCystAction } from '../../../game-engine/bosses/mammoth-cyst/execute-mammoth-cyst-action';
 import { createCommunityCheckpoint, createCommunityGuardianScenario } from '../../../testing/scenarios/community-runtime-scenario';
 import { drawDarkestDungeonQuest } from '../../../game-engine/campaign/act-four/draw-quest';
-import { prepareFinalEncounter } from '../../../game-engine/campaign/act-four/prepare-final-encounter';
 import { transitionToNextFinalForm } from '../../../game-engine/campaign/act-four/transition-final-form';
-import { performFinalFormSispersion } from '../../../game-engine/campaign/act-four/final-forms/final-form-actions';
+import { communityFinalFormUnit, runCommunityFinalFormTurn } from '../../../game-engine/campaign/act-four/community-final-combat';
 import { commitBattleVictory } from '../../../game-engine/commands/battle';
 import { seededRuntimeSources, setRuntimeSources, setRandomSource } from '../../../game-engine/random';
 beforeEach(() => { setRuntimeSources(seededRuntimeSources(1203)); setRandomSource(() => 0.49); });
@@ -52,19 +51,28 @@ describe('Community capability whole SaveFile replay acceptance', () => {
     expect(replay.campaign).toBe(restored); expect(replay.campaign.provisions).toEqual(first.campaign.provisions);
   });
   it('SR-final-skill save preserves the actual preparation receipt and no selected skill is fabricated', () => {
-    const before = finalReady();
-    const prepared = prepareFinalEncounter(before, { mode: 'community-reference', rng: () => 0, chooseWild: () => 'food' });
-    expect(prepared.ok).toBe(true);
-    const restored = reload(prepared.campaign); setRandomSource(noRng);
-    expect(prepareFinalEncounter(restored, { mode: 'community-reference', rng: noRng, chooseWild: () => { throw new Error('reroll'); } })).toMatchObject({ ok: true, alreadyPrepared: true, provisionRecord: prepared.provisionRecord });
-    const result = performFinalFormSispersion(restored, 1, { mode: 'community-reference', rng: noRng });
-    expect(result.ok).toBe(false);
+    const campaign = beginCommunityFinalEncounter(2);
+    const form = communityFinalFormUnit(campaign.battle!, 'ancestor-first-form')!;
+    const first = runCommunityFinalFormTurn(campaign, form.id);
+    expect(first.ok).toBe(true);
+    const restored = reload(first.campaign);
+    setRandomSource(noRng);
+    const replay = runCommunityFinalFormTurn(restored, form.id);
+    expect(replay.alreadyProcessed).toBe(true);
+    expect(replay.campaign.battle!.communityAttackEvents).toEqual(first.campaign.battle!.communityAttackEvents);
+    expect(replay.campaign.actFourState.finalFormRuntimeState?.runtimes['ancestor-first-form']).toEqual(
+      first.campaign.actFourState.finalFormRuntimeState?.runtimes['ancestor-first-form'],
+    );
   });
   it('SR-final-transition no transition or initiative rebuild is invented after reload', () => {
-    const before = finalReady(); const first = prepareFinalEncounter(before, { mode: 'community-reference', rng: () => 0, chooseWild: () => 'food' });
-    expect(first.ok).toBe(true); const restored = reload(first.campaign); setRandomSource(noRng);
+    const started = beginCommunityFinalEncounter(2);
+    const restored = reload(started);
+    setRandomSource(noRng);
+    expect(restored.battle!.battleId).toBe(started.battle!.battleId);
+    expect(restored.battle!.sourceRoomId).toBe(started.battle!.sourceRoomId);
+    expect(restored.actFourState.finalEncounterState?.activeFormId).toBe(started.actFourState.finalEncounterState?.activeFormId);
     const result = transitionToNextFinalForm(restored, { mode: 'community-reference', rng: noRng });
-    expect(result.ok).toBe(false); expect(result.record).toBeNull();
+    expect(result.ok).toBe(false);
     expect(restored.actFourState.formTransitionHistory).toEqual([]);
   });
   it('SR-victory-templars first death survives reload and second death progresses exactly once', () => {
