@@ -150,6 +150,28 @@ function recordEvent(state: BattleState, event: NonNullable<BattleState['communi
   return { ...state, communityAttackEvents: [...(state.communityAttackEvents ?? []), event] };
 }
 
+/**
+ * WP-11：Final monster 对 Hero 的伤害同步到 Campaign Hero（wounds / atDeathsDoor / dead），
+ * 与 resolveDamage 的 campaign 级写法一致。否则 Form transition 从 campaign.heroes.wounds
+ * 重建时会「恢复」生命 —— 这正是 R2 false-green 的根源。
+ */
+function syncFinalHeroVitalsToCampaign(campaign: CampaignState, unit: BattleUnit): CampaignState {
+  if (unit.side !== 'hero') return campaign;
+  const hero = campaign.heroes.find((candidate) => candidate.instanceId === unit.sourceId);
+  if (!hero) return campaign;
+  const wounds = Math.min(hero.maxLife, Math.max(0, hero.maxLife - unit.hp));
+  const dead = hero.dead || !unit.isAlive;
+  if (hero.wounds === wounds && hero.atDeathsDoor === unit.atDeathsDoor && hero.dead === dead) return campaign;
+  return {
+    ...campaign,
+    heroes: campaign.heroes.map((candidate) =>
+      candidate.instanceId === hero.instanceId
+        ? { ...candidate, wounds, atDeathsDoor: unit.atDeathsDoor, dead }
+        : candidate
+    ),
+  };
+}
+
 function eventIdFor(state: BattleState, actorId: string): string {
   return `community-final:${state.battleId}:${state.round}:${state.initiativeIndex}:${actorId}`;
 }
@@ -225,6 +247,9 @@ function executeAttack(campaign: CampaignState, actor: BattleUnit, leaf: Communi
       nextBattle = applyHitEffects(nextBattle, applied.unit, leaf, `${eventId}:${target.id}`);
       next = { ...next, battle: nextBattle };
       next = applyLeafStress(next, leaf, target, eventId);
+      nextBattle = next.battle!;
+      // WP-11：伤害 / Death's Door / 死亡同步到 Campaign Hero，保证跨 Form 不恢复生命。
+      next = syncFinalHeroVitalsToCampaign(next, findUnit(nextBattle, target.id) ?? applied.unit);
       nextBattle = next.battle!;
     }
     if (leaf.specialEffect.includes('light-1')) {

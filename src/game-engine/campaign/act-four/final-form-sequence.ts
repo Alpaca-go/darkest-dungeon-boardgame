@@ -117,7 +117,35 @@ export function buildFinalEncounterBattle(
   rng: () => number,
   previousBattleId?: string | null,
 ): BattleState {
-  const heroUnits = campaign.heroes.filter((h) => !h.dead).map((h, i) => makeHeroUnit(h, i, campaign));
+  // WP-11（方案 A）：Form transition 直接从上一 Form 的 BattleState.heroes 继承 Hero combat state。
+  // 仅当 previousBattleId 与当前 battle 匹配（即这真的是一次 Form 切换，而非首个 Form 出场）时继承。
+  const previousHeroes = previousBattleId && campaign.battle?.battleId === previousBattleId
+    ? campaign.battle.heroes
+    : null;
+  const heroUnits = campaign.heroes.filter((h) => !h.dead).map((h, i) => {
+    const fresh = makeHeroUnit(h, i, campaign);
+    const prior = previousHeroes?.find((unit) => unit.sourceId === h.instanceId);
+    if (!prior) return fresh;
+    // 硬约束 15/16：hp / stress / stance / 状态效果 / 位置全部原样带入下一 Form，
+    // 不得因 transition 重建而恢复生命或丢失 Bleed/Blight/Mark/Stun/Debuff。
+    return {
+      ...fresh,
+      hp: prior.hp,
+      isAlive: prior.isAlive,
+      atDeathsDoor: prior.atDeathsDoor,
+      deathblowRollCount: prior.deathblowRollCount,
+      stress: prior.stress,
+      stance: prior.stance,
+      position: prior.position,
+      bleed: prior.bleed,
+      blight: prior.blight,
+      stunned: prior.stunned,
+      marked: prior.marked,
+      conditionDurations: prior.conditionDurations ? { ...prior.conditionDurations } : undefined,
+      buffs: prior.buffs.map((buff) => ({ ...buff })),
+      debuffs: prior.debuffs.map((debuff) => ({ ...debuff })),
+    };
+  });
   const initiativeOrder = shuffleWithRng(
     rng,
     [...heroUnits, formUnit].filter((u) => u.isAlive).map((u) => u.id),
