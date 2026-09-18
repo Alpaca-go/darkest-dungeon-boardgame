@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { createCommunityCheckpoint, createCommunityGuardianScenario } from '../../../testing/scenarios/community-runtime-scenario';
 import { drawDarkestDungeonQuest } from '../../../game-engine/campaign/act-four/draw-quest';
 import { resolveExcavationSiteRoom } from '../../../game-engine/campaign/act-four/excavation-site';
@@ -13,8 +13,11 @@ import {
 } from './capability-test-support';
 import { communityFinalFormUnit, runCommunityFinalFormTurn } from '../../../game-engine/campaign/act-four/community-final-combat';
 import { transitionToNextFinalForm } from '../../../game-engine/campaign/act-four/transition-final-form';
+import { seededRuntimeSources, setRandomSource, setRuntimeSources } from '../../../game-engine/random';
 
 const chooseFood = () => 'food' as const;
+beforeEach(() => { setRuntimeSources(seededRuntimeSources(1203)); setRandomSource(() => 0.49); });
+afterEach(() => setRandomSource(null));
 
 describe('Community Act IV three-route matrix', () => {
   it('R1 We Are The Flame reaches first Final Form through Guardian victory then a real transition', () => {
