@@ -173,13 +173,35 @@ describe('Community Guardian / Room R1 adversarial mutation gate (WP-7)', () => 
 
   it('Displace using position + 2 instead of Room 11 Push fails production proof', () => {
     const result = runGuardianMutation(
-      'src/data/darkest-dungeon/community-reference/community-guardian-special-skill.test.ts',
-      'const displaced =',
-      'const displaced = false; const _ignored =',
+      'src/game-engine/bosses/mammoth-cyst/execute-mammoth-cyst-action.ts',
+      `if ('pushDistance' in leaf && leaf.pushDistance) {
+      const push = startDisplacePush(working, {
+        heroId: options.targetHeroId,
+        awayFromActorId: card.actorId,
+        distance: leaf.pushDistance,
+        sourceActionEventId: initiativeCardId,
+        now,
+      });
+      working = push.campaign;
+      pendingChoice = push.pendingChoice;
+    }`,
+      `if ('pushDistance' in leaf && leaf.pushDistance) {
+      const battleHero = working.battle?.heroes.find((unit) => unit.sourceId === options.targetHeroId);
+      if (working.battle && battleHero) {
+        working = {
+          ...working,
+          battle: {
+            ...working.battle,
+            heroes: working.battle.heroes.map((unit) =>
+              unit.id === battleHero.id ? { ...unit, position: unit.position + 2 } : unit,
+            ),
+          },
+        };
+      }
+    }`,
       SPECIAL_SKILL_SUITE,
       'Displace applies Debuff 2 and starts Room 11 Push 2',
     );
-    // Prefer mutating the assertion gate itself when production Push wiring is multi-path.
     expect(result.discovered, result.diagnostics).toBeGreaterThan(0);
     expect(result.failed, result.diagnostics).toBeGreaterThan(0);
   }, 120_000);
@@ -251,11 +273,34 @@ describe('Community Guardian / Room R1 adversarial mutation gate (WP-7)', () => 
   });
 
   it('no-space unresolved tie does not auto-randomize a choice', () => {
-    const body = read('src/game-engine/bosses/mammoth-cyst/summon-white-cell-stalk.ts', 'utf8');
-    expect(body).toContain('pendingDisplacementChoice');
-    expect(body).toMatch(/不随机|requires player choice|pendingChoice/);
-    expect(read(SAVE_REPLAY_SUITE, 'utf8')).toContain('SR-R1-02');
-  });
+    const result = runGuardianMutation(
+      'src/game-engine/bosses/mammoth-cyst/summon-white-cell-stalk.ts',
+      `    return pend({
+      ...choiceBase,
+      kind: 'summon-hero-displacement',
+      heroId,
+      heroCandidateIds: heroesInArea.length > 1 ? heroesInArea : [],
+      monsterCandidateIds: [],
+      destinationAreaIds: nearest.areaIds,
+    });`,
+      `    const autoHeroId = heroId ?? heroesInArea[0];
+    const moved = applyMammothCystDisplacement(campaign, {
+      kind: 'summon-hero-displacement',
+      heroId: autoHeroId,
+      toAreaId: nearest.areaIds[0],
+      distance: nearest.distance,
+      sourceActionEventId: options.sourceActionEventId,
+      transactionId: displacementTransactionId,
+      now,
+    });
+    if (!moved.ok) return { ...base, campaign: moved.campaign, state: moved.state, rolledBack: true, reason: moved.reason };
+    return summonWhiteCellStalk(moved.campaign, options);`,
+      SAVE_REPLAY_SUITE,
+      'SR-R1-02 Mammoth no-space pending choice survives reload without reroll or duplicate summon',
+    );
+    expect(result.discovered, result.diagnostics).toBeGreaterThan(0);
+    expect(result.failed, result.diagnostics).toBeGreaterThan(0);
+  }, 120_000);
 
   it('Front/Back four-slot fill is reachable only through product drawDarkestDungeonMonster', () => {
     const campaign = createCommunityGuardianScenario(0);
