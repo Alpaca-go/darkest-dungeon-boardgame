@@ -204,3 +204,27 @@ export function driveCommunityFinalToForm(campaign: CampaignState, formId: strin
   expect(next.actFourState.finalEncounterState?.activeFormId).toBe(formId);
   return next;
 }
+
+/**
+ * Phase 11A.4R2A WP-4/5/6：驱动到 heart-of-darkness，并用 scripted roll 控制
+ * 进入 Heart 时 setup 生成的初始 Impending Doom forecast（transition rng 同时用于
+ * initiative shuffle，恒定 rng 下两者都确定）。
+ */
+export function driveCommunityFinalToHeartWithForecast(forecastRoll: number): CampaignState {
+  let next = beginCommunityFinalEncounter(2);
+  for (let hop = 0; hop < 4 && next.actFourState.finalEncounterState?.activeFormId !== 'heart-of-darkness'; hop++) {
+    next = driveCommunityFinalUntil(next, (state) => state.actFourState.finalEncounterState?.status === 'transitioning' || state.actFourState.finalEncounterState?.activeFormId === 'heart-of-darkness');
+    if (next.actFourState.finalEncounterState?.activeFormId === 'heart-of-darkness') break;
+    const toFormId = next.actFourState.finalEncounterState?.transitionState?.toFormId;
+    const transition = transitionToNextFinalForm(next, {
+      mode: 'community-reference',
+      rng: toFormId === 'heart-of-darkness' ? () => (forecastRoll - 0.5) / 10 : () => 0.2,
+    });
+    expect(transition.ok, transition.reason ?? '').toBe(true);
+    next = transition.campaign;
+  }
+  expect(next.actFourState.finalEncounterState?.activeFormId).toBe('heart-of-darkness');
+  const runtime = next.actFourState.finalFormRuntimeState?.runtimes['heart-of-darkness'];
+  expect(runtime?.kind === 'heart-of-darkness' ? runtime.currentForecast?.roll : null).toBe(forecastRoll);
+  return next;
+}
