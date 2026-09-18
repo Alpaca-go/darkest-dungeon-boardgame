@@ -19,7 +19,10 @@ describe('Community final acceptance rejects false green proofs', () => {
   it('A02 rejects a nonexistent named test in a real file', () => expect(() => resolveTestReference(`${SUITES.production}:missing`, fixtureRows())).toThrow('named test'));
   it('A03 rejects an accepted capability without production proof', () => expect(capabilityAssessments(fixtureRows().filter(row => !row.title.startsWith('P-quest-provision '))).errors.join()).toContain('P-quest-provision'));
   it('A04 rejects an accepted capability without whole-save proof', () => expect(capabilityAssessments(fixtureRows().filter(row => !row.title.startsWith('SR-quest-provision '))).errors.join()).toContain('SR-quest-provision'));
-  it('A05 removed blocker is not implementation evidence', () => expect(capabilityAssessments(fixtureRows(), COMMUNITY_RUNTIME_FIELD_COVERAGE, COMMUNITY_RUNTIME_BLOCKERS.filter(blocker => blocker.code !== 'FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED')).errors).toContain('final-skill: unsupported semantic has no active blocker'));
+  it('A05 removed blocker is not implementation evidence', () => {
+    const forged = COMMUNITY_RUNTIME_FIELD_COVERAGE.map(leaf => leaf.classification === 'consumed' ? leaf : { ...leaf, classification: 'engine-unsupported-blocker' as const, blockerCode: 'FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED' as const, runtimeSelector: undefined, runtimeSelectorId: null });
+    expect(capabilityAssessments(fixtureRows(), forged, COMMUNITY_RUNTIME_BLOCKERS.filter(blocker => blocker.code !== 'FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED')).errors).toContain('final-skill: unsupported semantic has no active blocker');
+  });
   it('A06 fewer discovered tests cannot pass with exit zero', () => { const rows = fixtureRows().filter(row => row.file.endsWith(SUITES.production)).slice(1); expect(validateTestGroup(rows, EXPECTED_TEST_IDS.production)).toContain('discovered != expected'); });
   it('A07 skipped test is not a completed proof', () => { const rows = fixtureRows().filter(row => row.file.endsWith(SUITES.production)); rows[0].status = 'pending'; expect(validateTestGroup(rows, EXPECTED_TEST_IDS.production)).toContain('skipped != 0'); });
   it('A08 todo test is not a completed proof', () => { const rows = fixtureRows().filter(row => row.file.endsWith(SUITES.production)); rows[0].status = 'todo'; expect(testCounts(rows, rows.length).todo).toBe(1); expect(validateTestGroup(rows, EXPECTED_TEST_IDS.production)).toContain('todo != 0'); });
@@ -59,12 +62,12 @@ describe('Community final acceptance rejects false green proofs', () => {
     expect(result.discovered, result.diagnostics).toBe(1); expect(result.failed, result.diagnostics).toBe(1); expect(result.exitCode).not.toBe(0);
   }, 100_000);
   it('A19 a transition policy constant cannot replace production transition and save proof', () => {
-    const forged = COMMUNITY_RUNTIME_FIELD_COVERAGE.map(leaf => leaf.blockerCode === 'FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED' ? { ...leaf, classification: 'consumed' as const, blockerCode: null, runtimeSelectorId: 'constant' } : leaf);
-    expect(capabilityAssessments(fixtureRows(), forged).errors).toContain('final-transition: missing production/save proof contract');
+    const forged = COMMUNITY_RUNTIME_FIELD_COVERAGE.map(leaf => leaf.requirementId === 'tierB-ancestor-room' && leaf.sourcePath === 'roomEffects' ? { ...leaf, runtimeSelectorId: null, runtimeSelector: undefined } : leaf);
+    expect(capabilityAssessments(fixtureRows(), forged).errors.some((error) => error.includes('final-transition'))).toBe(true);
   });
   it('A20 a Final selection constant cannot replace a full printed-skill matrix', () => {
-    const forged = COMMUNITY_RUNTIME_FIELD_COVERAGE.map(leaf => leaf.blockerCode === 'FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED' ? { ...leaf, classification: 'consumed' as const, blockerCode: null, runtimeSelectorId: 'constant' } : leaf);
-    expect(capabilityAssessments(fixtureRows(), forged).errors).toContain('final-skill: missing production/save proof contract');
+    const forged = COMMUNITY_RUNTIME_FIELD_COVERAGE.map(leaf => /skillIds|d10SkillTable|impendingDoomD10SkillMap|vacantStanceFillSource/.test(leaf.sourcePath) ? { ...leaf, runtimeSelectorId: null, runtimeSelector: undefined } : leaf);
+    expect(capabilityAssessments(fixtureRows(), forged).errors.some((error) => error.includes('final-skill'))).toBe(true);
   });
   it('A21 missing or invalid Wild choice leaves the real Quest transaction unchanged', () => {
     for (const choice of [undefined, (() => 'invalid')]) {

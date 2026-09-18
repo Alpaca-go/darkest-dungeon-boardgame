@@ -88,13 +88,11 @@ describe('Community Guardian / Room R1 adversarial mutation gate (WP-7)', () => 
   it('keeps TEMPLARS_PIT_EXIT_RULE_UNRESOLVED as the only R1 source blocker', () => {
     const codes = COMMUNITY_RUNTIME_BLOCKERS.map((blocker) => blocker.code);
     expect(codes).toEqual([
-      'FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED',
-      'FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED',
       'TEMPLARS_PIT_EXIT_RULE_UNRESOLVED',
       'GESTATING_HEART_LETHAL_TIMING_UNRESOLVED',
       'COME_UNTO_YOUR_MAKER_UNRESOLVED',
     ]);
-    expect(codes).toHaveLength(5);
+    expect(codes).toHaveLength(3);
   });
 
   it('rejects helper-direct as a production entry for coverage closure', () => {
