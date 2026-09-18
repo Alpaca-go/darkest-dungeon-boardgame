@@ -1,14 +1,12 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { actors, attack, communityAttack, defeatWithHeroSkills, deployShufflingSummons, finalReady, noRng, scenario, summonedActors, summon, targetId, win } from './capability-test-support';
+import { actors, attack, communityAttack, defeatWithHeroSkills, deployShufflingSummons, beginCommunityFinalEncounter, noRng, scenario, summonedActors, summon, targetId, win } from './capability-test-support';
 import { applyStatusEffectEvent } from '../../../game-engine/status-effects';
-import { advanceTurn, endHeroTurn, heroUseSkill } from '../../../game-engine/battle';
+import { advanceTurn, endHeroTurn, heroUseSkill, legalTargetsForActor } from '../../../game-engine/battle';
 import { commitBattleVictory } from '../../../game-engine/commands/battle';
 import { createCommunityCheckpoint, createCommunityGuardianScenario } from '../../../testing/scenarios/community-runtime-scenario';
 import { drawDarkestDungeonQuest } from '../../../game-engine/campaign/act-four/draw-quest';
-import { prepareFinalEncounter } from '../../../game-engine/campaign/act-four/prepare-final-encounter';
 import { transitionToNextFinalForm } from '../../../game-engine/campaign/act-four/transition-final-form';
-import { performFinalFormSispersion } from '../../../game-engine/campaign/act-four/final-forms/final-form-actions';
-import { COMMUNITY_RUNTIME_BLOCKERS } from './runtime-profile';
+import { runCommunityFinalFormTurn, communityFinalFormUnit, applyCommunityFinalHeroSkill } from '../../../game-engine/campaign/act-four/community-final-combat';
 import { COMMUNITY_RUNTIME_FIELD_COVERAGE } from './runtime-field-coverage';
 import { requirement } from './normalized';
 import { seededRuntimeSources, setRuntimeSources, setRandomSource } from '../../../game-engine/random';
@@ -84,16 +82,14 @@ describe('Community capability production acceptance', () => {
     expect(Object.values(result.campaign.provisions).reduce((sum, count) => sum + count, 0)).toBe(16);
     expect(result.campaign.actFourState.processedTransactionIds).toContain(result.record!.transactionId);
   });
-  it('P-final-skill all normalized Final selection leaves remain blocked without a production encounter', () => {
-    const campaign = finalReady();
-    const prepared = prepareFinalEncounter(campaign, { mode: 'community-reference', rng: () => 0, chooseWild: () => 'food' });
-    expect(prepared.ok).toBe(true);
-    expect(prepared.provisionRecord?.communityProvision?.dice).toHaveLength(8);
-    const result = performFinalFormSispersion(prepared.campaign, 1, { mode: 'community-reference', rng: noRng });
-    expect(result.ok).toBe(false);
-    const leaves = COMMUNITY_RUNTIME_FIELD_COVERAGE.filter(leaf => leaf.blockerCode === 'FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED');
-    expect(leaves.length).toBeGreaterThan(1);
-    expect(leaves.every(leaf => leaf.classification === 'engine-unsupported-blocker')).toBe(true);
+  it('P-final-skill production turn executes a source-backed Final skill through runCommunityFinalFormTurn', () => {
+    const campaign = beginCommunityFinalEncounter(2);
+    const form = communityFinalFormUnit(campaign.battle!, 'ancestor-first-form')!;
+    const result = runCommunityFinalFormTurn(campaign, form.id);
+    expect(result.ok, result.reason ?? '').toBe(true);
+    expect(result.alreadyProcessed).toBe(false);
+    expect(result.skillId).toBeTruthy();
+    expect(campaign.battle!.monsters.some((unit) => unit.sourceId.includes('reflection'))).toBe(true);
   });
   it('P-quest-isolation Prototype and Formal do not receive Community provisions', () => {
     const base = createCommunityCheckpoint();
@@ -117,13 +113,39 @@ describe('Community capability production acceptance', () => {
     }
     expect(battle.round).toBeGreaterThan(battle.maxRounds); expect(battle.status).toBe('active');
   });
-  it('P-final-transition real transition cannot be accepted by bypassing the preparation blocker', () => {
-    const campaign = finalReady();
-    const prepared = prepareFinalEncounter(campaign, { mode: 'community-reference', rng: () => 0, chooseWild: () => 'food' });
-    expect(prepared.ok).toBe(true);
-    const transition = transitionToNextFinalForm(prepared.campaign, { mode: 'community-reference', rng: noRng });
-    expect(transition.ok).toBe(false);
-    expect(COMMUNITY_RUNTIME_BLOCKERS.some(blocker => blocker.code === 'FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED')).toBe(true);
+  it('P-final-transition real Form defeat reaches transitionToNextFinalForm without injecting transitionState', () => {
+    let campaign = beginCommunityFinalEncounter(2);
+    const battleId = campaign.battle!.battleId;
+    const roomId = campaign.battle!.sourceRoomId;
+    for (let step = 0; step < 400 && campaign.actFourState.finalEncounterState?.status !== 'transitioning'; step++) {
+      let battle = campaign.battle!;
+      if (!battle.activeActorId) {
+        campaign = { ...campaign, battle: advanceTurn(battle) };
+        continue;
+      }
+      const hero = battle.heroes.find((unit) => unit.id === battle.activeActorId);
+      if (!hero) {
+        const turn = runCommunityFinalFormTurn(campaign, battle.activeActorId);
+        campaign = { ...turn.campaign, battle: endHeroTurn(turn.campaign.battle!, battle.activeActorId) };
+        continue;
+      }
+      if (hero.position > 3) {
+        campaign = { ...campaign, battle: endHeroTurn(battle, hero.id) };
+        continue;
+      }
+      const target = legalTargetsForActor(battle, 'crusader-holy-lance')[0];
+      if (!target) {
+        campaign = { ...campaign, battle: endHeroTurn(battle, hero.id) };
+        continue;
+      }
+      campaign = applyCommunityFinalHeroSkill(campaign, hero.id, 'crusader-holy-lance', target).campaign;
+    }
+    expect(campaign.actFourState.finalEncounterState?.status).toBe('transitioning');
+    const transition = transitionToNextFinalForm(campaign, { mode: 'community-reference', rng: () => 0.2 });
+    expect(transition.ok, transition.reason ?? '').toBe(true);
+    expect(transition.campaign.battle!.round).toBe(1);
+    expect(transition.campaign.battle!.battleId).toBe(battleId);
+    expect(transition.campaign.battle!.sourceRoomId).toBe(roomId);
   });
   it('P-victory-templars first defeat stays incomplete and both real defeats progress once', () => {
     const base = createCommunityGuardianScenario(1);

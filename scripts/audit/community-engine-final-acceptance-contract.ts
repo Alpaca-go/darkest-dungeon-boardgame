@@ -92,6 +92,8 @@ function proofIds(id: string, leaf: Leaf): { production: string[]; saveReplay: s
     return { production: [`P-critical-${actor}-${roll}`], saveReplay: [`SR-critical-${actor}-${roll}`] };
   }
   if (id === 'quest-provision') return { production: ['P-quest-provision', 'P-quest-isolation', 'P-quest-living'], saveReplay: ['SR-quest-provision'] };
+  if (id === 'final-skill') return { production: ['P-final-skill'], saveReplay: ['SR-final-skill'] };
+  if (id === 'final-transition') return { production: ['P-final-transition'], saveReplay: ['SR-final-transition'] };
   if (id === 'guardian-victory') {
     const family = actor.startsWith('templars') ? 'templars' : actor.startsWith('mammoth') ? 'mammoth' : 'shuffling';
     return { production: [`P-victory-${family}`, `P-round-limit-${family === 'templars' ? 1 : family === 'mammoth' ? 2 : 0}`], saveReplay: [`SR-victory-${family}`] };
