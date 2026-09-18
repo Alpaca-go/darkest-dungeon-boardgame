@@ -4,6 +4,7 @@
 - Verification scope: **LOCAL MEASURED VERIFICATION**
 - Verified implementation head: `3e949ca45d5f6597dafe6462921c341bb493b682`
 - Evidence publication parent: `3e949ca45d5f6597dafe6462921c341bb493b682`
+- Evidence publication commit: `c2c2f08be24f268b20c41d6506a631ee1e71086d`
 - SOURCE-BLOCKED: `TEMPLARS_PIT_EXIT_RULE_UNRESOLVED`, `GESTATING_HEART_LETHAL_TIMING_UNRESOLVED`, `COME_UNTO_YOUR_MAKER_UNRESOLVED`
 - Active blockers (3): `TEMPLARS_PIT_EXIT_RULE_UNRESOLVED`, `GESTATING_HEART_LETHAL_TIMING_UNRESOLVED`, `COME_UNTO_YOUR_MAKER_UNRESOLVED`
 - Flags: manualPlaytestCandidate=false, fullActFourPlayable=false, canEnterPhase11B=false
