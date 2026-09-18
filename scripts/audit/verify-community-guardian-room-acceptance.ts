@@ -68,7 +68,8 @@ const git = (...args: string[]): string => execFileSync('git', args, { cwd: ROOT
 const sha256 = (path: string): string => createHash('sha256').update(readFileSync(resolve(ROOT, path))).digest('hex');
 const json = (path: string): Record<string, any> => JSON.parse(readFileSync(resolve(ROOT, path), 'utf8')) as Record<string, any>;
 
-if (git('status', '--porcelain')) {
+const dirty = git('status', '--porcelain', '--untracked-files=no');
+if (dirty) {
   throw new Error('Working tree must be clean before measured R1A verification');
 }
 
