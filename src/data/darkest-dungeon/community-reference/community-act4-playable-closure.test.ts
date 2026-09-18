@@ -132,16 +132,14 @@ describe('Community Act IV playable-closure production', () => {
     expect(restored.actFourState.contentRuntime?.physicalMonsterDeck).toEqual(content.campaign.actFourState.contentRuntime?.physicalMonsterDeck);
   });
 
-  it('PC11 remaining runtime blockers stay exactly the accepted five', () => {
+  it('PC11 remaining runtime blockers stay exactly the accepted three source blockers', () => {
     const codes = COMMUNITY_RUNTIME_BLOCKERS.map((blocker) => blocker.code);
     expect(codes).toEqual([
-      'FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED',
-      'FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED',
       'TEMPLARS_PIT_EXIT_RULE_UNRESOLVED',
       'GESTATING_HEART_LETHAL_TIMING_UNRESOLVED',
       'COME_UNTO_YOUR_MAKER_UNRESOLVED',
     ]);
-    expect(codes).toHaveLength(5);
+    expect(codes).toHaveLength(3);
     expect(COMMUNITY_RUNTIME_BLOCKERS.some((blocker) => blocker.code === 'MONSTER_CARD_FRONT_BACK_SIZE_UNRESOLVED')).toBe(false);
     expect(COMMUNITY_RUNTIME_BLOCKERS.some((blocker) => blocker.code === 'GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED')).toBe(false);
   });
