@@ -32,7 +32,9 @@ describe('Community Act IV three-route matrix', () => {
     expect(campaign.actFourState.skippedFinalFormId).toBe('ancestor-first-form');
     const pit = resolveSpikedPitExitPolicy(COMMUNITY_TEMPLARS_ROOM.spikedPits[0], 'community-reference');
     expect(pit).toMatchObject({ ok: false, blocker: { code: 'TEMPLARS_PIT_EXIT_RULE_UNRESOLVED' } });
-    expect(COMMUNITY_RUNTIME_BLOCKERS.some((blocker) => blocker.code === 'TEMPLARS_AREA_ADJACENCY_UNRESOLVED')).toBe(true);
+    // Phase 11A.4R1 WP-5：adjacency blocker 已关闭 —— Room 9 派生拓扑真实在线。
+    expect(COMMUNITY_TEMPLARS_ROOM.areaGraph.edges.length).toBeGreaterThan(0);
+    expect(COMMUNITY_RUNTIME_BLOCKERS.some((blocker) => blocker.code === 'TEMPLARS_AREA_ADJACENCY_UNRESOLVED')).toBe(false);
   });
 
   it('R3 Belly of the Beast / Mammoth reaches real Final Provision then exact remaining Final blocker', () => {

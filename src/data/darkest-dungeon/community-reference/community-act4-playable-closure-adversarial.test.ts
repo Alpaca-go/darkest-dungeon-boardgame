@@ -128,7 +128,10 @@ describe('Community Act IV playable-closure adversarial', () => {
   });
 
   it('P16 Room 9 adjacency traced from artwork and promoted -> FAIL', () => {
-    expect(COMMUNITY_RUNTIME_BLOCKERS.some((blocker) => blocker.code === 'TEMPLARS_AREA_ADJACENCY_UNRESOLVED')).toBe(true);
+    // Phase 11A.4R1 WP-5：runtime blocker 已通过「已接受 tileGeometry 轮廓派生」关闭；
+    // 但 source 级 dossier 仍记录 adjacencyGraph: null（未把纯美术描图当作来源真相），
+    // 且 source-resolution 校验仍拒绝无 rulebook 引用的 resolved 判定。
+    expect(COMMUNITY_RUNTIME_BLOCKERS.some((blocker) => blocker.code === 'TEMPLARS_AREA_ADJACENCY_UNRESOLVED')).toBe(false);
     expect(COMMUNITY_SOURCE_BLOCKER_RESOLUTION.targets.find((item) => item.blockerCode === 'TEMPLARS_AREA_ADJACENCY_UNRESOLVED')?.resolvedValue).toMatchObject({ adjacencyGraph: null });
   });
 
@@ -153,6 +156,7 @@ describe('Community Act IV playable-closure adversarial', () => {
   it('P20 route matrix hides a reachable blocker -> FAIL', () => {
     expect(COMMUNITY_REFERENCE_RUNTIME_PROFILE.runtimeBlockers.length).toBeGreaterThan(0);
     expect(routeFile).toContain('TEMPLARS_PIT_EXIT_RULE_UNRESOLVED');
-    expect(routeFile).toContain('TEMPLARS_AREA_ADJACENCY_UNRESOLVED');
+    // Phase 11A.4R1 WP-5：adjacency blocker 已关闭，route matrix 改为证明派生拓扑在线。
+    expect(routeFile).toContain('areaGraph.edges');
   });
 });

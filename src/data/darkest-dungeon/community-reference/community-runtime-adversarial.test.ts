@@ -15,7 +15,26 @@ describe('Community runtime final-acceptance adversarial requirements', () => {
   it('A04 missing numeric cannot silently become zero', () => expect(() => requireCommunityNumber(undefined, 'test.field')).toThrow('Missing confirmed Community numeric field'));
   it('A05 Community Templar validator cannot be bypassed', () => { const impaler = structuredClone(COMMUNITY_TEMPLAR_IMPALER); impaler.skills[0].d10Rolls = []; expect(validateCommunityTemplarsDefinitions({ encounter: COMMUNITY_TEMPLARS_ENCOUNTER, impaler, warlord: COMMUNITY_TEMPLAR_WARLORD, room: COMMUNITY_TEMPLARS_ROOM }).isComplete).toBe(false); });
   it('A06 Community Mammoth validator cannot be bypassed', () => { const room = structuredClone(COMMUNITY_MAMMOTH_CYST_ROOM); delete (room.teleportationD10Map as Record<string, string>)['10']; expect(validateCommunityMammothDefinitions({ guardian: COMMUNITY_MAMMOTH_CYST_GUARDIAN, cyst: COMMUNITY_MAMMOTH_CYST, stalk: COMMUNITY_WHITE_CELL_STALK, room, summon: COMMUNITY_MAMMOTH_CYST_SUMMON }).isComplete).toBe(false); });
-  it('A07 empty Templar graph is explicitly blocked not treated as navigable', () => { const result = validateCommunityTemplarsDefinitions(); expect(COMMUNITY_TEMPLARS_ROOM.areaGraph.edges).toEqual([]); expect(result.knownBlockers).toContain('TEMPLARS_AREA_ADJACENCY_UNRESOLVED'); });
+  it('A07 derived Templar graph is closed: no isolated area, endpoints valid, adjacency blocker gone', () => {
+    // Phase 11A.4R1 WP-5：TEMPLARS_AREA_ADJACENCY_UNRESOLVED 已关闭 —— edges 由已接受
+    // tileGeometry 轮廓派生；此处验证派生图的结构完整性，而非「空图 + blocker」旧态。
+    const result = validateCommunityTemplarsDefinitions();
+    const room = COMMUNITY_TEMPLARS_ROOM;
+    expect(room.areaGraph.edges.length).toBeGreaterThan(0);
+    const valid = new Set(room.validAreaIds);
+    for (const edge of room.areaGraph.edges) {
+      expect(valid.has(edge.from)).toBe(true);
+      expect(valid.has(edge.to)).toBe(true);
+      expect(edge.from).not.toBe(edge.to);
+    }
+    const connected = new Set(room.areaGraph.edges.flatMap((edge) => [edge.from, edge.to]));
+    // 普通 Area 全部接入图（Pit 是 Area 内部的 hole，不作为独立图节点）。
+    for (const areaId of room.validAreaIds.filter((id) => !room.spikedPits.some((pit) => pit.areaId === id))) {
+      expect(connected.has(areaId)).toBe(true);
+    }
+    expect(result.knownBlockers).not.toContain('TEMPLARS_AREA_ADJACENCY_UNRESOLVED');
+    expect(result.knownBlockers).toContain('TEMPLARS_PIT_EXIT_RULE_UNRESOLVED');
+  });
   it('A08 Shuffling Community save cannot restore as Prototype', () => { const state = createCommunityGuardianScenario(0).actFourState.shufflingHorrorEncounterState!; expect(sanitizeShufflingHorrorEncounterState(JSON.parse(JSON.stringify(state)))?.mode).toBe('community-reference'); });
   it('A09 Community Final has no broad Official object inheritance', () => expect(readFileSync('src/data/darkest-dungeon/final-encounter/index.ts', 'utf8')).not.toMatch(/COMMUNITY_[A-Z_]+[^=]*=\s*\{\s*\.\.\.OFFICIAL_/));
   it('A10 an unclassified projection proof fails', () => { const altered = COMMUNITY_RUNTIME_PROJECTION_PROOFS.map((proof, index) => index === 0 ? { ...proof, classification: '' as never } : proof); expect(validateCommunityRuntimeProjectionProofs(altered)).not.toEqual([]); });

@@ -396,6 +396,68 @@ export interface MammothCystDataAuditSnapshot {
 }
 
 /** §26 顶层存档容器。 */
+// ---------------------------------------------------------------------------
+// Phase 11A.4R1 WP-2 / WP-7：Room 11 拓扑位移（Displace Push / 召唤 no-space）
+// ---------------------------------------------------------------------------
+
+/**
+ * 一次已落盘的 Room 11 位移记录（Displace Push 或召唤 no-space 挪让）。
+ *
+ * 来源约束（community-source-blocker-resolution dossier）：
+ * - Hero 位移：「a Hero must move to the nearest available Area」（rulebook:31）；
+ * - Monster 位移：「players choose which Monster to move to nearest available Area」；
+ * - destinationTieBreak / pathMetric 均为 null —— 等距多目的地绝不随机、绝不猜，
+ *   一律落成 `pendingDisplacementChoice` 显式玩家选择。
+ */
+export interface MammothCystDisplacementRecord {
+  id: string;
+  kind: 'displace-push' | 'summon-hero-displacement' | 'summon-monster-displacement';
+  /** 被移动的 Hero instanceId（hero 位移时）。 */
+  heroId: string | null;
+  /** 被移动的 Monster actorId（monster 位移时）。 */
+  monsterActorId: string | null;
+  fromAreaId: string;
+  toAreaId: string;
+  /** Displace Push 的总步数（Push X）；召唤挪让恒为 1（nearest）。 */
+  distance: number;
+  /** 关联的召唤 / Skill 事件。 */
+  sourceActionEventId: string;
+  transactionId: string;
+  createdAt: string;
+}
+
+/**
+ * 等待玩家裁决的位移选择（显式 player choice state，进入 Save/Replay）。
+ *
+ * 任意维度只有一个候选时引擎直接落定、不产生本状态；出现多候选（多个 Hero /
+ * 多个 Monster / 多个等距目的地）时挂起，由 `resolveMammothCystDisplacementChoice`
+ * 携带玩家选择结算。挂起期间不产生任何半位移状态。
+ */
+export interface MammothCystDisplacementChoice {
+  id: string;
+  kind: MammothCystDisplacementRecord['kind'];
+  /** 本步选择的幂等事务 id。 */
+  transactionId: string;
+  /** summon-* 位移完成后要恢复的召唤行动（Initiative Card id）。 */
+  sourceActionEventId: string;
+  /** displace-push：被 Push 的 Hero；summon-hero：单个候选时已锁定。 */
+  heroId: string | null;
+  /** summon-hero：多名 Hero 同区时的候选人（>1 才填）。 */
+  heroCandidateIds: string[];
+  /** summon-monster：由玩家选择挪让的 Monster 候选人。 */
+  monsterCandidateIds: string[];
+  /** 本步可选目的地（等距 nearest / 等距 away 候选；>1 时由玩家选）。 */
+  destinationAreaIds: string[];
+  /** displace-push：远离的基准 Area（Stalk 所在）。 */
+  awayFromAreaId: string | null;
+  /** displace-push：本步之后剩余步数。 */
+  remainingSteps: number;
+  /** 召唤目标 Stance / Area（恢复召唤时复核用）。 */
+  spawnStance: MonsterStance | null;
+  spawnAreaId: string | null;
+  createdAt: string;
+}
+
 export interface MammothCystEncounterState {
   /** 内容版本（Definition 变更时 +1；用于识别旧存档）。 */
   mammothCystContentVersion: number;
@@ -434,6 +496,11 @@ export interface MammothCystEncounterState {
 
   snapshot: MammothCystDefinitionSnapshot;
   mammothCystDataAudit: MammothCystDataAuditSnapshot;
+
+  /** Phase 11A.4R1 WP-2/WP-7：Room 11 位移历史（Displace Push / 召唤挪让）。 */
+  displacementHistory: MammothCystDisplacementRecord[];
+  /** 挂起的玩家位移选择；null = 无待决选择。 */
+  pendingDisplacementChoice: MammothCystDisplacementChoice | null;
 
   /** 幂等事务 id（保留最近 200 条）。 */
   processedTransactionIds: string[];

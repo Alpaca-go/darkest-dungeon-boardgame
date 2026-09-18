@@ -16,6 +16,7 @@ import {
   communitySpecialSkillLeaf,
   markedBonusDamage,
 } from './community-guardian-special-skills';
+import { resolveCommunityMonsterTarget } from './community-monster-targeting';
 
 export const COMMUNITY_GUARDIAN_SOURCE_PREFIX = 'community-dd-';
 
@@ -141,40 +142,70 @@ export function runCommunityGuardianMonsterTurn(state: BattleState, monster: Bat
   if (!requirementId) return state;
   const eventId = `community-attack:${state.battleId}:${state.round}:${state.initiativeIndex}:${monster.id}`;
   const saved = state.communityAttackEvents?.find((event) => event.eventId === eventId);
-  const target = state.heroes.find((hero) => hero.isAlive);
-  if (!target) return pushLog(state, `${monster.name} 没有可攻击的英雄。`, 'warning');
-  if (saved) {
-    if (saved.targetId !== target.id) return pushLog(state, 'Saved Community attack target mismatch', 'warning');
-    return state;
-  }
-  const skillRoll = d10();
-  const localSkill = selectCommunityGuardianSkillId(requirementId, monster.stance ?? 'aggressive', skillRoll);
-  const skills = communityGuardianMonsterSkills();
   const prefix = monster.sourceId.includes('templars-impaler') ? 'community-dd-skill-impaler-' : monster.sourceId.includes('templars-warlord') ? 'community-dd-skill-warlord-' : 'community-dd-skill-';
+
+  // WP-4：先定 Skill 再按统一 Resolver 定目标（rulebook 顺序：Check Skill → Check Target）。
+  // 重放（saved）时不掷技能骰 —— 从已保存的 skillId 反推 localSkill，保证零 RNG 消耗。
+  const skillRoll = saved ? saved.skillRoll : d10();
+  const localSkill = saved
+    ? saved.skillId.slice(prefix.length)
+    : selectCommunityGuardianSkillId(requirementId, monster.stance ?? 'aggressive', skillRoll);
+  const skills = communityGuardianMonsterSkills();
   const skill = skills.find((candidate) => candidate.id === `${prefix}${localSkill}`);
   if (!skill) return pushLog(state, `${monster.name} 缺少 Community skill ${localSkill}。`, 'warning');
+
+  // WP-4：统一 Community Monster Target Resolver —— Stance 优先级 + position + id，
+  // 与 heroes 数组顺序无关；非法目标不进入候选集，绝不退化为「第一个存活 Hero」。
+  const resolved = resolveCommunityMonsterTarget(state, monster, localSkill, skill);
+  if (saved) {
+    if (saved.targetId !== (resolved?.unit.id ?? '')) return pushLog(state, 'Saved Community attack target mismatch', 'warning');
+    return state;
+  }
+  if (!resolved) {
+    // 合法目标缺失（如无存活 Hero、或 Reconstitute 的 Mammoth Cyst 已死亡）：
+    // 记录事件保证幂等，日志显式说明 —— 绝不静默成功（WP-2 Reconstitute 约束）。
+    const next = pushLog({
+      ...state,
+      communityAttackEvents: [...(state.communityAttackEvents ?? []), {
+        eventId,
+        monsterId: monster.id,
+        skillId: skill.id,
+        targetId: '',
+        skillRoll,
+        attackRoll: 0,
+        hit: false,
+        critical: false,
+        damage: 0,
+        healAmount: 0,
+      }],
+    }, `${monster.name} 的 ${skill.name} 没有合法目标，行动落空。`, 'warning');
+    return checkEnd(next);
+  }
+
+  const target = resolved.unit;
   const leaf = communitySpecialSkillLeaf(localSkill);
-  const attackRoll = leaf.attack === false ? 0 : d10();
-  const bonus = markedBonusDamage(localSkill, target);
-  const outcome = leaf.attack === false
+  const isHeroAttack = resolved.kind === 'hero' && leaf.attack !== false;
+  const attackRoll = isHeroAttack ? d10() : 0;
+  const bonus = resolved.kind === 'hero' ? markedBonusDamage(localSkill, target) : 0;
+  const outcome = !isHeroAttack
     ? { hit: true, critical: false, damage: 0 }
     : resolveCommunityGuardianCritical(requirementId, localSkill, attackRoll, skill.accuracy ?? 7, skill.minDamage ?? 0);
   const damage = outcome.hit ? outcome.damage + bonus : 0;
   let next = state;
   let tgt = target;
-  if (outcome.hit && damage > 0) {
+  if (outcome.hit && damage > 0 && resolved.kind === 'hero') {
     const applied = applyBattleUnitDamage(tgt, damage);
     tgt = applied.unit;
     next = setUnit(next, tgt);
     for (const log of applied.logs) next = pushLog(next, log, applied.heroDied ? 'danger' : 'warning');
   }
-  if (outcome.hit && tgt.isAlive && skill.applyEffects?.length) {
+  if (outcome.hit && resolved.kind === 'hero' && tgt.isAlive && skill.applyEffects?.length) {
     next = applyStatusEffectEvent(next, tgt.id, skill.applyEffects, `${eventId}:effects`);
     tgt = findUnit(next, tgt.id)!;
     const blocked = next.statusEffectEvents?.find((event) => event.eventId === `${eventId}:effects`)?.blocked ?? [];
     if (blocked.length > 0) next = pushLog(next, `${tgt.name} 的抗性调整了部分效果${describeBlockedEffects(blocked)}。`, 'success');
   }
-  if (outcome.hit && tgt.isAlive && skill.stress && tgt.side === 'hero') {
+  if (outcome.hit && resolved.kind === 'hero' && tgt.isAlive && skill.stress && tgt.side === 'hero') {
     tgt = { ...tgt, stress: Math.min(10, tgt.stress + skill.stress) };
     next = setUnit(next, tgt);
   }
@@ -195,16 +226,20 @@ export function runCommunityGuardianMonsterTurn(state: BattleState, monster: Bat
       markedBonusDamage: special.markedBonus,
       pitTossRoll: special.pitTossRoll,
       pitTossAreaId: special.pitTossAreaId,
+      pitTossIgnored: special.pitTossIgnored,
       healAmount: special.healAmount,
       undulationsBefore: special.undulationsBefore,
       undulationsAfter: special.undulationsAfter,
+      summonedRoles: special.summonedRoles.length > 0 ? special.summonedRoles : undefined,
     }],
   };
   next = pushLog(
     next,
-    outcome.hit
-      ? `${monster.name} 使用 ${skill.name}${outcome.critical ? '（暴击）' : ''}，掷 ${attackRoll} 命中 ${target.name}，造成 ${outcome.damage} 伤害。`
-      : `${monster.name} 使用 ${skill.name}，掷 ${attackRoll} 未命中 ${target.name}。`,
+    !isHeroAttack
+      ? `${monster.name} 使用 ${skill.name}。`
+      : outcome.hit
+        ? `${monster.name} 使用 ${skill.name}${outcome.critical ? '（暴击）' : ''}，掷 ${attackRoll} 命中 ${target.name}，造成 ${outcome.damage} 伤害。`
+        : `${monster.name} 使用 ${skill.name}，掷 ${attackRoll} 未命中 ${target.name}。`,
     outcome.hit ? 'danger' : 'info',
   );
   return checkEnd(next);

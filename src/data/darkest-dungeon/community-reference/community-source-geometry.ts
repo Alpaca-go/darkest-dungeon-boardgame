@@ -1,6 +1,8 @@
-/** Source-backed Room 10/11 topology and physical Monster card attributes from the accepted Complete Edition intake. */
+/** Source-backed Room 9/10/11 topology and physical Monster card attributes from the accepted Complete Edition intake. */
 
-export const COMMUNITY_SOURCE_GEOMETRY_ID = 'phase11a4-community-source-geometry.v1' as const;
+import { requirement } from './normalized';
+
+export const COMMUNITY_SOURCE_GEOMETRY_ID = 'phase11a4r1-community-source-geometry.v1' as const;
 
 export const COMMUNITY_ROOM10_STANCE_AREAS = {
   monster: {
@@ -125,6 +127,63 @@ export const COMMUNITY_ROOM11_AREAS: SourceAreaOutline[] = [
 ];
 
 export const COMMUNITY_ROOM11_EDGES = adjacencyEdgesFromOutlines(COMMUNITY_ROOM11_AREAS);
+
+// ---------------------------------------------------------------------------
+// Phase 11A.4R1 WP-5：Room 9（The Templars）拓扑。
+//
+// 唯一数据源是已接受的 normalized `tierB-templars-room-tile.tileGeometry`
+// （evidenceType: confirmed_from_visual，含 14 个 Area 轮廓、容量点、Stance Marker、
+// pit 洞与 blackRegions 记录）。edges 由与 Room 11 相同的
+// `adjacencyEdgesFromOutlines` 共享边界推导产生 —— 不手写、不从美术想象补边。
+// pit 与包围/相邻普通 Area 的边与 ordinary-area edge 进入同一 graph；
+// 「能否沿边离开 pit」是 movement policy 问题（TEMPLARS_PIT_EXIT_RULE_UNRESOLVED
+// 保持 SOURCE-BLOCKED），不在拓扑层发明。
+// ---------------------------------------------------------------------------
+
+interface Room9TileGeometry {
+  areas: Array<{ sourceLocalAreaId: string; capacityDots: number; outlineOn1600Canvas: Point[] }>;
+  outlineHoles?: Record<string, string[]>;
+  blackRegions?: string;
+}
+
+const room9TileGeometry = requirement('tierB-templars-room-tile').fields.tileGeometry;
+if (room9TileGeometry.evidenceType !== 'confirmed_from_visual' || room9TileGeometry.status !== 'confirmed') {
+  throw new Error('Room 9 tile geometry must come from the accepted confirmed_from_visual record');
+}
+
+const room9Geometry = room9TileGeometry.value as Room9TileGeometry;
+
+export const COMMUNITY_ROOM9_AREAS: SourceAreaOutline[] = room9Geometry.areas.map((area) => ({
+  sourceLocalAreaId: area.sourceLocalAreaId,
+  outlineOn1600Canvas: area.outlineOn1600Canvas.map((point) => [...point] as Point),
+  capacityDots: area.capacityDots,
+}));
+
+/** Pit 洞记录（r9-SW ⊃ r9-pit-7-8、r9-SE ⊃ r9-pit-9-10），来自同一已接受字段。 */
+export const COMMUNITY_ROOM9_OUTLINE_HOLES: Record<string, string[]> = { ...(room9Geometry.outlineHoles ?? {}) };
+
+const room9SharedEdges = adjacencyEdgesFromOutlines(COMMUNITY_ROOM9_AREAS);
+
+// 完全内嵌的 pit 洞（如 r9-pit-7-8 内嵌于 r9-SW）与包围 Area 没有共享边界，
+// 连接关系由已接受字段 `outlineHoles` 显式记录 —— 直接消费该记录，不做几何猜测。
+const room9HoleEdges: Array<[string, string]> = Object.entries(COMMUNITY_ROOM9_OUTLINE_HOLES).flatMap(
+  ([container, holes]) =>
+    holes
+      .filter((hole) => !room9SharedEdges.some(([a, b]) => (a === container && b === hole) || (a === hole && b === container)))
+      .map((hole): [string, string] => [container, hole]),
+);
+
+export const COMMUNITY_ROOM9_EDGES = [...room9SharedEdges, ...room9HoleEdges];
+
+if (COMMUNITY_ROOM9_AREAS.length !== 14 || COMMUNITY_ROOM9_EDGES.length === 0) {
+  throw new Error('Room 9 topology derivation failed: expected 14 areas and a non-empty edge set');
+}
+// 每个 Area（含全部 5 个 pit）都必须至少有一条边 —— 孤立节点意味着拓扑推导漏边。
+for (const area of COMMUNITY_ROOM9_AREAS) {
+  if (!COMMUNITY_ROOM9_EDGES.some(([a, b]) => a === area.sourceLocalAreaId || b === area.sourceLocalAreaId)) {
+    throw new Error(`Room 9 topology derivation left ${area.sourceLocalAreaId} isolated`);
+  }
+}
 
 export function nearestAvailableAreas(
   fromAreaId: string,

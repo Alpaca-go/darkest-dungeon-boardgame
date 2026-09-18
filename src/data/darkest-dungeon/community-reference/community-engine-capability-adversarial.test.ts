@@ -26,7 +26,9 @@ describe('Community final acceptance rejects false green proofs', () => {
   it('A09 wrong implementation SHA or publication parent fails', () => expect(validateEvidenceBinding({ verifiedImplementationHead: 'wrong', expectedHead: 'a'.repeat(40), evidencePublicationParent: 'a'.repeat(40), official: {}, freshOfficial: {} })).toContain('Implementation HEAD / publication parent mismatch'));
   it('A10 Official exact truth must come from the fresh artifact', () => expect(validateEvidenceBinding({ verifiedImplementationHead: 'a', expectedHead: 'a', evidencePublicationParent: 'a', official: { runId: 'old' }, freshOfficial: { runId: 'fresh' } })).toContain('Official truth differs from fresh artifact'));
   it('A11 source-gap removal without evidence stays rejected', () => {
-    const remaining = ['TEMPLARS_PIT_EXIT_RULE_UNRESOLVED', 'TEMPLARS_AREA_ADJACENCY_UNRESOLVED', 'COME_UNTO_YOUR_MAKER_UNRESOLVED', 'GESTATING_HEART_LETHAL_TIMING_UNRESOLVED'];
+    // Phase 11A.4R1 WP-5：TEMPLARS_AREA_ADJACENCY_UNRESOLVED 已关闭（几何派生拓扑），
+    // 其余来源级 blocker 保持显式。
+    const remaining = ['TEMPLARS_PIT_EXIT_RULE_UNRESOLVED', 'COME_UNTO_YOUR_MAKER_UNRESOLVED', 'GESTATING_HEART_LETHAL_TIMING_UNRESOLVED'];
     expect(remaining.every(code => COMMUNITY_RUNTIME_BLOCKERS.some(blocker => blocker.code === code))).toBe(true);
     const mutant = COMMUNITY_RUNTIME_BLOCKERS.filter(blocker => blocker.code !== 'TEMPLARS_PIT_EXIT_RULE_UNRESOLVED').map(blocker => blocker.code as string);
     expect(remaining.filter(code => !mutant.includes(code))).toEqual(['TEMPLARS_PIT_EXIT_RULE_UNRESOLVED']);
@@ -48,11 +50,12 @@ describe('Community final acceptance rejects false green proofs', () => {
     expect(result.discovered, result.diagnostics).toBe(1); expect(result.failed, result.diagnostics).toBe(1); expect(result.exitCode).not.toBe(0);
   }, 100_000);
   it('A17 removing the production Templars critical hook fails the real attack case', () => {
-    const result = runProductionMutation('src/game-engine/campaign/act-four/community-guardian-combat.ts', 'const outcome = resolveCommunityGuardianCritical(requirementId, localSkill, attackRoll, skill.accuracy ?? 7, skill.minDamage ?? 0);', 'const outcome = { hit: true, critical: false, damage: skill.minDamage ?? 0 };', 'P-critical-templars-impaler-5');
+    // Phase 11A.4R1 WP-4：critical hook 现位于 hero-attack 三元分支（self/ally 技能无攻击骰）。
+    const result = runProductionMutation('src/game-engine/campaign/act-four/community-guardian-combat.ts', ': resolveCommunityGuardianCritical(requirementId, localSkill, attackRoll, skill.accuracy ?? 7, skill.minDamage ?? 0);', ': { hit: true, critical: false, damage: skill.minDamage ?? 0 };', 'P-critical-templars-impaler-5');
     expect(result.discovered, result.diagnostics).toBe(1); expect(result.failed, result.diagnostics).toBe(1); expect(result.exitCode).not.toBe(0);
   }, 100_000);
   it('A18 removing the production Shuffling critical hook fails the real attack case', () => {
-    const result = runProductionMutation('src/game-engine/campaign/act-four/community-guardian-combat.ts', 'const outcome = resolveCommunityGuardianCritical(requirementId, localSkill, attackRoll, skill.accuracy ?? 7, skill.minDamage ?? 0);', 'const outcome = { hit: true, critical: false, damage: 0 };', 'P-critical-shuffling-horror-5');
+    const result = runProductionMutation('src/game-engine/campaign/act-four/community-guardian-combat.ts', ': resolveCommunityGuardianCritical(requirementId, localSkill, attackRoll, skill.accuracy ?? 7, skill.minDamage ?? 0);', ': { hit: true, critical: false, damage: 0 };', 'P-critical-shuffling-horror-5');
     expect(result.discovered, result.diagnostics).toBe(1); expect(result.failed, result.diagnostics).toBe(1); expect(result.exitCode).not.toBe(0);
   }, 100_000);
   it('A19 a transition policy constant cannot replace production transition and save proof', () => {

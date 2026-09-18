@@ -41,6 +41,13 @@ import {
 } from './mammoth-cyst-runtime';
 import { decideMammothCystAction } from './mammoth-cyst-action-override';
 import type { CommunityRuntimeBlockerCode } from '../../../data/darkest-dungeon/community-reference/runtime-profile';
+import type { MammothCystDisplacementChoice } from '../../../types/mammoth-cyst';
+import {
+  applyMammothCystDisplacement,
+  nearestAvailableAreas,
+  resolveMammothCystDisplacementChoice,
+  type ResolveDisplacementChoiceSelection,
+} from './room-11-displacement';
 
 /** 通用「第一处空 Stance」的检查顺序（规则书 Stance Tracker 自上而下）。 */
 export const STANCE_ORDER: MonsterStance[] = ['aggressive', 'ranged', 'defensive', 'support'];
@@ -150,10 +157,15 @@ export function resolveWhiteCellStalkSpawnSpace(
   }
   const occupancy = getMammothCystAreaOccupancy(state, areaId).length;
   if (occupancy >= capacity) {
-    return fail(
+    // WP-7：no-space 不再是终点 —— 保留 stance/areaId 供召唤方进入位移流程。
+    return {
+      ok: false,
+      stance,
+      areaId,
+      resolvedBy,
       eventIds,
-      `Area ${areaId} 已满（${occupancy}/${capacity}），Room Definition 未规定溢出处理，拒绝召唤`,
-    );
+      reason: `Area ${areaId} 已满（${occupancy}/${capacity}），进入 no-space 位移解析`,
+    };
   }
   eventIds.push(`spawn-capacity-check:${areaId}:${occupancy}/${capacity}`);
 
@@ -188,6 +200,11 @@ export interface SummonWhiteCellStalkResult {
   rolledBack: boolean;
   reason: string | null;
   blockerCode?: CommunityRuntimeBlockerCode;
+  /**
+   * WP-7：no-space 位移需要玩家裁决时挂起的选择（英雄候选 / 怪物候选 / 等距目的地）。
+   * 非 null 时本次召唤未发生；玩家结算选择后由 resolveSummonDisplacementChoice 恢复召唤。
+   */
+  pendingChoice: MammothCystDisplacementChoice | null;
 }
 
 /**
@@ -232,6 +249,7 @@ export function summonWhiteCellStalk(
       alreadySummoned: true,
       rolledBack: false,
       reason: null,
+      pendingChoice: null,
     };
   }
 
@@ -257,8 +275,14 @@ export function summonWhiteCellStalk(
   const room = state.snapshot.room;
   const space = resolveWhiteCellStalkSpawnSpace(state, room);
   if (!space.ok || !space.stance || !space.areaId) {
+    // WP-7（community-reference）：Area 已满 → 按 rulebook:31 进入 no-space 位移解析
+    // （Hero 挪最近可用 Area / Monster 占满时玩家选择挪让对象；等距并列 → 显式玩家选择），
+    // 位移完成后恢复本次召唤。不再是 ENGINE_UNSUPPORTED blocker。
+    const isNoSpace = /已满/.test(space.reason ?? '');
+    if (mode === 'community-reference' && isNoSpace && space.stance && space.areaId) {
+      return resolveSummonNoSpace(campaign, state, space.stance, space.areaId, options, transactionId);
+    }
     // 解析失败 → 整体放弃，不创建任何单位、不加任何卡。
-    const noSpaceBlocker = mode === 'community-reference' && /已满/.test(space.reason ?? '');
     return {
       ok: false,
       campaign,
@@ -267,8 +291,8 @@ export function summonWhiteCellStalk(
       initiativeCards: [],
       alreadySummoned: false,
       rolledBack: true,
-      reason: noSpaceBlocker ? 'MAMMOTH_STALK_NO_SPACE_RESOLUTION_ENGINE_UNSUPPORTED' : space.reason,
-      blockerCode: noSpaceBlocker ? 'MAMMOTH_STALK_NO_SPACE_RESOLUTION_ENGINE_UNSUPPORTED' : undefined,
+      reason: space.reason,
+      pendingChoice: null,
     };
   }
 
@@ -291,6 +315,7 @@ export function summonWhiteCellStalk(
       alreadySummoned: false,
       rolledBack: true,
       reason: 'White Cell Stalk 卡面数值缺失（maxHp 未录入），拒绝召唤',
+      pendingChoice: null,
     };
   }
 
@@ -320,6 +345,7 @@ export function summonWhiteCellStalk(
       alreadySummoned: false,
       rolledBack: true,
       reason: `Summon Definition 声明加入 ${cardsToAdd} 张 Initiative，与规则书 verified 的 2 张不符`,
+      pendingChoice: null,
     };
   }
   const newCards = createMammothCystInitiativeCardsFor(
@@ -404,6 +430,7 @@ export function summonWhiteCellStalk(
     alreadySummoned: false,
     rolledBack: false,
     reason: null,
+    pendingChoice: null,
   };
 }
 
@@ -417,5 +444,171 @@ function summonFail(campaign: CampaignState, reason: string): SummonWhiteCellSta
     alreadySummoned: false,
     rolledBack: false,
     reason,
+    pendingChoice: null,
   };
+}
+
+// ---------------------------------------------------------------------------
+// Phase 11A.4R1 WP-7：召唤 no-space 位移解析（rulebook:31）
+// ---------------------------------------------------------------------------
+
+/**
+ * Spawn Area 已满时的位移解析：
+ * - 有存活 Hero 在目标 Area → Hero 挪到 nearest available Area（唯一候选直接落定；
+ *   多 Hero / 多等距目的地 → 挂起显式玩家选择，绝不随机）；
+ * - Area 被 Monster 占满（无 Hero）→ 玩家选择挪让的 Monster（唯一 Monster 且唯一
+ *   目的地时无实际选择空间，直接落定）；
+ * - 位移与召唤构成同一逻辑事务：选择挂起期间不产生任何召唤副作用；
+ *   玩家结算后由 resolveSummonDisplacementChoice 恢复召唤。
+ */
+function resolveSummonNoSpace(
+  campaign: CampaignState,
+  state: MammothCystEncounterState,
+  stance: MonsterStance,
+  areaId: string,
+  options: SummonWhiteCellStalkOptions,
+  summonTransactionId: string,
+): SummonWhiteCellStalkResult {
+  const displacementTransactionId = `${summonTransactionId}:no-space-displace`;
+  const base: SummonWhiteCellStalkResult = {
+    ok: false,
+    campaign,
+    state,
+    record: null,
+    initiativeCards: [],
+    alreadySummoned: false,
+    rolledBack: false,
+    reason: null,
+    pendingChoice: null,
+  };
+
+  // 幂等：位移已结算但召唤尚未恢复（例如 Save 发生在选择结算后、召唤恢复前）→ 直接恢复召唤。
+  if (hasProcessedMammothCystTransaction(state, displacementTransactionId) && !state.pendingDisplacementChoice) {
+    return summonWhiteCellStalk(campaign, options);
+  }
+
+  const now = options.now ?? nowIso();
+  const heroesInArea = state.heroPlacements
+    .filter((p) => p.areaId === areaId)
+    .filter((p) => campaign.heroes.some((h) => h.instanceId === p.heroId && !h.dead))
+    .map((p) => p.heroId)
+    .sort();
+  const monstersInArea = state.actorStates
+    .filter((a) => a.isAlive && a.areaId === areaId)
+    .map((a) => a.actorId)
+    .sort();
+
+  const nearest = nearestAvailableAreas(state, areaId);
+  if (nearest.areaIds.length === 0) {
+    return { ...base, rolledBack: true, reason: `Room 11 没有任何可挪让的可用 Area（自 ${areaId} 起全部满员），召唤失败` };
+  }
+
+  const pend = (choice: Omit<MammothCystDisplacementChoice, 'id' | 'createdAt'>): SummonWhiteCellStalkResult => {
+    const pending: MammothCystDisplacementChoice = { ...choice, id: createId('mcchoice'), createdAt: now };
+    const nextState: MammothCystEncounterState = { ...state, pendingDisplacementChoice: pending };
+    const next: CampaignState = { ...campaign, actFourState: { ...campaign.actFourState, mammothCystEncounterState: nextState }, updatedAt: now };
+    return {
+      ...base,
+      campaign: pushLog(next, `Summon no-space：等待玩家裁决位移（${pending.kind}，候选目的地 ${pending.destinationAreaIds.join(' / ')}）。`, 'warning'),
+      state: nextState,
+      reason: 'no-space displacement requires player choice',
+      pendingChoice: pending,
+    };
+  };
+
+  const choiceBase = {
+    transactionId: displacementTransactionId,
+    sourceActionEventId: options.sourceActionEventId,
+    spawnStance: stance,
+    spawnAreaId: areaId,
+    remainingSteps: 1,
+    awayFromAreaId: null,
+  };
+
+  if (heroesInArea.length > 0) {
+    // rulebook:31：「A Hero must move to the nearest available Area」。
+    const heroId = heroesInArea.length === 1 ? heroesInArea[0] : null;
+    if (heroId && nearest.areaIds.length === 1) {
+      const moved = applyMammothCystDisplacement(campaign, {
+        kind: 'summon-hero-displacement',
+        heroId,
+        toAreaId: nearest.areaIds[0],
+        distance: nearest.distance,
+        sourceActionEventId: options.sourceActionEventId,
+        transactionId: displacementTransactionId,
+        now,
+      });
+      if (!moved.ok) return { ...base, campaign: moved.campaign, state: moved.state, rolledBack: true, reason: moved.reason };
+      // 位移落定 → 同一逻辑事务内恢复召唤。
+      return summonWhiteCellStalk(moved.campaign, options);
+    }
+    return pend({
+      ...choiceBase,
+      kind: 'summon-hero-displacement',
+      heroId,
+      heroCandidateIds: heroesInArea.length > 1 ? heroesInArea : [],
+      monsterCandidateIds: [],
+      destinationAreaIds: nearest.areaIds,
+    });
+  }
+
+  if (monstersInArea.length > 0) {
+    // rulebook:31：「players choose which Monster to move to the nearest available Area」。
+    if (monstersInArea.length === 1 && nearest.areaIds.length === 1) {
+      // 单一 Monster + 单一目的地：玩家选择退化（无实际分支），直接落定。
+      const moved = applyMammothCystDisplacement(campaign, {
+        kind: 'summon-monster-displacement',
+        monsterActorId: monstersInArea[0],
+        toAreaId: nearest.areaIds[0],
+        distance: nearest.distance,
+        sourceActionEventId: options.sourceActionEventId,
+        transactionId: displacementTransactionId,
+        now,
+      });
+      if (!moved.ok) return { ...base, campaign: moved.campaign, state: moved.state, rolledBack: true, reason: moved.reason };
+      return summonWhiteCellStalk(moved.campaign, options);
+    }
+    return pend({
+      ...choiceBase,
+      kind: 'summon-monster-displacement',
+      heroId: null,
+      heroCandidateIds: [],
+      monsterCandidateIds: monstersInArea,
+      destinationAreaIds: nearest.areaIds,
+    });
+  }
+
+  return { ...base, rolledBack: true, reason: `Area ${areaId} 已满但占位表为空（状态不一致），拒绝召唤` };
+}
+
+/**
+ * 玩家结算召唤 no-space 位移选择：先结算位移（显式 choice transaction，进存档），
+ * 再在**同一调用**内恢复被挂起的召唤 —— 位移 + 召唤对外表现为一次原子事务。
+ */
+export function resolveSummonDisplacementChoice(
+  campaign: CampaignState,
+  selection: ResolveDisplacementChoiceSelection & { mode?: DataMode | 'community-reference' },
+): SummonWhiteCellStalkResult {
+  const state = campaign.actFourState.mammothCystEncounterState;
+  const pending = state?.pendingDisplacementChoice ?? null;
+  if (!state || !pending) return { ...summonFail(campaign, '没有挂起的位移选择'), pendingChoice: null };
+  if (pending.kind === 'displace-push') return { ...summonFail(campaign, '该选择属于 Displace Push，而非召唤位移'), pendingChoice: pending };
+
+  const resolved = resolveMammothCystDisplacementChoice(campaign, selection);
+  if (!resolved.ok) return { ...summonFail(resolved.campaign, resolved.reason ?? '位移选择结算失败'), state: resolved.state, pendingChoice: resolved.pendingChoice };
+  if (resolved.alreadyResolved) {
+    // 重放：位移早已落盘 → 直接恢复召唤（summon 自身幂等键保证不重复召唤）。
+    return summonWhiteCellStalk(resolved.campaign, {
+      mode: selection.mode,
+      rng: selection.rng,
+      now: selection.now,
+      sourceActionEventId: pending.sourceActionEventId,
+    });
+  }
+  return summonWhiteCellStalk(resolved.campaign, {
+    mode: selection.mode,
+    rng: selection.rng,
+    now: selection.now,
+    sourceActionEventId: pending.sourceActionEventId,
+  });
 }

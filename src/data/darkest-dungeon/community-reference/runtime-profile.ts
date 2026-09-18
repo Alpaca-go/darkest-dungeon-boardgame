@@ -43,8 +43,12 @@ export const COMMUNITY_RUNTIME_BLOCKERS = [
   blocker('COME_UNTO_YOUR_MAKER_UNRESOLVED', 'tierB-come-unto-your-maker', 'definition', 'source-level'),
   blocker('MONSTER_CARD_FRONT_BACK_SIZE_UNRESOLVED', 'tierB-darkest-dungeon-monster-deck', 'drawPolicy', 'source-level', 'per-card Front/Back/Large size for four-slot fill', 'drawDarkestDungeonMonster'),
   blocker('GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED', 'runtime-guardian-combat', 'specialSkillEffectResolution', 'runtime-only'),
-  blocker('TEMPLARS_AREA_ADJACENCY_UNRESOLVED', 'runtime-templars-room', 'areaAdjacency', 'runtime-only'),
-  blocker('MAMMOTH_STALK_NO_SPACE_RESOLUTION_ENGINE_UNSUPPORTED', 'tierB-mammoth-cyst-room', 'spawnAreaPolicy.noSpace', 'runtime-only', 'room area adjacency / nearest-available displacement', 'summonWhiteCellStalk'),
+  // Phase 11A.4R1 WP-5：TEMPLARS_AREA_ADJACENCY_UNRESOLVED 已关闭 —— Room 9 拓扑由已接受
+  // tileGeometry 轮廓派生（community-source-geometry COMMUNITY_ROOM9_EDGES），接线进
+  // COMMUNITY_TEMPLARS_ROOM.areaGraph.edges 并被 Body Slam Pit Toss 消费。
+  // Phase 11A.4R1 WP-7：MAMMOTH_STALK_NO_SPACE_RESOLUTION_ENGINE_UNSUPPORTED 已关闭 ——
+  // Room 11 派生拓扑 + nearest-available / Displace Push 位移引擎（room-11-displacement）
+  // 接线进 summonWhiteCellStalk；等距并列走显式玩家选择，不随机、不猜测。
 ] as const;
 
 export function communityRequirement(requirementId: string) {

@@ -443,6 +443,8 @@ export function setupMammothCystEncounter(
     skillRolls: [],
     summonHistory: [],
     teleportationHistory: [],
+    displacementHistory: [],
+    pendingDisplacementChoice: null,
     areaEntryRuntime: createAreaEntryRuntimes(room),
     roomHazardEventHistory: [],
     snapshot,

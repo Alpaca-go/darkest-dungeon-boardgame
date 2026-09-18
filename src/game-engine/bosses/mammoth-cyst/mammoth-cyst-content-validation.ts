@@ -167,6 +167,13 @@ export function sanitizeMammothCystEncounterState(raw: unknown): MammothCystEnco
     skillRolls: objArray(r.skillRolls),
     summonHistory: objArray(r.summonHistory),
     teleportationHistory: objArray(r.teleportationHistory),
+    // Phase 11A.4R1 WP-2/WP-7：位移历史原样保留；挂起的玩家选择原样保留（ Save/Replay 契约），
+    // 缺失时回退 null（旧存档无此字段）。
+    displacementHistory: objArray(r.displacementHistory),
+    pendingDisplacementChoice:
+      r.pendingDisplacementChoice && typeof r.pendingDisplacementChoice === 'object'
+        ? (r.pendingDisplacementChoice as MammothCystEncounterState['pendingDisplacementChoice'])
+        : null,
     areaEntryRuntime: objArray(r.areaEntryRuntime),
     roomHazardEventHistory: objArray(r.roomHazardEventHistory),
     snapshot,

@@ -356,6 +356,32 @@ export interface BattleStressEvent {
 }
 
 /** 战斗状态。 */
+/** Battle 级 Guardian 房间内单个 Hero 的站位（key 为 BattleUnit.id）。 */
+export interface CommunityGuardianRoomHeroArea {
+  areaId: string;
+  /** 位于 Spiked Pit 内时为 pit id，否则为 null。 */
+  pitId: string | null;
+}
+
+/** Body Slam Pit Toss 的战斗内审计记录（含被 no-space 规则忽略的）。 */
+export interface CommunityPitTossEvent {
+  eventId: string;
+  heroId: string;
+  roll: number;
+  pitId: string | null;
+  areaId: string | null;
+  ignored: boolean;
+  reason: string | null;
+}
+
+export interface CommunityGuardianRoomState {
+  /** 当前仅 Templars 家族在 Battle 层产生房间移动（Body Slam Pit Toss）。 */
+  family: 'templars' | 'mammoth-cyst' | 'shuffling-horror';
+  roomId: string;
+  heroAreas: Record<string, CommunityGuardianRoomHeroArea>;
+  pitTossEvents: CommunityPitTossEvent[];
+}
+
 export interface BattleState {
   /** Source-backed Guardian rooms do not use the ordinary round timeout. */
   roundLimitPolicy?: 'not-counted';
@@ -378,10 +404,23 @@ export interface BattleState {
     markedBonusDamage?: number;
     pitTossRoll?: number | null;
     pitTossAreaId?: string | null;
+    /** Pit Toss 因 Pit 无空间被忽略（asset:f236b8:face「no-space ignore」），Hero 未移动。 */
+    pitTossIgnored?: boolean;
     healAmount?: number;
     undulationsBefore?: Record<string, Stance> | null;
     undulationsAfter?: Record<string, Stance> | null;
+    /** Echoing Disassembly 本次真实召唤的角色（battle 级补位，供 campaign 同步）。 */
+    summonedRoles?: string[];
   }>;
+  /**
+   * Phase 11A.4R1 WP-1/WP-5：Guardian Battle 内的房间级 Hero 站位。
+   *
+   * Battle 引擎是纯 BattleState 函数，无法访问 Campaign 级 encounter state，
+   * 因此 Templars Body Slam 的 Pit Toss 在战斗内只写这里；
+   * campaign 级 encounter state（heroPlacements / spikedPitRuntime）由
+   * `synchronizeCommunityGuardianDeaths` 在结算点回写，两者一起进存档。
+   */
+  communityRoomState?: CommunityGuardianRoomState;
   battleId: string;
   status: BattleStatus;
   round: number;

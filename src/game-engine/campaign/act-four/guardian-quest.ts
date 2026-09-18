@@ -38,6 +38,7 @@ import { setupTemplarsEncounter } from '../../bosses/templars/templars-runtime';
 // 桶文件会再导出 mammoth-cyst-victory，而后者反向依赖本模块，走桶文件会形成循环依赖。
 import { setupMammothCystEncounter } from '../../bosses/mammoth-cyst/mammoth-cyst-runtime';
 import { setupShufflingHorrorEncounter } from '../../bosses/shuffling-horror/shuffling-horror-runtime';
+import { seedCommunityGuardianRoomState } from './community-guardian-room-state';
 import { failCampaign } from '../../stagecoach';
 import { pushLog } from '../../log';
 import { createId, nowIso } from '../../random';
@@ -318,7 +319,16 @@ export function startGuardianBattle(
   }
 
   if (options?.mode === 'community-reference' && campaignAfter.battle) {
-    campaignAfter = { ...campaignAfter, battle: { ...campaignAfter.battle, roundLimitPolicy: 'not-counted' } };
+    // Phase 11A.4R1 WP-1/WP-5：播种 Battle 级房间站位（Body Slam Pit Toss 的唯一事实来源）。
+    const communityRoomState = seedCommunityGuardianRoomState(campaignAfter);
+    campaignAfter = {
+      ...campaignAfter,
+      battle: {
+        ...campaignAfter.battle,
+        roundLimitPolicy: 'not-counted',
+        ...(communityRoomState ? { communityRoomState } : {}),
+      },
+    };
   }
   return {
     ok: true,
