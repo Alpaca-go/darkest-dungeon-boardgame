@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import {
   beginCommunityFinalEncounter,
   driveCommunityFinalToForm,
+  driveCommunityFinalToHeartWithForecast,
   driveCommunityFinalUntil,
   finalReady,
   noRng,
@@ -21,6 +22,27 @@ import { seededRuntimeSources, setRandomSource, setRuntimeSources } from '../../
 
 beforeEach(() => { setRuntimeSources(seededRuntimeSources(1203)); setRandomSource(() => 0.49); });
 afterEach(() => setRandomSource(null));
+
+/** 语义状态向量：reload 会为 BattleUnit 补默认字段（如 equippedTrinketInstanceIds），只比较战斗语义字段。 */
+function heroVectors(campaign: ReturnType<typeof beginCommunityFinalEncounter>) {
+  return campaign.battle!.heroes.map((unit) => ({
+    id: unit.id,
+    hp: unit.hp,
+    maxHp: unit.maxHp,
+    stress: unit.stress,
+    stance: unit.stance,
+    position: unit.position,
+    isAlive: unit.isAlive,
+    atDeathsDoor: unit.atDeathsDoor,
+    bleed: unit.bleed,
+    blight: unit.blight,
+    stunned: unit.stunned,
+    marked: unit.marked,
+    conditionDurations: unit.conditionDurations ?? null,
+    buffs: unit.buffs,
+    debuffs: unit.debuffs,
+  }));
+}
 
 describe('Community Final encounter save/replay matrix', () => {
   it('FR-SR-01 Final Provision complete → reload', () => {
@@ -175,5 +197,182 @@ describe('Community Final encounter save/replay matrix', () => {
     expect(restored.heroes.map((hero) => ({ wounds: hero.wounds, stress: hero.stress, stance: hero.stance }))).toEqual(
       transition.campaign.heroes.map((hero) => ({ wounds: hero.wounds, stress: hero.stress, stance: hero.stance })),
     );
+  });
+
+  // -----------------------------------------------------------------------
+  // Phase 11A.4R2A WP-18：R2A 新增 save/replay 场景。
+  // continuous 与 reload 状态等价，且不重复 RNG / effect transaction。
+  // -----------------------------------------------------------------------
+
+  it('FR-SR-13 Puncture 完整执行后 → reload 不重复 forecast / damage / Bleed / Stress', () => {
+    const campaign = driveCommunityFinalToHeartWithForecast(6);
+    const form = communityFinalFormUnit(campaign.battle!, 'heart-of-darkness')!;
+    scriptedD10(12, 100, 3); // attack 命中；bleed 抵抗不抵抗；下一 forecast roll 3
+    const first = runCommunityFinalFormTurn(campaign, form.id);
+    expect(first.skillId).toBe('puncture');
+    const event = first.campaign.battle!.communityAttackEvents!.at(-1)!;
+    expect(event.hit).toBe(true);
+    const target = first.campaign.battle!.heroes.find((unit) => unit.id === event.targetId)!;
+    expect(target.bleed).toBe(3);
+    const runtime = first.campaign.actFourState.finalFormRuntimeState?.runtimes['heart-of-darkness'];
+    const heroes = heroVectors(first.campaign);
+    const restored = reload(first.campaign);
+    expect(heroVectors(restored)).toEqual(heroes);
+    expect(restored.actFourState.finalFormRuntimeState?.runtimes['heart-of-darkness']).toEqual(runtime);
+    setRandomSource(noRng);
+    const replay = runCommunityFinalFormTurn(restored, form.id);
+    expect(replay.alreadyProcessed).toBe(true);
+    expect(replay.campaign.battle!.communityAttackEvents).toEqual(first.campaign.battle!.communityAttackEvents);
+    expect(heroVectors(replay.campaign)).toEqual(heroes);
+    expect(replay.campaign.actFourState.finalFormRuntimeState?.runtimes['heart-of-darkness']).toEqual(runtime);
+  });
+
+  it('FR-SR-14 Dissolution 完整执行后 → reload 不重复 forecast / damage / Blight / Debuff', () => {
+    const campaign = driveCommunityFinalToHeartWithForecast(9);
+    const form = communityFinalFormUnit(campaign.battle!, 'heart-of-darkness')!;
+    scriptedD10(12, 100, 4); // attack 命中；blight 抵抗不抵抗；下一 forecast roll 4
+    const first = runCommunityFinalFormTurn(campaign, form.id);
+    expect(first.skillId).toBe('dissolution');
+    const event = first.campaign.battle!.communityAttackEvents!.at(-1)!;
+    expect(event.hit).toBe(true);
+    const target = first.campaign.battle!.heroes.find((unit) => unit.id === event.targetId)!;
+    expect(target.blight).toBe(3);
+    expect(target.debuffs).toHaveLength(1);
+    const runtime = first.campaign.actFourState.finalFormRuntimeState?.runtimes['heart-of-darkness'];
+    const heroes = heroVectors(first.campaign);
+    const restored = reload(first.campaign);
+    expect(heroVectors(restored)).toEqual(heroes);
+    expect(restored.actFourState.finalFormRuntimeState?.runtimes['heart-of-darkness']).toEqual(runtime);
+    setRandomSource(noRng);
+    const replay = runCommunityFinalFormTurn(restored, form.id);
+    expect(replay.alreadyProcessed).toBe(true);
+    expect(replay.campaign.battle!.communityAttackEvents).toEqual(first.campaign.battle!.communityAttackEvents);
+    expect(heroVectors(replay.campaign)).toEqual(heroes);
+  });
+
+  it('FR-SR-15 It Chooses Mark 2t + Debuff → reload 保留 duration 且不重复施加', () => {
+    let campaign = beginCommunityFinalEncounter(2);
+    const imperfect = campaign.battle!.monsters.find((unit) => unit.sourceId.includes('imperfect'))!;
+    campaign = {
+      ...campaign,
+      battle: {
+        ...campaign.battle!,
+        heroes: campaign.battle!.heroes.map((unit) => ({ ...unit, stance: 'support' as const })),
+      },
+    };
+    scriptedD10(2, 11);
+    const first = runCommunityFinalFormTurn(campaign, imperfect.id);
+    expect(first.skillId).toBe('it-chooses');
+    const event = first.campaign.battle!.communityAttackEvents!.at(-1)!;
+    const target = first.campaign.battle!.heroes.find((unit) => unit.id === event.targetId)!;
+    expect(target.marked).toBe(true);
+    expect(target.conditionDurations?.mark).toBe(2);
+    expect(target.debuffs).toHaveLength(1);
+    const heroes = heroVectors(first.campaign);
+    const restored = reload(first.campaign);
+    expect(heroVectors(restored)).toEqual(heroes);
+    setRandomSource(noRng);
+    const replay = runCommunityFinalFormTurn(restored, imperfect.id);
+    expect(replay.alreadyProcessed).toBe(true);
+    expect(heroVectors(replay.campaign)).toEqual(heroes);
+  });
+
+  it('FR-SR-16 Final Monster damage/stress → Form transition → reload 保留全部 Hero combat state', () => {
+    let campaign = beginCommunityFinalEncounter(1);
+    const form = campaign.battle!.monsters.find((unit) => unit.sourceId.includes('ancestor-second-form'))!;
+    const target = [...campaign.battle!.heroes].sort((a, b) => a.position - b.position)[0];
+    scriptedD10(10, 12, 100, 10, 10, 10); // Embrace Futility：DMG 2 / Stun 2t / Stress +2 / Push 2
+    const acted = runCommunityFinalFormTurn(campaign, form.id);
+    expect(acted.skillId).toBe('embrace-futility');
+    campaign = acted.campaign;
+    campaign = {
+      ...campaign,
+      battle: {
+        ...campaign.battle!,
+        monsters: campaign.battle!.monsters.map((unit) => (unit.id === form.id ? { ...unit, hp: 1 } : unit)),
+      },
+    };
+    const attacker = campaign.battle!.heroes.find((unit) => unit.id !== target.id && unit.position <= 3)!;
+    const killed = applyCommunityFinalHeroSkill(
+      { ...campaign, battle: { ...campaign.battle!, activeActorId: attacker.id, currentActionPoints: 1 } },
+      attacker.id,
+      'crusader-holy-lance',
+      form.id,
+    ).campaign;
+    expect(killed.actFourState.finalEncounterState?.status).toBe('transitioning');
+    const transition = transitionToNextFinalForm(killed, { mode: 'community-reference', rng: () => 0.4 });
+    expect(transition.ok, transition.reason ?? '').toBe(true);
+    // transition 后的 Hero combat state（含 damage/stress/stun/push）经 reload 完整保留。
+    const heroes = heroVectors(transition.campaign);
+    const carried = heroes.find((unit) => unit.id === target.id)!;
+    expect(carried.hp).toBe(target.hp - 2);
+    expect(carried.stunned).toBe(target.stunned + 2);
+    expect(carried.stress).toBe(target.stress + 2);
+    const restored = reload(transition.campaign);
+    expect(heroVectors(restored)).toEqual(heroes);
+    expect(restored.battle!.battleId).toBe(transition.campaign.battle!.battleId);
+    // reload 后重复 transition 幂等。
+    setRandomSource(noRng);
+    const again = transitionToNextFinalForm(restored, { mode: 'community-reference', rng: noRng });
+    expect(again.alreadyTransitioned).toBe(true);
+    expect(heroVectors(again.campaign)).toEqual(heroes);
+  });
+
+  it('FR-SR-17 多目标 Know This → reload 不重复 damage / Stress / Light', () => {
+    const base = driveCommunityFinalToHeartWithForecast(2);
+    const form = communityFinalFormUnit(base.battle!, 'heart-of-darkness')!;
+    const campaign = {
+      ...base,
+      battle: {
+        ...base.battle!,
+        heroes: base.battle!.heroes.map((unit) => ({ ...unit, stance: 'aggressive' as const })),
+      },
+    };
+    scriptedD10(12, 5); // attack 命中全部 4 个目标；下一 forecast roll 5
+    const first = runCommunityFinalFormTurn(campaign, form.id);
+    expect(first.skillId).toBe('know-this');
+    for (const before of campaign.battle!.heroes) {
+      const after = first.campaign.battle!.heroes.find((unit) => unit.id === before.id)!;
+      expect(after.hp).toBe(before.hp - 2);
+      expect(after.stress).toBe(before.stress + 3);
+    }
+    const heroes = heroVectors(first.campaign);
+    const light = first.campaign.battle!.light;
+    const runtime = first.campaign.actFourState.finalFormRuntimeState?.runtimes['heart-of-darkness'];
+    const restored = reload(first.campaign);
+    expect(heroVectors(restored)).toEqual(heroes);
+    expect(restored.battle!.light).toBe(light);
+    setRandomSource(noRng);
+    const replay = runCommunityFinalFormTurn(restored, form.id);
+    expect(replay.alreadyProcessed).toBe(true);
+    expect(heroVectors(replay.campaign)).toEqual(heroes);
+    expect(replay.campaign.battle!.light).toBe(light);
+    expect(replay.campaign.actFourState.finalFormRuntimeState?.runtimes['heart-of-darkness']).toEqual(runtime);
+  });
+
+  it('FR-SR-18 Reflection turn（Reunion）完整执行后 → reload 不重复 damage / Bleed / Stress', () => {
+    let campaign = beginCommunityFinalEncounter(2);
+    const perfect = campaign.battle!.monsters.find((unit) => unit.sourceId.includes('perfect-reflection'))!;
+    campaign = {
+      ...campaign,
+      battle: {
+        ...campaign.battle!,
+        heroes: campaign.battle!.heroes.map((unit) => ({ ...unit, stance: 'aggressive' as const })),
+        monsters: campaign.battle!.monsters.map((unit) => (unit.id === perfect.id ? { ...unit, stance: 'support' as const } : unit)),
+      },
+    };
+    scriptedD10(3, 11, 100); // Reunion 命中；bleed 抵抗不抵抗
+    const first = runCommunityFinalFormTurn(campaign, perfect.id);
+    expect(first.skillId).toBe('reunion');
+    const event = first.campaign.battle!.communityAttackEvents!.at(-1)!;
+    const target = first.campaign.battle!.heroes.find((unit) => unit.id === event.targetId)!;
+    expect(target.bleed).toBe(2);
+    const heroes = heroVectors(first.campaign);
+    const restored = reload(first.campaign);
+    expect(heroVectors(restored)).toEqual(heroes);
+    setRandomSource(noRng);
+    const replay = runCommunityFinalFormTurn(restored, perfect.id);
+    expect(replay.alreadyProcessed).toBe(true);
+    expect(heroVectors(replay.campaign)).toEqual(heroes);
   });
 });

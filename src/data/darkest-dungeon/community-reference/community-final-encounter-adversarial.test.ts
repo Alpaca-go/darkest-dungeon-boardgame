@@ -74,14 +74,14 @@ export default { ...base, root: ${JSON.stringify(root)}, plugins: [...base.plugi
 }
 
 describe('Community Final encounter mutation gate', () => {
-  it('keeps the three source blockers plus the two R2A re-opened Final runtime blockers', () => {
+  it('keeps exactly the three source blockers after R2A real acceptance re-closure', () => {
     expect(COMMUNITY_RUNTIME_BLOCKERS.map((blocker) => blocker.code)).toEqual([
       'TEMPLARS_PIT_EXIT_RULE_UNRESOLVED',
       'GESTATING_HEART_LETHAL_TIMING_UNRESOLVED',
       'COME_UNTO_YOUR_MAKER_UNRESOLVED',
-      // Phase 11A.4R2A WP-0：R2 关闭被认定为 false-green，真实验收前保持打开。
-      'FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED',
-      'FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED',
+      // Phase 11A.4R2A WP-19/20：FINAL_SKILL_TABLE / FINAL_ROOM_TRANSITION 两个 runtime blocker
+      // 经独立 source evidence 绑定 + 语义级 production + 跨 Form 状态保留 + mutation gate +
+      // save/replay 全部真实验收后重新关闭（WP-0 曾临时恢复为 5 个）。
     ]);
   });
 

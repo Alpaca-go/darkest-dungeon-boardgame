@@ -138,11 +138,9 @@ describe('Community Act IV playable-closure production', () => {
       'TEMPLARS_PIT_EXIT_RULE_UNRESOLVED',
       'GESTATING_HEART_LETHAL_TIMING_UNRESOLVED',
       'COME_UNTO_YOUR_MAKER_UNRESOLVED',
-      // Phase 11A.4R2A WP-0：R2 的关闭被认定为 false-green，修复验收期间重新打开。
-      'FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED',
-      'FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED',
+      // Phase 11A.4R2A WP-19/20：两个 Final runtime blocker 经真实验收后重新关闭。
     ]);
-    expect(codes).toHaveLength(5);
+    expect(codes).toHaveLength(3);
     expect(COMMUNITY_RUNTIME_BLOCKERS.some((blocker) => blocker.code === 'MONSTER_CARD_FRONT_BACK_SIZE_UNRESOLVED')).toBe(false);
     expect(COMMUNITY_RUNTIME_BLOCKERS.some((blocker) => blocker.code === 'GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED')).toBe(false);
   });

@@ -51,12 +51,14 @@ export const COMMUNITY_RUNTIME_BLOCKERS = [
   // per-card Front/Back/Large 来自 COMMUNITY_PHYSICAL_MONSTER_CARD_ATTRIBUTES（卡面 type-line），
   // 产品普通遭遇入口 drawDarkestDungeonMonster → fillCommunityOrdinaryMonsterEncounter
   // 顶牌连抽至 4 Stance Slot 填满。
-  // Phase 11A.4R2A WP-0：R2 对以下两个 blocker 的关闭被审计认定为 false-green
-  // （coverage 仅凭 test title、transition 只比较 campaign.heroes），本阶段重新打开，
-  // 只有 R2A 真实验收（独立 source evidence 绑定 + 语义级 production 测试 +
-  // 跨 Form 状态保留矩阵 + mutation gate + save/replay）全部通过后才能再次关闭。
-  blocker('FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED', 'runtime-community-final', 'printedSkillSelection', 'runtime-only', 'all normalized Final skill/d10 leaves through Community prepare/start/action/save', 'runCommunityFinalFormTurn'),
-  blocker('FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED', 'tierB-ancestor-room', 'roomEffects', 'runtime-only', 'production-reachable Community transition preserving real battle Hero state', 'transitionToNextFinalForm'),
+  // Phase 11A.4R2A WP-19：FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED 已关闭 ——
+  // 独立 source evidence（community-final-skill-source-evidence.json，vendored 卡面 SHA256 +
+  // TTS 3657612854 provenance）=== source inventory === runtime semantics === production tests
+  // === save/replay；coverage contract 解析 test body，拒绝 metadata-only proof。
+  // Phase 11A.4R2A WP-20：FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED 已关闭 ——
+  // Form transition 直接继承上一 Form 的 Battle Hero state（hp/stress/statuses/stance/position/
+  // conditionDurations），Final combat 伤害经 syncFinalHeroVitalsToCampaign 同步 campaign wounds；
+  // WP-13 逐字段保留矩阵 + WP-14 九项 transition mutation gate 全部通过。
 ] as const;
 
 export function communityRequirement(requirementId: string) {
