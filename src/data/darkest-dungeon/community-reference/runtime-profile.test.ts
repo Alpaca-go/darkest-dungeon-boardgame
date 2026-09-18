@@ -29,7 +29,7 @@ import {
   validateCommunityRuntimeProfile,
   validateCommunitySetupSnapshot,
 } from './runtime-profile';
-import { drawCommunityMonster, communityPhysicalMonsterPlacementPolicyProof } from '../../../game-engine/campaign/act-four/community-physical-monster-deck';
+import { communityPhysicalMonsterPlacementPolicyProof } from '../../../game-engine/campaign/act-four/community-physical-monster-deck';
 
 const HERO_IDS = ['crusader', 'vestal', 'highwayman', 'hellion'];
 const PROFILE = 'community-reference' as const;
@@ -145,14 +145,15 @@ describe('COMMUNITY PRODUCTION-PATH MATRIX', () => {
     }
   }
 
-  it('normal-room Monster draw uses a physical instance without logical-uniform selection', () => {
+  it('normal-room Monster draw fills four Stance slots from the physical deck without logical-uniform selection', () => {
     const campaign = productionSetup(0, 0);
     const before = campaign.actFourState.contentRuntime?.physicalMonsterDeck?.drawPile ?? [];
     const result = drawDarkestDungeonMonster(campaign, () => { throw new Error('RNG must not run'); });
     expect(result.ok).toBe(true);
     expect(result.monsterDefinitionId?.startsWith('community-dd-monster-')).toBe(true);
-    expect(result.campaign.actFourState.contentRuntime?.physicalMonsterDeck?.drawPile).toEqual(before.slice(1));
-    expect(result.campaign.actFourState.contentRuntime?.physicalMonsterDeck?.inBattle).toHaveLength(1);
+    expect(result.campaign.actFourState.contentRuntime?.physicalMonsterDeck?.drawPile).toEqual(before.slice(4));
+    expect(result.campaign.actFourState.contentRuntime?.physicalMonsterDeck?.inBattle).toHaveLength(4);
+    expect(result.campaign.actFourState.contentRuntime?.physicalMonsterDeck?.activePlacements).toHaveLength(4);
   });
 
   it('selects the Community Ancestor room directly', () => {
@@ -207,15 +208,14 @@ describe('COMMUNITY PRODUCTION-PATH MATRIX', () => {
 
 describe('supported-path unresolved boundaries', () => {
   it.each(COMMUNITY_RUNTIME_BLOCKERS.map((item) => [item.code, item.requirementId, item.field] as const))('%s returns an explicit community-source blocker', (code, requirementId, field) => expect(blockCommunityOperation(code)).toMatchObject({ ok: false, kind: 'community-source-blocked', blocker: { code, requirementId, field, sourceAuthority: 'COMMUNITY_RETAIL_REFERENCE' } }));
-  it('ordinary encounter fills four Stance slots from Front/Back source attributes', () => {
+  it('ordinary encounter fills four Stance slots via drawDarkestDungeonMonster production seam', () => {
     const campaign = productionSetup(0, 0);
-    const filled = drawCommunityMonster(campaign, 'wp8-fill-test');
+    const filled = drawDarkestDungeonMonster(campaign, () => { throw new Error('RNG must not run'); });
     expect(filled.ok).toBe(true);
-    expect(filled.placements).toHaveLength(4);
-    expect(new Set(filled.placements.map((item) => item.stance)).size).toBe(4);
-    expect(filled.placements.every((item) => item.large === false && item.slotCount === 1)).toBe(true);
     const deck = filled.campaign.actFourState.contentRuntime!.physicalMonsterDeck!;
     expect(deck.activePlacements).toHaveLength(4);
+    expect(new Set(deck.activePlacements.map((item) => item.stance)).size).toBe(4);
+    expect(deck.activePlacements.every((item) => item.large === false && item.slotCount === 1)).toBe(true);
     expect(deck.inBattle).toHaveLength(4);
     expect(communityPhysicalMonsterPlacementPolicyProof().cards).toHaveLength(9);
     expect(JSON.stringify(communityPhysicalMonsterPlacementPolicyProof())).not.toContain('prototype-');

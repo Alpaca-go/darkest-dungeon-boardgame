@@ -36,7 +36,7 @@ import {
 } from './act-four-state';
 import { createSeededRng } from './rng';
 import type { CommunityRuntimeBlocker } from '../../../data/darkest-dungeon/community-reference/runtime-profile';
-import { createShuffledCommunityPhysicalMonsterDeck, drawCommunityPhysicalMonster } from './community-physical-monster-deck';
+import { createShuffledCommunityPhysicalMonsterDeck, drawCommunityMonster } from './community-physical-monster-deck';
 
 export interface ActivateContentSetOptions {
   mode?: ActFourContentMode;
@@ -170,7 +170,11 @@ export interface DrawDarkestDungeonMonsterResult {
   blocker?: CommunityRuntimeBlocker;
 }
 
-/** Normal-room production draw seam. Community composition is known, ordering is not. */
+/**
+ * Ordinary-room Monster setup production seam.
+ * Community-reference: physical deck → top-card draws → Front/Back Stance placement → four slots filled.
+ * Does not consume extra RNG after the deck shuffle order is established.
+ */
 export function drawDarkestDungeonMonster(
   campaign: CampaignState,
   rng: () => number,
@@ -178,10 +182,17 @@ export function drawDarkestDungeonMonster(
   const runtime = campaign.actFourState.contentRuntime;
   if (!runtime) return { ok: false, campaign, monsterDefinitionId: null, reason: 'Darkest Dungeon content is not active' };
   if (runtime.runtimeProfileId === 'community-reference') {
-    const transactionId = `dd-monster-draw:${campaign.id}:${runtime.physicalMonsterDeck?.drawHistory.length ?? 0}`;
-    const drawn = drawCommunityPhysicalMonster(campaign, transactionId);
-    if (!drawn.ok) return { ok: false, campaign, monsterDefinitionId: null, reason: drawn.reason };
-    return { ok: true, campaign: drawn.campaign, monsterDefinitionId: drawn.monsterDefinitionId, reason: null };
+    const transactionId = `dd-monster-fill:${campaign.id}:${runtime.physicalMonsterDeck?.fillHistory.length ?? 0}`;
+    const filled = drawCommunityMonster(campaign, transactionId);
+    if (!filled.ok) {
+      return { ok: false, campaign: filled.campaign, monsterDefinitionId: null, reason: filled.reason };
+    }
+    return {
+      ok: true,
+      campaign: filled.campaign,
+      monsterDefinitionId: filled.placements[0]?.definitionId ?? null,
+      reason: null,
+    };
   }
   const pool = runtime.monsterDefinitionIds;
   if (pool.length === 0) return { ok: false, campaign, monsterDefinitionId: null, reason: 'Monster Deck 为空' };

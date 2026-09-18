@@ -35,12 +35,13 @@ describe('Community Act IV playable-closure adversarial', () => {
     expect(prepared.provisionRecord?.communityProvision?.poolMaximum).toBe(16);
   });
 
-  it('P03 DD Monster deck selects uniformly among 9 logical IDs -> FAIL', () => {
+  it('P03 DD Monster deck fills four physical Stance slots without logical-uniform selection -> FAIL', () => {
     const campaign = createCommunityGuardianScenario(0);
     const first = drawDarkestDungeonMonster(campaign, () => 0);
-    const second = drawDarkestDungeonMonster(first.campaign, () => 0);
-    expect(first.campaign.actFourState.contentRuntime!.physicalMonsterDeck!.inBattle).toHaveLength(1);
-    expect(second.campaign.actFourState.contentRuntime!.physicalMonsterDeck!.inBattle).toHaveLength(2);
+    const second = drawDarkestDungeonMonster(first.campaign, () => { throw new Error('idempotent fill must not RNG'); });
+    expect(first.campaign.actFourState.contentRuntime!.physicalMonsterDeck!.inBattle).toHaveLength(4);
+    expect(first.campaign.actFourState.contentRuntime!.physicalMonsterDeck!.activePlacements).toHaveLength(4);
+    expect(second.campaign.actFourState.contentRuntime!.physicalMonsterDeck!.inBattle).toHaveLength(4);
     expect(COMMUNITY_MONSTER_DRAW_SEMANTIC.uniformLogicalIdentity).toBe(false);
     expect(new Set(COMMUNITY_REFERENCE_RUNTIME_PROFILE.monsterComposition.map((item) => item.id)).size).toBe(9);
   });

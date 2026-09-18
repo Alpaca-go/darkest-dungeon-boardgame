@@ -12,7 +12,7 @@ import { COMMUNITY_RUNTIME_BLOCKERS } from './runtime-profile';
 import { setupFinalFormRuntime } from '../../../game-engine/campaign/act-four/final-forms/final-form-runtime';
 import { rollFinalFormAncestorTeleport } from '../../../game-engine/campaign/act-four/final-forms/final-form-actions';
 import { getAncestorSecondFormInitiativeActorCount, isAbsoluteNothingnessTargetable } from '../../../game-engine/campaign/act-four/final-forms/ancestor-second-form';
-import { returnCommunityPhysicalMonstersFromBattle, COMMUNITY_PHYSICAL_MONSTER_DECK_SIZE, drawCommunityMonster } from '../../../game-engine/campaign/act-four/community-physical-monster-deck';
+import { returnCommunityPhysicalMonstersFromBattle, COMMUNITY_PHYSICAL_MONSTER_DECK_SIZE } from '../../../game-engine/campaign/act-four/community-physical-monster-deck';
 
 const chooseFood = () => 'food' as const;
 
@@ -49,24 +49,29 @@ describe('Community Act IV playable-closure production', () => {
     expect(COMMUNITY_MONSTER_DRAW_SEMANTIC.uniformLogicalIdentity).toBe(false);
   });
 
-  it('PC05 top-card draw preserves physical identity and is not 9-logical uniform', () => {
+  it('PC05 ordinary-room production draw fills four Front/Back Stance slots', () => {
     const campaign = createCommunityGuardianScenario(0);
     const deck = campaign.actFourState.contentRuntime!.physicalMonsterDeck!;
-    const top = deck.drawPile[0];
-    const result = drawDarkestDungeonMonster(campaign, () => 0.99);
+    const topFour = deck.drawPile.slice(0, 4);
+    const result = drawDarkestDungeonMonster(campaign, () => { throw new Error('RNG must not run'); });
     expect(result.ok).toBe(true);
-    expect(result.campaign.actFourState.contentRuntime!.physicalMonsterDeck!.inBattle).toEqual([top]);
-    expect(result.monsterDefinitionId).toBe(deck.instanceToDefinitionId[top]);
+    const after = result.campaign.actFourState.contentRuntime!.physicalMonsterDeck!;
+    expect(after.inBattle).toEqual(topFour);
+    expect(after.activePlacements).toHaveLength(4);
+    expect(new Set(after.activePlacements.map((item) => item.stance)).size).toBe(4);
+    expect(after.activePlacements.every((item) => item.placementSide === 'front' || item.placementSide === 'back')).toBe(true);
+    expect(result.monsterDefinitionId).toBe(deck.instanceToDefinitionId[topFour[0]]);
   });
 
   it('PC05b ordinary fill places four Front/Back monsters into distinct Stance slots', () => {
     const campaign = createCommunityGuardianScenario(0);
-    const filled = drawCommunityMonster(campaign, 'pc05b-fill');
+    const filled = drawDarkestDungeonMonster(campaign, () => 0);
     expect(filled.ok).toBe(true);
-    expect(filled.placements.map((item) => item.stance).sort()).toEqual(['aggressive', 'defensive', 'ranged', 'support']);
-    expect(filled.placements.every((item) => item.placementSide === 'front' || item.placementSide === 'back')).toBe(true);
-    const replay = drawCommunityMonster(filled.campaign, 'pc05b-fill');
-    expect(replay.placements).toEqual(filled.placements);
+    const placements = filled.campaign.actFourState.contentRuntime!.physicalMonsterDeck!.activePlacements;
+    expect(placements.map((item) => item.stance).sort()).toEqual(['aggressive', 'defensive', 'ranged', 'support']);
+    expect(placements.every((item) => item.placementSide === 'front' || item.placementSide === 'back')).toBe(true);
+    const replay = drawDarkestDungeonMonster(filled.campaign, () => { throw new Error('idempotent fill must not RNG'); });
+    expect(replay.campaign.actFourState.contentRuntime!.physicalMonsterDeck!.activePlacements).toEqual(placements);
     expect(replay.campaign.actFourState.contentRuntime!.physicalMonsterDeck!.drawPile).toEqual(
       filled.campaign.actFourState.contentRuntime!.physicalMonsterDeck!.drawPile,
     );
@@ -78,7 +83,7 @@ describe('Community Act IV playable-closure production', () => {
     const deck = returned.actFourState.contentRuntime!.physicalMonsterDeck!;
     expect(deck.inBattle).toEqual([]);
     expect(deck.drawPile).toHaveLength(26);
-    expect(deck.returnHistory[0]?.returnedInstanceIds).toHaveLength(1);
+    expect(deck.returnHistory[0]?.returnedInstanceIds).toHaveLength(4);
     const replay = returnCommunityPhysicalMonstersFromBattle(returned, () => { throw new Error('reshuffle'); }, 'pc06-return');
     expect(replay.actFourState.contentRuntime!.physicalMonsterDeck).toEqual(deck);
   });
@@ -127,9 +132,17 @@ describe('Community Act IV playable-closure production', () => {
     expect(restored.actFourState.contentRuntime?.physicalMonsterDeck).toEqual(content.campaign.actFourState.contentRuntime?.physicalMonsterDeck);
   });
 
-  it('PC11 remaining source blockers stay explicit', () => {
-    const remaining = ['TEMPLARS_PIT_EXIT_RULE_UNRESOLVED', 'GESTATING_HEART_LETHAL_TIMING_UNRESOLVED', 'COME_UNTO_YOUR_MAKER_UNRESOLVED'];
-    expect(remaining.every((code) => COMMUNITY_RUNTIME_BLOCKERS.some((blocker) => blocker.code === code))).toBe(true);
+  it('PC11 remaining runtime blockers stay exactly the accepted five', () => {
+    const codes = COMMUNITY_RUNTIME_BLOCKERS.map((blocker) => blocker.code);
+    expect(codes).toEqual([
+      'FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED',
+      'FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED',
+      'TEMPLARS_PIT_EXIT_RULE_UNRESOLVED',
+      'GESTATING_HEART_LETHAL_TIMING_UNRESOLVED',
+      'COME_UNTO_YOUR_MAKER_UNRESOLVED',
+    ]);
+    expect(codes).toHaveLength(5);
     expect(COMMUNITY_RUNTIME_BLOCKERS.some((blocker) => blocker.code === 'MONSTER_CARD_FRONT_BACK_SIZE_UNRESOLVED')).toBe(false);
+    expect(COMMUNITY_RUNTIME_BLOCKERS.some((blocker) => blocker.code === 'GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED')).toBe(false);
   });
 });

@@ -49,9 +49,10 @@ export const COMMUNITY_RUNTIME_BLOCKERS = [
   // Phase 11A.4R1 WP-7：MAMMOTH_STALK_NO_SPACE_RESOLUTION_ENGINE_UNSUPPORTED 已关闭 ——
   // Room 11 派生拓扑 + nearest-available / Displace Push 位移引擎（room-11-displacement）
   // 接线进 summonWhiteCellStalk；等距并列走显式玩家选择，不随机、不猜测。
-  // Phase 11A.4R1 WP-8：MONSTER_CARD_FRONT_BACK_SIZE_UNRESOLVED 已关闭 ——
+  // Phase 11A.4R1 WP-8 / R1A WP-3：MONSTER_CARD_FRONT_BACK_SIZE_UNRESOLVED 已关闭 ——
   // per-card Front/Back/Large 来自 COMMUNITY_PHYSICAL_MONSTER_CARD_ATTRIBUTES（卡面 type-line），
-  // fillCommunityOrdinaryMonsterEncounter 顶牌连抽至 4 Stance Slot 填满。
+  // 产品普通遭遇入口 drawDarkestDungeonMonster → fillCommunityOrdinaryMonsterEncounter
+  // 顶牌连抽至 4 Stance Slot 填满。
 ] as const;
 
 export function communityRequirement(requirementId: string) {
