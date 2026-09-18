@@ -30,6 +30,7 @@ import type {
   ImpendingDoomForecast,
   ImperfectDeathReactionRecord,
   ReflectionActorState,
+  ReflectionKind,
   SispersionSummonRecord,
   WoundedReactionRecord,
 } from '../../../../types/final-forms';
@@ -253,7 +254,7 @@ export interface AncestorStanceActionResult {
 export function resolveFinalFormAncestorStance(
   campaign: CampaignState,
   sequence: number,
-  options?: FinalFormActionOptions,
+  options?: FinalFormActionOptions & { fillKind?: ReflectionKind; d10Roll?: number; fillOneStance?: boolean },
 ): AncestorStanceActionResult {
   const ctx = resolveContext<AncestorFirstFormRuntime>(
     campaign,
@@ -280,6 +281,7 @@ export function resolveFinalFormAncestorStance(
     encounterId,
     sequence,
     ctx.now,
+    { fillKind: options?.fillKind, d10Roll: options?.d10Roll, fillOneStance: options?.fillOneStance },
   );
 
   let next = commitRuntime(

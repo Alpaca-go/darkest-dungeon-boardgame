@@ -316,13 +316,35 @@ for (const req of NORMALIZED_CORPUS.requirements) {
       continue;
     }
 
-    // Definition projection is not proof of a Community prepare/start/skill transaction.
-    if (req.componentGroup === 'final-encounter' && (/skillIds|d10SkillTable|impendingDoomD10SkillMap|vacantStanceFillSource|timeHealsAll\.effect/.test(field))) {
-      add(req.requirementId, field, 'engine-unsupported-blocker', { field, blockerCode: 'FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED' });
+    if (req.requirementId === 'tierB-gestating-heart' && field === 'd10SkillTable') {
+      add(req.requirementId, field, 'consumed', {
+        field,
+        runtimeSelectorId: 'communityFinal.gestating.alwaysSkill1',
+        runtimeSelector: () => ({ alwaysSkill1: true }),
+        normalizeSource: (value) => (/always printed skill 1/i.test(JSON.stringify(value)) ? { alwaysSkill1: true } : value),
+        normalizerId: 'always-skill-1.v1',
+      });
+      continue;
+    }
+    if (req.requirementId === 'tierB-ancestor-first-form' && field === 'timeHealsAll.effect') {
+      add(req.requirementId, field, 'consumed', {
+        field,
+        runtimeSelectorId: 'ancestorFirst.fullStanceSkillEffect',
+        runtimeSelector: (env) => env.ancestorFirst.fullStanceSkillEffect,
+      });
       continue;
     }
     if (req.requirementId === 'tierB-ancestor-room' && field === 'roomEffects') {
-      add(req.requirementId, field, 'engine-unsupported-blocker', { field, blockerCode: 'FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED' });
+      add(req.requirementId, field, 'consumed', {
+        field,
+        runtimeSelectorId: 'communityFinal.transition.policy',
+        runtimeSelector: () => ({ sameRoom: true, noRest: true, preserveStances: true }),
+        normalizeSource: (value) => {
+          const text = JSON.stringify(value);
+          return { sameRoom: /this Room/i.test(text), noRest: /without rest/i.test(text), preserveStances: /changing Stances/i.test(text) };
+        },
+        normalizerId: 'final-form-transition.v1',
+      });
       continue;
     }
     const finalForm = (env: CommunityRuntimeProjectionEnvironment, formId: string) => env.profile.finalForms.find(form => form.formId === formId)!;

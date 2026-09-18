@@ -282,6 +282,7 @@ export function resolveAncestorStance(
   encounterId: string,
   sequence: number,
   now: string,
+  options?: { fillKind?: ReflectionKind; d10Roll?: number; fillOneStance?: boolean },
 ): AncestorStanceResolutionResult {
   const transactionId = finalFormTransactionIds.stanceResolution(encounterId, sequence);
   const existing = runtime.stanceResolutionHistory.find((r) => r.transactionId === transactionId);
@@ -315,12 +316,14 @@ export function resolveAncestorStance(
       outcome: 'time-heals-all',
       vacantStances: [],
       filledStances: [],
+      d10Roll: null,
+      fillKind: null,
       blockedReason: blocked,
       at: now,
     };
     skillIdToCast = blocked ? null : mech.fullStanceSkillId;
   } else {
-    const fillKind = mech.vacantStanceFillKind;
+    const fillKind = options?.fillKind ?? mech.vacantStanceFillKind;
     if (fillKind === null) {
       resolution = {
         transactionId,
@@ -328,6 +331,8 @@ export function resolveAncestorStance(
         outcome: 'fill-reflection-stances',
         vacantStances,
         filledStances: [],
+        d10Roll: options?.d10Roll ?? null,
+        fillKind: null,
         blockedReason: '补位 Reflection 的来源（Perfect / Imperfect）官方未给出，不作推测',
         at: now,
       };
@@ -335,7 +340,8 @@ export function resolveAncestorStance(
       const nextGeneration =
         runtime.reflections.reduce((max, r) => Math.max(max, r.generation), 0) + 1;
       let seq = runtime.reflections.length;
-      spawned = vacantStances.map((stance) => {
+      const stancesToFill = options?.fillOneStance ? vacantStances.slice(0, 1) : vacantStances;
+      spawned = stancesToFill.map((stance) => {
         seq += 1;
         return {
           id: reflectionId(fillKind, seq),
@@ -354,7 +360,9 @@ export function resolveAncestorStance(
         allStancesOccupied: false,
         outcome: 'fill-reflection-stances',
         vacantStances,
-        filledStances: vacantStances,
+        filledStances: stancesToFill,
+        d10Roll: options?.d10Roll ?? null,
+        fillKind,
         blockedReason: null,
         at: now,
       };

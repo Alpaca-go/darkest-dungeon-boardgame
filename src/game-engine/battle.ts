@@ -539,6 +539,9 @@ export function heroSkillActionError(
   if (!isSkillUsableFrom(actor, skill)) return `无法从当前站位释放 ${skill.name}。`;
   const target = findUnit(state, targetId);
   if (!target || !isLegalTarget(actor, target, skill)) return '目标不合法。';
+  if (state.communityFinal?.forbiddenTargetIds.includes(targetId) || (state.communityFinal?.guarded && targetId === state.communityFinal.ancestorUnitId)) {
+    return '目标不合法。';
+  }
   return null;
 }
 
@@ -565,6 +568,9 @@ export function heroUseSkill(
   }
   const target = findUnit(state, targetId);
   if (!target || !isLegalTarget(actor, target, skill)) return state;
+  if (state.communityFinal?.forbiddenTargetIds.includes(targetId) || (state.communityFinal?.guarded && targetId === state.communityFinal.ancestorUnitId)) {
+    return pushBattleLog(state, `${actor.name} 无法攻击受 Guard 保护的目标。`, 'warning');
+  }
 
   let s = state;
   let tgt: BattleUnit = target;

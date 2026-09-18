@@ -73,6 +73,10 @@ export interface AncestorStanceResolution {
   vacantStances: NonAggressiveStance[];
   /** 实际补上的 Stance（数据缺失时为空数组）。 */
   filledStances: NonAggressiveStance[];
+  /** Community vacant-stance d10 的掷骰结果（prototype 全量补位时缺省）。 */
+  d10Roll?: number | null;
+  /** 本次补位的 Reflection 种类。 */
+  fillKind?: ReflectionKind | null;
   /** 被数据缺口阻断的原因；null 表示正常执行。 */
   blockedReason: string | null;
   at: string;

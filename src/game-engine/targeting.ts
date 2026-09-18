@@ -23,9 +23,11 @@ export function computeLegalTargetIds(
   actor: BattleUnit,
   skill: BattleSkillLike
 ): string[] {
+  const overlay = state.communityFinal;
   return allUnits(state)
     .filter((u) => isLegalTarget(actor, u, skill))
-    .map((u) => u.id);
+    .map((u) => u.id)
+    .filter((id) => !overlay || (!overlay.forbiddenTargetIds.includes(id) && !(overlay.guarded && id === overlay.ancestorUnitId)));
 }
 
 /** 合并英雄与怪物单位（用于遍历）。 */

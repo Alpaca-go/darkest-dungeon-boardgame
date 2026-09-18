@@ -39,6 +39,7 @@ import { buildFinalEncounterBattle, buildFinalFormUnit } from './final-form-sequ
 import { createSeededRng } from './rng';
 // Phase 10E：切换到新 Form 时同步建立其机制运行时（上一 Form 的运行时保留供审计）。
 import { setupFinalFormRuntime } from './final-forms/final-form-runtime';
+import { materializeCommunityFinalBattle } from './community-final-actors';
 
 /** Form 切换历史保留条数（与 sanitizeActFourState 的 slice(-20) 对齐）。 */
 export const FORM_TRANSITION_HISTORY_LIMIT = 20;
@@ -344,9 +345,10 @@ export function transitionToNextFinalForm(
     transactionId,
   );
 
+  const finished = { ...next, actFourState: nextState };
   return {
     ok: true,
-    campaign: { ...next, actFourState: nextState },
+    campaign: mode === 'community-reference' ? materializeCommunityFinalBattle(finished) : finished,
     fromFormId: pending.fromFormId,
     toFormId: pending.toFormId,
     initiativeRebuilt: true,

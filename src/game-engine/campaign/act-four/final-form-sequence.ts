@@ -37,6 +37,7 @@ import { createSeededRng, shuffleWithRng } from './rng';
 // Nothingness / Sispersion / Impending Doom）。硬约束 1 —— 这里不新建战斗状态机，
 // 只是把 Definition 驱动的附加状态挂到 ActFourState 下。
 import { setupFinalFormRuntime } from './final-forms/final-form-runtime';
+import { materializeCommunityFinalBattle } from './community-final-actors';
 
 // ---------------------------------------------------------------------------
 // Form 单位构建
@@ -254,9 +255,10 @@ export function startFinalEncounter(
   );
   nextState = withActFourStage(nextState, 'final-encounter-active', `${transactionId}:stage`);
 
+  const started = { ...next, actFourState: nextState };
   return {
     ok: true,
-    campaign: { ...next, actFourState: nextState },
+    campaign: mode === 'community-reference' ? materializeCommunityFinalBattle(started) : started,
     formId,
     formIndex: 0,
     alreadyStarted: false,

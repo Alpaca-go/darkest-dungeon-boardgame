@@ -421,6 +421,16 @@ export interface BattleState {
    * `synchronizeCommunityGuardianDeaths` 在结算点回写，两者一起进存档。
    */
   communityRoomState?: CommunityGuardianRoomState;
+  /**
+   * Phase 11A.4R2：Community Final Battle overlay（GUARD / 禁选目标 / 幂等事件）。
+   * 不新建第二套战斗引擎；Hero 目标筛选与 Monster Turn 共用这份 BattleState 字段。
+   */
+  communityFinal?: {
+    formId: import('./final-encounter').FinalFormId;
+    ancestorUnitId: string;
+    guarded: boolean;
+    forbiddenTargetIds: string[];
+  };
   battleId: string;
   status: BattleStatus;
   round: number;

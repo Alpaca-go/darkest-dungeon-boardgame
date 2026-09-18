@@ -36,8 +36,6 @@ export interface CommunityRuntimeBlocker {
 }
 const blocker = (code: CommunityRuntimeBlockerCode, requirementId: string, field: string, classification: CommunityRuntimeBlocker['classification'], runtimeDependency = field, firstBlockingFunction = 'blockCommunityOperation'): CommunityRuntimeBlocker => ({ code, requirementId, field, sourcePath: field, runtimeDependency, firstBlockingFunction, tests: [`BLOCK:${code}`], proofKind: requirementId.startsWith('runtime-') ? 'capability-level' : 'semantic-leaf', classification, sourceAuthority: 'COMMUNITY_RETAIL_REFERENCE' });
 export const COMMUNITY_RUNTIME_BLOCKERS = [
-  blocker('FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED', 'runtime-community-final', 'printedSkillSelection', 'runtime-only', 'all normalized Final skill/d10 leaves through Community prepare/start/action/save', 'prepareFinalEncounter'),
-  blocker('FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED', 'tierB-ancestor-room', 'roomEffects', 'runtime-only', 'production-reachable Community transition without injecting Final state', 'prepareFinalEncounter'),
   blocker('TEMPLARS_PIT_EXIT_RULE_UNRESOLVED', 'tierB-templars-room', 'pitExitRule', 'source-level'),
   blocker('GESTATING_HEART_LETHAL_TIMING_UNRESOLVED', 'tierB-gestating-heart', 'lethalWoundTimingRuling', 'source-level'),
   blocker('COME_UNTO_YOUR_MAKER_UNRESOLVED', 'tierB-come-unto-your-maker', 'definition', 'source-level'),
@@ -53,6 +51,10 @@ export const COMMUNITY_RUNTIME_BLOCKERS = [
   // per-card Front/Back/Large 来自 COMMUNITY_PHYSICAL_MONSTER_CARD_ATTRIBUTES（卡面 type-line），
   // 产品普通遭遇入口 drawDarkestDungeonMonster → fillCommunityOrdinaryMonsterEncounter
   // 顶牌连抽至 4 Stance Slot 填满。
+  // Phase 11A.4R2：FINAL_SKILL_TABLE_ENGINE_UNSUPPORTED 已关闭 —— COMMUNITY_FINAL_SKILL_COVERAGE
+  // 证明 requiredSourceInventory === implemented === productionTested，且 helper-direct = 0。
+  // Phase 11A.4R2：FINAL_ROOM_TRANSITION_ENGINE_UNSUPPORTED 已关闭 —— 真实 Form lethal →
+  // defeatFinalForm → transitionToNextFinalForm，不经 finalReady / 注入 transitionState。
 ] as const;
 
 export function communityRequirement(requirementId: string) {
@@ -190,8 +192,8 @@ export function validateCommunityRuntimeProfile(profile: typeof COMMUNITY_REFERE
   if (profile.monsterComposition.reduce((total, monster) => total + monster.physicalInstances.length, 0) !== 26 || profile.monsterComposition.length !== 9) errors.push('monster composition must be 26 physical / 9 logical');
   if (definitions.some((definition) => !definition.id.startsWith('community-') || definition.id.startsWith('prototype-') || definition.enabledInOfficialPool !== false)) errors.push('Community identity or official-pool isolation failure');
   if (definitions.some((definition) => definition.officialDataStatus === 'verified')) errors.push('Community definitions must not masquerade as official verified data');
-  // Final×2 + Pit Exit + Gestating + Come Unto（WP-8 Front/Back、WP-9 Special Skill 已关闭）。
-  if (profile.runtimeBlockers.length < 5 || profile.runtimeBlockers.some((item) => profile.unresolvedRules[item.code] !== null)) errors.push('active source/runtime blockers must remain explicit');
+  // Pit Exit + Gestating lethal + Come Unto Your Maker. Final skill/transition closed in 11A.4R2.
+  if (profile.runtimeBlockers.length < 3 || profile.runtimeBlockers.some((item) => profile.unresolvedRules[item.code] !== null)) errors.push('active source/runtime blockers must remain explicit');
   if (String(profile.capabilities.monsterDeck.randomDraw) === 'prototype' || profile.capabilities.fullActFourPlayable !== false) errors.push('Community runtime must fail closed');
   if (profile.contentHash !== computeCommunityReferenceContentHash(profile.sourcePackageSha256, profile.artifactIdentities)) errors.push('content hash artifact identity mismatch');
   return errors;

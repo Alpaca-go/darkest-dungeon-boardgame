@@ -1,7 +1,7 @@
 import { expect } from 'vitest';
 import type { CampaignState } from '../../../types';
 import { createCommunityGuardianScenario } from '../../../testing/scenarios/community-runtime-scenario';
-import { advanceTurn, endHeroTurn, runMonsterTurn } from '../../../game-engine/battle';
+import { advanceTurn, endHeroTurn, legalTargetsForActor, runMonsterTurn } from '../../../game-engine/battle';
 import { beginHeroSkillAction } from '../../../game-engine/trinkets/battle-trinket-bridge';
 import { commitBattleVictory } from '../../../game-engine/commands/battle';
 import { executeMammothCystAction } from '../../../game-engine/bosses/mammoth-cyst/execute-mammoth-cyst-action';
@@ -10,6 +10,10 @@ import { appendShufflingSummonBattleUnits } from '../../../game-engine/bosses/sh
 import { shouldForceCommunityEchoingDisassembly } from '../../../game-engine/campaign/act-four/community-guardian-combat';
 import { createSaveSnapshot, migrateSaveFile, restoreSaveSnapshot, validateSaveFile } from '../../../game-engine/save';
 import { startFinalHamlet, advanceFinalHamletDay } from '../../../game-engine/campaign/act-four/final-hamlet';
+import { prepareFinalEncounter } from '../../../game-engine/campaign/act-four/prepare-final-encounter';
+import { startFinalEncounter } from '../../../game-engine/campaign/act-four/final-form-sequence';
+import { applyCommunityFinalHeroSkill, runCommunityFinalFormTurn } from '../../../game-engine/campaign/act-four/community-final-combat';
+import { transitionToNextFinalForm } from '../../../game-engine/campaign/act-four/transition-final-form';
 import { setRandomSource } from '../../../game-engine/random';
 
 export const noRng = (): never => { throw new Error('Unexpected RNG consumption'); };
@@ -132,4 +136,71 @@ export function finalReady(): CampaignState {
   }
   expect(campaign.actFourState.stage).toBe('final-encounter-ready');
   return campaign;
+}
+
+export function beginCommunityFinalEncounter(index: 0 | 1 | 2 = 2): CampaignState {
+  let hamlet: CampaignState;
+  if (index === 2) hamlet = finalReady();
+  else {
+    const startedHamlet = startFinalHamlet(win(index), { rng: () => 0 });
+    expect(startedHamlet.ok).toBe(true);
+    hamlet = startedHamlet.campaign;
+    for (let day = 1; day <= 4; day++) {
+      const advanced = advanceFinalHamletDay(hamlet, { rng: () => 0 });
+      expect(advanced.ok).toBe(true);
+      hamlet = advanced.campaign;
+    }
+  }
+  const prepared = prepareFinalEncounter(hamlet, { mode: 'community-reference', rng: () => 0, chooseWild: () => 'food' });
+  expect(prepared.ok, prepared.reason ?? '').toBe(true);
+  const started = startFinalEncounter(prepared.campaign, { mode: 'community-reference', rng: () => 0.31 });
+  expect(started.ok, started.reason ?? '').toBe(true);
+  expect(started.campaign.battle).not.toBeNull();
+  return started.campaign;
+}
+
+export function driveCommunityFinalUntil(
+  campaign: CampaignState,
+  predicate: (next: CampaignState) => boolean,
+  maxSteps = 800,
+): CampaignState {
+  let next = campaign;
+  for (let step = 0; step < maxSteps && !predicate(next); step++) {
+    let battle = next.battle;
+    if (!battle) break;
+    if (!battle.activeActorId) {
+      next = { ...next, battle: advanceTurn(battle) };
+      continue;
+    }
+    const hero = battle.heroes.find((unit) => unit.id === battle.activeActorId);
+    if (!hero) {
+      const turn = runCommunityFinalFormTurn(next, battle.activeActorId);
+      next = { ...turn.campaign, battle: endHeroTurn(turn.campaign.battle!, battle.activeActorId) };
+      continue;
+    }
+    if (hero.position > 3) {
+      next = { ...next, battle: endHeroTurn(battle, hero.id) };
+      continue;
+    }
+    const target = legalTargetsForActor(battle, 'crusader-holy-lance')[0];
+    if (!target) {
+      next = { ...next, battle: endHeroTurn(battle, hero.id) };
+      continue;
+    }
+    next = applyCommunityFinalHeroSkill(next, hero.id, 'crusader-holy-lance', target).campaign;
+  }
+  return next;
+}
+
+export function driveCommunityFinalToForm(campaign: CampaignState, formId: string): CampaignState {
+  let next = campaign;
+  for (let hop = 0; hop < 4 && next.actFourState.finalEncounterState?.activeFormId !== formId; hop++) {
+    next = driveCommunityFinalUntil(next, (state) => state.actFourState.finalEncounterState?.status === 'transitioning' || state.actFourState.finalEncounterState?.activeFormId === formId);
+    if (next.actFourState.finalEncounterState?.activeFormId === formId) return next;
+    const transition = transitionToNextFinalForm(next, { mode: 'community-reference', rng: () => 0.2 });
+    expect(transition.ok, transition.reason ?? '').toBe(true);
+    next = transition.campaign;
+  }
+  expect(next.actFourState.finalEncounterState?.activeFormId).toBe(formId);
+  return next;
 }
