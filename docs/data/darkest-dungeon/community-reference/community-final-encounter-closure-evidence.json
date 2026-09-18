@@ -1,0 +1,180 @@
+{
+  "schemaVersion": "phase11a4r2-community-final-encounter-closure.v1",
+  "runId": "f9684095-15e5-490a-ad25-030b82c1a8a8",
+  "measuredAt": "2026-09-18T12:50:03.933Z",
+  "verificationScope": "LOCAL MEASURED VERIFICATION",
+  "verifiedImplementationHead": "3e949ca45d5f6597dafe6462921c341bb493b682",
+  "evidencePublicationParent": "3e949ca45d5f6597dafe6462921c341bb493b682",
+  "evidencePublicationCommit": null,
+  "terminalVerdict": "COMMUNITY-FINAL-RUNTIME-IMPLEMENTATION-ACCEPTED",
+  "sourceBlocked": [
+    "TEMPLARS_PIT_EXIT_RULE_UNRESOLVED",
+    "GESTATING_HEART_LETHAL_TIMING_UNRESOLVED",
+    "COME_UNTO_YOUR_MAKER_UNRESOLVED"
+  ],
+  "activeRuntimeBlockers": [
+    "TEMPLARS_PIT_EXIT_RULE_UNRESOLVED",
+    "GESTATING_HEART_LETHAL_TIMING_UNRESOLVED",
+    "COME_UNTO_YOUR_MAKER_UNRESOLVED"
+  ],
+  "expectedRuntimeBlockers": [
+    "TEMPLARS_PIT_EXIT_RULE_UNRESOLVED",
+    "GESTATING_HEART_LETHAL_TIMING_UNRESOLVED",
+    "COME_UNTO_YOUR_MAKER_UNRESOLVED"
+  ],
+  "flags": {
+    "manualPlaytestCandidate": false,
+    "fullActFourPlayable": false,
+    "canEnterPhase11B": false
+  },
+  "structuredTestGroups": {
+    "sourceCoverage": {
+      "expected": 2,
+      "discovered": 2,
+      "run": 2,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "todo": 0,
+      "reporter": "docs/reports/phase-11a4r2/sourceCoverage.vitest.json",
+      "sha256": "a093d995f232ad5b190eb47403721e1bd81f22c11362f137a2f6186c517777ec"
+    },
+    "finalProduction": {
+      "expected": 21,
+      "discovered": 21,
+      "run": 21,
+      "passed": 21,
+      "failed": 0,
+      "skipped": 0,
+      "todo": 0,
+      "reporter": "docs/reports/phase-11a4r2/finalProduction.vitest.json",
+      "sha256": "4beb58ca5a5ed046aa211c8a5e79ba81d35520e86431b1b67dbaa74167bf8fda"
+    },
+    "finalSaveReplay": {
+      "expected": 12,
+      "discovered": 12,
+      "run": 12,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "todo": 0,
+      "reporter": "docs/reports/phase-11a4r2/finalSaveReplay.vitest.json",
+      "sha256": "7afb27ec032d6989f5951542e74f6f9dfd493340ab9011fb57d76149cd11ed97"
+    },
+    "finalAdversarial": {
+      "expected": 18,
+      "discovered": 18,
+      "run": 18,
+      "passed": 18,
+      "failed": 0,
+      "skipped": 0,
+      "todo": 0,
+      "reporter": "docs/reports/phase-11a4r2/finalAdversarial.vitest.json",
+      "sha256": "99c9a6f746d4af5f646074e861640f36c5c8a8c184211dac70feb7dd12edeb51"
+    },
+    "routeMatrix": {
+      "expected": 5,
+      "discovered": 5,
+      "run": 5,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "todo": 0,
+      "reporter": "docs/reports/phase-11a4r2/routeMatrix.vitest.json",
+      "sha256": "1ffc3d25f9937f2d0220c6944c41cb5af7700e500bd6244e6eab4abb88e3ab26"
+    },
+    "frozenFinal": {
+      "expected": 12,
+      "discovered": 12,
+      "run": 12,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "todo": 0,
+      "reporter": "docs/reports/phase-11a4r2/frozenFinal.vitest.json",
+      "sha256": "a4014e6bfae54fc4bb6b78f3d48ec67261f235abeb778c18960f4e9bcad8deb6"
+    }
+  },
+  "e2e": {
+    "expected": 3,
+    "discovered": 3,
+    "run": 3,
+    "passed": 3,
+    "failed": 0,
+    "skipped": 0,
+    "reporter": "docs/reports/phase-11a4r2/community-act4-playable-closure-e2e.json",
+    "sha256": "38ceaed7ffb9cdc224d63d94da35b26dc0d275b8c7847962b8b4364258b6ecb9"
+  },
+  "commands": [
+    {
+      "name": "typecheck",
+      "exitCode": 0,
+      "durationMs": 7939,
+      "log": "docs/reports/phase-11a4r2/typecheck.log",
+      "logSha256": "75a11da44c802486bc6f65640aa48a730f0f684c5c07a42ba3cd1735eb3fb070"
+    },
+    {
+      "name": "sourceCoverage",
+      "exitCode": 0,
+      "durationMs": 1950,
+      "log": "docs/reports/phase-11a4r2/sourceCoverage.log",
+      "logSha256": "22a40039a200c4d1fd6f636480e78ef2c1cb66e9b6364da1003f7332dcc243ba"
+    },
+    {
+      "name": "finalProduction",
+      "exitCode": 0,
+      "durationMs": 3385,
+      "log": "docs/reports/phase-11a4r2/finalProduction.log",
+      "logSha256": "053dde895a7f41aaf539f1f38414d33dfeb757eb94b751a27c7946492012a559"
+    },
+    {
+      "name": "finalSaveReplay",
+      "exitCode": 0,
+      "durationMs": 3578,
+      "log": "docs/reports/phase-11a4r2/finalSaveReplay.log",
+      "logSha256": "ff212e9288c4097782ab4bf22449df3cb20dc8fa316964083bce1e8ed0b4d73e"
+    },
+    {
+      "name": "finalAdversarial",
+      "exitCode": 0,
+      "durationMs": 57697,
+      "log": "docs/reports/phase-11a4r2/finalAdversarial.log",
+      "logSha256": "65674220843a6efef6f71edf3ad23dbfcee519e735ec9ae2c0274202e9cee451"
+    },
+    {
+      "name": "routeMatrix",
+      "exitCode": 0,
+      "durationMs": 3409,
+      "log": "docs/reports/phase-11a4r2/routeMatrix.log",
+      "logSha256": "b1472e02434418fee5da2843b0f47e2dcaea20b486d8b5f5d0aeec53d362f189"
+    },
+    {
+      "name": "frozenFinal",
+      "exitCode": 0,
+      "durationMs": 3015,
+      "log": "docs/reports/phase-11a4r2/frozenFinal.log",
+      "logSha256": "30983d1693516d8d0051fa55f779a3ec830b7b658aaeaf9a796895616bbabbf3"
+    },
+    {
+      "name": "build",
+      "exitCode": 0,
+      "durationMs": 7809,
+      "log": "docs/reports/phase-11a4r2/build.log",
+      "logSha256": "8b637441a213f002379a511a391cd59240839ca5f4980147a6b4297ee745a9d8"
+    },
+    {
+      "name": "finalBrowserE2E",
+      "exitCode": 0,
+      "durationMs": 14100,
+      "log": "docs/reports/phase-11a4r2/finalBrowserE2E.log",
+      "logSha256": "b7a255bb3ec3b033b5c33e558c2fe7d01fae7bc2be1e81ef008f8562446f0fe8"
+    }
+  ],
+  "failures": [],
+  "acceptanceNotes": [
+    "R2 implementation acceptance complete when terminalVerdict is COMMUNITY-FINAL-RUNTIME-IMPLEMENTATION-ACCEPTED.",
+    "Remaining SOURCE-BLOCKED rules: TEMPLARS_PIT_EXIT_RULE_UNRESOLVED, GESTATING_HEART_LETHAL_TIMING_UNRESOLVED, COME_UNTO_YOUR_MAKER_UNRESOLVED.",
+    "This evidence is LOCAL MEASURED VERIFICATION; it does not claim CI green.",
+    "Do not start Phase 11B or R3 Full Route Acceptance until remaining source blockers are resolved from accepted sources or product policy."
+  ]
+}
