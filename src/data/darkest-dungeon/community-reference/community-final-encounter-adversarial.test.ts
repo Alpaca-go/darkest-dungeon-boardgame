@@ -7,6 +7,7 @@ import { COMMUNITY_RUNTIME_BLOCKERS } from './runtime-profile';
 
 const PRODUCTION = 'src/data/darkest-dungeon/community-reference/community-final-production.test.ts';
 const SAVE = 'src/data/darkest-dungeon/community-reference/community-final-encounter-save-replay.test.ts';
+const TRANSITION = 'src/data/darkest-dungeon/community-reference/community-final-transition-state.test.ts';
 
 function runMutation(
   edits: Array<{ file: string; from: string; to: string }> | string,
@@ -292,6 +293,290 @@ describe('Community Final encounter mutation gate', () => {
       'if (ctx.mode === \'community-reference\') {\n    return { ok: true as false, campaign: { ...campaign, gold: (campaign.gold ?? 0) + 1 }, reason: \'guessed\' };\n  }',
       PRODUCTION,
       'Come Unto Your Maker remains source-blocked',
+    );
+    expect(result.discovered, result.diagnostics).toBeGreaterThan(0);
+    expect(result.failed, result.diagnostics).toBeGreaterThan(0);
+  }, 180_000);
+
+  // -----------------------------------------------------------------------
+  // WP-14：Transition Mutation Gate —— 每个错误必须让 WP-13 production transition suite 失败。
+  // -----------------------------------------------------------------------
+
+  it('WP-14: damage disappears on transition (hp not inherited from previous Form)', () => {
+    const result = runMutation(
+      'src/game-engine/campaign/act-four/final-form-sequence.ts',
+      '      hp: prior.hp,',
+      '      hp: fresh.hp,',
+      TRANSITION,
+      'Form',
+    );
+    expect(result.discovered, result.diagnostics).toBeGreaterThan(0);
+    expect(result.failed, result.diagnostics).toBeGreaterThan(0);
+  }, 180_000);
+
+  it('WP-14: stress disappears on transition', () => {
+    const result = runMutation(
+      'src/game-engine/campaign/act-four/final-form-sequence.ts',
+      '      stress: prior.stress,',
+      '      stress: 0,',
+      TRANSITION,
+      'Form',
+    );
+    expect(result.discovered, result.diagnostics).toBeGreaterThan(0);
+    expect(result.failed, result.diagnostics).toBeGreaterThan(0);
+  }, 180_000);
+
+  it('WP-14: bleed disappears on transition', () => {
+    const result = runMutation(
+      'src/game-engine/campaign/act-four/final-form-sequence.ts',
+      '      bleed: prior.bleed,',
+      '      bleed: 0,',
+      TRANSITION,
+      'Form',
+    );
+    expect(result.discovered, result.diagnostics).toBeGreaterThan(0);
+    expect(result.failed, result.diagnostics).toBeGreaterThan(0);
+  }, 180_000);
+
+  it('WP-14: condition durations (mark/stun/bleed) disappear on transition', () => {
+    const result = runMutation(
+      'src/game-engine/campaign/act-four/final-form-sequence.ts',
+      '      conditionDurations: prior.conditionDurations ? { ...prior.conditionDurations } : undefined,',
+      '      conditionDurations: undefined,',
+      TRANSITION,
+      'Form',
+    );
+    expect(result.discovered, result.diagnostics).toBeGreaterThan(0);
+    expect(result.failed, result.diagnostics).toBeGreaterThan(0);
+  }, 180_000);
+
+  it('WP-14: hero HP rebuilt from pre-form Campaign value (inheritance disabled)', () => {
+    const result = runMutation(
+      'src/game-engine/campaign/act-four/final-form-sequence.ts',
+      '  const previousHeroes = previousBattleId && campaign.battle?.battleId === previousBattleId\n    ? campaign.battle.heroes\n    : null;',
+      '  const previousHeroes = null;',
+      TRANSITION,
+      'Form',
+    );
+    expect(result.discovered, result.diagnostics).toBeGreaterThan(0);
+    expect(result.failed, result.diagnostics).toBeGreaterThan(0);
+  }, 180_000);
+
+  it('WP-14: battleId changes on transition', () => {
+    const result = runMutation(
+      'src/game-engine/campaign/act-four/transition-final-form.ts',
+      '    policy.resetBattleUsage ? null : (campaign.battle?.battleId ?? null),',
+      '    null,',
+      TRANSITION,
+      'Form',
+    );
+    expect(result.discovered, result.diagnostics).toBeGreaterThan(0);
+    expect(result.failed, result.diagnostics).toBeGreaterThan(0);
+  }, 180_000);
+
+  it('WP-14: Room changes on transition', () => {
+    const result = runMutation(
+      'src/game-engine/campaign/act-four/final-form-sequence.ts',
+      '    sourceRoomId: encounter.roomDefinitionId,',
+      '    sourceRoomId: \'community-dd-room-mutated\',',
+      TRANSITION,
+      'Form',
+    );
+    expect(result.discovered, result.diagnostics).toBeGreaterThan(0);
+    expect(result.failed, result.diagnostics).toBeGreaterThan(0);
+  }, 180_000);
+
+  it('WP-14: Round not reset on transition', () => {
+    const result = runMutation(
+      'src/game-engine/campaign/act-four/final-form-sequence.ts',
+      '    // 硬约束 17：Round 重置为 1。\n    round: 1,',
+      '    round: 2,',
+      TRANSITION,
+      'Form',
+    );
+    expect(result.discovered, result.diagnostics).toBeGreaterThan(0);
+    expect(result.failed, result.diagnostics).toBeGreaterThan(0);
+  }, 180_000);
+
+  it('WP-14: initiative not rebuilt on transition', () => {
+    const result = runMutation(
+      'src/game-engine/campaign/act-four/final-form-sequence.ts',
+      '    initiativeOrder,\n    initiativeIndex: -1,',
+      '    initiativeOrder: campaign.battle?.initiativeOrder ?? initiativeOrder,\n    initiativeIndex: -1,',
+      TRANSITION,
+      'Form',
+    );
+    expect(result.discovered, result.diagnostics).toBeGreaterThan(0);
+    expect(result.failed, result.diagnostics).toBeGreaterThan(0);
+  }, 180_000);
+
+  // -----------------------------------------------------------------------
+  // WP-15：Leaf-Level Mutation —— 每类语义至少一个 mutation，不能只 mutation skill selection。
+  // -----------------------------------------------------------------------
+
+  it('WP-15: wrong damage (base damage +1)', () => {
+    const result = runMutation(
+      'src/game-engine/campaign/act-four/community-final-combat.ts',
+      '  const damage = !hit ? 0 : critical && leaf.crit ? leaf.crit.damage : leaf.damage;',
+      '  const damage = !hit ? 0 : critical && leaf.crit ? leaf.crit.damage : leaf.damage + 1;',
+      PRODUCTION,
+      'P-final',
+    );
+    expect(result.discovered, result.diagnostics).toBeGreaterThan(0);
+    expect(result.failed, result.diagnostics).toBeGreaterThan(0);
+  }, 180_000);
+
+  it('WP-15: wrong crit (crit never deals crit damage)', () => {
+    const result = runMutation(
+      'src/game-engine/campaign/act-four/community-final-combat.ts',
+      '  const damage = !hit ? 0 : critical && leaf.crit ? leaf.crit.damage : leaf.damage;',
+      '  const damage = !hit ? 0 : leaf.damage;',
+      PRODUCTION,
+      'P-final',
+    );
+    expect(result.discovered, result.diagnostics).toBeGreaterThan(0);
+    expect(result.failed, result.diagnostics).toBeGreaterThan(0);
+  }, 180_000);
+
+  it('WP-15: wrong target (closest policy reversed to furthest)', () => {
+    const result = runMutation(
+      'src/data/darkest-dungeon/community-reference/community-final-targeting.ts',
+      '  const closest = [...heroes].sort((a, b) => a.position - b.position || compareUnitId(a, b));',
+      '  const closest = [...heroes].sort((a, b) => b.position - a.position || compareUnitId(a, b));',
+      PRODUCTION,
+      'P-final',
+    );
+    expect(result.discovered, result.diagnostics).toBeGreaterThan(0);
+    expect(result.failed, result.diagnostics).toBeGreaterThan(0);
+  }, 180_000);
+
+  it('WP-15: range ignored (all living heroes legal regardless of range)', () => {
+    const result = runMutation(
+      'src/data/darkest-dungeon/community-reference/community-final-targeting.ts',
+      '  const legal = range === null\n    ? living\n    : living.filter((hero) => communityFinalSkillCanReach(',
+      '  const legal = living.filter((hero) => true || communityFinalSkillCanReach(',
+      'src/data/darkest-dungeon/community-reference/community-final-targeting.test.ts',
+      'out-of-range',
+    );
+    expect(result.discovered, result.diagnostics).toBeGreaterThan(0);
+    expect(result.failed, result.diagnostics).toBeGreaterThan(0);
+  }, 180_000);
+
+  it('WP-15: wrong multi-target count (crowded area only hits 1)', () => {
+    const result = runMutation(
+      'src/data/darkest-dungeon/community-reference/community-final-targeting.ts',
+      '    return (ranked[0]?.[1] ?? []).sort((a, b) => a.position - b.position || compareUnitId(a, b)).slice(0, count);',
+      '    return (ranked[0]?.[1] ?? []).sort((a, b) => a.position - b.position || compareUnitId(a, b)).slice(0, 1);',
+      PRODUCTION,
+      'P-final',
+    );
+    expect(result.discovered, result.diagnostics).toBeGreaterThan(0);
+    expect(result.failed, result.diagnostics).toBeGreaterThan(0);
+  }, 180_000);
+
+  it('WP-15: missing Bleed', () => {
+    const result = runMutation(
+      'src/game-engine/campaign/act-four/community-final-combat.ts',
+      "    if (bleed) effects.push({ type: 'bleed', amount: Number(bleed[1]), durationTurns: Number(bleed[2]) });",
+      "    if (false && bleed) effects.push({ type: 'bleed', amount: Number(bleed[1]), durationTurns: Number(bleed[2]) });",
+      PRODUCTION,
+      'P-final',
+    );
+    expect(result.discovered, result.diagnostics).toBeGreaterThan(0);
+    expect(result.failed, result.diagnostics).toBeGreaterThan(0);
+  }, 180_000);
+
+  it('WP-15: missing Blight', () => {
+    const result = runMutation(
+      'src/game-engine/campaign/act-four/community-final-combat.ts',
+      "    if (blight) effects.push({ type: 'blight', amount: Number(blight[1]), durationTurns: Number(blight[2]) });",
+      "    if (false && blight) effects.push({ type: 'blight', amount: Number(blight[1]), durationTurns: Number(blight[2]) });",
+      PRODUCTION,
+      'P-final',
+    );
+    expect(result.discovered, result.diagnostics).toBeGreaterThan(0);
+    expect(result.failed, result.diagnostics).toBeGreaterThan(0);
+  }, 180_000);
+
+  it('WP-15: missing Stun', () => {
+    const result = runMutation(
+      'src/game-engine/campaign/act-four/community-final-combat.ts',
+      "    if (stun) effects.push({ type: 'stun', amount: Number(stun[1]), durationTurns: Number(stun[1]) });",
+      "    if (false && stun) effects.push({ type: 'stun', amount: Number(stun[1]), durationTurns: Number(stun[1]) });",
+      PRODUCTION,
+      'P-final',
+    );
+    expect(result.discovered, result.diagnostics).toBeGreaterThan(0);
+    expect(result.failed, result.diagnostics).toBeGreaterThan(0);
+  }, 180_000);
+
+  it('WP-15: missing Mark', () => {
+    const result = runMutation(
+      'src/game-engine/campaign/act-four/community-final-combat.ts',
+      "    if (mark) effects.push({ type: 'mark', amount: 1, durationTurns: Number(mark[1]) });",
+      "    if (false && mark) effects.push({ type: 'mark', amount: 1, durationTurns: Number(mark[1]) });",
+      PRODUCTION,
+      'P-final',
+    );
+    expect(result.discovered, result.diagnostics).toBeGreaterThan(0);
+    expect(result.failed, result.diagnostics).toBeGreaterThan(0);
+  }, 180_000);
+
+  it('WP-15: wrong duration (Mark 2t applied as 1t)', () => {
+    const result = runMutation(
+      'src/game-engine/campaign/act-four/community-final-combat.ts',
+      "    if (mark) effects.push({ type: 'mark', amount: 1, durationTurns: Number(mark[1]) });",
+      "    if (mark) effects.push({ type: 'mark', amount: 1, durationTurns: 1 });",
+      PRODUCTION,
+      'P-final',
+    );
+    expect(result.discovered, result.diagnostics).toBeGreaterThan(0);
+    expect(result.failed, result.diagnostics).toBeGreaterThan(0);
+  }, 180_000);
+
+  it('WP-15: missing Stress (shared pipeline skipped)', () => {
+    const result = runMutation(
+      'src/game-engine/campaign/act-four/community-final-combat.ts',
+      '    if (!stress) continue;',
+      '    if (true) continue;',
+      PRODUCTION,
+      'P-final',
+    );
+    expect(result.discovered, result.diagnostics).toBeGreaterThan(0);
+    expect(result.failed, result.diagnostics).toBeGreaterThan(0);
+  }, 180_000);
+
+  it('WP-15: missing Light -1', () => {
+    const result = runMutation(
+      'src/game-engine/campaign/act-four/community-final-combat.ts',
+      "    if (leaf.specialEffect.includes('light-1')) {",
+      "    if (false && leaf.specialEffect.includes('light-1')) {",
+      PRODUCTION,
+      'P-final',
+    );
+    expect(result.discovered, result.diagnostics).toBeGreaterThan(0);
+    expect(result.failed, result.diagnostics).toBeGreaterThan(0);
+  }, 180_000);
+
+  it('WP-15: missing marked +3 damage bonus', () => {
+    const result = runMutation(
+      'src/game-engine/campaign/act-four/community-final-combat.ts',
+      "      const markedBonus = leaf.specialEffect.includes('+3 damage vs Marked') && target.marked ? 3 : 0;",
+      "      const markedBonus = leaf.specialEffect.includes('+3 damage vs Marked') && target.marked ? 0 : 0;",
+      PRODUCTION,
+      'P-final',
+    );
+    expect(result.discovered, result.diagnostics).toBeGreaterThan(0);
+    expect(result.failed, result.diagnostics).toBeGreaterThan(0);
+  }, 180_000);
+
+  it('WP-15: missing Push 2', () => {
+    const result = runMutation(
+      'src/game-engine/campaign/act-four/community-final-combat.ts',
+      "  if (leaf.specialEffect.includes('push 2')) {",
+      "  if (false && leaf.specialEffect.includes('push 2')) {",
+      PRODUCTION,
+      'P-final',
     );
     expect(result.discovered, result.diagnostics).toBeGreaterThan(0);
     expect(result.failed, result.diagnostics).toBeGreaterThan(0);
