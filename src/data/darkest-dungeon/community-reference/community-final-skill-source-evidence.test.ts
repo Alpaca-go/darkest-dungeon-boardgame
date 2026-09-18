@@ -19,6 +19,7 @@ import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import {
+  COMMUNITY_FINAL_ACTOR_SOURCE_STATS,
   COMMUNITY_FINAL_SKILL_SOURCE_INVENTORY,
   type CommunityFinalSkillSourceLeaf,
 } from './community-final-skill-source-inventory';
@@ -55,6 +56,7 @@ interface EvidenceArtifact {
     string,
     { sourceGuid: string; cardId: number; cardIndex: number; assetPath: string; assetSha256: string }
   >;
+  actors: Array<{ actorId: string; card: string; printedSpeed: number; extractionStatus: string }>;
   leaves: EvidenceLeaf[];
 }
 
@@ -171,6 +173,20 @@ describe('Community Final skill source evidence binding (WP-1/WP-2)', () => {
     for (const leaf of evidence.leaves) {
       expect(leaf.extractionStatus.length, `leaf ${leafKey(leaf)} extractionStatus`).toBeGreaterThan(0);
       expect(leaf.extractionStatus, `leaf ${leafKey(leaf)} extractionStatus`).toContain('verified');
+    }
+  });
+
+  it('actor source stats (printed Speed) bind the evidence actors section', () => {
+    expect(COMMUNITY_FINAL_ACTOR_SOURCE_STATS.map((stats) => stats.actorId).sort()).toEqual(
+      evidence.actors.map((actor) => actor.actorId).sort(),
+    );
+    for (const stats of COMMUNITY_FINAL_ACTOR_SOURCE_STATS) {
+      const evidenceActor = evidence.actors.find((actor) => actor.actorId === stats.actorId);
+      expect(evidenceActor, `actor ${stats.actorId} evidence`).toBeDefined();
+      expect(stats.printedSpeed, `actor ${stats.actorId} printedSpeed`).toBe(evidenceActor!.printedSpeed);
+      const card = evidence.cards[evidenceActor!.card];
+      expect(card, `actor ${stats.actorId} card`).toBeDefined();
+      expect(stats.sourceReference, `actor ${stats.actorId} sourceReference`).toBe(card.assetPath);
     }
   });
 });

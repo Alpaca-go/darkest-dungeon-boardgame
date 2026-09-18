@@ -10,8 +10,8 @@ import { COMMUNITY_RUNTIME_MONSTER_COMPOSITION } from '../../../data/darkest-dun
 import {
   COMMUNITY_FINAL_SKILL_SOURCE_INVENTORY,
   type CommunityFinalSkillSourceLeaf,
-  type CommunityFinalTargetPolicy,
 } from '../../../data/darkest-dungeon/community-reference/community-final-skill-source-inventory';
+import { resolveCommunityFinalTargets } from '../../../data/darkest-dungeon/community-reference/community-final-targeting';
 import { blockCommunityOperation } from '../../../data/darkest-dungeon/community-reference/runtime-profile';
 import { getVacantReflectionStances } from './final-forms/ancestor-first-form';
 import {
@@ -74,38 +74,6 @@ function resolveFinalCritical(leaf: CommunityFinalSkillSourceLeaf, roll: number)
 
 function compareId(a: BattleUnit, b: BattleUnit): number {
   return a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
-}
-
-function livingHeroes(state: BattleState): BattleUnit[] {
-  return state.heroes.filter((hero) => hero.isAlive);
-}
-
-function pickByPolicy(state: BattleState, policy: CommunityFinalTargetPolicy, count: number): BattleUnit[] {
-  const heroes = livingHeroes(state);
-  if (heroes.length === 0 || policy === 'none') return [];
-  const closest = [...heroes].sort((a, b) => a.position - b.position || compareId(a, b));
-  const furthest = [...heroes].sort((a, b) => b.position - a.position || compareId(a, b));
-  const stressed = [...heroes].sort((a, b) => b.stress - a.stress || a.position - b.position || compareId(a, b));
-  const wounded = [...heroes].sort((a, b) => (b.maxHp - b.hp) - (a.maxHp - a.hp) || compareId(a, b));
-  if (policy === 'closest') return closest.slice(0, count);
-  if (policy === 'furthest') return furthest.slice(0, count);
-  if (policy === 'most-stressed') return stressed.slice(0, count);
-  if (policy === 'most-wounded-hero') return wounded.slice(0, count);
-  if (policy === 'marked-then-closest') {
-    const marked = closest.filter((hero) => hero.marked);
-    return (marked.length > 0 ? marked : closest).slice(0, count);
-  }
-  if (policy === 'crowded') {
-    const groups = new Map<Stance, BattleUnit[]>();
-    for (const hero of heroes) {
-      const list = groups.get(hero.stance) ?? [];
-      list.push(hero);
-      groups.set(hero.stance, list);
-    }
-    const ranked = [...groups.values()].sort((a, b) => b.length - a.length || a[0].position - b[0].position);
-    return (ranked[0] ?? []).sort((a, b) => a.position - b.position || compareId(a, b)).slice(0, count);
-  }
-  return [];
 }
 
 function mostWoundedMonster(state: BattleState, selfId: string): BattleUnit | null {
@@ -224,7 +192,27 @@ function executeAttack(campaign: CampaignState, actor: BattleUnit, leaf: Communi
   if (saved) return campaign;
   let next: CampaignState = campaign;
   let nextBattle = battle;
-  const targets = leaf.attack ? pickByPolicy(nextBattle, leaf.targetPolicy, leaf.multiTargetCount) : [];
+  // WP-10：source range → 合法目标 Area → target resolver。range 不得被忽略；
+  // 移动（≤ Speed 个 Area）后仍无合法目标 → skip the rest of its turn（不掷攻击骰）。
+  const resolution = leaf.attack
+    ? resolveCommunityFinalTargets(nextBattle, actor, leaf)
+    : { targets: [] as BattleUnit[], legalTargetIds: [] as string[], skippedOutOfRange: false };
+  const targets = resolution.targets;
+  if (leaf.attack && resolution.skippedOutOfRange) {
+    nextBattle = recordEvent(nextBattle, {
+      eventId,
+      monsterId: actor.id,
+      skillId: leaf.localSkillId,
+      targetId: '',
+      skillRoll,
+      attackRoll: 0,
+      hit: false,
+      critical: false,
+      damage: 0,
+      skippedReason: 'out-of-range',
+    });
+    return { ...next, battle: nextBattle };
+  }
   const attackRoll = leaf.attack ? d10() : 0;
   const outcome = resolveFinalCritical(leaf, attackRoll);
   let damage = 0;
@@ -314,6 +302,9 @@ function runAncestorSecondTurn(campaign: CampaignState, actor: BattleUnit, event
   const skillRoll = d10();
   const local = skillRoll <= 2 ? 'refashion-them' : skillRoll <= 6 ? 'unmake-them-all' : 'embrace-futility';
   let next = executeAttack(campaign, actor, leafFor('ancestor-second-form', local), eventId, skillRoll);
+  // WP-10：range skip =「skip the rest of its turn」—— action-end teleport 同样不发生。
+  const acted = next.battle?.communityAttackEvents?.find((event) => event.eventId === eventId);
+  if (acted?.skippedReason === 'out-of-range') return next;
   const sequence = (next.actFourState.finalFormRuntimeState?.runtimes['ancestor-second-form']?.kind === 'ancestor-second-form'
     ? next.actFourState.finalFormRuntimeState!.runtimes['ancestor-second-form']!.teleportHistory.length
     : 0) + 1;

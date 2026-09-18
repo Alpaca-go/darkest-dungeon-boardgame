@@ -318,6 +318,28 @@ export const COMMUNITY_FINAL_SKILL_SOURCE_INVENTORY: readonly CommunityFinalSkil
   },
 ] as const;
 
+/**
+ * Phase 11A.4R2A WP-10：Actor 级 source 数值（卡面顶部 Speed）。
+ * Range 语义需要 Speed 来决定 Monster 移动后能否进入射程（rulebook p24：
+ * Monster 最多移动 Speed 个 Area 以进入 Skill Range，否则跳过本回合）。
+ * 与 leaf 一样由独立 evidence（community-final-skill-source-evidence.json actors）校验。
+ */
+export interface CommunityFinalActorSourceStats {
+  actorId: string;
+  sourceUnitId: string;
+  printedSpeed: number;
+  sourceReference: string;
+}
+
+export const COMMUNITY_FINAL_ACTOR_SOURCE_STATS: readonly CommunityFinalActorSourceStats[] = [
+  { actorId: 'ancestor-first-form', sourceUnitId: 'community-dd-final-form-ancestor-first-form', printedSpeed: 2, sourceReference: CARD.ancestor1 },
+  { actorId: 'perfect-reflection', sourceUnitId: 'community-dd-perfect-reflection', printedSpeed: 2, sourceReference: CARD.perfect },
+  { actorId: 'imperfect-reflection', sourceUnitId: 'community-dd-imperfect-reflection', printedSpeed: 2, sourceReference: CARD.imperfect },
+  { actorId: 'ancestor-second-form', sourceUnitId: 'community-dd-final-form-ancestor-second-form', printedSpeed: 3, sourceReference: CARD.ancestor2 },
+  { actorId: 'gestating-heart', sourceUnitId: 'community-dd-final-form-gestating-heart', printedSpeed: 1, sourceReference: CARD.gestating },
+  { actorId: 'heart-of-darkness', sourceUnitId: 'community-dd-final-form-heart-of-darkness', printedSpeed: 3, sourceReference: CARD.heart },
+] as const;
+
 export const COMMUNITY_FINAL_SOURCE_BLOCKED_LEAVES = [
   {
     code: 'GESTATING_HEART_LETHAL_TIMING_UNRESOLVED',

@@ -407,6 +407,8 @@ export interface BattleState {
     /** Pit Toss 因 Pit 无空间被忽略（asset:f236b8:face「no-space ignore」），Hero 未移动。 */
     pitTossIgnored?: boolean;
     healAmount?: number;
+    /** WP-10：移动（≤ Speed 个 Area）后仍无合法目标 → skip the rest of its turn。 */
+    skippedReason?: 'out-of-range';
     undulationsBefore?: Record<string, Stance> | null;
     undulationsAfter?: Record<string, Stance> | null;
     /** Echoing Disassembly 本次真实召唤的角色（battle 级补位，供 campaign 同步）。 */
