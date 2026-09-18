@@ -5,9 +5,10 @@ import { rollDie } from './random';
 
 /** 给单位施加一个状态效果（返回新单位，不修改原对象）。 */
 export function applyEffectToUnit(unit: BattleUnit, effect: ActiveEffect): BattleUnit {
-  const withDuration = (next: BattleUnit): BattleUnit => effect.durationTurns === undefined
-    ? next
-    : { ...next, conditionDurations: { ...next.conditionDurations, [effect.type]: Math.max(next.conditionDurations?.[effect.type] ?? 0, effect.durationTurns) } };
+  const withDuration = (next: BattleUnit): BattleUnit => {
+    if (effect.durationTurns === undefined || effect.type === 'buff' || effect.type === 'debuff') return next;
+    return { ...next, conditionDurations: { ...next.conditionDurations, [effect.type]: Math.max(next.conditionDurations?.[effect.type] ?? 0, effect.durationTurns) } };
+  };
   switch (effect.type) {
     case 'stun':
       return withDuration({ ...unit, stunned: unit.stunned + effect.amount });
@@ -17,6 +18,10 @@ export function applyEffectToUnit(unit: BattleUnit, effect: ActiveEffect): Battl
       return withDuration({ ...unit, blight: unit.blight + effect.amount });
     case 'mark':
       return withDuration({ ...unit, marked: true });
+    case 'buff':
+      return withDuration({ ...unit, buffs: [...unit.buffs, effect] });
+    case 'debuff':
+      return withDuration({ ...unit, debuffs: [...unit.debuffs, effect] });
     default:
       return unit;
   }
@@ -84,7 +89,7 @@ export function applyEffectsWithResistance(
       blocked.push({ type: effect.type, reason: 'immune' });
       continue;
     }
-    if (categoricalResistances.includes(effect.type)) {
+    if (effect.type !== 'buff' && effect.type !== 'debuff' && categoricalResistances.includes(effect.type)) {
       const from = effect.durationTurns ?? effect.amount;
       const to = Math.max(0, from - 1);
       blocked.push({ type: effect.type, reason: 'resisted', durationReducedFrom: from, durationReducedTo: to });

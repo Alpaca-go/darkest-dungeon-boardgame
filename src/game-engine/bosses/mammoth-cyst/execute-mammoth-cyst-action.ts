@@ -198,6 +198,7 @@ export function executeMammothCystAction(
       skill,
       teleportation: tele.record,
       reason: tele.reason,
+      stressDealt: tele.ok ? 2 : 0,
     };
   }
 

@@ -75,7 +75,7 @@ export type StatusEffectType = 'bleed' | 'blight' | 'stun' | 'mark';
 
 /** 生效中的状态层数。 */
 export interface ActiveEffect {
-  type: StatusEffectType;
+  type: StatusEffectType | 'buff' | 'debuff';
   amount: number;
   /** Optional source-backed duration. Legacy effects omit this and retain stack-count behavior. */
   durationTurns?: number;
@@ -375,6 +375,12 @@ export interface BattleState {
     hit: boolean;
     critical: boolean;
     damage: number;
+    markedBonusDamage?: number;
+    pitTossRoll?: number | null;
+    pitTossAreaId?: string | null;
+    healAmount?: number;
+    undulationsBefore?: Record<string, Stance> | null;
+    undulationsAfter?: Record<string, Stance> | null;
   }>;
   battleId: string;
   status: BattleStatus;

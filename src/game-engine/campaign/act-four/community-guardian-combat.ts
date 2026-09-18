@@ -1,4 +1,4 @@
-import type { ActiveEffect, BattleState, BattleUnit, MonsterSkillDefinition } from '../../../types';
+import type { ActiveEffect, BattleState, BattleUnit, GameLogEntry, MonsterSkillDefinition } from '../../../types';
 import { d10 } from '../../random';
 import { applyBattleUnitDamage } from '../../damage';
 import { applyStatusEffectEvent, describeBlockedEffects } from '../../status-effects';
@@ -11,7 +11,11 @@ import {
   resolveCommunityGuardianCritical,
   type CommunityConditionCategory,
 } from './community-engine-capabilities';
-import type { GameLogEntry } from '../../../types';
+import {
+  applyCommunityGuardianSpecialSkill,
+  communitySpecialSkillLeaf,
+  markedBonusDamage,
+} from './community-guardian-special-skills';
 
 export const COMMUNITY_GUARDIAN_SOURCE_PREFIX = 'community-dd-';
 
@@ -37,11 +41,11 @@ const SKILL_EFFECTS: Record<string, ActiveEffect[]> = {
   torment: [],
   'body-slam': [{ type: 'stun', amount: 2, durationTurns: 2 }],
   revelation: [],
-  'stinger-shot': [{ type: 'blight', amount: 3, durationTurns: 3 }],
-  'bulging-gaze': [],
+  'stinger-shot': [{ type: 'blight', amount: 3, durationTurns: 3 }, { type: 'debuff', amount: 0, durationTurns: 2 }],
+  'bulging-gaze': [{ type: 'debuff', amount: 0, durationTurns: 1 }],
   digestion: [{ type: 'blight', amount: 3, durationTurns: 2 }],
   lacerate: [{ type: 'bleed', amount: 3, durationTurns: 3 }],
-  'death-lash': [],
+  'death-lash': [{ type: 'debuff', amount: 0, durationTurns: 1 }],
   'the-finger': [{ type: 'bleed', amount: 3, durationTurns: 3 }],
   'maul-the-flesh': [{ type: 'bleed', amount: 2, durationTurns: 3 }],
   'daze-the-mind': [{ type: 'stun', amount: 2, durationTurns: 2 }],
@@ -53,6 +57,7 @@ const SKILL_STRESS: Record<string, number> = {
   'death-lash': 1,
   'the-finger': 2,
   teleport: 2,
+  'echoing-disassembly': 2,
 };
 
 function skillNumberToId(requirementId: string, printedNumber: number): string {
@@ -148,12 +153,17 @@ export function runCommunityGuardianMonsterTurn(state: BattleState, monster: Bat
   const prefix = monster.sourceId.includes('templars-impaler') ? 'community-dd-skill-impaler-' : monster.sourceId.includes('templars-warlord') ? 'community-dd-skill-warlord-' : 'community-dd-skill-';
   const skill = skills.find((candidate) => candidate.id === `${prefix}${localSkill}`);
   if (!skill) return pushLog(state, `${monster.name} 缺少 Community skill ${localSkill}。`, 'warning');
-  const attackRoll = d10();
-  const outcome = resolveCommunityGuardianCritical(requirementId, localSkill, attackRoll, skill.accuracy ?? 7, skill.minDamage ?? 0);
+  const leaf = communitySpecialSkillLeaf(localSkill);
+  const attackRoll = leaf.attack === false ? 0 : d10();
+  const bonus = markedBonusDamage(localSkill, target);
+  const outcome = leaf.attack === false
+    ? { hit: true, critical: false, damage: 0 }
+    : resolveCommunityGuardianCritical(requirementId, localSkill, attackRoll, skill.accuracy ?? 7, skill.minDamage ?? 0);
+  const damage = outcome.hit ? outcome.damage + bonus : 0;
   let next = state;
   let tgt = target;
-  if (outcome.hit && outcome.damage > 0) {
-    const applied = applyBattleUnitDamage(tgt, outcome.damage);
+  if (outcome.hit && damage > 0) {
+    const applied = applyBattleUnitDamage(tgt, damage);
     tgt = applied.unit;
     next = setUnit(next, tgt);
     for (const log of applied.logs) next = pushLog(next, log, applied.heroDied ? 'danger' : 'warning');
@@ -168,6 +178,8 @@ export function runCommunityGuardianMonsterTurn(state: BattleState, monster: Bat
     tgt = { ...tgt, stress: Math.min(10, tgt.stress + skill.stress) };
     next = setUnit(next, tgt);
   }
+  const special = applyCommunityGuardianSpecialSkill(next, monster, tgt, localSkill, eventId, outcome.hit);
+  next = special.state;
   next = {
     ...next,
     communityAttackEvents: [...(next.communityAttackEvents ?? []), {
@@ -179,7 +191,13 @@ export function runCommunityGuardianMonsterTurn(state: BattleState, monster: Bat
       attackRoll,
       hit: outcome.hit,
       critical: outcome.critical,
-      damage: outcome.damage,
+      damage,
+      markedBonusDamage: special.markedBonus,
+      pitTossRoll: special.pitTossRoll,
+      pitTossAreaId: special.pitTossAreaId,
+      healAmount: special.healAmount,
+      undulationsBefore: special.undulationsBefore,
+      undulationsAfter: special.undulationsAfter,
     }],
   };
   next = pushLog(
