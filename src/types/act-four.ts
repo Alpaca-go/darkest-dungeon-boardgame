@@ -139,12 +139,32 @@ export interface CommunityPhysicalMonsterDrawRecord {
   instanceId: string;
   definitionId: string;
   transactionId: string;
+  /** WP-8：四槽填充时的 Stance 落位；单卡抽（如 Gestating）可省略。 */
+  stance?: string;
+  placementSide?: 'front' | 'back';
+  slotCount?: number;
+  large?: boolean;
 }
 
 export interface CommunityPhysicalMonsterReturnRecord {
   transactionId: string;
   returnedInstanceIds: string[];
   drawPileAfter: string[];
+}
+
+export interface CommunityPhysicalMonsterPlacement {
+  instanceId: string;
+  definitionId: string;
+  stance: string;
+  placementSide: 'front' | 'back';
+  slotCount: number;
+  large: boolean;
+}
+
+export interface CommunityPhysicalMonsterFillRecord {
+  transactionId: string;
+  placements: CommunityPhysicalMonsterPlacement[];
+  occupiedStances: string[];
 }
 
 export interface CommunityPhysicalMonsterDeckState {
@@ -157,6 +177,9 @@ export interface CommunityPhysicalMonsterDeckState {
   shuffleReceipt: { order: string[]; at: string };
   drawHistory: CommunityPhysicalMonsterDrawRecord[];
   returnHistory: CommunityPhysicalMonsterReturnRecord[];
+  /** WP-8：当前战斗中已放置的 Stance 占用（Front/Back 填充结果）。 */
+  activePlacements: CommunityPhysicalMonsterPlacement[];
+  fillHistory: CommunityPhysicalMonsterFillRecord[];
 }
 
 // ---------------------------------------------------------------------------

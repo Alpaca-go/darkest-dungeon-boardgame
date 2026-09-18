@@ -7,6 +7,7 @@ import { commitBattleVictory } from '../../../game-engine/commands/battle';
 import { executeMammothCystAction } from '../../../game-engine/bosses/mammoth-cyst/execute-mammoth-cyst-action';
 import { resolveEchoingDisassembly } from '../../../game-engine/bosses/shuffling-horror/echoing-disassembly-summon';
 import { appendShufflingSummonBattleUnits } from '../../../game-engine/bosses/shuffling-horror/shuffling-horror-runtime';
+import { shouldForceCommunityEchoingDisassembly } from '../../../game-engine/campaign/act-four/community-guardian-combat';
 import { createSaveSnapshot, migrateSaveFile, restoreSaveSnapshot, validateSaveFile } from '../../../game-engine/save';
 import { startFinalHamlet, advanceFinalHamletDay } from '../../../game-engine/campaign/act-four/final-hamlet';
 import { setRandomSource } from '../../../game-engine/random';
@@ -76,11 +77,19 @@ export function attack(actor: 'mammoth-cyst' | 'white-cell-stalk', skillRoll: nu
 export function communityAttack(actor: Exclude<CombatActor, 'mammoth-cyst' | 'white-cell-stalk'>, skillRoll: number, hitRoll: number) {
   const campaign = summonedActors.includes(actor as typeof summonedActors[number]) ? deployShufflingSummons() : scenario(actor as Actor);
   const hero = campaign.battle!.heroes.find(unit => unit.isAlive)!;
-  scriptedD10(skillRoll, hitRoll);
+  // asset:450ace:face：Horror 在 Stance 未满时强制 Echoing，不消耗 skill d10。
+  const horror = campaign.battle!.monsters.find((unit) => unit.sourceId === 'community-dd-shuffling-horror');
+  const forceEchoing = actor === 'shuffling-horror' && horror && shouldForceCommunityEchoingDisassembly(campaign.battle!, horror);
+  if (forceEchoing) scriptedD10(hitRoll);
+  else scriptedD10(skillRoll, hitRoll);
   const result = runMonsterTurn(campaign.battle!, targetId(campaign, actor));
   const event = result.communityAttackEvents?.at(-1);
   expect(event).toBeDefined();
   expect(event!.attackRoll).toBe(hitRoll);
+  if (forceEchoing) {
+    expect(event!.skillId).toContain('echoing-disassembly');
+    expect(event!.skillRoll).toBe(0);
+  }
   return { before: campaign.battle!, result, heroId: hero.id, campaign: { ...campaign, battle: result } };
 }
 

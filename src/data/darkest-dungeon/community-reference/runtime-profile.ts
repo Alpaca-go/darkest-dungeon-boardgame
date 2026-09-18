@@ -41,14 +41,17 @@ export const COMMUNITY_RUNTIME_BLOCKERS = [
   blocker('TEMPLARS_PIT_EXIT_RULE_UNRESOLVED', 'tierB-templars-room', 'pitExitRule', 'source-level'),
   blocker('GESTATING_HEART_LETHAL_TIMING_UNRESOLVED', 'tierB-gestating-heart', 'lethalWoundTimingRuling', 'source-level'),
   blocker('COME_UNTO_YOUR_MAKER_UNRESOLVED', 'tierB-come-unto-your-maker', 'definition', 'source-level'),
-  blocker('MONSTER_CARD_FRONT_BACK_SIZE_UNRESOLVED', 'tierB-darkest-dungeon-monster-deck', 'drawPolicy', 'source-level', 'per-card Front/Back/Large size for four-slot fill', 'drawDarkestDungeonMonster'),
-  blocker('GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED', 'runtime-guardian-combat', 'specialSkillEffectResolution', 'runtime-only'),
+  // Phase 11A.4R1 WP-9：GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED 已关闭 ——
+  // COMMUNITY_GUARDIAN_SKILL_COVERAGE 证明 implemented === productionTested === sourceInventory。
   // Phase 11A.4R1 WP-5：TEMPLARS_AREA_ADJACENCY_UNRESOLVED 已关闭 —— Room 9 拓扑由已接受
   // tileGeometry 轮廓派生（community-source-geometry COMMUNITY_ROOM9_EDGES），接线进
   // COMMUNITY_TEMPLARS_ROOM.areaGraph.edges 并被 Body Slam Pit Toss 消费。
   // Phase 11A.4R1 WP-7：MAMMOTH_STALK_NO_SPACE_RESOLUTION_ENGINE_UNSUPPORTED 已关闭 ——
   // Room 11 派生拓扑 + nearest-available / Displace Push 位移引擎（room-11-displacement）
   // 接线进 summonWhiteCellStalk；等距并列走显式玩家选择，不随机、不猜测。
+  // Phase 11A.4R1 WP-8：MONSTER_CARD_FRONT_BACK_SIZE_UNRESOLVED 已关闭 ——
+  // per-card Front/Back/Large 来自 COMMUNITY_PHYSICAL_MONSTER_CARD_ATTRIBUTES（卡面 type-line），
+  // fillCommunityOrdinaryMonsterEncounter 顶牌连抽至 4 Stance Slot 填满。
 ] as const;
 
 export function communityRequirement(requirementId: string) {
@@ -160,15 +163,11 @@ export const COMMUNITY_REFERENCE_RUNTIME_PROFILE = {
   monsterComposition: COMMUNITY_RUNTIME_MONSTER_COMPOSITION,
   unresolvedRules: Object.fromEntries(COMMUNITY_RUNTIME_BLOCKERS.map((item) => [item.code, item.classification === 'source-level' ? communityRequirement(item.requirementId).fields[item.field]?.value ?? null : null])) as Record<CommunityRuntimeBlockerCode, unknown>,
   runtimeBlockers: COMMUNITY_RUNTIME_BLOCKERS,
-  capabilities: { questPool: 'ready', layoutPool: 'ready', contentSnapshot: 'ready', guardian: { templars: 'partial', mammothCyst: 'ready', shufflingHorror: 'partial' }, monsterDeck: { definitions: 'ready', randomDraw: 'partial' }, finalEncounter: { ancestorFirst: 'ready', ancestorSecond: 'partial', gestatingHeart: 'partial', heartOfDarkness: 'partial' }, fullActFourPlayable: false },
+  capabilities: { questPool: 'ready', layoutPool: 'ready', contentSnapshot: 'ready', guardian: { templars: 'partial', mammothCyst: 'ready', shufflingHorror: 'partial' }, monsterDeck: { definitions: 'ready', randomDraw: 'ready' }, finalEncounter: { ancestorFirst: 'ready', ancestorSecond: 'partial', gestatingHeart: 'partial', heartOfDarkness: 'partial' }, fullActFourPlayable: false },
 } as const;
 
 export type CommunitySourceBlockedResult = { ok: false; kind: 'community-source-blocked'; blocker: CommunityRuntimeBlocker };
 export function blockCommunityOperation(code: CommunityRuntimeBlockerCode): CommunitySourceBlockedResult { const active = COMMUNITY_RUNTIME_BLOCKERS.find((item) => item.code === code); if (!active) throw new Error(`Unknown Community runtime blocker: ${code}`); return { ok: false, kind: 'community-source-blocked', blocker: active }; }
-export function drawCommunityMonster(campaign: { actFourState: ActFourState }): CommunitySourceBlockedResult {
-  void campaign;
-  return blockCommunityOperation('MONSTER_CARD_FRONT_BACK_SIZE_UNRESOLVED');
-}
 
 export function validateCommunitySetupSnapshot(state: ActFourState): string[] {
   const errors: string[] = [];
@@ -190,7 +189,8 @@ export function validateCommunityRuntimeProfile(profile: typeof COMMUNITY_REFERE
   if (profile.monsterComposition.reduce((total, monster) => total + monster.physicalInstances.length, 0) !== 26 || profile.monsterComposition.length !== 9) errors.push('monster composition must be 26 physical / 9 logical');
   if (definitions.some((definition) => !definition.id.startsWith('community-') || definition.id.startsWith('prototype-') || definition.enabledInOfficialPool !== false)) errors.push('Community identity or official-pool isolation failure');
   if (definitions.some((definition) => definition.officialDataStatus === 'verified')) errors.push('Community definitions must not masquerade as official verified data');
-  if (profile.runtimeBlockers.length < 7 || profile.runtimeBlockers.some((item) => profile.unresolvedRules[item.code] !== null)) errors.push('active source/runtime blockers must remain explicit');
+  // Final×2 + Pit Exit + Gestating + Come Unto（WP-8 Front/Back、WP-9 Special Skill 已关闭）。
+  if (profile.runtimeBlockers.length < 5 || profile.runtimeBlockers.some((item) => profile.unresolvedRules[item.code] !== null)) errors.push('active source/runtime blockers must remain explicit');
   if (String(profile.capabilities.monsterDeck.randomDraw) === 'prototype' || profile.capabilities.fullActFourPlayable !== false) errors.push('Community runtime must fail closed');
   if (profile.contentHash !== computeCommunityReferenceContentHash(profile.sourcePackageSha256, profile.artifactIdentities)) errors.push('content hash artifact identity mismatch');
   return errors;

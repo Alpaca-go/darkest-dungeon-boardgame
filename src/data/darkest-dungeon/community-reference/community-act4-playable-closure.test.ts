@@ -12,7 +12,7 @@ import { COMMUNITY_RUNTIME_BLOCKERS } from './runtime-profile';
 import { setupFinalFormRuntime } from '../../../game-engine/campaign/act-four/final-forms/final-form-runtime';
 import { rollFinalFormAncestorTeleport } from '../../../game-engine/campaign/act-four/final-forms/final-form-actions';
 import { getAncestorSecondFormInitiativeActorCount, isAbsoluteNothingnessTargetable } from '../../../game-engine/campaign/act-four/final-forms/ancestor-second-form';
-import { returnCommunityPhysicalMonstersFromBattle, COMMUNITY_PHYSICAL_MONSTER_DECK_SIZE } from '../../../game-engine/campaign/act-four/community-physical-monster-deck';
+import { returnCommunityPhysicalMonstersFromBattle, COMMUNITY_PHYSICAL_MONSTER_DECK_SIZE, drawCommunityMonster } from '../../../game-engine/campaign/act-four/community-physical-monster-deck';
 
 const chooseFood = () => 'food' as const;
 
@@ -57,6 +57,19 @@ describe('Community Act IV playable-closure production', () => {
     expect(result.ok).toBe(true);
     expect(result.campaign.actFourState.contentRuntime!.physicalMonsterDeck!.inBattle).toEqual([top]);
     expect(result.monsterDefinitionId).toBe(deck.instanceToDefinitionId[top]);
+  });
+
+  it('PC05b ordinary fill places four Front/Back monsters into distinct Stance slots', () => {
+    const campaign = createCommunityGuardianScenario(0);
+    const filled = drawCommunityMonster(campaign, 'pc05b-fill');
+    expect(filled.ok).toBe(true);
+    expect(filled.placements.map((item) => item.stance).sort()).toEqual(['aggressive', 'defensive', 'ranged', 'support']);
+    expect(filled.placements.every((item) => item.placementSide === 'front' || item.placementSide === 'back')).toBe(true);
+    const replay = drawCommunityMonster(filled.campaign, 'pc05b-fill');
+    expect(replay.placements).toEqual(filled.placements);
+    expect(replay.campaign.actFourState.contentRuntime!.physicalMonsterDeck!.drawPile).toEqual(
+      filled.campaign.actFourState.contentRuntime!.physicalMonsterDeck!.drawPile,
+    );
   });
 
   it('PC06 used cards shuffle back at Battle End', () => {
@@ -115,7 +128,8 @@ describe('Community Act IV playable-closure production', () => {
   });
 
   it('PC11 remaining source blockers stay explicit', () => {
-    const remaining = ['TEMPLARS_PIT_EXIT_RULE_UNRESOLVED', 'GESTATING_HEART_LETHAL_TIMING_UNRESOLVED', 'COME_UNTO_YOUR_MAKER_UNRESOLVED', 'MONSTER_CARD_FRONT_BACK_SIZE_UNRESOLVED'];
+    const remaining = ['TEMPLARS_PIT_EXIT_RULE_UNRESOLVED', 'GESTATING_HEART_LETHAL_TIMING_UNRESOLVED', 'COME_UNTO_YOUR_MAKER_UNRESOLVED'];
     expect(remaining.every((code) => COMMUNITY_RUNTIME_BLOCKERS.some((blocker) => blocker.code === code))).toBe(true);
+    expect(COMMUNITY_RUNTIME_BLOCKERS.some((blocker) => blocker.code === 'MONSTER_CARD_FRONT_BACK_SIZE_UNRESOLVED')).toBe(false);
   });
 });

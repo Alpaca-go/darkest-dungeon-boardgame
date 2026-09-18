@@ -32,7 +32,8 @@ describe('Community Guardian semantic acceptance', () => {
   it('G11 teleport map trace', () => expect(Object.values(COMMUNITY_MAMMOTH_CYST_ROOM.teleportationD10Map)).toEqual(['r11-teleport-1-2','r11-teleport-1-2','r11-teleport-3-4','r11-teleport-3-4','r11-teleport-5-6','r11-teleport-5-6','r11-teleport-7-8','r11-teleport-7-8','r11-teleport-9-10','r11-teleport-9-10']));
   it('G12 spawn and no-space semantics are classified leaf-by-leaf', () => {
     expect(COMMUNITY_RUNTIME_FIELD_COVERAGE.find((entry) => entry.requirementId === 'tierB-mammoth-cyst-room' && entry.sourcePath === 'spawnAreaPolicy.stanceToArea')?.classification).toBe('consumed');
-    expect(COMMUNITY_RUNTIME_FIELD_COVERAGE.find((entry) => entry.requirementId === 'tierB-mammoth-cyst-room' && entry.sourcePath === 'spawnAreaPolicy.noSpace')?.classification).toBe('engine-unsupported-blocker');
+    // Phase 11A.4R1 WP-7：no-space 已接线 nearest-available displacement，不再是 engine-unsupported。
+    expect(COMMUNITY_RUNTIME_FIELD_COVERAGE.find((entry) => entry.requirementId === 'tierB-mammoth-cyst-room' && entry.sourcePath === 'spawnAreaPolicy.noSpace')?.classification).toBe('consumed');
   });
   it('G13 Shuffling Horror setup preserves Community mode', () => expect(createCommunityGuardianScenario(0).actFourState.shufflingHorrorEncounterState?.mode).toBe('community-reference'));
   it('G14 Priest and Growth reserve identities', () => expect(createCommunityGuardianScenario(0).actFourState.shufflingHorrorEncounterState?.actors.filter((actor) => actor.inReserve).map((actor) => actor.actorId)).toEqual(['u_community-dd-cultist-priest', 'u_community-dd-malignant-growth']));

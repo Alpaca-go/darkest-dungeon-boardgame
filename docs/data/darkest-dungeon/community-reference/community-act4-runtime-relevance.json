@@ -5,17 +5,6 @@
   "terminalVerdictHint": "COMMUNITY-ACT-IV-INTEGRATION-PARTIAL",
   "items": [
     {
-      "blockerCode": "MONSTER_CARD_FRONT_BACK_SIZE_UNRESOLVED",
-      "sourceVerdict": "split-from-resolved",
-      "referencedByAcceptedCommunityRuntime": true,
-      "reachableProductionEntryPoints": ["drawDarkestDungeonMonster", "ordinary Darkest Dungeon room encounter fill"],
-      "possibleUserActions": ["draw the next physical Monster card into four Stance slots"],
-      "blocksRoute": ["ordinary DD Monster encounters on all three Quest routes"],
-      "classification": "runtime-blocking",
-      "reason": "Physical 26-card shuffle, top-card draw and Battle End return are consumed. Per-card Front/Back/Large size needed to fill four Stance slots remains unknown.",
-      "proofTests": ["PC05", "P03", "M03"]
-    },
-    {
       "blockerCode": "SHUFFLING_ROOM10_NON_AGGRESSIVE_STANCE_AREA_UNRESOLVED",
       "sourceVerdict": "split-from-resolved",
       "referencedByAcceptedCommunityRuntime": true,
@@ -38,17 +27,6 @@
       "proofTests": ["R2", "P15", "G07"]
     },
     {
-      "blockerCode": "TEMPLARS_AREA_ADJACENCY_UNRESOLVED",
-      "sourceVerdict": "partially-resolved",
-      "referencedByAcceptedCommunityRuntime": true,
-      "reachableProductionEntryPoints": ["Templar Body Slam / Pit Toss destination", "Room 9 movement"],
-      "possibleUserActions": ["move between Room 9 areas", "resolve Pit Toss destination legality"],
-      "blocksRoute": ["Light the Way"],
-      "classification": "runtime-blocking",
-      "reason": "Area inventory, capacities and pit identities are known. No accepted textual adjacency graph was promoted from artwork.",
-      "proofTests": ["P16", "R2"]
-    },
-    {
       "blockerCode": "GESTATING_HEART_LETHAL_TIMING_UNRESOLVED",
       "sourceVerdict": "partially-resolved",
       "referencedByAcceptedCommunityRuntime": true,
@@ -69,17 +47,6 @@
       "classification": "leaf-blocking",
       "reason": "Heart of Darkness is an accepted Community Final form. The skill remains source-unresolved. Videogame behavior is rejected. Source is not marked resolved.",
       "proofTests": ["P17", "F11", "N07"]
-    },
-    {
-      "blockerCode": "MAMMOTH_STALK_NO_SPACE_RESOLUTION_ENGINE_UNSUPPORTED",
-      "sourceVerdict": "partially-resolved",
-      "referencedByAcceptedCommunityRuntime": true,
-      "reachableProductionEntryPoints": ["summonWhiteCellStalk"],
-      "possibleUserActions": ["summon White Cell Stalk when the corresponding area is full"],
-      "blocksRoute": ["Belly of the Beast no-space summon branch"],
-      "classification": "leaf-blocking",
-      "reason": "Ordinary Stalk summon is production-reachable. Nearest/tie/path displacement when no space remains is not invented.",
-      "proofTests": ["T52-equivalent community-runtime-truth-gate"]
     },
     {
       "blockerCode": "SHUFFLING_SUMMON_RESISTANCE_ENGINE_UNSUPPORTED",
@@ -157,17 +124,6 @@
       "classification": "leaf-blocking",
       "reason": "Categorical shuffle resistance remains an engine gap. Room 9 adjacency is not invented to close Templar shuffle.",
       "proofTests": ["A23"]
-    },
-    {
-      "blockerCode": "GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED",
-      "sourceVerdict": "partially-resolved",
-      "referencedByAcceptedCommunityRuntime": true,
-      "reachableProductionEntryPoints": ["Guardian special-skill resolution"],
-      "possibleUserActions": ["resolve a Guardian special-effect leaf"],
-      "blocksRoute": ["Guardian special-skill leaves whose dependsOn remain open"],
-      "classification": "leaf-blocking",
-      "reason": "Source-complete leaves with available primitives and empty dependsOn remain the only candidates. Body Slam, Displace, Echoing and Finger stay blocked by their exact dependencies.",
-      "proofTests": ["G16"]
     }
   ]
 }

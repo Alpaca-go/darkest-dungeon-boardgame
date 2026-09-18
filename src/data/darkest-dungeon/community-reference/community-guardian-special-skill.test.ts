@@ -1,11 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { attack, communityAttack, reload, scriptedD10, scenario, targetId } from './capability-test-support';
+import { attack, communityAttack, deployShufflingSummons, reload, scriptedD10, scenario, summon, targetId } from './capability-test-support';
 import {
   applyCommunityGuardianSpecialSkill,
   communitySpecialSkillLeaf,
   markedBonusDamage,
 } from '../../../game-engine/campaign/act-four/community-guardian-special-skills';
 import { getCommunityHeroRoomArea } from '../../../game-engine/campaign/act-four/community-guardian-room-state';
+import { shouldForceCommunityEchoingDisassembly } from '../../../game-engine/campaign/act-four/community-guardian-combat';
 import { executeMammothCystAction } from '../../../game-engine/bosses/mammoth-cyst/execute-mammoth-cyst-action';
 import { resolveSummonDisplacementChoice, summonWhiteCellStalk } from '../../../game-engine/bosses/mammoth-cyst/summon-white-cell-stalk';
 import { createCommunityGuardianScenario } from '../../../testing/scenarios/community-runtime-scenario';
@@ -16,6 +17,17 @@ describe('Community Guardian special skill production', () => {
   // ---------------------------------------------------------------------------
   // WP-1 Templars
   // ---------------------------------------------------------------------------
+  it('Torment deals damage on the production Monster Turn path', () => {
+    const { before, result, heroId } = communityAttack('templars-impaler', 1, 1);
+    const event = result.communityAttackEvents!.at(-1)!;
+    expect(event.skillId).toContain('torment');
+    expect(event.hit).toBe(true);
+    expect(event.damage).toBeGreaterThan(0);
+    const beforeHp = before.heroes.find((unit) => unit.id === heroId)!.hp;
+    const afterHp = result.heroes.find((unit) => unit.id === heroId)!.hp;
+    expect(afterHp).toBeLessThan(beforeHp);
+  });
+
   it('Body Slam moves the Hero into the mapped Pit Area (not event-only)', () => {
     const { result, heroId, campaign } = communityAttack('templars-impaler', 6, 1);
     const event = result.communityAttackEvents!.at(-1)!;
@@ -80,6 +92,19 @@ describe('Community Guardian special skill production', () => {
   // ---------------------------------------------------------------------------
   // WP-3 Shuffling
   // ---------------------------------------------------------------------------
+  it('Lacerate applies Bleed 3/3 on the production Monster Turn path', () => {
+    // Stance 已满时才走 d10；rolls 1–7 → Lacerate。
+    const campaign = deployShufflingSummons();
+    const before = campaign.battle!;
+    const hero = before.heroes.find((unit) => unit.isAlive)!;
+    scriptedD10(1, 1);
+    const result = runMonsterTurn(before, targetId(campaign, 'shuffling-horror'));
+    const event = result.communityAttackEvents!.at(-1)!;
+    expect(event.skillId).toContain('lacerate');
+    expect(event.hit).toBe(true);
+    expect(result.heroes.find((unit) => unit.id === hero.id)!.bleed).toBe(3);
+  });
+
   it('The Finger marked bonus enters the damage pipeline', () => {
     expect(communitySpecialSkillLeaf('the-finger')).toMatchObject({ markedBonusDamage: 5 });
     const { before, heroId } = communityAttack('cultist-priest', 8, 1);
@@ -102,10 +127,9 @@ describe('Community Guardian special skill production', () => {
   });
 
   it('Undulations production Monster Turn redistributes living Heroes onto Stance slots', () => {
-    // rolls 8–10 → Undulations；leaf.attack=false → 不掷 attackRoll。
-    // 规则书语义：取下全部 Stance Token → 洗混 → 从 Aggressive 到 Support 放回
-    // （非「保留原 stance 多重集」；每人落到唯一 Stance）。
-    const campaign = scenario('shuffling-horror');
+    // rolls 8–10 → Undulations；仅当 Stance 已满（Priest+Growth 在场）时才走 d10，
+    // 否则 Ability Card 强制 Echoing（asset:450ace:face）。
+    const campaign = deployShufflingSummons();
     const before = campaign.battle!;
     const living = before.heroes.filter((hero) => hero.isAlive);
     scriptedD10(9);
@@ -120,9 +144,9 @@ describe('Community Guardian special skill production', () => {
     expect(new Set(afterLiving.map((hero) => hero.stance)).size).toBe(afterLiving.length);
   });
 
-  it('Echoing Disassembly is absent from the Shuffling Horror d10 table (SOURCE GAP)', () => {
-    // 规范化来源把 Echoing 标为 printedNumber=3，但 d10SkillTable 只映射 1/2。
-    // 在补齐来源映射之前，生产 Monster Turn 无法选中该技能 —— 见会话暂停说明。
+  it('Echoing Disassembly is forced when Monster Stance slots are not filled (not a d10 skill)', () => {
+    // asset:450ace:face：If not all Stance Slots for Monsters are filled → will use Echoing.
+    // asset:ccf3dc:face：d10 仅映射 Skill 1/2；Skill 3 无骰点区间 —— 不得发明映射。
     const table = requirement('tierB-shuffling-horror').fields.d10SkillTable.value as Array<{
       ranges: Array<{ printedSkillNumber: number }>;
     }>;
@@ -130,6 +154,63 @@ describe('Community Guardian special skill production', () => {
     expect(numbers.has(3)).toBe(false);
     expect(numbers.has(1)).toBe(true);
     expect(numbers.has(2)).toBe(true);
+
+    const campaign = scenario('shuffling-horror');
+    const before = campaign.battle!;
+    expect(before.monsters.some((unit) => unit.sourceId === 'community-dd-cultist-priest' && unit.isAlive)).toBe(false);
+    expect(before.monsters.some((unit) => unit.sourceId === 'community-dd-malignant-growth' && unit.isAlive)).toBe(false);
+    const beforeLight = before.light ?? 0;
+    const hero = before.heroes.find((unit) => unit.isAlive)!;
+    // 强制路径不消耗 skill d10；仅命中骰（Acc 12 → d10 必中）。
+    scriptedD10(1);
+    const result = runMonsterTurn(before, targetId(campaign, 'shuffling-horror'));
+    const event = result.communityAttackEvents!.at(-1)!;
+    expect(event.skillId).toContain('echoing-disassembly');
+    expect(event.skillRoll).toBe(0);
+    expect(event.hit).toBe(true);
+    expect(event.summonedRoles).toEqual(['cultist-priest', 'malignant-growth']);
+    expect(result.monsters.some((unit) => unit.sourceId === 'community-dd-cultist-priest' && unit.isAlive)).toBe(true);
+    expect(result.monsters.some((unit) => unit.sourceId === 'community-dd-malignant-growth' && unit.isAlive)).toBe(true);
+    expect(result.heroes.find((unit) => unit.id === hero.id)!.stress - hero.stress).toBe(2);
+    expect((result.light ?? 0) - beforeLight).toBe(-1);
+  });
+
+  it('Echoing Disassembly is not forced once Priest and Growth are already in play', () => {
+    const campaign = deployShufflingSummons();
+    const before = campaign.battle!;
+    expect(shouldForceCommunityEchoingDisassembly(before, before.monsters.find((unit) => unit.sourceId === 'community-dd-shuffling-horror')!)).toBe(false);
+    scriptedD10(9, 1);
+    const result = runMonsterTurn(before, targetId(campaign, 'shuffling-horror'));
+    const event = result.communityAttackEvents!.at(-1)!;
+    expect(event.skillId).toContain('undulations');
+    expect(event.skillRoll).toBe(9);
+  });
+
+  it('Death Lash applies Debuff 1 and Stress +1 on hit', () => {
+    const { before, result, heroId } = communityAttack('cultist-priest', 1, 1);
+    const event = result.communityAttackEvents!.at(-1)!;
+    expect(event.skillId).toContain('death-lash');
+    expect(event.hit).toBe(true);
+    const beforeHero = before.heroes.find((unit) => unit.id === heroId)!;
+    const afterHero = result.heroes.find((unit) => unit.id === heroId)!;
+    expect(afterHero.stress - beforeHero.stress).toBe(1);
+    expect(afterHero.debuffs.some((effect) => effect.type === 'debuff' && effect.durationTurns === 1)).toBe(true);
+  });
+
+  it('Maul the Flesh applies Bleed 2/3 on hit', () => {
+    const { result, heroId } = communityAttack('malignant-growth', 1, 1);
+    const event = result.communityAttackEvents!.at(-1)!;
+    expect(event.skillId).toContain('maul-the-flesh');
+    expect(event.hit).toBe(true);
+    expect(result.heroes.find((unit) => unit.id === heroId)!.bleed).toBe(2);
+  });
+
+  it('Daze the Mind applies Stun 2 turns on hit', () => {
+    const { result, heroId } = communityAttack('malignant-growth', 6, 1);
+    const event = result.communityAttackEvents!.at(-1)!;
+    expect(event.skillId).toContain('daze-the-mind');
+    expect(event.hit).toBe(true);
+    expect(result.heroes.find((unit) => unit.id === heroId)!.stunned).toBeGreaterThan(0);
   });
 
   // ---------------------------------------------------------------------------
@@ -172,6 +253,77 @@ describe('Community Guardian special skill production', () => {
     const after = result.state!.actorStates.find((actor) => actor.actorId === cyst.actorId)!;
     expect(after.hp).toBeLessThanOrEqual(after.maxHp);
     expect(after.hp).toBe(cyst.hp - 5);
+  });
+
+  it('Reconstitute heals Mammoth Cyst by 14 and applies Buff 2 turns', () => {
+    const campaign = summon();
+    const state = campaign.actFourState.mammothCystEncounterState!;
+    const cyst = state.actorStates.find((actor) => actor.owner === 'mammoth-cyst')!;
+    const wounded = {
+      ...state,
+      actorStates: state.actorStates.map((actor) =>
+        actor.actorId === cyst.actorId ? { ...actor, hp: Math.max(1, actor.hp - 20) } : actor,
+      ),
+    };
+    const prepared = { ...campaign, actFourState: { ...campaign.actFourState, mammothCystEncounterState: wounded } };
+    const card = wounded.initiativeCards.find((item) => item.owner === 'white-cell-stalk')!;
+    const result = executeMammothCystAction(prepared, card.id, {
+      mode: 'community-reference',
+      targetMonsterActorId: cyst.actorId,
+      rng: () => (1 - 0.5) / 10, // skill roll 1 → Reconstitute
+      now: '2026-09-12T00:00:03.000Z',
+    });
+    expect(result.ok, result.reason ?? '').toBe(true);
+    expect(result.skill?.id).toContain('reconstitute');
+    expect(result.skill?.specialEffect).toEqual({ type: 'heal-monster', amount: 14, target: 'ally' });
+    const after = result.state!.actorStates.find((actor) => actor.actorId === cyst.actorId)!;
+    expect(after.hp).toBe(Math.min(cyst.maxHp, cyst.hp - 20 + 14));
+  });
+
+  it('Displace applies Debuff 2 and starts Room 11 Push 2', () => {
+    const { before, result, heroId } = attack('white-cell-stalk', 4, 1);
+    expect(result.skill?.id).toContain('displace');
+    expect(result.ok).toBe(true);
+    const battleHero = result.campaign.battle!.heroes.find((unit) => unit.sourceId === heroId)!;
+    expect(battleHero.debuffs.some((effect) => effect.type === 'debuff' && effect.durationTurns === 2)).toBe(true);
+    // Push：唯一路径自动落定写入 history；多路径挂起 pending；零路径 cut short 仍会登记 :start。
+    const beforeArea = before.actFourState.mammothCystEncounterState!.heroPlacements.find((p) => p.heroId === heroId)?.areaId;
+    const afterArea = result.state!.heroPlacements.find((p) => p.heroId === heroId)?.areaId;
+    const pushStarted = result.state!.processedTransactionIds.some((id) => id.includes('mammoth-cyst-displace:') && id.endsWith(':start'));
+    const displaced =
+      result.pendingChoice?.kind === 'displace-push'
+      || (result.state!.displacementHistory?.some((record) => record.kind === 'displace-push') ?? false)
+      || (beforeArea !== undefined && afterArea !== undefined && beforeArea !== afterArea)
+      || pushStarted;
+    expect(displaced).toBe(true);
+  });
+
+  it('Teleport applies Stress +2 then Room 11 d10 relocation', () => {
+    const campaign = summon();
+    const state = campaign.actFourState.mammothCystEncounterState!;
+    const card = state.initiativeCards.find((item) => item.owner === 'white-cell-stalk')!;
+    const heroId = campaign.heroes[0].instanceId;
+    const beforeArea = state.heroPlacements.find((p) => p.heroId === heroId)?.areaId;
+    const rolls = [8, 1, 1]; // skill → Teleport, hit, Room 11 map
+    const result = executeMammothCystAction(campaign, card.id, {
+      mode: 'community-reference',
+      targetHeroId: heroId,
+      rng: () => {
+        const roll = rolls.shift();
+        if (roll === undefined) throw new Error('Teleport used unexpected extra RNG');
+        return (roll - 0.5) / 10;
+      },
+      now: '2026-09-12T00:00:04.000Z',
+    });
+    expect(result.ok, result.reason ?? '').toBe(true);
+    expect(result.skill?.id).toContain('teleport');
+    expect(result.stressDealt).toBe(2);
+    expect(result.teleportation).not.toBeNull();
+    expect(result.teleportation!.targetAreaId).toBeTruthy();
+    const afterArea = result.state!.heroPlacements.find((p) => p.heroId === heroId)?.areaId;
+    expect(afterArea).toBe(result.teleportation!.targetAreaId);
+    expect(result.teleportation!.originalAreaId).toBe(beforeArea);
+    expect(rolls).toEqual([]);
   });
 
   it('WP-7 no-space choice resolution completes the summon atomically', () => {

@@ -74,11 +74,26 @@ export function selectCommunityGuardianSkillId(requirementId: string, stance: st
     if (table.dieRollRequired === false) return skillNumberToId(requirementId, 1);
     throw new Error(`Unsupported Community d10 table on ${requirementId}`);
   }
-  const wanted = stance || 'aggressive';
-  const row = table.find((entry) => entry.stances.includes(wanted)) ?? table[0];
-  const range = row.ranges.find((entry) => entry.rolls.includes(roll));
-  if (!range) throw new Error(`No Community skill for ${requirementId} stance ${wanted} roll ${roll}`);
+  const row = table.find((entry) => entry.stances.includes(stance));
+  if (!row) throw new Error(`No d10 row for stance ${stance} on ${requirementId}`);
+  const range = row.ranges.find((candidate) => candidate.rolls.includes(roll));
+  if (!range) throw new Error(`No d10 mapping for roll ${roll} on ${requirementId}/${stance}`);
   return skillNumberToId(requirementId, range.printedSkillNumber);
+}
+
+/**
+ * asset:450ace:face verified（GUID 450ace / CardID 42032 Ability Card）：
+ * 「If not all Stance Slots for Monsters are filled, Shuffling Horror will use this Skill.」
+ *
+ * Battle 层代理：Cultist Priest / Malignant Growth 任一未以存活单位在场
+ * → Stance Slot 未填满 → 强制 Echoing Disassembly（替换普通 d10 选技，不发明 d10 映射）。
+ * Battle Card（ccf3dc / 46616）的 d10 仅映射 Skill 1/2；Skill 3 无骰点区间。
+ */
+export function shouldForceCommunityEchoingDisassembly(state: BattleState, monster: BattleUnit): boolean {
+  if (monster.sourceId !== 'community-dd-shuffling-horror') return false;
+  const priestAlive = state.monsters.some((unit) => unit.sourceId === 'community-dd-cultist-priest' && unit.isAlive);
+  const growthAlive = state.monsters.some((unit) => unit.sourceId === 'community-dd-malignant-growth' && unit.isAlive);
+  return !(priestAlive && growthAlive);
 }
 
 export function communityGuardianMonsterSkills(): MonsterSkillDefinition[] {
@@ -146,10 +161,15 @@ export function runCommunityGuardianMonsterTurn(state: BattleState, monster: Bat
 
   // WP-4：先定 Skill 再按统一 Resolver 定目标（rulebook 顺序：Check Skill → Check Target）。
   // 重放（saved）时不掷技能骰 —— 从已保存的 skillId 反推 localSkill，保证零 RNG 消耗。
-  const skillRoll = saved ? saved.skillRoll : d10();
+  // WP-3 / asset:450ace:face：Shuffling Horror 在 Monster Stance 未满时强制 Echoing，
+  // 跳过 d10 选技（Battle Card 未给 Skill 3 分配骰点区间，绝不发明映射）。
+  const forcedEchoing = !saved && shouldForceCommunityEchoingDisassembly(state, monster);
+  const skillRoll = saved ? saved.skillRoll : forcedEchoing ? 0 : d10();
   const localSkill = saved
     ? saved.skillId.slice(prefix.length)
-    : selectCommunityGuardianSkillId(requirementId, monster.stance ?? 'aggressive', skillRoll);
+    : forcedEchoing
+      ? 'echoing-disassembly'
+      : selectCommunityGuardianSkillId(requirementId, monster.stance ?? 'aggressive', skillRoll);
   const skills = communityGuardianMonsterSkills();
   const skill = skills.find((candidate) => candidate.id === `${prefix}${localSkill}`);
   if (!skill) return pushLog(state, `${monster.name} 缺少 Community skill ${localSkill}。`, 'warning');

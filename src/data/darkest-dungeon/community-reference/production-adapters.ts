@@ -101,7 +101,9 @@ function mammothSkills(requirementId: string, stance: string): MammothCystSkillD
     const skillDamage = specialEffect ? null : requireCommunityNumber(damage[localId], `${requirementId}.damage.${localId}`);
     // WP-2：卡面 Stress（dossier leaf）——Teleport +2、Bulging Gaze +1，其余 0。
     const skillStress = localId === 'teleport' ? 2 : localId === 'bulging-gaze' ? 1 : 0;
-    return { id: id(`skill-${localId}`), actorDefinitionId: actorId, name: skill.printedName, d10Rolls: rollsFor(d10, stance, skill.printedNumber) as MammothRoll[], usableFromAreaIds: [], targetSide: localId === 'revivify' ? 'self' : localId === 'reconstitute' ? 'ally' : 'enemy', targetKind: localId === 'revivify' || localId === 'reconstitute' ? 'monster' : 'hero', accuracy: skillAccuracy, minDamage: skillDamage, maxDamage: skillDamage, stress: skillStress, specialEffect, triggersTeleportation: localId === 'teleport', teleportationMapId: localId === 'teleport' ? id('mammoth-cyst-teleport-map') : undefined, rollPolicy: 'definition-driven', requiresHit: specialEffect?.type === 'heal-monster' ? false : true, description: `Community retail card action: ${skill.printedName}`, officialDataStatus: 'partial', sourceReference: reference(requirementId, 'skillIds') };
+    // Teleportation 要求已核对的掷骰策略（resolve-teleportation 拒绝 definition-driven）。
+    const rollPolicy = localId === 'teleport' ? 'single-roll-for-all-targets' as const : 'definition-driven' as const;
+    return { id: id(`skill-${localId}`), actorDefinitionId: actorId, name: skill.printedName, d10Rolls: rollsFor(d10, stance, skill.printedNumber) as MammothRoll[], usableFromAreaIds: [], targetSide: localId === 'revivify' ? 'self' : localId === 'reconstitute' ? 'ally' : 'enemy', targetKind: localId === 'revivify' || localId === 'reconstitute' ? 'monster' : 'hero', accuracy: skillAccuracy, minDamage: skillDamage, maxDamage: skillDamage, stress: skillStress, specialEffect, triggersTeleportation: localId === 'teleport', teleportationMapId: localId === 'teleport' ? id('mammoth-cyst-teleport-map') : undefined, rollPolicy, requiresHit: specialEffect?.type === 'heal-monster' ? false : true, description: `Community retail card action: ${skill.printedName}`, officialDataStatus: 'partial', sourceReference: reference(requirementId, 'skillIds') };
   });
 }
 export const COMMUNITY_MAMMOTH_CYST: MammothCystActorDefinition = { id: id('mammoth-cyst'), actorType: 'boss', name: 'Mammoth Cyst', campaignLevel: 3, requiredStance: 'aggressive', actionsPerRound: 2, stats: actorStats('tierB-mammoth-cyst'), skills: mammothSkills('tierB-mammoth-cyst', 'aggressive'), color: '#991b1b', officialDataStatus: 'partial', sourceReference: reference('tierB-mammoth-cyst', 'maxHp'), enabledInOfficialPool: false };
@@ -173,7 +175,7 @@ export function validateCommunityMammothDefinitions(input: {
   if (revivify?.type !== 'heal-monster' || revivify.amount !== 15) issues.push('cyst.revivify');
   if (reconstitute?.type !== 'heal-monster' || reconstitute.amount !== 14) issues.push('stalk.reconstitute');
   if (input.stalk.skills.find((skill) => skill.id.endsWith('teleport'))?.specialEffect?.type !== 'teleport-hero') issues.push('stalk.teleport');
-  return { isComplete: missing.length === 0 && issues.length === 0, missing, issues, knownBlockers: ['GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED'] };
+  return { isComplete: missing.length === 0 && issues.length === 0, missing, issues, knownBlockers: [] };
 }
 
 export function validateCommunityShufflingDefinitions(specs = COMMUNITY_SHUFFLING_ACTORS, room = COMMUNITY_SHUFFLING_ROOM): CommunityDefinitionValidation {

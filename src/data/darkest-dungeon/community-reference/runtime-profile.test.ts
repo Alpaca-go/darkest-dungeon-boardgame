@@ -26,10 +26,10 @@ import {
   COMMUNITY_RUNTIME_BLOCKERS,
   blockCommunityOperation,
   computeCommunityReferenceContentHash,
-  drawCommunityMonster,
   validateCommunityRuntimeProfile,
   validateCommunitySetupSnapshot,
 } from './runtime-profile';
+import { drawCommunityMonster, communityPhysicalMonsterPlacementPolicyProof } from '../../../game-engine/campaign/act-four/community-physical-monster-deck';
 
 const HERO_IDS = ['crusader', 'vestal', 'highwayman', 'hellion'];
 const PROFILE = 'community-reference' as const;
@@ -207,6 +207,18 @@ describe('COMMUNITY PRODUCTION-PATH MATRIX', () => {
 
 describe('supported-path unresolved boundaries', () => {
   it.each(COMMUNITY_RUNTIME_BLOCKERS.map((item) => [item.code, item.requirementId, item.field] as const))('%s returns an explicit community-source blocker', (code, requirementId, field) => expect(blockCommunityOperation(code)).toMatchObject({ ok: false, kind: 'community-source-blocked', blocker: { code, requirementId, field, sourceAuthority: 'COMMUNITY_RETAIL_REFERENCE' } }));
-  it('Monster draw refuses saved-order and Prototype fallback', () => expect(drawCommunityMonster(productionSetup(0, 0)).blocker.code).toBe('MONSTER_CARD_FRONT_BACK_SIZE_UNRESOLVED'));
+  it('ordinary encounter fills four Stance slots from Front/Back source attributes', () => {
+    const campaign = productionSetup(0, 0);
+    const filled = drawCommunityMonster(campaign, 'wp8-fill-test');
+    expect(filled.ok).toBe(true);
+    expect(filled.placements).toHaveLength(4);
+    expect(new Set(filled.placements.map((item) => item.stance)).size).toBe(4);
+    expect(filled.placements.every((item) => item.large === false && item.slotCount === 1)).toBe(true);
+    const deck = filled.campaign.actFourState.contentRuntime!.physicalMonsterDeck!;
+    expect(deck.activePlacements).toHaveLength(4);
+    expect(deck.inBattle).toHaveLength(4);
+    expect(communityPhysicalMonsterPlacementPolicyProof().cards).toHaveLength(9);
+    expect(JSON.stringify(communityPhysicalMonsterPlacementPolicyProof())).not.toContain('prototype-');
+  });
   it('pins the profile to the accepted source package', () => expect(COMMUNITY_REFERENCE_SOURCE_SHA256).toBe(COMMUNITY_REFERENCE_RUNTIME_PROFILE.sourcePackageSha256));
 });

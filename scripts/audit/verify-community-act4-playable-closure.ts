@@ -38,12 +38,17 @@ const CLOSED = [
   'SHUFFLING_INITIAL_AREA_UNRESOLVED',
   'EXCAVATION_PROVISION_DIE_MAP_UNRESOLVED',
   'ABSOLUTE_NOTHINGNESS_STANCE_UNRESOLVED',
-];
-const SPLIT = [
+  // Phase 11A.4R1 closures:
+  'TEMPLARS_AREA_ADJACENCY_UNRESOLVED',
+  'MAMMOTH_STALK_NO_SPACE_RESOLUTION_ENGINE_UNSUPPORTED',
   'MONSTER_CARD_FRONT_BACK_SIZE_UNRESOLVED',
+  'GUARDIAN_SPECIAL_SKILL_ENGINE_UNSUPPORTED',
+];
+const SPLIT: string[] = [
+  // FRONT_BACK 已在 WP-8 关闭；Pit Exit 仍为 SOURCE-BLOCKED（不进 CLOSED，因从未“关闭”）。
 ];
 const SUITES = {
-  production: { file: 'src/data/darkest-dungeon/community-reference/community-act4-playable-closure.test.ts', expected: 11 },
+  production: { file: 'src/data/darkest-dungeon/community-reference/community-act4-playable-closure.test.ts', expected: 12 },
   routeMatrix: { file: 'src/data/darkest-dungeon/community-reference/community-act4-route-matrix.test.ts', expected: 5 },
   adversarial: { file: 'src/data/darkest-dungeon/community-reference/community-act4-playable-closure-adversarial.test.ts', expected: 20 },
   saveReplay: { file: 'src/data/darkest-dungeon/community-reference/community-act4-playable-closure-save-replay.test.ts', expected: 7 },

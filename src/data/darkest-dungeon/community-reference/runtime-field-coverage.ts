@@ -28,6 +28,8 @@ import {
   COMMUNITY_GUARDIAN_VICTORY_POLICIES,
   COMMUNITY_QUEST_PROVISION_POLICY,
 } from '../../../game-engine/campaign/act-four/community-engine-capabilities';
+import { COMMUNITY_MONSTER_DRAW_SEMANTIC } from './source-supplement-runtime';
+import { COMMUNITY_PHYSICAL_MONSTER_CARD_ATTRIBUTES } from './community-source-geometry';
 
 export type RuntimeFieldClassification = 'consumed' | 'explicit-source-blocker' | 'engine-unsupported-blocker' | 'display-only' | 'not-runtime-relevant';
 
@@ -187,7 +189,6 @@ const SOURCE_BLOCKERS: Record<string, CommunityRuntimeBlockerCode> = {
   'tierB-templars-room.pitExitRule': 'TEMPLARS_PIT_EXIT_RULE_UNRESOLVED',
   'tierB-gestating-heart.lethalWoundTimingRuling': 'GESTATING_HEART_LETHAL_TIMING_UNRESOLVED',
   'tierB-come-unto-your-maker.definition': 'COME_UNTO_YOUR_MAKER_UNRESOLVED',
-  'tierB-darkest-dungeon-monster-deck.drawPolicy': 'MONSTER_CARD_FRONT_BACK_SIZE_UNRESOLVED',
 };
 
 const actorFor = (id: string, env: CommunityRuntimeProjectionEnvironment): any => ({
@@ -375,6 +376,27 @@ for (const req of NORMALIZED_CORPUS.requirements) {
     if (req.requirementId === 'tierB-darkest-dungeon-monster-deck') {
       if (field === 'deckComposition') add(req.requirementId, field, 'consumed', { field, runtimeSelectorId: 'profile.monsterComposition.physicalInstances', runtimeSelector: env => env.profile.monsterComposition.map(monster => ({ sourceLocalMonsterDefinitionId: monster.sourceLocalMonsterDefinitionId, count: monster.physicalInstances.length, members: monster.physicalInstances.map(member => ({ guid: member.guid, cardId: member.cardId })) })), normalizeSource: value => (value as any).composition.map((monster: any) => ({ sourceLocalMonsterDefinitionId: monster.sourceLocalMonsterDefinitionId, count: monster.count, members: monster.members })), normalizerId: 'monster-composition.v1' });
       else if (field === 'monsterDefinitionIds') add(req.requirementId, field, 'consumed', { field, runtimeSelectorId: 'profile.monsterComposition.ids', runtimeSelector: env => env.profile.monsterComposition.map(monster => monster.sourceLocalMonsterDefinitionId), normalizeSource: value => (value as any[]).map(monster => monster.sourceLocalMonsterDefinitionId), normalizerId: 'monster-local-ids.v1' });
+      else if (field === 'drawPolicy') {
+        // Corpus drawPolicy 仍为 null（validate blocked）；生产策略由 supplement + 卡面 Front/Back 表证明。
+        const proof = () => ({
+          draw: COMMUNITY_MONSTER_DRAW_SEMANTIC.draw,
+          stanceSlots: 4,
+          largeUsesTwoSlots: COMMUNITY_MONSTER_DRAW_SEMANTIC.largeUsesTwoSlots,
+          cards: COMMUNITY_PHYSICAL_MONSTER_CARD_ATTRIBUTES.map((card) => ({
+            sourceLocalMonsterDefinitionId: card.sourceLocalMonsterDefinitionId,
+            placementSide: card.placementSide,
+            large: card.large,
+            slotCount: card.slotCount,
+          })),
+        });
+        add(req.requirementId, field, 'consumed', {
+          field,
+          sourceSelector: proof,
+          runtimeSelectorId: 'monsterDeck.frontBackFill',
+          runtimeSelector: proof,
+          normalizerId: 'monster-front-back-fill.v1',
+        });
+      }
       continue;
     }
 
