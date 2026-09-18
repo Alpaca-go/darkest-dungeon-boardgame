@@ -19,7 +19,11 @@ const chooseFood = () => 'food' as const;
 beforeEach(() => { setRuntimeSources(seededRuntimeSources(1203)); setRandomSource(() => 0.49); });
 afterEach(() => setRandomSource(null));
 
-describe('Community Act IV three-route matrix', () => {
+// Phase 11A.4R2A WP-16：本矩阵使用 createCommunityGuardianScenario() 作为 Guardian 起点，
+// 因此它是 **Guardian→Final segment integration matrix**，不是 full Quest→Campaign route acceptance。
+// 完整 Quest → Dungeon → Guardian → Final Hamlet → Final → Campaign result 的连续验收留给 R3。
+// R2A 期间禁止据此将 manualPlaytestCandidate 设为 true。
+describe('Community Act IV segment integration matrix (Guardian→Final; full route acceptance reserved for R3)', () => {
   it('R1 We Are The Flame reaches first Final Form through Guardian victory then a real transition', () => {
     const campaign = createCommunityGuardianScenario(0);
     expect(campaign.actFourState.questDrawRecord?.selectedQuestId).toBe(COMMUNITY_RUNTIME_QUESTS[0].id);
