@@ -2,6 +2,7 @@ import type { ActiveEffect, BattleState, BattleUnit, CampaignState, Stance } fro
 import type { ReflectionKind } from '../../../types/final-forms';
 import { applyBattleUnitDamage } from '../../damage';
 import { applyStatusEffectEvent } from '../../status-effects';
+import { applyStress } from '../../stress';
 import { findUnit } from '../../initiative';
 import { d10 } from '../../random';
 import { heroUseSkill } from '../../battle';
@@ -47,8 +48,7 @@ function setUnit(state: BattleState, unit: BattleUnit): BattleState {
   };
 }
 
-function withDuration(unit: BattleUnit, kind: 'buff' | 'debuff' | 'mark', turns: number): BattleUnit {
-  if (kind === 'mark') return { ...unit, marked: true };
+function withDuration(unit: BattleUnit, kind: 'buff' | 'debuff', turns: number): BattleUnit {
   const effect = { type: kind, amount: 0, durationTurns: turns };
   if (kind === 'buff') return { ...unit, buffs: [...unit.buffs, effect] };
   return { ...unit, debuffs: [...unit.debuffs, effect] };
@@ -124,13 +124,14 @@ function applyHitEffects(state: BattleState, target: BattleUnit, leaf: Community
     const stun = token.match(/^stun (\d+)t$/);
     const mark = token.match(/^mark (\d+)t$/);
     const debuff = token.match(/^debuff (\d+)t$/);
-    const stress = token.match(/^stress\+(\d+)$/);
     if (bleed) effects.push({ type: 'bleed', amount: Number(bleed[1]), durationTurns: Number(bleed[2]) });
     if (blight) effects.push({ type: 'blight', amount: Number(blight[1]), durationTurns: Number(blight[2]) });
     if (stun) effects.push({ type: 'stun', amount: Number(stun[1]), durationTurns: Number(stun[1]) });
-    if (mark) tgt = withDuration(tgt, 'mark', Number(mark[1]));
+    // WP-8：Mark 不再走 Final 私有 path（丢失 duration），统一走共享 applyStatusEffectEvent，
+    // 由 applyEffectToUnit 写入 marked + conditionDurations.mark。
+    if (mark) effects.push({ type: 'mark', amount: 1, durationTurns: Number(mark[1]) });
     if (debuff) tgt = withDuration(tgt, 'debuff', Number(debuff[1]));
-    if (stress) tgt = { ...tgt, stress: Math.min(10, tgt.stress + Number(stress[1])) };
+    // WP-12：stress+N 不在 BattleUnit 上直接修改，由 executeAttack 走共享 applyStress 管线。
   }
   next = setUnit(next, tgt);
   if (effects.length > 0) next = applyStatusEffectEvent(next, tgt.id, effects, `${eventId}:effects`);
@@ -144,6 +145,35 @@ function applyHitEffects(state: BattleState, target: BattleUnit, leaf: Community
       const applied = applyBattleUnitDamage(current, extraDamage);
       next = setUnit(next, applied.unit);
     }
+  }
+  return next;
+}
+
+/**
+ * WP-12：Final skill 的 Stress 效果统一走共享 campaign 管线 applyStress
+ * （含 Resolve Test / Affliction / Virtue / Heart Attack / save-replay 批次幂等），
+ * 并通过 syncHeroMentalToBattle 同步回 BattleUnit，保证 Campaign/Battle stress 一致。
+ */
+function applyLeafStress(
+  campaign: CampaignState,
+  leaf: CommunityFinalSkillSourceLeaf,
+  target: BattleUnit,
+  eventId: string,
+): CampaignState {
+  let next = campaign;
+  for (const token of leaf.statusStressEffects) {
+    const stress = token.match(/^stress\+(\d+)$/);
+    if (!stress) continue;
+    const out = applyStress(next, {
+      heroId: target.sourceId,
+      amount: Number(stress[1]),
+      sourceType: 'battle-skill',
+      sourceId: `community-final:${leaf.actorId}:${leaf.localSkillId}`,
+      questId: next.currentQuestId ?? '',
+      battleId: next.battle?.battleId,
+      batchId: `${eventId}:${target.id}:stress`,
+    });
+    next = out.campaign;
   }
   return next;
 }
@@ -192,6 +222,7 @@ function executeAttack(campaign: CampaignState, actor: BattleUnit, leaf: Communi
   const battle = campaign.battle!;
   const saved = battle.communityAttackEvents?.find((event) => event.eventId === eventId);
   if (saved) return campaign;
+  let next: CampaignState = campaign;
   let nextBattle = battle;
   const targets = leaf.attack ? pickByPolicy(nextBattle, leaf.targetPolicy, leaf.multiTargetCount) : [];
   const attackRoll = leaf.attack ? d10() : 0;
@@ -204,6 +235,9 @@ function executeAttack(campaign: CampaignState, actor: BattleUnit, leaf: Communi
       const applied = applyBattleUnitDamage(findUnit(nextBattle, target.id) ?? target, damage);
       nextBattle = setUnit(nextBattle, applied.unit);
       nextBattle = applyHitEffects(nextBattle, applied.unit, leaf, `${eventId}:${target.id}`);
+      next = { ...next, battle: nextBattle };
+      next = applyLeafStress(next, leaf, target, eventId);
+      nextBattle = next.battle!;
     }
     if (leaf.specialEffect.includes('light-1')) {
       nextBattle = { ...nextBattle, light: Math.max(0, (nextBattle.light ?? 0) - 1) };
@@ -227,7 +261,7 @@ function executeAttack(campaign: CampaignState, actor: BattleUnit, leaf: Communi
     damage,
     healAmount: leaf.localSkillId === 'time-heals-all' ? 10 : 0,
   });
-  return { ...campaign, battle: nextBattle };
+  return { ...next, battle: nextBattle };
 }
 
 function runAncestorFirstTurn(campaign: CampaignState, actor: BattleUnit, eventId: string): CampaignState {

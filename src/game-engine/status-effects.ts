@@ -212,6 +212,19 @@ export function resolveStartOfTurnConditions(unit: BattleUnit, light = 0): Start
     messages.push(`${next.name} 受到 Blight 伤害 ${blightDmg}（剩余 ${remaining} 回合）。`);
   }
 
+  // Phase 11A.4R2A WP-8：Mark 持续时间与 Bleed/Blight 同步在被标记者的回合开始递减；
+  // 剩余 0 时清除 marked。无 duration 的旧 mark（conditionDurations.mark 缺失）保持原行为。
+  const markDuration = next.conditionDurations?.mark;
+  if (next.marked && markDuration !== undefined) {
+    const remaining = Math.max(0, markDuration - 1);
+    next = {
+      ...next,
+      marked: remaining > 0,
+      conditionDurations: { ...next.conditionDurations, mark: remaining },
+    };
+    if (remaining === 0) messages.push(`${next.name} 的 Mark 已消退。`);
+  }
+
   if (total <= 0) {
     return {
       unit: next,
