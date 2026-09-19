@@ -42,7 +42,10 @@
     "verify:community-guardian-room-acceptance": "vite-node scripts/audit/verify-community-guardian-room-acceptance.ts",
     "verify:community-final-encounter-closure": "vite-node scripts/audit/verify-community-final-encounter-closure.ts",
     "verify:community-final-runtime-acceptance": "vite-node scripts/audit/verify-community-final-runtime-acceptance.ts",
-    "test:e2e:community-act4-playable-closure": "node scripts/e2e/run-community-act4-playable-closure-e2e.mjs"
+    "test:e2e:community-act4-playable-closure": "node scripts/e2e/run-community-act4-playable-closure-e2e.mjs",
+    "audit:complete-edition-content": "vite-node scripts/audit/complete-edition-content-inventory.ts",
+    "verify:complete-edition-content-coverage": "vite-node scripts/audit/complete-edition-content-inventory.ts --verify",
+    "test:complete-edition-content-inventory": "vite-node scripts/audit/test-complete-edition-inventory.ts"
   },
   "dependencies": {
     "lucide-react": "^0.408.0",
