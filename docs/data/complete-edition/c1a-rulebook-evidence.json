@@ -1,0 +1,21 @@
+{
+  "source":"docs/DD_EN_COREBOX_RULES.pdf",
+  "sha256":"9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+  "status":"rulebook-confirmed",
+  "observations":[
+    {"id":"S4:p11","page":11,"region":"Pick a Quest; bottom-right","facts":["Top-left number is Resting Points supplied with the Firewood token, not room count.","Choose one of two quest cards and permanently discard the other.","The base game's ordinary quest setup is distinct from Darkest Dungeon quests."]},
+    {"id":"S4:p12","page":12,"region":"Setting up the Dungeon Layout; bottom-left; stance and provision legend","facts":["Bottom quest pictograms specify room-token counts; shuffle them on the selected dungeon layout.","Crossed swords, arrows, shield and banner are aggressive, ranged, defensive and support stances.","The die with Tool and DD faces is a Provision Die."]},
+    {"id":"S4:p14,p29","pages":[14,29],"region":"Leaving the Dungeon; Experience Points","facts":["Ordinary quests can be left during exploration before dice are rolled.","Quest XP is based on completed objectives; ordinary quests normally yield 0 to 3 XP.","Do not turn each printed XP rate into an invented mandatory win threshold."]},
+    {"id":"S4:p21","page":21,"region":"Conditions legend","facts":["Armor pictogram is Protection, blue shield is Guard.","Condition stacks have separate durations; repeated printed Buff or Blight stacks must remain independent.","Removing a named condition removes all its stacks.","Stress minus recovers stress; stress plus suffers stress."]},
+    {"id":"S4:p26","page":26,"region":"Trinkets; left column","facts":["Trinkets are active declarations when applicable; resolve then turn from positive to negative or back.","Only one use per turn in battle.","Critical Stone example explicitly permits declaring Crit +2 after seeing the roll.","Inventory capacity equals hero level; excess Trinkets cannot be stored.","The source's two effects are printed on the front's opposing halves; the rulebook example illustrates rotation."]},
+    {"id":"S4:p30","page":30,"region":"Boss Quest; Fighting a Boss","facts":["Face the Threat is the general ordinary Boss Quest, after two preceding quests.","Shuffle its Objective token among the edge rooms (one corridor), then fill remaining slots.","Use the current boss's room; no retreat; failure ends campaign.","Flip the boss card from Threat to Battle; threat effects cease at that moment.","Boss battles have no normal round limit; boss death immediately ends battle and removes other monsters."]},
+    {"id":"S4:p35","page":35,"region":"The Campaign; left column","facts":["The common Boss Quest applies in Acts I, II and III after two ordinary quests per act.","Boss association is the current Imminent Threat, not a named single boss.","Quest and trinket dungeon decks progress with campaign level; this is not authorization to combine expansion pools."]}
+  ],
+  "threatFinding":{
+    "status":"rulebook-confirmed",
+    "statement":"Threat mechanics are on the Threat side of Boss cards according to p30; p11 illustrates dungeon and Hamlet threats. C0's zero separately classified Threat Cards does not mean no Threat mechanics.",
+    "exactTtsThreatCardBinding":null,
+    "bindingStatus":"source-blocked",
+    "blocker":"C1A's 125 target cards do not supply a complete ordinary-boss threat-face inventory. Preserve C0 classifications; a separate boss/threat source intake must bind these faces."
+  }
+}
