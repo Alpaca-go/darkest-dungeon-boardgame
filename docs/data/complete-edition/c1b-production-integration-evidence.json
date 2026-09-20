@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-20T05:27:16.799Z",
+  "verifiedImplementationHead": "fc91acf73e5af99f25aa1532ea4f5c647eda8830",
+  "verificationScope": "LOCAL MEASURED VERIFICATION",
+  "baselineHead": "1a42e312284c69ced025a20f0f5030dd820057fb",
+  "branch": "phase-11a4-c1b-trinket-quest-production-integration",
+  "measuredCoverage": {
+    "quests": {
+      "sourceSupported": 75,
+      "runtimeReady": 0,
+      "productionEnabled": 0,
+      "adapterRequired": 0,
+      "engineBlocked": 75,
+      "sourceBlockedPhysicalOutsideRegistry": 1
+    },
+    "trinkets": {
+      "sourcePhysical": 49,
+      "sourceSupported": 48,
+      "runtimeReady": 2,
+      "productionEnabled": 2,
+      "adapterRequired": 0,
+      "engineBlocked": 46,
+      "sourceBlocked": 1
+    }
+  },
+  "productionClaims": {
+    "questIntegrationComplete": false,
+    "trinketIntegrationComplete": false,
+    "blocker": "BROAD_CONTENT_RUNTIME_CAPABILITY_INSUFFICIENT"
+  },
+  "verificationCommands": [
+    "npm run typecheck",
+    "npx vitest run src/game-engine/c1b-production.test.ts src/game-engine/phase8c.test.ts",
+    "npm test",
+    "npm run build",
+    "npm run test:e2e:community-content-c1b"
+  ]
+}
