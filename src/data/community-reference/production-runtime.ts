@@ -1,5 +1,6 @@
 import type { QuestDefinition } from '../../types';
 import type {
+  QuestFirewoodSetup,
   QuestDungeonComposition,
   QuestRoomTokenType,
   QuestXpUnitDefinition,
@@ -53,7 +54,7 @@ export interface CommunityTrinketRuntimeAdapter {
 export interface CommunityQuestRuntimeAdapter {
   adapterId: 'c1c1-simple-community-quest-v1';
   definitionId: string;
-  requiredPrimitives: ['QUEST_ROOM_TOKEN_COMPOSITION', 'QUEST_XP_UNIT_ACCOUNTING'];
+  requiredPrimitives: ['QUEST_ROOM_TOKEN_COMPOSITION', 'QUEST_FIREWOOD_RESTING_POINT_SETUP', 'QUEST_XP_UNIT_ACCOUNTING'];
   definition: QuestDefinition;
 }
 
@@ -72,17 +73,19 @@ export interface CommunityProductionProof {
 type SourceQuest = (typeof questData)[number];
 type SourceTrinket = (typeof trinketData)[number];
 
-const normalizePrimitive = (message: string): string => {
-  if (/timing hero-skill-resolution/i.test(message)) return 'POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW';
-  if (/room-token composition/i.test(message)) return 'QUEST_ROOM_TOKEN_COMPOSITION';
-  if (/firewood|resting-point/i.test(message)) return 'QUEST_FIREWOOD_SETUP';
-  if (/repeated per-unit XP/i.test(message)) return 'QUEST_XP_UNIT_ACCOUNTING';
-  if (/quest-specific policies/i.test(message)) return 'QUEST_SPECIAL_RULE_ADAPTER';
-  return message.replace(/[^A-Za-z0-9]+/g, '_').replace(/^_|_$/g, '').toUpperCase();
+export const normalizePrimitives = (message: string): string[] => {
+  const primitives: string[] = [];
+  if (/timing hero-skill-resolution/i.test(message)) primitives.push('POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW');
+  if (/room-token composition/i.test(message)) primitives.push('QUEST_ROOM_TOKEN_COMPOSITION');
+  if (/firewood|resting-point/i.test(message)) primitives.push('QUEST_FIREWOOD_RESTING_POINT_SETUP');
+  if (/repeated per-unit XP/i.test(message)) primitives.push('QUEST_XP_UNIT_ACCOUNTING');
+  if (/quest-specific policies/i.test(message)) primitives.push('QUEST_SPECIAL_RULE_ADAPTER');
+  return primitives.length > 0 ? primitives : [message.replace(/[^A-Za-z0-9]+/g, '_').replace(/^_|_$/g, '').toUpperCase()];
 };
 
 const IMPLEMENTED_QUEST_PRIMITIVES = new Set([
   'QUEST_ROOM_TOKEN_COMPOSITION',
+  'QUEST_FIREWOOD_RESTING_POINT_SETUP',
   'QUEST_XP_UNIT_ACCOUNTING',
 ]);
 
@@ -98,15 +101,16 @@ type SimpleSourceQuest = SourceQuest & {
     placement: 'shuffle-on-layout-room-slots';
   };
   specialRules: unknown[];
+  firewood: QuestFirewoodSetup;
 };
 
 function isC1C1SimpleCoreQuest(source: SourceQuest): source is SimpleSourceQuest {
-  const declared = [...new Set(source.runtimeSupport.missingCapabilities.map(normalizePrimitive))];
+  const declared = [...new Set(source.runtimeSupport.missingCapabilities.flatMap(normalizePrimitives))];
   return source.sourceStatus === 'source-supported'
     && (source.region === 'ruins' || source.region === 'warrens')
     && source.questType === 'standard'
     && Array.isArray(source.specialRules) && source.specialRules.length === 0
-    && declared.length === 2
+    && declared.length === 3
     && declared.every((primitive) => IMPLEMENTED_QUEST_PRIMITIVES.has(primitive));
 }
 
@@ -134,10 +138,14 @@ function adaptSimpleCommunityQuest(source: SimpleSourceQuest): CommunityQuestRun
     region: source.region as 'ruins' | 'warrens',
     sourceOrigin: 'community-complete-edition',
   };
+  const firewoodSetup: QuestFirewoodSetup = {
+    tokens: Number(source.firewood.tokens),
+    restingPoints: Number(source.firewood.restingPoints),
+  };
   return {
     adapterId: 'c1c1-simple-community-quest-v1',
     definitionId: source.id,
-    requiredPrimitives: ['QUEST_ROOM_TOKEN_COMPOSITION', 'QUEST_XP_UNIT_ACCOUNTING'],
+    requiredPrimitives: ['QUEST_ROOM_TOKEN_COMPOSITION', 'QUEST_FIREWOOD_RESTING_POINT_SETUP', 'QUEST_XP_UNIT_ACCOUNTING'],
     definition: {
       id: source.id,
       name: source.printedName,
@@ -152,6 +160,7 @@ function adaptSimpleCommunityQuest(source: SimpleSourceQuest): CommunityQuestRun
       runtimeContentMetadata,
       dungeonComposition: composition,
       xpUnit,
+      firewoodSetup,
     },
   };
 }
@@ -171,42 +180,52 @@ export const COMMUNITY_QUEST_PRODUCTION_PROOFS: Readonly<Record<string, Communit
     sourceSupported: true,
     semanticSupported: true,
     stateful: true,
-    productionTests: ['C1C1-QUEST-RUNTIME'],
+    productionTests: ['C1C1-QUEST-RUNTIME', 'C1C1R-QUEST-SOURCE-SETUP'],
     saveReplayTests: ['C1C1-QUEST-SAVE-REPLAY'],
     selectorTests: ['C1C1-QUEST-SELECTOR'],
-    e2eTests: ['C1C1-E2E-COMMUNITY-QUEST'],
+    e2eTests: ['C1C1R-E2E-SIMPLE-QUEST-ADAPTER'],
   }])),
 );
+
+export function questAdapterSourceSetupErrors(source: SourceQuest, adapter: CommunityQuestRuntimeAdapter | undefined): string[] {
+  if (!adapter) return ['adapter missing'];
+  const errors: string[] = [];
+  if (adapter.definition.firewoodSetup?.tokens !== Number(source.firewood.tokens)) errors.push('firewood token mismatch');
+  if (adapter.definition.firewoodSetup?.restingPoints !== Number(source.firewood.restingPoints)) errors.push('resting point mismatch');
+  return errors;
+}
 
 export function evaluateCommunityQuestCapability(
   source: SourceQuest,
   adapters: Readonly<Record<string, CommunityQuestRuntimeAdapter>> = COMMUNITY_QUEST_RUNTIME_ADAPTERS,
   proofs: Readonly<Record<string, CommunityProductionProof>> = COMMUNITY_QUEST_PRODUCTION_PROOFS,
   registeredProofs: Readonly<Record<string, RegisteredProductionProof>> = PRODUCTION_PROOF_REGISTRY,
+  implementedPrimitives: ReadonlySet<string> = IMPLEMENTED_QUEST_PRIMITIVES,
 ): RuntimeCapabilityRecord {
   const sourceBlocked = source.sourceStatus !== 'source-supported';
-  const declaredMissingPrimitives = [...new Set(source.runtimeSupport.missingCapabilities.map(normalizePrimitive))];
-  const missingPrimitives = declaredMissingPrimitives.filter((primitive) => !IMPLEMENTED_QUEST_PRIMITIVES.has(primitive));
+  const declaredMissingPrimitives = [...new Set(source.runtimeSupport.missingCapabilities.flatMap(normalizePrimitives))];
+  const missingPrimitives = declaredMissingPrimitives.filter((primitive) => !implementedPrimitives.has(primitive));
   const adapter = adapters[source.id];
+  const adapterValid = Boolean(adapter && questAdapterSourceSetupErrors(source, adapter).length === 0);
   const proof = proofs[source.id];
-  const proofMatches = Boolean(adapter && proof && proof.definitionId === source.id && proof.runtimeAdapterId === adapter.adapterId);
+  const proofMatches = Boolean(adapterValid && adapter && proof && proof.definitionId === source.id && proof.runtimeAdapterId === adapter.adapterId);
   const measuredRuntimeProof: RuntimeProofState = {
-    adapterPresent: Boolean(adapter),
+    adapterPresent: adapterValid,
     productionProofPresent: Boolean(proofMatches && allProofsResolve(proof.productionTests, 'production-runtime', source.id, registeredProofs)),
     saveReplayProofPresent: Boolean(proofMatches && allProofsResolve(proof.saveReplayTests, 'save-replay', source.id, registeredProofs)),
     selectorProofPresent: Boolean(proofMatches && allProofsResolve(proof.selectorTests, 'selector', source.id, registeredProofs)),
-    e2eProofPresent: Boolean(proofMatches && allProofsResolve(proof.e2eTests, 'e2e', source.id, registeredProofs)),
+    e2eProofPresent: Boolean(proofMatches && allProofsResolve(proof.e2eTests, 'e2e', source.id, registeredProofs, adapter?.adapterId)),
   };
   const proofComplete = Boolean(proofMatches && proof.sourceSupported && proof.semanticSupported
     && measuredRuntimeProof.productionProofPresent && measuredRuntimeProof.saveReplayProofPresent
     && measuredRuntimeProof.selectorProofPresent && measuredRuntimeProof.e2eProofPresent);
   const productionStatus: ProductionStatus = sourceBlocked ? 'SOURCE_BLOCKED'
     : missingPrimitives.length > 0 ? 'ENGINE_PRIMITIVE_MISSING'
-      : adapter && proofComplete ? 'PRODUCTION_READY' : 'ADAPTER_REQUIRED';
+      : adapterValid && proofComplete ? 'PRODUCTION_READY' : 'ADAPTER_REQUIRED';
   const blockerCodes = productionStatus === 'SOURCE_BLOCKED' ? ['SOURCE_EVIDENCE_BLOCKED']
     : productionStatus === 'ENGINE_PRIMITIVE_MISSING' ? missingPrimitives
       : productionStatus === 'PRODUCTION_READY' ? [] : [
-        ...(adapter ? [] : ['RUNTIME_ADAPTER_MISSING']),
+        ...(adapterValid ? [] : ['RUNTIME_ADAPTER_MISSING_OR_SOURCE_SETUP_MISMATCH']),
         ...(proofMatches ? [] : ['PRODUCTION_PROOF_MISSING_OR_MISMATCHED']),
         ...(measuredRuntimeProof.productionProofPresent ? [] : ['PRODUCTION_TEST_PROOF_MISSING']),
         ...(measuredRuntimeProof.saveReplayProofPresent ? [] : ['SAVE_REPLAY_PROOF_MISSING']),
@@ -223,7 +242,7 @@ export function evaluateCommunityQuestCapability(
     existingPrimitives: source.runtimeSupport.existingCandidates,
     missingPrimitives,
     declaredMissingPrimitives,
-    adapterStatus: sourceBlocked ? 'NOT_APPLICABLE' : adapter ? 'IMPLEMENTED' : 'REQUIRED',
+    adapterStatus: sourceBlocked ? 'NOT_APPLICABLE' : adapterValid ? 'IMPLEMENTED' : 'REQUIRED',
     productionStatus,
     blockerCodes,
     measuredRuntimeProof,
@@ -314,7 +333,7 @@ export function evaluateCommunityTrinketCapability(
   const declaredMissingPrimitives = [...new Set([
     ...source.positiveSide.runtimeSupport.missingCapabilities,
     ...source.negativeSide.runtimeSupport.missingCapabilities,
-  ].map(normalizePrimitive))];
+  ].flatMap(normalizePrimitives))];
   const missingPrimitives = declaredMissingPrimitives.filter((primitive) => primitive !== 'POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW');
   const proofComplete = Boolean(proofMatches && proof.sourceSupported && proof.semanticSupported
     && measuredRuntimeProof.productionProofPresent && measuredRuntimeProof.saveReplayProofPresent

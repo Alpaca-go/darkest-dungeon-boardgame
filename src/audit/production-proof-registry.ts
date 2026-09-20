@@ -8,6 +8,8 @@ export interface RegisteredProductionProof {
   testFile: string;
   runner: 'vitest' | 'playwright';
   status: ProductionProofStatus;
+  scope?: 'definition' | 'adapter';
+  adapterId?: string;
 }
 
 export const ACCURACY_STONE_ID = 'community-trinket-core-accuracy-stone';
@@ -27,6 +29,14 @@ function proof(entry: RegisteredProductionProof): RegisteredProductionProof {
 }
 
 export const PRODUCTION_PROOF_REGISTRY: Readonly<Record<string, RegisteredProductionProof>> = Object.freeze(Object.fromEntries([
+  proof({
+    proofId: 'C1C1R-QUEST-SOURCE-SETUP',
+    definitionIds: [...C1C1_CORE_QUEST_IDS],
+    proofType: 'production-runtime',
+    testFile: 'src/game-engine/c1c1r-firewood-real-flow.test.ts',
+    runner: 'vitest',
+    status: 'active',
+  }),
   proof({
     proofId: 'C1C1-QUEST-RUNTIME',
     definitionIds: [...C1C1_CORE_QUEST_IDS],
@@ -52,12 +62,14 @@ export const PRODUCTION_PROOF_REGISTRY: Readonly<Record<string, RegisteredProduc
     status: 'active',
   }),
   proof({
-    proofId: 'C1C1-E2E-COMMUNITY-QUEST',
-    definitionIds: [...C1C1_CORE_QUEST_IDS],
+    proofId: 'C1C1R-E2E-SIMPLE-QUEST-ADAPTER',
+    definitionIds: [],
     proofType: 'e2e',
-    testFile: 'e2e/phase11a4-c1c1-community-quest.spec.ts',
+    testFile: 'e2e/phase11a4-c1c1r-real-community-quest.spec.ts',
     runner: 'playwright',
     status: 'active',
+    scope: 'adapter',
+    adapterId: 'c1c1-simple-community-quest-v1',
   }),
   proof({
     proofId: 'C1BR-PA-ACCURACY-RUNTIME',
@@ -122,12 +134,15 @@ export function resolveRegisteredProof(
   expectedType: ProductionProofType,
   definitionId: string,
   registry: Readonly<Record<string, RegisteredProductionProof>> = PRODUCTION_PROOF_REGISTRY,
+  expectedAdapterId?: string,
 ): { resolved: boolean; reason: 'RESOLVED' | 'UNRESOLVED' | 'WRONG_TYPE' | 'WRONG_DEFINITION' | 'DISABLED' } {
   const registered = registry[proofId];
   if (!registered) return { resolved: false, reason: 'UNRESOLVED' };
   if (registered.status !== 'active') return { resolved: false, reason: 'DISABLED' };
   if (registered.proofType !== expectedType) return { resolved: false, reason: 'WRONG_TYPE' };
-  if (!registered.definitionIds.includes(definitionId)) return { resolved: false, reason: 'WRONG_DEFINITION' };
+  if (registered.scope === 'adapter') {
+    if (!expectedAdapterId || registered.adapterId !== expectedAdapterId) return { resolved: false, reason: 'WRONG_DEFINITION' };
+  } else if (!registered.definitionIds.includes(definitionId)) return { resolved: false, reason: 'WRONG_DEFINITION' };
   return { resolved: true, reason: 'RESOLVED' };
 }
 
@@ -136,8 +151,9 @@ export function allProofsResolve(
   expectedType: ProductionProofType,
   definitionId: string,
   registry: Readonly<Record<string, RegisteredProductionProof>> = PRODUCTION_PROOF_REGISTRY,
+  expectedAdapterId?: string,
 ): boolean {
   return proofIds.length > 0 && proofIds.every((proofId) =>
-    resolveRegisteredProof(proofId, expectedType, definitionId, registry).resolved,
+    resolveRegisteredProof(proofId, expectedType, definitionId, registry, expectedAdapterId).resolved,
   );
 }

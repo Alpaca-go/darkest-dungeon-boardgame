@@ -47,7 +47,7 @@ export function analyzeProductionProofBindings(
     for (const { field, type } of FIELDS) {
       for (const proofId of manifest[field]) {
         referenced.add(proofId);
-        const result = resolveRegisteredProof(proofId, type, manifest.definitionId, registry);
+        const result = resolveRegisteredProof(proofId, type, manifest.definitionId, registry, manifest.runtimeAdapterId);
         resolutions.push({
           definitionId: manifest.definitionId,
           manifestField: field,

@@ -110,9 +110,9 @@ describe('C1B-R2 production proof mutation gate', () => {
     const allManifests = { ...COMMUNITY_TRINKET_PRODUCTION_PROOFS, ...COMMUNITY_QUEST_PRODUCTION_PROOFS };
     const analysis = analyzeProductionProofBindings(allManifests, PRODUCTION_PROOF_REGISTRY);
     expect(analysis).toMatchObject({
-      registeredProofCount: 11,
-      requiredProofCount: 36,
-      resolvedProofCount: 36,
+      registeredProofCount: 12,
+      requiredProofCount: 43,
+      resolvedProofCount: 43,
       unresolvedProofCount: 0,
       crossDefinitionMismatchCount: 0,
       wrongTypeCount: 0,

@@ -22,6 +22,14 @@ export interface QuestRuntimeState {
   qualifiedUnitCount?: number;
   xpUnitsEarned?: number;
   xpEarned?: number;
+  firewoodTokensRemaining?: number;
+  restingPointsRemaining?: number;
+  restingPointsSpent?: number;
+}
+
+export interface QuestFirewoodSetup {
+  tokens: number;
+  restingPoints: number;
 }
 
 export type QuestRoomTokenType = 'empty' | 'dark' | 'curio' | 'treasure' | 'lair' | 'trap';
