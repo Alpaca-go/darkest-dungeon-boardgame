@@ -1,0 +1,266 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1B-R2",
+  "baselineHead": "63793e9eb54a894958a96bc61d3f595bd81de259",
+  "verifiedImplementationHead": "54c6c9f5323a86ab83623d14fab501b5f4e03711",
+  "verifiedTreeHash": "f21cc15b6ee23ff05ff787f318c353c5bcbf62ba",
+  "evidencePublicationHead": null,
+  "evidencePublicationNote": "The evidence commit is intentionally later than verifiedImplementationHead.",
+  "verificationScope": "LOCAL MEASURED VERIFICATION",
+  "registeredProofCount": 7,
+  "requiredProofCount": 8,
+  "resolvedProofCount": 8,
+  "unresolvedProofCount": 0,
+  "crossDefinitionMismatchCount": 0,
+  "wrongTypeCount": 0,
+  "disabledProofCount": 0,
+  "orphanProofCount": 0,
+  "runtimeProofCommands": [
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe D:\\darkest-dungoen-boardgame\\node_modules\\vitest\\vitest.mjs run src/game-engine/c1br-production-proof.test.ts --reporter=json",
+      "exitCode": 0,
+      "measuredTestCount": 5
+    }
+  ],
+  "saveReplayProofCommands": [
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe D:\\darkest-dungoen-boardgame\\node_modules\\vitest\\vitest.mjs run src/game-engine/c1br-production-proof.test.ts --reporter=json",
+      "exitCode": 0,
+      "measuredTestCount": 5
+    }
+  ],
+  "selectorProofCommands": [
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe D:\\darkest-dungoen-boardgame\\node_modules\\vitest\\vitest.mjs run src/game-engine/c1br-production-proof.test.ts --reporter=json",
+      "exitCode": 0,
+      "measuredTestCount": 5
+    }
+  ],
+  "e2eProofCommands": [
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe D:\\darkest-dungoen-boardgame\\scripts\\e2e\\run-community-content-c1br-e2e.mjs",
+      "exitCode": 0,
+      "measuredProofIds": [
+        "C1BR-E2E-ACCURACY",
+        "C1BR-E2E-CRITICAL"
+      ]
+    }
+  ],
+  "actualExitCodes": {
+    "sourceSemanticHistoricalBaseline": 0,
+    "vitestProofSuite": 0,
+    "playwrightProofSuite": 0
+  },
+  "proofExecutions": [
+    {
+      "proofId": "C1BR-PA-ACCURACY-RUNTIME",
+      "runner": "vitest",
+      "testFile": "src/game-engine/c1br-production-proof.test.ts",
+      "status": "passed"
+    },
+    {
+      "proofId": "C1BR-PA-CRITICAL-RUNTIME",
+      "runner": "vitest",
+      "testFile": "src/game-engine/c1br-production-proof.test.ts",
+      "status": "passed"
+    },
+    {
+      "proofId": "C1BR-CS-TRINKET-METADATA",
+      "runner": "vitest",
+      "testFile": "src/game-engine/c1br-production-proof.test.ts",
+      "status": "passed"
+    },
+    {
+      "proofId": "C1BR-SAVE-ACCURACY-SIDE-REPLAY",
+      "runner": "vitest",
+      "testFile": "src/game-engine/c1br-production-proof.test.ts",
+      "status": "passed"
+    },
+    {
+      "proofId": "C1BR-SAVE-CRITICAL-SIDE-REPLAY",
+      "runner": "vitest",
+      "testFile": "src/game-engine/c1br-production-proof.test.ts",
+      "status": "passed"
+    },
+    {
+      "proofId": "C1BR-E2E-ACCURACY",
+      "runner": "playwright",
+      "testFile": "e2e/phase11a4-c1br-community-trinket-production.spec.ts",
+      "status": "passed"
+    },
+    {
+      "proofId": "C1BR-E2E-CRITICAL",
+      "runner": "playwright",
+      "testFile": "e2e/phase11a4-c1br-community-trinket-production.spec.ts",
+      "status": "passed"
+    }
+  ],
+  "proofBindings": [
+    {
+      "definitionId": "community-trinket-core-accuracy-stone",
+      "manifestField": "productionTests",
+      "expectedType": "production-runtime",
+      "proofId": "C1BR-PA-ACCURACY-RUNTIME",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1BR-PA-ACCURACY-RUNTIME",
+        "definitionIds": [
+          "community-trinket-core-accuracy-stone"
+        ],
+        "proofType": "production-runtime",
+        "testFile": "src/game-engine/c1br-production-proof.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-accuracy-stone",
+      "manifestField": "saveReplayTests",
+      "expectedType": "save-replay",
+      "proofId": "C1BR-SAVE-ACCURACY-SIDE-REPLAY",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1BR-SAVE-ACCURACY-SIDE-REPLAY",
+        "definitionIds": [
+          "community-trinket-core-accuracy-stone"
+        ],
+        "proofType": "save-replay",
+        "testFile": "src/game-engine/c1br-production-proof.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-accuracy-stone",
+      "manifestField": "selectorTests",
+      "expectedType": "selector",
+      "proofId": "C1BR-CS-TRINKET-METADATA",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1BR-CS-TRINKET-METADATA",
+        "definitionIds": [
+          "community-trinket-core-accuracy-stone",
+          "community-trinket-core-critical-stone"
+        ],
+        "proofType": "selector",
+        "testFile": "src/game-engine/c1br-production-proof.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-accuracy-stone",
+      "manifestField": "e2eTests",
+      "expectedType": "e2e",
+      "proofId": "C1BR-E2E-ACCURACY",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1BR-E2E-ACCURACY",
+        "definitionIds": [
+          "community-trinket-core-accuracy-stone"
+        ],
+        "proofType": "e2e",
+        "testFile": "e2e/phase11a4-c1br-community-trinket-production.spec.ts",
+        "runner": "playwright",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-critical-stone",
+      "manifestField": "productionTests",
+      "expectedType": "production-runtime",
+      "proofId": "C1BR-PA-CRITICAL-RUNTIME",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1BR-PA-CRITICAL-RUNTIME",
+        "definitionIds": [
+          "community-trinket-core-critical-stone"
+        ],
+        "proofType": "production-runtime",
+        "testFile": "src/game-engine/c1br-production-proof.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-critical-stone",
+      "manifestField": "saveReplayTests",
+      "expectedType": "save-replay",
+      "proofId": "C1BR-SAVE-CRITICAL-SIDE-REPLAY",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1BR-SAVE-CRITICAL-SIDE-REPLAY",
+        "definitionIds": [
+          "community-trinket-core-critical-stone"
+        ],
+        "proofType": "save-replay",
+        "testFile": "src/game-engine/c1br-production-proof.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-critical-stone",
+      "manifestField": "selectorTests",
+      "expectedType": "selector",
+      "proofId": "C1BR-CS-TRINKET-METADATA",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1BR-CS-TRINKET-METADATA",
+        "definitionIds": [
+          "community-trinket-core-accuracy-stone",
+          "community-trinket-core-critical-stone"
+        ],
+        "proofType": "selector",
+        "testFile": "src/game-engine/c1br-production-proof.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-critical-stone",
+      "manifestField": "e2eTests",
+      "expectedType": "e2e",
+      "proofId": "C1BR-E2E-CRITICAL",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1BR-E2E-CRITICAL",
+        "definitionIds": [
+          "community-trinket-core-critical-stone"
+        ],
+        "proofType": "e2e",
+        "testFile": "e2e/phase11a4-c1br-community-trinket-production.spec.ts",
+        "runner": "playwright",
+        "status": "active"
+      }
+    }
+  ],
+  "readyDefinitions": [
+    {
+      "definitionId": "community-trinket-core-accuracy-stone",
+      "adapter": "RESOLVED",
+      "productionRuntimeProof": "RESOLVED + PASS",
+      "saveReplayProof": "RESOLVED + PASS",
+      "selectorProof": "RESOLVED + PASS",
+      "e2eProof": "RESOLVED + PASS"
+    },
+    {
+      "definitionId": "community-trinket-core-critical-stone",
+      "adapter": "RESOLVED",
+      "productionRuntimeProof": "RESOLVED + PASS",
+      "saveReplayProof": "RESOLVED + PASS",
+      "selectorProof": "RESOLVED + PASS",
+      "e2eProof": "RESOLVED + PASS"
+    }
+  ],
+  "questProductionReady": 0,
+  "trinketProductionReady": 2
+}
