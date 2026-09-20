@@ -1,0 +1,4402 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-1R",
+  "generatedAt": "2026-09-20T14:47:49.512Z",
+  "verificationScope": "LOCAL MEASURED VERIFICATION",
+  "implementedPrimitives": [
+    "QUEST_ROOM_TOKEN_COMPOSITION",
+    "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+    "QUEST_XP_UNIT_ACCOUNTING",
+    "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW"
+  ],
+  "capabilityLayers": {
+    "sourceSupported": 75,
+    "engineCapable": 10,
+    "adapterComplete": 7,
+    "proofComplete": 7,
+    "productionReady": 7
+  },
+  "primitiveClassification": {
+    "compoundMessagesCanYieldMultiplePrimitives": true,
+    "roomComposition": "QUEST_ROOM_TOKEN_COMPOSITION",
+    "firewoodAndRestingPoints": "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+    "repeatedXpUnits": "QUEST_XP_UNIT_ACCOUNTING"
+  },
+  "quests": [
+    {
+      "definitionId": "community-quest-boss-face-the-threat",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl1-deep-horrors",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl1-deep-waters",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [
+        "QuestObjectiveDefinition:clear-room-count"
+      ],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl1-purify-the-eldritch-signs",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl1-test-the-waters",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl1-unclean-waters",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl2-deep-horrors-2",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl2-deep-waters-2",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [
+        "QuestObjectiveDefinition:clear-room-count"
+      ],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl2-eldritch-purging",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl2-the-deep-ones",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl2-unclean-waters-2",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl3-deep-waters-3",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [
+        "QuestObjectiveDefinition:clear-room-count"
+      ],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl3-tainted-trinkets",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl3-the-deep-ones-2",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl3-the-shipwrecks",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl3-unclean-waters-3",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl1-deep-in-the-swamp",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ADAPTER_REQUIRED",
+      "specialRuleRuntimeSupport": "ADAPTER_REQUIRED",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [
+        "QuestObjectiveDefinition:clear-room-count"
+      ],
+      "missingPrimitives": [],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ADAPTER_REQUIRED",
+      "blockerCodes": [
+        "RUNTIME_ADAPTER_MISSING_OR_SOURCE_SETUP_MISMATCH",
+        "PRODUCTION_PROOF_MISSING_OR_MISMATCHED",
+        "PRODUCTION_TEST_PROOF_MISSING",
+        "SAVE_REPLAY_PROOF_MISSING",
+        "SELECTOR_PROOF_MISSING",
+        "E2E_PROOF_MISSING"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl1-lost-and-found",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl1-rest-in-rubble",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl1-rivers-run-red",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl1-they-are-swarm",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl2-deeper-into-the-swamp",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ADAPTER_REQUIRED",
+      "specialRuleRuntimeSupport": "ADAPTER_REQUIRED",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [
+        "QuestObjectiveDefinition:clear-room-count"
+      ],
+      "missingPrimitives": [],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ADAPTER_REQUIRED",
+      "blockerCodes": [
+        "RUNTIME_ADAPTER_MISSING_OR_SOURCE_SETUP_MISMATCH",
+        "PRODUCTION_PROOF_MISSING_OR_MISMATCHED",
+        "PRODUCTION_TEST_PROOF_MISSING",
+        "SAVE_REPLAY_PROOF_MISSING",
+        "SELECTOR_PROOF_MISSING",
+        "E2E_PROOF_MISSING"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl2-lurkers",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl2-pest-control",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ADAPTER_REQUIRED",
+      "specialRuleRuntimeSupport": "ADAPTER_REQUIRED",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ADAPTER_REQUIRED",
+      "blockerCodes": [
+        "RUNTIME_ADAPTER_MISSING_OR_SOURCE_SETUP_MISMATCH",
+        "PRODUCTION_PROOF_MISSING_OR_MISMATCHED",
+        "PRODUCTION_TEST_PROOF_MISSING",
+        "SAVE_REPLAY_PROOF_MISSING",
+        "SELECTOR_PROOF_MISSING",
+        "E2E_PROOF_MISSING"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl2-ruin-the-party",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl2-take-em-back",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl3-breeders",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl3-cut-the-buzz",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl3-the-endless-marsh",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [
+        "QuestObjectiveDefinition:clear-room-count"
+      ],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl3-uninvited",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-dem-bones",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-fundraiser",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-rising-threat",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-scout-ahead",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "PRODUCTION_READY",
+      "specialRuleRuntimeSupport": "PRODUCTION_READY",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [
+        "QuestObjectiveDefinition:clear-room-count"
+      ],
+      "missingPrimitives": [],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "IMPLEMENTED",
+      "productionStatus": "PRODUCTION_READY",
+      "blockerCodes": [],
+      "measuredRuntimeProof": {
+        "adapterPresent": true,
+        "productionProofPresent": true,
+        "saveReplayProofPresent": true,
+        "selectorProofPresent": true,
+        "e2eProofPresent": true
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-wipe-em-out",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "PRODUCTION_READY",
+      "specialRuleRuntimeSupport": "PRODUCTION_READY",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "IMPLEMENTED",
+      "productionStatus": "PRODUCTION_READY",
+      "blockerCodes": [],
+      "measuredRuntimeProof": {
+        "adapterPresent": true,
+        "productionProofPresent": true,
+        "saveReplayProofPresent": true,
+        "selectorProofPresent": true,
+        "e2eProofPresent": true
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-break-them",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-clear-the-path",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "PRODUCTION_READY",
+      "specialRuleRuntimeSupport": "PRODUCTION_READY",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [
+        "QuestObjectiveDefinition:clear-room-count"
+      ],
+      "missingPrimitives": [],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "IMPLEMENTED",
+      "productionStatus": "PRODUCTION_READY",
+      "blockerCodes": [],
+      "measuredRuntimeProof": {
+        "adapterPresent": true,
+        "productionProofPresent": true,
+        "saveReplayProofPresent": true,
+        "selectorProofPresent": true,
+        "e2eProofPresent": true
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-disruption",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-purify-the-fountains",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-reduce-to-rubble",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "PRODUCTION_READY",
+      "specialRuleRuntimeSupport": "PRODUCTION_READY",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "IMPLEMENTED",
+      "productionStatus": "PRODUCTION_READY",
+      "blockerCodes": [],
+      "measuredRuntimeProof": {
+        "adapterPresent": true,
+        "productionProofPresent": true,
+        "saveReplayProofPresent": true,
+        "selectorProofPresent": true,
+        "e2eProofPresent": true
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl3-creeping-darkness",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [
+        "QuestObjectiveDefinition:clear-room-count"
+      ],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl3-forward-camps",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl3-the-threat-is-real",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl3-they-are-back",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl3-warm-up-the-halls",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-disarm-them",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-explore-the-sewers",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "PRODUCTION_READY",
+      "specialRuleRuntimeSupport": "PRODUCTION_READY",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [
+        "QuestObjectiveDefinition:clear-room-count"
+      ],
+      "missingPrimitives": [],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "IMPLEMENTED",
+      "productionStatus": "PRODUCTION_READY",
+      "blockerCodes": [],
+      "measuredRuntimeProof": {
+        "adapterPresent": true,
+        "productionProofPresent": true,
+        "saveReplayProofPresent": true,
+        "selectorProofPresent": true,
+        "e2eProofPresent": true
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-family-trinkets",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-pork-chop",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "PRODUCTION_READY",
+      "specialRuleRuntimeSupport": "PRODUCTION_READY",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "IMPLEMENTED",
+      "productionStatus": "PRODUCTION_READY",
+      "blockerCodes": [],
+      "measuredRuntimeProof": {
+        "adapterPresent": true,
+        "productionProofPresent": true,
+        "saveReplayProofPresent": true,
+        "selectorProofPresent": true,
+        "e2eProofPresent": true
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-worm-squash",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-a-new-breed",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-bait-them-out",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-carrion-infestation",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-mapping-the-sewers",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "PRODUCTION_READY",
+      "specialRuleRuntimeSupport": "PRODUCTION_READY",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [
+        "QuestObjectiveDefinition:clear-room-count"
+      ],
+      "missingPrimitives": [],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "IMPLEMENTED",
+      "productionStatus": "PRODUCTION_READY",
+      "blockerCodes": [],
+      "measuredRuntimeProof": {
+        "adapterPresent": true,
+        "productionProofPresent": true,
+        "saveReplayProofPresent": true,
+        "selectorProofPresent": true,
+        "e2eProofPresent": true
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-ringleaders",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl3-alpha-swine",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl3-deep-in-the-warrens",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [
+        "QuestObjectiveDefinition:clear-room-count"
+      ],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl3-drums-of-doom",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl3-foul-arsenal",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl3-infighting",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-weald-lvl1-circle-of-witches",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-weald-lvl1-disinfection",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-weald-lvl1-fungal-research",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-weald-lvl1-patrol-the-woods",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [
+        "QuestObjectiveDefinition:clear-room-count"
+      ],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-weald-lvl1-purge-the-woods",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-weald-lvl2-hounds-of-the-woods",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-weald-lvl2-lost-supplies",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-weald-lvl2-lost-treasures",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-weald-lvl2-searching-in-the-dark",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-weald-lvl2-spreaders-of-miasma",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-weald-lvl3-final-swipe",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [
+        "QuestObjectiveDefinition:clear-room-count"
+      ],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-weald-lvl3-great-unclean-ones",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-weald-lvl3-no-other-way",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-weald-lvl3-the-infected",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-quest-weald-lvl3-whispering-woods",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "objectiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "specialRuleRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "QUEST_ROOM_TOKEN_COMPOSITION",
+        "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+        "QUEST_SPECIAL_RULE_ADAPTER",
+        "QUEST_XP_UNIT_ACCOUNTING"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "QUEST_SPECIAL_RULE_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    }
+  ],
+  "trinkets": [
+    {
+      "definitionId": "community-trinket-color-of-madness-ashen-distillation",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_DISCARD_RESOURCE"
+      ],
+      "existingPrimitives": [
+        "ActiveEffectDefinition:heal-self"
+      ],
+      "missingPrimitives": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_DISCARD_RESOURCE"
+      ],
+      "declaredMissingPrimitives": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_DISCARD_RESOURCE"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_DISCARD_RESOURCE"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-color-of-madness-broken-key",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_HERO_SKILL_HITS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "existingPrimitives": [
+        "shared applyStatusEffectEvent",
+        "ActiveEffectDefinition:stress-self"
+      ],
+      "missingPrimitives": [
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_HERO_SKILL_HITS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "declaredMissingPrimitives": [
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_HERO_SKILL_HITS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_HERO_SKILL_HITS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-color-of-madness-coat-of-many-colors",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "ACTIVEEFFECTDEFINITION_ONLY_ADDRESSES_SELF_GROUP_AREA_TARGETING_NEEDS_ADAPTER"
+      ],
+      "existingPrimitives": [
+        "shared applyStatusEffectEvent",
+        "ActiveEffectDefinition:stress-self"
+      ],
+      "missingPrimitives": [
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "ACTIVEEFFECTDEFINITION_ONLY_ADDRESSES_SELF_GROUP_AREA_TARGETING_NEEDS_ADAPTER"
+      ],
+      "declaredMissingPrimitives": [
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "ACTIVEEFFECTDEFINITION_ONLY_ADDRESSES_SELF_GROUP_AREA_TARGETING_NEEDS_ADAPTER"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "ACTIVEEFFECTDEFINITION_ONLY_ADDRESSES_SELF_GROUP_AREA_TARGETING_NEEDS_ADAPTER"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-color-of-madness-heretical-passage",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_DISCARD_RESOURCE",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "existingPrimitives": [
+        "ActiveModifierDefinition:crit",
+        "ActiveModifierDefinition:damage",
+        "ActiveEffectDefinition:heal-self"
+      ],
+      "missingPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_DISCARD_RESOURCE",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "declaredMissingPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_DISCARD_RESOURCE",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_DISCARD_RESOURCE",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-color-of-madness-mask-of-the-timeless",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_GAIN_ACTION",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_DISCARD_RESOURCE"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_GAIN_ACTION",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_DISCARD_RESOURCE"
+      ],
+      "declaredMissingPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_GAIN_ACTION",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_DISCARD_RESOURCE"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_GAIN_ACTION",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_DISCARD_RESOURCE"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-color-of-madness-millers-pipe",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_REMOVE_ALL_CONDITION_STACKS",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET"
+      ],
+      "existingPrimitives": [
+        "shared applyStatusEffectEvent"
+      ],
+      "missingPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_REMOVE_ALL_CONDITION_STACKS",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET"
+      ],
+      "declaredMissingPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_REMOVE_ALL_CONDITION_STACKS",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_REMOVE_ALL_CONDITION_STACKS",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-color-of-madness-petrified-amulet",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "existingPrimitives": [
+        "shared applyStatusEffectEvent",
+        "shared applyStatusEffectEvent"
+      ],
+      "missingPrimitives": [
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "declaredMissingPrimitives": [
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-color-of-madness-petrified-skull",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "existingPrimitives": [
+        "shared applyStatusEffectEvent",
+        "ActiveEffectDefinition:stress-self"
+      ],
+      "missingPrimitives": [
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "declaredMissingPrimitives": [
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-color-of-madness-smoking-skull",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "EXACT_APPLICABLE_TIMING_TARGETED_BY_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "existingPrimitives": [
+        "ActiveModifierDefinition:dodge",
+        "ActiveModifierDefinition:accuracy"
+      ],
+      "missingPrimitives": [
+        "EXACT_APPLICABLE_TIMING_TARGETED_BY_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "declaredMissingPrimitives": [
+        "EXACT_APPLICABLE_TIMING_TARGETED_BY_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "EXACT_APPLICABLE_TIMING_TARGETED_BY_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-color-of-madness-thirsting-blade",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_SUFFER_WOUNDS",
+        "EXACT_APPLICABLE_TIMING_HERO_ATTACK_MISSES_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "existingPrimitives": [
+        "ActiveModifierDefinition:crit"
+      ],
+      "missingPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_SUFFER_WOUNDS",
+        "EXACT_APPLICABLE_TIMING_HERO_ATTACK_MISSES_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "declaredMissingPrimitives": [
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_SUFFER_WOUNDS",
+        "EXACT_APPLICABLE_TIMING_HERO_ATTACK_MISSES_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_SUFFER_WOUNDS",
+        "EXACT_APPLICABLE_TIMING_HERO_ATTACK_MISSES_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-color-of-madness-topshelf-tonic",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET"
+      ],
+      "existingPrimitives": [
+        "ActiveEffectDefinition:recover-stress-self",
+        "shared applyStatusEffectEvent"
+      ],
+      "missingPrimitives": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET"
+      ],
+      "declaredMissingPrimitives": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-accuracy-stone",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "PRODUCTION_READY",
+      "negativeRuntimeSupport": "PRODUCTION_READY",
+      "requiredPrimitives": [
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW"
+      ],
+      "existingPrimitives": [
+        "ActiveModifierDefinition:accuracy",
+        "ActiveModifierDefinition:accuracy"
+      ],
+      "missingPrimitives": [],
+      "declaredMissingPrimitives": [
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW"
+      ],
+      "adapterStatus": "IMPLEMENTED",
+      "productionStatus": "PRODUCTION_READY",
+      "blockerCodes": [],
+      "measuredRuntimeProof": {
+        "adapterPresent": true,
+        "productionProofPresent": true,
+        "saveReplayProofPresent": true,
+        "selectorProofPresent": true,
+        "e2eProofPresent": true
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-archers-ring",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "TRINKETUSECONDITION_HAS_NO_STANCE_PREDICATE",
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW"
+      ],
+      "existingPrimitives": [
+        "ActiveModifierDefinition:accuracy",
+        "ActiveModifierDefinition:accuracy"
+      ],
+      "missingPrimitives": [
+        "TRINKETUSECONDITION_HAS_NO_STANCE_PREDICATE"
+      ],
+      "declaredMissingPrimitives": [
+        "TRINKETUSECONDITION_HAS_NO_STANCE_PREDICATE",
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "TRINKETUSECONDITION_HAS_NO_STANCE_PREDICATE"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-berserk-charm",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_GAIN_ACTION",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "existingPrimitives": [
+        "ActiveEffectDefinition:stress-self"
+      ],
+      "missingPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_GAIN_ACTION",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "declaredMissingPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_GAIN_ACTION",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_GAIN_ACTION",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-bleed-charm",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_HERO_SKILL_HITS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_MODIFY_CONDITION_DURATION",
+        "EXACT_APPLICABLE_TIMING_HERO_CAUSES_CONDITION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "existingPrimitives": [
+        "shared applyStatusEffectEvent"
+      ],
+      "missingPrimitives": [
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_HERO_SKILL_HITS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_MODIFY_CONDITION_DURATION",
+        "EXACT_APPLICABLE_TIMING_HERO_CAUSES_CONDITION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "declaredMissingPrimitives": [
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_HERO_SKILL_HITS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_MODIFY_CONDITION_DURATION",
+        "EXACT_APPLICABLE_TIMING_HERO_CAUSES_CONDITION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_HERO_SKILL_HITS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_MODIFY_CONDITION_DURATION",
+        "EXACT_APPLICABLE_TIMING_HERO_CAUSES_CONDITION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-blight-charm",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_HERO_SKILL_HITS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_MODIFY_CONDITION_DURATION",
+        "EXACT_APPLICABLE_TIMING_HERO_CAUSES_CONDITION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "existingPrimitives": [
+        "shared applyStatusEffectEvent"
+      ],
+      "missingPrimitives": [
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_HERO_SKILL_HITS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_MODIFY_CONDITION_DURATION",
+        "EXACT_APPLICABLE_TIMING_HERO_CAUSES_CONDITION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "declaredMissingPrimitives": [
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_HERO_SKILL_HITS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_MODIFY_CONDITION_DURATION",
+        "EXACT_APPLICABLE_TIMING_HERO_CAUSES_CONDITION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_HERO_SKILL_HITS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_MODIFY_CONDITION_DURATION",
+        "EXACT_APPLICABLE_TIMING_HERO_CAUSES_CONDITION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-bloodthirst-ring",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_HERO_HIT_BY_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "existingPrimitives": [
+        "ActiveEffectDefinition:consume-provision",
+        "ActiveEffectDefinition:heal-self",
+        "shared applyStatusEffectEvent"
+      ],
+      "missingPrimitives": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_HERO_HIT_BY_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "declaredMissingPrimitives": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_HERO_HIT_BY_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_HERO_HIT_BY_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-book-of-constitution",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_DISCARD_DISEASE",
+        "EXACT_APPLICABLE_TIMING_DISEASE_ACQUIRED_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_TRINKETMODIFIERTYPE_MOVEMENT",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_DISCARD_DISEASE",
+        "EXACT_APPLICABLE_TIMING_DISEASE_ACQUIRED_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_TRINKETMODIFIERTYPE_MOVEMENT",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "declaredMissingPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_DISCARD_DISEASE",
+        "EXACT_APPLICABLE_TIMING_DISEASE_ACQUIRED_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_TRINKETMODIFIERTYPE_MOVEMENT",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_DISCARD_DISEASE",
+        "EXACT_APPLICABLE_TIMING_DISEASE_ACQUIRED_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_TRINKETMODIFIERTYPE_MOVEMENT",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-book-of-holiness",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_CONVERT_INCOMING_HIT_TO_CRITICAL",
+        "EXACT_APPLICABLE_TIMING_HERO_HIT_BY_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "existingPrimitives": [
+        "ActiveEffectDefinition:recover-stress-self"
+      ],
+      "missingPrimitives": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_CONVERT_INCOMING_HIT_TO_CRITICAL",
+        "EXACT_APPLICABLE_TIMING_HERO_HIT_BY_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "declaredMissingPrimitives": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_CONVERT_INCOMING_HIT_TO_CRITICAL",
+        "EXACT_APPLICABLE_TIMING_HERO_HIT_BY_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_CONVERT_INCOMING_HIT_TO_CRITICAL",
+        "EXACT_APPLICABLE_TIMING_HERO_HIT_BY_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-book-of-relaxation",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "existingPrimitives": [
+        "ActiveEffectDefinition:recover-stress-self",
+        "ActiveModifierDefinition:dodge"
+      ],
+      "missingPrimitives": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "declaredMissingPrimitives": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-book-of-sanity",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "existingPrimitives": [
+        "ActiveEffectDefinition:recover-stress-self",
+        "ActiveEffectDefinition:damage-self"
+      ],
+      "missingPrimitives": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "declaredMissingPrimitives": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-camouflage-cloak",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "EXACT_APPLICABLE_TIMING_INCOMING_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_HERO_HIT_BY_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "existingPrimitives": [
+        "ActiveModifierDefinition:dodge",
+        "shared applyStatusEffectEvent"
+      ],
+      "missingPrimitives": [
+        "EXACT_APPLICABLE_TIMING_INCOMING_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_HERO_HIT_BY_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "declaredMissingPrimitives": [
+        "EXACT_APPLICABLE_TIMING_INCOMING_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_HERO_HIT_BY_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "EXACT_APPLICABLE_TIMING_INCOMING_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_HERO_HIT_BY_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-campers-helmet",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_ROLL_PROVISION_DICE",
+        "EXACT_APPLICABLE_TIMING_CAMPING_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "EXACT_APPLICABLE_TIMING_SCOUT_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "existingPrimitives": [
+        "ActiveEffectDefinition:stress-self"
+      ],
+      "missingPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_ROLL_PROVISION_DICE",
+        "EXACT_APPLICABLE_TIMING_CAMPING_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "EXACT_APPLICABLE_TIMING_SCOUT_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "declaredMissingPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_ROLL_PROVISION_DICE",
+        "EXACT_APPLICABLE_TIMING_CAMPING_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "EXACT_APPLICABLE_TIMING_SCOUT_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_ROLL_PROVISION_DICE",
+        "EXACT_APPLICABLE_TIMING_CAMPING_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "EXACT_APPLICABLE_TIMING_SCOUT_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-candle-of-life",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "ACTIVEEFFECTDEFINITION_ONLY_ADDRESSES_SELF_GROUP_AREA_TARGETING_NEEDS_ADAPTER",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "existingPrimitives": [
+        "ActiveEffectDefinition:heal-self",
+        "ActiveEffectDefinition:change-light"
+      ],
+      "missingPrimitives": [
+        "ACTIVEEFFECTDEFINITION_ONLY_ADDRESSES_SELF_GROUP_AREA_TARGETING_NEEDS_ADAPTER",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "declaredMissingPrimitives": [
+        "ACTIVEEFFECTDEFINITION_ONLY_ADDRESSES_SELF_GROUP_AREA_TARGETING_NEEDS_ADAPTER",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "ACTIVEEFFECTDEFINITION_ONLY_ADDRESSES_SELF_GROUP_AREA_TARGETING_NEEDS_ADAPTER",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-caution-cloak",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_PREVENT_STRESS",
+        "EXACT_APPLICABLE_TIMING_SCOUT_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "existingPrimitives": [
+        "ActiveEffectDefinition:change-light"
+      ],
+      "missingPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_PREVENT_STRESS",
+        "EXACT_APPLICABLE_TIMING_SCOUT_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "declaredMissingPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_PREVENT_STRESS",
+        "EXACT_APPLICABLE_TIMING_SCOUT_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_PREVENT_STRESS",
+        "EXACT_APPLICABLE_TIMING_SCOUT_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-chirurgeons-charm",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "EXACT_APPLICABLE_TIMING_HERO_HEALS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "EXACT_APPLICABLE_TIMING_HERO_IS_HEALED_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "existingPrimitives": [
+        "ActiveModifierDefinition:healing",
+        "ActiveModifierDefinition:healing"
+      ],
+      "missingPrimitives": [
+        "EXACT_APPLICABLE_TIMING_HERO_HEALS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "EXACT_APPLICABLE_TIMING_HERO_IS_HEALED_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "declaredMissingPrimitives": [
+        "EXACT_APPLICABLE_TIMING_HERO_HEALS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "EXACT_APPLICABLE_TIMING_HERO_IS_HEALED_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "EXACT_APPLICABLE_TIMING_HERO_HEALS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "EXACT_APPLICABLE_TIMING_HERO_IS_HEALED_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-cleansing-crystal",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_REMOVE_ALL_CONDITION_STACKS",
+        "ACTIVEEFFECTDEFINITION_ONLY_ADDRESSES_SELF_GROUP_AREA_TARGETING_NEEDS_ADAPTER",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_GAIN_QUIRK"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_REMOVE_ALL_CONDITION_STACKS",
+        "ACTIVEEFFECTDEFINITION_ONLY_ADDRESSES_SELF_GROUP_AREA_TARGETING_NEEDS_ADAPTER",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_GAIN_QUIRK"
+      ],
+      "declaredMissingPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_REMOVE_ALL_CONDITION_STACKS",
+        "ACTIVEEFFECTDEFINITION_ONLY_ADDRESSES_SELF_GROUP_AREA_TARGETING_NEEDS_ADAPTER",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_GAIN_QUIRK"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_REMOVE_ALL_CONDITION_STACKS",
+        "ACTIVEEFFECTDEFINITION_ONLY_ADDRESSES_SELF_GROUP_AREA_TARGETING_NEEDS_ADAPTER",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_GAIN_QUIRK"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-critical-stone",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "PRODUCTION_READY",
+      "negativeRuntimeSupport": "PRODUCTION_READY",
+      "requiredPrimitives": [
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW"
+      ],
+      "existingPrimitives": [
+        "ActiveModifierDefinition:crit",
+        "ActiveModifierDefinition:accuracy"
+      ],
+      "missingPrimitives": [],
+      "declaredMissingPrimitives": [
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW"
+      ],
+      "adapterStatus": "IMPLEMENTED",
+      "productionStatus": "PRODUCTION_READY",
+      "blockerCodes": [],
+      "measuredRuntimeProof": {
+        "adapterPresent": true,
+        "productionProofPresent": true,
+        "saveReplayProofPresent": true,
+        "selectorProofPresent": true,
+        "e2eProofPresent": true
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-damage-stone",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_SUFFER_WOUNDS",
+        "EXACT_APPLICABLE_TIMING_HERO_TAKES_DAMAGE_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "existingPrimitives": [
+        "ActiveModifierDefinition:damage"
+      ],
+      "missingPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_SUFFER_WOUNDS",
+        "EXACT_APPLICABLE_TIMING_HERO_TAKES_DAMAGE_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "declaredMissingPrimitives": [
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_SUFFER_WOUNDS",
+        "EXACT_APPLICABLE_TIMING_HERO_TAKES_DAMAGE_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_SUFFER_WOUNDS",
+        "EXACT_APPLICABLE_TIMING_HERO_TAKES_DAMAGE_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-dark-bracer",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_SET_DAMAGE",
+        "EXACT_APPLICABLE_TIMING_HERO_SKILL_HITS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "existingPrimitives": [
+        "ActiveModifierDefinition:crit"
+      ],
+      "missingPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_SET_DAMAGE",
+        "EXACT_APPLICABLE_TIMING_HERO_SKILL_HITS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "declaredMissingPrimitives": [
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_SET_DAMAGE",
+        "EXACT_APPLICABLE_TIMING_HERO_SKILL_HITS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_SET_DAMAGE",
+        "EXACT_APPLICABLE_TIMING_HERO_SKILL_HITS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-dark-crown",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_TRINKETMODIFIERTYPE_VIRTUE_CHANCE",
+        "EXACT_APPLICABLE_TIMING_RESOLVE_TEST_RESULT_DETERMINED_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "existingPrimitives": [
+        "ActiveEffectDefinition:recover-stress-self"
+      ],
+      "missingPrimitives": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_TRINKETMODIFIERTYPE_VIRTUE_CHANCE",
+        "EXACT_APPLICABLE_TIMING_RESOLVE_TEST_RESULT_DETERMINED_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "declaredMissingPrimitives": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_TRINKETMODIFIERTYPE_VIRTUE_CHANCE",
+        "EXACT_APPLICABLE_TIMING_RESOLVE_TEST_RESULT_DETERMINED_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_TRINKETMODIFIERTYPE_VIRTUE_CHANCE",
+        "EXACT_APPLICABLE_TIMING_RESOLVE_TEST_RESULT_DETERMINED_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-debuff-charm",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_HERO_SKILL_HITS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_MODIFY_CONDITION_DURATION",
+        "EXACT_APPLICABLE_TIMING_HERO_CAUSES_CONDITION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "existingPrimitives": [
+        "shared applyStatusEffectEvent"
+      ],
+      "missingPrimitives": [
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_HERO_SKILL_HITS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_MODIFY_CONDITION_DURATION",
+        "EXACT_APPLICABLE_TIMING_HERO_CAUSES_CONDITION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "declaredMissingPrimitives": [
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_HERO_SKILL_HITS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_MODIFY_CONDITION_DURATION",
+        "EXACT_APPLICABLE_TIMING_HERO_CAUSES_CONDITION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_HERO_SKILL_HITS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_MODIFY_CONDITION_DURATION",
+        "EXACT_APPLICABLE_TIMING_HERO_CAUSES_CONDITION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-defenders-ring",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "TRINKETUSECONDITION_HAS_NO_STANCE_PREDICATE",
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW"
+      ],
+      "existingPrimitives": [
+        "ActiveModifierDefinition:crit",
+        "ActiveModifierDefinition:accuracy"
+      ],
+      "missingPrimitives": [
+        "TRINKETUSECONDITION_HAS_NO_STANCE_PREDICATE"
+      ],
+      "declaredMissingPrimitives": [
+        "TRINKETUSECONDITION_HAS_NO_STANCE_PREDICATE",
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "TRINKETUSECONDITION_HAS_NO_STANCE_PREDICATE"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-fasting-seal",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "existingPrimitives": [
+        "ActiveModifierDefinition:dodge",
+        "ActiveEffectDefinition:consume-provision"
+      ],
+      "missingPrimitives": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "declaredMissingPrimitives": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-fortunate-armlet",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "existingPrimitives": [
+        "ActiveModifierDefinition:accuracy",
+        "ActiveModifierDefinition:crit",
+        "ActiveEffectDefinition:stress-self"
+      ],
+      "missingPrimitives": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "declaredMissingPrimitives": [
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-protective-padlock",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_SCALE_INCOMING_DAMAGE",
+        "EXACT_APPLICABLE_TIMING_HERO_HIT_BY_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_TRINKETMODIFIERTYPE_MOVEMENT",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_SCALE_INCOMING_DAMAGE",
+        "EXACT_APPLICABLE_TIMING_HERO_HIT_BY_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_TRINKETMODIFIERTYPE_MOVEMENT",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "declaredMissingPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_SCALE_INCOMING_DAMAGE",
+        "EXACT_APPLICABLE_TIMING_HERO_HIT_BY_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_TRINKETMODIFIERTYPE_MOVEMENT",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_SCALE_INCOMING_DAMAGE",
+        "EXACT_APPLICABLE_TIMING_HERO_HIT_BY_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_TRINKETMODIFIERTYPE_MOVEMENT",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-recovery-charm",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "existingPrimitives": [
+        "ActiveEffectDefinition:heal-self",
+        "ActiveEffectDefinition:stress-self"
+      ],
+      "missingPrimitives": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "declaredMissingPrimitives": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-sages-book",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "TRINKETUSECONDITION_HAS_NO_STANCE_PREDICATE",
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW"
+      ],
+      "existingPrimitives": [
+        "ActiveModifierDefinition:accuracy",
+        "ActiveModifierDefinition:accuracy"
+      ],
+      "missingPrimitives": [
+        "TRINKETUSECONDITION_HAS_NO_STANCE_PREDICATE"
+      ],
+      "declaredMissingPrimitives": [
+        "TRINKETUSECONDITION_HAS_NO_STANCE_PREDICATE",
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "TRINKETUSECONDITION_HAS_NO_STANCE_PREDICATE"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-scholars-ring",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "TRINKETUSECONDITION_HAS_NO_STANCE_PREDICATE",
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW"
+      ],
+      "existingPrimitives": [
+        "ActiveModifierDefinition:crit",
+        "ActiveModifierDefinition:accuracy"
+      ],
+      "missingPrimitives": [
+        "TRINKETUSECONDITION_HAS_NO_STANCE_PREDICATE"
+      ],
+      "declaredMissingPrimitives": [
+        "TRINKETUSECONDITION_HAS_NO_STANCE_PREDICATE",
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "TRINKETUSECONDITION_HAS_NO_STANCE_PREDICATE"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-snipers-ring",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "TRINKETUSECONDITION_HAS_NO_STANCE_PREDICATE",
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW"
+      ],
+      "existingPrimitives": [
+        "ActiveModifierDefinition:crit",
+        "ActiveModifierDefinition:accuracy"
+      ],
+      "missingPrimitives": [
+        "TRINKETUSECONDITION_HAS_NO_STANCE_PREDICATE"
+      ],
+      "declaredMissingPrimitives": [
+        "TRINKETUSECONDITION_HAS_NO_STANCE_PREDICATE",
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "TRINKETUSECONDITION_HAS_NO_STANCE_PREDICATE"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-solar-bracer",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_SET_DAMAGE",
+        "EXACT_APPLICABLE_TIMING_HERO_SKILL_HITS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "existingPrimitives": [
+        "ActiveModifierDefinition:crit"
+      ],
+      "missingPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_SET_DAMAGE",
+        "EXACT_APPLICABLE_TIMING_HERO_SKILL_HITS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "declaredMissingPrimitives": [
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_SET_DAMAGE",
+        "EXACT_APPLICABLE_TIMING_HERO_SKILL_HITS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_SET_DAMAGE",
+        "EXACT_APPLICABLE_TIMING_HERO_SKILL_HITS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-solar-crown",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_TRINKETMODIFIERTYPE_VIRTUE_CHANCE",
+        "EXACT_APPLICABLE_TIMING_RESOLVE_TEST_RESULT_DETERMINED_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "existingPrimitives": [
+        "ActiveEffectDefinition:recover-stress-self"
+      ],
+      "missingPrimitives": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_TRINKETMODIFIERTYPE_VIRTUE_CHANCE",
+        "EXACT_APPLICABLE_TIMING_RESOLVE_TEST_RESULT_DETERMINED_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "declaredMissingPrimitives": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_TRINKETMODIFIERTYPE_VIRTUE_CHANCE",
+        "EXACT_APPLICABLE_TIMING_RESOLVE_TEST_RESULT_DETERMINED_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_TRINKETMODIFIERTYPE_VIRTUE_CHANCE",
+        "EXACT_APPLICABLE_TIMING_RESOLVE_TEST_RESULT_DETERMINED_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-speed-stone",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_CHOOSE_ONE",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_CHOOSE_ONE",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "declaredMissingPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_CHOOSE_ONE",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_CHOOSE_ONE",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-stun-charm",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_HERO_SKILL_HITS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_MODIFY_CONDITION_DURATION",
+        "EXACT_APPLICABLE_TIMING_HERO_CAUSES_CONDITION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "existingPrimitives": [
+        "shared applyStatusEffectEvent"
+      ],
+      "missingPrimitives": [
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_HERO_SKILL_HITS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_MODIFY_CONDITION_DURATION",
+        "EXACT_APPLICABLE_TIMING_HERO_CAUSES_CONDITION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "declaredMissingPrimitives": [
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_HERO_SKILL_HITS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_MODIFY_CONDITION_DURATION",
+        "EXACT_APPLICABLE_TIMING_HERO_CAUSES_CONDITION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_HERO_SKILL_HITS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_MODIFY_CONDITION_DURATION",
+        "EXACT_APPLICABLE_TIMING_HERO_CAUSES_CONDITION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-survival-guide",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_IGNORE_RESULT",
+        "EXACT_APPLICABLE_TIMING_EXPLORATION_DIE_RESULT_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_REPLACE_RESULT"
+      ],
+      "existingPrimitives": [],
+      "missingPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_IGNORE_RESULT",
+        "EXACT_APPLICABLE_TIMING_EXPLORATION_DIE_RESULT_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_REPLACE_RESULT"
+      ],
+      "declaredMissingPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_IGNORE_RESULT",
+        "EXACT_APPLICABLE_TIMING_EXPLORATION_DIE_RESULT_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_REPLACE_RESULT"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_IGNORE_RESULT",
+        "EXACT_APPLICABLE_TIMING_EXPLORATION_DIE_RESULT_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_REPLACE_RESULT"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-warriors-bracer",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "TRINKETUSECONDITION_HAS_NO_STANCE_PREDICATE",
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW"
+      ],
+      "existingPrimitives": [
+        "ActiveModifierDefinition:accuracy",
+        "ActiveModifierDefinition:accuracy"
+      ],
+      "missingPrimitives": [
+        "TRINKETUSECONDITION_HAS_NO_STANCE_PREDICATE"
+      ],
+      "declaredMissingPrimitives": [
+        "TRINKETUSECONDITION_HAS_NO_STANCE_PREDICATE",
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "TRINKETUSECONDITION_HAS_NO_STANCE_PREDICATE"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-warriors-cap",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "TRINKETUSECONDITION_HAS_NO_STANCE_PREDICATE",
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW"
+      ],
+      "existingPrimitives": [
+        "ActiveModifierDefinition:accuracy",
+        "ActiveModifierDefinition:accuracy"
+      ],
+      "missingPrimitives": [
+        "TRINKETUSECONDITION_HAS_NO_STANCE_PREDICATE"
+      ],
+      "declaredMissingPrimitives": [
+        "TRINKETUSECONDITION_HAS_NO_STANCE_PREDICATE",
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "TRINKETUSECONDITION_HAS_NO_STANCE_PREDICATE"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-warriors-ring",
+      "sourceStatus": "source-supported",
+      "semanticStatus": "runtime-primitive-unsupported",
+      "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+      "requiredPrimitives": [
+        "TRINKETUSECONDITION_HAS_NO_STANCE_PREDICATE",
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW"
+      ],
+      "existingPrimitives": [
+        "ActiveModifierDefinition:crit",
+        "ActiveModifierDefinition:accuracy"
+      ],
+      "missingPrimitives": [
+        "TRINKETUSECONDITION_HAS_NO_STANCE_PREDICATE"
+      ],
+      "declaredMissingPrimitives": [
+        "TRINKETUSECONDITION_HAS_NO_STANCE_PREDICATE",
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW"
+      ],
+      "adapterStatus": "REQUIRED",
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "TRINKETUSECONDITION_HAS_NO_STANCE_PREDICATE"
+      ],
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      }
+    }
+  ]
+}
