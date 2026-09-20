@@ -1,4 +1,5 @@
 import type { CampaignState, QuestDefinition } from '../types';
+import type { CommunityContentSet, CommunityRegion, RuntimeContentMetadata } from '../types/content-runtime';
 import type { TrinketDefinition, TrinketLevel } from '../types/trinkets';
 import { QUESTS, STANDARD_QUESTS } from './quests';
 import { officialTrinketPool } from './trinkets/trinket-registry';
@@ -23,29 +24,70 @@ export function runtimeContentContext(campaign: CampaignState): RuntimeContentCo
   };
 }
 
+const CONTENT_SETS: readonly CommunityContentSet[] = ['core', 'color-of-madness', 'crimson-court'];
+const REGIONS: readonly CommunityRegion[] = ['ruins', 'warrens', 'weald', 'cove', 'crimson-court'];
+
+function validMetadata(value: RuntimeContentMetadata | undefined): value is RuntimeContentMetadata {
+  return Boolean(
+    value
+      && value.sourceOrigin === 'community-complete-edition'
+      && value.sourceDefinitionId.length > 0
+      && CONTENT_SETS.includes(value.contentSet)
+      && (value.region === null || REGIONS.includes(value.region)),
+  );
+}
+
+/** Pure fixture seam: Community quest selection never infers routing from an id. */
+export function filterCommunityQuestCandidates(
+  candidates: readonly QuestDefinition[],
+  context: RuntimeContentContext,
+): QuestDefinition[] {
+  const sets = new Set(context.enabledContentSets ?? ['core']);
+  const regions = new Set(context.enabledRegions ?? ['ruins', 'warrens', 'weald', 'cove']);
+  return candidates.filter((quest) => {
+    const metadata = quest.runtimeContentMetadata;
+    return validMetadata(metadata)
+      && metadata.region !== null
+      && sets.has(metadata.contentSet)
+      && regions.has(metadata.region)
+      && (context.campaignLevel === undefined || quest.dungeonLevel === context.campaignLevel);
+  });
+}
+
+/** Pure fixture seam: malformed/unknown metadata fails closed. */
+export function filterCommunityTrinketCandidates(
+  candidates: readonly TrinketDefinition[],
+  context: RuntimeContentContext,
+): TrinketDefinition[] {
+  const sets = new Set(context.enabledContentSets ?? ['core']);
+  return candidates.filter((trinket) => {
+    const metadata = trinket.runtimeContentMetadata;
+    return validMetadata(metadata) && metadata.region === null && sets.has(metadata.contentSet);
+  });
+}
+
 export function getQuestPool(context: RuntimeContentContext): QuestDefinition[] {
   if ((context.runtimeContentProfile ?? 'legacy-prototype') === 'legacy-prototype') {
     return STANDARD_QUESTS;
   }
-  return COMMUNITY_RUNTIME_QUESTS.filter((quest) => quest.dungeonLevel === context.campaignLevel);
+  return filterCommunityQuestCandidates(COMMUNITY_RUNTIME_QUESTS, context);
 }
 
 export function getBossQuestPool(context: RuntimeContentContext): QuestDefinition[] {
   if ((context.runtimeContentProfile ?? 'legacy-prototype') === 'legacy-prototype') {
     return QUESTS.filter((quest) => !STANDARD_QUESTS.some((standard) => standard.id === quest.id));
   }
-  return COMMUNITY_RUNTIME_QUESTS.filter((quest) => quest.type === 'boss');
+  return filterCommunityQuestCandidates(COMMUNITY_RUNTIME_QUESTS, {
+    ...context,
+    campaignLevel: undefined,
+  }).filter((quest) => quest.type === 'boss');
 }
 
 export function getTrinketPool(context: RuntimeContentContext): TrinketDefinition[] {
   if ((context.runtimeContentProfile ?? 'legacy-prototype') === 'legacy-prototype') {
     return officialTrinketPool();
   }
-  const sets = new Set(context.enabledContentSets ?? ['core']);
-  return COMMUNITY_RUNTIME_TRINKETS.filter((trinket) => {
-    const sourceSet = trinket.id.split('-')[2];
-    return sourceSet === 'core' ? sets.has('core') : true;
-  });
+  return filterCommunityTrinketCandidates(COMMUNITY_RUNTIME_TRINKETS, context);
 }
 
 export function getTrinketPoolByLevel(

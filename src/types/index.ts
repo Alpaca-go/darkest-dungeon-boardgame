@@ -949,6 +949,8 @@ export interface QuestDefinition {
   difficulty: 'easy' | 'normal' | 'hard';
   /** Phase 8D：结构化 Objective 列表（最多 3 条，决定 0-3 XP）。 */
   objectives: QuestObjectiveDefinition[];
+  /** Required for Community production selection; legacy definitions intentionally omit it. */
+  runtimeContentMetadata?: import('./content-runtime').RuntimeContentMetadata;
 }
 
 /** 房间类型元数据（用于纯色块区分）。 */

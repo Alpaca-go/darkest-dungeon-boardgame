@@ -10,6 +10,7 @@
 //   未经核实的数值一律不得进入官方池（数据策略）。
 
 import type { ProvisionPool, StatusEffectType } from './index';
+import type { RuntimeContentMetadata } from './content-runtime';
 
 // ---------------------------------------------------------------------------
 // 基础枚举
@@ -143,6 +144,8 @@ export interface TrinketDefinition {
   /** 是否可进入官方卡池（仅 verified 数据允许为 true）。 */
   enabledInOfficialPool: boolean;
   dataOrigin: TrinketDataOrigin;
+  /** Required for Community production selection; legacy definitions intentionally omit it. */
+  runtimeContentMetadata?: RuntimeContentMetadata;
 }
 
 // ---------------------------------------------------------------------------
