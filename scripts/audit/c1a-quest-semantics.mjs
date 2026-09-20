@@ -1,4 +1,5 @@
 // Source-domain normalization, never imports production quests or engine constants.
+import {classifySpecialRules} from './c1ar-quest-classification.mjs';
 const rules = {
  '445-2':{minimum:{roomType:'lair',count:1},goldPerLair:10,exchange:{gold:20,xp:1,recipient:'Heir',time:'after-quest'}},
  '445-3':{rooms:[7],area:'green',actionCost:2,collect:'bones',clearOnlyAfterCollection:true,excludeRoomsFromOtherEncounters:true},
@@ -12,7 +13,7 @@ const rules = {
  '445-13':{trigger:'unholy-monster-spawned',target:'all-heroes',stress:1},
  '445-14':{roomType:'lair',excludeMonsterLevels:[1]},
  '445-18':{setup:'boss-quest-rulebook-p30',returnToHamlet:'forbidden-until-boss-defeated'},
- '445-19':{rooms:[2,5,8],selection:'random-each-entry',area:'A',actionCost:2,collect:'sample',counter:{kind:'wound-tokens-on-quest-card',max:6}},
+ '445-19':{rooms:[2,5,8],setAsideAtStart:true,selection:'random-each-entry',area:'A',actionCost:2,collect:'sample',counter:{kind:'wound-tokens-on-quest-card',max:6}},
  '445-20':{roomType:'curio',alwaysBattle:true},
  '445-21':{roomType:'objective',spawnFirst:[{name:'Uca Major',count:1}],remaining:'normal-monster-deck'},
  '445-22':{trigger:'hero-kills-cove-monster',target:'killing-hero',conditions:[{type:'blight',amount:2,turns:3}]},
@@ -20,11 +21,11 @@ const rules = {
  '445-24':{roomType:'curio',alwaysBattle:true},
  '445-25':{trigger:'hero-kills-cove-monster',target:'killing-hero',conditions:[{type:'blight',amount:3,turns:3}]},
  '445-26':{roomType:'objective',spawnFirst:[{name:'Uca Major',count:1},{name:'Squiffy Ghast',count:1}],additionalRandomMonsters:1},
- '445-27':{rooms:[2,5,6,8],selection:'random-each-entry',roomType:'objective',monsterPool:'cove-only'},
+ '445-27':{rooms:[2,5,6,8],setAsideAtStart:true,selection:'random-each-entry',roomType:'objective',monsterPool:'cove-only'},
  '445-28':{roomType:'curio',alwaysBattle:true,curioEffects:'negative-only'},
  '445-29':{roomType:'curio',alwaysBattle:true,curioEffects:'negative-only'},
  '445-30':{trigger:'hero-kills-cove-monster',target:'killing-hero',conditions:[{type:'blight',amount:3,turns:4}]},
- '445-31':{rooms:[2,5,6,8],selection:'random-each-entry',roomType:'objective',spawn:[{name:'Squiffy Ghast',count:1}],monsterPool:'cove-only'},
+ '445-31':{rooms:[2,5,6,8],setAsideAtStart:true,selection:'random-each-entry',roomType:'objective',spawn:[{name:'Squiffy Ghast',count:1}],monsterPool:'cove-only'},
  '445-32':{rooms:[7],area:'green',trigger:'search-roll',rollRange:[4,8],replace:'chosen-provision',collect:'idol',maxPerShipwreck:1},
  '445-33':{rooms:[1,5,9],setup:{eachHeroRandomTrinketLevel:3,tainted:true,ifUnavailable:'taint-owned-trinket'},area:'red',actionCost:1,limit:'once-per-room',cleanse:'trinket',hamletChoice:[{gainNegativeQuirks:2,cleanse:true},{returnTrinketToOwnDeck:true}]},
  '444-0':{roomType:'objective',roomFilter:'has-loot',firstChestPerRoom:{replaceNormalLoot:'valuable'}},
@@ -33,7 +34,7 @@ const rules = {
  '444-4':{roomType:'lair',monsterPool:'crimson-court-only'},
  '444-5':{roomType:'lair',spawn:[{name:'Crocodilian',level:3,count:1}]},
  '444-8':{rooms:[5,6,7],selection:'random-then-discard-on-clear',roomType:'objective',monsterPool:'crimson-court-only'},
- '444-9':{roomType:'objective',courtMonsterLifeBonus:7,firstChest:{trinketLevel:2},returnExchange:{trinketLevel:2,xpEach:1,maxXp:3,loseTrinkets:true,minimumObjectiveRoomsCleared:1,recipient:'chosen-Heir'}},
+ '444-9':{roomType:'objective',roomFilter:'has-loot-chests',courtMonsterLifeBonus:7,firstChest:{trinketLevel:2},returnExchange:{trinketLevel:2,xpEach:1,maxXp:3,loseTrinkets:true,minimumObjectiveRoomsCleared:1,recipient:'chosen-Heir'}},
  '444-10':{rooms:[6,7,8],spawn:[{name:'Courtesan',count:2},{name:'Chevalier',count:2}]},
  '444-11':{trigger:'court-monster-hits-hero',addToHit:{type:'bleed',amount:3,turns:3},healAttacker:4},
  '444-12':{setup:'random-rooms',trigger:'leave-cleared-room',replace:'random-face-down-room-token',resetVisited:true},
@@ -58,7 +59,7 @@ const rules = {
  '444-34':{trigger:'battle-start',roll:'d10',condition:'roll-greater-than-light',firstRoundInitiative:'all-monsters-on-top'},
  '444-35':{roomType:'objective',spawn:[{name:'Hateful Virago',level:3,count:1}]},
  '444-36':{roomType:'treasure',monsterLevels:[2]},
- '444-37':{setup:{fixed:{lair:3},remaining:'random'},roomType:'lair',monsterPool:'weald-only'},
+ '444-37':{setup:{remaining:'random'},roomType:'lair',monsterPool:'weald-only'},
  '444-38':{rooms:[1,3,6],selection:'random-then-discard-on-secure',spawn:[{name:'Rabid Gnasher',count:3}]},
  '444-39':{startingProvisions:'no-normal-roll; allow-Survivalist-and-skills',roomFilter:'has-loot-chests',chestLoot:'roll-two-random-provisions-instead',returnGoldPerProvision:1},
  '444-40':{rooms:[5],area:'red',actionCost:1,provisionCost:{torch:1},ignite:'oak',cannotIgniteRound:4,burnsAt:'end-of-next-round',onIgnitionRoundEnd:'fill-empty-stances-with-new-monsters',clearIfBurnt:'even-with-monsters-at-end-round-four'},
@@ -83,17 +84,22 @@ export function questSemantics(cell, printed) {
   else if(/killed|slain/i.test(reward)) {entity=reward.split('/')[1].replace(/killed\.|slain\./ig,'').trim();objectiveType='kill-entity';}
   else if(/20\[gold\]/.test(reward)) {entity='gold-donated-to-heir';objectiveType='return-resource';targetCount=20;}
   else {
-    const entities={'445-3':['bones','collect-and-return',1],'445-9':['fountain','purify',1],'445-10':['dark-room','illuminate-and-clear',1],'445-11':['camp','establish',1],'445-19':['sample','collect',2],'445-23':['eldritch-sign','purify',1],'445-32':['idol','find',1],'445-33':['trinket','cleanse',1],'444-0':['valuable','return-resource',1],'444-2':['blood-vial','return-resource',1],'444-9':['level-2-trinket','return-resource',1],'444-17':['level-2-trinket-acquired-in-this-dungeon','return-resource',1],'444-30':['necrotic-fungus','collect-and-return',1],'444-32':['oak','disinfect',1],'444-39':['provision','return-resource',2],'444-40':['infected-oak','burn',1]};
+    const entities={'445-3':['bones','collect',1],'445-9':['fountain','purify',1],'445-10':['dark-room','illuminate-and-clear',1],'445-11':['camp','establish',1],'445-19':['sample','collect',2],'445-23':['eldritch-sign','purify',1],'445-32':['idol','find',1],'445-33':['trinket','cleanse',1],'444-0':['valuable','return-resource',1],'444-2':['blood-vial','return-resource',1],'444-9':['level-2-trinket','return-resource',1],'444-17':['level-2-trinket-acquired-in-this-dungeon','return-resource',1],'444-30':['necrotic-fungus','collect-and-return',1],'444-32':['oak','disinfect',1],'444-39':['provision','return-resource',2],'444-40':['infected-oak','burn',1]};
     const found=entities[cell];if(!found)throw Error(`Unknown objective: ${title}`);[entity,objectiveType,targetCount]=found;
   }
-  const objective={objectiveType,targetCount,targetEntity:entity,requiredConditions:special.map((_,i)=>({specialRule:i})),completionCondition:{type:'count-qualified-events',count:targetCount,qualification:objectiveType},countMeaning:'one-XP-unit; not an invented mandatory full-quest threshold',minimumQuestGoal:params?.minimum??(cell==='444-9'?{objectiveRooms:1}:null)};
+  const specialRules=classifySpecialRules(cell,special,params);
+  const bindings=relation=>specialRules.flatMap((rule,index)=>rule.objectiveBinding?.relation===relation?[{specialRule:index,relation}]:[]);
+  const objective={objectiveType,targetCount,targetEntity:entity,
+    qualificationRules:bindings('qualification'),completionRules:bindings('completion'),
+    countMeaning:'one-XP-unit; not an invented mandatory full-quest threshold',
+    minimumQuestGoal:params?.minimum?{...params.minimum,scope:'quest',rules:bindings('minimum-goal')}:cell==='444-9'?{roomType:'objective',count:1,scope:'trinket-return-xp-eligibility',rules:bindings('minimum-goal')}:null,
+    xpUnit:{amount:boss?3:1,targetEntity:entity,targetCount,basis:boss?'boss-defeated':'printed-reward-rate',mandatoryQuestThreshold:false}};
   const rewards=[{kind:'xp',amount:boss?3:1,per:boss?'boss-defeated':{targetEntity:entity,count:targetCount},cap:{amount:3,source:'S4:p14,p29'},timing:'quest-end; granted-to-each-eligible-hero'}];
   if(cell==='445-2') rewards.push({kind:'gold',amount:10,per:'lair-cleared',timing:'on-clear'});
   if(cell==='444-39') rewards.push({kind:'gold',amount:1,per:'provision-returned',timing:'return-to-hamlet'});
   if(['444-9','444-17'].includes(cell))rewards.push({kind:'trinket',level:2,count:1,timing:'first-eligible-chest-per-room',sourceRule:0});
   if(cell==='445-33')rewards.push({kind:'trinket',level:3,count:1,target:'each-hero',timing:'setup',condition:'tainted; see special rule',sourceRule:0});
-  const specialRules=special.map((printedText,i)=>({printedText,semanticType:'quest-specific-compound-rule',parameters:params,runtimeSupport:'RUNTIME_PRIMITIVE_UNSUPPORTED',runtimeGaps:['QuestDefinition has no interpreter for these room/encounter/campaign policies'],literalField:`printedSpecialRules.${i}`}));
-  const unresolvedFields=cell==='444-14'?['specialRules.0.parameters.onClear']:[];
+  const unresolvedFields=cell==='444-14'?[`specialRules.${specialRules.findIndex(r=>'onClear' in r.parameters)}.parameters.onClear`]:[];
   const dynamic=Object.values(roomRequirements).includes('?');
   return {objective,rewards,roomCount:dynamic?null:Object.values(roomRequirements).reduce((a,b)=>a+b,0),dungeonStructure:{roomTokens:roomRequirements,placement:boss?'boss-objective-among-edge-rooms':dynamic?'see-special-setup-rule':'shuffle-on-layout-room-slots',randomRemainder:dynamic,roomCountBasis:dynamic?'selected-layout; not a fixed card number':'sum-of-printed-room-tokens'},specialRules,unresolvedFields,
     runtimeSupport:{classification:unresolvedFields.length?'SOURCE_UNRESOLVED':'RUNTIME_PRIMITIVE_UNSUPPORTED',existingCandidates:objectiveType==='clear-rooms'&&entity==='room'?['QuestObjectiveDefinition:clear-room-count']:[],missingCapabilities:['Complete room-token composition and printed firewood/resting-point setup are not represented by ordinary QuestDefinition',...(special.length?['Quest-specific policies require new adapters/primitives']:[]),'Repeated per-unit XP must not be replaced by unrelated prototype objectives'],productionIntegration:'not-integrated'}};

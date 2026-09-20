@@ -72,14 +72,17 @@ export function generate() {
     if(p==='printedName')field=trinket?'printedName':'printedTitle';
     else if(p==='level'||p==='region'||p==='contentSet'||p==='expansion')field=p==='expansion'?'contentSet':p;
     else if(trinket){field=p.startsWith('negativeSide')?'negativeSide.printedText':'positiveSide.printedText';rulebook=['S4:p12','S4:p21','S4:p26'];}
-    else if(p.startsWith('specialRules'))field=`printedSpecialRules.${p.split('.')[1]}`;
-    else if(p.startsWith('objective.requiredConditions'))field=`printedSpecialRules.${p.split('.')[2]}`;
+    else if(p.startsWith('specialRules')){const rule=n.specialRules[Number(p.split('.')[1])];field=rule.sourceReference.literalField;rulebook=rule.sourceReference.rulebook;}
+    else if(/^objective\.(qualificationRules|completionRules)\./.test(p)){
+      const binding=n.objective[p.split('.')[1]][Number(p.split('.')[2])];
+      field=n.specialRules[binding.specialRule].sourceReference.literalField;
+    }
     else if(p.startsWith('objective.minimumQuestGoal')&&row[5].length)field='printedSpecialRules.0';
     else if(p.startsWith('rewards.')&&n.rewards[Number(p.split('.')[1])]?.kind!=='xp')field='printedSpecialRules.0';
     else if(p.startsWith('firewood')){field='printedRestingPoints';rulebook=['S4:p11'];}
     else if(p.startsWith('dungeonStructure')||p==='roomCount'){field='printedRoomRequirement';rulebook=['S4:p12'];}
     else if(p.startsWith('bossAssociation')){field='printedSpecialRules.0';rulebook=['S4:p30','S4:p35'];}
-    else {field='printedReward';rulebook=['S4:p14,p29'];}
+    else {field='printedReward';rulebook=physical.region==='boss'?['S4:p30','S4:p35']:['S4:p14,p29'];}
     let evidenceRef=ref(field);
     if(field==='printedRoomRequirement')evidenceRef=sourceRef(field,'front',[0.08,0.72,0.8,0.25]);
     n.leafProvenance[p]={...evidenceRef,rulebook,sourceStatus:n.unresolvedFields.includes(p)?'source-blocked':evidenceRef.status};
@@ -96,7 +99,7 @@ export function generate() {
    const stem=kind==='trinkets'?'trinket':'quest';
    evidence[kind].sort((a,b)=>sort(a.definitionId,b.definitionId));normalized[kind].sort((a,b)=>sort(a.id,b.id));
    output[`${dataRoot}/${kind}/community-${stem}-source-evidence.json`]={schemaVersion:`c1a.${stem}.literal.v1`,sourceSha256:expectedSource,records:evidence[kind]};
-   output[`${dataRoot}/${kind}/community-${stem}-normalized.json`]={schemaVersion:`c1a.${stem}.normalized.v1`,definitions:normalized[kind]};
+   output[`${dataRoot}/${kind}/community-${stem}-normalized.json`]={schemaVersion:kind==='quests'?'c1ar.quest.normalized.v2':`c1a.${stem}.normalized.v1`,definitions:normalized[kind]};
    output[`src/data/community-reference/${kind}/data.json`]=normalized[kind].filter(n=>n.sourceStatus==='source-supported');
  }
  return output;
