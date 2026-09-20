@@ -1244,6 +1244,34 @@ export function migrateCampaignToV17(campaign: CampaignState): CampaignState {
 }
 
 /** C1B: old saves remain on the legacy pool; migration never silently opts in. */
+function sanitizeQuestRuntimeState(value: unknown): CampaignState['questRuntimeState'] {
+  if (!value || typeof value !== 'object') return null;
+  const raw = value as Record<string, unknown>;
+  if (typeof raw.definitionId !== 'string' || raw.definitionId.length === 0) return null;
+  if (!raw.counters || typeof raw.counters !== 'object' || Array.isArray(raw.counters)) return null;
+  if (!raw.flags || typeof raw.flags !== 'object' || Array.isArray(raw.flags)) return null;
+  if (!Array.isArray(raw.selectedRoomIds) || !raw.selectedRoomIds.every((id) => typeof id === 'string')) return null;
+  if (!Array.isArray(raw.setAsideRoomIds) || !raw.setAsideRoomIds.every((id) => typeof id === 'string')) return null;
+  const counters = Object.entries(raw.counters).reduce<Record<string, number> | null>((result, [key, entry]) => {
+    if (result === null || typeof entry !== 'number' || !Number.isFinite(entry)) return null;
+    result[key] = entry;
+    return result;
+  }, {});
+  const flags = Object.entries(raw.flags).reduce<Record<string, boolean> | null>((result, [key, entry]) => {
+    if (result === null || typeof entry !== 'boolean') return null;
+    result[key] = entry;
+    return result;
+  }, {});
+  if (!counters || !flags) return null;
+  return {
+    definitionId: raw.definitionId,
+    counters,
+    flags,
+    selectedRoomIds: [...raw.selectedRoomIds],
+    setAsideRoomIds: [...raw.setAsideRoomIds],
+  };
+}
+
 export function migrateCampaignToV18(campaign: CampaignState): CampaignState {
   const raw = campaign as CampaignState & Record<string, unknown>;
   const runtimeContentProfile = raw.runtimeContentProfile === 'community-complete-edition'
@@ -1261,9 +1289,7 @@ export function migrateCampaignToV18(campaign: CampaignState): CampaignState {
       ? raw.enabledRegions.filter((value): value is 'ruins' | 'warrens' | 'weald' | 'cove' | 'crimson-court' =>
           value === 'ruins' || value === 'warrens' || value === 'weald' || value === 'cove' || value === 'crimson-court')
       : ['ruins', 'warrens', 'weald', 'cove'],
-    questRuntimeState: raw.questRuntimeState && typeof raw.questRuntimeState === 'object'
-      ? campaign.questRuntimeState ?? null
-      : null,
+    questRuntimeState: sanitizeQuestRuntimeState(raw.questRuntimeState),
   };
 }
 
