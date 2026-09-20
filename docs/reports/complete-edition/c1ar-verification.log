@@ -1,0 +1,106 @@
+
+> darkest-dungeon-web-prototype@0.1.0 verify:complete-edition-c1ar
+> node scripts/audit/verify-complete-edition-c1ar.mjs
+
+{
+  "result": "PASS",
+  "questDefinitions": 76,
+  "withSpecialRules": 66,
+  "withoutSpecialRules": 10,
+  "sourceSupported": 75,
+  "sourceBlocked": 1,
+  "registry": {
+    "standard": 74,
+    "boss": 1
+  },
+  "baseline": "C0, literal evidence, assets, all Trinkets and Production unchanged",
+  "qrFixtures": "QR-01 through QR-08 PASS",
+  "semanticTamperTests": [
+    {
+      "name": "non-objective-rule-in-objective",
+      "result": "PASS: rejected"
+    },
+    {
+      "name": "blanket-requiredConditions",
+      "result": "PASS: rejected"
+    },
+    {
+      "name": "objective-rule-unbound",
+      "result": "PASS: rejected"
+    },
+    {
+      "name": "missing-category",
+      "result": "PASS: rejected"
+    },
+    {
+      "name": "missing-boolean",
+      "result": "PASS: rejected"
+    },
+    {
+      "name": "lost-printed-rule",
+      "result": "PASS: rejected"
+    },
+    {
+      "name": "bad-source-index",
+      "result": "PASS: rejected"
+    },
+    {
+      "name": "invented-xp-minimum",
+      "result": "PASS: rejected"
+    },
+    {
+      "name": "rest-in-rubble-iii-invented-verb",
+      "result": "PASS: rejected"
+    },
+    {
+      "name": "lost-provenance",
+      "result": "PASS: rejected"
+    },
+    {
+      "name": "boss-no-retreat-as-objective",
+      "result": "PASS: rejected"
+    },
+    {
+      "name": "drop-bone-qualification",
+      "result": "PASS: rejected"
+    },
+    {
+      "name": "T1-delete-trinket-evidence",
+      "result": "PASS: tamper rejected"
+    },
+    {
+      "name": "T2-alter-card-index",
+      "result": "PASS: tamper rejected"
+    },
+    {
+      "name": "T3-swap-trinket-assets",
+      "result": "PASS: tamper rejected"
+    },
+    {
+      "name": "T4-alter-quest-title",
+      "result": "PASS: tamper rejected"
+    },
+    {
+      "name": "T5-inject-prototype-quest",
+      "result": "PASS: tamper rejected"
+    },
+    {
+      "name": "T6-fill-blocked-semantic-leaf",
+      "result": "PASS: tamper rejected"
+    },
+    {
+      "name": "T7-confuse-content-set",
+      "result": "PASS: tamper rejected"
+    },
+    {
+      "name": "T8-merge-without-evidence",
+      "result": "PASS: tamper rejected"
+    }
+  ],
+  "stopGate": "C1A-R only; independent audit pending; C1B forbidden"
+}
+
+npm run typecheck: PASS (tsc --noEmit, exit 0)
+npm run build: PASS (tsc && vite build, exit 0; 2336 modules transformed)
+Build warning: chunks larger than 500 kB after minification. No build errors.
+git diff --check: PASS
