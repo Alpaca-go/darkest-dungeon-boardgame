@@ -12,12 +12,53 @@ export interface RegisteredProductionProof {
 
 export const ACCURACY_STONE_ID = 'community-trinket-core-accuracy-stone';
 export const CRITICAL_STONE_ID = 'community-trinket-core-critical-stone';
+export const C1C1_CORE_QUEST_IDS = [
+  'community-quest-ruins-lvl1-scout-ahead',
+  'community-quest-ruins-lvl1-wipe-em-out',
+  'community-quest-ruins-lvl2-clear-the-path',
+  'community-quest-ruins-lvl2-reduce-to-rubble',
+  'community-quest-warrens-lvl1-explore-the-sewers',
+  'community-quest-warrens-lvl1-pork-chop',
+  'community-quest-warrens-lvl2-mapping-the-sewers',
+] as const;
 
 function proof(entry: RegisteredProductionProof): RegisteredProductionProof {
   return Object.freeze({ ...entry, definitionIds: Object.freeze([...entry.definitionIds]) as unknown as string[] });
 }
 
 export const PRODUCTION_PROOF_REGISTRY: Readonly<Record<string, RegisteredProductionProof>> = Object.freeze(Object.fromEntries([
+  proof({
+    proofId: 'C1C1-QUEST-RUNTIME',
+    definitionIds: [...C1C1_CORE_QUEST_IDS],
+    proofType: 'production-runtime',
+    testFile: 'src/game-engine/c1c1-community-quest-production.test.ts',
+    runner: 'vitest',
+    status: 'active',
+  }),
+  proof({
+    proofId: 'C1C1-QUEST-SAVE-REPLAY',
+    definitionIds: [...C1C1_CORE_QUEST_IDS],
+    proofType: 'save-replay',
+    testFile: 'src/game-engine/c1c1-community-quest-production.test.ts',
+    runner: 'vitest',
+    status: 'active',
+  }),
+  proof({
+    proofId: 'C1C1-QUEST-SELECTOR',
+    definitionIds: [...C1C1_CORE_QUEST_IDS],
+    proofType: 'selector',
+    testFile: 'src/game-engine/c1c1-community-quest-production.test.ts',
+    runner: 'vitest',
+    status: 'active',
+  }),
+  proof({
+    proofId: 'C1C1-E2E-COMMUNITY-QUEST',
+    definitionIds: [...C1C1_CORE_QUEST_IDS],
+    proofType: 'e2e',
+    testFile: 'e2e/phase11a4-c1c1-community-quest.spec.ts',
+    runner: 'playwright',
+    status: 'active',
+  }),
   proof({
     proofId: 'C1BR-PA-ACCURACY-RUNTIME',
     definitionIds: [ACCURACY_STONE_ID],

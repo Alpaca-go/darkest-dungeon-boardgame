@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   COMMUNITY_SOURCE_TRINKETS,
+  COMMUNITY_QUEST_PRODUCTION_PROOFS,
   COMMUNITY_TRINKET_PRODUCTION_PROOFS,
   COMMUNITY_TRINKET_RUNTIME_ADAPTERS,
   evaluateCommunityTrinketCapability,
@@ -106,11 +107,12 @@ describe('C1B-R2 production proof mutation gate', () => {
   });
 
   it('accepts the real bidirectional registry without unresolved, mismatched, or orphan proofs', () => {
-    const analysis = analyzeProductionProofBindings(COMMUNITY_TRINKET_PRODUCTION_PROOFS, PRODUCTION_PROOF_REGISTRY);
+    const allManifests = { ...COMMUNITY_TRINKET_PRODUCTION_PROOFS, ...COMMUNITY_QUEST_PRODUCTION_PROOFS };
+    const analysis = analyzeProductionProofBindings(allManifests, PRODUCTION_PROOF_REGISTRY);
     expect(analysis).toMatchObject({
-      registeredProofCount: 7,
-      requiredProofCount: 8,
-      resolvedProofCount: 8,
+      registeredProofCount: 11,
+      requiredProofCount: 36,
+      resolvedProofCount: 36,
       unresolvedProofCount: 0,
       crossDefinitionMismatchCount: 0,
       wrongTypeCount: 0,

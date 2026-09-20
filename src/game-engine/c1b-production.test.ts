@@ -50,10 +50,15 @@ describe('C1B production content gate', () => {
     expect(migrated.enabledContentSets).toEqual(['core']);
   });
 
-  it('Community selectors fail closed for quests and expose only both-side validated trinkets', () => {
+  it('Community selectors expose only production-proved quests and both-side validated trinkets', () => {
     const campaign = createNewCampaign('community-complete-edition');
     const context = runtimeContentContext(campaign);
-    expect(getQuestPool(context)).toEqual([]);
+    expect(getQuestPool(context).map((quest) => quest.id)).toEqual([
+      'community-quest-ruins-lvl1-scout-ahead',
+      'community-quest-ruins-lvl1-wipe-em-out',
+      'community-quest-warrens-lvl1-explore-the-sewers',
+      'community-quest-warrens-lvl1-pork-chop',
+    ]);
     expect(getBossQuestPool(context)).toEqual([]);
     expect(getTrinketPoolByLevel(context, 1).map((item) => item.id).sort()).toEqual([
       'community-trinket-core-accuracy-stone',
