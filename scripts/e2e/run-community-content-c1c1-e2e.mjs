@@ -32,7 +32,7 @@ const vite = spawn(process.execPath, [resolve(root, 'node_modules/vite/bin/vite.
 let result;
 try {
   if (!await waitForPort(true, 30_000)) throw new Error('Vite did not start');
-  result = await run(process.execPath, [resolve(root, 'node_modules/@playwright/test/cli.js'), 'test', '--config=playwright.critical.config.ts', 'e2e/phase11a4-c1c1-community-quest.spec.ts']);
+  result = await run(process.execPath, [resolve(root, 'node_modules/@playwright/test/cli.js'), 'test', '--config=playwright.critical.config.ts', 'e2e/phase11a4-c1c1r-real-community-quest.spec.ts']);
 } finally {
   if (vite.exitCode === null) vite.kill('SIGTERM');
   if (!await waitForPort(false, 15_000) && vite.exitCode === null) vite.kill('SIGKILL');
