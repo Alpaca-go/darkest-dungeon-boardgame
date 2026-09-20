@@ -4,6 +4,11 @@ import type { TrinketDefinition, TrinketLevel } from '../../types/trinkets';
 import questData from './quests/data.json' with { type: 'json' };
 import trinketData from './trinkets/data.json' with { type: 'json' };
 import { buyPriceForLevel, sellPriceForLevel } from '../trinkets/trinket-pricing';
+import {
+  PRODUCTION_PROOF_REGISTRY,
+  allProofsResolve,
+  type RegisteredProductionProof,
+} from '../../audit/production-proof-registry';
 
 export type ProductionStatus = 'PRODUCTION_READY' | 'ADAPTER_REQUIRED' | 'ENGINE_PRIMITIVE_MISSING' | 'SOURCE_BLOCKED';
 
@@ -143,13 +148,13 @@ export const COMMUNITY_TRINKET_PRODUCTION_PROOFS: Readonly<Record<string, Commun
   [accuracyStone.id]: {
     definitionId: accuracyStone.id, runtimeAdapterId: 'post-roll-accuracy-stone-v1', sourceSupported: true,
     semanticSupported: true, stateful: true, productionTests: ['C1BR-PA-ACCURACY-RUNTIME'],
-    saveReplayTests: ['C1BR-E2E-ACCURACY-SAVE-RELOAD'], selectorTests: ['C1BR-CS-TRINKET-METADATA'],
+    saveReplayTests: ['C1BR-SAVE-ACCURACY-SIDE-REPLAY'], selectorTests: ['C1BR-CS-TRINKET-METADATA'],
     e2eTests: ['C1BR-E2E-ACCURACY'],
   },
   [criticalStone.id]: {
     definitionId: criticalStone.id, runtimeAdapterId: 'post-roll-critical-stone-v1', sourceSupported: true,
     semanticSupported: true, stateful: true, productionTests: ['C1BR-PA-CRITICAL-RUNTIME'],
-    saveReplayTests: ['C1BR-E2E-CRITICAL-SAVE-RELOAD'], selectorTests: ['C1BR-CS-TRINKET-METADATA'],
+    saveReplayTests: ['C1BR-SAVE-CRITICAL-SIDE-REPLAY'], selectorTests: ['C1BR-CS-TRINKET-METADATA'],
     e2eTests: ['C1BR-E2E-CRITICAL'],
   },
 });
@@ -158,6 +163,7 @@ export function evaluateCommunityTrinketCapability(
   source: SourceTrinket,
   adapters: Readonly<Record<string, CommunityTrinketRuntimeAdapter>> = COMMUNITY_TRINKET_RUNTIME_ADAPTERS,
   proofs: Readonly<Record<string, CommunityProductionProof>> = COMMUNITY_TRINKET_PRODUCTION_PROOFS,
+  registeredProofs: Readonly<Record<string, RegisteredProductionProof>> = PRODUCTION_PROOF_REGISTRY,
 ): RuntimeCapabilityRecord {
   const sourceBlocked = source.sourceStatus !== 'source-supported';
   const adapter = adapters[source.id];
@@ -165,10 +171,10 @@ export function evaluateCommunityTrinketCapability(
   const proofMatches = Boolean(adapter && proof && proof.definitionId === source.id && proof.runtimeAdapterId === adapter.adapterId);
   const measuredRuntimeProof: RuntimeProofState = {
     adapterPresent: Boolean(adapter),
-    productionProofPresent: Boolean(proofMatches && proof.productionTests.length),
-    saveReplayProofPresent: Boolean(proofMatches && (!proof.stateful || proof.saveReplayTests.length)),
-    selectorProofPresent: Boolean(proofMatches && proof.selectorTests.length),
-    e2eProofPresent: Boolean(proofMatches && proof.e2eTests.length),
+    productionProofPresent: Boolean(proofMatches && allProofsResolve(proof.productionTests, 'production-runtime', source.id, registeredProofs)),
+    saveReplayProofPresent: Boolean(proofMatches && (!proof.stateful || allProofsResolve(proof.saveReplayTests, 'save-replay', source.id, registeredProofs))),
+    selectorProofPresent: Boolean(proofMatches && allProofsResolve(proof.selectorTests, 'selector', source.id, registeredProofs)),
+    e2eProofPresent: Boolean(proofMatches && allProofsResolve(proof.e2eTests, 'e2e', source.id, registeredProofs)),
   };
   const declaredMissingPrimitives = [...new Set([
     ...source.positiveSide.runtimeSupport.missingCapabilities,
