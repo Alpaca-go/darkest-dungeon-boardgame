@@ -160,11 +160,11 @@ describe('正负面与翻面', () => {
     expect(c.heroes[0].equippedTrinkets[0].currentSide).toBe('positive');
   });
 
-  it('使用后翻面；攻击掷骰前声明会累加修正后翻到另一面', () => {
+  it('使用后翻面；看到攻击掷骰后、结算前声明并翻到另一面', () => {
     let c = makeBattle(grant(fresh(), 0, 'critical-stone'), 0);
     const inst = c.heroes[0].equippedTrinkets[0];
     const opened = openTrinketWindow(c, {
-      window: 'before-attack-roll',
+      window: 'after-attack-roll-before-hit-resolution',
       heroId: c.heroes[0].instanceId,
       eventId: 'atk-1',
     });
@@ -179,14 +179,14 @@ describe('正负面与翻面', () => {
   it('同一回合每张 Trinket 只能用一次（关键规则 5）', () => {
     let c = makeBattle(grant(fresh(), 0, 'critical-stone'), 0);
     const opened = openTrinketWindow(c, {
-      window: 'before-attack-roll',
+      window: 'after-attack-roll-before-hit-resolution',
       heroId: c.heroes[0].instanceId,
       eventId: 'atk-1',
     });
     const used = useTrinket(opened.campaign, opened.opened[0].id);
     // 同一回合（同 turnId）再开窗口不应产生新机会
     const reopen = openTrinketWindow(used.campaign, {
-      window: 'before-attack-roll',
+      window: 'after-attack-roll-before-hit-resolution',
       heroId: used.campaign.heroes[0].instanceId,
       eventId: 'atk-2',
     });
