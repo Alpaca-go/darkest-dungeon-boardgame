@@ -4,11 +4,25 @@ import { applyDefaultLoadout, createNewCampaign, selectParty } from '../src/game
 import { createSaveSnapshot } from '../src/game-engine/save';
 import { generateDungeon } from '../src/game-engine/dungeon';
 import { initBattle } from '../src/game-engine/battle';
+import {
+  PRODUCTION_PROOF_REGISTRY,
+  type RegisteredProductionProof,
+} from '../src/audit/production-proof-registry';
 
 const STORAGE_KEY = 'dd-web-prototype-save-v1';
 const PARTY = ['crusader', 'highwayman', 'vestal', 'plague-doctor'];
 const ACCURACY = 'community-trinket-core-accuracy-stone';
 const CRITICAL = 'community-trinket-core-critical-stone';
+
+function productionE2ETest(
+  registration: RegisteredProductionProof,
+  body: Parameters<typeof test>[1],
+) {
+  if (registration.runner !== 'playwright' || registration.proofType !== 'e2e' || registration.status !== 'active') {
+    throw new Error(`Invalid Playwright proof registration: ${registration.proofId}`);
+  }
+  test(registration.proofId, body);
+}
 
 function hamletState(): HamletState {
   return {
@@ -137,7 +151,7 @@ test('C1BR-E2E-OFFER: real Nomad UI is deterministic on reload and diverse acros
   expect(other).not.toEqual(first);
 });
 
-test('C1BR-E2E-ACCURACY: buy, equip, use to turn roll 9 into a hit, flip, and replay', async ({ page }) => {
+productionE2ETest(PRODUCTION_PROOF_REGISTRY['C1BR-E2E-ACCURACY'], async ({ page }) => {
   await setBrowserSeed(page, 7);
   await importSave(page, hamletSave());
   const purchased = await purchase(page, ACCURACY);
@@ -146,7 +160,7 @@ test('C1BR-E2E-ACCURACY: buy, equip, use to turn roll 9 into a hit, flip, and re
   await usePostRollTrinket(page, ACCURACY, 9, /掷 9 命中/);
 });
 
-test('C1BR-E2E-CRITICAL: buy, equip, use to turn roll 8 into a crit, flip, and replay', async ({ page }) => {
+productionE2ETest(PRODUCTION_PROOF_REGISTRY['C1BR-E2E-CRITICAL'], async ({ page }) => {
   await setBrowserSeed(page, 7);
   await importSave(page, hamletSave());
   const purchased = await purchase(page, CRITICAL);
