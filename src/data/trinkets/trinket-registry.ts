@@ -14,13 +14,18 @@ import type {
 } from '../../types/trinkets';
 import { VERIFIED_TRINKETS } from './verified-trinkets';
 import { PROTOTYPE_TRINKETS } from './prototype-trinkets';
+import { COMMUNITY_RUNTIME_TRINKETS } from '../community-reference/production-runtime';
 import { OFFICIAL_TRINKET_IMPORT_TEMPLATE_META as importTemplate } from './official-trinket-import-template-meta';
 
 /** 官方核心盒 Trinket 标称总数（规则书）。 */
 export const EXPECTED_CORE_TRINKET_COUNT = 38;
 
 /** 全部已定义 Trinket（官方可信 + 原型）。 */
-export const ALL_TRINKETS: TrinketDefinition[] = [...VERIFIED_TRINKETS, ...PROTOTYPE_TRINKETS];
+export const ALL_TRINKETS: TrinketDefinition[] = [
+  ...VERIFIED_TRINKETS,
+  ...PROTOTYPE_TRINKETS,
+  ...COMMUNITY_RUNTIME_TRINKETS,
+];
 
 const BY_ID = new Map<string, TrinketDefinition>();
 for (const t of ALL_TRINKETS) {
@@ -101,7 +106,7 @@ export function filledTemplateSlotCount(): number {
  * 只报告、不修改数据；Debug 面板与单元测试共用。
  */
 export function validateTrinketRegistry(
-  defs: TrinketDefinition[] = ALL_TRINKETS
+  defs: TrinketDefinition[] = [...VERIFIED_TRINKETS, ...PROTOTYPE_TRINKETS]
 ): TrinketRegistrySummary {
   const seen = new Set<string>();
   const duplicateIds: string[] = [];

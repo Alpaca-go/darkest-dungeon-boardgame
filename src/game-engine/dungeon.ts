@@ -11,6 +11,7 @@ import { createRuleEventContext, emitPartyRuleEvent } from './quirks';
 import { drawTrinket } from './trinkets/draw-trinket';
 import { acquireTrinket } from './trinkets/acquire-trinket';
 import type { MentalEventSourceType } from '../types';
+import { runtimeContentContext } from '../data/content-selector';
 
 /** Phase 7：全队压力统一入口（存活英雄各 +amount，走统一管线处理阈值）。 */
 function applyPartyStress(
@@ -136,7 +137,11 @@ function applyRoomResult(campaign: CampaignState, room: DungeonRoom): CampaignSt
       //   刷新后由存档恢复，绝不重抽（房间已 cleared + sourceEventId 幂等双保险）；
       // - 官方池只出 verified 卡；池为空（异常情况）则安全跳过，不白屏。
       const lootEventId = `loot:${dungeon.questId}:${room.id}`;
-      const draw = drawTrinket({ level: 1, pool: 'official' });
+      const draw = drawTrinket({
+        level: 1,
+        pool: 'official',
+        runtimeContext: runtimeContentContext(campaign),
+      });
       if (draw.definition) {
         c = acquireTrinket(c, {
           trinketId: draw.definition.id,

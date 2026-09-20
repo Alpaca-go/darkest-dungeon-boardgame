@@ -89,6 +89,7 @@ import {
   completeReplacementFlow as engineCompleteReplacementFlow,
 } from '../game-engine/replacement';
 import type { DamageCommand, NomadWagonVisitCommand } from '../types';
+import type { RuntimeContentProfile } from '../types/content-runtime';
 // ---- Phase 8C：Trinket / Nomad Wagon ----
 import {
   beginHeroSkillAction,
@@ -124,7 +125,7 @@ interface GameStore {
   ui: UiState;
 
   // ---- 通用 ----
-  newCampaign(): void;
+  newCampaign(profile?: RuntimeContentProfile): void;
   continueCampaign(): void;
   resetCampaign(): void;
   /** 手动保存当前战役（存档管理 UI 用）。 */
@@ -280,8 +281,8 @@ export const useGameStore = create<GameStore>((set, get) => {
     campaign: initialCampaign,
     ui: EMPTY_UI,
 
-    newCampaign: () => {
-      const campaign = createNewCampaign();
+    newCampaign: (profile = 'legacy-prototype') => {
+      const campaign = createNewCampaign(profile);
       saveCampaign(campaign);
       set({ campaign, ui: { ...EMPTY_UI } });
     },

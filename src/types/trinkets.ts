@@ -31,7 +31,7 @@ export type TrinketSide = 'positive' | 'negative';
 export type TrinketOfficialDataStatus = 'verified' | 'partial' | 'prototype' | 'unavailable';
 
 /** 数据来源域：官方卡池 vs 原型测试卡池。 */
-export type TrinketDataOrigin = 'official' | 'prototype';
+export type TrinketDataOrigin = 'official' | 'prototype' | 'community';
 
 /** Trinket 获取来源。 */
 export type TrinketSourceKind =

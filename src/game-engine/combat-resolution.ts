@@ -8,19 +8,16 @@ export interface AttackResult {
   damage: number;
 }
 
-/**
- * 简化 d10 命中判定：
- * - 掷 1..10，结果 <= accuracy 视为命中；
- * - 自然 10 必中且为暴击（暴击统一造成最大伤害）；
- * - Phase 8C：critBonus 降低暴击阈值（crit 判定为 roll >= 10 - critBonus 且命中）。
- * 未命中 damage = 0。
- */
-export function resolveAttack(
+export function rollAttackDie(): number {
+  return d10();
+}
+
+export function resolveAttackFromRoll(
   skill: BattleSkillLike,
+  roll: number,
   accuracyBonus = 0,
-  critBonus = 0
+  critBonus = 0,
 ): AttackResult {
-  const roll = d10();
   const accuracy = (skill.accuracy ?? 7) + accuracyBonus;
   const critThreshold = Math.max(2, 10 - Math.max(0, critBonus));
   const natural10 = roll === 10;
@@ -33,6 +30,21 @@ export function resolveAttack(
     damage = crit ? max : randInt(min, max);
   }
   return { roll, hit, crit, damage };
+}
+
+/**
+ * 简化 d10 命中判定：
+ * - 掷 1..10，结果 <= accuracy 视为命中；
+ * - 自然 10 必中且为暴击（暴击统一造成最大伤害）；
+ * - Phase 8C：critBonus 降低暴击阈值（crit 判定为 roll >= 10 - critBonus 且命中）。
+ * 未命中 damage = 0。
+ */
+export function resolveAttack(
+  skill: BattleSkillLike,
+  accuracyBonus = 0,
+  critBonus = 0
+): AttackResult {
+  return resolveAttackFromRoll(skill, d10(), accuracyBonus, critBonus);
 }
 
 /** 对目标施加伤害（不低于 0），死亡则标记 isAlive=false。 */

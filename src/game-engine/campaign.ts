@@ -15,6 +15,7 @@ import { createInitialNomadWagonState } from './trinkets/trinket-state';
 import { createInitialCampaignProgress } from './campaign/campaign-progress';
 import { createInitialActFourState } from './campaign/act-four/act-four-state';
 import { validateQuestSelection } from './campaign/campaign-orchestrator';
+import type { RuntimeContentProfile } from '../types/content-runtime';
 
 /** Phase 1 初始补给池默认值（后续阶段可由 Provision Dice 生成替换）。 */
 export const DEFAULT_PROVISIONS: ProvisionPool = {
@@ -30,10 +31,18 @@ export const DEFAULT_PROVISIONS: ProvisionPool = {
  * 规则：进入 CAMPAIGN_SETUP，等待玩家选择 4 名英雄。
  * 仅设置 Phase 1 需要的字段，其余预留字段给后续阶段。
  */
-export function createNewCampaign(): CampaignState {
+export function createNewCampaign(
+  runtimeContentProfile: RuntimeContentProfile = 'legacy-prototype',
+): CampaignState {
   const now = nowIso();
   return {
     saveVersion: SAVE_VERSION, // v8 = Phase 9A（Boss / Imminent Threat / Face the Threat）
+    runtimeContentProfile,
+    enabledContentSets: runtimeContentProfile === 'community-complete-edition'
+      ? ['core', 'color-of-madness', 'crimson-court']
+      : ['core'],
+    enabledRegions: ['ruins', 'warrens', 'weald', 'cove', 'crimson-court'],
+    questRuntimeState: null,
     id: createId('cmp'),
     createdAt: now,
     updatedAt: now,

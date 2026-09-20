@@ -15,6 +15,7 @@ import { retargetPendingReplacement } from './replacement';
 import { finalizeQuestReturnToHamlet } from '../campaign/campaign-orchestrator';
 import { selectQuest } from '../campaign';
 import { engineChooseQuest } from '../campaign/campaign-orchestrator';
+import { getBossQuestPool, getQuestPool, runtimeContentContext } from '../../data/content-selector';
 
 export type QuestCommandError =
   | 'already-resolved'
@@ -170,6 +171,11 @@ export function commitQuestSelection(
   questId: string,
   options?: { now?: string },
 ): QuestSelectionResult {
+  const context = runtimeContentContext(campaign);
+  const eligible = [...getQuestPool(context), ...getBossQuestPool(context)];
+  if (!eligible.some((quest) => quest.id === questId)) {
+    return { ok: false, campaign, error: 'quest-not-production-eligible' };
+  }
   const gate = engineChooseQuest(campaign, questId, options);
   if (!gate.ok) {
     return { ok: false, campaign, error: 'no-active-quest' };

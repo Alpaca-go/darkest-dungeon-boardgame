@@ -14,8 +14,8 @@ import { buyPriceForLevel, sellPriceForLevel } from './trinket-pricing';
 
 /**
  * Critical Stone（暴击石）。
- * - Positive：攻击掷骰前声明，本次攻击暴击 +2（暴击阈值由 10 降到 8）；
- * - Negative：攻击掷骰前声明，本次攻击命中 -2；
+ * - Positive：看到攻击掷骰后、命中/暴击结算前声明，本次攻击暴击 +2；
+ * - Negative：同一反应窗口声明，本次攻击命中 -2；
  * - 使用任一面后翻到另一面（关键规则 4）。
  */
 export const CRITICAL_STONE: TrinketDefinition = {
@@ -25,8 +25,8 @@ export const CRITICAL_STONE: TrinketDefinition = {
   positiveSide: {
     side: 'positive',
     label: '暴击 +2',
-    description: '攻击掷骰前声明：本次攻击暴击 +2。使用后翻到负面。',
-    useWindows: ['before-attack-roll'],
+    description: '看到攻击掷骰后、结算前声明：本次攻击暴击 +2。使用后翻到负面。',
+    useWindows: ['after-attack-roll-before-hit-resolution'],
     modifiers: [{ type: 'crit', amount: 2 }],
     effects: [],
     canUse: [{ type: 'in-battle' }, { type: 'is-acting-hero' }],
@@ -34,8 +34,8 @@ export const CRITICAL_STONE: TrinketDefinition = {
   negativeSide: {
     side: 'negative',
     label: '命中 -2',
-    description: '攻击掷骰前声明：本次攻击命中 -2。使用后翻回正面。',
-    useWindows: ['before-attack-roll'],
+    description: '看到攻击掷骰后、结算前声明：本次攻击命中 -2。使用后翻回正面。',
+    useWindows: ['after-attack-roll-before-hit-resolution'],
     modifiers: [{ type: 'accuracy', amount: -2 }],
     effects: [],
     canUse: [{ type: 'in-battle' }, { type: 'is-acting-hero' }],

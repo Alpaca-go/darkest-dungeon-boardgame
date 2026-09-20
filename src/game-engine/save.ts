@@ -88,7 +88,7 @@ export const STORAGE_KEY = 'dd-web-prototype-save-v1';
  *      Load 后由存档数据自行补齐（如缺失则视为空字符串，等待下次 selectQuest 重新生成）。
  *      迁移**不**根据 questCount 推断 Act，**不**代掷任何随机数，**不**触发 Threat Draw。
  */
-export const SAVE_VERSION = 17;
+export const SAVE_VERSION = 18;
 
 /**
  * v2 存档文件结构。
@@ -114,7 +114,7 @@ interface SaveEnvelopeV1 {
 }
 
 /** 可被迁移到当前版本的历史存档版本号。 */
-const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
 
 /** 读档结果：区分正常 / 无存档 / 损坏 / 版本不支持。 */
 export type LoadStatus = 'ok' | 'empty' | 'corrupt' | 'unsupported';
@@ -1243,6 +1243,30 @@ export function migrateCampaignToV17(campaign: CampaignState): CampaignState {
   };
 }
 
+/** C1B: old saves remain on the legacy pool; migration never silently opts in. */
+export function migrateCampaignToV18(campaign: CampaignState): CampaignState {
+  const raw = campaign as CampaignState & Record<string, unknown>;
+  const runtimeContentProfile = raw.runtimeContentProfile === 'community-complete-edition'
+    ? 'community-complete-edition'
+    : 'legacy-prototype';
+  return {
+    ...campaign,
+    saveVersion: SAVE_VERSION,
+    runtimeContentProfile,
+    enabledContentSets: Array.isArray(raw.enabledContentSets)
+      ? raw.enabledContentSets.filter((value): value is 'core' | 'color-of-madness' | 'crimson-court' =>
+          value === 'core' || value === 'color-of-madness' || value === 'crimson-court')
+      : ['core'],
+    enabledRegions: Array.isArray(raw.enabledRegions)
+      ? raw.enabledRegions.filter((value): value is 'ruins' | 'warrens' | 'weald' | 'cove' | 'crimson-court' =>
+          value === 'ruins' || value === 'warrens' || value === 'weald' || value === 'cove' || value === 'crimson-court')
+      : ['ruins', 'warrens', 'weald', 'cove'],
+    questRuntimeState: raw.questRuntimeState && typeof raw.questRuntimeState === 'object'
+      ? campaign.questRuntimeState ?? null
+      : null,
+  };
+}
+
 /** 净化已存在的 campaignProgress（补缺字段 / clamp / 去掉非法类型），不重新随机。 */
 function sanitizeCampaignProgress(raw: CampaignProgressState): CampaignProgressState {
   const base = createInitialCampaignProgress({
@@ -1288,7 +1312,7 @@ function sanitizeCampaignProgress(raw: CampaignProgressState): CampaignProgressS
  *  → v16 = Phase 10E Final Encounter 四形态 → v17 = Phase 11A.1 Campaign Orchestration）。
  */
 export function migrateCampaignToLatest(campaign: CampaignState): CampaignState {
-  return migrateCampaignToV17(
+  return migrateCampaignToV18(migrateCampaignToV17(
     migrateCampaignToV16(
       migrateCampaignToV15(
         migrateCampaignToV14(
@@ -1306,7 +1330,7 @@ export function migrateCampaignToLatest(campaign: CampaignState): CampaignState 
         ),
       ),
     ),
-  );
+  ));
 }
 
 /**

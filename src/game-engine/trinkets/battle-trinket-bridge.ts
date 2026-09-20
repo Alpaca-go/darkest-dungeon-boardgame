@@ -15,6 +15,8 @@
 
 import type { CampaignState, PendingBattleAction } from '../../types';
 import { heroSkillActionError, heroUseSkill } from '../battle';
+import { rollAttackDie } from '../combat-resolution';
+import { getSkillById } from '../../data/skills';
 import type { TrinketActionBonuses } from '../battle';
 import { openTrinketWindow, openOpportunities, findOpportunity } from './trinket-opportunities';
 import { useTrinket, declineTrinketUse, sumModifiers } from './use-trinket';
@@ -59,16 +61,27 @@ export function beginHeroSkillAction(
   const err = heroSkillActionError(battle, actorUnitId, skillId, targetId);
   if (err) return { campaign, error: err, paused: false };
 
+  const skill = getSkillById(skillId);
+  if (skill?.targetSide !== 'enemy') {
+    const resolved = heroUseSkill(battle, actorUnitId, skillId, targetId);
+    return {
+      campaign: synchronizeCommunityGuardianDeaths({ ...campaign, battle: resolved }),
+      error: null,
+      paused: false,
+    };
+  }
+
   const heroId = heroInstanceIdForUnit(campaign, actorUnitId);
   const hero = heroId ? findHero(campaign, heroId) : undefined;
 
-  // 开窗（英雄未找到或无可用 Trinket 时 hasOpportunity=false，直接执行）
+  // Roll first. The result is persisted and visible while the reaction window is open.
+  const attackRoll = rollAttackDie();
   let next = campaign;
   let hasOpportunity = false;
   if (hero) {
     const eventId = `atk:${battle.battleId}:r${battle.round}:i${battle.initiativeIndex}:${actorUnitId}:ap${battle.currentActionPoints}`;
     const opened = openTrinketWindow(next, {
-      window: 'before-attack-roll',
+      window: 'after-attack-roll-before-hit-resolution',
       heroId: hero.instanceId,
       eventId,
     });
@@ -82,6 +95,7 @@ export function beginHeroSkillAction(
       actorUnitId,
       skillId,
       targetId,
+      attackRoll,
       accuracyBonus: 0,
       critBonus: 0,
       damageBonus: 0,
@@ -94,7 +108,7 @@ export function beginHeroSkillAction(
   }
 
   // 无机会 → 直接执行（零加成）
-  const resolved = heroUseSkill(next.battle!, actorUnitId, skillId, targetId);
+  const resolved = heroUseSkill(next.battle!, actorUnitId, skillId, targetId, undefined, attackRoll);
   return { campaign: synchronizeCommunityGuardianDeaths({ ...next, battle: resolved }), error: null, paused: false };
 }
 
@@ -108,7 +122,14 @@ function resumePendingAction(campaign: CampaignState): CampaignState {
     crit: pa.critBonus,
     damage: pa.damageBonus,
   };
-  const resolved = heroUseSkill(battle, pa.actorUnitId, pa.skillId, pa.targetId, bonuses);
+  const resolved = heroUseSkill(
+    battle,
+    pa.actorUnitId,
+    pa.skillId,
+    pa.targetId,
+    bonuses,
+    pa.attackRoll,
+  );
   return synchronizeCommunityGuardianDeaths({ ...campaign, battle: { ...resolved, pendingAction: null } });
 }
 
@@ -139,8 +160,8 @@ export function resolveTrinketOpportunity(
     const res = useTrinket(next, opportunityId);
     if (res.error) return { campaign, error: res.error, resumed: false };
     next = res.campaign;
-    // before-attack-roll 修正注入冻结动作
-    if (opp.useWindow === 'before-attack-roll' && next.battle?.pendingAction) {
+    // Post-roll/pre-resolution modifiers apply to the persisted roll.
+    if (opp.useWindow === 'after-attack-roll-before-hit-resolution' && next.battle?.pendingAction) {
       const pa = next.battle.pendingAction;
       next = {
         ...next,

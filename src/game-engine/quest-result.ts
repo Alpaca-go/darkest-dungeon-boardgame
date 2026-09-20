@@ -15,6 +15,7 @@ import {
 } from './progression/quest-objectives';
 import { consumeTemporarySkillForms } from './progression/skill-forms';
 import { drawTrinket } from './trinkets/draw-trinket';
+import { runtimeContentContext } from '../data/content-selector';
 import { acquireTrinket } from './trinkets/acquire-trinket';
 import { hasTrinketCapacity } from './trinkets/capacity';
 
@@ -162,7 +163,11 @@ export function applyQuestRewards(
     // - 幂等键用「任务 id + 本次为第 N 次完成」，同一任务日后重打不会被误判为重复；
     // - 官方池抽 Level I；池为空则安全跳过（不白屏、不发假卡）。
     const rewardEventId = `quest-reward:${summary.questId}:q${campaign.completedQuestCount}`;
-    const draw = drawTrinket({ level: 1, pool: 'official' });
+    const draw = drawTrinket({
+      level: 1,
+      pool: 'official',
+      runtimeContext: runtimeContentContext(next),
+    });
     if (draw.definition) {
       // 归属英雄：有空位的第一名存活英雄；若全满则留待分配（玩家在入村前结算）。
       const rewardHero = next.heroes.find(

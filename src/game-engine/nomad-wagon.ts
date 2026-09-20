@@ -30,6 +30,7 @@ import {
 } from '../data/trinkets/trinket-pricing';
 import { getTrinketById } from '../data/trinkets/trinket-registry';
 import { drawTrinket } from './trinkets/draw-trinket';
+import { runtimeContentContext } from '../data/content-selector';
 import { acquireTrinket } from './trinkets/acquire-trinket';
 import {
   createInitialNomadWagonState,
@@ -126,6 +127,7 @@ export function ensureNomadWagonOffer(campaign: CampaignState): CampaignState {
     const res = drawTrinket({
       level,
       pool: 'official',
+      runtimeContext: runtimeContentContext(campaign),
       excludedTrinketIds: drawn,
       allowDuplicateFallback: true,
     });

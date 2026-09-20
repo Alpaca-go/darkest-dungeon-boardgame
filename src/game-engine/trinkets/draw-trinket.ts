@@ -11,10 +11,13 @@ import {
   officialTrinketPoolByLevel,
   prototypeTrinketPool,
 } from '../../data/trinkets/trinket-registry';
+import { getTrinketPoolByLevel, type RuntimeContentContext } from '../../data/content-selector';
 
 export interface DrawTrinketCommand {
   level: TrinketLevel;
   pool: 'official' | 'prototype';
+  /** Production callers pass the persisted profile. Omission preserves legacy tests/debug. */
+  runtimeContext?: RuntimeContentContext;
   /** 已被 Nomad Wagon Offer 等占用、不希望重复出现的定义 id。 */
   excludedTrinketIds?: string[];
   /** 允许候选耗尽时回退到不排除（Offer 场景需要「宁可重复不可空转」时置 true）。 */
@@ -30,7 +33,12 @@ export interface DrawTrinketResult {
   candidateCount: number;
 }
 
-function poolByLevel(pool: 'official' | 'prototype', level: TrinketLevel): TrinketDefinition[] {
+function poolByLevel(
+  pool: 'official' | 'prototype',
+  level: TrinketLevel,
+  runtimeContext?: RuntimeContentContext,
+): TrinketDefinition[] {
+  if (runtimeContext) return getTrinketPoolByLevel(runtimeContext, level);
   if (pool === 'official') return officialTrinketPoolByLevel(level);
   return prototypeTrinketPool().filter((t) => t.level === level);
 }
@@ -41,7 +49,7 @@ function poolByLevel(pool: 'official' | 'prototype', level: TrinketLevel): Trink
  */
 export function drawTrinket(cmd: DrawTrinketCommand): DrawTrinketResult {
   const excluded = new Set(cmd.excludedTrinketIds ?? []);
-  const all = poolByLevel(cmd.pool, cmd.level);
+  const all = poolByLevel(cmd.pool, cmd.level, cmd.runtimeContext);
   let candidates = all.filter((t) => !excluded.has(t.id));
   if (candidates.length === 0 && cmd.allowDuplicateFallback) candidates = all;
   if (candidates.length === 0) return { definition: null, candidateCount: 0 };

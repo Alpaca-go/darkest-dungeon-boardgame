@@ -26,6 +26,13 @@ import type {
 } from './bosses';
 
 import type {
+  CommunityContentSet,
+  CommunityRegion,
+  QuestRuntimeState,
+  RuntimeContentProfile,
+} from './content-runtime';
+
+import type {
   HeroTrinketState,
   NomadWagonState,
   PendingTrinketAllocation,
@@ -336,6 +343,8 @@ export interface PendingBattleAction {
   actorUnitId: string;
   skillId: string;
   targetId: string;
+  /** Attack d10 is generated before the reaction window and persisted across save/reload. */
+  attackRoll: number;
   /** Trinket 累计的命中修正。 */
   accuracyBonus: number;
   /** Trinket 累计的暴击阈值修正（crit 判定为 roll >= 10 - critBonus）。 */
@@ -702,6 +711,11 @@ export interface HeroLevelProfile {
 /** 战役状态（存档根对象）。 */
 export interface CampaignState {
   saveVersion: number;
+  /** C1B content selection is persisted. Missing legacy values migrate fail-closed. */
+  runtimeContentProfile?: RuntimeContentProfile;
+  enabledContentSets?: CommunityContentSet[];
+  enabledRegions?: CommunityRegion[];
+  questRuntimeState?: QuestRuntimeState | null;
   id: string;
   createdAt: string;
   updatedAt: string;

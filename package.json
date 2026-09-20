@@ -14,6 +14,7 @@
     "test:e2e:lifecycle": "node scripts/e2e/run-critical-e2e.mjs && node scripts/e2e/run-critical-e2e.mjs",
     "test:e2e:community-reference": "node scripts/e2e/run-community-reference-e2e.mjs",
     "test:e2e:community-visual-smoke": "node scripts/e2e/run-community-visual-smoke.mjs",
+    "test:e2e:community-content-c1b": "node scripts/e2e/run-community-content-c1b-e2e.mjs",
     "verify:phase11a2-3": "vite-node scripts/audit/verify-phase11a2-3.ts",
     "audit:content": "vite-node scripts/audit/content.ts",
     "audit:rules": "vite-node scripts/audit/rules.ts",
@@ -51,7 +52,8 @@
     "import:complete-edition-c1a": "node scripts/assets/import-complete-edition-c1a.mjs",
     "test:complete-edition-c1a-registry": "vite-node scripts/audit/test-complete-edition-c1a-registry.ts",
     "generate:complete-edition-c1ar": "node scripts/audit/generate-complete-edition-c1ar.mjs",
-    "verify:complete-edition-c1ar": "node scripts/audit/verify-complete-edition-c1ar.mjs"
+    "verify:complete-edition-c1ar": "node scripts/audit/verify-complete-edition-c1ar.mjs",
+    "audit:complete-edition-c1b": "vite-node scripts/audit/generate-complete-edition-c1b.ts"
   },
   "dependencies": {
     "lucide-react": "^0.408.0",

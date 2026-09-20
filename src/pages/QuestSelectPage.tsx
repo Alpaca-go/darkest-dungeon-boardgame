@@ -1,6 +1,7 @@
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useGameStore } from '../store/useGameStore';
-import { QUESTS, isStandardQuestId, isBossQuestId, getQuestById } from '../data/quests';
+import { isStandardQuestId, isBossQuestId, getQuestById } from '../data/quests';
+import { getBossQuestPool, getQuestPool, runtimeContentContext } from '../data/content-selector';
 import { canSelectStandardQuest, canSelectBossQuest } from '../game-engine/campaign/campaign-progress';
 import { getThreatById } from '../data/bosses/threat-registry';
 import QuestCard from '../components/quest/QuestCard';
@@ -27,6 +28,10 @@ export default function QuestSelectPage() {
   const standardSelectable = canSelectStandardQuest(cp);
   const bossSelectable = canSelectBossQuest(cp);
   const activeThreat = cp.activeThreatId ? getThreatById(cp.activeThreatId) : null;
+  const context = runtimeContentContext(campaign);
+  const questPool = cp.bossQuestRequired
+    ? getBossQuestPool(context)
+    : getQuestPool(context);
 
   const onChoose = (questId: string) => {
     chooseQuest(questId);
@@ -67,7 +72,7 @@ export default function QuestSelectPage() {
       ) : null}
 
       <div className="grid sm:grid-cols-2 gap-4">
-        {QUESTS.map((q) => {
+        {questPool.map((q) => {
           const isStandard = isStandardQuestId(q.id);
           const isBoss = isBossQuestId(q.id);
           const isDisabled =
@@ -85,6 +90,15 @@ export default function QuestSelectPage() {
           );
         })}
       </div>
+
+      {questPool.length === 0 ? (
+        <div className="mt-4 rounded border border-dd-danger bg-dd-danger/10 p-4" data-testid="community-quest-pool-blocked">
+          <strong>当前没有符合条件且运行时已验证的 Community Quest。</strong>
+          <p className="mt-1 text-sm text-dd-muted">
+            系统已阻止原型任务回退；请启用对应区域/内容集，或等待所需共享运行时能力完成。
+          </p>
+        </div>
+      ) : null}
 
       <p className="text-xs text-dd-muted mt-4">
         选择后将立即生成地牢并进入探索阶段（任务 ID 与状态已写入战役存档）。

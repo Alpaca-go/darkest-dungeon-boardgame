@@ -24,6 +24,7 @@ import { currentTrinketTurnId, findHero } from './trinket-state';
  */
 export const WIRED_WINDOWS: readonly TrinketUseWindow[] = [
   'before-attack-roll',
+  'after-attack-roll-before-hit-resolution',
   'hero-turn-start',
   'room-entered',
 ] as const;

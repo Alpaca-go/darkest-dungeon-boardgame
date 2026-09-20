@@ -20,7 +20,7 @@ import {
   isLegalTarget,
   isSkillUsableFrom,
 } from './targeting';
-import { resolveAttack } from './combat-resolution';
+import { resolveAttack, resolveAttackFromRoll } from './combat-resolution';
 import { applyBattleUnitDamage } from './damage';
 import { applyBattleUnitHealing } from './healing';
 import {
@@ -554,7 +554,8 @@ export function heroUseSkill(
   unitId: string,
   skillId: string,
   targetId: string,
-  trinketBonuses: TrinketActionBonuses = NO_TRINKET_BONUSES
+  trinketBonuses: TrinketActionBonuses = NO_TRINKET_BONUSES,
+  preRolledAttack?: number,
 ): BattleState {
   const actor = findUnit(state, unitId);
   if (!actor || actor.side !== 'hero' || actor.id !== state.activeActorId) return state;
@@ -582,11 +583,18 @@ export function heroUseSkill(
   if (skill.targetSide === 'enemy') {
     // Phase 7：精神效果（Focused）的当前回合命中加成
     // Phase 8C：Trinket 命中 / 暴击阈值修正（来自冻结动作）
-    const res = resolveAttack(
-      skill,
-      (actor.turnAccuracyBonus ?? 0) + trinketBonuses.accuracy,
-      trinketBonuses.crit
-    );
+    const res = preRolledAttack === undefined
+      ? resolveAttack(
+          skill,
+          (actor.turnAccuracyBonus ?? 0) + trinketBonuses.accuracy,
+          trinketBonuses.crit,
+        )
+      : resolveAttackFromRoll(
+          skill,
+          preRolledAttack,
+          (actor.turnAccuracyBonus ?? 0) + trinketBonuses.accuracy,
+          trinketBonuses.crit,
+        );
     if (trinketBonuses.accuracy !== 0 || trinketBonuses.crit !== 0 || trinketBonuses.damage !== 0) {
       s = pushBattleLog(
         s,

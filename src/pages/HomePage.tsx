@@ -29,8 +29,10 @@ export default function HomePage() {
   const saveDetail = loadSaveDetailed();
   const broken = saveDetail.status === 'corrupt' || saveDetail.status === 'unsupported';
 
+  const [newProfile, setNewProfile] = useState<'legacy-prototype' | 'community-complete-edition'>('legacy-prototype');
+
   const doNew = () => {
-    newCampaign();
+    newCampaign(newProfile);
     navigate('/setup');
   };
 
@@ -143,6 +145,18 @@ export default function HomePage() {
       </p>
 
       <div className="flex flex-wrap gap-3 mb-3">
+        <label className="flex items-center gap-2 text-sm text-dd-muted">
+          内容版本
+          <select
+            data-testid="runtime-content-profile"
+            value={newProfile}
+            onChange={(event) => setNewProfile(event.target.value as typeof newProfile)}
+            className="rounded border border-dd-border bg-dd-panel2 px-2 py-2 text-dd-text"
+          >
+            <option value="community-complete-edition">Community Complete Edition</option>
+            <option value="legacy-prototype">Legacy Prototype</option>
+          </select>
+        </label>
         <button
           onClick={handleNew}
           className="px-4 py-2 rounded bg-dd-positive text-white font-semibold hover:brightness-110 transition-colors"
@@ -224,6 +238,10 @@ export default function HomePage() {
         <h2 className="text-sm font-bold text-dd-text mb-3 tracking-wide">存档摘要</h2>
         {campaign ? (
           <dl className="grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
+            <div className="flex justify-between">
+              <dt className="text-dd-muted">内容版本</dt>
+              <dd className="text-dd-text">{campaign.runtimeContentProfile ?? 'legacy-prototype'}</dd>
+            </div>
             <div className="flex justify-between">
               <dt className="text-dd-muted">Act</dt>
               <dd className="text-dd-text">{campaign.act}</dd>
