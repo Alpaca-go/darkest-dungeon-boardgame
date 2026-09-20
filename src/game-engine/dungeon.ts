@@ -1,4 +1,4 @@
-import type { CampaignState, DungeonRoom, DungeonState } from '../types';
+import type { CampaignState, DungeonRoom, DungeonRoomType, DungeonState, QuestDefinition } from '../types';
 import { DUNGEON_NODES, roomTypeMapForQuest } from '../data/dungeons';
 import { CURIOS } from '../data/curios';
 import { createId, d10, pick } from './random';
@@ -12,6 +12,9 @@ import { drawTrinket } from './trinkets/draw-trinket';
 import { acquireTrinket } from './trinkets/acquire-trinket';
 import type { MentalEventSourceType } from '../types';
 import { runtimeContentContext } from '../data/content-selector';
+import { getQuestById } from '../data/quests';
+import type { QuestRoomTokenType } from '../types/content-runtime';
+import { recordQuestQualificationEvent } from './quests/quest-runtime';
 
 /** Phase 7：全队压力统一入口（存活英雄各 +amount，走统一管线处理阈值）。 */
 function applyPartyStress(
@@ -41,7 +44,85 @@ export const TREASURE_GOLD = 20;
  * 根据任务生成一张固定拓扑的地牢地图。
  * 起点为 current，其余房间初始隐藏，类型由任务模板决定。
  */
-export function generateDungeon(questId: string): DungeonState {
+const COMMUNITY_ROOM_NODES = [
+  { id: 'start', adjacentRoomIds: ['A'] },
+  { id: 'A', adjacentRoomIds: ['start', 'B', 'E'] },
+  { id: 'B', adjacentRoomIds: ['A', 'C', 'F'] },
+  { id: 'C', adjacentRoomIds: ['B', 'D'] },
+  { id: 'D', adjacentRoomIds: ['C'] },
+  { id: 'E', adjacentRoomIds: ['A', 'F'] },
+  { id: 'F', adjacentRoomIds: ['E', 'B', 'G'] },
+  { id: 'G', adjacentRoomIds: ['F', 'H'] },
+  { id: 'H', adjacentRoomIds: ['G'] },
+] as const;
+
+function stableSeed(value: string): number {
+  let hash = 2166136261;
+  for (const char of value) hash = Math.imul(hash ^ char.charCodeAt(0), 16777619) >>> 0;
+  return hash || 1;
+}
+
+function deterministicShuffle<T>(values: readonly T[], seedText: string): T[] {
+  const result = [...values];
+  let seed = stableSeed(seedText);
+  for (let index = result.length - 1; index > 0; index -= 1) {
+    seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+    const target = seed % (index + 1);
+    [result[index], result[target]] = [result[target], result[index]];
+  }
+  return result;
+}
+
+const tokenToRuntimeType = (token: QuestRoomTokenType): DungeonRoomType => {
+  if (token === 'lair') return 'battle';
+  if (token === 'dark' || token === 'curio') return 'empty';
+  return token;
+};
+
+export function generateCommunityDungeon(quest: QuestDefinition, seed = quest.id): DungeonState {
+  if (!quest.dungeonComposition) throw new Error(`Community Quest has no source composition: ${quest.id}`);
+  const tokens = quest.dungeonComposition.roomTokens.flatMap(({ roomType, count }) =>
+    Array.from({ length: count }, () => roomType));
+  if (tokens.length !== quest.roomCount || tokens.length !== COMMUNITY_ROOM_NODES.length - 1) {
+    throw new Error(`Community Quest room composition mismatch: ${quest.id}`);
+  }
+  const arranged = deterministicShuffle(tokens, `${quest.id}:${seed}`);
+  const rooms: DungeonRoom[] = COMMUNITY_ROOM_NODES.map((node, index) => {
+    if (node.id === 'start') {
+      return { id: node.id, type: 'start', status: 'current', adjacentRoomIds: [...node.adjacentRoomIds], curioId: null, curioUsed: false };
+    }
+    const sourceRoomToken = arranged[index - 1];
+    const curioIndex = stableSeed(`${quest.id}:${seed}:${node.id}`) % CURIOS.length;
+    return {
+      id: node.id,
+      type: tokenToRuntimeType(sourceRoomToken),
+      sourceRoomToken,
+      status: 'hidden',
+      adjacentRoomIds: [...node.adjacentRoomIds],
+      curioId: sourceRoomToken === 'curio' ? CURIOS[curioIndex]?.id ?? null : null,
+      curioUsed: false,
+    };
+  });
+  return {
+    questId: quest.id,
+    questRunId: createId('qrun'),
+    currentRoomId: 'start',
+    previousRoomId: null,
+    rooms,
+    scoutedNextMove: false,
+    roomsCleared: 0,
+    objectiveComplete: false,
+    canLeave: true,
+  };
+}
+
+export function generateDungeonForQuest(quest: QuestDefinition, seed = quest.id): DungeonState {
+  return quest.runtimeContentMetadata?.sourceOrigin === 'community-complete-edition'
+    ? generateCommunityDungeon(quest, seed)
+    : generateLegacyDungeon(quest.id);
+}
+
+function generateLegacyDungeon(questId: string): DungeonState {
   const typeMap = roomTypeMapForQuest(questId);
   const rooms: DungeonRoom[] = DUNGEON_NODES.map((node) => ({
     id: node.id,
@@ -64,6 +145,11 @@ export function generateDungeon(questId: string): DungeonState {
     objectiveComplete: false,
     canLeave: true,
   };
+}
+
+export function generateDungeon(questId: string, seed = questId): DungeonState {
+  const quest = getQuestById(questId);
+  return quest ? generateDungeonForQuest(quest, seed) : generateLegacyDungeon(questId);
 }
 
 /** 当前房间是否还有可揭示（hidden）的相邻房间。 */
@@ -122,7 +208,7 @@ function applyRoomResult(campaign: CampaignState, room: DungeonRoom): CampaignSt
     case 'empty': {
       const updated = markRoom(dungeon, room.id, 'cleared');
       const c: CampaignState = { ...campaign, dungeon: { ...updated, roomsCleared: updated.roomsCleared + 1 } };
-      return log(c, '进入空房间，已安全清除。', 'success');
+      return log(recordQuestQualificationEvent(c, room), '进入空房间，已安全清除。', 'success');
     }
     case 'treasure': {
       const updated = markRoom(dungeon, room.id, 'cleared');
@@ -150,7 +236,7 @@ function applyRoomResult(campaign: CampaignState, room: DungeonRoom): CampaignSt
           questId: dungeon.questId,
         }).campaign;
       }
-      return c;
+      return recordQuestQualificationEvent(c, room);
     }
     case 'objective': {
       const updated = markRoom(dungeon, room.id, 'cleared');
@@ -162,7 +248,7 @@ function applyRoomResult(campaign: CampaignState, room: DungeonRoom): CampaignSt
           objectiveComplete: true,
         },
       };
-      return log(c, '抵达目标房间，任务目标已完成！', 'success');
+      return log(recordQuestQualificationEvent(c, room), '抵达目标房间，任务目标已完成！', 'success');
     }
     case 'trap': {
       // 消耗 Tool 拆除；不足则随机英雄受伤、全队压力上升。陷阱房间保持已访问（不清除）。

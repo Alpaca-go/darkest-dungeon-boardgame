@@ -14,16 +14,10 @@ const POS: Record<string, { x: number; y: number }> = {
   C: { x: 490, y: 170 },
   D: { x: 190, y: 310 },
   E: { x: 340, y: 310 },
+  F: { x: 490, y: 310 },
+  G: { x: 490, y: 240 },
+  H: { x: 490, y: 100 },
 };
-
-const EDGES: [string, string][] = [
-  ['start', 'A'],
-  ['A', 'B'],
-  ['B', 'C'],
-  ['A', 'D'],
-  ['B', 'E'],
-  ['D', 'E'],
-];
 
 const STATUS_RING: Record<DungeonRoom['status'], string> = {
   hidden: 'border-dashed border-dd-border opacity-70',
@@ -45,11 +39,15 @@ const STATUS_LABEL: Record<DungeonRoom['status'], string> = {
 export default function DungeonMap({ dungeon, onRoomClick }: DungeonMapProps) {
   const current = dungeon.rooms.find((r) => r.id === dungeon.currentRoomId);
   const adjacent = new Set(current?.adjacentRoomIds ?? []);
+  const roomIds = new Set(dungeon.rooms.map((room) => room.id));
+  const edges = dungeon.rooms.flatMap((room) => room.adjacentRoomIds
+    .filter((other) => roomIds.has(other) && room.id.localeCompare(other) < 0)
+    .map((other) => [room.id, other] as [string, string]));
 
   return (
     <div className="relative w-full" style={{ height: 400 }}>
       <svg className="absolute inset-0 w-full h-full" viewBox="0 0 640 380" preserveAspectRatio="xMidYMid meet">
-        {EDGES.map(([a, b]) => {
+        {edges.map(([a, b]) => {
           const pa = POS[a];
           const pb = POS[b];
           const active = adjacent.has(a) && adjacent.has(b) && (current?.id === a || current?.id === b);

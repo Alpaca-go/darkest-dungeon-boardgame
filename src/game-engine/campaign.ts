@@ -16,6 +16,7 @@ import { createInitialCampaignProgress } from './campaign/campaign-progress';
 import { createInitialActFourState } from './campaign/act-four/act-four-state';
 import { validateQuestSelection } from './campaign/campaign-orchestrator';
 import type { RuntimeContentProfile } from '../types/content-runtime';
+import { createQuestRuntimeState } from './quests/quest-runtime';
 
 /** Phase 1 初始补给池默认值（后续阶段可由 Provision Dice 生成替换）。 */
 export const DEFAULT_PROVISIONS: ProvisionPool = {
@@ -266,6 +267,7 @@ export function selectQuest(campaign: CampaignState, questId: string): CampaignS
   let next: CampaignState = {
     ...campaign,
     currentQuestId: questId,
+    questRuntimeState: createQuestRuntimeState(quest),
     questStatus: 'active',
     dungeon: generateDungeon(questId),
     battle: null,

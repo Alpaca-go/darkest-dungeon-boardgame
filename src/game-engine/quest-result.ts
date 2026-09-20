@@ -18,6 +18,7 @@ import { drawTrinket } from './trinkets/draw-trinket';
 import { runtimeContentContext } from '../data/content-selector';
 import { acquireTrinket } from './trinkets/acquire-trinket';
 import { hasTrinketCapacity } from './trinkets/capacity';
+import { calculateQuestXpReward } from './quests/quest-runtime';
 
 /** 空补给池（结算后清空用）。 */
 export const EMPTY_PROVISIONS: ProvisionPool = {
@@ -68,7 +69,8 @@ export function resolveQuestResult(
   // Phase 8D：XP 完全由 Objective 完成数决定（0-3），与 outcome 解耦。
   // 阵亡英雄不获得 XP；存活英雄全部获得相同数量（不按人数拆分）。
   const objectives = evaluateQuestObjectives(campaign);
-  const xpPerHero = Math.min(3, objectives.filter((o) => o.completed).length);
+  const sourceXp = quest?.xpUnit ? calculateQuestXpReward(campaign) : null;
+  const xpPerHero = sourceXp?.xpEarned ?? Math.min(3, objectives.filter((o) => o.completed).length);
 
   return {
     questId: campaign.currentQuestId ?? '',
@@ -81,7 +83,7 @@ export function resolveQuestResult(
     provisionsLeft: { ...campaign.provisions },
     objectives,
     xpPerHero,
-    completedObjectiveCount: objectives.filter((o) => o.completed).length,
+    completedObjectiveCount: sourceXp?.xpUnitsEarned ?? objectives.filter((o) => o.completed).length,
     heroes: campaign.heroes.map((h) => ({
       instanceId: h.instanceId,
       name: h.name,

@@ -1263,12 +1263,19 @@ function sanitizeQuestRuntimeState(value: unknown): CampaignState['questRuntimeS
     return result;
   }, {});
   if (!counters || !flags) return null;
+  const optionalCount = (key: 'qualifiedUnitCount' | 'xpUnitsEarned' | 'xpEarned'): number | undefined => {
+    const entry = raw[key];
+    return typeof entry === 'number' && Number.isFinite(entry) && entry >= 0 ? Math.floor(entry) : undefined;
+  };
   return {
     definitionId: raw.definitionId,
     counters,
     flags,
     selectedRoomIds: [...raw.selectedRoomIds],
     setAsideRoomIds: [...raw.setAsideRoomIds],
+    qualifiedUnitCount: optionalCount('qualifiedUnitCount'),
+    xpUnitsEarned: optionalCount('xpUnitsEarned'),
+    xpEarned: optionalCount('xpEarned'),
   };
 }
 

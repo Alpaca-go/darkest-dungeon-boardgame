@@ -1,5 +1,6 @@
 import type { QuestDefinition } from '../types';
 import { FACE_THE_THREAT_QUEST } from './quests/face-the-threat';
+import { COMMUNITY_RUNTIME_QUESTS } from './community-reference/production-runtime';
 
 // ---------------------------------------------------------------------------
 // Phase 8D：每个 Standard Quest 附带最多 3 条结构化 Objective，
@@ -98,12 +99,13 @@ export const QUEST_IDS = {
 
 /** 按 id 取 Quest（Phase 11A.1：现在能取到 Boss Quest）。 */
 export function getQuestById(id: string): QuestDefinition | undefined {
-  return QUESTS.find((q) => q.id === id);
+  return QUESTS.find((q) => q.id === id) ?? COMMUNITY_RUNTIME_QUESTS.find((q) => q.id === id);
 }
 
 /** 判定一个 Quest id 是否属于 Standard Quest。 */
 export function isStandardQuestId(id: string): boolean {
-  return STANDARD_QUESTS.some((q) => q.id === id);
+  return STANDARD_QUESTS.some((q) => q.id === id)
+    || COMMUNITY_RUNTIME_QUESTS.some((q) => q.id === id && q.type === 'standard');
 }
 
 /** 判定一个 Quest id 是否属于 Boss Quest（Phase 9A §8：仅 face-the-threat）。 */

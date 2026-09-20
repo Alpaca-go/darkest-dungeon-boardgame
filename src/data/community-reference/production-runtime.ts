@@ -1,5 +1,10 @@
 import type { QuestDefinition } from '../../types';
-import type { RuntimeContentMetadata } from '../../types/content-runtime';
+import type {
+  QuestDungeonComposition,
+  QuestRoomTokenType,
+  QuestXpUnitDefinition,
+  RuntimeContentMetadata,
+} from '../../types/content-runtime';
 import type { TrinketDefinition, TrinketLevel } from '../../types/trinkets';
 import questData from './quests/data.json' with { type: 'json' };
 import trinketData from './trinkets/data.json' with { type: 'json' };
@@ -45,6 +50,13 @@ export interface CommunityTrinketRuntimeAdapter {
   definition: TrinketDefinition;
 }
 
+export interface CommunityQuestRuntimeAdapter {
+  adapterId: 'c1c1-simple-community-quest-v1';
+  definitionId: string;
+  requiredPrimitives: ['QUEST_ROOM_TOKEN_COMPOSITION', 'QUEST_XP_UNIT_ACCOUNTING'];
+  definition: QuestDefinition;
+}
+
 export interface CommunityProductionProof {
   definitionId: string;
   runtimeAdapterId: string;
@@ -69,33 +81,156 @@ const normalizePrimitive = (message: string): string => {
   return message.replace(/[^A-Za-z0-9]+/g, '_').replace(/^_|_$/g, '').toUpperCase();
 };
 
-const EMPTY_PROOF: RuntimeProofState = {
-  adapterPresent: false,
-  productionProofPresent: false,
-  saveReplayProofPresent: false,
-  selectorProofPresent: false,
-  e2eProofPresent: false,
+const IMPLEMENTED_QUEST_PRIMITIVES = new Set([
+  'QUEST_ROOM_TOKEN_COMPOSITION',
+  'QUEST_XP_UNIT_ACCOUNTING',
+]);
+
+type SimpleSourceQuest = SourceQuest & {
+  objective: {
+    targetEntity: 'room' | 'lair';
+    minimumQuestGoal: number | null;
+    xpUnit: { amount: number; targetCount: number };
+  };
+  rewards: Array<{ kind: string; cap?: { amount?: number } }>;
+  dungeonStructure: {
+    roomTokens: Partial<Record<QuestRoomTokenType, number>>;
+    placement: 'shuffle-on-layout-room-slots';
+  };
+  specialRules: unknown[];
 };
 
-export const COMMUNITY_QUEST_CAPABILITIES: RuntimeCapabilityRecord[] = questData.map((source) => {
+function isC1C1SimpleCoreQuest(source: SourceQuest): source is SimpleSourceQuest {
+  const declared = [...new Set(source.runtimeSupport.missingCapabilities.map(normalizePrimitive))];
+  return source.sourceStatus === 'source-supported'
+    && (source.region === 'ruins' || source.region === 'warrens')
+    && source.questType === 'standard'
+    && Array.isArray(source.specialRules) && source.specialRules.length === 0
+    && declared.length === 2
+    && declared.every((primitive) => IMPLEMENTED_QUEST_PRIMITIVES.has(primitive));
+}
+
+function adaptSimpleCommunityQuest(source: SimpleSourceQuest): CommunityQuestRuntimeAdapter {
+  if (source.specialRules.length !== 0) throw new Error(`Simple Quest adapter rejects special rules: ${source.id}`);
+  const roomTokens = Object.entries(source.dungeonStructure.roomTokens)
+    .filter((entry): entry is [QuestRoomTokenType, number] => Number.isInteger(entry[1]) && Number(entry[1]) > 0)
+    .map(([roomType, count]) => ({ roomType, count }));
+  const composition: QuestDungeonComposition = {
+    roomTokens,
+    placement: source.dungeonStructure.placement,
+  };
+  const reward = source.rewards.find((entry) => entry.kind === 'xp');
+  const xpUnit: QuestXpUnitDefinition = {
+    qualificationEvent: 'room-cleared',
+    targetEntity: source.objective.targetEntity,
+    unitSize: source.objective.xpUnit.targetCount,
+    xpPerUnit: source.objective.xpUnit.amount,
+    maximumXp: reward?.cap?.amount ?? null,
+    minimumQuestGoal: source.objective.minimumQuestGoal,
+  };
+  const runtimeContentMetadata: RuntimeContentMetadata = {
+    sourceDefinitionId: source.id,
+    contentSet: 'core',
+    region: source.region as 'ruins' | 'warrens',
+    sourceOrigin: 'community-complete-edition',
+  };
+  return {
+    adapterId: 'c1c1-simple-community-quest-v1',
+    definitionId: source.id,
+    requiredPrimitives: ['QUEST_ROOM_TOKEN_COMPOSITION', 'QUEST_XP_UNIT_ACCOUNTING'],
+    definition: {
+      id: source.id,
+      name: source.printedName,
+      type: 'standard',
+      description: `Source-backed ${source.region} quest.`,
+      dungeonLevel: Number(source.level),
+      roomCount: Number(source.roomCount),
+      objective: `${xpUnit.xpPerUnit} XP per ${xpUnit.unitSize} ${xpUnit.targetEntity}${xpUnit.unitSize === 1 ? '' : 's'} cleared`,
+      reward: `0-${xpUnit.maximumXp ?? 3} XP`,
+      difficulty: source.level === 1 ? 'easy' : source.level === 2 ? 'normal' : 'hard',
+      objectives: [],
+      runtimeContentMetadata,
+      dungeonComposition: composition,
+      xpUnit,
+    },
+  };
+}
+
+export const COMMUNITY_QUEST_RUNTIME_ADAPTERS: Readonly<Record<string, CommunityQuestRuntimeAdapter>> = Object.freeze(
+  Object.fromEntries(questData.filter(isC1C1SimpleCoreQuest).map((source) => {
+    const adapter = adaptSimpleCommunityQuest(source);
+    return [source.id, adapter];
+  })),
+);
+
+const questDefinitionIds = Object.keys(COMMUNITY_QUEST_RUNTIME_ADAPTERS);
+export const COMMUNITY_QUEST_PRODUCTION_PROOFS: Readonly<Record<string, CommunityProductionProof>> = Object.freeze(
+  Object.fromEntries(questDefinitionIds.map((definitionId) => [definitionId, {
+    definitionId,
+    runtimeAdapterId: 'c1c1-simple-community-quest-v1',
+    sourceSupported: true,
+    semanticSupported: true,
+    stateful: true,
+    productionTests: ['C1C1-QUEST-RUNTIME'],
+    saveReplayTests: ['C1C1-QUEST-SAVE-REPLAY'],
+    selectorTests: ['C1C1-QUEST-SELECTOR'],
+    e2eTests: ['C1C1-E2E-COMMUNITY-QUEST'],
+  }])),
+);
+
+export function evaluateCommunityQuestCapability(
+  source: SourceQuest,
+  adapters: Readonly<Record<string, CommunityQuestRuntimeAdapter>> = COMMUNITY_QUEST_RUNTIME_ADAPTERS,
+  proofs: Readonly<Record<string, CommunityProductionProof>> = COMMUNITY_QUEST_PRODUCTION_PROOFS,
+  registeredProofs: Readonly<Record<string, RegisteredProductionProof>> = PRODUCTION_PROOF_REGISTRY,
+): RuntimeCapabilityRecord {
   const sourceBlocked = source.sourceStatus !== 'source-supported';
-  const missing = [...new Set(source.runtimeSupport.missingCapabilities.map(normalizePrimitive))];
+  const declaredMissingPrimitives = [...new Set(source.runtimeSupport.missingCapabilities.map(normalizePrimitive))];
+  const missingPrimitives = declaredMissingPrimitives.filter((primitive) => !IMPLEMENTED_QUEST_PRIMITIVES.has(primitive));
+  const adapter = adapters[source.id];
+  const proof = proofs[source.id];
+  const proofMatches = Boolean(adapter && proof && proof.definitionId === source.id && proof.runtimeAdapterId === adapter.adapterId);
+  const measuredRuntimeProof: RuntimeProofState = {
+    adapterPresent: Boolean(adapter),
+    productionProofPresent: Boolean(proofMatches && allProofsResolve(proof.productionTests, 'production-runtime', source.id, registeredProofs)),
+    saveReplayProofPresent: Boolean(proofMatches && allProofsResolve(proof.saveReplayTests, 'save-replay', source.id, registeredProofs)),
+    selectorProofPresent: Boolean(proofMatches && allProofsResolve(proof.selectorTests, 'selector', source.id, registeredProofs)),
+    e2eProofPresent: Boolean(proofMatches && allProofsResolve(proof.e2eTests, 'e2e', source.id, registeredProofs)),
+  };
+  const proofComplete = Boolean(proofMatches && proof.sourceSupported && proof.semanticSupported
+    && measuredRuntimeProof.productionProofPresent && measuredRuntimeProof.saveReplayProofPresent
+    && measuredRuntimeProof.selectorProofPresent && measuredRuntimeProof.e2eProofPresent);
+  const productionStatus: ProductionStatus = sourceBlocked ? 'SOURCE_BLOCKED'
+    : missingPrimitives.length > 0 ? 'ENGINE_PRIMITIVE_MISSING'
+      : adapter && proofComplete ? 'PRODUCTION_READY' : 'ADAPTER_REQUIRED';
+  const blockerCodes = productionStatus === 'SOURCE_BLOCKED' ? ['SOURCE_EVIDENCE_BLOCKED']
+    : productionStatus === 'ENGINE_PRIMITIVE_MISSING' ? missingPrimitives
+      : productionStatus === 'PRODUCTION_READY' ? [] : [
+        ...(adapter ? [] : ['RUNTIME_ADAPTER_MISSING']),
+        ...(proofMatches ? [] : ['PRODUCTION_PROOF_MISSING_OR_MISMATCHED']),
+        ...(measuredRuntimeProof.productionProofPresent ? [] : ['PRODUCTION_TEST_PROOF_MISSING']),
+        ...(measuredRuntimeProof.saveReplayProofPresent ? [] : ['SAVE_REPLAY_PROOF_MISSING']),
+        ...(measuredRuntimeProof.selectorProofPresent ? [] : ['SELECTOR_PROOF_MISSING']),
+        ...(measuredRuntimeProof.e2eProofPresent ? [] : ['E2E_PROOF_MISSING']),
+      ];
   return {
     definitionId: source.id,
     sourceStatus: source.sourceStatus,
     semanticStatus: source.normalizationStatus,
-    objectiveRuntimeSupport: sourceBlocked ? 'SOURCE_BLOCKED' : 'ENGINE_PRIMITIVE_MISSING',
-    specialRuleRuntimeSupport: sourceBlocked ? 'SOURCE_BLOCKED' : 'ENGINE_PRIMITIVE_MISSING',
-    requiredPrimitives: missing,
+    objectiveRuntimeSupport: productionStatus,
+    specialRuleRuntimeSupport: source.specialRules.length === 0 ? productionStatus : 'ENGINE_PRIMITIVE_MISSING',
+    requiredPrimitives: declaredMissingPrimitives,
     existingPrimitives: source.runtimeSupport.existingCandidates,
-    missingPrimitives: missing,
-    declaredMissingPrimitives: missing,
-    adapterStatus: sourceBlocked ? 'NOT_APPLICABLE' : 'REQUIRED',
-    productionStatus: sourceBlocked ? 'SOURCE_BLOCKED' : 'ENGINE_PRIMITIVE_MISSING',
-    blockerCodes: sourceBlocked ? ['SOURCE_EVIDENCE_BLOCKED'] : missing,
-    measuredRuntimeProof: { ...EMPTY_PROOF },
+    missingPrimitives,
+    declaredMissingPrimitives,
+    adapterStatus: sourceBlocked ? 'NOT_APPLICABLE' : adapter ? 'IMPLEMENTED' : 'REQUIRED',
+    productionStatus,
+    blockerCodes,
+    measuredRuntimeProof,
   };
-});
+}
+
+export const COMMUNITY_QUEST_CAPABILITIES: RuntimeCapabilityRecord[] = questData.map((source) => evaluateCommunityQuestCapability(source));
 
 function sourceTrinket(id: string): SourceTrinket {
   const found = trinketData.find((item) => item.id === id);
@@ -180,12 +315,16 @@ export function evaluateCommunityTrinketCapability(
     ...source.positiveSide.runtimeSupport.missingCapabilities,
     ...source.negativeSide.runtimeSupport.missingCapabilities,
   ].map(normalizePrimitive))];
+  const missingPrimitives = declaredMissingPrimitives.filter((primitive) => primitive !== 'POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW');
   const proofComplete = Boolean(proofMatches && proof.sourceSupported && proof.semanticSupported
     && measuredRuntimeProof.productionProofPresent && measuredRuntimeProof.saveReplayProofPresent
     && measuredRuntimeProof.selectorProofPresent && measuredRuntimeProof.e2eProofPresent);
   const productionStatus: ProductionStatus = sourceBlocked ? 'SOURCE_BLOCKED'
-    : adapter && proofComplete ? 'PRODUCTION_READY' : 'ADAPTER_REQUIRED';
-  const blockerCodes = sourceBlocked ? ['SOURCE_EVIDENCE_BLOCKED'] : productionStatus === 'PRODUCTION_READY' ? [] : [
+    : missingPrimitives.length > 0 ? 'ENGINE_PRIMITIVE_MISSING'
+      : adapter && proofComplete ? 'PRODUCTION_READY' : 'ADAPTER_REQUIRED';
+  const blockerCodes = sourceBlocked ? ['SOURCE_EVIDENCE_BLOCKED']
+    : productionStatus === 'ENGINE_PRIMITIVE_MISSING' ? missingPrimitives
+      : productionStatus === 'PRODUCTION_READY' ? [] : [
     ...(adapter ? [] : ['RUNTIME_ADAPTER_MISSING']),
     ...(proofMatches ? [] : ['PRODUCTION_PROOF_MISSING_OR_MISMATCHED']),
     ...(proof && !proof.sourceSupported ? ['SOURCE_PROOF_MISSING'] : []),
@@ -194,13 +333,13 @@ export function evaluateCommunityTrinketCapability(
     ...(measuredRuntimeProof.saveReplayProofPresent ? [] : ['SAVE_REPLAY_PROOF_MISSING']),
     ...(measuredRuntimeProof.selectorProofPresent ? [] : ['SELECTOR_PROOF_MISSING']),
     ...(measuredRuntimeProof.e2eProofPresent ? [] : ['E2E_PROOF_MISSING']),
-  ];
+      ];
   return {
     definitionId: source.id, sourceStatus: source.sourceStatus, semanticStatus: source.normalizationStatus,
     positiveRuntimeSupport: productionStatus, negativeRuntimeSupport: productionStatus,
     requiredPrimitives: adapter?.requiredPrimitives ?? declaredMissingPrimitives,
     existingPrimitives: [...source.positiveSide.runtimeSupport.existingCandidates, ...source.negativeSide.runtimeSupport.existingCandidates],
-    missingPrimitives: adapter ? [] : declaredMissingPrimitives,
+    missingPrimitives,
     declaredMissingPrimitives, adapterStatus: sourceBlocked ? 'NOT_APPLICABLE' : adapter ? 'IMPLEMENTED' : 'REQUIRED',
     productionStatus, blockerCodes, measuredRuntimeProof,
   };
@@ -213,8 +352,10 @@ export const COMMUNITY_RUNTIME_TRINKETS: TrinketDefinition[] = COMMUNITY_TRINKET
   .map((capability) => COMMUNITY_TRINKET_RUNTIME_ADAPTERS[capability.definitionId]?.definition)
   .filter((definition): definition is TrinketDefinition => Boolean(definition));
 
-// Quest production stays empty until exact adapters and proof manifests exist.
-export const COMMUNITY_RUNTIME_QUESTS: QuestDefinition[] = [];
+export const COMMUNITY_RUNTIME_QUESTS: QuestDefinition[] = COMMUNITY_QUEST_CAPABILITIES
+  .filter((capability) => capability.productionStatus === 'PRODUCTION_READY')
+  .map((capability) => COMMUNITY_QUEST_RUNTIME_ADAPTERS[capability.definitionId]?.definition)
+  .filter((definition): definition is QuestDefinition => Boolean(definition));
 
 export const COMMUNITY_SOURCE_QUESTS: readonly SourceQuest[] = questData;
 export const COMMUNITY_SOURCE_TRINKETS: readonly SourceTrinket[] = trinketData;

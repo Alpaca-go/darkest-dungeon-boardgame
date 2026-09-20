@@ -7,6 +7,7 @@ import type {
 import { getQuestById } from '../../data/quests';
 import { QUEST_XP_POLICY } from '../../data/progression/guild-costs';
 import { createId, nowIso } from '../random';
+import { calculateQuestXpReward } from '../quests/quest-runtime';
 
 // ---------------------------------------------------------------------------
 // Phase 8D：Quest Objective 与 0-3 XP
@@ -128,8 +129,14 @@ export function eligibleXpHeroIds(campaign: CampaignState): string[] {
  */
 export function createQuestXpResult(campaign: CampaignState): QuestXpResult {
   const objectives = evaluateQuestObjectives(campaign);
-  const { completedObjectiveCount, completedObjectiveIds, xpPerHero } = computeQuestXp(objectives);
   const quest = getQuestById(campaign.currentQuestId ?? '');
+  const sourceXp = quest?.xpUnit ? calculateQuestXpReward(campaign) : null;
+  const computed = computeQuestXp(objectives);
+  const completedObjectiveCount = sourceXp?.xpUnitsEarned ?? computed.completedObjectiveCount;
+  const completedObjectiveIds = sourceXp
+    ? Array.from({ length: sourceXp.xpUnitsEarned }, (_, index) => `${quest!.id}-xp-unit-${index + 1}`)
+    : computed.completedObjectiveIds;
+  const xpPerHero = sourceXp?.xpEarned ?? computed.xpPerHero;
   return {
     id: createId('qxp'),
     questId: campaign.currentQuestId ?? '',

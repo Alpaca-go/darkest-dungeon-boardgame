@@ -41,6 +41,7 @@ import {
 import { chooseMonsterAction } from './monster-ai';
 import { isCommunityGuardianUnit, resolveCommunityShuffleMovement, runCommunityGuardianMonsterTurn } from './campaign/act-four/community-guardian-combat';
 import { pushLog } from './log';
+import { recordQuestQualificationEvent } from './quests/quest-runtime';
 import {
   applyQuirkModifiersRaw,
   describeModifierApplications,
@@ -909,6 +910,7 @@ export function resolveVictory(campaign: CampaignState): CampaignState {
     };
     if (room?.type === 'objective') dungeon = { ...dungeon, objectiveComplete: true };
     c = { ...c, dungeon };
+    if (!wasCleared && room) c = recordQuestQualificationEvent(c, { ...room, status: 'cleared' });
   }
 
   const returnSeed = Array.from(b.battleId).reduce((hash, char) => (hash + char.charCodeAt(0) * 17) >>> 0, 0x11a326);

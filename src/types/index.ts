@@ -216,6 +216,8 @@ export interface DungeonRoom {
   curioId?: string | null;
   /** Phase 8B：该 Curio 是否已被互动过（每个房间只能互动一次）。 */
   curioUsed?: boolean;
+  /** Exact printed token identity for source-backed Community dungeons. */
+  sourceRoomToken?: import('./content-runtime').QuestRoomTokenType;
 }
 
 /** Phase 8B：Curio 定义（最小实现，仅承载 Disease 感染来源）。 */
@@ -951,6 +953,9 @@ export interface QuestDefinition {
   objectives: QuestObjectiveDefinition[];
   /** Required for Community production selection; legacy definitions intentionally omit it. */
   runtimeContentMetadata?: import('./content-runtime').RuntimeContentMetadata;
+  /** Source-backed runtime fields are present only on adapted Community quests. */
+  dungeonComposition?: import('./content-runtime').QuestDungeonComposition;
+  xpUnit?: import('./content-runtime').QuestXpUnitDefinition;
 }
 
 /** 房间类型元数据（用于纯色块区分）。 */
