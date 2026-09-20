@@ -90,6 +90,7 @@ import {
 } from '../game-engine/replacement';
 import type { DamageCommand, NomadWagonVisitCommand } from '../types';
 import type { RuntimeContentProfile } from '../types/content-runtime';
+import { restAtCamp as engineRestAtCamp } from '../game-engine/quests/quest-runtime';
 // ---- Phase 8C：Trinket / Nomad Wagon ----
 import {
   beginHeroSkillAction,
@@ -152,6 +153,7 @@ interface GameStore {
   scout(): void;
   moveToRoom(roomId: string): void;
   useProvision(type: keyof ProvisionPool, heroId?: string): void;
+  restAtCamp(): void;
 
   // ---- Phase 3：战斗 ----
   selectBattleSkill(skillId: string | null): void;
@@ -426,6 +428,13 @@ export const useGameStore = create<GameStore>((set, get) => {
         ...c,
         provisions: { ...c.provisions, [type]: c.provisions[type] - 1 },
       });
+    },
+
+    restAtCamp: () => {
+      const c = get().campaign;
+      if (!c) return;
+      const result = engineRestAtCamp(c);
+      if (result.ok) commit(result.campaign);
     },
 
     // ---- Phase 3：战斗动作（全部委托给 game-engine，并自动保存） ----

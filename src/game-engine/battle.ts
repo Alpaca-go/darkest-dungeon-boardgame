@@ -900,17 +900,26 @@ export function resolveVictory(campaign: CampaignState): CampaignState {
   if (c.dungeon) {
     const room = c.dungeon.rooms.find((r) => r.id === b.sourceRoomId);
     const wasCleared = room?.status === 'cleared';
+    const waitsForCurio = room?.sourceRoomToken === 'curio';
     const rooms = c.dungeon.rooms.map((r) =>
-      r.id === b.sourceRoomId ? { ...r, status: 'cleared' as const } : r
+      r.id === b.sourceRoomId ? {
+        ...r,
+        status: waitsForCurio ? 'current' as const : 'cleared' as const,
+        curioGuardResolved: waitsForCurio ? true : r.curioGuardResolved,
+      } : r
     );
     let dungeon = {
       ...c.dungeon,
       rooms,
-      roomsCleared: c.dungeon.roomsCleared + (wasCleared ? 0 : 1),
+      roomsCleared: c.dungeon.roomsCleared + (wasCleared || waitsForCurio ? 0 : 1),
     };
     if (room?.type === 'objective') dungeon = { ...dungeon, objectiveComplete: true };
     c = { ...c, dungeon };
-    if (!wasCleared && room) c = recordQuestQualificationEvent(c, { ...room, status: 'cleared' });
+    if (!wasCleared && !waitsForCurio && room) c = recordQuestQualificationEvent(c, { ...room, status: 'cleared' });
+    if (!wasCleared && room?.sourceRoomToken === 'treasure') {
+      c = { ...c, gold: c.gold + 20 };
+      c = pushLog(c, 'Treasure Room 已清除，获得 20 Gold。', 'success');
+    }
   }
 
   const returnSeed = Array.from(b.battleId).reduce((hash, char) => (hash + char.charCodeAt(0) * 17) >>> 0, 0x11a326);

@@ -10,6 +10,7 @@ import { getCurioById } from '../../data/curios';
 import { createId, d10 } from '../random';
 import { pushLog } from '../log';
 import { acquireDisease } from './acquire-disease';
+import { recordQuestQualificationEvent } from '../quests/quest-runtime';
 
 export interface CurioInteractionResult {
   campaign: CampaignState;
@@ -51,13 +52,20 @@ export function interactWithCurio(
   if (!curio) return { campaign, error: '物件数据缺失' };
 
   // 先标记已使用（无论结果如何都不可重复搜查）
+  const clearsSourceCurio = room.sourceRoomToken === 'curio' && room.curioGuardResolved === true;
   let next: CampaignState = {
     ...campaign,
     dungeon: {
       ...dungeon,
-      rooms: dungeon.rooms.map((r) => (r.id === room.id ? { ...r, curioUsed: true } : r)),
+      rooms: dungeon.rooms.map((r) => (r.id === room.id ? {
+        ...r,
+        curioUsed: true,
+        status: clearsSourceCurio ? 'cleared' as const : r.status,
+      } : r)),
+      roomsCleared: dungeon.roomsCleared + (clearsSourceCurio ? 1 : 0),
     },
   };
+  if (clearsSourceCurio) next = recordQuestQualificationEvent(next, { ...room, status: 'cleared' });
   next = pushLog(next, `${hero.name} 搜查了 ${curio.name}。`, 'info');
 
   switch (curio.effect.kind) {

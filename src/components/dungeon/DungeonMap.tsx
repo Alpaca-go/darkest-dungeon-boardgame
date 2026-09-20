@@ -73,6 +73,7 @@ export default function DungeonMap({ dungeon, onRoomClick }: DungeonMapProps) {
         return (
           <button
             key={room.id}
+            data-testid={`dungeon-room-${room.id}`}
             type="button"
             disabled={!clickable}
             onClick={() => clickable && onRoomClick(room.id)}

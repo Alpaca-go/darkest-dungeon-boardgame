@@ -198,6 +198,7 @@ export type DungeonRoomType =
   | 'battle'
   | 'objective';
 
+
 /** 地牢房间状态。 */
 export type DungeonRoomStatus =
   | 'hidden'
@@ -218,6 +219,8 @@ export interface DungeonRoom {
   curioUsed?: boolean;
   /** Exact printed token identity for source-backed Community dungeons. */
   sourceRoomToken?: import('./content-runtime').QuestRoomTokenType;
+  /** Community Curio rooms cannot clear until the guard roll/battle resolves and a Hero interacts. */
+  curioGuardResolved?: boolean;
 }
 
 /** Phase 8B：Curio 定义（最小实现，仅承载 Disease 感染来源）。 */
@@ -956,6 +959,7 @@ export interface QuestDefinition {
   /** Source-backed runtime fields are present only on adapted Community quests. */
   dungeonComposition?: import('./content-runtime').QuestDungeonComposition;
   xpUnit?: import('./content-runtime').QuestXpUnitDefinition;
+  firewoodSetup?: import('./content-runtime').QuestFirewoodSetup;
 }
 
 /** 房间类型元数据（用于纯色块区分）。 */

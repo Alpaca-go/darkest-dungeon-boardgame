@@ -19,6 +19,7 @@ export default function DungeonExplorePage() {
   const moveToRoom = useGameStore((s) => s.moveToRoom);
   const leaveDungeon = useGameStore((s) => s.leaveDungeon);
   const interactWithCurio = useGameStore((s) => s.interactWithCurio);
+  const restAtCamp = useGameStore((s) => s.restAtCamp);
   const [confirmLeave, setConfirmLeave] = useState(false);
 
   const gamePhase = campaign?.gamePhase;
@@ -67,6 +68,7 @@ export default function DungeonExplorePage() {
               : 'bg-dd-panel2 text-dd-muted cursor-not-allowed',
           ].join(' ')}
           title="侦察相邻房间（全队压力 +1）"
+          data-testid="scout-dungeon"
         >
           Scout（侦察）
         </button>
@@ -74,6 +76,24 @@ export default function DungeonExplorePage() {
       </div>
 
       <TopResourceBar campaign={campaign} />
+
+      {campaign.questRuntimeState ? (
+        <div className="rounded border border-dd-border bg-dd-panel/60 p-3 flex items-center justify-between" data-testid="quest-rest-runtime">
+          <span className="text-sm text-dd-text">
+            Firewood: <strong>{campaign.questRuntimeState.firewoodTokensRemaining ?? 0}</strong>
+            {' · '}Resting Points: <strong>{campaign.questRuntimeState.restingPointsRemaining ?? 0}</strong>
+          </span>
+          <button
+            type="button"
+            data-testid="rest-at-camp"
+            onClick={restAtCamp}
+            disabled={current?.status !== 'cleared' || (campaign.questRuntimeState.firewoodTokensRemaining ?? 0) <= 0}
+            className="px-3 py-1.5 rounded border border-dd-border bg-dd-panel2 text-sm text-dd-text disabled:opacity-40"
+          >
+            Rest at Camp
+          </button>
+        </div>
+      ) : null}
 
       <div className="grid lg:grid-cols-[240px_1fr_260px] gap-4">
         {/* 队伍面板 */}

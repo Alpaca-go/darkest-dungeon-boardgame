@@ -79,6 +79,15 @@ const tokenToRuntimeType = (token: QuestRoomTokenType): DungeonRoomType => {
   return token;
 };
 
+export const QUEST_ROOM_TOKEN_BEHAVIOR_MATRIX = Object.freeze({
+  empty: { sourceSemantic: 'automatically cleared', runtimeRoomType: 'empty', runtimeBehavior: 'clear-on-entry', qualificationBehavior: 'records room clear' },
+  dark: { sourceSemantic: 'Light -1; cannot be cleared', runtimeRoomType: 'empty', runtimeBehavior: 'light-loss-and-visited', qualificationBehavior: 'never qualifies as cleared' },
+  curio: { sourceSemantic: 'guard roll; battle on 1-5; interact; then clear', runtimeRoomType: 'empty', runtimeBehavior: 'guard-roll-battle-or-interaction', qualificationBehavior: 'records after interaction' },
+  treasure: { sourceSemantic: 'guarded battle; 20 Gold after clear', runtimeRoomType: 'treasure', runtimeBehavior: 'battle-then-reward', qualificationBehavior: 'records after victory' },
+  lair: { sourceSemantic: 'guarded battle', runtimeRoomType: 'battle', runtimeBehavior: 'battle', qualificationBehavior: 'records after victory' },
+  trap: { sourceSemantic: 'party hazard; cannot be cleared', runtimeRoomType: 'trap', runtimeBehavior: 'tool-or-party-stress-and-visited', qualificationBehavior: 'never qualifies as cleared' },
+} satisfies Record<QuestRoomTokenType, { sourceSemantic: string; runtimeRoomType: DungeonRoomType; runtimeBehavior: string; qualificationBehavior: string }>);
+
 export function generateCommunityDungeon(quest: QuestDefinition, seed = quest.id): DungeonState {
   if (!quest.dungeonComposition) throw new Error(`Community Quest has no source composition: ${quest.id}`);
   const tokens = quest.dungeonComposition.roomTokens.flatMap(({ roomType, count }) =>
@@ -204,6 +213,39 @@ function applyRoomResult(campaign: CampaignState, room: DungeonRoom): CampaignSt
   const log = (c: CampaignState, msg: string, kind: 'info' | 'success' | 'warning' | 'danger' = 'info') =>
     pushLog(c, msg, kind);
 
+  if (room.sourceRoomToken === 'dark') {
+    const updated = markRoom(dungeon, room.id, 'visited');
+    return log({ ...campaign, light: Math.max(0, campaign.light - 1), dungeon: updated }, '进入 Dark Room：Light -1；该房间不能被清除。', 'warning');
+  }
+  if (room.sourceRoomToken === 'curio') {
+    const guardRoll = d10();
+    if (guardRoll <= 5) {
+      return log(initBattle(campaign, room.id), `Curio Room 守卫判定 ${guardRoll}：遭遇战斗。`, 'danger');
+    }
+    return log({
+      ...campaign,
+      dungeon: {
+        ...dungeon,
+        rooms: dungeon.rooms.map((entry) => entry.id === room.id ? { ...entry, curioGuardResolved: true } : entry),
+      },
+    }, `Curio Room 守卫判定 ${guardRoll}：无守卫；完成 Curio 互动后清除。`, 'success');
+  }
+  if (room.sourceRoomToken === 'treasure') {
+    return log(initBattle(campaign, room.id), 'Treasure Room 由怪物守卫；战斗胜利后获得宝藏。', 'danger');
+  }
+  if (room.sourceRoomToken === 'trap') {
+    let next = campaign;
+    if (next.provisions.tool > 0) {
+      next = { ...next, provisions: { ...next.provisions, tool: next.provisions.tool - 1 } };
+      next = { ...next, dungeon: markRoom(next.dungeon!, room.id, 'visited') };
+      return log(next, '使用 1 Tool 忽略 Trap Room；该房间不能被清除。', 'warning');
+    }
+    const level = Math.max(1, getQuestById(campaign.currentQuestId ?? '')?.dungeonLevel ?? 1);
+    next = applyPartyStress(next, level, 'exploration', `trap-room:${room.id}`);
+    next = { ...next, dungeon: markRoom(next.dungeon!, room.id, 'visited') };
+    return log(next, `Trap Room：每名英雄承受 ${level} Stress；该房间不能被清除。`, 'danger');
+  }
+
   switch (room.type) {
     case 'empty': {
       const updated = markRoom(dungeon, room.id, 'cleared');
@@ -255,7 +297,8 @@ function applyRoomResult(campaign: CampaignState, room: DungeonRoom): CampaignSt
       let c: CampaignState = campaign;
       if (c.provisions.tool > 0) {
         c = { ...c, provisions: { ...c.provisions, tool: c.provisions.tool - 1 } };
-        return log(c, '触发陷阱，消耗 1 Tool 将其拆除。', 'warning');
+        c = { ...c, dungeon: markRoom(c.dungeon!, room.id, 'visited') };
+        return log(c, '触发陷阱，消耗 1 Tool 忽略其效果；该房间不能被清除。', 'warning');
       }
       // Phase 6：陷阱伤害统一走 resolveDamage（Death's Door / Deathblow 生效）
       const victim = pick(c.heroes.filter((h) => !h.dead));

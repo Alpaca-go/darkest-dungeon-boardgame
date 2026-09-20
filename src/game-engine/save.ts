@@ -1263,7 +1263,7 @@ function sanitizeQuestRuntimeState(value: unknown): CampaignState['questRuntimeS
     return result;
   }, {});
   if (!counters || !flags) return null;
-  const optionalCount = (key: 'qualifiedUnitCount' | 'xpUnitsEarned' | 'xpEarned'): number | undefined => {
+  const optionalCount = (key: 'qualifiedUnitCount' | 'xpUnitsEarned' | 'xpEarned' | 'firewoodTokensRemaining' | 'restingPointsRemaining' | 'restingPointsSpent'): number | undefined => {
     const entry = raw[key];
     return typeof entry === 'number' && Number.isFinite(entry) && entry >= 0 ? Math.floor(entry) : undefined;
   };
@@ -1276,6 +1276,9 @@ function sanitizeQuestRuntimeState(value: unknown): CampaignState['questRuntimeS
     qualifiedUnitCount: optionalCount('qualifiedUnitCount'),
     xpUnitsEarned: optionalCount('xpUnitsEarned'),
     xpEarned: optionalCount('xpEarned'),
+    firewoodTokensRemaining: optionalCount('firewoodTokensRemaining') ?? 0,
+    restingPointsRemaining: optionalCount('restingPointsRemaining') ?? 0,
+    restingPointsSpent: optionalCount('restingPointsSpent') ?? 0,
   };
 }
 
