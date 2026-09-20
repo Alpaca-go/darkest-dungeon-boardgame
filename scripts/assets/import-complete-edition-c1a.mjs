@@ -25,6 +25,9 @@ if (process.argv[1]?.replaceAll('\\','/').endsWith('/import-complete-edition-c1a
   const ttsPath = process.argv.includes('--tts') ? arg('--tts') : process.env.COMPLETE_EDITION_TTS;
   if (!ttsPath || sha(readFileSync(ttsPath)) !== expectedSource) throw Error('Supply the C0 TTS using --tts or COMPLETE_EDITION_TTS');
   const tts = json(ttsPath);
+  const manifestFile=`${dataRoot}/c1a-asset-manifest.json`;
+  const previous=existsSync(manifestFile)?json(manifestFile):null;
+  const atlasLocks=new Map((previous?.records??[]).flatMap(r=>Object.values(r.assets)).filter(a=>a.sourceAtlasSha256).map(a=>[a.sourceAtlasUrl,a.sourceAtlasSha256]));
   const records = [];
   const unavailable = new Map();
   for (const r of rows()) {
@@ -50,6 +53,7 @@ if (process.argv[1]?.replaceAll('\\','/').endsWith('/import-complete-edition-c1a
         if (unavailable.has(url)) { assets[side] = {assetPath:null,assetSha256:null,sourceAtlasUrl:url,cardIndex:r.cardIndex,status:'source-blocked',blocker:unavailable.get(url)}; continue; }
       }
       const bytes = readFileSync(cache), meta = await sharp(bytes).metadata();
+      if(atlasLocks.has(url)&&atlasLocks.get(url)!==sha(bytes))throw Error(`Atlas bytes differ from the frozen intake: ${url}`);
       const index = side === 'back' && !r.uniqueBack ? 0 : r.cardIndex;
       const nw = side === 'back' && !r.uniqueBack ? 1 : r.numWidth;
       const nh = side === 'back' && !r.uniqueBack ? 1 : r.numHeight;
@@ -62,6 +66,8 @@ if (process.argv[1]?.replaceAll('\\','/').endsWith('/import-complete-edition-c1a
     }
     records.push({...s,sourceGuid:r.sourceObjectGuid,cardId:r.cardId,deckId:r.deckId,cardIndex:r.cardIndex,physicalIdentity:r.physicalIdentity,ttsPath:r.ttsPath,containerPath:r.containerHierarchy,sourceExpansion:r.sourceCategory,FaceURL:r.faceUrl,BackURL:r.backUrl,NumWidth:r.numWidth,NumHeight:r.numHeight,UniqueBack:r.uniqueBack,assets});
   }
-  write(`${dataRoot}/c1a-asset-manifest.json`, {schemaVersion:'c1a.assets.v1',sourceSha256:expectedSource,c0InventorySha256:sha(readFileSync(c0Path)),cropConvention:'row-major; floor(cell boundary); UniqueBack uses same index',records});
+  const missing=records.flatMap(r=>Object.entries(r.assets).filter(([,a])=>!a.assetPath).map(([side,a])=>({physicalIdentity:r.physicalIdentity,side,...a})));
+  if(missing.length){write('.artifacts/c1a/asset-failures.json',missing);throw Error(`${missing.length} unavailable card sides; previous complete manifest preserved. See .artifacts/c1a/asset-failures.json`);}
+  write(manifestFile, {schemaVersion:'c1a.assets.v1',sourceSha256:expectedSource,c0InventorySha256:sha(readFileSync(c0Path)),cropConvention:'row-major; floor(cell boundary); UniqueBack uses same index',records});
   console.log(`Vendored ${records.length} cards / ${records.length*2} images`);
 }

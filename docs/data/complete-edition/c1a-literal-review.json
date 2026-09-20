@@ -1,0 +1,22 @@
+{
+  "schemaVersion":"c1a.literal-review.v1",
+  "reviewer":"Astra source intake; awaiting independent audit",
+  "method":"Each of the listed cells was visually read in a labeled contact sheet derived from its vendored image. Trinket negative panels were separately rotated for reading. Full backs were reviewed through the eight exact-hash representatives; every physical cell retains its own actual back crop.",
+  "reviewedCells":{
+    "453":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37],
+    "466":[0,1,2,3,4,5,6,7,8,9,10],
+    "444":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44],
+    "445":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33]
+  },
+  "sourceBlockers":[
+    {"cell":"453-22","literalField":"positiveSide.printedText","printedQuote":"When healed, receive [heal]4","reason":"The printed 4 has no plus sign and does not say whether the healing is additional or replaces the received value. Keep that operation unresolved; the number and wording are readable."},
+    {"cell":"444-14","literalField":"printedSpecialRules.0","printedQuote":"Clearing Curio Rooms causes Heroes to a tomb.","reason":"A verb is missing from the printed sentence. Do not copy the action from the Level I card. Other printed rules remain readable."}
+  ],
+  "notBlockers":[
+    "COM Trinkets print no level: null is source-confirmed absence, not a missing value to fill from Core.",
+    "Boss Quest prints no level or region emblem: its act applicability comes separately from S4.",
+    "Question marks in room composition are printed randomized counts; retain them and the setup rule.",
+    "Dash in Resting Points is printed absence of resting supplies; it is not an unreadable digit.",
+    "Warrior's Bracer repeats Acc. Preserve this typo; the only printed numerical modifier is +2."
+  ]
+}

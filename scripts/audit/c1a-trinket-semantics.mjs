@@ -86,6 +86,6 @@ export function classifyTrinket(side) {
   if(side.target==='self-and-heroes-in-same-area'||side.target==='all-four-heroes'||side.target==='all-heroes') gaps.push('ActiveEffectDefinition only addresses self; group/area targeting needs adapter');
   // WIRED_WINDOWS is not equivalent to the type union. Unwired or arbitrary timing
   // cannot be certified by merely finding an enum member.
-  gaps.push(`Exact applicable timing ${side.trigger} is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)`);
-  return {classification:side.unresolvedFields.length?'SOURCE_UNRESOLVED':'RUNTIME_PRIMITIVE_UNSUPPORTED',existingCandidates:[...new Set(candidates)],missingCapabilities:[...new Set(gaps)],productionIntegration:'not-integrated'};
+  if(side.trigger!=='before-skill-roll')gaps.push(`Exact applicable timing ${side.trigger} is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)`);
+  return {classification:side.unresolvedFields.length?'SOURCE_UNRESOLVED':gaps.length?'RUNTIME_PRIMITIVE_UNSUPPORTED':candidates.length>1?'NEEDS_COMPOSITE_EXISTING_PRIMITIVES':'SUPPORTED_EXISTING_PRIMITIVES',existingCandidates:[...new Set(candidates)],missingCapabilities:[...new Set(gaps)],productionIntegration:'not-integrated'};
 }

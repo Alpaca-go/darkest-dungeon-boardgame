@@ -3584,29 +3584,6 @@
         ],
         "sourceStatus": "visual-confirmed"
       },
-      "positiveSide.runtimeSupport.missingCapabilities.0": {
-        "sourceId": "c1a-source:tts-path:/ObjectStates/48/ContainedObjects/0/ContainedObjects/3",
-        "literalField": "positiveSide.printedText",
-        "assetPath": "src/assets/community-reference/complete-edition/trinkets/color-of-madness/466-3.front.png",
-        "assetSha256": "b64566ef98439fbe2eb2713b0e45f2bb8847068d878097941cccc26f366ed8bf",
-        "region": {
-          "units": "fraction-of-card",
-          "box": [
-            0,
-            0,
-            1,
-            0.5
-          ],
-          "rotation": 0
-        },
-        "status": "visual-confirmed",
-        "rulebook": [
-          "S4:p12",
-          "S4:p21",
-          "S4:p26"
-        ],
-        "sourceStatus": "visual-confirmed"
-      },
       "positiveSide.runtimeSupport.productionIntegration": {
         "sourceId": "c1a-source:tts-path:/ObjectStates/48/ContainedObjects/0/ContainedObjects/3",
         "literalField": "positiveSide.printedText",
@@ -4004,15 +3981,13 @@
       "semanticNotes": [],
       "unresolvedFields": [],
       "runtimeSupport": {
-        "classification": "RUNTIME_PRIMITIVE_UNSUPPORTED",
+        "classification": "NEEDS_COMPOSITE_EXISTING_PRIMITIVES",
         "existingCandidates": [
           "ActiveModifierDefinition:crit",
           "ActiveModifierDefinition:damage",
           "ActiveEffectDefinition:heal-self"
         ],
-        "missingCapabilities": [
-          "Exact applicable timing before-skill-roll is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
-        ],
+        "missingCapabilities": [],
         "productionIntegration": "not-integrated"
       }
     },
@@ -4045,7 +4020,7 @@
     "runtimeSupport": {
       "classification": "RUNTIME_PRIMITIVE_UNSUPPORTED",
       "sideClassifications": [
-        "RUNTIME_PRIMITIVE_UNSUPPORTED",
+        "NEEDS_COMPOSITE_EXISTING_PRIMITIVES",
         "RUNTIME_PRIMITIVE_UNSUPPORTED"
       ],
       "productionIntegration": "not-integrated"

@@ -1,0 +1,27 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {COMMUNITY_TRINKETS,communityTrinkets,communityTrinketsByLevel,communityTrinketsByContentSet} from '../../src/data/community-reference/trinkets';
+import {COMMUNITY_STANDARD_QUESTS,COMMUNITY_BOSS_QUESTS,communityStandardQuests,communityBossQuests,communityQuestsByContentSet} from '../../src/data/community-reference/quests';
+
+const read=(path:string)=>JSON.parse(readFileSync(path,'utf8'));
+assert.deepEqual(COMMUNITY_TRINKETS,read('src/data/community-reference/trinkets/data.json'));
+assert.deepEqual([...COMMUNITY_STANDARD_QUESTS,...COMMUNITY_BOSS_QUESTS].map(q=>q.id).sort(),read('src/data/community-reference/quests/data.json').map((q:{id:string})=>q.id).sort());
+assert.equal(communityTrinkets(),COMMUNITY_TRINKETS);
+assert.equal(communityStandardQuests(),COMMUNITY_STANDARD_QUESTS);
+assert.equal(communityBossQuests(),COMMUNITY_BOSS_QUESTS);
+assert.equal(COMMUNITY_TRINKETS.length,48);
+assert.equal(COMMUNITY_STANDARD_QUESTS.length,74);
+assert.equal(COMMUNITY_BOSS_QUESTS.length,1);
+assert.equal(communityTrinketsByContentSet('core').length,37);
+assert.equal(communityTrinketsByContentSet('color-of-madness').length,11);
+assert.equal(communityTrinketsByLevel(null).length,11);
+assert.equal(communityTrinketsByLevel(1).length,14);
+assert.equal(communityQuestsByContentSet('core').length,16);
+assert.equal(communityQuestsByContentSet('crimson-court').length,14);
+assert.ok(Object.isFrozen(COMMUNITY_TRINKETS));
+assert.ok(Object.isFrozen(COMMUNITY_TRINKETS[0].positiveSide));
+assert.ok(Object.isFrozen(COMMUNITY_STANDARD_QUESTS[0].objective));
+assert.ok(Object.isFrozen(COMMUNITY_BOSS_QUESTS[0].specialRules));
+assert.ok(!COMMUNITY_TRINKETS.some(t=>t.printedName==='Bloodcourse Medallion'));
+assert.ok(!COMMUNITY_STANDARD_QUESTS.some(q=>q.printedName==='Rest in Rubble III'));
+console.log('C1A actual exported registries and immutable getters PASS');

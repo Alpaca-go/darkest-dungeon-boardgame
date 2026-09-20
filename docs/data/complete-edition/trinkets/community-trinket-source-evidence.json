@@ -334,6 +334,7 @@
       },
       "printedBackText": null,
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[heal]",
         "[crystal]"
@@ -671,6 +672,7 @@
       },
       "printedBackText": null,
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[stun]",
         "[stress]"
@@ -1025,6 +1027,7 @@
       },
       "printedBackText": null,
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[buff]",
         "[hero]",
@@ -1380,6 +1383,7 @@
       },
       "printedBackText": null,
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[damage]",
         "[heal]",
@@ -1701,6 +1705,7 @@
       },
       "printedBackText": null,
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[crystal]"
       ]
@@ -2071,6 +2076,7 @@
       },
       "printedBackText": null,
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[blight]",
         "[bleed]",
@@ -2410,6 +2416,7 @@
       },
       "printedBackText": null,
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[armor]",
         "[bleed]"
@@ -2764,6 +2771,7 @@
       },
       "printedBackText": null,
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[armor]",
         "[guard]",
@@ -3085,6 +3093,7 @@
       },
       "printedBackText": null,
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[dodge]"
       ]
@@ -3404,6 +3413,7 @@
       },
       "printedBackText": null,
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[wound]"
       ]
@@ -3740,6 +3750,7 @@
       },
       "printedBackText": null,
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[stress]",
         "[blight]"
@@ -4013,6 +4024,7 @@
       },
       "printedBackText": "I",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": []
     },
     {
@@ -4300,6 +4312,7 @@
       },
       "printedBackText": "I",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[arrows-stance]"
       ]
@@ -4589,6 +4602,7 @@
       },
       "printedBackText": "III",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[stress]"
       ]
@@ -4878,6 +4892,7 @@
       },
       "printedBackText": "I",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[bleed]"
       ]
@@ -5167,6 +5182,7 @@
       },
       "printedBackText": "I",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[blight]"
       ]
@@ -5253,7 +5269,14 @@
         "sha256": "4080855eaad648fd83a62efbd11eb38835e861705ffc3f6e3eeb04c11f16635c"
       },
       "extractionStatus": "visual-confirmed",
-      "sourceBlockers": [],
+      "sourceBlockers": [
+        {
+          "cell": "453-22",
+          "literalField": "positiveSide.printedText",
+          "printedQuote": "When healed, receive [heal]4",
+          "reason": "The printed 4 has no plus sign and does not say whether the healing is additional or replaces the received value. Keep that operation unresolved; the number and wording are readable."
+        }
+      ],
       "fieldEvidence": {
         "contentSet": {
           "status": "tts-structure-confirmed",
@@ -5473,6 +5496,7 @@
       },
       "printedBackText": "II",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-blocked",
       "symbols": [
         "[heal]",
         "[bleed]"
@@ -5797,6 +5821,7 @@
       },
       "printedBackText": "II",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[food]",
         "[heal]",
@@ -6105,6 +6130,7 @@
       },
       "printedBackText": "II",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[disease]",
         "[movement]"
@@ -6395,6 +6421,7 @@
       },
       "printedBackText": "II",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[stress]"
       ]
@@ -6701,6 +6728,7 @@
       },
       "printedBackText": "II",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[stress]",
         "[dodge]"
@@ -7008,6 +7036,7 @@
       },
       "printedBackText": "III",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[stress]",
         "[damage]"
@@ -7349,6 +7378,7 @@
       },
       "printedBackText": "II",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[dodge]",
         "[light]",
@@ -7658,6 +7688,7 @@
       },
       "printedBackText": "II",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[provision-die]",
         "[stress]"
@@ -7965,6 +7996,7 @@
       },
       "printedBackText": "III",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[heal]",
         "[light]"
@@ -8272,6 +8304,7 @@
       },
       "printedBackText": "I",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[stress]",
         "[light]"
@@ -8562,6 +8595,7 @@
       },
       "printedBackText": "II",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[heal]"
       ]
@@ -8936,6 +8970,7 @@
       },
       "printedBackText": "III",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[bleed]",
         "[blight]",
@@ -9213,6 +9248,7 @@
       },
       "printedBackText": "I",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": []
     },
     {
@@ -9517,6 +9553,7 @@
       },
       "printedBackText": "I",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[damage]",
         "[wound]"
@@ -9858,6 +9895,7 @@
       },
       "printedBackText": "II",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[light]",
         "[less-or-equal]",
@@ -10184,6 +10222,7 @@
       },
       "printedBackText": "III",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[stress]",
         "[light]",
@@ -10475,6 +10514,7 @@
       },
       "printedBackText": "I",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[debuff]"
       ]
@@ -10764,6 +10804,7 @@
       },
       "printedBackText": "III",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[shield-stance]"
       ]
@@ -11070,6 +11111,7 @@
       },
       "printedBackText": "III",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[dodge]",
         "[food]"
@@ -11360,6 +11402,7 @@
       },
       "printedBackText": "II",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[stress]"
       ]
@@ -11666,6 +11709,7 @@
       },
       "printedBackText": "II",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[damage]",
         "[movement]"
@@ -11973,6 +12017,7 @@
       },
       "printedBackText": "III",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[heal]",
         "[stress]"
@@ -12263,6 +12308,7 @@
       },
       "printedBackText": "I",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[banner-stance]"
       ]
@@ -12552,6 +12598,7 @@
       },
       "printedBackText": "III",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[banner-stance]"
       ]
@@ -12841,6 +12888,7 @@
       },
       "printedBackText": "III",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[arrows-stance]"
       ]
@@ -13181,6 +13229,7 @@
       },
       "printedBackText": "II",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[light]",
         "[greater-or-equal]",
@@ -13507,6 +13556,7 @@
       },
       "printedBackText": "III",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[stress]",
         "[light]",
@@ -13815,6 +13865,7 @@
       },
       "printedBackText": "I",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[movement]",
         "[dodge]"
@@ -14105,6 +14156,7 @@
       },
       "printedBackText": "I",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[stun]"
       ]
@@ -14411,6 +14463,7 @@
       },
       "printedBackText": "I",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[trap]",
         "[hunger]"
@@ -14701,6 +14754,7 @@
       },
       "printedBackText": "I",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[sword-stance]"
       ]
@@ -14990,6 +15044,7 @@
       },
       "printedBackText": "I",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[shield-stance]"
       ]
@@ -15279,6 +15334,7 @@
       },
       "printedBackText": "III",
       "backObservation": "Nomad illustration; no rules. Exact indexed UniqueBack cell retained.",
+      "sourceSupportStatus": "source-supported",
       "symbols": [
         "[sword-stance]"
       ]
