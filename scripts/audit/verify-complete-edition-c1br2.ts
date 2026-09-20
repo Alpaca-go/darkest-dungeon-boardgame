@@ -19,7 +19,6 @@ import {
 
 const baselineHead = '63793e9eb54a894958a96bc61d3f595bd81de259';
 const evidencePath = resolve(process.cwd(), 'docs/data/complete-edition/c1br2-machine-verifiable-production-proof-evidence.json');
-const npmCommand = process.platform === 'win32' ? 'npm.cmd' : 'npm';
 
 interface CommandResult {
   command: string;
@@ -106,7 +105,7 @@ try {
 }
 const vitestAssertions = vitestJson.testResults?.flatMap((suite) => suite.assertionResults ?? []) ?? [];
 
-const playwright = run(npmCommand, ['run', 'test:e2e:community-content-c1br']);
+const playwright = run(process.execPath, [resolve(process.cwd(), 'scripts/e2e/run-community-content-c1br-e2e.mjs')]);
 const playwrightOutput = `${playwright.stdout}\n${playwright.stderr}`;
 
 const executions: ProofExecutionResult[] = Object.values(PRODUCTION_PROOF_REGISTRY).map((registered) => {
@@ -135,7 +134,9 @@ const executions: ProofExecutionResult[] = Object.values(PRODUCTION_PROOF_REGIST
 if (vitest.exitCode !== 0 || vitestJson.success !== true || (vitestJson.numPendingTests ?? 0) > 0 || (vitestJson.numTodoTests ?? 0) > 0) {
   throw new Error(`Required Vitest proofs failed or were skipped (exit ${vitest.exitCode})`);
 }
-if (playwright.exitCode !== 0) throw new Error(`Required Playwright proofs failed (exit ${playwright.exitCode})`);
+if (playwright.exitCode !== 0) {
+  throw new Error(`Required Playwright proofs failed (exit ${playwright.exitCode}): ${playwright.stderr || playwright.stdout.slice(-2000)}`);
+}
 const publicationErrors = evidencePublicationErrors(binding, executions);
 if (publicationErrors.length) throw new Error(`Evidence publication refused: ${publicationErrors.join('; ')}`);
 
