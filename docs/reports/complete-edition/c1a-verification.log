@@ -1,0 +1,52 @@
+
+> darkest-dungeon-web-prototype@0.1.0 verify:complete-edition-c1a
+> node scripts/audit/verify-complete-edition-c1a.mjs --tts C:/Users/kyrie/Documents/My Games/Tabletop Simulator/Mods/Workshop/3657612854.json
+
+{
+  "result": "PASS",
+  "sourceSha256": "d2fe21a6aa294f80fb47e56677c3a74090c3dc131361d798dfde709f6a3a64a2",
+  "physicalTrinkets": 49,
+  "physicalOrdinaryQuests": 76,
+  "verifiedImages": 250,
+  "sourceSupportedTrinkets": 48,
+  "sourceSupportedStandardQuests": 74,
+  "sourceSupportedBossQuests": 1,
+  "sourceBlocked": 2,
+  "deterministicGeneration": "byte-identical",
+  "productionAndDdBaseline": "unchanged",
+  "tamperTests": [
+    {
+      "name": "T1-delete-trinket-evidence",
+      "result": "PASS: tamper rejected"
+    },
+    {
+      "name": "T2-alter-card-index",
+      "result": "PASS: tamper rejected"
+    },
+    {
+      "name": "T3-swap-trinket-assets",
+      "result": "PASS: tamper rejected"
+    },
+    {
+      "name": "T4-alter-quest-title",
+      "result": "PASS: tamper rejected"
+    },
+    {
+      "name": "T5-inject-prototype-quest",
+      "result": "PASS: tamper rejected"
+    },
+    {
+      "name": "T6-fill-blocked-semantic-leaf",
+      "result": "PASS: tamper rejected"
+    },
+    {
+      "name": "T7-confuse-content-set",
+      "result": "PASS: tamper rejected"
+    },
+    {
+      "name": "T8-merge-without-evidence",
+      "result": "PASS: tamper rejected"
+    }
+  ],
+  "limitation": "Integrity and transformation verification, not independent visual confirmation. C1B must audit original images and semantic interpretation."
+}
