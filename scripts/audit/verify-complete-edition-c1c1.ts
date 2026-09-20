@@ -45,8 +45,9 @@ let vitestJson: { success?: boolean; numPendingTests?: number; numTodoTests?: nu
 try { vitestJson = JSON.parse(vitest.stdout); } catch { throw new Error(`Quest proof output is not JSON: ${vitest.stderr}`); }
 const assertions = vitestJson.testResults?.flatMap((suite) => suite.assertionResults ?? []) ?? [];
 const e2e = run(process.execPath, [resolve(root, 'scripts/e2e/run-community-content-c1c1-e2e.mjs')]);
-const regression = run('npm.cmd', ['test']);
-const build = run('npm.cmd', ['run', 'build']);
+const commandShell = process.env.ComSpec ?? 'cmd.exe';
+const regression = run(commandShell, ['/d', '/s', '/c', 'npm test']);
+const build = run(commandShell, ['/d', '/s', '/c', 'npm run build']);
 if (vitest.exitCode !== 0 || vitestJson.success !== true || (vitestJson.numPendingTests ?? 0) || (vitestJson.numTodoTests ?? 0)) throw new Error('Quest Vitest proof suite failed or skipped');
 if (e2e.exitCode !== 0) throw new Error(`Quest Playwright suite failed: ${e2e.stderr || e2e.stdout.slice(-2000)}`);
 if (regression.exitCode !== 0) throw new Error(`Regression suite failed: ${regression.stderr || regression.stdout.slice(-2000)}`);
