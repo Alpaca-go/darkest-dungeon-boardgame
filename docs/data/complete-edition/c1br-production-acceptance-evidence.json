@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1B-R",
+  "verificationScope": "LOCAL MEASURED VERIFICATION",
+  "baselineHead": "72285f6c820a340e8468d705bf738884a9b7ad8b",
+  "verifiedImplementationHead": "adb5686ee60ffb38b214307d9f2710829603821b",
+  "capabilityMatrix": "c1br-production-capability-matrix.json",
+  "questProductionReady": {
+    "ready": 0,
+    "sourceSupported": 75
+  },
+  "trinketProductionReady": {
+    "ready": 2,
+    "sourceSupported": 48,
+    "definitionIds": [
+      "community-trinket-core-accuracy-stone",
+      "community-trinket-core-critical-stone"
+    ]
+  },
+  "selectorContract": {
+    "idParsingForbidden": true,
+    "definitionMetadataRequired": [
+      "sourceDefinitionId",
+      "contentSet",
+      "region",
+      "sourceOrigin"
+    ],
+    "contentSetUnknownPolicy": "FAIL_CLOSED",
+    "regionUnknownPolicy": "FAIL_CLOSED",
+    "questPredicates": [
+      "production registry membership",
+      "campaignLevel",
+      "enabledContentSets",
+      "enabledRegions"
+    ],
+    "legacyProfileUnchanged": true,
+    "communityLegacyFallback": false,
+    "proofTests": [
+      "PA-04",
+      "PA-05",
+      "PA-06",
+      "PA-07",
+      "PA-08"
+    ]
+  },
+  "productionProofCoverage": [
+    {
+      "definitionId": "community-trinket-core-accuracy-stone",
+      "runtimeAdapterId": "post-roll-accuracy-stone-v1",
+      "sourceSupported": true,
+      "semanticSupported": true,
+      "stateful": true,
+      "productionTests": [
+        "C1BR-PA-ACCURACY-RUNTIME"
+      ],
+      "saveReplayTests": [
+        "C1BR-E2E-ACCURACY-SAVE-RELOAD"
+      ],
+      "selectorTests": [
+        "C1BR-CS-TRINKET-METADATA"
+      ],
+      "e2eTests": [
+        "C1BR-E2E-ACCURACY"
+      ],
+      "productionStatus": "PRODUCTION_READY"
+    },
+    {
+      "definitionId": "community-trinket-core-critical-stone",
+      "runtimeAdapterId": "post-roll-critical-stone-v1",
+      "sourceSupported": true,
+      "semanticSupported": true,
+      "stateful": true,
+      "productionTests": [
+        "C1BR-PA-CRITICAL-RUNTIME"
+      ],
+      "saveReplayTests": [
+        "C1BR-E2E-CRITICAL-SAVE-RELOAD"
+      ],
+      "selectorTests": [
+        "C1BR-CS-TRINKET-METADATA"
+      ],
+      "e2eTests": [
+        "C1BR-E2E-CRITICAL"
+      ],
+      "productionStatus": "PRODUCTION_READY"
+    }
+  ],
+  "saveReplayCoverage": {
+    "profileAndSelectors": true,
+    "emptyEnabledArraysPreserved": true,
+    "invalidValuesRemoved": true,
+    "unknownProfileFallsBackToLegacy": true,
+    "validQuestRuntimeStatePreserved": true,
+    "invalidQuestRuntimeStateFailsSafe": true,
+    "trinketSideReplay": [
+      "Accuracy Stone",
+      "Critical Stone"
+    ],
+    "nomadOfferReplay": true
+  },
+  "e2eCoverage": {
+    "command": "npm run test:e2e:community-content-c1br",
+    "result": "4 passed",
+    "tests": [
+      "C1BR-E2E-PROFILE",
+      "C1BR-E2E-OFFER",
+      "C1BR-E2E-ACCURACY",
+      "C1BR-E2E-CRITICAL"
+    ],
+    "realUiChain": [
+      "Home profile selection",
+      "save-schema import",
+      "Hamlet hero selection",
+      "Nomad offer",
+      "purchase",
+      "equip",
+      "battle attack",
+      "post-roll use",
+      "flip",
+      "reload"
+    ],
+    "directStoreMutation": false,
+    "debugAcquisition": false,
+    "testRegistryOverride": false
+  },
+  "adversarialCoverage": [
+    "PA-01",
+    "PA-02",
+    "PA-03",
+    "PA-04",
+    "PA-05",
+    "PA-06",
+    "PA-07",
+    "PA-08",
+    "PA-09",
+    "PA-10",
+    "PA-11",
+    "PA-12"
+  ],
+  "validation": {
+    "typecheck": "PASS",
+    "unitAndIntegration": "103 files / 1767 tests PASS",
+    "build": "PASS",
+    "historicalC1bE2e": "PASS",
+    "c1brE2e": "4 tests PASS"
+  },
+  "historicalEvidencePolicy": "C1B evidence preserved; this file is additive."
+}
