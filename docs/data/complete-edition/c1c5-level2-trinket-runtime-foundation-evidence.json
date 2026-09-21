@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-5",
+  "measuredAt": "2026-09-21T23:40:00.000Z",
+  "baselineHead": "9fb8429625c35d6efed3a54515a98000726e802e",
+  "verifiedImplementationHead": "abff27d11743069fb81edbf274c6936cb933e33b",
+  "verifiedImplementationTree": "4ba606db27c16203b5cb5cd30a8eebc58469a5f6",
+  "level2SourceCount": 11,
+  "level2ProductionReadyBefore": 0,
+  "level2ProductionReadyAfter": 1,
+  "newlyReadyTrinketIds": [
+    "community-trinket-core-chirurgeons-charm"
+  ],
+  "deckCoverageBefore": {
+    "sourceDefinitionCount": 11,
+    "productionReadyCount": 0,
+    "completeForRandomDraw": false
+  },
+  "deckCoverageAfter": {
+    "level": 2,
+    "sourceDefinitionCount": 11,
+    "sourceSupportedCount": 11,
+    "sourceSemanticCompleteCount": 11,
+    "runtimeSemanticCompleteCount": 1,
+    "productionReadyCount": 1,
+    "productionReadyIds": [
+      "community-trinket-core-chirurgeons-charm"
+    ],
+    "missingDefinitionIds": [
+      "community-trinket-core-bloodthirst-ring",
+      "community-trinket-core-book-of-constitution",
+      "community-trinket-core-book-of-holiness",
+      "community-trinket-core-book-of-relaxation",
+      "community-trinket-core-camouflage-cloak",
+      "community-trinket-core-campers-helmet",
+      "community-trinket-core-dark-bracer",
+      "community-trinket-core-fortunate-armlet",
+      "community-trinket-core-protective-padlock",
+      "community-trinket-core-solar-bracer"
+    ],
+    "semanticallyIncompleteDefinitionIds": [],
+    "completeForRandomDraw": false
+  },
+  "completeForRandomDraw": false,
+  "implementedRuntimeWindows": [
+    "before-healing-delivered-resolution",
+    "before-healing-received-resolution"
+  ],
+  "implementedRuntimeEffects": [
+    "ActiveModifierDefinition:healing"
+  ],
+  "semanticCoverage": {
+    "cardCount": 11,
+    "sideCount": 22
+  },
+  "proofBindings": [
+    {
+      "definitionId": "community-trinket-core-chirurgeons-charm",
+      "runtimeAdapterId": "staged-healing-chirurgeons-charm-v1",
+      "requiredPrimitives": [
+        "STAGED_HEALING_TRINKET_WINDOWS"
+      ],
+      "sourceSupported": true,
+      "semanticSupported": true,
+      "stateful": true,
+      "productionTests": [
+        "C1C5-CHIRURGEONS-RUNTIME"
+      ],
+      "saveReplayTests": [
+        "C1C5-CHIRURGEONS-SAVE-REPLAY"
+      ],
+      "selectorTests": [
+        "C1C5-CHIRURGEONS-SELECTOR"
+      ],
+      "e2eTests": [
+        "C1C5-E2E-CHIRURGEONS"
+      ]
+    }
+  ],
+  "saveReplayResults": [
+    "C1C5-CHIRURGEONS-SAVE-REPLAY"
+  ],
+  "e2eResults": [
+    "C1C5-E2E-CHIRURGEONS"
+  ],
+  "familyTrinketsProductionReady": false,
+  "restSemanticStatus": "SOURCE_UNRESOLVED_FAIL_CLOSED",
+  "commands": [
+    {
+      "command": "C1C-5 proof tests",
+      "exitCode": 0
+    },
+    {
+      "command": "C1C-5 production UI E2E",
+      "exitCode": 0
+    },
+    {
+      "command": "C1BR regression",
+      "exitCode": 0
+    },
+    {
+      "command": "full regression",
+      "exitCode": 0
+    },
+    {
+      "command": "typecheck",
+      "exitCode": 0
+    },
+    {
+      "command": "build",
+      "exitCode": 0
+    }
+  ],
+  "failures": [],
+  "terminalVerdict": "C1C5-LEVEL2-TRINKET-RUNTIME-FOUNDATION-ACCEPTED"
+}
