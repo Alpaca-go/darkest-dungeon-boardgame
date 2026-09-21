@@ -1,149 +1,241 @@
-import type { TrinketDefinition, TrinketSideDefinition } from '../types/trinkets';
+import type {
+  ActiveEffectDefinition, ActiveModifierDefinition, TrinketDefinition, TrinketSideDefinition, TrinketUseCondition,
+} from '../types/trinkets';
 
 export type TrinketSemanticImplementationStatus = 'IMPLEMENTED' | 'PARTIAL' | 'UNSUPPORTED' | 'SOURCE_UNRESOLVED';
+export type TrinketSemanticMismatchCode =
+  | 'TRINKET_TRIGGER_MISMATCH' | 'TRINKET_WINDOW_MISMATCH' | 'TRINKET_TARGET_MISMATCH'
+  | 'TRINKET_MODIFIER_TYPE_MISMATCH' | 'TRINKET_MODIFIER_AMOUNT_MISMATCH' | 'TRINKET_MODIFIER_OPERATION_MISMATCH'
+  | 'TRINKET_EFFECT_TYPE_MISMATCH' | 'TRINKET_EFFECT_PARAMETER_MISMATCH'
+  | 'TRINKET_CONDITION_MISMATCH' | 'TRINKET_RUNTIME_ADDED_CONDITION_UNSUPPORTED'
+  | 'TRINKET_TRIGGER_SCOPE_UNRESOLVED';
 
+export interface CanonicalCondition { type: string; operator?: string; value?: string | number | boolean }
+export interface CanonicalModifier { stat: string; operation: 'add' | 'set'; amount: number }
+export interface CanonicalEffect { type: string; target: string; parameters: Record<string, unknown> }
+export interface CanonicalTrinketSidePayload {
+  trigger: string; target: string; conditions: CanonicalCondition[]; modifiers: CanonicalModifier[]; effects: CanonicalEffect[];
+}
+export interface RuntimeTrinketSemanticBindings {
+  trigger: string | null; window: string | null; target: string | null;
+  derivedConditionEvidence?: Readonly<Record<string, string>>;
+}
+export interface TrinketSemanticMismatch { code: TrinketSemanticMismatchCode; source: unknown; runtime: unknown }
+export interface TrinketSemanticComparison {
+  triggerMatch: boolean; windowMatch: boolean; targetMatch: boolean;
+  modifierMatch: boolean; effectMatch: boolean; conditionMatch: boolean;
+  sourcePayload: CanonicalTrinketSidePayload; runtimePayload: CanonicalTrinketSidePayload;
+  derivedRuntimeConditions: CanonicalCondition[]; runtimeConditionEvidence: string[];
+  unsupportedRuntimeConditions: string[]; unsupportedRuntimeBehavior: string[];
+  mismatches: TrinketSemanticMismatch[]; runtimeSliceSemanticComplete: boolean;
+}
 export interface TrinketSemanticObligation {
-  obligationId: string;
-  definitionId: string;
-  side: 'positive' | 'negative';
-  printedText: string;
-  trigger: string;
-  sourceUseWindow: string;
-  target: string;
-  sourceConditions: readonly unknown[];
-  sourceModifiers: readonly unknown[];
-  sourceEffects: readonly unknown[];
-  runtimeTriggerBinding: string | null;
-  runtimeWindowBinding: string | null;
-  runtimeConditionBindings: string[];
-  runtimeConditionEvidence: string[];
+  obligationId: string; definitionId: string; side: 'positive' | 'negative'; printedText: string;
+  trigger: string; sourceUseWindow: string; target: string;
+  sourceConditions: readonly unknown[]; sourceModifiers: readonly unknown[]; sourceEffects: readonly unknown[];
+  runtimeTriggerBinding: string | null; runtimeWindowBinding: string | null; runtimeTargetBinding: string | null;
+  runtimeConditionBindings: string[]; derivedRuntimeConditions: CanonicalCondition[];
+  unsupportedRuntimeConditions: string[]; unsupportedRuntimeBehavior: string[]; runtimeConditionEvidence: string[];
   runtimeEffectBindings: string[];
-  implementationStatus: TrinketSemanticImplementationStatus;
-  proofIds: string[];
-  blockerCode: string | null;
+  triggerMatch: boolean; windowMatch: boolean; targetMatch: boolean;
+  modifierMatch: boolean; effectMatch: boolean; conditionMatch: boolean; runtimeSliceSemanticComplete: boolean;
+  semanticMismatches: TrinketSemanticMismatch[];
+  implementationStatus: TrinketSemanticImplementationStatus; proofIds: string[]; blockerCode: string | null;
 }
-
 export interface TrinketSourceSide {
-  label: string;
-  trigger: string;
-  useWindow: string;
-  target: string;
-  conditions: readonly unknown[];
-  modifiers: readonly unknown[];
-  effects: readonly unknown[];
-  unresolvedFields: readonly string[];
-  runtimeSupport: { existingCandidates: readonly string[] };
+  label: string; trigger: string; useWindow: string; target: string;
+  conditions: readonly unknown[]; modifiers: readonly unknown[]; effects: readonly unknown[];
+  unresolvedFields: readonly string[]; runtimeSupport: { existingCandidates: readonly string[] };
 }
-
 export interface TrinketSourceDefinition {
-  id: string;
-  sourceStatus: string;
-  unresolvedFields: readonly string[];
-  positiveSide: TrinketSourceSide;
-  negativeSide: TrinketSourceSide;
+  id: string; sourceStatus: string; unresolvedFields: readonly string[];
+  positiveSide: TrinketSourceSide; negativeSide: TrinketSourceSide;
 }
-
 export interface TrinketProofBinding {
-  productionTests: readonly string[];
-  saveReplayTests: readonly string[];
-  selectorTests: readonly string[];
-  e2eTests: readonly string[];
+  productionTests: readonly string[]; saveReplayTests: readonly string[];
+  selectorTests: readonly string[]; e2eTests: readonly string[];
 }
 
 const sideDefinition = (adapter: TrinketDefinition | undefined, side: 'positive' | 'negative'): TrinketSideDefinition | undefined =>
   side === 'positive' ? adapter?.positiveSide : adapter?.negativeSide;
-
-const conditionKey = (condition: TrinketSideDefinition['canUse'] extends (infer T)[] | undefined ? T : never): string => {
-  if (!condition) return '';
-  return 'value' in condition ? `${condition.type}:${condition.value}` : condition.type;
+const object = (value: unknown): Record<string, unknown> => value && typeof value === 'object' ? value as Record<string, unknown> : {};
+const stable = (value: unknown): string => {
+  if (Array.isArray(value)) return `[${value.map(stable).sort().join(',')}]`;
+  if (value && typeof value === 'object') return `{${Object.entries(value as Record<string, unknown>).sort(([a], [b]) => a.localeCompare(b))
+    .map(([key, child]) => `${key}:${stable(child)}`).join(',')}}`;
+  return JSON.stringify(value);
 };
+const exactArray = (a: readonly unknown[], b: readonly unknown[]) => stable(a) === stable(b);
 
-function conditionEvidence(trigger: string, bindings: readonly string[]): string[] {
-  if (trigger !== 'hero-skill-resolution') return [];
-  return bindings.flatMap((binding) => binding === 'is-acting-hero'
-    ? ['C1BR-SOURCE-TRIGGER-ACTOR-DERIVATION']
-    : binding === 'in-battle' ? ['C1BR-HERO-SKILL-WINDOW-DERIVATION'] : []);
+export function canonicalSourceModifier(value: unknown): CanonicalModifier | null {
+  const entry = object(value);
+  return entry.kind === 'modify' && typeof entry.stat === 'string' && typeof entry.amount === 'number'
+    ? { stat: entry.stat, operation: entry.operation === 'set' ? 'set' : 'add', amount: entry.amount } : null;
+}
+export function canonicalRuntimeModifier(value: ActiveModifierDefinition): CanonicalModifier {
+  return { stat: value.type, operation: value.operation ?? 'add', amount: value.amount };
+}
+export function canonicalSourceCondition(value: unknown): CanonicalCondition | null {
+  const entry = object(value);
+  if (entry.kind === 'light' && typeof entry.operator === 'string' && typeof entry.value === 'number') {
+    return { type: 'light', operator: entry.operator, value: entry.value };
+  }
+  if (typeof entry.kind !== 'string') return null;
+  return { type: entry.kind, ...(typeof entry.operator === 'string' ? { operator: entry.operator } : {}),
+    ...(['string', 'number', 'boolean'].includes(typeof entry.value) ? { value: entry.value as string | number | boolean } : {}) };
+}
+export function canonicalRuntimeCondition(value: TrinketUseCondition): CanonicalCondition {
+  if (value.type === 'min-light') return { type: 'light', operator: '>=', value: value.value };
+  if (value.type === 'max-light') return { type: 'light', operator: '<=', value: value.value };
+  return { type: value.type };
+}
+export function canonicalSourceEffect(value: unknown, target: string): CanonicalEffect | null {
+  const entry = object(value);
+  if (typeof entry.kind !== 'string') return null;
+  return { type: entry.kind, target: typeof entry.target === 'string' ? entry.target : target,
+    parameters: Object.fromEntries(Object.entries(entry).filter(([key]) => key !== 'kind' && key !== 'target')) };
+}
+export function canonicalRuntimeEffect(value: ActiveEffectDefinition, target: string): CanonicalEffect {
+  switch (value.type) {
+    case 'heal-self': return { type: 'heal', target, parameters: { amount: value.amount } };
+    case 'stress-self': return { type: 'change-stress', target, parameters: { amount: value.amount } };
+    case 'recover-stress-self': return { type: 'change-stress', target, parameters: { amount: -value.amount } };
+    case 'consume-provision': return { type: 'consume-provision', target, parameters: { provision: value.provision, amount: value.amount } };
+    case 'apply-condition-self': return { type: 'apply-condition-stack', target, parameters: { condition: value.condition, amount: value.amount } };
+    case 'damage-self': return { type: 'damage', target, parameters: { amount: value.amount } };
+    case 'change-light': return { type: 'change-light', target, parameters: { amount: value.amount } };
+    case 'log-only': return { type: 'log-only', target, parameters: { note: value.note } };
+  }
 }
 
-function matchingWindow(trigger: string, runtime: TrinketSideDefinition | undefined): string | null {
-  const expected = trigger === 'hero-heals' ? 'before-healing-delivered-resolution'
-    : trigger === 'hero-is-healed' ? 'before-healing-received-resolution'
-      : trigger === 'hero-skill-resolution' ? 'after-attack-roll-before-hit-resolution' : null;
-  return expected && runtime?.useWindows.includes(expected) ? expected : null;
+const RUNTIME_WINDOW_BINDINGS: Readonly<Record<string, { trigger: string; target: string }>> = Object.freeze({
+  'after-attack-roll-before-hit-resolution': { trigger: 'hero-skill-resolution', target: 'skill' },
+  'before-healing-delivered-resolution': { trigger: 'hero-heals', target: 'healing-delivered' },
+  'before-healing-received-resolution': { trigger: 'hero-is-healed', target: 'healing-received' },
+});
+function bindingForRuntime(runtime: TrinketSideDefinition | undefined): RuntimeTrinketSemanticBindings {
+  if (!runtime || runtime.useWindows.length !== 1) return { trigger: null, window: null, target: null };
+  const window = runtime.useWindows[0]; const semantic = RUNTIME_WINDOW_BINDINGS[window];
+  const evidence = runtime.canUse?.reduce<Record<string, string>>((out, condition) => {
+    if (semantic?.trigger === 'hero-skill-resolution' && condition.type === 'in-battle') out['in-battle'] = 'C1BR-HERO-SKILL-WINDOW-DERIVATION:DERIVED_FROM_TRIGGER';
+    if (semantic?.trigger === 'hero-skill-resolution' && condition.type === 'is-acting-hero') out['is-acting-hero'] = 'C1BR-SOURCE-TRIGGER-ACTOR-DERIVATION:DERIVED_FROM_TRIGGER';
+    return out;
+  }, {});
+  return { trigger: semantic?.trigger ?? null, window, target: semantic?.target ?? null, derivedConditionEvidence: evidence };
 }
 
-function triggerScopeComplete(trigger: string): boolean {
-  // Healing wording is not battle-qualified in the source. The current runtime only
-  // exposes battle skill healing, so these definition-level obligations remain partial.
-  return trigger !== 'hero-heals' && trigger !== 'hero-is-healed';
+function modifierMismatch(source: CanonicalModifier[], runtime: CanonicalModifier[]): TrinketSemanticMismatch | null {
+  if (source.length !== runtime.length) return { code: 'TRINKET_MODIFIER_TYPE_MISMATCH', source, runtime };
+  for (let index = 0; index < source.length; index += 1) {
+    const expected = source[index]; const actual = runtime[index];
+    if (expected.stat !== actual.stat) return { code: 'TRINKET_MODIFIER_TYPE_MISMATCH', source: expected, runtime: actual };
+    if (expected.operation !== actual.operation) return { code: 'TRINKET_MODIFIER_OPERATION_MISMATCH', source: expected, runtime: actual };
+    if (expected.amount !== actual.amount) return { code: 'TRINKET_MODIFIER_AMOUNT_MISMATCH', source: expected, runtime: actual };
+  }
+  return null;
+}
+function effectMismatch(source: CanonicalEffect[], runtime: CanonicalEffect[]): TrinketSemanticMismatch | null {
+  if (source.length !== runtime.length) return { code: 'TRINKET_EFFECT_TYPE_MISMATCH', source, runtime };
+  for (let index = 0; index < source.length; index += 1) {
+    const expected = source[index]; const actual = runtime[index];
+    if (expected.type !== actual.type) return { code: 'TRINKET_EFFECT_TYPE_MISMATCH', source: expected, runtime: actual };
+    if (expected.target !== actual.target || stable(expected.parameters) !== stable(actual.parameters)) {
+      return { code: 'TRINKET_EFFECT_PARAMETER_MISMATCH', source: expected, runtime: actual };
+    }
+  }
+  return null;
 }
 
-export function trinketSemanticObligations(
-  source: TrinketSourceDefinition,
-  adapter: TrinketDefinition | undefined,
-  proof: TrinketProofBinding | undefined,
-): TrinketSemanticObligation[] {
+/** Exact, card-agnostic source → runtime semantic payload comparison. */
+export function compareTrinketSemanticPayload(
+  sourceSide: TrinketSourceSide,
+  runtimeSide: TrinketSideDefinition | undefined,
+  bindings: RuntimeTrinketSemanticBindings = bindingForRuntime(runtimeSide),
+): TrinketSemanticComparison {
+  const sourceModifiers = sourceSide.modifiers.map(canonicalSourceModifier).filter((entry): entry is CanonicalModifier => entry !== null);
+  const runtimeModifiers = (runtimeSide?.modifiers ?? []).filter((entry) => (entry.operation ?? 'add') !== 'set').map(canonicalRuntimeModifier);
+  const sourceEffects = sourceSide.effects.map((entry) => canonicalSourceEffect(entry, sourceSide.target)).filter((entry): entry is CanonicalEffect => entry !== null);
+  const runtimeEffects: CanonicalEffect[] = [
+    ...(runtimeSide?.effects ?? []).map((entry) => canonicalRuntimeEffect(entry, bindings.target ?? sourceSide.target)),
+    ...(runtimeSide?.modifiers ?? []).filter((entry) => entry.operation === 'set').map((entry) => ({
+      type: `set-${entry.type}`, target: bindings.target ?? sourceSide.target, parameters: { amount: entry.amount },
+    })),
+  ];
+  const sourceConditions = sourceSide.conditions.map(canonicalSourceCondition).filter((entry): entry is CanonicalCondition => entry !== null);
+  const sourceConditionRuntime: CanonicalCondition[] = []; const derivedRuntimeConditions: CanonicalCondition[] = [];
+  const runtimeConditionEvidence: string[] = []; const unsupportedRuntimeConditions: string[] = [];
+  for (const condition of (runtimeSide?.canUse ?? []).map(canonicalRuntimeCondition)) {
+    if (sourceConditions.some((candidate) => stable(candidate) === stable(condition))) sourceConditionRuntime.push(condition);
+    else {
+      const evidence = bindings.derivedConditionEvidence?.[condition.type];
+      if (evidence?.endsWith(':DERIVED_FROM_TRIGGER')) { derivedRuntimeConditions.push(condition); runtimeConditionEvidence.push(evidence); }
+      else unsupportedRuntimeConditions.push(stable(condition));
+    }
+  }
+  const triggerMatch = bindings.trigger === sourceSide.trigger;
+  const expectedWindow = Object.entries(RUNTIME_WINDOW_BINDINGS).find(([, value]) => value.trigger === sourceSide.trigger && value.target === sourceSide.target)?.[0] ?? null;
+  const windowMatch = bindings.window !== null && bindings.window === expectedWindow && runtimeSide?.useWindows.length === 1;
+  const targetMatch = bindings.target === sourceSide.target;
+  const modifierProblem = modifierMismatch(sourceModifiers, runtimeModifiers);
+  const effectProblem = effectMismatch(sourceEffects, runtimeEffects);
+  const conditionExact = exactArray(sourceConditions, sourceConditionRuntime);
+  const conditionMatch = conditionExact && unsupportedRuntimeConditions.length === 0;
+  const unsupportedRuntimeBehavior = [
+    ...(runtimeModifiers.length > sourceModifiers.length ? runtimeModifiers.slice(sourceModifiers.length).map(stable) : []),
+    ...(runtimeEffects.length > sourceEffects.length ? runtimeEffects.slice(sourceEffects.length).map(stable) : []),
+  ];
+  const mismatches: TrinketSemanticMismatch[] = [];
+  if (!triggerMatch) mismatches.push({ code: 'TRINKET_TRIGGER_MISMATCH', source: sourceSide.trigger, runtime: bindings.trigger });
+  if (!windowMatch) mismatches.push({ code: 'TRINKET_WINDOW_MISMATCH', source: expectedWindow, runtime: bindings.window });
+  if (!targetMatch) mismatches.push({ code: 'TRINKET_TARGET_MISMATCH', source: sourceSide.target, runtime: bindings.target });
+  if (modifierProblem) mismatches.push(modifierProblem);
+  if (effectProblem) mismatches.push(effectProblem);
+  if (!conditionExact) mismatches.push({ code: 'TRINKET_CONDITION_MISMATCH', source: sourceConditions, runtime: sourceConditionRuntime });
+  if (unsupportedRuntimeConditions.length) mismatches.push({ code: 'TRINKET_RUNTIME_ADDED_CONDITION_UNSUPPORTED', source: sourceConditions, runtime: unsupportedRuntimeConditions });
+  return {
+    triggerMatch, windowMatch, targetMatch, modifierMatch: modifierProblem === null, effectMatch: effectProblem === null, conditionMatch,
+    sourcePayload: { trigger: sourceSide.trigger, target: sourceSide.target, conditions: sourceConditions, modifiers: sourceModifiers, effects: sourceEffects },
+    runtimePayload: { trigger: bindings.trigger ?? '', target: bindings.target ?? '', conditions: sourceConditionRuntime, modifiers: runtimeModifiers, effects: runtimeEffects },
+    derivedRuntimeConditions, runtimeConditionEvidence, unsupportedRuntimeConditions, unsupportedRuntimeBehavior, mismatches,
+    runtimeSliceSemanticComplete: triggerMatch && windowMatch && targetMatch && modifierProblem === null && effectProblem === null
+      && conditionMatch && unsupportedRuntimeBehavior.length === 0,
+  };
+}
+
+function triggerScopeComplete(trigger: string): boolean { return trigger !== 'hero-heals' && trigger !== 'hero-is-healed'; }
+export function trinketSemanticObligations(source: TrinketSourceDefinition, adapter: TrinketDefinition | undefined, proof: TrinketProofBinding | undefined): TrinketSemanticObligation[] {
   return (['positive', 'negative'] as const).map((side) => {
-    const value = side === 'positive' ? source.positiveSide : source.negativeSide;
-    const runtime = sideDefinition(adapter, side);
-    const runtimeWindowBinding = matchingWindow(value.trigger, runtime);
-    const runtimeConditionBindings = (runtime?.canUse ?? []).map(conditionKey).filter(Boolean);
-    const runtimeConditionEvidence = conditionEvidence(value.trigger, runtimeConditionBindings);
-    const runtimeAddedConditions = runtimeConditionBindings.length > value.conditions.length
-      && runtimeConditionEvidence.length !== runtimeConditionBindings.length;
-    const sourceResolved = source.sourceStatus === 'source-supported'
-      && source.unresolvedFields.length === 0 && value.unresolvedFields.length === 0;
-    const effectBound = Boolean(runtime && runtime.modifiers.length >= value.modifiers.length
-      && runtime.effects.length >= value.effects.length);
-    const battleSliceBound = Boolean(runtimeWindowBinding && effectBound);
+    const value = side === 'positive' ? source.positiveSide : source.negativeSide; const runtime = sideDefinition(adapter, side);
+    const bindings = bindingForRuntime(runtime); const comparison = compareTrinketSemanticPayload(value, runtime, bindings);
+    const sourceResolved = source.sourceStatus === 'source-supported' && source.unresolvedFields.length === 0 && value.unresolvedFields.length === 0;
     const scopeComplete = triggerScopeComplete(value.trigger);
-    const proofIds = battleSliceBound && proof ? [
-      ...proof.productionTests, ...proof.saveReplayTests, ...proof.selectorTests, ...proof.e2eTests,
-    ] : [];
+    const proofIds = comparison.runtimeSliceSemanticComplete && proof ? [...new Set([...proof.productionTests, ...proof.saveReplayTests, ...proof.selectorTests, ...proof.e2eTests])] : [];
     const implementationStatus: TrinketSemanticImplementationStatus = !sourceResolved ? 'SOURCE_UNRESOLVED'
-      : runtimeAddedConditions ? 'PARTIAL'
-        : battleSliceBound && scopeComplete ? 'IMPLEMENTED'
-          : battleSliceBound ? 'PARTIAL' : adapter ? 'UNSUPPORTED' : 'UNSUPPORTED';
+      : comparison.runtimeSliceSemanticComplete && scopeComplete && proofIds.length > 0 ? 'IMPLEMENTED'
+        : comparison.runtimeSliceSemanticComplete || adapter ? 'PARTIAL' : 'UNSUPPORTED';
+    const blockerCode = comparison.mismatches[0]?.code ?? (!scopeComplete ? 'TRINKET_TRIGGER_SCOPE_UNRESOLVED' : null);
     return {
-      obligationId: `${source.id}:${side}`,
-      definitionId: source.id,
-      side,
-      printedText: value.label,
-      trigger: value.trigger,
-      sourceUseWindow: value.useWindow,
-      target: value.target,
-      sourceConditions: value.conditions,
-      sourceModifiers: value.modifiers,
-      sourceEffects: value.effects,
-      runtimeTriggerBinding: runtimeWindowBinding ? value.trigger : null,
-      runtimeWindowBinding,
-      runtimeConditionBindings,
-      runtimeConditionEvidence,
-      runtimeEffectBindings: effectBound ? ['TrinketSideDefinition:modifiers/effects'] : value.runtimeSupport.existingCandidates.slice(),
-      implementationStatus,
-      proofIds,
-      blockerCode: implementationStatus === 'IMPLEMENTED' ? null
-        : runtimeAddedConditions ? 'TRINKET_RUNTIME_ADDED_CONDITION_UNSUPPORTED'
-          : battleSliceBound && !scopeComplete ? 'TRINKET_TRIGGER_SCOPE_UNRESOLVED'
-            : 'TRINKET_SEMANTIC_OBLIGATION_UNSUPPORTED',
+      obligationId: `${source.id}:${side}`, definitionId: source.id, side, printedText: value.label,
+      trigger: value.trigger, sourceUseWindow: value.useWindow, target: value.target,
+      sourceConditions: value.conditions, sourceModifiers: value.modifiers, sourceEffects: value.effects,
+      runtimeTriggerBinding: bindings.trigger, runtimeWindowBinding: bindings.window, runtimeTargetBinding: bindings.target,
+      runtimeConditionBindings: (runtime?.canUse ?? []).map((entry) => stable(canonicalRuntimeCondition(entry))),
+      derivedRuntimeConditions: comparison.derivedRuntimeConditions, unsupportedRuntimeConditions: comparison.unsupportedRuntimeConditions,
+      unsupportedRuntimeBehavior: comparison.unsupportedRuntimeBehavior, runtimeConditionEvidence: comparison.runtimeConditionEvidence,
+      runtimeEffectBindings: comparison.runtimeSliceSemanticComplete ? ['CanonicalTrinketSidePayload:exact'] : value.runtimeSupport.existingCandidates.slice(),
+      triggerMatch: comparison.triggerMatch, windowMatch: comparison.windowMatch, targetMatch: comparison.targetMatch,
+      modifierMatch: comparison.modifierMatch, effectMatch: comparison.effectMatch, conditionMatch: comparison.conditionMatch,
+      runtimeSliceSemanticComplete: comparison.runtimeSliceSemanticComplete, semanticMismatches: comparison.mismatches,
+      implementationStatus, proofIds, blockerCode,
     };
   });
 }
-
 export function trinketSourceSemanticComplete(source: TrinketSourceDefinition): boolean {
-  return source.sourceStatus === 'source-supported'
-    && source.unresolvedFields.length === 0
-    && source.positiveSide.unresolvedFields.length === 0
-    && source.negativeSide.unresolvedFields.length === 0;
+  return source.sourceStatus === 'source-supported' && source.unresolvedFields.length === 0
+    && source.positiveSide.unresolvedFields.length === 0 && source.negativeSide.unresolvedFields.length === 0;
 }
-
-export function trinketRuntimeSemanticComplete(
-  sourceSemanticComplete: boolean,
-  obligations: readonly TrinketSemanticObligation[],
-): boolean {
-  return sourceSemanticComplete && obligations.length === 2 && obligations.every((obligation) =>
-    obligation.implementationStatus === 'IMPLEMENTED'
-    && obligation.runtimeTriggerBinding !== null
-    && obligation.runtimeWindowBinding !== null
-    && obligation.proofIds.length > 0);
+export function trinketRuntimeSemanticComplete(sourceSemanticComplete: boolean, obligations: readonly TrinketSemanticObligation[]): boolean {
+  return sourceSemanticComplete && obligations.length === 2 && obligations.every((obligation) => obligation.implementationStatus === 'IMPLEMENTED'
+    && obligation.runtimeSliceSemanticComplete && obligation.runtimeTriggerBinding !== null && obligation.runtimeWindowBinding !== null
+    && obligation.runtimeTargetBinding !== null && obligation.proofIds.length > 0);
 }

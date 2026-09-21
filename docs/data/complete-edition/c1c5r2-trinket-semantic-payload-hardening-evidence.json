@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-5R2",
+  "measuredAt": "2026-09-22T07:15:00.000Z",
+  "baselineHead": "d5f01d9319d9d0e051327c439b0f4d1c9296db14",
+  "verifiedImplementationHead": "d5f01d9319d9d0e051327c439b0f4d1c9296db14",
+  "verifiedImplementationTree": "0869bafde47c319b18765c3aa8fa594a054d5fe2",
+  "historicalEvidenceHashes": {
+    "docs/data/complete-edition/c1c5-level2-trinket-capability-matrix.json": "83b9ec1b8d4ca164b4612740ab60e8a0d057d8bf344158837f893b11d2dc3c4b",
+    "docs/data/complete-edition/c1c5-level2-trinket-runtime-foundation-evidence.json": "5d43c0753feeff6cb4ff3e5412930a65de3dd290ce57c27075b6e54bee04e057",
+    "docs/data/complete-edition/c1c5-trinket-deck-coverage.json": "abf49c7f4f0a452b01bd197584e70bf016c530a7a1ab9b42f9f27baeaadefaf3",
+    "docs/data/complete-edition/c1c5r-chirurgeons-trigger-scope.json": "5ef5ed668d658ef9d4a7d6f89c6ffabe88d3f8104b259dbb169eb703e979b365",
+    "docs/data/complete-edition/c1c5r-level2-trinket-capability-matrix.json": "4a699d7accfa4b8e105251944e920bb38ce1ab00b841d71d2fe8e1cfe78d6471",
+    "docs/data/complete-edition/c1c5r-trinket-deck-coverage.json": "2a417b9cf9e628a2c4919bcc82b579ef50c94aa238f51e65a3403830c49b76f8",
+    "docs/data/complete-edition/c1c5r-trinket-semantic-scope-repair-evidence.json": "7dff52be732c2f6c75c2c2ed7ed3980b130c8d84e72ab676f380fb6aa3d47bfb",
+    "docs/reports/complete-edition/c1c5-level2-trinket-runtime-foundation-report.md": "a2e713f683b6a6558b8fe44461e9a714726239e3c824a3ad722669d7dd59746f",
+    "docs/reports/complete-edition/c1c5r-trinket-semantic-scope-repair-report.md": "f99de15598d88d36d4d9075d4986b11e632f643921264c9d84f450ed8c81f212"
+  },
+  "exactPayloadComparatorEnabled": true,
+  "modifierMutationResults": {
+    "wrongAmount": "REJECTED",
+    "wrongType": "REJECTED",
+    "wrongSign": "REJECTED",
+    "missingModifier": "REJECTED",
+    "extraGameplayBehavior": "REJECTED",
+    "wrongHealingAmount": "REJECTED",
+    "negativeHealingAmount": "REJECTED",
+    "setVsAdd": "REJECTED",
+    "effectParameters": "REJECTED"
+  },
+  "effectMutationResults": {
+    "wrongType": "REJECTED",
+    "wrongParameters": "REJECTED",
+    "setVsAdd": "REJECTED"
+  },
+  "conditionMutationResults": {
+    "wrongThreshold": "REJECTED",
+    "wrongOperator": "REJECTED",
+    "unsupportedAddedCondition": "REJECTED"
+  },
+  "targetMutationResults": {
+    "wrongTarget": "REJECTED"
+  },
+  "triggerMutationResults": {
+    "wrongTrigger": "REJECTED"
+  },
+  "level1ReadyIds": [
+    "community-trinket-core-accuracy-stone",
+    "community-trinket-core-critical-stone"
+  ],
+  "chirurgeonsBattleSliceComplete": true,
+  "chirurgeonsDefinitionReady": false,
+  "level2ProductionReadyCount": 0,
+  "level2CompleteForRandomDraw": false,
+  "familyDeckDependencyBound": true,
+  "familyProductionReady": false,
+  "familySelectorReachable": false,
+  "restSemanticStatus": "SOURCE_UNRESOLVED_FAIL_CLOSED",
+  "proofBindings": [
+    "C1C5-CHIRURGEONS-RUNTIME",
+    "C1C5-CHIRURGEONS-SAVE-REPLAY",
+    "C1C5-CHIRURGEONS-SELECTOR",
+    "C1C5-E2E-CHIRURGEONS"
+  ],
+  "commands": [
+    {
+      "command": "C1C-5R2 payload mutation tests",
+      "exitCode": 0
+    },
+    {
+      "command": "C1C-5 save/replay regression",
+      "exitCode": 0
+    },
+    {
+      "command": "C1BR E2E",
+      "exitCode": 0
+    },
+    {
+      "command": "C1C5 Battle E2E",
+      "exitCode": 0
+    },
+    {
+      "command": "full regression",
+      "exitCode": 0
+    },
+    {
+      "command": "typecheck",
+      "exitCode": 0
+    },
+    {
+      "command": "build",
+      "exitCode": 0
+    }
+  ],
+  "failures": [],
+  "terminalVerdict": "C1C5R2-TRINKET-SEMANTIC-PAYLOAD-HARDENING-ACCEPTED"
+}
