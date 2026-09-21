@@ -48,34 +48,117 @@ export function createQuestRuntimeState(quest: QuestDefinition): CampaignState['
 export interface QuestRestResult {
   ok: boolean;
   campaign: CampaignState;
-  error: 'not-in-cleared-room' | 'no-firewood' | 'no-resting-points' | null;
+  error: RestAllocationError | null;
+}
+
+export type RestRecoveryResource = 'life' | 'stress';
+
+export interface RestAllocationEntry {
+  /** Campaign Hero instance id (the source calls the target a Hero). */
+  heroId: string;
+  resource: RestRecoveryResource;
+  points: number;
+}
+
+export interface RestAllocation {
+  allocations: RestAllocationEntry[];
+}
+
+export type RestAllocationError =
+  | 'REST_NOT_COMMUNITY_QUEST'
+  | 'REST_NOT_IN_DUNGEON_EXPLORE'
+  | 'REST_NOT_IN_CLEARED_ROOM'
+  | 'REST_NO_FIREWOOD'
+  | 'REST_NO_RESTING_POINTS'
+  | 'REST_ALLOCATION_INVALID_POINTS'
+  | 'REST_ALLOCATION_INVALID_RESOURCE'
+  | 'REST_ALLOCATION_UNKNOWN_HERO'
+  | 'REST_ALLOCATION_DEAD_HERO'
+  | 'REST_ALLOCATION_EXCEEDS_BUDGET'
+  | 'REST_ALLOCATION_EXCEEDS_RECOVERY_CAP';
+
+export interface RestAllocationValidation {
+  ok: boolean;
+  error: RestAllocationError | null;
+  availablePoints: number;
+  spentPoints: number;
+}
+
+/** Pure, fail-closed validation for a player-authored Rest allocation. */
+export function validateRestAllocation(
+  campaign: CampaignState,
+  allocation: RestAllocation,
+): RestAllocationValidation {
+  const state = campaign.questRuntimeState;
+  const quest = getQuestById(campaign.currentQuestId ?? '');
+  const current = campaign.dungeon?.rooms.find((room) => room.id === campaign.dungeon?.currentRoomId);
+  const budget = state?.restingPointsRemaining ?? 0;
+  const invalid = (error: RestAllocationError, spentPoints = 0): RestAllocationValidation => ({
+    ok: false,
+    error,
+    availablePoints: budget,
+    spentPoints,
+  });
+
+  if (quest?.runtimeContentMetadata?.sourceOrigin !== 'community-complete-edition') {
+    return invalid('REST_NOT_COMMUNITY_QUEST');
+  }
+  if (campaign.gamePhase !== 'dungeon-explore') return invalid('REST_NOT_IN_DUNGEON_EXPLORE');
+  if (!current || current.status !== 'cleared') return invalid('REST_NOT_IN_CLEARED_ROOM');
+  if (!state || (state.firewoodTokensRemaining ?? 0) <= 0) return invalid('REST_NO_FIREWOOD');
+  if (budget <= 0) return invalid('REST_NO_RESTING_POINTS');
+  if (!allocation || !Array.isArray(allocation.allocations)) return invalid('REST_ALLOCATION_INVALID_POINTS');
+
+  const requestedByHeroAndResource = new Map<string, number>();
+  let spentPoints = 0;
+  for (const entry of allocation.allocations) {
+    if (!entry || !Number.isInteger(entry.points) || entry.points < 0) {
+      return invalid('REST_ALLOCATION_INVALID_POINTS', spentPoints);
+    }
+    if (entry.resource !== 'life' && entry.resource !== 'stress') {
+      return invalid('REST_ALLOCATION_INVALID_RESOURCE', spentPoints);
+    }
+    const hero = campaign.heroes.find((candidate) => candidate.instanceId === entry.heroId);
+    if (!hero) return invalid('REST_ALLOCATION_UNKNOWN_HERO', spentPoints);
+    if (hero.dead || !hero.isAlive) return invalid('REST_ALLOCATION_DEAD_HERO', spentPoints);
+    spentPoints += entry.points;
+    if (spentPoints > budget) return invalid('REST_ALLOCATION_EXCEEDS_BUDGET', spentPoints);
+    const key = `${entry.heroId}:${entry.resource}`;
+    const requested = (requestedByHeroAndResource.get(key) ?? 0) + entry.points;
+    const recoverable = entry.resource === 'life' ? hero.wounds : hero.stress;
+    if (requested > recoverable) return invalid('REST_ALLOCATION_EXCEEDS_RECOVERY_CAP', spentPoints);
+    requestedByHeroAndResource.set(key, requested);
+  }
+
+  return { ok: true, error: null, availablePoints: budget, spentPoints };
 }
 
 /**
- * Minimal production Rest command. The party confirms one Rest session, spends one printed
- * Firewood token, and deterministically applies the complete printed point budget: Stress first,
- * then Wounds, round-robin across living Heroes. Unneeded points are intentionally forfeited.
+ * Atomically commits the allocation chosen by the players. One point recovers one Life
+ * (represented by removing one Wound) or one Stress. Confirming ends the Rest and discards
+ * one Firewood; points not spent by the players are forfeited with that completed session.
  */
-export function restAtCamp(campaign: CampaignState): QuestRestResult {
-  const state = campaign.questRuntimeState;
-  const current = campaign.dungeon?.rooms.find((room) => room.id === campaign.dungeon?.currentRoomId);
-  if (campaign.gamePhase !== 'dungeon-explore' || !current || current.status !== 'cleared') {
-    return { ok: false, campaign, error: 'not-in-cleared-room' };
+export function commitRestAtCamp(campaign: CampaignState, allocation: RestAllocation): QuestRestResult {
+  const validation = validateRestAllocation(campaign, allocation);
+  if (!validation.ok) return { ok: false, campaign, error: validation.error };
+
+  const state = campaign.questRuntimeState!;
+  const recovery = new Map<string, { life: number; stress: number }>();
+  for (const entry of allocation.allocations) {
+    const current = recovery.get(entry.heroId) ?? { life: 0, stress: 0 };
+    current[entry.resource] += entry.points;
+    recovery.set(entry.heroId, current);
   }
-  if (!state || (state.firewoodTokensRemaining ?? 0) <= 0) return { ok: false, campaign, error: 'no-firewood' };
-  const budget = state.restingPointsRemaining ?? 0;
-  if (budget <= 0) return { ok: false, campaign, error: 'no-resting-points' };
-  const heroes = campaign.heroes.map((hero) => ({ ...hero }));
-  const living = heroes.filter((hero) => hero.isAlive && !hero.dead);
-  let spent = 0;
-  for (let point = 0; point < budget && living.length > 0; point += 1) {
-    const candidates = living.filter((hero) => hero.stress > 0 || hero.wounds > 0);
-    if (candidates.length === 0) break;
-    const hero = candidates[point % candidates.length];
-    if (hero.stress > 0) hero.stress -= 1;
-    else hero.wounds = Math.max(0, hero.wounds - 1);
-    spent += 1;
-  }
+  const heroes = campaign.heroes.map((hero) => {
+    const chosen = recovery.get(hero.instanceId);
+    if (!chosen) return hero;
+    return {
+      ...hero,
+      wounds: hero.wounds - chosen.life,
+      stress: hero.stress - chosen.stress,
+    };
+  });
+  const totalSpent = (state.restingPointsSpent ?? 0) + validation.spentPoints;
   return {
     ok: true,
     campaign: {
@@ -85,8 +168,8 @@ export function restAtCamp(campaign: CampaignState): QuestRestResult {
         ...state,
         firewoodTokensRemaining: (state.firewoodTokensRemaining ?? 0) - 1,
         restingPointsRemaining: 0,
-        restingPointsSpent: (state.restingPointsSpent ?? 0) + spent,
-        counters: { ...state.counters, restingPointsSpent: (state.restingPointsSpent ?? 0) + spent },
+        restingPointsSpent: totalSpent,
+        counters: { ...state.counters, restingPointsSpent: totalSpent },
       },
     },
     error: null,
