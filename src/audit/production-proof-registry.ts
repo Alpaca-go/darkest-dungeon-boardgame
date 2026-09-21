@@ -8,8 +8,9 @@ export interface RegisteredProductionProof {
   testFile: string;
   runner: 'vitest' | 'playwright';
   status: ProductionProofStatus;
-  scope?: 'definition' | 'adapter';
+  scope?: 'definition' | 'adapter' | 'primitive';
   adapterId?: string;
+  primitiveId?: string;
 }
 
 export const ACCURACY_STONE_ID = 'community-trinket-core-accuracy-stone';
@@ -70,6 +71,16 @@ export const PRODUCTION_PROOF_REGISTRY: Readonly<Record<string, RegisteredProduc
     status: 'active',
     scope: 'adapter',
     adapterId: 'c1c1-simple-community-quest-v1',
+  }),
+  proof({
+    proofId: 'C1C1R2-E2E-REST-ALLOCATION',
+    definitionIds: [],
+    proofType: 'e2e',
+    testFile: 'e2e/phase11a4-c1c1r2-rest-allocation.spec.ts',
+    runner: 'playwright',
+    status: 'active',
+    scope: 'primitive',
+    primitiveId: 'QUEST_FIREWOOD_RESTING_POINT_SETUP',
   }),
   proof({
     proofId: 'C1BR-PA-ACCURACY-RUNTIME',
@@ -135,6 +146,7 @@ export function resolveRegisteredProof(
   definitionId: string,
   registry: Readonly<Record<string, RegisteredProductionProof>> = PRODUCTION_PROOF_REGISTRY,
   expectedAdapterId?: string,
+  expectedPrimitiveIds: readonly string[] = [],
 ): { resolved: boolean; reason: 'RESOLVED' | 'UNRESOLVED' | 'WRONG_TYPE' | 'WRONG_DEFINITION' | 'DISABLED' } {
   const registered = registry[proofId];
   if (!registered) return { resolved: false, reason: 'UNRESOLVED' };
@@ -142,6 +154,8 @@ export function resolveRegisteredProof(
   if (registered.proofType !== expectedType) return { resolved: false, reason: 'WRONG_TYPE' };
   if (registered.scope === 'adapter') {
     if (!expectedAdapterId || registered.adapterId !== expectedAdapterId) return { resolved: false, reason: 'WRONG_DEFINITION' };
+  } else if (registered.scope === 'primitive') {
+    if (!registered.primitiveId || !expectedPrimitiveIds.includes(registered.primitiveId)) return { resolved: false, reason: 'WRONG_DEFINITION' };
   } else if (!registered.definitionIds.includes(definitionId)) return { resolved: false, reason: 'WRONG_DEFINITION' };
   return { resolved: true, reason: 'RESOLVED' };
 }
@@ -152,8 +166,9 @@ export function allProofsResolve(
   definitionId: string,
   registry: Readonly<Record<string, RegisteredProductionProof>> = PRODUCTION_PROOF_REGISTRY,
   expectedAdapterId?: string,
+  expectedPrimitiveIds: readonly string[] = [],
 ): boolean {
   return proofIds.length > 0 && proofIds.every((proofId) =>
-    resolveRegisteredProof(proofId, expectedType, definitionId, registry, expectedAdapterId).resolved,
+    resolveRegisteredProof(proofId, expectedType, definitionId, registry, expectedAdapterId, expectedPrimitiveIds).resolved,
   );
 }

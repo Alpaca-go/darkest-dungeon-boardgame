@@ -13,7 +13,7 @@ import {
 } from '../data/community-reference/production-runtime';
 import { applyDefaultLoadout, createNewCampaign, selectParty } from './campaign';
 import { generateDungeon, moveToRoom, QUEST_ROOM_TOKEN_BEHAVIOR_MATRIX } from './dungeon';
-import { createQuestRuntimeState, restAtCamp } from './quests/quest-runtime';
+import { commitRestAtCamp, createQuestRuntimeState } from './quests/quest-runtime';
 import { createSaveSnapshot, restoreSaveSnapshot } from './save';
 import { interactWithCurio } from './diseases/curio';
 import { commitBattleVictory } from './commands/battle';
@@ -91,7 +91,9 @@ describe('C1C-1R source setup production proof', () => {
     };
     const restored = restoreSaveSnapshot(createSaveSnapshot(campaign));
     expect(restored.questRuntimeState).toMatchObject({ firewoodTokensRemaining: 1, restingPointsRemaining: 8 });
-    const rested = restAtCamp(restored);
+    const rested = commitRestAtCamp(restored, {
+      allocations: [{ heroId: restored.heroes[0].instanceId, resource: 'stress', points: 3 }],
+    });
     expect(rested.ok).toBe(true);
     expect(rested.campaign.questRuntimeState).toMatchObject({ firewoodTokensRemaining: 0, restingPointsRemaining: 0, restingPointsSpent: 3 });
     const twice = restoreSaveSnapshot(createSaveSnapshot(restoreSaveSnapshot(createSaveSnapshot(rested.campaign))));

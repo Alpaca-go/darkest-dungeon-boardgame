@@ -61,6 +61,7 @@ export interface CommunityQuestRuntimeAdapter {
 export interface CommunityProductionProof {
   definitionId: string;
   runtimeAdapterId: string;
+  requiredPrimitives?: string[];
   sourceSupported: boolean;
   semanticSupported: boolean;
   stateful: boolean;
@@ -177,13 +178,18 @@ export const COMMUNITY_QUEST_PRODUCTION_PROOFS: Readonly<Record<string, Communit
   Object.fromEntries(questDefinitionIds.map((definitionId) => [definitionId, {
     definitionId,
     runtimeAdapterId: 'c1c1-simple-community-quest-v1',
+    requiredPrimitives: [...COMMUNITY_QUEST_RUNTIME_ADAPTERS[definitionId].requiredPrimitives],
     sourceSupported: true,
     semanticSupported: true,
     stateful: true,
     productionTests: ['C1C1-QUEST-RUNTIME', 'C1C1R-QUEST-SOURCE-SETUP'],
     saveReplayTests: ['C1C1-QUEST-SAVE-REPLAY'],
     selectorTests: ['C1C1-QUEST-SELECTOR'],
-    e2eTests: ['C1C1R-E2E-SIMPLE-QUEST-ADAPTER'],
+    e2eTests: [
+      'C1C1R-E2E-SIMPLE-QUEST-ADAPTER',
+      ...(COMMUNITY_QUEST_RUNTIME_ADAPTERS[definitionId].definition.firewoodSetup!.tokens > 0
+        ? ['C1C1R2-E2E-REST-ALLOCATION'] : []),
+    ],
   }])),
 );
 
@@ -214,7 +220,14 @@ export function evaluateCommunityQuestCapability(
     productionProofPresent: Boolean(proofMatches && allProofsResolve(proof.productionTests, 'production-runtime', source.id, registeredProofs)),
     saveReplayProofPresent: Boolean(proofMatches && allProofsResolve(proof.saveReplayTests, 'save-replay', source.id, registeredProofs)),
     selectorProofPresent: Boolean(proofMatches && allProofsResolve(proof.selectorTests, 'selector', source.id, registeredProofs)),
-    e2eProofPresent: Boolean(proofMatches && allProofsResolve(proof.e2eTests, 'e2e', source.id, registeredProofs, adapter?.adapterId)),
+    e2eProofPresent: Boolean(proofMatches && allProofsResolve(
+      proof.e2eTests,
+      'e2e',
+      source.id,
+      registeredProofs,
+      adapter?.adapterId,
+      proof.requiredPrimitives ?? [],
+    )),
   };
   const proofComplete = Boolean(proofMatches && proof.sourceSupported && proof.semanticSupported
     && measuredRuntimeProof.productionProofPresent && measuredRuntimeProof.saveReplayProofPresent
