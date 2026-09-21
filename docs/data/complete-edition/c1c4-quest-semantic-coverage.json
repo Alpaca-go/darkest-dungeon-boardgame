@@ -1,0 +1,5250 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-4",
+  "generatedAt": "2026-09-21T11:37:45.903Z",
+  "baselineHead": "5ac8cc58efd73ae0bbc88074ea46dc29e405d899",
+  "verifiedImplementationHead": "67902a82ff0842f65fb4abcc8a7932a1e0a7ec34",
+  "definitions": [
+    {
+      "definitionId": "community-quest-boss-face-the-threat",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 2,
+      "obligations": [
+        {
+          "obligationId": "community-quest-boss-face-the-threat:rule-0:0",
+          "definitionId": "community-quest-boss-face-the-threat",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "quest-setup",
+          "trigger": null,
+          "scope": "quest-setup",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": [
+              "S4:p30",
+              "S4:p35"
+            ]
+          },
+          "parameters": {
+            "setup": "boss-quest-rulebook-p30"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "setup": "boss-quest-rulebook-p30"
+          }
+        },
+        {
+          "obligationId": "community-quest-boss-face-the-threat:rule-0:1",
+          "definitionId": "community-quest-boss-face-the-threat",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "campaign-rule",
+          "trigger": null,
+          "scope": "boss-quest",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": [
+              "S4:p30",
+              "S4:p35"
+            ]
+          },
+          "parameters": {
+            "returnToHamlet": "forbidden-until-boss-defeated"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "returnToHamlet": "forbidden-until-boss-defeated"
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-cove-lvl1-deep-horrors",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 1,
+      "obligations": [
+        {
+          "obligationId": "community-quest-cove-lvl1-deep-horrors:rule-0:0",
+          "definitionId": "community-quest-cove-lvl1-deep-horrors",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-spawn",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "roomType": "objective",
+            "spawnFirst": [
+              {
+                "name": "Uca Major",
+                "count": 1
+              }
+            ],
+            "remaining": "normal-monster-deck"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "roomType": "objective",
+            "spawnFirst": [
+              {
+                "name": "Uca Major",
+                "count": 1
+              }
+            ],
+            "remaining": "normal-monster-deck"
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-cove-lvl1-deep-waters",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 1,
+      "obligations": [
+        {
+          "obligationId": "community-quest-cove-lvl1-deep-waters:rule-0:0",
+          "definitionId": "community-quest-cove-lvl1-deep-waters",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "battle-start",
+          "trigger": null,
+          "scope": "curio-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "roomType": "curio",
+            "alwaysBattle": true
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "roomType": "curio",
+            "alwaysBattle": true
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-cove-lvl1-purify-the-eldritch-signs",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 4,
+      "obligations": [
+        {
+          "obligationId": "community-quest-cove-lvl1-purify-the-eldritch-signs:rule-0:0",
+          "definitionId": "community-quest-cove-lvl1-purify-the-eldritch-signs",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-setup",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "rooms": [
+              1,
+              9
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "rooms": [
+              1,
+              9
+            ]
+          }
+        },
+        {
+          "obligationId": "community-quest-cove-lvl1-purify-the-eldritch-signs:rule-0:1",
+          "definitionId": "community-quest-cove-lvl1-purify-the-eldritch-signs",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-selection",
+          "trigger": "enter-objective-room",
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "selection": "random-each-entry-return-after-encounter"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "selection": "random-each-entry-return-after-encounter"
+          }
+        },
+        {
+          "obligationId": "community-quest-cove-lvl1-purify-the-eldritch-signs:rule-0:2",
+          "definitionId": "community-quest-cove-lvl1-purify-the-eldritch-signs",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "quest-setup",
+          "trigger": null,
+          "scope": "quest-setup",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "setup": "may-convert-any-provision-to-potion"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "setup": "may-convert-any-provision-to-potion"
+          }
+        },
+        {
+          "obligationId": "community-quest-cove-lvl1-purify-the-eldritch-signs:rule-0:3",
+          "definitionId": "community-quest-cove-lvl1-purify-the-eldritch-signs",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "objective-qualification",
+          "trigger": null,
+          "scope": "objective-room-red-area",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "area": "red",
+            "provisionCost": {
+              "potion": 1
+            },
+            "limit": "once-per-battle",
+            "purify": "eldritch-sign"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "area": "red",
+            "provisionCost": {
+              "potion": 1
+            },
+            "limit": "once-per-battle",
+            "purify": "eldritch-sign"
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-cove-lvl1-test-the-waters",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 3,
+      "obligations": [
+        {
+          "obligationId": "community-quest-cove-lvl1-test-the-waters:rule-0:0",
+          "definitionId": "community-quest-cove-lvl1-test-the-waters",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-setup",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "rooms": [
+              2,
+              5,
+              8
+            ],
+            "setAsideAtStart": true
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "rooms": [
+              2,
+              5,
+              8
+            ],
+            "setAsideAtStart": true
+          }
+        },
+        {
+          "obligationId": "community-quest-cove-lvl1-test-the-waters:rule-0:1",
+          "definitionId": "community-quest-cove-lvl1-test-the-waters",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-selection",
+          "trigger": "enter-objective-room",
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "selection": "random-each-entry"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "selection": "random-each-entry"
+          }
+        },
+        {
+          "obligationId": "community-quest-cove-lvl1-test-the-waters:rule-0:2",
+          "definitionId": "community-quest-cove-lvl1-test-the-waters",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "objective-qualification",
+          "trigger": null,
+          "scope": "objective-room-area-A",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "area": "A",
+            "actionCost": 2,
+            "collect": "sample",
+            "counter": {
+              "kind": "wound-tokens-on-quest-card",
+              "max": 6
+            }
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "area": "A",
+            "actionCost": 2,
+            "collect": "sample",
+            "counter": {
+              "kind": "wound-tokens-on-quest-card",
+              "max": 6
+            }
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-cove-lvl1-unclean-waters",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 1,
+      "obligations": [
+        {
+          "obligationId": "community-quest-cove-lvl1-unclean-waters:rule-0:0",
+          "definitionId": "community-quest-cove-lvl1-unclean-waters",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "hero-condition",
+          "trigger": "hero-kills-cove-monster",
+          "scope": "killing-hero",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "trigger": "hero-kills-cove-monster",
+            "target": "killing-hero",
+            "conditions": [
+              {
+                "type": "blight",
+                "amount": 2,
+                "turns": 3
+              }
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "trigger": "hero-kills-cove-monster",
+            "target": "killing-hero",
+            "conditions": [
+              {
+                "type": "blight",
+                "amount": 2,
+                "turns": 3
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-cove-lvl2-deep-horrors-2",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 1,
+      "obligations": [
+        {
+          "obligationId": "community-quest-cove-lvl2-deep-horrors-2:rule-0:0",
+          "definitionId": "community-quest-cove-lvl2-deep-horrors-2",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-spawn",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "roomType": "objective",
+            "spawnFirst": [
+              {
+                "name": "Uca Major",
+                "count": 1
+              },
+              {
+                "name": "Squiffy Ghast",
+                "count": 1
+              }
+            ],
+            "additionalRandomMonsters": 1
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "roomType": "objective",
+            "spawnFirst": [
+              {
+                "name": "Uca Major",
+                "count": 1
+              },
+              {
+                "name": "Squiffy Ghast",
+                "count": 1
+              }
+            ],
+            "additionalRandomMonsters": 1
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-cove-lvl2-deep-waters-2",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 1,
+      "obligations": [
+        {
+          "obligationId": "community-quest-cove-lvl2-deep-waters-2:rule-0:0",
+          "definitionId": "community-quest-cove-lvl2-deep-waters-2",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "battle-start",
+          "trigger": null,
+          "scope": "curio-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "roomType": "curio",
+            "alwaysBattle": true
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "roomType": "curio",
+            "alwaysBattle": true
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-cove-lvl2-eldritch-purging",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 2,
+      "obligations": [
+        {
+          "obligationId": "community-quest-cove-lvl2-eldritch-purging:rule-0:0",
+          "definitionId": "community-quest-cove-lvl2-eldritch-purging",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "battle-start",
+          "trigger": null,
+          "scope": "curio-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "roomType": "curio",
+            "alwaysBattle": true
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "roomType": "curio",
+            "alwaysBattle": true
+          }
+        },
+        {
+          "obligationId": "community-quest-cove-lvl2-eldritch-purging:rule-0:1",
+          "definitionId": "community-quest-cove-lvl2-eldritch-purging",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "curio",
+          "trigger": "after-curio-room-cleared",
+          "scope": "curio-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "curioEffects": "negative-only"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "curioEffects": "negative-only"
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-cove-lvl2-the-deep-ones",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 3,
+      "obligations": [
+        {
+          "obligationId": "community-quest-cove-lvl2-the-deep-ones:rule-0:0",
+          "definitionId": "community-quest-cove-lvl2-the-deep-ones",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-setup",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "rooms": [
+              2,
+              5,
+              6,
+              8
+            ],
+            "setAsideAtStart": true
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "rooms": [
+              2,
+              5,
+              6,
+              8
+            ],
+            "setAsideAtStart": true
+          }
+        },
+        {
+          "obligationId": "community-quest-cove-lvl2-the-deep-ones:rule-0:1",
+          "definitionId": "community-quest-cove-lvl2-the-deep-ones",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-selection",
+          "trigger": "enter-objective-room",
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "selection": "random-each-entry"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "selection": "random-each-entry"
+          }
+        },
+        {
+          "obligationId": "community-quest-cove-lvl2-the-deep-ones:rule-0:2",
+          "definitionId": "community-quest-cove-lvl2-the-deep-ones",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-pool",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "roomType": "objective",
+            "monsterPool": "cove-only"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "roomType": "objective",
+            "monsterPool": "cove-only"
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-cove-lvl2-unclean-waters-2",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 1,
+      "obligations": [
+        {
+          "obligationId": "community-quest-cove-lvl2-unclean-waters-2:rule-0:0",
+          "definitionId": "community-quest-cove-lvl2-unclean-waters-2",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "hero-condition",
+          "trigger": "hero-kills-cove-monster",
+          "scope": "killing-hero",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "trigger": "hero-kills-cove-monster",
+            "target": "killing-hero",
+            "conditions": [
+              {
+                "type": "blight",
+                "amount": 3,
+                "turns": 3
+              }
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "trigger": "hero-kills-cove-monster",
+            "target": "killing-hero",
+            "conditions": [
+              {
+                "type": "blight",
+                "amount": 3,
+                "turns": 3
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-cove-lvl3-deep-waters-3",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 2,
+      "obligations": [
+        {
+          "obligationId": "community-quest-cove-lvl3-deep-waters-3:rule-0:0",
+          "definitionId": "community-quest-cove-lvl3-deep-waters-3",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "battle-start",
+          "trigger": null,
+          "scope": "curio-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "roomType": "curio",
+            "alwaysBattle": true
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "roomType": "curio",
+            "alwaysBattle": true
+          }
+        },
+        {
+          "obligationId": "community-quest-cove-lvl3-deep-waters-3:rule-0:1",
+          "definitionId": "community-quest-cove-lvl3-deep-waters-3",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "curio",
+          "trigger": "after-curio-room-cleared",
+          "scope": "curio-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "curioEffects": "negative-only"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "curioEffects": "negative-only"
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-cove-lvl3-tainted-trinkets",
+      "sourceSemanticComplete": true,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 9,
+      "obligations": [
+        {
+          "obligationId": "TT-01",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-setup",
+          "trigger": "quest-start",
+          "scope": "objective-rooms",
+          "parameters": {
+            "roomSemanticIdentities": [
+              "cove-1",
+              "cove-5",
+              "cove-9"
+            ]
+          },
+          "runtimePrimitive": "QUEST_RULE_ROOM_IDENTITY_SELECTION",
+          "runtimeBindingId": "tainted-trinkets-objective-room-setup",
+          "implementationStatus": "PARTIAL",
+          "proofIds": [
+            "C1C3-TAINTED-RUNTIME"
+          ],
+          "blockerCode": "QUEST_ROOM_IDENTITY_SELECTION_UNSUPPORTED",
+          "definitionId": "community-quest-cove-lvl3-tainted-trinkets",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "status": "PARTIAL",
+          "effect": {
+            "roomSemanticIdentities": [
+              "cove-1",
+              "cove-5",
+              "cove-9"
+            ]
+          }
+        },
+        {
+          "obligationId": "TT-02",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "quest-setup",
+          "trigger": "quest-start",
+          "scope": "each-hero",
+          "parameters": {
+            "randomTrinketLevel": 3
+          },
+          "runtimePrimitive": "QUEST_RULE_TRINKET_ACQUISITION",
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_TRINKET_ACQUISITION_UNSUPPORTED",
+          "definitionId": "community-quest-cove-lvl3-tainted-trinkets",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "status": "UNSUPPORTED",
+          "effect": {
+            "randomTrinketLevel": 3
+          }
+        },
+        {
+          "obligationId": "TT-03",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "quest-setup",
+          "trigger": "quest-start",
+          "scope": "hero-without-capacity",
+          "parameters": {
+            "fallback": "choose-owned-trinket-and-taint"
+          },
+          "runtimePrimitive": "QUEST_RULE_TRINKET_FALLBACK_CHOICE",
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_TRINKET_ACQUISITION_UNSUPPORTED",
+          "definitionId": "community-quest-cove-lvl3-tainted-trinkets",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "status": "UNSUPPORTED",
+          "effect": {
+            "fallback": "choose-owned-trinket-and-taint"
+          }
+        },
+        {
+          "obligationId": "TT-04",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "trinket-state",
+          "trigger": "quest-start",
+          "scope": "assigned-trinket",
+          "parameters": {
+            "tainted": true,
+            "ownerHeroId": "required",
+            "acquiredByQuest": "required"
+          },
+          "runtimePrimitive": "QUEST_RULE_TRINKET_STATE",
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_TAINTED_TRINKET_STATE_UNSUPPORTED",
+          "definitionId": "community-quest-cove-lvl3-tainted-trinkets",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "status": "UNSUPPORTED",
+          "effect": {
+            "tainted": true,
+            "ownerHeroId": "required",
+            "acquiredByQuest": "required"
+          }
+        },
+        {
+          "obligationId": "TT-05",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "objective-qualification",
+          "trigger": "token-interacted",
+          "scope": "objective-room-red-area",
+          "parameters": {
+            "heroLocation": "red",
+            "oncePerRoom": true,
+            "taintedTrinketRequired": true
+          },
+          "runtimePrimitive": "QUEST_RULE_ACTION_AREA_INTERACTION",
+          "runtimeBindingId": "tainted-trinkets-cleanse-completion",
+          "implementationStatus": "PARTIAL",
+          "proofIds": [
+            "C1C3-TAINTED-RUNTIME"
+          ],
+          "blockerCode": "QUEST_ACTION_AREA_INTERACTION_UNSUPPORTED",
+          "definitionId": "community-quest-cove-lvl3-tainted-trinkets",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "status": "PARTIAL",
+          "effect": {
+            "heroLocation": "red",
+            "oncePerRoom": true,
+            "taintedTrinketRequired": true
+          }
+        },
+        {
+          "obligationId": "TT-06",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "action-cost",
+          "trigger": "token-interacted",
+          "scope": "acting-hero",
+          "parameters": {
+            "actionCost": 1
+          },
+          "runtimePrimitive": "QUEST_RULE_ACTION_ECONOMY",
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_ACTION_AREA_INTERACTION_UNSUPPORTED",
+          "definitionId": "community-quest-cove-lvl3-tainted-trinkets",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "status": "UNSUPPORTED",
+          "effect": {
+            "actionCost": 1
+          }
+        },
+        {
+          "obligationId": "TT-07",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "objective-qualification",
+          "trigger": "token-interacted",
+          "scope": "cleansed-tainted-trinket",
+          "parameters": {
+            "xpPerCleanse": 1,
+            "maximumXp": 3
+          },
+          "runtimePrimitive": "QUEST_RULE_QUEST_COMPLETION",
+          "runtimeBindingId": "tainted-trinkets-cleanse-completion",
+          "implementationStatus": "PARTIAL",
+          "proofIds": [
+            "C1C3-TAINTED-RUNTIME"
+          ],
+          "blockerCode": "RUNTIME_SEMANTIC_PARTIAL",
+          "definitionId": "community-quest-cove-lvl3-tainted-trinkets",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "status": "PARTIAL",
+          "effect": {
+            "xpPerCleanse": 1,
+            "maximumXp": 3
+          }
+        },
+        {
+          "obligationId": "TT-08",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "campaign-rule",
+          "trigger": "return-to-hamlet",
+          "scope": "heroes-with-tainted-trinkets",
+          "parameters": {
+            "choices": [
+              "gain-2-negative-quirks-and-cleanse",
+              "remove-and-return-to-deck"
+            ]
+          },
+          "runtimePrimitive": "QUEST_RULE_HAMLET_CHOICE",
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_HAMLET_RESOLUTION_UNSUPPORTED",
+          "definitionId": "community-quest-cove-lvl3-tainted-trinkets",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "status": "UNSUPPORTED",
+          "effect": {
+            "choices": [
+              "gain-2-negative-quirks-and-cleanse",
+              "remove-and-return-to-deck"
+            ]
+          }
+        },
+        {
+          "obligationId": "TT-09",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "campaign-rule",
+          "trigger": "return-to-hamlet",
+          "scope": "chosen-hero",
+          "parameters": {
+            "negativeQuirks": 2
+          },
+          "runtimePrimitive": "QUEST_RULE_QUIRK_GAIN",
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_HAMLET_RESOLUTION_UNSUPPORTED",
+          "definitionId": "community-quest-cove-lvl3-tainted-trinkets",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "status": "UNSUPPORTED",
+          "effect": {
+            "negativeQuirks": 2
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-cove-lvl3-the-deep-ones-2",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 4,
+      "obligations": [
+        {
+          "obligationId": "community-quest-cove-lvl3-the-deep-ones-2:rule-0:0",
+          "definitionId": "community-quest-cove-lvl3-the-deep-ones-2",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-setup",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "rooms": [
+              2,
+              5,
+              6,
+              8
+            ],
+            "setAsideAtStart": true
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "rooms": [
+              2,
+              5,
+              6,
+              8
+            ],
+            "setAsideAtStart": true
+          }
+        },
+        {
+          "obligationId": "community-quest-cove-lvl3-the-deep-ones-2:rule-0:1",
+          "definitionId": "community-quest-cove-lvl3-the-deep-ones-2",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-selection",
+          "trigger": "enter-objective-room",
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "selection": "random-each-entry"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "selection": "random-each-entry"
+          }
+        },
+        {
+          "obligationId": "community-quest-cove-lvl3-the-deep-ones-2:rule-0:2",
+          "definitionId": "community-quest-cove-lvl3-the-deep-ones-2",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-spawn",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "roomType": "objective",
+            "spawn": [
+              {
+                "name": "Squiffy Ghast",
+                "count": 1
+              }
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "roomType": "objective",
+            "spawn": [
+              {
+                "name": "Squiffy Ghast",
+                "count": 1
+              }
+            ]
+          }
+        },
+        {
+          "obligationId": "community-quest-cove-lvl3-the-deep-ones-2:rule-0:3",
+          "definitionId": "community-quest-cove-lvl3-the-deep-ones-2",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-pool",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "monsterPool": "cove-only"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "monsterPool": "cove-only"
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-cove-lvl3-the-shipwrecks",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 2,
+      "obligations": [
+        {
+          "obligationId": "community-quest-cove-lvl3-the-shipwrecks:rule-0:0",
+          "definitionId": "community-quest-cove-lvl3-the-shipwrecks",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-setup",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "rooms": [
+              7
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "rooms": [
+              7
+            ]
+          }
+        },
+        {
+          "obligationId": "community-quest-cove-lvl3-the-shipwrecks:rule-0:1",
+          "definitionId": "community-quest-cove-lvl3-the-shipwrecks",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "objective-qualification",
+          "trigger": "search-roll",
+          "scope": "objective-room-green-area",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "area": "green",
+            "trigger": "search-roll",
+            "rollRange": [
+              4,
+              8
+            ],
+            "replace": "chosen-provision",
+            "collect": "idol",
+            "maxPerShipwreck": 1
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "area": "green",
+            "trigger": "search-roll",
+            "rollRange": [
+              4,
+              8
+            ],
+            "replace": "chosen-provision",
+            "collect": "idol",
+            "maxPerShipwreck": 1
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-cove-lvl3-unclean-waters-3",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 1,
+      "obligations": [
+        {
+          "obligationId": "community-quest-cove-lvl3-unclean-waters-3:rule-0:0",
+          "definitionId": "community-quest-cove-lvl3-unclean-waters-3",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "hero-condition",
+          "trigger": "hero-kills-cove-monster",
+          "scope": "killing-hero",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "trigger": "hero-kills-cove-monster",
+            "target": "killing-hero",
+            "conditions": [
+              {
+                "type": "blight",
+                "amount": 3,
+                "turns": 4
+              }
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "trigger": "hero-kills-cove-monster",
+            "target": "killing-hero",
+            "conditions": [
+              {
+                "type": "blight",
+                "amount": 3,
+                "turns": 4
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl1-deep-in-the-swamp",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 0,
+      "obligations": []
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl1-lost-and-found",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 2,
+      "obligations": [
+        {
+          "obligationId": "community-quest-crimson-court-lvl1-lost-and-found:rule-0:0",
+          "definitionId": "community-quest-crimson-court-lvl1-lost-and-found",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-selection",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "roomType": "objective",
+            "roomFilter": "has-loot"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "roomType": "objective",
+            "roomFilter": "has-loot"
+          }
+        },
+        {
+          "obligationId": "community-quest-crimson-court-lvl1-lost-and-found:rule-0:1",
+          "definitionId": "community-quest-crimson-court-lvl1-lost-and-found",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "loot",
+          "trigger": "loot-chest",
+          "scope": "first-loot-chest-in-each-objective-room",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "firstChestPerRoom": {
+              "replaceNormalLoot": "valuable"
+            }
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "firstChestPerRoom": {
+              "replaceNormalLoot": "valuable"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl1-rest-in-rubble",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 2,
+      "obligations": [
+        {
+          "obligationId": "community-quest-crimson-court-lvl1-rest-in-rubble:rule-0:0",
+          "definitionId": "community-quest-crimson-court-lvl1-rest-in-rubble",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-clear-rule",
+          "trigger": "curio-room-cleared",
+          "scope": "curio-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "roomType": "curio",
+            "onClear": "desecrate-tomb"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "roomType": "curio",
+            "onClear": "desecrate-tomb"
+          }
+        },
+        {
+          "obligationId": "community-quest-crimson-court-lvl1-rest-in-rubble:rule-0:1",
+          "definitionId": "community-quest-crimson-court-lvl1-rest-in-rubble",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "curio",
+          "trigger": null,
+          "scope": "curio-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "curioEffects": "negative-only",
+            "torchCannotCounter": true
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "curioEffects": "negative-only",
+            "torchCannotCounter": true
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl1-rivers-run-red",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 4,
+      "obligations": [
+        {
+          "obligationId": "community-quest-crimson-court-lvl1-rivers-run-red:rule-0:0",
+          "definitionId": "community-quest-crimson-court-lvl1-rivers-run-red",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-setup",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "rooms": [
+              2,
+              3,
+              4
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "rooms": [
+              2,
+              3,
+              4
+            ]
+          }
+        },
+        {
+          "obligationId": "community-quest-crimson-court-lvl1-rivers-run-red:rule-0:1",
+          "definitionId": "community-quest-crimson-court-lvl1-rivers-run-red",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-selection",
+          "trigger": "enter-objective-room",
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "selection": "random-then-discard-on-clear"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "selection": "random-then-discard-on-clear"
+          }
+        },
+        {
+          "obligationId": "community-quest-crimson-court-lvl1-rivers-run-red:rule-0:2",
+          "definitionId": "community-quest-crimson-court-lvl1-rivers-run-red",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "objective-qualification",
+          "trigger": null,
+          "scope": "objective-room-area-A-red",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "area": "A-red",
+            "actionCost": 2,
+            "collect": "blood-vial"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "area": "A-red",
+            "actionCost": 2,
+            "collect": "blood-vial"
+          }
+        },
+        {
+          "obligationId": "community-quest-crimson-court-lvl1-rivers-run-red:rule-0:3",
+          "definitionId": "community-quest-crimson-court-lvl1-rivers-run-red",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "objective-completion",
+          "trigger": "vial-filled",
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "clearOnlyAfterCollection": true
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "clearOnlyAfterCollection": true
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl1-they-are-swarm",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 1,
+      "obligations": [
+        {
+          "obligationId": "community-quest-crimson-court-lvl1-they-are-swarm:rule-0:0",
+          "definitionId": "community-quest-crimson-court-lvl1-they-are-swarm",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-pool",
+          "trigger": null,
+          "scope": "lairs",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "roomType": "lair",
+            "monsterPool": "crimson-court-only"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "roomType": "lair",
+            "monsterPool": "crimson-court-only"
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl2-deeper-into-the-swamp",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 0,
+      "obligations": []
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl2-lurkers",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 1,
+      "obligations": [
+        {
+          "obligationId": "community-quest-crimson-court-lvl2-lurkers:rule-0:0",
+          "definitionId": "community-quest-crimson-court-lvl2-lurkers",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-spawn",
+          "trigger": null,
+          "scope": "lairs",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "roomType": "lair",
+            "spawn": [
+              {
+                "name": "Crocodilian",
+                "level": 3,
+                "count": 1
+              }
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "roomType": "lair",
+            "spawn": [
+              {
+                "name": "Crocodilian",
+                "level": 3,
+                "count": 1
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl2-pest-control",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 0,
+      "obligations": []
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl2-ruin-the-party",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 3,
+      "obligations": [
+        {
+          "obligationId": "community-quest-crimson-court-lvl2-ruin-the-party:rule-0:0",
+          "definitionId": "community-quest-crimson-court-lvl2-ruin-the-party",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-setup",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "rooms": [
+              5,
+              6,
+              7
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "rooms": [
+              5,
+              6,
+              7
+            ]
+          }
+        },
+        {
+          "obligationId": "community-quest-crimson-court-lvl2-ruin-the-party:rule-0:1",
+          "definitionId": "community-quest-crimson-court-lvl2-ruin-the-party",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-selection",
+          "trigger": "enter-objective-room",
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "selection": "random-then-discard-on-clear"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "selection": "random-then-discard-on-clear"
+          }
+        },
+        {
+          "obligationId": "community-quest-crimson-court-lvl2-ruin-the-party:rule-0:2",
+          "definitionId": "community-quest-crimson-court-lvl2-ruin-the-party",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-pool",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "roomType": "objective",
+            "monsterPool": "crimson-court-only"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "roomType": "objective",
+            "monsterPool": "crimson-court-only"
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl2-take-em-back",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 6,
+      "obligations": [
+        {
+          "obligationId": "community-quest-crimson-court-lvl2-take-em-back:rule-0:0",
+          "definitionId": "community-quest-crimson-court-lvl2-take-em-back",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-selection",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "roomFilter": "has-loot-chests"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "roomFilter": "has-loot-chests"
+          }
+        },
+        {
+          "obligationId": "community-quest-crimson-court-lvl2-take-em-back:rule-0:1",
+          "definitionId": "community-quest-crimson-court-lvl2-take-em-back",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-stat-modifier",
+          "trigger": null,
+          "scope": "court-monsters-in-objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "roomType": "objective",
+            "courtMonsterLifeBonus": 7
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "roomType": "objective",
+            "courtMonsterLifeBonus": 7
+          }
+        },
+        {
+          "obligationId": "community-quest-crimson-court-lvl2-take-em-back:rule-0:2",
+          "definitionId": "community-quest-crimson-court-lvl2-take-em-back",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "loot",
+          "trigger": "loot-chest",
+          "scope": "first-chest-in-objective-room",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "firstChest": {
+              "trinketLevel": 2
+            }
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "firstChest": {
+              "trinketLevel": 2
+            }
+          }
+        },
+        {
+          "obligationId": "community-quest-crimson-court-lvl2-take-em-back:rule-0:3",
+          "definitionId": "community-quest-crimson-court-lvl2-take-em-back",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "objective-qualification",
+          "trigger": "return-to-hamlet",
+          "scope": "quest-reward",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "trinketLevel": 2,
+            "loseTrinkets": true,
+            "recipient": "chosen-Heir"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "trinketLevel": 2,
+            "loseTrinkets": true,
+            "recipient": "chosen-Heir"
+          }
+        },
+        {
+          "obligationId": "community-quest-crimson-court-lvl2-take-em-back:rule-0:4",
+          "definitionId": "community-quest-crimson-court-lvl2-take-em-back",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "reward-modifier",
+          "trigger": "return-to-hamlet",
+          "scope": "trinket-return-xp",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "xpEach": 1,
+            "maxXp": 3
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "xpEach": 1,
+            "maxXp": 3
+          }
+        },
+        {
+          "obligationId": "community-quest-crimson-court-lvl2-take-em-back:rule-0:5",
+          "definitionId": "community-quest-crimson-court-lvl2-take-em-back",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "objective-completion",
+          "trigger": null,
+          "scope": "trinket-return-xp-eligibility",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "minimumObjectiveRoomsCleared": 1
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "minimumObjectiveRoomsCleared": 1
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl3-breeders",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 3,
+      "obligations": [
+        {
+          "obligationId": "community-quest-crimson-court-lvl3-breeders:rule-0:0",
+          "definitionId": "community-quest-crimson-court-lvl3-breeders",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-setup",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "rooms": [
+              4,
+              5,
+              9
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "rooms": [
+              4,
+              5,
+              9
+            ]
+          }
+        },
+        {
+          "obligationId": "community-quest-crimson-court-lvl3-breeders:rule-0:1",
+          "definitionId": "community-quest-crimson-court-lvl3-breeders",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-selection",
+          "trigger": "enter-objective-room",
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "selection": "random-then-discard-on-clear"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "selection": "random-then-discard-on-clear"
+          }
+        },
+        {
+          "obligationId": "community-quest-crimson-court-lvl3-breeders:rule-0:2",
+          "definitionId": "community-quest-crimson-court-lvl3-breeders",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-spawn",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "spawn": [
+              {
+                "name": "Crocodilian",
+                "count": 1
+              },
+              {
+                "name": "Adder",
+                "count": 1
+              }
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "spawn": [
+              {
+                "name": "Crocodilian",
+                "count": 1
+              },
+              {
+                "name": "Adder",
+                "count": 1
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl3-cut-the-buzz",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 2,
+      "obligations": [
+        {
+          "obligationId": "community-quest-crimson-court-lvl3-cut-the-buzz:rule-0:0",
+          "definitionId": "community-quest-crimson-court-lvl3-cut-the-buzz",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "hero-condition",
+          "trigger": "court-monster-hits-hero",
+          "scope": "heroes-hit-by-court-monsters",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "trigger": "court-monster-hits-hero",
+            "addToHit": {
+              "type": "bleed",
+              "amount": 3,
+              "turns": 3
+            }
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "trigger": "court-monster-hits-hero",
+            "addToHit": {
+              "type": "bleed",
+              "amount": 3,
+              "turns": 3
+            }
+          }
+        },
+        {
+          "obligationId": "community-quest-crimson-court-lvl3-cut-the-buzz:rule-0:1",
+          "definitionId": "community-quest-crimson-court-lvl3-cut-the-buzz",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-stat-modifier",
+          "trigger": "court-monster-hits-hero",
+          "scope": "attacking-court-monster",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "healAttacker": 4
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "healAttacker": 4
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl3-the-endless-marsh",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 2,
+      "obligations": [
+        {
+          "obligationId": "community-quest-crimson-court-lvl3-the-endless-marsh:rule-0:0",
+          "definitionId": "community-quest-crimson-court-lvl3-the-endless-marsh",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "dungeon-setup",
+          "trigger": null,
+          "scope": "dungeon",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "setup": "random-rooms"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "setup": "random-rooms"
+          }
+        },
+        {
+          "obligationId": "community-quest-crimson-court-lvl3-the-endless-marsh:rule-0:1",
+          "definitionId": "community-quest-crimson-court-lvl3-the-endless-marsh",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "exploration",
+          "trigger": "leave-cleared-room",
+          "scope": "cleared-room",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "trigger": "leave-cleared-room",
+            "replace": "random-face-down-room-token",
+            "resetVisited": true
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "trigger": "leave-cleared-room",
+            "replace": "random-face-down-room-token",
+            "resetVisited": true
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl3-uninvited",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 2,
+      "obligations": [
+        {
+          "obligationId": "community-quest-crimson-court-lvl3-uninvited:rule-0:0",
+          "definitionId": "community-quest-crimson-court-lvl3-uninvited",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-setup",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "rooms": [
+              6,
+              7,
+              8
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "rooms": [
+              6,
+              7,
+              8
+            ]
+          }
+        },
+        {
+          "obligationId": "community-quest-crimson-court-lvl3-uninvited:rule-0:1",
+          "definitionId": "community-quest-crimson-court-lvl3-uninvited",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-spawn",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "spawn": [
+              {
+                "name": "Courtesan",
+                "count": 2
+              },
+              {
+                "name": "Chevalier",
+                "count": 2
+              }
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "spawn": [
+              {
+                "name": "Courtesan",
+                "count": 2
+              },
+              {
+                "name": "Chevalier",
+                "count": 2
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-dem-bones",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 3,
+      "obligations": [
+        {
+          "obligationId": "community-quest-ruins-lvl1-dem-bones:rule-0:0",
+          "definitionId": "community-quest-ruins-lvl1-dem-bones",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-setup",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "rooms": [
+              7
+            ],
+            "excludeRoomsFromOtherEncounters": true
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "rooms": [
+              7
+            ],
+            "excludeRoomsFromOtherEncounters": true
+          }
+        },
+        {
+          "obligationId": "community-quest-ruins-lvl1-dem-bones:rule-0:1",
+          "definitionId": "community-quest-ruins-lvl1-dem-bones",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "objective-qualification",
+          "trigger": null,
+          "scope": "objective-room-green-area",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "area": "green",
+            "actionCost": 2,
+            "collect": "bones"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "area": "green",
+            "actionCost": 2,
+            "collect": "bones"
+          }
+        },
+        {
+          "obligationId": "community-quest-ruins-lvl1-dem-bones:rule-0:2",
+          "definitionId": "community-quest-ruins-lvl1-dem-bones",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "objective-completion",
+          "trigger": "bones-collected",
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "clearOnlyAfterCollection": true
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "clearOnlyAfterCollection": true
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-fundraiser",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 3,
+      "obligations": [
+        {
+          "obligationId": "community-quest-ruins-lvl1-fundraiser:rule-0:0",
+          "definitionId": "community-quest-ruins-lvl1-fundraiser",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "objective-completion",
+          "trigger": null,
+          "scope": "quest",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "minimum": {
+              "roomType": "lair",
+              "count": 1
+            }
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "minimum": {
+              "roomType": "lair",
+              "count": 1
+            }
+          }
+        },
+        {
+          "obligationId": "community-quest-ruins-lvl1-fundraiser:rule-0:1",
+          "definitionId": "community-quest-ruins-lvl1-fundraiser",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "reward-modifier",
+          "trigger": "lair-cleared",
+          "scope": "lairs",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "goldPerLair": 10
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "goldPerLair": 10
+          }
+        },
+        {
+          "obligationId": "community-quest-ruins-lvl1-fundraiser:rule-0:2",
+          "definitionId": "community-quest-ruins-lvl1-fundraiser",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "reward-modifier",
+          "trigger": "after-quest",
+          "scope": "quest-reward",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "exchange": {
+              "gold": 20,
+              "xp": 1,
+              "recipient": "Heir",
+              "time": "after-quest"
+            }
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "exchange": {
+              "gold": 20,
+              "xp": 1,
+              "recipient": "Heir",
+              "time": "after-quest"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-rising-threat",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 2,
+      "obligations": [
+        {
+          "obligationId": "community-quest-ruins-lvl1-rising-threat:rule-0:0",
+          "definitionId": "community-quest-ruins-lvl1-rising-threat",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "battle-start",
+          "trigger": null,
+          "scope": "curio-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "roomType": "curio",
+            "alwaysBattle": true
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "roomType": "curio",
+            "alwaysBattle": true
+          }
+        },
+        {
+          "obligationId": "community-quest-ruins-lvl1-rising-threat:rule-0:1",
+          "definitionId": "community-quest-ruins-lvl1-rising-threat",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-spawn",
+          "trigger": "spawn-monsters-in-curio-room",
+          "scope": "curio-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "drawMonster": {
+              "level": 2,
+              "count": 1
+            }
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "drawMonster": {
+              "level": 2,
+              "count": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-scout-ahead",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 0,
+      "obligations": []
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-wipe-em-out",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 0,
+      "obligations": []
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-break-them",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 1,
+      "obligations": [
+        {
+          "obligationId": "community-quest-ruins-lvl2-break-them:rule-0:0",
+          "definitionId": "community-quest-ruins-lvl2-break-them",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-spawn",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "roomType": "objective",
+            "spawn": [
+              {
+                "name": "Bone Bearer",
+                "level": 3,
+                "count": 1
+              }
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "roomType": "objective",
+            "spawn": [
+              {
+                "name": "Bone Bearer",
+                "level": 3,
+                "count": 1
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-clear-the-path",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 0,
+      "obligations": []
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-disruption",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 2,
+      "obligations": [
+        {
+          "obligationId": "community-quest-ruins-lvl2-disruption:rule-0:0",
+          "definitionId": "community-quest-ruins-lvl2-disruption",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-setup",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "rooms": [
+              4,
+              8
+            ],
+            "excludeRoomsFromOtherEncounters": true
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "rooms": [
+              4,
+              8
+            ],
+            "excludeRoomsFromOtherEncounters": true
+          }
+        },
+        {
+          "obligationId": "community-quest-ruins-lvl2-disruption:rule-0:1",
+          "definitionId": "community-quest-ruins-lvl2-disruption",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-selection",
+          "trigger": "enter-objective-room",
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "selection": "random-each-entry"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "selection": "random-each-entry"
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-purify-the-fountains",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 5,
+      "obligations": [
+        {
+          "obligationId": "community-quest-ruins-lvl2-purify-the-fountains:rule-0:0",
+          "definitionId": "community-quest-ruins-lvl2-purify-the-fountains",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-setup",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "rooms": [
+              3
+            ],
+            "excludeRoomsFromOtherEncounters": true
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "rooms": [
+              3
+            ],
+            "excludeRoomsFromOtherEncounters": true
+          }
+        },
+        {
+          "obligationId": "community-quest-ruins-lvl2-purify-the-fountains:rule-0:1",
+          "definitionId": "community-quest-ruins-lvl2-purify-the-fountains",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "quest-setup",
+          "trigger": null,
+          "scope": "quest-setup",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "startingProvisions": {
+              "potion": 3,
+              "ifPossible": true
+            }
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "startingProvisions": {
+              "potion": 3,
+              "ifPossible": true
+            }
+          }
+        },
+        {
+          "obligationId": "community-quest-ruins-lvl2-purify-the-fountains:rule-0:2",
+          "definitionId": "community-quest-ruins-lvl2-purify-the-fountains",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "objective-qualification",
+          "trigger": null,
+          "scope": "objective-room-fountain",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "actionCost": 2,
+            "provisionCost": {
+              "potion": 1
+            },
+            "feature": "Healing Fountain"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "actionCost": 2,
+            "provisionCost": {
+              "potion": 1
+            },
+            "feature": "Healing Fountain"
+          }
+        },
+        {
+          "obligationId": "community-quest-ruins-lvl2-purify-the-fountains:rule-0:3",
+          "definitionId": "community-quest-ruins-lvl2-purify-the-fountains",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-setup",
+          "trigger": null,
+          "scope": "objective-room-fountain",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "disableUntilPurified": true
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "disableUntilPurified": true
+          }
+        },
+        {
+          "obligationId": "community-quest-ruins-lvl2-purify-the-fountains:rule-0:4",
+          "definitionId": "community-quest-ruins-lvl2-purify-the-fountains",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "objective-completion",
+          "trigger": "fountain-purified",
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "clearOnlyAfterPurified": true
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "clearOnlyAfterPurified": true
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-reduce-to-rubble",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 0,
+      "obligations": []
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl3-creeping-darkness",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 1,
+      "obligations": [
+        {
+          "obligationId": "community-quest-ruins-lvl3-creeping-darkness:rule-0:0",
+          "definitionId": "community-quest-ruins-lvl3-creeping-darkness",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "hero-stress",
+          "trigger": "unholy-monster-spawned",
+          "scope": "all-heroes",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "trigger": "unholy-monster-spawned",
+            "target": "all-heroes",
+            "stress": 1
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "trigger": "unholy-monster-spawned",
+            "target": "all-heroes",
+            "stress": 1
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl3-forward-camps",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 2,
+      "obligations": [
+        {
+          "obligationId": "community-quest-ruins-lvl3-forward-camps:rule-0:0",
+          "definitionId": "community-quest-ruins-lvl3-forward-camps",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "objective-qualification",
+          "trigger": "use-torch-or-tool",
+          "scope": "empty-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "roomType": "empty",
+            "provisionChoice": [
+              "torch",
+              "tool"
+            ],
+            "provisionCost": 1,
+            "create": "camp"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "roomType": "empty",
+            "provisionChoice": [
+              "torch",
+              "tool"
+            ],
+            "provisionCost": 1,
+            "create": "camp"
+          }
+        },
+        {
+          "obligationId": "community-quest-ruins-lvl3-forward-camps:rule-0:1",
+          "definitionId": "community-quest-ruins-lvl3-forward-camps",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "dungeon-setup",
+          "trigger": null,
+          "scope": "dungeon",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "setup": {
+              "fixed": {
+                "empty": 3
+              },
+              "remaining": "random-non-objective"
+            }
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "setup": {
+              "fixed": {
+                "empty": 3
+              },
+              "remaining": "random-non-objective"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl3-the-threat-is-real",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 1,
+      "obligations": [
+        {
+          "obligationId": "community-quest-ruins-lvl3-the-threat-is-real:rule-0:0",
+          "definitionId": "community-quest-ruins-lvl3-the-threat-is-real",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-pool",
+          "trigger": null,
+          "scope": "lairs",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "roomType": "lair",
+            "excludeMonsterLevels": [
+              1
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "roomType": "lair",
+            "excludeMonsterLevels": [
+              1
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl3-they-are-back",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 2,
+      "obligations": [
+        {
+          "obligationId": "community-quest-ruins-lvl3-they-are-back:rule-0:0",
+          "definitionId": "community-quest-ruins-lvl3-they-are-back",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-spawn",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "roomType": "objective",
+            "name": "Bone Captain",
+            "count": 1
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "roomType": "objective",
+            "name": "Bone Captain",
+            "count": 1
+          }
+        },
+        {
+          "obligationId": "community-quest-ruins-lvl3-they-are-back:rule-0:1",
+          "definitionId": "community-quest-ruins-lvl3-they-are-back",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-stat-modifier",
+          "trigger": null,
+          "scope": "bone-captain-in-objective-room",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "lifeBonus": 20,
+            "dodgeBonus": 2
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "lifeBonus": 20,
+            "dodgeBonus": 2
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl3-warm-up-the-halls",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 4,
+      "obligations": [
+        {
+          "obligationId": "community-quest-ruins-lvl3-warm-up-the-halls:rule-0:0",
+          "definitionId": "community-quest-ruins-lvl3-warm-up-the-halls",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "provision",
+          "trigger": "after-provision-roll",
+          "scope": "each-hero",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "setup": "each-hero-may-convert-one-provision-to-torch"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "setup": "each-hero-may-convert-one-provision-to-torch"
+          }
+        },
+        {
+          "obligationId": "community-quest-ruins-lvl3-warm-up-the-halls:rule-0:1",
+          "definitionId": "community-quest-ruins-lvl3-warm-up-the-halls",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "objective-qualification",
+          "trigger": "use-torch",
+          "scope": "dark-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "roomType": "dark",
+            "provisionCost": {
+              "torch": 1
+            }
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "roomType": "dark",
+            "provisionCost": {
+              "torch": 1
+            }
+          }
+        },
+        {
+          "obligationId": "community-quest-ruins-lvl3-warm-up-the-halls:rule-0:2",
+          "definitionId": "community-quest-ruins-lvl3-warm-up-the-halls",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "objective-completion",
+          "trigger": "use-torch",
+          "scope": "dark-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "clearOnUse": true
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "clearOnUse": true
+          }
+        },
+        {
+          "obligationId": "community-quest-ruins-lvl3-warm-up-the-halls:rule-0:3",
+          "definitionId": "community-quest-ruins-lvl3-warm-up-the-halls",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "provision",
+          "trigger": "use-torch",
+          "scope": "dark-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "alsoNormalProvisionEffect": true
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "alsoNormalProvisionEffect": true
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-disarm-them",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 2,
+      "obligations": [
+        {
+          "obligationId": "community-quest-warrens-lvl1-disarm-them:rule-0:0",
+          "definitionId": "community-quest-warrens-lvl1-disarm-them",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-setup",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "rooms": [
+              6
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "rooms": [
+              6
+            ]
+          }
+        },
+        {
+          "obligationId": "community-quest-warrens-lvl1-disarm-them:rule-0:1",
+          "definitionId": "community-quest-warrens-lvl1-disarm-them",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-pool",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "monsterPool": "warrens-only"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "monsterPool": "warrens-only"
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-explore-the-sewers",
+      "sourceSemanticComplete": true,
+      "runtimeSemanticComplete": true,
+      "semanticObligationCount": 0,
+      "obligations": []
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-family-trinkets",
+      "sourceSemanticComplete": true,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 6,
+      "obligations": [
+        {
+          "obligationId": "FT-01",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-selection",
+          "trigger": "quest-start",
+          "scope": "lairs",
+          "parameters": {
+            "roomFilter": "has-loot-chests"
+          },
+          "runtimePrimitive": "QUEST_RULE_LOOT_CHEST_SELECTION",
+          "runtimeBindingId": "family-trinkets-lair-room-setup",
+          "implementationStatus": "PARTIAL",
+          "proofIds": [
+            "C1C3-FAMILY-RUNTIME"
+          ],
+          "blockerCode": "QUEST_LOOT_CHEST_SELECTION_UNSUPPORTED",
+          "definitionId": "community-quest-warrens-lvl1-family-trinkets",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "status": "PARTIAL",
+          "effect": {
+            "roomFilter": "has-loot-chests"
+          }
+        },
+        {
+          "obligationId": "FT-02",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "loot",
+          "trigger": "loot-chest",
+          "scope": "first-chest-per-lair",
+          "parameters": {
+            "oncePerLair": true
+          },
+          "runtimePrimitive": "QUEST_RULE_TOKEN_INTERACTION",
+          "runtimeBindingId": "family-trinkets-first-chest-interaction",
+          "implementationStatus": "PARTIAL",
+          "proofIds": [
+            "C1C3-FAMILY-RUNTIME"
+          ],
+          "blockerCode": "RUNTIME_SEMANTIC_PARTIAL",
+          "definitionId": "community-quest-warrens-lvl1-family-trinkets",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "status": "PARTIAL",
+          "effect": {
+            "oncePerLair": true
+          }
+        },
+        {
+          "obligationId": "FT-03",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "loot",
+          "trigger": "loot-chest",
+          "scope": "first-chest-per-lair",
+          "parameters": {
+            "trinketLevel": 2,
+            "realInventory": true
+          },
+          "runtimePrimitive": "QUEST_RULE_TRINKET_ACQUISITION",
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_TRINKET_ACQUISITION_UNSUPPORTED",
+          "definitionId": "community-quest-warrens-lvl1-family-trinkets",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "status": "UNSUPPORTED",
+          "effect": {
+            "trinketLevel": 2,
+            "realInventory": true
+          }
+        },
+        {
+          "obligationId": "FT-04",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "trinket-provenance",
+          "trigger": "loot-chest",
+          "scope": "acquired-trinket",
+          "parameters": {
+            "acquiredThisDungeon": true,
+            "questRunId": "required"
+          },
+          "runtimePrimitive": "QUEST_RULE_TRINKET_PROVENANCE",
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_TRINKET_PROVENANCE_UNSUPPORTED",
+          "definitionId": "community-quest-warrens-lvl1-family-trinkets",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "status": "UNSUPPORTED",
+          "effect": {
+            "acquiredThisDungeon": true,
+            "questRunId": "required"
+          }
+        },
+        {
+          "obligationId": "FT-05",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "campaign-rule",
+          "trigger": "return-to-hamlet",
+          "scope": "qualifying-level-2-trinkets",
+          "parameters": {
+            "minimum": 0,
+            "maximum": 3,
+            "playerChoice": true
+          },
+          "runtimePrimitive": "QUEST_RULE_TRINKET_RETURN_EXCHANGE",
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_TRINKET_RETURN_EXCHANGE_UNSUPPORTED",
+          "definitionId": "community-quest-warrens-lvl1-family-trinkets",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "status": "UNSUPPORTED",
+          "effect": {
+            "minimum": 0,
+            "maximum": 3,
+            "playerChoice": true
+          }
+        },
+        {
+          "obligationId": "FT-06",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "objective-qualification",
+          "trigger": "return-to-hamlet",
+          "scope": "returned-qualifying-trinkets",
+          "parameters": {
+            "xpPerReturnedTrinket": 1,
+            "maximumXp": 3
+          },
+          "runtimePrimitive": "QUEST_RULE_QUEST_COMPLETION",
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_TRINKET_RETURN_EXCHANGE_UNSUPPORTED",
+          "definitionId": "community-quest-warrens-lvl1-family-trinkets",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "status": "UNSUPPORTED",
+          "effect": {
+            "xpPerReturnedTrinket": 1,
+            "maximumXp": 3
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-pork-chop",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 0,
+      "obligations": []
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-worm-squash",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 2,
+      "obligations": [
+        {
+          "obligationId": "community-quest-warrens-lvl1-worm-squash:rule-0:0",
+          "definitionId": "community-quest-warrens-lvl1-worm-squash",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-setup",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "rooms": [
+              8
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "rooms": [
+              8
+            ]
+          }
+        },
+        {
+          "obligationId": "community-quest-warrens-lvl1-worm-squash:rule-0:1",
+          "definitionId": "community-quest-warrens-lvl1-worm-squash",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-spawn",
+          "trigger": "battle-start",
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "spawn": [
+              {
+                "name": "Large Carrion Eater",
+                "level": 2,
+                "count": 1
+              }
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "spawn": [
+              {
+                "name": "Large Carrion Eater",
+                "level": 2,
+                "count": 1
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-a-new-breed",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 1,
+      "obligations": [
+        {
+          "obligationId": "community-quest-warrens-lvl2-a-new-breed:rule-0:0",
+          "definitionId": "community-quest-warrens-lvl2-a-new-breed",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-stat-modifier",
+          "trigger": null,
+          "scope": "warrens-monsters",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "monsterPool": "warrens",
+            "immunity": "all-conditions"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "monsterPool": "warrens",
+            "immunity": "all-conditions"
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-bait-them-out",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 3,
+      "obligations": [
+        {
+          "obligationId": "community-quest-warrens-lvl2-bait-them-out:rule-0:0",
+          "definitionId": "community-quest-warrens-lvl2-bait-them-out",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "quest-setup",
+          "trigger": null,
+          "scope": "quest-setup",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "startingProvisions": {
+              "food": 3
+            }
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "startingProvisions": {
+              "food": 3
+            }
+          }
+        },
+        {
+          "obligationId": "community-quest-warrens-lvl2-bait-them-out:rule-0:1",
+          "definitionId": "community-quest-warrens-lvl2-bait-them-out",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "battle-start",
+          "trigger": "spend-food-to-bait",
+          "scope": "empty-room-bait-encounter",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "roomType": "empty",
+            "provisionCost": {
+              "food": 1
+            },
+            "room": "random"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "roomType": "empty",
+            "provisionCost": {
+              "food": 1
+            },
+            "room": "random"
+          }
+        },
+        {
+          "obligationId": "community-quest-warrens-lvl2-bait-them-out:rule-0:2",
+          "definitionId": "community-quest-warrens-lvl2-bait-them-out",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-spawn",
+          "trigger": "battle-start",
+          "scope": "baited-swine-skiver-encounter",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "spawn": {
+              "name": "Swine Skiver",
+              "level": 3,
+              "count": 1
+            },
+            "d10": [
+              {
+                "range": [
+                  1,
+                  4
+                ],
+                "additional": 2
+              },
+              {
+                "range": [
+                  5,
+                  8
+                ],
+                "additional": 3
+              },
+              {
+                "range": [
+                  9,
+                  10
+                ],
+                "additional": 0
+              }
+            ],
+            "additionalSizes": [
+              "normal",
+              "small"
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "spawn": {
+              "name": "Swine Skiver",
+              "level": 3,
+              "count": 1
+            },
+            "d10": [
+              {
+                "range": [
+                  1,
+                  4
+                ],
+                "additional": 2
+              },
+              {
+                "range": [
+                  5,
+                  8
+                ],
+                "additional": 3
+              },
+              {
+                "range": [
+                  9,
+                  10
+                ],
+                "additional": 0
+              }
+            ],
+            "additionalSizes": [
+              "normal",
+              "small"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-carrion-infestation",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 4,
+      "obligations": [
+        {
+          "obligationId": "community-quest-warrens-lvl2-carrion-infestation:rule-0:0",
+          "definitionId": "community-quest-warrens-lvl2-carrion-infestation",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-spawn",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "roomType": "objective",
+            "spawn": [
+              {
+                "name": "Large Carrion Eater",
+                "count": 1
+              },
+              {
+                "name": "Carrion Eater",
+                "count": 2
+              }
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "roomType": "objective",
+            "spawn": [
+              {
+                "name": "Large Carrion Eater",
+                "count": 1
+              },
+              {
+                "name": "Carrion Eater",
+                "count": 2
+              }
+            ]
+          }
+        },
+        {
+          "obligationId": "community-quest-warrens-lvl2-carrion-infestation:rule-0:1",
+          "definitionId": "community-quest-warrens-lvl2-carrion-infestation",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-spawn",
+          "trigger": "named-carrion-eater-dies",
+          "scope": "objective-room-battle",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "deathReplacements": [
+              {
+                "from": "Large Carrion Eater",
+                "to": "Carrion Eater"
+              },
+              {
+                "from": "Carrion Eater",
+                "to": "Maggot"
+              }
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "deathReplacements": [
+              {
+                "from": "Large Carrion Eater",
+                "to": "Carrion Eater"
+              },
+              {
+                "from": "Carrion Eater",
+                "to": "Maggot"
+              }
+            ]
+          }
+        },
+        {
+          "obligationId": "community-quest-warrens-lvl2-carrion-infestation:rule-0:2",
+          "definitionId": "community-quest-warrens-lvl2-carrion-infestation",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "battle-end",
+          "trigger": "only-maggots-remain",
+          "scope": "objective-room-battle",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "endBattleAndSecureWhen": "only-maggots-remain"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "endBattleAndSecureWhen": "only-maggots-remain"
+          }
+        },
+        {
+          "obligationId": "community-quest-warrens-lvl2-carrion-infestation:rule-0:3",
+          "definitionId": "community-quest-warrens-lvl2-carrion-infestation",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "objective-completion",
+          "trigger": "only-maggots-remain",
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "endBattleAndSecureWhen": "only-maggots-remain"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "endBattleAndSecureWhen": "only-maggots-remain"
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-mapping-the-sewers",
+      "sourceSemanticComplete": true,
+      "runtimeSemanticComplete": true,
+      "semanticObligationCount": 0,
+      "obligations": []
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-ringleaders",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 3,
+      "obligations": [
+        {
+          "obligationId": "community-quest-warrens-lvl2-ringleaders:rule-0:0",
+          "definitionId": "community-quest-warrens-lvl2-ringleaders",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-setup",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "rooms": [
+              9
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "rooms": [
+              9
+            ]
+          }
+        },
+        {
+          "obligationId": "community-quest-warrens-lvl2-ringleaders:rule-0:1",
+          "definitionId": "community-quest-warrens-lvl2-ringleaders",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-spawn",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "spawn": [
+              {
+                "name": "Swine Skiver",
+                "level": 3,
+                "count": 1
+              },
+              {
+                "name": "Large Carrion Eater",
+                "count": 1
+              }
+            ],
+            "randomAdditional": {
+              "count": 1,
+              "sizes": [
+                "normal",
+                "small"
+              ]
+            }
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "spawn": [
+              {
+                "name": "Swine Skiver",
+                "level": 3,
+                "count": 1
+              },
+              {
+                "name": "Large Carrion Eater",
+                "count": 1
+              }
+            ],
+            "randomAdditional": {
+              "count": 1,
+              "sizes": [
+                "normal",
+                "small"
+              ]
+            }
+          }
+        },
+        {
+          "obligationId": "community-quest-warrens-lvl2-ringleaders:rule-0:2",
+          "definitionId": "community-quest-warrens-lvl2-ringleaders",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "battle-end",
+          "trigger": "swine-skiver-killed",
+          "scope": "objective-room-battle",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "endBattleImmediatelyWhenKilled": "Swine Skiver"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "endBattleImmediatelyWhenKilled": "Swine Skiver"
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl3-alpha-swine",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 2,
+      "obligations": [
+        {
+          "obligationId": "community-quest-warrens-lvl3-alpha-swine:rule-0:0",
+          "definitionId": "community-quest-warrens-lvl3-alpha-swine",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-spawn",
+          "trigger": null,
+          "scope": "lairs",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "roomType": "lair",
+            "spawn": [
+              {
+                "name": "Swinetaur",
+                "count": 1
+              }
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "roomType": "lair",
+            "spawn": [
+              {
+                "name": "Swinetaur",
+                "count": 1
+              }
+            ]
+          }
+        },
+        {
+          "obligationId": "community-quest-warrens-lvl3-alpha-swine:rule-0:1",
+          "definitionId": "community-quest-warrens-lvl3-alpha-swine",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-stat-modifier",
+          "trigger": null,
+          "scope": "warrens-monsters-in-lairs",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "warrensMonsterCritBonus": 1
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "warrensMonsterCritBonus": 1
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl3-deep-in-the-warrens",
+      "sourceSemanticComplete": true,
+      "runtimeSemanticComplete": true,
+      "semanticObligationCount": 1,
+      "obligations": [
+        {
+          "obligationId": "DITW-01",
+          "definitionId": "community-quest-warrens-lvl3-deep-in-the-warrens",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "provision",
+          "trigger": "leave-room",
+          "scope": "party",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "trigger": "leave-room",
+            "discardChosenProvision": 1
+          },
+          "runtimePrimitive": "QUEST_RULE_PROVISION_INTERACTION",
+          "runtimeBindingId": "deep-in-the-warrens-discard-after-leave",
+          "implementationStatus": "IMPLEMENTED",
+          "proofIds": [
+            "C1C2-SPECIAL-RULE-RUNTIME",
+            "C1C2-SPECIAL-RULE-SAVE-REPLAY",
+            "C1C2-E2E-SPECIAL-RULE"
+          ],
+          "status": "IMPLEMENTED",
+          "effect": {
+            "trigger": "leave-room",
+            "discardChosenProvision": 1
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl3-drums-of-doom",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 4,
+      "obligations": [
+        {
+          "obligationId": "community-quest-warrens-lvl3-drums-of-doom:rule-0:0",
+          "definitionId": "community-quest-warrens-lvl3-drums-of-doom",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-spawn",
+          "trigger": null,
+          "scope": "lairs",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "roomType": "lair",
+            "spawn": [
+              {
+                "name": "Swine Drummer",
+                "count": 1
+              }
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "roomType": "lair",
+            "spawn": [
+              {
+                "name": "Swine Drummer",
+                "count": 1
+              }
+            ]
+          }
+        },
+        {
+          "obligationId": "community-quest-warrens-lvl3-drums-of-doom:rule-0:1",
+          "definitionId": "community-quest-warrens-lvl3-drums-of-doom",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-stat-modifier",
+          "trigger": null,
+          "scope": "first-monster-spawned-after-drummer",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "firstFollowingMonster": {
+              "guardTurns": 4
+            }
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "firstFollowingMonster": {
+              "guardTurns": 4
+            }
+          }
+        },
+        {
+          "obligationId": "community-quest-warrens-lvl3-drums-of-doom:rule-0:2",
+          "definitionId": "community-quest-warrens-lvl3-drums-of-doom",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-stat-modifier",
+          "trigger": "guarded-monster-dies",
+          "scope": "next-monster-in-stance-priority",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "onGuardedMonsterDeath": "transfer-remaining-guard-to-next-stance-priority-monster"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "onGuardedMonsterDeath": "transfer-remaining-guard-to-next-stance-priority-monster"
+          }
+        },
+        {
+          "obligationId": "community-quest-warrens-lvl3-drums-of-doom:rule-0:3",
+          "definitionId": "community-quest-warrens-lvl3-drums-of-doom",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-stat-modifier",
+          "trigger": "swine-drummer-activation",
+          "scope": "all-monsters-in-lair",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "onDrummerActivation": {
+              "target": "all-monsters",
+              "independentBuffStacks": [
+                2,
+                2
+              ]
+            }
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "onDrummerActivation": {
+              "target": "all-monsters",
+              "independentBuffStacks": [
+                2,
+                2
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl3-foul-arsenal",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 2,
+      "obligations": [
+        {
+          "obligationId": "community-quest-warrens-lvl3-foul-arsenal:rule-0:0",
+          "definitionId": "community-quest-warrens-lvl3-foul-arsenal",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-setup",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "rooms": [
+              6
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "rooms": [
+              6
+            ]
+          }
+        },
+        {
+          "obligationId": "community-quest-warrens-lvl3-foul-arsenal:rule-0:1",
+          "definitionId": "community-quest-warrens-lvl3-foul-arsenal",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "hero-condition",
+          "trigger": "hero-enters-deaths-door-in-this-room",
+          "scope": "hero-in-objective-room",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "trigger": "hero-enters-deaths-door-in-this-room",
+            "gainDisease": 1
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "trigger": "hero-enters-deaths-door-in-this-room",
+            "gainDisease": 1
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl3-infighting",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 4,
+      "obligations": [
+        {
+          "obligationId": "community-quest-warrens-lvl3-infighting:rule-0:0",
+          "definitionId": "community-quest-warrens-lvl3-infighting",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-spawn",
+          "trigger": null,
+          "scope": "lairs",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "roomType": "lair",
+            "spawn": [
+              {
+                "name": "Swine Skiver",
+                "count": 1
+              }
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "roomType": "lair",
+            "spawn": [
+              {
+                "name": "Swine Skiver",
+                "count": 1
+              }
+            ]
+          }
+        },
+        {
+          "obligationId": "community-quest-warrens-lvl3-infighting:rule-0:1",
+          "definitionId": "community-quest-warrens-lvl3-infighting",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "scouting",
+          "trigger": "before-advancing",
+          "scope": "quest",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "scoutingForbidden": true,
+            "beforeAdvancing": "may-reveal-one-adjacent-room"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "scoutingForbidden": true,
+            "beforeAdvancing": "may-reveal-one-adjacent-room"
+          }
+        },
+        {
+          "obligationId": "community-quest-warrens-lvl3-infighting:rule-0:2",
+          "definitionId": "community-quest-warrens-lvl3-infighting",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "exploration",
+          "trigger": "move-to-revealed-lair",
+          "scope": "revealed-lair",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "movingToRevealedLair": "skip-exploration"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "movingToRevealedLair": "skip-exploration"
+          }
+        },
+        {
+          "obligationId": "community-quest-warrens-lvl3-infighting:rule-0:3",
+          "definitionId": "community-quest-warrens-lvl3-infighting",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "initiative",
+          "trigger": null,
+          "scope": "lair-battle-first-round",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "firstRoundInitiative": "all-heroes-on-top"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "firstRoundInitiative": "all-heroes-on-top"
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-weald-lvl1-circle-of-witches",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 2,
+      "obligations": [
+        {
+          "obligationId": "community-quest-weald-lvl1-circle-of-witches:rule-0:0",
+          "definitionId": "community-quest-weald-lvl1-circle-of-witches",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-setup",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "rooms": [
+              9
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "rooms": [
+              9
+            ]
+          }
+        },
+        {
+          "obligationId": "community-quest-weald-lvl1-circle-of-witches:rule-0:1",
+          "definitionId": "community-quest-weald-lvl1-circle-of-witches",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-spawn",
+          "trigger": "battle-start",
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "spawn": [
+              {
+                "name": "Crone",
+                "level": 2,
+                "count": 1
+              }
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "spawn": [
+              {
+                "name": "Crone",
+                "level": 2,
+                "count": 1
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-weald-lvl1-disinfection",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 3,
+      "obligations": [
+        {
+          "obligationId": "community-quest-weald-lvl1-disinfection:rule-0:0",
+          "definitionId": "community-quest-weald-lvl1-disinfection",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-setup",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "rooms": [
+              5
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "rooms": [
+              5
+            ]
+          }
+        },
+        {
+          "obligationId": "community-quest-weald-lvl1-disinfection:rule-0:1",
+          "definitionId": "community-quest-weald-lvl1-disinfection",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "quest-setup",
+          "trigger": null,
+          "scope": "quest-setup",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "startingProvisions": {
+              "potion": 3
+            }
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "startingProvisions": {
+              "potion": 3
+            }
+          }
+        },
+        {
+          "obligationId": "community-quest-weald-lvl1-disinfection:rule-0:2",
+          "definitionId": "community-quest-weald-lvl1-disinfection",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "objective-qualification",
+          "trigger": null,
+          "scope": "objective-room-red-area",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "area": "red",
+            "actionCost": 1,
+            "provisionCost": {
+              "potion": 1
+            },
+            "disinfect": "oak"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "area": "red",
+            "actionCost": 1,
+            "provisionCost": {
+              "potion": 1
+            },
+            "disinfect": "oak"
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-weald-lvl1-fungal-research",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 3,
+      "obligations": [
+        {
+          "obligationId": "community-quest-weald-lvl1-fungal-research:rule-0:0",
+          "definitionId": "community-quest-weald-lvl1-fungal-research",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-setup",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "rooms": [
+              3,
+              6,
+              8
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "rooms": [
+              3,
+              6,
+              8
+            ]
+          }
+        },
+        {
+          "obligationId": "community-quest-weald-lvl1-fungal-research:rule-0:1",
+          "definitionId": "community-quest-weald-lvl1-fungal-research",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-selection",
+          "trigger": "enter-objective-room",
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "selection": "random-then-discard-on-secure"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "selection": "random-then-discard-on-secure"
+          }
+        },
+        {
+          "obligationId": "community-quest-weald-lvl1-fungal-research:rule-0:2",
+          "definitionId": "community-quest-weald-lvl1-fungal-research",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "objective-qualification",
+          "trigger": "battle-won",
+          "scope": "objective-room-battle",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "objectiveRequires": "win-with-at-least-one-unsmashed-necrotic-fungus"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "objectiveRequires": "win-with-at-least-one-unsmashed-necrotic-fungus"
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-weald-lvl1-patrol-the-woods",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 1,
+      "obligations": [
+        {
+          "obligationId": "community-quest-weald-lvl1-patrol-the-woods:rule-0:0",
+          "definitionId": "community-quest-weald-lvl1-patrol-the-woods",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "initiative",
+          "trigger": "battle-start",
+          "scope": "battle-first-round",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "trigger": "battle-start",
+            "roll": "d10",
+            "condition": "roll-greater-than-light",
+            "firstRoundInitiative": "all-monsters-on-top"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "trigger": "battle-start",
+            "roll": "d10",
+            "condition": "roll-greater-than-light",
+            "firstRoundInitiative": "all-monsters-on-top"
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-weald-lvl1-purge-the-woods",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 1,
+      "obligations": [
+        {
+          "obligationId": "community-quest-weald-lvl1-purge-the-woods:rule-0:0",
+          "definitionId": "community-quest-weald-lvl1-purge-the-woods",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-pool",
+          "trigger": null,
+          "scope": "lairs",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "roomType": "lair",
+            "monsterPool": "weald-only"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "roomType": "lair",
+            "monsterPool": "weald-only"
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-weald-lvl2-hounds-of-the-woods",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 3,
+      "obligations": [
+        {
+          "obligationId": "community-quest-weald-lvl2-hounds-of-the-woods:rule-0:0",
+          "definitionId": "community-quest-weald-lvl2-hounds-of-the-woods",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-setup",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "rooms": [
+              1,
+              3,
+              6
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "rooms": [
+              1,
+              3,
+              6
+            ]
+          }
+        },
+        {
+          "obligationId": "community-quest-weald-lvl2-hounds-of-the-woods:rule-0:1",
+          "definitionId": "community-quest-weald-lvl2-hounds-of-the-woods",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-selection",
+          "trigger": "enter-objective-room",
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "selection": "random-then-discard-on-secure"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "selection": "random-then-discard-on-secure"
+          }
+        },
+        {
+          "obligationId": "community-quest-weald-lvl2-hounds-of-the-woods:rule-0:2",
+          "definitionId": "community-quest-weald-lvl2-hounds-of-the-woods",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-spawn",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "spawn": [
+              {
+                "name": "Rabid Gnasher",
+                "count": 3
+              }
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "spawn": [
+              {
+                "name": "Rabid Gnasher",
+                "count": 3
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-weald-lvl2-lost-supplies",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 4,
+      "obligations": [
+        {
+          "obligationId": "community-quest-weald-lvl2-lost-supplies:rule-0:0",
+          "definitionId": "community-quest-weald-lvl2-lost-supplies",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "quest-setup",
+          "trigger": null,
+          "scope": "quest-setup",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "startingProvisions": "no-normal-roll; allow-Survivalist-and-skills"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "startingProvisions": "no-normal-roll; allow-Survivalist-and-skills"
+          }
+        },
+        {
+          "obligationId": "community-quest-weald-lvl2-lost-supplies:rule-0:1",
+          "definitionId": "community-quest-weald-lvl2-lost-supplies",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-selection",
+          "trigger": null,
+          "scope": "all-dungeon-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "roomFilter": "has-loot-chests"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "roomFilter": "has-loot-chests"
+          }
+        },
+        {
+          "obligationId": "community-quest-weald-lvl2-lost-supplies:rule-0:2",
+          "definitionId": "community-quest-weald-lvl2-lost-supplies",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "loot",
+          "trigger": "loot-chest",
+          "scope": "loot-chests",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "chestLoot": "roll-two-random-provisions-instead"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "chestLoot": "roll-two-random-provisions-instead"
+          }
+        },
+        {
+          "obligationId": "community-quest-weald-lvl2-lost-supplies:rule-0:3",
+          "definitionId": "community-quest-weald-lvl2-lost-supplies",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "reward-modifier",
+          "trigger": "return-to-hamlet",
+          "scope": "returned-provisions",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "returnGoldPerProvision": 1
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "returnGoldPerProvision": 1
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-weald-lvl2-lost-treasures",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 1,
+      "obligations": [
+        {
+          "obligationId": "community-quest-weald-lvl2-lost-treasures:rule-0:0",
+          "definitionId": "community-quest-weald-lvl2-lost-treasures",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-pool",
+          "trigger": null,
+          "scope": "treasure-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "roomType": "treasure",
+            "monsterLevels": [
+              2
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "roomType": "treasure",
+            "monsterLevels": [
+              2
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-weald-lvl2-searching-in-the-dark",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 2,
+      "obligations": [
+        {
+          "obligationId": "community-quest-weald-lvl2-searching-in-the-dark:rule-0:0",
+          "definitionId": "community-quest-weald-lvl2-searching-in-the-dark",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "dungeon-setup",
+          "trigger": null,
+          "scope": "dungeon",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "setup": {
+              "remaining": "random"
+            }
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "setup": {
+              "remaining": "random"
+            }
+          }
+        },
+        {
+          "obligationId": "community-quest-weald-lvl2-searching-in-the-dark:rule-0:1",
+          "definitionId": "community-quest-weald-lvl2-searching-in-the-dark",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-pool",
+          "trigger": null,
+          "scope": "lairs",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "roomType": "lair",
+            "monsterPool": "weald-only"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "roomType": "lair",
+            "monsterPool": "weald-only"
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-weald-lvl2-spreaders-of-miasma",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 1,
+      "obligations": [
+        {
+          "obligationId": "community-quest-weald-lvl2-spreaders-of-miasma:rule-0:0",
+          "definitionId": "community-quest-weald-lvl2-spreaders-of-miasma",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-spawn",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "roomType": "objective",
+            "spawn": [
+              {
+                "name": "Hateful Virago",
+                "level": 3,
+                "count": 1
+              }
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "roomType": "objective",
+            "spawn": [
+              {
+                "name": "Hateful Virago",
+                "level": 3,
+                "count": 1
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-weald-lvl3-final-swipe",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 1,
+      "obligations": [
+        {
+          "obligationId": "community-quest-weald-lvl3-final-swipe:rule-0:0",
+          "definitionId": "community-quest-weald-lvl3-final-swipe",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "hero-condition",
+          "trigger": "weald-monster-spawned-in-battle",
+          "scope": "all-heroes",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "trigger": "weald-monster-spawned-in-battle",
+            "target": "all-heroes",
+            "conditions": [
+              {
+                "type": "blight",
+                "amount": 1,
+                "turns": 2
+              }
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "trigger": "weald-monster-spawned-in-battle",
+            "target": "all-heroes",
+            "conditions": [
+              {
+                "type": "blight",
+                "amount": 1,
+                "turns": 2
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-weald-lvl3-great-unclean-ones",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 3,
+      "obligations": [
+        {
+          "obligationId": "community-quest-weald-lvl3-great-unclean-ones:rule-0:0",
+          "definitionId": "community-quest-weald-lvl3-great-unclean-ones",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-spawn",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "roomType": "objective",
+            "name": "Unclean Giant",
+            "count": 1
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "roomType": "objective",
+            "name": "Unclean Giant",
+            "count": 1
+          }
+        },
+        {
+          "obligationId": "community-quest-weald-lvl3-great-unclean-ones:rule-0:1",
+          "definitionId": "community-quest-weald-lvl3-great-unclean-ones",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-stat-modifier",
+          "trigger": null,
+          "scope": "unclean-giant-in-objective-room",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "actionsPerRound": 2
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "actionsPerRound": 2
+          }
+        },
+        {
+          "obligationId": "community-quest-weald-lvl3-great-unclean-ones:rule-0:2",
+          "definitionId": "community-quest-weald-lvl3-great-unclean-ones",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "initiative",
+          "trigger": null,
+          "scope": "unclean-giant-in-objective-room",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "additionalInitiativeCards": 1
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "additionalInitiativeCards": 1
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-weald-lvl3-no-other-way",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 4,
+      "obligations": [
+        {
+          "obligationId": "community-quest-weald-lvl3-no-other-way:rule-0:0",
+          "definitionId": "community-quest-weald-lvl3-no-other-way",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "room-setup",
+          "trigger": null,
+          "scope": "objective-rooms",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "rooms": [
+              5
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "rooms": [
+              5
+            ]
+          }
+        },
+        {
+          "obligationId": "community-quest-weald-lvl3-no-other-way:rule-0:1",
+          "definitionId": "community-quest-weald-lvl3-no-other-way",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "objective-qualification",
+          "trigger": null,
+          "scope": "objective-room-oak",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "area": "red",
+            "actionCost": 1,
+            "provisionCost": {
+              "torch": 1
+            },
+            "ignite": "oak",
+            "cannotIgniteRound": 4,
+            "burnsAt": "end-of-next-round"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "area": "red",
+            "actionCost": 1,
+            "provisionCost": {
+              "torch": 1
+            },
+            "ignite": "oak",
+            "cannotIgniteRound": 4,
+            "burnsAt": "end-of-next-round"
+          }
+        },
+        {
+          "obligationId": "community-quest-weald-lvl3-no-other-way:rule-0:2",
+          "definitionId": "community-quest-weald-lvl3-no-other-way",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "monster-spawn",
+          "trigger": "end-of-ignition-round",
+          "scope": "empty-stances",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "onIgnitionRoundEnd": "fill-empty-stances-with-new-monsters"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "onIgnitionRoundEnd": "fill-empty-stances-with-new-monsters"
+          }
+        },
+        {
+          "obligationId": "community-quest-weald-lvl3-no-other-way:rule-0:3",
+          "definitionId": "community-quest-weald-lvl3-no-other-way",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "objective-completion",
+          "trigger": "oak-burn-resolves",
+          "scope": "objective-room-oak",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "clearIfBurnt": "even-with-monsters-at-end-round-four"
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "clearIfBurnt": "even-with-monsters-at-end-round-four"
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-weald-lvl3-the-infected",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 1,
+      "obligations": [
+        {
+          "obligationId": "community-quest-weald-lvl3-the-infected:rule-0:0",
+          "definitionId": "community-quest-weald-lvl3-the-infected",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "hero-condition",
+          "trigger": "monster-in-lair-killed",
+          "scope": "all-heroes",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "trigger": "monster-in-lair-killed",
+            "target": "all-heroes",
+            "conditions": [
+              {
+                "type": "blight",
+                "amount": 2,
+                "turns": 2
+              },
+              {
+                "type": "blight",
+                "amount": 2,
+                "turns": 2
+              }
+            ]
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "trigger": "monster-in-lair-killed",
+            "target": "all-heroes",
+            "conditions": [
+              {
+                "type": "blight",
+                "amount": 2,
+                "turns": 2
+              },
+              {
+                "type": "blight",
+                "amount": 2,
+                "turns": 2
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-quest-weald-lvl3-whispering-woods",
+      "sourceSemanticComplete": false,
+      "runtimeSemanticComplete": false,
+      "semanticObligationCount": 1,
+      "obligations": [
+        {
+          "obligationId": "community-quest-weald-lvl3-whispering-woods:rule-0:0",
+          "definitionId": "community-quest-weald-lvl3-whispering-woods",
+          "sourceRuleIndex": 0,
+          "semanticCategory": "hero-stress",
+          "trigger": "battle-round-start",
+          "scope": "all-heroes",
+          "sourceReference": {
+            "literalField": "printedSpecialRules.0",
+            "rulebook": []
+          },
+          "parameters": {
+            "trigger": "battle-round-start",
+            "target": "all-heroes",
+            "stress": 1
+          },
+          "runtimePrimitive": null,
+          "runtimeBindingId": null,
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "QUEST_SOURCE_RULE_RUNTIME_UNSUPPORTED",
+          "status": "UNSUPPORTED",
+          "effect": {
+            "trigger": "battle-round-start",
+            "target": "all-heroes",
+            "stress": 1
+          }
+        }
+      ]
+    }
+  ]
+}

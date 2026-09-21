@@ -1,0 +1,205 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-4",
+  "measuredAt": "2026-09-21T11:37:45.903Z",
+  "baselineHead": "5ac8cc58efd73ae0bbc88074ea46dc29e405d899",
+  "verifiedImplementationHead": "67902a82ff0842f65fb4abcc8a7932a1e0a7ec34",
+  "verifiedImplementationTree": "d50d952f52beebdff840105974570c0a450f4657",
+  "historicalEvidenceHashes": {
+    "docs/data/complete-edition/c1c3r-quest-semantic-coverage.json": "80afe64f2a464d86163f0507deaf7d57bbdccf1182106886fe381417ff3cd630",
+    "docs/data/complete-edition/c1c3r-runtime-capability-matrix.json": "59c7c445411af4ccf3a41191670f706385defdf085ade0e756618dfb19bacca2",
+    "docs/data/complete-edition/c1c3r-semantic-fidelity-repair-evidence.json": "767abe84c2d356caeb3d18ae9d6af45ef49d5e29bf2dfcfe949b4f14a9adcd3d",
+    "docs/reports/complete-edition/c1c3r-semantic-fidelity-repair-report.md": "c1496d9bf050e3dfcbb57d14249650911394b4f57c462dffc84aaae784322397"
+  },
+  "sourceAuditOutcome": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+  "sourcesChecked": [
+    {
+      "evidenceId": "C1C4:S1:CORE-RULEBOOK-FULL-TEXT",
+      "tier": "S1",
+      "reference": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "status": "EXHAUSTIVELY_SEARCHED",
+      "pageCount": 44
+    },
+    {
+      "evidenceId": "C1C4:S1:DESIGNER-FAQ-UNAVAILABLE",
+      "tier": "S1",
+      "reference": "https://boardgamegeek.com/filepage/250715/darkest-dungeon-board-game-faq-by-the-designers",
+      "status": "LOCATED_ACCESS_UNAVAILABLE",
+      "provenanceManifest": "docs/source/darkest-dungeon-designer-faq/source-provenance.json"
+    },
+    {
+      "evidenceId": "C1C4:S2:ARGYRIOS-ALL-POINTS",
+      "tier": "S2",
+      "reference": "https://boardgamegeek.com/thread/2987684/some-v-quick-questions",
+      "locatorReference": "https://boardgamegeek.com/thread/3574396/firewood-token",
+      "status": "ACCEPTED_WITH_LIMITATION"
+    },
+    {
+      "evidenceId": "C1C4:S5:HOUSE-RULE-REWRITES",
+      "tier": "S5",
+      "reference": "https://boardgamegeek.com/thread/3008011/house-rules-and-clarifications-suggested-rulebook",
+      "status": "REJECTED_FOR_PRODUCTION"
+    }
+  ],
+  "acceptedSources": [
+    "C1C4:S1:CORE-RULEBOOK-p15",
+    "C1C4:S1:CORE-RULEBOOK-p36",
+    "C1C4:S2:ARGYRIOS-ALL-POINTS"
+  ],
+  "rejectedSources": [
+    {
+      "reference": "https://boardgamegeek.com/thread/3008011/house-rules-and-clarifications-suggested-rulebook",
+      "reason": "HOUSE_RULE"
+    },
+    {
+      "reference": "https://boardgamegeek.com/thread/3574396/firewood-token community interpretations",
+      "reason": "COMMUNITY_INTERPRETATION_ONLY"
+    },
+    {
+      "reference": "search-result descriptions of the inaccessible designer FAQ",
+      "reason": "OUT_OF_CONTEXT"
+    },
+    {
+      "reference": "Darkest Dungeon video-game camping behavior",
+      "reason": "VIDEO_GAME_RULE"
+    },
+    {
+      "reference": "Any proposed waste-excess, deny-rest, partial-spend, no-effect-spend, or reduced-budget behavior",
+      "reason": "AMBIGUOUS"
+    }
+  ],
+  "restQuestionMatrix": "docs/data/complete-edition/c1c4-rest-source-question-matrix.json",
+  "insufficientRecoveryCapacityBefore": "SOURCE_UNRESOLVED",
+  "insufficientRecoveryCapacityAfter": "SOURCE_UNRESOLVED",
+  "sourceSemanticCompleteBefore": 5,
+  "sourceSemanticCompleteAfter": 5,
+  "runtimeSemanticCompleteBefore": 3,
+  "runtimeSemanticCompleteAfter": 3,
+  "questReadyBefore": 3,
+  "questReadyAfter": 3,
+  "newlyReadyQuestIds": [],
+  "newlyBlockedQuestIds": [],
+  "remainingBlockedQuestIds": [
+    "community-quest-boss-face-the-threat",
+    "community-quest-cove-lvl1-deep-horrors",
+    "community-quest-cove-lvl1-deep-waters",
+    "community-quest-cove-lvl1-purify-the-eldritch-signs",
+    "community-quest-cove-lvl1-test-the-waters",
+    "community-quest-cove-lvl1-unclean-waters",
+    "community-quest-cove-lvl2-deep-horrors-2",
+    "community-quest-cove-lvl2-deep-waters-2",
+    "community-quest-cove-lvl2-eldritch-purging",
+    "community-quest-cove-lvl2-the-deep-ones",
+    "community-quest-cove-lvl2-unclean-waters-2",
+    "community-quest-cove-lvl3-deep-waters-3",
+    "community-quest-cove-lvl3-tainted-trinkets",
+    "community-quest-cove-lvl3-the-deep-ones-2",
+    "community-quest-cove-lvl3-the-shipwrecks",
+    "community-quest-cove-lvl3-unclean-waters-3",
+    "community-quest-crimson-court-lvl1-deep-in-the-swamp",
+    "community-quest-crimson-court-lvl1-lost-and-found",
+    "community-quest-crimson-court-lvl1-rest-in-rubble",
+    "community-quest-crimson-court-lvl1-rivers-run-red",
+    "community-quest-crimson-court-lvl1-they-are-swarm",
+    "community-quest-crimson-court-lvl2-deeper-into-the-swamp",
+    "community-quest-crimson-court-lvl2-lurkers",
+    "community-quest-crimson-court-lvl2-pest-control",
+    "community-quest-crimson-court-lvl2-ruin-the-party",
+    "community-quest-crimson-court-lvl2-take-em-back",
+    "community-quest-crimson-court-lvl3-breeders",
+    "community-quest-crimson-court-lvl3-cut-the-buzz",
+    "community-quest-crimson-court-lvl3-the-endless-marsh",
+    "community-quest-crimson-court-lvl3-uninvited",
+    "community-quest-ruins-lvl1-dem-bones",
+    "community-quest-ruins-lvl1-fundraiser",
+    "community-quest-ruins-lvl1-rising-threat",
+    "community-quest-ruins-lvl1-scout-ahead",
+    "community-quest-ruins-lvl1-wipe-em-out",
+    "community-quest-ruins-lvl2-break-them",
+    "community-quest-ruins-lvl2-clear-the-path",
+    "community-quest-ruins-lvl2-disruption",
+    "community-quest-ruins-lvl2-purify-the-fountains",
+    "community-quest-ruins-lvl2-reduce-to-rubble",
+    "community-quest-ruins-lvl3-creeping-darkness",
+    "community-quest-ruins-lvl3-forward-camps",
+    "community-quest-ruins-lvl3-the-threat-is-real",
+    "community-quest-ruins-lvl3-they-are-back",
+    "community-quest-ruins-lvl3-warm-up-the-halls",
+    "community-quest-warrens-lvl1-disarm-them",
+    "community-quest-warrens-lvl1-family-trinkets",
+    "community-quest-warrens-lvl1-pork-chop",
+    "community-quest-warrens-lvl1-worm-squash",
+    "community-quest-warrens-lvl2-a-new-breed",
+    "community-quest-warrens-lvl2-bait-them-out",
+    "community-quest-warrens-lvl2-carrion-infestation",
+    "community-quest-warrens-lvl2-ringleaders",
+    "community-quest-warrens-lvl3-alpha-swine",
+    "community-quest-warrens-lvl3-drums-of-doom",
+    "community-quest-warrens-lvl3-foul-arsenal",
+    "community-quest-warrens-lvl3-infighting",
+    "community-quest-weald-lvl1-circle-of-witches",
+    "community-quest-weald-lvl1-disinfection",
+    "community-quest-weald-lvl1-fungal-research",
+    "community-quest-weald-lvl1-patrol-the-woods",
+    "community-quest-weald-lvl1-purge-the-woods",
+    "community-quest-weald-lvl2-hounds-of-the-woods",
+    "community-quest-weald-lvl2-lost-supplies",
+    "community-quest-weald-lvl2-lost-treasures",
+    "community-quest-weald-lvl2-searching-in-the-dark",
+    "community-quest-weald-lvl2-spreaders-of-miasma",
+    "community-quest-weald-lvl3-final-swipe",
+    "community-quest-weald-lvl3-great-unclean-ones",
+    "community-quest-weald-lvl3-no-other-way",
+    "community-quest-weald-lvl3-the-infected",
+    "community-quest-weald-lvl3-whispering-woods"
+  ],
+  "productionUiProofs": [
+    {
+      "definitionId": "community-quest-warrens-lvl1-explore-the-sewers",
+      "proofId": "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+      "testFile": "e2e/phase11a4-c1c1r-real-community-quest.spec.ts",
+      "proofSurface": "production-ui"
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-mapping-the-sewers",
+      "proofId": "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+      "testFile": "e2e/phase11a4-c1c1r-real-community-quest.spec.ts",
+      "proofSurface": "production-ui"
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl3-deep-in-the-warrens",
+      "proofId": "C1C2-E2E-SPECIAL-RULE",
+      "testFile": "e2e/phase11a4-c1c2-quest-special-rule.spec.ts",
+      "proofSurface": "production-ui"
+    }
+  ],
+  "commands": [
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe D:\\darkest-dungoen-boardgame\\node_modules\\vitest\\vitest.mjs run src/audit/c1c4-rest-source-closure.test.ts src/audit/c1c3r-semantic-fidelity.test.ts src/audit/c1c1r3-rest-budget-semantics.test.ts src/game-engine/c1c1r2-rest-allocation.test.ts src/game-engine/c1c1r-firewood-real-flow.test.ts src/game-engine/c1c1-community-quest-production.test.ts src/audit/production-proof-verification.test.ts",
+      "exitCode": 0
+    },
+    {
+      "command": "C:\\WINDOWS\\system32\\cmd.exe /d /s /c npm run test:e2e:community-content-c1c2",
+      "exitCode": 0
+    },
+    {
+      "command": "C:\\WINDOWS\\system32\\cmd.exe /d /s /c npm test",
+      "exitCode": 0
+    },
+    {
+      "command": "C:\\WINDOWS\\system32\\cmd.exe /d /s /c npm run typecheck",
+      "exitCode": 0
+    },
+    {
+      "command": "C:\\WINDOWS\\system32\\cmd.exe /d /s /c npm run build",
+      "exitCode": 0
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe D:\\darkest-dungoen-boardgame\\node_modules\\vite-node\\vite-node.mjs scripts/audit/generate-complete-edition-c1c4.ts",
+      "exitCode": 0
+    }
+  ],
+  "failures": [],
+  "terminalVerdict": "C1C4-REST-SOURCE-EXHAUSTED-STILL-UNRESOLVED"
+}
