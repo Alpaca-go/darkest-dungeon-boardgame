@@ -598,6 +598,7 @@ export function evaluateCommunityTrinketCapability(
   const implementedTrinketPrimitives = new Set(['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW', 'STAGED_HEALING_TRINKET_WINDOWS']);
   const missingPrimitives = declaredMissingPrimitives.filter((primitive) => !implementedTrinketPrimitives.has(primitive));
   const sourceSemanticComplete = !sourceBlocked && source.unresolvedFields.length === 0;
+  const runtimeSemanticComplete = sourceSemanticComplete && Boolean(adapter) && missingPrimitives.length === 0;
   const productionUiProofComplete = Boolean(proofMatches && proof && measuredRuntimeProof.e2eProofPresent
     && allProofsUseSurface(proof.e2eTests, 'production-ui', registeredProofs));
   const proofComplete = Boolean(proofMatches && proof.sourceSupported && proof.semanticSupported
@@ -623,7 +624,7 @@ export function evaluateCommunityTrinketCapability(
     sourceSupported: !sourceBlocked,
     engineCapable: missingPrimitives.length === 0,
     sourceSemanticComplete,
-    runtimeSemanticComplete: sourceSemanticComplete,
+    runtimeSemanticComplete,
     semanticObligationCount: 0,
     implementedSemanticObligationCount: 0,
     partialSemanticObligationCount: 0,
