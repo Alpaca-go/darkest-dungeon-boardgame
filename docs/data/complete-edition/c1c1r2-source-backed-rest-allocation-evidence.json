@@ -1,0 +1,1000 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-1R2",
+  "generatedAt": "2026-09-21T00:06:58.336Z",
+  "verificationScope": "LOCAL MEASURED VERIFICATION",
+  "baselineHead": "8bf2ab674e1dec8fde67e11e180b66ccb0b8f34a",
+  "verifiedImplementationHead": "c21876b6ce2776e19118651a0d346fcced9c7f9a",
+  "verifiedImplementationTree": "c48f90be8e54e53694b840c7066630a1f5ccf33c",
+  "evidencePublicationHead": null,
+  "evidencePublicationHeadReason": "A commit cannot contain its own hash; the publication commit is reported by the handoff after these generated files are committed.",
+  "sourceRuleEvidence": {
+    "path": "docs/data/complete-edition/c1c1r2-rest-rule-evidence.json",
+    "source": "docs/DD_EN_COREBOX_RULES.pdf",
+    "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+    "pages": [
+      11,
+      15
+    ]
+  },
+  "restAllocationSemanticStatus": "SOURCE_BACKED",
+  "restPrimitiveStatus": "IMPLEMENTED_AND_PRODUCTION_PROVEN",
+  "firewoodQuestIds": [
+    "community-quest-ruins-lvl1-scout-ahead",
+    "community-quest-ruins-lvl1-wipe-em-out",
+    "community-quest-ruins-lvl2-clear-the-path",
+    "community-quest-ruins-lvl2-reduce-to-rubble",
+    "community-quest-warrens-lvl1-pork-chop"
+  ],
+  "zeroFirewoodQuestIds": [
+    "community-quest-warrens-lvl1-explore-the-sewers",
+    "community-quest-warrens-lvl2-mapping-the-sewers"
+  ],
+  "questReadyBefore": 7,
+  "questReadyAfter": 7,
+  "readyQuestIds": [
+    "community-quest-ruins-lvl1-scout-ahead",
+    "community-quest-ruins-lvl1-wipe-em-out",
+    "community-quest-ruins-lvl2-clear-the-path",
+    "community-quest-ruins-lvl2-reduce-to-rubble",
+    "community-quest-warrens-lvl1-explore-the-sewers",
+    "community-quest-warrens-lvl1-pork-chop",
+    "community-quest-warrens-lvl2-mapping-the-sewers"
+  ],
+  "restE2EProof": {
+    "proofId": "C1C1R2-E2E-REST-ALLOCATION",
+    "scope": "primitive",
+    "primitiveId": "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+    "questIdExecuted": "community-quest-ruins-lvl1-scout-ahead",
+    "testFile": "e2e/phase11a4-c1c1r2-rest-allocation.spec.ts"
+  },
+  "questGameplayE2EProof": {
+    "proofId": "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+    "scope": "adapter",
+    "questIdExecuted": "community-quest-warrens-lvl1-explore-the-sewers"
+  },
+  "proofBindings": [
+    {
+      "definitionId": "community-quest-ruins-lvl1-scout-ahead",
+      "manifestField": "productionTests",
+      "expectedType": "production-runtime",
+      "proofId": "C1C1-QUEST-RUNTIME",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1-QUEST-RUNTIME",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "production-runtime",
+        "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-scout-ahead",
+      "manifestField": "productionTests",
+      "expectedType": "production-runtime",
+      "proofId": "C1C1R-QUEST-SOURCE-SETUP",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1R-QUEST-SOURCE-SETUP",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "production-runtime",
+        "testFile": "src/game-engine/c1c1r-firewood-real-flow.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-scout-ahead",
+      "manifestField": "saveReplayTests",
+      "expectedType": "save-replay",
+      "proofId": "C1C1-QUEST-SAVE-REPLAY",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1-QUEST-SAVE-REPLAY",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "save-replay",
+        "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-scout-ahead",
+      "manifestField": "selectorTests",
+      "expectedType": "selector",
+      "proofId": "C1C1-QUEST-SELECTOR",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1-QUEST-SELECTOR",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "selector",
+        "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-scout-ahead",
+      "manifestField": "e2eTests",
+      "expectedType": "e2e",
+      "proofId": "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+        "definitionIds": [],
+        "proofType": "e2e",
+        "testFile": "e2e/phase11a4-c1c1r-real-community-quest.spec.ts",
+        "runner": "playwright",
+        "status": "active",
+        "scope": "adapter",
+        "adapterId": "c1c1-simple-community-quest-v1"
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-scout-ahead",
+      "manifestField": "e2eTests",
+      "expectedType": "e2e",
+      "proofId": "C1C1R2-E2E-REST-ALLOCATION",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1R2-E2E-REST-ALLOCATION",
+        "definitionIds": [],
+        "proofType": "e2e",
+        "testFile": "e2e/phase11a4-c1c1r2-rest-allocation.spec.ts",
+        "runner": "playwright",
+        "status": "active",
+        "scope": "primitive",
+        "primitiveId": "QUEST_FIREWOOD_RESTING_POINT_SETUP"
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-wipe-em-out",
+      "manifestField": "productionTests",
+      "expectedType": "production-runtime",
+      "proofId": "C1C1-QUEST-RUNTIME",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1-QUEST-RUNTIME",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "production-runtime",
+        "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-wipe-em-out",
+      "manifestField": "productionTests",
+      "expectedType": "production-runtime",
+      "proofId": "C1C1R-QUEST-SOURCE-SETUP",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1R-QUEST-SOURCE-SETUP",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "production-runtime",
+        "testFile": "src/game-engine/c1c1r-firewood-real-flow.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-wipe-em-out",
+      "manifestField": "saveReplayTests",
+      "expectedType": "save-replay",
+      "proofId": "C1C1-QUEST-SAVE-REPLAY",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1-QUEST-SAVE-REPLAY",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "save-replay",
+        "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-wipe-em-out",
+      "manifestField": "selectorTests",
+      "expectedType": "selector",
+      "proofId": "C1C1-QUEST-SELECTOR",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1-QUEST-SELECTOR",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "selector",
+        "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-wipe-em-out",
+      "manifestField": "e2eTests",
+      "expectedType": "e2e",
+      "proofId": "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+        "definitionIds": [],
+        "proofType": "e2e",
+        "testFile": "e2e/phase11a4-c1c1r-real-community-quest.spec.ts",
+        "runner": "playwright",
+        "status": "active",
+        "scope": "adapter",
+        "adapterId": "c1c1-simple-community-quest-v1"
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-wipe-em-out",
+      "manifestField": "e2eTests",
+      "expectedType": "e2e",
+      "proofId": "C1C1R2-E2E-REST-ALLOCATION",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1R2-E2E-REST-ALLOCATION",
+        "definitionIds": [],
+        "proofType": "e2e",
+        "testFile": "e2e/phase11a4-c1c1r2-rest-allocation.spec.ts",
+        "runner": "playwright",
+        "status": "active",
+        "scope": "primitive",
+        "primitiveId": "QUEST_FIREWOOD_RESTING_POINT_SETUP"
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-clear-the-path",
+      "manifestField": "productionTests",
+      "expectedType": "production-runtime",
+      "proofId": "C1C1-QUEST-RUNTIME",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1-QUEST-RUNTIME",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "production-runtime",
+        "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-clear-the-path",
+      "manifestField": "productionTests",
+      "expectedType": "production-runtime",
+      "proofId": "C1C1R-QUEST-SOURCE-SETUP",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1R-QUEST-SOURCE-SETUP",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "production-runtime",
+        "testFile": "src/game-engine/c1c1r-firewood-real-flow.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-clear-the-path",
+      "manifestField": "saveReplayTests",
+      "expectedType": "save-replay",
+      "proofId": "C1C1-QUEST-SAVE-REPLAY",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1-QUEST-SAVE-REPLAY",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "save-replay",
+        "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-clear-the-path",
+      "manifestField": "selectorTests",
+      "expectedType": "selector",
+      "proofId": "C1C1-QUEST-SELECTOR",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1-QUEST-SELECTOR",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "selector",
+        "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-clear-the-path",
+      "manifestField": "e2eTests",
+      "expectedType": "e2e",
+      "proofId": "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+        "definitionIds": [],
+        "proofType": "e2e",
+        "testFile": "e2e/phase11a4-c1c1r-real-community-quest.spec.ts",
+        "runner": "playwright",
+        "status": "active",
+        "scope": "adapter",
+        "adapterId": "c1c1-simple-community-quest-v1"
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-clear-the-path",
+      "manifestField": "e2eTests",
+      "expectedType": "e2e",
+      "proofId": "C1C1R2-E2E-REST-ALLOCATION",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1R2-E2E-REST-ALLOCATION",
+        "definitionIds": [],
+        "proofType": "e2e",
+        "testFile": "e2e/phase11a4-c1c1r2-rest-allocation.spec.ts",
+        "runner": "playwright",
+        "status": "active",
+        "scope": "primitive",
+        "primitiveId": "QUEST_FIREWOOD_RESTING_POINT_SETUP"
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-reduce-to-rubble",
+      "manifestField": "productionTests",
+      "expectedType": "production-runtime",
+      "proofId": "C1C1-QUEST-RUNTIME",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1-QUEST-RUNTIME",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "production-runtime",
+        "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-reduce-to-rubble",
+      "manifestField": "productionTests",
+      "expectedType": "production-runtime",
+      "proofId": "C1C1R-QUEST-SOURCE-SETUP",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1R-QUEST-SOURCE-SETUP",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "production-runtime",
+        "testFile": "src/game-engine/c1c1r-firewood-real-flow.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-reduce-to-rubble",
+      "manifestField": "saveReplayTests",
+      "expectedType": "save-replay",
+      "proofId": "C1C1-QUEST-SAVE-REPLAY",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1-QUEST-SAVE-REPLAY",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "save-replay",
+        "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-reduce-to-rubble",
+      "manifestField": "selectorTests",
+      "expectedType": "selector",
+      "proofId": "C1C1-QUEST-SELECTOR",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1-QUEST-SELECTOR",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "selector",
+        "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-reduce-to-rubble",
+      "manifestField": "e2eTests",
+      "expectedType": "e2e",
+      "proofId": "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+        "definitionIds": [],
+        "proofType": "e2e",
+        "testFile": "e2e/phase11a4-c1c1r-real-community-quest.spec.ts",
+        "runner": "playwright",
+        "status": "active",
+        "scope": "adapter",
+        "adapterId": "c1c1-simple-community-quest-v1"
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-reduce-to-rubble",
+      "manifestField": "e2eTests",
+      "expectedType": "e2e",
+      "proofId": "C1C1R2-E2E-REST-ALLOCATION",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1R2-E2E-REST-ALLOCATION",
+        "definitionIds": [],
+        "proofType": "e2e",
+        "testFile": "e2e/phase11a4-c1c1r2-rest-allocation.spec.ts",
+        "runner": "playwright",
+        "status": "active",
+        "scope": "primitive",
+        "primitiveId": "QUEST_FIREWOOD_RESTING_POINT_SETUP"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-explore-the-sewers",
+      "manifestField": "productionTests",
+      "expectedType": "production-runtime",
+      "proofId": "C1C1-QUEST-RUNTIME",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1-QUEST-RUNTIME",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "production-runtime",
+        "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-explore-the-sewers",
+      "manifestField": "productionTests",
+      "expectedType": "production-runtime",
+      "proofId": "C1C1R-QUEST-SOURCE-SETUP",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1R-QUEST-SOURCE-SETUP",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "production-runtime",
+        "testFile": "src/game-engine/c1c1r-firewood-real-flow.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-explore-the-sewers",
+      "manifestField": "saveReplayTests",
+      "expectedType": "save-replay",
+      "proofId": "C1C1-QUEST-SAVE-REPLAY",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1-QUEST-SAVE-REPLAY",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "save-replay",
+        "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-explore-the-sewers",
+      "manifestField": "selectorTests",
+      "expectedType": "selector",
+      "proofId": "C1C1-QUEST-SELECTOR",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1-QUEST-SELECTOR",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "selector",
+        "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-explore-the-sewers",
+      "manifestField": "e2eTests",
+      "expectedType": "e2e",
+      "proofId": "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+        "definitionIds": [],
+        "proofType": "e2e",
+        "testFile": "e2e/phase11a4-c1c1r-real-community-quest.spec.ts",
+        "runner": "playwright",
+        "status": "active",
+        "scope": "adapter",
+        "adapterId": "c1c1-simple-community-quest-v1"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-pork-chop",
+      "manifestField": "productionTests",
+      "expectedType": "production-runtime",
+      "proofId": "C1C1-QUEST-RUNTIME",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1-QUEST-RUNTIME",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "production-runtime",
+        "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-pork-chop",
+      "manifestField": "productionTests",
+      "expectedType": "production-runtime",
+      "proofId": "C1C1R-QUEST-SOURCE-SETUP",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1R-QUEST-SOURCE-SETUP",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "production-runtime",
+        "testFile": "src/game-engine/c1c1r-firewood-real-flow.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-pork-chop",
+      "manifestField": "saveReplayTests",
+      "expectedType": "save-replay",
+      "proofId": "C1C1-QUEST-SAVE-REPLAY",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1-QUEST-SAVE-REPLAY",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "save-replay",
+        "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-pork-chop",
+      "manifestField": "selectorTests",
+      "expectedType": "selector",
+      "proofId": "C1C1-QUEST-SELECTOR",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1-QUEST-SELECTOR",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "selector",
+        "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-pork-chop",
+      "manifestField": "e2eTests",
+      "expectedType": "e2e",
+      "proofId": "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+        "definitionIds": [],
+        "proofType": "e2e",
+        "testFile": "e2e/phase11a4-c1c1r-real-community-quest.spec.ts",
+        "runner": "playwright",
+        "status": "active",
+        "scope": "adapter",
+        "adapterId": "c1c1-simple-community-quest-v1"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-pork-chop",
+      "manifestField": "e2eTests",
+      "expectedType": "e2e",
+      "proofId": "C1C1R2-E2E-REST-ALLOCATION",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1R2-E2E-REST-ALLOCATION",
+        "definitionIds": [],
+        "proofType": "e2e",
+        "testFile": "e2e/phase11a4-c1c1r2-rest-allocation.spec.ts",
+        "runner": "playwright",
+        "status": "active",
+        "scope": "primitive",
+        "primitiveId": "QUEST_FIREWOOD_RESTING_POINT_SETUP"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-mapping-the-sewers",
+      "manifestField": "productionTests",
+      "expectedType": "production-runtime",
+      "proofId": "C1C1-QUEST-RUNTIME",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1-QUEST-RUNTIME",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "production-runtime",
+        "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-mapping-the-sewers",
+      "manifestField": "productionTests",
+      "expectedType": "production-runtime",
+      "proofId": "C1C1R-QUEST-SOURCE-SETUP",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1R-QUEST-SOURCE-SETUP",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "production-runtime",
+        "testFile": "src/game-engine/c1c1r-firewood-real-flow.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-mapping-the-sewers",
+      "manifestField": "saveReplayTests",
+      "expectedType": "save-replay",
+      "proofId": "C1C1-QUEST-SAVE-REPLAY",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1-QUEST-SAVE-REPLAY",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "save-replay",
+        "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-mapping-the-sewers",
+      "manifestField": "selectorTests",
+      "expectedType": "selector",
+      "proofId": "C1C1-QUEST-SELECTOR",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1-QUEST-SELECTOR",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "selector",
+        "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-mapping-the-sewers",
+      "manifestField": "e2eTests",
+      "expectedType": "e2e",
+      "proofId": "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+        "definitionIds": [],
+        "proofType": "e2e",
+        "testFile": "e2e/phase11a4-c1c1r-real-community-quest.spec.ts",
+        "runner": "playwright",
+        "status": "active",
+        "scope": "adapter",
+        "adapterId": "c1c1-simple-community-quest-v1"
+      }
+    }
+  ],
+  "proofExecutionResults": [
+    {
+      "proofId": "C1C1R-QUEST-SOURCE-SETUP",
+      "runner": "vitest",
+      "testFile": "src/game-engine/c1c1r-firewood-real-flow.test.ts",
+      "status": "passed"
+    },
+    {
+      "proofId": "C1C1-QUEST-RUNTIME",
+      "runner": "vitest",
+      "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+      "status": "passed"
+    },
+    {
+      "proofId": "C1C1-QUEST-SAVE-REPLAY",
+      "runner": "vitest",
+      "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+      "status": "passed"
+    },
+    {
+      "proofId": "C1C1-QUEST-SELECTOR",
+      "runner": "vitest",
+      "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+      "status": "passed"
+    },
+    {
+      "proofId": "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+      "runner": "playwright",
+      "testFile": "e2e/phase11a4-c1c1r-real-community-quest.spec.ts",
+      "status": "passed"
+    },
+    {
+      "proofId": "C1C1R2-E2E-REST-ALLOCATION",
+      "runner": "playwright",
+      "testFile": "e2e/phase11a4-c1c1r2-rest-allocation.spec.ts",
+      "status": "passed"
+    }
+  ],
+  "actualExitCodes": {
+    "frozenSourceTruth": 0,
+    "sourceEvidenceContract": 0,
+    "restSourceGuard": 0,
+    "restE2eSourceGuard": 0,
+    "restAllocationAndQuestProofs": 0,
+    "questAndRestPlaywright": 0,
+    "fullRegression": 0,
+    "build": 0
+  },
+  "verificationCommands": [
+    "C:\\Program Files\\nodejs\\node.exe D:\\darkest-dungoen-boardgame\\node_modules\\vitest\\vitest.mjs run src/game-engine/c1c1r2-rest-allocation.test.ts src/game-engine/c1c1r-firewood-real-flow.test.ts src/game-engine/c1c1-community-quest-production.test.ts src/audit/production-proof-verification.test.ts --reporter=json",
+    "C:\\Program Files\\nodejs\\node.exe D:\\darkest-dungoen-boardgame\\scripts\\e2e\\run-community-content-c1c1-e2e.mjs",
+    "C:\\WINDOWS\\system32\\cmd.exe /d /s /c npm test",
+    "C:\\WINDOWS\\system32\\cmd.exe /d /s /c npm run build"
+  ]
+}
