@@ -75,6 +75,7 @@ export type RestAllocationError =
   | 'REST_ALLOCATION_UNKNOWN_HERO'
   | 'REST_ALLOCATION_DEAD_HERO'
   | 'REST_ALLOCATION_EXCEEDS_BUDGET'
+  | 'REST_ALLOCATION_INCOMPLETE_BUDGET'
   | 'REST_ALLOCATION_EXCEEDS_RECOVERY_CAP';
 
 export interface RestAllocationValidation {
@@ -90,7 +91,6 @@ export function validateRestAllocation(
   allocation: RestAllocation,
 ): RestAllocationValidation {
   const state = campaign.questRuntimeState;
-  const quest = getQuestById(campaign.currentQuestId ?? '');
   const current = campaign.dungeon?.rooms.find((room) => room.id === campaign.dungeon?.currentRoomId);
   const budget = state?.restingPointsRemaining ?? 0;
   const invalid = (error: RestAllocationError, spentPoints = 0): RestAllocationValidation => ({
@@ -100,7 +100,9 @@ export function validateRestAllocation(
     spentPoints,
   });
 
-  if (quest?.runtimeContentMetadata?.sourceOrigin !== 'community-complete-edition') {
+  if (campaign.runtimeContentProfile !== 'community-complete-edition'
+    || !state
+    || state.definitionId !== campaign.currentQuestId) {
     return invalid('REST_NOT_COMMUNITY_QUEST');
   }
   if (campaign.gamePhase !== 'dungeon-explore') return invalid('REST_NOT_IN_DUNGEON_EXPLORE');
@@ -130,13 +132,15 @@ export function validateRestAllocation(
     requestedByHeroAndResource.set(key, requested);
   }
 
+  if (spentPoints !== budget) return invalid('REST_ALLOCATION_INCOMPLETE_BUDGET', spentPoints);
+
   return { ok: true, error: null, availablePoints: budget, spentPoints };
 }
 
 /**
  * Atomically commits the allocation chosen by the players. One point recovers one Life
  * (represented by removing one Wound) or one Stress. Confirming ends the Rest and discards
- * one Firewood; points not spent by the players are forfeited with that completed session.
+ * one Firewood. The source-backed full-budget gate requires every printed point to be allocated.
  */
 export function commitRestAtCamp(campaign: CampaignState, allocation: RestAllocation): QuestRestResult {
   const validation = validateRestAllocation(campaign, allocation);

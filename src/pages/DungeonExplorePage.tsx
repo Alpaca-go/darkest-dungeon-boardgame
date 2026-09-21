@@ -11,7 +11,8 @@ import TopResourceBar from '../components/dungeon/TopResourceBar';
 import EventLog from '../components/dungeon/EventLog';
 import HeroCard from '../components/hero/HeroCard';
 import TrinketSlots from '../components/trinkets/TrinketSlots';
-import type { RestAllocationEntry, RestRecoveryResource } from '../game-engine/quests/quest-runtime';
+import { validateRestAllocation } from '../game-engine/quests/quest-runtime';
+import type { RestAllocation, RestRecoveryResource } from '../game-engine/quests/quest-runtime';
 
 export default function DungeonExplorePage() {
   const navigate = useNavigate();
@@ -51,6 +52,13 @@ export default function DungeonExplorePage() {
   const restBudget = campaign.questRuntimeState?.restingPointsRemaining ?? 0;
   const restSpent = Object.values(restDraft).reduce((sum, entry) => sum + entry.life + entry.stress, 0);
   const restRemaining = restBudget - restSpent;
+  const restAllocation: RestAllocation = {
+    allocations: Object.entries(restDraft).flatMap(([heroId, entry]) => ([
+      ...(entry.life > 0 ? [{ heroId, resource: 'life' as const, points: entry.life }] : []),
+      ...(entry.stress > 0 ? [{ heroId, resource: 'stress' as const, points: entry.stress }] : []),
+    ])),
+  };
+  const restValidation = validateRestAllocation(campaign, restAllocation);
   const openRestAllocation = () => {
     setRestDraft({});
     setRestError(null);
@@ -72,11 +80,7 @@ export default function DungeonExplorePage() {
     setRestError(null);
   };
   const confirmRestAllocation = () => {
-    const allocations: RestAllocationEntry[] = Object.entries(restDraft).flatMap(([heroId, entry]) => ([
-      ...(entry.life > 0 ? [{ heroId, resource: 'life' as const, points: entry.life }] : []),
-      ...(entry.stress > 0 ? [{ heroId, resource: 'stress' as const, points: entry.stress }] : []),
-    ]));
-    const error = commitRestAtCamp({ allocations });
+    const error = commitRestAtCamp(restAllocation);
     if (error) {
       setRestError(error);
       return;
@@ -297,10 +301,14 @@ export default function DungeonExplorePage() {
                 );
               })}
             </div>
-            {restError && <p className="text-xs text-red-300" role="alert" data-testid="rest-allocation-error">{restError}</p>}
+            {(restError || restValidation.error === 'REST_ALLOCATION_INCOMPLETE_BUDGET') && (
+              <p className="text-xs text-red-300" role="alert" data-testid="rest-allocation-error">
+                {restError ?? `${restRemaining} Resting Points still need allocation`}
+              </p>
+            )}
             <div className="flex justify-end gap-2">
               <button type="button" onClick={closeRestAllocation} data-testid="rest-allocation-cancel" className="px-3 py-1.5 rounded border border-dd-border bg-dd-panel2 text-sm text-dd-text">Cancel</button>
-              <button type="button" onClick={confirmRestAllocation} disabled={restRemaining < 0} data-testid="rest-allocation-confirm" className="px-3 py-1.5 rounded bg-dd-warn text-black font-semibold text-sm disabled:opacity-40">Confirm Rest</button>
+              <button type="button" onClick={confirmRestAllocation} disabled={!restValidation.ok} data-testid="rest-allocation-confirm" className="px-3 py-1.5 rounded bg-dd-warn text-black font-semibold text-sm disabled:opacity-40">Confirm Rest</button>
             </div>
           </div>
         </div>
