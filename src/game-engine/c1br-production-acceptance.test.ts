@@ -119,7 +119,7 @@ describe('C1B-R production promotion adversarial matrix', () => {
   it('PA-08 Community never falls back to legacy definitions', () => {
     const context = runtimeContentContext(communityCampaign());
     const quests = getQuestPool(context);
-    expect(quests).toHaveLength(4);
+    expect(quests.map((quest) => quest.id)).toEqual(['community-quest-warrens-lvl1-explore-the-sewers']);
     expect(quests.every((quest) => quest.id.startsWith('community-quest-'))).toBe(true);
     expect(quests.some((quest) => STANDARD_QUESTS.some((legacy) => legacy.id === quest.id))).toBe(false);
     expect(getTrinketPool(context).map((entry) => entry.id).sort()).toEqual([ACCURACY, CRITICAL]);
