@@ -1,0 +1,484 @@
+{
+  "schemaVersion": 3,
+  "phase": "11A.4-C1C-3",
+  "measuredAt": "2026-09-21T07:26:37.399Z",
+  "baselineHead": "ba31e00cbf00a193881bafaa732e627a469d04ee",
+  "verifiedImplementationHead": "2b3ed7b3b341f9dbb37eed0eaa4fff89548d445b",
+  "verifiedImplementationTree": "27626bf2b421393d7a969b30b05330648f6e5f8a",
+  "historicalEvidenceHashes": {
+    "docs/data/complete-edition/c1c2-quest-runtime-expansion-evidence.json": "7f45977ed958597e5e9c20547e0c9ded0a394861ca37ab91acb65c01600ed09f",
+    "docs/data/complete-edition/c1c2-runtime-capability-matrix.json": "4e9c6b608ad6fb0e4e5289335b748c34a0213f70a933b48798b7572b78bdf33d",
+    "docs/data/complete-edition/c1c2-runtime-primitive-backlog.json": "ded89935401de3781c85cab7eac57894d0551f09532bd98d35ad8d003cc3f765",
+    "docs/reports/complete-edition/c1c2-quest-runtime-expansion-report.md": "af92a830780caa0fc8f80df403ee0643a7c12a0b038d3dac5f160bf9c8bea7c9"
+  },
+  "questReadyBefore": 3,
+  "questReadyAfter": 5,
+  "semanticCompleteBefore": 5,
+  "semanticCompleteAfter": 5,
+  "newlyImplementedPrimitives": [
+    "QUEST_RULE_ROOM_SETUP",
+    "QUEST_RULE_TOKEN_INTERACTION",
+    "QUEST_RULE_QUEST_COMPLETION"
+  ],
+  "newlyReadyQuestIds": [
+    "community-quest-cove-lvl3-tainted-trinkets",
+    "community-quest-warrens-lvl1-family-trinkets"
+  ],
+  "singlePrimitiveBacklog": [
+    {
+      "primitive": "QUEST_RULE_MONSTER_STATE",
+      "blockedDefinitions": 32,
+      "semanticReadyDefinitions": 0,
+      "potentialUnlock": 0,
+      "blockedDefinitionIds": [
+        "community-quest-cove-lvl1-deep-horrors",
+        "community-quest-cove-lvl2-deep-horrors-2",
+        "community-quest-cove-lvl2-the-deep-ones",
+        "community-quest-cove-lvl3-the-deep-ones-2",
+        "community-quest-crimson-court-lvl1-they-are-swarm",
+        "community-quest-crimson-court-lvl2-lurkers",
+        "community-quest-crimson-court-lvl2-ruin-the-party",
+        "community-quest-crimson-court-lvl2-take-em-back",
+        "community-quest-crimson-court-lvl3-breeders",
+        "community-quest-crimson-court-lvl3-cut-the-buzz",
+        "community-quest-crimson-court-lvl3-uninvited",
+        "community-quest-ruins-lvl1-rising-threat",
+        "community-quest-ruins-lvl2-break-them",
+        "community-quest-ruins-lvl3-the-threat-is-real",
+        "community-quest-ruins-lvl3-they-are-back",
+        "community-quest-warrens-lvl1-disarm-them",
+        "community-quest-warrens-lvl1-worm-squash",
+        "community-quest-warrens-lvl2-a-new-breed",
+        "community-quest-warrens-lvl2-bait-them-out",
+        "community-quest-warrens-lvl2-carrion-infestation",
+        "community-quest-warrens-lvl2-ringleaders",
+        "community-quest-warrens-lvl3-alpha-swine",
+        "community-quest-warrens-lvl3-drums-of-doom",
+        "community-quest-warrens-lvl3-infighting",
+        "community-quest-weald-lvl1-circle-of-witches",
+        "community-quest-weald-lvl1-purge-the-woods",
+        "community-quest-weald-lvl2-hounds-of-the-woods",
+        "community-quest-weald-lvl2-lost-treasures",
+        "community-quest-weald-lvl2-searching-in-the-dark",
+        "community-quest-weald-lvl2-spreaders-of-miasma",
+        "community-quest-weald-lvl3-great-unclean-ones",
+        "community-quest-weald-lvl3-no-other-way"
+      ],
+      "potentialUnlockDefinitionIds": []
+    },
+    {
+      "primitive": "QUEST_RULE_ROOM_SETUP",
+      "blockedDefinitions": 31,
+      "semanticReadyDefinitions": 2,
+      "potentialUnlock": 0,
+      "blockedDefinitionIds": [
+        "community-quest-boss-face-the-threat",
+        "community-quest-cove-lvl1-purify-the-eldritch-signs",
+        "community-quest-cove-lvl1-test-the-waters",
+        "community-quest-cove-lvl2-the-deep-ones",
+        "community-quest-cove-lvl3-tainted-trinkets",
+        "community-quest-cove-lvl3-the-deep-ones-2",
+        "community-quest-cove-lvl3-the-shipwrecks",
+        "community-quest-crimson-court-lvl1-lost-and-found",
+        "community-quest-crimson-court-lvl1-rivers-run-red",
+        "community-quest-crimson-court-lvl2-ruin-the-party",
+        "community-quest-crimson-court-lvl2-take-em-back",
+        "community-quest-crimson-court-lvl3-breeders",
+        "community-quest-crimson-court-lvl3-the-endless-marsh",
+        "community-quest-crimson-court-lvl3-uninvited",
+        "community-quest-ruins-lvl1-dem-bones",
+        "community-quest-ruins-lvl2-disruption",
+        "community-quest-ruins-lvl2-purify-the-fountains",
+        "community-quest-ruins-lvl3-forward-camps",
+        "community-quest-warrens-lvl1-disarm-them",
+        "community-quest-warrens-lvl1-family-trinkets",
+        "community-quest-warrens-lvl1-worm-squash",
+        "community-quest-warrens-lvl2-bait-them-out",
+        "community-quest-warrens-lvl2-ringleaders",
+        "community-quest-warrens-lvl3-foul-arsenal",
+        "community-quest-weald-lvl1-circle-of-witches",
+        "community-quest-weald-lvl1-disinfection",
+        "community-quest-weald-lvl1-fungal-research",
+        "community-quest-weald-lvl2-hounds-of-the-woods",
+        "community-quest-weald-lvl2-lost-supplies",
+        "community-quest-weald-lvl2-searching-in-the-dark",
+        "community-quest-weald-lvl3-no-other-way"
+      ],
+      "potentialUnlockDefinitionIds": []
+    },
+    {
+      "primitive": "QUEST_RULE_QUEST_COMPLETION",
+      "blockedDefinitions": 17,
+      "semanticReadyDefinitions": 2,
+      "potentialUnlock": 0,
+      "blockedDefinitionIds": [
+        "community-quest-boss-face-the-threat",
+        "community-quest-cove-lvl1-purify-the-eldritch-signs",
+        "community-quest-cove-lvl1-test-the-waters",
+        "community-quest-cove-lvl3-tainted-trinkets",
+        "community-quest-cove-lvl3-the-shipwrecks",
+        "community-quest-crimson-court-lvl1-rivers-run-red",
+        "community-quest-crimson-court-lvl2-take-em-back",
+        "community-quest-ruins-lvl1-dem-bones",
+        "community-quest-ruins-lvl1-fundraiser",
+        "community-quest-ruins-lvl2-purify-the-fountains",
+        "community-quest-ruins-lvl3-forward-camps",
+        "community-quest-ruins-lvl3-warm-up-the-halls",
+        "community-quest-warrens-lvl1-family-trinkets",
+        "community-quest-warrens-lvl2-carrion-infestation",
+        "community-quest-weald-lvl1-disinfection",
+        "community-quest-weald-lvl1-fungal-research",
+        "community-quest-weald-lvl3-no-other-way"
+      ],
+      "potentialUnlockDefinitionIds": []
+    },
+    {
+      "primitive": "QUEST_RULE_BATTLE_SETUP",
+      "blockedDefinitions": 9,
+      "semanticReadyDefinitions": 0,
+      "potentialUnlock": 0,
+      "blockedDefinitionIds": [
+        "community-quest-cove-lvl1-deep-waters",
+        "community-quest-cove-lvl2-deep-waters-2",
+        "community-quest-cove-lvl2-eldritch-purging",
+        "community-quest-cove-lvl3-deep-waters-3",
+        "community-quest-ruins-lvl1-rising-threat",
+        "community-quest-warrens-lvl2-bait-them-out",
+        "community-quest-warrens-lvl3-infighting",
+        "community-quest-weald-lvl1-patrol-the-woods",
+        "community-quest-weald-lvl3-great-unclean-ones"
+      ],
+      "potentialUnlockDefinitionIds": []
+    },
+    {
+      "primitive": "QUEST_RULE_HERO_STATE",
+      "blockedDefinitions": 9,
+      "semanticReadyDefinitions": 0,
+      "potentialUnlock": 0,
+      "blockedDefinitionIds": [
+        "community-quest-cove-lvl1-unclean-waters",
+        "community-quest-cove-lvl2-unclean-waters-2",
+        "community-quest-cove-lvl3-unclean-waters-3",
+        "community-quest-crimson-court-lvl3-cut-the-buzz",
+        "community-quest-ruins-lvl3-creeping-darkness",
+        "community-quest-warrens-lvl3-foul-arsenal",
+        "community-quest-weald-lvl3-final-swipe",
+        "community-quest-weald-lvl3-the-infected",
+        "community-quest-weald-lvl3-whispering-woods"
+      ],
+      "potentialUnlockDefinitionIds": []
+    },
+    {
+      "primitive": "QUEST_REST_ALLOCATION_SEMANTICS",
+      "blockedDefinitions": 8,
+      "semanticReadyDefinitions": 0,
+      "potentialUnlock": 0,
+      "blockedDefinitionIds": [
+        "community-quest-crimson-court-lvl1-deep-in-the-swamp",
+        "community-quest-crimson-court-lvl2-deeper-into-the-swamp",
+        "community-quest-crimson-court-lvl2-pest-control",
+        "community-quest-ruins-lvl1-scout-ahead",
+        "community-quest-ruins-lvl1-wipe-em-out",
+        "community-quest-ruins-lvl2-clear-the-path",
+        "community-quest-ruins-lvl2-reduce-to-rubble",
+        "community-quest-warrens-lvl1-pork-chop"
+      ],
+      "potentialUnlockDefinitionIds": []
+    },
+    {
+      "primitive": "QUEST_RULE_TOKEN_INTERACTION",
+      "blockedDefinitions": 7,
+      "semanticReadyDefinitions": 1,
+      "potentialUnlock": 0,
+      "blockedDefinitionIds": [
+        "community-quest-cove-lvl2-eldritch-purging",
+        "community-quest-cove-lvl3-deep-waters-3",
+        "community-quest-crimson-court-lvl1-lost-and-found",
+        "community-quest-crimson-court-lvl1-rest-in-rubble",
+        "community-quest-crimson-court-lvl2-take-em-back",
+        "community-quest-warrens-lvl1-family-trinkets",
+        "community-quest-weald-lvl2-lost-supplies"
+      ],
+      "potentialUnlockDefinitionIds": []
+    },
+    {
+      "primitive": "QUEST_RULE_REWARD_OVERRIDE",
+      "blockedDefinitions": 3,
+      "semanticReadyDefinitions": 0,
+      "potentialUnlock": 0,
+      "blockedDefinitionIds": [
+        "community-quest-crimson-court-lvl2-take-em-back",
+        "community-quest-ruins-lvl1-fundraiser",
+        "community-quest-weald-lvl2-lost-supplies"
+      ],
+      "potentialUnlockDefinitionIds": []
+    },
+    {
+      "primitive": "QUEST_RULE_BATTLE_RESULT",
+      "blockedDefinitions": 2,
+      "semanticReadyDefinitions": 0,
+      "potentialUnlock": 0,
+      "blockedDefinitionIds": [
+        "community-quest-warrens-lvl2-carrion-infestation",
+        "community-quest-warrens-lvl2-ringleaders"
+      ],
+      "potentialUnlockDefinitionIds": []
+    },
+    {
+      "primitive": "QUEST_RULE_EXPLORATION",
+      "blockedDefinitions": 2,
+      "semanticReadyDefinitions": 0,
+      "potentialUnlock": 0,
+      "blockedDefinitionIds": [
+        "community-quest-crimson-court-lvl3-the-endless-marsh",
+        "community-quest-warrens-lvl3-infighting"
+      ],
+      "potentialUnlockDefinitionIds": []
+    },
+    {
+      "primitive": "QUEST_RULE_ROOM_CLEAR",
+      "blockedDefinitions": 1,
+      "semanticReadyDefinitions": 0,
+      "potentialUnlock": 0,
+      "blockedDefinitionIds": [
+        "community-quest-crimson-court-lvl1-rest-in-rubble"
+      ],
+      "potentialUnlockDefinitionIds": []
+    }
+  ],
+  "primitiveBundleBacklog": [
+    {
+      "primitiveIds": [
+        "QUEST_RULE_QUEST_COMPLETION",
+        "QUEST_RULE_ROOM_SETUP"
+      ],
+      "definitionIds": [
+        "community-quest-cove-lvl3-tainted-trinkets"
+      ],
+      "potentialUnlock": 1
+    },
+    {
+      "primitiveIds": [
+        "QUEST_RULE_QUEST_COMPLETION",
+        "QUEST_RULE_ROOM_SETUP",
+        "QUEST_RULE_TOKEN_INTERACTION"
+      ],
+      "definitionIds": [
+        "community-quest-warrens-lvl1-family-trinkets"
+      ],
+      "potentialUnlock": 1
+    }
+  ],
+  "proofBindings": [
+    {
+      "definitionId": "community-quest-cove-lvl3-tainted-trinkets",
+      "manifestField": "productionTests",
+      "expectedType": "production-runtime",
+      "proofId": "C1C3-TAINTED-RUNTIME",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C3-TAINTED-RUNTIME",
+        "definitionIds": [
+          "community-quest-cove-lvl3-tainted-trinkets"
+        ],
+        "proofType": "production-runtime",
+        "testFile": "src/game-engine/c1c3-multi-primitive-quest-rule.test.ts",
+        "runner": "vitest",
+        "status": "active",
+        "scope": "definition"
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl3-tainted-trinkets",
+      "manifestField": "saveReplayTests",
+      "expectedType": "save-replay",
+      "proofId": "C1C3-TAINTED-SAVE-REPLAY",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C3-TAINTED-SAVE-REPLAY",
+        "definitionIds": [
+          "community-quest-cove-lvl3-tainted-trinkets"
+        ],
+        "proofType": "save-replay",
+        "testFile": "src/game-engine/c1c3-multi-primitive-quest-rule.test.ts",
+        "runner": "vitest",
+        "status": "active",
+        "scope": "definition"
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl3-tainted-trinkets",
+      "manifestField": "selectorTests",
+      "expectedType": "selector",
+      "proofId": "C1C3-TAINTED-SELECTOR",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C3-TAINTED-SELECTOR",
+        "definitionIds": [
+          "community-quest-cove-lvl3-tainted-trinkets"
+        ],
+        "proofType": "selector",
+        "testFile": "src/game-engine/c1c3-multi-primitive-quest-rule.test.ts",
+        "runner": "vitest",
+        "status": "active",
+        "scope": "definition"
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl3-tainted-trinkets",
+      "manifestField": "e2eTests",
+      "expectedType": "e2e",
+      "proofId": "C1C3-E2E-TAINTED-TRINKETS",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C3-E2E-TAINTED-TRINKETS",
+        "definitionIds": [
+          "community-quest-cove-lvl3-tainted-trinkets"
+        ],
+        "proofType": "e2e",
+        "testFile": "e2e/phase11a4-c1c3-multi-primitive-quest.spec.ts",
+        "runner": "playwright",
+        "status": "active",
+        "scope": "definition"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-family-trinkets",
+      "manifestField": "productionTests",
+      "expectedType": "production-runtime",
+      "proofId": "C1C3-FAMILY-RUNTIME",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C3-FAMILY-RUNTIME",
+        "definitionIds": [
+          "community-quest-warrens-lvl1-family-trinkets"
+        ],
+        "proofType": "production-runtime",
+        "testFile": "src/game-engine/c1c3-multi-primitive-quest-rule.test.ts",
+        "runner": "vitest",
+        "status": "active",
+        "scope": "definition"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-family-trinkets",
+      "manifestField": "saveReplayTests",
+      "expectedType": "save-replay",
+      "proofId": "C1C3-FAMILY-SAVE-REPLAY",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C3-FAMILY-SAVE-REPLAY",
+        "definitionIds": [
+          "community-quest-warrens-lvl1-family-trinkets"
+        ],
+        "proofType": "save-replay",
+        "testFile": "src/game-engine/c1c3-multi-primitive-quest-rule.test.ts",
+        "runner": "vitest",
+        "status": "active",
+        "scope": "definition"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-family-trinkets",
+      "manifestField": "selectorTests",
+      "expectedType": "selector",
+      "proofId": "C1C3-FAMILY-SELECTOR",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C3-FAMILY-SELECTOR",
+        "definitionIds": [
+          "community-quest-warrens-lvl1-family-trinkets"
+        ],
+        "proofType": "selector",
+        "testFile": "src/game-engine/c1c3-multi-primitive-quest-rule.test.ts",
+        "runner": "vitest",
+        "status": "active",
+        "scope": "definition"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-family-trinkets",
+      "manifestField": "e2eTests",
+      "expectedType": "e2e",
+      "proofId": "C1C3-E2E-FAMILY-TRINKETS",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C3-E2E-FAMILY-TRINKETS",
+        "definitionIds": [
+          "community-quest-warrens-lvl1-family-trinkets"
+        ],
+        "proofType": "e2e",
+        "testFile": "e2e/phase11a4-c1c3-multi-primitive-quest.spec.ts",
+        "runner": "playwright",
+        "status": "active",
+        "scope": "definition"
+      }
+    }
+  ],
+  "saveReplayResults": [
+    {
+      "proofId": "C1C3-TAINTED-SAVE-REPLAY",
+      "runner": "vitest",
+      "testFile": "src/game-engine/c1c3-multi-primitive-quest-rule.test.ts",
+      "status": "passed"
+    },
+    {
+      "proofId": "C1C3-FAMILY-SAVE-REPLAY",
+      "runner": "vitest",
+      "testFile": "src/game-engine/c1c3-multi-primitive-quest-rule.test.ts",
+      "status": "passed"
+    }
+  ],
+  "e2eResults": [
+    {
+      "proofId": "C1C3-E2E-TAINTED-TRINKETS",
+      "runner": "playwright",
+      "testFile": "e2e/phase11a4-c1c3-multi-primitive-quest.spec.ts",
+      "status": "passed"
+    },
+    {
+      "proofId": "C1C3-E2E-FAMILY-TRINKETS",
+      "runner": "playwright",
+      "testFile": "e2e/phase11a4-c1c3-multi-primitive-quest.spec.ts",
+      "status": "passed"
+    }
+  ],
+  "fullCampaignUiPathProven": false,
+  "checkpointPolicy": "production-generated checkpoint + UI continuation",
+  "commands": [
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe D:\\darkest-dungoen-boardgame\\node_modules\\vitest\\vitest.mjs run src/game-engine/c1c3-multi-primitive-quest-rule.test.ts src/game-engine/c1c2-quest-runtime-expansion.test.ts src/game-engine/c1c1-community-quest-production.test.ts src/game-engine/c1c1r-firewood-real-flow.test.ts src/audit/c1c1r3-rest-budget-semantics.test.ts src/audit/production-proof-verification.test.ts --reporter=json",
+      "exitCode": 0
+    },
+    {
+      "command": "C:\\WINDOWS\\system32\\cmd.exe /d /s /c npm run test:e2e:community-content-c1c3",
+      "exitCode": 0
+    },
+    {
+      "command": "C:\\WINDOWS\\system32\\cmd.exe /d /s /c npm test",
+      "exitCode": 0
+    },
+    {
+      "command": "C:\\WINDOWS\\system32\\cmd.exe /d /s /c npm run typecheck",
+      "exitCode": 0
+    },
+    {
+      "command": "C:\\WINDOWS\\system32\\cmd.exe /d /s /c npm run build",
+      "exitCode": 0
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe D:\\darkest-dungoen-boardgame\\node_modules\\vite-node\\vite-node.mjs scripts/audit/generate-complete-edition-c1c3.ts",
+      "exitCode": 0
+    }
+  ],
+  "failures": [],
+  "terminalVerdict": "C1C3-MULTI-PRIMITIVE-QUEST-RULE-CLOSURE-ACCEPTED"
+}
