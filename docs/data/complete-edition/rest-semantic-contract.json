@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-1R2",
+  "terminology": {
+    "recoveryResources": ["life", "stress"],
+    "lifeRuntimeRepresentation": "Removing one Wound recovers one Life in the campaign health model."
+  },
+  "firewoodUse": {
+    "status": "SOURCE_EXPLICIT",
+    "sourceEvidenceIds": ["C1C1R2:S4:p11", "C1C1R2:S4:p15"],
+    "rule": "One supplied Firewood token permits one Rest; completing that Rest discards one Firewood token."
+  },
+  "sessionBudget": {
+    "status": "SOURCE_EXPLICIT",
+    "sourceEvidenceIds": ["C1C1R2:S4:p11", "C1C1R2:S4:p15"],
+    "rule": "The current Quest card supplies the Resting Point amount available to the party for the Rest."
+  },
+  "restingPointAllocation": {
+    "status": "SOURCE_EXPLICIT",
+    "sourceEvidenceIds": ["C1C1R2:S4:p15"],
+    "rule": "Players collectively choose the Hero allocation; the engine must not choose targets or recovery resources."
+  },
+  "pointConversion": {
+    "status": "SOURCE_EXPLICIT",
+    "sourceEvidenceIds": ["C1C1R2:S4:p15"],
+    "rule": "Each point spent recovers exactly 1 Life or exactly 1 Stress."
+  },
+  "multiplePointsPerHero": {
+    "status": "SOURCE_EXPLICIT",
+    "sourceEvidenceIds": ["C1C1R2:S4:p15"],
+    "rule": "A Hero may receive multiple points and chooses how to spend that Hero's allocation."
+  },
+  "onePurposePerPoint": {
+    "status": "SOURCE_EXPLICIT",
+    "sourceEvidenceIds": ["C1C1R2:S4:p15"],
+    "rule": "A point recovers Life or Stress, never both."
+  },
+  "partialSpend": {
+    "status": "SOURCE_DERIVED",
+    "sourceEvidenceIds": ["C1C1R2:S4:p15"],
+    "rule": "Only points actually spent are recorded. Confirming completes the Rest and discards Firewood, so any unspent session budget is forfeited.",
+    "derivation": "The rule distinguishes points spent from the printed amount and instructs the party to discard Firewood after it has Rested; it does not state that all points must be spent."
+  },
+  "roomGate": {
+    "status": "SOURCE_EXPLICIT",
+    "sourceEvidenceIds": ["C1C1R2:S4:p15"],
+    "rule": "Rest is legal only in a cleared Room."
+  },
+  "recoveryCap": {
+    "status": "MODEL_INVARIANT",
+    "sourceEvidenceIds": ["C1C1R2:S4:p15"],
+    "rule": "A recovery allocation cannot exceed the target Hero's current missing Life or current Stress."
+  },
+  "unresolvedSemantics": []
+}
