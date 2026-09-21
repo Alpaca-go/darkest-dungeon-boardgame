@@ -15,6 +15,7 @@ import {
   allProofsResolve,
   type RegisteredProductionProof,
 } from '../../audit/production-proof-registry';
+import { restAllocationSemanticsImplemented } from '../../audit/rest-semantic-contract';
 
 export type ProductionStatus = 'PRODUCTION_READY' | 'ADAPTER_REQUIRED' | 'ENGINE_PRIMITIVE_MISSING' | 'SOURCE_BLOCKED';
 
@@ -54,7 +55,7 @@ export interface CommunityTrinketRuntimeAdapter {
 export interface CommunityQuestRuntimeAdapter {
   adapterId: 'c1c1-simple-community-quest-v1';
   definitionId: string;
-  requiredPrimitives: ['QUEST_ROOM_TOKEN_COMPOSITION', 'QUEST_FIREWOOD_RESTING_POINT_SETUP', 'QUEST_XP_UNIT_ACCOUNTING'];
+  requiredPrimitives: string[];
   definition: QuestDefinition;
 }
 
@@ -62,6 +63,7 @@ export interface CommunityProductionProof {
   definitionId: string;
   runtimeAdapterId: string;
   requiredPrimitives?: string[];
+  primitiveProofRequirements?: Record<string, string>;
   sourceSupported: boolean;
   semanticSupported: boolean;
   stateful: boolean;
@@ -84,11 +86,16 @@ export const normalizePrimitives = (message: string): string[] => {
   return primitives.length > 0 ? primitives : [message.replace(/[^A-Za-z0-9]+/g, '_').replace(/^_|_$/g, '').toUpperCase()];
 };
 
-const IMPLEMENTED_QUEST_PRIMITIVES = new Set([
-  'QUEST_ROOM_TOKEN_COMPOSITION',
-  'QUEST_FIREWOOD_RESTING_POINT_SETUP',
-  'QUEST_XP_UNIT_ACCOUNTING',
-]);
+export function implementedQuestPrimitives(restSemanticsReady = restAllocationSemanticsImplemented()): ReadonlySet<string> {
+  return new Set([
+    'QUEST_ROOM_TOKEN_COMPOSITION',
+    'QUEST_FIREWOOD_RESTING_POINT_SETUP',
+    'QUEST_XP_UNIT_ACCOUNTING',
+    ...(restSemanticsReady ? ['QUEST_REST_ALLOCATION_SEMANTICS'] : []),
+  ]);
+}
+
+const IMPLEMENTED_QUEST_PRIMITIVES = implementedQuestPrimitives();
 
 type SimpleSourceQuest = SourceQuest & {
   objective: {
@@ -146,7 +153,12 @@ function adaptSimpleCommunityQuest(source: SimpleSourceQuest): CommunityQuestRun
   return {
     adapterId: 'c1c1-simple-community-quest-v1',
     definitionId: source.id,
-    requiredPrimitives: ['QUEST_ROOM_TOKEN_COMPOSITION', 'QUEST_FIREWOOD_RESTING_POINT_SETUP', 'QUEST_XP_UNIT_ACCOUNTING'],
+    requiredPrimitives: [
+      'QUEST_ROOM_TOKEN_COMPOSITION',
+      'QUEST_FIREWOOD_RESTING_POINT_SETUP',
+      'QUEST_XP_UNIT_ACCOUNTING',
+      ...(firewoodSetup.tokens > 0 ? ['QUEST_REST_ALLOCATION_SEMANTICS'] : []),
+    ],
     definition: {
       id: source.id,
       name: source.printedName,
@@ -179,6 +191,9 @@ export const COMMUNITY_QUEST_PRODUCTION_PROOFS: Readonly<Record<string, Communit
     definitionId,
     runtimeAdapterId: 'c1c1-simple-community-quest-v1',
     requiredPrimitives: [...COMMUNITY_QUEST_RUNTIME_ADAPTERS[definitionId].requiredPrimitives],
+    primitiveProofRequirements: COMMUNITY_QUEST_RUNTIME_ADAPTERS[definitionId].definition.firewoodSetup!.tokens > 0
+      ? { 'C1C1R2-E2E-REST-ALLOCATION': 'QUEST_REST_ALLOCATION_SEMANTICS' }
+      : undefined,
     sourceSupported: true,
     semanticSupported: true,
     stateful: true,
@@ -210,8 +225,12 @@ export function evaluateCommunityQuestCapability(
 ): RuntimeCapabilityRecord {
   const sourceBlocked = source.sourceStatus !== 'source-supported';
   const declaredMissingPrimitives = [...new Set(source.runtimeSupport.missingCapabilities.flatMap(normalizePrimitives))];
-  const missingPrimitives = declaredMissingPrimitives.filter((primitive) => !implementedPrimitives.has(primitive));
   const adapter = adapters[source.id];
+  const requiredPrimitives = [
+    ...declaredMissingPrimitives,
+    ...((adapter?.definition.firewoodSetup?.tokens ?? 0) > 0 ? ['QUEST_REST_ALLOCATION_SEMANTICS'] : []),
+  ];
+  const missingPrimitives = requiredPrimitives.filter((primitive) => !implementedPrimitives.has(primitive));
   const adapterValid = Boolean(adapter && questAdapterSourceSetupErrors(source, adapter).length === 0);
   const proof = proofs[source.id];
   const proofMatches = Boolean(adapterValid && adapter && proof && proof.definitionId === source.id && proof.runtimeAdapterId === adapter.adapterId);
@@ -227,6 +246,7 @@ export function evaluateCommunityQuestCapability(
       registeredProofs,
       adapter?.adapterId,
       proof.requiredPrimitives ?? [],
+      proof.primitiveProofRequirements ?? {},
     )),
   };
   const proofComplete = Boolean(proofMatches && proof.sourceSupported && proof.semanticSupported
@@ -251,7 +271,7 @@ export function evaluateCommunityQuestCapability(
     semanticStatus: source.normalizationStatus,
     objectiveRuntimeSupport: productionStatus,
     specialRuleRuntimeSupport: source.specialRules.length === 0 ? productionStatus : 'ENGINE_PRIMITIVE_MISSING',
-    requiredPrimitives: declaredMissingPrimitives,
+    requiredPrimitives,
     existingPrimitives: source.runtimeSupport.existingCandidates,
     missingPrimitives,
     declaredMissingPrimitives,

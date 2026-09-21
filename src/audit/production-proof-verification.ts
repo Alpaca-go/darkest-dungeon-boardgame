@@ -53,7 +53,9 @@ export function analyzeProductionProofBindings(
           manifest.definitionId,
           registry,
           manifest.runtimeAdapterId,
-          manifest.requiredPrimitives ?? [],
+          manifest.primitiveProofRequirements?.[proofId]
+            ? [manifest.primitiveProofRequirements[proofId]]
+            : manifest.requiredPrimitives ?? [],
         );
         resolutions.push({
           definitionId: manifest.definitionId,

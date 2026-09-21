@@ -80,7 +80,7 @@ export const PRODUCTION_PROOF_REGISTRY: Readonly<Record<string, RegisteredProduc
     runner: 'playwright',
     status: 'active',
     scope: 'primitive',
-    primitiveId: 'QUEST_FIREWOOD_RESTING_POINT_SETUP',
+    primitiveId: 'QUEST_REST_ALLOCATION_SEMANTICS',
   }),
   proof({
     proofId: 'C1BR-PA-ACCURACY-RUNTIME',
@@ -167,8 +167,16 @@ export function allProofsResolve(
   registry: Readonly<Record<string, RegisteredProductionProof>> = PRODUCTION_PROOF_REGISTRY,
   expectedAdapterId?: string,
   expectedPrimitiveIds: readonly string[] = [],
+  expectedPrimitiveByProof: Readonly<Record<string, string>> = {},
 ): boolean {
   return proofIds.length > 0 && proofIds.every((proofId) =>
-    resolveRegisteredProof(proofId, expectedType, definitionId, registry, expectedAdapterId, expectedPrimitiveIds).resolved,
+    resolveRegisteredProof(
+      proofId,
+      expectedType,
+      definitionId,
+      registry,
+      expectedAdapterId,
+      expectedPrimitiveByProof[proofId] ? [expectedPrimitiveByProof[proofId]] : expectedPrimitiveIds,
+    ).resolved,
   );
 }
