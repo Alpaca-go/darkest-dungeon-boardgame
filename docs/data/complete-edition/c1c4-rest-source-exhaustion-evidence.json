@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-4",
+  "retrievalDate": "2026-09-21",
+  "sourceAuditOutcome": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+  "sourceHierarchyEnforced": true,
+  "sourcesChecked": [
+    {
+      "evidenceId": "C1C4:S1:CORE-RULEBOOK-FULL-TEXT",
+      "tier": "S1",
+      "reference": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "status": "EXHAUSTIVELY_SEARCHED",
+      "pageCount": 44
+    },
+    {
+      "evidenceId": "C1C4:S1:DESIGNER-FAQ-UNAVAILABLE",
+      "tier": "S1",
+      "reference": "https://boardgamegeek.com/filepage/250715/darkest-dungeon-board-game-faq-by-the-designers",
+      "status": "LOCATED_ACCESS_UNAVAILABLE",
+      "provenanceManifest": "docs/source/darkest-dungeon-designer-faq/source-provenance.json"
+    },
+    {
+      "evidenceId": "C1C4:S2:ARGYRIOS-ALL-POINTS",
+      "tier": "S2",
+      "reference": "https://boardgamegeek.com/thread/2987684/some-v-quick-questions",
+      "locatorReference": "https://boardgamegeek.com/thread/3574396/firewood-token",
+      "status": "ACCEPTED_WITH_LIMITATION"
+    },
+    {
+      "evidenceId": "C1C4:S5:HOUSE-RULE-REWRITES",
+      "tier": "S5",
+      "reference": "https://boardgamegeek.com/thread/3008011/house-rules-and-clarifications-suggested-rulebook",
+      "status": "REJECTED_FOR_PRODUCTION"
+    }
+  ],
+  "documentsChecked": [
+    {
+      "reference": "docs/DD_EN_COREBOX_RULES.pdf",
+      "pagesChecked": "1-44",
+      "restOrRecoveryTermPages": [1, 2, 4, 10, 11, 12, 15, 16, 17, 18, 20, 21, 24, 25, 26, 27, 30, 31, 32, 33, 34, 35, 36, 38, 40, 42],
+      "semanticPages": [11, 12, 15, 20, 21, 24, 27, 30, 32, 33, 34, 36, 40],
+      "conclusion": "No paragraph defines insufficient Rest recovery capacity or a general spend-without-effect rule. Page 36 adds an eight-point free Rest but does not address excess points."
+    },
+    {
+      "reference": "Darkest Dungeon the Board Game FAQ by the Designers",
+      "pagesChecked": [],
+      "status": "CONTENT_UNAVAILABLE_AFTER_RECORDED_ACQUISITION_ATTEMPTS"
+    }
+  ],
+  "forumThreadsChecked": [
+    {
+      "reference": "https://boardgamegeek.com/thread/2987684/some-v-quick-questions",
+      "designer": "Argyrios Pouggouras",
+      "context": "Question 5 asks about Firewood/Rest timing and Quest Resting Points.",
+      "relevantAnswer": "Rest uses Firewood at a cleared Room and spends all Resting Points provided by the Quest.",
+      "limitation": "Does not discuss excess points or insufficient recovery capacity."
+    },
+    {
+      "reference": "https://boardgamegeek.com/thread/3574396/firewood-token",
+      "status": "SECONDARY_LOCATOR_TO_DESIGNER_REPLY",
+      "limitation": "Community repost is not independently promoted beyond the attributable original reply."
+    },
+    {
+      "reference": "https://boardgamegeek.com/thread/3008011/house-rules-and-clarifications-suggested-rulebook",
+      "status": "COMMUNITY_HOUSE_RULES_ONLY"
+    }
+  ],
+  "faqChecked": {
+    "title": "Darkest Dungeon the Board Game FAQ by the Designers",
+    "listingConfirmed": true,
+    "contentInspected": false,
+    "status": "LOCATED_ACCESS_UNAVAILABLE",
+    "searchIndexTermsChecked": ["Rest", "Resting", "Resting Point", "Resting Points", "Firewood", "recover", "recovery", "Life", "Stress", "heal", "healing", "full health", "spend", "all points", "unused", "remaining", "excess"]
+  },
+  "searchTerms": ["Rest", "Resting", "Resting Point", "Resting Points", "Firewood", "recover", "recovery", "Life", "Stress", "heal", "healing", "full health", "spend", "all points", "unused", "remaining", "excess", "allocate", "may", "must", "up to"],
+  "candidateStatements": [
+    {
+      "evidenceId": "C1C4:S1:CORE-RULEBOOK-p15",
+      "statement": "Players collectively distribute the Quest Resting Point amount and recover one Life or one Stress per point spent; completed Rest discards Firewood.",
+      "classification": "ACCEPTED",
+      "limitation": "Does not define excess handling."
+    },
+    {
+      "evidenceId": "C1C4:S2:ARGYRIOS-ALL-POINTS",
+      "statement": "All Resting Points supplied by the Quest are spent when Resting.",
+      "classification": "ACCEPTED",
+      "limitation": "Does not say whether spending requires a recovery effect."
+    },
+    {
+      "evidenceId": "C1C4:S1:CORE-RULEBOOK-p36",
+      "statement": "An Excavation Site grants a free Rest as if the party had eight Resting Points without consuming standard Firewood.",
+      "classification": "ACCEPTED_CONTEXT_ONLY",
+      "limitation": "No insufficient-capacity rule is supplied."
+    }
+  ],
+  "rejectedStatements": [
+    {
+      "reference": "https://boardgamegeek.com/thread/3008011/house-rules-and-clarifications-suggested-rulebook",
+      "reason": "HOUSE_RULE"
+    },
+    {
+      "reference": "https://boardgamegeek.com/thread/3574396/firewood-token community interpretations",
+      "reason": "COMMUNITY_INTERPRETATION_ONLY"
+    },
+    {
+      "reference": "search-result descriptions of the inaccessible designer FAQ",
+      "reason": "OUT_OF_CONTEXT"
+    },
+    {
+      "reference": "Darkest Dungeon video-game camping behavior",
+      "reason": "VIDEO_GAME_RULE"
+    },
+    {
+      "reference": "Any proposed waste-excess, deny-rest, partial-spend, no-effect-spend, or reduced-budget behavior",
+      "reason": "AMBIGUOUS"
+    }
+  ],
+  "acceptedStatements": ["C1C4:S1:CORE-RULEBOOK-p15", "C1C4:S1:CORE-RULEBOOK-p36", "C1C4:S2:ARGYRIOS-ALL-POINTS"],
+  "unresolvedQuestions": ["Q2", "Q3", "Q4", "Q5", "Q6", "Q8", "Q9"],
+  "insufficientRecoveryCapacity": {
+    "status": "SOURCE_UNRESOLVED",
+    "rule": "SOURCE_UNRESOLVED",
+    "sourceEvidenceIds": ["C1C4:S1:CORE-RULEBOOK-FULL-TEXT", "C1C4:S1:DESIGNER-FAQ-UNAVAILABLE", "C1C4:S2:ARGYRIOS-ALL-POINTS"]
+  }
+}

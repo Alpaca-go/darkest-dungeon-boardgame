@@ -41,10 +41,12 @@ export const C1C3_MULTI_PRIMITIVE_QUEST_IDS = [
   'community-quest-warrens-lvl1-family-trinkets',
 ] as const;
 
-function proof(entry: RegisteredProductionProof): RegisteredProductionProof {
+export function proof(entry: RegisteredProductionProof): RegisteredProductionProof {
+  if (entry.proofType === 'e2e' && entry.proofSurface === undefined) {
+    throw new Error(`${entry.proofId}: e2e proofSurface must be declared explicitly`);
+  }
   return Object.freeze({
     ...entry,
-    proofSurface: entry.proofSurface ?? (entry.proofType === 'e2e' ? 'production-ui' : undefined),
     definitionIds: Object.freeze([...entry.definitionIds]) as unknown as string[],
   });
 }
@@ -100,6 +102,7 @@ export const PRODUCTION_PROOF_REGISTRY: Readonly<Record<string, RegisteredProduc
     status: 'active',
     scope: 'adapter',
     adapterId: 'c1c1-simple-community-quest-v1',
+    proofSurface: 'production-ui',
   }),
   proof({
     proofId: 'C1C1R2-E2E-REST-ALLOCATION',
@@ -110,6 +113,7 @@ export const PRODUCTION_PROOF_REGISTRY: Readonly<Record<string, RegisteredProduc
     status: 'active',
     scope: 'primitive',
     primitiveId: 'QUEST_REST_ALLOCATION_SEMANTICS',
+    proofSurface: 'production-ui',
   }),
   proof({
     proofId: 'C1C2-ADAPTER-RUNTIME',
@@ -158,7 +162,7 @@ export const PRODUCTION_PROOF_REGISTRY: Readonly<Record<string, RegisteredProduc
     definitionIds: [...C1C2_SPECIAL_RULE_QUEST_IDS],
     proofType: 'e2e',
     testFile: 'e2e/phase11a4-c1c2-quest-special-rule.spec.ts',
-    runner: 'playwright', status: 'active', scope: 'definition',
+    runner: 'playwright', status: 'active', scope: 'definition', proofSurface: 'production-ui',
   }),
   proof({
     proofId: 'C1BR-PA-ACCURACY-RUNTIME',
@@ -207,6 +211,7 @@ export const PRODUCTION_PROOF_REGISTRY: Readonly<Record<string, RegisteredProduc
     testFile: 'e2e/phase11a4-c1br-community-trinket-production.spec.ts',
     runner: 'playwright',
     status: 'active',
+    proofSurface: 'production-ui',
   }),
   proof({
     proofId: 'C1BR-E2E-CRITICAL',
@@ -215,6 +220,7 @@ export const PRODUCTION_PROOF_REGISTRY: Readonly<Record<string, RegisteredProduc
     testFile: 'e2e/phase11a4-c1br-community-trinket-production.spec.ts',
     runner: 'playwright',
     status: 'active',
+    proofSurface: 'production-ui',
   }),
 ].map((entry) => [entry.proofId, entry])));
 
