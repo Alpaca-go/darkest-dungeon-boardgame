@@ -11,6 +11,7 @@ import TopResourceBar from '../components/dungeon/TopResourceBar';
 import EventLog from '../components/dungeon/EventLog';
 import HeroCard from '../components/hero/HeroCard';
 import TrinketSlots from '../components/trinkets/TrinketSlots';
+import type { RestAllocationEntry, RestRecoveryResource } from '../game-engine/quests/quest-runtime';
 
 export default function DungeonExplorePage() {
   const navigate = useNavigate();
@@ -19,8 +20,11 @@ export default function DungeonExplorePage() {
   const moveToRoom = useGameStore((s) => s.moveToRoom);
   const leaveDungeon = useGameStore((s) => s.leaveDungeon);
   const interactWithCurio = useGameStore((s) => s.interactWithCurio);
-  const restAtCamp = useGameStore((s) => s.restAtCamp);
+  const commitRestAtCamp = useGameStore((s) => s.commitRestAtCamp);
   const [confirmLeave, setConfirmLeave] = useState(false);
+  const [restAllocationOpen, setRestAllocationOpen] = useState(false);
+  const [restDraft, setRestDraft] = useState<Record<string, { life: number; stress: number }>>({});
+  const [restError, setRestError] = useState<string | null>(null);
 
   const gamePhase = campaign?.gamePhase;
   useEffect(() => {
@@ -44,6 +48,41 @@ export default function DungeonExplorePage() {
   const meta = current ? getRoomMeta(current.type) : undefined;
   const scoutable = canScout(dungeon);
   const curio = getCurioById(current?.curioId);
+  const restBudget = campaign.questRuntimeState?.restingPointsRemaining ?? 0;
+  const restSpent = Object.values(restDraft).reduce((sum, entry) => sum + entry.life + entry.stress, 0);
+  const restRemaining = restBudget - restSpent;
+  const openRestAllocation = () => {
+    setRestDraft({});
+    setRestError(null);
+    setRestAllocationOpen(true);
+  };
+  const closeRestAllocation = () => {
+    setRestDraft({});
+    setRestError(null);
+    setRestAllocationOpen(false);
+  };
+  const changeRestPoint = (heroId: string, resource: RestRecoveryResource, delta: -1 | 1) => {
+    const hero = campaign.heroes.find((entry) => entry.instanceId === heroId);
+    if (!hero || hero.dead || !hero.isAlive) return;
+    const currentDraft = restDraft[heroId] ?? { life: 0, stress: 0 };
+    const recoverable = resource === 'life' ? hero.wounds : hero.stress;
+    const next = currentDraft[resource] + delta;
+    if (next < 0 || next > recoverable || (delta > 0 && restRemaining <= 0)) return;
+    setRestDraft({ ...restDraft, [heroId]: { ...currentDraft, [resource]: next } });
+    setRestError(null);
+  };
+  const confirmRestAllocation = () => {
+    const allocations: RestAllocationEntry[] = Object.entries(restDraft).flatMap(([heroId, entry]) => ([
+      ...(entry.life > 0 ? [{ heroId, resource: 'life' as const, points: entry.life }] : []),
+      ...(entry.stress > 0 ? [{ heroId, resource: 'stress' as const, points: entry.stress }] : []),
+    ]));
+    const error = commitRestAtCamp({ allocations });
+    if (error) {
+      setRestError(error);
+      return;
+    }
+    closeRestAllocation();
+  };
 
   return (
     <div className="p-4 max-w-6xl mx-auto flex flex-col gap-4">
@@ -86,8 +125,10 @@ export default function DungeonExplorePage() {
           <button
             type="button"
             data-testid="rest-at-camp"
-            onClick={restAtCamp}
-            disabled={current?.status !== 'cleared' || (campaign.questRuntimeState.firewoodTokensRemaining ?? 0) <= 0}
+            onClick={openRestAllocation}
+            disabled={current?.status !== 'cleared'
+              || (campaign.questRuntimeState.firewoodTokensRemaining ?? 0) <= 0
+              || restBudget <= 0}
             className="px-3 py-1.5 rounded border border-dd-border bg-dd-panel2 text-sm text-dd-text disabled:opacity-40"
           >
             Rest at Camp
@@ -206,6 +247,64 @@ export default function DungeonExplorePage() {
       </div>
 
       <EventLog log={campaign.log} />
+
+      {restAllocationOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="rest-allocation-title"
+          data-testid="rest-allocation-modal"
+        >
+          <div className="rounded-lg border border-dd-border bg-dd-panel p-5 w-[620px] max-w-[94vw] max-h-[90vh] overflow-y-auto flex flex-col gap-4">
+            <div>
+              <h3 id="rest-allocation-title" className="text-base font-bold text-dd-text">Allocate Resting Points</h3>
+              <p className="text-xs text-dd-muted mt-1">
+                Choose how the party spends its Resting Points. Each point recovers 1 Life or 1 Stress.
+              </p>
+            </div>
+            <div className="grid grid-cols-3 gap-2 text-sm">
+              <div className="rounded bg-dd-panel2 p-2">Firewood: <strong data-testid="rest-firewood">{campaign.questRuntimeState?.firewoodTokensRemaining ?? 0}</strong></div>
+              <div className="rounded bg-dd-panel2 p-2">Used: <strong data-testid="rest-points-used">{restSpent}</strong></div>
+              <div className="rounded bg-dd-panel2 p-2">Remaining: <strong data-testid="rest-points-remaining">{restRemaining}</strong></div>
+            </div>
+            <div className="flex flex-col gap-2">
+              {campaign.heroes.map((hero) => {
+                const chosen = restDraft[hero.instanceId] ?? { life: 0, stress: 0 };
+                const unavailable = hero.dead || !hero.isAlive;
+                return (
+                  <div key={hero.instanceId} className="rounded border border-dd-border bg-dd-panel2 p-3" data-testid={`rest-hero-${hero.instanceId}`}>
+                    <div className="flex items-center justify-between gap-2">
+                      <strong className="text-sm text-dd-text">{hero.name}</strong>
+                      <span className="text-xs text-dd-muted">Life {Math.max(0, hero.maxLife - hero.wounds)}/{hero.maxLife} · Wounds {hero.wounds} · Stress {hero.stress}</span>
+                    </div>
+                    <div className="mt-2 grid grid-cols-2 gap-3">
+                      {(['life', 'stress'] as const).map((resource) => {
+                        const maximum = resource === 'life' ? hero.wounds : hero.stress;
+                        return (
+                          <div key={resource} className="flex items-center justify-between rounded bg-dd-panel px-2 py-1.5">
+                            <span className="text-xs text-dd-text">Recover {resource === 'life' ? 'Life' : 'Stress'}</span>
+                            <div className="flex items-center gap-2">
+                              <button type="button" data-testid={`rest-${hero.instanceId}-${resource}-minus`} onClick={() => changeRestPoint(hero.instanceId, resource, -1)} disabled={unavailable || chosen[resource] <= 0} className="w-7 h-7 rounded border border-dd-border disabled:opacity-30">−</button>
+                              <span className="w-5 text-center text-sm" data-testid={`rest-${hero.instanceId}-${resource}-points`}>{chosen[resource]}</span>
+                              <button type="button" data-testid={`rest-${hero.instanceId}-${resource}-plus`} onClick={() => changeRestPoint(hero.instanceId, resource, 1)} disabled={unavailable || restRemaining <= 0 || chosen[resource] >= maximum} className="w-7 h-7 rounded border border-dd-border disabled:opacity-30">+</button>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            {restError && <p className="text-xs text-red-300" role="alert" data-testid="rest-allocation-error">{restError}</p>}
+            <div className="flex justify-end gap-2">
+              <button type="button" onClick={closeRestAllocation} data-testid="rest-allocation-cancel" className="px-3 py-1.5 rounded border border-dd-border bg-dd-panel2 text-sm text-dd-text">Cancel</button>
+              <button type="button" onClick={confirmRestAllocation} disabled={restRemaining < 0} data-testid="rest-allocation-confirm" className="px-3 py-1.5 rounded bg-dd-warn text-black font-semibold text-sm disabled:opacity-40">Confirm Rest</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {confirmLeave && (
         <div
