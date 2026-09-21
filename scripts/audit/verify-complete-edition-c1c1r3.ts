@@ -15,14 +15,18 @@ import {
   evidencePublicationErrors,
   type ProofExecutionResult,
 } from '../../src/audit/production-proof-verification';
-import { semanticContractAcceptanceErrors } from '../../src/audit/rest-semantic-contract';
+import {
+  REST_SEMANTIC_CONTRACT,
+  deriveUnresolvedRestSemantics,
+  semanticContractAcceptanceErrors,
+} from '../../src/audit/rest-semantic-contract';
 import { questReadinessInvariantErrors } from '../../src/audit/quest-readiness-invariants';
 
 const root = process.cwd();
-const baselineHead = '8bf2ab674e1dec8fde67e11e180b66ccb0b8f34a';
-const evidencePath = resolve(root, 'docs/data/complete-edition/c1c1r2-source-backed-rest-allocation-evidence.json');
-const reportPath = resolve(root, 'docs/reports/complete-edition/c1c1r2-source-backed-rest-allocation-report.md');
-const sourceEvidencePath = resolve(root, 'docs/data/complete-edition/c1c1r2-rest-rule-evidence.json');
+const baselineHead = 'a74ce9ef5664c532af16e26e7b8f8815671631e1';
+const evidencePath = resolve(root, 'docs/data/complete-edition/c1c1r3-rest-budget-semantic-closure-evidence.json');
+const reportPath = resolve(root, 'docs/reports/complete-edition/c1c1r3-rest-budget-semantic-closure-report.md');
+const budgetEvidencePath = resolve(root, 'docs/data/complete-edition/c1c1r3-rest-budget-rule-evidence.json');
 const rulebookPath = resolve(root, 'docs/DD_EN_COREBOX_RULES.pdf');
 const expectedRulebookHash = '9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae';
 
@@ -58,35 +62,56 @@ const protectedPaths = [
   'docs/data/complete-edition/c1a-rulebook-evidence.json',
   'docs/data/complete-edition/c1a-source-review-lock.json',
   'docs/data/complete-edition/c1ar-semantic-review-lock.json',
+  'docs/data/complete-edition/c1c1-core-quest-foundation-evidence.json',
+  'docs/data/complete-edition/c1c1r-firewood-real-quest-flow-evidence.json',
+  'docs/data/complete-edition/c1c1r2-source-backed-rest-allocation-evidence.json',
+  'docs/reports/complete-edition/c1c1r2-source-backed-rest-allocation-report.md',
 ];
 const freeze = run('git', ['diff', '--quiet', baselineHead, '--', ...protectedPaths]);
-if (freeze.exitCode !== 0) throw new Error('Source / C1A / C1A-R semantic freeze changed');
+if (freeze.exitCode !== 0) throw new Error('Historical source/evidence freeze changed');
 
 const actualRulebookHash = createHash('sha256').update(readFileSync(rulebookPath)).digest('hex');
-const sourceEvidence = JSON.parse(readFileSync(sourceEvidencePath, 'utf8')) as {
-  sourceSha256: string;
-  evidence: Array<{ evidenceId: string; facts: string[] }>;
+const budgetEvidence = JSON.parse(readFileSync(budgetEvidencePath, 'utf8')) as {
+  sources: Array<{ sourceId: string; tier: string; author?: string; originalReference?: string; locatorReference?: string; limitations?: string }>;
+  questions: Record<string, { status: string; answer: string }>;
+  productionConclusion: string;
 };
-if (actualRulebookHash !== expectedRulebookHash || sourceEvidence.sourceSha256 !== actualRulebookHash) {
-  throw new Error('Rest rule evidence is not bound to the frozen Core Rulebook hash');
+const requiredEvidenceIds = ['C1C1R3:S1:p11,p15,p43', 'C1C1R3:S2:ARGYRIS-ALL-POINTS'];
+const presentEvidenceIds = new Set(budgetEvidence.sources.map((source) => source.sourceId));
+if (actualRulebookHash !== expectedRulebookHash || requiredEvidenceIds.some((id) => !presentEvidenceIds.has(id))) {
+  throw new Error('Rest budget evidence is not bound to the required S1/S2 sources');
 }
-if (!sourceEvidence.evidence.some((entry) => entry.evidenceId === 'C1C1R2:S4:p15')
-  || semanticContractAcceptanceErrors().length > 0) {
-  throw new Error('Rest source semantic contract is incomplete or unresolved');
+const designerEvidence = budgetEvidence.sources.find((source) => source.sourceId === 'C1C1R3:S2:ARGYRIS-ALL-POINTS');
+if (designerEvidence?.tier !== 'S2_DESIGNER_CLARIFICATION'
+  || designerEvidence.author !== 'Argyris Poungouras'
+  || !designerEvidence.originalReference
+  || !designerEvidence.locatorReference
+  || !designerEvidence.limitations) {
+  throw new Error('Designer clarification attribution is incomplete');
+}
+const budgetStatus = (REST_SEMANTIC_CONTRACT.budgetConsumption as { status: string }).status;
+const zeroPointStatus = (REST_SEMANTIC_CONTRACT.zeroPointRest as { status: string }).status;
+const insufficientStatus = (REST_SEMANTIC_CONTRACT.insufficientRecoveryCapacity as { status: string }).status;
+const unresolvedSemantics = deriveUnresolvedRestSemantics();
+const semanticErrors = semanticContractAcceptanceErrors();
+if (budgetStatus !== 'SOURCE_EXPLICIT'
+  || zeroPointStatus !== 'SOURCE_DERIVED'
+  || insufficientStatus !== 'SOURCE_UNRESOLVED'
+  || unresolvedSemantics.join(',') !== 'insufficientRecoveryCapacity'
+  || semanticErrors.length !== 1
+  || budgetEvidence.productionConclusion !== 'FAIL_CLOSE_FIREWOOD_QUESTS_UNTIL_INSUFFICIENT_CAPACITY_SEMANTICS_ARE_RESOLVED') {
+  throw new Error('Rest semantic fail-close contract is inconsistent');
 }
 
 const runtimeSource = readFileSync(resolve(root, 'src/game-engine/quests/quest-runtime.ts'), 'utf8');
-const sourceGuardPatterns = [
-  /round[- ]robin/i,
-  /stress[- ]first/i,
-  /for\s*\(let point[\s\S]*hero\.stress\s*>\s*0[\s\S]*hero\.wounds/,
-  /export function restAtCamp\s*\(/,
-];
+const sourceGuardPatterns = [/round[- ]robin/i, /stress[- ]first/i, /export function restAtCamp\s*\(/];
 const sourceGuardViolations = sourceGuardPatterns.filter((pattern) => pattern.test(runtimeSource)).map((pattern) => pattern.source);
-if (sourceGuardViolations.length) throw new Error(`Rest source guard failed: ${sourceGuardViolations.join(', ')}`);
+if (!runtimeSource.includes('REST_ALLOCATION_INCOMPLETE_BUDGET') || sourceGuardViolations.length) {
+  throw new Error(`Rest runtime source guard failed: ${sourceGuardViolations.join(', ')}`);
+}
 
-const restE2ePath = resolve(root, 'e2e/phase11a4-c1c1r2-rest-allocation.spec.ts');
-const restE2eSource = readFileSync(restE2ePath, 'utf8');
+const restE2eSource = readFileSync(resolve(root, 'e2e/phase11a4-c1c1r2-rest-allocation.spec.ts'), 'utf8');
+const fixtureSource = readFileSync(resolve(root, 'src/test-support/c1c1r3-rest-e2e-fixture.ts'), 'utf8');
 const e2eGuardPatterns = [
   /store\.setState/,
   /recordQuestQualificationEvent/,
@@ -95,7 +120,12 @@ const e2eGuardPatterns = [
   /\.wounds\s*=(?!=)/,
 ];
 const e2eGuardViolations = e2eGuardPatterns.filter((pattern) => pattern.test(restE2eSource)).map((pattern) => pattern.source);
-if (e2eGuardViolations.length) throw new Error(`Rest E2E source guard failed: ${e2eGuardViolations.join(', ')}`);
+if (e2eGuardViolations.length
+  || !fixtureSource.includes('scoutDungeon(campaign)')
+  || !fixtureSource.includes("moveToRoom(campaign, 'A')")
+  || /firewoodTokensRemaining\s*:|restingPointsRemaining\s*:|heroes\s*:\s*[^\n]*map/.test(fixtureSource)) {
+  throw new Error(`Rest E2E injection guard failed: ${e2eGuardViolations.join(', ')}`);
+}
 
 const referencedProofIds = new Set(Object.values(COMMUNITY_QUEST_PRODUCTION_PROOFS).flatMap((manifest) => [
   ...manifest.productionTests,
@@ -108,13 +138,16 @@ const binding = analyzeProductionProofBindings(COMMUNITY_QUEST_PRODUCTION_PROOFS
 const bindingErrors = evidencePublicationErrors(binding, []).filter((error) => !error.includes(' execution missing'));
 if (bindingErrors.length) throw new Error(`Quest proof binding failed: ${bindingErrors.join('; ')}`);
 const restProof = questRegistry['C1C1R2-E2E-REST-ALLOCATION'];
-if (restProof?.scope !== 'primitive' || restProof.primitiveId !== 'QUEST_REST_ALLOCATION_SEMANTICS' || restProof.definitionIds.length !== 0) {
-  throw new Error('Rest E2E proof is not scoped to the Rest allocation semantic primitive');
+if (restProof?.scope !== 'primitive'
+  || restProof.primitiveId !== 'QUEST_REST_ALLOCATION_SEMANTICS'
+  || restProof.definitionIds.length !== 0) {
+  throw new Error('Rest E2E proof has the wrong primitive scope');
 }
 
 const proofTests = run(process.execPath, [
   resolve(root, 'node_modules/vitest/vitest.mjs'),
   'run',
+  'src/audit/c1c1r3-rest-budget-semantics.test.ts',
   'src/game-engine/c1c1r2-rest-allocation.test.ts',
   'src/game-engine/c1c1r-firewood-real-flow.test.ts',
   'src/game-engine/c1c1-community-quest-production.test.ts',
@@ -129,7 +162,7 @@ const commandShell = process.env.ComSpec ?? 'cmd.exe';
 const regression = run(commandShell, ['/d', '/s', '/c', 'npm test']);
 const build = run(commandShell, ['/d', '/s', '/c', 'npm run build']);
 if (proofTests.exitCode !== 0 || proofJson.success !== true || (proofJson.numPendingTests ?? 0) > 0 || (proofJson.numTodoTests ?? 0) > 0) {
-  throw new Error('Rest allocation proof suite failed or skipped');
+  throw new Error('Rest budget proof suite failed or skipped');
 }
 if (e2e.exitCode !== 0) throw new Error(`Quest/Rest Playwright failed: ${e2e.stderr || e2e.stdout.slice(-2000)}`);
 if (regression.exitCode !== 0) throw new Error(`Regression failed: ${regression.stderr || regression.stdout.slice(-2000)}`);
@@ -148,61 +181,70 @@ const publicationErrors = evidencePublicationErrors(binding, executions);
 if (publicationErrors.length) throw new Error(`Evidence publication refused: ${publicationErrors.join('; ')}`);
 
 const ready = COMMUNITY_QUEST_CAPABILITIES.filter((entry) => entry.productionStatus === 'PRODUCTION_READY');
-const trinketReady = COMMUNITY_TRINKET_CAPABILITIES.filter((entry) => entry.productionStatus === 'PRODUCTION_READY');
+const blocked = COMMUNITY_QUEST_CAPABILITIES.filter((entry) => entry.productionStatus !== 'PRODUCTION_READY');
 const readinessErrors = questReadinessInvariantErrors(COMMUNITY_QUEST_CAPABILITIES, COMMUNITY_SOURCE_QUESTS);
 if (readinessErrors.length) throw new Error(`Quest readiness invariant failed: ${readinessErrors.join('; ')}`);
+const trinketReady = COMMUNITY_TRINKET_CAPABILITIES.filter((entry) => entry.productionStatus === 'PRODUCTION_READY');
 if (trinketReady.length !== 2) throw new Error(`Trinket readiness changed: ${trinketReady.length}`);
-const specialRuleIds = new Set(COMMUNITY_SOURCE_QUESTS.filter((entry) => entry.specialRules.length > 0).map((entry) => entry.id));
-if (ready.some((entry) => specialRuleIds.has(entry.definitionId))) throw new Error('Special-rule Quest became Production Ready');
+const crimsonSimple = COMMUNITY_SOURCE_QUESTS.filter((entry) => entry.contentSet === 'crimson-court' && entry.specialRules.length === 0);
+if (crimsonSimple.some((source) => COMMUNITY_QUEST_CAPABILITIES.find((entry) => entry.definitionId === source.id)?.productionStatus !== 'ADAPTER_REQUIRED')) {
+  throw new Error('Simple Crimson Court Quest status changed');
+}
 
 const adapters = Object.values(COMMUNITY_QUEST_RUNTIME_ADAPTERS);
 const firewoodQuestIds = adapters.filter((adapter) => (adapter.definition.firewoodSetup?.tokens ?? 0) > 0).map((adapter) => adapter.definitionId);
 const zeroFirewoodQuestIds = adapters.filter((adapter) => (adapter.definition.firewoodSetup?.tokens ?? 0) === 0).map((adapter) => adapter.definitionId);
+if (firewoodQuestIds.some((id) => ready.some((entry) => entry.definitionId === id))) throw new Error('Unresolved Firewood Quest became Ready');
+if (zeroFirewoodQuestIds.some((id) => !ready.some((entry) => entry.definitionId === id))) throw new Error('Zero-Firewood Quest was over-blocked');
+
 const verifiedImplementationHead = git('rev-parse', 'HEAD');
 const verifiedImplementationTree = git('write-tree');
 const evidence = {
   schemaVersion: 1,
-  phase: '11A.4-C1C-1R2',
+  phase: '11A.4-C1C-1R3',
   generatedAt: new Date().toISOString(),
   verificationScope: 'LOCAL MEASURED VERIFICATION',
   baselineHead,
   verifiedImplementationHead,
   verifiedImplementationTree,
   evidencePublicationHead: null,
-  evidencePublicationHeadReason: 'A commit cannot contain its own hash; the publication commit is reported by the handoff after these generated files are committed.',
+  evidencePublicationHeadReason: 'A commit cannot contain its own hash; the publication commit is reported by the handoff.',
   sourceRuleEvidence: {
-    path: 'docs/data/complete-edition/c1c1r2-rest-rule-evidence.json',
-    source: 'docs/DD_EN_COREBOX_RULES.pdf',
-    sha256: actualRulebookHash,
-    pages: [11, 15],
+    path: 'docs/data/complete-edition/c1c1r3-rest-budget-rule-evidence.json',
+    rulebookSha256: actualRulebookHash,
+    designerClarification: designerEvidence,
   },
-  restAllocationSemanticStatus: 'SOURCE_BACKED',
-  restPrimitiveStatus: 'IMPLEMENTED_AND_PRODUCTION_PROVEN',
+  budgetConsumptionSemanticStatus: budgetStatus,
+  zeroPointRestSemanticStatus: zeroPointStatus,
+  insufficientCapacitySemanticStatus: insufficientStatus,
+  unresolvedProductionSemantics: unresolvedSemantics,
+  restAllocationSemanticStatus: 'SOURCE_UNRESOLVED_FAIL_CLOSED',
+  implementedRestPrimitives: ['QUEST_FIREWOOD_RESTING_POINT_SETUP'],
+  blockedRestPrimitives: ['QUEST_REST_ALLOCATION_SEMANTICS'],
   firewoodQuestIds,
   zeroFirewoodQuestIds,
   questReadyBefore: 7,
   questReadyAfter: ready.length,
+  readyCountIsMeasured: true,
   readyQuestIds: ready.map((entry) => entry.definitionId),
+  blockedQuestIds: blocked.map((entry) => entry.definitionId),
   restE2EProof: {
     proofId: restProof.proofId,
     scope: restProof.scope,
     primitiveId: restProof.primitiveId,
-    questIdExecuted: 'community-quest-ruins-lvl1-scout-ahead',
-    testFile: restProof.testFile,
-  },
-  questGameplayE2EProof: {
-    proofId: 'C1C1R-E2E-SIMPLE-QUEST-ADAPTER',
-    scope: 'adapter',
-    questIdExecuted: 'community-quest-warrens-lvl1-explore-the-sewers',
+    status: executions.find((entry) => entry.proofId === restProof.proofId)?.status,
+    semanticClosureEffect: 'Does not override SOURCE_UNRESOLVED insufficient-capacity semantics',
+    fixture: 'Schema-restored save generated by production Scout and move commands',
   },
   proofBindings: binding.resolutions,
   proofExecutionResults: executions,
   actualExitCodes: {
-    frozenSourceTruth: freeze.exitCode,
-    sourceEvidenceContract: 0,
-    restSourceGuard: sourceGuardViolations.length,
-    restE2eSourceGuard: e2eGuardViolations.length,
-    restAllocationAndQuestProofs: proofTests.exitCode,
+    historicalSemanticFreeze: freeze.exitCode,
+    restBudgetSourceEvidence: 0,
+    semanticContractValidation: 0,
+    restRuntimeSourceGuard: sourceGuardViolations.length,
+    restE2eInjectionGuard: e2eGuardViolations.length,
+    restBudgetAndQuestProofs: proofTests.exitCode,
     questAndRestPlaywright: e2e.exitCode,
     fullRegression: regression.exitCode,
     build: build.exitCode,
@@ -211,16 +253,16 @@ const evidence = {
 };
 writeFileSync(evidencePath, `${JSON.stringify(evidence, null, 2)}\n`);
 
-const report = `# C1C-1R2 Source-backed Rest Allocation\n\n`
+const report = `# C1C-1R3 Rest Budget Semantic Closure\n\n`
   + `Verification scope: **${evidence.verificationScope}**\n\n`
-  + `The verifier measured implementation HEAD \`${verifiedImplementationHead}\` and Git index tree \`${verifiedImplementationTree}\`. The evidence publication commit is intentionally not self-recorded; use the branch HEAD in the handoff.\n\n`
-  + `## Source rule\n\n`
-  + `Core Rulebook pages 11 and 15 are bound by SHA-256 \`${actualRulebookHash}\`. The rules explicitly give the party the printed Resting Point amount, require a cleared Room and party agreement, let players distribute points, convert each spent point into 1 Life or 1 Stress, and discard Firewood after Rest.\n\n`
-  + `## Outcome\n\n`
-  + `Automatic target selection, stress-first recovery, and round-robin allocation are removed. Players edit an unpersisted draft, Cancel without mutation, or atomically commit a validated allocation. Invalid entries leave Heroes, Firewood, and Rest counters unchanged.\n\n`
-  + `Quest Production Ready remains **${ready.length} / ${COMMUNITY_QUEST_CAPABILITIES.length}**; Trinket Production Ready remains **${trinketReady.length} / ${COMMUNITY_TRINKET_CAPABILITIES.length}**. No special-rule Quest became ready.\n\n`
+  + `Measured implementation HEAD \`${verifiedImplementationHead}\` and tree \`${verifiedImplementationTree}\`.\n\n`
+  + `## Source outcome\n\n`
+  + `Core rules plus the attributed designer clarification explicitly require spending all supplied Resting Points. Voluntary partial and zero-point Rest are rejected. The sources do not define what happens when total recoverable Life plus Stress is below the printed budget, so \`QUEST_REST_ALLOCATION_SEMANTICS\` remains fail-closed.\n\n`
+  + `## Measured readiness\n\n`
+  + `Quest Production Ready is **${ready.length} / ${COMMUNITY_QUEST_CAPABILITIES.length}**, measured without a target-count assertion. The five Firewood Quests are blocked by the unresolved interaction primitive; the two 0/0 Quests remain Ready. Trinket Production Ready remains **${trinketReady.length} / ${COMMUNITY_TRINKET_CAPABILITIES.length}**.\n\n`
+  + `Ready Quest IDs:\n\n${ready.map((entry) => `- \`${entry.definitionId}\``).join('\n')}\n\n`
   + `## Browser proof\n\n`
-  + `\`C1C1R2-E2E-REST-ALLOCATION\` is primitive-scoped to \`QUEST_FIREWOOD_RESTING_POINT_SETUP\` and executes \`community-quest-ruins-lvl1-scout-ahead\` through production UI. It creates recoverable Stress through Scout, clears a real Room, proves Cancel unchanged, commits exactly one selected recovery, observes Firewood 1 → 0, and verifies save/reload. The existing Explore the Sewers Quest/XP E2E also remains green.\n\n`
+  + `The Rest E2E allocates the complete 8-point budget through eight player clicks, rejects a partial draft, consumes Firewood, and verifies reload. It proves the implemented UI/command path but does not override the unresolved insufficient-capacity rule. The existing Explore the Sewers gameplay/XP E2E remains green.\n\n`
   + `## Measured commands\n\n`
   + Object.entries(evidence.actualExitCodes).map(([name, code]) => `- ${name}: exit ${code}`).join('\n')
   + `\n\nC1C-2 is outside this verification scope.\n`;
@@ -232,5 +274,6 @@ console.log(JSON.stringify({
   verifiedImplementationHead,
   verifiedImplementationTree,
   questReadyAfter: ready.length,
+  readyCountIsMeasured: true,
   actualExitCodes: evidence.actualExitCodes,
 }, null, 2));
