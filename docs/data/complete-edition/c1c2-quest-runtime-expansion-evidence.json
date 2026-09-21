@@ -1,0 +1,637 @@
+{
+  "schemaVersion": 2,
+  "phase": "11A.4-C1C-2",
+  "measuredAt": "2026-09-21T06:03:14.322Z",
+  "baselineHead": "a51bfeaf30c5be187ffc7d54e1dd978b0d9b8be4",
+  "verifiedImplementationHead": "f0ac03a4709272f848b058edc1092d7f651d692a",
+  "verifiedImplementationTree": "917e2db07d8193065999823d3f1c8021b8ee3d2e",
+  "historicalEvidenceHashes": {
+    "docs/data/complete-edition/c1a-asset-manifest.json": "10e18db2e14c6b1c482a199a92313bb630f5f65871d20d37584b8f3b8d5edc80",
+    "docs/data/complete-edition/c1a-literal-review.json": "d44f1a72423be67d544cc211bd58fb1d29880746e28d5fed62a96296585c9105",
+    "docs/data/complete-edition/c1a-logical-identities.json": "8cb5bbb3f0b3bd4351b07e470fa8f5c7e52eaa13c3aec632e7211b1ae6f2c80d",
+    "docs/data/complete-edition/c1a-rulebook-evidence.json": "40dabb9c9c0a5781062b3e59ef66806f86bdb78e0fba39a801a44346eba22fe6",
+    "docs/data/complete-edition/c1a-source-review-lock.json": "d8fa9c8418930897fa2d1f6ead02a095f1262e5ff5f4187d3ea7a39c3e38b142",
+    "docs/data/complete-edition/c1ar-semantic-review-lock.json": "6c78a350d67bfbbb9849a2aa5ad75bc0500601acbf59debcc7162c4db3a7f101",
+    "docs/data/complete-edition/c1b-production-integration-evidence.json": "041b977c0752fd7654abb276c259082a1e3ee5976b4cf5f4829836756cb5165a",
+    "docs/data/complete-edition/c1b-runtime-capability-matrix.json": "3bf842f747ed60a710a77dce498c10471fd2b426754d301cad86e526b9e2ca44",
+    "docs/data/complete-edition/c1b-runtime-primitive-backlog.json": "463a4b7969959a61844b148bc1f12b16188c2a5fa2ddd82af1c67b951a49c53b",
+    "docs/data/complete-edition/c1br-production-acceptance-evidence.json": "be6326b702a327b4256dea7bcb605f30b43e06162d7d663b315edea259b7287d",
+    "docs/data/complete-edition/c1br-production-capability-matrix.json": "197af8098a29d957b3dfea647a40f5cfc53685d409808584c20cd00713e2deb5",
+    "docs/data/complete-edition/c1br2-machine-verifiable-production-proof-evidence.json": "f61c6aa4c37eb5006053df32f1cc15afc4c01dbdc99938630c0f635d5dc6a3af",
+    "docs/data/complete-edition/c1c1-core-quest-foundation-evidence.json": "481d8d9cff8393d69f2647de1b389bc34ddcb3d44d5b4825fe767b54b537327d",
+    "docs/data/complete-edition/c1c1-runtime-capability-baseline.json": "5500d813e5ac8f642a07f1f2b48b14d4fca11e5c7c958eb93f226499aa93a83b",
+    "docs/data/complete-edition/c1c1-runtime-capability-matrix.json": "882b96eb1d13601d7302345acfd036cf40765e8a64a39e747483c05a1e4e24c6",
+    "docs/data/complete-edition/c1c1-runtime-primitive-backlog.json": "3ef3095a14857c384febb16a9a3ca60a5a97bd64ae0f29442521247d3bbc77c1",
+    "docs/data/complete-edition/c1c1r-firewood-real-quest-flow-evidence.json": "c36797c20252876fccd7d5a970ef0e288620ff91cb4f3c11d5ff89fccaede1da",
+    "docs/data/complete-edition/c1c1r-runtime-capability-matrix.json": "3e8154bfd8c48f342fa5c2256564c4f6e5f6e9ca7665045c409b3ab745b039b8",
+    "docs/data/complete-edition/c1c1r-runtime-primitive-backlog.json": "7de02ffc3518f073a70d022cc02f84d3bf546ce6dab825cce6427b7b3ff47e6e",
+    "docs/data/complete-edition/c1c1r2-rest-rule-evidence.json": "a982b54f6f05020615f3fb9e5ad58baad9d4290b150322b661fea3921721982e",
+    "docs/data/complete-edition/c1c1r2-source-backed-rest-allocation-evidence.json": "1f7776c0b0174c846157cf9f4aca56dcb36e4f7f0b8957f4cace81b3410d52f6",
+    "docs/data/complete-edition/c1c1r3-rest-budget-rule-evidence.json": "fcb40c84d2950b42fa304b435d609f86cadf11a0cf161f5d430c4047125198da",
+    "docs/data/complete-edition/c1c1r3-rest-budget-semantic-closure-evidence.json": "42c0c1ee343ff2fd43e0b9ec3c492d9d1d960db4cb2f49ef11e3f47724d38248"
+  },
+  "questReadyBefore": 2,
+  "questReadyAfter": 3,
+  "trinketReadyBefore": 2,
+  "trinketReadyAfter": 2,
+  "sourceSupportedCount": 75,
+  "semanticCompleteCount": 5,
+  "engineCapableCount": 3,
+  "adapterCompleteCount": 11,
+  "proofCompleteCount": 11,
+  "newlyReadyQuestIds": [
+    "community-quest-warrens-lvl3-deep-in-the-warrens"
+  ],
+  "remainingSemanticBlockers": [
+    {
+      "code": "QUEST_REST_ALLOCATION_SEMANTICS",
+      "unresolved": [
+        "insufficientRecoveryCapacity"
+      ]
+    }
+  ],
+  "remainingPrimitiveBlockers": [
+    {
+      "primitive": "QUEST_RULE_MONSTER_STATE",
+      "blockedDefinitions": 32,
+      "semanticReadyDefinitions": 0,
+      "potentialUnlock": 0,
+      "blockedDefinitionIds": [
+        "community-quest-cove-lvl1-deep-horrors",
+        "community-quest-cove-lvl2-deep-horrors-2",
+        "community-quest-cove-lvl2-the-deep-ones",
+        "community-quest-cove-lvl3-the-deep-ones-2",
+        "community-quest-crimson-court-lvl1-they-are-swarm",
+        "community-quest-crimson-court-lvl2-lurkers",
+        "community-quest-crimson-court-lvl2-ruin-the-party",
+        "community-quest-crimson-court-lvl2-take-em-back",
+        "community-quest-crimson-court-lvl3-breeders",
+        "community-quest-crimson-court-lvl3-cut-the-buzz",
+        "community-quest-crimson-court-lvl3-uninvited",
+        "community-quest-ruins-lvl1-rising-threat",
+        "community-quest-ruins-lvl2-break-them",
+        "community-quest-ruins-lvl3-the-threat-is-real",
+        "community-quest-ruins-lvl3-they-are-back",
+        "community-quest-warrens-lvl1-disarm-them",
+        "community-quest-warrens-lvl1-worm-squash",
+        "community-quest-warrens-lvl2-a-new-breed",
+        "community-quest-warrens-lvl2-bait-them-out",
+        "community-quest-warrens-lvl2-carrion-infestation",
+        "community-quest-warrens-lvl2-ringleaders",
+        "community-quest-warrens-lvl3-alpha-swine",
+        "community-quest-warrens-lvl3-drums-of-doom",
+        "community-quest-warrens-lvl3-infighting",
+        "community-quest-weald-lvl1-circle-of-witches",
+        "community-quest-weald-lvl1-purge-the-woods",
+        "community-quest-weald-lvl2-hounds-of-the-woods",
+        "community-quest-weald-lvl2-lost-treasures",
+        "community-quest-weald-lvl2-searching-in-the-dark",
+        "community-quest-weald-lvl2-spreaders-of-miasma",
+        "community-quest-weald-lvl3-great-unclean-ones",
+        "community-quest-weald-lvl3-no-other-way"
+      ],
+      "potentialUnlockDefinitionIds": []
+    },
+    {
+      "primitive": "QUEST_RULE_ROOM_SETUP",
+      "blockedDefinitions": 31,
+      "semanticReadyDefinitions": 2,
+      "potentialUnlock": 0,
+      "blockedDefinitionIds": [
+        "community-quest-boss-face-the-threat",
+        "community-quest-cove-lvl1-purify-the-eldritch-signs",
+        "community-quest-cove-lvl1-test-the-waters",
+        "community-quest-cove-lvl2-the-deep-ones",
+        "community-quest-cove-lvl3-tainted-trinkets",
+        "community-quest-cove-lvl3-the-deep-ones-2",
+        "community-quest-cove-lvl3-the-shipwrecks",
+        "community-quest-crimson-court-lvl1-lost-and-found",
+        "community-quest-crimson-court-lvl1-rivers-run-red",
+        "community-quest-crimson-court-lvl2-ruin-the-party",
+        "community-quest-crimson-court-lvl2-take-em-back",
+        "community-quest-crimson-court-lvl3-breeders",
+        "community-quest-crimson-court-lvl3-the-endless-marsh",
+        "community-quest-crimson-court-lvl3-uninvited",
+        "community-quest-ruins-lvl1-dem-bones",
+        "community-quest-ruins-lvl2-disruption",
+        "community-quest-ruins-lvl2-purify-the-fountains",
+        "community-quest-ruins-lvl3-forward-camps",
+        "community-quest-warrens-lvl1-disarm-them",
+        "community-quest-warrens-lvl1-family-trinkets",
+        "community-quest-warrens-lvl1-worm-squash",
+        "community-quest-warrens-lvl2-bait-them-out",
+        "community-quest-warrens-lvl2-ringleaders",
+        "community-quest-warrens-lvl3-foul-arsenal",
+        "community-quest-weald-lvl1-circle-of-witches",
+        "community-quest-weald-lvl1-disinfection",
+        "community-quest-weald-lvl1-fungal-research",
+        "community-quest-weald-lvl2-hounds-of-the-woods",
+        "community-quest-weald-lvl2-lost-supplies",
+        "community-quest-weald-lvl2-searching-in-the-dark",
+        "community-quest-weald-lvl3-no-other-way"
+      ],
+      "potentialUnlockDefinitionIds": []
+    },
+    {
+      "primitive": "QUEST_RULE_QUEST_COMPLETION",
+      "blockedDefinitions": 17,
+      "semanticReadyDefinitions": 2,
+      "potentialUnlock": 0,
+      "blockedDefinitionIds": [
+        "community-quest-boss-face-the-threat",
+        "community-quest-cove-lvl1-purify-the-eldritch-signs",
+        "community-quest-cove-lvl1-test-the-waters",
+        "community-quest-cove-lvl3-tainted-trinkets",
+        "community-quest-cove-lvl3-the-shipwrecks",
+        "community-quest-crimson-court-lvl1-rivers-run-red",
+        "community-quest-crimson-court-lvl2-take-em-back",
+        "community-quest-ruins-lvl1-dem-bones",
+        "community-quest-ruins-lvl1-fundraiser",
+        "community-quest-ruins-lvl2-purify-the-fountains",
+        "community-quest-ruins-lvl3-forward-camps",
+        "community-quest-ruins-lvl3-warm-up-the-halls",
+        "community-quest-warrens-lvl1-family-trinkets",
+        "community-quest-warrens-lvl2-carrion-infestation",
+        "community-quest-weald-lvl1-disinfection",
+        "community-quest-weald-lvl1-fungal-research",
+        "community-quest-weald-lvl3-no-other-way"
+      ],
+      "potentialUnlockDefinitionIds": []
+    },
+    {
+      "primitive": "QUEST_RULE_BATTLE_SETUP",
+      "blockedDefinitions": 9,
+      "semanticReadyDefinitions": 0,
+      "potentialUnlock": 0,
+      "blockedDefinitionIds": [
+        "community-quest-cove-lvl1-deep-waters",
+        "community-quest-cove-lvl2-deep-waters-2",
+        "community-quest-cove-lvl2-eldritch-purging",
+        "community-quest-cove-lvl3-deep-waters-3",
+        "community-quest-ruins-lvl1-rising-threat",
+        "community-quest-warrens-lvl2-bait-them-out",
+        "community-quest-warrens-lvl3-infighting",
+        "community-quest-weald-lvl1-patrol-the-woods",
+        "community-quest-weald-lvl3-great-unclean-ones"
+      ],
+      "potentialUnlockDefinitionIds": []
+    },
+    {
+      "primitive": "QUEST_RULE_HERO_STATE",
+      "blockedDefinitions": 9,
+      "semanticReadyDefinitions": 0,
+      "potentialUnlock": 0,
+      "blockedDefinitionIds": [
+        "community-quest-cove-lvl1-unclean-waters",
+        "community-quest-cove-lvl2-unclean-waters-2",
+        "community-quest-cove-lvl3-unclean-waters-3",
+        "community-quest-crimson-court-lvl3-cut-the-buzz",
+        "community-quest-ruins-lvl3-creeping-darkness",
+        "community-quest-warrens-lvl3-foul-arsenal",
+        "community-quest-weald-lvl3-final-swipe",
+        "community-quest-weald-lvl3-the-infected",
+        "community-quest-weald-lvl3-whispering-woods"
+      ],
+      "potentialUnlockDefinitionIds": []
+    },
+    {
+      "primitive": "QUEST_REST_ALLOCATION_SEMANTICS",
+      "blockedDefinitions": 8,
+      "semanticReadyDefinitions": 0,
+      "potentialUnlock": 0,
+      "blockedDefinitionIds": [
+        "community-quest-crimson-court-lvl1-deep-in-the-swamp",
+        "community-quest-crimson-court-lvl2-deeper-into-the-swamp",
+        "community-quest-crimson-court-lvl2-pest-control",
+        "community-quest-ruins-lvl1-scout-ahead",
+        "community-quest-ruins-lvl1-wipe-em-out",
+        "community-quest-ruins-lvl2-clear-the-path",
+        "community-quest-ruins-lvl2-reduce-to-rubble",
+        "community-quest-warrens-lvl1-pork-chop"
+      ],
+      "potentialUnlockDefinitionIds": []
+    },
+    {
+      "primitive": "QUEST_RULE_TOKEN_INTERACTION",
+      "blockedDefinitions": 7,
+      "semanticReadyDefinitions": 1,
+      "potentialUnlock": 0,
+      "blockedDefinitionIds": [
+        "community-quest-cove-lvl2-eldritch-purging",
+        "community-quest-cove-lvl3-deep-waters-3",
+        "community-quest-crimson-court-lvl1-lost-and-found",
+        "community-quest-crimson-court-lvl1-rest-in-rubble",
+        "community-quest-crimson-court-lvl2-take-em-back",
+        "community-quest-warrens-lvl1-family-trinkets",
+        "community-quest-weald-lvl2-lost-supplies"
+      ],
+      "potentialUnlockDefinitionIds": []
+    },
+    {
+      "primitive": "QUEST_RULE_REWARD_OVERRIDE",
+      "blockedDefinitions": 3,
+      "semanticReadyDefinitions": 0,
+      "potentialUnlock": 0,
+      "blockedDefinitionIds": [
+        "community-quest-crimson-court-lvl2-take-em-back",
+        "community-quest-ruins-lvl1-fundraiser",
+        "community-quest-weald-lvl2-lost-supplies"
+      ],
+      "potentialUnlockDefinitionIds": []
+    },
+    {
+      "primitive": "QUEST_RULE_BATTLE_RESULT",
+      "blockedDefinitions": 2,
+      "semanticReadyDefinitions": 0,
+      "potentialUnlock": 0,
+      "blockedDefinitionIds": [
+        "community-quest-warrens-lvl2-carrion-infestation",
+        "community-quest-warrens-lvl2-ringleaders"
+      ],
+      "potentialUnlockDefinitionIds": []
+    },
+    {
+      "primitive": "QUEST_RULE_EXPLORATION",
+      "blockedDefinitions": 2,
+      "semanticReadyDefinitions": 0,
+      "potentialUnlock": 0,
+      "blockedDefinitionIds": [
+        "community-quest-crimson-court-lvl3-the-endless-marsh",
+        "community-quest-warrens-lvl3-infighting"
+      ],
+      "potentialUnlockDefinitionIds": []
+    },
+    {
+      "primitive": "QUEST_RULE_ROOM_CLEAR",
+      "blockedDefinitions": 1,
+      "semanticReadyDefinitions": 0,
+      "potentialUnlock": 0,
+      "blockedDefinitionIds": [
+        "community-quest-crimson-court-lvl1-rest-in-rubble"
+      ],
+      "potentialUnlockDefinitionIds": []
+    }
+  ],
+  "proofBindings": [
+    {
+      "definitionId": "community-quest-warrens-lvl1-explore-the-sewers",
+      "manifestField": "productionTests",
+      "expectedType": "production-runtime",
+      "proofId": "C1C1-QUEST-RUNTIME",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1-QUEST-RUNTIME",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "production-runtime",
+        "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-explore-the-sewers",
+      "manifestField": "productionTests",
+      "expectedType": "production-runtime",
+      "proofId": "C1C1R-QUEST-SOURCE-SETUP",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1R-QUEST-SOURCE-SETUP",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "production-runtime",
+        "testFile": "src/game-engine/c1c1r-firewood-real-flow.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-explore-the-sewers",
+      "manifestField": "saveReplayTests",
+      "expectedType": "save-replay",
+      "proofId": "C1C1-QUEST-SAVE-REPLAY",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1-QUEST-SAVE-REPLAY",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "save-replay",
+        "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-explore-the-sewers",
+      "manifestField": "selectorTests",
+      "expectedType": "selector",
+      "proofId": "C1C1-QUEST-SELECTOR",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1-QUEST-SELECTOR",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "selector",
+        "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-explore-the-sewers",
+      "manifestField": "e2eTests",
+      "expectedType": "e2e",
+      "proofId": "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+        "definitionIds": [],
+        "proofType": "e2e",
+        "testFile": "e2e/phase11a4-c1c1r-real-community-quest.spec.ts",
+        "runner": "playwright",
+        "status": "active",
+        "scope": "adapter",
+        "adapterId": "c1c1-simple-community-quest-v1"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-mapping-the-sewers",
+      "manifestField": "productionTests",
+      "expectedType": "production-runtime",
+      "proofId": "C1C1-QUEST-RUNTIME",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1-QUEST-RUNTIME",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "production-runtime",
+        "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-mapping-the-sewers",
+      "manifestField": "productionTests",
+      "expectedType": "production-runtime",
+      "proofId": "C1C1R-QUEST-SOURCE-SETUP",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1R-QUEST-SOURCE-SETUP",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "production-runtime",
+        "testFile": "src/game-engine/c1c1r-firewood-real-flow.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-mapping-the-sewers",
+      "manifestField": "saveReplayTests",
+      "expectedType": "save-replay",
+      "proofId": "C1C1-QUEST-SAVE-REPLAY",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1-QUEST-SAVE-REPLAY",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "save-replay",
+        "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-mapping-the-sewers",
+      "manifestField": "selectorTests",
+      "expectedType": "selector",
+      "proofId": "C1C1-QUEST-SELECTOR",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1-QUEST-SELECTOR",
+        "definitionIds": [
+          "community-quest-ruins-lvl1-scout-ahead",
+          "community-quest-ruins-lvl1-wipe-em-out",
+          "community-quest-ruins-lvl2-clear-the-path",
+          "community-quest-ruins-lvl2-reduce-to-rubble",
+          "community-quest-warrens-lvl1-explore-the-sewers",
+          "community-quest-warrens-lvl1-pork-chop",
+          "community-quest-warrens-lvl2-mapping-the-sewers"
+        ],
+        "proofType": "selector",
+        "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+        "runner": "vitest",
+        "status": "active"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-mapping-the-sewers",
+      "manifestField": "e2eTests",
+      "expectedType": "e2e",
+      "proofId": "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+        "definitionIds": [],
+        "proofType": "e2e",
+        "testFile": "e2e/phase11a4-c1c1r-real-community-quest.spec.ts",
+        "runner": "playwright",
+        "status": "active",
+        "scope": "adapter",
+        "adapterId": "c1c1-simple-community-quest-v1"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl3-deep-in-the-warrens",
+      "manifestField": "productionTests",
+      "expectedType": "production-runtime",
+      "proofId": "C1C2-SPECIAL-RULE-RUNTIME",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C2-SPECIAL-RULE-RUNTIME",
+        "definitionIds": [
+          "community-quest-warrens-lvl3-deep-in-the-warrens"
+        ],
+        "proofType": "production-runtime",
+        "testFile": "src/game-engine/c1c2-quest-runtime-expansion.test.ts",
+        "runner": "vitest",
+        "status": "active",
+        "scope": "definition"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl3-deep-in-the-warrens",
+      "manifestField": "saveReplayTests",
+      "expectedType": "save-replay",
+      "proofId": "C1C2-SPECIAL-RULE-SAVE-REPLAY",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C2-SPECIAL-RULE-SAVE-REPLAY",
+        "definitionIds": [
+          "community-quest-warrens-lvl3-deep-in-the-warrens"
+        ],
+        "proofType": "save-replay",
+        "testFile": "src/game-engine/c1c2-quest-runtime-expansion.test.ts",
+        "runner": "vitest",
+        "status": "active",
+        "scope": "definition"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl3-deep-in-the-warrens",
+      "manifestField": "selectorTests",
+      "expectedType": "selector",
+      "proofId": "C1C2-SPECIAL-RULE-SELECTOR",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C2-SPECIAL-RULE-SELECTOR",
+        "definitionIds": [
+          "community-quest-warrens-lvl3-deep-in-the-warrens"
+        ],
+        "proofType": "selector",
+        "testFile": "src/game-engine/c1c2-quest-runtime-expansion.test.ts",
+        "runner": "vitest",
+        "status": "active",
+        "scope": "definition"
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl3-deep-in-the-warrens",
+      "manifestField": "e2eTests",
+      "expectedType": "e2e",
+      "proofId": "C1C2-E2E-SPECIAL-RULE",
+      "resolved": true,
+      "reason": "RESOLVED",
+      "registration": {
+        "proofId": "C1C2-E2E-SPECIAL-RULE",
+        "definitionIds": [
+          "community-quest-warrens-lvl3-deep-in-the-warrens"
+        ],
+        "proofType": "e2e",
+        "testFile": "e2e/phase11a4-c1c2-quest-special-rule.spec.ts",
+        "runner": "playwright",
+        "status": "active",
+        "scope": "definition"
+      }
+    }
+  ],
+  "saveReplayResults": [
+    {
+      "proofId": "C1C1-QUEST-SAVE-REPLAY",
+      "runner": "vitest",
+      "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+      "status": "passed"
+    },
+    {
+      "proofId": "C1C2-SPECIAL-RULE-SAVE-REPLAY",
+      "runner": "vitest",
+      "testFile": "src/game-engine/c1c2-quest-runtime-expansion.test.ts",
+      "status": "passed"
+    }
+  ],
+  "e2eResults": [
+    {
+      "proofId": "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+      "runner": "playwright",
+      "testFile": "e2e/phase11a4-c1c1r-real-community-quest.spec.ts",
+      "status": "passed"
+    },
+    {
+      "proofId": "C1C2-E2E-SPECIAL-RULE",
+      "runner": "playwright",
+      "testFile": "e2e/phase11a4-c1c2-quest-special-rule.spec.ts",
+      "status": "passed"
+    }
+  ],
+  "commands": [
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe D:\\darkest-dungoen-boardgame\\node_modules\\vitest\\vitest.mjs run src/game-engine/c1c2-quest-runtime-expansion.test.ts src/game-engine/c1c1-community-quest-production.test.ts src/game-engine/c1c1r-firewood-real-flow.test.ts src/audit/c1c1r3-rest-budget-semantics.test.ts src/audit/production-proof-verification.test.ts --reporter=json",
+      "exitCode": 0
+    },
+    {
+      "command": "C:\\WINDOWS\\system32\\cmd.exe /d /s /c npm run test:e2e:community-content-c1c2",
+      "exitCode": 0
+    },
+    {
+      "command": "C:\\WINDOWS\\system32\\cmd.exe /d /s /c npm test",
+      "exitCode": 0
+    },
+    {
+      "command": "C:\\WINDOWS\\system32\\cmd.exe /d /s /c npm run typecheck",
+      "exitCode": 0
+    },
+    {
+      "command": "C:\\WINDOWS\\system32\\cmd.exe /d /s /c npm run build",
+      "exitCode": 0
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe D:\\darkest-dungoen-boardgame\\node_modules\\vite-node\\vite-node.mjs scripts/audit/generate-complete-edition-c1c2.ts",
+      "exitCode": 0
+    }
+  ],
+  "failures": [],
+  "terminalVerdict": "C1C2-QUEST-RUNTIME-EXPANSION-ACCEPTED"
+}
