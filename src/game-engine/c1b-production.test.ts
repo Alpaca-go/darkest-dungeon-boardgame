@@ -55,7 +55,6 @@ describe('C1B production content gate', () => {
     const context = runtimeContentContext(campaign);
     expect(getQuestPool(context).map((quest) => quest.id)).toEqual([
       'community-quest-warrens-lvl1-explore-the-sewers',
-      'community-quest-warrens-lvl1-family-trinkets',
     ]);
     expect(getBossQuestPool(context)).toEqual([]);
     expect(getTrinketPoolByLevel(context, 1).map((item) => item.id).sort()).toEqual([

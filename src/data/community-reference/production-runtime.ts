@@ -13,8 +13,15 @@ import { buyPriceForLevel, sellPriceForLevel } from '../trinkets/trinket-pricing
 import {
   PRODUCTION_PROOF_REGISTRY,
   allProofsResolve,
+  allProofsUseSurface,
   type RegisteredProductionProof,
 } from '../../audit/production-proof-registry';
+import {
+  semanticCoverageCounts,
+  semanticObligationsForQuest,
+  runtimeSemanticComplete as obligationsAreRuntimeComplete,
+  type QuestSemanticObligation,
+} from '../../audit/quest-semantic-coverage';
 import { restAllocationSemanticsImplemented } from '../../audit/rest-semantic-contract';
 import type { CampaignState } from '../../types';
 import type { QuestRuntimeState } from '../../types/content-runtime';
@@ -34,12 +41,22 @@ export interface RuntimeCapabilityRecord {
   definitionId: string;
   sourceSupported: boolean;
   engineCapable: boolean;
+  sourceSemanticComplete: boolean;
+  runtimeSemanticComplete: boolean;
+  semanticObligationCount: number;
+  implementedSemanticObligationCount: number;
+  partialSemanticObligationCount: number;
+  unsupportedSemanticObligationCount: number;
+  sourceUnresolvedSemanticObligationCount: number;
+  semanticObligations: QuestSemanticObligation[];
+  /** Backward-compatible alias for sourceSemanticComplete. */
   semanticComplete: boolean;
   adapterComplete: boolean;
   selectorReachable: boolean;
   productionProofComplete: boolean;
   saveReplayProofComplete: boolean;
   e2eProofComplete: boolean;
+  productionUiProofComplete: boolean;
   productionReady: boolean;
   sourceStatus: string;
   semanticStatus: string;
@@ -373,18 +390,23 @@ export function evaluateCommunityQuestCapability(
   const sourceBlocked = source.sourceStatus !== 'source-supported';
   const declaredMissingPrimitives = [...new Set(source.runtimeSupport.missingCapabilities.flatMap(normalizePrimitives))];
   const specialRulePrimitives = classifyQuestSpecialRulePrimitives(source);
+  const semanticObligations = semanticObligationsForQuest(source);
+  const obligationPrimitives = semanticObligations.flatMap((obligation) => obligation.runtimePrimitive ? [obligation.runtimePrimitive] : []);
+  const obligationCounts = semanticCoverageCounts(semanticObligations);
   const basePrimitives = declaredMissingPrimitives.filter((primitive) => primitive !== 'QUEST_SPECIAL_RULE_ADAPTER');
   const adapter = adapters[source.id];
   const requiredPrimitives = [...new Set([
     ...basePrimitives,
     ...specialRulePrimitives,
+    ...obligationPrimitives,
     ...((adapter?.definition.firewoodSetup?.tokens ?? 0) > 0 ? ['QUEST_REST_ALLOCATION_SEMANTICS'] : []),
   ])];
   const missingPrimitives = requiredPrimitives.filter((primitive) => !implementedPrimitives.has(primitive));
-  const semanticComplete = !sourceBlocked
+  const sourceSemanticComplete = !sourceBlocked
     && source.unresolvedFields.length === 0
     && !specialRulePrimitives.includes('SOURCE_SEMANTIC_UNRESOLVED')
     && (!(Number(source.firewood.tokens) > 0) || implementedPrimitives.has('QUEST_REST_ALLOCATION_SEMANTICS'));
+  const runtimeSemanticComplete = sourceSemanticComplete && obligationsAreRuntimeComplete(source.id, semanticObligations);
   const adapterValid = Boolean(adapter && questAdapterSourceSetupErrors(source, adapter).length === 0);
   const proof = proofs[source.id];
   const proofMatches = Boolean(adapterValid && adapter && proof && proof.definitionId === source.id && proof.runtimeAdapterId === adapter.adapterId);
@@ -403,32 +425,42 @@ export function evaluateCommunityQuestCapability(
       proof.primitiveProofRequirements ?? {},
     )),
   };
+  const productionUiProofComplete = Boolean(proofMatches && proof && measuredRuntimeProof.e2eProofPresent
+    && allProofsUseSurface(proof.e2eTests, 'production-ui', registeredProofs));
   const proofComplete = Boolean(proofMatches && proof.sourceSupported && proof.semanticSupported
     && measuredRuntimeProof.productionProofPresent && measuredRuntimeProof.saveReplayProofPresent
-    && measuredRuntimeProof.selectorProofPresent && measuredRuntimeProof.e2eProofPresent);
+    && measuredRuntimeProof.selectorProofPresent && productionUiProofComplete);
   const productionStatus: ProductionStatus = sourceBlocked ? 'SOURCE_BLOCKED'
     : missingPrimitives.length > 0 ? 'ENGINE_PRIMITIVE_MISSING'
-      : semanticComplete && adapterValid && proofComplete ? 'PRODUCTION_READY' : 'ADAPTER_REQUIRED';
+      : runtimeSemanticComplete && adapterValid && proofComplete ? 'PRODUCTION_READY' : 'ADAPTER_REQUIRED';
   const blockerCodes = productionStatus === 'SOURCE_BLOCKED' ? ['SOURCE_EVIDENCE_BLOCKED']
-    : productionStatus === 'ENGINE_PRIMITIVE_MISSING' ? missingPrimitives
-      : productionStatus === 'PRODUCTION_READY' ? [] : [
+    : productionStatus === 'PRODUCTION_READY' ? [] : [...new Set([
+        ...missingPrimitives,
+        ...(sourceSemanticComplete && !runtimeSemanticComplete ? ['RUNTIME_SEMANTIC_PARTIAL'] : []),
+        ...semanticObligations.flatMap((obligation) => obligation.implementationStatus === 'IMPLEMENTED' || !obligation.blockerCode ? [] : [obligation.blockerCode]),
         ...(adapterValid ? [] : ['RUNTIME_ADAPTER_MISSING_OR_SOURCE_SETUP_MISMATCH']),
         ...(proofMatches ? [] : ['PRODUCTION_PROOF_MISSING_OR_MISMATCHED']),
         ...(measuredRuntimeProof.productionProofPresent ? [] : ['PRODUCTION_TEST_PROOF_MISSING']),
         ...(measuredRuntimeProof.saveReplayProofPresent ? [] : ['SAVE_REPLAY_PROOF_MISSING']),
         ...(measuredRuntimeProof.selectorProofPresent ? [] : ['SELECTOR_PROOF_MISSING']),
         ...(measuredRuntimeProof.e2eProofPresent ? [] : ['E2E_PROOF_MISSING']),
-      ];
+        ...(productionUiProofComplete ? [] : ['PRODUCTION_UI_E2E_MISSING']),
+      ])];
   return {
     definitionId: source.id,
     sourceSupported: !sourceBlocked,
     engineCapable: missingPrimitives.length === 0,
-    semanticComplete,
+    sourceSemanticComplete,
+    runtimeSemanticComplete,
+    ...obligationCounts,
+    semanticObligations,
+    semanticComplete: sourceSemanticComplete,
     adapterComplete: adapterValid,
     selectorReachable: measuredRuntimeProof.selectorProofPresent,
     productionProofComplete: measuredRuntimeProof.productionProofPresent,
     saveReplayProofComplete: measuredRuntimeProof.saveReplayProofPresent,
     e2eProofComplete: measuredRuntimeProof.e2eProofPresent,
+    productionUiProofComplete,
     productionReady: productionStatus === 'PRODUCTION_READY',
     sourceStatus: source.sourceStatus,
     semanticStatus: source.normalizationStatus,
@@ -532,9 +564,12 @@ export function evaluateCommunityTrinketCapability(
     ...source.negativeSide.runtimeSupport.missingCapabilities,
   ].flatMap(normalizePrimitives))];
   const missingPrimitives = declaredMissingPrimitives.filter((primitive) => primitive !== 'POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW');
+  const sourceSemanticComplete = !sourceBlocked && source.unresolvedFields.length === 0;
+  const productionUiProofComplete = Boolean(proofMatches && proof && measuredRuntimeProof.e2eProofPresent
+    && allProofsUseSurface(proof.e2eTests, 'production-ui', registeredProofs));
   const proofComplete = Boolean(proofMatches && proof.sourceSupported && proof.semanticSupported
     && measuredRuntimeProof.productionProofPresent && measuredRuntimeProof.saveReplayProofPresent
-    && measuredRuntimeProof.selectorProofPresent && measuredRuntimeProof.e2eProofPresent);
+    && measuredRuntimeProof.selectorProofPresent && productionUiProofComplete);
   const productionStatus: ProductionStatus = sourceBlocked ? 'SOURCE_BLOCKED'
     : missingPrimitives.length > 0 ? 'ENGINE_PRIMITIVE_MISSING'
       : adapter && proofComplete ? 'PRODUCTION_READY' : 'ADAPTER_REQUIRED';
@@ -554,12 +589,21 @@ export function evaluateCommunityTrinketCapability(
     definitionId: source.id,
     sourceSupported: !sourceBlocked,
     engineCapable: missingPrimitives.length === 0,
-    semanticComplete: !sourceBlocked && source.unresolvedFields.length === 0,
+    sourceSemanticComplete,
+    runtimeSemanticComplete: sourceSemanticComplete,
+    semanticObligationCount: 0,
+    implementedSemanticObligationCount: 0,
+    partialSemanticObligationCount: 0,
+    unsupportedSemanticObligationCount: 0,
+    sourceUnresolvedSemanticObligationCount: 0,
+    semanticObligations: [],
+    semanticComplete: sourceSemanticComplete,
     adapterComplete: Boolean(adapter),
     selectorReachable: measuredRuntimeProof.selectorProofPresent,
     productionProofComplete: measuredRuntimeProof.productionProofPresent,
     saveReplayProofComplete: measuredRuntimeProof.saveReplayProofPresent,
     e2eProofComplete: measuredRuntimeProof.e2eProofPresent,
+    productionUiProofComplete,
     productionReady: productionStatus === 'PRODUCTION_READY',
     sourceStatus: source.sourceStatus, semanticStatus: source.normalizationStatus,
     positiveRuntimeSupport: productionStatus, negativeRuntimeSupport: productionStatus,

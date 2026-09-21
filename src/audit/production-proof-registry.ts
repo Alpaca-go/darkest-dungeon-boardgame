@@ -11,6 +11,7 @@ export interface RegisteredProductionProof {
   scope?: 'definition' | 'adapter' | 'primitive';
   adapterId?: string;
   primitiveId?: string;
+  proofSurface?: 'production-ui' | 'production-command' | 'test-harness';
 }
 
 export const ACCURACY_STONE_ID = 'community-trinket-core-accuracy-stone';
@@ -41,7 +42,11 @@ export const C1C3_MULTI_PRIMITIVE_QUEST_IDS = [
 ] as const;
 
 function proof(entry: RegisteredProductionProof): RegisteredProductionProof {
-  return Object.freeze({ ...entry, definitionIds: Object.freeze([...entry.definitionIds]) as unknown as string[] });
+  return Object.freeze({
+    ...entry,
+    proofSurface: entry.proofSurface ?? (entry.proofType === 'e2e' ? 'production-ui' : undefined),
+    definitionIds: Object.freeze([...entry.definitionIds]) as unknown as string[],
+  });
 }
 
 export const PRODUCTION_PROOF_REGISTRY: Readonly<Record<string, RegisteredProductionProof>> = Object.freeze(Object.fromEntries([
@@ -51,7 +56,7 @@ export const PRODUCTION_PROOF_REGISTRY: Readonly<Record<string, RegisteredProduc
       proof({ proofId: `C1C3-${label}-RUNTIME`, definitionIds: [definitionId], proofType: 'production-runtime', testFile: 'src/game-engine/c1c3-multi-primitive-quest-rule.test.ts', runner: 'vitest', status: 'active', scope: 'definition' }),
       proof({ proofId: `C1C3-${label}-SAVE-REPLAY`, definitionIds: [definitionId], proofType: 'save-replay', testFile: 'src/game-engine/c1c3-multi-primitive-quest-rule.test.ts', runner: 'vitest', status: 'active', scope: 'definition' }),
       proof({ proofId: `C1C3-${label}-SELECTOR`, definitionIds: [definitionId], proofType: 'selector', testFile: 'src/game-engine/c1c3-multi-primitive-quest-rule.test.ts', runner: 'vitest', status: 'active', scope: 'definition' }),
-      proof({ proofId: `C1C3-E2E-${label}-TRINKETS`, definitionIds: [definitionId], proofType: 'e2e', testFile: 'e2e/phase11a4-c1c3-multi-primitive-quest.spec.ts', runner: 'playwright', status: 'active', scope: 'definition' }),
+      proof({ proofId: `C1C3-E2E-${label}-TRINKETS`, definitionIds: [definitionId], proofType: 'e2e', testFile: 'e2e/phase11a4-c1c3-multi-primitive-quest.spec.ts', runner: 'playwright', status: 'active', scope: 'definition', proofSurface: 'test-harness' }),
     ];
   }),
   proof({
@@ -252,4 +257,12 @@ export function allProofsResolve(
       expectedPrimitiveByProof[proofId] ? [expectedPrimitiveByProof[proofId]] : expectedPrimitiveIds,
     ).resolved,
   );
+}
+
+export function allProofsUseSurface(
+  proofIds: readonly string[],
+  surface: NonNullable<RegisteredProductionProof['proofSurface']>,
+  registry: Readonly<Record<string, RegisteredProductionProof>> = PRODUCTION_PROOF_REGISTRY,
+): boolean {
+  return proofIds.length > 0 && proofIds.every((proofId) => registry[proofId]?.proofSurface === surface);
 }

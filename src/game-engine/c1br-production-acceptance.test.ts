@@ -121,7 +121,6 @@ describe('C1B-R production promotion adversarial matrix', () => {
     const quests = getQuestPool(context);
     expect(quests.map((quest) => quest.id)).toEqual([
       'community-quest-warrens-lvl1-explore-the-sewers',
-      'community-quest-warrens-lvl1-family-trinkets',
     ]);
     expect(quests.every((quest) => quest.id.startsWith('community-quest-'))).toBe(true);
     expect(quests.some((quest) => STANDARD_QUESTS.some((legacy) => legacy.id === quest.id))).toBe(false);

@@ -106,7 +106,7 @@ describe('C1C-1 executable Community Quest production proofs', () => {
 
   productionProofTest(registration('C1C1-QUEST-SELECTOR'), () => {
     const base = runtimeContentContext(createNewCampaign('community-complete-edition'));
-    expect(getQuestPool({ ...base, campaignLevel: 1 }).map((quest) => quest.name)).toEqual(['Explore the Sewers', 'Family Trinkets']);
+    expect(getQuestPool({ ...base, campaignLevel: 1 }).map((quest) => quest.name)).toEqual(['Explore the Sewers']);
     expect(getQuestPool({ ...base, campaignLevel: 2 }).map((quest) => quest.name)).toEqual(['Mapping the Sewers']);
     expect(filterCommunityQuestCandidates(COMMUNITY_RUNTIME_QUESTS, {
       ...base, campaignLevel: 1, enabledRegions: ['ruins'],
