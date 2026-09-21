@@ -19,6 +19,10 @@ const sourceDir = resolve(root, 'docs/source/darkest-dungeon-designer-faq');
 const evidencePath = resolve(dataDir, 'c1c4-rest-semantic-source-closure-evidence.json');
 const reportPath = resolve(root, 'docs/reports/complete-edition/c1c4-rest-semantic-source-closure-report.md');
 const commandShell = process.env.ComSpec ?? 'cmd.exe';
+const volatileRegressionArtifacts = [
+  'docs/data/core-campaign/official-source-manifest.json',
+  'docs/data/core-campaign/source-readiness.json',
+] as const;
 
 interface CommandResult { command: string; exitCode: number; stdout: string; stderr: string }
 function run(command: string, args: string[], timeout = 900_000, env?: NodeJS.ProcessEnv): CommandResult {
@@ -139,7 +143,9 @@ const proofTests = run(process.execPath, [resolve(root, 'node_modules/vitest/vit
 requirePass('C1C-4 source/proof/readiness mutation tests', proofTests);
 const e2e = run(commandShell, ['/d', '/s', '/c', 'npm run test:e2e:community-content-c1c2']);
 requirePass('Production UI Playwright', e2e);
+const volatileArtifactSnapshots = new Map(volatileRegressionArtifacts.map((path) => [path, readFileSync(resolve(root, path))]));
 const regression = run(commandShell, ['/d', '/s', '/c', 'npm test']);
+for (const [path, contents] of volatileArtifactSnapshots) writeFileSync(resolve(root, path), contents);
 requirePass('Full regression', regression);
 const typecheck = run(commandShell, ['/d', '/s', '/c', 'npm run typecheck']);
 requirePass('Typecheck', typecheck);
