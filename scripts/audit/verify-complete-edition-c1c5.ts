@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { readFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import {
@@ -13,6 +13,10 @@ const root = process.cwd();
 const baselineHead = '9fb8429625c35d6efed3a54515a98000726e802e';
 const commandShell = process.env.ComSpec ?? 'cmd.exe';
 const dataDir = resolve(root, 'docs/data/complete-edition');
+const volatileRegressionArtifacts = [
+  'docs/data/core-campaign/official-source-manifest.json',
+  'docs/data/core-campaign/source-readiness.json',
+] as const;
 
 interface Result { command: string; exitCode: number; stdout: string; stderr: string }
 function run(command: string, args: string[], timeout = 900_000): Result {
@@ -71,7 +75,9 @@ const e2e = run(commandShell, ['/d', '/s', '/c', 'npm run test:e2e:community-con
 requirePass('C1C-5 production UI E2E', e2e);
 const c1brE2e = run(commandShell, ['/d', '/s', '/c', 'npm run test:e2e:community-content-c1br']);
 requirePass('C1BR production UI regression', c1brE2e);
+const volatileSnapshots = new Map(volatileRegressionArtifacts.map((path) => [path, readFileSync(resolve(root, path))]));
 const regression = run(commandShell, ['/d', '/s', '/c', 'npm test']);
+for (const [path, contents] of volatileSnapshots) writeFileSync(resolve(root, path), contents);
 requirePass('Full regression', regression);
 const typecheck = run(commandShell, ['/d', '/s', '/c', 'npm run typecheck']);
 requirePass('Typecheck', typecheck);
