@@ -358,6 +358,21 @@ export interface PendingBattleAction {
   damageBonus: number;
 }
 
+/** A healing skill frozen while its delivered/received Trinket windows resolve. */
+export interface PendingHealingAction {
+  kind: 'hero-healing-skill';
+  eventId: string;
+  actorUnitId: string;
+  targetUnitId: string;
+  healerHeroId: string;
+  targetHeroId: string;
+  skillId: string;
+  baseAmount: number;
+  healingModifier: number;
+  stage: 'healer-window' | 'target-window';
+  processedTrinketInstanceIds: string[];
+}
+
 /** Phase 7：战斗内产生的待处理压力事件（store 层路由到统一 stress 管线）。 */
 export interface BattleStressEvent {
   id: string;
@@ -798,6 +813,8 @@ export interface CampaignState {
   pendingTrinketAllocations: PendingTrinketAllocation[];
   /** 当前开放中的 Trinket 使用机会（同一窗口可能同时开多张卡）。 */
   pendingTrinketUseOpportunities: TrinketUseOpportunity[];
+  /** Persisted healing intent; null unless a delivered/received healing window is open. */
+  pendingHealingAction: PendingHealingAction | null;
   /** 进行中的 Trinket 使用事务（防同一次使用重复结算 / 重复翻面）。 */
   pendingTrinketUseTransaction: PendingTrinketUseTransaction | null;
   /** Trinket 获取记录（永久保存）。 */

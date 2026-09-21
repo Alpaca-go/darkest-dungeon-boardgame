@@ -89,7 +89,7 @@ export const STORAGE_KEY = 'dd-web-prototype-save-v1';
  *      Load 后由存档数据自行补齐（如缺失则视为空字符串，等待下次 selectQuest 重新生成）。
  *      迁移**不**根据 questCount 推断 Act，**不**代掷任何随机数，**不**触发 Threat Draw。
  */
-export const SAVE_VERSION = 18;
+export const SAVE_VERSION = 19;
 
 /**
  * v2 存档文件结构。
@@ -115,7 +115,7 @@ interface SaveEnvelopeV1 {
 }
 
 /** 可被迁移到当前版本的历史存档版本号。 */
-const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
+const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
 
 /** 读档结果：区分正常 / 无存档 / 损坏 / 版本不支持。 */
 export type LoadStatus = 'ok' | 'empty' | 'corrupt' | 'unsupported';
@@ -927,12 +927,12 @@ export function migrateCampaignToV7(campaign: CampaignState): CampaignState {
       battle.monsters.some(needsTrinketIds) ||
       !Array.isArray(anyB.pendingRuleEvents) ||
       !Array.isArray(anyB.pendingDiseaseInfections) ||
-      anyB.pendingAction !== null;
+      anyB.pendingAction === undefined;
     if (needsBattleUpdate) {
       changed = true;
       battle = {
         ...battle,
-        pendingAction: null,
+        pendingAction: anyB.pendingAction === undefined ? null : battle.pendingAction,
         pendingRuleEvents: Array.isArray(anyB.pendingRuleEvents) ? battle.pendingRuleEvents : [],
         pendingDiseaseInfections: Array.isArray(anyB.pendingDiseaseInfections)
           ? battle.pendingDiseaseInfections
@@ -968,7 +968,6 @@ export function migrateCampaignToV7(campaign: CampaignState): CampaignState {
     // ---- Phase 8C 字段 ----
     !Array.isArray(anyC.pendingTrinketAllocations) ||
     !Array.isArray(anyC.pendingTrinketUseOpportunities) ||
-    (anyC.pendingTrinketUseOpportunities as unknown[]).length > 0 ||
     anyC.pendingTrinketUseTransaction !== null ||
     !Array.isArray(anyC.trinketAcquisitionRecords) ||
     !Array.isArray(anyC.trinketUseRecords) ||
@@ -1015,7 +1014,9 @@ export function migrateCampaignToV7(campaign: CampaignState): CampaignState {
     pendingTrinketAllocations: Array.isArray(anyC.pendingTrinketAllocations)
       ? (campaign.pendingTrinketAllocations ?? []).filter((a) => !!getTrinketById(a.trinketId))
       : [],
-    pendingTrinketUseOpportunities: [],
+    pendingTrinketUseOpportunities: Array.isArray(anyC.pendingTrinketUseOpportunities)
+      ? campaign.pendingTrinketUseOpportunities
+      : [],
     pendingTrinketUseTransaction: null,
     trinketAcquisitionRecords: Array.isArray(anyC.trinketAcquisitionRecords)
       ? campaign.trinketAcquisitionRecords
@@ -1341,6 +1342,22 @@ export function migrateCampaignToV18(campaign: CampaignState): CampaignState {
   };
 }
 
+/** v19 persists the staged healing intent and live Trinket opportunities together. */
+export function migrateCampaignToV19(campaign: CampaignState): CampaignState {
+  const raw = campaign as CampaignState & Record<string, unknown>;
+  const pending = raw.pendingHealingAction;
+  const value = pending as unknown as Record<string, unknown> | undefined;
+  const valid = pending && typeof pending === 'object'
+    && value?.kind === 'hero-healing-skill'
+    && typeof value.eventId === 'string'
+    && (value.stage === 'healer-window' || value.stage === 'target-window');
+  return {
+    ...campaign,
+    saveVersion: SAVE_VERSION,
+    pendingHealingAction: valid ? campaign.pendingHealingAction : null,
+  };
+}
+
 /** 净化已存在的 campaignProgress（补缺字段 / clamp / 去掉非法类型），不重新随机。 */
 function sanitizeCampaignProgress(raw: CampaignProgressState): CampaignProgressState {
   const base = createInitialCampaignProgress({
@@ -1386,7 +1403,7 @@ function sanitizeCampaignProgress(raw: CampaignProgressState): CampaignProgressS
  *  → v16 = Phase 10E Final Encounter 四形态 → v17 = Phase 11A.1 Campaign Orchestration）。
  */
 export function migrateCampaignToLatest(campaign: CampaignState): CampaignState {
-  return migrateCampaignToV18(migrateCampaignToV17(
+  return migrateCampaignToV19(migrateCampaignToV18(migrateCampaignToV17(
     migrateCampaignToV16(
       migrateCampaignToV15(
         migrateCampaignToV14(
@@ -1404,7 +1421,7 @@ export function migrateCampaignToLatest(campaign: CampaignState): CampaignState 
         ),
       ),
     ),
-  ));
+  )));
 }
 
 /**

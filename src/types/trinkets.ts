@@ -55,6 +55,8 @@ export type TrinketUseWindow =
   | 'after-damage-applied'
   | 'before-healing-applied'
   | 'after-healing-applied'
+  | 'before-healing-delivered-resolution'
+  | 'before-healing-received-resolution'
   | 'before-stress-applied'
   | 'after-stress-applied'
   | 'hero-turn-start'

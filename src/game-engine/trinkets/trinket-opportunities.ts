@@ -27,6 +27,8 @@ export const WIRED_WINDOWS: readonly TrinketUseWindow[] = [
   'after-attack-roll-before-hit-resolution',
   'hero-turn-start',
   'room-entered',
+  'before-healing-delivered-resolution',
+  'before-healing-received-resolution',
 ] as const;
 
 export function isWiredWindow(w: TrinketUseWindow): boolean {
@@ -149,6 +151,8 @@ export interface OpenTrinketWindowCommand {
   eventId: string;
   /** 根事件 id（默认等于 eventId）。 */
   rootEventId?: string;
+  /** Physical cards already offered by an earlier stage of the same root event. */
+  excludedTrinketInstanceIds?: readonly string[];
 }
 
 export interface OpenTrinketWindowResult {
@@ -177,7 +181,10 @@ export function openTrinketWindow(
   const rootEventId = cmd.rootEventId ?? cmd.eventId;
   const opened: TrinketUseOpportunity[] = [];
 
-  for (const inst of hero.equippedTrinkets ?? []) {
+  const excluded = new Set(cmd.excludedTrinketInstanceIds ?? []);
+  const equipped = [...(hero.equippedTrinkets ?? [])].sort((a, b) => a.instanceId.localeCompare(b.instanceId));
+  for (const inst of equipped) {
+    if (excluded.has(inst.instanceId)) continue;
     const def = getTrinketById(inst.trinketId);
     if (!def) continue; // 未知定义 → 静默跳过，绝不白屏（核心约束 10）
     const side = getTrinketSide(inst.trinketId, inst.currentSide);

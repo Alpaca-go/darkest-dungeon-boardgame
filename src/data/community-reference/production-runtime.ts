@@ -114,6 +114,7 @@ type SourceTrinket = (typeof trinketData)[number];
 export const normalizePrimitives = (message: string): string[] => {
   const primitives: string[] = [];
   if (/timing hero-skill-resolution/i.test(message)) primitives.push('POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW');
+  if (/timing hero-(heals|is-healed)/i.test(message)) primitives.push('STAGED_HEALING_TRINKET_WINDOWS');
   if (/room-token composition/i.test(message)) primitives.push('QUEST_ROOM_TOKEN_COMPOSITION');
   if (/firewood|resting-point/i.test(message)) primitives.push('QUEST_FIREWOOD_RESTING_POINT_SETUP');
   if (/repeated per-unit XP/i.test(message)) primitives.push('QUEST_XP_UNIT_ACCOUNTING');
@@ -521,10 +522,34 @@ function postRollModifierTrinket(
 
 const accuracyStone = postRollModifierTrinket('community-trinket-core-accuracy-stone', { type: 'accuracy', amount: 1 }, { type: 'accuracy', amount: -1 });
 const criticalStone = postRollModifierTrinket('community-trinket-core-critical-stone', { type: 'crit', amount: 2 }, { type: 'accuracy', amount: -2 });
+const chirurgeonsSource = sourceTrinket('community-trinket-core-chirurgeons-charm');
+const chirurgeonsCharm: TrinketDefinition = {
+  id: chirurgeonsSource.id,
+  name: chirurgeonsSource.printedName,
+  level: 2,
+  positiveSide: {
+    side: 'positive', label: '治疗输出 +2', description: chirurgeonsSource.positiveSide.label,
+    useWindows: ['before-healing-delivered-resolution'], modifiers: [{ type: 'healing', amount: 2 }],
+    effects: [], canUse: [{ type: 'in-battle' }],
+  },
+  negativeSide: {
+    side: 'negative', label: '治疗承受 -4', description: chirurgeonsSource.negativeSide.label,
+    useWindows: ['before-healing-received-resolution'], modifiers: [{ type: 'healing', amount: -4 }],
+    effects: [], canUse: [{ type: 'in-battle' }],
+  },
+  sellPrice: sellPriceForLevel(2), buyPrice: buyPriceForLevel(2), officialDataStatus: 'verified',
+  sourceReference: chirurgeonsSource.sourceReferences.join('; '), enabledInOfficialPool: false,
+  dataOrigin: 'community',
+  runtimeContentMetadata: {
+    sourceDefinitionId: chirurgeonsSource.id, contentSet: 'core', region: null,
+    sourceOrigin: 'community-complete-edition',
+  },
+};
 
 export const COMMUNITY_TRINKET_RUNTIME_ADAPTERS: Readonly<Record<string, CommunityTrinketRuntimeAdapter>> = Object.freeze({
   [accuracyStone.id]: { adapterId: 'post-roll-accuracy-stone-v1', definitionId: accuracyStone.id, requiredPrimitives: ['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW'], definition: accuracyStone },
   [criticalStone.id]: { adapterId: 'post-roll-critical-stone-v1', definitionId: criticalStone.id, requiredPrimitives: ['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW'], definition: criticalStone },
+  [chirurgeonsCharm.id]: { adapterId: 'staged-healing-chirurgeons-charm-v1', definitionId: chirurgeonsCharm.id, requiredPrimitives: ['STAGED_HEALING_TRINKET_WINDOWS'], definition: chirurgeonsCharm },
 });
 
 export const COMMUNITY_TRINKET_PRODUCTION_PROOFS: Readonly<Record<string, CommunityProductionProof>> = Object.freeze({
@@ -539,6 +564,13 @@ export const COMMUNITY_TRINKET_PRODUCTION_PROOFS: Readonly<Record<string, Commun
     semanticSupported: true, stateful: true, productionTests: ['C1BR-PA-CRITICAL-RUNTIME'],
     saveReplayTests: ['C1BR-SAVE-CRITICAL-SIDE-REPLAY'], selectorTests: ['C1BR-CS-TRINKET-METADATA'],
     e2eTests: ['C1BR-E2E-CRITICAL'],
+  },
+  [chirurgeonsCharm.id]: {
+    definitionId: chirurgeonsCharm.id, runtimeAdapterId: 'staged-healing-chirurgeons-charm-v1',
+    requiredPrimitives: ['STAGED_HEALING_TRINKET_WINDOWS'], sourceSupported: true,
+    semanticSupported: true, stateful: true, productionTests: ['C1C5-CHIRURGEONS-RUNTIME'],
+    saveReplayTests: ['C1C5-CHIRURGEONS-SAVE-REPLAY'], selectorTests: ['C1C5-CHIRURGEONS-SELECTOR'],
+    e2eTests: ['C1C5-E2E-CHIRURGEONS'],
   },
 });
 
@@ -563,7 +595,8 @@ export function evaluateCommunityTrinketCapability(
     ...source.positiveSide.runtimeSupport.missingCapabilities,
     ...source.negativeSide.runtimeSupport.missingCapabilities,
   ].flatMap(normalizePrimitives))];
-  const missingPrimitives = declaredMissingPrimitives.filter((primitive) => primitive !== 'POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW');
+  const implementedTrinketPrimitives = new Set(['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW', 'STAGED_HEALING_TRINKET_WINDOWS']);
+  const missingPrimitives = declaredMissingPrimitives.filter((primitive) => !implementedTrinketPrimitives.has(primitive));
   const sourceSemanticComplete = !sourceBlocked && source.unresolvedFields.length === 0;
   const productionUiProofComplete = Boolean(proofMatches && proof && measuredRuntimeProof.e2eProofPresent
     && allProofsUseSurface(proof.e2eTests, 'production-ui', registeredProofs));

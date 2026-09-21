@@ -94,6 +94,12 @@ export default function BattlePage() {
         </div>
       ) : null}
 
+      {campaign.pendingHealingAction ? (
+        <div className="rounded border border-emerald-500 bg-emerald-500/10 p-3 text-sm text-dd-text" data-testid="healing-trinket-window">
+          治疗尚未结算：当前等待{campaign.pendingHealingAction.stage === 'healer-window' ? '治疗者' : '受治疗者'}声明饰品。
+        </div>
+      ) : null}
+
       <Battlefield
         battle={battle}
         colorOf={colorOf}

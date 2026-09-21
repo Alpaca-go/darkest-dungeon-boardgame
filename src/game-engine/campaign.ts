@@ -112,6 +112,7 @@ export function createNewCampaign(
     // ---- Phase 8C ----
     pendingTrinketAllocations: [],
     pendingTrinketUseOpportunities: [],
+    pendingHealingAction: null,
     pendingTrinketUseTransaction: null,
     trinketAcquisitionRecords: [],
     trinketUseRecords: [],

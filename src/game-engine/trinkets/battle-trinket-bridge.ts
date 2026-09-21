@@ -22,6 +22,7 @@ import { openTrinketWindow, openOpportunities, findOpportunity } from './trinket
 import { useTrinket, declineTrinketUse, sumModifiers } from './use-trinket';
 import { findHero } from './trinket-state';
 import { synchronizeCommunityGuardianDeaths } from '../campaign/act-four/community-guardian-battle';
+import { beginHealingTrinketAction, resolveHealingTrinketOpportunity } from './healing-trinket-bridge';
 
 // ---------------------------------------------------------------------------
 // before-attack-roll：冻结与恢复
@@ -54,7 +55,7 @@ export function beginHeroSkillAction(
   if (!battle || battle.status !== 'active' || !battle.activeActorId) {
     return { campaign, error: '当前没有进行中的战斗回合。', paused: false };
   }
-  if (battle.pendingAction) {
+  if (battle.pendingAction || campaign.pendingHealingAction) {
     return { campaign, error: '还有未结清的饰品决策，不能声明新动作。', paused: false };
   }
   const actorUnitId = battle.activeActorId;
@@ -62,7 +63,8 @@ export function beginHeroSkillAction(
   if (err) return { campaign, error: err, paused: false };
 
   const skill = getSkillById(skillId);
-  if (skill?.targetSide !== 'enemy') {
+  if (skill && skill.targetSide !== 'enemy') {
+    if (skill.heal) return beginHealingTrinketAction(campaign, actorUnitId, skillId, targetId);
     const resolved = heroUseSkill(battle, actorUnitId, skillId, targetId);
     return {
       campaign: synchronizeCommunityGuardianDeaths({ ...campaign, battle: resolved }),
@@ -121,6 +123,7 @@ function resumePendingAction(campaign: CampaignState): CampaignState {
     accuracy: pa.accuracyBonus,
     crit: pa.critBonus,
     damage: pa.damageBonus,
+    healing: 0,
   };
   const resolved = heroUseSkill(
     battle,
@@ -154,6 +157,9 @@ export function resolveTrinketOpportunity(
 ): ResolveOpportunityResult {
   const opp = findOpportunity(campaign, opportunityId);
   if (!opp) return { campaign, error: '使用机会不存在。', resumed: false };
+  if (campaign.pendingHealingAction && opp.rootEventId === campaign.pendingHealingAction.eventId) {
+    return resolveHealingTrinketOpportunity(campaign, opportunityId, action);
+  }
 
   let next = campaign;
   if (action === 'use') {

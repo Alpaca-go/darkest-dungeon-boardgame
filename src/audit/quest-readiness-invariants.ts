@@ -1,4 +1,7 @@
 import type { RuntimeCapabilityRecord } from '../data/community-reference/production-runtime';
+import type { TrinketDeckCoverage } from './level2-trinket-deck';
+
+const FAMILY_TRINKETS_ID = 'community-quest-warrens-lvl1-family-trinkets';
 
 interface QuestSourceForInvariant { id: string; contentSet: string; specialRules: unknown[] }
 
@@ -6,6 +9,7 @@ interface QuestSourceForInvariant { id: string; contentSet: string; specialRules
 export function questReadinessInvariantErrors(
   capabilities: readonly RuntimeCapabilityRecord[],
   sources: readonly QuestSourceForInvariant[],
+  level2DeckCoverage?: TrinketDeckCoverage,
 ): string[] {
   const sourceById = new Map(sources.map((source) => [source.id, source]));
   const errors: string[] = [];
@@ -25,6 +29,12 @@ export function questReadinessInvariantErrors(
     if (!Object.values(capability.measuredRuntimeProof).every(Boolean)) errors.push(`${capability.definitionId}: ready without complete measured proof`);
     if (!capability.productionReady) errors.push(`${capability.definitionId}: status/ready gate mismatch`);
     if (!source) errors.push(`${capability.definitionId}: ready without source definition`);
+  }
+  if (level2DeckCoverage && !level2DeckCoverage.completeForRandomDraw) {
+    const family = capabilities.find((entry) => entry.definitionId === FAMILY_TRINKETS_ID);
+    if (family?.productionReady || family?.productionStatus === 'PRODUCTION_READY') {
+      errors.push(`${FAMILY_TRINKETS_ID}: ready while Level 2 source deck is incomplete`);
+    }
   }
   return errors;
 }

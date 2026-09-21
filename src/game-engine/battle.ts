@@ -516,9 +516,12 @@ export interface TrinketActionBonuses {
   accuracy: number;
   crit: number;
   damage: number;
+  healing: number;
+  /** Frozen source amount for a persisted healing action. */
+  healingBase?: number;
 }
 
-const NO_TRINKET_BONUSES: TrinketActionBonuses = { accuracy: 0, crit: 0, damage: 0 };
+const NO_TRINKET_BONUSES: TrinketActionBonuses = { accuracy: 0, crit: 0, damage: 0, healing: 0 };
 
 /**
  * 校验英雄技能是否可以合法释放（不结算）。
@@ -658,7 +661,10 @@ export function heroUseSkill(
   } else {
     // 治疗 / 缓解压力 / buff（ally 或 self）——治疗统一走 applyBattleUnitHealing
     if (skill.heal) {
-      const rawHeal = skill.heal + levelBonus.heal;
+      const rawHeal = Math.max(
+        0,
+        (trinketBonuses.healingBase ?? (skill.heal + levelBonus.heal)) + trinketBonuses.healing,
+      );
       // Phase 8A：Quirk 治疗接受修正（目标为英雄时）
       const healMod =
         tgt.side === 'hero'
