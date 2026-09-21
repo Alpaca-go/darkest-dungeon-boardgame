@@ -1267,8 +1267,24 @@ function sanitizeQuestRuntimeState(value: unknown): CampaignState['questRuntimeS
     const entry = raw[key];
     return typeof entry === 'number' && Number.isFinite(entry) && entry >= 0 ? Math.floor(entry) : undefined;
   };
+  const processedRuleTransactionIds = Array.isArray(raw.processedRuleTransactionIds)
+    ? raw.processedRuleTransactionIds.filter((entry): entry is string => typeof entry === 'string').slice(-200)
+    : [];
+  const rawPending = raw.pendingRuleChoice;
+  const pendingRuleChoice = rawPending && typeof rawPending === 'object'
+    && typeof (rawPending as Record<string, unknown>).transactionId === 'string'
+    && typeof (rawPending as Record<string, unknown>).questRuleId === 'string'
+    && typeof (rawPending as Record<string, unknown>).triggerInstanceId === 'string'
+    && (rawPending as Record<string, unknown>).trigger === 'leave-room'
+    && (rawPending as Record<string, unknown>).effect
+    && typeof (rawPending as Record<string, unknown>).effect === 'object'
+    && ((rawPending as Record<string, unknown>).effect as Record<string, unknown>).type === 'discard-chosen-provision'
+    && ((rawPending as Record<string, unknown>).effect as Record<string, unknown>).amount === 1
+    ? rawPending as NonNullable<CampaignState['questRuntimeState']>['pendingRuleChoice']
+    : null;
   return {
     definitionId: raw.definitionId,
+    questInstanceId: typeof raw.questInstanceId === 'string' ? raw.questInstanceId : raw.definitionId,
     counters,
     flags,
     selectedRoomIds: [...raw.selectedRoomIds],
@@ -1279,6 +1295,8 @@ function sanitizeQuestRuntimeState(value: unknown): CampaignState['questRuntimeS
     firewoodTokensRemaining: optionalCount('firewoodTokensRemaining') ?? 0,
     restingPointsRemaining: optionalCount('restingPointsRemaining') ?? 0,
     restingPointsSpent: optionalCount('restingPointsSpent') ?? 0,
+    pendingRuleChoice,
+    processedRuleTransactionIds,
   };
 }
 

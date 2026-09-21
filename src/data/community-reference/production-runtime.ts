@@ -16,6 +16,9 @@ import {
   type RegisteredProductionProof,
 } from '../../audit/production-proof-registry';
 import { restAllocationSemanticsImplemented } from '../../audit/rest-semantic-contract';
+import type { CampaignState } from '../../types';
+import type { QuestRuntimeState } from '../../types/content-runtime';
+import type { QuestSpecialRuleDefinition } from '../../game-engine/quests/quest-special-rule-types';
 
 export type ProductionStatus = 'PRODUCTION_READY' | 'ADAPTER_REQUIRED' | 'ENGINE_PRIMITIVE_MISSING' | 'SOURCE_BLOCKED';
 
@@ -29,6 +32,15 @@ export interface RuntimeProofState {
 
 export interface RuntimeCapabilityRecord {
   definitionId: string;
+  sourceSupported: boolean;
+  engineCapable: boolean;
+  semanticComplete: boolean;
+  adapterComplete: boolean;
+  selectorReachable: boolean;
+  productionProofComplete: boolean;
+  saveReplayProofComplete: boolean;
+  e2eProofComplete: boolean;
+  productionReady: boolean;
   sourceStatus: string;
   semanticStatus: string;
   objectiveRuntimeSupport?: ProductionStatus;
@@ -53,10 +65,16 @@ export interface CommunityTrinketRuntimeAdapter {
 }
 
 export interface CommunityQuestRuntimeAdapter {
-  adapterId: 'c1c1-simple-community-quest-v1';
+  adapterId: 'c1c1-simple-community-quest-v1' | 'c1c2-provision-discard-quest-v1';
   definitionId: string;
+  questDefinitionId: string;
   requiredPrimitives: string[];
   definition: QuestDefinition;
+  setup(state: QuestRuntimeState): QuestRuntimeState;
+  evaluateObjective(campaign: CampaignState): number;
+  evaluateCompletion(campaign: CampaignState): boolean;
+  applyRewards(campaign: CampaignState): CampaignState;
+  specialRules: QuestSpecialRuleDefinition[];
 }
 
 export interface CommunityProductionProof {
@@ -91,6 +109,7 @@ export function implementedQuestPrimitives(restSemanticsReady = restAllocationSe
     'QUEST_ROOM_TOKEN_COMPOSITION',
     'QUEST_FIREWOOD_RESTING_POINT_SETUP',
     'QUEST_XP_UNIT_ACCOUNTING',
+    'QUEST_RULE_PROVISION_INTERACTION',
     ...(restSemanticsReady ? ['QUEST_REST_ALLOCATION_SEMANTICS'] : []),
   ]);
 }
@@ -112,18 +131,59 @@ type SimpleSourceQuest = SourceQuest & {
   firewood: QuestFirewoodSetup;
 };
 
+const DEEP_IN_THE_WARRENS_ID = 'community-quest-warrens-lvl3-deep-in-the-warrens';
+
+const SPECIAL_RULE_PRIMITIVES: Readonly<Record<string, string>> = Object.freeze({
+  'room-setup': 'QUEST_RULE_ROOM_SETUP',
+  'dungeon-setup': 'QUEST_RULE_ROOM_SETUP',
+  'room-selection': 'QUEST_RULE_ROOM_SETUP',
+  'room-clear-rule': 'QUEST_RULE_ROOM_CLEAR',
+  exploration: 'QUEST_RULE_EXPLORATION',
+  scouting: 'QUEST_RULE_EXPLORATION',
+  'battle-start': 'QUEST_RULE_BATTLE_SETUP',
+  'battle-end': 'QUEST_RULE_BATTLE_RESULT',
+  initiative: 'QUEST_RULE_BATTLE_SETUP',
+  'monster-pool': 'QUEST_RULE_MONSTER_STATE',
+  'monster-spawn': 'QUEST_RULE_MONSTER_STATE',
+  'monster-stat-modifier': 'QUEST_RULE_MONSTER_STATE',
+  curio: 'QUEST_RULE_TOKEN_INTERACTION',
+  loot: 'QUEST_RULE_TOKEN_INTERACTION',
+  provision: 'QUEST_RULE_PROVISION_INTERACTION',
+  'reward-modifier': 'QUEST_RULE_REWARD_OVERRIDE',
+  'objective-qualification': 'QUEST_RULE_QUEST_COMPLETION',
+  'objective-completion': 'QUEST_RULE_QUEST_COMPLETION',
+  'quest-setup': 'QUEST_RULE_ROOM_SETUP',
+  'campaign-rule': 'QUEST_RULE_QUEST_COMPLETION',
+  'hero-stress': 'QUEST_RULE_HERO_STATE',
+  'hero-condition': 'QUEST_RULE_HERO_STATE',
+});
+
+export function classifyQuestSpecialRulePrimitives(source: SourceQuest): string[] {
+  return [...new Set(source.specialRules.map((rule) =>
+    SPECIAL_RULE_PRIMITIVES[rule.semanticCategory] ?? 'SOURCE_SEMANTIC_UNRESOLVED'))];
+}
+
 function isC1C1SimpleCoreQuest(source: SourceQuest): source is SimpleSourceQuest {
   const declared = [...new Set(source.runtimeSupport.missingCapabilities.flatMap(normalizePrimitives))];
   return source.sourceStatus === 'source-supported'
-    && (source.region === 'ruins' || source.region === 'warrens')
     && source.questType === 'standard'
     && Array.isArray(source.specialRules) && source.specialRules.length === 0
     && declared.length === 3
     && declared.every((primitive) => IMPLEMENTED_QUEST_PRIMITIVES.has(primitive));
 }
 
-function adaptSimpleCommunityQuest(source: SimpleSourceQuest): CommunityQuestRuntimeAdapter {
-  if (source.specialRules.length !== 0) throw new Error(`Simple Quest adapter rejects special rules: ${source.id}`);
+function isC1C2ProvisionQuest(source: SourceQuest): source is SimpleSourceQuest {
+  return source.id === DEEP_IN_THE_WARRENS_ID
+    && source.sourceStatus === 'source-supported'
+    && source.questType === 'standard'
+    && source.firewood.tokens === 0
+    && source.unresolvedFields.length === 0
+    && classifyQuestSpecialRulePrimitives(source).join(',') === 'QUEST_RULE_PROVISION_INTERACTION';
+}
+
+function adaptCommunityQuest(source: SimpleSourceQuest): CommunityQuestRuntimeAdapter {
+  const provisionRule = source.id === DEEP_IN_THE_WARRENS_ID;
+  if (source.specialRules.length !== 0 && !provisionRule) throw new Error(`Quest adapter rejects unsupported special rules: ${source.id}`);
   const roomTokens = Object.entries(source.dungeonStructure.roomTokens)
     .filter((entry): entry is [QuestRoomTokenType, number] => Number.isInteger(entry[1]) && Number(entry[1]) > 0)
     .map(([roomType, count]) => ({ roomType, count }));
@@ -142,8 +202,8 @@ function adaptSimpleCommunityQuest(source: SimpleSourceQuest): CommunityQuestRun
   };
   const runtimeContentMetadata: RuntimeContentMetadata = {
     sourceDefinitionId: source.id,
-    contentSet: 'core',
-    region: source.region as 'ruins' | 'warrens',
+    contentSet: source.contentSet === 'crimson-court' ? 'crimson-court' : 'core',
+    region: source.region as RuntimeContentMetadata['region'],
     sourceOrigin: 'community-complete-edition',
   };
   const firewoodSetup: QuestFirewoodSetup = {
@@ -151,13 +211,15 @@ function adaptSimpleCommunityQuest(source: SimpleSourceQuest): CommunityQuestRun
     restingPoints: Number(source.firewood.restingPoints),
   };
   return {
-    adapterId: 'c1c1-simple-community-quest-v1',
+    adapterId: provisionRule ? 'c1c2-provision-discard-quest-v1' : 'c1c1-simple-community-quest-v1',
     definitionId: source.id,
+    questDefinitionId: source.id,
     requiredPrimitives: [
       'QUEST_ROOM_TOKEN_COMPOSITION',
       'QUEST_FIREWOOD_RESTING_POINT_SETUP',
       'QUEST_XP_UNIT_ACCOUNTING',
       ...(firewoodSetup.tokens > 0 ? ['QUEST_REST_ALLOCATION_SEMANTICS'] : []),
+      ...(provisionRule ? ['QUEST_RULE_PROVISION_INTERACTION'] : []),
     ],
     definition: {
       id: source.id,
@@ -175,12 +237,26 @@ function adaptSimpleCommunityQuest(source: SimpleSourceQuest): CommunityQuestRun
       xpUnit,
       firewoodSetup,
     },
+    setup: (state) => state,
+    evaluateObjective: (campaign) => campaign.questRuntimeState?.qualifiedUnitCount ?? 0,
+    evaluateCompletion: (campaign) => Boolean(campaign.dungeon?.objectiveComplete),
+    applyRewards: (campaign) => campaign,
+    specialRules: provisionRule ? [{
+      id: 'deep-in-the-warrens-discard-after-leave',
+      trigger: 'leave-room',
+      conditions: [
+        { type: 'runtime-content-profile', profile: 'community-complete-edition' },
+        { type: 'quest-active' },
+      ],
+      effects: [{ type: 'discard-chosen-provision', amount: 1 }],
+      sourceReferences: [source.sourceReferences[0], 'printedSpecialRules.0'],
+    }] : [],
   };
 }
 
 export const COMMUNITY_QUEST_RUNTIME_ADAPTERS: Readonly<Record<string, CommunityQuestRuntimeAdapter>> = Object.freeze(
-  Object.fromEntries(questData.filter(isC1C1SimpleCoreQuest).map((source) => {
-    const adapter = adaptSimpleCommunityQuest(source);
+  Object.fromEntries(questData.filter((source) => isC1C1SimpleCoreQuest(source) || isC1C2ProvisionQuest(source)).map((source) => {
+    const adapter = adaptCommunityQuest(source as SimpleSourceQuest);
     return [source.id, adapter];
   })),
 );
@@ -189,7 +265,7 @@ const questDefinitionIds = Object.keys(COMMUNITY_QUEST_RUNTIME_ADAPTERS);
 export const COMMUNITY_QUEST_PRODUCTION_PROOFS: Readonly<Record<string, CommunityProductionProof>> = Object.freeze(
   Object.fromEntries(questDefinitionIds.map((definitionId) => [definitionId, {
     definitionId,
-    runtimeAdapterId: 'c1c1-simple-community-quest-v1',
+    runtimeAdapterId: COMMUNITY_QUEST_RUNTIME_ADAPTERS[definitionId].adapterId,
     requiredPrimitives: [...COMMUNITY_QUEST_RUNTIME_ADAPTERS[definitionId].requiredPrimitives],
     primitiveProofRequirements: COMMUNITY_QUEST_RUNTIME_ADAPTERS[definitionId].definition.firewoodSetup!.tokens > 0
       ? { 'C1C1R2-E2E-REST-ALLOCATION': 'QUEST_REST_ALLOCATION_SEMANTICS' }
@@ -197,10 +273,15 @@ export const COMMUNITY_QUEST_PRODUCTION_PROOFS: Readonly<Record<string, Communit
     sourceSupported: true,
     semanticSupported: true,
     stateful: true,
-    productionTests: ['C1C1-QUEST-RUNTIME', 'C1C1R-QUEST-SOURCE-SETUP'],
-    saveReplayTests: ['C1C1-QUEST-SAVE-REPLAY'],
-    selectorTests: ['C1C1-QUEST-SELECTOR'],
-    e2eTests: [
+    productionTests: definitionId === DEEP_IN_THE_WARRENS_ID
+      ? ['C1C2-SPECIAL-RULE-RUNTIME']
+      : definitionId.startsWith('community-quest-crimson-court-')
+        ? ['C1C2-ADAPTER-RUNTIME'] : ['C1C1-QUEST-RUNTIME', 'C1C1R-QUEST-SOURCE-SETUP'],
+    saveReplayTests: definitionId === DEEP_IN_THE_WARRENS_ID ? ['C1C2-SPECIAL-RULE-SAVE-REPLAY']
+      : definitionId.startsWith('community-quest-crimson-court-') ? ['C1C2-ADAPTER-SAVE-REPLAY'] : ['C1C1-QUEST-SAVE-REPLAY'],
+    selectorTests: definitionId === DEEP_IN_THE_WARRENS_ID ? ['C1C2-SPECIAL-RULE-SELECTOR']
+      : definitionId.startsWith('community-quest-crimson-court-') ? ['C1C2-ADAPTER-SELECTOR'] : ['C1C1-QUEST-SELECTOR'],
+    e2eTests: definitionId === DEEP_IN_THE_WARRENS_ID ? ['C1C2-E2E-SPECIAL-RULE'] : [
       'C1C1R-E2E-SIMPLE-QUEST-ADAPTER',
       ...(COMMUNITY_QUEST_RUNTIME_ADAPTERS[definitionId].definition.firewoodSetup!.tokens > 0
         ? ['C1C1R2-E2E-REST-ALLOCATION'] : []),
@@ -225,12 +306,19 @@ export function evaluateCommunityQuestCapability(
 ): RuntimeCapabilityRecord {
   const sourceBlocked = source.sourceStatus !== 'source-supported';
   const declaredMissingPrimitives = [...new Set(source.runtimeSupport.missingCapabilities.flatMap(normalizePrimitives))];
+  const specialRulePrimitives = classifyQuestSpecialRulePrimitives(source);
+  const basePrimitives = declaredMissingPrimitives.filter((primitive) => primitive !== 'QUEST_SPECIAL_RULE_ADAPTER');
   const adapter = adapters[source.id];
-  const requiredPrimitives = [
-    ...declaredMissingPrimitives,
+  const requiredPrimitives = [...new Set([
+    ...basePrimitives,
+    ...specialRulePrimitives,
     ...((adapter?.definition.firewoodSetup?.tokens ?? 0) > 0 ? ['QUEST_REST_ALLOCATION_SEMANTICS'] : []),
-  ];
+  ])];
   const missingPrimitives = requiredPrimitives.filter((primitive) => !implementedPrimitives.has(primitive));
+  const semanticComplete = !sourceBlocked
+    && source.unresolvedFields.length === 0
+    && !specialRulePrimitives.includes('SOURCE_SEMANTIC_UNRESOLVED')
+    && (!(Number(source.firewood.tokens) > 0) || implementedPrimitives.has('QUEST_REST_ALLOCATION_SEMANTICS'));
   const adapterValid = Boolean(adapter && questAdapterSourceSetupErrors(source, adapter).length === 0);
   const proof = proofs[source.id];
   const proofMatches = Boolean(adapterValid && adapter && proof && proof.definitionId === source.id && proof.runtimeAdapterId === adapter.adapterId);
@@ -254,7 +342,7 @@ export function evaluateCommunityQuestCapability(
     && measuredRuntimeProof.selectorProofPresent && measuredRuntimeProof.e2eProofPresent);
   const productionStatus: ProductionStatus = sourceBlocked ? 'SOURCE_BLOCKED'
     : missingPrimitives.length > 0 ? 'ENGINE_PRIMITIVE_MISSING'
-      : adapterValid && proofComplete ? 'PRODUCTION_READY' : 'ADAPTER_REQUIRED';
+      : semanticComplete && adapterValid && proofComplete ? 'PRODUCTION_READY' : 'ADAPTER_REQUIRED';
   const blockerCodes = productionStatus === 'SOURCE_BLOCKED' ? ['SOURCE_EVIDENCE_BLOCKED']
     : productionStatus === 'ENGINE_PRIMITIVE_MISSING' ? missingPrimitives
       : productionStatus === 'PRODUCTION_READY' ? [] : [
@@ -267,10 +355,20 @@ export function evaluateCommunityQuestCapability(
       ];
   return {
     definitionId: source.id,
+    sourceSupported: !sourceBlocked,
+    engineCapable: missingPrimitives.length === 0,
+    semanticComplete,
+    adapterComplete: adapterValid,
+    selectorReachable: measuredRuntimeProof.selectorProofPresent,
+    productionProofComplete: measuredRuntimeProof.productionProofPresent,
+    saveReplayProofComplete: measuredRuntimeProof.saveReplayProofPresent,
+    e2eProofComplete: measuredRuntimeProof.e2eProofPresent,
+    productionReady: productionStatus === 'PRODUCTION_READY',
     sourceStatus: source.sourceStatus,
     semanticStatus: source.normalizationStatus,
     objectiveRuntimeSupport: productionStatus,
-    specialRuleRuntimeSupport: source.specialRules.length === 0 ? productionStatus : 'ENGINE_PRIMITIVE_MISSING',
+    specialRuleRuntimeSupport: source.specialRules.length === 0 || specialRulePrimitives.every((primitive) => implementedPrimitives.has(primitive))
+      ? productionStatus : 'ENGINE_PRIMITIVE_MISSING',
     requiredPrimitives,
     existingPrimitives: source.runtimeSupport.existingCandidates,
     missingPrimitives,
@@ -387,7 +485,17 @@ export function evaluateCommunityTrinketCapability(
     ...(measuredRuntimeProof.e2eProofPresent ? [] : ['E2E_PROOF_MISSING']),
       ];
   return {
-    definitionId: source.id, sourceStatus: source.sourceStatus, semanticStatus: source.normalizationStatus,
+    definitionId: source.id,
+    sourceSupported: !sourceBlocked,
+    engineCapable: missingPrimitives.length === 0,
+    semanticComplete: !sourceBlocked && source.unresolvedFields.length === 0,
+    adapterComplete: Boolean(adapter),
+    selectorReachable: measuredRuntimeProof.selectorProofPresent,
+    productionProofComplete: measuredRuntimeProof.productionProofPresent,
+    saveReplayProofComplete: measuredRuntimeProof.saveReplayProofPresent,
+    e2eProofComplete: measuredRuntimeProof.e2eProofPresent,
+    productionReady: productionStatus === 'PRODUCTION_READY',
+    sourceStatus: source.sourceStatus, semanticStatus: source.normalizationStatus,
     positiveRuntimeSupport: productionStatus, negativeRuntimeSupport: productionStatus,
     requiredPrimitives: adapter?.requiredPrimitives ?? declaredMissingPrimitives,
     existingPrimitives: [...source.positiveSide.runtimeSupport.existingCandidates, ...source.negativeSide.runtimeSupport.existingCandidates],

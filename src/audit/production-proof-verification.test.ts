@@ -109,10 +109,13 @@ describe('C1B-R2 production proof mutation gate', () => {
   it('accepts the real bidirectional registry without unresolved, mismatched, or orphan proofs', () => {
     const allManifests = { ...COMMUNITY_TRINKET_PRODUCTION_PROOFS, ...COMMUNITY_QUEST_PRODUCTION_PROOFS };
     const analysis = analyzeProductionProofBindings(allManifests, PRODUCTION_PROOF_REGISTRY);
+    const requiredProofCount = Object.values(allManifests).reduce((sum, manifest) => sum
+      + manifest.productionTests.length + manifest.saveReplayTests.length
+      + manifest.selectorTests.length + manifest.e2eTests.length, 0);
     expect(analysis).toMatchObject({
-      registeredProofCount: 13,
-      requiredProofCount: 48,
-      resolvedProofCount: 48,
+      registeredProofCount: Object.keys(PRODUCTION_PROOF_REGISTRY).length,
+      requiredProofCount,
+      resolvedProofCount: requiredProofCount,
       unresolvedProofCount: 0,
       crossDefinitionMismatchCount: 0,
       wrongTypeCount: 0,

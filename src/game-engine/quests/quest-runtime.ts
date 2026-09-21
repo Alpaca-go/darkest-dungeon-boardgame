@@ -28,10 +28,11 @@ export function calculateQuestXpReward(campaign: CampaignState): QuestXpEvaluati
   return evaluateQuestXpUnits(quest, qualified);
 }
 
-export function createQuestRuntimeState(quest: QuestDefinition): CampaignState['questRuntimeState'] {
+export function createQuestRuntimeState(quest: QuestDefinition, questInstanceId = `${quest.id}:runtime`): CampaignState['questRuntimeState'] {
   if (!quest.xpUnit || !quest.dungeonComposition) return null;
   return {
     definitionId: quest.id,
+    questInstanceId,
     counters: { qualifiedUnitCount: 0, xpUnitsEarned: 0, xpEarned: 0 },
     flags: { objectiveComplete: false },
     selectedRoomIds: [],
@@ -42,6 +43,8 @@ export function createQuestRuntimeState(quest: QuestDefinition): CampaignState['
     firewoodTokensRemaining: quest.firewoodSetup?.tokens ?? 0,
     restingPointsRemaining: quest.firewoodSetup?.restingPoints ?? 0,
     restingPointsSpent: 0,
+    pendingRuleChoice: null,
+    processedRuleTransactionIds: [],
   };
 }
 

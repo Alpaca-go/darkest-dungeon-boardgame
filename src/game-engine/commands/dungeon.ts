@@ -11,9 +11,11 @@ import { canMoveTo, moveToRoom as engineMoveToRoom } from '../dungeon';
 import { openRoomEnteredWindows } from '../trinkets/battle-trinket-bridge';
 import { evaluateReplacementFlow } from '../stagecoach';
 import { settleBattleState } from './battle';
+import { evaluateQuestRules } from '../quests/quest-special-rule-runtime';
 
 export type EnterRoomError =
   | 'cannot-move'
+  | 'pending-quest-rule-choice'
   | 'battle-settlement-failed';
 
 export interface EnterRoomResult {
@@ -29,11 +31,19 @@ export function enterDungeonRoom(
   campaign: CampaignState,
   roomId: string,
 ): EnterRoomResult {
+  if (campaign.questRuntimeState?.pendingRuleChoice) {
+    return { ok: false, campaign, error: 'pending-quest-rule-choice' };
+  }
   if (!campaign.dungeon || !canMoveTo(campaign.dungeon, roomId)) {
     return { ok: false, campaign, error: 'cannot-move' };
   }
 
+  const previousRoomId = campaign.dungeon.currentRoomId;
   let next: CampaignState = engineMoveToRoom(campaign, roomId);
+  next = evaluateQuestRules(next, {
+    trigger: 'leave-room',
+    triggerInstanceId: `${previousRoomId}->${roomId}`,
+  });
 
   // 进入战斗房间时立即结算（压力 / 死亡 / 精神）。
   // 即使 settleBattleState 返回 mental-guard-exceeded（极少见，长 mental loop），

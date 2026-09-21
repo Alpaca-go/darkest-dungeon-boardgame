@@ -267,7 +267,10 @@ export function selectQuest(campaign: CampaignState, questId: string): CampaignS
   let next: CampaignState = {
     ...campaign,
     currentQuestId: questId,
-    questRuntimeState: createQuestRuntimeState(quest),
+    questRuntimeState: createQuestRuntimeState(
+      quest,
+      `${campaign.id}:${questId}:run-${campaign.completedQuestCount + 1}`,
+    ),
     questStatus: 'active',
     dungeon: generateDungeon(questId),
     battle: null,

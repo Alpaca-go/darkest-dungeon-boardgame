@@ -148,7 +148,12 @@ export function commitBattleRetreat(campaign: CampaignState): BattleSettlementRe
   if (!campaign.battle) {
     return { ok: false, campaign, error: 'battle-not-active-for-retreat', mentalLoops: 0 };
   }
-  const settled = settleBattleState(campaign);
+  // The round-limit pipeline has already committed `defeat` before the UI exposes
+  // "Retreat to dungeon". Do not send that terminal state through the active-only
+  // settlement guard again or the visible button becomes a no-op.
+  const settled = campaign.battle.status === 'defeat'
+    ? { ok: true as const, campaign, error: null, mentalLoops: 0 }
+    : settleBattleState(campaign);
   if (!settled.ok) return settled;
   const next = retreatFromBattle(settled.campaign);
   return { ok: true, campaign: next, error: null, mentalLoops: settled.mentalLoops };

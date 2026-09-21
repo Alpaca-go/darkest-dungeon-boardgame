@@ -11,6 +11,7 @@ import QuirkDecisionOverlay from '../quirk/QuirkDecisionOverlay';
 import DiseaseAcquisitionOverlay from '../disease/DiseaseAcquisitionOverlay';
 import TrinketUseOverlay from '../trinkets/TrinketUseOverlay';
 import TrinketAllocationOverlay from '../trinkets/TrinketAllocationOverlay';
+import QuestRuleChoiceOverlay from '../quest/QuestRuleChoiceOverlay';
 
 /**
  * 统一外层布局：顶部资源条 + 导航 + 内容区(Outlet) + 底部说明。
@@ -116,6 +117,7 @@ export default function GameShell() {
       {/* Phase 8C：饰品使用机会 / 待分配（含死亡转移）浮层，阻塞至玩家决策 */}
       <TrinketUseOverlay />
       <TrinketAllocationOverlay />
+      <QuestRuleChoiceOverlay />
       <MentalEventOverlay />
       <DebugPanel />
     </div>

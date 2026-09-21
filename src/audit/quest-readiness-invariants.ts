@@ -1,10 +1,6 @@
 import type { RuntimeCapabilityRecord } from '../data/community-reference/production-runtime';
 
-interface QuestSourceForInvariant {
-  id: string;
-  contentSet: string;
-  specialRules: unknown[];
-}
+interface QuestSourceForInvariant { id: string; contentSet: string; specialRules: unknown[] }
 
 /** Validates each measured Ready result without asserting a target count. */
 export function questReadinessInvariantErrors(
@@ -18,10 +14,10 @@ export function questReadinessInvariantErrors(
     if (capability.missingPrimitives.length > 0) errors.push(`${capability.definitionId}: ready with missing primitive`);
     if (capability.adapterStatus !== 'IMPLEMENTED') errors.push(`${capability.definitionId}: ready without adapter`);
     if (!Object.values(capability.measuredRuntimeProof).every(Boolean)) errors.push(`${capability.definitionId}: ready without complete proof`);
-    if (source?.specialRules.length) errors.push(`${capability.definitionId}: special-rule Quest ready`);
-    if (source?.contentSet === 'crimson-court' && source.specialRules.length === 0) {
-      errors.push(`${capability.definitionId}: deferred Crimson Court Quest ready`);
-    }
+    if (!capability.sourceSupported) errors.push(`${capability.definitionId}: ready without source support`);
+    if (!capability.semanticComplete) errors.push(`${capability.definitionId}: ready without semantic completion`);
+    if (!capability.productionReady) errors.push(`${capability.definitionId}: status/ready gate mismatch`);
+    if (!source) errors.push(`${capability.definitionId}: ready without source definition`);
   }
   return errors;
 }

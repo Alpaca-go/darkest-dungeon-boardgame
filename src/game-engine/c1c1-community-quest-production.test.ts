@@ -57,7 +57,7 @@ function campaignFor(questId: string): CampaignState {
 
 describe('C1C-1 executable Community Quest production proofs', () => {
   productionProofTest(registration('C1C1-QUEST-RUNTIME'), () => {
-    expect(COMMUNITY_RUNTIME_QUESTS.map((quest) => quest.id)).toEqual([
+    expect(COMMUNITY_RUNTIME_QUESTS.filter((quest) => C1C1_CORE_QUEST_IDS.includes(quest.id as typeof C1C1_CORE_QUEST_IDS[number])).map((quest) => quest.id)).toEqual([
       'community-quest-warrens-lvl1-explore-the-sewers',
       'community-quest-warrens-lvl2-mapping-the-sewers',
     ]);
@@ -132,13 +132,18 @@ describe('C1C-1 Quest mutation closure', () => {
   });
 
   it('QC-07/QC-08 special rules and deferred Crimson Court definitions fail closed', () => {
-    expect(Object.keys(COMMUNITY_QUEST_RUNTIME_ADAPTERS)).toEqual([...C1C1_CORE_QUEST_IDS]);
+    expect(C1C1_CORE_QUEST_IDS.every((id) => Boolean(COMMUNITY_QUEST_RUNTIME_ADAPTERS[id]))).toBe(true);
     for (const id of [
       'community-quest-crimson-court-lvl1-deep-in-the-swamp',
       'community-quest-crimson-court-lvl2-deeper-into-the-swamp',
       'community-quest-crimson-court-lvl2-pest-control',
-    ]) expect(COMMUNITY_QUEST_CAPABILITIES.find((entry) => entry.definitionId === id)?.productionStatus).toBe('ADAPTER_REQUIRED');
-    expect(COMMUNITY_QUEST_CAPABILITIES.filter((entry) => entry.productionStatus === 'PRODUCTION_READY')).toHaveLength(2);
+    ]) {
+      const capability = COMMUNITY_QUEST_CAPABILITIES.find((entry) => entry.definitionId === id);
+      expect(capability?.adapterComplete).toBe(true);
+      expect(capability?.semanticComplete).toBe(false);
+      expect(capability?.productionStatus).not.toBe('PRODUCTION_READY');
+    }
+    expect(COMMUNITY_QUEST_CAPABILITIES.filter((entry) => entry.productionStatus === 'PRODUCTION_READY').length).toBeGreaterThanOrEqual(2);
   });
 
   it('QC-11/QC-12 fake or wrong-definition proofs close readiness', () => {

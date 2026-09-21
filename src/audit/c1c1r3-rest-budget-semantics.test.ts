@@ -70,8 +70,10 @@ describe('C1C-1R3 Rest budget semantic closure', () => {
     }
   });
 
-  it('RS-07 measured Ready count of two passes invariant validation without a target-count assertion', () => {
-    expect(COMMUNITY_QUEST_CAPABILITIES.filter((entry) => entry.productionStatus === 'PRODUCTION_READY')).toHaveLength(2);
+  it('RS-07 preserves both R3 zero-Firewood Ready definitions and validates measured readiness', () => {
+    expect(zeroFirewoodIds.every((id) => COMMUNITY_QUEST_CAPABILITIES.some(
+      (entry) => entry.definitionId === id && entry.productionStatus === 'PRODUCTION_READY',
+    ))).toBe(true);
     expect(questReadinessInvariantErrors(COMMUNITY_QUEST_CAPABILITIES, COMMUNITY_SOURCE_QUESTS)).toEqual([]);
   });
 
@@ -80,11 +82,12 @@ describe('C1C-1R3 Rest budget semantic closure', () => {
     const promoted = {
       ...COMMUNITY_QUEST_CAPABILITIES.find((entry) => entry.definitionId === special.id)!,
       productionStatus: 'PRODUCTION_READY' as const,
+      productionReady: false,
       missingPrimitives: [],
       adapterStatus: 'IMPLEMENTED' as const,
       measuredRuntimeProof: { adapterPresent: true, productionProofPresent: true, saveReplayProofPresent: true, selectorProofPresent: true, e2eProofPresent: true },
     };
-    expect(questReadinessInvariantErrors([promoted], COMMUNITY_SOURCE_QUESTS)).toContain(`${special.id}: special-rule Quest ready`);
+    expect(questReadinessInvariantErrors([promoted], COMMUNITY_SOURCE_QUESTS)).toContain(`${special.id}: status/ready gate mismatch`);
   });
 
   it('RS-09 rejects an accidentally promoted simple Crimson Court Quest', () => {
@@ -92,11 +95,12 @@ describe('C1C-1R3 Rest budget semantic closure', () => {
     const promoted = {
       ...COMMUNITY_QUEST_CAPABILITIES.find((entry) => entry.definitionId === crimson.id)!,
       productionStatus: 'PRODUCTION_READY' as const,
+      productionReady: false,
       missingPrimitives: [],
       adapterStatus: 'IMPLEMENTED' as const,
       measuredRuntimeProof: { adapterPresent: true, productionProofPresent: true, saveReplayProofPresent: true, selectorProofPresent: true, e2eProofPresent: true },
     };
-    expect(questReadinessInvariantErrors([promoted], COMMUNITY_SOURCE_QUESTS)).toContain(`${crimson.id}: deferred Crimson Court Quest ready`);
+    expect(questReadinessInvariantErrors([promoted], COMMUNITY_SOURCE_QUESTS)).toContain(`${crimson.id}: status/ready gate mismatch`);
   });
 
   it('RS-10 wrong Rest proof primitive cannot close a Firewood Quest', () => {

@@ -25,6 +25,16 @@ export const C1C1_CORE_QUEST_IDS = [
   'community-quest-warrens-lvl2-mapping-the-sewers',
 ] as const;
 
+export const C1C2_ADAPTER_ONLY_QUEST_IDS = [
+  'community-quest-crimson-court-lvl1-deep-in-the-swamp',
+  'community-quest-crimson-court-lvl2-deeper-into-the-swamp',
+  'community-quest-crimson-court-lvl2-pest-control',
+] as const;
+
+export const C1C2_SPECIAL_RULE_QUEST_IDS = [
+  'community-quest-warrens-lvl3-deep-in-the-warrens',
+] as const;
+
 function proof(entry: RegisteredProductionProof): RegisteredProductionProof {
   return Object.freeze({ ...entry, definitionIds: Object.freeze([...entry.definitionIds]) as unknown as string[] });
 }
@@ -81,6 +91,55 @@ export const PRODUCTION_PROOF_REGISTRY: Readonly<Record<string, RegisteredProduc
     status: 'active',
     scope: 'primitive',
     primitiveId: 'QUEST_REST_ALLOCATION_SEMANTICS',
+  }),
+  proof({
+    proofId: 'C1C2-ADAPTER-RUNTIME',
+    definitionIds: [...C1C2_ADAPTER_ONLY_QUEST_IDS],
+    proofType: 'production-runtime',
+    testFile: 'src/game-engine/c1c2-quest-runtime-expansion.test.ts',
+    runner: 'vitest', status: 'active', scope: 'definition',
+  }),
+  proof({
+    proofId: 'C1C2-ADAPTER-SAVE-REPLAY',
+    definitionIds: [...C1C2_ADAPTER_ONLY_QUEST_IDS],
+    proofType: 'save-replay',
+    testFile: 'src/game-engine/c1c2-quest-runtime-expansion.test.ts',
+    runner: 'vitest', status: 'active', scope: 'definition',
+  }),
+  proof({
+    proofId: 'C1C2-ADAPTER-SELECTOR',
+    definitionIds: [...C1C2_ADAPTER_ONLY_QUEST_IDS],
+    proofType: 'selector',
+    testFile: 'src/game-engine/c1c2-quest-runtime-expansion.test.ts',
+    runner: 'vitest', status: 'active', scope: 'definition',
+  }),
+  proof({
+    proofId: 'C1C2-SPECIAL-RULE-RUNTIME',
+    definitionIds: [...C1C2_SPECIAL_RULE_QUEST_IDS],
+    proofType: 'production-runtime',
+    testFile: 'src/game-engine/c1c2-quest-runtime-expansion.test.ts',
+    runner: 'vitest', status: 'active', scope: 'definition',
+  }),
+  proof({
+    proofId: 'C1C2-SPECIAL-RULE-SAVE-REPLAY',
+    definitionIds: [...C1C2_SPECIAL_RULE_QUEST_IDS],
+    proofType: 'save-replay',
+    testFile: 'src/game-engine/c1c2-quest-runtime-expansion.test.ts',
+    runner: 'vitest', status: 'active', scope: 'definition',
+  }),
+  proof({
+    proofId: 'C1C2-SPECIAL-RULE-SELECTOR',
+    definitionIds: [...C1C2_SPECIAL_RULE_QUEST_IDS],
+    proofType: 'selector',
+    testFile: 'src/game-engine/c1c2-quest-runtime-expansion.test.ts',
+    runner: 'vitest', status: 'active', scope: 'definition',
+  }),
+  proof({
+    proofId: 'C1C2-E2E-SPECIAL-RULE',
+    definitionIds: [...C1C2_SPECIAL_RULE_QUEST_IDS],
+    proofType: 'e2e',
+    testFile: 'e2e/phase11a4-c1c2-quest-special-rule.spec.ts',
+    runner: 'playwright', status: 'active', scope: 'definition',
   }),
   proof({
     proofId: 'C1BR-PA-ACCURACY-RUNTIME',

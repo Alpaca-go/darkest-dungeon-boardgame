@@ -61,12 +61,18 @@ describe('C1C-1R source setup production proof', () => {
 
   it('FR-02/FR-03 mismatched source setup closes the adapter', () => {
     const id = C1C1_CORE_QUEST_IDS[0];
-    const badTokens = structuredClone(COMMUNITY_QUEST_RUNTIME_ADAPTERS);
+    const badTokens = { ...COMMUNITY_QUEST_RUNTIME_ADAPTERS, [id]: {
+      ...COMMUNITY_QUEST_RUNTIME_ADAPTERS[id],
+      definition: structuredClone(COMMUNITY_QUEST_RUNTIME_ADAPTERS[id].definition),
+    } };
     badTokens[id].definition.firewoodSetup!.tokens = 0;
     expect(evaluateCommunityQuestCapability(
       source(id), badTokens, COMMUNITY_QUEST_PRODUCTION_PROOFS, PRODUCTION_PROOF_REGISTRY, implementedQuestPrimitives(true),
     ).productionStatus).toBe('ADAPTER_REQUIRED');
-    const badPoints = structuredClone(COMMUNITY_QUEST_RUNTIME_ADAPTERS);
+    const badPoints = { ...COMMUNITY_QUEST_RUNTIME_ADAPTERS, [id]: {
+      ...COMMUNITY_QUEST_RUNTIME_ADAPTERS[id],
+      definition: structuredClone(COMMUNITY_QUEST_RUNTIME_ADAPTERS[id].definition),
+    } };
     badPoints[id].definition.firewoodSetup!.restingPoints = 12;
     expect(evaluateCommunityQuestCapability(
       source(id), badPoints, COMMUNITY_QUEST_PRODUCTION_PROOFS, PRODUCTION_PROOF_REGISTRY, implementedQuestPrimitives(true),

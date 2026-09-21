@@ -14,6 +14,8 @@ export interface RuntimeContentMetadata {
 
 export interface QuestRuntimeState {
   definitionId: string;
+  /** Stable identity for deterministic special-rule transactions. */
+  questInstanceId?: string;
   counters: Record<string, number>;
   flags: Record<string, boolean>;
   selectedRoomIds: string[];
@@ -25,6 +27,21 @@ export interface QuestRuntimeState {
   firewoodTokensRemaining?: number;
   restingPointsRemaining?: number;
   restingPointsSpent?: number;
+  pendingRuleChoice?: QuestRulePendingChoice | null;
+  processedRuleTransactionIds?: string[];
+}
+
+export type QuestRuleProvision = 'food' | 'bandage' | 'potion' | 'torch' | 'tool';
+
+export interface QuestRulePendingChoice {
+  transactionId: string;
+  questRuleId: string;
+  triggerInstanceId: string;
+  trigger: 'leave-room';
+  effect: {
+    type: 'discard-chosen-provision';
+    amount: number;
+  };
 }
 
 export interface QuestFirewoodSetup {

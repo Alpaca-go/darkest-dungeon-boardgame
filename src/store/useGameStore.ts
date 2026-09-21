@@ -92,6 +92,8 @@ import type { DamageCommand, NomadWagonVisitCommand } from '../types';
 import type { RuntimeContentProfile } from '../types/content-runtime';
 import { commitRestAtCamp as engineCommitRestAtCamp } from '../game-engine/quests/quest-runtime';
 import type { RestAllocation, RestAllocationError } from '../game-engine/quests/quest-runtime';
+import { applyQuestRuleEffects as engineApplyQuestRuleEffects } from '../game-engine/quests/quest-special-rule-runtime';
+import type { QuestRuleProvision } from '../types/content-runtime';
 // ---- Phase 8C：Trinket / Nomad Wagon ----
 import {
   beginHeroSkillAction,
@@ -155,6 +157,7 @@ interface GameStore {
   moveToRoom(roomId: string): void;
   useProvision(type: keyof ProvisionPool, heroId?: string): void;
   commitRestAtCamp(allocation: RestAllocation): RestAllocationError | null;
+  resolveQuestRuleProvision(transactionId: string, provision: QuestRuleProvision): string | null;
 
   // ---- Phase 3：战斗 ----
   selectBattleSkill(skillId: string | null): void;
@@ -437,6 +440,15 @@ export const useGameStore = create<GameStore>((set, get) => {
       const result = engineCommitRestAtCamp(c, allocation);
       if (result.ok) commit(result.campaign);
       return result.error;
+    },
+
+    resolveQuestRuleProvision: (transactionId, provision) => {
+      const c = get().campaign;
+      if (!c) return 'no-campaign';
+      const result = engineApplyQuestRuleEffects(c, transactionId, provision);
+      if (!result.ok) return result.error;
+      commit(result.campaign);
+      return null;
     },
 
     // ---- Phase 3：战斗动作（全部委托给 game-engine，并自动保存） ----
