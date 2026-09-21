@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-3R",
+  "measuredAt": "2026-09-21T10:41:39.370Z",
+  "baselineHead": "82fb21fe87c584c59e0f0dc0116492d191bc7e07",
+  "verifiedImplementationHead": "4448a82ff66a41ad8554c7917951f0366ba7ae06",
+  "verifiedImplementationTree": "33e49a8ac9654d099f0c1b88efc53efc0ee1768a",
+  "historicalEvidenceHashes": {
+    "docs/data/complete-edition/c1c3-multi-primitive-quest-rule-closure-evidence.json": "15292fa0a3533576b33b8792928c0edfe53a00d9098a39ceb53df0772999fecb",
+    "docs/reports/complete-edition/c1c3-multi-primitive-quest-rule-closure-report.md": "12a028b0e6066641cabec53f3d75c7264f0c056f06efc52add6fdfde70912907"
+  },
+  "questReadyBefore": 5,
+  "questReadyAfter": 3,
+  "readyQuestIds": [
+    "community-quest-warrens-lvl1-explore-the-sewers",
+    "community-quest-warrens-lvl2-mapping-the-sewers",
+    "community-quest-warrens-lvl3-deep-in-the-warrens"
+  ],
+  "falseReadyDefinitionsDetected": [
+    "community-quest-cove-lvl3-tainted-trinkets",
+    "community-quest-warrens-lvl1-family-trinkets"
+  ],
+  "falseReadyDefinitionsDemoted": [
+    "community-quest-cove-lvl3-tainted-trinkets",
+    "community-quest-warrens-lvl1-family-trinkets"
+  ],
+  "falseReadyDefinitionsRePromoted": [],
+  "sourceSemanticCompleteCount": 5,
+  "runtimeSemanticCompleteCount": 3,
+  "semanticCoverage": {
+    "manifest": "docs/data/complete-edition/c1c3r-quest-semantic-coverage.json",
+    "definitionCount": 75,
+    "taintedObligations": 9,
+    "familyObligations": 6
+  },
+  "productionUiProofs": [
+    {
+      "definitionId": "community-quest-warrens-lvl1-explore-the-sewers",
+      "proofId": "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+      "testFile": "e2e/phase11a4-c1c1r-real-community-quest.spec.ts",
+      "proofSurface": "production-ui"
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-mapping-the-sewers",
+      "proofId": "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+      "testFile": "e2e/phase11a4-c1c1r-real-community-quest.spec.ts",
+      "proofSurface": "production-ui"
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl3-deep-in-the-warrens",
+      "proofId": "C1C2-E2E-SPECIAL-RULE",
+      "testFile": "e2e/phase11a4-c1c2-quest-special-rule.spec.ts",
+      "proofSurface": "production-ui"
+    }
+  ],
+  "restSemanticStatus": {
+    "unresolvedField": "insufficientRecoveryCapacity",
+    "status": "SOURCE_UNRESOLVED_FAIL_CLOSED"
+  },
+  "commands": [
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe D:\\darkest-dungoen-boardgame\\node_modules\\vitest\\vitest.mjs run src/audit/c1c3r-semantic-fidelity.test.ts src/game-engine/c1c3-multi-primitive-quest-rule.test.ts src/game-engine/c1c2-quest-runtime-expansion.test.ts src/game-engine/c1c1-community-quest-production.test.ts src/game-engine/c1c1r-firewood-real-flow.test.ts src/audit/production-proof-verification.test.ts",
+      "exitCode": 0
+    },
+    {
+      "command": "C:\\WINDOWS\\system32\\cmd.exe /d /s /c npm run test:e2e:community-content-c1c2",
+      "exitCode": 0
+    },
+    {
+      "command": "C:\\WINDOWS\\system32\\cmd.exe /d /s /c npm test",
+      "exitCode": 0
+    },
+    {
+      "command": "C:\\WINDOWS\\system32\\cmd.exe /d /s /c npm run typecheck",
+      "exitCode": 0
+    },
+    {
+      "command": "C:\\WINDOWS\\system32\\cmd.exe /d /s /c npm run build",
+      "exitCode": 0
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe D:\\darkest-dungoen-boardgame\\node_modules\\vite-node\\vite-node.mjs scripts/audit/generate-complete-edition-c1c3r.ts",
+      "exitCode": 0
+    }
+  ],
+  "failures": [],
+  "terminalVerdict": "C1C3R-SEMANTIC-FIDELITY-REPAIR-ACCEPTED"
+}
