@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGameStore, routeForPhase } from '../../store/useGameStore';
-import { buildCommunityReferenceCheckpoint, playUntil } from './e2e-player-harness';
+import { buildCommunityReferenceCheckpoint, playUntil, playUntilQuestProgress } from './e2e-player-harness';
 import { createCommunityFinalScenario } from '../scenarios/community-runtime-scenario';
 import { canSelectBossQuest, canSelectStandardQuest } from '../../game-engine/campaign/campaign-progress';
 import { stableHashState } from '../../audit/core-campaign/types';
@@ -25,8 +25,16 @@ export default function E2ETestControls() {
       if (failure) throw new Error(failure);
     } catch (e) { setError(String(e)); }
   };
+  const runQuestProgress = (count: number) => {
+    try {
+      playUntilQuestProgress(count);
+      const c = useGameStore.getState().campaign;
+      if (c) navigate(routeForPhase(c.gamePhase));
+    } catch (e) { setError(String(e)); }
+  };
   return <aside data-testid="e2e-controls" style={{ position: 'relative', zIndex: 10000, background: '#171717' }}>
     <button data-testid="e2e-complete-quest" onClick={() => run('quest-result')}>E2E: Play quest</button>
+    <button data-testid="e2e-quest-progress-1" onClick={() => runQuestProgress(1)}>E2E: First quest interaction</button>
     <button data-testid="e2e-finish-hamlet" onClick={() => run('quest-select')}>E2E: Finish preparation</button>
     <button data-testid="e2e-community-shuffling-horror" onClick={() => enterCommunity(0)}>E2E: Community Shuffling Horror</button>
     <button data-testid="e2e-community-templars" onClick={() => enterCommunity(0.34)}>E2E: Community Templars</button>

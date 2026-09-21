@@ -19,6 +19,7 @@ import type {
   QuestResultSummary,
   TrinketSide,
 } from '../types';
+import type { QuestRuntimeToken } from '../types/content-runtime';
 import { nowIso } from './random';
 import { createInitialStagecoach } from './stagecoach';
 import { getQuirkById, normalizeQuirkId } from '../data/quirks';
@@ -1270,6 +1271,23 @@ function sanitizeQuestRuntimeState(value: unknown): CampaignState['questRuntimeS
   const processedRuleTransactionIds = Array.isArray(raw.processedRuleTransactionIds)
     ? raw.processedRuleTransactionIds.filter((entry): entry is string => typeof entry === 'string').slice(-200)
     : [];
+  const rawTokens = Array.isArray(raw.questTokens) ? raw.questTokens : [];
+  const questTokens = rawTokens.filter((entry): entry is QuestRuntimeToken => {
+    if (!entry || typeof entry !== 'object') return false;
+    const token = entry as Record<string, unknown>;
+    return typeof token.id === 'string' && typeof token.roomId === 'string'
+      && (token.type === 'tainted-trinket-objective' || token.type === 'family-trinket-chest')
+      && (token.status === 'available' || token.status === 'consumed');
+  }).map((entry) => ({ ...entry }));
+  const rawRoomSetup = raw.roomSetup;
+  const roomSetup = rawRoomSetup && typeof rawRoomSetup === 'object'
+    && Array.isArray((rawRoomSetup as Record<string, unknown>).selectedRoomIds)
+    && Array.isArray((rawRoomSetup as Record<string, unknown>).setAsideRoomIds)
+    && Array.isArray((rawRoomSetup as Record<string, unknown>).tokenPlacement)
+    && typeof (rawRoomSetup as Record<string, unknown>).rngCursor === 'number'
+    && typeof (rawRoomSetup as Record<string, unknown>).transactionId === 'string'
+    ? rawRoomSetup as NonNullable<CampaignState['questRuntimeState']>['roomSetup']
+    : null;
   const rawPending = raw.pendingRuleChoice;
   const pendingRuleChoice = rawPending && typeof rawPending === 'object'
     && typeof (rawPending as Record<string, unknown>).transactionId === 'string'
@@ -1297,6 +1315,8 @@ function sanitizeQuestRuntimeState(value: unknown): CampaignState['questRuntimeS
     restingPointsSpent: optionalCount('restingPointsSpent') ?? 0,
     pendingRuleChoice,
     processedRuleTransactionIds,
+    roomSetup,
+    questTokens,
   };
 }
 

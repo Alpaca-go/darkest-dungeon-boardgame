@@ -35,11 +35,25 @@ export const C1C2_SPECIAL_RULE_QUEST_IDS = [
   'community-quest-warrens-lvl3-deep-in-the-warrens',
 ] as const;
 
+export const C1C3_MULTI_PRIMITIVE_QUEST_IDS = [
+  'community-quest-cove-lvl3-tainted-trinkets',
+  'community-quest-warrens-lvl1-family-trinkets',
+] as const;
+
 function proof(entry: RegisteredProductionProof): RegisteredProductionProof {
   return Object.freeze({ ...entry, definitionIds: Object.freeze([...entry.definitionIds]) as unknown as string[] });
 }
 
 export const PRODUCTION_PROOF_REGISTRY: Readonly<Record<string, RegisteredProductionProof>> = Object.freeze(Object.fromEntries([
+  ...C1C3_MULTI_PRIMITIVE_QUEST_IDS.flatMap((definitionId) => {
+    const label = definitionId.includes('tainted-trinkets') ? 'TAINTED' : 'FAMILY';
+    return [
+      proof({ proofId: `C1C3-${label}-RUNTIME`, definitionIds: [definitionId], proofType: 'production-runtime', testFile: 'src/game-engine/c1c3-multi-primitive-quest-rule.test.ts', runner: 'vitest', status: 'active', scope: 'definition' }),
+      proof({ proofId: `C1C3-${label}-SAVE-REPLAY`, definitionIds: [definitionId], proofType: 'save-replay', testFile: 'src/game-engine/c1c3-multi-primitive-quest-rule.test.ts', runner: 'vitest', status: 'active', scope: 'definition' }),
+      proof({ proofId: `C1C3-${label}-SELECTOR`, definitionIds: [definitionId], proofType: 'selector', testFile: 'src/game-engine/c1c3-multi-primitive-quest-rule.test.ts', runner: 'vitest', status: 'active', scope: 'definition' }),
+      proof({ proofId: `C1C3-E2E-${label}-TRINKETS`, definitionIds: [definitionId], proofType: 'e2e', testFile: 'e2e/phase11a4-c1c3-multi-primitive-quest.spec.ts', runner: 'playwright', status: 'active', scope: 'definition' }),
+    ];
+  }),
   proof({
     proofId: 'C1C1R-QUEST-SOURCE-SETUP',
     definitionIds: [...C1C1_CORE_QUEST_IDS],

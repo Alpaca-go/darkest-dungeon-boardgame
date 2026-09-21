@@ -86,7 +86,7 @@ export const QUEST_ROOM_TOKEN_BEHAVIOR_MATRIX = Object.freeze({
   treasure: { sourceSemantic: 'guarded battle; 20 Gold after clear', runtimeRoomType: 'treasure', runtimeBehavior: 'battle-then-reward', qualificationBehavior: 'records after victory' },
   lair: { sourceSemantic: 'guarded battle', runtimeRoomType: 'battle', runtimeBehavior: 'battle', qualificationBehavior: 'records after victory' },
   trap: { sourceSemantic: 'party hazard; cannot be cleared', runtimeRoomType: 'trap', runtimeBehavior: 'tool-or-party-stress-and-visited', qualificationBehavior: 'never qualifies as cleared' },
-} satisfies Record<QuestRoomTokenType, { sourceSemantic: string; runtimeRoomType: DungeonRoomType; runtimeBehavior: string; qualificationBehavior: string }>);
+} satisfies Record<Exclude<QuestRoomTokenType, 'objective'>, { sourceSemantic: string; runtimeRoomType: DungeonRoomType; runtimeBehavior: string; qualificationBehavior: string }>);
 
 export function generateCommunityDungeon(quest: QuestDefinition, seed = quest.id): DungeonState {
   if (!quest.dungeonComposition) throw new Error(`Community Quest has no source composition: ${quest.id}`);
@@ -287,7 +287,7 @@ function applyRoomResult(campaign: CampaignState, room: DungeonRoom): CampaignSt
         dungeon: {
           ...updated,
           roomsCleared: updated.roomsCleared + 1,
-          objectiveComplete: true,
+          objectiveComplete: (campaign.questRuntimeState?.questTokens?.length ?? 0) === 0,
         },
       };
       return log(recordQuestQualificationEvent(c, room), '抵达目标房间，任务目标已完成！', 'success');

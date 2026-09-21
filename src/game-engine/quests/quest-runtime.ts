@@ -20,6 +20,9 @@ export function evaluateQuestXpUnits(quest: QuestDefinition, qualifiedUnitCount:
 export function calculateQuestXpReward(campaign: CampaignState): QuestXpEvaluation | null {
   const quest = getQuestById(campaign.currentQuestId ?? '');
   if (!quest?.xpUnit) return null;
+  if ((campaign.questRuntimeState?.questTokens?.length ?? 0) > 0) {
+    return evaluateQuestXpUnits(quest, campaign.questRuntimeState?.qualifiedUnitCount ?? 0);
+  }
   const selected = new Set(campaign.questRuntimeState?.selectedRoomIds ?? []);
   const qualified = (campaign.dungeon?.rooms ?? []).filter((room) => {
     if (selected.size > 0 ? !selected.has(room.id) : room.status !== 'cleared') return false;
@@ -45,6 +48,8 @@ export function createQuestRuntimeState(quest: QuestDefinition, questInstanceId 
     restingPointsSpent: 0,
     pendingRuleChoice: null,
     processedRuleTransactionIds: [],
+    roomSetup: null,
+    questTokens: [],
   };
 }
 
@@ -187,7 +192,8 @@ export function recordQuestQualificationEvent(campaign: CampaignState, room: Dun
   const quest = getQuestById(campaign.currentQuestId ?? '');
   const state = campaign.questRuntimeState;
   if (!quest?.xpUnit || !state || state.definitionId !== quest.id) return campaign;
-  const qualifies = quest.xpUnit.targetEntity === 'room' || room.sourceRoomToken === 'lair';
+  const qualifies = quest.xpUnit.targetEntity === 'room'
+    || (quest.xpUnit.targetEntity === 'lair' && room.sourceRoomToken === 'lair');
   if (!qualifies || state.selectedRoomIds.includes(room.id)) return campaign;
   const selectedRoomIds = [...state.selectedRoomIds, room.id];
   const evaluated = evaluateQuestXpUnits(quest, selectedRoomIds.length);

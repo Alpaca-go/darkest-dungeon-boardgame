@@ -17,6 +17,7 @@ import { createInitialActFourState } from './campaign/act-four/act-four-state';
 import { validateQuestSelection } from './campaign/campaign-orchestrator';
 import type { RuntimeContentProfile } from '../types/content-runtime';
 import { createQuestRuntimeState } from './quests/quest-runtime';
+import { applyQuestRoomSetup } from './quests/quest-special-rule-runtime';
 
 /** Phase 1 初始补给池默认值（后续阶段可由 Provision Dice 生成替换）。 */
 export const DEFAULT_PROVISIONS: ProvisionPool = {
@@ -290,6 +291,7 @@ export function selectQuest(campaign: CampaignState, questId: string): CampaignS
   next = resetMentalStateForNewQuest(next);
   // Phase 8D：初始化本次任务的 Objective 进度快照（全部未完成）
   next = refreshObjectiveProgress(next);
+  next = applyQuestRoomSetup(next);
   next = pushLog(next, `选择了任务：${quest.name}。地牢已生成，开始探索。`, 'success');
   if (bonus > 0) {
     next = pushLog(next, `Supply Run 事件生效：每种补给 +${bonus}。`, 'success');

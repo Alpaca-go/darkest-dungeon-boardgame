@@ -22,6 +22,7 @@ export default function DungeonExplorePage() {
   const leaveDungeon = useGameStore((s) => s.leaveDungeon);
   const interactWithCurio = useGameStore((s) => s.interactWithCurio);
   const commitRestAtCamp = useGameStore((s) => s.commitRestAtCamp);
+  const interactWithQuestToken = useGameStore((s) => s.interactWithQuestToken);
   const [confirmLeave, setConfirmLeave] = useState(false);
   const [restAllocationOpen, setRestAllocationOpen] = useState(false);
   const [restDraft, setRestDraft] = useState<Record<string, { life: number; stress: number }>>({});
@@ -49,6 +50,9 @@ export default function DungeonExplorePage() {
   const meta = current ? getRoomMeta(current.type) : undefined;
   const scoutable = canScout(dungeon);
   const curio = getCurioById(current?.curioId);
+  const currentQuestToken = campaign.questRuntimeState?.questTokens?.find((token) => token.roomId === current?.id);
+  const questTokens = campaign.questRuntimeState?.questTokens ?? [];
+  const questTokenProgress = questTokens.filter((token) => token.status === 'consumed').length;
   const restBudget = campaign.questRuntimeState?.restingPointsRemaining ?? 0;
   const restSpent = Object.values(restDraft).reduce((sum, entry) => sum + entry.life + entry.stress, 0);
   const restRemaining = restBudget - restSpent;
@@ -206,6 +210,30 @@ export default function DungeonExplorePage() {
               {dungeon.objectiveComplete && (
                 <div className="text-[11px] text-dd-positive mt-1">✓ 任务目标已完成</div>
               )}
+            </div>
+          )}
+
+          {questTokens.length > 0 && (
+            <div className="rounded-md border border-dd-warn/60 bg-amber-950/20 p-2.5" data-testid="quest-token-progress">
+              <div className="text-sm font-bold text-dd-warn">Quest Objective</div>
+              <div className="text-[11px] text-dd-muted mt-0.5">
+                {questTokenProgress} / {questTokens.length} interactions complete
+              </div>
+              {currentQuestToken ? (
+                currentQuestToken.status === 'consumed' ? (
+                  <div className="text-[11px] text-dd-positive mt-1" data-testid="quest-token-consumed">Interaction complete.</div>
+                ) : (
+                  <button
+                    type="button"
+                    data-testid="interact-quest-token"
+                    disabled={current?.status !== 'cleared'}
+                    onClick={() => interactWithQuestToken()}
+                    className="mt-2 px-3 py-1.5 rounded bg-dd-warn text-black text-xs font-semibold disabled:opacity-40"
+                  >
+                    {currentQuestToken.type === 'tainted-trinket-objective' ? 'Cleanse Tainted Trinket' : 'Loot Family Trinket Chest'}
+                  </button>
+                )
+              ) : null}
             </div>
           )}
 

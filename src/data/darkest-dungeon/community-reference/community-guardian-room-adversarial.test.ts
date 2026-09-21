@@ -1,7 +1,7 @@
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { createCommunityGuardianScenario } from '../../../testing/scenarios/community-runtime-scenario';
 import { drawDarkestDungeonMonster } from '../../../game-engine/campaign/act-four/content-runtime';
@@ -35,10 +35,12 @@ function runGuardianMutation(
       throw new Error(`Mutation anchor must occur once: ${edit.file} :: ${edit.from}`);
     }
   }
-  const scratch = mkdtempSync(join(tmpdir(), 'community-r1-mutation-'));
+  const scratchRoot = resolve(root, 'pw-out', 'vitest-mutations');
+  mkdirSync(scratchRoot, { recursive: true });
+  const scratch = mkdtempSync(join(scratchRoot, 'community-r1-mutation-'));
   const reportPath = join(scratch, 'result.json');
   const configPath = join(scratch, 'vite.config.mts');
-  const baseConfig = resolve(root, 'vite.config.ts').split('\\').join('/');
+  const baseConfig = pathToFileURL(resolve(root, 'vite.config.ts')).href;
   const editLiteral = JSON.stringify(normalized);
   writeFileSync(configPath, `import base from ${JSON.stringify(baseConfig)};
 const edits = ${editLiteral};
@@ -60,6 +62,7 @@ export default { ...base, root: ${JSON.stringify(root)}, plugins: [...base.plugi
     { cwd: root, encoding: 'utf8', timeout: 120_000, maxBuffer: 8 * 1024 * 1024 },
   );
   if (result.error) throw result.error;
+  if (!existsSync(reportPath)) throw new Error(`Mutation report missing (exit ${result.status}): ${result.stdout}\n${result.stderr}`);
   const report = JSON.parse(readFileSync(reportPath, 'utf8'));
   const flat: Array<{ title: string; status: string }> = [];
   const walk = (node: unknown): void => {

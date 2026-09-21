@@ -65,7 +65,7 @@ export interface CommunityTrinketRuntimeAdapter {
 }
 
 export interface CommunityQuestRuntimeAdapter {
-  adapterId: 'c1c1-simple-community-quest-v1' | 'c1c2-provision-discard-quest-v1';
+  adapterId: 'c1c1-simple-community-quest-v1' | 'c1c2-provision-discard-quest-v1' | 'c1c3-multi-primitive-quest-v1';
   definitionId: string;
   questDefinitionId: string;
   requiredPrimitives: string[];
@@ -110,6 +110,9 @@ export function implementedQuestPrimitives(restSemanticsReady = restAllocationSe
     'QUEST_FIREWOOD_RESTING_POINT_SETUP',
     'QUEST_XP_UNIT_ACCOUNTING',
     'QUEST_RULE_PROVISION_INTERACTION',
+    'QUEST_RULE_ROOM_SETUP',
+    'QUEST_RULE_TOKEN_INTERACTION',
+    'QUEST_RULE_QUEST_COMPLETION',
     ...(restSemanticsReady ? ['QUEST_REST_ALLOCATION_SEMANTICS'] : []),
   ]);
 }
@@ -118,7 +121,7 @@ const IMPLEMENTED_QUEST_PRIMITIVES = implementedQuestPrimitives();
 
 type SimpleSourceQuest = SourceQuest & {
   objective: {
-    targetEntity: 'room' | 'lair';
+    targetEntity: QuestXpUnitDefinition['targetEntity'];
     minimumQuestGoal: number | null;
     xpUnit: { amount: number; targetCount: number };
   };
@@ -132,6 +135,8 @@ type SimpleSourceQuest = SourceQuest & {
 };
 
 const DEEP_IN_THE_WARRENS_ID = 'community-quest-warrens-lvl3-deep-in-the-warrens';
+export const TAINTED_TRINKETS_ID = 'community-quest-cove-lvl3-tainted-trinkets';
+export const FAMILY_TRINKETS_ID = 'community-quest-warrens-lvl1-family-trinkets';
 
 const SPECIAL_RULE_PRIMITIVES: Readonly<Record<string, string>> = Object.freeze({
   'room-setup': 'QUEST_RULE_ROOM_SETUP',
@@ -181,9 +186,58 @@ function isC1C2ProvisionQuest(source: SourceQuest): source is SimpleSourceQuest 
     && classifyQuestSpecialRulePrimitives(source).join(',') === 'QUEST_RULE_PROVISION_INTERACTION';
 }
 
+function isC1C3MultiPrimitiveQuest(source: SourceQuest): source is SimpleSourceQuest {
+  return (source.id === TAINTED_TRINKETS_ID || source.id === FAMILY_TRINKETS_ID)
+    && source.sourceStatus === 'source-supported'
+    && source.questType === 'standard'
+    && source.firewood.tokens === 0
+    && source.unresolvedFields.length === 0;
+}
+
+function c1c3Rules(source: SimpleSourceQuest): QuestSpecialRuleDefinition[] {
+  const sourceReferences = [source.sourceReferences[0], 'printedSpecialRules.0'];
+  const conditions = [
+    { type: 'runtime-content-profile' as const, profile: 'community-complete-edition' as const },
+    { type: 'quest-active' as const },
+  ];
+  if (source.id === TAINTED_TRINKETS_ID) return [
+    {
+      id: 'tainted-trinkets-objective-room-setup', trigger: 'quest-start', conditions,
+      effects: [{ type: 'place-quest-token-in-rooms', roomTokenType: 'objective', questTokenType: 'tainted-trinket-objective', count: 3, selectionPolicy: 'all-matching-source-rooms' }],
+      sourceReferences, semanticCategory: 'room-setup', printedSpecialRuleIndex: 0,
+    },
+    {
+      id: 'tainted-trinkets-cleanse-completion', trigger: 'token-interacted', conditions,
+      effects: [
+        { type: 'consume-current-room-quest-token', questTokenType: 'tainted-trinket-objective', progressCounter: 'cleansedTaintedTrinkets' },
+        { type: 'complete-when-quest-token-count', questTokenType: 'tainted-trinket-objective', requiredCount: 3 },
+      ],
+      sourceReferences, semanticCategory: 'quest-completion', printedSpecialRuleIndex: 0,
+    },
+  ];
+  return [
+    {
+      id: 'family-trinkets-lair-room-setup', trigger: 'quest-start', conditions,
+      effects: [{ type: 'place-quest-token-in-rooms', roomTokenType: 'lair', questTokenType: 'family-trinket-chest', count: 3, selectionPolicy: 'all-matching-source-rooms' }],
+      sourceReferences, semanticCategory: 'room-setup', printedSpecialRuleIndex: 0,
+    },
+    {
+      id: 'family-trinkets-first-chest-interaction', trigger: 'token-interacted', conditions,
+      effects: [{ type: 'consume-current-room-quest-token', questTokenType: 'family-trinket-chest', progressCounter: 'familyTrinketsRecovered' }],
+      sourceReferences, semanticCategory: 'token-interaction', printedSpecialRuleIndex: 0,
+    },
+    {
+      id: 'family-trinkets-return-completion', trigger: 'quest-completed', conditions,
+      effects: [{ type: 'complete-when-quest-token-count', questTokenType: 'family-trinket-chest', requiredCount: 3 }],
+      sourceReferences, semanticCategory: 'quest-completion', printedSpecialRuleIndex: 0,
+    },
+  ];
+}
+
 function adaptCommunityQuest(source: SimpleSourceQuest): CommunityQuestRuntimeAdapter {
   const provisionRule = source.id === DEEP_IN_THE_WARRENS_ID;
-  if (source.specialRules.length !== 0 && !provisionRule) throw new Error(`Quest adapter rejects unsupported special rules: ${source.id}`);
+  const multiPrimitiveRule = source.id === TAINTED_TRINKETS_ID || source.id === FAMILY_TRINKETS_ID;
+  if (source.specialRules.length !== 0 && !provisionRule && !multiPrimitiveRule) throw new Error(`Quest adapter rejects unsupported special rules: ${source.id}`);
   const roomTokens = Object.entries(source.dungeonStructure.roomTokens)
     .filter((entry): entry is [QuestRoomTokenType, number] => Number.isInteger(entry[1]) && Number(entry[1]) > 0)
     .map(([roomType, count]) => ({ roomType, count }));
@@ -211,7 +265,8 @@ function adaptCommunityQuest(source: SimpleSourceQuest): CommunityQuestRuntimeAd
     restingPoints: Number(source.firewood.restingPoints),
   };
   return {
-    adapterId: provisionRule ? 'c1c2-provision-discard-quest-v1' : 'c1c1-simple-community-quest-v1',
+    adapterId: multiPrimitiveRule ? 'c1c3-multi-primitive-quest-v1'
+      : provisionRule ? 'c1c2-provision-discard-quest-v1' : 'c1c1-simple-community-quest-v1',
     definitionId: source.id,
     questDefinitionId: source.id,
     requiredPrimitives: [
@@ -220,6 +275,7 @@ function adaptCommunityQuest(source: SimpleSourceQuest): CommunityQuestRuntimeAd
       'QUEST_XP_UNIT_ACCOUNTING',
       ...(firewoodSetup.tokens > 0 ? ['QUEST_REST_ALLOCATION_SEMANTICS'] : []),
       ...(provisionRule ? ['QUEST_RULE_PROVISION_INTERACTION'] : []),
+      ...(multiPrimitiveRule ? classifyQuestSpecialRulePrimitives(source) : []),
     ],
     definition: {
       id: source.id,
@@ -250,12 +306,14 @@ function adaptCommunityQuest(source: SimpleSourceQuest): CommunityQuestRuntimeAd
       ],
       effects: [{ type: 'discard-chosen-provision', amount: 1 }],
       sourceReferences: [source.sourceReferences[0], 'printedSpecialRules.0'],
-    }] : [],
+      semanticCategory: 'provision',
+      printedSpecialRuleIndex: 0,
+    }] : multiPrimitiveRule ? c1c3Rules(source) : [],
   };
 }
 
 export const COMMUNITY_QUEST_RUNTIME_ADAPTERS: Readonly<Record<string, CommunityQuestRuntimeAdapter>> = Object.freeze(
-  Object.fromEntries(questData.filter((source) => isC1C1SimpleCoreQuest(source) || isC1C2ProvisionQuest(source)).map((source) => {
+  Object.fromEntries(questData.filter((source) => isC1C1SimpleCoreQuest(source) || isC1C2ProvisionQuest(source) || isC1C3MultiPrimitiveQuest(source)).map((source) => {
     const adapter = adaptCommunityQuest(source as SimpleSourceQuest);
     return [source.id, adapter];
   })),
@@ -273,15 +331,23 @@ export const COMMUNITY_QUEST_PRODUCTION_PROOFS: Readonly<Record<string, Communit
     sourceSupported: true,
     semanticSupported: true,
     stateful: true,
-    productionTests: definitionId === DEEP_IN_THE_WARRENS_ID
+    productionTests: definitionId === TAINTED_TRINKETS_ID ? ['C1C3-TAINTED-RUNTIME']
+      : definitionId === FAMILY_TRINKETS_ID ? ['C1C3-FAMILY-RUNTIME']
+      : definitionId === DEEP_IN_THE_WARRENS_ID
       ? ['C1C2-SPECIAL-RULE-RUNTIME']
       : definitionId.startsWith('community-quest-crimson-court-')
         ? ['C1C2-ADAPTER-RUNTIME'] : ['C1C1-QUEST-RUNTIME', 'C1C1R-QUEST-SOURCE-SETUP'],
-    saveReplayTests: definitionId === DEEP_IN_THE_WARRENS_ID ? ['C1C2-SPECIAL-RULE-SAVE-REPLAY']
+    saveReplayTests: definitionId === TAINTED_TRINKETS_ID ? ['C1C3-TAINTED-SAVE-REPLAY']
+      : definitionId === FAMILY_TRINKETS_ID ? ['C1C3-FAMILY-SAVE-REPLAY']
+      : definitionId === DEEP_IN_THE_WARRENS_ID ? ['C1C2-SPECIAL-RULE-SAVE-REPLAY']
       : definitionId.startsWith('community-quest-crimson-court-') ? ['C1C2-ADAPTER-SAVE-REPLAY'] : ['C1C1-QUEST-SAVE-REPLAY'],
-    selectorTests: definitionId === DEEP_IN_THE_WARRENS_ID ? ['C1C2-SPECIAL-RULE-SELECTOR']
+    selectorTests: definitionId === TAINTED_TRINKETS_ID ? ['C1C3-TAINTED-SELECTOR']
+      : definitionId === FAMILY_TRINKETS_ID ? ['C1C3-FAMILY-SELECTOR']
+      : definitionId === DEEP_IN_THE_WARRENS_ID ? ['C1C2-SPECIAL-RULE-SELECTOR']
       : definitionId.startsWith('community-quest-crimson-court-') ? ['C1C2-ADAPTER-SELECTOR'] : ['C1C1-QUEST-SELECTOR'],
-    e2eTests: definitionId === DEEP_IN_THE_WARRENS_ID ? ['C1C2-E2E-SPECIAL-RULE'] : [
+    e2eTests: definitionId === TAINTED_TRINKETS_ID ? ['C1C3-E2E-TAINTED-TRINKETS']
+      : definitionId === FAMILY_TRINKETS_ID ? ['C1C3-E2E-FAMILY-TRINKETS']
+      : definitionId === DEEP_IN_THE_WARRENS_ID ? ['C1C2-E2E-SPECIAL-RULE'] : [
       'C1C1R-E2E-SIMPLE-QUEST-ADAPTER',
       ...(COMMUNITY_QUEST_RUNTIME_ADAPTERS[definitionId].definition.firewoodSetup!.tokens > 0
         ? ['C1C1R2-E2E-REST-ALLOCATION'] : []),

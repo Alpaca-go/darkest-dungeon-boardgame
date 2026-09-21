@@ -1,5 +1,5 @@
 import type { CampaignState } from '../../types';
-import type { QuestRuleProvision, QuestRuntimeState } from '../../types/content-runtime';
+import type { QuestRoomTokenType, QuestRuleProvision, QuestRuntimeState, QuestRuntimeTokenType } from '../../types/content-runtime';
 
 export type QuestRuleTrigger =
   | 'quest-start'
@@ -17,10 +17,25 @@ export type QuestRuleCondition =
   | { type: 'runtime-content-profile'; profile: 'community-complete-edition' }
   | { type: 'quest-active' };
 
-export type QuestRuleEffect = {
-  type: 'discard-chosen-provision';
-  amount: 1;
-};
+export type QuestRuleEffect =
+  | { type: 'discard-chosen-provision'; amount: 1 }
+  | {
+      type: 'place-quest-token-in-rooms';
+      roomTokenType: QuestRoomTokenType;
+      questTokenType: QuestRuntimeTokenType;
+      count: number;
+      selectionPolicy: 'all-matching-source-rooms';
+    }
+  | {
+      type: 'consume-current-room-quest-token';
+      questTokenType: QuestRuntimeTokenType;
+      progressCounter: string;
+    }
+  | {
+      type: 'complete-when-quest-token-count';
+      questTokenType: QuestRuntimeTokenType;
+      requiredCount: number;
+    };
 
 export interface QuestSpecialRuleDefinition {
   id: string;
@@ -28,6 +43,8 @@ export interface QuestSpecialRuleDefinition {
   conditions: QuestRuleCondition[];
   effects: QuestRuleEffect[];
   sourceReferences: string[];
+  semanticCategory: 'provision' | 'room-setup' | 'token-interaction' | 'quest-completion';
+  printedSpecialRuleIndex: number;
 }
 
 export interface QuestRuleTriggerContext {
@@ -39,6 +56,12 @@ export interface QuestRuleApplicationResult {
   ok: boolean;
   campaign: CampaignState;
   error: 'no-pending-choice' | 'wrong-transaction' | 'invalid-provision' | 'insufficient-provision' | null;
+}
+
+export interface QuestTokenInteractionResult {
+  ok: boolean;
+  campaign: CampaignState;
+  error: 'no-active-quest' | 'no-quest-token' | 'room-condition-invalid' | 'already-consumed' | 'already-complete' | null;
 }
 
 export interface CommunityQuestRuntimeAdapterContract {

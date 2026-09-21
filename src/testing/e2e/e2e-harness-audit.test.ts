@@ -10,7 +10,7 @@ it('E2E player has only approved public actions and no property mutation', () =>
   const tree = ts.createSourceFile(path, source, ts.ScriptTarget.Latest, true);
   const allowed = new Set(['declineTrinketOpportunity','resolveTrinketAllocation','leaveDungeon','moveToRoom',
     'battleResolveVictory','selectBattleSkill','battleUseSkill','battleEndTurn','skipHeroToday','endHamletDay',
-    'completeReplacementFlow','confirmReplacement','selectReplacementHero']);
+    'completeReplacementFlow','confirmReplacement','selectReplacementHero','interactWithQuestToken']);
   const violations: string[] = [];
   function visit(node: ts.Node) {
     if (ts.isBinaryExpression(node) && node.operatorToken.kind >= ts.SyntaxKind.FirstAssignment

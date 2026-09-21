@@ -29,7 +29,26 @@ export function playNextLegalAction(): void {
     case 'dungeon-explore': {
       const d = c.dungeon;
       if (!d) throw new Error('Missing dungeon');
+      const questToken = c.questRuntimeState?.questTokens?.find(token =>
+        token.roomId === d.currentRoomId && token.status === 'available');
+      const currentRoom = d.rooms.find(room => room.id === d.currentRoomId);
+      if (questToken && currentRoom?.status === 'cleared') return void store.interactWithQuestToken();
       if (d.objectiveComplete && d.canLeave) return store.leaveDungeon();
+      const targets = new Set(c.questRuntimeState?.questTokens?.filter(token => token.status === 'available').map(token => token.roomId) ?? []);
+      if (targets.size > 0) {
+        let queue: Array<{ roomId: string; firstStep: string | null }> = [{ roomId: d.currentRoomId, firstStep: null }];
+        const seen = new Set([d.currentRoomId]);
+        while (queue.length > 0) {
+          const candidate = queue.shift()!;
+          if (candidate.firstStep && targets.has(candidate.roomId)) return store.moveToRoom(candidate.firstStep);
+          const room = d.rooms.find(entry => entry.id === candidate.roomId);
+          for (const adjacentId of [...(room?.adjacentRoomIds ?? [])].sort()) {
+            if (seen.has(adjacentId)) continue;
+            seen.add(adjacentId);
+            queue = [...queue, { roomId: adjacentId, firstStep: candidate.firstStep ?? adjacentId }];
+          }
+        }
+      }
       const current = d.rooms.find(r => r.id === d.currentRoomId);
       const adjacent = d.rooms.filter(r => current?.adjacentRoomIds.includes(r.id));
       const uncleared = adjacent.filter(r => r.status !== 'cleared');
@@ -82,6 +101,17 @@ export function playUntil(target: 'quest-result' | 'quest-select'): void {
     if (before === useGameStore.getState().campaign) throw new Error(`Player action made no progress: ${before?.gamePhase}`);
   }
   throw new Error('Player step limit exceeded');
+}
+
+export function playUntilQuestProgress(targetCount: number): void {
+  if (import.meta.env.VITE_E2E_MODE !== '1') throw new Error('E2E mode required');
+  for (let step = 0; step < 4000; step++) {
+    const campaign = useGameStore.getState().campaign;
+    const progress = campaign?.questRuntimeState?.questTokens?.filter(token => token.status === 'consumed').length ?? 0;
+    if (progress >= targetCount) return;
+    playNextLegalAction();
+  }
+  throw new Error('Quest progress step limit exceeded');
 }
 
 // E2E harness exports only production-command orchestration helpers.

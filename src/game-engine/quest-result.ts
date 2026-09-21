@@ -19,6 +19,7 @@ import { runtimeContentContext } from '../data/content-selector';
 import { acquireTrinket } from './trinkets/acquire-trinket';
 import { hasTrinketCapacity } from './trinkets/capacity';
 import { calculateQuestXpReward } from './quests/quest-runtime';
+import { evaluateQuestCompletion } from './quests/quest-special-rule-runtime';
 
 /** 空补给池（结算后清空用）。 */
 export const EMPTY_PROVISIONS: ProvisionPool = {
@@ -59,7 +60,7 @@ export function resolveQuestResult(
 ): QuestResultSummary {
   const quest = getQuestById(campaign.currentQuestId ?? '');
   const allDead = !campaign.heroes.some((h) => h.isAlive);
-  const objectiveComplete = campaign.dungeon?.objectiveComplete ?? false;
+  const objectiveComplete = evaluateQuestCompletion(campaign);
 
   let outcome: QuestOutcome;
   if (reason === 'defeat' || allDead) outcome = 'failed';
