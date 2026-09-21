@@ -8,6 +8,7 @@ import {
   COMMUNITY_QUEST_PRODUCTION_PROOFS,
   COMMUNITY_QUEST_RUNTIME_ADAPTERS,
   evaluateCommunityQuestCapability,
+  implementedQuestPrimitives,
   normalizePrimitives,
   questAdapterSourceSetupErrors,
 } from '../data/community-reference/production-runtime';
@@ -62,10 +63,14 @@ describe('C1C-1R source setup production proof', () => {
     const id = C1C1_CORE_QUEST_IDS[0];
     const badTokens = structuredClone(COMMUNITY_QUEST_RUNTIME_ADAPTERS);
     badTokens[id].definition.firewoodSetup!.tokens = 0;
-    expect(evaluateCommunityQuestCapability(source(id), badTokens).productionStatus).toBe('ADAPTER_REQUIRED');
+    expect(evaluateCommunityQuestCapability(
+      source(id), badTokens, COMMUNITY_QUEST_PRODUCTION_PROOFS, PRODUCTION_PROOF_REGISTRY, implementedQuestPrimitives(true),
+    ).productionStatus).toBe('ADAPTER_REQUIRED');
     const badPoints = structuredClone(COMMUNITY_QUEST_RUNTIME_ADAPTERS);
     badPoints[id].definition.firewoodSetup!.restingPoints = 12;
-    expect(evaluateCommunityQuestCapability(source(id), badPoints).productionStatus).toBe('ADAPTER_REQUIRED');
+    expect(evaluateCommunityQuestCapability(
+      source(id), badPoints, COMMUNITY_QUEST_PRODUCTION_PROOFS, PRODUCTION_PROOF_REGISTRY, implementedQuestPrimitives(true),
+    ).productionStatus).toBe('ADAPTER_REQUIRED');
   });
 
   it('FR-04 missing firewood runtime primitive fails closed', () => {
@@ -83,7 +88,7 @@ describe('C1C-1R source setup production proof', () => {
     let campaign = campaignFor(C1C1_CORE_QUEST_IDS[0]);
     campaign = {
       ...campaign,
-      heroes: campaign.heroes.map((hero, index) => index === 0 ? { ...hero, stress: 3 } : hero),
+      heroes: campaign.heroes.map((hero, index) => index === 0 ? { ...hero, stress: 8 } : hero),
       dungeon: {
         ...campaign.dungeon!,
         rooms: campaign.dungeon!.rooms.map((room) => room.id === 'start' ? { ...room, status: 'cleared' as const } : room),
@@ -92,10 +97,10 @@ describe('C1C-1R source setup production proof', () => {
     const restored = restoreSaveSnapshot(createSaveSnapshot(campaign));
     expect(restored.questRuntimeState).toMatchObject({ firewoodTokensRemaining: 1, restingPointsRemaining: 8 });
     const rested = commitRestAtCamp(restored, {
-      allocations: [{ heroId: restored.heroes[0].instanceId, resource: 'stress', points: 3 }],
+      allocations: [{ heroId: restored.heroes[0].instanceId, resource: 'stress', points: 8 }],
     });
     expect(rested.ok).toBe(true);
-    expect(rested.campaign.questRuntimeState).toMatchObject({ firewoodTokensRemaining: 0, restingPointsRemaining: 0, restingPointsSpent: 3 });
+    expect(rested.campaign.questRuntimeState).toMatchObject({ firewoodTokensRemaining: 0, restingPointsRemaining: 0, restingPointsSpent: 8 });
     const twice = restoreSaveSnapshot(createSaveSnapshot(restoreSaveSnapshot(createSaveSnapshot(rested.campaign))));
     expect(twice.questRuntimeState).toEqual(rested.campaign.questRuntimeState);
   });

@@ -41,6 +41,7 @@ function allocation(campaign: CampaignState): RestAllocation {
   return {
     allocations: [
       { heroId: campaign.heroes[0].instanceId, resource: 'stress', points: 3 },
+      { heroId: campaign.heroes[0].instanceId, resource: 'life', points: 3 },
       { heroId: campaign.heroes[1].instanceId, resource: 'life', points: 2 },
     ],
   };
@@ -51,26 +52,30 @@ describe('C1C-1R2 source-backed Rest allocation', () => {
     const campaign = restCampaign();
     const result = commitRestAtCamp(campaign, allocation(campaign));
     expect(result).toMatchObject({ ok: true, error: null });
-    expect(result.campaign.heroes[0]).toMatchObject({ stress: 1, wounds: 3 });
+    expect(result.campaign.heroes[0]).toMatchObject({ stress: 1, wounds: 0 });
     expect(result.campaign.heroes[1]).toMatchObject({ stress: 2, wounds: 0 });
     expect(result.campaign.heroes[2]).toEqual(campaign.heroes[2]);
     expect(result.campaign.questRuntimeState).toMatchObject({
       firewoodTokensRemaining: 0,
       restingPointsRemaining: 0,
-      restingPointsSpent: 5,
+      restingPointsSpent: 8,
     });
   });
 
-  it('allows the players to end Rest without spending the full printed budget', () => {
+  it('RS-01 rejects voluntary partial spending atomically', () => {
     const campaign = restCampaign();
     const result = commitRestAtCamp(campaign, {
       allocations: [{ heroId: campaign.heroes[0].instanceId, resource: 'life', points: 1 }],
     });
-    expect(result.ok).toBe(true);
-    expect(result.campaign.questRuntimeState).toMatchObject({
-      firewoodTokensRemaining: 0,
-      restingPointsRemaining: 0,
-      restingPointsSpent: 1,
+    expect(result).toEqual({ ok: false, campaign, error: 'REST_ALLOCATION_INCOMPLETE_BUDGET' });
+  });
+
+  it('RS-02 rejects a zero-point Rest while recoverable capacity exists', () => {
+    const campaign = restCampaign();
+    expect(commitRestAtCamp(campaign, { allocations: [] })).toEqual({
+      ok: false,
+      campaign,
+      error: 'REST_ALLOCATION_INCOMPLETE_BUDGET',
     });
   });
 
@@ -120,8 +125,10 @@ describe('C1C-1R2 source-backed Rest allocation', () => {
       allocations: [
         { heroId: campaign.heroes[0].instanceId, resource: 'stress', points: 2 },
         { heroId: campaign.heroes[0].instanceId, resource: 'stress', points: 2 },
+        { heroId: campaign.heroes[0].instanceId, resource: 'life', points: 3 },
+        { heroId: campaign.heroes[1].instanceId, resource: 'life', points: 1 },
       ],
-    })).toMatchObject({ ok: true, spentPoints: 4 });
+    })).toMatchObject({ ok: true, spentPoints: 8 });
     expect(campaign).toEqual(before);
   });
 
@@ -145,8 +152,6 @@ describe('C1C-1R2 source-backed Rest allocation', () => {
     expect(page).not.toMatch(/setCampaign|replaceCampaign/);
     const e2e = readFileSync('e2e/phase11a4-c1c1r2-rest-allocation.spec.ts', 'utf8');
     expect(e2e).not.toMatch(/store\.setState|recordQuestQualificationEvent|\.stress\s*=(?!=)|\.wounds\s*=(?!=)/);
-    expect(e2e.match(/window\.localStorage\.setItem\([^)]*\)/g)).toEqual([
-      "window.localStorage.setItem('dd-fixed-rng', '1')",
-    ]);
+    expect(e2e.match(/window\.localStorage\.setItem\([^)]*\)/g)).toBeNull();
   });
 });

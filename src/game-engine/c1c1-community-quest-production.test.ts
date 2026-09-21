@@ -57,7 +57,10 @@ function campaignFor(questId: string): CampaignState {
 
 describe('C1C-1 executable Community Quest production proofs', () => {
   productionProofTest(registration('C1C1-QUEST-RUNTIME'), () => {
-    expect(COMMUNITY_RUNTIME_QUESTS.map((quest) => quest.id)).toEqual([...C1C1_CORE_QUEST_IDS]);
+    expect(COMMUNITY_RUNTIME_QUESTS.map((quest) => quest.id)).toEqual([
+      'community-quest-warrens-lvl1-explore-the-sewers',
+      'community-quest-warrens-lvl2-mapping-the-sewers',
+    ]);
     for (const definitionId of C1C1_CORE_QUEST_IDS) {
       const adapter = COMMUNITY_QUEST_RUNTIME_ADAPTERS[definitionId];
       const semantic = source(definitionId);
@@ -103,15 +106,11 @@ describe('C1C-1 executable Community Quest production proofs', () => {
 
   productionProofTest(registration('C1C1-QUEST-SELECTOR'), () => {
     const base = runtimeContentContext(createNewCampaign('community-complete-edition'));
-    expect(getQuestPool({ ...base, campaignLevel: 1 }).map((quest) => quest.name)).toEqual([
-      'Scout Ahead', "Wipe 'Em Out", 'Explore the Sewers', 'Pork Chop',
-    ]);
-    expect(getQuestPool({ ...base, campaignLevel: 2 }).map((quest) => quest.name)).toEqual([
-      'Clear the Path', 'Reduce to Rubble', 'Mapping the Sewers',
-    ]);
+    expect(getQuestPool({ ...base, campaignLevel: 1 }).map((quest) => quest.name)).toEqual(['Explore the Sewers']);
+    expect(getQuestPool({ ...base, campaignLevel: 2 }).map((quest) => quest.name)).toEqual(['Mapping the Sewers']);
     expect(filterCommunityQuestCandidates(COMMUNITY_RUNTIME_QUESTS, {
       ...base, campaignLevel: 1, enabledRegions: ['ruins'],
-    }).map((quest) => quest.id)).toEqual(C1C1_CORE_QUEST_IDS.slice(0, 2));
+    }).map((quest) => quest.id)).toEqual([]);
     expect(filterCommunityQuestCandidates(COMMUNITY_RUNTIME_QUESTS, {
       ...base, campaignLevel: 1, enabledContentSets: [],
     })).toEqual([]);
@@ -139,11 +138,11 @@ describe('C1C-1 Quest mutation closure', () => {
       'community-quest-crimson-court-lvl2-deeper-into-the-swamp',
       'community-quest-crimson-court-lvl2-pest-control',
     ]) expect(COMMUNITY_QUEST_CAPABILITIES.find((entry) => entry.definitionId === id)?.productionStatus).toBe('ADAPTER_REQUIRED');
-    expect(COMMUNITY_QUEST_CAPABILITIES.filter((entry) => entry.productionStatus === 'PRODUCTION_READY')).toHaveLength(7);
+    expect(COMMUNITY_QUEST_CAPABILITIES.filter((entry) => entry.productionStatus === 'PRODUCTION_READY')).toHaveLength(2);
   });
 
   it('QC-11/QC-12 fake or wrong-definition proofs close readiness', () => {
-    const id = C1C1_CORE_QUEST_IDS[0];
+    const id = 'community-quest-warrens-lvl1-explore-the-sewers';
     const manifests = structuredClone(COMMUNITY_QUEST_PRODUCTION_PROOFS) as Record<string, CommunityProductionProof>;
     manifests[id].productionTests = ['FAKE-QUEST-PROOF'];
     expect(evaluateCommunityQuestCapability(source(id), COMMUNITY_QUEST_RUNTIME_ADAPTERS, manifests).productionStatus).toBe('ADAPTER_REQUIRED');
