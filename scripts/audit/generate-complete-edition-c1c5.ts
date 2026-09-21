@@ -1,5 +1,5 @@
 import { execFileSync } from 'node:child_process';
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import {
   COMMUNITY_QUEST_CAPABILITIES, COMMUNITY_TRINKET_CAPABILITIES,
@@ -13,7 +13,8 @@ const reportDir = resolve(root, 'docs/reports/complete-edition');
 mkdirSync(outputDir, { recursive: true });
 mkdirSync(reportDir, { recursive: true });
 const baselineHead = '9fb8429625c35d6efed3a54515a98000726e802e';
-const verifiedImplementationHead = process.env.C1C5_VERIFIED_HEAD ?? execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
+const requestedHead = process.env.C1C5_VERIFIED_HEAD ?? 'HEAD';
+const verifiedImplementationHead = execFileSync('git', ['rev-parse', requestedHead], { encoding: 'utf8' }).trim();
 const verifiedImplementationTree = execFileSync('git', ['rev-parse', `${verifiedImplementationHead}^{tree}`], { encoding: 'utf8' }).trim();
 const generatedAt = process.env.C1C5_MEASURED_AT ?? '2026-09-21T00:00:00.000Z';
 const level2Capabilities = COMMUNITY_TRINKET_CAPABILITIES.filter((entry) => LEVEL_2_TRINKET_CENSUS.some((source) => source.definitionId === entry.definitionId));
@@ -43,6 +44,12 @@ const matrix = LEVEL_2_TRINKET_CENSUS.map((source) => {
 });
 const family = COMMUNITY_QUEST_CAPABILITIES.find((entry) => entry.definitionId === 'community-quest-warrens-lvl1-family-trinkets')!;
 const readyIds = matrix.filter((entry) => entry.productionReady).map((entry) => entry.definitionId);
+const baselineMatrix = JSON.parse(readFileSync(resolve(outputDir, 'c1c4-runtime-capability-matrix.json'), 'utf8')) as {
+  trinkets: Array<{ definitionId: string; productionReady: boolean }>;
+};
+const level2Ids = new Set(LEVEL_2_TRINKET_CENSUS.map((entry) => entry.definitionId));
+const level2ProductionReadyBefore = baselineMatrix.trinkets
+  .filter((entry) => level2Ids.has(entry.definitionId) && entry.productionReady).length;
 
 writeFileSync(resolve(outputDir, 'c1c5-level2-trinket-capability-matrix.json'), `${JSON.stringify({
   schemaVersion: 1, phase: '11A.4-C1C-5', generatedAt, baselineHead,
@@ -55,10 +62,14 @@ const evidence = {
   schemaVersion: 1, phase: '11A.4-C1C-5', measuredAt: generatedAt, baselineHead,
   verifiedImplementationHead, verifiedImplementationTree,
   level2SourceCount: LEVEL_2_TRINKET_DECK_COVERAGE.sourceDefinitionCount,
-  level2ProductionReadyBefore: 0,
+  level2ProductionReadyBefore,
   level2ProductionReadyAfter: LEVEL_2_TRINKET_DECK_COVERAGE.productionReadyCount,
   newlyReadyTrinketIds: readyIds,
-  deckCoverageBefore: { sourceDefinitionCount: 11, productionReadyCount: 0, completeForRandomDraw: false },
+  deckCoverageBefore: {
+    sourceDefinitionCount: LEVEL_2_TRINKET_DECK_COVERAGE.sourceDefinitionCount,
+    productionReadyCount: level2ProductionReadyBefore,
+    completeForRandomDraw: level2ProductionReadyBefore === LEVEL_2_TRINKET_DECK_COVERAGE.sourceDefinitionCount,
+  },
   deckCoverageAfter: LEVEL_2_TRINKET_DECK_COVERAGE,
   completeForRandomDraw: LEVEL_2_TRINKET_DECK_COVERAGE.completeForRandomDraw,
   implementedRuntimeWindows: ['before-healing-delivered-resolution', 'before-healing-received-resolution'],
