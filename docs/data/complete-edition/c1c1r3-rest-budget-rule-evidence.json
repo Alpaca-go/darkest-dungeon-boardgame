@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-1R3",
+  "sourceHierarchy": [
+    "S1_CORE_RULEBOOK",
+    "S2_DESIGNER_CLARIFICATION",
+    "S3_LOCKED_PROJECT_EVIDENCE"
+  ],
+  "sources": [
+    {
+      "sourceId": "C1C1R3:S1:p11,p15,p43",
+      "tier": "S1_CORE_RULEBOOK",
+      "reference": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "facts": [
+        "Pages 11 and 15 bind Firewood, the printed Resting Point amount, cleared-Room use, player distribution, point conversion, and Firewood discard.",
+        "Page 43 identifies Argyris Poungouras as a Game Designer and Game Developer."
+      ]
+    },
+    {
+      "sourceId": "C1C1R3:S2:ARGYRIS-ALL-POINTS",
+      "tier": "S2_DESIGNER_CLARIFICATION",
+      "author": "Argyris Poungouras",
+      "authorIdentity": "Darkest Dungeon: The Board Game designer and developer, cross-checked against Core Rulebook page 43 credits.",
+      "originalReference": "https://boardgamegeek.com/thread/2987684/some-v-quick-questi...",
+      "locatorReference": "https://boardgamegeek.com/thread/3574396/firewood-token",
+      "quotedFragment": "spending all resting points the quest provides at that point",
+      "paraphrasedRule": "Using Firewood for Rest requires spending the entire Resting Point amount supplied by the Quest.",
+      "ambiguityResolved": "Players may not voluntarily confirm a partial-budget or zero-point Rest when the printed budget is positive.",
+      "limitations": "The clarification does not say whether a point may be spent without effect when the party has less recoverable Life plus Stress than the printed budget."
+    }
+  ],
+  "questions": {
+    "Q1_fullPrintedAmountRequired": {
+      "status": "SOURCE_EXPLICIT",
+      "sourceEvidenceIds": ["C1C1R3:S2:ARGYRIS-ALL-POINTS"],
+      "answer": "Yes. The entire printed Resting Point amount must be spent."
+    },
+    "Q2_excessWhenRecoveryNeedIsLower": {
+      "status": "SOURCE_UNRESOLVED",
+      "sourceEvidenceIds": ["C1C1R3:S1:p11,p15,p43", "C1C1R3:S2:ARGYRIS-ALL-POINTS"],
+      "answer": "Neither source states whether excess points may be spent for no recovery effect or whether Rest is unavailable."
+    },
+    "Q3_voluntaryPartialSpend": {
+      "status": "SOURCE_EXPLICIT",
+      "sourceEvidenceIds": ["C1C1R3:S2:ARGYRIS-ALL-POINTS"],
+      "answer": "No. Voluntary partial spending conflicts with the designer's all-points instruction."
+    },
+    "Q4_zeroPointRest": {
+      "status": "SOURCE_DERIVED",
+      "sourceEvidenceIds": ["C1C1R3:S2:ARGYRIS-ALL-POINTS"],
+      "answer": "A zero-point allocation cannot satisfy an instruction to spend all points when the printed budget is positive."
+    },
+    "Q5_finishWhenCapacityIsInsufficient": {
+      "status": "SOURCE_UNRESOLVED",
+      "sourceEvidenceIds": ["C1C1R3:S1:p11,p15,p43", "C1C1R3:S2:ARGYRIS-ALL-POINTS"],
+      "answer": "Unresolved. Production must not choose a waste-points or cannot-Rest rule."
+    }
+  },
+  "productionConclusion": "FAIL_CLOSE_FIREWOOD_QUESTS_UNTIL_INSUFFICIENT_CAPACITY_SEMANTICS_ARE_RESOLVED"
+}

@@ -1,6 +1,6 @@
 {
-  "schemaVersion": 1,
-  "phase": "11A.4-C1C-1R2",
+  "schemaVersion": 2,
+  "phase": "11A.4-C1C-1R3",
   "terminology": {
     "recoveryResources": ["life", "stress"],
     "lifeRuntimeRepresentation": "Removing one Wound recovers one Life in the campaign health model."
@@ -35,11 +35,27 @@
     "sourceEvidenceIds": ["C1C1R2:S4:p15"],
     "rule": "A point recovers Life or Stress, never both."
   },
+  "budgetConsumption": {
+    "status": "SOURCE_EXPLICIT",
+    "sourceEvidenceIds": ["C1C1R3:S2:ARGYRIS-ALL-POINTS"],
+    "rule": "A Rest must spend the entire Resting Point amount supplied by the Quest."
+  },
   "partialSpend": {
+    "status": "SOURCE_EXPLICIT",
+    "sourceEvidenceIds": ["C1C1R3:S2:ARGYRIS-ALL-POINTS"],
+    "rule": "Players may not voluntarily complete Rest after spending only part of a positive printed budget."
+  },
+  "zeroPointRest": {
     "status": "SOURCE_DERIVED",
-    "sourceEvidenceIds": ["C1C1R2:S4:p15"],
-    "rule": "Only points actually spent are recorded. Confirming completes the Rest and discards Firewood, so any unspent session budget is forfeited.",
-    "derivation": "The rule distinguishes points spent from the printed amount and instructs the party to discard Firewood after it has Rested; it does not state that all points must be spent."
+    "sourceEvidenceIds": ["C1C1R3:S2:ARGYRIS-ALL-POINTS"],
+    "rule": "A zero-point allocation cannot complete a Rest whose printed budget is positive.",
+    "derivation": "Zero spent points cannot equal the explicitly required full positive budget."
+  },
+  "insufficientRecoveryCapacity": {
+    "status": "SOURCE_UNRESOLVED",
+    "sourceEvidenceIds": ["C1C1R3:S1:p11,p15,p43", "C1C1R3:S2:ARGYRIS-ALL-POINTS"],
+    "rule": "SOURCE_UNRESOLVED",
+    "blocker": "Sources do not say whether excess points may be spent without recovery effect or whether Rest is unavailable."
   },
   "roomGate": {
     "status": "SOURCE_EXPLICIT",
@@ -51,5 +67,15 @@
     "sourceEvidenceIds": ["C1C1R2:S4:p15"],
     "rule": "A recovery allocation cannot exceed the target Hero's current missing Life or current Stress."
   },
-  "unresolvedSemantics": []
+  "productionRequiredFields": [
+    "firewoodUse",
+    "sessionBudget",
+    "restingPointAllocation",
+    "pointConversion",
+    "budgetConsumption",
+    "zeroPointRest",
+    "insufficientRecoveryCapacity",
+    "roomGate"
+  ],
+  "acceptedDerivedFields": ["zeroPointRest"]
 }
