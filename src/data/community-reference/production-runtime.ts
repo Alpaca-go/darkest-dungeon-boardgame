@@ -26,6 +26,12 @@ import { restAllocationSemanticsImplemented } from '../../audit/rest-semantic-co
 import type { CampaignState } from '../../types';
 import type { QuestRuntimeState } from '../../types/content-runtime';
 import type { QuestSpecialRuleDefinition } from '../../game-engine/quests/quest-special-rule-types';
+import {
+  trinketRuntimeSemanticComplete,
+  trinketSemanticObligations,
+  trinketSourceSemanticComplete,
+  type TrinketSemanticObligation,
+} from '../../audit/trinket-semantic-coverage';
 
 export type ProductionStatus = 'PRODUCTION_READY' | 'ADAPTER_REQUIRED' | 'ENGINE_PRIMITIVE_MISSING' | 'SOURCE_BLOCKED';
 
@@ -49,6 +55,7 @@ export interface RuntimeCapabilityRecord {
   unsupportedSemanticObligationCount: number;
   sourceUnresolvedSemanticObligationCount: number;
   semanticObligations: QuestSemanticObligation[];
+  trinketSemanticObligations?: TrinketSemanticObligation[];
   /** Backward-compatible alias for sourceSemanticComplete. */
   semanticComplete: boolean;
   adapterComplete: boolean;
@@ -387,6 +394,7 @@ export function evaluateCommunityQuestCapability(
   proofs: Readonly<Record<string, CommunityProductionProof>> = COMMUNITY_QUEST_PRODUCTION_PROOFS,
   registeredProofs: Readonly<Record<string, RegisteredProductionProof>> = PRODUCTION_PROOF_REGISTRY,
   implementedPrimitives: ReadonlySet<string> = IMPLEMENTED_QUEST_PRIMITIVES,
+  externalDependencies: ReadonlySet<string> = new Set(),
 ): RuntimeCapabilityRecord {
   const sourceBlocked = source.sourceStatus !== 'source-supported';
   const declaredMissingPrimitives = [...new Set(source.runtimeSupport.missingCapabilities.flatMap(normalizePrimitives))];
@@ -401,8 +409,10 @@ export function evaluateCommunityQuestCapability(
     ...specialRulePrimitives,
     ...obligationPrimitives,
     ...((adapter?.definition.firewoodSetup?.tokens ?? 0) > 0 ? ['QUEST_REST_ALLOCATION_SEMANTICS'] : []),
+    ...(source.id === FAMILY_TRINKETS_ID ? ['LEVEL_2_TRINKET_SOURCE_DECK_COMPLETE'] : []),
   ])];
-  const missingPrimitives = requiredPrimitives.filter((primitive) => !implementedPrimitives.has(primitive));
+  const availablePrimitives = new Set([...implementedPrimitives, ...externalDependencies]);
+  const missingPrimitives = requiredPrimitives.filter((primitive) => !availablePrimitives.has(primitive));
   const sourceSemanticComplete = !sourceBlocked
     && source.unresolvedFields.length === 0
     && !specialRulePrimitives.includes('SOURCE_SEMANTIC_UNRESOLVED')
@@ -479,8 +489,6 @@ export function evaluateCommunityQuestCapability(
   };
 }
 
-export const COMMUNITY_QUEST_CAPABILITIES: RuntimeCapabilityRecord[] = questData.map((source) => evaluateCommunityQuestCapability(source));
-
 function sourceTrinket(id: string): SourceTrinket {
   const found = trinketData.find((item) => item.id === id);
   if (!found) throw new Error(`Missing Community Trinket source: ${id}`);
@@ -530,12 +538,12 @@ const chirurgeonsCharm: TrinketDefinition = {
   positiveSide: {
     side: 'positive', label: '治疗输出 +2', description: chirurgeonsSource.positiveSide.label,
     useWindows: ['before-healing-delivered-resolution'], modifiers: [{ type: 'healing', amount: 2 }],
-    effects: [], canUse: [{ type: 'in-battle' }],
+    effects: [],
   },
   negativeSide: {
     side: 'negative', label: '治疗承受 -4', description: chirurgeonsSource.negativeSide.label,
     useWindows: ['before-healing-received-resolution'], modifiers: [{ type: 'healing', amount: -4 }],
-    effects: [], canUse: [{ type: 'in-battle' }],
+    effects: [],
   },
   sellPrice: sellPriceForLevel(2), buyPrice: buyPriceForLevel(2), officialDataStatus: 'verified',
   sourceReference: chirurgeonsSource.sourceReferences.join('; '), enabledInOfficialPool: false,
@@ -567,7 +575,13 @@ export const COMMUNITY_TRINKET_PRODUCTION_PROOFS: Readonly<Record<string, Commun
   },
   [chirurgeonsCharm.id]: {
     definitionId: chirurgeonsCharm.id, runtimeAdapterId: 'staged-healing-chirurgeons-charm-v1',
-    requiredPrimitives: ['STAGED_HEALING_TRINKET_WINDOWS'], sourceSupported: true,
+    requiredPrimitives: ['BATTLE_HEALING_TRINKET_WINDOWS'],
+    primitiveProofRequirements: {
+      'C1C5-CHIRURGEONS-RUNTIME': 'BATTLE_HEALING_TRINKET_WINDOWS',
+      'C1C5-CHIRURGEONS-SAVE-REPLAY': 'BATTLE_HEALING_TRINKET_WINDOWS',
+      'C1C5-CHIRURGEONS-SELECTOR': 'BATTLE_HEALING_TRINKET_WINDOWS',
+      'C1C5-E2E-CHIRURGEONS': 'BATTLE_HEALING_TRINKET_WINDOWS',
+    }, sourceSupported: true,
     semanticSupported: true, stateful: true, productionTests: ['C1C5-CHIRURGEONS-RUNTIME'],
     saveReplayTests: ['C1C5-CHIRURGEONS-SAVE-REPLAY'], selectorTests: ['C1C5-CHIRURGEONS-SELECTOR'],
     e2eTests: ['C1C5-E2E-CHIRURGEONS'],
@@ -583,13 +597,14 @@ export function evaluateCommunityTrinketCapability(
   const sourceBlocked = source.sourceStatus !== 'source-supported';
   const adapter = adapters[source.id];
   const proof = proofs[source.id];
+  const semanticObligations = trinketSemanticObligations(source, adapter?.definition, proof);
   const proofMatches = Boolean(adapter && proof && proof.definitionId === source.id && proof.runtimeAdapterId === adapter.adapterId);
   const measuredRuntimeProof: RuntimeProofState = {
     adapterPresent: Boolean(adapter),
-    productionProofPresent: Boolean(proofMatches && allProofsResolve(proof.productionTests, 'production-runtime', source.id, registeredProofs)),
-    saveReplayProofPresent: Boolean(proofMatches && (!proof.stateful || allProofsResolve(proof.saveReplayTests, 'save-replay', source.id, registeredProofs))),
-    selectorProofPresent: Boolean(proofMatches && allProofsResolve(proof.selectorTests, 'selector', source.id, registeredProofs)),
-    e2eProofPresent: Boolean(proofMatches && allProofsResolve(proof.e2eTests, 'e2e', source.id, registeredProofs)),
+    productionProofPresent: Boolean(proofMatches && allProofsResolve(proof.productionTests, 'production-runtime', source.id, registeredProofs, adapter?.adapterId, proof?.requiredPrimitives, proof?.primitiveProofRequirements)),
+    saveReplayProofPresent: Boolean(proofMatches && (!proof.stateful || allProofsResolve(proof.saveReplayTests, 'save-replay', source.id, registeredProofs, adapter?.adapterId, proof?.requiredPrimitives, proof?.primitiveProofRequirements))),
+    selectorProofPresent: Boolean(proofMatches && allProofsResolve(proof.selectorTests, 'selector', source.id, registeredProofs, adapter?.adapterId, proof?.requiredPrimitives, proof?.primitiveProofRequirements)),
+    e2eProofPresent: Boolean(proofMatches && allProofsResolve(proof.e2eTests, 'e2e', source.id, registeredProofs, adapter?.adapterId, proof?.requiredPrimitives, proof?.primitiveProofRequirements)),
   };
   const declaredMissingPrimitives = [...new Set([
     ...source.positiveSide.runtimeSupport.missingCapabilities,
@@ -597,8 +612,8 @@ export function evaluateCommunityTrinketCapability(
   ].flatMap(normalizePrimitives))];
   const implementedTrinketPrimitives = new Set(['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW', 'STAGED_HEALING_TRINKET_WINDOWS']);
   const missingPrimitives = declaredMissingPrimitives.filter((primitive) => !implementedTrinketPrimitives.has(primitive));
-  const sourceSemanticComplete = !sourceBlocked && source.unresolvedFields.length === 0;
-  const runtimeSemanticComplete = sourceSemanticComplete && Boolean(adapter) && missingPrimitives.length === 0;
+  const sourceSemanticComplete = trinketSourceSemanticComplete(source);
+  const runtimeSemanticComplete = trinketRuntimeSemanticComplete(sourceSemanticComplete, semanticObligations);
   const productionUiProofComplete = Boolean(proofMatches && proof && measuredRuntimeProof.e2eProofPresent
     && allProofsUseSurface(proof.e2eTests, 'production-ui', registeredProofs));
   const proofComplete = Boolean(proofMatches && proof.sourceSupported && proof.semanticSupported
@@ -606,10 +621,11 @@ export function evaluateCommunityTrinketCapability(
     && measuredRuntimeProof.selectorProofPresent && productionUiProofComplete);
   const productionStatus: ProductionStatus = sourceBlocked ? 'SOURCE_BLOCKED'
     : missingPrimitives.length > 0 ? 'ENGINE_PRIMITIVE_MISSING'
-      : adapter && proofComplete ? 'PRODUCTION_READY' : 'ADAPTER_REQUIRED';
+      : runtimeSemanticComplete && adapter && proofComplete ? 'PRODUCTION_READY' : 'ADAPTER_REQUIRED';
   const blockerCodes = sourceBlocked ? ['SOURCE_EVIDENCE_BLOCKED']
     : productionStatus === 'ENGINE_PRIMITIVE_MISSING' ? missingPrimitives
-      : productionStatus === 'PRODUCTION_READY' ? [] : [
+    : productionStatus === 'PRODUCTION_READY' ? [] : [
+    ...semanticObligations.flatMap((obligation) => obligation.blockerCode ? [obligation.blockerCode] : []),
     ...(adapter ? [] : ['RUNTIME_ADAPTER_MISSING']),
     ...(proofMatches ? [] : ['PRODUCTION_PROOF_MISSING_OR_MISMATCHED']),
     ...(proof && !proof.sourceSupported ? ['SOURCE_PROOF_MISSING'] : []),
@@ -625,12 +641,13 @@ export function evaluateCommunityTrinketCapability(
     engineCapable: missingPrimitives.length === 0,
     sourceSemanticComplete,
     runtimeSemanticComplete,
-    semanticObligationCount: 0,
-    implementedSemanticObligationCount: 0,
-    partialSemanticObligationCount: 0,
-    unsupportedSemanticObligationCount: 0,
-    sourceUnresolvedSemanticObligationCount: 0,
+    semanticObligationCount: semanticObligations.length,
+    implementedSemanticObligationCount: semanticObligations.filter((entry) => entry.implementationStatus === 'IMPLEMENTED').length,
+    partialSemanticObligationCount: semanticObligations.filter((entry) => entry.implementationStatus === 'PARTIAL').length,
+    unsupportedSemanticObligationCount: semanticObligations.filter((entry) => entry.implementationStatus === 'UNSUPPORTED').length,
+    sourceUnresolvedSemanticObligationCount: semanticObligations.filter((entry) => entry.implementationStatus === 'SOURCE_UNRESOLVED').length,
     semanticObligations: [],
+    trinketSemanticObligations: semanticObligations,
     semanticComplete: sourceSemanticComplete,
     adapterComplete: Boolean(adapter),
     selectorReachable: measuredRuntimeProof.selectorProofPresent,
@@ -650,6 +667,19 @@ export function evaluateCommunityTrinketCapability(
 }
 
 export const COMMUNITY_TRINKET_CAPABILITIES: RuntimeCapabilityRecord[] = trinketData.map((source) => evaluateCommunityTrinketCapability(source));
+
+/** Implemented definitions available to deterministic fixtures and save restore, independent of promotion. */
+export const COMMUNITY_IMPLEMENTED_TRINKETS: TrinketDefinition[] = Object.values(COMMUNITY_TRINKET_RUNTIME_ADAPTERS)
+  .map((adapter) => adapter.definition);
+
+const level2Sources = trinketData.filter((source) => source.level === 2);
+const level2DeckComplete = level2Sources.length > 0 && level2Sources.every((source) =>
+  COMMUNITY_TRINKET_CAPABILITIES.find((capability) => capability.definitionId === source.id)?.productionReady);
+const COMMUNITY_EXTERNAL_DEPENDENCIES = new Set(level2DeckComplete ? ['LEVEL_2_TRINKET_SOURCE_DECK_COMPLETE'] : []);
+
+export const COMMUNITY_QUEST_CAPABILITIES: RuntimeCapabilityRecord[] = questData.map((source) =>
+  evaluateCommunityQuestCapability(source, COMMUNITY_QUEST_RUNTIME_ADAPTERS, COMMUNITY_QUEST_PRODUCTION_PROOFS,
+    PRODUCTION_PROOF_REGISTRY, IMPLEMENTED_QUEST_PRIMITIVES, COMMUNITY_EXTERNAL_DEPENDENCIES));
 
 export const COMMUNITY_RUNTIME_TRINKETS: TrinketDefinition[] = COMMUNITY_TRINKET_CAPABILITIES
   .filter((capability) => capability.productionStatus === 'PRODUCTION_READY')

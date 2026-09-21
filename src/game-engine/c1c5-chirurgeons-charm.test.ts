@@ -8,8 +8,8 @@ import { generateDungeon } from './dungeon';
 import { initBattle } from './battle';
 import { beginHeroSkillAction, resolveTrinketOpportunity } from './trinkets/battle-trinket-bridge';
 import { openTrinketWindow } from './trinkets/trinket-opportunities';
-import { createSaveSnapshot, restoreSaveSnapshot } from './save';
-import { COMMUNITY_RUNTIME_TRINKETS } from '../data/community-reference/production-runtime';
+import { createSaveSnapshot, migrateCampaignToV19, restoreSaveSnapshot } from './save';
+import { COMMUNITY_RUNTIME_TRINKETS, COMMUNITY_TRINKET_RUNTIME_ADAPTERS } from '../data/community-reference/production-runtime';
 import { filterCommunityTrinketCandidates, runtimeContentContext } from '../data/content-selector';
 
 function registration(proofId: string) {
@@ -100,11 +100,11 @@ describe('C1C-5 Chirurgeon\'s Charm production behavior', () => {
   });
 
   productionProofTest(registration('C1C5-CHIRURGEONS-SELECTOR'), () => {
-    const definition = COMMUNITY_RUNTIME_TRINKETS.find((entry) => entry.id === CHIRURGEONS_CHARM_ID);
+    const definition = COMMUNITY_TRINKET_RUNTIME_ADAPTERS[CHIRURGEONS_CHARM_ID].definition;
     expect(definition?.positiveSide.useWindows).toEqual(['before-healing-delivered-resolution']);
     expect(definition?.negativeSide.useWindows).toEqual(['before-healing-received-resolution']);
     const context = runtimeContentContext(createNewCampaign('community-complete-edition'));
-    expect(filterCommunityTrinketCandidates(COMMUNITY_RUNTIME_TRINKETS, context).some((entry) => entry.id === CHIRURGEONS_CHARM_ID)).toBe(true);
+    expect(filterCommunityTrinketCandidates(COMMUNITY_RUNTIME_TRINKETS, context).some((entry) => entry.id === CHIRURGEONS_CHARM_ID)).toBe(false);
   });
 
   it('does not offer the same physical card twice on a self-heal', () => {
@@ -190,5 +190,17 @@ describe('C1C-5 Chirurgeon\'s Charm production behavior', () => {
     const resolved = resolveTrinketOpportunity(replay, receiverOpportunity.id, 'use').campaign;
     const target = resolved.battle!.heroes.find((unit) => unit.sourceId === resolved.heroes[1].instanceId)!;
     expect(target.maxHp - target.hp).toBe(6); // 12 - (8 + 2 - 4)
+  });
+
+  it('drops an invalid staged healing root and its orphan opportunities on restore', () => {
+    const begun = beginHeal(healingBattle('healer')).campaign;
+    const eventId = begun.pendingHealingAction!.eventId;
+    const corrupted = {
+      ...begun,
+      pendingHealingAction: { ...begun.pendingHealingAction!, actorUnitId: '', baseAmount: Number.NaN },
+    };
+    const restored = migrateCampaignToV19(corrupted);
+    expect(restored.pendingHealingAction).toBeNull();
+    expect(restored.pendingTrinketUseOpportunities.some((entry) => entry.rootEventId === eventId)).toBe(false);
   });
 });

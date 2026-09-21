@@ -223,10 +223,10 @@ export const PRODUCTION_PROOF_REGISTRY: Readonly<Record<string, RegisteredProduc
     status: 'active',
     proofSurface: 'production-ui',
   }),
-  proof({ proofId: 'C1C5-CHIRURGEONS-RUNTIME', definitionIds: [CHIRURGEONS_CHARM_ID], proofType: 'production-runtime', testFile: 'src/game-engine/c1c5-chirurgeons-charm.test.ts', runner: 'vitest', status: 'active' }),
-  proof({ proofId: 'C1C5-CHIRURGEONS-SAVE-REPLAY', definitionIds: [CHIRURGEONS_CHARM_ID], proofType: 'save-replay', testFile: 'src/game-engine/c1c5-chirurgeons-charm.test.ts', runner: 'vitest', status: 'active' }),
-  proof({ proofId: 'C1C5-CHIRURGEONS-SELECTOR', definitionIds: [CHIRURGEONS_CHARM_ID], proofType: 'selector', testFile: 'src/game-engine/c1c5-chirurgeons-charm.test.ts', runner: 'vitest', status: 'active' }),
-  proof({ proofId: 'C1C5-E2E-CHIRURGEONS', definitionIds: [CHIRURGEONS_CHARM_ID], proofType: 'e2e', testFile: 'e2e/phase11a4-c1c5-chirurgeons-charm.spec.ts', runner: 'playwright', status: 'active', proofSurface: 'production-ui' }),
+  proof({ proofId: 'C1C5-CHIRURGEONS-RUNTIME', definitionIds: [CHIRURGEONS_CHARM_ID], proofType: 'production-runtime', testFile: 'src/game-engine/c1c5-chirurgeons-charm.test.ts', runner: 'vitest', status: 'active', scope: 'primitive', primitiveId: 'BATTLE_HEALING_TRINKET_WINDOWS' }),
+  proof({ proofId: 'C1C5-CHIRURGEONS-SAVE-REPLAY', definitionIds: [CHIRURGEONS_CHARM_ID], proofType: 'save-replay', testFile: 'src/game-engine/c1c5-chirurgeons-charm.test.ts', runner: 'vitest', status: 'active', scope: 'primitive', primitiveId: 'BATTLE_HEALING_TRINKET_WINDOWS' }),
+  proof({ proofId: 'C1C5-CHIRURGEONS-SELECTOR', definitionIds: [CHIRURGEONS_CHARM_ID], proofType: 'selector', testFile: 'src/game-engine/c1c5-chirurgeons-charm.test.ts', runner: 'vitest', status: 'active', scope: 'primitive', primitiveId: 'BATTLE_HEALING_TRINKET_WINDOWS' }),
+  proof({ proofId: 'C1C5-E2E-CHIRURGEONS', definitionIds: [CHIRURGEONS_CHARM_ID], proofType: 'e2e', testFile: 'e2e/phase11a4-c1c5-chirurgeons-charm.spec.ts', runner: 'playwright', status: 'active', scope: 'primitive', primitiveId: 'BATTLE_HEALING_TRINKET_WINDOWS', proofSurface: 'production-ui' }),
 ].map((entry) => [entry.proofId, entry])));
 
 export function resolveRegisteredProof(

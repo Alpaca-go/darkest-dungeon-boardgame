@@ -25,7 +25,6 @@ import { setRandomSource } from './random';
 
 const ACCURACY = 'community-trinket-core-accuracy-stone';
 const CRITICAL = 'community-trinket-core-critical-stone';
-const CHIRURGEONS = 'community-trinket-core-chirurgeons-charm';
 const PARTY = ['crusader', 'highwayman', 'vestal', 'plague-doctor'];
 
 function source(id: string) {
@@ -125,7 +124,7 @@ describe('C1B-R production promotion adversarial matrix', () => {
     ]);
     expect(quests.every((quest) => quest.id.startsWith('community-quest-'))).toBe(true);
     expect(quests.some((quest) => STANDARD_QUESTS.some((legacy) => legacy.id === quest.id))).toBe(false);
-    expect(getTrinketPool(context).map((entry) => entry.id).sort()).toEqual([ACCURACY, CHIRURGEONS, CRITICAL].sort());
+    expect(getTrinketPool(context).map((entry) => entry.id).sort()).toEqual([ACCURACY, CRITICAL].sort());
     expect(getTrinketPool(context).some((entry) => entry.id === 'critical-stone')).toBe(false);
     expect(commitQuestSelection(communityCampaign(), STANDARD_QUESTS[0].id).error).toBe('quest-not-production-eligible');
   });

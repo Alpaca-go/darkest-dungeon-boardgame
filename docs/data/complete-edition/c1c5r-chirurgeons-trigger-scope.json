@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-5R",
+  "definitionId": "community-trinket-core-chirurgeons-charm",
+  "sourceLiteral": {
+    "positive": "When healing: heal +2",
+    "negative": "When healed: receive -4"
+  },
+  "sourceBattleOnlyEvidence": [],
+  "triggerScopeComplete": false,
+  "scopes": [
+    {
+      "scope": "battle-healing-skill",
+      "label": "S1 Battle healing Skill",
+      "status": "IN_SCOPE",
+      "runtimeSupport": "IMPLEMENTED",
+      "proofIds": [
+        "C1C5-CHIRURGEONS-RUNTIME",
+        "C1C5-E2E-CHIRURGEONS"
+      ]
+    },
+    {
+      "scope": "campaign-resolve-healing",
+      "label": "S2 Campaign/non-battle resolveHealing()",
+      "status": "SOURCE_UNRESOLVED",
+      "runtimeSupport": "RUNTIME_UNSUPPORTED",
+      "proofIds": []
+    },
+    {
+      "scope": "resting-point-life-recovery",
+      "label": "S3 Resting Point Life recovery",
+      "status": "SOURCE_UNRESOLVED",
+      "runtimeSupport": "RUNTIME_UNSUPPORTED",
+      "proofIds": []
+    },
+    {
+      "scope": "trinket-caused-healing",
+      "label": "S4 Trinket-caused healing",
+      "status": "SOURCE_UNRESOLVED",
+      "runtimeSupport": "RUNTIME_UNSUPPORTED",
+      "proofIds": []
+    },
+    {
+      "scope": "provision-caused-healing",
+      "label": "S5 Provision-caused healing",
+      "status": "SOURCE_UNRESOLVED",
+      "runtimeSupport": "RUNTIME_UNSUPPORTED",
+      "proofIds": []
+    },
+    {
+      "scope": "hamlet-healing",
+      "label": "S6 Hamlet healing",
+      "status": "SOURCE_UNRESOLVED",
+      "runtimeSupport": "RUNTIME_UNSUPPORTED",
+      "proofIds": []
+    }
+  ]
+}

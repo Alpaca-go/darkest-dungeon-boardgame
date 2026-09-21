@@ -14,7 +14,7 @@ import type {
 } from '../../types/trinkets';
 import { VERIFIED_TRINKETS } from './verified-trinkets';
 import { PROTOTYPE_TRINKETS } from './prototype-trinkets';
-import { COMMUNITY_RUNTIME_TRINKETS } from '../community-reference/production-runtime';
+import { COMMUNITY_IMPLEMENTED_TRINKETS } from '../community-reference/production-runtime';
 import { OFFICIAL_TRINKET_IMPORT_TEMPLATE_META as importTemplate } from './official-trinket-import-template-meta';
 
 /** 官方核心盒 Trinket 标称总数（规则书）。 */
@@ -24,7 +24,7 @@ export const EXPECTED_CORE_TRINKET_COUNT = 38;
 export const ALL_TRINKETS: TrinketDefinition[] = [
   ...VERIFIED_TRINKETS,
   ...PROTOTYPE_TRINKETS,
-  ...COMMUNITY_RUNTIME_TRINKETS,
+  ...COMMUNITY_IMPLEMENTED_TRINKETS,
 ];
 
 const BY_ID = new Map<string, TrinketDefinition>();

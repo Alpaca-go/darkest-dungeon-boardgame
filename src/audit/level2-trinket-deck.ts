@@ -7,6 +7,8 @@ export interface TrinketSourceForCoverage {
   level: number | null;
   sourceStatus: string;
   unresolvedFields: readonly string[];
+  positiveSide?: { unresolvedFields: readonly string[] };
+  negativeSide?: { unresolvedFields: readonly string[] };
 }
 export interface TrinketSideCensusEntry {
   definitionId: string;
@@ -44,24 +46,17 @@ export interface TrinketDeckCoverage {
   completeForRandomDraw: boolean;
 }
 
-const CHIRURGEONS_ID = 'community-trinket-core-chirurgeons-charm';
-const CHIRURGEONS_PROOFS = [
-  'C1C5-CHIRURGEONS-RUNTIME', 'C1C5-CHIRURGEONS-SAVE-REPLAY',
-  'C1C5-CHIRURGEONS-SELECTOR', 'C1C5-E2E-CHIRURGEONS',
-];
-
 function censusSide(source: SourceTrinket, side: 'positive' | 'negative'): TrinketSideCensusEntry {
   const value = side === 'positive' ? source.positiveSide : source.negativeSide;
-  const implemented = source.id === CHIRURGEONS_ID;
+  const capability = COMMUNITY_TRINKET_CAPABILITIES.find((entry) => entry.definitionId === source.id);
+  const obligation = capability?.trinketSemanticObligations?.find((entry) => entry.side === side);
   return {
     definitionId: source.id, side, trigger: value.trigger, useWindow: value.useWindow, target: value.target,
     modifiers: value.modifiers, effects: value.effects, conditions: value.conditions,
-    runtimeWindowBinding: implemented
-      ? (side === 'positive' ? 'before-healing-delivered-resolution' : 'before-healing-received-resolution')
-      : null,
-    runtimeEffectBindings: implemented ? ['ActiveModifierDefinition:healing'] : value.runtimeSupport.existingCandidates,
-    implementationStatus: implemented ? 'IMPLEMENTED' : source.unresolvedFields.length > 0 ? 'SOURCE_UNRESOLVED' : 'UNSUPPORTED',
-    proofIds: implemented ? CHIRURGEONS_PROOFS : [],
+    runtimeWindowBinding: obligation?.runtimeWindowBinding ?? null,
+    runtimeEffectBindings: obligation?.runtimeEffectBindings ?? value.runtimeSupport.existingCandidates,
+    implementationStatus: obligation?.implementationStatus ?? (source.unresolvedFields.length > 0 ? 'SOURCE_UNRESOLVED' : 'UNSUPPORTED'),
+    proofIds: obligation?.proofIds ?? [],
   };
 }
 
@@ -86,7 +81,8 @@ export function measureTrinketDeckCoverage(
     .filter((source) => !byId.get(source.id)?.productionReady)
     .map((source) => source.id);
   const semanticallyIncompleteDefinitionIds = required
-    .filter((source) => source.unresolvedFields.length > 0 || !byId.get(source.id)?.sourceSemanticComplete)
+    .filter((source) => source.unresolvedFields.length > 0 || (source.positiveSide?.unresolvedFields.length ?? 0) > 0
+      || (source.negativeSide?.unresolvedFields.length ?? 0) > 0 || !byId.get(source.id)?.sourceSemanticComplete)
     .map((source) => source.id);
   const productionReadyCount = required.filter((source) => byId.get(source.id)?.productionReady).length;
   const productionReadyIds = required.filter((source) => byId.get(source.id)?.productionReady).map((source) => source.id);

@@ -1,0 +1,923 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-5R",
+  "generatedAt": "2026-09-22T00:00:00.000Z",
+  "baselineHead": "a4087540602d5816ed3e0c328be4a5d16e2b3b32",
+  "verifiedImplementationHead": "a4087540602d5816ed3e0c328be4a5d16e2b3b32",
+  "verifiedImplementationTree": "f02b716f6d1204b8be6b0e6f7212112c5ca61eed",
+  "cards": [
+    {
+      "definitionId": "community-trinket-core-bloodthirst-ring",
+      "sourceSemanticComplete": true,
+      "positiveSideSourceComplete": true,
+      "negativeSideSourceComplete": true,
+      "positiveRuntimeComplete": false,
+      "negativeRuntimeComplete": false,
+      "triggerScopeComplete": true,
+      "runtimeSemanticComplete": false,
+      "runtimeAddedConditions": [],
+      "runtimeConditionEvidence": [],
+      "adapterComplete": false,
+      "productionProofComplete": false,
+      "saveReplayProofComplete": false,
+      "selectorProofComplete": false,
+      "productionUiProofComplete": false,
+      "productionReady": false,
+      "blockerCodes": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_HERO_HIT_BY_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "semanticObligations": [
+        {
+          "obligationId": "community-trinket-core-bloodthirst-ring:positive",
+          "definitionId": "community-trinket-core-bloodthirst-ring",
+          "side": "positive",
+          "printedText": "Bloodthirst Ring",
+          "trigger": "voluntary-declaration",
+          "sourceUseWindow": "declare-when-applicable",
+          "target": "equipped-hero",
+          "sourceConditions": [],
+          "sourceModifiers": [],
+          "sourceEffects": [
+            {
+              "kind": "consume-provision",
+              "provision": "food",
+              "amount": 1
+            },
+            {
+              "kind": "heal",
+              "amount": 10
+            }
+          ],
+          "runtimeTriggerBinding": null,
+          "runtimeWindowBinding": null,
+          "runtimeConditionBindings": [],
+          "runtimeConditionEvidence": [],
+          "runtimeEffectBindings": [
+            "ActiveEffectDefinition:consume-provision",
+            "ActiveEffectDefinition:heal-self"
+          ],
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "TRINKET_SEMANTIC_OBLIGATION_UNSUPPORTED"
+        },
+        {
+          "obligationId": "community-trinket-core-bloodthirst-ring:negative",
+          "definitionId": "community-trinket-core-bloodthirst-ring",
+          "side": "negative",
+          "printedText": "Bloodthirst Ring",
+          "trigger": "hero-hit-by-attack",
+          "sourceUseWindow": "declare-when-applicable",
+          "target": "equipped-hero",
+          "sourceConditions": [],
+          "sourceModifiers": [],
+          "sourceEffects": [
+            {
+              "kind": "apply-condition-stack",
+              "condition": "bleed",
+              "turns": 2,
+              "amount": 3
+            }
+          ],
+          "runtimeTriggerBinding": null,
+          "runtimeWindowBinding": null,
+          "runtimeConditionBindings": [],
+          "runtimeConditionEvidence": [],
+          "runtimeEffectBindings": [
+            "shared applyStatusEffectEvent"
+          ],
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "TRINKET_SEMANTIC_OBLIGATION_UNSUPPORTED"
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-book-of-constitution",
+      "sourceSemanticComplete": true,
+      "positiveSideSourceComplete": true,
+      "negativeSideSourceComplete": true,
+      "positiveRuntimeComplete": false,
+      "negativeRuntimeComplete": false,
+      "triggerScopeComplete": true,
+      "runtimeSemanticComplete": false,
+      "runtimeAddedConditions": [],
+      "runtimeConditionEvidence": [],
+      "adapterComplete": false,
+      "productionProofComplete": false,
+      "saveReplayProofComplete": false,
+      "selectorProofComplete": false,
+      "productionUiProofComplete": false,
+      "productionReady": false,
+      "blockerCodes": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_DISCARD_DISEASE",
+        "EXACT_APPLICABLE_TIMING_DISEASE_ACQUIRED_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_TRINKETMODIFIERTYPE_MOVEMENT",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "semanticObligations": [
+        {
+          "obligationId": "community-trinket-core-book-of-constitution:positive",
+          "definitionId": "community-trinket-core-book-of-constitution",
+          "side": "positive",
+          "printedText": "Book of Constitution",
+          "trigger": "disease-acquired",
+          "sourceUseWindow": "declare-when-applicable",
+          "target": "new-disease",
+          "sourceConditions": [],
+          "sourceModifiers": [],
+          "sourceEffects": [
+            {
+              "kind": "discard-disease",
+              "immediately": true
+            }
+          ],
+          "runtimeTriggerBinding": null,
+          "runtimeWindowBinding": null,
+          "runtimeConditionBindings": [],
+          "runtimeConditionEvidence": [],
+          "runtimeEffectBindings": [],
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "TRINKET_SEMANTIC_OBLIGATION_UNSUPPORTED"
+        },
+        {
+          "obligationId": "community-trinket-core-book-of-constitution:negative",
+          "definitionId": "community-trinket-core-book-of-constitution",
+          "side": "negative",
+          "printedText": "Book of Constitution",
+          "trigger": "voluntary-declaration",
+          "sourceUseWindow": "declare-when-applicable",
+          "target": "equipped-hero",
+          "sourceConditions": [],
+          "sourceModifiers": [
+            {
+              "kind": "modify",
+              "stat": "movement",
+              "amount": -2
+            }
+          ],
+          "sourceEffects": [],
+          "runtimeTriggerBinding": null,
+          "runtimeWindowBinding": null,
+          "runtimeConditionBindings": [],
+          "runtimeConditionEvidence": [],
+          "runtimeEffectBindings": [],
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "TRINKET_SEMANTIC_OBLIGATION_UNSUPPORTED"
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-book-of-holiness",
+      "sourceSemanticComplete": true,
+      "positiveSideSourceComplete": true,
+      "negativeSideSourceComplete": true,
+      "positiveRuntimeComplete": false,
+      "negativeRuntimeComplete": false,
+      "triggerScopeComplete": true,
+      "runtimeSemanticComplete": false,
+      "runtimeAddedConditions": [],
+      "runtimeConditionEvidence": [],
+      "adapterComplete": false,
+      "productionProofComplete": false,
+      "saveReplayProofComplete": false,
+      "selectorProofComplete": false,
+      "productionUiProofComplete": false,
+      "productionReady": false,
+      "blockerCodes": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_CONVERT_INCOMING_HIT_TO_CRITICAL",
+        "EXACT_APPLICABLE_TIMING_HERO_HIT_BY_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "semanticObligations": [
+        {
+          "obligationId": "community-trinket-core-book-of-holiness:positive",
+          "definitionId": "community-trinket-core-book-of-holiness",
+          "side": "positive",
+          "printedText": "Book of Holiness",
+          "trigger": "voluntary-declaration",
+          "sourceUseWindow": "declare-when-applicable",
+          "target": "equipped-hero",
+          "sourceConditions": [],
+          "sourceModifiers": [],
+          "sourceEffects": [
+            {
+              "kind": "change-stress",
+              "amount": -3
+            }
+          ],
+          "runtimeTriggerBinding": null,
+          "runtimeWindowBinding": null,
+          "runtimeConditionBindings": [],
+          "runtimeConditionEvidence": [],
+          "runtimeEffectBindings": [
+            "ActiveEffectDefinition:recover-stress-self"
+          ],
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "TRINKET_SEMANTIC_OBLIGATION_UNSUPPORTED"
+        },
+        {
+          "obligationId": "community-trinket-core-book-of-holiness:negative",
+          "definitionId": "community-trinket-core-book-of-holiness",
+          "side": "negative",
+          "printedText": "Book of Holiness",
+          "trigger": "hero-hit-by-attack",
+          "sourceUseWindow": "declare-when-applicable",
+          "target": "equipped-hero",
+          "sourceConditions": [],
+          "sourceModifiers": [],
+          "sourceEffects": [
+            {
+              "kind": "convert-incoming-hit-to-critical"
+            }
+          ],
+          "runtimeTriggerBinding": null,
+          "runtimeWindowBinding": null,
+          "runtimeConditionBindings": [],
+          "runtimeConditionEvidence": [],
+          "runtimeEffectBindings": [],
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "TRINKET_SEMANTIC_OBLIGATION_UNSUPPORTED"
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-book-of-relaxation",
+      "sourceSemanticComplete": true,
+      "positiveSideSourceComplete": true,
+      "negativeSideSourceComplete": true,
+      "positiveRuntimeComplete": false,
+      "negativeRuntimeComplete": false,
+      "triggerScopeComplete": true,
+      "runtimeSemanticComplete": false,
+      "runtimeAddedConditions": [],
+      "runtimeConditionEvidence": [],
+      "adapterComplete": false,
+      "productionProofComplete": false,
+      "saveReplayProofComplete": false,
+      "selectorProofComplete": false,
+      "productionUiProofComplete": false,
+      "productionReady": false,
+      "blockerCodes": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "semanticObligations": [
+        {
+          "obligationId": "community-trinket-core-book-of-relaxation:positive",
+          "definitionId": "community-trinket-core-book-of-relaxation",
+          "side": "positive",
+          "printedText": "Book of Relaxation",
+          "trigger": "voluntary-declaration",
+          "sourceUseWindow": "declare-when-applicable",
+          "target": "equipped-hero",
+          "sourceConditions": [],
+          "sourceModifiers": [],
+          "sourceEffects": [
+            {
+              "kind": "change-stress",
+              "amount": -2
+            }
+          ],
+          "runtimeTriggerBinding": null,
+          "runtimeWindowBinding": null,
+          "runtimeConditionBindings": [],
+          "runtimeConditionEvidence": [],
+          "runtimeEffectBindings": [
+            "ActiveEffectDefinition:recover-stress-self"
+          ],
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "TRINKET_SEMANTIC_OBLIGATION_UNSUPPORTED"
+        },
+        {
+          "obligationId": "community-trinket-core-book-of-relaxation:negative",
+          "definitionId": "community-trinket-core-book-of-relaxation",
+          "side": "negative",
+          "printedText": "Book of Relaxation",
+          "trigger": "voluntary-declaration",
+          "sourceUseWindow": "declare-when-applicable",
+          "target": "equipped-hero",
+          "sourceConditions": [],
+          "sourceModifiers": [
+            {
+              "kind": "modify",
+              "stat": "dodge",
+              "amount": -2
+            }
+          ],
+          "sourceEffects": [],
+          "runtimeTriggerBinding": null,
+          "runtimeWindowBinding": null,
+          "runtimeConditionBindings": [],
+          "runtimeConditionEvidence": [],
+          "runtimeEffectBindings": [
+            "ActiveModifierDefinition:dodge"
+          ],
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "TRINKET_SEMANTIC_OBLIGATION_UNSUPPORTED"
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-camouflage-cloak",
+      "sourceSemanticComplete": true,
+      "positiveSideSourceComplete": true,
+      "negativeSideSourceComplete": true,
+      "positiveRuntimeComplete": false,
+      "negativeRuntimeComplete": false,
+      "triggerScopeComplete": true,
+      "runtimeSemanticComplete": false,
+      "runtimeAddedConditions": [],
+      "runtimeConditionEvidence": [],
+      "adapterComplete": false,
+      "productionProofComplete": false,
+      "saveReplayProofComplete": false,
+      "selectorProofComplete": false,
+      "productionUiProofComplete": false,
+      "productionReady": false,
+      "blockerCodes": [
+        "EXACT_APPLICABLE_TIMING_INCOMING_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_HERO_HIT_BY_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "semanticObligations": [
+        {
+          "obligationId": "community-trinket-core-camouflage-cloak:positive",
+          "definitionId": "community-trinket-core-camouflage-cloak",
+          "side": "positive",
+          "printedText": "Camouflage Cloak",
+          "trigger": "incoming-attack",
+          "sourceUseWindow": "declare-when-applicable",
+          "target": "equipped-hero",
+          "sourceConditions": [
+            {
+              "kind": "light",
+              "operator": ">=",
+              "value": 3
+            }
+          ],
+          "sourceModifiers": [
+            {
+              "kind": "modify",
+              "stat": "dodge",
+              "amount": 2
+            }
+          ],
+          "sourceEffects": [],
+          "runtimeTriggerBinding": null,
+          "runtimeWindowBinding": null,
+          "runtimeConditionBindings": [],
+          "runtimeConditionEvidence": [],
+          "runtimeEffectBindings": [
+            "ActiveModifierDefinition:dodge"
+          ],
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "TRINKET_SEMANTIC_OBLIGATION_UNSUPPORTED"
+        },
+        {
+          "obligationId": "community-trinket-core-camouflage-cloak:negative",
+          "definitionId": "community-trinket-core-camouflage-cloak",
+          "side": "negative",
+          "printedText": "Camouflage Cloak",
+          "trigger": "hero-hit-by-attack",
+          "sourceUseWindow": "declare-when-applicable",
+          "target": "equipped-hero",
+          "sourceConditions": [],
+          "sourceModifiers": [],
+          "sourceEffects": [
+            {
+              "kind": "apply-condition-stack",
+              "condition": "stun",
+              "turns": 1,
+              "amount": null
+            }
+          ],
+          "runtimeTriggerBinding": null,
+          "runtimeWindowBinding": null,
+          "runtimeConditionBindings": [],
+          "runtimeConditionEvidence": [],
+          "runtimeEffectBindings": [
+            "shared applyStatusEffectEvent"
+          ],
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "TRINKET_SEMANTIC_OBLIGATION_UNSUPPORTED"
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-campers-helmet",
+      "sourceSemanticComplete": true,
+      "positiveSideSourceComplete": true,
+      "negativeSideSourceComplete": true,
+      "positiveRuntimeComplete": false,
+      "negativeRuntimeComplete": false,
+      "triggerScopeComplete": true,
+      "runtimeSemanticComplete": false,
+      "runtimeAddedConditions": [],
+      "runtimeConditionEvidence": [],
+      "adapterComplete": false,
+      "productionProofComplete": false,
+      "saveReplayProofComplete": false,
+      "selectorProofComplete": false,
+      "productionUiProofComplete": false,
+      "productionReady": false,
+      "blockerCodes": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_ROLL_PROVISION_DICE",
+        "EXACT_APPLICABLE_TIMING_CAMPING_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "EXACT_APPLICABLE_TIMING_SCOUT_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "semanticObligations": [
+        {
+          "obligationId": "community-trinket-core-campers-helmet:positive",
+          "definitionId": "community-trinket-core-campers-helmet",
+          "side": "positive",
+          "printedText": "Camper's Helmet",
+          "trigger": "camping",
+          "sourceUseWindow": "declare-when-applicable",
+          "target": "party-provisions",
+          "sourceConditions": [],
+          "sourceModifiers": [],
+          "sourceEffects": [
+            {
+              "kind": "roll-provision-dice",
+              "count": 2
+            }
+          ],
+          "runtimeTriggerBinding": null,
+          "runtimeWindowBinding": null,
+          "runtimeConditionBindings": [],
+          "runtimeConditionEvidence": [],
+          "runtimeEffectBindings": [],
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "TRINKET_SEMANTIC_OBLIGATION_UNSUPPORTED"
+        },
+        {
+          "obligationId": "community-trinket-core-campers-helmet:negative",
+          "definitionId": "community-trinket-core-campers-helmet",
+          "side": "negative",
+          "printedText": "Camper's Helmet",
+          "trigger": "scout",
+          "sourceUseWindow": "declare-when-applicable",
+          "target": "equipped-hero",
+          "sourceConditions": [],
+          "sourceModifiers": [],
+          "sourceEffects": [
+            {
+              "kind": "change-stress",
+              "amount": 1
+            }
+          ],
+          "runtimeTriggerBinding": null,
+          "runtimeWindowBinding": null,
+          "runtimeConditionBindings": [],
+          "runtimeConditionEvidence": [],
+          "runtimeEffectBindings": [
+            "ActiveEffectDefinition:stress-self"
+          ],
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "TRINKET_SEMANTIC_OBLIGATION_UNSUPPORTED"
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-chirurgeons-charm",
+      "sourceSemanticComplete": true,
+      "positiveSideSourceComplete": true,
+      "negativeSideSourceComplete": true,
+      "positiveRuntimeComplete": false,
+      "negativeRuntimeComplete": false,
+      "triggerScopeComplete": false,
+      "runtimeSemanticComplete": false,
+      "runtimeAddedConditions": [],
+      "runtimeConditionEvidence": [],
+      "adapterComplete": true,
+      "productionProofComplete": true,
+      "saveReplayProofComplete": true,
+      "selectorProofComplete": true,
+      "productionUiProofComplete": true,
+      "productionReady": false,
+      "blockerCodes": [
+        "TRINKET_TRIGGER_SCOPE_UNRESOLVED",
+        "TRINKET_TRIGGER_SCOPE_UNRESOLVED"
+      ],
+      "semanticObligations": [
+        {
+          "obligationId": "community-trinket-core-chirurgeons-charm:positive",
+          "definitionId": "community-trinket-core-chirurgeons-charm",
+          "side": "positive",
+          "printedText": "Chirurgeon's Charm",
+          "trigger": "hero-heals",
+          "sourceUseWindow": "declare-when-applicable",
+          "target": "healing-delivered",
+          "sourceConditions": [],
+          "sourceModifiers": [
+            {
+              "kind": "modify",
+              "stat": "healing",
+              "amount": 2
+            }
+          ],
+          "sourceEffects": [],
+          "runtimeTriggerBinding": "hero-heals",
+          "runtimeWindowBinding": "before-healing-delivered-resolution",
+          "runtimeConditionBindings": [],
+          "runtimeConditionEvidence": [],
+          "runtimeEffectBindings": [
+            "TrinketSideDefinition:modifiers/effects"
+          ],
+          "implementationStatus": "PARTIAL",
+          "proofIds": [
+            "C1C5-CHIRURGEONS-RUNTIME",
+            "C1C5-CHIRURGEONS-SAVE-REPLAY",
+            "C1C5-CHIRURGEONS-SELECTOR",
+            "C1C5-E2E-CHIRURGEONS"
+          ],
+          "blockerCode": "TRINKET_TRIGGER_SCOPE_UNRESOLVED"
+        },
+        {
+          "obligationId": "community-trinket-core-chirurgeons-charm:negative",
+          "definitionId": "community-trinket-core-chirurgeons-charm",
+          "side": "negative",
+          "printedText": "Chirurgeon's Charm",
+          "trigger": "hero-is-healed",
+          "sourceUseWindow": "declare-when-applicable",
+          "target": "healing-received",
+          "sourceConditions": [],
+          "sourceModifiers": [
+            {
+              "kind": "modify",
+              "stat": "healing",
+              "amount": -4
+            }
+          ],
+          "sourceEffects": [],
+          "runtimeTriggerBinding": "hero-is-healed",
+          "runtimeWindowBinding": "before-healing-received-resolution",
+          "runtimeConditionBindings": [],
+          "runtimeConditionEvidence": [],
+          "runtimeEffectBindings": [
+            "TrinketSideDefinition:modifiers/effects"
+          ],
+          "implementationStatus": "PARTIAL",
+          "proofIds": [
+            "C1C5-CHIRURGEONS-RUNTIME",
+            "C1C5-CHIRURGEONS-SAVE-REPLAY",
+            "C1C5-CHIRURGEONS-SELECTOR",
+            "C1C5-E2E-CHIRURGEONS"
+          ],
+          "blockerCode": "TRINKET_TRIGGER_SCOPE_UNRESOLVED"
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-dark-bracer",
+      "sourceSemanticComplete": true,
+      "positiveSideSourceComplete": true,
+      "negativeSideSourceComplete": true,
+      "positiveRuntimeComplete": false,
+      "negativeRuntimeComplete": false,
+      "triggerScopeComplete": true,
+      "runtimeSemanticComplete": false,
+      "runtimeAddedConditions": [],
+      "runtimeConditionEvidence": [],
+      "adapterComplete": false,
+      "productionProofComplete": false,
+      "saveReplayProofComplete": false,
+      "selectorProofComplete": false,
+      "productionUiProofComplete": false,
+      "productionReady": false,
+      "blockerCodes": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_SET_DAMAGE",
+        "EXACT_APPLICABLE_TIMING_HERO_SKILL_HITS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "semanticObligations": [
+        {
+          "obligationId": "community-trinket-core-dark-bracer:positive",
+          "definitionId": "community-trinket-core-dark-bracer",
+          "side": "positive",
+          "printedText": "Dark Bracer",
+          "trigger": "hero-skill-resolution",
+          "sourceUseWindow": "declare-when-applicable",
+          "target": "skill",
+          "sourceConditions": [
+            {
+              "kind": "light",
+              "operator": "<=",
+              "value": 3
+            }
+          ],
+          "sourceModifiers": [
+            {
+              "kind": "modify",
+              "stat": "crit",
+              "amount": 2
+            }
+          ],
+          "sourceEffects": [],
+          "runtimeTriggerBinding": null,
+          "runtimeWindowBinding": null,
+          "runtimeConditionBindings": [],
+          "runtimeConditionEvidence": [],
+          "runtimeEffectBindings": [
+            "ActiveModifierDefinition:crit"
+          ],
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "TRINKET_SEMANTIC_OBLIGATION_UNSUPPORTED"
+        },
+        {
+          "obligationId": "community-trinket-core-dark-bracer:negative",
+          "definitionId": "community-trinket-core-dark-bracer",
+          "side": "negative",
+          "printedText": "Dark Bracer",
+          "trigger": "hero-skill-hits",
+          "sourceUseWindow": "declare-when-applicable",
+          "target": "skill",
+          "sourceConditions": [
+            {
+              "kind": "light",
+              "operator": ">=",
+              "value": 3
+            }
+          ],
+          "sourceModifiers": [],
+          "sourceEffects": [
+            {
+              "kind": "set-damage",
+              "amount": 0
+            }
+          ],
+          "runtimeTriggerBinding": null,
+          "runtimeWindowBinding": null,
+          "runtimeConditionBindings": [],
+          "runtimeConditionEvidence": [],
+          "runtimeEffectBindings": [],
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "TRINKET_SEMANTIC_OBLIGATION_UNSUPPORTED"
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-fortunate-armlet",
+      "sourceSemanticComplete": true,
+      "positiveSideSourceComplete": true,
+      "negativeSideSourceComplete": true,
+      "positiveRuntimeComplete": false,
+      "negativeRuntimeComplete": false,
+      "triggerScopeComplete": true,
+      "runtimeSemanticComplete": false,
+      "runtimeAddedConditions": [],
+      "runtimeConditionEvidence": [],
+      "adapterComplete": false,
+      "productionProofComplete": false,
+      "saveReplayProofComplete": false,
+      "selectorProofComplete": false,
+      "productionUiProofComplete": false,
+      "productionReady": false,
+      "blockerCodes": [
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "semanticObligations": [
+        {
+          "obligationId": "community-trinket-core-fortunate-armlet:positive",
+          "definitionId": "community-trinket-core-fortunate-armlet",
+          "side": "positive",
+          "printedText": "Fortunate Armlet",
+          "trigger": "hero-skill-resolution",
+          "sourceUseWindow": "declare-when-applicable",
+          "target": "skill",
+          "sourceConditions": [],
+          "sourceModifiers": [
+            {
+              "kind": "modify",
+              "stat": "accuracy",
+              "amount": 1
+            },
+            {
+              "kind": "modify",
+              "stat": "crit",
+              "amount": 1
+            }
+          ],
+          "sourceEffects": [],
+          "runtimeTriggerBinding": null,
+          "runtimeWindowBinding": null,
+          "runtimeConditionBindings": [],
+          "runtimeConditionEvidence": [],
+          "runtimeEffectBindings": [
+            "ActiveModifierDefinition:accuracy",
+            "ActiveModifierDefinition:crit"
+          ],
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "TRINKET_SEMANTIC_OBLIGATION_UNSUPPORTED"
+        },
+        {
+          "obligationId": "community-trinket-core-fortunate-armlet:negative",
+          "definitionId": "community-trinket-core-fortunate-armlet",
+          "side": "negative",
+          "printedText": "Fortunate Armlet",
+          "trigger": "voluntary-declaration",
+          "sourceUseWindow": "declare-when-applicable",
+          "target": "equipped-hero",
+          "sourceConditions": [],
+          "sourceModifiers": [],
+          "sourceEffects": [
+            {
+              "kind": "change-stress",
+              "amount": 1
+            }
+          ],
+          "runtimeTriggerBinding": null,
+          "runtimeWindowBinding": null,
+          "runtimeConditionBindings": [],
+          "runtimeConditionEvidence": [],
+          "runtimeEffectBindings": [
+            "ActiveEffectDefinition:stress-self"
+          ],
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "TRINKET_SEMANTIC_OBLIGATION_UNSUPPORTED"
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-protective-padlock",
+      "sourceSemanticComplete": true,
+      "positiveSideSourceComplete": true,
+      "negativeSideSourceComplete": true,
+      "positiveRuntimeComplete": false,
+      "negativeRuntimeComplete": false,
+      "triggerScopeComplete": true,
+      "runtimeSemanticComplete": false,
+      "runtimeAddedConditions": [],
+      "runtimeConditionEvidence": [],
+      "adapterComplete": false,
+      "productionProofComplete": false,
+      "saveReplayProofComplete": false,
+      "selectorProofComplete": false,
+      "productionUiProofComplete": false,
+      "productionReady": false,
+      "blockerCodes": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_SCALE_INCOMING_DAMAGE",
+        "EXACT_APPLICABLE_TIMING_HERO_HIT_BY_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_TRINKETMODIFIERTYPE_MOVEMENT",
+        "EXACT_APPLICABLE_TIMING_VOLUNTARY_DECLARATION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "semanticObligations": [
+        {
+          "obligationId": "community-trinket-core-protective-padlock:positive",
+          "definitionId": "community-trinket-core-protective-padlock",
+          "side": "positive",
+          "printedText": "Protective Padlock",
+          "trigger": "hero-hit-by-attack",
+          "sourceUseWindow": "declare-when-applicable",
+          "target": "equipped-hero",
+          "sourceConditions": [],
+          "sourceModifiers": [],
+          "sourceEffects": [
+            {
+              "kind": "scale-incoming-damage",
+              "factor": 0.5,
+              "rounding": "up"
+            }
+          ],
+          "runtimeTriggerBinding": null,
+          "runtimeWindowBinding": null,
+          "runtimeConditionBindings": [],
+          "runtimeConditionEvidence": [],
+          "runtimeEffectBindings": [],
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "TRINKET_SEMANTIC_OBLIGATION_UNSUPPORTED"
+        },
+        {
+          "obligationId": "community-trinket-core-protective-padlock:negative",
+          "definitionId": "community-trinket-core-protective-padlock",
+          "side": "negative",
+          "printedText": "Protective Padlock",
+          "trigger": "voluntary-declaration",
+          "sourceUseWindow": "declare-when-applicable",
+          "target": "equipped-hero",
+          "sourceConditions": [],
+          "sourceModifiers": [
+            {
+              "kind": "modify",
+              "stat": "movement",
+              "amount": -1
+            }
+          ],
+          "sourceEffects": [],
+          "runtimeTriggerBinding": null,
+          "runtimeWindowBinding": null,
+          "runtimeConditionBindings": [],
+          "runtimeConditionEvidence": [],
+          "runtimeEffectBindings": [],
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "TRINKET_SEMANTIC_OBLIGATION_UNSUPPORTED"
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-solar-bracer",
+      "sourceSemanticComplete": true,
+      "positiveSideSourceComplete": true,
+      "negativeSideSourceComplete": true,
+      "positiveRuntimeComplete": false,
+      "negativeRuntimeComplete": false,
+      "triggerScopeComplete": true,
+      "runtimeSemanticComplete": false,
+      "runtimeAddedConditions": [],
+      "runtimeConditionEvidence": [],
+      "adapterComplete": false,
+      "productionProofComplete": false,
+      "saveReplayProofComplete": false,
+      "selectorProofComplete": false,
+      "productionUiProofComplete": false,
+      "productionReady": false,
+      "blockerCodes": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_SET_DAMAGE",
+        "EXACT_APPLICABLE_TIMING_HERO_SKILL_HITS_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "semanticObligations": [
+        {
+          "obligationId": "community-trinket-core-solar-bracer:positive",
+          "definitionId": "community-trinket-core-solar-bracer",
+          "side": "positive",
+          "printedText": "Solar Bracer",
+          "trigger": "hero-skill-resolution",
+          "sourceUseWindow": "declare-when-applicable",
+          "target": "skill",
+          "sourceConditions": [
+            {
+              "kind": "light",
+              "operator": ">=",
+              "value": 3
+            }
+          ],
+          "sourceModifiers": [
+            {
+              "kind": "modify",
+              "stat": "crit",
+              "amount": 2
+            }
+          ],
+          "sourceEffects": [],
+          "runtimeTriggerBinding": null,
+          "runtimeWindowBinding": null,
+          "runtimeConditionBindings": [],
+          "runtimeConditionEvidence": [],
+          "runtimeEffectBindings": [
+            "ActiveModifierDefinition:crit"
+          ],
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "TRINKET_SEMANTIC_OBLIGATION_UNSUPPORTED"
+        },
+        {
+          "obligationId": "community-trinket-core-solar-bracer:negative",
+          "definitionId": "community-trinket-core-solar-bracer",
+          "side": "negative",
+          "printedText": "Solar Bracer",
+          "trigger": "hero-skill-hits",
+          "sourceUseWindow": "declare-when-applicable",
+          "target": "skill",
+          "sourceConditions": [
+            {
+              "kind": "light",
+              "operator": "<=",
+              "value": 3
+            }
+          ],
+          "sourceModifiers": [],
+          "sourceEffects": [
+            {
+              "kind": "set-damage",
+              "amount": 0
+            }
+          ],
+          "runtimeTriggerBinding": null,
+          "runtimeWindowBinding": null,
+          "runtimeConditionBindings": [],
+          "runtimeConditionEvidence": [],
+          "runtimeEffectBindings": [],
+          "implementationStatus": "UNSUPPORTED",
+          "proofIds": [],
+          "blockerCode": "TRINKET_SEMANTIC_OBLIGATION_UNSUPPORTED"
+        }
+      ]
+    }
+  ]
+}

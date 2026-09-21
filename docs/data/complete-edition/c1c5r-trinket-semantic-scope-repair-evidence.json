@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-5R",
+  "measuredAt": "2026-09-22T00:00:00.000Z",
+  "baselineHead": "a4087540602d5816ed3e0c328be4a5d16e2b3b32",
+  "verifiedImplementationHead": "a4087540602d5816ed3e0c328be4a5d16e2b3b32",
+  "verifiedImplementationTree": "f02b716f6d1204b8be6b0e6f7212112c5ca61eed",
+  "historicalEvidenceHashes": {
+    "docs/data/complete-edition/c1c5-level2-trinket-capability-matrix.json": "83b9ec1b8d4ca164b4612740ab60e8a0d057d8bf344158837f893b11d2dc3c4b",
+    "docs/data/complete-edition/c1c5-level2-trinket-runtime-foundation-evidence.json": "5d43c0753feeff6cb4ff3e5412930a65de3dd290ce57c27075b6e54bee04e057",
+    "docs/data/complete-edition/c1c5-trinket-deck-coverage.json": "abf49c7f4f0a452b01bd197584e70bf016c530a7a1ab9b42f9f27baeaadefaf3",
+    "docs/reports/complete-edition/c1c5-level2-trinket-runtime-foundation-report.md": "a2e713f683b6a6558b8fe44461e9a714726239e3c824a3ad722669d7dd59746f"
+  },
+  "chirurgeonsReadyBefore": true,
+  "chirurgeonsReadyAfter": false,
+  "level2ReadyBefore": 1,
+  "level2ReadyAfter": 0,
+  "battleHealingSliceComplete": true,
+  "triggerScopeComplete": false,
+  "runtimeAddedConditionAudit": {
+    "sourceConditions": [],
+    "runtimeConditions": [],
+    "unsupportedConditions": []
+  },
+  "level2DeckCoverage": {
+    "level": 2,
+    "sourceDefinitionCount": 11,
+    "sourceSupportedCount": 11,
+    "sourceSemanticCompleteCount": 11,
+    "runtimeSemanticCompleteCount": 0,
+    "productionReadyCount": 0,
+    "productionReadyIds": [],
+    "missingDefinitionIds": [
+      "community-trinket-core-bloodthirst-ring",
+      "community-trinket-core-book-of-constitution",
+      "community-trinket-core-book-of-holiness",
+      "community-trinket-core-book-of-relaxation",
+      "community-trinket-core-camouflage-cloak",
+      "community-trinket-core-campers-helmet",
+      "community-trinket-core-chirurgeons-charm",
+      "community-trinket-core-dark-bracer",
+      "community-trinket-core-fortunate-armlet",
+      "community-trinket-core-protective-padlock",
+      "community-trinket-core-solar-bracer"
+    ],
+    "semanticallyIncompleteDefinitionIds": [],
+    "completeForRandomDraw": false
+  },
+  "familyDeckDependencyBound": true,
+  "familyProductionReady": false,
+  "familySelectorReachable": false,
+  "restSemanticStatus": "SOURCE_UNRESOLVED_FAIL_CLOSED",
+  "proofBindings": [
+    "C1C5-CHIRURGEONS-RUNTIME",
+    "C1C5-CHIRURGEONS-SAVE-REPLAY",
+    "C1C5-CHIRURGEONS-SELECTOR",
+    "C1C5-E2E-CHIRURGEONS",
+    "C1C5-CHIRURGEONS-RUNTIME",
+    "C1C5-CHIRURGEONS-SAVE-REPLAY",
+    "C1C5-CHIRURGEONS-SELECTOR",
+    "C1C5-E2E-CHIRURGEONS"
+  ],
+  "commands": [
+    {
+      "command": "C1C-5R semantic mutation tests",
+      "exitCode": 0
+    },
+    {
+      "command": "C1C-5 battle healing proof",
+      "exitCode": 0
+    },
+    {
+      "command": "C1C-5 production UI E2E",
+      "exitCode": 0
+    },
+    {
+      "command": "C1BR regression",
+      "exitCode": 0
+    },
+    {
+      "command": "full regression",
+      "exitCode": 0
+    },
+    {
+      "command": "typecheck",
+      "exitCode": 0
+    },
+    {
+      "command": "build",
+      "exitCode": 0
+    }
+  ],
+  "failures": [],
+  "terminalVerdict": "C1C5R-BATTLE-HEALING-FOUNDATION-ACCEPTED-CARD-NOT-PROMOTED"
+}

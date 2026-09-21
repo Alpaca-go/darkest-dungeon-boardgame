@@ -1347,14 +1347,26 @@ export function migrateCampaignToV19(campaign: CampaignState): CampaignState {
   const raw = campaign as CampaignState & Record<string, unknown>;
   const pending = raw.pendingHealingAction;
   const value = pending as unknown as Record<string, unknown> | undefined;
+  const validString = (candidate: unknown) => typeof candidate === 'string' && candidate.length > 0;
   const valid = pending && typeof pending === 'object'
     && value?.kind === 'hero-healing-skill'
-    && typeof value.eventId === 'string'
+    && validString(value.eventId)
+    && validString(value.actorUnitId) && validString(value.targetUnitId)
+    && validString(value.healerHeroId) && validString(value.targetHeroId)
+    && validString(value.skillId)
+    && typeof value.baseAmount === 'number' && Number.isFinite(value.baseAmount) && value.baseAmount >= 0
+    && typeof value.healingModifier === 'number' && Number.isFinite(value.healingModifier)
+    && Array.isArray(value.processedTrinketInstanceIds)
+    && value.processedTrinketInstanceIds.every(validString)
     && (value.stage === 'healer-window' || value.stage === 'target-window');
+  const invalidRootEventId = !valid && validString(value?.eventId) ? value!.eventId as string : null;
   return {
     ...campaign,
     saveVersion: SAVE_VERSION,
     pendingHealingAction: valid ? campaign.pendingHealingAction : null,
+    pendingTrinketUseOpportunities: invalidRootEventId
+      ? campaign.pendingTrinketUseOpportunities.filter((opportunity) => opportunity.rootEventId !== invalidRootEventId)
+      : campaign.pendingTrinketUseOpportunities,
   };
 }
 

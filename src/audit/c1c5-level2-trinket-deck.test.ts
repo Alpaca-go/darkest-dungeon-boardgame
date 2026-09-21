@@ -12,7 +12,7 @@ describe('C1C-5 Level 2 Trinket source truth', () => {
     expect(LEVEL_2_TRINKET_CENSUS).toHaveLength(11);
     expect(LEVEL_2_TRINKET_CENSUS.every((entry) => entry.sides.length === 2)).toBe(true);
     expect(LEVEL_2_TRINKET_DECK_COVERAGE).toMatchObject({
-      sourceDefinitionCount: 11, productionReadyCount: 1, completeForRandomDraw: false,
+      sourceDefinitionCount: 11, productionReadyCount: 0, completeForRandomDraw: false,
     });
   });
 
@@ -41,6 +41,8 @@ describe('C1C-5 Level 2 Trinket source truth', () => {
   it('keeps Family Trinkets blocked while the Level 2 deck is incomplete', () => {
     const family = COMMUNITY_QUEST_CAPABILITIES.find((entry) => entry.definitionId === 'community-quest-warrens-lvl1-family-trinkets')!;
     expect(family.productionReady).toBe(false);
+    expect(family.blockerCodes).toContain('LEVEL_2_TRINKET_SOURCE_DECK_COMPLETE');
+    expect(COMMUNITY_QUEST_CAPABILITIES.some((entry) => entry.definitionId === family.definitionId && entry.productionReady)).toBe(false);
     expect(questReadinessInvariantErrors(COMMUNITY_QUEST_CAPABILITIES, COMMUNITY_SOURCE_QUESTS, LEVEL_2_TRINKET_DECK_COVERAGE)).toEqual([]);
     const promoted = COMMUNITY_QUEST_CAPABILITIES.map((entry) => entry.definitionId === family.definitionId
       ? { ...entry, productionReady: true, productionStatus: 'PRODUCTION_READY' as const }
