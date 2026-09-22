@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-6",
+  "measuredAt": "2026-09-22T09:30:00.000Z",
+  "baselineHead": "eca0a293f4126d8b7e31934303ed0fcfd1ae1c61",
+  "verifiedImplementationHead": "436e76cd8e3062f3fc68f1ba589822e087f821a7",
+  "verifiedImplementationTree": "48517d00f8edc812a4f30ab3297a19ee897fc214",
+  "historicalEvidenceHashes": {
+    "docs/data/complete-edition/c1c5-level2-trinket-capability-matrix.json": "83b9ec1b8d4ca164b4612740ab60e8a0d057d8bf344158837f893b11d2dc3c4b",
+    "docs/data/complete-edition/c1c5-level2-trinket-runtime-foundation-evidence.json": "5d43c0753feeff6cb4ff3e5412930a65de3dd290ce57c27075b6e54bee04e057",
+    "docs/data/complete-edition/c1c5-trinket-deck-coverage.json": "abf49c7f4f0a452b01bd197584e70bf016c530a7a1ab9b42f9f27baeaadefaf3",
+    "docs/data/complete-edition/c1c5r-chirurgeons-trigger-scope.json": "5ef5ed668d658ef9d4a7d6f89c6ffabe88d3f8104b259dbb169eb703e979b365",
+    "docs/data/complete-edition/c1c5r-level2-trinket-capability-matrix.json": "4a699d7accfa4b8e105251944e920bb38ce1ab00b841d71d2fe8e1cfe78d6471",
+    "docs/data/complete-edition/c1c5r-trinket-deck-coverage.json": "2a417b9cf9e628a2c4919bcc82b579ef50c94aa238f51e65a3403830c49b76f8",
+    "docs/data/complete-edition/c1c5r-trinket-semantic-scope-repair-evidence.json": "7dff52be732c2f6c75c2c2ed7ed3980b130c8d84e72ab676f380fb6aa3d47bfb",
+    "docs/data/complete-edition/c1c5r2-level2-trinket-capability-matrix.json": "666f4098deae29df4e575ed7d9f3d27bece991c5271c3330875870821f7d59e1",
+    "docs/data/complete-edition/c1c5r2-trinket-semantic-payload-hardening-evidence.json": "16a8f29bee900d1887f549e47bef053453f55777578172953b6404ead4dbc93b",
+    "docs/reports/complete-edition/c1c5-level2-trinket-runtime-foundation-report.md": "a2e713f683b6a6558b8fe44461e9a714726239e3c824a3ad722669d7dd59746f",
+    "docs/reports/complete-edition/c1c5r-trinket-semantic-scope-repair-report.md": "f99de15598d88d36d4d9075d4986b11e632f643921264c9d84f450ed8c81f212",
+    "docs/reports/complete-edition/c1c5r2-trinket-semantic-payload-hardening-report.md": "e05fc3f6de96645abaf26d47d812b27362ab537e8d9413e3af54065355652191"
+  },
+  "wiredWindowsBefore": [
+    "before-attack-roll",
+    "after-attack-roll-before-hit-resolution",
+    "hero-turn-start",
+    "room-entered",
+    "before-healing-delivered-resolution",
+    "before-healing-received-resolution"
+  ],
+  "wiredWindowsAfter": [
+    "before-attack-roll",
+    "after-attack-roll-before-hit-resolution",
+    "before-damage-applied",
+    "hero-turn-start",
+    "room-entered",
+    "before-healing-delivered-resolution",
+    "before-healing-received-resolution"
+  ],
+  "attackResolutionStages": [
+    "post-roll-window",
+    "pre-damage-window"
+  ],
+  "damageRandomnessFrozen": true,
+  "unknownSourceCanonicalizationFailsClosed": true,
+  "darkBracerReadyBefore": false,
+  "darkBracerReadyAfter": true,
+  "solarBracerReadyBefore": false,
+  "solarBracerReadyAfter": true,
+  "level2ReadyBefore": 0,
+  "level2ReadyAfter": 2,
+  "level2CompleteForRandomDraw": false,
+  "familyProductionReady": false,
+  "familySelectorReachable": false,
+  "chirurgeonsProductionReady": false,
+  "proofBindings": [
+    "C1C6-DARK-BRACER-RUNTIME",
+    "C1C6-DARK-BRACER-SAVE-REPLAY",
+    "C1C6-DARK-BRACER-SELECTOR",
+    "C1C6-E2E-DARK-BRACER",
+    "C1C6-SOLAR-BRACER-RUNTIME",
+    "C1C6-SOLAR-BRACER-SAVE-REPLAY",
+    "C1C6-SOLAR-BRACER-SELECTOR",
+    "C1C6-E2E-SOLAR-BRACER"
+  ],
+  "saveReplayResults": {
+    "frozenBaseDamage": "PASS",
+    "changedRngDoesNotReroll": "PASS",
+    "duplicateDecisionRejected": "PASS"
+  },
+  "e2eResults": {
+    "darkPositiveAndNegative": "PASS",
+    "solarPositiveAndNegative": "PASS",
+    "proofSurface": "production-ui"
+  },
+  "commands": [
+    {
+      "command": "C1C-6 runtime/mutation/save tests",
+      "exitCode": 0
+    },
+    {
+      "command": "C1C-6 production UI E2E",
+      "exitCode": 0
+    },
+    {
+      "command": "C1BR regression",
+      "exitCode": 0
+    },
+    {
+      "command": "C1C5 regression",
+      "exitCode": 0
+    },
+    {
+      "command": "full regression",
+      "exitCode": 0
+    },
+    {
+      "command": "typecheck",
+      "exitCode": 0
+    },
+    {
+      "command": "build",
+      "exitCode": 0
+    }
+  ],
+  "failures": [],
+  "terminalVerdict": "C1C6-DARK-SOLAR-ATTACK-RESOLUTION-ACCEPTED"
+}
