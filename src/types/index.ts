@@ -345,6 +345,9 @@ export interface BattleUnit {
  */
 export interface PendingBattleAction {
   kind: 'hero-skill';
+  /** Stable root shared by every decision window for this physical attack. */
+  rootEventId: string;
+  stage: 'post-roll-window' | 'pre-damage-window';
   actorUnitId: string;
   skillId: string;
   targetId: string;
@@ -356,6 +359,14 @@ export interface PendingBattleAction {
   critBonus: number;
   /** Trinket 累计的伤害修正。 */
   damageBonus: number;
+  /** Frozen resolution values. Null until the post-roll window closes. */
+  hit: boolean | null;
+  crit: boolean | null;
+  baseDamage: number | null;
+  /** A one-attack override applied after every additive/output modifier. */
+  finalDamageOverride: number | null;
+  /** Cards offered in an earlier stage of this same root event. */
+  processedTrinketInstanceIds: string[];
 }
 
 /** A healing skill frozen while its delivered/received Trinket windows resolve. */

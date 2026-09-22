@@ -121,6 +121,8 @@ type SourceTrinket = (typeof trinketData)[number];
 export const normalizePrimitives = (message: string): string[] => {
   const primitives: string[] = [];
   if (/timing hero-skill-resolution/i.test(message)) primitives.push('POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW');
+  if (/timing hero-skill-hits/i.test(message)) primitives.push('PRE_DAMAGE_HIT_TRINKET_WINDOW');
+  if (/primitive:set-damage/i.test(message)) primitives.push('SET_DAMAGE_OVERRIDE');
   if (/timing hero-(heals|is-healed)/i.test(message)) primitives.push('STAGED_HEALING_TRINKET_WINDOWS');
   if (/room-token composition/i.test(message)) primitives.push('QUEST_ROOM_TOKEN_COMPOSITION');
   if (/firewood|resting-point/i.test(message)) primitives.push('QUEST_FIREWOOD_RESTING_POINT_SETUP');
@@ -554,10 +556,38 @@ const chirurgeonsCharm: TrinketDefinition = {
   },
 };
 
+function bracerTrinket(id: string, positiveLight: 'min' | 'max', negativeLight: 'min' | 'max'): TrinketDefinition {
+  const source = sourceTrinket(id);
+  const light = (kind: 'min' | 'max') => kind === 'min'
+    ? ({ type: 'min-light', value: 3 } as const)
+    : ({ type: 'max-light', value: 3 } as const);
+  return {
+    id: source.id, name: source.printedName, level: 2,
+    positiveSide: {
+      side: 'positive', label: '暴击 +2', description: source.positiveSide.label,
+      useWindows: ['after-attack-roll-before-hit-resolution'], modifiers: [{ type: 'crit', amount: 2 }],
+      effects: [], canUse: [light(positiveLight)],
+    },
+    negativeSide: {
+      side: 'negative', label: '伤害 = 0', description: source.negativeSide.label,
+      useWindows: ['before-damage-applied'], modifiers: [{ type: 'damage', operation: 'set', amount: 0 }],
+      effects: [], canUse: [light(negativeLight)],
+    },
+    sellPrice: sellPriceForLevel(2), buyPrice: buyPriceForLevel(2), officialDataStatus: 'verified',
+    sourceReference: source.sourceReferences.join('; '), enabledInOfficialPool: false, dataOrigin: 'community',
+    runtimeContentMetadata: { sourceDefinitionId: source.id, contentSet: 'core', region: null, sourceOrigin: 'community-complete-edition' },
+  };
+}
+
+const darkBracer = bracerTrinket('community-trinket-core-dark-bracer', 'max', 'min');
+const solarBracer = bracerTrinket('community-trinket-core-solar-bracer', 'min', 'max');
+
 export const COMMUNITY_TRINKET_RUNTIME_ADAPTERS: Readonly<Record<string, CommunityTrinketRuntimeAdapter>> = Object.freeze({
   [accuracyStone.id]: { adapterId: 'post-roll-accuracy-stone-v1', definitionId: accuracyStone.id, requiredPrimitives: ['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW'], definition: accuracyStone },
   [criticalStone.id]: { adapterId: 'post-roll-critical-stone-v1', definitionId: criticalStone.id, requiredPrimitives: ['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW'], definition: criticalStone },
   [chirurgeonsCharm.id]: { adapterId: 'staged-healing-chirurgeons-charm-v1', definitionId: chirurgeonsCharm.id, requiredPrimitives: ['STAGED_HEALING_TRINKET_WINDOWS'], definition: chirurgeonsCharm },
+  [darkBracer.id]: { adapterId: 'staged-attack-dark-bracer-v1', definitionId: darkBracer.id, requiredPrimitives: ['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW', 'PRE_DAMAGE_HIT_TRINKET_WINDOW', 'SET_DAMAGE_OVERRIDE'], definition: darkBracer },
+  [solarBracer.id]: { adapterId: 'staged-attack-solar-bracer-v1', definitionId: solarBracer.id, requiredPrimitives: ['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW', 'PRE_DAMAGE_HIT_TRINKET_WINDOW', 'SET_DAMAGE_OVERRIDE'], definition: solarBracer },
 });
 
 export const COMMUNITY_TRINKET_PRODUCTION_PROOFS: Readonly<Record<string, CommunityProductionProof>> = Object.freeze({
@@ -586,6 +616,14 @@ export const COMMUNITY_TRINKET_PRODUCTION_PROOFS: Readonly<Record<string, Commun
     saveReplayTests: ['C1C5-CHIRURGEONS-SAVE-REPLAY'], selectorTests: ['C1C5-CHIRURGEONS-SELECTOR'],
     e2eTests: ['C1C5-E2E-CHIRURGEONS'],
   },
+  ...Object.fromEntries([darkBracer, solarBracer].map((definition) => [definition.id, {
+    definitionId: definition.id, runtimeAdapterId: `staged-attack-${definition === darkBracer ? 'dark' : 'solar'}-bracer-v1`,
+    sourceSupported: true, semanticSupported: true, stateful: true,
+    productionTests: [`C1C6-${definition === darkBracer ? 'DARK' : 'SOLAR'}-BRACER-RUNTIME`],
+    saveReplayTests: [`C1C6-${definition === darkBracer ? 'DARK' : 'SOLAR'}-BRACER-SAVE-REPLAY`],
+    selectorTests: [`C1C6-${definition === darkBracer ? 'DARK' : 'SOLAR'}-BRACER-SELECTOR`],
+    e2eTests: [`C1C6-E2E-${definition === darkBracer ? 'DARK' : 'SOLAR'}-BRACER`],
+  }])),
 });
 
 export function evaluateCommunityTrinketCapability(
@@ -610,7 +648,7 @@ export function evaluateCommunityTrinketCapability(
     ...source.positiveSide.runtimeSupport.missingCapabilities,
     ...source.negativeSide.runtimeSupport.missingCapabilities,
   ].flatMap(normalizePrimitives))];
-  const implementedTrinketPrimitives = new Set(['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW', 'STAGED_HEALING_TRINKET_WINDOWS']);
+  const implementedTrinketPrimitives = new Set(['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW', 'STAGED_HEALING_TRINKET_WINDOWS', 'PRE_DAMAGE_HIT_TRINKET_WINDOW', 'SET_DAMAGE_OVERRIDE']);
   const missingPrimitives = declaredMissingPrimitives.filter((primitive) => !implementedTrinketPrimitives.has(primitive));
   const sourceSemanticComplete = trinketSourceSemanticComplete(source);
   const runtimeSemanticComplete = trinketRuntimeSemanticComplete(sourceSemanticComplete, semanticObligations);

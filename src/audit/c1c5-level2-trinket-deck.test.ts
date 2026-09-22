@@ -12,8 +12,10 @@ describe('C1C-5 Level 2 Trinket source truth', () => {
     expect(LEVEL_2_TRINKET_CENSUS).toHaveLength(11);
     expect(LEVEL_2_TRINKET_CENSUS.every((entry) => entry.sides.length === 2)).toBe(true);
     expect(LEVEL_2_TRINKET_DECK_COVERAGE).toMatchObject({
-      sourceDefinitionCount: 11, productionReadyCount: 0, completeForRandomDraw: false,
+      sourceDefinitionCount: 11, completeForRandomDraw: false,
     });
+    expect(LEVEL_2_TRINKET_DECK_COVERAGE.productionReadyCount)
+      .toBe(LEVEL_2_TRINKET_DECK_COVERAGE.productionReadyIds.length);
   });
 
   it('fails closed at 1/11 and 10/11 production-ready', () => {

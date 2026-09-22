@@ -8,6 +8,9 @@ export interface AttackResult {
   damage: number;
 }
 
+/** An attack result whose random damage roll has already been generated. */
+export type PreparedAttackResolution = AttackResult;
+
 export function rollAttackDie(): number {
   return d10();
 }

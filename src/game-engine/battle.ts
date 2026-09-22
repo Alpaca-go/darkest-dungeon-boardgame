@@ -521,7 +521,33 @@ export interface TrinketActionBonuses {
   healingBase?: number;
 }
 
+export interface PreparedHeroAttackResolution {
+  roll: number;
+  hit: boolean;
+  crit: boolean;
+  baseDamage: number;
+}
+
 const NO_TRINKET_BONUSES: TrinketActionBonuses = { accuracy: 0, crit: 0, damage: 0, healing: 0 };
+
+/** Generate and freeze every random result needed by one hero attack. */
+export function prepareHeroAttackResolution(
+  state: BattleState,
+  unitId: string,
+  skillId: string,
+  trinketBonuses: TrinketActionBonuses = NO_TRINKET_BONUSES,
+  preRolledAttack?: number,
+): PreparedHeroAttackResolution | null {
+  const actor = findUnit(state, unitId);
+  const raw = getSkillById(skillId);
+  if (!actor || !raw) return null;
+  const skill = normalizeHeroSkill(raw);
+  if (skill.targetSide !== 'enemy') return null;
+  const result = preRolledAttack === undefined
+    ? resolveAttack(skill, (actor.turnAccuracyBonus ?? 0) + trinketBonuses.accuracy, trinketBonuses.crit)
+    : resolveAttackFromRoll(skill, preRolledAttack, (actor.turnAccuracyBonus ?? 0) + trinketBonuses.accuracy, trinketBonuses.crit);
+  return { roll: result.roll, hit: result.hit, crit: result.crit, baseDamage: result.damage };
+}
 
 /**
  * 校验英雄技能是否可以合法释放（不结算）。
@@ -560,6 +586,8 @@ export function heroUseSkill(
   targetId: string,
   trinketBonuses: TrinketActionBonuses = NO_TRINKET_BONUSES,
   preRolledAttack?: number,
+  preparedAttack?: PreparedHeroAttackResolution,
+  finalDamageOverride?: number | null,
 ): BattleState {
   const actor = findUnit(state, unitId);
   if (!actor || actor.side !== 'hero' || actor.id !== state.activeActorId) return state;
@@ -587,7 +615,8 @@ export function heroUseSkill(
   if (skill.targetSide === 'enemy') {
     // Phase 7：精神效果（Focused）的当前回合命中加成
     // Phase 8C：Trinket 命中 / 暴击阈值修正（来自冻结动作）
-    const res = preRolledAttack === undefined
+    const res = preparedAttack ? { ...preparedAttack, damage: preparedAttack.baseDamage }
+      : preRolledAttack === undefined
       ? resolveAttack(
           skill,
           (actor.turnAccuracyBonus ?? 0) + trinketBonuses.accuracy,
@@ -624,7 +653,7 @@ export function heroUseSkill(
         rawDamage,
         'attack'
       );
-      const totalDamage = outMod.amount;
+      const totalDamage = finalDamageOverride ?? outMod.amount;
       if (outMod.applied.length > 0) {
         s = pushBattleLog(
           s,
@@ -719,6 +748,22 @@ export function heroUseSkill(
   s = checkEnd(s);
   if (s.status === 'active' && s.currentActionPoints <= 0) s = advanceTurn(s);
   return s;
+}
+
+/** Commit a frozen attack without generating another attack or damage roll. */
+export function commitHeroAttackResolution(
+  state: BattleState,
+  unitId: string,
+  skillId: string,
+  targetId: string,
+  trinketBonuses: TrinketActionBonuses,
+  preparedAttack: PreparedHeroAttackResolution,
+  finalDamageOverride: number | null,
+): BattleState {
+  return heroUseSkill(
+    state, unitId, skillId, targetId, trinketBonuses, preparedAttack.roll,
+    preparedAttack, finalDamageOverride,
+  );
 }
 
 /** 英雄主动结束回合。 */

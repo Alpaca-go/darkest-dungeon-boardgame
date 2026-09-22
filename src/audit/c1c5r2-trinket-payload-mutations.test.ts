@@ -104,4 +104,18 @@ describe('C1C-5R2 exact Trinket semantic payload mutations', () => {
     }
     expect(mismatchCodes(ACCURACY)).toEqual([]);
   });
+
+  it.each(['modifiers', 'effects', 'conditions'] as const)('fails closed when a source %s entry cannot be canonicalized', (field) => {
+    const base = source(ACCURACY).positiveSide;
+    const malformed: TrinketSourceSide = { ...base, [field]: [...base[field], { unsupported: true }] };
+    const runtime = COMMUNITY_TRINKET_RUNTIME_ADAPTERS[ACCURACY].definition.positiveSide;
+    const result = compareTrinketSemanticPayload(malformed, runtime, {
+      trigger: 'hero-skill-resolution', window: 'after-attack-roll-before-hit-resolution', target: 'skill',
+      derivedConditionEvidence: {
+        'in-battle': 'TEST:DERIVED_FROM_TRIGGER', 'is-acting-hero': 'TEST:DERIVED_FROM_TRIGGER',
+      },
+    });
+    expect(result.runtimeSliceSemanticComplete).toBe(false);
+    expect(result.mismatches.map((entry) => entry.code)).toContain('TRINKET_SOURCE_PAYLOAD_CANONICALIZATION_UNSUPPORTED');
+  });
 });

@@ -14,7 +14,12 @@
 //   - room-entered：进入房间后为全体存活英雄开窗（战斗房间除外）。
 
 import type { CampaignState, PendingBattleAction } from '../../types';
-import { heroSkillActionError, heroUseSkill } from '../battle';
+import {
+  commitHeroAttackResolution,
+  heroSkillActionError,
+  heroUseSkill,
+  prepareHeroAttackResolution,
+} from '../battle';
 import { rollAttackDie } from '../combat-resolution';
 import { getSkillById } from '../../data/skills';
 import type { TrinketActionBonuses } from '../battle';
@@ -78,61 +83,85 @@ export function beginHeroSkillAction(
 
   // Roll first. The result is persisted and visible while the reaction window is open.
   const attackRoll = rollAttackDie();
+  const rootEventId = `atk:${battle.battleId}:r${battle.round}:i${battle.initiativeIndex}:${actorUnitId}:ap${battle.currentActionPoints}`;
   let next = campaign;
-  let hasOpportunity = false;
+  let openedInstanceIds: string[] = [];
   if (hero) {
-    const eventId = `atk:${battle.battleId}:r${battle.round}:i${battle.initiativeIndex}:${actorUnitId}:ap${battle.currentActionPoints}`;
     const opened = openTrinketWindow(next, {
       window: 'after-attack-roll-before-hit-resolution',
       heroId: hero.instanceId,
-      eventId,
+      eventId: `${rootEventId}:post-roll`,
+      rootEventId,
     });
     next = opened.campaign;
-    hasOpportunity = opened.hasOpportunity;
+    openedInstanceIds = opened.opened.map((entry) => entry.trinketInstanceId);
   }
 
-  if (hasOpportunity) {
-    const pendingAction: PendingBattleAction = {
-      kind: 'hero-skill',
-      actorUnitId,
-      skillId,
-      targetId,
-      attackRoll,
-      accuracyBonus: 0,
-      critBonus: 0,
-      damageBonus: 0,
-    };
+  const pendingAction: PendingBattleAction = {
+    kind: 'hero-skill', rootEventId, stage: 'post-roll-window', actorUnitId, skillId, targetId, attackRoll,
+    accuracyBonus: 0, critBonus: 0, damageBonus: 0,
+    hit: null, crit: null, baseDamage: null, finalDamageOverride: null,
+    processedTrinketInstanceIds: openedInstanceIds,
+  };
+  next = { ...next, battle: { ...next.battle!, pendingAction } };
+  if (openedInstanceIds.length > 0) {
     return {
-      campaign: { ...next, battle: { ...next.battle!, pendingAction } },
+      campaign: next,
       error: null,
       paused: true,
     };
   }
 
-  // 无机会 → 直接执行（零加成）
-  const resolved = heroUseSkill(next.battle!, actorUnitId, skillId, targetId, undefined, attackRoll);
-  return { campaign: synchronizeCommunityGuardianDeaths({ ...next, battle: resolved }), error: null, paused: false };
+  next = advancePendingAction(next);
+  return { campaign: next, error: null, paused: Boolean(next.battle?.pendingAction) };
 }
 
-/** 执行冻结动作并清空 pendingAction（内部；机会结清后调用）。 */
-function resumePendingAction(campaign: CampaignState): CampaignState {
+function pendingBonuses(pa: PendingBattleAction): TrinketActionBonuses {
+  return { accuracy: pa.accuracyBonus, crit: pa.critBonus, damage: pa.damageBonus, healing: 0 };
+}
+
+/** Advance one frozen attack stage. Every random value is persisted before another window opens. */
+function advancePendingAction(campaign: CampaignState): CampaignState {
   const battle = campaign.battle;
   const pa = battle?.pendingAction;
   if (!battle || !pa) return campaign;
-  const bonuses: TrinketActionBonuses = {
-    accuracy: pa.accuracyBonus,
-    crit: pa.critBonus,
-    damage: pa.damageBonus,
-    healing: 0,
-  };
-  const resolved = heroUseSkill(
-    battle,
-    pa.actorUnitId,
-    pa.skillId,
-    pa.targetId,
-    bonuses,
-    pa.attackRoll,
-  );
+  if (pa.stage === 'post-roll-window') {
+    const prepared = prepareHeroAttackResolution(battle, pa.actorUnitId, pa.skillId, pendingBonuses(pa), pa.attackRoll);
+    if (!prepared) return { ...campaign, battle: { ...battle, pendingAction: null } };
+    const frozen: PendingBattleAction = {
+      ...pa, stage: 'pre-damage-window', hit: prepared.hit, crit: prepared.crit, baseDamage: prepared.baseDamage,
+    };
+    let next: CampaignState = { ...campaign, battle: { ...battle, pendingAction: frozen } };
+    if (prepared.hit) {
+      const heroId = heroInstanceIdForUnit(next, pa.actorUnitId);
+      if (heroId) {
+        const opened = openTrinketWindow(next, {
+          window: 'before-damage-applied', heroId, eventId: `${pa.rootEventId}:pre-damage`,
+          rootEventId: pa.rootEventId, excludedTrinketInstanceIds: pa.processedTrinketInstanceIds,
+        });
+        next = opened.campaign;
+        if (opened.hasOpportunity) {
+          return {
+            ...next,
+            battle: {
+              ...next.battle!,
+              pendingAction: {
+                ...frozen,
+                processedTrinketInstanceIds: [...frozen.processedTrinketInstanceIds, ...opened.opened.map((entry) => entry.trinketInstanceId)],
+              },
+            },
+          };
+        }
+      }
+    }
+    return advancePendingAction(next);
+  }
+  if (pa.hit === null || pa.crit === null || pa.baseDamage === null) {
+    return { ...campaign, battle: { ...battle, pendingAction: null } };
+  }
+  const resolved = commitHeroAttackResolution(battle, pa.actorUnitId, pa.skillId, pa.targetId, pendingBonuses(pa), {
+    roll: pa.attackRoll, hit: pa.hit, crit: pa.crit, baseDamage: pa.baseDamage,
+  }, pa.finalDamageOverride);
   return synchronizeCommunityGuardianDeaths({ ...campaign, battle: { ...resolved, pendingAction: null } });
 }
 
@@ -166,7 +195,7 @@ export function resolveTrinketOpportunity(
     const res = useTrinket(next, opportunityId);
     if (res.error) return { campaign, error: res.error, resumed: false };
     next = res.campaign;
-    // Post-roll/pre-resolution modifiers apply to the persisted roll.
+    // Modifiers are applied only to the stage represented by their exact source window.
     if (opp.useWindow === 'after-attack-roll-before-hit-resolution' && next.battle?.pendingAction) {
       const pa = next.battle.pendingAction;
       next = {
@@ -182,6 +211,13 @@ export function resolveTrinketOpportunity(
         },
       };
     }
+    if (opp.useWindow === 'before-damage-applied' && next.battle?.pendingAction) {
+      const setDamage = res.appliedModifiers.find((modifier) => modifier.type === 'damage' && modifier.operation === 'set');
+      if (setDamage) next = {
+        ...next,
+        battle: { ...next.battle, pendingAction: { ...next.battle.pendingAction, finalDamageOverride: setDamage.amount } },
+      };
+    }
   } else {
     next = declineTrinketUse(next, opportunityId);
     if (next === campaign) return { campaign, error: '该使用机会已关闭。', resumed: false };
@@ -189,8 +225,8 @@ export function resolveTrinketOpportunity(
 
   // 机会全部结清 → 恢复冻结动作
   if (next.battle?.pendingAction && openOpportunities(next).length === 0) {
-    next = resumePendingAction(next);
-    return { campaign: next, error: null, resumed: true };
+    next = advancePendingAction(next);
+    return { campaign: next, error: null, resumed: !next.battle?.pendingAction };
   }
   return { campaign: next, error: null, resumed: false };
 }

@@ -8,7 +8,7 @@ export type TrinketSemanticMismatchCode =
   | 'TRINKET_MODIFIER_TYPE_MISMATCH' | 'TRINKET_MODIFIER_AMOUNT_MISMATCH' | 'TRINKET_MODIFIER_OPERATION_MISMATCH'
   | 'TRINKET_EFFECT_TYPE_MISMATCH' | 'TRINKET_EFFECT_PARAMETER_MISMATCH'
   | 'TRINKET_CONDITION_MISMATCH' | 'TRINKET_RUNTIME_ADDED_CONDITION_UNSUPPORTED'
-  | 'TRINKET_TRIGGER_SCOPE_UNRESOLVED';
+  | 'TRINKET_TRIGGER_SCOPE_UNRESOLVED' | 'TRINKET_SOURCE_PAYLOAD_CANONICALIZATION_UNSUPPORTED';
 
 export interface CanonicalCondition { type: string; operator?: string; value?: string | number | boolean }
 export interface CanonicalModifier { stat: string; operation: 'add' | 'set'; amount: number }
@@ -110,6 +110,7 @@ export function canonicalRuntimeEffect(value: ActiveEffectDefinition, target: st
 
 const RUNTIME_WINDOW_BINDINGS: Readonly<Record<string, { trigger: string; target: string }>> = Object.freeze({
   'after-attack-roll-before-hit-resolution': { trigger: 'hero-skill-resolution', target: 'skill' },
+  'before-damage-applied': { trigger: 'hero-skill-hits', target: 'skill' },
   'before-healing-delivered-resolution': { trigger: 'hero-heals', target: 'healing-delivered' },
   'before-healing-received-resolution': { trigger: 'hero-is-healed', target: 'healing-received' },
 });
@@ -162,6 +163,9 @@ export function compareTrinketSemanticPayload(
     })),
   ];
   const sourceConditions = sourceSide.conditions.map(canonicalSourceCondition).filter((entry): entry is CanonicalCondition => entry !== null);
+  const sourceCanonicalizationComplete = sourceModifiers.length === sourceSide.modifiers.length
+    && sourceEffects.length === sourceSide.effects.length
+    && sourceConditions.length === sourceSide.conditions.length;
   const sourceConditionRuntime: CanonicalCondition[] = []; const derivedRuntimeConditions: CanonicalCondition[] = [];
   const runtimeConditionEvidence: string[] = []; const unsupportedRuntimeConditions: string[] = [];
   for (const condition of (runtimeSide?.canUse ?? []).map(canonicalRuntimeCondition)) {
@@ -185,6 +189,11 @@ export function compareTrinketSemanticPayload(
     ...(runtimeEffects.length > sourceEffects.length ? runtimeEffects.slice(sourceEffects.length).map(stable) : []),
   ];
   const mismatches: TrinketSemanticMismatch[] = [];
+  if (!sourceCanonicalizationComplete) mismatches.push({
+    code: 'TRINKET_SOURCE_PAYLOAD_CANONICALIZATION_UNSUPPORTED',
+    source: { modifiers: sourceSide.modifiers, effects: sourceSide.effects, conditions: sourceSide.conditions },
+    runtime: { modifiers: sourceModifiers, effects: sourceEffects, conditions: sourceConditions },
+  });
   if (!triggerMatch) mismatches.push({ code: 'TRINKET_TRIGGER_MISMATCH', source: sourceSide.trigger, runtime: bindings.trigger });
   if (!windowMatch) mismatches.push({ code: 'TRINKET_WINDOW_MISMATCH', source: expectedWindow, runtime: bindings.window });
   if (!targetMatch) mismatches.push({ code: 'TRINKET_TARGET_MISMATCH', source: sourceSide.target, runtime: bindings.target });
@@ -197,7 +206,7 @@ export function compareTrinketSemanticPayload(
     sourcePayload: { trigger: sourceSide.trigger, target: sourceSide.target, conditions: sourceConditions, modifiers: sourceModifiers, effects: sourceEffects },
     runtimePayload: { trigger: bindings.trigger ?? '', target: bindings.target ?? '', conditions: sourceConditionRuntime, modifiers: runtimeModifiers, effects: runtimeEffects },
     derivedRuntimeConditions, runtimeConditionEvidence, unsupportedRuntimeConditions, unsupportedRuntimeBehavior, mismatches,
-    runtimeSliceSemanticComplete: triggerMatch && windowMatch && targetMatch && modifierProblem === null && effectProblem === null
+    runtimeSliceSemanticComplete: sourceCanonicalizationComplete && triggerMatch && windowMatch && targetMatch && modifierProblem === null && effectProblem === null
       && conditionMatch && unsupportedRuntimeBehavior.length === 0,
   };
 }

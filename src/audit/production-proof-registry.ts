@@ -17,6 +17,8 @@ export interface RegisteredProductionProof {
 export const ACCURACY_STONE_ID = 'community-trinket-core-accuracy-stone';
 export const CRITICAL_STONE_ID = 'community-trinket-core-critical-stone';
 export const CHIRURGEONS_CHARM_ID = 'community-trinket-core-chirurgeons-charm';
+export const DARK_BRACER_ID = 'community-trinket-core-dark-bracer';
+export const SOLAR_BRACER_ID = 'community-trinket-core-solar-bracer';
 export const C1C1_CORE_QUEST_IDS = [
   'community-quest-ruins-lvl1-scout-ahead',
   'community-quest-ruins-lvl1-wipe-em-out',
@@ -227,6 +229,12 @@ export const PRODUCTION_PROOF_REGISTRY: Readonly<Record<string, RegisteredProduc
   proof({ proofId: 'C1C5-CHIRURGEONS-SAVE-REPLAY', definitionIds: [CHIRURGEONS_CHARM_ID], proofType: 'save-replay', testFile: 'src/game-engine/c1c5-chirurgeons-charm.test.ts', runner: 'vitest', status: 'active', scope: 'primitive', primitiveId: 'BATTLE_HEALING_TRINKET_WINDOWS' }),
   proof({ proofId: 'C1C5-CHIRURGEONS-SELECTOR', definitionIds: [CHIRURGEONS_CHARM_ID], proofType: 'selector', testFile: 'src/game-engine/c1c5-chirurgeons-charm.test.ts', runner: 'vitest', status: 'active', scope: 'primitive', primitiveId: 'BATTLE_HEALING_TRINKET_WINDOWS' }),
   proof({ proofId: 'C1C5-E2E-CHIRURGEONS', definitionIds: [CHIRURGEONS_CHARM_ID], proofType: 'e2e', testFile: 'e2e/phase11a4-c1c5-chirurgeons-charm.spec.ts', runner: 'playwright', status: 'active', scope: 'primitive', primitiveId: 'BATTLE_HEALING_TRINKET_WINDOWS', proofSurface: 'production-ui' }),
+  ...([['DARK', DARK_BRACER_ID], ['SOLAR', SOLAR_BRACER_ID]] as const).flatMap(([label, definitionId]) => [
+    proof({ proofId: `C1C6-${label}-BRACER-RUNTIME`, definitionIds: [definitionId], proofType: 'production-runtime', testFile: 'src/game-engine/c1c6-dark-solar-bracer.test.ts', runner: 'vitest', status: 'active' }),
+    proof({ proofId: `C1C6-${label}-BRACER-SAVE-REPLAY`, definitionIds: [definitionId], proofType: 'save-replay', testFile: 'src/game-engine/c1c6-dark-solar-bracer.test.ts', runner: 'vitest', status: 'active' }),
+    proof({ proofId: `C1C6-${label}-BRACER-SELECTOR`, definitionIds: [definitionId], proofType: 'selector', testFile: 'src/game-engine/c1c6-dark-solar-bracer.test.ts', runner: 'vitest', status: 'active' }),
+    proof({ proofId: `C1C6-E2E-${label}-BRACER`, definitionIds: [definitionId], proofType: 'e2e', testFile: 'e2e/phase11a4-c1c6-dark-solar-bracer.spec.ts', runner: 'playwright', status: 'active', proofSurface: 'production-ui' }),
+  ]),
 ].map((entry) => [entry.proofId, entry])));
 
 export function resolveRegisteredProof(

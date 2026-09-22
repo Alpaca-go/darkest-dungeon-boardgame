@@ -88,9 +88,13 @@ export default function BattlePage() {
       {battle.pendingAction ? (
         <div
           className="rounded border border-dd-accent bg-dd-accent/10 p-3 text-sm text-dd-text"
-          data-testid="post-roll-trinket-window"
+          data-testid={battle.pendingAction.stage === 'post-roll-window' ? 'post-roll-trinket-window' : 'pre-damage-trinket-window'}
         >
-          攻击掷骰结果：<strong>{battle.pendingAction.attackRoll}</strong>。命中/暴击尚未结算，可声明饰品。
+          {battle.pendingAction.stage === 'post-roll-window' ? (
+            <>攻击掷骰结果：<strong>{battle.pendingAction.attackRoll}</strong>。命中/暴击尚未结算，可声明饰品。</>
+          ) : (
+            <>攻击已命中，冻结伤害：<strong>{battle.pendingAction.baseDamage}</strong>。伤害尚未应用，可声明饰品。</>
+          )}
         </div>
       ) : null}
 
