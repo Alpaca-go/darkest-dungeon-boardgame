@@ -10,6 +10,7 @@ import Battlefield from '../components/battle/Battlefield';
 import SkillBar from '../components/battle/SkillBar';
 import BattleLog from '../components/battle/BattleLog';
 import ActorDetails from '../components/battle/ActorDetails';
+import TrinketSlots from '../components/trinkets/TrinketSlots';
 
 /**
  * 战斗页面（Phase 3）：
@@ -59,6 +60,9 @@ export default function BattlePage() {
   };
 
   const inspectUnit = getUnit(battle, inspectId) ?? activeUnit ?? null;
+  const inspectHero = inspectUnit?.side === 'hero'
+    ? campaign.heroes.find((hero) => hero.instanceId === inspectUnit.sourceId)
+    : undefined;
 
   const onVictoryReturn = () => {
     battleResolveVictory();
@@ -166,7 +170,10 @@ export default function BattlePage() {
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <ActorDetails unit={inspectUnit ?? null} />
+        <div className="space-y-2">
+          <ActorDetails unit={inspectUnit ?? null} />
+          {inspectHero && <TrinketSlots hero={inspectHero} />}
+        </div>
         <BattleLog entries={battle.battleLog} />
       </div>
     </div>

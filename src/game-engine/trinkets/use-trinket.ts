@@ -24,6 +24,7 @@ import { resolveDamage } from '../damage';
 import { resolveHealing } from '../healing';
 import { applyStress, recoverStress } from '../stress';
 import { applyConditionToHero, createRuleEventContext } from '../quirks';
+import { applyStatusEffectEvent, describeBlockedEffects } from '../status-effects';
 import { getTrinketById, getTrinketSide, trinketDisplayName } from '../../data/trinkets/trinket-registry';
 import {
   currentTrinketTurnId,
@@ -169,6 +170,29 @@ function applyOneEffect(
         );
       }
       return pushLog(campaign, `${trinketName}：状态 ${effect.condition} 本阶段未接入，已跳过。`, 'info');
+    }
+    case 'apply-condition-stack': {
+      if (!campaign.battle) {
+        return pushLog(campaign, `${trinketName}：状态目标当前不在战斗中，效果未结算。`, 'warning');
+      }
+      const target = effect.target === 'equipped-hero'
+        ? campaign.battle.heroes.find((unit) => unit.sourceId === heroId)
+        : undefined;
+      if (!target?.isAlive) {
+        return pushLog(campaign, `${trinketName}：状态目标不可用，效果未结算。`, 'warning');
+      }
+      const battle = applyStatusEffectEvent(campaign.battle, target.id, [{
+        type: effect.condition,
+        amount: effect.amount ?? 1,
+        durationTurns: effect.durationTurns,
+      }], effectEventId);
+      const event = battle.statusEffectEvents?.find((entry) => entry.eventId === effectEventId);
+      const blocked = describeBlockedEffects(event?.blocked ?? []);
+      return pushLog(
+        { ...campaign, battle },
+        `${trinketName}：${target.name} 获得 ${effect.condition}（${effect.durationTurns} 回合）${blocked}。`,
+        blocked ? 'warning' : 'info',
+      );
     }
     case 'change-light': {
       const next = Math.max(LIGHT_MIN, Math.min(LIGHT_MAX, campaign.light + effect.amount));

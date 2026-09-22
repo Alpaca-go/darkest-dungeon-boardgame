@@ -14,7 +14,7 @@ export const TRINKET_EFFECT_CONSUMER_COVERAGE: Readonly<Record<string, RuntimeEf
   'scale-incoming-damage': { effectType: 'scale-incoming-damage', consumerPrimitive: 'INCOMING_DAMAGE_SCALE_CONSUMER', wired: true },
   'set-damage': { effectType: 'set-damage', consumerPrimitive: 'SET_DAMAGE_OVERRIDE', wired: true },
   'convert-incoming-hit-to-critical': { effectType: 'convert-incoming-hit-to-critical', consumerPrimitive: null, wired: false },
-  'apply-condition-stack': { effectType: 'apply-condition-stack', consumerPrimitive: null, wired: false },
+  'apply-condition-stack': { effectType: 'apply-condition-stack', consumerPrimitive: 'TRINKET_CONDITION_STACK_CONSUMER', wired: true },
 });
 
 export function missingEffectConsumers(effects: readonly { type: string }[]): string[] {

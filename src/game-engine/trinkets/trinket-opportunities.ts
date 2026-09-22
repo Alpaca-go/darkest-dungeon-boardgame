@@ -125,6 +125,9 @@ export function buildOpportunityPreview(side: TrinketSideDefinition): string {
       case 'apply-condition-self':
         parts.push(`自身获得 ${e.condition} ${e.amount}`);
         break;
+      case 'apply-condition-stack':
+        parts.push(`${e.target === 'equipped-hero' ? '自身' : e.target}获得 ${e.condition}${e.amount === null ? '' : ` ${e.amount}`}，持续 ${e.durationTurns} 回合`);
+        break;
       case 'change-light':
         parts.push(`光照 ${signed(e.amount)}`);
         break;

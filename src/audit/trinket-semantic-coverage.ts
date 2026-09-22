@@ -112,6 +112,9 @@ export function canonicalRuntimeEffect(value: ActiveEffectDefinition, target: st
     case 'recover-stress-self': return { type: 'change-stress', target, parameters: { amount: -value.amount } };
     case 'consume-provision': return { type: 'consume-provision', target, parameters: { provision: value.provision, amount: value.amount } };
     case 'apply-condition-self': return { type: 'apply-condition-stack', target, parameters: { condition: value.condition, amount: value.amount } };
+    case 'apply-condition-stack': return { type: 'apply-condition-stack', target: value.target, parameters: {
+      condition: value.condition, amount: value.amount, turns: value.durationTurns,
+    } };
     case 'damage-self': return { type: 'damage', target, parameters: { amount: value.amount } };
     case 'change-light': return { type: 'change-light', target, parameters: { amount: value.amount } };
     case 'scale-incoming-damage': return { type: 'scale-incoming-damage', target, parameters: {

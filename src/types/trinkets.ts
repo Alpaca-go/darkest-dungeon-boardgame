@@ -94,6 +94,9 @@ export interface ActiveModifierDefinition {
   operation?: 'add' | 'set';
 }
 
+/** Source-semantic target of an active Trinket effect. */
+export type TrinketEffectTarget = 'equipped-hero';
+
 /** 主动效果：一律回落到官方统一管线（伤害/治疗/压力/状态）。 */
 export type ActiveEffectDefinition =
   | { type: 'damage-self'; amount: number }
@@ -101,6 +104,14 @@ export type ActiveEffectDefinition =
   | { type: 'stress-self'; amount: number }
   | { type: 'recover-stress-self'; amount: number }
   | { type: 'apply-condition-self'; condition: StatusEffectType; amount: number }
+  | {
+      type: 'apply-condition-stack';
+      condition: StatusEffectType;
+      /** null means the printed source declares duration but no independent magnitude. */
+      amount: number | null;
+      durationTurns: number;
+      target: TrinketEffectTarget;
+    }
   | { type: 'change-light'; amount: number }
   | { type: 'consume-provision'; provision: keyof ProvisionPool; amount: number }
   | {
