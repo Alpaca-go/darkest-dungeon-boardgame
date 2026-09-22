@@ -13,10 +13,10 @@ const root = process.cwd();
 const outputDir = resolve(root, 'docs/data/complete-edition');
 const reportDir = resolve(root, 'docs/reports/complete-edition');
 const baselineHead = 'eca0a293f4126d8b7e31934303ed0fcfd1ae1c61';
-const generatedAt = '2026-09-22T09:30:00.000Z';
 const git = (...args: string[]) => execFileSync('git', args, { cwd: root, encoding: 'utf8' }).trim();
 const verifiedImplementationHead = git('rev-parse', 'HEAD');
 const verifiedImplementationTree = git('rev-parse', 'HEAD^{tree}');
+const verifiedImplementationCommittedAt = git('show', '-s', '--format=%cI', verifiedImplementationHead);
 const sha256 = (contents: string | Buffer) => createHash('sha256').update(contents).digest('hex');
 const historicalPaths = git('ls-tree', '-r', '--name-only', baselineHead, '--', 'docs/data/complete-edition', 'docs/reports/complete-edition')
   .split(/\r?\n/).filter((path) => /\/c1c5(?:r|r2)?-/.test(path));
@@ -43,8 +43,8 @@ const cards = LEVEL_2_TRINKET_CENSUS.map((source) => {
   };
 });
 const matrix = {
-  schemaVersion: 1, phase: '11A.4-C1C-6', generatedAt, baselineHead,
-  verifiedImplementationHead, verifiedImplementationTree, cards,
+  schemaVersion: 2, phase: '11A.4-C1C-6', baselineHead,
+  verifiedImplementationHead, verifiedImplementationTree, verifiedImplementationCommittedAt, cards,
 };
 writeFileSync(resolve(outputDir, 'c1c6-level2-trinket-capability-matrix.json'), `${JSON.stringify(matrix, null, 2)}\n`);
 
@@ -58,8 +58,8 @@ const proofBindings = [...new Set(cards.filter((card) => [DARK_BRACER_ID, SOLAR_
 const family = COMMUNITY_QUEST_CAPABILITIES.find((entry) => entry.definitionId === 'community-quest-warrens-lvl1-family-trinkets')!;
 const chirurgeons = COMMUNITY_TRINKET_CAPABILITIES.find((entry) => entry.definitionId === CHIRURGEONS_CHARM_ID)!;
 const evidence = {
-  schemaVersion: 1, phase: '11A.4-C1C-6', measuredAt: generatedAt, baselineHead,
-  verifiedImplementationHead, verifiedImplementationTree, historicalEvidenceHashes,
+  schemaVersion: 2, phase: '11A.4-C1C-6', baselineHead,
+  verifiedImplementationHead, verifiedImplementationTree, verifiedImplementationCommittedAt, historicalEvidenceHashes,
   wiredWindowsBefore: WIRED_WINDOWS.filter((window) => window !== 'before-damage-applied'),
   wiredWindowsAfter: WIRED_WINDOWS,
   attackResolutionStages: ['post-roll-window', 'pre-damage-window'],
@@ -74,14 +74,10 @@ const evidence = {
   familySelectorReachable: COMMUNITY_RUNTIME_QUESTS.some((entry) => entry.id === family.definitionId),
   chirurgeonsProductionReady: chirurgeons.productionReady,
   proofBindings,
-  saveReplayResults: { frozenBaseDamage: 'PASS', changedRngDoesNotReroll: 'PASS', duplicateDecisionRejected: 'PASS' },
-  e2eResults: { darkPositiveAndNegative: 'PASS', solarPositiveAndNegative: 'PASS', proofSurface: 'production-ui' },
-  commands: [
-    'C1C-6 runtime/mutation/save tests', 'C1C-6 production UI E2E', 'C1BR regression', 'C1C5 regression',
-    'full regression', 'typecheck', 'build',
-  ].map((command) => ({ command, exitCode: 0 })),
-  failures: [], terminalVerdict: 'C1C6-DARK-SOLAR-ATTACK-RESOLUTION-ACCEPTED',
+  verificationCommand: 'npm run verify:complete-edition-c1c6',
+  verificationRequired: true,
+  terminalVerdict: 'C1C6-DARK-SOLAR-ATTACK-RESOLUTION-ACCEPTED',
 };
 writeFileSync(resolve(outputDir, 'c1c6-dark-solar-attack-resolution-evidence.json'), `${JSON.stringify(evidence, null, 2)}\n`);
-writeFileSync(resolve(reportDir, 'c1c6-dark-solar-attack-resolution-report.md'), `# C1C-6 Dark & Solar Bracer Attack Resolution Closure\n\nVerdict: **${evidence.terminalVerdict}**\n\nDark Bracer and Solar Bracer now use one staged attack pipeline. Attack roll, hit, crit, and base damage are frozen before the pre-damage decision. Their negative sides set final damage to zero without rewriting the hit or suppressing on-hit effects. Level 2 readiness is **${evidence.level2ReadyAfter} / ${LEVEL_2_TRINKET_DECK_COVERAGE.sourceDefinitionCount}**; the incomplete deck and Family Trinkets remain fail closed.\n`);
+writeFileSync(resolve(reportDir, 'c1c6-dark-solar-attack-resolution-report.md'), `# C1C-6 Dark & Solar Bracer Attack Resolution Closure\n\nVerdict contract: **${evidence.terminalVerdict}**\n\nEvidence is bound to implementation commit \`${verifiedImplementationHead}\` and tree \`${verifiedImplementationTree}\`. The independent command \`${evidence.verificationCommand}\` must re-prove this snapshot; the committed evidence does not contain synthetic command results.\n\nDark Bracer and Solar Bracer use one staged attack pipeline. Attack roll, hit, crit, and base damage are frozen before the pre-damage decision. Their negative sides set final damage to zero without rewriting the hit or suppressing on-hit effects. Level 2 readiness is **${evidence.level2ReadyAfter} / ${LEVEL_2_TRINKET_DECK_COVERAGE.sourceDefinitionCount}**; the incomplete deck and Family Trinkets remain fail closed.\n`);
 console.log(JSON.stringify({ terminalVerdict: evidence.terminalVerdict, readyIds: LEVEL_2_TRINKET_DECK_COVERAGE.productionReadyIds, completeForRandomDraw: evidence.level2CompleteForRandomDraw }, null, 2));
