@@ -15,7 +15,10 @@
 
 import type { CampaignState, PendingBattleAction } from '../../types';
 import {
+  advanceTurn,
+  commitPendingMonsterAttackResolution,
   commitHeroAttackResolution,
+  freezePendingMonsterAttack,
   heroSkillActionError,
   heroUseSkill,
   prepareHeroAttackResolution,
@@ -28,6 +31,70 @@ import { useTrinket, declineTrinketUse, sumModifiers } from './use-trinket';
 import { findHero } from './trinket-state';
 import { synchronizeCommunityGuardianDeaths } from '../campaign/act-four/community-guardian-battle';
 import { beginHealingTrinketAction, resolveHealingTrinketOpportunity } from './healing-trinket-bridge';
+
+function hasOpenForRoot(campaign: CampaignState, rootEventId: string): boolean {
+  return openOpportunities(campaign).some((entry) => entry.rootEventId === rootEventId);
+}
+
+/**
+ * Open or resume the two source-distinct defensive windows. Every random fact
+ * needed after a window is persisted on pendingMonsterAttack before control is
+ * returned to the UI.
+ */
+export function advancePendingMonsterAttack(campaign: CampaignState): CampaignState {
+  let next = campaign;
+  for (let guard = 0; guard < 50; guard += 1) {
+    const battle = next.battle;
+    const pending = battle?.pendingMonsterAttack;
+    if (!battle || !pending) return next;
+    if (hasOpenForRoot(next, pending.rootEventId)) return next;
+    const target = battle.heroes.find((unit) => unit.id === pending.targetHeroUnitId);
+    const hero = target ? findHero(next, target.sourceId) : undefined;
+    if (!hero || !target?.isAlive) {
+      return { ...next, battle: { ...battle, pendingMonsterAttack: null } };
+    }
+
+    if (pending.stage === 'incoming-attack-window') {
+      const opened = openTrinketWindow(next, {
+        window: 'before-incoming-hit-resolution', heroId: hero.instanceId,
+        eventId: `${pending.rootEventId}:incoming`, rootEventId: pending.rootEventId,
+        excludedTrinketInstanceIds: pending.processedTrinketInstanceIds,
+      });
+      next = opened.campaign;
+      if (opened.hasOpportunity) {
+        next = { ...next, battle: { ...next.battle!, pendingMonsterAttack: {
+          ...next.battle!.pendingMonsterAttack!,
+          processedTrinketInstanceIds: [...pending.processedTrinketInstanceIds, ...opened.opened.map((entry) => entry.trinketInstanceId)],
+        } } };
+        return next;
+      }
+      next = { ...next, battle: freezePendingMonsterAttack(next.battle!) };
+      continue;
+    }
+
+    if (!pending.hit) {
+      const committed = commitPendingMonsterAttackResolution(battle);
+      next = { ...next, battle: committed.status === 'active' ? advanceTurn(committed) : committed };
+      continue;
+    }
+    const opened = openTrinketWindow(next, {
+      window: 'before-incoming-damage-applied', heroId: hero.instanceId,
+      eventId: `${pending.rootEventId}:hit`, rootEventId: pending.rootEventId,
+      excludedTrinketInstanceIds: pending.processedTrinketInstanceIds,
+    });
+    next = opened.campaign;
+    if (opened.hasOpportunity) {
+      next = { ...next, battle: { ...next.battle!, pendingMonsterAttack: {
+        ...next.battle!.pendingMonsterAttack!,
+        processedTrinketInstanceIds: [...pending.processedTrinketInstanceIds, ...opened.opened.map((entry) => entry.trinketInstanceId)],
+      } } };
+      return next;
+    }
+    const committed = commitPendingMonsterAttackResolution(next.battle!);
+    next = { ...next, battle: committed.status === 'active' ? advanceTurn(committed) : committed };
+  }
+  return next;
+}
 
 // ---------------------------------------------------------------------------
 // before-attack-roll：冻结与恢复
@@ -218,6 +285,24 @@ export function resolveTrinketOpportunity(
         battle: { ...next.battle, pendingAction: { ...next.battle.pendingAction, finalDamageOverride: setDamage.amount } },
       };
     }
+    if (opp.useWindow === 'before-incoming-hit-resolution' && next.battle?.pendingMonsterAttack) {
+      const pending = next.battle.pendingMonsterAttack;
+      next = { ...next, battle: { ...next.battle, pendingMonsterAttack: {
+        ...pending, dodgeModifier: pending.dodgeModifier + sumModifiers(res.appliedModifiers, 'dodge'),
+      } } };
+    }
+    if (opp.useWindow === 'before-incoming-damage-applied' && next.battle?.pendingMonsterAttack) {
+      const scale = res.appliedEffects.find((effect) => effect.type === 'scale-incoming-damage');
+      if (scale?.type === 'scale-incoming-damage') {
+        const pending = next.battle.pendingMonsterAttack;
+        next = { ...next, battle: { ...next.battle, pendingMonsterAttack: {
+          ...pending,
+          incomingDamageNumerator: pending.incomingDamageNumerator * scale.numerator,
+          incomingDamageDenominator: pending.incomingDamageDenominator * scale.denominator,
+          incomingDamageRounding: scale.rounding,
+        } } };
+      }
+    }
   } else {
     next = declineTrinketUse(next, opportunityId);
     if (next === campaign) return { campaign, error: '该使用机会已关闭。', resumed: false };
@@ -227,6 +312,10 @@ export function resolveTrinketOpportunity(
   if (next.battle?.pendingAction && openOpportunities(next).length === 0) {
     next = advancePendingAction(next);
     return { campaign: next, error: null, resumed: !next.battle?.pendingAction };
+  }
+  if (next.battle?.pendingMonsterAttack && !hasOpenForRoot(next, next.battle.pendingMonsterAttack.rootEventId)) {
+    next = advancePendingMonsterAttack(next);
+    return { campaign: next, error: null, resumed: !next.battle?.pendingMonsterAttack };
   }
   return { campaign: next, error: null, resumed: false };
 }

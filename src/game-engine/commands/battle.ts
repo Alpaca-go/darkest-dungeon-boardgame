@@ -19,7 +19,7 @@ import {
   processBattleDiseaseInfections,
 } from '../diseases/battle-bridge';
 import { resumeTurnAfterMentalCheck } from '../battle';
-import { openBattleTurnStartWindow } from '../trinkets/battle-trinket-bridge';
+import { advancePendingMonsterAttack, openBattleTurnStartWindow } from '../trinkets/battle-trinket-bridge';
 import { evaluateReplacementFlow } from '../stagecoach';
 import { commitCommunityGuardianVictory, isCommunityGuardianBattle, synchronizeCommunityGuardianDeaths } from '../campaign/act-four/community-guardian-battle';
 
@@ -72,6 +72,10 @@ export function settleBattleState(
   const limit = options?.mentalGuardLimit ?? BATTLE_MENTAL_GUARD_LIMIT;
 
   let next: CampaignState = synchronizeCommunityGuardianDeaths(campaign);
+  next = advancePendingMonsterAttack(next);
+  if (next.battle?.pendingMonsterAttack) {
+    return { ok: true, campaign: next, error: null, mentalLoops: 0 };
+  }
   next = processBattleDeaths(next);
   next = processBattleStressEvents(next);
   next = processBattleRuleEvents(next);

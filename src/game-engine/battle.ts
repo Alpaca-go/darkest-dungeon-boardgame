@@ -6,6 +6,7 @@ import type {
   MonsterDefinition,
   RuleEventType,
   SkillDefinition,
+  PendingMonsterAttack,
 } from '../types';
 import { createId, d10, nowIso } from './random';
 import { returnCommunityPhysicalMonstersFromBattle } from './campaign/act-four/community-physical-monster-deck';
@@ -316,7 +317,7 @@ export function initBattle(campaign: CampaignState, roomId: string): CampaignSta
   let next: CampaignState = {
     ...campaign,
     gamePhase: 'battle',
-    battle: started,
+    battle: { ...started, stagedIncomingAttacks: true, pendingMonsterAttack: null },
     dungeon,
   };
   // Phase 8A：battle-started 时机事件（Off Guard / Shocker 等）。
@@ -387,6 +388,14 @@ export function advanceTurn(state: BattleState): BattleState {
     if (!activated || !activated.isAlive) continue; // 持续伤害致死，跳过
 
     if (activated.side === 'monster') {
+      if (s.stagedIncomingAttacks) {
+        s = prepareMonsterAttackResolution(s, id);
+        if (s.pendingMonsterAttack) return s;
+        // No legal attack (for example, every target is out of range): the
+        // preparation helper may move/log, but there is no reaction to stage.
+        // Continue past this monster just like the legacy automatic path.
+        continue;
+      }
       s = runMonsterTurn(s, id);
       s = checkEnd(s);
       if (s.status !== 'active') return s;
@@ -786,6 +795,117 @@ function tryMonsterMove(state: BattleState, monsterId: string): BattleState {
     }
   }
   return state;
+}
+
+/** Freeze only the attack roll before the incoming-attack window opens. */
+export function prepareMonsterAttackResolution(state: BattleState, monsterId: string): BattleState {
+  if (state.pendingMonsterAttack) return state;
+  const monster = findUnit(state, monsterId);
+  if (!monster || !monster.isAlive || monster.side !== 'monster') return state;
+  const action = chooseMonsterAction(state, monster);
+  if (!action) {
+    let moved = tryMonsterMove(state, monsterId);
+    return pushBattleLog(moved, `${monster.name} 无法行动，跳过回合。`, 'warning');
+  }
+  const skill = getMonsterSkillById(action.skillId);
+  const target = findUnit(state, action.targetId);
+  if (!skill || !target || target.side !== 'hero') return state;
+  const rootEventId = `matk:${state.battleId}:r${state.round}:i${state.initiativeIndex}:${monsterId}`;
+  const pending: PendingMonsterAttack = {
+    kind: 'monster-attack', rootEventId, stage: 'incoming-attack-window',
+    monsterUnitId: monsterId, targetHeroUnitId: target.id, skillId: skill.id,
+    attackRoll: d10(), dodgeModifier: 0, hit: null, crit: null, baseDamage: null,
+    diseaseRoll: null, incomingDamageNumerator: 1, incomingDamageDenominator: 1,
+    incomingDamageRounding: 'ceil', processedTrinketInstanceIds: [],
+  };
+  return { ...state, pendingMonsterAttack: pending };
+}
+
+/** Resolve hit/crit and freeze damage plus attack-owned disease RNG. */
+export function freezePendingMonsterAttack(state: BattleState): BattleState {
+  const pending = state.pendingMonsterAttack;
+  if (!pending || pending.stage !== 'incoming-attack-window') return state;
+  const skill = getMonsterSkillById(pending.skillId);
+  if (!skill) return { ...state, pendingMonsterAttack: null };
+  const resolved = resolveAttackFromRoll(skill, pending.attackRoll, -pending.dodgeModifier);
+  return {
+    ...state,
+    pendingMonsterAttack: {
+      ...pending,
+      stage: 'hero-hit-window',
+      hit: resolved.hit,
+      crit: resolved.crit,
+      baseDamage: resolved.damage,
+      diseaseRoll: resolved.hit && skill.diseaseChance ? d10() : null,
+    },
+  };
+}
+
+/** Commit a prepared monster attack without any attack/damage/disease reroll. */
+export function commitPendingMonsterAttackResolution(state: BattleState): BattleState {
+  const pending = state.pendingMonsterAttack;
+  if (!pending || pending.stage !== 'hero-hit-window' || pending.hit === null ||
+      pending.crit === null || pending.baseDamage === null) return state;
+  const monster = findUnit(state, pending.monsterUnitId);
+  const skill = getMonsterSkillById(pending.skillId);
+  const target = findUnit(state, pending.targetHeroUnitId);
+  if (!monster || !skill || !target) return { ...state, pendingMonsterAttack: null };
+  const cleared: BattleState = { ...state, pendingMonsterAttack: null };
+  if (!pending.hit) {
+    return pushBattleLog(cleared, `${monster.name} 使用 ${skill.name}，掷 ${pending.attackRoll} 未命中 ${target.name}。`, 'info');
+  }
+
+  let working: BattleState = cleared;
+  let tgt: BattleUnit = target;
+  const inMod = applyQuirkModifiersRaw(tgt.quirkIds ?? [], state.light ?? 0, 'damage-taken', pending.baseDamage, 'attack');
+  const transformedDamage = Math.ceil(
+    inMod.amount * pending.incomingDamageNumerator / pending.incomingDamageDenominator,
+  );
+  if (inMod.applied.length > 0) {
+    working = pushBattleLog(working, `${tgt.name} 承伤修正 ${pending.baseDamage} → ${inMod.amount}${describeModifierApplications(inMod.applied)}。`, 'info');
+  }
+  const outcome = applyBattleUnitDamage(tgt, transformedDamage);
+  tgt = outcome.unit;
+  if (outcome.heroDied) tgt = { ...tgt, deathCause: 'deathblow-attack' };
+  let queuedStress = 0;
+  if (tgt.isAlive) {
+    if (skill.stress) {
+      tgt = { ...tgt, stress: Math.min(10, tgt.stress + skill.stress) };
+      queuedStress = skill.stress;
+    }
+    if (skill.applyEffects?.length) {
+      const eff = applyEffectsWithResistance(tgt, skill.applyEffects);
+      tgt = eff.unit;
+      if (eff.blocked.length > 0) working = pushBattleLog(working, `${tgt.name} 凭 Level ${tgt.heroLevel ?? 1} 抗性抵挡了部分效果${describeBlockedEffects(eff.blocked)}。`, 'success');
+    }
+  }
+  let shuffled = false;
+  if (skill.moveTarget && tgt.isAlive) {
+    const np = clamp(tgt.position + skill.moveTarget, 1, 4);
+    if (np !== tgt.position && !working.heroes.some((h) => h.id !== tgt.id && h.position === np)) {
+      tgt = { ...tgt, position: np };
+      shuffled = true;
+    }
+  }
+  let next = setUnit(working, tgt);
+  if (queuedStress > 0) next = queueStressEvent(next, tgt.sourceId, queuedStress, 'battle-skill', skill.id);
+  if (shuffled) {
+    next = pushBattleLog(next, `${tgt.name} 被强制移动到位置 ${tgt.position}。`, 'warning');
+    next = queueBattleRuleEvent(next, 'hero-shuffled', tgt.sourceId);
+  }
+  if (skill.diseaseChance && tgt.isAlive && pending.diseaseRoll !== null &&
+      pending.diseaseRoll <= skill.diseaseChance.d10AtMost) {
+    next = { ...next, pendingDiseaseInfections: [...(next.pendingDiseaseInfections ?? []), {
+      id: createId('binf'), heroInstanceId: tgt.sourceId,
+      diseaseId: skill.diseaseChance.diseaseId, sourceSkillId: skill.id,
+    }] };
+    next = pushBattleLog(next, `${tgt.name} 被 ${skill.name} 传染了疾病！`, 'danger');
+  }
+  const effNote = skill.applyEffects?.length ? `（施加 ${skill.applyEffects.map((e) => e.type).join('/')}）` : '';
+  const stressNote = skill.stress ? ` 并施加 ${skill.stress} 压力。` : '';
+  next = pushBattleLog(next, `${monster.name} 使用 ${skill.name}，掷 ${pending.attackRoll}${pending.crit ? '（暴击）' : ''} 命中 ${tgt.name}，造成 ${transformedDamage} 伤害${stressNote}${effNote}`, 'danger');
+  for (const message of outcome.logs) next = pushBattleLog(next, message, outcome.heroDied ? 'danger' : 'warning');
+  return checkEnd(next);
 }
 
 /** 执行单个怪物的自动回合。 */

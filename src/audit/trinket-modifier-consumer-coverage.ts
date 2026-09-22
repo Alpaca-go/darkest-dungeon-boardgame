@@ -4,6 +4,7 @@ export interface RuntimeModifierConsumerBinding {
   modifierType: TrinketModifierType;
   consumerPrimitive: string | null;
   wired: boolean;
+  supportedTriggers?: readonly string[];
 }
 
 /**
@@ -18,7 +19,7 @@ export const TRINKET_MODIFIER_CONSUMER_COVERAGE: Readonly<Record<TrinketModifier
   healing: { modifierType: 'healing', consumerPrimitive: 'STAGED_HEALING_CONSUMER', wired: true },
   stress: { modifierType: 'stress', consumerPrimitive: null, wired: false },
   'stress-recovery': { modifierType: 'stress-recovery', consumerPrimitive: null, wired: false },
-  dodge: { modifierType: 'dodge', consumerPrimitive: null, wired: false },
+  dodge: { modifierType: 'dodge', consumerPrimitive: 'INCOMING_DODGE_MODIFIER_CONSUMER', wired: true, supportedTriggers: ['incoming-attack'] },
   'condition-duration': { modifierType: 'condition-duration', consumerPrimitive: null, wired: false },
   light: { modifierType: 'light', consumerPrimitive: null, wired: false },
   'dungeon-roll': { modifierType: 'dungeon-roll', consumerPrimitive: null, wired: false },
@@ -30,8 +31,11 @@ export function modifierConsumerBinding(stat: string): RuntimeModifierConsumerBi
     : null;
 }
 
-export function missingModifierConsumers(modifiers: readonly { stat: string }[]): string[] {
+export function missingModifierConsumers(modifiers: readonly { stat: string }[], trigger?: string): string[] {
   return [...new Set(modifiers
-    .filter((modifier) => !modifierConsumerBinding(modifier.stat)?.wired)
+    .filter((modifier) => {
+      const binding = modifierConsumerBinding(modifier.stat);
+      return !binding?.wired || Boolean(trigger && binding.supportedTriggers && !binding.supportedTriggers.includes(trigger));
+    })
     .map((modifier) => modifier.stat))].sort();
 }

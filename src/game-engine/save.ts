@@ -31,6 +31,7 @@ import { getTrinketCapacity } from './trinkets/capacity';
 import { createInitialCampaignProgress } from './campaign/campaign-progress';
 import type { ActFourState } from '../types/act-four';
 import { createInitialActFourState, sanitizeActFourState } from './campaign/act-four/act-four-state';
+import { getMonsterSkillById } from '../data/monster-skills';
 
 // ---------------------------------------------------------------------------
 // 存档格式（Phase 6 升级为 v3 SaveFile）
@@ -89,7 +90,7 @@ export const STORAGE_KEY = 'dd-web-prototype-save-v1';
  *      Load 后由存档数据自行补齐（如缺失则视为空字符串，等待下次 selectQuest 重新生成）。
  *      迁移**不**根据 questCount 推断 Act，**不**代掷任何随机数，**不**触发 Threat Draw。
  */
-export const SAVE_VERSION = 19;
+export const SAVE_VERSION = 20;
 
 /**
  * v2 存档文件结构。
@@ -115,7 +116,7 @@ interface SaveEnvelopeV1 {
 }
 
 /** 可被迁移到当前版本的历史存档版本号。 */
-const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
+const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
 
 /** 读档结果：区分正常 / 无存档 / 损坏 / 版本不支持。 */
 export type LoadStatus = 'ok' | 'empty' | 'corrupt' | 'unsupported';
@@ -418,6 +419,21 @@ export function validateSaveFile(data: unknown): string | null {
       if (!c.heroes.some((h) => h.instanceId === u.sourceId)) {
         return `战斗单位 ${u.id} 引用了不存在的英雄`;
       }
+    }
+    const pending = b.pendingMonsterAttack;
+    if (pending) {
+      if (pending.kind !== 'monster-attack' ||
+          (pending.stage !== 'incoming-attack-window' && pending.stage !== 'hero-hit-window')) return 'pendingMonsterAttack stage 非法';
+      if (!b.monsters.some((unit) => unit.id === pending.monsterUnitId && unit.isAlive)) return 'pendingMonsterAttack monster 引用失效';
+      if (!b.heroes.some((unit) => unit.id === pending.targetHeroUnitId && unit.isAlive)) return 'pendingMonsterAttack target 引用失效';
+      if (!getMonsterSkillById(pending.skillId)) return 'pendingMonsterAttack skill 引用失效';
+      if (pending.monsterUnitId !== b.activeActorId) return 'pendingMonsterAttack actor 与当前回合不一致';
+      if (!Number.isInteger(pending.attackRoll) || pending.attackRoll < 1 || pending.attackRoll > 10) return 'pendingMonsterAttack attackRoll 非法';
+      if (!Number.isFinite(pending.dodgeModifier)) return 'pendingMonsterAttack dodgeModifier 非法';
+      if (pending.stage === 'incoming-attack-window' && (pending.hit !== null || pending.crit !== null || pending.baseDamage !== null)) return 'pendingMonsterAttack incoming stage 包含未授权结果';
+      if (pending.stage === 'hero-hit-window' && (typeof pending.hit !== 'boolean' || typeof pending.crit !== 'boolean' || typeof pending.baseDamage !== 'number' || pending.baseDamage < 0)) return 'pendingMonsterAttack hit stage 结果非法';
+      if (!Array.isArray(pending.processedTrinketInstanceIds) || new Set(pending.processedTrinketInstanceIds).size !== pending.processedTrinketInstanceIds.length) return 'pendingMonsterAttack processed ids 非法';
+      if (!Number.isInteger(pending.incomingDamageNumerator) || pending.incomingDamageNumerator < 0 || !Number.isInteger(pending.incomingDamageDenominator) || pending.incomingDamageDenominator <= 0 || pending.incomingDamageRounding !== 'ceil') return 'pendingMonsterAttack damage transform 非法';
     }
   }
   if (c.gamePhase === 'quest-result' && !c.lastQuestResult) return 'quest-result 阶段缺少 lastQuestResult';
@@ -1370,6 +1386,40 @@ export function migrateCampaignToV19(campaign: CampaignState): CampaignState {
   };
 }
 
+/** v20 persists staged incoming monster attacks; malformed/orphaned work is discarded without rerolling. */
+export function migrateCampaignToV20(campaign: CampaignState): CampaignState {
+  const battle = campaign.battle;
+  if (!battle) return { ...campaign, saveVersion: SAVE_VERSION };
+  const pending = battle.pendingMonsterAttack;
+  if (pending === undefined || pending === null) {
+    return { ...campaign, saveVersion: SAVE_VERSION, battle: { ...battle, pendingMonsterAttack: null } };
+  }
+  const ids = pending.processedTrinketInstanceIds;
+  const valid = pending.kind === 'monster-attack'
+    && (pending.stage === 'incoming-attack-window' || pending.stage === 'hero-hit-window')
+    && battle.activeActorId === pending.monsterUnitId
+    && battle.monsters.some((unit) => unit.id === pending.monsterUnitId && unit.isAlive)
+    && battle.heroes.some((unit) => unit.id === pending.targetHeroUnitId && unit.isAlive)
+    && typeof pending.skillId === 'string' && Boolean(getMonsterSkillById(pending.skillId))
+    && Number.isInteger(pending.attackRoll) && pending.attackRoll >= 1 && pending.attackRoll <= 10
+    && typeof pending.dodgeModifier === 'number' && Number.isFinite(pending.dodgeModifier)
+    && Number.isInteger(pending.incomingDamageNumerator) && pending.incomingDamageNumerator >= 0
+    && Number.isInteger(pending.incomingDamageDenominator) && pending.incomingDamageDenominator > 0
+    && pending.incomingDamageRounding === 'ceil'
+    && Array.isArray(ids) && ids.every((id) => typeof id === 'string') && new Set(ids).size === ids.length
+    && (pending.stage === 'incoming-attack-window'
+      ? pending.hit === null && pending.crit === null && pending.baseDamage === null
+      : typeof pending.hit === 'boolean' && typeof pending.crit === 'boolean'
+        && typeof pending.baseDamage === 'number' && pending.baseDamage >= 0);
+  if (valid) return { ...campaign, saveVersion: SAVE_VERSION };
+  return {
+    ...campaign,
+    saveVersion: SAVE_VERSION,
+    battle: { ...battle, pendingMonsterAttack: null },
+    pendingTrinketUseOpportunities: campaign.pendingTrinketUseOpportunities.filter((entry) => entry.rootEventId !== pending.rootEventId),
+  };
+}
+
 /** 净化已存在的 campaignProgress（补缺字段 / clamp / 去掉非法类型），不重新随机。 */
 function sanitizeCampaignProgress(raw: CampaignProgressState): CampaignProgressState {
   const base = createInitialCampaignProgress({
@@ -1415,7 +1465,7 @@ function sanitizeCampaignProgress(raw: CampaignProgressState): CampaignProgressS
  *  → v16 = Phase 10E Final Encounter 四形态 → v17 = Phase 11A.1 Campaign Orchestration）。
  */
 export function migrateCampaignToLatest(campaign: CampaignState): CampaignState {
-  return migrateCampaignToV19(migrateCampaignToV18(migrateCampaignToV17(
+  return migrateCampaignToV20(migrateCampaignToV19(migrateCampaignToV18(migrateCampaignToV17(
     migrateCampaignToV16(
       migrateCampaignToV15(
         migrateCampaignToV14(
@@ -1433,7 +1483,7 @@ export function migrateCampaignToLatest(campaign: CampaignState): CampaignState 
         ),
       ),
     ),
-  )));
+  ))));
 }
 
 /**

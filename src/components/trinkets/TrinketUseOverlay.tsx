@@ -15,6 +15,13 @@ export default function TrinketUseOverlay() {
   if (!campaign) return null;
   const opps = openOpportunities(campaign);
   if (opps.length === 0) return null;
+  const incoming = campaign.battle?.pendingMonsterAttack;
+  const incomingMonster = incoming
+    ? campaign.battle?.monsters.find((unit) => unit.id === incoming.monsterUnitId)
+    : undefined;
+  const incomingHero = incoming
+    ? campaign.battle?.heroes.find((unit) => unit.id === incoming.targetHeroUnitId)
+    : undefined;
 
   return (
     <div
@@ -26,6 +33,15 @@ export default function TrinketUseOverlay() {
         <p className="text-xs text-dd-muted mb-3">
           每张饰品可在对应窗口使用一次（每回合每张限一次）。请选择「使用」或「跳过」。
         </p>
+        {incoming && incomingMonster && incomingHero && (
+          <div className="mb-3 rounded border border-red-900/70 bg-black/25 p-3 text-sm" data-testid="incoming-attack-context">
+            <div className="text-dd-text">{incomingMonster.name} 正在攻击 {incomingHero.name}</div>
+            <div className="text-dd-muted">冻结骰点：{incoming.attackRoll}</div>
+            {incoming.stage === 'hero-hit-window' && (
+              <div className="text-red-300">攻击已命中；冻结基础伤害：{incoming.baseDamage}</div>
+            )}
+          </div>
+        )}
         <div className="space-y-2 max-h-[60vh] overflow-auto">
           {opps.map((opp) => (
             <div

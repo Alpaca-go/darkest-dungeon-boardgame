@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-8",
+  "lockedRulebook": {
+    "source": "docs/DD_EN_COREBOX_RULES.pdf",
+    "sourceSha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae"
+  },
+  "evidence": [
+    {
+      "evidenceId": "C1C8-RULEBOOK-SKILL-ACCURACY-DODGE",
+      "page": 19,
+      "region": "Anatomy of a Skill, Accuracy",
+      "fact": "The maximum successful attack roll is Skill Accuracy modified by the target's Dodge; the printed example resolves Accuracy 9 against Dodge 1 as a threshold of 8."
+    },
+    {
+      "evidenceId": "C1C8-RULEBOOK-HIT-DAMAGE-ORDER",
+      "pages": [19, 20],
+      "region": "Anatomy of a Skill, Accuracy/Critical/Target Effects",
+      "fact": "A successful roll establishes a hit; hit damage or healing is then applied, and target effects occur only if the Skill hits."
+    },
+    {
+      "evidenceId": "C1C8-RULEBOOK-MONSTER-ATTACK",
+      "page": 22,
+      "region": "A Monster's Turn example",
+      "fact": "Monster Skills use the same Accuracy minus target Dodge attack-roll comparison before inflicting damage."
+    },
+    {
+      "evidenceId": "S4:p26",
+      "page": 26,
+      "region": "Trinkets; left column",
+      "fact": "A Trinket is actively declared when applicable and is limited to one use per battle turn."
+    }
+  ],
+  "timing": {
+    "incomingAttack": {
+      "status": "SOURCE_DERIVED",
+      "runtimeWindow": "before-incoming-hit-resolution",
+      "after": ["target-selected", "attack-roll-frozen"],
+      "before": ["hit-determined", "damage-frozen", "target-effects-applied"]
+    },
+    "heroHitByAttack": {
+      "status": "SOURCE_DERIVED",
+      "runtimeWindow": "before-incoming-damage-applied",
+      "after": ["hit-determined", "critical-determined", "base-damage-frozen"],
+      "before": ["damage-applied", "target-effects-applied", "stress-applied", "movement-applied", "disease-committed"]
+    },
+    "damageDetermination": {
+      "status": "SOURCE_DERIVED",
+      "contract": "The damage result is frozen before the hero-hit-by-attack decision and never rerolled after a Trinket decision or reload."
+    },
+    "criticalOverride": {
+      "status": "SOURCE_UNRESOLVED",
+      "blocker": "The locked evidence does not establish whether converting an already established hit into a Critical precedes or replaces the frozen damage result."
+    },
+    "statusApplication": {
+      "status": "SOURCE_EXPLICIT",
+      "contract": "Target effects apply after damage and only when the attack hit."
+    }
+  },
+  "reactiveTrinketUsageEpoch": {
+    "status": "SOURCE_DERIVED",
+    "runtimeIdentity": "battleId:round:initiativeIndex:activeMonsterUnitId",
+    "finding": "The source says once per battle turn. A defensive declaration during a Monster's turn therefore records that Monster turn as usedTurnId; null is never used for an active battle reaction."
+  },
+  "failClosed": {
+    "bookOfHolinessCriticalOverride": "SOURCE_UNRESOLVED",
+    "bloodthirstConditionDuration": "TRINKET_STATUS_EFFECT_DURATION_CONSUMER_MISSING",
+    "camouflageStunDuration": "TRINKET_STATUS_EFFECT_DURATION_CONSUMER_MISSING"
+  }
+}

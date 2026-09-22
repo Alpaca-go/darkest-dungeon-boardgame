@@ -495,13 +495,20 @@ export function autoPlayBattle(campaign: CampaignState, maxSteps = 400): Campaig
   while (c.battle && c.battle.status === 'active' && steps++ < maxSteps) {
     let battle = c.battle;
     // 有冻结的 Trinket 决策时先结清（Driver 一律选择"不使用"，保持确定性）。
-    if (battle.pendingAction) {
-      const resolved = declineAllTrinketOpportunities(c);
+    if (battle.pendingAction || battle.pendingMonsterAttack) {
+      const hasOpenOpportunity = c.pendingTrinketUseOpportunities.some(
+        (entry) => entry.status === 'open',
+      );
+      const resolved = hasOpenOpportunity
+        ? declineAllTrinketOpportunities(c)
+        : battle.pendingMonsterAttack
+          ? settleBattleState(c).campaign
+          : c;
       if (resolved === c) break;
       c = resolved;
-      if (!c.battle || c.battle.status !== 'active') break;
-      battle = c.battle;
-      if (battle.pendingAction) break; // 仍冻结 → 真卡住，交给上层报死锁
+      // Re-enter through the same decision gate. A staged monster attack may
+      // open its hit window, or may have no eligible Trinkets at either stage.
+      continue;
     }
     const actor = getActiveUnit(battle);
     if (!actor) break;

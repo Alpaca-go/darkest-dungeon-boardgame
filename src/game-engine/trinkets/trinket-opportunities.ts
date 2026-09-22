@@ -26,6 +26,8 @@ export const WIRED_WINDOWS: readonly TrinketUseWindow[] = [
   'before-attack-roll',
   'after-attack-roll-before-hit-resolution',
   'before-damage-applied',
+  'before-incoming-hit-resolution',
+  'before-incoming-damage-applied',
   'hero-turn-start',
   'room-entered',
   'before-healing-delivered-resolution',
@@ -128,6 +130,9 @@ export function buildOpportunityPreview(side: TrinketSideDefinition): string {
         break;
       case 'consume-provision':
         parts.push(`消耗 ${e.provision} ×${e.amount}`);
+        break;
+      case 'scale-incoming-damage':
+        parts.push(`本次伤害 ×${e.numerator}/${e.denominator}（向上取整）`);
         break;
       case 'log-only':
         parts.push(e.note);

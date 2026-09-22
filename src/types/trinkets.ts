@@ -52,6 +52,8 @@ export type TrinketUseWindow =
   | 'before-attack-roll'
   | 'after-attack-roll-before-hit-resolution'
   | 'before-damage-applied'
+  | 'before-incoming-hit-resolution'
+  | 'before-incoming-damage-applied'
   | 'after-damage-applied'
   | 'before-healing-applied'
   | 'after-healing-applied'
@@ -101,6 +103,12 @@ export type ActiveEffectDefinition =
   | { type: 'apply-condition-self'; condition: StatusEffectType; amount: number }
   | { type: 'change-light'; amount: number }
   | { type: 'consume-provision'; provision: keyof ProvisionPool; amount: number }
+  | {
+      type: 'scale-incoming-damage';
+      numerator: number;
+      denominator: number;
+      rounding: 'ceil';
+    }
   | { type: 'log-only'; note: string };
 
 /** 使用前置条件（全部满足才开窗）。 */

@@ -369,6 +369,30 @@ export interface PendingBattleAction {
   processedTrinketInstanceIds: string[];
 }
 
+/**
+ * A monster attack whose random facts are frozen while the defending Hero
+ * resolves the two source-distinct Trinket reaction windows.
+ */
+export interface PendingMonsterAttack {
+  kind: 'monster-attack';
+  rootEventId: string;
+  stage: 'incoming-attack-window' | 'hero-hit-window';
+  monsterUnitId: string;
+  targetHeroUnitId: string;
+  skillId: string;
+  attackRoll: number;
+  dodgeModifier: number;
+  hit: boolean | null;
+  crit: boolean | null;
+  baseDamage: number | null;
+  /** Frozen before the hit window; null when the skill cannot infect. */
+  diseaseRoll: number | null;
+  incomingDamageNumerator: number;
+  incomingDamageDenominator: number;
+  incomingDamageRounding: 'ceil';
+  processedTrinketInstanceIds: string[];
+}
+
 /** A healing skill frozen while its delivered/received Trinket windows resolve. */
 export interface PendingHealingAction {
   kind: 'hero-healing-skill';
@@ -518,6 +542,10 @@ export interface BattleState {
    * 逐条决定使用/放弃，全部结清后由引擎继续执行该动作。
    */
   pendingAction?: PendingBattleAction | null;
+  /** C1C-8 staged defensive reaction pipeline. */
+  pendingMonsterAttack?: PendingMonsterAttack | null;
+  /** Opt-in for production-created ordinary battles; legacy fixtures stay atomic. */
+  stagedIncomingAttacks?: boolean;
   // ---- Phase 9A（可选字段；普通战斗不写入，保证既有行为零变化）----
   /**
    * Boss 战斗状态。非 null 即 Boss Battle（§11.1）。

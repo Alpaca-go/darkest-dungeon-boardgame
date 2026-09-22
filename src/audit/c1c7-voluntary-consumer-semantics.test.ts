@@ -50,7 +50,7 @@ describe('C1C-7 semantic truth gates', () => {
   });
 
   it('reports Book of Relaxation dodge as represented but unconsumed', () => {
-    expect(TRINKET_MODIFIER_CONSUMER_COVERAGE.dodge).toMatchObject({ wired: false, consumerPrimitive: null });
+    expect(TRINKET_MODIFIER_CONSUMER_COVERAGE.dodge).toMatchObject({ wired: true, consumerPrimitive: 'INCOMING_DODGE_MODIFIER_CONSUMER' });
     const book = COMMUNITY_SOURCE_TRINKETS.find((entry) => entry.id === BOOK_OF_RELAXATION_ID)!;
     const capability = evaluateCommunityTrinketCapability(book);
     expect(capability.productionReady).toBe(false);

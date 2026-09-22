@@ -123,6 +123,10 @@ export const normalizePrimitives = (message: string): string[] => {
   if (/timing voluntary-declaration/i.test(message)) primitives.push('VOLUNTARY_DECLARATION_RUNTIME');
   if (/timing hero-skill-resolution/i.test(message)) primitives.push('POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW');
   if (/timing hero-skill-hits/i.test(message)) primitives.push('PRE_DAMAGE_HIT_TRINKET_WINDOW');
+  if (/timing hero-hit-by-attack/i.test(message)) primitives.push('HERO_HIT_BY_ATTACK_TRINKET_WINDOW');
+  if (/timing incoming-attack/i.test(message)) primitives.push('INCOMING_ATTACK_TRINKET_WINDOW');
+  if (/primitive:scale-incoming-damage/i.test(message)) primitives.push('INCOMING_DAMAGE_SCALE_CONSUMER');
+  if (/ActiveModifierDefinition:dodge|consumer[^:]*:dodge/i.test(message)) primitives.push('INCOMING_DODGE_MODIFIER_CONSUMER');
   if (/primitive:set-damage/i.test(message)) primitives.push('SET_DAMAGE_OVERRIDE');
   if (/timing hero-(heals|is-healed)/i.test(message)) primitives.push('STAGED_HEALING_TRINKET_WINDOWS');
   if (/room-token composition/i.test(message)) primitives.push('QUEST_ROOM_TOKEN_COMPOSITION');
@@ -605,6 +609,40 @@ function bracerTrinket(id: string, positiveLight: 'min' | 'max', negativeLight: 
 
 const darkBracer = bracerTrinket('community-trinket-core-dark-bracer', 'max', 'min');
 const solarBracer = bracerTrinket('community-trinket-core-solar-bracer', 'min', 'max');
+const protectiveSource = sourceTrinket('community-trinket-core-protective-padlock');
+const protectivePadlock: TrinketDefinition = {
+  id: protectiveSource.id, name: protectiveSource.printedName, level: 2,
+  positiveSide: {
+    side: 'positive', label: '本次伤害减半（向上取整）', description: protectiveSource.positiveSide.label,
+    useWindows: ['before-incoming-damage-applied'], modifiers: [],
+    effects: [{ type: 'scale-incoming-damage', numerator: 1, denominator: 2, rounding: 'ceil' }],
+    canUse: [{ type: 'in-battle' }],
+  },
+  // The voluntary movement side remains fail-closed.
+  negativeSide: {
+    side: 'negative', label: '移动 -1（时机未决）', description: protectiveSource.negativeSide.label,
+    useWindows: [], modifiers: [], effects: [],
+  },
+  sellPrice: sellPriceForLevel(2), buyPrice: buyPriceForLevel(2), officialDataStatus: 'verified',
+  sourceReference: protectiveSource.sourceReferences.join('; '), enabledInOfficialPool: false, dataOrigin: 'community',
+  runtimeContentMetadata: { sourceDefinitionId: protectiveSource.id, contentSet: 'core', region: null, sourceOrigin: 'community-complete-edition' },
+};
+const camouflageSource = sourceTrinket('community-trinket-core-camouflage-cloak');
+const camouflageCloak: TrinketDefinition = {
+  id: camouflageSource.id, name: camouflageSource.printedName, level: 2,
+  positiveSide: {
+    side: 'positive', label: '闪避 +2', description: camouflageSource.positiveSide.label,
+    useWindows: ['before-incoming-hit-resolution'], modifiers: [{ type: 'dodge', amount: 2 }], effects: [],
+    canUse: [{ type: 'min-light', value: 3 }],
+  },
+  negativeSide: {
+    side: 'negative', label: 'Stun 1 回合（状态时长 consumer 未接入）', description: camouflageSource.negativeSide.label,
+    useWindows: [], modifiers: [], effects: [],
+  },
+  sellPrice: sellPriceForLevel(2), buyPrice: buyPriceForLevel(2), officialDataStatus: 'verified',
+  sourceReference: camouflageSource.sourceReferences.join('; '), enabledInOfficialPool: false, dataOrigin: 'community',
+  runtimeContentMetadata: { sourceDefinitionId: camouflageSource.id, contentSet: 'core', region: null, sourceOrigin: 'community-complete-edition' },
+};
 
 export const COMMUNITY_TRINKET_RUNTIME_ADAPTERS: Readonly<Record<string, CommunityTrinketRuntimeAdapter>> = Object.freeze({
   [accuracyStone.id]: { adapterId: 'post-roll-accuracy-stone-v1', definitionId: accuracyStone.id, requiredPrimitives: ['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW'], definition: accuracyStone },
@@ -613,6 +651,8 @@ export const COMMUNITY_TRINKET_RUNTIME_ADAPTERS: Readonly<Record<string, Communi
   [chirurgeonsCharm.id]: { adapterId: 'staged-healing-chirurgeons-charm-v1', definitionId: chirurgeonsCharm.id, requiredPrimitives: ['STAGED_HEALING_TRINKET_WINDOWS'], definition: chirurgeonsCharm },
   [darkBracer.id]: { adapterId: 'staged-attack-dark-bracer-v1', definitionId: darkBracer.id, requiredPrimitives: ['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW', 'PRE_DAMAGE_HIT_TRINKET_WINDOW', 'SET_DAMAGE_OVERRIDE'], definition: darkBracer },
   [solarBracer.id]: { adapterId: 'staged-attack-solar-bracer-v1', definitionId: solarBracer.id, requiredPrimitives: ['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW', 'PRE_DAMAGE_HIT_TRINKET_WINDOW', 'SET_DAMAGE_OVERRIDE'], definition: solarBracer },
+  [protectivePadlock.id]: { adapterId: 'incoming-damage-protective-padlock-positive-v1', definitionId: protectivePadlock.id, requiredPrimitives: ['STAGED_INCOMING_ATTACK_RESOLUTION', 'HERO_HIT_BY_ATTACK_TRINKET_WINDOW', 'INCOMING_DAMAGE_SCALE_CONSUMER'], definition: protectivePadlock },
+  [camouflageCloak.id]: { adapterId: 'incoming-dodge-camouflage-cloak-positive-v1', definitionId: camouflageCloak.id, requiredPrimitives: ['STAGED_INCOMING_ATTACK_RESOLUTION', 'INCOMING_ATTACK_TRINKET_WINDOW', 'INCOMING_DODGE_MODIFIER_CONSUMER'], definition: camouflageCloak },
 });
 
 export const COMMUNITY_TRINKET_PRODUCTION_PROOFS: Readonly<Record<string, CommunityProductionProof>> = Object.freeze({
@@ -664,6 +704,36 @@ export const COMMUNITY_TRINKET_PRODUCTION_PROOFS: Readonly<Record<string, Commun
     selectorTests: [`C1C6-${definition === darkBracer ? 'DARK' : 'SOLAR'}-BRACER-SELECTOR`],
     e2eTests: [`C1C6-E2E-${definition === darkBracer ? 'DARK' : 'SOLAR'}-BRACER`],
   }])),
+  [protectivePadlock.id]: {
+    definitionId: protectivePadlock.id, runtimeAdapterId: 'incoming-damage-protective-padlock-positive-v1',
+    requiredPrimitives: ['STAGED_INCOMING_ATTACK_RESOLUTION', 'INCOMING_DAMAGE_SCALE_CONSUMER'],
+    primitiveProofRequirements: {
+      'C1C8-INCOMING-ATTACK-RUNTIME': 'STAGED_INCOMING_ATTACK_RESOLUTION',
+      'C1C8-INCOMING-ATTACK-SAVE-REPLAY': 'STAGED_INCOMING_ATTACK_RESOLUTION',
+      'C1C8-PROTECTIVE-POSITIVE-RUNTIME': 'INCOMING_DAMAGE_SCALE_CONSUMER',
+      'C1C8-PROTECTIVE-POSITIVE-SAVE': 'INCOMING_DAMAGE_SCALE_CONSUMER',
+      'C1C8-PROTECTIVE-POSITIVE-SELECTOR': 'INCOMING_DAMAGE_SCALE_CONSUMER',
+      'C1C8-E2E-PROTECTIVE-POSITIVE': 'INCOMING_DAMAGE_SCALE_CONSUMER',
+    } as Record<string, string>,
+    sourceSupported: true, semanticSupported: true, stateful: true,
+    productionTests: ['C1C8-INCOMING-ATTACK-RUNTIME', 'C1C8-PROTECTIVE-POSITIVE-RUNTIME'], saveReplayTests: ['C1C8-INCOMING-ATTACK-SAVE-REPLAY', 'C1C8-PROTECTIVE-POSITIVE-SAVE'],
+    selectorTests: ['C1C8-PROTECTIVE-POSITIVE-SELECTOR'], e2eTests: ['C1C8-E2E-PROTECTIVE-POSITIVE'],
+  },
+  [camouflageCloak.id]: {
+    definitionId: camouflageCloak.id, runtimeAdapterId: 'incoming-dodge-camouflage-cloak-positive-v1',
+    requiredPrimitives: ['STAGED_INCOMING_ATTACK_RESOLUTION', 'INCOMING_DODGE_MODIFIER_CONSUMER'],
+    primitiveProofRequirements: {
+      'C1C8-INCOMING-ATTACK-RUNTIME': 'STAGED_INCOMING_ATTACK_RESOLUTION',
+      'C1C8-INCOMING-ATTACK-SAVE-REPLAY': 'STAGED_INCOMING_ATTACK_RESOLUTION',
+      'C1C8-CAMOUFLAGE-POSITIVE-RUNTIME': 'INCOMING_DODGE_MODIFIER_CONSUMER',
+      'C1C8-CAMOUFLAGE-POSITIVE-SAVE': 'INCOMING_DODGE_MODIFIER_CONSUMER',
+      'C1C8-CAMOUFLAGE-POSITIVE-SELECTOR': 'INCOMING_DODGE_MODIFIER_CONSUMER',
+      'C1C8-E2E-CAMOUFLAGE-POSITIVE': 'INCOMING_DODGE_MODIFIER_CONSUMER',
+    } as Record<string, string>,
+    sourceSupported: true, semanticSupported: true, stateful: true,
+    productionTests: ['C1C8-INCOMING-ATTACK-RUNTIME', 'C1C8-CAMOUFLAGE-POSITIVE-RUNTIME'], saveReplayTests: ['C1C8-INCOMING-ATTACK-SAVE-REPLAY', 'C1C8-CAMOUFLAGE-POSITIVE-SAVE'],
+    selectorTests: ['C1C8-CAMOUFLAGE-POSITIVE-SELECTOR'], e2eTests: ['C1C8-E2E-CAMOUFLAGE-POSITIVE'],
+  },
 });
 
 export function evaluateCommunityTrinketCapability(
@@ -688,7 +758,7 @@ export function evaluateCommunityTrinketCapability(
     ...source.positiveSide.runtimeSupport.missingCapabilities,
     ...source.negativeSide.runtimeSupport.missingCapabilities,
   ].flatMap(normalizePrimitives))];
-  const implementedTrinketPrimitives = new Set(['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW', 'STAGED_HEALING_TRINKET_WINDOWS', 'PRE_DAMAGE_HIT_TRINKET_WINDOW', 'SET_DAMAGE_OVERRIDE']);
+  const implementedTrinketPrimitives = new Set(['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW', 'STAGED_HEALING_TRINKET_WINDOWS', 'PRE_DAMAGE_HIT_TRINKET_WINDOW', 'SET_DAMAGE_OVERRIDE', 'STAGED_INCOMING_ATTACK_RESOLUTION', 'INCOMING_ATTACK_TRINKET_WINDOW', 'HERO_HIT_BY_ATTACK_TRINKET_WINDOW', 'INCOMING_DAMAGE_SCALE_CONSUMER', 'INCOMING_DODGE_MODIFIER_CONSUMER']);
   const missingPrimitives = declaredMissingPrimitives.filter((primitive) => !implementedTrinketPrimitives.has(primitive));
   const sourceSemanticComplete = trinketSourceSemanticComplete(source);
   const runtimeSemanticComplete = trinketRuntimeSemanticComplete(sourceSemanticComplete, semanticObligations);

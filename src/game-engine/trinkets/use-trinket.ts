@@ -190,6 +190,9 @@ function applyOneEffect(
       };
       return pushLog(c, `${trinketName}：消耗补给 ${effect.provision} ×${used}。`, 'info');
     }
+    case 'scale-incoming-damage':
+      // Deferred: the staged monster-attack bridge applies this to its frozen damage.
+      return campaign;
     case 'log-only':
       return pushLog(campaign, `${trinketName}：${effect.note}`, 'info');
     default:
@@ -207,6 +210,7 @@ export interface UseTrinketResult {
   error: string | null;
   /** 本次使用面上的主动修正器（before-attack-roll 由战斗集成注入冻结动作）。 */
   appliedModifiers: ActiveModifierDefinition[];
+  appliedEffects: ActiveEffectDefinition[];
   usedOpportunity: TrinketUseOpportunity | null;
 }
 
@@ -229,7 +233,7 @@ export function useTrinket(
   ctx?: RuleEventContext
 ): UseTrinketResult {
   const error = trinketUseError(campaign, opportunityId);
-  if (error) return { campaign, error, appliedModifiers: [], usedOpportunity: null };
+  if (error) return { campaign, error, appliedModifiers: [], appliedEffects: [], usedOpportunity: null };
 
   const opp = findOpportunity(campaign, opportunityId)!;
   const hero = findHero(campaign, opp.heroId)!;
@@ -301,6 +305,7 @@ export function useTrinket(
     campaign: next,
     error: null,
     appliedModifiers: def ? [...side.modifiers] : [],
+    appliedEffects: def ? [...side.effects] : [],
     usedOpportunity: { ...opp, status: 'used' },
   };
 }
