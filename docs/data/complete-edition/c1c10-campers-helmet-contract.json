@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-10",
+  "sourceDefinitionId": "community-trinket-core-campers-helmet",
+  "sourceReferences": [
+    "c1a-source:tts-path:/ObjectStates/60/ContainedObjects/2"
+  ],
+  "provisionDieSource": {
+    "document": "docs/DD_EN_COREBOX_RULES.pdf",
+    "pages": [
+      12,
+      18
+    ],
+    "die": "d6",
+    "faces": [
+      "food",
+      "bandage",
+      "potion",
+      "torch",
+      "tool",
+      "wild"
+    ],
+    "blankFaces": false,
+    "diceIndependent": true,
+    "directDestination": "party common Provision pool",
+    "poolMaximum": 16,
+    "wildRule": "the player who rolled a Wild turns that die to any non-Wild Provision face",
+    "applicationTiming": "after both dice are rolled and all Wild choices are resolved, before the frozen Rest allocation commits"
+  },
+  "resolutionOrder": {
+    "scout": [
+      "Scout declared",
+      "applicable Trinkets declared/resolved",
+      "original Scout resolves"
+    ],
+    "camp": [
+      "valid Rest allocation frozen",
+      "applicable Trinkets declared/resolved",
+      "original Rest allocation commits"
+    ],
+    "evidence": [
+      "Camper card declares its effect when camping/scouting",
+      "Core rules define the original Scout and Camp resolutions"
+    ]
+  },
+  "source": {
+    "positive": {
+      "trigger": "camping",
+      "useWindow": "declare-when-applicable",
+      "target": "party-provisions",
+      "effect": {
+        "kind": "roll-provision-dice",
+        "count": 2
+      }
+    },
+    "negative": {
+      "trigger": "scout",
+      "useWindow": "declare-when-applicable",
+      "target": "equipped-hero",
+      "effect": {
+        "kind": "change-stress",
+        "amount": 1
+      }
+    }
+  },
+  "runtime": {
+    "adapterId": "campers-helmet-camping-scout-runtime-v1",
+    "positive": {
+      "window": "before-camp-resolution",
+      "effect": {
+        "type": "roll-provision-dice",
+        "count": 2,
+        "target": "party-provisions"
+      }
+    },
+    "negative": {
+      "window": "before-scout-resolution",
+      "effect": {
+        "type": "stress-self",
+        "amount": 1
+      }
+    },
+    "consumer": "TRINKET_PROVISION_DICE_CONSUMER",
+    "rng": "game-engine/random.random -> RuntimeSources",
+    "saveReplay": "PendingDungeonTrinketAction.pendingProvisionDice"
+  }
+}
