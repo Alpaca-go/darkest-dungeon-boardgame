@@ -667,6 +667,23 @@ const campersHelmet: TrinketDefinition = {
   enabledInOfficialPool: false, dataOrigin: 'community',
   runtimeContentMetadata: { sourceDefinitionId: campersSource.id, contentSet: 'core', region: null, sourceOrigin: 'community-complete-edition' },
 };
+const bloodthirstSource = sourceTrinket('community-trinket-core-bloodthirst-ring');
+const bloodthirstRing: TrinketDefinition = {
+  id: bloodthirstSource.id, name: bloodthirstSource.printedName, level: 2,
+  positiveSide: {
+    side: 'positive', label: bloodthirstSource.positiveSide.label, description: bloodthirstSource.positiveSide.label,
+    useWindows: [], modifiers: [], effects: [], canUse: [],
+  },
+  negativeSide: {
+    side: 'negative', label: '流血 3，持续 2 回合', description: bloodthirstSource.negativeSide.label,
+    useWindows: ['before-incoming-damage-applied'], modifiers: [], effects: [{
+      type: 'apply-condition-stack', condition: 'bleed', amount: 3, durationTurns: 2, target: 'equipped-hero',
+    }], canUse: [{ type: 'in-battle' }],
+  },
+  sellPrice: sellPriceForLevel(2), buyPrice: buyPriceForLevel(2), officialDataStatus: 'verified',
+  sourceReference: bloodthirstSource.sourceReferences.join('; '), enabledInOfficialPool: false, dataOrigin: 'community',
+  runtimeContentMetadata: { sourceDefinitionId: bloodthirstSource.id, contentSet: 'core', region: null, sourceOrigin: 'community-complete-edition' },
+};
 
 export const COMMUNITY_TRINKET_RUNTIME_ADAPTERS: Readonly<Record<string, CommunityTrinketRuntimeAdapter>> = Object.freeze({
   [accuracyStone.id]: { adapterId: 'post-roll-accuracy-stone-v1', definitionId: accuracyStone.id, requiredPrimitives: ['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW'], definition: accuracyStone },
@@ -678,6 +695,7 @@ export const COMMUNITY_TRINKET_RUNTIME_ADAPTERS: Readonly<Record<string, Communi
   [protectivePadlock.id]: { adapterId: 'incoming-damage-protective-padlock-positive-v1', definitionId: protectivePadlock.id, requiredPrimitives: ['STAGED_INCOMING_ATTACK_RESOLUTION', 'HERO_HIT_BY_ATTACK_TRINKET_WINDOW', 'INCOMING_DAMAGE_SCALE_CONSUMER'], definition: protectivePadlock },
   [camouflageCloak.id]: { adapterId: 'camouflage-cloak-condition-runtime-v2', definitionId: camouflageCloak.id, requiredPrimitives: ['STAGED_INCOMING_ATTACK_RESOLUTION', 'INCOMING_ATTACK_TRINKET_WINDOW', 'HERO_HIT_BY_ATTACK_TRINKET_WINDOW', 'INCOMING_DODGE_MODIFIER_CONSUMER', 'TRINKET_CONDITION_STACK_CONSUMER'], definition: camouflageCloak },
   [campersHelmet.id]: { adapterId: 'campers-helmet-camping-scout-runtime-v1', definitionId: campersHelmet.id, requiredPrimitives: ['STAGED_DUNGEON_TRINKET_WINDOWS', 'TRINKET_PROVISION_DICE_CONSUMER'], definition: campersHelmet },
+  [bloodthirstRing.id]: { adapterId: 'bloodthirst-ring-hit-bleed-negative-v1', definitionId: bloodthirstRing.id, requiredPrimitives: ['STAGED_INCOMING_ATTACK_RESOLUTION', 'HERO_HIT_BY_ATTACK_TRINKET_WINDOW', 'TRINKET_CONDITION_STACK_CONSUMER'], definition: bloodthirstRing },
 });
 
 export const COMMUNITY_TRINKET_PRODUCTION_PROOFS: Readonly<Record<string, CommunityProductionProof>> = Object.freeze({
@@ -778,6 +796,21 @@ export const COMMUNITY_TRINKET_PRODUCTION_PROOFS: Readonly<Record<string, Commun
     productionTests: ['C1C10-CAMPERS-CAMPING-RUNTIME', 'C1C10-CAMPERS-SCOUT-RUNTIME'],
     saveReplayTests: ['C1C10-CAMPERS-SAVE-REPLAY'], selectorTests: ['C1C10-CAMPERS-SELECTOR'],
     e2eTests: ['C1C10-E2E-CAMPERS-CAMPING', 'C1C10-E2E-CAMPERS-SCOUT'],
+  },
+  [bloodthirstRing.id]: {
+    definitionId: bloodthirstRing.id, runtimeAdapterId: 'bloodthirst-ring-hit-bleed-negative-v1',
+    requiredPrimitives: ['STAGED_INCOMING_ATTACK_RESOLUTION', 'HERO_HIT_BY_ATTACK_TRINKET_WINDOW', 'TRINKET_CONDITION_STACK_CONSUMER'],
+    primitiveProofRequirements: {
+      'C1C11-BLOODTHIRST-NEGATIVE-RUNTIME': 'TRINKET_CONDITION_STACK_CONSUMER',
+      'C1C11-BLOODTHIRST-NEGATIVE-SAVE-REPLAY': 'STAGED_INCOMING_ATTACK_RESOLUTION',
+      'C1C11-BLOODTHIRST-NEGATIVE-SELECTOR': 'TRINKET_CONDITION_STACK_CONSUMER',
+      'C1C11-E2E-BLOODTHIRST-NEGATIVE': 'HERO_HIT_BY_ATTACK_TRINKET_WINDOW',
+    } as Record<string, string>,
+    sourceSupported: true, semanticSupported: true, stateful: true,
+    productionTests: ['C1C11-BLOODTHIRST-NEGATIVE-RUNTIME'],
+    saveReplayTests: ['C1C11-BLOODTHIRST-NEGATIVE-SAVE-REPLAY'],
+    selectorTests: ['C1C11-BLOODTHIRST-NEGATIVE-SELECTOR'],
+    e2eTests: ['C1C11-E2E-BLOODTHIRST-NEGATIVE'],
   },
 });
 

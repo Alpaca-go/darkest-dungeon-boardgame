@@ -24,6 +24,7 @@ export const BOOK_OF_RELAXATION_ID = 'community-trinket-core-book-of-relaxation'
 export const PROTECTIVE_PADLOCK_ID = 'community-trinket-core-protective-padlock';
 export const CAMOUFLAGE_CLOAK_ID = 'community-trinket-core-camouflage-cloak';
 export const CAMPERS_HELMET_ID = 'community-trinket-core-campers-helmet';
+export const BLOODTHIRST_RING_ID = 'community-trinket-core-bloodthirst-ring';
 export const C1C1_CORE_QUEST_IDS = [
   'community-quest-ruins-lvl1-scout-ahead',
   'community-quest-ruins-lvl1-wipe-em-out',
@@ -264,6 +265,10 @@ export const PRODUCTION_PROOF_REGISTRY: Readonly<Record<string, RegisteredProduc
   proof({ proofId: 'C1C10-CAMPERS-SELECTOR', definitionIds: [CAMPERS_HELMET_ID], proofType: 'selector', testFile: 'src/audit/c1c10-campers-helmet-semantics.test.ts', runner: 'vitest', status: 'active', scope: 'primitive', primitiveId: 'TRINKET_PROVISION_DICE_CONSUMER' }),
   proof({ proofId: 'C1C10-E2E-CAMPERS-CAMPING', definitionIds: [CAMPERS_HELMET_ID], proofType: 'e2e', testFile: 'e2e/phase11a4-c1c10-campers-helmet.spec.ts', runner: 'playwright', status: 'active', scope: 'primitive', primitiveId: 'TRINKET_PROVISION_DICE_CONSUMER', proofSurface: 'production-ui' }),
   proof({ proofId: 'C1C10-E2E-CAMPERS-SCOUT', definitionIds: [CAMPERS_HELMET_ID], proofType: 'e2e', testFile: 'e2e/phase11a4-c1c10-campers-helmet.spec.ts', runner: 'playwright', status: 'active', scope: 'primitive', primitiveId: 'STAGED_DUNGEON_TRINKET_WINDOWS', proofSurface: 'production-ui' }),
+  proof({ proofId: 'C1C11-BLOODTHIRST-NEGATIVE-RUNTIME', definitionIds: [BLOODTHIRST_RING_ID], proofType: 'production-runtime', testFile: 'src/game-engine/c1c11-bloodthirst-ring.test.ts', runner: 'vitest', status: 'active', scope: 'primitive', primitiveId: 'TRINKET_CONDITION_STACK_CONSUMER' }),
+  proof({ proofId: 'C1C11-BLOODTHIRST-NEGATIVE-SAVE-REPLAY', definitionIds: [BLOODTHIRST_RING_ID], proofType: 'save-replay', testFile: 'src/game-engine/c1c11-bloodthirst-ring.test.ts', runner: 'vitest', status: 'active', scope: 'primitive', primitiveId: 'STAGED_INCOMING_ATTACK_RESOLUTION' }),
+  proof({ proofId: 'C1C11-BLOODTHIRST-NEGATIVE-SELECTOR', definitionIds: [BLOODTHIRST_RING_ID], proofType: 'selector', testFile: 'src/audit/c1c11-bloodthirst-semantics.test.ts', runner: 'vitest', status: 'active', scope: 'primitive', primitiveId: 'TRINKET_CONDITION_STACK_CONSUMER' }),
+  proof({ proofId: 'C1C11-E2E-BLOODTHIRST-NEGATIVE', definitionIds: [BLOODTHIRST_RING_ID], proofType: 'e2e', testFile: 'e2e/phase11a4-c1c11-bloodthirst-ring.spec.ts', runner: 'playwright', status: 'active', scope: 'primitive', primitiveId: 'HERO_HIT_BY_ATTACK_TRINKET_WINDOW', proofSurface: 'production-ui' }),
 ].map((entry) => [entry.proofId, entry])));
 
 export function resolveRegisteredProof(
