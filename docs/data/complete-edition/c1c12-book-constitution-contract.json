@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-12",
+  "sourceDefinitionId": "community-trinket-core-book-of-constitution",
+  "sourceReferences": [
+    "c1a-source:tts-path:/ObjectStates/60/ContainedObjects/10"
+  ],
+  "scope": "positive-side-only",
+  "negativeSidePolicy": "fail-closed until movement and voluntary-declaration are implemented",
+  "source": {
+    "positive": {
+      "label": "Book of Constitution",
+      "trigger": "disease-acquired",
+      "useWindow": "declare-when-applicable",
+      "target": "new-disease",
+      "modifiers": [],
+      "effects": [
+        {
+          "kind": "discard-disease",
+          "immediately": true
+        }
+      ],
+      "conditions": [],
+      "semanticNotes": [],
+      "unresolvedFields": [],
+      "runtimeSupport": {
+        "classification": "RUNTIME_PRIMITIVE_UNSUPPORTED",
+        "existingCandidates": [],
+        "missingCapabilities": [
+          "No exact active trinket primitive:discard-disease",
+          "Exact applicable timing disease-acquired is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ],
+        "productionIntegration": "not-integrated"
+      }
+    },
+    "negative": {
+      "label": "Book of Constitution",
+      "trigger": "voluntary-declaration",
+      "useWindow": "declare-when-applicable",
+      "target": "equipped-hero",
+      "modifiers": [
+        {
+          "kind": "modify",
+          "stat": "movement",
+          "amount": -2
+        }
+      ],
+      "effects": [],
+      "conditions": [],
+      "semanticNotes": [],
+      "unresolvedFields": [],
+      "runtimeSupport": {
+        "classification": "RUNTIME_PRIMITIVE_UNSUPPORTED",
+        "existingCandidates": [],
+        "missingCapabilities": [
+          "No TrinketModifierType:movement",
+          "Exact applicable timing voluntary-declaration is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ],
+        "productionIntegration": "not-integrated"
+      }
+    }
+  },
+  "runtime": {
+    "adapterId": "book-of-constitution-disease-discard-positive-v1",
+    "requiredPrimitives": [
+      "STAGED_DISEASE_ACQUISITION",
+      "DISEASE_ACQUIRED_TRINKET_WINDOW",
+      "TRINKET_DISCARD_DISEASE_CONSUMER"
+    ],
+    "positive": {
+      "side": "positive",
+      "label": "立即丢弃新疾病",
+      "description": "Book of Constitution",
+      "useWindows": [
+        "before-disease-acquisition-commit"
+      ],
+      "modifiers": [],
+      "effects": [
+        {
+          "type": "discard-disease",
+          "immediately": true,
+          "target": "new-disease"
+        }
+      ],
+      "canUse": []
+    },
+    "negative": {
+      "side": "negative",
+      "label": "移动 -2（时机未决）",
+      "description": "Book of Constitution",
+      "useWindows": [],
+      "modifiers": [],
+      "effects": [],
+      "canUse": []
+    },
+    "consumer": {
+      "effectType": "discard-disease",
+      "consumerPrimitive": "TRINKET_DISCARD_DISEASE_CONSUMER",
+      "wired": true
+    }
+  }
+}

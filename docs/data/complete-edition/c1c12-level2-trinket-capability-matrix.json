@@ -1,0 +1,510 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-12",
+  "baselineHead": "5abd51df2ae2a229e090b9bf8d9c08a1d96d0be6",
+  "verifiedImplementationHead": "fe05453847648083227404e0983600a64b1be057",
+  "verifiedImplementationTree": "78587ab9685e99eb046d21f72cf118b5dbafec7b",
+  "verifiedImplementationCommittedAt": "2026-09-23T07:36:12+08:00",
+  "cards": [
+    {
+      "definitionId": "community-trinket-core-bloodthirst-ring",
+      "productionReady": false,
+      "blockerCodes": [
+        "VOLUNTARY_DECLARATION_RUNTIME",
+        "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "triggerMatch": false,
+          "windowMatch": false,
+          "targetMatch": false,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "effectMatch": false,
+          "effectConsumerMatch": true,
+          "runtimeSliceSemanticComplete": false,
+          "implementationStatus": "PARTIAL",
+          "blockerCode": "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+          "proofIds": []
+        },
+        {
+          "side": "negative",
+          "triggerMatch": true,
+          "windowMatch": true,
+          "targetMatch": true,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "effectMatch": true,
+          "effectConsumerMatch": true,
+          "runtimeSliceSemanticComplete": true,
+          "implementationStatus": "IMPLEMENTED",
+          "blockerCode": null,
+          "proofIds": [
+            "C1C11-BLOODTHIRST-NEGATIVE-RUNTIME",
+            "C1C11-BLOODTHIRST-NEGATIVE-SAVE-REPLAY",
+            "C1C11-BLOODTHIRST-NEGATIVE-SELECTOR",
+            "C1C11-E2E-BLOODTHIRST-NEGATIVE"
+          ]
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-book-of-constitution",
+      "productionReady": false,
+      "blockerCodes": [
+        "NO_TRINKETMODIFIERTYPE_MOVEMENT",
+        "VOLUNTARY_DECLARATION_RUNTIME",
+        "TRINKET_MODIFIER_CONSUMER_MISSING"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "triggerMatch": true,
+          "windowMatch": true,
+          "targetMatch": true,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "effectMatch": true,
+          "effectConsumerMatch": true,
+          "runtimeSliceSemanticComplete": true,
+          "implementationStatus": "IMPLEMENTED",
+          "blockerCode": null,
+          "proofIds": [
+            "C1C12-CONSTITUTION-DISEASE-DISCARD-RUNTIME",
+            "C1C12-CONSTITUTION-REPLACEMENT-PREVENTION",
+            "C1C12-CONSTITUTION-SAVE-REPLAY",
+            "C1C12-CONSTITUTION-SELECTOR",
+            "C1C12-E2E-CONSTITUTION-CURIO"
+          ]
+        },
+        {
+          "side": "negative",
+          "triggerMatch": false,
+          "windowMatch": false,
+          "targetMatch": false,
+          "modifierMatch": false,
+          "modifierConsumerMatch": false,
+          "effectMatch": true,
+          "effectConsumerMatch": true,
+          "runtimeSliceSemanticComplete": false,
+          "implementationStatus": "PARTIAL",
+          "blockerCode": "TRINKET_MODIFIER_CONSUMER_MISSING",
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-book-of-holiness",
+      "productionReady": false,
+      "blockerCodes": [
+        "VOLUNTARY_DECLARATION_RUNTIME",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_CONVERT_INCOMING_HIT_TO_CRITICAL",
+        "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+        "TRINKET_EFFECT_CONSUMER_MISSING"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "triggerMatch": false,
+          "windowMatch": false,
+          "targetMatch": false,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "effectMatch": false,
+          "effectConsumerMatch": true,
+          "runtimeSliceSemanticComplete": false,
+          "implementationStatus": "UNSUPPORTED",
+          "blockerCode": "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+          "proofIds": []
+        },
+        {
+          "side": "negative",
+          "triggerMatch": false,
+          "windowMatch": false,
+          "targetMatch": false,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "effectMatch": false,
+          "effectConsumerMatch": false,
+          "runtimeSliceSemanticComplete": false,
+          "implementationStatus": "UNSUPPORTED",
+          "blockerCode": "TRINKET_EFFECT_CONSUMER_MISSING",
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-book-of-relaxation",
+      "productionReady": false,
+      "blockerCodes": [
+        "VOLUNTARY_DECLARATION_RUNTIME",
+        "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+        "TRINKET_MODIFIER_CONSUMER_MISSING"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "triggerMatch": false,
+          "windowMatch": false,
+          "targetMatch": false,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "effectMatch": false,
+          "effectConsumerMatch": true,
+          "runtimeSliceSemanticComplete": false,
+          "implementationStatus": "UNSUPPORTED",
+          "blockerCode": "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+          "proofIds": []
+        },
+        {
+          "side": "negative",
+          "triggerMatch": false,
+          "windowMatch": false,
+          "targetMatch": false,
+          "modifierMatch": false,
+          "modifierConsumerMatch": false,
+          "effectMatch": true,
+          "effectConsumerMatch": true,
+          "runtimeSliceSemanticComplete": false,
+          "implementationStatus": "UNSUPPORTED",
+          "blockerCode": "TRINKET_MODIFIER_CONSUMER_MISSING",
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-camouflage-cloak",
+      "productionReady": true,
+      "blockerCodes": [],
+      "sides": [
+        {
+          "side": "positive",
+          "triggerMatch": true,
+          "windowMatch": true,
+          "targetMatch": true,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "effectMatch": true,
+          "effectConsumerMatch": true,
+          "runtimeSliceSemanticComplete": true,
+          "implementationStatus": "IMPLEMENTED",
+          "blockerCode": null,
+          "proofIds": [
+            "C1C8-INCOMING-ATTACK-RUNTIME",
+            "C1C8-CAMOUFLAGE-POSITIVE-RUNTIME",
+            "C1C9-CAMOUFLAGE-CONDITION-RUNTIME",
+            "C1C8-INCOMING-ATTACK-SAVE-REPLAY",
+            "C1C8-CAMOUFLAGE-POSITIVE-SAVE",
+            "C1C9-CAMOUFLAGE-CONDITION-SAVE-REPLAY",
+            "C1C8-CAMOUFLAGE-POSITIVE-SELECTOR",
+            "C1C9-CAMOUFLAGE-CONDITION-SELECTOR",
+            "C1C8-E2E-CAMOUFLAGE-POSITIVE",
+            "C1C9-E2E-CAMOUFLAGE-CONDITION"
+          ]
+        },
+        {
+          "side": "negative",
+          "triggerMatch": true,
+          "windowMatch": true,
+          "targetMatch": true,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "effectMatch": true,
+          "effectConsumerMatch": true,
+          "runtimeSliceSemanticComplete": true,
+          "implementationStatus": "IMPLEMENTED",
+          "blockerCode": null,
+          "proofIds": [
+            "C1C8-INCOMING-ATTACK-RUNTIME",
+            "C1C8-CAMOUFLAGE-POSITIVE-RUNTIME",
+            "C1C9-CAMOUFLAGE-CONDITION-RUNTIME",
+            "C1C8-INCOMING-ATTACK-SAVE-REPLAY",
+            "C1C8-CAMOUFLAGE-POSITIVE-SAVE",
+            "C1C9-CAMOUFLAGE-CONDITION-SAVE-REPLAY",
+            "C1C8-CAMOUFLAGE-POSITIVE-SELECTOR",
+            "C1C9-CAMOUFLAGE-CONDITION-SELECTOR",
+            "C1C8-E2E-CAMOUFLAGE-POSITIVE",
+            "C1C9-E2E-CAMOUFLAGE-CONDITION"
+          ]
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-campers-helmet",
+      "productionReady": true,
+      "blockerCodes": [],
+      "sides": [
+        {
+          "side": "positive",
+          "triggerMatch": true,
+          "windowMatch": true,
+          "targetMatch": true,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "effectMatch": true,
+          "effectConsumerMatch": true,
+          "runtimeSliceSemanticComplete": true,
+          "implementationStatus": "IMPLEMENTED",
+          "blockerCode": null,
+          "proofIds": [
+            "C1C10-CAMPERS-CAMPING-RUNTIME",
+            "C1C10-CAMPERS-SCOUT-RUNTIME",
+            "C1C10-CAMPERS-SAVE-REPLAY",
+            "C1C10-CAMPERS-SELECTOR",
+            "C1C10-E2E-CAMPERS-CAMPING",
+            "C1C10-E2E-CAMPERS-SCOUT"
+          ]
+        },
+        {
+          "side": "negative",
+          "triggerMatch": true,
+          "windowMatch": true,
+          "targetMatch": true,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "effectMatch": true,
+          "effectConsumerMatch": true,
+          "runtimeSliceSemanticComplete": true,
+          "implementationStatus": "IMPLEMENTED",
+          "blockerCode": null,
+          "proofIds": [
+            "C1C10-CAMPERS-CAMPING-RUNTIME",
+            "C1C10-CAMPERS-SCOUT-RUNTIME",
+            "C1C10-CAMPERS-SAVE-REPLAY",
+            "C1C10-CAMPERS-SELECTOR",
+            "C1C10-E2E-CAMPERS-CAMPING",
+            "C1C10-E2E-CAMPERS-SCOUT"
+          ]
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-chirurgeons-charm",
+      "productionReady": false,
+      "blockerCodes": [
+        "TRINKET_TRIGGER_SCOPE_UNRESOLVED",
+        "TRINKET_TRIGGER_SCOPE_UNRESOLVED"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "triggerMatch": true,
+          "windowMatch": true,
+          "targetMatch": true,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "effectMatch": true,
+          "effectConsumerMatch": true,
+          "runtimeSliceSemanticComplete": true,
+          "implementationStatus": "PARTIAL",
+          "blockerCode": "TRINKET_TRIGGER_SCOPE_UNRESOLVED",
+          "proofIds": [
+            "C1C5-CHIRURGEONS-RUNTIME",
+            "C1C5-CHIRURGEONS-SAVE-REPLAY",
+            "C1C5-CHIRURGEONS-SELECTOR",
+            "C1C5-E2E-CHIRURGEONS"
+          ]
+        },
+        {
+          "side": "negative",
+          "triggerMatch": true,
+          "windowMatch": true,
+          "targetMatch": true,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "effectMatch": true,
+          "effectConsumerMatch": true,
+          "runtimeSliceSemanticComplete": true,
+          "implementationStatus": "PARTIAL",
+          "blockerCode": "TRINKET_TRIGGER_SCOPE_UNRESOLVED",
+          "proofIds": [
+            "C1C5-CHIRURGEONS-RUNTIME",
+            "C1C5-CHIRURGEONS-SAVE-REPLAY",
+            "C1C5-CHIRURGEONS-SELECTOR",
+            "C1C5-E2E-CHIRURGEONS"
+          ]
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-dark-bracer",
+      "productionReady": true,
+      "blockerCodes": [],
+      "sides": [
+        {
+          "side": "positive",
+          "triggerMatch": true,
+          "windowMatch": true,
+          "targetMatch": true,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "effectMatch": true,
+          "effectConsumerMatch": true,
+          "runtimeSliceSemanticComplete": true,
+          "implementationStatus": "IMPLEMENTED",
+          "blockerCode": null,
+          "proofIds": [
+            "C1C6-DARK-BRACER-RUNTIME",
+            "C1C6-DARK-BRACER-SAVE-REPLAY",
+            "C1C6-DARK-BRACER-SELECTOR",
+            "C1C6-E2E-DARK-BRACER"
+          ]
+        },
+        {
+          "side": "negative",
+          "triggerMatch": true,
+          "windowMatch": true,
+          "targetMatch": true,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "effectMatch": true,
+          "effectConsumerMatch": true,
+          "runtimeSliceSemanticComplete": true,
+          "implementationStatus": "IMPLEMENTED",
+          "blockerCode": null,
+          "proofIds": [
+            "C1C6-DARK-BRACER-RUNTIME",
+            "C1C6-DARK-BRACER-SAVE-REPLAY",
+            "C1C6-DARK-BRACER-SELECTOR",
+            "C1C6-E2E-DARK-BRACER"
+          ]
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-fortunate-armlet",
+      "productionReady": false,
+      "blockerCodes": [
+        "VOLUNTARY_DECLARATION_RUNTIME",
+        "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "triggerMatch": true,
+          "windowMatch": true,
+          "targetMatch": true,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "effectMatch": true,
+          "effectConsumerMatch": true,
+          "runtimeSliceSemanticComplete": true,
+          "implementationStatus": "IMPLEMENTED",
+          "blockerCode": null,
+          "proofIds": [
+            "C1C7-FORTUNATE-POSITIVE-RUNTIME",
+            "C1C7-FORTUNATE-POSITIVE-SAVE-REPLAY",
+            "C1C7-FORTUNATE-POSITIVE-SELECTOR",
+            "C1C7-E2E-FORTUNATE-POSITIVE"
+          ]
+        },
+        {
+          "side": "negative",
+          "triggerMatch": false,
+          "windowMatch": false,
+          "targetMatch": false,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "effectMatch": false,
+          "effectConsumerMatch": true,
+          "runtimeSliceSemanticComplete": false,
+          "implementationStatus": "PARTIAL",
+          "blockerCode": "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-protective-padlock",
+      "productionReady": false,
+      "blockerCodes": [
+        "NO_TRINKETMODIFIERTYPE_MOVEMENT",
+        "VOLUNTARY_DECLARATION_RUNTIME",
+        "TRINKET_MODIFIER_CONSUMER_MISSING"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "triggerMatch": true,
+          "windowMatch": true,
+          "targetMatch": true,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "effectMatch": true,
+          "effectConsumerMatch": true,
+          "runtimeSliceSemanticComplete": true,
+          "implementationStatus": "IMPLEMENTED",
+          "blockerCode": null,
+          "proofIds": [
+            "C1C8-INCOMING-ATTACK-RUNTIME",
+            "C1C8-PROTECTIVE-POSITIVE-RUNTIME",
+            "C1C8-INCOMING-ATTACK-SAVE-REPLAY",
+            "C1C8-PROTECTIVE-POSITIVE-SAVE",
+            "C1C8-PROTECTIVE-POSITIVE-SELECTOR",
+            "C1C8-E2E-PROTECTIVE-POSITIVE"
+          ]
+        },
+        {
+          "side": "negative",
+          "triggerMatch": false,
+          "windowMatch": false,
+          "targetMatch": false,
+          "modifierMatch": false,
+          "modifierConsumerMatch": false,
+          "effectMatch": true,
+          "effectConsumerMatch": true,
+          "runtimeSliceSemanticComplete": false,
+          "implementationStatus": "PARTIAL",
+          "blockerCode": "TRINKET_MODIFIER_CONSUMER_MISSING",
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-solar-bracer",
+      "productionReady": true,
+      "blockerCodes": [],
+      "sides": [
+        {
+          "side": "positive",
+          "triggerMatch": true,
+          "windowMatch": true,
+          "targetMatch": true,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "effectMatch": true,
+          "effectConsumerMatch": true,
+          "runtimeSliceSemanticComplete": true,
+          "implementationStatus": "IMPLEMENTED",
+          "blockerCode": null,
+          "proofIds": [
+            "C1C6-SOLAR-BRACER-RUNTIME",
+            "C1C6-SOLAR-BRACER-SAVE-REPLAY",
+            "C1C6-SOLAR-BRACER-SELECTOR",
+            "C1C6-E2E-SOLAR-BRACER"
+          ]
+        },
+        {
+          "side": "negative",
+          "triggerMatch": true,
+          "windowMatch": true,
+          "targetMatch": true,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "effectMatch": true,
+          "effectConsumerMatch": true,
+          "runtimeSliceSemanticComplete": true,
+          "implementationStatus": "IMPLEMENTED",
+          "blockerCode": null,
+          "proofIds": [
+            "C1C6-SOLAR-BRACER-RUNTIME",
+            "C1C6-SOLAR-BRACER-SAVE-REPLAY",
+            "C1C6-SOLAR-BRACER-SELECTOR",
+            "C1C6-E2E-SOLAR-BRACER"
+          ]
+        }
+      ]
+    }
+  ]
+}

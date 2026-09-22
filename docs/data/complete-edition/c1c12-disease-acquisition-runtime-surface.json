@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-12",
+  "callers": [
+    {
+      "caller": "src/game-engine/diseases/curio.ts",
+      "sourceKinds": [
+        "curio"
+      ],
+      "productionReachable": true,
+      "stagedThroughBookWindow": true,
+      "notes": "Guaranteed and chance Curio outcomes freeze after result selection."
+    },
+    {
+      "caller": "src/game-engine/exploration.ts",
+      "sourceKinds": [
+        "exploration-event"
+      ],
+      "productionReachable": true,
+      "stagedThroughBookWindow": true,
+      "notes": "Victim, roll, and Disease are selected before staging."
+    },
+    {
+      "caller": "src/game-engine/diseases/battle-bridge.ts",
+      "sourceKinds": [
+        "monster-skill"
+      ],
+      "productionReachable": true,
+      "stagedThroughBookWindow": true,
+      "notes": "Remaining queued infections stay queued while the first transaction is paused."
+    },
+    {
+      "caller": "src/store/useGameStore.ts",
+      "sourceKinds": [
+        "debug"
+      ],
+      "productionReachable": false,
+      "stagedThroughBookWindow": true,
+      "notes": "Debug parity path; not used as sole production proof."
+    }
+  ]
+}
