@@ -220,6 +220,9 @@ function applyOneEffect(
     case 'roll-provision-dice':
       // Deferred: the persisted dungeon-action bridge rolls and consumes Wild choices.
       return campaign;
+    case 'discard-disease':
+      // Deferred: only disease-trinket-bridge may consume this context-bound effect.
+      return campaign;
     case 'log-only':
       return pushLog(campaign, `${trinketName}：${effect.note}`, 'info');
     default:
@@ -257,7 +260,8 @@ function writeTransaction(
 export function useTrinket(
   campaign: CampaignState,
   opportunityId: string,
-  ctx?: RuleEventContext
+  ctx?: RuleEventContext,
+  options?: { allowDiseaseDiscard?: boolean },
 ): UseTrinketResult {
   const error = trinketUseError(campaign, opportunityId);
   if (error) return { campaign, error, appliedModifiers: [], appliedEffects: [], usedOpportunity: null };
@@ -267,6 +271,9 @@ export function useTrinket(
   const inst = (hero.equippedTrinkets ?? []).find((t) => t.instanceId === opp.trinketInstanceId)!;
   const def = getTrinketById(inst.trinketId);
   const side = getTrinketSide(inst.trinketId, inst.currentSide)!;
+  if (side.effects.some((effect) => effect.type === 'discard-disease') && !options?.allowDiseaseDiscard) {
+    return { campaign, error: '该效果只能在疾病获取事务中结算。', appliedModifiers: [], appliedEffects: [], usedOpportunity: null };
+  }
   const name = trinketDisplayName(inst.trinketId);
   const usedSide = inst.currentSide;
   const flippedTo = otherSide(usedSide);

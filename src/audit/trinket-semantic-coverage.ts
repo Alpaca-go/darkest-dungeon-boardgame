@@ -122,6 +122,7 @@ export function canonicalRuntimeEffect(value: ActiveEffectDefinition, target: st
       rounding: value.rounding === 'ceil' ? 'up' : value.rounding,
     } };
     case 'roll-provision-dice': return { type: 'roll-provision-dice', target: value.target, parameters: { count: value.count } };
+    case 'discard-disease': return { type: 'discard-disease', target: value.target, parameters: { immediately: value.immediately } };
     case 'log-only': return { type: 'log-only', target, parameters: { note: value.note } };
   }
 }
@@ -135,6 +136,7 @@ const RUNTIME_WINDOW_BINDINGS: Readonly<Record<string, { trigger: string; target
   'before-incoming-damage-applied': { trigger: 'hero-hit-by-attack', target: 'equipped-hero' },
   'before-camp-resolution': { trigger: 'camping', target: 'party-provisions' },
   'before-scout-resolution': { trigger: 'scout', target: 'equipped-hero' },
+  'before-disease-acquisition-commit': { trigger: 'disease-acquired', target: 'new-disease' },
 });
 function bindingForRuntime(runtime: TrinketSideDefinition | undefined): RuntimeTrinketSemanticBindings {
   if (!runtime || runtime.useWindows.length !== 1) return { trigger: null, window: null, target: null };

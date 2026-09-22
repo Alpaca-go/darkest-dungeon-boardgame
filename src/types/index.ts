@@ -831,6 +831,8 @@ export interface CampaignState {
   processedDiseaseEventIds: string[];
   /** 进行中的 Disease 替换事务（刷新恢复用；完成后置 null）。 */
   pendingDiseaseTransaction: PendingDiseaseTransaction | null;
+  /** Disease acquisition frozen before hero.disease is mutated. */
+  pendingDiseaseTrinketAction: PendingDiseaseTrinketAction | null;
   /** 最近一次 Disease 获取结果（Overlay 数据源；确认后置 null）。 */
   lastDiseaseAcquisition: DiseaseAcquisitionRecord | null;
   // ---- Phase 8D：Quest XP / Hero Level / Skill Level / Guild ----
@@ -1436,7 +1438,8 @@ export type DiseaseAcquisitionOutcome =
   | 'replaced-quirk-decision-pending'
   | 'replaced-hero-died'
   | 'discarded-dead-hero'
-  | 'discarded-invalid';
+  | 'discarded-invalid'
+  | 'discarded-by-trinket';
 
 /** Disease 获取记录（永久保存，用于 UI / 幂等 / 回归验证）。 */
 export interface DiseaseAcquisitionRecord {
@@ -1449,6 +1452,8 @@ export interface DiseaseAcquisitionRecord {
   negativeQuirkId?: string;
   pendingQuirkDecisionId?: string;
   deathRecordId?: string;
+  preventedByTrinketId?: string;
+  preventedByTrinketInstanceId?: string;
   outcome: DiseaseAcquisitionOutcome;
   sourceEventId: string;
   createdAt: string;
@@ -1462,6 +1467,21 @@ export interface PendingDiseaseTransaction {
   previousDiseaseId: string | null;
   negativeQuirkId?: string;
   status: 'disease-written' | 'quirk-processing' | 'decision-pending' | 'completed' | 'hero-died';
+}
+
+/** Frozen pre-commit disease transaction used by disease-reactive Trinkets. */
+export interface PendingDiseaseTrinketAction {
+  kind: 'disease-acquisition';
+  rootEventId: string;
+  sourceEventId: string;
+  heroId: string;
+  diseaseId: string;
+  source: DiseaseSourceKind;
+  questId: string | null;
+  deathSource?: 'battle' | 'exploration' | 'quest-result';
+  deathResumePhase?: 'dungeon-explore' | 'quest-result' | 'hamlet';
+  stage: 'trinket-window';
+  processedTrinketInstanceIds: string[];
 }
 
 /** Sanitarium 服务项。 */

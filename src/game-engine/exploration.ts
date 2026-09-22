@@ -6,7 +6,7 @@ import { pushLog } from './log';
 import { resolveDamage } from './damage';
 import { applyStressBatch } from './stress';
 import { createRuleEventContext, emitPartyRuleEvent } from './quirks';
-import { acquireDisease } from './diseases/acquire-disease';
+import { beginDiseaseAcquisitionWithTrinkets } from './trinkets/disease-trinket-bridge';
 
 /**
  * Phase 8B：向全体存活英雄发射一个探索时机事件。
@@ -152,7 +152,7 @@ export function applyExplorationResult(
         `污秽遗骸：${victim.name} 掷出 ${roll}（≤4），被感染！`,
         'danger'
       );
-      return acquireDisease(next, {
+      return beginDiseaseAcquisitionWithTrinkets(next, {
         heroId: victim.instanceId,
         diseaseId: disease.id,
         source: 'exploration-event',

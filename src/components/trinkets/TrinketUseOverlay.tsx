@@ -1,5 +1,6 @@
 import { useGameStore } from '../../store/useGameStore';
 import { openOpportunities } from '../../game-engine/trinkets/trinket-opportunities';
+import { getDiseaseById } from '../../data/diseases';
 
 /**
  * Phase 8C：饰品使用机会浮层（阻塞式，全局挂载）。
@@ -19,6 +20,8 @@ export default function TrinketUseOverlay() {
   const wildDice = dungeonAction?.pendingProvisionDice?.filter((die) => die.selectedFace === null) ?? [];
   if (opps.length === 0 && wildDice.length === 0) return null;
   const incoming = campaign.battle?.pendingMonsterAttack;
+  const diseaseAction = campaign.pendingDiseaseTrinketAction;
+  const incomingDisease = diseaseAction ? getDiseaseById(diseaseAction.diseaseId) : undefined;
   const incomingMonster = incoming
     ? campaign.battle?.monsters.find((unit) => unit.id === incoming.monsterUnitId)
     : undefined;
@@ -42,6 +45,12 @@ export default function TrinketUseOverlay() {
               {dungeonAction.kind === 'scout' ? 'Scout 结算前' : 'Rest at Camp 结算前'}
             </div>
             <div className="text-dd-muted">原始动作已冻结；饰品机会结清后只执行一次。</div>
+          </div>
+        )}
+        {diseaseAction && (
+          <div className="mb-3 rounded border border-lime-800/70 bg-black/25 p-3 text-sm" data-testid="disease-trinket-context">
+            <div className="text-dd-text">疾病获取结算：{incomingDisease?.name ?? diseaseAction.diseaseId}</div>
+            <div className="text-dd-muted">新疾病尚未写入英雄；使用 Book of Constitution 可立即丢弃。</div>
           </div>
         )}
         {incoming && incomingMonster && incomingHero && (

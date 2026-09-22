@@ -11,7 +11,7 @@
 
 import type { CampaignState } from '../../types';
 import { createRuleEventContext, emitRuleEvent } from '../quirks';
-import { acquireDisease } from './acquire-disease';
+import { beginDiseaseAcquisitionWithTrinkets } from '../trinkets/disease-trinket-bridge';
 import { syncHeroMentalToBattle } from '../mental-log';
 
 /**
@@ -52,8 +52,9 @@ export function processBattleDiseaseInfections(campaign: CampaignState): Campaig
   const queued = b.pendingDiseaseInfections;
   let c: CampaignState = { ...campaign, battle: { ...b, pendingDiseaseInfections: [] } };
 
-  for (const inf of queued) {
-    c = acquireDisease(c, {
+  for (let index = 0; index < queued.length; index += 1) {
+    const inf = queued[index];
+    const result = beginDiseaseAcquisitionWithTrinkets(c, {
       heroId: inf.heroInstanceId,
       diseaseId: inf.diseaseId,
       source: 'monster-skill',
@@ -61,7 +62,15 @@ export function processBattleDiseaseInfections(campaign: CampaignState): Campaig
       questId: c.currentQuestId,
       deathSource: 'battle',
       deathResumePhase: 'dungeon-explore',
-    }).campaign;
+    });
+    c = result.campaign;
+    if (result.paused) {
+      const remaining = queued.slice(index + 1);
+      if (remaining.length > 0 && c.battle) {
+        c = { ...c, battle: { ...c.battle, pendingDiseaseInfections: remaining } };
+      }
+      break;
+    }
   }
   return c;
 }

@@ -1422,8 +1422,43 @@ export function migrateCampaignToV20(campaign: CampaignState): CampaignState {
   };
 }
 
+function sanitizePendingDiseaseTrinketAction(campaign: CampaignState): CampaignState {
+  const raw = campaign as CampaignState & Record<string, unknown>;
+  const candidate = raw.pendingDiseaseTrinketAction;
+  if (candidate === undefined || candidate === null) {
+    return { ...campaign, pendingDiseaseTrinketAction: null };
+  }
+  if (typeof candidate !== 'object' || Array.isArray(candidate)) {
+    return { ...campaign, pendingDiseaseTrinketAction: null };
+  }
+  const pending = candidate as NonNullable<CampaignState['pendingDiseaseTrinketAction']>;
+  const hero = campaign.heroes.find((entry) => entry.instanceId === pending.heroId);
+  const valid = pending.kind === 'disease-acquisition'
+    && pending.stage === 'trinket-window'
+    && typeof pending.sourceEventId === 'string' && pending.sourceEventId.length > 0
+    && pending.rootEventId === `disease-acquisition:${pending.sourceEventId}`
+    && typeof pending.diseaseId === 'string' && Boolean(getDiseaseById(pending.diseaseId))
+    && Boolean(hero && hero.isAlive && !hero.dead)
+    && !campaign.processedDiseaseEventIds.includes(pending.sourceEventId)
+    && Array.isArray(pending.processedTrinketInstanceIds)
+    && pending.processedTrinketInstanceIds.every((id) => typeof id === 'string')
+    && campaign.pendingTrinketUseOpportunities.some(
+      (entry) => entry.rootEventId === pending.rootEventId && entry.status === 'open',
+    );
+  if (valid) return { ...campaign, pendingDiseaseTrinketAction: pending };
+  const rootEventId = typeof pending.rootEventId === 'string' ? pending.rootEventId : null;
+  return {
+    ...campaign,
+    pendingDiseaseTrinketAction: null,
+    pendingTrinketUseOpportunities: rootEventId
+      ? campaign.pendingTrinketUseOpportunities.filter((entry) => entry.rootEventId !== rootEventId)
+      : campaign.pendingTrinketUseOpportunities,
+  };
+}
+
 /** v21 persists Scout/Camp intents and already-rolled Provision dice without rerolling. */
-export function migrateCampaignToV21(campaign: CampaignState): CampaignState {
+export function migrateCampaignToV21(campaignInput: CampaignState): CampaignState {
+  const campaign = sanitizePendingDiseaseTrinketAction(campaignInput);
   const raw = campaign as CampaignState & Record<string, unknown>;
   const candidate = raw.pendingDungeonTrinketAction;
   if (candidate === undefined || candidate === null) {

@@ -42,9 +42,9 @@ import {
 import type { QuirkDecisionChoice } from '../game-engine/quirks';
 // ---- Phase 8B：Disease / Sanitarium ----
 import {
-  acquireDisease as engineAcquireDisease,
   finalizeDiseaseTransaction,
 } from '../game-engine/diseases/acquire-disease';
+import { beginDiseaseAcquisitionWithTrinkets as engineBeginDiseaseAcquisitionWithTrinkets } from '../game-engine/trinkets/disease-trinket-bridge';
 import {
   useSanitariumRemoveDisease as engineRemoveDisease,
   sanitariumRemoveDiseaseError,
@@ -787,7 +787,7 @@ export const useGameStore = create<GameStore>((set, get) => {
     debugGrantDisease: (heroId, diseaseId) => {
       const c = get().campaign;
       if (!c) return;
-      const { campaign: acquired, outcome } = engineAcquireDisease(c, {
+      const { campaign: acquired } = engineBeginDiseaseAcquisitionWithTrinkets(c, {
         heroId,
         diseaseId,
         source: 'debug',
@@ -808,7 +808,7 @@ export const useGameStore = create<GameStore>((set, get) => {
       let next = acquired;
       if (next === c) return;
       // 替换 Disease 时抽到的负面 Quirk 可能触发 Madness Death
-      if (outcome === 'replaced-hero-died' && next.battle) {
+      if (next.lastDiseaseAcquisition?.outcome === 'replaced-hero-died' && next.battle) {
         const settled = settleBattleState(next);
         next = settled.campaign;
       }

@@ -69,7 +69,8 @@ export type TrinketUseWindow =
   | 'battle-started'
   | 'battle-ended'
   | 'before-scout-resolution'
-  | 'before-camp-resolution';
+  | 'before-camp-resolution'
+  | 'before-disease-acquisition-commit';
 
 // ---------------------------------------------------------------------------
 // 主动修正器 / 主动效果
@@ -97,7 +98,7 @@ export interface ActiveModifierDefinition {
 }
 
 /** Source-semantic target of an active Trinket effect. */
-export type TrinketEffectTarget = 'equipped-hero' | 'party-provisions';
+export type TrinketEffectTarget = 'equipped-hero' | 'party-provisions' | 'new-disease';
 
 /** 主动效果：一律回落到官方统一管线（伤害/治疗/压力/状态）。 */
 export type ActiveEffectDefinition =
@@ -123,6 +124,7 @@ export type ActiveEffectDefinition =
       rounding: 'ceil';
     }
   | { type: 'roll-provision-dice'; count: number; target: 'party-provisions' }
+  | { type: 'discard-disease'; immediately: true; target: 'new-disease' }
   | { type: 'log-only'; note: string };
 
 export type ProvisionFace = 'food' | 'bandage' | 'potion' | 'torch' | 'tool' | 'wild';

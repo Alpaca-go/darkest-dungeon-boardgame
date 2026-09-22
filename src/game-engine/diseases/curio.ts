@@ -9,7 +9,7 @@ import type { CampaignState } from '../../types';
 import { getCurioById } from '../../data/curios';
 import { createId, d10 } from '../random';
 import { pushLog } from '../log';
-import { acquireDisease } from './acquire-disease';
+import { beginDiseaseAcquisitionWithTrinkets } from '../trinkets/disease-trinket-bridge';
 import { recordQuestQualificationEvent } from '../quests/quest-runtime';
 
 export interface CurioInteractionResult {
@@ -79,7 +79,7 @@ export function interactWithCurio(
     case 'disease-guaranteed': {
       next = pushLog(next, `${curio.name}：${hero.name} 必定被感染！`, 'danger');
       return {
-        campaign: acquireDisease(next, {
+        campaign: beginDiseaseAcquisitionWithTrinkets(next, {
           heroId: hero.instanceId,
           diseaseId: curio.effect.diseaseId,
           source: 'curio',
@@ -109,7 +109,7 @@ export function interactWithCurio(
         'danger'
       );
       return {
-        campaign: acquireDisease(next, {
+        campaign: beginDiseaseAcquisitionWithTrinkets(next, {
           heroId: hero.instanceId,
           diseaseId: curio.effect.diseaseId,
           source: 'curio',

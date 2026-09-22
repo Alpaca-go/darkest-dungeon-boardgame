@@ -56,6 +56,27 @@ export interface AcquireDiseaseResult {
   record?: DiseaseAcquisitionRecord;
 }
 
+export type DiseaseAcquisitionClassification =
+  | 'invalid'
+  | 'dead'
+  | 'duplicate'
+  | 'would-add'
+  | 'would-replace';
+
+/** Read-only preflight for pre-commit reaction windows. */
+export function classifyDiseaseAcquisition(
+  campaign: CampaignState,
+  input: AcquireDiseaseInput,
+): DiseaseAcquisitionClassification {
+  if (campaign.processedDiseaseEventIds.includes(input.sourceEventId)) return 'invalid';
+  const definition = getDiseaseById(input.diseaseId);
+  if (!definition || !isRealDiseaseId(input.diseaseId)) return 'invalid';
+  const hero = campaign.heroes.find((entry) => entry.instanceId === input.heroId);
+  if (!hero || hero.dead || !hero.isAlive) return 'dead';
+  if (!hero.disease) return 'would-add';
+  return hero.disease.diseaseId === definition.id ? 'duplicate' : 'would-replace';
+}
+
 /** 随机抽 1 个该英雄尚未拥有的 Negative Quirk；全部拥有时退化为任意 Negative Quirk。 */
 export function drawNegativeQuirkId(campaign: CampaignState, heroId: string): string {
   const hero = campaign.heroes.find((h) => h.instanceId === heroId);
@@ -262,6 +283,45 @@ export function acquireDisease(
   next = setTransaction(next, null);
   next = pushLog(next, `${hero.name} 因病情恶化获得负面怪癖「${quirkName}」。`, 'warning');
   return finish(next, 'replaced', base);
+}
+
+/** Complete a valid acquisition event without ever committing its incoming Disease. */
+export function discardDiseaseAcquisitionByTrinket(
+  campaign: CampaignState,
+  input: AcquireDiseaseInput,
+  trinketId: string,
+  trinketInstanceId: string,
+): AcquireDiseaseResult {
+  if (campaign.processedDiseaseEventIds.includes(input.sourceEventId)) {
+    return { campaign, outcome: 'duplicate-discarded' };
+  }
+  const hero = campaign.heroes.find((entry) => entry.instanceId === input.heroId);
+  const definition = getDiseaseById(input.diseaseId);
+  if (!hero || hero.dead || !hero.isAlive || !definition || !isRealDiseaseId(input.diseaseId)) {
+    return acquireDisease(campaign, input);
+  }
+  const record: DiseaseAcquisitionRecord = {
+    id: createId('dacq'),
+    heroId: hero.instanceId,
+    heroName: hero.name,
+    questId: input.questId ?? campaign.currentQuestId ?? null,
+    incomingDiseaseId: definition.id,
+    outcome: 'discarded-by-trinket',
+    sourceEventId: input.sourceEventId,
+    preventedByTrinketId: trinketId,
+    preventedByTrinketInstanceId: trinketInstanceId,
+    createdAt: nowIso(),
+  };
+  const logged = pushLog(
+    campaign,
+    `${hero.name} 使用饰品立即丢弃了新疾病「${definition.name}」。`,
+    'success',
+  );
+  return {
+    campaign: pushRecord(markProcessed(logged, input.sourceEventId), record),
+    outcome: 'discarded-by-trinket',
+    record,
+  };
 }
 
 /**

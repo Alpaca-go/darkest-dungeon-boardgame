@@ -34,6 +34,7 @@ export const WIRED_WINDOWS: readonly TrinketUseWindow[] = [
   'before-healing-received-resolution',
   'before-scout-resolution',
   'before-camp-resolution',
+  'before-disease-acquisition-commit',
 ] as const;
 
 export function isWiredWindow(w: TrinketUseWindow): boolean {
@@ -141,6 +142,9 @@ export function buildOpportunityPreview(side: TrinketSideDefinition): string {
         break;
       case 'roll-provision-dice':
         parts.push(`掷 ${e.count} 颗补给骰并加入小队补给池`);
+        break;
+      case 'discard-disease':
+        parts.push('立即丢弃本次新疾病');
         break;
       case 'log-only':
         parts.push(e.note);

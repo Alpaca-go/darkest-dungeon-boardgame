@@ -31,6 +31,7 @@ import { useTrinket, declineTrinketUse, sumModifiers } from './use-trinket';
 import { findHero } from './trinket-state';
 import { synchronizeCommunityGuardianDeaths } from '../campaign/act-four/community-guardian-battle';
 import { beginHealingTrinketAction, resolveHealingTrinketOpportunity } from './healing-trinket-bridge';
+import { resolveDiseaseTrinketOpportunity } from './disease-trinket-bridge';
 
 function hasOpenForRoot(campaign: CampaignState, rootEventId: string): boolean {
   return openOpportunities(campaign).some((entry) => entry.rootEventId === rootEventId);
@@ -253,6 +254,11 @@ export function resolveTrinketOpportunity(
 ): ResolveOpportunityResult {
   const opp = findOpportunity(campaign, opportunityId);
   if (!opp) return { campaign, error: '使用机会不存在。', resumed: false };
+  if (campaign.pendingDiseaseTrinketAction
+    && opp.rootEventId === campaign.pendingDiseaseTrinketAction.rootEventId) {
+    const resolved = resolveDiseaseTrinketOpportunity(campaign, opportunityId, action);
+    return { campaign: resolved.campaign, error: resolved.error, resumed: !resolved.paused };
+  }
   if (campaign.pendingHealingAction && opp.rootEventId === campaign.pendingHealingAction.eventId) {
     return resolveHealingTrinketOpportunity(campaign, opportunityId, action);
   }

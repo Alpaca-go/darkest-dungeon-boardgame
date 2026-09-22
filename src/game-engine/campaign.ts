@@ -100,6 +100,7 @@ export function createNewCampaign(
     diseaseTreatmentRecords: [],
     processedDiseaseEventIds: [],
     pendingDiseaseTransaction: null,
+    pendingDiseaseTrinketAction: null,
     lastDiseaseAcquisition: null,
     // ---- Phase 8D ----
     objectiveProgress: [],

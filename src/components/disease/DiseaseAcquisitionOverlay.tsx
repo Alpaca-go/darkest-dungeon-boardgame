@@ -25,11 +25,12 @@ export default function DiseaseAcquisitionOverlay() {
   const quirk = record.negativeQuirkId ? getQuirkById(record.negativeQuirkId) : undefined;
 
   const isDuplicate = record.outcome === 'duplicate-discarded';
+  const isPrevented = record.outcome === 'discarded-by-trinket';
   const isDeath = record.outcome === 'replaced-hero-died';
   const isReplace =
     record.outcome === 'replaced' || record.outcome === 'replaced-quirk-decision-pending' || isDeath;
 
-  const title = isDuplicate ? '同种疾病 · 无变化' : isReplace ? '疾病恶化！' : '感染疾病！';
+  const title = isPrevented ? '疾病已被丢弃' : isDuplicate ? '同种疾病 · 无变化' : isReplace ? '疾病恶化！' : '感染疾病！';
   const tone = isDeath
     ? 'border-red-500 text-red-300'
     : isDuplicate
@@ -50,7 +51,11 @@ export default function DiseaseAcquisitionOverlay() {
             <span className="font-semibold">{record.heroName}</span> 接触到了{' '}
             <span className="font-bold">{incoming?.name ?? record.incomingDiseaseId}</span>。
           </p>
-          {isDuplicate ? (
+          {isPrevented ? (
+            <p className="text-lime-300 text-xs">
+              Book of Constitution 阻止了这次感染；英雄原有疾病状态保持不变。
+            </p>
+          ) : isDuplicate ? (
             <p className="text-dd-muted text-xs">
               该英雄已经患有同种疾病，新的感染被丢弃（每名英雄最多携带 1 种疾病）。
             </p>
