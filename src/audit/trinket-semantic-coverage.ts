@@ -121,6 +121,7 @@ export function canonicalRuntimeEffect(value: ActiveEffectDefinition, target: st
       factor: value.numerator / value.denominator,
       rounding: value.rounding === 'ceil' ? 'up' : value.rounding,
     } };
+    case 'roll-provision-dice': return { type: 'roll-provision-dice', target: value.target, parameters: { count: value.count } };
     case 'log-only': return { type: 'log-only', target, parameters: { note: value.note } };
   }
 }
@@ -132,6 +133,8 @@ const RUNTIME_WINDOW_BINDINGS: Readonly<Record<string, { trigger: string; target
   'before-healing-received-resolution': { trigger: 'hero-is-healed', target: 'healing-received' },
   'before-incoming-hit-resolution': { trigger: 'incoming-attack', target: 'equipped-hero' },
   'before-incoming-damage-applied': { trigger: 'hero-hit-by-attack', target: 'equipped-hero' },
+  'before-camp-resolution': { trigger: 'camping', target: 'party-provisions' },
+  'before-scout-resolution': { trigger: 'scout', target: 'equipped-hero' },
 });
 function bindingForRuntime(runtime: TrinketSideDefinition | undefined): RuntimeTrinketSemanticBindings {
   if (!runtime || runtime.useWindows.length !== 1) return { trigger: null, window: null, target: null };
@@ -140,6 +143,9 @@ function bindingForRuntime(runtime: TrinketSideDefinition | undefined): RuntimeT
     if (semantic?.trigger === 'hero-skill-resolution' && condition.type === 'in-battle') out['in-battle'] = 'C1BR-HERO-SKILL-WINDOW-DERIVATION:DERIVED_FROM_TRIGGER';
     if ((semantic?.trigger === 'incoming-attack' || semantic?.trigger === 'hero-hit-by-attack') && condition.type === 'in-battle') {
       out['in-battle'] = 'C1C8-MONSTER-ATTACK-WINDOW-DERIVATION:DERIVED_FROM_TRIGGER';
+    }
+    if ((semantic?.trigger === 'camping' || semantic?.trigger === 'scout') && condition.type === 'out-of-battle') {
+      out['out-of-battle'] = 'C1C10-DUNGEON-ACTION-WINDOW-DERIVATION:DERIVED_FROM_TRIGGER';
     }
     if (semantic?.trigger === 'hero-skill-resolution' && condition.type === 'is-acting-hero') out['is-acting-hero'] = 'C1BR-SOURCE-TRIGGER-ACTOR-DERIVATION:DERIVED_FROM_TRIGGER';
     return out;

@@ -37,6 +37,7 @@ import type {
   NomadWagonState,
   PendingTrinketAllocation,
   PendingTrinketUseTransaction,
+  PendingDungeonTrinketAction,
   TrinketAcquisitionRecord,
   TrinketTransferRecord,
   TrinketUseOpportunity,
@@ -856,6 +857,8 @@ export interface CampaignState {
   pendingHealingAction: PendingHealingAction | null;
   /** 进行中的 Trinket 使用事务（防同一次使用重复结算 / 重复翻面）。 */
   pendingTrinketUseTransaction: PendingTrinketUseTransaction | null;
+  /** Scout/Camp command frozen while dungeon Trinket choices are resolved. */
+  pendingDungeonTrinketAction: PendingDungeonTrinketAction | null;
   /** Trinket 获取记录（永久保存）。 */
   trinketAcquisitionRecords: TrinketAcquisitionRecord[];
   /** Trinket 使用记录（永久保存，保留最近 200 条）。 */

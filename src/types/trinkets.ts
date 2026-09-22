@@ -67,7 +67,9 @@ export type TrinketUseWindow =
   | 'after-dungeon-roll'
   | 'room-entered'
   | 'battle-started'
-  | 'battle-ended';
+  | 'battle-ended'
+  | 'before-scout-resolution'
+  | 'before-camp-resolution';
 
 // ---------------------------------------------------------------------------
 // 主动修正器 / 主动效果
@@ -95,7 +97,7 @@ export interface ActiveModifierDefinition {
 }
 
 /** Source-semantic target of an active Trinket effect. */
-export type TrinketEffectTarget = 'equipped-hero';
+export type TrinketEffectTarget = 'equipped-hero' | 'party-provisions';
 
 /** 主动效果：一律回落到官方统一管线（伤害/治疗/压力/状态）。 */
 export type ActiveEffectDefinition =
@@ -120,7 +122,45 @@ export type ActiveEffectDefinition =
       denominator: number;
       rounding: 'ceil';
     }
+  | { type: 'roll-provision-dice'; count: number; target: 'party-provisions' }
   | { type: 'log-only'; note: string };
+
+export type ProvisionFace = 'food' | 'bandage' | 'potion' | 'torch' | 'tool' | 'wild';
+
+export interface PendingProvisionDie {
+  index: number;
+  roll: number;
+  rolledFace: ProvisionFace;
+  selectedFace: Exclude<ProvisionFace, 'wild'> | null;
+}
+
+export interface FrozenRestAllocation {
+  allocations: Array<{ heroId: string; resource: 'life' | 'stress'; points: number }>;
+}
+
+/** Persisted exploration action paused before its authoritative Scout/Camp commit. */
+export type PendingDungeonTrinketAction =
+  | {
+      kind: 'scout';
+      rootEventId: string;
+      questId: string;
+      questRunId: string;
+      roomId: string;
+      stage: 'trinket-window' | 'provision-choice';
+      processedTrinketInstanceIds: string[];
+      pendingProvisionDice: PendingProvisionDie[] | null;
+    }
+  | {
+      kind: 'camp';
+      rootEventId: string;
+      questId: string;
+      questRunId: string;
+      roomId: string;
+      stage: 'trinket-window' | 'provision-choice';
+      processedTrinketInstanceIds: string[];
+      pendingProvisionDice: PendingProvisionDie[] | null;
+      allocation: FrozenRestAllocation;
+    };
 
 /** 使用前置条件（全部满足才开窗）。 */
 export type TrinketUseCondition =

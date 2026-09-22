@@ -28,7 +28,8 @@ describe('C1C-9 exact condition semantics', () => {
       effectType: 'apply-condition-stack', consumerPrimitive: 'TRINKET_CONDITION_STACK_CONSUMER', wired: true,
     });
     expect(capability.productionReady).toBe(true);
-    expect(LEVEL_2_TRINKET_DECK_COVERAGE.productionReadyCount).toBe(3);
+    // Later Level-2 closures may raise the aggregate while Camouflage remains ready.
+    expect(LEVEL_2_TRINKET_DECK_COVERAGE.productionReadyCount).toBeGreaterThanOrEqual(3);
     expect(LEVEL_2_TRINKET_DECK_COVERAGE.completeForRandomDraw).toBe(false);
   });
 

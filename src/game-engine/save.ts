@@ -32,6 +32,8 @@ import { createInitialCampaignProgress } from './campaign/campaign-progress';
 import type { ActFourState } from '../types/act-four';
 import { createInitialActFourState, sanitizeActFourState } from './campaign/act-four/act-four-state';
 import { getMonsterSkillById } from '../data/monster-skills';
+import { canScout } from './dungeon';
+import { validateRestAllocation, type RestAllocation } from './quests/quest-runtime';
 
 // ---------------------------------------------------------------------------
 // 存档格式（Phase 6 升级为 v3 SaveFile）
@@ -90,7 +92,7 @@ export const STORAGE_KEY = 'dd-web-prototype-save-v1';
  *      Load 后由存档数据自行补齐（如缺失则视为空字符串，等待下次 selectQuest 重新生成）。
  *      迁移**不**根据 questCount 推断 Act，**不**代掷任何随机数，**不**触发 Threat Draw。
  */
-export const SAVE_VERSION = 20;
+export const SAVE_VERSION = 21;
 
 /**
  * v2 存档文件结构。
@@ -116,7 +118,7 @@ interface SaveEnvelopeV1 {
 }
 
 /** 可被迁移到当前版本的历史存档版本号。 */
-const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
+const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 
 /** 读档结果：区分正常 / 无存档 / 损坏 / 版本不支持。 */
 export type LoadStatus = 'ok' | 'empty' | 'corrupt' | 'unsupported';
@@ -1420,6 +1422,53 @@ export function migrateCampaignToV20(campaign: CampaignState): CampaignState {
   };
 }
 
+/** v21 persists Scout/Camp intents and already-rolled Provision dice without rerolling. */
+export function migrateCampaignToV21(campaign: CampaignState): CampaignState {
+  const raw = campaign as CampaignState & Record<string, unknown>;
+  const candidate = raw.pendingDungeonTrinketAction;
+  if (candidate === undefined || candidate === null) {
+    return { ...campaign, saveVersion: SAVE_VERSION, pendingDungeonTrinketAction: null };
+  }
+  if (typeof candidate !== 'object' || Array.isArray(candidate)) {
+    return { ...campaign, saveVersion: SAVE_VERSION, pendingDungeonTrinketAction: null };
+  }
+  const pending = candidate as NonNullable<CampaignState['pendingDungeonTrinketAction']>;
+  const faces = ['food', 'bandage', 'potion', 'torch', 'tool', 'wild'];
+  const choices = faces.slice(0, -1);
+  const diceValid = pending.pendingProvisionDice === null || (Array.isArray(pending.pendingProvisionDice)
+    && pending.pendingProvisionDice.length > 0
+    && pending.pendingProvisionDice.every((die, index) => Number.isInteger(die.index) && die.index === index
+      && Number.isInteger(die.roll) && die.roll >= 1 && die.roll <= 6
+      && die.rolledFace === faces[die.roll - 1]
+      && (die.rolledFace === 'wild' ? die.selectedFace === null || choices.includes(die.selectedFace as string)
+        : die.selectedFace === die.rolledFace)));
+  const rootOpportunities = campaign.pendingTrinketUseOpportunities.filter((entry) => entry.rootEventId === pending.rootEventId);
+  const baseValid = campaign.gamePhase === 'dungeon-explore' && !campaign.battle
+    && (pending.kind === 'scout' || pending.kind === 'camp')
+    && typeof pending.rootEventId === 'string' && pending.rootEventId.length > 0
+    && typeof pending.questId === 'string' && campaign.currentQuestId === pending.questId
+    && typeof pending.questRunId === 'string' && campaign.dungeon?.questRunId === pending.questRunId
+    && typeof pending.roomId === 'string' && campaign.dungeon?.currentRoomId === pending.roomId
+    && (pending.stage === 'trinket-window' || pending.stage === 'provision-choice')
+    && Array.isArray(pending.processedTrinketInstanceIds)
+    && pending.processedTrinketInstanceIds.every((id) => typeof id === 'string')
+    && diceValid
+    && (pending.pendingProvisionDice !== null || rootOpportunities.some((entry) => entry.status === 'open'));
+  const originalActionValid = pending.kind === 'scout'
+    ? Boolean(campaign.dungeon && canScout(campaign.dungeon))
+    : pending.kind === 'camp' && validateRestAllocation(campaign, pending.allocation as RestAllocation).ok;
+  if (baseValid && originalActionValid) return { ...campaign, saveVersion: SAVE_VERSION, pendingDungeonTrinketAction: pending };
+  const rootEventId = typeof pending.rootEventId === 'string' ? pending.rootEventId : null;
+  return {
+    ...campaign,
+    saveVersion: SAVE_VERSION,
+    pendingDungeonTrinketAction: null,
+    pendingTrinketUseOpportunities: rootEventId
+      ? campaign.pendingTrinketUseOpportunities.filter((entry) => entry.rootEventId !== rootEventId)
+      : campaign.pendingTrinketUseOpportunities,
+  };
+}
+
 /** 净化已存在的 campaignProgress（补缺字段 / clamp / 去掉非法类型），不重新随机。 */
 function sanitizeCampaignProgress(raw: CampaignProgressState): CampaignProgressState {
   const base = createInitialCampaignProgress({
@@ -1465,7 +1514,7 @@ function sanitizeCampaignProgress(raw: CampaignProgressState): CampaignProgressS
  *  → v16 = Phase 10E Final Encounter 四形态 → v17 = Phase 11A.1 Campaign Orchestration）。
  */
 export function migrateCampaignToLatest(campaign: CampaignState): CampaignState {
-  return migrateCampaignToV20(migrateCampaignToV19(migrateCampaignToV18(migrateCampaignToV17(
+  return migrateCampaignToV21(migrateCampaignToV20(migrateCampaignToV19(migrateCampaignToV18(migrateCampaignToV17(
     migrateCampaignToV16(
       migrateCampaignToV15(
         migrateCampaignToV14(
@@ -1483,7 +1532,7 @@ export function migrateCampaignToLatest(campaign: CampaignState): CampaignState 
         ),
       ),
     ),
-  ))));
+  )))));
 }
 
 /**
@@ -1542,7 +1591,7 @@ export function migrateSaveFile(raw: unknown): SaveFile | null {
  * - gold 为负 → 归零。
  */
 export function sanitizeSaveFile(save: SaveFile): SaveFile {
-  let c = save.campaign;
+  let c = migrateCampaignToV21(save.campaign);
   if (c.gold < 0) c = { ...c, gold: 0 };
 
   if (c.gamePhase === 'battle' && !c.battle) {

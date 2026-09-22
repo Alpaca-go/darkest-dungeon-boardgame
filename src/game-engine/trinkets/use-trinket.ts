@@ -217,6 +217,9 @@ function applyOneEffect(
     case 'scale-incoming-damage':
       // Deferred: the staged monster-attack bridge applies this to its frozen damage.
       return campaign;
+    case 'roll-provision-dice':
+      // Deferred: the persisted dungeon-action bridge rolls and consumes Wild choices.
+      return campaign;
     case 'log-only':
       return pushLog(campaign, `${trinketName}：${effect.note}`, 'info');
     default:

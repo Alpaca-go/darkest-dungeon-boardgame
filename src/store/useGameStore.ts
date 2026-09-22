@@ -7,7 +7,6 @@ import {
   applyDefaultLoadout as engineApplyDefaultLoadout,
 } from '../game-engine/campaign';
 import {
-  scoutDungeon,
   canScout,
 } from '../game-engine/dungeon';
 import {
@@ -90,8 +89,13 @@ import {
 } from '../game-engine/replacement';
 import type { DamageCommand, NomadWagonVisitCommand } from '../types';
 import type { RuntimeContentProfile } from '../types/content-runtime';
-import { commitRestAtCamp as engineCommitRestAtCamp } from '../game-engine/quests/quest-runtime';
 import type { RestAllocation, RestAllocationError } from '../game-engine/quests/quest-runtime';
+import {
+  beginCampTrinketAction,
+  beginScoutTrinketAction,
+  chooseDungeonProvisionWild as engineChooseDungeonProvisionWild,
+  resolveDungeonTrinketOpportunity,
+} from '../game-engine/trinkets/dungeon-trinket-bridge';
 import {
   applyQuestRuleEffects as engineApplyQuestRuleEffects,
   interactWithQuestToken as engineInteractWithQuestToken,
@@ -159,7 +163,7 @@ interface GameStore {
   scout(): void;
   moveToRoom(roomId: string): void;
   useProvision(type: keyof ProvisionPool, heroId?: string): void;
-  commitRestAtCamp(allocation: RestAllocation): RestAllocationError | null;
+  commitRestAtCamp(allocation: RestAllocation): RestAllocationError | 'DUNGEON_TRINKET_ACTION_PENDING' | null;
   resolveQuestRuleProvision(transactionId: string, provision: QuestRuleProvision): string | null;
   interactWithQuestToken(): string | null;
 
@@ -256,6 +260,7 @@ interface GameStore {
   useTrinketOpportunity(opportunityId: string): void;
   /** 跳过一条使用机会。 */
   declineTrinketOpportunity(opportunityId: string): void;
+  chooseDungeonProvisionWild(dieIndex: number, face: keyof ProvisionPool): void;
   /** 结算一条待分配（assign / replace / discard）。 */
   resolveTrinketAllocation(allocationId: string, choice: TrinketAllocationChoice): void;
   /** 非战斗时把饰品从一名英雄转交给另一名英雄。 */
@@ -416,7 +421,8 @@ export const useGameStore = create<GameStore>((set, get) => {
     scout: () => {
       const c = get().campaign;
       if (!c || !c.dungeon || !canScout(c.dungeon)) return;
-      commit(scoutDungeon(c));
+      const result = beginScoutTrinketAction(c);
+      if (!result.error) commit(result.campaign);
     },
 
     moveToRoom: (roomId) => {
@@ -441,8 +447,8 @@ export const useGameStore = create<GameStore>((set, get) => {
     commitRestAtCamp: (allocation) => {
       const c = get().campaign;
       if (!c) return 'REST_NOT_IN_DUNGEON_EXPLORE';
-      const result = engineCommitRestAtCamp(c, allocation);
-      if (result.ok) commit(result.campaign);
+      const result = beginCampTrinketAction(c, allocation);
+      if (!result.error) commit(result.campaign);
       return result.error;
     },
 
@@ -870,6 +876,13 @@ export const useGameStore = create<GameStore>((set, get) => {
     useTrinketOpportunity: (opportunityId) => {
       const c = get().campaign;
       if (!c) return;
+      const dungeonOpportunity = c.pendingTrinketUseOpportunities.find((entry) => entry.id === opportunityId);
+      if (c.pendingDungeonTrinketAction
+        && dungeonOpportunity?.rootEventId === c.pendingDungeonTrinketAction.rootEventId) {
+        const resolved = resolveDungeonTrinketOpportunity(c, opportunityId, 'use');
+        if (!resolved.error && resolved.campaign !== c) commit(resolveReplacementsFlow(resolved.campaign));
+        return;
+      }
       const { campaign: resolved, error } = resolveTrinketOpportunity(c, opportunityId, 'use');
       if (error || resolved === c) return;
       let next = resolved;
@@ -886,6 +899,13 @@ export const useGameStore = create<GameStore>((set, get) => {
     declineTrinketOpportunity: (opportunityId) => {
       const c = get().campaign;
       if (!c) return;
+      const dungeonOpportunity = c.pendingTrinketUseOpportunities.find((entry) => entry.id === opportunityId);
+      if (c.pendingDungeonTrinketAction
+        && dungeonOpportunity?.rootEventId === c.pendingDungeonTrinketAction.rootEventId) {
+        const resolved = resolveDungeonTrinketOpportunity(c, opportunityId, 'decline');
+        if (!resolved.error && resolved.campaign !== c) commit(resolved.campaign);
+        return;
+      }
       const { campaign: resolved, error } = resolveTrinketOpportunity(c, opportunityId, 'decline');
       if (error || resolved === c) return;
       let next = resolved;
@@ -894,6 +914,13 @@ export const useGameStore = create<GameStore>((set, get) => {
         next = settled.campaign;
       }
       commit(next);
+    },
+
+    chooseDungeonProvisionWild: (dieIndex, face) => {
+      const c = get().campaign;
+      if (!c) return;
+      const resolved = engineChooseDungeonProvisionWild(c, dieIndex, face);
+      if (!resolved.error && resolved.campaign !== c) commit(resolved.campaign);
     },
 
     resolveTrinketAllocation: (allocationId, choice) => {

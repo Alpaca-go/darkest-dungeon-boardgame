@@ -23,6 +23,7 @@ export const FORTUNATE_ARMLET_ID = 'community-trinket-core-fortunate-armlet';
 export const BOOK_OF_RELAXATION_ID = 'community-trinket-core-book-of-relaxation';
 export const PROTECTIVE_PADLOCK_ID = 'community-trinket-core-protective-padlock';
 export const CAMOUFLAGE_CLOAK_ID = 'community-trinket-core-camouflage-cloak';
+export const CAMPERS_HELMET_ID = 'community-trinket-core-campers-helmet';
 export const C1C1_CORE_QUEST_IDS = [
   'community-quest-ruins-lvl1-scout-ahead',
   'community-quest-ruins-lvl1-wipe-em-out',
@@ -257,6 +258,12 @@ export const PRODUCTION_PROOF_REGISTRY: Readonly<Record<string, RegisteredProduc
   proof({ proofId: 'C1C9-CAMOUFLAGE-CONDITION-SAVE-REPLAY', definitionIds: [CAMOUFLAGE_CLOAK_ID], proofType: 'save-replay', testFile: 'src/game-engine/c1c9-condition-duration.test.ts', runner: 'vitest', status: 'active', scope: 'primitive', primitiveId: 'TRINKET_CONDITION_STACK_CONSUMER' }),
   proof({ proofId: 'C1C9-CAMOUFLAGE-CONDITION-SELECTOR', definitionIds: [CAMOUFLAGE_CLOAK_ID], proofType: 'selector', testFile: 'src/audit/c1c9-condition-semantics.test.ts', runner: 'vitest', status: 'active', scope: 'primitive', primitiveId: 'TRINKET_CONDITION_STACK_CONSUMER' }),
   proof({ proofId: 'C1C9-E2E-CAMOUFLAGE-CONDITION', definitionIds: [CAMOUFLAGE_CLOAK_ID], proofType: 'e2e', testFile: 'e2e/phase11a4-c1c9-condition-duration.spec.ts', runner: 'playwright', status: 'active', scope: 'primitive', primitiveId: 'TRINKET_CONDITION_STACK_CONSUMER', proofSurface: 'production-ui' }),
+  proof({ proofId: 'C1C10-CAMPERS-CAMPING-RUNTIME', definitionIds: [CAMPERS_HELMET_ID], proofType: 'production-runtime', testFile: 'src/game-engine/c1c10-campers-helmet.test.ts', runner: 'vitest', status: 'active', scope: 'primitive', primitiveId: 'TRINKET_PROVISION_DICE_CONSUMER' }),
+  proof({ proofId: 'C1C10-CAMPERS-SCOUT-RUNTIME', definitionIds: [CAMPERS_HELMET_ID], proofType: 'production-runtime', testFile: 'src/game-engine/c1c10-campers-helmet.test.ts', runner: 'vitest', status: 'active', scope: 'primitive', primitiveId: 'STAGED_DUNGEON_TRINKET_WINDOWS' }),
+  proof({ proofId: 'C1C10-CAMPERS-SAVE-REPLAY', definitionIds: [CAMPERS_HELMET_ID], proofType: 'save-replay', testFile: 'src/game-engine/c1c10-campers-helmet.test.ts', runner: 'vitest', status: 'active', scope: 'primitive', primitiveId: 'STAGED_DUNGEON_TRINKET_WINDOWS' }),
+  proof({ proofId: 'C1C10-CAMPERS-SELECTOR', definitionIds: [CAMPERS_HELMET_ID], proofType: 'selector', testFile: 'src/audit/c1c10-campers-helmet-semantics.test.ts', runner: 'vitest', status: 'active', scope: 'primitive', primitiveId: 'TRINKET_PROVISION_DICE_CONSUMER' }),
+  proof({ proofId: 'C1C10-E2E-CAMPERS-CAMPING', definitionIds: [CAMPERS_HELMET_ID], proofType: 'e2e', testFile: 'e2e/phase11a4-c1c10-campers-helmet.spec.ts', runner: 'playwright', status: 'active', scope: 'primitive', primitiveId: 'TRINKET_PROVISION_DICE_CONSUMER', proofSurface: 'production-ui' }),
+  proof({ proofId: 'C1C10-E2E-CAMPERS-SCOUT', definitionIds: [CAMPERS_HELMET_ID], proofType: 'e2e', testFile: 'e2e/phase11a4-c1c10-campers-helmet.spec.ts', runner: 'playwright', status: 'active', scope: 'primitive', primitiveId: 'STAGED_DUNGEON_TRINKET_WINDOWS', proofSurface: 'production-ui' }),
 ].map((entry) => [entry.proofId, entry])));
 
 export function resolveRegisteredProof(

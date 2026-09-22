@@ -130,6 +130,8 @@ export const normalizePrimitives = (message: string): string[] => {
   if (/primitive:set-damage/i.test(message)) primitives.push('SET_DAMAGE_OVERRIDE');
   if (/ActiveEffectDefinition cannot express independent magnitude and turns/i.test(message)) primitives.push('TRINKET_CONDITION_STACK_CONSUMER');
   if (/timing hero-(heals|is-healed)/i.test(message)) primitives.push('STAGED_HEALING_TRINKET_WINDOWS');
+  if (/timing (camping|scout)/i.test(message)) primitives.push('STAGED_DUNGEON_TRINKET_WINDOWS');
+  if (/primitive:roll-provision-dice/i.test(message)) primitives.push('TRINKET_PROVISION_DICE_CONSUMER');
   if (/room-token composition/i.test(message)) primitives.push('QUEST_ROOM_TOKEN_COMPOSITION');
   if (/firewood|resting-point/i.test(message)) primitives.push('QUEST_FIREWOOD_RESTING_POINT_SETUP');
   if (/repeated per-unit XP/i.test(message)) primitives.push('QUEST_XP_UNIT_ACCOUNTING');
@@ -646,6 +648,25 @@ const camouflageCloak: TrinketDefinition = {
   sourceReference: camouflageSource.sourceReferences.join('; '), enabledInOfficialPool: false, dataOrigin: 'community',
   runtimeContentMetadata: { sourceDefinitionId: camouflageSource.id, contentSet: 'core', region: null, sourceOrigin: 'community-complete-edition' },
 };
+const campersSource = sourceTrinket('community-trinket-core-campers-helmet');
+const campersHelmet: TrinketDefinition = {
+  id: campersSource.id, name: campersSource.printedName, level: 2,
+  positiveSide: {
+    side: 'positive', label: '掷 2 颗补给骰', description: campersSource.positiveSide.label,
+    useWindows: ['before-camp-resolution'], modifiers: [],
+    effects: [{ type: 'roll-provision-dice', count: 2, target: 'party-provisions' }],
+    canUse: [{ type: 'out-of-battle' }],
+  },
+  negativeSide: {
+    side: 'negative', label: '自身压力 +1', description: campersSource.negativeSide.label,
+    useWindows: ['before-scout-resolution'], modifiers: [], effects: [{ type: 'stress-self', amount: 1 }],
+    canUse: [{ type: 'out-of-battle' }],
+  },
+  sellPrice: sellPriceForLevel(2), buyPrice: buyPriceForLevel(2), officialDataStatus: 'verified',
+  sourceReference: `${campersSource.sourceReferences.join('; ')}; DD_EN_COREBOX_RULES.pdf p12`,
+  enabledInOfficialPool: false, dataOrigin: 'community',
+  runtimeContentMetadata: { sourceDefinitionId: campersSource.id, contentSet: 'core', region: null, sourceOrigin: 'community-complete-edition' },
+};
 
 export const COMMUNITY_TRINKET_RUNTIME_ADAPTERS: Readonly<Record<string, CommunityTrinketRuntimeAdapter>> = Object.freeze({
   [accuracyStone.id]: { adapterId: 'post-roll-accuracy-stone-v1', definitionId: accuracyStone.id, requiredPrimitives: ['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW'], definition: accuracyStone },
@@ -656,6 +677,7 @@ export const COMMUNITY_TRINKET_RUNTIME_ADAPTERS: Readonly<Record<string, Communi
   [solarBracer.id]: { adapterId: 'staged-attack-solar-bracer-v1', definitionId: solarBracer.id, requiredPrimitives: ['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW', 'PRE_DAMAGE_HIT_TRINKET_WINDOW', 'SET_DAMAGE_OVERRIDE'], definition: solarBracer },
   [protectivePadlock.id]: { adapterId: 'incoming-damage-protective-padlock-positive-v1', definitionId: protectivePadlock.id, requiredPrimitives: ['STAGED_INCOMING_ATTACK_RESOLUTION', 'HERO_HIT_BY_ATTACK_TRINKET_WINDOW', 'INCOMING_DAMAGE_SCALE_CONSUMER'], definition: protectivePadlock },
   [camouflageCloak.id]: { adapterId: 'camouflage-cloak-condition-runtime-v2', definitionId: camouflageCloak.id, requiredPrimitives: ['STAGED_INCOMING_ATTACK_RESOLUTION', 'INCOMING_ATTACK_TRINKET_WINDOW', 'HERO_HIT_BY_ATTACK_TRINKET_WINDOW', 'INCOMING_DODGE_MODIFIER_CONSUMER', 'TRINKET_CONDITION_STACK_CONSUMER'], definition: camouflageCloak },
+  [campersHelmet.id]: { adapterId: 'campers-helmet-camping-scout-runtime-v1', definitionId: campersHelmet.id, requiredPrimitives: ['STAGED_DUNGEON_TRINKET_WINDOWS', 'TRINKET_PROVISION_DICE_CONSUMER'], definition: campersHelmet },
 });
 
 export const COMMUNITY_TRINKET_PRODUCTION_PROOFS: Readonly<Record<string, CommunityProductionProof>> = Object.freeze({
@@ -741,6 +763,22 @@ export const COMMUNITY_TRINKET_PRODUCTION_PROOFS: Readonly<Record<string, Commun
     productionTests: ['C1C8-INCOMING-ATTACK-RUNTIME', 'C1C8-CAMOUFLAGE-POSITIVE-RUNTIME', 'C1C9-CAMOUFLAGE-CONDITION-RUNTIME'], saveReplayTests: ['C1C8-INCOMING-ATTACK-SAVE-REPLAY', 'C1C8-CAMOUFLAGE-POSITIVE-SAVE', 'C1C9-CAMOUFLAGE-CONDITION-SAVE-REPLAY'],
     selectorTests: ['C1C8-CAMOUFLAGE-POSITIVE-SELECTOR', 'C1C9-CAMOUFLAGE-CONDITION-SELECTOR'], e2eTests: ['C1C8-E2E-CAMOUFLAGE-POSITIVE', 'C1C9-E2E-CAMOUFLAGE-CONDITION'],
   },
+  [campersHelmet.id]: {
+    definitionId: campersHelmet.id, runtimeAdapterId: 'campers-helmet-camping-scout-runtime-v1',
+    requiredPrimitives: ['STAGED_DUNGEON_TRINKET_WINDOWS', 'TRINKET_PROVISION_DICE_CONSUMER'],
+    primitiveProofRequirements: {
+      'C1C10-CAMPERS-CAMPING-RUNTIME': 'TRINKET_PROVISION_DICE_CONSUMER',
+      'C1C10-CAMPERS-SCOUT-RUNTIME': 'STAGED_DUNGEON_TRINKET_WINDOWS',
+      'C1C10-CAMPERS-SAVE-REPLAY': 'STAGED_DUNGEON_TRINKET_WINDOWS',
+      'C1C10-CAMPERS-SELECTOR': 'TRINKET_PROVISION_DICE_CONSUMER',
+      'C1C10-E2E-CAMPERS-CAMPING': 'TRINKET_PROVISION_DICE_CONSUMER',
+      'C1C10-E2E-CAMPERS-SCOUT': 'STAGED_DUNGEON_TRINKET_WINDOWS',
+    } as Record<string, string>,
+    sourceSupported: true, semanticSupported: true, stateful: true,
+    productionTests: ['C1C10-CAMPERS-CAMPING-RUNTIME', 'C1C10-CAMPERS-SCOUT-RUNTIME'],
+    saveReplayTests: ['C1C10-CAMPERS-SAVE-REPLAY'], selectorTests: ['C1C10-CAMPERS-SELECTOR'],
+    e2eTests: ['C1C10-E2E-CAMPERS-CAMPING', 'C1C10-E2E-CAMPERS-SCOUT'],
+  },
 });
 
 export function evaluateCommunityTrinketCapability(
@@ -765,7 +803,7 @@ export function evaluateCommunityTrinketCapability(
     ...source.positiveSide.runtimeSupport.missingCapabilities,
     ...source.negativeSide.runtimeSupport.missingCapabilities,
   ].flatMap(normalizePrimitives))];
-  const implementedTrinketPrimitives = new Set(['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW', 'STAGED_HEALING_TRINKET_WINDOWS', 'PRE_DAMAGE_HIT_TRINKET_WINDOW', 'SET_DAMAGE_OVERRIDE', 'STAGED_INCOMING_ATTACK_RESOLUTION', 'INCOMING_ATTACK_TRINKET_WINDOW', 'HERO_HIT_BY_ATTACK_TRINKET_WINDOW', 'INCOMING_DAMAGE_SCALE_CONSUMER', 'INCOMING_DODGE_MODIFIER_CONSUMER', 'TRINKET_CONDITION_STACK_CONSUMER']);
+  const implementedTrinketPrimitives = new Set(['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW', 'STAGED_HEALING_TRINKET_WINDOWS', 'PRE_DAMAGE_HIT_TRINKET_WINDOW', 'SET_DAMAGE_OVERRIDE', 'STAGED_INCOMING_ATTACK_RESOLUTION', 'INCOMING_ATTACK_TRINKET_WINDOW', 'HERO_HIT_BY_ATTACK_TRINKET_WINDOW', 'INCOMING_DAMAGE_SCALE_CONSUMER', 'INCOMING_DODGE_MODIFIER_CONSUMER', 'TRINKET_CONDITION_STACK_CONSUMER', 'STAGED_DUNGEON_TRINKET_WINDOWS', 'TRINKET_PROVISION_DICE_CONSUMER']);
   const missingPrimitives = declaredMissingPrimitives.filter((primitive) => !implementedTrinketPrimitives.has(primitive));
   const sourceSemanticComplete = trinketSourceSemanticComplete(source);
   const runtimeSemanticComplete = trinketRuntimeSemanticComplete(sourceSemanticComplete, semanticObligations);

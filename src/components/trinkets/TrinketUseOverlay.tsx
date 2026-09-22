@@ -11,10 +11,13 @@ export default function TrinketUseOverlay() {
   const campaign = useGameStore((s) => s.campaign);
   const useOpp = useGameStore((s) => s.useTrinketOpportunity);
   const declineOpp = useGameStore((s) => s.declineTrinketOpportunity);
+  const chooseWild = useGameStore((s) => s.chooseDungeonProvisionWild);
 
   if (!campaign) return null;
   const opps = openOpportunities(campaign);
-  if (opps.length === 0) return null;
+  const dungeonAction = campaign.pendingDungeonTrinketAction;
+  const wildDice = dungeonAction?.pendingProvisionDice?.filter((die) => die.selectedFace === null) ?? [];
+  if (opps.length === 0 && wildDice.length === 0) return null;
   const incoming = campaign.battle?.pendingMonsterAttack;
   const incomingMonster = incoming
     ? campaign.battle?.monsters.find((unit) => unit.id === incoming.monsterUnitId)
@@ -33,6 +36,14 @@ export default function TrinketUseOverlay() {
         <p className="text-xs text-dd-muted mb-3">
           每张饰品可在对应窗口使用一次（每回合每张限一次）。请选择「使用」或「跳过」。
         </p>
+        {dungeonAction && (
+          <div className="mb-3 rounded border border-amber-800/70 bg-black/25 p-3 text-sm" data-testid="dungeon-trinket-context">
+            <div className="text-dd-text">
+              {dungeonAction.kind === 'scout' ? 'Scout 结算前' : 'Rest at Camp 结算前'}
+            </div>
+            <div className="text-dd-muted">原始动作已冻结；饰品机会结清后只执行一次。</div>
+          </div>
+        )}
         {incoming && incomingMonster && incomingHero && (
           <div className="mb-3 rounded border border-red-900/70 bg-black/25 p-3 text-sm" data-testid="incoming-attack-context">
             <div className="text-dd-text">{incomingMonster.name} 正在攻击 {incomingHero.name}</div>
@@ -42,7 +53,24 @@ export default function TrinketUseOverlay() {
             )}
           </div>
         )}
-        <div className="space-y-2 max-h-[60vh] overflow-auto">
+        {wildDice.length > 0 ? (
+          <div className="space-y-3" data-testid="provision-wild-choice">
+            {wildDice.map((die) => (
+              <div key={die.index} className="rounded border border-dd-border bg-dd-panel2 p-3">
+                <div className="text-sm text-dd-text mb-2">补给骰 {die.index + 1} 掷出 Wild：选择一个补给面</div>
+                <div className="flex flex-wrap gap-2">
+                  {(['food', 'bandage', 'potion', 'torch', 'tool'] as const).map((face) => (
+                    <button key={face} type="button" onClick={() => chooseWild(die.index, face)}
+                      data-testid={`provision-wild-${die.index}-${face}`}
+                      className="px-3 py-1 rounded bg-emerald-700 text-white text-sm font-semibold">
+                      {face}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : <div className="space-y-2 max-h-[60vh] overflow-auto">
           {opps.map((opp) => (
             <div
               key={opp.id}
@@ -71,7 +99,7 @@ export default function TrinketUseOverlay() {
               </div>
             </div>
           ))}
-        </div>
+        </div>}
       </div>
     </div>
   );

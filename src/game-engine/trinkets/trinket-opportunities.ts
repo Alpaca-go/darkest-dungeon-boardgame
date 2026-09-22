@@ -32,6 +32,8 @@ export const WIRED_WINDOWS: readonly TrinketUseWindow[] = [
   'room-entered',
   'before-healing-delivered-resolution',
   'before-healing-received-resolution',
+  'before-scout-resolution',
+  'before-camp-resolution',
 ] as const;
 
 export function isWiredWindow(w: TrinketUseWindow): boolean {
@@ -126,7 +128,7 @@ export function buildOpportunityPreview(side: TrinketSideDefinition): string {
         parts.push(`自身获得 ${e.condition} ${e.amount}`);
         break;
       case 'apply-condition-stack':
-        parts.push(`${e.target === 'equipped-hero' ? '自身' : e.target}获得 ${e.condition}${e.amount === null ? '' : ` ${e.amount}`}，持续 ${e.durationTurns} 回合`);
+        parts.push(`自身获得 ${e.condition}${e.amount === null ? '' : ` ${e.amount}`}，持续 ${e.durationTurns} 回合`);
         break;
       case 'change-light':
         parts.push(`光照 ${signed(e.amount)}`);
@@ -136,6 +138,9 @@ export function buildOpportunityPreview(side: TrinketSideDefinition): string {
         break;
       case 'scale-incoming-damage':
         parts.push(`本次伤害 ×${e.numerator}/${e.denominator}（向上取整）`);
+        break;
+      case 'roll-provision-dice':
+        parts.push(`掷 ${e.count} 颗补给骰并加入小队补给池`);
         break;
       case 'log-only':
         parts.push(e.note);

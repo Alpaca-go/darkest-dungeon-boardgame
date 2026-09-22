@@ -114,6 +114,7 @@ export function createNewCampaign(
     pendingTrinketUseOpportunities: [],
     pendingHealingAction: null,
     pendingTrinketUseTransaction: null,
+    pendingDungeonTrinketAction: null,
     trinketAcquisitionRecords: [],
     trinketUseRecords: [],
     trinketTransferRecords: [],
