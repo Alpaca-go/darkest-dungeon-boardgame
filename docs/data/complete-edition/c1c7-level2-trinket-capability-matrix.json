@@ -1,0 +1,1106 @@
+{
+  "schemaVersion": 3,
+  "phase": "11A.4-C1C-7",
+  "baselineHead": "373507c4a3e297371c0a989cf4ec570fb67e596b",
+  "verifiedImplementationHead": "600eacdfee1ce3ebd8f8afad4137c268c37bc052",
+  "verifiedImplementationTree": "903043d272ff5854020557207bc5f0b8f11d27a7",
+  "verifiedImplementationCommittedAt": "2026-09-22T13:30:12+08:00",
+  "sourceTimingOutcome": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+  "cards": [
+    {
+      "definitionId": "community-trinket-core-bloodthirst-ring",
+      "sourceSemanticComplete": true,
+      "runtimeSemanticComplete": false,
+      "positiveSideComplete": false,
+      "negativeSideComplete": false,
+      "adapterComplete": false,
+      "productionReady": false,
+      "blockerCodes": [
+        "VOLUNTARY_DECLARATION_RUNTIME",
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_HERO_HIT_BY_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+        "TRINKET_TRIGGER_MISMATCH"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "triggerMatch": false,
+          "windowMatch": false,
+          "targetMatch": false,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "missingModifierConsumers": [],
+          "effectMatch": false,
+          "conditionMatch": true,
+          "triggerScopeComplete": false,
+          "sourceTimingScopeStatus": "SOURCE_UNRESOLVED",
+          "runtimeSliceSemanticComplete": false,
+          "implementationStatus": "UNSUPPORTED",
+          "blockerCode": "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "voluntary-declaration",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "equipped-hero",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "consume-provision",
+                  "target": "equipped-hero",
+                  "parameters": {
+                    "provision": "food",
+                    "amount": 1
+                  }
+                },
+                {
+                  "type": "heal",
+                  "target": "equipped-hero",
+                  "parameters": {
+                    "amount": 10
+                  }
+                }
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        },
+        {
+          "side": "negative",
+          "triggerMatch": false,
+          "windowMatch": false,
+          "targetMatch": false,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "missingModifierConsumers": [],
+          "effectMatch": false,
+          "conditionMatch": true,
+          "triggerScopeComplete": true,
+          "sourceTimingScopeStatus": "SOURCE_BOUND",
+          "runtimeSliceSemanticComplete": false,
+          "implementationStatus": "UNSUPPORTED",
+          "blockerCode": "TRINKET_TRIGGER_MISMATCH",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "hero-hit-by-attack",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "equipped-hero",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "apply-condition-stack",
+                  "target": "equipped-hero",
+                  "parameters": {
+                    "condition": "bleed",
+                    "turns": 2,
+                    "amount": 3
+                  }
+                }
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-book-of-constitution",
+      "sourceSemanticComplete": true,
+      "runtimeSemanticComplete": false,
+      "positiveSideComplete": false,
+      "negativeSideComplete": false,
+      "adapterComplete": false,
+      "productionReady": false,
+      "blockerCodes": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_DISCARD_DISEASE",
+        "EXACT_APPLICABLE_TIMING_DISEASE_ACQUIRED_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_TRINKETMODIFIERTYPE_MOVEMENT",
+        "VOLUNTARY_DECLARATION_RUNTIME",
+        "TRINKET_TRIGGER_MISMATCH",
+        "TRINKET_MODIFIER_CONSUMER_MISSING"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "triggerMatch": false,
+          "windowMatch": false,
+          "targetMatch": false,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "missingModifierConsumers": [],
+          "effectMatch": false,
+          "conditionMatch": true,
+          "triggerScopeComplete": true,
+          "sourceTimingScopeStatus": "SOURCE_BOUND",
+          "runtimeSliceSemanticComplete": false,
+          "implementationStatus": "UNSUPPORTED",
+          "blockerCode": "TRINKET_TRIGGER_MISMATCH",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "disease-acquired",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "new-disease",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "discard-disease",
+                  "target": "new-disease",
+                  "parameters": {
+                    "immediately": true
+                  }
+                }
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        },
+        {
+          "side": "negative",
+          "triggerMatch": false,
+          "windowMatch": false,
+          "targetMatch": false,
+          "modifierMatch": false,
+          "modifierConsumerMatch": false,
+          "missingModifierConsumers": [
+            "movement"
+          ],
+          "effectMatch": true,
+          "conditionMatch": true,
+          "triggerScopeComplete": false,
+          "sourceTimingScopeStatus": "SOURCE_UNRESOLVED",
+          "runtimeSliceSemanticComplete": false,
+          "implementationStatus": "UNSUPPORTED",
+          "blockerCode": "TRINKET_MODIFIER_CONSUMER_MISSING",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "voluntary-declaration",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "equipped-hero",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_MODIFIER_TYPE_MISMATCH",
+              "source": [
+                {
+                  "stat": "movement",
+                  "operation": "add",
+                  "amount": -2
+                }
+              ],
+              "runtime": []
+            },
+            {
+              "code": "TRINKET_MODIFIER_CONSUMER_MISSING",
+              "source": [
+                "movement"
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-book-of-holiness",
+      "sourceSemanticComplete": true,
+      "runtimeSemanticComplete": false,
+      "positiveSideComplete": false,
+      "negativeSideComplete": false,
+      "adapterComplete": false,
+      "productionReady": false,
+      "blockerCodes": [
+        "VOLUNTARY_DECLARATION_RUNTIME",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_CONVERT_INCOMING_HIT_TO_CRITICAL",
+        "EXACT_APPLICABLE_TIMING_HERO_HIT_BY_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+        "TRINKET_TRIGGER_MISMATCH"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "triggerMatch": false,
+          "windowMatch": false,
+          "targetMatch": false,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "missingModifierConsumers": [],
+          "effectMatch": false,
+          "conditionMatch": true,
+          "triggerScopeComplete": false,
+          "sourceTimingScopeStatus": "SOURCE_UNRESOLVED",
+          "runtimeSliceSemanticComplete": false,
+          "implementationStatus": "UNSUPPORTED",
+          "blockerCode": "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "voluntary-declaration",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "equipped-hero",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "change-stress",
+                  "target": "equipped-hero",
+                  "parameters": {
+                    "amount": -3
+                  }
+                }
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        },
+        {
+          "side": "negative",
+          "triggerMatch": false,
+          "windowMatch": false,
+          "targetMatch": false,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "missingModifierConsumers": [],
+          "effectMatch": false,
+          "conditionMatch": true,
+          "triggerScopeComplete": true,
+          "sourceTimingScopeStatus": "SOURCE_BOUND",
+          "runtimeSliceSemanticComplete": false,
+          "implementationStatus": "UNSUPPORTED",
+          "blockerCode": "TRINKET_TRIGGER_MISMATCH",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "hero-hit-by-attack",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "equipped-hero",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "convert-incoming-hit-to-critical",
+                  "target": "equipped-hero",
+                  "parameters": {}
+                }
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-book-of-relaxation",
+      "sourceSemanticComplete": true,
+      "runtimeSemanticComplete": false,
+      "positiveSideComplete": false,
+      "negativeSideComplete": false,
+      "adapterComplete": false,
+      "productionReady": false,
+      "blockerCodes": [
+        "VOLUNTARY_DECLARATION_RUNTIME",
+        "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+        "TRINKET_MODIFIER_CONSUMER_MISSING"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "triggerMatch": false,
+          "windowMatch": false,
+          "targetMatch": false,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "missingModifierConsumers": [],
+          "effectMatch": false,
+          "conditionMatch": true,
+          "triggerScopeComplete": false,
+          "sourceTimingScopeStatus": "SOURCE_UNRESOLVED",
+          "runtimeSliceSemanticComplete": false,
+          "implementationStatus": "UNSUPPORTED",
+          "blockerCode": "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "voluntary-declaration",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "equipped-hero",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "change-stress",
+                  "target": "equipped-hero",
+                  "parameters": {
+                    "amount": -2
+                  }
+                }
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        },
+        {
+          "side": "negative",
+          "triggerMatch": false,
+          "windowMatch": false,
+          "targetMatch": false,
+          "modifierMatch": false,
+          "modifierConsumerMatch": false,
+          "missingModifierConsumers": [
+            "dodge"
+          ],
+          "effectMatch": true,
+          "conditionMatch": true,
+          "triggerScopeComplete": false,
+          "sourceTimingScopeStatus": "SOURCE_UNRESOLVED",
+          "runtimeSliceSemanticComplete": false,
+          "implementationStatus": "UNSUPPORTED",
+          "blockerCode": "TRINKET_MODIFIER_CONSUMER_MISSING",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "voluntary-declaration",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "equipped-hero",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_MODIFIER_TYPE_MISMATCH",
+              "source": [
+                {
+                  "stat": "dodge",
+                  "operation": "add",
+                  "amount": -2
+                }
+              ],
+              "runtime": []
+            },
+            {
+              "code": "TRINKET_MODIFIER_CONSUMER_MISSING",
+              "source": [
+                "dodge"
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-camouflage-cloak",
+      "sourceSemanticComplete": true,
+      "runtimeSemanticComplete": false,
+      "positiveSideComplete": false,
+      "negativeSideComplete": false,
+      "adapterComplete": false,
+      "productionReady": false,
+      "blockerCodes": [
+        "EXACT_APPLICABLE_TIMING_INCOMING_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "ACTIVEEFFECTDEFINITION_CANNOT_EXPRESS_INDEPENDENT_MAGNITUDE_AND_TURNS_NON_SELF_TARGET",
+        "EXACT_APPLICABLE_TIMING_HERO_HIT_BY_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "TRINKET_MODIFIER_CONSUMER_MISSING",
+        "TRINKET_TRIGGER_MISMATCH"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "triggerMatch": false,
+          "windowMatch": false,
+          "targetMatch": false,
+          "modifierMatch": false,
+          "modifierConsumerMatch": false,
+          "missingModifierConsumers": [
+            "dodge"
+          ],
+          "effectMatch": true,
+          "conditionMatch": false,
+          "triggerScopeComplete": true,
+          "sourceTimingScopeStatus": "SOURCE_BOUND",
+          "runtimeSliceSemanticComplete": false,
+          "implementationStatus": "UNSUPPORTED",
+          "blockerCode": "TRINKET_MODIFIER_CONSUMER_MISSING",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "incoming-attack",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "equipped-hero",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_MODIFIER_TYPE_MISMATCH",
+              "source": [
+                {
+                  "stat": "dodge",
+                  "operation": "add",
+                  "amount": 2
+                }
+              ],
+              "runtime": []
+            },
+            {
+              "code": "TRINKET_MODIFIER_CONSUMER_MISSING",
+              "source": [
+                "dodge"
+              ],
+              "runtime": []
+            },
+            {
+              "code": "TRINKET_CONDITION_MISMATCH",
+              "source": [
+                {
+                  "type": "light",
+                  "operator": ">=",
+                  "value": 3
+                }
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        },
+        {
+          "side": "negative",
+          "triggerMatch": false,
+          "windowMatch": false,
+          "targetMatch": false,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "missingModifierConsumers": [],
+          "effectMatch": false,
+          "conditionMatch": true,
+          "triggerScopeComplete": true,
+          "sourceTimingScopeStatus": "SOURCE_BOUND",
+          "runtimeSliceSemanticComplete": false,
+          "implementationStatus": "UNSUPPORTED",
+          "blockerCode": "TRINKET_TRIGGER_MISMATCH",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "hero-hit-by-attack",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "equipped-hero",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "apply-condition-stack",
+                  "target": "equipped-hero",
+                  "parameters": {
+                    "condition": "stun",
+                    "turns": 1,
+                    "amount": null
+                  }
+                }
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-campers-helmet",
+      "sourceSemanticComplete": true,
+      "runtimeSemanticComplete": false,
+      "positiveSideComplete": false,
+      "negativeSideComplete": false,
+      "adapterComplete": false,
+      "productionReady": false,
+      "blockerCodes": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_ROLL_PROVISION_DICE",
+        "EXACT_APPLICABLE_TIMING_CAMPING_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "EXACT_APPLICABLE_TIMING_SCOUT_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "TRINKET_TRIGGER_MISMATCH"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "triggerMatch": false,
+          "windowMatch": false,
+          "targetMatch": false,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "missingModifierConsumers": [],
+          "effectMatch": false,
+          "conditionMatch": true,
+          "triggerScopeComplete": true,
+          "sourceTimingScopeStatus": "SOURCE_BOUND",
+          "runtimeSliceSemanticComplete": false,
+          "implementationStatus": "UNSUPPORTED",
+          "blockerCode": "TRINKET_TRIGGER_MISMATCH",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "camping",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "party-provisions",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "roll-provision-dice",
+                  "target": "party-provisions",
+                  "parameters": {
+                    "count": 2
+                  }
+                }
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        },
+        {
+          "side": "negative",
+          "triggerMatch": false,
+          "windowMatch": false,
+          "targetMatch": false,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "missingModifierConsumers": [],
+          "effectMatch": false,
+          "conditionMatch": true,
+          "triggerScopeComplete": true,
+          "sourceTimingScopeStatus": "SOURCE_BOUND",
+          "runtimeSliceSemanticComplete": false,
+          "implementationStatus": "UNSUPPORTED",
+          "blockerCode": "TRINKET_TRIGGER_MISMATCH",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "scout",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "equipped-hero",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "change-stress",
+                  "target": "equipped-hero",
+                  "parameters": {
+                    "amount": 1
+                  }
+                }
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-chirurgeons-charm",
+      "sourceSemanticComplete": true,
+      "runtimeSemanticComplete": false,
+      "positiveSideComplete": false,
+      "negativeSideComplete": false,
+      "adapterComplete": true,
+      "productionReady": false,
+      "blockerCodes": [
+        "TRINKET_TRIGGER_SCOPE_UNRESOLVED",
+        "TRINKET_TRIGGER_SCOPE_UNRESOLVED"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "triggerMatch": true,
+          "windowMatch": true,
+          "targetMatch": true,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "missingModifierConsumers": [],
+          "effectMatch": true,
+          "conditionMatch": true,
+          "triggerScopeComplete": false,
+          "sourceTimingScopeStatus": "RUNTIME_SCOPE_PARTIAL",
+          "runtimeSliceSemanticComplete": true,
+          "implementationStatus": "PARTIAL",
+          "blockerCode": "TRINKET_TRIGGER_SCOPE_UNRESOLVED",
+          "semanticMismatches": [],
+          "proofIds": [
+            "C1C5-CHIRURGEONS-RUNTIME",
+            "C1C5-CHIRURGEONS-SAVE-REPLAY",
+            "C1C5-CHIRURGEONS-SELECTOR",
+            "C1C5-E2E-CHIRURGEONS"
+          ]
+        },
+        {
+          "side": "negative",
+          "triggerMatch": true,
+          "windowMatch": true,
+          "targetMatch": true,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "missingModifierConsumers": [],
+          "effectMatch": true,
+          "conditionMatch": true,
+          "triggerScopeComplete": false,
+          "sourceTimingScopeStatus": "RUNTIME_SCOPE_PARTIAL",
+          "runtimeSliceSemanticComplete": true,
+          "implementationStatus": "PARTIAL",
+          "blockerCode": "TRINKET_TRIGGER_SCOPE_UNRESOLVED",
+          "semanticMismatches": [],
+          "proofIds": [
+            "C1C5-CHIRURGEONS-RUNTIME",
+            "C1C5-CHIRURGEONS-SAVE-REPLAY",
+            "C1C5-CHIRURGEONS-SELECTOR",
+            "C1C5-E2E-CHIRURGEONS"
+          ]
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-dark-bracer",
+      "sourceSemanticComplete": true,
+      "runtimeSemanticComplete": true,
+      "positiveSideComplete": true,
+      "negativeSideComplete": true,
+      "adapterComplete": true,
+      "productionReady": true,
+      "blockerCodes": [],
+      "sides": [
+        {
+          "side": "positive",
+          "triggerMatch": true,
+          "windowMatch": true,
+          "targetMatch": true,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "missingModifierConsumers": [],
+          "effectMatch": true,
+          "conditionMatch": true,
+          "triggerScopeComplete": true,
+          "sourceTimingScopeStatus": "SOURCE_BOUND",
+          "runtimeSliceSemanticComplete": true,
+          "implementationStatus": "IMPLEMENTED",
+          "blockerCode": null,
+          "semanticMismatches": [],
+          "proofIds": [
+            "C1C6-DARK-BRACER-RUNTIME",
+            "C1C6-DARK-BRACER-SAVE-REPLAY",
+            "C1C6-DARK-BRACER-SELECTOR",
+            "C1C6-E2E-DARK-BRACER"
+          ]
+        },
+        {
+          "side": "negative",
+          "triggerMatch": true,
+          "windowMatch": true,
+          "targetMatch": true,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "missingModifierConsumers": [],
+          "effectMatch": true,
+          "conditionMatch": true,
+          "triggerScopeComplete": true,
+          "sourceTimingScopeStatus": "SOURCE_BOUND",
+          "runtimeSliceSemanticComplete": true,
+          "implementationStatus": "IMPLEMENTED",
+          "blockerCode": null,
+          "semanticMismatches": [],
+          "proofIds": [
+            "C1C6-DARK-BRACER-RUNTIME",
+            "C1C6-DARK-BRACER-SAVE-REPLAY",
+            "C1C6-DARK-BRACER-SELECTOR",
+            "C1C6-E2E-DARK-BRACER"
+          ]
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-fortunate-armlet",
+      "sourceSemanticComplete": true,
+      "runtimeSemanticComplete": false,
+      "positiveSideComplete": true,
+      "negativeSideComplete": false,
+      "adapterComplete": true,
+      "productionReady": false,
+      "blockerCodes": [
+        "VOLUNTARY_DECLARATION_RUNTIME",
+        "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "triggerMatch": true,
+          "windowMatch": true,
+          "targetMatch": true,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "missingModifierConsumers": [],
+          "effectMatch": true,
+          "conditionMatch": true,
+          "triggerScopeComplete": true,
+          "sourceTimingScopeStatus": "SOURCE_BOUND",
+          "runtimeSliceSemanticComplete": true,
+          "implementationStatus": "IMPLEMENTED",
+          "blockerCode": null,
+          "semanticMismatches": [],
+          "proofIds": [
+            "C1C7-FORTUNATE-POSITIVE-RUNTIME",
+            "C1C7-FORTUNATE-POSITIVE-SAVE-REPLAY",
+            "C1C7-FORTUNATE-POSITIVE-SELECTOR",
+            "C1C7-E2E-FORTUNATE-POSITIVE"
+          ]
+        },
+        {
+          "side": "negative",
+          "triggerMatch": false,
+          "windowMatch": false,
+          "targetMatch": false,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "missingModifierConsumers": [],
+          "effectMatch": false,
+          "conditionMatch": true,
+          "triggerScopeComplete": false,
+          "sourceTimingScopeStatus": "SOURCE_UNRESOLVED",
+          "runtimeSliceSemanticComplete": false,
+          "implementationStatus": "PARTIAL",
+          "blockerCode": "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "voluntary-declaration",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "equipped-hero",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "change-stress",
+                  "target": "equipped-hero",
+                  "parameters": {
+                    "amount": 1
+                  }
+                }
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-protective-padlock",
+      "sourceSemanticComplete": true,
+      "runtimeSemanticComplete": false,
+      "positiveSideComplete": false,
+      "negativeSideComplete": false,
+      "adapterComplete": false,
+      "productionReady": false,
+      "blockerCodes": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_SCALE_INCOMING_DAMAGE",
+        "EXACT_APPLICABLE_TIMING_HERO_HIT_BY_ATTACK_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_TRINKETMODIFIERTYPE_MOVEMENT",
+        "VOLUNTARY_DECLARATION_RUNTIME",
+        "TRINKET_TRIGGER_MISMATCH",
+        "TRINKET_MODIFIER_CONSUMER_MISSING"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "triggerMatch": false,
+          "windowMatch": false,
+          "targetMatch": false,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "missingModifierConsumers": [],
+          "effectMatch": false,
+          "conditionMatch": true,
+          "triggerScopeComplete": true,
+          "sourceTimingScopeStatus": "SOURCE_BOUND",
+          "runtimeSliceSemanticComplete": false,
+          "implementationStatus": "UNSUPPORTED",
+          "blockerCode": "TRINKET_TRIGGER_MISMATCH",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "hero-hit-by-attack",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "equipped-hero",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "scale-incoming-damage",
+                  "target": "equipped-hero",
+                  "parameters": {
+                    "factor": 0.5,
+                    "rounding": "up"
+                  }
+                }
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        },
+        {
+          "side": "negative",
+          "triggerMatch": false,
+          "windowMatch": false,
+          "targetMatch": false,
+          "modifierMatch": false,
+          "modifierConsumerMatch": false,
+          "missingModifierConsumers": [
+            "movement"
+          ],
+          "effectMatch": true,
+          "conditionMatch": true,
+          "triggerScopeComplete": false,
+          "sourceTimingScopeStatus": "SOURCE_UNRESOLVED",
+          "runtimeSliceSemanticComplete": false,
+          "implementationStatus": "UNSUPPORTED",
+          "blockerCode": "TRINKET_MODIFIER_CONSUMER_MISSING",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "voluntary-declaration",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "equipped-hero",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_MODIFIER_TYPE_MISMATCH",
+              "source": [
+                {
+                  "stat": "movement",
+                  "operation": "add",
+                  "amount": -1
+                }
+              ],
+              "runtime": []
+            },
+            {
+              "code": "TRINKET_MODIFIER_CONSUMER_MISSING",
+              "source": [
+                "movement"
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-solar-bracer",
+      "sourceSemanticComplete": true,
+      "runtimeSemanticComplete": true,
+      "positiveSideComplete": true,
+      "negativeSideComplete": true,
+      "adapterComplete": true,
+      "productionReady": true,
+      "blockerCodes": [],
+      "sides": [
+        {
+          "side": "positive",
+          "triggerMatch": true,
+          "windowMatch": true,
+          "targetMatch": true,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "missingModifierConsumers": [],
+          "effectMatch": true,
+          "conditionMatch": true,
+          "triggerScopeComplete": true,
+          "sourceTimingScopeStatus": "SOURCE_BOUND",
+          "runtimeSliceSemanticComplete": true,
+          "implementationStatus": "IMPLEMENTED",
+          "blockerCode": null,
+          "semanticMismatches": [],
+          "proofIds": [
+            "C1C6-SOLAR-BRACER-RUNTIME",
+            "C1C6-SOLAR-BRACER-SAVE-REPLAY",
+            "C1C6-SOLAR-BRACER-SELECTOR",
+            "C1C6-E2E-SOLAR-BRACER"
+          ]
+        },
+        {
+          "side": "negative",
+          "triggerMatch": true,
+          "windowMatch": true,
+          "targetMatch": true,
+          "modifierMatch": true,
+          "modifierConsumerMatch": true,
+          "missingModifierConsumers": [],
+          "effectMatch": true,
+          "conditionMatch": true,
+          "triggerScopeComplete": true,
+          "sourceTimingScopeStatus": "SOURCE_BOUND",
+          "runtimeSliceSemanticComplete": true,
+          "implementationStatus": "IMPLEMENTED",
+          "blockerCode": null,
+          "semanticMismatches": [],
+          "proofIds": [
+            "C1C6-SOLAR-BRACER-RUNTIME",
+            "C1C6-SOLAR-BRACER-SAVE-REPLAY",
+            "C1C6-SOLAR-BRACER-SELECTOR",
+            "C1C6-E2E-SOLAR-BRACER"
+          ]
+        }
+      ]
+    }
+  ]
+}
