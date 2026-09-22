@@ -120,6 +120,7 @@ type SourceTrinket = (typeof trinketData)[number];
 
 export const normalizePrimitives = (message: string): string[] => {
   const primitives: string[] = [];
+  if (/timing voluntary-declaration/i.test(message)) primitives.push('VOLUNTARY_DECLARATION_RUNTIME');
   if (/timing hero-skill-resolution/i.test(message)) primitives.push('POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW');
   if (/timing hero-skill-hits/i.test(message)) primitives.push('PRE_DAMAGE_HIT_TRINKET_WINDOW');
   if (/primitive:set-damage/i.test(message)) primitives.push('SET_DAMAGE_OVERRIDE');
@@ -532,6 +533,29 @@ function postRollModifierTrinket(
 
 const accuracyStone = postRollModifierTrinket('community-trinket-core-accuracy-stone', { type: 'accuracy', amount: 1 }, { type: 'accuracy', amount: -1 });
 const criticalStone = postRollModifierTrinket('community-trinket-core-critical-stone', { type: 'crit', amount: 2 }, { type: 'accuracy', amount: -2 });
+const fortunateSource = sourceTrinket('community-trinket-core-fortunate-armlet');
+const fortunateArmlet: TrinketDefinition = {
+  id: fortunateSource.id,
+  name: fortunateSource.printedName,
+  level: 2,
+  positiveSide: {
+    side: 'positive', label: '命中 +1 / 暴击 +1', description: fortunateSource.positiveSide.label,
+    useWindows: ['after-attack-roll-before-hit-resolution'],
+    modifiers: [{ type: 'accuracy', amount: 1 }, { type: 'crit', amount: 1 }], effects: [],
+    canUse: [{ type: 'in-battle' }, { type: 'is-acting-hero' }],
+  },
+  // Outcome B: retain the data shape without inventing a legal declaration window.
+  negativeSide: {
+    side: 'negative', label: '压力 +1（时机未决）', description: fortunateSource.negativeSide.label,
+    useWindows: [], modifiers: [], effects: [],
+  },
+  sellPrice: sellPriceForLevel(2), buyPrice: buyPriceForLevel(2), officialDataStatus: 'verified',
+  sourceReference: fortunateSource.sourceReferences.join('; '), enabledInOfficialPool: false, dataOrigin: 'community',
+  runtimeContentMetadata: {
+    sourceDefinitionId: fortunateSource.id, contentSet: 'core', region: null,
+    sourceOrigin: 'community-complete-edition',
+  },
+};
 const chirurgeonsSource = sourceTrinket('community-trinket-core-chirurgeons-charm');
 const chirurgeonsCharm: TrinketDefinition = {
   id: chirurgeonsSource.id,
@@ -585,6 +609,7 @@ const solarBracer = bracerTrinket('community-trinket-core-solar-bracer', 'min', 
 export const COMMUNITY_TRINKET_RUNTIME_ADAPTERS: Readonly<Record<string, CommunityTrinketRuntimeAdapter>> = Object.freeze({
   [accuracyStone.id]: { adapterId: 'post-roll-accuracy-stone-v1', definitionId: accuracyStone.id, requiredPrimitives: ['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW'], definition: accuracyStone },
   [criticalStone.id]: { adapterId: 'post-roll-critical-stone-v1', definitionId: criticalStone.id, requiredPrimitives: ['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW'], definition: criticalStone },
+  [fortunateArmlet.id]: { adapterId: 'post-roll-fortunate-armlet-positive-v1', definitionId: fortunateArmlet.id, requiredPrimitives: ['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW'], definition: fortunateArmlet },
   [chirurgeonsCharm.id]: { adapterId: 'staged-healing-chirurgeons-charm-v1', definitionId: chirurgeonsCharm.id, requiredPrimitives: ['STAGED_HEALING_TRINKET_WINDOWS'], definition: chirurgeonsCharm },
   [darkBracer.id]: { adapterId: 'staged-attack-dark-bracer-v1', definitionId: darkBracer.id, requiredPrimitives: ['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW', 'PRE_DAMAGE_HIT_TRINKET_WINDOW', 'SET_DAMAGE_OVERRIDE'], definition: darkBracer },
   [solarBracer.id]: { adapterId: 'staged-attack-solar-bracer-v1', definitionId: solarBracer.id, requiredPrimitives: ['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW', 'PRE_DAMAGE_HIT_TRINKET_WINDOW', 'SET_DAMAGE_OVERRIDE'], definition: solarBracer },
@@ -603,6 +628,21 @@ export const COMMUNITY_TRINKET_PRODUCTION_PROOFS: Readonly<Record<string, Commun
     saveReplayTests: ['C1BR-SAVE-CRITICAL-SIDE-REPLAY'], selectorTests: ['C1BR-CS-TRINKET-METADATA'],
     e2eTests: ['C1BR-E2E-CRITICAL'],
   },
+  [fortunateArmlet.id]: {
+    definitionId: fortunateArmlet.id, runtimeAdapterId: 'post-roll-fortunate-armlet-positive-v1',
+    requiredPrimitives: ['FORTUNATE_POST_ROLL_ATTACK_SLICE'],
+    primitiveProofRequirements: {
+      'C1C7-FORTUNATE-POSITIVE-RUNTIME': 'FORTUNATE_POST_ROLL_ATTACK_SLICE',
+      'C1C7-FORTUNATE-POSITIVE-SAVE-REPLAY': 'FORTUNATE_POST_ROLL_ATTACK_SLICE',
+      'C1C7-FORTUNATE-POSITIVE-SELECTOR': 'FORTUNATE_POST_ROLL_ATTACK_SLICE',
+      'C1C7-E2E-FORTUNATE-POSITIVE': 'FORTUNATE_POST_ROLL_ATTACK_SLICE',
+    } as Record<string, string>,
+    sourceSupported: true, semanticSupported: true, stateful: true,
+    productionTests: ['C1C7-FORTUNATE-POSITIVE-RUNTIME'],
+    saveReplayTests: ['C1C7-FORTUNATE-POSITIVE-SAVE-REPLAY'],
+    selectorTests: ['C1C7-FORTUNATE-POSITIVE-SELECTOR'],
+    e2eTests: ['C1C7-E2E-FORTUNATE-POSITIVE'],
+  },
   [chirurgeonsCharm.id]: {
     definitionId: chirurgeonsCharm.id, runtimeAdapterId: 'staged-healing-chirurgeons-charm-v1',
     requiredPrimitives: ['BATTLE_HEALING_TRINKET_WINDOWS'],
@@ -611,7 +651,7 @@ export const COMMUNITY_TRINKET_PRODUCTION_PROOFS: Readonly<Record<string, Commun
       'C1C5-CHIRURGEONS-SAVE-REPLAY': 'BATTLE_HEALING_TRINKET_WINDOWS',
       'C1C5-CHIRURGEONS-SELECTOR': 'BATTLE_HEALING_TRINKET_WINDOWS',
       'C1C5-E2E-CHIRURGEONS': 'BATTLE_HEALING_TRINKET_WINDOWS',
-    }, sourceSupported: true,
+    } as Record<string, string>, sourceSupported: true,
     semanticSupported: true, stateful: true, productionTests: ['C1C5-CHIRURGEONS-RUNTIME'],
     saveReplayTests: ['C1C5-CHIRURGEONS-SAVE-REPLAY'], selectorTests: ['C1C5-CHIRURGEONS-SELECTOR'],
     e2eTests: ['C1C5-E2E-CHIRURGEONS'],
@@ -660,10 +700,11 @@ export function evaluateCommunityTrinketCapability(
   const productionStatus: ProductionStatus = sourceBlocked ? 'SOURCE_BLOCKED'
     : missingPrimitives.length > 0 ? 'ENGINE_PRIMITIVE_MISSING'
       : runtimeSemanticComplete && adapter && proofComplete ? 'PRODUCTION_READY' : 'ADAPTER_REQUIRED';
+  const semanticBlockers = semanticObligations.flatMap((obligation) => obligation.blockerCode ? [obligation.blockerCode] : []);
   const blockerCodes = sourceBlocked ? ['SOURCE_EVIDENCE_BLOCKED']
-    : productionStatus === 'ENGINE_PRIMITIVE_MISSING' ? missingPrimitives
+    : productionStatus === 'ENGINE_PRIMITIVE_MISSING' ? [...new Set([...missingPrimitives, ...semanticBlockers])]
     : productionStatus === 'PRODUCTION_READY' ? [] : [
-    ...semanticObligations.flatMap((obligation) => obligation.blockerCode ? [obligation.blockerCode] : []),
+    ...semanticBlockers,
     ...(adapter ? [] : ['RUNTIME_ADAPTER_MISSING']),
     ...(proofMatches ? [] : ['PRODUCTION_PROOF_MISSING_OR_MISMATCHED']),
     ...(proof && !proof.sourceSupported ? ['SOURCE_PROOF_MISSING'] : []),

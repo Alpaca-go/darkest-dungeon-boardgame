@@ -1,6 +1,8 @@
 import type {
   ActiveEffectDefinition, ActiveModifierDefinition, TrinketDefinition, TrinketSideDefinition, TrinketUseCondition,
 } from '../types/trinkets';
+import { missingModifierConsumers } from './trinket-modifier-consumer-coverage';
+import { trinketTriggerScopeBinding, type TrinketSourceTimingScopeStatus } from './trinket-trigger-scope-coverage';
 
 export type TrinketSemanticImplementationStatus = 'IMPLEMENTED' | 'PARTIAL' | 'UNSUPPORTED' | 'SOURCE_UNRESOLVED';
 export type TrinketSemanticMismatchCode =
@@ -8,7 +10,8 @@ export type TrinketSemanticMismatchCode =
   | 'TRINKET_MODIFIER_TYPE_MISMATCH' | 'TRINKET_MODIFIER_AMOUNT_MISMATCH' | 'TRINKET_MODIFIER_OPERATION_MISMATCH'
   | 'TRINKET_EFFECT_TYPE_MISMATCH' | 'TRINKET_EFFECT_PARAMETER_MISMATCH'
   | 'TRINKET_CONDITION_MISMATCH' | 'TRINKET_RUNTIME_ADDED_CONDITION_UNSUPPORTED'
-  | 'TRINKET_TRIGGER_SCOPE_UNRESOLVED' | 'TRINKET_SOURCE_PAYLOAD_CANONICALIZATION_UNSUPPORTED';
+  | 'TRINKET_TRIGGER_SCOPE_UNRESOLVED' | 'TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED'
+  | 'TRINKET_MODIFIER_CONSUMER_MISSING' | 'TRINKET_SOURCE_PAYLOAD_CANONICALIZATION_UNSUPPORTED';
 
 export interface CanonicalCondition { type: string; operator?: string; value?: string | number | boolean }
 export interface CanonicalModifier { stat: string; operation: 'add' | 'set'; amount: number }
@@ -23,7 +26,8 @@ export interface RuntimeTrinketSemanticBindings {
 export interface TrinketSemanticMismatch { code: TrinketSemanticMismatchCode; source: unknown; runtime: unknown }
 export interface TrinketSemanticComparison {
   triggerMatch: boolean; windowMatch: boolean; targetMatch: boolean;
-  modifierMatch: boolean; effectMatch: boolean; conditionMatch: boolean;
+  modifierMatch: boolean; modifierConsumerMatch: boolean; missingModifierConsumers: string[];
+  effectMatch: boolean; conditionMatch: boolean;
   sourcePayload: CanonicalTrinketSidePayload; runtimePayload: CanonicalTrinketSidePayload;
   derivedRuntimeConditions: CanonicalCondition[]; runtimeConditionEvidence: string[];
   unsupportedRuntimeConditions: string[]; unsupportedRuntimeBehavior: string[];
@@ -38,7 +42,9 @@ export interface TrinketSemanticObligation {
   unsupportedRuntimeConditions: string[]; unsupportedRuntimeBehavior: string[]; runtimeConditionEvidence: string[];
   runtimeEffectBindings: string[];
   triggerMatch: boolean; windowMatch: boolean; targetMatch: boolean;
-  modifierMatch: boolean; effectMatch: boolean; conditionMatch: boolean; runtimeSliceSemanticComplete: boolean;
+  modifierMatch: boolean; modifierConsumerMatch: boolean; missingModifierConsumers: string[];
+  effectMatch: boolean; conditionMatch: boolean; runtimeSliceSemanticComplete: boolean;
+  triggerScopeComplete: boolean; sourceTimingScopeStatus: TrinketSourceTimingScopeStatus;
   semanticMismatches: TrinketSemanticMismatch[];
   implementationStatus: TrinketSemanticImplementationStatus; proofIds: string[]; blockerCode: string | null;
 }
@@ -126,9 +132,14 @@ function bindingForRuntime(runtime: TrinketSideDefinition | undefined): RuntimeT
 }
 
 function modifierMismatch(source: CanonicalModifier[], runtime: CanonicalModifier[]): TrinketSemanticMismatch | null {
-  if (source.length !== runtime.length) return { code: 'TRINKET_MODIFIER_TYPE_MISMATCH', source, runtime };
-  for (let index = 0; index < source.length; index += 1) {
-    const expected = source[index]; const actual = runtime[index];
+  const canonical = (values: CanonicalModifier[]) => [...values].sort((left, right) =>
+    left.stat.localeCompare(right.stat) || left.operation.localeCompare(right.operation) || left.amount - right.amount);
+  const expectedModifiers = canonical(source); const runtimeModifiers = canonical(runtime);
+  if (expectedModifiers.length !== runtimeModifiers.length) {
+    return { code: 'TRINKET_MODIFIER_TYPE_MISMATCH', source: expectedModifiers, runtime: runtimeModifiers };
+  }
+  for (let index = 0; index < expectedModifiers.length; index += 1) {
+    const expected = expectedModifiers[index]; const actual = runtimeModifiers[index];
     if (expected.stat !== actual.stat) return { code: 'TRINKET_MODIFIER_TYPE_MISMATCH', source: expected, runtime: actual };
     if (expected.operation !== actual.operation) return { code: 'TRINKET_MODIFIER_OPERATION_MISMATCH', source: expected, runtime: actual };
     if (expected.amount !== actual.amount) return { code: 'TRINKET_MODIFIER_AMOUNT_MISMATCH', source: expected, runtime: actual };
@@ -181,6 +192,8 @@ export function compareTrinketSemanticPayload(
   const windowMatch = bindings.window !== null && bindings.window === expectedWindow && runtimeSide?.useWindows.length === 1;
   const targetMatch = bindings.target === sourceSide.target;
   const modifierProblem = modifierMismatch(sourceModifiers, runtimeModifiers);
+  const consumersMissing = missingModifierConsumers(sourceModifiers);
+  const modifierConsumerMatch = consumersMissing.length === 0;
   const effectProblem = effectMismatch(sourceEffects, runtimeEffects);
   const conditionExact = exactArray(sourceConditions, sourceConditionRuntime);
   const conditionMatch = conditionExact && unsupportedRuntimeConditions.length === 0;
@@ -198,31 +211,39 @@ export function compareTrinketSemanticPayload(
   if (!windowMatch) mismatches.push({ code: 'TRINKET_WINDOW_MISMATCH', source: expectedWindow, runtime: bindings.window });
   if (!targetMatch) mismatches.push({ code: 'TRINKET_TARGET_MISMATCH', source: sourceSide.target, runtime: bindings.target });
   if (modifierProblem) mismatches.push(modifierProblem);
+  if (!modifierConsumerMatch) mismatches.push({
+    code: 'TRINKET_MODIFIER_CONSUMER_MISSING', source: consumersMissing, runtime: [],
+  });
   if (effectProblem) mismatches.push(effectProblem);
   if (!conditionExact) mismatches.push({ code: 'TRINKET_CONDITION_MISMATCH', source: sourceConditions, runtime: sourceConditionRuntime });
   if (unsupportedRuntimeConditions.length) mismatches.push({ code: 'TRINKET_RUNTIME_ADDED_CONDITION_UNSUPPORTED', source: sourceConditions, runtime: unsupportedRuntimeConditions });
   return {
-    triggerMatch, windowMatch, targetMatch, modifierMatch: modifierProblem === null, effectMatch: effectProblem === null, conditionMatch,
+    triggerMatch, windowMatch, targetMatch, modifierMatch: modifierProblem === null,
+    modifierConsumerMatch, missingModifierConsumers: consumersMissing,
+    effectMatch: effectProblem === null, conditionMatch,
     sourcePayload: { trigger: sourceSide.trigger, target: sourceSide.target, conditions: sourceConditions, modifiers: sourceModifiers, effects: sourceEffects },
     runtimePayload: { trigger: bindings.trigger ?? '', target: bindings.target ?? '', conditions: sourceConditionRuntime, modifiers: runtimeModifiers, effects: runtimeEffects },
     derivedRuntimeConditions, runtimeConditionEvidence, unsupportedRuntimeConditions, unsupportedRuntimeBehavior, mismatches,
-    runtimeSliceSemanticComplete: sourceCanonicalizationComplete && triggerMatch && windowMatch && targetMatch && modifierProblem === null && effectProblem === null
+    runtimeSliceSemanticComplete: sourceCanonicalizationComplete && triggerMatch && windowMatch && targetMatch
+      && modifierProblem === null && modifierConsumerMatch && effectProblem === null
       && conditionMatch && unsupportedRuntimeBehavior.length === 0,
   };
 }
 
-function triggerScopeComplete(trigger: string): boolean { return trigger !== 'hero-heals' && trigger !== 'hero-is-healed'; }
 export function trinketSemanticObligations(source: TrinketSourceDefinition, adapter: TrinketDefinition | undefined, proof: TrinketProofBinding | undefined): TrinketSemanticObligation[] {
   return (['positive', 'negative'] as const).map((side) => {
     const value = side === 'positive' ? source.positiveSide : source.negativeSide; const runtime = sideDefinition(adapter, side);
     const bindings = bindingForRuntime(runtime); const comparison = compareTrinketSemanticPayload(value, runtime, bindings);
     const sourceResolved = source.sourceStatus === 'source-supported' && source.unresolvedFields.length === 0 && value.unresolvedFields.length === 0;
-    const scopeComplete = triggerScopeComplete(value.trigger);
+    const triggerScope = trinketTriggerScopeBinding(value.trigger);
+    const scopeComplete = triggerScope.scopeComplete;
     const proofIds = comparison.runtimeSliceSemanticComplete && proof ? [...new Set([...proof.productionTests, ...proof.saveReplayTests, ...proof.selectorTests, ...proof.e2eTests])] : [];
     const implementationStatus: TrinketSemanticImplementationStatus = !sourceResolved ? 'SOURCE_UNRESOLVED'
       : comparison.runtimeSliceSemanticComplete && scopeComplete && proofIds.length > 0 ? 'IMPLEMENTED'
         : comparison.runtimeSliceSemanticComplete || adapter ? 'PARTIAL' : 'UNSUPPORTED';
-    const blockerCode = comparison.mismatches[0]?.code ?? (!scopeComplete ? 'TRINKET_TRIGGER_SCOPE_UNRESOLVED' : null);
+    const blockerCode = comparison.missingModifierConsumers.length > 0 ? 'TRINKET_MODIFIER_CONSUMER_MISSING'
+      : value.trigger === 'voluntary-declaration' && !scopeComplete ? triggerScope.blockerCode
+        : comparison.mismatches[0]?.code ?? (!scopeComplete ? triggerScope.blockerCode : null);
     return {
       obligationId: `${source.id}:${side}`, definitionId: source.id, side, printedText: value.label,
       trigger: value.trigger, sourceUseWindow: value.useWindow, target: value.target,
@@ -233,7 +254,10 @@ export function trinketSemanticObligations(source: TrinketSourceDefinition, adap
       unsupportedRuntimeBehavior: comparison.unsupportedRuntimeBehavior, runtimeConditionEvidence: comparison.runtimeConditionEvidence,
       runtimeEffectBindings: comparison.runtimeSliceSemanticComplete ? ['CanonicalTrinketSidePayload:exact'] : value.runtimeSupport.existingCandidates.slice(),
       triggerMatch: comparison.triggerMatch, windowMatch: comparison.windowMatch, targetMatch: comparison.targetMatch,
-      modifierMatch: comparison.modifierMatch, effectMatch: comparison.effectMatch, conditionMatch: comparison.conditionMatch,
+      modifierMatch: comparison.modifierMatch, modifierConsumerMatch: comparison.modifierConsumerMatch,
+      missingModifierConsumers: comparison.missingModifierConsumers,
+      effectMatch: comparison.effectMatch, conditionMatch: comparison.conditionMatch,
+      triggerScopeComplete: scopeComplete, sourceTimingScopeStatus: triggerScope.sourceTimingScopeStatus,
       runtimeSliceSemanticComplete: comparison.runtimeSliceSemanticComplete, semanticMismatches: comparison.mismatches,
       implementationStatus, proofIds, blockerCode,
     };

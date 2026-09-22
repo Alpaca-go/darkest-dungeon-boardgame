@@ -19,6 +19,8 @@ export const CRITICAL_STONE_ID = 'community-trinket-core-critical-stone';
 export const CHIRURGEONS_CHARM_ID = 'community-trinket-core-chirurgeons-charm';
 export const DARK_BRACER_ID = 'community-trinket-core-dark-bracer';
 export const SOLAR_BRACER_ID = 'community-trinket-core-solar-bracer';
+export const FORTUNATE_ARMLET_ID = 'community-trinket-core-fortunate-armlet';
+export const BOOK_OF_RELAXATION_ID = 'community-trinket-core-book-of-relaxation';
 export const C1C1_CORE_QUEST_IDS = [
   'community-quest-ruins-lvl1-scout-ahead',
   'community-quest-ruins-lvl1-wipe-em-out',
@@ -235,6 +237,10 @@ export const PRODUCTION_PROOF_REGISTRY: Readonly<Record<string, RegisteredProduc
     proof({ proofId: `C1C6-${label}-BRACER-SELECTOR`, definitionIds: [definitionId], proofType: 'selector', testFile: 'src/game-engine/c1c6-dark-solar-bracer.test.ts', runner: 'vitest', status: 'active' }),
     proof({ proofId: `C1C6-E2E-${label}-BRACER`, definitionIds: [definitionId], proofType: 'e2e', testFile: 'e2e/phase11a4-c1c6-dark-solar-bracer.spec.ts', runner: 'playwright', status: 'active', proofSurface: 'production-ui' }),
   ]),
+  proof({ proofId: 'C1C7-FORTUNATE-POSITIVE-RUNTIME', definitionIds: [FORTUNATE_ARMLET_ID], proofType: 'production-runtime', testFile: 'src/game-engine/c1c7-fortunate-armlet.test.ts', runner: 'vitest', status: 'active', scope: 'primitive', primitiveId: 'FORTUNATE_POST_ROLL_ATTACK_SLICE' }),
+  proof({ proofId: 'C1C7-FORTUNATE-POSITIVE-SAVE-REPLAY', definitionIds: [FORTUNATE_ARMLET_ID], proofType: 'save-replay', testFile: 'src/game-engine/c1c7-fortunate-armlet.test.ts', runner: 'vitest', status: 'active', scope: 'primitive', primitiveId: 'FORTUNATE_POST_ROLL_ATTACK_SLICE' }),
+  proof({ proofId: 'C1C7-FORTUNATE-POSITIVE-SELECTOR', definitionIds: [FORTUNATE_ARMLET_ID], proofType: 'selector', testFile: 'src/game-engine/c1c7-fortunate-armlet.test.ts', runner: 'vitest', status: 'active', scope: 'primitive', primitiveId: 'FORTUNATE_POST_ROLL_ATTACK_SLICE' }),
+  proof({ proofId: 'C1C7-E2E-FORTUNATE-POSITIVE', definitionIds: [FORTUNATE_ARMLET_ID], proofType: 'e2e', testFile: 'e2e/phase11a4-c1c7-fortunate-armlet.spec.ts', runner: 'playwright', status: 'active', scope: 'primitive', primitiveId: 'FORTUNATE_POST_ROLL_ATTACK_SLICE', proofSurface: 'production-ui' }),
 ].map((entry) => [entry.proofId, entry])));
 
 export function resolveRegisteredProof(

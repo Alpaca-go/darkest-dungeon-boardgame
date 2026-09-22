@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-7",
+  "trigger": "voluntary-declaration",
+  "outcome": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+  "sourceReferences": [
+    {
+      "path": "docs/DD_EN_COREBOX_RULES.pdf",
+      "pages": [26],
+      "finding": "Trinkets may be used when the situation applies; the hero declares use, resolves the effect, flips the card, and in battle may use a Trinket only once per turn. The Critical Stone example leaves its negative use at an unspecified 'at some point'."
+    },
+    {
+      "path": "docs/DD_EN_COREBOX_RULES.pdf",
+      "pages": [14, 15, 18, 32],
+      "finding": "Exploration, Resting, Hero Turns, and Hamlet procedures were checked and do not define voluntary Trinket declaration insertion points."
+    },
+    {
+      "path": "src/data/community-reference/trinkets/data.json",
+      "definitions": [
+        "community-trinket-core-fortunate-armlet",
+        "community-trinket-core-book-of-relaxation"
+      ],
+      "finding": "Card wording identifies declaration-driven effects but does not close the cross-context timing domain."
+    }
+  ],
+  "sourceFacts": {
+    "declarationRequired": true,
+    "effectResolvesBeforeFlip": true,
+    "battleUseLimit": "once-per-turn",
+    "exactInsertionTimingDefined": false,
+    "nonBattleUsageEpochDefined": false
+  },
+  "scope": {
+    "battleActiveHeroTurn": "SOURCE_UNRESOLVED",
+    "battleBetweenActions": "SOURCE_UNRESOLVED",
+    "battleBeforeActionDeclared": "SOURCE_UNRESOLVED",
+    "battleAfterActionResolved": "SOURCE_UNRESOLVED",
+    "battleReactionWindowOpen": "SOURCE_UNRESOLVED",
+    "dungeonExploration": "SOURCE_UNRESOLVED",
+    "roomResolution": "SOURCE_UNRESOLVED",
+    "corridorResolution": "SOURCE_UNRESOLVED",
+    "restCamping": "SOURCE_UNRESOLVED",
+    "hamlet": "SOURCE_UNRESOLVED",
+    "questSetup": "SOURCE_UNRESOLVED",
+    "questResolution": "SOURCE_UNRESOLVED"
+  },
+  "scopeComplete": false,
+  "runtimeDecision": {
+    "manualDeclarationWindowWired": false,
+    "defaultPolicy": "FAIL_CLOSED",
+    "reason": "No reliable source defines a complete legal timing domain, so the engine does not infer one from its current phases or UI."
+  }
+}
