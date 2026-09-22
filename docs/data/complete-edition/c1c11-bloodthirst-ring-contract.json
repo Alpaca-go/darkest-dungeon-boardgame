@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-11",
+  "sourceDefinitionId": "community-trinket-core-bloodthirst-ring",
+  "sourceReferences": [
+    "c1a-source:tts-path:/ObjectStates/60/ContainedObjects/11"
+  ],
+  "scope": "negative-side-only",
+  "positiveSidePolicy": "fail-closed until voluntary-declaration timing is resolved",
+  "source": {
+    "positive": {
+      "trigger": "voluntary-declaration",
+      "useWindow": "declare-when-applicable",
+      "target": "equipped-hero",
+      "effects": [
+        {
+          "kind": "consume-provision",
+          "provision": "food",
+          "amount": 1
+        },
+        {
+          "kind": "heal",
+          "amount": 10
+        }
+      ]
+    },
+    "negative": {
+      "trigger": "hero-hit-by-attack",
+      "useWindow": "declare-when-applicable",
+      "target": "equipped-hero",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "bleed",
+        "turns": 2,
+        "amount": 3
+      }
+    }
+  },
+  "runtime": {
+    "adapterId": "bloodthirst-ring-hit-bleed-negative-v1",
+    "requiredPrimitives": [
+      "STAGED_INCOMING_ATTACK_RESOLUTION",
+      "HERO_HIT_BY_ATTACK_TRINKET_WINDOW",
+      "TRINKET_CONDITION_STACK_CONSUMER"
+    ],
+    "positive": {
+      "windows": [],
+      "effects": []
+    },
+    "negative": {
+      "window": "before-incoming-damage-applied",
+      "effect": {
+        "type": "apply-condition-stack",
+        "condition": "bleed",
+        "amount": 3,
+        "durationTurns": 2,
+        "target": "equipped-hero"
+      }
+    },
+    "consumer": "TRINKET_CONDITION_STACK_CONSUMER",
+    "timing": "opens only after a staged incoming attack has resolved as a hit and before incoming damage commits",
+    "duration": "bleed magnitude remains 3 while categorical duration counts 2 -> 1 -> 0",
+    "saveReplay": "open opportunity, used trinket side, status-effect event idempotency, and condition duration persist"
+  }
+}
