@@ -1,10 +1,10 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "phase": "11A.4-C1C-6",
-  "measuredAt": "2026-09-22T09:30:00.000Z",
   "baselineHead": "eca0a293f4126d8b7e31934303ed0fcfd1ae1c61",
-  "verifiedImplementationHead": "436e76cd8e3062f3fc68f1ba589822e087f821a7",
-  "verifiedImplementationTree": "48517d00f8edc812a4f30ab3297a19ee897fc214",
+  "verifiedImplementationHead": "c0fbd79d61670e165fd2531ef59676c54f5d1524",
+  "verifiedImplementationTree": "5574a0572db6efce6f0563e6576918485b0dffd2",
+  "verifiedImplementationCommittedAt": "2026-09-22T10:25:17+08:00",
   "historicalEvidenceHashes": {
     "docs/data/complete-edition/c1c5-level2-trinket-capability-matrix.json": "83b9ec1b8d4ca164b4612740ab60e8a0d057d8bf344158837f893b11d2dc3c4b",
     "docs/data/complete-edition/c1c5-level2-trinket-runtime-foundation-evidence.json": "5d43c0753feeff6cb4ff3e5412930a65de3dd290ce57c27075b6e54bee04e057",
@@ -62,46 +62,7 @@
     "C1C6-SOLAR-BRACER-SELECTOR",
     "C1C6-E2E-SOLAR-BRACER"
   ],
-  "saveReplayResults": {
-    "frozenBaseDamage": "PASS",
-    "changedRngDoesNotReroll": "PASS",
-    "duplicateDecisionRejected": "PASS"
-  },
-  "e2eResults": {
-    "darkPositiveAndNegative": "PASS",
-    "solarPositiveAndNegative": "PASS",
-    "proofSurface": "production-ui"
-  },
-  "commands": [
-    {
-      "command": "C1C-6 runtime/mutation/save tests",
-      "exitCode": 0
-    },
-    {
-      "command": "C1C-6 production UI E2E",
-      "exitCode": 0
-    },
-    {
-      "command": "C1BR regression",
-      "exitCode": 0
-    },
-    {
-      "command": "C1C5 regression",
-      "exitCode": 0
-    },
-    {
-      "command": "full regression",
-      "exitCode": 0
-    },
-    {
-      "command": "typecheck",
-      "exitCode": 0
-    },
-    {
-      "command": "build",
-      "exitCode": 0
-    }
-  ],
-  "failures": [],
+  "verificationCommand": "npm run verify:complete-edition-c1c6",
+  "verificationRequired": true,
   "terminalVerdict": "C1C6-DARK-SOLAR-ATTACK-RESOLUTION-ACCEPTED"
 }
