@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-9",
+  "sourceDefinitionId": "community-trinket-core-camouflage-cloak",
+  "sourceReferences": [
+    "c1a-source:tts-path:/ObjectStates/60/ContainedObjects/7"
+  ],
+  "source": {
+    "trigger": "hero-hit-by-attack",
+    "useWindow": "declare-when-applicable",
+    "target": "equipped-hero",
+    "effect": {
+      "kind": "apply-condition-stack",
+      "condition": "stun",
+      "turns": 1,
+      "amount": null
+    }
+  },
+  "runtime": {
+    "window": "before-incoming-damage-applied",
+    "effect": {
+      "type": "apply-condition-stack",
+      "condition": "stun",
+      "amount": null,
+      "durationTurns": 1,
+      "target": "equipped-hero"
+    },
+    "consumer": "TRINKET_CONDITION_STACK_CONSUMER",
+    "resistanceInteraction": "applyStatusEffectEvent -> applyEffectsWithResistance",
+    "turnConsumptionSemantics": "tickStun decrements conditionDurations.stun after the stunned action is skipped",
+    "eventIdentity": "trinket idempotency key + effect index"
+  }
+}
