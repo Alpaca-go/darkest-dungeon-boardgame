@@ -71,6 +71,11 @@ function conditionMet(campaign: CampaignState, heroId: string, cond: TrinketUseC
       return !inBattle(campaign);
     case 'is-acting-hero':
       return isActingHero(campaign, heroId);
+    case 'incoming-hit-not-critical': {
+      const pending = campaign.battle?.pendingMonsterAttack;
+      return Boolean(pending?.stage === 'hero-hit-window' && pending.hit === true && pending.crit === false
+        && pending.criticalOverride === null);
+    }
     case 'min-light':
       return currentLight(campaign) >= cond.value;
     case 'max-light':
@@ -145,6 +150,9 @@ export function buildOpportunityPreview(side: TrinketSideDefinition): string {
         break;
       case 'discard-disease':
         parts.push('立即丢弃本次新疾病');
+        break;
+      case 'convert-incoming-hit-to-critical':
+        parts.push('将本次普通命中转换为暴击');
         break;
       case 'log-only':
         parts.push(e.note);

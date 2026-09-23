@@ -125,6 +125,7 @@ export type ActiveEffectDefinition =
     }
   | { type: 'roll-provision-dice'; count: number; target: 'party-provisions' }
   | { type: 'discard-disease'; immediately: true; target: 'new-disease' }
+  | { type: 'convert-incoming-hit-to-critical'; target: 'equipped-hero' }
   | { type: 'log-only'; note: string };
 
 export type ProvisionFace = 'food' | 'bandage' | 'potion' | 'torch' | 'tool' | 'wild';
@@ -169,6 +170,7 @@ export type TrinketUseCondition =
   | { type: 'in-battle' }
   | { type: 'out-of-battle' }
   | { type: 'is-acting-hero' }
+  | { type: 'incoming-hit-not-critical' }
   | { type: 'min-light'; value: number }
   | { type: 'max-light'; value: number };
 

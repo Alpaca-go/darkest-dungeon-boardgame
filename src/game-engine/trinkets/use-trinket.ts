@@ -223,6 +223,9 @@ function applyOneEffect(
     case 'discard-disease':
       // Deferred: only disease-trinket-bridge may consume this context-bound effect.
       return campaign;
+    case 'convert-incoming-hit-to-critical':
+      // Deferred: only the staged monster-attack bridge may transform frozen attack facts.
+      return campaign;
     case 'log-only':
       return pushLog(campaign, `${trinketName}：${effect.note}`, 'info');
     default:

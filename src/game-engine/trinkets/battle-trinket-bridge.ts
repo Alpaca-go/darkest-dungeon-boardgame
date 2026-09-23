@@ -308,6 +308,14 @@ export function resolveTrinketOpportunity(
           incomingDamageRounding: scale.rounding,
         } } };
       }
+      const conversion = res.appliedEffects.find((effect) => effect.type === 'convert-incoming-hit-to-critical');
+      if (conversion?.type === 'convert-incoming-hit-to-critical') {
+        const currentBattle = next.battle;
+        const pending = currentBattle?.pendingMonsterAttack;
+        if (currentBattle && pending) next = { ...next, battle: { ...currentBattle, pendingMonsterAttack: {
+          ...pending, criticalOverride: 'force-critical',
+        } } };
+      }
     }
   } else {
     next = declineTrinketUse(next, opportunityId);

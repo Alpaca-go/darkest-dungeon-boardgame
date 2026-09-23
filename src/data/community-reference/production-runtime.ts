@@ -133,6 +133,7 @@ export const normalizePrimitives = (message: string): string[] => {
   if (/timing (camping|scout)/i.test(message)) primitives.push('STAGED_DUNGEON_TRINKET_WINDOWS');
   if (/primitive:roll-provision-dice/i.test(message)) primitives.push('TRINKET_PROVISION_DICE_CONSUMER');
   if (/primitive:discard-disease/i.test(message)) primitives.push('TRINKET_DISCARD_DISEASE_CONSUMER');
+  if (/primitive:convert-incoming-hit-to-critical/i.test(message)) primitives.push('INCOMING_CRITICAL_CONVERSION_CONSUMER');
   if (/timing disease-acquired/i.test(message)) primitives.push('DISEASE_ACQUIRED_TRINKET_WINDOW');
   if (/room-token composition/i.test(message)) primitives.push('QUEST_ROOM_TOKEN_COMPOSITION');
   if (/firewood|resting-point/i.test(message)) primitives.push('QUEST_FIREWOOD_RESTING_POINT_SETUP');
@@ -703,6 +704,25 @@ const bookOfConstitution: TrinketDefinition = {
   sourceReference: constitutionSource.sourceReferences.join('; '), enabledInOfficialPool: false, dataOrigin: 'community',
   runtimeContentMetadata: { sourceDefinitionId: constitutionSource.id, contentSet: 'core', region: null, sourceOrigin: 'community-complete-edition' },
 };
+const holinessSource = sourceTrinket('community-trinket-core-book-of-holiness');
+const bookOfHoliness: TrinketDefinition = {
+  id: holinessSource.id, name: holinessSource.printedName, level: 2,
+  // Voluntary declaration scope remains source-unresolved and intentionally fail-closed.
+  positiveSide: {
+    side: 'positive', label: '压力 -3（自愿声明时机未决）', description: holinessSource.positiveSide.label,
+    useWindows: [], modifiers: [], effects: [], canUse: [],
+  },
+  negativeSide: {
+    side: 'negative', label: '将普通命中转换为暴击', description: holinessSource.negativeSide.label,
+    useWindows: ['before-incoming-damage-applied'], modifiers: [], effects: [{
+      type: 'convert-incoming-hit-to-critical', target: 'equipped-hero',
+    }], canUse: [{ type: 'in-battle' }, { type: 'incoming-hit-not-critical' }],
+  },
+  sellPrice: sellPriceForLevel(2), buyPrice: buyPriceForLevel(2), officialDataStatus: 'verified',
+  sourceReference: `${holinessSource.sourceReferences.join('; ')}; DD_EN_COREBOX_RULES.pdf pp19-20,26`,
+  enabledInOfficialPool: false, dataOrigin: 'community',
+  runtimeContentMetadata: { sourceDefinitionId: holinessSource.id, contentSet: 'core', region: null, sourceOrigin: 'community-complete-edition' },
+};
 
 export const COMMUNITY_TRINKET_RUNTIME_ADAPTERS: Readonly<Record<string, CommunityTrinketRuntimeAdapter>> = Object.freeze({
   [accuracyStone.id]: { adapterId: 'post-roll-accuracy-stone-v1', definitionId: accuracyStone.id, requiredPrimitives: ['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW'], definition: accuracyStone },
@@ -716,6 +736,7 @@ export const COMMUNITY_TRINKET_RUNTIME_ADAPTERS: Readonly<Record<string, Communi
   [campersHelmet.id]: { adapterId: 'campers-helmet-camping-scout-runtime-v1', definitionId: campersHelmet.id, requiredPrimitives: ['STAGED_DUNGEON_TRINKET_WINDOWS', 'TRINKET_PROVISION_DICE_CONSUMER'], definition: campersHelmet },
   [bloodthirstRing.id]: { adapterId: 'bloodthirst-ring-hit-bleed-negative-v1', definitionId: bloodthirstRing.id, requiredPrimitives: ['STAGED_INCOMING_ATTACK_RESOLUTION', 'HERO_HIT_BY_ATTACK_TRINKET_WINDOW', 'TRINKET_CONDITION_STACK_CONSUMER'], definition: bloodthirstRing },
   [bookOfConstitution.id]: { adapterId: 'book-of-constitution-disease-discard-positive-v1', definitionId: bookOfConstitution.id, requiredPrimitives: ['STAGED_DISEASE_ACQUISITION', 'DISEASE_ACQUIRED_TRINKET_WINDOW', 'TRINKET_DISCARD_DISEASE_CONSUMER'], definition: bookOfConstitution },
+  [bookOfHoliness.id]: { adapterId: 'book-of-holiness-critical-negative-v1', definitionId: bookOfHoliness.id, requiredPrimitives: ['STAGED_INCOMING_ATTACK_RESOLUTION', 'HERO_HIT_BY_ATTACK_TRINKET_WINDOW', 'INCOMING_CRITICAL_CONVERSION_CONSUMER'], definition: bookOfHoliness },
 });
 
 export const COMMUNITY_TRINKET_PRODUCTION_PROOFS: Readonly<Record<string, CommunityProductionProof>> = Object.freeze({
@@ -847,6 +868,22 @@ export const COMMUNITY_TRINKET_PRODUCTION_PROOFS: Readonly<Record<string, Commun
     saveReplayTests: ['C1C12-CONSTITUTION-SAVE-REPLAY'], selectorTests: ['C1C12-CONSTITUTION-SELECTOR'],
     e2eTests: ['C1C12-E2E-CONSTITUTION-CURIO'],
   },
+  [bookOfHoliness.id]: {
+    definitionId: bookOfHoliness.id, runtimeAdapterId: 'book-of-holiness-critical-negative-v1',
+    requiredPrimitives: ['STAGED_INCOMING_ATTACK_RESOLUTION', 'HERO_HIT_BY_ATTACK_TRINKET_WINDOW', 'INCOMING_CRITICAL_CONVERSION_CONSUMER'],
+    primitiveProofRequirements: {
+      'C1C13-HOLINESS-CRITICAL-RUNTIME': 'INCOMING_CRITICAL_CONVERSION_CONSUMER',
+      'C1C13-HOLINESS-CRITICAL-SAVE-REPLAY': 'STAGED_INCOMING_ATTACK_RESOLUTION',
+      'C1C13-HOLINESS-CRITICAL-SELECTOR': 'HERO_HIT_BY_ATTACK_TRINKET_WINDOW',
+      'C1C13-HOLINESS-CRITICAL-COMPOSITION': 'INCOMING_CRITICAL_CONVERSION_CONSUMER',
+      'C1C13-E2E-HOLINESS-CRITICAL': 'INCOMING_CRITICAL_CONVERSION_CONSUMER',
+    } as Record<string, string>,
+    sourceSupported: true, semanticSupported: true, stateful: true,
+    productionTests: ['C1C13-HOLINESS-CRITICAL-RUNTIME', 'C1C13-HOLINESS-CRITICAL-COMPOSITION'],
+    saveReplayTests: ['C1C13-HOLINESS-CRITICAL-SAVE-REPLAY'],
+    selectorTests: ['C1C13-HOLINESS-CRITICAL-SOURCE-CONTRACT', 'C1C13-HOLINESS-CRITICAL-SELECTOR'],
+    e2eTests: ['C1C13-E2E-HOLINESS-CRITICAL'],
+  },
 });
 
 export function evaluateCommunityTrinketCapability(
@@ -871,7 +908,7 @@ export function evaluateCommunityTrinketCapability(
     ...source.positiveSide.runtimeSupport.missingCapabilities,
     ...source.negativeSide.runtimeSupport.missingCapabilities,
   ].flatMap(normalizePrimitives))];
-  const implementedTrinketPrimitives = new Set(['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW', 'STAGED_HEALING_TRINKET_WINDOWS', 'PRE_DAMAGE_HIT_TRINKET_WINDOW', 'SET_DAMAGE_OVERRIDE', 'STAGED_INCOMING_ATTACK_RESOLUTION', 'INCOMING_ATTACK_TRINKET_WINDOW', 'HERO_HIT_BY_ATTACK_TRINKET_WINDOW', 'INCOMING_DAMAGE_SCALE_CONSUMER', 'INCOMING_DODGE_MODIFIER_CONSUMER', 'TRINKET_CONDITION_STACK_CONSUMER', 'STAGED_DUNGEON_TRINKET_WINDOWS', 'TRINKET_PROVISION_DICE_CONSUMER', 'STAGED_DISEASE_ACQUISITION', 'DISEASE_ACQUIRED_TRINKET_WINDOW', 'TRINKET_DISCARD_DISEASE_CONSUMER']);
+  const implementedTrinketPrimitives = new Set(['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW', 'STAGED_HEALING_TRINKET_WINDOWS', 'PRE_DAMAGE_HIT_TRINKET_WINDOW', 'SET_DAMAGE_OVERRIDE', 'STAGED_INCOMING_ATTACK_RESOLUTION', 'INCOMING_ATTACK_TRINKET_WINDOW', 'HERO_HIT_BY_ATTACK_TRINKET_WINDOW', 'INCOMING_DAMAGE_SCALE_CONSUMER', 'INCOMING_DODGE_MODIFIER_CONSUMER', 'TRINKET_CONDITION_STACK_CONSUMER', 'STAGED_DUNGEON_TRINKET_WINDOWS', 'TRINKET_PROVISION_DICE_CONSUMER', 'STAGED_DISEASE_ACQUISITION', 'DISEASE_ACQUIRED_TRINKET_WINDOW', 'TRINKET_DISCARD_DISEASE_CONSUMER', 'INCOMING_CRITICAL_CONVERSION_CONSUMER']);
   const missingPrimitives = declaredMissingPrimitives.filter((primitive) => !implementedTrinketPrimitives.has(primitive));
   const sourceSemanticComplete = trinketSourceSemanticComplete(source);
   const runtimeSemanticComplete = trinketRuntimeSemanticComplete(sourceSemanticComplete, semanticObligations);

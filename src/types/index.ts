@@ -386,6 +386,8 @@ export interface PendingMonsterAttack {
   hit: boolean | null;
   crit: boolean | null;
   baseDamage: number | null;
+  /** Source-preserving transform; original crit/baseDamage remain frozen audit facts. */
+  criticalOverride: null | 'force-critical';
   /** Frozen before the hit window; null when the skill cannot infect. */
   diseaseRoll: number | null;
   incomingDamageNumerator: number;

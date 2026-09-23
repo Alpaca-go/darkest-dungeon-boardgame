@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-13",
+  "definitionId": "community-trinket-core-book-of-holiness",
+  "status": "SOURCE_CLOSED",
+  "source": {
+    "card": {
+      "reference": "c1a-source:tts-path:/ObjectStates/60/ContainedObjects/9",
+      "assetPath": "src/assets/community-reference/complete-edition/trinkets/core/level-2/453-16.front.png",
+      "sha256": "1a599b0b7c2bb329a006f82a23cec5facef4f5bff0709d5d477a1e508884f188",
+      "negativeText": "Turn a Hit against you into a Crit."
+    },
+    "rulebook": {
+      "path": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "pages": [19, 20, 26]
+    }
+  },
+  "closure": {
+    "criticalEffectExact": true,
+    "criticalDamageSemanticsExact": true,
+    "conversionTimingExact": true,
+    "rerollPolicyExact": true,
+    "alreadyCriticalPolicyExact": true
+  },
+  "semantics": {
+    "criticalDamage": "REPLACE_STANDARD_DAMAGE_WITH_PRINTED_CRITICAL_DAMAGE",
+    "runtimeCriticalDamageField": "MonsterSkillDefinition.maxDamage",
+    "criticalStress": "TARGET_AND_EACH_OTHER_HERO_IN_SAME_AREA_NOT_TARGETED_SUFFER_ONE_STRESS",
+    "targetEffects": "UNCHANGED",
+    "disease": "UNCHANGED",
+    "movement": "UNCHANGED",
+    "conversion": "ORDINARY_FROZEN_HIT_BECOMES_CRITICAL_AND_STANDARD_DAMAGE_IS_REPLACED",
+    "alreadyCriticalPolicy": "NOT_APPLICABLE",
+    "alreadyCriticalBasis": "The card converts a Hit into a Crit; the rulebook defines a Critical as occurring instead of a standard success, so an attack already classified Critical has no ordinary Hit classification to convert.",
+    "rngPolicy": "NO_REROLL_OR_RESELECTION",
+    "preservedFrozenFacts": ["attackRoll", "hit", "crit", "baseDamage", "diseaseRoll", "targetHeroUnitId", "skillId"],
+    "transformState": "criticalOverride=force-critical",
+    "damageOrder": [
+      "effective-critical-base-damage",
+      "damage-taken-quirk-modifiers",
+      "incoming-damage-scale",
+      "ceil",
+      "applyBattleUnitDamage"
+    ]
+  },
+  "evidence": [
+    {
+      "source": "card-negative",
+      "finding": "The equipped hero may actively turn an applicable incoming Hit into a Crit."
+    },
+    {
+      "source": "rulebook-page-19-20",
+      "finding": "A Critical success occurs instead of a standard one and uses Critical Damage instead of standard damage."
+    },
+    {
+      "source": "rulebook-page-20",
+      "finding": "When a hero suffers a Critical Hit, the target and same-area heroes not targeted by the skill suffer one Stress; target effects retain their ordinary hit-only timing."
+    },
+    {
+      "source": "rulebook-page-26",
+      "finding": "A Trinket is declared when its printed situation applies and flips after use."
+    }
+  ],
+  "positiveSide": {
+    "status": "FAIL_CLOSED",
+    "blockers": ["VOLUNTARY_DECLARATION_RUNTIME", "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED"]
+  }
+}

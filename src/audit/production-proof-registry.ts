@@ -26,6 +26,7 @@ export const CAMOUFLAGE_CLOAK_ID = 'community-trinket-core-camouflage-cloak';
 export const CAMPERS_HELMET_ID = 'community-trinket-core-campers-helmet';
 export const BLOODTHIRST_RING_ID = 'community-trinket-core-bloodthirst-ring';
 export const BOOK_OF_CONSTITUTION_ID = 'community-trinket-core-book-of-constitution';
+export const BOOK_OF_HOLINESS_ID = 'community-trinket-core-book-of-holiness';
 export const C1C1_CORE_QUEST_IDS = [
   'community-quest-ruins-lvl1-scout-ahead',
   'community-quest-ruins-lvl1-wipe-em-out',
@@ -275,6 +276,12 @@ export const PRODUCTION_PROOF_REGISTRY: Readonly<Record<string, RegisteredProduc
   proof({ proofId: 'C1C12-CONSTITUTION-SAVE-REPLAY', definitionIds: [BOOK_OF_CONSTITUTION_ID], proofType: 'save-replay', testFile: 'src/game-engine/c1c12-book-constitution.test.ts', runner: 'vitest', status: 'active', scope: 'primitive', primitiveId: 'STAGED_DISEASE_ACQUISITION' }),
   proof({ proofId: 'C1C12-CONSTITUTION-SELECTOR', definitionIds: [BOOK_OF_CONSTITUTION_ID], proofType: 'selector', testFile: 'src/audit/c1c12-book-constitution-semantics.test.ts', runner: 'vitest', status: 'active', scope: 'primitive', primitiveId: 'DISEASE_ACQUIRED_TRINKET_WINDOW' }),
   proof({ proofId: 'C1C12-E2E-CONSTITUTION-CURIO', definitionIds: [BOOK_OF_CONSTITUTION_ID], proofType: 'e2e', testFile: 'e2e/phase11a4-c1c12-book-constitution.spec.ts', runner: 'playwright', status: 'active', scope: 'primitive', primitiveId: 'DISEASE_ACQUIRED_TRINKET_WINDOW', proofSurface: 'production-ui' }),
+  proof({ proofId: 'C1C13-HOLINESS-CRITICAL-SOURCE-CONTRACT', definitionIds: [BOOK_OF_HOLINESS_ID], proofType: 'selector', testFile: 'src/audit/c1c13-book-holiness-semantics.test.ts', runner: 'vitest', status: 'active', scope: 'definition' }),
+  proof({ proofId: 'C1C13-HOLINESS-CRITICAL-RUNTIME', definitionIds: [BOOK_OF_HOLINESS_ID], proofType: 'production-runtime', testFile: 'src/game-engine/c1c13-book-holiness.test.ts', runner: 'vitest', status: 'active', scope: 'primitive', primitiveId: 'INCOMING_CRITICAL_CONVERSION_CONSUMER' }),
+  proof({ proofId: 'C1C13-HOLINESS-CRITICAL-SAVE-REPLAY', definitionIds: [BOOK_OF_HOLINESS_ID], proofType: 'save-replay', testFile: 'src/game-engine/c1c13-book-holiness.test.ts', runner: 'vitest', status: 'active', scope: 'primitive', primitiveId: 'STAGED_INCOMING_ATTACK_RESOLUTION' }),
+  proof({ proofId: 'C1C13-HOLINESS-CRITICAL-SELECTOR', definitionIds: [BOOK_OF_HOLINESS_ID], proofType: 'selector', testFile: 'src/audit/c1c13-book-holiness-semantics.test.ts', runner: 'vitest', status: 'active', scope: 'primitive', primitiveId: 'HERO_HIT_BY_ATTACK_TRINKET_WINDOW' }),
+  proof({ proofId: 'C1C13-HOLINESS-CRITICAL-COMPOSITION', definitionIds: [BOOK_OF_HOLINESS_ID], proofType: 'production-runtime', testFile: 'src/game-engine/c1c13-book-holiness.test.ts', runner: 'vitest', status: 'active', scope: 'primitive', primitiveId: 'INCOMING_CRITICAL_CONVERSION_CONSUMER' }),
+  proof({ proofId: 'C1C13-E2E-HOLINESS-CRITICAL', definitionIds: [BOOK_OF_HOLINESS_ID], proofType: 'e2e', testFile: 'e2e/phase11a4-c1c13-book-holiness.spec.ts', runner: 'playwright', status: 'active', scope: 'primitive', primitiveId: 'INCOMING_CRITICAL_CONVERSION_CONSUMER', proofSurface: 'production-ui' }),
 ].map((entry) => [entry.proofId, entry])));
 
 export function resolveRegisteredProof(

@@ -815,6 +815,7 @@ export function prepareMonsterAttackResolution(state: BattleState, monsterId: st
     kind: 'monster-attack', rootEventId, stage: 'incoming-attack-window',
     monsterUnitId: monsterId, targetHeroUnitId: target.id, skillId: skill.id,
     attackRoll: d10(), dodgeModifier: 0, hit: null, crit: null, baseDamage: null,
+    criticalOverride: null,
     diseaseRoll: null, incomingDamageNumerator: 1, incomingDamageDenominator: 1,
     incomingDamageRounding: 'ceil', processedTrinketInstanceIds: [],
   };
@@ -855,14 +856,18 @@ export function commitPendingMonsterAttackResolution(state: BattleState): Battle
     return pushBattleLog(cleared, `${monster.name} 使用 ${skill.name}，掷 ${pending.attackRoll} 未命中 ${target.name}。`, 'info');
   }
 
+  const effectiveCritical = pending.crit || pending.criticalOverride === 'force-critical';
+  const effectiveBaseDamage = pending.criticalOverride === 'force-critical' && !pending.crit
+    ? skill.maxDamage
+    : pending.baseDamage;
   let working: BattleState = cleared;
   let tgt: BattleUnit = target;
-  const inMod = applyQuirkModifiersRaw(tgt.quirkIds ?? [], state.light ?? 0, 'damage-taken', pending.baseDamage, 'attack');
+  const inMod = applyQuirkModifiersRaw(tgt.quirkIds ?? [], state.light ?? 0, 'damage-taken', effectiveBaseDamage, 'attack');
   const transformedDamage = Math.ceil(
     inMod.amount * pending.incomingDamageNumerator / pending.incomingDamageDenominator,
   );
   if (inMod.applied.length > 0) {
-    working = pushBattleLog(working, `${tgt.name} 承伤修正 ${pending.baseDamage} → ${inMod.amount}${describeModifierApplications(inMod.applied)}。`, 'info');
+    working = pushBattleLog(working, `${tgt.name} 承伤修正 ${effectiveBaseDamage} → ${inMod.amount}${describeModifierApplications(inMod.applied)}。`, 'info');
   }
   const outcome = applyBattleUnitDamage(tgt, transformedDamage);
   tgt = outcome.unit;
@@ -889,6 +894,16 @@ export function commitPendingMonsterAttackResolution(state: BattleState): Battle
   }
   let next = setUnit(working, tgt);
   if (queuedStress > 0) next = queueStressEvent(next, tgt.sourceId, queuedStress, 'battle-skill', skill.id);
+  if (effectiveCritical) {
+    const targetArea = state.communityRoomState?.heroAreas[target.id]?.areaId;
+    for (const hero of next.heroes) {
+      const inSameArea = targetArea === undefined
+        || state.communityRoomState?.heroAreas[hero.id]?.areaId === targetArea;
+      if (hero.isAlive && inSameArea) {
+        next = queueStressEvent(next, hero.sourceId, 1, 'critical', skill.id);
+      }
+    }
+  }
   if (shuffled) {
     next = pushBattleLog(next, `${tgt.name} 被强制移动到位置 ${tgt.position}。`, 'warning');
     next = queueBattleRuleEvent(next, 'hero-shuffled', tgt.sourceId);
@@ -903,7 +918,10 @@ export function commitPendingMonsterAttackResolution(state: BattleState): Battle
   }
   const effNote = skill.applyEffects?.length ? `（施加 ${skill.applyEffects.map((e) => e.type).join('/')}）` : '';
   const stressNote = skill.stress ? ` 并施加 ${skill.stress} 压力。` : '';
-  next = pushBattleLog(next, `${monster.name} 使用 ${skill.name}，掷 ${pending.attackRoll}${pending.crit ? '（暴击）' : ''} 命中 ${tgt.name}，造成 ${transformedDamage} 伤害${stressNote}${effNote}`, 'danger');
+  const criticalNote = effectiveCritical
+    ? pending.criticalOverride === 'force-critical' && !pending.crit ? '（转化为暴击）' : '（暴击）'
+    : '';
+  next = pushBattleLog(next, `${monster.name} 使用 ${skill.name}，掷 ${pending.attackRoll}${criticalNote} 命中 ${tgt.name}，造成 ${transformedDamage} 伤害${stressNote}${effNote}`, 'danger');
   for (const message of outcome.logs) next = pushBattleLog(next, message, outcome.heroDied ? 'danger' : 'warning');
   return checkEnd(next);
 }

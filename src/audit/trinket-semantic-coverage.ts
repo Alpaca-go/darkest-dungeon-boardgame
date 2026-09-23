@@ -123,6 +123,7 @@ export function canonicalRuntimeEffect(value: ActiveEffectDefinition, target: st
     } };
     case 'roll-provision-dice': return { type: 'roll-provision-dice', target: value.target, parameters: { count: value.count } };
     case 'discard-disease': return { type: 'discard-disease', target: value.target, parameters: { immediately: value.immediately } };
+    case 'convert-incoming-hit-to-critical': return { type: 'convert-incoming-hit-to-critical', target: value.target, parameters: {} };
     case 'log-only': return { type: 'log-only', target, parameters: { note: value.note } };
   }
 }
@@ -145,6 +146,9 @@ function bindingForRuntime(runtime: TrinketSideDefinition | undefined): RuntimeT
     if (semantic?.trigger === 'hero-skill-resolution' && condition.type === 'in-battle') out['in-battle'] = 'C1BR-HERO-SKILL-WINDOW-DERIVATION:DERIVED_FROM_TRIGGER';
     if ((semantic?.trigger === 'incoming-attack' || semantic?.trigger === 'hero-hit-by-attack') && condition.type === 'in-battle') {
       out['in-battle'] = 'C1C8-MONSTER-ATTACK-WINDOW-DERIVATION:DERIVED_FROM_TRIGGER';
+    }
+    if (semantic?.trigger === 'hero-hit-by-attack' && condition.type === 'incoming-hit-not-critical') {
+      out['incoming-hit-not-critical'] = 'C1C13-HOLINESS-CARD-GRAMMAR-AND-CRITICAL-INSTEAD-OF-STANDARD:DERIVED_FROM_TRIGGER';
     }
     if ((semantic?.trigger === 'camping' || semantic?.trigger === 'scout') && condition.type === 'out-of-battle') {
       out['out-of-battle'] = 'C1C10-DUNGEON-ACTION-WINDOW-DERIVATION:DERIVED_FROM_TRIGGER';
