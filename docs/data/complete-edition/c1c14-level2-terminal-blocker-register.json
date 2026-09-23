@@ -1,0 +1,191 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-14",
+  "baselineHead": "d4c00cbccd5f4c495a6df208b59e23cdd9540433",
+  "verifiedImplementationHead": "c8549da7b87e45022259226756366970846817e2",
+  "verifiedImplementationTree": "be442a2dd2f1c02898b272fac44eae7b58b37bff",
+  "blockers": [
+    {
+      "blockerCode": "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+      "category": "SOURCE_SCOPE",
+      "affectedCards": [
+        "community-trinket-core-bloodthirst-ring",
+        "community-trinket-core-book-of-constitution",
+        "community-trinket-core-book-of-holiness",
+        "community-trinket-core-book-of-relaxation",
+        "community-trinket-core-fortunate-armlet",
+        "community-trinket-core-protective-padlock"
+      ],
+      "affectedSides": [
+        {
+          "definitionId": "community-trinket-core-bloodthirst-ring",
+          "side": "positive"
+        },
+        {
+          "definitionId": "community-trinket-core-book-of-constitution",
+          "side": "negative"
+        },
+        {
+          "definitionId": "community-trinket-core-book-of-holiness",
+          "side": "positive"
+        },
+        {
+          "definitionId": "community-trinket-core-book-of-relaxation",
+          "side": "positive"
+        },
+        {
+          "definitionId": "community-trinket-core-book-of-relaxation",
+          "side": "negative"
+        },
+        {
+          "definitionId": "community-trinket-core-fortunate-armlet",
+          "side": "negative"
+        },
+        {
+          "definitionId": "community-trinket-core-protective-padlock",
+          "side": "negative"
+        }
+      ],
+      "upstreamBlockers": [],
+      "downstreamBlockers": [
+        "VOLUNTARY_DECLARATION_RUNTIME",
+        "NO_TRINKETMODIFIERTYPE_MOVEMENT",
+        "TRINKET_MODIFIER_CONSUMER_MISSING"
+      ],
+      "canResolveWithCurrentSources": false,
+      "wouldIncreaseReadyCountIfResolvedAlone": 0,
+      "recommendedAction": "WAIT_FOR_NEW_SOURCE_EVIDENCE"
+    },
+    {
+      "blockerCode": "TRINKET_TRIGGER_SCOPE_UNRESOLVED",
+      "category": "SOURCE_SCOPE",
+      "affectedCards": [
+        "community-trinket-core-chirurgeons-charm"
+      ],
+      "affectedSides": [
+        {
+          "definitionId": "community-trinket-core-chirurgeons-charm",
+          "side": "positive"
+        },
+        {
+          "definitionId": "community-trinket-core-chirurgeons-charm",
+          "side": "negative"
+        }
+      ],
+      "upstreamBlockers": [],
+      "downstreamBlockers": [],
+      "canResolveWithCurrentSources": false,
+      "wouldIncreaseReadyCountIfResolvedAlone": 1,
+      "recommendedAction": "WAIT_FOR_NEW_SOURCE_EVIDENCE"
+    },
+    {
+      "blockerCode": "VOLUNTARY_DECLARATION_RUNTIME",
+      "category": "RUNTIME_PRIMITIVE",
+      "affectedCards": [
+        "community-trinket-core-bloodthirst-ring",
+        "community-trinket-core-book-of-constitution",
+        "community-trinket-core-book-of-holiness",
+        "community-trinket-core-book-of-relaxation",
+        "community-trinket-core-fortunate-armlet",
+        "community-trinket-core-protective-padlock"
+      ],
+      "affectedSides": [
+        {
+          "definitionId": "community-trinket-core-bloodthirst-ring",
+          "side": "positive"
+        },
+        {
+          "definitionId": "community-trinket-core-book-of-constitution",
+          "side": "negative"
+        },
+        {
+          "definitionId": "community-trinket-core-book-of-holiness",
+          "side": "positive"
+        },
+        {
+          "definitionId": "community-trinket-core-book-of-relaxation",
+          "side": "positive"
+        },
+        {
+          "definitionId": "community-trinket-core-book-of-relaxation",
+          "side": "negative"
+        },
+        {
+          "definitionId": "community-trinket-core-fortunate-armlet",
+          "side": "negative"
+        },
+        {
+          "definitionId": "community-trinket-core-protective-padlock",
+          "side": "negative"
+        }
+      ],
+      "upstreamBlockers": [
+        "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED"
+      ],
+      "downstreamBlockers": [
+        "NO_TRINKETMODIFIERTYPE_MOVEMENT",
+        "TRINKET_MODIFIER_CONSUMER_MISSING"
+      ],
+      "canResolveWithCurrentSources": true,
+      "wouldIncreaseReadyCountIfResolvedAlone": 0,
+      "recommendedAction": "DEFER"
+    },
+    {
+      "blockerCode": "NO_TRINKETMODIFIERTYPE_MOVEMENT",
+      "category": "RUNTIME_PRIMITIVE",
+      "affectedCards": [
+        "community-trinket-core-book-of-constitution",
+        "community-trinket-core-protective-padlock"
+      ],
+      "affectedSides": [
+        {
+          "definitionId": "community-trinket-core-book-of-constitution",
+          "side": "negative"
+        },
+        {
+          "definitionId": "community-trinket-core-protective-padlock",
+          "side": "negative"
+        }
+      ],
+      "upstreamBlockers": [
+        "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+        "VOLUNTARY_DECLARATION_RUNTIME"
+      ],
+      "downstreamBlockers": [],
+      "canResolveWithCurrentSources": true,
+      "wouldIncreaseReadyCountIfResolvedAlone": 0,
+      "recommendedAction": "DEFER"
+    },
+    {
+      "blockerCode": "TRINKET_MODIFIER_CONSUMER_MISSING",
+      "category": "CONTEXT_SPECIFIC_CONSUMER",
+      "affectedCards": [
+        "community-trinket-core-book-of-constitution",
+        "community-trinket-core-book-of-relaxation",
+        "community-trinket-core-protective-padlock"
+      ],
+      "affectedSides": [
+        {
+          "definitionId": "community-trinket-core-book-of-constitution",
+          "side": "negative"
+        },
+        {
+          "definitionId": "community-trinket-core-book-of-relaxation",
+          "side": "negative"
+        },
+        {
+          "definitionId": "community-trinket-core-protective-padlock",
+          "side": "negative"
+        }
+      ],
+      "upstreamBlockers": [
+        "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+        "VOLUNTARY_DECLARATION_RUNTIME"
+      ],
+      "downstreamBlockers": [],
+      "canResolveWithCurrentSources": true,
+      "wouldIncreaseReadyCountIfResolvedAlone": 0,
+      "recommendedAction": "DEFER"
+    }
+  ]
+}

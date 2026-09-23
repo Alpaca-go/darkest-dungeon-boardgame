@@ -1,0 +1,581 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-14",
+  "baselineHead": "d4c00cbccd5f4c495a6df208b59e23cdd9540433",
+  "verifiedImplementationHead": "c8549da7b87e45022259226756366970846817e2",
+  "verifiedImplementationTree": "be442a2dd2f1c02898b272fac44eae7b58b37bff",
+  "readyCount": 4,
+  "notReadyCount": 7,
+  "completeForRandomDraw": false,
+  "readinessInvariantErrors": [],
+  "cards": [
+    {
+      "definitionId": "community-trinket-core-bloodthirst-ring",
+      "printedName": "Bloodthirst Ring",
+      "productionReady": false,
+      "blockerCodes": [
+        "VOLUNTARY_DECLARATION_RUNTIME",
+        "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "trigger": "voluntary-declaration",
+          "currentStatus": "PARTIAL",
+          "sourceScopeComplete": false,
+          "runtimePrimitiveComplete": false,
+          "consumerComplete": true,
+          "proofComplete": false,
+          "upstreamBlocker": "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+          "implementationPossibleNow": false,
+          "readyGainIfImplemented": 0,
+          "priority": "P0",
+          "blockerCodes": [
+            "VOLUNTARY_DECLARATION_RUNTIME",
+            "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED"
+          ],
+          "proofIds": []
+        },
+        {
+          "side": "negative",
+          "trigger": "hero-hit-by-attack",
+          "currentStatus": "IMPLEMENTED",
+          "sourceScopeComplete": true,
+          "runtimePrimitiveComplete": true,
+          "consumerComplete": true,
+          "proofComplete": true,
+          "upstreamBlocker": null,
+          "implementationPossibleNow": false,
+          "readyGainIfImplemented": 0,
+          "priority": "P4",
+          "blockerCodes": [],
+          "proofIds": [
+            "C1C11-BLOODTHIRST-NEGATIVE-RUNTIME",
+            "C1C11-BLOODTHIRST-NEGATIVE-SAVE-REPLAY",
+            "C1C11-BLOODTHIRST-NEGATIVE-SELECTOR",
+            "C1C11-E2E-BLOODTHIRST-NEGATIVE"
+          ]
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-book-of-constitution",
+      "printedName": "Book of Constitution",
+      "productionReady": false,
+      "blockerCodes": [
+        "NO_TRINKETMODIFIERTYPE_MOVEMENT",
+        "VOLUNTARY_DECLARATION_RUNTIME",
+        "TRINKET_MODIFIER_CONSUMER_MISSING"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "trigger": "disease-acquired",
+          "currentStatus": "IMPLEMENTED",
+          "sourceScopeComplete": true,
+          "runtimePrimitiveComplete": true,
+          "consumerComplete": true,
+          "proofComplete": true,
+          "upstreamBlocker": null,
+          "implementationPossibleNow": false,
+          "readyGainIfImplemented": 0,
+          "priority": "P4",
+          "blockerCodes": [],
+          "proofIds": [
+            "C1C12-CONSTITUTION-DISEASE-DISCARD-RUNTIME",
+            "C1C12-CONSTITUTION-REPLACEMENT-PREVENTION",
+            "C1C12-CONSTITUTION-SAVE-REPLAY",
+            "C1C12-CONSTITUTION-SELECTOR",
+            "C1C12-E2E-CONSTITUTION-CURIO"
+          ]
+        },
+        {
+          "side": "negative",
+          "trigger": "voluntary-declaration",
+          "currentStatus": "PARTIAL",
+          "sourceScopeComplete": false,
+          "runtimePrimitiveComplete": false,
+          "consumerComplete": false,
+          "proofComplete": false,
+          "upstreamBlocker": "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+          "implementationPossibleNow": false,
+          "readyGainIfImplemented": 0,
+          "priority": "P0",
+          "blockerCodes": [
+            "VOLUNTARY_DECLARATION_RUNTIME",
+            "NO_TRINKETMODIFIERTYPE_MOVEMENT",
+            "TRINKET_MODIFIER_CONSUMER_MISSING",
+            "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED"
+          ],
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-book-of-holiness",
+      "printedName": "Book of Holiness",
+      "productionReady": false,
+      "blockerCodes": [
+        "VOLUNTARY_DECLARATION_RUNTIME",
+        "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "trigger": "voluntary-declaration",
+          "currentStatus": "PARTIAL",
+          "sourceScopeComplete": false,
+          "runtimePrimitiveComplete": false,
+          "consumerComplete": true,
+          "proofComplete": false,
+          "upstreamBlocker": "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+          "implementationPossibleNow": false,
+          "readyGainIfImplemented": 0,
+          "priority": "P0",
+          "blockerCodes": [
+            "VOLUNTARY_DECLARATION_RUNTIME",
+            "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED"
+          ],
+          "proofIds": []
+        },
+        {
+          "side": "negative",
+          "trigger": "hero-hit-by-attack",
+          "currentStatus": "IMPLEMENTED",
+          "sourceScopeComplete": true,
+          "runtimePrimitiveComplete": true,
+          "consumerComplete": true,
+          "proofComplete": true,
+          "upstreamBlocker": null,
+          "implementationPossibleNow": false,
+          "readyGainIfImplemented": 0,
+          "priority": "P4",
+          "blockerCodes": [],
+          "proofIds": [
+            "C1C13-HOLINESS-CRITICAL-RUNTIME",
+            "C1C13-HOLINESS-CRITICAL-COMPOSITION",
+            "C1C13-HOLINESS-CRITICAL-SAVE-REPLAY",
+            "C1C13-HOLINESS-CRITICAL-SOURCE-CONTRACT",
+            "C1C13-HOLINESS-CRITICAL-SELECTOR",
+            "C1C13-E2E-HOLINESS-CRITICAL"
+          ]
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-book-of-relaxation",
+      "printedName": "Book of Relaxation",
+      "productionReady": false,
+      "blockerCodes": [
+        "VOLUNTARY_DECLARATION_RUNTIME",
+        "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+        "TRINKET_MODIFIER_CONSUMER_MISSING"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "trigger": "voluntary-declaration",
+          "currentStatus": "UNSUPPORTED",
+          "sourceScopeComplete": false,
+          "runtimePrimitiveComplete": false,
+          "consumerComplete": true,
+          "proofComplete": false,
+          "upstreamBlocker": "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+          "implementationPossibleNow": false,
+          "readyGainIfImplemented": 0,
+          "priority": "P0",
+          "blockerCodes": [
+            "VOLUNTARY_DECLARATION_RUNTIME",
+            "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED"
+          ],
+          "proofIds": []
+        },
+        {
+          "side": "negative",
+          "trigger": "voluntary-declaration",
+          "currentStatus": "UNSUPPORTED",
+          "sourceScopeComplete": false,
+          "runtimePrimitiveComplete": false,
+          "consumerComplete": false,
+          "proofComplete": false,
+          "upstreamBlocker": "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+          "implementationPossibleNow": false,
+          "readyGainIfImplemented": 0,
+          "priority": "P0",
+          "blockerCodes": [
+            "VOLUNTARY_DECLARATION_RUNTIME",
+            "TRINKET_MODIFIER_CONSUMER_MISSING",
+            "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED"
+          ],
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-camouflage-cloak",
+      "printedName": "Camouflage Cloak",
+      "productionReady": true,
+      "blockerCodes": [],
+      "sides": [
+        {
+          "side": "positive",
+          "trigger": "incoming-attack",
+          "currentStatus": "IMPLEMENTED",
+          "sourceScopeComplete": true,
+          "runtimePrimitiveComplete": true,
+          "consumerComplete": true,
+          "proofComplete": true,
+          "upstreamBlocker": null,
+          "implementationPossibleNow": false,
+          "readyGainIfImplemented": 0,
+          "priority": "P4",
+          "blockerCodes": [],
+          "proofIds": [
+            "C1C8-INCOMING-ATTACK-RUNTIME",
+            "C1C8-CAMOUFLAGE-POSITIVE-RUNTIME",
+            "C1C9-CAMOUFLAGE-CONDITION-RUNTIME",
+            "C1C8-INCOMING-ATTACK-SAVE-REPLAY",
+            "C1C8-CAMOUFLAGE-POSITIVE-SAVE",
+            "C1C9-CAMOUFLAGE-CONDITION-SAVE-REPLAY",
+            "C1C8-CAMOUFLAGE-POSITIVE-SELECTOR",
+            "C1C9-CAMOUFLAGE-CONDITION-SELECTOR",
+            "C1C8-E2E-CAMOUFLAGE-POSITIVE",
+            "C1C9-E2E-CAMOUFLAGE-CONDITION"
+          ]
+        },
+        {
+          "side": "negative",
+          "trigger": "hero-hit-by-attack",
+          "currentStatus": "IMPLEMENTED",
+          "sourceScopeComplete": true,
+          "runtimePrimitiveComplete": true,
+          "consumerComplete": true,
+          "proofComplete": true,
+          "upstreamBlocker": null,
+          "implementationPossibleNow": false,
+          "readyGainIfImplemented": 0,
+          "priority": "P4",
+          "blockerCodes": [],
+          "proofIds": [
+            "C1C8-INCOMING-ATTACK-RUNTIME",
+            "C1C8-CAMOUFLAGE-POSITIVE-RUNTIME",
+            "C1C9-CAMOUFLAGE-CONDITION-RUNTIME",
+            "C1C8-INCOMING-ATTACK-SAVE-REPLAY",
+            "C1C8-CAMOUFLAGE-POSITIVE-SAVE",
+            "C1C9-CAMOUFLAGE-CONDITION-SAVE-REPLAY",
+            "C1C8-CAMOUFLAGE-POSITIVE-SELECTOR",
+            "C1C9-CAMOUFLAGE-CONDITION-SELECTOR",
+            "C1C8-E2E-CAMOUFLAGE-POSITIVE",
+            "C1C9-E2E-CAMOUFLAGE-CONDITION"
+          ]
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-campers-helmet",
+      "printedName": "Camper's Helmet",
+      "productionReady": true,
+      "blockerCodes": [],
+      "sides": [
+        {
+          "side": "positive",
+          "trigger": "camping",
+          "currentStatus": "IMPLEMENTED",
+          "sourceScopeComplete": true,
+          "runtimePrimitiveComplete": true,
+          "consumerComplete": true,
+          "proofComplete": true,
+          "upstreamBlocker": null,
+          "implementationPossibleNow": false,
+          "readyGainIfImplemented": 0,
+          "priority": "P4",
+          "blockerCodes": [],
+          "proofIds": [
+            "C1C10-CAMPERS-CAMPING-RUNTIME",
+            "C1C10-CAMPERS-SCOUT-RUNTIME",
+            "C1C10-CAMPERS-SAVE-REPLAY",
+            "C1C10-CAMPERS-SELECTOR",
+            "C1C10-E2E-CAMPERS-CAMPING",
+            "C1C10-E2E-CAMPERS-SCOUT"
+          ]
+        },
+        {
+          "side": "negative",
+          "trigger": "scout",
+          "currentStatus": "IMPLEMENTED",
+          "sourceScopeComplete": true,
+          "runtimePrimitiveComplete": true,
+          "consumerComplete": true,
+          "proofComplete": true,
+          "upstreamBlocker": null,
+          "implementationPossibleNow": false,
+          "readyGainIfImplemented": 0,
+          "priority": "P4",
+          "blockerCodes": [],
+          "proofIds": [
+            "C1C10-CAMPERS-CAMPING-RUNTIME",
+            "C1C10-CAMPERS-SCOUT-RUNTIME",
+            "C1C10-CAMPERS-SAVE-REPLAY",
+            "C1C10-CAMPERS-SELECTOR",
+            "C1C10-E2E-CAMPERS-CAMPING",
+            "C1C10-E2E-CAMPERS-SCOUT"
+          ]
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-chirurgeons-charm",
+      "printedName": "Chirurgeon's Charm",
+      "productionReady": false,
+      "blockerCodes": [
+        "TRINKET_TRIGGER_SCOPE_UNRESOLVED",
+        "TRINKET_TRIGGER_SCOPE_UNRESOLVED"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "trigger": "hero-heals",
+          "currentStatus": "PARTIAL",
+          "sourceScopeComplete": false,
+          "runtimePrimitiveComplete": true,
+          "consumerComplete": true,
+          "proofComplete": false,
+          "upstreamBlocker": "TRINKET_TRIGGER_SCOPE_UNRESOLVED",
+          "implementationPossibleNow": false,
+          "readyGainIfImplemented": 0,
+          "priority": "P1",
+          "blockerCodes": [
+            "TRINKET_TRIGGER_SCOPE_UNRESOLVED"
+          ],
+          "proofIds": [
+            "C1C5-CHIRURGEONS-RUNTIME",
+            "C1C5-CHIRURGEONS-SAVE-REPLAY",
+            "C1C5-CHIRURGEONS-SELECTOR",
+            "C1C5-E2E-CHIRURGEONS"
+          ]
+        },
+        {
+          "side": "negative",
+          "trigger": "hero-is-healed",
+          "currentStatus": "PARTIAL",
+          "sourceScopeComplete": false,
+          "runtimePrimitiveComplete": true,
+          "consumerComplete": true,
+          "proofComplete": false,
+          "upstreamBlocker": "TRINKET_TRIGGER_SCOPE_UNRESOLVED",
+          "implementationPossibleNow": false,
+          "readyGainIfImplemented": 0,
+          "priority": "P1",
+          "blockerCodes": [
+            "TRINKET_TRIGGER_SCOPE_UNRESOLVED"
+          ],
+          "proofIds": [
+            "C1C5-CHIRURGEONS-RUNTIME",
+            "C1C5-CHIRURGEONS-SAVE-REPLAY",
+            "C1C5-CHIRURGEONS-SELECTOR",
+            "C1C5-E2E-CHIRURGEONS"
+          ]
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-dark-bracer",
+      "printedName": "Dark Bracer",
+      "productionReady": true,
+      "blockerCodes": [],
+      "sides": [
+        {
+          "side": "positive",
+          "trigger": "hero-skill-resolution",
+          "currentStatus": "IMPLEMENTED",
+          "sourceScopeComplete": true,
+          "runtimePrimitiveComplete": true,
+          "consumerComplete": true,
+          "proofComplete": true,
+          "upstreamBlocker": null,
+          "implementationPossibleNow": false,
+          "readyGainIfImplemented": 0,
+          "priority": "P4",
+          "blockerCodes": [],
+          "proofIds": [
+            "C1C6-DARK-BRACER-RUNTIME",
+            "C1C6-DARK-BRACER-SAVE-REPLAY",
+            "C1C6-DARK-BRACER-SELECTOR",
+            "C1C6-E2E-DARK-BRACER"
+          ]
+        },
+        {
+          "side": "negative",
+          "trigger": "hero-skill-hits",
+          "currentStatus": "IMPLEMENTED",
+          "sourceScopeComplete": true,
+          "runtimePrimitiveComplete": true,
+          "consumerComplete": true,
+          "proofComplete": true,
+          "upstreamBlocker": null,
+          "implementationPossibleNow": false,
+          "readyGainIfImplemented": 0,
+          "priority": "P4",
+          "blockerCodes": [],
+          "proofIds": [
+            "C1C6-DARK-BRACER-RUNTIME",
+            "C1C6-DARK-BRACER-SAVE-REPLAY",
+            "C1C6-DARK-BRACER-SELECTOR",
+            "C1C6-E2E-DARK-BRACER"
+          ]
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-fortunate-armlet",
+      "printedName": "Fortunate Armlet",
+      "productionReady": false,
+      "blockerCodes": [
+        "VOLUNTARY_DECLARATION_RUNTIME",
+        "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "trigger": "hero-skill-resolution",
+          "currentStatus": "IMPLEMENTED",
+          "sourceScopeComplete": true,
+          "runtimePrimitiveComplete": true,
+          "consumerComplete": true,
+          "proofComplete": true,
+          "upstreamBlocker": null,
+          "implementationPossibleNow": false,
+          "readyGainIfImplemented": 0,
+          "priority": "P4",
+          "blockerCodes": [],
+          "proofIds": [
+            "C1C7-FORTUNATE-POSITIVE-RUNTIME",
+            "C1C7-FORTUNATE-POSITIVE-SAVE-REPLAY",
+            "C1C7-FORTUNATE-POSITIVE-SELECTOR",
+            "C1C7-E2E-FORTUNATE-POSITIVE"
+          ]
+        },
+        {
+          "side": "negative",
+          "trigger": "voluntary-declaration",
+          "currentStatus": "PARTIAL",
+          "sourceScopeComplete": false,
+          "runtimePrimitiveComplete": false,
+          "consumerComplete": true,
+          "proofComplete": false,
+          "upstreamBlocker": "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+          "implementationPossibleNow": false,
+          "readyGainIfImplemented": 0,
+          "priority": "P0",
+          "blockerCodes": [
+            "VOLUNTARY_DECLARATION_RUNTIME",
+            "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED"
+          ],
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-protective-padlock",
+      "printedName": "Protective Padlock",
+      "productionReady": false,
+      "blockerCodes": [
+        "NO_TRINKETMODIFIERTYPE_MOVEMENT",
+        "VOLUNTARY_DECLARATION_RUNTIME",
+        "TRINKET_MODIFIER_CONSUMER_MISSING"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "trigger": "hero-hit-by-attack",
+          "currentStatus": "IMPLEMENTED",
+          "sourceScopeComplete": true,
+          "runtimePrimitiveComplete": true,
+          "consumerComplete": true,
+          "proofComplete": true,
+          "upstreamBlocker": null,
+          "implementationPossibleNow": false,
+          "readyGainIfImplemented": 0,
+          "priority": "P4",
+          "blockerCodes": [],
+          "proofIds": [
+            "C1C8-INCOMING-ATTACK-RUNTIME",
+            "C1C8-PROTECTIVE-POSITIVE-RUNTIME",
+            "C1C8-INCOMING-ATTACK-SAVE-REPLAY",
+            "C1C8-PROTECTIVE-POSITIVE-SAVE",
+            "C1C8-PROTECTIVE-POSITIVE-SELECTOR",
+            "C1C8-E2E-PROTECTIVE-POSITIVE"
+          ]
+        },
+        {
+          "side": "negative",
+          "trigger": "voluntary-declaration",
+          "currentStatus": "PARTIAL",
+          "sourceScopeComplete": false,
+          "runtimePrimitiveComplete": false,
+          "consumerComplete": false,
+          "proofComplete": false,
+          "upstreamBlocker": "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+          "implementationPossibleNow": false,
+          "readyGainIfImplemented": 0,
+          "priority": "P0",
+          "blockerCodes": [
+            "VOLUNTARY_DECLARATION_RUNTIME",
+            "NO_TRINKETMODIFIERTYPE_MOVEMENT",
+            "TRINKET_MODIFIER_CONSUMER_MISSING",
+            "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED"
+          ],
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-solar-bracer",
+      "printedName": "Solar Bracer",
+      "productionReady": true,
+      "blockerCodes": [],
+      "sides": [
+        {
+          "side": "positive",
+          "trigger": "hero-skill-resolution",
+          "currentStatus": "IMPLEMENTED",
+          "sourceScopeComplete": true,
+          "runtimePrimitiveComplete": true,
+          "consumerComplete": true,
+          "proofComplete": true,
+          "upstreamBlocker": null,
+          "implementationPossibleNow": false,
+          "readyGainIfImplemented": 0,
+          "priority": "P4",
+          "blockerCodes": [],
+          "proofIds": [
+            "C1C6-SOLAR-BRACER-RUNTIME",
+            "C1C6-SOLAR-BRACER-SAVE-REPLAY",
+            "C1C6-SOLAR-BRACER-SELECTOR",
+            "C1C6-E2E-SOLAR-BRACER"
+          ]
+        },
+        {
+          "side": "negative",
+          "trigger": "hero-skill-hits",
+          "currentStatus": "IMPLEMENTED",
+          "sourceScopeComplete": true,
+          "runtimePrimitiveComplete": true,
+          "consumerComplete": true,
+          "proofComplete": true,
+          "upstreamBlocker": null,
+          "implementationPossibleNow": false,
+          "readyGainIfImplemented": 0,
+          "priority": "P4",
+          "blockerCodes": [],
+          "proofIds": [
+            "C1C6-SOLAR-BRACER-RUNTIME",
+            "C1C6-SOLAR-BRACER-SAVE-REPLAY",
+            "C1C6-SOLAR-BRACER-SELECTOR",
+            "C1C6-E2E-SOLAR-BRACER"
+          ]
+        }
+      ]
+    }
+  ]
+}

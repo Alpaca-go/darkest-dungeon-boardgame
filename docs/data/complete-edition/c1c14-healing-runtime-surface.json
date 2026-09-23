@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-14",
+  "baselineHead": "d4c00cbccd5f4c495a6df208b59e23cdd9540433",
+  "verifiedImplementationHead": "c8549da7b87e45022259226756366970846817e2",
+  "verifiedImplementationTree": "be442a2dd2f1c02898b272fac44eae7b58b37bff",
+  "surfaces": [
+    {
+      "surfaceId": "battle-healing-skill",
+      "caller": "battle.ts / trinkets/healing-trinket-bridge.ts",
+      "phase": "battle",
+      "healerIdentityAvailable": true,
+      "receiverIdentityAvailable": true,
+      "sourceDescribedAsHealing": true,
+      "passesTrinketWindow": true,
+      "sourceScopeStatus": "IN_SCOPE"
+    },
+    {
+      "surfaceId": "campaign-resolve-healing",
+      "caller": "healing.ts resolveHealing()",
+      "phase": "campaign",
+      "healerIdentityAvailable": false,
+      "receiverIdentityAvailable": true,
+      "sourceDescribedAsHealing": true,
+      "passesTrinketWindow": false,
+      "sourceScopeStatus": "SOURCE_UNRESOLVED"
+    },
+    {
+      "surfaceId": "resting-point-life-recovery",
+      "caller": "campaign/act-four/excavation-site.ts",
+      "phase": "rest",
+      "healerIdentityAvailable": false,
+      "receiverIdentityAvailable": true,
+      "sourceDescribedAsHealing": true,
+      "passesTrinketWindow": false,
+      "sourceScopeStatus": "SOURCE_UNRESOLVED"
+    },
+    {
+      "surfaceId": "provision-caused-healing",
+      "caller": "No direct current caller found",
+      "phase": "dungeon",
+      "healerIdentityAvailable": false,
+      "receiverIdentityAvailable": false,
+      "sourceDescribedAsHealing": false,
+      "passesTrinketWindow": false,
+      "sourceScopeStatus": "SOURCE_UNRESOLVED"
+    },
+    {
+      "surfaceId": "trinket-caused-healing",
+      "caller": "trinkets/use-trinket.ts",
+      "phase": "campaign",
+      "healerIdentityAvailable": false,
+      "receiverIdentityAvailable": true,
+      "sourceDescribedAsHealing": true,
+      "passesTrinketWindow": false,
+      "sourceScopeStatus": "SOURCE_UNRESOLVED"
+    },
+    {
+      "surfaceId": "hamlet-healing",
+      "caller": "hamlet.ts Sanitarium",
+      "phase": "hamlet",
+      "healerIdentityAvailable": false,
+      "receiverIdentityAvailable": true,
+      "sourceDescribedAsHealing": true,
+      "passesTrinketWindow": false,
+      "sourceScopeStatus": "SOURCE_UNRESOLVED"
+    },
+    {
+      "surfaceId": "quest-or-reward-healing",
+      "caller": "campaign/act-four/excavation-site.ts; quirks.ts",
+      "phase": "quest",
+      "healerIdentityAvailable": false,
+      "receiverIdentityAvailable": true,
+      "sourceDescribedAsHealing": true,
+      "passesTrinketWindow": false,
+      "sourceScopeStatus": "SOURCE_UNRESOLVED"
+    },
+    {
+      "surfaceId": "battle-non-skill-healing",
+      "caller": "mental-effects.ts; campaign/act-four/community-final-combat.ts",
+      "phase": "battle",
+      "healerIdentityAvailable": "VARIES",
+      "receiverIdentityAvailable": true,
+      "sourceDescribedAsHealing": true,
+      "passesTrinketWindow": false,
+      "sourceScopeStatus": "SOURCE_UNRESOLVED"
+    },
+    {
+      "surfaceId": "debug-or-migration",
+      "caller": "No direct healing caller found",
+      "phase": "debug",
+      "healerIdentityAvailable": false,
+      "receiverIdentityAvailable": false,
+      "sourceDescribedAsHealing": false,
+      "passesTrinketWindow": false,
+      "sourceScopeStatus": "NOT_APPLICABLE"
+    }
+  ]
+}

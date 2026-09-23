@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-14",
+  "baselineHead": "d4c00cbccd5f4c495a6df208b59e23cdd9540433",
+  "verifiedImplementationHead": "c8549da7b87e45022259226756366970846817e2",
+  "verifiedImplementationTree": "be442a2dd2f1c02898b272fac44eae7b58b37bff",
+  "gaps": [
+    {
+      "id": "generic-voluntary-declaration-domain",
+      "blockerCode": "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+      "affectedCards": [
+        "community-trinket-core-bloodthirst-ring",
+        "community-trinket-core-book-of-constitution",
+        "community-trinket-core-book-of-holiness",
+        "community-trinket-core-book-of-relaxation",
+        "community-trinket-core-fortunate-armlet",
+        "community-trinket-core-protective-padlock"
+      ],
+      "missingEvidence": [
+        "legal declaration contexts",
+        "battle and non-battle insertion points",
+        "usage epoch",
+        "multiple-card ordering",
+        "save/replay semantics"
+      ],
+      "priorContract": "c1c7-voluntary-declaration-timing-contract.json",
+      "status": "SOURCE_EXHAUSTED_STILL_UNRESOLVED"
+    },
+    {
+      "id": "chirurgeons-healing-trigger-scope",
+      "blockerCode": "TRINKET_TRIGGER_SCOPE_UNRESOLVED",
+      "affectedCards": [
+        "community-trinket-core-chirurgeons-charm"
+      ],
+      "missingEvidence": [
+        "battle-only or all-healing scope",
+        "non-battle source and receiver applicability"
+      ],
+      "priorContract": "c1c5r-chirurgeons-trigger-scope.json",
+      "status": "SOURCE_UNRESOLVED"
+    }
+  ]
+}

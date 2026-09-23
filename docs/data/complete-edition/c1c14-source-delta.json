@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-14",
+  "baselineHead": "d4c00cbccd5f4c495a6df208b59e23cdd9540433",
+  "verifiedImplementationHead": "c8549da7b87e45022259226756366970846817e2",
+  "verifiedImplementationTree": "be442a2dd2f1c02898b272fac44eae7b58b37bff",
+  "priorContracts": {
+    "voluntary": "c1c7-voluntary-declaration-timing-contract.json",
+    "healing": "c1c5r-chirurgeons-trigger-scope.json"
+  },
+  "voluntary": {
+    "priorCommit": "600eacd",
+    "sourceSnapshot": [
+      {
+        "path": "docs/DD_EN_COREBOX_RULES.pdf",
+        "trackedPrior": false,
+        "trackedNow": false,
+        "priorHash": null,
+        "currentHash": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+        "change": "LOCAL_SOURCE_WITHOUT_HISTORICAL_BLOB"
+      },
+      {
+        "path": "docs/source/darkest-dungeon-designer-faq/README.md",
+        "trackedPrior": true,
+        "trackedNow": true,
+        "priorHash": "4c4a1e5eb97a30cc9e19cf47f620cba3ffd4ee00cbe825a37265820a6b83b04d",
+        "currentHash": "4c4a1e5eb97a30cc9e19cf47f620cba3ffd4ee00cbe825a37265820a6b83b04d",
+        "change": "UNCHANGED"
+      },
+      {
+        "path": "docs/source/darkest-dungeon-designer-faq/source-provenance.json",
+        "trackedPrior": true,
+        "trackedNow": true,
+        "priorHash": "0ea8332337fec2f6c2f4ad63aff592d193b34f325c5e5c09c24680b97039b2fd",
+        "currentHash": "0ea8332337fec2f6c2f4ad63aff592d193b34f325c5e5c09c24680b97039b2fd",
+        "change": "UNCHANGED"
+      },
+      {
+        "path": "src/data/community-reference/trinkets/data.json",
+        "trackedPrior": true,
+        "trackedNow": true,
+        "priorHash": "06b9bd40238411d35cce811346b08366a12530273dedfe09d8e714c1aef104fc",
+        "currentHash": "06b9bd40238411d35cce811346b08366a12530273dedfe09d8e714c1aef104fc",
+        "change": "UNCHANGED"
+      }
+    ],
+    "sourceDelta": "NONE"
+  },
+  "healing": {
+    "priorCommit": "1b41731",
+    "sourceSnapshot": [
+      {
+        "path": "docs/DD_EN_COREBOX_RULES.pdf",
+        "trackedPrior": false,
+        "trackedNow": false,
+        "priorHash": null,
+        "currentHash": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+        "change": "LOCAL_SOURCE_WITHOUT_HISTORICAL_BLOB"
+      },
+      {
+        "path": "docs/source/darkest-dungeon-designer-faq/README.md",
+        "trackedPrior": true,
+        "trackedNow": true,
+        "priorHash": "4c4a1e5eb97a30cc9e19cf47f620cba3ffd4ee00cbe825a37265820a6b83b04d",
+        "currentHash": "4c4a1e5eb97a30cc9e19cf47f620cba3ffd4ee00cbe825a37265820a6b83b04d",
+        "change": "UNCHANGED"
+      },
+      {
+        "path": "docs/source/darkest-dungeon-designer-faq/source-provenance.json",
+        "trackedPrior": true,
+        "trackedNow": true,
+        "priorHash": "0ea8332337fec2f6c2f4ad63aff592d193b34f325c5e5c09c24680b97039b2fd",
+        "currentHash": "0ea8332337fec2f6c2f4ad63aff592d193b34f325c5e5c09c24680b97039b2fd",
+        "change": "UNCHANGED"
+      },
+      {
+        "path": "src/data/community-reference/trinkets/data.json",
+        "trackedPrior": true,
+        "trackedNow": true,
+        "priorHash": "06b9bd40238411d35cce811346b08366a12530273dedfe09d8e714c1aef104fc",
+        "currentHash": "06b9bd40238411d35cce811346b08366a12530273dedfe09d8e714c1aef104fc",
+        "change": "UNCHANGED"
+      }
+    ],
+    "sourceDelta": "NONE"
+  },
+  "localRulebookNote": "The rulebook PDF is present locally but not tracked at either prior commit; its historical bytes cannot be compared. The prior contracts already cite this same named source.",
+  "newlyAvailableRelevantAuthoritativeEvidence": [],
+  "decision": "PRESERVE_FAIL_CLOSED"
+}
