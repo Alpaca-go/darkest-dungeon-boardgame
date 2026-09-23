@@ -80,7 +80,7 @@ describe('C1C-13 Book of Holiness incoming Critical conversion', () => {
     setRandomSource(() => { throw new Error('conversion must not consume RNG'); });
     const resolved = resolveTrinketOpportunity(campaign, open(campaign, BOOK_OF_HOLINESS_ID).id, 'use').campaign;
     expect(before - targetHp(resolved, frozen.targetHeroUnitId)).toBe(getMonsterSkillById(frozen.skillId)!.maxDamage);
-    expect(resolved.battle?.battleLog.at(-1)?.message).toContain('转化为暴击');
+    expect(resolved.battle?.battleLog.some((entry) => entry.message.includes('转化为暴击'))).toBe(true);
     expect(resolved.battle?.pendingStressEvents).toHaveLength(4);
     expect(frozen).toMatchObject({ crit: false, baseDamage: 2, criticalOverride: null });
   });
@@ -92,7 +92,7 @@ describe('C1C-13 Book of Holiness incoming Critical conversion', () => {
     expect(before - targetHp(resolved, frozen.targetHeroUnitId)).toBe(2);
     expect(resolved.heroes.find((hero) => hero.instanceId === open(campaign, BOOK_OF_HOLINESS_ID).heroId)
       ?.equippedTrinkets.find((t) => t.trinketId === BOOK_OF_HOLINESS_ID)?.currentSide).toBe('negative');
-    expect(resolved.battle?.battleLog.at(-1)?.message).not.toContain('暴击');
+    expect(resolved.battle?.battleLog.some((entry) => entry.message.includes('转化为暴击'))).toBe(false);
   });
 
   it('does not open on a miss or an already-Critical attack', () => {
