@@ -1,0 +1,1132 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-15",
+  "baselineHead": "5c9caecfb66ff7fb05c3946347e3c3f4b6633ddb",
+  "verifiedImplementationHead": "f2908df4e6dcd68672d6b816ee278c04da26ec8a",
+  "verifiedImplementationTree": "9406c715e6d5caefdc66da36de72d3e054ee4744",
+  "verifiedImplementationCommittedAt": "2026-09-27T02:31:23+08:00",
+  "cards": [
+    {
+      "definitionId": "community-trinket-core-berserk-charm",
+      "printedName": "Berserk Charm",
+      "contentSet": "core",
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/15/ContainedObjects/0"
+      ],
+      "historicalDiagnosis": [
+        [
+          "No exact active trinket primitive:gain-action",
+          "Exact applicable timing voluntary-declaration is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ],
+        [
+          "Exact applicable timing voluntary-declaration is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ]
+      ],
+      "productionReady": false,
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "VOLUNTARY_DECLARATION_RUNTIME",
+        "TRINKET_EFFECT_CONSUMER_MISSING:gain-action",
+        "TRINKET_EFFECT_CONSUMER_MISSING",
+        "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "implementationStatus": "UNSUPPORTED",
+          "runtimeSliceSemanticComplete": false,
+          "blockerCode": "TRINKET_EFFECT_CONSUMER_MISSING",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "voluntary-declaration",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "equipped-hero",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "gain-action",
+                  "target": "equipped-hero",
+                  "parameters": {
+                    "count": 1
+                  }
+                }
+              ],
+              "runtime": []
+            },
+            {
+              "code": "TRINKET_EFFECT_CONSUMER_MISSING",
+              "source": [
+                "gain-action"
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        },
+        {
+          "side": "negative",
+          "implementationStatus": "UNSUPPORTED",
+          "runtimeSliceSemanticComplete": false,
+          "blockerCode": "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "voluntary-declaration",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "equipped-hero",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "change-stress",
+                  "target": "equipped-hero",
+                  "parameters": {
+                    "amount": 1
+                  }
+                }
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-book-of-sanity",
+      "printedName": "Book of Sanity",
+      "contentSet": "core",
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/15/ContainedObjects/9"
+      ],
+      "historicalDiagnosis": [
+        [
+          "Exact applicable timing voluntary-declaration is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ],
+        [
+          "Exact applicable timing voluntary-declaration is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ]
+      ],
+      "productionReady": false,
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "VOLUNTARY_DECLARATION_RUNTIME",
+        "TRINKET_EFFECT_CONSUMER_MISSING:suffer-damage",
+        "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+        "TRINKET_EFFECT_CONSUMER_MISSING"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "implementationStatus": "UNSUPPORTED",
+          "runtimeSliceSemanticComplete": false,
+          "blockerCode": "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "voluntary-declaration",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "equipped-hero",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "change-stress",
+                  "target": "equipped-hero",
+                  "parameters": {
+                    "amount": -4
+                  }
+                }
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        },
+        {
+          "side": "negative",
+          "implementationStatus": "UNSUPPORTED",
+          "runtimeSliceSemanticComplete": false,
+          "blockerCode": "TRINKET_EFFECT_CONSUMER_MISSING",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "voluntary-declaration",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "equipped-hero",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "suffer-damage",
+                  "target": "equipped-hero",
+                  "parameters": {
+                    "amount": 6
+                  }
+                }
+              ],
+              "runtime": []
+            },
+            {
+              "code": "TRINKET_EFFECT_CONSUMER_MISSING",
+              "source": [
+                "suffer-damage"
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-candle-of-life",
+      "printedName": "Candle of Life",
+      "contentSet": "core",
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/15/ContainedObjects/10"
+      ],
+      "historicalDiagnosis": [
+        [
+          "ActiveEffectDefinition only addresses self; group/area targeting needs adapter",
+          "Exact applicable timing voluntary-declaration is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ],
+        [
+          "Exact applicable timing voluntary-declaration is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ]
+      ],
+      "productionReady": false,
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "VOLUNTARY_DECLARATION_RUNTIME",
+        "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "implementationStatus": "UNSUPPORTED",
+          "runtimeSliceSemanticComplete": false,
+          "blockerCode": "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "voluntary-declaration",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "self-and-heroes-in-same-area",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "heal",
+                  "target": "self-and-heroes-in-same-area",
+                  "parameters": {
+                    "amount": 6
+                  }
+                }
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        },
+        {
+          "side": "negative",
+          "implementationStatus": "UNSUPPORTED",
+          "runtimeSliceSemanticComplete": false,
+          "blockerCode": "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "voluntary-declaration",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "equipped-hero",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "change-light",
+                  "target": "equipped-hero",
+                  "parameters": {
+                    "amount": -2
+                  }
+                }
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-cleansing-crystal",
+      "printedName": "Cleansing Crystal",
+      "contentSet": "core",
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/15/ContainedObjects/11"
+      ],
+      "historicalDiagnosis": [
+        [
+          "No exact active trinket primitive:remove-all-condition-stacks",
+          "ActiveEffectDefinition only addresses self; group/area targeting needs adapter",
+          "Exact applicable timing voluntary-declaration is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ],
+        [
+          "No exact active trinket primitive:gain-quirk",
+          "Exact applicable timing voluntary-declaration is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ]
+      ],
+      "productionReady": false,
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "VOLUNTARY_DECLARATION_RUNTIME",
+        "TRINKET_EFFECT_CONSUMER_MISSING:remove-all-condition-stacks",
+        "TRINKET_EFFECT_CONSUMER_MISSING:gain-quirk",
+        "TRINKET_EFFECT_CONSUMER_MISSING",
+        "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "implementationStatus": "UNSUPPORTED",
+          "runtimeSliceSemanticComplete": false,
+          "blockerCode": "TRINKET_EFFECT_CONSUMER_MISSING",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "voluntary-declaration",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "all-heroes",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "remove-all-condition-stacks",
+                  "target": "all-heroes",
+                  "parameters": {
+                    "conditions": [
+                      "bleed",
+                      "blight",
+                      "debuff",
+                      "stun",
+                      "mark"
+                    ]
+                  }
+                }
+              ],
+              "runtime": []
+            },
+            {
+              "code": "TRINKET_EFFECT_CONSUMER_MISSING",
+              "source": [
+                "remove-all-condition-stacks"
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        },
+        {
+          "side": "negative",
+          "implementationStatus": "UNSUPPORTED",
+          "runtimeSliceSemanticComplete": false,
+          "blockerCode": "TRINKET_EFFECT_CONSUMER_MISSING",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "voluntary-declaration",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "equipped-hero",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "gain-quirk",
+                  "target": "equipped-hero",
+                  "parameters": {
+                    "polarity": "negative",
+                    "count": 1
+                  }
+                }
+              ],
+              "runtime": []
+            },
+            {
+              "code": "TRINKET_EFFECT_CONSUMER_MISSING",
+              "source": [
+                "gain-quirk"
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-dark-crown",
+      "printedName": "Dark Crown",
+      "contentSet": "core",
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/15/ContainedObjects/1"
+      ],
+      "historicalDiagnosis": [
+        [
+          "Exact applicable timing voluntary-declaration is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ],
+        [
+          "No TrinketModifierType:virtue-chance",
+          "Exact applicable timing resolve-test-result-determined is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ]
+      ],
+      "productionReady": false,
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "VOLUNTARY_DECLARATION_RUNTIME",
+        "TRINKET_TRIGGER_WINDOW_MISSING:resolve-test-result-determined",
+        "TRINKET_MODIFIER_CONSUMER_MISSING:virtue-chance",
+        "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+        "TRINKET_MODIFIER_CONSUMER_MISSING"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "implementationStatus": "UNSUPPORTED",
+          "runtimeSliceSemanticComplete": false,
+          "blockerCode": "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "voluntary-declaration",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "equipped-hero",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "change-stress",
+                  "target": "equipped-hero",
+                  "parameters": {
+                    "amount": -9
+                  }
+                }
+              ],
+              "runtime": []
+            },
+            {
+              "code": "TRINKET_CONDITION_MISMATCH",
+              "source": [
+                {
+                  "type": "light",
+                  "operator": "<=",
+                  "value": 3
+                }
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        },
+        {
+          "side": "negative",
+          "implementationStatus": "UNSUPPORTED",
+          "runtimeSliceSemanticComplete": false,
+          "blockerCode": "TRINKET_MODIFIER_CONSUMER_MISSING",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "resolve-test-result-determined",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "equipped-hero",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_MODIFIER_TYPE_MISMATCH",
+              "source": [
+                {
+                  "stat": "virtue-chance",
+                  "operation": "add",
+                  "amount": -2
+                }
+              ],
+              "runtime": []
+            },
+            {
+              "code": "TRINKET_MODIFIER_CONSUMER_MISSING",
+              "source": [
+                "virtue-chance"
+              ],
+              "runtime": []
+            },
+            {
+              "code": "TRINKET_CONDITION_MISMATCH",
+              "source": [
+                {
+                  "type": "light",
+                  "operator": "<=",
+                  "value": 3
+                }
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-defenders-ring",
+      "printedName": "Defender's Ring",
+      "contentSet": "core",
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/15/ContainedObjects/6"
+      ],
+      "historicalDiagnosis": [
+        [
+          "TrinketUseCondition has no stance predicate",
+          "Exact applicable timing hero-skill-resolution is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ],
+        [
+          "TrinketUseCondition has no stance predicate",
+          "Exact applicable timing hero-skill-resolution is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ]
+      ],
+      "productionReady": true,
+      "productionStatus": "PRODUCTION_READY",
+      "blockerCodes": [],
+      "sides": [
+        {
+          "side": "positive",
+          "implementationStatus": "IMPLEMENTED",
+          "runtimeSliceSemanticComplete": true,
+          "blockerCode": null,
+          "semanticMismatches": [],
+          "proofIds": [
+            "C1C15-DEFENDER-RING-RUNTIME",
+            "C1C15-DEFENDER-RING-SAVE-REPLAY",
+            "C1C15-DEFENDER-RING-SELECTOR",
+            "C1C15-E2E-DEFENDER-RING"
+          ]
+        },
+        {
+          "side": "negative",
+          "implementationStatus": "IMPLEMENTED",
+          "runtimeSliceSemanticComplete": true,
+          "blockerCode": null,
+          "semanticMismatches": [],
+          "proofIds": [
+            "C1C15-DEFENDER-RING-RUNTIME",
+            "C1C15-DEFENDER-RING-SAVE-REPLAY",
+            "C1C15-DEFENDER-RING-SELECTOR",
+            "C1C15-E2E-DEFENDER-RING"
+          ]
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-fasting-seal",
+      "printedName": "Fasting Seal",
+      "contentSet": "core",
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/15/ContainedObjects/2"
+      ],
+      "historicalDiagnosis": [
+        [
+          "Exact applicable timing voluntary-declaration is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ],
+        [
+          "Exact applicable timing voluntary-declaration is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ]
+      ],
+      "productionReady": false,
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "VOLUNTARY_DECLARATION_RUNTIME",
+        "TRINKET_MODIFIER_CONSUMER_MISSING:dodge",
+        "TRINKET_MODIFIER_CONSUMER_MISSING",
+        "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "implementationStatus": "UNSUPPORTED",
+          "runtimeSliceSemanticComplete": false,
+          "blockerCode": "TRINKET_MODIFIER_CONSUMER_MISSING",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "voluntary-declaration",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "equipped-hero",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_MODIFIER_TYPE_MISMATCH",
+              "source": [
+                {
+                  "stat": "dodge",
+                  "operation": "add",
+                  "amount": 5
+                }
+              ],
+              "runtime": []
+            },
+            {
+              "code": "TRINKET_MODIFIER_CONSUMER_MISSING",
+              "source": [
+                "dodge"
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        },
+        {
+          "side": "negative",
+          "implementationStatus": "UNSUPPORTED",
+          "runtimeSliceSemanticComplete": false,
+          "blockerCode": "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "voluntary-declaration",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "equipped-hero",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "consume-provision",
+                  "target": "equipped-hero",
+                  "parameters": {
+                    "provision": "food",
+                    "amount": 1,
+                    "applyNormalBenefit": false
+                  }
+                }
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-recovery-charm",
+      "printedName": "Recovery Charm",
+      "contentSet": "core",
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/15/ContainedObjects/3"
+      ],
+      "historicalDiagnosis": [
+        [
+          "Exact applicable timing voluntary-declaration is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ],
+        [
+          "Exact applicable timing voluntary-declaration is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ]
+      ],
+      "productionReady": false,
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "VOLUNTARY_DECLARATION_RUNTIME",
+        "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "implementationStatus": "UNSUPPORTED",
+          "runtimeSliceSemanticComplete": false,
+          "blockerCode": "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "voluntary-declaration",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "equipped-hero",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "heal",
+                  "target": "equipped-hero",
+                  "parameters": {
+                    "amount": 9
+                  }
+                }
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        },
+        {
+          "side": "negative",
+          "implementationStatus": "UNSUPPORTED",
+          "runtimeSliceSemanticComplete": false,
+          "blockerCode": "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "voluntary-declaration",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "equipped-hero",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "change-stress",
+                  "target": "equipped-hero",
+                  "parameters": {
+                    "amount": 2
+                  }
+                }
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-scholars-ring",
+      "printedName": "Scholar's Ring",
+      "contentSet": "core",
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/15/ContainedObjects/7"
+      ],
+      "historicalDiagnosis": [
+        [
+          "TrinketUseCondition has no stance predicate",
+          "Exact applicable timing hero-skill-resolution is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ],
+        [
+          "TrinketUseCondition has no stance predicate",
+          "Exact applicable timing hero-skill-resolution is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ]
+      ],
+      "productionReady": true,
+      "productionStatus": "PRODUCTION_READY",
+      "blockerCodes": [],
+      "sides": [
+        {
+          "side": "positive",
+          "implementationStatus": "IMPLEMENTED",
+          "runtimeSliceSemanticComplete": true,
+          "blockerCode": null,
+          "semanticMismatches": [],
+          "proofIds": [
+            "C1C15-SCHOLAR-RING-RUNTIME",
+            "C1C15-SCHOLAR-RING-SAVE-REPLAY",
+            "C1C15-SCHOLAR-RING-SELECTOR",
+            "C1C15-E2E-SCHOLAR-RING"
+          ]
+        },
+        {
+          "side": "negative",
+          "implementationStatus": "IMPLEMENTED",
+          "runtimeSliceSemanticComplete": true,
+          "blockerCode": null,
+          "semanticMismatches": [],
+          "proofIds": [
+            "C1C15-SCHOLAR-RING-RUNTIME",
+            "C1C15-SCHOLAR-RING-SAVE-REPLAY",
+            "C1C15-SCHOLAR-RING-SELECTOR",
+            "C1C15-E2E-SCHOLAR-RING"
+          ]
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-snipers-ring",
+      "printedName": "Sniper's Ring",
+      "contentSet": "core",
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/15/ContainedObjects/4"
+      ],
+      "historicalDiagnosis": [
+        [
+          "TrinketUseCondition has no stance predicate",
+          "Exact applicable timing hero-skill-resolution is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ],
+        [
+          "TrinketUseCondition has no stance predicate",
+          "Exact applicable timing hero-skill-resolution is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ]
+      ],
+      "productionReady": true,
+      "productionStatus": "PRODUCTION_READY",
+      "blockerCodes": [],
+      "sides": [
+        {
+          "side": "positive",
+          "implementationStatus": "IMPLEMENTED",
+          "runtimeSliceSemanticComplete": true,
+          "blockerCode": null,
+          "semanticMismatches": [],
+          "proofIds": [
+            "C1C15-SNIPER-RING-RUNTIME",
+            "C1C15-SNIPER-RING-SAVE-REPLAY",
+            "C1C15-SNIPER-RING-SELECTOR",
+            "C1C15-E2E-SNIPER-RING"
+          ]
+        },
+        {
+          "side": "negative",
+          "implementationStatus": "IMPLEMENTED",
+          "runtimeSliceSemanticComplete": true,
+          "blockerCode": null,
+          "semanticMismatches": [],
+          "proofIds": [
+            "C1C15-SNIPER-RING-RUNTIME",
+            "C1C15-SNIPER-RING-SAVE-REPLAY",
+            "C1C15-SNIPER-RING-SELECTOR",
+            "C1C15-E2E-SNIPER-RING"
+          ]
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-solar-crown",
+      "printedName": "Solar Crown",
+      "contentSet": "core",
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/15/ContainedObjects/8"
+      ],
+      "historicalDiagnosis": [
+        [
+          "Exact applicable timing voluntary-declaration is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ],
+        [
+          "No TrinketModifierType:virtue-chance",
+          "Exact applicable timing resolve-test-result-determined is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ]
+      ],
+      "productionReady": false,
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "VOLUNTARY_DECLARATION_RUNTIME",
+        "TRINKET_TRIGGER_WINDOW_MISSING:resolve-test-result-determined",
+        "TRINKET_MODIFIER_CONSUMER_MISSING:virtue-chance",
+        "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+        "TRINKET_MODIFIER_CONSUMER_MISSING"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "implementationStatus": "UNSUPPORTED",
+          "runtimeSliceSemanticComplete": false,
+          "blockerCode": "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "voluntary-declaration",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "equipped-hero",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "change-stress",
+                  "target": "equipped-hero",
+                  "parameters": {
+                    "amount": -3
+                  }
+                }
+              ],
+              "runtime": []
+            },
+            {
+              "code": "TRINKET_CONDITION_MISMATCH",
+              "source": [
+                {
+                  "type": "light",
+                  "operator": ">=",
+                  "value": 3
+                }
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        },
+        {
+          "side": "negative",
+          "implementationStatus": "UNSUPPORTED",
+          "runtimeSliceSemanticComplete": false,
+          "blockerCode": "TRINKET_MODIFIER_CONSUMER_MISSING",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "resolve-test-result-determined",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "equipped-hero",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_MODIFIER_TYPE_MISMATCH",
+              "source": [
+                {
+                  "stat": "virtue-chance",
+                  "operation": "add",
+                  "amount": -2
+                }
+              ],
+              "runtime": []
+            },
+            {
+              "code": "TRINKET_MODIFIER_CONSUMER_MISSING",
+              "source": [
+                "virtue-chance"
+              ],
+              "runtime": []
+            },
+            {
+              "code": "TRINKET_CONDITION_MISMATCH",
+              "source": [
+                {
+                  "type": "light",
+                  "operator": ">=",
+                  "value": 3
+                }
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-warriors-ring",
+      "printedName": "Warrior's Ring",
+      "contentSet": "core",
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/15/ContainedObjects/5"
+      ],
+      "historicalDiagnosis": [
+        [
+          "TrinketUseCondition has no stance predicate",
+          "Exact applicable timing hero-skill-resolution is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ],
+        [
+          "TrinketUseCondition has no stance predicate",
+          "Exact applicable timing hero-skill-resolution is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ]
+      ],
+      "productionReady": true,
+      "productionStatus": "PRODUCTION_READY",
+      "blockerCodes": [],
+      "sides": [
+        {
+          "side": "positive",
+          "implementationStatus": "IMPLEMENTED",
+          "runtimeSliceSemanticComplete": true,
+          "blockerCode": null,
+          "semanticMismatches": [],
+          "proofIds": [
+            "C1C15-WARRIOR-RING-RUNTIME",
+            "C1C15-WARRIOR-RING-SAVE-REPLAY",
+            "C1C15-WARRIOR-RING-SELECTOR",
+            "C1C15-E2E-WARRIOR-RING"
+          ]
+        },
+        {
+          "side": "negative",
+          "implementationStatus": "IMPLEMENTED",
+          "runtimeSliceSemanticComplete": true,
+          "blockerCode": null,
+          "semanticMismatches": [],
+          "proofIds": [
+            "C1C15-WARRIOR-RING-RUNTIME",
+            "C1C15-WARRIOR-RING-SAVE-REPLAY",
+            "C1C15-WARRIOR-RING-SELECTOR",
+            "C1C15-E2E-WARRIOR-RING"
+          ]
+        }
+      ]
+    }
+  ]
+}

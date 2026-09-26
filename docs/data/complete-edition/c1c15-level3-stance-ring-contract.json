@@ -1,0 +1,177 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-15",
+  "baselineHead": "5c9caecfb66ff7fb05c3946347e3c3f4b6633ddb",
+  "verifiedImplementationHead": "f2908df4e6dcd68672d6b816ee278c04da26ec8a",
+  "verifiedImplementationTree": "9406c715e6d5caefdc66da36de72d3e054ee4744",
+  "verifiedImplementationCommittedAt": "2026-09-27T02:31:23+08:00",
+  "sourceTrigger": "hero-skill-resolution",
+  "runtimeWindow": "after-attack-roll-before-hit-resolution",
+  "timingEvidence": [
+    "C1BR-HERO-SKILL-WINDOW-DERIVATION",
+    "C1C7-FORTUNATE-POSITIVE-RUNTIME"
+  ],
+  "newTimingPrimitiveRequired": false,
+  "runtimeStance": "ACTIVE_BATTLE_UNIT_ELSE_CAMPAIGN_HERO",
+  "declarationPolicy": "PLAYER_USE_OR_SKIP",
+  "attackRollPolicy": "FROZEN_NO_REROLL",
+  "modifierLifetime": "CURRENT_SKILL_RESOLUTION",
+  "rings": [
+    {
+      "definitionId": "community-trinket-core-defenders-ring",
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/15/ContainedObjects/6"
+      ],
+      "positive": {
+        "conditions": [
+          {
+            "type": "stance",
+            "operator": "==",
+            "value": "defensive"
+          }
+        ],
+        "modifiers": [
+          {
+            "kind": "modify",
+            "stat": "crit",
+            "amount": 4
+          }
+        ]
+      },
+      "negative": {
+        "conditions": [
+          {
+            "type": "stance",
+            "operator": "!=",
+            "value": "defensive"
+          }
+        ],
+        "modifiers": [
+          {
+            "kind": "modify",
+            "stat": "accuracy",
+            "amount": -2
+          }
+        ]
+      },
+      "adapterId": "level3-stance-ring-defensive-v1"
+    },
+    {
+      "definitionId": "community-trinket-core-scholars-ring",
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/15/ContainedObjects/7"
+      ],
+      "positive": {
+        "conditions": [
+          {
+            "type": "stance",
+            "operator": "==",
+            "value": "support"
+          }
+        ],
+        "modifiers": [
+          {
+            "kind": "modify",
+            "stat": "crit",
+            "amount": 4
+          }
+        ]
+      },
+      "negative": {
+        "conditions": [
+          {
+            "type": "stance",
+            "operator": "!=",
+            "value": "support"
+          }
+        ],
+        "modifiers": [
+          {
+            "kind": "modify",
+            "stat": "accuracy",
+            "amount": -2
+          }
+        ]
+      },
+      "adapterId": "level3-stance-ring-support-v1"
+    },
+    {
+      "definitionId": "community-trinket-core-snipers-ring",
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/15/ContainedObjects/4"
+      ],
+      "positive": {
+        "conditions": [
+          {
+            "type": "stance",
+            "operator": "==",
+            "value": "ranged"
+          }
+        ],
+        "modifiers": [
+          {
+            "kind": "modify",
+            "stat": "crit",
+            "amount": 4
+          }
+        ]
+      },
+      "negative": {
+        "conditions": [
+          {
+            "type": "stance",
+            "operator": "!=",
+            "value": "ranged"
+          }
+        ],
+        "modifiers": [
+          {
+            "kind": "modify",
+            "stat": "accuracy",
+            "amount": -2
+          }
+        ]
+      },
+      "adapterId": "level3-stance-ring-ranged-v1"
+    },
+    {
+      "definitionId": "community-trinket-core-warriors-ring",
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/15/ContainedObjects/5"
+      ],
+      "positive": {
+        "conditions": [
+          {
+            "type": "stance",
+            "operator": "==",
+            "value": "aggressive"
+          }
+        ],
+        "modifiers": [
+          {
+            "kind": "modify",
+            "stat": "crit",
+            "amount": 4
+          }
+        ]
+      },
+      "negative": {
+        "conditions": [
+          {
+            "type": "stance",
+            "operator": "!=",
+            "value": "aggressive"
+          }
+        ],
+        "modifiers": [
+          {
+            "kind": "modify",
+            "stat": "accuracy",
+            "amount": -2
+          }
+        ]
+      },
+      "adapterId": "level3-stance-ring-aggressive-v1"
+    }
+  ]
+}
