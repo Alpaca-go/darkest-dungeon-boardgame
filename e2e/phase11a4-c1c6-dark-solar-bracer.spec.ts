@@ -68,6 +68,7 @@ for (const [label, trinketId, positiveLight, negativeLight] of [
   ['SOLAR', SOLAR_BRACER_ID, 4, 2],
 ] as const) {
   test(PRODUCTION_PROOF_REGISTRY[`C1C6-E2E-${label}-BRACER`].proofId, async ({ page }) => {
+    test.setTimeout(120_000); // Two complete import/use flows can exceed the single-flow budget on Windows.
     await importSave(page, battleSave(trinketId, 'positive', positiveLight));
     await declareSmite(page);
     await expect(page.getByTestId('post-roll-trinket-window')).toContainText('8');

@@ -9,6 +9,7 @@
 
 import type {
   CampaignState,
+  Stance,
   TrinketSideDefinition,
   TrinketUseCondition,
   TrinketUseOpportunity,
@@ -17,26 +18,13 @@ import type {
 import { createId, nowIso } from '../random';
 import { getTrinketById, getTrinketSide, trinketDisplayName } from '../../data/trinkets/trinket-registry';
 import { currentTrinketTurnId, findHero } from './trinket-state';
+import { WIRED_WINDOWS } from './wired-trinket-windows';
+export { WIRED_WINDOWS } from './wired-trinket-windows';
 
 /**
  * 本轮真正接入运行时的窗口。
  * 未列出的窗口只存在于数据模型中，引擎不会凭空开口 —— 避免「有数据没入口」的假实现。
  */
-export const WIRED_WINDOWS: readonly TrinketUseWindow[] = [
-  'before-attack-roll',
-  'after-attack-roll-before-hit-resolution',
-  'before-damage-applied',
-  'before-incoming-hit-resolution',
-  'before-incoming-damage-applied',
-  'hero-turn-start',
-  'room-entered',
-  'before-healing-delivered-resolution',
-  'before-healing-received-resolution',
-  'before-scout-resolution',
-  'before-camp-resolution',
-  'before-disease-acquisition-commit',
-] as const;
-
 export function isWiredWindow(w: TrinketUseWindow): boolean {
   return WIRED_WINDOWS.includes(w);
 }
@@ -63,6 +51,13 @@ function currentLight(campaign: CampaignState): number {
   return campaign.light;
 }
 
+/** BattleUnit is authoritative after battle start; the campaign hero can be a stale snapshot. */
+export function currentRuntimeStance(campaign: CampaignState, heroId: string): Stance | null {
+  const battle = campaign.battle;
+  if (battle?.status === 'active') return battle.heroes.find((unit) => unit.sourceId === heroId)?.stance ?? null;
+  return campaign.heroes.find((hero) => hero.instanceId === heroId)?.stance ?? null;
+}
+
 function conditionMet(campaign: CampaignState, heroId: string, cond: TrinketUseCondition): boolean {
   switch (cond.type) {
     case 'in-battle':
@@ -80,6 +75,10 @@ function conditionMet(campaign: CampaignState, heroId: string, cond: TrinketUseC
       return currentLight(campaign) >= cond.value;
     case 'max-light':
       return currentLight(campaign) <= cond.value;
+    case 'stance': {
+      const stance = currentRuntimeStance(campaign, heroId);
+      return stance === null ? false : cond.negated ? stance !== cond.value : stance === cond.value;
+    }
     default:
       return false;
   }

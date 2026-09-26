@@ -19,6 +19,8 @@ function registration(proofId: string) {
 }
 
 function conditionOpportunity(): CampaignState {
+  // Keep battle initialization from applying random conditions before this proof's attack.
+  setRandomSource(() => 0);
   let campaign = applyDefaultLoadout(selectParty(createNewCampaign('community-complete-edition'),
     ['crusader', 'highwayman', 'vestal', 'plague-doctor']));
   campaign = { ...campaign, currentQuestId: 'c1c9-proof', dungeon: generateDungeon('c1c9-proof') };

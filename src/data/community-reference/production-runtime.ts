@@ -23,6 +23,7 @@ import {
   type QuestSemanticObligation,
 } from '../../audit/quest-semantic-coverage';
 import { restAllocationSemanticsImplemented } from '../../audit/rest-semantic-contract';
+import { liveTrinketMissingPrimitives } from '../../audit/trinket-live-runtime-coverage';
 import type { CampaignState } from '../../types';
 import type { QuestRuntimeState } from '../../types/content-runtime';
 import type { QuestSpecialRuleDefinition } from '../../game-engine/quests/quest-special-rule-types';
@@ -122,6 +123,7 @@ export const normalizePrimitives = (message: string): string[] => {
   const primitives: string[] = [];
   if (/timing voluntary-declaration/i.test(message)) primitives.push('VOLUNTARY_DECLARATION_RUNTIME');
   if (/timing hero-skill-resolution/i.test(message)) primitives.push('POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW');
+  if (/TrinketUseCondition has no stance predicate/i.test(message)) primitives.push('TRINKET_STANCE_CONDITION_CONSUMER');
   if (/timing hero-skill-hits/i.test(message)) primitives.push('PRE_DAMAGE_HIT_TRINKET_WINDOW');
   if (/timing hero-hit-by-attack/i.test(message)) primitives.push('HERO_HIT_BY_ATTACK_TRINKET_WINDOW');
   if (/timing incoming-attack/i.test(message)) primitives.push('INCOMING_ATTACK_TRINKET_WINDOW');
@@ -724,7 +726,41 @@ const bookOfHoliness: TrinketDefinition = {
   runtimeContentMetadata: { sourceDefinitionId: holinessSource.id, contentSet: 'core', region: null, sourceOrigin: 'community-complete-edition' },
 };
 
+const STANCE_RING_SPECS = [
+  { id: 'community-trinket-core-defenders-ring', stance: 'defensive', key: 'DEFENDER' },
+  { id: 'community-trinket-core-scholars-ring', stance: 'support', key: 'SCHOLAR' },
+  { id: 'community-trinket-core-snipers-ring', stance: 'ranged', key: 'SNIPER' },
+  { id: 'community-trinket-core-warriors-ring', stance: 'aggressive', key: 'WARRIOR' },
+] as const;
+
+function buildStanceRing(spec: (typeof STANCE_RING_SPECS)[number]): TrinketDefinition {
+  const source = sourceTrinket(spec.id);
+  return {
+    id: source.id, name: source.printedName, level: 3,
+    positiveSide: {
+      side: 'positive', label: '暴击 +4', description: source.positiveSide.label,
+      useWindows: ['after-attack-roll-before-hit-resolution'], modifiers: [{ type: 'crit', amount: 4 }], effects: [],
+      canUse: [{ type: 'in-battle' }, { type: 'is-acting-hero' }, { type: 'stance', value: spec.stance, negated: false }],
+    },
+    negativeSide: {
+      side: 'negative', label: '命中 -2', description: source.negativeSide.label,
+      useWindows: ['after-attack-roll-before-hit-resolution'], modifiers: [{ type: 'accuracy', amount: -2 }], effects: [],
+      canUse: [{ type: 'in-battle' }, { type: 'is-acting-hero' }, { type: 'stance', value: spec.stance, negated: true }],
+    },
+    sellPrice: sellPriceForLevel(3), buyPrice: buyPriceForLevel(3), officialDataStatus: 'verified',
+    sourceReference: source.sourceReferences.join('; '), enabledInOfficialPool: false, dataOrigin: 'community',
+    runtimeContentMetadata: { sourceDefinitionId: source.id, contentSet: 'core', region: null, sourceOrigin: 'community-complete-edition' },
+  };
+}
+const stanceRings = STANCE_RING_SPECS.map(buildStanceRing);
+
 export const COMMUNITY_TRINKET_RUNTIME_ADAPTERS: Readonly<Record<string, CommunityTrinketRuntimeAdapter>> = Object.freeze({
+  ...Object.fromEntries(stanceRings.map((definition) => [definition.id, {
+    adapterId: `level3-stance-ring-${STANCE_RING_SPECS.find((spec) => spec.id === definition.id)!.stance}-v1`,
+    definitionId: definition.id,
+    requiredPrimitives: ['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW', 'TRINKET_STANCE_CONDITION_CONSUMER'],
+    definition,
+  }])),
   [accuracyStone.id]: { adapterId: 'post-roll-accuracy-stone-v1', definitionId: accuracyStone.id, requiredPrimitives: ['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW'], definition: accuracyStone },
   [criticalStone.id]: { adapterId: 'post-roll-critical-stone-v1', definitionId: criticalStone.id, requiredPrimitives: ['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW'], definition: criticalStone },
   [fortunateArmlet.id]: { adapterId: 'post-roll-fortunate-armlet-positive-v1', definitionId: fortunateArmlet.id, requiredPrimitives: ['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW'], definition: fortunateArmlet },
@@ -740,6 +776,15 @@ export const COMMUNITY_TRINKET_RUNTIME_ADAPTERS: Readonly<Record<string, Communi
 });
 
 export const COMMUNITY_TRINKET_PRODUCTION_PROOFS: Readonly<Record<string, CommunityProductionProof>> = Object.freeze({
+  ...Object.fromEntries(STANCE_RING_SPECS.map((spec) => [spec.id, {
+    definitionId: spec.id, runtimeAdapterId: `level3-stance-ring-${spec.stance}-v1`,
+    requiredPrimitives: ['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW', 'TRINKET_STANCE_CONDITION_CONSUMER'],
+    sourceSupported: true, semanticSupported: true, stateful: true,
+    productionTests: [`C1C15-${spec.key}-RING-RUNTIME`],
+    saveReplayTests: [`C1C15-${spec.key}-RING-SAVE-REPLAY`],
+    selectorTests: [`C1C15-${spec.key}-RING-SELECTOR`],
+    e2eTests: [`C1C15-E2E-${spec.key}-RING`],
+  }])),
   [accuracyStone.id]: {
     definitionId: accuracyStone.id, runtimeAdapterId: 'post-roll-accuracy-stone-v1', sourceSupported: true,
     semanticSupported: true, stateful: true, productionTests: ['C1BR-PA-ACCURACY-RUNTIME'],
@@ -908,8 +953,10 @@ export function evaluateCommunityTrinketCapability(
     ...source.positiveSide.runtimeSupport.missingCapabilities,
     ...source.negativeSide.runtimeSupport.missingCapabilities,
   ].flatMap(normalizePrimitives))];
-  const implementedTrinketPrimitives = new Set(['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW', 'STAGED_HEALING_TRINKET_WINDOWS', 'PRE_DAMAGE_HIT_TRINKET_WINDOW', 'SET_DAMAGE_OVERRIDE', 'STAGED_INCOMING_ATTACK_RESOLUTION', 'INCOMING_ATTACK_TRINKET_WINDOW', 'HERO_HIT_BY_ATTACK_TRINKET_WINDOW', 'INCOMING_DAMAGE_SCALE_CONSUMER', 'INCOMING_DODGE_MODIFIER_CONSUMER', 'TRINKET_CONDITION_STACK_CONSUMER', 'STAGED_DUNGEON_TRINKET_WINDOWS', 'TRINKET_PROVISION_DICE_CONSUMER', 'STAGED_DISEASE_ACQUISITION', 'DISEASE_ACQUIRED_TRINKET_WINDOW', 'TRINKET_DISCARD_DISEASE_CONSUMER', 'INCOMING_CRITICAL_CONVERSION_CONSUMER']);
-  const missingPrimitives = declaredMissingPrimitives.filter((primitive) => !implementedTrinketPrimitives.has(primitive));
+  const implementedTrinketPrimitives = new Set(['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW', 'TRINKET_STANCE_CONDITION_CONSUMER', 'STAGED_HEALING_TRINKET_WINDOWS', 'PRE_DAMAGE_HIT_TRINKET_WINDOW', 'SET_DAMAGE_OVERRIDE', 'STAGED_INCOMING_ATTACK_RESOLUTION', 'INCOMING_ATTACK_TRINKET_WINDOW', 'HERO_HIT_BY_ATTACK_TRINKET_WINDOW', 'INCOMING_DAMAGE_SCALE_CONSUMER', 'INCOMING_DODGE_MODIFIER_CONSUMER', 'TRINKET_CONDITION_STACK_CONSUMER', 'STAGED_DUNGEON_TRINKET_WINDOWS', 'TRINKET_PROVISION_DICE_CONSUMER', 'STAGED_DISEASE_ACQUISITION', 'DISEASE_ACQUIRED_TRINKET_WINDOW', 'TRINKET_DISCARD_DISEASE_CONSUMER', 'INCOMING_CRITICAL_CONVERSION_CONSUMER']);
+  const missingPrimitives = source.level === 3 && source.contentSet === 'core'
+    ? liveTrinketMissingPrimitives(source)
+    : declaredMissingPrimitives.filter((primitive) => !implementedTrinketPrimitives.has(primitive));
   const sourceSemanticComplete = trinketSourceSemanticComplete(source);
   const runtimeSemanticComplete = trinketRuntimeSemanticComplete(sourceSemanticComplete, semanticObligations);
   const productionUiProofComplete = Boolean(proofMatches && proof && measuredRuntimeProof.e2eProofPresent
@@ -920,7 +967,11 @@ export function evaluateCommunityTrinketCapability(
   const productionStatus: ProductionStatus = sourceBlocked ? 'SOURCE_BLOCKED'
     : missingPrimitives.length > 0 ? 'ENGINE_PRIMITIVE_MISSING'
       : runtimeSemanticComplete && adapter && proofComplete ? 'PRODUCTION_READY' : 'ADAPTER_REQUIRED';
-  const semanticBlockers = semanticObligations.flatMap((obligation) => obligation.blockerCode ? [obligation.blockerCode] : []);
+  const semanticBlockers = semanticObligations.flatMap((obligation) => [
+    ...(obligation.blockerCode ? [obligation.blockerCode] : []),
+    ...(source.level === 3 && obligation.trigger === 'voluntary-declaration' && !obligation.triggerScopeComplete
+      ? ['TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED'] : []),
+  ]);
   const blockerCodes = sourceBlocked ? ['SOURCE_EVIDENCE_BLOCKED']
     : productionStatus === 'ENGINE_PRIMITIVE_MISSING' ? [...new Set([...missingPrimitives, ...semanticBlockers])]
     : productionStatus === 'PRODUCTION_READY' ? [] : [

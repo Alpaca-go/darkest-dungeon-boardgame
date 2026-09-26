@@ -3,6 +3,7 @@ import type {
 } from '../types/trinkets';
 import { missingModifierConsumers } from './trinket-modifier-consumer-coverage';
 import { missingEffectConsumers } from './trinket-effect-consumer-coverage';
+import { missingConditionConsumers } from './trinket-condition-consumer-coverage';
 import { trinketTriggerScopeBinding, type TrinketSourceTimingScopeStatus } from './trinket-trigger-scope-coverage';
 
 export type TrinketSemanticImplementationStatus = 'IMPLEMENTED' | 'PARTIAL' | 'UNSUPPORTED' | 'SOURCE_UNRESOLVED';
@@ -87,6 +88,9 @@ export function canonicalRuntimeModifier(value: ActiveModifierDefinition): Canon
 }
 export function canonicalSourceCondition(value: unknown): CanonicalCondition | null {
   const entry = object(value);
+  if (entry.kind === 'stance' && typeof entry.value === 'string' && typeof entry.negated === 'boolean') {
+    return { type: 'stance', operator: entry.negated ? '!=' : '==', value: entry.value };
+  }
   if (entry.kind === 'light' && typeof entry.operator === 'string' && typeof entry.value === 'number') {
     return { type: 'light', operator: entry.operator, value: entry.value };
   }
@@ -95,6 +99,7 @@ export function canonicalSourceCondition(value: unknown): CanonicalCondition | n
     ...(['string', 'number', 'boolean'].includes(typeof entry.value) ? { value: entry.value as string | number | boolean } : {}) };
 }
 export function canonicalRuntimeCondition(value: TrinketUseCondition): CanonicalCondition {
+  if (value.type === 'stance') return { type: 'stance', operator: value.negated ? '!=' : '==', value: value.value };
   if (value.type === 'min-light') return { type: 'light', operator: '>=', value: value.value };
   if (value.type === 'max-light') return { type: 'light', operator: '<=', value: value.value };
   return { type: value.type };
@@ -128,7 +133,7 @@ export function canonicalRuntimeEffect(value: ActiveEffectDefinition, target: st
   }
 }
 
-const RUNTIME_WINDOW_BINDINGS: Readonly<Record<string, { trigger: string; target: string }>> = Object.freeze({
+export const RUNTIME_WINDOW_BINDINGS: Readonly<Record<string, { trigger: string; target: string }>> = Object.freeze({
   'after-attack-roll-before-hit-resolution': { trigger: 'hero-skill-resolution', target: 'skill' },
   'before-damage-applied': { trigger: 'hero-skill-hits', target: 'skill' },
   'before-healing-delivered-resolution': { trigger: 'hero-heals', target: 'healing-delivered' },
@@ -226,7 +231,9 @@ export function compareTrinketSemanticPayload(
   const effectsMissing = missingEffectConsumers(sourceEffects);
   const effectConsumerMatch = effectsMissing.length === 0;
   const conditionExact = exactArray(sourceConditions, sourceConditionRuntime);
-  const conditionMatch = conditionExact && unsupportedRuntimeConditions.length === 0;
+  const conditionConsumersMissing = missingConditionConsumers(runtimeSide?.canUse ?? []);
+  const conditionMatch = conditionExact && unsupportedRuntimeConditions.length === 0
+    && conditionConsumersMissing.length === 0;
   const unsupportedRuntimeBehavior = [
     ...(runtimeModifiers.length > sourceModifiers.length ? runtimeModifiers.slice(sourceModifiers.length).map(stable) : []),
     ...(runtimeEffects.length > sourceEffects.length ? runtimeEffects.slice(sourceEffects.length).map(stable) : []),
@@ -246,7 +253,7 @@ export function compareTrinketSemanticPayload(
   });
   if (effectProblem) mismatches.push(effectProblem);
   if (!effectConsumerMatch) mismatches.push({ code: 'TRINKET_EFFECT_CONSUMER_MISSING', source: effectsMissing, runtime: [] });
-  if (!conditionExact) mismatches.push({ code: 'TRINKET_CONDITION_MISMATCH', source: sourceConditions, runtime: sourceConditionRuntime });
+  if (!conditionExact || conditionConsumersMissing.length > 0) mismatches.push({ code: 'TRINKET_CONDITION_MISMATCH', source: sourceConditions, runtime: sourceConditionRuntime });
   if (unsupportedRuntimeConditions.length) mismatches.push({ code: 'TRINKET_RUNTIME_ADDED_CONDITION_UNSUPPORTED', source: sourceConditions, runtime: unsupportedRuntimeConditions });
   return {
     triggerMatch, windowMatch, targetMatch, modifierMatch: modifierProblem === null,

@@ -27,6 +27,12 @@ export const CAMPERS_HELMET_ID = 'community-trinket-core-campers-helmet';
 export const BLOODTHIRST_RING_ID = 'community-trinket-core-bloodthirst-ring';
 export const BOOK_OF_CONSTITUTION_ID = 'community-trinket-core-book-of-constitution';
 export const BOOK_OF_HOLINESS_ID = 'community-trinket-core-book-of-holiness';
+export const LEVEL3_STANCE_RING_SPECS = [
+  { definitionId: 'community-trinket-core-defenders-ring', stance: 'defensive', key: 'DEFENDER' },
+  { definitionId: 'community-trinket-core-scholars-ring', stance: 'support', key: 'SCHOLAR' },
+  { definitionId: 'community-trinket-core-snipers-ring', stance: 'ranged', key: 'SNIPER' },
+  { definitionId: 'community-trinket-core-warriors-ring', stance: 'aggressive', key: 'WARRIOR' },
+] as const;
 export const C1C1_CORE_QUEST_IDS = [
   'community-quest-ruins-lvl1-scout-ahead',
   'community-quest-ruins-lvl1-wipe-em-out',
@@ -63,6 +69,12 @@ export function proof(entry: RegisteredProductionProof): RegisteredProductionPro
 }
 
 export const PRODUCTION_PROOF_REGISTRY: Readonly<Record<string, RegisteredProductionProof>> = Object.freeze(Object.fromEntries([
+  ...LEVEL3_STANCE_RING_SPECS.flatMap((ring) => [
+    proof({ proofId: `C1C15-${ring.key}-RING-RUNTIME`, definitionIds: [ring.definitionId], proofType: 'production-runtime', testFile: 'src/game-engine/c1c15-level3-stance-rings.test.ts', runner: 'vitest', status: 'active', scope: 'definition' }),
+    proof({ proofId: `C1C15-${ring.key}-RING-SAVE-REPLAY`, definitionIds: [ring.definitionId], proofType: 'save-replay', testFile: 'src/game-engine/c1c15-level3-stance-rings.test.ts', runner: 'vitest', status: 'active', scope: 'definition' }),
+    proof({ proofId: `C1C15-${ring.key}-RING-SELECTOR`, definitionIds: [ring.definitionId], proofType: 'selector', testFile: 'src/game-engine/c1c15-level3-stance-rings.test.ts', runner: 'vitest', status: 'active', scope: 'definition' }),
+    proof({ proofId: `C1C15-E2E-${ring.key}-RING`, definitionIds: [ring.definitionId], proofType: 'e2e', testFile: 'e2e/phase11a4-c1c15-level3-stance-rings.spec.ts', runner: 'playwright', status: 'active', scope: 'definition', proofSurface: 'production-ui' }),
+  ]),
   ...C1C3_MULTI_PRIMITIVE_QUEST_IDS.flatMap((definitionId) => {
     const label = definitionId.includes('tainted-trinkets') ? 'TAINTED' : 'FAMILY';
     return [

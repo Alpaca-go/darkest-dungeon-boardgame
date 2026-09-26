@@ -9,7 +9,7 @@
 // - 官方数据可信度用 officialDataStatus + enabledInOfficialPool 双重标记，
 //   未经核实的数值一律不得进入官方池（数据策略）。
 
-import type { ProvisionPool, StatusEffectType } from './index';
+import type { ProvisionPool, StatusEffectType, Stance } from './index';
 import type { RuntimeContentMetadata } from './content-runtime';
 
 // ---------------------------------------------------------------------------
@@ -172,7 +172,8 @@ export type TrinketUseCondition =
   | { type: 'is-acting-hero' }
   | { type: 'incoming-hit-not-critical' }
   | { type: 'min-light'; value: number }
-  | { type: 'max-light'; value: number };
+  | { type: 'max-light'; value: number }
+  | { type: 'stance'; value: Stance; negated: boolean };
 
 // ---------------------------------------------------------------------------
 // 定义
