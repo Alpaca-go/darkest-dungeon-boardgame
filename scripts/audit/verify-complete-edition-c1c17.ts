@@ -17,6 +17,8 @@ import { getTrinketPoolByLevel, runtimeContentContext } from '../../src/data/con
 import { createNewCampaign } from '../../src/game-engine/campaign';
 const root = process.cwd();
 const baselineHead = '69aa2185d221e2935b48383e4dbbdee8ba9d0d43';
+const repairBaselineHead = '62c8478e2461d04e8a0ea567e58ccfe996e1ad34';
+const priorImplementationAnchor = '79f7c656afa61a5527e7ac956f4e38d1491ddb3a';
 const names = ['c1c17-survival-guide-contract.json', 'c1c17-exploration-runtime-surface.json', 'c1c17-level1-trinket-capability-matrix.json', 'c1c17-level1-trinket-deck-coverage.json', 'c1c17-survival-guide-runtime-evidence.json'];
 const dataDir = resolve(root, 'docs/data/complete-edition');
 const read = (name: string): any => JSON.parse(readFileSync(resolve(dataDir, name), 'utf8'));
@@ -34,7 +36,10 @@ const clean = () => !spawnSync('git', ['diff', '--quiet'], { cwd: root }).status
   && !spawnSync('git', ['diff', '--cached', '--quiet'], { cwd: root }).status;
 check(clean(), 'C1C17 requires a clean tracked tree');
 function verifyLiveImplementation(anchor: string) {
-  check(anchor !== baselineHead && git('rev-parse', anchor + '^') === baselineHead, 'implementation parent must be exact C1C16 HEAD');
+  check(git('rev-parse', priorImplementationAnchor + '^') === baselineHead, 'original implementation parent must be exact C1C16 HEAD');
+  check(git('rev-parse', repairBaselineHead + '^') === priorImplementationAnchor, 'C1C17R baseline chain drift');
+  check(anchor !== priorImplementationAnchor && git('rev-parse', anchor + '^') === repairBaselineHead, 'repair implementation parent must be exact C1C17 HEAD');
+  requireProductionRuntimeDiff(git('diff', '--name-only', repairBaselineHead, anchor).split(/\r?\n/).filter(Boolean));
   const changedPaths = git('diff', '--name-only', baselineHead, anchor).split(/\r?\n/).filter(Boolean);
   const productionRuntimeChanges = requireProductionRuntimeDiff(changedPaths);
   check(!changedPaths.some((path) => /\/c1c(?:5(?:r|r2)?|6|7|8|9|10|11|12|13|14|15|16)-/.test(path) && path.startsWith('docs/')), 'historical evidence changed');
@@ -88,7 +93,7 @@ const runtimeChanges = verifyLiveImplementation(anchor);
 equal(evidence.productionRuntimeChanges, runtimeChanges, 'implementation production diff evidence drift');
 requireVerificationReceipt(evidence.implementationVerification, anchor, evidence.verifiedImplementationTree);
 git('merge-base', '--is-ancestor', baselineHead, anchor);
-check(git('rev-parse', `${anchor}^`) === baselineHead, 'implementation must start from exact C1C16 baseline');
+check(evidence.repairBaselineHead === repairBaselineHead && evidence.priorImplementationAnchor === priorImplementationAnchor, 'repair lineage evidence mismatch');
 git('merge-base', '--is-ancestor', anchor, 'HEAD');
 check(git('rev-parse', `${anchor}^{tree}`) === evidence.verifiedImplementationTree, 'implementation tree mismatch');
 check(git('show', '-s', '--format=%cI', anchor) === evidence.verifiedImplementationCommittedAt, 'implementation timestamp mismatch');
@@ -144,6 +149,7 @@ const contract = read('c1c17-survival-guide-contract.json');
 equal(contract.positive, source.positiveSide, 'positive source drift');
 equal(contract.negative, source.negativeSide, 'negative source drift');
 equal(contract.adapter, COMMUNITY_TRINKET_RUNTIME_ADAPTERS[SURVIVAL_GUIDE_ID], 'adapter drift');
+check(contract.ignorePolicy === 'TERMINAL_CLOSE_ALL_ROOT_OPPORTUNITIES_COMPLETE_MOVE' && contract.ignoredRestorePolicy === 'CLEAR_PENDING_AND_ORPHAN_OPPORTUNITIES_NO_MOVE', 'ignored result terminal contract drift');
 check(contract.sourceTrigger === 'exploration-die-result' && contract.runtimeWindow === 'after-dungeon-roll'
   && contract.target === 'exploration-die' && source.positiveSide.conditions.length === 0 && source.negativeSide.conditions.length === 0, 'timing/target/conditions drift');
 equal(capability.requiredPrimitives, ['STAGED_EXPLORATION_MOVE', 'EXPLORATION_RESULT_TRINKET_WINDOW', 'TRINKET_EXPLORATION_RESULT_IGNORE_CONSUMER', 'TRINKET_EXPLORATION_RESULT_REPLACE_CONSUMER'], 'required primitives drift');

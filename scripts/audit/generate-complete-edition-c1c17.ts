@@ -13,7 +13,8 @@ import { createNewCampaign } from '../../src/game-engine/campaign';
 const baselineHead = '69aa2185d221e2935b48383e4dbbdee8ba9d0d43';
 const git = (...args: string[]) => execFileSync('git', args, { encoding: 'utf8' }).trim();
 const sha = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
-const meta = { schemaVersion: 1, phase: '11A.4-C1C-17', baselineHead,
+const meta = { schemaVersion: 1, phase: '11A.4-C1C-17R', baselineHead, repairBaselineHead: '62c8478e2461d04e8a0ea567e58ccfe996e1ad34',
+  priorImplementationAnchor: '79f7c656afa61a5527e7ac956f4e38d1491ddb3a',
   baselineImplementationAnchor: '130f1cc868adc3e27eb3ac5a2087f8da4e2f4e86', baselineImplementationTree: '7cb92fbdf5e8492dde6cdfa9f9869b89b8354f6b',
   verifiedImplementationHead: git('rev-parse', 'HEAD'), verifiedImplementationTree: git('rev-parse', 'HEAD^{tree}'),
   verifiedImplementationCommittedAt: git('show', '-s', '--format=%cI', 'HEAD') };
@@ -30,6 +31,8 @@ const adapter = COMMUNITY_TRINKET_RUNTIME_ADAPTERS[SURVIVAL_GUIDE_ID];
 const contract = { definitionId: SURVIVAL_GUIDE_ID, sourceReferences: source.sourceReferences,
   sourceTrigger: 'exploration-die-result', runtimeWindow: 'after-dungeon-roll', target: 'exploration-die',
   positive: source.positiveSide, negative: source.negativeSide, adapter,
+  ignorePolicy: 'TERMINAL_CLOSE_ALL_ROOT_OPPORTUNITIES_COMPLETE_MOVE',
+  ignoredRestorePolicy: 'CLEAR_PENDING_AND_ORPHAN_OPPORTUNITIES_NO_MOVE',
   resultPolicy: 'ROLL_ONCE_BEFORE_WINDOW_FREEZE_ORIGINAL_AND_EFFECTIVE',
   moveIdentity: ['rootEventId', 'questId', 'questRunId', 'fromRoomId', 'destinationRoomId'],
   physicalPolicy: 'PROCESSED_PHYSICAL_IDS_PERSIST_REEVALUATE_UNPROCESSED_CLOSE_STALE',
@@ -61,9 +64,9 @@ write('c1c17-survival-guide-runtime-evidence.json', { historicalEvidenceHashes, 
   readySubsetDraw: 'ENABLED', fullDeckStatus: 'complete 14-card Level-1 deck is not runtime-complete', deferredConditionCharms: deferred,
   readinessInvariantErrors: trinketReadinessInvariantErrors(COMMUNITY_TRINKET_CAPABILITIES), verificationCommand: 'npm run verify:complete-edition-c1c17',
   verificationRequired: true, terminalVerdict: verdict });
-writeFileSync('docs/reports/complete-edition/c1c17-survival-guide-runtime-report.md', '# C1C17 Survival Guide exploration result runtime\n\n' + verdict + '\n\n'
+writeFileSync('docs/reports/complete-edition/c1c17-survival-guide-runtime-report.md', '# C1C17R Survival Guide ignore-result closure repair\n\n' + verdict + '\n\n'
   + 'Survival Guide implements both exact source sides at after-dungeon-roll. The move identity and single rolled exploration result are persisted before any result, leave-room rule, room entry, battle settlement or replacement continuation. Use/Decline resumes the shared production command. Positive skips result consequences and completes the move; Negative transforms the effective result to Trap and consumes the existing Trap pipeline. The original result remains unchanged.\n\n'
-  + 'All living holders contribute physical opportunities. After a transform, stale opportunities close and unprocessed instances are reevaluated. A processed card never reopens in the same root, including after its flip. Saves preserve open, Negative-used and Positive-used checkpoints; invalid intent clears pending state and orphan windows without moving. No save version bump: this extends an existing union.\n\n'
+  + 'All living holders contribute physical opportunities. After a transform, stale opportunities close and unprocessed instances are reevaluated. A processed card never reopens in the same root, including after its flip. Ignore is terminal: all sibling root opportunities close immediately, sibling cards do not flip or produce Use Records, and the move completes. Negative transforms still reevaluate unprocessed cards. Saves preserve open and Negative-used checkpoints; Positive-used saves are already completed moves. Legacy/corrupt ignored=true pending saves clear pending state and orphan opportunities without moving. No save version bump: this extends an existing union.\n\n'
   + 'Level 1 Ready = 7/14. Production-ready subset draw is enabled; the complete 14-card Level-1 deck is not runtime-complete (completeForRandomDraw=false). Level 2 remains 4/11 and Level 3 remains 4/12. Historical C1C5–C1C16 evidence and normalized sources are frozen. C1C16 tests project its original adapter set to retain historical six-card assertions.\n\n'
   + 'Bleed Charm, Blight Charm, Debuff Charm and Stun Charm are deferred. Hero-caused conditions still have amount-only legacy skill representations without independent duration; duration=amount is not a source rule. Debuff has no StatusEffectType token, independent duration application, or expiration. Reopening requires hero-caused-condition-source-contract covering magnitude, duration, exact insertion, target, duration -1 at zero, debuff representation and expiration. Next compare Damage Stone against the condition family; single-side work yields no whole-card Ready gain.\n\n'
   + 'Verification: npm run verify:complete-edition-c1c17 runs all requested historical E2E suites, npm test, typecheck and build. Registered C1C17 proofs exercise applicability, transformations, multi-copy, frozen save replay, semantic mutations and real room-click UI Use/reload behavior. Evidence is generated only after --implementation completes every required suite for its exact commit/tree. The verifier rejects documentation/audit/test-only implementation diffs; both consumers and registered proofs are checked explicitly. --evidence-only checks the final evidence commit against the verified implementation receipt. Implementation and evidence-only commits are independently checked.\n');

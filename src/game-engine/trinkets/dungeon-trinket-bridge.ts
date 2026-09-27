@@ -264,6 +264,11 @@ export function chooseDungeonProvisionWild(
 function openExplorationOpportunities(campaign: CampaignState): CampaignState {
   const pending = campaign.pendingDungeonTrinketAction;
   if (pending?.kind !== 'exploration-move') return campaign;
+  if (pending.ignored) {
+    return { ...campaign, pendingTrinketUseOpportunities: campaign.pendingTrinketUseOpportunities.filter(
+      (entry) => entry.rootEventId !== pending.rootEventId,
+    ) };
+  }
   const allowed = campaign.heroes.filter((hero) => hero.isAlive && !hero.dead).flatMap((hero) =>
     hero.equippedTrinkets.filter((card) => {
       const side = getTrinketSide(card.trinketId, card.currentSide);
@@ -272,8 +277,6 @@ function openExplorationOpportunities(campaign: CampaignState): CampaignState {
     }).map((card) => card.instanceId));
   let next = { ...campaign, pendingTrinketUseOpportunities: campaign.pendingTrinketUseOpportunities.filter((entry) =>
     entry.rootEventId !== pending.rootEventId || (entry.status === 'open' && allowed.includes(entry.trinketInstanceId))) };
-  // Ignoring a result preserves existing applicable physical decisions, but creates no new ones.
-  if (pending.ignored) return next;
   for (const hero of campaign.heroes) {
     next = openTrinketWindow(next, { window: 'after-dungeon-roll', heroId: hero.instanceId,
       eventId: pending.rootEventId + ':' + hero.instanceId, rootEventId: pending.rootEventId,

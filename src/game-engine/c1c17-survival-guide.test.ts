@@ -112,17 +112,34 @@ describe('C1C17 staged exploration', () => {
     expect(ignored.dungeon!.currentRoomId).toBe('A');
     expect(ignored.provisions.tool).toBe(1);
     expect(ignored.trinketUseRecords).toHaveLength(2);
+    expect(ignored.pendingDungeonTrinketAction).toBeNull();
+    expect(ignored.pendingTrinketUseOpportunities).toHaveLength(0);
     const positives = begin(['positive', 'positive'], 'trap');
     const one = decide(positives, 'use');
-    expect(one.pendingDungeonTrinketAction).toMatchObject({ ignored: true });
+    expect(one.pendingDungeonTrinketAction).toBeNull();
+    expect(one.pendingTrinketUseOpportunities).toHaveLength(0);
+    expect(one.dungeon!.currentRoomId).toBe('A');
+    expect(one.trinketUseRecords).toHaveLength(1);
+    expect(one.heroes.map((hero) => [hero.wounds, hero.stress])).toEqual(positives.heroes.map((hero) => [hero.wounds, hero.stress]));
     expect(one.heroes[1].equippedTrinkets[0].currentSide).toBe('positive');
-    expect(decide(one, 'decline').provisions.tool).toBe(1);
+    expect(one.provisions.tool).toBe(1);
+    expect(resolveOpenTrinketOpportunities(one, [{ opportunityId: positives.pendingTrinketUseOpportunities[1].id, decision: 'use' }])).toEqual(one);
+    const mixed = begin(['positive', 'negative'], 'hunger');
+    expect(mixed.pendingTrinketUseOpportunities).toHaveLength(2);
+    const finished = decide(mixed, 'use');
+    expect(finished.pendingDungeonTrinketAction).toBeNull();
+    expect(finished.pendingTrinketUseOpportunities).toHaveLength(0);
+    expect(finished.dungeon!.currentRoomId).toBe('A');
+    expect(finished.provisions.food).toBe(3);
+    expect(finished.heroes[1].equippedTrinkets[0].currentSide).toBe('negative');
+    expect(finished.trinketUseRecords).toHaveLength(1);
+    expect(resolveOpenTrinketOpportunities(finished, [{ opportunityId: mixed.pendingTrinketUseOpportunities[1].id, decision: 'use' }])).toEqual(finished);
   });
   proof('SAVE-REPLAY', () => {
     const original = begin(['negative', 'positive', 'positive'], 'none');
     const negativeUsed = decide(original, 'use');
     const positiveUsed = decide(negativeUsed, 'use');
-    for (const checkpoint of [original, negativeUsed, positiveUsed]) {
+    for (const checkpoint of [original, negativeUsed]) {
       setRandomSource(() => { throw new Error('Must not reroll'); });
       const save = createSaveSnapshot(checkpoint);
       const restored = restoreSaveSnapshot(JSON.parse(JSON.stringify(save)));
@@ -130,10 +147,28 @@ describe('C1C17 staged exploration', () => {
       let next = restored;
       while (next.pendingDungeonTrinketAction) next = decide(next, 'decline');
       expect(next.dungeon!.currentRoomId).toBe('A');
-      expect(next.provisions.tool).toBe(checkpoint === positiveUsed ? 1 : checkpoint === original ? 1 : 0);
+      expect(next.provisions.tool).toBe(checkpoint === original ? 1 : 0);
       expect(resolveOpenTrinketOpportunities(next, [{ opportunityId: checkpoint.pendingTrinketUseOpportunities[0].id, decision: 'use' }])).toEqual(next);
     }
-    for (const mutation of [ { questId: 'bad' }, { questRunId: 'bad' }, { fromRoomId: 'bad' }, { destinationRoomId: 'H' },
+    setRandomSource(() => { throw new Error('Completed ignore must not reroll or repeat consequences'); });
+    const completedReplay = restoreSaveSnapshot(createSaveSnapshot(positiveUsed));
+    expect(completedReplay.pendingDungeonTrinketAction).toBeNull();
+    expect(completedReplay.pendingTrinketUseOpportunities).toHaveLength(0);
+    expect(completedReplay.dungeon!.currentRoomId).toBe('A');
+    expect(completedReplay.provisions.tool).toBe(1);
+    expect(completedReplay.trinketUseRecords).toEqual(positiveUsed.trinketUseRecords);
+    expect(completedReplay.heroes.map((hero) => hero.equippedTrinkets)).toEqual(positiveUsed.heroes.map((hero) => hero.equippedTrinkets));
+    expect(resolveOpenTrinketOpportunities(completedReplay, [{ opportunityId: negativeUsed.pendingTrinketUseOpportunities[1].id, decision: 'use' }])).toEqual(completedReplay);
+    const legacyIgnored = createSaveSnapshot(structuredClone(negativeUsed));
+    if (legacyIgnored.campaign.pendingDungeonTrinketAction?.kind === 'exploration-move') legacyIgnored.campaign.pendingDungeonTrinketAction.ignored = true;
+    const clearedLegacy = restoreSaveSnapshot(legacyIgnored);
+    expect(clearedLegacy.pendingDungeonTrinketAction).toBeNull();
+    expect(clearedLegacy.pendingTrinketUseOpportunities).toHaveLength(0);
+    expect(clearedLegacy.dungeon!.currentRoomId).toBe('start');
+    expect(clearedLegacy.provisions).toEqual(negativeUsed.provisions);
+    expect(clearedLegacy.trinketUseRecords).toEqual(negativeUsed.trinketUseRecords);
+    expect(clearedLegacy.heroes.map((hero) => hero.equippedTrinkets)).toEqual(negativeUsed.heroes.map((hero) => hero.equippedTrinkets));
+    for (const mutation of [ { ignored: true }, { questId: 'bad' }, { questRunId: 'bad' }, { fromRoomId: 'bad' }, { destinationRoomId: 'H' },
       { originalResult: 'bad' }, { effectiveResult: 'bad' }, { processedTrinketInstanceIds: ['fake'] }, { ignored: 'yes' } ]) {
       const save = createSaveSnapshot(original);
       Object.assign(save.campaign.pendingDungeonTrinketAction!, mutation);

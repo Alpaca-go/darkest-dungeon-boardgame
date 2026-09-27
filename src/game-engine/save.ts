@@ -1486,7 +1486,7 @@ export function migrateCampaignToV21(campaignInput: CampaignState): CampaignStat
       && Boolean(campaign.dungeon?.rooms.find((room) => room.id === pending.fromRoomId)?.adjacentRoomIds.includes(pending.destinationRoomId))
       && Boolean(campaign.dungeon?.rooms.some((room) => room.id === pending.destinationRoomId))
       && results.includes(pending.originalResult) && results.includes(pending.effectiveResult)
-      && typeof pending.ignored === 'boolean' && Array.isArray(pending.processedTrinketInstanceIds)
+      && pending.ignored === false && Array.isArray(pending.processedTrinketInstanceIds)
       && new Set(pending.processedTrinketInstanceIds).size === pending.processedTrinketInstanceIds.length
       && pending.processedTrinketInstanceIds.every((id) => typeof id === 'string' && physicalIds.includes(id))
       && rootOpportunities.length > 0
