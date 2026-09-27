@@ -1,0 +1,1482 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-16",
+  "baselineHead": "24dc66cbd27b3a28abf76babd6d8fd6e3865507f",
+  "verifiedImplementationHead": "130f1cc868adc3e27eb3ac5a2087f8da4e2f4e86",
+  "verifiedImplementationTree": "7cb92fbdf5e8492dde6cdfa9f9869b89b8354f6b",
+  "verifiedImplementationCommittedAt": "2026-09-27T10:11:21+08:00",
+  "cards": [
+    {
+      "definitionId": "community-trinket-core-accuracy-stone",
+      "printedName": "Accuracy Stone",
+      "contentSet": "core",
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/13"
+      ],
+      "historicalDiagnosis": [
+        [
+          "Exact applicable timing hero-skill-resolution is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ],
+        [
+          "Exact applicable timing hero-skill-resolution is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ]
+      ],
+      "productionReady": true,
+      "productionStatus": "PRODUCTION_READY",
+      "blockerCodes": [],
+      "runtimeSemanticComplete": true,
+      "measuredRuntimeProof": {
+        "adapterPresent": true,
+        "productionProofPresent": true,
+        "saveReplayProofPresent": true,
+        "selectorProofPresent": true,
+        "e2eProofPresent": true
+      },
+      "productionUiProofComplete": true,
+      "requiredPrimitives": [
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW"
+      ],
+      "missingPrimitives": [],
+      "sides": [
+        {
+          "side": "positive",
+          "implementationStatus": "IMPLEMENTED",
+          "runtimeSliceSemanticComplete": true,
+          "blockerCode": null,
+          "semanticMismatches": [],
+          "proofIds": [
+            "C1BR-PA-ACCURACY-RUNTIME",
+            "C1BR-SAVE-ACCURACY-SIDE-REPLAY",
+            "C1BR-CS-TRINKET-METADATA",
+            "C1BR-E2E-ACCURACY"
+          ]
+        },
+        {
+          "side": "negative",
+          "implementationStatus": "IMPLEMENTED",
+          "runtimeSliceSemanticComplete": true,
+          "blockerCode": null,
+          "semanticMismatches": [],
+          "proofIds": [
+            "C1BR-PA-ACCURACY-RUNTIME",
+            "C1BR-SAVE-ACCURACY-SIDE-REPLAY",
+            "C1BR-CS-TRINKET-METADATA",
+            "C1BR-E2E-ACCURACY"
+          ]
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-archers-ring",
+      "printedName": "Archer's Ring",
+      "contentSet": "core",
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/11"
+      ],
+      "historicalDiagnosis": [
+        [
+          "TrinketUseCondition has no stance predicate",
+          "Exact applicable timing hero-skill-resolution is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ],
+        [
+          "Exact applicable timing hero-skill-resolution is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ]
+      ],
+      "productionReady": true,
+      "productionStatus": "PRODUCTION_READY",
+      "blockerCodes": [],
+      "runtimeSemanticComplete": true,
+      "measuredRuntimeProof": {
+        "adapterPresent": true,
+        "productionProofPresent": true,
+        "saveReplayProofPresent": true,
+        "selectorProofPresent": true,
+        "e2eProofPresent": true
+      },
+      "productionUiProofComplete": true,
+      "requiredPrimitives": [
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW",
+        "POST_ROLL_ATTACK_ACCURACY_CONSUMER",
+        "TRINKET_STANCE_CONDITION_CONSUMER"
+      ],
+      "missingPrimitives": [],
+      "sides": [
+        {
+          "side": "positive",
+          "implementationStatus": "IMPLEMENTED",
+          "runtimeSliceSemanticComplete": true,
+          "blockerCode": null,
+          "semanticMismatches": [],
+          "proofIds": [
+            "C1C16-ARCHER-RING-RUNTIME",
+            "C1C16-ARCHER-RING-SAVE-REPLAY",
+            "C1C16-ARCHER-RING-SELECTOR",
+            "C1C16-E2E-ARCHER-RING"
+          ]
+        },
+        {
+          "side": "negative",
+          "implementationStatus": "IMPLEMENTED",
+          "runtimeSliceSemanticComplete": true,
+          "blockerCode": null,
+          "semanticMismatches": [],
+          "proofIds": [
+            "C1C16-ARCHER-RING-RUNTIME",
+            "C1C16-ARCHER-RING-SAVE-REPLAY",
+            "C1C16-ARCHER-RING-SELECTOR",
+            "C1C16-E2E-ARCHER-RING"
+          ]
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-bleed-charm",
+      "printedName": "Bleed Charm",
+      "contentSet": "core",
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/12"
+      ],
+      "historicalDiagnosis": [
+        [
+          "ActiveEffectDefinition cannot express independent magnitude and turns / non-self target",
+          "Exact applicable timing hero-skill-hits is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ],
+        [
+          "No exact active trinket primitive:modify-condition-duration",
+          "Exact applicable timing hero-causes-condition is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ]
+      ],
+      "productionReady": false,
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "TRINKET_TRIGGER_WINDOW_MISSING:hero-skill-hits",
+        "TRINKET_TRIGGER_WINDOW_MISSING:hero-causes-condition",
+        "TRINKET_EFFECT_CONSUMER_MISSING:modify-condition-duration",
+        "TRINKET_TRIGGER_MISMATCH",
+        "TRINKET_EFFECT_CONSUMER_MISSING"
+      ],
+      "runtimeSemanticComplete": false,
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      },
+      "productionUiProofComplete": false,
+      "requiredPrimitives": [
+        "TRINKET_CONDITION_STACK_CONSUMER",
+        "PRE_DAMAGE_HIT_TRINKET_WINDOW",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_MODIFY_CONDITION_DURATION",
+        "EXACT_APPLICABLE_TIMING_HERO_CAUSES_CONDITION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "missingPrimitives": [
+        "TRINKET_TRIGGER_WINDOW_MISSING:hero-skill-hits",
+        "TRINKET_TRIGGER_WINDOW_MISSING:hero-causes-condition",
+        "TRINKET_EFFECT_CONSUMER_MISSING:modify-condition-duration"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "implementationStatus": "UNSUPPORTED",
+          "runtimeSliceSemanticComplete": false,
+          "blockerCode": "TRINKET_TRIGGER_MISMATCH",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "hero-skill-hits",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "skill-target",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "apply-condition-stack",
+                  "target": "skill-target",
+                  "parameters": {
+                    "condition": "bleed",
+                    "turns": 2,
+                    "amount": 2
+                  }
+                }
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        },
+        {
+          "side": "negative",
+          "implementationStatus": "UNSUPPORTED",
+          "runtimeSliceSemanticComplete": false,
+          "blockerCode": "TRINKET_EFFECT_CONSUMER_MISSING",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "hero-causes-condition",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "condition-being-caused",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "modify-condition-duration",
+                  "target": "condition-being-caused",
+                  "parameters": {
+                    "turns": -1
+                  }
+                }
+              ],
+              "runtime": []
+            },
+            {
+              "code": "TRINKET_EFFECT_CONSUMER_MISSING",
+              "source": [
+                "modify-condition-duration"
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-blight-charm",
+      "printedName": "Blight Charm",
+      "contentSet": "core",
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/10"
+      ],
+      "historicalDiagnosis": [
+        [
+          "ActiveEffectDefinition cannot express independent magnitude and turns / non-self target",
+          "Exact applicable timing hero-skill-hits is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ],
+        [
+          "No exact active trinket primitive:modify-condition-duration",
+          "Exact applicable timing hero-causes-condition is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ]
+      ],
+      "productionReady": false,
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "TRINKET_TRIGGER_WINDOW_MISSING:hero-skill-hits",
+        "TRINKET_TRIGGER_WINDOW_MISSING:hero-causes-condition",
+        "TRINKET_EFFECT_CONSUMER_MISSING:modify-condition-duration",
+        "TRINKET_TRIGGER_MISMATCH",
+        "TRINKET_EFFECT_CONSUMER_MISSING"
+      ],
+      "runtimeSemanticComplete": false,
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      },
+      "productionUiProofComplete": false,
+      "requiredPrimitives": [
+        "TRINKET_CONDITION_STACK_CONSUMER",
+        "PRE_DAMAGE_HIT_TRINKET_WINDOW",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_MODIFY_CONDITION_DURATION",
+        "EXACT_APPLICABLE_TIMING_HERO_CAUSES_CONDITION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "missingPrimitives": [
+        "TRINKET_TRIGGER_WINDOW_MISSING:hero-skill-hits",
+        "TRINKET_TRIGGER_WINDOW_MISSING:hero-causes-condition",
+        "TRINKET_EFFECT_CONSUMER_MISSING:modify-condition-duration"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "implementationStatus": "UNSUPPORTED",
+          "runtimeSliceSemanticComplete": false,
+          "blockerCode": "TRINKET_TRIGGER_MISMATCH",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "hero-skill-hits",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "skill-target",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "apply-condition-stack",
+                  "target": "skill-target",
+                  "parameters": {
+                    "condition": "blight",
+                    "turns": 2,
+                    "amount": 2
+                  }
+                }
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        },
+        {
+          "side": "negative",
+          "implementationStatus": "UNSUPPORTED",
+          "runtimeSliceSemanticComplete": false,
+          "blockerCode": "TRINKET_EFFECT_CONSUMER_MISSING",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "hero-causes-condition",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "condition-being-caused",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "modify-condition-duration",
+                  "target": "condition-being-caused",
+                  "parameters": {
+                    "turns": -1
+                  }
+                }
+              ],
+              "runtime": []
+            },
+            {
+              "code": "TRINKET_EFFECT_CONSUMER_MISSING",
+              "source": [
+                "modify-condition-duration"
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-caution-cloak",
+      "printedName": "Caution Cloak",
+      "contentSet": "core",
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/9"
+      ],
+      "historicalDiagnosis": [
+        [
+          "No exact active trinket primitive:prevent-stress",
+          "Exact applicable timing scout is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ],
+        [
+          "Exact applicable timing voluntary-declaration is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ]
+      ],
+      "productionReady": false,
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "TRINKET_EFFECT_CONSUMER_MISSING:prevent-stress",
+        "VOLUNTARY_DECLARATION_RUNTIME",
+        "TRINKET_EFFECT_CONSUMER_MISSING",
+        "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED"
+      ],
+      "runtimeSemanticComplete": false,
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      },
+      "productionUiProofComplete": false,
+      "requiredPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_PREVENT_STRESS",
+        "STAGED_DUNGEON_TRINKET_WINDOWS",
+        "VOLUNTARY_DECLARATION_RUNTIME"
+      ],
+      "missingPrimitives": [
+        "TRINKET_EFFECT_CONSUMER_MISSING:prevent-stress",
+        "VOLUNTARY_DECLARATION_RUNTIME"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "implementationStatus": "UNSUPPORTED",
+          "runtimeSliceSemanticComplete": false,
+          "blockerCode": "TRINKET_EFFECT_CONSUMER_MISSING",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "scout",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": "before-scout-resolution",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "equipped-hero",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "prevent-stress",
+                  "target": "equipped-hero",
+                  "parameters": {
+                    "source": "scouting"
+                  }
+                }
+              ],
+              "runtime": []
+            },
+            {
+              "code": "TRINKET_EFFECT_CONSUMER_MISSING",
+              "source": [
+                "prevent-stress"
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        },
+        {
+          "side": "negative",
+          "implementationStatus": "UNSUPPORTED",
+          "runtimeSliceSemanticComplete": false,
+          "blockerCode": "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "voluntary-declaration",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "equipped-hero",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "change-light",
+                  "target": "equipped-hero",
+                  "parameters": {
+                    "amount": -1
+                  }
+                }
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-critical-stone",
+      "printedName": "Critical Stone",
+      "contentSet": "core",
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/8"
+      ],
+      "historicalDiagnosis": [
+        [
+          "Exact applicable timing hero-skill-resolution is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ],
+        [
+          "Exact applicable timing hero-skill-resolution is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ]
+      ],
+      "productionReady": true,
+      "productionStatus": "PRODUCTION_READY",
+      "blockerCodes": [],
+      "runtimeSemanticComplete": true,
+      "measuredRuntimeProof": {
+        "adapterPresent": true,
+        "productionProofPresent": true,
+        "saveReplayProofPresent": true,
+        "selectorProofPresent": true,
+        "e2eProofPresent": true
+      },
+      "productionUiProofComplete": true,
+      "requiredPrimitives": [
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW"
+      ],
+      "missingPrimitives": [],
+      "sides": [
+        {
+          "side": "positive",
+          "implementationStatus": "IMPLEMENTED",
+          "runtimeSliceSemanticComplete": true,
+          "blockerCode": null,
+          "semanticMismatches": [],
+          "proofIds": [
+            "C1BR-PA-CRITICAL-RUNTIME",
+            "C1BR-SAVE-CRITICAL-SIDE-REPLAY",
+            "C1BR-CS-TRINKET-METADATA",
+            "C1BR-E2E-CRITICAL"
+          ]
+        },
+        {
+          "side": "negative",
+          "implementationStatus": "IMPLEMENTED",
+          "runtimeSliceSemanticComplete": true,
+          "blockerCode": null,
+          "semanticMismatches": [],
+          "proofIds": [
+            "C1BR-PA-CRITICAL-RUNTIME",
+            "C1BR-SAVE-CRITICAL-SIDE-REPLAY",
+            "C1BR-CS-TRINKET-METADATA",
+            "C1BR-E2E-CRITICAL"
+          ]
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-damage-stone",
+      "printedName": "Damage Stone",
+      "contentSet": "core",
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/7"
+      ],
+      "historicalDiagnosis": [
+        [
+          "Exact applicable timing hero-skill-resolution is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ],
+        [
+          "No exact active trinket primitive:suffer-wounds",
+          "Exact applicable timing hero-takes-damage is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ]
+      ],
+      "productionReady": false,
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "TRINKET_TRIGGER_WINDOW_MISSING:hero-takes-damage",
+        "TRINKET_EFFECT_CONSUMER_MISSING:suffer-wounds",
+        "TRINKET_TRIGGER_MISMATCH",
+        "TRINKET_EFFECT_CONSUMER_MISSING"
+      ],
+      "runtimeSemanticComplete": false,
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      },
+      "productionUiProofComplete": false,
+      "requiredPrimitives": [
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_SUFFER_WOUNDS",
+        "EXACT_APPLICABLE_TIMING_HERO_TAKES_DAMAGE_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "missingPrimitives": [
+        "TRINKET_TRIGGER_WINDOW_MISSING:hero-takes-damage",
+        "TRINKET_EFFECT_CONSUMER_MISSING:suffer-wounds"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "implementationStatus": "UNSUPPORTED",
+          "runtimeSliceSemanticComplete": false,
+          "blockerCode": "TRINKET_TRIGGER_MISMATCH",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "hero-skill-resolution",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": "after-attack-roll-before-hit-resolution",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "skill",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_MODIFIER_TYPE_MISMATCH",
+              "source": [
+                {
+                  "stat": "damage",
+                  "operation": "add",
+                  "amount": 3
+                }
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        },
+        {
+          "side": "negative",
+          "implementationStatus": "UNSUPPORTED",
+          "runtimeSliceSemanticComplete": false,
+          "blockerCode": "TRINKET_EFFECT_CONSUMER_MISSING",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "hero-takes-damage",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "equipped-hero",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "suffer-wounds",
+                  "target": "equipped-hero",
+                  "parameters": {
+                    "amount": 2
+                  }
+                }
+              ],
+              "runtime": []
+            },
+            {
+              "code": "TRINKET_EFFECT_CONSUMER_MISSING",
+              "source": [
+                "suffer-wounds"
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-debuff-charm",
+      "printedName": "Debuff Charm",
+      "contentSet": "core",
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/6"
+      ],
+      "historicalDiagnosis": [
+        [
+          "ActiveEffectDefinition cannot express independent magnitude and turns / non-self target",
+          "Exact applicable timing hero-skill-hits is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ],
+        [
+          "No exact active trinket primitive:modify-condition-duration",
+          "Exact applicable timing hero-causes-condition is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ]
+      ],
+      "productionReady": false,
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "TRINKET_TRIGGER_WINDOW_MISSING:hero-skill-hits",
+        "TRINKET_TRIGGER_WINDOW_MISSING:hero-causes-condition",
+        "TRINKET_EFFECT_CONSUMER_MISSING:modify-condition-duration",
+        "TRINKET_TRIGGER_MISMATCH",
+        "TRINKET_EFFECT_CONSUMER_MISSING"
+      ],
+      "runtimeSemanticComplete": false,
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      },
+      "productionUiProofComplete": false,
+      "requiredPrimitives": [
+        "TRINKET_CONDITION_STACK_CONSUMER",
+        "PRE_DAMAGE_HIT_TRINKET_WINDOW",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_MODIFY_CONDITION_DURATION",
+        "EXACT_APPLICABLE_TIMING_HERO_CAUSES_CONDITION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "missingPrimitives": [
+        "TRINKET_TRIGGER_WINDOW_MISSING:hero-skill-hits",
+        "TRINKET_TRIGGER_WINDOW_MISSING:hero-causes-condition",
+        "TRINKET_EFFECT_CONSUMER_MISSING:modify-condition-duration"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "implementationStatus": "UNSUPPORTED",
+          "runtimeSliceSemanticComplete": false,
+          "blockerCode": "TRINKET_TRIGGER_MISMATCH",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "hero-skill-hits",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "skill-target",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "apply-condition-stack",
+                  "target": "skill-target",
+                  "parameters": {
+                    "condition": "debuff",
+                    "turns": 2,
+                    "amount": null
+                  }
+                }
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        },
+        {
+          "side": "negative",
+          "implementationStatus": "UNSUPPORTED",
+          "runtimeSliceSemanticComplete": false,
+          "blockerCode": "TRINKET_EFFECT_CONSUMER_MISSING",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "hero-causes-condition",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "condition-being-caused",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "modify-condition-duration",
+                  "target": "condition-being-caused",
+                  "parameters": {
+                    "turns": -1
+                  }
+                }
+              ],
+              "runtime": []
+            },
+            {
+              "code": "TRINKET_EFFECT_CONSUMER_MISSING",
+              "source": [
+                "modify-condition-duration"
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-sages-book",
+      "printedName": "Sage's Book",
+      "contentSet": "core",
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/5"
+      ],
+      "historicalDiagnosis": [
+        [
+          "TrinketUseCondition has no stance predicate",
+          "Exact applicable timing hero-skill-resolution is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ],
+        [
+          "Exact applicable timing hero-skill-resolution is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ]
+      ],
+      "productionReady": true,
+      "productionStatus": "PRODUCTION_READY",
+      "blockerCodes": [],
+      "runtimeSemanticComplete": true,
+      "measuredRuntimeProof": {
+        "adapterPresent": true,
+        "productionProofPresent": true,
+        "saveReplayProofPresent": true,
+        "selectorProofPresent": true,
+        "e2eProofPresent": true
+      },
+      "productionUiProofComplete": true,
+      "requiredPrimitives": [
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW",
+        "POST_ROLL_ATTACK_ACCURACY_CONSUMER",
+        "TRINKET_STANCE_CONDITION_CONSUMER"
+      ],
+      "missingPrimitives": [],
+      "sides": [
+        {
+          "side": "positive",
+          "implementationStatus": "IMPLEMENTED",
+          "runtimeSliceSemanticComplete": true,
+          "blockerCode": null,
+          "semanticMismatches": [],
+          "proofIds": [
+            "C1C16-SAGE-BOOK-RUNTIME",
+            "C1C16-SAGE-BOOK-SAVE-REPLAY",
+            "C1C16-SAGE-BOOK-SELECTOR",
+            "C1C16-E2E-SAGE-BOOK"
+          ]
+        },
+        {
+          "side": "negative",
+          "implementationStatus": "IMPLEMENTED",
+          "runtimeSliceSemanticComplete": true,
+          "blockerCode": null,
+          "semanticMismatches": [],
+          "proofIds": [
+            "C1C16-SAGE-BOOK-RUNTIME",
+            "C1C16-SAGE-BOOK-SAVE-REPLAY",
+            "C1C16-SAGE-BOOK-SELECTOR",
+            "C1C16-E2E-SAGE-BOOK"
+          ]
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-speed-stone",
+      "printedName": "Speed Stone",
+      "contentSet": "core",
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/4"
+      ],
+      "historicalDiagnosis": [
+        [
+          "No exact active trinket primitive:choose-one",
+          "Exact applicable timing voluntary-declaration is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ],
+        [
+          "No exact active trinket primitive:choose-one",
+          "Exact applicable timing voluntary-declaration is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ]
+      ],
+      "productionReady": false,
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "VOLUNTARY_DECLARATION_RUNTIME",
+        "TRINKET_EFFECT_CONSUMER_MISSING:choose-one",
+        "TRINKET_EFFECT_CONSUMER_MISSING",
+        "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED"
+      ],
+      "runtimeSemanticComplete": false,
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      },
+      "productionUiProofComplete": false,
+      "requiredPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_CHOOSE_ONE",
+        "VOLUNTARY_DECLARATION_RUNTIME"
+      ],
+      "missingPrimitives": [
+        "VOLUNTARY_DECLARATION_RUNTIME",
+        "TRINKET_EFFECT_CONSUMER_MISSING:choose-one"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "implementationStatus": "UNSUPPORTED",
+          "runtimeSliceSemanticComplete": false,
+          "blockerCode": "TRINKET_EFFECT_CONSUMER_MISSING",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "voluntary-declaration",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "equipped-hero",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "choose-one",
+                  "target": "equipped-hero",
+                  "parameters": {
+                    "options": [
+                      {
+                        "kind": "modify",
+                        "stat": "movement",
+                        "amount": 1
+                      },
+                      {
+                        "kind": "modify",
+                        "stat": "dodge",
+                        "amount": 1
+                      }
+                    ]
+                  }
+                }
+              ],
+              "runtime": []
+            },
+            {
+              "code": "TRINKET_EFFECT_CONSUMER_MISSING",
+              "source": [
+                "choose-one"
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        },
+        {
+          "side": "negative",
+          "implementationStatus": "UNSUPPORTED",
+          "runtimeSliceSemanticComplete": false,
+          "blockerCode": "TRINKET_EFFECT_CONSUMER_MISSING",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "voluntary-declaration",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "equipped-hero",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "choose-one",
+                  "target": "equipped-hero",
+                  "parameters": {
+                    "options": [
+                      {
+                        "kind": "modify",
+                        "stat": "movement",
+                        "amount": -1
+                      },
+                      {
+                        "kind": "modify",
+                        "stat": "dodge",
+                        "amount": -1
+                      }
+                    ]
+                  }
+                }
+              ],
+              "runtime": []
+            },
+            {
+              "code": "TRINKET_EFFECT_CONSUMER_MISSING",
+              "source": [
+                "choose-one"
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-stun-charm",
+      "printedName": "Stun Charm",
+      "contentSet": "core",
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/3"
+      ],
+      "historicalDiagnosis": [
+        [
+          "ActiveEffectDefinition cannot express independent magnitude and turns / non-self target",
+          "Exact applicable timing hero-skill-hits is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ],
+        [
+          "No exact active trinket primitive:modify-condition-duration",
+          "Exact applicable timing hero-causes-condition is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ]
+      ],
+      "productionReady": false,
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "TRINKET_TRIGGER_WINDOW_MISSING:hero-skill-hits",
+        "TRINKET_TRIGGER_WINDOW_MISSING:hero-causes-condition",
+        "TRINKET_EFFECT_CONSUMER_MISSING:modify-condition-duration",
+        "TRINKET_TRIGGER_MISMATCH",
+        "TRINKET_EFFECT_CONSUMER_MISSING"
+      ],
+      "runtimeSemanticComplete": false,
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      },
+      "productionUiProofComplete": false,
+      "requiredPrimitives": [
+        "TRINKET_CONDITION_STACK_CONSUMER",
+        "PRE_DAMAGE_HIT_TRINKET_WINDOW",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_MODIFY_CONDITION_DURATION",
+        "EXACT_APPLICABLE_TIMING_HERO_CAUSES_CONDITION_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+      ],
+      "missingPrimitives": [
+        "TRINKET_TRIGGER_WINDOW_MISSING:hero-skill-hits",
+        "TRINKET_TRIGGER_WINDOW_MISSING:hero-causes-condition",
+        "TRINKET_EFFECT_CONSUMER_MISSING:modify-condition-duration"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "implementationStatus": "UNSUPPORTED",
+          "runtimeSliceSemanticComplete": false,
+          "blockerCode": "TRINKET_TRIGGER_MISMATCH",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "hero-skill-hits",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "skill-target",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "apply-condition-stack",
+                  "target": "skill-target",
+                  "parameters": {
+                    "condition": "stun",
+                    "turns": 1,
+                    "amount": null
+                  }
+                }
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        },
+        {
+          "side": "negative",
+          "implementationStatus": "UNSUPPORTED",
+          "runtimeSliceSemanticComplete": false,
+          "blockerCode": "TRINKET_EFFECT_CONSUMER_MISSING",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "hero-causes-condition",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "condition-being-caused",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "modify-condition-duration",
+                  "target": "condition-being-caused",
+                  "parameters": {
+                    "turns": -1
+                  }
+                }
+              ],
+              "runtime": []
+            },
+            {
+              "code": "TRINKET_EFFECT_CONSUMER_MISSING",
+              "source": [
+                "modify-condition-duration"
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-survival-guide",
+      "printedName": "Survival Guide",
+      "contentSet": "core",
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/2"
+      ],
+      "historicalDiagnosis": [
+        [
+          "No exact active trinket primitive:ignore-result",
+          "Exact applicable timing exploration-die-result is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ],
+        [
+          "No exact active trinket primitive:replace-result",
+          "Exact applicable timing exploration-die-result is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ]
+      ],
+      "productionReady": false,
+      "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+      "blockerCodes": [
+        "TRINKET_TRIGGER_WINDOW_MISSING:exploration-die-result",
+        "TRINKET_EFFECT_CONSUMER_MISSING:ignore-result",
+        "TRINKET_EFFECT_CONSUMER_MISSING:replace-result",
+        "TRINKET_EFFECT_CONSUMER_MISSING"
+      ],
+      "runtimeSemanticComplete": false,
+      "measuredRuntimeProof": {
+        "adapterPresent": false,
+        "productionProofPresent": false,
+        "saveReplayProofPresent": false,
+        "selectorProofPresent": false,
+        "e2eProofPresent": false
+      },
+      "productionUiProofComplete": false,
+      "requiredPrimitives": [
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_IGNORE_RESULT",
+        "EXACT_APPLICABLE_TIMING_EXPLORATION_DIE_RESULT_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED",
+        "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_REPLACE_RESULT"
+      ],
+      "missingPrimitives": [
+        "TRINKET_TRIGGER_WINDOW_MISSING:exploration-die-result",
+        "TRINKET_EFFECT_CONSUMER_MISSING:ignore-result",
+        "TRINKET_EFFECT_CONSUMER_MISSING:replace-result"
+      ],
+      "sides": [
+        {
+          "side": "positive",
+          "implementationStatus": "UNSUPPORTED",
+          "runtimeSliceSemanticComplete": false,
+          "blockerCode": "TRINKET_EFFECT_CONSUMER_MISSING",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "exploration-die-result",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "exploration-die",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "ignore-result",
+                  "target": "exploration-die",
+                  "parameters": {
+                    "options": [
+                      "trap",
+                      "hunger"
+                    ]
+                  }
+                }
+              ],
+              "runtime": []
+            },
+            {
+              "code": "TRINKET_EFFECT_CONSUMER_MISSING",
+              "source": [
+                "ignore-result"
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        },
+        {
+          "side": "negative",
+          "implementationStatus": "UNSUPPORTED",
+          "runtimeSliceSemanticComplete": false,
+          "blockerCode": "TRINKET_EFFECT_CONSUMER_MISSING",
+          "semanticMismatches": [
+            {
+              "code": "TRINKET_TRIGGER_MISMATCH",
+              "source": "exploration-die-result",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_WINDOW_MISMATCH",
+              "source": null,
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_TARGET_MISMATCH",
+              "source": "exploration-die",
+              "runtime": null
+            },
+            {
+              "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+              "source": [
+                {
+                  "type": "replace-result",
+                  "target": "exploration-die",
+                  "parameters": {
+                    "from": "not-trap",
+                    "to": "trap"
+                  }
+                }
+              ],
+              "runtime": []
+            },
+            {
+              "code": "TRINKET_EFFECT_CONSUMER_MISSING",
+              "source": [
+                "replace-result"
+              ],
+              "runtime": []
+            }
+          ],
+          "proofIds": []
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-warriors-bracer",
+      "printedName": "Warrior's Bracer",
+      "contentSet": "core",
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/1"
+      ],
+      "historicalDiagnosis": [
+        [
+          "TrinketUseCondition has no stance predicate",
+          "Exact applicable timing hero-skill-resolution is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ],
+        [
+          "Exact applicable timing hero-skill-resolution is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ]
+      ],
+      "productionReady": true,
+      "productionStatus": "PRODUCTION_READY",
+      "blockerCodes": [],
+      "runtimeSemanticComplete": true,
+      "measuredRuntimeProof": {
+        "adapterPresent": true,
+        "productionProofPresent": true,
+        "saveReplayProofPresent": true,
+        "selectorProofPresent": true,
+        "e2eProofPresent": true
+      },
+      "productionUiProofComplete": true,
+      "requiredPrimitives": [
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW",
+        "POST_ROLL_ATTACK_ACCURACY_CONSUMER",
+        "TRINKET_STANCE_CONDITION_CONSUMER"
+      ],
+      "missingPrimitives": [],
+      "sides": [
+        {
+          "side": "positive",
+          "implementationStatus": "IMPLEMENTED",
+          "runtimeSliceSemanticComplete": true,
+          "blockerCode": null,
+          "semanticMismatches": [],
+          "proofIds": [
+            "C1C16-WARRIOR-BRACER-RUNTIME",
+            "C1C16-WARRIOR-BRACER-SAVE-REPLAY",
+            "C1C16-WARRIOR-BRACER-SELECTOR",
+            "C1C16-E2E-WARRIOR-BRACER"
+          ]
+        },
+        {
+          "side": "negative",
+          "implementationStatus": "IMPLEMENTED",
+          "runtimeSliceSemanticComplete": true,
+          "blockerCode": null,
+          "semanticMismatches": [],
+          "proofIds": [
+            "C1C16-WARRIOR-BRACER-RUNTIME",
+            "C1C16-WARRIOR-BRACER-SAVE-REPLAY",
+            "C1C16-WARRIOR-BRACER-SELECTOR",
+            "C1C16-E2E-WARRIOR-BRACER"
+          ]
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-warriors-cap",
+      "printedName": "Warrior's Cap",
+      "contentSet": "core",
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/0"
+      ],
+      "historicalDiagnosis": [
+        [
+          "TrinketUseCondition has no stance predicate",
+          "Exact applicable timing hero-skill-resolution is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ],
+        [
+          "Exact applicable timing hero-skill-resolution is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ]
+      ],
+      "productionReady": true,
+      "productionStatus": "PRODUCTION_READY",
+      "blockerCodes": [],
+      "runtimeSemanticComplete": true,
+      "measuredRuntimeProof": {
+        "adapterPresent": true,
+        "productionProofPresent": true,
+        "saveReplayProofPresent": true,
+        "selectorProofPresent": true,
+        "e2eProofPresent": true
+      },
+      "productionUiProofComplete": true,
+      "requiredPrimitives": [
+        "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW",
+        "POST_ROLL_ATTACK_ACCURACY_CONSUMER",
+        "TRINKET_STANCE_CONDITION_CONSUMER"
+      ],
+      "missingPrimitives": [],
+      "sides": [
+        {
+          "side": "positive",
+          "implementationStatus": "IMPLEMENTED",
+          "runtimeSliceSemanticComplete": true,
+          "blockerCode": null,
+          "semanticMismatches": [],
+          "proofIds": [
+            "C1C16-WARRIOR-CAP-RUNTIME",
+            "C1C16-WARRIOR-CAP-SAVE-REPLAY",
+            "C1C16-WARRIOR-CAP-SELECTOR",
+            "C1C16-E2E-WARRIOR-CAP"
+          ]
+        },
+        {
+          "side": "negative",
+          "implementationStatus": "IMPLEMENTED",
+          "runtimeSliceSemanticComplete": true,
+          "blockerCode": null,
+          "semanticMismatches": [],
+          "proofIds": [
+            "C1C16-WARRIOR-CAP-RUNTIME",
+            "C1C16-WARRIOR-CAP-SAVE-REPLAY",
+            "C1C16-WARRIOR-CAP-SELECTOR",
+            "C1C16-E2E-WARRIOR-CAP"
+          ]
+        }
+      ]
+    }
+  ]
+}

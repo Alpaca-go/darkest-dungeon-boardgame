@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-16",
+  "baselineHead": "24dc66cbd27b3a28abf76babd6d8fd6e3865507f",
+  "verifiedImplementationHead": "130f1cc868adc3e27eb3ac5a2087f8da4e2f4e86",
+  "verifiedImplementationTree": "7cb92fbdf5e8492dde6cdfa9f9869b89b8354f6b",
+  "verifiedImplementationCommittedAt": "2026-09-27T10:11:21+08:00",
+  "sourceTrigger": "hero-skill-resolution",
+  "runtimeWindow": "after-attack-roll-before-hit-resolution",
+  "timingEvidence": [
+    "C1BR-HERO-SKILL-WINDOW-DERIVATION",
+    "C1C7-FORTUNATE-POSITIVE-RUNTIME"
+  ],
+  "newTimingPrimitiveRequired": false,
+  "runtimeStance": "ACTIVE_BATTLE_UNIT_ELSE_CAMPAIGN_HERO",
+  "declarationPolicy": "PLAYER_USE_OR_SKIP",
+  "attackRollPolicy": "FROZEN_NO_REROLL",
+  "modifierLifetime": "CURRENT_SKILL_RESOLUTION",
+  "cards": [
+    {
+      "definitionId": "community-trinket-core-archers-ring",
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/11"
+      ],
+      "positive": {
+        "conditions": [
+          {
+            "type": "stance",
+            "operator": "==",
+            "value": "ranged"
+          }
+        ],
+        "modifiers": [
+          {
+            "kind": "modify",
+            "stat": "accuracy",
+            "amount": 2
+          }
+        ]
+      },
+      "negative": {
+        "conditions": [],
+        "modifiers": [
+          {
+            "kind": "modify",
+            "stat": "accuracy",
+            "amount": -1
+          }
+        ]
+      },
+      "adapterId": "level1-archers-ring-stance-accuracy-v1"
+    },
+    {
+      "definitionId": "community-trinket-core-sages-book",
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/5"
+      ],
+      "positive": {
+        "conditions": [
+          {
+            "type": "stance",
+            "operator": "==",
+            "value": "support"
+          }
+        ],
+        "modifiers": [
+          {
+            "kind": "modify",
+            "stat": "accuracy",
+            "amount": 2
+          }
+        ]
+      },
+      "negative": {
+        "conditions": [],
+        "modifiers": [
+          {
+            "kind": "modify",
+            "stat": "accuracy",
+            "amount": -1
+          }
+        ]
+      },
+      "adapterId": "level1-sages-book-stance-accuracy-v1"
+    },
+    {
+      "definitionId": "community-trinket-core-warriors-bracer",
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/1"
+      ],
+      "positive": {
+        "conditions": [
+          {
+            "type": "stance",
+            "operator": "==",
+            "value": "aggressive"
+          }
+        ],
+        "modifiers": [
+          {
+            "kind": "modify",
+            "stat": "accuracy",
+            "amount": 2
+          }
+        ]
+      },
+      "negative": {
+        "conditions": [],
+        "modifiers": [
+          {
+            "kind": "modify",
+            "stat": "accuracy",
+            "amount": -1
+          }
+        ]
+      },
+      "adapterId": "level1-warriors-bracer-stance-accuracy-v1"
+    },
+    {
+      "definitionId": "community-trinket-core-warriors-cap",
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/0"
+      ],
+      "positive": {
+        "conditions": [
+          {
+            "type": "stance",
+            "operator": "==",
+            "value": "defensive"
+          }
+        ],
+        "modifiers": [
+          {
+            "kind": "modify",
+            "stat": "accuracy",
+            "amount": 2
+          }
+        ]
+      },
+      "negative": {
+        "conditions": [],
+        "modifiers": [
+          {
+            "kind": "modify",
+            "stat": "accuracy",
+            "amount": -1
+          }
+        ]
+      },
+      "adapterId": "level1-warriors-cap-stance-accuracy-v1"
+    }
+  ]
+}
