@@ -9,7 +9,7 @@
 // - 官方数据可信度用 officialDataStatus + enabledInOfficialPool 双重标记，
 //   未经核实的数值一律不得进入官方池（数据策略）。
 
-import type { ProvisionPool, StatusEffectType, Stance } from './index';
+import type { ExplorationEventResult, ProvisionPool, StatusEffectType, Stance } from './index';
 import type { RuntimeContentMetadata } from './content-runtime';
 
 // ---------------------------------------------------------------------------
@@ -98,7 +98,7 @@ export interface ActiveModifierDefinition {
 }
 
 /** Source-semantic target of an active Trinket effect. */
-export type TrinketEffectTarget = 'equipped-hero' | 'party-provisions' | 'new-disease';
+export type TrinketEffectTarget = 'equipped-hero' | 'party-provisions' | 'new-disease' | 'exploration-die';
 
 /** 主动效果：一律回落到官方统一管线（伤害/治疗/压力/状态）。 */
 export type ActiveEffectDefinition =
@@ -126,6 +126,8 @@ export type ActiveEffectDefinition =
   | { type: 'roll-provision-dice'; count: number; target: 'party-provisions' }
   | { type: 'discard-disease'; immediately: true; target: 'new-disease' }
   | { type: 'convert-incoming-hit-to-critical'; target: 'equipped-hero' }
+  | { type: 'ignore-exploration-result'; options: ExplorationEventResult[]; target: 'exploration-die' }
+  | { type: 'replace-exploration-result'; from: 'not-trap'; to: 'trap'; target: 'exploration-die' }
   | { type: 'log-only'; note: string };
 
 export type ProvisionFace = 'food' | 'bandage' | 'potion' | 'torch' | 'tool' | 'wild';
@@ -143,6 +145,12 @@ export interface FrozenRestAllocation {
 
 /** Persisted exploration action paused before its authoritative Scout/Camp commit. */
 export type PendingDungeonTrinketAction =
+  | {
+      kind: 'exploration-move'; rootEventId: string; questId: string; questRunId: string;
+      fromRoomId: string; destinationRoomId: string; stage: 'trinket-window';
+      originalResult: ExplorationEventResult; effectiveResult: ExplorationEventResult; ignored: boolean;
+      processedTrinketInstanceIds: string[]; pendingProvisionDice?: never;
+    }
   | {
       kind: 'scout';
       rootEventId: string;

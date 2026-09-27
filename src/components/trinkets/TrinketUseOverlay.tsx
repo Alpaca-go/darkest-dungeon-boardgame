@@ -42,9 +42,15 @@ export default function TrinketUseOverlay() {
         {dungeonAction && (
           <div className="mb-3 rounded border border-amber-800/70 bg-black/25 p-3 text-sm" data-testid="dungeon-trinket-context">
             <div className="text-dd-text">
-              {dungeonAction.kind === 'scout' ? 'Scout 结算前' : 'Rest at Camp 结算前'}
+              {dungeonAction.kind === 'scout' ? 'Scout 结算前' : dungeonAction.kind === 'camp' ? 'Rest at Camp 结算前' : '探索移动结算前'}
             </div>
             <div className="text-dd-muted">原始动作已冻结；饰品机会结清后只执行一次。</div>
+          </div>
+        )}
+        {dungeonAction?.kind === 'exploration-move' && (
+          <div className="mb-3 text-dd-text" data-testid="exploration-result-context">
+            Exploration Result: {dungeonAction.effectiveResult === 'none' ? 'None' : dungeonAction.effectiveResult === 'hunger' ? 'Hunger' : dungeonAction.effectiveResult === 'trap' ? 'Trap' : dungeonAction.effectiveResult}
+            {dungeonAction.ignored && ' (Ignored)'}
           </div>
         )}
         {diseaseAction && (

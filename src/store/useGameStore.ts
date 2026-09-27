@@ -880,7 +880,8 @@ export const useGameStore = create<GameStore>((set, get) => {
       if (c.pendingDungeonTrinketAction
         && dungeonOpportunity?.rootEventId === c.pendingDungeonTrinketAction.rootEventId) {
         const resolved = resolveDungeonTrinketOpportunity(c, opportunityId, 'use');
-        if (!resolved.error && resolved.campaign !== c) commit(resolveReplacementsFlow(resolved.campaign));
+        if (!resolved.error && resolved.campaign !== c) commit(c.pendingDungeonTrinketAction.kind === 'exploration-move'
+          ? resolved.campaign : resolveReplacementsFlow(resolved.campaign));
         return;
       }
       const { campaign: resolved, error } = resolveTrinketOpportunity(c, opportunityId, 'use');

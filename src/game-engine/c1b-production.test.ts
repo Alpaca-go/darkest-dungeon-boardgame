@@ -62,6 +62,7 @@ describe('C1B production content gate', () => {
       'community-trinket-core-archers-ring',
       'community-trinket-core-critical-stone',
       'community-trinket-core-sages-book',
+      'community-trinket-core-survival-guide',
       'community-trinket-core-warriors-bracer',
       'community-trinket-core-warriors-cap',
     ]);

@@ -172,6 +172,9 @@ export function applyExplorationResult(
  * 移动前触发一次随机探索事件：随机选事件后应用其效果与补给扣减。
  */
 export function resolveExplorationEvent(campaign: CampaignState): CampaignState {
-  const chosen = pick(EXPLORATION_EVENTS);
-  return applyExplorationResult(campaign, chosen.result);
+  return applyExplorationResult(campaign, rollExplorationResult());
+}
+
+export function rollExplorationResult(): ExplorationEventResult {
+  return pick(EXPLORATION_EVENTS).result;
 }

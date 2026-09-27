@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { LEVEL_1_TRINKET_CENSUS, LEVEL_1_TRINKET_DECK_COVERAGE } from './level1-trinket-deck';
+import { LEVEL_1_TRINKET_CENSUS as liveCensus } from './level1-trinket-deck';
+import { measureTrinketDeckCoverage } from './level2-trinket-deck';
 import { LEVEL_2_TRINKET_DECK_COVERAGE } from './level2-trinket-deck';
 import { LEVEL_3_TRINKET_DECK_COVERAGE } from './level3-trinket-deck';
 import { LEVEL1_STANCE_ACCURACY_SPECS, LEVEL3_STANCE_RING_SPECS } from './production-proof-registry';
@@ -11,6 +12,11 @@ import { drawSourceCompleteTrinket } from '../game-engine/trinkets/draw-trinket'
 import { runtimeContentContext } from '../data/content-selector';
 import { createNewCampaign } from '../game-engine/campaign';
 
+const historicalAdapters = Object.fromEntries(Object.entries(COMMUNITY_TRINKET_RUNTIME_ADAPTERS).filter(([id]) => id !== 'community-trinket-core-survival-guide'));
+const historicalSources = COMMUNITY_SOURCE_TRINKETS.filter((source) => source.level === 1 && source.contentSet === 'core');
+const historicalCapabilities = historicalSources.map((source) => evaluateCommunityTrinketCapability(source, historicalAdapters));
+const LEVEL_1_TRINKET_DECK_COVERAGE = measureTrinketDeckCoverage(1, historicalSources, historicalCapabilities);
+const LEVEL_1_TRINKET_CENSUS = liveCensus.map((card) => ({ ...card, productionReady: historicalCapabilities.find((entry) => entry.definitionId === card.definitionId)!.productionReady }));
 const stones = ['community-trinket-core-accuracy-stone', 'community-trinket-core-critical-stone'];
 describe('C1C16 Level 1 live foundation', () => {
   it('derives fourteen Core sources, recomputes baseline two and promotes exactly four', () => {
@@ -18,7 +24,7 @@ describe('C1C16 Level 1 live foundation', () => {
     expect(sources).toHaveLength(14);
     expect(sources.every((source) => source.sourceStatus === 'source-supported' && source.unresolvedFields.length === 0)).toBe(true);
     const added = new Set<string>(LEVEL1_STANCE_ACCURACY_SPECS.map((card) => card.definitionId));
-    const baselineAdapters = Object.fromEntries(Object.entries(COMMUNITY_TRINKET_RUNTIME_ADAPTERS).filter(([id]) => !added.has(id)));
+    const baselineAdapters = Object.fromEntries(Object.entries(historicalAdapters).filter(([id]) => !added.has(id)));
     expect(sources.filter((source) => evaluateCommunityTrinketCapability(source, baselineAdapters).productionReady).map((source) => source.id).sort()).toEqual([...stones].sort());
     expect(LEVEL_1_TRINKET_CENSUS).toHaveLength(14);
     expect([...LEVEL_1_TRINKET_DECK_COVERAGE.productionReadyIds].sort()).toEqual([...stones, ...added].sort());

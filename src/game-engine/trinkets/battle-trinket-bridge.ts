@@ -1,3 +1,4 @@
+import { resolveDungeonTrinketOpportunity } from './dungeon-trinket-bridge';
 // Phase 8C：Trinket 与战斗/地牢流程的桥接（开发文档 §11 / §12）。
 //
 // before-attack-roll 流程（核心约束 2：UI 不产生随机数）：
@@ -254,6 +255,9 @@ export function resolveTrinketOpportunity(
 ): ResolveOpportunityResult {
   const opp = findOpportunity(campaign, opportunityId);
   if (!opp) return { campaign, error: '使用机会不存在。', resumed: false };
+  if (campaign.pendingDungeonTrinketAction && opp.rootEventId === campaign.pendingDungeonTrinketAction.rootEventId) {
+    return resolveDungeonTrinketOpportunity(campaign, opportunityId, action);
+  }
   if (campaign.pendingDiseaseTrinketAction
     && opp.rootEventId === campaign.pendingDiseaseTrinketAction.rootEventId) {
     const resolved = resolveDiseaseTrinketOpportunity(campaign, opportunityId, action);

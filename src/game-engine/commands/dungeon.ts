@@ -2,16 +2,18 @@
 //
 // 真实顺序（与 dev doc §14 / 原 Store moveToRoom 严格一致）：
 //   1. canMoveTo
-//   2. engineMoveToRoom
-//   3. if battle: settleBattleState
+//   2. freeze exploration move → Trinket decisions → shared commit
+//   3. leave-room rules; if battle: settleBattleState
 //   4. openRoomEnteredWindows
 //   5. if dungeon-explore: evaluateReplacementFlow
 import type { CampaignState } from '../../types';
-import { canMoveTo, moveToRoom as engineMoveToRoom } from '../dungeon';
+import { canMoveTo } from '../dungeon';
 import { openRoomEnteredWindows } from '../trinkets/battle-trinket-bridge';
 import { evaluateReplacementFlow } from '../stagecoach';
 import { settleBattleState } from './battle';
 import { evaluateQuestRules } from '../quests/quest-special-rule-runtime';
+
+import { beginExplorationMoveTrinketAction } from '../trinkets/dungeon-trinket-bridge';
 
 export type EnterRoomError =
   | 'cannot-move'
@@ -34,12 +36,18 @@ export function enterDungeonRoom(
   if (campaign.questRuntimeState?.pendingRuleChoice) {
     return { ok: false, campaign, error: 'pending-quest-rule-choice' };
   }
-  if (!campaign.dungeon || !canMoveTo(campaign.dungeon, roomId)) {
+  if (campaign.gamePhase !== 'dungeon-explore' || campaign.battle || campaign.pendingDungeonTrinketAction
+    || !campaign.dungeon || !canMoveTo(campaign.dungeon, roomId)
+    || !campaign.dungeon.rooms.some((room) => room.id === roomId)) {
     return { ok: false, campaign, error: 'cannot-move' };
   }
 
-  const previousRoomId = campaign.dungeon.currentRoomId;
-  let next: CampaignState = engineMoveToRoom(campaign, roomId);
+  const begun = beginExplorationMoveTrinketAction(campaign, roomId);
+  return { ok: true, campaign: begun.campaign, error: null };
+}
+
+export function finalizeDungeonRoomEntry(campaign: CampaignState, previousRoomId: string, roomId: string): EnterRoomResult {
+  let next = campaign;
   next = evaluateQuestRules(next, {
     trigger: 'leave-room',
     triggerInstanceId: `${previousRoomId}->${roomId}`,

@@ -1,10 +1,10 @@
-import type { CampaignState, DungeonRoom, DungeonRoomType, DungeonState, QuestDefinition } from '../types';
+import type { CampaignState, ExplorationEventResult, DungeonRoom, DungeonRoomType, DungeonState, QuestDefinition } from '../types';
 import { DUNGEON_NODES, roomTypeMapForQuest } from '../data/dungeons';
 import { CURIOS } from '../data/curios';
 import { createId, d10, pick } from './random';
 import { initBattle } from './battle';
 import { pushLog } from './log';
-import { resolveExplorationEvent } from './exploration';
+import { applyExplorationResult, rollExplorationResult } from './exploration';
 import { resolveDamage } from './damage';
 import { applyStressBatch } from './stress';
 import { createRuleEventContext, emitPartyRuleEvent } from './quirks';
@@ -341,11 +341,16 @@ function markRoom(
  * 非相邻房间直接忽略（调用方应已禁用）。返回更新后的 campaign。
  */
 export function moveToRoom(campaign: CampaignState, roomId: string): CampaignState {
+  if (!campaign.dungeon || !canMoveTo(campaign.dungeon, roomId)) return campaign;
+  return commitMoveToRoom(campaign, roomId, rollExplorationResult());
+}
+
+export function commitMoveToRoom(campaign: CampaignState, roomId: string, result: ExplorationEventResult | null): CampaignState {
   if (!campaign.dungeon) return campaign;
   if (!canMoveTo(campaign.dungeon, roomId)) return campaign;
 
-  // 1) 走廊探索事件（随机）
-  let next = resolveExplorationEvent(campaign);
+  // 1) 提交调用方已冻结的走廊探索结果；null 表示忽略。
+  let next = result === null ? campaign : applyExplorationResult(campaign, result);
 
   // 2) 进入房间：更新当前/上一房间状态
   const dungeon = next.dungeon!;

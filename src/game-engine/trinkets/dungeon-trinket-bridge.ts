@@ -6,12 +6,17 @@ import type {
 } from '../../types';
 import type { RestAllocation, RestAllocationError } from '../quests/quest-runtime';
 import { commitRestAtCamp, validateRestAllocation } from '../quests/quest-runtime';
-import { canScout, scoutDungeon } from '../dungeon';
+import { canMoveTo, commitMoveToRoom, canScout, scoutDungeon } from '../dungeon';
 import { createId, random } from '../random';
 import { pushLog } from '../log';
 import { openTrinketWindow, openOpportunities, findOpportunity } from './trinket-opportunities';
 import { declineTrinketUse, trinketUseError, useTrinket } from './use-trinket';
+import { explorationEffectApplicable } from './exploration-result-applicability';
+export { explorationEffectApplicable } from './exploration-result-applicability';
 import { getTrinketSide } from '../../data/trinkets/trinket-registry';
+
+import { rollExplorationResult } from '../exploration';
+import { finalizeDungeonRoomEntry } from '../commands/dungeon';
 
 export const CAMPERS_HELMET_ID = 'community-trinket-core-campers-helmet';
 export const PROVISION_POOL_MAXIMUM = 16;
@@ -37,6 +42,7 @@ function openForParty(
   campaign: CampaignState,
   pending: PendingDungeonTrinketAction,
 ): CampaignState {
+  if (pending.kind === 'exploration-move') return openExplorationOpportunities(campaign);
   let next = campaign;
   const window = pending.kind === 'scout' ? 'before-scout-resolution' : 'before-camp-resolution';
   for (const hero of campaign.heroes) {
@@ -65,7 +71,10 @@ function actionIdentityValid(campaign: CampaignState, pending: PendingDungeonTri
   return campaign.gamePhase === 'dungeon-explore'
     && campaign.currentQuestId === pending.questId
     && campaign.dungeon?.questRunId === pending.questRunId
-    && campaign.dungeon.currentRoomId === pending.roomId;
+    && !campaign.battle
+    && campaign.dungeon.currentRoomId === (pending.kind === 'exploration-move' ? pending.fromRoomId : pending.roomId)
+    && (pending.kind !== 'exploration-move' || (canMoveTo(campaign.dungeon, pending.destinationRoomId)
+      && campaign.dungeon.rooms.some((room) => room.id === pending.destinationRoomId)));
 }
 
 function completeOriginalAction(campaign: CampaignState): CampaignState {
@@ -76,6 +85,10 @@ function completeOriginalAction(campaign: CampaignState): CampaignState {
   if (pending.pendingProvisionDice?.some((die) => die.selectedFace === null)) return campaign;
 
   const cleared = clearPending(campaign, pending.rootEventId);
+  if (pending.kind === 'exploration-move') {
+    const moved = commitMoveToRoom(cleared, pending.destinationRoomId, pending.ignored ? null : pending.effectiveResult);
+    return finalizeDungeonRoomEntry(moved, pending.fromRoomId, pending.destinationRoomId).campaign;
+  }
   if (pending.kind === 'scout') {
     return canScout(cleared.dungeon!) ? scoutDungeon(cleared) : cleared;
   }
@@ -177,6 +190,7 @@ export function resolveDungeonTrinketOpportunity(
   if (!actionIdentityValid(campaign, pending)) {
     return { campaign: clearPending(campaign, pending.rootEventId), error: null, resumed: false };
   }
+  if (pending.kind === 'exploration-move') return resolveExplorationOpportunity(campaign, opportunityId, action);
   if (pending.pendingProvisionDice) {
     return { campaign, error: '请先为 Wild 补给骰选择面。', resumed: false };
   }
@@ -245,4 +259,66 @@ export function chooseDungeonProvisionWild(
   };
   const committed = commitProvisionDice(next);
   return { campaign: committed, error: null, resumed: committed.pendingDungeonTrinketAction === null };
+}
+
+function openExplorationOpportunities(campaign: CampaignState): CampaignState {
+  const pending = campaign.pendingDungeonTrinketAction;
+  if (pending?.kind !== 'exploration-move') return campaign;
+  const allowed = campaign.heroes.filter((hero) => hero.isAlive && !hero.dead).flatMap((hero) =>
+    hero.equippedTrinkets.filter((card) => {
+      const side = getTrinketSide(card.trinketId, card.currentSide);
+      return side && !pending.processedTrinketInstanceIds.includes(card.instanceId)
+        && explorationEffectApplicable(side, pending.effectiveResult);
+    }).map((card) => card.instanceId));
+  let next = { ...campaign, pendingTrinketUseOpportunities: campaign.pendingTrinketUseOpportunities.filter((entry) =>
+    entry.rootEventId !== pending.rootEventId || (entry.status === 'open' && allowed.includes(entry.trinketInstanceId))) };
+  // Ignoring a result preserves existing applicable physical decisions, but creates no new ones.
+  if (pending.ignored) return next;
+  for (const hero of campaign.heroes) {
+    next = openTrinketWindow(next, { window: 'after-dungeon-roll', heroId: hero.instanceId,
+      eventId: pending.rootEventId + ':' + hero.instanceId, rootEventId: pending.rootEventId,
+      allowedTrinketInstanceIds: allowed, excludedTrinketInstanceIds: pending.processedTrinketInstanceIds }).campaign;
+  }
+  return next;
+}
+
+export function beginExplorationMoveTrinketAction(campaign: CampaignState, destinationRoomId: string): BeginDungeonActionResult {
+  if (campaign.pendingDungeonTrinketAction) return { campaign, error: 'DUNGEON_TRINKET_ACTION_PENDING', paused: true };
+  if (campaign.gamePhase !== 'dungeon-explore' || campaign.battle || !campaign.dungeon
+    || !canMoveTo(campaign.dungeon, destinationRoomId)
+    || !campaign.dungeon.rooms.some((room) => room.id === destinationRoomId)) return { campaign, error: null, paused: false };
+  const result = rollExplorationResult();
+  const pending: PendingDungeonTrinketAction = { kind: 'exploration-move', rootEventId: 'explore-move:' + createId('action'),
+    questId: campaign.currentQuestId ?? '', questRunId: campaign.dungeon.questRunId,
+    fromRoomId: campaign.dungeon.currentRoomId, destinationRoomId, stage: 'trinket-window',
+    originalResult: result, effectiveResult: result, ignored: false, processedTrinketInstanceIds: [] };
+  const opened = openExplorationOpportunities({ ...campaign, pendingDungeonTrinketAction: pending });
+  const paused = openOpportunities(opened).some((entry) => entry.rootEventId === pending.rootEventId);
+  return { campaign: paused ? opened : completeOriginalAction(opened), error: null, paused };
+}
+
+function resolveExplorationOpportunity(campaign: CampaignState, opportunityId: string, action: 'use' | 'decline'): ResolveDungeonOpportunityResult {
+  const pending = campaign.pendingDungeonTrinketAction;
+  const opportunity = findOpportunity(campaign, opportunityId);
+  if (pending?.kind !== 'exploration-move' || !opportunity || opportunity.status !== 'open'
+    || pending.processedTrinketInstanceIds.includes(opportunity.trinketInstanceId)) return { campaign, error: '探索机会已失效。', resumed: false };
+  const side = getTrinketSide(opportunity.trinketId, opportunity.side);
+  if (!side || !explorationEffectApplicable(side, pending.effectiveResult)) return { campaign, error: '探索结果已改变。', resumed: false };
+  let next = campaign;
+  let effectiveResult = pending.effectiveResult;
+  let ignored = pending.ignored;
+  if (action === 'decline') next = declineTrinketUse(next, opportunityId);
+  else {
+    const used = useTrinket(next, opportunityId, undefined, { allowExplorationResult: true });
+    if (used.error) return { campaign, error: used.error, resumed: false };
+    next = used.campaign;
+    for (const effect of used.appliedEffects) {
+      if (effect.type === 'ignore-exploration-result') ignored = true;
+      if (effect.type === 'replace-exploration-result') effectiveResult = effect.to;
+    }
+  }
+  next = { ...next, pendingDungeonTrinketAction: { ...pending, effectiveResult, ignored,
+    processedTrinketInstanceIds: [...pending.processedTrinketInstanceIds, opportunity.trinketInstanceId] } };
+  const completed = completeOriginalAction(openExplorationOpportunities(next));
+  return { campaign: completed, error: null, resumed: completed.pendingDungeonTrinketAction === null };
 }

@@ -153,6 +153,12 @@ export function buildOpportunityPreview(side: TrinketSideDefinition): string {
       case 'convert-incoming-hit-to-critical':
         parts.push('将本次普通命中转换为暴击');
         break;
+      case 'ignore-exploration-result':
+        parts.push('忽略本次 Trap / Hunger 探索结果');
+        break;
+      case 'replace-exploration-result':
+        parts.push('将本次非 Trap 探索结果改为 Trap');
+        break;
       case 'log-only':
         parts.push(e.note);
         break;
@@ -178,6 +184,7 @@ export interface OpenTrinketWindowCommand {
   rootEventId?: string;
   /** Physical cards already offered by an earlier stage of the same root event. */
   excludedTrinketInstanceIds?: readonly string[];
+  allowedTrinketInstanceIds?: readonly string[];
 }
 
 export interface OpenTrinketWindowResult {
@@ -209,7 +216,7 @@ export function openTrinketWindow(
   const excluded = new Set(cmd.excludedTrinketInstanceIds ?? []);
   const equipped = [...(hero.equippedTrinkets ?? [])].sort((a, b) => a.instanceId.localeCompare(b.instanceId));
   for (const inst of equipped) {
-    if (excluded.has(inst.instanceId)) continue;
+    if (excluded.has(inst.instanceId) || (cmd.allowedTrinketInstanceIds && !cmd.allowedTrinketInstanceIds.includes(inst.instanceId))) continue;
     const def = getTrinketById(inst.trinketId);
     if (!def) continue; // 未知定义 → 静默跳过，绝不白屏（核心约束 10）
     const side = getTrinketSide(inst.trinketId, inst.currentSide);

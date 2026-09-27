@@ -14,6 +14,7 @@ export interface RegisteredProductionProof {
   proofSurface?: 'production-ui' | 'production-command' | 'test-harness';
 }
 
+export const SURVIVAL_GUIDE_ID = 'community-trinket-core-survival-guide';
 export const ACCURACY_STONE_ID = 'community-trinket-core-accuracy-stone';
 export const CRITICAL_STONE_ID = 'community-trinket-core-critical-stone';
 export const CHIRURGEONS_CHARM_ID = 'community-trinket-core-chirurgeons-charm';
@@ -75,6 +76,14 @@ export function proof(entry: RegisteredProductionProof): RegisteredProductionPro
 }
 
 export const PRODUCTION_PROOF_REGISTRY: Readonly<Record<string, RegisteredProductionProof>> = Object.freeze(Object.fromEntries([
+  ...['RUNTIME', 'RESULT-TRANSFORM', 'MULTI-COPY', 'SAVE-REPLAY', 'SELECTOR'].map((key) => proof({
+    proofId: 'C1C17-SURVIVAL-GUIDE-' + key, definitionIds: [SURVIVAL_GUIDE_ID],
+    proofType: key === 'SAVE-REPLAY' ? 'save-replay' : key === 'SELECTOR' ? 'selector' : 'production-runtime',
+    testFile: 'src/game-engine/c1c17-survival-guide.test.ts', runner: 'vitest', status: 'active', scope: 'definition',
+  })),
+  ...['POSITIVE', 'NEGATIVE'].map((key) => proof({ proofId: 'C1C17-E2E-SURVIVAL-GUIDE-' + key,
+    definitionIds: [SURVIVAL_GUIDE_ID], proofType: 'e2e', testFile: 'e2e/phase11a4-c1c17-survival-guide.spec.ts',
+    runner: 'playwright', status: 'active', scope: 'definition', proofSurface: 'production-ui' })),
   ...LEVEL1_STANCE_ACCURACY_SPECS.flatMap((card) => [
     proof({ proofId: `C1C16-${card.key}-RUNTIME`, definitionIds: [card.definitionId], proofType: 'production-runtime', testFile: 'src/game-engine/c1c16-level1-stance-accuracy.test.ts', runner: 'vitest', status: 'active', scope: 'definition' }),
     proof({ proofId: `C1C16-${card.key}-SAVE-REPLAY`, definitionIds: [card.definitionId], proofType: 'save-replay', testFile: 'src/game-engine/c1c16-level1-stance-accuracy.test.ts', runner: 'vitest', status: 'active', scope: 'definition' }),

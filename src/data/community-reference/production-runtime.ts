@@ -778,7 +778,21 @@ function buildStanceRing(spec: (typeof STANCE_RING_SPECS)[number]): TrinketDefin
 }
 const stanceRings = STANCE_RING_SPECS.map(buildStanceRing);
 
+const survivalSource = sourceTrinket('community-trinket-core-survival-guide');
+const survivalGuide: TrinketDefinition = {
+  id: survivalSource.id, name: survivalSource.printedName, level: 1,
+  positiveSide: { side: 'positive', label: '忽略 Trap / Hunger', description: survivalSource.positiveSide.label,
+    useWindows: ['after-dungeon-roll'], modifiers: [], effects: [{ type: 'ignore-exploration-result', options: ['trap', 'hunger'], target: 'exploration-die' }] },
+  negativeSide: { side: 'negative', label: '非 Trap 改为 Trap', description: survivalSource.negativeSide.label,
+    useWindows: ['after-dungeon-roll'], modifiers: [], effects: [{ type: 'replace-exploration-result', from: 'not-trap', to: 'trap', target: 'exploration-die' }] },
+  sellPrice: sellPriceForLevel(1), buyPrice: buyPriceForLevel(1), officialDataStatus: 'verified',
+  sourceReference: survivalSource.sourceReferences.join('; '), enabledInOfficialPool: false, dataOrigin: 'community',
+  runtimeContentMetadata: { sourceDefinitionId: survivalSource.id, contentSet: 'core', region: null, sourceOrigin: 'community-complete-edition' },
+};
+const survivalPrimitives = ['STAGED_EXPLORATION_MOVE', 'EXPLORATION_RESULT_TRINKET_WINDOW', 'TRINKET_EXPLORATION_RESULT_IGNORE_CONSUMER', 'TRINKET_EXPLORATION_RESULT_REPLACE_CONSUMER'];
+
 export const COMMUNITY_TRINKET_RUNTIME_ADAPTERS: Readonly<Record<string, CommunityTrinketRuntimeAdapter>> = Object.freeze({
+  [survivalGuide.id]: { adapterId: 'survival-guide-exploration-result-v1', definitionId: survivalGuide.id, requiredPrimitives: survivalPrimitives, definition: survivalGuide },
   ...Object.fromEntries(level1AccuracyTrinkets.map((definition) => [definition.id, {
     adapterId: level1AccuracyAdapterId(definition.id), definitionId: definition.id,
     requiredPrimitives: LEVEL1_ACCURACY_PRIMITIVES, definition,
@@ -804,6 +818,11 @@ export const COMMUNITY_TRINKET_RUNTIME_ADAPTERS: Readonly<Record<string, Communi
 });
 
 export const COMMUNITY_TRINKET_PRODUCTION_PROOFS: Readonly<Record<string, CommunityProductionProof>> = Object.freeze({
+  [survivalGuide.id]: { definitionId: survivalGuide.id, runtimeAdapterId: 'survival-guide-exploration-result-v1', requiredPrimitives: survivalPrimitives,
+    sourceSupported: true, semanticSupported: true, stateful: true,
+    productionTests: ['C1C17-SURVIVAL-GUIDE-RUNTIME', 'C1C17-SURVIVAL-GUIDE-RESULT-TRANSFORM', 'C1C17-SURVIVAL-GUIDE-MULTI-COPY'],
+    saveReplayTests: ['C1C17-SURVIVAL-GUIDE-SAVE-REPLAY'], selectorTests: ['C1C17-SURVIVAL-GUIDE-SELECTOR'],
+    e2eTests: ['C1C17-E2E-SURVIVAL-GUIDE-POSITIVE', 'C1C17-E2E-SURVIVAL-GUIDE-NEGATIVE'] },
   ...Object.fromEntries(LEVEL1_STANCE_ACCURACY_SPECS.map((spec) => [spec.definitionId, {
     definitionId: spec.definitionId, runtimeAdapterId: level1AccuracyAdapterId(spec.definitionId),
     requiredPrimitives: LEVEL1_ACCURACY_PRIMITIVES,

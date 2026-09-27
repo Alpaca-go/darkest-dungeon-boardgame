@@ -264,7 +264,7 @@ export function useTrinket(
   campaign: CampaignState,
   opportunityId: string,
   ctx?: RuleEventContext,
-  options?: { allowDiseaseDiscard?: boolean },
+  options?: { allowDiseaseDiscard?: boolean; allowExplorationResult?: boolean },
 ): UseTrinketResult {
   const error = trinketUseError(campaign, opportunityId);
   if (error) return { campaign, error, appliedModifiers: [], appliedEffects: [], usedOpportunity: null };
@@ -276,6 +276,9 @@ export function useTrinket(
   const side = getTrinketSide(inst.trinketId, inst.currentSide)!;
   if (side.effects.some((effect) => effect.type === 'discard-disease') && !options?.allowDiseaseDiscard) {
     return { campaign, error: '该效果只能在疾病获取事务中结算。', appliedModifiers: [], appliedEffects: [], usedOpportunity: null };
+  }
+  if (side.effects.some((effect) => effect.type === 'ignore-exploration-result' || effect.type === 'replace-exploration-result') && !options?.allowExplorationResult) {
+    return { campaign, error: '该效果只能在探索移动事务中结算。', appliedModifiers: [], appliedEffects: [], usedOpportunity: null };
   }
   const name = trinketDisplayName(inst.trinketId);
   const usedSide = inst.currentSide;

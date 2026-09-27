@@ -70,6 +70,9 @@ export function aliveHeroIds(campaign: CampaignState, excludeHeroId?: string): s
  * - 其他阶段：null（不开窗）。
  */
 export function currentTrinketTurnId(campaign: CampaignState): string | null {
+  if (campaign.pendingDungeonTrinketAction?.kind === 'exploration-move') {
+    return campaign.pendingDungeonTrinketAction.rootEventId;
+  }
   const b = campaign.battle;
   if (b && b.status === 'active' && b.activeActorId) {
     return `${b.battleId}:${b.round}:${b.initiativeIndex}:${b.activeActorId}`;

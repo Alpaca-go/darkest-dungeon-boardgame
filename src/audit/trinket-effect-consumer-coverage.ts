@@ -6,6 +6,8 @@ export interface RuntimeEffectConsumerBinding {
 
 /** Runtime truth registry: representability alone never implies consumption. */
 export const TRINKET_EFFECT_CONSUMER_COVERAGE: Readonly<Record<string, RuntimeEffectConsumerBinding>> = Object.freeze({
+  'ignore-result': { effectType: 'ignore-result', consumerPrimitive: 'TRINKET_EXPLORATION_RESULT_IGNORE_CONSUMER', wired: true },
+  'replace-result': { effectType: 'replace-result', consumerPrimitive: 'TRINKET_EXPLORATION_RESULT_REPLACE_CONSUMER', wired: true },
   heal: { effectType: 'heal', consumerPrimitive: 'TRINKET_HEALING_CONSUMER', wired: true },
   'change-stress': { effectType: 'change-stress', consumerPrimitive: 'TRINKET_STRESS_CONSUMER', wired: true },
   'consume-provision': { effectType: 'consume-provision', consumerPrimitive: 'TRINKET_PROVISION_CONSUMER', wired: true },

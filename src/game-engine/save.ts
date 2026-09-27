@@ -25,7 +25,8 @@ import { createInitialStagecoach } from './stagecoach';
 import { getQuirkById, normalizeQuirkId } from '../data/quirks';
 import { getDiseaseById } from '../data/diseases';
 import { QUIRK_CAP } from './quirks';
-import { getTrinketById } from '../data/trinkets/trinket-registry';
+import { explorationEffectApplicable } from './trinkets/exploration-result-applicability';
+import { getTrinketById, getTrinketSide } from '../data/trinkets/trinket-registry';
 import { createInitialNomadWagonState } from './trinkets/trinket-state';
 import { getTrinketCapacity } from './trinkets/capacity';
 import { createInitialCampaignProgress } from './campaign/campaign-progress';
@@ -1458,18 +1459,52 @@ function sanitizePendingDiseaseTrinketAction(campaign: CampaignState): CampaignS
   };
 }
 
-/** v21 persists Scout/Camp intents and already-rolled Provision dice without rerolling. */
+/** Existing action field also persists frozen exploration moves; no field/version bump is needed. */
 export function migrateCampaignToV21(campaignInput: CampaignState): CampaignState {
   const campaign = sanitizePendingDiseaseTrinketAction(campaignInput);
   const raw = campaign as CampaignState & Record<string, unknown>;
   const candidate = raw.pendingDungeonTrinketAction;
   if (candidate === undefined || candidate === null) {
-    return { ...campaign, saveVersion: SAVE_VERSION, pendingDungeonTrinketAction: null };
+    return { ...campaign, saveVersion: SAVE_VERSION, pendingDungeonTrinketAction: null,
+      pendingTrinketUseOpportunities: campaign.pendingTrinketUseOpportunities.filter((entry) => entry.useWindow !== 'after-dungeon-roll') };
   }
   if (typeof candidate !== 'object' || Array.isArray(candidate)) {
-    return { ...campaign, saveVersion: SAVE_VERSION, pendingDungeonTrinketAction: null };
+    return { ...campaign, saveVersion: SAVE_VERSION, pendingDungeonTrinketAction: null,
+      pendingTrinketUseOpportunities: campaign.pendingTrinketUseOpportunities.filter((entry) => entry.useWindow !== 'after-dungeon-roll') };
   }
   const pending = candidate as NonNullable<CampaignState['pendingDungeonTrinketAction']>;
+  if (pending.kind === 'exploration-move') {
+    const results = ['none', 'trap', 'hunger', 'darkness', 'rubble', 'contaminated-remains'];
+    const physicalIds = campaign.heroes.flatMap((hero) => hero.equippedTrinkets.map((card) => card.instanceId));
+    const rootOpportunities = campaign.pendingTrinketUseOpportunities.filter((entry) => entry.rootEventId === pending.rootEventId);
+    const valid = campaign.gamePhase === 'dungeon-explore' && !campaign.battle
+      && typeof pending.rootEventId === 'string' && pending.rootEventId.startsWith('explore-move:')
+      && typeof pending.questId === 'string' && pending.questId.length > 0 && pending.questId === campaign.currentQuestId
+      && typeof pending.questRunId === 'string' && pending.questRunId.length > 0 && pending.questRunId === campaign.dungeon?.questRunId
+      && typeof pending.fromRoomId === 'string' && typeof pending.destinationRoomId === 'string'
+      && pending.fromRoomId === campaign.dungeon?.currentRoomId && pending.stage === 'trinket-window'
+      && Boolean(campaign.dungeon?.rooms.find((room) => room.id === pending.fromRoomId)?.adjacentRoomIds.includes(pending.destinationRoomId))
+      && Boolean(campaign.dungeon?.rooms.some((room) => room.id === pending.destinationRoomId))
+      && results.includes(pending.originalResult) && results.includes(pending.effectiveResult)
+      && typeof pending.ignored === 'boolean' && Array.isArray(pending.processedTrinketInstanceIds)
+      && new Set(pending.processedTrinketInstanceIds).size === pending.processedTrinketInstanceIds.length
+      && pending.processedTrinketInstanceIds.every((id) => typeof id === 'string' && physicalIds.includes(id))
+      && rootOpportunities.length > 0
+      && new Set(rootOpportunities.map((entry) => entry.trinketInstanceId)).size === rootOpportunities.length
+      && rootOpportunities.every((entry) => {
+        const hero = campaign.heroes.find((hero) => hero.instanceId === entry.heroId);
+        const card = hero?.equippedTrinkets.find((card) => card.instanceId === entry.trinketInstanceId);
+        const side = card && getTrinketSide(card.trinketId, card.currentSide);
+        return hero?.isAlive && !hero.dead && card && side && card.trinketId === entry.trinketId
+          && card.currentSide === entry.side && entry.status === 'open' && entry.useWindow === 'after-dungeon-roll'
+          && !pending.processedTrinketInstanceIds.includes(entry.trinketInstanceId)
+          && explorationEffectApplicable(side, pending.effectiveResult);
+      });
+    return { ...campaign, saveVersion: SAVE_VERSION, pendingDungeonTrinketAction: valid ? pending : null,
+      pendingTrinketUseOpportunities: campaign.pendingTrinketUseOpportunities.filter((entry) =>
+        valid ? entry.useWindow !== 'after-dungeon-roll' || entry.rootEventId === pending.rootEventId
+          : entry.useWindow !== 'after-dungeon-roll' && entry.rootEventId !== pending.rootEventId) };
+  }
   const faces = ['food', 'bandage', 'potion', 'torch', 'tool', 'wild'];
   const choices = faces.slice(0, -1);
   const diceValid = pending.pendingProvisionDice === null || (Array.isArray(pending.pendingProvisionDice)

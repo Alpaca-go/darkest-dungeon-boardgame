@@ -129,6 +129,8 @@ export function canonicalRuntimeEffect(value: ActiveEffectDefinition, target: st
     case 'roll-provision-dice': return { type: 'roll-provision-dice', target: value.target, parameters: { count: value.count } };
     case 'discard-disease': return { type: 'discard-disease', target: value.target, parameters: { immediately: value.immediately } };
     case 'convert-incoming-hit-to-critical': return { type: 'convert-incoming-hit-to-critical', target: value.target, parameters: {} };
+    case 'ignore-exploration-result': return { type: 'ignore-result', target: value.target, parameters: { options: value.options } };
+    case 'replace-exploration-result': return { type: 'replace-result', target: value.target, parameters: { from: value.from, to: value.to } };
     case 'log-only': return { type: 'log-only', target, parameters: { note: value.note } };
   }
 }
@@ -140,6 +142,7 @@ export const RUNTIME_WINDOW_BINDINGS: Readonly<Record<string, { trigger: string;
   'before-healing-received-resolution': { trigger: 'hero-is-healed', target: 'healing-received' },
   'before-incoming-hit-resolution': { trigger: 'incoming-attack', target: 'equipped-hero' },
   'before-incoming-damage-applied': { trigger: 'hero-hit-by-attack', target: 'equipped-hero' },
+  'after-dungeon-roll': { trigger: 'exploration-die-result', target: 'exploration-die' },
   'before-camp-resolution': { trigger: 'camping', target: 'party-provisions' },
   'before-scout-resolution': { trigger: 'scout', target: 'equipped-hero' },
   'before-disease-acquisition-commit': { trigger: 'disease-acquired', target: 'new-disease' },

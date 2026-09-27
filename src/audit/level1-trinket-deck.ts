@@ -32,7 +32,7 @@ export const LEVEL_1_TRINKET_DECK_COVERAGE = measureTrinketDeckCoverage(1,
   trinketData.filter((source) => source.level !== 1 || source.contentSet === 'core'));
 
 /** Recompute the pre-family state using live consumers with only the new adapters removed. */
-const addedIds = new Set<string>(LEVEL1_STANCE_ACCURACY_SPECS.map((card) => card.definitionId));
+const addedIds = new Set<string>([...LEVEL1_STANCE_ACCURACY_SPECS.map((card) => card.definitionId), 'community-trinket-core-survival-guide']);
 const baselineAdapters = Object.fromEntries(Object.entries(COMMUNITY_TRINKET_RUNTIME_ADAPTERS).filter(([id]) => !addedIds.has(id)));
 const level1Sources = trinketData.filter((source) => source.level === 1 && source.contentSet === 'core');
 export const LEVEL_1_BASELINE_DECK_COVERAGE = measureTrinketDeckCoverage(1, level1Sources,
