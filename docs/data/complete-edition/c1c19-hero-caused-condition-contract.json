@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-19",
+  "baselineHead": "73da3ae9d0fae07b35fcde23daa6856acdbc514a",
+  "baselineTree": "57525fad7e2897cfcb321c013112fdc6d99a6251",
+  "c1c17Implementation": "e7f4b4a94940ebc714301912a93f7fc9a173fd93",
+  "name": "ConditionTransaction",
+  "implemented": false,
+  "designStatus": "SOURCE_GATED_DESIGN_ONLY",
+  "fields": [
+    "rootEventId",
+    "conditionEventId",
+    "sourceHeroId",
+    "sourceBattleUnitId",
+    "sourceSkillId",
+    "targetUnitId",
+    "conditionType",
+    "baseMagnitude",
+    "baseDuration",
+    "effectiveMagnitude",
+    "effectiveDuration",
+    "resistanceOutcome",
+    "sourceEventId"
+  ],
+  "fieldMeaning": {
+    "rootEventId": "stable shared causing action identity; not new RNG on decision",
+    "conditionEventId": "stable target/effect identity; avoids applying one Use to every effect",
+    "sourceHeroId": "authoritative causing campaign Hero, not the recipient by default",
+    "sourceBattleUnitId": "actual acting Hero unit",
+    "sourceSkillId": "source Skill, or explicit other-source attribution if that scope is proven",
+    "targetUnitId": "original actual target, immutable on Use/Decline/reload",
+    "baseMagnitude": "source amount, may be null; separate from duration",
+    "baseDuration": "only authoritative independently bound source turns",
+    "effectiveMagnitude": "unchanged by duration modifier",
+    "effectiveDuration": "source-bound duration changes only; unresolved ordering cannot run",
+    "resistanceOutcome": "not-rolled or frozen original roll/outcome/immunity/categorical decision, including provenance",
+    "sourceEventId": "stable original cause transaction identity"
+  },
+  "proposedGranularity": "Conditional design: one causing-action root with one child per actual target/Condition; adoption requires source-backed declaration/selection ordering",
+  "sourceAuthorizesChildOpportunityOrder": false,
+  "declarationStage": null,
+  "resistanceStageOrder": null,
+  "invariant": [
+    "No positive on miss",
+    "No negative from mere applyEffects presence on a miss",
+    "No duration=amount",
+    "No negative duration enters runtime",
+    "No retarget after decision",
+    "One Use binds one selected Condition, never all skill effects",
+    "Distinct physical copies share root state",
+    "Persist processed physical instances and Use/Decline decisions",
+    "Persist already rolled resistance; never reroll on reload",
+    "UI reads authoritative pending transaction"
+  ],
+  "rngPolicy": {
+    "declarationRelativeToResistance": null,
+    "alreadyRolledValueMustPersist": true,
+    "mayRerollOnReload": false
+  },
+  "currentRuntimeCandidate": "PendingBattleAction freezes hit/crit/baseDamage/target; statusEffectEvents persists completed effects/blocked results, but neither is a pending attributed Condition declaration transaction",
+  "activeContinuation": "Future only: freeze -> engine opportunity -> Use/Decline -> commit/resume exactly once; exact commit point unresolved"
+}

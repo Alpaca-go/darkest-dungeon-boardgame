@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-19",
+  "baselineHead": "73da3ae9d0fae07b35fcde23daa6856acdbc514a",
+  "baselineTree": "57525fad7e2897cfcb321c013112fdc6d99a6251",
+  "c1c17Implementation": "e7f4b4a94940ebc714301912a93f7fc9a173fd93",
+  "condition": "debuff",
+  "isCondition": true,
+  "sourceDurationRepresentation": "one independent stack of 2 Debuff tokens for 2t",
+  "turnTick": "affected target unit turn start; remove top token of each independent stack",
+  "expiration": "stack exhaustion; remove empty stack; no stack means no per-stack Crit bonus",
+  "expirationEvidenceKind": "DERIVED_FROM_EXPLICIT_TOKEN_STACK_AND_PER_STACK_RULES",
+  "multipleCoexistingStacks": true,
+  "sameDebuffPolicy": "NEW_INDEPENDENT_STACK_NOT_REFRESH",
+  "sourceResistance": "categorical Condition duration -1 / immunity negates",
+  "charmResistanceOrdering": null,
+  "zeroDurationApplication": null,
+  "sourceDurationStatus": "SOURCE_BOUND",
+  "durationModifierLifecycleStatus": "SOURCE_UNRESOLVED",
+  "runtimeStatus": "NOT_IMPLEMENTED",
+  "runtimeIndependentStacks": false,
+  "runtimeTurnTick": false,
+  "runtimeExpiration": false,
+  "runtimePercentDebuffResistanceConsumer": false,
+  "runtimeCategoricalDebuffResistanceConsumer": false,
+  "gaps": [
+    "StatusEffectType/conditionDurations/categoricalResistances lack debuff",
+    "ActiveEffect debuff array append skips duration bookkeeping",
+    "RESIST_KEY_BY_EFFECT omits debuff although HeroResistanceProfile has a debuff field",
+    "No buff/debuff turn tick or expiry removal",
+    "No independent per-condition timed stack model"
+  ],
+  "evidence": [
+    "DURATION_COUNTS_TOKENS",
+    "INDEPENDENT_REPEATED_STACKS",
+    "TARGET_TURN_STACK_TICK",
+    "DEBUFF_STACK_RULE",
+    "CATEGORICAL_RESISTANCE_IMMUNITY"
+  ]
+}

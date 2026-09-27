@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-19",
+  "baselineHead": "73da3ae9d0fae07b35fcde23daa6856acdbc514a",
+  "baselineTree": "57525fad7e2897cfcb321c013112fdc6d99a6251",
+  "c1c17Implementation": "e7f4b4a94940ebc714301912a93f7fc9a173fd93",
+  "negativeDelta": -1,
+  "modifies": "duration",
+  "magnitudeModified": false,
+  "baseMagnitude": "independent source amount; null remains null for Debuff/Stun",
+  "baseDuration": "independent source turns; never amount",
+  "effectiveMagnitude": "unchanged from baseMagnitude",
+  "effectiveDuration": null,
+  "minimumDuration": null,
+  "nonNegativeRuntimeInvariant": true,
+  "sourceFloorRule": null,
+  "arithmeticOneTurnMinusOne": 0,
+  "zeroDurationApplication": null,
+  "zeroDurationStatus": "SOURCE_UNRESOLVED",
+  "zeroTokensInference": "Token-count rule suggests no lasting stack at zero; it does not specify cancellation vs immediate expiry or declaration/Use/block records",
+  "clampProposal": {
+    "expression": "max(0, baseDuration - 1)",
+    "sourceProven": false,
+    "implemented": false
+  },
+  "categoricalResistanceInteraction": {
+    "sourceDelta": -1,
+    "orderRelativeToCharm": null,
+    "numericOutcomeCommutative": true,
+    "conditionalArithmeticOnly": "If both are accepted independent -1 duration operations with floor 0, both orders yield max(0, baseDuration-2). Not proof of applicability or records.",
+    "logOrdering": null,
+    "blockedRecordPolicy": null,
+    "useRecordPolicy": null,
+    "zeroCancellationPolicy": null
+  },
+  "percentageResistanceInteraction": {
+    "existingRuntime": "d100 for bleed/blight/stun; full block on roll <= percentage",
+    "officialSourceProven": false,
+    "orderRelativeToCharm": null,
+    "resistedConditionCountsAsCaused": null,
+    "rollBeforeDeclaration": null
+  },
+  "immunityInteraction": {
+    "officialMeaning": "negates effect",
+    "orderRelativeToCharm": null,
+    "immuneConditionCountsAsCaused": null
+  },
+  "semanticAmountNullPolicy": "C1C9 consumer may use auxiliary runtime amount=1; source semantic comparator must preserve null, never derive duration",
+  "positiveSharedPipelineInvariant": "Any future Charm condition uses applyStatusEffectEvent/shared resistance path; no immunity/resistance bypass. Existing target/type gaps must first be closed.",
+  "sourceStatus": "PARTIALLY_SOURCE_BOUND",
+  "modifierLifecycleStatus": "SOURCE_UNRESOLVED"
+}

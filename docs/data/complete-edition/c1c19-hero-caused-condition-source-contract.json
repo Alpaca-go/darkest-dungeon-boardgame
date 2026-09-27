@@ -1,0 +1,1600 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-19",
+  "baselineHead": "73da3ae9d0fae07b35fcde23daa6856acdbc514a",
+  "baselineTree": "57525fad7e2897cfcb321c013112fdc6d99a6251",
+  "c1c17Implementation": "e7f4b4a94940ebc714301912a93f7fc9a173fd93",
+  "cards": [
+    {
+      "definitionId": "community-trinket-core-bleed-charm",
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/12"
+      ],
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "positive": {
+        "label": "Bleed Charm",
+        "trigger": "hero-skill-hits",
+        "useWindow": "declare-when-applicable",
+        "target": "skill-target",
+        "modifiers": [],
+        "effects": [
+          {
+            "kind": "apply-condition-stack",
+            "condition": "bleed",
+            "turns": 2,
+            "amount": 2
+          }
+        ],
+        "conditions": [],
+        "semanticNotes": [],
+        "unresolvedFields": [],
+        "runtimeSupport": {
+          "classification": "RUNTIME_PRIMITIVE_UNSUPPORTED",
+          "existingCandidates": [
+            "shared applyStatusEffectEvent"
+          ],
+          "missingCapabilities": [
+            "ActiveEffectDefinition cannot express independent magnitude and turns / non-self target",
+            "Exact applicable timing hero-skill-hits is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+          ],
+          "productionIntegration": "not-integrated"
+        }
+      },
+      "negative": {
+        "label": "Bleed Charm",
+        "trigger": "hero-causes-condition",
+        "useWindow": "declare-when-applicable",
+        "target": "condition-being-caused",
+        "modifiers": [],
+        "effects": [
+          {
+            "kind": "modify-condition-duration",
+            "turns": -1
+          }
+        ],
+        "conditions": [],
+        "semanticNotes": [],
+        "unresolvedFields": [],
+        "runtimeSupport": {
+          "classification": "RUNTIME_PRIMITIVE_UNSUPPORTED",
+          "existingCandidates": [],
+          "missingCapabilities": [
+            "No exact active trinket primitive:modify-condition-duration",
+            "Exact applicable timing hero-causes-condition is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+          ],
+          "productionIntegration": "not-integrated"
+        }
+      },
+      "literalPositive": "When you hit with a Skill inflict an additional 2[bleed] 2t",
+      "literalNegative": "-1t to a Condition you are causing",
+      "visualEvidence": [
+        {
+          "side": "positive",
+          "assetPath": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-2.front.png",
+          "recordedAssetSha256": "35fcc4206eae6f233c1b6230b018a315a8713ac28a1ed862e37d0973c19fd93b",
+          "actualAssetSha256": "35fcc4206eae6f233c1b6230b018a315a8713ac28a1ed862e37d0973c19fd93b",
+          "region": {
+            "units": "fraction-of-card",
+            "box": [
+              0,
+              0,
+              1,
+              0.5
+            ],
+            "rotation": 0
+          }
+        },
+        {
+          "side": "negative",
+          "assetPath": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-2.front.png",
+          "recordedAssetSha256": "35fcc4206eae6f233c1b6230b018a315a8713ac28a1ed862e37d0973c19fd93b",
+          "actualAssetSha256": "35fcc4206eae6f233c1b6230b018a315a8713ac28a1ed862e37d0973c19fd93b",
+          "region": {
+            "units": "fraction-of-card",
+            "box": [
+              0,
+              0.5,
+              1,
+              0.5
+            ],
+            "rotation": 180
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-blight-charm",
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/10"
+      ],
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "positive": {
+        "label": "Blight Charm",
+        "trigger": "hero-skill-hits",
+        "useWindow": "declare-when-applicable",
+        "target": "skill-target",
+        "modifiers": [],
+        "effects": [
+          {
+            "kind": "apply-condition-stack",
+            "condition": "blight",
+            "turns": 2,
+            "amount": 2
+          }
+        ],
+        "conditions": [],
+        "semanticNotes": [],
+        "unresolvedFields": [],
+        "runtimeSupport": {
+          "classification": "RUNTIME_PRIMITIVE_UNSUPPORTED",
+          "existingCandidates": [
+            "shared applyStatusEffectEvent"
+          ],
+          "missingCapabilities": [
+            "ActiveEffectDefinition cannot express independent magnitude and turns / non-self target",
+            "Exact applicable timing hero-skill-hits is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+          ],
+          "productionIntegration": "not-integrated"
+        }
+      },
+      "negative": {
+        "label": "Blight Charm",
+        "trigger": "hero-causes-condition",
+        "useWindow": "declare-when-applicable",
+        "target": "condition-being-caused",
+        "modifiers": [],
+        "effects": [
+          {
+            "kind": "modify-condition-duration",
+            "turns": -1
+          }
+        ],
+        "conditions": [],
+        "semanticNotes": [],
+        "unresolvedFields": [],
+        "runtimeSupport": {
+          "classification": "RUNTIME_PRIMITIVE_UNSUPPORTED",
+          "existingCandidates": [],
+          "missingCapabilities": [
+            "No exact active trinket primitive:modify-condition-duration",
+            "Exact applicable timing hero-causes-condition is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+          ],
+          "productionIntegration": "not-integrated"
+        }
+      },
+      "literalPositive": "When you hit with a Skill inflict an additional 2[blight] 2t",
+      "literalNegative": "-1t to a Condition you are causing",
+      "visualEvidence": [
+        {
+          "side": "positive",
+          "assetPath": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-3.front.png",
+          "recordedAssetSha256": "7dd0aa580d00064ab98358abd03b1454215fd04b2030f5cbe19e4ec36793e865",
+          "actualAssetSha256": "7dd0aa580d00064ab98358abd03b1454215fd04b2030f5cbe19e4ec36793e865",
+          "region": {
+            "units": "fraction-of-card",
+            "box": [
+              0,
+              0,
+              1,
+              0.5
+            ],
+            "rotation": 0
+          }
+        },
+        {
+          "side": "negative",
+          "assetPath": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-3.front.png",
+          "recordedAssetSha256": "7dd0aa580d00064ab98358abd03b1454215fd04b2030f5cbe19e4ec36793e865",
+          "actualAssetSha256": "7dd0aa580d00064ab98358abd03b1454215fd04b2030f5cbe19e4ec36793e865",
+          "region": {
+            "units": "fraction-of-card",
+            "box": [
+              0,
+              0.5,
+              1,
+              0.5
+            ],
+            "rotation": 180
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-debuff-charm",
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/6"
+      ],
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "positive": {
+        "label": "Debuff Charm",
+        "trigger": "hero-skill-hits",
+        "useWindow": "declare-when-applicable",
+        "target": "skill-target",
+        "modifiers": [],
+        "effects": [
+          {
+            "kind": "apply-condition-stack",
+            "condition": "debuff",
+            "turns": 2,
+            "amount": null
+          }
+        ],
+        "conditions": [],
+        "semanticNotes": [],
+        "unresolvedFields": [],
+        "runtimeSupport": {
+          "classification": "RUNTIME_PRIMITIVE_UNSUPPORTED",
+          "existingCandidates": [
+            "shared applyStatusEffectEvent"
+          ],
+          "missingCapabilities": [
+            "ActiveEffectDefinition cannot express independent magnitude and turns / non-self target",
+            "Exact applicable timing hero-skill-hits is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+          ],
+          "productionIntegration": "not-integrated"
+        }
+      },
+      "negative": {
+        "label": "Debuff Charm",
+        "trigger": "hero-causes-condition",
+        "useWindow": "declare-when-applicable",
+        "target": "condition-being-caused",
+        "modifiers": [],
+        "effects": [
+          {
+            "kind": "modify-condition-duration",
+            "turns": -1
+          }
+        ],
+        "conditions": [],
+        "semanticNotes": [],
+        "unresolvedFields": [],
+        "runtimeSupport": {
+          "classification": "RUNTIME_PRIMITIVE_UNSUPPORTED",
+          "existingCandidates": [],
+          "missingCapabilities": [
+            "No exact active trinket primitive:modify-condition-duration",
+            "Exact applicable timing hero-causes-condition is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+          ],
+          "productionIntegration": "not-integrated"
+        }
+      },
+      "literalPositive": "When you hit with a Skill inflict an additional [debuff] 2t",
+      "literalNegative": "-1t to a Condition you are causing",
+      "visualEvidence": [
+        {
+          "side": "positive",
+          "assetPath": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-7.front.png",
+          "recordedAssetSha256": "2ddd3cd4c1c6e02ca5651ba2e1dd095c0a80dc4fca77ec1e98700457bda0279c",
+          "actualAssetSha256": "2ddd3cd4c1c6e02ca5651ba2e1dd095c0a80dc4fca77ec1e98700457bda0279c",
+          "region": {
+            "units": "fraction-of-card",
+            "box": [
+              0,
+              0,
+              1,
+              0.5
+            ],
+            "rotation": 0
+          }
+        },
+        {
+          "side": "negative",
+          "assetPath": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-7.front.png",
+          "recordedAssetSha256": "2ddd3cd4c1c6e02ca5651ba2e1dd095c0a80dc4fca77ec1e98700457bda0279c",
+          "actualAssetSha256": "2ddd3cd4c1c6e02ca5651ba2e1dd095c0a80dc4fca77ec1e98700457bda0279c",
+          "region": {
+            "units": "fraction-of-card",
+            "box": [
+              0,
+              0.5,
+              1,
+              0.5
+            ],
+            "rotation": 180
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-stun-charm",
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/3"
+      ],
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "positive": {
+        "label": "Stun Charm",
+        "trigger": "hero-skill-hits",
+        "useWindow": "declare-when-applicable",
+        "target": "skill-target",
+        "modifiers": [],
+        "effects": [
+          {
+            "kind": "apply-condition-stack",
+            "condition": "stun",
+            "turns": 1,
+            "amount": null
+          }
+        ],
+        "conditions": [],
+        "semanticNotes": [],
+        "unresolvedFields": [],
+        "runtimeSupport": {
+          "classification": "RUNTIME_PRIMITIVE_UNSUPPORTED",
+          "existingCandidates": [
+            "shared applyStatusEffectEvent"
+          ],
+          "missingCapabilities": [
+            "ActiveEffectDefinition cannot express independent magnitude and turns / non-self target",
+            "Exact applicable timing hero-skill-hits is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+          ],
+          "productionIntegration": "not-integrated"
+        }
+      },
+      "negative": {
+        "label": "Stun Charm",
+        "trigger": "hero-causes-condition",
+        "useWindow": "declare-when-applicable",
+        "target": "condition-being-caused",
+        "modifiers": [],
+        "effects": [
+          {
+            "kind": "modify-condition-duration",
+            "turns": -1
+          }
+        ],
+        "conditions": [],
+        "semanticNotes": [],
+        "unresolvedFields": [],
+        "runtimeSupport": {
+          "classification": "RUNTIME_PRIMITIVE_UNSUPPORTED",
+          "existingCandidates": [],
+          "missingCapabilities": [
+            "No exact active trinket primitive:modify-condition-duration",
+            "Exact applicable timing hero-causes-condition is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+          ],
+          "productionIntegration": "not-integrated"
+        }
+      },
+      "literalPositive": "When you hit with a skill inflict an additional [stun] 1t",
+      "literalNegative": "-1t to a Condition you are causing",
+      "visualEvidence": [
+        {
+          "side": "positive",
+          "assetPath": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-10.front.png",
+          "recordedAssetSha256": "bff46da4f7556c6090ec5be6ed5c6bea5edbac3d28977220cd647be4bd6edfaa",
+          "actualAssetSha256": "bff46da4f7556c6090ec5be6ed5c6bea5edbac3d28977220cd647be4bd6edfaa",
+          "region": {
+            "units": "fraction-of-card",
+            "box": [
+              0,
+              0,
+              1,
+              0.5
+            ],
+            "rotation": 0
+          }
+        },
+        {
+          "side": "negative",
+          "assetPath": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-10.front.png",
+          "recordedAssetSha256": "bff46da4f7556c6090ec5be6ed5c6bea5edbac3d28977220cd647be4bd6edfaa",
+          "actualAssetSha256": "bff46da4f7556c6090ec5be6ed5c6bea5edbac3d28977220cd647be4bd6edfaa",
+          "region": {
+            "units": "fraction-of-card",
+            "box": [
+              0,
+              0.5,
+              1,
+              0.5
+            ],
+            "rotation": 180
+          }
+        }
+      ]
+    }
+  ],
+  "facts": [
+    {
+      "factId": "SKILL_TARGET_EFFECTS_ORDER",
+      "source": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sourceSha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "page": 20,
+      "region": "left-column",
+      "requiredText": [
+        "take place after any other effects",
+        "only if the Skill hits"
+      ],
+      "semanticFact": "Printed Skill Target Effects take place after the Skill's other effects and only if it hits. This does not explicitly locate an additional Trinket condition or its active declaration.",
+      "bboxPoints": [
+        0,
+        0,
+        297.638,
+        841.89
+      ]
+    },
+    {
+      "factId": "SKILL_SELF_EFFECTS_EXCEPTION",
+      "source": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sourceSha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "page": 20,
+      "region": "left-column",
+      "requiredText": [
+        "take place before any other effects",
+        "Self Effects ignore Resistances"
+      ],
+      "semanticFact": "Printed Skill Self Effects precede other Skill effects regardless of hit/miss and ignore resistance/immunity. Do not generalize this to Charm skill-target effects.",
+      "bboxPoints": [
+        0,
+        0,
+        297.638,
+        841.89
+      ]
+    },
+    {
+      "factId": "DURATION_COUNTS_TOKENS",
+      "source": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sourceSha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "page": 20,
+      "region": "right-column",
+      "requiredText": [
+        "as many tokens as its turn duration"
+      ],
+      "semanticFact": "A timed Condition creates a stack with token count given by turn duration, not magnitude.",
+      "bboxPoints": [
+        297.638,
+        0,
+        595.276,
+        841.89
+      ]
+    },
+    {
+      "factId": "INDEPENDENT_REPEATED_STACKS",
+      "source": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sourceSha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "page": 20,
+      "region": "right-column",
+      "requiredText": [
+        "just make a new stack",
+        "multiple Buffs, Debuffs"
+      ],
+      "semanticFact": "Applying an existing Condition makes another separate stack; multiple Buff and Debuff stacks coexist, rather than refreshing/merging.",
+      "bboxPoints": [
+        297.638,
+        0,
+        595.276,
+        841.89
+      ]
+    },
+    {
+      "factId": "TARGET_TURN_STACK_TICK",
+      "source": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sourceSha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "page": 20,
+      "region": "right-column",
+      "requiredText": [
+        "At the start of the character",
+        "remove the top token of each stack"
+      ],
+      "semanticFact": "At the affected character's turn start, remove the top token of every stack and apply its effects, if any.",
+      "bboxPoints": [
+        297.638,
+        0,
+        595.276,
+        841.89
+      ]
+    },
+    {
+      "factId": "SIMULTANEOUS_WOUND_CONDITIONS",
+      "source": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sourceSha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "page": 20,
+      "region": "right-column",
+      "requiredText": [
+        "Bleed and Blight",
+        "do so at the same time"
+      ],
+      "semanticFact": "Wounding Conditions resolve simultaneously; this does not prove all new conditions are a single creation/declaration batch.",
+      "bboxPoints": [
+        297.638,
+        0,
+        595.276,
+        841.89
+      ]
+    },
+    {
+      "factId": "BLEED_MAGNITUDE_DURATION",
+      "source": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sourceSha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "page": 21,
+      "region": "left-column",
+      "requiredText": [
+        "tokens equal to the rounds",
+        "number indicated on the token"
+      ],
+      "semanticFact": "Bleed potency determines Wounds per tick; duration determines tokens/rounds. They are independent. Blight follows the same model.",
+      "bboxPoints": [
+        0,
+        0,
+        297.638,
+        841.89
+      ]
+    },
+    {
+      "factId": "STUN_TURN_EFFECT",
+      "source": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sourceSha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "page": 21,
+      "region": "left-column",
+      "requiredText": [
+        "Stun xt",
+        "Heroes lose one action"
+      ],
+      "semanticFact": "Stun token duration is independent of amount; at turn start removal causes Heroes to lose an action, Monsters their turn. C1C9 skip runtime must not be generalized as a source rule for all stacks.",
+      "bboxPoints": [
+        0,
+        0,
+        297.638,
+        841.89
+      ]
+    },
+    {
+      "factId": "DEBUFF_STACK_RULE",
+      "source": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sourceSha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "page": 21,
+      "region": "left-column",
+      "requiredText": [
+        "Debuff xt",
+        "stack of x Debuff tokens",
+        "Characters targeting a debuffed enemy gain",
+        "against them per stack"
+      ],
+      "semanticFact": "Debuff is a timed Condition. Each independent stack lasts its token duration and grants attackers a Crit bonus per stack while present; token exhaustion leaves no active stack. The last inference follows the stack construction, not an explicit Charm-zero rule.",
+      "bboxPoints": [
+        0,
+        0,
+        297.638,
+        841.89
+      ]
+    },
+    {
+      "factId": "MARK_BUFF_CATALOGUE",
+      "source": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sourceSha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "page": 21,
+      "region": "left-column",
+      "requiredText": [
+        "Buff xt",
+        "Mark xt"
+      ],
+      "semanticFact": "Buff and Mark are timed Conditions; a generic a-Condition instruction has no same-named-condition restriction.",
+      "bboxPoints": [
+        0,
+        0,
+        297.638,
+        841.89
+      ]
+    },
+    {
+      "factId": "OTHER_TIMED_CONDITIONS",
+      "source": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sourceSha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "page": 21,
+      "region": "left-column",
+      "requiredText": [
+        "Riposte xt",
+        "Guard xt"
+      ],
+      "semanticFact": "Riposte and Guard also have timed stacks; the Negative is not source-limited to the four Charm names.",
+      "bboxPoints": [
+        0,
+        0,
+        297.638,
+        841.89
+      ]
+    },
+    {
+      "factId": "PROTECTION_TIMED_CONDITION",
+      "source": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sourceSha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "page": 21,
+      "region": "right-column",
+      "requiredText": [
+        "Protection",
+        "Protection stacks"
+      ],
+      "semanticFact": "Protection also uses duration stacks. The current status type catalogue does not represent it as an ActiveEffect.",
+      "bboxPoints": [
+        297.638,
+        0,
+        595.276,
+        841.89
+      ]
+    },
+    {
+      "factId": "CATEGORICAL_RESISTANCE_IMMUNITY",
+      "source": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sourceSha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "page": 21,
+      "region": "right-column",
+      "requiredText": [
+        "Resistance reduces the",
+        "duration of the Condition by 1 turn",
+        "immunity negates the"
+      ],
+      "semanticFact": "Official categorical Resistance reduces turn duration by one; immunity negates the effect. This gives no Charm declaration ordering or percentage roll rule.",
+      "bboxPoints": [
+        297.638,
+        0,
+        595.276,
+        841.89
+      ]
+    },
+    {
+      "factId": "ACTIVE_TRINKET_ONCE_PER_TURN",
+      "source": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sourceSha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "page": 26,
+      "region": "left-column",
+      "requiredText": [
+        "they declare the use",
+        "only once",
+        "per turn"
+      ],
+      "semanticFact": "Trinkets are active declarations that resolve and flip; each physical Trinket can be used once per battle turn.",
+      "bboxPoints": [
+        0,
+        0,
+        297.638,
+        841.89
+      ]
+    }
+  ],
+  "heroCausesGrammar": [
+    {
+      "definitionId": "community-trinket-core-bleed-charm",
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/12"
+      ],
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "positive": {
+        "label": "Bleed Charm",
+        "trigger": "hero-skill-hits",
+        "useWindow": "declare-when-applicable",
+        "target": "skill-target",
+        "modifiers": [],
+        "effects": [
+          {
+            "kind": "apply-condition-stack",
+            "condition": "bleed",
+            "turns": 2,
+            "amount": 2
+          }
+        ],
+        "conditions": [],
+        "semanticNotes": [],
+        "unresolvedFields": [],
+        "runtimeSupport": {
+          "classification": "RUNTIME_PRIMITIVE_UNSUPPORTED",
+          "existingCandidates": [
+            "shared applyStatusEffectEvent"
+          ],
+          "missingCapabilities": [
+            "ActiveEffectDefinition cannot express independent magnitude and turns / non-self target",
+            "Exact applicable timing hero-skill-hits is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+          ],
+          "productionIntegration": "not-integrated"
+        }
+      },
+      "negative": {
+        "label": "Bleed Charm",
+        "trigger": "hero-causes-condition",
+        "useWindow": "declare-when-applicable",
+        "target": "condition-being-caused",
+        "modifiers": [],
+        "effects": [
+          {
+            "kind": "modify-condition-duration",
+            "turns": -1
+          }
+        ],
+        "conditions": [],
+        "semanticNotes": [],
+        "unresolvedFields": [],
+        "runtimeSupport": {
+          "classification": "RUNTIME_PRIMITIVE_UNSUPPORTED",
+          "existingCandidates": [],
+          "missingCapabilities": [
+            "No exact active trinket primitive:modify-condition-duration",
+            "Exact applicable timing hero-causes-condition is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+          ],
+          "productionIntegration": "not-integrated"
+        }
+      },
+      "literalPositive": "When you hit with a Skill inflict an additional 2[bleed] 2t",
+      "literalNegative": "-1t to a Condition you are causing",
+      "visualEvidence": [
+        {
+          "side": "positive",
+          "assetPath": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-2.front.png",
+          "recordedAssetSha256": "35fcc4206eae6f233c1b6230b018a315a8713ac28a1ed862e37d0973c19fd93b",
+          "actualAssetSha256": "35fcc4206eae6f233c1b6230b018a315a8713ac28a1ed862e37d0973c19fd93b",
+          "region": {
+            "units": "fraction-of-card",
+            "box": [
+              0,
+              0,
+              1,
+              0.5
+            ],
+            "rotation": 0
+          }
+        },
+        {
+          "side": "negative",
+          "assetPath": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-2.front.png",
+          "recordedAssetSha256": "35fcc4206eae6f233c1b6230b018a315a8713ac28a1ed862e37d0973c19fd93b",
+          "actualAssetSha256": "35fcc4206eae6f233c1b6230b018a315a8713ac28a1ed862e37d0973c19fd93b",
+          "region": {
+            "units": "fraction-of-card",
+            "box": [
+              0,
+              0.5,
+              1,
+              0.5
+            ],
+            "rotation": 180
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-blight-charm",
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/10"
+      ],
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "positive": {
+        "label": "Blight Charm",
+        "trigger": "hero-skill-hits",
+        "useWindow": "declare-when-applicable",
+        "target": "skill-target",
+        "modifiers": [],
+        "effects": [
+          {
+            "kind": "apply-condition-stack",
+            "condition": "blight",
+            "turns": 2,
+            "amount": 2
+          }
+        ],
+        "conditions": [],
+        "semanticNotes": [],
+        "unresolvedFields": [],
+        "runtimeSupport": {
+          "classification": "RUNTIME_PRIMITIVE_UNSUPPORTED",
+          "existingCandidates": [
+            "shared applyStatusEffectEvent"
+          ],
+          "missingCapabilities": [
+            "ActiveEffectDefinition cannot express independent magnitude and turns / non-self target",
+            "Exact applicable timing hero-skill-hits is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+          ],
+          "productionIntegration": "not-integrated"
+        }
+      },
+      "negative": {
+        "label": "Blight Charm",
+        "trigger": "hero-causes-condition",
+        "useWindow": "declare-when-applicable",
+        "target": "condition-being-caused",
+        "modifiers": [],
+        "effects": [
+          {
+            "kind": "modify-condition-duration",
+            "turns": -1
+          }
+        ],
+        "conditions": [],
+        "semanticNotes": [],
+        "unresolvedFields": [],
+        "runtimeSupport": {
+          "classification": "RUNTIME_PRIMITIVE_UNSUPPORTED",
+          "existingCandidates": [],
+          "missingCapabilities": [
+            "No exact active trinket primitive:modify-condition-duration",
+            "Exact applicable timing hero-causes-condition is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+          ],
+          "productionIntegration": "not-integrated"
+        }
+      },
+      "literalPositive": "When you hit with a Skill inflict an additional 2[blight] 2t",
+      "literalNegative": "-1t to a Condition you are causing",
+      "visualEvidence": [
+        {
+          "side": "positive",
+          "assetPath": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-3.front.png",
+          "recordedAssetSha256": "7dd0aa580d00064ab98358abd03b1454215fd04b2030f5cbe19e4ec36793e865",
+          "actualAssetSha256": "7dd0aa580d00064ab98358abd03b1454215fd04b2030f5cbe19e4ec36793e865",
+          "region": {
+            "units": "fraction-of-card",
+            "box": [
+              0,
+              0,
+              1,
+              0.5
+            ],
+            "rotation": 0
+          }
+        },
+        {
+          "side": "negative",
+          "assetPath": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-3.front.png",
+          "recordedAssetSha256": "7dd0aa580d00064ab98358abd03b1454215fd04b2030f5cbe19e4ec36793e865",
+          "actualAssetSha256": "7dd0aa580d00064ab98358abd03b1454215fd04b2030f5cbe19e4ec36793e865",
+          "region": {
+            "units": "fraction-of-card",
+            "box": [
+              0,
+              0.5,
+              1,
+              0.5
+            ],
+            "rotation": 180
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-debuff-charm",
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/6"
+      ],
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "positive": {
+        "label": "Debuff Charm",
+        "trigger": "hero-skill-hits",
+        "useWindow": "declare-when-applicable",
+        "target": "skill-target",
+        "modifiers": [],
+        "effects": [
+          {
+            "kind": "apply-condition-stack",
+            "condition": "debuff",
+            "turns": 2,
+            "amount": null
+          }
+        ],
+        "conditions": [],
+        "semanticNotes": [],
+        "unresolvedFields": [],
+        "runtimeSupport": {
+          "classification": "RUNTIME_PRIMITIVE_UNSUPPORTED",
+          "existingCandidates": [
+            "shared applyStatusEffectEvent"
+          ],
+          "missingCapabilities": [
+            "ActiveEffectDefinition cannot express independent magnitude and turns / non-self target",
+            "Exact applicable timing hero-skill-hits is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+          ],
+          "productionIntegration": "not-integrated"
+        }
+      },
+      "negative": {
+        "label": "Debuff Charm",
+        "trigger": "hero-causes-condition",
+        "useWindow": "declare-when-applicable",
+        "target": "condition-being-caused",
+        "modifiers": [],
+        "effects": [
+          {
+            "kind": "modify-condition-duration",
+            "turns": -1
+          }
+        ],
+        "conditions": [],
+        "semanticNotes": [],
+        "unresolvedFields": [],
+        "runtimeSupport": {
+          "classification": "RUNTIME_PRIMITIVE_UNSUPPORTED",
+          "existingCandidates": [],
+          "missingCapabilities": [
+            "No exact active trinket primitive:modify-condition-duration",
+            "Exact applicable timing hero-causes-condition is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+          ],
+          "productionIntegration": "not-integrated"
+        }
+      },
+      "literalPositive": "When you hit with a Skill inflict an additional [debuff] 2t",
+      "literalNegative": "-1t to a Condition you are causing",
+      "visualEvidence": [
+        {
+          "side": "positive",
+          "assetPath": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-7.front.png",
+          "recordedAssetSha256": "2ddd3cd4c1c6e02ca5651ba2e1dd095c0a80dc4fca77ec1e98700457bda0279c",
+          "actualAssetSha256": "2ddd3cd4c1c6e02ca5651ba2e1dd095c0a80dc4fca77ec1e98700457bda0279c",
+          "region": {
+            "units": "fraction-of-card",
+            "box": [
+              0,
+              0,
+              1,
+              0.5
+            ],
+            "rotation": 0
+          }
+        },
+        {
+          "side": "negative",
+          "assetPath": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-7.front.png",
+          "recordedAssetSha256": "2ddd3cd4c1c6e02ca5651ba2e1dd095c0a80dc4fca77ec1e98700457bda0279c",
+          "actualAssetSha256": "2ddd3cd4c1c6e02ca5651ba2e1dd095c0a80dc4fca77ec1e98700457bda0279c",
+          "region": {
+            "units": "fraction-of-card",
+            "box": [
+              0,
+              0.5,
+              1,
+              0.5
+            ],
+            "rotation": 180
+          }
+        }
+      ]
+    },
+    {
+      "definitionId": "community-trinket-core-stun-charm",
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/3"
+      ],
+      "sourceStatus": "source-supported",
+      "unresolvedFields": [],
+      "positive": {
+        "label": "Stun Charm",
+        "trigger": "hero-skill-hits",
+        "useWindow": "declare-when-applicable",
+        "target": "skill-target",
+        "modifiers": [],
+        "effects": [
+          {
+            "kind": "apply-condition-stack",
+            "condition": "stun",
+            "turns": 1,
+            "amount": null
+          }
+        ],
+        "conditions": [],
+        "semanticNotes": [],
+        "unresolvedFields": [],
+        "runtimeSupport": {
+          "classification": "RUNTIME_PRIMITIVE_UNSUPPORTED",
+          "existingCandidates": [
+            "shared applyStatusEffectEvent"
+          ],
+          "missingCapabilities": [
+            "ActiveEffectDefinition cannot express independent magnitude and turns / non-self target",
+            "Exact applicable timing hero-skill-hits is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+          ],
+          "productionIntegration": "not-integrated"
+        }
+      },
+      "negative": {
+        "label": "Stun Charm",
+        "trigger": "hero-causes-condition",
+        "useWindow": "declare-when-applicable",
+        "target": "condition-being-caused",
+        "modifiers": [],
+        "effects": [
+          {
+            "kind": "modify-condition-duration",
+            "turns": -1
+          }
+        ],
+        "conditions": [],
+        "semanticNotes": [],
+        "unresolvedFields": [],
+        "runtimeSupport": {
+          "classification": "RUNTIME_PRIMITIVE_UNSUPPORTED",
+          "existingCandidates": [],
+          "missingCapabilities": [
+            "No exact active trinket primitive:modify-condition-duration",
+            "Exact applicable timing hero-causes-condition is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+          ],
+          "productionIntegration": "not-integrated"
+        }
+      },
+      "literalPositive": "When you hit with a skill inflict an additional [stun] 1t",
+      "literalNegative": "-1t to a Condition you are causing",
+      "visualEvidence": [
+        {
+          "side": "positive",
+          "assetPath": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-10.front.png",
+          "recordedAssetSha256": "bff46da4f7556c6090ec5be6ed5c6bea5edbac3d28977220cd647be4bd6edfaa",
+          "actualAssetSha256": "bff46da4f7556c6090ec5be6ed5c6bea5edbac3d28977220cd647be4bd6edfaa",
+          "region": {
+            "units": "fraction-of-card",
+            "box": [
+              0,
+              0,
+              1,
+              0.5
+            ],
+            "rotation": 0
+          }
+        },
+        {
+          "side": "negative",
+          "assetPath": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-10.front.png",
+          "recordedAssetSha256": "bff46da4f7556c6090ec5be6ed5c6bea5edbac3d28977220cd647be4bd6edfaa",
+          "actualAssetSha256": "bff46da4f7556c6090ec5be6ed5c6bea5edbac3d28977220cd647be4bd6edfaa",
+          "region": {
+            "units": "fraction-of-card",
+            "box": [
+              0,
+              0.5,
+              1,
+              0.5
+            ],
+            "rotation": 180
+          }
+        }
+      ]
+    }
+  ],
+  "allConditionTrinketSources": [
+    {
+      "definitionId": "community-trinket-color-of-madness-broken-key",
+      "side": "positive",
+      "effectIndex": 0,
+      "trigger": "hero-skill-hits",
+      "target": "skill-target",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "stun",
+        "turns": 2,
+        "amount": null
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/48/ContainedObjects/0/ContainedObjects/1"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-color-of-madness-coat-of-many-colors",
+      "side": "positive",
+      "effectIndex": 0,
+      "trigger": "voluntary-declaration",
+      "target": "equipped-hero",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "buff",
+        "turns": 3,
+        "amount": null
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/48/ContainedObjects/0/ContainedObjects/2"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-color-of-madness-coat-of-many-colors",
+      "side": "positive",
+      "effectIndex": 1,
+      "trigger": "voluntary-declaration",
+      "target": "equipped-hero",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "buff",
+        "turns": 2,
+        "amount": null
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/48/ContainedObjects/0/ContainedObjects/2"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-color-of-madness-coat-of-many-colors",
+      "side": "positive",
+      "effectIndex": 2,
+      "trigger": "voluntary-declaration",
+      "target": "equipped-hero",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "buff",
+        "turns": 1,
+        "amount": null
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/48/ContainedObjects/0/ContainedObjects/2"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-color-of-madness-millers-pipe",
+      "side": "positive",
+      "effectIndex": 0,
+      "trigger": "voluntary-declaration",
+      "target": "equipped-hero",
+      "effect": {
+        "kind": "remove-all-condition-stacks",
+        "conditions": [
+          "blight",
+          "bleed",
+          "mark"
+        ]
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/48/ContainedObjects/0/ContainedObjects/5"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-color-of-madness-millers-pipe",
+      "side": "negative",
+      "effectIndex": 0,
+      "trigger": "voluntary-declaration",
+      "target": "equipped-hero",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "debuff",
+        "turns": 1,
+        "amount": null
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/48/ContainedObjects/0/ContainedObjects/5"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-color-of-madness-petrified-amulet",
+      "side": "positive",
+      "effectIndex": 0,
+      "trigger": "voluntary-declaration",
+      "target": "equipped-hero",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "protection",
+        "turns": 3,
+        "amount": null
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/48/ContainedObjects/0/ContainedObjects/6"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-color-of-madness-petrified-amulet",
+      "side": "negative",
+      "effectIndex": 0,
+      "trigger": "voluntary-declaration",
+      "target": "equipped-hero",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "bleed",
+        "turns": 3,
+        "amount": 1
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/48/ContainedObjects/0/ContainedObjects/6"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-color-of-madness-petrified-skull",
+      "side": "positive",
+      "effectIndex": 0,
+      "trigger": "voluntary-declaration",
+      "target": "equipped-hero",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "protection",
+        "turns": 2,
+        "amount": null
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/48/ContainedObjects/0/ContainedObjects/7"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-color-of-madness-petrified-skull",
+      "side": "positive",
+      "effectIndex": 1,
+      "trigger": "voluntary-declaration",
+      "target": "equipped-hero",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "guard",
+        "turns": 2,
+        "amount": null
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/48/ContainedObjects/0/ContainedObjects/7"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-color-of-madness-topshelf-tonic",
+      "side": "negative",
+      "effectIndex": 0,
+      "trigger": "voluntary-declaration",
+      "target": "equipped-hero",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "blight",
+        "turns": 3,
+        "amount": 2
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/48/ContainedObjects/0/ContainedObjects/10"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-core-bleed-charm",
+      "side": "positive",
+      "effectIndex": 0,
+      "trigger": "hero-skill-hits",
+      "target": "skill-target",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "bleed",
+        "turns": 2,
+        "amount": 2
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/12"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-core-bleed-charm",
+      "side": "negative",
+      "effectIndex": 0,
+      "trigger": "hero-causes-condition",
+      "target": "condition-being-caused",
+      "effect": {
+        "kind": "modify-condition-duration",
+        "turns": -1
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/12"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-core-blight-charm",
+      "side": "positive",
+      "effectIndex": 0,
+      "trigger": "hero-skill-hits",
+      "target": "skill-target",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "blight",
+        "turns": 2,
+        "amount": 2
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/10"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-core-blight-charm",
+      "side": "negative",
+      "effectIndex": 0,
+      "trigger": "hero-causes-condition",
+      "target": "condition-being-caused",
+      "effect": {
+        "kind": "modify-condition-duration",
+        "turns": -1
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/10"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-core-bloodthirst-ring",
+      "side": "negative",
+      "effectIndex": 0,
+      "trigger": "hero-hit-by-attack",
+      "target": "equipped-hero",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "bleed",
+        "turns": 2,
+        "amount": 3
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/60/ContainedObjects/11"
+      ],
+      "runtimeAdapterExists": true
+    },
+    {
+      "definitionId": "community-trinket-core-camouflage-cloak",
+      "side": "negative",
+      "effectIndex": 0,
+      "trigger": "hero-hit-by-attack",
+      "target": "equipped-hero",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "stun",
+        "turns": 1,
+        "amount": null
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/60/ContainedObjects/7"
+      ],
+      "runtimeAdapterExists": true
+    },
+    {
+      "definitionId": "community-trinket-core-cleansing-crystal",
+      "side": "positive",
+      "effectIndex": 0,
+      "trigger": "voluntary-declaration",
+      "target": "all-heroes",
+      "effect": {
+        "kind": "remove-all-condition-stacks",
+        "conditions": [
+          "bleed",
+          "blight",
+          "debuff",
+          "stun",
+          "mark"
+        ]
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/15/ContainedObjects/11"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-core-debuff-charm",
+      "side": "positive",
+      "effectIndex": 0,
+      "trigger": "hero-skill-hits",
+      "target": "skill-target",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "debuff",
+        "turns": 2,
+        "amount": null
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/6"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-core-debuff-charm",
+      "side": "negative",
+      "effectIndex": 0,
+      "trigger": "hero-causes-condition",
+      "target": "condition-being-caused",
+      "effect": {
+        "kind": "modify-condition-duration",
+        "turns": -1
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/6"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-core-stun-charm",
+      "side": "positive",
+      "effectIndex": 0,
+      "trigger": "hero-skill-hits",
+      "target": "skill-target",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "stun",
+        "turns": 1,
+        "amount": null
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/3"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-core-stun-charm",
+      "side": "negative",
+      "effectIndex": 0,
+      "trigger": "hero-causes-condition",
+      "target": "condition-being-caused",
+      "effect": {
+        "kind": "modify-condition-duration",
+        "turns": -1
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/3"
+      ],
+      "runtimeAdapterExists": false
+    }
+  ],
+  "positive": {
+    "sourceTrigger": "hero-skill-hits",
+    "sourceTarget": "skill-target",
+    "targetComplete": true,
+    "targetIdentity": "actual skill targetUnitId, never retargeted after declaration",
+    "requiresFrozenSuccessfulHit": true,
+    "existingWindow": "before-damage-applied",
+    "existingBinding": {
+      "trigger": "hero-skill-hits",
+      "target": "skill"
+    },
+    "exactTargetMatch": false,
+    "exactInsertionPoint": null,
+    "timingStatus": "SOURCE_UNRESOLVED",
+    "damageConditionOrdering": null,
+    "normalSkillConditionBatchMembership": null,
+    "deadTargetApplicable": null,
+    "deadTargetRuntimePolicy": "FAIL_CLOSED; shared event rejects unavailable target; this is not proof of official survive-only timing",
+    "evaluatedAlternatives": [
+      "hit confirmed before damage",
+      "damage committed before normal conditions",
+      "same creation batch as normal conditions",
+      "other source-backed timing"
+    ],
+    "selectedAlternative": null,
+    "normalSkillTargetEffectOrderingEvidence": "SKILL_TARGET_EFFECTS_ORDER; not a card-specific declaration binding"
+  },
+  "negative": {
+    "sourceTrigger": "hero-causes-condition",
+    "sourceTarget": "condition-being-caused",
+    "negativeDelta": -1,
+    "modifies": "duration only",
+    "sameNamedConditionOnly": false,
+    "singularCondition": true,
+    "appliesToAllConditionsWithOneUse": false,
+    "scope": "Any timed Condition actually caused by the declaring Hero; attribution and exact applicability are unproven",
+    "auditedConditionTypes": [
+      "bleed",
+      "blight",
+      "stun",
+      "debuff",
+      "mark",
+      "buff"
+    ],
+    "otherOfficialTimedConditions": [
+      "riposte",
+      "guard",
+      "protection"
+    ],
+    "instantConditions": {
+      "examples": [
+        "shuffle",
+        "stress"
+      ],
+      "durationDeltaInterpretation": null,
+      "policy": "UNRESOLVED_FAIL_CLOSED; no turn duration to shorten is inferred"
+    },
+    "insertionPoint": null,
+    "percentageResistanceOrdering": null,
+    "categoricalResistanceOrdering": null,
+    "immunityOrdering": null,
+    "resistedConditionCountsAsCaused": null,
+    "sourceTimingStatus": "SOURCE_UNRESOLVED",
+    "scopeRuntimeStatus": "RUNTIME_SCOPE_PARTIAL",
+    "nonSkillHeroConditionAttribution": null,
+    "additionalCharmConditionCountsAsHeroCaused": null,
+    "multiConditionOpportunitySelection": null,
+    "applicabilityPolicy": "No speculative window; miss, absent independent duration, dead target or unresolved resisted/immune/cancelled case fails closed"
+  },
+  "physicalCards": {
+    "samePhysicalCardSameBattleTurnDoubleUse": false,
+    "sourceFact": "ACTIVE_TRINKET_ONCE_PER_TURN",
+    "recursionAllowed": false,
+    "runtimeUsedTurnIdConsumer": "src/game-engine/trinkets/use-trinket.ts:77",
+    "proposedProcessedInstancePolicy": "Persist one shared root exclusion set; do not reopen a used/processed instance after flip or reload",
+    "processedRootPolicyIsSourceTimingProof": false,
+    "differentCopiesAllowedByTurnLimit": true,
+    "declineConsumesTurnUse": false,
+    "declinedInstanceLaterChildEligibility": null,
+    "differentCopiesOrdering": null,
+    "additionalConditionNestedRootOrdering": null,
+    "futureRequirement": "Keep distinct physical instance ids, shared root and authoritative dynamic re-evaluation; exact order remains gated"
+  },
+  "resolutionStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+  "outcome": "C",
+  "terminalVerdict": "C1C19-HERO-CAUSED-CONDITION-SOURCE-EXHAUSTED-STILL-UNRESOLVED",
+  "researchScope": "Directly searched all 44 bundled core-rulebook pages. Reviewed generic Skill Target/Self rules, timed stacks, categorical resistance, immunity, trinkets, derived conditions and turn-start rules; no exact hero-causes-condition active ordering found.",
+  "searchedTerms": {
+    "Condition": [
+      2,
+      10,
+      18,
+      20,
+      21,
+      26,
+      27,
+      28,
+      29,
+      32
+    ],
+    "duration": [
+      20,
+      21
+    ],
+    "stack": [
+      2,
+      18,
+      20,
+      21,
+      25
+    ],
+    "Resistance": [
+      2,
+      5,
+      10,
+      13,
+      16,
+      17,
+      18,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      29,
+      30,
+      31
+    ],
+    "Immunity": [
+      21
+    ],
+    "simultaneously": [
+      29
+    ],
+    "additional": [
+      26,
+      27,
+      28,
+      29,
+      33
+    ],
+    "causing": [
+      20
+    ],
+    "hit": [
+      8,
+      10,
+      19,
+      20,
+      26,
+      28,
+      39,
+      42
+    ],
+    "Trinket": [
+      2,
+      5,
+      10,
+      16,
+      26,
+      29,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36
+    ],
+    "zero": [
+      37
+    ],
+    "0 turns": []
+  }
+}

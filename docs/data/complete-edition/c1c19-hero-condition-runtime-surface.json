@@ -1,0 +1,1708 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-19",
+  "baselineHead": "73da3ae9d0fae07b35fcde23daa6856acdbc514a",
+  "baselineTree": "57525fad7e2897cfcb321c013112fdc6d99a6251",
+  "c1c17Implementation": "e7f4b4a94940ebc714301912a93f7fc9a173fd93",
+  "skillCount": 28,
+  "skills": [
+    {
+      "skillId": "crusader-smite",
+      "heroId": "crusader",
+      "kind": "attack",
+      "declaredTargetSide": "enemy",
+      "effectiveTargetSide": "enemy",
+      "lookupMatchesLiveRegistry": true,
+      "productionLookup": "src/data/skills.ts::getSkillById -> SKILLS; all content profiles use battle.ts::heroUseSkill",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      },
+      "effects": []
+    },
+    {
+      "skillId": "crusader-holy-lance",
+      "heroId": "crusader",
+      "kind": "attack",
+      "declaredTargetSide": "enemy",
+      "effectiveTargetSide": "enemy",
+      "lookupMatchesLiveRegistry": true,
+      "productionLookup": "src/data/skills.ts::getSkillById -> SKILLS; all content profiles use battle.ts::heroUseSkill",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      },
+      "effects": [
+        {
+          "effectIndex": 0,
+          "condition": "bleed",
+          "amount": 1,
+          "durationTurns": null,
+          "runtimeDuration": null,
+          "sourceDuration": null,
+          "sourceReference": null,
+          "status": "LEGACY_DURATION_UNRESOLVED",
+          "observedLegacyRuntime": "No declared duration; bleed/blight layer amount decays each turn, stun amount is a skip counter; categorical branch may use amount as fallback. These code behaviors are not sourceDuration.",
+          "targetSemantics": "frozen skill target; hit -> damage -> if alive applyStatusEffectEvent",
+          "durationInferenceForbidden": "duration must not be copied from amount"
+        }
+      ]
+    },
+    {
+      "skillId": "crusader-bulwark",
+      "heroId": "crusader",
+      "kind": "guard",
+      "declaredTargetSide": "self",
+      "effectiveTargetSide": "self",
+      "lookupMatchesLiveRegistry": true,
+      "productionLookup": "src/data/skills.ts::getSkillById -> SKILLS; all content profiles use battle.ts::heroUseSkill",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      },
+      "effects": []
+    },
+    {
+      "skillId": "crusader-battle-heal",
+      "heroId": "crusader",
+      "kind": "move",
+      "declaredTargetSide": "ally",
+      "effectiveTargetSide": "ally",
+      "lookupMatchesLiveRegistry": true,
+      "productionLookup": "src/data/skills.ts::getSkillById -> SKILLS; all content profiles use battle.ts::heroUseSkill",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      },
+      "effects": []
+    },
+    {
+      "skillId": "vestal-divine-grace",
+      "heroId": "vestal",
+      "kind": "heal",
+      "declaredTargetSide": "ally",
+      "effectiveTargetSide": "ally",
+      "lookupMatchesLiveRegistry": true,
+      "productionLookup": "src/data/skills.ts::getSkillById -> SKILLS; all content profiles use battle.ts::heroUseSkill",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      },
+      "effects": []
+    },
+    {
+      "skillId": "vestal-judgement",
+      "heroId": "vestal",
+      "kind": "attack",
+      "declaredTargetSide": "enemy",
+      "effectiveTargetSide": "enemy",
+      "lookupMatchesLiveRegistry": true,
+      "productionLookup": "src/data/skills.ts::getSkillById -> SKILLS; all content profiles use battle.ts::heroUseSkill",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      },
+      "effects": []
+    },
+    {
+      "skillId": "vestal-sanctuary",
+      "heroId": "vestal",
+      "kind": "guard",
+      "declaredTargetSide": "self",
+      "effectiveTargetSide": "self",
+      "lookupMatchesLiveRegistry": true,
+      "productionLookup": "src/data/skills.ts::getSkillById -> SKILLS; all content profiles use battle.ts::heroUseSkill",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      },
+      "effects": []
+    },
+    {
+      "skillId": "vestal-mantra",
+      "heroId": "vestal",
+      "kind": "move",
+      "declaredTargetSide": "self",
+      "effectiveTargetSide": "self",
+      "lookupMatchesLiveRegistry": true,
+      "productionLookup": "src/data/skills.ts::getSkillById -> SKILLS; all content profiles use battle.ts::heroUseSkill",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      },
+      "effects": []
+    },
+    {
+      "skillId": "highwayman-pistol-shot",
+      "heroId": "highwayman",
+      "kind": "attack",
+      "declaredTargetSide": "enemy",
+      "effectiveTargetSide": "enemy",
+      "lookupMatchesLiveRegistry": true,
+      "productionLookup": "src/data/skills.ts::getSkillById -> SKILLS; all content profiles use battle.ts::heroUseSkill",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      },
+      "effects": []
+    },
+    {
+      "skillId": "highwayman-wicked-slice",
+      "heroId": "highwayman",
+      "kind": "attack",
+      "declaredTargetSide": "enemy",
+      "effectiveTargetSide": "enemy",
+      "lookupMatchesLiveRegistry": true,
+      "productionLookup": "src/data/skills.ts::getSkillById -> SKILLS; all content profiles use battle.ts::heroUseSkill",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      },
+      "effects": [
+        {
+          "effectIndex": 0,
+          "condition": "bleed",
+          "amount": 1,
+          "durationTurns": null,
+          "runtimeDuration": null,
+          "sourceDuration": null,
+          "sourceReference": null,
+          "status": "LEGACY_DURATION_UNRESOLVED",
+          "observedLegacyRuntime": "No declared duration; bleed/blight layer amount decays each turn, stun amount is a skip counter; categorical branch may use amount as fallback. These code behaviors are not sourceDuration.",
+          "targetSemantics": "frozen skill target; hit -> damage -> if alive applyStatusEffectEvent",
+          "durationInferenceForbidden": "duration must not be copied from amount"
+        }
+      ]
+    },
+    {
+      "skillId": "highwayman-duelist",
+      "heroId": "highwayman",
+      "kind": "guard",
+      "declaredTargetSide": "self",
+      "effectiveTargetSide": "self",
+      "lookupMatchesLiveRegistry": true,
+      "productionLookup": "src/data/skills.ts::getSkillById -> SKILLS; all content profiles use battle.ts::heroUseSkill",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      },
+      "effects": []
+    },
+    {
+      "skillId": "highwayman-open-vein",
+      "heroId": "highwayman",
+      "kind": "move",
+      "declaredTargetSide": "enemy",
+      "effectiveTargetSide": "enemy",
+      "lookupMatchesLiveRegistry": true,
+      "productionLookup": "src/data/skills.ts::getSkillById -> SKILLS; all content profiles use battle.ts::heroUseSkill",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      },
+      "effects": [
+        {
+          "effectIndex": 0,
+          "condition": "bleed",
+          "amount": 2,
+          "durationTurns": null,
+          "runtimeDuration": null,
+          "sourceDuration": null,
+          "sourceReference": null,
+          "status": "LEGACY_DURATION_UNRESOLVED",
+          "observedLegacyRuntime": "No declared duration; bleed/blight layer amount decays each turn, stun amount is a skip counter; categorical branch may use amount as fallback. These code behaviors are not sourceDuration.",
+          "targetSemantics": "frozen skill target; hit -> damage -> if alive applyStatusEffectEvent",
+          "durationInferenceForbidden": "duration must not be copied from amount"
+        }
+      ]
+    },
+    {
+      "skillId": "hellion-iron-swan",
+      "heroId": "hellion",
+      "kind": "attack",
+      "declaredTargetSide": "enemy",
+      "effectiveTargetSide": "enemy",
+      "lookupMatchesLiveRegistry": true,
+      "productionLookup": "src/data/skills.ts::getSkillById -> SKILLS; all content profiles use battle.ts::heroUseSkill",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      },
+      "effects": []
+    },
+    {
+      "skillId": "hellion-bash",
+      "heroId": "hellion",
+      "kind": "attack",
+      "declaredTargetSide": "enemy",
+      "effectiveTargetSide": "enemy",
+      "lookupMatchesLiveRegistry": true,
+      "productionLookup": "src/data/skills.ts::getSkillById -> SKILLS; all content profiles use battle.ts::heroUseSkill",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      },
+      "effects": [
+        {
+          "effectIndex": 0,
+          "condition": "stun",
+          "amount": 1,
+          "durationTurns": null,
+          "runtimeDuration": null,
+          "sourceDuration": null,
+          "sourceReference": null,
+          "status": "LEGACY_DURATION_UNRESOLVED",
+          "observedLegacyRuntime": "No declared duration; bleed/blight layer amount decays each turn, stun amount is a skip counter; categorical branch may use amount as fallback. These code behaviors are not sourceDuration.",
+          "targetSemantics": "frozen skill target; hit -> damage -> if alive applyStatusEffectEvent",
+          "durationInferenceForbidden": "duration must not be copied from amount"
+        }
+      ]
+    },
+    {
+      "skillId": "hellion-breakthrough",
+      "heroId": "hellion",
+      "kind": "guard",
+      "declaredTargetSide": "self",
+      "effectiveTargetSide": "self",
+      "lookupMatchesLiveRegistry": true,
+      "productionLookup": "src/data/skills.ts::getSkillById -> SKILLS; all content profiles use battle.ts::heroUseSkill",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      },
+      "effects": []
+    },
+    {
+      "skillId": "hellion-adrenaline-rush",
+      "heroId": "hellion",
+      "kind": "move",
+      "declaredTargetSide": "self",
+      "effectiveTargetSide": "self",
+      "lookupMatchesLiveRegistry": true,
+      "productionLookup": "src/data/skills.ts::getSkillById -> SKILLS; all content profiles use battle.ts::heroUseSkill",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      },
+      "effects": []
+    },
+    {
+      "skillId": "leper-hew",
+      "heroId": "leper",
+      "kind": "attack",
+      "declaredTargetSide": null,
+      "effectiveTargetSide": "enemy",
+      "lookupMatchesLiveRegistry": true,
+      "productionLookup": "src/data/skills.ts::getSkillById -> SKILLS; all content profiles use battle.ts::heroUseSkill",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      },
+      "effects": []
+    },
+    {
+      "skillId": "leper-fortify",
+      "heroId": "leper",
+      "kind": "guard",
+      "declaredTargetSide": null,
+      "effectiveTargetSide": "self",
+      "lookupMatchesLiveRegistry": true,
+      "productionLookup": "src/data/skills.ts::getSkillById -> SKILLS; all content profiles use battle.ts::heroUseSkill",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      },
+      "effects": []
+    },
+    {
+      "skillId": "leper-reposition",
+      "heroId": "leper",
+      "kind": "move",
+      "declaredTargetSide": null,
+      "effectiveTargetSide": "self",
+      "lookupMatchesLiveRegistry": true,
+      "productionLookup": "src/data/skills.ts::getSkillById -> SKILLS; all content profiles use battle.ts::heroUseSkill",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      },
+      "effects": []
+    },
+    {
+      "skillId": "occultist-sap",
+      "heroId": "occultist",
+      "kind": "attack",
+      "declaredTargetSide": null,
+      "effectiveTargetSide": "enemy",
+      "lookupMatchesLiveRegistry": true,
+      "productionLookup": "src/data/skills.ts::getSkillById -> SKILLS; all content profiles use battle.ts::heroUseSkill",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      },
+      "effects": []
+    },
+    {
+      "skillId": "occultist-ward",
+      "heroId": "occultist",
+      "kind": "guard",
+      "declaredTargetSide": null,
+      "effectiveTargetSide": "self",
+      "lookupMatchesLiveRegistry": true,
+      "productionLookup": "src/data/skills.ts::getSkillById -> SKILLS; all content profiles use battle.ts::heroUseSkill",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      },
+      "effects": []
+    },
+    {
+      "skillId": "occultist-blink",
+      "heroId": "occultist",
+      "kind": "move",
+      "declaredTargetSide": null,
+      "effectiveTargetSide": "self",
+      "lookupMatchesLiveRegistry": true,
+      "productionLookup": "src/data/skills.ts::getSkillById -> SKILLS; all content profiles use battle.ts::heroUseSkill",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      },
+      "effects": []
+    },
+    {
+      "skillId": "plague-doctor-noxious",
+      "heroId": "plague-doctor",
+      "kind": "attack",
+      "declaredTargetSide": null,
+      "effectiveTargetSide": "enemy",
+      "lookupMatchesLiveRegistry": true,
+      "productionLookup": "src/data/skills.ts::getSkillById -> SKILLS; all content profiles use battle.ts::heroUseSkill",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      },
+      "effects": []
+    },
+    {
+      "skillId": "plague-doctor-guard",
+      "heroId": "plague-doctor",
+      "kind": "guard",
+      "declaredTargetSide": null,
+      "effectiveTargetSide": "self",
+      "lookupMatchesLiveRegistry": true,
+      "productionLookup": "src/data/skills.ts::getSkillById -> SKILLS; all content profiles use battle.ts::heroUseSkill",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      },
+      "effects": []
+    },
+    {
+      "skillId": "plague-doctor-tincture",
+      "heroId": "plague-doctor",
+      "kind": "move",
+      "declaredTargetSide": null,
+      "effectiveTargetSide": "self",
+      "lookupMatchesLiveRegistry": true,
+      "productionLookup": "src/data/skills.ts::getSkillById -> SKILLS; all content profiles use battle.ts::heroUseSkill",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      },
+      "effects": []
+    },
+    {
+      "skillId": "grave-robber-flash",
+      "heroId": "grave-robber",
+      "kind": "attack",
+      "declaredTargetSide": null,
+      "effectiveTargetSide": "enemy",
+      "lookupMatchesLiveRegistry": true,
+      "productionLookup": "src/data/skills.ts::getSkillById -> SKILLS; all content profiles use battle.ts::heroUseSkill",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      },
+      "effects": []
+    },
+    {
+      "skillId": "grave-robber-dodge",
+      "heroId": "grave-robber",
+      "kind": "guard",
+      "declaredTargetSide": null,
+      "effectiveTargetSide": "self",
+      "lookupMatchesLiveRegistry": true,
+      "productionLookup": "src/data/skills.ts::getSkillById -> SKILLS; all content profiles use battle.ts::heroUseSkill",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      },
+      "effects": []
+    },
+    {
+      "skillId": "grave-robber-sneak",
+      "heroId": "grave-robber",
+      "kind": "move",
+      "declaredTargetSide": null,
+      "effectiveTargetSide": "self",
+      "lookupMatchesLiveRegistry": true,
+      "productionLookup": "src/data/skills.ts::getSkillById -> SKILLS; all content profiles use battle.ts::heroUseSkill",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      },
+      "effects": []
+    }
+  ],
+  "conditionCount": 4,
+  "heroSkillConditions": [
+    {
+      "skillId": "crusader-holy-lance",
+      "heroId": "crusader",
+      "targetSide": "enemy",
+      "effectIndex": 0,
+      "condition": "bleed",
+      "amount": 1,
+      "durationTurns": null,
+      "runtimeDuration": null,
+      "sourceDuration": null,
+      "sourceReference": null,
+      "status": "LEGACY_DURATION_UNRESOLVED",
+      "observedLegacyRuntime": "No declared duration; bleed/blight layer amount decays each turn, stun amount is a skip counter; categorical branch may use amount as fallback. These code behaviors are not sourceDuration.",
+      "targetSemantics": "frozen skill target; hit -> damage -> if alive applyStatusEffectEvent",
+      "durationInferenceForbidden": "duration must not be copied from amount",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      }
+    },
+    {
+      "skillId": "highwayman-wicked-slice",
+      "heroId": "highwayman",
+      "targetSide": "enemy",
+      "effectIndex": 0,
+      "condition": "bleed",
+      "amount": 1,
+      "durationTurns": null,
+      "runtimeDuration": null,
+      "sourceDuration": null,
+      "sourceReference": null,
+      "status": "LEGACY_DURATION_UNRESOLVED",
+      "observedLegacyRuntime": "No declared duration; bleed/blight layer amount decays each turn, stun amount is a skip counter; categorical branch may use amount as fallback. These code behaviors are not sourceDuration.",
+      "targetSemantics": "frozen skill target; hit -> damage -> if alive applyStatusEffectEvent",
+      "durationInferenceForbidden": "duration must not be copied from amount",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      }
+    },
+    {
+      "skillId": "highwayman-open-vein",
+      "heroId": "highwayman",
+      "targetSide": "enemy",
+      "effectIndex": 0,
+      "condition": "bleed",
+      "amount": 2,
+      "durationTurns": null,
+      "runtimeDuration": null,
+      "sourceDuration": null,
+      "sourceReference": null,
+      "status": "LEGACY_DURATION_UNRESOLVED",
+      "observedLegacyRuntime": "No declared duration; bleed/blight layer amount decays each turn, stun amount is a skip counter; categorical branch may use amount as fallback. These code behaviors are not sourceDuration.",
+      "targetSemantics": "frozen skill target; hit -> damage -> if alive applyStatusEffectEvent",
+      "durationInferenceForbidden": "duration must not be copied from amount",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      }
+    },
+    {
+      "skillId": "hellion-bash",
+      "heroId": "hellion",
+      "targetSide": "enemy",
+      "effectIndex": 0,
+      "condition": "stun",
+      "amount": 1,
+      "durationTurns": null,
+      "runtimeDuration": null,
+      "sourceDuration": null,
+      "sourceReference": null,
+      "status": "LEGACY_DURATION_UNRESOLVED",
+      "observedLegacyRuntime": "No declared duration; bleed/blight layer amount decays each turn, stun amount is a skip counter; categorical branch may use amount as fallback. These code behaviors are not sourceDuration.",
+      "targetSemantics": "frozen skill target; hit -> damage -> if alive applyStatusEffectEvent",
+      "durationInferenceForbidden": "duration must not be copied from amount",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      }
+    }
+  ],
+  "legacyDurationGapCount": 4,
+  "conditionCallsites": [
+    {
+      "caller": "src/game-engine/battle.ts:678",
+      "containingFunction": "heroUseSkill",
+      "primitive": "applyStatusEffectEvent",
+      "arguments": [
+        "setUnit(s, tgt)",
+        "tgt.id",
+        "skill.applyEffects",
+        "eventId"
+      ],
+      "classification": "HERO_SKILL",
+      "fileSha256": "c2128c9cb90792f49e7c3b15e98275ab17a23865cdd76723b1fce1f82a316f40",
+      "activeHeroCausesConditionWindow": false,
+      "pendingConditionTransaction": false
+    },
+    {
+      "caller": "src/game-engine/battle.ts:730",
+      "containingFunction": "heroUseSkill",
+      "primitive": "applyEffects",
+      "arguments": [
+        "tgt",
+        "skill.applyEffects"
+      ],
+      "classification": "HERO_SKILL",
+      "fileSha256": "c2128c9cb90792f49e7c3b15e98275ab17a23865cdd76723b1fce1f82a316f40",
+      "activeHeroCausesConditionWindow": false,
+      "pendingConditionTransaction": false
+    },
+    {
+      "caller": "src/game-engine/battle.ts:882",
+      "containingFunction": "commitPendingMonsterAttackResolution",
+      "primitive": "applyEffectsWithResistance",
+      "arguments": [
+        "tgt",
+        "skill.applyEffects"
+      ],
+      "classification": "ENEMY_OR_ENCOUNTER_CONDITION; not an ordinary Hero skill",
+      "fileSha256": "c2128c9cb90792f49e7c3b15e98275ab17a23865cdd76723b1fce1f82a316f40",
+      "activeHeroCausesConditionWindow": false,
+      "pendingConditionTransaction": false
+    },
+    {
+      "caller": "src/game-engine/battle.ts:980",
+      "containingFunction": "runMonsterTurn",
+      "primitive": "applyEffectsWithResistance",
+      "arguments": [
+        "tgt",
+        "skill.applyEffects"
+      ],
+      "classification": "ENEMY_OR_ENCOUNTER_CONDITION; not an ordinary Hero skill",
+      "fileSha256": "c2128c9cb90792f49e7c3b15e98275ab17a23865cdd76723b1fce1f82a316f40",
+      "activeHeroCausesConditionWindow": false,
+      "pendingConditionTransaction": false
+    },
+    {
+      "caller": "src/game-engine/bosses/mammoth-cyst/execute-mammoth-cyst-action.ts:188",
+      "containingFunction": "executeMammothCystAction",
+      "primitive": "withCommunityBattleUnitEffect",
+      "arguments": [
+        "working",
+        "targetId",
+        "'buff'",
+        "leaf.buffTurns"
+      ],
+      "classification": "ENEMY_OR_ENCOUNTER_CONDITION; not an ordinary Hero skill",
+      "fileSha256": "194c0094b91f5c95227886aa5a2c4ed91f319a9cdea6b1accac2c9c2a5fbbd20",
+      "activeHeroCausesConditionWindow": false,
+      "pendingConditionTransaction": false
+    },
+    {
+      "caller": "src/game-engine/bosses/mammoth-cyst/execute-mammoth-cyst-action.ts:389",
+      "containingFunction": "executeMammothCystAction",
+      "primitive": "withCommunityBattleUnitEffect",
+      "arguments": [
+        "working",
+        "heroBattleId",
+        "'debuff'",
+        "leaf.debuffTurns"
+      ],
+      "classification": "ENEMY_OR_ENCOUNTER_CONDITION; not an ordinary Hero skill",
+      "fileSha256": "194c0094b91f5c95227886aa5a2c4ed91f319a9cdea6b1accac2c9c2a5fbbd20",
+      "activeHeroCausesConditionWindow": false,
+      "pendingConditionTransaction": false
+    },
+    {
+      "caller": "src/game-engine/bosses/mammoth-cyst/execute-mammoth-cyst-action.ts:392",
+      "containingFunction": "executeMammothCystAction",
+      "primitive": "applyConditionToHero",
+      "arguments": [
+        "working",
+        "options.targetHeroId",
+        "'blight'",
+        "leaf.blight.amount",
+        "leaf.blight.durationTurns",
+        "skill.name",
+        "createRuleEventContext()"
+      ],
+      "classification": "ENEMY_OR_ENCOUNTER_CONDITION; not an ordinary Hero skill",
+      "fileSha256": "194c0094b91f5c95227886aa5a2c4ed91f319a9cdea6b1accac2c9c2a5fbbd20",
+      "activeHeroCausesConditionWindow": false,
+      "pendingConditionTransaction": false
+    },
+    {
+      "caller": "src/game-engine/campaign/act-four/community-final-combat.ts:101",
+      "containingFunction": "applyHitEffects",
+      "primitive": "withDuration",
+      "arguments": [
+        "tgt",
+        "'debuff'",
+        "Number(debuff[1])"
+      ],
+      "classification": "ENEMY_OR_ENCOUNTER_CONDITION; not an ordinary Hero skill",
+      "fileSha256": "2ea4e8a00227d7d1b48075f0897abd6299ce69f0fb5bf6426b99282bfa4c0acb",
+      "activeHeroCausesConditionWindow": false,
+      "pendingConditionTransaction": false
+    },
+    {
+      "caller": "src/game-engine/campaign/act-four/community-final-combat.ts:105",
+      "containingFunction": "applyHitEffects",
+      "primitive": "applyStatusEffectEvent",
+      "arguments": [
+        "next",
+        "tgt.id",
+        "effects",
+        "`${eventId}:effects`"
+      ],
+      "classification": "ENEMY_OR_ENCOUNTER_CONDITION; not an ordinary Hero skill",
+      "fileSha256": "2ea4e8a00227d7d1b48075f0897abd6299ce69f0fb5bf6426b99282bfa4c0acb",
+      "activeHeroCausesConditionWindow": false,
+      "pendingConditionTransaction": false
+    },
+    {
+      "caller": "src/game-engine/campaign/act-four/community-final-combat.ts:517",
+      "containingFunction": "applyCommunityFinalHeroSkill",
+      "primitive": "applyStatusEffectEvent",
+      "arguments": [
+        "battleState",
+        "hero.id",
+        "[{ type: 'blight', amount: reaction.effect.blightPotency, durationTurns: reaction.effect.blightDurationTurns }]",
+        "`final-ichor:${sequence}`"
+      ],
+      "classification": "ENCOUNTER_REACTION_TO_HERO_ATTACK; actor causing condition is not automatically the Hero",
+      "fileSha256": "2ea4e8a00227d7d1b48075f0897abd6299ce69f0fb5bf6426b99282bfa4c0acb",
+      "activeHeroCausesConditionWindow": false,
+      "pendingConditionTransaction": false
+    },
+    {
+      "caller": "src/game-engine/campaign/act-four/community-guardian-combat.ts:223",
+      "containingFunction": "runCommunityGuardianMonsterTurn",
+      "primitive": "applyStatusEffectEvent",
+      "arguments": [
+        "next",
+        "tgt.id",
+        "skill.applyEffects",
+        "`${eventId}:effects`"
+      ],
+      "classification": "ENEMY_OR_ENCOUNTER_CONDITION; not an ordinary Hero skill",
+      "fileSha256": "58c07029ea03efb2807abcc57f00098a7d66fedd3c003dfe1ce47bb8b3512bfb",
+      "activeHeroCausesConditionWindow": false,
+      "pendingConditionTransaction": false
+    },
+    {
+      "caller": "src/game-engine/campaign/act-four/community-guardian-room-state.ts:167",
+      "containingFunction": "applyCommunityPitToss",
+      "primitive": "applyStatusEffectEvent",
+      "arguments": [
+        "next",
+        "target.id",
+        "[{ type: 'bleed', amount: effect.amount, durationTurns: effect.duration }]",
+        "`${eventId}:pit-entry`"
+      ],
+      "classification": "ENEMY_OR_ENCOUNTER_CONDITION; not an ordinary Hero skill",
+      "fileSha256": "4683293f3f92b7d661121ea86ceb0eabd7b3c93db3927e64b087bf3a4c496312",
+      "activeHeroCausesConditionWindow": false,
+      "pendingConditionTransaction": false
+    },
+    {
+      "caller": "src/game-engine/campaign/act-four/community-guardian-special-skills.ts:115",
+      "containingFunction": "applyCommunityGuardianSpecialSkill",
+      "primitive": "withDuration",
+      "arguments": [
+        "actor",
+        "'buff'",
+        "leaf.buffTurns"
+      ],
+      "classification": "ENEMY_OR_ENCOUNTER_CONDITION; not an ordinary Hero skill",
+      "fileSha256": "ba8d89656e41004298c4ec8fcd0fd8d8bd014d08678e3cecfd6e8d8ed9a6b317",
+      "activeHeroCausesConditionWindow": false,
+      "pendingConditionTransaction": false
+    },
+    {
+      "caller": "src/game-engine/campaign/act-four/community-guardian-special-skills.ts:124",
+      "containingFunction": "applyCommunityGuardianSpecialSkill",
+      "primitive": "withDuration",
+      "arguments": [
+        "healed",
+        "'buff'",
+        "leaf.buffTurns"
+      ],
+      "classification": "ENEMY_OR_ENCOUNTER_CONDITION; not an ordinary Hero skill",
+      "fileSha256": "ba8d89656e41004298c4ec8fcd0fd8d8bd014d08678e3cecfd6e8d8ed9a6b317",
+      "activeHeroCausesConditionWindow": false,
+      "pendingConditionTransaction": false
+    },
+    {
+      "caller": "src/game-engine/campaign/act-four/community-guardian-special-skills.ts:154",
+      "containingFunction": "applyCommunityGuardianSpecialSkill",
+      "primitive": "withDuration",
+      "arguments": [
+        "tgt",
+        "'debuff'",
+        "leaf.debuffTurns"
+      ],
+      "classification": "ENEMY_OR_ENCOUNTER_CONDITION; not an ordinary Hero skill",
+      "fileSha256": "ba8d89656e41004298c4ec8fcd0fd8d8bd014d08678e3cecfd6e8d8ed9a6b317",
+      "activeHeroCausesConditionWindow": false,
+      "pendingConditionTransaction": false
+    },
+    {
+      "caller": "src/game-engine/quirks.ts:134",
+      "containingFunction": "applyConditionToHero",
+      "primitive": "writeConditionLayers",
+      "arguments": [
+        "next",
+        "heroId",
+        "condition",
+        "potency"
+      ],
+      "classification": "PASSIVE_DERIVED; attribution to a causing Hero not established",
+      "fileSha256": "e44a10c9528da4270d523f3d3e6ee093fd9fefb2ec0ae9ffa853f6ce5c62711d",
+      "activeHeroCausesConditionWindow": false,
+      "pendingConditionTransaction": false
+    },
+    {
+      "caller": "src/game-engine/quirks.ts:226",
+      "containingFunction": "execReactionEffect",
+      "primitive": "applyConditionToHero",
+      "arguments": [
+        "next",
+        "hero.instanceId",
+        "effect.condition",
+        "effect.potency",
+        "effect.duration",
+        "name",
+        "ctx"
+      ],
+      "classification": "PASSIVE_DERIVED; attribution to a causing Hero not established",
+      "fileSha256": "e44a10c9528da4270d523f3d3e6ee093fd9fefb2ec0ae9ffa853f6ce5c62711d",
+      "activeHeroCausesConditionWindow": false,
+      "pendingConditionTransaction": false
+    },
+    {
+      "caller": "src/game-engine/room-hazards/room-hazard-trigger.ts:182",
+      "containingFunction": "resolveRoomHazardTrigger",
+      "primitive": "applyConditionToHero",
+      "arguments": [
+        "campaign",
+        "actorId",
+        "effect.condition",
+        "effect.amount!",
+        "effect.duration",
+        "effect.description",
+        "createRuleEventContext()"
+      ],
+      "classification": "ENEMY_OR_ENCOUNTER_CONDITION; not an ordinary Hero skill",
+      "fileSha256": "79ea14569395ee92705534e413e9e5ad69da85699d5d934faae271852be9111e",
+      "activeHeroCausesConditionWindow": false,
+      "pendingConditionTransaction": false
+    },
+    {
+      "caller": "src/game-engine/status-effects.ts:14",
+      "containingFunction": "applyEffectToUnit",
+      "primitive": "withDuration",
+      "arguments": [
+        "{ ...unit, stunned: unit.stunned + effect.amount }"
+      ],
+      "classification": "SHARED_CONSUMER_INTERNAL",
+      "fileSha256": "ef5a89e1a94476763be1371ddfeba34f9916c5ab79c4f841cc83f6fd186a2590",
+      "activeHeroCausesConditionWindow": false,
+      "pendingConditionTransaction": false
+    },
+    {
+      "caller": "src/game-engine/status-effects.ts:16",
+      "containingFunction": "applyEffectToUnit",
+      "primitive": "withDuration",
+      "arguments": [
+        "{ ...unit, bleed: unit.bleed + effect.amount }"
+      ],
+      "classification": "SHARED_CONSUMER_INTERNAL",
+      "fileSha256": "ef5a89e1a94476763be1371ddfeba34f9916c5ab79c4f841cc83f6fd186a2590",
+      "activeHeroCausesConditionWindow": false,
+      "pendingConditionTransaction": false
+    },
+    {
+      "caller": "src/game-engine/status-effects.ts:18",
+      "containingFunction": "applyEffectToUnit",
+      "primitive": "withDuration",
+      "arguments": [
+        "{ ...unit, blight: unit.blight + effect.amount }"
+      ],
+      "classification": "SHARED_CONSUMER_INTERNAL",
+      "fileSha256": "ef5a89e1a94476763be1371ddfeba34f9916c5ab79c4f841cc83f6fd186a2590",
+      "activeHeroCausesConditionWindow": false,
+      "pendingConditionTransaction": false
+    },
+    {
+      "caller": "src/game-engine/status-effects.ts:20",
+      "containingFunction": "applyEffectToUnit",
+      "primitive": "withDuration",
+      "arguments": [
+        "{ ...unit, marked: true }"
+      ],
+      "classification": "SHARED_CONSUMER_INTERNAL",
+      "fileSha256": "ef5a89e1a94476763be1371ddfeba34f9916c5ab79c4f841cc83f6fd186a2590",
+      "activeHeroCausesConditionWindow": false,
+      "pendingConditionTransaction": false
+    },
+    {
+      "caller": "src/game-engine/status-effects.ts:22",
+      "containingFunction": "applyEffectToUnit",
+      "primitive": "withDuration",
+      "arguments": [
+        "{ ...unit, buffs: [...unit.buffs, effect] }"
+      ],
+      "classification": "SHARED_CONSUMER_INTERNAL",
+      "fileSha256": "ef5a89e1a94476763be1371ddfeba34f9916c5ab79c4f841cc83f6fd186a2590",
+      "activeHeroCausesConditionWindow": false,
+      "pendingConditionTransaction": false
+    },
+    {
+      "caller": "src/game-engine/status-effects.ts:24",
+      "containingFunction": "applyEffectToUnit",
+      "primitive": "withDuration",
+      "arguments": [
+        "{ ...unit, debuffs: [...unit.debuffs, effect] }"
+      ],
+      "classification": "SHARED_CONSUMER_INTERNAL",
+      "fileSha256": "ef5a89e1a94476763be1371ddfeba34f9916c5ab79c4f841cc83f6fd186a2590",
+      "activeHeroCausesConditionWindow": false,
+      "pendingConditionTransaction": false
+    },
+    {
+      "caller": "src/game-engine/status-effects.ts:33",
+      "containingFunction": "applyEffects",
+      "primitive": "applyEffectToUnit",
+      "arguments": [
+        "u",
+        "e"
+      ],
+      "classification": "SHARED_CONSUMER_INTERNAL",
+      "fileSha256": "ef5a89e1a94476763be1371ddfeba34f9916c5ab79c4f841cc83f6fd186a2590",
+      "activeHeroCausesConditionWindow": false,
+      "pendingConditionTransaction": false
+    },
+    {
+      "caller": "src/game-engine/status-effects.ts:96",
+      "containingFunction": "applyEffectsWithResistance",
+      "primitive": "applyEffectToUnit",
+      "arguments": [
+        "next",
+        "{ ...effect, durationTurns: to }"
+      ],
+      "classification": "SHARED_CONSUMER_INTERNAL",
+      "fileSha256": "ef5a89e1a94476763be1371ddfeba34f9916c5ab79c4f841cc83f6fd186a2590",
+      "activeHeroCausesConditionWindow": false,
+      "pendingConditionTransaction": false
+    },
+    {
+      "caller": "src/game-engine/status-effects.ts:108",
+      "containingFunction": "applyEffectsWithResistance",
+      "primitive": "applyEffectToUnit",
+      "arguments": [
+        "next",
+        "effect"
+      ],
+      "classification": "SHARED_CONSUMER_INTERNAL",
+      "fileSha256": "ef5a89e1a94476763be1371ddfeba34f9916c5ab79c4f841cc83f6fd186a2590",
+      "activeHeroCausesConditionWindow": false,
+      "pendingConditionTransaction": false
+    },
+    {
+      "caller": "src/game-engine/status-effects.ts:122",
+      "containingFunction": "applyStatusEffectEvent",
+      "primitive": "applyEffectsWithResistance",
+      "arguments": [
+        "target",
+        "effects"
+      ],
+      "classification": "SHARED_CONSUMER_INTERNAL",
+      "fileSha256": "ef5a89e1a94476763be1371ddfeba34f9916c5ab79c4f841cc83f6fd186a2590",
+      "activeHeroCausesConditionWindow": false,
+      "pendingConditionTransaction": false
+    },
+    {
+      "caller": "src/game-engine/trinkets/use-trinket.ts:162",
+      "containingFunction": "applyOneEffect",
+      "primitive": "applyConditionToHero",
+      "arguments": [
+        "campaign",
+        "heroId",
+        "effect.condition",
+        "effect.amount",
+        "1",
+        "trinketName",
+        "ctx"
+      ],
+      "classification": "ACTIVE_HERO_TRINKET; self-target only today",
+      "fileSha256": "db42e10c5aac04f2c53cf192a69477161c443b2e04d5822a6b423482f416d341",
+      "activeHeroCausesConditionWindow": false,
+      "pendingConditionTransaction": false
+    },
+    {
+      "caller": "src/game-engine/trinkets/use-trinket.ts:184",
+      "containingFunction": "applyOneEffect",
+      "primitive": "applyStatusEffectEvent",
+      "arguments": [
+        "campaign.battle",
+        "target.id",
+        "[{\n        type: effect.condition,\n        amount: effect.amount ?? 1,\n        durationTurns: effect.durationTurns,\n      }]",
+        "effectEventId"
+      ],
+      "classification": "ACTIVE_HERO_TRINKET; self-target only today",
+      "fileSha256": "db42e10c5aac04f2c53cf192a69477161c443b2e04d5822a6b423482f416d341",
+      "activeHeroCausesConditionWindow": false,
+      "pendingConditionTransaction": false
+    }
+  ],
+  "conditionScopeCounts": {
+    "bleed": 3,
+    "blight": 0,
+    "stun": 1,
+    "debuff": 0,
+    "mark": 0,
+    "buff": 0
+  },
+  "multipleConditionsInLiveSkills": [],
+  "sourceGrammarInventory": [
+    "community-trinket-core-bleed-charm",
+    "community-trinket-core-blight-charm",
+    "community-trinket-core-debuff-charm",
+    "community-trinket-core-stun-charm"
+  ],
+  "allConditionTrinketSources": [
+    {
+      "definitionId": "community-trinket-color-of-madness-broken-key",
+      "side": "positive",
+      "effectIndex": 0,
+      "trigger": "hero-skill-hits",
+      "target": "skill-target",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "stun",
+        "turns": 2,
+        "amount": null
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/48/ContainedObjects/0/ContainedObjects/1"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-color-of-madness-coat-of-many-colors",
+      "side": "positive",
+      "effectIndex": 0,
+      "trigger": "voluntary-declaration",
+      "target": "equipped-hero",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "buff",
+        "turns": 3,
+        "amount": null
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/48/ContainedObjects/0/ContainedObjects/2"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-color-of-madness-coat-of-many-colors",
+      "side": "positive",
+      "effectIndex": 1,
+      "trigger": "voluntary-declaration",
+      "target": "equipped-hero",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "buff",
+        "turns": 2,
+        "amount": null
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/48/ContainedObjects/0/ContainedObjects/2"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-color-of-madness-coat-of-many-colors",
+      "side": "positive",
+      "effectIndex": 2,
+      "trigger": "voluntary-declaration",
+      "target": "equipped-hero",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "buff",
+        "turns": 1,
+        "amount": null
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/48/ContainedObjects/0/ContainedObjects/2"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-color-of-madness-millers-pipe",
+      "side": "positive",
+      "effectIndex": 0,
+      "trigger": "voluntary-declaration",
+      "target": "equipped-hero",
+      "effect": {
+        "kind": "remove-all-condition-stacks",
+        "conditions": [
+          "blight",
+          "bleed",
+          "mark"
+        ]
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/48/ContainedObjects/0/ContainedObjects/5"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-color-of-madness-millers-pipe",
+      "side": "negative",
+      "effectIndex": 0,
+      "trigger": "voluntary-declaration",
+      "target": "equipped-hero",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "debuff",
+        "turns": 1,
+        "amount": null
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/48/ContainedObjects/0/ContainedObjects/5"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-color-of-madness-petrified-amulet",
+      "side": "positive",
+      "effectIndex": 0,
+      "trigger": "voluntary-declaration",
+      "target": "equipped-hero",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "protection",
+        "turns": 3,
+        "amount": null
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/48/ContainedObjects/0/ContainedObjects/6"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-color-of-madness-petrified-amulet",
+      "side": "negative",
+      "effectIndex": 0,
+      "trigger": "voluntary-declaration",
+      "target": "equipped-hero",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "bleed",
+        "turns": 3,
+        "amount": 1
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/48/ContainedObjects/0/ContainedObjects/6"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-color-of-madness-petrified-skull",
+      "side": "positive",
+      "effectIndex": 0,
+      "trigger": "voluntary-declaration",
+      "target": "equipped-hero",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "protection",
+        "turns": 2,
+        "amount": null
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/48/ContainedObjects/0/ContainedObjects/7"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-color-of-madness-petrified-skull",
+      "side": "positive",
+      "effectIndex": 1,
+      "trigger": "voluntary-declaration",
+      "target": "equipped-hero",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "guard",
+        "turns": 2,
+        "amount": null
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/48/ContainedObjects/0/ContainedObjects/7"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-color-of-madness-topshelf-tonic",
+      "side": "negative",
+      "effectIndex": 0,
+      "trigger": "voluntary-declaration",
+      "target": "equipped-hero",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "blight",
+        "turns": 3,
+        "amount": 2
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/48/ContainedObjects/0/ContainedObjects/10"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-core-bleed-charm",
+      "side": "positive",
+      "effectIndex": 0,
+      "trigger": "hero-skill-hits",
+      "target": "skill-target",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "bleed",
+        "turns": 2,
+        "amount": 2
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/12"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-core-bleed-charm",
+      "side": "negative",
+      "effectIndex": 0,
+      "trigger": "hero-causes-condition",
+      "target": "condition-being-caused",
+      "effect": {
+        "kind": "modify-condition-duration",
+        "turns": -1
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/12"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-core-blight-charm",
+      "side": "positive",
+      "effectIndex": 0,
+      "trigger": "hero-skill-hits",
+      "target": "skill-target",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "blight",
+        "turns": 2,
+        "amount": 2
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/10"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-core-blight-charm",
+      "side": "negative",
+      "effectIndex": 0,
+      "trigger": "hero-causes-condition",
+      "target": "condition-being-caused",
+      "effect": {
+        "kind": "modify-condition-duration",
+        "turns": -1
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/10"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-core-bloodthirst-ring",
+      "side": "negative",
+      "effectIndex": 0,
+      "trigger": "hero-hit-by-attack",
+      "target": "equipped-hero",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "bleed",
+        "turns": 2,
+        "amount": 3
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/60/ContainedObjects/11"
+      ],
+      "runtimeAdapterExists": true
+    },
+    {
+      "definitionId": "community-trinket-core-camouflage-cloak",
+      "side": "negative",
+      "effectIndex": 0,
+      "trigger": "hero-hit-by-attack",
+      "target": "equipped-hero",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "stun",
+        "turns": 1,
+        "amount": null
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/60/ContainedObjects/7"
+      ],
+      "runtimeAdapterExists": true
+    },
+    {
+      "definitionId": "community-trinket-core-cleansing-crystal",
+      "side": "positive",
+      "effectIndex": 0,
+      "trigger": "voluntary-declaration",
+      "target": "all-heroes",
+      "effect": {
+        "kind": "remove-all-condition-stacks",
+        "conditions": [
+          "bleed",
+          "blight",
+          "debuff",
+          "stun",
+          "mark"
+        ]
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/15/ContainedObjects/11"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-core-debuff-charm",
+      "side": "positive",
+      "effectIndex": 0,
+      "trigger": "hero-skill-hits",
+      "target": "skill-target",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "debuff",
+        "turns": 2,
+        "amount": null
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/6"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-core-debuff-charm",
+      "side": "negative",
+      "effectIndex": 0,
+      "trigger": "hero-causes-condition",
+      "target": "condition-being-caused",
+      "effect": {
+        "kind": "modify-condition-duration",
+        "turns": -1
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/6"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-core-stun-charm",
+      "side": "positive",
+      "effectIndex": 0,
+      "trigger": "hero-skill-hits",
+      "target": "skill-target",
+      "effect": {
+        "kind": "apply-condition-stack",
+        "condition": "stun",
+        "turns": 1,
+        "amount": null
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/3"
+      ],
+      "runtimeAdapterExists": false
+    },
+    {
+      "definitionId": "community-trinket-core-stun-charm",
+      "side": "negative",
+      "effectIndex": 0,
+      "trigger": "hero-causes-condition",
+      "target": "condition-being-caused",
+      "effect": {
+        "kind": "modify-condition-duration",
+        "turns": -1
+      },
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/3"
+      ],
+      "runtimeAdapterExists": false
+    }
+  ],
+  "liveTrinketConditionProducers": [
+    {
+      "definitionId": "prototype-condition-charm",
+      "side": "negative",
+      "effectIndex": 0,
+      "effect": {
+        "type": "apply-condition-self",
+        "condition": "bleed",
+        "amount": 1
+      },
+      "useWindows": [
+        "battle-started"
+      ],
+      "causingHeroAttribution": "active declaring Hero is known; exact hero-causes-condition eligibility for a Trinket-created condition is unproven"
+    },
+    {
+      "definitionId": "community-trinket-core-camouflage-cloak",
+      "side": "negative",
+      "effectIndex": 0,
+      "effect": {
+        "type": "apply-condition-stack",
+        "condition": "stun",
+        "amount": null,
+        "durationTurns": 1,
+        "target": "equipped-hero"
+      },
+      "useWindows": [
+        "before-incoming-damage-applied"
+      ],
+      "causingHeroAttribution": "active declaring Hero is known; exact hero-causes-condition eligibility for a Trinket-created condition is unproven"
+    },
+    {
+      "definitionId": "community-trinket-core-bloodthirst-ring",
+      "side": "negative",
+      "effectIndex": 0,
+      "effect": {
+        "type": "apply-condition-stack",
+        "condition": "bleed",
+        "amount": 3,
+        "durationTurns": 2,
+        "target": "equipped-hero"
+      },
+      "useWindows": [
+        "before-incoming-damage-applied"
+      ],
+      "causingHeroAttribution": "active declaring Hero is known; exact hero-causes-condition eligibility for a Trinket-created condition is unproven"
+    }
+  ],
+  "passiveConditionProducers": [
+    {
+      "definitionId": "black-plague",
+      "reactionIndex": 0,
+      "effectIndex": 0,
+      "trigger": "blight-before-apply",
+      "effect": {
+        "type": "condition-self",
+        "condition": "blight",
+        "potency": 1,
+        "duration": 2
+      },
+      "causingHeroAttribution": "not established; effect recipient is not automatically the causing Hero",
+      "durationConsumer": "logged but not persisted by applyConditionToHero"
+    },
+    {
+      "definitionId": "creeping-cough",
+      "reactionIndex": 0,
+      "effectIndex": 0,
+      "trigger": "rubble-resolved",
+      "effect": {
+        "type": "condition-self",
+        "condition": "bleed",
+        "potency": 1,
+        "duration": 4
+      },
+      "causingHeroAttribution": "not established; effect recipient is not automatically the causing Hero",
+      "durationConsumer": "logged but not persisted by applyConditionToHero"
+    },
+    {
+      "definitionId": "hemophilia",
+      "reactionIndex": 0,
+      "effectIndex": 0,
+      "trigger": "bleed-before-apply",
+      "effect": {
+        "type": "condition-self",
+        "condition": "bleed",
+        "potency": 1,
+        "duration": 2
+      },
+      "causingHeroAttribution": "not established; effect recipient is not automatically the causing Hero",
+      "durationConsumer": "logged but not persisted by applyConditionToHero"
+    },
+    {
+      "definitionId": "spotted-fever",
+      "reactionIndex": 0,
+      "effectIndex": 0,
+      "trigger": "damage-resolved",
+      "effect": {
+        "type": "condition-self",
+        "condition": "blight",
+        "potency": 1,
+        "duration": 2
+      },
+      "causingHeroAttribution": "not established; effect recipient is not automatically the causing Hero",
+      "durationConsumer": "logged but not persisted by applyConditionToHero"
+    },
+    {
+      "definitionId": "tapeworm",
+      "reactionIndex": 0,
+      "effectIndex": 0,
+      "trigger": "hunger-resolved",
+      "effect": {
+        "type": "condition-self",
+        "condition": "bleed",
+        "potency": 1,
+        "duration": 4
+      },
+      "causingHeroAttribution": "not established; effect recipient is not automatically the causing Hero",
+      "durationConsumer": "logged but not persisted by applyConditionToHero"
+    }
+  ],
+  "skillLookupAudit": "SKILLS is the only Hero SkillDefinition lookup; skill-level registry adds damage/heal bonuses, not applyEffects or independent duration. Encounter hero-skill wrapper delegates to heroUseSkill.",
+  "pipelines": {
+    "enemyTargetHeroSkill": "heroUseSkill -> hit -> applyBattleUnitDamage -> if target.isAlive applyStatusEffectEvent -> applyEffectsWithResistance",
+    "allySelfHeroSkill": "heroUseSkill -> heal/stress -> applyEffects directly; currently no listed ally/self applyEffects in SKILLS",
+    "trinketCondition": "use-trinket apply-condition-stack resolves equipped-hero only; target type union lacks skill-target / condition-being-caused",
+    "passiveConditions": "applyConditionToHero emits before-apply passive event, writes summed layers and logs duration without persisting it; not a Hero-caused active window",
+    "encounterReactiveCondition": "applyCommunityFinalHeroSkill can invoke hostile wounded reaction blight on attacking Hero; causation must not be assigned from UI or recipient",
+    "saveReplay": "battle object including completed statusEffectEvents is serialized; event reuse verifies target/effects, no pending child source/causer transaction exists"
+  },
+  "consumers": {
+    "conditionStack": {
+      "effectType": "apply-condition-stack",
+      "consumerPrimitive": "TRINKET_CONDITION_STACK_CONSUMER",
+      "wired": true
+    },
+    "sourceTargetConsumerComplete": false,
+    "conditionDurationModifierTypeExists": true,
+    "conditionDurationModifierConsumerExists": false,
+    "categoricalBranch": "durationTurns ?? effect.amount; max(0, duration-1), excludes buff/debuff, precedes percentage branch",
+    "resistanceDataProvenance": "hero-level-registry.ts labels percentage resistance and immunity values prototype; p21 proves categorical shortening/immunity, not the d100 rule or Charm ordering",
+    "runtimeZeroBehavior": "categorical branch skips apply at 0; direct applyEffectToUnit with duration=0 can still add potency. Existing behavior is not a new Charm source rule.",
+    "aggregateStacks": "bleed/blight/stun amount sums with max duration per type; mark boolean/max duration; not independent per-source stacks",
+    "debuffDurationComplete": false,
+    "genericHeroCausesConditionWindowExists": false
+  },
+  "sourceHashes": {
+    "src/data/skills.ts": "3343715f175815b8339f2e0e5d2c5135c74bdcd6f383e768f63d2cfdc3c4aff5",
+    "src/game-engine/battle.ts": "c2128c9cb90792f49e7c3b15e98275ab17a23865cdd76723b1fce1f82a316f40",
+    "src/game-engine/status-effects.ts": "ef5a89e1a94476763be1371ddfeba34f9916c5ab79c4f841cc83f6fd186a2590",
+    "src/game-engine/quirks.ts": "e44a10c9528da4270d523f3d3e6ee093fd9fefb2ec0ae9ffa853f6ce5c62711d",
+    "src/types/index.ts": "0e0e3be318b96829eb6e32e1688cef801b4ab673e81bdc6da77cbbdea320990b",
+    "src/types/trinkets.ts": "72278e810832d6bd4aa32a2cfa2dd74646a753bf7edcc4b11d6bd0397fe27474",
+    "src/game-engine/trinkets/use-trinket.ts": "db42e10c5aac04f2c53cf192a69477161c443b2e04d5822a6b423482f416d341",
+    "src/game-engine/save.ts": "5cd38a80514b891bcc01c39fe59b0ec5289cf62b642d00b95fde1303d9266295",
+    "src/data/progression/skill-level-registry.ts": "b9d4750999216bfcf77d98f695fec484fd8d61e96725247bb03f356a3e1291b8",
+    "src/data/progression/hero-level-registry.ts": "8bd27d792ba5095fc2158a0c9b0e074563ac768af8ae845f49738996ecf65553"
+  }
+}

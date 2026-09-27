@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-19",
+  "baselineHead": "73da3ae9d0fae07b35fcde23daa6856acdbc514a",
+  "baselineTree": "57525fad7e2897cfcb321c013112fdc6d99a6251",
+  "c1c17Implementation": "e7f4b4a94940ebc714301912a93f7fc9a173fd93",
+  "sourceStatus": "SOURCE_DURATION_UNRESOLVED",
+  "count": 4,
+  "gaps": [
+    {
+      "skillId": "crusader-holy-lance",
+      "heroId": "crusader",
+      "targetSide": "enemy",
+      "effectIndex": 0,
+      "condition": "bleed",
+      "amount": 1,
+      "durationTurns": null,
+      "runtimeDuration": null,
+      "sourceDuration": null,
+      "sourceReference": null,
+      "status": "SOURCE_DURATION_UNRESOLVED",
+      "observedLegacyRuntime": "No declared duration; bleed/blight layer amount decays each turn, stun amount is a skip counter; categorical branch may use amount as fallback. These code behaviors are not sourceDuration.",
+      "targetSemantics": "frozen skill target; hit -> damage -> if alive applyStatusEffectEvent",
+      "durationInferenceForbidden": "duration must not be copied from amount",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      },
+      "runtimeInputStatus": "LEGACY_DURATION_UNRESOLVED",
+      "reconstructionAuthorized": false
+    },
+    {
+      "skillId": "highwayman-wicked-slice",
+      "heroId": "highwayman",
+      "targetSide": "enemy",
+      "effectIndex": 0,
+      "condition": "bleed",
+      "amount": 1,
+      "durationTurns": null,
+      "runtimeDuration": null,
+      "sourceDuration": null,
+      "sourceReference": null,
+      "status": "SOURCE_DURATION_UNRESOLVED",
+      "observedLegacyRuntime": "No declared duration; bleed/blight layer amount decays each turn, stun amount is a skip counter; categorical branch may use amount as fallback. These code behaviors are not sourceDuration.",
+      "targetSemantics": "frozen skill target; hit -> damage -> if alive applyStatusEffectEvent",
+      "durationInferenceForbidden": "duration must not be copied from amount",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      },
+      "runtimeInputStatus": "LEGACY_DURATION_UNRESOLVED",
+      "reconstructionAuthorized": false
+    },
+    {
+      "skillId": "highwayman-open-vein",
+      "heroId": "highwayman",
+      "targetSide": "enemy",
+      "effectIndex": 0,
+      "condition": "bleed",
+      "amount": 2,
+      "durationTurns": null,
+      "runtimeDuration": null,
+      "sourceDuration": null,
+      "sourceReference": null,
+      "status": "SOURCE_DURATION_UNRESOLVED",
+      "observedLegacyRuntime": "No declared duration; bleed/blight layer amount decays each turn, stun amount is a skip counter; categorical branch may use amount as fallback. These code behaviors are not sourceDuration.",
+      "targetSemantics": "frozen skill target; hit -> damage -> if alive applyStatusEffectEvent",
+      "durationInferenceForbidden": "duration must not be copied from amount",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      },
+      "runtimeInputStatus": "LEGACY_DURATION_UNRESOLVED",
+      "reconstructionAuthorized": false
+    },
+    {
+      "skillId": "hellion-bash",
+      "heroId": "hellion",
+      "targetSide": "enemy",
+      "effectIndex": 0,
+      "condition": "stun",
+      "amount": 1,
+      "durationTurns": null,
+      "runtimeDuration": null,
+      "sourceDuration": null,
+      "sourceReference": null,
+      "status": "SOURCE_DURATION_UNRESOLVED",
+      "observedLegacyRuntime": "No declared duration; bleed/blight layer amount decays each turn, stun amount is a skip counter; categorical branch may use amount as fallback. These code behaviors are not sourceDuration.",
+      "targetSemantics": "frozen skill target; hit -> damage -> if alive applyStatusEffectEvent",
+      "durationInferenceForbidden": "duration must not be copied from amount",
+      "sourceProvenance": {
+        "sourceFile": "src/data/skills.ts",
+        "sourceReference": null,
+        "authoritativeCardDuration": null,
+        "manifestOfficialDataStatus": "partial",
+        "manifestMissingFields": [
+          "sourceReference"
+        ],
+        "skillLevelRegistry": "Lv1 verified label is not a card/page binding; Lv2/3 prototype damage/heal bonuses contain no durations"
+      },
+      "runtimeInputStatus": "LEGACY_DURATION_UNRESOLVED",
+      "reconstructionAuthorized": false
+    }
+  ],
+  "allLegacyEffectsInventoried": true,
+  "durationEqualsAmountAuthorized": false,
+  "sourceRestorationPerformed": false
+}
