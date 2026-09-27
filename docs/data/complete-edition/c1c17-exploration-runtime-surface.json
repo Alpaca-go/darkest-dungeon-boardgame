@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-17",
+  "baselineHead": "69aa2185d221e2935b48383e4dbbdee8ba9d0d43",
+  "baselineImplementationAnchor": "130f1cc868adc3e27eb3ac5a2087f8da4e2f4e86",
+  "baselineImplementationTree": "7cb92fbdf5e8492dde6cdfa9f9869b89b8354f6b",
+  "verifiedImplementationHead": "79f7c656afa61a5527e7ac956f4e38d1491ddb3a",
+  "verifiedImplementationTree": "a31c61d719d91df48020a5e0a69a3dc1b7f5f404",
+  "verifiedImplementationCommittedAt": "2026-09-27T13:25:08+08:00",
+  "productionMovementEntry": "commands/dungeon.ts::enterDungeonRoom",
+  "randomSource": "exploration.ts::rollExplorationResult / EXPLORATION_EVENTS",
+  "resultApplication": "exploration.ts::applyExplorationResult",
+  "frozenMoveCommit": "dungeon.ts::commitMoveToRoom",
+  "insertion": "AFTER_RESULT_FROZEN_BEFORE_RESULT_APPLICATION",
+  "roomContinuation": "commands/dungeon.ts::finalizeDungeonRoomEntry",
+  "decisionEntry": "trinkets/dungeon-trinket-bridge.ts::resolveDungeonTrinketOpportunity",
+  "legacyCompatibility": "dungeon.ts::moveToRoom",
+  "consumerRules": "IGNORE_SKIPS_APPLY_REPLACE_CALLS_SHARED_TRAP_PIPELINE",
+  "downstreamRng": "ONLY_AFTER_RESULT_COMMIT"
+}

@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-17",
+  "baselineHead": "69aa2185d221e2935b48383e4dbbdee8ba9d0d43",
+  "baselineImplementationAnchor": "130f1cc868adc3e27eb3ac5a2087f8da4e2f4e86",
+  "baselineImplementationTree": "7cb92fbdf5e8492dde6cdfa9f9869b89b8354f6b",
+  "verifiedImplementationHead": "79f7c656afa61a5527e7ac956f4e38d1491ddb3a",
+  "verifiedImplementationTree": "a31c61d719d91df48020a5e0a69a3dc1b7f5f404",
+  "verifiedImplementationCommittedAt": "2026-09-27T13:25:08+08:00",
+  "definitionId": "community-trinket-core-survival-guide",
+  "sourceReferences": [
+    "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/2"
+  ],
+  "sourceTrigger": "exploration-die-result",
+  "runtimeWindow": "after-dungeon-roll",
+  "target": "exploration-die",
+  "positive": {
+    "label": "Survival Guide",
+    "trigger": "exploration-die-result",
+    "useWindow": "declare-when-applicable",
+    "target": "exploration-die",
+    "modifiers": [],
+    "effects": [
+      {
+        "kind": "ignore-result",
+        "options": [
+          "trap",
+          "hunger"
+        ]
+      }
+    ],
+    "conditions": [],
+    "semanticNotes": [],
+    "unresolvedFields": [],
+    "runtimeSupport": {
+      "classification": "RUNTIME_PRIMITIVE_UNSUPPORTED",
+      "existingCandidates": [],
+      "missingCapabilities": [
+        "No exact active trinket primitive:ignore-result",
+        "Exact applicable timing exploration-die-result is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+      ],
+      "productionIntegration": "not-integrated"
+    }
+  },
+  "negative": {
+    "label": "Survival Guide",
+    "trigger": "exploration-die-result",
+    "useWindow": "declare-when-applicable",
+    "target": "exploration-die",
+    "modifiers": [],
+    "effects": [
+      {
+        "kind": "replace-result",
+        "from": "not-trap",
+        "to": "trap"
+      }
+    ],
+    "conditions": [],
+    "semanticNotes": [],
+    "unresolvedFields": [],
+    "runtimeSupport": {
+      "classification": "RUNTIME_PRIMITIVE_UNSUPPORTED",
+      "existingCandidates": [],
+      "missingCapabilities": [
+        "No exact active trinket primitive:replace-result",
+        "Exact applicable timing exploration-die-result is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+      ],
+      "productionIntegration": "not-integrated"
+    }
+  },
+  "adapter": {
+    "adapterId": "survival-guide-exploration-result-v1",
+    "definitionId": "community-trinket-core-survival-guide",
+    "requiredPrimitives": [
+      "STAGED_EXPLORATION_MOVE",
+      "EXPLORATION_RESULT_TRINKET_WINDOW",
+      "TRINKET_EXPLORATION_RESULT_IGNORE_CONSUMER",
+      "TRINKET_EXPLORATION_RESULT_REPLACE_CONSUMER"
+    ],
+    "definition": {
+      "id": "community-trinket-core-survival-guide",
+      "name": "Survival Guide",
+      "level": 1,
+      "positiveSide": {
+        "side": "positive",
+        "label": "忽略 Trap / Hunger",
+        "description": "Survival Guide",
+        "useWindows": [
+          "after-dungeon-roll"
+        ],
+        "modifiers": [],
+        "effects": [
+          {
+            "type": "ignore-exploration-result",
+            "options": [
+              "trap",
+              "hunger"
+            ],
+            "target": "exploration-die"
+          }
+        ]
+      },
+      "negativeSide": {
+        "side": "negative",
+        "label": "非 Trap 改为 Trap",
+        "description": "Survival Guide",
+        "useWindows": [
+          "after-dungeon-roll"
+        ],
+        "modifiers": [],
+        "effects": [
+          {
+            "type": "replace-exploration-result",
+            "from": "not-trap",
+            "to": "trap",
+            "target": "exploration-die"
+          }
+        ]
+      },
+      "sellPrice": 2,
+      "buyPrice": 4,
+      "officialDataStatus": "verified",
+      "sourceReference": "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/2",
+      "enabledInOfficialPool": false,
+      "dataOrigin": "community",
+      "runtimeContentMetadata": {
+        "sourceDefinitionId": "community-trinket-core-survival-guide",
+        "contentSet": "core",
+        "region": null,
+        "sourceOrigin": "community-complete-edition"
+      }
+    }
+  },
+  "resultPolicy": "ROLL_ONCE_BEFORE_WINDOW_FREEZE_ORIGINAL_AND_EFFECTIVE",
+  "moveIdentity": [
+    "rootEventId",
+    "questId",
+    "questRunId",
+    "fromRoomId",
+    "destinationRoomId"
+  ],
+  "physicalPolicy": "PROCESSED_PHYSICAL_IDS_PERSIST_REEVALUATE_UNPROCESSED_CLOSE_STALE",
+  "continuationPolicy": "SHARED_PRODUCTION_COMMAND_AFTER_RESULT_COMMIT",
+  "invalidRestorePolicy": "CLEAR_PENDING_AND_ORPHAN_ROOT_FAIL_CLOSED"
+}
