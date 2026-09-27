@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-20",
+  "baselineHead": "78d2899c4b6a9ee7a5343e4ce2131dc4b0d8068d",
+  "baselineTree": "0c2f6a142155f22c92a781157efaf1f54712d562",
+  "gaps": [
+    {
+      "rootFamily": "VOLUNTARY_DECLARATION",
+      "sourceGapId": "GENERIC_VOLUNTARY_DECLARATION_SCOPE",
+      "blockerCode": "TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED",
+      "sourceStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "previousContracts": [
+        "c1c7-voluntary-declaration-timing-contract.json",
+        "c1c14-source-gap-freeze.json"
+      ],
+      "priority": "P0",
+      "reopenCondition": [
+        "New authoritative legal declaration contexts and insertion points",
+        "Battle/non-battle usage epoch, ordering and save/replay scope"
+      ],
+      "affectedCards": [
+        "community-trinket-core-berserk-charm",
+        "community-trinket-core-bloodthirst-ring",
+        "community-trinket-core-book-of-constitution",
+        "community-trinket-core-book-of-holiness",
+        "community-trinket-core-book-of-relaxation",
+        "community-trinket-core-book-of-sanity",
+        "community-trinket-core-candle-of-life",
+        "community-trinket-core-caution-cloak",
+        "community-trinket-core-cleansing-crystal",
+        "community-trinket-core-dark-crown",
+        "community-trinket-core-fasting-seal",
+        "community-trinket-core-fortunate-armlet",
+        "community-trinket-core-protective-padlock",
+        "community-trinket-core-recovery-charm",
+        "community-trinket-core-solar-crown",
+        "community-trinket-core-speed-stone"
+      ],
+      "affectedCardCount": 16,
+      "newSourceSincePriorPhase": false
+    },
+    {
+      "rootFamily": "HERO_CAUSED_CONDITION",
+      "sourceGapId": "HERO_CAUSED_CONDITION_ACTIVE_TIMING",
+      "blockerCode": "HERO_CAUSED_CONDITION_ACTIVE_TIMING_UNRESOLVED",
+      "sourceStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "previousContracts": [
+        "c1c19-hero-caused-condition-source-contract.json",
+        "c1c19-condition-charm-feasibility.json"
+      ],
+      "priority": "P0",
+      "reopenCondition": [
+        "Exact hero-skill-hits skill-target and hero-causes-condition declaration timing",
+        "Resistance/immunity ordering and fully resisted causation",
+        "Zero-duration lifecycle, singular child selection and multi-condition/cross-copy ordering",
+        "Independent authoritative durations for all legacy Hero Skill conditions; never duration=amount"
+      ],
+      "affectedCards": [
+        "community-trinket-core-bleed-charm",
+        "community-trinket-core-blight-charm",
+        "community-trinket-core-debuff-charm",
+        "community-trinket-core-stun-charm"
+      ],
+      "affectedCardCount": 4,
+      "newSourceSincePriorPhase": false
+    },
+    {
+      "rootFamily": "DAMAGE_WOUND",
+      "sourceGapId": "SUFFER_WOUNDS_AND_HERO_TAKES_DAMAGE",
+      "blockerCode": "SUFFER_WOUNDS_SOURCE_SEMANTICS_UNRESOLVED",
+      "sourceStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "previousContracts": [
+        "c1c18-wound-semantics-contract.json",
+        "c1c18-damage-stone-feasibility.json"
+      ],
+      "priority": "P1",
+      "reopenCondition": [
+        "Complete suffer-wounds modifier semantics",
+        "Exact hero-takes-damage timing and zero-final-Damage applicability",
+        "Damage/Wound equivalence or distinct pipeline and full battle/campaign trigger scope"
+      ],
+      "affectedCards": [
+        "community-trinket-core-damage-stone"
+      ],
+      "affectedCardCount": 1,
+      "newSourceSincePriorPhase": false
+    },
+    {
+      "rootFamily": "HEALING_TRIGGER_SCOPE",
+      "sourceGapId": "CHIRURGEON_HEALING_TRIGGER_SCOPE",
+      "blockerCode": "TRINKET_TRIGGER_SCOPE_UNRESOLVED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "previousContracts": [
+        "c1c5r-chirurgeons-trigger-scope.json",
+        "c1c14-source-gap-freeze.json"
+      ],
+      "priority": "P1",
+      "reopenCondition": [
+        "Authoritative When healing / When healed scope: battle Skill only or explicit other healing surfaces",
+        "If broader, source/receiver applicability for Rest, Provision, Hamlet, other Trinkets and campaign healing"
+      ],
+      "affectedCards": [
+        "community-trinket-core-chirurgeons-charm"
+      ],
+      "affectedCardCount": 1,
+      "newSourceSincePriorPhase": false
+    }
+  ],
+  "sourceDelta": "NONE"
+}

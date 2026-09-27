@@ -1,0 +1,765 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-20",
+  "baselineHead": "78d2899c4b6a9ee7a5343e4ce2131dc4b0d8068d",
+  "baselineTree": "0c2f6a142155f22c92a781157efaf1f54712d562",
+  "rows": [
+    {
+      "primitive": "GENERIC_VOLUNTARY_DECLARATION_SCOPE",
+      "kind": "SOURCE_CLOSURE",
+      "affectedCards": [
+        "community-trinket-core-berserk-charm",
+        "community-trinket-core-bloodthirst-ring",
+        "community-trinket-core-book-of-constitution",
+        "community-trinket-core-book-of-holiness",
+        "community-trinket-core-book-of-relaxation",
+        "community-trinket-core-book-of-sanity",
+        "community-trinket-core-candle-of-life",
+        "community-trinket-core-caution-cloak",
+        "community-trinket-core-cleansing-crystal",
+        "community-trinket-core-dark-crown",
+        "community-trinket-core-fasting-seal",
+        "community-trinket-core-fortunate-armlet",
+        "community-trinket-core-protective-padlock",
+        "community-trinket-core-recovery-charm",
+        "community-trinket-core-solar-crown",
+        "community-trinket-core-speed-stone"
+      ],
+      "rootSourceGate": [
+        "GENERIC_VOLUNTARY_DECLARATION_SCOPE"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "maximumCardsReopenedForEvaluation": 16,
+      "crossCardReuse": 16,
+      "priority": "P0",
+      "sourceClosedCounterfactualStatus": "Reopens evaluation, not automatic Ready promotion."
+    },
+    {
+      "primitive": "HERO_CAUSED_CONDITION_ACTIVE_TIMING",
+      "kind": "SOURCE_CLOSURE",
+      "affectedCards": [
+        "community-trinket-core-bleed-charm",
+        "community-trinket-core-blight-charm",
+        "community-trinket-core-debuff-charm",
+        "community-trinket-core-stun-charm"
+      ],
+      "rootSourceGate": [
+        "HERO_CAUSED_CONDITION_ACTIVE_TIMING"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "maximumCardsReopenedForEvaluation": 4,
+      "crossCardReuse": 4,
+      "priority": "P0",
+      "sourceClosedCounterfactualStatus": "Reopens evaluation, not automatic Ready promotion."
+    },
+    {
+      "primitive": "SUFFER_WOUNDS_AND_HERO_TAKES_DAMAGE",
+      "kind": "SOURCE_CLOSURE",
+      "affectedCards": [
+        "community-trinket-core-damage-stone"
+      ],
+      "rootSourceGate": [
+        "SUFFER_WOUNDS_AND_HERO_TAKES_DAMAGE"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "maximumCardsReopenedForEvaluation": 1,
+      "crossCardReuse": 1,
+      "priority": "P1",
+      "sourceClosedCounterfactualStatus": "Reopens evaluation, not automatic Ready promotion."
+    },
+    {
+      "primitive": "CHIRURGEON_HEALING_TRIGGER_SCOPE",
+      "kind": "SOURCE_CLOSURE",
+      "affectedCards": [
+        "community-trinket-core-chirurgeons-charm"
+      ],
+      "rootSourceGate": [
+        "CHIRURGEON_HEALING_TRIGGER_SCOPE"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "maximumCardsReopenedForEvaluation": 1,
+      "crossCardReuse": 1,
+      "priority": "P1",
+      "sourceClosedCounterfactualStatus": "Highest isolated unlock; battle-Skill-only scope may nearly promote, but exact payload, proof and selector invariants must be re-evaluated."
+    },
+    {
+      "primitive": "CONDITION_RESISTANCE_CONSUMER",
+      "kind": "RUNTIME_PRIMITIVE",
+      "affectedCards": [
+        "community-trinket-core-bleed-charm",
+        "community-trinket-core-blight-charm",
+        "community-trinket-core-debuff-charm",
+        "community-trinket-core-stun-charm"
+      ],
+      "rootSourceGate": [
+        "HERO_CAUSED_CONDITION_ACTIVE_TIMING"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "sourceClosedCounterfactualStatus": "NOT_ESTABLISHED; source closure does not supply remaining runtime, semantic or proof obligations",
+      "crossCardReuse": 4,
+      "priority": "P3",
+      "classification": "DOWNSTREAM_RUNTIME_BLOCKER_BEHIND_SOURCE_GATE"
+    },
+    {
+      "primitive": "CONDITION_TRANSACTION_DURATION_CONSUMER",
+      "kind": "RUNTIME_PRIMITIVE",
+      "affectedCards": [
+        "community-trinket-core-bleed-charm",
+        "community-trinket-core-blight-charm",
+        "community-trinket-core-debuff-charm",
+        "community-trinket-core-stun-charm"
+      ],
+      "rootSourceGate": [
+        "HERO_CAUSED_CONDITION_ACTIVE_TIMING"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "sourceClosedCounterfactualStatus": "NOT_ESTABLISHED; source closure does not supply remaining runtime, semantic or proof obligations",
+      "crossCardReuse": 4,
+      "priority": "P3",
+      "classification": "DOWNSTREAM_RUNTIME_BLOCKER_BEHIND_SOURCE_GATE"
+    },
+    {
+      "primitive": "DEBUFF_DURATION_BOOKKEEPING",
+      "kind": "RUNTIME_PRIMITIVE",
+      "affectedCards": [
+        "community-trinket-core-debuff-charm"
+      ],
+      "rootSourceGate": [
+        "HERO_CAUSED_CONDITION_ACTIVE_TIMING"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "sourceClosedCounterfactualStatus": "NOT_ESTABLISHED; source closure does not supply remaining runtime, semantic or proof obligations",
+      "crossCardReuse": 1,
+      "priority": "P3",
+      "classification": "DOWNSTREAM_RUNTIME_BLOCKER_BEHIND_SOURCE_GATE"
+    },
+    {
+      "primitive": "DEBUFF_EXPIRY",
+      "kind": "RUNTIME_PRIMITIVE",
+      "affectedCards": [
+        "community-trinket-core-debuff-charm"
+      ],
+      "rootSourceGate": [
+        "HERO_CAUSED_CONDITION_ACTIVE_TIMING"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "sourceClosedCounterfactualStatus": "NOT_ESTABLISHED; source closure does not supply remaining runtime, semantic or proof obligations",
+      "crossCardReuse": 1,
+      "priority": "P3",
+      "classification": "DOWNSTREAM_RUNTIME_BLOCKER_BEHIND_SOURCE_GATE"
+    },
+    {
+      "primitive": "DEBUFF_RESISTANCE_CONSUMER",
+      "kind": "RUNTIME_PRIMITIVE",
+      "affectedCards": [
+        "community-trinket-core-debuff-charm"
+      ],
+      "rootSourceGate": [
+        "HERO_CAUSED_CONDITION_ACTIVE_TIMING"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "sourceClosedCounterfactualStatus": "NOT_ESTABLISHED; source closure does not supply remaining runtime, semantic or proof obligations",
+      "crossCardReuse": 1,
+      "priority": "P3",
+      "classification": "DOWNSTREAM_RUNTIME_BLOCKER_BEHIND_SOURCE_GATE"
+    },
+    {
+      "primitive": "DEBUFF_TURN_TICK",
+      "kind": "RUNTIME_PRIMITIVE",
+      "affectedCards": [
+        "community-trinket-core-debuff-charm"
+      ],
+      "rootSourceGate": [
+        "HERO_CAUSED_CONDITION_ACTIVE_TIMING"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "sourceClosedCounterfactualStatus": "NOT_ESTABLISHED; source closure does not supply remaining runtime, semantic or proof obligations",
+      "crossCardReuse": 1,
+      "priority": "P3",
+      "classification": "DOWNSTREAM_RUNTIME_BLOCKER_BEHIND_SOURCE_GATE"
+    },
+    {
+      "primitive": "INDEPENDENT_HERO_SKILL_CONDITION_DURATION",
+      "kind": "RUNTIME_PRIMITIVE",
+      "affectedCards": [
+        "community-trinket-core-bleed-charm",
+        "community-trinket-core-blight-charm",
+        "community-trinket-core-debuff-charm",
+        "community-trinket-core-stun-charm"
+      ],
+      "rootSourceGate": [
+        "HERO_CAUSED_CONDITION_ACTIVE_TIMING"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "sourceClosedCounterfactualStatus": "NOT_ESTABLISHED; source closure does not supply remaining runtime, semantic or proof obligations",
+      "crossCardReuse": 4,
+      "priority": "P3",
+      "classification": "DOWNSTREAM_RUNTIME_BLOCKER_BEHIND_SOURCE_GATE"
+    },
+    {
+      "primitive": "NO_TRINKETMODIFIERTYPE_MOVEMENT",
+      "kind": "RUNTIME_PRIMITIVE",
+      "affectedCards": [
+        "community-trinket-core-book-of-constitution",
+        "community-trinket-core-protective-padlock"
+      ],
+      "rootSourceGate": [
+        "GENERIC_VOLUNTARY_DECLARATION_SCOPE"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "sourceClosedCounterfactualStatus": "NOT_ESTABLISHED; source closure does not supply remaining runtime, semantic or proof obligations",
+      "crossCardReuse": 2,
+      "priority": "P3",
+      "classification": "DOWNSTREAM_RUNTIME_BLOCKER_BEHIND_SOURCE_GATE"
+    },
+    {
+      "primitive": "SIDE_SEMANTIC_ADAPTER_PROOF:negative",
+      "kind": "RUNTIME_PRIMITIVE",
+      "affectedCards": [
+        "community-trinket-core-berserk-charm",
+        "community-trinket-core-bleed-charm",
+        "community-trinket-core-blight-charm",
+        "community-trinket-core-book-of-constitution",
+        "community-trinket-core-book-of-relaxation",
+        "community-trinket-core-book-of-sanity",
+        "community-trinket-core-candle-of-life",
+        "community-trinket-core-caution-cloak",
+        "community-trinket-core-chirurgeons-charm",
+        "community-trinket-core-cleansing-crystal",
+        "community-trinket-core-damage-stone",
+        "community-trinket-core-dark-crown",
+        "community-trinket-core-debuff-charm",
+        "community-trinket-core-fasting-seal",
+        "community-trinket-core-fortunate-armlet",
+        "community-trinket-core-protective-padlock",
+        "community-trinket-core-recovery-charm",
+        "community-trinket-core-solar-crown",
+        "community-trinket-core-speed-stone",
+        "community-trinket-core-stun-charm"
+      ],
+      "rootSourceGate": [
+        "CHIRURGEON_HEALING_TRIGGER_SCOPE",
+        "GENERIC_VOLUNTARY_DECLARATION_SCOPE",
+        "HERO_CAUSED_CONDITION_ACTIVE_TIMING",
+        "SUFFER_WOUNDS_AND_HERO_TAKES_DAMAGE"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "sourceClosedCounterfactualStatus": "NOT_ESTABLISHED; source closure does not supply remaining runtime, semantic or proof obligations",
+      "crossCardReuse": 20,
+      "priority": "P3",
+      "classification": "DOWNSTREAM_RUNTIME_BLOCKER_BEHIND_SOURCE_GATE"
+    },
+    {
+      "primitive": "SIDE_SEMANTIC_ADAPTER_PROOF:positive",
+      "kind": "RUNTIME_PRIMITIVE",
+      "affectedCards": [
+        "community-trinket-core-berserk-charm",
+        "community-trinket-core-bleed-charm",
+        "community-trinket-core-blight-charm",
+        "community-trinket-core-bloodthirst-ring",
+        "community-trinket-core-book-of-holiness",
+        "community-trinket-core-book-of-relaxation",
+        "community-trinket-core-book-of-sanity",
+        "community-trinket-core-candle-of-life",
+        "community-trinket-core-caution-cloak",
+        "community-trinket-core-chirurgeons-charm",
+        "community-trinket-core-cleansing-crystal",
+        "community-trinket-core-damage-stone",
+        "community-trinket-core-dark-crown",
+        "community-trinket-core-debuff-charm",
+        "community-trinket-core-fasting-seal",
+        "community-trinket-core-recovery-charm",
+        "community-trinket-core-solar-crown",
+        "community-trinket-core-speed-stone",
+        "community-trinket-core-stun-charm"
+      ],
+      "rootSourceGate": [
+        "CHIRURGEON_HEALING_TRIGGER_SCOPE",
+        "GENERIC_VOLUNTARY_DECLARATION_SCOPE",
+        "HERO_CAUSED_CONDITION_ACTIVE_TIMING",
+        "SUFFER_WOUNDS_AND_HERO_TAKES_DAMAGE"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "sourceClosedCounterfactualStatus": "NOT_ESTABLISHED; source closure does not supply remaining runtime, semantic or proof obligations",
+      "crossCardReuse": 19,
+      "priority": "P3",
+      "classification": "DOWNSTREAM_RUNTIME_BLOCKER_BEHIND_SOURCE_GATE"
+    },
+    {
+      "primitive": "TRINKET_EFFECT_CONSUMER_MISSING:choose-one",
+      "kind": "RUNTIME_PRIMITIVE",
+      "affectedCards": [
+        "community-trinket-core-speed-stone"
+      ],
+      "rootSourceGate": [
+        "GENERIC_VOLUNTARY_DECLARATION_SCOPE"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "sourceClosedCounterfactualStatus": "NOT_ESTABLISHED; source closure does not supply remaining runtime, semantic or proof obligations",
+      "crossCardReuse": 1,
+      "priority": "P3",
+      "classification": "DOWNSTREAM_RUNTIME_BLOCKER_BEHIND_SOURCE_GATE"
+    },
+    {
+      "primitive": "TRINKET_EFFECT_CONSUMER_MISSING:gain-action",
+      "kind": "RUNTIME_PRIMITIVE",
+      "affectedCards": [
+        "community-trinket-core-berserk-charm"
+      ],
+      "rootSourceGate": [
+        "GENERIC_VOLUNTARY_DECLARATION_SCOPE"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "sourceClosedCounterfactualStatus": "NOT_ESTABLISHED; source closure does not supply remaining runtime, semantic or proof obligations",
+      "crossCardReuse": 1,
+      "priority": "P3",
+      "classification": "DOWNSTREAM_RUNTIME_BLOCKER_BEHIND_SOURCE_GATE"
+    },
+    {
+      "primitive": "TRINKET_EFFECT_CONSUMER_MISSING:gain-quirk",
+      "kind": "RUNTIME_PRIMITIVE",
+      "affectedCards": [
+        "community-trinket-core-cleansing-crystal"
+      ],
+      "rootSourceGate": [
+        "GENERIC_VOLUNTARY_DECLARATION_SCOPE"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "sourceClosedCounterfactualStatus": "NOT_ESTABLISHED; source closure does not supply remaining runtime, semantic or proof obligations",
+      "crossCardReuse": 1,
+      "priority": "P3",
+      "classification": "DOWNSTREAM_RUNTIME_BLOCKER_BEHIND_SOURCE_GATE"
+    },
+    {
+      "primitive": "TRINKET_EFFECT_CONSUMER_MISSING:modify-condition-duration",
+      "kind": "RUNTIME_PRIMITIVE",
+      "affectedCards": [
+        "community-trinket-core-bleed-charm",
+        "community-trinket-core-blight-charm",
+        "community-trinket-core-debuff-charm",
+        "community-trinket-core-stun-charm"
+      ],
+      "rootSourceGate": [
+        "HERO_CAUSED_CONDITION_ACTIVE_TIMING"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "sourceClosedCounterfactualStatus": "NOT_ESTABLISHED; source closure does not supply remaining runtime, semantic or proof obligations",
+      "crossCardReuse": 4,
+      "priority": "P3",
+      "classification": "DOWNSTREAM_RUNTIME_BLOCKER_BEHIND_SOURCE_GATE"
+    },
+    {
+      "primitive": "TRINKET_EFFECT_CONSUMER_MISSING:prevent-stress",
+      "kind": "RUNTIME_PRIMITIVE",
+      "affectedCards": [
+        "community-trinket-core-caution-cloak"
+      ],
+      "rootSourceGate": [
+        "GENERIC_VOLUNTARY_DECLARATION_SCOPE"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "sourceClosedCounterfactualStatus": "NOT_ESTABLISHED; source closure does not supply remaining runtime, semantic or proof obligations",
+      "crossCardReuse": 1,
+      "priority": "P3",
+      "classification": "DOWNSTREAM_RUNTIME_BLOCKER_BEHIND_SOURCE_GATE"
+    },
+    {
+      "primitive": "TRINKET_EFFECT_CONSUMER_MISSING:remove-all-condition-stacks",
+      "kind": "RUNTIME_PRIMITIVE",
+      "affectedCards": [
+        "community-trinket-core-cleansing-crystal"
+      ],
+      "rootSourceGate": [
+        "GENERIC_VOLUNTARY_DECLARATION_SCOPE"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "sourceClosedCounterfactualStatus": "NOT_ESTABLISHED; source closure does not supply remaining runtime, semantic or proof obligations",
+      "crossCardReuse": 1,
+      "priority": "P3",
+      "classification": "DOWNSTREAM_RUNTIME_BLOCKER_BEHIND_SOURCE_GATE"
+    },
+    {
+      "primitive": "TRINKET_EFFECT_CONSUMER_MISSING:suffer-damage",
+      "kind": "RUNTIME_PRIMITIVE",
+      "affectedCards": [
+        "community-trinket-core-book-of-sanity"
+      ],
+      "rootSourceGate": [
+        "GENERIC_VOLUNTARY_DECLARATION_SCOPE"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "sourceClosedCounterfactualStatus": "NOT_ESTABLISHED; source closure does not supply remaining runtime, semantic or proof obligations",
+      "crossCardReuse": 1,
+      "priority": "P3",
+      "classification": "DOWNSTREAM_RUNTIME_BLOCKER_BEHIND_SOURCE_GATE"
+    },
+    {
+      "primitive": "TRINKET_EFFECT_CONSUMER_MISSING:suffer-wounds",
+      "kind": "RUNTIME_PRIMITIVE",
+      "affectedCards": [
+        "community-trinket-core-damage-stone"
+      ],
+      "rootSourceGate": [
+        "SUFFER_WOUNDS_AND_HERO_TAKES_DAMAGE"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "sourceClosedCounterfactualStatus": "NOT_ESTABLISHED; source closure does not supply remaining runtime, semantic or proof obligations",
+      "crossCardReuse": 1,
+      "priority": "P3",
+      "classification": "DOWNSTREAM_RUNTIME_BLOCKER_BEHIND_SOURCE_GATE"
+    },
+    {
+      "primitive": "TRINKET_MODIFIER_CONSUMER_MISSING:dodge",
+      "kind": "RUNTIME_PRIMITIVE",
+      "affectedCards": [
+        "community-trinket-core-book-of-relaxation",
+        "community-trinket-core-fasting-seal",
+        "community-trinket-core-speed-stone"
+      ],
+      "rootSourceGate": [
+        "GENERIC_VOLUNTARY_DECLARATION_SCOPE"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "sourceClosedCounterfactualStatus": "NOT_ESTABLISHED; source closure does not supply remaining runtime, semantic or proof obligations",
+      "crossCardReuse": 3,
+      "priority": "P3",
+      "classification": "DOWNSTREAM_RUNTIME_BLOCKER_BEHIND_SOURCE_GATE"
+    },
+    {
+      "primitive": "TRINKET_MODIFIER_CONSUMER_MISSING:movement",
+      "kind": "RUNTIME_PRIMITIVE",
+      "affectedCards": [
+        "community-trinket-core-book-of-constitution",
+        "community-trinket-core-protective-padlock",
+        "community-trinket-core-speed-stone"
+      ],
+      "rootSourceGate": [
+        "GENERIC_VOLUNTARY_DECLARATION_SCOPE"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "sourceClosedCounterfactualStatus": "NOT_ESTABLISHED; source closure does not supply remaining runtime, semantic or proof obligations",
+      "crossCardReuse": 3,
+      "priority": "P3",
+      "classification": "DOWNSTREAM_RUNTIME_BLOCKER_BEHIND_SOURCE_GATE"
+    },
+    {
+      "primitive": "TRINKET_MODIFIER_CONSUMER_MISSING:virtue-chance",
+      "kind": "RUNTIME_PRIMITIVE",
+      "affectedCards": [
+        "community-trinket-core-dark-crown",
+        "community-trinket-core-solar-crown"
+      ],
+      "rootSourceGate": [
+        "GENERIC_VOLUNTARY_DECLARATION_SCOPE"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "sourceClosedCounterfactualStatus": "NOT_ESTABLISHED; source closure does not supply remaining runtime, semantic or proof obligations",
+      "crossCardReuse": 2,
+      "priority": "P3",
+      "classification": "DOWNSTREAM_RUNTIME_BLOCKER_BEHIND_SOURCE_GATE"
+    },
+    {
+      "primitive": "TRINKET_TRIGGER_WINDOW_MISSING:hero-causes-condition",
+      "kind": "RUNTIME_PRIMITIVE",
+      "affectedCards": [
+        "community-trinket-core-bleed-charm",
+        "community-trinket-core-blight-charm",
+        "community-trinket-core-debuff-charm",
+        "community-trinket-core-stun-charm"
+      ],
+      "rootSourceGate": [
+        "HERO_CAUSED_CONDITION_ACTIVE_TIMING"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "sourceClosedCounterfactualStatus": "NOT_ESTABLISHED; source closure does not supply remaining runtime, semantic or proof obligations",
+      "crossCardReuse": 4,
+      "priority": "P3",
+      "classification": "DOWNSTREAM_RUNTIME_BLOCKER_BEHIND_SOURCE_GATE"
+    },
+    {
+      "primitive": "TRINKET_TRIGGER_WINDOW_MISSING:hero-skill-hits",
+      "kind": "RUNTIME_PRIMITIVE",
+      "affectedCards": [
+        "community-trinket-core-bleed-charm",
+        "community-trinket-core-blight-charm",
+        "community-trinket-core-debuff-charm",
+        "community-trinket-core-stun-charm"
+      ],
+      "rootSourceGate": [
+        "HERO_CAUSED_CONDITION_ACTIVE_TIMING"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "sourceClosedCounterfactualStatus": "NOT_ESTABLISHED; source closure does not supply remaining runtime, semantic or proof obligations",
+      "crossCardReuse": 4,
+      "priority": "P3",
+      "classification": "DOWNSTREAM_RUNTIME_BLOCKER_BEHIND_SOURCE_GATE"
+    },
+    {
+      "primitive": "TRINKET_TRIGGER_WINDOW_MISSING:hero-takes-damage",
+      "kind": "RUNTIME_PRIMITIVE",
+      "affectedCards": [
+        "community-trinket-core-damage-stone"
+      ],
+      "rootSourceGate": [
+        "SUFFER_WOUNDS_AND_HERO_TAKES_DAMAGE"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "sourceClosedCounterfactualStatus": "NOT_ESTABLISHED; source closure does not supply remaining runtime, semantic or proof obligations",
+      "crossCardReuse": 1,
+      "priority": "P3",
+      "classification": "DOWNSTREAM_RUNTIME_BLOCKER_BEHIND_SOURCE_GATE"
+    },
+    {
+      "primitive": "TRINKET_TRIGGER_WINDOW_MISSING:resolve-test-result-determined",
+      "kind": "RUNTIME_PRIMITIVE",
+      "affectedCards": [
+        "community-trinket-core-dark-crown",
+        "community-trinket-core-solar-crown"
+      ],
+      "rootSourceGate": [
+        "GENERIC_VOLUNTARY_DECLARATION_SCOPE"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "sourceClosedCounterfactualStatus": "NOT_ESTABLISHED; source closure does not supply remaining runtime, semantic or proof obligations",
+      "crossCardReuse": 2,
+      "priority": "P3",
+      "classification": "DOWNSTREAM_RUNTIME_BLOCKER_BEHIND_SOURCE_GATE"
+    },
+    {
+      "primitive": "VOLUNTARY_DECLARATION_RUNTIME",
+      "kind": "RUNTIME_PRIMITIVE",
+      "affectedCards": [
+        "community-trinket-core-berserk-charm",
+        "community-trinket-core-bloodthirst-ring",
+        "community-trinket-core-book-of-constitution",
+        "community-trinket-core-book-of-holiness",
+        "community-trinket-core-book-of-relaxation",
+        "community-trinket-core-book-of-sanity",
+        "community-trinket-core-candle-of-life",
+        "community-trinket-core-caution-cloak",
+        "community-trinket-core-cleansing-crystal",
+        "community-trinket-core-dark-crown",
+        "community-trinket-core-fasting-seal",
+        "community-trinket-core-fortunate-armlet",
+        "community-trinket-core-protective-padlock",
+        "community-trinket-core-recovery-charm",
+        "community-trinket-core-solar-crown",
+        "community-trinket-core-speed-stone"
+      ],
+      "rootSourceGate": [
+        "GENERIC_VOLUNTARY_DECLARATION_SCOPE"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "sourceClosedCounterfactualStatus": "NOT_ESTABLISHED; source closure does not supply remaining runtime, semantic or proof obligations",
+      "crossCardReuse": 16,
+      "priority": "P3",
+      "classification": "DOWNSTREAM_RUNTIME_BLOCKER_BEHIND_SOURCE_GATE"
+    },
+    {
+      "primitive": "WHOLE_CARD_ADAPTER",
+      "kind": "RUNTIME_PRIMITIVE",
+      "affectedCards": [
+        "community-trinket-core-berserk-charm",
+        "community-trinket-core-bleed-charm",
+        "community-trinket-core-blight-charm",
+        "community-trinket-core-book-of-relaxation",
+        "community-trinket-core-book-of-sanity",
+        "community-trinket-core-candle-of-life",
+        "community-trinket-core-caution-cloak",
+        "community-trinket-core-cleansing-crystal",
+        "community-trinket-core-damage-stone",
+        "community-trinket-core-dark-crown",
+        "community-trinket-core-debuff-charm",
+        "community-trinket-core-fasting-seal",
+        "community-trinket-core-recovery-charm",
+        "community-trinket-core-solar-crown",
+        "community-trinket-core-speed-stone",
+        "community-trinket-core-stun-charm"
+      ],
+      "rootSourceGate": [
+        "GENERIC_VOLUNTARY_DECLARATION_SCOPE",
+        "HERO_CAUSED_CONDITION_ACTIVE_TIMING",
+        "SUFFER_WOUNDS_AND_HERO_TAKES_DAMAGE"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "sourceClosedCounterfactualStatus": "NOT_ESTABLISHED; source closure does not supply remaining runtime, semantic or proof obligations",
+      "crossCardReuse": 16,
+      "priority": "P3",
+      "classification": "DOWNSTREAM_RUNTIME_BLOCKER_BEHIND_SOURCE_GATE"
+    },
+    {
+      "primitive": "WHOLE_CARD_PROOF_SELECTOR_UI_E2E",
+      "kind": "RUNTIME_PRIMITIVE",
+      "affectedCards": [
+        "community-trinket-core-berserk-charm",
+        "community-trinket-core-bleed-charm",
+        "community-trinket-core-blight-charm",
+        "community-trinket-core-book-of-relaxation",
+        "community-trinket-core-book-of-sanity",
+        "community-trinket-core-candle-of-life",
+        "community-trinket-core-caution-cloak",
+        "community-trinket-core-cleansing-crystal",
+        "community-trinket-core-damage-stone",
+        "community-trinket-core-dark-crown",
+        "community-trinket-core-debuff-charm",
+        "community-trinket-core-fasting-seal",
+        "community-trinket-core-recovery-charm",
+        "community-trinket-core-solar-crown",
+        "community-trinket-core-speed-stone",
+        "community-trinket-core-stun-charm"
+      ],
+      "rootSourceGate": [
+        "GENERIC_VOLUNTARY_DECLARATION_SCOPE",
+        "HERO_CAUSED_CONDITION_ACTIVE_TIMING",
+        "SUFFER_WOUNDS_AND_HERO_TAKES_DAMAGE"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "sourceClosedCounterfactualStatus": "NOT_ESTABLISHED; source closure does not supply remaining runtime, semantic or proof obligations",
+      "crossCardReuse": 16,
+      "priority": "P3",
+      "classification": "DOWNSTREAM_RUNTIME_BLOCKER_BEHIND_SOURCE_GATE"
+    },
+    {
+      "primitive": "CAUTION_CLOAK_POSITIVE_SCOUT_PREVENT_STRESS",
+      "kind": "PARTIAL_SLICE",
+      "affectedCards": [
+        "community-trinket-core-caution-cloak"
+      ],
+      "rootSourceGate": [
+        "GENERIC_VOLUNTARY_DECLARATION_SCOPE"
+      ],
+      "implementableNow": null,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "sourceClosedCounterfactualStatus": "NOT_ESTABLISHED; whole-card semantics and production proofs still required",
+      "crossCardReuse": 1,
+      "priority": "P4",
+      "classification": "DEFERRED_PARTIAL_SLICE",
+      "note": "Scout source effect is recorded; full slice feasibility not proven here."
+    },
+    {
+      "primitive": "CROWN_NEGATIVE_RESOLVE_VIRTUE_CHANCE_MINUS_2",
+      "kind": "PARTIAL_SLICE",
+      "affectedCards": [
+        "community-trinket-core-dark-crown",
+        "community-trinket-core-solar-crown"
+      ],
+      "rootSourceGate": [
+        "GENERIC_VOLUNTARY_DECLARATION_SCOPE"
+      ],
+      "implementableNow": null,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "sourceClosedCounterfactualStatus": "NOT_ESTABLISHED; whole-card semantics and production proofs still required",
+      "crossCardReuse": 2,
+      "priority": "P4",
+      "classification": "DEFERRED_PARTIAL_SLICE",
+      "note": "May be independently source-safe in future; no new feasibility promotion in C1C20."
+    },
+    {
+      "primitive": "DAMAGE_STONE_POSITIVE_DAMAGE_PLUS_3",
+      "kind": "PARTIAL_SLICE",
+      "affectedCards": [
+        "community-trinket-core-damage-stone"
+      ],
+      "rootSourceGate": [
+        "SUFFER_WOUNDS_AND_HERO_TAKES_DAMAGE"
+      ],
+      "implementableNow": true,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "sourceClosedCounterfactualStatus": "NOT_ESTABLISHED; whole-card semantics and production proofs still required",
+      "crossCardReuse": 1,
+      "priority": "P4",
+      "classification": "DEFERRED_PARTIAL_SLICE",
+      "note": "C1C18 READY_FOR_IMPLEMENTATION positive preserved."
+    },
+    {
+      "primitive": "CONDITION_CHARM_POSITIVE_SKILL_TARGET",
+      "kind": "PARTIAL_SLICE",
+      "affectedCards": [
+        "community-trinket-core-bleed-charm",
+        "community-trinket-core-blight-charm",
+        "community-trinket-core-debuff-charm",
+        "community-trinket-core-stun-charm"
+      ],
+      "rootSourceGate": [
+        "HERO_CAUSED_CONDITION_ACTIVE_TIMING"
+      ],
+      "implementableNow": false,
+      "cardsPromotedIfImplementedAlone": [],
+      "cardsPromotedIfSourceGateClosed": [],
+      "sourceClosedCounterfactualStatus": "NOT_ESTABLISHED; whole-card semantics and production proofs still required",
+      "crossCardReuse": 4,
+      "priority": "P4",
+      "classification": "DEFERRED_PARTIAL_SLICE",
+      "note": "C1C19 exact Positive timing remains unresolved."
+    }
+  ],
+  "counterfactualPolicy": "Current gain is computed through upstream gate reachability. Source closure only reopens evaluation; no automatic promotions or invented future proof. Empty source-closed promotion lists mean none demonstrated, not forever impossible.",
+  "immediateRuntimeOnlyReadyGain": 0
+}

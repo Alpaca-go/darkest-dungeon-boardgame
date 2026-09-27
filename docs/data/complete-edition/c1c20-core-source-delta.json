@@ -1,0 +1,685 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-20",
+  "baselineHead": "78d2899c4b6a9ee7a5343e4ce2131dc4b0d8068d",
+  "baselineTree": "0c2f6a142155f22c92a781157efaf1f54712d562",
+  "scope": "Current locally available locked source set; no claim of exhaustive worldwide publication discovery",
+  "scanRoots": [
+    "docs/source",
+    "docs (PDF/FAQ/errata/clarification/reference candidates)",
+    "src/data/community-reference/trinkets",
+    "docs/data/complete-edition/trinkets",
+    "src/assets/community-reference/complete-edition/trinkets/core",
+    ".artifacts (source candidates)",
+    "COMPLETE_EDITION_TTS if supplied"
+  ],
+  "sourceDelta": "NONE",
+  "snapshot": [
+    {
+      "path": "docs/DD_EN_COREBOX_RULES.pdf",
+      "baselineSha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "currentSha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "baselineBinding": "FROZEN_SOURCE_INPUT_HASH",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "docs/data/complete-edition/c1a-asset-manifest.json",
+      "baselineSha256": "10e18db2e14c6b1c482a199a92313bb630f5f65871d20d37584b8f3b8d5edc80",
+      "currentSha256": "10e18db2e14c6b1c482a199a92313bb630f5f65871d20d37584b8f3b8d5edc80",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "docs/data/complete-edition/c1a-rulebook-evidence.json",
+      "baselineSha256": "40dabb9c9c0a5781062b3e59ef66806f86bdb78e0fba39a801a44346eba22fe6",
+      "currentSha256": "40dabb9c9c0a5781062b3e59ef66806f86bdb78e0fba39a801a44346eba22fe6",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "docs/data/complete-edition/c1a-source-review-lock.json",
+      "baselineSha256": "d8fa9c8418930897fa2d1f6ead02a095f1262e5ff5f4187d3ea7a39c3e38b142",
+      "currentSha256": "d8fa9c8418930897fa2d1f6ead02a095f1262e5ff5f4187d3ea7a39c3e38b142",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "docs/data/complete-edition/complete-edition-raw-inventory.json",
+      "baselineSha256": "f7bd06a7a726df301cefe26e10586c0fe3a870ceb92903d5190077cfaae66245",
+      "currentSha256": "f7bd06a7a726df301cefe26e10586c0fe3a870ceb92903d5190077cfaae66245",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "docs/data/complete-edition/trinkets/community-trinket-normalized.json",
+      "baselineSha256": "6c84ffb770a698ceb4a97bdf08559176f3482fd99cb2d4848fc8a1b87c1f170c",
+      "currentSha256": "6c84ffb770a698ceb4a97bdf08559176f3482fd99cb2d4848fc8a1b87c1f170c",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "docs/data/complete-edition/trinkets/community-trinket-source-evidence.json",
+      "baselineSha256": "1641b9a541d852fee1befebcde27fc4a2c365cd576a117ee0854529de953e2ad",
+      "currentSha256": "1641b9a541d852fee1befebcde27fc4a2c365cd576a117ee0854529de953e2ad",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "docs/data/complete-edition/trinkets/literal-observations.json",
+      "baselineSha256": "4080855eaad648fd83a62efbd11eb38835e861705ffc3f6e3eeb04c11f16635c",
+      "currentSha256": "4080855eaad648fd83a62efbd11eb38835e861705ffc3f6e3eeb04c11f16635c",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "docs/references/DD_EN_COREBOX_RULES.pdf",
+      "baselineSha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "currentSha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "baselineBinding": "FROZEN_SOURCE_INPUT_HASH",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "docs/source/darkest-dungeon-designer-faq/README.md",
+      "baselineSha256": "4c4a1e5eb97a30cc9e19cf47f620cba3ffd4ee00cbe825a37265820a6b83b04d",
+      "currentSha256": "4c4a1e5eb97a30cc9e19cf47f620cba3ffd4ee00cbe825a37265820a6b83b04d",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "docs/source/darkest-dungeon-designer-faq/source-provenance.json",
+      "baselineSha256": "0ea8332337fec2f6c2f4ad63aff592d193b34f325c5e5c09c24680b97039b2fd",
+      "currentSha256": "0ea8332337fec2f6c2f4ad63aff592d193b34f325c5e5c09c24680b97039b2fd",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-0.back.png",
+      "baselineSha256": "5a44b718ef8e6106ddfeca993a5b1d1e856f0ad335e82fbbbf48b617d17b92cb",
+      "currentSha256": "5a44b718ef8e6106ddfeca993a5b1d1e856f0ad335e82fbbbf48b617d17b92cb",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-0.front.png",
+      "baselineSha256": "4370503c40c04dc6341d61a3231b7d1a583377a39c02c2cf6bc179cc96d4af94",
+      "currentSha256": "4370503c40c04dc6341d61a3231b7d1a583377a39c02c2cf6bc179cc96d4af94",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-1.back.png",
+      "baselineSha256": "5a44b718ef8e6106ddfeca993a5b1d1e856f0ad335e82fbbbf48b617d17b92cb",
+      "currentSha256": "5a44b718ef8e6106ddfeca993a5b1d1e856f0ad335e82fbbbf48b617d17b92cb",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-1.front.png",
+      "baselineSha256": "743a58646c4bc4f4432e6d7093397c5e5b7aa5f5967891970ab9ddd2e6a27cbb",
+      "currentSha256": "743a58646c4bc4f4432e6d7093397c5e5b7aa5f5967891970ab9ddd2e6a27cbb",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-10.back.png",
+      "baselineSha256": "5a44b718ef8e6106ddfeca993a5b1d1e856f0ad335e82fbbbf48b617d17b92cb",
+      "currentSha256": "5a44b718ef8e6106ddfeca993a5b1d1e856f0ad335e82fbbbf48b617d17b92cb",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-10.front.png",
+      "baselineSha256": "bff46da4f7556c6090ec5be6ed5c6bea5edbac3d28977220cd647be4bd6edfaa",
+      "currentSha256": "bff46da4f7556c6090ec5be6ed5c6bea5edbac3d28977220cd647be4bd6edfaa",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-11.back.png",
+      "baselineSha256": "5a44b718ef8e6106ddfeca993a5b1d1e856f0ad335e82fbbbf48b617d17b92cb",
+      "currentSha256": "5a44b718ef8e6106ddfeca993a5b1d1e856f0ad335e82fbbbf48b617d17b92cb",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-11.front.png",
+      "baselineSha256": "a65ece093e349ee925c458d20cf5749640c76183eb31e2c77bfb520681069360",
+      "currentSha256": "a65ece093e349ee925c458d20cf5749640c76183eb31e2c77bfb520681069360",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-12.back.png",
+      "baselineSha256": "5a44b718ef8e6106ddfeca993a5b1d1e856f0ad335e82fbbbf48b617d17b92cb",
+      "currentSha256": "5a44b718ef8e6106ddfeca993a5b1d1e856f0ad335e82fbbbf48b617d17b92cb",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-12.front.png",
+      "baselineSha256": "47a4a1c2101552778b3982e8cd37a1cc7703cf26073fe86008de3053576944ab",
+      "currentSha256": "47a4a1c2101552778b3982e8cd37a1cc7703cf26073fe86008de3053576944ab",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-13.back.png",
+      "baselineSha256": "5a44b718ef8e6106ddfeca993a5b1d1e856f0ad335e82fbbbf48b617d17b92cb",
+      "currentSha256": "5a44b718ef8e6106ddfeca993a5b1d1e856f0ad335e82fbbbf48b617d17b92cb",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-13.front.png",
+      "baselineSha256": "f32317b44f7873f8396be760eaf77e9354c586797c95ba2786121b6eb01aac67",
+      "currentSha256": "f32317b44f7873f8396be760eaf77e9354c586797c95ba2786121b6eb01aac67",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-2.back.png",
+      "baselineSha256": "5a44b718ef8e6106ddfeca993a5b1d1e856f0ad335e82fbbbf48b617d17b92cb",
+      "currentSha256": "5a44b718ef8e6106ddfeca993a5b1d1e856f0ad335e82fbbbf48b617d17b92cb",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-2.front.png",
+      "baselineSha256": "35fcc4206eae6f233c1b6230b018a315a8713ac28a1ed862e37d0973c19fd93b",
+      "currentSha256": "35fcc4206eae6f233c1b6230b018a315a8713ac28a1ed862e37d0973c19fd93b",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-3.back.png",
+      "baselineSha256": "5a44b718ef8e6106ddfeca993a5b1d1e856f0ad335e82fbbbf48b617d17b92cb",
+      "currentSha256": "5a44b718ef8e6106ddfeca993a5b1d1e856f0ad335e82fbbbf48b617d17b92cb",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-3.front.png",
+      "baselineSha256": "7dd0aa580d00064ab98358abd03b1454215fd04b2030f5cbe19e4ec36793e865",
+      "currentSha256": "7dd0aa580d00064ab98358abd03b1454215fd04b2030f5cbe19e4ec36793e865",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-4.back.png",
+      "baselineSha256": "5a44b718ef8e6106ddfeca993a5b1d1e856f0ad335e82fbbbf48b617d17b92cb",
+      "currentSha256": "5a44b718ef8e6106ddfeca993a5b1d1e856f0ad335e82fbbbf48b617d17b92cb",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-4.front.png",
+      "baselineSha256": "2d2f4609911b9e75e874eeec4f682cabf4d1ee0f19ef29b503cc0cb5ac474c5a",
+      "currentSha256": "2d2f4609911b9e75e874eeec4f682cabf4d1ee0f19ef29b503cc0cb5ac474c5a",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-5.back.png",
+      "baselineSha256": "5a44b718ef8e6106ddfeca993a5b1d1e856f0ad335e82fbbbf48b617d17b92cb",
+      "currentSha256": "5a44b718ef8e6106ddfeca993a5b1d1e856f0ad335e82fbbbf48b617d17b92cb",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-5.front.png",
+      "baselineSha256": "1727d8fcbb15019d639d27e61e6ef1ea2b10bbee938906f43804e9612c2bd77d",
+      "currentSha256": "1727d8fcbb15019d639d27e61e6ef1ea2b10bbee938906f43804e9612c2bd77d",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-6.back.png",
+      "baselineSha256": "5a44b718ef8e6106ddfeca993a5b1d1e856f0ad335e82fbbbf48b617d17b92cb",
+      "currentSha256": "5a44b718ef8e6106ddfeca993a5b1d1e856f0ad335e82fbbbf48b617d17b92cb",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-6.front.png",
+      "baselineSha256": "41f3f9bb8852c83e5403a9f153a74305fbba9bb13a2b575271838763738a7c9b",
+      "currentSha256": "41f3f9bb8852c83e5403a9f153a74305fbba9bb13a2b575271838763738a7c9b",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-7.back.png",
+      "baselineSha256": "5a44b718ef8e6106ddfeca993a5b1d1e856f0ad335e82fbbbf48b617d17b92cb",
+      "currentSha256": "5a44b718ef8e6106ddfeca993a5b1d1e856f0ad335e82fbbbf48b617d17b92cb",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-7.front.png",
+      "baselineSha256": "2ddd3cd4c1c6e02ca5651ba2e1dd095c0a80dc4fca77ec1e98700457bda0279c",
+      "currentSha256": "2ddd3cd4c1c6e02ca5651ba2e1dd095c0a80dc4fca77ec1e98700457bda0279c",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-8.back.png",
+      "baselineSha256": "5a44b718ef8e6106ddfeca993a5b1d1e856f0ad335e82fbbbf48b617d17b92cb",
+      "currentSha256": "5a44b718ef8e6106ddfeca993a5b1d1e856f0ad335e82fbbbf48b617d17b92cb",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-8.front.png",
+      "baselineSha256": "b9fbb42b9784b852ccb455c1c15934a9b20b6d39fbbf5a7bb17c19993b18b65d",
+      "currentSha256": "b9fbb42b9784b852ccb455c1c15934a9b20b6d39fbbf5a7bb17c19993b18b65d",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-9.back.png",
+      "baselineSha256": "5a44b718ef8e6106ddfeca993a5b1d1e856f0ad335e82fbbbf48b617d17b92cb",
+      "currentSha256": "5a44b718ef8e6106ddfeca993a5b1d1e856f0ad335e82fbbbf48b617d17b92cb",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-9.front.png",
+      "baselineSha256": "9344325d0b0297776f7dc4781fc1ae13d8473c9e0794f04c83563b78f9c54347",
+      "currentSha256": "9344325d0b0297776f7dc4781fc1ae13d8473c9e0794f04c83563b78f9c54347",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-2/453-14.back.png",
+      "baselineSha256": "f184d3341bd61eb847ee9eed977419cc4c913f16aff9abaa4e67576baa0d4a98",
+      "currentSha256": "f184d3341bd61eb847ee9eed977419cc4c913f16aff9abaa4e67576baa0d4a98",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-2/453-14.front.png",
+      "baselineSha256": "23afca18abc381beb41588bae755771c6231f71eb0dd01fb396afeb4ac520e4e",
+      "currentSha256": "23afca18abc381beb41588bae755771c6231f71eb0dd01fb396afeb4ac520e4e",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-2/453-15.back.png",
+      "baselineSha256": "f184d3341bd61eb847ee9eed977419cc4c913f16aff9abaa4e67576baa0d4a98",
+      "currentSha256": "f184d3341bd61eb847ee9eed977419cc4c913f16aff9abaa4e67576baa0d4a98",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-2/453-15.front.png",
+      "baselineSha256": "143622e1459d3571d0beff7e581ac52afc28cb1c742d9b4133ce124e6bcd5c9f",
+      "currentSha256": "143622e1459d3571d0beff7e581ac52afc28cb1c742d9b4133ce124e6bcd5c9f",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-2/453-16.back.png",
+      "baselineSha256": "f184d3341bd61eb847ee9eed977419cc4c913f16aff9abaa4e67576baa0d4a98",
+      "currentSha256": "f184d3341bd61eb847ee9eed977419cc4c913f16aff9abaa4e67576baa0d4a98",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-2/453-16.front.png",
+      "baselineSha256": "1a599b0b7c2bb329a006f82a23cec5facef4f5bff0709d5d477a1e508884f188",
+      "currentSha256": "1a599b0b7c2bb329a006f82a23cec5facef4f5bff0709d5d477a1e508884f188",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-2/453-17.back.png",
+      "baselineSha256": "f184d3341bd61eb847ee9eed977419cc4c913f16aff9abaa4e67576baa0d4a98",
+      "currentSha256": "f184d3341bd61eb847ee9eed977419cc4c913f16aff9abaa4e67576baa0d4a98",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-2/453-17.front.png",
+      "baselineSha256": "8c31933bb91ed10dadf9929f995aba11632785dd30a592dde1ae1abcfc683d06",
+      "currentSha256": "8c31933bb91ed10dadf9929f995aba11632785dd30a592dde1ae1abcfc683d06",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-2/453-18.back.png",
+      "baselineSha256": "f184d3341bd61eb847ee9eed977419cc4c913f16aff9abaa4e67576baa0d4a98",
+      "currentSha256": "f184d3341bd61eb847ee9eed977419cc4c913f16aff9abaa4e67576baa0d4a98",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-2/453-18.front.png",
+      "baselineSha256": "5cb9b4999ff512e504ec203c992e6e9528dd56ee6e93dba3342fbc15bd11cc9e",
+      "currentSha256": "5cb9b4999ff512e504ec203c992e6e9528dd56ee6e93dba3342fbc15bd11cc9e",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-2/453-19.back.png",
+      "baselineSha256": "f184d3341bd61eb847ee9eed977419cc4c913f16aff9abaa4e67576baa0d4a98",
+      "currentSha256": "f184d3341bd61eb847ee9eed977419cc4c913f16aff9abaa4e67576baa0d4a98",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-2/453-19.front.png",
+      "baselineSha256": "8aaf81b25f8c9f78fb9f4722d907bca366af174547488e7f9078c540c8d752c2",
+      "currentSha256": "8aaf81b25f8c9f78fb9f4722d907bca366af174547488e7f9078c540c8d752c2",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-2/453-20.back.png",
+      "baselineSha256": "f184d3341bd61eb847ee9eed977419cc4c913f16aff9abaa4e67576baa0d4a98",
+      "currentSha256": "f184d3341bd61eb847ee9eed977419cc4c913f16aff9abaa4e67576baa0d4a98",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-2/453-20.front.png",
+      "baselineSha256": "d4dc427b2fbad1fe497e9038c45bb68646415965f0ece1fa1ee9a6999cecbdaf",
+      "currentSha256": "d4dc427b2fbad1fe497e9038c45bb68646415965f0ece1fa1ee9a6999cecbdaf",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-2/453-21.back.png",
+      "baselineSha256": "f184d3341bd61eb847ee9eed977419cc4c913f16aff9abaa4e67576baa0d4a98",
+      "currentSha256": "f184d3341bd61eb847ee9eed977419cc4c913f16aff9abaa4e67576baa0d4a98",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-2/453-21.front.png",
+      "baselineSha256": "e35826725d234752a4d36a68fa63d92b7dedef2409230b4d617635c04e6c9036",
+      "currentSha256": "e35826725d234752a4d36a68fa63d92b7dedef2409230b4d617635c04e6c9036",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-2/453-22.back.png",
+      "baselineSha256": "f184d3341bd61eb847ee9eed977419cc4c913f16aff9abaa4e67576baa0d4a98",
+      "currentSha256": "f184d3341bd61eb847ee9eed977419cc4c913f16aff9abaa4e67576baa0d4a98",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-2/453-22.front.png",
+      "baselineSha256": "c9fa20651793b39929b0856dd869adc8a1369384fb3b5915c6bc7e0f42bee987",
+      "currentSha256": "c9fa20651793b39929b0856dd869adc8a1369384fb3b5915c6bc7e0f42bee987",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-2/453-23.back.png",
+      "baselineSha256": "f184d3341bd61eb847ee9eed977419cc4c913f16aff9abaa4e67576baa0d4a98",
+      "currentSha256": "f184d3341bd61eb847ee9eed977419cc4c913f16aff9abaa4e67576baa0d4a98",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-2/453-23.front.png",
+      "baselineSha256": "056212194916d79c5d0930d4e19c55bc717418e383a7f2607e69fa9fbe0e1e0c",
+      "currentSha256": "056212194916d79c5d0930d4e19c55bc717418e383a7f2607e69fa9fbe0e1e0c",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-2/453-24.back.png",
+      "baselineSha256": "f184d3341bd61eb847ee9eed977419cc4c913f16aff9abaa4e67576baa0d4a98",
+      "currentSha256": "f184d3341bd61eb847ee9eed977419cc4c913f16aff9abaa4e67576baa0d4a98",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-2/453-24.front.png",
+      "baselineSha256": "d307e56861ecac3370721ad8f8fb5a67c3a1353e63106f053243734fc9c4b665",
+      "currentSha256": "d307e56861ecac3370721ad8f8fb5a67c3a1353e63106f053243734fc9c4b665",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-2/453-25.back.png",
+      "baselineSha256": "f184d3341bd61eb847ee9eed977419cc4c913f16aff9abaa4e67576baa0d4a98",
+      "currentSha256": "f184d3341bd61eb847ee9eed977419cc4c913f16aff9abaa4e67576baa0d4a98",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-2/453-25.front.png",
+      "baselineSha256": "61f9246a2ff578da07725c6e9e0de02a27a48a7712887cccc421bf3ec606e439",
+      "currentSha256": "61f9246a2ff578da07725c6e9e0de02a27a48a7712887cccc421bf3ec606e439",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-3/453-26.back.png",
+      "baselineSha256": "b865b25d311f92d96014c16b9eee83cb99331160e73f6ea3a5ff9158799a2111",
+      "currentSha256": "b865b25d311f92d96014c16b9eee83cb99331160e73f6ea3a5ff9158799a2111",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-3/453-26.front.png",
+      "baselineSha256": "a367bd73fa9f2baec12800c2fee26dae2b8b5de90a19e14869b8ee4b97e45436",
+      "currentSha256": "a367bd73fa9f2baec12800c2fee26dae2b8b5de90a19e14869b8ee4b97e45436",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-3/453-27.back.png",
+      "baselineSha256": "b865b25d311f92d96014c16b9eee83cb99331160e73f6ea3a5ff9158799a2111",
+      "currentSha256": "b865b25d311f92d96014c16b9eee83cb99331160e73f6ea3a5ff9158799a2111",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-3/453-27.front.png",
+      "baselineSha256": "98fa2e2a25e8078d7ab50925e020de414f47bc7bc43c1b9c5ede4006f4da7b4d",
+      "currentSha256": "98fa2e2a25e8078d7ab50925e020de414f47bc7bc43c1b9c5ede4006f4da7b4d",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-3/453-28.back.png",
+      "baselineSha256": "b865b25d311f92d96014c16b9eee83cb99331160e73f6ea3a5ff9158799a2111",
+      "currentSha256": "b865b25d311f92d96014c16b9eee83cb99331160e73f6ea3a5ff9158799a2111",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-3/453-28.front.png",
+      "baselineSha256": "b10a650dcb58401bf33a3f26cc11681c1f0d8b0e3041094269e378cb6d5da16d",
+      "currentSha256": "b10a650dcb58401bf33a3f26cc11681c1f0d8b0e3041094269e378cb6d5da16d",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-3/453-29.back.png",
+      "baselineSha256": "b865b25d311f92d96014c16b9eee83cb99331160e73f6ea3a5ff9158799a2111",
+      "currentSha256": "b865b25d311f92d96014c16b9eee83cb99331160e73f6ea3a5ff9158799a2111",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-3/453-29.front.png",
+      "baselineSha256": "9b9ef1e37be30e3c697678a9b85abd8518b92d1e65007b63d64cd27a60bcb957",
+      "currentSha256": "9b9ef1e37be30e3c697678a9b85abd8518b92d1e65007b63d64cd27a60bcb957",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-3/453-30.back.png",
+      "baselineSha256": "b865b25d311f92d96014c16b9eee83cb99331160e73f6ea3a5ff9158799a2111",
+      "currentSha256": "b865b25d311f92d96014c16b9eee83cb99331160e73f6ea3a5ff9158799a2111",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-3/453-30.front.png",
+      "baselineSha256": "cbe8958a6fda091adbcfa32face3c0400d976eb6ce353080c64335e32a66d2c3",
+      "currentSha256": "cbe8958a6fda091adbcfa32face3c0400d976eb6ce353080c64335e32a66d2c3",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-3/453-31.back.png",
+      "baselineSha256": "b865b25d311f92d96014c16b9eee83cb99331160e73f6ea3a5ff9158799a2111",
+      "currentSha256": "b865b25d311f92d96014c16b9eee83cb99331160e73f6ea3a5ff9158799a2111",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-3/453-31.front.png",
+      "baselineSha256": "795d3fdabe2dcbe978064a0db6952e8c95a1dafb361a6118fe04ef8f06862180",
+      "currentSha256": "795d3fdabe2dcbe978064a0db6952e8c95a1dafb361a6118fe04ef8f06862180",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-3/453-32.back.png",
+      "baselineSha256": "b865b25d311f92d96014c16b9eee83cb99331160e73f6ea3a5ff9158799a2111",
+      "currentSha256": "b865b25d311f92d96014c16b9eee83cb99331160e73f6ea3a5ff9158799a2111",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-3/453-32.front.png",
+      "baselineSha256": "b6cd3cb4d2355381d36692e31be42121cfd6e0e86f401e6a5a9a1907dfc051c1",
+      "currentSha256": "b6cd3cb4d2355381d36692e31be42121cfd6e0e86f401e6a5a9a1907dfc051c1",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-3/453-33.back.png",
+      "baselineSha256": "b865b25d311f92d96014c16b9eee83cb99331160e73f6ea3a5ff9158799a2111",
+      "currentSha256": "b865b25d311f92d96014c16b9eee83cb99331160e73f6ea3a5ff9158799a2111",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-3/453-33.front.png",
+      "baselineSha256": "d6d1c24ae7a973fb97164f72d7cb7ec519c0295e7c6ca692b5e8bdaa52203113",
+      "currentSha256": "d6d1c24ae7a973fb97164f72d7cb7ec519c0295e7c6ca692b5e8bdaa52203113",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-3/453-34.back.png",
+      "baselineSha256": "b865b25d311f92d96014c16b9eee83cb99331160e73f6ea3a5ff9158799a2111",
+      "currentSha256": "b865b25d311f92d96014c16b9eee83cb99331160e73f6ea3a5ff9158799a2111",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-3/453-34.front.png",
+      "baselineSha256": "163eba672dd70456c55546353617b77e293785a6fa4efd35bed77c391724d1a5",
+      "currentSha256": "163eba672dd70456c55546353617b77e293785a6fa4efd35bed77c391724d1a5",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-3/453-35.back.png",
+      "baselineSha256": "b865b25d311f92d96014c16b9eee83cb99331160e73f6ea3a5ff9158799a2111",
+      "currentSha256": "b865b25d311f92d96014c16b9eee83cb99331160e73f6ea3a5ff9158799a2111",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-3/453-35.front.png",
+      "baselineSha256": "179185549a393e9026d213d84a2612b261697dafdd9fcae6bb7aedfcbd4fb7e0",
+      "currentSha256": "179185549a393e9026d213d84a2612b261697dafdd9fcae6bb7aedfcbd4fb7e0",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-3/453-36.back.png",
+      "baselineSha256": "b865b25d311f92d96014c16b9eee83cb99331160e73f6ea3a5ff9158799a2111",
+      "currentSha256": "b865b25d311f92d96014c16b9eee83cb99331160e73f6ea3a5ff9158799a2111",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-3/453-36.front.png",
+      "baselineSha256": "4a618a5a2526e52f134d763a09a31fa4a8a4a9706a7d14c798d19606f6880643",
+      "currentSha256": "4a618a5a2526e52f134d763a09a31fa4a8a4a9706a7d14c798d19606f6880643",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-3/453-37.back.png",
+      "baselineSha256": "b865b25d311f92d96014c16b9eee83cb99331160e73f6ea3a5ff9158799a2111",
+      "currentSha256": "b865b25d311f92d96014c16b9eee83cb99331160e73f6ea3a5ff9158799a2111",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/assets/community-reference/complete-edition/trinkets/core/level-3/453-37.front.png",
+      "baselineSha256": "869dc482cb79c7a00b3e197a8038e124bbf49577d88ca3020ec92a036486a989",
+      "currentSha256": "869dc482cb79c7a00b3e197a8038e124bbf49577d88ca3020ec92a036486a989",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/data/community-reference/trinkets/data.json",
+      "baselineSha256": "06b9bd40238411d35cce811346b08366a12530273dedfe09d8e714c1aef104fc",
+      "currentSha256": "06b9bd40238411d35cce811346b08366a12530273dedfe09d8e714c1aef104fc",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    },
+    {
+      "path": "src/data/community-reference/trinkets/index.ts",
+      "baselineSha256": "dd3e1eca9699320585e45fad5993b8884dd019835a136c0ae722f69ce9be129a",
+      "currentSha256": "dd3e1eca9699320585e45fad5993b8884dd019835a136c0ae722f69ce9be129a",
+      "baselineBinding": "C1C19_GIT_BLOB",
+      "change": "UNCHANGED"
+    }
+  ],
+  "changedCandidates": [],
+  "originalInputs": [
+    {
+      "name": "3657612854.json",
+      "sha256": "d2fe21a6aa294f80fb47e56677c3a74090c3dc131361d798dfde709f6a3a64a2",
+      "role": "S1-primary",
+      "locallyComparedPaths": [],
+      "binding": "FROZEN_NORMALIZED_EXTRACTION_ONLY; raw original not reacquired"
+    },
+    {
+      "name": "Phase11A3_CompleteEdition_Source_Intake_Package.json",
+      "role": "S2-intake",
+      "sha256": "382e479f84f79a9b3cc6b0256b2fa5dea100b3576244988f180b49e75ed78d2a",
+      "locallyComparedPaths": [],
+      "binding": "FROZEN_NORMALIZED_EXTRACTION_ONLY; raw original not reacquired"
+    },
+    {
+      "name": "Phase11A3_CompleteEdition_Source_Extraction_Audit_Report.md",
+      "role": "S3-extraction-audit",
+      "sha256": "53bde7d1e181fbc536ae81de0113c800f94a34bf7292572adf5ff5129bfa9cbb",
+      "locallyComparedPaths": [],
+      "binding": "FROZEN_NORMALIZED_EXTRACTION_ONLY; raw original not reacquired"
+    },
+    {
+      "name": "DD_EN_COREBOX_RULES.pdf",
+      "role": "S4-rulebook",
+      "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "locallyComparedPaths": [
+        "docs/DD_EN_COREBOX_RULES.pdf",
+        "docs/references/DD_EN_COREBOX_RULES.pdf"
+      ],
+      "binding": "CURRENT_BYTES_COMPARED"
+    }
+  ],
+  "faqAcquisitionStatus": "LOCATED_ACCESS_UNAVAILABLE",
+  "faqBinaryAvailable": false,
+  "newRulebook": false,
+  "newFaq": false,
+  "newErrata": false,
+  "newReferenceCard": false,
+  "newTtsRuleObject": false,
+  "newOfficialClarification": false,
+  "decision": "INHERIT_FROZEN_CONTRACTS_WITHOUT_REINTERPRETATION"
+}
