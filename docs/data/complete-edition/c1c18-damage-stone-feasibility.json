@@ -1,0 +1,502 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-18",
+  "baselineHead": "d7bd56c65db32ef0cb8aa2a2c365c27f1df95b18",
+  "implementationAnchor": "e7f4b4a94940ebc714301912a93f7fc9a173fd93",
+  "implementationTree": "041f20ad33911f73e68eee6d5799a9d0ac733ff9",
+  "definitionId": "community-trinket-core-damage-stone",
+  "positiveFeasibility": "READY_FOR_IMPLEMENTATION",
+  "positive": {
+    "trigger": "hero-skill-resolution",
+    "target": "skill",
+    "modifier": {
+      "stat": "damage",
+      "amount": 3
+    },
+    "runtimeWindow": "after-attack-roll-before-hit-resolution",
+    "semanticBinding": {
+      "trigger": "hero-skill-resolution",
+      "target": "skill"
+    },
+    "primitive": "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW",
+    "consumer": "PendingBattleAction.damageBonus -> getPendingTrinketBonuses -> battle rawDamage",
+    "evidence": [
+      "src/audit/trinket-semantic-coverage.ts:139",
+      "src/game-engine/trinkets/battle-trinket-bridge.ts:286",
+      "src/game-engine/trinkets/battle-trinket-bridge.ts:189",
+      "src/game-engine/battle.ts:655"
+    ],
+    "implementationStatus": "NOT_IMPLEMENTED"
+  },
+  "negative": {
+    "semantics": "SOURCE_SEMANTICS_UNRESOLVED",
+    "triggerScopeStatus": "SOURCE_UNRESOLVED",
+    "runtimeScopeStatus": "RUNTIME_SCOPE_PARTIAL",
+    "retainedBlockers": [
+      "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_SUFFER_WOUNDS",
+      "TRINKET_TRIGGER_WINDOW_MISSING:hero-takes-damage",
+      "SOURCE_TIMING_UNRESOLVED"
+    ]
+  },
+  "productionReady": false,
+  "terminalVerdict": "C1C18-DAMAGE-STONE-WOUND-CONTRACT-SOURCE-EXHAUSTED-STILL-UNRESOLVED",
+  "historicalEvidenceHashes": {
+    "docs/data/complete-edition/c1a-asset-manifest.json": "10e18db2e14c6b1c482a199a92313bb630f5f65871d20d37584b8f3b8d5edc80",
+    "docs/data/complete-edition/c1a-literal-review.json": "d44f1a72423be67d544cc211bd58fb1d29880746e28d5fed62a96296585c9105",
+    "docs/data/complete-edition/c1a-logical-identities.json": "8cb5bbb3f0b3bd4351b07e470fa8f5c7e52eaa13c3aec632e7211b1ae6f2c80d",
+    "docs/data/complete-edition/c1a-rulebook-evidence.json": "40dabb9c9c0a5781062b3e59ef66806f86bdb78e0fba39a801a44346eba22fe6",
+    "docs/data/complete-edition/c1a-source-review-lock.json": "d8fa9c8418930897fa2d1f6ead02a095f1262e5ff5f4187d3ea7a39c3e38b142",
+    "docs/data/complete-edition/c1ar-semantic-review-lock.json": "6c78a350d67bfbbb9849a2aa5ad75bc0500601acbf59debcc7162c4db3a7f101",
+    "docs/data/complete-edition/c1b-production-integration-evidence.json": "041b977c0752fd7654abb276c259082a1e3ee5976b4cf5f4829836756cb5165a",
+    "docs/data/complete-edition/c1b-runtime-capability-matrix.json": "3bf842f747ed60a710a77dce498c10471fd2b426754d301cad86e526b9e2ca44",
+    "docs/data/complete-edition/c1b-runtime-primitive-backlog.json": "463a4b7969959a61844b148bc1f12b16188c2a5fa2ddd82af1c67b951a49c53b",
+    "docs/data/complete-edition/c1br-production-acceptance-evidence.json": "be6326b702a327b4256dea7bcb605f30b43e06162d7d663b315edea259b7287d",
+    "docs/data/complete-edition/c1br-production-capability-matrix.json": "197af8098a29d957b3dfea647a40f5cfc53685d409808584c20cd00713e2deb5",
+    "docs/data/complete-edition/c1br2-machine-verifiable-production-proof-evidence.json": "f61c6aa4c37eb5006053df32f1cc15afc4c01dbdc99938630c0f635d5dc6a3af",
+    "docs/data/complete-edition/c1c1-core-quest-foundation-evidence.json": "481d8d9cff8393d69f2647de1b389bc34ddcb3d44d5b4825fe767b54b537327d",
+    "docs/data/complete-edition/c1c1-runtime-capability-baseline.json": "5500d813e5ac8f642a07f1f2b48b14d4fca11e5c7c958eb93f226499aa93a83b",
+    "docs/data/complete-edition/c1c1-runtime-capability-matrix.json": "882b96eb1d13601d7302345acfd036cf40765e8a64a39e747483c05a1e4e24c6",
+    "docs/data/complete-edition/c1c1-runtime-primitive-backlog.json": "3ef3095a14857c384febb16a9a3ca60a5a97bd64ae0f29442521247d3bbc77c1",
+    "docs/data/complete-edition/c1c10-campers-helmet-contract.json": "0ec5fef33d0be3d463daac15400a3da1a7f36658b74e8e3acf287b7da6c44a58",
+    "docs/data/complete-edition/c1c10-campers-helmet-runtime-evidence.json": "cc3f6a12c0ddba9323bccf2fb57909b9248035c859d10d9849c135c4ce02c9ab",
+    "docs/data/complete-edition/c1c10-level2-trinket-capability-matrix.json": "3ba8d5ce07f7ae46345b0a746a3ada2dbd62270e8e2c1a7281c5d4017a671e49",
+    "docs/data/complete-edition/c1c11-bloodthirst-ring-contract.json": "83defc609a926570952e4e2a0fb2297a76c9c7f8607d7c305cf4fb376aecd2cd",
+    "docs/data/complete-edition/c1c11-bloodthirst-ring-runtime-evidence.json": "29953d3ec3587d427a62981803c99121456ec0b936106d217f28ac8b3e277aa6",
+    "docs/data/complete-edition/c1c11-level2-trinket-capability-matrix.json": "8e2130630eefb1589f69510f8cbd7ff945148ec2f581df10d1920e79289a8d8c",
+    "docs/data/complete-edition/c1c12-book-constitution-contract.json": "dd10c5a075ce50ad1764d1b0214d49407b1007e32a2a94491115f4fb36fc0d24",
+    "docs/data/complete-edition/c1c12-book-constitution-runtime-evidence.json": "c41001531d513d66044aa40ef4895c9496dca7003686b9de531cb39e63e8d703",
+    "docs/data/complete-edition/c1c12-disease-acquisition-runtime-surface.json": "f7cd37f09f3f53acecd6ab9c237428649f7d6cfb5791616f78b09cf5e6768af4",
+    "docs/data/complete-edition/c1c12-level2-trinket-capability-matrix.json": "11bee92aef5e2a1f0fb0d3418363cfde43b1f7f802284a7d08e9c44946f6c457",
+    "docs/data/complete-edition/c1c13-book-holiness-critical-contract.json": "1a5bb96a3cc0e23afd7b559a3d596eeff0bd5c822a55bd7887f132d49174f245",
+    "docs/data/complete-edition/c1c13-book-holiness-runtime-evidence.json": "86b68fa2f170f1a6224285fd153b46bd169c0d9e51f8be867cec438a2ea928ef",
+    "docs/data/complete-edition/c1c13-level2-trinket-capability-matrix.json": "9539284bcb8b3223734a7e881046b9dc3c52f4b61c18e5ea202144b63bc85266",
+    "docs/data/complete-edition/c1c14-healing-runtime-surface.json": "0056f2268155158b053a1de4bb17bd014d11a162ef62babac8859c28cb146efb",
+    "docs/data/complete-edition/c1c14-level2-runtime-opportunity-matrix.json": "7b4bb7c6cd6a5be3c2bdf1b76f11f9e9fa3de9109a15f86af2f6e1538e5ff824",
+    "docs/data/complete-edition/c1c14-level2-source-gap-register.json": "3bfe48ad0581272a6777f5f734753d9841d657fbf0b02b4b2a2a64f5c26e35b8",
+    "docs/data/complete-edition/c1c14-level2-terminal-blocker-register.json": "b332c3f180e782634f2c388ecc67666003e9c235229c3924dc00b3b62fe89bc6",
+    "docs/data/complete-edition/c1c14-level2-trinket-capability-matrix.json": "7b39d0e386b790b28d3c0302363e00aae7ed8078bd0b5909edae9dfb927401e5",
+    "docs/data/complete-edition/c1c14-source-delta.json": "177612b86ec48102c99552dc819a7ce8e49c6ace0051e57319d481a11c5109b0",
+    "docs/data/complete-edition/c1c14-source-gap-freeze.json": "4569e0b35dbda2d7c7d7988228f00ad3dcd20a49203567db594733268140809a",
+    "docs/data/complete-edition/c1c15-level3-runtime-capability-matrix.json": "f7596a960d273e2956af6fab7cce2847f49ff84ab8d3161ebe9d4495cf2cb468",
+    "docs/data/complete-edition/c1c15-level3-runtime-evidence.json": "77e6210d9f96a18af379badeaefadca7b2ab561b25b55e5dfa1f71064d847812",
+    "docs/data/complete-edition/c1c15-level3-source-census.json": "d698c62b1a59bf3a14233e5efb725d7da6b64ecfecef4320d4d654305c3ea0b2",
+    "docs/data/complete-edition/c1c15-level3-stance-ring-contract.json": "4a103d1cd7676b0aa451fc51bf28e3f97969562caacc8528e62f98fb915e4c2f",
+    "docs/data/complete-edition/c1c15-level3-trinket-capability-matrix.json": "f7596a960d273e2956af6fab7cce2847f49ff84ab8d3161ebe9d4495cf2cb468",
+    "docs/data/complete-edition/c1c15-level3-trinket-deck-coverage.json": "b3e2721121daa4c05a98b22f52012546c27e5f525462469df2f457e5cc39fad5",
+    "docs/data/complete-edition/c1c16-level1-runtime-evidence.json": "6b1a1dddc66223c9f7b48af27a8360f3ce86e7f7663ebc3ff42e366af039370e",
+    "docs/data/complete-edition/c1c16-level1-source-census.json": "3b0b2bab08e6da1babff8ec73aada428885c68fc1dbcfd45213bbb5d20aebdfa",
+    "docs/data/complete-edition/c1c16-level1-stance-accuracy-contract.json": "500dec1ff31aca6e597a9ceb02cfd591739b1ae4580cdd342886d66c27f7c6b3",
+    "docs/data/complete-edition/c1c16-level1-trinket-capability-matrix.json": "6224079e2a9dd7051ed0d606285ef5365a911016a7f5c9e171fad334218e6897",
+    "docs/data/complete-edition/c1c16-level1-trinket-deck-coverage.json": "f22f962e76d43b7b10488d2bd1ea4ff7e63dd4320353b430553e001711a66850",
+    "docs/data/complete-edition/c1c17-exploration-runtime-surface.json": "bf84ae78305606fee759b9f0c57e302185374b717a1fb705afbea98df3c55a00",
+    "docs/data/complete-edition/c1c17-level1-trinket-capability-matrix.json": "83444c28e33d12583147d3b5679cb12866f800ab81a5573fed47b01640256271",
+    "docs/data/complete-edition/c1c17-level1-trinket-deck-coverage.json": "f189380d33ca59a316cbe7e4e09fc421baf34808bf54ad5bb229a385997bad1e",
+    "docs/data/complete-edition/c1c17-survival-guide-contract.json": "425996aa5de9d08f5d370653a6ffa3efaac5e6beaf9ade0028a67ed75112e943",
+    "docs/data/complete-edition/c1c17-survival-guide-runtime-evidence.json": "ec666a7423f6ae056e40699204030b0b52f5aff9985c6253cfc3c0aac386a3ce",
+    "docs/data/complete-edition/c1c1r-firewood-real-quest-flow-evidence.json": "c36797c20252876fccd7d5a970ef0e288620ff91cb4f3c11d5ff89fccaede1da",
+    "docs/data/complete-edition/c1c1r-runtime-capability-matrix.json": "3e8154bfd8c48f342fa5c2256564c4f6e5f6e9ca7665045c409b3ab745b039b8",
+    "docs/data/complete-edition/c1c1r-runtime-primitive-backlog.json": "7de02ffc3518f073a70d022cc02f84d3bf546ce6dab825cce6427b7b3ff47e6e",
+    "docs/data/complete-edition/c1c1r2-rest-rule-evidence.json": "a982b54f6f05020615f3fb9e5ad58baad9d4290b150322b661fea3921721982e",
+    "docs/data/complete-edition/c1c1r2-source-backed-rest-allocation-evidence.json": "1f7776c0b0174c846157cf9f4aca56dcb36e4f7f0b8957f4cace81b3410d52f6",
+    "docs/data/complete-edition/c1c1r3-rest-budget-rule-evidence.json": "fcb40c84d2950b42fa304b435d609f86cadf11a0cf161f5d430c4047125198da",
+    "docs/data/complete-edition/c1c1r3-rest-budget-semantic-closure-evidence.json": "42c0c1ee343ff2fd43e0b9ec3c492d9d1d960db4cb2f49ef11e3f47724d38248",
+    "docs/data/complete-edition/c1c2-quest-runtime-expansion-evidence.json": "7f45977ed958597e5e9c20547e0c9ded0a394861ca37ab91acb65c01600ed09f",
+    "docs/data/complete-edition/c1c2-runtime-capability-matrix.json": "4e9c6b608ad6fb0e4e5289335b748c34a0213f70a933b48798b7572b78bdf33d",
+    "docs/data/complete-edition/c1c2-runtime-primitive-backlog.json": "ded89935401de3781c85cab7eac57894d0551f09532bd98d35ad8d003cc3f765",
+    "docs/data/complete-edition/c1c3-multi-primitive-quest-rule-closure-evidence.json": "15292fa0a3533576b33b8792928c0edfe53a00d9098a39ceb53df0772999fecb",
+    "docs/data/complete-edition/c1c3-runtime-capability-matrix.json": "0a775ffdc55690c199d84a1dc6d292460957824bad7b911ee28e59838078a8e8",
+    "docs/data/complete-edition/c1c3-runtime-primitive-backlog.json": "aa18db19969381d712ff780b4ff3e3f7655aa4d6b96d2cd685ccce9baef5b825",
+    "docs/data/complete-edition/c1c3r-quest-semantic-coverage.json": "80afe64f2a464d86163f0507deaf7d57bbdccf1182106886fe381417ff3cd630",
+    "docs/data/complete-edition/c1c3r-runtime-capability-matrix.json": "59c7c445411af4ccf3a41191670f706385defdf085ade0e756618dfb19bacca2",
+    "docs/data/complete-edition/c1c3r-semantic-fidelity-repair-evidence.json": "767abe84c2d356caeb3d18ae9d6af45ef49d5e29bf2dfcfe949b4f14a9adcd3d",
+    "docs/data/complete-edition/c1c4-quest-semantic-coverage.json": "f240a9cb38ae29d9e04f1bde27f631d5cb76d2613f5ece72cf55ea540e422c2b",
+    "docs/data/complete-edition/c1c4-rest-semantic-source-closure-evidence.json": "71e81c6536c40e553bd8937d0cf1000c31b49dbaf53865e3d3f1c535379ded55",
+    "docs/data/complete-edition/c1c4-rest-source-exhaustion-evidence.json": "4962df450d2a125178d361c643028eb06daaa106cfb91910539bc465c25a0704",
+    "docs/data/complete-edition/c1c4-rest-source-question-matrix.json": "7eae9d6577efaa3d604f68f131d53df17d63eaa8b2d2aa7a018d0f9b1268cec0",
+    "docs/data/complete-edition/c1c4-runtime-capability-matrix.json": "0e8355b364af0e98f2f56e0e231aa4669c03b9c62e2889752fca982383360f46",
+    "docs/data/complete-edition/c1c5-level2-trinket-capability-matrix.json": "83b9ec1b8d4ca164b4612740ab60e8a0d057d8bf344158837f893b11d2dc3c4b",
+    "docs/data/complete-edition/c1c5-level2-trinket-runtime-foundation-evidence.json": "5d43c0753feeff6cb4ff3e5412930a65de3dd290ce57c27075b6e54bee04e057",
+    "docs/data/complete-edition/c1c5-trinket-deck-coverage.json": "abf49c7f4f0a452b01bd197584e70bf016c530a7a1ab9b42f9f27baeaadefaf3",
+    "docs/data/complete-edition/c1c5r-chirurgeons-trigger-scope.json": "5ef5ed668d658ef9d4a7d6f89c6ffabe88d3f8104b259dbb169eb703e979b365",
+    "docs/data/complete-edition/c1c5r-level2-trinket-capability-matrix.json": "4a699d7accfa4b8e105251944e920bb38ce1ab00b841d71d2fe8e1cfe78d6471",
+    "docs/data/complete-edition/c1c5r-trinket-deck-coverage.json": "2a417b9cf9e628a2c4919bcc82b579ef50c94aa238f51e65a3403830c49b76f8",
+    "docs/data/complete-edition/c1c5r-trinket-semantic-scope-repair-evidence.json": "7dff52be732c2f6c75c2c2ed7ed3980b130c8d84e72ab676f380fb6aa3d47bfb",
+    "docs/data/complete-edition/c1c5r2-level2-trinket-capability-matrix.json": "666f4098deae29df4e575ed7d9f3d27bece991c5271c3330875870821f7d59e1",
+    "docs/data/complete-edition/c1c5r2-trinket-semantic-payload-hardening-evidence.json": "16a8f29bee900d1887f549e47bef053453f55777578172953b6404ead4dbc93b",
+    "docs/data/complete-edition/c1c6-dark-solar-attack-resolution-evidence.json": "41b3c37c3552037374da42f489dced2f52f199b0223cb90ce2f143d5f4cfe4d8",
+    "docs/data/complete-edition/c1c6-level2-trinket-capability-matrix.json": "20416e3c5caf85bfe2fd49d32016880d092db9b3ec288f1487542a4598a8c6c4",
+    "docs/data/complete-edition/c1c7-level2-trinket-capability-matrix.json": "339162f369186480c73fece541f4ece864511e29fb1ded29daf551a74aba1e94",
+    "docs/data/complete-edition/c1c7-voluntary-declaration-fortunate-evidence.json": "54e82eb627fbfe49a1fdd294d4cdda5a1dc5a85edbd30b7e51ea41dda2b32192",
+    "docs/data/complete-edition/c1c7-voluntary-declaration-timing-contract.json": "98d861e235519b7c7e38a33a9bcdce32af9ebae97b9c190e943f05cdbab3732c",
+    "docs/data/complete-edition/c1c8-incoming-attack-runtime-evidence.json": "a4226d33db2c08371a7918fd513da6545564d4ae13911babfef22e9d6d312965",
+    "docs/data/complete-edition/c1c8-incoming-attack-timing-contract.json": "c84b7536c8c8934b9d7e976eb7d0095504ff8ea4b6f72f50a5899d49fc835599",
+    "docs/data/complete-edition/c1c8-level2-trinket-capability-matrix.json": "9951c5b13a4150a31862d173da7c2a796ba107269945808025aa6d902fdbe583",
+    "docs/data/complete-edition/c1c9-condition-duration-contract.json": "de6269cf7d017023dd87bfebd18e7bc003f47b88d16d6a5583b760731c160825",
+    "docs/data/complete-edition/c1c9-condition-runtime-evidence.json": "d99357acc0a882df91db8203c3332c20275812b2ba3fc0144fb5a397d92770e9",
+    "docs/data/complete-edition/c1c9-level2-trinket-capability-matrix.json": "08290138b27a0682ec08e87e71240582b46d2f2c5627b92c42171aee514bd4fe",
+    "docs/data/complete-edition/complete-edition-content-coverage.json": "e8b5b060aae09c69c20c4bd6a08215bc2442a84f2ade280ba8f57f973d88caea",
+    "docs/data/complete-edition/complete-edition-raw-inventory.json": "f7bd06a7a726df301cefe26e10586c0fe3a870ceb92903d5190077cfaae66245",
+    "docs/data/complete-edition/complete-edition-visual-classification.json": "c81e94ba95bfac7c8665487133f65f01332d5773660e64e79b614df6cc8e9ec3",
+    "docs/data/complete-edition/quests/community-quest-normalized.json": "4132eb9809c1049890b100c9cc6be11c1393da32fef4c17ac3016d5fc729a0d6",
+    "docs/data/complete-edition/quests/community-quest-source-evidence.json": "1527d21b53a9ed7d32f858aff62b48cddb35f3f7bd6bff89c376e8e6c03b7ea5",
+    "docs/data/complete-edition/quests/literal-observations-445.json": "30410224686684e9ab4f602484a76aa60ee995ce6283a8ecbd2cde223dd93206",
+    "docs/data/complete-edition/quests/literal-observations-court.json": "85f381e7f11907a78688a13d062d8f2a4b409397c600b334a83cb8fbe04908b3",
+    "docs/data/complete-edition/quests/literal-observations-cove.json": "619cda2fcfc199df478e304d46566cc63e3b4619914849d61354ed5a488f2f99",
+    "docs/data/complete-edition/quests/literal-observations-warrens.json": "09b5e5f4b49ced31205e7c4167790d9941d60823b33022b268aa4c7bbd4c297b",
+    "docs/data/complete-edition/quests/literal-observations-weald.json": "18b3e1a24169d755a5e2988c868ffebc3f02af62ecc24898633ec60954aa6ad8",
+    "docs/data/complete-edition/rest-semantic-contract.json": "0ba21e8a7e1c737c901e2c0838a07f08bd7e6f62306392ae8363faf351b58593",
+    "docs/data/complete-edition/trinkets/community-trinket-normalized.json": "6c84ffb770a698ceb4a97bdf08559176f3482fd99cb2d4848fc8a1b87c1f170c",
+    "docs/data/complete-edition/trinkets/community-trinket-source-evidence.json": "1641b9a541d852fee1befebcde27fc4a2c365cd576a117ee0854529de953e2ad",
+    "docs/data/complete-edition/trinkets/literal-observations.json": "4080855eaad648fd83a62efbd11eb38835e861705ffc3f6e3eeb04c11f16635c",
+    "docs/reports/complete-edition/c1a-trinket-quest-source-intake-report.md": "c1b57dcfe7562d27525a3c08d8adf940821b79bf2c976a6b8742f4e5e73417b3",
+    "docs/reports/complete-edition/c1a-verification.log": "ccd5d4eee30fbab1010c2770b6a236aa78a6d63627e31ec847e6ef0456877031",
+    "docs/reports/complete-edition/c1ar-quest-semantic-classification-repair-report.md": "18381f4451f2696f77dbd9f420001474ceee439bf6657bd1a81e179c1cf217e2",
+    "docs/reports/complete-edition/c1ar-verification.log": "c6c78f5f2da3460457db505a01a08a00fea814af13d33dbf9bdd0016e5572686",
+    "docs/reports/complete-edition/c1b-runtime-capability-matrix.md": "bde887ae4465fbb5ae1191c17f536e28ab6248d509dc155cdf997aaea758b252",
+    "docs/reports/complete-edition/c1b-trinket-quest-production-integration-report.md": "65383f9c89062f80f940200a19fdc7652a284fa8164dc26e4a543fbba060dd08",
+    "docs/reports/complete-edition/c1c1-core-quest-foundation-report.md": "9b12f1e09a05dc24286f08719dbbe11bc51217a1a0775badeaf08adb78474524",
+    "docs/reports/complete-edition/c1c10-campers-helmet-runtime-report.md": "36fe2764269783219b50fbbfa2a10489b6081abf39f2464d6e780fcfcb02a465",
+    "docs/reports/complete-edition/c1c11-bloodthirst-ring-runtime-report.md": "ed5aae053b29d346512c45e99114cfa3bbea13c0292e3bc9708a1fbf55814f90",
+    "docs/reports/complete-edition/c1c12-book-constitution-runtime-report.md": "82763f31c92e5e768098caf71c6237858a76057c0be4f92f4933ff89486db186",
+    "docs/reports/complete-edition/c1c13-book-holiness-runtime-report.md": "52eb9089ed8dbc62c5487b690e1078d5724c4b60d9a10fb761822ddb78f27b6b",
+    "docs/reports/complete-edition/c1c14-level2-blocker-consolidation-report.md": "eb49c301a8201466f5e567e49435a6712aaddb876972b71c5ba17f061a319a8c",
+    "docs/reports/complete-edition/c1c15-level3-stance-ring-runtime-report.md": "1dea5aa5dc53690df7572a8ee66fa07a90a6b0d767277e54281567c190bdd50b",
+    "docs/reports/complete-edition/c1c16-level1-stance-accuracy-runtime-report.md": "4532f3a4cc048d9bc91e842c396d5e803ec6957928367f7e99282e500c137d51",
+    "docs/reports/complete-edition/c1c17-survival-guide-runtime-report.md": "ea860a1924a00216ab85e1bdf3ec14043f823d4281ec4984fdf10d94d34a3216",
+    "docs/reports/complete-edition/c1c1r-firewood-real-quest-flow-report.md": "3683e8f2ad88dc9c4a7af2f7cb9ac955c44ff014bb069c503d3e3fec94509815",
+    "docs/reports/complete-edition/c1c1r2-source-backed-rest-allocation-report.md": "06bdc0fd631bb63af7168e3262f3cba2d62487d984c11eb45a8b849c7f4003db",
+    "docs/reports/complete-edition/c1c1r3-rest-budget-semantic-closure-report.md": "768bd7212d2d05dfd9199e86014a3567dfd2554e918355762a76f13c2fcd8715",
+    "docs/reports/complete-edition/c1c2-quest-runtime-expansion-report.md": "af92a830780caa0fc8f80df403ee0643a7c12a0b038d3dac5f160bf9c8bea7c9",
+    "docs/reports/complete-edition/c1c3-multi-primitive-quest-rule-closure-report.md": "12a028b0e6066641cabec53f3d75c7264f0c056f06efc52add6fdfde70912907",
+    "docs/reports/complete-edition/c1c3r-semantic-fidelity-repair-report.md": "c1496d9bf050e3dfcbb57d14249650911394b4f57c462dffc84aaae784322397",
+    "docs/reports/complete-edition/c1c4-rest-semantic-source-closure-report.md": "c20444f8f2ede00020bbc2b1489e1dcff463c524d8fd6929326358c19ec199bf",
+    "docs/reports/complete-edition/c1c5-level2-trinket-runtime-foundation-report.md": "a2e713f683b6a6558b8fe44461e9a714726239e3c824a3ad722669d7dd59746f",
+    "docs/reports/complete-edition/c1c5r-trinket-semantic-scope-repair-report.md": "f99de15598d88d36d4d9075d4986b11e632f643921264c9d84f450ed8c81f212",
+    "docs/reports/complete-edition/c1c5r2-trinket-semantic-payload-hardening-report.md": "e05fc3f6de96645abaf26d47d812b27362ab537e8d9413e3af54065355652191",
+    "docs/reports/complete-edition/c1c6-dark-solar-attack-resolution-report.md": "a5ae2bb1ea59bb76c156ea9c1362efb0f347690f43ba84ffd8527c6306e5cd11",
+    "docs/reports/complete-edition/c1c7-voluntary-declaration-fortunate-report.md": "ee6b197e54715279259062ea472888ead7d9e84965da5ddb972269e3041d250e",
+    "docs/reports/complete-edition/c1c8-incoming-attack-runtime-report.md": "c8fbcca86eb518467bdee797159f8499eceb53325b7ff8233ff2220d84e3bff5",
+    "docs/reports/complete-edition/c1c9-condition-runtime-report.md": "3bcaf76bb1512e9e0aafc9b5e9613183986955d24be0060df9fefd755dff1569",
+    "docs/reports/complete-edition/complete-edition-content-coverage-report.md": "e2a48373817f79c9f43f191a3c8458e59c88204774ef47059a8971a4b93f1016",
+    "src/data/community-reference/trinkets/data.json": "06b9bd40238411d35cce811346b08366a12530273dedfe09d8e714c1aef104fc",
+    "src/assets/community-reference/complete-edition/trinkets/color-of-madness/466-9.front.png": "ae07b6699f3ddf798bd25bf834619d53c1093013ce2a1387516db337aa6d8076",
+    "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-6.front.png": "41f3f9bb8852c83e5403a9f153a74305fbba9bb13a2b575271838763738a7c9b",
+    "src/assets/community-reference/complete-edition/trinkets/core/level-3/453-35.front.png": "179185549a393e9026d213d84a2612b261697dafdd9fcae6bb7aedfcbd4fb7e0",
+    "docs/DD_EN_COREBOX_RULES.pdf": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae"
+  },
+  "normalizedSourceSha256": "06b9bd40238411d35cce811346b08366a12530273dedfe09d8e714c1aef104fc",
+  "rulebookSourceSha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+  "level1Coverage": {
+    "level": 1,
+    "sourceDefinitionCount": 14,
+    "sourceSupportedCount": 14,
+    "sourceSemanticCompleteCount": 14,
+    "runtimeSemanticCompleteCount": 7,
+    "productionReadyCount": 7,
+    "productionReadyIds": [
+      "community-trinket-core-accuracy-stone",
+      "community-trinket-core-archers-ring",
+      "community-trinket-core-critical-stone",
+      "community-trinket-core-sages-book",
+      "community-trinket-core-survival-guide",
+      "community-trinket-core-warriors-bracer",
+      "community-trinket-core-warriors-cap"
+    ],
+    "missingDefinitionIds": [
+      "community-trinket-core-bleed-charm",
+      "community-trinket-core-blight-charm",
+      "community-trinket-core-caution-cloak",
+      "community-trinket-core-damage-stone",
+      "community-trinket-core-debuff-charm",
+      "community-trinket-core-speed-stone",
+      "community-trinket-core-stun-charm"
+    ],
+    "semanticallyIncompleteDefinitionIds": [],
+    "completeForRandomDraw": false
+  },
+  "level2Coverage": {
+    "level": 2,
+    "sourceDefinitionCount": 11,
+    "sourceSupportedCount": 11,
+    "sourceSemanticCompleteCount": 11,
+    "runtimeSemanticCompleteCount": 4,
+    "productionReadyCount": 4,
+    "productionReadyIds": [
+      "community-trinket-core-camouflage-cloak",
+      "community-trinket-core-campers-helmet",
+      "community-trinket-core-dark-bracer",
+      "community-trinket-core-solar-bracer"
+    ],
+    "missingDefinitionIds": [
+      "community-trinket-core-bloodthirst-ring",
+      "community-trinket-core-book-of-constitution",
+      "community-trinket-core-book-of-holiness",
+      "community-trinket-core-book-of-relaxation",
+      "community-trinket-core-chirurgeons-charm",
+      "community-trinket-core-fortunate-armlet",
+      "community-trinket-core-protective-padlock"
+    ],
+    "semanticallyIncompleteDefinitionIds": [],
+    "completeForRandomDraw": false
+  },
+  "level3Coverage": {
+    "level": 3,
+    "sourceDefinitionCount": 12,
+    "sourceSupportedCount": 12,
+    "sourceSemanticCompleteCount": 12,
+    "runtimeSemanticCompleteCount": 4,
+    "productionReadyCount": 4,
+    "productionReadyIds": [
+      "community-trinket-core-defenders-ring",
+      "community-trinket-core-scholars-ring",
+      "community-trinket-core-snipers-ring",
+      "community-trinket-core-warriors-ring"
+    ],
+    "missingDefinitionIds": [
+      "community-trinket-core-berserk-charm",
+      "community-trinket-core-book-of-sanity",
+      "community-trinket-core-candle-of-life",
+      "community-trinket-core-cleansing-crystal",
+      "community-trinket-core-dark-crown",
+      "community-trinket-core-fasting-seal",
+      "community-trinket-core-recovery-charm",
+      "community-trinket-core-solar-crown"
+    ],
+    "semanticallyIncompleteDefinitionIds": [],
+    "completeForRandomDraw": false
+  },
+  "readySubset": [
+    "community-trinket-core-accuracy-stone",
+    "community-trinket-core-archers-ring",
+    "community-trinket-core-critical-stone",
+    "community-trinket-core-sages-book",
+    "community-trinket-core-survival-guide",
+    "community-trinket-core-warriors-bracer",
+    "community-trinket-core-warriors-cap"
+  ],
+  "damageStoneCapability": {
+    "definitionId": "community-trinket-core-damage-stone",
+    "sourceSupported": true,
+    "engineCapable": false,
+    "sourceSemanticComplete": true,
+    "runtimeSemanticComplete": false,
+    "semanticObligationCount": 2,
+    "implementedSemanticObligationCount": 0,
+    "partialSemanticObligationCount": 0,
+    "unsupportedSemanticObligationCount": 2,
+    "sourceUnresolvedSemanticObligationCount": 0,
+    "semanticObligations": [],
+    "trinketSemanticObligations": [
+      {
+        "obligationId": "community-trinket-core-damage-stone:positive",
+        "definitionId": "community-trinket-core-damage-stone",
+        "side": "positive",
+        "printedText": "Damage Stone",
+        "trigger": "hero-skill-resolution",
+        "sourceUseWindow": "declare-when-applicable",
+        "target": "skill",
+        "sourceConditions": [],
+        "sourceModifiers": [
+          {
+            "kind": "modify",
+            "stat": "damage",
+            "amount": 3
+          }
+        ],
+        "sourceEffects": [],
+        "runtimeTriggerBinding": null,
+        "runtimeWindowBinding": null,
+        "runtimeTargetBinding": null,
+        "runtimeConditionBindings": [],
+        "derivedRuntimeConditions": [],
+        "unsupportedRuntimeConditions": [],
+        "unsupportedRuntimeBehavior": [],
+        "runtimeConditionEvidence": [],
+        "runtimeEffectBindings": [
+          "ActiveModifierDefinition:damage"
+        ],
+        "triggerMatch": false,
+        "windowMatch": false,
+        "targetMatch": false,
+        "modifierMatch": false,
+        "modifierConsumerMatch": true,
+        "missingModifierConsumers": [],
+        "effectMatch": true,
+        "effectConsumerMatch": true,
+        "missingEffectConsumers": [],
+        "conditionMatch": true,
+        "triggerScopeComplete": true,
+        "sourceTimingScopeStatus": "SOURCE_BOUND",
+        "runtimeSliceSemanticComplete": false,
+        "semanticMismatches": [
+          {
+            "code": "TRINKET_TRIGGER_MISMATCH",
+            "source": "hero-skill-resolution",
+            "runtime": null
+          },
+          {
+            "code": "TRINKET_WINDOW_MISMATCH",
+            "source": "after-attack-roll-before-hit-resolution",
+            "runtime": null
+          },
+          {
+            "code": "TRINKET_TARGET_MISMATCH",
+            "source": "skill",
+            "runtime": null
+          },
+          {
+            "code": "TRINKET_MODIFIER_TYPE_MISMATCH",
+            "source": [
+              {
+                "stat": "damage",
+                "operation": "add",
+                "amount": 3
+              }
+            ],
+            "runtime": []
+          }
+        ],
+        "implementationStatus": "UNSUPPORTED",
+        "proofIds": [],
+        "blockerCode": "TRINKET_TRIGGER_MISMATCH"
+      },
+      {
+        "obligationId": "community-trinket-core-damage-stone:negative",
+        "definitionId": "community-trinket-core-damage-stone",
+        "side": "negative",
+        "printedText": "Damage Stone",
+        "trigger": "hero-takes-damage",
+        "sourceUseWindow": "declare-when-applicable",
+        "target": "equipped-hero",
+        "sourceConditions": [],
+        "sourceModifiers": [],
+        "sourceEffects": [
+          {
+            "kind": "suffer-wounds",
+            "amount": 2
+          }
+        ],
+        "runtimeTriggerBinding": null,
+        "runtimeWindowBinding": null,
+        "runtimeTargetBinding": null,
+        "runtimeConditionBindings": [],
+        "derivedRuntimeConditions": [],
+        "unsupportedRuntimeConditions": [],
+        "unsupportedRuntimeBehavior": [],
+        "runtimeConditionEvidence": [],
+        "runtimeEffectBindings": [],
+        "triggerMatch": false,
+        "windowMatch": false,
+        "targetMatch": false,
+        "modifierMatch": true,
+        "modifierConsumerMatch": true,
+        "missingModifierConsumers": [],
+        "effectMatch": false,
+        "effectConsumerMatch": false,
+        "missingEffectConsumers": [
+          "suffer-wounds"
+        ],
+        "conditionMatch": true,
+        "triggerScopeComplete": true,
+        "sourceTimingScopeStatus": "SOURCE_BOUND",
+        "runtimeSliceSemanticComplete": false,
+        "semanticMismatches": [
+          {
+            "code": "TRINKET_TRIGGER_MISMATCH",
+            "source": "hero-takes-damage",
+            "runtime": null
+          },
+          {
+            "code": "TRINKET_WINDOW_MISMATCH",
+            "source": null,
+            "runtime": null
+          },
+          {
+            "code": "TRINKET_TARGET_MISMATCH",
+            "source": "equipped-hero",
+            "runtime": null
+          },
+          {
+            "code": "TRINKET_EFFECT_TYPE_MISMATCH",
+            "source": [
+              {
+                "type": "suffer-wounds",
+                "target": "equipped-hero",
+                "parameters": {
+                  "amount": 2
+                }
+              }
+            ],
+            "runtime": []
+          },
+          {
+            "code": "TRINKET_EFFECT_CONSUMER_MISSING",
+            "source": [
+              "suffer-wounds"
+            ],
+            "runtime": []
+          }
+        ],
+        "implementationStatus": "UNSUPPORTED",
+        "proofIds": [],
+        "blockerCode": "TRINKET_EFFECT_CONSUMER_MISSING"
+      }
+    ],
+    "semanticComplete": true,
+    "adapterComplete": false,
+    "selectorReachable": false,
+    "productionProofComplete": false,
+    "saveReplayProofComplete": false,
+    "e2eProofComplete": false,
+    "productionUiProofComplete": false,
+    "productionReady": false,
+    "sourceStatus": "source-supported",
+    "semanticStatus": "runtime-primitive-unsupported",
+    "positiveRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+    "negativeRuntimeSupport": "ENGINE_PRIMITIVE_MISSING",
+    "requiredPrimitives": [
+      "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW",
+      "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_SUFFER_WOUNDS",
+      "EXACT_APPLICABLE_TIMING_HERO_TAKES_DAMAGE_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+    ],
+    "existingPrimitives": [
+      "ActiveModifierDefinition:damage"
+    ],
+    "missingPrimitives": [
+      "TRINKET_TRIGGER_WINDOW_MISSING:hero-takes-damage",
+      "TRINKET_EFFECT_CONSUMER_MISSING:suffer-wounds"
+    ],
+    "declaredMissingPrimitives": [
+      "POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW",
+      "NO_EXACT_ACTIVE_TRINKET_PRIMITIVE_SUFFER_WOUNDS",
+      "EXACT_APPLICABLE_TIMING_HERO_TAKES_DAMAGE_IS_NOT_FULLY_EXPOSED_BY_WIRED_WINDOWS_BEFORE_ATTACK_ROLL_HERO_TURN_START_ROOM_ENTERED"
+    ],
+    "adapterStatus": "REQUIRED",
+    "productionStatus": "ENGINE_PRIMITIVE_MISSING",
+    "blockerCodes": [
+      "TRINKET_TRIGGER_WINDOW_MISSING:hero-takes-damage",
+      "TRINKET_EFFECT_CONSUMER_MISSING:suffer-wounds",
+      "TRINKET_TRIGGER_MISMATCH",
+      "TRINKET_EFFECT_CONSUMER_MISSING"
+    ],
+    "measuredRuntimeProof": {
+      "adapterPresent": false,
+      "productionProofPresent": false,
+      "saveReplayProofPresent": false,
+      "selectorProofPresent": false,
+      "e2eProofPresent": false
+    }
+  },
+  "damageStoneAdapterExists": false,
+  "conditionCharms": {
+    "status": "DEFERRED",
+    "requiredContract": "hero-caused-condition-source-contract",
+    "ids": [
+      "community-trinket-core-bleed-charm",
+      "community-trinket-core-blight-charm",
+      "community-trinket-core-debuff-charm",
+      "community-trinket-core-stun-charm"
+    ]
+  },
+  "nextPhase": "C1C19: hero-caused-condition-source-contract; no Damage Stone runtime"
+}

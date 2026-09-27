@@ -1,0 +1,202 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-18",
+  "baselineHead": "d7bd56c65db32ef0cb8aa2a2c365c27f1df95b18",
+  "implementationAnchor": "e7f4b4a94940ebc714301912a93f7fc9a173fd93",
+  "implementationTree": "041f20ad33911f73e68eee6d5799a9d0ac733ff9",
+  "definitionId": "community-trinket-core-damage-stone",
+  "sourceStatus": "source-supported",
+  "unresolvedFields": [],
+  "card": {
+    "definitionId": "community-trinket-core-damage-stone",
+    "sourceReferences": [
+      "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/7"
+    ],
+    "positive": {
+      "label": "Damage Stone",
+      "trigger": "hero-skill-resolution",
+      "useWindow": "declare-when-applicable",
+      "target": "skill",
+      "modifiers": [
+        {
+          "kind": "modify",
+          "stat": "damage",
+          "amount": 3
+        }
+      ],
+      "effects": [],
+      "conditions": [],
+      "semanticNotes": [],
+      "unresolvedFields": [],
+      "runtimeSupport": {
+        "classification": "RUNTIME_PRIMITIVE_UNSUPPORTED",
+        "existingCandidates": [
+          "ActiveModifierDefinition:damage"
+        ],
+        "missingCapabilities": [
+          "Exact applicable timing hero-skill-resolution is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ],
+        "productionIntegration": "not-integrated"
+      }
+    },
+    "negative": {
+      "label": "Damage Stone",
+      "trigger": "hero-takes-damage",
+      "useWindow": "declare-when-applicable",
+      "target": "equipped-hero",
+      "modifiers": [],
+      "effects": [
+        {
+          "kind": "suffer-wounds",
+          "amount": 2
+        }
+      ],
+      "conditions": [],
+      "semanticNotes": [],
+      "unresolvedFields": [],
+      "runtimeSupport": {
+        "classification": "RUNTIME_PRIMITIVE_UNSUPPORTED",
+        "existingCandidates": [],
+        "missingCapabilities": [
+          "No exact active trinket primitive:suffer-wounds",
+          "Exact applicable timing hero-takes-damage is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ],
+        "productionIntegration": "not-integrated"
+      }
+    },
+    "literalPositive": "[damage]+3",
+    "literalNegative": "When you take Damage: suffer 2 [wound]",
+    "assetPath": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-6.front.png",
+    "assetSha256": "41f3f9bb8852c83e5403a9f153a74305fbba9bb13a2b575271838763738a7c9b",
+    "region": {
+      "units": "fraction-of-card",
+      "box": [
+        0,
+        0.5,
+        1,
+        0.5
+      ],
+      "rotation": 180
+    }
+  },
+  "positive": {
+    "label": "Damage Stone",
+    "trigger": "hero-skill-resolution",
+    "useWindow": "declare-when-applicable",
+    "target": "skill",
+    "modifiers": [
+      {
+        "kind": "modify",
+        "stat": "damage",
+        "amount": 3
+      }
+    ],
+    "effects": [],
+    "conditions": [],
+    "semanticNotes": [],
+    "unresolvedFields": [],
+    "runtimeSupport": {
+      "classification": "RUNTIME_PRIMITIVE_UNSUPPORTED",
+      "existingCandidates": [
+        "ActiveModifierDefinition:damage"
+      ],
+      "missingCapabilities": [
+        "Exact applicable timing hero-skill-resolution is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+      ],
+      "productionIntegration": "not-integrated"
+    }
+  },
+  "negative": {
+    "label": "Damage Stone",
+    "trigger": "hero-takes-damage",
+    "useWindow": "declare-when-applicable",
+    "target": "equipped-hero",
+    "modifiers": [],
+    "effects": [
+      {
+        "kind": "suffer-wounds",
+        "amount": 2
+      }
+    ],
+    "conditions": [],
+    "semanticNotes": [],
+    "unresolvedFields": [],
+    "runtimeSupport": {
+      "classification": "RUNTIME_PRIMITIVE_UNSUPPORTED",
+      "existingCandidates": [],
+      "missingCapabilities": [
+        "No exact active trinket primitive:suffer-wounds",
+        "Exact applicable timing hero-takes-damage is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+      ],
+      "productionIntegration": "not-integrated"
+    }
+  },
+  "trigger": {
+    "trigger": "hero-takes-damage",
+    "requiresPositiveAppliedAmount": null,
+    "firesAfterCommit": null,
+    "firesBeforeCommit": null,
+    "deadHeroEligible": false,
+    "deadHeroPolicy": "ACTIVE_DECLARATION_LIVING_SUBJECT_FAIL_CLOSED",
+    "battleCoverage": false,
+    "explorationCoverage": false,
+    "sourceStatus": "SOURCE_UNRESOLVED",
+    "runtimeScopeStatus": "RUNTIME_SCOPE_PARTIAL",
+    "timingBlocker": "SOURCE_TIMING_UNRESOLVED",
+    "ordering": "NO_EXACT_ORDER_AUTHORIZED: incoming hit/prevention windows are not equivalent; commit vs pre-commit unresolved",
+    "zeroFinalDamagePolicy": "UNRESOLVED_FAIL_CLOSED; hit is not proof of taking Damage",
+    "passiveEventPolicy": "DETECTION_CANDIDATE_ONLY_NOT_ACTIVE_WINDOW",
+    "requiredActiveLifecycle": [
+      "freeze original continuation",
+      "open active opportunity for eligible living holder",
+      "Use / Decline",
+      "resume exactly once"
+    ],
+    "futureFrozenFields": [
+      "rootEventId",
+      "heroId",
+      "sourceType",
+      "sourceActorId",
+      "sourceSkillId",
+      "originalAmount",
+      "finalAppliedAmount",
+      "previousHp",
+      "nextHp",
+      "damageEventId"
+    ]
+  },
+  "deathsDoorContract": {
+    "id": "damage-stone-deaths-door-contract",
+    "evidence": [
+      "LIFE_THRESHOLD",
+      "ANY_AMOUNT_ONE_DEATHBLOW"
+    ],
+    "scenarios": [
+      {
+        "originalOutcome": "still HP > 0",
+        "woundRule": "injury tokens bounded by Life",
+        "negativeApplicable": false,
+        "reason": "unresolved active timing/modifier semantics"
+      },
+      {
+        "originalOutcome": "enter Death's Door",
+        "woundRule": "subsequent suffer 2 Wounds at Death's Door would roll once",
+        "negativeApplicable": false,
+        "reason": "commit ordering unresolved; cannot authorize declaration"
+      },
+      {
+        "originalOutcome": "already Death's Door; Deathblow safe",
+        "woundRule": "another distinct suffer 2 Wounds transaction would roll once",
+        "negativeApplicable": false,
+        "reason": "take-Damage trigger and ordering unresolved"
+      },
+      {
+        "originalOutcome": "already Death's Door; permanently died",
+        "woundRule": "dead subject",
+        "negativeApplicable": false,
+        "reason": "dead hero cannot actively declare"
+      }
+    ]
+  },
+  "productionReady": false
+}

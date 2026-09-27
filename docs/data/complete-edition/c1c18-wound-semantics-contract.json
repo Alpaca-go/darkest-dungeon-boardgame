@@ -1,0 +1,460 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-18",
+  "baselineHead": "d7bd56c65db32ef0cb8aa2a2c365c27f1df95b18",
+  "implementationAnchor": "e7f4b4a94940ebc714301912a93f7fc9a173fd93",
+  "implementationTree": "041f20ad33911f73e68eee6d5799a9d0ac733ff9",
+  "token": "wound",
+  "sourceMeaning": "Wound tokens record injury up to Life; skill Damage places that many tokens. At Death's Door replace suffering any amount with a Deathblow roll.",
+  "equivalentToDamage": null,
+  "protectionApplies": null,
+  "damageModifiersApply": null,
+  "damageResistanceApplies": null,
+  "deathDoorBehavior": "At Life Wounds enter Death's Door; Wounds never exceed Life.",
+  "deathblowBehavior": "Already at Death's Door: roll die instead of taking more Wounds; skull kills.",
+  "multiWoundDeathblowCount": 1,
+  "sourceStatus": "PARTIALLY_SOURCE_BOUND",
+  "primitiveDecision": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+  "primitiveOutcome": "C",
+  "exactPrimitiveProven": false,
+  "reuseDamagePipelineProven": false,
+  "facts": [
+    {
+      "factId": "DAMAGE_PLACES_WOUND_TOKENS",
+      "source": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sourceSha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "page": 19,
+      "region": "right-column",
+      "requiredText": "equal to the Damage",
+      "semanticFact": "A successful skill applies Wound tokens equal to the Damage it dealt; healing removes tokens. This is a directional conversion, not universal pipeline equivalence.",
+      "bboxPoints": [
+        297.638,
+        0,
+        595.276,
+        841.89
+      ]
+    },
+    {
+      "factId": "BLEED_EXAMPLE_USES_BOTH_WORDS",
+      "source": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sourceSha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "page": 20,
+      "region": "right-column",
+      "requiredText": "only suffer 2 Damage",
+      "semanticFact": "The same Bleed example calls the current injury Wounds and the next-round injury Damage. This shows overlapping prose usage but not equivalence for all modifiers, triggers or naked card instructions.",
+      "bboxPoints": [
+        297.638,
+        0,
+        595.276,
+        841.89
+      ]
+    },
+    {
+      "factId": "LIFE_THRESHOLD",
+      "source": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sourceSha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "page": 29,
+      "region": "left-column",
+      "requiredText": "Wounds equal to their Life",
+      "semanticFact": "Heroes enter Death's Door when Wounds reach Life, instead of immediately dying; Wounds cannot exceed Life.",
+      "bboxPoints": [
+        0,
+        0,
+        297.638,
+        841.89
+      ]
+    },
+    {
+      "factId": "ANY_AMOUNT_ONE_DEATHBLOW",
+      "source": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sourceSha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "page": 29,
+      "region": "left-column",
+      "requiredText": "any amount of Wounds",
+      "semanticFact": "At Death's Door, any amount of Wounds replaces token application with a roll of the Deathblow die. A skull kills; otherwise survive.",
+      "bboxPoints": [
+        0,
+        0,
+        297.638,
+        841.89
+      ]
+    },
+    {
+      "factId": "SIMULTANEOUS_CONDITIONS_ONE_ROLL",
+      "source": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sourceSha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "page": 29,
+      "region": "right-column",
+      "requiredText": "apply their Wounds simultaneously",
+      "semanticFact": "Simultaneous wounding conditions (Bleed and Blight) cause only one Deathblow roll.",
+      "bboxPoints": [
+        297.638,
+        0,
+        595.276,
+        841.89
+      ]
+    },
+    {
+      "factId": "PROTECTION_ATTACK_DAMAGE",
+      "source": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sourceSha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "page": 21,
+      "region": "right-column",
+      "requiredText": "from attacks",
+      "semanticFact": "Protection halves Damage from attacks (rounded up). No identification of naked suffer-Wounds as attack Damage.",
+      "bboxPoints": [
+        297.638,
+        0,
+        595.276,
+        841.89
+      ]
+    },
+    {
+      "factId": "ACTIVE_TRINKET_DECLARATION",
+      "source": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sourceSha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "page": 26,
+      "region": "left-column",
+      "requiredText": "they declare the use",
+      "semanticFact": "Trinkets require active declaration when applicable, then resolve and flip; in battle once per turn.",
+      "bboxPoints": [
+        0,
+        0,
+        297.638,
+        841.89
+      ]
+    },
+    {
+      "factId": "TAKES_DAMAGE_CAN_MODIFY",
+      "source": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sourceSha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "page": 27,
+      "region": "left-column",
+      "requiredText": "reduce it by 1",
+      "semanticFact": "On Guard uses When the Hero takes Damage to reduce it by 1; the phrase alone is not universal proof of after-commit timing.",
+      "bboxPoints": [
+        0,
+        0,
+        297.638,
+        841.89
+      ]
+    },
+    {
+      "factId": "DERIVED_WOUND_GRAMMAR",
+      "source": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sourceSha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "page": 28,
+      "region": "left-column",
+      "requiredText": "take 1 Wound per Hero Level",
+      "semanticFact": "Syphilis distinguishes taking Damage from taking a derived Wound; does not define recursion or trinket opportunity timing.",
+      "bboxPoints": [
+        0,
+        0,
+        297.638,
+        841.89
+      ]
+    }
+  ],
+  "grammarInventory": [
+    {
+      "definitionId": "community-trinket-color-of-madness-thirsting-blade",
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/48/ContainedObjects/0/ContainedObjects/9"
+      ],
+      "positive": {
+        "label": "Thirsting Blade",
+        "trigger": "hero-skill-resolution",
+        "useWindow": "declare-when-applicable",
+        "target": "skill",
+        "modifiers": [
+          {
+            "kind": "modify",
+            "stat": "crit",
+            "amount": 2
+          }
+        ],
+        "effects": [],
+        "conditions": [],
+        "semanticNotes": [],
+        "unresolvedFields": [],
+        "runtimeSupport": {
+          "classification": "RUNTIME_PRIMITIVE_UNSUPPORTED",
+          "existingCandidates": [
+            "ActiveModifierDefinition:crit"
+          ],
+          "missingCapabilities": [
+            "Exact applicable timing hero-skill-resolution is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+          ],
+          "productionIntegration": "not-integrated"
+        }
+      },
+      "negative": {
+        "label": "Thirsting Blade",
+        "trigger": "hero-attack-misses",
+        "useWindow": "declare-when-applicable",
+        "target": "equipped-hero",
+        "modifiers": [],
+        "effects": [
+          {
+            "kind": "suffer-wounds",
+            "amount": 3
+          }
+        ],
+        "conditions": [],
+        "semanticNotes": [],
+        "unresolvedFields": [],
+        "runtimeSupport": {
+          "classification": "RUNTIME_PRIMITIVE_UNSUPPORTED",
+          "existingCandidates": [],
+          "missingCapabilities": [
+            "No exact active trinket primitive:suffer-wounds",
+            "Exact applicable timing hero-attack-misses is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+          ],
+          "productionIntegration": "not-integrated"
+        }
+      },
+      "literalPositive": "Crit+2",
+      "literalNegative": "When you miss with an attack, the Hero suffers 3 [wound]",
+      "assetPath": "src/assets/community-reference/complete-edition/trinkets/color-of-madness/466-9.front.png",
+      "assetSha256": "ae07b6699f3ddf798bd25bf834619d53c1093013ce2a1387516db337aa6d8076",
+      "region": {
+        "units": "fraction-of-card",
+        "box": [
+          0,
+          0.5,
+          1,
+          0.5
+        ],
+        "rotation": 180
+      }
+    },
+    {
+      "definitionId": "community-trinket-core-damage-stone",
+      "sourceReferences": [
+        "c1a-source:tts-path:/ObjectStates/59/ContainedObjects/7"
+      ],
+      "positive": {
+        "label": "Damage Stone",
+        "trigger": "hero-skill-resolution",
+        "useWindow": "declare-when-applicable",
+        "target": "skill",
+        "modifiers": [
+          {
+            "kind": "modify",
+            "stat": "damage",
+            "amount": 3
+          }
+        ],
+        "effects": [],
+        "conditions": [],
+        "semanticNotes": [],
+        "unresolvedFields": [],
+        "runtimeSupport": {
+          "classification": "RUNTIME_PRIMITIVE_UNSUPPORTED",
+          "existingCandidates": [
+            "ActiveModifierDefinition:damage"
+          ],
+          "missingCapabilities": [
+            "Exact applicable timing hero-skill-resolution is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+          ],
+          "productionIntegration": "not-integrated"
+        }
+      },
+      "negative": {
+        "label": "Damage Stone",
+        "trigger": "hero-takes-damage",
+        "useWindow": "declare-when-applicable",
+        "target": "equipped-hero",
+        "modifiers": [],
+        "effects": [
+          {
+            "kind": "suffer-wounds",
+            "amount": 2
+          }
+        ],
+        "conditions": [],
+        "semanticNotes": [],
+        "unresolvedFields": [],
+        "runtimeSupport": {
+          "classification": "RUNTIME_PRIMITIVE_UNSUPPORTED",
+          "existingCandidates": [],
+          "missingCapabilities": [
+            "No exact active trinket primitive:suffer-wounds",
+            "Exact applicable timing hero-takes-damage is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+          ],
+          "productionIntegration": "not-integrated"
+        }
+      },
+      "literalPositive": "[damage]+3",
+      "literalNegative": "When you take Damage: suffer 2 [wound]",
+      "assetPath": "src/assets/community-reference/complete-edition/trinkets/core/level-1/453-6.front.png",
+      "assetSha256": "41f3f9bb8852c83e5403a9f153a74305fbba9bb13a2b575271838763738a7c9b",
+      "region": {
+        "units": "fraction-of-card",
+        "box": [
+          0,
+          0.5,
+          1,
+          0.5
+        ],
+        "rotation": 180
+      }
+    }
+  ],
+  "damageContrast": {
+    "definitionId": "community-trinket-core-book-of-sanity",
+    "sourceReferences": [
+      "c1a-source:tts-path:/ObjectStates/15/ContainedObjects/9"
+    ],
+    "positive": {
+      "label": "Book of Sanity",
+      "trigger": "voluntary-declaration",
+      "useWindow": "declare-when-applicable",
+      "target": "equipped-hero",
+      "modifiers": [],
+      "effects": [
+        {
+          "kind": "change-stress",
+          "amount": -4
+        }
+      ],
+      "conditions": [],
+      "semanticNotes": [],
+      "unresolvedFields": [],
+      "runtimeSupport": {
+        "classification": "RUNTIME_PRIMITIVE_UNSUPPORTED",
+        "existingCandidates": [
+          "ActiveEffectDefinition:recover-stress-self"
+        ],
+        "missingCapabilities": [
+          "Exact applicable timing voluntary-declaration is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ],
+        "productionIntegration": "not-integrated"
+      }
+    },
+    "negative": {
+      "label": "Book of Sanity",
+      "trigger": "voluntary-declaration",
+      "useWindow": "declare-when-applicable",
+      "target": "equipped-hero",
+      "modifiers": [],
+      "effects": [
+        {
+          "kind": "suffer-damage",
+          "amount": 6
+        }
+      ],
+      "conditions": [],
+      "semanticNotes": [],
+      "unresolvedFields": [],
+      "runtimeSupport": {
+        "classification": "RUNTIME_PRIMITIVE_UNSUPPORTED",
+        "existingCandidates": [
+          "ActiveEffectDefinition:damage-self"
+        ],
+        "missingCapabilities": [
+          "Exact applicable timing voluntary-declaration is not fully exposed by WIRED_WINDOWS (before-attack-roll, hero-turn-start, room-entered)"
+        ],
+        "productionIntegration": "not-integrated"
+      }
+    },
+    "literalPositive": "[stress] -4",
+    "literalNegative": "Suffer [damage]6",
+    "assetPath": "src/assets/community-reference/complete-edition/trinkets/core/level-3/453-35.front.png",
+    "assetSha256": "179185549a393e9026d213d84a2612b261697dafdd9fcae6bb7aedfcbd4fb7e0",
+    "region": {
+      "units": "fraction-of-card",
+      "box": [
+        0,
+        0.5,
+        1,
+        0.5
+      ],
+      "rotation": 180
+    }
+  },
+  "tokenComparison": "DISTINCT_PRINTED_TOKENS; universal runtime equivalence UNRESOLVED",
+  "researchScope": "All 44 pages of bundled official core rulebook, including condition, protection, trinket, quirk/disease and PvP sections. No external rule inference.",
+  "searchedTerms": {
+    "Wound": [
+      4,
+      9,
+      10,
+      14,
+      15,
+      19,
+      20,
+      21,
+      24,
+      26,
+      27,
+      28,
+      29,
+      32,
+      40,
+      41
+    ],
+    "Wounds": [
+      4,
+      9,
+      10,
+      14,
+      15,
+      20,
+      21,
+      24,
+      26,
+      27,
+      28,
+      29,
+      32,
+      40,
+      41
+    ],
+    "Damage": [
+      19,
+      20,
+      21,
+      22,
+      26,
+      27,
+      28,
+      42
+    ],
+    "Health": [],
+    "HP": [
+      5
+    ],
+    "Death's Door": [
+      3,
+      4,
+      9,
+      10,
+      20,
+      29,
+      37
+    ],
+    "Deathblow": [
+      3,
+      9,
+      29,
+      37
+    ],
+    "take Damage": [],
+    "suffer Wounds": []
+  },
+  "questions": {
+    "Q1": "Tokens are injury bookkeeping; HP=Life-Wounds is a representation inference. Not merely HP loss: at Death's Door Wounds become a die roll.",
+    "Q2": "Normal state injury tokens capped by Life; already at Death's Door replace with die. No unconditional wounds += N contract.",
+    "Q3": "Protection is stated for Damage; no explicit universal rule applying Protection, modifiers or resistance to naked suffer-Wounds instructions. Unresolved.",
+    "Q4": "One roll for any amount of Wounds, including 2, when already at Death's Door (p29).",
+    "Q5": "Permanently dead subject cannot actively declare: fail closed. No Damage Stone opportunity.",
+    "Q6": "No explicit zero-final-Damage take-Damage definition found. Unresolved; cannot substitute hit."
+  },
+  "unresolved": [
+    "Protection/modifiers/resistance for suffer-wounds",
+    "hero-takes-damage exact commit ordering",
+    "zero-final-Damage trigger semantics",
+    "unified staged battle/campaign scope"
+  ]
+}
