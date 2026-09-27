@@ -1,10 +1,10 @@
-# C1C17 Survival Guide exploration result runtime
+# C1C17R Survival Guide ignore-result closure repair
 
 C1C17-SURVIVAL-GUIDE-EXPLORATION-RESULT-RUNTIME-ACCEPTED-READY-7-OF-14
 
 Survival Guide implements both exact source sides at after-dungeon-roll. The move identity and single rolled exploration result are persisted before any result, leave-room rule, room entry, battle settlement or replacement continuation. Use/Decline resumes the shared production command. Positive skips result consequences and completes the move; Negative transforms the effective result to Trap and consumes the existing Trap pipeline. The original result remains unchanged.
 
-All living holders contribute physical opportunities. After a transform, stale opportunities close and unprocessed instances are reevaluated. A processed card never reopens in the same root, including after its flip. Saves preserve open, Negative-used and Positive-used checkpoints; invalid intent clears pending state and orphan windows without moving. No save version bump: this extends an existing union.
+All living holders contribute physical opportunities. After a transform, stale opportunities close and unprocessed instances are reevaluated. A processed card never reopens in the same root, including after its flip. Ignore is terminal: all sibling root opportunities close immediately, sibling cards do not flip or produce Use Records, and the move completes. Negative transforms still reevaluate unprocessed cards. Saves preserve open and Negative-used checkpoints; Positive-used saves are already completed moves. Legacy/corrupt ignored=true pending saves clear pending state and orphan opportunities without moving. No save version bump: this extends an existing union.
 
 Level 1 Ready = 7/14. Production-ready subset draw is enabled; the complete 14-card Level-1 deck is not runtime-complete (completeForRandomDraw=false). Level 2 remains 4/11 and Level 3 remains 4/12. Historical C1C5–C1C16 evidence and normalized sources are frozen. C1C16 tests project its original adapter set to retain historical six-card assertions.
 
