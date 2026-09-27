@@ -1,0 +1,2523 @@
+{
+  "phase": "11A.4-C1C-21",
+  "baselineHead": "cef91c4cd31cf074e9d3b7db56098f473772f728",
+  "baselineTree": "215bc0081a5369b7a68d9e645d28b42304d2e5cc",
+  "truthSource": "LIVE_SOURCE_CAPABILITY_ADAPTER_PROOF_REGISTRY",
+  "schemaVersion": 1,
+  "model": "Primitive-only promotion retains live adapter/proof and rejects unbound semantic obligations; companions require all named missing primitives. No synthetic proofs or adapters.",
+  "rows": [
+    {
+      "primitive": "QUEST_RULE_ACTION_AREA_INTERACTION",
+      "affectedQuestCount": 1,
+      "affectedQuestIds": [
+        "community-quest-cove-lvl3-tainted-trinkets"
+      ],
+      "sourceGateCount": 1,
+      "otherRuntimeBlockerCount": 1,
+      "cardsPromotedIfImplementedAlone": 0,
+      "cardsPromotedIfImplementedAloneIds": [],
+      "cardsPromotedWithKnownCompanionPrimitives": 0,
+      "companionPrimitives": [],
+      "crossQuestReuse": 1,
+      "implementationComplexityClass": "REQUIRES_SOURCE_EXACT_CONSUMER_AND_BINDING",
+      "recommendedPriority": "P3"
+    },
+    {
+      "primitive": "QUEST_RULE_ACTION_ECONOMY",
+      "affectedQuestCount": 1,
+      "affectedQuestIds": [
+        "community-quest-cove-lvl3-tainted-trinkets"
+      ],
+      "sourceGateCount": 1,
+      "otherRuntimeBlockerCount": 1,
+      "cardsPromotedIfImplementedAlone": 0,
+      "cardsPromotedIfImplementedAloneIds": [],
+      "cardsPromotedWithKnownCompanionPrimitives": 0,
+      "companionPrimitives": [],
+      "crossQuestReuse": 1,
+      "implementationComplexityClass": "REQUIRES_SOURCE_EXACT_CONSUMER_AND_BINDING",
+      "recommendedPriority": "P3"
+    },
+    {
+      "primitive": "QUEST_RULE_BATTLE_RESULT",
+      "affectedQuestCount": 2,
+      "affectedQuestIds": [
+        "community-quest-warrens-lvl2-carrion-infestation",
+        "community-quest-warrens-lvl2-ringleaders"
+      ],
+      "sourceGateCount": 2,
+      "otherRuntimeBlockerCount": 2,
+      "cardsPromotedIfImplementedAlone": 0,
+      "cardsPromotedIfImplementedAloneIds": [],
+      "cardsPromotedWithKnownCompanionPrimitives": 0,
+      "companionPrimitives": [],
+      "crossQuestReuse": 2,
+      "implementationComplexityClass": "REQUIRES_SOURCE_EXACT_CONSUMER_AND_BINDING",
+      "recommendedPriority": "P3"
+    },
+    {
+      "primitive": "QUEST_RULE_BATTLE_SETUP",
+      "affectedQuestCount": 9,
+      "affectedQuestIds": [
+        "community-quest-cove-lvl1-deep-waters",
+        "community-quest-cove-lvl2-deep-waters-2",
+        "community-quest-cove-lvl2-eldritch-purging",
+        "community-quest-cove-lvl3-deep-waters-3",
+        "community-quest-ruins-lvl1-rising-threat",
+        "community-quest-warrens-lvl2-bait-them-out",
+        "community-quest-warrens-lvl3-infighting",
+        "community-quest-weald-lvl1-patrol-the-woods",
+        "community-quest-weald-lvl3-great-unclean-ones"
+      ],
+      "sourceGateCount": 9,
+      "otherRuntimeBlockerCount": 9,
+      "cardsPromotedIfImplementedAlone": 0,
+      "cardsPromotedIfImplementedAloneIds": [],
+      "cardsPromotedWithKnownCompanionPrimitives": 0,
+      "companionPrimitives": [],
+      "crossQuestReuse": 9,
+      "implementationComplexityClass": "REQUIRES_SOURCE_EXACT_CONSUMER_AND_BINDING",
+      "recommendedPriority": "P3"
+    },
+    {
+      "primitive": "QUEST_RULE_EXPLORATION",
+      "affectedQuestCount": 2,
+      "affectedQuestIds": [
+        "community-quest-crimson-court-lvl3-the-endless-marsh",
+        "community-quest-warrens-lvl3-infighting"
+      ],
+      "sourceGateCount": 2,
+      "otherRuntimeBlockerCount": 2,
+      "cardsPromotedIfImplementedAlone": 0,
+      "cardsPromotedIfImplementedAloneIds": [],
+      "cardsPromotedWithKnownCompanionPrimitives": 0,
+      "companionPrimitives": [],
+      "crossQuestReuse": 2,
+      "implementationComplexityClass": "REQUIRES_SOURCE_EXACT_CONSUMER_AND_BINDING",
+      "recommendedPriority": "P3"
+    },
+    {
+      "primitive": "QUEST_RULE_HAMLET_CHOICE",
+      "affectedQuestCount": 1,
+      "affectedQuestIds": [
+        "community-quest-cove-lvl3-tainted-trinkets"
+      ],
+      "sourceGateCount": 1,
+      "otherRuntimeBlockerCount": 1,
+      "cardsPromotedIfImplementedAlone": 0,
+      "cardsPromotedIfImplementedAloneIds": [],
+      "cardsPromotedWithKnownCompanionPrimitives": 0,
+      "companionPrimitives": [],
+      "crossQuestReuse": 1,
+      "implementationComplexityClass": "REQUIRES_SOURCE_EXACT_CONSUMER_AND_BINDING",
+      "recommendedPriority": "P3"
+    },
+    {
+      "primitive": "QUEST_RULE_HERO_STATE",
+      "affectedQuestCount": 9,
+      "affectedQuestIds": [
+        "community-quest-cove-lvl1-unclean-waters",
+        "community-quest-cove-lvl2-unclean-waters-2",
+        "community-quest-cove-lvl3-unclean-waters-3",
+        "community-quest-crimson-court-lvl3-cut-the-buzz",
+        "community-quest-ruins-lvl3-creeping-darkness",
+        "community-quest-warrens-lvl3-foul-arsenal",
+        "community-quest-weald-lvl3-final-swipe",
+        "community-quest-weald-lvl3-the-infected",
+        "community-quest-weald-lvl3-whispering-woods"
+      ],
+      "sourceGateCount": 9,
+      "otherRuntimeBlockerCount": 9,
+      "cardsPromotedIfImplementedAlone": 0,
+      "cardsPromotedIfImplementedAloneIds": [],
+      "cardsPromotedWithKnownCompanionPrimitives": 0,
+      "companionPrimitives": [],
+      "crossQuestReuse": 9,
+      "implementationComplexityClass": "REQUIRES_SOURCE_EXACT_CONSUMER_AND_BINDING",
+      "recommendedPriority": "P3"
+    },
+    {
+      "primitive": "QUEST_RULE_LOOT_CHEST_SELECTION",
+      "affectedQuestCount": 1,
+      "affectedQuestIds": [
+        "community-quest-warrens-lvl1-family-trinkets"
+      ],
+      "sourceGateCount": 1,
+      "otherRuntimeBlockerCount": 1,
+      "cardsPromotedIfImplementedAlone": 0,
+      "cardsPromotedIfImplementedAloneIds": [],
+      "cardsPromotedWithKnownCompanionPrimitives": 0,
+      "companionPrimitives": [],
+      "crossQuestReuse": 1,
+      "implementationComplexityClass": "REQUIRES_SOURCE_EXACT_CONSUMER_AND_BINDING",
+      "recommendedPriority": "P3"
+    },
+    {
+      "primitive": "QUEST_RULE_MONSTER_STATE",
+      "affectedQuestCount": 32,
+      "affectedQuestIds": [
+        "community-quest-cove-lvl1-deep-horrors",
+        "community-quest-cove-lvl2-deep-horrors-2",
+        "community-quest-cove-lvl2-the-deep-ones",
+        "community-quest-cove-lvl3-the-deep-ones-2",
+        "community-quest-crimson-court-lvl1-they-are-swarm",
+        "community-quest-crimson-court-lvl2-lurkers",
+        "community-quest-crimson-court-lvl2-ruin-the-party",
+        "community-quest-crimson-court-lvl2-take-em-back",
+        "community-quest-crimson-court-lvl3-breeders",
+        "community-quest-crimson-court-lvl3-cut-the-buzz",
+        "community-quest-crimson-court-lvl3-uninvited",
+        "community-quest-ruins-lvl1-rising-threat",
+        "community-quest-ruins-lvl2-break-them",
+        "community-quest-ruins-lvl3-the-threat-is-real",
+        "community-quest-ruins-lvl3-they-are-back",
+        "community-quest-warrens-lvl1-disarm-them",
+        "community-quest-warrens-lvl1-worm-squash",
+        "community-quest-warrens-lvl2-a-new-breed",
+        "community-quest-warrens-lvl2-bait-them-out",
+        "community-quest-warrens-lvl2-carrion-infestation",
+        "community-quest-warrens-lvl2-ringleaders",
+        "community-quest-warrens-lvl3-alpha-swine",
+        "community-quest-warrens-lvl3-drums-of-doom",
+        "community-quest-warrens-lvl3-infighting",
+        "community-quest-weald-lvl1-circle-of-witches",
+        "community-quest-weald-lvl1-purge-the-woods",
+        "community-quest-weald-lvl2-hounds-of-the-woods",
+        "community-quest-weald-lvl2-lost-treasures",
+        "community-quest-weald-lvl2-searching-in-the-dark",
+        "community-quest-weald-lvl2-spreaders-of-miasma",
+        "community-quest-weald-lvl3-great-unclean-ones",
+        "community-quest-weald-lvl3-no-other-way"
+      ],
+      "sourceGateCount": 32,
+      "otherRuntimeBlockerCount": 32,
+      "cardsPromotedIfImplementedAlone": 0,
+      "cardsPromotedIfImplementedAloneIds": [],
+      "cardsPromotedWithKnownCompanionPrimitives": 0,
+      "companionPrimitives": [],
+      "crossQuestReuse": 32,
+      "implementationComplexityClass": "REQUIRES_SOURCE_EXACT_CONSUMER_AND_BINDING",
+      "recommendedPriority": "P3"
+    },
+    {
+      "primitive": "QUEST_RULE_QUEST_COMPLETION",
+      "affectedQuestCount": 2,
+      "affectedQuestIds": [
+        "community-quest-cove-lvl3-tainted-trinkets",
+        "community-quest-warrens-lvl1-family-trinkets"
+      ],
+      "sourceGateCount": 2,
+      "otherRuntimeBlockerCount": 2,
+      "cardsPromotedIfImplementedAlone": 0,
+      "cardsPromotedIfImplementedAloneIds": [],
+      "cardsPromotedWithKnownCompanionPrimitives": 0,
+      "companionPrimitives": [],
+      "crossQuestReuse": 2,
+      "implementationComplexityClass": "REQUIRES_SOURCE_EXACT_CONSUMER_AND_BINDING",
+      "recommendedPriority": "P3"
+    },
+    {
+      "primitive": "QUEST_RULE_QUIRK_GAIN",
+      "affectedQuestCount": 1,
+      "affectedQuestIds": [
+        "community-quest-cove-lvl3-tainted-trinkets"
+      ],
+      "sourceGateCount": 1,
+      "otherRuntimeBlockerCount": 1,
+      "cardsPromotedIfImplementedAlone": 0,
+      "cardsPromotedIfImplementedAloneIds": [],
+      "cardsPromotedWithKnownCompanionPrimitives": 0,
+      "companionPrimitives": [],
+      "crossQuestReuse": 1,
+      "implementationComplexityClass": "REQUIRES_SOURCE_EXACT_CONSUMER_AND_BINDING",
+      "recommendedPriority": "P3"
+    },
+    {
+      "primitive": "QUEST_RULE_REWARD_OVERRIDE",
+      "affectedQuestCount": 3,
+      "affectedQuestIds": [
+        "community-quest-crimson-court-lvl2-take-em-back",
+        "community-quest-ruins-lvl1-fundraiser",
+        "community-quest-weald-lvl2-lost-supplies"
+      ],
+      "sourceGateCount": 3,
+      "otherRuntimeBlockerCount": 3,
+      "cardsPromotedIfImplementedAlone": 0,
+      "cardsPromotedIfImplementedAloneIds": [],
+      "cardsPromotedWithKnownCompanionPrimitives": 0,
+      "companionPrimitives": [],
+      "crossQuestReuse": 3,
+      "implementationComplexityClass": "REQUIRES_SOURCE_EXACT_CONSUMER_AND_BINDING",
+      "recommendedPriority": "P3"
+    },
+    {
+      "primitive": "QUEST_RULE_ROOM_CLEAR",
+      "affectedQuestCount": 1,
+      "affectedQuestIds": [
+        "community-quest-crimson-court-lvl1-rest-in-rubble"
+      ],
+      "sourceGateCount": 1,
+      "otherRuntimeBlockerCount": 1,
+      "cardsPromotedIfImplementedAlone": 0,
+      "cardsPromotedIfImplementedAloneIds": [],
+      "cardsPromotedWithKnownCompanionPrimitives": 0,
+      "companionPrimitives": [],
+      "crossQuestReuse": 1,
+      "implementationComplexityClass": "REQUIRES_SOURCE_EXACT_CONSUMER_AND_BINDING",
+      "recommendedPriority": "P3"
+    },
+    {
+      "primitive": "QUEST_RULE_ROOM_IDENTITY_SELECTION",
+      "affectedQuestCount": 1,
+      "affectedQuestIds": [
+        "community-quest-cove-lvl3-tainted-trinkets"
+      ],
+      "sourceGateCount": 1,
+      "otherRuntimeBlockerCount": 1,
+      "cardsPromotedIfImplementedAlone": 0,
+      "cardsPromotedIfImplementedAloneIds": [],
+      "cardsPromotedWithKnownCompanionPrimitives": 0,
+      "companionPrimitives": [],
+      "crossQuestReuse": 1,
+      "implementationComplexityClass": "REQUIRES_SOURCE_EXACT_CONSUMER_AND_BINDING",
+      "recommendedPriority": "P3"
+    },
+    {
+      "primitive": "QUEST_RULE_TOKEN_INTERACTION",
+      "affectedQuestCount": 1,
+      "affectedQuestIds": [
+        "community-quest-warrens-lvl1-family-trinkets"
+      ],
+      "sourceGateCount": 1,
+      "otherRuntimeBlockerCount": 1,
+      "cardsPromotedIfImplementedAlone": 0,
+      "cardsPromotedIfImplementedAloneIds": [],
+      "cardsPromotedWithKnownCompanionPrimitives": 0,
+      "companionPrimitives": [],
+      "crossQuestReuse": 1,
+      "implementationComplexityClass": "REQUIRES_SOURCE_EXACT_CONSUMER_AND_BINDING",
+      "recommendedPriority": "P3"
+    },
+    {
+      "primitive": "QUEST_RULE_TRINKET_ACQUISITION",
+      "affectedQuestCount": 2,
+      "affectedQuestIds": [
+        "community-quest-cove-lvl3-tainted-trinkets",
+        "community-quest-warrens-lvl1-family-trinkets"
+      ],
+      "sourceGateCount": 2,
+      "otherRuntimeBlockerCount": 2,
+      "cardsPromotedIfImplementedAlone": 0,
+      "cardsPromotedIfImplementedAloneIds": [],
+      "cardsPromotedWithKnownCompanionPrimitives": 0,
+      "companionPrimitives": [],
+      "crossQuestReuse": 2,
+      "implementationComplexityClass": "REQUIRES_SOURCE_EXACT_CONSUMER_AND_BINDING",
+      "recommendedPriority": "P3"
+    },
+    {
+      "primitive": "QUEST_RULE_TRINKET_FALLBACK_CHOICE",
+      "affectedQuestCount": 1,
+      "affectedQuestIds": [
+        "community-quest-cove-lvl3-tainted-trinkets"
+      ],
+      "sourceGateCount": 1,
+      "otherRuntimeBlockerCount": 1,
+      "cardsPromotedIfImplementedAlone": 0,
+      "cardsPromotedIfImplementedAloneIds": [],
+      "cardsPromotedWithKnownCompanionPrimitives": 0,
+      "companionPrimitives": [],
+      "crossQuestReuse": 1,
+      "implementationComplexityClass": "REQUIRES_SOURCE_EXACT_CONSUMER_AND_BINDING",
+      "recommendedPriority": "P3"
+    },
+    {
+      "primitive": "QUEST_RULE_TRINKET_PROVENANCE",
+      "affectedQuestCount": 1,
+      "affectedQuestIds": [
+        "community-quest-warrens-lvl1-family-trinkets"
+      ],
+      "sourceGateCount": 1,
+      "otherRuntimeBlockerCount": 1,
+      "cardsPromotedIfImplementedAlone": 0,
+      "cardsPromotedIfImplementedAloneIds": [],
+      "cardsPromotedWithKnownCompanionPrimitives": 0,
+      "companionPrimitives": [],
+      "crossQuestReuse": 1,
+      "implementationComplexityClass": "REQUIRES_SOURCE_EXACT_CONSUMER_AND_BINDING",
+      "recommendedPriority": "P3"
+    },
+    {
+      "primitive": "QUEST_RULE_TRINKET_RETURN_EXCHANGE",
+      "affectedQuestCount": 1,
+      "affectedQuestIds": [
+        "community-quest-warrens-lvl1-family-trinkets"
+      ],
+      "sourceGateCount": 1,
+      "otherRuntimeBlockerCount": 1,
+      "cardsPromotedIfImplementedAlone": 0,
+      "cardsPromotedIfImplementedAloneIds": [],
+      "cardsPromotedWithKnownCompanionPrimitives": 0,
+      "companionPrimitives": [],
+      "crossQuestReuse": 1,
+      "implementationComplexityClass": "REQUIRES_SOURCE_EXACT_CONSUMER_AND_BINDING",
+      "recommendedPriority": "P3"
+    },
+    {
+      "primitive": "QUEST_RULE_TRINKET_STATE",
+      "affectedQuestCount": 1,
+      "affectedQuestIds": [
+        "community-quest-cove-lvl3-tainted-trinkets"
+      ],
+      "sourceGateCount": 1,
+      "otherRuntimeBlockerCount": 1,
+      "cardsPromotedIfImplementedAlone": 0,
+      "cardsPromotedIfImplementedAloneIds": [],
+      "cardsPromotedWithKnownCompanionPrimitives": 0,
+      "companionPrimitives": [],
+      "crossQuestReuse": 1,
+      "implementationComplexityClass": "REQUIRES_SOURCE_EXACT_CONSUMER_AND_BINDING",
+      "recommendedPriority": "P3"
+    }
+  ],
+  "semanticCategories": [
+    {
+      "category": "action-cost",
+      "affectedQuestCount": 1,
+      "affectedQuestIds": [
+        "community-quest-cove-lvl3-tainted-trinkets"
+      ],
+      "sourceRulesExact": true,
+      "wholeQuestReadyGain": 0,
+      "sharedPrimitiveReuse": [
+        "QUEST_RULE_ACTION_AREA_INTERACTION",
+        "QUEST_RULE_ACTION_ECONOMY",
+        "QUEST_RULE_HAMLET_CHOICE",
+        "QUEST_RULE_QUEST_COMPLETION",
+        "QUEST_RULE_QUIRK_GAIN",
+        "QUEST_RULE_ROOM_IDENTITY_SELECTION",
+        "QUEST_RULE_TRINKET_ACQUISITION",
+        "QUEST_RULE_TRINKET_FALLBACK_CHOICE",
+        "QUEST_RULE_TRINKET_STATE"
+      ],
+      "existingRuntimeOverlap": 1,
+      "saveReplayComplexity": "SOURCE_TARGET_TIMING_REQUIRES_SPECIFICATION",
+      "UIComplexity": "NOT_YET_SPECIFIED",
+      "crossRegionReuse": 1
+    },
+    {
+      "category": "battle-end",
+      "affectedQuestCount": 2,
+      "affectedQuestIds": [
+        "community-quest-warrens-lvl2-carrion-infestation",
+        "community-quest-warrens-lvl2-ringleaders"
+      ],
+      "sourceRulesExact": false,
+      "wholeQuestReadyGain": 0,
+      "sharedPrimitiveReuse": [
+        "QUEST_RULE_BATTLE_RESULT",
+        "QUEST_RULE_MONSTER_STATE",
+        "UNBOUND_CATEGORY:battle-end",
+        "UNBOUND_CATEGORY:monster-spawn",
+        "UNBOUND_CATEGORY:objective-completion",
+        "UNBOUND_CATEGORY:room-setup"
+      ],
+      "existingRuntimeOverlap": 0,
+      "saveReplayComplexity": "SOURCE_TARGET_TIMING_REQUIRES_SPECIFICATION",
+      "UIComplexity": "NOT_YET_SPECIFIED",
+      "crossRegionReuse": 1
+    },
+    {
+      "category": "battle-start",
+      "affectedQuestCount": 6,
+      "affectedQuestIds": [
+        "community-quest-cove-lvl1-deep-waters",
+        "community-quest-cove-lvl2-deep-waters-2",
+        "community-quest-cove-lvl2-eldritch-purging",
+        "community-quest-cove-lvl3-deep-waters-3",
+        "community-quest-ruins-lvl1-rising-threat",
+        "community-quest-warrens-lvl2-bait-them-out"
+      ],
+      "sourceRulesExact": false,
+      "wholeQuestReadyGain": 0,
+      "sharedPrimitiveReuse": [
+        "QUEST_RULE_BATTLE_SETUP",
+        "QUEST_RULE_MONSTER_STATE",
+        "UNBOUND_CATEGORY:battle-start",
+        "UNBOUND_CATEGORY:curio",
+        "UNBOUND_CATEGORY:monster-spawn",
+        "UNBOUND_CATEGORY:quest-setup"
+      ],
+      "existingRuntimeOverlap": 0,
+      "saveReplayComplexity": "SOURCE_TARGET_TIMING_REQUIRES_SPECIFICATION",
+      "UIComplexity": "NOT_YET_SPECIFIED",
+      "crossRegionReuse": 3
+    },
+    {
+      "category": "campaign-rule",
+      "affectedQuestCount": 3,
+      "affectedQuestIds": [
+        "community-quest-boss-face-the-threat",
+        "community-quest-cove-lvl3-tainted-trinkets",
+        "community-quest-warrens-lvl1-family-trinkets"
+      ],
+      "sourceRulesExact": false,
+      "wholeQuestReadyGain": 0,
+      "sharedPrimitiveReuse": [
+        "QUEST_RULE_ACTION_AREA_INTERACTION",
+        "QUEST_RULE_ACTION_ECONOMY",
+        "QUEST_RULE_HAMLET_CHOICE",
+        "QUEST_RULE_LOOT_CHEST_SELECTION",
+        "QUEST_RULE_QUEST_COMPLETION",
+        "QUEST_RULE_QUIRK_GAIN",
+        "QUEST_RULE_ROOM_IDENTITY_SELECTION",
+        "QUEST_RULE_TOKEN_INTERACTION",
+        "QUEST_RULE_TRINKET_ACQUISITION",
+        "QUEST_RULE_TRINKET_FALLBACK_CHOICE",
+        "QUEST_RULE_TRINKET_PROVENANCE",
+        "QUEST_RULE_TRINKET_RETURN_EXCHANGE",
+        "QUEST_RULE_TRINKET_STATE",
+        "UNBOUND_CATEGORY:campaign-rule",
+        "UNBOUND_CATEGORY:quest-setup"
+      ],
+      "existingRuntimeOverlap": 2,
+      "saveReplayComplexity": "SOURCE_TARGET_TIMING_REQUIRES_SPECIFICATION",
+      "UIComplexity": "NOT_YET_SPECIFIED",
+      "crossRegionReuse": 3
+    },
+    {
+      "category": "curio",
+      "affectedQuestCount": 3,
+      "affectedQuestIds": [
+        "community-quest-cove-lvl2-eldritch-purging",
+        "community-quest-cove-lvl3-deep-waters-3",
+        "community-quest-crimson-court-lvl1-rest-in-rubble"
+      ],
+      "sourceRulesExact": false,
+      "wholeQuestReadyGain": 0,
+      "sharedPrimitiveReuse": [
+        "QUEST_RULE_BATTLE_SETUP",
+        "QUEST_RULE_ROOM_CLEAR",
+        "UNBOUND_CATEGORY:battle-start",
+        "UNBOUND_CATEGORY:curio",
+        "UNBOUND_CATEGORY:room-clear-rule"
+      ],
+      "existingRuntimeOverlap": 0,
+      "saveReplayComplexity": "SOURCE_TARGET_TIMING_REQUIRES_SPECIFICATION",
+      "UIComplexity": "NOT_YET_SPECIFIED",
+      "crossRegionReuse": 2
+    },
+    {
+      "category": "dungeon-setup",
+      "affectedQuestCount": 3,
+      "affectedQuestIds": [
+        "community-quest-crimson-court-lvl3-the-endless-marsh",
+        "community-quest-ruins-lvl3-forward-camps",
+        "community-quest-weald-lvl2-searching-in-the-dark"
+      ],
+      "sourceRulesExact": false,
+      "wholeQuestReadyGain": 0,
+      "sharedPrimitiveReuse": [
+        "QUEST_RULE_EXPLORATION",
+        "QUEST_RULE_MONSTER_STATE",
+        "UNBOUND_CATEGORY:dungeon-setup",
+        "UNBOUND_CATEGORY:exploration",
+        "UNBOUND_CATEGORY:monster-pool",
+        "UNBOUND_CATEGORY:objective-qualification"
+      ],
+      "existingRuntimeOverlap": 0,
+      "saveReplayComplexity": "SOURCE_TARGET_TIMING_REQUIRES_SPECIFICATION",
+      "UIComplexity": "NOT_YET_SPECIFIED",
+      "crossRegionReuse": 3
+    },
+    {
+      "category": "exploration",
+      "affectedQuestCount": 2,
+      "affectedQuestIds": [
+        "community-quest-crimson-court-lvl3-the-endless-marsh",
+        "community-quest-warrens-lvl3-infighting"
+      ],
+      "sourceRulesExact": false,
+      "wholeQuestReadyGain": 0,
+      "sharedPrimitiveReuse": [
+        "QUEST_RULE_BATTLE_SETUP",
+        "QUEST_RULE_EXPLORATION",
+        "QUEST_RULE_MONSTER_STATE",
+        "UNBOUND_CATEGORY:dungeon-setup",
+        "UNBOUND_CATEGORY:exploration",
+        "UNBOUND_CATEGORY:initiative",
+        "UNBOUND_CATEGORY:monster-spawn",
+        "UNBOUND_CATEGORY:scouting"
+      ],
+      "existingRuntimeOverlap": 0,
+      "saveReplayComplexity": "SOURCE_TARGET_TIMING_REQUIRES_SPECIFICATION",
+      "UIComplexity": "NOT_YET_SPECIFIED",
+      "crossRegionReuse": 2
+    },
+    {
+      "category": "hero-condition",
+      "affectedQuestCount": 7,
+      "affectedQuestIds": [
+        "community-quest-cove-lvl1-unclean-waters",
+        "community-quest-cove-lvl2-unclean-waters-2",
+        "community-quest-cove-lvl3-unclean-waters-3",
+        "community-quest-crimson-court-lvl3-cut-the-buzz",
+        "community-quest-warrens-lvl3-foul-arsenal",
+        "community-quest-weald-lvl3-final-swipe",
+        "community-quest-weald-lvl3-the-infected"
+      ],
+      "sourceRulesExact": false,
+      "wholeQuestReadyGain": 0,
+      "sharedPrimitiveReuse": [
+        "QUEST_RULE_HERO_STATE",
+        "QUEST_RULE_MONSTER_STATE",
+        "UNBOUND_CATEGORY:hero-condition",
+        "UNBOUND_CATEGORY:monster-stat-modifier",
+        "UNBOUND_CATEGORY:room-setup"
+      ],
+      "existingRuntimeOverlap": 0,
+      "saveReplayComplexity": "SOURCE_TARGET_TIMING_REQUIRES_SPECIFICATION",
+      "UIComplexity": "NOT_YET_SPECIFIED",
+      "crossRegionReuse": 4
+    },
+    {
+      "category": "hero-stress",
+      "affectedQuestCount": 2,
+      "affectedQuestIds": [
+        "community-quest-ruins-lvl3-creeping-darkness",
+        "community-quest-weald-lvl3-whispering-woods"
+      ],
+      "sourceRulesExact": false,
+      "wholeQuestReadyGain": 0,
+      "sharedPrimitiveReuse": [
+        "QUEST_RULE_HERO_STATE",
+        "UNBOUND_CATEGORY:hero-stress"
+      ],
+      "existingRuntimeOverlap": 0,
+      "saveReplayComplexity": "SOURCE_TARGET_TIMING_REQUIRES_SPECIFICATION",
+      "UIComplexity": "NOT_YET_SPECIFIED",
+      "crossRegionReuse": 2
+    },
+    {
+      "category": "initiative",
+      "affectedQuestCount": 3,
+      "affectedQuestIds": [
+        "community-quest-warrens-lvl3-infighting",
+        "community-quest-weald-lvl1-patrol-the-woods",
+        "community-quest-weald-lvl3-great-unclean-ones"
+      ],
+      "sourceRulesExact": false,
+      "wholeQuestReadyGain": 0,
+      "sharedPrimitiveReuse": [
+        "QUEST_RULE_BATTLE_SETUP",
+        "QUEST_RULE_EXPLORATION",
+        "QUEST_RULE_MONSTER_STATE",
+        "UNBOUND_CATEGORY:exploration",
+        "UNBOUND_CATEGORY:initiative",
+        "UNBOUND_CATEGORY:monster-spawn",
+        "UNBOUND_CATEGORY:monster-stat-modifier",
+        "UNBOUND_CATEGORY:scouting"
+      ],
+      "existingRuntimeOverlap": 0,
+      "saveReplayComplexity": "SOURCE_TARGET_TIMING_REQUIRES_SPECIFICATION",
+      "UIComplexity": "NOT_YET_SPECIFIED",
+      "crossRegionReuse": 2
+    },
+    {
+      "category": "loot",
+      "affectedQuestCount": 4,
+      "affectedQuestIds": [
+        "community-quest-crimson-court-lvl1-lost-and-found",
+        "community-quest-crimson-court-lvl2-take-em-back",
+        "community-quest-warrens-lvl1-family-trinkets",
+        "community-quest-weald-lvl2-lost-supplies"
+      ],
+      "sourceRulesExact": false,
+      "wholeQuestReadyGain": 0,
+      "sharedPrimitiveReuse": [
+        "QUEST_RULE_LOOT_CHEST_SELECTION",
+        "QUEST_RULE_MONSTER_STATE",
+        "QUEST_RULE_QUEST_COMPLETION",
+        "QUEST_RULE_REWARD_OVERRIDE",
+        "QUEST_RULE_TOKEN_INTERACTION",
+        "QUEST_RULE_TRINKET_ACQUISITION",
+        "QUEST_RULE_TRINKET_PROVENANCE",
+        "QUEST_RULE_TRINKET_RETURN_EXCHANGE",
+        "UNBOUND_CATEGORY:loot",
+        "UNBOUND_CATEGORY:monster-stat-modifier",
+        "UNBOUND_CATEGORY:objective-completion",
+        "UNBOUND_CATEGORY:objective-qualification",
+        "UNBOUND_CATEGORY:quest-setup",
+        "UNBOUND_CATEGORY:reward-modifier",
+        "UNBOUND_CATEGORY:room-selection"
+      ],
+      "existingRuntimeOverlap": 1,
+      "saveReplayComplexity": "SOURCE_TARGET_TIMING_REQUIRES_SPECIFICATION",
+      "UIComplexity": "NOT_YET_SPECIFIED",
+      "crossRegionReuse": 3
+    },
+    {
+      "category": "monster-pool",
+      "affectedQuestCount": 9,
+      "affectedQuestIds": [
+        "community-quest-cove-lvl2-the-deep-ones",
+        "community-quest-cove-lvl3-the-deep-ones-2",
+        "community-quest-crimson-court-lvl1-they-are-swarm",
+        "community-quest-crimson-court-lvl2-ruin-the-party",
+        "community-quest-ruins-lvl3-the-threat-is-real",
+        "community-quest-warrens-lvl1-disarm-them",
+        "community-quest-weald-lvl1-purge-the-woods",
+        "community-quest-weald-lvl2-lost-treasures",
+        "community-quest-weald-lvl2-searching-in-the-dark"
+      ],
+      "sourceRulesExact": false,
+      "wholeQuestReadyGain": 0,
+      "sharedPrimitiveReuse": [
+        "QUEST_RULE_MONSTER_STATE",
+        "UNBOUND_CATEGORY:dungeon-setup",
+        "UNBOUND_CATEGORY:monster-pool",
+        "UNBOUND_CATEGORY:monster-spawn",
+        "UNBOUND_CATEGORY:room-selection",
+        "UNBOUND_CATEGORY:room-setup"
+      ],
+      "existingRuntimeOverlap": 0,
+      "saveReplayComplexity": "SOURCE_TARGET_TIMING_REQUIRES_SPECIFICATION",
+      "UIComplexity": "NOT_YET_SPECIFIED",
+      "crossRegionReuse": 5
+    },
+    {
+      "category": "monster-spawn",
+      "affectedQuestCount": 21,
+      "affectedQuestIds": [
+        "community-quest-cove-lvl1-deep-horrors",
+        "community-quest-cove-lvl2-deep-horrors-2",
+        "community-quest-cove-lvl3-the-deep-ones-2",
+        "community-quest-crimson-court-lvl2-lurkers",
+        "community-quest-crimson-court-lvl3-breeders",
+        "community-quest-crimson-court-lvl3-uninvited",
+        "community-quest-ruins-lvl1-rising-threat",
+        "community-quest-ruins-lvl2-break-them",
+        "community-quest-ruins-lvl3-they-are-back",
+        "community-quest-warrens-lvl1-worm-squash",
+        "community-quest-warrens-lvl2-bait-them-out",
+        "community-quest-warrens-lvl2-carrion-infestation",
+        "community-quest-warrens-lvl2-ringleaders",
+        "community-quest-warrens-lvl3-alpha-swine",
+        "community-quest-warrens-lvl3-drums-of-doom",
+        "community-quest-warrens-lvl3-infighting",
+        "community-quest-weald-lvl1-circle-of-witches",
+        "community-quest-weald-lvl2-hounds-of-the-woods",
+        "community-quest-weald-lvl2-spreaders-of-miasma",
+        "community-quest-weald-lvl3-great-unclean-ones",
+        "community-quest-weald-lvl3-no-other-way"
+      ],
+      "sourceRulesExact": false,
+      "wholeQuestReadyGain": 0,
+      "sharedPrimitiveReuse": [
+        "QUEST_RULE_BATTLE_RESULT",
+        "QUEST_RULE_BATTLE_SETUP",
+        "QUEST_RULE_EXPLORATION",
+        "QUEST_RULE_MONSTER_STATE",
+        "UNBOUND_CATEGORY:battle-end",
+        "UNBOUND_CATEGORY:battle-start",
+        "UNBOUND_CATEGORY:exploration",
+        "UNBOUND_CATEGORY:initiative",
+        "UNBOUND_CATEGORY:monster-pool",
+        "UNBOUND_CATEGORY:monster-spawn",
+        "UNBOUND_CATEGORY:monster-stat-modifier",
+        "UNBOUND_CATEGORY:objective-completion",
+        "UNBOUND_CATEGORY:objective-qualification",
+        "UNBOUND_CATEGORY:quest-setup",
+        "UNBOUND_CATEGORY:room-selection",
+        "UNBOUND_CATEGORY:room-setup",
+        "UNBOUND_CATEGORY:scouting"
+      ],
+      "existingRuntimeOverlap": 0,
+      "saveReplayComplexity": "SOURCE_TARGET_TIMING_REQUIRES_SPECIFICATION",
+      "UIComplexity": "NOT_YET_SPECIFIED",
+      "crossRegionReuse": 5
+    },
+    {
+      "category": "monster-stat-modifier",
+      "affectedQuestCount": 7,
+      "affectedQuestIds": [
+        "community-quest-crimson-court-lvl2-take-em-back",
+        "community-quest-crimson-court-lvl3-cut-the-buzz",
+        "community-quest-ruins-lvl3-they-are-back",
+        "community-quest-warrens-lvl2-a-new-breed",
+        "community-quest-warrens-lvl3-alpha-swine",
+        "community-quest-warrens-lvl3-drums-of-doom",
+        "community-quest-weald-lvl3-great-unclean-ones"
+      ],
+      "sourceRulesExact": false,
+      "wholeQuestReadyGain": 0,
+      "sharedPrimitiveReuse": [
+        "QUEST_RULE_BATTLE_SETUP",
+        "QUEST_RULE_HERO_STATE",
+        "QUEST_RULE_MONSTER_STATE",
+        "QUEST_RULE_REWARD_OVERRIDE",
+        "UNBOUND_CATEGORY:hero-condition",
+        "UNBOUND_CATEGORY:initiative",
+        "UNBOUND_CATEGORY:loot",
+        "UNBOUND_CATEGORY:monster-spawn",
+        "UNBOUND_CATEGORY:monster-stat-modifier",
+        "UNBOUND_CATEGORY:objective-completion",
+        "UNBOUND_CATEGORY:objective-qualification",
+        "UNBOUND_CATEGORY:reward-modifier",
+        "UNBOUND_CATEGORY:room-selection"
+      ],
+      "existingRuntimeOverlap": 0,
+      "saveReplayComplexity": "SOURCE_TARGET_TIMING_REQUIRES_SPECIFICATION",
+      "UIComplexity": "NOT_YET_SPECIFIED",
+      "crossRegionReuse": 4
+    },
+    {
+      "category": "objective-completion",
+      "affectedQuestCount": 8,
+      "affectedQuestIds": [
+        "community-quest-crimson-court-lvl1-rivers-run-red",
+        "community-quest-crimson-court-lvl2-take-em-back",
+        "community-quest-ruins-lvl1-dem-bones",
+        "community-quest-ruins-lvl1-fundraiser",
+        "community-quest-ruins-lvl2-purify-the-fountains",
+        "community-quest-ruins-lvl3-warm-up-the-halls",
+        "community-quest-warrens-lvl2-carrion-infestation",
+        "community-quest-weald-lvl3-no-other-way"
+      ],
+      "sourceRulesExact": false,
+      "wholeQuestReadyGain": 0,
+      "sharedPrimitiveReuse": [
+        "QUEST_RULE_BATTLE_RESULT",
+        "QUEST_RULE_MONSTER_STATE",
+        "QUEST_RULE_REWARD_OVERRIDE",
+        "UNBOUND_CATEGORY:battle-end",
+        "UNBOUND_CATEGORY:loot",
+        "UNBOUND_CATEGORY:monster-spawn",
+        "UNBOUND_CATEGORY:monster-stat-modifier",
+        "UNBOUND_CATEGORY:objective-completion",
+        "UNBOUND_CATEGORY:objective-qualification",
+        "UNBOUND_CATEGORY:provision",
+        "UNBOUND_CATEGORY:quest-setup",
+        "UNBOUND_CATEGORY:reward-modifier",
+        "UNBOUND_CATEGORY:room-selection",
+        "UNBOUND_CATEGORY:room-setup"
+      ],
+      "existingRuntimeOverlap": 0,
+      "saveReplayComplexity": "SOURCE_TARGET_TIMING_REQUIRES_SPECIFICATION",
+      "UIComplexity": "NOT_YET_SPECIFIED",
+      "crossRegionReuse": 4
+    },
+    {
+      "category": "objective-qualification",
+      "affectedQuestCount": 14,
+      "affectedQuestIds": [
+        "community-quest-cove-lvl1-purify-the-eldritch-signs",
+        "community-quest-cove-lvl1-test-the-waters",
+        "community-quest-cove-lvl3-tainted-trinkets",
+        "community-quest-cove-lvl3-the-shipwrecks",
+        "community-quest-crimson-court-lvl1-rivers-run-red",
+        "community-quest-crimson-court-lvl2-take-em-back",
+        "community-quest-ruins-lvl1-dem-bones",
+        "community-quest-ruins-lvl2-purify-the-fountains",
+        "community-quest-ruins-lvl3-forward-camps",
+        "community-quest-ruins-lvl3-warm-up-the-halls",
+        "community-quest-warrens-lvl1-family-trinkets",
+        "community-quest-weald-lvl1-disinfection",
+        "community-quest-weald-lvl1-fungal-research",
+        "community-quest-weald-lvl3-no-other-way"
+      ],
+      "sourceRulesExact": false,
+      "wholeQuestReadyGain": 0,
+      "sharedPrimitiveReuse": [
+        "QUEST_RULE_ACTION_AREA_INTERACTION",
+        "QUEST_RULE_ACTION_ECONOMY",
+        "QUEST_RULE_HAMLET_CHOICE",
+        "QUEST_RULE_LOOT_CHEST_SELECTION",
+        "QUEST_RULE_MONSTER_STATE",
+        "QUEST_RULE_QUEST_COMPLETION",
+        "QUEST_RULE_QUIRK_GAIN",
+        "QUEST_RULE_REWARD_OVERRIDE",
+        "QUEST_RULE_ROOM_IDENTITY_SELECTION",
+        "QUEST_RULE_TOKEN_INTERACTION",
+        "QUEST_RULE_TRINKET_ACQUISITION",
+        "QUEST_RULE_TRINKET_FALLBACK_CHOICE",
+        "QUEST_RULE_TRINKET_PROVENANCE",
+        "QUEST_RULE_TRINKET_RETURN_EXCHANGE",
+        "QUEST_RULE_TRINKET_STATE",
+        "UNBOUND_CATEGORY:dungeon-setup",
+        "UNBOUND_CATEGORY:loot",
+        "UNBOUND_CATEGORY:monster-spawn",
+        "UNBOUND_CATEGORY:monster-stat-modifier",
+        "UNBOUND_CATEGORY:objective-completion",
+        "UNBOUND_CATEGORY:objective-qualification",
+        "UNBOUND_CATEGORY:provision",
+        "UNBOUND_CATEGORY:quest-setup",
+        "UNBOUND_CATEGORY:reward-modifier",
+        "UNBOUND_CATEGORY:room-selection",
+        "UNBOUND_CATEGORY:room-setup"
+      ],
+      "existingRuntimeOverlap": 2,
+      "saveReplayComplexity": "SOURCE_TARGET_TIMING_REQUIRES_SPECIFICATION",
+      "UIComplexity": "NOT_YET_SPECIFIED",
+      "crossRegionReuse": 5
+    },
+    {
+      "category": "provision",
+      "affectedQuestCount": 1,
+      "affectedQuestIds": [
+        "community-quest-ruins-lvl3-warm-up-the-halls"
+      ],
+      "sourceRulesExact": false,
+      "wholeQuestReadyGain": 0,
+      "sharedPrimitiveReuse": [
+        "UNBOUND_CATEGORY:objective-completion",
+        "UNBOUND_CATEGORY:objective-qualification",
+        "UNBOUND_CATEGORY:provision"
+      ],
+      "existingRuntimeOverlap": 0,
+      "saveReplayComplexity": "SOURCE_TARGET_TIMING_REQUIRES_SPECIFICATION",
+      "UIComplexity": "NOT_YET_SPECIFIED",
+      "crossRegionReuse": 1
+    },
+    {
+      "category": "quest-setup",
+      "affectedQuestCount": 7,
+      "affectedQuestIds": [
+        "community-quest-boss-face-the-threat",
+        "community-quest-cove-lvl1-purify-the-eldritch-signs",
+        "community-quest-cove-lvl3-tainted-trinkets",
+        "community-quest-ruins-lvl2-purify-the-fountains",
+        "community-quest-warrens-lvl2-bait-them-out",
+        "community-quest-weald-lvl1-disinfection",
+        "community-quest-weald-lvl2-lost-supplies"
+      ],
+      "sourceRulesExact": false,
+      "wholeQuestReadyGain": 0,
+      "sharedPrimitiveReuse": [
+        "QUEST_RULE_ACTION_AREA_INTERACTION",
+        "QUEST_RULE_ACTION_ECONOMY",
+        "QUEST_RULE_BATTLE_SETUP",
+        "QUEST_RULE_HAMLET_CHOICE",
+        "QUEST_RULE_MONSTER_STATE",
+        "QUEST_RULE_QUEST_COMPLETION",
+        "QUEST_RULE_QUIRK_GAIN",
+        "QUEST_RULE_REWARD_OVERRIDE",
+        "QUEST_RULE_ROOM_IDENTITY_SELECTION",
+        "QUEST_RULE_TRINKET_ACQUISITION",
+        "QUEST_RULE_TRINKET_FALLBACK_CHOICE",
+        "QUEST_RULE_TRINKET_STATE",
+        "UNBOUND_CATEGORY:battle-start",
+        "UNBOUND_CATEGORY:campaign-rule",
+        "UNBOUND_CATEGORY:loot",
+        "UNBOUND_CATEGORY:monster-spawn",
+        "UNBOUND_CATEGORY:objective-completion",
+        "UNBOUND_CATEGORY:objective-qualification",
+        "UNBOUND_CATEGORY:quest-setup",
+        "UNBOUND_CATEGORY:reward-modifier",
+        "UNBOUND_CATEGORY:room-selection",
+        "UNBOUND_CATEGORY:room-setup"
+      ],
+      "existingRuntimeOverlap": 1,
+      "saveReplayComplexity": "SOURCE_TARGET_TIMING_REQUIRES_SPECIFICATION",
+      "UIComplexity": "NOT_YET_SPECIFIED",
+      "crossRegionReuse": 5
+    },
+    {
+      "category": "reward-modifier",
+      "affectedQuestCount": 3,
+      "affectedQuestIds": [
+        "community-quest-crimson-court-lvl2-take-em-back",
+        "community-quest-ruins-lvl1-fundraiser",
+        "community-quest-weald-lvl2-lost-supplies"
+      ],
+      "sourceRulesExact": false,
+      "wholeQuestReadyGain": 0,
+      "sharedPrimitiveReuse": [
+        "QUEST_RULE_MONSTER_STATE",
+        "QUEST_RULE_REWARD_OVERRIDE",
+        "UNBOUND_CATEGORY:loot",
+        "UNBOUND_CATEGORY:monster-stat-modifier",
+        "UNBOUND_CATEGORY:objective-completion",
+        "UNBOUND_CATEGORY:objective-qualification",
+        "UNBOUND_CATEGORY:quest-setup",
+        "UNBOUND_CATEGORY:reward-modifier",
+        "UNBOUND_CATEGORY:room-selection"
+      ],
+      "existingRuntimeOverlap": 0,
+      "saveReplayComplexity": "SOURCE_TARGET_TIMING_REQUIRES_SPECIFICATION",
+      "UIComplexity": "NOT_YET_SPECIFIED",
+      "crossRegionReuse": 3
+    },
+    {
+      "category": "room-clear-rule",
+      "affectedQuestCount": 1,
+      "affectedQuestIds": [
+        "community-quest-crimson-court-lvl1-rest-in-rubble"
+      ],
+      "sourceRulesExact": false,
+      "wholeQuestReadyGain": 0,
+      "sharedPrimitiveReuse": [
+        "QUEST_RULE_ROOM_CLEAR",
+        "UNBOUND_CATEGORY:curio",
+        "UNBOUND_CATEGORY:room-clear-rule"
+      ],
+      "existingRuntimeOverlap": 0,
+      "saveReplayComplexity": "SOURCE_TARGET_TIMING_REQUIRES_SPECIFICATION",
+      "UIComplexity": "NOT_YET_SPECIFIED",
+      "crossRegionReuse": 1
+    },
+    {
+      "category": "room-selection",
+      "affectedQuestCount": 14,
+      "affectedQuestIds": [
+        "community-quest-cove-lvl1-purify-the-eldritch-signs",
+        "community-quest-cove-lvl1-test-the-waters",
+        "community-quest-cove-lvl2-the-deep-ones",
+        "community-quest-cove-lvl3-the-deep-ones-2",
+        "community-quest-crimson-court-lvl1-lost-and-found",
+        "community-quest-crimson-court-lvl1-rivers-run-red",
+        "community-quest-crimson-court-lvl2-ruin-the-party",
+        "community-quest-crimson-court-lvl2-take-em-back",
+        "community-quest-crimson-court-lvl3-breeders",
+        "community-quest-ruins-lvl2-disruption",
+        "community-quest-warrens-lvl1-family-trinkets",
+        "community-quest-weald-lvl1-fungal-research",
+        "community-quest-weald-lvl2-hounds-of-the-woods",
+        "community-quest-weald-lvl2-lost-supplies"
+      ],
+      "sourceRulesExact": false,
+      "wholeQuestReadyGain": 0,
+      "sharedPrimitiveReuse": [
+        "QUEST_RULE_LOOT_CHEST_SELECTION",
+        "QUEST_RULE_MONSTER_STATE",
+        "QUEST_RULE_QUEST_COMPLETION",
+        "QUEST_RULE_REWARD_OVERRIDE",
+        "QUEST_RULE_TOKEN_INTERACTION",
+        "QUEST_RULE_TRINKET_ACQUISITION",
+        "QUEST_RULE_TRINKET_PROVENANCE",
+        "QUEST_RULE_TRINKET_RETURN_EXCHANGE",
+        "UNBOUND_CATEGORY:loot",
+        "UNBOUND_CATEGORY:monster-pool",
+        "UNBOUND_CATEGORY:monster-spawn",
+        "UNBOUND_CATEGORY:monster-stat-modifier",
+        "UNBOUND_CATEGORY:objective-completion",
+        "UNBOUND_CATEGORY:objective-qualification",
+        "UNBOUND_CATEGORY:quest-setup",
+        "UNBOUND_CATEGORY:reward-modifier",
+        "UNBOUND_CATEGORY:room-selection",
+        "UNBOUND_CATEGORY:room-setup"
+      ],
+      "existingRuntimeOverlap": 1,
+      "saveReplayComplexity": "SOURCE_TARGET_TIMING_REQUIRES_SPECIFICATION",
+      "UIComplexity": "NOT_YET_SPECIFIED",
+      "crossRegionReuse": 5
+    },
+    {
+      "category": "room-setup",
+      "affectedQuestCount": 22,
+      "affectedQuestIds": [
+        "community-quest-cove-lvl1-purify-the-eldritch-signs",
+        "community-quest-cove-lvl1-test-the-waters",
+        "community-quest-cove-lvl2-the-deep-ones",
+        "community-quest-cove-lvl3-tainted-trinkets",
+        "community-quest-cove-lvl3-the-deep-ones-2",
+        "community-quest-cove-lvl3-the-shipwrecks",
+        "community-quest-crimson-court-lvl1-rivers-run-red",
+        "community-quest-crimson-court-lvl2-ruin-the-party",
+        "community-quest-crimson-court-lvl3-breeders",
+        "community-quest-crimson-court-lvl3-uninvited",
+        "community-quest-ruins-lvl1-dem-bones",
+        "community-quest-ruins-lvl2-disruption",
+        "community-quest-ruins-lvl2-purify-the-fountains",
+        "community-quest-warrens-lvl1-disarm-them",
+        "community-quest-warrens-lvl1-worm-squash",
+        "community-quest-warrens-lvl2-ringleaders",
+        "community-quest-warrens-lvl3-foul-arsenal",
+        "community-quest-weald-lvl1-circle-of-witches",
+        "community-quest-weald-lvl1-disinfection",
+        "community-quest-weald-lvl1-fungal-research",
+        "community-quest-weald-lvl2-hounds-of-the-woods",
+        "community-quest-weald-lvl3-no-other-way"
+      ],
+      "sourceRulesExact": false,
+      "wholeQuestReadyGain": 0,
+      "sharedPrimitiveReuse": [
+        "QUEST_RULE_ACTION_AREA_INTERACTION",
+        "QUEST_RULE_ACTION_ECONOMY",
+        "QUEST_RULE_BATTLE_RESULT",
+        "QUEST_RULE_HAMLET_CHOICE",
+        "QUEST_RULE_HERO_STATE",
+        "QUEST_RULE_MONSTER_STATE",
+        "QUEST_RULE_QUEST_COMPLETION",
+        "QUEST_RULE_QUIRK_GAIN",
+        "QUEST_RULE_ROOM_IDENTITY_SELECTION",
+        "QUEST_RULE_TRINKET_ACQUISITION",
+        "QUEST_RULE_TRINKET_FALLBACK_CHOICE",
+        "QUEST_RULE_TRINKET_STATE",
+        "UNBOUND_CATEGORY:battle-end",
+        "UNBOUND_CATEGORY:hero-condition",
+        "UNBOUND_CATEGORY:monster-pool",
+        "UNBOUND_CATEGORY:monster-spawn",
+        "UNBOUND_CATEGORY:objective-completion",
+        "UNBOUND_CATEGORY:objective-qualification",
+        "UNBOUND_CATEGORY:quest-setup",
+        "UNBOUND_CATEGORY:room-selection",
+        "UNBOUND_CATEGORY:room-setup"
+      ],
+      "existingRuntimeOverlap": 1,
+      "saveReplayComplexity": "SOURCE_TARGET_TIMING_REQUIRES_SPECIFICATION",
+      "UIComplexity": "NOT_YET_SPECIFIED",
+      "crossRegionReuse": 5
+    },
+    {
+      "category": "scouting",
+      "affectedQuestCount": 1,
+      "affectedQuestIds": [
+        "community-quest-warrens-lvl3-infighting"
+      ],
+      "sourceRulesExact": false,
+      "wholeQuestReadyGain": 0,
+      "sharedPrimitiveReuse": [
+        "QUEST_RULE_BATTLE_SETUP",
+        "QUEST_RULE_EXPLORATION",
+        "QUEST_RULE_MONSTER_STATE",
+        "UNBOUND_CATEGORY:exploration",
+        "UNBOUND_CATEGORY:initiative",
+        "UNBOUND_CATEGORY:monster-spawn",
+        "UNBOUND_CATEGORY:scouting"
+      ],
+      "existingRuntimeOverlap": 0,
+      "saveReplayComplexity": "SOURCE_TARGET_TIMING_REQUIRES_SPECIFICATION",
+      "UIComplexity": "NOT_YET_SPECIFIED",
+      "crossRegionReuse": 1
+    },
+    {
+      "category": "trinket-provenance",
+      "affectedQuestCount": 1,
+      "affectedQuestIds": [
+        "community-quest-warrens-lvl1-family-trinkets"
+      ],
+      "sourceRulesExact": true,
+      "wholeQuestReadyGain": 0,
+      "sharedPrimitiveReuse": [
+        "QUEST_RULE_LOOT_CHEST_SELECTION",
+        "QUEST_RULE_QUEST_COMPLETION",
+        "QUEST_RULE_TOKEN_INTERACTION",
+        "QUEST_RULE_TRINKET_ACQUISITION",
+        "QUEST_RULE_TRINKET_PROVENANCE",
+        "QUEST_RULE_TRINKET_RETURN_EXCHANGE"
+      ],
+      "existingRuntimeOverlap": 1,
+      "saveReplayComplexity": "SOURCE_TARGET_TIMING_REQUIRES_SPECIFICATION",
+      "UIComplexity": "NOT_YET_SPECIFIED",
+      "crossRegionReuse": 1
+    },
+    {
+      "category": "trinket-state",
+      "affectedQuestCount": 1,
+      "affectedQuestIds": [
+        "community-quest-cove-lvl3-tainted-trinkets"
+      ],
+      "sourceRulesExact": true,
+      "wholeQuestReadyGain": 0,
+      "sharedPrimitiveReuse": [
+        "QUEST_RULE_ACTION_AREA_INTERACTION",
+        "QUEST_RULE_ACTION_ECONOMY",
+        "QUEST_RULE_HAMLET_CHOICE",
+        "QUEST_RULE_QUEST_COMPLETION",
+        "QUEST_RULE_QUIRK_GAIN",
+        "QUEST_RULE_ROOM_IDENTITY_SELECTION",
+        "QUEST_RULE_TRINKET_ACQUISITION",
+        "QUEST_RULE_TRINKET_FALLBACK_CHOICE",
+        "QUEST_RULE_TRINKET_STATE"
+      ],
+      "existingRuntimeOverlap": 1,
+      "saveReplayComplexity": "SOURCE_TARGET_TIMING_REQUIRES_SPECIFICATION",
+      "UIComplexity": "NOT_YET_SPECIFIED",
+      "crossRegionReuse": 1
+    }
+  ],
+  "reusedProofRegistry": {
+    "C1C17-SURVIVAL-GUIDE-RUNTIME": {
+      "proofId": "C1C17-SURVIVAL-GUIDE-RUNTIME",
+      "definitionIds": [
+        "community-trinket-core-survival-guide"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1c17-survival-guide.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C17-SURVIVAL-GUIDE-RESULT-TRANSFORM": {
+      "proofId": "C1C17-SURVIVAL-GUIDE-RESULT-TRANSFORM",
+      "definitionIds": [
+        "community-trinket-core-survival-guide"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1c17-survival-guide.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C17-SURVIVAL-GUIDE-MULTI-COPY": {
+      "proofId": "C1C17-SURVIVAL-GUIDE-MULTI-COPY",
+      "definitionIds": [
+        "community-trinket-core-survival-guide"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1c17-survival-guide.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C17-SURVIVAL-GUIDE-SAVE-REPLAY": {
+      "proofId": "C1C17-SURVIVAL-GUIDE-SAVE-REPLAY",
+      "definitionIds": [
+        "community-trinket-core-survival-guide"
+      ],
+      "proofType": "save-replay",
+      "testFile": "src/game-engine/c1c17-survival-guide.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C17-SURVIVAL-GUIDE-SELECTOR": {
+      "proofId": "C1C17-SURVIVAL-GUIDE-SELECTOR",
+      "definitionIds": [
+        "community-trinket-core-survival-guide"
+      ],
+      "proofType": "selector",
+      "testFile": "src/game-engine/c1c17-survival-guide.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C17-E2E-SURVIVAL-GUIDE-POSITIVE": {
+      "proofId": "C1C17-E2E-SURVIVAL-GUIDE-POSITIVE",
+      "definitionIds": [
+        "community-trinket-core-survival-guide"
+      ],
+      "proofType": "e2e",
+      "testFile": "e2e/phase11a4-c1c17-survival-guide.spec.ts",
+      "runner": "playwright",
+      "status": "active",
+      "scope": "definition",
+      "proofSurface": "production-ui"
+    },
+    "C1C17-E2E-SURVIVAL-GUIDE-NEGATIVE": {
+      "proofId": "C1C17-E2E-SURVIVAL-GUIDE-NEGATIVE",
+      "definitionIds": [
+        "community-trinket-core-survival-guide"
+      ],
+      "proofType": "e2e",
+      "testFile": "e2e/phase11a4-c1c17-survival-guide.spec.ts",
+      "runner": "playwright",
+      "status": "active",
+      "scope": "definition",
+      "proofSurface": "production-ui"
+    },
+    "C1C16-ARCHER-RING-RUNTIME": {
+      "proofId": "C1C16-ARCHER-RING-RUNTIME",
+      "definitionIds": [
+        "community-trinket-core-archers-ring"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1c16-level1-stance-accuracy.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C16-ARCHER-RING-SAVE-REPLAY": {
+      "proofId": "C1C16-ARCHER-RING-SAVE-REPLAY",
+      "definitionIds": [
+        "community-trinket-core-archers-ring"
+      ],
+      "proofType": "save-replay",
+      "testFile": "src/game-engine/c1c16-level1-stance-accuracy.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C16-ARCHER-RING-SELECTOR": {
+      "proofId": "C1C16-ARCHER-RING-SELECTOR",
+      "definitionIds": [
+        "community-trinket-core-archers-ring"
+      ],
+      "proofType": "selector",
+      "testFile": "src/game-engine/c1c16-level1-stance-accuracy.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C16-E2E-ARCHER-RING": {
+      "proofId": "C1C16-E2E-ARCHER-RING",
+      "definitionIds": [
+        "community-trinket-core-archers-ring"
+      ],
+      "proofType": "e2e",
+      "testFile": "e2e/phase11a4-c1c16-level1-stance-accuracy.spec.ts",
+      "runner": "playwright",
+      "status": "active",
+      "scope": "definition",
+      "proofSurface": "production-ui"
+    },
+    "C1C16-SAGE-BOOK-RUNTIME": {
+      "proofId": "C1C16-SAGE-BOOK-RUNTIME",
+      "definitionIds": [
+        "community-trinket-core-sages-book"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1c16-level1-stance-accuracy.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C16-SAGE-BOOK-SAVE-REPLAY": {
+      "proofId": "C1C16-SAGE-BOOK-SAVE-REPLAY",
+      "definitionIds": [
+        "community-trinket-core-sages-book"
+      ],
+      "proofType": "save-replay",
+      "testFile": "src/game-engine/c1c16-level1-stance-accuracy.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C16-SAGE-BOOK-SELECTOR": {
+      "proofId": "C1C16-SAGE-BOOK-SELECTOR",
+      "definitionIds": [
+        "community-trinket-core-sages-book"
+      ],
+      "proofType": "selector",
+      "testFile": "src/game-engine/c1c16-level1-stance-accuracy.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C16-E2E-SAGE-BOOK": {
+      "proofId": "C1C16-E2E-SAGE-BOOK",
+      "definitionIds": [
+        "community-trinket-core-sages-book"
+      ],
+      "proofType": "e2e",
+      "testFile": "e2e/phase11a4-c1c16-level1-stance-accuracy.spec.ts",
+      "runner": "playwright",
+      "status": "active",
+      "scope": "definition",
+      "proofSurface": "production-ui"
+    },
+    "C1C16-WARRIOR-BRACER-RUNTIME": {
+      "proofId": "C1C16-WARRIOR-BRACER-RUNTIME",
+      "definitionIds": [
+        "community-trinket-core-warriors-bracer"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1c16-level1-stance-accuracy.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C16-WARRIOR-BRACER-SAVE-REPLAY": {
+      "proofId": "C1C16-WARRIOR-BRACER-SAVE-REPLAY",
+      "definitionIds": [
+        "community-trinket-core-warriors-bracer"
+      ],
+      "proofType": "save-replay",
+      "testFile": "src/game-engine/c1c16-level1-stance-accuracy.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C16-WARRIOR-BRACER-SELECTOR": {
+      "proofId": "C1C16-WARRIOR-BRACER-SELECTOR",
+      "definitionIds": [
+        "community-trinket-core-warriors-bracer"
+      ],
+      "proofType": "selector",
+      "testFile": "src/game-engine/c1c16-level1-stance-accuracy.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C16-E2E-WARRIOR-BRACER": {
+      "proofId": "C1C16-E2E-WARRIOR-BRACER",
+      "definitionIds": [
+        "community-trinket-core-warriors-bracer"
+      ],
+      "proofType": "e2e",
+      "testFile": "e2e/phase11a4-c1c16-level1-stance-accuracy.spec.ts",
+      "runner": "playwright",
+      "status": "active",
+      "scope": "definition",
+      "proofSurface": "production-ui"
+    },
+    "C1C16-WARRIOR-CAP-RUNTIME": {
+      "proofId": "C1C16-WARRIOR-CAP-RUNTIME",
+      "definitionIds": [
+        "community-trinket-core-warriors-cap"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1c16-level1-stance-accuracy.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C16-WARRIOR-CAP-SAVE-REPLAY": {
+      "proofId": "C1C16-WARRIOR-CAP-SAVE-REPLAY",
+      "definitionIds": [
+        "community-trinket-core-warriors-cap"
+      ],
+      "proofType": "save-replay",
+      "testFile": "src/game-engine/c1c16-level1-stance-accuracy.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C16-WARRIOR-CAP-SELECTOR": {
+      "proofId": "C1C16-WARRIOR-CAP-SELECTOR",
+      "definitionIds": [
+        "community-trinket-core-warriors-cap"
+      ],
+      "proofType": "selector",
+      "testFile": "src/game-engine/c1c16-level1-stance-accuracy.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C16-E2E-WARRIOR-CAP": {
+      "proofId": "C1C16-E2E-WARRIOR-CAP",
+      "definitionIds": [
+        "community-trinket-core-warriors-cap"
+      ],
+      "proofType": "e2e",
+      "testFile": "e2e/phase11a4-c1c16-level1-stance-accuracy.spec.ts",
+      "runner": "playwright",
+      "status": "active",
+      "scope": "definition",
+      "proofSurface": "production-ui"
+    },
+    "C1C15-DEFENDER-RING-RUNTIME": {
+      "proofId": "C1C15-DEFENDER-RING-RUNTIME",
+      "definitionIds": [
+        "community-trinket-core-defenders-ring"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1c15-level3-stance-rings.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C15-DEFENDER-RING-SAVE-REPLAY": {
+      "proofId": "C1C15-DEFENDER-RING-SAVE-REPLAY",
+      "definitionIds": [
+        "community-trinket-core-defenders-ring"
+      ],
+      "proofType": "save-replay",
+      "testFile": "src/game-engine/c1c15-level3-stance-rings.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C15-DEFENDER-RING-SELECTOR": {
+      "proofId": "C1C15-DEFENDER-RING-SELECTOR",
+      "definitionIds": [
+        "community-trinket-core-defenders-ring"
+      ],
+      "proofType": "selector",
+      "testFile": "src/game-engine/c1c15-level3-stance-rings.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C15-E2E-DEFENDER-RING": {
+      "proofId": "C1C15-E2E-DEFENDER-RING",
+      "definitionIds": [
+        "community-trinket-core-defenders-ring"
+      ],
+      "proofType": "e2e",
+      "testFile": "e2e/phase11a4-c1c15-level3-stance-rings.spec.ts",
+      "runner": "playwright",
+      "status": "active",
+      "scope": "definition",
+      "proofSurface": "production-ui"
+    },
+    "C1C15-SCHOLAR-RING-RUNTIME": {
+      "proofId": "C1C15-SCHOLAR-RING-RUNTIME",
+      "definitionIds": [
+        "community-trinket-core-scholars-ring"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1c15-level3-stance-rings.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C15-SCHOLAR-RING-SAVE-REPLAY": {
+      "proofId": "C1C15-SCHOLAR-RING-SAVE-REPLAY",
+      "definitionIds": [
+        "community-trinket-core-scholars-ring"
+      ],
+      "proofType": "save-replay",
+      "testFile": "src/game-engine/c1c15-level3-stance-rings.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C15-SCHOLAR-RING-SELECTOR": {
+      "proofId": "C1C15-SCHOLAR-RING-SELECTOR",
+      "definitionIds": [
+        "community-trinket-core-scholars-ring"
+      ],
+      "proofType": "selector",
+      "testFile": "src/game-engine/c1c15-level3-stance-rings.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C15-E2E-SCHOLAR-RING": {
+      "proofId": "C1C15-E2E-SCHOLAR-RING",
+      "definitionIds": [
+        "community-trinket-core-scholars-ring"
+      ],
+      "proofType": "e2e",
+      "testFile": "e2e/phase11a4-c1c15-level3-stance-rings.spec.ts",
+      "runner": "playwright",
+      "status": "active",
+      "scope": "definition",
+      "proofSurface": "production-ui"
+    },
+    "C1C15-SNIPER-RING-RUNTIME": {
+      "proofId": "C1C15-SNIPER-RING-RUNTIME",
+      "definitionIds": [
+        "community-trinket-core-snipers-ring"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1c15-level3-stance-rings.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C15-SNIPER-RING-SAVE-REPLAY": {
+      "proofId": "C1C15-SNIPER-RING-SAVE-REPLAY",
+      "definitionIds": [
+        "community-trinket-core-snipers-ring"
+      ],
+      "proofType": "save-replay",
+      "testFile": "src/game-engine/c1c15-level3-stance-rings.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C15-SNIPER-RING-SELECTOR": {
+      "proofId": "C1C15-SNIPER-RING-SELECTOR",
+      "definitionIds": [
+        "community-trinket-core-snipers-ring"
+      ],
+      "proofType": "selector",
+      "testFile": "src/game-engine/c1c15-level3-stance-rings.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C15-E2E-SNIPER-RING": {
+      "proofId": "C1C15-E2E-SNIPER-RING",
+      "definitionIds": [
+        "community-trinket-core-snipers-ring"
+      ],
+      "proofType": "e2e",
+      "testFile": "e2e/phase11a4-c1c15-level3-stance-rings.spec.ts",
+      "runner": "playwright",
+      "status": "active",
+      "scope": "definition",
+      "proofSurface": "production-ui"
+    },
+    "C1C15-WARRIOR-RING-RUNTIME": {
+      "proofId": "C1C15-WARRIOR-RING-RUNTIME",
+      "definitionIds": [
+        "community-trinket-core-warriors-ring"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1c15-level3-stance-rings.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C15-WARRIOR-RING-SAVE-REPLAY": {
+      "proofId": "C1C15-WARRIOR-RING-SAVE-REPLAY",
+      "definitionIds": [
+        "community-trinket-core-warriors-ring"
+      ],
+      "proofType": "save-replay",
+      "testFile": "src/game-engine/c1c15-level3-stance-rings.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C15-WARRIOR-RING-SELECTOR": {
+      "proofId": "C1C15-WARRIOR-RING-SELECTOR",
+      "definitionIds": [
+        "community-trinket-core-warriors-ring"
+      ],
+      "proofType": "selector",
+      "testFile": "src/game-engine/c1c15-level3-stance-rings.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C15-E2E-WARRIOR-RING": {
+      "proofId": "C1C15-E2E-WARRIOR-RING",
+      "definitionIds": [
+        "community-trinket-core-warriors-ring"
+      ],
+      "proofType": "e2e",
+      "testFile": "e2e/phase11a4-c1c15-level3-stance-rings.spec.ts",
+      "runner": "playwright",
+      "status": "active",
+      "scope": "definition",
+      "proofSurface": "production-ui"
+    },
+    "C1C3-TAINTED-RUNTIME": {
+      "proofId": "C1C3-TAINTED-RUNTIME",
+      "definitionIds": [
+        "community-quest-cove-lvl3-tainted-trinkets"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1c3-multi-primitive-quest-rule.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C3-TAINTED-SAVE-REPLAY": {
+      "proofId": "C1C3-TAINTED-SAVE-REPLAY",
+      "definitionIds": [
+        "community-quest-cove-lvl3-tainted-trinkets"
+      ],
+      "proofType": "save-replay",
+      "testFile": "src/game-engine/c1c3-multi-primitive-quest-rule.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C3-TAINTED-SELECTOR": {
+      "proofId": "C1C3-TAINTED-SELECTOR",
+      "definitionIds": [
+        "community-quest-cove-lvl3-tainted-trinkets"
+      ],
+      "proofType": "selector",
+      "testFile": "src/game-engine/c1c3-multi-primitive-quest-rule.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C3-E2E-TAINTED-TRINKETS": {
+      "proofId": "C1C3-E2E-TAINTED-TRINKETS",
+      "definitionIds": [
+        "community-quest-cove-lvl3-tainted-trinkets"
+      ],
+      "proofType": "e2e",
+      "testFile": "e2e/phase11a4-c1c3-multi-primitive-quest.spec.ts",
+      "runner": "playwright",
+      "status": "active",
+      "scope": "definition",
+      "proofSurface": "test-harness"
+    },
+    "C1C3-FAMILY-RUNTIME": {
+      "proofId": "C1C3-FAMILY-RUNTIME",
+      "definitionIds": [
+        "community-quest-warrens-lvl1-family-trinkets"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1c3-multi-primitive-quest-rule.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C3-FAMILY-SAVE-REPLAY": {
+      "proofId": "C1C3-FAMILY-SAVE-REPLAY",
+      "definitionIds": [
+        "community-quest-warrens-lvl1-family-trinkets"
+      ],
+      "proofType": "save-replay",
+      "testFile": "src/game-engine/c1c3-multi-primitive-quest-rule.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C3-FAMILY-SELECTOR": {
+      "proofId": "C1C3-FAMILY-SELECTOR",
+      "definitionIds": [
+        "community-quest-warrens-lvl1-family-trinkets"
+      ],
+      "proofType": "selector",
+      "testFile": "src/game-engine/c1c3-multi-primitive-quest-rule.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C3-E2E-FAMILY-TRINKETS": {
+      "proofId": "C1C3-E2E-FAMILY-TRINKETS",
+      "definitionIds": [
+        "community-quest-warrens-lvl1-family-trinkets"
+      ],
+      "proofType": "e2e",
+      "testFile": "e2e/phase11a4-c1c3-multi-primitive-quest.spec.ts",
+      "runner": "playwright",
+      "status": "active",
+      "scope": "definition",
+      "proofSurface": "test-harness"
+    },
+    "C1C1R-QUEST-SOURCE-SETUP": {
+      "proofId": "C1C1R-QUEST-SOURCE-SETUP",
+      "definitionIds": [
+        "community-quest-ruins-lvl1-scout-ahead",
+        "community-quest-ruins-lvl1-wipe-em-out",
+        "community-quest-ruins-lvl2-clear-the-path",
+        "community-quest-ruins-lvl2-reduce-to-rubble",
+        "community-quest-warrens-lvl1-explore-the-sewers",
+        "community-quest-warrens-lvl1-pork-chop",
+        "community-quest-warrens-lvl2-mapping-the-sewers"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1c1r-firewood-real-flow.test.ts",
+      "runner": "vitest",
+      "status": "active"
+    },
+    "C1C1-QUEST-RUNTIME": {
+      "proofId": "C1C1-QUEST-RUNTIME",
+      "definitionIds": [
+        "community-quest-ruins-lvl1-scout-ahead",
+        "community-quest-ruins-lvl1-wipe-em-out",
+        "community-quest-ruins-lvl2-clear-the-path",
+        "community-quest-ruins-lvl2-reduce-to-rubble",
+        "community-quest-warrens-lvl1-explore-the-sewers",
+        "community-quest-warrens-lvl1-pork-chop",
+        "community-quest-warrens-lvl2-mapping-the-sewers"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+      "runner": "vitest",
+      "status": "active"
+    },
+    "C1C1-QUEST-SAVE-REPLAY": {
+      "proofId": "C1C1-QUEST-SAVE-REPLAY",
+      "definitionIds": [
+        "community-quest-ruins-lvl1-scout-ahead",
+        "community-quest-ruins-lvl1-wipe-em-out",
+        "community-quest-ruins-lvl2-clear-the-path",
+        "community-quest-ruins-lvl2-reduce-to-rubble",
+        "community-quest-warrens-lvl1-explore-the-sewers",
+        "community-quest-warrens-lvl1-pork-chop",
+        "community-quest-warrens-lvl2-mapping-the-sewers"
+      ],
+      "proofType": "save-replay",
+      "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+      "runner": "vitest",
+      "status": "active"
+    },
+    "C1C1-QUEST-SELECTOR": {
+      "proofId": "C1C1-QUEST-SELECTOR",
+      "definitionIds": [
+        "community-quest-ruins-lvl1-scout-ahead",
+        "community-quest-ruins-lvl1-wipe-em-out",
+        "community-quest-ruins-lvl2-clear-the-path",
+        "community-quest-ruins-lvl2-reduce-to-rubble",
+        "community-quest-warrens-lvl1-explore-the-sewers",
+        "community-quest-warrens-lvl1-pork-chop",
+        "community-quest-warrens-lvl2-mapping-the-sewers"
+      ],
+      "proofType": "selector",
+      "testFile": "src/game-engine/c1c1-community-quest-production.test.ts",
+      "runner": "vitest",
+      "status": "active"
+    },
+    "C1C1R-E2E-SIMPLE-QUEST-ADAPTER": {
+      "proofId": "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+      "definitionIds": [],
+      "proofType": "e2e",
+      "testFile": "e2e/phase11a4-c1c1r-real-community-quest.spec.ts",
+      "runner": "playwright",
+      "status": "active",
+      "scope": "adapter",
+      "adapterId": "c1c1-simple-community-quest-v1",
+      "proofSurface": "production-ui"
+    },
+    "C1C1R2-E2E-REST-ALLOCATION": {
+      "proofId": "C1C1R2-E2E-REST-ALLOCATION",
+      "definitionIds": [],
+      "proofType": "e2e",
+      "testFile": "e2e/phase11a4-c1c1r2-rest-allocation.spec.ts",
+      "runner": "playwright",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "QUEST_REST_ALLOCATION_SEMANTICS",
+      "proofSurface": "production-ui"
+    },
+    "C1C2-ADAPTER-RUNTIME": {
+      "proofId": "C1C2-ADAPTER-RUNTIME",
+      "definitionIds": [
+        "community-quest-crimson-court-lvl1-deep-in-the-swamp",
+        "community-quest-crimson-court-lvl2-deeper-into-the-swamp",
+        "community-quest-crimson-court-lvl2-pest-control"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1c2-quest-runtime-expansion.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C2-ADAPTER-SAVE-REPLAY": {
+      "proofId": "C1C2-ADAPTER-SAVE-REPLAY",
+      "definitionIds": [
+        "community-quest-crimson-court-lvl1-deep-in-the-swamp",
+        "community-quest-crimson-court-lvl2-deeper-into-the-swamp",
+        "community-quest-crimson-court-lvl2-pest-control"
+      ],
+      "proofType": "save-replay",
+      "testFile": "src/game-engine/c1c2-quest-runtime-expansion.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C2-ADAPTER-SELECTOR": {
+      "proofId": "C1C2-ADAPTER-SELECTOR",
+      "definitionIds": [
+        "community-quest-crimson-court-lvl1-deep-in-the-swamp",
+        "community-quest-crimson-court-lvl2-deeper-into-the-swamp",
+        "community-quest-crimson-court-lvl2-pest-control"
+      ],
+      "proofType": "selector",
+      "testFile": "src/game-engine/c1c2-quest-runtime-expansion.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C2-SPECIAL-RULE-RUNTIME": {
+      "proofId": "C1C2-SPECIAL-RULE-RUNTIME",
+      "definitionIds": [
+        "community-quest-warrens-lvl3-deep-in-the-warrens"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1c2-quest-runtime-expansion.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C2-SPECIAL-RULE-SAVE-REPLAY": {
+      "proofId": "C1C2-SPECIAL-RULE-SAVE-REPLAY",
+      "definitionIds": [
+        "community-quest-warrens-lvl3-deep-in-the-warrens"
+      ],
+      "proofType": "save-replay",
+      "testFile": "src/game-engine/c1c2-quest-runtime-expansion.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C2-SPECIAL-RULE-SELECTOR": {
+      "proofId": "C1C2-SPECIAL-RULE-SELECTOR",
+      "definitionIds": [
+        "community-quest-warrens-lvl3-deep-in-the-warrens"
+      ],
+      "proofType": "selector",
+      "testFile": "src/game-engine/c1c2-quest-runtime-expansion.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C2-E2E-SPECIAL-RULE": {
+      "proofId": "C1C2-E2E-SPECIAL-RULE",
+      "definitionIds": [
+        "community-quest-warrens-lvl3-deep-in-the-warrens"
+      ],
+      "proofType": "e2e",
+      "testFile": "e2e/phase11a4-c1c2-quest-special-rule.spec.ts",
+      "runner": "playwright",
+      "status": "active",
+      "scope": "definition",
+      "proofSurface": "production-ui"
+    },
+    "C1BR-PA-ACCURACY-RUNTIME": {
+      "proofId": "C1BR-PA-ACCURACY-RUNTIME",
+      "definitionIds": [
+        "community-trinket-core-accuracy-stone"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1br-production-proof.test.ts",
+      "runner": "vitest",
+      "status": "active"
+    },
+    "C1BR-PA-CRITICAL-RUNTIME": {
+      "proofId": "C1BR-PA-CRITICAL-RUNTIME",
+      "definitionIds": [
+        "community-trinket-core-critical-stone"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1br-production-proof.test.ts",
+      "runner": "vitest",
+      "status": "active"
+    },
+    "C1BR-CS-TRINKET-METADATA": {
+      "proofId": "C1BR-CS-TRINKET-METADATA",
+      "definitionIds": [
+        "community-trinket-core-accuracy-stone",
+        "community-trinket-core-critical-stone"
+      ],
+      "proofType": "selector",
+      "testFile": "src/game-engine/c1br-production-proof.test.ts",
+      "runner": "vitest",
+      "status": "active"
+    },
+    "C1BR-SAVE-ACCURACY-SIDE-REPLAY": {
+      "proofId": "C1BR-SAVE-ACCURACY-SIDE-REPLAY",
+      "definitionIds": [
+        "community-trinket-core-accuracy-stone"
+      ],
+      "proofType": "save-replay",
+      "testFile": "src/game-engine/c1br-production-proof.test.ts",
+      "runner": "vitest",
+      "status": "active"
+    },
+    "C1BR-SAVE-CRITICAL-SIDE-REPLAY": {
+      "proofId": "C1BR-SAVE-CRITICAL-SIDE-REPLAY",
+      "definitionIds": [
+        "community-trinket-core-critical-stone"
+      ],
+      "proofType": "save-replay",
+      "testFile": "src/game-engine/c1br-production-proof.test.ts",
+      "runner": "vitest",
+      "status": "active"
+    },
+    "C1BR-E2E-ACCURACY": {
+      "proofId": "C1BR-E2E-ACCURACY",
+      "definitionIds": [
+        "community-trinket-core-accuracy-stone"
+      ],
+      "proofType": "e2e",
+      "testFile": "e2e/phase11a4-c1br-community-trinket-production.spec.ts",
+      "runner": "playwright",
+      "status": "active",
+      "proofSurface": "production-ui"
+    },
+    "C1BR-E2E-CRITICAL": {
+      "proofId": "C1BR-E2E-CRITICAL",
+      "definitionIds": [
+        "community-trinket-core-critical-stone"
+      ],
+      "proofType": "e2e",
+      "testFile": "e2e/phase11a4-c1br-community-trinket-production.spec.ts",
+      "runner": "playwright",
+      "status": "active",
+      "proofSurface": "production-ui"
+    },
+    "C1C5-CHIRURGEONS-RUNTIME": {
+      "proofId": "C1C5-CHIRURGEONS-RUNTIME",
+      "definitionIds": [
+        "community-trinket-core-chirurgeons-charm"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1c5-chirurgeons-charm.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "BATTLE_HEALING_TRINKET_WINDOWS"
+    },
+    "C1C5-CHIRURGEONS-SAVE-REPLAY": {
+      "proofId": "C1C5-CHIRURGEONS-SAVE-REPLAY",
+      "definitionIds": [
+        "community-trinket-core-chirurgeons-charm"
+      ],
+      "proofType": "save-replay",
+      "testFile": "src/game-engine/c1c5-chirurgeons-charm.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "BATTLE_HEALING_TRINKET_WINDOWS"
+    },
+    "C1C5-CHIRURGEONS-SELECTOR": {
+      "proofId": "C1C5-CHIRURGEONS-SELECTOR",
+      "definitionIds": [
+        "community-trinket-core-chirurgeons-charm"
+      ],
+      "proofType": "selector",
+      "testFile": "src/game-engine/c1c5-chirurgeons-charm.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "BATTLE_HEALING_TRINKET_WINDOWS"
+    },
+    "C1C5-E2E-CHIRURGEONS": {
+      "proofId": "C1C5-E2E-CHIRURGEONS",
+      "definitionIds": [
+        "community-trinket-core-chirurgeons-charm"
+      ],
+      "proofType": "e2e",
+      "testFile": "e2e/phase11a4-c1c5-chirurgeons-charm.spec.ts",
+      "runner": "playwright",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "BATTLE_HEALING_TRINKET_WINDOWS",
+      "proofSurface": "production-ui"
+    },
+    "C1C6-DARK-BRACER-RUNTIME": {
+      "proofId": "C1C6-DARK-BRACER-RUNTIME",
+      "definitionIds": [
+        "community-trinket-core-dark-bracer"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1c6-dark-solar-bracer.test.ts",
+      "runner": "vitest",
+      "status": "active"
+    },
+    "C1C6-DARK-BRACER-SAVE-REPLAY": {
+      "proofId": "C1C6-DARK-BRACER-SAVE-REPLAY",
+      "definitionIds": [
+        "community-trinket-core-dark-bracer"
+      ],
+      "proofType": "save-replay",
+      "testFile": "src/game-engine/c1c6-dark-solar-bracer.test.ts",
+      "runner": "vitest",
+      "status": "active"
+    },
+    "C1C6-DARK-BRACER-SELECTOR": {
+      "proofId": "C1C6-DARK-BRACER-SELECTOR",
+      "definitionIds": [
+        "community-trinket-core-dark-bracer"
+      ],
+      "proofType": "selector",
+      "testFile": "src/game-engine/c1c6-dark-solar-bracer.test.ts",
+      "runner": "vitest",
+      "status": "active"
+    },
+    "C1C6-E2E-DARK-BRACER": {
+      "proofId": "C1C6-E2E-DARK-BRACER",
+      "definitionIds": [
+        "community-trinket-core-dark-bracer"
+      ],
+      "proofType": "e2e",
+      "testFile": "e2e/phase11a4-c1c6-dark-solar-bracer.spec.ts",
+      "runner": "playwright",
+      "status": "active",
+      "proofSurface": "production-ui"
+    },
+    "C1C6-SOLAR-BRACER-RUNTIME": {
+      "proofId": "C1C6-SOLAR-BRACER-RUNTIME",
+      "definitionIds": [
+        "community-trinket-core-solar-bracer"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1c6-dark-solar-bracer.test.ts",
+      "runner": "vitest",
+      "status": "active"
+    },
+    "C1C6-SOLAR-BRACER-SAVE-REPLAY": {
+      "proofId": "C1C6-SOLAR-BRACER-SAVE-REPLAY",
+      "definitionIds": [
+        "community-trinket-core-solar-bracer"
+      ],
+      "proofType": "save-replay",
+      "testFile": "src/game-engine/c1c6-dark-solar-bracer.test.ts",
+      "runner": "vitest",
+      "status": "active"
+    },
+    "C1C6-SOLAR-BRACER-SELECTOR": {
+      "proofId": "C1C6-SOLAR-BRACER-SELECTOR",
+      "definitionIds": [
+        "community-trinket-core-solar-bracer"
+      ],
+      "proofType": "selector",
+      "testFile": "src/game-engine/c1c6-dark-solar-bracer.test.ts",
+      "runner": "vitest",
+      "status": "active"
+    },
+    "C1C6-E2E-SOLAR-BRACER": {
+      "proofId": "C1C6-E2E-SOLAR-BRACER",
+      "definitionIds": [
+        "community-trinket-core-solar-bracer"
+      ],
+      "proofType": "e2e",
+      "testFile": "e2e/phase11a4-c1c6-dark-solar-bracer.spec.ts",
+      "runner": "playwright",
+      "status": "active",
+      "proofSurface": "production-ui"
+    },
+    "C1C7-FORTUNATE-POSITIVE-RUNTIME": {
+      "proofId": "C1C7-FORTUNATE-POSITIVE-RUNTIME",
+      "definitionIds": [
+        "community-trinket-core-fortunate-armlet"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1c7-fortunate-armlet.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "FORTUNATE_POST_ROLL_ATTACK_SLICE"
+    },
+    "C1C7-FORTUNATE-POSITIVE-SAVE-REPLAY": {
+      "proofId": "C1C7-FORTUNATE-POSITIVE-SAVE-REPLAY",
+      "definitionIds": [
+        "community-trinket-core-fortunate-armlet"
+      ],
+      "proofType": "save-replay",
+      "testFile": "src/game-engine/c1c7-fortunate-armlet.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "FORTUNATE_POST_ROLL_ATTACK_SLICE"
+    },
+    "C1C7-FORTUNATE-POSITIVE-SELECTOR": {
+      "proofId": "C1C7-FORTUNATE-POSITIVE-SELECTOR",
+      "definitionIds": [
+        "community-trinket-core-fortunate-armlet"
+      ],
+      "proofType": "selector",
+      "testFile": "src/game-engine/c1c7-fortunate-armlet.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "FORTUNATE_POST_ROLL_ATTACK_SLICE"
+    },
+    "C1C7-E2E-FORTUNATE-POSITIVE": {
+      "proofId": "C1C7-E2E-FORTUNATE-POSITIVE",
+      "definitionIds": [
+        "community-trinket-core-fortunate-armlet"
+      ],
+      "proofType": "e2e",
+      "testFile": "e2e/phase11a4-c1c7-fortunate-armlet.spec.ts",
+      "runner": "playwright",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "FORTUNATE_POST_ROLL_ATTACK_SLICE",
+      "proofSurface": "production-ui"
+    },
+    "C1C8-INCOMING-ATTACK-RUNTIME": {
+      "proofId": "C1C8-INCOMING-ATTACK-RUNTIME",
+      "definitionIds": [
+        "community-trinket-core-protective-padlock",
+        "community-trinket-core-camouflage-cloak"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1c8-incoming-attack.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "STAGED_INCOMING_ATTACK_RESOLUTION"
+    },
+    "C1C8-INCOMING-ATTACK-SAVE-REPLAY": {
+      "proofId": "C1C8-INCOMING-ATTACK-SAVE-REPLAY",
+      "definitionIds": [
+        "community-trinket-core-protective-padlock",
+        "community-trinket-core-camouflage-cloak"
+      ],
+      "proofType": "save-replay",
+      "testFile": "src/game-engine/c1c8-incoming-attack.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "STAGED_INCOMING_ATTACK_RESOLUTION"
+    },
+    "C1C8-PROTECTIVE-POSITIVE-RUNTIME": {
+      "proofId": "C1C8-PROTECTIVE-POSITIVE-RUNTIME",
+      "definitionIds": [
+        "community-trinket-core-protective-padlock"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1c8-incoming-attack.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "INCOMING_DAMAGE_SCALE_CONSUMER"
+    },
+    "C1C8-PROTECTIVE-POSITIVE-SAVE": {
+      "proofId": "C1C8-PROTECTIVE-POSITIVE-SAVE",
+      "definitionIds": [
+        "community-trinket-core-protective-padlock"
+      ],
+      "proofType": "save-replay",
+      "testFile": "src/game-engine/c1c8-incoming-attack.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "INCOMING_DAMAGE_SCALE_CONSUMER"
+    },
+    "C1C8-PROTECTIVE-POSITIVE-SELECTOR": {
+      "proofId": "C1C8-PROTECTIVE-POSITIVE-SELECTOR",
+      "definitionIds": [
+        "community-trinket-core-protective-padlock"
+      ],
+      "proofType": "selector",
+      "testFile": "src/audit/c1c8-incoming-semantics.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "INCOMING_DAMAGE_SCALE_CONSUMER"
+    },
+    "C1C8-E2E-PROTECTIVE-POSITIVE": {
+      "proofId": "C1C8-E2E-PROTECTIVE-POSITIVE",
+      "definitionIds": [
+        "community-trinket-core-protective-padlock"
+      ],
+      "proofType": "e2e",
+      "testFile": "e2e/phase11a4-c1c8-incoming-attack.spec.ts",
+      "runner": "playwright",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "INCOMING_DAMAGE_SCALE_CONSUMER",
+      "proofSurface": "production-ui"
+    },
+    "C1C8-CAMOUFLAGE-POSITIVE-RUNTIME": {
+      "proofId": "C1C8-CAMOUFLAGE-POSITIVE-RUNTIME",
+      "definitionIds": [
+        "community-trinket-core-camouflage-cloak"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1c8-incoming-attack.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "INCOMING_DODGE_MODIFIER_CONSUMER"
+    },
+    "C1C8-CAMOUFLAGE-POSITIVE-SAVE": {
+      "proofId": "C1C8-CAMOUFLAGE-POSITIVE-SAVE",
+      "definitionIds": [
+        "community-trinket-core-camouflage-cloak"
+      ],
+      "proofType": "save-replay",
+      "testFile": "src/game-engine/c1c8-incoming-attack.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "INCOMING_DODGE_MODIFIER_CONSUMER"
+    },
+    "C1C8-CAMOUFLAGE-POSITIVE-SELECTOR": {
+      "proofId": "C1C8-CAMOUFLAGE-POSITIVE-SELECTOR",
+      "definitionIds": [
+        "community-trinket-core-camouflage-cloak"
+      ],
+      "proofType": "selector",
+      "testFile": "src/audit/c1c8-incoming-semantics.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "INCOMING_DODGE_MODIFIER_CONSUMER"
+    },
+    "C1C8-E2E-CAMOUFLAGE-POSITIVE": {
+      "proofId": "C1C8-E2E-CAMOUFLAGE-POSITIVE",
+      "definitionIds": [
+        "community-trinket-core-camouflage-cloak"
+      ],
+      "proofType": "e2e",
+      "testFile": "e2e/phase11a4-c1c8-incoming-attack.spec.ts",
+      "runner": "playwright",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "INCOMING_DODGE_MODIFIER_CONSUMER",
+      "proofSurface": "production-ui"
+    },
+    "C1C9-CAMOUFLAGE-CONDITION-RUNTIME": {
+      "proofId": "C1C9-CAMOUFLAGE-CONDITION-RUNTIME",
+      "definitionIds": [
+        "community-trinket-core-camouflage-cloak"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1c9-condition-duration.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "TRINKET_CONDITION_STACK_CONSUMER"
+    },
+    "C1C9-CAMOUFLAGE-CONDITION-SAVE-REPLAY": {
+      "proofId": "C1C9-CAMOUFLAGE-CONDITION-SAVE-REPLAY",
+      "definitionIds": [
+        "community-trinket-core-camouflage-cloak"
+      ],
+      "proofType": "save-replay",
+      "testFile": "src/game-engine/c1c9-condition-duration.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "TRINKET_CONDITION_STACK_CONSUMER"
+    },
+    "C1C9-CAMOUFLAGE-CONDITION-SELECTOR": {
+      "proofId": "C1C9-CAMOUFLAGE-CONDITION-SELECTOR",
+      "definitionIds": [
+        "community-trinket-core-camouflage-cloak"
+      ],
+      "proofType": "selector",
+      "testFile": "src/audit/c1c9-condition-semantics.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "TRINKET_CONDITION_STACK_CONSUMER"
+    },
+    "C1C9-E2E-CAMOUFLAGE-CONDITION": {
+      "proofId": "C1C9-E2E-CAMOUFLAGE-CONDITION",
+      "definitionIds": [
+        "community-trinket-core-camouflage-cloak"
+      ],
+      "proofType": "e2e",
+      "testFile": "e2e/phase11a4-c1c9-condition-duration.spec.ts",
+      "runner": "playwright",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "TRINKET_CONDITION_STACK_CONSUMER",
+      "proofSurface": "production-ui"
+    },
+    "C1C10-CAMPERS-CAMPING-RUNTIME": {
+      "proofId": "C1C10-CAMPERS-CAMPING-RUNTIME",
+      "definitionIds": [
+        "community-trinket-core-campers-helmet"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1c10-campers-helmet.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "TRINKET_PROVISION_DICE_CONSUMER"
+    },
+    "C1C10-CAMPERS-SCOUT-RUNTIME": {
+      "proofId": "C1C10-CAMPERS-SCOUT-RUNTIME",
+      "definitionIds": [
+        "community-trinket-core-campers-helmet"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1c10-campers-helmet.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "STAGED_DUNGEON_TRINKET_WINDOWS"
+    },
+    "C1C10-CAMPERS-SAVE-REPLAY": {
+      "proofId": "C1C10-CAMPERS-SAVE-REPLAY",
+      "definitionIds": [
+        "community-trinket-core-campers-helmet"
+      ],
+      "proofType": "save-replay",
+      "testFile": "src/game-engine/c1c10-campers-helmet.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "STAGED_DUNGEON_TRINKET_WINDOWS"
+    },
+    "C1C10-CAMPERS-SELECTOR": {
+      "proofId": "C1C10-CAMPERS-SELECTOR",
+      "definitionIds": [
+        "community-trinket-core-campers-helmet"
+      ],
+      "proofType": "selector",
+      "testFile": "src/audit/c1c10-campers-helmet-semantics.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "TRINKET_PROVISION_DICE_CONSUMER"
+    },
+    "C1C10-E2E-CAMPERS-CAMPING": {
+      "proofId": "C1C10-E2E-CAMPERS-CAMPING",
+      "definitionIds": [
+        "community-trinket-core-campers-helmet"
+      ],
+      "proofType": "e2e",
+      "testFile": "e2e/phase11a4-c1c10-campers-helmet.spec.ts",
+      "runner": "playwright",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "TRINKET_PROVISION_DICE_CONSUMER",
+      "proofSurface": "production-ui"
+    },
+    "C1C10-E2E-CAMPERS-SCOUT": {
+      "proofId": "C1C10-E2E-CAMPERS-SCOUT",
+      "definitionIds": [
+        "community-trinket-core-campers-helmet"
+      ],
+      "proofType": "e2e",
+      "testFile": "e2e/phase11a4-c1c10-campers-helmet.spec.ts",
+      "runner": "playwright",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "STAGED_DUNGEON_TRINKET_WINDOWS",
+      "proofSurface": "production-ui"
+    },
+    "C1C11-BLOODTHIRST-NEGATIVE-RUNTIME": {
+      "proofId": "C1C11-BLOODTHIRST-NEGATIVE-RUNTIME",
+      "definitionIds": [
+        "community-trinket-core-bloodthirst-ring"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1c11-bloodthirst-ring.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "TRINKET_CONDITION_STACK_CONSUMER"
+    },
+    "C1C11-BLOODTHIRST-NEGATIVE-SAVE-REPLAY": {
+      "proofId": "C1C11-BLOODTHIRST-NEGATIVE-SAVE-REPLAY",
+      "definitionIds": [
+        "community-trinket-core-bloodthirst-ring"
+      ],
+      "proofType": "save-replay",
+      "testFile": "src/game-engine/c1c11-bloodthirst-ring.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "STAGED_INCOMING_ATTACK_RESOLUTION"
+    },
+    "C1C11-BLOODTHIRST-NEGATIVE-SELECTOR": {
+      "proofId": "C1C11-BLOODTHIRST-NEGATIVE-SELECTOR",
+      "definitionIds": [
+        "community-trinket-core-bloodthirst-ring"
+      ],
+      "proofType": "selector",
+      "testFile": "src/audit/c1c11-bloodthirst-semantics.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "TRINKET_CONDITION_STACK_CONSUMER"
+    },
+    "C1C11-E2E-BLOODTHIRST-NEGATIVE": {
+      "proofId": "C1C11-E2E-BLOODTHIRST-NEGATIVE",
+      "definitionIds": [
+        "community-trinket-core-bloodthirst-ring"
+      ],
+      "proofType": "e2e",
+      "testFile": "e2e/phase11a4-c1c11-bloodthirst-ring.spec.ts",
+      "runner": "playwright",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "HERO_HIT_BY_ATTACK_TRINKET_WINDOW",
+      "proofSurface": "production-ui"
+    },
+    "C1C12-CONSTITUTION-DISEASE-DISCARD-RUNTIME": {
+      "proofId": "C1C12-CONSTITUTION-DISEASE-DISCARD-RUNTIME",
+      "definitionIds": [
+        "community-trinket-core-book-of-constitution"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1c12-book-constitution.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "TRINKET_DISCARD_DISEASE_CONSUMER"
+    },
+    "C1C12-CONSTITUTION-REPLACEMENT-PREVENTION": {
+      "proofId": "C1C12-CONSTITUTION-REPLACEMENT-PREVENTION",
+      "definitionIds": [
+        "community-trinket-core-book-of-constitution"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1c12-book-constitution.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "STAGED_DISEASE_ACQUISITION"
+    },
+    "C1C12-CONSTITUTION-SAVE-REPLAY": {
+      "proofId": "C1C12-CONSTITUTION-SAVE-REPLAY",
+      "definitionIds": [
+        "community-trinket-core-book-of-constitution"
+      ],
+      "proofType": "save-replay",
+      "testFile": "src/game-engine/c1c12-book-constitution.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "STAGED_DISEASE_ACQUISITION"
+    },
+    "C1C12-CONSTITUTION-SELECTOR": {
+      "proofId": "C1C12-CONSTITUTION-SELECTOR",
+      "definitionIds": [
+        "community-trinket-core-book-of-constitution"
+      ],
+      "proofType": "selector",
+      "testFile": "src/audit/c1c12-book-constitution-semantics.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "DISEASE_ACQUIRED_TRINKET_WINDOW"
+    },
+    "C1C12-E2E-CONSTITUTION-CURIO": {
+      "proofId": "C1C12-E2E-CONSTITUTION-CURIO",
+      "definitionIds": [
+        "community-trinket-core-book-of-constitution"
+      ],
+      "proofType": "e2e",
+      "testFile": "e2e/phase11a4-c1c12-book-constitution.spec.ts",
+      "runner": "playwright",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "DISEASE_ACQUIRED_TRINKET_WINDOW",
+      "proofSurface": "production-ui"
+    },
+    "C1C13-HOLINESS-CRITICAL-SOURCE-CONTRACT": {
+      "proofId": "C1C13-HOLINESS-CRITICAL-SOURCE-CONTRACT",
+      "definitionIds": [
+        "community-trinket-core-book-of-holiness"
+      ],
+      "proofType": "selector",
+      "testFile": "src/audit/c1c13-book-holiness-semantics.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "definition"
+    },
+    "C1C13-HOLINESS-CRITICAL-RUNTIME": {
+      "proofId": "C1C13-HOLINESS-CRITICAL-RUNTIME",
+      "definitionIds": [
+        "community-trinket-core-book-of-holiness"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1c13-book-holiness.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "INCOMING_CRITICAL_CONVERSION_CONSUMER"
+    },
+    "C1C13-HOLINESS-CRITICAL-SAVE-REPLAY": {
+      "proofId": "C1C13-HOLINESS-CRITICAL-SAVE-REPLAY",
+      "definitionIds": [
+        "community-trinket-core-book-of-holiness"
+      ],
+      "proofType": "save-replay",
+      "testFile": "src/game-engine/c1c13-book-holiness.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "STAGED_INCOMING_ATTACK_RESOLUTION"
+    },
+    "C1C13-HOLINESS-CRITICAL-SELECTOR": {
+      "proofId": "C1C13-HOLINESS-CRITICAL-SELECTOR",
+      "definitionIds": [
+        "community-trinket-core-book-of-holiness"
+      ],
+      "proofType": "selector",
+      "testFile": "src/audit/c1c13-book-holiness-semantics.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "HERO_HIT_BY_ATTACK_TRINKET_WINDOW"
+    },
+    "C1C13-HOLINESS-CRITICAL-COMPOSITION": {
+      "proofId": "C1C13-HOLINESS-CRITICAL-COMPOSITION",
+      "definitionIds": [
+        "community-trinket-core-book-of-holiness"
+      ],
+      "proofType": "production-runtime",
+      "testFile": "src/game-engine/c1c13-book-holiness.test.ts",
+      "runner": "vitest",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "INCOMING_CRITICAL_CONVERSION_CONSUMER"
+    },
+    "C1C13-E2E-HOLINESS-CRITICAL": {
+      "proofId": "C1C13-E2E-HOLINESS-CRITICAL",
+      "definitionIds": [
+        "community-trinket-core-book-of-holiness"
+      ],
+      "proofType": "e2e",
+      "testFile": "e2e/phase11a4-c1c13-book-holiness.spec.ts",
+      "runner": "playwright",
+      "status": "active",
+      "scope": "primitive",
+      "primitiveId": "INCOMING_CRITICAL_CONVERSION_CONSUMER",
+      "proofSurface": "production-ui"
+    }
+  }
+}

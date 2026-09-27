@@ -1,0 +1,801 @@
+{
+  "phase": "11A.4-C1C-21",
+  "baselineHead": "cef91c4cd31cf074e9d3b7db56098f473772f728",
+  "baselineTree": "215bc0081a5369b7a68d9e645d28b42304d2e5cc",
+  "truthSource": "LIVE_SOURCE_CAPABILITY_ADAPTER_PROOF_REGISTRY",
+  "schemaVersion": 1,
+  "restAcceptanceErrors": [
+    "insufficientRecoveryCapacity: SOURCE_UNRESOLVED is not accepted for Production"
+  ],
+  "quests": [
+    {
+      "definitionId": "community-quest-boss-face-the-threat",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-cove-lvl1-deep-horrors",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-cove-lvl1-deep-waters",
+      "firewoodTokens": 1,
+      "restingPoints": 8,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-cove-lvl1-purify-the-eldritch-signs",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-cove-lvl1-test-the-waters",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-cove-lvl1-unclean-waters",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-cove-lvl2-deep-horrors-2",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-cove-lvl2-deep-waters-2",
+      "firewoodTokens": 1,
+      "restingPoints": 8,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-cove-lvl2-eldritch-purging",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-cove-lvl2-the-deep-ones",
+      "firewoodTokens": 1,
+      "restingPoints": 8,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-cove-lvl2-unclean-waters-2",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-cove-lvl3-deep-waters-3",
+      "firewoodTokens": 1,
+      "restingPoints": 8,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-cove-lvl3-the-deep-ones-2",
+      "firewoodTokens": 1,
+      "restingPoints": 8,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-cove-lvl3-the-shipwrecks",
+      "firewoodTokens": 1,
+      "restingPoints": 4,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-cove-lvl3-unclean-waters-3",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl1-deep-in-the-swamp",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": true,
+      "proofAvailability": {
+        "definitionId": "community-quest-crimson-court-lvl1-deep-in-the-swamp",
+        "runtimeAdapterId": "c1c1-simple-community-quest-v1",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_REST_ALLOCATION_SEMANTICS"
+        ],
+        "primitiveProofRequirements": {
+          "C1C1R2-E2E-REST-ALLOCATION": "QUEST_REST_ALLOCATION_SEMANTICS"
+        },
+        "sourceSupported": true,
+        "semanticSupported": true,
+        "stateful": true,
+        "productionTests": [
+          "C1C2-ADAPTER-RUNTIME"
+        ],
+        "saveReplayTests": [
+          "C1C2-ADAPTER-SAVE-REPLAY"
+        ],
+        "selectorTests": [
+          "C1C2-ADAPTER-SELECTOR"
+        ],
+        "e2eTests": [
+          "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+          "C1C1R2-E2E-REST-ALLOCATION"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl1-lost-and-found",
+      "firewoodTokens": 1,
+      "restingPoints": 8,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl1-rest-in-rubble",
+      "firewoodTokens": 1,
+      "restingPoints": 8,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl1-rivers-run-red",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl1-they-are-swarm",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl2-deeper-into-the-swamp",
+      "firewoodTokens": 1,
+      "restingPoints": 8,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": true,
+      "proofAvailability": {
+        "definitionId": "community-quest-crimson-court-lvl2-deeper-into-the-swamp",
+        "runtimeAdapterId": "c1c1-simple-community-quest-v1",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_REST_ALLOCATION_SEMANTICS"
+        ],
+        "primitiveProofRequirements": {
+          "C1C1R2-E2E-REST-ALLOCATION": "QUEST_REST_ALLOCATION_SEMANTICS"
+        },
+        "sourceSupported": true,
+        "semanticSupported": true,
+        "stateful": true,
+        "productionTests": [
+          "C1C2-ADAPTER-RUNTIME"
+        ],
+        "saveReplayTests": [
+          "C1C2-ADAPTER-SAVE-REPLAY"
+        ],
+        "selectorTests": [
+          "C1C2-ADAPTER-SELECTOR"
+        ],
+        "e2eTests": [
+          "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+          "C1C1R2-E2E-REST-ALLOCATION"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl2-lurkers",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl2-pest-control",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": true,
+      "proofAvailability": {
+        "definitionId": "community-quest-crimson-court-lvl2-pest-control",
+        "runtimeAdapterId": "c1c1-simple-community-quest-v1",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_REST_ALLOCATION_SEMANTICS"
+        ],
+        "primitiveProofRequirements": {
+          "C1C1R2-E2E-REST-ALLOCATION": "QUEST_REST_ALLOCATION_SEMANTICS"
+        },
+        "sourceSupported": true,
+        "semanticSupported": true,
+        "stateful": true,
+        "productionTests": [
+          "C1C2-ADAPTER-RUNTIME"
+        ],
+        "saveReplayTests": [
+          "C1C2-ADAPTER-SAVE-REPLAY"
+        ],
+        "selectorTests": [
+          "C1C2-ADAPTER-SELECTOR"
+        ],
+        "e2eTests": [
+          "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+          "C1C1R2-E2E-REST-ALLOCATION"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl2-ruin-the-party",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl2-take-em-back",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl3-breeders",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl3-cut-the-buzz",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl3-the-endless-marsh",
+      "firewoodTokens": 1,
+      "restingPoints": 8,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl3-uninvited",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-dem-bones",
+      "firewoodTokens": 1,
+      "restingPoints": 8,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-fundraiser",
+      "firewoodTokens": 1,
+      "restingPoints": 8,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-rising-threat",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-scout-ahead",
+      "firewoodTokens": 1,
+      "restingPoints": 8,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": true,
+      "proofAvailability": {
+        "definitionId": "community-quest-ruins-lvl1-scout-ahead",
+        "runtimeAdapterId": "c1c1-simple-community-quest-v1",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_REST_ALLOCATION_SEMANTICS"
+        ],
+        "primitiveProofRequirements": {
+          "C1C1R2-E2E-REST-ALLOCATION": "QUEST_REST_ALLOCATION_SEMANTICS"
+        },
+        "sourceSupported": true,
+        "semanticSupported": true,
+        "stateful": true,
+        "productionTests": [
+          "C1C1-QUEST-RUNTIME",
+          "C1C1R-QUEST-SOURCE-SETUP"
+        ],
+        "saveReplayTests": [
+          "C1C1-QUEST-SAVE-REPLAY"
+        ],
+        "selectorTests": [
+          "C1C1-QUEST-SELECTOR"
+        ],
+        "e2eTests": [
+          "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+          "C1C1R2-E2E-REST-ALLOCATION"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-wipe-em-out",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": true,
+      "proofAvailability": {
+        "definitionId": "community-quest-ruins-lvl1-wipe-em-out",
+        "runtimeAdapterId": "c1c1-simple-community-quest-v1",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_REST_ALLOCATION_SEMANTICS"
+        ],
+        "primitiveProofRequirements": {
+          "C1C1R2-E2E-REST-ALLOCATION": "QUEST_REST_ALLOCATION_SEMANTICS"
+        },
+        "sourceSupported": true,
+        "semanticSupported": true,
+        "stateful": true,
+        "productionTests": [
+          "C1C1-QUEST-RUNTIME",
+          "C1C1R-QUEST-SOURCE-SETUP"
+        ],
+        "saveReplayTests": [
+          "C1C1-QUEST-SAVE-REPLAY"
+        ],
+        "selectorTests": [
+          "C1C1-QUEST-SELECTOR"
+        ],
+        "e2eTests": [
+          "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+          "C1C1R2-E2E-REST-ALLOCATION"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-break-them",
+      "firewoodTokens": 1,
+      "restingPoints": 8,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-clear-the-path",
+      "firewoodTokens": 1,
+      "restingPoints": 8,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": true,
+      "proofAvailability": {
+        "definitionId": "community-quest-ruins-lvl2-clear-the-path",
+        "runtimeAdapterId": "c1c1-simple-community-quest-v1",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_REST_ALLOCATION_SEMANTICS"
+        ],
+        "primitiveProofRequirements": {
+          "C1C1R2-E2E-REST-ALLOCATION": "QUEST_REST_ALLOCATION_SEMANTICS"
+        },
+        "sourceSupported": true,
+        "semanticSupported": true,
+        "stateful": true,
+        "productionTests": [
+          "C1C1-QUEST-RUNTIME",
+          "C1C1R-QUEST-SOURCE-SETUP"
+        ],
+        "saveReplayTests": [
+          "C1C1-QUEST-SAVE-REPLAY"
+        ],
+        "selectorTests": [
+          "C1C1-QUEST-SELECTOR"
+        ],
+        "e2eTests": [
+          "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+          "C1C1R2-E2E-REST-ALLOCATION"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-disruption",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-purify-the-fountains",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-reduce-to-rubble",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": true,
+      "proofAvailability": {
+        "definitionId": "community-quest-ruins-lvl2-reduce-to-rubble",
+        "runtimeAdapterId": "c1c1-simple-community-quest-v1",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_REST_ALLOCATION_SEMANTICS"
+        ],
+        "primitiveProofRequirements": {
+          "C1C1R2-E2E-REST-ALLOCATION": "QUEST_REST_ALLOCATION_SEMANTICS"
+        },
+        "sourceSupported": true,
+        "semanticSupported": true,
+        "stateful": true,
+        "productionTests": [
+          "C1C1-QUEST-RUNTIME",
+          "C1C1R-QUEST-SOURCE-SETUP"
+        ],
+        "saveReplayTests": [
+          "C1C1-QUEST-SAVE-REPLAY"
+        ],
+        "selectorTests": [
+          "C1C1-QUEST-SELECTOR"
+        ],
+        "e2eTests": [
+          "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+          "C1C1R2-E2E-REST-ALLOCATION"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl3-creeping-darkness",
+      "firewoodTokens": 1,
+      "restingPoints": 8,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl3-forward-camps",
+      "firewoodTokens": 1,
+      "restingPoints": 8,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl3-the-threat-is-real",
+      "firewoodTokens": 1,
+      "restingPoints": 8,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl3-they-are-back",
+      "firewoodTokens": 1,
+      "restingPoints": 8,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl3-warm-up-the-halls",
+      "firewoodTokens": 1,
+      "restingPoints": 4,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-disarm-them",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-pork-chop",
+      "firewoodTokens": 1,
+      "restingPoints": 8,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": true,
+      "proofAvailability": {
+        "definitionId": "community-quest-warrens-lvl1-pork-chop",
+        "runtimeAdapterId": "c1c1-simple-community-quest-v1",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_REST_ALLOCATION_SEMANTICS"
+        ],
+        "primitiveProofRequirements": {
+          "C1C1R2-E2E-REST-ALLOCATION": "QUEST_REST_ALLOCATION_SEMANTICS"
+        },
+        "sourceSupported": true,
+        "semanticSupported": true,
+        "stateful": true,
+        "productionTests": [
+          "C1C1-QUEST-RUNTIME",
+          "C1C1R-QUEST-SOURCE-SETUP"
+        ],
+        "saveReplayTests": [
+          "C1C1-QUEST-SAVE-REPLAY"
+        ],
+        "selectorTests": [
+          "C1C1-QUEST-SELECTOR"
+        ],
+        "e2eTests": [
+          "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+          "C1C1R2-E2E-REST-ALLOCATION"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-worm-squash",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-a-new-breed",
+      "firewoodTokens": 1,
+      "restingPoints": 8,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-bait-them-out",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-carrion-infestation",
+      "firewoodTokens": 1,
+      "restingPoints": 4,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-ringleaders",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl3-alpha-swine",
+      "firewoodTokens": 1,
+      "restingPoints": 8,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl3-drums-of-doom",
+      "firewoodTokens": 1,
+      "restingPoints": 8,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl3-foul-arsenal",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl3-infighting",
+      "firewoodTokens": 1,
+      "restingPoints": 8,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-weald-lvl1-circle-of-witches",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-weald-lvl1-disinfection",
+      "firewoodTokens": 1,
+      "restingPoints": 8,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-weald-lvl1-fungal-research",
+      "firewoodTokens": 1,
+      "restingPoints": 8,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-weald-lvl1-patrol-the-woods",
+      "firewoodTokens": 1,
+      "restingPoints": 8,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-weald-lvl1-purge-the-woods",
+      "firewoodTokens": 1,
+      "restingPoints": 4,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-weald-lvl2-hounds-of-the-woods",
+      "firewoodTokens": 1,
+      "restingPoints": 8,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-weald-lvl2-lost-supplies",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-weald-lvl2-lost-treasures",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-weald-lvl2-searching-in-the-dark",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-weald-lvl2-spreaders-of-miasma",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-weald-lvl3-final-swipe",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-weald-lvl3-great-unclean-ones",
+      "firewoodTokens": 1,
+      "restingPoints": 12,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-weald-lvl3-no-other-way",
+      "firewoodTokens": 1,
+      "restingPoints": 8,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-weald-lvl3-the-infected",
+      "firewoodTokens": 1,
+      "restingPoints": 8,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    },
+    {
+      "definitionId": "community-quest-weald-lvl3-whispering-woods",
+      "firewoodTokens": 1,
+      "restingPoints": 8,
+      "restSemanticBlocker": "insufficientRecoveryCapacity",
+      "wouldOtherwiseUseSimpleAdapter": false,
+      "proofAvailability": null
+    }
+  ]
+}

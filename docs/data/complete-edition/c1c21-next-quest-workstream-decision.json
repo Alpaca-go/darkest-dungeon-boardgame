@@ -1,0 +1,148 @@
+{
+  "phase": "11A.4-C1C-21",
+  "baselineHead": "cef91c4cd31cf074e9d3b7db56098f473772f728",
+  "baselineTree": "215bc0081a5369b7a68d9e645d28b42304d2e5cc",
+  "truthSource": "LIVE_SOURCE_CAPABILITY_ADAPTER_PROOF_REGISTRY",
+  "schemaVersion": 1,
+  "selectedFamily": "NO_IMMEDIATE_SOURCE_SAFE_CANDIDATE",
+  "selectedPrimitives": [],
+  "candidateQuestIds": [],
+  "expectedReadyGain": 0,
+  "whySelected": "No primitive alone closes live semantic bindings, adapter and production proof obligations. Source-exact literals alone do not establish a precise runtime contract.",
+  "whyAlternativesDeferred": [
+    {
+      "primitive": "QUEST_RULE_ACTION_AREA_INTERACTION",
+      "wholeQuestGain": 0,
+      "sourceGateCount": 1,
+      "otherRuntimeBlockerCount": 1
+    },
+    {
+      "primitive": "QUEST_RULE_ACTION_ECONOMY",
+      "wholeQuestGain": 0,
+      "sourceGateCount": 1,
+      "otherRuntimeBlockerCount": 1
+    },
+    {
+      "primitive": "QUEST_RULE_BATTLE_RESULT",
+      "wholeQuestGain": 0,
+      "sourceGateCount": 2,
+      "otherRuntimeBlockerCount": 2
+    },
+    {
+      "primitive": "QUEST_RULE_BATTLE_SETUP",
+      "wholeQuestGain": 0,
+      "sourceGateCount": 9,
+      "otherRuntimeBlockerCount": 9
+    },
+    {
+      "primitive": "QUEST_RULE_EXPLORATION",
+      "wholeQuestGain": 0,
+      "sourceGateCount": 2,
+      "otherRuntimeBlockerCount": 2
+    },
+    {
+      "primitive": "QUEST_RULE_HAMLET_CHOICE",
+      "wholeQuestGain": 0,
+      "sourceGateCount": 1,
+      "otherRuntimeBlockerCount": 1
+    },
+    {
+      "primitive": "QUEST_RULE_HERO_STATE",
+      "wholeQuestGain": 0,
+      "sourceGateCount": 9,
+      "otherRuntimeBlockerCount": 9
+    },
+    {
+      "primitive": "QUEST_RULE_LOOT_CHEST_SELECTION",
+      "wholeQuestGain": 0,
+      "sourceGateCount": 1,
+      "otherRuntimeBlockerCount": 1
+    },
+    {
+      "primitive": "QUEST_RULE_MONSTER_STATE",
+      "wholeQuestGain": 0,
+      "sourceGateCount": 32,
+      "otherRuntimeBlockerCount": 32
+    },
+    {
+      "primitive": "QUEST_RULE_QUEST_COMPLETION",
+      "wholeQuestGain": 0,
+      "sourceGateCount": 2,
+      "otherRuntimeBlockerCount": 2
+    },
+    {
+      "primitive": "QUEST_RULE_QUIRK_GAIN",
+      "wholeQuestGain": 0,
+      "sourceGateCount": 1,
+      "otherRuntimeBlockerCount": 1
+    },
+    {
+      "primitive": "QUEST_RULE_REWARD_OVERRIDE",
+      "wholeQuestGain": 0,
+      "sourceGateCount": 3,
+      "otherRuntimeBlockerCount": 3
+    },
+    {
+      "primitive": "QUEST_RULE_ROOM_CLEAR",
+      "wholeQuestGain": 0,
+      "sourceGateCount": 1,
+      "otherRuntimeBlockerCount": 1
+    },
+    {
+      "primitive": "QUEST_RULE_ROOM_IDENTITY_SELECTION",
+      "wholeQuestGain": 0,
+      "sourceGateCount": 1,
+      "otherRuntimeBlockerCount": 1
+    },
+    {
+      "primitive": "QUEST_RULE_TOKEN_INTERACTION",
+      "wholeQuestGain": 0,
+      "sourceGateCount": 1,
+      "otherRuntimeBlockerCount": 1
+    },
+    {
+      "primitive": "QUEST_RULE_TRINKET_ACQUISITION",
+      "wholeQuestGain": 0,
+      "sourceGateCount": 2,
+      "otherRuntimeBlockerCount": 2
+    },
+    {
+      "primitive": "QUEST_RULE_TRINKET_FALLBACK_CHOICE",
+      "wholeQuestGain": 0,
+      "sourceGateCount": 1,
+      "otherRuntimeBlockerCount": 1
+    },
+    {
+      "primitive": "QUEST_RULE_TRINKET_PROVENANCE",
+      "wholeQuestGain": 0,
+      "sourceGateCount": 1,
+      "otherRuntimeBlockerCount": 1
+    },
+    {
+      "primitive": "QUEST_RULE_TRINKET_RETURN_EXCHANGE",
+      "wholeQuestGain": 0,
+      "sourceGateCount": 1,
+      "otherRuntimeBlockerCount": 1
+    },
+    {
+      "primitive": "QUEST_RULE_TRINKET_STATE",
+      "wholeQuestGain": 0,
+      "sourceGateCount": 1,
+      "otherRuntimeBlockerCount": 1
+    }
+  ],
+  "sourceRisks": [
+    "Rest insufficientRecoveryCapacity unresolved",
+    "Level 2/3 full source decks incomplete",
+    "Generic special rules have unbound category obligations; no inferred target/timing contract"
+  ],
+  "requiredProductionProof": [
+    "source-exact runtime",
+    "save-replay",
+    "selector",
+    "production-ui E2E"
+  ],
+  "nextAction": "C1C22 Boss / Encounter inventory and source-contract audit; no Quest gameplay implementation selected",
+  "standardQuestStatus": "MIXED_SOURCE_GATES_AND_RUNTIME_BINDING_GAPS",
+  "warning": "Zero immediate promotion does not mean all Standard Quests have unknown source rules."
+}
