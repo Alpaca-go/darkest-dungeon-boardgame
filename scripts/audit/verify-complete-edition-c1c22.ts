@@ -1,0 +1,14 @@
+import { readFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
+import { artifacts, report, git, baselineHead } from './c1c22-contract';
+const assert=(v:unknown,msg:string)=>{if(!v)throw new Error('C1C22: '+msg);};
+git('merge-base','--is-ancestor',baselineHead,'HEAD');
+const allowed=(p:string)=>p==='package.json'||/^src\/audit\/(boss-encounter-live-inventory|c1c22-boss-encounter-live-inventory\.test)\.ts$/.test(p)||/^scripts\/audit\/(c1c22-contract|(?:generate|verify)-complete-edition-c1c22)\.ts$/.test(p)||/^docs\/(data|reports)\/complete-edition\/c1c22-/.test(p);
+assert(git('diff','--name-only',baselineHead).split(/\r?\n/).filter(Boolean).every(allowed),'only new audit scope; C1C20/21 and gameplay frozen');
+const pkg=JSON.parse(git('show',baselineHead+':package.json'));
+for(const verb of ['audit','verify'])pkg.scripts[verb+':complete-edition-c1c22']='vite-node scripts/audit/'+(verb==='audit'?'generate':'verify')+'-complete-edition-c1c22.ts';
+assert(JSON.stringify(JSON.parse(readFileSync('package.json','utf8')))===JSON.stringify(pkg),'only two new package scripts');
+for(const[name,value]of Object.entries(artifacts()))assert(JSON.stringify(JSON.parse(readFileSync('docs/data/complete-edition/'+name,'utf8')))===JSON.stringify(value),'live artifact '+name);
+assert(readFileSync('docs/reports/complete-edition/c1c22-boss-encounter-live-inventory-report.md','utf8').replace(/\r\n/g,'\n')===report(),'report binding');
+execFileSync(process.env.ComSpec??'cmd.exe',['/d','/s','/c','npx vitest run src/audit/c1c22-boss-encounter-live-inventory.test.ts src/audit/c1c21-standard-quest-live-rebaseline.test.ts'],{stdio:'inherit'});
+console.log('C1C22 inventory contract verified; upstream C1C21 full regression failures remain open');
