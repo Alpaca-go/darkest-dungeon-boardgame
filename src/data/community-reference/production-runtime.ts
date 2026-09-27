@@ -11,6 +11,7 @@ import questData from './quests/data.json' with { type: 'json' };
 import trinketData from './trinkets/data.json' with { type: 'json' };
 import { buyPriceForLevel, sellPriceForLevel } from '../trinkets/trinket-pricing';
 import {
+  LEVEL1_STANCE_ACCURACY_SPECS,
   PRODUCTION_PROOF_REGISTRY,
   allProofsResolve,
   allProofsUseSurface,
@@ -726,6 +727,29 @@ const bookOfHoliness: TrinketDefinition = {
   runtimeContentMetadata: { sourceDefinitionId: holinessSource.id, contentSet: 'core', region: null, sourceOrigin: 'community-complete-edition' },
 };
 
+const LEVEL1_ACCURACY_PRIMITIVES = ['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW', 'POST_ROLL_ATTACK_ACCURACY_CONSUMER', 'TRINKET_STANCE_CONDITION_CONSUMER'];
+function buildLevel1StanceAccuracyTrinket(spec: (typeof LEVEL1_STANCE_ACCURACY_SPECS)[number]): TrinketDefinition {
+  const source = sourceTrinket(spec.definitionId);
+  return {
+    id: source.id, name: source.printedName, level: 1,
+    positiveSide: {
+      side: 'positive', label: '命中 +2', description: source.positiveSide.label,
+      useWindows: ['after-attack-roll-before-hit-resolution'], modifiers: [{ type: 'accuracy', amount: 2 }], effects: [],
+      canUse: [{ type: 'in-battle' }, { type: 'is-acting-hero' }, { type: 'stance', value: spec.stance, negated: false }],
+    },
+    negativeSide: {
+      side: 'negative', label: '命中 -1', description: source.negativeSide.label,
+      useWindows: ['after-attack-roll-before-hit-resolution'], modifiers: [{ type: 'accuracy', amount: -1 }], effects: [],
+      canUse: [{ type: 'in-battle' }, { type: 'is-acting-hero' }],
+    },
+    sellPrice: sellPriceForLevel(1), buyPrice: buyPriceForLevel(1), officialDataStatus: 'verified',
+    sourceReference: source.sourceReferences.join('; '), enabledInOfficialPool: false, dataOrigin: 'community',
+    runtimeContentMetadata: { sourceDefinitionId: source.id, contentSet: 'core', region: null, sourceOrigin: 'community-complete-edition' },
+  };
+}
+const level1AccuracyTrinkets = LEVEL1_STANCE_ACCURACY_SPECS.map(buildLevel1StanceAccuracyTrinket);
+const level1AccuracyAdapterId = (id: string) => `level1-${id.replace('community-trinket-core-', '')}-stance-accuracy-v1`;
+
 const STANCE_RING_SPECS = [
   { id: 'community-trinket-core-defenders-ring', stance: 'defensive', key: 'DEFENDER' },
   { id: 'community-trinket-core-scholars-ring', stance: 'support', key: 'SCHOLAR' },
@@ -755,6 +779,10 @@ function buildStanceRing(spec: (typeof STANCE_RING_SPECS)[number]): TrinketDefin
 const stanceRings = STANCE_RING_SPECS.map(buildStanceRing);
 
 export const COMMUNITY_TRINKET_RUNTIME_ADAPTERS: Readonly<Record<string, CommunityTrinketRuntimeAdapter>> = Object.freeze({
+  ...Object.fromEntries(level1AccuracyTrinkets.map((definition) => [definition.id, {
+    adapterId: level1AccuracyAdapterId(definition.id), definitionId: definition.id,
+    requiredPrimitives: LEVEL1_ACCURACY_PRIMITIVES, definition,
+  }])),
   ...Object.fromEntries(stanceRings.map((definition) => [definition.id, {
     adapterId: `level3-stance-ring-${STANCE_RING_SPECS.find((spec) => spec.id === definition.id)!.stance}-v1`,
     definitionId: definition.id,
@@ -776,6 +804,13 @@ export const COMMUNITY_TRINKET_RUNTIME_ADAPTERS: Readonly<Record<string, Communi
 });
 
 export const COMMUNITY_TRINKET_PRODUCTION_PROOFS: Readonly<Record<string, CommunityProductionProof>> = Object.freeze({
+  ...Object.fromEntries(LEVEL1_STANCE_ACCURACY_SPECS.map((spec) => [spec.definitionId, {
+    definitionId: spec.definitionId, runtimeAdapterId: level1AccuracyAdapterId(spec.definitionId),
+    requiredPrimitives: LEVEL1_ACCURACY_PRIMITIVES,
+    sourceSupported: true, semanticSupported: true, stateful: true,
+    productionTests: [`C1C16-${spec.key}-RUNTIME`], saveReplayTests: [`C1C16-${spec.key}-SAVE-REPLAY`],
+    selectorTests: [`C1C16-${spec.key}-SELECTOR`], e2eTests: [`C1C16-E2E-${spec.key}`],
+  }])),
   ...Object.fromEntries(STANCE_RING_SPECS.map((spec) => [spec.id, {
     definitionId: spec.id, runtimeAdapterId: `level3-stance-ring-${spec.stance}-v1`,
     requiredPrimitives: ['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW', 'TRINKET_STANCE_CONDITION_CONSUMER'],
@@ -954,7 +989,7 @@ export function evaluateCommunityTrinketCapability(
     ...source.negativeSide.runtimeSupport.missingCapabilities,
   ].flatMap(normalizePrimitives))];
   const implementedTrinketPrimitives = new Set(['POST_ROLL_PRE_RESOLUTION_TRINKET_WINDOW', 'TRINKET_STANCE_CONDITION_CONSUMER', 'STAGED_HEALING_TRINKET_WINDOWS', 'PRE_DAMAGE_HIT_TRINKET_WINDOW', 'SET_DAMAGE_OVERRIDE', 'STAGED_INCOMING_ATTACK_RESOLUTION', 'INCOMING_ATTACK_TRINKET_WINDOW', 'HERO_HIT_BY_ATTACK_TRINKET_WINDOW', 'INCOMING_DAMAGE_SCALE_CONSUMER', 'INCOMING_DODGE_MODIFIER_CONSUMER', 'TRINKET_CONDITION_STACK_CONSUMER', 'STAGED_DUNGEON_TRINKET_WINDOWS', 'TRINKET_PROVISION_DICE_CONSUMER', 'STAGED_DISEASE_ACQUISITION', 'DISEASE_ACQUIRED_TRINKET_WINDOW', 'TRINKET_DISCARD_DISEASE_CONSUMER', 'INCOMING_CRITICAL_CONVERSION_CONSUMER']);
-  const missingPrimitives = source.level === 3 && source.contentSet === 'core'
+  const missingPrimitives = (source.level === 1 || source.level === 3) && source.contentSet === 'core'
     ? liveTrinketMissingPrimitives(source)
     : declaredMissingPrimitives.filter((primitive) => !implementedTrinketPrimitives.has(primitive));
   const sourceSemanticComplete = trinketSourceSemanticComplete(source);
@@ -969,7 +1004,7 @@ export function evaluateCommunityTrinketCapability(
       : runtimeSemanticComplete && adapter && proofComplete ? 'PRODUCTION_READY' : 'ADAPTER_REQUIRED';
   const semanticBlockers = semanticObligations.flatMap((obligation) => [
     ...(obligation.blockerCode ? [obligation.blockerCode] : []),
-    ...(source.level === 3 && obligation.trigger === 'voluntary-declaration' && !obligation.triggerScopeComplete
+    ...((source.level === 1 || source.level === 3) && obligation.trigger === 'voluntary-declaration' && !obligation.triggerScopeComplete
       ? ['TRINKET_VOLUNTARY_DECLARATION_SCOPE_UNRESOLVED'] : []),
   ]);
   const blockerCodes = sourceBlocked ? ['SOURCE_EVIDENCE_BLOCKED']

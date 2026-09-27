@@ -27,6 +27,12 @@ export const CAMPERS_HELMET_ID = 'community-trinket-core-campers-helmet';
 export const BLOODTHIRST_RING_ID = 'community-trinket-core-bloodthirst-ring';
 export const BOOK_OF_CONSTITUTION_ID = 'community-trinket-core-book-of-constitution';
 export const BOOK_OF_HOLINESS_ID = 'community-trinket-core-book-of-holiness';
+export const LEVEL1_STANCE_ACCURACY_SPECS = [
+  { definitionId: 'community-trinket-core-archers-ring', stance: 'ranged', key: 'ARCHER-RING' },
+  { definitionId: 'community-trinket-core-sages-book', stance: 'support', key: 'SAGE-BOOK' },
+  { definitionId: 'community-trinket-core-warriors-bracer', stance: 'aggressive', key: 'WARRIOR-BRACER' },
+  { definitionId: 'community-trinket-core-warriors-cap', stance: 'defensive', key: 'WARRIOR-CAP' },
+] as const;
 export const LEVEL3_STANCE_RING_SPECS = [
   { definitionId: 'community-trinket-core-defenders-ring', stance: 'defensive', key: 'DEFENDER' },
   { definitionId: 'community-trinket-core-scholars-ring', stance: 'support', key: 'SCHOLAR' },
@@ -69,6 +75,12 @@ export function proof(entry: RegisteredProductionProof): RegisteredProductionPro
 }
 
 export const PRODUCTION_PROOF_REGISTRY: Readonly<Record<string, RegisteredProductionProof>> = Object.freeze(Object.fromEntries([
+  ...LEVEL1_STANCE_ACCURACY_SPECS.flatMap((card) => [
+    proof({ proofId: `C1C16-${card.key}-RUNTIME`, definitionIds: [card.definitionId], proofType: 'production-runtime', testFile: 'src/game-engine/c1c16-level1-stance-accuracy.test.ts', runner: 'vitest', status: 'active', scope: 'definition' }),
+    proof({ proofId: `C1C16-${card.key}-SAVE-REPLAY`, definitionIds: [card.definitionId], proofType: 'save-replay', testFile: 'src/game-engine/c1c16-level1-stance-accuracy.test.ts', runner: 'vitest', status: 'active', scope: 'definition' }),
+    proof({ proofId: `C1C16-${card.key}-SELECTOR`, definitionIds: [card.definitionId], proofType: 'selector', testFile: 'src/game-engine/c1c16-level1-stance-accuracy.test.ts', runner: 'vitest', status: 'active', scope: 'definition' }),
+    proof({ proofId: `C1C16-E2E-${card.key}`, definitionIds: [card.definitionId], proofType: 'e2e', testFile: 'e2e/phase11a4-c1c16-level1-stance-accuracy.spec.ts', runner: 'playwright', status: 'active', scope: 'definition', proofSurface: 'production-ui' }),
+  ]),
   ...LEVEL3_STANCE_RING_SPECS.flatMap((ring) => [
     proof({ proofId: `C1C15-${ring.key}-RING-RUNTIME`, definitionIds: [ring.definitionId], proofType: 'production-runtime', testFile: 'src/game-engine/c1c15-level3-stance-rings.test.ts', runner: 'vitest', status: 'active', scope: 'definition' }),
     proof({ proofId: `C1C15-${ring.key}-RING-SAVE-REPLAY`, definitionIds: [ring.definitionId], proofType: 'save-replay', testFile: 'src/game-engine/c1c15-level3-stance-rings.test.ts', runner: 'vitest', status: 'active', scope: 'definition' }),

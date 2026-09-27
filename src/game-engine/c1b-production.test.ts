@@ -59,7 +59,11 @@ describe('C1B production content gate', () => {
     expect(getBossQuestPool(context)).toEqual([]);
     expect(getTrinketPoolByLevel(context, 1).map((item) => item.id).sort()).toEqual([
       'community-trinket-core-accuracy-stone',
+      'community-trinket-core-archers-ring',
       'community-trinket-core-critical-stone',
+      'community-trinket-core-sages-book',
+      'community-trinket-core-warriors-bracer',
+      'community-trinket-core-warriors-cap',
     ]);
     expect(commitQuestSelection(campaign, 'scout-ahead').error).toBe('quest-not-production-eligible');
   });
