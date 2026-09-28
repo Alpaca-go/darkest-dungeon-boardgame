@@ -1,0 +1,2991 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C28",
+  "family": "Necromancer",
+  "baselineHead": "aaedb2d30b1e5d90bf8d41e7dbced9f93288f73a",
+  "runtimeImplemented": false,
+  "inputSha256": {
+    "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json": "55e89348a581632d0a6fc6371700ff79754f70993e986192d9f630dcda34f3db",
+    "docs/data/complete-edition/c1c25-necromancer-encounter-composition.json": "87910e8fa32708906787e04885ea66e865dd9c4fb260fb3b5963baf3f332d21c",
+    "docs/data/complete-edition/c1c25-necromancer-setup-contract.json": "688781f05721790b11473bcdb4b3adb04a2a65b3edd367a59ebf662344b1d564",
+    "docs/data/complete-edition/c1c25-necromancer-room-contract.json": "23249ae51a8ddeaad7d8801175f372b624294e12290947178e0a43846cc63226",
+    "docs/data/complete-edition/c1c25-necromancer-summon-contract.json": "9692b8ec31d22dbaeb5a4010eaa6f181dbbc9d64f295e0df772ff9e92a27bdf2",
+    "docs/data/complete-edition/c1c25-necromancer-cleanup-contract.json": "a65826efef7ad6306e8877cd24f2735df9b549bfa2d85dd6d633d9cd4c4fe205",
+    "docs/data/complete-edition/c1c25-necromancer-bone-source-binding.json": "ed3d427224322e0b4d3cae466956cc4aaf897966d7a2818fb24344585b2bf862",
+    "docs/data/complete-edition/c1c25-necromancer-source-precedence.json": "a71c2131471190e84b618314cc9ba50abd105012d0cce8dea807b2538b7f0569",
+    "docs/data/complete-edition/c1c25-necromancer-source-discrepancies.json": "cf29f05af4a78d02895e2d4142e6b3b921e81519ba1c2e94b97f3ba13e1e2acb",
+    "docs/data/complete-edition/c1c25-necromancer-external-dependencies.json": "399db33e8a3dd6ae066661e848821d6f13a1c25c22d160c3dcfbe3794ba2e206",
+    "docs/data/complete-edition/c1c26-necromancer-lowest-roll-tie-contract.json": "dc90883d17b43232b0fe3c8cf861e56ddeb9d2b3f6493d753d6f14dab0989afb",
+    "docs/data/complete-edition/c1c26-necromancer-area-target-tie-contract.json": "833e9443c9a85cc79c4e9b76c6ef9f8b5769d7cb32c484f1657dc07efd6279da",
+    "docs/data/complete-edition/c1c26-necromancer-summon-count-contract.json": "a0e16a2cd27901a2568ae95d086129b7f26812c230cda4c6cb94f448889f6a9c",
+    "docs/data/complete-edition/c1c26-necromancer-summon-copy-policy.json": "7ddb77c79e6a189fb9344bbde20559fa16e1ea147c777052289188c96f45357c",
+    "docs/data/complete-edition/c1c26-necromancer-bone-identity-closure.json": "4b4b628d2c07d5623a4779c16cdbd6b3994e1051775f2e14926eab47a66ab470",
+    "docs/data/complete-edition/c1c26-necromancer-reanimation-order-contract.json": "c74a0b336d99e0ceaa4f564ed8ea2c455a6f7ec762cb5c9d17aeb7c9a2af73c1",
+    "docs/data/complete-edition/c1c26-necromancer-room-capacity-resolution.json": "6b8f3cbde60bc96a30c99a062945ca85d78baaa67e679ecb37d677264d2270c8",
+    "docs/data/complete-edition/c1c26-necromancer-cleanup-destination-contract.json": "eed72852b284996e03b7cc2ecc3cb5f977a6b89360a3ccaccaaf5cda7bbe6e3f",
+    "docs/data/complete-edition/c1c26-necromancer-source-precedence-closure.json": "6d6150b779b51301dea48ee79a1df9f5494b1e2745ef8f6b8611eb423da39ac9",
+    "docs/data/complete-edition/c1c26-necromancer-source-gap-register.json": "39dc385218f8b883a6e37446e8e42741b3e7aac4fa267688d6d7572652c9e3b3",
+    "docs/data/complete-edition/c1c26-necromancer-frozen-baseline-contracts.json": "25eaaa0850abe6c3bd8e1173ba3ee59276bca1f6507058dbcc667976f6df550a",
+    "docs/data/complete-edition/c1c27-necromancer-source-exhaustion-register.json": "f8775575cac52140b75104d96a2574061b962833a5d530ca824755f08dca49b2",
+    "docs/data/complete-edition/c1c27-necromancer-semantic-completeness-matrix.json": "0c566887282a3efa5c203102cb10a4182f36a8dc448851849dabbcb9bfbdeb15",
+    "docs/data/complete-edition/c1c27-source-retrieval-evidence.json": "65e6731a6f8c54cb553c01de3df1f9c8eea4804b1c1af710fa8d0ef3d985911e",
+    "docs/data/complete-edition/c1c27-authoritative-source-authentication.json": "12dbfafcf8a2ef48e33c22afaa6cdffb80e14f164317eba556236d4632c3b96b"
+  },
+  "freezePolicy": {
+    "policyId": "C1C28_USER_AVAILABLE_CORPUS_FREEZE",
+    "authority": "PROJECT_DECISION",
+    "basis": "Explicit C1C28 user instruction: proceed on the premise that no authoritative material beyond the rulebook and official physical components can be acquired.",
+    "exhaustionScope": "PROJECT_CURRENTLY_AVAILABLE_AUTHORITATIVE_CORPUS",
+    "globalExhaustionClaim": false,
+    "faqDoesNotExistClaim": false,
+    "authenticatedPermanentUnavailabilityClaim": false,
+    "furtherAcquisitionRequired": false,
+    "oldC1C27GateChanged": false,
+    "projectDevelopmentGateSuperseded": true,
+    "futureSourceReauditAllowed": true,
+    "evidenceIds": [
+      "C1C28_USER_AVAILABLE_CORPUS_FREEZE",
+      "retrieval-designer-faq",
+      "retrieval-designer-file-list",
+      "retrieval-designer-faq-retry",
+      "retrieval-historical-faq-index",
+      "retrieval-publisher-faq",
+      "retrieval-publisher-root",
+      "retrieval-kickstarter-updates",
+      "retrieval-redhook-distribution",
+      "retrieval-redhook-search",
+      "retrieval-faq-mirror-en",
+      "retrieval-faq-mirror-es",
+      "retrieval-production-warrens",
+      "retrieval-production-com",
+      "retrieval-production-drive-a",
+      "retrieval-production-drive-b",
+      "retrieval-rulebook-mirror-gamershq",
+      "retrieval-rulebook-mirror-gamershq-retry",
+      "retrieval-rulebook-mirror-tesera",
+      "retrieval-house-rule-lead",
+      "retrieval-wargamer-distribution",
+      "retrieval-tts-discovery",
+      "retrieval-tts-official-corebox",
+      "retrieval-tts-community-complete"
+    ]
+  },
+  "categories": [
+    {
+      "category": "BONE_IDENTITY_UNRESOLVED",
+      "affectedCards": [
+        42004
+      ],
+      "familyDependencyCards": [
+        42004,
+        46039,
+        42005,
+        46038,
+        42003,
+        46037,
+        42002,
+        42001,
+        42000
+      ],
+      "officialKnownFacts": [
+        {
+          "summary": "Captain is the Level II first-Battle Dungeon Threat dependency. One named miniature is observed; narrow artwork 46111 and Large combat component 46600 retain distinct physical identities.",
+          "sourceReferences": [
+            {
+              "path": "docs/data/complete-edition/c1c27-necromancer-bone-identity-closure.json",
+              "pointer": ""
+            }
+          ]
+        }
+      ],
+      "officialUnknowns": "Authenticate the narrow artwork / full Large Captain association and copy instruction; keep the two components distinct.",
+      "checkedSources": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 6,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 17,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "scoped review"
+        }
+      ],
+      "unavailableAuthorityHistory": {
+        "path": "docs/data/complete-edition/c1c27-source-retrieval-evidence.json",
+        "receiptIds": [
+          "retrieval-designer-faq",
+          "retrieval-designer-file-list",
+          "retrieval-designer-faq-retry",
+          "retrieval-historical-faq-index",
+          "retrieval-publisher-faq",
+          "retrieval-publisher-root",
+          "retrieval-kickstarter-updates",
+          "retrieval-redhook-distribution",
+          "retrieval-redhook-search",
+          "retrieval-faq-mirror-en",
+          "retrieval-faq-mirror-es",
+          "retrieval-production-warrens",
+          "retrieval-production-com",
+          "retrieval-production-drive-a",
+          "retrieval-production-drive-b",
+          "retrieval-rulebook-mirror-gamershq",
+          "retrieval-rulebook-mirror-gamershq-retry",
+          "retrieval-rulebook-mirror-tesera",
+          "retrieval-house-rule-lead",
+          "retrieval-wargamer-distribution",
+          "retrieval-tts-discovery",
+          "retrieval-tts-official-corebox",
+          "retrieval-tts-community-complete"
+        ],
+        "pendingAuthoritySourceIds": [
+          "designer-faq",
+          "designer-file-list",
+          "designer-faq-retry",
+          "historical-faq-index",
+          "publisher-faq",
+          "kickstarter-updates",
+          "redhook-distribution",
+          "redhook-search",
+          "faq-mirror-en",
+          "faq-mirror-es",
+          "production-warrens",
+          "production-com",
+          "production-drive-a",
+          "production-drive-b",
+          "rulebook-mirror-gamershq-retry",
+          "rulebook-mirror-tesera",
+          "tts-official-corebox"
+        ],
+        "historicalC1C27Status": "BLOCKED_ON_UNRETRIEVED_AUTHORITY",
+        "newlyAuthenticatedFiles": 0
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "exhaustionScope": "PROJECT_CURRENTLY_AVAILABLE_AUTHORITATIVE_CORPUS",
+      "canonicalOfficialResolved": false,
+      "runtimeImpact": [
+        "Use full combat stats from 46600 and keep both component identities and literal provenance."
+      ],
+      "projectRulingRequired": true,
+      "rulingIds": [
+        "NECRO_CAPTAIN_PROJECT_COMPONENT_BINDING"
+      ],
+      "riskLevel": "HIGH_GAMEPLAY_IMPACT",
+      "leafUsages": 3,
+      "exhaustionEvidenceIds": [
+        "C1C28_USER_AVAILABLE_CORPUS_FREEZE",
+        "retrieval-designer-faq",
+        "retrieval-designer-file-list",
+        "retrieval-designer-faq-retry",
+        "retrieval-historical-faq-index",
+        "retrieval-publisher-faq",
+        "retrieval-publisher-root",
+        "retrieval-kickstarter-updates",
+        "retrieval-redhook-distribution",
+        "retrieval-redhook-search",
+        "retrieval-faq-mirror-en",
+        "retrieval-faq-mirror-es",
+        "retrieval-production-warrens",
+        "retrieval-production-com",
+        "retrieval-production-drive-a",
+        "retrieval-production-drive-b",
+        "retrieval-rulebook-mirror-gamershq",
+        "retrieval-rulebook-mirror-gamershq-retry",
+        "retrieval-rulebook-mirror-tesera",
+        "retrieval-house-rule-lead",
+        "retrieval-wargamer-distribution",
+        "retrieval-tts-discovery",
+        "retrieval-tts-official-corebox",
+        "retrieval-tts-community-complete"
+      ]
+    },
+    {
+      "category": "CLEANUP_DESTINATION_UNRESOLVED",
+      "affectedCards": [
+        42004,
+        46039,
+        42005,
+        46038,
+        42003,
+        46037,
+        42002,
+        42001,
+        42000
+      ],
+      "familyDependencyCards": [
+        42004,
+        46039,
+        42005,
+        46038,
+        42003,
+        46037,
+        42002,
+        42001,
+        42000
+      ],
+      "officialKnownFacts": [
+        {
+          "summary": "Boss defeat ends Battle and removes other Monsters. Room Card is discarded for the Dungeon and returned to its deck at Hamlet; generic Monster-card return and permanent removal remain source-bound.",
+          "sourceReferences": [
+            {
+              "path": "docs/data/complete-edition/c1c27-necromancer-cleanup-destination-closure.json",
+              "pointer": ""
+            }
+          ]
+        }
+      ],
+      "officialUnknowns": "Identify the post-defeat storage destinations and side/reset policy of the Boss trio.",
+      "checkedSources": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 25,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 30,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 32,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 35,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "scoped review"
+        }
+      ],
+      "unavailableAuthorityHistory": {
+        "path": "docs/data/complete-edition/c1c27-source-retrieval-evidence.json",
+        "receiptIds": [
+          "retrieval-designer-faq",
+          "retrieval-designer-file-list",
+          "retrieval-designer-faq-retry",
+          "retrieval-historical-faq-index",
+          "retrieval-publisher-faq",
+          "retrieval-publisher-root",
+          "retrieval-kickstarter-updates",
+          "retrieval-redhook-distribution",
+          "retrieval-redhook-search",
+          "retrieval-faq-mirror-en",
+          "retrieval-faq-mirror-es",
+          "retrieval-production-warrens",
+          "retrieval-production-com",
+          "retrieval-production-drive-a",
+          "retrieval-production-drive-b",
+          "retrieval-rulebook-mirror-gamershq",
+          "retrieval-rulebook-mirror-gamershq-retry",
+          "retrieval-rulebook-mirror-tesera",
+          "retrieval-house-rule-lead",
+          "retrieval-wargamer-distribution",
+          "retrieval-tts-discovery",
+          "retrieval-tts-official-corebox",
+          "retrieval-tts-community-complete"
+        ],
+        "pendingAuthoritySourceIds": [
+          "designer-faq",
+          "designer-file-list",
+          "designer-faq-retry",
+          "historical-faq-index",
+          "publisher-faq",
+          "kickstarter-updates",
+          "redhook-distribution",
+          "redhook-search",
+          "faq-mirror-en",
+          "faq-mirror-es",
+          "production-warrens",
+          "production-com",
+          "production-drive-a",
+          "production-drive-b",
+          "rulebook-mirror-gamershq-retry",
+          "rulebook-mirror-tesera",
+          "tts-official-corebox"
+        ],
+        "historicalC1C27Status": "BLOCKED_ON_UNRETRIEVED_AUTHORITY",
+        "newlyAuthenticatedFiles": 0
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "exhaustionScope": "PROJECT_CURRENTLY_AVAILABLE_AUTHORITATIVE_CORPUS",
+      "canonicalOfficialResolved": false,
+      "runtimeImpact": [
+        "Use component-specific destinations and explicit reset; do not recreate a defeated Boss or erase campaign progression."
+      ],
+      "projectRulingRequired": true,
+      "rulingIds": [
+        "NECRO_BOSS_TRIO_ENCOUNTER_STORAGE_RESET"
+      ],
+      "riskLevel": "LOW_RISK_DETERMINISM",
+      "leafUsages": 2,
+      "exhaustionEvidenceIds": [
+        "C1C28_USER_AVAILABLE_CORPUS_FREEZE",
+        "retrieval-designer-faq",
+        "retrieval-designer-file-list",
+        "retrieval-designer-faq-retry",
+        "retrieval-historical-faq-index",
+        "retrieval-publisher-faq",
+        "retrieval-publisher-root",
+        "retrieval-kickstarter-updates",
+        "retrieval-redhook-distribution",
+        "retrieval-redhook-search",
+        "retrieval-faq-mirror-en",
+        "retrieval-faq-mirror-es",
+        "retrieval-production-warrens",
+        "retrieval-production-com",
+        "retrieval-production-drive-a",
+        "retrieval-production-drive-b",
+        "retrieval-rulebook-mirror-gamershq",
+        "retrieval-rulebook-mirror-gamershq-retry",
+        "retrieval-rulebook-mirror-tesera",
+        "retrieval-house-rule-lead",
+        "retrieval-wargamer-distribution",
+        "retrieval-tts-discovery",
+        "retrieval-tts-official-corebox",
+        "retrieval-tts-community-complete"
+      ]
+    },
+    {
+      "category": "EFFECT_ORDER_UNRESOLVED",
+      "affectedCards": [
+        42005
+      ],
+      "familyDependencyCards": [
+        42004,
+        46039,
+        42005,
+        46038,
+        42003,
+        46037,
+        42002,
+        42001,
+        42000
+      ],
+      "officialKnownFacts": [
+        {
+          "summary": "Level III immediately respawns the first non-large Monster death each Battle in its corresponding Area and ignores the effect if no space. Generic casualty threshold/removal and generic new-spawn initiative are separately known.",
+          "sourceReferences": [
+            {
+              "path": "docs/data/complete-edition/c1c27-necromancer-reanimation-order-closure.json",
+              "pointer": ""
+            }
+          ]
+        }
+      ],
+      "officialUnknowns": "Specify Reanimation relative to casualty removal, initiative, other death effects and simultaneous first deaths.",
+      "checkedSources": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 17,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 20,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 24,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 25,
+          "region": "scoped review"
+        }
+      ],
+      "unavailableAuthorityHistory": {
+        "path": "docs/data/complete-edition/c1c27-source-retrieval-evidence.json",
+        "receiptIds": [
+          "retrieval-designer-faq",
+          "retrieval-designer-file-list",
+          "retrieval-designer-faq-retry",
+          "retrieval-historical-faq-index",
+          "retrieval-publisher-faq",
+          "retrieval-publisher-root",
+          "retrieval-kickstarter-updates",
+          "retrieval-redhook-distribution",
+          "retrieval-redhook-search",
+          "retrieval-faq-mirror-en",
+          "retrieval-faq-mirror-es",
+          "retrieval-production-warrens",
+          "retrieval-production-com",
+          "retrieval-production-drive-a",
+          "retrieval-production-drive-b",
+          "retrieval-rulebook-mirror-gamershq",
+          "retrieval-rulebook-mirror-gamershq-retry",
+          "retrieval-rulebook-mirror-tesera",
+          "retrieval-house-rule-lead",
+          "retrieval-wargamer-distribution",
+          "retrieval-tts-discovery",
+          "retrieval-tts-official-corebox",
+          "retrieval-tts-community-complete"
+        ],
+        "pendingAuthoritySourceIds": [
+          "designer-faq",
+          "designer-file-list",
+          "designer-faq-retry",
+          "historical-faq-index",
+          "publisher-faq",
+          "kickstarter-updates",
+          "redhook-distribution",
+          "redhook-search",
+          "faq-mirror-en",
+          "faq-mirror-es",
+          "production-warrens",
+          "production-com",
+          "production-drive-a",
+          "production-drive-b",
+          "rulebook-mirror-gamershq-retry",
+          "rulebook-mirror-tesera",
+          "tts-official-corebox"
+        ],
+        "historicalC1C27Status": "BLOCKED_ON_UNRETRIEVED_AUTHORITY",
+        "newlyAuthenticatedFiles": 0
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "exhaustionScope": "PROJECT_CURRENTLY_AVAILABLE_AUTHORITATIVE_CORPUS",
+      "canonicalOfficialResolved": false,
+      "runtimeImpact": [
+        "A causal death-group API, distinct physical/runtime IDs and replayed initiative RNG are C1C29 obligations; engine array position supplies no rule.",
+        "Pause selection, reject invalid IDs and consume the one-per-Battle window even on failed placement."
+      ],
+      "projectRulingRequired": true,
+      "rulingIds": [
+        "NECRO_REANIMATION_NEW_INSTANCE_EVENT_ORDER",
+        "NECRO_SIMULTANEOUS_FIRST_DEATH_PLAYER_CHOICE"
+      ],
+      "riskLevel": "HIGH_GAMEPLAY_IMPACT",
+      "leafUsages": 1,
+      "exhaustionEvidenceIds": [
+        "C1C28_USER_AVAILABLE_CORPUS_FREEZE",
+        "retrieval-designer-faq",
+        "retrieval-designer-file-list",
+        "retrieval-designer-faq-retry",
+        "retrieval-historical-faq-index",
+        "retrieval-publisher-faq",
+        "retrieval-publisher-root",
+        "retrieval-kickstarter-updates",
+        "retrieval-redhook-distribution",
+        "retrieval-redhook-search",
+        "retrieval-faq-mirror-en",
+        "retrieval-faq-mirror-es",
+        "retrieval-production-warrens",
+        "retrieval-production-com",
+        "retrieval-production-drive-a",
+        "retrieval-production-drive-b",
+        "retrieval-rulebook-mirror-gamershq",
+        "retrieval-rulebook-mirror-gamershq-retry",
+        "retrieval-rulebook-mirror-tesera",
+        "retrieval-house-rule-lead",
+        "retrieval-wargamer-distribution",
+        "retrieval-tts-discovery",
+        "retrieval-tts-official-corebox",
+        "retrieval-tts-community-complete"
+      ]
+    },
+    {
+      "category": "LOWEST_ROLL_HERO_TIE_UNRESOLVED",
+      "affectedCards": [
+        42004,
+        42005
+      ],
+      "familyDependencyCards": [
+        42004,
+        46039,
+        42005,
+        46038,
+        42003,
+        46037,
+        42002,
+        42001,
+        42000
+      ],
+      "officialKnownFacts": [
+        {
+          "summary": "All Heroes roll D10 on the first preparation day; lowest Hero guards Graveyard. Level II permits its normal effect; Level III prohibits it. No acquired official tied-lowest selection rule.",
+          "sourceReferences": [
+            {
+              "path": "docs/data/complete-edition/c1c27-necromancer-lowest-roll-tie-closure.json",
+              "pointer": ""
+            }
+          ]
+        }
+      ],
+      "officialUnknowns": "Specify the Hamlet lowest-D10 tie rule for Haunted Graveyard and The Restless Dead.",
+      "checkedSources": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 11,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 24,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 30,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 32,
+          "region": "scoped review"
+        }
+      ],
+      "unavailableAuthorityHistory": {
+        "path": "docs/data/complete-edition/c1c27-source-retrieval-evidence.json",
+        "receiptIds": [
+          "retrieval-designer-faq",
+          "retrieval-designer-file-list",
+          "retrieval-designer-faq-retry",
+          "retrieval-historical-faq-index",
+          "retrieval-publisher-faq",
+          "retrieval-publisher-root",
+          "retrieval-kickstarter-updates",
+          "retrieval-redhook-distribution",
+          "retrieval-redhook-search",
+          "retrieval-faq-mirror-en",
+          "retrieval-faq-mirror-es",
+          "retrieval-production-warrens",
+          "retrieval-production-com",
+          "retrieval-production-drive-a",
+          "retrieval-production-drive-b",
+          "retrieval-rulebook-mirror-gamershq",
+          "retrieval-rulebook-mirror-gamershq-retry",
+          "retrieval-rulebook-mirror-tesera",
+          "retrieval-house-rule-lead",
+          "retrieval-wargamer-distribution",
+          "retrieval-tts-discovery",
+          "retrieval-tts-official-corebox",
+          "retrieval-tts-community-complete"
+        ],
+        "pendingAuthoritySourceIds": [
+          "designer-faq",
+          "designer-file-list",
+          "designer-faq-retry",
+          "historical-faq-index",
+          "publisher-faq",
+          "kickstarter-updates",
+          "redhook-distribution",
+          "redhook-search",
+          "faq-mirror-en",
+          "faq-mirror-es",
+          "production-warrens",
+          "production-com",
+          "production-drive-a",
+          "production-drive-b",
+          "rulebook-mirror-gamershq-retry",
+          "rulebook-mirror-tesera",
+          "tts-official-corebox"
+        ],
+        "historicalC1C27Status": "BLOCKED_ON_UNRETRIEVED_AUTHORITY",
+        "newlyAuthenticatedFiles": 0
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "exhaustionScope": "PROJECT_CURRENTLY_AVAILABLE_AUTHORITATIVE_CORPUS",
+      "canonicalOfficialResolved": false,
+      "runtimeImpact": [
+        "Suspend forced Graveyard visit until a valid choice; retain Level II may-use and Level III cannot-use official differences."
+      ],
+      "projectRulingRequired": true,
+      "rulingIds": [
+        "NECRO_LOWEST_ROLL_TIE_PLAYER_CHOICE"
+      ],
+      "riskLevel": "LOW_RISK_DETERMINISM",
+      "leafUsages": 13,
+      "exhaustionEvidenceIds": [
+        "C1C28_USER_AVAILABLE_CORPUS_FREEZE",
+        "retrieval-designer-faq",
+        "retrieval-designer-file-list",
+        "retrieval-designer-faq-retry",
+        "retrieval-historical-faq-index",
+        "retrieval-publisher-faq",
+        "retrieval-publisher-root",
+        "retrieval-kickstarter-updates",
+        "retrieval-redhook-distribution",
+        "retrieval-redhook-search",
+        "retrieval-faq-mirror-en",
+        "retrieval-faq-mirror-es",
+        "retrieval-production-warrens",
+        "retrieval-production-com",
+        "retrieval-production-drive-a",
+        "retrieval-production-drive-b",
+        "retrieval-rulebook-mirror-gamershq",
+        "retrieval-rulebook-mirror-gamershq-retry",
+        "retrieval-rulebook-mirror-tesera",
+        "retrieval-house-rule-lead",
+        "retrieval-wargamer-distribution",
+        "retrieval-tts-discovery",
+        "retrieval-tts-official-corebox",
+        "retrieval-tts-community-complete"
+      ]
+    },
+    {
+      "category": "ROOM_CAPACITY_INTERACTION_UNRESOLVED",
+      "affectedCards": [
+        42003,
+        42004,
+        42005,
+        46037,
+        46038,
+        46039
+      ],
+      "familyDependencyCards": [
+        42004,
+        46039,
+        42005,
+        46038,
+        42003,
+        46037,
+        42002,
+        42001,
+        42000
+      ],
+      "officialKnownFacts": [
+        {
+          "summary": "First empty Stance and printed Target Area placement apply. Full Stances suppress. Core p31 displaces a miniature toward a nearest available Area; this is not Stance replacement or initial Large-draw substitution.",
+          "sourceReferences": [
+            {
+              "path": "docs/data/complete-edition/c1c27-necromancer-room-capacity-closure.json",
+              "pointer": ""
+            }
+          ]
+        }
+      ],
+      "officialUnknowns": "Specify equal-nearest destination choice and no-available-Area behavior under p31 displacement.",
+      "checkedSources": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 17,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 24,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 31,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "scoped review"
+        }
+      ],
+      "unavailableAuthorityHistory": {
+        "path": "docs/data/complete-edition/c1c27-source-retrieval-evidence.json",
+        "receiptIds": [
+          "retrieval-designer-faq",
+          "retrieval-designer-file-list",
+          "retrieval-designer-faq-retry",
+          "retrieval-historical-faq-index",
+          "retrieval-publisher-faq",
+          "retrieval-publisher-root",
+          "retrieval-kickstarter-updates",
+          "retrieval-redhook-distribution",
+          "retrieval-redhook-search",
+          "retrieval-faq-mirror-en",
+          "retrieval-faq-mirror-es",
+          "retrieval-production-warrens",
+          "retrieval-production-com",
+          "retrieval-production-drive-a",
+          "retrieval-production-drive-b",
+          "retrieval-rulebook-mirror-gamershq",
+          "retrieval-rulebook-mirror-gamershq-retry",
+          "retrieval-rulebook-mirror-tesera",
+          "retrieval-house-rule-lead",
+          "retrieval-wargamer-distribution",
+          "retrieval-tts-discovery",
+          "retrieval-tts-official-corebox",
+          "retrieval-tts-community-complete"
+        ],
+        "pendingAuthoritySourceIds": [
+          "designer-faq",
+          "designer-file-list",
+          "designer-faq-retry",
+          "historical-faq-index",
+          "publisher-faq",
+          "kickstarter-updates",
+          "redhook-distribution",
+          "redhook-search",
+          "faq-mirror-en",
+          "faq-mirror-es",
+          "production-warrens",
+          "production-com",
+          "production-drive-a",
+          "production-drive-b",
+          "rulebook-mirror-gamershq-retry",
+          "rulebook-mirror-tesera",
+          "tts-official-corebox"
+        ],
+        "historicalC1C27Status": "BLOCKED_ON_UNRETRIEVED_AUTHORITY",
+        "newlyAuthenticatedFiles": 0
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "exhaustionScope": "PROJECT_CURRENTLY_AVAILABLE_AUTHORITATIVE_CORPUS",
+      "canonicalOfficialResolved": false,
+      "runtimeImpact": [
+        "Require explicit legal placement plan, player input on tied legal units/destinations, and atomic commit."
+      ],
+      "projectRulingRequired": true,
+      "rulingIds": [
+        "NECRO_ROOM_CAPACITY_DISPLACEMENT_OR_SUPPRESS"
+      ],
+      "riskLevel": "MEDIUM_RULE_INTERPRETATION",
+      "leafUsages": 3,
+      "exhaustionEvidenceIds": [
+        "C1C28_USER_AVAILABLE_CORPUS_FREEZE",
+        "retrieval-designer-faq",
+        "retrieval-designer-file-list",
+        "retrieval-designer-faq-retry",
+        "retrieval-historical-faq-index",
+        "retrieval-publisher-faq",
+        "retrieval-publisher-root",
+        "retrieval-kickstarter-updates",
+        "retrieval-redhook-distribution",
+        "retrieval-redhook-search",
+        "retrieval-faq-mirror-en",
+        "retrieval-faq-mirror-es",
+        "retrieval-production-warrens",
+        "retrieval-production-com",
+        "retrieval-production-drive-a",
+        "retrieval-production-drive-b",
+        "retrieval-rulebook-mirror-gamershq",
+        "retrieval-rulebook-mirror-gamershq-retry",
+        "retrieval-rulebook-mirror-tesera",
+        "retrieval-house-rule-lead",
+        "retrieval-wargamer-distribution",
+        "retrieval-tts-discovery",
+        "retrieval-tts-official-corebox",
+        "retrieval-tts-community-complete"
+      ]
+    },
+    {
+      "category": "SOURCE_PRECEDENCE_UNRESOLVED",
+      "affectedCards": [
+        42004,
+        46039,
+        42005,
+        46038,
+        42003,
+        46037,
+        42002,
+        42001,
+        42000
+      ],
+      "familyDependencyCards": [
+        42004,
+        46039,
+        42005,
+        46038,
+        42003,
+        46037,
+        42002,
+        42001,
+        42000
+      ],
+      "officialKnownFacts": [
+        {
+          "summary": "Printed Boss/Monster components say Bone Rabble; core p38 says Bone Rubble. No acquired scoped correction or alias supersedes this conflict. Previously bound scoped precedence decisions stay frozen.",
+          "sourceReferences": [
+            {
+              "path": "docs/data/complete-edition/c1c27-necromancer-source-precedence-final.json",
+              "pointer": ""
+            }
+          ]
+        }
+      ],
+      "officialUnknowns": "Acquire an explicit correction or equivalence for printed Bone Rabble versus p38 Bone Rubble.",
+      "checkedSources": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 7,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 30,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 31,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 35,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "scoped review"
+        }
+      ],
+      "unavailableAuthorityHistory": {
+        "path": "docs/data/complete-edition/c1c27-source-retrieval-evidence.json",
+        "receiptIds": [
+          "retrieval-designer-faq",
+          "retrieval-designer-file-list",
+          "retrieval-designer-faq-retry",
+          "retrieval-historical-faq-index",
+          "retrieval-publisher-faq",
+          "retrieval-publisher-root",
+          "retrieval-kickstarter-updates",
+          "retrieval-redhook-distribution",
+          "retrieval-redhook-search",
+          "retrieval-faq-mirror-en",
+          "retrieval-faq-mirror-es",
+          "retrieval-production-warrens",
+          "retrieval-production-com",
+          "retrieval-production-drive-a",
+          "retrieval-production-drive-b",
+          "retrieval-rulebook-mirror-gamershq",
+          "retrieval-rulebook-mirror-gamershq-retry",
+          "retrieval-rulebook-mirror-tesera",
+          "retrieval-house-rule-lead",
+          "retrieval-wargamer-distribution",
+          "retrieval-tts-discovery",
+          "retrieval-tts-official-corebox",
+          "retrieval-tts-community-complete"
+        ],
+        "pendingAuthoritySourceIds": [
+          "designer-faq",
+          "designer-file-list",
+          "designer-faq-retry",
+          "historical-faq-index",
+          "publisher-faq",
+          "kickstarter-updates",
+          "redhook-distribution",
+          "redhook-search",
+          "faq-mirror-en",
+          "faq-mirror-es",
+          "production-warrens",
+          "production-com",
+          "production-drive-a",
+          "production-drive-b",
+          "rulebook-mirror-gamershq-retry",
+          "rulebook-mirror-tesera",
+          "tts-official-corebox"
+        ],
+        "historicalC1C27Status": "BLOCKED_ON_UNRETRIEVED_AUTHORITY",
+        "newlyAuthenticatedFiles": 0
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "exhaustionScope": "PROJECT_CURRENTLY_AVAILABLE_AUTHORITATIVE_CORPUS",
+      "canonicalOfficialResolved": false,
+      "runtimeImpact": [
+        "Resolve this local runtime identity through ruling ID, without global normalization or canonical merge."
+      ],
+      "projectRulingRequired": true,
+      "rulingIds": [
+        "NECRO_RUBBLE_REFERS_TO_PRINTED_RABBLE"
+      ],
+      "riskLevel": "HIGH_GAMEPLAY_IMPACT",
+      "leafUsages": 15,
+      "exhaustionEvidenceIds": [
+        "C1C28_USER_AVAILABLE_CORPUS_FREEZE",
+        "retrieval-designer-faq",
+        "retrieval-designer-file-list",
+        "retrieval-designer-faq-retry",
+        "retrieval-historical-faq-index",
+        "retrieval-publisher-faq",
+        "retrieval-publisher-root",
+        "retrieval-kickstarter-updates",
+        "retrieval-redhook-distribution",
+        "retrieval-redhook-search",
+        "retrieval-faq-mirror-en",
+        "retrieval-faq-mirror-es",
+        "retrieval-production-warrens",
+        "retrieval-production-com",
+        "retrieval-production-drive-a",
+        "retrieval-production-drive-b",
+        "retrieval-rulebook-mirror-gamershq",
+        "retrieval-rulebook-mirror-gamershq-retry",
+        "retrieval-rulebook-mirror-tesera",
+        "retrieval-house-rule-lead",
+        "retrieval-wargamer-distribution",
+        "retrieval-tts-discovery",
+        "retrieval-tts-official-corebox",
+        "retrieval-tts-community-complete"
+      ]
+    },
+    {
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "affectedCards": [
+        42004,
+        46039,
+        42005,
+        46038,
+        42003,
+        46037,
+        42002,
+        42001,
+        42000
+      ],
+      "familyDependencyCards": [
+        42004,
+        46039,
+        42005,
+        46038,
+        42003,
+        46037,
+        42002,
+        42001,
+        42000
+      ],
+      "officialKnownFacts": [
+        {
+          "summary": "Rabble, Soldier and Spearman each have three observed miniatures; Captain has one. Core p38 keeps named components on hand. Observed quantities do not establish an official gameplay limit or within-Battle reuse policy.",
+          "sourceReferences": [
+            {
+              "path": "docs/data/complete-edition/c1c27-necromancer-summon-supply-closure.json",
+              "pointer": ""
+            }
+          ]
+        }
+      ],
+      "officialUnknowns": "Specify reserved/shared pool, dead copy reuse, permanent removal and supply exhaustion behavior.",
+      "checkedSources": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 6,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 7,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 10,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 17,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 25,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 31,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "scoped review"
+        }
+      ],
+      "unavailableAuthorityHistory": {
+        "path": "docs/data/complete-edition/c1c27-source-retrieval-evidence.json",
+        "receiptIds": [
+          "retrieval-designer-faq",
+          "retrieval-designer-file-list",
+          "retrieval-designer-faq-retry",
+          "retrieval-historical-faq-index",
+          "retrieval-publisher-faq",
+          "retrieval-publisher-root",
+          "retrieval-kickstarter-updates",
+          "retrieval-redhook-distribution",
+          "retrieval-redhook-search",
+          "retrieval-faq-mirror-en",
+          "retrieval-faq-mirror-es",
+          "retrieval-production-warrens",
+          "retrieval-production-com",
+          "retrieval-production-drive-a",
+          "retrieval-production-drive-b",
+          "retrieval-rulebook-mirror-gamershq",
+          "retrieval-rulebook-mirror-gamershq-retry",
+          "retrieval-rulebook-mirror-tesera",
+          "retrieval-house-rule-lead",
+          "retrieval-wargamer-distribution",
+          "retrieval-tts-discovery",
+          "retrieval-tts-official-corebox",
+          "retrieval-tts-community-complete"
+        ],
+        "pendingAuthoritySourceIds": [
+          "designer-faq",
+          "designer-file-list",
+          "designer-faq-retry",
+          "historical-faq-index",
+          "publisher-faq",
+          "kickstarter-updates",
+          "redhook-distribution",
+          "redhook-search",
+          "faq-mirror-en",
+          "faq-mirror-es",
+          "production-warrens",
+          "production-com",
+          "production-drive-a",
+          "production-drive-b",
+          "rulebook-mirror-gamershq-retry",
+          "rulebook-mirror-tesera",
+          "tts-official-corebox"
+        ],
+        "historicalC1C27Status": "BLOCKED_ON_UNRETRIEVED_AUTHORITY",
+        "newlyAuthenticatedFiles": 0
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "exhaustionScope": "PROJECT_CURRENTLY_AVAILABLE_AUTHORITATIVE_CORPUS",
+      "canonicalOfficialResolved": false,
+      "runtimeImpact": [
+        "Track available/active/spent/permanently removed token states and reject over-allocation."
+      ],
+      "projectRulingRequired": true,
+      "rulingIds": [
+        "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND"
+      ],
+      "riskLevel": "HIGH_GAMEPLAY_IMPACT",
+      "leafUsages": 28,
+      "exhaustionEvidenceIds": [
+        "C1C28_USER_AVAILABLE_CORPUS_FREEZE",
+        "retrieval-designer-faq",
+        "retrieval-designer-file-list",
+        "retrieval-designer-faq-retry",
+        "retrieval-historical-faq-index",
+        "retrieval-publisher-faq",
+        "retrieval-publisher-root",
+        "retrieval-kickstarter-updates",
+        "retrieval-redhook-distribution",
+        "retrieval-redhook-search",
+        "retrieval-faq-mirror-en",
+        "retrieval-faq-mirror-es",
+        "retrieval-production-warrens",
+        "retrieval-production-com",
+        "retrieval-production-drive-a",
+        "retrieval-production-drive-b",
+        "retrieval-rulebook-mirror-gamershq",
+        "retrieval-rulebook-mirror-gamershq-retry",
+        "retrieval-rulebook-mirror-tesera",
+        "retrieval-house-rule-lead",
+        "retrieval-wargamer-distribution",
+        "retrieval-tts-discovery",
+        "retrieval-tts-official-corebox",
+        "retrieval-tts-community-complete"
+      ]
+    },
+    {
+      "category": "SUMMON_COUNT_UNRESOLVED",
+      "affectedCards": [
+        46037,
+        46038,
+        46039
+      ],
+      "familyDependencyCards": [
+        42004,
+        46039,
+        42005,
+        46038,
+        42003,
+        46037,
+        42002,
+        42001,
+        42000
+      ],
+      "officialKnownFacts": [
+        {
+          "summary": "Each Skill selects one Target Area with a shared roll compared separately against Heroes. Target effects require successful hits; this does not settle whether the printed summon instruction repeats per Hero.",
+          "sourceReferences": [
+            {
+              "path": "docs/data/complete-edition/c1c27-necromancer-summon-count-closure.json",
+              "pointer": ""
+            }
+          ]
+        }
+      ],
+      "officialUnknowns": "Specify one summon per Skill/Area versus per successful Hero when one roll has mixed hit results.",
+      "checkedSources": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 19,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 20,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 24,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 31,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "scoped review"
+        }
+      ],
+      "unavailableAuthorityHistory": {
+        "path": "docs/data/complete-edition/c1c27-source-retrieval-evidence.json",
+        "receiptIds": [
+          "retrieval-designer-faq",
+          "retrieval-designer-file-list",
+          "retrieval-designer-faq-retry",
+          "retrieval-historical-faq-index",
+          "retrieval-publisher-faq",
+          "retrieval-publisher-root",
+          "retrieval-kickstarter-updates",
+          "retrieval-redhook-distribution",
+          "retrieval-redhook-search",
+          "retrieval-faq-mirror-en",
+          "retrieval-faq-mirror-es",
+          "retrieval-production-warrens",
+          "retrieval-production-com",
+          "retrieval-production-drive-a",
+          "retrieval-production-drive-b",
+          "retrieval-rulebook-mirror-gamershq",
+          "retrieval-rulebook-mirror-gamershq-retry",
+          "retrieval-rulebook-mirror-tesera",
+          "retrieval-house-rule-lead",
+          "retrieval-wargamer-distribution",
+          "retrieval-tts-discovery",
+          "retrieval-tts-official-corebox",
+          "retrieval-tts-community-complete"
+        ],
+        "pendingAuthoritySourceIds": [
+          "designer-faq",
+          "designer-file-list",
+          "designer-faq-retry",
+          "historical-faq-index",
+          "publisher-faq",
+          "kickstarter-updates",
+          "redhook-distribution",
+          "redhook-search",
+          "faq-mirror-en",
+          "faq-mirror-es",
+          "production-warrens",
+          "production-com",
+          "production-drive-a",
+          "production-drive-b",
+          "rulebook-mirror-gamershq-retry",
+          "rulebook-mirror-tesera",
+          "tts-official-corebox"
+        ],
+        "historicalC1C27Status": "BLOCKED_ON_UNRETRIEVED_AUTHORITY",
+        "newlyAuthenticatedFiles": 0
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "exhaustionScope": "PROJECT_CURRENTLY_AVAILABLE_AUTHORITATIVE_CORPUS",
+      "canonicalOfficialResolved": false,
+      "runtimeImpact": [
+        "Gate on at least one successful hit, preserve misses and printed suppression, and never multiply by Hero count.",
+        "Gate on at least one successful hit, preserve misses and printed suppression, and never multiply by Hero count.",
+        "Gate on at least one successful hit, preserve misses and printed suppression, and never multiply by Hero count."
+      ],
+      "projectRulingRequired": true,
+      "rulingIds": [
+        "NECRO_SUMMON_COUNT_LEVEL_1_ONCE_PER_ACTIVATION",
+        "NECRO_SUMMON_COUNT_LEVEL_2_ONCE_PER_ACTIVATION",
+        "NECRO_SUMMON_COUNT_LEVEL_3_ONCE_PER_ACTIVATION"
+      ],
+      "riskLevel": "HIGH_GAMEPLAY_IMPACT",
+      "leafUsages": 6,
+      "exhaustionEvidenceIds": [
+        "C1C28_USER_AVAILABLE_CORPUS_FREEZE",
+        "retrieval-designer-faq",
+        "retrieval-designer-file-list",
+        "retrieval-designer-faq-retry",
+        "retrieval-historical-faq-index",
+        "retrieval-publisher-faq",
+        "retrieval-publisher-root",
+        "retrieval-kickstarter-updates",
+        "retrieval-redhook-distribution",
+        "retrieval-redhook-search",
+        "retrieval-faq-mirror-en",
+        "retrieval-faq-mirror-es",
+        "retrieval-production-warrens",
+        "retrieval-production-com",
+        "retrieval-production-drive-a",
+        "retrieval-production-drive-b",
+        "retrieval-rulebook-mirror-gamershq",
+        "retrieval-rulebook-mirror-gamershq-retry",
+        "retrieval-rulebook-mirror-tesera",
+        "retrieval-house-rule-lead",
+        "retrieval-wargamer-distribution",
+        "retrieval-tts-discovery",
+        "retrieval-tts-official-corebox",
+        "retrieval-tts-community-complete"
+      ]
+    },
+    {
+      "category": "TARGET_TIE_UNRESOLVED",
+      "affectedCards": [
+        46037,
+        46038,
+        46039
+      ],
+      "familyDependencyCards": [
+        42004,
+        46039,
+        42005,
+        46038,
+        42003,
+        46037,
+        42002,
+        42001,
+        42000
+      ],
+      "officialKnownFacts": [
+        {
+          "summary": "Necromancer Skills target Crowded Areas with the printed range and Hero target counts. Character Stance targeting priorities do not define tied Area occupancy selection.",
+          "sourceReferences": [
+            {
+              "path": "docs/data/complete-edition/c1c27-necromancer-area-tie-closure.json",
+              "pointer": ""
+            }
+          ]
+        }
+      ],
+      "officialUnknowns": "Specify which equally crowded eligible Area is selected; character Stance priority is insufficient.",
+      "checkedSources": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 19,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 24,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "scoped review"
+        }
+      ],
+      "unavailableAuthorityHistory": {
+        "path": "docs/data/complete-edition/c1c27-source-retrieval-evidence.json",
+        "receiptIds": [
+          "retrieval-designer-faq",
+          "retrieval-designer-file-list",
+          "retrieval-designer-faq-retry",
+          "retrieval-historical-faq-index",
+          "retrieval-publisher-faq",
+          "retrieval-publisher-root",
+          "retrieval-kickstarter-updates",
+          "retrieval-redhook-distribution",
+          "retrieval-redhook-search",
+          "retrieval-faq-mirror-en",
+          "retrieval-faq-mirror-es",
+          "retrieval-production-warrens",
+          "retrieval-production-com",
+          "retrieval-production-drive-a",
+          "retrieval-production-drive-b",
+          "retrieval-rulebook-mirror-gamershq",
+          "retrieval-rulebook-mirror-gamershq-retry",
+          "retrieval-rulebook-mirror-tesera",
+          "retrieval-house-rule-lead",
+          "retrieval-wargamer-distribution",
+          "retrieval-tts-discovery",
+          "retrieval-tts-official-corebox",
+          "retrieval-tts-community-complete"
+        ],
+        "pendingAuthoritySourceIds": [
+          "designer-faq",
+          "designer-file-list",
+          "designer-faq-retry",
+          "historical-faq-index",
+          "publisher-faq",
+          "kickstarter-updates",
+          "redhook-distribution",
+          "redhook-search",
+          "faq-mirror-en",
+          "faq-mirror-es",
+          "production-warrens",
+          "production-com",
+          "production-drive-a",
+          "production-drive-b",
+          "rulebook-mirror-gamershq-retry",
+          "rulebook-mirror-tesera",
+          "tts-official-corebox"
+        ],
+        "historicalC1C27Status": "BLOCKED_ON_UNRETRIEVED_AUTHORITY",
+        "newlyAuthenticatedFiles": 0
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "exhaustionScope": "PROJECT_CURRENTLY_AVAILABLE_AUTHORITATIVE_CORPUS",
+      "canonicalOfficialResolved": false,
+      "runtimeImpact": [
+        "Keep Area selection separate from Hero selection and exact-range handling; record chosen Area before range/movement evaluation."
+      ],
+      "projectRulingRequired": true,
+      "rulingIds": [
+        "NECRO_CROWDED_AREA_TIE_PLAYER_CHOICE"
+      ],
+      "riskLevel": "LOW_RISK_DETERMINISM",
+      "leafUsages": 4,
+      "exhaustionEvidenceIds": [
+        "C1C28_USER_AVAILABLE_CORPUS_FREEZE",
+        "retrieval-designer-faq",
+        "retrieval-designer-file-list",
+        "retrieval-designer-faq-retry",
+        "retrieval-historical-faq-index",
+        "retrieval-publisher-faq",
+        "retrieval-publisher-root",
+        "retrieval-kickstarter-updates",
+        "retrieval-redhook-distribution",
+        "retrieval-redhook-search",
+        "retrieval-faq-mirror-en",
+        "retrieval-faq-mirror-es",
+        "retrieval-production-warrens",
+        "retrieval-production-com",
+        "retrieval-production-drive-a",
+        "retrieval-production-drive-b",
+        "retrieval-rulebook-mirror-gamershq",
+        "retrieval-rulebook-mirror-gamershq-retry",
+        "retrieval-rulebook-mirror-tesera",
+        "retrieval-house-rule-lead",
+        "retrieval-wargamer-distribution",
+        "retrieval-tts-discovery",
+        "retrieval-tts-official-corebox",
+        "retrieval-tts-community-complete"
+      ]
+    }
+  ],
+  "baselineUsages": [
+    {
+      "gapId": "c1c25-necromancer-encounter-composition.json:/levels/0/summonCopyCounts",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-encounter-composition.json",
+        "pointer": "/levels/0/summonCopyCounts"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c25-necromancer-encounter-composition.json:/levels/0/summonCopyCounts",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-encounter-composition.json:/levels/1/summonCopyCounts",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-encounter-composition.json",
+        "pointer": "/levels/1/summonCopyCounts"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c25-necromancer-encounter-composition.json:/levels/1/summonCopyCounts",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-encounter-composition.json:/levels/2/summonCopyCounts",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-encounter-composition.json",
+        "pointer": "/levels/2/summonCopyCounts"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c25-necromancer-encounter-composition.json:/levels/2/summonCopyCounts",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/0/tieRule",
+      "category": "LOWEST_ROLL_HERO_TIE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/0/tieRule"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_LOWEST_ROLL_TIE_PLAYER_CHOICE",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/0/tieRule",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/0/summonCopyPolicy",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/0/summonCopyPolicy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/0/summonCopyPolicy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/0/boneCaptainVariant",
+      "category": "BONE_IDENTITY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/0/boneCaptainVariant"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_CAPTAIN_PROJECT_COMPONENT_BINDING",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/0/boneCaptainVariant",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/0/familyExecutionGates/copyPolicy",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/0/familyExecutionGates/copyPolicy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/0/familyExecutionGates/copyPolicy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/0/familyExecutionGates/lowestRollTie",
+      "category": "LOWEST_ROLL_HERO_TIE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/0/familyExecutionGates/lowestRollTie"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_LOWEST_ROLL_TIE_PLAYER_CHOICE",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/0/familyExecutionGates/lowestRollTie",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/0/familyExecutionGates/nameDiscrepancy",
+      "category": "SOURCE_PRECEDENCE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/0/familyExecutionGates/nameDiscrepancy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_RUBBLE_REFERS_TO_PRINTED_RABBLE",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/0/familyExecutionGates/nameDiscrepancy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/1/tieRule",
+      "category": "TARGET_TIE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/1/tieRule"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_CROWDED_AREA_TIE_PLAYER_CHOICE",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/1/tieRule",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/1/summonMultiplicity",
+      "category": "SUMMON_COUNT_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/1/summonMultiplicity"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_SUMMON_COUNT_LEVEL_3_ONCE_PER_ACTIVATION",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/1/summonMultiplicity",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/1/summonCopyPolicy",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/1/summonCopyPolicy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/1/summonCopyPolicy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/1/familyExecutionGates/copyPolicy",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/1/familyExecutionGates/copyPolicy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/1/familyExecutionGates/copyPolicy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/1/familyExecutionGates/lowestRollTie",
+      "category": "LOWEST_ROLL_HERO_TIE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/1/familyExecutionGates/lowestRollTie"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_LOWEST_ROLL_TIE_PLAYER_CHOICE",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/1/familyExecutionGates/lowestRollTie",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/1/familyExecutionGates/nameDiscrepancy",
+      "category": "SOURCE_PRECEDENCE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/1/familyExecutionGates/nameDiscrepancy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_RUBBLE_REFERS_TO_PRINTED_RABBLE",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/1/familyExecutionGates/nameDiscrepancy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/2/tieRule",
+      "category": "LOWEST_ROLL_HERO_TIE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/2/tieRule"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_LOWEST_ROLL_TIE_PLAYER_CHOICE",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/2/tieRule",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/2/summonCopyPolicy",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/2/summonCopyPolicy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/2/summonCopyPolicy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/2/reanimationInitiative",
+      "category": "EFFECT_ORDER_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/2/reanimationInitiative"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_REANIMATION_NEW_INSTANCE_EVENT_ORDER",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/2/reanimationInitiative",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/2/familyExecutionGates/copyPolicy",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/2/familyExecutionGates/copyPolicy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/2/familyExecutionGates/copyPolicy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/2/familyExecutionGates/lowestRollTie",
+      "category": "LOWEST_ROLL_HERO_TIE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/2/familyExecutionGates/lowestRollTie"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_LOWEST_ROLL_TIE_PLAYER_CHOICE",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/2/familyExecutionGates/lowestRollTie",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/2/familyExecutionGates/nameDiscrepancy",
+      "category": "SOURCE_PRECEDENCE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/2/familyExecutionGates/nameDiscrepancy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_RUBBLE_REFERS_TO_PRINTED_RABBLE",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/2/familyExecutionGates/nameDiscrepancy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/3/tieRule",
+      "category": "TARGET_TIE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/3/tieRule"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_CROWDED_AREA_TIE_PLAYER_CHOICE",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/3/tieRule",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/3/summonMultiplicity",
+      "category": "SUMMON_COUNT_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/3/summonMultiplicity"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_SUMMON_COUNT_LEVEL_2_ONCE_PER_ACTIVATION",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/3/summonMultiplicity",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/3/summonCopyPolicy",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/3/summonCopyPolicy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/3/summonCopyPolicy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/3/familyExecutionGates/copyPolicy",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/3/familyExecutionGates/copyPolicy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/3/familyExecutionGates/copyPolicy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/3/familyExecutionGates/lowestRollTie",
+      "category": "LOWEST_ROLL_HERO_TIE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/3/familyExecutionGates/lowestRollTie"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_LOWEST_ROLL_TIE_PLAYER_CHOICE",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/3/familyExecutionGates/lowestRollTie",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/3/familyExecutionGates/nameDiscrepancy",
+      "category": "SOURCE_PRECEDENCE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/3/familyExecutionGates/nameDiscrepancy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_RUBBLE_REFERS_TO_PRINTED_RABBLE",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/3/familyExecutionGates/nameDiscrepancy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/4/summonCopyPolicy",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/4/summonCopyPolicy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/4/summonCopyPolicy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/4/nameDiscrepancy",
+      "category": "SOURCE_PRECEDENCE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/4/nameDiscrepancy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_RUBBLE_REFERS_TO_PRINTED_RABBLE",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/4/nameDiscrepancy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/4/familyExecutionGates/copyPolicy",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/4/familyExecutionGates/copyPolicy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/4/familyExecutionGates/copyPolicy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/4/familyExecutionGates/lowestRollTie",
+      "category": "LOWEST_ROLL_HERO_TIE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/4/familyExecutionGates/lowestRollTie"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_LOWEST_ROLL_TIE_PLAYER_CHOICE",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/4/familyExecutionGates/lowestRollTie",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/4/familyExecutionGates/nameDiscrepancy",
+      "category": "SOURCE_PRECEDENCE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/4/familyExecutionGates/nameDiscrepancy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_RUBBLE_REFERS_TO_PRINTED_RABBLE",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/4/familyExecutionGates/nameDiscrepancy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/5/tieRule",
+      "category": "TARGET_TIE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/5/tieRule"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_CROWDED_AREA_TIE_PLAYER_CHOICE",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/5/tieRule",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/5/summonMultiplicity",
+      "category": "SUMMON_COUNT_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/5/summonMultiplicity"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_SUMMON_COUNT_LEVEL_1_ONCE_PER_ACTIVATION",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/5/summonMultiplicity",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/5/summonCopyPolicy",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/5/summonCopyPolicy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/5/summonCopyPolicy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/5/nameDiscrepancy",
+      "category": "SOURCE_PRECEDENCE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/5/nameDiscrepancy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_RUBBLE_REFERS_TO_PRINTED_RABBLE",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/5/nameDiscrepancy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/5/familyExecutionGates/copyPolicy",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/5/familyExecutionGates/copyPolicy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/5/familyExecutionGates/copyPolicy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/5/familyExecutionGates/lowestRollTie",
+      "category": "LOWEST_ROLL_HERO_TIE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/5/familyExecutionGates/lowestRollTie"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_LOWEST_ROLL_TIE_PLAYER_CHOICE",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/5/familyExecutionGates/lowestRollTie",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/5/familyExecutionGates/nameDiscrepancy",
+      "category": "SOURCE_PRECEDENCE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/5/familyExecutionGates/nameDiscrepancy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_RUBBLE_REFERS_TO_PRINTED_RABBLE",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/5/familyExecutionGates/nameDiscrepancy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/6/familyExecutionGates/copyPolicy",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/6/familyExecutionGates/copyPolicy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/6/familyExecutionGates/copyPolicy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/6/familyExecutionGates/lowestRollTie",
+      "category": "LOWEST_ROLL_HERO_TIE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/6/familyExecutionGates/lowestRollTie"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_LOWEST_ROLL_TIE_PLAYER_CHOICE",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/6/familyExecutionGates/lowestRollTie",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/6/familyExecutionGates/nameDiscrepancy",
+      "category": "SOURCE_PRECEDENCE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/6/familyExecutionGates/nameDiscrepancy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_RUBBLE_REFERS_TO_PRINTED_RABBLE",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/6/familyExecutionGates/nameDiscrepancy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/7/familyExecutionGates/copyPolicy",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/7/familyExecutionGates/copyPolicy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/7/familyExecutionGates/copyPolicy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/7/familyExecutionGates/lowestRollTie",
+      "category": "LOWEST_ROLL_HERO_TIE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/7/familyExecutionGates/lowestRollTie"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_LOWEST_ROLL_TIE_PLAYER_CHOICE",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/7/familyExecutionGates/lowestRollTie",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/7/familyExecutionGates/nameDiscrepancy",
+      "category": "SOURCE_PRECEDENCE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/7/familyExecutionGates/nameDiscrepancy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_RUBBLE_REFERS_TO_PRINTED_RABBLE",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/7/familyExecutionGates/nameDiscrepancy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/8/familyExecutionGates/copyPolicy",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/8/familyExecutionGates/copyPolicy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/8/familyExecutionGates/copyPolicy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/8/familyExecutionGates/lowestRollTie",
+      "category": "LOWEST_ROLL_HERO_TIE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/8/familyExecutionGates/lowestRollTie"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_LOWEST_ROLL_TIE_PLAYER_CHOICE",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/8/familyExecutionGates/lowestRollTie",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-card-semantic-contracts.json:/cards/8/familyExecutionGates/nameDiscrepancy",
+      "category": "SOURCE_PRECEDENCE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json",
+        "pointer": "/cards/8/familyExecutionGates/nameDiscrepancy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_RUBBLE_REFERS_TO_PRINTED_RABBLE",
+      "runtimeFieldId": "c1c25-necromancer-card-semantic-contracts.json:/cards/8/familyExecutionGates/nameDiscrepancy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-bone-source-binding.json:/units/0/copyPolicy",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-bone-source-binding.json",
+        "pointer": "/units/0/copyPolicy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c25-necromancer-bone-source-binding.json:/units/0/copyPolicy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-bone-source-binding.json:/units/1/copyPolicy",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-bone-source-binding.json",
+        "pointer": "/units/1/copyPolicy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c25-necromancer-bone-source-binding.json:/units/1/copyPolicy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-bone-source-binding.json:/units/2/copyPolicy",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-bone-source-binding.json",
+        "pointer": "/units/2/copyPolicy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c25-necromancer-bone-source-binding.json:/units/2/copyPolicy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-bone-source-binding.json:/units/5/copyPolicy",
+      "category": "BONE_IDENTITY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-bone-source-binding.json",
+        "pointer": "/units/5/copyPolicy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_CAPTAIN_PROJECT_COMPONENT_BINDING",
+      "runtimeFieldId": "c1c25-necromancer-bone-source-binding.json:/units/5/copyPolicy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-bone-source-binding.json:/missingName/alias",
+      "category": "SOURCE_PRECEDENCE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-bone-source-binding.json",
+        "pointer": "/missingName/alias"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_RUBBLE_REFERS_TO_PRINTED_RABBLE",
+      "runtimeFieldId": "c1c25-necromancer-bone-source-binding.json:/missingName/alias",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-summon-contract.json:/levels/0/count",
+      "category": "SUMMON_COUNT_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-summon-contract.json",
+        "pointer": "/levels/0/count"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_SUMMON_COUNT_LEVEL_1_ONCE_PER_ACTIVATION",
+      "runtimeFieldId": "c1c25-necromancer-summon-contract.json:/levels/0/count",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-summon-contract.json:/levels/0/roomCapacityFallback",
+      "category": "ROOM_CAPACITY_INTERACTION_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-summon-contract.json",
+        "pointer": "/levels/0/roomCapacityFallback"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_ROOM_CAPACITY_DISPLACEMENT_OR_SUPPRESS",
+      "runtimeFieldId": "c1c25-necromancer-summon-contract.json:/levels/0/roomCapacityFallback",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-summon-contract.json:/levels/0/copyPolicy",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-summon-contract.json",
+        "pointer": "/levels/0/copyPolicy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c25-necromancer-summon-contract.json:/levels/0/copyPolicy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-summon-contract.json:/levels/1/count",
+      "category": "SUMMON_COUNT_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-summon-contract.json",
+        "pointer": "/levels/1/count"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_SUMMON_COUNT_LEVEL_2_ONCE_PER_ACTIVATION",
+      "runtimeFieldId": "c1c25-necromancer-summon-contract.json:/levels/1/count",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-summon-contract.json:/levels/1/roomCapacityFallback",
+      "category": "ROOM_CAPACITY_INTERACTION_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-summon-contract.json",
+        "pointer": "/levels/1/roomCapacityFallback"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_ROOM_CAPACITY_DISPLACEMENT_OR_SUPPRESS",
+      "runtimeFieldId": "c1c25-necromancer-summon-contract.json:/levels/1/roomCapacityFallback",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-summon-contract.json:/levels/1/copyPolicy",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-summon-contract.json",
+        "pointer": "/levels/1/copyPolicy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c25-necromancer-summon-contract.json:/levels/1/copyPolicy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-summon-contract.json:/levels/2/count",
+      "category": "SUMMON_COUNT_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-summon-contract.json",
+        "pointer": "/levels/2/count"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_SUMMON_COUNT_LEVEL_3_ONCE_PER_ACTIVATION",
+      "runtimeFieldId": "c1c25-necromancer-summon-contract.json:/levels/2/count",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-summon-contract.json:/levels/2/roomCapacityFallback",
+      "category": "ROOM_CAPACITY_INTERACTION_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-summon-contract.json",
+        "pointer": "/levels/2/roomCapacityFallback"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_ROOM_CAPACITY_DISPLACEMENT_OR_SUPPRESS",
+      "runtimeFieldId": "c1c25-necromancer-summon-contract.json:/levels/2/roomCapacityFallback",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-summon-contract.json:/levels/2/copyPolicy",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-summon-contract.json",
+        "pointer": "/levels/2/copyPolicy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c25-necromancer-summon-contract.json:/levels/2/copyPolicy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-setup-contract.json:/levels/0/requiredComponents/value/summonCopyCounts",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-setup-contract.json",
+        "pointer": "/levels/0/requiredComponents/value/summonCopyCounts"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c25-necromancer-setup-contract.json:/levels/0/requiredComponents/value/summonCopyCounts",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-setup-contract.json:/levels/1/requiredComponents/value/summonCopyCounts",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-setup-contract.json",
+        "pointer": "/levels/1/requiredComponents/value/summonCopyCounts"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c25-necromancer-setup-contract.json:/levels/1/requiredComponents/value/summonCopyCounts",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-setup-contract.json:/levels/2/requiredComponents/value/summonCopyCounts",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-setup-contract.json",
+        "pointer": "/levels/2/requiredComponents/value/summonCopyCounts"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c25-necromancer-setup-contract.json:/levels/2/requiredComponents/value/summonCopyCounts",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-cleanup-contract.json:/bossCardDestination",
+      "category": "CLEANUP_DESTINATION_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-cleanup-contract.json",
+        "pointer": "/bossCardDestination"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_BOSS_TRIO_ENCOUNTER_STORAGE_RESET",
+      "runtimeFieldId": "c1c25-necromancer-cleanup-contract.json:/bossCardDestination",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-source-precedence.json:/rulings/boneName",
+      "category": "SOURCE_PRECEDENCE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-source-precedence.json",
+        "pointer": "/rulings/boneName"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_RUBBLE_REFERS_TO_PRINTED_RABBLE",
+      "runtimeFieldId": "c1c25-necromancer-source-precedence.json:/rulings/boneName",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-source-precedence.json:/rulings/lowestRollTie",
+      "category": "LOWEST_ROLL_HERO_TIE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-source-precedence.json",
+        "pointer": "/rulings/lowestRollTie"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_LOWEST_ROLL_TIE_PLAYER_CHOICE",
+      "runtimeFieldId": "c1c25-necromancer-source-precedence.json:/rulings/lowestRollTie",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-source-discrepancies.json:/discrepancies/0/precedence",
+      "category": "SOURCE_PRECEDENCE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-source-discrepancies.json",
+        "pointer": "/discrepancies/0/precedence"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_RUBBLE_REFERS_TO_PRINTED_RABBLE",
+      "runtimeFieldId": "c1c25-necromancer-source-discrepancies.json:/discrepancies/0/precedence",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-external-dependencies.json:/dependencies/0/sourceGates/0",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-external-dependencies.json",
+        "pointer": "/dependencies/0/sourceGates/0"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c25-necromancer-external-dependencies.json:/dependencies/0/sourceGates/0",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-external-dependencies.json:/dependencies/0/sourceGates/1",
+      "category": "SOURCE_PRECEDENCE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-external-dependencies.json",
+        "pointer": "/dependencies/0/sourceGates/1"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_RUBBLE_REFERS_TO_PRINTED_RABBLE",
+      "runtimeFieldId": "c1c25-necromancer-external-dependencies.json:/dependencies/0/sourceGates/1",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-external-dependencies.json:/dependencies/1/sourceGates/0",
+      "category": "BONE_IDENTITY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-external-dependencies.json",
+        "pointer": "/dependencies/1/sourceGates/0"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_CAPTAIN_PROJECT_COMPONENT_BINDING",
+      "runtimeFieldId": "c1c25-necromancer-external-dependencies.json:/dependencies/1/sourceGates/0",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-external-dependencies.json:/dependencies/4/sourceGates/0",
+      "category": "LOWEST_ROLL_HERO_TIE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-external-dependencies.json",
+        "pointer": "/dependencies/4/sourceGates/0"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_LOWEST_ROLL_TIE_PLAYER_CHOICE",
+      "runtimeFieldId": "c1c25-necromancer-external-dependencies.json:/dependencies/4/sourceGates/0",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-external-dependencies.json:/dependencies/4/sourceGates/1",
+      "category": "TARGET_TIE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-external-dependencies.json",
+        "pointer": "/dependencies/4/sourceGates/1"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_CROWDED_AREA_TIE_PLAYER_CHOICE",
+      "runtimeFieldId": "c1c25-necromancer-external-dependencies.json:/dependencies/4/sourceGates/1",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c25-necromancer-external-dependencies.json:/dependencies/7/sourceGates/0",
+      "category": "CLEANUP_DESTINATION_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c25-necromancer-external-dependencies.json",
+        "pointer": "/dependencies/7/sourceGates/0"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_BOSS_TRIO_ENCOUNTER_STORAGE_RESET",
+      "runtimeFieldId": "c1c25-necromancer-external-dependencies.json:/dependencies/7/sourceGates/0",
+      "officialResolved": false
+    }
+  ],
+  "refinedUsages": [
+    {
+      "gapId": "c1c26-necromancer-lowest-roll-tie-contract.json:/effects/0/tieRule",
+      "category": "LOWEST_ROLL_HERO_TIE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-lowest-roll-tie-contract.json",
+        "pointer": "/effects/0/tieRule"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_LOWEST_ROLL_TIE_PLAYER_CHOICE",
+      "runtimeFieldId": "c1c26-necromancer-lowest-roll-tie-contract.json:/effects/0/tieRule",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-lowest-roll-tie-contract.json:/effects/1/tieRule",
+      "category": "LOWEST_ROLL_HERO_TIE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-lowest-roll-tie-contract.json",
+        "pointer": "/effects/1/tieRule"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_LOWEST_ROLL_TIE_PLAYER_CHOICE",
+      "runtimeFieldId": "c1c26-necromancer-lowest-roll-tie-contract.json:/effects/1/tieRule",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-area-target-tie-contract.json:/crowdedAreaTieRule",
+      "category": "TARGET_TIE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-area-target-tie-contract.json",
+        "pointer": "/crowdedAreaTieRule"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_CROWDED_AREA_TIE_PLAYER_CHOICE",
+      "runtimeFieldId": "c1c26-necromancer-area-target-tie-contract.json:/crowdedAreaTieRule",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-summon-count-contract.json:/skills/0/summonCount",
+      "category": "SUMMON_COUNT_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-summon-count-contract.json",
+        "pointer": "/skills/0/summonCount"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_SUMMON_COUNT_LEVEL_1_ONCE_PER_ACTIVATION",
+      "runtimeFieldId": "c1c26-necromancer-summon-count-contract.json:/skills/0/summonCount",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-summon-count-contract.json:/skills/0/summonCountBasis",
+      "category": "SUMMON_COUNT_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-summon-count-contract.json",
+        "pointer": "/skills/0/summonCountBasis"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_SUMMON_COUNT_LEVEL_1_ONCE_PER_ACTIVATION",
+      "runtimeFieldId": "c1c26-necromancer-summon-count-contract.json:/skills/0/summonCountBasis",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-summon-count-contract.json:/skills/1/summonCount",
+      "category": "SUMMON_COUNT_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-summon-count-contract.json",
+        "pointer": "/skills/1/summonCount"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_SUMMON_COUNT_LEVEL_1_ONCE_PER_ACTIVATION",
+      "runtimeFieldId": "c1c26-necromancer-summon-count-contract.json:/skills/1/summonCount",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-summon-count-contract.json:/skills/1/summonCountBasis",
+      "category": "SUMMON_COUNT_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-summon-count-contract.json",
+        "pointer": "/skills/1/summonCountBasis"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_SUMMON_COUNT_LEVEL_1_ONCE_PER_ACTIVATION",
+      "runtimeFieldId": "c1c26-necromancer-summon-count-contract.json:/skills/1/summonCountBasis",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-summon-count-contract.json:/skills/2/summonCount",
+      "category": "SUMMON_COUNT_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-summon-count-contract.json",
+        "pointer": "/skills/2/summonCount"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_SUMMON_COUNT_LEVEL_1_ONCE_PER_ACTIVATION",
+      "runtimeFieldId": "c1c26-necromancer-summon-count-contract.json:/skills/2/summonCount",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-summon-count-contract.json:/skills/2/summonCountBasis",
+      "category": "SUMMON_COUNT_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-summon-count-contract.json",
+        "pointer": "/skills/2/summonCountBasis"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_SUMMON_COUNT_LEVEL_1_ONCE_PER_ACTIVATION",
+      "runtimeFieldId": "c1c26-necromancer-summon-count-contract.json:/skills/2/summonCountBasis",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-summon-count-contract.json:/skills/3/summonCount",
+      "category": "SUMMON_COUNT_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-summon-count-contract.json",
+        "pointer": "/skills/3/summonCount"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_SUMMON_COUNT_LEVEL_2_ONCE_PER_ACTIVATION",
+      "runtimeFieldId": "c1c26-necromancer-summon-count-contract.json:/skills/3/summonCount",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-summon-count-contract.json:/skills/3/summonCountBasis",
+      "category": "SUMMON_COUNT_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-summon-count-contract.json",
+        "pointer": "/skills/3/summonCountBasis"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_SUMMON_COUNT_LEVEL_2_ONCE_PER_ACTIVATION",
+      "runtimeFieldId": "c1c26-necromancer-summon-count-contract.json:/skills/3/summonCountBasis",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-summon-count-contract.json:/skills/4/summonCount",
+      "category": "SUMMON_COUNT_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-summon-count-contract.json",
+        "pointer": "/skills/4/summonCount"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_SUMMON_COUNT_LEVEL_2_ONCE_PER_ACTIVATION",
+      "runtimeFieldId": "c1c26-necromancer-summon-count-contract.json:/skills/4/summonCount",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-summon-count-contract.json:/skills/4/summonCountBasis",
+      "category": "SUMMON_COUNT_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-summon-count-contract.json",
+        "pointer": "/skills/4/summonCountBasis"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_SUMMON_COUNT_LEVEL_2_ONCE_PER_ACTIVATION",
+      "runtimeFieldId": "c1c26-necromancer-summon-count-contract.json:/skills/4/summonCountBasis",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-summon-count-contract.json:/skills/5/summonCount",
+      "category": "SUMMON_COUNT_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-summon-count-contract.json",
+        "pointer": "/skills/5/summonCount"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_SUMMON_COUNT_LEVEL_2_ONCE_PER_ACTIVATION",
+      "runtimeFieldId": "c1c26-necromancer-summon-count-contract.json:/skills/5/summonCount",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-summon-count-contract.json:/skills/5/summonCountBasis",
+      "category": "SUMMON_COUNT_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-summon-count-contract.json",
+        "pointer": "/skills/5/summonCountBasis"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_SUMMON_COUNT_LEVEL_2_ONCE_PER_ACTIVATION",
+      "runtimeFieldId": "c1c26-necromancer-summon-count-contract.json:/skills/5/summonCountBasis",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-summon-count-contract.json:/skills/6/summonCount",
+      "category": "SUMMON_COUNT_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-summon-count-contract.json",
+        "pointer": "/skills/6/summonCount"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_SUMMON_COUNT_LEVEL_3_ONCE_PER_ACTIVATION",
+      "runtimeFieldId": "c1c26-necromancer-summon-count-contract.json:/skills/6/summonCount",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-summon-count-contract.json:/skills/6/summonCountBasis",
+      "category": "SUMMON_COUNT_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-summon-count-contract.json",
+        "pointer": "/skills/6/summonCountBasis"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_SUMMON_COUNT_LEVEL_3_ONCE_PER_ACTIVATION",
+      "runtimeFieldId": "c1c26-necromancer-summon-count-contract.json:/skills/6/summonCountBasis",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-summon-count-contract.json:/skills/7/summonCount",
+      "category": "SUMMON_COUNT_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-summon-count-contract.json",
+        "pointer": "/skills/7/summonCount"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_SUMMON_COUNT_LEVEL_3_ONCE_PER_ACTIVATION",
+      "runtimeFieldId": "c1c26-necromancer-summon-count-contract.json:/skills/7/summonCount",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-summon-count-contract.json:/skills/7/summonCountBasis",
+      "category": "SUMMON_COUNT_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-summon-count-contract.json",
+        "pointer": "/skills/7/summonCountBasis"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_SUMMON_COUNT_LEVEL_3_ONCE_PER_ACTIVATION",
+      "runtimeFieldId": "c1c26-necromancer-summon-count-contract.json:/skills/7/summonCountBasis",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-summon-count-contract.json:/skills/8/summonCount",
+      "category": "SUMMON_COUNT_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-summon-count-contract.json",
+        "pointer": "/skills/8/summonCount"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_SUMMON_COUNT_LEVEL_3_ONCE_PER_ACTIVATION",
+      "runtimeFieldId": "c1c26-necromancer-summon-count-contract.json:/skills/8/summonCount",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-summon-count-contract.json:/skills/8/summonCountBasis",
+      "category": "SUMMON_COUNT_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-summon-count-contract.json",
+        "pointer": "/skills/8/summonCountBasis"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_SUMMON_COUNT_LEVEL_3_ONCE_PER_ACTIVATION",
+      "runtimeFieldId": "c1c26-necromancer-summon-count-contract.json:/skills/8/summonCountBasis",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-summon-copy-policy.json:/campaignCopyPolicy",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-summon-copy-policy.json",
+        "pointer": "/campaignCopyPolicy"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c26-necromancer-summon-copy-policy.json:/campaignCopyPolicy",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-summon-copy-policy.json:/encounterSummonAvailability",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-summon-copy-policy.json",
+        "pointer": "/encounterSummonAvailability"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c26-necromancer-summon-copy-policy.json:/encounterSummonAvailability",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-summon-copy-policy.json:/runtimeSupplyLifecycle/deadSummonReuse",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-summon-copy-policy.json",
+        "pointer": "/runtimeSupplyLifecycle/deadSummonReuse"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c26-necromancer-summon-copy-policy.json:/runtimeSupplyLifecycle/deadSummonReuse",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-summon-copy-policy.json:/runtimeSupplyLifecycle/removedMonsterReturnsToSupply",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-summon-copy-policy.json",
+        "pointer": "/runtimeSupplyLifecycle/removedMonsterReturnsToSupply"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c26-necromancer-summon-copy-policy.json:/runtimeSupplyLifecycle/removedMonsterReturnsToSupply",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-summon-copy-policy.json:/runtimeSupplyLifecycle/permanentRemovalReuse",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-summon-copy-policy.json",
+        "pointer": "/runtimeSupplyLifecycle/permanentRemovalReuse"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c26-necromancer-summon-copy-policy.json:/runtimeSupplyLifecycle/permanentRemovalReuse",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-summon-copy-policy.json:/runtimeSupplyLifecycle/supplyExhaustion",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-summon-copy-policy.json",
+        "pointer": "/runtimeSupplyLifecycle/supplyExhaustion"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c26-necromancer-summon-copy-policy.json:/runtimeSupplyLifecycle/supplyExhaustion",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-bone-identity-closure.json:/nameConflict/authoritativeName",
+      "category": "SOURCE_PRECEDENCE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-bone-identity-closure.json",
+        "pointer": "/nameConflict/authoritativeName"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_RUBBLE_REFERS_TO_PRINTED_RABBLE",
+      "runtimeFieldId": "c1c26-necromancer-bone-identity-closure.json:/nameConflict/authoritativeName",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-bone-identity-closure.json:/captain/componentAssociation",
+      "category": "BONE_IDENTITY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-bone-identity-closure.json",
+        "pointer": "/captain/componentAssociation"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_CAPTAIN_PROJECT_COMPONENT_BINDING",
+      "runtimeFieldId": "c1c26-necromancer-bone-identity-closure.json:/captain/componentAssociation",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-reanimation-order-contract.json:/order/deathFinalBeforeTrigger",
+      "category": "EFFECT_ORDER_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-reanimation-order-contract.json",
+        "pointer": "/order/deathFinalBeforeTrigger"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_REANIMATION_NEW_INSTANCE_EVENT_ORDER",
+      "runtimeFieldId": "c1c26-necromancer-reanimation-order-contract.json:/order/deathFinalBeforeTrigger",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-reanimation-order-contract.json:/order/removeMiniatureBeforeRespawn",
+      "category": "EFFECT_ORDER_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-reanimation-order-contract.json",
+        "pointer": "/order/removeMiniatureBeforeRespawn"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_REANIMATION_NEW_INSTANCE_EVENT_ORDER",
+      "runtimeFieldId": "c1c26-necromancer-reanimation-order-contract.json:/order/removeMiniatureBeforeRespawn",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-reanimation-order-contract.json:/order/removeCardBeforeRespawn",
+      "category": "EFFECT_ORDER_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-reanimation-order-contract.json",
+        "pointer": "/order/removeCardBeforeRespawn"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_REANIMATION_NEW_INSTANCE_EVENT_ORDER",
+      "runtimeFieldId": "c1c26-necromancer-reanimation-order-contract.json:/order/removeCardBeforeRespawn",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-reanimation-order-contract.json:/order/initiativeRetained",
+      "category": "EFFECT_ORDER_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-reanimation-order-contract.json",
+        "pointer": "/order/initiativeRetained"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_REANIMATION_NEW_INSTANCE_EVENT_ORDER",
+      "runtimeFieldId": "c1c26-necromancer-reanimation-order-contract.json:/order/initiativeRetained",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-reanimation-order-contract.json:/order/treatedAsNewSpawn",
+      "category": "EFFECT_ORDER_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-reanimation-order-contract.json",
+        "pointer": "/order/treatedAsNewSpawn"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_REANIMATION_NEW_INSTANCE_EVENT_ORDER",
+      "runtimeFieldId": "c1c26-necromancer-reanimation-order-contract.json:/order/treatedAsNewSpawn",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-reanimation-order-contract.json:/order/otherOnDeathEffects",
+      "category": "EFFECT_ORDER_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-reanimation-order-contract.json",
+        "pointer": "/order/otherOnDeathEffects"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_REANIMATION_NEW_INSTANCE_EVENT_ORDER",
+      "runtimeFieldId": "c1c26-necromancer-reanimation-order-contract.json:/order/otherOnDeathEffects",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-reanimation-order-contract.json:/order/simultaneousFirstDeath",
+      "category": "EFFECT_ORDER_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-reanimation-order-contract.json",
+        "pointer": "/order/simultaneousFirstDeath"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_SIMULTANEOUS_FIRST_DEATH_PLAYER_CHOICE",
+      "runtimeFieldId": "c1c26-necromancer-reanimation-order-contract.json:/order/simultaneousFirstDeath",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-reanimation-order-contract.json:/order/subsequentEffects",
+      "category": "EFFECT_ORDER_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-reanimation-order-contract.json",
+        "pointer": "/order/subsequentEffects"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_REANIMATION_NEW_INSTANCE_EVENT_ORDER",
+      "runtimeFieldId": "c1c26-necromancer-reanimation-order-contract.json:/order/subsequentEffects",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-room-capacity-resolution.json:/nearestAvailableAreaTie",
+      "category": "ROOM_CAPACITY_INTERACTION_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-room-capacity-resolution.json",
+        "pointer": "/nearestAvailableAreaTie"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_ROOM_CAPACITY_DISPLACEMENT_OR_SUPPRESS",
+      "runtimeFieldId": "c1c26-necromancer-room-capacity-resolution.json:/nearestAvailableAreaTie",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-room-capacity-resolution.json:/noAvailableAreaFallback",
+      "category": "ROOM_CAPACITY_INTERACTION_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-room-capacity-resolution.json",
+        "pointer": "/noAvailableAreaFallback"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_ROOM_CAPACITY_DISPLACEMENT_OR_SUPPRESS",
+      "runtimeFieldId": "c1c26-necromancer-room-capacity-resolution.json:/noAvailableAreaFallback",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-cleanup-destination-contract.json:/frozenSkeleton/bossCardDestination",
+      "category": "CLEANUP_DESTINATION_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-cleanup-destination-contract.json",
+        "pointer": "/frozenSkeleton/bossCardDestination"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_BOSS_TRIO_ENCOUNTER_STORAGE_RESET",
+      "runtimeFieldId": "c1c26-necromancer-cleanup-destination-contract.json:/frozenSkeleton/bossCardDestination",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-cleanup-destination-contract.json:/destinations/bossIdentity",
+      "category": "CLEANUP_DESTINATION_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-cleanup-destination-contract.json",
+        "pointer": "/destinations/bossIdentity"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_BOSS_TRIO_ENCOUNTER_STORAGE_RESET",
+      "runtimeFieldId": "c1c26-necromancer-cleanup-destination-contract.json:/destinations/bossIdentity",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-cleanup-destination-contract.json:/destinations/threatAbility",
+      "category": "CLEANUP_DESTINATION_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-cleanup-destination-contract.json",
+        "pointer": "/destinations/threatAbility"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_BOSS_TRIO_ENCOUNTER_STORAGE_RESET",
+      "runtimeFieldId": "c1c26-necromancer-cleanup-destination-contract.json:/destinations/threatAbility",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-cleanup-destination-contract.json:/destinations/bossBattle",
+      "category": "CLEANUP_DESTINATION_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-cleanup-destination-contract.json",
+        "pointer": "/destinations/bossBattle"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_BOSS_TRIO_ENCOUNTER_STORAGE_RESET",
+      "runtimeFieldId": "c1c26-necromancer-cleanup-destination-contract.json:/destinations/bossBattle",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-cleanup-destination-contract.json:/destinations/summonedCardReservationAfterReturn",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-cleanup-destination-contract.json",
+        "pointer": "/destinations/summonedCardReservationAfterReturn"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+      "runtimeFieldId": "c1c26-necromancer-cleanup-destination-contract.json:/destinations/summonedCardReservationAfterReturn",
+      "officialResolved": false
+    },
+    {
+      "gapId": "c1c26-necromancer-source-precedence-closure.json:/topics/0/resolution",
+      "category": "SOURCE_PRECEDENCE_UNRESOLVED",
+      "sourceReference": {
+        "path": "docs/data/complete-edition/c1c26-necromancer-source-precedence-closure.json",
+        "pointer": "/topics/0/resolution"
+      },
+      "canonicalStatus": "SOURCE_EXHAUSTED_STILL_UNRESOLVED",
+      "runtimeResolution": "PROJECT_RULING",
+      "rulingId": "NECRO_RUBBLE_REFERS_TO_PRINTED_RABBLE",
+      "runtimeFieldId": "c1c26-necromancer-source-precedence-closure.json:/topics/0/resolution",
+      "officialResolved": false
+    }
+  ],
+  "totals": {
+    "categories": 9,
+    "inheritedLeafUsages": 75,
+    "sourceResolvedUsages": 0,
+    "projectScopedTerminalUsages": 75,
+    "runtimeRulingCoveredUsages": 75,
+    "refinedUsages": 45
+  },
+  "historicalCanonicalFilesRewritten": false,
+  "globallyExhaustedCorpus": false
+}
