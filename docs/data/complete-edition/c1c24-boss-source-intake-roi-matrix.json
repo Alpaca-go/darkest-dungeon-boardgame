@@ -1,0 +1,718 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-24",
+  "baselineHead": "877f14bff74a4dd9dfd18ea3fff3e1d8acc0f549",
+  "inputSha256": {
+    "docs/data/complete-edition/c1c22-boss-encounter-live-inventory.json": "a976a5351ebc03e2e2dc2d79f6d7496780ab5e599cbc3b27ddb76ce522c50849",
+    "docs/data/complete-edition/complete-edition-raw-inventory.json": "f7bd06a7a726df301cefe26e10586c0fe3a870ceb92903d5190077cfaae66245",
+    "docs/data/complete-edition/c1c24-boss-crop-manifest.json": "d98223329c4a4267fcb6d876770a46daa7929cccbe990fb48dcfe1e92bb45d17",
+    "docs/data/complete-edition/c1c24-boss-ocr-drafts.json": "7564ae407a8bae8349232241196d3a00395f0b4a73221044ba88b049bd8c2725",
+    "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+    "scripts/audit/c1c24-printed-source.ts": "017f8fa3241fd6dbb1a5de99244d56def46c20a04a0dc1dbd90e17a3b1426e91"
+  },
+  "promotionBasis": "FAMILY_SOURCE_COMPLETENESS_NOT_PRIMITIVE_HITS",
+  "scorePolicy": "Eligibility requires complete classification/assets. Score = 100*literal fraction + 20*direct named canonical setup + 10*absence of observed forms/states - 10*source gaps per card. Size supplies bounded scope, never a small-family bonus. Runtime Ready gain is zero without a complete family semantic contract and production proof.",
+  "families": [
+    {
+      "family": "Necromancer",
+      "familySize": 9,
+      "classificationComplete": true,
+      "allSourceSidesBound": true,
+      "literalCompleteCount": 9,
+      "semanticCompleteCount": 0,
+      "sourceGapCount": 150,
+      "observedFormAndStateCount": 0,
+      "canonicalSetupPage": 38,
+      "eligibleForDeeperSourceIntake": true,
+      "sharedMechanics": [
+        "Generic Boss threat flip/expiry and initiative p30",
+        "Monster card anatomy/target/stance convention p24",
+        "Three level variants use one shared summoning ability; p38 named setup and cleanup"
+      ],
+      "existingEngineOverlap": {
+        "evidenceRole": "NEGATIVE_READINESS_ONLY",
+        "genericPrimitivesAreNotBossConsumer": true,
+        "sourceBoundBossConsumerProven": false
+      },
+      "actIVOverlap": {
+        "referenceOnly": true,
+        "reusedAcceptedSemantics": false,
+        "ordinaryGardenGuardianIsNotActIVGuardian": true,
+        "readyGain": 0
+      },
+      "expectedSourceSafeProgression": {
+        "remainingLiteralDefinitions": 0,
+        "cardLocalSemanticContractsToEstablish": 9,
+        "basis": "Concrete physical definition IDs in the family matrix; source intake may close these gaps, success is not presumed."
+      },
+      "expectedWholeContentReadyGain": 0,
+      "immediateReadyGain": 0,
+      "sourceIntakeScore": -36.67
+    },
+    {
+      "family": "Prophet",
+      "familySize": 9,
+      "classificationComplete": true,
+      "allSourceSidesBound": true,
+      "literalCompleteCount": 6,
+      "semanticCompleteCount": 0,
+      "sourceGapCount": 153,
+      "observedFormAndStateCount": 0,
+      "canonicalSetupPage": 38,
+      "eligibleForDeeperSourceIntake": true,
+      "sharedMechanics": [
+        "Generic Boss threat flip/expiry and initiative p30",
+        "Monster card anatomy/target/stance convention p24"
+      ],
+      "existingEngineOverlap": {
+        "evidenceRole": "NEGATIVE_READINESS_ONLY",
+        "genericPrimitivesAreNotBossConsumer": true,
+        "sourceBoundBossConsumerProven": false
+      },
+      "actIVOverlap": {
+        "referenceOnly": true,
+        "reusedAcceptedSemantics": false,
+        "ordinaryGardenGuardianIsNotActIVGuardian": true,
+        "readyGain": 0
+      },
+      "expectedSourceSafeProgression": {
+        "remainingLiteralDefinitions": 3,
+        "cardLocalSemanticContractsToEstablish": 9,
+        "basis": "Concrete physical definition IDs in the family matrix; source intake may close these gaps, success is not presumed."
+      },
+      "expectedWholeContentReadyGain": 0,
+      "immediateReadyGain": 0,
+      "sourceIntakeScore": -73.33
+    },
+    {
+      "family": "Thing from the stars",
+      "familySize": 3,
+      "classificationComplete": true,
+      "allSourceSidesBound": true,
+      "literalCompleteCount": 2,
+      "semanticCompleteCount": 0,
+      "sourceGapCount": 52,
+      "observedFormAndStateCount": 0,
+      "canonicalSetupPage": null,
+      "eligibleForDeeperSourceIntake": true,
+      "sharedMechanics": [
+        "Generic Boss threat flip/expiry and initiative p30",
+        "Monster card anatomy/target/stance convention p24"
+      ],
+      "existingEngineOverlap": {
+        "evidenceRole": "NEGATIVE_READINESS_ONLY",
+        "genericPrimitivesAreNotBossConsumer": true,
+        "sourceBoundBossConsumerProven": false
+      },
+      "actIVOverlap": {
+        "referenceOnly": true,
+        "reusedAcceptedSemantics": false,
+        "ordinaryGardenGuardianIsNotActIVGuardian": true,
+        "readyGain": 0
+      },
+      "expectedSourceSafeProgression": {
+        "remainingLiteralDefinitions": 1,
+        "cardLocalSemanticContractsToEstablish": 3,
+        "basis": "Concrete physical definition IDs in the family matrix; source intake may close these gaps, success is not presumed."
+      },
+      "expectedWholeContentReadyGain": 0,
+      "immediateReadyGain": 0,
+      "sourceIntakeScore": -96.67
+    },
+    {
+      "family": "Collector",
+      "familySize": 18,
+      "classificationComplete": true,
+      "allSourceSidesBound": true,
+      "literalCompleteCount": 6,
+      "semanticCompleteCount": 0,
+      "sourceGapCount": 315,
+      "observedFormAndStateCount": 0,
+      "canonicalSetupPage": 39,
+      "eligibleForDeeperSourceIntake": true,
+      "sharedMechanics": [
+        "Generic Boss threat flip/expiry and initiative p30",
+        "Monster card anatomy/target/stance convention p24"
+      ],
+      "existingEngineOverlap": {
+        "evidenceRole": "NEGATIVE_READINESS_ONLY",
+        "genericPrimitivesAreNotBossConsumer": true,
+        "sourceBoundBossConsumerProven": false
+      },
+      "actIVOverlap": {
+        "referenceOnly": true,
+        "reusedAcceptedSemantics": false,
+        "ordinaryGardenGuardianIsNotActIVGuardian": true,
+        "readyGain": 0
+      },
+      "expectedSourceSafeProgression": {
+        "remainingLiteralDefinitions": 12,
+        "cardLocalSemanticContractsToEstablish": 18,
+        "basis": "Concrete physical definition IDs in the family matrix; source intake may close these gaps, success is not presumed."
+      },
+      "expectedWholeContentReadyGain": 0,
+      "immediateReadyGain": 0,
+      "sourceIntakeScore": -111.67
+    },
+    {
+      "family": "Fanatic",
+      "familySize": 12,
+      "classificationComplete": true,
+      "allSourceSidesBound": true,
+      "literalCompleteCount": 3,
+      "semanticCompleteCount": 0,
+      "sourceGapCount": 210,
+      "observedFormAndStateCount": 0,
+      "canonicalSetupPage": 39,
+      "eligibleForDeeperSourceIntake": true,
+      "sharedMechanics": [
+        "Generic Boss threat flip/expiry and initiative p30",
+        "Monster card anatomy/target/stance convention p24"
+      ],
+      "existingEngineOverlap": {
+        "evidenceRole": "NEGATIVE_READINESS_ONLY",
+        "genericPrimitivesAreNotBossConsumer": true,
+        "sourceBoundBossConsumerProven": false
+      },
+      "actIVOverlap": {
+        "referenceOnly": true,
+        "reusedAcceptedSemantics": false,
+        "ordinaryGardenGuardianIsNotActIVGuardian": true,
+        "readyGain": 0
+      },
+      "expectedSourceSafeProgression": {
+        "remainingLiteralDefinitions": 9,
+        "cardLocalSemanticContractsToEstablish": 12,
+        "basis": "Concrete physical definition IDs in the family matrix; source intake may close these gaps, success is not presumed."
+      },
+      "expectedWholeContentReadyGain": 0,
+      "immediateReadyGain": 0,
+      "sourceIntakeScore": -120
+    },
+    {
+      "family": "The Sleeper",
+      "familySize": 4,
+      "classificationComplete": true,
+      "allSourceSidesBound": true,
+      "literalCompleteCount": 2,
+      "semanticCompleteCount": 0,
+      "sourceGapCount": 70,
+      "observedFormAndStateCount": 1,
+      "canonicalSetupPage": null,
+      "eligibleForDeeperSourceIntake": true,
+      "sharedMechanics": [
+        "Generic Boss threat flip/expiry and initiative p30",
+        "Monster card anatomy/target/stance convention p24"
+      ],
+      "existingEngineOverlap": {
+        "evidenceRole": "NEGATIVE_READINESS_ONLY",
+        "genericPrimitivesAreNotBossConsumer": true,
+        "sourceBoundBossConsumerProven": false
+      },
+      "actIVOverlap": {
+        "referenceOnly": true,
+        "reusedAcceptedSemantics": false,
+        "ordinaryGardenGuardianIsNotActIVGuardian": true,
+        "readyGain": 0
+      },
+      "expectedSourceSafeProgression": {
+        "remainingLiteralDefinitions": 2,
+        "cardLocalSemanticContractsToEstablish": 4,
+        "basis": "Concrete physical definition IDs in the family matrix; source intake may close these gaps, success is not presumed."
+      },
+      "expectedWholeContentReadyGain": 0,
+      "immediateReadyGain": 0,
+      "sourceIntakeScore": -125
+    },
+    {
+      "family": "Hag",
+      "familySize": 15,
+      "classificationComplete": true,
+      "allSourceSidesBound": true,
+      "literalCompleteCount": 6,
+      "semanticCompleteCount": 0,
+      "sourceGapCount": 255,
+      "observedFormAndStateCount": 3,
+      "canonicalSetupPage": null,
+      "eligibleForDeeperSourceIntake": true,
+      "sharedMechanics": [
+        "Generic Boss threat flip/expiry and initiative p30",
+        "Monster card anatomy/target/stance convention p24"
+      ],
+      "existingEngineOverlap": {
+        "evidenceRole": "NEGATIVE_READINESS_ONLY",
+        "genericPrimitivesAreNotBossConsumer": true,
+        "sourceBoundBossConsumerProven": false
+      },
+      "actIVOverlap": {
+        "referenceOnly": true,
+        "reusedAcceptedSemantics": false,
+        "ordinaryGardenGuardianIsNotActIVGuardian": true,
+        "readyGain": 0
+      },
+      "expectedSourceSafeProgression": {
+        "remainingLiteralDefinitions": 9,
+        "cardLocalSemanticContractsToEstablish": 15,
+        "basis": "Concrete physical definition IDs in the family matrix; source intake may close these gaps, success is not presumed."
+      },
+      "expectedWholeContentReadyGain": 0,
+      "immediateReadyGain": 0,
+      "sourceIntakeScore": -130
+    },
+    {
+      "family": "Garden Guardian",
+      "familySize": 21,
+      "classificationComplete": true,
+      "allSourceSidesBound": true,
+      "literalCompleteCount": 6,
+      "semanticCompleteCount": 0,
+      "sourceGapCount": 369,
+      "observedFormAndStateCount": 0,
+      "canonicalSetupPage": null,
+      "eligibleForDeeperSourceIntake": true,
+      "sharedMechanics": [
+        "Generic Boss threat flip/expiry and initiative p30",
+        "Monster card anatomy/target/stance convention p24"
+      ],
+      "existingEngineOverlap": {
+        "evidenceRole": "NEGATIVE_READINESS_ONLY",
+        "genericPrimitivesAreNotBossConsumer": true,
+        "sourceBoundBossConsumerProven": false
+      },
+      "actIVOverlap": {
+        "referenceOnly": true,
+        "reusedAcceptedSemantics": false,
+        "ordinaryGardenGuardianIsNotActIVGuardian": true,
+        "readyGain": 0
+      },
+      "expectedSourceSafeProgression": {
+        "remainingLiteralDefinitions": 15,
+        "cardLocalSemanticContractsToEstablish": 21,
+        "basis": "Concrete physical definition IDs in the family matrix; source intake may close these gaps, success is not presumed."
+      },
+      "expectedWholeContentReadyGain": 0,
+      "immediateReadyGain": 0,
+      "sourceIntakeScore": -137.14
+    },
+    {
+      "family": "Brigand Pounder",
+      "familySize": 12,
+      "classificationComplete": true,
+      "allSourceSidesBound": true,
+      "literalCompleteCount": 3,
+      "semanticCompleteCount": 0,
+      "sourceGapCount": 210,
+      "observedFormAndStateCount": 0,
+      "canonicalSetupPage": null,
+      "eligibleForDeeperSourceIntake": true,
+      "sharedMechanics": [
+        "Generic Boss threat flip/expiry and initiative p30",
+        "Monster card anatomy/target/stance convention p24"
+      ],
+      "existingEngineOverlap": {
+        "evidenceRole": "NEGATIVE_READINESS_ONLY",
+        "genericPrimitivesAreNotBossConsumer": true,
+        "sourceBoundBossConsumerProven": false
+      },
+      "actIVOverlap": {
+        "referenceOnly": true,
+        "reusedAcceptedSemantics": false,
+        "ordinaryGardenGuardianIsNotActIVGuardian": true,
+        "readyGain": 0
+      },
+      "expectedSourceSafeProgression": {
+        "remainingLiteralDefinitions": 9,
+        "cardLocalSemanticContractsToEstablish": 12,
+        "basis": "Concrete physical definition IDs in the family matrix; source intake may close these gaps, success is not presumed."
+      },
+      "expectedWholeContentReadyGain": 0,
+      "immediateReadyGain": 0,
+      "sourceIntakeScore": -140
+    },
+    {
+      "family": "Shrieker",
+      "familySize": 12,
+      "classificationComplete": true,
+      "allSourceSidesBound": true,
+      "literalCompleteCount": 3,
+      "semanticCompleteCount": 0,
+      "sourceGapCount": 210,
+      "observedFormAndStateCount": 0,
+      "canonicalSetupPage": null,
+      "eligibleForDeeperSourceIntake": true,
+      "sharedMechanics": [
+        "Generic Boss threat flip/expiry and initiative p30",
+        "Monster card anatomy/target/stance convention p24"
+      ],
+      "existingEngineOverlap": {
+        "evidenceRole": "NEGATIVE_READINESS_ONLY",
+        "genericPrimitivesAreNotBossConsumer": true,
+        "sourceBoundBossConsumerProven": false
+      },
+      "actIVOverlap": {
+        "referenceOnly": true,
+        "reusedAcceptedSemantics": false,
+        "ordinaryGardenGuardianIsNotActIVGuardian": true,
+        "readyGain": 0
+      },
+      "expectedSourceSafeProgression": {
+        "remainingLiteralDefinitions": 9,
+        "cardLocalSemanticContractsToEstablish": 12,
+        "basis": "Concrete physical definition IDs in the family matrix; source intake may close these gaps, success is not presumed."
+      },
+      "expectedWholeContentReadyGain": 0,
+      "immediateReadyGain": 0,
+      "sourceIntakeScore": -140
+    },
+    {
+      "family": "Swine Prince",
+      "familySize": 12,
+      "classificationComplete": true,
+      "allSourceSidesBound": true,
+      "literalCompleteCount": 3,
+      "semanticCompleteCount": 0,
+      "sourceGapCount": 210,
+      "observedFormAndStateCount": 0,
+      "canonicalSetupPage": null,
+      "eligibleForDeeperSourceIntake": true,
+      "sharedMechanics": [
+        "Generic Boss threat flip/expiry and initiative p30",
+        "Monster card anatomy/target/stance convention p24"
+      ],
+      "existingEngineOverlap": {
+        "evidenceRole": "NEGATIVE_READINESS_ONLY",
+        "genericPrimitivesAreNotBossConsumer": true,
+        "sourceBoundBossConsumerProven": false
+      },
+      "actIVOverlap": {
+        "referenceOnly": true,
+        "reusedAcceptedSemantics": false,
+        "ordinaryGardenGuardianIsNotActIVGuardian": true,
+        "readyGain": 0
+      },
+      "expectedSourceSafeProgression": {
+        "remainingLiteralDefinitions": 9,
+        "cardLocalSemanticContractsToEstablish": 12,
+        "basis": "Concrete physical definition IDs in the family matrix; source intake may close these gaps, success is not presumed."
+      },
+      "expectedWholeContentReadyGain": 0,
+      "immediateReadyGain": 0,
+      "sourceIntakeScore": -140
+    },
+    {
+      "family": "Shambler",
+      "familySize": 15,
+      "classificationComplete": true,
+      "allSourceSidesBound": true,
+      "literalCompleteCount": 3,
+      "semanticCompleteCount": 0,
+      "sourceGapCount": 276,
+      "observedFormAndStateCount": 0,
+      "canonicalSetupPage": null,
+      "eligibleForDeeperSourceIntake": true,
+      "sharedMechanics": [
+        "Generic Boss threat flip/expiry and initiative p30",
+        "Monster card anatomy/target/stance convention p24"
+      ],
+      "existingEngineOverlap": {
+        "evidenceRole": "NEGATIVE_READINESS_ONLY",
+        "genericPrimitivesAreNotBossConsumer": true,
+        "sourceBoundBossConsumerProven": false
+      },
+      "actIVOverlap": {
+        "referenceOnly": true,
+        "reusedAcceptedSemantics": false,
+        "ordinaryGardenGuardianIsNotActIVGuardian": true,
+        "readyGain": 0
+      },
+      "expectedSourceSafeProgression": {
+        "remainingLiteralDefinitions": 12,
+        "cardLocalSemanticContractsToEstablish": 15,
+        "basis": "Concrete physical definition IDs in the family matrix; source intake may close these gaps, success is not presumed."
+      },
+      "expectedWholeContentReadyGain": 0,
+      "immediateReadyGain": 0,
+      "sourceIntakeScore": -154
+    },
+    {
+      "family": "Viscount",
+      "familySize": 18,
+      "classificationComplete": true,
+      "allSourceSidesBound": true,
+      "literalCompleteCount": 3,
+      "semanticCompleteCount": 0,
+      "sourceGapCount": 318,
+      "observedFormAndStateCount": 9,
+      "canonicalSetupPage": null,
+      "eligibleForDeeperSourceIntake": true,
+      "sharedMechanics": [
+        "Generic Boss threat flip/expiry and initiative p30",
+        "Monster card anatomy/target/stance convention p24"
+      ],
+      "existingEngineOverlap": {
+        "evidenceRole": "NEGATIVE_READINESS_ONLY",
+        "genericPrimitivesAreNotBossConsumer": true,
+        "sourceBoundBossConsumerProven": false
+      },
+      "actIVOverlap": {
+        "referenceOnly": true,
+        "reusedAcceptedSemantics": false,
+        "ordinaryGardenGuardianIsNotActIVGuardian": true,
+        "readyGain": 0
+      },
+      "expectedSourceSafeProgression": {
+        "remainingLiteralDefinitions": 15,
+        "cardLocalSemanticContractsToEstablish": 18,
+        "basis": "Concrete physical definition IDs in the family matrix; source intake may close these gaps, success is not presumed."
+      },
+      "expectedWholeContentReadyGain": 0,
+      "immediateReadyGain": 0,
+      "sourceIntakeScore": -160
+    },
+    {
+      "family": "The Miller",
+      "familySize": 5,
+      "classificationComplete": true,
+      "allSourceSidesBound": true,
+      "literalCompleteCount": 1,
+      "semanticCompleteCount": 0,
+      "sourceGapCount": 93,
+      "observedFormAndStateCount": 2,
+      "canonicalSetupPage": null,
+      "eligibleForDeeperSourceIntake": true,
+      "sharedMechanics": [
+        "Generic Boss threat flip/expiry and initiative p30",
+        "Monster card anatomy/target/stance convention p24"
+      ],
+      "existingEngineOverlap": {
+        "evidenceRole": "NEGATIVE_READINESS_ONLY",
+        "genericPrimitivesAreNotBossConsumer": true,
+        "sourceBoundBossConsumerProven": false
+      },
+      "actIVOverlap": {
+        "referenceOnly": true,
+        "reusedAcceptedSemantics": false,
+        "ordinaryGardenGuardianIsNotActIVGuardian": true,
+        "readyGain": 0
+      },
+      "expectedSourceSafeProgression": {
+        "remainingLiteralDefinitions": 4,
+        "cardLocalSemanticContractsToEstablish": 5,
+        "basis": "Concrete physical definition IDs in the family matrix; source intake may close these gaps, success is not presumed."
+      },
+      "expectedWholeContentReadyGain": 0,
+      "immediateReadyGain": 0,
+      "sourceIntakeScore": -166
+    },
+    {
+      "family": "Baron",
+      "familySize": 9,
+      "classificationComplete": true,
+      "allSourceSidesBound": true,
+      "literalCompleteCount": 0,
+      "semanticCompleteCount": 0,
+      "sourceGapCount": 159,
+      "observedFormAndStateCount": 0,
+      "canonicalSetupPage": null,
+      "eligibleForDeeperSourceIntake": true,
+      "sharedMechanics": [
+        "Generic Boss threat flip/expiry and initiative p30",
+        "Monster card anatomy/target/stance convention p24"
+      ],
+      "existingEngineOverlap": {
+        "evidenceRole": "NEGATIVE_READINESS_ONLY",
+        "genericPrimitivesAreNotBossConsumer": true,
+        "sourceBoundBossConsumerProven": false
+      },
+      "actIVOverlap": {
+        "referenceOnly": true,
+        "reusedAcceptedSemantics": false,
+        "ordinaryGardenGuardianIsNotActIVGuardian": true,
+        "readyGain": 0
+      },
+      "expectedSourceSafeProgression": {
+        "remainingLiteralDefinitions": 9,
+        "cardLocalSemanticContractsToEstablish": 9,
+        "basis": "Concrete physical definition IDs in the family matrix; source intake may close these gaps, success is not presumed."
+      },
+      "expectedWholeContentReadyGain": 0,
+      "immediateReadyGain": 0,
+      "sourceIntakeScore": -166.67
+    },
+    {
+      "family": "Brigand Vvulf",
+      "familySize": 9,
+      "classificationComplete": true,
+      "allSourceSidesBound": true,
+      "literalCompleteCount": 0,
+      "semanticCompleteCount": 0,
+      "sourceGapCount": 159,
+      "observedFormAndStateCount": 0,
+      "canonicalSetupPage": null,
+      "eligibleForDeeperSourceIntake": true,
+      "sharedMechanics": [
+        "Generic Boss threat flip/expiry and initiative p30",
+        "Monster card anatomy/target/stance convention p24"
+      ],
+      "existingEngineOverlap": {
+        "evidenceRole": "NEGATIVE_READINESS_ONLY",
+        "genericPrimitivesAreNotBossConsumer": true,
+        "sourceBoundBossConsumerProven": false
+      },
+      "actIVOverlap": {
+        "referenceOnly": true,
+        "reusedAcceptedSemantics": false,
+        "ordinaryGardenGuardianIsNotActIVGuardian": true,
+        "readyGain": 0
+      },
+      "expectedSourceSafeProgression": {
+        "remainingLiteralDefinitions": 9,
+        "cardLocalSemanticContractsToEstablish": 9,
+        "basis": "Concrete physical definition IDs in the family matrix; source intake may close these gaps, success is not presumed."
+      },
+      "expectedWholeContentReadyGain": 0,
+      "immediateReadyGain": 0,
+      "sourceIntakeScore": -166.67
+    },
+    {
+      "family": "Countess",
+      "familySize": 9,
+      "classificationComplete": true,
+      "allSourceSidesBound": true,
+      "literalCompleteCount": 0,
+      "semanticCompleteCount": 0,
+      "sourceGapCount": 159,
+      "observedFormAndStateCount": 0,
+      "canonicalSetupPage": null,
+      "eligibleForDeeperSourceIntake": true,
+      "sharedMechanics": [
+        "Generic Boss threat flip/expiry and initiative p30",
+        "Monster card anatomy/target/stance convention p24"
+      ],
+      "existingEngineOverlap": {
+        "evidenceRole": "NEGATIVE_READINESS_ONLY",
+        "genericPrimitivesAreNotBossConsumer": true,
+        "sourceBoundBossConsumerProven": false
+      },
+      "actIVOverlap": {
+        "referenceOnly": true,
+        "reusedAcceptedSemantics": false,
+        "ordinaryGardenGuardianIsNotActIVGuardian": true,
+        "readyGain": 0
+      },
+      "expectedSourceSafeProgression": {
+        "remainingLiteralDefinitions": 9,
+        "cardLocalSemanticContractsToEstablish": 9,
+        "basis": "Concrete physical definition IDs in the family matrix; source intake may close these gaps, success is not presumed."
+      },
+      "expectedWholeContentReadyGain": 0,
+      "immediateReadyGain": 0,
+      "sourceIntakeScore": -166.67
+    },
+    {
+      "family": "Siren",
+      "familySize": 9,
+      "classificationComplete": true,
+      "allSourceSidesBound": true,
+      "literalCompleteCount": 0,
+      "semanticCompleteCount": 0,
+      "sourceGapCount": 159,
+      "observedFormAndStateCount": 0,
+      "canonicalSetupPage": null,
+      "eligibleForDeeperSourceIntake": true,
+      "sharedMechanics": [
+        "Generic Boss threat flip/expiry and initiative p30",
+        "Monster card anatomy/target/stance convention p24"
+      ],
+      "existingEngineOverlap": {
+        "evidenceRole": "NEGATIVE_READINESS_ONLY",
+        "genericPrimitivesAreNotBossConsumer": true,
+        "sourceBoundBossConsumerProven": false
+      },
+      "actIVOverlap": {
+        "referenceOnly": true,
+        "reusedAcceptedSemantics": false,
+        "ordinaryGardenGuardianIsNotActIVGuardian": true,
+        "readyGain": 0
+      },
+      "expectedSourceSafeProgression": {
+        "remainingLiteralDefinitions": 9,
+        "cardLocalSemanticContractsToEstablish": 9,
+        "basis": "Concrete physical definition IDs in the family matrix; source intake may close these gaps, success is not presumed."
+      },
+      "expectedWholeContentReadyGain": 0,
+      "immediateReadyGain": 0,
+      "sourceIntakeScore": -166.67
+    },
+    {
+      "family": "Drowned Crew",
+      "familySize": 12,
+      "classificationComplete": true,
+      "allSourceSidesBound": true,
+      "literalCompleteCount": 0,
+      "semanticCompleteCount": 0,
+      "sourceGapCount": 213,
+      "observedFormAndStateCount": 0,
+      "canonicalSetupPage": null,
+      "eligibleForDeeperSourceIntake": true,
+      "sharedMechanics": [
+        "Generic Boss threat flip/expiry and initiative p30",
+        "Monster card anatomy/target/stance convention p24"
+      ],
+      "existingEngineOverlap": {
+        "evidenceRole": "NEGATIVE_READINESS_ONLY",
+        "genericPrimitivesAreNotBossConsumer": true,
+        "sourceBoundBossConsumerProven": false
+      },
+      "actIVOverlap": {
+        "referenceOnly": true,
+        "reusedAcceptedSemantics": false,
+        "ordinaryGardenGuardianIsNotActIVGuardian": true,
+        "readyGain": 0
+      },
+      "expectedSourceSafeProgression": {
+        "remainingLiteralDefinitions": 12,
+        "cardLocalSemanticContractsToEstablish": 12,
+        "basis": "Concrete physical definition IDs in the family matrix; source intake may close these gaps, success is not presumed."
+      },
+      "expectedWholeContentReadyGain": 0,
+      "immediateReadyGain": 0,
+      "sourceIntakeScore": -167.5
+    },
+    {
+      "family": "The Flesh",
+      "familySize": 18,
+      "classificationComplete": true,
+      "allSourceSidesBound": true,
+      "literalCompleteCount": 0,
+      "semanticCompleteCount": 0,
+      "sourceGapCount": 321,
+      "observedFormAndStateCount": 12,
+      "canonicalSetupPage": null,
+      "eligibleForDeeperSourceIntake": true,
+      "sharedMechanics": [
+        "Generic Boss threat flip/expiry and initiative p30",
+        "Monster card anatomy/target/stance convention p24"
+      ],
+      "existingEngineOverlap": {
+        "evidenceRole": "NEGATIVE_READINESS_ONLY",
+        "genericPrimitivesAreNotBossConsumer": true,
+        "sourceBoundBossConsumerProven": false
+      },
+      "actIVOverlap": {
+        "referenceOnly": true,
+        "reusedAcceptedSemantics": false,
+        "ordinaryGardenGuardianIsNotActIVGuardian": true,
+        "readyGain": 0
+      },
+      "expectedSourceSafeProgression": {
+        "remainingLiteralDefinitions": 18,
+        "cardLocalSemanticContractsToEstablish": 18,
+        "basis": "Concrete physical definition IDs in the family matrix; source intake may close these gaps, success is not presumed."
+      },
+      "expectedWholeContentReadyGain": 0,
+      "immediateReadyGain": 0,
+      "sourceIntakeScore": -178.33
+    }
+  ]
+}

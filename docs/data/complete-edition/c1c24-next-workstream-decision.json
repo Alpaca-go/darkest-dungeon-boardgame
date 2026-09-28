@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-24",
+  "baselineHead": "877f14bff74a4dd9dfd18ea3fff3e1d8acc0f549",
+  "inputSha256": {
+    "docs/data/complete-edition/c1c22-boss-encounter-live-inventory.json": "a976a5351ebc03e2e2dc2d79f6d7496780ab5e599cbc3b27ddb76ce522c50849",
+    "docs/data/complete-edition/complete-edition-raw-inventory.json": "f7bd06a7a726df301cefe26e10586c0fe3a870ceb92903d5190077cfaae66245",
+    "docs/data/complete-edition/c1c24-boss-crop-manifest.json": "d98223329c4a4267fcb6d876770a46daa7929cccbe990fb48dcfe1e92bb45d17",
+    "docs/data/complete-edition/c1c24-boss-ocr-drafts.json": "7564ae407a8bae8349232241196d3a00395f0b4a73221044ba88b049bd8c2725",
+    "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+    "scripts/audit/c1c24-printed-source.ts": "017f8fa3241fd6dbb1a5de99244d56def46c20a04a0dc1dbd90e17a3b1426e91"
+  },
+  "outcome": "BOSS_FAMILY_SOURCE_INTAKE_SELECTED",
+  "verdict": "NEXT-BOSS-FAMILY-SOURCE-INTAKE-SELECTED",
+  "selectedFamily": "Necromancer",
+  "nextWorkstream": "C1C25 Necromancer printed-definition + semantic source intake",
+  "selectionScore": -36.67,
+  "expectedSourceDefinitionScope": 9,
+  "alreadyLiteralComplete": 9,
+  "boundedSemanticIntakePotential": 9,
+  "expectedReadyGain": 0,
+  "reason": "Highest eligible reproducible source-intake score; 9/9 verified literals, exact two-sided assets and subtype closure, named core setup page 38, 0 observed form/state objects. This selects source semantics only; no family-wide semantic/production contract exists.",
+  "requiredSourceClosure": [
+    "Resolve card-specific timing/target/ties and effect ordering",
+    "Bind complete encounter composition, levels and campaign copy policy",
+    "Bind summon monster source cards and Room Card/Tile external dependencies",
+    "Retain printed Bone Rabble vs core p38 Bone Rubble discrepancy until source-resolved",
+    "Resolve full-Stance summoning suppression versus general replacement rules and source precedence",
+    "Resolve lowest-roll Hero ties for Haunted Graveyard / The Restless Dead"
+  ],
+  "runtimeFoundationSelected": false,
+  "productionReadyGainDemonstrated": false
+}

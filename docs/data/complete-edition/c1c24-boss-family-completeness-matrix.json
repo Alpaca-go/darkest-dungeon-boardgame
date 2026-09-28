@@ -1,0 +1,1544 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-24",
+  "baselineHead": "877f14bff74a4dd9dfd18ea3fff3e1d8acc0f549",
+  "inputSha256": {
+    "docs/data/complete-edition/c1c22-boss-encounter-live-inventory.json": "a976a5351ebc03e2e2dc2d79f6d7496780ab5e599cbc3b27ddb76ce522c50849",
+    "docs/data/complete-edition/complete-edition-raw-inventory.json": "f7bd06a7a726df301cefe26e10586c0fe3a870ceb92903d5190077cfaae66245",
+    "docs/data/complete-edition/c1c24-boss-crop-manifest.json": "d98223329c4a4267fcb6d876770a46daa7929cccbe990fb48dcfe1e92bb45d17",
+    "docs/data/complete-edition/c1c24-boss-ocr-drafts.json": "7564ae407a8bae8349232241196d3a00395f0b4a73221044ba88b049bd8c2725",
+    "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+    "scripts/audit/c1c24-printed-source.ts": "017f8fa3241fd6dbb1a5de99244d56def46c20a04a0dc1dbd90e17a3b1426e91"
+  },
+  "countingPolicy": "Exclusive subtype lists partition 231 physical identities; abilitySidePhysicalIds and formAndStatePhysicalIds are overlapping annotations.",
+  "counts": {
+    "physicalCards": 231,
+    "families": 20,
+    "familyClassified": 231,
+    "familyUnresolved": 0,
+    "subtypePhysicalCounts": {
+      "BATTLE": 114,
+      "THREAT": 51,
+      "ABILITY": 12,
+      "BOSS_IDENTITY": 54,
+      "PHASE": 0,
+      "SUMMON": 0,
+      "ROOM_RULE": 0,
+      "TOKEN_RULE": 0,
+      "REFERENCE": 0,
+      "OTHER_SOURCE_BOUND": 0,
+      "UNRESOLVED": 0
+    },
+    "abilitySideCards": 63,
+    "pairedPrintedStateCards": 3,
+    "sourceSheets": 34,
+    "sourceBoundSides": 462,
+    "literalComplete": 56,
+    "literalPartial": 175,
+    "notExtracted": 0,
+    "semanticComplete": 0,
+    "sourceGated": 231,
+    "productionReady": 0,
+    "sourceGapCount": 4061
+  },
+  "families": [
+    {
+      "family": "Baron",
+      "physicalCardCount": 9,
+      "cards": {
+        "battle": [
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/1/ContainedObjects/4",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/1/ContainedObjects/5",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/1/ContainedObjects/6"
+        ],
+        "threat": [
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/1/ContainedObjects/0",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/1/ContainedObjects/1",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/1/ContainedObjects/2"
+        ],
+        "ability": [],
+        "boss_identity": [
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/1/ContainedObjects/3/ContainedObjects/0",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/1/ContainedObjects/3/ContainedObjects/1",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/1/ContainedObjects/3/ContainedObjects/2"
+        ],
+        "phase": [],
+        "summon": [],
+        "room_rule": [],
+        "token_rule": [],
+        "reference": [],
+        "other_source_bound": [],
+        "unresolved": []
+      },
+      "subtypePhysicalCounts": {
+        "BATTLE": 3,
+        "THREAT": 3,
+        "ABILITY": 0,
+        "BOSS_IDENTITY": 3,
+        "PHASE": 0,
+        "SUMMON": 0,
+        "ROOM_RULE": 0,
+        "TOKEN_RULE": 0,
+        "REFERENCE": 0,
+        "OTHER_SOURCE_BOUND": 0,
+        "UNRESOLVED": 0
+      },
+      "abilitySidePhysicalIds": [
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/1/ContainedObjects/0",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/1/ContainedObjects/1",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/1/ContainedObjects/2"
+      ],
+      "bossSubjectPhysicalIds": [
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/1/ContainedObjects/3/ContainedObjects/0",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/1/ContainedObjects/3/ContainedObjects/1",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/1/ContainedObjects/3/ContainedObjects/2",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/1/ContainedObjects/4",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/1/ContainedObjects/5",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/1/ContainedObjects/6"
+      ],
+      "attachedMechanismPhysicalIds": [],
+      "formAndStatePhysicalIds": [],
+      "subtypeClassifiedCount": 9,
+      "literalCompleteCount": 0,
+      "semanticCompleteCount": 0,
+      "sourceGatedCount": 9,
+      "unresolvedSubtypeCount": 0,
+      "unresolvedPrintedDefinitionCount": 9,
+      "sourceGapCount": 159,
+      "runtimeCandidateCount": 0,
+      "productionReadyCount": 0,
+      "allSourceSidesBound": true
+    },
+    {
+      "family": "Brigand Pounder",
+      "physicalCardCount": 12,
+      "cards": {
+        "battle": [
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/2/ContainedObjects/4/ContainedObjects/0",
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/2/ContainedObjects/4/ContainedObjects/1",
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/2/ContainedObjects/5/ContainedObjects/0",
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/2/ContainedObjects/5/ContainedObjects/1",
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/2/ContainedObjects/6/ContainedObjects/0",
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/2/ContainedObjects/6/ContainedObjects/1"
+        ],
+        "threat": [
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/2/ContainedObjects/1",
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/2/ContainedObjects/2",
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/2/ContainedObjects/3"
+        ],
+        "ability": [],
+        "boss_identity": [
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/2/ContainedObjects/0/ContainedObjects/0",
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/2/ContainedObjects/0/ContainedObjects/1",
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/2/ContainedObjects/0/ContainedObjects/2"
+        ],
+        "phase": [],
+        "summon": [],
+        "room_rule": [],
+        "token_rule": [],
+        "reference": [],
+        "other_source_bound": [],
+        "unresolved": []
+      },
+      "subtypePhysicalCounts": {
+        "BATTLE": 6,
+        "THREAT": 3,
+        "ABILITY": 0,
+        "BOSS_IDENTITY": 3,
+        "PHASE": 0,
+        "SUMMON": 0,
+        "ROOM_RULE": 0,
+        "TOKEN_RULE": 0,
+        "REFERENCE": 0,
+        "OTHER_SOURCE_BOUND": 0,
+        "UNRESOLVED": 0
+      },
+      "abilitySidePhysicalIds": [
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/2/ContainedObjects/1",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/2/ContainedObjects/2",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/2/ContainedObjects/3"
+      ],
+      "bossSubjectPhysicalIds": [
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/2/ContainedObjects/0/ContainedObjects/0",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/2/ContainedObjects/0/ContainedObjects/1",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/2/ContainedObjects/0/ContainedObjects/2",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/2/ContainedObjects/4/ContainedObjects/1",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/2/ContainedObjects/5/ContainedObjects/1",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/2/ContainedObjects/6/ContainedObjects/1"
+      ],
+      "attachedMechanismPhysicalIds": [
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/2/ContainedObjects/4/ContainedObjects/0",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/2/ContainedObjects/5/ContainedObjects/0",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/2/ContainedObjects/6/ContainedObjects/0"
+      ],
+      "formAndStatePhysicalIds": [],
+      "subtypeClassifiedCount": 12,
+      "literalCompleteCount": 3,
+      "semanticCompleteCount": 0,
+      "sourceGatedCount": 12,
+      "unresolvedSubtypeCount": 0,
+      "unresolvedPrintedDefinitionCount": 9,
+      "sourceGapCount": 210,
+      "runtimeCandidateCount": 0,
+      "productionReadyCount": 0,
+      "allSourceSidesBound": true
+    },
+    {
+      "family": "Brigand Vvulf",
+      "physicalCardCount": 9,
+      "cards": {
+        "battle": [
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/0/ContainedObjects/4",
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/0/ContainedObjects/5",
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/0/ContainedObjects/6"
+        ],
+        "threat": [
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/0/ContainedObjects/0",
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/0/ContainedObjects/1",
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/0/ContainedObjects/2"
+        ],
+        "ability": [],
+        "boss_identity": [
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/0/ContainedObjects/3/ContainedObjects/0",
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/0/ContainedObjects/3/ContainedObjects/1",
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/0/ContainedObjects/3/ContainedObjects/2"
+        ],
+        "phase": [],
+        "summon": [],
+        "room_rule": [],
+        "token_rule": [],
+        "reference": [],
+        "other_source_bound": [],
+        "unresolved": []
+      },
+      "subtypePhysicalCounts": {
+        "BATTLE": 3,
+        "THREAT": 3,
+        "ABILITY": 0,
+        "BOSS_IDENTITY": 3,
+        "PHASE": 0,
+        "SUMMON": 0,
+        "ROOM_RULE": 0,
+        "TOKEN_RULE": 0,
+        "REFERENCE": 0,
+        "OTHER_SOURCE_BOUND": 0,
+        "UNRESOLVED": 0
+      },
+      "abilitySidePhysicalIds": [
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/0/ContainedObjects/0",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/0/ContainedObjects/1",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/0/ContainedObjects/2"
+      ],
+      "bossSubjectPhysicalIds": [
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/0/ContainedObjects/3/ContainedObjects/0",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/0/ContainedObjects/3/ContainedObjects/1",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/0/ContainedObjects/3/ContainedObjects/2",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/0/ContainedObjects/4",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/0/ContainedObjects/5",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/0/ContainedObjects/6"
+      ],
+      "attachedMechanismPhysicalIds": [],
+      "formAndStatePhysicalIds": [],
+      "subtypeClassifiedCount": 9,
+      "literalCompleteCount": 0,
+      "semanticCompleteCount": 0,
+      "sourceGatedCount": 9,
+      "unresolvedSubtypeCount": 0,
+      "unresolvedPrintedDefinitionCount": 9,
+      "sourceGapCount": 159,
+      "runtimeCandidateCount": 0,
+      "productionReadyCount": 0,
+      "allSourceSidesBound": true
+    },
+    {
+      "family": "Collector",
+      "physicalCardCount": 18,
+      "cards": {
+        "battle": [
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/4/ContainedObjects/0",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/4/ContainedObjects/1",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/4/ContainedObjects/2",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/4/ContainedObjects/3",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/5/ContainedObjects/0",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/5/ContainedObjects/1",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/5/ContainedObjects/2",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/5/ContainedObjects/3",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/6/ContainedObjects/0",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/6/ContainedObjects/1",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/6/ContainedObjects/2",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/6/ContainedObjects/3"
+        ],
+        "threat": [
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/0",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/1",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/2"
+        ],
+        "ability": [],
+        "boss_identity": [
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/3/ContainedObjects/0",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/3/ContainedObjects/1",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/3/ContainedObjects/2"
+        ],
+        "phase": [],
+        "summon": [],
+        "room_rule": [],
+        "token_rule": [],
+        "reference": [],
+        "other_source_bound": [],
+        "unresolved": []
+      },
+      "subtypePhysicalCounts": {
+        "BATTLE": 12,
+        "THREAT": 3,
+        "ABILITY": 0,
+        "BOSS_IDENTITY": 3,
+        "PHASE": 0,
+        "SUMMON": 0,
+        "ROOM_RULE": 0,
+        "TOKEN_RULE": 0,
+        "REFERENCE": 0,
+        "OTHER_SOURCE_BOUND": 0,
+        "UNRESOLVED": 0
+      },
+      "abilitySidePhysicalIds": [
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/0",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/1",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/2"
+      ],
+      "bossSubjectPhysicalIds": [
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/3/ContainedObjects/0",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/3/ContainedObjects/1",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/3/ContainedObjects/2",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/4/ContainedObjects/3",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/5/ContainedObjects/3",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/6/ContainedObjects/3"
+      ],
+      "attachedMechanismPhysicalIds": [
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/4/ContainedObjects/0",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/4/ContainedObjects/1",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/4/ContainedObjects/2",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/5/ContainedObjects/0",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/5/ContainedObjects/1",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/5/ContainedObjects/2",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/6/ContainedObjects/0",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/6/ContainedObjects/1",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1/ContainedObjects/6/ContainedObjects/2"
+      ],
+      "formAndStatePhysicalIds": [],
+      "subtypeClassifiedCount": 18,
+      "literalCompleteCount": 6,
+      "semanticCompleteCount": 0,
+      "sourceGatedCount": 18,
+      "unresolvedSubtypeCount": 0,
+      "unresolvedPrintedDefinitionCount": 12,
+      "sourceGapCount": 315,
+      "runtimeCandidateCount": 0,
+      "productionReadyCount": 0,
+      "allSourceSidesBound": true
+    },
+    {
+      "family": "Countess",
+      "physicalCardCount": 9,
+      "cards": {
+        "battle": [
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/2/ContainedObjects/5",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/2/ContainedObjects/6",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/2/ContainedObjects/7"
+        ],
+        "threat": [
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/2/ContainedObjects/0",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/2/ContainedObjects/1",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/2/ContainedObjects/2"
+        ],
+        "ability": [],
+        "boss_identity": [
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/2/ContainedObjects/4/ContainedObjects/0",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/2/ContainedObjects/4/ContainedObjects/1",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/2/ContainedObjects/4/ContainedObjects/2"
+        ],
+        "phase": [],
+        "summon": [],
+        "room_rule": [],
+        "token_rule": [],
+        "reference": [],
+        "other_source_bound": [],
+        "unresolved": []
+      },
+      "subtypePhysicalCounts": {
+        "BATTLE": 3,
+        "THREAT": 3,
+        "ABILITY": 0,
+        "BOSS_IDENTITY": 3,
+        "PHASE": 0,
+        "SUMMON": 0,
+        "ROOM_RULE": 0,
+        "TOKEN_RULE": 0,
+        "REFERENCE": 0,
+        "OTHER_SOURCE_BOUND": 0,
+        "UNRESOLVED": 0
+      },
+      "abilitySidePhysicalIds": [
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/2/ContainedObjects/0",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/2/ContainedObjects/1",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/2/ContainedObjects/2"
+      ],
+      "bossSubjectPhysicalIds": [
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/2/ContainedObjects/4/ContainedObjects/0",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/2/ContainedObjects/4/ContainedObjects/1",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/2/ContainedObjects/4/ContainedObjects/2",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/2/ContainedObjects/5",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/2/ContainedObjects/6",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/2/ContainedObjects/7"
+      ],
+      "attachedMechanismPhysicalIds": [],
+      "formAndStatePhysicalIds": [],
+      "subtypeClassifiedCount": 9,
+      "literalCompleteCount": 0,
+      "semanticCompleteCount": 0,
+      "sourceGatedCount": 9,
+      "unresolvedSubtypeCount": 0,
+      "unresolvedPrintedDefinitionCount": 9,
+      "sourceGapCount": 159,
+      "runtimeCandidateCount": 0,
+      "productionReadyCount": 0,
+      "allSourceSidesBound": true
+    },
+    {
+      "family": "Drowned Crew",
+      "physicalCardCount": 12,
+      "cards": {
+        "battle": [
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/2/ContainedObjects/4",
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/2/ContainedObjects/5",
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/2/ContainedObjects/6",
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/2/ContainedObjects/7",
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/2/ContainedObjects/8",
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/2/ContainedObjects/9"
+        ],
+        "threat": [
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/2/ContainedObjects/0",
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/2/ContainedObjects/1",
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/2/ContainedObjects/2"
+        ],
+        "ability": [],
+        "boss_identity": [
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/2/ContainedObjects/3/ContainedObjects/0",
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/2/ContainedObjects/3/ContainedObjects/1",
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/2/ContainedObjects/3/ContainedObjects/2"
+        ],
+        "phase": [],
+        "summon": [],
+        "room_rule": [],
+        "token_rule": [],
+        "reference": [],
+        "other_source_bound": [],
+        "unresolved": []
+      },
+      "subtypePhysicalCounts": {
+        "BATTLE": 6,
+        "THREAT": 3,
+        "ABILITY": 0,
+        "BOSS_IDENTITY": 3,
+        "PHASE": 0,
+        "SUMMON": 0,
+        "ROOM_RULE": 0,
+        "TOKEN_RULE": 0,
+        "REFERENCE": 0,
+        "OTHER_SOURCE_BOUND": 0,
+        "UNRESOLVED": 0
+      },
+      "abilitySidePhysicalIds": [
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/2/ContainedObjects/0",
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/2/ContainedObjects/1",
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/2/ContainedObjects/2"
+      ],
+      "bossSubjectPhysicalIds": [
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/2/ContainedObjects/3/ContainedObjects/0",
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/2/ContainedObjects/3/ContainedObjects/1",
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/2/ContainedObjects/3/ContainedObjects/2",
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/2/ContainedObjects/4",
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/2/ContainedObjects/5",
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/2/ContainedObjects/6"
+      ],
+      "attachedMechanismPhysicalIds": [
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/2/ContainedObjects/7",
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/2/ContainedObjects/8",
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/2/ContainedObjects/9"
+      ],
+      "formAndStatePhysicalIds": [],
+      "subtypeClassifiedCount": 12,
+      "literalCompleteCount": 0,
+      "semanticCompleteCount": 0,
+      "sourceGatedCount": 12,
+      "unresolvedSubtypeCount": 0,
+      "unresolvedPrintedDefinitionCount": 12,
+      "sourceGapCount": 213,
+      "runtimeCandidateCount": 0,
+      "productionReadyCount": 0,
+      "allSourceSidesBound": true
+    },
+    {
+      "family": "Fanatic",
+      "physicalCardCount": 12,
+      "cards": {
+        "battle": [
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/4/ContainedObjects/0",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/4/ContainedObjects/1",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/5/ContainedObjects/0",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/5/ContainedObjects/1",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/6/ContainedObjects/0",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/6/ContainedObjects/1"
+        ],
+        "threat": [
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/0",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/1",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/2"
+        ],
+        "ability": [],
+        "boss_identity": [
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/3/ContainedObjects/0",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/3/ContainedObjects/1",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/3/ContainedObjects/2"
+        ],
+        "phase": [],
+        "summon": [],
+        "room_rule": [],
+        "token_rule": [],
+        "reference": [],
+        "other_source_bound": [],
+        "unresolved": []
+      },
+      "subtypePhysicalCounts": {
+        "BATTLE": 6,
+        "THREAT": 3,
+        "ABILITY": 0,
+        "BOSS_IDENTITY": 3,
+        "PHASE": 0,
+        "SUMMON": 0,
+        "ROOM_RULE": 0,
+        "TOKEN_RULE": 0,
+        "REFERENCE": 0,
+        "OTHER_SOURCE_BOUND": 0,
+        "UNRESOLVED": 0
+      },
+      "abilitySidePhysicalIds": [
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/0",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/1",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/2"
+      ],
+      "bossSubjectPhysicalIds": [
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/3/ContainedObjects/0",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/3/ContainedObjects/1",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/3/ContainedObjects/2",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/4/ContainedObjects/1",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/5/ContainedObjects/1",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/6/ContainedObjects/1"
+      ],
+      "attachedMechanismPhysicalIds": [
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/4/ContainedObjects/0",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/5/ContainedObjects/0",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/6/ContainedObjects/0"
+      ],
+      "formAndStatePhysicalIds": [],
+      "subtypeClassifiedCount": 12,
+      "literalCompleteCount": 3,
+      "semanticCompleteCount": 0,
+      "sourceGatedCount": 12,
+      "unresolvedSubtypeCount": 0,
+      "unresolvedPrintedDefinitionCount": 9,
+      "sourceGapCount": 210,
+      "runtimeCandidateCount": 0,
+      "productionReadyCount": 0,
+      "allSourceSidesBound": true
+    },
+    {
+      "family": "Garden Guardian",
+      "physicalCardCount": 21,
+      "cards": {
+        "battle": [
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/4",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/5",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/6",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/7/ContainedObjects/0",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/7/ContainedObjects/1",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/8/ContainedObjects/0",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/8/ContainedObjects/1",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/9/ContainedObjects/0",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/9/ContainedObjects/1"
+        ],
+        "threat": [
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/0/ContainedObjects/2",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/1/ContainedObjects/2",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/2/ContainedObjects/2"
+        ],
+        "ability": [
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/0/ContainedObjects/0",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/0/ContainedObjects/1",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/1/ContainedObjects/0",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/1/ContainedObjects/1",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/2/ContainedObjects/0",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/2/ContainedObjects/1"
+        ],
+        "boss_identity": [
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/3/ContainedObjects/0",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/3/ContainedObjects/1",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/3/ContainedObjects/2"
+        ],
+        "phase": [],
+        "summon": [],
+        "room_rule": [],
+        "token_rule": [],
+        "reference": [],
+        "other_source_bound": [],
+        "unresolved": []
+      },
+      "subtypePhysicalCounts": {
+        "BATTLE": 9,
+        "THREAT": 3,
+        "ABILITY": 6,
+        "BOSS_IDENTITY": 3,
+        "PHASE": 0,
+        "SUMMON": 0,
+        "ROOM_RULE": 0,
+        "TOKEN_RULE": 0,
+        "REFERENCE": 0,
+        "OTHER_SOURCE_BOUND": 0,
+        "UNRESOLVED": 0
+      },
+      "abilitySidePhysicalIds": [
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/0/ContainedObjects/0",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/0/ContainedObjects/1",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/0/ContainedObjects/2",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/1/ContainedObjects/0",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/1/ContainedObjects/1",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/1/ContainedObjects/2",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/2/ContainedObjects/0",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/2/ContainedObjects/1",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/2/ContainedObjects/2"
+      ],
+      "bossSubjectPhysicalIds": [
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/3/ContainedObjects/0",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/3/ContainedObjects/1",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/3/ContainedObjects/2",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/4",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/5",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/6"
+      ],
+      "attachedMechanismPhysicalIds": [
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/0/ContainedObjects/0",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/0/ContainedObjects/1",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/1/ContainedObjects/0",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/1/ContainedObjects/1",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/2/ContainedObjects/0",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/2/ContainedObjects/1",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/7/ContainedObjects/0",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/7/ContainedObjects/1",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/8/ContainedObjects/0",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/8/ContainedObjects/1",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/9/ContainedObjects/0",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/3/ContainedObjects/9/ContainedObjects/1"
+      ],
+      "formAndStatePhysicalIds": [],
+      "subtypeClassifiedCount": 21,
+      "literalCompleteCount": 6,
+      "semanticCompleteCount": 0,
+      "sourceGatedCount": 21,
+      "unresolvedSubtypeCount": 0,
+      "unresolvedPrintedDefinitionCount": 15,
+      "sourceGapCount": 369,
+      "runtimeCandidateCount": 0,
+      "productionReadyCount": 0,
+      "allSourceSidesBound": true
+    },
+    {
+      "family": "Hag",
+      "physicalCardCount": 15,
+      "cards": {
+        "battle": [
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/7/ContainedObjects/0",
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/7/ContainedObjects/1",
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/8/ContainedObjects/0",
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/8/ContainedObjects/1",
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/9/ContainedObjects/0",
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/9/ContainedObjects/1"
+        ],
+        "threat": [
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/1",
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/3",
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/5"
+        ],
+        "ability": [
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/0",
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/2",
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/4"
+        ],
+        "boss_identity": [
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/6/ContainedObjects/0",
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/6/ContainedObjects/1",
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/6/ContainedObjects/2"
+        ],
+        "phase": [],
+        "summon": [],
+        "room_rule": [],
+        "token_rule": [],
+        "reference": [],
+        "other_source_bound": [],
+        "unresolved": []
+      },
+      "subtypePhysicalCounts": {
+        "BATTLE": 6,
+        "THREAT": 3,
+        "ABILITY": 3,
+        "BOSS_IDENTITY": 3,
+        "PHASE": 0,
+        "SUMMON": 0,
+        "ROOM_RULE": 0,
+        "TOKEN_RULE": 0,
+        "REFERENCE": 0,
+        "OTHER_SOURCE_BOUND": 0,
+        "UNRESOLVED": 0
+      },
+      "abilitySidePhysicalIds": [
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/0",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/1",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/2",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/3",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/4",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/5"
+      ],
+      "bossSubjectPhysicalIds": [
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/6/ContainedObjects/0",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/6/ContainedObjects/1",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/6/ContainedObjects/2",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/7/ContainedObjects/1",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/8/ContainedObjects/1",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/9/ContainedObjects/1"
+      ],
+      "attachedMechanismPhysicalIds": [
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/0",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/2",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/4",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/7/ContainedObjects/0",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/8/ContainedObjects/0",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/9/ContainedObjects/0"
+      ],
+      "formAndStatePhysicalIds": [
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/7/ContainedObjects/0",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/8/ContainedObjects/0",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/1/ContainedObjects/9/ContainedObjects/0"
+      ],
+      "subtypeClassifiedCount": 15,
+      "literalCompleteCount": 6,
+      "semanticCompleteCount": 0,
+      "sourceGatedCount": 15,
+      "unresolvedSubtypeCount": 0,
+      "unresolvedPrintedDefinitionCount": 9,
+      "sourceGapCount": 255,
+      "runtimeCandidateCount": 0,
+      "productionReadyCount": 0,
+      "allSourceSidesBound": true
+    },
+    {
+      "family": "Necromancer",
+      "physicalCardCount": 9,
+      "cards": {
+        "battle": [
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/1",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/3",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/5"
+        ],
+        "threat": [
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/0",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/2",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/4"
+        ],
+        "ability": [],
+        "boss_identity": [
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/6/ContainedObjects/0",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/6/ContainedObjects/1",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/6/ContainedObjects/2"
+        ],
+        "phase": [],
+        "summon": [],
+        "room_rule": [],
+        "token_rule": [],
+        "reference": [],
+        "other_source_bound": [],
+        "unresolved": []
+      },
+      "subtypePhysicalCounts": {
+        "BATTLE": 3,
+        "THREAT": 3,
+        "ABILITY": 0,
+        "BOSS_IDENTITY": 3,
+        "PHASE": 0,
+        "SUMMON": 0,
+        "ROOM_RULE": 0,
+        "TOKEN_RULE": 0,
+        "REFERENCE": 0,
+        "OTHER_SOURCE_BOUND": 0,
+        "UNRESOLVED": 0
+      },
+      "abilitySidePhysicalIds": [
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/0",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/2",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/4"
+      ],
+      "bossSubjectPhysicalIds": [
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/1",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/3",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/5",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/6/ContainedObjects/0",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/6/ContainedObjects/1",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/6/ContainedObjects/2"
+      ],
+      "attachedMechanismPhysicalIds": [],
+      "formAndStatePhysicalIds": [],
+      "subtypeClassifiedCount": 9,
+      "literalCompleteCount": 9,
+      "semanticCompleteCount": 0,
+      "sourceGatedCount": 9,
+      "unresolvedSubtypeCount": 0,
+      "unresolvedPrintedDefinitionCount": 0,
+      "sourceGapCount": 150,
+      "runtimeCandidateCount": 0,
+      "productionReadyCount": 0,
+      "allSourceSidesBound": true
+    },
+    {
+      "family": "Prophet",
+      "physicalCardCount": 9,
+      "cards": {
+        "battle": [
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6"
+        ],
+        "threat": [
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/0",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/1",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/5"
+        ],
+        "ability": [],
+        "boss_identity": [
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/3/ContainedObjects/0",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/3/ContainedObjects/1",
+          "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/3/ContainedObjects/2"
+        ],
+        "phase": [],
+        "summon": [],
+        "room_rule": [],
+        "token_rule": [],
+        "reference": [],
+        "other_source_bound": [],
+        "unresolved": []
+      },
+      "subtypePhysicalCounts": {
+        "BATTLE": 3,
+        "THREAT": 3,
+        "ABILITY": 0,
+        "BOSS_IDENTITY": 3,
+        "PHASE": 0,
+        "SUMMON": 0,
+        "ROOM_RULE": 0,
+        "TOKEN_RULE": 0,
+        "REFERENCE": 0,
+        "OTHER_SOURCE_BOUND": 0,
+        "UNRESOLVED": 0
+      },
+      "abilitySidePhysicalIds": [
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/0",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/1",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/5"
+      ],
+      "bossSubjectPhysicalIds": [
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/3/ContainedObjects/0",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/3/ContainedObjects/1",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/3/ContainedObjects/2",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+        "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6"
+      ],
+      "attachedMechanismPhysicalIds": [],
+      "formAndStatePhysicalIds": [],
+      "subtypeClassifiedCount": 9,
+      "literalCompleteCount": 6,
+      "semanticCompleteCount": 0,
+      "sourceGatedCount": 9,
+      "unresolvedSubtypeCount": 0,
+      "unresolvedPrintedDefinitionCount": 3,
+      "sourceGapCount": 153,
+      "runtimeCandidateCount": 0,
+      "productionReadyCount": 0,
+      "allSourceSidesBound": true
+    },
+    {
+      "family": "Shambler",
+      "physicalCardCount": 15,
+      "cards": {
+        "battle": [
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/1/ContainedObjects/4",
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/1/ContainedObjects/5",
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/1/ContainedObjects/6",
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/1/ContainedObjects/7/ContainedObjects/0",
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/1/ContainedObjects/7/ContainedObjects/1",
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/1/ContainedObjects/8/ContainedObjects/0",
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/1/ContainedObjects/8/ContainedObjects/1",
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/1/ContainedObjects/9/ContainedObjects/0",
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/1/ContainedObjects/9/ContainedObjects/1"
+        ],
+        "threat": [
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/1/ContainedObjects/0",
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/1/ContainedObjects/1",
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/1/ContainedObjects/2"
+        ],
+        "ability": [],
+        "boss_identity": [
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/1/ContainedObjects/3/ContainedObjects/0",
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/1/ContainedObjects/3/ContainedObjects/1",
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/1/ContainedObjects/3/ContainedObjects/2"
+        ],
+        "phase": [],
+        "summon": [],
+        "room_rule": [],
+        "token_rule": [],
+        "reference": [],
+        "other_source_bound": [],
+        "unresolved": []
+      },
+      "subtypePhysicalCounts": {
+        "BATTLE": 9,
+        "THREAT": 3,
+        "ABILITY": 0,
+        "BOSS_IDENTITY": 3,
+        "PHASE": 0,
+        "SUMMON": 0,
+        "ROOM_RULE": 0,
+        "TOKEN_RULE": 0,
+        "REFERENCE": 0,
+        "OTHER_SOURCE_BOUND": 0,
+        "UNRESOLVED": 0
+      },
+      "abilitySidePhysicalIds": [
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/1/ContainedObjects/0",
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/1/ContainedObjects/1",
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/1/ContainedObjects/2"
+      ],
+      "bossSubjectPhysicalIds": [
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/1/ContainedObjects/3/ContainedObjects/0",
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/1/ContainedObjects/3/ContainedObjects/1",
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/1/ContainedObjects/3/ContainedObjects/2",
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/1/ContainedObjects/4",
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/1/ContainedObjects/5",
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/1/ContainedObjects/6"
+      ],
+      "attachedMechanismPhysicalIds": [
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/1/ContainedObjects/7/ContainedObjects/0",
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/1/ContainedObjects/7/ContainedObjects/1",
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/1/ContainedObjects/8/ContainedObjects/0",
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/1/ContainedObjects/8/ContainedObjects/1",
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/1/ContainedObjects/9/ContainedObjects/0",
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/1/ContainedObjects/9/ContainedObjects/1"
+      ],
+      "formAndStatePhysicalIds": [],
+      "subtypeClassifiedCount": 15,
+      "literalCompleteCount": 3,
+      "semanticCompleteCount": 0,
+      "sourceGatedCount": 15,
+      "unresolvedSubtypeCount": 0,
+      "unresolvedPrintedDefinitionCount": 12,
+      "sourceGapCount": 276,
+      "runtimeCandidateCount": 0,
+      "productionReadyCount": 0,
+      "allSourceSidesBound": true
+    },
+    {
+      "family": "Shrieker",
+      "physicalCardCount": 12,
+      "cards": {
+        "battle": [
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/0/ContainedObjects/4/ContainedObjects/0",
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/0/ContainedObjects/4/ContainedObjects/1",
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/0/ContainedObjects/5/ContainedObjects/0",
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/0/ContainedObjects/5/ContainedObjects/1",
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/0/ContainedObjects/6/ContainedObjects/0",
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/0/ContainedObjects/6/ContainedObjects/1"
+        ],
+        "threat": [
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/0/ContainedObjects/0",
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/0/ContainedObjects/1",
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/0/ContainedObjects/2"
+        ],
+        "ability": [],
+        "boss_identity": [
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/0/ContainedObjects/3/ContainedObjects/0",
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/0/ContainedObjects/3/ContainedObjects/1",
+          "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/0/ContainedObjects/3/ContainedObjects/2"
+        ],
+        "phase": [],
+        "summon": [],
+        "room_rule": [],
+        "token_rule": [],
+        "reference": [],
+        "other_source_bound": [],
+        "unresolved": []
+      },
+      "subtypePhysicalCounts": {
+        "BATTLE": 6,
+        "THREAT": 3,
+        "ABILITY": 0,
+        "BOSS_IDENTITY": 3,
+        "PHASE": 0,
+        "SUMMON": 0,
+        "ROOM_RULE": 0,
+        "TOKEN_RULE": 0,
+        "REFERENCE": 0,
+        "OTHER_SOURCE_BOUND": 0,
+        "UNRESOLVED": 0
+      },
+      "abilitySidePhysicalIds": [
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/0/ContainedObjects/0",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/0/ContainedObjects/1",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/0/ContainedObjects/2"
+      ],
+      "bossSubjectPhysicalIds": [
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/0/ContainedObjects/3/ContainedObjects/0",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/0/ContainedObjects/3/ContainedObjects/1",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/0/ContainedObjects/3/ContainedObjects/2",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/0/ContainedObjects/4/ContainedObjects/1",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/0/ContainedObjects/5/ContainedObjects/1",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/0/ContainedObjects/6/ContainedObjects/1"
+      ],
+      "attachedMechanismPhysicalIds": [
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/0/ContainedObjects/4/ContainedObjects/0",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/0/ContainedObjects/5/ContainedObjects/0",
+        "tts-path:/ObjectStates/54/ContainedObjects/12/ContainedObjects/0/ContainedObjects/6/ContainedObjects/0"
+      ],
+      "formAndStatePhysicalIds": [],
+      "subtypeClassifiedCount": 12,
+      "literalCompleteCount": 3,
+      "semanticCompleteCount": 0,
+      "sourceGatedCount": 12,
+      "unresolvedSubtypeCount": 0,
+      "unresolvedPrintedDefinitionCount": 9,
+      "sourceGapCount": 210,
+      "runtimeCandidateCount": 0,
+      "productionReadyCount": 0,
+      "allSourceSidesBound": true
+    },
+    {
+      "family": "Siren",
+      "physicalCardCount": 9,
+      "cards": {
+        "battle": [
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/0/ContainedObjects/4",
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/0/ContainedObjects/5",
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/0/ContainedObjects/6"
+        ],
+        "threat": [
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0",
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1",
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2"
+        ],
+        "ability": [],
+        "boss_identity": [
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/0",
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/1",
+          "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/2"
+        ],
+        "phase": [],
+        "summon": [],
+        "room_rule": [],
+        "token_rule": [],
+        "reference": [],
+        "other_source_bound": [],
+        "unresolved": []
+      },
+      "subtypePhysicalCounts": {
+        "BATTLE": 3,
+        "THREAT": 3,
+        "ABILITY": 0,
+        "BOSS_IDENTITY": 3,
+        "PHASE": 0,
+        "SUMMON": 0,
+        "ROOM_RULE": 0,
+        "TOKEN_RULE": 0,
+        "REFERENCE": 0,
+        "OTHER_SOURCE_BOUND": 0,
+        "UNRESOLVED": 0
+      },
+      "abilitySidePhysicalIds": [
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0",
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1",
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2"
+      ],
+      "bossSubjectPhysicalIds": [
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/0",
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/1",
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/2",
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/0/ContainedObjects/4",
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/0/ContainedObjects/5",
+        "tts-path:/ObjectStates/53/ContainedObjects/6/ContainedObjects/0/ContainedObjects/6"
+      ],
+      "attachedMechanismPhysicalIds": [],
+      "formAndStatePhysicalIds": [],
+      "subtypeClassifiedCount": 9,
+      "literalCompleteCount": 0,
+      "semanticCompleteCount": 0,
+      "sourceGatedCount": 9,
+      "unresolvedSubtypeCount": 0,
+      "unresolvedPrintedDefinitionCount": 9,
+      "sourceGapCount": 159,
+      "runtimeCandidateCount": 0,
+      "productionReadyCount": 0,
+      "allSourceSidesBound": true
+    },
+    {
+      "family": "Swine Prince",
+      "physicalCardCount": 12,
+      "cards": {
+        "battle": [
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/2/ContainedObjects/4",
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/2/ContainedObjects/5",
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/2/ContainedObjects/6",
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/2/ContainedObjects/7",
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/2/ContainedObjects/8",
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/2/ContainedObjects/9"
+        ],
+        "threat": [
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/2/ContainedObjects/0",
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/2/ContainedObjects/1",
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/2/ContainedObjects/2"
+        ],
+        "ability": [],
+        "boss_identity": [
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/2/ContainedObjects/3/ContainedObjects/0",
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/2/ContainedObjects/3/ContainedObjects/1",
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/2/ContainedObjects/3/ContainedObjects/2"
+        ],
+        "phase": [],
+        "summon": [],
+        "room_rule": [],
+        "token_rule": [],
+        "reference": [],
+        "other_source_bound": [],
+        "unresolved": []
+      },
+      "subtypePhysicalCounts": {
+        "BATTLE": 6,
+        "THREAT": 3,
+        "ABILITY": 0,
+        "BOSS_IDENTITY": 3,
+        "PHASE": 0,
+        "SUMMON": 0,
+        "ROOM_RULE": 0,
+        "TOKEN_RULE": 0,
+        "REFERENCE": 0,
+        "OTHER_SOURCE_BOUND": 0,
+        "UNRESOLVED": 0
+      },
+      "abilitySidePhysicalIds": [
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/2/ContainedObjects/0",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/2/ContainedObjects/1",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/2/ContainedObjects/2"
+      ],
+      "bossSubjectPhysicalIds": [
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/2/ContainedObjects/3/ContainedObjects/0",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/2/ContainedObjects/3/ContainedObjects/1",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/2/ContainedObjects/3/ContainedObjects/2",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/2/ContainedObjects/4",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/2/ContainedObjects/5",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/2/ContainedObjects/6"
+      ],
+      "attachedMechanismPhysicalIds": [
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/2/ContainedObjects/7",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/2/ContainedObjects/8",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/2/ContainedObjects/9"
+      ],
+      "formAndStatePhysicalIds": [],
+      "subtypeClassifiedCount": 12,
+      "literalCompleteCount": 3,
+      "semanticCompleteCount": 0,
+      "sourceGatedCount": 12,
+      "unresolvedSubtypeCount": 0,
+      "unresolvedPrintedDefinitionCount": 9,
+      "sourceGapCount": 210,
+      "runtimeCandidateCount": 0,
+      "productionReadyCount": 0,
+      "allSourceSidesBound": true
+    },
+    {
+      "family": "The Flesh",
+      "physicalCardCount": 18,
+      "cards": {
+        "battle": [
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/4/ContainedObjects/0",
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/4/ContainedObjects/1",
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/4/ContainedObjects/2",
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/4/ContainedObjects/3",
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/5/ContainedObjects/0",
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/5/ContainedObjects/1",
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/5/ContainedObjects/2",
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/5/ContainedObjects/3",
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/6/ContainedObjects/0",
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/6/ContainedObjects/1",
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/6/ContainedObjects/2",
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/6/ContainedObjects/3"
+        ],
+        "threat": [
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/0",
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/1",
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/2"
+        ],
+        "ability": [],
+        "boss_identity": [
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/3/ContainedObjects/0",
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/3/ContainedObjects/1",
+          "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/3/ContainedObjects/2"
+        ],
+        "phase": [],
+        "summon": [],
+        "room_rule": [],
+        "token_rule": [],
+        "reference": [],
+        "other_source_bound": [],
+        "unresolved": []
+      },
+      "subtypePhysicalCounts": {
+        "BATTLE": 12,
+        "THREAT": 3,
+        "ABILITY": 0,
+        "BOSS_IDENTITY": 3,
+        "PHASE": 0,
+        "SUMMON": 0,
+        "ROOM_RULE": 0,
+        "TOKEN_RULE": 0,
+        "REFERENCE": 0,
+        "OTHER_SOURCE_BOUND": 0,
+        "UNRESOLVED": 0
+      },
+      "abilitySidePhysicalIds": [
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/0",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/1",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/2"
+      ],
+      "bossSubjectPhysicalIds": [
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/3/ContainedObjects/0",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/3/ContainedObjects/1",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/3/ContainedObjects/2"
+      ],
+      "attachedMechanismPhysicalIds": [
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/4/ContainedObjects/0",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/4/ContainedObjects/1",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/4/ContainedObjects/2",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/4/ContainedObjects/3",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/5/ContainedObjects/0",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/5/ContainedObjects/1",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/5/ContainedObjects/2",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/5/ContainedObjects/3",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/6/ContainedObjects/0",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/6/ContainedObjects/1",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/6/ContainedObjects/2",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/6/ContainedObjects/3"
+      ],
+      "formAndStatePhysicalIds": [
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/4/ContainedObjects/0",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/4/ContainedObjects/1",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/4/ContainedObjects/2",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/4/ContainedObjects/3",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/5/ContainedObjects/0",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/5/ContainedObjects/1",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/5/ContainedObjects/2",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/5/ContainedObjects/3",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/6/ContainedObjects/0",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/6/ContainedObjects/1",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/6/ContainedObjects/2",
+        "tts-path:/ObjectStates/52/ContainedObjects/9/ContainedObjects/1/ContainedObjects/6/ContainedObjects/3"
+      ],
+      "subtypeClassifiedCount": 18,
+      "literalCompleteCount": 0,
+      "semanticCompleteCount": 0,
+      "sourceGatedCount": 18,
+      "unresolvedSubtypeCount": 0,
+      "unresolvedPrintedDefinitionCount": 18,
+      "sourceGapCount": 321,
+      "runtimeCandidateCount": 0,
+      "productionReadyCount": 0,
+      "allSourceSidesBound": true
+    },
+    {
+      "family": "The Miller",
+      "physicalCardCount": 5,
+      "cards": {
+        "battle": [
+          "tts-path:/ObjectStates/48/ContainedObjects/8/ContainedObjects/1/ContainedObjects/2",
+          "tts-path:/ObjectStates/48/ContainedObjects/8/ContainedObjects/1/ContainedObjects/3/ContainedObjects/0",
+          "tts-path:/ObjectStates/48/ContainedObjects/8/ContainedObjects/1/ContainedObjects/3/ContainedObjects/1"
+        ],
+        "threat": [],
+        "ability": [
+          "tts-path:/ObjectStates/48/ContainedObjects/8/ContainedObjects/1/ContainedObjects/0"
+        ],
+        "boss_identity": [
+          "tts-path:/ObjectStates/48/ContainedObjects/8/ContainedObjects/1/ContainedObjects/1"
+        ],
+        "phase": [],
+        "summon": [],
+        "room_rule": [],
+        "token_rule": [],
+        "reference": [],
+        "other_source_bound": [],
+        "unresolved": []
+      },
+      "subtypePhysicalCounts": {
+        "BATTLE": 3,
+        "THREAT": 0,
+        "ABILITY": 1,
+        "BOSS_IDENTITY": 1,
+        "PHASE": 0,
+        "SUMMON": 0,
+        "ROOM_RULE": 0,
+        "TOKEN_RULE": 0,
+        "REFERENCE": 0,
+        "OTHER_SOURCE_BOUND": 0,
+        "UNRESOLVED": 0
+      },
+      "abilitySidePhysicalIds": [
+        "tts-path:/ObjectStates/48/ContainedObjects/8/ContainedObjects/1/ContainedObjects/0"
+      ],
+      "bossSubjectPhysicalIds": [
+        "tts-path:/ObjectStates/48/ContainedObjects/8/ContainedObjects/1/ContainedObjects/1",
+        "tts-path:/ObjectStates/48/ContainedObjects/8/ContainedObjects/1/ContainedObjects/2"
+      ],
+      "attachedMechanismPhysicalIds": [
+        "tts-path:/ObjectStates/48/ContainedObjects/8/ContainedObjects/1/ContainedObjects/3/ContainedObjects/0",
+        "tts-path:/ObjectStates/48/ContainedObjects/8/ContainedObjects/1/ContainedObjects/3/ContainedObjects/1"
+      ],
+      "formAndStatePhysicalIds": [
+        "tts-path:/ObjectStates/48/ContainedObjects/8/ContainedObjects/1/ContainedObjects/3/ContainedObjects/0",
+        "tts-path:/ObjectStates/48/ContainedObjects/8/ContainedObjects/1/ContainedObjects/3/ContainedObjects/1"
+      ],
+      "subtypeClassifiedCount": 5,
+      "literalCompleteCount": 1,
+      "semanticCompleteCount": 0,
+      "sourceGatedCount": 5,
+      "unresolvedSubtypeCount": 0,
+      "unresolvedPrintedDefinitionCount": 4,
+      "sourceGapCount": 93,
+      "runtimeCandidateCount": 0,
+      "productionReadyCount": 0,
+      "allSourceSidesBound": true
+    },
+    {
+      "family": "The Sleeper",
+      "physicalCardCount": 4,
+      "cards": {
+        "battle": [
+          "tts-path:/ObjectStates/48/ContainedObjects/8/ContainedObjects/2/ContainedObjects/1",
+          "tts-path:/ObjectStates/48/ContainedObjects/8/ContainedObjects/2/ContainedObjects/4"
+        ],
+        "threat": [],
+        "ability": [
+          "tts-path:/ObjectStates/48/ContainedObjects/8/ContainedObjects/2/ContainedObjects/0"
+        ],
+        "boss_identity": [
+          "tts-path:/ObjectStates/48/ContainedObjects/8/ContainedObjects/2/ContainedObjects/2"
+        ],
+        "phase": [],
+        "summon": [],
+        "room_rule": [],
+        "token_rule": [],
+        "reference": [],
+        "other_source_bound": [],
+        "unresolved": []
+      },
+      "subtypePhysicalCounts": {
+        "BATTLE": 2,
+        "THREAT": 0,
+        "ABILITY": 1,
+        "BOSS_IDENTITY": 1,
+        "PHASE": 0,
+        "SUMMON": 0,
+        "ROOM_RULE": 0,
+        "TOKEN_RULE": 0,
+        "REFERENCE": 0,
+        "OTHER_SOURCE_BOUND": 0,
+        "UNRESOLVED": 0
+      },
+      "abilitySidePhysicalIds": [
+        "tts-path:/ObjectStates/48/ContainedObjects/8/ContainedObjects/2/ContainedObjects/0"
+      ],
+      "bossSubjectPhysicalIds": [
+        "tts-path:/ObjectStates/48/ContainedObjects/8/ContainedObjects/2/ContainedObjects/2",
+        "tts-path:/ObjectStates/48/ContainedObjects/8/ContainedObjects/2/ContainedObjects/4"
+      ],
+      "attachedMechanismPhysicalIds": [
+        "tts-path:/ObjectStates/48/ContainedObjects/8/ContainedObjects/2/ContainedObjects/1"
+      ],
+      "formAndStatePhysicalIds": [
+        "tts-path:/ObjectStates/48/ContainedObjects/8/ContainedObjects/2/ContainedObjects/1"
+      ],
+      "subtypeClassifiedCount": 4,
+      "literalCompleteCount": 2,
+      "semanticCompleteCount": 0,
+      "sourceGatedCount": 4,
+      "unresolvedSubtypeCount": 0,
+      "unresolvedPrintedDefinitionCount": 2,
+      "sourceGapCount": 70,
+      "runtimeCandidateCount": 0,
+      "productionReadyCount": 0,
+      "allSourceSidesBound": true
+    },
+    {
+      "family": "Thing from the stars",
+      "physicalCardCount": 3,
+      "cards": {
+        "battle": [
+          "tts-path:/ObjectStates/48/ContainedObjects/8/ContainedObjects/0/ContainedObjects/2"
+        ],
+        "threat": [],
+        "ability": [
+          "tts-path:/ObjectStates/48/ContainedObjects/8/ContainedObjects/0/ContainedObjects/0"
+        ],
+        "boss_identity": [
+          "tts-path:/ObjectStates/48/ContainedObjects/8/ContainedObjects/0/ContainedObjects/1"
+        ],
+        "phase": [],
+        "summon": [],
+        "room_rule": [],
+        "token_rule": [],
+        "reference": [],
+        "other_source_bound": [],
+        "unresolved": []
+      },
+      "subtypePhysicalCounts": {
+        "BATTLE": 1,
+        "THREAT": 0,
+        "ABILITY": 1,
+        "BOSS_IDENTITY": 1,
+        "PHASE": 0,
+        "SUMMON": 0,
+        "ROOM_RULE": 0,
+        "TOKEN_RULE": 0,
+        "REFERENCE": 0,
+        "OTHER_SOURCE_BOUND": 0,
+        "UNRESOLVED": 0
+      },
+      "abilitySidePhysicalIds": [
+        "tts-path:/ObjectStates/48/ContainedObjects/8/ContainedObjects/0/ContainedObjects/0"
+      ],
+      "bossSubjectPhysicalIds": [
+        "tts-path:/ObjectStates/48/ContainedObjects/8/ContainedObjects/0/ContainedObjects/1",
+        "tts-path:/ObjectStates/48/ContainedObjects/8/ContainedObjects/0/ContainedObjects/2"
+      ],
+      "attachedMechanismPhysicalIds": [],
+      "formAndStatePhysicalIds": [],
+      "subtypeClassifiedCount": 3,
+      "literalCompleteCount": 2,
+      "semanticCompleteCount": 0,
+      "sourceGatedCount": 3,
+      "unresolvedSubtypeCount": 0,
+      "unresolvedPrintedDefinitionCount": 1,
+      "sourceGapCount": 52,
+      "runtimeCandidateCount": 0,
+      "productionReadyCount": 0,
+      "allSourceSidesBound": true
+    },
+    {
+      "family": "Viscount",
+      "physicalCardCount": 18,
+      "cards": {
+        "battle": [
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/4/ContainedObjects/0",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/4/ContainedObjects/1",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/4/ContainedObjects/2",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/4/ContainedObjects/3",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/5/ContainedObjects/0",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/5/ContainedObjects/1",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/5/ContainedObjects/2",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/5/ContainedObjects/3",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/6/ContainedObjects/0",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/6/ContainedObjects/1",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/6/ContainedObjects/2",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/6/ContainedObjects/3"
+        ],
+        "threat": [
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2"
+        ],
+        "ability": [],
+        "boss_identity": [
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/0",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/1",
+          "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/2"
+        ],
+        "phase": [],
+        "summon": [],
+        "room_rule": [],
+        "token_rule": [],
+        "reference": [],
+        "other_source_bound": [],
+        "unresolved": []
+      },
+      "subtypePhysicalCounts": {
+        "BATTLE": 12,
+        "THREAT": 3,
+        "ABILITY": 0,
+        "BOSS_IDENTITY": 3,
+        "PHASE": 0,
+        "SUMMON": 0,
+        "ROOM_RULE": 0,
+        "TOKEN_RULE": 0,
+        "REFERENCE": 0,
+        "OTHER_SOURCE_BOUND": 0,
+        "UNRESOLVED": 0
+      },
+      "abilitySidePhysicalIds": [
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/1",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2"
+      ],
+      "bossSubjectPhysicalIds": [
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/0",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/1",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3/ContainedObjects/2",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/4/ContainedObjects/3",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/5/ContainedObjects/3",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/6/ContainedObjects/3"
+      ],
+      "attachedMechanismPhysicalIds": [
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/4/ContainedObjects/0",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/4/ContainedObjects/1",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/4/ContainedObjects/2",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/5/ContainedObjects/0",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/5/ContainedObjects/1",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/5/ContainedObjects/2",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/6/ContainedObjects/0",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/6/ContainedObjects/1",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/6/ContainedObjects/2"
+      ],
+      "formAndStatePhysicalIds": [
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/4/ContainedObjects/0",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/4/ContainedObjects/1",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/4/ContainedObjects/2",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/5/ContainedObjects/0",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/5/ContainedObjects/1",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/5/ContainedObjects/2",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/6/ContainedObjects/0",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/6/ContainedObjects/1",
+        "tts-path:/ObjectStates/51/ContainedObjects/6/ContainedObjects/0/ContainedObjects/6/ContainedObjects/2"
+      ],
+      "subtypeClassifiedCount": 18,
+      "literalCompleteCount": 3,
+      "semanticCompleteCount": 0,
+      "sourceGatedCount": 18,
+      "unresolvedSubtypeCount": 0,
+      "unresolvedPrintedDefinitionCount": 15,
+      "sourceGapCount": 318,
+      "runtimeCandidateCount": 0,
+      "productionReadyCount": 0,
+      "allSourceSidesBound": true
+    }
+  ]
+}
