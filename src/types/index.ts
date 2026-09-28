@@ -257,6 +257,8 @@ export interface DungeonState {
 
 /** 战斗单位（英雄或怪物）。所有字段均可序列化以支持 localStorage 存档。 */
 export interface BattleUnit {
+  /** Definition-bound board-game Dodge for the Boss foundation. */
+  bossCombatDodge?: number;
   id: string;
   name: string;
   side: BattleSide;
@@ -450,6 +452,8 @@ export interface CommunityGuardianRoomState {
 }
 
 export interface BattleState {
+  /** Serializable, contract-bound ordinary Boss foundation; absent on legacy battles. */
+  bossEncounter?: import('./boss-runtime').BossEncounterState;
   /** Source-backed Guardian rooms do not use the ordinary round timeout. */
   roundLimitPolicy?: 'not-counted';
   statusEffectEvents?: Array<{
@@ -772,6 +776,10 @@ export interface HeroLevelProfile {
 
 /** 战役状态（存档根对象）。 */
 export interface CampaignState {
+  /** Completed contract-bound encounters preserve rule version and replay provenance. */
+  bossEncounterHistory?: import('./boss-runtime').BossEncounterState[];
+  /** Pre-flip encounter state survives ordinary Battle settlement; Room entry bridge resumes it later. */
+  bossEncounterCheckpoint?: import('./boss-runtime').BossEncounterState | null;
   saveVersion: number;
   /** C1B content selection is persisted. Missing legacy values migrate fail-closed. */
   runtimeContentProfile?: RuntimeContentProfile;

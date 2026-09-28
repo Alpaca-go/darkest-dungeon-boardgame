@@ -39,6 +39,7 @@ export function threatScopeForPhase(phase: GamePhase): ThreatScope | null {
 
 /** Threat 是否仍在生效（§6.3：已抽取 + 未因进入 Boss Room 停止 + 战役未结束）。 */
 export function isThreatActive(campaign: CampaignState): boolean {
+  if (campaign.battle?.bossEncounter?.side === 'ABILITY') return false;
   const rt = campaign.activeThreatRuntime;
   if (!rt || !rt.active) return false;
   if (campaign.campaignProgress.activeThreatId !== rt.threatId) return false;

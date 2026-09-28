@@ -1,0 +1,393 @@
+{
+  "phase": "11A.4-C1C29",
+  "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1",
+  "ruleSourcePolicyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "cases": [
+    {
+      "kind": "hero",
+      "fixtureAuthority": "SYNTHETIC_EXTERNAL_COMBAT_DEPENDENCIES",
+      "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1",
+      "initialStateSha256": "613365b02b0351095f91632491beaf1b4afd0d2722eb5ba60627f9f5c6ee1eff",
+      "pendingStateSha256": "68f22d3270db8b6f99ec64a3d0f966acf6546bf27204210ddc6aa1d3e44a3d82",
+      "finalStateSha256": "db73e5bbfd3a4888652ec0307c1cb162f2dcdde95bdec89dc4054d96e1eaed7e",
+      "reloadStateSha256": "db73e5bbfd3a4888652ec0307c1cb162f2dcdde95bdec89dc4054d96e1eaed7e",
+      "replayStateSha256": "db73e5bbfd3a4888652ec0307c1cb162f2dcdde95bdec89dc4054d96e1eaed7e",
+      "inputs": [
+        {
+          "type": "PREPARATION_DAY",
+          "rolls": {
+            "hero-1": 1,
+            "hero-2": 1,
+            "hero-3": 1,
+            "hero-4": 1
+          }
+        },
+        {
+          "type": "CHOICE",
+          "choiceId": "c1c29-fixture:event:3:choice",
+          "selectedId": "hero-4"
+        }
+      ],
+      "choices": [
+        {
+          "eventId": "c1c29-fixture:event:4",
+          "eventType": "CHOICE_COMMITTED",
+          "sourceCardId": 42005,
+          "authority": "PROJECT_RULING",
+          "rulingId": "NECRO_LOWEST_ROLL_TIE_PLAYER_CHOICE",
+          "actor": null,
+          "targets": [
+            "hero-4"
+          ],
+          "result": {
+            "choice": {
+              "choiceId": "c1c29-fixture:event:3:choice",
+              "choiceType": "CHOICE_TARGET_HERO",
+              "sourceEffectId": "c1c29-fixture:event:2",
+              "candidateIds": [
+                "hero-1",
+                "hero-2",
+                "hero-3",
+                "hero-4"
+              ],
+              "createdAtEventId": "c1c29-fixture:event:3",
+              "selectedId": "hero-4",
+              "status": "COMMITTED",
+              "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1",
+              "continuation": {
+                "kind": "graveyard"
+              }
+            }
+          },
+          "parentEventId": "c1c29-fixture:event:3",
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        }
+      ],
+      "saveReload": "PASS",
+      "replay": "PASS"
+    },
+    {
+      "kind": "area",
+      "fixtureAuthority": "SYNTHETIC_EXTERNAL_COMBAT_DEPENDENCIES",
+      "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1",
+      "initialStateSha256": "20f0c153a58f3d77c32dca7de1973098506f116ef8ac0f2a0bba1d0863f0bdda",
+      "pendingStateSha256": "5ea9bb78f3cc45a0d4a08da5f62f30e3ecb7a99a1b635f0957d0a1d057078157",
+      "finalStateSha256": "ed2b65550f94602ada88ce8c6748dff90e3a1c0249b3a2bea100d3a518ad0dfd",
+      "reloadStateSha256": "ed2b65550f94602ada88ce8c6748dff90e3a1c0249b3a2bea100d3a518ad0dfd",
+      "replayStateSha256": "ed2b65550f94602ada88ce8c6748dff90e3a1c0249b3a2bea100d3a518ad0dfd",
+      "inputs": [
+        {
+          "type": "SKILL",
+          "skillRoll": 1,
+          "attackRoll": 2
+        },
+        {
+          "type": "CHOICE",
+          "choiceId": "c1c29-fixture:event:5:choice",
+          "selectedId": "upper-centre"
+        }
+      ],
+      "choices": [
+        {
+          "eventId": "c1c29-fixture:event:6",
+          "eventType": "CHOICE_COMMITTED",
+          "sourceCardId": 46037,
+          "authority": "PROJECT_RULING",
+          "rulingId": "NECRO_CROWDED_AREA_TIE_PLAYER_CHOICE",
+          "actor": "c1c29-fixture:boss",
+          "targets": [
+            "upper-centre"
+          ],
+          "result": {
+            "choice": {
+              "choiceId": "c1c29-fixture:event:5:choice",
+              "choiceType": "CHOICE_TARGET_AREA",
+              "sourceEffectId": "c1c29-fixture:event:4",
+              "candidateIds": [
+                "bottom",
+                "upper-centre"
+              ],
+              "createdAtEventId": "c1c29-fixture:event:5",
+              "selectedId": "upper-centre",
+              "status": "COMMITTED",
+              "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1",
+              "continuation": {
+                "kind": "skill",
+                "skillNumber": 1,
+                "attackRoll": 2,
+                "parentEventId": "c1c29-fixture:event:4"
+              }
+            }
+          },
+          "parentEventId": "c1c29-fixture:event:5",
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        }
+      ],
+      "saveReload": "PASS",
+      "replay": "PASS"
+    },
+    {
+      "kind": "death",
+      "fixtureAuthority": "SYNTHETIC_EXTERNAL_COMBAT_DEPENDENCIES",
+      "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1",
+      "initialStateSha256": "c4bd5477b64eb60ef2223e4732b4b90b7913fffa813359a746177ec8f50f1a45",
+      "pendingStateSha256": "2198586d7f5c373b43ffa22f81a26677207bfd903f5b746dc7e486908bba8304",
+      "finalStateSha256": "d44111ed46942f126268a8772870c44cdbed21caa4cdf6634a4a1c0931ea7336",
+      "reloadStateSha256": "d44111ed46942f126268a8772870c44cdbed21caa4cdf6634a4a1c0931ea7336",
+      "replayStateSha256": "d44111ed46942f126268a8772870c44cdbed21caa4cdf6634a4a1c0931ea7336",
+      "inputs": [
+        {
+          "type": "MONSTER_DAMAGE",
+          "amounts": {
+            "a": 40,
+            "z": 40
+          }
+        },
+        {
+          "type": "CHOICE",
+          "choiceId": "c1c29-fixture:event:6:choice",
+          "selectedId": "z"
+        }
+      ],
+      "choices": [
+        {
+          "eventId": "c1c29-fixture:event:7",
+          "eventType": "CHOICE_COMMITTED",
+          "sourceCardId": 42005,
+          "authority": "PROJECT_RULING",
+          "rulingId": "NECRO_SIMULTANEOUS_FIRST_DEATH_PLAYER_CHOICE",
+          "actor": null,
+          "targets": [
+            "z"
+          ],
+          "result": {
+            "choice": {
+              "choiceId": "c1c29-fixture:event:6:choice",
+              "choiceType": "CHOICE_REANIMATION_DEATH",
+              "sourceEffectId": "c1c29-fixture:event:3",
+              "candidateIds": [
+                "a",
+                "z"
+              ],
+              "createdAtEventId": "c1c29-fixture:event:6",
+              "selectedId": "z",
+              "status": "COMMITTED",
+              "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1",
+              "continuation": {
+                "kind": "reanimate",
+                "deaths": [
+                  {
+                    "instanceId": "a",
+                    "definition": {
+                      "definitionId": "bone-rabble",
+                      "sourceCardId": 0,
+                      "life": 12,
+                      "speed": 1,
+                      "dataAuthority": "TEST_FIXTURE",
+                      "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1",
+                      "large": false,
+                      "occupiedSlots": 1,
+                      "tags": [
+                        "Unholy"
+                      ],
+                      "skillIds": []
+                    },
+                    "areaId": "top",
+                    "correspondingAreaId": "top",
+                    "unit": {
+                      "id": "a",
+                      "sourceId": "bone-rabble",
+                      "name": "a",
+                      "side": "monster",
+                      "hp": 0,
+                      "maxHp": 40,
+                      "speed": 2,
+                      "stress": 0,
+                      "position": 1,
+                      "stance": "aggressive",
+                      "isAlive": false,
+                      "stunned": 0,
+                      "bleed": 0,
+                      "blight": 0,
+                      "marked": false,
+                      "buffs": [],
+                      "debuffs": [],
+                      "actionPoints": 0,
+                      "atDeathsDoor": false,
+                      "deathblowRollCount": 0,
+                      "resolveTestedThisQuest": false,
+                      "resolveState": "normal",
+                      "virtueId": null,
+                      "afflictionId": null,
+                      "mentalEffectResolvedTurnId": null,
+                      "bossCombatDodge": 0
+                    },
+                    "tokenId": "bone-rabble:1"
+                  },
+                  {
+                    "instanceId": "z",
+                    "definition": {
+                      "definitionId": "bone-rabble",
+                      "sourceCardId": 0,
+                      "life": 12,
+                      "speed": 1,
+                      "dataAuthority": "TEST_FIXTURE",
+                      "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1",
+                      "large": false,
+                      "occupiedSlots": 1,
+                      "tags": [
+                        "Unholy"
+                      ],
+                      "skillIds": []
+                    },
+                    "areaId": "top",
+                    "correspondingAreaId": "top",
+                    "unit": {
+                      "id": "z",
+                      "sourceId": "bone-rabble",
+                      "name": "z",
+                      "side": "monster",
+                      "hp": 0,
+                      "maxHp": 40,
+                      "speed": 2,
+                      "stress": 0,
+                      "position": 2,
+                      "stance": "defensive",
+                      "isAlive": false,
+                      "stunned": 0,
+                      "bleed": 0,
+                      "blight": 0,
+                      "marked": false,
+                      "buffs": [],
+                      "debuffs": [],
+                      "actionPoints": 0,
+                      "atDeathsDoor": false,
+                      "deathblowRollCount": 0,
+                      "resolveTestedThisQuest": false,
+                      "resolveState": "normal",
+                      "virtueId": null,
+                      "afflictionId": null,
+                      "mentalEffectResolvedTurnId": null,
+                      "bossCombatDodge": 0
+                    },
+                    "tokenId": "bone-rabble:2"
+                  }
+                ],
+                "parentEventId": "c1c29-fixture:event:3"
+              }
+            }
+          },
+          "parentEventId": "c1c29-fixture:event:6",
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        }
+      ],
+      "saveReload": "PASS",
+      "replay": "PASS"
+    },
+    {
+      "kind": "placement",
+      "fixtureAuthority": "SYNTHETIC_EXTERNAL_COMBAT_DEPENDENCIES",
+      "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1",
+      "initialStateSha256": "b8e7935538bcce128c1a34514425a44aecfa0caab0e6e0051768bb4d1032d0ce",
+      "pendingStateSha256": "4d74cf55edb218942de0dfec8f03a0cf1cfc550e3129ab5bae194794faf9a54a",
+      "finalStateSha256": "47f22c9bf6d4650838b996762b6c662f235176c657cc1942dad7752badeb7466",
+      "reloadStateSha256": "47f22c9bf6d4650838b996762b6c662f235176c657cc1942dad7752badeb7466",
+      "replayStateSha256": "47f22c9bf6d4650838b996762b6c662f235176c657cc1942dad7752badeb7466",
+      "inputs": [
+        {
+          "type": "SKILL",
+          "skillRoll": 5,
+          "attackRoll": 2
+        },
+        {
+          "type": "CHOICE",
+          "choiceId": "c1c29-fixture:event:10:choice",
+          "selectedId": "hero-2"
+        },
+        {
+          "type": "CHOICE",
+          "choiceId": "c1c29-fixture:event:12:choice",
+          "selectedId": "upper-centre"
+        }
+      ],
+      "choices": [
+        {
+          "eventId": "c1c29-fixture:event:11",
+          "eventType": "CHOICE_COMMITTED",
+          "sourceCardId": 46037,
+          "authority": "PROJECT_RULING",
+          "rulingId": "NECRO_ROOM_CAPACITY_DISPLACEMENT_OR_SUPPRESS",
+          "actor": "c1c29-fixture:boss",
+          "targets": [
+            "hero-2"
+          ],
+          "result": {
+            "choice": {
+              "choiceId": "c1c29-fixture:event:10:choice",
+              "choiceType": "CHOICE_DISPLACEMENT_CHARACTER",
+              "sourceEffectId": "c1c29-fixture:event:4",
+              "candidateIds": [
+                "hero-1",
+                "hero-2"
+              ],
+              "createdAtEventId": "c1c29-fixture:event:10",
+              "selectedId": "hero-2",
+              "status": "COMMITTED",
+              "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1",
+              "continuation": {
+                "kind": "spawn",
+                "definitionId": "bone-rabble",
+                "areaId": "centre",
+                "parentEventId": "c1c29-fixture:event:4"
+              }
+            }
+          },
+          "parentEventId": "c1c29-fixture:event:10",
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:13",
+          "eventType": "CHOICE_COMMITTED",
+          "sourceCardId": 46037,
+          "authority": "PROJECT_RULING",
+          "rulingId": "NECRO_ROOM_CAPACITY_DISPLACEMENT_OR_SUPPRESS",
+          "actor": "c1c29-fixture:boss",
+          "targets": [
+            "upper-centre"
+          ],
+          "result": {
+            "choice": {
+              "choiceId": "c1c29-fixture:event:12:choice",
+              "choiceType": "CHOICE_PLACEMENT_DESTINATION",
+              "sourceEffectId": "c1c29-fixture:event:4",
+              "candidateIds": [
+                "bottom",
+                "left",
+                "right",
+                "upper-centre"
+              ],
+              "createdAtEventId": "c1c29-fixture:event:12",
+              "selectedId": "upper-centre",
+              "status": "COMMITTED",
+              "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1",
+              "continuation": {
+                "kind": "spawn",
+                "definitionId": "bone-rabble",
+                "areaId": "centre",
+                "parentEventId": "c1c29-fixture:event:4",
+                "displacedId": "hero-2"
+              }
+            }
+          },
+          "parentEventId": "c1c29-fixture:event:12",
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        }
+      ],
+      "saveReload": "PASS",
+      "replay": "PASS"
+    }
+  ],
+  "seed": 2929,
+  "playerInputPolicy": "Explicit scripted choices persisted in event/input log; no runtime fallback",
+  "fixtureAuthority": "SYNTHETIC_EXTERNAL_COMBAT_DEPENDENCIES"
+}

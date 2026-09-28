@@ -1,0 +1,32 @@
+{
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "effectiveFrom": "C1C29",
+  "allowed": [
+    "official locked rulebook",
+    "printed official cards/components",
+    "existing hash-bound source extracts"
+  ],
+  "disallowed": [
+    "Designer FAQ",
+    "BGG",
+    "forums",
+    "Reddit",
+    "Wiki",
+    "YouTube",
+    "gameplay videos",
+    "Steam Workshop scripts",
+    "TTS Lua",
+    "third-party summaries",
+    "player interpretations",
+    "videogame rules"
+  ],
+  "missingRulePolicy": {
+    "authority": "PROJECT_RULING",
+    "canonical": false,
+    "canonicalStatus": "SOURCE_UNRESOLVED",
+    "explicitVersionRequired": true
+  },
+  "externalAuthorityAcquisition": false,
+  "sourceClosureContinuation": "ONLY_FOR_OMITTED_LOCKED_OFFICIAL_RULEBOOK_PAGES",
+  "printImageTransportIsNotRuleAuthority": true
+}

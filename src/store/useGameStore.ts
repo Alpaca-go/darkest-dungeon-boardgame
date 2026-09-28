@@ -1,4 +1,6 @@
 import { create } from 'zustand';
+import { applyBossFoundationInput } from '../game-engine/commands/boss-foundation';
+import { advanceTurn } from '../game-engine/battle';
 import type { CampaignState, ProvisionPool } from '../types';
 import {
   createNewCampaign,
@@ -132,6 +134,7 @@ interface UiState {
   battleSkillId: string | null;
 }
 interface GameStore {
+  commitBossChoice(choiceId: string, selectedId: string): void;
   campaign: CampaignState | null;
   ui: UiState;
 
@@ -293,6 +296,15 @@ export const useGameStore = create<GameStore>((set, get) => {
   };
 
   return {
+    commitBossChoice: (choiceId, selectedId) => {
+      const c = get().campaign;
+      if (!c?.battle?.bossEncounter?.pendingChoice) return;
+      const changed = applyBossFoundationInput(c, { type: 'CHOICE', choiceId, selectedId });
+      let battle = changed.battle!;
+      if (!battle.bossEncounter?.pendingChoice && battle.activeActorId && battle.monsters.some(u => u.id === battle.activeActorId)) battle = advanceTurn(battle);
+      const next = { ...changed, battle };
+      commit(battle.bossEncounter?.pendingChoice ? next : settleBattleState(next).campaign);
+    },
     campaign: initialCampaign,
     ui: EMPTY_UI,
 

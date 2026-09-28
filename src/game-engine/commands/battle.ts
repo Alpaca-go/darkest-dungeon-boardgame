@@ -8,6 +8,7 @@
 // Store 与 Simulation Driver 必须调用同一份；headless-shim 中的
 // settleBattleHeadless / shimResolveVictory / shimRetreat 必须删除。
 import type { CampaignState } from '../../types';
+import { commitBossFoundationVictory, settleBossThreatBattle } from './boss-foundation';
 import { resolveVictory as engineResolveVictory } from '../battle';
 import { retreatFromBattle } from '../dungeon';
 import { resolveTurnStartMentalEffect, processBattleStressEvents } from '../mental-effects';
@@ -65,6 +66,7 @@ export function settleBattleState(
   campaign: CampaignState,
   options?: { mentalGuardLimit?: number },
 ): BattleSettlementResult {
+  if (campaign.battle?.bossEncounter?.pendingChoice) return { ok: true, campaign, error: null, mentalLoops: 0 };
   if (!campaign.battle || campaign.battle.status !== 'active') {
     return { ok: false, campaign, error: 'battle-not-active', mentalLoops: 0 };
   }
@@ -127,6 +129,11 @@ export function settleBattleState(
  *   没有 active 守卫），production 删掉这一步既不丢 effects，也不重复工作。
  */
 export function commitBattleVictory(campaign: CampaignState): BattleSettlementResult {
+  if (campaign.battle?.bossEncounter) {
+    if (campaign.battle.status !== 'victory') return { ok: false, campaign, error: 'battle-not-victory', mentalLoops: 0 };
+    if (campaign.battle.bossEncounter.side === 'THREAT') return { ok: true, campaign: settleBossThreatBattle(campaign), error: null, mentalLoops: 0 };
+    return { ok: true, campaign: commitBossFoundationVictory(campaign), error: null, mentalLoops: 0 };
+  }
   if (isCommunityGuardianBattle(campaign)) {
     const result = commitCommunityGuardianVictory(campaign);
     return { ok: result.ok, campaign: result.campaign, error: result.ok ? null : 'battle-not-victory', mentalLoops: 0 };

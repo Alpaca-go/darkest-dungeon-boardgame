@@ -1,0 +1,1108 @@
+{
+  "phase": "11A.4-C1C29",
+  "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1",
+  "ruleSourcePolicyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "proofScope": "REAL_PRODUCTION_EXECUTOR_WITH_EXPLICIT_SYNTHETIC_DEPENDENCY_FIXTURES",
+  "proof": [
+    {
+      "level": 1,
+      "cardSet": [
+        42000,
+        42003,
+        46037
+      ],
+      "life": 77,
+      "sourceDefinitionSha256": "d4240d45a66616c183ba18bdd685a7a7387d2e9e85639266670e630b90aeff72",
+      "initialStateSha256": "27f10d6d08ec63085cf74e7933af7c2a73b96bb5893cd86a0799461b47d48b70",
+      "finalStateSha256": "a35d69793da64fae98d6f26241523fe999e7b2a6c13c7d87100770e3128ad48f",
+      "events": [
+        {
+          "eventId": "c1c29-fixture:event:1",
+          "eventType": "ENCOUNTER_SETUP",
+          "sourceCardId": 42003,
+          "authority": "OFFICIAL_SOURCE",
+          "actor": null,
+          "targets": [],
+          "result": {
+            "roomNumber": 10,
+            "level": 1,
+            "cardIds": [
+              42000,
+              42003,
+              46037
+            ]
+          },
+          "parentEventId": null,
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:2",
+          "eventType": "THREAT_FLIPPED_TO_ABILITY",
+          "sourceCardId": 46037,
+          "authority": "OFFICIAL_SOURCE",
+          "actor": null,
+          "targets": [],
+          "result": {
+            "threatStopped": true,
+            "abilityActive": true
+          },
+          "parentEventId": null,
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:3",
+          "eventType": "BOSS_BATTLE_STARTED",
+          "sourceCardId": 46037,
+          "authority": "OFFICIAL_SOURCE",
+          "actor": "c1c29-fixture:boss",
+          "targets": [],
+          "result": {
+            "life": 77,
+            "areaId": "top",
+            "stance": "aggressive"
+          },
+          "parentEventId": null,
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:4",
+          "eventType": "SKILL_ROLLED",
+          "sourceCardId": 46037,
+          "authority": "OFFICIAL_SOURCE",
+          "actor": "c1c29-fixture:boss",
+          "targets": [],
+          "result": {
+            "skillRoll": 1,
+            "attackRoll": 2,
+            "skillNumber": 1
+          },
+          "parentEventId": null,
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:5",
+          "eventType": "CHOICE_CREATED",
+          "sourceCardId": 46037,
+          "authority": "PROJECT_RULING",
+          "rulingId": "NECRO_CROWDED_AREA_TIE_PLAYER_CHOICE",
+          "actor": "c1c29-fixture:boss",
+          "targets": [
+            "bottom",
+            "upper-centre"
+          ],
+          "result": {
+            "type": "CHOICE_TARGET_AREA",
+            "candidateIds": [
+              "bottom",
+              "upper-centre"
+            ]
+          },
+          "parentEventId": "c1c29-fixture:event:4",
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:6",
+          "eventType": "CHOICE_COMMITTED",
+          "sourceCardId": 46037,
+          "authority": "PROJECT_RULING",
+          "rulingId": "NECRO_CROWDED_AREA_TIE_PLAYER_CHOICE",
+          "actor": "c1c29-fixture:boss",
+          "targets": [
+            "upper-centre"
+          ],
+          "result": {
+            "choice": {
+              "choiceId": "c1c29-fixture:event:5:choice",
+              "choiceType": "CHOICE_TARGET_AREA",
+              "sourceEffectId": "c1c29-fixture:event:4",
+              "candidateIds": [
+                "bottom",
+                "upper-centre"
+              ],
+              "createdAtEventId": "c1c29-fixture:event:5",
+              "selectedId": "upper-centre",
+              "status": "COMMITTED",
+              "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1",
+              "continuation": {
+                "kind": "skill",
+                "skillNumber": 1,
+                "attackRoll": 2,
+                "parentEventId": "c1c29-fixture:event:4"
+              }
+            }
+          },
+          "parentEventId": "c1c29-fixture:event:5",
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:7",
+          "eventType": "ATTACK_ROLLED",
+          "sourceCardId": 46037,
+          "authority": "OFFICIAL_SOURCE",
+          "actor": "c1c29-fixture:boss",
+          "targets": [
+            "hero-1",
+            "hero-2"
+          ],
+          "result": {
+            "attackRoll": 2
+          },
+          "parentEventId": "c1c29-fixture:event:4",
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:8",
+          "eventType": "SELF_PUSH",
+          "sourceCardId": 46037,
+          "authority": "OFFICIAL_SOURCE",
+          "actor": "c1c29-fixture:boss",
+          "targets": [
+            "c1c29-fixture:boss"
+          ],
+          "result": {
+            "count": 1,
+            "stance": "defensive",
+            "from": "top"
+          },
+          "parentEventId": "c1c29-fixture:event:4",
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:9",
+          "eventType": "TARGET_EFFECT",
+          "sourceCardId": 46037,
+          "authority": "OFFICIAL_SOURCE",
+          "actor": "c1c29-fixture:boss",
+          "targets": [
+            "hero-1"
+          ],
+          "result": {
+            "attackRoll": 2,
+            "dodge": 0,
+            "hit": true,
+            "critical": false,
+            "damage": 6,
+            "stress": 0,
+            "deathblowRoll": null
+          },
+          "parentEventId": "c1c29-fixture:event:4",
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:10",
+          "eventType": "TARGET_EFFECT",
+          "sourceCardId": 46037,
+          "authority": "OFFICIAL_SOURCE",
+          "actor": "c1c29-fixture:boss",
+          "targets": [
+            "hero-2"
+          ],
+          "result": {
+            "attackRoll": 2,
+            "dodge": 0,
+            "hit": true,
+            "critical": false,
+            "damage": 6,
+            "stress": 0,
+            "deathblowRoll": null
+          },
+          "parentEventId": "c1c29-fixture:event:4",
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:11",
+          "eventType": "SKILL_RESOLVED",
+          "sourceCardId": 46037,
+          "authority": "PROJECT_RULING",
+          "rulingId": "NECRO_SUMMON_COUNT_LEVEL_1_ONCE_PER_ACTIVATION",
+          "actor": "c1c29-fixture:boss",
+          "targets": [
+            "hero-1",
+            "hero-2"
+          ],
+          "result": {
+            "areaId": "upper-centre",
+            "skillNumber": 1,
+            "attackRoll": 2,
+            "successfulHits": [
+              "hero-1",
+              "hero-2"
+            ],
+            "summonInstructions": 1
+          },
+          "parentEventId": "c1c29-fixture:event:4",
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:12",
+          "eventType": "SUPPLY_TOKEN_COMMITTED",
+          "sourceCardId": 46037,
+          "authority": "PROJECT_RULING",
+          "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+          "actor": "c1c29-fixture:boss",
+          "targets": [
+            "c1c29-fixture:spawn:12"
+          ],
+          "result": {
+            "tokenId": "bone-rabble:1",
+            "instanceId": "c1c29-fixture:spawn:12"
+          },
+          "parentEventId": "c1c29-fixture:event:4",
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:13",
+          "eventType": "SUMMON_SPAWNED",
+          "sourceCardId": 46037,
+          "authority": "OFFICIAL_SOURCE",
+          "actor": "c1c29-fixture:boss",
+          "targets": [
+            "c1c29-fixture:spawn:12"
+          ],
+          "result": {
+            "instanceId": "c1c29-fixture:spawn:12",
+            "definitionId": "bone-rabble",
+            "tokenId": "bone-rabble:1",
+            "areaId": "upper-centre",
+            "position": 1,
+            "combatDefinitionAuthority": "TEST_FIXTURE",
+            "combatSourceCardId": 0
+          },
+          "parentEventId": "c1c29-fixture:event:4",
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        }
+      ],
+      "summonLedger": {
+        "bone-rabble": {
+          "total": 3,
+          "available": 2,
+          "active": 1,
+          "spentThisBattle": 0,
+          "permanentlyRemoved": 0,
+          "tokens": [
+            {
+              "tokenId": "bone-rabble:1",
+              "state": "active",
+              "instanceId": "c1c29-fixture:spawn:12"
+            },
+            {
+              "tokenId": "bone-rabble:2",
+              "state": "available",
+              "instanceId": null
+            },
+            {
+              "tokenId": "bone-rabble:3",
+              "state": "available",
+              "instanceId": null
+            }
+          ]
+        },
+        "bone-soldier": {
+          "total": 3,
+          "available": 3,
+          "active": 0,
+          "spentThisBattle": 0,
+          "permanentlyRemoved": 0,
+          "tokens": [
+            {
+              "tokenId": "bone-soldier:1",
+              "state": "available",
+              "instanceId": null
+            },
+            {
+              "tokenId": "bone-soldier:2",
+              "state": "available",
+              "instanceId": null
+            },
+            {
+              "tokenId": "bone-soldier:3",
+              "state": "available",
+              "instanceId": null
+            }
+          ]
+        },
+        "bone-spearman": {
+          "total": 3,
+          "available": 3,
+          "active": 0,
+          "spentThisBattle": 0,
+          "permanentlyRemoved": 0,
+          "tokens": [
+            {
+              "tokenId": "bone-spearman:1",
+              "state": "available",
+              "instanceId": null
+            },
+            {
+              "tokenId": "bone-spearman:2",
+              "state": "available",
+              "instanceId": null
+            },
+            {
+              "tokenId": "bone-spearman:3",
+              "state": "available",
+              "instanceId": null
+            }
+          ]
+        },
+        "bone-captain": {
+          "total": 1,
+          "available": 1,
+          "active": 0,
+          "spentThisBattle": 0,
+          "permanentlyRemoved": 0,
+          "tokens": [
+            {
+              "tokenId": "bone-captain:1",
+              "state": "available",
+              "instanceId": null
+            }
+          ]
+        }
+      },
+      "initiative": [
+        "hero-4",
+        "c1c29-fixture:spawn:12",
+        "hero-3",
+        "hero-2",
+        "c1c29-fixture:boss",
+        "hero-1"
+      ],
+      "syntheticDependencyFixture": true
+    },
+    {
+      "level": 2,
+      "cardSet": [
+        42001,
+        42004,
+        46038
+      ],
+      "life": 103,
+      "sourceDefinitionSha256": "b08f5bc5e55eda161e7e7b4ed5840b118fffbcceba29b9344ccbbc750f0079a1",
+      "initialStateSha256": "5f0c856ef290af626132cdb6381c24a91c6915be1192dd61aa71824ce4a6a338",
+      "finalStateSha256": "782fae5546a29cef97cdb82fd96012214cf2aa016452b51bbed1cf114acaecca",
+      "events": [
+        {
+          "eventId": "c1c29-fixture:event:1",
+          "eventType": "ENCOUNTER_SETUP",
+          "sourceCardId": 42004,
+          "authority": "OFFICIAL_SOURCE",
+          "actor": null,
+          "targets": [],
+          "result": {
+            "roomNumber": 10,
+            "level": 2,
+            "cardIds": [
+              42001,
+              42004,
+              46038
+            ]
+          },
+          "parentEventId": null,
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:2",
+          "eventType": "THREAT_FLIPPED_TO_ABILITY",
+          "sourceCardId": 46038,
+          "authority": "OFFICIAL_SOURCE",
+          "actor": null,
+          "targets": [],
+          "result": {
+            "threatStopped": true,
+            "abilityActive": true
+          },
+          "parentEventId": null,
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:3",
+          "eventType": "BOSS_BATTLE_STARTED",
+          "sourceCardId": 46038,
+          "authority": "OFFICIAL_SOURCE",
+          "actor": "c1c29-fixture:boss",
+          "targets": [],
+          "result": {
+            "life": 103,
+            "areaId": "top",
+            "stance": "aggressive"
+          },
+          "parentEventId": null,
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:4",
+          "eventType": "SKILL_ROLLED",
+          "sourceCardId": 46038,
+          "authority": "OFFICIAL_SOURCE",
+          "actor": "c1c29-fixture:boss",
+          "targets": [],
+          "result": {
+            "skillRoll": 1,
+            "attackRoll": 2,
+            "skillNumber": 1
+          },
+          "parentEventId": null,
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:5",
+          "eventType": "CHOICE_CREATED",
+          "sourceCardId": 46038,
+          "authority": "PROJECT_RULING",
+          "rulingId": "NECRO_CROWDED_AREA_TIE_PLAYER_CHOICE",
+          "actor": "c1c29-fixture:boss",
+          "targets": [
+            "bottom",
+            "upper-centre"
+          ],
+          "result": {
+            "type": "CHOICE_TARGET_AREA",
+            "candidateIds": [
+              "bottom",
+              "upper-centre"
+            ]
+          },
+          "parentEventId": "c1c29-fixture:event:4",
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:6",
+          "eventType": "CHOICE_COMMITTED",
+          "sourceCardId": 46038,
+          "authority": "PROJECT_RULING",
+          "rulingId": "NECRO_CROWDED_AREA_TIE_PLAYER_CHOICE",
+          "actor": "c1c29-fixture:boss",
+          "targets": [
+            "upper-centre"
+          ],
+          "result": {
+            "choice": {
+              "choiceId": "c1c29-fixture:event:5:choice",
+              "choiceType": "CHOICE_TARGET_AREA",
+              "sourceEffectId": "c1c29-fixture:event:4",
+              "candidateIds": [
+                "bottom",
+                "upper-centre"
+              ],
+              "createdAtEventId": "c1c29-fixture:event:5",
+              "selectedId": "upper-centre",
+              "status": "COMMITTED",
+              "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1",
+              "continuation": {
+                "kind": "skill",
+                "skillNumber": 1,
+                "attackRoll": 2,
+                "parentEventId": "c1c29-fixture:event:4"
+              }
+            }
+          },
+          "parentEventId": "c1c29-fixture:event:5",
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:7",
+          "eventType": "ATTACK_ROLLED",
+          "sourceCardId": 46038,
+          "authority": "OFFICIAL_SOURCE",
+          "actor": "c1c29-fixture:boss",
+          "targets": [
+            "hero-1",
+            "hero-2"
+          ],
+          "result": {
+            "attackRoll": 2
+          },
+          "parentEventId": "c1c29-fixture:event:4",
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:8",
+          "eventType": "SELF_PUSH",
+          "sourceCardId": 46038,
+          "authority": "OFFICIAL_SOURCE",
+          "actor": "c1c29-fixture:boss",
+          "targets": [
+            "c1c29-fixture:boss"
+          ],
+          "result": {
+            "count": 1,
+            "stance": "defensive",
+            "from": "top"
+          },
+          "parentEventId": "c1c29-fixture:event:4",
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:9",
+          "eventType": "TARGET_EFFECT",
+          "sourceCardId": 46038,
+          "authority": "OFFICIAL_SOURCE",
+          "actor": "c1c29-fixture:boss",
+          "targets": [
+            "hero-1"
+          ],
+          "result": {
+            "attackRoll": 2,
+            "dodge": 0,
+            "hit": true,
+            "critical": false,
+            "damage": 8,
+            "stress": 0,
+            "deathblowRoll": null
+          },
+          "parentEventId": "c1c29-fixture:event:4",
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:10",
+          "eventType": "TARGET_EFFECT",
+          "sourceCardId": 46038,
+          "authority": "OFFICIAL_SOURCE",
+          "actor": "c1c29-fixture:boss",
+          "targets": [
+            "hero-2"
+          ],
+          "result": {
+            "attackRoll": 2,
+            "dodge": 0,
+            "hit": true,
+            "critical": false,
+            "damage": 8,
+            "stress": 0,
+            "deathblowRoll": null
+          },
+          "parentEventId": "c1c29-fixture:event:4",
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:11",
+          "eventType": "SKILL_RESOLVED",
+          "sourceCardId": 46038,
+          "authority": "PROJECT_RULING",
+          "rulingId": "NECRO_SUMMON_COUNT_LEVEL_2_ONCE_PER_ACTIVATION",
+          "actor": "c1c29-fixture:boss",
+          "targets": [
+            "hero-1",
+            "hero-2"
+          ],
+          "result": {
+            "areaId": "upper-centre",
+            "skillNumber": 1,
+            "attackRoll": 2,
+            "successfulHits": [
+              "hero-1",
+              "hero-2"
+            ],
+            "summonInstructions": 1
+          },
+          "parentEventId": "c1c29-fixture:event:4",
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:12",
+          "eventType": "SUPPLY_TOKEN_COMMITTED",
+          "sourceCardId": 46038,
+          "authority": "PROJECT_RULING",
+          "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+          "actor": "c1c29-fixture:boss",
+          "targets": [
+            "c1c29-fixture:spawn:12"
+          ],
+          "result": {
+            "tokenId": "bone-soldier:1",
+            "instanceId": "c1c29-fixture:spawn:12"
+          },
+          "parentEventId": "c1c29-fixture:event:4",
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:13",
+          "eventType": "SUMMON_SPAWNED",
+          "sourceCardId": 46038,
+          "authority": "OFFICIAL_SOURCE",
+          "actor": "c1c29-fixture:boss",
+          "targets": [
+            "c1c29-fixture:spawn:12"
+          ],
+          "result": {
+            "instanceId": "c1c29-fixture:spawn:12",
+            "definitionId": "bone-soldier",
+            "tokenId": "bone-soldier:1",
+            "areaId": "upper-centre",
+            "position": 1,
+            "combatDefinitionAuthority": "TEST_FIXTURE",
+            "combatSourceCardId": 0
+          },
+          "parentEventId": "c1c29-fixture:event:4",
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        }
+      ],
+      "summonLedger": {
+        "bone-rabble": {
+          "total": 3,
+          "available": 3,
+          "active": 0,
+          "spentThisBattle": 0,
+          "permanentlyRemoved": 0,
+          "tokens": [
+            {
+              "tokenId": "bone-rabble:1",
+              "state": "available",
+              "instanceId": null
+            },
+            {
+              "tokenId": "bone-rabble:2",
+              "state": "available",
+              "instanceId": null
+            },
+            {
+              "tokenId": "bone-rabble:3",
+              "state": "available",
+              "instanceId": null
+            }
+          ]
+        },
+        "bone-soldier": {
+          "total": 3,
+          "available": 2,
+          "active": 1,
+          "spentThisBattle": 0,
+          "permanentlyRemoved": 0,
+          "tokens": [
+            {
+              "tokenId": "bone-soldier:1",
+              "state": "active",
+              "instanceId": "c1c29-fixture:spawn:12"
+            },
+            {
+              "tokenId": "bone-soldier:2",
+              "state": "available",
+              "instanceId": null
+            },
+            {
+              "tokenId": "bone-soldier:3",
+              "state": "available",
+              "instanceId": null
+            }
+          ]
+        },
+        "bone-spearman": {
+          "total": 3,
+          "available": 3,
+          "active": 0,
+          "spentThisBattle": 0,
+          "permanentlyRemoved": 0,
+          "tokens": [
+            {
+              "tokenId": "bone-spearman:1",
+              "state": "available",
+              "instanceId": null
+            },
+            {
+              "tokenId": "bone-spearman:2",
+              "state": "available",
+              "instanceId": null
+            },
+            {
+              "tokenId": "bone-spearman:3",
+              "state": "available",
+              "instanceId": null
+            }
+          ]
+        },
+        "bone-captain": {
+          "total": 1,
+          "available": 1,
+          "active": 0,
+          "spentThisBattle": 0,
+          "permanentlyRemoved": 0,
+          "tokens": [
+            {
+              "tokenId": "bone-captain:1",
+              "state": "available",
+              "instanceId": null
+            }
+          ]
+        }
+      },
+      "initiative": [
+        "hero-4",
+        "c1c29-fixture:spawn:12",
+        "hero-3",
+        "hero-2",
+        "c1c29-fixture:boss",
+        "hero-1"
+      ],
+      "syntheticDependencyFixture": true
+    },
+    {
+      "level": 3,
+      "cardSet": [
+        42002,
+        42005,
+        46039
+      ],
+      "life": 144,
+      "sourceDefinitionSha256": "2111da476c096d83473f61df205feea9909c5353022591f4be57141b97f85eab",
+      "initialStateSha256": "ceba222bf94258f8800de25d0f16b3f0a72b6281c024957a3fd9f739beaf4e2a",
+      "finalStateSha256": "0a7df537612d246617453ccefb98765c67e60e0849d1bd4b4def23230c665fe1",
+      "events": [
+        {
+          "eventId": "c1c29-fixture:event:1",
+          "eventType": "ENCOUNTER_SETUP",
+          "sourceCardId": 42005,
+          "authority": "OFFICIAL_SOURCE",
+          "actor": null,
+          "targets": [],
+          "result": {
+            "roomNumber": 10,
+            "level": 3,
+            "cardIds": [
+              42002,
+              42005,
+              46039
+            ]
+          },
+          "parentEventId": null,
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:2",
+          "eventType": "THREAT_FLIPPED_TO_ABILITY",
+          "sourceCardId": 46039,
+          "authority": "OFFICIAL_SOURCE",
+          "actor": null,
+          "targets": [],
+          "result": {
+            "threatStopped": true,
+            "abilityActive": true
+          },
+          "parentEventId": null,
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:3",
+          "eventType": "BOSS_BATTLE_STARTED",
+          "sourceCardId": 46039,
+          "authority": "OFFICIAL_SOURCE",
+          "actor": "c1c29-fixture:boss",
+          "targets": [],
+          "result": {
+            "life": 144,
+            "areaId": "top",
+            "stance": "aggressive"
+          },
+          "parentEventId": null,
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:4",
+          "eventType": "SKILL_ROLLED",
+          "sourceCardId": 46039,
+          "authority": "OFFICIAL_SOURCE",
+          "actor": "c1c29-fixture:boss",
+          "targets": [],
+          "result": {
+            "skillRoll": 1,
+            "attackRoll": 2,
+            "skillNumber": 1
+          },
+          "parentEventId": null,
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:5",
+          "eventType": "CHOICE_CREATED",
+          "sourceCardId": 46039,
+          "authority": "PROJECT_RULING",
+          "rulingId": "NECRO_CROWDED_AREA_TIE_PLAYER_CHOICE",
+          "actor": "c1c29-fixture:boss",
+          "targets": [
+            "bottom",
+            "upper-centre"
+          ],
+          "result": {
+            "type": "CHOICE_TARGET_AREA",
+            "candidateIds": [
+              "bottom",
+              "upper-centre"
+            ]
+          },
+          "parentEventId": "c1c29-fixture:event:4",
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:6",
+          "eventType": "CHOICE_COMMITTED",
+          "sourceCardId": 46039,
+          "authority": "PROJECT_RULING",
+          "rulingId": "NECRO_CROWDED_AREA_TIE_PLAYER_CHOICE",
+          "actor": "c1c29-fixture:boss",
+          "targets": [
+            "upper-centre"
+          ],
+          "result": {
+            "choice": {
+              "choiceId": "c1c29-fixture:event:5:choice",
+              "choiceType": "CHOICE_TARGET_AREA",
+              "sourceEffectId": "c1c29-fixture:event:4",
+              "candidateIds": [
+                "bottom",
+                "upper-centre"
+              ],
+              "createdAtEventId": "c1c29-fixture:event:5",
+              "selectedId": "upper-centre",
+              "status": "COMMITTED",
+              "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1",
+              "continuation": {
+                "kind": "skill",
+                "skillNumber": 1,
+                "attackRoll": 2,
+                "parentEventId": "c1c29-fixture:event:4"
+              }
+            }
+          },
+          "parentEventId": "c1c29-fixture:event:5",
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:7",
+          "eventType": "ATTACK_ROLLED",
+          "sourceCardId": 46039,
+          "authority": "OFFICIAL_SOURCE",
+          "actor": "c1c29-fixture:boss",
+          "targets": [
+            "hero-1",
+            "hero-2"
+          ],
+          "result": {
+            "attackRoll": 2
+          },
+          "parentEventId": "c1c29-fixture:event:4",
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:8",
+          "eventType": "SELF_PUSH",
+          "sourceCardId": 46039,
+          "authority": "OFFICIAL_SOURCE",
+          "actor": "c1c29-fixture:boss",
+          "targets": [
+            "c1c29-fixture:boss"
+          ],
+          "result": {
+            "count": 1,
+            "stance": "defensive",
+            "from": "top"
+          },
+          "parentEventId": "c1c29-fixture:event:4",
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:9",
+          "eventType": "TARGET_EFFECT",
+          "sourceCardId": 46039,
+          "authority": "OFFICIAL_SOURCE",
+          "actor": "c1c29-fixture:boss",
+          "targets": [
+            "hero-1"
+          ],
+          "result": {
+            "attackRoll": 2,
+            "dodge": 0,
+            "hit": true,
+            "critical": false,
+            "damage": 10,
+            "stress": 0,
+            "deathblowRoll": null
+          },
+          "parentEventId": "c1c29-fixture:event:4",
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:10",
+          "eventType": "TARGET_EFFECT",
+          "sourceCardId": 46039,
+          "authority": "OFFICIAL_SOURCE",
+          "actor": "c1c29-fixture:boss",
+          "targets": [
+            "hero-2"
+          ],
+          "result": {
+            "attackRoll": 2,
+            "dodge": 0,
+            "hit": true,
+            "critical": false,
+            "damage": 10,
+            "stress": 0,
+            "deathblowRoll": null
+          },
+          "parentEventId": "c1c29-fixture:event:4",
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:11",
+          "eventType": "SKILL_RESOLVED",
+          "sourceCardId": 46039,
+          "authority": "PROJECT_RULING",
+          "rulingId": "NECRO_SUMMON_COUNT_LEVEL_3_ONCE_PER_ACTIVATION",
+          "actor": "c1c29-fixture:boss",
+          "targets": [
+            "hero-1",
+            "hero-2"
+          ],
+          "result": {
+            "areaId": "upper-centre",
+            "skillNumber": 1,
+            "attackRoll": 2,
+            "successfulHits": [
+              "hero-1",
+              "hero-2"
+            ],
+            "summonInstructions": 1
+          },
+          "parentEventId": "c1c29-fixture:event:4",
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:12",
+          "eventType": "SUPPLY_TOKEN_COMMITTED",
+          "sourceCardId": 46039,
+          "authority": "PROJECT_RULING",
+          "rulingId": "NECRO_FINITE_BATTLE_SUPPLY_NO_DEATH_REFUND",
+          "actor": "c1c29-fixture:boss",
+          "targets": [
+            "c1c29-fixture:spawn:12"
+          ],
+          "result": {
+            "tokenId": "bone-spearman:1",
+            "instanceId": "c1c29-fixture:spawn:12"
+          },
+          "parentEventId": "c1c29-fixture:event:4",
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "eventId": "c1c29-fixture:event:13",
+          "eventType": "SUMMON_SPAWNED",
+          "sourceCardId": 46039,
+          "authority": "OFFICIAL_SOURCE",
+          "actor": "c1c29-fixture:boss",
+          "targets": [
+            "c1c29-fixture:spawn:12"
+          ],
+          "result": {
+            "instanceId": "c1c29-fixture:spawn:12",
+            "definitionId": "bone-spearman",
+            "tokenId": "bone-spearman:1",
+            "areaId": "upper-centre",
+            "position": 1,
+            "combatDefinitionAuthority": "TEST_FIXTURE",
+            "combatSourceCardId": 0
+          },
+          "parentEventId": "c1c29-fixture:event:4",
+          "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        }
+      ],
+      "summonLedger": {
+        "bone-rabble": {
+          "total": 3,
+          "available": 3,
+          "active": 0,
+          "spentThisBattle": 0,
+          "permanentlyRemoved": 0,
+          "tokens": [
+            {
+              "tokenId": "bone-rabble:1",
+              "state": "available",
+              "instanceId": null
+            },
+            {
+              "tokenId": "bone-rabble:2",
+              "state": "available",
+              "instanceId": null
+            },
+            {
+              "tokenId": "bone-rabble:3",
+              "state": "available",
+              "instanceId": null
+            }
+          ]
+        },
+        "bone-soldier": {
+          "total": 3,
+          "available": 3,
+          "active": 0,
+          "spentThisBattle": 0,
+          "permanentlyRemoved": 0,
+          "tokens": [
+            {
+              "tokenId": "bone-soldier:1",
+              "state": "available",
+              "instanceId": null
+            },
+            {
+              "tokenId": "bone-soldier:2",
+              "state": "available",
+              "instanceId": null
+            },
+            {
+              "tokenId": "bone-soldier:3",
+              "state": "available",
+              "instanceId": null
+            }
+          ]
+        },
+        "bone-spearman": {
+          "total": 3,
+          "available": 2,
+          "active": 1,
+          "spentThisBattle": 0,
+          "permanentlyRemoved": 0,
+          "tokens": [
+            {
+              "tokenId": "bone-spearman:1",
+              "state": "active",
+              "instanceId": "c1c29-fixture:spawn:12"
+            },
+            {
+              "tokenId": "bone-spearman:2",
+              "state": "available",
+              "instanceId": null
+            },
+            {
+              "tokenId": "bone-spearman:3",
+              "state": "available",
+              "instanceId": null
+            }
+          ]
+        },
+        "bone-captain": {
+          "total": 1,
+          "available": 1,
+          "active": 0,
+          "spentThisBattle": 0,
+          "permanentlyRemoved": 0,
+          "tokens": [
+            {
+              "tokenId": "bone-captain:1",
+              "state": "available",
+              "instanceId": null
+            }
+          ]
+        }
+      },
+      "initiative": [
+        "hero-4",
+        "c1c29-fixture:spawn:12",
+        "hero-3",
+        "hero-2",
+        "c1c29-fixture:boss",
+        "hero-1"
+      ],
+      "syntheticDependencyFixture": true
+    }
+  ],
+  "normalProductionGameplayAccepted": false,
+  "syntheticMonsterLifeIsOfficial": false
+}

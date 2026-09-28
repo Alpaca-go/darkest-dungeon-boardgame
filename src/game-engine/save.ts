@@ -21,6 +21,8 @@ import type {
 } from '../types';
 import type { QuestRuntimeToken } from '../types/content-runtime';
 import { nowIso } from './random';
+import { assertBossEncounter } from './bosses/foundation';
+import { resolveBossDefinition } from './bosses/definitions';
 import { createInitialStagecoach } from './stagecoach';
 import { getQuirkById, normalizeQuirkId } from '../data/quirks';
 import { getDiseaseById } from '../data/diseases';
@@ -181,6 +183,14 @@ export function validateSaveFile(data: unknown): string | null {
   if (!s.gamePhase || !VALID_PHASES.includes(s.gamePhase)) return `非法 gamePhase：${String(s.gamePhase)}`;
 
   const c = s.campaign as Partial<CampaignState> | undefined;
+  if (c?.bossEncounterCheckpoint || c?.bossEncounterHistory) {
+    try {
+      for (const e of [...(c.bossEncounterHistory ?? []), ...(c.bossEncounterCheckpoint ? [c.bossEncounterCheckpoint] : [])]) {
+        if (JSON.stringify(e.definition) !== JSON.stringify(resolveBossDefinition(e.bossFamily, e.bossLevel, e.ruleSetVersion))) return 'Boss history/checkpoint differs from its pinned contract';
+        if (e.events.some(event => event.ruleSetVersion !== e.ruleSetVersion)) return 'Boss history/checkpoint event version mismatch';
+      }
+    } catch (error) { return `Boss history/checkpoint invalid: ${error instanceof Error ? error.message : String(error)}`; }
+  }
   if (!c || typeof c !== 'object') return '缺少 campaign 字段';
   if (!Array.isArray(c.heroes)) return 'campaign.heroes 缺失或不是数组';
   if (typeof c.gold !== 'number' || Number.isNaN(c.gold)) return 'campaign.gold 非法';
@@ -418,6 +428,14 @@ export function validateSaveFile(data: unknown): string | null {
   if (c.gamePhase === 'battle') {
     const b = c.battle as BattleState | null | undefined;
     if (!b || !Array.isArray(b.heroes) || !Array.isArray(b.monsters)) return 'battle 阶段缺少合法的 BattleState';
+    if (b.bossEncounter) {
+      try {
+        const e = b.bossEncounter;
+        const definition = resolveBossDefinition(e.bossFamily, e.bossLevel, e.ruleSetVersion);
+        if (JSON.stringify(e.definition) !== JSON.stringify(definition)) return 'Boss executable definition differs from its pinned contract';
+        assertBossEncounter(b);
+      } catch (error) { return `Boss runtime save invalid: ${error instanceof Error ? error.message : String(error)}`; }
+    }
     for (const u of b.heroes) {
       if (!c.heroes.some((h) => h.instanceId === u.sourceId)) {
         return `战斗单位 ${u.id} 引用了不存在的英雄`;

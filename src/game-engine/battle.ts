@@ -8,6 +8,7 @@ import type {
   SkillDefinition,
   PendingMonsterAttack,
 } from '../types';
+import { applyBossRuntimeInput, checkBossRuntimeEnd, withBossEncounterSources } from './bosses/foundation';
 import { createId, d10, nowIso } from './random';
 import { returnCommunityPhysicalMonstersFromBattle } from './campaign/act-four/community-physical-monster-deck';
 import { createSeededRng } from './campaign/act-four/rng';
@@ -332,6 +333,11 @@ export function initBattle(campaign: CampaignState, roomId: string): CampaignSta
 
 /** 推进到下一个行动者；自动跳过死亡/Stun 单位，并在怪物回合自动执行其动作。 */
 export function advanceTurn(state: BattleState): BattleState {
+  if (state.bossEncounter?.pendingChoice) return state;
+  if (state.bossEncounter) return withBossEncounterSources(state, s => advanceTurnInternal(s));
+  return advanceTurnInternal(state);
+}
+function advanceTurnInternal(state: BattleState): BattleState {
   if (state.status !== 'active') return state;
   // Phase 7：上一个行动单位的临时加成在回合结束时清零
   let s: BattleState = clearTurnBonuses({ ...state });
@@ -388,6 +394,13 @@ export function advanceTurn(state: BattleState): BattleState {
     if (!activated || !activated.isAlive) continue; // 持续伤害致死，跳过
 
     if (activated.side === 'monster') {
+      if (s.bossEncounter?.bossState.actorId === id) {
+        s = runMonsterTurn(s, id);
+        if (s.bossEncounter?.pendingChoice) return s;
+        s = checkEnd(s);
+        if (s.status !== 'active') return s;
+        continue;
+      }
       if (s.stagedIncomingAttacks) {
         s = prepareMonsterAttackResolution(s, id);
         if (s.pendingMonsterAttack) return s;
@@ -487,6 +500,7 @@ function applyStunSkip(state: BattleState, id: string): BattleState {
 
 /** 英雄是否可朝某方向移动（用于 UI 禁用判定）。 */
 export function canHeroMove(state: BattleState, unitId: string, dir: -1 | 1): boolean {
+  if (state.bossEncounter?.pendingChoice) return false;
   const actor = findUnit(state, unitId);
   if (!actor || actor.side !== 'hero' || actor.id !== state.activeActorId) return false;
   if (state.currentActionPoints <= 0) return false;
@@ -497,6 +511,7 @@ export function canHeroMove(state: BattleState, unitId: string, dir: -1 | 1): bo
 
 /** 英雄移动一个位置（消耗 1 行动点）。 */
 export function heroMove(state: BattleState, unitId: string, dir: -1 | 1): BattleState {
+  if (state.bossEncounter?.pendingChoice) return state;
   const actor = findUnit(state, unitId);
   if (!actor || !canHeroMove(state, unitId, dir)) return state;
   const np = actor.position + dir;
@@ -512,6 +527,7 @@ export function heroMove(state: BattleState, unitId: string, dir: -1 | 1): Battl
 
 /** 当前行动英雄对某技能可合法选中的目标 id。 */
 export function legalTargetsForActor(state: BattleState, skillId: string): string[] {
+  if (state.bossEncounter?.pendingChoice) return [];
   const actor = getActiveUnit(state);
   if (!actor) return [];
   const raw = getSkillById(skillId);
@@ -547,6 +563,7 @@ export function prepareHeroAttackResolution(
   trinketBonuses: TrinketActionBonuses = NO_TRINKET_BONUSES,
   preRolledAttack?: number,
 ): PreparedHeroAttackResolution | null {
+  if (state.bossEncounter?.pendingChoice) return null;
   const actor = findUnit(state, unitId);
   const raw = getSkillById(skillId);
   if (!actor || !raw) return null;
@@ -569,6 +586,7 @@ export function heroSkillActionError(
   skillId: string,
   targetId: string
 ): string | null {
+  if (state.bossEncounter?.pendingChoice) return '请先完成 Boss 待决选择。';
   const actor = findUnit(state, unitId);
   if (!actor || actor.side !== 'hero' || actor.id !== state.activeActorId) return '当前不是该英雄的回合。';
   if (state.currentActionPoints <= 0) return '行动点不足。';
@@ -599,6 +617,7 @@ export function heroUseSkill(
   finalDamageOverride?: number | null,
 ): BattleState {
   const actor = findUnit(state, unitId);
+  if (state.bossEncounter?.pendingChoice) return state;
   if (!actor || actor.side !== 'hero' || actor.id !== state.activeActorId) return state;
   if (state.currentActionPoints <= 0) return state;
   const raw = getSkillById(skillId);
@@ -777,6 +796,7 @@ export function commitHeroAttackResolution(
 
 /** 英雄主动结束回合。 */
 export function endHeroTurn(state: BattleState, unitId: string): BattleState {
+  if (state.bossEncounter?.pendingChoice) return state;
   const actor = findUnit(state, unitId);
   if (!actor || actor.side !== 'hero' || actor.id !== state.activeActorId) return state;
   return advanceTurn(state);
@@ -928,6 +948,11 @@ export function commitPendingMonsterAttackResolution(state: BattleState): Battle
 
 /** 执行单个怪物的自动回合。 */
 export function runMonsterTurn(state: BattleState, monsterId: string): BattleState {
+  if (state.bossEncounter?.pendingChoice) return state;
+  if (state.bossEncounter?.bossState.actorId === monsterId) {
+    if (state.bossEncounter.bossState.lastActionRound === state.round) return state;
+    return applyBossRuntimeInput(state, { type: 'SKILL' });
+  }
   const monster = findUnit(state, monsterId);
   if (!monster || !monster.isAlive || monster.side !== 'monster') return state;
   if (
@@ -1053,6 +1078,13 @@ export function runMonsterTurn(state: BattleState, monsterId: string): BattleSta
  * 仅当所有英雄 isAlive=false（永久死亡）才判负。
  */
 export function checkEnd(state: BattleState): BattleState {
+  if (state.bossEncounter) {
+    state = checkBossRuntimeEnd(state);
+    if (state.status !== 'active' || state.bossEncounter?.pendingChoice) return state;
+    const deadIds = state.monsters.filter(u => !u.isAlive).map(u => u.id);
+    if (deadIds.length) state = applyBossRuntimeInput(state, { type: 'DEATHS', instanceIds: deadIds });
+    if (state.bossEncounter?.pendingChoice) return state;
+  }
   if (state.status !== 'active') return state;
   const monstersAlive = state.monsters.some((m) => m.isAlive);
   const heroesAlive = state.heroes.some((h) => h.isAlive);

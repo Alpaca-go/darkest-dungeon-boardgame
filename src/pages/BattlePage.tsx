@@ -9,6 +9,7 @@ import InitiativeBar from '../components/battle/InitiativeBar';
 import Battlefield from '../components/battle/Battlefield';
 import SkillBar from '../components/battle/SkillBar';
 import BattleLog from '../components/battle/BattleLog';
+import BossChoicePanel from '../components/battle/BossChoicePanel';
 import ActorDetails from '../components/battle/ActorDetails';
 import TrinketSlots from '../components/trinkets/TrinketSlots';
 
@@ -20,6 +21,7 @@ import TrinketSlots from '../components/trinkets/TrinketSlots';
 export default function BattlePage() {
   const navigate = useNavigate();
   const campaign = useGameStore((s) => s.campaign);
+  const commitBossChoice = useGameStore((s) => s.commitBossChoice);
   const battleSkillId = useGameStore((s) => s.ui.battleSkillId);
   const selectBattleSkill = useGameStore((s) => s.selectBattleSkill);
   const battleHeroMove = useGameStore((s) => s.battleHeroMove);
@@ -80,10 +82,13 @@ export default function BattlePage() {
 
   return (
     <div className="p-6 max-w-5xl mx-auto space-y-4">
+      {battle.bossEncounter?.pendingChoice && <BossChoicePanel key={battle.bossEncounter.pendingChoice.choiceId}
+        choice={battle.bossEncounter.pendingChoice} onConfirm={commitBossChoice}
+        candidateLabel={id => [...battle.heroes, ...battle.monsters].find(u => u.id === id)?.name ?? id} />}
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold text-dd-text">战斗</h1>
         {battle.status === 'active' && (
-          <span className="text-xs text-dd-muted">击败所有敌人即可获胜；第 {battle.maxRounds} 轮结束仍未清除则被迫撤退。</span>
+          <span className="text-xs text-dd-muted">{battle.roundLimitPolicy === 'not-counted' ? '击败 Boss 即可获胜。' : `击败所有敌人即可获胜；第 ${battle.maxRounds} 轮结束仍未清除则被迫撤退。`}</span>
         )}
       </div>
 
