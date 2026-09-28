@@ -1,0 +1,1993 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-23",
+  "baselineHead": "a6f29f9543f017c454724bbeade445c94d0c63f2",
+  "inputSha256": {
+    "docs/data/complete-edition/c1c22-hamlet-event-source-intake-register.json": "9c0ff53d19f893c8e97d19de6fc2d9650b323b11308293e37ff716c6811311d0",
+    "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json": "11204d1e54cdf71077d54ceeb9d575f89fc61d027324505e9ccf6a1a1545b103",
+    "docs/data/complete-edition/c1c23-rulebook-evidence.json": "b83839abc608f999e1cb443a007d25092fac5d2f4d41bd2c080b3fb33e36e357",
+    "scripts/audit/c1c23-printed-source.ts": "ce13fa071a091813c54774170ad48bcde85139ba7d3b19084049a1120af9fb5c"
+  },
+  "cards": [
+    {
+      "definitionId": "ce-hamlet-event-43514",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/0",
+      "printedName": "Guild Training",
+      "activation": {
+        "trigger": "HAMLET_EVENT_RESOLVE",
+        "source": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "The Hamlet; Draw a Hamlet Event Card"
+        },
+        "excludesFirstQuest": {
+          "value": true,
+          "source": {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+            "page": 10,
+            "region": "Setting up the Game"
+          }
+        }
+      },
+      "preparationDays": {
+        "printed": 2,
+        "value": 2,
+        "source": {
+          "definitionId": "ce-hamlet-event-43514",
+          "field": "printedPreparationDays"
+        },
+        "legend": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 33,
+          "region": "Event card example caption"
+        }
+      },
+      "target": {
+        "effectTargets": [
+          "each choosing Hero’s selected Skill"
+        ],
+        "selectionIsNotCurrentHero": true,
+        "scope": "As explicitly named in each printed effect; Hero references are to the current party, not Stagecoach roster."
+      },
+      "choices": [
+        {
+          "choiceRequired": true,
+          "choiceType": "OPTIONAL_SKILL_SELECTION_PER_HERO",
+          "actor": "each Hero",
+          "options": [
+            "decline",
+            "upgrade own chosen Skill"
+          ],
+          "selectionTiming": "IMMEDIATE",
+          "cancelability": {
+            "status": "SOURCE_UNRESOLVED",
+            "category": "CHOICE_SCOPE_UNRESOLVED",
+            "reason": "Printed optionality permits declining before commitment; reversal after commitment is not specified."
+          },
+          "selectionCount": 1,
+          "eligibleTargets": "own upgradeable Skill; equipped-only restriction not printed",
+          "optional": true
+        }
+      ],
+      "costs": [
+        {
+          "type": "FREE_SKILL_UPGRADE",
+          "gold": 0,
+          "xp": 0,
+          "printedBasis": "for free"
+        }
+      ],
+      "effects": [
+        {
+          "unitId": "ce-hamlet-event-43514:effect:1",
+          "type": "UPGRADE_SKILL",
+          "target": "each choosing Hero’s selected Skill",
+          "timing": "IMMEDIATE",
+          "levels": 1,
+          "source": {
+            "definitionId": "ce-hamlet-event-43514",
+            "field": "rulesLiteral",
+            "literal": "Each Hero can immediately upgrade a Skill for free. Discard this event from the deck permanently."
+          }
+        }
+      ],
+      "effectOrder": {
+        "value": "Printed clause order; conditional branches and deferred triggers retained separately",
+        "source": {
+          "definitionId": "ce-hamlet-event-43514",
+          "field": "rulesLiteral"
+        }
+      },
+      "lifecycle": {
+        "destination": "PERMANENT_CAMPAIGN_REMOVAL",
+        "condition": "after event instructions (unconditional printed final sentence)"
+      },
+      "expiry": "Per effect timing/duration; card return does not cancel registered delayed obligations.",
+      "sourceReferences": [
+        {
+          "kind": "PRINTED_DEFINITION",
+          "definitionId": "ce-hamlet-event-43514"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "Draw a Hamlet Event Card"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 34,
+          "region": "The Guild; normal Skill upgrade is by one Level (Event costs remain separate)"
+        }
+      ]
+    },
+    {
+      "definitionId": "ce-hamlet-event-43513",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/1",
+      "printedName": "In Good Spirits",
+      "activation": {
+        "trigger": "HAMLET_EVENT_RESOLVE",
+        "source": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "The Hamlet; Draw a Hamlet Event Card"
+        },
+        "excludesFirstQuest": {
+          "value": true,
+          "source": {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+            "page": 10,
+            "region": "Setting up the Game"
+          }
+        }
+      },
+      "preparationDays": {
+        "printed": 3,
+        "value": 3,
+        "source": {
+          "definitionId": "ce-hamlet-event-43513",
+          "field": "printedPreparationDays"
+        },
+        "legend": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 33,
+          "region": "Event card example caption"
+        }
+      },
+      "target": {
+        "effectTargets": [
+          "each Hero",
+          "all Heroes tied for highest roll",
+          "all highest-roll Heroes"
+        ],
+        "selectionIsNotCurrentHero": true,
+        "scope": "As explicitly named in each printed effect; Hero references are to the current party, not Stagecoach roster."
+      },
+      "choices": [
+        {
+          "choiceRequired": false,
+          "choiceType": "NONE",
+          "options": []
+        }
+      ],
+      "costs": [],
+      "effects": [
+        {
+          "unitId": "ce-hamlet-event-43513:effect:1",
+          "type": "ROLL_D10_PER_HERO",
+          "target": "each Hero",
+          "timing": "HAMLET_EVENT_RESOLVE",
+          "source": {
+            "definitionId": "ce-hamlet-event-43513",
+            "field": "rulesLiteral",
+            "literal": "Each Hero rolls a [D10], the Hero or Heroes that roll the highest gain a Virtue and place(s) their (or their) stress marker on the red side."
+          }
+        },
+        {
+          "unitId": "ce-hamlet-event-43513:effect:2",
+          "type": "GAIN_VIRTUE",
+          "target": "all Heroes tied for highest roll",
+          "timing": "AFTER_ALL_EVENT_D10_ROLLS",
+          "countEach": 1,
+          "existingAfflictionOrVirtue": {
+            "status": "SOURCE_UNRESOLVED",
+            "category": "TARGET_SCOPE_UNRESOLVED",
+            "reason": "Interaction with existing Affliction/Virtue and Virtue deck availability is not stated on this card."
+          },
+          "source": {
+            "definitionId": "ce-hamlet-event-43513",
+            "field": "rulesLiteral",
+            "literal": "Each Hero rolls a [D10], the Hero or Heroes that roll the highest gain a Virtue and place(s) their (or their) stress marker on the red side."
+          }
+        },
+        {
+          "unitId": "ce-hamlet-event-43513:effect:3",
+          "type": "SET_STRESS_MARKER_SIDE",
+          "target": "all highest-roll Heroes",
+          "timing": "AFTER_GAIN_VIRTUE",
+          "side": "red",
+          "source": {
+            "definitionId": "ce-hamlet-event-43513",
+            "field": "rulesLiteral",
+            "literal": "Each Hero rolls a [D10], the Hero or Heroes that roll the highest gain a Virtue and place(s) their (or their) stress marker on the red side."
+          }
+        }
+      ],
+      "effectOrder": {
+        "value": "Printed clause order; conditional branches and deferred triggers retained separately",
+        "source": {
+          "definitionId": "ce-hamlet-event-43513",
+          "field": "rulesLiteral"
+        }
+      },
+      "lifecycle": {
+        "destination": "SHUFFLE_BACK_INTO_EVENT_DECK",
+        "timing": "after event instructions",
+        "source": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "Draw a Hamlet Event Card"
+        }
+      },
+      "expiry": "Per effect timing/duration; card return does not cancel registered delayed obligations.",
+      "sourceReferences": [
+        {
+          "kind": "PRINTED_DEFINITION",
+          "definitionId": "ce-hamlet-event-43513"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "Draw a Hamlet Event Card"
+        }
+      ]
+    },
+    {
+      "definitionId": "ce-hamlet-event-43512",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/2",
+      "printedName": "General Repairs",
+      "activation": {
+        "trigger": "HAMLET_EVENT_RESOLVE",
+        "source": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "The Hamlet; Draw a Hamlet Event Card"
+        },
+        "excludesFirstQuest": {
+          "value": true,
+          "source": {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+            "page": 10,
+            "region": "Setting up the Game"
+          }
+        }
+      },
+      "preparationDays": {
+        "printed": 4,
+        "value": 4,
+        "source": {
+          "definitionId": "ce-hamlet-event-43512",
+          "field": "printedPreparationDays"
+        },
+        "legend": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 33,
+          "region": "Event card example caption"
+        }
+      },
+      "target": {
+        "effectTargets": [
+          "hamlet location"
+        ],
+        "selectionIsNotCurrentHero": true,
+        "scope": "As explicitly named in each printed effect; Hero references are to the current party, not Stagecoach roster."
+      },
+      "choices": [
+        {
+          "choiceRequired": false,
+          "choiceType": "NONE",
+          "options": []
+        }
+      ],
+      "costs": [],
+      "effects": [
+        {
+          "unitId": "ce-hamlet-event-43512:effect:1",
+          "type": "ROLL_ADDITIONAL_BUILDING_BLOCK",
+          "target": "hamlet location",
+          "timing": "EACH_DAY_THIS_HAMLET",
+          "count": 1,
+          "die": "ten-sided (p33)",
+          "collision": "reroll occupied Caretaker location until free building (p33)",
+          "source": {
+            "definitionId": "ce-hamlet-event-43512",
+            "field": "rulesLiteral",
+            "literal": "In addition to the Caretaker, roll for another location to be blocked each day."
+          }
+        }
+      ],
+      "effectOrder": {
+        "value": "Printed clause order; conditional branches and deferred triggers retained separately",
+        "source": {
+          "definitionId": "ce-hamlet-event-43512",
+          "field": "rulesLiteral"
+        }
+      },
+      "lifecycle": {
+        "destination": "SHUFFLE_BACK_INTO_EVENT_DECK",
+        "timing": "after event instructions",
+        "source": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "Draw a Hamlet Event Card"
+        }
+      },
+      "expiry": "Per effect timing/duration; card return does not cancel registered delayed obligations.",
+      "sourceReferences": [
+        {
+          "kind": "PRINTED_DEFINITION",
+          "definitionId": "ce-hamlet-event-43512"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "Draw a Hamlet Event Card"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 33,
+          "region": "Building upgrades and Caretaker collision rule"
+        }
+      ]
+    },
+    {
+      "definitionId": "ce-hamlet-event-43511",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/3",
+      "printedName": "Caregivers Convention",
+      "activation": {
+        "trigger": "HAMLET_EVENT_RESOLVE",
+        "source": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "The Hamlet; Draw a Hamlet Event Card"
+        },
+        "excludesFirstQuest": {
+          "value": true,
+          "source": {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+            "page": 10,
+            "region": "Setting up the Game"
+          }
+        }
+      },
+      "preparationDays": {
+        "printed": 2,
+        "value": 2,
+        "source": {
+          "definitionId": "ce-hamlet-event-43511",
+          "field": "printedPreparationDays"
+        },
+        "legend": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 33,
+          "region": "Event card example caption"
+        }
+      },
+      "target": {
+        "effectTargets": [
+          "each choosing Hero’s selected Quirk"
+        ],
+        "selectionIsNotCurrentHero": true,
+        "scope": "As explicitly named in each printed effect; Hero references are to the current party, not Stagecoach roster."
+      },
+      "choices": [
+        {
+          "choiceRequired": true,
+          "choiceType": "OPTIONAL_QUIRK_SELECTION_PER_HERO",
+          "actor": "each Hero",
+          "options": [
+            "decline",
+            "remove own chosen Quirk"
+          ],
+          "selectionTiming": "HAMLET_EVENT_RESOLVE",
+          "cancelability": {
+            "status": "SOURCE_UNRESOLVED",
+            "category": "CHOICE_SCOPE_UNRESOLVED",
+            "reason": "Printed optionality permits declining before commitment; reversal after commitment is not specified."
+          },
+          "selectionCount": 1,
+          "eligibleTargets": "one Quirk on self; no printed positive/negative restriction",
+          "optional": true
+        }
+      ],
+      "costs": [
+        {
+          "type": "GOLD",
+          "amount": 0,
+          "scope": "Quirk removal"
+        }
+      ],
+      "effects": [
+        {
+          "unitId": "ce-hamlet-event-43511:effect:1",
+          "type": "REMOVE_QUIRK",
+          "target": "each choosing Hero’s selected Quirk",
+          "timing": "HAMLET_EVENT_RESOLVE",
+          "count": 1,
+          "source": {
+            "definitionId": "ce-hamlet-event-43511",
+            "field": "rulesLiteral",
+            "literal": "Each Hero can remove a Quirk for free."
+          }
+        }
+      ],
+      "effectOrder": {
+        "value": "Printed clause order; conditional branches and deferred triggers retained separately",
+        "source": {
+          "definitionId": "ce-hamlet-event-43511",
+          "field": "rulesLiteral"
+        }
+      },
+      "lifecycle": {
+        "destination": "SHUFFLE_BACK_INTO_EVENT_DECK",
+        "timing": "after event instructions",
+        "source": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "Draw a Hamlet Event Card"
+        }
+      },
+      "expiry": "Per effect timing/duration; card return does not cancel registered delayed obligations.",
+      "sourceReferences": [
+        {
+          "kind": "PRINTED_DEFINITION",
+          "definitionId": "ce-hamlet-event-43511"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "Draw a Hamlet Event Card"
+        }
+      ]
+    },
+    {
+      "definitionId": "ce-hamlet-event-43510",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/4",
+      "printedName": "Medical Breakthrough",
+      "activation": {
+        "trigger": "HAMLET_EVENT_RESOLVE",
+        "source": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "The Hamlet; Draw a Hamlet Event Card"
+        },
+        "excludesFirstQuest": {
+          "value": true,
+          "source": {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+            "page": 10,
+            "region": "Setting up the Game"
+          }
+        }
+      },
+      "preparationDays": {
+        "printed": 3,
+        "value": 3,
+        "source": {
+          "definitionId": "ce-hamlet-event-43510",
+          "field": "printedPreparationDays"
+        },
+        "legend": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 33,
+          "region": "Event card example caption"
+        }
+      },
+      "target": {
+        "effectTargets": [
+          "selected Hero (not current Hero)"
+        ],
+        "selectionIsNotCurrentHero": true,
+        "scope": "As explicitly named in each printed effect; Hero references are to the current party, not Stagecoach roster."
+      },
+      "choices": [
+        {
+          "choiceRequired": true,
+          "choiceType": "SELECT_HERO_AND_DISEASE",
+          "actor": "party",
+          "options": [
+            "remove one disease from chosen Hero"
+          ],
+          "selectionTiming": "HAMLET_EVENT_RESOLVE",
+          "cancelability": {
+            "status": "SOURCE_UNRESOLVED",
+            "category": "CHOICE_SCOPE_UNRESOLVED",
+            "reason": "No eligible diseased Hero / cancellation behavior is not specified by this mandatory sentence."
+          },
+          "selectionCount": 1,
+          "eligibleHeroes": "party Hero with a disease",
+          "optional": false
+        }
+      ],
+      "costs": [],
+      "effects": [
+        {
+          "unitId": "ce-hamlet-event-43510:effect:1",
+          "type": "REMOVE_DISEASE",
+          "target": "selected Hero (not current Hero)",
+          "timing": "HAMLET_EVENT_RESOLVE",
+          "count": 1,
+          "source": {
+            "definitionId": "ce-hamlet-event-43510",
+            "field": "rulesLiteral",
+            "literal": "Party removes a disease from a Hero."
+          }
+        }
+      ],
+      "effectOrder": {
+        "value": "Printed clause order; conditional branches and deferred triggers retained separately",
+        "source": {
+          "definitionId": "ce-hamlet-event-43510",
+          "field": "rulesLiteral"
+        }
+      },
+      "lifecycle": {
+        "destination": "SHUFFLE_BACK_INTO_EVENT_DECK",
+        "timing": "after event instructions",
+        "source": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "Draw a Hamlet Event Card"
+        }
+      },
+      "expiry": "Per effect timing/duration; card return does not cancel registered delayed obligations.",
+      "sourceReferences": [
+        {
+          "kind": "PRINTED_DEFINITION",
+          "definitionId": "ce-hamlet-event-43510"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "Draw a Hamlet Event Card"
+        }
+      ]
+    },
+    {
+      "definitionId": "ce-hamlet-event-43509",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/5",
+      "printedName": "The Feast",
+      "activation": {
+        "trigger": "HAMLET_EVENT_RESOLVE",
+        "source": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "The Hamlet; Draw a Hamlet Event Card"
+        },
+        "excludesFirstQuest": {
+          "value": true,
+          "source": {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+            "page": 10,
+            "region": "Setting up the Game"
+          }
+        }
+      },
+      "preparationDays": {
+        "printed": 1,
+        "value": 1,
+        "source": {
+          "definitionId": "ce-hamlet-event-43509",
+          "field": "printedPreparationDays"
+        },
+        "legend": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 33,
+          "region": "Event card example caption"
+        }
+      },
+      "target": {
+        "effectTargets": [
+          "choosing Hero",
+          "choosing Hero"
+        ],
+        "selectionIsNotCurrentHero": true,
+        "scope": "As explicitly named in each printed effect; Hero references are to the current party, not Stagecoach roster."
+      },
+      "choices": [
+        {
+          "choiceRequired": true,
+          "choiceType": "SELECT_ONE_OPTION_PER_HERO",
+          "actor": "each Hero",
+          "options": [
+            "decline",
+            "fully restore stress",
+            "fully restore health"
+          ],
+          "selectionTiming": "HAMLET_EVENT_RESOLVE",
+          "cancelability": {
+            "status": "SOURCE_UNRESOLVED",
+            "category": "CHOICE_SCOPE_UNRESOLVED",
+            "reason": "Printed optionality permits declining before commitment; reversal after commitment is not specified."
+          },
+          "selectionCount": 1,
+          "eligibleHeroes": "each party Hero acts for self",
+          "optional": true
+        }
+      ],
+      "costs": [],
+      "effects": [
+        {
+          "unitId": "ce-hamlet-event-43509:effect:1",
+          "type": "FULL_STRESS_RECOVERY",
+          "target": "choosing Hero",
+          "timing": "HAMLET_EVENT_RESOLVE",
+          "condition": "stress option chosen",
+          "source": {
+            "definitionId": "ce-hamlet-event-43509",
+            "field": "rulesLiteral",
+            "literal": "Each Hero can choose to fully restore either [STRESS] or [HEART]."
+          }
+        },
+        {
+          "unitId": "ce-hamlet-event-43509:effect:2",
+          "type": "FULL_HEALTH_RESTORE",
+          "target": "choosing Hero",
+          "timing": "HAMLET_EVENT_RESOLVE",
+          "condition": "health option chosen",
+          "source": {
+            "definitionId": "ce-hamlet-event-43509",
+            "field": "rulesLiteral",
+            "literal": "Each Hero can choose to fully restore either [STRESS] or [HEART]."
+          }
+        }
+      ],
+      "effectOrder": {
+        "value": "Printed clause order; conditional branches and deferred triggers retained separately",
+        "source": {
+          "definitionId": "ce-hamlet-event-43509",
+          "field": "rulesLiteral"
+        }
+      },
+      "lifecycle": {
+        "destination": "SHUFFLE_BACK_INTO_EVENT_DECK",
+        "timing": "after event instructions",
+        "source": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "Draw a Hamlet Event Card"
+        }
+      },
+      "expiry": "Per effect timing/duration; card return does not cancel registered delayed obligations.",
+      "sourceReferences": [
+        {
+          "kind": "PRINTED_DEFINITION",
+          "definitionId": "ce-hamlet-event-43509"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "Draw a Hamlet Event Card"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 21,
+          "region": "Stress recovery legend"
+        }
+      ]
+    },
+    {
+      "definitionId": "ce-hamlet-event-43508",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/6",
+      "printedName": "Gypsy Trail",
+      "activation": {
+        "trigger": "HAMLET_EVENT_RESOLVE",
+        "source": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "The Hamlet; Draw a Hamlet Event Card"
+        },
+        "excludesFirstQuest": {
+          "value": true,
+          "source": {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+            "page": 10,
+            "region": "Setting up the Game"
+          }
+        }
+      },
+      "preparationDays": {
+        "printed": 2,
+        "value": 2,
+        "source": {
+          "definitionId": "ce-hamlet-event-43508",
+          "field": "printedPreparationDays"
+        },
+        "legend": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 33,
+          "region": "Event card example caption"
+        }
+      },
+      "target": {
+        "effectTargets": [
+          "Hero selling a Trinket"
+        ],
+        "selectionIsNotCurrentHero": true,
+        "scope": "As explicitly named in each printed effect; Hero references are to the current party, not Stagecoach roster."
+      },
+      "choices": [
+        {
+          "choiceRequired": false,
+          "choiceType": "NONE",
+          "options": []
+        }
+      ],
+      "costs": [],
+      "effects": [
+        {
+          "unitId": "ce-hamlet-event-43508:effect:1",
+          "type": "MODIFY_TRINKET_SALE_GOLD",
+          "target": "Hero selling a Trinket",
+          "timing": "TRINKET_SALE",
+          "amount": 5,
+          "duration": {
+            "status": "SOURCE_UNRESOLVED",
+            "category": "TRIGGER_TIMING_UNRESOLVED",
+            "reason": "Card does not explicitly state duration; this-week scope must not be inferred solely from adjacent Events."
+          },
+          "source": {
+            "definitionId": "ce-hamlet-event-43508",
+            "field": "rulesLiteral",
+            "literal": "Heroes gain +5[GOLD] when selling Trinkets."
+          }
+        }
+      ],
+      "effectOrder": {
+        "value": "Printed clause order; conditional branches and deferred triggers retained separately",
+        "source": {
+          "definitionId": "ce-hamlet-event-43508",
+          "field": "rulesLiteral"
+        }
+      },
+      "lifecycle": {
+        "destination": "SHUFFLE_BACK_INTO_EVENT_DECK",
+        "timing": "after event instructions",
+        "source": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "Draw a Hamlet Event Card"
+        }
+      },
+      "expiry": "Per effect timing/duration; card return does not cancel registered delayed obligations.",
+      "sourceReferences": [
+        {
+          "kind": "PRINTED_DEFINITION",
+          "definitionId": "ce-hamlet-event-43508"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "Draw a Hamlet Event Card"
+        }
+      ]
+    },
+    {
+      "definitionId": "ce-hamlet-event-43507",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/7",
+      "printedName": "Traveling Merchants",
+      "activation": {
+        "trigger": "HAMLET_EVENT_RESOLVE",
+        "source": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "The Hamlet; Draw a Hamlet Event Card"
+        },
+        "excludesFirstQuest": {
+          "value": true,
+          "source": {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+            "page": 10,
+            "region": "Setting up the Game"
+          }
+        }
+      },
+      "preparationDays": {
+        "printed": 2,
+        "value": 2,
+        "source": {
+          "definitionId": "ce-hamlet-event-43507",
+          "field": "printedPreparationDays"
+        },
+        "legend": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 33,
+          "region": "Event card example caption"
+        }
+      },
+      "target": {
+        "effectTargets": [
+          "each Hero’s selected provision die"
+        ],
+        "selectionIsNotCurrentHero": true,
+        "scope": "As explicitly named in each printed effect; Hero references are to the current party, not Stagecoach roster."
+      },
+      "choices": [
+        {
+          "choiceRequired": true,
+          "choiceType": "OPTIONAL_DIE_AND_FACE_SELECTION",
+          "actor": "each Hero",
+          "options": [
+            "decline",
+            "choose own die and desired face"
+          ],
+          "selectionTiming": "AFTER_PROVISION_ROLL_BEFORE_NEXT_QUEST",
+          "cancelability": {
+            "status": "SOURCE_UNRESOLVED",
+            "category": "CHOICE_SCOPE_UNRESOLVED",
+            "reason": "Printed optionality permits declining before commitment; reversal after commitment is not specified."
+          },
+          "selectionCount": 1,
+          "eligibleTargets": "one of that Hero’s rolled provision dice",
+          "optional": true
+        }
+      ],
+      "costs": [],
+      "effects": [
+        {
+          "unitId": "ce-hamlet-event-43507:effect:1",
+          "type": "SET_PROVISION_DIE_FACE",
+          "target": "each Hero’s selected provision die",
+          "timing": "AFTER_PROVISION_ROLL_BEFORE_NEXT_QUEST",
+          "desiredFace": "whichever side they want",
+          "ownershipAfterPooling": {
+            "status": "SOURCE_UNRESOLVED",
+            "category": "TARGET_SCOPE_UNRESOLVED",
+            "reason": "Rulebook p12 pools all dice; card requires their dice. Preserve per-Hero roll provenance; interaction with already-pooled/unattributed dice is not specified."
+          },
+          "source": {
+            "definitionId": "ce-hamlet-event-43507",
+            "field": "rulesLiteral",
+            "literal": "After rolling for Provisions, each Hero can choose one of their Provisions dice to be whichever side they want before the next Quest."
+          }
+        }
+      ],
+      "effectOrder": {
+        "value": "Printed clause order; conditional branches and deferred triggers retained separately",
+        "source": {
+          "definitionId": "ce-hamlet-event-43507",
+          "field": "rulesLiteral"
+        }
+      },
+      "lifecycle": {
+        "destination": "SHUFFLE_BACK_INTO_EVENT_DECK",
+        "timing": "after event instructions",
+        "source": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "Draw a Hamlet Event Card"
+        }
+      },
+      "expiry": "Per effect timing/duration; card return does not cancel registered delayed obligations.",
+      "sourceReferences": [
+        {
+          "kind": "PRINTED_DEFINITION",
+          "definitionId": "ce-hamlet-event-43507"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "Draw a Hamlet Event Card"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 12,
+          "region": "Provision Dice legend and pooling rules"
+        }
+      ]
+    },
+    {
+      "definitionId": "ce-hamlet-event-43506",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/8",
+      "printedName": "Town Fair",
+      "activation": {
+        "trigger": "HAMLET_EVENT_RESOLVE",
+        "source": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "The Hamlet; Draw a Hamlet Event Card"
+        },
+        "excludesFirstQuest": {
+          "value": true,
+          "source": {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+            "page": 10,
+            "region": "Setting up the Game"
+          }
+        }
+      },
+      "preparationDays": {
+        "printed": 1,
+        "value": 1,
+        "source": {
+          "definitionId": "ce-hamlet-event-43506",
+          "field": "printedPreparationDays"
+        },
+        "legend": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 33,
+          "region": "Event card example caption"
+        }
+      },
+      "target": {
+        "effectTargets": [
+          "printed four-helmet scope",
+          "printed four-helmet scope"
+        ],
+        "selectionIsNotCurrentHero": true,
+        "scope": {
+          "status": "SOURCE_UNRESOLVED",
+          "category": "TARGET_SCOPE_UNRESOLVED",
+          "reason": "Four yellow helmet pictograms are preserved; no explicit legend binding for this target glyph in inspected source pages. Do not silently equate it with selected/current/all campaign heroes."
+        }
+      },
+      "choices": [
+        {
+          "choiceRequired": false,
+          "choiceType": "NONE",
+          "options": []
+        }
+      ],
+      "costs": [],
+      "effects": [
+        {
+          "unitId": "ce-hamlet-event-43506:effect:1",
+          "type": "RECOVER_STRESS",
+          "target": "printed four-helmet scope",
+          "timing": "HAMLET_EVENT_RESOLVE",
+          "amount": 3,
+          "source": {
+            "definitionId": "ce-hamlet-event-43506",
+            "field": "rulesLiteral",
+            "literal": "[FOUR_YELLOW_HELMETS]: [STRESS]-3 and [GREEN_PLUS]2 /Hero Level."
+          }
+        },
+        {
+          "unitId": "ce-hamlet-event-43506:effect:2",
+          "type": "HEAL",
+          "target": "printed four-helmet scope",
+          "timing": "HAMLET_EVENT_RESOLVE",
+          "amountPerHeroLevel": 2,
+          "source": {
+            "definitionId": "ce-hamlet-event-43506",
+            "field": "rulesLiteral",
+            "literal": "[FOUR_YELLOW_HELMETS]: [STRESS]-3 and [GREEN_PLUS]2 /Hero Level."
+          }
+        }
+      ],
+      "effectOrder": {
+        "value": "Printed clause order; conditional branches and deferred triggers retained separately",
+        "source": {
+          "definitionId": "ce-hamlet-event-43506",
+          "field": "rulesLiteral"
+        }
+      },
+      "lifecycle": {
+        "destination": "SHUFFLE_BACK_INTO_EVENT_DECK",
+        "timing": "after event instructions",
+        "source": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "Draw a Hamlet Event Card"
+        }
+      },
+      "expiry": "Per effect timing/duration; card return does not cancel registered delayed obligations.",
+      "sourceReferences": [
+        {
+          "kind": "PRINTED_DEFINITION",
+          "definitionId": "ce-hamlet-event-43506"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "Draw a Hamlet Event Card"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 21,
+          "region": "Stress recovery legend"
+        }
+      ]
+    },
+    {
+      "definitionId": "ce-hamlet-event-43505",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/9",
+      "printedName": "Labor Force",
+      "activation": {
+        "trigger": "HAMLET_EVENT_RESOLVE",
+        "source": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "The Hamlet; Draw a Hamlet Event Card"
+        },
+        "excludesFirstQuest": {
+          "value": true,
+          "source": {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+            "page": 10,
+            "region": "Setting up the Game"
+          }
+        }
+      },
+      "preparationDays": {
+        "printed": 3,
+        "value": 3,
+        "source": {
+          "definitionId": "ce-hamlet-event-43505",
+          "field": "printedPreparationDays"
+        },
+        "legend": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 33,
+          "region": "Event card example caption"
+        }
+      },
+      "target": {
+        "effectTargets": [
+          "selected building",
+          "selected building"
+        ],
+        "selectionIsNotCurrentHero": true,
+        "scope": "As explicitly named in each printed effect; Hero references are to the current party, not Stagecoach roster."
+      },
+      "choices": [
+        {
+          "choiceRequired": true,
+          "choiceType": "OPTIONAL_BUILDING_SELECTION",
+          "actor": "party (group agreement; rulebook p33)",
+          "options": [
+            "decline",
+            "upgrade eligible building"
+          ],
+          "selectionTiming": "HAMLET_EVENT_RESOLVE",
+          "cancelability": {
+            "status": "SOURCE_UNRESOLVED",
+            "category": "CHOICE_SCOPE_UNRESOLVED",
+            "reason": "Printed optionality permits declining before commitment; reversal after commitment is not specified."
+          },
+          "selectionCount": 1,
+          "eligibleTargets": "Upgradeable Hamlet buildings; Guild and Graveyard excluded (p33)",
+          "optional": true
+        }
+      ],
+      "costs": [
+        {
+          "type": "WAIVE_BUILDING_UPGRADE_GOLD",
+          "amount": 0,
+          "scope": "chosen upgrade"
+        },
+        {
+          "type": "FORGO_VISITS",
+          "target": "chosen building",
+          "duration": "this week",
+          "condition": "upgrade accepted"
+        }
+      ],
+      "effects": [
+        {
+          "unitId": "ce-hamlet-event-43505:effect:1",
+          "type": "UPGRADE_BUILDING",
+          "target": "selected building",
+          "timing": "HAMLET_EVENT_RESOLVE",
+          "condition": "upgrade accepted",
+          "source": {
+            "definitionId": "ce-hamlet-event-43505",
+            "field": "rulesLiteral",
+            "literal": "You may upgrade a building for free. If you do, you cannot visit it this week. Discard this event from the deck permanently."
+          }
+        },
+        {
+          "unitId": "ce-hamlet-event-43505:effect:2",
+          "type": "BLOCK_BUILDING_VISITS",
+          "target": "selected building",
+          "timing": "THIS_HAMLET_WEEK",
+          "condition": "upgrade accepted",
+          "source": {
+            "definitionId": "ce-hamlet-event-43505",
+            "field": "rulesLiteral",
+            "literal": "You may upgrade a building for free. If you do, you cannot visit it this week. Discard this event from the deck permanently."
+          }
+        }
+      ],
+      "effectOrder": {
+        "value": "Printed clause order; conditional branches and deferred triggers retained separately",
+        "source": {
+          "definitionId": "ce-hamlet-event-43505",
+          "field": "rulesLiteral"
+        }
+      },
+      "lifecycle": {
+        "destination": "PERMANENT_CAMPAIGN_REMOVAL",
+        "condition": {
+          "status": "SOURCE_UNRESOLVED",
+          "category": "DECK_LIFECYCLE_UNRESOLVED",
+          "reason": "Final discard sentence is outside the if-clause; whether declining also permanently removes the card is not explicitly settled."
+        }
+      },
+      "expiry": "Per effect timing/duration; card return does not cancel registered delayed obligations.",
+      "sourceReferences": [
+        {
+          "kind": "PRINTED_DEFINITION",
+          "definitionId": "ce-hamlet-event-43505"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "Draw a Hamlet Event Card"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 33,
+          "region": "Building upgrades and Caretaker collision rule"
+        }
+      ]
+    },
+    {
+      "definitionId": "ce-hamlet-event-43504",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/10",
+      "printedName": "Uneventful Week",
+      "activation": {
+        "trigger": "HAMLET_EVENT_RESOLVE",
+        "source": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "The Hamlet; Draw a Hamlet Event Card"
+        },
+        "excludesFirstQuest": {
+          "value": true,
+          "source": {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+            "page": 10,
+            "region": "Setting up the Game"
+          }
+        }
+      },
+      "preparationDays": {
+        "printed": 3,
+        "value": 3,
+        "source": {
+          "definitionId": "ce-hamlet-event-43504",
+          "field": "printedPreparationDays"
+        },
+        "legend": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 33,
+          "region": "Event card example caption"
+        }
+      },
+      "target": {
+        "effectTargets": [],
+        "selectionIsNotCurrentHero": true,
+        "scope": "As explicitly named in each printed effect; Hero references are to the current party, not Stagecoach roster."
+      },
+      "choices": [
+        {
+          "choiceRequired": false,
+          "choiceType": "NONE",
+          "options": []
+        }
+      ],
+      "costs": [],
+      "effects": [],
+      "effectOrder": {
+        "value": "Printed clause order; conditional branches and deferred triggers retained separately",
+        "source": {
+          "definitionId": "ce-hamlet-event-43504",
+          "field": "rulesLiteral"
+        }
+      },
+      "lifecycle": {
+        "destination": "SHUFFLE_BACK_INTO_EVENT_DECK",
+        "timing": "after event instructions",
+        "source": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "Draw a Hamlet Event Card"
+        }
+      },
+      "expiry": "No additional printed rule; preparation days still apply.",
+      "sourceReferences": [
+        {
+          "kind": "PRINTED_DEFINITION",
+          "definitionId": "ce-hamlet-event-43504"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "Draw a Hamlet Event Card"
+        }
+      ]
+    },
+    {
+      "definitionId": "ce-hamlet-event-43502",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/11",
+      "printedName": "Lost Shipment",
+      "activation": {
+        "trigger": "HAMLET_EVENT_RESOLVE",
+        "source": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "The Hamlet; Draw a Hamlet Event Card"
+        },
+        "excludesFirstQuest": {
+          "value": true,
+          "source": {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+            "page": 10,
+            "region": "Setting up the Game"
+          }
+        }
+      },
+      "preparationDays": {
+        "printed": 4,
+        "value": 4,
+        "source": {
+          "definitionId": "ce-hamlet-event-43502",
+          "field": "printedPreparationDays"
+        },
+        "legend": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 33,
+          "region": "Event card example caption"
+        }
+      },
+      "target": {
+        "effectTargets": [
+          "party provision roll"
+        ],
+        "selectionIsNotCurrentHero": true,
+        "scope": "As explicitly named in each printed effect; Hero references are to the current party, not Stagecoach roster."
+      },
+      "choices": [
+        {
+          "choiceRequired": false,
+          "choiceType": "NONE",
+          "options": []
+        }
+      ],
+      "costs": [],
+      "effects": [
+        {
+          "unitId": "ce-hamlet-event-43502:effect:1",
+          "type": "MODIFY_PROVISION_ROLL_COUNT",
+          "target": "party provision roll",
+          "timing": "BEFORE_NEXT_QUEST",
+          "amount": -2,
+          "source": {
+            "definitionId": "ce-hamlet-event-43502",
+            "field": "rulesLiteral",
+            "literal": "Party rolls -2 [PROVISION_DIE] before the next Quest."
+          }
+        }
+      ],
+      "effectOrder": {
+        "value": "Printed clause order; conditional branches and deferred triggers retained separately",
+        "source": {
+          "definitionId": "ce-hamlet-event-43502",
+          "field": "rulesLiteral"
+        }
+      },
+      "lifecycle": {
+        "destination": "SHUFFLE_BACK_INTO_EVENT_DECK",
+        "timing": "after event instructions",
+        "source": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "Draw a Hamlet Event Card"
+        }
+      },
+      "expiry": "Per effect timing/duration; card return does not cancel registered delayed obligations.",
+      "sourceReferences": [
+        {
+          "kind": "PRINTED_DEFINITION",
+          "definitionId": "ce-hamlet-event-43502"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "Draw a Hamlet Event Card"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 12,
+          "region": "Provision Dice legend and pooling rules"
+        }
+      ]
+    },
+    {
+      "definitionId": "ce-hamlet-event-43503",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/12",
+      "printedName": "Unsettling Darkness",
+      "activation": {
+        "trigger": "HAMLET_EVENT_RESOLVE",
+        "source": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "The Hamlet; Draw a Hamlet Event Card"
+        },
+        "excludesFirstQuest": {
+          "value": true,
+          "source": {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+            "page": 10,
+            "region": "Setting up the Game"
+          }
+        }
+      },
+      "preparationDays": {
+        "printed": 3,
+        "value": 3,
+        "source": {
+          "definitionId": "ce-hamlet-event-43503",
+          "field": "printedPreparationDays"
+        },
+        "legend": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 33,
+          "region": "Event card example caption"
+        }
+      },
+      "target": {
+        "effectTargets": [
+          "next quest light tracker"
+        ],
+        "selectionIsNotCurrentHero": true,
+        "scope": "As explicitly named in each printed effect; Hero references are to the current party, not Stagecoach roster."
+      },
+      "choices": [
+        {
+          "choiceRequired": false,
+          "choiceType": "NONE",
+          "options": []
+        }
+      ],
+      "costs": [],
+      "effects": [
+        {
+          "unitId": "ce-hamlet-event-43503:effect:1",
+          "type": "SET_STARTING_LIGHT",
+          "target": "next quest light tracker",
+          "timing": "NEXT_QUEST_START",
+          "value": 4,
+          "source": {
+            "definitionId": "ce-hamlet-event-43503",
+            "field": "rulesLiteral",
+            "literal": "Start at [LIGHT]4 next run."
+          }
+        }
+      ],
+      "effectOrder": {
+        "value": "Printed clause order; conditional branches and deferred triggers retained separately",
+        "source": {
+          "definitionId": "ce-hamlet-event-43503",
+          "field": "rulesLiteral"
+        }
+      },
+      "lifecycle": {
+        "destination": "SHUFFLE_BACK_INTO_EVENT_DECK",
+        "timing": "after event instructions",
+        "source": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "Draw a Hamlet Event Card"
+        }
+      },
+      "expiry": "Per effect timing/duration; card return does not cancel registered delayed obligations.",
+      "sourceReferences": [
+        {
+          "kind": "PRINTED_DEFINITION",
+          "definitionId": "ce-hamlet-event-43503"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "Draw a Hamlet Event Card"
+        }
+      ]
+    },
+    {
+      "definitionId": "ce-hamlet-event-43501",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/13",
+      "printedName": "Busy Week",
+      "activation": {
+        "trigger": "HAMLET_EVENT_RESOLVE",
+        "source": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "The Hamlet; Draw a Hamlet Event Card"
+        },
+        "excludesFirstQuest": {
+          "value": true,
+          "source": {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+            "page": 10,
+            "region": "Setting up the Game"
+          }
+        }
+      },
+      "preparationDays": {
+        "printed": 2,
+        "value": 2,
+        "source": {
+          "definitionId": "ce-hamlet-event-43501",
+          "field": "printedPreparationDays"
+        },
+        "legend": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 33,
+          "region": "Event card example caption"
+        }
+      },
+      "target": {
+        "effectTargets": [
+          "hamlet state"
+        ],
+        "selectionIsNotCurrentHero": true,
+        "scope": "As explicitly named in each printed effect; Hero references are to the current party, not Stagecoach roster."
+      },
+      "choices": [
+        {
+          "choiceRequired": false,
+          "choiceType": "NONE",
+          "options": []
+        }
+      ],
+      "costs": [],
+      "effects": [
+        {
+          "unitId": "ce-hamlet-event-43501:effect:1",
+          "type": "SUPPRESS_CARETAKER_PLACEMENT",
+          "target": "hamlet state",
+          "timing": "EACH_DAY_THIS_HAMLET",
+          "duration": "this week",
+          "source": {
+            "definitionId": "ce-hamlet-event-43501",
+            "field": "rulesLiteral",
+            "literal": "Do not place the Caretaker anywhere this week."
+          }
+        }
+      ],
+      "effectOrder": {
+        "value": "Printed clause order; conditional branches and deferred triggers retained separately",
+        "source": {
+          "definitionId": "ce-hamlet-event-43501",
+          "field": "rulesLiteral"
+        }
+      },
+      "lifecycle": {
+        "destination": "SHUFFLE_BACK_INTO_EVENT_DECK",
+        "timing": "after event instructions",
+        "source": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "Draw a Hamlet Event Card"
+        }
+      },
+      "expiry": "Per effect timing/duration; card return does not cancel registered delayed obligations.",
+      "sourceReferences": [
+        {
+          "kind": "PRINTED_DEFINITION",
+          "definitionId": "ce-hamlet-event-43501"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "Draw a Hamlet Event Card"
+        }
+      ]
+    },
+    {
+      "definitionId": "ce-hamlet-event-43500",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/14",
+      "printedName": "Supply Run",
+      "activation": {
+        "trigger": "HAMLET_EVENT_RESOLVE",
+        "source": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "The Hamlet; Draw a Hamlet Event Card"
+        },
+        "excludesFirstQuest": {
+          "value": true,
+          "source": {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+            "page": 10,
+            "region": "Setting up the Game"
+          }
+        }
+      },
+      "preparationDays": {
+        "printed": 2,
+        "value": 2,
+        "source": {
+          "definitionId": "ce-hamlet-event-43500",
+          "field": "printedPreparationDays"
+        },
+        "legend": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 33,
+          "region": "Event card example caption"
+        }
+      },
+      "target": {
+        "effectTargets": [
+          "party provision pool"
+        ],
+        "selectionIsNotCurrentHero": true,
+        "scope": "As explicitly named in each printed effect; Hero references are to the current party, not Stagecoach roster."
+      },
+      "choices": [
+        {
+          "choiceRequired": false,
+          "choiceType": "NONE",
+          "options": []
+        }
+      ],
+      "costs": [],
+      "effects": [
+        {
+          "unitId": "ce-hamlet-event-43500:effect:1",
+          "type": "GAIN_PROVISION_DICE",
+          "target": "party provision pool",
+          "timing": "BEFORE_NEXT_QUEST",
+          "amount": 2,
+          "acquisition": {
+            "status": "SOURCE_UNRESOLVED",
+            "category": "EFFECT_ORDER_UNRESOLVED",
+            "reason": "Card says gains, not rolls; exact acquisition/roll ordering relative to the normal provision roll is not specified."
+          },
+          "source": {
+            "definitionId": "ce-hamlet-event-43500",
+            "field": "rulesLiteral",
+            "literal": "Party gains +2 [PROVISION_DIE] before the next Quest."
+          }
+        }
+      ],
+      "effectOrder": {
+        "value": "Printed clause order; conditional branches and deferred triggers retained separately",
+        "source": {
+          "definitionId": "ce-hamlet-event-43500",
+          "field": "rulesLiteral"
+        }
+      },
+      "lifecycle": {
+        "destination": "SHUFFLE_BACK_INTO_EVENT_DECK",
+        "timing": "after event instructions",
+        "source": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "Draw a Hamlet Event Card"
+        }
+      },
+      "expiry": "Per effect timing/duration; card return does not cancel registered delayed obligations.",
+      "sourceReferences": [
+        {
+          "kind": "PRINTED_DEFINITION",
+          "definitionId": "ce-hamlet-event-43500"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "Draw a Hamlet Event Card"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 12,
+          "region": "Provision Dice legend and pooling rules"
+        }
+      ]
+    },
+    {
+      "definitionId": "ce-hamlet-event-43515",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/15",
+      "printedName": "Militia Training",
+      "activation": {
+        "trigger": "HAMLET_EVENT_RESOLVE",
+        "source": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "The Hamlet; Draw a Hamlet Event Card"
+        },
+        "excludesFirstQuest": {
+          "value": true,
+          "source": {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+            "page": 10,
+            "region": "Setting up the Game"
+          }
+        }
+      },
+      "preparationDays": {
+        "printed": "?",
+        "value": {
+          "training": 0,
+          "otherwise": 3
+        },
+        "source": {
+          "definitionId": "ce-hamlet-event-43515",
+          "field": "printedPreparationDays"
+        },
+        "legend": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 33,
+          "region": "Event card example caption"
+        }
+      },
+      "target": {
+        "effectTargets": [
+          "each participating Hero’s selected Level 1 Skill",
+          "hamlet days tracker"
+        ],
+        "selectionIsNotCurrentHero": true,
+        "scope": "As explicitly named in each printed effect; Hero references are to the current party, not Stagecoach roster."
+      },
+      "choices": [
+        {
+          "choiceRequired": true,
+          "choiceType": "PARTY_TRAIN_OR_PREPARE",
+          "actor": "all Heroes",
+          "options": [
+            "train; 0 days",
+            "else; 3 days"
+          ],
+          "selectionTiming": "HAMLET_EVENT_RESOLVE",
+          "cancelability": {
+            "status": "SOURCE_UNRESOLVED",
+            "category": "CHOICE_SCOPE_UNRESOLVED",
+            "reason": "Printed optionality permits declining before commitment; reversal after commitment is not specified."
+          },
+          "selectionCount": "one Level 1 Skill per participating Hero",
+          "eligibleTargets": "Level 1 Skills",
+          "optional": true,
+          "mixedParticipation": {
+            "status": "SOURCE_UNRESOLVED",
+            "category": "CHOICE_SCOPE_UNRESOLVED",
+            "reason": "If they do does not settle mixed acceptance or Heroes without a Level 1 Skill; do not invent an all-or-nothing vote."
+          }
+        }
+      ],
+      "costs": [
+        {
+          "type": "FORGO_PREPARATION_DAYS",
+          "amount": 3,
+          "condition": "training branch"
+        },
+        {
+          "type": "UPGRADE_RESOURCE_COST",
+          "status": {
+            "status": "SOURCE_UNRESOLVED",
+            "category": "CHOICE_SCOPE_UNRESOLVED",
+            "reason": "Unlike Guild Training this card does not say for free; whether ordinary Gold/XP costs apply is not explicit."
+          }
+        }
+      ],
+      "effects": [
+        {
+          "unitId": "ce-hamlet-event-43515:effect:1",
+          "type": "UPGRADE_LEVEL_ONE_SKILL",
+          "target": "each participating Hero’s selected Level 1 Skill",
+          "timing": "HAMLET_EVENT_RESOLVE",
+          "toLevel": 2,
+          "source": {
+            "definitionId": "ce-hamlet-event-43515",
+            "field": "rulesLiteral",
+            "literal": "All Heroes can Level Up one Lvl 1 Skill. If they do, 0 days. Else 3 days."
+          }
+        },
+        {
+          "unitId": "ce-hamlet-event-43515:effect:2",
+          "type": "SET_PREPARATION_DAYS",
+          "target": "hamlet days tracker",
+          "timing": "HAMLET_EVENT_RESOLVE",
+          "training": 0,
+          "otherwise": 3,
+          "source": {
+            "definitionId": "ce-hamlet-event-43515",
+            "field": "rulesLiteral",
+            "literal": "All Heroes can Level Up one Lvl 1 Skill. If they do, 0 days. Else 3 days."
+          }
+        }
+      ],
+      "effectOrder": {
+        "value": "Printed clause order; conditional branches and deferred triggers retained separately",
+        "source": {
+          "definitionId": "ce-hamlet-event-43515",
+          "field": "rulesLiteral"
+        }
+      },
+      "lifecycle": {
+        "destination": "SHUFFLE_BACK_INTO_EVENT_DECK",
+        "timing": "after event instructions",
+        "source": {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "Draw a Hamlet Event Card"
+        }
+      },
+      "expiry": "Per effect timing/duration; card return does not cancel registered delayed obligations.",
+      "sourceReferences": [
+        {
+          "kind": "PRINTED_DEFINITION",
+          "definitionId": "ce-hamlet-event-43515"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "Draw a Hamlet Event Card"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 34,
+          "region": "The Guild; normal Skill upgrade is by one Level (Event costs remain separate)"
+        }
+      ]
+    }
+  ],
+  "deckLifecycle": {
+    "initialComposition": {
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/0",
+        "tts-path:/ObjectStates/83/ContainedObjects/1",
+        "tts-path:/ObjectStates/83/ContainedObjects/2",
+        "tts-path:/ObjectStates/83/ContainedObjects/3",
+        "tts-path:/ObjectStates/83/ContainedObjects/4",
+        "tts-path:/ObjectStates/83/ContainedObjects/5",
+        "tts-path:/ObjectStates/83/ContainedObjects/6",
+        "tts-path:/ObjectStates/83/ContainedObjects/7",
+        "tts-path:/ObjectStates/83/ContainedObjects/8",
+        "tts-path:/ObjectStates/83/ContainedObjects/9",
+        "tts-path:/ObjectStates/83/ContainedObjects/10",
+        "tts-path:/ObjectStates/83/ContainedObjects/11",
+        "tts-path:/ObjectStates/83/ContainedObjects/12",
+        "tts-path:/ObjectStates/83/ContainedObjects/13",
+        "tts-path:/ObjectStates/83/ContainedObjects/14",
+        "tts-path:/ObjectStates/83/ContainedObjects/15"
+      ],
+      "count": 16,
+      "basis": "C1C22 locked TTS container; core components list p5 also says 16 Hamlet Events",
+      "source": {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+        "page": 5,
+        "region": "Components list"
+      }
+    },
+    "initialShuffle": {
+      "value": "Hamlet Event Cards shuffled into one deck beside Hamlet board",
+      "sources": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 10,
+          "region": "Ready the Hamlet"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 11,
+          "region": "Ready the Hamlet continuation"
+        }
+      ]
+    },
+    "all16SimultaneouslyUsed": {
+      "status": "SOURCE_UNRESOLVED",
+      "category": "EXPANSION_MEMBERSHIP_UNRESOLVED",
+      "reason": "Single 16-card TTS container and core count do not prove Complete Edition campaign configuration uses every card together."
+    },
+    "expansionFiltering": {
+      "status": "SOURCE_UNRESOLVED",
+      "category": "EXPANSION_MEMBERSHIP_UNRESOLVED",
+      "reason": "No card-by-card expansion/configuration rule bound from the locked source; no expansion membership inferred from artwork or filenames."
+    },
+    "drawTiming": {
+      "value": "First Hamlet step after a Dungeon delve; not before the first Quest",
+      "sources": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "The Hamlet"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 10,
+          "region": "First Quest setup"
+        }
+      ]
+    },
+    "drawCount": {
+      "value": 1,
+      "source": {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+        "page": 32,
+        "region": "Draw a Hamlet Event Card"
+      }
+    },
+    "revealTiming": {
+      "status": "SOURCE_UNRESOLVED",
+      "category": "TRIGGER_TIMING_UNRESOLVED",
+      "reason": "Draw and follow instructions imply reading, but a separate reveal trigger/order is not defined; no synthetic reveal event contract."
+    },
+    "resolveTiming": {
+      "value": "Follow instructions on draw; individual clauses can install this-week or next-Quest effects",
+      "source": {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+        "page": 32,
+        "region": "Draw a Hamlet Event Card"
+      }
+    },
+    "discardDestination": {
+      "value": "Normally return to Event deck; explicitly permanent cards removed from campaign",
+      "sources": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 32,
+          "region": "Draw a Hamlet Event Card"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+          "page": 33,
+          "region": "Permanent discard note"
+        }
+      ],
+      "overrideCards": [
+        "Labor Force (decline branch unresolved)",
+        "Guild Training"
+      ]
+    },
+    "reshuffleCondition": {
+      "value": "Shuffle drawn card back after following instructions, except permanent removal; not a generic discard-pile exhaustion reshuffle",
+      "source": {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+        "page": 32,
+        "region": "Draw a Hamlet Event Card"
+      }
+    },
+    "exhaustedDeckBehavior": {
+      "status": "SOURCE_UNRESOLVED",
+      "category": "DECK_LIFECYCLE_UNRESOLVED",
+      "reason": "No explicit exhausted-deck rule in bound source; no assumed reshuffle/recycle of permanently removed Events."
+    },
+    "duplicateUniqueCopies": {
+      "value": "16 unique card cells and physical objects; one each in locked TTS container",
+      "campaignCopyPolicy": {
+        "status": "SOURCE_UNRESOLVED",
+        "category": "DECK_LIFECYCLE_UNRESOLVED",
+        "reason": "TTS physical copies do not establish every campaign/expansion copy policy."
+      }
+    },
+    "campaignPersistence": {
+      "value": "Permanent discard from campaign for printed exceptions",
+      "source": {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+        "page": 33,
+        "region": "Permanent discard note"
+      },
+      "eventStateAcrossSave": {
+        "status": "SOURCE_UNRESOLVED",
+        "category": "DECK_LIFECYCLE_UNRESOLVED",
+        "reason": "Rulebook p35 allows campaign saving but does not enumerate Event state in this extraction; exact saved membership/order and pending effects remain unbound."
+      }
+    },
+    "saveReplayRequirements": {
+      "kind": "ENGINE_OBLIGATIONS_NOT_PRINTED_RULES",
+      "obligations": [
+        "Event definition and source version",
+        "deck membership/order and permanent removals",
+        "draw/choice/die results",
+        "pending deferred effects and expiry",
+        "idempotent resolution and replay"
+      ],
+      "proofAvailable": false,
+      "source": {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c23-rulebook-evidence.json",
+        "page": 35,
+        "region": "Saving the Game; general persistence only"
+      }
+    }
+  }
+}

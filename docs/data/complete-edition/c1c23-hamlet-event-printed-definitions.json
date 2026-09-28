@@ -1,0 +1,973 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-23",
+  "baselineHead": "a6f29f9543f017c454724bbeade445c94d0c63f2",
+  "inputSha256": {
+    "docs/data/complete-edition/c1c22-hamlet-event-source-intake-register.json": "9c0ff53d19f893c8e97d19de6fc2d9650b323b11308293e37ff716c6811311d0",
+    "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json": "11204d1e54cdf71077d54ceeb9d575f89fc61d027324505e9ccf6a1a1545b103",
+    "docs/data/complete-edition/c1c23-rulebook-evidence.json": "b83839abc608f999e1cb443a007d25092fac5d2f4d41bd2c080b3fb33e36e357",
+    "scripts/audit/c1c23-printed-source.ts": "ce13fa071a091813c54774170ad48bcde85139ba7d3b19084049a1120af9fb5c"
+  },
+  "cards": [
+    {
+      "definitionId": "ce-hamlet-event-43514",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/0",
+      "printedName": "Guild Training",
+      "printedPreparationDays": 2,
+      "flavorLiteral": "The guildmaster was once a benevolent adventurer who has witnessed the death of all his prodigies. His tutelage a honorary tribute to them and to himself.",
+      "rulesLiteral": "Each Hero can immediately upgrade a Skill for free. Discard this event from the deck permanently.",
+      "frontLiteral": "Guild Training\n[PREPARATION_DAYS:2]\nThe guildmaster was once a benevolent adventurer who has witnessed the death of all his prodigies. His tutelage a honorary tribute to them and to himself.\nEach Hero can immediately upgrade a Skill for free. Discard this event from the deck permanently.",
+      "backLiteral": "HAMLET EVENT",
+      "backSemanticRole": "card-back-only",
+      "literalComplete": true,
+      "transcription": {
+        "method": "Independent visual reading of each original 590x980 front crop and original back sheet",
+        "reader": "Codex C1C23 intake",
+        "normalization": "Line wraps joined; typographic apostrophes normalized. Bracket tokens preserve printed glyphs; flavor and rules remain separate. Empty rulesLiteral is intentional on Uneventful Week, not unreadable text.",
+        "runtimeAsEvidence": false
+      },
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_TTS_CARD_CROP",
+          "side": "front",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/0",
+          "cardId": 43514,
+          "manifestPath": "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json",
+          "path": "docs/data/complete-edition/source-assets/c1c23/crops/43514-front.png",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c23/hamlet-event-front.jpg",
+          "sheetSha256": "65f91c8ab479ca8e9f6c52c15459cba94ab7c1d81037f0e8945f41d5650705c0",
+          "cropSha256": "3b57470db2f5b52973ca3558b0f98c57baf8bc6af2d2cb8af1942ae141920722",
+          "bounds": {
+            "left": 2360,
+            "top": 1960,
+            "width": 590,
+            "height": 980
+          }
+        },
+        {
+          "kind": "LOCKED_TTS_CARD_CROP",
+          "side": "back",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/0",
+          "cardId": 43514,
+          "manifestPath": "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json",
+          "path": "docs/data/complete-edition/source-assets/c1c23/crops/43514-back.png",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c23/hamlet-event-back.jpg",
+          "sheetSha256": "9707d8c9ad68e78ef6492454eeae68ca51578bf9a306e29005eb32631646a69d",
+          "cropSha256": "931078c9913a04efaa7d3419e16a4a7a0f0be3239c79db6fd7869be4fedbc7e4",
+          "bounds": {
+            "left": 2360,
+            "top": 1960,
+            "width": 590,
+            "height": 980
+          }
+        }
+      ],
+      "assetHashes": {
+        "frontSheet": "65f91c8ab479ca8e9f6c52c15459cba94ab7c1d81037f0e8945f41d5650705c0",
+        "backSheet": "9707d8c9ad68e78ef6492454eeae68ca51578bf9a306e29005eb32631646a69d",
+        "frontCrop": "3b57470db2f5b52973ca3558b0f98c57baf8bc6af2d2cb8af1942ae141920722",
+        "backCrop": "931078c9913a04efaa7d3419e16a4a7a0f0be3239c79db6fd7869be4fedbc7e4"
+      }
+    },
+    {
+      "definitionId": "ce-hamlet-event-43513",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/1",
+      "printedName": "In Good Spirits",
+      "printedPreparationDays": 3,
+      "flavorLiteral": "With spirits lifted and head held high, eager and resolute, the Heroes marched to their doom...",
+      "rulesLiteral": "Each Hero rolls a [D10], the Hero or Heroes that roll the highest gain a Virtue and place(s) their (or their) stress marker on the red side.",
+      "frontLiteral": "In Good Spirits\n[PREPARATION_DAYS:3]\nWith spirits lifted and head held high, eager and resolute, the Heroes marched to their doom...\nEach Hero rolls a [D10], the Hero or Heroes that roll the highest gain a Virtue and place(s) their (or their) stress marker on the red side.",
+      "backLiteral": "HAMLET EVENT",
+      "backSemanticRole": "card-back-only",
+      "literalComplete": true,
+      "transcription": {
+        "method": "Independent visual reading of each original 590x980 front crop and original back sheet",
+        "reader": "Codex C1C23 intake",
+        "normalization": "Line wraps joined; typographic apostrophes normalized. Bracket tokens preserve printed glyphs; flavor and rules remain separate. Empty rulesLiteral is intentional on Uneventful Week, not unreadable text.",
+        "runtimeAsEvidence": false
+      },
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_TTS_CARD_CROP",
+          "side": "front",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/1",
+          "cardId": 43513,
+          "manifestPath": "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json",
+          "path": "docs/data/complete-edition/source-assets/c1c23/crops/43513-front.png",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c23/hamlet-event-front.jpg",
+          "sheetSha256": "65f91c8ab479ca8e9f6c52c15459cba94ab7c1d81037f0e8945f41d5650705c0",
+          "cropSha256": "8d47aa9b4024df36999c6fb8f047c2d5816c9575e2eab8d683987b567a25be4a",
+          "bounds": {
+            "left": 1770,
+            "top": 1960,
+            "width": 590,
+            "height": 980
+          }
+        },
+        {
+          "kind": "LOCKED_TTS_CARD_CROP",
+          "side": "back",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/1",
+          "cardId": 43513,
+          "manifestPath": "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json",
+          "path": "docs/data/complete-edition/source-assets/c1c23/crops/43513-back.png",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c23/hamlet-event-back.jpg",
+          "sheetSha256": "9707d8c9ad68e78ef6492454eeae68ca51578bf9a306e29005eb32631646a69d",
+          "cropSha256": "931078c9913a04efaa7d3419e16a4a7a0f0be3239c79db6fd7869be4fedbc7e4",
+          "bounds": {
+            "left": 1770,
+            "top": 1960,
+            "width": 590,
+            "height": 980
+          }
+        }
+      ],
+      "assetHashes": {
+        "frontSheet": "65f91c8ab479ca8e9f6c52c15459cba94ab7c1d81037f0e8945f41d5650705c0",
+        "backSheet": "9707d8c9ad68e78ef6492454eeae68ca51578bf9a306e29005eb32631646a69d",
+        "frontCrop": "8d47aa9b4024df36999c6fb8f047c2d5816c9575e2eab8d683987b567a25be4a",
+        "backCrop": "931078c9913a04efaa7d3419e16a4a7a0f0be3239c79db6fd7869be4fedbc7e4"
+      }
+    },
+    {
+      "definitionId": "ce-hamlet-event-43512",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/2",
+      "printedName": "General Repairs",
+      "printedPreparationDays": 4,
+      "flavorLiteral": "His role is quite demanding, to keep an abandoned hamlet from falling apart...",
+      "rulesLiteral": "In addition to the Caretaker, roll for another location to be blocked each day.",
+      "frontLiteral": "General Repairs\n[PREPARATION_DAYS:4]\nHis role is quite demanding, to keep an abandoned hamlet from falling apart...\nIn addition to the Caretaker, roll for another location to be blocked each day.",
+      "backLiteral": "HAMLET EVENT",
+      "backSemanticRole": "card-back-only",
+      "literalComplete": true,
+      "transcription": {
+        "method": "Independent visual reading of each original 590x980 front crop and original back sheet",
+        "reader": "Codex C1C23 intake",
+        "normalization": "Line wraps joined; typographic apostrophes normalized. Bracket tokens preserve printed glyphs; flavor and rules remain separate. Empty rulesLiteral is intentional on Uneventful Week, not unreadable text.",
+        "runtimeAsEvidence": false
+      },
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_TTS_CARD_CROP",
+          "side": "front",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/2",
+          "cardId": 43512,
+          "manifestPath": "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json",
+          "path": "docs/data/complete-edition/source-assets/c1c23/crops/43512-front.png",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c23/hamlet-event-front.jpg",
+          "sheetSha256": "65f91c8ab479ca8e9f6c52c15459cba94ab7c1d81037f0e8945f41d5650705c0",
+          "cropSha256": "e4ebf172f2a95fd5e79f9299a91c557873777189b211169d4f33942dd9a9c34d",
+          "bounds": {
+            "left": 1180,
+            "top": 1960,
+            "width": 590,
+            "height": 980
+          }
+        },
+        {
+          "kind": "LOCKED_TTS_CARD_CROP",
+          "side": "back",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/2",
+          "cardId": 43512,
+          "manifestPath": "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json",
+          "path": "docs/data/complete-edition/source-assets/c1c23/crops/43512-back.png",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c23/hamlet-event-back.jpg",
+          "sheetSha256": "9707d8c9ad68e78ef6492454eeae68ca51578bf9a306e29005eb32631646a69d",
+          "cropSha256": "931078c9913a04efaa7d3419e16a4a7a0f0be3239c79db6fd7869be4fedbc7e4",
+          "bounds": {
+            "left": 1180,
+            "top": 1960,
+            "width": 590,
+            "height": 980
+          }
+        }
+      ],
+      "assetHashes": {
+        "frontSheet": "65f91c8ab479ca8e9f6c52c15459cba94ab7c1d81037f0e8945f41d5650705c0",
+        "backSheet": "9707d8c9ad68e78ef6492454eeae68ca51578bf9a306e29005eb32631646a69d",
+        "frontCrop": "e4ebf172f2a95fd5e79f9299a91c557873777189b211169d4f33942dd9a9c34d",
+        "backCrop": "931078c9913a04efaa7d3419e16a4a7a0f0be3239c79db6fd7869be4fedbc7e4"
+      }
+    },
+    {
+      "definitionId": "ce-hamlet-event-43511",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/3",
+      "printedName": "Caregivers Convention",
+      "printedPreparationDays": 2,
+      "flavorLiteral": "Open your heart to another, united under a common cause. Let your heart not falter.",
+      "rulesLiteral": "Each Hero can remove a Quirk for free.",
+      "frontLiteral": "Caregivers Convention\n[PREPARATION_DAYS:2]\nOpen your heart to another, united under a common cause. Let your heart not falter.\nEach Hero can remove a Quirk for free.",
+      "backLiteral": "HAMLET EVENT",
+      "backSemanticRole": "card-back-only",
+      "literalComplete": true,
+      "transcription": {
+        "method": "Independent visual reading of each original 590x980 front crop and original back sheet",
+        "reader": "Codex C1C23 intake",
+        "normalization": "Line wraps joined; typographic apostrophes normalized. Bracket tokens preserve printed glyphs; flavor and rules remain separate. Empty rulesLiteral is intentional on Uneventful Week, not unreadable text.",
+        "runtimeAsEvidence": false
+      },
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_TTS_CARD_CROP",
+          "side": "front",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/3",
+          "cardId": 43511,
+          "manifestPath": "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json",
+          "path": "docs/data/complete-edition/source-assets/c1c23/crops/43511-front.png",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c23/hamlet-event-front.jpg",
+          "sheetSha256": "65f91c8ab479ca8e9f6c52c15459cba94ab7c1d81037f0e8945f41d5650705c0",
+          "cropSha256": "de15c4a2c0113046fc1fc056eaf43cd7a68c3f58cf86edced827d7fc31c79583",
+          "bounds": {
+            "left": 590,
+            "top": 1960,
+            "width": 590,
+            "height": 980
+          }
+        },
+        {
+          "kind": "LOCKED_TTS_CARD_CROP",
+          "side": "back",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/3",
+          "cardId": 43511,
+          "manifestPath": "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json",
+          "path": "docs/data/complete-edition/source-assets/c1c23/crops/43511-back.png",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c23/hamlet-event-back.jpg",
+          "sheetSha256": "9707d8c9ad68e78ef6492454eeae68ca51578bf9a306e29005eb32631646a69d",
+          "cropSha256": "931078c9913a04efaa7d3419e16a4a7a0f0be3239c79db6fd7869be4fedbc7e4",
+          "bounds": {
+            "left": 590,
+            "top": 1960,
+            "width": 590,
+            "height": 980
+          }
+        }
+      ],
+      "assetHashes": {
+        "frontSheet": "65f91c8ab479ca8e9f6c52c15459cba94ab7c1d81037f0e8945f41d5650705c0",
+        "backSheet": "9707d8c9ad68e78ef6492454eeae68ca51578bf9a306e29005eb32631646a69d",
+        "frontCrop": "de15c4a2c0113046fc1fc056eaf43cd7a68c3f58cf86edced827d7fc31c79583",
+        "backCrop": "931078c9913a04efaa7d3419e16a4a7a0f0be3239c79db6fd7869be4fedbc7e4"
+      }
+    },
+    {
+      "definitionId": "ce-hamlet-event-43510",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/4",
+      "printedName": "Medical Breakthrough",
+      "printedPreparationDays": 3,
+      "flavorLiteral": "Even maladies can be defeated by the power of the human mind. What about darkness though?",
+      "rulesLiteral": "Party removes a disease from a Hero.",
+      "frontLiteral": "Medical Breakthrough\n[PREPARATION_DAYS:3]\nEven maladies can be defeated by the power of the human mind. What about darkness though?\nParty removes a disease from a Hero.",
+      "backLiteral": "HAMLET EVENT",
+      "backSemanticRole": "card-back-only",
+      "literalComplete": true,
+      "transcription": {
+        "method": "Independent visual reading of each original 590x980 front crop and original back sheet",
+        "reader": "Codex C1C23 intake",
+        "normalization": "Line wraps joined; typographic apostrophes normalized. Bracket tokens preserve printed glyphs; flavor and rules remain separate. Empty rulesLiteral is intentional on Uneventful Week, not unreadable text.",
+        "runtimeAsEvidence": false
+      },
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_TTS_CARD_CROP",
+          "side": "front",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/4",
+          "cardId": 43510,
+          "manifestPath": "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json",
+          "path": "docs/data/complete-edition/source-assets/c1c23/crops/43510-front.png",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c23/hamlet-event-front.jpg",
+          "sheetSha256": "65f91c8ab479ca8e9f6c52c15459cba94ab7c1d81037f0e8945f41d5650705c0",
+          "cropSha256": "9904068bb9bbdad29d334d06779b439e6c440cc42e6da31bd3bbceaec06c75bf",
+          "bounds": {
+            "left": 0,
+            "top": 1960,
+            "width": 590,
+            "height": 980
+          }
+        },
+        {
+          "kind": "LOCKED_TTS_CARD_CROP",
+          "side": "back",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/4",
+          "cardId": 43510,
+          "manifestPath": "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json",
+          "path": "docs/data/complete-edition/source-assets/c1c23/crops/43510-back.png",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c23/hamlet-event-back.jpg",
+          "sheetSha256": "9707d8c9ad68e78ef6492454eeae68ca51578bf9a306e29005eb32631646a69d",
+          "cropSha256": "931078c9913a04efaa7d3419e16a4a7a0f0be3239c79db6fd7869be4fedbc7e4",
+          "bounds": {
+            "left": 0,
+            "top": 1960,
+            "width": 590,
+            "height": 980
+          }
+        }
+      ],
+      "assetHashes": {
+        "frontSheet": "65f91c8ab479ca8e9f6c52c15459cba94ab7c1d81037f0e8945f41d5650705c0",
+        "backSheet": "9707d8c9ad68e78ef6492454eeae68ca51578bf9a306e29005eb32631646a69d",
+        "frontCrop": "9904068bb9bbdad29d334d06779b439e6c440cc42e6da31bd3bbceaec06c75bf",
+        "backCrop": "931078c9913a04efaa7d3419e16a4a7a0f0be3239c79db6fd7869be4fedbc7e4"
+      }
+    },
+    {
+      "definitionId": "ce-hamlet-event-43509",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/5",
+      "printedName": "The Feast",
+      "printedPreparationDays": 1,
+      "flavorLiteral": "A feast in commemoration of the family estate’s honor and our willingness to survive...",
+      "rulesLiteral": "Each Hero can choose to fully restore either [STRESS] or [HEART].",
+      "frontLiteral": "The Feast\n[PREPARATION_DAYS:1]\nA feast in commemoration of the family estate’s honor and our willingness to survive...\nEach Hero can choose to fully restore either [STRESS] or [HEART].",
+      "backLiteral": "HAMLET EVENT",
+      "backSemanticRole": "card-back-only",
+      "literalComplete": true,
+      "transcription": {
+        "method": "Independent visual reading of each original 590x980 front crop and original back sheet",
+        "reader": "Codex C1C23 intake",
+        "normalization": "Line wraps joined; typographic apostrophes normalized. Bracket tokens preserve printed glyphs; flavor and rules remain separate. Empty rulesLiteral is intentional on Uneventful Week, not unreadable text.",
+        "runtimeAsEvidence": false
+      },
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_TTS_CARD_CROP",
+          "side": "front",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/5",
+          "cardId": 43509,
+          "manifestPath": "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json",
+          "path": "docs/data/complete-edition/source-assets/c1c23/crops/43509-front.png",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c23/hamlet-event-front.jpg",
+          "sheetSha256": "65f91c8ab479ca8e9f6c52c15459cba94ab7c1d81037f0e8945f41d5650705c0",
+          "cropSha256": "05d7d4357e0282ddfcfd09f9385c8764a6d8311696a1eb8ef75cfbe792492917",
+          "bounds": {
+            "left": 2360,
+            "top": 980,
+            "width": 590,
+            "height": 980
+          }
+        },
+        {
+          "kind": "LOCKED_TTS_CARD_CROP",
+          "side": "back",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/5",
+          "cardId": 43509,
+          "manifestPath": "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json",
+          "path": "docs/data/complete-edition/source-assets/c1c23/crops/43509-back.png",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c23/hamlet-event-back.jpg",
+          "sheetSha256": "9707d8c9ad68e78ef6492454eeae68ca51578bf9a306e29005eb32631646a69d",
+          "cropSha256": "931078c9913a04efaa7d3419e16a4a7a0f0be3239c79db6fd7869be4fedbc7e4",
+          "bounds": {
+            "left": 2360,
+            "top": 980,
+            "width": 590,
+            "height": 980
+          }
+        }
+      ],
+      "assetHashes": {
+        "frontSheet": "65f91c8ab479ca8e9f6c52c15459cba94ab7c1d81037f0e8945f41d5650705c0",
+        "backSheet": "9707d8c9ad68e78ef6492454eeae68ca51578bf9a306e29005eb32631646a69d",
+        "frontCrop": "05d7d4357e0282ddfcfd09f9385c8764a6d8311696a1eb8ef75cfbe792492917",
+        "backCrop": "931078c9913a04efaa7d3419e16a4a7a0f0be3239c79db6fd7869be4fedbc7e4"
+      }
+    },
+    {
+      "definitionId": "ce-hamlet-event-43508",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/6",
+      "printedName": "Gypsy Trail",
+      "printedPreparationDays": 2,
+      "flavorLiteral": "Back then, the villagers sought to drive the gypsies away from their lands. Now they only pray that they stay some more...",
+      "rulesLiteral": "Heroes gain +5[GOLD] when selling Trinkets.",
+      "frontLiteral": "Gypsy Trail\n[PREPARATION_DAYS:2]\nBack then, the villagers sought to drive the gypsies away from their lands. Now they only pray that they stay some more...\nHeroes gain +5[GOLD] when selling Trinkets.",
+      "backLiteral": "HAMLET EVENT",
+      "backSemanticRole": "card-back-only",
+      "literalComplete": true,
+      "transcription": {
+        "method": "Independent visual reading of each original 590x980 front crop and original back sheet",
+        "reader": "Codex C1C23 intake",
+        "normalization": "Line wraps joined; typographic apostrophes normalized. Bracket tokens preserve printed glyphs; flavor and rules remain separate. Empty rulesLiteral is intentional on Uneventful Week, not unreadable text.",
+        "runtimeAsEvidence": false
+      },
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_TTS_CARD_CROP",
+          "side": "front",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/6",
+          "cardId": 43508,
+          "manifestPath": "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json",
+          "path": "docs/data/complete-edition/source-assets/c1c23/crops/43508-front.png",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c23/hamlet-event-front.jpg",
+          "sheetSha256": "65f91c8ab479ca8e9f6c52c15459cba94ab7c1d81037f0e8945f41d5650705c0",
+          "cropSha256": "575ef9c4b448e842a95d772d7722e7100c5c475a943f34a29474570ec8e63d09",
+          "bounds": {
+            "left": 1770,
+            "top": 980,
+            "width": 590,
+            "height": 980
+          }
+        },
+        {
+          "kind": "LOCKED_TTS_CARD_CROP",
+          "side": "back",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/6",
+          "cardId": 43508,
+          "manifestPath": "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json",
+          "path": "docs/data/complete-edition/source-assets/c1c23/crops/43508-back.png",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c23/hamlet-event-back.jpg",
+          "sheetSha256": "9707d8c9ad68e78ef6492454eeae68ca51578bf9a306e29005eb32631646a69d",
+          "cropSha256": "931078c9913a04efaa7d3419e16a4a7a0f0be3239c79db6fd7869be4fedbc7e4",
+          "bounds": {
+            "left": 1770,
+            "top": 980,
+            "width": 590,
+            "height": 980
+          }
+        }
+      ],
+      "assetHashes": {
+        "frontSheet": "65f91c8ab479ca8e9f6c52c15459cba94ab7c1d81037f0e8945f41d5650705c0",
+        "backSheet": "9707d8c9ad68e78ef6492454eeae68ca51578bf9a306e29005eb32631646a69d",
+        "frontCrop": "575ef9c4b448e842a95d772d7722e7100c5c475a943f34a29474570ec8e63d09",
+        "backCrop": "931078c9913a04efaa7d3419e16a4a7a0f0be3239c79db6fd7869be4fedbc7e4"
+      }
+    },
+    {
+      "definitionId": "ce-hamlet-event-43507",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/7",
+      "printedName": "Traveling Merchants",
+      "printedPreparationDays": 2,
+      "flavorLiteral": "Distrust and hope embodied on these men’s faces. Their gain, our survival.",
+      "rulesLiteral": "After rolling for Provisions, each Hero can choose one of their Provisions dice to be whichever side they want before the next Quest.",
+      "frontLiteral": "Traveling Merchants\n[PREPARATION_DAYS:2]\nDistrust and hope embodied on these men’s faces. Their gain, our survival.\nAfter rolling for Provisions, each Hero can choose one of their Provisions dice to be whichever side they want before the next Quest.",
+      "backLiteral": "HAMLET EVENT",
+      "backSemanticRole": "card-back-only",
+      "literalComplete": true,
+      "transcription": {
+        "method": "Independent visual reading of each original 590x980 front crop and original back sheet",
+        "reader": "Codex C1C23 intake",
+        "normalization": "Line wraps joined; typographic apostrophes normalized. Bracket tokens preserve printed glyphs; flavor and rules remain separate. Empty rulesLiteral is intentional on Uneventful Week, not unreadable text.",
+        "runtimeAsEvidence": false
+      },
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_TTS_CARD_CROP",
+          "side": "front",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/7",
+          "cardId": 43507,
+          "manifestPath": "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json",
+          "path": "docs/data/complete-edition/source-assets/c1c23/crops/43507-front.png",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c23/hamlet-event-front.jpg",
+          "sheetSha256": "65f91c8ab479ca8e9f6c52c15459cba94ab7c1d81037f0e8945f41d5650705c0",
+          "cropSha256": "0214466ab25321d78a2141aff3c463de20223a04007ada30e6e057bc6a575bd3",
+          "bounds": {
+            "left": 1180,
+            "top": 980,
+            "width": 590,
+            "height": 980
+          }
+        },
+        {
+          "kind": "LOCKED_TTS_CARD_CROP",
+          "side": "back",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/7",
+          "cardId": 43507,
+          "manifestPath": "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json",
+          "path": "docs/data/complete-edition/source-assets/c1c23/crops/43507-back.png",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c23/hamlet-event-back.jpg",
+          "sheetSha256": "9707d8c9ad68e78ef6492454eeae68ca51578bf9a306e29005eb32631646a69d",
+          "cropSha256": "931078c9913a04efaa7d3419e16a4a7a0f0be3239c79db6fd7869be4fedbc7e4",
+          "bounds": {
+            "left": 1180,
+            "top": 980,
+            "width": 590,
+            "height": 980
+          }
+        }
+      ],
+      "assetHashes": {
+        "frontSheet": "65f91c8ab479ca8e9f6c52c15459cba94ab7c1d81037f0e8945f41d5650705c0",
+        "backSheet": "9707d8c9ad68e78ef6492454eeae68ca51578bf9a306e29005eb32631646a69d",
+        "frontCrop": "0214466ab25321d78a2141aff3c463de20223a04007ada30e6e057bc6a575bd3",
+        "backCrop": "931078c9913a04efaa7d3419e16a4a7a0f0be3239c79db6fd7869be4fedbc7e4"
+      }
+    },
+    {
+      "definitionId": "ce-hamlet-event-43506",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/8",
+      "printedName": "Town Fair",
+      "printedPreparationDays": 1,
+      "flavorLiteral": "Happiness and revelry drive the demons away, albeit only for a short while...",
+      "rulesLiteral": "[FOUR_YELLOW_HELMETS]: [STRESS]-3 and [GREEN_PLUS]2 /Hero Level.",
+      "frontLiteral": "Town Fair\n[PREPARATION_DAYS:1]\nHappiness and revelry drive the demons away, albeit only for a short while...\n[FOUR_YELLOW_HELMETS]: [STRESS]-3 and [GREEN_PLUS]2 /Hero Level.",
+      "backLiteral": "HAMLET EVENT",
+      "backSemanticRole": "card-back-only",
+      "literalComplete": true,
+      "transcription": {
+        "method": "Independent visual reading of each original 590x980 front crop and original back sheet",
+        "reader": "Codex C1C23 intake",
+        "normalization": "Line wraps joined; typographic apostrophes normalized. Bracket tokens preserve printed glyphs; flavor and rules remain separate. Empty rulesLiteral is intentional on Uneventful Week, not unreadable text.",
+        "runtimeAsEvidence": false
+      },
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_TTS_CARD_CROP",
+          "side": "front",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/8",
+          "cardId": 43506,
+          "manifestPath": "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json",
+          "path": "docs/data/complete-edition/source-assets/c1c23/crops/43506-front.png",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c23/hamlet-event-front.jpg",
+          "sheetSha256": "65f91c8ab479ca8e9f6c52c15459cba94ab7c1d81037f0e8945f41d5650705c0",
+          "cropSha256": "e12db70daf1fde4b3fe3480c2358b124d86264ede7f3a2075142110db5f1f988",
+          "bounds": {
+            "left": 590,
+            "top": 980,
+            "width": 590,
+            "height": 980
+          }
+        },
+        {
+          "kind": "LOCKED_TTS_CARD_CROP",
+          "side": "back",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/8",
+          "cardId": 43506,
+          "manifestPath": "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json",
+          "path": "docs/data/complete-edition/source-assets/c1c23/crops/43506-back.png",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c23/hamlet-event-back.jpg",
+          "sheetSha256": "9707d8c9ad68e78ef6492454eeae68ca51578bf9a306e29005eb32631646a69d",
+          "cropSha256": "931078c9913a04efaa7d3419e16a4a7a0f0be3239c79db6fd7869be4fedbc7e4",
+          "bounds": {
+            "left": 590,
+            "top": 980,
+            "width": 590,
+            "height": 980
+          }
+        }
+      ],
+      "assetHashes": {
+        "frontSheet": "65f91c8ab479ca8e9f6c52c15459cba94ab7c1d81037f0e8945f41d5650705c0",
+        "backSheet": "9707d8c9ad68e78ef6492454eeae68ca51578bf9a306e29005eb32631646a69d",
+        "frontCrop": "e12db70daf1fde4b3fe3480c2358b124d86264ede7f3a2075142110db5f1f988",
+        "backCrop": "931078c9913a04efaa7d3419e16a4a7a0f0be3239c79db6fd7869be4fedbc7e4"
+      }
+    },
+    {
+      "definitionId": "ce-hamlet-event-43505",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/9",
+      "printedName": "Labor Force",
+      "printedPreparationDays": 3,
+      "flavorLiteral": "Families banded together, seeking to renovate one of the Hamlet’s buildings. Their altruism a welcome but mixed blessing.",
+      "rulesLiteral": "You may upgrade a building for free. If you do, you cannot visit it this week. Discard this event from the deck permanently.",
+      "frontLiteral": "Labor Force\n[PREPARATION_DAYS:3]\nFamilies banded together, seeking to renovate one of the Hamlet’s buildings. Their altruism a welcome but mixed blessing.\nYou may upgrade a building for free. If you do, you cannot visit it this week. Discard this event from the deck permanently.",
+      "backLiteral": "HAMLET EVENT",
+      "backSemanticRole": "card-back-only",
+      "literalComplete": true,
+      "transcription": {
+        "method": "Independent visual reading of each original 590x980 front crop and original back sheet",
+        "reader": "Codex C1C23 intake",
+        "normalization": "Line wraps joined; typographic apostrophes normalized. Bracket tokens preserve printed glyphs; flavor and rules remain separate. Empty rulesLiteral is intentional on Uneventful Week, not unreadable text.",
+        "runtimeAsEvidence": false
+      },
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_TTS_CARD_CROP",
+          "side": "front",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/9",
+          "cardId": 43505,
+          "manifestPath": "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json",
+          "path": "docs/data/complete-edition/source-assets/c1c23/crops/43505-front.png",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c23/hamlet-event-front.jpg",
+          "sheetSha256": "65f91c8ab479ca8e9f6c52c15459cba94ab7c1d81037f0e8945f41d5650705c0",
+          "cropSha256": "7145d88033a9fc31b1eda36f1c4acaa48a5ea116d39c7ee1d2853bfafee6dae5",
+          "bounds": {
+            "left": 0,
+            "top": 980,
+            "width": 590,
+            "height": 980
+          }
+        },
+        {
+          "kind": "LOCKED_TTS_CARD_CROP",
+          "side": "back",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/9",
+          "cardId": 43505,
+          "manifestPath": "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json",
+          "path": "docs/data/complete-edition/source-assets/c1c23/crops/43505-back.png",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c23/hamlet-event-back.jpg",
+          "sheetSha256": "9707d8c9ad68e78ef6492454eeae68ca51578bf9a306e29005eb32631646a69d",
+          "cropSha256": "931078c9913a04efaa7d3419e16a4a7a0f0be3239c79db6fd7869be4fedbc7e4",
+          "bounds": {
+            "left": 0,
+            "top": 980,
+            "width": 590,
+            "height": 980
+          }
+        }
+      ],
+      "assetHashes": {
+        "frontSheet": "65f91c8ab479ca8e9f6c52c15459cba94ab7c1d81037f0e8945f41d5650705c0",
+        "backSheet": "9707d8c9ad68e78ef6492454eeae68ca51578bf9a306e29005eb32631646a69d",
+        "frontCrop": "7145d88033a9fc31b1eda36f1c4acaa48a5ea116d39c7ee1d2853bfafee6dae5",
+        "backCrop": "931078c9913a04efaa7d3419e16a4a7a0f0be3239c79db6fd7869be4fedbc7e4"
+      }
+    },
+    {
+      "definitionId": "ce-hamlet-event-43504",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/10",
+      "printedName": "Uneventful Week",
+      "printedPreparationDays": 3,
+      "flavorLiteral": "The most exquisite news, to have a week without any...",
+      "rulesLiteral": "",
+      "frontLiteral": "Uneventful Week\n[PREPARATION_DAYS:3]\nThe most exquisite news, to have a week without any...",
+      "backLiteral": "HAMLET EVENT",
+      "backSemanticRole": "card-back-only",
+      "literalComplete": true,
+      "transcription": {
+        "method": "Independent visual reading of each original 590x980 front crop and original back sheet",
+        "reader": "Codex C1C23 intake",
+        "normalization": "Line wraps joined; typographic apostrophes normalized. Bracket tokens preserve printed glyphs; flavor and rules remain separate. Empty rulesLiteral is intentional on Uneventful Week, not unreadable text.",
+        "runtimeAsEvidence": false
+      },
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_TTS_CARD_CROP",
+          "side": "front",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/10",
+          "cardId": 43504,
+          "manifestPath": "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json",
+          "path": "docs/data/complete-edition/source-assets/c1c23/crops/43504-front.png",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c23/hamlet-event-front.jpg",
+          "sheetSha256": "65f91c8ab479ca8e9f6c52c15459cba94ab7c1d81037f0e8945f41d5650705c0",
+          "cropSha256": "7827f61c861dcfd7c13ae3d3b20c41c9f04ddf46d6797412059e805db3cf0e43",
+          "bounds": {
+            "left": 2360,
+            "top": 0,
+            "width": 590,
+            "height": 980
+          }
+        },
+        {
+          "kind": "LOCKED_TTS_CARD_CROP",
+          "side": "back",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/10",
+          "cardId": 43504,
+          "manifestPath": "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json",
+          "path": "docs/data/complete-edition/source-assets/c1c23/crops/43504-back.png",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c23/hamlet-event-back.jpg",
+          "sheetSha256": "9707d8c9ad68e78ef6492454eeae68ca51578bf9a306e29005eb32631646a69d",
+          "cropSha256": "931078c9913a04efaa7d3419e16a4a7a0f0be3239c79db6fd7869be4fedbc7e4",
+          "bounds": {
+            "left": 2360,
+            "top": 0,
+            "width": 590,
+            "height": 980
+          }
+        }
+      ],
+      "assetHashes": {
+        "frontSheet": "65f91c8ab479ca8e9f6c52c15459cba94ab7c1d81037f0e8945f41d5650705c0",
+        "backSheet": "9707d8c9ad68e78ef6492454eeae68ca51578bf9a306e29005eb32631646a69d",
+        "frontCrop": "7827f61c861dcfd7c13ae3d3b20c41c9f04ddf46d6797412059e805db3cf0e43",
+        "backCrop": "931078c9913a04efaa7d3419e16a4a7a0f0be3239c79db6fd7869be4fedbc7e4"
+      }
+    },
+    {
+      "definitionId": "ce-hamlet-event-43502",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/11",
+      "printedName": "Lost Shipment",
+      "printedPreparationDays": 4,
+      "flavorLiteral": "Everyone was expecting the goods to arrive intact. But all they got was news of misfortune and loss...",
+      "rulesLiteral": "Party rolls -2 [PROVISION_DIE] before the next Quest.",
+      "frontLiteral": "Lost Shipment\n[PREPARATION_DAYS:4]\nEveryone was expecting the goods to arrive intact. But all they got was news of misfortune and loss...\nParty rolls -2 [PROVISION_DIE] before the next Quest.",
+      "backLiteral": "HAMLET EVENT",
+      "backSemanticRole": "card-back-only",
+      "literalComplete": true,
+      "transcription": {
+        "method": "Independent visual reading of each original 590x980 front crop and original back sheet",
+        "reader": "Codex C1C23 intake",
+        "normalization": "Line wraps joined; typographic apostrophes normalized. Bracket tokens preserve printed glyphs; flavor and rules remain separate. Empty rulesLiteral is intentional on Uneventful Week, not unreadable text.",
+        "runtimeAsEvidence": false
+      },
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_TTS_CARD_CROP",
+          "side": "front",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/11",
+          "cardId": 43502,
+          "manifestPath": "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json",
+          "path": "docs/data/complete-edition/source-assets/c1c23/crops/43502-front.png",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c23/hamlet-event-front.jpg",
+          "sheetSha256": "65f91c8ab479ca8e9f6c52c15459cba94ab7c1d81037f0e8945f41d5650705c0",
+          "cropSha256": "4f7932763ac0b5266a4f7f07987aad809eaaa8a715289bad4e0a471f20f861a2",
+          "bounds": {
+            "left": 1180,
+            "top": 0,
+            "width": 590,
+            "height": 980
+          }
+        },
+        {
+          "kind": "LOCKED_TTS_CARD_CROP",
+          "side": "back",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/11",
+          "cardId": 43502,
+          "manifestPath": "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json",
+          "path": "docs/data/complete-edition/source-assets/c1c23/crops/43502-back.png",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c23/hamlet-event-back.jpg",
+          "sheetSha256": "9707d8c9ad68e78ef6492454eeae68ca51578bf9a306e29005eb32631646a69d",
+          "cropSha256": "931078c9913a04efaa7d3419e16a4a7a0f0be3239c79db6fd7869be4fedbc7e4",
+          "bounds": {
+            "left": 1180,
+            "top": 0,
+            "width": 590,
+            "height": 980
+          }
+        }
+      ],
+      "assetHashes": {
+        "frontSheet": "65f91c8ab479ca8e9f6c52c15459cba94ab7c1d81037f0e8945f41d5650705c0",
+        "backSheet": "9707d8c9ad68e78ef6492454eeae68ca51578bf9a306e29005eb32631646a69d",
+        "frontCrop": "4f7932763ac0b5266a4f7f07987aad809eaaa8a715289bad4e0a471f20f861a2",
+        "backCrop": "931078c9913a04efaa7d3419e16a4a7a0f0be3239c79db6fd7869be4fedbc7e4"
+      }
+    },
+    {
+      "definitionId": "ce-hamlet-event-43503",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/12",
+      "printedName": "Unsettling Darkness",
+      "printedPreparationDays": 3,
+      "flavorLiteral": "When darkness forms shapes in the horizon making all candle lights dim. This was one such week, one of unsettling darkness...",
+      "rulesLiteral": "Start at [LIGHT]4 next run.",
+      "frontLiteral": "Unsettling Darkness\n[PREPARATION_DAYS:3]\nWhen darkness forms shapes in the horizon making all candle lights dim. This was one such week, one of unsettling darkness...\nStart at [LIGHT]4 next run.",
+      "backLiteral": "HAMLET EVENT",
+      "backSemanticRole": "card-back-only",
+      "literalComplete": true,
+      "transcription": {
+        "method": "Independent visual reading of each original 590x980 front crop and original back sheet",
+        "reader": "Codex C1C23 intake",
+        "normalization": "Line wraps joined; typographic apostrophes normalized. Bracket tokens preserve printed glyphs; flavor and rules remain separate. Empty rulesLiteral is intentional on Uneventful Week, not unreadable text.",
+        "runtimeAsEvidence": false
+      },
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_TTS_CARD_CROP",
+          "side": "front",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/12",
+          "cardId": 43503,
+          "manifestPath": "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json",
+          "path": "docs/data/complete-edition/source-assets/c1c23/crops/43503-front.png",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c23/hamlet-event-front.jpg",
+          "sheetSha256": "65f91c8ab479ca8e9f6c52c15459cba94ab7c1d81037f0e8945f41d5650705c0",
+          "cropSha256": "8ba6cf30decb09e58f8506ae33087b22ab920d336ec372e0b8d9eb64c54438a6",
+          "bounds": {
+            "left": 1770,
+            "top": 0,
+            "width": 590,
+            "height": 980
+          }
+        },
+        {
+          "kind": "LOCKED_TTS_CARD_CROP",
+          "side": "back",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/12",
+          "cardId": 43503,
+          "manifestPath": "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json",
+          "path": "docs/data/complete-edition/source-assets/c1c23/crops/43503-back.png",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c23/hamlet-event-back.jpg",
+          "sheetSha256": "9707d8c9ad68e78ef6492454eeae68ca51578bf9a306e29005eb32631646a69d",
+          "cropSha256": "931078c9913a04efaa7d3419e16a4a7a0f0be3239c79db6fd7869be4fedbc7e4",
+          "bounds": {
+            "left": 1770,
+            "top": 0,
+            "width": 590,
+            "height": 980
+          }
+        }
+      ],
+      "assetHashes": {
+        "frontSheet": "65f91c8ab479ca8e9f6c52c15459cba94ab7c1d81037f0e8945f41d5650705c0",
+        "backSheet": "9707d8c9ad68e78ef6492454eeae68ca51578bf9a306e29005eb32631646a69d",
+        "frontCrop": "8ba6cf30decb09e58f8506ae33087b22ab920d336ec372e0b8d9eb64c54438a6",
+        "backCrop": "931078c9913a04efaa7d3419e16a4a7a0f0be3239c79db6fd7869be4fedbc7e4"
+      }
+    },
+    {
+      "definitionId": "ce-hamlet-event-43501",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/13",
+      "printedName": "Busy Week",
+      "printedPreparationDays": 2,
+      "flavorLiteral": "He was nowhere to be seen. Yet one could feel his uneasy presence and hear his irritating laughter.",
+      "rulesLiteral": "Do not place the Caretaker anywhere this week.",
+      "frontLiteral": "Busy Week\n[PREPARATION_DAYS:2]\nHe was nowhere to be seen. Yet one could feel his uneasy presence and hear his irritating laughter.\nDo not place the Caretaker anywhere this week.",
+      "backLiteral": "HAMLET EVENT",
+      "backSemanticRole": "card-back-only",
+      "literalComplete": true,
+      "transcription": {
+        "method": "Independent visual reading of each original 590x980 front crop and original back sheet",
+        "reader": "Codex C1C23 intake",
+        "normalization": "Line wraps joined; typographic apostrophes normalized. Bracket tokens preserve printed glyphs; flavor and rules remain separate. Empty rulesLiteral is intentional on Uneventful Week, not unreadable text.",
+        "runtimeAsEvidence": false
+      },
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_TTS_CARD_CROP",
+          "side": "front",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/13",
+          "cardId": 43501,
+          "manifestPath": "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json",
+          "path": "docs/data/complete-edition/source-assets/c1c23/crops/43501-front.png",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c23/hamlet-event-front.jpg",
+          "sheetSha256": "65f91c8ab479ca8e9f6c52c15459cba94ab7c1d81037f0e8945f41d5650705c0",
+          "cropSha256": "d0c4eeab3da6b55f3e96740f02a4ebc4acffea2c8ae180f14d516cbe67851cea",
+          "bounds": {
+            "left": 590,
+            "top": 0,
+            "width": 590,
+            "height": 980
+          }
+        },
+        {
+          "kind": "LOCKED_TTS_CARD_CROP",
+          "side": "back",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/13",
+          "cardId": 43501,
+          "manifestPath": "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json",
+          "path": "docs/data/complete-edition/source-assets/c1c23/crops/43501-back.png",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c23/hamlet-event-back.jpg",
+          "sheetSha256": "9707d8c9ad68e78ef6492454eeae68ca51578bf9a306e29005eb32631646a69d",
+          "cropSha256": "931078c9913a04efaa7d3419e16a4a7a0f0be3239c79db6fd7869be4fedbc7e4",
+          "bounds": {
+            "left": 590,
+            "top": 0,
+            "width": 590,
+            "height": 980
+          }
+        }
+      ],
+      "assetHashes": {
+        "frontSheet": "65f91c8ab479ca8e9f6c52c15459cba94ab7c1d81037f0e8945f41d5650705c0",
+        "backSheet": "9707d8c9ad68e78ef6492454eeae68ca51578bf9a306e29005eb32631646a69d",
+        "frontCrop": "d0c4eeab3da6b55f3e96740f02a4ebc4acffea2c8ae180f14d516cbe67851cea",
+        "backCrop": "931078c9913a04efaa7d3419e16a4a7a0f0be3239c79db6fd7869be4fedbc7e4"
+      }
+    },
+    {
+      "definitionId": "ce-hamlet-event-43500",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/14",
+      "printedName": "Supply Run",
+      "printedPreparationDays": 2,
+      "flavorLiteral": "’Tis not only the Heroes but the common folk too, that offer up anything they can for the Hamlet’s common good.",
+      "rulesLiteral": "Party gains +2 [PROVISION_DIE] before the next Quest.",
+      "frontLiteral": "Supply Run\n[PREPARATION_DAYS:2]\n’Tis not only the Heroes but the common folk too, that offer up anything they can for the Hamlet’s common good.\nParty gains +2 [PROVISION_DIE] before the next Quest.",
+      "backLiteral": "HAMLET EVENT",
+      "backSemanticRole": "card-back-only",
+      "literalComplete": true,
+      "transcription": {
+        "method": "Independent visual reading of each original 590x980 front crop and original back sheet",
+        "reader": "Codex C1C23 intake",
+        "normalization": "Line wraps joined; typographic apostrophes normalized. Bracket tokens preserve printed glyphs; flavor and rules remain separate. Empty rulesLiteral is intentional on Uneventful Week, not unreadable text.",
+        "runtimeAsEvidence": false
+      },
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_TTS_CARD_CROP",
+          "side": "front",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/14",
+          "cardId": 43500,
+          "manifestPath": "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json",
+          "path": "docs/data/complete-edition/source-assets/c1c23/crops/43500-front.png",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c23/hamlet-event-front.jpg",
+          "sheetSha256": "65f91c8ab479ca8e9f6c52c15459cba94ab7c1d81037f0e8945f41d5650705c0",
+          "cropSha256": "db63e8f19ef54554500922b9fe020bccb6e4ad1a8733f2f649c735ad7ecd0fb4",
+          "bounds": {
+            "left": 0,
+            "top": 0,
+            "width": 590,
+            "height": 980
+          }
+        },
+        {
+          "kind": "LOCKED_TTS_CARD_CROP",
+          "side": "back",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/14",
+          "cardId": 43500,
+          "manifestPath": "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json",
+          "path": "docs/data/complete-edition/source-assets/c1c23/crops/43500-back.png",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c23/hamlet-event-back.jpg",
+          "sheetSha256": "9707d8c9ad68e78ef6492454eeae68ca51578bf9a306e29005eb32631646a69d",
+          "cropSha256": "931078c9913a04efaa7d3419e16a4a7a0f0be3239c79db6fd7869be4fedbc7e4",
+          "bounds": {
+            "left": 0,
+            "top": 0,
+            "width": 590,
+            "height": 980
+          }
+        }
+      ],
+      "assetHashes": {
+        "frontSheet": "65f91c8ab479ca8e9f6c52c15459cba94ab7c1d81037f0e8945f41d5650705c0",
+        "backSheet": "9707d8c9ad68e78ef6492454eeae68ca51578bf9a306e29005eb32631646a69d",
+        "frontCrop": "db63e8f19ef54554500922b9fe020bccb6e4ad1a8733f2f649c735ad7ecd0fb4",
+        "backCrop": "931078c9913a04efaa7d3419e16a4a7a0f0be3239c79db6fd7869be4fedbc7e4"
+      }
+    },
+    {
+      "definitionId": "ce-hamlet-event-43515",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/15",
+      "printedName": "Militia Training",
+      "printedPreparationDays": "?",
+      "flavorLiteral": "The Hamlet’s guards train intensely. If only the Heroes could benefit from that. Alas, they’d lose all of their precious time though...",
+      "rulesLiteral": "All Heroes can Level Up one Lvl 1 Skill. If they do, 0 days. Else 3 days.",
+      "frontLiteral": "Militia Training\n[PREPARATION_DAYS:?]\nThe Hamlet’s guards train intensely. If only the Heroes could benefit from that. Alas, they’d lose all of their precious time though...\nAll Heroes can Level Up one Lvl 1 Skill. If they do, 0 days. Else 3 days.",
+      "backLiteral": "HAMLET EVENT",
+      "backSemanticRole": "card-back-only",
+      "literalComplete": true,
+      "transcription": {
+        "method": "Independent visual reading of each original 590x980 front crop and original back sheet",
+        "reader": "Codex C1C23 intake",
+        "normalization": "Line wraps joined; typographic apostrophes normalized. Bracket tokens preserve printed glyphs; flavor and rules remain separate. Empty rulesLiteral is intentional on Uneventful Week, not unreadable text.",
+        "runtimeAsEvidence": false
+      },
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_TTS_CARD_CROP",
+          "side": "front",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/15",
+          "cardId": 43515,
+          "manifestPath": "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json",
+          "path": "docs/data/complete-edition/source-assets/c1c23/crops/43515-front.png",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c23/hamlet-event-front.jpg",
+          "sheetSha256": "65f91c8ab479ca8e9f6c52c15459cba94ab7c1d81037f0e8945f41d5650705c0",
+          "cropSha256": "0791c26dddf1d316b93dc6d498df0f67ccf38c7ca0c6234265bc5c6d208bdf34",
+          "bounds": {
+            "left": 0,
+            "top": 2940,
+            "width": 590,
+            "height": 980
+          }
+        },
+        {
+          "kind": "LOCKED_TTS_CARD_CROP",
+          "side": "back",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/15",
+          "cardId": 43515,
+          "manifestPath": "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json",
+          "path": "docs/data/complete-edition/source-assets/c1c23/crops/43515-back.png",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c23/hamlet-event-back.jpg",
+          "sheetSha256": "9707d8c9ad68e78ef6492454eeae68ca51578bf9a306e29005eb32631646a69d",
+          "cropSha256": "931078c9913a04efaa7d3419e16a4a7a0f0be3239c79db6fd7869be4fedbc7e4",
+          "bounds": {
+            "left": 0,
+            "top": 2940,
+            "width": 590,
+            "height": 980
+          }
+        }
+      ],
+      "assetHashes": {
+        "frontSheet": "65f91c8ab479ca8e9f6c52c15459cba94ab7c1d81037f0e8945f41d5650705c0",
+        "backSheet": "9707d8c9ad68e78ef6492454eeae68ca51578bf9a306e29005eb32631646a69d",
+        "frontCrop": "0791c26dddf1d316b93dc6d498df0f67ccf38c7ca0c6234265bc5c6d208bdf34",
+        "backCrop": "931078c9913a04efaa7d3419e16a4a7a0f0be3239c79db6fd7869be4fedbc7e4"
+      }
+    }
+  ]
+}

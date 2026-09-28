@@ -1,0 +1,812 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-23",
+  "baselineHead": "a6f29f9543f017c454724bbeade445c94d0c63f2",
+  "inputSha256": {
+    "docs/data/complete-edition/c1c22-hamlet-event-source-intake-register.json": "9c0ff53d19f893c8e97d19de6fc2d9650b323b11308293e37ff716c6811311d0",
+    "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json": "11204d1e54cdf71077d54ceeb9d575f89fc61d027324505e9ccf6a1a1545b103",
+    "docs/data/complete-edition/c1c23-rulebook-evidence.json": "b83839abc608f999e1cb443a007d25092fac5d2f4d41bd2c080b3fb33e36e357",
+    "scripts/audit/c1c23-printed-source.ts": "ce13fa071a091813c54774170ad48bcde85139ba7d3b19084049a1120af9fb5c"
+  },
+  "sourceGaps": [
+    {
+      "gapId": "deck:/deckLifecycle/all16SimultaneouslyUsed",
+      "blockerKind": "SOURCE",
+      "scope": "DECK",
+      "field": "/deckLifecycle/all16SimultaneouslyUsed",
+      "category": "EXPANSION_MEMBERSHIP_UNRESOLVED",
+      "reason": "Single 16-card TTS container and core count do not prove Complete Edition campaign configuration uses every card together.",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/0",
+        "tts-path:/ObjectStates/83/ContainedObjects/1",
+        "tts-path:/ObjectStates/83/ContainedObjects/2",
+        "tts-path:/ObjectStates/83/ContainedObjects/3",
+        "tts-path:/ObjectStates/83/ContainedObjects/4",
+        "tts-path:/ObjectStates/83/ContainedObjects/5",
+        "tts-path:/ObjectStates/83/ContainedObjects/6",
+        "tts-path:/ObjectStates/83/ContainedObjects/7",
+        "tts-path:/ObjectStates/83/ContainedObjects/8",
+        "tts-path:/ObjectStates/83/ContainedObjects/9",
+        "tts-path:/ObjectStates/83/ContainedObjects/10",
+        "tts-path:/ObjectStates/83/ContainedObjects/11",
+        "tts-path:/ObjectStates/83/ContainedObjects/12",
+        "tts-path:/ObjectStates/83/ContainedObjects/13",
+        "tts-path:/ObjectStates/83/ContainedObjects/14",
+        "tts-path:/ObjectStates/83/ContainedObjects/15"
+      ]
+    },
+    {
+      "gapId": "deck:/deckLifecycle/expansionFiltering",
+      "blockerKind": "SOURCE",
+      "scope": "DECK",
+      "field": "/deckLifecycle/expansionFiltering",
+      "category": "EXPANSION_MEMBERSHIP_UNRESOLVED",
+      "reason": "No card-by-card expansion/configuration rule bound from the locked source; no expansion membership inferred from artwork or filenames.",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/0",
+        "tts-path:/ObjectStates/83/ContainedObjects/1",
+        "tts-path:/ObjectStates/83/ContainedObjects/2",
+        "tts-path:/ObjectStates/83/ContainedObjects/3",
+        "tts-path:/ObjectStates/83/ContainedObjects/4",
+        "tts-path:/ObjectStates/83/ContainedObjects/5",
+        "tts-path:/ObjectStates/83/ContainedObjects/6",
+        "tts-path:/ObjectStates/83/ContainedObjects/7",
+        "tts-path:/ObjectStates/83/ContainedObjects/8",
+        "tts-path:/ObjectStates/83/ContainedObjects/9",
+        "tts-path:/ObjectStates/83/ContainedObjects/10",
+        "tts-path:/ObjectStates/83/ContainedObjects/11",
+        "tts-path:/ObjectStates/83/ContainedObjects/12",
+        "tts-path:/ObjectStates/83/ContainedObjects/13",
+        "tts-path:/ObjectStates/83/ContainedObjects/14",
+        "tts-path:/ObjectStates/83/ContainedObjects/15"
+      ]
+    },
+    {
+      "gapId": "deck:/deckLifecycle/revealTiming",
+      "blockerKind": "SOURCE",
+      "scope": "DECK",
+      "field": "/deckLifecycle/revealTiming",
+      "category": "TRIGGER_TIMING_UNRESOLVED",
+      "reason": "Draw and follow instructions imply reading, but a separate reveal trigger/order is not defined; no synthetic reveal event contract.",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/0",
+        "tts-path:/ObjectStates/83/ContainedObjects/1",
+        "tts-path:/ObjectStates/83/ContainedObjects/2",
+        "tts-path:/ObjectStates/83/ContainedObjects/3",
+        "tts-path:/ObjectStates/83/ContainedObjects/4",
+        "tts-path:/ObjectStates/83/ContainedObjects/5",
+        "tts-path:/ObjectStates/83/ContainedObjects/6",
+        "tts-path:/ObjectStates/83/ContainedObjects/7",
+        "tts-path:/ObjectStates/83/ContainedObjects/8",
+        "tts-path:/ObjectStates/83/ContainedObjects/9",
+        "tts-path:/ObjectStates/83/ContainedObjects/10",
+        "tts-path:/ObjectStates/83/ContainedObjects/11",
+        "tts-path:/ObjectStates/83/ContainedObjects/12",
+        "tts-path:/ObjectStates/83/ContainedObjects/13",
+        "tts-path:/ObjectStates/83/ContainedObjects/14",
+        "tts-path:/ObjectStates/83/ContainedObjects/15"
+      ]
+    },
+    {
+      "gapId": "deck:/deckLifecycle/exhaustedDeckBehavior",
+      "blockerKind": "SOURCE",
+      "scope": "DECK",
+      "field": "/deckLifecycle/exhaustedDeckBehavior",
+      "category": "DECK_LIFECYCLE_UNRESOLVED",
+      "reason": "No explicit exhausted-deck rule in bound source; no assumed reshuffle/recycle of permanently removed Events.",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/0",
+        "tts-path:/ObjectStates/83/ContainedObjects/1",
+        "tts-path:/ObjectStates/83/ContainedObjects/2",
+        "tts-path:/ObjectStates/83/ContainedObjects/3",
+        "tts-path:/ObjectStates/83/ContainedObjects/4",
+        "tts-path:/ObjectStates/83/ContainedObjects/5",
+        "tts-path:/ObjectStates/83/ContainedObjects/6",
+        "tts-path:/ObjectStates/83/ContainedObjects/7",
+        "tts-path:/ObjectStates/83/ContainedObjects/8",
+        "tts-path:/ObjectStates/83/ContainedObjects/9",
+        "tts-path:/ObjectStates/83/ContainedObjects/10",
+        "tts-path:/ObjectStates/83/ContainedObjects/11",
+        "tts-path:/ObjectStates/83/ContainedObjects/12",
+        "tts-path:/ObjectStates/83/ContainedObjects/13",
+        "tts-path:/ObjectStates/83/ContainedObjects/14",
+        "tts-path:/ObjectStates/83/ContainedObjects/15"
+      ]
+    },
+    {
+      "gapId": "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+      "blockerKind": "SOURCE",
+      "scope": "DECK",
+      "field": "/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+      "category": "DECK_LIFECYCLE_UNRESOLVED",
+      "reason": "TTS physical copies do not establish every campaign/expansion copy policy.",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/0",
+        "tts-path:/ObjectStates/83/ContainedObjects/1",
+        "tts-path:/ObjectStates/83/ContainedObjects/2",
+        "tts-path:/ObjectStates/83/ContainedObjects/3",
+        "tts-path:/ObjectStates/83/ContainedObjects/4",
+        "tts-path:/ObjectStates/83/ContainedObjects/5",
+        "tts-path:/ObjectStates/83/ContainedObjects/6",
+        "tts-path:/ObjectStates/83/ContainedObjects/7",
+        "tts-path:/ObjectStates/83/ContainedObjects/8",
+        "tts-path:/ObjectStates/83/ContainedObjects/9",
+        "tts-path:/ObjectStates/83/ContainedObjects/10",
+        "tts-path:/ObjectStates/83/ContainedObjects/11",
+        "tts-path:/ObjectStates/83/ContainedObjects/12",
+        "tts-path:/ObjectStates/83/ContainedObjects/13",
+        "tts-path:/ObjectStates/83/ContainedObjects/14",
+        "tts-path:/ObjectStates/83/ContainedObjects/15"
+      ]
+    },
+    {
+      "gapId": "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave",
+      "blockerKind": "SOURCE",
+      "scope": "DECK",
+      "field": "/deckLifecycle/campaignPersistence/eventStateAcrossSave",
+      "category": "DECK_LIFECYCLE_UNRESOLVED",
+      "reason": "Rulebook p35 allows campaign saving but does not enumerate Event state in this extraction; exact saved membership/order and pending effects remain unbound.",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/0",
+        "tts-path:/ObjectStates/83/ContainedObjects/1",
+        "tts-path:/ObjectStates/83/ContainedObjects/2",
+        "tts-path:/ObjectStates/83/ContainedObjects/3",
+        "tts-path:/ObjectStates/83/ContainedObjects/4",
+        "tts-path:/ObjectStates/83/ContainedObjects/5",
+        "tts-path:/ObjectStates/83/ContainedObjects/6",
+        "tts-path:/ObjectStates/83/ContainedObjects/7",
+        "tts-path:/ObjectStates/83/ContainedObjects/8",
+        "tts-path:/ObjectStates/83/ContainedObjects/9",
+        "tts-path:/ObjectStates/83/ContainedObjects/10",
+        "tts-path:/ObjectStates/83/ContainedObjects/11",
+        "tts-path:/ObjectStates/83/ContainedObjects/12",
+        "tts-path:/ObjectStates/83/ContainedObjects/13",
+        "tts-path:/ObjectStates/83/ContainedObjects/14",
+        "tts-path:/ObjectStates/83/ContainedObjects/15"
+      ]
+    },
+    {
+      "gapId": "ce-hamlet-event-43514:/choices/0/cancelability",
+      "blockerKind": "SOURCE",
+      "scope": "CARD",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/0"
+      ],
+      "field": "/choices/0/cancelability",
+      "category": "CHOICE_SCOPE_UNRESOLVED",
+      "reason": "Printed optionality permits declining before commitment; reversal after commitment is not specified."
+    },
+    {
+      "gapId": "ce-hamlet-event-43513:/effects/1/existingAfflictionOrVirtue",
+      "blockerKind": "SOURCE",
+      "scope": "CARD",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/1"
+      ],
+      "field": "/effects/1/existingAfflictionOrVirtue",
+      "category": "TARGET_SCOPE_UNRESOLVED",
+      "reason": "Interaction with existing Affliction/Virtue and Virtue deck availability is not stated on this card."
+    },
+    {
+      "gapId": "ce-hamlet-event-43511:/choices/0/cancelability",
+      "blockerKind": "SOURCE",
+      "scope": "CARD",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/3"
+      ],
+      "field": "/choices/0/cancelability",
+      "category": "CHOICE_SCOPE_UNRESOLVED",
+      "reason": "Printed optionality permits declining before commitment; reversal after commitment is not specified."
+    },
+    {
+      "gapId": "ce-hamlet-event-43510:/choices/0/cancelability",
+      "blockerKind": "SOURCE",
+      "scope": "CARD",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/4"
+      ],
+      "field": "/choices/0/cancelability",
+      "category": "CHOICE_SCOPE_UNRESOLVED",
+      "reason": "No eligible diseased Hero / cancellation behavior is not specified by this mandatory sentence."
+    },
+    {
+      "gapId": "ce-hamlet-event-43509:/choices/0/cancelability",
+      "blockerKind": "SOURCE",
+      "scope": "CARD",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/5"
+      ],
+      "field": "/choices/0/cancelability",
+      "category": "CHOICE_SCOPE_UNRESOLVED",
+      "reason": "Printed optionality permits declining before commitment; reversal after commitment is not specified."
+    },
+    {
+      "gapId": "ce-hamlet-event-43508:/effects/0/duration",
+      "blockerKind": "SOURCE",
+      "scope": "CARD",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/6"
+      ],
+      "field": "/effects/0/duration",
+      "category": "TRIGGER_TIMING_UNRESOLVED",
+      "reason": "Card does not explicitly state duration; this-week scope must not be inferred solely from adjacent Events."
+    },
+    {
+      "gapId": "ce-hamlet-event-43507:/choices/0/cancelability",
+      "blockerKind": "SOURCE",
+      "scope": "CARD",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/7"
+      ],
+      "field": "/choices/0/cancelability",
+      "category": "CHOICE_SCOPE_UNRESOLVED",
+      "reason": "Printed optionality permits declining before commitment; reversal after commitment is not specified."
+    },
+    {
+      "gapId": "ce-hamlet-event-43507:/effects/0/ownershipAfterPooling",
+      "blockerKind": "SOURCE",
+      "scope": "CARD",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/7"
+      ],
+      "field": "/effects/0/ownershipAfterPooling",
+      "category": "TARGET_SCOPE_UNRESOLVED",
+      "reason": "Rulebook p12 pools all dice; card requires their dice. Preserve per-Hero roll provenance; interaction with already-pooled/unattributed dice is not specified."
+    },
+    {
+      "gapId": "ce-hamlet-event-43506:/target/scope",
+      "blockerKind": "SOURCE",
+      "scope": "CARD",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/8"
+      ],
+      "field": "/target/scope",
+      "category": "TARGET_SCOPE_UNRESOLVED",
+      "reason": "Four yellow helmet pictograms are preserved; no explicit legend binding for this target glyph in inspected source pages. Do not silently equate it with selected/current/all campaign heroes."
+    },
+    {
+      "gapId": "ce-hamlet-event-43505:/choices/0/cancelability",
+      "blockerKind": "SOURCE",
+      "scope": "CARD",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/9"
+      ],
+      "field": "/choices/0/cancelability",
+      "category": "CHOICE_SCOPE_UNRESOLVED",
+      "reason": "Printed optionality permits declining before commitment; reversal after commitment is not specified."
+    },
+    {
+      "gapId": "ce-hamlet-event-43505:/lifecycle/condition",
+      "blockerKind": "SOURCE",
+      "scope": "CARD",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/9"
+      ],
+      "field": "/lifecycle/condition",
+      "category": "DECK_LIFECYCLE_UNRESOLVED",
+      "reason": "Final discard sentence is outside the if-clause; whether declining also permanently removes the card is not explicitly settled."
+    },
+    {
+      "gapId": "ce-hamlet-event-43500:/effects/0/acquisition",
+      "blockerKind": "SOURCE",
+      "scope": "CARD",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/14"
+      ],
+      "field": "/effects/0/acquisition",
+      "category": "EFFECT_ORDER_UNRESOLVED",
+      "reason": "Card says gains, not rolls; exact acquisition/roll ordering relative to the normal provision roll is not specified."
+    },
+    {
+      "gapId": "ce-hamlet-event-43515:/choices/0/cancelability",
+      "blockerKind": "SOURCE",
+      "scope": "CARD",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/15"
+      ],
+      "field": "/choices/0/cancelability",
+      "category": "CHOICE_SCOPE_UNRESOLVED",
+      "reason": "Printed optionality permits declining before commitment; reversal after commitment is not specified."
+    },
+    {
+      "gapId": "ce-hamlet-event-43515:/choices/0/mixedParticipation",
+      "blockerKind": "SOURCE",
+      "scope": "CARD",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/15"
+      ],
+      "field": "/choices/0/mixedParticipation",
+      "category": "CHOICE_SCOPE_UNRESOLVED",
+      "reason": "If they do does not settle mixed acceptance or Heroes without a Level 1 Skill; do not invent an all-or-nothing vote."
+    },
+    {
+      "gapId": "ce-hamlet-event-43515:/costs/1/status",
+      "blockerKind": "SOURCE",
+      "scope": "CARD",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/15"
+      ],
+      "field": "/costs/1/status",
+      "category": "CHOICE_SCOPE_UNRESOLVED",
+      "reason": "Unlike Guild Training this card does not say for free; whether ordinary Gold/XP costs apply is not explicit."
+    }
+  ],
+  "runtimeGaps": [
+    {
+      "gapId": "ce-hamlet-event-43514:engine",
+      "blockerKind": "RUNTIME",
+      "category": "ENGINE_BINDING_MISSING",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/0"
+      ],
+      "requiredPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_OPTIONAL_SKILL_SELECTION_PER_HERO",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SOURCE_BOUND_CONSUMER",
+        "EVENT_UPGRADE_SKILL"
+      ]
+    },
+    {
+      "gapId": "ce-hamlet-event-43514:proof",
+      "blockerKind": "PROOF",
+      "category": "PRODUCTION_PROOF_MISSING",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/0"
+      ],
+      "obligations": [
+        "PRODUCTION_PROOF_MISSING:Event save/replay",
+        "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+      ]
+    },
+    {
+      "gapId": "ce-hamlet-event-43513:engine",
+      "blockerKind": "RUNTIME",
+      "category": "ENGINE_BINDING_MISSING",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/1"
+      ],
+      "requiredPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_GAIN_VIRTUE",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_ROLL_D10_PER_HERO",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SET_STRESS_MARKER_SIDE",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ]
+    },
+    {
+      "gapId": "ce-hamlet-event-43513:proof",
+      "blockerKind": "PROOF",
+      "category": "PRODUCTION_PROOF_MISSING",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/1"
+      ],
+      "obligations": [
+        "PRODUCTION_PROOF_MISSING:Event save/replay",
+        "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+      ]
+    },
+    {
+      "gapId": "ce-hamlet-event-43512:engine",
+      "blockerKind": "RUNTIME",
+      "category": "ENGINE_BINDING_MISSING",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/2"
+      ],
+      "requiredPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_ROLL_ADDITIONAL_BUILDING_BLOCK",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ]
+    },
+    {
+      "gapId": "ce-hamlet-event-43512:proof",
+      "blockerKind": "PROOF",
+      "category": "PRODUCTION_PROOF_MISSING",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/2"
+      ],
+      "obligations": [
+        "PRODUCTION_PROOF_MISSING:Event save/replay",
+        "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+      ]
+    },
+    {
+      "gapId": "ce-hamlet-event-43511:engine",
+      "blockerKind": "RUNTIME",
+      "category": "ENGINE_BINDING_MISSING",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/3"
+      ],
+      "requiredPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_OPTIONAL_QUIRK_SELECTION_PER_HERO",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_REMOVE_QUIRK",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ]
+    },
+    {
+      "gapId": "ce-hamlet-event-43511:proof",
+      "blockerKind": "PROOF",
+      "category": "PRODUCTION_PROOF_MISSING",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/3"
+      ],
+      "obligations": [
+        "PRODUCTION_PROOF_MISSING:Event save/replay",
+        "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+      ]
+    },
+    {
+      "gapId": "ce-hamlet-event-43510:engine",
+      "blockerKind": "RUNTIME",
+      "category": "ENGINE_BINDING_MISSING",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/4"
+      ],
+      "requiredPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_REMOVE_DISEASE",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SELECT_HERO_AND_DISEASE",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ]
+    },
+    {
+      "gapId": "ce-hamlet-event-43510:proof",
+      "blockerKind": "PROOF",
+      "category": "PRODUCTION_PROOF_MISSING",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/4"
+      ],
+      "obligations": [
+        "PRODUCTION_PROOF_MISSING:Event save/replay",
+        "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+      ]
+    },
+    {
+      "gapId": "ce-hamlet-event-43509:engine",
+      "blockerKind": "RUNTIME",
+      "category": "ENGINE_BINDING_MISSING",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/5"
+      ],
+      "requiredPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_FULL_HEALTH_RESTORE",
+        "EVENT_FULL_STRESS_RECOVERY",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SELECT_ONE_OPTION_PER_HERO",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ]
+    },
+    {
+      "gapId": "ce-hamlet-event-43509:proof",
+      "blockerKind": "PROOF",
+      "category": "PRODUCTION_PROOF_MISSING",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/5"
+      ],
+      "obligations": [
+        "PRODUCTION_PROOF_MISSING:Event save/replay",
+        "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+      ]
+    },
+    {
+      "gapId": "ce-hamlet-event-43508:engine",
+      "blockerKind": "RUNTIME",
+      "category": "ENGINE_BINDING_MISSING",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/6"
+      ],
+      "requiredPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_MODIFY_TRINKET_SALE_GOLD",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ]
+    },
+    {
+      "gapId": "ce-hamlet-event-43508:proof",
+      "blockerKind": "PROOF",
+      "category": "PRODUCTION_PROOF_MISSING",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/6"
+      ],
+      "obligations": [
+        "PRODUCTION_PROOF_MISSING:Event save/replay",
+        "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+      ]
+    },
+    {
+      "gapId": "ce-hamlet-event-43507:engine",
+      "blockerKind": "RUNTIME",
+      "category": "ENGINE_BINDING_MISSING",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/7"
+      ],
+      "requiredPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_OPTIONAL_DIE_AND_FACE_SELECTION",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SET_PROVISION_DIE_FACE",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ]
+    },
+    {
+      "gapId": "ce-hamlet-event-43507:proof",
+      "blockerKind": "PROOF",
+      "category": "PRODUCTION_PROOF_MISSING",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/7"
+      ],
+      "obligations": [
+        "PRODUCTION_PROOF_MISSING:Event save/replay",
+        "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+      ]
+    },
+    {
+      "gapId": "ce-hamlet-event-43506:engine",
+      "blockerKind": "RUNTIME",
+      "category": "ENGINE_BINDING_MISSING",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/8"
+      ],
+      "requiredPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_HEAL",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_RECOVER_STRESS",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ]
+    },
+    {
+      "gapId": "ce-hamlet-event-43506:proof",
+      "blockerKind": "PROOF",
+      "category": "PRODUCTION_PROOF_MISSING",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/8"
+      ],
+      "obligations": [
+        "PRODUCTION_PROOF_MISSING:Event save/replay",
+        "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+      ]
+    },
+    {
+      "gapId": "ce-hamlet-event-43505:engine",
+      "blockerKind": "RUNTIME",
+      "category": "ENGINE_BINDING_MISSING",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/9"
+      ],
+      "requiredPrimitives": [
+        "EVENT_BLOCK_BUILDING_VISITS",
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_OPTIONAL_BUILDING_SELECTION",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SOURCE_BOUND_CONSUMER",
+        "EVENT_UPGRADE_BUILDING"
+      ]
+    },
+    {
+      "gapId": "ce-hamlet-event-43505:proof",
+      "blockerKind": "PROOF",
+      "category": "PRODUCTION_PROOF_MISSING",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/9"
+      ],
+      "obligations": [
+        "PRODUCTION_PROOF_MISSING:Event save/replay",
+        "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+      ]
+    },
+    {
+      "gapId": "ce-hamlet-event-43504:engine",
+      "blockerKind": "RUNTIME",
+      "category": "ENGINE_BINDING_MISSING",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/10"
+      ],
+      "requiredPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ]
+    },
+    {
+      "gapId": "ce-hamlet-event-43504:proof",
+      "blockerKind": "PROOF",
+      "category": "PRODUCTION_PROOF_MISSING",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/10"
+      ],
+      "obligations": [
+        "PRODUCTION_PROOF_MISSING:Event save/replay",
+        "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+      ]
+    },
+    {
+      "gapId": "ce-hamlet-event-43502:engine",
+      "blockerKind": "RUNTIME",
+      "category": "ENGINE_BINDING_MISSING",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/11"
+      ],
+      "requiredPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_MODIFY_PROVISION_ROLL_COUNT",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ]
+    },
+    {
+      "gapId": "ce-hamlet-event-43502:proof",
+      "blockerKind": "PROOF",
+      "category": "PRODUCTION_PROOF_MISSING",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/11"
+      ],
+      "obligations": [
+        "PRODUCTION_PROOF_MISSING:Event save/replay",
+        "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+      ]
+    },
+    {
+      "gapId": "ce-hamlet-event-43503:engine",
+      "blockerKind": "RUNTIME",
+      "category": "ENGINE_BINDING_MISSING",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/12"
+      ],
+      "requiredPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SET_STARTING_LIGHT",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ]
+    },
+    {
+      "gapId": "ce-hamlet-event-43503:proof",
+      "blockerKind": "PROOF",
+      "category": "PRODUCTION_PROOF_MISSING",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/12"
+      ],
+      "obligations": [
+        "PRODUCTION_PROOF_MISSING:Event save/replay",
+        "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+      ]
+    },
+    {
+      "gapId": "ce-hamlet-event-43501:engine",
+      "blockerKind": "RUNTIME",
+      "category": "ENGINE_BINDING_MISSING",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/13"
+      ],
+      "requiredPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SOURCE_BOUND_CONSUMER",
+        "EVENT_SUPPRESS_CARETAKER_PLACEMENT"
+      ]
+    },
+    {
+      "gapId": "ce-hamlet-event-43501:proof",
+      "blockerKind": "PROOF",
+      "category": "PRODUCTION_PROOF_MISSING",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/13"
+      ],
+      "obligations": [
+        "PRODUCTION_PROOF_MISSING:Event save/replay",
+        "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+      ]
+    },
+    {
+      "gapId": "ce-hamlet-event-43500:engine",
+      "blockerKind": "RUNTIME",
+      "category": "ENGINE_BINDING_MISSING",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/14"
+      ],
+      "requiredPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_GAIN_PROVISION_DICE",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ]
+    },
+    {
+      "gapId": "ce-hamlet-event-43500:proof",
+      "blockerKind": "PROOF",
+      "category": "PRODUCTION_PROOF_MISSING",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/14"
+      ],
+      "obligations": [
+        "PRODUCTION_PROOF_MISSING:Event save/replay",
+        "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+      ]
+    },
+    {
+      "gapId": "ce-hamlet-event-43515:engine",
+      "blockerKind": "RUNTIME",
+      "category": "ENGINE_BINDING_MISSING",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/15"
+      ],
+      "requiredPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_PARTY_TRAIN_OR_PREPARE",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SET_PREPARATION_DAYS",
+        "EVENT_SOURCE_BOUND_CONSUMER",
+        "EVENT_UPGRADE_LEVEL_ONE_SKILL"
+      ]
+    },
+    {
+      "gapId": "ce-hamlet-event-43515:proof",
+      "blockerKind": "PROOF",
+      "category": "PRODUCTION_PROOF_MISSING",
+      "physicalIds": [
+        "tts-path:/ObjectStates/83/ContainedObjects/15"
+      ],
+      "obligations": [
+        "PRODUCTION_PROOF_MISSING:Event save/replay",
+        "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+      ]
+    }
+  ]
+}

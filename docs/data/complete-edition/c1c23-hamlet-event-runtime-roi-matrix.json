@@ -1,0 +1,506 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-23",
+  "baselineHead": "a6f29f9543f017c454724bbeade445c94d0c63f2",
+  "inputSha256": {
+    "docs/data/complete-edition/c1c22-hamlet-event-source-intake-register.json": "9c0ff53d19f893c8e97d19de6fc2d9650b323b11308293e37ff716c6811311d0",
+    "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json": "11204d1e54cdf71077d54ceeb9d575f89fc61d027324505e9ccf6a1a1545b103",
+    "docs/data/complete-edition/c1c23-rulebook-evidence.json": "b83839abc608f999e1cb443a007d25092fac5d2f4d41bd2c080b3fb33e36e357",
+    "scripts/audit/c1c23-printed-source.ts": "ce13fa071a091813c54774170ad48bcde85139ba7d3b19084049a1120af9fb5c"
+  },
+  "promotionBasis": "WHOLE_EVENT_PROMOTION",
+  "sourceClosureAssumed": false,
+  "proofClosureIsRequired": true,
+  "primitiveHitCountIsNotReadyGain": true,
+  "families": [
+    {
+      "family": "HAMLET_EVENT_PREPARATION_ONLY",
+      "candidateDefinitionIds": [
+        "ce-hamlet-event-43504"
+      ],
+      "implementationBundle": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ],
+      "assumedProofClosure": [
+        "Complete Event save/replay, production runtime and UI proof required; none supplied in C1C23"
+      ],
+      "promotionChecks": [
+        {
+          "definitionId": "ce-hamlet-event-43504",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/10",
+          "semanticComplete": true,
+          "remainingSourceGates": [
+            "deck:/deckLifecycle/all16SimultaneouslyUsed",
+            "deck:/deckLifecycle/expansionFiltering",
+            "deck:/deckLifecycle/revealTiming",
+            "deck:/deckLifecycle/exhaustedDeckBehavior",
+            "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+            "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave"
+          ],
+          "remainingPrimitivesAfterBundle": [],
+          "proofObligations": [
+            "PRODUCTION_PROOF_MISSING:Event save/replay",
+            "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+          ],
+          "qualifiesForWholeEventPromotion": false
+        }
+      ],
+      "expectedReadyDefinitionIds": [],
+      "expectedReadyGain": 0,
+      "immediateReadyGain": 0
+    },
+    {
+      "family": "HAMLET_EVENT_SIMPLE_NEXT_QUEST",
+      "candidateDefinitionIds": [
+        "ce-hamlet-event-43502",
+        "ce-hamlet-event-43503",
+        "ce-hamlet-event-43500"
+      ],
+      "implementationBundle": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_GAIN_PROVISION_DICE",
+        "EVENT_MODIFY_PROVISION_ROLL_COUNT",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SET_STARTING_LIGHT",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ],
+      "assumedProofClosure": [
+        "Complete Event save/replay, production runtime and UI proof required; none supplied in C1C23"
+      ],
+      "promotionChecks": [
+        {
+          "definitionId": "ce-hamlet-event-43502",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/11",
+          "semanticComplete": true,
+          "remainingSourceGates": [
+            "deck:/deckLifecycle/all16SimultaneouslyUsed",
+            "deck:/deckLifecycle/expansionFiltering",
+            "deck:/deckLifecycle/revealTiming",
+            "deck:/deckLifecycle/exhaustedDeckBehavior",
+            "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+            "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave"
+          ],
+          "remainingPrimitivesAfterBundle": [],
+          "proofObligations": [
+            "PRODUCTION_PROOF_MISSING:Event save/replay",
+            "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+          ],
+          "qualifiesForWholeEventPromotion": false
+        },
+        {
+          "definitionId": "ce-hamlet-event-43503",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/12",
+          "semanticComplete": true,
+          "remainingSourceGates": [
+            "deck:/deckLifecycle/all16SimultaneouslyUsed",
+            "deck:/deckLifecycle/expansionFiltering",
+            "deck:/deckLifecycle/revealTiming",
+            "deck:/deckLifecycle/exhaustedDeckBehavior",
+            "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+            "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave"
+          ],
+          "remainingPrimitivesAfterBundle": [],
+          "proofObligations": [
+            "PRODUCTION_PROOF_MISSING:Event save/replay",
+            "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+          ],
+          "qualifiesForWholeEventPromotion": false
+        },
+        {
+          "definitionId": "ce-hamlet-event-43500",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/14",
+          "semanticComplete": false,
+          "remainingSourceGates": [
+            "deck:/deckLifecycle/all16SimultaneouslyUsed",
+            "deck:/deckLifecycle/expansionFiltering",
+            "deck:/deckLifecycle/revealTiming",
+            "deck:/deckLifecycle/exhaustedDeckBehavior",
+            "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+            "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave",
+            "ce-hamlet-event-43500:/effects/0/acquisition"
+          ],
+          "remainingPrimitivesAfterBundle": [],
+          "proofObligations": [
+            "PRODUCTION_PROOF_MISSING:Event save/replay",
+            "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+          ],
+          "qualifiesForWholeEventPromotion": false
+        }
+      ],
+      "expectedReadyDefinitionIds": [],
+      "expectedReadyGain": 0,
+      "immediateReadyGain": 0
+    },
+    {
+      "family": "HAMLET_EVENT_DAILY_CARETAKER",
+      "candidateDefinitionIds": [
+        "ce-hamlet-event-43512",
+        "ce-hamlet-event-43501"
+      ],
+      "implementationBundle": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_ROLL_ADDITIONAL_BUILDING_BLOCK",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SOURCE_BOUND_CONSUMER",
+        "EVENT_SUPPRESS_CARETAKER_PLACEMENT"
+      ],
+      "assumedProofClosure": [
+        "Complete Event save/replay, production runtime and UI proof required; none supplied in C1C23"
+      ],
+      "promotionChecks": [
+        {
+          "definitionId": "ce-hamlet-event-43512",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/2",
+          "semanticComplete": true,
+          "remainingSourceGates": [
+            "deck:/deckLifecycle/all16SimultaneouslyUsed",
+            "deck:/deckLifecycle/expansionFiltering",
+            "deck:/deckLifecycle/revealTiming",
+            "deck:/deckLifecycle/exhaustedDeckBehavior",
+            "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+            "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave"
+          ],
+          "remainingPrimitivesAfterBundle": [],
+          "proofObligations": [
+            "PRODUCTION_PROOF_MISSING:Event save/replay",
+            "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+          ],
+          "qualifiesForWholeEventPromotion": false
+        },
+        {
+          "definitionId": "ce-hamlet-event-43501",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/13",
+          "semanticComplete": true,
+          "remainingSourceGates": [
+            "deck:/deckLifecycle/all16SimultaneouslyUsed",
+            "deck:/deckLifecycle/expansionFiltering",
+            "deck:/deckLifecycle/revealTiming",
+            "deck:/deckLifecycle/exhaustedDeckBehavior",
+            "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+            "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave"
+          ],
+          "remainingPrimitivesAfterBundle": [],
+          "proofObligations": [
+            "PRODUCTION_PROOF_MISSING:Event save/replay",
+            "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+          ],
+          "qualifiesForWholeEventPromotion": false
+        }
+      ],
+      "expectedReadyDefinitionIds": [],
+      "expectedReadyGain": 0,
+      "immediateReadyGain": 0
+    },
+    {
+      "family": "HAMLET_EVENT_SELECTION_AND_RECOVERY",
+      "candidateDefinitionIds": [
+        "ce-hamlet-event-43511",
+        "ce-hamlet-event-43510",
+        "ce-hamlet-event-43509",
+        "ce-hamlet-event-43506"
+      ],
+      "implementationBundle": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_FULL_HEALTH_RESTORE",
+        "EVENT_FULL_STRESS_RECOVERY",
+        "EVENT_HEAL",
+        "EVENT_OPTIONAL_QUIRK_SELECTION_PER_HERO",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_RECOVER_STRESS",
+        "EVENT_REMOVE_DISEASE",
+        "EVENT_REMOVE_QUIRK",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SELECT_HERO_AND_DISEASE",
+        "EVENT_SELECT_ONE_OPTION_PER_HERO",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ],
+      "assumedProofClosure": [
+        "Complete Event save/replay, production runtime and UI proof required; none supplied in C1C23"
+      ],
+      "promotionChecks": [
+        {
+          "definitionId": "ce-hamlet-event-43511",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/3",
+          "semanticComplete": false,
+          "remainingSourceGates": [
+            "deck:/deckLifecycle/all16SimultaneouslyUsed",
+            "deck:/deckLifecycle/expansionFiltering",
+            "deck:/deckLifecycle/revealTiming",
+            "deck:/deckLifecycle/exhaustedDeckBehavior",
+            "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+            "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave",
+            "ce-hamlet-event-43511:/choices/0/cancelability"
+          ],
+          "remainingPrimitivesAfterBundle": [],
+          "proofObligations": [
+            "PRODUCTION_PROOF_MISSING:Event save/replay",
+            "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+          ],
+          "qualifiesForWholeEventPromotion": false
+        },
+        {
+          "definitionId": "ce-hamlet-event-43510",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/4",
+          "semanticComplete": false,
+          "remainingSourceGates": [
+            "deck:/deckLifecycle/all16SimultaneouslyUsed",
+            "deck:/deckLifecycle/expansionFiltering",
+            "deck:/deckLifecycle/revealTiming",
+            "deck:/deckLifecycle/exhaustedDeckBehavior",
+            "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+            "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave",
+            "ce-hamlet-event-43510:/choices/0/cancelability"
+          ],
+          "remainingPrimitivesAfterBundle": [],
+          "proofObligations": [
+            "PRODUCTION_PROOF_MISSING:Event save/replay",
+            "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+          ],
+          "qualifiesForWholeEventPromotion": false
+        },
+        {
+          "definitionId": "ce-hamlet-event-43509",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/5",
+          "semanticComplete": false,
+          "remainingSourceGates": [
+            "deck:/deckLifecycle/all16SimultaneouslyUsed",
+            "deck:/deckLifecycle/expansionFiltering",
+            "deck:/deckLifecycle/revealTiming",
+            "deck:/deckLifecycle/exhaustedDeckBehavior",
+            "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+            "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave",
+            "ce-hamlet-event-43509:/choices/0/cancelability"
+          ],
+          "remainingPrimitivesAfterBundle": [],
+          "proofObligations": [
+            "PRODUCTION_PROOF_MISSING:Event save/replay",
+            "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+          ],
+          "qualifiesForWholeEventPromotion": false
+        },
+        {
+          "definitionId": "ce-hamlet-event-43506",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/8",
+          "semanticComplete": false,
+          "remainingSourceGates": [
+            "deck:/deckLifecycle/all16SimultaneouslyUsed",
+            "deck:/deckLifecycle/expansionFiltering",
+            "deck:/deckLifecycle/revealTiming",
+            "deck:/deckLifecycle/exhaustedDeckBehavior",
+            "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+            "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave",
+            "ce-hamlet-event-43506:/target/scope"
+          ],
+          "remainingPrimitivesAfterBundle": [],
+          "proofObligations": [
+            "PRODUCTION_PROOF_MISSING:Event save/replay",
+            "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+          ],
+          "qualifiesForWholeEventPromotion": false
+        }
+      ],
+      "expectedReadyDefinitionIds": [],
+      "expectedReadyGain": 0,
+      "immediateReadyGain": 0
+    },
+    {
+      "family": "HAMLET_EVENT_TRAINING_AND_REMOVAL",
+      "candidateDefinitionIds": [
+        "ce-hamlet-event-43514",
+        "ce-hamlet-event-43505",
+        "ce-hamlet-event-43515"
+      ],
+      "implementationBundle": [
+        "EVENT_BLOCK_BUILDING_VISITS",
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_OPTIONAL_BUILDING_SELECTION",
+        "EVENT_OPTIONAL_SKILL_SELECTION_PER_HERO",
+        "EVENT_PARTY_TRAIN_OR_PREPARE",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SET_PREPARATION_DAYS",
+        "EVENT_SOURCE_BOUND_CONSUMER",
+        "EVENT_UPGRADE_BUILDING",
+        "EVENT_UPGRADE_LEVEL_ONE_SKILL",
+        "EVENT_UPGRADE_SKILL"
+      ],
+      "assumedProofClosure": [
+        "Complete Event save/replay, production runtime and UI proof required; none supplied in C1C23"
+      ],
+      "promotionChecks": [
+        {
+          "definitionId": "ce-hamlet-event-43514",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/0",
+          "semanticComplete": false,
+          "remainingSourceGates": [
+            "deck:/deckLifecycle/all16SimultaneouslyUsed",
+            "deck:/deckLifecycle/expansionFiltering",
+            "deck:/deckLifecycle/revealTiming",
+            "deck:/deckLifecycle/exhaustedDeckBehavior",
+            "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+            "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave",
+            "ce-hamlet-event-43514:/choices/0/cancelability"
+          ],
+          "remainingPrimitivesAfterBundle": [],
+          "proofObligations": [
+            "PRODUCTION_PROOF_MISSING:Event save/replay",
+            "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+          ],
+          "qualifiesForWholeEventPromotion": false
+        },
+        {
+          "definitionId": "ce-hamlet-event-43505",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/9",
+          "semanticComplete": false,
+          "remainingSourceGates": [
+            "deck:/deckLifecycle/all16SimultaneouslyUsed",
+            "deck:/deckLifecycle/expansionFiltering",
+            "deck:/deckLifecycle/revealTiming",
+            "deck:/deckLifecycle/exhaustedDeckBehavior",
+            "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+            "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave",
+            "ce-hamlet-event-43505:/choices/0/cancelability",
+            "ce-hamlet-event-43505:/lifecycle/condition"
+          ],
+          "remainingPrimitivesAfterBundle": [],
+          "proofObligations": [
+            "PRODUCTION_PROOF_MISSING:Event save/replay",
+            "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+          ],
+          "qualifiesForWholeEventPromotion": false
+        },
+        {
+          "definitionId": "ce-hamlet-event-43515",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/15",
+          "semanticComplete": false,
+          "remainingSourceGates": [
+            "deck:/deckLifecycle/all16SimultaneouslyUsed",
+            "deck:/deckLifecycle/expansionFiltering",
+            "deck:/deckLifecycle/revealTiming",
+            "deck:/deckLifecycle/exhaustedDeckBehavior",
+            "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+            "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave",
+            "ce-hamlet-event-43515:/choices/0/cancelability",
+            "ce-hamlet-event-43515:/choices/0/mixedParticipation",
+            "ce-hamlet-event-43515:/costs/1/status"
+          ],
+          "remainingPrimitivesAfterBundle": [],
+          "proofObligations": [
+            "PRODUCTION_PROOF_MISSING:Event save/replay",
+            "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+          ],
+          "qualifiesForWholeEventPromotion": false
+        }
+      ],
+      "expectedReadyDefinitionIds": [],
+      "expectedReadyGain": 0,
+      "immediateReadyGain": 0
+    },
+    {
+      "family": "HAMLET_EVENT_ROLL_AND_TRANSACTION",
+      "candidateDefinitionIds": [
+        "ce-hamlet-event-43513",
+        "ce-hamlet-event-43508",
+        "ce-hamlet-event-43507"
+      ],
+      "implementationBundle": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_GAIN_VIRTUE",
+        "EVENT_MODIFY_TRINKET_SALE_GOLD",
+        "EVENT_OPTIONAL_DIE_AND_FACE_SELECTION",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_ROLL_D10_PER_HERO",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SET_PROVISION_DIE_FACE",
+        "EVENT_SET_STRESS_MARKER_SIDE",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ],
+      "assumedProofClosure": [
+        "Complete Event save/replay, production runtime and UI proof required; none supplied in C1C23"
+      ],
+      "promotionChecks": [
+        {
+          "definitionId": "ce-hamlet-event-43513",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/1",
+          "semanticComplete": false,
+          "remainingSourceGates": [
+            "deck:/deckLifecycle/all16SimultaneouslyUsed",
+            "deck:/deckLifecycle/expansionFiltering",
+            "deck:/deckLifecycle/revealTiming",
+            "deck:/deckLifecycle/exhaustedDeckBehavior",
+            "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+            "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave",
+            "ce-hamlet-event-43513:/effects/1/existingAfflictionOrVirtue"
+          ],
+          "remainingPrimitivesAfterBundle": [],
+          "proofObligations": [
+            "PRODUCTION_PROOF_MISSING:Event save/replay",
+            "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+          ],
+          "qualifiesForWholeEventPromotion": false
+        },
+        {
+          "definitionId": "ce-hamlet-event-43508",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/6",
+          "semanticComplete": false,
+          "remainingSourceGates": [
+            "deck:/deckLifecycle/all16SimultaneouslyUsed",
+            "deck:/deckLifecycle/expansionFiltering",
+            "deck:/deckLifecycle/revealTiming",
+            "deck:/deckLifecycle/exhaustedDeckBehavior",
+            "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+            "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave",
+            "ce-hamlet-event-43508:/effects/0/duration"
+          ],
+          "remainingPrimitivesAfterBundle": [],
+          "proofObligations": [
+            "PRODUCTION_PROOF_MISSING:Event save/replay",
+            "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+          ],
+          "qualifiesForWholeEventPromotion": false
+        },
+        {
+          "definitionId": "ce-hamlet-event-43507",
+          "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/7",
+          "semanticComplete": false,
+          "remainingSourceGates": [
+            "deck:/deckLifecycle/all16SimultaneouslyUsed",
+            "deck:/deckLifecycle/expansionFiltering",
+            "deck:/deckLifecycle/revealTiming",
+            "deck:/deckLifecycle/exhaustedDeckBehavior",
+            "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+            "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave",
+            "ce-hamlet-event-43507:/choices/0/cancelability",
+            "ce-hamlet-event-43507:/effects/0/ownershipAfterPooling"
+          ],
+          "remainingPrimitivesAfterBundle": [],
+          "proofObligations": [
+            "PRODUCTION_PROOF_MISSING:Event save/replay",
+            "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+          ],
+          "qualifiesForWholeEventPromotion": false
+        }
+      ],
+      "expectedReadyDefinitionIds": [],
+      "expectedReadyGain": 0,
+      "immediateReadyGain": 0
+    }
+  ]
+}

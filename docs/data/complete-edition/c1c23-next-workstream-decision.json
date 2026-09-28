@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-23",
+  "baselineHead": "a6f29f9543f017c454724bbeade445c94d0c63f2",
+  "inputSha256": {
+    "docs/data/complete-edition/c1c22-hamlet-event-source-intake-register.json": "9c0ff53d19f893c8e97d19de6fc2d9650b323b11308293e37ff716c6811311d0",
+    "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json": "11204d1e54cdf71077d54ceeb9d575f89fc61d027324505e9ccf6a1a1545b103",
+    "docs/data/complete-edition/c1c23-rulebook-evidence.json": "b83839abc608f999e1cb443a007d25092fac5d2f4d41bd2c080b3fb33e36e357",
+    "scripts/audit/c1c23-printed-source.ts": "ce13fa071a091813c54774170ad48bcde85139ba7d3b19084049a1120af9fb5c"
+  },
+  "outcome": "NO_IMMEDIATE_SOURCE_SAFE_CANDIDATE",
+  "selectedFamily": null,
+  "candidateDefinitionIds": [],
+  "expectedReadyGain": 0,
+  "nextWorkstream": "C1C24 Boss source intake: Threat / Battle / Ability subtype classification",
+  "reason": "All Event families retain deck-level source gates; some also have card-specific semantic gaps. Runtime-only changes cannot close those gates. No complete Event Ready gain is demonstrated."
+}

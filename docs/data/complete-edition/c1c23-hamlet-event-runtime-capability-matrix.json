@@ -1,0 +1,853 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C-23",
+  "baselineHead": "a6f29f9543f017c454724bbeade445c94d0c63f2",
+  "inputSha256": {
+    "docs/data/complete-edition/c1c22-hamlet-event-source-intake-register.json": "9c0ff53d19f893c8e97d19de6fc2d9650b323b11308293e37ff716c6811311d0",
+    "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json": "11204d1e54cdf71077d54ceeb9d575f89fc61d027324505e9ccf6a1a1545b103",
+    "docs/data/complete-edition/c1c23-rulebook-evidence.json": "b83839abc608f999e1cb443a007d25092fac5d2f4d41bd2c080b3fb33e36e357",
+    "scripts/audit/c1c23-printed-source.ts": "ce13fa071a091813c54774170ad48bcde85139ba7d3b19084049a1120af9fb5c"
+  },
+  "runtimeEvidence": {
+    "evidenceRole": "Negative consumer audit only; never printed evidence",
+    "files": {
+      "src/data/hamlet-events.ts": "192da1f5ed873668ea085f5dd659453f8a3575e1cc19fc9c9c1489574b4e8509",
+      "src/game-engine/hamlet.ts": "1808d25ec4c55061791f4861bef7b8f617d8007084e939326910cbc1f96551ca",
+      "src/components/hamlet/HamletEventCard.tsx": "cb7ef3d66aa1774e1ea4727e6a0b10c19c727a1086cb7b9ccfcc5e639a85e982"
+    },
+    "finding": "HAMLET_EVENTS contains 3 mock definitions. startHamletPhase picks that list; no ce-hamlet-event-* source IDs or formal Event deck/choice consumer. Generic healing/quirk/progression utilities alone are not Event adapters."
+  },
+  "cards": [
+    {
+      "definitionId": "ce-hamlet-event-43514",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/0",
+      "printedName": "Guild Training",
+      "literalComplete": true,
+      "semanticComplete": false,
+      "sourceGated": true,
+      "runtimeConsumerAvailable": false,
+      "adapterAvailable": false,
+      "saveReplayProof": false,
+      "selectorReachable": false,
+      "productionProof": false,
+      "productionUiProof": false,
+      "productionReady": false,
+      "requiredPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_OPTIONAL_SKILL_SELECTION_PER_HERO",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SOURCE_BOUND_CONSUMER",
+        "EVENT_UPGRADE_SKILL"
+      ],
+      "missingPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_OPTIONAL_SKILL_SELECTION_PER_HERO",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SOURCE_BOUND_CONSUMER",
+        "EVENT_UPGRADE_SKILL"
+      ],
+      "sourceGates": [
+        "deck:/deckLifecycle/all16SimultaneouslyUsed",
+        "deck:/deckLifecycle/expansionFiltering",
+        "deck:/deckLifecycle/revealTiming",
+        "deck:/deckLifecycle/exhaustedDeckBehavior",
+        "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+        "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave",
+        "ce-hamlet-event-43514:/choices/0/cancelability"
+      ],
+      "runtimeBlockers": [
+        "ENGINE_BINDING_MISSING:source-bound Event consumer/deck contract",
+        "ENGINE_BINDING_MISSING:formal Event adapters and production selectors"
+      ],
+      "proofBlockers": [
+        "PRODUCTION_PROOF_MISSING:Event save/replay",
+        "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+      ]
+    },
+    {
+      "definitionId": "ce-hamlet-event-43513",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/1",
+      "printedName": "In Good Spirits",
+      "literalComplete": true,
+      "semanticComplete": false,
+      "sourceGated": true,
+      "runtimeConsumerAvailable": false,
+      "adapterAvailable": false,
+      "saveReplayProof": false,
+      "selectorReachable": false,
+      "productionProof": false,
+      "productionUiProof": false,
+      "productionReady": false,
+      "requiredPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_GAIN_VIRTUE",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_ROLL_D10_PER_HERO",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SET_STRESS_MARKER_SIDE",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ],
+      "missingPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_GAIN_VIRTUE",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_ROLL_D10_PER_HERO",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SET_STRESS_MARKER_SIDE",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ],
+      "sourceGates": [
+        "deck:/deckLifecycle/all16SimultaneouslyUsed",
+        "deck:/deckLifecycle/expansionFiltering",
+        "deck:/deckLifecycle/revealTiming",
+        "deck:/deckLifecycle/exhaustedDeckBehavior",
+        "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+        "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave",
+        "ce-hamlet-event-43513:/effects/1/existingAfflictionOrVirtue"
+      ],
+      "runtimeBlockers": [
+        "ENGINE_BINDING_MISSING:source-bound Event consumer/deck contract",
+        "ENGINE_BINDING_MISSING:formal Event adapters and production selectors"
+      ],
+      "proofBlockers": [
+        "PRODUCTION_PROOF_MISSING:Event save/replay",
+        "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+      ]
+    },
+    {
+      "definitionId": "ce-hamlet-event-43512",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/2",
+      "printedName": "General Repairs",
+      "literalComplete": true,
+      "semanticComplete": true,
+      "sourceGated": true,
+      "runtimeConsumerAvailable": false,
+      "adapterAvailable": false,
+      "saveReplayProof": false,
+      "selectorReachable": false,
+      "productionProof": false,
+      "productionUiProof": false,
+      "productionReady": false,
+      "requiredPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_ROLL_ADDITIONAL_BUILDING_BLOCK",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ],
+      "missingPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_ROLL_ADDITIONAL_BUILDING_BLOCK",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ],
+      "sourceGates": [
+        "deck:/deckLifecycle/all16SimultaneouslyUsed",
+        "deck:/deckLifecycle/expansionFiltering",
+        "deck:/deckLifecycle/revealTiming",
+        "deck:/deckLifecycle/exhaustedDeckBehavior",
+        "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+        "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave"
+      ],
+      "runtimeBlockers": [
+        "ENGINE_BINDING_MISSING:source-bound Event consumer/deck contract",
+        "ENGINE_BINDING_MISSING:formal Event adapters and production selectors"
+      ],
+      "proofBlockers": [
+        "PRODUCTION_PROOF_MISSING:Event save/replay",
+        "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+      ]
+    },
+    {
+      "definitionId": "ce-hamlet-event-43511",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/3",
+      "printedName": "Caregivers Convention",
+      "literalComplete": true,
+      "semanticComplete": false,
+      "sourceGated": true,
+      "runtimeConsumerAvailable": false,
+      "adapterAvailable": false,
+      "saveReplayProof": false,
+      "selectorReachable": false,
+      "productionProof": false,
+      "productionUiProof": false,
+      "productionReady": false,
+      "requiredPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_OPTIONAL_QUIRK_SELECTION_PER_HERO",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_REMOVE_QUIRK",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ],
+      "missingPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_OPTIONAL_QUIRK_SELECTION_PER_HERO",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_REMOVE_QUIRK",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ],
+      "sourceGates": [
+        "deck:/deckLifecycle/all16SimultaneouslyUsed",
+        "deck:/deckLifecycle/expansionFiltering",
+        "deck:/deckLifecycle/revealTiming",
+        "deck:/deckLifecycle/exhaustedDeckBehavior",
+        "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+        "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave",
+        "ce-hamlet-event-43511:/choices/0/cancelability"
+      ],
+      "runtimeBlockers": [
+        "ENGINE_BINDING_MISSING:source-bound Event consumer/deck contract",
+        "ENGINE_BINDING_MISSING:formal Event adapters and production selectors"
+      ],
+      "proofBlockers": [
+        "PRODUCTION_PROOF_MISSING:Event save/replay",
+        "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+      ]
+    },
+    {
+      "definitionId": "ce-hamlet-event-43510",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/4",
+      "printedName": "Medical Breakthrough",
+      "literalComplete": true,
+      "semanticComplete": false,
+      "sourceGated": true,
+      "runtimeConsumerAvailable": false,
+      "adapterAvailable": false,
+      "saveReplayProof": false,
+      "selectorReachable": false,
+      "productionProof": false,
+      "productionUiProof": false,
+      "productionReady": false,
+      "requiredPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_REMOVE_DISEASE",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SELECT_HERO_AND_DISEASE",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ],
+      "missingPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_REMOVE_DISEASE",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SELECT_HERO_AND_DISEASE",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ],
+      "sourceGates": [
+        "deck:/deckLifecycle/all16SimultaneouslyUsed",
+        "deck:/deckLifecycle/expansionFiltering",
+        "deck:/deckLifecycle/revealTiming",
+        "deck:/deckLifecycle/exhaustedDeckBehavior",
+        "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+        "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave",
+        "ce-hamlet-event-43510:/choices/0/cancelability"
+      ],
+      "runtimeBlockers": [
+        "ENGINE_BINDING_MISSING:source-bound Event consumer/deck contract",
+        "ENGINE_BINDING_MISSING:formal Event adapters and production selectors"
+      ],
+      "proofBlockers": [
+        "PRODUCTION_PROOF_MISSING:Event save/replay",
+        "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+      ]
+    },
+    {
+      "definitionId": "ce-hamlet-event-43509",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/5",
+      "printedName": "The Feast",
+      "literalComplete": true,
+      "semanticComplete": false,
+      "sourceGated": true,
+      "runtimeConsumerAvailable": false,
+      "adapterAvailable": false,
+      "saveReplayProof": false,
+      "selectorReachable": false,
+      "productionProof": false,
+      "productionUiProof": false,
+      "productionReady": false,
+      "requiredPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_FULL_HEALTH_RESTORE",
+        "EVENT_FULL_STRESS_RECOVERY",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SELECT_ONE_OPTION_PER_HERO",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ],
+      "missingPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_FULL_HEALTH_RESTORE",
+        "EVENT_FULL_STRESS_RECOVERY",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SELECT_ONE_OPTION_PER_HERO",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ],
+      "sourceGates": [
+        "deck:/deckLifecycle/all16SimultaneouslyUsed",
+        "deck:/deckLifecycle/expansionFiltering",
+        "deck:/deckLifecycle/revealTiming",
+        "deck:/deckLifecycle/exhaustedDeckBehavior",
+        "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+        "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave",
+        "ce-hamlet-event-43509:/choices/0/cancelability"
+      ],
+      "runtimeBlockers": [
+        "ENGINE_BINDING_MISSING:source-bound Event consumer/deck contract",
+        "ENGINE_BINDING_MISSING:formal Event adapters and production selectors"
+      ],
+      "proofBlockers": [
+        "PRODUCTION_PROOF_MISSING:Event save/replay",
+        "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+      ]
+    },
+    {
+      "definitionId": "ce-hamlet-event-43508",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/6",
+      "printedName": "Gypsy Trail",
+      "literalComplete": true,
+      "semanticComplete": false,
+      "sourceGated": true,
+      "runtimeConsumerAvailable": false,
+      "adapterAvailable": false,
+      "saveReplayProof": false,
+      "selectorReachable": false,
+      "productionProof": false,
+      "productionUiProof": false,
+      "productionReady": false,
+      "requiredPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_MODIFY_TRINKET_SALE_GOLD",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ],
+      "missingPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_MODIFY_TRINKET_SALE_GOLD",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ],
+      "sourceGates": [
+        "deck:/deckLifecycle/all16SimultaneouslyUsed",
+        "deck:/deckLifecycle/expansionFiltering",
+        "deck:/deckLifecycle/revealTiming",
+        "deck:/deckLifecycle/exhaustedDeckBehavior",
+        "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+        "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave",
+        "ce-hamlet-event-43508:/effects/0/duration"
+      ],
+      "runtimeBlockers": [
+        "ENGINE_BINDING_MISSING:source-bound Event consumer/deck contract",
+        "ENGINE_BINDING_MISSING:formal Event adapters and production selectors"
+      ],
+      "proofBlockers": [
+        "PRODUCTION_PROOF_MISSING:Event save/replay",
+        "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+      ]
+    },
+    {
+      "definitionId": "ce-hamlet-event-43507",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/7",
+      "printedName": "Traveling Merchants",
+      "literalComplete": true,
+      "semanticComplete": false,
+      "sourceGated": true,
+      "runtimeConsumerAvailable": false,
+      "adapterAvailable": false,
+      "saveReplayProof": false,
+      "selectorReachable": false,
+      "productionProof": false,
+      "productionUiProof": false,
+      "productionReady": false,
+      "requiredPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_OPTIONAL_DIE_AND_FACE_SELECTION",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SET_PROVISION_DIE_FACE",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ],
+      "missingPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_OPTIONAL_DIE_AND_FACE_SELECTION",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SET_PROVISION_DIE_FACE",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ],
+      "sourceGates": [
+        "deck:/deckLifecycle/all16SimultaneouslyUsed",
+        "deck:/deckLifecycle/expansionFiltering",
+        "deck:/deckLifecycle/revealTiming",
+        "deck:/deckLifecycle/exhaustedDeckBehavior",
+        "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+        "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave",
+        "ce-hamlet-event-43507:/choices/0/cancelability",
+        "ce-hamlet-event-43507:/effects/0/ownershipAfterPooling"
+      ],
+      "runtimeBlockers": [
+        "ENGINE_BINDING_MISSING:source-bound Event consumer/deck contract",
+        "ENGINE_BINDING_MISSING:formal Event adapters and production selectors"
+      ],
+      "proofBlockers": [
+        "PRODUCTION_PROOF_MISSING:Event save/replay",
+        "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+      ]
+    },
+    {
+      "definitionId": "ce-hamlet-event-43506",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/8",
+      "printedName": "Town Fair",
+      "literalComplete": true,
+      "semanticComplete": false,
+      "sourceGated": true,
+      "runtimeConsumerAvailable": false,
+      "adapterAvailable": false,
+      "saveReplayProof": false,
+      "selectorReachable": false,
+      "productionProof": false,
+      "productionUiProof": false,
+      "productionReady": false,
+      "requiredPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_HEAL",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_RECOVER_STRESS",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ],
+      "missingPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_HEAL",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_RECOVER_STRESS",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ],
+      "sourceGates": [
+        "deck:/deckLifecycle/all16SimultaneouslyUsed",
+        "deck:/deckLifecycle/expansionFiltering",
+        "deck:/deckLifecycle/revealTiming",
+        "deck:/deckLifecycle/exhaustedDeckBehavior",
+        "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+        "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave",
+        "ce-hamlet-event-43506:/target/scope"
+      ],
+      "runtimeBlockers": [
+        "ENGINE_BINDING_MISSING:source-bound Event consumer/deck contract",
+        "ENGINE_BINDING_MISSING:formal Event adapters and production selectors"
+      ],
+      "proofBlockers": [
+        "PRODUCTION_PROOF_MISSING:Event save/replay",
+        "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+      ]
+    },
+    {
+      "definitionId": "ce-hamlet-event-43505",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/9",
+      "printedName": "Labor Force",
+      "literalComplete": true,
+      "semanticComplete": false,
+      "sourceGated": true,
+      "runtimeConsumerAvailable": false,
+      "adapterAvailable": false,
+      "saveReplayProof": false,
+      "selectorReachable": false,
+      "productionProof": false,
+      "productionUiProof": false,
+      "productionReady": false,
+      "requiredPrimitives": [
+        "EVENT_BLOCK_BUILDING_VISITS",
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_OPTIONAL_BUILDING_SELECTION",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SOURCE_BOUND_CONSUMER",
+        "EVENT_UPGRADE_BUILDING"
+      ],
+      "missingPrimitives": [
+        "EVENT_BLOCK_BUILDING_VISITS",
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_OPTIONAL_BUILDING_SELECTION",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SOURCE_BOUND_CONSUMER",
+        "EVENT_UPGRADE_BUILDING"
+      ],
+      "sourceGates": [
+        "deck:/deckLifecycle/all16SimultaneouslyUsed",
+        "deck:/deckLifecycle/expansionFiltering",
+        "deck:/deckLifecycle/revealTiming",
+        "deck:/deckLifecycle/exhaustedDeckBehavior",
+        "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+        "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave",
+        "ce-hamlet-event-43505:/choices/0/cancelability",
+        "ce-hamlet-event-43505:/lifecycle/condition"
+      ],
+      "runtimeBlockers": [
+        "ENGINE_BINDING_MISSING:source-bound Event consumer/deck contract",
+        "ENGINE_BINDING_MISSING:formal Event adapters and production selectors"
+      ],
+      "proofBlockers": [
+        "PRODUCTION_PROOF_MISSING:Event save/replay",
+        "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+      ]
+    },
+    {
+      "definitionId": "ce-hamlet-event-43504",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/10",
+      "printedName": "Uneventful Week",
+      "literalComplete": true,
+      "semanticComplete": true,
+      "sourceGated": true,
+      "runtimeConsumerAvailable": false,
+      "adapterAvailable": false,
+      "saveReplayProof": false,
+      "selectorReachable": false,
+      "productionProof": false,
+      "productionUiProof": false,
+      "productionReady": false,
+      "requiredPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ],
+      "missingPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ],
+      "sourceGates": [
+        "deck:/deckLifecycle/all16SimultaneouslyUsed",
+        "deck:/deckLifecycle/expansionFiltering",
+        "deck:/deckLifecycle/revealTiming",
+        "deck:/deckLifecycle/exhaustedDeckBehavior",
+        "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+        "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave"
+      ],
+      "runtimeBlockers": [
+        "ENGINE_BINDING_MISSING:source-bound Event consumer/deck contract",
+        "ENGINE_BINDING_MISSING:formal Event adapters and production selectors"
+      ],
+      "proofBlockers": [
+        "PRODUCTION_PROOF_MISSING:Event save/replay",
+        "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+      ]
+    },
+    {
+      "definitionId": "ce-hamlet-event-43502",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/11",
+      "printedName": "Lost Shipment",
+      "literalComplete": true,
+      "semanticComplete": true,
+      "sourceGated": true,
+      "runtimeConsumerAvailable": false,
+      "adapterAvailable": false,
+      "saveReplayProof": false,
+      "selectorReachable": false,
+      "productionProof": false,
+      "productionUiProof": false,
+      "productionReady": false,
+      "requiredPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_MODIFY_PROVISION_ROLL_COUNT",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ],
+      "missingPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_MODIFY_PROVISION_ROLL_COUNT",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ],
+      "sourceGates": [
+        "deck:/deckLifecycle/all16SimultaneouslyUsed",
+        "deck:/deckLifecycle/expansionFiltering",
+        "deck:/deckLifecycle/revealTiming",
+        "deck:/deckLifecycle/exhaustedDeckBehavior",
+        "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+        "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave"
+      ],
+      "runtimeBlockers": [
+        "ENGINE_BINDING_MISSING:source-bound Event consumer/deck contract",
+        "ENGINE_BINDING_MISSING:formal Event adapters and production selectors"
+      ],
+      "proofBlockers": [
+        "PRODUCTION_PROOF_MISSING:Event save/replay",
+        "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+      ]
+    },
+    {
+      "definitionId": "ce-hamlet-event-43503",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/12",
+      "printedName": "Unsettling Darkness",
+      "literalComplete": true,
+      "semanticComplete": true,
+      "sourceGated": true,
+      "runtimeConsumerAvailable": false,
+      "adapterAvailable": false,
+      "saveReplayProof": false,
+      "selectorReachable": false,
+      "productionProof": false,
+      "productionUiProof": false,
+      "productionReady": false,
+      "requiredPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SET_STARTING_LIGHT",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ],
+      "missingPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SET_STARTING_LIGHT",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ],
+      "sourceGates": [
+        "deck:/deckLifecycle/all16SimultaneouslyUsed",
+        "deck:/deckLifecycle/expansionFiltering",
+        "deck:/deckLifecycle/revealTiming",
+        "deck:/deckLifecycle/exhaustedDeckBehavior",
+        "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+        "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave"
+      ],
+      "runtimeBlockers": [
+        "ENGINE_BINDING_MISSING:source-bound Event consumer/deck contract",
+        "ENGINE_BINDING_MISSING:formal Event adapters and production selectors"
+      ],
+      "proofBlockers": [
+        "PRODUCTION_PROOF_MISSING:Event save/replay",
+        "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+      ]
+    },
+    {
+      "definitionId": "ce-hamlet-event-43501",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/13",
+      "printedName": "Busy Week",
+      "literalComplete": true,
+      "semanticComplete": true,
+      "sourceGated": true,
+      "runtimeConsumerAvailable": false,
+      "adapterAvailable": false,
+      "saveReplayProof": false,
+      "selectorReachable": false,
+      "productionProof": false,
+      "productionUiProof": false,
+      "productionReady": false,
+      "requiredPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SOURCE_BOUND_CONSUMER",
+        "EVENT_SUPPRESS_CARETAKER_PLACEMENT"
+      ],
+      "missingPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SOURCE_BOUND_CONSUMER",
+        "EVENT_SUPPRESS_CARETAKER_PLACEMENT"
+      ],
+      "sourceGates": [
+        "deck:/deckLifecycle/all16SimultaneouslyUsed",
+        "deck:/deckLifecycle/expansionFiltering",
+        "deck:/deckLifecycle/revealTiming",
+        "deck:/deckLifecycle/exhaustedDeckBehavior",
+        "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+        "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave"
+      ],
+      "runtimeBlockers": [
+        "ENGINE_BINDING_MISSING:source-bound Event consumer/deck contract",
+        "ENGINE_BINDING_MISSING:formal Event adapters and production selectors"
+      ],
+      "proofBlockers": [
+        "PRODUCTION_PROOF_MISSING:Event save/replay",
+        "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+      ]
+    },
+    {
+      "definitionId": "ce-hamlet-event-43500",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/14",
+      "printedName": "Supply Run",
+      "literalComplete": true,
+      "semanticComplete": false,
+      "sourceGated": true,
+      "runtimeConsumerAvailable": false,
+      "adapterAvailable": false,
+      "saveReplayProof": false,
+      "selectorReachable": false,
+      "productionProof": false,
+      "productionUiProof": false,
+      "productionReady": false,
+      "requiredPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_GAIN_PROVISION_DICE",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ],
+      "missingPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_GAIN_PROVISION_DICE",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SOURCE_BOUND_CONSUMER"
+      ],
+      "sourceGates": [
+        "deck:/deckLifecycle/all16SimultaneouslyUsed",
+        "deck:/deckLifecycle/expansionFiltering",
+        "deck:/deckLifecycle/revealTiming",
+        "deck:/deckLifecycle/exhaustedDeckBehavior",
+        "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+        "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave",
+        "ce-hamlet-event-43500:/effects/0/acquisition"
+      ],
+      "runtimeBlockers": [
+        "ENGINE_BINDING_MISSING:source-bound Event consumer/deck contract",
+        "ENGINE_BINDING_MISSING:formal Event adapters and production selectors"
+      ],
+      "proofBlockers": [
+        "PRODUCTION_PROOF_MISSING:Event save/replay",
+        "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+      ]
+    },
+    {
+      "definitionId": "ce-hamlet-event-43515",
+      "physicalIdentity": "tts-path:/ObjectStates/83/ContainedObjects/15",
+      "printedName": "Militia Training",
+      "literalComplete": true,
+      "semanticComplete": false,
+      "sourceGated": true,
+      "runtimeConsumerAvailable": false,
+      "adapterAvailable": false,
+      "saveReplayProof": false,
+      "selectorReachable": false,
+      "productionProof": false,
+      "productionUiProof": false,
+      "productionReady": false,
+      "requiredPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_PARTY_TRAIN_OR_PREPARE",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SET_PREPARATION_DAYS",
+        "EVENT_SOURCE_BOUND_CONSUMER",
+        "EVENT_UPGRADE_LEVEL_ONE_SKILL"
+      ],
+      "missingPrimitives": [
+        "EVENT_DECK_LIFECYCLE",
+        "EVENT_PARTY_TRAIN_OR_PREPARE",
+        "EVENT_PREPARATION_DAYS",
+        "EVENT_PRODUCTION_SELECTOR",
+        "EVENT_PRODUCTION_UI",
+        "EVENT_SAVE_REPLAY",
+        "EVENT_SET_PREPARATION_DAYS",
+        "EVENT_SOURCE_BOUND_CONSUMER",
+        "EVENT_UPGRADE_LEVEL_ONE_SKILL"
+      ],
+      "sourceGates": [
+        "deck:/deckLifecycle/all16SimultaneouslyUsed",
+        "deck:/deckLifecycle/expansionFiltering",
+        "deck:/deckLifecycle/revealTiming",
+        "deck:/deckLifecycle/exhaustedDeckBehavior",
+        "deck:/deckLifecycle/duplicateUniqueCopies/campaignCopyPolicy",
+        "deck:/deckLifecycle/campaignPersistence/eventStateAcrossSave",
+        "ce-hamlet-event-43515:/choices/0/cancelability",
+        "ce-hamlet-event-43515:/choices/0/mixedParticipation",
+        "ce-hamlet-event-43515:/costs/1/status"
+      ],
+      "runtimeBlockers": [
+        "ENGINE_BINDING_MISSING:source-bound Event consumer/deck contract",
+        "ENGINE_BINDING_MISSING:formal Event adapters and production selectors"
+      ],
+      "proofBlockers": [
+        "PRODUCTION_PROOF_MISSING:Event save/replay",
+        "PRODUCTION_PROOF_MISSING:Event runtime and UI evidence"
+      ]
+    }
+  ],
+  "counts": {
+    "total": 16,
+    "literalComplete": 16,
+    "semanticComplete": 5,
+    "sourceGated": 16,
+    "runtimeBlocked": 16,
+    "productionReady": 0
+  }
+}
