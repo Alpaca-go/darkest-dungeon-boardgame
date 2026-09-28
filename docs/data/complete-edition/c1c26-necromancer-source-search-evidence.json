@@ -1,0 +1,177 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C26",
+  "baselineHead": "2ba8942bbd080b49260f9cba117729a000ebcddf",
+  "family": "Necromancer",
+  "runtimeImplemented": false,
+  "inputSha256": {
+    "docs/data/complete-edition/c1c25-necromancer-source-gap-register.json": "3cbbdd55db18cea6c9b036e1a5b10e1a039021df0112a9afa5f6d15e3c375ed1",
+    "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json": "55e89348a581632d0a6fc6371700ff79754f70993e986192d9f630dcda34f3db",
+    "docs/data/complete-edition/c1c25-necromancer-encounter-composition.json": "87910e8fa32708906787e04885ea66e865dd9c4fb260fb3b5963baf3f332d21c",
+    "docs/data/complete-edition/c1c25-necromancer-room-contract.json": "23249ae51a8ddeaad7d8801175f372b624294e12290947178e0a43846cc63226",
+    "docs/data/complete-edition/c1c25-necromancer-source-precedence.json": "a71c2131471190e84b618314cc9ba50abd105012d0cce8dea807b2538b7f0569",
+    "docs/data/complete-edition/c1c25-necromancer-bone-source-binding.json": "ed3d427224322e0b4d3cae466956cc4aaf897966d7a2818fb24344585b2bf862",
+    "docs/data/complete-edition/c1c25-necromancer-cleanup-contract.json": "a65826efef7ad6306e8877cd24f2735df9b549bfa2d85dd6d633d9cd4c4fe205",
+    "docs/data/complete-edition/c1c25-necromancer-setup-contract.json": "688781f05721790b11473bcdb4b3adb04a2a65b3edd367a59ebf662344b1d564",
+    "docs/data/complete-edition/c1c25-necromancer-runtime-capability-matrix.json": "c9542fc1622e663eebde2164617a0eda21611169822bd83ffb733c842db252a5",
+    "docs/data/complete-edition/c1c25-necromancer-source-manifest.json": "a5f2de381495868493c544df9787f3cfa82e6980f00d747fa5875cfc0f6489dd",
+    "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+    "docs/data/complete-edition/c1c26-source-retrieval-evidence.json": "11fe8ccd5225043b92e11f2ec10d645e973362e86625a9f3400f59e637d79832"
+  },
+  "retrievalEvidencePath": "docs/data/complete-edition/c1c26-source-retrieval-evidence.json",
+  "receipts": [
+    {
+      "id": "designer-faq",
+      "url": "https://boardgamegeek.com/filepage/250715/darkest-dungeon-board-game-faq-by-the-designers",
+      "searchQuery": "\"Darkest Dungeon\" \"FAQ\" \"designers\" \"250715\"",
+      "retrievalTime": "2026-09-28T11:39:53.303Z",
+      "transport": "curl.exe HTTPS normal public request",
+      "exitCode": 0,
+      "httpStatus": 403,
+      "transportError": null,
+      "responsePath": "docs/data/complete-edition/source-assets/c1c26/designer-faq.response",
+      "responseSha256": "65b23557cd16cd79468d25520d4ed73db8865d910768acb67b785bd661d7b805",
+      "fileIdentity": {
+        "bggFilepage": 250715,
+        "title": "Darkest Dungeon the Board Game FAQ by the Designers",
+        "uploader": "apoxwrhthrio1980",
+        "downloadFileId": null,
+        "fileSha256": null
+      },
+      "authoritativeContentAcquired": false,
+      "rulesAuthority": false,
+      "status": "CONTENT_NOT_AUTHENTICATED",
+      "permanentlyUnavailable": false
+    },
+    {
+      "id": "designer-file-list",
+      "url": "https://boardgamegeek.com/boardgame/317321/darkest-dungeon-the-board-game/files",
+      "searchQuery": "\"Darkest Dungeon\" \"FAQ\" \"designers\"",
+      "retrievalTime": "2026-09-28T11:39:55.095Z",
+      "transport": "curl.exe HTTPS normal public request",
+      "exitCode": 0,
+      "httpStatus": 403,
+      "transportError": null,
+      "responsePath": "docs/data/complete-edition/source-assets/c1c26/designer-file-list.response",
+      "responseSha256": "bdfb1c9984903a4637de8fecff5a29abf5357bd4e2c1fbc32b389995c0fd9cc6",
+      "fileIdentity": null,
+      "authoritativeContentAcquired": false,
+      "rulesAuthority": false,
+      "status": "CONTENT_NOT_AUTHENTICATED",
+      "permanentlyUnavailable": false
+    },
+    {
+      "id": "publisher-faq-lead",
+      "url": "https://info.mythicgames.net/fr/darkestdungeon/faq/english",
+      "searchQuery": "\"Darkest Dungeon\" \"FAQ\" Mythic",
+      "retrievalTime": "2026-09-28T11:39:55.895Z",
+      "transport": "curl.exe HTTPS normal public request",
+      "exitCode": 6,
+      "httpStatus": null,
+      "transportError": "curl: (6) Could not resolve host: info.mythicgames.net",
+      "responsePath": null,
+      "responseSha256": null,
+      "fileIdentity": null,
+      "authoritativeContentAcquired": false,
+      "rulesAuthority": false,
+      "status": "CONTENT_NOT_AUTHENTICATED",
+      "permanentlyUnavailable": false
+    },
+    {
+      "id": "later-official-files-lead",
+      "url": "https://www.darkestdungeon.com/news/regarding-mythic-games-and-the-darkest-dungeon-board-game/",
+      "searchQuery": "site:darkestdungeon.com \"Regarding Mythic\"",
+      "retrievalTime": "2026-09-28T11:39:56.118Z",
+      "transport": "curl.exe HTTPS normal public request",
+      "exitCode": 0,
+      "httpStatus": 404,
+      "transportError": null,
+      "responsePath": "docs/data/complete-edition/source-assets/c1c26/later-official-files-lead.response",
+      "responseSha256": "41560e3888ac8bc7fde1c95026240701bbc80593687c0b8fb3f878904b3ed3c8",
+      "fileIdentity": null,
+      "authoritativeContentAcquired": false,
+      "rulesAuthority": false,
+      "status": "CONTENT_NOT_AUTHENTICATED",
+      "permanentlyUnavailable": false
+    }
+  ],
+  "searches": [
+    {
+      "query": "\"Darkest Dungeon\" \"FAQ\" \"designers\" \"250715\"",
+      "result": "designer file listing located; direct filepage content unavailable",
+      "date": "2026-09-28",
+      "searchIsExhaustionProof": false
+    },
+    {
+      "query": "\"Darkest Dungeon\" \"Bone Rubble\" FAQ",
+      "result": "no authenticated correction acquired",
+      "date": "2026-09-28",
+      "searchIsExhaustionProof": false
+    },
+    {
+      "query": "\"Darkest Dungeon\" \"Crowded\" \"tie\" board game",
+      "result": "no authenticated Area tie clarification acquired",
+      "date": "2026-09-28",
+      "searchIsExhaustionProof": false
+    },
+    {
+      "query": "\"Darkest Dungeon\" \"Haunted Graveyard\" tie",
+      "result": "no authenticated Hamlet tie clarification acquired",
+      "date": "2026-09-28",
+      "searchIsExhaustionProof": false
+    },
+    {
+      "query": "\"Darkest Dungeon board game\" \"summon\" \"copies\"",
+      "result": "no authenticated copy lifecycle clarification acquired",
+      "date": "2026-09-28",
+      "searchIsExhaustionProof": false
+    },
+    {
+      "query": "\"Darkest Dungeon board game\" \"Reanimation\" FAQ",
+      "result": "secondary campaign description only; no ordering authority acquired",
+      "date": "2026-09-28",
+      "searchIsExhaustionProof": false
+    },
+    {
+      "query": "\"Darkest Dungeon board game\" \"nearest available\" tie",
+      "result": "no authenticated fallback clarification acquired",
+      "date": "2026-09-28",
+      "searchIsExhaustionProof": false
+    },
+    {
+      "query": "site:darkestdungeon.com \"Regarding Mythic\"",
+      "result": "later production file distribution lead; linked official page returned 404; corpus not examined",
+      "date": "2026-09-28",
+      "searchIsExhaustionProof": false
+    }
+  ],
+  "leads": [
+    {
+      "url": "https://boardgamegeek.com/boardgame/317321/darkest-dungeon-the-board-game/files",
+      "status": "DESIGNER_FILE_LISTING_LOCATED_CONTENT_UNAVAILABLE",
+      "rulesAuthority": false,
+      "nextEvidence": "Authenticated PDF download and version/hash provenance"
+    },
+    {
+      "url": "https://es.scribd.com/document/686825056/DD-FAQ-EN",
+      "status": "SECONDARY_MIRROR_SEARCH_LEAD",
+      "rulesAuthority": false,
+      "nextEvidence": "Match designer original file identity before any rule promotion"
+    },
+    {
+      "url": "https://boardgamegeek.com/thread/3008011/house-rules-and-clarifications-suggested-rulebook",
+      "status": "COMMUNITY_SEARCH_LEAD",
+      "rulesAuthority": false,
+      "nextEvidence": "Original FAQ link only; reject house-rule mechanics and hierarchy"
+    },
+    {
+      "url": "https://www.wargamer.com/darkest-dungeon-board-game/files",
+      "status": "LATER_PRODUCTION_CORPUS_SEARCH_LEAD",
+      "rulesAuthority": false,
+      "nextEvidence": "Authenticated official/backer production corpus or revised rulebook; linked official page currently 404"
+    }
+  ],
+  "authoritativeFaqAcquired": false,
+  "revisedOfficialRulebookAcquired": false,
+  "laterOfficialCorpusExamined": false
+}

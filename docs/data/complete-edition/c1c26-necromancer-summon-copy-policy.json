@@ -1,0 +1,657 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C26",
+  "baselineHead": "2ba8942bbd080b49260f9cba117729a000ebcddf",
+  "family": "Necromancer",
+  "runtimeImplemented": false,
+  "inputSha256": {
+    "docs/data/complete-edition/c1c25-necromancer-source-gap-register.json": "3cbbdd55db18cea6c9b036e1a5b10e1a039021df0112a9afa5f6d15e3c375ed1",
+    "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json": "55e89348a581632d0a6fc6371700ff79754f70993e986192d9f630dcda34f3db",
+    "docs/data/complete-edition/c1c25-necromancer-encounter-composition.json": "87910e8fa32708906787e04885ea66e865dd9c4fb260fb3b5963baf3f332d21c",
+    "docs/data/complete-edition/c1c25-necromancer-room-contract.json": "23249ae51a8ddeaad7d8801175f372b624294e12290947178e0a43846cc63226",
+    "docs/data/complete-edition/c1c25-necromancer-source-precedence.json": "a71c2131471190e84b618314cc9ba50abd105012d0cce8dea807b2538b7f0569",
+    "docs/data/complete-edition/c1c25-necromancer-bone-source-binding.json": "ed3d427224322e0b4d3cae466956cc4aaf897966d7a2818fb24344585b2bf862",
+    "docs/data/complete-edition/c1c25-necromancer-cleanup-contract.json": "a65826efef7ad6306e8877cd24f2735df9b549bfa2d85dd6d633d9cd4c4fe205",
+    "docs/data/complete-edition/c1c25-necromancer-setup-contract.json": "688781f05721790b11473bcdb4b3adb04a2a65b3edd367a59ebf662344b1d564",
+    "docs/data/complete-edition/c1c25-necromancer-runtime-capability-matrix.json": "c9542fc1622e663eebde2164617a0eda21611169822bd83ffb733c842db252a5",
+    "docs/data/complete-edition/c1c25-necromancer-source-manifest.json": "a5f2de381495868493c544df9787f3cfa82e6980f00d747fa5875cfc0f6489dd",
+    "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+    "docs/data/complete-edition/c1c26-source-retrieval-evidence.json": "11fe8ccd5225043b92e11f2ec10d645e973362e86625a9f3400f59e637d79832"
+  },
+  "observedPhysicalCopies": [
+    {
+      "name": "Bone Rabble",
+      "printedFacts": {
+        "level": "I",
+        "HP": 6,
+        "speed": 0,
+        "dodge": 1,
+        "type": "Unholy - Front"
+      },
+      "observedComponents": [
+        {
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/5/ContainedObjects/1/ContainedObjects/1/ContainedObjects/22",
+          "cardId": 46140,
+          "front": {
+            "path": "docs/data/complete-edition/source-assets/c1c25/crops/46140-50acd2839a8f-front.png",
+            "url": "https://steamusercontent-a.akamaihd.net/ugc/17004907428100041250/8CEFF8A92B429ECB2B9608AABD6426A8495BB190/",
+            "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/c85410d128a2b4c5f745c06cece595aa2ded997e004cca9ea09fd9af2182043b.bin",
+            "sheetSha256": "e0e08c32417b0e24fc4bab53ae5f2fb945f1fb90975db3646e0cb1f19ed6f7df",
+            "cell": 40,
+            "grid": {
+              "width": 10,
+              "height": 6
+            },
+            "bounds": {
+              "left": 0,
+              "top": 3880,
+              "width": 570,
+              "height": 970
+            },
+            "sha256": "03d61f59c6143691e65ab77ca56dac2fda92d6948ed31e8c4888adba0daab4c2"
+          }
+        },
+        {
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/5/ContainedObjects/1/ContainedObjects/1/ContainedObjects/23",
+          "cardId": 46139,
+          "front": {
+            "path": "docs/data/complete-edition/source-assets/c1c25/crops/46139-3768e5382547-front.png",
+            "url": "https://steamusercontent-a.akamaihd.net/ugc/17004907428100041250/8CEFF8A92B429ECB2B9608AABD6426A8495BB190/",
+            "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/c85410d128a2b4c5f745c06cece595aa2ded997e004cca9ea09fd9af2182043b.bin",
+            "sheetSha256": "e0e08c32417b0e24fc4bab53ae5f2fb945f1fb90975db3646e0cb1f19ed6f7df",
+            "cell": 39,
+            "grid": {
+              "width": 10,
+              "height": 6
+            },
+            "bounds": {
+              "left": 5130,
+              "top": 2910,
+              "width": 570,
+              "height": 970
+            },
+            "sha256": "f9c3e37aaa12f031c5f4116043dbe7aa25cceacb5f37bfb6fbed2c53331efc65"
+          }
+        },
+        {
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/5/ContainedObjects/1/ContainedObjects/1/ContainedObjects/24",
+          "cardId": 46141,
+          "front": {
+            "path": "docs/data/complete-edition/source-assets/c1c25/crops/46141-e0daf532c7f2-front.png",
+            "url": "https://steamusercontent-a.akamaihd.net/ugc/17004907428100041250/8CEFF8A92B429ECB2B9608AABD6426A8495BB190/",
+            "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/c85410d128a2b4c5f745c06cece595aa2ded997e004cca9ea09fd9af2182043b.bin",
+            "sheetSha256": "e0e08c32417b0e24fc4bab53ae5f2fb945f1fb90975db3646e0cb1f19ed6f7df",
+            "cell": 41,
+            "grid": {
+              "width": 10,
+              "height": 6
+            },
+            "bounds": {
+              "left": 570,
+              "top": 3880,
+              "width": 570,
+              "height": 970
+            },
+            "sha256": "7d8da8b621c314fcaece1c0db01d879c8504562104fdb41bc5497d4c6982e29a"
+          }
+        }
+      ],
+      "distinctComponentCount": 3,
+      "observedMiniatureManifestCount": 3,
+      "miniatureManifestReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 7,
+          "region": "Miniatures manifest; quantity is not a reuse instruction"
+        }
+      ],
+      "ordinarySkillSummonEligible": true,
+      "countMeaning": "Observed source components; Captain narrow/full components are not two monsters. No runtime supply count inferred."
+    },
+    {
+      "name": "Bone Soldier",
+      "printedFacts": {
+        "level": "I",
+        "HP": 7,
+        "speed": 0,
+        "dodge": 1,
+        "type": "Unholy - Front"
+      },
+      "observedComponents": [
+        {
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/5/ContainedObjects/2/ContainedObjects/1/ContainedObjects/6",
+          "cardId": 46100,
+          "front": {
+            "path": "docs/data/complete-edition/source-assets/c1c25/crops/46100-b380fe530b9e-front.png",
+            "url": "https://steamusercontent-a.akamaihd.net/ugc/17004907428100041250/8CEFF8A92B429ECB2B9608AABD6426A8495BB190/",
+            "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/c85410d128a2b4c5f745c06cece595aa2ded997e004cca9ea09fd9af2182043b.bin",
+            "sheetSha256": "e0e08c32417b0e24fc4bab53ae5f2fb945f1fb90975db3646e0cb1f19ed6f7df",
+            "cell": 0,
+            "grid": {
+              "width": 10,
+              "height": 6
+            },
+            "bounds": {
+              "left": 0,
+              "top": 0,
+              "width": 570,
+              "height": 970
+            },
+            "sha256": "66266ceb68479bbe62c68129e9228c277400d0b6aa62e9a236cd19e1e1c01653"
+          }
+        },
+        {
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/5/ContainedObjects/2/ContainedObjects/1/ContainedObjects/7",
+          "cardId": 46100,
+          "front": {
+            "path": "docs/data/complete-edition/source-assets/c1c25/crops/46100-d938b46226f0-front.png",
+            "url": "https://steamusercontent-a.akamaihd.net/ugc/17004907428100041250/8CEFF8A92B429ECB2B9608AABD6426A8495BB190/",
+            "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/c85410d128a2b4c5f745c06cece595aa2ded997e004cca9ea09fd9af2182043b.bin",
+            "sheetSha256": "e0e08c32417b0e24fc4bab53ae5f2fb945f1fb90975db3646e0cb1f19ed6f7df",
+            "cell": 0,
+            "grid": {
+              "width": 10,
+              "height": 6
+            },
+            "bounds": {
+              "left": 0,
+              "top": 0,
+              "width": 570,
+              "height": 970
+            },
+            "sha256": "66266ceb68479bbe62c68129e9228c277400d0b6aa62e9a236cd19e1e1c01653"
+          }
+        },
+        {
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/5/ContainedObjects/2/ContainedObjects/1/ContainedObjects/8",
+          "cardId": 46100,
+          "front": {
+            "path": "docs/data/complete-edition/source-assets/c1c25/crops/46100-e83eef8de923-front.png",
+            "url": "https://steamusercontent-a.akamaihd.net/ugc/17004907428100041250/8CEFF8A92B429ECB2B9608AABD6426A8495BB190/",
+            "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/c85410d128a2b4c5f745c06cece595aa2ded997e004cca9ea09fd9af2182043b.bin",
+            "sheetSha256": "e0e08c32417b0e24fc4bab53ae5f2fb945f1fb90975db3646e0cb1f19ed6f7df",
+            "cell": 0,
+            "grid": {
+              "width": 10,
+              "height": 6
+            },
+            "bounds": {
+              "left": 0,
+              "top": 0,
+              "width": 570,
+              "height": 970
+            },
+            "sha256": "66266ceb68479bbe62c68129e9228c277400d0b6aa62e9a236cd19e1e1c01653"
+          }
+        }
+      ],
+      "distinctComponentCount": 3,
+      "observedMiniatureManifestCount": 3,
+      "miniatureManifestReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 6,
+          "region": "Miniatures manifest; quantity is not a reuse instruction"
+        }
+      ],
+      "ordinarySkillSummonEligible": true,
+      "countMeaning": "Observed source components; Captain narrow/full components are not two monsters. No runtime supply count inferred."
+    },
+    {
+      "name": "Bone Spearman",
+      "printedFacts": {
+        "level": "II",
+        "HP": 15,
+        "speed": 1,
+        "dodge": 2,
+        "type": "Unholy - Front"
+      },
+      "observedComponents": [
+        {
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/5/ContainedObjects/2/ContainedObjects/0/ContainedObjects/0",
+          "cardId": 46114,
+          "front": {
+            "path": "docs/data/complete-edition/source-assets/c1c25/crops/46114-77091661b3ce-front.png",
+            "url": "https://steamusercontent-a.akamaihd.net/ugc/17004907428100041250/8CEFF8A92B429ECB2B9608AABD6426A8495BB190/",
+            "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/c85410d128a2b4c5f745c06cece595aa2ded997e004cca9ea09fd9af2182043b.bin",
+            "sheetSha256": "e0e08c32417b0e24fc4bab53ae5f2fb945f1fb90975db3646e0cb1f19ed6f7df",
+            "cell": 14,
+            "grid": {
+              "width": 10,
+              "height": 6
+            },
+            "bounds": {
+              "left": 2280,
+              "top": 970,
+              "width": 570,
+              "height": 970
+            },
+            "sha256": "799b7cea2cac0c0069f979854f60d8b421fe12dabaf5b563536159bafd7889c8"
+          }
+        },
+        {
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/5/ContainedObjects/2/ContainedObjects/0/ContainedObjects/1",
+          "cardId": 46114,
+          "front": {
+            "path": "docs/data/complete-edition/source-assets/c1c25/crops/46114-e1afc3b2412b-front.png",
+            "url": "https://steamusercontent-a.akamaihd.net/ugc/17004907428100041250/8CEFF8A92B429ECB2B9608AABD6426A8495BB190/",
+            "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/c85410d128a2b4c5f745c06cece595aa2ded997e004cca9ea09fd9af2182043b.bin",
+            "sheetSha256": "e0e08c32417b0e24fc4bab53ae5f2fb945f1fb90975db3646e0cb1f19ed6f7df",
+            "cell": 14,
+            "grid": {
+              "width": 10,
+              "height": 6
+            },
+            "bounds": {
+              "left": 2280,
+              "top": 970,
+              "width": 570,
+              "height": 970
+            },
+            "sha256": "799b7cea2cac0c0069f979854f60d8b421fe12dabaf5b563536159bafd7889c8"
+          }
+        },
+        {
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/5/ContainedObjects/2/ContainedObjects/0/ContainedObjects/2",
+          "cardId": 46112,
+          "front": {
+            "path": "docs/data/complete-edition/source-assets/c1c25/crops/46112-c7dbc9bac07d-front.png",
+            "url": "https://steamusercontent-a.akamaihd.net/ugc/17004907428100041250/8CEFF8A92B429ECB2B9608AABD6426A8495BB190/",
+            "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/c85410d128a2b4c5f745c06cece595aa2ded997e004cca9ea09fd9af2182043b.bin",
+            "sheetSha256": "e0e08c32417b0e24fc4bab53ae5f2fb945f1fb90975db3646e0cb1f19ed6f7df",
+            "cell": 12,
+            "grid": {
+              "width": 10,
+              "height": 6
+            },
+            "bounds": {
+              "left": 1140,
+              "top": 970,
+              "width": 570,
+              "height": 970
+            },
+            "sha256": "f43bc92d6564f0208d2ee3d89065c48ae2cc4d30af4b95fcaae066710ce9d5d8"
+          }
+        }
+      ],
+      "distinctComponentCount": 3,
+      "observedMiniatureManifestCount": 3,
+      "miniatureManifestReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 6,
+          "region": "Miniatures manifest; quantity is not a reuse instruction"
+        }
+      ],
+      "ordinarySkillSummonEligible": true,
+      "countMeaning": "Observed source components; Captain narrow/full components are not two monsters. No runtime supply count inferred."
+    },
+    {
+      "name": "Bone Courtier",
+      "printedFacts": {
+        "level": "I",
+        "HP": 7,
+        "speed": 1,
+        "dodge": 3,
+        "type": "Unholy - Back"
+      },
+      "observedComponents": [
+        {
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/5/ContainedObjects/2/ContainedObjects/1/ContainedObjects/3",
+          "cardId": 46105,
+          "front": {
+            "path": "docs/data/complete-edition/source-assets/c1c25/crops/46105-4c86b9f68138-front.png",
+            "url": "https://steamusercontent-a.akamaihd.net/ugc/17004907428100041250/8CEFF8A92B429ECB2B9608AABD6426A8495BB190/",
+            "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/c85410d128a2b4c5f745c06cece595aa2ded997e004cca9ea09fd9af2182043b.bin",
+            "sheetSha256": "e0e08c32417b0e24fc4bab53ae5f2fb945f1fb90975db3646e0cb1f19ed6f7df",
+            "cell": 5,
+            "grid": {
+              "width": 10,
+              "height": 6
+            },
+            "bounds": {
+              "left": 2850,
+              "top": 0,
+              "width": 570,
+              "height": 970
+            },
+            "sha256": "6155c913dfa92d2a1aa7f7b018430daae6e0755028dfa96052227b39d30f77ae"
+          }
+        },
+        {
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/5/ContainedObjects/2/ContainedObjects/1/ContainedObjects/4",
+          "cardId": 46105,
+          "front": {
+            "path": "docs/data/complete-edition/source-assets/c1c25/crops/46105-a082c967d76c-front.png",
+            "url": "https://steamusercontent-a.akamaihd.net/ugc/17004907428100041250/8CEFF8A92B429ECB2B9608AABD6426A8495BB190/",
+            "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/c85410d128a2b4c5f745c06cece595aa2ded997e004cca9ea09fd9af2182043b.bin",
+            "sheetSha256": "e0e08c32417b0e24fc4bab53ae5f2fb945f1fb90975db3646e0cb1f19ed6f7df",
+            "cell": 5,
+            "grid": {
+              "width": 10,
+              "height": 6
+            },
+            "bounds": {
+              "left": 2850,
+              "top": 0,
+              "width": 570,
+              "height": 970
+            },
+            "sha256": "6155c913dfa92d2a1aa7f7b018430daae6e0755028dfa96052227b39d30f77ae"
+          }
+        },
+        {
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/5/ContainedObjects/2/ContainedObjects/1/ContainedObjects/5",
+          "cardId": 46105,
+          "front": {
+            "path": "docs/data/complete-edition/source-assets/c1c25/crops/46105-10f0837c9d9d-front.png",
+            "url": "https://steamusercontent-a.akamaihd.net/ugc/17004907428100041250/8CEFF8A92B429ECB2B9608AABD6426A8495BB190/",
+            "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/c85410d128a2b4c5f745c06cece595aa2ded997e004cca9ea09fd9af2182043b.bin",
+            "sheetSha256": "e0e08c32417b0e24fc4bab53ae5f2fb945f1fb90975db3646e0cb1f19ed6f7df",
+            "cell": 5,
+            "grid": {
+              "width": 10,
+              "height": 6
+            },
+            "bounds": {
+              "left": 2850,
+              "top": 0,
+              "width": 570,
+              "height": 970
+            },
+            "sha256": "6155c913dfa92d2a1aa7f7b018430daae6e0755028dfa96052227b39d30f77ae"
+          }
+        }
+      ],
+      "distinctComponentCount": 3,
+      "observedMiniatureManifestCount": 3,
+      "miniatureManifestReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 6,
+          "region": "Miniatures manifest; quantity is not a reuse instruction"
+        }
+      ],
+      "ordinarySkillSummonEligible": false,
+      "countMeaning": "Observed source components; Captain narrow/full components are not two monsters. No runtime supply count inferred."
+    },
+    {
+      "name": "Bone Defender",
+      "printedFacts": {
+        "level": "I",
+        "HP": 10,
+        "speed": 0,
+        "dodge": 2,
+        "type": "Unholy - Front"
+      },
+      "observedComponents": [
+        {
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/5/ContainedObjects/2/ContainedObjects/1/ContainedObjects/9",
+          "cardId": 46110,
+          "front": {
+            "path": "docs/data/complete-edition/source-assets/c1c25/crops/46110-a55ab786bae2-front.png",
+            "url": "https://steamusercontent-a.akamaihd.net/ugc/17004907428100041250/8CEFF8A92B429ECB2B9608AABD6426A8495BB190/",
+            "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/c85410d128a2b4c5f745c06cece595aa2ded997e004cca9ea09fd9af2182043b.bin",
+            "sheetSha256": "e0e08c32417b0e24fc4bab53ae5f2fb945f1fb90975db3646e0cb1f19ed6f7df",
+            "cell": 10,
+            "grid": {
+              "width": 10,
+              "height": 6
+            },
+            "bounds": {
+              "left": 0,
+              "top": 970,
+              "width": 570,
+              "height": 970
+            },
+            "sha256": "a8dd05f42730f22775a2d717d5c6f231f0785692baf1996d11179a3c528d1b24"
+          }
+        },
+        {
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/5/ContainedObjects/2/ContainedObjects/1/ContainedObjects/10",
+          "cardId": 46110,
+          "front": {
+            "path": "docs/data/complete-edition/source-assets/c1c25/crops/46110-465c0ecd42ee-front.png",
+            "url": "https://steamusercontent-a.akamaihd.net/ugc/17004907428100041250/8CEFF8A92B429ECB2B9608AABD6426A8495BB190/",
+            "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/c85410d128a2b4c5f745c06cece595aa2ded997e004cca9ea09fd9af2182043b.bin",
+            "sheetSha256": "e0e08c32417b0e24fc4bab53ae5f2fb945f1fb90975db3646e0cb1f19ed6f7df",
+            "cell": 10,
+            "grid": {
+              "width": 10,
+              "height": 6
+            },
+            "bounds": {
+              "left": 0,
+              "top": 970,
+              "width": 570,
+              "height": 970
+            },
+            "sha256": "a8dd05f42730f22775a2d717d5c6f231f0785692baf1996d11179a3c528d1b24"
+          }
+        }
+      ],
+      "distinctComponentCount": 2,
+      "observedMiniatureManifestCount": 2,
+      "miniatureManifestReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 6,
+          "region": "Miniatures manifest; quantity is not a reuse instruction"
+        }
+      ],
+      "ordinarySkillSummonEligible": false,
+      "countMeaning": "Observed source components; Captain narrow/full components are not two monsters. No runtime supply count inferred."
+    },
+    {
+      "name": "Bone Captain",
+      "printedFacts": {
+        "level": "II",
+        "HP": 33,
+        "speed": 1,
+        "dodge": 1,
+        "type": "Unholy - Front - Large"
+      },
+      "observedComponents": [
+        {
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/5/ContainedObjects/2/ContainedObjects/0/ContainedObjects/3",
+          "cardId": 46111,
+          "front": {
+            "path": "docs/data/complete-edition/source-assets/c1c25/crops/46111-409fee068e02-front.png",
+            "url": "https://steamusercontent-a.akamaihd.net/ugc/17004907428100041250/8CEFF8A92B429ECB2B9608AABD6426A8495BB190/",
+            "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/c85410d128a2b4c5f745c06cece595aa2ded997e004cca9ea09fd9af2182043b.bin",
+            "sheetSha256": "e0e08c32417b0e24fc4bab53ae5f2fb945f1fb90975db3646e0cb1f19ed6f7df",
+            "cell": 11,
+            "grid": {
+              "width": 10,
+              "height": 6
+            },
+            "bounds": {
+              "left": 570,
+              "top": 970,
+              "width": 570,
+              "height": 970
+            },
+            "sha256": "1471271536ef7a42a7a225e7d09b0a2c31473d055b15c23afbdce4cf1f9184e4"
+          }
+        },
+        {
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/5/ContainedObjects/2/ContainedObjects/3",
+          "cardId": 46600,
+          "front": {
+            "path": "docs/data/complete-edition/source-assets/c1c25/crops/46600-50d4373aa783-front.png",
+            "url": "https://steamusercontent-a.akamaihd.net/ugc/15424415349197047542/360B0B450F5A7AA166D1E89A8471CFB66A2EFD6E/",
+            "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/d81b3d69979ebf16899651bfea86f2900e09cc101b5a3da1ad21f5f04c11b3b7.bin",
+            "sheetSha256": "5d83089f66555e3a6f3df5ebb6ab4b439dbb6fe47c54b419033dff57f3df00f8",
+            "cell": 0,
+            "grid": {
+              "width": 5,
+              "height": 5
+            },
+            "bounds": {
+              "left": 0,
+              "top": 0,
+              "width": 1100,
+              "height": 1100
+            },
+            "sha256": "39a941da6f308058845dca81641efd3a79d510c49fec75d1d418112d54acc92f"
+          }
+        }
+      ],
+      "distinctComponentCount": 2,
+      "observedMiniatureManifestCount": 1,
+      "miniatureManifestReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 6,
+          "region": "Miniatures manifest; quantity is not a reuse instruction"
+        }
+      ],
+      "ordinarySkillSummonEligible": false,
+      "countMeaning": "Observed source components; Captain narrow/full components are not two monsters. No runtime supply count inferred."
+    }
+  ],
+  "reservedComponents": {
+    "status": "BOUND",
+    "value": "Keep the level-specific named Bone cards and miniatures on hand to the side",
+    "sourceReferences": [
+      {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+        "page": 38,
+        "region": "Necromancer setup step 3"
+      }
+    ]
+  },
+  "campaignCopyPolicy": {
+    "status": "SOURCE_UNRESOLVED",
+    "value": null,
+    "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+    "reason": "No instruction resolves encounter pool shared with campaign deck or per-level availability.",
+    "sourceReferences": [
+      {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+        "page": 10,
+        "region": "Monster deck construction"
+      },
+      {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+        "page": 38,
+        "region": "keep on hand"
+      }
+    ]
+  },
+  "encounterSummonAvailability": {
+    "status": "SOURCE_UNRESOLVED",
+    "value": null,
+    "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+    "reason": "Physical count does not establish selectable summon pool when copies already drawn/used.",
+    "sourceReferences": [
+      {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+        "page": 17,
+        "region": "duplicate colour identifiers"
+      },
+      {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+        "page": 38,
+        "region": "on hand"
+      }
+    ]
+  },
+  "runtimeSupplyLifecycle": {
+    "deadSummonReuse": {
+      "status": "SOURCE_UNRESOLVED",
+      "value": null,
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "reason": "Specify reserved/shared pool, dead copy reuse, permanent removal and supply exhaustion behavior.",
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 25,
+          "region": "Battle-end deck return does not specify within-Battle reuse"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "summon"
+        }
+      ]
+    },
+    "removedMonsterReturnsToSupply": {
+      "status": "SOURCE_UNRESOLVED",
+      "value": null,
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "reason": "Specify reserved/shared pool, dead copy reuse, permanent removal and supply exhaustion behavior.",
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 25,
+          "region": "Battle-end deck return does not specify within-Battle reuse"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "summon"
+        }
+      ]
+    },
+    "permanentRemovalReuse": {
+      "status": "SOURCE_UNRESOLVED",
+      "value": null,
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "reason": "Specify reserved/shared pool, dead copy reuse, permanent removal and supply exhaustion behavior.",
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 25,
+          "region": "Battle-end deck return does not specify within-Battle reuse"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "summon"
+        }
+      ]
+    },
+    "supplyExhaustion": {
+      "status": "SOURCE_UNRESOLVED",
+      "value": null,
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "reason": "Specify reserved/shared pool, dead copy reuse, permanent removal and supply exhaustion behavior.",
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 25,
+          "region": "Battle-end deck return does not specify within-Battle reuse"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "summon"
+        }
+      ]
+    }
+  },
+  "status": "SOURCE_BLOCKED",
+  "infiniteCloneAllowed": false,
+  "defaultDeadReuseAllowed": false,
+  "defaultExhaustedSkipAllowed": false
+}

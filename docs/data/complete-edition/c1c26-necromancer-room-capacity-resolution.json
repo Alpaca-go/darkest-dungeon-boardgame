@@ -1,0 +1,636 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C26",
+  "baselineHead": "2ba8942bbd080b49260f9cba117729a000ebcddf",
+  "family": "Necromancer",
+  "runtimeImplemented": false,
+  "inputSha256": {
+    "docs/data/complete-edition/c1c25-necromancer-source-gap-register.json": "3cbbdd55db18cea6c9b036e1a5b10e1a039021df0112a9afa5f6d15e3c375ed1",
+    "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json": "55e89348a581632d0a6fc6371700ff79754f70993e986192d9f630dcda34f3db",
+    "docs/data/complete-edition/c1c25-necromancer-encounter-composition.json": "87910e8fa32708906787e04885ea66e865dd9c4fb260fb3b5963baf3f332d21c",
+    "docs/data/complete-edition/c1c25-necromancer-room-contract.json": "23249ae51a8ddeaad7d8801175f372b624294e12290947178e0a43846cc63226",
+    "docs/data/complete-edition/c1c25-necromancer-source-precedence.json": "a71c2131471190e84b618314cc9ba50abd105012d0cce8dea807b2538b7f0569",
+    "docs/data/complete-edition/c1c25-necromancer-bone-source-binding.json": "ed3d427224322e0b4d3cae466956cc4aaf897966d7a2818fb24344585b2bf862",
+    "docs/data/complete-edition/c1c25-necromancer-cleanup-contract.json": "a65826efef7ad6306e8877cd24f2735df9b549bfa2d85dd6d633d9cd4c4fe205",
+    "docs/data/complete-edition/c1c25-necromancer-setup-contract.json": "688781f05721790b11473bcdb4b3adb04a2a65b3edd367a59ebf662344b1d564",
+    "docs/data/complete-edition/c1c25-necromancer-runtime-capability-matrix.json": "c9542fc1622e663eebde2164617a0eda21611169822bd83ffb733c842db252a5",
+    "docs/data/complete-edition/c1c25-necromancer-source-manifest.json": "a5f2de381495868493c544df9787f3cfa82e6980f00d747fa5875cfc0f6489dd",
+    "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+    "docs/data/complete-edition/c1c26-source-retrieval-evidence.json": "11fe8ccd5225043b92e11f2ec10d645e973362e86625a9f3400f59e637d79832"
+  },
+  "frozenRoom": {
+    "schemaVersion": 1,
+    "phase": "11A.4-C1C25",
+    "baselineHead": "179bc367299952d693e9adb81ddd311b42a475b0",
+    "family": "Necromancer",
+    "runtimeImplemented": false,
+    "inputSha256": {
+      "docs/data/complete-edition/c1c24-boss-printed-definitions.json": "dfc9fb3369aa991b6b1d1e9acb3bb3127e7ef91ecaa655126684dbb71eec5483",
+      "docs/data/complete-edition/c1c24-boss-subtype-classification.json": "e011f68a4ad7ddb8a44be3f73655c2573b0f0318bf9ef8611cc94a7e9bdba930",
+      "docs/data/complete-edition/c1c24-boss-family-classification.json": "ccf674596d7d5b52265822406550304dd783e67aebff4cf7554b2678acfba648",
+      "docs/data/complete-edition/c1c24-boss-source-manifest.json": "8bb7158f5720ffe3d2a3cb0068961d0a8454085acf3f223722864b6556e16953",
+      "docs/data/complete-edition/c1c24-boss-family-completeness-matrix.json": "883348365fddf909d8fdab193497f0ff70f50988ff21fd72c5e40a814d056d42",
+      "docs/data/complete-edition/complete-edition-raw-inventory.json": "f7bd06a7a726df301cefe26e10586c0fe3a870ceb92903d5190077cfaae66245",
+      "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+      "docs/data/complete-edition/c1c25-external-source-manifest.json": "1ddda982111ab106ab1fbb2e205f0710fc434648e47da0c20072a97653141287",
+      "docs/data/complete-edition/c1c25-source-search-evidence.json": "0900846e3ff6cd3d4fe8794026aa5e95ebf8f64d12efa3eb262987fe283f91cc"
+    },
+    "card": {
+      "status": "BOUND",
+      "value": {
+        "cardId": 44709,
+        "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/3/ContainedObjects/3"
+      },
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "Find Necromancer Room Card and corresponding Room Tile"
+        },
+        {
+          "kind": "PRINTED_COMPONENT",
+          "path": "docs/data/complete-edition/source-assets/c1c25/crops/44709-d9ba7f70e600-front.png",
+          "url": "https://steamusercontent-a.akamaihd.net/ugc/14650257961976472599/445EF67B8C222C8A53D77851BDE565AE244DB926/",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/d54607371c694bd0e2585f677c088c55f0e4aabe3e84796169f7ea100d00f058.bin",
+          "sheetSha256": "577b9ac5db685cc37684331231914156e8adebc16fb822d230af52e16e876174",
+          "cell": 9,
+          "grid": {
+            "width": 6,
+            "height": 6
+          },
+          "bounds": {
+            "left": 1590,
+            "top": 730,
+            "width": 530,
+            "height": 730
+          },
+          "sha256": "6a294c79fb118bc0ae03a9ba1c6cd6621ec3aa718bb775a7fa67201062e71011"
+        }
+      ]
+    },
+    "tile": {
+      "status": "BOUND",
+      "value": {
+        "number": 10,
+        "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+        "side": "ImageSecondaryURL"
+      },
+      "sourceReferences": [
+        {
+          "kind": "PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+          "ttsPath": "/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+          "sourceObjectGuid": "51494f",
+          "nickname": "10-11",
+          "side": "ImageSecondaryURL",
+          "path": "docs/data/complete-edition/source-assets/c1c25/tile-10.bin",
+          "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+          "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f",
+          "sha1": "906f191d51e6c274fbd77bf421a2bef00099d57f",
+          "width": 2150,
+          "height": 2150,
+          "receipt": {
+            "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+            "acquisitionKind": "ORIGINAL_URL_DOWNLOAD",
+            "acquiredAt": "2026-09-28T06:54:43.158Z",
+            "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f"
+          }
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "corresponding Room Tile"
+        }
+      ]
+    },
+    "printedName": "10—Necromancer Room",
+    "printedRoomRule": {
+      "status": "PRINTED_ABSENT",
+      "value": null,
+      "reason": "Room card has BOSS label and layout, no special rule text",
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "Find Necromancer Room Card and corresponding Room Tile"
+        },
+        {
+          "kind": "PRINTED_COMPONENT",
+          "path": "docs/data/complete-edition/source-assets/c1c25/crops/44709-d9ba7f70e600-front.png",
+          "url": "https://steamusercontent-a.akamaihd.net/ugc/14650257961976472599/445EF67B8C222C8A53D77851BDE565AE244DB926/",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/d54607371c694bd0e2585f677c088c55f0e4aabe3e84796169f7ea100d00f058.bin",
+          "sheetSha256": "577b9ac5db685cc37684331231914156e8adebc16fb822d230af52e16e876174",
+          "cell": 9,
+          "grid": {
+            "width": 6,
+            "height": 6
+          },
+          "bounds": {
+            "left": 1590,
+            "top": 730,
+            "width": 530,
+            "height": 730
+          },
+          "sha256": "6a294c79fb118bc0ae03a9ba1c6cd6621ec3aa718bb775a7fa67201062e71011"
+        }
+      ]
+    },
+    "areas": {
+      "status": "BOUND",
+      "value": [
+        {
+          "id": "top",
+          "bounds": [
+            0.345,
+            0.015,
+            0.67,
+            0.205
+          ],
+          "capacity": 3,
+          "highGround": true,
+          "monsterStart": [
+            "Aggressive"
+          ],
+          "heroStart": []
+        },
+        {
+          "id": "left",
+          "bounds": [
+            0.115,
+            0.215,
+            0.34,
+            0.67
+          ],
+          "capacity": 4,
+          "highGround": false,
+          "monsterStart": [],
+          "heroStart": []
+        },
+        {
+          "id": "upper-centre",
+          "bounds": [
+            0.345,
+            0.215,
+            0.67,
+            0.455
+          ],
+          "capacity": 3,
+          "highGround": false,
+          "monsterStart": [],
+          "heroStart": []
+        },
+        {
+          "id": "right",
+          "bounds": [
+            0.68,
+            0.215,
+            0.895,
+            0.67
+          ],
+          "capacity": 4,
+          "highGround": false,
+          "monsterStart": [],
+          "heroStart": []
+        },
+        {
+          "id": "centre",
+          "bounds": [
+            0.345,
+            0.46,
+            0.67,
+            0.67
+          ],
+          "capacity": 2,
+          "highGround": false,
+          "monsterStart": [],
+          "heroStart": []
+        },
+        {
+          "id": "lower-left",
+          "bounds": [
+            0.115,
+            0.68,
+            0.34,
+            0.89
+          ],
+          "capacity": 2,
+          "highGround": false,
+          "monsterStart": [],
+          "heroStart": []
+        },
+        {
+          "id": "lower-right",
+          "bounds": [
+            0.68,
+            0.68,
+            0.895,
+            0.89
+          ],
+          "capacity": 2,
+          "highGround": false,
+          "monsterStart": [],
+          "heroStart": []
+        },
+        {
+          "id": "bottom",
+          "bounds": [
+            0.345,
+            0.68,
+            0.67,
+            0.985
+          ],
+          "capacity": 4,
+          "highGround": false,
+          "monsterStart": [],
+          "heroStart": [
+            "Aggressive",
+            "Defensive",
+            "Ranged",
+            "Support"
+          ]
+        }
+      ],
+      "sourceReferences": [
+        {
+          "kind": "PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+          "ttsPath": "/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+          "sourceObjectGuid": "51494f",
+          "nickname": "10-11",
+          "side": "ImageSecondaryURL",
+          "path": "docs/data/complete-edition/source-assets/c1c25/tile-10.bin",
+          "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+          "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f",
+          "sha1": "906f191d51e6c274fbd77bf421a2bef00099d57f",
+          "width": 2150,
+          "height": 2150,
+          "receipt": {
+            "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+            "acquisitionKind": "ORIGINAL_URL_DOWNLOAD",
+            "acquiredAt": "2026-09-28T06:54:43.158Z",
+            "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f"
+          }
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "Find Necromancer Room Card and corresponding Room Tile"
+        },
+        {
+          "kind": "PRINTED_COMPONENT",
+          "path": "docs/data/complete-edition/source-assets/c1c25/crops/44709-d9ba7f70e600-front.png",
+          "url": "https://steamusercontent-a.akamaihd.net/ugc/14650257961976472599/445EF67B8C222C8A53D77851BDE565AE244DB926/",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/d54607371c694bd0e2585f677c088c55f0e4aabe3e84796169f7ea100d00f058.bin",
+          "sheetSha256": "577b9ac5db685cc37684331231914156e8adebc16fb822d230af52e16e876174",
+          "cell": 9,
+          "grid": {
+            "width": 6,
+            "height": 6
+          },
+          "bounds": {
+            "left": 1590,
+            "top": 730,
+            "width": 530,
+            "height": 730
+          },
+          "sha256": "6a294c79fb118bc0ae03a9ba1c6cd6621ec3aa718bb775a7fa67201062e71011"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 16,
+          "region": "Deploy to printed Stance locations"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 18,
+          "region": "Occupancy dots"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 25,
+          "region": "High Ground"
+        }
+      ]
+    },
+    "adjacency": {
+      "status": "BOUND",
+      "value": [
+        [
+          "top",
+          "upper-centre"
+        ],
+        [
+          "left",
+          "upper-centre"
+        ],
+        [
+          "left",
+          "centre"
+        ],
+        [
+          "left",
+          "lower-left"
+        ],
+        [
+          "upper-centre",
+          "right"
+        ],
+        [
+          "upper-centre",
+          "centre"
+        ],
+        [
+          "right",
+          "centre"
+        ],
+        [
+          "right",
+          "lower-right"
+        ],
+        [
+          "centre",
+          "bottom"
+        ],
+        [
+          "lower-left",
+          "bottom"
+        ],
+        [
+          "lower-right",
+          "bottom"
+        ]
+      ],
+      "sourceReferences": [
+        {
+          "kind": "PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+          "ttsPath": "/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+          "sourceObjectGuid": "51494f",
+          "nickname": "10-11",
+          "side": "ImageSecondaryURL",
+          "path": "docs/data/complete-edition/source-assets/c1c25/tile-10.bin",
+          "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+          "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f",
+          "sha1": "906f191d51e6c274fbd77bf421a2bef00099d57f",
+          "width": 2150,
+          "height": 2150,
+          "receipt": {
+            "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+            "acquisitionKind": "ORIGINAL_URL_DOWNLOAD",
+            "acquiredAt": "2026-09-28T06:54:43.158Z",
+            "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f"
+          }
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "Find Necromancer Room Card and corresponding Room Tile"
+        },
+        {
+          "kind": "PRINTED_COMPONENT",
+          "path": "docs/data/complete-edition/source-assets/c1c25/crops/44709-d9ba7f70e600-front.png",
+          "url": "https://steamusercontent-a.akamaihd.net/ugc/14650257961976472599/445EF67B8C222C8A53D77851BDE565AE244DB926/",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/d54607371c694bd0e2585f677c088c55f0e4aabe3e84796169f7ea100d00f058.bin",
+          "sheetSha256": "577b9ac5db685cc37684331231914156e8adebc16fb822d230af52e16e876174",
+          "cell": 9,
+          "grid": {
+            "width": 6,
+            "height": 6
+          },
+          "bounds": {
+            "left": 1590,
+            "top": 730,
+            "width": 530,
+            "height": 730
+          },
+          "sha256": "6a294c79fb118bc0ae03a9ba1c6cd6621ec3aa718bb775a7fa67201062e71011"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 16,
+          "region": "Deploy to printed Stance locations"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 18,
+          "region": "Occupancy dots"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 25,
+          "region": "High Ground"
+        }
+      ]
+    },
+    "layoutPolicy": "Bounds are visual annotation coordinates on original tile, not gameplay-engine cells. Area IDs are local audit labels; shared borders establish adjacency.",
+    "levelDifferences": {
+      "status": "BOUND",
+      "value": "Same named Room Card/Tile for all levels; no level-specific Room variant stated",
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "Necromancer Room, no Level variant"
+        }
+      ]
+    },
+    "spawnLocations": {
+      "status": "BOUND",
+      "value": {
+        "boss": "top",
+        "heroes": "bottom",
+        "summons": "Skill Target Area, not default Stance Area"
+      },
+      "sourceReferences": [
+        {
+          "kind": "PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+          "ttsPath": "/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+          "sourceObjectGuid": "51494f",
+          "nickname": "10-11",
+          "side": "ImageSecondaryURL",
+          "path": "docs/data/complete-edition/source-assets/c1c25/tile-10.bin",
+          "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+          "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f",
+          "sha1": "906f191d51e6c274fbd77bf421a2bef00099d57f",
+          "width": 2150,
+          "height": 2150,
+          "receipt": {
+            "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+            "acquisitionKind": "ORIGINAL_URL_DOWNLOAD",
+            "acquiredAt": "2026-09-28T06:54:43.158Z",
+            "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f"
+          }
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "Find Necromancer Room Card and corresponding Room Tile"
+        },
+        {
+          "kind": "PRINTED_COMPONENT",
+          "path": "docs/data/complete-edition/source-assets/c1c25/crops/44709-d9ba7f70e600-front.png",
+          "url": "https://steamusercontent-a.akamaihd.net/ugc/14650257961976472599/445EF67B8C222C8A53D77851BDE565AE244DB926/",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/d54607371c694bd0e2585f677c088c55f0e4aabe3e84796169f7ea100d00f058.bin",
+          "sheetSha256": "577b9ac5db685cc37684331231914156e8adebc16fb822d230af52e16e876174",
+          "cell": 9,
+          "grid": {
+            "width": 6,
+            "height": 6
+          },
+          "bounds": {
+            "left": 1590,
+            "top": 730,
+            "width": 530,
+            "height": 730
+          },
+          "sha256": "6a294c79fb118bc0ae03a9ba1c6cd6621ec3aa718bb775a7fa67201062e71011"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 16,
+          "region": "Deploy to printed Stance locations"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 18,
+          "region": "Occupancy dots"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 25,
+          "region": "High Ground"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "Target Area summon"
+        }
+      ]
+    },
+    "sourceBound": true
+  },
+  "fullStancePrecedence": {
+    "status": "BOUND",
+    "value": "Boss printed suppression; core p38 first-empty requires empty slot; p31 relocates miniatures only; p17 replacement scoped to large-Monster initial draws",
+    "sourceReferences": [
+      {
+        "kind": "PRINTED_COMPONENT",
+        "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/4",
+        "definitionId": "ce-boss-42003-78ba81",
+        "side": "front",
+        "literal": "all Stances occupied",
+        "path": "docs/data/complete-edition/source-assets/c1c24/crops/42003-78ba81-front.png",
+        "sha256": "112f5f4f6ddfe8e6a2571452576adbd1c0c1b4f5f8e3daecf9f6a6c05d6ff77a"
+      },
+      {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+        "page": 38,
+        "region": "first empty Stance"
+      },
+      {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+        "page": 31,
+        "region": "Room Area displacement"
+      },
+      {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+        "page": 17,
+        "region": "large Monster cannot fit"
+      }
+    ]
+  },
+  "firstEmptyStance": {
+    "status": "BOUND",
+    "value": "Place summoned card in first empty Stance",
+    "sourceReferences": [
+      {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+        "page": 38,
+        "region": "Necromancer"
+      }
+    ]
+  },
+  "summonMiniatureArea": {
+    "status": "BOUND",
+    "value": "Target Area overrides generic corresponding-Stance Area",
+    "sourceReferences": [
+      {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+        "page": 31,
+        "region": "unless Boss specifies otherwise"
+      },
+      {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+        "page": 38,
+        "region": "Target Area"
+      }
+    ]
+  },
+  "miniatureDisplacement": {
+    "status": "BOUND",
+    "value": "Full spawn Area: move a Hero; all-Monster Area: players choose Monster to move to nearest available Area",
+    "sourceReferences": [
+      {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+        "page": 31,
+        "region": "Monster Summoning"
+      }
+    ]
+  },
+  "nearestAvailableAreaTie": {
+    "status": "SOURCE_UNRESOLVED",
+    "value": null,
+    "category": "ROOM_CAPACITY_INTERACTION_UNRESOLVED",
+    "reason": "Specify equal-nearest destination choice and no-available-Area behavior under p31 displacement.",
+    "sourceReferences": [
+      {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+        "page": 31,
+        "region": "nearest available Area"
+      }
+    ]
+  },
+  "noAvailableAreaFallback": {
+    "status": "SOURCE_UNRESOLVED",
+    "value": null,
+    "category": "ROOM_CAPACITY_INTERACTION_UNRESOLVED",
+    "reason": "Specify equal-nearest destination choice and no-available-Area behavior under p31 displacement.",
+    "sourceReferences": [
+      {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+        "page": 31,
+        "region": "nearest available Area"
+      }
+    ]
+  },
+  "fullStanceSuppressionIsAreaFallback": false,
+  "initialLargeDrawReplacementIsSummonFallback": false,
+  "summonPlacementRuntimeSafe": false
+}

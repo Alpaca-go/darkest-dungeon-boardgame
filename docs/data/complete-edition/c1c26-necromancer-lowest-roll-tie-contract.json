@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C26",
+  "baselineHead": "2ba8942bbd080b49260f9cba117729a000ebcddf",
+  "family": "Necromancer",
+  "runtimeImplemented": false,
+  "inputSha256": {
+    "docs/data/complete-edition/c1c25-necromancer-source-gap-register.json": "3cbbdd55db18cea6c9b036e1a5b10e1a039021df0112a9afa5f6d15e3c375ed1",
+    "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json": "55e89348a581632d0a6fc6371700ff79754f70993e986192d9f630dcda34f3db",
+    "docs/data/complete-edition/c1c25-necromancer-encounter-composition.json": "87910e8fa32708906787e04885ea66e865dd9c4fb260fb3b5963baf3f332d21c",
+    "docs/data/complete-edition/c1c25-necromancer-room-contract.json": "23249ae51a8ddeaad7d8801175f372b624294e12290947178e0a43846cc63226",
+    "docs/data/complete-edition/c1c25-necromancer-source-precedence.json": "a71c2131471190e84b618314cc9ba50abd105012d0cce8dea807b2538b7f0569",
+    "docs/data/complete-edition/c1c25-necromancer-bone-source-binding.json": "ed3d427224322e0b4d3cae466956cc4aaf897966d7a2818fb24344585b2bf862",
+    "docs/data/complete-edition/c1c25-necromancer-cleanup-contract.json": "a65826efef7ad6306e8877cd24f2735df9b549bfa2d85dd6d633d9cd4c4fe205",
+    "docs/data/complete-edition/c1c25-necromancer-setup-contract.json": "688781f05721790b11473bcdb4b3adb04a2a65b3edd367a59ebf662344b1d564",
+    "docs/data/complete-edition/c1c25-necromancer-runtime-capability-matrix.json": "c9542fc1622e663eebde2164617a0eda21611169822bd83ffb733c842db252a5",
+    "docs/data/complete-edition/c1c25-necromancer-source-manifest.json": "a5f2de381495868493c544df9787f3cfa82e6980f00d747fa5875cfc0f6489dd",
+    "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+    "docs/data/complete-edition/c1c26-source-retrieval-evidence.json": "11fe8ccd5225043b92e11f2ec10d645e973362e86625a9f3400f59e637d79832"
+  },
+  "effects": [
+    {
+      "level": 2,
+      "name": "Haunted Graveyard",
+      "mayUseGraveyardEffect": true,
+      "trigger": "first preparation day",
+      "target": "Hero with lowest D10 result",
+      "tieRule": {
+        "status": "SOURCE_UNRESOLVED",
+        "value": null,
+        "category": "LOWEST_ROLL_HERO_TIE_UNRESOLVED",
+        "reason": "Specify the Hamlet lowest-D10 tie rule for Haunted Graveyard and The Restless Dead.",
+        "sourceReferences": [
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 24,
+            "region": "character Stance priority is Monster targeting scope"
+          },
+          {
+            "kind": "LOCKED_TTS_CARD_CROP",
+            "manifestPath": "docs/data/complete-edition/c1c24-boss-crop-manifest.json",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/0",
+            "side": "back",
+            "status": "SOURCE_BOUND",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/42004-324dd0-back.png",
+            "assetId": "1d7611549f91eb64445c99fcd1baa698296078f60294c9af855abbf83cc324a7",
+            "sheetPath": "docs/data/complete-edition/source-assets/c1c24/sheets/1d7611549f91eb64445c99fcd1baa698296078f60294c9af855abbf83cc324a7.bin",
+            "sheetSha256": "95cd26894dc3f7eaa7f5774d61916d37cbd3efa355276ff565977f2918f826fa",
+            "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/16946260315131195788/E31F48E59492BE12479712B29F4EFA95019F3C89/",
+            "cell": 4,
+            "grid": {
+              "width": 10,
+              "height": 4
+            },
+            "bounds": {
+              "left": 2360,
+              "top": 0,
+              "width": 590,
+              "height": 980
+            },
+            "cropSha256": "e40b1651d9e8dce1198662cd473d59e745321d0295a813deb0f8b0d76d5730d8"
+          },
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/6/ContainedObjects/1",
+            "definitionId": "ce-boss-42001-97468f",
+            "side": "back",
+            "literal": "BOSS\n[LEVEL:II]",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/42001-97468f-back.png",
+            "sha256": "4f1b4315c3a1a28c5b57ff2a0517a9ed3b144c208d95352400dec8824f892380"
+          }
+        ]
+      },
+      "runtimeBindingStatus": "BLOCKED",
+      "isolatesTo": "Hamlet effects at Levels II and III; does not invalidate static Room/setup data"
+    },
+    {
+      "level": 3,
+      "name": "The Restless Dead",
+      "mayUseGraveyardEffect": false,
+      "trigger": "first preparation day",
+      "target": "Hero with lowest D10 result",
+      "tieRule": {
+        "status": "SOURCE_UNRESOLVED",
+        "value": null,
+        "category": "LOWEST_ROLL_HERO_TIE_UNRESOLVED",
+        "reason": "Specify the Hamlet lowest-D10 tie rule for Haunted Graveyard and The Restless Dead.",
+        "sourceReferences": [
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 24,
+            "region": "character Stance priority is Monster targeting scope"
+          },
+          {
+            "kind": "LOCKED_TTS_CARD_CROP",
+            "manifestPath": "docs/data/complete-edition/c1c24-boss-crop-manifest.json",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/2",
+            "side": "back",
+            "status": "SOURCE_BOUND",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/42005-b1efcd-back.png",
+            "assetId": "1d7611549f91eb64445c99fcd1baa698296078f60294c9af855abbf83cc324a7",
+            "sheetPath": "docs/data/complete-edition/source-assets/c1c24/sheets/1d7611549f91eb64445c99fcd1baa698296078f60294c9af855abbf83cc324a7.bin",
+            "sheetSha256": "95cd26894dc3f7eaa7f5774d61916d37cbd3efa355276ff565977f2918f826fa",
+            "sourceUrl": "https://steamusercontent-a.akamaihd.net/ugc/16946260315131195788/E31F48E59492BE12479712B29F4EFA95019F3C89/",
+            "cell": 5,
+            "grid": {
+              "width": 10,
+              "height": 4
+            },
+            "bounds": {
+              "left": 2950,
+              "top": 0,
+              "width": 590,
+              "height": 980
+            },
+            "cropSha256": "dda5c00146e5ae8eca61ca2c1a53d7dac23583bf1d2021b35b6b5ae0038371d3"
+          },
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/6/ContainedObjects/0",
+            "definitionId": "ce-boss-42002-dc2410",
+            "side": "back",
+            "literal": "BOSS\n[LEVEL:III]",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/42002-dc2410-back.png",
+            "sha256": "132ba5c63e2e7a1c553c162021b1201f13fcd5b822f244c84649b4568e5758aa"
+          }
+        ]
+      },
+      "runtimeBindingStatus": "BLOCKED",
+      "isolatesTo": "Hamlet effects at Levels II and III; does not invalidate static Room/setup data"
+    }
+  ],
+  "prohibitedFallbacks": [
+    "player chooses",
+    "first player",
+    "active Hero",
+    "random",
+    "reroll",
+    "simultaneous Heroes"
+  ]
+}

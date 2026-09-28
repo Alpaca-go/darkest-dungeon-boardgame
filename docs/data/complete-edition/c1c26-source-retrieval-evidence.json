@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "receipts": [
+    {
+      "id": "designer-faq",
+      "url": "https://boardgamegeek.com/filepage/250715/darkest-dungeon-board-game-faq-by-the-designers",
+      "searchQuery": "\"Darkest Dungeon\" \"FAQ\" \"designers\" \"250715\"",
+      "retrievalTime": "2026-09-28T11:39:53.303Z",
+      "transport": "curl.exe HTTPS normal public request",
+      "exitCode": 0,
+      "httpStatus": 403,
+      "transportError": null,
+      "responsePath": "docs/data/complete-edition/source-assets/c1c26/designer-faq.response",
+      "responseSha256": "65b23557cd16cd79468d25520d4ed73db8865d910768acb67b785bd661d7b805",
+      "fileIdentity": {
+        "bggFilepage": 250715,
+        "title": "Darkest Dungeon the Board Game FAQ by the Designers",
+        "uploader": "apoxwrhthrio1980",
+        "downloadFileId": null,
+        "fileSha256": null
+      },
+      "authoritativeContentAcquired": false,
+      "rulesAuthority": false,
+      "status": "CONTENT_NOT_AUTHENTICATED",
+      "permanentlyUnavailable": false
+    },
+    {
+      "id": "designer-file-list",
+      "url": "https://boardgamegeek.com/boardgame/317321/darkest-dungeon-the-board-game/files",
+      "searchQuery": "\"Darkest Dungeon\" \"FAQ\" \"designers\"",
+      "retrievalTime": "2026-09-28T11:39:55.095Z",
+      "transport": "curl.exe HTTPS normal public request",
+      "exitCode": 0,
+      "httpStatus": 403,
+      "transportError": null,
+      "responsePath": "docs/data/complete-edition/source-assets/c1c26/designer-file-list.response",
+      "responseSha256": "bdfb1c9984903a4637de8fecff5a29abf5357bd4e2c1fbc32b389995c0fd9cc6",
+      "fileIdentity": null,
+      "authoritativeContentAcquired": false,
+      "rulesAuthority": false,
+      "status": "CONTENT_NOT_AUTHENTICATED",
+      "permanentlyUnavailable": false
+    },
+    {
+      "id": "publisher-faq-lead",
+      "url": "https://info.mythicgames.net/fr/darkestdungeon/faq/english",
+      "searchQuery": "\"Darkest Dungeon\" \"FAQ\" Mythic",
+      "retrievalTime": "2026-09-28T11:39:55.895Z",
+      "transport": "curl.exe HTTPS normal public request",
+      "exitCode": 6,
+      "httpStatus": null,
+      "transportError": "curl: (6) Could not resolve host: info.mythicgames.net",
+      "responsePath": null,
+      "responseSha256": null,
+      "fileIdentity": null,
+      "authoritativeContentAcquired": false,
+      "rulesAuthority": false,
+      "status": "CONTENT_NOT_AUTHENTICATED",
+      "permanentlyUnavailable": false
+    },
+    {
+      "id": "later-official-files-lead",
+      "url": "https://www.darkestdungeon.com/news/regarding-mythic-games-and-the-darkest-dungeon-board-game/",
+      "searchQuery": "site:darkestdungeon.com \"Regarding Mythic\"",
+      "retrievalTime": "2026-09-28T11:39:56.118Z",
+      "transport": "curl.exe HTTPS normal public request",
+      "exitCode": 0,
+      "httpStatus": 404,
+      "transportError": null,
+      "responsePath": "docs/data/complete-edition/source-assets/c1c26/later-official-files-lead.response",
+      "responseSha256": "41560e3888ac8bc7fde1c95026240701bbc80593687c0b8fb3f878904b3ed3c8",
+      "fileIdentity": null,
+      "authoritativeContentAcquired": false,
+      "rulesAuthority": false,
+      "status": "CONTENT_NOT_AUTHENTICATED",
+      "permanentlyUnavailable": false
+    }
+  ],
+  "note": "HTTP/TLS/access failures do not prove permanent unavailability. Response hashes identify transport bodies, not authenticated FAQ PDFs. Successful HTML alone is not an acquired rule file."
+}

@@ -1,0 +1,10 @@
+import { readFileSync } from 'node:fs';
+import { root, verifyAssets } from './c1c25-contract';
+import { buildArtifacts, validateArtifacts, verifyBaselineAndReceipts, report } from './c1c26-contract';
+verifyBaselineAndReceipts();
+await verifyAssets();
+const expected = buildArtifacts();
+const stored = Object.fromEntries(Object.keys(expected).map(n => [n, JSON.parse(readFileSync(root + n, 'utf8'))]));
+validateArtifacts(stored);
+if (readFileSync('docs/reports/complete-edition/c1c26-necromancer-source-closure-report.md', 'utf8').replace(/\r\n/g, '\n') !== report(expected)) throw new Error('C1C26 report drift');
+console.log('C1C26 verified: baseline content frozen with EOL-only tolerance; source bytes/crops verified; 75 bounded usages / 9 topics / 0 terminal; 0 family semantic, eligible or Ready; continuation.');

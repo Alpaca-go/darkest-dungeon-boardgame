@@ -1,0 +1,3800 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C26",
+  "baselineHead": "2ba8942bbd080b49260f9cba117729a000ebcddf",
+  "family": "Necromancer",
+  "runtimeImplemented": false,
+  "inputSha256": {
+    "docs/data/complete-edition/c1c25-necromancer-source-gap-register.json": "3cbbdd55db18cea6c9b036e1a5b10e1a039021df0112a9afa5f6d15e3c375ed1",
+    "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json": "55e89348a581632d0a6fc6371700ff79754f70993e986192d9f630dcda34f3db",
+    "docs/data/complete-edition/c1c25-necromancer-encounter-composition.json": "87910e8fa32708906787e04885ea66e865dd9c4fb260fb3b5963baf3f332d21c",
+    "docs/data/complete-edition/c1c25-necromancer-room-contract.json": "23249ae51a8ddeaad7d8801175f372b624294e12290947178e0a43846cc63226",
+    "docs/data/complete-edition/c1c25-necromancer-source-precedence.json": "a71c2131471190e84b618314cc9ba50abd105012d0cce8dea807b2538b7f0569",
+    "docs/data/complete-edition/c1c25-necromancer-bone-source-binding.json": "ed3d427224322e0b4d3cae466956cc4aaf897966d7a2818fb24344585b2bf862",
+    "docs/data/complete-edition/c1c25-necromancer-cleanup-contract.json": "a65826efef7ad6306e8877cd24f2735df9b549bfa2d85dd6d633d9cd4c4fe205",
+    "docs/data/complete-edition/c1c25-necromancer-setup-contract.json": "688781f05721790b11473bcdb4b3adb04a2a65b3edd367a59ebf662344b1d564",
+    "docs/data/complete-edition/c1c25-necromancer-runtime-capability-matrix.json": "c9542fc1622e663eebde2164617a0eda21611169822bd83ffb733c842db252a5",
+    "docs/data/complete-edition/c1c25-necromancer-source-manifest.json": "a5f2de381495868493c544df9787f3cfa82e6980f00d747fa5875cfc0f6489dd",
+    "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+    "docs/data/complete-edition/c1c26-source-retrieval-evidence.json": "11fe8ccd5225043b92e11f2ec10d645e973362e86625a9f3400f59e637d79832"
+  },
+  "composition": {
+    "schemaVersion": 1,
+    "phase": "11A.4-C1C25",
+    "baselineHead": "179bc367299952d693e9adb81ddd311b42a475b0",
+    "family": "Necromancer",
+    "runtimeImplemented": false,
+    "inputSha256": {
+      "docs/data/complete-edition/c1c24-boss-printed-definitions.json": "dfc9fb3369aa991b6b1d1e9acb3bb3127e7ef91ecaa655126684dbb71eec5483",
+      "docs/data/complete-edition/c1c24-boss-subtype-classification.json": "e011f68a4ad7ddb8a44be3f73655c2573b0f0318bf9ef8611cc94a7e9bdba930",
+      "docs/data/complete-edition/c1c24-boss-family-classification.json": "ccf674596d7d5b52265822406550304dd783e67aebff4cf7554b2678acfba648",
+      "docs/data/complete-edition/c1c24-boss-source-manifest.json": "8bb7158f5720ffe3d2a3cb0068961d0a8454085acf3f223722864b6556e16953",
+      "docs/data/complete-edition/c1c24-boss-family-completeness-matrix.json": "883348365fddf909d8fdab193497f0ff70f50988ff21fd72c5e40a814d056d42",
+      "docs/data/complete-edition/complete-edition-raw-inventory.json": "f7bd06a7a726df301cefe26e10586c0fe3a870ceb92903d5190077cfaae66245",
+      "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+      "docs/data/complete-edition/c1c25-external-source-manifest.json": "1ddda982111ab106ab1fbb2e205f0710fc434648e47da0c20072a97653141287",
+      "docs/data/complete-edition/c1c25-source-search-evidence.json": "0900846e3ff6cd3d4fe8794026aa5e95ebf8f64d12efa3eb262987fe283f91cc"
+    },
+    "levels": [
+      {
+        "level": 1,
+        "printedLevel": "I",
+        "bossIdentityPhysicalId": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/6/ContainedObjects/2",
+        "threatPhysicalId": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/4",
+        "battlePhysicalId": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/5",
+        "abilitySide": {
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/4",
+          "side": "front"
+        },
+        "encounterRole": "CAMPAIGN_IMMINENT_THREAT_AND_BOSS_BATTLE",
+        "relationEvidence": [
+          {
+            "kind": "SOURCE_CONTAINER",
+            "guid": "b7b238",
+            "nickname": "Necromancer",
+            "objectType": "Bag",
+            "ttsPath": "/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0",
+            "sourcePath": "docs/data/complete-edition/complete-edition-raw-inventory.json",
+            "basis": "Last named containing object on the SAME locked TTS physical path; auxiliary printed names do not create extra families."
+          },
+          {
+            "kind": "SOURCE_CONTAINER",
+            "guid": "b7b238",
+            "nickname": "Necromancer",
+            "objectType": "Bag",
+            "ttsPath": "/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0",
+            "sourcePath": "docs/data/complete-edition/complete-edition-raw-inventory.json",
+            "basis": "Last named containing object on the SAME locked TTS physical path; auxiliary printed names do not create extra families."
+          },
+          {
+            "kind": "SOURCE_CONTAINER",
+            "guid": "b7b238",
+            "nickname": "Necromancer",
+            "objectType": "Bag",
+            "ttsPath": "/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0",
+            "sourcePath": "docs/data/complete-edition/complete-edition-raw-inventory.json",
+            "basis": "Last named containing object on the SAME locked TTS physical path; auxiliary printed names do not create extra families."
+          },
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/6/ContainedObjects/2",
+            "definitionId": "ce-boss-42000-42fcbd",
+            "side": "back",
+            "literal": "BOSS\n[LEVEL:I]",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/42000-42fcbd-back.png",
+            "sha256": "e357f1520d793b1267f0dc437f2f0abb3a8f8cf866cde87c40f813a820dda32c"
+          },
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/4",
+            "definitionId": "ce-boss-42003-78ba81",
+            "side": "front",
+            "literal": "Necromancer\n[LEVEL:I]\nACTIONS / Round: 1\nSummoning [SKULL_RED_DOWN_ARROW]: When a Monster is [SKULL_RED_DOWN_ARROW], the Monster miniature is placed on the Target Area, and a new Monster Initiative Card is shuffled into the Initiative Deck. If all Stances are occupied, the Summoning does not take effect.",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/42003-78ba81-front.png",
+            "sha256": "112f5f4f6ddfe8e6a2571452576adbd1c0c1b4f5f8e3daecf9f6a6c05d6ff77a"
+          },
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/5",
+            "definitionId": "ce-boss-46037-85d8bf",
+            "side": "front",
+            "literal": "Necromancer\n[LEVEL:I]",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/46037-85d8bf-front.png",
+            "sha256": "560c93fa1feb3add813afe4791d7e6a6cc88c4eeab112977007f6938afcb4f08"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 11,
+            "region": "Draw Boss identity; find its Threat; each Boss also has Battle Card per Level"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 30,
+            "region": "Three versions according to Campaign Level; flip Threat to Battle abilities"
+          }
+        ],
+        "coreCopyCounts": {
+          "status": "BOUND",
+          "value": {
+            "bossIdentity": 1,
+            "threatAbility": 1,
+            "battle": 1
+          },
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 11,
+              "region": "one selected Boss and its matching Threat; per-level Battle Card"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "Necromancer Battle Card, singular"
+            }
+          ]
+        },
+        "monsterSummons": {
+          "status": "BOUND",
+          "value": {
+            "name": "Bone Rabble",
+            "printedMonsterLevel": "I",
+            "eligibleSourceCardIds": [
+              46140,
+              46139,
+              46141
+            ]
+          },
+          "sourceReferences": [
+            {
+              "kind": "PRINTED_COMPONENT",
+              "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/5",
+              "definitionId": "ce-boss-46037-85d8bf",
+              "side": "front",
+              "literal": "Bone Rabble",
+              "path": "docs/data/complete-edition/source-assets/c1c24/crops/46037-85d8bf-front.png",
+              "sha256": "560c93fa1feb3add813afe4791d7e6a6cc88c4eeab112977007f6938afcb4f08"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "Level-dependent summoned Bone cards"
+            }
+          ]
+        },
+        "roomCard": {
+          "status": "BOUND",
+          "value": {
+            "cardId": 44709,
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/3/ContainedObjects/3"
+          },
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "Find Necromancer Room Card and corresponding Room Tile"
+            },
+            {
+              "kind": "PRINTED_COMPONENT",
+              "path": "docs/data/complete-edition/source-assets/c1c25/crops/44709-d9ba7f70e600-front.png",
+              "url": "https://steamusercontent-a.akamaihd.net/ugc/14650257961976472599/445EF67B8C222C8A53D77851BDE565AE244DB926/",
+              "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/d54607371c694bd0e2585f677c088c55f0e4aabe3e84796169f7ea100d00f058.bin",
+              "sheetSha256": "577b9ac5db685cc37684331231914156e8adebc16fb822d230af52e16e876174",
+              "cell": 9,
+              "grid": {
+                "width": 6,
+                "height": 6
+              },
+              "bounds": {
+                "left": 1590,
+                "top": 730,
+                "width": 530,
+                "height": 730
+              },
+              "sha256": "6a294c79fb118bc0ae03a9ba1c6cd6621ec3aa718bb775a7fa67201062e71011"
+            }
+          ]
+        },
+        "roomTile": {
+          "status": "BOUND",
+          "value": {
+            "number": 10,
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+            "side": "ImageSecondaryURL"
+          },
+          "sourceReferences": [
+            {
+              "kind": "PRINTED_COMPONENT",
+              "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+              "ttsPath": "/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+              "sourceObjectGuid": "51494f",
+              "nickname": "10-11",
+              "side": "ImageSecondaryURL",
+              "path": "docs/data/complete-edition/source-assets/c1c25/tile-10.bin",
+              "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+              "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f",
+              "sha1": "906f191d51e6c274fbd77bf421a2bef00099d57f",
+              "width": 2150,
+              "height": 2150,
+              "receipt": {
+                "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+                "acquisitionKind": "ORIGINAL_URL_DOWNLOAD",
+                "acquiredAt": "2026-09-28T06:54:43.158Z",
+                "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f"
+              }
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "corresponding Room Tile"
+            }
+          ]
+        },
+        "tokens": {
+          "status": "BOUND",
+          "value": [
+            "Hero Stance tokens",
+            "Wound tokens",
+            "Hero and Monster Initiative cards",
+            "Monster colour identifiers when duplicate units are present"
+          ],
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 16,
+              "region": "Hero deployment and initiative"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 17,
+              "region": "Duplicate monster colour identifiers"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 19,
+              "region": "Wounds on hit"
+            }
+          ]
+        },
+        "externalDecks": {
+          "status": "BOUND",
+          "value": [
+            "4 Hero Initiative cards",
+            "1 Necromancer Monster Initiative card",
+            "one additional Monster Initiative card per summon"
+          ],
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 16,
+              "region": "Four Hero Initiative Cards"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "One Boss Initiative; shuffle one per summon"
+            }
+          ]
+        },
+        "summonCopyCounts": {
+          "status": "SOURCE_UNRESOLVED",
+          "value": null,
+          "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+          "reason": "Inventory records candidate copies, not an instruction to clone exhausted components or a rule for summon supply exhaustion.",
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "cards and miniatures on hand"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 17,
+              "region": "Use coloured identifiers for duplicate monsters"
+            }
+          ]
+        },
+        "setupOrder": {
+          "status": "BOUND",
+          "value": [
+            "put Room Card and Tile in play",
+            "place Boss Battle Card in Aggressive and miniature on corresponding Area",
+            "shuffle one Boss Initiative",
+            "keep named Bone cards and miniatures on hand"
+          ],
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "numbered steps 1-3"
+            }
+          ]
+        },
+        "cleanupObligations": {
+          "status": "BOUND",
+          "value": [
+            "Boss defeat ends Battle immediately",
+            "remove all other Monsters",
+            "advance Campaign Level / Act"
+          ],
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 30,
+              "region": "Fighting a Boss"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "When Necromancer defeated"
+            }
+          ]
+        },
+        "sourceBoundCoreComposition": true,
+        "fullySourceBound": false
+      },
+      {
+        "level": 2,
+        "printedLevel": "II",
+        "bossIdentityPhysicalId": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/6/ContainedObjects/1",
+        "threatPhysicalId": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/0",
+        "battlePhysicalId": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/3",
+        "abilitySide": {
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/0",
+          "side": "front"
+        },
+        "encounterRole": "CAMPAIGN_IMMINENT_THREAT_AND_BOSS_BATTLE",
+        "relationEvidence": [
+          {
+            "kind": "SOURCE_CONTAINER",
+            "guid": "b7b238",
+            "nickname": "Necromancer",
+            "objectType": "Bag",
+            "ttsPath": "/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0",
+            "sourcePath": "docs/data/complete-edition/complete-edition-raw-inventory.json",
+            "basis": "Last named containing object on the SAME locked TTS physical path; auxiliary printed names do not create extra families."
+          },
+          {
+            "kind": "SOURCE_CONTAINER",
+            "guid": "b7b238",
+            "nickname": "Necromancer",
+            "objectType": "Bag",
+            "ttsPath": "/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0",
+            "sourcePath": "docs/data/complete-edition/complete-edition-raw-inventory.json",
+            "basis": "Last named containing object on the SAME locked TTS physical path; auxiliary printed names do not create extra families."
+          },
+          {
+            "kind": "SOURCE_CONTAINER",
+            "guid": "b7b238",
+            "nickname": "Necromancer",
+            "objectType": "Bag",
+            "ttsPath": "/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0",
+            "sourcePath": "docs/data/complete-edition/complete-edition-raw-inventory.json",
+            "basis": "Last named containing object on the SAME locked TTS physical path; auxiliary printed names do not create extra families."
+          },
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/6/ContainedObjects/1",
+            "definitionId": "ce-boss-42001-97468f",
+            "side": "back",
+            "literal": "BOSS\n[LEVEL:II]",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/42001-97468f-back.png",
+            "sha256": "4f1b4315c3a1a28c5b57ff2a0517a9ed3b144c208d95352400dec8824f892380"
+          },
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/0",
+            "definitionId": "ce-boss-42004-324dd0",
+            "side": "front",
+            "literal": "Necromancer\n[LEVEL:II]\nACTIONS / Round: 1\nSummoning [SKULL_RED_DOWN_ARROW]: When a Monster is [SKULL_RED_DOWN_ARROW], the Monster miniature is placed on the Target Area, and a new Monster Initiative Card is shuffled into the Initiative Deck. If all Stances are occupied, the Summoning does not take effect.",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/42004-324dd0-front.png",
+            "sha256": "a6bdfbb7c71419d77b46aeb50f1cbc437d1916f51dec02c328056289aef8b5f8"
+          },
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/3",
+            "definitionId": "ce-boss-46038-a54cb7",
+            "side": "front",
+            "literal": "Necromancer\n[LEVEL:II]",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/46038-a54cb7-front.png",
+            "sha256": "dabb5479c32fcdc24a4a0b5963045d3331ed490aa4c8c93d456d4e805644b990"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 11,
+            "region": "Draw Boss identity; find its Threat; each Boss also has Battle Card per Level"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 30,
+            "region": "Three versions according to Campaign Level; flip Threat to Battle abilities"
+          }
+        ],
+        "coreCopyCounts": {
+          "status": "BOUND",
+          "value": {
+            "bossIdentity": 1,
+            "threatAbility": 1,
+            "battle": 1
+          },
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 11,
+              "region": "one selected Boss and its matching Threat; per-level Battle Card"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "Necromancer Battle Card, singular"
+            }
+          ]
+        },
+        "monsterSummons": {
+          "status": "BOUND",
+          "value": {
+            "name": "Bone Soldier",
+            "printedMonsterLevel": "I",
+            "eligibleSourceCardIds": [
+              46100
+            ]
+          },
+          "sourceReferences": [
+            {
+              "kind": "PRINTED_COMPONENT",
+              "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/3",
+              "definitionId": "ce-boss-46038-a54cb7",
+              "side": "front",
+              "literal": "Bone Soldier",
+              "path": "docs/data/complete-edition/source-assets/c1c24/crops/46038-a54cb7-front.png",
+              "sha256": "dabb5479c32fcdc24a4a0b5963045d3331ed490aa4c8c93d456d4e805644b990"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "Level-dependent summoned Bone cards"
+            }
+          ]
+        },
+        "roomCard": {
+          "status": "BOUND",
+          "value": {
+            "cardId": 44709,
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/3/ContainedObjects/3"
+          },
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "Find Necromancer Room Card and corresponding Room Tile"
+            },
+            {
+              "kind": "PRINTED_COMPONENT",
+              "path": "docs/data/complete-edition/source-assets/c1c25/crops/44709-d9ba7f70e600-front.png",
+              "url": "https://steamusercontent-a.akamaihd.net/ugc/14650257961976472599/445EF67B8C222C8A53D77851BDE565AE244DB926/",
+              "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/d54607371c694bd0e2585f677c088c55f0e4aabe3e84796169f7ea100d00f058.bin",
+              "sheetSha256": "577b9ac5db685cc37684331231914156e8adebc16fb822d230af52e16e876174",
+              "cell": 9,
+              "grid": {
+                "width": 6,
+                "height": 6
+              },
+              "bounds": {
+                "left": 1590,
+                "top": 730,
+                "width": 530,
+                "height": 730
+              },
+              "sha256": "6a294c79fb118bc0ae03a9ba1c6cd6621ec3aa718bb775a7fa67201062e71011"
+            }
+          ]
+        },
+        "roomTile": {
+          "status": "BOUND",
+          "value": {
+            "number": 10,
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+            "side": "ImageSecondaryURL"
+          },
+          "sourceReferences": [
+            {
+              "kind": "PRINTED_COMPONENT",
+              "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+              "ttsPath": "/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+              "sourceObjectGuid": "51494f",
+              "nickname": "10-11",
+              "side": "ImageSecondaryURL",
+              "path": "docs/data/complete-edition/source-assets/c1c25/tile-10.bin",
+              "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+              "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f",
+              "sha1": "906f191d51e6c274fbd77bf421a2bef00099d57f",
+              "width": 2150,
+              "height": 2150,
+              "receipt": {
+                "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+                "acquisitionKind": "ORIGINAL_URL_DOWNLOAD",
+                "acquiredAt": "2026-09-28T06:54:43.158Z",
+                "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f"
+              }
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "corresponding Room Tile"
+            }
+          ]
+        },
+        "tokens": {
+          "status": "BOUND",
+          "value": [
+            "Hero Stance tokens",
+            "Wound tokens",
+            "Hero and Monster Initiative cards",
+            "Monster colour identifiers when duplicate units are present"
+          ],
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 16,
+              "region": "Hero deployment and initiative"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 17,
+              "region": "Duplicate monster colour identifiers"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 19,
+              "region": "Wounds on hit"
+            }
+          ]
+        },
+        "externalDecks": {
+          "status": "BOUND",
+          "value": [
+            "4 Hero Initiative cards",
+            "1 Necromancer Monster Initiative card",
+            "one additional Monster Initiative card per summon"
+          ],
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 16,
+              "region": "Four Hero Initiative Cards"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "One Boss Initiative; shuffle one per summon"
+            }
+          ]
+        },
+        "summonCopyCounts": {
+          "status": "SOURCE_UNRESOLVED",
+          "value": null,
+          "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+          "reason": "Inventory records candidate copies, not an instruction to clone exhausted components or a rule for summon supply exhaustion.",
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "cards and miniatures on hand"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 17,
+              "region": "Use coloured identifiers for duplicate monsters"
+            }
+          ]
+        },
+        "setupOrder": {
+          "status": "BOUND",
+          "value": [
+            "put Room Card and Tile in play",
+            "place Boss Battle Card in Aggressive and miniature on corresponding Area",
+            "shuffle one Boss Initiative",
+            "keep named Bone cards and miniatures on hand"
+          ],
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "numbered steps 1-3"
+            }
+          ]
+        },
+        "cleanupObligations": {
+          "status": "BOUND",
+          "value": [
+            "Boss defeat ends Battle immediately",
+            "remove all other Monsters",
+            "advance Campaign Level / Act"
+          ],
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 30,
+              "region": "Fighting a Boss"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "When Necromancer defeated"
+            }
+          ]
+        },
+        "sourceBoundCoreComposition": true,
+        "fullySourceBound": false
+      },
+      {
+        "level": 3,
+        "printedLevel": "III",
+        "bossIdentityPhysicalId": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/6/ContainedObjects/0",
+        "threatPhysicalId": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/2",
+        "battlePhysicalId": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/1",
+        "abilitySide": {
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/2",
+          "side": "front"
+        },
+        "encounterRole": "CAMPAIGN_IMMINENT_THREAT_AND_BOSS_BATTLE",
+        "relationEvidence": [
+          {
+            "kind": "SOURCE_CONTAINER",
+            "guid": "b7b238",
+            "nickname": "Necromancer",
+            "objectType": "Bag",
+            "ttsPath": "/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0",
+            "sourcePath": "docs/data/complete-edition/complete-edition-raw-inventory.json",
+            "basis": "Last named containing object on the SAME locked TTS physical path; auxiliary printed names do not create extra families."
+          },
+          {
+            "kind": "SOURCE_CONTAINER",
+            "guid": "b7b238",
+            "nickname": "Necromancer",
+            "objectType": "Bag",
+            "ttsPath": "/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0",
+            "sourcePath": "docs/data/complete-edition/complete-edition-raw-inventory.json",
+            "basis": "Last named containing object on the SAME locked TTS physical path; auxiliary printed names do not create extra families."
+          },
+          {
+            "kind": "SOURCE_CONTAINER",
+            "guid": "b7b238",
+            "nickname": "Necromancer",
+            "objectType": "Bag",
+            "ttsPath": "/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0",
+            "sourcePath": "docs/data/complete-edition/complete-edition-raw-inventory.json",
+            "basis": "Last named containing object on the SAME locked TTS physical path; auxiliary printed names do not create extra families."
+          },
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/6/ContainedObjects/0",
+            "definitionId": "ce-boss-42002-dc2410",
+            "side": "back",
+            "literal": "BOSS\n[LEVEL:III]",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/42002-dc2410-back.png",
+            "sha256": "132ba5c63e2e7a1c553c162021b1201f13fcd5b822f244c84649b4568e5758aa"
+          },
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/2",
+            "definitionId": "ce-boss-42005-b1efcd",
+            "side": "front",
+            "literal": "Necromancer\n[LEVEL:III]\nACTIONS / Round: 1\nSummoning [SKULL_RED_DOWN_ARROW]: When a Monster is [SKULL_RED_DOWN_ARROW], the Monster miniature is placed on the Target Area, and a new Monster Initiative Card is shuffled into the Initiative Deck. If all Stances are occupied, the Summoning does not take effect.",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/42005-b1efcd-front.png",
+            "sha256": "59ac8a9efd2bf7c26f6ed0f0decd4ba769637a97bf7ac59b4159db484b586f4d"
+          },
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/1",
+            "definitionId": "ce-boss-46039-6c498c",
+            "side": "front",
+            "literal": "Necromancer\n[LEVEL:III]",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/46039-6c498c-front.png",
+            "sha256": "22e464f3afc432db01f573c550c3c0be1dd0131ba5b358a95c204782cf84cb14"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 11,
+            "region": "Draw Boss identity; find its Threat; each Boss also has Battle Card per Level"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 30,
+            "region": "Three versions according to Campaign Level; flip Threat to Battle abilities"
+          }
+        ],
+        "coreCopyCounts": {
+          "status": "BOUND",
+          "value": {
+            "bossIdentity": 1,
+            "threatAbility": 1,
+            "battle": 1
+          },
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 11,
+              "region": "one selected Boss and its matching Threat; per-level Battle Card"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "Necromancer Battle Card, singular"
+            }
+          ]
+        },
+        "monsterSummons": {
+          "status": "BOUND",
+          "value": {
+            "name": "Bone Spearman",
+            "printedMonsterLevel": "II",
+            "eligibleSourceCardIds": [
+              46114,
+              46112
+            ]
+          },
+          "sourceReferences": [
+            {
+              "kind": "PRINTED_COMPONENT",
+              "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/1",
+              "definitionId": "ce-boss-46039-6c498c",
+              "side": "front",
+              "literal": "Bone Spearman",
+              "path": "docs/data/complete-edition/source-assets/c1c24/crops/46039-6c498c-front.png",
+              "sha256": "22e464f3afc432db01f573c550c3c0be1dd0131ba5b358a95c204782cf84cb14"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "Level-dependent summoned Bone cards"
+            }
+          ]
+        },
+        "roomCard": {
+          "status": "BOUND",
+          "value": {
+            "cardId": 44709,
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/3/ContainedObjects/3"
+          },
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "Find Necromancer Room Card and corresponding Room Tile"
+            },
+            {
+              "kind": "PRINTED_COMPONENT",
+              "path": "docs/data/complete-edition/source-assets/c1c25/crops/44709-d9ba7f70e600-front.png",
+              "url": "https://steamusercontent-a.akamaihd.net/ugc/14650257961976472599/445EF67B8C222C8A53D77851BDE565AE244DB926/",
+              "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/d54607371c694bd0e2585f677c088c55f0e4aabe3e84796169f7ea100d00f058.bin",
+              "sheetSha256": "577b9ac5db685cc37684331231914156e8adebc16fb822d230af52e16e876174",
+              "cell": 9,
+              "grid": {
+                "width": 6,
+                "height": 6
+              },
+              "bounds": {
+                "left": 1590,
+                "top": 730,
+                "width": 530,
+                "height": 730
+              },
+              "sha256": "6a294c79fb118bc0ae03a9ba1c6cd6621ec3aa718bb775a7fa67201062e71011"
+            }
+          ]
+        },
+        "roomTile": {
+          "status": "BOUND",
+          "value": {
+            "number": 10,
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+            "side": "ImageSecondaryURL"
+          },
+          "sourceReferences": [
+            {
+              "kind": "PRINTED_COMPONENT",
+              "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+              "ttsPath": "/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+              "sourceObjectGuid": "51494f",
+              "nickname": "10-11",
+              "side": "ImageSecondaryURL",
+              "path": "docs/data/complete-edition/source-assets/c1c25/tile-10.bin",
+              "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+              "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f",
+              "sha1": "906f191d51e6c274fbd77bf421a2bef00099d57f",
+              "width": 2150,
+              "height": 2150,
+              "receipt": {
+                "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+                "acquisitionKind": "ORIGINAL_URL_DOWNLOAD",
+                "acquiredAt": "2026-09-28T06:54:43.158Z",
+                "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f"
+              }
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "corresponding Room Tile"
+            }
+          ]
+        },
+        "tokens": {
+          "status": "BOUND",
+          "value": [
+            "Hero Stance tokens",
+            "Wound tokens",
+            "Hero and Monster Initiative cards",
+            "Monster colour identifiers when duplicate units are present"
+          ],
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 16,
+              "region": "Hero deployment and initiative"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 17,
+              "region": "Duplicate monster colour identifiers"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 19,
+              "region": "Wounds on hit"
+            }
+          ]
+        },
+        "externalDecks": {
+          "status": "BOUND",
+          "value": [
+            "4 Hero Initiative cards",
+            "1 Necromancer Monster Initiative card",
+            "one additional Monster Initiative card per summon"
+          ],
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 16,
+              "region": "Four Hero Initiative Cards"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "One Boss Initiative; shuffle one per summon"
+            }
+          ]
+        },
+        "summonCopyCounts": {
+          "status": "SOURCE_UNRESOLVED",
+          "value": null,
+          "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+          "reason": "Inventory records candidate copies, not an instruction to clone exhausted components or a rule for summon supply exhaustion.",
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "cards and miniatures on hand"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 17,
+              "region": "Use coloured identifiers for duplicate monsters"
+            }
+          ]
+        },
+        "setupOrder": {
+          "status": "BOUND",
+          "value": [
+            "put Room Card and Tile in play",
+            "place Boss Battle Card in Aggressive and miniature on corresponding Area",
+            "shuffle one Boss Initiative",
+            "keep named Bone cards and miniatures on hand"
+          ],
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "numbered steps 1-3"
+            }
+          ]
+        },
+        "cleanupObligations": {
+          "status": "BOUND",
+          "value": [
+            "Boss defeat ends Battle immediately",
+            "remove all other Monsters",
+            "advance Campaign Level / Act"
+          ],
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 30,
+              "region": "Fighting a Boss"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "When Necromancer defeated"
+            }
+          ]
+        },
+        "sourceBoundCoreComposition": true,
+        "fullySourceBound": false
+      }
+    ],
+    "censusPolicy": "Exactly nine C1C24 core physical identities. External cards, tile and rules do not add to census."
+  },
+  "setup": {
+    "schemaVersion": 1,
+    "phase": "11A.4-C1C25",
+    "baselineHead": "179bc367299952d693e9adb81ddd311b42a475b0",
+    "family": "Necromancer",
+    "runtimeImplemented": false,
+    "inputSha256": {
+      "docs/data/complete-edition/c1c24-boss-printed-definitions.json": "dfc9fb3369aa991b6b1d1e9acb3bb3127e7ef91ecaa655126684dbb71eec5483",
+      "docs/data/complete-edition/c1c24-boss-subtype-classification.json": "e011f68a4ad7ddb8a44be3f73655c2573b0f0318bf9ef8611cc94a7e9bdba930",
+      "docs/data/complete-edition/c1c24-boss-family-classification.json": "ccf674596d7d5b52265822406550304dd783e67aebff4cf7554b2678acfba648",
+      "docs/data/complete-edition/c1c24-boss-source-manifest.json": "8bb7158f5720ffe3d2a3cb0068961d0a8454085acf3f223722864b6556e16953",
+      "docs/data/complete-edition/c1c24-boss-family-completeness-matrix.json": "883348365fddf909d8fdab193497f0ff70f50988ff21fd72c5e40a814d056d42",
+      "docs/data/complete-edition/complete-edition-raw-inventory.json": "f7bd06a7a726df301cefe26e10586c0fe3a870ceb92903d5190077cfaae66245",
+      "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+      "docs/data/complete-edition/c1c25-external-source-manifest.json": "1ddda982111ab106ab1fbb2e205f0710fc434648e47da0c20072a97653141287",
+      "docs/data/complete-edition/c1c25-source-search-evidence.json": "0900846e3ff6cd3d4fe8794026aa5e95ebf8f64d12efa3eb262987fe283f91cc"
+    },
+    "levels": [
+      {
+        "level": 1,
+        "requiredComponents": {
+          "status": "BOUND",
+          "value": {
+            "level": 1,
+            "printedLevel": "I",
+            "bossIdentityPhysicalId": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/6/ContainedObjects/2",
+            "threatPhysicalId": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/4",
+            "battlePhysicalId": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/5",
+            "abilitySide": {
+              "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/4",
+              "side": "front"
+            },
+            "encounterRole": "CAMPAIGN_IMMINENT_THREAT_AND_BOSS_BATTLE",
+            "relationEvidence": [
+              {
+                "kind": "SOURCE_CONTAINER",
+                "guid": "b7b238",
+                "nickname": "Necromancer",
+                "objectType": "Bag",
+                "ttsPath": "/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0",
+                "sourcePath": "docs/data/complete-edition/complete-edition-raw-inventory.json",
+                "basis": "Last named containing object on the SAME locked TTS physical path; auxiliary printed names do not create extra families."
+              },
+              {
+                "kind": "SOURCE_CONTAINER",
+                "guid": "b7b238",
+                "nickname": "Necromancer",
+                "objectType": "Bag",
+                "ttsPath": "/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0",
+                "sourcePath": "docs/data/complete-edition/complete-edition-raw-inventory.json",
+                "basis": "Last named containing object on the SAME locked TTS physical path; auxiliary printed names do not create extra families."
+              },
+              {
+                "kind": "SOURCE_CONTAINER",
+                "guid": "b7b238",
+                "nickname": "Necromancer",
+                "objectType": "Bag",
+                "ttsPath": "/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0",
+                "sourcePath": "docs/data/complete-edition/complete-edition-raw-inventory.json",
+                "basis": "Last named containing object on the SAME locked TTS physical path; auxiliary printed names do not create extra families."
+              },
+              {
+                "kind": "PRINTED_COMPONENT",
+                "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/6/ContainedObjects/2",
+                "definitionId": "ce-boss-42000-42fcbd",
+                "side": "back",
+                "literal": "BOSS\n[LEVEL:I]",
+                "path": "docs/data/complete-edition/source-assets/c1c24/crops/42000-42fcbd-back.png",
+                "sha256": "e357f1520d793b1267f0dc437f2f0abb3a8f8cf866cde87c40f813a820dda32c"
+              },
+              {
+                "kind": "PRINTED_COMPONENT",
+                "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/4",
+                "definitionId": "ce-boss-42003-78ba81",
+                "side": "front",
+                "literal": "Necromancer\n[LEVEL:I]\nACTIONS / Round: 1\nSummoning [SKULL_RED_DOWN_ARROW]: When a Monster is [SKULL_RED_DOWN_ARROW], the Monster miniature is placed on the Target Area, and a new Monster Initiative Card is shuffled into the Initiative Deck. If all Stances are occupied, the Summoning does not take effect.",
+                "path": "docs/data/complete-edition/source-assets/c1c24/crops/42003-78ba81-front.png",
+                "sha256": "112f5f4f6ddfe8e6a2571452576adbd1c0c1b4f5f8e3daecf9f6a6c05d6ff77a"
+              },
+              {
+                "kind": "PRINTED_COMPONENT",
+                "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/5",
+                "definitionId": "ce-boss-46037-85d8bf",
+                "side": "front",
+                "literal": "Necromancer\n[LEVEL:I]",
+                "path": "docs/data/complete-edition/source-assets/c1c24/crops/46037-85d8bf-front.png",
+                "sha256": "560c93fa1feb3add813afe4791d7e6a6cc88c4eeab112977007f6938afcb4f08"
+              },
+              {
+                "kind": "LOCKED_CORE_RULEBOOK",
+                "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                "page": 11,
+                "region": "Draw Boss identity; find its Threat; each Boss also has Battle Card per Level"
+              },
+              {
+                "kind": "LOCKED_CORE_RULEBOOK",
+                "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                "page": 30,
+                "region": "Three versions according to Campaign Level; flip Threat to Battle abilities"
+              }
+            ],
+            "coreCopyCounts": {
+              "status": "BOUND",
+              "value": {
+                "bossIdentity": 1,
+                "threatAbility": 1,
+                "battle": 1
+              },
+              "sourceReferences": [
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 11,
+                  "region": "one selected Boss and its matching Threat; per-level Battle Card"
+                },
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 38,
+                  "region": "Necromancer Battle Card, singular"
+                }
+              ]
+            },
+            "monsterSummons": {
+              "status": "BOUND",
+              "value": {
+                "name": "Bone Rabble",
+                "printedMonsterLevel": "I",
+                "eligibleSourceCardIds": [
+                  46140,
+                  46139,
+                  46141
+                ]
+              },
+              "sourceReferences": [
+                {
+                  "kind": "PRINTED_COMPONENT",
+                  "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/5",
+                  "definitionId": "ce-boss-46037-85d8bf",
+                  "side": "front",
+                  "literal": "Bone Rabble",
+                  "path": "docs/data/complete-edition/source-assets/c1c24/crops/46037-85d8bf-front.png",
+                  "sha256": "560c93fa1feb3add813afe4791d7e6a6cc88c4eeab112977007f6938afcb4f08"
+                },
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 38,
+                  "region": "Level-dependent summoned Bone cards"
+                }
+              ]
+            },
+            "roomCard": {
+              "status": "BOUND",
+              "value": {
+                "cardId": 44709,
+                "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/3/ContainedObjects/3"
+              },
+              "sourceReferences": [
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 38,
+                  "region": "Find Necromancer Room Card and corresponding Room Tile"
+                },
+                {
+                  "kind": "PRINTED_COMPONENT",
+                  "path": "docs/data/complete-edition/source-assets/c1c25/crops/44709-d9ba7f70e600-front.png",
+                  "url": "https://steamusercontent-a.akamaihd.net/ugc/14650257961976472599/445EF67B8C222C8A53D77851BDE565AE244DB926/",
+                  "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/d54607371c694bd0e2585f677c088c55f0e4aabe3e84796169f7ea100d00f058.bin",
+                  "sheetSha256": "577b9ac5db685cc37684331231914156e8adebc16fb822d230af52e16e876174",
+                  "cell": 9,
+                  "grid": {
+                    "width": 6,
+                    "height": 6
+                  },
+                  "bounds": {
+                    "left": 1590,
+                    "top": 730,
+                    "width": 530,
+                    "height": 730
+                  },
+                  "sha256": "6a294c79fb118bc0ae03a9ba1c6cd6621ec3aa718bb775a7fa67201062e71011"
+                }
+              ]
+            },
+            "roomTile": {
+              "status": "BOUND",
+              "value": {
+                "number": 10,
+                "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+                "side": "ImageSecondaryURL"
+              },
+              "sourceReferences": [
+                {
+                  "kind": "PRINTED_COMPONENT",
+                  "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+                  "ttsPath": "/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+                  "sourceObjectGuid": "51494f",
+                  "nickname": "10-11",
+                  "side": "ImageSecondaryURL",
+                  "path": "docs/data/complete-edition/source-assets/c1c25/tile-10.bin",
+                  "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+                  "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f",
+                  "sha1": "906f191d51e6c274fbd77bf421a2bef00099d57f",
+                  "width": 2150,
+                  "height": 2150,
+                  "receipt": {
+                    "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+                    "acquisitionKind": "ORIGINAL_URL_DOWNLOAD",
+                    "acquiredAt": "2026-09-28T06:54:43.158Z",
+                    "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f"
+                  }
+                },
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 38,
+                  "region": "corresponding Room Tile"
+                }
+              ]
+            },
+            "tokens": {
+              "status": "BOUND",
+              "value": [
+                "Hero Stance tokens",
+                "Wound tokens",
+                "Hero and Monster Initiative cards",
+                "Monster colour identifiers when duplicate units are present"
+              ],
+              "sourceReferences": [
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 16,
+                  "region": "Hero deployment and initiative"
+                },
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 17,
+                  "region": "Duplicate monster colour identifiers"
+                },
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 19,
+                  "region": "Wounds on hit"
+                }
+              ]
+            },
+            "externalDecks": {
+              "status": "BOUND",
+              "value": [
+                "4 Hero Initiative cards",
+                "1 Necromancer Monster Initiative card",
+                "one additional Monster Initiative card per summon"
+              ],
+              "sourceReferences": [
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 16,
+                  "region": "Four Hero Initiative Cards"
+                },
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 38,
+                  "region": "One Boss Initiative; shuffle one per summon"
+                }
+              ]
+            },
+            "summonCopyCounts": {
+              "status": "SOURCE_UNRESOLVED",
+              "value": null,
+              "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+              "reason": "Inventory records candidate copies, not an instruction to clone exhausted components or a rule for summon supply exhaustion.",
+              "sourceReferences": [
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 38,
+                  "region": "cards and miniatures on hand"
+                },
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 17,
+                  "region": "Use coloured identifiers for duplicate monsters"
+                }
+              ]
+            },
+            "setupOrder": {
+              "status": "BOUND",
+              "value": [
+                "put Room Card and Tile in play",
+                "place Boss Battle Card in Aggressive and miniature on corresponding Area",
+                "shuffle one Boss Initiative",
+                "keep named Bone cards and miniatures on hand"
+              ],
+              "sourceReferences": [
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 38,
+                  "region": "numbered steps 1-3"
+                }
+              ]
+            },
+            "cleanupObligations": {
+              "status": "BOUND",
+              "value": [
+                "Boss defeat ends Battle immediately",
+                "remove all other Monsters",
+                "advance Campaign Level / Act"
+              ],
+              "sourceReferences": [
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 30,
+                  "region": "Fighting a Boss"
+                },
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 38,
+                  "region": "When Necromancer defeated"
+                }
+              ]
+            },
+            "sourceBoundCoreComposition": true,
+            "fullySourceBound": false
+          },
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "setup"
+            }
+          ]
+        },
+        "roomSetup": {
+          "status": "BOUND",
+          "value": {
+            "number": 10,
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+            "side": "ImageSecondaryURL"
+          },
+          "sourceReferences": [
+            {
+              "kind": "PRINTED_COMPONENT",
+              "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+              "ttsPath": "/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+              "sourceObjectGuid": "51494f",
+              "nickname": "10-11",
+              "side": "ImageSecondaryURL",
+              "path": "docs/data/complete-edition/source-assets/c1c25/tile-10.bin",
+              "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+              "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f",
+              "sha1": "906f191d51e6c274fbd77bf421a2bef00099d57f",
+              "width": 2150,
+              "height": 2150,
+              "receipt": {
+                "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+                "acquisitionKind": "ORIGINAL_URL_DOWNLOAD",
+                "acquiredAt": "2026-09-28T06:54:43.158Z",
+                "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f"
+              }
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "corresponding Room Tile"
+            }
+          ]
+        },
+        "bossPlacement": {
+          "status": "BOUND",
+          "value": {
+            "stance": "Aggressive",
+            "area": "top"
+          },
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "step 2"
+            },
+            {
+              "kind": "PRINTED_COMPONENT",
+              "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+              "ttsPath": "/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+              "sourceObjectGuid": "51494f",
+              "nickname": "10-11",
+              "side": "ImageSecondaryURL",
+              "path": "docs/data/complete-edition/source-assets/c1c25/tile-10.bin",
+              "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+              "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f",
+              "sha1": "906f191d51e6c274fbd77bf421a2bef00099d57f",
+              "width": 2150,
+              "height": 2150,
+              "receipt": {
+                "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+                "acquisitionKind": "ORIGINAL_URL_DOWNLOAD",
+                "acquiredAt": "2026-09-28T06:54:43.158Z",
+                "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f"
+              }
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "Find Necromancer Room Card and corresponding Room Tile"
+            },
+            {
+              "kind": "PRINTED_COMPONENT",
+              "path": "docs/data/complete-edition/source-assets/c1c25/crops/44709-d9ba7f70e600-front.png",
+              "url": "https://steamusercontent-a.akamaihd.net/ugc/14650257961976472599/445EF67B8C222C8A53D77851BDE565AE244DB926/",
+              "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/d54607371c694bd0e2585f677c088c55f0e4aabe3e84796169f7ea100d00f058.bin",
+              "sheetSha256": "577b9ac5db685cc37684331231914156e8adebc16fb822d230af52e16e876174",
+              "cell": 9,
+              "grid": {
+                "width": 6,
+                "height": 6
+              },
+              "bounds": {
+                "left": 1590,
+                "top": 730,
+                "width": 530,
+                "height": 730
+              },
+              "sha256": "6a294c79fb118bc0ae03a9ba1c6cd6621ec3aa718bb775a7fa67201062e71011"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 16,
+              "region": "Deploy to printed Stance locations"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 18,
+              "region": "Occupancy dots"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 25,
+              "region": "High Ground"
+            }
+          ]
+        },
+        "heroPlacement": {
+          "status": "BOUND",
+          "value": {
+            "area": "bottom",
+            "stances": "chosen existing Hero Stances"
+          },
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 16,
+              "region": "Deploy Heroes"
+            },
+            {
+              "kind": "PRINTED_COMPONENT",
+              "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+              "ttsPath": "/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+              "sourceObjectGuid": "51494f",
+              "nickname": "10-11",
+              "side": "ImageSecondaryURL",
+              "path": "docs/data/complete-edition/source-assets/c1c25/tile-10.bin",
+              "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+              "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f",
+              "sha1": "906f191d51e6c274fbd77bf421a2bef00099d57f",
+              "width": 2150,
+              "height": 2150,
+              "receipt": {
+                "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+                "acquisitionKind": "ORIGINAL_URL_DOWNLOAD",
+                "acquiredAt": "2026-09-28T06:54:43.158Z",
+                "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f"
+              }
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "Find Necromancer Room Card and corresponding Room Tile"
+            },
+            {
+              "kind": "PRINTED_COMPONENT",
+              "path": "docs/data/complete-edition/source-assets/c1c25/crops/44709-d9ba7f70e600-front.png",
+              "url": "https://steamusercontent-a.akamaihd.net/ugc/14650257961976472599/445EF67B8C222C8A53D77851BDE565AE244DB926/",
+              "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/d54607371c694bd0e2585f677c088c55f0e4aabe3e84796169f7ea100d00f058.bin",
+              "sheetSha256": "577b9ac5db685cc37684331231914156e8adebc16fb822d230af52e16e876174",
+              "cell": 9,
+              "grid": {
+                "width": 6,
+                "height": 6
+              },
+              "bounds": {
+                "left": 1590,
+                "top": 730,
+                "width": 530,
+                "height": 730
+              },
+              "sha256": "6a294c79fb118bc0ae03a9ba1c6cd6621ec3aa718bb775a7fa67201062e71011"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 16,
+              "region": "Deploy to printed Stance locations"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 18,
+              "region": "Occupancy dots"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 25,
+              "region": "High Ground"
+            }
+          ]
+        },
+        "summonPlacement": {
+          "status": "BOUND",
+          "value": "No initial Bone units in p38 setup; keep on side until summoned",
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "step 3"
+            }
+          ]
+        },
+        "threatState": {
+          "status": "BOUND",
+          "value": "Flip physical Threat card to Ability; Threats cease",
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 30,
+              "region": "Fighting a Boss"
+            }
+          ]
+        },
+        "battleDeck": {
+          "status": "BOUND",
+          "value": "One per-level Boss Battle Card; no invented Boss attack deck",
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 11,
+              "region": "per-level Battle Card"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "Battle Card"
+            }
+          ]
+        },
+        "initialStance": {
+          "status": "BOUND",
+          "value": "Aggressive",
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "step 2"
+            }
+          ]
+        },
+        "initialHP": {
+          "status": "BOUND",
+          "value": 77,
+          "sourceReferences": [
+            {
+              "kind": "PRINTED_COMPONENT",
+              "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/5",
+              "definitionId": "ce-boss-46037-85d8bf",
+              "side": "front",
+              "literal": "ORANGE_HEART",
+              "path": "docs/data/complete-edition/source-assets/c1c24/crops/46037-85d8bf-front.png",
+              "sha256": "560c93fa1feb3add813afe4791d7e6a6cc88c4eeab112977007f6938afcb4f08"
+            }
+          ]
+        },
+        "initialWounds": {
+          "status": "BOUND",
+          "value": "No existing Wounds carried into a newly placed Monster component",
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 19,
+              "region": "Wounds recorded on hit"
+            }
+          ]
+        },
+        "externalDeckState": {
+          "status": "BOUND",
+          "value": {
+            "heroInitiativeCount": 4,
+            "bossInitiativeCount": 1,
+            "boneCards": "on hand; not auto-spawned"
+          },
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 16,
+              "region": "Hero Initiative"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "Boss Initiative and Bone components"
+            }
+          ]
+        }
+      },
+      {
+        "level": 2,
+        "requiredComponents": {
+          "status": "BOUND",
+          "value": {
+            "level": 2,
+            "printedLevel": "II",
+            "bossIdentityPhysicalId": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/6/ContainedObjects/1",
+            "threatPhysicalId": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/0",
+            "battlePhysicalId": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/3",
+            "abilitySide": {
+              "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/0",
+              "side": "front"
+            },
+            "encounterRole": "CAMPAIGN_IMMINENT_THREAT_AND_BOSS_BATTLE",
+            "relationEvidence": [
+              {
+                "kind": "SOURCE_CONTAINER",
+                "guid": "b7b238",
+                "nickname": "Necromancer",
+                "objectType": "Bag",
+                "ttsPath": "/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0",
+                "sourcePath": "docs/data/complete-edition/complete-edition-raw-inventory.json",
+                "basis": "Last named containing object on the SAME locked TTS physical path; auxiliary printed names do not create extra families."
+              },
+              {
+                "kind": "SOURCE_CONTAINER",
+                "guid": "b7b238",
+                "nickname": "Necromancer",
+                "objectType": "Bag",
+                "ttsPath": "/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0",
+                "sourcePath": "docs/data/complete-edition/complete-edition-raw-inventory.json",
+                "basis": "Last named containing object on the SAME locked TTS physical path; auxiliary printed names do not create extra families."
+              },
+              {
+                "kind": "SOURCE_CONTAINER",
+                "guid": "b7b238",
+                "nickname": "Necromancer",
+                "objectType": "Bag",
+                "ttsPath": "/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0",
+                "sourcePath": "docs/data/complete-edition/complete-edition-raw-inventory.json",
+                "basis": "Last named containing object on the SAME locked TTS physical path; auxiliary printed names do not create extra families."
+              },
+              {
+                "kind": "PRINTED_COMPONENT",
+                "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/6/ContainedObjects/1",
+                "definitionId": "ce-boss-42001-97468f",
+                "side": "back",
+                "literal": "BOSS\n[LEVEL:II]",
+                "path": "docs/data/complete-edition/source-assets/c1c24/crops/42001-97468f-back.png",
+                "sha256": "4f1b4315c3a1a28c5b57ff2a0517a9ed3b144c208d95352400dec8824f892380"
+              },
+              {
+                "kind": "PRINTED_COMPONENT",
+                "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/0",
+                "definitionId": "ce-boss-42004-324dd0",
+                "side": "front",
+                "literal": "Necromancer\n[LEVEL:II]\nACTIONS / Round: 1\nSummoning [SKULL_RED_DOWN_ARROW]: When a Monster is [SKULL_RED_DOWN_ARROW], the Monster miniature is placed on the Target Area, and a new Monster Initiative Card is shuffled into the Initiative Deck. If all Stances are occupied, the Summoning does not take effect.",
+                "path": "docs/data/complete-edition/source-assets/c1c24/crops/42004-324dd0-front.png",
+                "sha256": "a6bdfbb7c71419d77b46aeb50f1cbc437d1916f51dec02c328056289aef8b5f8"
+              },
+              {
+                "kind": "PRINTED_COMPONENT",
+                "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/3",
+                "definitionId": "ce-boss-46038-a54cb7",
+                "side": "front",
+                "literal": "Necromancer\n[LEVEL:II]",
+                "path": "docs/data/complete-edition/source-assets/c1c24/crops/46038-a54cb7-front.png",
+                "sha256": "dabb5479c32fcdc24a4a0b5963045d3331ed490aa4c8c93d456d4e805644b990"
+              },
+              {
+                "kind": "LOCKED_CORE_RULEBOOK",
+                "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                "page": 11,
+                "region": "Draw Boss identity; find its Threat; each Boss also has Battle Card per Level"
+              },
+              {
+                "kind": "LOCKED_CORE_RULEBOOK",
+                "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                "page": 30,
+                "region": "Three versions according to Campaign Level; flip Threat to Battle abilities"
+              }
+            ],
+            "coreCopyCounts": {
+              "status": "BOUND",
+              "value": {
+                "bossIdentity": 1,
+                "threatAbility": 1,
+                "battle": 1
+              },
+              "sourceReferences": [
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 11,
+                  "region": "one selected Boss and its matching Threat; per-level Battle Card"
+                },
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 38,
+                  "region": "Necromancer Battle Card, singular"
+                }
+              ]
+            },
+            "monsterSummons": {
+              "status": "BOUND",
+              "value": {
+                "name": "Bone Soldier",
+                "printedMonsterLevel": "I",
+                "eligibleSourceCardIds": [
+                  46100
+                ]
+              },
+              "sourceReferences": [
+                {
+                  "kind": "PRINTED_COMPONENT",
+                  "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/3",
+                  "definitionId": "ce-boss-46038-a54cb7",
+                  "side": "front",
+                  "literal": "Bone Soldier",
+                  "path": "docs/data/complete-edition/source-assets/c1c24/crops/46038-a54cb7-front.png",
+                  "sha256": "dabb5479c32fcdc24a4a0b5963045d3331ed490aa4c8c93d456d4e805644b990"
+                },
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 38,
+                  "region": "Level-dependent summoned Bone cards"
+                }
+              ]
+            },
+            "roomCard": {
+              "status": "BOUND",
+              "value": {
+                "cardId": 44709,
+                "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/3/ContainedObjects/3"
+              },
+              "sourceReferences": [
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 38,
+                  "region": "Find Necromancer Room Card and corresponding Room Tile"
+                },
+                {
+                  "kind": "PRINTED_COMPONENT",
+                  "path": "docs/data/complete-edition/source-assets/c1c25/crops/44709-d9ba7f70e600-front.png",
+                  "url": "https://steamusercontent-a.akamaihd.net/ugc/14650257961976472599/445EF67B8C222C8A53D77851BDE565AE244DB926/",
+                  "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/d54607371c694bd0e2585f677c088c55f0e4aabe3e84796169f7ea100d00f058.bin",
+                  "sheetSha256": "577b9ac5db685cc37684331231914156e8adebc16fb822d230af52e16e876174",
+                  "cell": 9,
+                  "grid": {
+                    "width": 6,
+                    "height": 6
+                  },
+                  "bounds": {
+                    "left": 1590,
+                    "top": 730,
+                    "width": 530,
+                    "height": 730
+                  },
+                  "sha256": "6a294c79fb118bc0ae03a9ba1c6cd6621ec3aa718bb775a7fa67201062e71011"
+                }
+              ]
+            },
+            "roomTile": {
+              "status": "BOUND",
+              "value": {
+                "number": 10,
+                "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+                "side": "ImageSecondaryURL"
+              },
+              "sourceReferences": [
+                {
+                  "kind": "PRINTED_COMPONENT",
+                  "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+                  "ttsPath": "/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+                  "sourceObjectGuid": "51494f",
+                  "nickname": "10-11",
+                  "side": "ImageSecondaryURL",
+                  "path": "docs/data/complete-edition/source-assets/c1c25/tile-10.bin",
+                  "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+                  "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f",
+                  "sha1": "906f191d51e6c274fbd77bf421a2bef00099d57f",
+                  "width": 2150,
+                  "height": 2150,
+                  "receipt": {
+                    "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+                    "acquisitionKind": "ORIGINAL_URL_DOWNLOAD",
+                    "acquiredAt": "2026-09-28T06:54:43.158Z",
+                    "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f"
+                  }
+                },
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 38,
+                  "region": "corresponding Room Tile"
+                }
+              ]
+            },
+            "tokens": {
+              "status": "BOUND",
+              "value": [
+                "Hero Stance tokens",
+                "Wound tokens",
+                "Hero and Monster Initiative cards",
+                "Monster colour identifiers when duplicate units are present"
+              ],
+              "sourceReferences": [
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 16,
+                  "region": "Hero deployment and initiative"
+                },
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 17,
+                  "region": "Duplicate monster colour identifiers"
+                },
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 19,
+                  "region": "Wounds on hit"
+                }
+              ]
+            },
+            "externalDecks": {
+              "status": "BOUND",
+              "value": [
+                "4 Hero Initiative cards",
+                "1 Necromancer Monster Initiative card",
+                "one additional Monster Initiative card per summon"
+              ],
+              "sourceReferences": [
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 16,
+                  "region": "Four Hero Initiative Cards"
+                },
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 38,
+                  "region": "One Boss Initiative; shuffle one per summon"
+                }
+              ]
+            },
+            "summonCopyCounts": {
+              "status": "SOURCE_UNRESOLVED",
+              "value": null,
+              "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+              "reason": "Inventory records candidate copies, not an instruction to clone exhausted components or a rule for summon supply exhaustion.",
+              "sourceReferences": [
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 38,
+                  "region": "cards and miniatures on hand"
+                },
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 17,
+                  "region": "Use coloured identifiers for duplicate monsters"
+                }
+              ]
+            },
+            "setupOrder": {
+              "status": "BOUND",
+              "value": [
+                "put Room Card and Tile in play",
+                "place Boss Battle Card in Aggressive and miniature on corresponding Area",
+                "shuffle one Boss Initiative",
+                "keep named Bone cards and miniatures on hand"
+              ],
+              "sourceReferences": [
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 38,
+                  "region": "numbered steps 1-3"
+                }
+              ]
+            },
+            "cleanupObligations": {
+              "status": "BOUND",
+              "value": [
+                "Boss defeat ends Battle immediately",
+                "remove all other Monsters",
+                "advance Campaign Level / Act"
+              ],
+              "sourceReferences": [
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 30,
+                  "region": "Fighting a Boss"
+                },
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 38,
+                  "region": "When Necromancer defeated"
+                }
+              ]
+            },
+            "sourceBoundCoreComposition": true,
+            "fullySourceBound": false
+          },
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "setup"
+            }
+          ]
+        },
+        "roomSetup": {
+          "status": "BOUND",
+          "value": {
+            "number": 10,
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+            "side": "ImageSecondaryURL"
+          },
+          "sourceReferences": [
+            {
+              "kind": "PRINTED_COMPONENT",
+              "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+              "ttsPath": "/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+              "sourceObjectGuid": "51494f",
+              "nickname": "10-11",
+              "side": "ImageSecondaryURL",
+              "path": "docs/data/complete-edition/source-assets/c1c25/tile-10.bin",
+              "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+              "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f",
+              "sha1": "906f191d51e6c274fbd77bf421a2bef00099d57f",
+              "width": 2150,
+              "height": 2150,
+              "receipt": {
+                "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+                "acquisitionKind": "ORIGINAL_URL_DOWNLOAD",
+                "acquiredAt": "2026-09-28T06:54:43.158Z",
+                "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f"
+              }
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "corresponding Room Tile"
+            }
+          ]
+        },
+        "bossPlacement": {
+          "status": "BOUND",
+          "value": {
+            "stance": "Aggressive",
+            "area": "top"
+          },
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "step 2"
+            },
+            {
+              "kind": "PRINTED_COMPONENT",
+              "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+              "ttsPath": "/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+              "sourceObjectGuid": "51494f",
+              "nickname": "10-11",
+              "side": "ImageSecondaryURL",
+              "path": "docs/data/complete-edition/source-assets/c1c25/tile-10.bin",
+              "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+              "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f",
+              "sha1": "906f191d51e6c274fbd77bf421a2bef00099d57f",
+              "width": 2150,
+              "height": 2150,
+              "receipt": {
+                "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+                "acquisitionKind": "ORIGINAL_URL_DOWNLOAD",
+                "acquiredAt": "2026-09-28T06:54:43.158Z",
+                "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f"
+              }
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "Find Necromancer Room Card and corresponding Room Tile"
+            },
+            {
+              "kind": "PRINTED_COMPONENT",
+              "path": "docs/data/complete-edition/source-assets/c1c25/crops/44709-d9ba7f70e600-front.png",
+              "url": "https://steamusercontent-a.akamaihd.net/ugc/14650257961976472599/445EF67B8C222C8A53D77851BDE565AE244DB926/",
+              "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/d54607371c694bd0e2585f677c088c55f0e4aabe3e84796169f7ea100d00f058.bin",
+              "sheetSha256": "577b9ac5db685cc37684331231914156e8adebc16fb822d230af52e16e876174",
+              "cell": 9,
+              "grid": {
+                "width": 6,
+                "height": 6
+              },
+              "bounds": {
+                "left": 1590,
+                "top": 730,
+                "width": 530,
+                "height": 730
+              },
+              "sha256": "6a294c79fb118bc0ae03a9ba1c6cd6621ec3aa718bb775a7fa67201062e71011"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 16,
+              "region": "Deploy to printed Stance locations"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 18,
+              "region": "Occupancy dots"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 25,
+              "region": "High Ground"
+            }
+          ]
+        },
+        "heroPlacement": {
+          "status": "BOUND",
+          "value": {
+            "area": "bottom",
+            "stances": "chosen existing Hero Stances"
+          },
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 16,
+              "region": "Deploy Heroes"
+            },
+            {
+              "kind": "PRINTED_COMPONENT",
+              "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+              "ttsPath": "/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+              "sourceObjectGuid": "51494f",
+              "nickname": "10-11",
+              "side": "ImageSecondaryURL",
+              "path": "docs/data/complete-edition/source-assets/c1c25/tile-10.bin",
+              "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+              "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f",
+              "sha1": "906f191d51e6c274fbd77bf421a2bef00099d57f",
+              "width": 2150,
+              "height": 2150,
+              "receipt": {
+                "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+                "acquisitionKind": "ORIGINAL_URL_DOWNLOAD",
+                "acquiredAt": "2026-09-28T06:54:43.158Z",
+                "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f"
+              }
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "Find Necromancer Room Card and corresponding Room Tile"
+            },
+            {
+              "kind": "PRINTED_COMPONENT",
+              "path": "docs/data/complete-edition/source-assets/c1c25/crops/44709-d9ba7f70e600-front.png",
+              "url": "https://steamusercontent-a.akamaihd.net/ugc/14650257961976472599/445EF67B8C222C8A53D77851BDE565AE244DB926/",
+              "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/d54607371c694bd0e2585f677c088c55f0e4aabe3e84796169f7ea100d00f058.bin",
+              "sheetSha256": "577b9ac5db685cc37684331231914156e8adebc16fb822d230af52e16e876174",
+              "cell": 9,
+              "grid": {
+                "width": 6,
+                "height": 6
+              },
+              "bounds": {
+                "left": 1590,
+                "top": 730,
+                "width": 530,
+                "height": 730
+              },
+              "sha256": "6a294c79fb118bc0ae03a9ba1c6cd6621ec3aa718bb775a7fa67201062e71011"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 16,
+              "region": "Deploy to printed Stance locations"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 18,
+              "region": "Occupancy dots"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 25,
+              "region": "High Ground"
+            }
+          ]
+        },
+        "summonPlacement": {
+          "status": "BOUND",
+          "value": "No initial Bone units in p38 setup; keep on side until summoned",
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "step 3"
+            }
+          ]
+        },
+        "threatState": {
+          "status": "BOUND",
+          "value": "Flip physical Threat card to Ability; Threats cease",
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 30,
+              "region": "Fighting a Boss"
+            }
+          ]
+        },
+        "battleDeck": {
+          "status": "BOUND",
+          "value": "One per-level Boss Battle Card; no invented Boss attack deck",
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 11,
+              "region": "per-level Battle Card"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "Battle Card"
+            }
+          ]
+        },
+        "initialStance": {
+          "status": "BOUND",
+          "value": "Aggressive",
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "step 2"
+            }
+          ]
+        },
+        "initialHP": {
+          "status": "BOUND",
+          "value": 103,
+          "sourceReferences": [
+            {
+              "kind": "PRINTED_COMPONENT",
+              "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/3",
+              "definitionId": "ce-boss-46038-a54cb7",
+              "side": "front",
+              "literal": "ORANGE_HEART",
+              "path": "docs/data/complete-edition/source-assets/c1c24/crops/46038-a54cb7-front.png",
+              "sha256": "dabb5479c32fcdc24a4a0b5963045d3331ed490aa4c8c93d456d4e805644b990"
+            }
+          ]
+        },
+        "initialWounds": {
+          "status": "BOUND",
+          "value": "No existing Wounds carried into a newly placed Monster component",
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 19,
+              "region": "Wounds recorded on hit"
+            }
+          ]
+        },
+        "externalDeckState": {
+          "status": "BOUND",
+          "value": {
+            "heroInitiativeCount": 4,
+            "bossInitiativeCount": 1,
+            "boneCards": "on hand; not auto-spawned"
+          },
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 16,
+              "region": "Hero Initiative"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "Boss Initiative and Bone components"
+            }
+          ]
+        }
+      },
+      {
+        "level": 3,
+        "requiredComponents": {
+          "status": "BOUND",
+          "value": {
+            "level": 3,
+            "printedLevel": "III",
+            "bossIdentityPhysicalId": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/6/ContainedObjects/0",
+            "threatPhysicalId": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/2",
+            "battlePhysicalId": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/1",
+            "abilitySide": {
+              "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/2",
+              "side": "front"
+            },
+            "encounterRole": "CAMPAIGN_IMMINENT_THREAT_AND_BOSS_BATTLE",
+            "relationEvidence": [
+              {
+                "kind": "SOURCE_CONTAINER",
+                "guid": "b7b238",
+                "nickname": "Necromancer",
+                "objectType": "Bag",
+                "ttsPath": "/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0",
+                "sourcePath": "docs/data/complete-edition/complete-edition-raw-inventory.json",
+                "basis": "Last named containing object on the SAME locked TTS physical path; auxiliary printed names do not create extra families."
+              },
+              {
+                "kind": "SOURCE_CONTAINER",
+                "guid": "b7b238",
+                "nickname": "Necromancer",
+                "objectType": "Bag",
+                "ttsPath": "/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0",
+                "sourcePath": "docs/data/complete-edition/complete-edition-raw-inventory.json",
+                "basis": "Last named containing object on the SAME locked TTS physical path; auxiliary printed names do not create extra families."
+              },
+              {
+                "kind": "SOURCE_CONTAINER",
+                "guid": "b7b238",
+                "nickname": "Necromancer",
+                "objectType": "Bag",
+                "ttsPath": "/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0",
+                "sourcePath": "docs/data/complete-edition/complete-edition-raw-inventory.json",
+                "basis": "Last named containing object on the SAME locked TTS physical path; auxiliary printed names do not create extra families."
+              },
+              {
+                "kind": "PRINTED_COMPONENT",
+                "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/6/ContainedObjects/0",
+                "definitionId": "ce-boss-42002-dc2410",
+                "side": "back",
+                "literal": "BOSS\n[LEVEL:III]",
+                "path": "docs/data/complete-edition/source-assets/c1c24/crops/42002-dc2410-back.png",
+                "sha256": "132ba5c63e2e7a1c553c162021b1201f13fcd5b822f244c84649b4568e5758aa"
+              },
+              {
+                "kind": "PRINTED_COMPONENT",
+                "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/2",
+                "definitionId": "ce-boss-42005-b1efcd",
+                "side": "front",
+                "literal": "Necromancer\n[LEVEL:III]\nACTIONS / Round: 1\nSummoning [SKULL_RED_DOWN_ARROW]: When a Monster is [SKULL_RED_DOWN_ARROW], the Monster miniature is placed on the Target Area, and a new Monster Initiative Card is shuffled into the Initiative Deck. If all Stances are occupied, the Summoning does not take effect.",
+                "path": "docs/data/complete-edition/source-assets/c1c24/crops/42005-b1efcd-front.png",
+                "sha256": "59ac8a9efd2bf7c26f6ed0f0decd4ba769637a97bf7ac59b4159db484b586f4d"
+              },
+              {
+                "kind": "PRINTED_COMPONENT",
+                "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/1",
+                "definitionId": "ce-boss-46039-6c498c",
+                "side": "front",
+                "literal": "Necromancer\n[LEVEL:III]",
+                "path": "docs/data/complete-edition/source-assets/c1c24/crops/46039-6c498c-front.png",
+                "sha256": "22e464f3afc432db01f573c550c3c0be1dd0131ba5b358a95c204782cf84cb14"
+              },
+              {
+                "kind": "LOCKED_CORE_RULEBOOK",
+                "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                "page": 11,
+                "region": "Draw Boss identity; find its Threat; each Boss also has Battle Card per Level"
+              },
+              {
+                "kind": "LOCKED_CORE_RULEBOOK",
+                "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                "page": 30,
+                "region": "Three versions according to Campaign Level; flip Threat to Battle abilities"
+              }
+            ],
+            "coreCopyCounts": {
+              "status": "BOUND",
+              "value": {
+                "bossIdentity": 1,
+                "threatAbility": 1,
+                "battle": 1
+              },
+              "sourceReferences": [
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 11,
+                  "region": "one selected Boss and its matching Threat; per-level Battle Card"
+                },
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 38,
+                  "region": "Necromancer Battle Card, singular"
+                }
+              ]
+            },
+            "monsterSummons": {
+              "status": "BOUND",
+              "value": {
+                "name": "Bone Spearman",
+                "printedMonsterLevel": "II",
+                "eligibleSourceCardIds": [
+                  46114,
+                  46112
+                ]
+              },
+              "sourceReferences": [
+                {
+                  "kind": "PRINTED_COMPONENT",
+                  "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/1",
+                  "definitionId": "ce-boss-46039-6c498c",
+                  "side": "front",
+                  "literal": "Bone Spearman",
+                  "path": "docs/data/complete-edition/source-assets/c1c24/crops/46039-6c498c-front.png",
+                  "sha256": "22e464f3afc432db01f573c550c3c0be1dd0131ba5b358a95c204782cf84cb14"
+                },
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 38,
+                  "region": "Level-dependent summoned Bone cards"
+                }
+              ]
+            },
+            "roomCard": {
+              "status": "BOUND",
+              "value": {
+                "cardId": 44709,
+                "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/3/ContainedObjects/3"
+              },
+              "sourceReferences": [
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 38,
+                  "region": "Find Necromancer Room Card and corresponding Room Tile"
+                },
+                {
+                  "kind": "PRINTED_COMPONENT",
+                  "path": "docs/data/complete-edition/source-assets/c1c25/crops/44709-d9ba7f70e600-front.png",
+                  "url": "https://steamusercontent-a.akamaihd.net/ugc/14650257961976472599/445EF67B8C222C8A53D77851BDE565AE244DB926/",
+                  "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/d54607371c694bd0e2585f677c088c55f0e4aabe3e84796169f7ea100d00f058.bin",
+                  "sheetSha256": "577b9ac5db685cc37684331231914156e8adebc16fb822d230af52e16e876174",
+                  "cell": 9,
+                  "grid": {
+                    "width": 6,
+                    "height": 6
+                  },
+                  "bounds": {
+                    "left": 1590,
+                    "top": 730,
+                    "width": 530,
+                    "height": 730
+                  },
+                  "sha256": "6a294c79fb118bc0ae03a9ba1c6cd6621ec3aa718bb775a7fa67201062e71011"
+                }
+              ]
+            },
+            "roomTile": {
+              "status": "BOUND",
+              "value": {
+                "number": 10,
+                "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+                "side": "ImageSecondaryURL"
+              },
+              "sourceReferences": [
+                {
+                  "kind": "PRINTED_COMPONENT",
+                  "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+                  "ttsPath": "/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+                  "sourceObjectGuid": "51494f",
+                  "nickname": "10-11",
+                  "side": "ImageSecondaryURL",
+                  "path": "docs/data/complete-edition/source-assets/c1c25/tile-10.bin",
+                  "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+                  "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f",
+                  "sha1": "906f191d51e6c274fbd77bf421a2bef00099d57f",
+                  "width": 2150,
+                  "height": 2150,
+                  "receipt": {
+                    "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+                    "acquisitionKind": "ORIGINAL_URL_DOWNLOAD",
+                    "acquiredAt": "2026-09-28T06:54:43.158Z",
+                    "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f"
+                  }
+                },
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 38,
+                  "region": "corresponding Room Tile"
+                }
+              ]
+            },
+            "tokens": {
+              "status": "BOUND",
+              "value": [
+                "Hero Stance tokens",
+                "Wound tokens",
+                "Hero and Monster Initiative cards",
+                "Monster colour identifiers when duplicate units are present"
+              ],
+              "sourceReferences": [
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 16,
+                  "region": "Hero deployment and initiative"
+                },
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 17,
+                  "region": "Duplicate monster colour identifiers"
+                },
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 19,
+                  "region": "Wounds on hit"
+                }
+              ]
+            },
+            "externalDecks": {
+              "status": "BOUND",
+              "value": [
+                "4 Hero Initiative cards",
+                "1 Necromancer Monster Initiative card",
+                "one additional Monster Initiative card per summon"
+              ],
+              "sourceReferences": [
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 16,
+                  "region": "Four Hero Initiative Cards"
+                },
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 38,
+                  "region": "One Boss Initiative; shuffle one per summon"
+                }
+              ]
+            },
+            "summonCopyCounts": {
+              "status": "SOURCE_UNRESOLVED",
+              "value": null,
+              "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+              "reason": "Inventory records candidate copies, not an instruction to clone exhausted components or a rule for summon supply exhaustion.",
+              "sourceReferences": [
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 38,
+                  "region": "cards and miniatures on hand"
+                },
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 17,
+                  "region": "Use coloured identifiers for duplicate monsters"
+                }
+              ]
+            },
+            "setupOrder": {
+              "status": "BOUND",
+              "value": [
+                "put Room Card and Tile in play",
+                "place Boss Battle Card in Aggressive and miniature on corresponding Area",
+                "shuffle one Boss Initiative",
+                "keep named Bone cards and miniatures on hand"
+              ],
+              "sourceReferences": [
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 38,
+                  "region": "numbered steps 1-3"
+                }
+              ]
+            },
+            "cleanupObligations": {
+              "status": "BOUND",
+              "value": [
+                "Boss defeat ends Battle immediately",
+                "remove all other Monsters",
+                "advance Campaign Level / Act"
+              ],
+              "sourceReferences": [
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 30,
+                  "region": "Fighting a Boss"
+                },
+                {
+                  "kind": "LOCKED_CORE_RULEBOOK",
+                  "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+                  "page": 38,
+                  "region": "When Necromancer defeated"
+                }
+              ]
+            },
+            "sourceBoundCoreComposition": true,
+            "fullySourceBound": false
+          },
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "setup"
+            }
+          ]
+        },
+        "roomSetup": {
+          "status": "BOUND",
+          "value": {
+            "number": 10,
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+            "side": "ImageSecondaryURL"
+          },
+          "sourceReferences": [
+            {
+              "kind": "PRINTED_COMPONENT",
+              "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+              "ttsPath": "/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+              "sourceObjectGuid": "51494f",
+              "nickname": "10-11",
+              "side": "ImageSecondaryURL",
+              "path": "docs/data/complete-edition/source-assets/c1c25/tile-10.bin",
+              "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+              "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f",
+              "sha1": "906f191d51e6c274fbd77bf421a2bef00099d57f",
+              "width": 2150,
+              "height": 2150,
+              "receipt": {
+                "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+                "acquisitionKind": "ORIGINAL_URL_DOWNLOAD",
+                "acquiredAt": "2026-09-28T06:54:43.158Z",
+                "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f"
+              }
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "corresponding Room Tile"
+            }
+          ]
+        },
+        "bossPlacement": {
+          "status": "BOUND",
+          "value": {
+            "stance": "Aggressive",
+            "area": "top"
+          },
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "step 2"
+            },
+            {
+              "kind": "PRINTED_COMPONENT",
+              "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+              "ttsPath": "/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+              "sourceObjectGuid": "51494f",
+              "nickname": "10-11",
+              "side": "ImageSecondaryURL",
+              "path": "docs/data/complete-edition/source-assets/c1c25/tile-10.bin",
+              "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+              "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f",
+              "sha1": "906f191d51e6c274fbd77bf421a2bef00099d57f",
+              "width": 2150,
+              "height": 2150,
+              "receipt": {
+                "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+                "acquisitionKind": "ORIGINAL_URL_DOWNLOAD",
+                "acquiredAt": "2026-09-28T06:54:43.158Z",
+                "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f"
+              }
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "Find Necromancer Room Card and corresponding Room Tile"
+            },
+            {
+              "kind": "PRINTED_COMPONENT",
+              "path": "docs/data/complete-edition/source-assets/c1c25/crops/44709-d9ba7f70e600-front.png",
+              "url": "https://steamusercontent-a.akamaihd.net/ugc/14650257961976472599/445EF67B8C222C8A53D77851BDE565AE244DB926/",
+              "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/d54607371c694bd0e2585f677c088c55f0e4aabe3e84796169f7ea100d00f058.bin",
+              "sheetSha256": "577b9ac5db685cc37684331231914156e8adebc16fb822d230af52e16e876174",
+              "cell": 9,
+              "grid": {
+                "width": 6,
+                "height": 6
+              },
+              "bounds": {
+                "left": 1590,
+                "top": 730,
+                "width": 530,
+                "height": 730
+              },
+              "sha256": "6a294c79fb118bc0ae03a9ba1c6cd6621ec3aa718bb775a7fa67201062e71011"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 16,
+              "region": "Deploy to printed Stance locations"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 18,
+              "region": "Occupancy dots"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 25,
+              "region": "High Ground"
+            }
+          ]
+        },
+        "heroPlacement": {
+          "status": "BOUND",
+          "value": {
+            "area": "bottom",
+            "stances": "chosen existing Hero Stances"
+          },
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 16,
+              "region": "Deploy Heroes"
+            },
+            {
+              "kind": "PRINTED_COMPONENT",
+              "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+              "ttsPath": "/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+              "sourceObjectGuid": "51494f",
+              "nickname": "10-11",
+              "side": "ImageSecondaryURL",
+              "path": "docs/data/complete-edition/source-assets/c1c25/tile-10.bin",
+              "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+              "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f",
+              "sha1": "906f191d51e6c274fbd77bf421a2bef00099d57f",
+              "width": 2150,
+              "height": 2150,
+              "receipt": {
+                "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+                "acquisitionKind": "ORIGINAL_URL_DOWNLOAD",
+                "acquiredAt": "2026-09-28T06:54:43.158Z",
+                "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f"
+              }
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "Find Necromancer Room Card and corresponding Room Tile"
+            },
+            {
+              "kind": "PRINTED_COMPONENT",
+              "path": "docs/data/complete-edition/source-assets/c1c25/crops/44709-d9ba7f70e600-front.png",
+              "url": "https://steamusercontent-a.akamaihd.net/ugc/14650257961976472599/445EF67B8C222C8A53D77851BDE565AE244DB926/",
+              "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/d54607371c694bd0e2585f677c088c55f0e4aabe3e84796169f7ea100d00f058.bin",
+              "sheetSha256": "577b9ac5db685cc37684331231914156e8adebc16fb822d230af52e16e876174",
+              "cell": 9,
+              "grid": {
+                "width": 6,
+                "height": 6
+              },
+              "bounds": {
+                "left": 1590,
+                "top": 730,
+                "width": 530,
+                "height": 730
+              },
+              "sha256": "6a294c79fb118bc0ae03a9ba1c6cd6621ec3aa718bb775a7fa67201062e71011"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 16,
+              "region": "Deploy to printed Stance locations"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 18,
+              "region": "Occupancy dots"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 25,
+              "region": "High Ground"
+            }
+          ]
+        },
+        "summonPlacement": {
+          "status": "BOUND",
+          "value": "No initial Bone units in p38 setup; keep on side until summoned",
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "step 3"
+            }
+          ]
+        },
+        "threatState": {
+          "status": "BOUND",
+          "value": "Flip physical Threat card to Ability; Threats cease",
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 30,
+              "region": "Fighting a Boss"
+            }
+          ]
+        },
+        "battleDeck": {
+          "status": "BOUND",
+          "value": "One per-level Boss Battle Card; no invented Boss attack deck",
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 11,
+              "region": "per-level Battle Card"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "Battle Card"
+            }
+          ]
+        },
+        "initialStance": {
+          "status": "BOUND",
+          "value": "Aggressive",
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "step 2"
+            }
+          ]
+        },
+        "initialHP": {
+          "status": "BOUND",
+          "value": 144,
+          "sourceReferences": [
+            {
+              "kind": "PRINTED_COMPONENT",
+              "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/1",
+              "definitionId": "ce-boss-46039-6c498c",
+              "side": "front",
+              "literal": "ORANGE_HEART",
+              "path": "docs/data/complete-edition/source-assets/c1c24/crops/46039-6c498c-front.png",
+              "sha256": "22e464f3afc432db01f573c550c3c0be1dd0131ba5b358a95c204782cf84cb14"
+            }
+          ]
+        },
+        "initialWounds": {
+          "status": "BOUND",
+          "value": "No existing Wounds carried into a newly placed Monster component",
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 19,
+              "region": "Wounds recorded on hit"
+            }
+          ]
+        },
+        "externalDeckState": {
+          "status": "BOUND",
+          "value": {
+            "heroInitiativeCount": 4,
+            "bossInitiativeCount": 1,
+            "boneCards": "on hand; not auto-spawned"
+          },
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 16,
+              "region": "Hero Initiative"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "Boss Initiative and Bone components"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "room": {
+    "schemaVersion": 1,
+    "phase": "11A.4-C1C25",
+    "baselineHead": "179bc367299952d693e9adb81ddd311b42a475b0",
+    "family": "Necromancer",
+    "runtimeImplemented": false,
+    "inputSha256": {
+      "docs/data/complete-edition/c1c24-boss-printed-definitions.json": "dfc9fb3369aa991b6b1d1e9acb3bb3127e7ef91ecaa655126684dbb71eec5483",
+      "docs/data/complete-edition/c1c24-boss-subtype-classification.json": "e011f68a4ad7ddb8a44be3f73655c2573b0f0318bf9ef8611cc94a7e9bdba930",
+      "docs/data/complete-edition/c1c24-boss-family-classification.json": "ccf674596d7d5b52265822406550304dd783e67aebff4cf7554b2678acfba648",
+      "docs/data/complete-edition/c1c24-boss-source-manifest.json": "8bb7158f5720ffe3d2a3cb0068961d0a8454085acf3f223722864b6556e16953",
+      "docs/data/complete-edition/c1c24-boss-family-completeness-matrix.json": "883348365fddf909d8fdab193497f0ff70f50988ff21fd72c5e40a814d056d42",
+      "docs/data/complete-edition/complete-edition-raw-inventory.json": "f7bd06a7a726df301cefe26e10586c0fe3a870ceb92903d5190077cfaae66245",
+      "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+      "docs/data/complete-edition/c1c25-external-source-manifest.json": "1ddda982111ab106ab1fbb2e205f0710fc434648e47da0c20072a97653141287",
+      "docs/data/complete-edition/c1c25-source-search-evidence.json": "0900846e3ff6cd3d4fe8794026aa5e95ebf8f64d12efa3eb262987fe283f91cc"
+    },
+    "card": {
+      "status": "BOUND",
+      "value": {
+        "cardId": 44709,
+        "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/3/ContainedObjects/3"
+      },
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "Find Necromancer Room Card and corresponding Room Tile"
+        },
+        {
+          "kind": "PRINTED_COMPONENT",
+          "path": "docs/data/complete-edition/source-assets/c1c25/crops/44709-d9ba7f70e600-front.png",
+          "url": "https://steamusercontent-a.akamaihd.net/ugc/14650257961976472599/445EF67B8C222C8A53D77851BDE565AE244DB926/",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/d54607371c694bd0e2585f677c088c55f0e4aabe3e84796169f7ea100d00f058.bin",
+          "sheetSha256": "577b9ac5db685cc37684331231914156e8adebc16fb822d230af52e16e876174",
+          "cell": 9,
+          "grid": {
+            "width": 6,
+            "height": 6
+          },
+          "bounds": {
+            "left": 1590,
+            "top": 730,
+            "width": 530,
+            "height": 730
+          },
+          "sha256": "6a294c79fb118bc0ae03a9ba1c6cd6621ec3aa718bb775a7fa67201062e71011"
+        }
+      ]
+    },
+    "tile": {
+      "status": "BOUND",
+      "value": {
+        "number": 10,
+        "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+        "side": "ImageSecondaryURL"
+      },
+      "sourceReferences": [
+        {
+          "kind": "PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+          "ttsPath": "/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+          "sourceObjectGuid": "51494f",
+          "nickname": "10-11",
+          "side": "ImageSecondaryURL",
+          "path": "docs/data/complete-edition/source-assets/c1c25/tile-10.bin",
+          "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+          "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f",
+          "sha1": "906f191d51e6c274fbd77bf421a2bef00099d57f",
+          "width": 2150,
+          "height": 2150,
+          "receipt": {
+            "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+            "acquisitionKind": "ORIGINAL_URL_DOWNLOAD",
+            "acquiredAt": "2026-09-28T06:54:43.158Z",
+            "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f"
+          }
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "corresponding Room Tile"
+        }
+      ]
+    },
+    "printedName": "10—Necromancer Room",
+    "printedRoomRule": {
+      "status": "PRINTED_ABSENT",
+      "value": null,
+      "reason": "Room card has BOSS label and layout, no special rule text",
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "Find Necromancer Room Card and corresponding Room Tile"
+        },
+        {
+          "kind": "PRINTED_COMPONENT",
+          "path": "docs/data/complete-edition/source-assets/c1c25/crops/44709-d9ba7f70e600-front.png",
+          "url": "https://steamusercontent-a.akamaihd.net/ugc/14650257961976472599/445EF67B8C222C8A53D77851BDE565AE244DB926/",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/d54607371c694bd0e2585f677c088c55f0e4aabe3e84796169f7ea100d00f058.bin",
+          "sheetSha256": "577b9ac5db685cc37684331231914156e8adebc16fb822d230af52e16e876174",
+          "cell": 9,
+          "grid": {
+            "width": 6,
+            "height": 6
+          },
+          "bounds": {
+            "left": 1590,
+            "top": 730,
+            "width": 530,
+            "height": 730
+          },
+          "sha256": "6a294c79fb118bc0ae03a9ba1c6cd6621ec3aa718bb775a7fa67201062e71011"
+        }
+      ]
+    },
+    "areas": {
+      "status": "BOUND",
+      "value": [
+        {
+          "id": "top",
+          "bounds": [
+            0.345,
+            0.015,
+            0.67,
+            0.205
+          ],
+          "capacity": 3,
+          "highGround": true,
+          "monsterStart": [
+            "Aggressive"
+          ],
+          "heroStart": []
+        },
+        {
+          "id": "left",
+          "bounds": [
+            0.115,
+            0.215,
+            0.34,
+            0.67
+          ],
+          "capacity": 4,
+          "highGround": false,
+          "monsterStart": [],
+          "heroStart": []
+        },
+        {
+          "id": "upper-centre",
+          "bounds": [
+            0.345,
+            0.215,
+            0.67,
+            0.455
+          ],
+          "capacity": 3,
+          "highGround": false,
+          "monsterStart": [],
+          "heroStart": []
+        },
+        {
+          "id": "right",
+          "bounds": [
+            0.68,
+            0.215,
+            0.895,
+            0.67
+          ],
+          "capacity": 4,
+          "highGround": false,
+          "monsterStart": [],
+          "heroStart": []
+        },
+        {
+          "id": "centre",
+          "bounds": [
+            0.345,
+            0.46,
+            0.67,
+            0.67
+          ],
+          "capacity": 2,
+          "highGround": false,
+          "monsterStart": [],
+          "heroStart": []
+        },
+        {
+          "id": "lower-left",
+          "bounds": [
+            0.115,
+            0.68,
+            0.34,
+            0.89
+          ],
+          "capacity": 2,
+          "highGround": false,
+          "monsterStart": [],
+          "heroStart": []
+        },
+        {
+          "id": "lower-right",
+          "bounds": [
+            0.68,
+            0.68,
+            0.895,
+            0.89
+          ],
+          "capacity": 2,
+          "highGround": false,
+          "monsterStart": [],
+          "heroStart": []
+        },
+        {
+          "id": "bottom",
+          "bounds": [
+            0.345,
+            0.68,
+            0.67,
+            0.985
+          ],
+          "capacity": 4,
+          "highGround": false,
+          "monsterStart": [],
+          "heroStart": [
+            "Aggressive",
+            "Defensive",
+            "Ranged",
+            "Support"
+          ]
+        }
+      ],
+      "sourceReferences": [
+        {
+          "kind": "PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+          "ttsPath": "/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+          "sourceObjectGuid": "51494f",
+          "nickname": "10-11",
+          "side": "ImageSecondaryURL",
+          "path": "docs/data/complete-edition/source-assets/c1c25/tile-10.bin",
+          "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+          "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f",
+          "sha1": "906f191d51e6c274fbd77bf421a2bef00099d57f",
+          "width": 2150,
+          "height": 2150,
+          "receipt": {
+            "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+            "acquisitionKind": "ORIGINAL_URL_DOWNLOAD",
+            "acquiredAt": "2026-09-28T06:54:43.158Z",
+            "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f"
+          }
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "Find Necromancer Room Card and corresponding Room Tile"
+        },
+        {
+          "kind": "PRINTED_COMPONENT",
+          "path": "docs/data/complete-edition/source-assets/c1c25/crops/44709-d9ba7f70e600-front.png",
+          "url": "https://steamusercontent-a.akamaihd.net/ugc/14650257961976472599/445EF67B8C222C8A53D77851BDE565AE244DB926/",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/d54607371c694bd0e2585f677c088c55f0e4aabe3e84796169f7ea100d00f058.bin",
+          "sheetSha256": "577b9ac5db685cc37684331231914156e8adebc16fb822d230af52e16e876174",
+          "cell": 9,
+          "grid": {
+            "width": 6,
+            "height": 6
+          },
+          "bounds": {
+            "left": 1590,
+            "top": 730,
+            "width": 530,
+            "height": 730
+          },
+          "sha256": "6a294c79fb118bc0ae03a9ba1c6cd6621ec3aa718bb775a7fa67201062e71011"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 16,
+          "region": "Deploy to printed Stance locations"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 18,
+          "region": "Occupancy dots"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 25,
+          "region": "High Ground"
+        }
+      ]
+    },
+    "adjacency": {
+      "status": "BOUND",
+      "value": [
+        [
+          "top",
+          "upper-centre"
+        ],
+        [
+          "left",
+          "upper-centre"
+        ],
+        [
+          "left",
+          "centre"
+        ],
+        [
+          "left",
+          "lower-left"
+        ],
+        [
+          "upper-centre",
+          "right"
+        ],
+        [
+          "upper-centre",
+          "centre"
+        ],
+        [
+          "right",
+          "centre"
+        ],
+        [
+          "right",
+          "lower-right"
+        ],
+        [
+          "centre",
+          "bottom"
+        ],
+        [
+          "lower-left",
+          "bottom"
+        ],
+        [
+          "lower-right",
+          "bottom"
+        ]
+      ],
+      "sourceReferences": [
+        {
+          "kind": "PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+          "ttsPath": "/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+          "sourceObjectGuid": "51494f",
+          "nickname": "10-11",
+          "side": "ImageSecondaryURL",
+          "path": "docs/data/complete-edition/source-assets/c1c25/tile-10.bin",
+          "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+          "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f",
+          "sha1": "906f191d51e6c274fbd77bf421a2bef00099d57f",
+          "width": 2150,
+          "height": 2150,
+          "receipt": {
+            "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+            "acquisitionKind": "ORIGINAL_URL_DOWNLOAD",
+            "acquiredAt": "2026-09-28T06:54:43.158Z",
+            "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f"
+          }
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "Find Necromancer Room Card and corresponding Room Tile"
+        },
+        {
+          "kind": "PRINTED_COMPONENT",
+          "path": "docs/data/complete-edition/source-assets/c1c25/crops/44709-d9ba7f70e600-front.png",
+          "url": "https://steamusercontent-a.akamaihd.net/ugc/14650257961976472599/445EF67B8C222C8A53D77851BDE565AE244DB926/",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/d54607371c694bd0e2585f677c088c55f0e4aabe3e84796169f7ea100d00f058.bin",
+          "sheetSha256": "577b9ac5db685cc37684331231914156e8adebc16fb822d230af52e16e876174",
+          "cell": 9,
+          "grid": {
+            "width": 6,
+            "height": 6
+          },
+          "bounds": {
+            "left": 1590,
+            "top": 730,
+            "width": 530,
+            "height": 730
+          },
+          "sha256": "6a294c79fb118bc0ae03a9ba1c6cd6621ec3aa718bb775a7fa67201062e71011"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 16,
+          "region": "Deploy to printed Stance locations"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 18,
+          "region": "Occupancy dots"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 25,
+          "region": "High Ground"
+        }
+      ]
+    },
+    "layoutPolicy": "Bounds are visual annotation coordinates on original tile, not gameplay-engine cells. Area IDs are local audit labels; shared borders establish adjacency.",
+    "levelDifferences": {
+      "status": "BOUND",
+      "value": "Same named Room Card/Tile for all levels; no level-specific Room variant stated",
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "Necromancer Room, no Level variant"
+        }
+      ]
+    },
+    "spawnLocations": {
+      "status": "BOUND",
+      "value": {
+        "boss": "top",
+        "heroes": "bottom",
+        "summons": "Skill Target Area, not default Stance Area"
+      },
+      "sourceReferences": [
+        {
+          "kind": "PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+          "ttsPath": "/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+          "sourceObjectGuid": "51494f",
+          "nickname": "10-11",
+          "side": "ImageSecondaryURL",
+          "path": "docs/data/complete-edition/source-assets/c1c25/tile-10.bin",
+          "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+          "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f",
+          "sha1": "906f191d51e6c274fbd77bf421a2bef00099d57f",
+          "width": 2150,
+          "height": 2150,
+          "receipt": {
+            "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+            "acquisitionKind": "ORIGINAL_URL_DOWNLOAD",
+            "acquiredAt": "2026-09-28T06:54:43.158Z",
+            "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f"
+          }
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "Find Necromancer Room Card and corresponding Room Tile"
+        },
+        {
+          "kind": "PRINTED_COMPONENT",
+          "path": "docs/data/complete-edition/source-assets/c1c25/crops/44709-d9ba7f70e600-front.png",
+          "url": "https://steamusercontent-a.akamaihd.net/ugc/14650257961976472599/445EF67B8C222C8A53D77851BDE565AE244DB926/",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/d54607371c694bd0e2585f677c088c55f0e4aabe3e84796169f7ea100d00f058.bin",
+          "sheetSha256": "577b9ac5db685cc37684331231914156e8adebc16fb822d230af52e16e876174",
+          "cell": 9,
+          "grid": {
+            "width": 6,
+            "height": 6
+          },
+          "bounds": {
+            "left": 1590,
+            "top": 730,
+            "width": 530,
+            "height": 730
+          },
+          "sha256": "6a294c79fb118bc0ae03a9ba1c6cd6621ec3aa718bb775a7fa67201062e71011"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 16,
+          "region": "Deploy to printed Stance locations"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 18,
+          "region": "Occupancy dots"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 25,
+          "region": "High Ground"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "Target Area summon"
+        }
+      ]
+    },
+    "sourceBound": true
+  },
+  "threatLifecycle": [
+    {
+      "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/0",
+      "trigger": {
+        "status": "BOUND",
+        "value": [
+          {
+            "clause": "Army of the Dead",
+            "domain": "DUNGEON",
+            "trigger": "start of first Battle in this Dungeon"
+          },
+          {
+            "clause": "Haunted Graveyard",
+            "domain": "HAMLET",
+            "trigger": "first preparation day"
+          }
+        ],
+        "sourceReferences": [
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/0",
+            "definitionId": "ce-boss-42004-324dd0",
+            "side": "back",
+            "literal": "[LEVEL:II]\n[GREEN_DUNGEON_ARCH]\nArmy of the Dead\nAt the start of the first Battle in this Dungeon, spawn a Bone Captain as the first Monster.\n[LOWER_HALF_ROTATED_180]\nHaunted Graveyard\nOn the first preparation day, Heroes roll a [D10]. The Hero with the lowest roll is forced to spend the first day visiting the Graveyard for guard duty. They can use the Graveyard's effect as normal.",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/42004-324dd0-back.png",
+            "sha256": "e40b1651d9e8dce1198662cd473d59e745321d0295a813deb0f8b0d76d5730d8"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 11,
+            "region": "Imminent Threat passives during Hamlet and Dungeon"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 30,
+            "region": "Flip Threat side to Battle abilities; threats cease at that moment"
+          }
+        ]
+      },
+      "expiry": {
+        "status": "BOUND",
+        "value": [
+          {
+            "clause": "Army of the Dead",
+            "expiry": "passive ceases on flip; spawned unit follows Battle lifecycle"
+          },
+          {
+            "clause": "Haunted Graveyard",
+            "expiry": "end of forced day; passive ceases on flip"
+          }
+        ],
+        "sourceReferences": [
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/0",
+            "definitionId": "ce-boss-42004-324dd0",
+            "side": "back",
+            "literal": "[LEVEL:II]\n[GREEN_DUNGEON_ARCH]\nArmy of the Dead\nAt the start of the first Battle in this Dungeon, spawn a Bone Captain as the first Monster.\n[LOWER_HALF_ROTATED_180]\nHaunted Graveyard\nOn the first preparation day, Heroes roll a [D10]. The Hero with the lowest roll is forced to spend the first day visiting the Graveyard for guard duty. They can use the Graveyard's effect as normal.",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/42004-324dd0-back.png",
+            "sha256": "e40b1651d9e8dce1198662cd473d59e745321d0295a813deb0f8b0d76d5730d8"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 30,
+            "region": "Threats cease when flipped"
+          }
+        ]
+      },
+      "abilitySideRelation": {
+        "status": "BOUND",
+        "value": {
+          "physicalFlip": true,
+          "transition": "Objective Room entry / Boss Battle setup",
+          "threatAndAbilitySimultaneous": false,
+          "abilityType": "persistent conditional summoning rule; 1 action per round",
+          "sharedAcrossLevels": "identical printed ability text except Level marker",
+          "threatReplacementAbilityPolicy": "No separate Threat replacement deck is sourced"
+        },
+        "sourceReferences": [
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/0",
+            "definitionId": "ce-boss-42004-324dd0",
+            "side": "front",
+            "literal": "Necromancer\n[LEVEL:II]\nACTIONS / Round: 1\nSummoning [SKULL_RED_DOWN_ARROW]: When a Monster is [SKULL_RED_DOWN_ARROW], the Monster miniature is placed on the Target Area, and a new Monster Initiative Card is shuffled into the Initiative Deck. If all Stances are occupied, the Summoning does not take effect.",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/42004-324dd0-front.png",
+            "sha256": "a6bdfbb7c71419d77b46aeb50f1cbc437d1916f51dec02c328056289aef8b5f8"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 30,
+            "region": "Flip Threats side to Battle abilities"
+          }
+        ]
+      }
+    },
+    {
+      "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/2",
+      "trigger": {
+        "status": "BOUND",
+        "value": [
+          {
+            "clause": "Reanimation",
+            "domain": "DUNGEON",
+            "trigger": "first non-large Monster death in each Battle"
+          },
+          {
+            "clause": "The Restless Dead",
+            "domain": "HAMLET",
+            "trigger": "first preparation day"
+          }
+        ],
+        "sourceReferences": [
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/2",
+            "definitionId": "ce-boss-42005-b1efcd",
+            "side": "back",
+            "literal": "[LEVEL:III]\n[GREEN_DUNGEON_ARCH]\nReanimation\nImmediately respawn the first non-large Monster that dies in each Battle. Place it in the corresponding Area on the board. If there is no space available, ignore this effect.\n[LOWER_HALF_ROTATED_180]\nThe Restless Dead\nOn the first preparation day, Heroes roll a [D10]. The Hero with the lowest roll is forced to spend the first day visiting the Graveyard for guard duty. They can't use the Graveyard's effect though.",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/42005-b1efcd-back.png",
+            "sha256": "dda5c00146e5ae8eca61ca2c1a53d7dac23583bf1d2021b35b6b5ae0038371d3"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 11,
+            "region": "Imminent Threat passives during Hamlet and Dungeon"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 30,
+            "region": "Flip Threat side to Battle abilities; threats cease at that moment"
+          }
+        ]
+      },
+      "expiry": {
+        "status": "BOUND",
+        "value": [
+          {
+            "clause": "Reanimation",
+            "expiry": "passive ceases on flip"
+          },
+          {
+            "clause": "The Restless Dead",
+            "expiry": "end of forced day; passive ceases on flip"
+          }
+        ],
+        "sourceReferences": [
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/2",
+            "definitionId": "ce-boss-42005-b1efcd",
+            "side": "back",
+            "literal": "[LEVEL:III]\n[GREEN_DUNGEON_ARCH]\nReanimation\nImmediately respawn the first non-large Monster that dies in each Battle. Place it in the corresponding Area on the board. If there is no space available, ignore this effect.\n[LOWER_HALF_ROTATED_180]\nThe Restless Dead\nOn the first preparation day, Heroes roll a [D10]. The Hero with the lowest roll is forced to spend the first day visiting the Graveyard for guard duty. They can't use the Graveyard's effect though.",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/42005-b1efcd-back.png",
+            "sha256": "dda5c00146e5ae8eca61ca2c1a53d7dac23583bf1d2021b35b6b5ae0038371d3"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 30,
+            "region": "Threats cease when flipped"
+          }
+        ]
+      },
+      "abilitySideRelation": {
+        "status": "BOUND",
+        "value": {
+          "physicalFlip": true,
+          "transition": "Objective Room entry / Boss Battle setup",
+          "threatAndAbilitySimultaneous": false,
+          "abilityType": "persistent conditional summoning rule; 1 action per round",
+          "sharedAcrossLevels": "identical printed ability text except Level marker",
+          "threatReplacementAbilityPolicy": "No separate Threat replacement deck is sourced"
+        },
+        "sourceReferences": [
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/2",
+            "definitionId": "ce-boss-42005-b1efcd",
+            "side": "front",
+            "literal": "Necromancer\n[LEVEL:III]\nACTIONS / Round: 1\nSummoning [SKULL_RED_DOWN_ARROW]: When a Monster is [SKULL_RED_DOWN_ARROW], the Monster miniature is placed on the Target Area, and a new Monster Initiative Card is shuffled into the Initiative Deck. If all Stances are occupied, the Summoning does not take effect.",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/42005-b1efcd-front.png",
+            "sha256": "59ac8a9efd2bf7c26f6ed0f0decd4ba769637a97bf7ac59b4159db484b586f4d"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 30,
+            "region": "Flip Threats side to Battle abilities"
+          }
+        ]
+      }
+    },
+    {
+      "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/4",
+      "trigger": {
+        "status": "BOUND",
+        "value": [
+          {
+            "clause": "This is Unholy!",
+            "domain": "DUNGEON",
+            "trigger": "After Battles"
+          },
+          {
+            "clause": "Unsettling Silhouettes",
+            "domain": "HAMLET",
+            "trigger": "Graveyard visit eligibility while Threat is active"
+          }
+        ],
+        "sourceReferences": [
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/4",
+            "definitionId": "ce-boss-42003-78ba81",
+            "side": "back",
+            "literal": "[LEVEL:I]\n[GREEN_DUNGEON_ARCH]\nThis is Unholy!\nAfter Battles, remove any non-unholy Monsters permanently from the game.\n[LOWER_HALF_ROTATED_180]\nUnsettling Silhouettes\nGraveyard is blocked.",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/42003-78ba81-back.png",
+            "sha256": "657f31f0d0e7f79dba458a16297a552ce85650f61805c34b75483bf410e793ec"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 11,
+            "region": "Imminent Threat passives during Hamlet and Dungeon"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 30,
+            "region": "Flip Threat side to Battle abilities; threats cease at that moment"
+          }
+        ]
+      },
+      "expiry": {
+        "status": "BOUND",
+        "value": [
+          {
+            "clause": "This is Unholy!",
+            "expiry": "Removal is permanent; passive ceases on flip"
+          },
+          {
+            "clause": "Unsettling Silhouettes",
+            "expiry": "flip to Ability"
+          }
+        ],
+        "sourceReferences": [
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/4",
+            "definitionId": "ce-boss-42003-78ba81",
+            "side": "back",
+            "literal": "[LEVEL:I]\n[GREEN_DUNGEON_ARCH]\nThis is Unholy!\nAfter Battles, remove any non-unholy Monsters permanently from the game.\n[LOWER_HALF_ROTATED_180]\nUnsettling Silhouettes\nGraveyard is blocked.",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/42003-78ba81-back.png",
+            "sha256": "657f31f0d0e7f79dba458a16297a552ce85650f61805c34b75483bf410e793ec"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 30,
+            "region": "Threats cease when flipped"
+          }
+        ]
+      },
+      "abilitySideRelation": {
+        "status": "BOUND",
+        "value": {
+          "physicalFlip": true,
+          "transition": "Objective Room entry / Boss Battle setup",
+          "threatAndAbilitySimultaneous": false,
+          "abilityType": "persistent conditional summoning rule; 1 action per round",
+          "sharedAcrossLevels": "identical printed ability text except Level marker",
+          "threatReplacementAbilityPolicy": "No separate Threat replacement deck is sourced"
+        },
+        "sourceReferences": [
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/4",
+            "definitionId": "ce-boss-42003-78ba81",
+            "side": "front",
+            "literal": "Necromancer\n[LEVEL:I]\nACTIONS / Round: 1\nSummoning [SKULL_RED_DOWN_ARROW]: When a Monster is [SKULL_RED_DOWN_ARROW], the Monster miniature is placed on the Target Area, and a new Monster Initiative Card is shuffled into the Initiative Deck. If all Stances are occupied, the Summoning does not take effect.",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/42003-78ba81-front.png",
+            "sha256": "112f5f4f6ddfe8e6a2571452576adbd1c0c1b4f5f8e3daecf9f6a6c05d6ff77a"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 30,
+            "region": "Flip Threats side to Battle abilities"
+          }
+        ]
+      }
+    }
+  ],
+  "fullStance": {
+    "status": "BOUND",
+    "value": "Boss printed suppression; core p38 first-empty requires empty slot; p31 relocates miniatures only; p17 replacement scoped to large-Monster initial draws",
+    "sourceReferences": [
+      {
+        "kind": "PRINTED_COMPONENT",
+        "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/4",
+        "definitionId": "ce-boss-42003-78ba81",
+        "side": "front",
+        "literal": "all Stances occupied",
+        "path": "docs/data/complete-edition/source-assets/c1c24/crops/42003-78ba81-front.png",
+        "sha256": "112f5f4f6ddfe8e6a2571452576adbd1c0c1b4f5f8e3daecf9f6a6c05d6ff77a"
+      },
+      {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+        "page": 38,
+        "region": "first empty Stance"
+      },
+      {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+        "page": 31,
+        "region": "Room Area displacement"
+      },
+      {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+        "page": 17,
+        "region": "large Monster cannot fit"
+      }
+    ]
+  },
+  "upstreamManifest": {
+    "schemaVersion": 1,
+    "phase": "11A.4-C1C25",
+    "baselineHead": "179bc367299952d693e9adb81ddd311b42a475b0",
+    "family": "Necromancer",
+    "runtimeImplemented": false,
+    "inputSha256": {
+      "docs/data/complete-edition/c1c24-boss-printed-definitions.json": "dfc9fb3369aa991b6b1d1e9acb3bb3127e7ef91ecaa655126684dbb71eec5483",
+      "docs/data/complete-edition/c1c24-boss-subtype-classification.json": "e011f68a4ad7ddb8a44be3f73655c2573b0f0318bf9ef8611cc94a7e9bdba930",
+      "docs/data/complete-edition/c1c24-boss-family-classification.json": "ccf674596d7d5b52265822406550304dd783e67aebff4cf7554b2678acfba648",
+      "docs/data/complete-edition/c1c24-boss-source-manifest.json": "8bb7158f5720ffe3d2a3cb0068961d0a8454085acf3f223722864b6556e16953",
+      "docs/data/complete-edition/c1c24-boss-family-completeness-matrix.json": "883348365fddf909d8fdab193497f0ff70f50988ff21fd72c5e40a814d056d42",
+      "docs/data/complete-edition/complete-edition-raw-inventory.json": "f7bd06a7a726df301cefe26e10586c0fe3a870ceb92903d5190077cfaae66245",
+      "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+      "docs/data/complete-edition/c1c25-external-source-manifest.json": "1ddda982111ab106ab1fbb2e205f0710fc434648e47da0c20072a97653141287",
+      "docs/data/complete-edition/c1c25-source-search-evidence.json": "0900846e3ff6cd3d4fe8794026aa5e95ebf8f64d12efa3eb262987fe283f91cc"
+    },
+    "frozenInputSha256": {
+      "docs/data/complete-edition/c1c20-core-runtime-roi-matrix.json": "5c2f5c91632b2126a3003d3eda198e7f354c3c65674469293fbf0b0dfdd43c32",
+      "docs/data/complete-edition/c1c20-core-source-delta.json": "54e65cabffa6b0f5516d1de5a1f18f661b00fcc2b3908c383660a0085cbb9956",
+      "docs/data/complete-edition/c1c20-core-source-gap-register.json": "06fd9f40ef55fb0a020f949d986445185dfb3b342ec6923b795066ec5216b500",
+      "docs/data/complete-edition/c1c20-core-trinket-coverage.json": "b6d66f357f37b3451a87865c6a2375067b79fb8bfb85f10c7c105b4c1e0101a4",
+      "docs/data/complete-edition/c1c20-core-trinket-terminal-blocker-register.json": "1b92300aa1631ac094f92d1323855542453b38c2883b13ab226b70a2f8f7b384",
+      "docs/data/complete-edition/c1c21-c1c4-delta.json": "a48b316bf3c43e6c44a5fa75fc7d05c019ab0d07f5331942ae73bb199f597cc3",
+      "docs/data/complete-edition/c1c21-next-quest-workstream-decision.json": "2c658672329d8a2364469218938bb48a943fc75a3b62035a880bc88c230c35ff",
+      "docs/data/complete-edition/c1c21-rest-gated-quest-register.json": "82c2bd639b41ced2e8750c03e9c6e179a5590b9e02ad6050bef9967f74df21eb",
+      "docs/data/complete-edition/c1c21-standard-quest-live-capability-matrix.json": "c55a7508258be1cdc058d98f179620236fa02c2030bbe8a6879f15318edde447",
+      "docs/data/complete-edition/c1c21-standard-quest-runtime-roi-matrix.json": "9fc0b4080670b817f5ab860b262fb490632a3aff48d50401d42d68335c769a41",
+      "docs/data/complete-edition/c1c21-standard-quest-source-gap-register.json": "0e26daef1de3d6ed4921be8ced8363f562a823a4b3fb2cbd953f0eadc6d3dc6b",
+      "docs/data/complete-edition/c1c21-trinket-dependent-quest-register.json": "80053d7794af298af71dfeff1a1e3dd171799cf2104f966dac172b1b223122c8",
+      "docs/data/complete-edition/c1c22-boss-encounter-live-inventory.json": "a976a5351ebc03e2e2dc2d79f6d7496780ab5e599cbc3b27ddb76ce522c50849",
+      "docs/data/complete-edition/c1c22-boss-encounter-opportunity-matrix.json": "220e4e47e73af51aaeb1273728ae1b77af9e2891c45433b316ce58bcbbb9c23c",
+      "docs/data/complete-edition/c1c22-boss-encounter-source-gap-register.json": "7ee457116b95753e7e1e9672f7e95d4b8b2474730c20a7e0b2c431afb0ad2295",
+      "docs/data/complete-edition/c1c22-hamlet-event-source-intake-register.json": "9c0ff53d19f893c8e97d19de6fc2d9650b323b11308293e37ff716c6811311d0",
+      "docs/data/complete-edition/c1c22-next-workstream-decision.json": "47a29ea561d67f6ef69998682d05b046017c737bc6d230ba504aed2513378194",
+      "docs/data/complete-edition/c1c23-hamlet-event-crop-manifest.json": "11204d1e54cdf71077d54ceeb9d575f89fc61d027324505e9ccf6a1a1545b103",
+      "docs/data/complete-edition/c1c23-hamlet-event-printed-definitions.json": "1e63aee81a036cb076aef0e61e0fafae0e30eb1e0533639f11ae6798a95878e0",
+      "docs/data/complete-edition/c1c23-hamlet-event-runtime-capability-matrix.json": "d6dd5ec630b84831b7e8c007fe50b0eafc322472387692c4244bc651a5ee414a",
+      "docs/data/complete-edition/c1c23-hamlet-event-runtime-roi-matrix.json": "d7086c052b46d037e2c49211a967e616fa0fb6fa60f8acfd55e29584efe88670",
+      "docs/data/complete-edition/c1c23-hamlet-event-semantic-contracts.json": "5707c1f0a9abf3e0c8ca8f008c0cb8ac446e0a6164b38e4a3c2e4f8fa7d01afd",
+      "docs/data/complete-edition/c1c23-hamlet-event-source-gap-register.json": "bbdfe69998522d57e142512b616a90309624678c693668fa0a099c029fec50b2",
+      "docs/data/complete-edition/c1c23-hamlet-event-source-manifest.json": "90a19d4a216e99b438bf0f78f835f200712392c0cfdc375373cd77afe41fbe14",
+      "docs/data/complete-edition/c1c23-next-workstream-decision.json": "8b241b57bbd940a107b4c853650c8a0f1b040893f7fc67e6c8c472f337a79943",
+      "docs/data/complete-edition/c1c23-rulebook-evidence.json": "b83839abc608f999e1cb443a007d25092fac5d2f4d41bd2c080b3fb33e36e357",
+      "docs/data/complete-edition/c1c24-boss-crop-manifest.json": "d98223329c4a4267fcb6d876770a46daa7929cccbe990fb48dcfe1e92bb45d17",
+      "docs/data/complete-edition/c1c24-boss-family-classification.json": "ccf674596d7d5b52265822406550304dd783e67aebff4cf7554b2678acfba648",
+      "docs/data/complete-edition/c1c24-boss-family-completeness-matrix.json": "883348365fddf909d8fdab193497f0ff70f50988ff21fd72c5e40a814d056d42",
+      "docs/data/complete-edition/c1c24-boss-ocr-drafts.json": "7564ae407a8bae8349232241196d3a00395f0b4a73221044ba88b049bd8c2725",
+      "docs/data/complete-edition/c1c24-boss-printed-definitions.json": "dfc9fb3369aa991b6b1d1e9acb3bb3127e7ef91ecaa655126684dbb71eec5483",
+      "docs/data/complete-edition/c1c24-boss-source-gap-register.json": "b674811afd49b1157f84b5237bc06d369e9b055b088408da5f496cf4ccb3f2b0",
+      "docs/data/complete-edition/c1c24-boss-source-intake-roi-matrix.json": "9a1cd67f8d7b6031b8d3d4cfddd98bc89382fcd994a9899eebf91ed17cc96b19",
+      "docs/data/complete-edition/c1c24-boss-source-manifest.json": "8bb7158f5720ffe3d2a3cb0068961d0a8454085acf3f223722864b6556e16953",
+      "docs/data/complete-edition/c1c24-boss-subtype-classification.json": "e011f68a4ad7ddb8a44be3f73655c2573b0f0318bf9ef8611cc94a7e9bdba930",
+      "docs/data/complete-edition/c1c24-next-workstream-decision.json": "d22aea4da21098bee9ac183604885eed587525d775097008405ace05ab0b5b73",
+      "docs/reports/complete-edition/c1c20-core-trinket-terminal-closure-report.md": "307b4a774287a650286747a45c6ecada3cc0db3134f223280ae1299ee82f6258",
+      "docs/reports/complete-edition/c1c21-standard-quest-live-rebaseline-report.md": "660eaad36375e5a139bc6313bda04ff8762a19b01e6d05bf9f52d30a5f7baf54",
+      "docs/reports/complete-edition/c1c22-boss-encounter-live-inventory-report.md": "3f5177419336a5f359614b359a005a016664e9ccbd45938f8980ef1f05dfaa8c",
+      "docs/reports/complete-edition/c1c23-hamlet-event-source-intake-report.md": "c64454db94bd1e413f0caf023cb0a635faa97339eb87d08d27c92e175b67e53e",
+      "docs/reports/complete-edition/c1c23-validation-report.md": "5df85aa02cb78d3efb88b831e6b180a4253ed2d77d179a887671a4d77c0c4e60",
+      "docs/reports/complete-edition/c1c24-boss-source-intake-report.md": "94f8ec861972af5c835143ae165476eeb9971453b4e6376c3cbfa90e23f8cc51",
+      "docs/reports/complete-edition/c1c24-validation-report.md": "d5a2326f94b1b1ff324ad10622c9d4fb8fb2be2dbce8d8a0972fb6d952db820c"
+    },
+    "baselineFrozenReady": {
+      "coreTrinket": "15/37",
+      "standardQuest": "3/75",
+      "hamletEventLiteral": 16,
+      "hamletEventCardLocalSemantic": 5,
+      "hamletEventReady": 0,
+      "bossEncounterCensus": 278,
+      "ordinaryBossCensus": 231,
+      "bossFamilies": 20,
+      "BATTLE": 114,
+      "THREAT": 51,
+      "ABILITY": 12,
+      "BOSS_IDENTITY": 54
+    },
+    "historicalE2EFailures": [
+      "C1C13 reload retry exhaustion",
+      "C1C12 reload retry exhaustion",
+      "C1C11 reload retry exhaustion",
+      "C1C3 selector click timeout"
+    ],
+    "externalSourceManifest": "docs/data/complete-edition/c1c25-external-source-manifest.json",
+    "sourceSearchEvidence": "docs/data/complete-edition/c1c25-source-search-evidence.json",
+    "verdict": "C1C25-NECROMANCER-SEMANTIC-SOURCE-INTAKE-ACCEPTED",
+    "meaning": "Accepted source intake and truthful unresolved contracts; not semantic-complete family, runtime or browser E2E acceptance."
+  },
+  "upstreamCounts": {
+    "trinket": "15/37",
+    "quest": "3/75",
+    "census": 278,
+    "hamletEvent": "16 literal / 5 local semantic / 0 Ready",
+    "boss": "231 / 20 families",
+    "Battle": 114,
+    "Threat": 51,
+    "AbilityExclusive": 12,
+    "Identity": 54
+  }
+}

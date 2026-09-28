@@ -1,0 +1,538 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C26",
+  "baselineHead": "2ba8942bbd080b49260f9cba117729a000ebcddf",
+  "family": "Necromancer",
+  "runtimeImplemented": false,
+  "inputSha256": {
+    "docs/data/complete-edition/c1c25-necromancer-source-gap-register.json": "3cbbdd55db18cea6c9b036e1a5b10e1a039021df0112a9afa5f6d15e3c375ed1",
+    "docs/data/complete-edition/c1c25-necromancer-card-semantic-contracts.json": "55e89348a581632d0a6fc6371700ff79754f70993e986192d9f630dcda34f3db",
+    "docs/data/complete-edition/c1c25-necromancer-encounter-composition.json": "87910e8fa32708906787e04885ea66e865dd9c4fb260fb3b5963baf3f332d21c",
+    "docs/data/complete-edition/c1c25-necromancer-room-contract.json": "23249ae51a8ddeaad7d8801175f372b624294e12290947178e0a43846cc63226",
+    "docs/data/complete-edition/c1c25-necromancer-source-precedence.json": "a71c2131471190e84b618314cc9ba50abd105012d0cce8dea807b2538b7f0569",
+    "docs/data/complete-edition/c1c25-necromancer-bone-source-binding.json": "ed3d427224322e0b4d3cae466956cc4aaf897966d7a2818fb24344585b2bf862",
+    "docs/data/complete-edition/c1c25-necromancer-cleanup-contract.json": "a65826efef7ad6306e8877cd24f2735df9b549bfa2d85dd6d633d9cd4c4fe205",
+    "docs/data/complete-edition/c1c25-necromancer-setup-contract.json": "688781f05721790b11473bcdb4b3adb04a2a65b3edd367a59ebf662344b1d564",
+    "docs/data/complete-edition/c1c25-necromancer-runtime-capability-matrix.json": "c9542fc1622e663eebde2164617a0eda21611169822bd83ffb733c842db252a5",
+    "docs/data/complete-edition/c1c25-necromancer-source-manifest.json": "a5f2de381495868493c544df9787f3cfa82e6980f00d747fa5875cfc0f6489dd",
+    "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+    "docs/data/complete-edition/c1c26-source-retrieval-evidence.json": "11fe8ccd5225043b92e11f2ec10d645e973362e86625a9f3400f59e637d79832"
+  },
+  "topics": [
+    {
+      "id": "BONE_IDENTITY_UNRESOLVED",
+      "category": "BONE_IDENTITY_UNRESOLVED",
+      "resolutionStatus": "BOUNDED_STILL_UNRESOLVED",
+      "sourceStatus": "SOURCE_BLOCKED",
+      "nextEvidence": "Authenticate the narrow artwork / full Large Captain association and copy instruction; keep the two components distinct.",
+      "checkedPages": [
+        6,
+        17,
+        38
+      ],
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 6,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 17,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "scoped review"
+        }
+      ],
+      "relevantComponentReview": "C1C24 nine locked cards; C1C25 Bone/Room original crops and manifests",
+      "exhaustionEvidence": {
+        "knownOfficialCorpusSearched": false,
+        "relevantComponentsChecked": true,
+        "rulebookChecked": true,
+        "faqCheckedOrProvablyUnavailable": false,
+        "noUnexaminedAuthoritativeConflict": false,
+        "proofReferences": [],
+        "pendingAuthoritativeSources": [
+          "designer FAQ filepage 250715 content",
+          "authenticated later official production files / revised rulebook if available"
+        ],
+        "accessFailureDoesNotProvePermanentUnavailability": true
+      },
+      "terminal": false
+    },
+    {
+      "id": "CLEANUP_DESTINATION_UNRESOLVED",
+      "category": "CLEANUP_DESTINATION_UNRESOLVED",
+      "resolutionStatus": "BOUNDED_STILL_UNRESOLVED",
+      "sourceStatus": "SOURCE_BLOCKED",
+      "nextEvidence": "Identify the post-defeat storage destinations and side/reset policy of the Boss trio.",
+      "checkedPages": [
+        25,
+        30,
+        32,
+        35,
+        38
+      ],
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 25,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 30,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 32,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 35,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "scoped review"
+        }
+      ],
+      "relevantComponentReview": "C1C24 nine locked cards; C1C25 Bone/Room original crops and manifests",
+      "exhaustionEvidence": {
+        "knownOfficialCorpusSearched": false,
+        "relevantComponentsChecked": true,
+        "rulebookChecked": true,
+        "faqCheckedOrProvablyUnavailable": false,
+        "noUnexaminedAuthoritativeConflict": false,
+        "proofReferences": [],
+        "pendingAuthoritativeSources": [
+          "designer FAQ filepage 250715 content",
+          "authenticated later official production files / revised rulebook if available"
+        ],
+        "accessFailureDoesNotProvePermanentUnavailability": true
+      },
+      "terminal": false
+    },
+    {
+      "id": "EFFECT_ORDER_UNRESOLVED",
+      "category": "EFFECT_ORDER_UNRESOLVED",
+      "resolutionStatus": "BOUNDED_STILL_UNRESOLVED",
+      "sourceStatus": "SOURCE_BLOCKED",
+      "nextEvidence": "Specify Reanimation relative to casualty removal, initiative, other death effects and simultaneous first deaths.",
+      "checkedPages": [
+        17,
+        20,
+        24,
+        25
+      ],
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 17,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 20,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 24,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 25,
+          "region": "scoped review"
+        }
+      ],
+      "relevantComponentReview": "C1C24 nine locked cards; C1C25 Bone/Room original crops and manifests",
+      "exhaustionEvidence": {
+        "knownOfficialCorpusSearched": false,
+        "relevantComponentsChecked": true,
+        "rulebookChecked": true,
+        "faqCheckedOrProvablyUnavailable": false,
+        "noUnexaminedAuthoritativeConflict": false,
+        "proofReferences": [],
+        "pendingAuthoritativeSources": [
+          "designer FAQ filepage 250715 content",
+          "authenticated later official production files / revised rulebook if available"
+        ],
+        "accessFailureDoesNotProvePermanentUnavailability": true
+      },
+      "terminal": false
+    },
+    {
+      "id": "LOWEST_ROLL_HERO_TIE_UNRESOLVED",
+      "category": "LOWEST_ROLL_HERO_TIE_UNRESOLVED",
+      "resolutionStatus": "BOUNDED_STILL_UNRESOLVED",
+      "sourceStatus": "SOURCE_BLOCKED",
+      "nextEvidence": "Specify the Hamlet lowest-D10 tie rule for Haunted Graveyard and The Restless Dead.",
+      "checkedPages": [
+        11,
+        24,
+        30,
+        32
+      ],
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 11,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 24,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 30,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 32,
+          "region": "scoped review"
+        }
+      ],
+      "relevantComponentReview": "C1C24 nine locked cards; C1C25 Bone/Room original crops and manifests",
+      "exhaustionEvidence": {
+        "knownOfficialCorpusSearched": false,
+        "relevantComponentsChecked": true,
+        "rulebookChecked": true,
+        "faqCheckedOrProvablyUnavailable": false,
+        "noUnexaminedAuthoritativeConflict": false,
+        "proofReferences": [],
+        "pendingAuthoritativeSources": [
+          "designer FAQ filepage 250715 content",
+          "authenticated later official production files / revised rulebook if available"
+        ],
+        "accessFailureDoesNotProvePermanentUnavailability": true
+      },
+      "terminal": false
+    },
+    {
+      "id": "ROOM_CAPACITY_INTERACTION_UNRESOLVED",
+      "category": "ROOM_CAPACITY_INTERACTION_UNRESOLVED",
+      "resolutionStatus": "BOUNDED_STILL_UNRESOLVED",
+      "sourceStatus": "SOURCE_BLOCKED",
+      "nextEvidence": "Specify equal-nearest destination choice and no-available-Area behavior under p31 displacement.",
+      "checkedPages": [
+        17,
+        24,
+        31,
+        38
+      ],
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 17,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 24,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 31,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "scoped review"
+        }
+      ],
+      "relevantComponentReview": "C1C24 nine locked cards; C1C25 Bone/Room original crops and manifests",
+      "exhaustionEvidence": {
+        "knownOfficialCorpusSearched": false,
+        "relevantComponentsChecked": true,
+        "rulebookChecked": true,
+        "faqCheckedOrProvablyUnavailable": false,
+        "noUnexaminedAuthoritativeConflict": false,
+        "proofReferences": [],
+        "pendingAuthoritativeSources": [
+          "designer FAQ filepage 250715 content",
+          "authenticated later official production files / revised rulebook if available"
+        ],
+        "accessFailureDoesNotProvePermanentUnavailability": true
+      },
+      "terminal": false
+    },
+    {
+      "id": "SOURCE_PRECEDENCE_UNRESOLVED",
+      "category": "SOURCE_PRECEDENCE_UNRESOLVED",
+      "resolutionStatus": "BOUNDED_STILL_UNRESOLVED",
+      "sourceStatus": "SOURCE_BLOCKED",
+      "nextEvidence": "Acquire an explicit correction or equivalence for printed Bone Rabble versus p38 Bone Rubble.",
+      "checkedPages": [
+        7,
+        30,
+        31,
+        35,
+        38
+      ],
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 7,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 30,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 31,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 35,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "scoped review"
+        }
+      ],
+      "relevantComponentReview": "C1C24 nine locked cards; C1C25 Bone/Room original crops and manifests",
+      "exhaustionEvidence": {
+        "knownOfficialCorpusSearched": false,
+        "relevantComponentsChecked": true,
+        "rulebookChecked": true,
+        "faqCheckedOrProvablyUnavailable": false,
+        "noUnexaminedAuthoritativeConflict": false,
+        "proofReferences": [],
+        "pendingAuthoritativeSources": [
+          "designer FAQ filepage 250715 content",
+          "authenticated later official production files / revised rulebook if available"
+        ],
+        "accessFailureDoesNotProvePermanentUnavailability": true
+      },
+      "terminal": false
+    },
+    {
+      "id": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+      "resolutionStatus": "BOUNDED_STILL_UNRESOLVED",
+      "sourceStatus": "SOURCE_BLOCKED",
+      "nextEvidence": "Specify reserved/shared pool, dead copy reuse, permanent removal and supply exhaustion behavior.",
+      "checkedPages": [
+        6,
+        7,
+        10,
+        17,
+        25,
+        31,
+        38
+      ],
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 6,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 7,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 10,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 17,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 25,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 31,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "scoped review"
+        }
+      ],
+      "relevantComponentReview": "C1C24 nine locked cards; C1C25 Bone/Room original crops and manifests",
+      "exhaustionEvidence": {
+        "knownOfficialCorpusSearched": false,
+        "relevantComponentsChecked": true,
+        "rulebookChecked": true,
+        "faqCheckedOrProvablyUnavailable": false,
+        "noUnexaminedAuthoritativeConflict": false,
+        "proofReferences": [],
+        "pendingAuthoritativeSources": [
+          "designer FAQ filepage 250715 content",
+          "authenticated later official production files / revised rulebook if available"
+        ],
+        "accessFailureDoesNotProvePermanentUnavailability": true
+      },
+      "terminal": false
+    },
+    {
+      "id": "SUMMON_COUNT_UNRESOLVED",
+      "category": "SUMMON_COUNT_UNRESOLVED",
+      "resolutionStatus": "BOUNDED_STILL_UNRESOLVED",
+      "sourceStatus": "SOURCE_BLOCKED",
+      "nextEvidence": "Specify one summon per Skill/Area versus per successful Hero when one roll has mixed hit results.",
+      "checkedPages": [
+        19,
+        20,
+        24,
+        31,
+        38
+      ],
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 19,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 20,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 24,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 31,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "scoped review"
+        }
+      ],
+      "relevantComponentReview": "C1C24 nine locked cards; C1C25 Bone/Room original crops and manifests",
+      "exhaustionEvidence": {
+        "knownOfficialCorpusSearched": false,
+        "relevantComponentsChecked": true,
+        "rulebookChecked": true,
+        "faqCheckedOrProvablyUnavailable": false,
+        "noUnexaminedAuthoritativeConflict": false,
+        "proofReferences": [],
+        "pendingAuthoritativeSources": [
+          "designer FAQ filepage 250715 content",
+          "authenticated later official production files / revised rulebook if available"
+        ],
+        "accessFailureDoesNotProvePermanentUnavailability": true
+      },
+      "terminal": false
+    },
+    {
+      "id": "TARGET_TIE_UNRESOLVED",
+      "category": "TARGET_TIE_UNRESOLVED",
+      "resolutionStatus": "BOUNDED_STILL_UNRESOLVED",
+      "sourceStatus": "SOURCE_BLOCKED",
+      "nextEvidence": "Specify which equally crowded eligible Area is selected; character Stance priority is insufficient.",
+      "checkedPages": [
+        19,
+        24,
+        38
+      ],
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 19,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 24,
+          "region": "scoped review"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "scoped review"
+        }
+      ],
+      "relevantComponentReview": "C1C24 nine locked cards; C1C25 Bone/Room original crops and manifests",
+      "exhaustionEvidence": {
+        "knownOfficialCorpusSearched": false,
+        "relevantComponentsChecked": true,
+        "rulebookChecked": true,
+        "faqCheckedOrProvablyUnavailable": false,
+        "noUnexaminedAuthoritativeConflict": false,
+        "proofReferences": [],
+        "pendingAuthoritativeSources": [
+          "designer FAQ filepage 250715 content",
+          "authenticated later official production files / revised rulebook if available"
+        ],
+        "accessFailureDoesNotProvePermanentUnavailability": true
+      },
+      "terminal": false
+    }
+  ],
+  "terminalCategoryCount": 0
+}
