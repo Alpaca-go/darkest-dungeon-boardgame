@@ -1,0 +1,780 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C25",
+  "baselineHead": "179bc367299952d693e9adb81ddd311b42a475b0",
+  "family": "Necromancer",
+  "runtimeImplemented": false,
+  "inputSha256": {
+    "docs/data/complete-edition/c1c24-boss-printed-definitions.json": "dfc9fb3369aa991b6b1d1e9acb3bb3127e7ef91ecaa655126684dbb71eec5483",
+    "docs/data/complete-edition/c1c24-boss-subtype-classification.json": "e011f68a4ad7ddb8a44be3f73655c2573b0f0318bf9ef8611cc94a7e9bdba930",
+    "docs/data/complete-edition/c1c24-boss-family-classification.json": "ccf674596d7d5b52265822406550304dd783e67aebff4cf7554b2678acfba648",
+    "docs/data/complete-edition/c1c24-boss-source-manifest.json": "8bb7158f5720ffe3d2a3cb0068961d0a8454085acf3f223722864b6556e16953",
+    "docs/data/complete-edition/c1c24-boss-family-completeness-matrix.json": "883348365fddf909d8fdab193497f0ff70f50988ff21fd72c5e40a814d056d42",
+    "docs/data/complete-edition/complete-edition-raw-inventory.json": "f7bd06a7a726df301cefe26e10586c0fe3a870ceb92903d5190077cfaae66245",
+    "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+    "docs/data/complete-edition/c1c25-external-source-manifest.json": "1ddda982111ab106ab1fbb2e205f0710fc434648e47da0c20072a97653141287",
+    "docs/data/complete-edition/c1c25-source-search-evidence.json": "0900846e3ff6cd3d4fe8794026aa5e95ebf8f64d12efa3eb262987fe283f91cc"
+  },
+  "levels": [
+    {
+      "level": 1,
+      "type": "Bone Rabble",
+      "printedMonsterLevel": "I",
+      "trigger": {
+        "status": "BOUND",
+        "value": "Successful printed summon Target effect after Self Push and damage",
+        "sourceReferences": [
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/5",
+            "definitionId": "ce-boss-46037-85d8bf",
+            "side": "front",
+            "literal": "Bone Rabble",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/46037-85d8bf-front.png",
+            "sha256": "560c93fa1feb3add813afe4791d7e6a6cc88c4eeab112977007f6938afcb4f08"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 20,
+            "region": "Target Effects"
+          }
+        ]
+      },
+      "count": {
+        "status": "SOURCE_UNRESOLVED",
+        "value": null,
+        "category": "SUMMON_COUNT_UNRESOLVED",
+        "reason": "The summon glyph is printed on multi-Hero Target effects. Acquired texts do not explicitly settle one summon per Skill versus per successful Hero target when hits differ; do not assume one spawn.",
+        "sourceReferences": [
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/5",
+            "definitionId": "ce-boss-46037-85d8bf",
+            "side": "front",
+            "literal": "Necromancer\n[LEVEL:I]\nEldritch - Unholy - Front\n[GRAY_RUINS_ARCH_BANNER]\n[YELLOW_SPEED_FOOTPRINT:0]\n[BLUE_DODGE_SQUARES:3]\n[ORANGE_HEART:77]\nResistances: [YELLOW_ORANGE_DOWN_DOUBLE_CHEVRON] [BLUE_LEFT_DOUBLE_CHEVRON]\nImmunities: [THREE_YELLOW_DIAMONDS]\n1 The Flesh is Willing\nCrowded [GRAY_RANGE_ARROW:1] [YELLOW_HELMETS:2]\nCrit 1 [RED_DAMAGE_BOLT:9] Acc 10 [RED_DAMAGE_BOLT:6]\n[GRAY_SELF_ARROW] Self [BLUE_LEFT_DOUBLE_CHEVRON] Push 1\n[GRAY_TARGET_ARROW] [SKULL_RED_DOWN_ARROW] Bone Rabble\n2 The Crawling Dead\nCrowded [GRAY_RANGE_ARROW:2] [YELLOW_HELMETS:2]\nCrit 1 [RED_DAMAGE_BOLT:7] Acc 10 [RED_DAMAGE_BOLT:5]\n[GRAY_SELF_ARROW] Self [BLUE_LEFT_DOUBLE_CHEVRON] Push 1\n[GRAY_TARGET_ARROW] [SKULL_RED_DOWN_ARROW] Bone Rabble\n3 Six Feet Under\nCrowded [GRAY_RANGE_ARROW:2] [YELLOW_HELMETS:4]\nAcc 10\n[GRAY_SELF_ARROW] Self [BLUE_LEFT_DOUBLE_CHEVRON] Push 1\n[GRAY_TARGET_ARROW] [SKULL_RED_DOWN_ARROW] Bone Rabble\n[BLACK_STRESS_SQUARE]+2\n[STANCE_AGGRESSIVE:DIE] [STANCE_DEFENSIVE:DIE] [STANCE_RANGED:DIE] [STANCE_SUPPORT:DIE]\n[SUPPORT_SKILL_TABLE] 1:1-3; 2:4-6; 3:7-10",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/46037-85d8bf-front.png",
+            "sha256": "560c93fa1feb3add813afe4791d7e6a6cc88c4eeab112977007f6938afcb4f08"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 20,
+            "region": "Target Effects"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 24,
+            "region": "apply one roll result separately"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 38,
+            "region": "summons one of them by using a Skill"
+          }
+        ]
+      },
+      "eligibleBoneUnits": {
+        "status": "BOUND",
+        "value": [
+          "Bone Rabble"
+        ],
+        "sourceReferences": [
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/5",
+            "definitionId": "ce-boss-46037-85d8bf",
+            "side": "front",
+            "literal": "Bone Rabble",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/46037-85d8bf-front.png",
+            "sha256": "560c93fa1feb3add813afe4791d7e6a6cc88c4eeab112977007f6938afcb4f08"
+          }
+        ]
+      },
+      "spawnLocation": {
+        "status": "BOUND",
+        "value": "Target Area",
+        "sourceReferences": [
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 38,
+            "region": "Target Area"
+          },
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/4",
+            "definitionId": "ce-boss-42003-78ba81",
+            "side": "front",
+            "literal": "Target Area",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/42003-78ba81-front.png",
+            "sha256": "112f5f4f6ddfe8e6a2571452576adbd1c0c1b4f5f8e3daecf9f6a6c05d6ff77a"
+          }
+        ]
+      },
+      "stanceRequirement": {
+        "status": "BOUND",
+        "value": "First empty Monster Stance slot",
+        "sourceReferences": [
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 38,
+            "region": "first empty Stance Slot"
+          }
+        ]
+      },
+      "fullStanceBehavior": {
+        "status": "BOUND",
+        "value": "SUPPRESS_SUMMON: no effect, no replacement and no Initiative insertion",
+        "sourceReferences": [
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/4",
+            "definitionId": "ce-boss-42003-78ba81",
+            "side": "front",
+            "literal": "If all Stances are occupied, the Summoning does not take effect.",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/42003-78ba81-front.png",
+            "sha256": "112f5f4f6ddfe8e6a2571452576adbd1c0c1b4f5f8e3daecf9f6a6c05d6ff77a"
+          }
+        ]
+      },
+      "fullRoomBehavior": {
+        "status": "BOUND",
+        "value": "If Target Area full, move a Hero to nearest available Area; if full of Monsters, players choose a Monster to move to nearest available Area",
+        "sourceReferences": [
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 31,
+            "region": "Monster Summoning"
+          }
+        ]
+      },
+      "roomCapacityFallback": {
+        "status": "SOURCE_UNRESOLVED",
+        "value": null,
+        "category": "ROOM_CAPACITY_INTERACTION_UNRESOLVED",
+        "reason": "p31 names nearest available Area but does not settle equal nearest Areas or no available Area anywhere. No automatic eviction or overflow invented.",
+        "sourceReferences": [
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 31,
+            "region": "nearest available Area"
+          }
+        ]
+      },
+      "replacementInteraction": {
+        "status": "BOUND",
+        "value": "Area displacement is not Stance replacement. p17 large-Monster draw exception is a different initial spawn case",
+        "sourceReferences": [
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 17,
+            "region": "Large Monsters during drawing"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 31,
+            "region": "Summoning"
+          },
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/4",
+            "definitionId": "ce-boss-42003-78ba81",
+            "side": "front",
+            "literal": "all Stances occupied",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/42003-78ba81-front.png",
+            "sha256": "112f5f4f6ddfe8e6a2571452576adbd1c0c1b4f5f8e3daecf9f6a6c05d6ff77a"
+          }
+        ]
+      },
+      "duplicateInteraction": {
+        "status": "BOUND",
+        "value": "Track duplicates with printed colour Monster identifiers",
+        "sourceReferences": [
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 17,
+            "region": "Duplicate Monster tokens"
+          }
+        ]
+      },
+      "copyPolicy": {
+        "status": "SOURCE_UNRESOLVED",
+        "value": null,
+        "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+        "reason": "Inventory records candidate copies, not an instruction to clone exhausted components or a rule for summon supply exhaustion.",
+        "sourceReferences": [
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 38,
+            "region": "cards and miniatures on hand"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 17,
+            "region": "Use coloured identifiers for duplicate monsters"
+          }
+        ]
+      },
+      "existingMonsterHandling": {
+        "status": "BOUND",
+        "value": "Retain existing Stance cards; only displace miniature for Area space where p31 requires",
+        "sourceReferences": [
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 31,
+            "region": "Summoning"
+          }
+        ]
+      },
+      "initiative": {
+        "status": "BOUND",
+        "value": "Shuffle one new Monster Initiative immediately; summoned Monster may act in current round",
+        "sourceReferences": [
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 31,
+            "region": "shuffle Initiative / current round"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 38,
+            "region": "shuffle one Initiative"
+          }
+        ]
+      },
+      "cleanup": {
+        "status": "BOUND",
+        "value": "Remove every other Monster at Boss defeat",
+        "sourceReferences": [
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 38,
+            "region": "cleanup"
+          }
+        ]
+      }
+    },
+    {
+      "level": 2,
+      "type": "Bone Soldier",
+      "printedMonsterLevel": "I",
+      "trigger": {
+        "status": "BOUND",
+        "value": "Successful printed summon Target effect after Self Push and damage",
+        "sourceReferences": [
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/3",
+            "definitionId": "ce-boss-46038-a54cb7",
+            "side": "front",
+            "literal": "Bone Soldier",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/46038-a54cb7-front.png",
+            "sha256": "dabb5479c32fcdc24a4a0b5963045d3331ed490aa4c8c93d456d4e805644b990"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 20,
+            "region": "Target Effects"
+          }
+        ]
+      },
+      "count": {
+        "status": "SOURCE_UNRESOLVED",
+        "value": null,
+        "category": "SUMMON_COUNT_UNRESOLVED",
+        "reason": "The summon glyph is printed on multi-Hero Target effects. Acquired texts do not explicitly settle one summon per Skill versus per successful Hero target when hits differ; do not assume one spawn.",
+        "sourceReferences": [
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/3",
+            "definitionId": "ce-boss-46038-a54cb7",
+            "side": "front",
+            "literal": "Necromancer\n[LEVEL:II]\nEldritch - Unholy - Front\n[GRAY_RUINS_ARCH_BANNER]\n[YELLOW_SPEED_FOOTPRINT:1]\n[BLUE_DODGE_SQUARES:3]\n[ORANGE_HEART:103]\nResistances: [YELLOW_ORANGE_DOWN_DOUBLE_CHEVRON] [BLUE_LEFT_DOUBLE_CHEVRON]\nImmunities: [THREE_YELLOW_DIAMONDS]\n1 The Flesh is Willing\nCrowded [GRAY_RANGE_ARROW:1] [YELLOW_HELMETS:2]\nCrit 1 [RED_DAMAGE_BOLT:12] Acc 11 [RED_DAMAGE_BOLT:8]\n[GRAY_SELF_ARROW] Self [BLUE_LEFT_DOUBLE_CHEVRON] Push 1\n[GRAY_TARGET_ARROW] [SKULL_RED_DOWN_ARROW] Bone Soldier\n2 The Crawling Dead\nCrowded [GRAY_RANGE_ARROW:2] [YELLOW_HELMETS:2]\nCrit 1 [RED_DAMAGE_BOLT:9] Acc 11 [RED_DAMAGE_BOLT:6]\n[GRAY_SELF_ARROW] Self [BLUE_LEFT_DOUBLE_CHEVRON] Push 1\n[GRAY_TARGET_ARROW] [SKULL_RED_DOWN_ARROW] Bone Soldier\n3 Six Feet Under\nCrowded [GRAY_RANGE_ARROW:2] [YELLOW_HELMETS:4]\nAcc 11\n[GRAY_SELF_ARROW] Self [BLUE_LEFT_DOUBLE_CHEVRON] Push 1\n[GRAY_TARGET_ARROW] [SKULL_RED_DOWN_ARROW] Bone Soldier\n[BLACK_STRESS_SQUARE]+2\n[STANCE_AGGRESSIVE:DIE] [STANCE_DEFENSIVE:DIE] [STANCE_RANGED:DIE] [STANCE_SUPPORT:DIE]\n[SUPPORT_SKILL_TABLE] 1:1-3; 2:4-6; 3:7-10",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/46038-a54cb7-front.png",
+            "sha256": "dabb5479c32fcdc24a4a0b5963045d3331ed490aa4c8c93d456d4e805644b990"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 20,
+            "region": "Target Effects"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 24,
+            "region": "apply one roll result separately"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 38,
+            "region": "summons one of them by using a Skill"
+          }
+        ]
+      },
+      "eligibleBoneUnits": {
+        "status": "BOUND",
+        "value": [
+          "Bone Soldier"
+        ],
+        "sourceReferences": [
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/3",
+            "definitionId": "ce-boss-46038-a54cb7",
+            "side": "front",
+            "literal": "Bone Soldier",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/46038-a54cb7-front.png",
+            "sha256": "dabb5479c32fcdc24a4a0b5963045d3331ed490aa4c8c93d456d4e805644b990"
+          }
+        ]
+      },
+      "spawnLocation": {
+        "status": "BOUND",
+        "value": "Target Area",
+        "sourceReferences": [
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 38,
+            "region": "Target Area"
+          },
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/0",
+            "definitionId": "ce-boss-42004-324dd0",
+            "side": "front",
+            "literal": "Target Area",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/42004-324dd0-front.png",
+            "sha256": "a6bdfbb7c71419d77b46aeb50f1cbc437d1916f51dec02c328056289aef8b5f8"
+          }
+        ]
+      },
+      "stanceRequirement": {
+        "status": "BOUND",
+        "value": "First empty Monster Stance slot",
+        "sourceReferences": [
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 38,
+            "region": "first empty Stance Slot"
+          }
+        ]
+      },
+      "fullStanceBehavior": {
+        "status": "BOUND",
+        "value": "SUPPRESS_SUMMON: no effect, no replacement and no Initiative insertion",
+        "sourceReferences": [
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/0",
+            "definitionId": "ce-boss-42004-324dd0",
+            "side": "front",
+            "literal": "If all Stances are occupied, the Summoning does not take effect.",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/42004-324dd0-front.png",
+            "sha256": "a6bdfbb7c71419d77b46aeb50f1cbc437d1916f51dec02c328056289aef8b5f8"
+          }
+        ]
+      },
+      "fullRoomBehavior": {
+        "status": "BOUND",
+        "value": "If Target Area full, move a Hero to nearest available Area; if full of Monsters, players choose a Monster to move to nearest available Area",
+        "sourceReferences": [
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 31,
+            "region": "Monster Summoning"
+          }
+        ]
+      },
+      "roomCapacityFallback": {
+        "status": "SOURCE_UNRESOLVED",
+        "value": null,
+        "category": "ROOM_CAPACITY_INTERACTION_UNRESOLVED",
+        "reason": "p31 names nearest available Area but does not settle equal nearest Areas or no available Area anywhere. No automatic eviction or overflow invented.",
+        "sourceReferences": [
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 31,
+            "region": "nearest available Area"
+          }
+        ]
+      },
+      "replacementInteraction": {
+        "status": "BOUND",
+        "value": "Area displacement is not Stance replacement. p17 large-Monster draw exception is a different initial spawn case",
+        "sourceReferences": [
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 17,
+            "region": "Large Monsters during drawing"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 31,
+            "region": "Summoning"
+          },
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/0",
+            "definitionId": "ce-boss-42004-324dd0",
+            "side": "front",
+            "literal": "all Stances occupied",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/42004-324dd0-front.png",
+            "sha256": "a6bdfbb7c71419d77b46aeb50f1cbc437d1916f51dec02c328056289aef8b5f8"
+          }
+        ]
+      },
+      "duplicateInteraction": {
+        "status": "BOUND",
+        "value": "Track duplicates with printed colour Monster identifiers",
+        "sourceReferences": [
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 17,
+            "region": "Duplicate Monster tokens"
+          }
+        ]
+      },
+      "copyPolicy": {
+        "status": "SOURCE_UNRESOLVED",
+        "value": null,
+        "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+        "reason": "Inventory records candidate copies, not an instruction to clone exhausted components or a rule for summon supply exhaustion.",
+        "sourceReferences": [
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 38,
+            "region": "cards and miniatures on hand"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 17,
+            "region": "Use coloured identifiers for duplicate monsters"
+          }
+        ]
+      },
+      "existingMonsterHandling": {
+        "status": "BOUND",
+        "value": "Retain existing Stance cards; only displace miniature for Area space where p31 requires",
+        "sourceReferences": [
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 31,
+            "region": "Summoning"
+          }
+        ]
+      },
+      "initiative": {
+        "status": "BOUND",
+        "value": "Shuffle one new Monster Initiative immediately; summoned Monster may act in current round",
+        "sourceReferences": [
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 31,
+            "region": "shuffle Initiative / current round"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 38,
+            "region": "shuffle one Initiative"
+          }
+        ]
+      },
+      "cleanup": {
+        "status": "BOUND",
+        "value": "Remove every other Monster at Boss defeat",
+        "sourceReferences": [
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 38,
+            "region": "cleanup"
+          }
+        ]
+      }
+    },
+    {
+      "level": 3,
+      "type": "Bone Spearman",
+      "printedMonsterLevel": "II",
+      "trigger": {
+        "status": "BOUND",
+        "value": "Successful printed summon Target effect after Self Push and damage",
+        "sourceReferences": [
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/1",
+            "definitionId": "ce-boss-46039-6c498c",
+            "side": "front",
+            "literal": "Bone Spearman",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/46039-6c498c-front.png",
+            "sha256": "22e464f3afc432db01f573c550c3c0be1dd0131ba5b358a95c204782cf84cb14"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 20,
+            "region": "Target Effects"
+          }
+        ]
+      },
+      "count": {
+        "status": "SOURCE_UNRESOLVED",
+        "value": null,
+        "category": "SUMMON_COUNT_UNRESOLVED",
+        "reason": "The summon glyph is printed on multi-Hero Target effects. Acquired texts do not explicitly settle one summon per Skill versus per successful Hero target when hits differ; do not assume one spawn.",
+        "sourceReferences": [
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/1",
+            "definitionId": "ce-boss-46039-6c498c",
+            "side": "front",
+            "literal": "Necromancer\n[LEVEL:III]\nEldritch - Unholy - Front\n[GRAY_RUINS_ARCH_BANNER]\n[YELLOW_SPEED_FOOTPRINT:3]\n[BLUE_DODGE_SQUARES:3]\n[ORANGE_HEART:144]\nResistances: [YELLOW_ORANGE_DOWN_DOUBLE_CHEVRON] [BLUE_LEFT_DOUBLE_CHEVRON]\nImmunities: [THREE_YELLOW_DIAMONDS]\n1 The Flesh is Willing\nCrowded [GRAY_RANGE_ARROW:1] [YELLOW_HELMETS:2]\nCrit 1 [RED_DAMAGE_BOLT:16] Acc 12 [RED_DAMAGE_BOLT:10]\n[GRAY_SELF_ARROW] Self [BLUE_LEFT_DOUBLE_CHEVRON] Push 1\n[GRAY_TARGET_ARROW] [SKULL_RED_DOWN_ARROW] Bone Spearman\n2 The Crawling Dead\nCrowded [GRAY_RANGE_ARROW:2] [YELLOW_HELMETS:2]\nCrit 1 [RED_DAMAGE_BOLT:11] Acc 12 [RED_DAMAGE_BOLT:8]\n[GRAY_SELF_ARROW] Self [BLUE_LEFT_DOUBLE_CHEVRON] Push 1\n[GRAY_TARGET_ARROW] [SKULL_RED_DOWN_ARROW] Bone Spearman\n3 Six Feet Under\nCrowded [GRAY_RANGE_ARROW:2] [YELLOW_HELMETS:4]\nAcc 12\n[GRAY_SELF_ARROW] Self [BLUE_LEFT_DOUBLE_CHEVRON] Push 1\n[GRAY_TARGET_ARROW] [SKULL_RED_DOWN_ARROW] Bone Spearman\n[BLACK_STRESS_SQUARE]+2\n[STANCE_AGGRESSIVE:DIE] [STANCE_DEFENSIVE:DIE] [STANCE_RANGED:DIE] [STANCE_SUPPORT:DIE]\n[SUPPORT_SKILL_TABLE] 1:1-3; 2:4-6; 3:7-10",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/46039-6c498c-front.png",
+            "sha256": "22e464f3afc432db01f573c550c3c0be1dd0131ba5b358a95c204782cf84cb14"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 20,
+            "region": "Target Effects"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 24,
+            "region": "apply one roll result separately"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 38,
+            "region": "summons one of them by using a Skill"
+          }
+        ]
+      },
+      "eligibleBoneUnits": {
+        "status": "BOUND",
+        "value": [
+          "Bone Spearman"
+        ],
+        "sourceReferences": [
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/1",
+            "definitionId": "ce-boss-46039-6c498c",
+            "side": "front",
+            "literal": "Bone Spearman",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/46039-6c498c-front.png",
+            "sha256": "22e464f3afc432db01f573c550c3c0be1dd0131ba5b358a95c204782cf84cb14"
+          }
+        ]
+      },
+      "spawnLocation": {
+        "status": "BOUND",
+        "value": "Target Area",
+        "sourceReferences": [
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 38,
+            "region": "Target Area"
+          },
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/2",
+            "definitionId": "ce-boss-42005-b1efcd",
+            "side": "front",
+            "literal": "Target Area",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/42005-b1efcd-front.png",
+            "sha256": "59ac8a9efd2bf7c26f6ed0f0decd4ba769637a97bf7ac59b4159db484b586f4d"
+          }
+        ]
+      },
+      "stanceRequirement": {
+        "status": "BOUND",
+        "value": "First empty Monster Stance slot",
+        "sourceReferences": [
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 38,
+            "region": "first empty Stance Slot"
+          }
+        ]
+      },
+      "fullStanceBehavior": {
+        "status": "BOUND",
+        "value": "SUPPRESS_SUMMON: no effect, no replacement and no Initiative insertion",
+        "sourceReferences": [
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/2",
+            "definitionId": "ce-boss-42005-b1efcd",
+            "side": "front",
+            "literal": "If all Stances are occupied, the Summoning does not take effect.",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/42005-b1efcd-front.png",
+            "sha256": "59ac8a9efd2bf7c26f6ed0f0decd4ba769637a97bf7ac59b4159db484b586f4d"
+          }
+        ]
+      },
+      "fullRoomBehavior": {
+        "status": "BOUND",
+        "value": "If Target Area full, move a Hero to nearest available Area; if full of Monsters, players choose a Monster to move to nearest available Area",
+        "sourceReferences": [
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 31,
+            "region": "Monster Summoning"
+          }
+        ]
+      },
+      "roomCapacityFallback": {
+        "status": "SOURCE_UNRESOLVED",
+        "value": null,
+        "category": "ROOM_CAPACITY_INTERACTION_UNRESOLVED",
+        "reason": "p31 names nearest available Area but does not settle equal nearest Areas or no available Area anywhere. No automatic eviction or overflow invented.",
+        "sourceReferences": [
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 31,
+            "region": "nearest available Area"
+          }
+        ]
+      },
+      "replacementInteraction": {
+        "status": "BOUND",
+        "value": "Area displacement is not Stance replacement. p17 large-Monster draw exception is a different initial spawn case",
+        "sourceReferences": [
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 17,
+            "region": "Large Monsters during drawing"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 31,
+            "region": "Summoning"
+          },
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/2",
+            "definitionId": "ce-boss-42005-b1efcd",
+            "side": "front",
+            "literal": "all Stances occupied",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/42005-b1efcd-front.png",
+            "sha256": "59ac8a9efd2bf7c26f6ed0f0decd4ba769637a97bf7ac59b4159db484b586f4d"
+          }
+        ]
+      },
+      "duplicateInteraction": {
+        "status": "BOUND",
+        "value": "Track duplicates with printed colour Monster identifiers",
+        "sourceReferences": [
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 17,
+            "region": "Duplicate Monster tokens"
+          }
+        ]
+      },
+      "copyPolicy": {
+        "status": "SOURCE_UNRESOLVED",
+        "value": null,
+        "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+        "reason": "Inventory records candidate copies, not an instruction to clone exhausted components or a rule for summon supply exhaustion.",
+        "sourceReferences": [
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 38,
+            "region": "cards and miniatures on hand"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 17,
+            "region": "Use coloured identifiers for duplicate monsters"
+          }
+        ]
+      },
+      "existingMonsterHandling": {
+        "status": "BOUND",
+        "value": "Retain existing Stance cards; only displace miniature for Area space where p31 requires",
+        "sourceReferences": [
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 31,
+            "region": "Summoning"
+          }
+        ]
+      },
+      "initiative": {
+        "status": "BOUND",
+        "value": "Shuffle one new Monster Initiative immediately; summoned Monster may act in current round",
+        "sourceReferences": [
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 31,
+            "region": "shuffle Initiative / current round"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 38,
+            "region": "shuffle one Initiative"
+          }
+        ]
+      },
+      "cleanup": {
+        "status": "BOUND",
+        "value": "Remove every other Monster at Boss defeat",
+        "sourceReferences": [
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 38,
+            "region": "cleanup"
+          }
+        ]
+      }
+    }
+  ],
+  "sourcePrecedence": "Printed full-Stance suppression and p38 Target Area govern; p31 covers Room capacity only; p17 does not authorize full-Stance replacement."
+}

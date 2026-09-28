@@ -1,0 +1,384 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C25",
+  "baselineHead": "179bc367299952d693e9adb81ddd311b42a475b0",
+  "family": "Necromancer",
+  "runtimeImplemented": false,
+  "inputSha256": {
+    "docs/data/complete-edition/c1c24-boss-printed-definitions.json": "dfc9fb3369aa991b6b1d1e9acb3bb3127e7ef91ecaa655126684dbb71eec5483",
+    "docs/data/complete-edition/c1c24-boss-subtype-classification.json": "e011f68a4ad7ddb8a44be3f73655c2573b0f0318bf9ef8611cc94a7e9bdba930",
+    "docs/data/complete-edition/c1c24-boss-family-classification.json": "ccf674596d7d5b52265822406550304dd783e67aebff4cf7554b2678acfba648",
+    "docs/data/complete-edition/c1c24-boss-source-manifest.json": "8bb7158f5720ffe3d2a3cb0068961d0a8454085acf3f223722864b6556e16953",
+    "docs/data/complete-edition/c1c24-boss-family-completeness-matrix.json": "883348365fddf909d8fdab193497f0ff70f50988ff21fd72c5e40a814d056d42",
+    "docs/data/complete-edition/complete-edition-raw-inventory.json": "f7bd06a7a726df301cefe26e10586c0fe3a870ceb92903d5190077cfaae66245",
+    "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+    "docs/data/complete-edition/c1c25-external-source-manifest.json": "1ddda982111ab106ab1fbb2e205f0710fc434648e47da0c20072a97653141287",
+    "docs/data/complete-edition/c1c25-source-search-evidence.json": "0900846e3ff6cd3d4fe8794026aa5e95ebf8f64d12efa3eb262987fe283f91cc"
+  },
+  "dependencies": [
+    {
+      "dependencyId": "BONE_SUMMON_CARDS",
+      "status": "PARTIAL",
+      "identityBound": true,
+      "contract": "c1c25-necromancer-bone-source-binding.json",
+      "sourceGates": [
+        {
+          "status": "SOURCE_UNRESOLVED",
+          "value": null,
+          "category": "SUMMON_COPY_POLICY_UNRESOLVED",
+          "reason": "Inventory records candidate copies, not an instruction to clone exhausted components or a rule for summon supply exhaustion.",
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "cards and miniatures on hand"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 17,
+              "region": "Use coloured identifiers for duplicate monsters"
+            }
+          ]
+        },
+        {
+          "status": "SOURCE_UNRESOLVED",
+          "value": null,
+          "category": "SOURCE_PRECEDENCE_UNRESOLVED",
+          "reason": "Bone Rabble printed on Boss I and monster cards; Bone Rubble on core p38. No acquired superseding erratum establishes equivalence or precedence.",
+          "sourceReferences": [
+            {
+              "kind": "PRINTED_COMPONENT",
+              "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/5",
+              "definitionId": "ce-boss-46037-85d8bf",
+              "side": "front",
+              "literal": "Bone Rabble",
+              "path": "docs/data/complete-edition/source-assets/c1c24/crops/46037-85d8bf-front.png",
+              "sha256": "560c93fa1feb3add813afe4791d7e6a6cc88c4eeab112977007f6938afcb4f08"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 38,
+              "region": "Bone Rubble"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "dependencyId": "BONE_CAPTAIN_THREAT",
+      "status": "PARTIAL",
+      "identityBound": true,
+      "sourceGates": [
+        {
+          "status": "SOURCE_UNRESOLVED",
+          "value": null,
+          "category": "BONE_IDENTITY_UNRESOLVED",
+          "reason": "Level II threat names Bone Captain; locked source contains a narrow artwork component (46111) and full Large combat card (46600). These are distinct components, not two spawn copies. Official association/copy instruction is not explicit.",
+          "sourceReferences": [
+            {
+              "kind": "PRINTED_COMPONENT",
+              "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/0",
+              "definitionId": "ce-boss-42004-324dd0",
+              "side": "back",
+              "literal": "[LEVEL:II]\n[GREEN_DUNGEON_ARCH]\nArmy of the Dead\nAt the start of the first Battle in this Dungeon, spawn a Bone Captain as the first Monster.\n[LOWER_HALF_ROTATED_180]\nHaunted Graveyard\nOn the first preparation day, Heroes roll a [D10]. The Hero with the lowest roll is forced to spend the first day visiting the Graveyard for guard duty. They can use the Graveyard's effect as normal.",
+              "path": "docs/data/complete-edition/source-assets/c1c24/crops/42004-324dd0-back.png",
+              "sha256": "e40b1651d9e8dce1198662cd473d59e745321d0295a813deb0f8b0d76d5730d8"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 17,
+              "region": "Large Monsters have cards spanning two slots"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "dependencyId": "ROOM_CARD",
+      "status": "BOUND",
+      "identityBound": true,
+      "contract": "c1c25-necromancer-room-contract.json",
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "Find Necromancer Room Card and corresponding Room Tile"
+        },
+        {
+          "kind": "PRINTED_COMPONENT",
+          "path": "docs/data/complete-edition/source-assets/c1c25/crops/44709-d9ba7f70e600-front.png",
+          "url": "https://steamusercontent-a.akamaihd.net/ugc/14650257961976472599/445EF67B8C222C8A53D77851BDE565AE244DB926/",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/d54607371c694bd0e2585f677c088c55f0e4aabe3e84796169f7ea100d00f058.bin",
+          "sheetSha256": "577b9ac5db685cc37684331231914156e8adebc16fb822d230af52e16e876174",
+          "cell": 9,
+          "grid": {
+            "width": 6,
+            "height": 6
+          },
+          "bounds": {
+            "left": 1590,
+            "top": 730,
+            "width": 530,
+            "height": 730
+          },
+          "sha256": "6a294c79fb118bc0ae03a9ba1c6cd6621ec3aa718bb775a7fa67201062e71011"
+        }
+      ]
+    },
+    {
+      "dependencyId": "ROOM_TILE",
+      "status": "BOUND",
+      "identityBound": true,
+      "contract": "c1c25-necromancer-room-contract.json",
+      "sourceReferences": [
+        {
+          "kind": "PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+          "ttsPath": "/ObjectStates/47/ContainedObjects/8/ContainedObjects/4",
+          "sourceObjectGuid": "51494f",
+          "nickname": "10-11",
+          "side": "ImageSecondaryURL",
+          "path": "docs/data/complete-edition/source-assets/c1c25/tile-10.bin",
+          "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+          "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f",
+          "sha1": "906f191d51e6c274fbd77bf421a2bef00099d57f",
+          "width": 2150,
+          "height": 2150,
+          "receipt": {
+            "url": "https://steamusercontent-a.akamaihd.net/ugc/13081149024712016848/906F191D51E6C274FBD77BF421A2BEF00099D57F/",
+            "acquisitionKind": "ORIGINAL_URL_DOWNLOAD",
+            "acquiredAt": "2026-09-28T06:54:43.158Z",
+            "sha256": "99c5d4e0c8335adc06ae5e065aeade86b99a1e14c5a19a5f4a2acbca894ce55f"
+          }
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "Find Necromancer Room Card and corresponding Room Tile"
+        },
+        {
+          "kind": "PRINTED_COMPONENT",
+          "path": "docs/data/complete-edition/source-assets/c1c25/crops/44709-d9ba7f70e600-front.png",
+          "url": "https://steamusercontent-a.akamaihd.net/ugc/14650257961976472599/445EF67B8C222C8A53D77851BDE565AE244DB926/",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/d54607371c694bd0e2585f677c088c55f0e4aabe3e84796169f7ea100d00f058.bin",
+          "sheetSha256": "577b9ac5db685cc37684331231914156e8adebc16fb822d230af52e16e876174",
+          "cell": 9,
+          "grid": {
+            "width": 6,
+            "height": 6
+          },
+          "bounds": {
+            "left": 1590,
+            "top": 730,
+            "width": 530,
+            "height": 730
+          },
+          "sha256": "6a294c79fb118bc0ae03a9ba1c6cd6621ec3aa718bb775a7fa67201062e71011"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 16,
+          "region": "Deploy to printed Stance locations"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 18,
+          "region": "Occupancy dots"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 25,
+          "region": "High Ground"
+        }
+      ]
+    },
+    {
+      "dependencyId": "GENERIC_TARGETING",
+      "status": "PARTIAL",
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 19,
+          "region": "target count"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 24,
+          "region": "Monster Check Target"
+        }
+      ],
+      "sourceGates": [
+        {
+          "status": "SOURCE_UNRESOLVED",
+          "value": null,
+          "category": "LOWEST_ROLL_HERO_TIE_UNRESOLVED",
+          "reason": "No acquired authoritative rule extends monster-skill Stance targeting ties (p24) to first-preparation-day lowest D10 ties. Random, active Hero, player choice and first-player fallbacks are prohibited.",
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 24,
+              "region": "Monster Check Target tie priority"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 11,
+              "region": "Imminent Threat passives during Hamlet and Dungeon"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 30,
+              "region": "Flip Threat side to Battle abilities; threats cease at that moment"
+            }
+          ]
+        },
+        {
+          "status": "SOURCE_UNRESOLVED",
+          "value": null,
+          "category": "TARGET_TIE_UNRESOLVED",
+          "reason": "p24 gives qualifying-character Stance priority, but no explicit mapping from tied Crowded Areas to a single Area when two different Areas have the same Hero count. Preserve the distinction from Hamlet lowest-roll ties.",
+          "sourceReferences": [
+            {
+              "kind": "PRINTED_COMPONENT",
+              "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/5",
+              "definitionId": "ce-boss-46037-85d8bf",
+              "side": "front",
+              "literal": "Necromancer\n[LEVEL:I]\nEldritch - Unholy - Front\n[GRAY_RUINS_ARCH_BANNER]\n[YELLOW_SPEED_FOOTPRINT:0]\n[BLUE_DODGE_SQUARES:3]\n[ORANGE_HEART:77]\nResistances: [YELLOW_ORANGE_DOWN_DOUBLE_CHEVRON] [BLUE_LEFT_DOUBLE_CHEVRON]\nImmunities: [THREE_YELLOW_DIAMONDS]\n1 The Flesh is Willing\nCrowded [GRAY_RANGE_ARROW:1] [YELLOW_HELMETS:2]\nCrit 1 [RED_DAMAGE_BOLT:9] Acc 10 [RED_DAMAGE_BOLT:6]\n[GRAY_SELF_ARROW] Self [BLUE_LEFT_DOUBLE_CHEVRON] Push 1\n[GRAY_TARGET_ARROW] [SKULL_RED_DOWN_ARROW] Bone Rabble\n2 The Crawling Dead\nCrowded [GRAY_RANGE_ARROW:2] [YELLOW_HELMETS:2]\nCrit 1 [RED_DAMAGE_BOLT:7] Acc 10 [RED_DAMAGE_BOLT:5]\n[GRAY_SELF_ARROW] Self [BLUE_LEFT_DOUBLE_CHEVRON] Push 1\n[GRAY_TARGET_ARROW] [SKULL_RED_DOWN_ARROW] Bone Rabble\n3 Six Feet Under\nCrowded [GRAY_RANGE_ARROW:2] [YELLOW_HELMETS:4]\nAcc 10\n[GRAY_SELF_ARROW] Self [BLUE_LEFT_DOUBLE_CHEVRON] Push 1\n[GRAY_TARGET_ARROW] [SKULL_RED_DOWN_ARROW] Bone Rabble\n[BLACK_STRESS_SQUARE]+2\n[STANCE_AGGRESSIVE:DIE] [STANCE_DEFENSIVE:DIE] [STANCE_RANGED:DIE] [STANCE_SUPPORT:DIE]\n[SUPPORT_SKILL_TABLE] 1:1-3; 2:4-6; 3:7-10",
+              "path": "docs/data/complete-edition/source-assets/c1c24/crops/46037-85d8bf-front.png",
+              "sha256": "560c93fa1feb3add813afe4791d7e6a6cc88c4eeab112977007f6938afcb4f08"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 24,
+              "region": "Crowded targets Area; character tie priority"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "dependencyId": "GENERIC_REPLACEMENT",
+      "status": "BOUND",
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 17,
+          "region": "large Monster draw only"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 31,
+          "region": "Room displacement"
+        }
+      ],
+      "scope": "No general full-Stance replacement entitlement for Necromancer"
+    },
+    {
+      "dependencyId": "STANCE_RULES",
+      "status": "BOUND",
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 21,
+          "region": "Shuffle"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 24,
+          "region": "Casualties"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "first empty slot"
+        }
+      ]
+    },
+    {
+      "dependencyId": "BATTLE_LIFECYCLE",
+      "status": "PARTIAL",
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 25,
+          "region": "Battle End"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 30,
+          "region": "Boss battle override"
+        }
+      ],
+      "sourceGates": [
+        {
+          "status": "SOURCE_UNRESOLVED",
+          "value": null,
+          "category": "CLEANUP_DESTINATION_UNRESOLVED",
+          "reason": "p25 describes Monster cards returning to Monster Deck; p30 does not explicitly bind the Boss Identity/Threat/Battle trio destinations after Act advancement. Do not shuffle Boss cards into ordinary Monster deck by default.",
+          "sourceReferences": [
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 25,
+              "region": "Battle End"
+            },
+            {
+              "kind": "LOCKED_CORE_RULEBOOK",
+              "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+              "page": 30,
+              "region": "advance Campaign"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "dependencyId": "CAMPAIGN_PROGRESSION",
+      "status": "BOUND",
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 30,
+          "region": "advance Campaign Level / next Act"
+        }
+      ]
+    },
+    {
+      "dependencyId": "FACE_THE_THREAT_REWARD_AND_RETURN",
+      "status": "OUT_OF_SCOPE",
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 30,
+          "region": "Boss Quest"
+        }
+      ],
+      "retainedGate": "REST_INSUFFICIENT_RECOVERY_CAPACITY",
+      "readyGain": 0
+    }
+  ],
+  "countedAsCoreCards": false
+}

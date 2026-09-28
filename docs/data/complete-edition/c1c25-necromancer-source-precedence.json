@@ -1,0 +1,161 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C25",
+  "baselineHead": "179bc367299952d693e9adb81ddd311b42a475b0",
+  "family": "Necromancer",
+  "runtimeImplemented": false,
+  "inputSha256": {
+    "docs/data/complete-edition/c1c24-boss-printed-definitions.json": "dfc9fb3369aa991b6b1d1e9acb3bb3127e7ef91ecaa655126684dbb71eec5483",
+    "docs/data/complete-edition/c1c24-boss-subtype-classification.json": "e011f68a4ad7ddb8a44be3f73655c2573b0f0318bf9ef8611cc94a7e9bdba930",
+    "docs/data/complete-edition/c1c24-boss-family-classification.json": "ccf674596d7d5b52265822406550304dd783e67aebff4cf7554b2678acfba648",
+    "docs/data/complete-edition/c1c24-boss-source-manifest.json": "8bb7158f5720ffe3d2a3cb0068961d0a8454085acf3f223722864b6556e16953",
+    "docs/data/complete-edition/c1c24-boss-family-completeness-matrix.json": "883348365fddf909d8fdab193497f0ff70f50988ff21fd72c5e40a814d056d42",
+    "docs/data/complete-edition/complete-edition-raw-inventory.json": "f7bd06a7a726df301cefe26e10586c0fe3a870ceb92903d5190077cfaae66245",
+    "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+    "docs/data/complete-edition/c1c25-external-source-manifest.json": "1ddda982111ab106ab1fbb2e205f0710fc434648e47da0c20072a97653141287",
+    "docs/data/complete-edition/c1c25-source-search-evidence.json": "0900846e3ff6cd3d4fe8794026aa5e95ebf8f64d12efa3eb262987fe283f91cc"
+  },
+  "policyBasis": [
+    "docs/data/complete-edition/c1c24-boss-source-manifest.json",
+    "docs/data/complete-edition/c1c20-core-trinket-terminal-blocker-register.json"
+  ],
+  "policy": "Authority and provenance are distinct. Exact TTS structure binds physical identity; acquired printed components/core tabletop rules bind semantics. Conflicting naming is gated unless explicit authoritative correction is acquired.",
+  "table": [
+    {
+      "kind": "OFFICIAL_ERRATA_FAQ",
+      "authority": "Only authenticated acquired explicit corrections can supersede corresponding printed/core clauses",
+      "acquired": false
+    },
+    {
+      "kind": "PRINTED_COMPONENT",
+      "authority": "Direct functional clause authority; preserve literal",
+      "acquired": true
+    },
+    {
+      "kind": "CORE_RULEBOOK",
+      "authority": "Generic lifecycle/setup/targeting and family special rules",
+      "acquired": true
+    },
+    {
+      "kind": "EXPANSION_RULEBOOK",
+      "authority": "Applicable expansion only; no Necromancer-specific override acquired",
+      "acquired": false
+    },
+    {
+      "kind": "TTS_STRUCTURAL_EVIDENCE",
+      "authority": "Identity/container/cell/copy observations only, no semantic precedence",
+      "acquired": true
+    },
+    {
+      "kind": "NORMALIZED_COMMUNITY_REFERENCE",
+      "authority": "Discovery aid only, never resolves conflicting official source",
+      "acquired": false
+    },
+    {
+      "kind": "MOCK_PROTOTYPE",
+      "authority": "EXCLUDED",
+      "acquired": false
+    },
+    {
+      "kind": "VIDEOGAME",
+      "authority": "EXCLUDED",
+      "acquired": false
+    }
+  ],
+  "rulings": {
+    "threatAbility": {
+      "status": "BOUND",
+      "value": "Explicit physical flip in core p30",
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 30,
+          "region": "Fighting a Boss"
+        }
+      ]
+    },
+    "fullStance": {
+      "status": "BOUND",
+      "value": "Boss printed suppression; core p38 first-empty requires empty slot; p31 relocates miniatures only; p17 replacement scoped to large-Monster initial draws",
+      "sourceReferences": [
+        {
+          "kind": "PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/4",
+          "definitionId": "ce-boss-42003-78ba81",
+          "side": "front",
+          "literal": "all Stances occupied",
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/42003-78ba81-front.png",
+          "sha256": "112f5f4f6ddfe8e6a2571452576adbd1c0c1b4f5f8e3daecf9f6a6c05d6ff77a"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "first empty Stance"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 31,
+          "region": "Room Area displacement"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 17,
+          "region": "large Monster cannot fit"
+        }
+      ]
+    },
+    "boneName": {
+      "status": "SOURCE_UNRESOLVED",
+      "value": null,
+      "category": "SOURCE_PRECEDENCE_UNRESOLVED",
+      "reason": "Bone Rabble printed on Boss I and monster cards; Bone Rubble on core p38. No acquired superseding erratum establishes equivalence or precedence.",
+      "sourceReferences": [
+        {
+          "kind": "PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/5",
+          "definitionId": "ce-boss-46037-85d8bf",
+          "side": "front",
+          "literal": "Bone Rabble",
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46037-85d8bf-front.png",
+          "sha256": "560c93fa1feb3add813afe4791d7e6a6cc88c4eeab112977007f6938afcb4f08"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "Bone Rubble"
+        }
+      ]
+    },
+    "lowestRollTie": {
+      "status": "SOURCE_UNRESOLVED",
+      "value": null,
+      "category": "LOWEST_ROLL_HERO_TIE_UNRESOLVED",
+      "reason": "No acquired authoritative rule extends monster-skill Stance targeting ties (p24) to first-preparation-day lowest D10 ties. Random, active Hero, player choice and first-player fallbacks are prohibited.",
+      "sourceReferences": [
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 24,
+          "region": "Monster Check Target tie priority"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 11,
+          "region": "Imminent Threat passives during Hamlet and Dungeon"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 30,
+          "region": "Flip Threat side to Battle abilities; threats cease at that moment"
+        }
+      ]
+    }
+  }
+}

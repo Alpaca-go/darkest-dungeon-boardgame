@@ -1,0 +1,307 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C25",
+  "baselineHead": "179bc367299952d693e9adb81ddd311b42a475b0",
+  "family": "Necromancer",
+  "runtimeImplemented": false,
+  "inputSha256": {
+    "docs/data/complete-edition/c1c24-boss-printed-definitions.json": "dfc9fb3369aa991b6b1d1e9acb3bb3127e7ef91ecaa655126684dbb71eec5483",
+    "docs/data/complete-edition/c1c24-boss-subtype-classification.json": "e011f68a4ad7ddb8a44be3f73655c2573b0f0318bf9ef8611cc94a7e9bdba930",
+    "docs/data/complete-edition/c1c24-boss-family-classification.json": "ccf674596d7d5b52265822406550304dd783e67aebff4cf7554b2678acfba648",
+    "docs/data/complete-edition/c1c24-boss-source-manifest.json": "8bb7158f5720ffe3d2a3cb0068961d0a8454085acf3f223722864b6556e16953",
+    "docs/data/complete-edition/c1c24-boss-family-completeness-matrix.json": "883348365fddf909d8fdab193497f0ff70f50988ff21fd72c5e40a814d056d42",
+    "docs/data/complete-edition/complete-edition-raw-inventory.json": "f7bd06a7a726df301cefe26e10586c0fe3a870ceb92903d5190077cfaae66245",
+    "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+    "docs/data/complete-edition/c1c25-external-source-manifest.json": "1ddda982111ab106ab1fbb2e205f0710fc434648e47da0c20072a97653141287",
+    "docs/data/complete-edition/c1c25-source-search-evidence.json": "0900846e3ff6cd3d4fe8794026aa5e95ebf8f64d12efa3eb262987fe283f91cc"
+  },
+  "discrepancies": [
+    {
+      "topic": "BONE_RABBLE_VS_BONE_RUBBLE",
+      "printedSource": {
+        "kind": "PRINTED_COMPONENT",
+        "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/5",
+        "definitionId": "ce-boss-46037-85d8bf",
+        "side": "front",
+        "literal": "Bone Rabble",
+        "path": "docs/data/complete-edition/source-assets/c1c24/crops/46037-85d8bf-front.png",
+        "sha256": "560c93fa1feb3add813afe4791d7e6a6cc88c4eeab112977007f6938afcb4f08"
+      },
+      "rulebookSource": {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+        "page": 38,
+        "region": "Bone Rubble"
+      },
+      "independentMonsterEvidence": [
+        {
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/5/ContainedObjects/1/ContainedObjects/1/ContainedObjects/22",
+          "sourceObjectGuid": "356377",
+          "ttsPath": "/ObjectStates/47/ContainedObjects/5/ContainedObjects/1/ContainedObjects/1/ContainedObjects/22",
+          "cardId": 46140,
+          "nickname": "Bone Rabble",
+          "containerHierarchy": [
+            {
+              "guid": "dee8e1",
+              "nickname": "Darkest Dungeon",
+              "objectType": "Custom_Model_Bag",
+              "ttsPath": "/ObjectStates/47"
+            },
+            {
+              "guid": "ce8f78",
+              "nickname": "Monsters Cards",
+              "objectType": "Bag",
+              "ttsPath": "/ObjectStates/47/ContainedObjects/5"
+            },
+            {
+              "guid": "5919c4",
+              "nickname": "Common Monsters",
+              "objectType": "Bag",
+              "ttsPath": "/ObjectStates/47/ContainedObjects/5/ContainedObjects/1"
+            },
+            {
+              "guid": "27c289",
+              "nickname": "",
+              "objectType": "Deck",
+              "ttsPath": "/ObjectStates/47/ContainedObjects/5/ContainedObjects/1/ContainedObjects/1"
+            }
+          ],
+          "front": {
+            "path": "docs/data/complete-edition/source-assets/c1c25/crops/46140-50acd2839a8f-front.png",
+            "url": "https://steamusercontent-a.akamaihd.net/ugc/17004907428100041250/8CEFF8A92B429ECB2B9608AABD6426A8495BB190/",
+            "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/c85410d128a2b4c5f745c06cece595aa2ded997e004cca9ea09fd9af2182043b.bin",
+            "sheetSha256": "e0e08c32417b0e24fc4bab53ae5f2fb945f1fb90975db3646e0cb1f19ed6f7df",
+            "cell": 40,
+            "grid": {
+              "width": 10,
+              "height": 6
+            },
+            "bounds": {
+              "left": 0,
+              "top": 3880,
+              "width": 570,
+              "height": 970
+            },
+            "sha256": "03d61f59c6143691e65ab77ca56dac2fda92d6948ed31e8c4888adba0daab4c2"
+          },
+          "back": {
+            "path": "docs/data/complete-edition/source-assets/c1c25/crops/46140-50acd2839a8f-back.png",
+            "url": "https://steamusercontent-a.akamaihd.net/ugc/12903429792422199573/D4310AC85F1EDC93E17B486E1E10D6C856B2ED94/",
+            "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/84fc0ee4678ad382b0ea5d2f7f80aced896f63936ca4a7e0d79fea460d01e7c9.bin",
+            "sheetSha256": "9be1bf2fc0178717da93f587d8200b02aacb4c932859c3217af97dabd91bba0b",
+            "cell": 40,
+            "grid": {
+              "width": 10,
+              "height": 6
+            },
+            "bounds": {
+              "left": 0,
+              "top": 3880,
+              "width": 570,
+              "height": 970
+            },
+            "sha256": "aa7fb0bbfb98eea209fc557c4a6b6370da0df80fc589079339041574f969086a"
+          }
+        },
+        {
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/5/ContainedObjects/1/ContainedObjects/1/ContainedObjects/23",
+          "sourceObjectGuid": "e398e9",
+          "ttsPath": "/ObjectStates/47/ContainedObjects/5/ContainedObjects/1/ContainedObjects/1/ContainedObjects/23",
+          "cardId": 46139,
+          "nickname": "Bone Rabble",
+          "containerHierarchy": [
+            {
+              "guid": "dee8e1",
+              "nickname": "Darkest Dungeon",
+              "objectType": "Custom_Model_Bag",
+              "ttsPath": "/ObjectStates/47"
+            },
+            {
+              "guid": "ce8f78",
+              "nickname": "Monsters Cards",
+              "objectType": "Bag",
+              "ttsPath": "/ObjectStates/47/ContainedObjects/5"
+            },
+            {
+              "guid": "5919c4",
+              "nickname": "Common Monsters",
+              "objectType": "Bag",
+              "ttsPath": "/ObjectStates/47/ContainedObjects/5/ContainedObjects/1"
+            },
+            {
+              "guid": "27c289",
+              "nickname": "",
+              "objectType": "Deck",
+              "ttsPath": "/ObjectStates/47/ContainedObjects/5/ContainedObjects/1/ContainedObjects/1"
+            }
+          ],
+          "front": {
+            "path": "docs/data/complete-edition/source-assets/c1c25/crops/46139-3768e5382547-front.png",
+            "url": "https://steamusercontent-a.akamaihd.net/ugc/17004907428100041250/8CEFF8A92B429ECB2B9608AABD6426A8495BB190/",
+            "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/c85410d128a2b4c5f745c06cece595aa2ded997e004cca9ea09fd9af2182043b.bin",
+            "sheetSha256": "e0e08c32417b0e24fc4bab53ae5f2fb945f1fb90975db3646e0cb1f19ed6f7df",
+            "cell": 39,
+            "grid": {
+              "width": 10,
+              "height": 6
+            },
+            "bounds": {
+              "left": 5130,
+              "top": 2910,
+              "width": 570,
+              "height": 970
+            },
+            "sha256": "f9c3e37aaa12f031c5f4116043dbe7aa25cceacb5f37bfb6fbed2c53331efc65"
+          },
+          "back": {
+            "path": "docs/data/complete-edition/source-assets/c1c25/crops/46139-3768e5382547-back.png",
+            "url": "https://steamusercontent-a.akamaihd.net/ugc/12903429792422199573/D4310AC85F1EDC93E17B486E1E10D6C856B2ED94/",
+            "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/84fc0ee4678ad382b0ea5d2f7f80aced896f63936ca4a7e0d79fea460d01e7c9.bin",
+            "sheetSha256": "9be1bf2fc0178717da93f587d8200b02aacb4c932859c3217af97dabd91bba0b",
+            "cell": 39,
+            "grid": {
+              "width": 10,
+              "height": 6
+            },
+            "bounds": {
+              "left": 5130,
+              "top": 2910,
+              "width": 570,
+              "height": 970
+            },
+            "sha256": "aa7fb0bbfb98eea209fc557c4a6b6370da0df80fc589079339041574f969086a"
+          }
+        },
+        {
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/5/ContainedObjects/1/ContainedObjects/1/ContainedObjects/24",
+          "sourceObjectGuid": "59eb87",
+          "ttsPath": "/ObjectStates/47/ContainedObjects/5/ContainedObjects/1/ContainedObjects/1/ContainedObjects/24",
+          "cardId": 46141,
+          "nickname": "Bone Rabble",
+          "containerHierarchy": [
+            {
+              "guid": "dee8e1",
+              "nickname": "Darkest Dungeon",
+              "objectType": "Custom_Model_Bag",
+              "ttsPath": "/ObjectStates/47"
+            },
+            {
+              "guid": "ce8f78",
+              "nickname": "Monsters Cards",
+              "objectType": "Bag",
+              "ttsPath": "/ObjectStates/47/ContainedObjects/5"
+            },
+            {
+              "guid": "5919c4",
+              "nickname": "Common Monsters",
+              "objectType": "Bag",
+              "ttsPath": "/ObjectStates/47/ContainedObjects/5/ContainedObjects/1"
+            },
+            {
+              "guid": "27c289",
+              "nickname": "",
+              "objectType": "Deck",
+              "ttsPath": "/ObjectStates/47/ContainedObjects/5/ContainedObjects/1/ContainedObjects/1"
+            }
+          ],
+          "front": {
+            "path": "docs/data/complete-edition/source-assets/c1c25/crops/46141-e0daf532c7f2-front.png",
+            "url": "https://steamusercontent-a.akamaihd.net/ugc/17004907428100041250/8CEFF8A92B429ECB2B9608AABD6426A8495BB190/",
+            "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/c85410d128a2b4c5f745c06cece595aa2ded997e004cca9ea09fd9af2182043b.bin",
+            "sheetSha256": "e0e08c32417b0e24fc4bab53ae5f2fb945f1fb90975db3646e0cb1f19ed6f7df",
+            "cell": 41,
+            "grid": {
+              "width": 10,
+              "height": 6
+            },
+            "bounds": {
+              "left": 570,
+              "top": 3880,
+              "width": 570,
+              "height": 970
+            },
+            "sha256": "7d8da8b621c314fcaece1c0db01d879c8504562104fdb41bc5497d4c6982e29a"
+          },
+          "back": {
+            "path": "docs/data/complete-edition/source-assets/c1c25/crops/46141-e0daf532c7f2-back.png",
+            "url": "https://steamusercontent-a.akamaihd.net/ugc/12903429792422199573/D4310AC85F1EDC93E17B486E1E10D6C856B2ED94/",
+            "sheetPath": "docs/data/complete-edition/source-assets/c1c25/sheets/84fc0ee4678ad382b0ea5d2f7f80aced896f63936ca4a7e0d79fea460d01e7c9.bin",
+            "sheetSha256": "9be1bf2fc0178717da93f587d8200b02aacb4c932859c3217af97dabd91bba0b",
+            "cell": 41,
+            "grid": {
+              "width": 10,
+              "height": 6
+            },
+            "bounds": {
+              "left": 570,
+              "top": 3880,
+              "width": 570,
+              "height": 970
+            },
+            "sha256": "aa7fb0bbfb98eea209fc557c4a6b6370da0df80fc589079339041574f969086a"
+          }
+        }
+      ],
+      "status": "UNRESOLVED",
+      "precedence": {
+        "status": "SOURCE_UNRESOLVED",
+        "value": null,
+        "category": "SOURCE_PRECEDENCE_UNRESOLVED",
+        "reason": "Bone Rabble printed on Boss I and monster cards; Bone Rubble on core p38. No acquired superseding erratum establishes equivalence or precedence.",
+        "sourceReferences": [
+          {
+            "kind": "PRINTED_COMPONENT",
+            "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/5",
+            "definitionId": "ce-boss-46037-85d8bf",
+            "side": "front",
+            "literal": "Bone Rabble",
+            "path": "docs/data/complete-edition/source-assets/c1c24/crops/46037-85d8bf-front.png",
+            "sha256": "560c93fa1feb3add813afe4791d7e6a6cc88c4eeab112977007f6938afcb4f08"
+          },
+          {
+            "kind": "LOCKED_CORE_RULEBOOK",
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "page": 38,
+            "region": "Bone Rubble"
+          }
+        ]
+      },
+      "searchEvidence": "docs/data/complete-edition/c1c25-source-search-evidence.json"
+    },
+    {
+      "topic": "FULL_STANCE_SUPPRESSION_VS_GENERIC_REPLACEMENT",
+      "status": "RESOLVED_BY_EXPLICIT_SCOPE",
+      "ruling": "SUPPRESS_SUMMON",
+      "sourceReferences": [
+        {
+          "kind": "PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/4",
+          "definitionId": "ce-boss-42003-78ba81",
+          "side": "front",
+          "literal": "all Stances occupied",
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/42003-78ba81-front.png",
+          "sha256": "112f5f4f6ddfe8e6a2571452576adbd1c0c1b4f5f8e3daecf9f6a6c05d6ff77a"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 17,
+          "region": "initial large-Monster draws"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 31,
+          "region": "Room capacity displacement"
+        },
+        {
+          "kind": "LOCKED_CORE_RULEBOOK",
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "page": 38,
+          "region": "first empty Stance"
+        }
+      ],
+      "remainingConflict": false
+    }
+  ]
+}

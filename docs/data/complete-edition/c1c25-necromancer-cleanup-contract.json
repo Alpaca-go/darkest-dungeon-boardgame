@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C25",
+  "baselineHead": "179bc367299952d693e9adb81ddd311b42a475b0",
+  "family": "Necromancer",
+  "runtimeImplemented": false,
+  "inputSha256": {
+    "docs/data/complete-edition/c1c24-boss-printed-definitions.json": "dfc9fb3369aa991b6b1d1e9acb3bb3127e7ef91ecaa655126684dbb71eec5483",
+    "docs/data/complete-edition/c1c24-boss-subtype-classification.json": "e011f68a4ad7ddb8a44be3f73655c2573b0f0318bf9ef8611cc94a7e9bdba930",
+    "docs/data/complete-edition/c1c24-boss-family-classification.json": "ccf674596d7d5b52265822406550304dd783e67aebff4cf7554b2678acfba648",
+    "docs/data/complete-edition/c1c24-boss-source-manifest.json": "8bb7158f5720ffe3d2a3cb0068961d0a8454085acf3f223722864b6556e16953",
+    "docs/data/complete-edition/c1c24-boss-family-completeness-matrix.json": "883348365fddf909d8fdab193497f0ff70f50988ff21fd72c5e40a814d056d42",
+    "docs/data/complete-edition/complete-edition-raw-inventory.json": "f7bd06a7a726df301cefe26e10586c0fe3a870ceb92903d5190077cfaae66245",
+    "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+    "docs/data/complete-edition/c1c25-external-source-manifest.json": "1ddda982111ab106ab1fbb2e205f0710fc434648e47da0c20072a97653141287",
+    "docs/data/complete-edition/c1c25-source-search-evidence.json": "0900846e3ff6cd3d4fe8794026aa5e95ebf8f64d12efa3eb262987fe283f91cc"
+  },
+  "defeatBoss": {
+    "status": "BOUND",
+    "value": "Wounds reach printed Life; end Boss Battle immediately",
+    "sourceReferences": [
+      {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+        "page": 24,
+        "region": "Monster death"
+      },
+      {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+        "page": 30,
+        "region": "Boss defeat"
+      }
+    ]
+  },
+  "removeSummons": {
+    "status": "BOUND",
+    "value": "Remove all other Monsters from play",
+    "sourceReferences": [
+      {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+        "page": 38,
+        "region": "Necromancer defeated"
+      }
+    ]
+  },
+  "removeThreat": {
+    "status": "BOUND",
+    "value": "Threat already ceased on physical flip; no turn/round-end Threat draw or expiry engine",
+    "sourceReferences": [
+      {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+        "page": 30,
+        "region": "Threats cease"
+      }
+    ]
+  },
+  "resetAbilityState": {
+    "status": "PRINTED_ABSENT",
+    "value": null,
+    "reason": "No separate persistent Ability counter/state on card",
+    "sourceReferences": [
+      {
+        "kind": "PRINTED_COMPONENT",
+        "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/4",
+        "definitionId": "ce-boss-42003-78ba81",
+        "side": "front",
+        "literal": "Necromancer\n[LEVEL:I]\nACTIONS / Round: 1\nSummoning [SKULL_RED_DOWN_ARROW]: When a Monster is [SKULL_RED_DOWN_ARROW], the Monster miniature is placed on the Target Area, and a new Monster Initiative Card is shuffled into the Initiative Deck. If all Stances are occupied, the Summoning does not take effect.",
+        "path": "docs/data/complete-edition/source-assets/c1c24/crops/42003-78ba81-front.png",
+        "sha256": "112f5f4f6ddfe8e6a2571452576adbd1c0c1b4f5f8e3daecf9f6a6c05d6ff77a"
+      }
+    ]
+  },
+  "roomCleanup": {
+    "status": "BOUND",
+    "value": "Return Tile to stack, return Hero miniatures; Room Card discarded for Dungeon run; uninteracted features lost",
+    "sourceReferences": [
+      {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+        "page": 25,
+        "region": "Battle End"
+      }
+    ]
+  },
+  "returnCards": {
+    "status": "BOUND",
+    "value": "Generic Monster Cards used in Battle shuffle back to Monster deck, subject to explicit permanent-removal Threat exception before flip",
+    "sourceReferences": [
+      {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+        "page": 25,
+        "region": "Battle End"
+      },
+      {
+        "kind": "PRINTED_COMPONENT",
+        "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/0/ContainedObjects/4",
+        "definitionId": "ce-boss-42003-78ba81",
+        "side": "back",
+        "literal": "remove permanently",
+        "path": "docs/data/complete-edition/source-assets/c1c24/crops/42003-78ba81-back.png",
+        "sha256": "657f31f0d0e7f79dba458a16297a552ce85650f61805c34b75483bf410e793ec"
+      }
+    ]
+  },
+  "bossCardDestination": {
+    "status": "SOURCE_UNRESOLVED",
+    "value": null,
+    "category": "CLEANUP_DESTINATION_UNRESOLVED",
+    "reason": "p25 describes Monster cards returning to Monster Deck; p30 does not explicitly bind the Boss Identity/Threat/Battle trio destinations after Act advancement. Do not shuffle Boss cards into ordinary Monster deck by default.",
+    "sourceReferences": [
+      {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+        "page": 25,
+        "region": "Battle End"
+      },
+      {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+        "page": 30,
+        "region": "advance Campaign"
+      }
+    ]
+  },
+  "discardCards": {
+    "status": "BOUND",
+    "value": "Room Card discarded for rest of Dungeon run",
+    "sourceReferences": [
+      {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+        "page": 25,
+        "region": "Battle End"
+      }
+    ]
+  },
+  "campaignStateUpdate": {
+    "status": "BOUND",
+    "value": "Advance Campaign Level and enter next Act; failure to defeat Boss ends Campaign",
+    "sourceReferences": [
+      {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+        "page": 30,
+        "region": "Fighting a Boss"
+      }
+    ]
+  },
+  "rewardRelation": {
+    "status": "BOUND",
+    "value": "Face the Threat! is external Quest reward authority; no new reward on these nine cards",
+    "sourceReferences": [
+      {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+        "page": 30,
+        "region": "Face the Threat Quest"
+      }
+    ]
+  },
+  "questReturnFlow": {
+    "status": "BOUND",
+    "value": "No Hamlet return until Boss defeated; subsequent campaign flow remains Quest/Act rules",
+    "sourceReferences": [
+      {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+        "page": 30,
+        "region": "Face the Threat"
+      },
+      {
+        "kind": "LOCKED_CORE_RULEBOOK",
+        "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+        "page": 32,
+        "region": "Campaign progression"
+      }
+    ]
+  }
+}

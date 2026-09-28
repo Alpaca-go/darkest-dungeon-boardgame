@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-09-28",
+  "scope": "Necromancer source-semantic clarification discovery; search snippets and secondary discussions are not mechanics authority",
+  "localSources": [
+    {"path": "docs/DD_EN_COREBOX_RULES.pdf", "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae", "review": "Locked extracted pages 11, 12, 16-25, 30, 31, 38; search for targeting, ties, precedence, replacement, stance, summoning and cleanup"},
+    {"path": "docs/data/complete-edition/c1c24-boss-printed-definitions.json", "review": "All 9 Necromancer front/back literals and crop bindings preserved"},
+    {"path": "docs/data/complete-edition/complete-edition-raw-inventory.json", "review": "Independent Bone candidate cards and physical Room Tile paths; TTS nickname is structural corroboration only"},
+    {"path": "docs/reports/complete-edition/c1c20-core-trinket-terminal-closure-report.md", "review": "Existing source policy: located but unacquired designer FAQ does not establish source closure; acquired formal tabletop sources remain distinct from normalized references"}
+  ],
+  "webQueries": [
+    "Darkest Dungeon board game official FAQ Necromancer Bone Rubble lowest roll tie",
+    "Darkest Dungeon board game Mythic designer FAQ rulebook errata",
+    "\"Darkest Dungeon\" \"FAQ\" \"designers\" filepage",
+    "\"DD_FAQ_EN\" Necromancer",
+    "\"Darkest Dungeon\" \"lowest\" \"Graveyard\" tie board game"
+  ],
+  "candidates": [
+    {"url": "https://boardgamegeek.com/boardgame/317321/darkest-dungeon-the-board-game/files", "title": "Darkest Dungeon the Board Game FAQ by the Designers", "status": "LOCATED_ACCESS_UNAVAILABLE", "accessResult": "403 Forbidden from authoritative file-list open; search indexed listing located, FAQ content/binary not acquired", "authorityForMechanics": false, "nextStep": "Acquire authenticated designer FAQ bytes and review exact Necromancer/tie/copy clauses"},
+    {"url": "https://es.scribd.com/document/686825056/DD-FAQ-EN", "status": "SECONDARY_MIRROR_NOT_AUTHENTICATED", "authorityForMechanics": false, "reason": "Indexed mirror title is insufficient provenance to adopt FAQ answers; no superseding rule accepted"},
+    {"url": "https://www.reddit.com/r/DarkestDungeon_TBG/comments/10lig38", "status": "COMMUNITY_DISCUSSION_EXCLUDED", "authorityForMechanics": false},
+    {"url": "https://www.reddit.com/r/DarkestDungeon_TBG/comments/z1pika", "status": "COMMUNITY_DISCUSSION_EXCLUDED", "authorityForMechanics": false}
+  ],
+  "unresolvedTopics": ["lowest-roll Hamlet tie", "Bone Rabble / Bone Rubble source precedence", "finite summon copy/exhaustion policy", "multi-Hero summon glyph count", "tied Crowded Areas", "Reanimation casualty / Initiative order", "nearest-space tie / no-space fallback", "Boss trio card destinations after victory", "Bone Captain component association"],
+  "negativeEvidenceLimit": "No clarification acquired in this bounded search. This does not claim no official publication exists or terminal source impossibility.",
+  "sourceDelta": "New exact Bone and Room original images acquired; no authenticated semantic errata/FAQ acquired",
+  "runtimeAsEvidence": false,
+  "videogameAsEvidence": false
+}

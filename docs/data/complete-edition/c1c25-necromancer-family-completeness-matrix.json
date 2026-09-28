@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C25",
+  "baselineHead": "179bc367299952d693e9adb81ddd311b42a475b0",
+  "family": {
+    "physicalCards": 9,
+    "literalComplete": 9,
+    "semanticComplete": 0,
+    "sourceGated": 9,
+    "cardLocalSemanticComplete": 3,
+    "externalDependenciesResolved": 5,
+    "externalDependenciesTotal": 10,
+    "runtimeCandidate": 0,
+    "productionReady": 0,
+    "executionBlockers": 75,
+    "sourceBlockerCategories": [
+      "BONE_IDENTITY_UNRESOLVED",
+      "CLEANUP_DESTINATION_UNRESOLVED",
+      "EFFECT_ORDER_UNRESOLVED",
+      "LOWEST_ROLL_HERO_TIE_UNRESOLVED",
+      "ROOM_CAPACITY_INTERACTION_UNRESOLVED",
+      "SOURCE_PRECEDENCE_UNRESOLVED",
+      "SUMMON_COPY_POLICY_UNRESOLVED",
+      "SUMMON_COUNT_UNRESOLVED",
+      "TARGET_TIE_UNRESOLVED"
+    ],
+    "coreLevelCompositionBound": true,
+    "encounterCompositionFullyBound": false,
+    "threatLifecycleBound": true,
+    "roomIdentityAndLayoutBound": true,
+    "fullStancePrecedenceBound": true
+  },
+  "runtimeImplemented": false,
+  "inputSha256": {
+    "docs/data/complete-edition/c1c24-boss-printed-definitions.json": "dfc9fb3369aa991b6b1d1e9acb3bb3127e7ef91ecaa655126684dbb71eec5483",
+    "docs/data/complete-edition/c1c24-boss-subtype-classification.json": "e011f68a4ad7ddb8a44be3f73655c2573b0f0318bf9ef8611cc94a7e9bdba930",
+    "docs/data/complete-edition/c1c24-boss-family-classification.json": "ccf674596d7d5b52265822406550304dd783e67aebff4cf7554b2678acfba648",
+    "docs/data/complete-edition/c1c24-boss-source-manifest.json": "8bb7158f5720ffe3d2a3cb0068961d0a8454085acf3f223722864b6556e16953",
+    "docs/data/complete-edition/c1c24-boss-family-completeness-matrix.json": "883348365fddf909d8fdab193497f0ff70f50988ff21fd72c5e40a814d056d42",
+    "docs/data/complete-edition/complete-edition-raw-inventory.json": "f7bd06a7a726df301cefe26e10586c0fe3a870ceb92903d5190077cfaae66245",
+    "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+    "docs/data/complete-edition/c1c25-external-source-manifest.json": "1ddda982111ab106ab1fbb2e205f0710fc434648e47da0c20072a97653141287",
+    "docs/data/complete-edition/c1c25-source-search-evidence.json": "0900846e3ff6cd3d4fe8794026aa5e95ebf8f64d12efa3eb262987fe283f91cc"
+  },
+  "levels": [
+    {
+      "level": 1,
+      "coreCards": 3,
+      "literalComplete": 3,
+      "semanticComplete": 0,
+      "sourceGated": 3,
+      "coreCompositionBound": true,
+      "fullySourceBound": false,
+      "productionReady": 0
+    },
+    {
+      "level": 2,
+      "coreCards": 3,
+      "literalComplete": 3,
+      "semanticComplete": 0,
+      "sourceGated": 3,
+      "coreCompositionBound": true,
+      "fullySourceBound": false,
+      "productionReady": 0
+    },
+    {
+      "level": 3,
+      "coreCards": 3,
+      "literalComplete": 3,
+      "semanticComplete": 0,
+      "sourceGated": 3,
+      "coreCompositionBound": true,
+      "fullySourceBound": false,
+      "productionReady": 0
+    }
+  ]
+}

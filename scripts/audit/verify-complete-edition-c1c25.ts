@@ -1,0 +1,20 @@
+import { readFileSync } from 'node:fs';
+import { baselineHead, buildArtifacts, git, root, validateArtifacts, verifyAssets, verifyScope, report, sha256 } from './c1c25-contract';
+git('merge-base','--is-ancestor',baselineHead,'HEAD');
+verifyScope(git('diff','--name-only',baselineHead).split(/\r?\n/).filter(Boolean));
+// These files/directories were already untracked when this task began; preserve user work.
+const preexisting=(p:string)=>p.startsWith('.tmp-')||p.startsWith('.tmp-crops/')||p.startsWith('tmp/')||p==='src/.tmp-geom-check.test.ts';
+verifyScope(git('ls-files','--others','--exclude-standard').split(/\r?\n/).filter(p=>p&&!preexisting(p)));
+const pkg=JSON.parse(git('show',baselineHead+':package.json'));
+pkg.scripts['import:complete-edition-c1c25']='node scripts/audit/acquire-c1c25-sources.mjs';
+pkg.scripts['audit:complete-edition-c1c25']='vite-node scripts/audit/generate-complete-edition-c1c25.ts';
+pkg.scripts['verify:complete-edition-c1c25']='vite-node scripts/audit/verify-complete-edition-c1c25.ts';
+if(JSON.stringify(JSON.parse(readFileSync('package.json','utf8')))!==JSON.stringify(pkg))throw new Error('Only three C1C25 package scripts allowed');
+await verifyAssets();
+const expected=buildArtifacts();
+const stored=Object.fromEntries(Object.keys(expected).map(name=>[name,JSON.parse(readFileSync(root+name,'utf8'))]));
+validateArtifacts(stored);
+for(const [p,hash]of Object.entries(stored['c1c25-necromancer-source-manifest.json'].frozenInputSha256))if(sha256(readFileSync(p))!==hash)throw new Error('Frozen upstream artifact drift: '+p);
+if(readFileSync('docs/reports/complete-edition/c1c25-necromancer-semantic-source-intake-report.md','utf8').replace(/\r\n/g,'\n')!==report(expected))throw new Error('C1C25 report drift');
+const f=stored['c1c25-necromancer-runtime-capability-matrix.json'].family;
+console.log(`C1C25 verified: 9 locked cards, 9 literal, ${f.semanticComplete} semantic, 9 gated, 0 candidates / Ready; ${f.executionBlockers} source leaves; source closure continuation. Original external crops byte-rebuilt; upstream and runtime frozen.`);
