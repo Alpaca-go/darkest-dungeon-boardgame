@@ -1,0 +1,10 @@
+import { readFileSync } from 'node:fs';
+import { root, verifyAssets } from './c1c25-contract';
+import { buildArtifacts, validateArtifacts, verifyBaselineAndReceipts, report } from './c1c27-contract';
+verifyBaselineAndReceipts();
+await verifyAssets();
+const expected = buildArtifacts();
+const stored = Object.fromEntries(Object.keys(expected).map(n => [n, JSON.parse(readFileSync(root + n, 'utf8'))]));
+validateArtifacts(stored);
+if (readFileSync('docs/reports/complete-edition/c1c27-necromancer-source-closure-report.md', 'utf8').replace(/\r\n/g, '\n') !== report(expected)) throw new Error('C1C27 report drift');
+console.log('C1C27 verified: frozen C1C26 content/assets; authenticated receipt hashes; 75 authority-blocked usages / 9 categories / 0 terminal; continuation, no runtime.');

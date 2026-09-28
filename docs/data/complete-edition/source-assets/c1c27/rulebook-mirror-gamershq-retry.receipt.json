@@ -1,0 +1,32 @@
+{
+  "evidenceId": "retrieval-rulebook-mirror-gamershq-retry",
+  "candidateId": "rulebook-mirror-gamershq-retry",
+  "url": "https://gamers-hq.de/media/pdf/1f/c0/6f/DD_EN_COREBOX_RULES.pdf",
+  "timestamp": "2026-09-28T13:46:44.452Z",
+  "httpStatus": 200,
+  "exitCode": 28,
+  "transportError": "curl: (28) Operation timed out after 120002 milliseconds with 1048307 out of 27763159 bytes received",
+  "failureClass": "TRANSPORT_TIMEOUT",
+  "antiBotObserved": false,
+  "redirectChain": [
+    {
+      "statusLine": "HTTP/1.1 200 OK",
+      "location": null,
+      "contentType": "application/pdf"
+    }
+  ],
+  "effectiveUrl": "https://gamers-hq.de/media/pdf/1f/c0/6f/DD_EN_COREBOX_RULES.pdf",
+  "contentType": "application/pdf",
+  "responsePath": "docs/data/complete-edition/source-assets/c1c27/rulebook-mirror-gamershq-retry.response",
+  "responseSha256": "ee69c745d26a2e848f8a9e29dc3568ddea493f0fa77e7af8f307a86f187cbf9f",
+  "responseBytes": 1048307,
+  "headersPath": "docs/data/complete-edition/source-assets/c1c27/rulebook-mirror-gamershq-retry.headers",
+  "headersSha256": "13b860e57728b27fef7aca3de91aa1c246afdbb63921cee9a4523a01a1832091",
+  "candidateIdentity": {
+    "sourceType": "TRANSPORT_MIRROR",
+    "description": "Longer ordinary public retry after partial PDF timeout; equality must use complete bytes"
+  },
+  "retryPath": "public linked URL; compare index and original provenance before promotion",
+  "permanentlyUnavailable": false,
+  "authenticatedRuleFile": false
+}

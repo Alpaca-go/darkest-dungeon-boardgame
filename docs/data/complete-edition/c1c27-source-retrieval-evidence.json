@@ -1,0 +1,682 @@
+{
+  "schemaVersion": 1,
+  "receipts": [
+    {
+      "evidenceId": "retrieval-designer-faq",
+      "candidateId": "designer-faq",
+      "url": "https://boardgamegeek.com/filepage/250715/darkest-dungeon-board-game-faq-by-the-designers",
+      "timestamp": "2026-09-28T13:43:58.495Z",
+      "httpStatus": null,
+      "exitCode": 56,
+      "transportError": "curl: (56) schannel: server closed abruptly (missing close_notify)",
+      "failureClass": "TRANSPORT_ERROR",
+      "antiBotObserved": false,
+      "redirectChain": [],
+      "effectiveUrl": "https://boardgamegeek.com/filepage/250715/darkest-dungeon-board-game-faq-by-the-designers",
+      "contentType": null,
+      "responsePath": null,
+      "responseSha256": null,
+      "responseBytes": 0,
+      "headersPath": "docs/data/complete-edition/source-assets/c1c27/designer-faq.headers",
+      "headersSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidateIdentity": {
+        "sourceType": "DESIGNER_FAQ",
+        "description": "BGG designer listing; uploader apoxwrhthrio1980; PDF identity unknown"
+      },
+      "retryPath": "public BGG filepage and game file index; no download ID guessed",
+      "permanentlyUnavailable": false,
+      "authenticatedRuleFile": false
+    },
+    {
+      "evidenceId": "retrieval-designer-file-list",
+      "candidateId": "designer-file-list",
+      "url": "https://boardgamegeek.com/boardgame/317321/darkest-dungeon-the-board-game/files",
+      "timestamp": "2026-09-28T13:43:58.519Z",
+      "httpStatus": 403,
+      "exitCode": 0,
+      "transportError": null,
+      "failureClass": "ACCESS_DENIED_403",
+      "antiBotObserved": true,
+      "redirectChain": [
+        {
+          "statusLine": "HTTP/1.1 403 Forbidden",
+          "location": null,
+          "contentType": "text/html; charset=UTF-8"
+        }
+      ],
+      "effectiveUrl": "https://boardgamegeek.com/boardgame/317321/darkest-dungeon-the-board-game/files",
+      "contentType": "text/html; charset=UTF-8",
+      "responsePath": "docs/data/complete-edition/source-assets/c1c27/designer-file-list.response",
+      "responseSha256": "f00994d8bde121c161cdaf7dcb76b5453c0babc4bd5118697341d7b93214c2f8",
+      "responseBytes": 5588,
+      "headersPath": "docs/data/complete-edition/source-assets/c1c27/designer-file-list.headers",
+      "headersSha256": "a10f7a013b1c651f3201ac2f613456d8cb9fdee9c1b385df43eb25e75559e2f5",
+      "candidateIdentity": {
+        "sourceType": "DESIGNER_FILE_INDEX",
+        "description": "Known official/designer acquisition path"
+      },
+      "retryPath": "public BGG filepage and game file index; no download ID guessed",
+      "permanentlyUnavailable": false,
+      "authenticatedRuleFile": false
+    },
+    {
+      "evidenceId": "retrieval-designer-faq-retry",
+      "candidateId": "designer-faq-retry",
+      "url": "https://boardgamegeek.com/filepage/250715/darkest-dungeon-board-game-faq-by-the-designers",
+      "timestamp": "2026-09-28T13:46:44.409Z",
+      "httpStatus": 403,
+      "exitCode": 0,
+      "transportError": null,
+      "failureClass": "ACCESS_DENIED_403",
+      "antiBotObserved": true,
+      "redirectChain": [
+        {
+          "statusLine": "HTTP/1.1 403 Forbidden",
+          "location": null,
+          "contentType": "text/html; charset=UTF-8"
+        }
+      ],
+      "effectiveUrl": "https://boardgamegeek.com/filepage/250715/darkest-dungeon-board-game-faq-by-the-designers",
+      "contentType": "text/html; charset=UTF-8",
+      "responsePath": "docs/data/complete-edition/source-assets/c1c27/designer-faq-retry.response",
+      "responseSha256": "776b76f94f9c46a55a25c711a32cbc038ebda7126a6f930b68428faa27616731",
+      "responseBytes": 5618,
+      "headersPath": "docs/data/complete-edition/source-assets/c1c27/designer-faq-retry.headers",
+      "headersSha256": "215ed6ad9911740a3c8328143b9ed419747ee9ff10db80f7e31c0e54106194c2",
+      "candidateIdentity": {
+        "sourceType": "DESIGNER_FAQ",
+        "description": "Normal public retry with longer transfer timeout; no anti-bot bypass"
+      },
+      "retryPath": "public BGG filepage and game file index; no download ID guessed",
+      "permanentlyUnavailable": false,
+      "authenticatedRuleFile": false
+    },
+    {
+      "evidenceId": "retrieval-historical-faq-index",
+      "candidateId": "historical-faq-index",
+      "url": "https://web.archive.org/cdx/search/cdx?url=boardgamegeek.com/filepage/250715/*&output=json&filter=statuscode:200",
+      "timestamp": "2026-09-28T13:46:44.434Z",
+      "httpStatus": null,
+      "exitCode": 28,
+      "transportError": "curl: (28) Failed to connect to web.archive.org:443 after 21269 ms: Could not connect to server",
+      "failureClass": "TRANSPORT_TIMEOUT",
+      "antiBotObserved": false,
+      "redirectChain": [],
+      "effectiveUrl": "https://web.archive.org/cdx/search/cdx?url=boardgamegeek.com/filepage/250715/*&output=json&filter=statuscode:200",
+      "contentType": null,
+      "responsePath": null,
+      "responseSha256": null,
+      "responseBytes": 0,
+      "headersPath": "docs/data/complete-edition/source-assets/c1c27/historical-faq-index.headers",
+      "headersSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidateIdentity": {
+        "sourceType": "ARCHIVE_INDEX",
+        "description": "Public archive index for known designer filepage; captures alone do not prove PDF bytes"
+      },
+      "retryPath": "public linked URL; compare index and original provenance before promotion",
+      "permanentlyUnavailable": false,
+      "authenticatedRuleFile": false
+    },
+    {
+      "evidenceId": "retrieval-publisher-faq",
+      "candidateId": "publisher-faq",
+      "url": "https://info.mythicgames.net/fr/darkestdungeon/faq/english",
+      "timestamp": "2026-09-28T13:43:58.530Z",
+      "httpStatus": null,
+      "exitCode": 6,
+      "transportError": "curl: (6) Could not resolve host: info.mythicgames.net",
+      "failureClass": "DNS_FAILURE",
+      "antiBotObserved": false,
+      "redirectChain": [],
+      "effectiveUrl": "https://info.mythicgames.net/fr/darkestdungeon/faq/english",
+      "contentType": null,
+      "responsePath": null,
+      "responseSha256": null,
+      "responseBytes": 0,
+      "headersPath": "docs/data/complete-edition/source-assets/c1c27/publisher-faq.headers",
+      "headersSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidateIdentity": {
+        "sourceType": "PUBLISHER_FAQ",
+        "description": "Inherited historical publisher link; may concern delivery rather than gameplay"
+      },
+      "retryPath": "public linked URL; compare index and original provenance before promotion",
+      "permanentlyUnavailable": false,
+      "authenticatedRuleFile": false
+    },
+    {
+      "evidenceId": "retrieval-publisher-root",
+      "candidateId": "publisher-root",
+      "url": "https://mythicgames.net/",
+      "timestamp": "2026-09-28T13:43:58.539Z",
+      "httpStatus": 200,
+      "exitCode": 0,
+      "transportError": null,
+      "failureClass": "RESPONSE_RECEIVED_NOT_AUTHENTICATED",
+      "antiBotObserved": true,
+      "redirectChain": [
+        {
+          "statusLine": "HTTP/1.1 200 OK",
+          "location": null,
+          "contentType": "text/html"
+        }
+      ],
+      "effectiveUrl": "https://mythicgames.net/",
+      "contentType": "text/html",
+      "responsePath": "docs/data/complete-edition/source-assets/c1c27/publisher-root.response",
+      "responseSha256": "993426b1d964f6a55c77589d2956395bcbd59d49c3c5cd619d318832321815c0",
+      "responseBytes": 306270,
+      "headersPath": "docs/data/complete-edition/source-assets/c1c27/publisher-root.headers",
+      "headersSha256": "e34823197ea8188f0bd1cab8500568df63fbc6666448a8c273d6275d27847f2a",
+      "candidateIdentity": {
+        "sourceType": "PUBLISHER_DOWNLOAD_INDEX",
+        "description": "Publisher corrections/download discovery"
+      },
+      "retryPath": "public linked URL; compare index and original provenance before promotion",
+      "permanentlyUnavailable": false,
+      "authenticatedRuleFile": false
+    },
+    {
+      "evidenceId": "retrieval-kickstarter-updates",
+      "candidateId": "kickstarter-updates",
+      "url": "https://www.kickstarter.com/projects/1162110258/darkest-dungeon-the-board-game/posts",
+      "timestamp": "2026-09-28T13:44:14.690Z",
+      "httpStatus": 403,
+      "exitCode": 0,
+      "transportError": null,
+      "failureClass": "ACCESS_DENIED_403",
+      "antiBotObserved": true,
+      "redirectChain": [
+        {
+          "statusLine": "HTTP/1.1 403 Forbidden",
+          "location": null,
+          "contentType": "text/html; charset=UTF-8"
+        }
+      ],
+      "effectiveUrl": "https://www.kickstarter.com/projects/1162110258/darkest-dungeon-the-board-game/posts",
+      "contentType": "text/html; charset=UTF-8",
+      "responsePath": "docs/data/complete-edition/source-assets/c1c27/kickstarter-updates.response",
+      "responseSha256": "b4821bbf6b91af3ed789db3ad3a6e6ba6b8a7b436bae1cf0b971a3b558b1797c",
+      "responseBytes": 5620,
+      "headersPath": "docs/data/complete-edition/source-assets/c1c27/kickstarter-updates.headers",
+      "headersSha256": "84c292ec1a9a5ca12fd0498ab28a8ed29d5f5286bb43a991f9b14a82bdaba57d",
+      "candidateIdentity": {
+        "sourceType": "OFFICIAL_CAMPAIGN_INDEX",
+        "description": "Official campaign updates; backer restrictions must be retained"
+      },
+      "retryPath": "public linked URL; compare index and original provenance before promotion",
+      "permanentlyUnavailable": false,
+      "authenticatedRuleFile": false
+    },
+    {
+      "evidenceId": "retrieval-redhook-distribution",
+      "candidateId": "redhook-distribution",
+      "url": "https://www.darkestdungeon.com/news/regarding-mythic-games-and-the-darkest-dungeon-board-game/",
+      "timestamp": "2026-09-28T13:44:14.701Z",
+      "httpStatus": 404,
+      "exitCode": 0,
+      "transportError": null,
+      "failureClass": "MISSING_404",
+      "antiBotObserved": true,
+      "redirectChain": [
+        {
+          "statusLine": "HTTP/1.1 404 Not Found",
+          "location": null,
+          "contentType": "text/html; charset=utf-8"
+        }
+      ],
+      "effectiveUrl": "https://www.darkestdungeon.com/news/regarding-mythic-games-and-the-darkest-dungeon-board-game/",
+      "contentType": "text/html; charset=utf-8",
+      "responsePath": "docs/data/complete-edition/source-assets/c1c27/redhook-distribution.response",
+      "responseSha256": "41560e3888ac8bc7fde1c95026240701bbc80593687c0b8fb3f878904b3ed3c8",
+      "responseBytes": 3495,
+      "headersPath": "docs/data/complete-edition/source-assets/c1c27/redhook-distribution.headers",
+      "headersSha256": "159c38e860843e32e290ce27de22b7b2597b47ceb3a3b2f72779ff50e8fb51fc",
+      "candidateIdentity": {
+        "sourceType": "OFFICIAL_DISTRIBUTION_NOTICE",
+        "description": "Inherited official URL, also linked by Wargamer"
+      },
+      "retryPath": "public linked URL; compare index and original provenance before promotion",
+      "permanentlyUnavailable": false,
+      "authenticatedRuleFile": false
+    },
+    {
+      "evidenceId": "retrieval-redhook-search",
+      "candidateId": "redhook-search",
+      "url": "https://www.darkestdungeon.com/?s=Regarding+Mythic",
+      "timestamp": "2026-09-28T13:44:14.713Z",
+      "httpStatus": 200,
+      "exitCode": 0,
+      "transportError": null,
+      "failureClass": "RESPONSE_RECEIVED_NOT_AUTHENTICATED",
+      "antiBotObserved": true,
+      "redirectChain": [
+        {
+          "statusLine": "HTTP/1.1 200 OK",
+          "location": null,
+          "contentType": "text/html; charset=UTF-8"
+        }
+      ],
+      "effectiveUrl": "https://www.darkestdungeon.com/?s=Regarding+Mythic",
+      "contentType": "text/html; charset=UTF-8",
+      "responsePath": "docs/data/complete-edition/source-assets/c1c27/redhook-search.response",
+      "responseSha256": "6154b83808566e991797f1b14da7d6ded7069ae64a1e2ac237c9f47822d307dd",
+      "responseBytes": 216106,
+      "headersPath": "docs/data/complete-edition/source-assets/c1c27/redhook-search.headers",
+      "headersSha256": "764579c6aae268ae33b2f85a5b2711309d0bf50b00c91bde8c2964fbbed1a092",
+      "candidateIdentity": {
+        "sourceType": "OFFICIAL_SITE_SEARCH",
+        "description": "Public retry for missing historical notice"
+      },
+      "retryPath": "public linked URL; compare index and original provenance before promotion",
+      "permanentlyUnavailable": false,
+      "authenticatedRuleFile": false
+    },
+    {
+      "evidenceId": "retrieval-faq-mirror-en",
+      "candidateId": "faq-mirror-en",
+      "url": "https://www.scribd.com/document/686825056/DD-FAQ-EN",
+      "timestamp": "2026-09-28T13:44:14.722Z",
+      "httpStatus": null,
+      "exitCode": 28,
+      "transportError": "curl: (28) Failed to connect to www.scribd.com:443 after 21270 ms: Could not connect to server",
+      "failureClass": "TRANSPORT_TIMEOUT",
+      "antiBotObserved": false,
+      "redirectChain": [],
+      "effectiveUrl": "https://www.scribd.com/document/686825056/DD-FAQ-EN",
+      "contentType": null,
+      "responsePath": null,
+      "responseSha256": null,
+      "responseBytes": 0,
+      "headersPath": "docs/data/complete-edition/source-assets/c1c27/faq-mirror-en.headers",
+      "headersSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidateIdentity": {
+        "sourceType": "TRANSPORT_MIRROR",
+        "description": "Public two-page preview; uploader LilG is not authenticated designer"
+      },
+      "retryPath": "locale variant of public preview; authenticated original still needed",
+      "permanentlyUnavailable": false,
+      "authenticatedRuleFile": false
+    },
+    {
+      "evidenceId": "retrieval-faq-mirror-es",
+      "candidateId": "faq-mirror-es",
+      "url": "https://es.scribd.com/document/686825056/DD-FAQ-EN",
+      "timestamp": "2026-09-28T13:44:36.023Z",
+      "httpStatus": null,
+      "exitCode": 28,
+      "transportError": "curl: (28) Failed to connect to es.scribd.com:443 after 21352 ms: Could not connect to server",
+      "failureClass": "TRANSPORT_TIMEOUT",
+      "antiBotObserved": false,
+      "redirectChain": [],
+      "effectiveUrl": "https://es.scribd.com/document/686825056/DD-FAQ-EN",
+      "contentType": null,
+      "responsePath": null,
+      "responseSha256": null,
+      "responseBytes": 0,
+      "headersPath": "docs/data/complete-edition/source-assets/c1c27/faq-mirror-es.headers",
+      "headersSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidateIdentity": {
+        "sourceType": "TRANSPORT_MIRROR",
+        "description": "Inherited locale transport retry; same document ID"
+      },
+      "retryPath": "locale variant of public preview; authenticated original still needed",
+      "permanentlyUnavailable": false,
+      "authenticatedRuleFile": false
+    },
+    {
+      "evidenceId": "retrieval-production-warrens",
+      "candidateId": "production-warrens",
+      "url": "https://boardgamegeek.com/filepage/315734/darkest-dungeon-the-board-game-the-warrens-printin",
+      "timestamp": "2026-09-28T13:44:36.033Z",
+      "httpStatus": 403,
+      "exitCode": 0,
+      "transportError": null,
+      "failureClass": "ACCESS_DENIED_403",
+      "antiBotObserved": true,
+      "redirectChain": [
+        {
+          "statusLine": "HTTP/1.1 403 Forbidden",
+          "location": null,
+          "contentType": "text/html; charset=UTF-8"
+        }
+      ],
+      "effectiveUrl": "https://boardgamegeek.com/filepage/315734/darkest-dungeon-the-board-game-the-warrens-printin",
+      "contentType": "text/html; charset=UTF-8",
+      "responsePath": "docs/data/complete-edition/source-assets/c1c27/production-warrens.response",
+      "responseSha256": "732be0b4873465a7d4caf86381389ffe41562ada15bd465cd046bc1c4e95e0ee",
+      "responseBytes": 5648,
+      "headersPath": "docs/data/complete-edition/source-assets/c1c27/production-warrens.headers",
+      "headersSha256": "b4bbc7b997c28a3bfa7d4895ea2d4d76457806b52219bb2ec3420716b5b608f0",
+      "candidateIdentity": {
+        "sourceType": "LATER_PRODUCTION_LEAD",
+        "description": "yoyoboy170; DD_EN_WARRENS_pt1/pt2; Jan 26 / Feb 1 2026; community-hosted claim only"
+      },
+      "retryPath": "public linked URL; compare index and original provenance before promotion",
+      "permanentlyUnavailable": false,
+      "authenticatedRuleFile": false
+    },
+    {
+      "evidenceId": "retrieval-production-com",
+      "candidateId": "production-com",
+      "url": "https://boardgamegeek.com/filepage/315735/darkest-dungeon-the-board-game-the-color-of-madnes",
+      "timestamp": "2026-09-28T13:44:36.042Z",
+      "httpStatus": 403,
+      "exitCode": 0,
+      "transportError": null,
+      "failureClass": "ACCESS_DENIED_403",
+      "antiBotObserved": true,
+      "redirectChain": [
+        {
+          "statusLine": "HTTP/1.1 403 Forbidden",
+          "location": null,
+          "contentType": "text/html; charset=UTF-8"
+        }
+      ],
+      "effectiveUrl": "https://boardgamegeek.com/filepage/315735/darkest-dungeon-the-board-game-the-color-of-madnes",
+      "contentType": "text/html; charset=UTF-8",
+      "responsePath": "docs/data/complete-edition/source-assets/c1c27/production-com.response",
+      "responseSha256": "726302e10a2a5dd874663f00ca56fa59aebeb1716e4ad0c0ccec010a5946554a",
+      "responseBytes": 5648,
+      "headersPath": "docs/data/complete-edition/source-assets/c1c27/production-com.headers",
+      "headersSha256": "029ee96852784cbe62c96cc3395f2d32488aa01b7a825cbb51f3b56f7b06e07a",
+      "candidateIdentity": {
+        "sourceType": "LATER_PRODUCTION_LEAD",
+        "description": "yoyoboy170; DD_EN_COM_pt1/pt2; Jan 26 / Feb 1 2026; community-hosted claim only"
+      },
+      "retryPath": "public linked URL; compare index and original provenance before promotion",
+      "permanentlyUnavailable": false,
+      "authenticatedRuleFile": false
+    },
+    {
+      "evidenceId": "retrieval-production-drive-a",
+      "candidateId": "production-drive-a",
+      "url": "https://drive.google.com/drive/folders/1Pe77e5X3mppFk4Q0qpSsJ-JgLnXyPN2J",
+      "timestamp": "2026-09-28T13:44:36.059Z",
+      "httpStatus": null,
+      "exitCode": 28,
+      "transportError": "curl: (28) Failed to connect to drive.google.com:443 after 21283 ms: Could not connect to server",
+      "failureClass": "TRANSPORT_TIMEOUT",
+      "antiBotObserved": false,
+      "redirectChain": [],
+      "effectiveUrl": "https://drive.google.com/drive/folders/1Pe77e5X3mppFk4Q0qpSsJ-JgLnXyPN2J",
+      "contentType": null,
+      "responsePath": null,
+      "responseSha256": null,
+      "responseBytes": 0,
+      "headersPath": "docs/data/complete-edition/source-assets/c1c27/production-drive-a.headers",
+      "headersSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidateIdentity": {
+        "sourceType": "LATER_PRODUCTION_LEAD",
+        "description": "Public community-linked folder; must authenticate against original backer distribution receipt"
+      },
+      "retryPath": "public linked URL; compare index and original provenance before promotion",
+      "permanentlyUnavailable": false,
+      "authenticatedRuleFile": false
+    },
+    {
+      "evidenceId": "retrieval-production-drive-b",
+      "candidateId": "production-drive-b",
+      "url": "https://drive.google.com/drive/folders/18N6kF1uFIKqiIJFEtkddViRuNgFpKRGh",
+      "timestamp": "2026-09-28T13:44:57.402Z",
+      "httpStatus": null,
+      "exitCode": 28,
+      "transportError": "curl: (28) Failed to connect to drive.google.com:443 after 21257 ms: Could not connect to server",
+      "failureClass": "TRANSPORT_TIMEOUT",
+      "antiBotObserved": false,
+      "redirectChain": [],
+      "effectiveUrl": "https://drive.google.com/drive/folders/18N6kF1uFIKqiIJFEtkddViRuNgFpKRGh",
+      "contentType": null,
+      "responsePath": null,
+      "responseSha256": null,
+      "responseBytes": 0,
+      "headersPath": "docs/data/complete-edition/source-assets/c1c27/production-drive-b.headers",
+      "headersSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidateIdentity": {
+        "sourceType": "LATER_PRODUCTION_LEAD",
+        "description": "Public community-linked folder; no authority inferred from permission to distribute IP"
+      },
+      "retryPath": "public linked URL; compare index and original provenance before promotion",
+      "permanentlyUnavailable": false,
+      "authenticatedRuleFile": false
+    },
+    {
+      "evidenceId": "retrieval-rulebook-mirror-gamershq",
+      "candidateId": "rulebook-mirror-gamershq",
+      "url": "https://gamers-hq.de/media/pdf/1f/c0/6f/DD_EN_COREBOX_RULES.pdf",
+      "timestamp": "2026-09-28T13:44:57.408Z",
+      "httpStatus": 200,
+      "exitCode": 28,
+      "transportError": "curl: (28) Operation timed out after 25000 milliseconds with 343795 out of 27763159 bytes received",
+      "failureClass": "TRANSPORT_TIMEOUT",
+      "antiBotObserved": false,
+      "redirectChain": [
+        {
+          "statusLine": "HTTP/1.1 200 OK",
+          "location": null,
+          "contentType": "application/pdf"
+        }
+      ],
+      "effectiveUrl": "https://gamers-hq.de/media/pdf/1f/c0/6f/DD_EN_COREBOX_RULES.pdf",
+      "contentType": "application/pdf",
+      "responsePath": "docs/data/complete-edition/source-assets/c1c27/rulebook-mirror-gamershq.response",
+      "responseSha256": "6ab4a7cad559c8b3e53fcf63e15985971472273f201cf3e7efbb340c20e49c14",
+      "responseBytes": 343795,
+      "headersPath": "docs/data/complete-edition/source-assets/c1c27/rulebook-mirror-gamershq.headers",
+      "headersSha256": "690a8a4223ee49665648ace4b76150a7785e6ca02352bd671531d911d98c8ea3",
+      "candidateIdentity": {
+        "sourceType": "TRANSPORT_MIRROR",
+        "description": "Retailer-hosted core rulebook; test exact equality to existing locked bytes before treating as duplicate"
+      },
+      "retryPath": "public linked URL; compare index and original provenance before promotion",
+      "permanentlyUnavailable": false,
+      "authenticatedRuleFile": false
+    },
+    {
+      "evidenceId": "retrieval-rulebook-mirror-gamershq-retry",
+      "candidateId": "rulebook-mirror-gamershq-retry",
+      "url": "https://gamers-hq.de/media/pdf/1f/c0/6f/DD_EN_COREBOX_RULES.pdf",
+      "timestamp": "2026-09-28T13:46:44.452Z",
+      "httpStatus": 200,
+      "exitCode": 28,
+      "transportError": "curl: (28) Operation timed out after 120002 milliseconds with 1048307 out of 27763159 bytes received",
+      "failureClass": "TRANSPORT_TIMEOUT",
+      "antiBotObserved": false,
+      "redirectChain": [
+        {
+          "statusLine": "HTTP/1.1 200 OK",
+          "location": null,
+          "contentType": "application/pdf"
+        }
+      ],
+      "effectiveUrl": "https://gamers-hq.de/media/pdf/1f/c0/6f/DD_EN_COREBOX_RULES.pdf",
+      "contentType": "application/pdf",
+      "responsePath": "docs/data/complete-edition/source-assets/c1c27/rulebook-mirror-gamershq-retry.response",
+      "responseSha256": "ee69c745d26a2e848f8a9e29dc3568ddea493f0fa77e7af8f307a86f187cbf9f",
+      "responseBytes": 1048307,
+      "headersPath": "docs/data/complete-edition/source-assets/c1c27/rulebook-mirror-gamershq-retry.headers",
+      "headersSha256": "13b860e57728b27fef7aca3de91aa1c246afdbb63921cee9a4523a01a1832091",
+      "candidateIdentity": {
+        "sourceType": "TRANSPORT_MIRROR",
+        "description": "Longer ordinary public retry after partial PDF timeout; equality must use complete bytes"
+      },
+      "retryPath": "public linked URL; compare index and original provenance before promotion",
+      "permanentlyUnavailable": false,
+      "authenticatedRuleFile": false
+    },
+    {
+      "evidenceId": "retrieval-rulebook-mirror-tesera",
+      "candidateId": "rulebook-mirror-tesera",
+      "url": "https://tesera.ru/images/items/2479862/Darkest_Dungeon_ENG.pdf",
+      "timestamp": "2026-09-28T13:44:57.413Z",
+      "httpStatus": 403,
+      "exitCode": 0,
+      "transportError": null,
+      "failureClass": "ACCESS_DENIED_403",
+      "antiBotObserved": false,
+      "redirectChain": [
+        {
+          "statusLine": "HTTP/1.1 403 Forbidden",
+          "location": null,
+          "contentType": "text/html; charset=UTF-8"
+        }
+      ],
+      "effectiveUrl": "https://tesera.ru/images/items/2479862/Darkest_Dungeon_ENG.pdf",
+      "contentType": "text/html; charset=UTF-8",
+      "responsePath": "docs/data/complete-edition/source-assets/c1c27/rulebook-mirror-tesera.response",
+      "responseSha256": "d48782a6d126baadc69beef3f37a643f10798916bc8e4460a3deacc36fbb8b51",
+      "responseBytes": 902,
+      "headersPath": "docs/data/complete-edition/source-assets/c1c27/rulebook-mirror-tesera.headers",
+      "headersSha256": "f34028058bf306d564eaeed834389681d15e5aff87fba1d97d2c406f02b56442",
+      "candidateIdentity": {
+        "sourceType": "TRANSPORT_MIRROR",
+        "description": "Rulebook search lead; date of indexing does not prove revision"
+      },
+      "retryPath": "public linked URL; compare index and original provenance before promotion",
+      "permanentlyUnavailable": false,
+      "authenticatedRuleFile": false
+    },
+    {
+      "evidenceId": "retrieval-house-rule-lead",
+      "candidateId": "house-rule-lead",
+      "url": "https://boardgamegeek.com/thread/3008011/house-rules-and-clarifications-suggested-rulebook",
+      "timestamp": "2026-09-28T13:44:57.421Z",
+      "httpStatus": 403,
+      "exitCode": 0,
+      "transportError": null,
+      "failureClass": "ACCESS_DENIED_403",
+      "antiBotObserved": true,
+      "redirectChain": [
+        {
+          "statusLine": "HTTP/1.1 403 Forbidden",
+          "location": null,
+          "contentType": "text/html; charset=UTF-8"
+        }
+      ],
+      "effectiveUrl": "https://boardgamegeek.com/thread/3008011/house-rules-and-clarifications-suggested-rulebook",
+      "contentType": "text/html; charset=UTF-8",
+      "responsePath": "docs/data/complete-edition/source-assets/c1c27/house-rule-lead.response",
+      "responseSha256": "bd99f154fe6cc0892c57ba3913ea308170a140f27007bd676eeb843c050b10d7",
+      "responseBytes": 5685,
+      "headersPath": "docs/data/complete-edition/source-assets/c1c27/house-rule-lead.headers",
+      "headersSha256": "38e3b64bccd24bb349192a095785f07d9d52aed108450bf252df7111e1a44e92",
+      "candidateIdentity": {
+        "sourceType": "COMMUNITY_DISCOVERY",
+        "description": "Reject mechanics and suggested hierarchy; original link discovery only"
+      },
+      "retryPath": "public linked URL; compare index and original provenance before promotion",
+      "permanentlyUnavailable": false,
+      "authenticatedRuleFile": false
+    },
+    {
+      "evidenceId": "retrieval-wargamer-distribution",
+      "candidateId": "wargamer-distribution",
+      "url": "https://www.wargamer.com/darkest-dungeon-board-game/files",
+      "timestamp": "2026-09-28T13:45:22.461Z",
+      "httpStatus": 403,
+      "exitCode": 28,
+      "transportError": "curl: (28) Operation timed out after 25003 milliseconds with 3314 out of 5545 bytes received",
+      "failureClass": "TRANSPORT_TIMEOUT",
+      "antiBotObserved": true,
+      "redirectChain": [
+        {
+          "statusLine": "HTTP/1.1 403 Forbidden",
+          "location": null,
+          "contentType": "text/html; charset=UTF-8"
+        }
+      ],
+      "effectiveUrl": "https://www.wargamer.com/darkest-dungeon-board-game/files",
+      "contentType": "text/html; charset=UTF-8",
+      "responsePath": "docs/data/complete-edition/source-assets/c1c27/wargamer-distribution.response",
+      "responseSha256": "69c66690866868b018e6bcf80e239876c5b8784456a7fb5bd3de7be9f0ed0f9c",
+      "responseBytes": 3314,
+      "headersPath": "docs/data/complete-edition/source-assets/c1c27/wargamer-distribution.headers",
+      "headersSha256": "fbb3046c795a8fc09aca93bdbe28e9ff44687e08c2d1ef8d8ad6e8fd445e6d50",
+      "candidateIdentity": {
+        "sourceType": "COMMUNITY_DISCOVERY",
+        "description": "Secondary article Jan 28 2026 links historical Red Hook notice; no rules authority"
+      },
+      "retryPath": "public linked URL; compare index and original provenance before promotion",
+      "permanentlyUnavailable": false,
+      "authenticatedRuleFile": false
+    },
+    {
+      "evidenceId": "retrieval-tts-discovery",
+      "candidateId": "tts-discovery",
+      "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3149292571",
+      "timestamp": "2026-09-28T13:45:22.497Z",
+      "httpStatus": null,
+      "exitCode": 28,
+      "transportError": "curl: (28) Failed to connect to steamcommunity.com:443 after 21086 ms: Could not connect to server",
+      "failureClass": "TRANSPORT_TIMEOUT",
+      "antiBotObserved": false,
+      "redirectChain": [],
+      "effectiveUrl": "https://steamcommunity.com/sharedfiles/filedetails/?id=3149292571",
+      "contentType": null,
+      "responsePath": null,
+      "responseSha256": null,
+      "responseBytes": 0,
+      "headersPath": "docs/data/complete-edition/source-assets/c1c27/tts-discovery.headers",
+      "headersSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidateIdentity": {
+        "sourceType": "COMMUNITY_COLLECTION_INDEX",
+        "description": "Search found Mythic-created demo within collection; collection itself is not official updated corpus"
+      },
+      "retryPath": "public linked URL; compare index and original provenance before promotion",
+      "permanentlyUnavailable": false,
+      "authenticatedRuleFile": false
+    },
+    {
+      "evidenceId": "retrieval-tts-official-corebox",
+      "candidateId": "tts-official-corebox",
+      "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3053935246",
+      "timestamp": "2026-09-28T13:51:43.504Z",
+      "httpStatus": null,
+      "exitCode": 28,
+      "transportError": "curl: (28) Failed to connect to steamcommunity.com:443 after 21084 ms: Could not connect to server",
+      "failureClass": "TRANSPORT_TIMEOUT",
+      "antiBotObserved": false,
+      "redirectChain": [],
+      "effectiveUrl": "https://steamcommunity.com/sharedfiles/filedetails/?id=3053935246",
+      "contentType": null,
+      "responsePath": null,
+      "responseSha256": null,
+      "responseBytes": 0,
+      "headersPath": "docs/data/complete-edition/source-assets/c1c27/tts-official-corebox.headers",
+      "headersSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidateIdentity": {
+        "sourceType": "OFFICIAL_TTS_LEAD",
+        "description": "Search listing names Rohinn and Mythic Games; Oct 18 / Dec 5 2023; official claim and removed-item notice require original provenance and version check"
+      },
+      "retryPath": "public linked URL; compare index and original provenance before promotion",
+      "permanentlyUnavailable": false,
+      "authenticatedRuleFile": false
+    },
+    {
+      "evidenceId": "retrieval-tts-community-complete",
+      "candidateId": "tts-community-complete",
+      "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3657612854",
+      "timestamp": "2026-09-28T13:51:43.518Z",
+      "httpStatus": null,
+      "exitCode": 28,
+      "transportError": "curl: (28) Failed to connect to steamcommunity.com:443 after 21060 ms: Could not connect to server",
+      "failureClass": "TRANSPORT_TIMEOUT",
+      "antiBotObserved": false,
+      "redirectChain": [],
+      "effectiveUrl": "https://steamcommunity.com/sharedfiles/filedetails/?id=3657612854",
+      "contentType": null,
+      "responsePath": null,
+      "responseSha256": null,
+      "responseBytes": 0,
+      "headersPath": "docs/data/complete-edition/source-assets/c1c27/tts-community-complete.headers",
+      "headersSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidateIdentity": {
+        "sourceType": "COMMUNITY_TTS",
+        "description": "Antha Complete Edition Jan/Aug 2026; acknowledgements do not authenticate official rules updates"
+      },
+      "retryPath": "public linked URL; compare index and original provenance before promotion",
+      "permanentlyUnavailable": false,
+      "authenticatedRuleFile": false
+    }
+  ],
+  "note": "Response bytes and HTTP success prove transport only. HTML previews are not original PDF bytes; failures do not prove permanent unavailability."
+}
