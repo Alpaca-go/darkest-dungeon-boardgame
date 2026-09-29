@@ -10,6 +10,8 @@ import { pushLog } from './log';
 import { pushMentalEvent, syncHeroMentalToBattle } from './mental-log';
 import { performResolveTest } from './resolve-test';
 import { triggerHeartAttack } from './heart-attack';
+import { graveyardStressTenIsFatal } from './campaign/necromancer-graveyard';
+import { killCampaignHero } from './hero-death';
 import { STRESS_MAX, clampStressValue } from './stress-constants';
 import { applyQuirkModifiers, describeModifierApplications } from './quirk-passives';
 // 注意：quirks.ts 亦引用本模块，形成 ESM 循环依赖。
@@ -132,7 +134,11 @@ export function applyStress(campaign: CampaignState, input: ApplyStressInput): A
       try {
         const fresh = next.heroes.find((h) => h.instanceId === hero.instanceId);
         if (fresh && !fresh.dead) {
-          if (!fresh.resolveTestedThisQuest) {
+          if (graveyardStressTenIsFatal(next, hero.instanceId)) {
+            next = killCampaignHero(next, { heroInstanceId: hero.instanceId, cause: 'heart-attack',
+              source: input.battleId ? 'battle' : 'exploration', resumePhase: 'dungeon-explore',
+              questId: input.questId, battleId: input.battleId, sourceSkillId: 'official-graveyard-stress-10' });
+          } else if (!fresh.resolveTestedThisQuest) {
             const rt = performResolveTest(next, hero.instanceId);
             next = rt.campaign;
             if (rt.result) result.resolveTest = rt.result;

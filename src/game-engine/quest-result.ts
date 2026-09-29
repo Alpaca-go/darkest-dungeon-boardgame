@@ -21,6 +21,7 @@ import { hasTrinketCapacity } from './trinkets/capacity';
 import { calculateQuestXpReward } from './quests/quest-runtime';
 import { evaluateQuestCompletion } from './quests/quest-special-rule-runtime';
 import { returnProductionBossRoomOnTermination } from './bosses/room-storage';
+import { expireGraveyardAtQuestEnd } from './campaign/necromancer-graveyard';
 
 /** 空补给池（结算后清空用）。 */
 export const EMPTY_PROVISIONS: ProvisionPool = {
@@ -116,6 +117,7 @@ export function applyQuestRewards(
   summary: QuestResultSummary
 ): CampaignState {
   if (campaign.questResultResolved) return campaign;
+  campaign = expireGraveyardAtQuestEnd(campaign);
 
   if (summary.outcome !== 'completed') campaign = returnProductionBossRoomOnTermination(campaign, summary.outcome);
 

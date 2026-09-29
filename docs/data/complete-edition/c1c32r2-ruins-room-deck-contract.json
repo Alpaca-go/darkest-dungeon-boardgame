@@ -1,0 +1,472 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R2",
+  "baselineHead": "35a42ac46ba97b07ed941bca078dc53fb5fab1bb",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "authority": "OFFICIAL_SOURCE",
+  "sourceReferences": [
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 10,
+      "location": "full printed face",
+      "componentId": "rooms-deck",
+      "sourceClass": "OFFICIAL_SOURCE"
+    },
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 15,
+      "location": "full printed face",
+      "componentId": "room-card-draw",
+      "sourceClass": "OFFICIAL_SOURCE"
+    },
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 30,
+      "location": "full printed face",
+      "componentId": "boss-room-setup",
+      "sourceClass": "OFFICIAL_SOURCE"
+    },
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 38,
+      "location": "full printed face",
+      "componentId": "necromancer-room-10",
+      "sourceClass": "OFFICIAL_SOURCE"
+    }
+  ],
+  "rooms": [
+    {
+      "componentId": "ruins-room-1",
+      "roomNumber": 1,
+      "sourceCardId": 44700,
+      "tileId": "ruins-tile-1",
+      "bossOnly": false,
+      "drawEligible": true,
+      "copyCount": 1,
+      "printedText": "!\n!\n1\n1—Ritual Chamber\nCornered: Heroes ending\ntheir turn here suffer \t+1.",
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "sha256": "1434c53d5dac4e79f3fe091c9dc97c0442864644cb043b12c3fc596ae7c30b72",
+          "page": 1,
+          "location": "full printed face",
+          "componentId": "ruins-room-1",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "sha256": "82128bffbce39d6624fde4a42cb2f9466d46b657bf13fb14ee6ac7ae11f094b2",
+          "page": 1,
+          "location": "printed back",
+          "componentId": "ruins-room-1",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "EFFECT_GLYPH_AND_AREA_BINDING_REQUIRED"
+    },
+    {
+      "componentId": "ruins-room-2",
+      "roomNumber": 2,
+      "sourceCardId": 44701,
+      "tileId": "ruins-tile-2",
+      "bossOnly": false,
+      "drawEligible": true,
+      "copyCount": 1,
+      "printedText": "!\n!\n! \t2\n2—Torture Chamber\nUnholy Aura: Heroes in this\nArea can’t heal or be healed.",
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "sha256": "1434c53d5dac4e79f3fe091c9dc97c0442864644cb043b12c3fc596ae7c30b72",
+          "page": 2,
+          "location": "full printed face",
+          "componentId": "ruins-room-2",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "sha256": "82128bffbce39d6624fde4a42cb2f9466d46b657bf13fb14ee6ac7ae11f094b2",
+          "page": 2,
+          "location": "printed back",
+          "componentId": "ruins-room-2",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "EFFECT_GLYPH_AND_AREA_BINDING_REQUIRED"
+    },
+    {
+      "componentId": "ruins-room-3",
+      "roomNumber": 3,
+      "sourceCardId": 44702,
+      "tileId": "ruins-tile-3",
+      "bossOnly": false,
+      "drawEligible": true,
+      "copyCount": 1,
+      "printedText": "3\n3—Healing Fountain\nHealing Waters: Heroes\nending their turn here 33 .",
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "sha256": "1434c53d5dac4e79f3fe091c9dc97c0442864644cb043b12c3fc596ae7c30b72",
+          "page": 3,
+          "location": "full printed face",
+          "componentId": "ruins-room-3",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "sha256": "82128bffbce39d6624fde4a42cb2f9466d46b657bf13fb14ee6ac7ae11f094b2",
+          "page": 3,
+          "location": "printed back",
+          "componentId": "ruins-room-3",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "EFFECT_GLYPH_AND_AREA_BINDING_REQUIRED"
+    },
+    {
+      "componentId": "ruins-room-4",
+      "roomNumber": 4,
+      "sourceCardId": 44703,
+      "tileId": "ruins-tile-4",
+      "bossOnly": false,
+      "drawEligible": true,
+      "copyCount": 1,
+      "printedText": "A\nB\nB\n!\t\n!\n4\n4—Spiked Pit\nA Circle of Power: Monsters standing\nhere at the end of their turn 44 .\nB Spiked Pit: Heroes and Monsters that\nare \tor standing here at the end of their\nturn take 33 and suffer 1 \t3t.",
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "sha256": "1434c53d5dac4e79f3fe091c9dc97c0442864644cb043b12c3fc596ae7c30b72",
+          "page": 4,
+          "location": "full printed face",
+          "componentId": "ruins-room-4",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "sha256": "82128bffbce39d6624fde4a42cb2f9466d46b657bf13fb14ee6ac7ae11f094b2",
+          "page": 4,
+          "location": "printed back",
+          "componentId": "ruins-room-4",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "EFFECT_GLYPH_AND_AREA_BINDING_REQUIRED"
+    },
+    {
+      "componentId": "ruins-room-5",
+      "roomNumber": 5,
+      "sourceCardId": 44704,
+      "tileId": "ruins-tile-5",
+      "bossOnly": false,
+      "drawEligible": true,
+      "copyCount": 1,
+      "printedText": "!\n5\n5—Beacon of Light\nStressful Darkness:\nThe Corridors are too dark. Heroes\nending their turn here suffer \t+1.\nBeacon of Light: Heroes ending\ntheir turn here recover 1 \t.",
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "sha256": "1434c53d5dac4e79f3fe091c9dc97c0442864644cb043b12c3fc596ae7c30b72",
+          "page": 5,
+          "location": "full printed face",
+          "componentId": "ruins-room-5",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "sha256": "82128bffbce39d6624fde4a42cb2f9466d46b657bf13fb14ee6ac7ae11f094b2",
+          "page": 5,
+          "location": "printed back",
+          "componentId": "ruins-room-5",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "EFFECT_GLYPH_AND_AREA_BINDING_REQUIRED"
+    },
+    {
+      "componentId": "ruins-room-6",
+      "roomNumber": 6,
+      "sourceCardId": 44705,
+      "tileId": "ruins-tile-6",
+      "bossOnly": false,
+      "drawEligible": true,
+      "copyCount": 1,
+      "printedText": "A\nB\t!\n6\n6—Treasure Chamber\nA Loot the Chest: Spend 2 actions\nhere to draw a Trinket. Once per battle.\nB Hide and Heal: When no\nMonsters are here, spend 1 action\nand suffer \t+2 to remove all \t.",
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "sha256": "1434c53d5dac4e79f3fe091c9dc97c0442864644cb043b12c3fc596ae7c30b72",
+          "page": 6,
+          "location": "full printed face",
+          "componentId": "ruins-room-6",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "sha256": "82128bffbce39d6624fde4a42cb2f9466d46b657bf13fb14ee6ac7ae11f094b2",
+          "page": 6,
+          "location": "printed back",
+          "componentId": "ruins-room-6",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "EFFECT_GLYPH_AND_AREA_BINDING_REQUIRED"
+    },
+    {
+      "componentId": "ruins-room-7",
+      "roomNumber": 7,
+      "sourceCardId": 44706,
+      "tileId": "ruins-tile-7",
+      "bossOnly": false,
+      "drawEligible": true,
+      "copyCount": 1,
+      "printedText": "!\n!\n7\n7—Tomb of Ancestor\nAncestor’s Glory: Heroes standing\nhere are immune to \t, \t, \t, \t, \tand \t.\nRemove any of these Conditions\nif already applied.",
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "sha256": "1434c53d5dac4e79f3fe091c9dc97c0442864644cb043b12c3fc596ae7c30b72",
+          "page": 7,
+          "location": "full printed face",
+          "componentId": "ruins-room-7",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "sha256": "82128bffbce39d6624fde4a42cb2f9466d46b657bf13fb14ee6ac7ae11f094b2",
+          "page": 7,
+          "location": "printed back",
+          "componentId": "ruins-room-7",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "EFFECT_GLYPH_AND_AREA_BINDING_REQUIRED"
+    },
+    {
+      "componentId": "ruins-room-8",
+      "roomNumber": 8,
+      "sourceCardId": 44707,
+      "tileId": "ruins-tile-8",
+      "bossOnly": false,
+      "drawEligible": true,
+      "copyCount": 1,
+      "printedText": "!\n!\n8\n8—Invocation Chamber\nThe Invokers: The last Monster each round\nalways moves towards Area \tinstead\nof following step 2 of the Monster turn.\nInvoking Abyss: If any Monster is here\nat the end of the round : \t: \t+2.",
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "sha256": "1434c53d5dac4e79f3fe091c9dc97c0442864644cb043b12c3fc596ae7c30b72",
+          "page": 8,
+          "location": "full printed face",
+          "componentId": "ruins-room-8",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "sha256": "82128bffbce39d6624fde4a42cb2f9466d46b657bf13fb14ee6ac7ae11f094b2",
+          "page": 8,
+          "location": "printed back",
+          "componentId": "ruins-room-8",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "EFFECT_GLYPH_AND_AREA_BINDING_REQUIRED"
+    },
+    {
+      "componentId": "ruins-room-9",
+      "roomNumber": 9,
+      "sourceCardId": 44708,
+      "tileId": "ruins-tile-9",
+      "bossOnly": false,
+      "drawEligible": true,
+      "copyCount": 1,
+      "printedText": "!\t\n!\n9\n9—Old Abbey\nFeeling the Presence: Heroes ending\ntheir turn here suffer\n+1 per Negative Quirk and 11 /\nHero Level per Positive Quirk.",
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "sha256": "1434c53d5dac4e79f3fe091c9dc97c0442864644cb043b12c3fc596ae7c30b72",
+          "page": 9,
+          "location": "full printed face",
+          "componentId": "ruins-room-9",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "sha256": "82128bffbce39d6624fde4a42cb2f9466d46b657bf13fb14ee6ac7ae11f094b2",
+          "page": 9,
+          "location": "printed back",
+          "componentId": "ruins-room-9",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "EFFECT_GLYPH_AND_AREA_BINDING_REQUIRED"
+    },
+    {
+      "componentId": "ruins-room-10",
+      "roomNumber": 10,
+      "sourceCardId": 44709,
+      "tileId": "ruins-tile-10",
+      "bossOnly": true,
+      "drawEligible": false,
+      "copyCount": 1,
+      "printedText": "10\n10—Necromancer Room\nBOSS",
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "sha256": "1434c53d5dac4e79f3fe091c9dc97c0442864644cb043b12c3fc596ae7c30b72",
+          "page": 10,
+          "location": "full printed face",
+          "componentId": "ruins-room-10",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "sha256": "82128bffbce39d6624fde4a42cb2f9466d46b657bf13fb14ee6ac7ae11f094b2",
+          "page": 10,
+          "location": "printed back",
+          "componentId": "ruins-room-10",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "BOSS_ONLY"
+    },
+    {
+      "componentId": "ruins-room-11",
+      "roomNumber": 11,
+      "sourceCardId": 44710,
+      "tileId": "ruins-tile-11",
+      "bossOnly": true,
+      "drawEligible": false,
+      "copyCount": 1,
+      "printedText": "6\n3\n4\n7-8\n10\n5\n9\n1-2\n11\n11—Prophet Room\nBOSS",
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "sha256": "1434c53d5dac4e79f3fe091c9dc97c0442864644cb043b12c3fc596ae7c30b72",
+          "page": 11,
+          "location": "full printed face",
+          "componentId": "ruins-room-11",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "sha256": "82128bffbce39d6624fde4a42cb2f9466d46b657bf13fb14ee6ac7ae11f094b2",
+          "page": 11,
+          "location": "printed back",
+          "componentId": "ruins-room-11",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "BOSS_ONLY"
+    },
+    {
+      "componentId": "ruins-room-12",
+      "roomNumber": 12,
+      "sourceCardId": 44711,
+      "tileId": "ruins-tile-12",
+      "bossOnly": true,
+      "drawEligible": false,
+      "copyCount": 1,
+      "printedText": "! ! !\n12\n12—Collector Room\nBOSS",
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "sha256": "1434c53d5dac4e79f3fe091c9dc97c0442864644cb043b12c3fc596ae7c30b72",
+          "page": 12,
+          "location": "full printed face",
+          "componentId": "ruins-room-12",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "sha256": "82128bffbce39d6624fde4a42cb2f9466d46b657bf13fb14ee6ac7ae11f094b2",
+          "page": 12,
+          "location": "printed back",
+          "componentId": "ruins-room-12",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "BOSS_ONLY"
+    },
+    {
+      "componentId": "ruins-room-13",
+      "roomNumber": 13,
+      "sourceCardId": 44712,
+      "tileId": "ruins-tile-13",
+      "bossOnly": true,
+      "drawEligible": false,
+      "copyCount": 1,
+      "printedText": "13\n13—Fanatic Room\nBOSS",
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "sha256": "1434c53d5dac4e79f3fe091c9dc97c0442864644cb043b12c3fc596ae7c30b72",
+          "page": 13,
+          "location": "full printed face",
+          "componentId": "ruins-room-13",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "sha256": "82128bffbce39d6624fde4a42cb2f9466d46b657bf13fb14ee6ac7ae11f094b2",
+          "page": 13,
+          "location": "printed back",
+          "componentId": "ruins-room-13",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "BOSS_ONLY"
+    }
+  ],
+  "ordinaryDrawPool": [
+    "ruins-room-1",
+    "ruins-room-2",
+    "ruins-room-3",
+    "ruins-room-4",
+    "ruins-room-5",
+    "ruins-room-6",
+    "ruins-room-7",
+    "ruins-room-8",
+    "ruins-room-9"
+  ],
+  "bossRoomExclusions": [
+    "ruins-room-10",
+    "ruins-room-11",
+    "ruins-room-12",
+    "ruins-room-13"
+  ],
+  "room10Ownership": "C1C32R RESERVED / IN_PLAY / RETURNED preserved",
+  "room10ExclusionBound": true,
+  "complete": false,
+  "exclusionAuthority": "Boss-only card label + distinct p30 setup; new ordinary-deck policy explicitly excludes all BOSS cards",
+  "room10CanBeOrdinary": false
+}

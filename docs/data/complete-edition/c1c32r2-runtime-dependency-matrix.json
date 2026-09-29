@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R2",
+  "baselineHead": "35a42ac46ba97b07ed941bca078dc53fb5fab1bb",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "accepted": false,
+  "gates": {
+    "ordinaryRuinsMonsterDeckComplete": false,
+    "drawableProductionMonsterDefinitionsMissing": 23,
+    "prototypeMonsterDependencies": 0,
+    "roomDeckContractComplete": false,
+    "room10ExclusionBound": true,
+    "tileAreaContractsComplete": false,
+    "ordinaryEncounterDrawContractComplete": false,
+    "largeMovementExecutableContractComplete": true,
+    "graveyardCampaignTransactionImplemented": true,
+    "historicalRulesetsPreserved": true,
+    "explicitProjectRulingCreated": true
+  },
+  "blockers": [
+    "FROZEN_BONE_SOURCE_MISMATCH_REVIEW",
+    "ORDINARY_MONSTER_EFFECT_ADAPTER_NOT_BOUND",
+    "ORDINARY_TILE_AREA_TRANSCRIPTION_AND_GLYPH_REVIEW",
+    "ORDINARY_ROOM_EFFECT_GLYPH_BINDING",
+    "PRINTED_STANCE_GROUPING_REVIEW",
+    "PREPARATION_DAY_CHECKPOINT_DOMAIN_BRIDGE"
+  ],
+  "scenarioC": {
+    "status": "NOT_PROVEN",
+    "combatHashes": null
+  },
+  "productionReady": 0
+}

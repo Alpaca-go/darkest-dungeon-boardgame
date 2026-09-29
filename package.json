@@ -165,7 +165,10 @@
     "test:necromancer-threat-bridge": "vitest run src/audit/c1c32r-necromancer-threat-bridge.test.ts",
     "test:e2e:necromancer-threat-bridge": "playwright test e2e/c1c32r-necromancer-threat-bridge.spec.ts",
     "audit:complete-edition-c1c32r": "vite-node scripts/audit/generate-complete-edition-c1c32r.ts",
-    "verify:complete-edition-c1c32r": "vite-node scripts/audit/verify-complete-edition-c1c32r.ts"
+    "verify:complete-edition-c1c32r": "vite-node scripts/audit/verify-complete-edition-c1c32r.ts",
+    "audit:complete-edition-c1c32r2": "vite-node scripts/audit/generate-complete-edition-c1c32r2.ts",
+    "verify:complete-edition-c1c32r2": "vite-node scripts/audit/verify-complete-edition-c1c32r2.ts",
+    "test:necromancer-threat-dependencies": "vitest run src/audit/c1c32r2-necromancer-threat-dependencies.test.ts"
   },
   "dependencies": {
     "lucide-react": "^0.408.0",

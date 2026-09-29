@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R2",
+  "baselineHead": "35a42ac46ba97b07ed941bca078dc53fb5fab1bb",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "status": "DOMAIN_COMMAND_IMPLEMENTED",
+  "proofs": [
+    {
+      "level": 2,
+      "useEffect": true,
+      "status": "PASS",
+      "classification": "CAMPAIGN_TRANSACTION_COMMAND_ISOLATION",
+      "productionPathAcceptance": false,
+      "fixtureControls": [
+        "pre-Boss campaign gate",
+        "Hamlet phase at settled checkpoint",
+        "next-Quest activation in isolated context"
+      ],
+      "beforeHash": "2178bcb1a7f368bd954d75153b3dd0d3b4ac1a9d478ae3a5cbe8fdbf9e524ee4",
+      "appliedHash": "affe60fe4fb17f5f0f9517d582e43396a94db3903f77541807fee1ed6a1031b9",
+      "saveHash": "1b0e2bbd4732d97560bacc76185b6974454c6636cd804e2d3bf59a9959e301a3",
+      "reloadedHash": "affe60fe4fb17f5f0f9517d582e43396a94db3903f77541807fee1ed6a1031b9",
+      "activeHash": "baf32a6d09424b1e8aabd37e548cdff87d2871c55f7ebc987e376d5ec72726a7",
+      "expiredHash": "6bdd34e9b764d535813c73b2fb3dd198d5bf44488f1fec317fea39a1864268d6",
+      "transactionId": "necromancer-graveyard:cmp_6xee_1:qrun_6xee_8:necromancer:2:first-preparation-day",
+      "receipt": {
+        "transactionId": "necromancer-graveyard:cmp_6xee_1:qrun_6xee_8:necromancer:2:first-preparation-day",
+        "campaignId": "cmp_6xee_1",
+        "sourceQuestRunId": "qrun_6xee_8",
+        "encounterId": "cmp_6xee_1:qrun_6xee_8:necromancer:2",
+        "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+        "threatLevel": 2,
+        "forcedHeroId": "u_hero_6xee_4",
+        "heroInstanceId": "hero_6xee_4",
+        "useEffect": true,
+        "virtueId": "official-graveyard:powerful",
+        "selectionEventId": "qrun_6xee_8:boss:event:2",
+        "preparationRolls": {
+          "u_hero_6xee_4": 1,
+          "u_hero_6xee_5": 2,
+          "u_hero_6xee_6": 3,
+          "u_hero_6xee_7": 4
+        },
+        "targetQuestRunId": null,
+        "lifecycle": "PENDING_NEXT_QUEST"
+      }
+    },
+    {
+      "level": 2,
+      "useEffect": false,
+      "status": "PASS",
+      "classification": "CAMPAIGN_TRANSACTION_COMMAND_ISOLATION",
+      "productionPathAcceptance": false,
+      "fixtureControls": [
+        "pre-Boss campaign gate",
+        "Hamlet phase at settled checkpoint",
+        "next-Quest activation in isolated context"
+      ],
+      "beforeHash": "2178bcb1a7f368bd954d75153b3dd0d3b4ac1a9d478ae3a5cbe8fdbf9e524ee4",
+      "appliedHash": "8d31984e4eff80133cf03e7d8b6a8af64e677a869423b73cb6f8e0874351e6c2",
+      "saveHash": "f826790b3b0f3a87980dab4b993e36f1009ba370af810384cce6489c0424a708",
+      "reloadedHash": "8d31984e4eff80133cf03e7d8b6a8af64e677a869423b73cb6f8e0874351e6c2",
+      "activeHash": "8d31984e4eff80133cf03e7d8b6a8af64e677a869423b73cb6f8e0874351e6c2",
+      "expiredHash": "8d31984e4eff80133cf03e7d8b6a8af64e677a869423b73cb6f8e0874351e6c2",
+      "transactionId": "necromancer-graveyard:cmp_6xee_1:qrun_6xee_8:necromancer:2:first-preparation-day",
+      "receipt": {
+        "transactionId": "necromancer-graveyard:cmp_6xee_1:qrun_6xee_8:necromancer:2:first-preparation-day",
+        "campaignId": "cmp_6xee_1",
+        "sourceQuestRunId": "qrun_6xee_8",
+        "encounterId": "cmp_6xee_1:qrun_6xee_8:necromancer:2",
+        "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+        "threatLevel": 2,
+        "forcedHeroId": "u_hero_6xee_4",
+        "heroInstanceId": "hero_6xee_4",
+        "useEffect": false,
+        "virtueId": null,
+        "selectionEventId": "qrun_6xee_8:boss:event:2",
+        "preparationRolls": {
+          "u_hero_6xee_4": 1,
+          "u_hero_6xee_5": 2,
+          "u_hero_6xee_6": 3,
+          "u_hero_6xee_7": 4
+        },
+        "targetQuestRunId": null,
+        "lifecycle": "GUARD_ONLY"
+      }
+    },
+    {
+      "level": 3,
+      "useEffect": false,
+      "status": "PASS",
+      "classification": "CAMPAIGN_TRANSACTION_COMMAND_ISOLATION",
+      "productionPathAcceptance": false,
+      "fixtureControls": [
+        "pre-Boss campaign gate",
+        "Hamlet phase at settled checkpoint",
+        "next-Quest activation in isolated context"
+      ],
+      "beforeHash": "c76b00452a41eafdcdde350eeb7bee9b3529c42816624ef7a901e0809994f61e",
+      "appliedHash": "3fe157004fa7b48a313d1031c1cc1dbfb66d343e853af8fc24a10c9259bf4c80",
+      "saveHash": "e864bc3b8836e6c1018f25362fffbf0fddea4af0103095d41fcca181b297e81e",
+      "reloadedHash": "3fe157004fa7b48a313d1031c1cc1dbfb66d343e853af8fc24a10c9259bf4c80",
+      "activeHash": "3fe157004fa7b48a313d1031c1cc1dbfb66d343e853af8fc24a10c9259bf4c80",
+      "expiredHash": "3fe157004fa7b48a313d1031c1cc1dbfb66d343e853af8fc24a10c9259bf4c80",
+      "transactionId": "necromancer-graveyard:cmp_6xef_1:qrun_6xef_8:necromancer:3:first-preparation-day",
+      "receipt": {
+        "transactionId": "necromancer-graveyard:cmp_6xef_1:qrun_6xef_8:necromancer:3:first-preparation-day",
+        "campaignId": "cmp_6xef_1",
+        "sourceQuestRunId": "qrun_6xef_8",
+        "encounterId": "cmp_6xef_1:qrun_6xef_8:necromancer:3",
+        "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+        "threatLevel": 3,
+        "forcedHeroId": "u_hero_6xef_4",
+        "heroInstanceId": "hero_6xef_4",
+        "useEffect": false,
+        "virtueId": null,
+        "selectionEventId": "qrun_6xef_8:boss:event:2",
+        "preparationRolls": {
+          "u_hero_6xef_4": 1,
+          "u_hero_6xef_5": 2,
+          "u_hero_6xef_6": 3,
+          "u_hero_6xef_7": 4
+        },
+        "targetQuestRunId": null,
+        "lifecycle": "GUARD_ONLY"
+      }
+    }
+  ],
+  "productionUIPathProven": false,
+  "noPrototypeVirtueDependencies": true,
+  "sourceBoundVirtueCardCount": 5,
+  "stressTenDeathPipeline": "killCampaignHero via applyStress",
+  "questStartHook": "selectQuest after resetMentalStateForNewQuest",
+  "questEndHook": "applyQuestRewards",
+  "scope": "No guarded THREAT Battle or full production Hamlet path claim"
+}

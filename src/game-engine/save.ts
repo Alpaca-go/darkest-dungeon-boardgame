@@ -27,6 +27,8 @@ import { assertBossEncounter } from './bosses/foundation';
 import { resolveBossDefinition } from './bosses/definitions';
 import { validateThreatCheckpoint } from './bosses/threat-checkpoint';
 import { validateHeroDodgeCampaignMetadata } from './rules/hero-dodge-versioning';
+import { validateGraveyardReceipts } from './campaign/necromancer-graveyard';
+import { validateLargeMovementContract } from './rules/large-movement-contract';
 import { createInitialStagecoach } from './stagecoach';
 import { getQuirkById, normalizeQuirkId } from '../data/quirks';
 import { getDiseaseById } from '../data/diseases';
@@ -197,7 +199,7 @@ export function validateSaveFile(data: unknown): string | null {
     } catch (error) { return `Boss history/checkpoint invalid: ${error instanceof Error ? error.message : String(error)}`; }
   }
   if (!c || typeof c !== 'object') return '缺少 campaign 字段';
-  try { validateProductionBossRoomStorage(c); validateHeroDodgeCampaignMetadata(c); }
+  try { validateProductionBossRoomStorage(c); validateHeroDodgeCampaignMetadata(c); validateGraveyardReceipts(c); if (c.battle) validateLargeMovementContract(c.battle); }
   catch (error) { return `Hero Dodge metadata invalid: ${error instanceof Error ? error.message : String(error)}`; }
   if (!Array.isArray(c.heroes)) return 'campaign.heroes 缺失或不是数组';
   if (typeof c.gold !== 'number' || Number.isNaN(c.gold)) return 'campaign.gold 非法';
@@ -1744,6 +1746,8 @@ export function restoreSaveSnapshot(save: SaveFile): CampaignState {
   const campaign = sanitizeSaveFile(save).campaign;
   validateProductionBossRoomStorage(campaign);
   validateHeroDodgeCampaignMetadata(campaign);
+  validateGraveyardReceipts(campaign);
+  if (campaign.battle) validateLargeMovementContract(campaign.battle);
   return campaign;
 }
 

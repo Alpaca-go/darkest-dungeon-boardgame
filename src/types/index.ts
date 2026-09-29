@@ -455,6 +455,8 @@ export interface CommunityGuardianRoomState {
 }
 
 export interface BattleState {
+  /** Generic movement dependency contract. Absent on all historical battles. */
+  largeMovementContract?: import('./necromancer-dependencies').LargeMovementContractState;
   /** Serializable, contract-bound ordinary Boss foundation; absent on legacy battles. */
   bossEncounter?: import('./boss-runtime').BossEncounterState;
   /** Source-backed Guardian rooms do not use the ordinary round timeout. */
@@ -779,6 +781,7 @@ export interface HeroLevelProfile {
 
 /** 战役状态（存档根对象）。 */
 export interface CampaignState {
+  necromancerGraveyardReceipts?: import('./necromancer-dependencies').GraveyardReceipt[];
   bossRoomStorage?: { roomId: string; roomCardId: number; tileId: string; encounterId: string; lifecycle: 'RESERVED' | 'IN_PLAY' | 'RETURNED' };
   /** Physical ownership receipts for an encounter terminated before Boss victory. */
   bossRoomReturnHistory?: Array<{
@@ -1131,6 +1134,9 @@ export interface ResolveTestModifiers {
 
 /** 精神效果（数据驱动执行器使用，不为每张卡写独立 if/else）。 */
 export type ResolveEffect =
+  | { type: 'stress-party'; amount: number }
+  | { type: 'buff-self' | 'buff-party'; turns: number }
+  | { type: 'heal-self-per-level'; amount: number }
   | { type: 'stress-self'; amount: number }
   | { type: 'stress-allies'; amount: number }
   | { type: 'heal-self'; amount: number }

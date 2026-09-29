@@ -8,6 +8,7 @@ import { generateDungeonForQuest } from './dungeon';
 import { pushLog } from './log';
 import { createInitialStagecoach } from './stagecoach';
 import { resetMentalStateForNewQuest } from './resolve-conversion';
+import { activateGraveyardForNextQuest } from './campaign/necromancer-graveyard';
 import { SAVE_VERSION } from './save';
 import { createInitialXpState } from './progression/xp-ledger';
 import { getHeroSkillSlots } from './progression/upgrade-core';
@@ -294,6 +295,7 @@ export function selectQuest(campaign: CampaignState, questId: string): CampaignS
   };
   // Phase 7：新任务重置精神状态（resolveTestedThisQuest / 兜底清理未转换状态）
   next = resetMentalStateForNewQuest(next);
+  next = activateGraveyardForNextQuest(next);
   // Phase 8D：初始化本次任务的 Objective 进度快照（全部未完成）
   next = refreshObjectiveProgress(next);
   next = applyQuestRoomSetup(next);

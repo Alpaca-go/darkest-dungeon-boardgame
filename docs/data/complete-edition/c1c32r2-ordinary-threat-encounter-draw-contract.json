@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R2",
+  "baselineHead": "35a42ac46ba97b07ed941bca078dc53fb5fab1bb",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "contractId": "C1C32R2-ORDINARY-PHYSICAL-DRAW-v1",
+  "status": "SPECIFIED_NOT_EXECUTABLE",
+  "complete": false,
+  "sourceReferences": [
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 15,
+      "location": "full printed face",
+      "componentId": "room-deck-top-card",
+      "sourceClass": "OFFICIAL_SOURCE"
+    },
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 16,
+      "location": "full printed face",
+      "componentId": "stance-deployment",
+      "sourceClass": "OFFICIAL_SOURCE"
+    },
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 17,
+      "location": "full printed face",
+      "componentId": "large-initial-draw-replacement",
+      "sourceClass": "OFFICIAL_SOURCE"
+    },
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 25,
+      "location": "full printed face",
+      "componentId": "battle-end-return-cards",
+      "sourceClass": "OFFICIAL_SOURCE"
+    }
+  ],
+  "steps": [
+    "At Quest initialization shuffle the nine ordinary Room copy IDs once with existing SeededRandom/Fisher-Yates; reserve Boss Room separately.",
+    "Shuffle all eligible Ruins + Common physical Monster copy IDs once, excluding permanent removals and copies owned by other encounters.",
+    "On Room reveal take saved Room queue head without RNG, bind its exact corresponding tile; no fallback geometry.",
+    "Draw Monster queue heads sequentially into Stance slots Aggressive to Support. Large uses two slots and higher-priority Stance. When the fourth slot draw is Large replace the last non-Large drawn Monster and shift towards Aggressive, per p17.",
+    "Hero Stances are player selected, not randomized; starting Areas follow the tile by Stance. Monster placement follows drawn Stance.",
+    "Use four Hero and one per living Monster Initiative cards; shuffle once with existing seeded helper.",
+    "Save Room/card/tile IDs, copy ownership, draw queues, placements, Stances, initiative, RNG before and after, and source-contract version atomically.",
+    "Reload validates and consumes stored result; never re-shuffle or redraw. At battle end Monster cards return and shuffle; Room card stays discarded until Dungeon run ends."
+  ],
+  "storedResultFields": [
+    "encounterId",
+    "questRunId",
+    "ruleSetVersion",
+    "roomCopyId",
+    "tileId",
+    "monsterCopyIds",
+    "discardedReplacementCopyIds",
+    "heroStances",
+    "monsterStances",
+    "placements",
+    "initiativeDeck",
+    "roomDrawQueue",
+    "monsterDrawQueue",
+    "rngBefore",
+    "rngAfter",
+    "sourceContractDigest"
+  ],
+  "rngConsumption": [
+    "Room deck Fisher-Yates: n-1 draws at setup",
+    "Monster deck Fisher-Yates: n-1 draws at setup",
+    "No RNG for queue-head draw or printed placement",
+    "Initiative Fisher-Yates: n-1 draws at battle initialization",
+    "Monster deck return/shuffle at Battle end: n-1 draws"
+  ],
+  "reloadRedraw": false,
+  "largeInitialDrawIsMovementDisplacement": false,
+  "blockers": [
+    "FROZEN_BONE_SOURCE_MISMATCH_REVIEW",
+    "ORDINARY_MONSTER_EFFECT_ADAPTER_NOT_BOUND",
+    "ORDINARY_TILE_AREA_TRANSCRIPTION_AND_GLYPH_REVIEW",
+    "ORDINARY_ROOM_EFFECT_GLYPH_BINDING"
+  ]
+}
