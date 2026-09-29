@@ -777,6 +777,10 @@ export interface HeroLevelProfile {
 
 /** 战役状态（存档根对象）。 */
 export interface CampaignState {
+  /** C1C31R explicit pre-encounter Dodge rule selection; absent legacy saves remain v1. */
+  heroDodgeRuleSetSelection?: import('./hero-dodge-rules').HeroDodgeRuleSetSelection;
+  /** Rule-only replay provenance; does not promote Boss combat or migrate old records. */
+  heroDodgeReplayRecords?: import('./hero-dodge-rules').HeroDodgeReplayRecord[];
   /** Completed contract-bound encounters preserve rule version and replay provenance. */
   bossEncounterHistory?: import('./boss-runtime').BossEncounterState[];
   /** Pre-flip encounter state survives ordinary Battle settlement; Room entry bridge resumes it later. */

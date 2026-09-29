@@ -1,0 +1,557 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C31R",
+  "baselineHead": "02d18d00ece61c9136ac0821ee5ce30ada038191",
+  "ruleSourcePolicyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "externalSourceAcquisition": false,
+  "selectedCandidate": "B_CLASS_BASELINE",
+  "candidates": [
+    {
+      "candidateId": "A_ZERO_FILL",
+      "name": "Zero Fill",
+      "rule": "Every unresolved pair explicitly receives 0; official pairs stay fixed.",
+      "reason": "Comparison baseline only. It erases the known nonzero-class benefit at higher levels and supplies no evasion to all unresolved classes.",
+      "selected": false,
+      "use": "DIGITAL_DESIGN_COMPARISON",
+      "officialAuthorityForUnknownValues": false,
+      "rows": [
+        {
+          "heroId": "crusader",
+          "level": 1,
+          "dodge": 0,
+          "authority": "OFFICIAL_SOURCE",
+          "canonical": true
+        },
+        {
+          "heroId": "crusader",
+          "level": 2,
+          "dodge": 0,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "crusader",
+          "level": 3,
+          "dodge": 0,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "vestal",
+          "level": 1,
+          "dodge": 0,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "vestal",
+          "level": 2,
+          "dodge": 0,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "vestal",
+          "level": 3,
+          "dodge": 0,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "highwayman",
+          "level": 1,
+          "dodge": 1,
+          "authority": "OFFICIAL_SOURCE",
+          "canonical": true
+        },
+        {
+          "heroId": "highwayman",
+          "level": 2,
+          "dodge": 0,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "highwayman",
+          "level": 3,
+          "dodge": 0,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "hellion",
+          "level": 1,
+          "dodge": 1,
+          "authority": "OFFICIAL_SOURCE",
+          "canonical": true
+        },
+        {
+          "heroId": "hellion",
+          "level": 2,
+          "dodge": 0,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "hellion",
+          "level": 3,
+          "dodge": 0,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "leper",
+          "level": 1,
+          "dodge": 0,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "leper",
+          "level": 2,
+          "dodge": 0,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "leper",
+          "level": 3,
+          "dodge": 0,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "occultist",
+          "level": 1,
+          "dodge": 0,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "occultist",
+          "level": 2,
+          "dodge": 0,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "occultist",
+          "level": 3,
+          "dodge": 0,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "plague-doctor",
+          "level": 1,
+          "dodge": 0,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "plague-doctor",
+          "level": 2,
+          "dodge": 0,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "plague-doctor",
+          "level": 3,
+          "dodge": 0,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "grave-robber",
+          "level": 1,
+          "dodge": 0,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "grave-robber",
+          "level": 2,
+          "dodge": 0,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "grave-robber",
+          "level": 3,
+          "dodge": 0,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        }
+      ]
+    },
+    {
+      "candidateId": "B_CLASS_BASELINE",
+      "name": "Class Baseline",
+      "rule": "Crusader class baseline 0; each of the other seven classes baseline 1, identical at all three levels.",
+      "reason": "Keep the three official anchors; choose 1 for every unknown class as the smallest nonzero value and modal known Level I value. No fantasy/stat inference or invented upgrade benefit. Higher-level equality is an explicit project design decision, not official inheritance.",
+      "selected": true,
+      "use": "DIGITAL_DESIGN_COMPARISON",
+      "officialAuthorityForUnknownValues": false,
+      "rows": [
+        {
+          "heroId": "crusader",
+          "level": 1,
+          "dodge": 0,
+          "authority": "OFFICIAL_SOURCE",
+          "canonical": true
+        },
+        {
+          "heroId": "crusader",
+          "level": 2,
+          "dodge": 0,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "crusader",
+          "level": 3,
+          "dodge": 0,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "vestal",
+          "level": 1,
+          "dodge": 1,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "vestal",
+          "level": 2,
+          "dodge": 1,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "vestal",
+          "level": 3,
+          "dodge": 1,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "highwayman",
+          "level": 1,
+          "dodge": 1,
+          "authority": "OFFICIAL_SOURCE",
+          "canonical": true
+        },
+        {
+          "heroId": "highwayman",
+          "level": 2,
+          "dodge": 1,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "highwayman",
+          "level": 3,
+          "dodge": 1,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "hellion",
+          "level": 1,
+          "dodge": 1,
+          "authority": "OFFICIAL_SOURCE",
+          "canonical": true
+        },
+        {
+          "heroId": "hellion",
+          "level": 2,
+          "dodge": 1,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "hellion",
+          "level": 3,
+          "dodge": 1,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "leper",
+          "level": 1,
+          "dodge": 1,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "leper",
+          "level": 2,
+          "dodge": 1,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "leper",
+          "level": 3,
+          "dodge": 1,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "occultist",
+          "level": 1,
+          "dodge": 1,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "occultist",
+          "level": 2,
+          "dodge": 1,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "occultist",
+          "level": 3,
+          "dodge": 1,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "plague-doctor",
+          "level": 1,
+          "dodge": 1,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "plague-doctor",
+          "level": 2,
+          "dodge": 1,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "plague-doctor",
+          "level": 3,
+          "dodge": 1,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "grave-robber",
+          "level": 1,
+          "dodge": 1,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "grave-robber",
+          "level": 2,
+          "dodge": 1,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "grave-robber",
+          "level": 3,
+          "dodge": 1,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        }
+      ]
+    },
+    {
+      "candidateId": "C_LEVEL_PROGRESSION",
+      "name": "Level Progression",
+      "rule": "Explicit rows use class baseline + (level - 1): Crusader 0/1/2, other classes 1/2/3.",
+      "reason": "Comparison only. Adds 10–20 percentage points of evasion per upgraded Hero and overlaps existing HP/slot/resistance progression; no evidence establishes such an additional benefit.",
+      "selected": false,
+      "use": "DIGITAL_DESIGN_COMPARISON",
+      "officialAuthorityForUnknownValues": false,
+      "rows": [
+        {
+          "heroId": "crusader",
+          "level": 1,
+          "dodge": 0,
+          "authority": "OFFICIAL_SOURCE",
+          "canonical": true
+        },
+        {
+          "heroId": "crusader",
+          "level": 2,
+          "dodge": 1,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "crusader",
+          "level": 3,
+          "dodge": 2,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "vestal",
+          "level": 1,
+          "dodge": 1,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "vestal",
+          "level": 2,
+          "dodge": 2,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "vestal",
+          "level": 3,
+          "dodge": 3,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "highwayman",
+          "level": 1,
+          "dodge": 1,
+          "authority": "OFFICIAL_SOURCE",
+          "canonical": true
+        },
+        {
+          "heroId": "highwayman",
+          "level": 2,
+          "dodge": 2,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "highwayman",
+          "level": 3,
+          "dodge": 3,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "hellion",
+          "level": 1,
+          "dodge": 1,
+          "authority": "OFFICIAL_SOURCE",
+          "canonical": true
+        },
+        {
+          "heroId": "hellion",
+          "level": 2,
+          "dodge": 2,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "hellion",
+          "level": 3,
+          "dodge": 3,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "leper",
+          "level": 1,
+          "dodge": 1,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "leper",
+          "level": 2,
+          "dodge": 2,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "leper",
+          "level": 3,
+          "dodge": 3,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "occultist",
+          "level": 1,
+          "dodge": 1,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "occultist",
+          "level": 2,
+          "dodge": 2,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "occultist",
+          "level": 3,
+          "dodge": 3,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "plague-doctor",
+          "level": 1,
+          "dodge": 1,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "plague-doctor",
+          "level": 2,
+          "dodge": 2,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "plague-doctor",
+          "level": 3,
+          "dodge": 3,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "grave-robber",
+          "level": 1,
+          "dodge": 1,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "grave-robber",
+          "level": 2,
+          "dodge": 2,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        },
+        {
+          "heroId": "grave-robber",
+          "level": 3,
+          "dodge": 3,
+          "authority": "PROJECT_RULING",
+          "canonical": false
+        }
+      ]
+    }
+  ],
+  "sourceBoundPairsPreserved": 3,
+  "prototypeValuesUsed": false,
+  "selectionPriority": [
+    "Preserve official pairs",
+    "Bound hit-rate distortion",
+    "Avoid invented progression",
+    "Minimize per-class exceptions",
+    "Deterministic versioning",
+    "Cheap future versioned override"
+  ]
+}

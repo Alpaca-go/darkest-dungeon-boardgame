@@ -24,6 +24,7 @@ import { nowIso } from './random';
 import { assertBossEncounter } from './bosses/foundation';
 import { resolveBossDefinition } from './bosses/definitions';
 import { validateThreatCheckpoint } from './bosses/threat-checkpoint';
+import { validateHeroDodgeCampaignMetadata } from './rules/hero-dodge-versioning';
 import { createInitialStagecoach } from './stagecoach';
 import { getQuirkById, normalizeQuirkId } from '../data/quirks';
 import { getDiseaseById } from '../data/diseases';
@@ -194,6 +195,8 @@ export function validateSaveFile(data: unknown): string | null {
     } catch (error) { return `Boss history/checkpoint invalid: ${error instanceof Error ? error.message : String(error)}`; }
   }
   if (!c || typeof c !== 'object') return '缺少 campaign 字段';
+  try { validateHeroDodgeCampaignMetadata(c); }
+  catch (error) { return `Hero Dodge metadata invalid: ${error instanceof Error ? error.message : String(error)}`; }
   if (!Array.isArray(c.heroes)) return 'campaign.heroes 缺失或不是数组';
   if (typeof c.gold !== 'number' || Number.isNaN(c.gold)) return 'campaign.gold 非法';
   if (!c.gamePhase || !VALID_PHASES.includes(c.gamePhase)) return 'campaign.gamePhase 非法';
@@ -1736,7 +1739,9 @@ export function sanitizeSaveFile(save: SaveFile): SaveFile {
 
 /** 从快照恢复战役状态（先修复再取 campaign）。 */
 export function restoreSaveSnapshot(save: SaveFile): CampaignState {
-  return sanitizeSaveFile(save).campaign;
+  const campaign = sanitizeSaveFile(save).campaign;
+  validateHeroDodgeCampaignMetadata(campaign);
+  return campaign;
 }
 
 // ---------------------------------------------------------------------------
