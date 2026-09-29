@@ -3,7 +3,8 @@ import { createId, nowIso } from './random';
 import { getHeroById } from '../data/heroes';
 import { getSkillsByHero } from '../data/skills';
 import { getQuestById } from '../data/quests';
-import { generateDungeon } from './dungeon';
+import { PRODUCTION_NECROMANCER_QUEST } from '../data/quests/production-necromancer-quest';
+import { generateDungeonForQuest } from './dungeon';
 import { pushLog } from './log';
 import { createInitialStagecoach } from './stagecoach';
 import { resetMentalStateForNewQuest } from './resolve-conversion';
@@ -253,7 +254,8 @@ export function isLoadoutComplete(campaign: CampaignState): boolean {
  * - Phase 11A.1 §8：Engine 侧门控 —— Boss 锁定时禁止 Standard；Standard 未达 2/2 时禁止 Boss Quest。
  */
 export function selectQuest(campaign: CampaignState, questId: string): CampaignState {
-  const quest = getQuestById(questId);
+  const quest = campaign.runtimeContentProfile === 'community-complete-edition' && questId === 'face-the-threat'
+    && campaign.campaignProgress.activeBossFamilyId === 'necromancer' ? PRODUCTION_NECROMANCER_QUEST : getQuestById(questId);
   if (!quest) return campaign;
   // Phase 11A.1 §8.1 / §8.2：Engine 侧门控（即使 UI 绕过也必须拒绝）。
   const validation = validateQuestSelection(campaign, questId);
@@ -276,7 +278,7 @@ export function selectQuest(campaign: CampaignState, questId: string): CampaignS
       `${campaign.id}:${questId}:run-${campaign.completedQuestCount + 1}`,
     ),
     questStatus: 'active',
-    dungeon: generateDungeon(questId),
+    dungeon: generateDungeonForQuest(quest),
     battle: null,
     provisions,
     gamePhase: 'dungeon-explore',

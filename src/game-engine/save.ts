@@ -20,6 +20,8 @@ import type {
   TrinketSide,
 } from '../types';
 import type { QuestRuntimeToken } from '../types/content-runtime';
+import { validateProductionBossRoomStorage } from './bosses/room-storage';
+import { sourceAttackSkill } from './component-monster-runtime';
 import { nowIso } from './random';
 import { assertBossEncounter } from './bosses/foundation';
 import { resolveBossDefinition } from './bosses/definitions';
@@ -195,7 +197,7 @@ export function validateSaveFile(data: unknown): string | null {
     } catch (error) { return `Boss history/checkpoint invalid: ${error instanceof Error ? error.message : String(error)}`; }
   }
   if (!c || typeof c !== 'object') return '缺少 campaign 字段';
-  try { validateHeroDodgeCampaignMetadata(c); }
+  try { validateProductionBossRoomStorage(c); validateHeroDodgeCampaignMetadata(c); }
   catch (error) { return `Hero Dodge metadata invalid: ${error instanceof Error ? error.message : String(error)}`; }
   if (!Array.isArray(c.heroes)) return 'campaign.heroes 缺失或不是数组';
   if (typeof c.gold !== 'number' || Number.isNaN(c.gold)) return 'campaign.gold 非法';
@@ -452,7 +454,7 @@ export function validateSaveFile(data: unknown): string | null {
           (pending.stage !== 'incoming-attack-window' && pending.stage !== 'hero-hit-window')) return 'pendingMonsterAttack stage 非法';
       if (!b.monsters.some((unit) => unit.id === pending.monsterUnitId && unit.isAlive)) return 'pendingMonsterAttack monster 引用失效';
       if (!b.heroes.some((unit) => unit.id === pending.targetHeroUnitId && unit.isAlive)) return 'pendingMonsterAttack target 引用失效';
-      if (!getMonsterSkillById(pending.skillId)) return 'pendingMonsterAttack skill 引用失效';
+      if (!(sourceAttackSkill(b) ?? getMonsterSkillById(pending.skillId))) return 'pendingMonsterAttack skill 引用失效';
       if (pending.monsterUnitId !== b.activeActorId) return 'pendingMonsterAttack actor 与当前回合不一致';
       if (!Number.isInteger(pending.attackRoll) || pending.attackRoll < 1 || pending.attackRoll > 10) return 'pendingMonsterAttack attackRoll 非法';
       if (!Number.isFinite(pending.dodgeModifier)) return 'pendingMonsterAttack dodgeModifier 非法';
@@ -1428,7 +1430,7 @@ export function migrateCampaignToV20(campaign: CampaignState): CampaignState {
     && battle.activeActorId === pending.monsterUnitId
     && battle.monsters.some((unit) => unit.id === pending.monsterUnitId && unit.isAlive)
     && battle.heroes.some((unit) => unit.id === pending.targetHeroUnitId && unit.isAlive)
-    && typeof pending.skillId === 'string' && Boolean(getMonsterSkillById(pending.skillId))
+    && typeof pending.skillId === 'string' && Boolean(sourceAttackSkill(battle) ?? getMonsterSkillById(pending.skillId))
     && Number.isInteger(pending.attackRoll) && pending.attackRoll >= 1 && pending.attackRoll <= 10
     && typeof pending.dodgeModifier === 'number' && Number.isFinite(pending.dodgeModifier)
     && Number.isInteger(pending.incomingDamageNumerator) && pending.incomingDamageNumerator >= 0
@@ -1740,6 +1742,7 @@ export function sanitizeSaveFile(save: SaveFile): SaveFile {
 /** 从快照恢复战役状态（先修复再取 campaign）。 */
 export function restoreSaveSnapshot(save: SaveFile): CampaignState {
   const campaign = sanitizeSaveFile(save).campaign;
+  validateProductionBossRoomStorage(campaign);
   validateHeroDodgeCampaignMetadata(campaign);
   return campaign;
 }

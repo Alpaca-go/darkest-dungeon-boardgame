@@ -25,6 +25,7 @@ export interface PrintedMonsterSkill {
   selfPull: number;
   targetPush: number;
   targetDebuffTurns: number;
+  targetStunTurns: number;
 }
 export interface BoneCombatDependency {
   monsterId: string;
@@ -41,9 +42,12 @@ export interface BoneCombatDependency {
   initiative: { cardsPerInstance: number; sourceReferences: CombatSourceReference[] };
   sourceReferences: CombatSourceReference[];
   unresolvedFields: string[];
-  status: 'PARTIAL' | 'IMPLEMENTED';
+  status: 'PARTIAL' | 'IMPLEMENTED' | 'SOURCE_REVIEW_COMPLETE';
 }
 export interface ProductionMonsterDefinition extends SpawnDefinition {
+  definitionStatus: 'EXECUTABLE_PRODUCTION_DEFINITION';
+  componentDefinitionVersion: string;
+  ordinaryNecromancerSummonPool: boolean;
   displayName: string;
   dodge: number;
   skills: PrintedMonsterSkill[];
@@ -52,4 +56,20 @@ export interface ProductionMonsterDefinition extends SpawnDefinition {
   immunities: string[];
   resistances: string[];
   sourceReferences: CombatSourceReference[];
+}
+
+/** Source-bound attack continuation shared by ordinary Monsters and Bosses. */
+export interface SourceMonsterAttack {
+  skill: import('./index').MonsterSkillDefinition;
+  criticalEnabled: boolean;
+  criticalThreshold: number;
+  criticalDamage: number;
+  targetPush: number;
+  remainingHeroes: string[];
+  alreadyResolvedHeroes: string[];
+  successfulHits: string[];
+  parentEventId: string;
+  targetAreaId: string;
+  summonDefinitionId: string | null;
+  skillNumber: number;
 }

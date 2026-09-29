@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import { applyBossFoundationInput } from '../game-engine/commands/boss-foundation';
+import { explicitlyMigrateHeroDodgeToV2 } from '../game-engine/rules/hero-dodge-versioning';
+import { applyBossThreatCheckpointInput, applyBossFoundationInput } from '../game-engine/commands/boss-foundation';
 import { advanceTurn } from '../game-engine/battle';
 import type { CampaignState, ProvisionPool } from '../types';
 import {
@@ -134,6 +135,8 @@ interface UiState {
   battleSkillId: string | null;
 }
 interface GameStore {
+  migrateHeroDodgeToV2: () => void;
+  battleHeroAreaMove: (areaId: string) => void;
   commitBossChoice(choiceId: string, selectedId: string): void;
   campaign: CampaignState | null;
   ui: UiState;
@@ -296,12 +299,26 @@ export const useGameStore = create<GameStore>((set, get) => {
   };
 
   return {
+    migrateHeroDodgeToV2: () => {
+      const c=get().campaign; if (!c || c.battle || c.bossEncounterCheckpoint) return;
+      commit(explicitlyMigrateHeroDodgeToV2(c,c.id+':hero-dodge-v2'));
+    },
+    battleHeroAreaMove: (areaId) => {
+      const c=get().campaign;
+      if (!c?.battle?.bossEncounter || !c.battle.activeActorId || c.battle.pendingMonsterAttack || c.battle.bossEncounter.pendingChoice) return;
+      const changed=applyBossFoundationInput(c,{type:'MOVE_HERO_AREA',heroId:c.battle.activeActorId,areaId});
+      const battle=changed.battle!.currentActionPoints===0 ? advanceTurn(changed.battle!) : changed.battle!;
+      commit(settleBattleState({...changed,battle}).campaign);
+    },
     commitBossChoice: (choiceId, selectedId) => {
       const c = get().campaign;
+      if (c?.bossEncounterCheckpoint?.pendingChoice && !c.battle) {
+        commit(applyBossThreatCheckpointInput(c,{type:'CHOICE',choiceId,selectedId})); return;
+      }
       if (!c?.battle?.bossEncounter?.pendingChoice) return;
       const changed = applyBossFoundationInput(c, { type: 'CHOICE', choiceId, selectedId });
       let battle = changed.battle!;
-      if (!battle.bossEncounter?.pendingChoice && battle.activeActorId && battle.monsters.some(u => u.id === battle.activeActorId)) battle = advanceTurn(battle);
+      if (!battle.bossEncounter?.pendingChoice && !battle.pendingMonsterAttack && battle.activeActorId && battle.monsters.some(u => u.id === battle.activeActorId)) battle = advanceTurn(battle);
       const next = { ...changed, battle };
       commit(battle.bossEncounter?.pendingChoice ? next : settleBattleState(next).campaign);
     },

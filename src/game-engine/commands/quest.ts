@@ -16,6 +16,7 @@ import { finalizeQuestReturnToHamlet } from '../campaign/campaign-orchestrator';
 import { selectQuest } from '../campaign';
 import { engineChooseQuest } from '../campaign/campaign-orchestrator';
 import { getBossQuestPool, getQuestPool, runtimeContentContext } from '../../data/content-selector';
+import { reserveProductionBossEncounter } from './boss-foundation';
 import { necromancerQuestEntryError } from '../bosses/production-dependency-gate';
 
 export type QuestCommandError =
@@ -174,6 +175,10 @@ export function commitQuestSelection(
 ): QuestSelectionResult {
   const dependencyError = necromancerQuestEntryError(campaign, questId);
   if (dependencyError) return { ok: false, campaign, error: dependencyError };
+  if (campaign.bossEncounterCheckpoint || campaign.battle?.bossEncounter) {
+    if (questId !== campaign.currentQuestId) return {ok:false,campaign,error:'active-boss-encounter'};
+    return {ok:true,campaign,error:null};
+  }
   const context = runtimeContentContext(campaign);
   const eligible = [...getQuestPool(context), ...getBossQuestPool(context)];
   if (!eligible.some((quest) => quest.id === questId)) {
@@ -184,5 +189,5 @@ export function commitQuestSelection(
     return { ok: false, campaign, error: 'no-active-quest' };
   }
   const next = selectQuest(gate.campaign, questId);
-  return { ok: true, campaign: next, error: null };
+  return { ok: true, campaign: reserveProductionBossEncounter(next), error: null };
 }

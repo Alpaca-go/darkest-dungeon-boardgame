@@ -1,3 +1,4 @@
+import { withBossEncounterSources } from '../bosses/foundation';
 import { resolveDungeonTrinketOpportunity } from './dungeon-trinket-bridge';
 // Phase 8C：Trinket 与战斗/地牢流程的桥接（开发文档 §11 / §12）。
 //
@@ -43,12 +44,19 @@ function hasOpenForRoot(campaign: CampaignState, rootEventId: string): boolean {
  * needed after a window is persisted on pendingMonsterAttack before control is
  * returned to the UI.
  */
-export function advancePendingMonsterAttack(campaign: CampaignState): CampaignState {
+export function advancePendingMonsterAttack(campaign: CampaignState, sourceScope = false): CampaignState {
+  if (!sourceScope && campaign.battle?.pendingMonsterAttack?.sourceAttack) {
+    let result = campaign;
+    const battle = withBossEncounterSources(structuredClone(campaign.battle), b=> {
+      result = advancePendingMonsterAttack({ ...campaign,battle:b },true); return result.battle!;
+    });
+    return {...result,battle};
+  }
   let next = campaign;
   for (let guard = 0; guard < 50; guard += 1) {
     const battle = next.battle;
     const pending = battle?.pendingMonsterAttack;
-    if (!battle || !pending) return next;
+    if (!battle || !pending || battle.bossEncounter?.pendingChoice) return next;
     if (hasOpenForRoot(next, pending.rootEventId)) return next;
     const target = battle.heroes.find((unit) => unit.id === pending.targetHeroUnitId);
     const hero = target ? findHero(next, target.sourceId) : undefined;
@@ -76,7 +84,7 @@ export function advancePendingMonsterAttack(campaign: CampaignState): CampaignSt
 
     if (!pending.hit) {
       const committed = commitPendingMonsterAttackResolution(battle);
-      next = { ...next, battle: committed.status === 'active' ? advanceTurn(committed) : committed };
+      next = { ...next, battle: committed.status === 'active' && !committed.pendingMonsterAttack && !committed.bossEncounter?.pendingChoice ? advanceTurn(committed) : committed };
       continue;
     }
     const opened = openTrinketWindow(next, {
@@ -251,8 +259,15 @@ export interface ResolveOpportunityResult {
 export function resolveTrinketOpportunity(
   campaign: CampaignState,
   opportunityId: string,
-  action: 'use' | 'decline'
+  action: 'use' | 'decline', sourceScope = false
 ): ResolveOpportunityResult {
+  if (!sourceScope && campaign.battle?.pendingMonsterAttack?.sourceAttack) {
+    let result: ResolveOpportunityResult = {campaign,error:null,resumed:false};
+    const battle = withBossEncounterSources(structuredClone(campaign.battle), b=>{
+      result=resolveTrinketOpportunity({...campaign,battle:b},opportunityId,action,true); return result.campaign.battle!;
+    });
+    return {...result,campaign:{...result.campaign,battle}};
+  }
   const opp = findOpportunity(campaign, opportunityId);
   if (!opp) return { campaign, error: '使用机会不存在。', resumed: false };
   if (campaign.pendingDungeonTrinketAction && opp.rootEventId === campaign.pendingDungeonTrinketAction.rootEventId) {

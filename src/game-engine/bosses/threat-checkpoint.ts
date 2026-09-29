@@ -2,6 +2,7 @@ import type { BattleState, CampaignState } from '../../types';
 import type { BossEncounterState } from '../../types/boss-runtime';
 import { assertBossEncounter } from './foundation';
 import { resolveBossDefinition } from './definitions';
+import { resolveHeroDodge } from '../rules/hero-dodge';
 
 /** Reject identity/version changes before any state or RNG is consumed. */
 export function validateThreatCheckpoint(campaign: CampaignState, checkpoint: BossEncounterState): void {
@@ -24,6 +25,15 @@ export function validateThreatCheckpoint(campaign: CampaignState, checkpoint: Bo
   if (!Array.isArray(context.consumedOnceKeys) || new Set(context.consumedOnceKeys).size !== context.consumedOnceKeys.length) throw new Error('Checkpoint consumed-once keys invalid');
   const heroIds = campaign.heroes.filter(h => !h.dead).map(h => `u_${h.instanceId}`);
   if (heroIds.some(id => !Number.isFinite(context.heroDodge[id]))) throw new Error('Checkpoint Hero Dodge missing');
+  if (context.heroDodgeBindings) {
+    if (Object.keys(context.heroDodgeBindings).length !== heroIds.length) throw new Error('Checkpoint Hero binding coverage invalid');
+    for (const hero of campaign.heroes.filter(h => !h.dead)) {
+      const id = `u_${hero.instanceId}`;
+      const expected = resolveHeroDodge({heroId:hero.heroId,level:hero.level,ruleSetVersion:checkpoint.ruleSetVersion});
+      if (JSON.stringify(context.heroDodgeBindings[id]) !== JSON.stringify(expected) || context.heroDodge[id] !== expected.value)
+        throw new Error('Checkpoint Hero binding differs from pinned resolver');
+    }
+  }
   if (checkpoint.threatState.forcedHeroId && !heroIds.includes(checkpoint.threatState.forcedHeroId)) throw new Error('Checkpoint selected Hero missing');
   if (checkpoint.pendingChoice && (checkpoint.pendingChoice.continuation.kind !== 'graveyard'
     || checkpoint.pendingChoice.candidateIds.some(id => !heroIds.includes(id)))) throw new Error('Checkpoint pending choice cannot be resumed in this campaign');

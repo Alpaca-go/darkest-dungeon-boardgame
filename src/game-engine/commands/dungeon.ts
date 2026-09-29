@@ -20,6 +20,7 @@ export type EnterRoomError =
   | 'cannot-move'
   | 'pending-quest-rule-choice'
   | 'battle-settlement-failed'
+  | 'necromancer-threat-domain-bridge-unbound'
   | 'necromancer-production-dependencies-unbound';
 
 export interface EnterRoomResult {
@@ -46,6 +47,14 @@ export function enterDungeonRoom(
     || !campaign.dungeon || !canMoveTo(campaign.dungeon, roomId)
     || !campaign.dungeon.rooms.some((room) => room.id === roomId)) {
     return { ok: false, campaign, error: 'cannot-move' };
+  }
+
+  // Stop affected promotion: the saved production Threat has no ordinary source-bound
+  // battle command yet. Never let its guarded Rooms silently use prototype encounters.
+  const room = campaign.dungeon.rooms.find(r => r.id === roomId)!;
+  if (campaign.bossEncounterCheckpoint?.checkpointContext?.heroDodgeBindings
+    && ['lair', 'treasure', 'curio'].includes(room.sourceRoomToken ?? '')) {
+    return { ok: false, campaign, error: 'necromancer-threat-domain-bridge-unbound' };
   }
 
   const begun = beginExplorationMoveTrinketAction(campaign, roomId);

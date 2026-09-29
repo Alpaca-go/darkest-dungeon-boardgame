@@ -18,6 +18,7 @@ import { necromancerQuestEntryError } from '../game-engine/bosses/production-dep
 export default function QuestSelectPage() {
   const navigate = useNavigate();
   const campaign = useGameStore((s) => s.campaign);
+  const migrateHeroDodgeToV2=useGameStore(s=>s.migrateHeroDodgeToV2);
   const chooseQuest = useGameStore((s) => s.chooseQuest);
 
   if (!campaign) return <Navigate to="/" replace />;
@@ -45,6 +46,10 @@ export default function QuestSelectPage() {
       <h1 className="text-2xl font-bold text-dd-text mb-1">任务选择</h1>
       <p className="text-dd-muted text-sm mb-4">选择一项任务，开始生成对应的地牢。</p>
 
+      {campaign.runtimeContentProfile === 'community-complete-edition' && cp.activeBossFamilyId === 'necromancer'
+        && !campaign.heroDodgeRuleSetSelection && !campaign.battle && !campaign.bossEncounterCheckpoint && <button
+          type="button" data-testid="migrate-hero-dodge-v2" onClick={migrateHeroDodgeToV2}
+          className="mb-4 rounded border border-dd-accent px-3 py-2">启用已接受的 Hero Dodge v2 规则</button>}
       {/* Phase 11A.1 §22 最小 UI：Campaign 状态条 */}
       <div className="mb-4 p-3 rounded border border-dd-border bg-dd-panel/40 text-sm">
         <div className="flex flex-wrap gap-3">

@@ -1,3 +1,4 @@
+import { areaDistance } from '../game-engine/bosses/foundation';
 import { useMemo, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useGameStore } from '../store/useGameStore';
@@ -21,6 +22,7 @@ import TrinketSlots from '../components/trinkets/TrinketSlots';
 export default function BattlePage() {
   const navigate = useNavigate();
   const campaign = useGameStore((s) => s.campaign);
+  const battleHeroAreaMove = useGameStore(s=>s.battleHeroAreaMove);
   const commitBossChoice = useGameStore((s) => s.commitBossChoice);
   const battleSkillId = useGameStore((s) => s.ui.battleSkillId);
   const selectBattleSkill = useGameStore((s) => s.selectBattleSkill);
@@ -93,6 +95,14 @@ export default function BattlePage() {
       </div>
 
       <InitiativeBar battle={battle} />
+      {battle.bossEncounter && isHeroTurn && !battle.pendingMonsterAttack && !battle.bossEncounter.pendingChoice && <div className="flex gap-2" data-testid="boss-area-movement">
+        {battle.bossEncounter.definition.areas.filter(a=>a.id!==battle.bossEncounter!.placements[activeUnit!.id]
+          && areaDistance(battle.bossEncounter!.definition,battle.bossEncounter!.placements[activeUnit!.id],a.id)<=activeUnit!.speed
+          && a.capacity > [...battle.heroes,...battle.monsters].filter(u=>u.isAlive && battle.bossEncounter!.placements[u.id]===a.id)
+            .reduce((n,u)=>n+(battle.bossEncounter!.spawnDefinitions[u.sourceId]?.occupiedSlots ?? 1),0))
+          .map(a=><button key={a.id} disabled={battle.currentActionPoints<=0} data-testid="boss-move-area" data-area-id={a.id}
+            onClick={()=>battleHeroAreaMove(a.id)}>移动到 {a.id}</button>)}
+      </div>}
 
       {battle.pendingAction ? (
         <div

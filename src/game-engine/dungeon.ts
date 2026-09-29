@@ -15,6 +15,7 @@ import { runtimeContentContext } from '../data/content-selector';
 import { getQuestById } from '../data/quests';
 import type { QuestRoomTokenType } from '../types/content-runtime';
 import { recordQuestQualificationEvent } from './quests/quest-runtime';
+import { enterProductionBossRoom } from './commands/boss-foundation';
 import { necromancerQuestEntryError } from './bosses/production-dependency-gate';
 
 /** Phase 7：全队压力统一入口（存活英雄各 +amount，走统一管线处理阈值）。 */
@@ -97,6 +98,15 @@ export function generateCommunityDungeon(quest: QuestDefinition, seed = quest.id
     throw new Error(`Community Quest room composition mismatch: ${quest.id}`);
   }
   const arranged = deterministicShuffle(tokens, `${quest.id}:${seed}`);
+  if (quest.type === 'boss') {
+    const edges = COMMUNITY_ROOM_NODES.filter(n=>n.id!=='start' && n.adjacentRoomIds.length===1);
+    const edge = edges[stableSeed(seed + ':boss-edge') % edges.length];
+    if (!edge) throw new Error('Boss Dungeon has no legal edge');
+    const slot = COMMUNITY_ROOM_NODES.findIndex(n=>n.id===edge.id)-1;
+    const current = arranged.indexOf('objective');
+    if (current<0) throw new Error('Boss Objective token missing');
+    [arranged[slot],arranged[current]]=[arranged[current],arranged[slot]];
+  }
   const rooms: DungeonRoom[] = COMMUNITY_ROOM_NODES.map((node, index) => {
     if (node.id === 'start') {
       return { id: node.id, type: 'start', status: 'current', adjacentRoomIds: [...node.adjacentRoomIds], curioId: null, curioUsed: false };
@@ -282,6 +292,8 @@ function applyRoomResult(campaign: CampaignState, room: DungeonRoom): CampaignSt
       return recordQuestQualificationEvent(c, room);
     }
     case 'objective': {
+      if (campaign.runtimeContentProfile === 'community-complete-edition' && campaign.currentQuestId === 'face-the-threat'
+        && campaign.campaignProgress.activeBossFamilyId === 'necromancer') return enterProductionBossRoom(campaign, room.id);
       const updated = markRoom(dungeon, room.id, 'cleared');
       const c: CampaignState = {
         ...campaign,

@@ -8,7 +8,8 @@ import type {
   SkillDefinition,
   PendingMonsterAttack,
 } from '../types';
-import { applyBossRuntimeInput, checkBossRuntimeEnd, withBossEncounterSources } from './bosses/foundation';
+import { applySourceTargetPush, sourceAttackSkill, resolveSourceAttackDodge, preparePrintedMonsterTurn } from './component-monster-runtime';
+import { finishSourceMonsterAttack, applyBossRuntimeInput, checkBossRuntimeEnd, withBossEncounterSources } from './bosses/foundation';
 import { getHeroCombatDefinition } from '../data/progression/hero-level-registry';
 import { createId, d10, nowIso } from './random';
 import { returnCommunityPhysicalMonstersFromBattle } from './campaign/act-four/community-physical-monster-deck';
@@ -27,6 +28,7 @@ import { resolveAttack, resolveAttackFromRoll } from './combat-resolution';
 import { applyBattleUnitDamage } from './damage';
 import { applyBattleUnitHealing } from './healing';
 import {
+  resolveShuffleCount,
   applyEffects,
   applyEffectsWithResistance,
   applyStatusEffectEvent,
@@ -336,7 +338,7 @@ export function initBattle(campaign: CampaignState, roomId: string): CampaignSta
 
 /** 推进到下一个行动者；自动跳过死亡/Stun 单位，并在怪物回合自动执行其动作。 */
 export function advanceTurn(state: BattleState): BattleState {
-  if (state.bossEncounter?.pendingChoice) return state;
+  if (state.bossEncounter?.pendingChoice || state.pendingMonsterAttack) return state;
   if (state.bossEncounter) return withBossEncounterSources(state, s => advanceTurnInternal(s));
   return advanceTurnInternal(state);
 }
@@ -399,7 +401,7 @@ function advanceTurnInternal(state: BattleState): BattleState {
     if (activated.side === 'monster') {
       if (s.bossEncounter?.bossState.actorId === id) {
         s = runMonsterTurn(s, id);
-        if (s.bossEncounter?.pendingChoice) return s;
+        if (s.bossEncounter?.pendingChoice || s.pendingMonsterAttack) return s;
         s = checkEnd(s);
         if (s.status !== 'active') return s;
         continue;
@@ -760,7 +762,7 @@ export function heroUseSkill(
     }
   }
   if (skill.moveTarget && skill.targetSide === 'enemy') {
-    const distance = resolveCommunityShuffleMovement(tgt, skill.moveTarget);
+    const distance = resolveCommunityShuffleMovement(tgt, resolveShuffleCount(tgt, skill.moveTarget));
     const np = clamp(tgt.position + distance, 1, 4);
     if (distance !== 0 && !s.monsters.some((m) => m.id !== tgt.id && m.position === np)) {
       tgt = { ...tgt, position: np };
@@ -823,6 +825,7 @@ function tryMonsterMove(state: BattleState, monsterId: string): BattleState {
 /** Freeze only the attack roll before the incoming-attack window opens. */
 export function prepareMonsterAttackResolution(state: BattleState, monsterId: string): BattleState {
   if (state.pendingMonsterAttack) return state;
+  if (state.bossEncounter?.checkpointContext?.heroDodgeBindings && state.bossEncounter.spawnDefinitions[findUnit(state, monsterId)?.sourceId ?? '']) return preparePrintedMonsterTurn(state, monsterId);
   const monster = findUnit(state, monsterId);
   if (!monster || !monster.isAlive || monster.side !== 'monster') return state;
   const action = chooseMonsterAction(state, monster);
@@ -849,9 +852,18 @@ export function prepareMonsterAttackResolution(state: BattleState, monsterId: st
 export function freezePendingMonsterAttack(state: BattleState): BattleState {
   const pending = state.pendingMonsterAttack;
   if (!pending || pending.stage !== 'incoming-attack-window') return state;
-  const skill = getMonsterSkillById(pending.skillId);
+  const skill = sourceAttackSkill(state) ?? getMonsterSkillById(pending.skillId);
   if (!skill) return { ...state, pendingMonsterAttack: null };
-  const resolved = resolveAttackFromRoll(skill, pending.attackRoll, -pending.dodgeModifier);
+  const source = pending.sourceAttack;
+  const attacker = findUnit(state,pending.monsterUnitId);
+  const target = findUnit(state,pending.targetHeroUnitId);
+  const accuracyModifier = source && target?.marked ? 1 : 0;
+  const critModifier = source && attacker ? attacker.buffs.reduce((n,e)=>n+e.amount,0)-attacker.debuffs.reduce((n,e)=>n+e.amount,0) : 0;
+  const resolved = source ? {
+    hit: pending.attackRoll <= skill.accuracy + accuracyModifier - resolveSourceAttackDodge(state) - pending.dodgeModifier,
+    crit: source.criticalEnabled && pending.attackRoll <= source.criticalThreshold + critModifier,
+    damage: source.criticalEnabled && pending.attackRoll <= source.criticalThreshold + critModifier ? source.criticalDamage : skill.minDamage,
+  } : resolveAttackFromRoll(skill, pending.attackRoll, -pending.dodgeModifier);
   return {
     ...state,
     pendingMonsterAttack: {
@@ -871,12 +883,12 @@ export function commitPendingMonsterAttackResolution(state: BattleState): Battle
   if (!pending || pending.stage !== 'hero-hit-window' || pending.hit === null ||
       pending.crit === null || pending.baseDamage === null) return state;
   const monster = findUnit(state, pending.monsterUnitId);
-  const skill = getMonsterSkillById(pending.skillId);
+  const skill = sourceAttackSkill(state) ?? getMonsterSkillById(pending.skillId);
   const target = findUnit(state, pending.targetHeroUnitId);
   if (!monster || !skill || !target) return { ...state, pendingMonsterAttack: null };
   const cleared: BattleState = { ...state, pendingMonsterAttack: null };
   if (!pending.hit) {
-    return pushBattleLog(cleared, `${monster.name} 使用 ${skill.name}，掷 ${pending.attackRoll} 未命中 ${target.name}。`, 'info');
+    return pushBattleLog(pending.sourceAttack ? finishSourceMonsterAttack(state, false) : cleared, `${monster.name} 使用 ${skill.name}，掷 ${pending.attackRoll} 未命中 ${target.name}。`, 'info');
   }
 
   const effectiveCritical = pending.crit || pending.criticalOverride === 'force-critical';
@@ -946,6 +958,10 @@ export function commitPendingMonsterAttackResolution(state: BattleState): Battle
     : '';
   next = pushBattleLog(next, `${monster.name} 使用 ${skill.name}，掷 ${pending.attackRoll}${criticalNote} 命中 ${tgt.name}，造成 ${transformedDamage} 伤害${stressNote}${effNote}`, 'danger');
   for (const message of outcome.logs) next = pushBattleLog(next, message, outcome.heroDied ? 'danger' : 'warning');
+  if (pending.sourceAttack) {
+    next = applySourceTargetPush({ ...next, pendingMonsterAttack: pending });
+    if (!next.bossEncounter?.pendingChoice) next = finishSourceMonsterAttack(next, true);
+  }
   return checkEnd(next);
 }
 
@@ -958,6 +974,7 @@ export function runMonsterTurn(state: BattleState, monsterId: string): BattleSta
   }
   const monster = findUnit(state, monsterId);
   if (!monster || !monster.isAlive || monster.side !== 'monster') return state;
+  if (state.bossEncounter?.checkpointContext?.heroDodgeBindings) return preparePrintedMonsterTurn(state,monsterId);
   if (
     isCommunityGuardianUnit(monster) &&
     monster.sourceId !== 'community-dd-mammoth-cyst' &&

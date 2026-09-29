@@ -157,7 +157,11 @@
     "test:e2e:necromancer-closure": "playwright test e2e/c1c31-necromancer-production-attempt.spec.ts",
     "audit:complete-edition-c1c31r": "vite-node scripts/audit/generate-complete-edition-c1c31r.ts",
     "verify:complete-edition-c1c31r": "vite-node scripts/audit/verify-complete-edition-c1c31r.ts",
-    "test:hero-dodge-review": "vitest run src/audit/c1c31r-hero-dodge-explicit-table.test.ts"
+    "test:hero-dodge-review": "vitest run src/audit/c1c31r-hero-dodge-explicit-table.test.ts",
+    "audit:complete-edition-c1c32": "vite-node scripts/audit/generate-complete-edition-c1c32.ts",
+    "verify:complete-edition-c1c32": "vite-node scripts/audit/verify-complete-edition-c1c32.ts",
+    "test:necromancer-finalization": "vitest run src/audit/c1c32-necromancer-runtime-finalization.test.ts",
+    "test:e2e:necromancer-finalization": "playwright test e2e/c1c32-necromancer-runtime-finalization.spec.ts"
   },
   "dependencies": {
     "lucide-react": "^0.408.0",

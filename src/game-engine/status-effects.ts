@@ -89,11 +89,11 @@ export function applyEffectsWithResistance(
       blocked.push({ type: effect.type, reason: 'immune' });
       continue;
     }
-    if (effect.type !== 'buff' && effect.type !== 'debuff' && categoricalResistances.includes(effect.type)) {
+    if (effect.type !== 'buff' && categoricalResistances.includes(effect.type as 'debuff')) {
       const from = effect.durationTurns ?? effect.amount;
       const to = Math.max(0, from - 1);
       blocked.push({ type: effect.type, reason: 'resisted', durationReducedFrom: from, durationReducedTo: to });
-      if (to > 0) next = applyEffectToUnit(next, { ...effect, durationTurns: to });
+      if (to > 0) next = applyEffectToUnit(next, { ...effect, amount: effect.type === 'stun' ? Math.min(effect.amount,to) : effect.amount, durationTurns: to });
       continue;
     }
     const key = RESIST_KEY_BY_EFFECT[effect.type];
@@ -276,4 +276,11 @@ export function tickStun(unit: BattleUnit): BattleUnit {
     stunned: remaining > 0 ? unit.stunned : 0,
     conditionDurations: { ...unit.conditionDurations, stun: remaining },
   };
+}
+
+/** Categorical printed Shuffle resistance, shared by every source-bound character. */
+export function resolveShuffleCount(unit: BattleUnit, distance: number): number {
+  if (unit.immunities?.some(i => i.toLowerCase() === 'shuffle')) return 0;
+  if (unit.categoricalResistances?.includes('shuffle')) return Math.sign(distance) * Math.max(0,Math.abs(distance)-1);
+  return distance;
 }

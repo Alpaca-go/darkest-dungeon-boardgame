@@ -259,6 +259,7 @@ export interface DungeonState {
 export interface BattleUnit {
   /** Definition-bound board-game Dodge for the Boss foundation. */
   bossCombatDodge?: number;
+  heroDodgeBinding?: import('./hero-dodge-rules').ResolvedHeroDodge;
   heroCombatDefinition?: import('./component-combat').HeroCombatDefinition;
   id: string;
   name: string;
@@ -334,7 +335,7 @@ export interface BattleUnit {
   /** 由 Hero Level Registry 派生的免疫状态列表（如 'stun'）。 */
   immunities?: string[];
   /** Board-game categorical resistance: reduce matching Condition duration by one turn. */
-  categoricalResistances?: StatusEffectType[];
+  categoricalResistances?: Array<StatusEffectType | 'debuff' | 'shuffle'>;
   /** Source-backed duration bookkeeping, separate from Bleed/Blight potency. */
   conditionDurations?: Partial<Record<StatusEffectType, number>>;
   // ---- Phase 8C：Trinket 快照（仅英雄；获取/翻面等权威状态始终在战役英雄上） ----
@@ -378,6 +379,7 @@ export interface PendingBattleAction {
  * resolves the two source-distinct Trinket reaction windows.
  */
 export interface PendingMonsterAttack {
+  sourceAttack?: import('./component-combat').SourceMonsterAttack;
   kind: 'monster-attack';
   rootEventId: string;
   stage: 'incoming-attack-window' | 'hero-hit-window';
@@ -777,6 +779,8 @@ export interface HeroLevelProfile {
 
 /** 战役状态（存档根对象）。 */
 export interface CampaignState {
+  bossRoomStorage?: { roomId: string; roomCardId: number; tileId: string; encounterId: string; lifecycle: 'RESERVED' | 'IN_PLAY' | 'RETURNED' };
+
   /** C1C31R explicit pre-encounter Dodge rule selection; absent legacy saves remain v1. */
   heroDodgeRuleSetSelection?: import('./hero-dodge-rules').HeroDodgeRuleSetSelection;
   /** Rule-only replay provenance; does not promote Boss combat or migrate old records. */

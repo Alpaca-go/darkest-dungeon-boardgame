@@ -92,6 +92,9 @@ export interface DeathSnapshot {
   tokenId: string | null;
 }
 export type BossContinuation =
+  | { kind: 'monster-move'; monsterId: string; skillNumber: number; targetIds: string[]; targetAreaId: string; parentEventId: string }
+  | { kind: 'source-self-move'; monsterId: string; targetIds: string[]; attackRoll: number; source: import('./component-combat').SourceMonsterAttack; parentEventId: string }
+  | { kind: 'source-target-push'; characterId: string; parentEventId: string }
   | { kind: 'graveyard' }
   | { kind: 'skill'; skillNumber: number; attackRoll: number | null; parentEventId: string; movementDone?: boolean; selfPushDone?: boolean }
   | { kind: 'boss-move' | 'self-push'; skillNumber: number; attackRoll: number | null; parentEventId: string; targetAreaId: string }
@@ -140,11 +143,13 @@ export interface BossEncounterState {
     definitionVersion: string;
     consumedOnceKeys: string[];
     heroDodge: Record<string, number>;
+    heroDodgeBindings?: Record<string, import('./hero-dodge-rules').ResolvedHeroDodge>;
     heroCombatDefinitions?: Record<string, import('./component-combat').HeroCombatDefinition>;
     dependencyAuthority: 'EXPLICIT_BINDING' | 'OFFICIAL_SOURCE';
   };
 }
 export type BossRuntimeInput =
+  | { type: 'MOVE_HERO_AREA'; heroId: string; areaId: string }
   | { type: 'ENTER_BOSS_ROOM' }
   | { type: 'PREPARATION_DAY'; rolls: Record<string, number> }
   | { type: 'FIRST_DUNGEON_BATTLE' }

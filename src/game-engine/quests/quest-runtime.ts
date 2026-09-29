@@ -32,7 +32,7 @@ export function calculateQuestXpReward(campaign: CampaignState): QuestXpEvaluati
 }
 
 export function createQuestRuntimeState(quest: QuestDefinition, questInstanceId = `${quest.id}:runtime`): CampaignState['questRuntimeState'] {
-  if (!quest.xpUnit || !quest.dungeonComposition) return null;
+  if ((!quest.xpUnit && quest.type !== 'boss') || !quest.dungeonComposition) return null;
   return {
     definitionId: quest.id,
     questInstanceId,
