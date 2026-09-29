@@ -781,6 +781,9 @@ export interface HeroLevelProfile {
 
 /** 战役状态（存档根对象）。 */
 export interface CampaignState {
+  ruinsRuleSetSelection?: import('../game-engine/rules/ruins-v4').RuinsVersionSelection;
+  ruinsDrawState?: import('../game-engine/ruins/encounter-draw').RuinsDrawState;
+  necromancerPreparationDay?: import('../game-engine/campaign/necromancer-preparation-day').NecromancerPreparationDay;
   necromancerGraveyardReceipts?: import('./necromancer-dependencies').GraveyardReceipt[];
   bossRoomStorage?: { roomId: string; roomCardId: number; tileId: string; encounterId: string; lifecycle: 'RESERVED' | 'IN_PLAY' | 'RETURNED' };
   /** Physical ownership receipts for an encounter terminated before Boss victory. */

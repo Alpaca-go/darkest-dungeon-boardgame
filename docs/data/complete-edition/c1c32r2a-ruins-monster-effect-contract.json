@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R2A",
+  "baselineHead": "624a2b5c20b9f40ee9e87ac103780cb9eb3c2053",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "ruleSetVersion": "C1C32R2A-DIGITAL-DEFAULT-v4",
+  "schema": "src/types/ruins-executable.ts:PrintedEffect",
+  "runtimeStrings": false,
+  "executorBound": false,
+  "sourceReferences": [
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 15,
+      "location": "full printed face",
+      "componentId": "room-deck-top-card",
+      "sourceClass": "OFFICIAL_SOURCE",
+      "visualReview": true
+    },
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 16,
+      "location": "full printed face",
+      "componentId": "stance-deployment",
+      "sourceClass": "OFFICIAL_SOURCE",
+      "visualReview": true
+    },
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 17,
+      "location": "full printed face",
+      "componentId": "large-initial-draw-replacement",
+      "sourceClass": "OFFICIAL_SOURCE",
+      "visualReview": true
+    },
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 25,
+      "location": "full printed face",
+      "componentId": "battle-end-return-cards",
+      "sourceClass": "OFFICIAL_SOURCE",
+      "visualReview": true
+    },
+    {
+      "sourceClass": "OFFICIAL_SOURCE",
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 20,
+      "location": "Skill self/target effect timing",
+      "componentId": "printed-effect-timing",
+      "visualReview": true
+    },
+    {
+      "sourceClass": "OFFICIAL_SOURCE",
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 21,
+      "location": "Condition definitions, stacks, Guard, Riposte, Protection, resistance and immunity",
+      "componentId": "printed-conditions",
+      "visualReview": true
+    },
+    {
+      "sourceClass": "OFFICIAL_SOURCE",
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 27,
+      "location": "Disease icon and acquisition",
+      "componentId": "disease-acquisition",
+      "visualReview": true
+    }
+  ],
+  "effectTypes": [
+    "shuffle",
+    "stress",
+    "markedDamageBonus",
+    "condition",
+    "heal",
+    "light",
+    "disease",
+    "removeCondition"
+  ],
+  "timing": {
+    "self": "BEFORE_TARGET_EFFECTS_EVEN_ON_MISS_IGNORE_RESISTANCE",
+    "target": "AFTER_DAMAGE_ON_HIT",
+    "noAccuracy": "AUTOMATIC_NO_ROLL",
+    "light": "ONCE_PER_SKILL_AFTER_SUCCESS"
+  },
+  "guard": "MANDATORY_TARGET_PRIORITY",
+  "riposte": "HALF_INCOMING_ATTACK_DAMAGE_CEIL_BEFORE_PROTECTION"
+}

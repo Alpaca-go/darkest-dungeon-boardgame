@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R2A",
+  "baselineHead": "624a2b5c20b9f40ee9e87ac103780cb9eb3c2053",
+  "policyId": "C1C32R2A-PRE-ENCOUNTER-EXPLICIT-MIGRATION-v1",
+  "ruleSetVersion": "C1C32R2A-DIGITAL-DEFAULT-v4",
+  "allowed": "BEFORE_ENCOUNTER_INITIALIZATION",
+  "rejected": [
+    "ACTIVE_BATTLE",
+    "THREAT_CHECKPOINT",
+    "SAVED_BOSS_ENCOUNTER",
+    "HISTORICAL_REPLAY",
+    "PENDING_ATTACK",
+    "PENDING_PLACEMENT"
+  ],
+  "legacySavesRemainPinned": true
+}

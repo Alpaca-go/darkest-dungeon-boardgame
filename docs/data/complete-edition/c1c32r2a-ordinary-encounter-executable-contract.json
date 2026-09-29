@@ -1,0 +1,1405 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R2A",
+  "baselineHead": "624a2b5c20b9f40ee9e87ac103780cb9eb3c2053",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "ruleSetVersion": "C1C32R2A-DIGITAL-DEFAULT-v4",
+  "status": "DOMAIN_DRAW_IMPLEMENTED_PENDING_DEPENDENCY_ACCEPTANCE",
+  "domainModule": "src/game-engine/ruins/encounter-draw.ts",
+  "productionIntegrated": false,
+  "roomDraw": "Rooms 1–9 without replacement; 10–13 excluded",
+  "monsterDraw": "Eligible physical copy deck, front/back stance priority, four occupied slots",
+  "ownership": [
+    "DECK",
+    "ENCOUNTER",
+    "SUMMON_POOL",
+    "DISCARD"
+  ],
+  "exhaustion": "Reject atomically; no unversioned automatic reshuffle",
+  "battleEnd": "Official p25: active Monster cards returned and shuffled into deck; Room card remains discarded for current Dungeon run",
+  "sourceUnresolved": [
+    {
+      "field": "initialLargeReplacementDiscard.returnTiming",
+      "status": "SOURCE_UNRESOLVED",
+      "evidence": "p17 says discard the last non-large spawn; p25 return paragraph does not explicitly classify the pre-Battle discarded card",
+      "runtimePolicy": "Keep the printed discard fact, block subsequent encounter initialization until an official binding or explicit versioned noncanonical PROJECT_RULING exists"
+    }
+  ],
+  "initiative": "Generic Hero/Monster cards, one per character; Fisher–Yates with shared injected RNG",
+  "rngConsumption": "Initial shuffle: 8 + eligibleCopies - 1 calls. Encounter draw: 4 + activeMonsters - 1 calls for initiative. Deck pops/ownership/placement consume zero.",
+  "savePolicy": "Persist full result and RNG cursor; same encounter identity returns saved result unchanged; conflicting Hero selection rejects",
+  "proofClassification": "SOURCE_COMPONENT_DOMAIN_ISOLATION_NOT_FULL_COMBAT_ACCEPTANCE",
+  "proofs": [
+    {
+      "level": 1,
+      "seed": 1,
+      "initialHash": "85c7b22783f51c563a1c0f99b8dcf6ba87abef0feac2987b6d9bbc3b581f4ac5",
+      "resultHash": "1a77026a5c8cd966c6a5445c217192459581219aec8491d199e83a05d3f11669",
+      "saveReloadHash": "1a77026a5c8cd966c6a5445c217192459581219aec8491d199e83a05d3f11669",
+      "rngCalls": 56,
+      "physicalCopies": [
+        "madman:copy-3",
+        "bone-defender:copy-2",
+        "cultist-acolyte:copy-3",
+        "bone-rabble:copy-3"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 1,
+      "seed": 2,
+      "initialHash": "42e30a42eb4acafcc6877128b6d60b309b9747e4d2faae75c29bfbbd858d3055",
+      "resultHash": "cc13b540f10f9146ea82c4814e3013c700975e2dd8c8765aa4428f6cf6b320f8",
+      "saveReloadHash": "cc13b540f10f9146ea82c4814e3013c700975e2dd8c8765aa4428f6cf6b320f8",
+      "rngCalls": 56,
+      "physicalCopies": [
+        "bone-defender:copy-2",
+        "cultist-acolyte:copy-2",
+        "webber:copy-3",
+        "spitter:copy-2"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 1,
+      "seed": 3,
+      "initialHash": "bdff8ac2645e2a808d4eb28bf01b8e3febb7b9c250c78bdca756d3687dcb84af",
+      "resultHash": "0a03b030e527c17f8bd41d90c593464e9a4ab6aec60d1f691ce1c43fcfb6a7bb",
+      "saveReloadHash": "0a03b030e527c17f8bd41d90c593464e9a4ab6aec60d1f691ce1c43fcfb6a7bb",
+      "rngCalls": 56,
+      "physicalCopies": [
+        "cultist-acolyte:copy-3",
+        "spitter:copy-3",
+        "bone-rabble:copy-1",
+        "bone-arbalist:copy-2"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 1,
+      "seed": 4,
+      "initialHash": "37188dc3f61ccff85fd6dad49d218de9017daeaf4a6178cf2031a65e45c7b8ac",
+      "resultHash": "ddfbe15e38f89c21db5b26b6356a756974798b9ad91b938b0ae117282d699bbf",
+      "saveReloadHash": "ddfbe15e38f89c21db5b26b6356a756974798b9ad91b938b0ae117282d699bbf",
+      "rngCalls": 56,
+      "physicalCopies": [
+        "pliskin:copy-2",
+        "maggot:copy-3",
+        "pliskin:copy-1",
+        "pliskin:copy-3"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 1,
+      "seed": 5,
+      "initialHash": "94b10ec7846cd00cecbc55d0fc435b3882609e792505033898457b61ec381d11",
+      "resultHash": "4f954d4794ddfd374ae06d122c690bf3b8849a32d69aa0061970bfaffd24e49d",
+      "saveReloadHash": "4f954d4794ddfd374ae06d122c690bf3b8849a32d69aa0061970bfaffd24e49d",
+      "rngCalls": 56,
+      "physicalCopies": [
+        "bone-rabble:copy-3",
+        "cultist-brawler:copy-2",
+        "webber:copy-1",
+        "webber:copy-3"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 1,
+      "seed": 6,
+      "initialHash": "5a51f3e3edbda385f74bca8790ac0bf1f6b37194508284189dfebe3b50cdd600",
+      "resultHash": "253376fca6916c26dfc7fcc3986b5aa11a8692c2e2add583153670698d925c7b",
+      "saveReloadHash": "253376fca6916c26dfc7fcc3986b5aa11a8692c2e2add583153670698d925c7b",
+      "rngCalls": 56,
+      "physicalCopies": [
+        "madman:copy-1",
+        "bone-rabble:copy-2",
+        "webber:copy-1",
+        "brigand-fusilier:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 1,
+      "seed": 7,
+      "initialHash": "8465b46a202706b870569761650cff348b72468a38175e59a99ddd646c77fc61",
+      "resultHash": "62a1e2e8134494d9be195e0439e1f7ef6477ea8cf47a978e38b456114e0573c7",
+      "saveReloadHash": "62a1e2e8134494d9be195e0439e1f7ef6477ea8cf47a978e38b456114e0573c7",
+      "rngCalls": 56,
+      "physicalCopies": [
+        "pliskin:copy-3",
+        "webber:copy-2",
+        "spitter:copy-2",
+        "bone-rabble:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 1,
+      "seed": 8,
+      "initialHash": "361df280816c962e9f4947707fdbd71424369c3df877c94764684118d13556e2",
+      "resultHash": "148134b82850e2e7aa100e3a6a433d99e2054fa3b83db15b642bc9553a717aa8",
+      "saveReloadHash": "148134b82850e2e7aa100e3a6a433d99e2054fa3b83db15b642bc9553a717aa8",
+      "rngCalls": 56,
+      "physicalCopies": [
+        "bone-courtier:copy-3",
+        "cultist-brawler:copy-2",
+        "brigand-cutthroat:copy-2",
+        "bone-defender:copy-2"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 1,
+      "seed": 9,
+      "initialHash": "0528e6bb045a409225914efe55a4a86460606e99cb9fba1cdb46f4db96c26128",
+      "resultHash": "3f18a5a9c0495f23d4099ae5557392bf307d4bcd7ae72a99916ae8f6cc7689c1",
+      "saveReloadHash": "3f18a5a9c0495f23d4099ae5557392bf307d4bcd7ae72a99916ae8f6cc7689c1",
+      "rngCalls": 56,
+      "physicalCopies": [
+        "cultist-acolyte:copy-1",
+        "bone-rabble:copy-1",
+        "brigand-fusilier:copy-2",
+        "bone-courtier:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 1,
+      "seed": 10,
+      "initialHash": "f3172257b52359f35adf497ad41bf9da3de4f6b068232254137cccd1dc1c6015",
+      "resultHash": "b7afbe884f30c7ffb33853c032a91a693e21652d7e37fd42994d38b9c9c75479",
+      "saveReloadHash": "b7afbe884f30c7ffb33853c032a91a693e21652d7e37fd42994d38b9c9c75479",
+      "rngCalls": 56,
+      "physicalCopies": [
+        "madman:copy-1",
+        "webber:copy-2",
+        "bone-courtier:copy-2",
+        "spitter:copy-2"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 1,
+      "seed": 11,
+      "initialHash": "3b730d95cde93c17120f24a22c627e856f7ce525ff56177a01bbf3a18bb9056b",
+      "resultHash": "0cb81826225d026ce845614947cf99543da6c7adc88840ec2a292d555bf1cea9",
+      "saveReloadHash": "0cb81826225d026ce845614947cf99543da6c7adc88840ec2a292d555bf1cea9",
+      "rngCalls": 56,
+      "physicalCopies": [
+        "bone-arbalist:copy-3",
+        "cultist-brawler:copy-2",
+        "spitter:copy-2",
+        "maggot:copy-2"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 1,
+      "seed": 12,
+      "initialHash": "640fe6d157f3b2f1ac5f78c0f175bc18eebce6b8eb4fcfebdf6d611d3716a38a",
+      "resultHash": "c32719dd96036804f95f69dce84fe92597671e3943eb0b7923685cbf4133777e",
+      "saveReloadHash": "c32719dd96036804f95f69dce84fe92597671e3943eb0b7923685cbf4133777e",
+      "rngCalls": 55,
+      "physicalCopies": [
+        "brigand-bloodletter:copy-1",
+        "spitter:copy-1",
+        "bone-rabble:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 1,
+      "seed": 13,
+      "initialHash": "8bfe5b22d6eb677ab682fcd145a40a4c1db7f40acc04120adab11e4a97bc1d55",
+      "resultHash": "0002a6309773a5af497913220e4a9999643eba50768e428ab1b5705721509757",
+      "saveReloadHash": "0002a6309773a5af497913220e4a9999643eba50768e428ab1b5705721509757",
+      "rngCalls": 56,
+      "physicalCopies": [
+        "brigand-fusilier:copy-1",
+        "bone-courtier:copy-1",
+        "spitter:copy-2",
+        "cultist-brawler:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 1,
+      "seed": 14,
+      "initialHash": "78c346163a35fd91be1c4f78ec1062d43e64fe47f5709fc4c2bc16d1e425750b",
+      "resultHash": "3fbe44771a2615184e6a4e99deb92c14e8b4d4b643da25ea08a87b115ff8a5cc",
+      "saveReloadHash": "3fbe44771a2615184e6a4e99deb92c14e8b4d4b643da25ea08a87b115ff8a5cc",
+      "rngCalls": 56,
+      "physicalCopies": [
+        "brigand-fusilier:copy-1",
+        "bone-rabble:copy-3",
+        "cultist-brawler:copy-2",
+        "cultist-acolyte:copy-2"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 1,
+      "seed": 15,
+      "initialHash": "45c7165348ac9545f0206e2aee09ccff6b205b359e56448147e105c0b77ea748",
+      "resultHash": "c750ff1e4efa1b5b118c4d1ef6051b5cb003c3463090bd3f3a7bb62f623221a1",
+      "saveReloadHash": "c750ff1e4efa1b5b118c4d1ef6051b5cb003c3463090bd3f3a7bb62f623221a1",
+      "rngCalls": 56,
+      "physicalCopies": [
+        "brigand-cutthroat:copy-1",
+        "maggot:copy-3",
+        "bone-soldier:copy-3",
+        "bone-arbalist:copy-3"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 1,
+      "seed": 16,
+      "initialHash": "45cdfe3db747d69f0fd4cc446b8eb2f5c43044e0f770ebc88e04e74bed42d67c",
+      "resultHash": "fccfc01143ab54ad43d957a06fe6dcced7c46b543cf99a00bda328afba8c159a",
+      "saveReloadHash": "fccfc01143ab54ad43d957a06fe6dcced7c46b543cf99a00bda328afba8c159a",
+      "rngCalls": 56,
+      "physicalCopies": [
+        "brigand-fusilier:copy-2",
+        "brigand-fusilier:copy-1",
+        "brigand-cutthroat:copy-2",
+        "bone-defender:copy-2"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 1,
+      "seed": 17,
+      "initialHash": "ac72405cbfe2e34cb56cfa133a9721646a510ec254aca3ba988b120d9b27eac3",
+      "resultHash": "f2436f4897d4e22a9aac2b9bfdf3662fa871e7255d98d94839e9226d118874a2",
+      "saveReloadHash": "f2436f4897d4e22a9aac2b9bfdf3662fa871e7255d98d94839e9226d118874a2",
+      "rngCalls": 56,
+      "physicalCopies": [
+        "bone-courtier:copy-3",
+        "bone-defender:copy-1",
+        "bone-courtier:copy-2",
+        "cultist-brawler:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 1,
+      "seed": 18,
+      "initialHash": "1e1e9f78e16ad4bd43d15d8dc0f311e3f81ded210bc3c7a218f6ab8e708d19a6",
+      "resultHash": "2259294973de9d6f73bab49786752a054f7bc3918c3c223051d7a11a56822eb1",
+      "saveReloadHash": "2259294973de9d6f73bab49786752a054f7bc3918c3c223051d7a11a56822eb1",
+      "rngCalls": 56,
+      "physicalCopies": [
+        "bone-rabble:copy-3",
+        "bone-rabble:copy-1",
+        "bone-soldier:copy-1",
+        "brigand-fusilier:copy-2"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 1,
+      "seed": 19,
+      "initialHash": "26e3fdb1084d1cc085d53138bd60e042422e83bfa461eabe6beebaa9bd67c3eb",
+      "resultHash": "00c08ac217ac9ef16098107b3e357317e08bc4b3ab20d2abfdecf6a224aa304a",
+      "saveReloadHash": "00c08ac217ac9ef16098107b3e357317e08bc4b3ab20d2abfdecf6a224aa304a",
+      "rngCalls": 56,
+      "physicalCopies": [
+        "webber:copy-1",
+        "cultist-acolyte:copy-3",
+        "brigand-fusilier:copy-2",
+        "spitter:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 1,
+      "seed": 20,
+      "initialHash": "754729e6cb1ef8e9c98949db767f2a440fbee206f38a5ac9c9e2893f476ba328",
+      "resultHash": "6cb99f379183165de7d6606b0f4f7ca8de04d8142b3de103796f40d7cdb50490",
+      "saveReloadHash": "6cb99f379183165de7d6606b0f4f7ca8de04d8142b3de103796f40d7cdb50490",
+      "rngCalls": 56,
+      "physicalCopies": [
+        "spitter:copy-1",
+        "cultist-acolyte:copy-3",
+        "webber:copy-1",
+        "bone-courtier:copy-3"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 1,
+      "seed": 21,
+      "initialHash": "34aca33e3d4b688216d2529da98b688aaabfd57992d4bed460d73fc153246329",
+      "resultHash": "cf7812d3e35f8ea1e107f1442799337a1b70412882904ae80b2fef0e0e47b412",
+      "saveReloadHash": "cf7812d3e35f8ea1e107f1442799337a1b70412882904ae80b2fef0e0e47b412",
+      "rngCalls": 56,
+      "physicalCopies": [
+        "brigand-cutthroat:copy-3",
+        "cultist-acolyte:copy-3",
+        "webber:copy-3",
+        "bone-soldier:copy-2"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 1,
+      "seed": 22,
+      "initialHash": "7d50d689cc72bddc3ebe7e316881a12893578a9e350a71bb1a2301fa2630e58a",
+      "resultHash": "94c72b9614287518a047d995c530f4f64c10c715a38eb7d98ac62ea9f489da77",
+      "saveReloadHash": "94c72b9614287518a047d995c530f4f64c10c715a38eb7d98ac62ea9f489da77",
+      "rngCalls": 56,
+      "physicalCopies": [
+        "cultist-acolyte:copy-3",
+        "spitter:copy-2",
+        "maggot:copy-1",
+        "bone-defender:copy-2"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 1,
+      "seed": 23,
+      "initialHash": "5b61be017447e1d49d33fcd3df4707385bb4c7e9fc12b18893300cb50c349984",
+      "resultHash": "f742f66d27edd26c4b6cdce6cee1ab98df6074bd760ea7247057545b33cf9925",
+      "saveReloadHash": "f742f66d27edd26c4b6cdce6cee1ab98df6074bd760ea7247057545b33cf9925",
+      "rngCalls": 56,
+      "physicalCopies": [
+        "madman:copy-3",
+        "brigand-cutthroat:copy-2",
+        "brigand-fusilier:copy-2",
+        "spitter:copy-2"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 1,
+      "seed": 24,
+      "initialHash": "313f53b2d25376cb309915a8d0f9d0422089c6fd96a77fcb45a48fc4a3628c8f",
+      "resultHash": "4a731a664df49aab53d5fe1d2f8b6996dff4548cd73bba3862f349b580ad2702",
+      "saveReloadHash": "4a731a664df49aab53d5fe1d2f8b6996dff4548cd73bba3862f349b580ad2702",
+      "rngCalls": 56,
+      "physicalCopies": [
+        "bone-courtier:copy-1",
+        "cultist-acolyte:copy-2",
+        "pliskin:copy-3",
+        "cultist-acolyte:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 1,
+      "seed": 25,
+      "initialHash": "f5e7a161f16e572291bb800292f0a7feede37de2ffb1d3fe81d58a95dd96ab9e",
+      "resultHash": "d2cea775d4911f795100582bcbb9ddfc7e2ce96f67e25b7c2ef615861e9aed42",
+      "saveReloadHash": "d2cea775d4911f795100582bcbb9ddfc7e2ce96f67e25b7c2ef615861e9aed42",
+      "rngCalls": 56,
+      "physicalCopies": [
+        "madman:copy-1",
+        "bone-courtier:copy-1",
+        "madman:copy-2",
+        "bone-courtier:copy-2"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 1,
+      "seed": 26,
+      "initialHash": "44fdcdf6fcd7936ff7a0e8a9dec2cfb5ce7e64169db6adec22d12ec75978fe95",
+      "resultHash": "0790debcb16c4dc02e6890fc037a5353dbb6f6c8a9755a44e5d2dd5a4402b847",
+      "saveReloadHash": "0790debcb16c4dc02e6890fc037a5353dbb6f6c8a9755a44e5d2dd5a4402b847",
+      "rngCalls": 56,
+      "physicalCopies": [
+        "bone-arbalist:copy-2",
+        "bone-defender:copy-2",
+        "bone-rabble:copy-2",
+        "pliskin:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 1,
+      "seed": 27,
+      "initialHash": "e70b124fcdfcea416907fa7f517d70e05ded7b7ab2a92d6cdedec3fb6a95e9d4",
+      "resultHash": "fbda9afdee004ac5dd0eef5ae54abf8674986c71c39a386d7e269c682d6926b8",
+      "saveReloadHash": "fbda9afdee004ac5dd0eef5ae54abf8674986c71c39a386d7e269c682d6926b8",
+      "rngCalls": 56,
+      "physicalCopies": [
+        "brigand-cutthroat:copy-3",
+        "madman:copy-3",
+        "bone-rabble:copy-1",
+        "cultist-brawler:copy-2"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 1,
+      "seed": 28,
+      "initialHash": "0481c6a9cffece8c735f4a20707ffa859ed9dc9d24666f4007dad5a862b8c4cc",
+      "resultHash": "1022e2e2b17bfa1876b24f81d5e0118614615b10527435f1f60c9c802c37e8f6",
+      "saveReloadHash": "1022e2e2b17bfa1876b24f81d5e0118614615b10527435f1f60c9c802c37e8f6",
+      "rngCalls": 56,
+      "physicalCopies": [
+        "cultist-acolyte:copy-3",
+        "brigand-cutthroat:copy-1",
+        "madman:copy-3",
+        "cultist-acolyte:copy-2"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 1,
+      "seed": 29,
+      "initialHash": "a51afd06f2c2d96f14486b4b735cd3c58ba94fad052635e5bdfe838858a863c4",
+      "resultHash": "c040f0ffba52690c4d4e25e26a97e2b0c318aba38123f32de2da1f9252e7a62c",
+      "saveReloadHash": "c040f0ffba52690c4d4e25e26a97e2b0c318aba38123f32de2da1f9252e7a62c",
+      "rngCalls": 55,
+      "physicalCopies": [
+        "brigand-cutthroat:copy-2",
+        "bone-soldier:copy-1",
+        "brigand-bloodletter:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 1,
+      "seed": 30,
+      "initialHash": "8cac3f5f6ba1fde196bb1c55b76952e10ea2ff60f4aef0d902bbe90c47a7b2e1",
+      "resultHash": "b6bbb0f51301b4b2b6262b741b3ca8a32bbf51a26d1581acb384757e0fdce205",
+      "saveReloadHash": "b6bbb0f51301b4b2b6262b741b3ca8a32bbf51a26d1581acb384757e0fdce205",
+      "rngCalls": 56,
+      "physicalCopies": [
+        "cultist-brawler:copy-3",
+        "cultist-acolyte:copy-3",
+        "webber:copy-1",
+        "bone-soldier:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 2,
+      "seed": 1,
+      "initialHash": "e9785af40167ebe21e9e47781f5dbec5bfab8a65d4b1ae70131891557d1e45d8",
+      "resultHash": "212f4771753eb153b91f780ef86435b3b02faebd164f6192f832631f92140953",
+      "saveReloadHash": "212f4771753eb153b91f780ef86435b3b02faebd164f6192f832631f92140953",
+      "rngCalls": 67,
+      "physicalCopies": [
+        "bone-spearman:copy-2",
+        "spitter:copy-2",
+        "bone-rabble:copy-2",
+        "bone-defender:copy-2"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 2,
+      "seed": 2,
+      "initialHash": "b494dbbf089f0b9a28a64dd5b3ff3d54941a5d7267c7437e0c82d056e853c978",
+      "resultHash": "c3cf3cb211cbcbc3cbfd8a44b6731bdff6fbc6d3796dbcaa28da9d70ef8043fc",
+      "saveReloadHash": "c3cf3cb211cbcbc3cbfd8a44b6731bdff6fbc6d3796dbcaa28da9d70ef8043fc",
+      "rngCalls": 66,
+      "physicalCopies": [
+        "maggot:copy-1",
+        "rattler:copy-1",
+        "bone-captain:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 2,
+      "seed": 3,
+      "initialHash": "402b4bde43e31ae6d4db98b8837e31e3f6a9555b4b65eedeab0fa43a65033c90",
+      "resultHash": "4e7947fd9529ee1ad08b48d26676a7bb10989167deb07b284c02767f1c3de6bf",
+      "saveReloadHash": "4e7947fd9529ee1ad08b48d26676a7bb10989167deb07b284c02767f1c3de6bf",
+      "rngCalls": 67,
+      "physicalCopies": [
+        "rattler:copy-2",
+        "gargoyle:copy-3",
+        "bone-rabble:copy-3",
+        "spitter:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 2,
+      "seed": 4,
+      "initialHash": "24328f1720b9c67b8d72eae43521beb71f93c192e41c033ce0167a171224d6f5",
+      "resultHash": "6bef10b3db14c23aee9cbe903d4d838bf079d612a060bf73ce8437e68fc2d386",
+      "saveReloadHash": "6bef10b3db14c23aee9cbe903d4d838bf079d612a060bf73ce8437e68fc2d386",
+      "rngCalls": 67,
+      "physicalCopies": [
+        "bone-arbalist:copy-2",
+        "bone-courtier:copy-3",
+        "brigand-fusilier:copy-3",
+        "brigand-fusilier:copy-2"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 2,
+      "seed": 5,
+      "initialHash": "2c053c7b340b18bb170d1b8ff87de1478718b685f16161bf0213b240a94360e9",
+      "resultHash": "aa17de30edf2a1aaab546b5f707f3cfaf65fb59ea3bc6845add996356a34d093",
+      "saveReloadHash": "aa17de30edf2a1aaab546b5f707f3cfaf65fb59ea3bc6845add996356a34d093",
+      "rngCalls": 67,
+      "physicalCopies": [
+        "cultist-acolyte:copy-3",
+        "madman:copy-3",
+        "bone-soldier:copy-1",
+        "cultist-acolyte:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 2,
+      "seed": 6,
+      "initialHash": "e21e555bcee658251fc9d2794d18fbfaffb3a8f75f77f59b20654ab11f5e3b0d",
+      "resultHash": "5f2aa882676475a869a3d40363d614a89df832bd944b6530b5f1bc4358a8e3ec",
+      "saveReloadHash": "5f2aa882676475a869a3d40363d614a89df832bd944b6530b5f1bc4358a8e3ec",
+      "rngCalls": 67,
+      "physicalCopies": [
+        "madman:copy-1",
+        "bone-rabble:copy-1",
+        "brigand-fusilier:copy-1",
+        "bone-courtier:copy-2"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 2,
+      "seed": 7,
+      "initialHash": "fd29543396db27048465a67a523d76633dd44d9eb940bbd9b0af6f4de1b9332c",
+      "resultHash": "0de7ed268f059cbd7b7413c8eebad862e88683c8d9a25ed2dea24324af900013",
+      "saveReloadHash": "0de7ed268f059cbd7b7413c8eebad862e88683c8d9a25ed2dea24324af900013",
+      "rngCalls": 67,
+      "physicalCopies": [
+        "rattler:copy-3",
+        "bone-spearman:copy-2",
+        "spitter:copy-2",
+        "bone-courtier:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 2,
+      "seed": 8,
+      "initialHash": "8e374388e9d8f9ccbfecfbd766d53f06508402ddf940c9d7a16c4ced581879fc",
+      "resultHash": "860d0da8e547cac2b5c29f2d94b77c9799f6ac071fd93cf399f0413fbd451beb",
+      "saveReloadHash": "860d0da8e547cac2b5c29f2d94b77c9799f6ac071fd93cf399f0413fbd451beb",
+      "rngCalls": 66,
+      "physicalCopies": [
+        "webber:copy-3",
+        "cultist-acolyte:copy-1",
+        "brigand-bloodletter:copy-1"
+      ],
+      "largeReplacement": true
+    },
+    {
+      "level": 2,
+      "seed": 9,
+      "initialHash": "9e0171a4620dd312b7f81d3f19b80859b8ea9bff154c8d011b031012ad147681",
+      "resultHash": "fcc454ccfce40a8c12178ceb4c08c91c6604bf1d039f7d081329e4db6f14d6d5",
+      "saveReloadHash": "fcc454ccfce40a8c12178ceb4c08c91c6604bf1d039f7d081329e4db6f14d6d5",
+      "rngCalls": 67,
+      "physicalCopies": [
+        "cultist-acolyte:copy-3",
+        "pliskin:copy-3",
+        "spitter:copy-2",
+        "brigand-cutthroat:copy-3"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 2,
+      "seed": 10,
+      "initialHash": "68d3cbf5d8c27edc65318b69fd869cdcab1f6f19cd6b425f09720e2a9343e15d",
+      "resultHash": "1633eb40beb218015d98a8c98f976c06ee7d2c06d9072b0526aa099259e239b0",
+      "saveReloadHash": "1633eb40beb218015d98a8c98f976c06ee7d2c06d9072b0526aa099259e239b0",
+      "rngCalls": 67,
+      "physicalCopies": [
+        "cultist-acolyte:copy-3",
+        "pliskin:copy-2",
+        "spitter:copy-2",
+        "pliskin:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 2,
+      "seed": 11,
+      "initialHash": "f5ff49711736097bc86912cf20ce80f11f6f5f6f8feb066556ca5a6630290e15",
+      "resultHash": "03ab1c841fc8c4aff6eaa98149cb5547f3377eaedfe03e0c2eb39e4ac456bb7f",
+      "saveReloadHash": "03ab1c841fc8c4aff6eaa98149cb5547f3377eaedfe03e0c2eb39e4ac456bb7f",
+      "rngCalls": 67,
+      "physicalCopies": [
+        "bone-arbalist:copy-2",
+        "webber:copy-1",
+        "madman:copy-1",
+        "bone-rabble:copy-3"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 2,
+      "seed": 12,
+      "initialHash": "2130f6005f68202bab4a4879eb7b3913dd3103d1226d012e80ad3871df477a55",
+      "resultHash": "4aaa6bd54250220db48d5849025cc26da16a35cf8587490274d916ed7f46f7bc",
+      "saveReloadHash": "4aaa6bd54250220db48d5849025cc26da16a35cf8587490274d916ed7f46f7bc",
+      "rngCalls": 67,
+      "physicalCopies": [
+        "maggot:copy-3",
+        "bone-rabble:copy-3",
+        "bone-spearman:copy-1",
+        "bone-arbalist:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 2,
+      "seed": 13,
+      "initialHash": "181c7b20ef3343b8b05a95dd2f652b3cbccb7db8deee7e40ad030fb8efa80b9e",
+      "resultHash": "83fb3ba2fcf347d60e2f9a6502cd2268708f20058efe488935bc799cac7dcb1e",
+      "saveReloadHash": "83fb3ba2fcf347d60e2f9a6502cd2268708f20058efe488935bc799cac7dcb1e",
+      "rngCalls": 67,
+      "physicalCopies": [
+        "pliskin:copy-2",
+        "brigand-fusilier:copy-3",
+        "rattler:copy-3",
+        "cultist-brawler:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 2,
+      "seed": 14,
+      "initialHash": "0a3d7f657e561d94620a72f4f93b79850398199c95e27c8d3cc0c5540db3f65a",
+      "resultHash": "1774c9288aeb74afc1ff96be9e656c34f7244b79b892a4048169b1aff7a9958c",
+      "saveReloadHash": "1774c9288aeb74afc1ff96be9e656c34f7244b79b892a4048169b1aff7a9958c",
+      "rngCalls": 67,
+      "physicalCopies": [
+        "bone-rabble:copy-2",
+        "gargoyle:copy-2",
+        "maggot:copy-2",
+        "cultist-acolyte:copy-3"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 2,
+      "seed": 15,
+      "initialHash": "7db654735e0322bdae418a0f689273c301a08284222ed4a4711e71075c133448",
+      "resultHash": "68af924c15383a2e766ddbeca7f8138412e1d0b7eaf288ab4ecbe820dae5d1e1",
+      "saveReloadHash": "68af924c15383a2e766ddbeca7f8138412e1d0b7eaf288ab4ecbe820dae5d1e1",
+      "rngCalls": 67,
+      "physicalCopies": [
+        "webber:copy-2",
+        "cultist-brawler:copy-3",
+        "spitter:copy-1",
+        "gargoyle:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 2,
+      "seed": 16,
+      "initialHash": "7e2a5acc18c5a24735eaa6cdd4d1b6b614b691bf648c90107581f233d78d1a1c",
+      "resultHash": "cba4b5c6d2bd77d414f4b4528b68a221600718eadad172fd4cc5fc5f9293a26c",
+      "saveReloadHash": "cba4b5c6d2bd77d414f4b4528b68a221600718eadad172fd4cc5fc5f9293a26c",
+      "rngCalls": 66,
+      "physicalCopies": [
+        "madman:copy-3",
+        "maggot:copy-1",
+        "bone-captain:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 2,
+      "seed": 17,
+      "initialHash": "4008437f393e5cd0a4712dcbe159704f632bfc170cf887184effea865deb95b5",
+      "resultHash": "535301434e7e8d52e2388051271c514cde5b4721f27654e69918316bdfbef566",
+      "saveReloadHash": "535301434e7e8d52e2388051271c514cde5b4721f27654e69918316bdfbef566",
+      "rngCalls": 67,
+      "physicalCopies": [
+        "cultist-brawler:copy-1",
+        "pliskin:copy-2",
+        "brigand-fusilier:copy-1",
+        "madman:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 2,
+      "seed": 18,
+      "initialHash": "4e628d7d3e7faf34451bde87d2d0f7aa203083069229ee62109dac4436386afc",
+      "resultHash": "12cc060beaab0a4d2de216c28703c696111b56d9990c9e85631dfbc04f97df17",
+      "saveReloadHash": "12cc060beaab0a4d2de216c28703c696111b56d9990c9e85631dfbc04f97df17",
+      "rngCalls": 67,
+      "physicalCopies": [
+        "bone-arbalist:copy-2",
+        "bone-spearman:copy-2",
+        "maggot:copy-2",
+        "rattler:copy-2"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 2,
+      "seed": 19,
+      "initialHash": "de10ec384f22f5aacf23b7a3127ec8709f742daefd38a5ccfaf1ed6b4cb6a1bf",
+      "resultHash": "2aa4e446136f9cb7079836c35af86981f477cd1166574d02aac1a2e7e2beecc5",
+      "saveReloadHash": "2aa4e446136f9cb7079836c35af86981f477cd1166574d02aac1a2e7e2beecc5",
+      "rngCalls": 67,
+      "physicalCopies": [
+        "madman:copy-1",
+        "bone-rabble:copy-1",
+        "bone-soldier:copy-1",
+        "gargoyle:copy-2"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 2,
+      "seed": 20,
+      "initialHash": "ffc77fb6d16ce67fef88c8bbff491ec82cbfacb1f29367faf4aa11f315a1a82d",
+      "resultHash": "37b7d571e11cc030633be4b4305ca45e6ae09f0002b49eecd7fa7ee2573b1dc4",
+      "saveReloadHash": "37b7d571e11cc030633be4b4305ca45e6ae09f0002b49eecd7fa7ee2573b1dc4",
+      "rngCalls": 67,
+      "physicalCopies": [
+        "spitter:copy-3",
+        "bone-arbalist:copy-1",
+        "brigand-fusilier:copy-2",
+        "bone-defender:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 2,
+      "seed": 21,
+      "initialHash": "ec9be0def7726341b7d1a5dcb3779a3903afe81d29b16d6f39e1fba3b8734d3b",
+      "resultHash": "81b934a628747d0c66b8193752a7d978ca2d0767d5c3d330044abd8203e6eee2",
+      "saveReloadHash": "81b934a628747d0c66b8193752a7d978ca2d0767d5c3d330044abd8203e6eee2",
+      "rngCalls": 67,
+      "physicalCopies": [
+        "bone-defender:copy-2",
+        "brigand-cutthroat:copy-3",
+        "madman:copy-3",
+        "madman:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 2,
+      "seed": 22,
+      "initialHash": "64c14d04c6b507f3e8574fbafa1c3e144e959e4bd98757bf916dc4120e2b856d",
+      "resultHash": "6cfd5a81481285a6f01092e8f31b68e910462f1a436dbbdf0c6da79085eebc31",
+      "saveReloadHash": "6cfd5a81481285a6f01092e8f31b68e910462f1a436dbbdf0c6da79085eebc31",
+      "rngCalls": 67,
+      "physicalCopies": [
+        "bone-rabble:copy-1",
+        "bone-spearman:copy-2",
+        "madman:copy-1",
+        "gargoyle:copy-3"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 2,
+      "seed": 23,
+      "initialHash": "99f9431dbd64fa9ad2bdbc2fd15c4f1f886fa22824e89be895fb4a957da756ba",
+      "resultHash": "b9a71dddfdc2cc59e5d06a0ad11f88b6892f96cb88a0b7b7ffbf34ae8f8ed613",
+      "saveReloadHash": "b9a71dddfdc2cc59e5d06a0ad11f88b6892f96cb88a0b7b7ffbf34ae8f8ed613",
+      "rngCalls": 66,
+      "physicalCopies": [
+        "cultist-acolyte:copy-1",
+        "cultist-acolyte:copy-2",
+        "ghoul:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 2,
+      "seed": 24,
+      "initialHash": "ba154f8fa615ff61ebfaff8771040616c11268d1f074099511e5cf3ccf027ed2",
+      "resultHash": "0605bdd7f7e0e10682d10a4b3c1240d7d0387f7669b2ae798b5d1fa3b287b2f3",
+      "saveReloadHash": "0605bdd7f7e0e10682d10a4b3c1240d7d0387f7669b2ae798b5d1fa3b287b2f3",
+      "rngCalls": 67,
+      "physicalCopies": [
+        "gargoyle:copy-2",
+        "pliskin:copy-1",
+        "rattler:copy-2",
+        "brigand-fusilier:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 2,
+      "seed": 25,
+      "initialHash": "111e7db1dd152a84616c5ee48131f944ad0fb2ac6c4225ac789e83eda3e07a02",
+      "resultHash": "acf541c9f19425637cbcabf6d141911eb1c70bba8c25da211c9bcfc9603a4a9c",
+      "saveReloadHash": "acf541c9f19425637cbcabf6d141911eb1c70bba8c25da211c9bcfc9603a4a9c",
+      "rngCalls": 66,
+      "physicalCopies": [
+        "bone-courtier:copy-2",
+        "brigand-bloodletter:copy-1",
+        "brigand-fusilier:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 2,
+      "seed": 26,
+      "initialHash": "d5adce4a5a075245ce0bc9b61d0bd10e05f582b9d43953ba35288ab38fb07072",
+      "resultHash": "e15c85afdd31f34d64bc9fbf798d385f3cf7059c8177c998e0e65f7a81917c44",
+      "saveReloadHash": "e15c85afdd31f34d64bc9fbf798d385f3cf7059c8177c998e0e65f7a81917c44",
+      "rngCalls": 67,
+      "physicalCopies": [
+        "webber:copy-3",
+        "bone-defender:copy-1",
+        "brigand-fusilier:copy-3",
+        "bone-arbalist:copy-3"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 2,
+      "seed": 27,
+      "initialHash": "f8067a00c1b9d07a65072311f3e2e8d34e65692710bea1d57680bd1b4267d70a",
+      "resultHash": "8c8898177c30b42a23ae12cdc1ff44dc837d4d1b585b94eb96f6815e4dff9f7b",
+      "saveReloadHash": "8c8898177c30b42a23ae12cdc1ff44dc837d4d1b585b94eb96f6815e4dff9f7b",
+      "rngCalls": 67,
+      "physicalCopies": [
+        "bone-soldier:copy-1",
+        "pliskin:copy-2",
+        "cultist-acolyte:copy-2",
+        "spitter:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 2,
+      "seed": 28,
+      "initialHash": "3ad09196300ca605ce98848b1ef197b22e59d9fc88519b48dbbd92d092894b5a",
+      "resultHash": "be424ff54670534fd36b3b0c23da0782dd203105a02d1d724cffef5083f88ae9",
+      "saveReloadHash": "be424ff54670534fd36b3b0c23da0782dd203105a02d1d724cffef5083f88ae9",
+      "rngCalls": 67,
+      "physicalCopies": [
+        "bone-arbalist:copy-2",
+        "madman:copy-3",
+        "bone-courtier:copy-3",
+        "bone-spearman:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 2,
+      "seed": 29,
+      "initialHash": "d28c6b96d0c66b54aab41c6ec81e5293fbcb61da03b143a34471a67b8a1c775f",
+      "resultHash": "481ef344bfc23dd306de7eff09d458c372116485e44535c1bf945c05b2f58fbd",
+      "saveReloadHash": "481ef344bfc23dd306de7eff09d458c372116485e44535c1bf945c05b2f58fbd",
+      "rngCalls": 67,
+      "physicalCopies": [
+        "bone-soldier:copy-2",
+        "cultist-brawler:copy-3",
+        "bone-arbalist:copy-1",
+        "maggot:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 2,
+      "seed": 30,
+      "initialHash": "4ec87e68bea57614848ded93f094e1843f4ba429f7ab5e85a637575373d8868c",
+      "resultHash": "c25fcd80a659e89390bc78bbb3306aa9ecf70ad9fbd0fdbffa2734e286d20320",
+      "saveReloadHash": "c25fcd80a659e89390bc78bbb3306aa9ecf70ad9fbd0fdbffa2734e286d20320",
+      "rngCalls": 67,
+      "physicalCopies": [
+        "brigand-cutthroat:copy-3",
+        "cultist-brawler:copy-3",
+        "bone-spearman:copy-1",
+        "bone-soldier:copy-3"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 3,
+      "seed": 1,
+      "initialHash": "330a6ed5244bfbb08c1ca2154991d881016673afa3bb83f5f2ac63aab04589f7",
+      "resultHash": "1bcb982990be55941e3b9272dbdad628117f50dbbaeca6601cd500f67e3eefbb",
+      "saveReloadHash": "1bcb982990be55941e3b9272dbdad628117f50dbbaeca6601cd500f67e3eefbb",
+      "rngCalls": 75,
+      "physicalCopies": [
+        "cultist-brawler:copy-1",
+        "brigand-fusilier:copy-2",
+        "adder:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 3,
+      "seed": 2,
+      "initialHash": "995b7a07c03b382da713947a61f72864a91d9365e25f4953c41fe65b869e4d3c",
+      "resultHash": "0b8dbac3bbab7a317070728f2ef52206cce8d472387977b272b35cbc05002235",
+      "saveReloadHash": "0b8dbac3bbab7a317070728f2ef52206cce8d472387977b272b35cbc05002235",
+      "rngCalls": 76,
+      "physicalCopies": [
+        "madman:copy-1",
+        "rattler:copy-3",
+        "pliskin:copy-2",
+        "brigand-raider:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 3,
+      "seed": 3,
+      "initialHash": "70d1a5b411dcde0f733a773f1917a47af1f6a08d18d4161f4e703c33894a9ccf",
+      "resultHash": "9dd11fb40f44c1758517fef382dfee3c928cef30f42846150f2869dec3566f5f",
+      "saveReloadHash": "9dd11fb40f44c1758517fef382dfee3c928cef30f42846150f2869dec3566f5f",
+      "rngCalls": 76,
+      "physicalCopies": [
+        "madman:copy-2",
+        "rattler:copy-1",
+        "bone-soldier:copy-1",
+        "webber:copy-3"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 3,
+      "seed": 4,
+      "initialHash": "786fc6d66269524cde9b9b13d6e4e69d622cf05068a83d9978a1cc7c279efcda",
+      "resultHash": "041eb196bd6a6f53821dd1949af0eb32bb3cdebcadb56e9031fd78b40168710a",
+      "saveReloadHash": "041eb196bd6a6f53821dd1949af0eb32bb3cdebcadb56e9031fd78b40168710a",
+      "rngCalls": 75,
+      "physicalCopies": [
+        "ghoul:copy-1",
+        "maggot:copy-3",
+        "cultist-acolyte:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 3,
+      "seed": 5,
+      "initialHash": "4d94a842a9caa7c10daffa61900e219787cae44d0097a452e89223765b80a0fd",
+      "resultHash": "3376a776259fb2372840c18d154b2f5f80ba1cc401b477f41132ae989f7bffe3",
+      "saveReloadHash": "3376a776259fb2372840c18d154b2f5f80ba1cc401b477f41132ae989f7bffe3",
+      "rngCalls": 76,
+      "physicalCopies": [
+        "cultist-acolyte:copy-1",
+        "pliskin:copy-1",
+        "brigand-hunter:copy-3",
+        "webber:copy-3"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 3,
+      "seed": 6,
+      "initialHash": "64bd74fbf0004c322bd7ea575fde6716d57eaf070da030cf4eddf81c9f58743b",
+      "resultHash": "b57b35a78cad3b2285a52001e1a63d6ca1466d049ac4ff4b776a49aa47725502",
+      "saveReloadHash": "b57b35a78cad3b2285a52001e1a63d6ca1466d049ac4ff4b776a49aa47725502",
+      "rngCalls": 76,
+      "physicalCopies": [
+        "cultist-acolyte:copy-1",
+        "bone-arbalist:copy-2",
+        "pliskin:copy-2",
+        "bone-soldier:copy-2"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 3,
+      "seed": 7,
+      "initialHash": "ec1a0075bb2e2ec9121e993d5816d39093c53439a4756b075588e9c77bb99159",
+      "resultHash": "6968167d09c4f6bd485001383b8cb78c969612a43d19feafc3f06ff61df22d90",
+      "saveReloadHash": "6968167d09c4f6bd485001383b8cb78c969612a43d19feafc3f06ff61df22d90",
+      "rngCalls": 76,
+      "physicalCopies": [
+        "webber:copy-1",
+        "cultist-acolyte:copy-2",
+        "pliskin:copy-2",
+        "bone-defender:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 3,
+      "seed": 8,
+      "initialHash": "b5d1edbecd08a3b379e5cacb6f62aba220d624eda715d32b7e4f03446be74d48",
+      "resultHash": "3fb398a1c225d77a451906489b1774430ffd3d65b6df0bbc7a34195a098d0b28",
+      "saveReloadHash": "3fb398a1c225d77a451906489b1774430ffd3d65b6df0bbc7a34195a098d0b28",
+      "rngCalls": 76,
+      "physicalCopies": [
+        "bone-soldier:copy-3",
+        "bone-arbalist:copy-3",
+        "rattler:copy-3",
+        "bone-courtier:copy-2"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 3,
+      "seed": 9,
+      "initialHash": "5d58d1b63bd472bdb0bb8a52ccedde4fcb49c519f9ab918be31417a80bce0734",
+      "resultHash": "a2b45802233aae8114e1d16e4bc83e47f5e50154558a0f0150dea94b8eac03e8",
+      "saveReloadHash": "a2b45802233aae8114e1d16e4bc83e47f5e50154558a0f0150dea94b8eac03e8",
+      "rngCalls": 75,
+      "physicalCopies": [
+        "bone-defender:copy-2",
+        "brigand-hunter:copy-2",
+        "adder:copy-1"
+      ],
+      "largeReplacement": true
+    },
+    {
+      "level": 3,
+      "seed": 10,
+      "initialHash": "f31e2472b686b776a516c0848133eeaceb1e6d676d510b8400356f47a0082859",
+      "resultHash": "5da4d9c803c21ee6313c020a35a4e96f9b442d6aeb8a0c07832bb584f54fc33f",
+      "saveReloadHash": "5da4d9c803c21ee6313c020a35a4e96f9b442d6aeb8a0c07832bb584f54fc33f",
+      "rngCalls": 76,
+      "physicalCopies": [
+        "madman:copy-1",
+        "gargoyle:copy-2",
+        "gargoyle:copy-3",
+        "brigand-raider:copy-3"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 3,
+      "seed": 11,
+      "initialHash": "edd4e21e3a3cb16f5bce38ec7603d29c2e11944a9dbac9060b5baadd7dce3af7",
+      "resultHash": "4a892fef7a876dc4680d6c71ac836d8965ba47ac18c7b05366a835806d7895ee",
+      "saveReloadHash": "4a892fef7a876dc4680d6c71ac836d8965ba47ac18c7b05366a835806d7895ee",
+      "rngCalls": 76,
+      "physicalCopies": [
+        "webber:copy-2",
+        "cultist-brawler:copy-1",
+        "madman:copy-1",
+        "bone-bearer:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 3,
+      "seed": 12,
+      "initialHash": "4d4e4cdfa1bc3a17740b13f825755e39e9bcf91349cc2293db9c21345ef978e6",
+      "resultHash": "04cb239d5893439d3d8657cf2b4baac48b4aa597b4d61316882350578fd8eca5",
+      "saveReloadHash": "04cb239d5893439d3d8657cf2b4baac48b4aa597b4d61316882350578fd8eca5",
+      "rngCalls": 76,
+      "physicalCopies": [
+        "brigand-raider:copy-3",
+        "bone-defender:copy-1",
+        "maggot:copy-1",
+        "maggot:copy-3"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 3,
+      "seed": 13,
+      "initialHash": "fe9140636edc9677968e6cc1c42ff77e45459d27dbbf5eb99f5e64ec6bfb3817",
+      "resultHash": "9168455d7c3a60fbec16d9f99b9657a893d665405223044dfff913efccab657d",
+      "saveReloadHash": "9168455d7c3a60fbec16d9f99b9657a893d665405223044dfff913efccab657d",
+      "rngCalls": 75,
+      "physicalCopies": [
+        "maggot:copy-1",
+        "pliskin:copy-3",
+        "brigand-bloodletter:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 3,
+      "seed": 14,
+      "initialHash": "83a2731bb4be2eec8734983f0fe523d3d547016b1f454417e7df50da29e98f80",
+      "resultHash": "f489056f3c14c36361d96ad13cf25f24d0f06b6552f269b6827e74ca04d871e6",
+      "saveReloadHash": "f489056f3c14c36361d96ad13cf25f24d0f06b6552f269b6827e74ca04d871e6",
+      "rngCalls": 76,
+      "physicalCopies": [
+        "spitter:copy-3",
+        "brigand-fusilier:copy-3",
+        "bone-soldier:copy-1",
+        "brigand-fusilier:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 3,
+      "seed": 15,
+      "initialHash": "c2ad543bddc0cdfa7bc65e043cb539b7f44417950fe708891de578b3ffc97712",
+      "resultHash": "dd5793d3d630d1ea42e9726e0322a1f0df64eafd826f9e2de4dc24c5b01fce2f",
+      "saveReloadHash": "dd5793d3d630d1ea42e9726e0322a1f0df64eafd826f9e2de4dc24c5b01fce2f",
+      "rngCalls": 76,
+      "physicalCopies": [
+        "spitter:copy-3",
+        "cultist-acolyte:copy-2",
+        "bone-soldier:copy-3",
+        "gargoyle:copy-2"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 3,
+      "seed": 16,
+      "initialHash": "63439658364bebf098d701791d003d779df19cb7c968fd9a830ebd72a936f798",
+      "resultHash": "5862c735f14e783a28584f5f9d44c34bc412910f5ad4cbe8d2f0751885389e3e",
+      "saveReloadHash": "5862c735f14e783a28584f5f9d44c34bc412910f5ad4cbe8d2f0751885389e3e",
+      "rngCalls": 75,
+      "physicalCopies": [
+        "brigand-cutthroat:copy-2",
+        "spitter:copy-1",
+        "ghoul:copy-1"
+      ],
+      "largeReplacement": true
+    },
+    {
+      "level": 3,
+      "seed": 17,
+      "initialHash": "4455b16f07e2b9d5aa3125f80f6bcd9d101e8575e070606ca9cf753d271f1c4b",
+      "resultHash": "5092a05c543763517d8c23516f1a21b9610c4f79021508ae2c4c92f91aa0ede5",
+      "saveReloadHash": "5092a05c543763517d8c23516f1a21b9610c4f79021508ae2c4c92f91aa0ede5",
+      "rngCalls": 75,
+      "physicalCopies": [
+        "maggot:copy-1",
+        "bone-arbalist:copy-2",
+        "ghoul:copy-1"
+      ],
+      "largeReplacement": true
+    },
+    {
+      "level": 3,
+      "seed": 18,
+      "initialHash": "e2fd54e99bb36b25d663375d6ab09c9a92f974ff6323583aeb203c63d5abb422",
+      "resultHash": "9d14c053cf4febed4163247a4b37773af6327d67d505cdf5f106b827e2607d02",
+      "saveReloadHash": "9d14c053cf4febed4163247a4b37773af6327d67d505cdf5f106b827e2607d02",
+      "rngCalls": 75,
+      "physicalCopies": [
+        "brigand-raider:copy-1",
+        "cultist-acolyte:copy-3",
+        "adder:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 3,
+      "seed": 19,
+      "initialHash": "b1902d1617edf1a0288d9e78e62066f2d1ac4d7ab4ff7faa74a603076390162b",
+      "resultHash": "256047d446cafb9f44cc21ab29113bf4990a1a5b9dcb853880ad631daf4def56",
+      "saveReloadHash": "256047d446cafb9f44cc21ab29113bf4990a1a5b9dcb853880ad631daf4def56",
+      "rngCalls": 76,
+      "physicalCopies": [
+        "webber:copy-1",
+        "brigand-cutthroat:copy-3",
+        "pliskin:copy-2",
+        "spitter:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 3,
+      "seed": 20,
+      "initialHash": "c4864a5c676ee38c5a3b0b92a0ca4ac696d713c72f1a1bc525a930226f4cfc7b",
+      "resultHash": "dad0735c46062cd97d5c84418ebac3da88393c6aaf3022659fbcf6cd16cc8b13",
+      "saveReloadHash": "dad0735c46062cd97d5c84418ebac3da88393c6aaf3022659fbcf6cd16cc8b13",
+      "rngCalls": 76,
+      "physicalCopies": [
+        "pliskin:copy-2",
+        "cultist-brawler:copy-2",
+        "maggot:copy-2",
+        "bone-bearer:copy-2"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 3,
+      "seed": 21,
+      "initialHash": "bca2256d1ea0c0b5bce7816722eb8511d88ddcfe93f7a94cc88b33e0f08787be",
+      "resultHash": "920e1c20ae4243329183706ed3baab73a0d2e84f51fa9ec1cb18b6bde5bee19f",
+      "saveReloadHash": "920e1c20ae4243329183706ed3baab73a0d2e84f51fa9ec1cb18b6bde5bee19f",
+      "rngCalls": 76,
+      "physicalCopies": [
+        "brigand-cutthroat:copy-1",
+        "rattler:copy-2",
+        "rattler:copy-3",
+        "rattler:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 3,
+      "seed": 22,
+      "initialHash": "c1d8e5fd7a63d1e2fca69011a73a8c511593c4466ac97a7985abd71f82e0a0c6",
+      "resultHash": "111bf75e754986d4e9ef4570fa3b8e4ad46d45911b3096830b8adfe751a91580",
+      "saveReloadHash": "111bf75e754986d4e9ef4570fa3b8e4ad46d45911b3096830b8adfe751a91580",
+      "rngCalls": 76,
+      "physicalCopies": [
+        "bone-bearer:copy-1",
+        "cultist-brawler:copy-2",
+        "gargoyle:copy-3",
+        "bone-bearer:copy-2"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 3,
+      "seed": 23,
+      "initialHash": "6e17e79a6909b9ba00ee1d74cd0fd006cbfa70623a5728251d58d1bdc705d55a",
+      "resultHash": "f74fab64015ec62ee17d2d54bdc01798555a0fe0bcbc76f55ed7fff762379494",
+      "saveReloadHash": "f74fab64015ec62ee17d2d54bdc01798555a0fe0bcbc76f55ed7fff762379494",
+      "rngCalls": 76,
+      "physicalCopies": [
+        "brigand-cutthroat:copy-2",
+        "brigand-raider:copy-1",
+        "cultist-brawler:copy-1",
+        "brigand-fusilier:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 3,
+      "seed": 24,
+      "initialHash": "ebbf2eac7ec76742db3409cfd46ac62346e05e253b9116f907ffd700aee86272",
+      "resultHash": "e6f0b76f795409132a0aa731271c60f7f39189248efd70d895db93f6a80d9c58",
+      "saveReloadHash": "e6f0b76f795409132a0aa731271c60f7f39189248efd70d895db93f6a80d9c58",
+      "rngCalls": 75,
+      "physicalCopies": [
+        "pliskin:copy-2",
+        "brigand-raider:copy-3",
+        "ghoul:copy-1"
+      ],
+      "largeReplacement": true
+    },
+    {
+      "level": 3,
+      "seed": 25,
+      "initialHash": "d7676816ed55c4a3c975f6a38502d774ebed5896b02b5aee28d8452a6b97475d",
+      "resultHash": "511cf80c2a8bfdca2c2f63c502dd230c90b28b319ac55c50350c7551a46d7bb0",
+      "saveReloadHash": "511cf80c2a8bfdca2c2f63c502dd230c90b28b319ac55c50350c7551a46d7bb0",
+      "rngCalls": 75,
+      "physicalCopies": [
+        "bone-spearman:copy-1",
+        "maggot:copy-3",
+        "adder:copy-1"
+      ],
+      "largeReplacement": true
+    },
+    {
+      "level": 3,
+      "seed": 26,
+      "initialHash": "46564aba3b4d3fc5d1018941e6a6a4527673c21ef9c1269e67ee0090b9902658",
+      "resultHash": "96cc20f941117f26729a41f713cb991371bf753c17cf3cb4aed51df489f2eee2",
+      "saveReloadHash": "96cc20f941117f26729a41f713cb991371bf753c17cf3cb4aed51df489f2eee2",
+      "rngCalls": 75,
+      "physicalCopies": [
+        "bone-spearman:copy-1",
+        "cultist-brawler:copy-3",
+        "bone-captain:copy-1"
+      ],
+      "largeReplacement": true
+    },
+    {
+      "level": 3,
+      "seed": 27,
+      "initialHash": "dbbb365157f1cf7a0a16418af8673d3c2d0cd46151dded18834a16070270d1be",
+      "resultHash": "f18bb787a8380e564691eecd65651a519cfbf32ff831be41fe93ed585d832302",
+      "saveReloadHash": "f18bb787a8380e564691eecd65651a519cfbf32ff831be41fe93ed585d832302",
+      "rngCalls": 76,
+      "physicalCopies": [
+        "bone-soldier:copy-1",
+        "cultist-brawler:copy-3",
+        "bone-rabble:copy-2",
+        "brigand-hunter:copy-2"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 3,
+      "seed": 28,
+      "initialHash": "78dba044ef85205de4648902d1b44b301a45df0a456a18153a438ad5cc14cef2",
+      "resultHash": "24d85c41dd1bbc3f2ef6dbf6ce9301fd0f5f21f02dbc56d73de1fd98e85afc07",
+      "saveReloadHash": "24d85c41dd1bbc3f2ef6dbf6ce9301fd0f5f21f02dbc56d73de1fd98e85afc07",
+      "rngCalls": 76,
+      "physicalCopies": [
+        "gargoyle:copy-1",
+        "pliskin:copy-1",
+        "brigand-fusilier:copy-3",
+        "rattler:copy-1"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 3,
+      "seed": 29,
+      "initialHash": "5cb0c616e98396693304b0a266925e6a9fd058a37de43c7945603ebdde3070ed",
+      "resultHash": "bb08d237b2a93d9577a434cdf59de5bea011f09d334a94b5f46d127c4d77718c",
+      "saveReloadHash": "bb08d237b2a93d9577a434cdf59de5bea011f09d334a94b5f46d127c4d77718c",
+      "rngCalls": 76,
+      "physicalCopies": [
+        "gargoyle:copy-2",
+        "cultist-acolyte:copy-2",
+        "bone-soldier:copy-2",
+        "bone-soldier:copy-3"
+      ],
+      "largeReplacement": false
+    },
+    {
+      "level": 3,
+      "seed": 30,
+      "initialHash": "f45441c913af6c162e8df691e1e7b341eda8cf1820f65d3421d8bebcc89af77e",
+      "resultHash": "b28f90fa668a5c48c4bfb46116bb00e8dbf3b4c9ed95be691ac844e69bb6c8a1",
+      "saveReloadHash": "b28f90fa668a5c48c4bfb46116bb00e8dbf3b4c9ed95be691ac844e69bb6c8a1",
+      "rngCalls": 76,
+      "physicalCopies": [
+        "spitter:copy-3",
+        "brigand-cutthroat:copy-1",
+        "rattler:copy-3",
+        "bone-bearer:copy-2"
+      ],
+      "largeReplacement": false
+    }
+  ],
+  "sourceReferences": [
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 15,
+      "location": "full printed face",
+      "componentId": "room-deck-top-card",
+      "sourceClass": "OFFICIAL_SOURCE"
+    },
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 16,
+      "location": "full printed face",
+      "componentId": "stance-deployment",
+      "sourceClass": "OFFICIAL_SOURCE"
+    },
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 17,
+      "location": "full printed face",
+      "componentId": "large-initial-draw-replacement",
+      "sourceClass": "OFFICIAL_SOURCE"
+    },
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 25,
+      "location": "full printed face",
+      "componentId": "battle-end-return-cards",
+      "sourceClass": "OFFICIAL_SOURCE"
+    }
+  ]
+}

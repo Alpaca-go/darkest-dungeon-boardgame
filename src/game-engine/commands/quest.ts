@@ -20,6 +20,7 @@ import { engineChooseQuest } from '../campaign/campaign-orchestrator';
 import { getBossQuestPool, getQuestPool, runtimeContentContext } from '../../data/content-selector';
 import { reserveProductionBossEncounter } from './boss-foundation';
 import { necromancerQuestEntryError } from '../bosses/production-dependency-gate';
+import { checkpointForPreparationDay, enterNecromancerPreparationDay } from '../campaign/necromancer-preparation-day';
 
 export type QuestCommandError =
   | 'already-resolved'
@@ -162,7 +163,10 @@ export function commitReturnToHamlet(
   }
 
   // 3. 进入 Hamlet 阶段。
-  const next2 = startHamletPhase(next);
+  const preparationCheckpoint = checkpointForPreparationDay(next, input.questRunId);
+  const canEnterHamlet = next.gamePhase === 'quest-result' && next.questResultResolved;
+  const hamletInput = canEnterHamlet && preparationCheckpoint && next.bossEncounterCheckpoint ? { ...next, bossEncounterCheckpoint: null } : next;
+  const next2 = enterNecromancerPreparationDay(startHamletPhase(hamletInput), preparationCheckpoint);
   let after: CampaignState = next2 === next ? next : next2;
 
   // 4. retarget + 5. replacement 始终执行。

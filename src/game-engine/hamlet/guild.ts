@@ -11,7 +11,7 @@ import { getSkillById } from '../../data/skills';
 import { getHamletBuildingById } from '../../data/hamlet-buildings';
 import { createId, nowIso } from '../random';
 import { pushLog } from '../log';
-import { buildingVisitError } from '../hamlet';
+import { buildingVisitError } from '../commands/hamlet-preparation-day';
 import {
   applyUpgradeChoicesToHero,
   buildUpgradeChoice,

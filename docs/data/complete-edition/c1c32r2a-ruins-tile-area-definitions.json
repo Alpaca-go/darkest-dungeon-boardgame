@@ -1,0 +1,4002 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R2A",
+  "baselineHead": "624a2b5c20b9f40ee9e87ac103780cb9eb3c2053",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "tiles": [
+    {
+      "tileId": "ruins-tile-1",
+      "roomNumber": 1,
+      "side": "front",
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+          "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+          "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+          "page": 1,
+          "location": "printed Tile 1; north-up; crop marks excluded",
+          "componentId": "ruins-tile-1",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ],
+      "areas": [
+        {
+          "id": "ruins-tile-1:NW",
+          "location": "NW",
+          "boundary": [
+            [
+              0,
+              0
+            ],
+            [
+              0.33,
+              0
+            ],
+            [
+              0.33,
+              0.33
+            ],
+            [
+              0,
+              0.33
+            ]
+          ],
+          "capacity": 4,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-1:N",
+            "ruins-tile-1:W"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 1,
+              "location": "printed Tile 1; north-up; crop marks excluded; Area NW",
+              "componentId": "ruins-tile-1",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-1:N",
+          "location": "N",
+          "boundary": [
+            [
+              0.33,
+              0
+            ],
+            [
+              0.78,
+              0
+            ],
+            [
+              0.78,
+              0.16
+            ],
+            [
+              0.33,
+              0.16
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-1:NW",
+            "ruins-tile-1:NE"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 1,
+              "location": "printed Tile 1; north-up; crop marks excluded; Area N",
+              "componentId": "ruins-tile-1",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-1:NE",
+          "location": "NE",
+          "boundary": [
+            [
+              0.78,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              0.44
+            ],
+            [
+              0.78,
+              0.44
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [
+            "red",
+            "loot"
+          ],
+          "adjacent": [
+            "ruins-tile-1:N",
+            "ruins-tile-1:C",
+            "ruins-tile-1:E"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 1,
+              "location": "printed Tile 1; north-up; crop marks excluded; Area NE",
+              "componentId": "ruins-tile-1",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-1:W",
+          "location": "W",
+          "boundary": [
+            [
+              0.1,
+              0.33
+            ],
+            [
+              0.33,
+              0.33
+            ],
+            [
+              0.33,
+              0.8
+            ],
+            [
+              0.1,
+              0.8
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-1:NW",
+            "ruins-tile-1:C",
+            "ruins-tile-1:SW"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 1,
+              "location": "printed Tile 1; north-up; crop marks excluded; Area W",
+              "componentId": "ruins-tile-1",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-1:C",
+          "location": "C",
+          "boundary": [
+            [
+              0.33,
+              0.27
+            ],
+            [
+              0.78,
+              0.27
+            ],
+            [
+              0.78,
+              0.44
+            ],
+            [
+              0.33,
+              0.44
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-1:NE",
+            "ruins-tile-1:W",
+            "ruins-tile-1:LOW"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 1,
+              "location": "printed Tile 1; north-up; crop marks excluded; Area C",
+              "componentId": "ruins-tile-1",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-1:LOW",
+          "location": "LOW",
+          "boundary": [
+            [
+              0.38,
+              0.44
+            ],
+            [
+              0.74,
+              0.44
+            ],
+            [
+              0.74,
+              0.68
+            ],
+            [
+              0.38,
+              0.68
+            ]
+          ],
+          "capacity": 2,
+          "elevation": -1,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-1:C"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 1,
+              "location": "printed Tile 1; north-up; crop marks excluded; Area LOW",
+              "componentId": "ruins-tile-1",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-1:E",
+          "location": "E",
+          "boundary": [
+            [
+              0.78,
+              0.44
+            ],
+            [
+              1,
+              0.44
+            ],
+            [
+              1,
+              0.8
+            ],
+            [
+              0.78,
+              0.8
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-1:NE",
+            "ruins-tile-1:SE"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 1,
+              "location": "printed Tile 1; north-up; crop marks excluded; Area E",
+              "componentId": "ruins-tile-1",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-1:SW",
+          "location": "SW",
+          "boundary": [
+            [
+              0,
+              0.8
+            ],
+            [
+              0.33,
+              0.8
+            ],
+            [
+              0.33,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "capacity": 2,
+          "elevation": 0,
+          "glyphs": [
+            "red",
+            "loot"
+          ],
+          "adjacent": [
+            "ruins-tile-1:W",
+            "ruins-tile-1:S"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 1,
+              "location": "printed Tile 1; north-up; crop marks excluded; Area SW",
+              "componentId": "ruins-tile-1",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-1:S",
+          "location": "S",
+          "boundary": [
+            [
+              0.33,
+              0.8
+            ],
+            [
+              0.78,
+              0.8
+            ],
+            [
+              0.78,
+              1
+            ],
+            [
+              0.33,
+              1
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-1:SW",
+            "ruins-tile-1:SE"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 1,
+              "location": "printed Tile 1; north-up; crop marks excluded; Area S",
+              "componentId": "ruins-tile-1",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-1:SE",
+          "location": "SE",
+          "boundary": [
+            [
+              0.78,
+              0.8
+            ],
+            [
+              1,
+              0.8
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              0.78,
+              1
+            ]
+          ],
+          "capacity": 2,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-1:E",
+            "ruins-tile-1:S"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 1,
+              "location": "printed Tile 1; north-up; crop marks excluded; Area SE",
+              "componentId": "ruins-tile-1",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        }
+      ],
+      "heroStartingStanceAreas": {
+        "aggressive": "ruins-tile-1:SW",
+        "defensive": "ruins-tile-1:NE",
+        "ranged": "ruins-tile-1:SW",
+        "support": "ruins-tile-1:NE"
+      },
+      "monsterStartingStanceAreas": {
+        "aggressive": "ruins-tile-1:SE",
+        "defensive": "ruins-tile-1:W",
+        "ranged": "ruins-tile-1:LOW",
+        "support": "ruins-tile-1:W"
+      }
+    },
+    {
+      "tileId": "ruins-tile-2",
+      "roomNumber": 2,
+      "side": "back",
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+          "fileName": "DD_COREBOX_TILES_BACK.pdf",
+          "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+          "page": 2,
+          "location": "printed Tile 2; north-up; crop marks excluded",
+          "componentId": "ruins-tile-2",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ],
+      "areas": [
+        {
+          "id": "ruins-tile-2:N",
+          "location": "N",
+          "boundary": [
+            [
+              0.22,
+              0
+            ],
+            [
+              0.78,
+              0
+            ],
+            [
+              0.78,
+              0.1
+            ],
+            [
+              0.22,
+              0.1
+            ]
+          ],
+          "capacity": 2,
+          "elevation": 0,
+          "glyphs": [
+            "loot"
+          ],
+          "adjacent": [
+            "ruins-tile-2:MID"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 2,
+              "location": "printed Tile 2; north-up; crop marks excluded; Area N",
+              "componentId": "ruins-tile-2",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-2:NW",
+          "location": "NW",
+          "boundary": [
+            [
+              0,
+              0.1
+            ],
+            [
+              0.22,
+              0.1
+            ],
+            [
+              0.22,
+              0.44
+            ],
+            [
+              0,
+              0.44
+            ]
+          ],
+          "capacity": 2,
+          "elevation": 0,
+          "glyphs": [
+            "loot"
+          ],
+          "adjacent": [
+            "ruins-tile-2:MID",
+            "ruins-tile-2:W"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 2,
+              "location": "printed Tile 2; north-up; crop marks excluded; Area NW",
+              "componentId": "ruins-tile-2",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-2:W",
+          "location": "W",
+          "boundary": [
+            [
+              0,
+              0.44
+            ],
+            [
+              0.22,
+              0.44
+            ],
+            [
+              0.22,
+              1
+            ],
+            [
+              0.1,
+              1
+            ],
+            [
+              0.1,
+              0.66
+            ],
+            [
+              0,
+              0.66
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-2:NW",
+            "ruins-tile-2:MID"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 2,
+              "location": "printed Tile 2; north-up; crop marks excluded; Area W",
+              "componentId": "ruins-tile-2",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-2:MID",
+          "location": "MID",
+          "boundary": [
+            [
+              0.22,
+              0.1
+            ],
+            [
+              0.46,
+              0.1
+            ],
+            [
+              0.46,
+              0.44
+            ],
+            [
+              0.55,
+              0.44
+            ],
+            [
+              0.55,
+              0.55
+            ],
+            [
+              0.22,
+              0.55
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-2:N",
+            "ruins-tile-2:NW",
+            "ruins-tile-2:W",
+            "ruins-tile-2:C"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 2,
+              "location": "printed Tile 2; north-up; crop marks excluded; Area MID",
+              "componentId": "ruins-tile-2",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-2:C",
+          "location": "C",
+          "boundary": [
+            [
+              0.46,
+              0.22
+            ],
+            [
+              0.78,
+              0.22
+            ],
+            [
+              0.78,
+              0.66
+            ],
+            [
+              0.55,
+              0.66
+            ],
+            [
+              0.55,
+              0.44
+            ],
+            [
+              0.46,
+              0.44
+            ]
+          ],
+          "capacity": 4,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-2:MID",
+            "ruins-tile-2:NE",
+            "ruins-tile-2:E",
+            "ruins-tile-2:S"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 2,
+              "location": "printed Tile 2; north-up; crop marks excluded; Area C",
+              "componentId": "ruins-tile-2",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-2:NE",
+          "location": "NE",
+          "boundary": [
+            [
+              0.78,
+              0.1
+            ],
+            [
+              1,
+              0.1
+            ],
+            [
+              1,
+              0.44
+            ],
+            [
+              0.78,
+              0.44
+            ]
+          ],
+          "capacity": 2,
+          "elevation": 0,
+          "glyphs": [
+            "loot"
+          ],
+          "adjacent": [
+            "ruins-tile-2:C",
+            "ruins-tile-2:E"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 2,
+              "location": "printed Tile 2; north-up; crop marks excluded; Area NE",
+              "componentId": "ruins-tile-2",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-2:E",
+          "location": "E",
+          "boundary": [
+            [
+              0.78,
+              0.44
+            ],
+            [
+              1,
+              0.44
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              0.9,
+              1
+            ],
+            [
+              0.9,
+              0.66
+            ],
+            [
+              0.78,
+              0.66
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-2:NE",
+            "ruins-tile-2:C"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 2,
+              "location": "printed Tile 2; north-up; crop marks excluded; Area E",
+              "componentId": "ruins-tile-2",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-2:S",
+          "location": "S",
+          "boundary": [
+            [
+              0.22,
+              0.66
+            ],
+            [
+              0.78,
+              0.66
+            ],
+            [
+              0.78,
+              1
+            ],
+            [
+              0.22,
+              1
+            ]
+          ],
+          "capacity": 4,
+          "elevation": 0,
+          "glyphs": [
+            "red"
+          ],
+          "adjacent": [
+            "ruins-tile-2:C"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 2,
+              "location": "printed Tile 2; north-up; crop marks excluded; Area S",
+              "componentId": "ruins-tile-2",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        }
+      ],
+      "heroStartingStanceAreas": {
+        "aggressive": "ruins-tile-2:S",
+        "defensive": "ruins-tile-2:S",
+        "ranged": "ruins-tile-2:S",
+        "support": "ruins-tile-2:S"
+      },
+      "monsterStartingStanceAreas": {
+        "aggressive": "ruins-tile-2:C",
+        "defensive": "ruins-tile-2:C",
+        "ranged": "ruins-tile-2:NE",
+        "support": "ruins-tile-2:MID"
+      }
+    },
+    {
+      "tileId": "ruins-tile-3",
+      "roomNumber": 3,
+      "side": "front",
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+          "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+          "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+          "page": 2,
+          "location": "printed Tile 3; north-up; crop marks excluded",
+          "componentId": "ruins-tile-3",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ],
+      "areas": [
+        {
+          "id": "ruins-tile-3:NW",
+          "location": "NW",
+          "boundary": [
+            [
+              0,
+              0
+            ],
+            [
+              0.2,
+              0
+            ],
+            [
+              0.2,
+              0.33
+            ],
+            [
+              0,
+              0.33
+            ]
+          ],
+          "capacity": 2,
+          "elevation": 1,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-3:N"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 2,
+              "location": "printed Tile 3; north-up; crop marks excluded; Area NW",
+              "componentId": "ruins-tile-3",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-3:N",
+          "location": "N",
+          "boundary": [
+            [
+              0.2,
+              0
+            ],
+            [
+              0.8,
+              0
+            ],
+            [
+              0.8,
+              0.33
+            ],
+            [
+              0.2,
+              0.33
+            ]
+          ],
+          "capacity": 4,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-3:NW",
+            "ruins-tile-3:NE",
+            "ruins-tile-3:W",
+            "ruins-tile-3:E"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 2,
+              "location": "printed Tile 3; north-up; crop marks excluded; Area N",
+              "componentId": "ruins-tile-3",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-3:NE",
+          "location": "NE",
+          "boundary": [
+            [
+              0.8,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              0.33
+            ],
+            [
+              0.8,
+              0.33
+            ]
+          ],
+          "capacity": 2,
+          "elevation": 1,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-3:N"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 2,
+              "location": "printed Tile 3; north-up; crop marks excluded; Area NE",
+              "componentId": "ruins-tile-3",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-3:W",
+          "location": "W",
+          "boundary": [
+            [
+              0,
+              0.38
+            ],
+            [
+              0.44,
+              0.38
+            ],
+            [
+              0.44,
+              0.52
+            ],
+            [
+              0.33,
+              0.52
+            ],
+            [
+              0.33,
+              0.56
+            ],
+            [
+              0,
+              0.56
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-3:N",
+            "ruins-tile-3:LOW_W"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 2,
+              "location": "printed Tile 3; north-up; crop marks excluded; Area W",
+              "componentId": "ruins-tile-3",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-3:E",
+          "location": "E",
+          "boundary": [
+            [
+              0.56,
+              0.38
+            ],
+            [
+              1,
+              0.38
+            ],
+            [
+              1,
+              0.56
+            ],
+            [
+              0.67,
+              0.56
+            ],
+            [
+              0.67,
+              0.52
+            ],
+            [
+              0.56,
+              0.52
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-3:N",
+            "ruins-tile-3:LOW_E"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 2,
+              "location": "printed Tile 3; north-up; crop marks excluded; Area E",
+              "componentId": "ruins-tile-3",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-3:LOW_W",
+          "location": "LOW_W",
+          "boundary": [
+            [
+              0,
+              0.56
+            ],
+            [
+              0.33,
+              0.56
+            ],
+            [
+              0.33,
+              0.9
+            ],
+            [
+              0,
+              0.9
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-3:W",
+            "ruins-tile-3:FOUNTAIN",
+            "ruins-tile-3:SW"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 2,
+              "location": "printed Tile 3; north-up; crop marks excluded; Area LOW_W",
+              "componentId": "ruins-tile-3",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-3:FOUNTAIN",
+          "location": "FOUNTAIN",
+          "boundary": [
+            [
+              0.33,
+              0.56
+            ],
+            [
+              0.67,
+              0.56
+            ],
+            [
+              0.67,
+              0.9
+            ],
+            [
+              0.33,
+              0.9
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [
+            "green"
+          ],
+          "adjacent": [
+            "ruins-tile-3:LOW_W",
+            "ruins-tile-3:LOW_E"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 2,
+              "location": "printed Tile 3; north-up; crop marks excluded; Area FOUNTAIN",
+              "componentId": "ruins-tile-3",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-3:LOW_E",
+          "location": "LOW_E",
+          "boundary": [
+            [
+              0.67,
+              0.56
+            ],
+            [
+              1,
+              0.56
+            ],
+            [
+              1,
+              0.9
+            ],
+            [
+              0.67,
+              0.9
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-3:E",
+            "ruins-tile-3:FOUNTAIN",
+            "ruins-tile-3:SE"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 2,
+              "location": "printed Tile 3; north-up; crop marks excluded; Area LOW_E",
+              "componentId": "ruins-tile-3",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-3:SW",
+          "location": "SW",
+          "boundary": [
+            [
+              0,
+              0.9
+            ],
+            [
+              0.33,
+              0.9
+            ],
+            [
+              0.33,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "capacity": 2,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-3:LOW_W"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 2,
+              "location": "printed Tile 3; north-up; crop marks excluded; Area SW",
+              "componentId": "ruins-tile-3",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-3:SE",
+          "location": "SE",
+          "boundary": [
+            [
+              0.67,
+              0.9
+            ],
+            [
+              1,
+              0.9
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              0.67,
+              1
+            ]
+          ],
+          "capacity": 2,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-3:LOW_E"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 2,
+              "location": "printed Tile 3; north-up; crop marks excluded; Area SE",
+              "componentId": "ruins-tile-3",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        }
+      ],
+      "heroStartingStanceAreas": {
+        "aggressive": "ruins-tile-3:SW",
+        "defensive": "ruins-tile-3:SE",
+        "ranged": "ruins-tile-3:SE",
+        "support": "ruins-tile-3:SW"
+      },
+      "monsterStartingStanceAreas": {
+        "aggressive": "ruins-tile-3:W",
+        "defensive": "ruins-tile-3:E",
+        "ranged": "ruins-tile-3:NE",
+        "support": "ruins-tile-3:NW"
+      }
+    },
+    {
+      "tileId": "ruins-tile-4",
+      "roomNumber": 4,
+      "side": "back",
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+          "fileName": "DD_COREBOX_TILES_BACK.pdf",
+          "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+          "page": 3,
+          "location": "printed Tile 4; north-up; crop marks excluded",
+          "componentId": "ruins-tile-4",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ],
+      "areas": [
+        {
+          "id": "ruins-tile-4:NW",
+          "location": "NW",
+          "boundary": [
+            [
+              0,
+              0
+            ],
+            [
+              0.22,
+              0
+            ],
+            [
+              0.22,
+              0.22
+            ],
+            [
+              0.2,
+              0.22
+            ],
+            [
+              0.2,
+              0.33
+            ],
+            [
+              0,
+              0.33
+            ]
+          ],
+          "capacity": 2,
+          "elevation": 1,
+          "glyphs": [
+            "loot"
+          ],
+          "adjacent": [
+            "ruins-tile-4:N"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 3,
+              "location": "printed Tile 4; north-up; crop marks excluded; Area NW",
+              "componentId": "ruins-tile-4",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-4:N",
+          "location": "N",
+          "boundary": [
+            [
+              0.22,
+              0
+            ],
+            [
+              0.67,
+              0
+            ],
+            [
+              0.67,
+              0.22
+            ],
+            [
+              0.22,
+              0.22
+            ]
+          ],
+          "capacity": 4,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-4:NW",
+            "ruins-tile-4:W"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 3,
+              "location": "printed Tile 4; north-up; crop marks excluded; Area N",
+              "componentId": "ruins-tile-4",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-4:NE",
+          "location": "NE",
+          "boundary": [
+            [
+              0.8,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              0.33
+            ],
+            [
+              0.8,
+              0.33
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [
+            "loot"
+          ],
+          "adjacent": [
+            "ruins-tile-4:E"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 3,
+              "location": "printed Tile 4; north-up; crop marks excluded; Area NE",
+              "componentId": "ruins-tile-4",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-4:W",
+          "location": "W",
+          "boundary": [
+            [
+              0,
+              0.38
+            ],
+            [
+              0.2,
+              0.38
+            ],
+            [
+              0.2,
+              0.22
+            ],
+            [
+              0.44,
+              0.22
+            ],
+            [
+              0.44,
+              0.33
+            ],
+            [
+              0.33,
+              0.33
+            ],
+            [
+              0.33,
+              0.56
+            ],
+            [
+              0,
+              0.56
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-4:N",
+            "ruins-tile-4:CIRCLE",
+            "ruins-tile-4:PIT_W"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 3,
+              "location": "printed Tile 4; north-up; crop marks excluded; Area W",
+              "componentId": "ruins-tile-4",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-4:CIRCLE",
+          "location": "CIRCLE",
+          "boundary": [
+            [
+              0.33,
+              0.33
+            ],
+            [
+              0.67,
+              0.33
+            ],
+            [
+              0.67,
+              0.67
+            ],
+            [
+              0.33,
+              0.67
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [
+            "red:A"
+          ],
+          "adjacent": [
+            "ruins-tile-4:W",
+            "ruins-tile-4:PIT_W",
+            "ruins-tile-4:PIT_E"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 3,
+              "location": "printed Tile 4; north-up; crop marks excluded; Area CIRCLE",
+              "componentId": "ruins-tile-4",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-4:E",
+          "location": "E",
+          "boundary": [
+            [
+              0.8,
+              0.33
+            ],
+            [
+              1,
+              0.33
+            ],
+            [
+              1,
+              0.56
+            ],
+            [
+              0.8,
+              0.56
+            ]
+          ],
+          "capacity": 2,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-4:NE",
+            "ruins-tile-4:PIT_E"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 3,
+              "location": "printed Tile 4; north-up; crop marks excluded; Area E",
+              "componentId": "ruins-tile-4",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-4:PIT_W",
+          "location": "PIT_W",
+          "boundary": [
+            [
+              0,
+              0.56
+            ],
+            [
+              0.33,
+              0.56
+            ],
+            [
+              0.33,
+              0.67
+            ],
+            [
+              0.44,
+              0.67
+            ],
+            [
+              0.44,
+              0.78
+            ],
+            [
+              0,
+              0.78
+            ]
+          ],
+          "capacity": 4,
+          "elevation": 0,
+          "glyphs": [
+            "red:B"
+          ],
+          "adjacent": [
+            "ruins-tile-4:W",
+            "ruins-tile-4:CIRCLE",
+            "ruins-tile-4:PIT_E",
+            "ruins-tile-4:SW",
+            "ruins-tile-4:S"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 3,
+              "location": "printed Tile 4; north-up; crop marks excluded; Area PIT_W",
+              "componentId": "ruins-tile-4",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-4:PIT_E",
+          "location": "PIT_E",
+          "boundary": [
+            [
+              0.44,
+              0.67
+            ],
+            [
+              0.67,
+              0.67
+            ],
+            [
+              0.67,
+              0.56
+            ],
+            [
+              1,
+              0.56
+            ],
+            [
+              1,
+              0.78
+            ],
+            [
+              0.44,
+              0.78
+            ]
+          ],
+          "capacity": 2,
+          "elevation": 0,
+          "glyphs": [
+            "red:B"
+          ],
+          "adjacent": [
+            "ruins-tile-4:CIRCLE",
+            "ruins-tile-4:E",
+            "ruins-tile-4:PIT_W",
+            "ruins-tile-4:S",
+            "ruins-tile-4:SE"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 3,
+              "location": "printed Tile 4; north-up; crop marks excluded; Area PIT_E",
+              "componentId": "ruins-tile-4",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-4:SW",
+          "location": "SW",
+          "boundary": [
+            [
+              0,
+              0.78
+            ],
+            [
+              0.33,
+              0.78
+            ],
+            [
+              0.33,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-4:PIT_W",
+            "ruins-tile-4:S"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 3,
+              "location": "printed Tile 4; north-up; crop marks excluded; Area SW",
+              "componentId": "ruins-tile-4",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-4:S",
+          "location": "S",
+          "boundary": [
+            [
+              0.33,
+              0.78
+            ],
+            [
+              0.67,
+              0.78
+            ],
+            [
+              0.67,
+              1
+            ],
+            [
+              0.33,
+              1
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-4:PIT_W",
+            "ruins-tile-4:PIT_E",
+            "ruins-tile-4:SW",
+            "ruins-tile-4:SE"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 3,
+              "location": "printed Tile 4; north-up; crop marks excluded; Area S",
+              "componentId": "ruins-tile-4",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-4:SE",
+          "location": "SE",
+          "boundary": [
+            [
+              0.67,
+              0.78
+            ],
+            [
+              1,
+              0.78
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              0.67,
+              1
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-4:PIT_E",
+            "ruins-tile-4:S"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 3,
+              "location": "printed Tile 4; north-up; crop marks excluded; Area SE",
+              "componentId": "ruins-tile-4",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        }
+      ],
+      "heroStartingStanceAreas": {
+        "aggressive": "ruins-tile-4:S",
+        "defensive": "ruins-tile-4:S",
+        "ranged": "ruins-tile-4:SE",
+        "support": "ruins-tile-4:SW"
+      },
+      "monsterStartingStanceAreas": {
+        "aggressive": "ruins-tile-4:CIRCLE",
+        "defensive": "ruins-tile-4:NE",
+        "ranged": "ruins-tile-4:NW",
+        "support": "ruins-tile-4:CIRCLE"
+      }
+    },
+    {
+      "tileId": "ruins-tile-5",
+      "roomNumber": 5,
+      "side": "front",
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+          "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+          "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+          "page": 3,
+          "location": "printed Tile 5; north-up; crop marks excluded",
+          "componentId": "ruins-tile-5",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ],
+      "areas": [
+        {
+          "id": "ruins-tile-5:NW",
+          "location": "NW",
+          "boundary": [
+            [
+              0,
+              0
+            ],
+            [
+              0.5,
+              0
+            ],
+            [
+              0.5,
+              0.33
+            ],
+            [
+              0.33,
+              0.33
+            ],
+            [
+              0.33,
+              0.22
+            ],
+            [
+              0.22,
+              0.22
+            ],
+            [
+              0.22,
+              0.33
+            ],
+            [
+              0,
+              0.33
+            ]
+          ],
+          "capacity": 4,
+          "elevation": 0,
+          "glyphs": [
+            "red"
+          ],
+          "adjacent": [
+            "ruins-tile-5:W",
+            "ruins-tile-5:MID"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 3,
+              "location": "printed Tile 5; north-up; crop marks excluded; Area NW",
+              "componentId": "ruins-tile-5",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-5:NE",
+          "location": "NE",
+          "boundary": [
+            [
+              0.58,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              0.33
+            ],
+            [
+              0.58,
+              0.33
+            ]
+          ],
+          "capacity": 4,
+          "elevation": 0,
+          "glyphs": [
+            "green"
+          ],
+          "adjacent": [
+            "ruins-tile-5:E"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 3,
+              "location": "printed Tile 5; north-up; crop marks excluded; Area NE",
+              "componentId": "ruins-tile-5",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-5:W",
+          "location": "W",
+          "boundary": [
+            [
+              0,
+              0.33
+            ],
+            [
+              0.22,
+              0.33
+            ],
+            [
+              0.22,
+              0.78
+            ],
+            [
+              0,
+              0.78
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [
+            "red"
+          ],
+          "adjacent": [
+            "ruins-tile-5:NW",
+            "ruins-tile-5:SW"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 3,
+              "location": "printed Tile 5; north-up; crop marks excluded; Area W",
+              "componentId": "ruins-tile-5",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-5:MID",
+          "location": "MID",
+          "boundary": [
+            [
+              0.33,
+              0.33
+            ],
+            [
+              0.56,
+              0.33
+            ],
+            [
+              0.56,
+              0.56
+            ],
+            [
+              0.33,
+              0.56
+            ]
+          ],
+          "capacity": 2,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-5:NW",
+            "ruins-tile-5:E",
+            "ruins-tile-5:S"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 3,
+              "location": "printed Tile 5; north-up; crop marks excluded; Area MID",
+              "componentId": "ruins-tile-5",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-5:E",
+          "location": "E",
+          "boundary": [
+            [
+              0.56,
+              0.33
+            ],
+            [
+              1,
+              0.33
+            ],
+            [
+              1,
+              0.56
+            ],
+            [
+              0.56,
+              0.56
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-5:NE",
+            "ruins-tile-5:MID",
+            "ruins-tile-5:SE"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 3,
+              "location": "printed Tile 5; north-up; crop marks excluded; Area E",
+              "componentId": "ruins-tile-5",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-5:SW",
+          "location": "SW",
+          "boundary": [
+            [
+              0,
+              0.78
+            ],
+            [
+              0.22,
+              0.78
+            ],
+            [
+              0.22,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "capacity": 2,
+          "elevation": 0,
+          "glyphs": [
+            "red"
+          ],
+          "adjacent": [
+            "ruins-tile-5:W"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 3,
+              "location": "printed Tile 5; north-up; crop marks excluded; Area SW",
+              "componentId": "ruins-tile-5",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-5:S",
+          "location": "S",
+          "boundary": [
+            [
+              0.33,
+              0.56
+            ],
+            [
+              0.56,
+              0.56
+            ],
+            [
+              0.56,
+              1
+            ],
+            [
+              0.33,
+              1
+            ]
+          ],
+          "capacity": 2,
+          "elevation": 0,
+          "glyphs": [
+            "red"
+          ],
+          "adjacent": [
+            "ruins-tile-5:MID"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 3,
+              "location": "printed Tile 5; north-up; crop marks excluded; Area S",
+              "componentId": "ruins-tile-5",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-5:SE",
+          "location": "SE",
+          "boundary": [
+            [
+              0.67,
+              0.56
+            ],
+            [
+              1,
+              0.56
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              0.67,
+              1
+            ]
+          ],
+          "capacity": 2,
+          "elevation": 0,
+          "glyphs": [
+            "red",
+            "loot"
+          ],
+          "adjacent": [
+            "ruins-tile-5:E"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 3,
+              "location": "printed Tile 5; north-up; crop marks excluded; Area SE",
+              "componentId": "ruins-tile-5",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        }
+      ],
+      "heroStartingStanceAreas": {
+        "aggressive": "ruins-tile-5:SW",
+        "defensive": "ruins-tile-5:S",
+        "ranged": "ruins-tile-5:SW",
+        "support": "ruins-tile-5:S"
+      },
+      "monsterStartingStanceAreas": {
+        "aggressive": "ruins-tile-5:NW",
+        "defensive": "ruins-tile-5:E",
+        "ranged": "ruins-tile-5:NW",
+        "support": "ruins-tile-5:NE"
+      }
+    },
+    {
+      "tileId": "ruins-tile-6",
+      "roomNumber": 6,
+      "side": "back",
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+          "fileName": "DD_COREBOX_TILES_BACK.pdf",
+          "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+          "page": 4,
+          "location": "printed Tile 6; north-up; crop marks excluded",
+          "componentId": "ruins-tile-6",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ],
+      "areas": [
+        {
+          "id": "ruins-tile-6:NW",
+          "location": "NW",
+          "boundary": [
+            [
+              0.22,
+              0.1
+            ],
+            [
+              0.46,
+              0.1
+            ],
+            [
+              0.46,
+              0.33
+            ],
+            [
+              0.22,
+              0.33
+            ]
+          ],
+          "capacity": 2,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-6:N",
+            "ruins-tile-6:CHEST"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 4,
+              "location": "printed Tile 6; north-up; crop marks excluded; Area NW",
+              "componentId": "ruins-tile-6",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-6:N",
+          "location": "N",
+          "boundary": [
+            [
+              0.46,
+              0
+            ],
+            [
+              0.8,
+              0
+            ],
+            [
+              0.8,
+              0.33
+            ],
+            [
+              0.46,
+              0.33
+            ]
+          ],
+          "capacity": 4,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-6:NW",
+            "ruins-tile-6:NE",
+            "ruins-tile-6:CHEST"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 4,
+              "location": "printed Tile 6; north-up; crop marks excluded; Area N",
+              "componentId": "ruins-tile-6",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-6:NE",
+          "location": "NE",
+          "boundary": [
+            [
+              0.8,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              0.33
+            ],
+            [
+              0.8,
+              0.33
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-6:N"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 4,
+              "location": "printed Tile 6; north-up; crop marks excluded; Area NE",
+              "componentId": "ruins-tile-6",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-6:W",
+          "location": "W",
+          "boundary": [
+            [
+              0,
+              0.33
+            ],
+            [
+              0.22,
+              0.33
+            ],
+            [
+              0.22,
+              0.56
+            ],
+            [
+              0,
+              0.56
+            ]
+          ],
+          "capacity": 2,
+          "elevation": 0,
+          "glyphs": [
+            "loot"
+          ],
+          "adjacent": [
+            "ruins-tile-6:CHEST"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 4,
+              "location": "printed Tile 6; north-up; crop marks excluded; Area W",
+              "componentId": "ruins-tile-6",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-6:CHEST",
+          "location": "CHEST",
+          "boundary": [
+            [
+              0.22,
+              0.33
+            ],
+            [
+              0.7,
+              0.33
+            ],
+            [
+              0.7,
+              0.67
+            ],
+            [
+              0.22,
+              0.67
+            ]
+          ],
+          "capacity": 4,
+          "elevation": 0,
+          "glyphs": [
+            "green:A"
+          ],
+          "adjacent": [
+            "ruins-tile-6:NW",
+            "ruins-tile-6:N",
+            "ruins-tile-6:W",
+            "ruins-tile-6:HIDE",
+            "ruins-tile-6:STEM"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 4,
+              "location": "printed Tile 6; north-up; crop marks excluded; Area CHEST",
+              "componentId": "ruins-tile-6",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-6:HIDE",
+          "location": "HIDE",
+          "boundary": [
+            [
+              0.7,
+              0.46
+            ],
+            [
+              0.9,
+              0.46
+            ],
+            [
+              0.9,
+              0.67
+            ],
+            [
+              0.7,
+              0.67
+            ]
+          ],
+          "capacity": 2,
+          "elevation": 0,
+          "glyphs": [
+            "green:B"
+          ],
+          "adjacent": [
+            "ruins-tile-6:CHEST"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 4,
+              "location": "printed Tile 6; north-up; crop marks excluded; Area HIDE",
+              "componentId": "ruins-tile-6",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-6:STEM",
+          "location": "STEM",
+          "boundary": [
+            [
+              0.46,
+              0.67
+            ],
+            [
+              0.7,
+              0.67
+            ],
+            [
+              0.7,
+              0.88
+            ],
+            [
+              0.46,
+              0.88
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-6:CHEST",
+            "ruins-tile-6:S"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 4,
+              "location": "printed Tile 6; north-up; crop marks excluded; Area STEM",
+              "componentId": "ruins-tile-6",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-6:SW",
+          "location": "SW",
+          "boundary": [
+            [
+              0,
+              0.8
+            ],
+            [
+              0.33,
+              0.8
+            ],
+            [
+              0.33,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-6:S"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 4,
+              "location": "printed Tile 6; north-up; crop marks excluded; Area SW",
+              "componentId": "ruins-tile-6",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-6:S",
+          "location": "S",
+          "boundary": [
+            [
+              0.33,
+              0.8
+            ],
+            [
+              0.46,
+              0.8
+            ],
+            [
+              0.46,
+              0.88
+            ],
+            [
+              0.7,
+              0.88
+            ],
+            [
+              0.7,
+              1
+            ],
+            [
+              0.33,
+              1
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-6:STEM",
+            "ruins-tile-6:SW",
+            "ruins-tile-6:SE"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 4,
+              "location": "printed Tile 6; north-up; crop marks excluded; Area S",
+              "componentId": "ruins-tile-6",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-6:SE",
+          "location": "SE",
+          "boundary": [
+            [
+              0.7,
+              0.8
+            ],
+            [
+              1,
+              0.8
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              0.7,
+              1
+            ]
+          ],
+          "capacity": 2,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-6:S"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 4,
+              "location": "printed Tile 6; north-up; crop marks excluded; Area SE",
+              "componentId": "ruins-tile-6",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        }
+      ],
+      "heroStartingStanceAreas": {
+        "aggressive": "ruins-tile-6:SW",
+        "defensive": "ruins-tile-6:NE",
+        "ranged": "ruins-tile-6:SW",
+        "support": "ruins-tile-6:NE"
+      },
+      "monsterStartingStanceAreas": {
+        "aggressive": "ruins-tile-6:N",
+        "defensive": "ruins-tile-6:CHEST",
+        "ranged": "ruins-tile-6:S",
+        "support": "ruins-tile-6:NW"
+      }
+    },
+    {
+      "tileId": "ruins-tile-7",
+      "roomNumber": 7,
+      "side": "front",
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+          "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+          "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+          "page": 4,
+          "location": "printed Tile 7; north-up; crop marks excluded",
+          "componentId": "ruins-tile-7",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ],
+      "areas": [
+        {
+          "id": "ruins-tile-7:NW",
+          "location": "NW",
+          "boundary": [
+            [
+              0,
+              0
+            ],
+            [
+              0.22,
+              0
+            ],
+            [
+              0.22,
+              0.22
+            ],
+            [
+              0,
+              0.22
+            ]
+          ],
+          "capacity": 2,
+          "elevation": 0,
+          "glyphs": [
+            "loot"
+          ],
+          "adjacent": [
+            "ruins-tile-7:N"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 4,
+              "location": "printed Tile 7; north-up; crop marks excluded; Area NW",
+              "componentId": "ruins-tile-7",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-7:N",
+          "location": "N",
+          "boundary": [
+            [
+              0.22,
+              0
+            ],
+            [
+              0.46,
+              0
+            ],
+            [
+              0.46,
+              0.22
+            ],
+            [
+              0.22,
+              0.22
+            ]
+          ],
+          "capacity": 2,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-7:NW",
+            "ruins-tile-7:NE",
+            "ruins-tile-7:TOMB"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 4,
+              "location": "printed Tile 7; north-up; crop marks excluded; Area N",
+              "componentId": "ruins-tile-7",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-7:NE",
+          "location": "NE",
+          "boundary": [
+            [
+              0.46,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              0.22
+            ],
+            [
+              0.46,
+              0.22
+            ]
+          ],
+          "capacity": 4,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-7:N"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 4,
+              "location": "printed Tile 7; north-up; crop marks excluded; Area NE",
+              "componentId": "ruins-tile-7",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-7:TOMB",
+          "location": "TOMB",
+          "boundary": [
+            [
+              0,
+              0.33
+            ],
+            [
+              0.22,
+              0.33
+            ],
+            [
+              0.22,
+              0.22
+            ],
+            [
+              0.46,
+              0.22
+            ],
+            [
+              0.46,
+              0.33
+            ],
+            [
+              0.56,
+              0.33
+            ],
+            [
+              0.56,
+              0.56
+            ],
+            [
+              0,
+              0.56
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [
+            "green"
+          ],
+          "adjacent": [
+            "ruins-tile-7:N",
+            "ruins-tile-7:E",
+            "ruins-tile-7:MID"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 4,
+              "location": "printed Tile 7; north-up; crop marks excluded; Area TOMB",
+              "componentId": "ruins-tile-7",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-7:E",
+          "location": "E",
+          "boundary": [
+            [
+              0.56,
+              0.33
+            ],
+            [
+              1,
+              0.33
+            ],
+            [
+              1,
+              0.7
+            ],
+            [
+              0.56,
+              0.7
+            ]
+          ],
+          "capacity": 4,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-7:TOMB",
+            "ruins-tile-7:MID"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 4,
+              "location": "printed Tile 7; north-up; crop marks excluded; Area E",
+              "componentId": "ruins-tile-7",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-7:MID",
+          "location": "MID",
+          "boundary": [
+            [
+              0.33,
+              0.56
+            ],
+            [
+              0.56,
+              0.56
+            ],
+            [
+              0.56,
+              0.78
+            ],
+            [
+              0.33,
+              0.78
+            ]
+          ],
+          "capacity": 2,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-7:TOMB",
+            "ruins-tile-7:E",
+            "ruins-tile-7:S"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 4,
+              "location": "printed Tile 7; north-up; crop marks excluded; Area MID",
+              "componentId": "ruins-tile-7",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-7:SW",
+          "location": "SW",
+          "boundary": [
+            [
+              0,
+              0.78
+            ],
+            [
+              0.33,
+              0.78
+            ],
+            [
+              0.33,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-7:S"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 4,
+              "location": "printed Tile 7; north-up; crop marks excluded; Area SW",
+              "componentId": "ruins-tile-7",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-7:S",
+          "location": "S",
+          "boundary": [
+            [
+              0.33,
+              0.78
+            ],
+            [
+              0.56,
+              0.78
+            ],
+            [
+              0.56,
+              1
+            ],
+            [
+              0.33,
+              1
+            ]
+          ],
+          "capacity": 2,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-7:MID",
+            "ruins-tile-7:SW",
+            "ruins-tile-7:SE"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 4,
+              "location": "printed Tile 7; north-up; crop marks excluded; Area S",
+              "componentId": "ruins-tile-7",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-7:SE",
+          "location": "SE",
+          "boundary": [
+            [
+              0.56,
+              0.78
+            ],
+            [
+              1,
+              0.78
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              0.56,
+              1
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [
+            "loot"
+          ],
+          "adjacent": [
+            "ruins-tile-7:S"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 4,
+              "location": "printed Tile 7; north-up; crop marks excluded; Area SE",
+              "componentId": "ruins-tile-7",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        }
+      ],
+      "heroStartingStanceAreas": {
+        "aggressive": "ruins-tile-7:SW",
+        "defensive": "ruins-tile-7:NE",
+        "ranged": "ruins-tile-7:NE",
+        "support": "ruins-tile-7:NE"
+      },
+      "monsterStartingStanceAreas": {
+        "aggressive": "ruins-tile-7:SE",
+        "defensive": "ruins-tile-7:TOMB",
+        "ranged": "ruins-tile-7:NW",
+        "support": "ruins-tile-7:TOMB"
+      }
+    },
+    {
+      "tileId": "ruins-tile-8",
+      "roomNumber": 8,
+      "side": "back",
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+          "fileName": "DD_COREBOX_TILES_BACK.pdf",
+          "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+          "page": 5,
+          "location": "printed Tile 8; north-up; crop marks excluded",
+          "componentId": "ruins-tile-8",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ],
+      "areas": [
+        {
+          "id": "ruins-tile-8:NW",
+          "location": "NW",
+          "boundary": [
+            [
+              0,
+              0
+            ],
+            [
+              0.56,
+              0
+            ],
+            [
+              0.56,
+              0.16
+            ],
+            [
+              0.33,
+              0.16
+            ],
+            [
+              0.33,
+              0.22
+            ],
+            [
+              0,
+              0.22
+            ]
+          ],
+          "capacity": 4,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-8:W"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 5,
+              "location": "printed Tile 8; north-up; crop marks excluded; Area NW",
+              "componentId": "ruins-tile-8",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-8:NE",
+          "location": "NE",
+          "boundary": [
+            [
+              0.78,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              0.22
+            ],
+            [
+              0.78,
+              0.22
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [
+            "loot"
+          ],
+          "adjacent": [
+            "ruins-tile-8:E"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 5,
+              "location": "printed Tile 8; north-up; crop marks excluded; Area NE",
+              "componentId": "ruins-tile-8",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-8:W",
+          "location": "W",
+          "boundary": [
+            [
+              0,
+              0.22
+            ],
+            [
+              0.33,
+              0.22
+            ],
+            [
+              0.33,
+              0.44
+            ],
+            [
+              0,
+              0.44
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-8:NW",
+            "ruins-tile-8:CIRCLE",
+            "ruins-tile-8:LOW_W"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 5,
+              "location": "printed Tile 8; north-up; crop marks excluded; Area W",
+              "componentId": "ruins-tile-8",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-8:CIRCLE",
+          "location": "CIRCLE",
+          "boundary": [
+            [
+              0.33,
+              0.22
+            ],
+            [
+              0.78,
+              0.22
+            ],
+            [
+              0.78,
+              0.44
+            ],
+            [
+              0.33,
+              0.44
+            ]
+          ],
+          "capacity": 4,
+          "elevation": 0,
+          "glyphs": [
+            "red"
+          ],
+          "adjacent": [
+            "ruins-tile-8:W",
+            "ruins-tile-8:E",
+            "ruins-tile-8:MID"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 5,
+              "location": "printed Tile 8; north-up; crop marks excluded; Area CIRCLE",
+              "componentId": "ruins-tile-8",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-8:E",
+          "location": "E",
+          "boundary": [
+            [
+              0.78,
+              0.22
+            ],
+            [
+              1,
+              0.22
+            ],
+            [
+              1,
+              0.44
+            ],
+            [
+              0.78,
+              0.44
+            ]
+          ],
+          "capacity": 2,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-8:CIRCLE",
+            "ruins-tile-8:NE",
+            "ruins-tile-8:LOW_E"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 5,
+              "location": "printed Tile 8; north-up; crop marks excluded; Area E",
+              "componentId": "ruins-tile-8",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-8:LOW_W",
+          "location": "LOW_W",
+          "boundary": [
+            [
+              0,
+              0.44
+            ],
+            [
+              0.22,
+              0.44
+            ],
+            [
+              0.22,
+              0.78
+            ],
+            [
+              0,
+              0.78
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-8:W",
+            "ruins-tile-8:SW"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 5,
+              "location": "printed Tile 8; north-up; crop marks excluded; Area LOW_W",
+              "componentId": "ruins-tile-8",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-8:MID",
+          "location": "MID",
+          "boundary": [
+            [
+              0.33,
+              0.44
+            ],
+            [
+              0.56,
+              0.44
+            ],
+            [
+              0.56,
+              0.67
+            ],
+            [
+              0.33,
+              0.67
+            ]
+          ],
+          "capacity": 2,
+          "elevation": 0,
+          "glyphs": [
+            "loot"
+          ],
+          "adjacent": [
+            "ruins-tile-8:CIRCLE"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 5,
+              "location": "printed Tile 8; north-up; crop marks excluded; Area MID",
+              "componentId": "ruins-tile-8",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-8:LOW_E",
+          "location": "LOW_E",
+          "boundary": [
+            [
+              0.78,
+              0.44
+            ],
+            [
+              1,
+              0.44
+            ],
+            [
+              1,
+              0.78
+            ],
+            [
+              0.78,
+              0.78
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-8:E",
+            "ruins-tile-8:SE"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 5,
+              "location": "printed Tile 8; north-up; crop marks excluded; Area LOW_E",
+              "componentId": "ruins-tile-8",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-8:SW",
+          "location": "SW",
+          "boundary": [
+            [
+              0,
+              0.78
+            ],
+            [
+              0.56,
+              0.78
+            ],
+            [
+              0.56,
+              1
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "capacity": 4,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-8:LOW_W"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 5,
+              "location": "printed Tile 8; north-up; crop marks excluded; Area SW",
+              "componentId": "ruins-tile-8",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-8:SE",
+          "location": "SE",
+          "boundary": [
+            [
+              0.67,
+              0.78
+            ],
+            [
+              1,
+              0.78
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              0.67,
+              1
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-8:LOW_E"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_BACK.pdf",
+              "fileName": "DD_COREBOX_TILES_BACK.pdf",
+              "sha256": "e6cdb6917cba0ca8d65c3e06142bf89cef714b6018e9c00ef26f2fdad74f6d8d",
+              "page": 5,
+              "location": "printed Tile 8; north-up; crop marks excluded; Area SE",
+              "componentId": "ruins-tile-8",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        }
+      ],
+      "heroStartingStanceAreas": {
+        "aggressive": "ruins-tile-8:SW",
+        "defensive": "ruins-tile-8:SW",
+        "ranged": "ruins-tile-8:SE",
+        "support": "ruins-tile-8:SE"
+      },
+      "monsterStartingStanceAreas": {
+        "aggressive": "ruins-tile-8:E",
+        "defensive": "ruins-tile-8:W",
+        "ranged": "ruins-tile-8:NW",
+        "support": "ruins-tile-8:NE"
+      }
+    },
+    {
+      "tileId": "ruins-tile-9",
+      "roomNumber": 9,
+      "side": "front",
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+          "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+          "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+          "page": 5,
+          "location": "printed Tile 9; north-up; crop marks excluded",
+          "componentId": "ruins-tile-9",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ],
+      "areas": [
+        {
+          "id": "ruins-tile-9:N",
+          "location": "N",
+          "boundary": [
+            [
+              0.33,
+              0
+            ],
+            [
+              0.67,
+              0
+            ],
+            [
+              0.67,
+              0.33
+            ],
+            [
+              0.33,
+              0.33
+            ]
+          ],
+          "capacity": 4,
+          "elevation": 0,
+          "glyphs": [
+            "red"
+          ],
+          "adjacent": [
+            "ruins-tile-9:NW",
+            "ruins-tile-9:NE",
+            "ruins-tile-9:C"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 5,
+              "location": "printed Tile 9; north-up; crop marks excluded; Area N",
+              "componentId": "ruins-tile-9",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-9:NW",
+          "location": "NW",
+          "boundary": [
+            [
+              0.1,
+              0.1
+            ],
+            [
+              0.33,
+              0.1
+            ],
+            [
+              0.33,
+              0.33
+            ],
+            [
+              0.1,
+              0.33
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [
+            "loot"
+          ],
+          "adjacent": [
+            "ruins-tile-9:N",
+            "ruins-tile-9:W"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 5,
+              "location": "printed Tile 9; north-up; crop marks excluded; Area NW",
+              "componentId": "ruins-tile-9",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-9:NE",
+          "location": "NE",
+          "boundary": [
+            [
+              0.67,
+              0.1
+            ],
+            [
+              0.9,
+              0.1
+            ],
+            [
+              0.9,
+              0.33
+            ],
+            [
+              0.67,
+              0.33
+            ]
+          ],
+          "capacity": 2,
+          "elevation": 0,
+          "glyphs": [
+            "loot"
+          ],
+          "adjacent": [
+            "ruins-tile-9:N",
+            "ruins-tile-9:E"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 5,
+              "location": "printed Tile 9; north-up; crop marks excluded; Area NE",
+              "componentId": "ruins-tile-9",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-9:W",
+          "location": "W",
+          "boundary": [
+            [
+              0,
+              0.33
+            ],
+            [
+              0.22,
+              0.33
+            ],
+            [
+              0.22,
+              0.67
+            ],
+            [
+              0,
+              0.67
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-9:NW",
+            "ruins-tile-9:SW"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 5,
+              "location": "printed Tile 9; north-up; crop marks excluded; Area W",
+              "componentId": "ruins-tile-9",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-9:C",
+          "location": "C",
+          "boundary": [
+            [
+              0.33,
+              0.33
+            ],
+            [
+              0.67,
+              0.33
+            ],
+            [
+              0.67,
+              0.67
+            ],
+            [
+              0.33,
+              0.67
+            ]
+          ],
+          "capacity": 4,
+          "elevation": 0,
+          "glyphs": [
+            "red"
+          ],
+          "adjacent": [
+            "ruins-tile-9:N",
+            "ruins-tile-9:S"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 5,
+              "location": "printed Tile 9; north-up; crop marks excluded; Area C",
+              "componentId": "ruins-tile-9",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-9:E",
+          "location": "E",
+          "boundary": [
+            [
+              0.78,
+              0.33
+            ],
+            [
+              1,
+              0.33
+            ],
+            [
+              1,
+              0.67
+            ],
+            [
+              0.78,
+              0.67
+            ]
+          ],
+          "capacity": 3,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-9:NE",
+            "ruins-tile-9:SE"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 5,
+              "location": "printed Tile 9; north-up; crop marks excluded; Area E",
+              "componentId": "ruins-tile-9",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-9:SW",
+          "location": "SW",
+          "boundary": [
+            [
+              0.1,
+              0.67
+            ],
+            [
+              0.33,
+              0.67
+            ],
+            [
+              0.33,
+              0.9
+            ],
+            [
+              0.1,
+              0.9
+            ]
+          ],
+          "capacity": 2,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-9:W",
+            "ruins-tile-9:S"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 5,
+              "location": "printed Tile 9; north-up; crop marks excluded; Area SW",
+              "componentId": "ruins-tile-9",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-9:S",
+          "location": "S",
+          "boundary": [
+            [
+              0.33,
+              0.67
+            ],
+            [
+              0.67,
+              0.67
+            ],
+            [
+              0.67,
+              1
+            ],
+            [
+              0.33,
+              1
+            ]
+          ],
+          "capacity": 4,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-9:SW",
+            "ruins-tile-9:C",
+            "ruins-tile-9:SE"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 5,
+              "location": "printed Tile 9; north-up; crop marks excluded; Area S",
+              "componentId": "ruins-tile-9",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        },
+        {
+          "id": "ruins-tile-9:SE",
+          "location": "SE",
+          "boundary": [
+            [
+              0.67,
+              0.67
+            ],
+            [
+              0.9,
+              0.67
+            ],
+            [
+              0.9,
+              0.9
+            ],
+            [
+              0.67,
+              0.9
+            ]
+          ],
+          "capacity": 2,
+          "elevation": 0,
+          "glyphs": [],
+          "adjacent": [
+            "ruins-tile-9:S",
+            "ruins-tile-9:E"
+          ],
+          "sourceReferences": [
+            {
+              "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+              "fileName": "DD_COREBOX_TILES_FRONT.pdf",
+              "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+              "page": 5,
+              "location": "printed Tile 9; north-up; crop marks excluded; Area SE",
+              "componentId": "ruins-tile-9",
+              "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+              "visualReview": true
+            }
+          ]
+        }
+      ],
+      "heroStartingStanceAreas": {
+        "aggressive": "ruins-tile-9:S",
+        "defensive": "ruins-tile-9:S",
+        "ranged": "ruins-tile-9:S",
+        "support": "ruins-tile-9:S"
+      },
+      "monsterStartingStanceAreas": {
+        "aggressive": "ruins-tile-9:C",
+        "defensive": "ruins-tile-9:C",
+        "ranged": "ruins-tile-9:NW",
+        "support": "ruins-tile-9:NE"
+      }
+    }
+  ],
+  "visualReview": true,
+  "coordinateSystem": "normalized printed face, north at Room number",
+  "historicalBackPageCorrection": {
+    "historical": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "official": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "excludedPage1": "OLD_ROAD_TILE_0"
+  },
+  "tileAreaContractsComplete": false,
+  "reviewStatus": "TRANSCRIBED_REQUIRES_TOPOLOGY_VALIDATION"
+}

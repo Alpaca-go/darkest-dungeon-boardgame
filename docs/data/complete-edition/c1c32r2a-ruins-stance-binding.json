@@ -1,0 +1,1563 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R2A",
+  "baselineHead": "624a2b5c20b9f40ee9e87ac103780cb9eb3c2053",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "ruleSetVersion": "C1C32R2A-DIGITAL-DEFAULT-v4",
+  "visualReview": true,
+  "bindings": [
+    {
+      "componentId": "bone-soldier",
+      "stanceBehavior": {
+        "aggressive": {
+          "kind": "INHERITS",
+          "stance": "ranged"
+        },
+        "defensive": {
+          "kind": "INHERITS",
+          "stance": "ranged"
+        },
+        "ranged": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 10,
+              "skill": 1
+            }
+          ]
+        },
+        "support": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 10,
+              "skill": 2
+            }
+          ]
+        }
+      },
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 1,
+          "location": "whole card",
+          "componentId": "bone-soldier",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 1,
+          "location": "card back",
+          "componentId": "bone-soldier",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    },
+    {
+      "componentId": "bone-courtier",
+      "stanceBehavior": {
+        "aggressive": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 10,
+              "skill": 2
+            }
+          ]
+        },
+        "defensive": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 5,
+              "skill": 1
+            },
+            {
+              "min": 6,
+              "max": 10,
+              "skill": 2
+            }
+          ]
+        },
+        "ranged": {
+          "kind": "INHERITS",
+          "stance": "support"
+        },
+        "support": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 10,
+              "skill": 1
+            }
+          ]
+        }
+      },
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 4,
+          "location": "whole card",
+          "componentId": "bone-courtier",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 4,
+          "location": "card back",
+          "componentId": "bone-courtier",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    },
+    {
+      "componentId": "bone-arbalist",
+      "stanceBehavior": {
+        "aggressive": {
+          "kind": "INHERITS",
+          "stance": "defensive"
+        },
+        "defensive": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 10,
+              "skill": 2
+            }
+          ]
+        },
+        "ranged": {
+          "kind": "INHERITS",
+          "stance": "support"
+        },
+        "support": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 10,
+              "skill": 1
+            }
+          ]
+        }
+      },
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 7,
+          "location": "whole card",
+          "componentId": "bone-arbalist",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 7,
+          "location": "card back",
+          "componentId": "bone-arbalist",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    },
+    {
+      "componentId": "bone-defender",
+      "stanceBehavior": {
+        "aggressive": {
+          "kind": "INHERITS",
+          "stance": "defensive"
+        },
+        "defensive": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 5,
+              "skill": 2
+            },
+            {
+              "min": 6,
+              "max": 10,
+              "skill": 1
+            }
+          ]
+        },
+        "ranged": {
+          "kind": "INHERITS",
+          "stance": "support"
+        },
+        "support": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 10,
+              "skill": 3
+            }
+          ]
+        }
+      },
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 10,
+          "location": "whole card",
+          "componentId": "bone-defender",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 10,
+          "location": "card back",
+          "componentId": "bone-defender",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    },
+    {
+      "componentId": "bone-captain",
+      "stanceBehavior": {
+        "aggressive": {
+          "kind": "INHERITS",
+          "stance": "defensive"
+        },
+        "defensive": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 6,
+              "skill": 1
+            },
+            {
+              "min": 7,
+              "max": 10,
+              "skill": 2
+            }
+          ]
+        },
+        "ranged": {
+          "kind": "INHERITS",
+          "stance": "support"
+        },
+        "support": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 10,
+              "skill": 2
+            }
+          ]
+        }
+      },
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 12,
+          "location": "large-card reference/proxy; not an additional physical copy",
+          "componentId": "bone-captain",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 12,
+          "location": "card back",
+          "componentId": "bone-captain",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_140x140_monster_large_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_140x140_monster_large_FRONT.pdf",
+          "sha256": "0be4a5a5a0a7c3b7759562114656eb536f80a9087c21f38fc160086dd5b73974",
+          "page": 1,
+          "location": "full printed face",
+          "componentId": "bone-captain",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_140x140_monster_large_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_140x140_monster_large_BACK.pdf",
+          "sha256": "ba2e2458c0bc9c333d8f5324406b4f9d8234820a630c71c2d819a18d6d10cb69",
+          "page": 1,
+          "location": "card back",
+          "componentId": "bone-captain",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    },
+    {
+      "componentId": "bone-spearman",
+      "stanceBehavior": {
+        "aggressive": {
+          "kind": "INHERITS",
+          "stance": "defensive"
+        },
+        "defensive": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 5,
+              "skill": 2
+            },
+            {
+              "min": 6,
+              "max": 10,
+              "skill": 1
+            }
+          ]
+        },
+        "ranged": {
+          "kind": "INHERITS",
+          "stance": "support"
+        },
+        "support": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 10,
+              "skill": 1
+            }
+          ]
+        }
+      },
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 13,
+          "location": "whole card",
+          "componentId": "bone-spearman",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 13,
+          "location": "card back",
+          "componentId": "bone-spearman",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    },
+    {
+      "componentId": "bone-bearer",
+      "stanceBehavior": {
+        "aggressive": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 10,
+              "skill": 2
+            }
+          ]
+        },
+        "defensive": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 4,
+              "skill": 2
+            },
+            {
+              "min": 5,
+              "max": 7,
+              "skill": 1
+            },
+            {
+              "min": 8,
+              "max": 10,
+              "skill": 3
+            }
+          ]
+        },
+        "ranged": {
+          "kind": "INHERITS",
+          "stance": "support"
+        },
+        "support": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 6,
+              "skill": 1
+            },
+            {
+              "min": 7,
+              "max": 10,
+              "skill": 3
+            }
+          ]
+        }
+      },
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 16,
+          "location": "whole card",
+          "componentId": "bone-bearer",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 16,
+          "location": "card back",
+          "componentId": "bone-bearer",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    },
+    {
+      "componentId": "cultist-brawler",
+      "stanceBehavior": {
+        "aggressive": {
+          "kind": "INHERITS",
+          "stance": "defensive"
+        },
+        "defensive": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 10,
+              "skill": 1
+            }
+          ]
+        },
+        "ranged": {
+          "kind": "INHERITS",
+          "stance": "support"
+        },
+        "support": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 10,
+              "skill": 2
+            }
+          ]
+        }
+      },
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 18,
+          "location": "whole card",
+          "componentId": "cultist-brawler",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 18,
+          "location": "card back",
+          "componentId": "cultist-brawler",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    },
+    {
+      "componentId": "cultist-acolyte",
+      "stanceBehavior": {
+        "aggressive": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 5,
+              "skill": 1
+            },
+            {
+              "min": 6,
+              "max": 10,
+              "skill": 3
+            }
+          ]
+        },
+        "defensive": {
+          "kind": "INHERITS",
+          "stance": "support"
+        },
+        "ranged": {
+          "kind": "INHERITS",
+          "stance": "support"
+        },
+        "support": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 4,
+              "skill": 1
+            },
+            {
+              "min": 5,
+              "max": 7,
+              "skill": 2
+            },
+            {
+              "min": 8,
+              "max": 10,
+              "skill": 3
+            }
+          ]
+        }
+      },
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 21,
+          "location": "whole card",
+          "componentId": "cultist-acolyte",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 21,
+          "location": "card back",
+          "componentId": "cultist-acolyte",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    },
+    {
+      "componentId": "brigand-cutthroat",
+      "stanceBehavior": {
+        "aggressive": {
+          "kind": "INHERITS",
+          "stance": "defensive"
+        },
+        "defensive": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 4,
+              "skill": 2
+            },
+            {
+              "min": 5,
+              "max": 10,
+              "skill": 1
+            }
+          ]
+        },
+        "ranged": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 10,
+              "skill": 1
+            }
+          ]
+        },
+        "support": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 10,
+              "skill": 3
+            }
+          ]
+        }
+      },
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 24,
+          "location": "whole card",
+          "componentId": "brigand-cutthroat",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 24,
+          "location": "card back",
+          "componentId": "brigand-cutthroat",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    },
+    {
+      "componentId": "brigand-fusilier",
+      "stanceBehavior": {
+        "aggressive": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 10,
+              "skill": 2
+            }
+          ]
+        },
+        "defensive": {
+          "kind": "INHERITS",
+          "stance": "support"
+        },
+        "ranged": {
+          "kind": "INHERITS",
+          "stance": "support"
+        },
+        "support": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 10,
+              "skill": 1
+            }
+          ]
+        }
+      },
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 27,
+          "location": "whole card",
+          "componentId": "brigand-fusilier",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 27,
+          "location": "card back",
+          "componentId": "brigand-fusilier",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    },
+    {
+      "componentId": "brigand-bloodletter",
+      "stanceBehavior": {
+        "aggressive": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 4,
+              "skill": 1
+            },
+            {
+              "min": 5,
+              "max": 8,
+              "skill": 2
+            },
+            {
+              "min": 9,
+              "max": 10,
+              "skill": 3
+            }
+          ]
+        },
+        "defensive": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 5,
+              "skill": 1
+            },
+            {
+              "min": 6,
+              "max": 10,
+              "skill": 2
+            }
+          ]
+        },
+        "ranged": {
+          "kind": "INHERITS",
+          "stance": "support"
+        },
+        "support": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 10,
+              "skill": 2
+            }
+          ]
+        }
+      },
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 30,
+          "location": "large-card reference/proxy; not an additional physical copy",
+          "componentId": "brigand-bloodletter",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 30,
+          "location": "card back",
+          "componentId": "brigand-bloodletter",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_140x140_monster_large_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_140x140_monster_large_FRONT.pdf",
+          "sha256": "0be4a5a5a0a7c3b7759562114656eb536f80a9087c21f38fc160086dd5b73974",
+          "page": 2,
+          "location": "full printed face",
+          "componentId": "brigand-bloodletter",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_140x140_monster_large_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_140x140_monster_large_BACK.pdf",
+          "sha256": "ba2e2458c0bc9c333d8f5324406b4f9d8234820a630c71c2d819a18d6d10cb69",
+          "page": 2,
+          "location": "card back",
+          "componentId": "brigand-bloodletter",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    },
+    {
+      "componentId": "maggot",
+      "stanceBehavior": {
+        "aggressive": {
+          "kind": "INHERITS",
+          "stance": "support"
+        },
+        "defensive": {
+          "kind": "INHERITS",
+          "stance": "support"
+        },
+        "ranged": {
+          "kind": "INHERITS",
+          "stance": "support"
+        },
+        "support": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 10,
+              "skill": 1
+            }
+          ]
+        }
+      },
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 31,
+          "location": "whole card",
+          "componentId": "maggot",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 31,
+          "location": "card back",
+          "componentId": "maggot",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    },
+    {
+      "componentId": "webber",
+      "stanceBehavior": {
+        "aggressive": {
+          "kind": "INHERITS",
+          "stance": "support"
+        },
+        "defensive": {
+          "kind": "INHERITS",
+          "stance": "support"
+        },
+        "ranged": {
+          "kind": "INHERITS",
+          "stance": "support"
+        },
+        "support": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 5,
+              "skill": 1
+            },
+            {
+              "min": 6,
+              "max": 10,
+              "skill": 2
+            }
+          ]
+        }
+      },
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 34,
+          "location": "whole card",
+          "componentId": "webber",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 34,
+          "location": "card back",
+          "componentId": "webber",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    },
+    {
+      "componentId": "spitter",
+      "stanceBehavior": {
+        "aggressive": {
+          "kind": "INHERITS",
+          "stance": "defensive"
+        },
+        "defensive": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 10,
+              "skill": 2
+            }
+          ]
+        },
+        "ranged": {
+          "kind": "INHERITS",
+          "stance": "support"
+        },
+        "support": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 10,
+              "skill": 1
+            }
+          ]
+        }
+      },
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 37,
+          "location": "whole card",
+          "componentId": "spitter",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 37,
+          "location": "card back",
+          "componentId": "spitter",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    },
+    {
+      "componentId": "bone-rabble",
+      "stanceBehavior": {
+        "aggressive": {
+          "kind": "INHERITS",
+          "stance": "ranged"
+        },
+        "defensive": {
+          "kind": "INHERITS",
+          "stance": "ranged"
+        },
+        "ranged": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 10,
+              "skill": 1
+            }
+          ]
+        },
+        "support": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 10,
+              "skill": 2
+            }
+          ]
+        }
+      },
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 40,
+          "location": "whole card",
+          "componentId": "bone-rabble",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 40,
+          "location": "card back",
+          "componentId": "bone-rabble",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    },
+    {
+      "componentId": "madman",
+      "stanceBehavior": {
+        "aggressive": {
+          "kind": "INHERITS",
+          "stance": "support"
+        },
+        "defensive": {
+          "kind": "INHERITS",
+          "stance": "support"
+        },
+        "ranged": {
+          "kind": "INHERITS",
+          "stance": "support"
+        },
+        "support": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 5,
+              "skill": 1
+            },
+            {
+              "min": 6,
+              "max": 10,
+              "skill": 2
+            }
+          ]
+        }
+      },
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 43,
+          "location": "whole card",
+          "componentId": "madman",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 43,
+          "location": "card back",
+          "componentId": "madman",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    },
+    {
+      "componentId": "pliskin",
+      "stanceBehavior": {
+        "aggressive": {
+          "kind": "INHERITS",
+          "stance": "defensive"
+        },
+        "defensive": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 10,
+              "skill": 2
+            }
+          ]
+        },
+        "ranged": {
+          "kind": "INHERITS",
+          "stance": "support"
+        },
+        "support": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 10,
+              "skill": 1
+            }
+          ]
+        }
+      },
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 46,
+          "location": "whole card",
+          "componentId": "pliskin",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 46,
+          "location": "card back",
+          "componentId": "pliskin",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    },
+    {
+      "componentId": "ghoul",
+      "stanceBehavior": {
+        "aggressive": {
+          "kind": "INHERITS",
+          "stance": "defensive"
+        },
+        "defensive": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 4,
+              "skill": 1
+            },
+            {
+              "min": 5,
+              "max": 7,
+              "skill": 2
+            },
+            {
+              "min": 8,
+              "max": 10,
+              "skill": 3
+            }
+          ]
+        },
+        "ranged": {
+          "kind": "INHERITS",
+          "stance": "support"
+        },
+        "support": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 5,
+              "skill": 2
+            },
+            {
+              "min": 6,
+              "max": 10,
+              "skill": 3
+            }
+          ]
+        }
+      },
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 49,
+          "location": "large-card reference/proxy; not an additional physical copy",
+          "componentId": "ghoul",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 49,
+          "location": "card back",
+          "componentId": "ghoul",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_140x140_monster_large_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_140x140_monster_large_FRONT.pdf",
+          "sha256": "0be4a5a5a0a7c3b7759562114656eb536f80a9087c21f38fc160086dd5b73974",
+          "page": 3,
+          "location": "full printed face",
+          "componentId": "ghoul",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_140x140_monster_large_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_140x140_monster_large_BACK.pdf",
+          "sha256": "ba2e2458c0bc9c333d8f5324406b4f9d8234820a630c71c2d819a18d6d10cb69",
+          "page": 3,
+          "location": "card back",
+          "componentId": "ghoul",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    },
+    {
+      "componentId": "gargoyle",
+      "stanceBehavior": {
+        "aggressive": {
+          "kind": "INHERITS",
+          "stance": "ranged"
+        },
+        "defensive": {
+          "kind": "INHERITS",
+          "stance": "ranged"
+        },
+        "ranged": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 6,
+              "skill": 1
+            },
+            {
+              "min": 7,
+              "max": 10,
+              "skill": 2
+            }
+          ]
+        },
+        "support": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 10,
+              "skill": 2
+            }
+          ]
+        }
+      },
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 50,
+          "location": "whole card",
+          "componentId": "gargoyle",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 50,
+          "location": "card back",
+          "componentId": "gargoyle",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    },
+    {
+      "componentId": "rattler",
+      "stanceBehavior": {
+        "aggressive": {
+          "kind": "INHERITS",
+          "stance": "ranged"
+        },
+        "defensive": {
+          "kind": "INHERITS",
+          "stance": "ranged"
+        },
+        "ranged": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 5,
+              "skill": 2
+            },
+            {
+              "min": 6,
+              "max": 10,
+              "skill": 1
+            }
+          ]
+        },
+        "support": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 5,
+              "skill": 1
+            },
+            {
+              "min": 6,
+              "max": 10,
+              "skill": 3
+            }
+          ]
+        }
+      },
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 53,
+          "location": "whole card",
+          "componentId": "rattler",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 53,
+          "location": "card back",
+          "componentId": "rattler",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    },
+    {
+      "componentId": "brigand-raider",
+      "stanceBehavior": {
+        "aggressive": {
+          "kind": "INHERITS",
+          "stance": "defensive"
+        },
+        "defensive": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 7,
+              "skill": 2
+            },
+            {
+              "min": 8,
+              "max": 10,
+              "skill": 1
+            }
+          ]
+        },
+        "ranged": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 5,
+              "skill": 2
+            },
+            {
+              "min": 6,
+              "max": 10,
+              "skill": 1
+            }
+          ]
+        },
+        "support": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 10,
+              "skill": 3
+            }
+          ]
+        }
+      },
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 56,
+          "location": "whole card",
+          "componentId": "brigand-raider",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 56,
+          "location": "card back",
+          "componentId": "brigand-raider",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    },
+    {
+      "componentId": "brigand-hunter",
+      "stanceBehavior": {
+        "aggressive": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 10,
+              "skill": 2
+            }
+          ]
+        },
+        "defensive": {
+          "kind": "INHERITS",
+          "stance": "support"
+        },
+        "ranged": {
+          "kind": "INHERITS",
+          "stance": "support"
+        },
+        "support": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 10,
+              "skill": 1
+            }
+          ]
+        }
+      },
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 59,
+          "location": "whole card",
+          "componentId": "brigand-hunter",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 59,
+          "location": "card back",
+          "componentId": "brigand-hunter",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    },
+    {
+      "componentId": "adder",
+      "stanceBehavior": {
+        "aggressive": {
+          "kind": "INHERITS",
+          "stance": "defensive"
+        },
+        "defensive": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 5,
+              "skill": 1
+            },
+            {
+              "min": 6,
+              "max": 10,
+              "skill": 2
+            }
+          ]
+        },
+        "ranged": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 3,
+              "skill": 1
+            },
+            {
+              "min": 4,
+              "max": 7,
+              "skill": 2
+            },
+            {
+              "min": 8,
+              "max": 10,
+              "skill": 3
+            }
+          ]
+        },
+        "support": {
+          "kind": "SKILL_TABLE",
+          "rows": [
+            {
+              "min": 1,
+              "max": 10,
+              "skill": 1
+            }
+          ]
+        }
+      },
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 62,
+          "location": "large-card reference/proxy; not an additional physical copy",
+          "componentId": "adder",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 62,
+          "location": "card back",
+          "componentId": "adder",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_140x140_monster_large_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_140x140_monster_large_FRONT.pdf",
+          "sha256": "0be4a5a5a0a7c3b7759562114656eb536f80a9087c21f38fc160086dd5b73974",
+          "page": 4,
+          "location": "full printed face",
+          "componentId": "adder",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_140x140_monster_large_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_140x140_monster_large_BACK.pdf",
+          "sha256": "ba2e2458c0bc9c333d8f5324406b4f9d8234820a630c71c2d819a18d6d10cb69",
+          "page": 4,
+          "location": "card back",
+          "componentId": "adder",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    }
+  ]
+}

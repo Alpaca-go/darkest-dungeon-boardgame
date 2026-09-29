@@ -3,7 +3,7 @@ import { getHamletBuildingById } from '../../data/hamlet-buildings';
 import { getSkillById } from '../../data/skills';
 import { createId, nowIso } from '../random';
 import { pushLog } from '../log';
-import { buildingVisitError } from '../hamlet';
+import { buildingVisitError } from '../commands/hamlet-preparation-day';
 import { getPermanentSkillLevel } from '../progression/upgrade-core';
 import { maxAvailableSkillLevel } from '../../data/progression/skill-level-registry';
 import { getActiveSkillFormOverrides } from '../progression/skill-forms';

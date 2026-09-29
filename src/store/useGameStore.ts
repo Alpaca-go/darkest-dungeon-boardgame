@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { explicitlyMigrateHeroDodgeToV2 } from '../game-engine/rules/hero-dodge-versioning';
 import { applyBossThreatCheckpointInput, applyBossFoundationInput } from '../game-engine/commands/boss-foundation';
 import { advanceTurn } from '../game-engine/battle';
+import { beginNecromancerGraveyardVisit, chooseNecromancerPreparationHero, commitNecromancerGraveyardVisit } from '../game-engine/campaign/necromancer-preparation-day';
 import type { CampaignState, ProvisionPool } from '../types';
 import {
   createNewCampaign,
@@ -22,7 +23,7 @@ import {
   visitAbbey as engineVisitAbbey,
   skipHeroAction,
   endHamletDay as engineEndHamletDay,
-} from '../game-engine/hamlet';
+} from '../game-engine/commands/hamlet-preparation-day';
 // ---- Phase 11A.2.3 §4：chooseQuest 收口为 commitQuestSelection（Store 不再自己组合编排） ----
 import {
   proceedCampaignToLoadout,
@@ -138,6 +139,8 @@ interface GameStore {
   migrateHeroDodgeToV2: () => void;
   battleHeroAreaMove: (areaId: string) => void;
   commitBossChoice(choiceId: string, selectedId: string): void;
+  beginGraveyardGuard(): void;
+  commitGraveyardGuard(useEffect: boolean): void;
   campaign: CampaignState | null;
   ui: UiState;
 
@@ -312,6 +315,9 @@ export const useGameStore = create<GameStore>((set, get) => {
     },
     commitBossChoice: (choiceId, selectedId) => {
       const c = get().campaign;
+      if (c?.necromancerPreparationDay?.status === 'PENDING_TIE') {
+        commit(chooseNecromancerPreparationHero(c, choiceId, selectedId)); return;
+      }
       if (c?.bossEncounterCheckpoint?.pendingChoice && !c.battle) {
         commit(applyBossThreatCheckpointInput(c,{type:'CHOICE',choiceId,selectedId})); return;
       }
@@ -321,6 +327,14 @@ export const useGameStore = create<GameStore>((set, get) => {
       if (!battle.bossEncounter?.pendingChoice && !battle.pendingMonsterAttack && battle.activeActorId && battle.monsters.some(u => u.id === battle.activeActorId)) battle = advanceTurn(battle);
       const next = { ...changed, battle };
       commit(battle.bossEncounter?.pendingChoice ? next : settleBattleState(next).campaign);
+    },
+    beginGraveyardGuard: () => {
+      const c = get().campaign;
+      if (c?.necromancerPreparationDay?.status === 'PENDING_VISIT') commit(beginNecromancerGraveyardVisit(c));
+    },
+    commitGraveyardGuard: (useEffect) => {
+      const c = get().campaign;
+      if (c?.necromancerPreparationDay?.status === 'PENDING_LEVEL_II_EFFECT') commit(commitNecromancerGraveyardVisit(c, useEffect));
     },
     campaign: initialCampaign,
     ui: EMPTY_UI,
