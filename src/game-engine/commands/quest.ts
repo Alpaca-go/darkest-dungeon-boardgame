@@ -16,6 +16,7 @@ import { finalizeQuestReturnToHamlet } from '../campaign/campaign-orchestrator';
 import { selectQuest } from '../campaign';
 import { engineChooseQuest } from '../campaign/campaign-orchestrator';
 import { getBossQuestPool, getQuestPool, runtimeContentContext } from '../../data/content-selector';
+import { necromancerQuestEntryError } from '../bosses/production-dependency-gate';
 
 export type QuestCommandError =
   | 'already-resolved'
@@ -171,6 +172,8 @@ export function commitQuestSelection(
   questId: string,
   options?: { now?: string },
 ): QuestSelectionResult {
+  const dependencyError = necromancerQuestEntryError(campaign, questId);
+  if (dependencyError) return { ok: false, campaign, error: dependencyError };
   const context = runtimeContentContext(campaign);
   const eligible = [...getQuestPool(context), ...getBossQuestPool(context)];
   if (!eligible.some((quest) => quest.id === questId)) {

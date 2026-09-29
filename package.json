@@ -146,7 +146,11 @@
     "audit:complete-edition-c1c29": "vite-node scripts/audit/generate-complete-edition-c1c29.ts",
     "verify:complete-edition-c1c29": "vite-node scripts/audit/verify-complete-edition-c1c29.ts",
     "test:necromancer-foundation": "vitest run src/game-engine/bosses/foundation.test.ts src/game-engine/commands/boss-foundation.test.ts src/audit/c1c29-necromancer-runtime-foundation.test.ts",
-    "test:e2e:necromancer-foundation": "playwright test e2e/c1c29-necromancer-foundation.spec.ts"
+    "test:e2e:necromancer-foundation": "playwright test e2e/c1c29-necromancer-foundation.spec.ts",
+    "audit:complete-edition-c1c30": "vite-node scripts/audit/generate-complete-edition-c1c30.ts",
+    "verify:complete-edition-c1c30": "vite-node scripts/audit/verify-complete-edition-c1c30.ts",
+    "test:necromancer-continuation": "vitest run src/audit/c1c30-necromancer-runtime-foundation.test.ts",
+    "test:e2e:necromancer-continuation": "playwright test e2e/c1c30-necromancer-dependency-gate.spec.ts"
   },
   "dependencies": {
     "lucide-react": "^0.408.0",

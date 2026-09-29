@@ -128,6 +128,21 @@ export interface BossEncounterState {
   idCursor: number;
   idSeed: number;
   cleanupState: { completed: boolean; campaignTransactionId: string | null; roomCleaned: boolean };
+  /** Bridge metadata for checkpoints created from C1C30 onward. */
+  checkpointContext?: {
+    schemaVersion: 1;
+    encounterId: string;
+    battleId: string;
+    campaignId: string;
+    questRunId: string;
+    campaignLevel: number;
+    threatId: string;
+    definitionVersion: string;
+    consumedOnceKeys: string[];
+    heroDodge: Record<string, number>;
+    heroCombatDefinitions?: Record<string, import('./component-combat').HeroCombatDefinition>;
+    dependencyAuthority: 'EXPLICIT_BINDING' | 'OFFICIAL_SOURCE';
+  };
 }
 export type BossRuntimeInput =
   | { type: 'ENTER_BOSS_ROOM' }

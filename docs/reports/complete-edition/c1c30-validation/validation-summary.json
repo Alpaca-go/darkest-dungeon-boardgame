@@ -1,0 +1,39 @@
+{
+  "phase": "11A.4-C1C30",
+  "finalStateRerun": true,
+  "typecheck": "PASS",
+  "foundationTests": {
+    "passed": 72,
+    "failed": 0
+  },
+  "continuationTests": {
+    "passed": 25,
+    "failed": 0
+  },
+  "fullVitest": {
+    "passed": 2383,
+    "total": 2385,
+    "testFiles": 153,
+    "unexpectedFailures": 0,
+    "historicalScopeConflicts": 2
+  },
+  "e2e": {
+    "passed": 1,
+    "skipped": 1,
+    "fullProductionPath": "PRODUCT_DEPENDENCY_BLOCKED",
+    "infraFailure": false
+  },
+  "build": "BUILD_ACCEPTANCE_UNVERIFIED",
+  "productionAcceptance": false,
+  "logsSha256": {
+    "typecheck-final.log": "65b5090ea2856131209f6d70a0eafe5c6328def7ef384275e67399a3660300f7",
+    "foundation-tests.log": "4c35b068d48dcbe9cd0b5cecee7f982a1b495da1c0a68e10cfbaf7c614275774",
+    "continuation-tests.log": "d998421b9e1c8800da05c0b1ff2c3c121e9d10cc41cbc226692b4229aed0919b",
+    "c1c29-verifier-final.log": "c5e921d9ab43db93961487a2bf45ae983da27e450b83bf13bee1d6e111aca050",
+    "c1c30-verifier.log": "21d71fdc7799fc0c63f1e78713d69365c851fb89e7461c9621cd41414f410c3b",
+    "full-vitest-final.json": "64e2782cda84156e96b210a7c56df2c590697b44607ac44fa5e1240cb4710645",
+    "full-vitest-final.log": "e2d468931b0ec1328e7647dca18d3b1eb073090d823bf5c755ffb66ece4415da",
+    "e2e.log": "535df0a9c1cce2d4eeb4e0e8c6275a523dc12baeadc4a8e900dcd1c0bebb97c1",
+    "build.log": "1e3f3c425f9ac2ec3449a2b03c60fac9e62169d879dbeb5359791380a446f05a"
+  }
+}

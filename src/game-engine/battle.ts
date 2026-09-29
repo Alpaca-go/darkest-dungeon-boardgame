@@ -9,6 +9,7 @@ import type {
   PendingMonsterAttack,
 } from '../types';
 import { applyBossRuntimeInput, checkBossRuntimeEnd, withBossEncounterSources } from './bosses/foundation';
+import { getHeroCombatDefinition } from '../data/progression/hero-level-registry';
 import { createId, d10, nowIso } from './random';
 import { returnCommunityPhysicalMonstersFromBattle } from './campaign/act-four/community-physical-monster-deck';
 import { createSeededRng } from './campaign/act-four/rng';
@@ -156,6 +157,7 @@ export function getActiveUnit(state: BattleState): BattleUnit | undefined {
  * 但必须复用同一套英雄单位构建逻辑，故导出。
  */
 export function makeHeroUnit(hero: HeroInstance, index: number, campaign: CampaignState): BattleUnit {
+  const combatDefinition = getHeroCombatDefinition(hero.heroId, hero.level);
   const hp = Math.max(0, hero.maxLife - hero.wounds);
   const effectiveSkillLevels: Record<string, 1 | 2 | 3> = {};
   for (const skillId of hero.equippedSkillIds) {
@@ -170,6 +172,7 @@ export function makeHeroUnit(hero: HeroInstance, index: number, campaign: Campai
   }
   return {
     id: `u_${hero.instanceId}`,
+    ...(combatDefinition ? { heroCombatDefinition: combatDefinition, bossCombatDodge: combatDefinition.dodge } : {}),
     name: hero.name,
     side: 'hero',
     sourceId: hero.instanceId,

@@ -15,6 +15,7 @@ import { runtimeContentContext } from '../data/content-selector';
 import { getQuestById } from '../data/quests';
 import type { QuestRoomTokenType } from '../types/content-runtime';
 import { recordQuestQualificationEvent } from './quests/quest-runtime';
+import { necromancerQuestEntryError } from './bosses/production-dependency-gate';
 
 /** Phase 7：全队压力统一入口（存活英雄各 +amount，走统一管线处理阈值）。 */
 function applyPartyStress(
@@ -346,6 +347,8 @@ export function moveToRoom(campaign: CampaignState, roomId: string): CampaignSta
 }
 
 export function commitMoveToRoom(campaign: CampaignState, roomId: string, result: ExplorationEventResult | null): CampaignState {
+  if (campaign.dungeon?.rooms.some(r => r.id === roomId && r.type === 'objective')
+    && necromancerQuestEntryError(campaign, campaign.currentQuestId ?? '')) return campaign;
   if (!campaign.dungeon) return campaign;
   if (!canMoveTo(campaign.dungeon, roomId)) return campaign;
 

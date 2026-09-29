@@ -23,6 +23,7 @@ import type { QuestRuntimeToken } from '../types/content-runtime';
 import { nowIso } from './random';
 import { assertBossEncounter } from './bosses/foundation';
 import { resolveBossDefinition } from './bosses/definitions';
+import { validateThreatCheckpoint } from './bosses/threat-checkpoint';
 import { createInitialStagecoach } from './stagecoach';
 import { getQuirkById, normalizeQuirkId } from '../data/quirks';
 import { getDiseaseById } from '../data/diseases';
@@ -185,6 +186,7 @@ export function validateSaveFile(data: unknown): string | null {
   const c = s.campaign as Partial<CampaignState> | undefined;
   if (c?.bossEncounterCheckpoint || c?.bossEncounterHistory) {
     try {
+      if (c.bossEncounterCheckpoint?.checkpointContext) validateThreatCheckpoint(c as CampaignState, c.bossEncounterCheckpoint);
       for (const e of [...(c.bossEncounterHistory ?? []), ...(c.bossEncounterCheckpoint ? [c.bossEncounterCheckpoint] : [])]) {
         if (JSON.stringify(e.definition) !== JSON.stringify(resolveBossDefinition(e.bossFamily, e.bossLevel, e.ruleSetVersion))) return 'Boss history/checkpoint differs from its pinned contract';
         if (e.events.some(event => event.ruleSetVersion !== e.ruleSetVersion)) return 'Boss history/checkpoint event version mismatch';

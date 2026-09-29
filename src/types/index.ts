@@ -259,6 +259,7 @@ export interface DungeonState {
 export interface BattleUnit {
   /** Definition-bound board-game Dodge for the Boss foundation. */
   bossCombatDodge?: number;
+  heroCombatDefinition?: import('./component-combat').HeroCombatDefinition;
   id: string;
   name: string;
   side: BattleSide;

@@ -5,6 +5,7 @@ import { getBossQuestPool, getQuestPool, runtimeContentContext } from '../data/c
 import { canSelectStandardQuest, canSelectBossQuest } from '../game-engine/campaign/campaign-progress';
 import { getThreatById } from '../data/bosses/threat-registry';
 import QuestCard from '../components/quest/QuestCard';
+import { necromancerQuestEntryError } from '../game-engine/bosses/production-dependency-gate';
 
 /**
  * Phase 11A.1 — 任务选择页最小 UI 改动（dev doc §22）：
@@ -27,6 +28,7 @@ export default function QuestSelectPage() {
   const cp = campaign.campaignProgress;
   const standardSelectable = canSelectStandardQuest(cp);
   const bossSelectable = canSelectBossQuest(cp);
+  const necromancerEntryBlocked = necromancerQuestEntryError(campaign, 'face-the-threat') !== null;
   const activeThreat = cp.activeThreatId ? getThreatById(cp.activeThreatId) : null;
   const context = runtimeContentContext(campaign);
   const questPool = cp.bossQuestRequired
@@ -78,6 +80,7 @@ export default function QuestSelectPage() {
           const isDisabled =
             (isStandard && !standardSelectable) ||
             (isBoss && !bossSelectable) ||
+            (q.id === 'face-the-threat' && necromancerEntryBlocked) ||
             cp.darkestDungeonUnlocked;
           return (
             <QuestCard
@@ -90,6 +93,12 @@ export default function QuestSelectPage() {
           );
         })}
       </div>
+
+      {cp.bossQuestRequired && necromancerEntryBlocked ? (
+        <p className="mt-3 text-sm text-dd-muted" data-testid="necromancer-production-entry-blocked">
+          Necromancer 暂不可进入：召唤怪物的正式行动定义和部分英雄数据尚未完成验证。
+        </p>
+      ) : null}
 
       {questPool.length === 0 ? (
         <div className="mt-4 rounded border border-dd-danger bg-dd-danger/10 p-4" data-testid="community-quest-pool-blocked">

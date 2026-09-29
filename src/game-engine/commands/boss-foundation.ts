@@ -1,7 +1,8 @@
 import type { BattleState, CampaignState } from '../../types';
 import type { BossDefinitionContract, BossRuntimeInput, SpawnDefinition } from '../../types/boss-runtime';
 import { makeHeroUnit, resolveVictory } from '../battle';
-import { applyBossRuntimeInput, bindBossEncounter, withBossEncounterSources } from '../bosses/foundation';
+import { applyBossRuntimeInput, assertBossEncounter, bindBossEncounter, withBossEncounterSources } from '../bosses/foundation';
+import { validateThreatCheckpoint } from '../bosses/threat-checkpoint';
 import { finalizeBossVictory, advanceCampaignAfterBoss } from '../campaign/campaign-orchestrator';
 import { FACE_THE_THREAT_QUEST_ID } from '../../data/quests/face-the-threat';
 import { nowIso } from '../random';
@@ -20,7 +21,48 @@ export function startBossFoundation(campaign: CampaignState, definition: BossDef
   const battle: BattleState = { battleId: `${campaign.dungeon.questRunId}:boss`, status: 'active', sourceRoomId: roomId,
     round: 1, maxRounds: 4, heroes, monsters: [], initiativeOrder: heroes.map(h => h.id), initiativeIndex: -1,
     activeActorId: null, currentActionPoints: 0, selectedSkillId: null, selectedTargetId: null, battleLog: [], rewards: { gold: 0 } };
-  return { ...campaign, gamePhase: 'battle', battle: bindBossEncounter(battle, definition, seed, spawnDefinitions) };
+  const bound = bindBossEncounter(battle, definition, seed, spawnDefinitions);
+  bound.bossEncounter!.checkpointContext = {
+    schemaVersion: 1, encounterId: `${campaign.id}:${campaign.dungeon.questRunId}:${definition.family}:${definition.level}`,
+    battleId: battle.battleId, campaignId: campaign.id, questRunId: campaign.dungeon.questRunId,
+    campaignLevel: campaign.campaignProgress.campaignLevel, threatId: campaign.campaignProgress.activeThreatId ?? '',
+    definitionVersion: definition.ruleSetVersion, consumedOnceKeys: [...(campaign.activeThreatRuntime?.consumedOnceKeys ?? [])],
+    heroDodge: Object.fromEntries(heroes.map(h => [h.id, h.bossCombatDodge!])), dependencyAuthority: 'EXPLICIT_BINDING',
+  };
+  return { ...campaign, gamePhase: 'battle', battle: bound };
+}
+
+/** Reattach the saved encounter, without re-binding, resetting events, or re-seeding. */
+export function resumeBossFoundation(campaign: CampaignState, roomId: string): CampaignState {
+  if (campaign.battle || !campaign.dungeon?.rooms.some(r => r.id === roomId && r.type === 'objective')) throw new Error('No available Boss objective Room');
+  const saved = campaign.bossEncounterCheckpoint;
+  if (!saved) throw new Error('No Threat checkpoint');
+  validateThreatCheckpoint(campaign, saved);
+  if (saved.pendingChoice) throw new Error('Resolve saved Threat choice before Room entry');
+  const encounter = structuredClone(saved);
+  const context = encounter.checkpointContext!;
+  const heroes = campaign.heroes.filter(h => !h.dead).map((hero, index) => ({ ...makeHeroUnit(hero, index, campaign), bossCombatDodge: context.heroDodge[`u_${hero.instanceId}`] }));
+  const battle: BattleState = { battleId: context.battleId, sourceRoomId: roomId, status: 'active', round: encounter.round,
+    maxRounds: 4, heroes, monsters: [], initiativeOrder: heroes.map(h => h.id), initiativeIndex: -1,
+    activeActorId: null, currentActionPoints: 0, selectedSkillId: null, selectedTargetId: null, battleLog: [], rewards: { gold: 0 }, bossEncounter: encounter };
+  assertBossEncounter(battle);
+  const resumed = applyBossFoundationInput({ ...campaign, battle, gamePhase: 'battle' }, { type: 'ENTER_BOSS_ROOM' });
+  return { ...resumed, activeThreatRuntime: resumed.activeThreatRuntime ? { ...resumed.activeThreatRuntime,
+    consumedOnceKeys: [...new Set([...resumed.activeThreatRuntime.consumedOnceKeys, ...context.consumedOnceKeys])] } : null };
+}
+
+/** A saved Preparation Day tie can be resolved without initializing a second encounter. */
+export function resolveBossThreatCheckpointChoice(campaign: CampaignState, choiceId: string, selectedId: string): CampaignState {
+  if (campaign.battle || !campaign.bossEncounterCheckpoint) throw new Error('No available Threat checkpoint');
+  const saved = campaign.bossEncounterCheckpoint;
+  validateThreatCheckpoint(campaign, saved);
+  const context = saved.checkpointContext!;
+  const heroes = campaign.heroes.filter(h => !h.dead).map((hero, index) => ({ ...makeHeroUnit(hero, index, campaign), bossCombatDodge: context.heroDodge[`u_${hero.instanceId}`] }));
+  const battle: BattleState = { battleId: context.battleId, sourceRoomId: saved.roomId, status: 'active', round: saved.round,
+    maxRounds: 4, heroes, monsters: [], initiativeOrder: heroes.map(h => h.id), initiativeIndex: -1, activeActorId: null,
+    currentActionPoints: 0, selectedSkillId: null, selectedTargetId: null, battleLog: [], rewards: { gold: 0 }, bossEncounter: structuredClone(saved) };
+  const resolved = applyBossRuntimeInput(battle, { type: 'CHOICE', choiceId, selectedId });
+  return { ...campaign, bossEncounterCheckpoint: resolved.bossEncounter! };
 }
 export function applyBossFoundationInput(campaign: CampaignState, input: BossRuntimeInput): CampaignState {
   if (!campaign.battle?.bossEncounter) throw new Error('No Boss foundation battle');
@@ -38,6 +80,7 @@ export function settleBossThreatBattle(campaign: CampaignState): CampaignState {
   const battle = campaign.battle;
   if (!battle?.bossEncounter || battle.bossEncounter.side !== 'THREAT' || battle.status !== 'victory') return campaign;
   const ended = applyBossRuntimeInput(battle, { type: 'END_THREAT_BATTLE' });
+  if (ended.bossEncounter!.checkpointContext) ended.bossEncounter!.checkpointContext.consumedOnceKeys = [...(campaign.activeThreatRuntime?.consumedOnceKeys ?? [])];
   const settled = resolveVictory({ ...campaign, battle: { ...ended, status: 'victory' } });
   return { ...settled, bossEncounterCheckpoint: ended.bossEncounter! };
 }
