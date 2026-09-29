@@ -20,6 +20,7 @@ import { acquireTrinket } from './trinkets/acquire-trinket';
 import { hasTrinketCapacity } from './trinkets/capacity';
 import { calculateQuestXpReward } from './quests/quest-runtime';
 import { evaluateQuestCompletion } from './quests/quest-special-rule-runtime';
+import { returnProductionBossRoomOnTermination } from './bosses/room-storage';
 
 /** 空补给池（结算后清空用）。 */
 export const EMPTY_PROVISIONS: ProvisionPool = {
@@ -115,6 +116,8 @@ export function applyQuestRewards(
   summary: QuestResultSummary
 ): CampaignState {
   if (campaign.questResultResolved) return campaign;
+
+  if (summary.outcome !== 'completed') campaign = returnProductionBossRoomOnTermination(campaign, summary.outcome);
 
   // temporaryDamageBonus 是单次任务内的临时加成，任务结束即清零。
   const heroes = campaign.heroes.map((h) =>

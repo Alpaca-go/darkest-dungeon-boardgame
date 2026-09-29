@@ -10,7 +10,9 @@
 import type { CampaignState, QuestOutcome } from '../../types';
 import { finishQuest, failQuestFromBattle } from '../quest-result';
 import { startHamletPhase, hamletEntryBlockedByTrinkets } from '../hamlet';
-import { evaluateReplacementFlow } from '../stagecoach';
+import { evaluateReplacementFlow, failCampaign } from '../stagecoach';
+import { hasUnfinishedProductionBossQuest } from '../bosses/room-storage';
+import { withBossEncounterSources } from '../bosses/foundation';
 import { retargetPendingReplacement } from './replacement';
 import { finalizeQuestReturnToHamlet } from '../campaign/campaign-orchestrator';
 import { selectQuest } from '../campaign';
@@ -23,6 +25,7 @@ export type QuestCommandError =
   | 'already-resolved'
   | 'no-active-quest'
   | 'no-summary'
+  | 'boss-quest-cannot-leave'
   | 'trinket-pending-choice';
 
 export interface QuestCommandResult {
@@ -50,6 +53,7 @@ export function commitLeaveDungeon(
   if (campaign.questResultResolved) {
     return { ok: false, campaign, error: 'already-resolved' };
   }
+  if (hasUnfinishedProductionBossQuest(campaign)) return { ok: false, campaign, error: 'boss-quest-cannot-leave' };
   let next = finishQuest(campaign, 'left');
   if (next === campaign) return { ok: false, campaign: next, error: 'no-active-quest' };
   next = retargetPendingReplacement(next, resumePhase);
@@ -65,11 +69,30 @@ export function commitQuestFailureFromDefeat(
   campaign: CampaignState,
   resumePhase: ReplacementResumePhase = 'quest-result',
 ): QuestCommandResult {
+  if (hasUnfinishedProductionBossQuest(campaign) && campaign.battle?.bossEncounter && campaign.battle.status === 'defeat') {
+    let result!: QuestCommandResult;
+    withBossEncounterSources(structuredClone(campaign.battle), battle => {
+      result = commitQuestFailureFromDefeatInternal({ ...campaign, battle }, resumePhase);
+      return battle;
+    });
+    return result;
+  }
+  return commitQuestFailureFromDefeatInternal(campaign, resumePhase);
+}
+
+function commitQuestFailureFromDefeatInternal(campaign: CampaignState, resumePhase: ReplacementResumePhase): QuestCommandResult {
   if (!campaign.battle || campaign.battle.status !== 'defeat') {
     return { ok: false, campaign, error: 'no-active-quest' };
   }
+  const productionBossFailure = hasUnfinishedProductionBossQuest(campaign);
   let next = failQuestFromBattle(campaign);
   if (next === campaign) return { ok: false, campaign: next, error: 'no-active-quest' };
+  if (productionBossFailure) {
+    const transaction = finalizeQuestReturnToHamlet(next, { questId: campaign.currentQuestId!,
+      questRunId: campaign.dungeon!.questRunId, questOutcome: 'failed' });
+    if (!transaction.ok) throw new Error('Production Boss failure transaction rejected');
+    return { ok: true, campaign: failCampaign(transaction.campaign, 'Face the Threat：未击败 Boss，战役失败。'), error: null };
+  }
   next = retargetPendingReplacement(next, resumePhase);
   next = evaluateReplacementFlow(next);
   return { ok: true, campaign: next, error: null };

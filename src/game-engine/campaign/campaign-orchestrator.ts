@@ -115,7 +115,7 @@ export function syncCampaignProgressMirrors(campaign: CampaignState): CampaignSt
 
 const TRANSACTION_HISTORY_LIMIT = 100;
 
-function withTransactionRecorded(
+export function withTransactionRecorded(
   campaign: CampaignState,
   transactionId: string,
 ): CampaignState {

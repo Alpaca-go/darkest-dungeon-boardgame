@@ -9,6 +9,8 @@
 // settleBattleHeadless / shimResolveVictory / shimRetreat 必须删除。
 import type { CampaignState } from '../../types';
 import { commitBossFoundationVictory, settleBossThreatBattle } from './boss-foundation';
+import { hasUnfinishedProductionBossQuest } from '../bosses/room-storage';
+import { commitQuestFailureFromDefeat } from './quest';
 import { resolveVictory as engineResolveVictory } from '../battle';
 import { retreatFromBattle } from '../dungeon';
 import { resolveTurnStartMentalEffect, processBattleStressEvents } from '../mental-effects';
@@ -32,6 +34,7 @@ export type BattleSettlementError =
   | 'battle-not-active'
   | 'battle-not-victory'
   | 'battle-not-active-for-retreat'
+  | 'boss-quest-cannot-retreat'
   | 'battle-settlement-failed';
 
 export interface BattleSettlementResult {
@@ -152,12 +155,17 @@ export function commitBattleVictory(campaign: CampaignState): BattleSettlementRe
 
 /**
  * 战斗撤退正式入口：settleBattleState → retreatFromBattle。
- * Boss 不可撤退由 retreatFromBattle 内部守卫（face-the-threat 仍调用此函数，
- * 但 retreatFromBattle 必须拒绝；具体行为由 dungeon.ts 决定）。
+ * Production ABILITY encounters reject voluntary retreat here. A defeated Boss
+ * encounter follows the Quest failure transaction; ordinary battle handling stays below.
  */
 export function commitBattleRetreat(campaign: CampaignState): BattleSettlementResult {
   if (!campaign.battle) {
     return { ok: false, campaign, error: 'battle-not-active-for-retreat', mentalLoops: 0 };
+  }
+  if (hasUnfinishedProductionBossQuest(campaign) && campaign.battle.bossEncounter?.side === 'ABILITY') {
+    if (campaign.battle.status !== 'defeat') return { ok: false, campaign, error: 'boss-quest-cannot-retreat', mentalLoops: 0 };
+    const failed = commitQuestFailureFromDefeat(campaign);
+    return { ok: failed.ok, campaign: failed.campaign, error: failed.ok ? null : 'battle-settlement-failed', mentalLoops: 0 };
   }
   // The round-limit pipeline has already committed `defeat` before the UI exposes
   // "Retreat to dungeon". Do not send that terminal state through the active-only

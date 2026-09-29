@@ -3,6 +3,7 @@ import { HEROES } from '../data/heroes';
 import { getSkillsByHero } from '../data/skills';
 import { hasCompleteLevelProfiles } from '../data/hero-level-profiles';
 import { pushLog } from './log';
+import { returnProductionBossRoomOnTermination } from './bosses/room-storage';
 
 /** 新战役的 Stagecoach 初始状态：2 个 Waiting Token、0 XP。 */
 export function createInitialStagecoach(): StagecoachState {
@@ -96,6 +97,7 @@ export function replacementBlockReason(campaign: CampaignState): string | null {
 /** 标记战役失败并进入 campaign-over（不删除存档）。 */
 export function failCampaign(campaign: CampaignState, reason: string): CampaignState {
   if (campaign.gamePhase === 'campaign-over') return campaign;
+  campaign = returnProductionBossRoomOnTermination(campaign, 'failed');
   let next: CampaignState = {
     ...campaign,
     gamePhase: 'campaign-over',

@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R",
+  "baselineHead": "75fe2e71e6670ddeea0c5df890d329f4914e5566",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "productionReady": 0,
+  "foundationAccepted": false,
+  "allCapabilityGatesImplemented": false,
+  "status": "PARTIAL",
+  "roomTermination": [
+    {
+      "level": 1,
+      "status": "PASS",
+      "classification": "ROOM_TERMINATION_COMMAND_ISOLATION",
+      "productionAcceptance": false,
+      "explicitControls": [
+        "pre-Boss campaign progression",
+        "defeat status injection at termination boundary"
+      ],
+      "syntheticCombatDefinitionDependencies": 0,
+      "reservedSaveHash": "46a205f4b269a2e0ca7f978da0b1edebeb015a2f354044657fb282e3cc79d4ad",
+      "initialStateHash": "cfd780f4d5db7ceb02313e0b1728d2b1378f58300f96de234897f6c1b4ab8c4e",
+      "preSaveHash": "dffe8162278e180d8cef57de2dd50abc91424130fc042c6c84e6ead72828c16e",
+      "saveHash": "0efb68ca92e420750239f86e5becba08e143e5809ce62e0addae4fa361b81c76",
+      "reloadedHash": "dffe8162278e180d8cef57de2dd50abc91424130fc042c6c84e6ead72828c16e",
+      "finalStateHash": "0f9188eda5966553011eb0bbd3ec2e33e0f7cf9a930d08a3626d42a8be6b960d",
+      "eventSequenceHash": "147d20f78d99071f6c92c487190defcf367f0bb87c467a623c262cebfa3df8ab",
+      "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "postCleanupSaveHash": "0b5196c6f775f2593467505c4625b166971c31e83a462b1d6c057618839fb7a0",
+      "encounterId": "cmp_2ht_1:qrun_2ht_8:necromancer:1",
+      "lifecycles": [
+        "RESERVED",
+        "IN_PLAY",
+        "RETURNED"
+      ],
+      "finalPhase": "campaign-over",
+      "campaignLevelUnchanged": true
+    },
+    {
+      "level": 2,
+      "status": "PASS",
+      "classification": "ROOM_TERMINATION_COMMAND_ISOLATION",
+      "productionAcceptance": false,
+      "explicitControls": [
+        "pre-Boss campaign progression",
+        "defeat status injection at termination boundary"
+      ],
+      "syntheticCombatDefinitionDependencies": 0,
+      "reservedSaveHash": "ece60927c3ded2c555d641b02ebe2646bd2ac3bf92a10d6d83d671ce7bf3afbf",
+      "initialStateHash": "21f8cc939b21a5d1cb4c2d301a374e59ad6aab4a0ab7aca5a3e96c786ea78168",
+      "preSaveHash": "36564ff6a0ad65ff880fc3ab6ddff892a76ed4d2ff8f52c2a8dd9470fb169456",
+      "saveHash": "c394b773e6f38624e19906731b5ed05985a3e0809d878f2fe64c501313371de6",
+      "reloadedHash": "36564ff6a0ad65ff880fc3ab6ddff892a76ed4d2ff8f52c2a8dd9470fb169456",
+      "finalStateHash": "53bf2776b47c6b2838196c6a33240085335d5e5867bfea7b471f5ba581134c0c",
+      "eventSequenceHash": "1a49beacfeafb6a097f166d4d4e9dad81d7260523f8850ded229d2b725f31a84",
+      "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "postCleanupSaveHash": "ee38bfd05a82b7abfe33499dc104bfc50ee621ef3c14ade15e6d5cfc96d9662c",
+      "encounterId": "cmp_2hu_1:qrun_2hu_8:necromancer:2",
+      "lifecycles": [
+        "RESERVED",
+        "IN_PLAY",
+        "RETURNED"
+      ],
+      "finalPhase": "campaign-over",
+      "campaignLevelUnchanged": true
+    },
+    {
+      "level": 3,
+      "status": "PASS",
+      "classification": "ROOM_TERMINATION_COMMAND_ISOLATION",
+      "productionAcceptance": false,
+      "explicitControls": [
+        "pre-Boss campaign progression",
+        "defeat status injection at termination boundary"
+      ],
+      "syntheticCombatDefinitionDependencies": 0,
+      "reservedSaveHash": "9c5f0d019127308def8f146c7eea522330be9cc53d3581fd127b5e513a761287",
+      "initialStateHash": "9aca05ad8cc41cb3d50d7855379143a110b34cb8dae2475e7779e72518971e00",
+      "preSaveHash": "650e4e5ea7a2b7214829f0382d71628289f45853b36dccd7bb11cbc44cea9006",
+      "saveHash": "2a908dbbf4d6910829096a120ad4fe82762400708ec67265b321f5aa5d23ad02",
+      "reloadedHash": "650e4e5ea7a2b7214829f0382d71628289f45853b36dccd7bb11cbc44cea9006",
+      "finalStateHash": "9cdcf4e55c1422c61fe0e43f8b1d48832f040f22a70178faedb1c2df221735eb",
+      "eventSequenceHash": "ef6a4ba2bea2f0b1d07179dc8cf9340af3a50e60f19025255f63679bf890754b",
+      "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "postCleanupSaveHash": "81e76bb479e1289b51490aa575001dc40940ccc3e646bd9a3bfe6d9ebe23fc93",
+      "encounterId": "cmp_2hv_1:qrun_2hv_8:necromancer:3",
+      "lifecycles": [
+        "RESERVED",
+        "IN_PLAY",
+        "RETURNED"
+      ],
+      "finalPhase": "campaign-over",
+      "campaignLevelUnchanged": true
+    }
+  ],
+  "scenarioC": "NOT_PROVEN",
+  "browserNormalPath": "PRODUCT_FAILURE",
+  "historicalProofArtifactsModified": false
+}

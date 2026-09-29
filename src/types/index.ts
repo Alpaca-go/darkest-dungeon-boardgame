@@ -780,6 +780,13 @@ export interface HeroLevelProfile {
 /** 战役状态（存档根对象）。 */
 export interface CampaignState {
   bossRoomStorage?: { roomId: string; roomCardId: number; tileId: string; encounterId: string; lifecycle: 'RESERVED' | 'IN_PLAY' | 'RETURNED' };
+  /** Physical ownership receipts for an encounter terminated before Boss victory. */
+  bossRoomReturnHistory?: Array<{
+    transactionId: string; campaignId: string; questRunId: string; encounterId: string;
+    roomId: string; roomCardId: number; tileId: string; ruleSetVersion: string;
+    previousLifecycle: 'RESERVED' | 'IN_PLAY'; reason: 'incomplete' | 'failed';
+    encounter: import('./boss-runtime').BossEncounterState;
+  }>;
 
   /** C1C31R explicit pre-encounter Dodge rule selection; absent legacy saves remain v1. */
   heroDodgeRuleSetSelection?: import('./hero-dodge-rules').HeroDodgeRuleSetSelection;

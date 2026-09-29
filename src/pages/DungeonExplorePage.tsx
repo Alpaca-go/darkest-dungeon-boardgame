@@ -102,8 +102,11 @@ export default function DungeonExplorePage() {
         <div className="flex items-center gap-2">
         <button
           onClick={onRequestLeave}
+          disabled={!!campaign.bossRoomStorage && campaign.bossRoomStorage.lifecycle !== 'RETURNED'}
           className="px-3 py-1.5 rounded font-semibold text-sm bg-dd-panel2 text-dd-text border border-dd-border hover:bg-dd-panel transition-colors"
-          title="离开地牢并进行任务结算（未完成目标视为任务未完成）"
+          title={campaign.bossRoomStorage && campaign.bossRoomStorage.lifecycle !== 'RETURNED'
+            ? 'Face the Threat：击败 Boss 后才能离开地牢。'
+            : '离开地牢并进行任务结算（未完成目标视为任务未完成）'}
           data-testid="leave-dungeon"
         >
           离开地牢
