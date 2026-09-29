@@ -150,7 +150,11 @@
     "audit:complete-edition-c1c30": "vite-node scripts/audit/generate-complete-edition-c1c30.ts",
     "verify:complete-edition-c1c30": "vite-node scripts/audit/verify-complete-edition-c1c30.ts",
     "test:necromancer-continuation": "vitest run src/audit/c1c30-necromancer-runtime-foundation.test.ts",
-    "test:e2e:necromancer-continuation": "playwright test e2e/c1c30-necromancer-dependency-gate.spec.ts"
+    "test:e2e:necromancer-continuation": "playwright test e2e/c1c30-necromancer-dependency-gate.spec.ts",
+    "audit:complete-edition-c1c31": "vite-node scripts/audit/generate-complete-edition-c1c31.ts",
+    "verify:complete-edition-c1c31": "vite-node scripts/audit/verify-complete-edition-c1c31.ts",
+    "test:necromancer-closure": "vitest run src/audit/c1c31-necromancer-runtime-foundation.test.ts",
+    "test:e2e:necromancer-closure": "playwright test e2e/c1c31-necromancer-production-attempt.spec.ts"
   },
   "dependencies": {
     "lucide-react": "^0.408.0",

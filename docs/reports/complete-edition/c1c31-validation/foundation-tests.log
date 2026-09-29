@@ -1,0 +1,16 @@
+
+> darkest-dungeon-web-prototype@0.1.0 test:necromancer-foundation
+> vitest run src/game-engine/bosses/foundation.test.ts src/game-engine/commands/boss-foundation.test.ts src/audit/c1c29-necromancer-runtime-foundation.test.ts
+
+
+ RUN  v2.1.9 D:/darkest-dungoen-boardgame
+
+ ✓ src/game-engine/bosses/foundation.test.ts (60 tests) 1133ms
+ ✓ src/game-engine/commands/boss-foundation.test.ts (6 tests) 172ms
+ ✓ src/audit/c1c29-necromancer-runtime-foundation.test.ts (6 tests) 2799ms
+   ✓ C1C29 real runtime binding and honest evidence > verifies checked-in traces against the production executor and frozen upstream inputs 2711ms
+
+ Test Files  3 passed (3)
+      Tests  72 passed (72)
+   Start at  10:45:17
+   Duration  19.87s (transform 21.20s, setup 0ms, collect 38.43s, tests 4.10s, environment 3.72s, prepare 607ms)

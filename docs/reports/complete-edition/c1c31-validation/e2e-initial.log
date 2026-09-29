@@ -1,0 +1,37 @@
+
+> darkest-dungeon-web-prototype@0.1.0 test:e2e:necromancer-closure
+> playwright test e2e/c1c31-necromancer-production-attempt.spec.ts
+
+[WebServer] (node:108992) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:108156) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 e2e\c1c31-necromancer-production-attempt.spec.ts:4:1 › C1C31 production attempt: selector to cleanup stops at dependency validation (PRODUCT_FAILURE) (3.1m)
+
+
+  1) e2e\c1c31-necromancer-production-attempt.spec.ts:4:1 › C1C31 production attempt: selector to cleanup stops at dependency validation (PRODUCT_FAILURE)
+
+    Test timeout of 180000ms exceeded.
+
+    Error: page.reload: Test timeout of 180000ms exceeded.
+    Call log:
+      - waiting for navigation until "domcontentloaded"
+        - navigated to "http://localhost:5199/quests"
+
+
+      34 |   console.log(JSON.stringify({ phase: 'C1C31', productionResult: 'PRODUCT_FAILURE',
+      35 |     failureBoundary: 'NORMAL_SELECTOR_DEPENDENCY_VALIDATION', commandError: result.error,
+    > 36 |     unresolvedDependencies: result.unresolved, inputCampaignUnchanged: result.unchanged,
+         |              ^
+      37 |     downstreamNotReached: ['Threat', 'Room 10', 'Ability', 'Boss Skill', 'real Bone summon', 'Bone turn',
+      38 |       'Bone death', 'Reanimation', 'reaction save/reload', 'victory', 'cleanup'],
+      39 |     pendingChoiceProductionProof: 'NOT_REACHED', syntheticDependenciesUsed: false }));
+        at D:\darkest-dungoen-boardgame\e2e\c1c31-necromancer-production-attempt.spec.ts:36:14
+
+    Error Context: pw-out\main-1790649847656\c1c31-necromancer-producti-8e434-validation-PRODUCT-FAILURE-\error-context.md
+
+  1 failed
+    e2e\c1c31-necromancer-production-attempt.spec.ts:4:1 › C1C31 production attempt: selector to cleanup stops at dependency validation (PRODUCT_FAILURE)

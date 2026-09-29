@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C31",
+  "baselineHead": "2ab674d7d8c15dbbd7367bb3b2011243facb5517",
+  "ruleSourcePolicyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1",
+  "externalSourceUsed": false,
+  "syntheticFallbackAllowed": false,
+  "status": "PRODUCT_FAILURE",
+  "productionAcceptance": false,
+  "failureBoundary": "NORMAL_SELECTOR_DEPENDENCY_VALIDATION",
+  "normalSelectorPass": false,
+  "realBoneExecutionPass": false,
+  "entryAttempt": {
+    "initialHash": "1b3b182ed75862d96359690fb604ffbc4f1cbe4b0625fe0db1b3eab4ee46a9ed",
+    "afterAttemptHash": "1b3b182ed75862d96359690fb604ffbc4f1cbe4b0625fe0db1b3eab4ee46a9ed",
+    "commandError": "necromancer-production-dependencies-unbound",
+    "unresolvedDependencies": [
+      "bone-rabble:stanceSelections.aggressive",
+      "bone-rabble:stanceSelections.defensive",
+      "bone-soldier:stanceSelections.aggressive",
+      "bone-soldier:stanceSelections.defensive",
+      "bone-spearman:stanceSelections.aggressive",
+      "bone-spearman:stanceSelections.ranged",
+      "bone-captain:stanceSelections.defensive",
+      "bone-captain:stanceSelections.ranged",
+      "hero:vestal:level-1:dodge",
+      "BoneSkillExecutor:SOURCE_UNRESOLVED_STANCE_BINDINGS",
+      "IncomingAttackReaction:BRIDGE_NOT_CLOSED"
+    ],
+    "syntheticFallbackAllowed": false
+  },
+  "pendingChoiceProductionProof": "NOT_REACHED",
+  "browserEvidence": "docs/reports/complete-edition/c1c31-validation/e2e.log"
+}
