@@ -781,7 +781,7 @@ export interface HeroLevelProfile {
 
 /** 战役状态（存档根对象）。 */
 export interface CampaignState {
-  ruinsRuleSetSelection?: import('../game-engine/rules/ruins-v4').RuinsVersionSelection;
+  ruinsRuleSetSelection?: import('../game-engine/rules/ruins-v4').RuinsVersionSelection | import('../game-engine/rules/ruins-v5').RuinsV5Selection;
   ruinsDrawState?: import('../game-engine/ruins/encounter-draw').RuinsDrawState;
   necromancerPreparationDay?: import('../game-engine/campaign/necromancer-preparation-day').NecromancerPreparationDay;
   necromancerGraveyardReceipts?: import('./necromancer-dependencies').GraveyardReceipt[];

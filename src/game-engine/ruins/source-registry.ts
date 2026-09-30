@@ -2,10 +2,10 @@ import monsterData from '../../../docs/data/complete-edition/c1c32r2a-ruins-mons
 import tileData from '../../../docs/data/complete-edition/c1c32r2a-ruins-tile-area-definitions.json';
 import roomData from '../../../docs/data/complete-edition/c1c32r2a-ruins-room-effect-definitions.json';
 import type { RuinsMonster, RuinsRoom, RuinsStance, RuinsTile, StanceBehavior } from '../../types/ruins-executable';
-import { RUINS_V4, RUINS_STANCES } from '../../types/ruins-executable';
+import { RUINS_V4, RUINS_V5, RUINS_STANCES } from '../../types/ruins-executable';
 
 export function ruinsMonsterDefinitions(version: string): RuinsMonster[] {
-  if (version !== RUINS_V4) throw new Error('Ruins successor version required');
+  if (version !== RUINS_V4 && version !== RUINS_V5) throw new Error('Ruins successor version required');
   return structuredClone(monsterData.definitions) as RuinsMonster[];
 }
 export function ruinsMonster(id: string, version: string): RuinsMonster {

@@ -1,6 +1,10 @@
 import type { BattleState } from './index';
 
 export const RUINS_V4 = 'C1C32R2A-DIGITAL-DEFAULT-v4' as const;
+/** Noncanonical, explicitly selected successor. v4 records are never rewritten. */
+export const RUINS_V5 = 'C1C32R2B-DIGITAL-DEFAULT-v5' as const;
+export const RUINS_V5_REPLACEMENT_RULING = 'C1C32R2B-LARGE-REPLACEMENT-RETURN-WITH-BATTLE-v1' as const;
+export type RuinsRuleSetVersion = typeof RUINS_V4 | typeof RUINS_V5;
 export const RUINS_STANCES = ['aggressive', 'defensive', 'ranged', 'support'] as const;
 export type RuinsStance = typeof RUINS_STANCES[number];
 export interface PrintedSource {

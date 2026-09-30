@@ -171,7 +171,10 @@
     "test:necromancer-threat-dependencies": "vitest run src/audit/c1c32r2-necromancer-threat-dependencies.test.ts",
     "audit:complete-edition-c1c32r2a": "vite-node scripts/audit/generate-complete-edition-c1c32r2a.ts",
     "verify:complete-edition-c1c32r2a": "vite-node scripts/audit/verify-complete-edition-c1c32r2a.ts",
-    "test:ruins-executable-dependencies": "vitest run src/audit/c1c32r2a-ruins-executable-dependencies.test.ts"
+    "test:ruins-executable-dependencies": "vitest run src/audit/c1c32r2a-ruins-executable-dependencies.test.ts",
+    "test:ruins-production-runtime": "vitest run src/audit/c1c32r2b-ruins-production-runtime.test.ts",
+    "audit:complete-edition-c1c32r2b": "vite-node scripts/audit/generate-complete-edition-c1c32r2b.ts",
+    "verify:complete-edition-c1c32r2b": "vite-node scripts/audit/verify-complete-edition-c1c32r2b.ts"
   },
   "dependencies": {
     "lucide-react": "^0.408.0",

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R2B",
+  "baselineHead": "2c4dfcf849579a5b53581f7a6d804285fe720c52",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "accepted": false,
+  "gates": {
+    "sourceBoundMonsterCandidates": 24,
+    "executableProductionMonsters": 0,
+    "drawableProductionMonsterDefinitionsMissing": 24,
+    "printedStanceGroupingComplete": true,
+    "productionMonsterEffectAdapterComplete": false,
+    "extendedPrintedEffectInterpreterComplete": false,
+    "tileAreaStructuralValidation": true,
+    "tileAreaFinalVisualValidation": true,
+    "roomGlyphTranscriptionComplete": true,
+    "roomEffectExecutorComplete": false,
+    "roomDeckContractComplete": true,
+    "room10ExclusionBound": true,
+    "initialLargeReplacementDiscardPolicyResolved": true,
+    "largeReplacementProjectRulingVersioned": true,
+    "ordinaryEncounterDomainDrawImplemented": true,
+    "ordinaryEncounterDrawExecutable": false,
+    "ordinaryEncounterDrawContractComplete": false,
+    "physicalCopyOwnershipComplete": false,
+    "officialBoneSourceMismatchResolvedByVersioning": true,
+    "historicalV1V2V3V4Preserved": true,
+    "graveyardCampaignTransactionImplemented": true,
+    "preparationDayDomainBridgeImplemented": true,
+    "preparationDayFullProductPathProven": false,
+    "activeQuestExpiredRealCommandProof": false
+  },
+  "blockers": [
+    "ORDINARY_MONSTER_EFFECT_ADAPTER_NOT_BOUND",
+    "EXTENDED_PRINTED_EFFECT_INTERPRETER_NOT_BOUND",
+    "ORDINARY_ROOM_EFFECT_EXECUTOR_NOT_BOUND",
+    "ORDINARY_ENCOUNTER_EXECUTABLE_COMPONENT_ACCEPTANCE",
+    "PHYSICAL_COPY_SUMMON_SUPPLY_RECONCILIATION_NOT_BOUND",
+    "ACTIVE_QUEST_AND_EXPIRED_REAL_COMMAND_SAVE_PROOF"
+  ],
+  "remainingExecutableDependencyBlockers": 6,
+  "deferredToC1C32R3": [
+    "NORMAL_PRODUCT_THREAT_PREPARATION_ENTRY_PROOF",
+    "SCENARIO_C_FULL_PRODUCT_PATH"
+  ],
+  "scenarioC": {
+    "status": "NOT_PROVEN",
+    "combatHashes": null
+  }
+}
