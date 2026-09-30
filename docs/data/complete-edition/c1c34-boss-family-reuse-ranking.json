@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C34",
+  "baseline": "e1fcfac0692eb91c5710552ac93e3bacb25f0240",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "contractVersion": "C1C34-SUCCESSOR-BINDING-v1",
+  "gameplayChanged": false,
+  "productionPromotion": false,
+  "method": "PLANNING_COST_V1",
+  "weights": {
+    "unresolvedDefinition": 2,
+    "specialComponent": 2,
+    "saveChange": 2,
+    "newUi": 2,
+    "newBattle": 3,
+    "legacyReuse": -1,
+    "sharedReuse": -1
+  },
+  "scoreIsProjectEstimate": true,
+  "sourceCountsFrozen": true,
+  "ranking": [
+    {
+      "family": "Prophet",
+      "legacyReuse": 6,
+      "sharedReuse": 7,
+      "specialComponents": 1,
+      "saveChanges": 2,
+      "newUi": 1,
+      "newBattle": 2,
+      "rationale": "One non-actor Pew mechanism; existing ordinal/area framework; Ruins Threat/checkpoint/storage reuse.",
+      "evidence": [
+        "src/game-engine/prophet/index.ts",
+        "src/game-engine/prophet/runtime.ts",
+        "src/game-engine/prophet/prophet.test.ts",
+        "src/data/bosses/prophet-family.ts",
+        "src/types/prophet.ts",
+        "e2e/phase-9c-prophet.spec.ts"
+      ],
+      "physicalCards": 9,
+      "literalComplete": 6,
+      "unresolvedDefinitions": 3,
+      "sourceGaps": 153,
+      "planningCost": 7,
+      "productionReady": false
+    },
+    {
+      "family": "Thing from the stars",
+      "legacyReuse": 0,
+      "sharedReuse": 3,
+      "specialComponents": 1,
+      "saveChanges": 2,
+      "newUi": 1,
+      "newBattle": 3,
+      "rationale": "Smallest card set, but no family runtime and less direct Ruins production binding.",
+      "evidence": [
+        "c1c24-boss-printed-definitions"
+      ],
+      "physicalCards": 3,
+      "literalComplete": 2,
+      "unresolvedDefinitions": 1,
+      "sourceGaps": 52,
+      "planningCost": 16,
+      "productionReady": false
+    },
+    {
+      "family": "Collector",
+      "legacyReuse": 4,
+      "sharedReuse": 6,
+      "specialComponents": 4,
+      "saveChanges": 3,
+      "newUi": 2,
+      "newBattle": 3,
+      "rationale": "Collector prototype exists too; summon/ownership reusable, but Collected actors and Loot Chests widen binding.",
+      "evidence": [
+        "src/game-engine/collector/runtime.ts",
+        "src/data/bosses/collector-family.ts",
+        "src/game-engine/collector/collector.test.ts"
+      ],
+      "physicalCards": 18,
+      "literalComplete": 6,
+      "unresolvedDefinitions": 12,
+      "sourceGaps": 315,
+      "planningCost": 41,
+      "productionReady": false
+    },
+    {
+      "family": "Hag",
+      "legacyReuse": 0,
+      "sharedReuse": 4,
+      "specialComponents": 2,
+      "saveChanges": 4,
+      "newUi": 3,
+      "newBattle": 4,
+      "rationale": "Cauldron/captive Hero and two-unit lifecycle need new battle/UI/save handling.",
+      "evidence": [
+        "c1c24-boss-printed-definitions"
+      ],
+      "physicalCards": 15,
+      "literalComplete": 6,
+      "unresolvedDefinitions": 9,
+      "sourceGaps": 255,
+      "planningCost": 44,
+      "productionReady": false
+    }
+  ],
+  "selectionDoesNotPromote": true
+}

@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C34",
+  "baseline": "e1fcfac0692eb91c5710552ac93e3bacb25f0240",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "contractVersion": "C1C34-SUCCESSOR-BINDING-v1",
+  "gameplayChanged": false,
+  "productionPromotion": false,
+  "files": [
+    {
+      "path": "src/game-engine/prophet/index.ts",
+      "classification": "REUSABLE_AS_IS",
+      "reason": "Exports only; no source or production acceptance claim.",
+      "sha256": "ac4970268936536f6347a1034f6f781b35447b5236f2d97de2873f49e66e45d6"
+    },
+    {
+      "path": "src/game-engine/prophet/runtime.ts",
+      "classification": "REUSABLE_AFTER_SOURCE_BINDING",
+      "reason": "Ordinal, non-occupying hazards, per-Pew attacks and cleanup can be adapted to BattleState.",
+      "sha256": "d9a043c9aeaabbd021649458ef101b5b5d0360c7c324affed4df005009a52742"
+    },
+    {
+      "path": "src/game-engine/prophet/prophet.test.ts",
+      "classification": "PROTOTYPE_ONLY",
+      "reason": "Synthetic values test mechanics; not production acceptance.",
+      "sha256": "3fac1673e88b3669eb73e4a54c11172b0e188ced01d65b170520aa6920e35f08"
+    },
+    {
+      "path": "src/data/bosses/prophet-family.ts",
+      "classification": "PROTOTYPE_ONLY",
+      "reason": "Official levels disabled; prototype stats/map/skills must never provide production defaults.",
+      "sha256": "5affab40ce4623a1e5f1e353640087e008727f255ca21a2bfd42d090bf2916c8"
+    },
+    {
+      "path": "src/types/prophet.ts",
+      "classification": "REUSABLE_AFTER_SOURCE_BINDING",
+      "reason": "Add source IDs, ruleset, ownership, pending choices and resumable per-Pew cursor.",
+      "sha256": "ff7248cad6ed5dc9440a3ebe72e7a4b4397a9aa5f0f667c20336ad215aed1e82"
+    },
+    {
+      "path": "e2e/phase-9c-prophet.spec.ts",
+      "classification": "PROTOTYPE_ONLY",
+      "reason": "Development harness only; successor needs normal production selector and real combat.",
+      "sha256": "a3583d5ba0e345d970ddddec885e4037993b0e21f2d6bea254de160b667f0991"
+    }
+  ],
+  "symbols": [
+    {
+      "path": "src/game-engine/prophet/runtime.ts",
+      "symbol": "createSeededRng",
+      "classification": "MUST_REPLACE",
+      "reason": "Use the shared saved RNG stream; do not introduce a second production stream."
+    },
+    {
+      "path": "src/game-engine/prophet/runtime.ts",
+      "symbol": "createProphetInitiativeCards",
+      "classification": "REUSABLE_AFTER_SOURCE_BINDING",
+      "reason": "Use shared seeded initiative and saved ordinal accounting."
+    },
+    {
+      "path": "src/game-engine/prophet/runtime.ts",
+      "symbol": "getProphetActionSemantics",
+      "classification": "REUSABLE_AS_IS",
+      "reason": "Pure ordinal 1/2/3 dispatch, source-backed p38-39."
+    },
+    {
+      "path": "src/game-engine/prophet/runtime.ts",
+      "symbol": "resolveProphetPewPlacement",
+      "classification": "MUST_REPLACE",
+      "reason": "Default room is PROPHET_PROTOTYPE_ROOM; production must fail closed without bound map."
+    },
+    {
+      "path": "src/game-engine/prophet/runtime.ts",
+      "symbol": "getAreaOccupancy / selectTargetableActorIds",
+      "classification": "REUSABLE_AFTER_SOURCE_BINDING",
+      "reason": "Preserve non-actor Pew filtering in shared BattleState target/capacity pipeline."
+    },
+    {
+      "path": "src/game-engine/prophet/runtime.ts",
+      "symbol": "resolveProphetSecondAction / resolveProphetRubbleOfRuin",
+      "classification": "REUSABLE_AFTER_SOURCE_BINDING",
+      "reason": "Inject shared damage/conditions; bind stats, targets, choices and interruption order."
+    },
+    {
+      "path": "src/game-engine/prophet/runtime.ts",
+      "symbol": "clearAllPews / resolveProphetVictory",
+      "classification": "REUSABLE_AFTER_SOURCE_BINDING",
+      "reason": "Connect cleanup to shared idempotent campaign transaction."
+    },
+    {
+      "path": "src/game-engine/prophet/runtime.ts",
+      "symbol": "migrateProphetSave / repairProphetRuntime",
+      "classification": "MUST_REPLACE",
+      "reason": "Prototype repair is not schema-2 ownership/causal tamper validation."
+    }
+  ],
+  "productionProof": false
+}

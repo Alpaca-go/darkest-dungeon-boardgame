@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C34",
+  "baseline": "e1fcfac0692eb91c5710552ac93e3bacb25f0240",
+  "status": "LOCAL_GATES_PASS",
+  "commands": [
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0
+    },
+    {
+      "command": "npm test -- --maxWorkers=4 --minWorkers=4 --reporter=default --reporter=json",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run historical-baseline-validation",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run verify:complete-edition-c1c33",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run verify:complete-edition-c1c34",
+      "exitCode": 0
+    }
+  ],
+  "fullRegression": {
+    "total": 2660,
+    "passed": 2660,
+    "failed": 0,
+    "pending": 0,
+    "todo": 0,
+    "testFiles": 173,
+    "failedTests": []
+  },
+  "fullRegressionReportSha256": "60e393e938f7f0324fd439b6fa2f04496080451c9158da3a9f2bf74137010bfb",
+  "frozenManifestSha256": "885fdd7044a55e186ac736a92ec5727a09f51e797a17731b12db2dfe9cd452ad",
+  "frozenRuntimeAndEvidence": "PASS",
+  "originalHistoricalTestsUnchanged": true,
+  "allowlistExpanded": false,
+  "gameplayChanged": false,
+  "browserAcceptance": "FROZEN_C1C33_EVIDENCE; successor freeze requires new production browser gate",
+  "remoteAcceptance": {
+    "required": true,
+    "workflow": ".github/workflows/release-gate.yml",
+    "verification": "Actual GitHub run for committed HEAD; local result does not imply remote PASS"
+  }
+}

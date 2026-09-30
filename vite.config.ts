@@ -14,6 +14,7 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     globals: true,
+    setupFiles: ['src/test-support/historical-baseline-setup.ts'],
     cache: false,
     include: ['src/**/*.test.ts', 'src/**/*.test.tsx'],
   },
