@@ -57,6 +57,14 @@ export interface RuinsRoomRule {
 }
 export interface RuinsRoom { roomNumber: number; rules: RuinsRoomRule[]; sourceReferences: PrintedSource[] }
 export interface RuinsBattleContext {
+  /** Absent on historical v5/v6 saves. Opt-in cross-link; never a second Threat state. */
+  executionSchemaVersion?: 2;
+  threatEncounterId?: string;
+  unitPhysicalBindings?: Record<string, { copyId: string; definitionId: string; generation: number; predecessorUnitId: string | null }>;
+  retiredMonsterInstances?: Array<{ unit: import('../types').BattleUnit; copyId: string; definitionId: string;
+    generation: number; areaId: string; correspondingAreaId: string; deathEventId: string }>;
+  pendingThreatDeathIds?: string[];
+  pendingReanimationChoice?: { choiceId: string; candidateIds: string[]; parentEventId: string; ruleSetVersion: string } | null;
   encounterId: string; roomNumber: number; tileId: string; ruleSetVersion: RuinsRuleSetVersion;
   placements: Record<string, string>; definitionIds: Record<string, string>; physicalCopyIds: string[];
   occupiedSpaces: Record<string, number>; rngCursor: number; rngCalls: number;

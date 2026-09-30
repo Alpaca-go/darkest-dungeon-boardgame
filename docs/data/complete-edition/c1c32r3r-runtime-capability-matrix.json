@@ -1,0 +1,313 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R3R",
+  "baseline": "fd2ba4d12ecf16b24ed0c5d502eb7ee566893c24",
+  "status": "PASS",
+  "monsters": 24,
+  "monsterSkills": 56,
+  "rooms": 9,
+  "roomRules": 14,
+  "tiles": 9,
+  "blockers": [],
+  "ordinaryThreatLevels": [
+    1,
+    2,
+    3
+  ],
+  "scenarioC": "PASS",
+  "preparationDay": "PASS",
+  "bossVictory": "PASS",
+  "validation": {
+    "schemaVersion": 1,
+    "phase": "11A.4-C1C32R3R",
+    "fullTests": {
+      "total": 2633,
+      "passed": 2631,
+      "pending": 0,
+      "failedTests": [
+        {
+          "fullName": "C1C27 authoritative source closure rejects gameplay, other-family, tooling and prior-phase changes",
+          "messages": [
+            "AssertionError: expected [Function] to not throw an error but 'Error: C1C27: scope violation: .gitat…' was thrown\n    at Proxy.<anonymous> (file:///D:/darkest-dungoen-boardgame/node_modules/@vitest/expect/dist/index.js:1509:21)\n    at Proxy.<anonymous> (file:///D:/darkest-dungoen-boardgame/node_modules/@vitest/expect/dist/index.js:972:17)\n    at Proxy.methodWrapper (file:///D:/darkest-dungoen-boardgame/node_modules/chai/index.js:1686:25)\n    at D:\\darkest-dungoen-boardgame\\src\\audit\\c1c27-necromancer-source-closure.test.ts:163:51\n    at file:///D:/darkest-dungoen-boardgame/node_modules/@vitest/runner/dist/index.js:146:14\n    at file:///D:/darkest-dungoen-boardgame/node_modules/@vitest/runner/dist/index.js:533:11\n    at runWithTimeout (file:///D:/darkest-dungoen-boardgame/node_modules/@vitest/runner/dist/index.js:39:7)\n    at runTest (file:///D:/darkest-dungoen-boardgame/node_modules/@vitest/runner/dist/index.js:1056:17)\n    at processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at runSuite (file:///D:/darkest-dungoen-boardgame/node_modules/@vitest/runner/dist/index.js:1205:15)"
+          ]
+        },
+        {
+          "fullName": "C1C28 canonical source and digital ruling separation C1C28 scope guard freezes gameplay, canonical history, other families and tooling",
+          "messages": [
+            "AssertionError: expected [Function] to not throw an error but 'Error: C1C28: scope violation: .gitat…' was thrown\n    at Proxy.<anonymous> (file:///D:/darkest-dungoen-boardgame/node_modules/@vitest/expect/dist/index.js:1509:21)\n    at Proxy.<anonymous> (file:///D:/darkest-dungoen-boardgame/node_modules/@vitest/expect/dist/index.js:972:17)\n    at Proxy.methodWrapper (file:///D:/darkest-dungoen-boardgame/node_modules/chai/index.js:1686:25)\n    at D:\\darkest-dungoen-boardgame\\src\\audit\\c1c28-necromancer-project-rulings.test.ts:249:48\n    at file:///D:/darkest-dungoen-boardgame/node_modules/@vitest/runner/dist/index.js:146:14\n    at file:///D:/darkest-dungoen-boardgame/node_modules/@vitest/runner/dist/index.js:533:11\n    at runWithTimeout (file:///D:/darkest-dungoen-boardgame/node_modules/@vitest/runner/dist/index.js:39:7)\n    at runTest (file:///D:/darkest-dungoen-boardgame/node_modules/@vitest/runner/dist/index.js:1056:17)\n    at processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at runSuite (file:///D:/darkest-dungoen-boardgame/node_modules/@vitest/runner/dist/index.js:1205:15)"
+          ]
+        }
+      ],
+      "rawResultHash": "7d7f3b38b896a79abbe62da3aff8affc724eeaca67d7fc3ce7e53412e3f6f6b3",
+      "finalRuntimeEditsIncluded": true,
+      "command": "npx vitest run --maxWorkers=4 --minWorkers=4 --reporter=json --outputFile=pw-out/c1c32r3r-full-tests-final.json"
+    },
+    "commands": [
+      {
+        "command": "npm run test:necromancer-foundation",
+        "kind": "focused-regression",
+        "exitCode": 0,
+        "log": "pw-out/c1c32r3r-test-necromancer-foundation.log"
+      },
+      {
+        "command": "npm run test:necromancer-continuation",
+        "kind": "focused-regression",
+        "exitCode": 0,
+        "log": "pw-out/c1c32r3r-test-necromancer-continuation.log"
+      },
+      {
+        "command": "npm run test:necromancer-closure",
+        "kind": "focused-regression",
+        "exitCode": 0,
+        "log": "pw-out/c1c32r3r-test-necromancer-closure.log"
+      },
+      {
+        "command": "npm run test:necromancer-finalization",
+        "kind": "focused-regression",
+        "exitCode": 0,
+        "log": "pw-out/c1c32r3r-test-necromancer-finalization.log"
+      },
+      {
+        "command": "npm run test:necromancer-threat-bridge",
+        "kind": "focused-regression",
+        "exitCode": 0,
+        "log": "pw-out/c1c32r3r-test-necromancer-threat-bridge.log"
+      },
+      {
+        "command": "npm run test:necromancer-threat-dependencies",
+        "kind": "focused-regression",
+        "exitCode": 0,
+        "log": "pw-out/c1c32r3r-test-necromancer-threat-dependencies.log"
+      },
+      {
+        "command": "npm run test:ruins-executable-dependencies",
+        "kind": "focused-regression",
+        "exitCode": 0,
+        "log": "pw-out/c1c32r3r-test-ruins-executable-dependencies.log"
+      },
+      {
+        "command": "npm run test:ruins-production-runtime",
+        "kind": "focused-regression",
+        "exitCode": 0,
+        "log": "pw-out/c1c32r3r-test-ruins-production-runtime.log"
+      },
+      {
+        "command": "npm run test:ruins-production-executor",
+        "kind": "focused-regression",
+        "exitCode": 0,
+        "log": "pw-out/c1c32r3r-test-ruins-production-executor.log"
+      },
+      {
+        "command": "npm run test:ruins-final-runtime-blockers",
+        "kind": "focused-regression",
+        "exitCode": 0,
+        "log": "pw-out/c1c32r3r-test-ruins-final-runtime-blockers.log"
+      },
+      {
+        "command": "npm run test:necromancer-production-threat-full-path",
+        "kind": "focused-regression",
+        "exitCode": 0,
+        "log": "pw-out/c1c32r3r-test-necromancer-production-threat-full-path.log"
+      },
+      {
+        "command": "npm run verify:complete-edition-c1c29",
+        "kind": "historical-verifier",
+        "exitCode": 0,
+        "log": "pw-out/c1c32r3r-verify-complete-edition-c1c29.log"
+      },
+      {
+        "command": "npm run verify:complete-edition-c1c30",
+        "kind": "historical-verifier",
+        "exitCode": 0,
+        "log": "pw-out/c1c32r3r-verify-complete-edition-c1c30.log"
+      },
+      {
+        "command": "npm run verify:complete-edition-c1c31",
+        "kind": "historical-verifier",
+        "exitCode": 0,
+        "log": "pw-out/c1c32r3r-verify-complete-edition-c1c31.log"
+      },
+      {
+        "command": "npm run verify:complete-edition-c1c31r",
+        "kind": "historical-verifier",
+        "exitCode": 0,
+        "log": "pw-out/c1c32r3r-verify-complete-edition-c1c31r.log"
+      },
+      {
+        "command": "npm run verify:complete-edition-c1c32",
+        "kind": "historical-verifier",
+        "exitCode": 0,
+        "log": "pw-out/c1c32r3r-verify-complete-edition-c1c32.log"
+      },
+      {
+        "command": "npm run verify:complete-edition-c1c32r",
+        "kind": "historical-verifier",
+        "exitCode": 0,
+        "log": "pw-out/c1c32r3r-verify-complete-edition-c1c32r.log"
+      },
+      {
+        "command": "npm run verify:complete-edition-c1c32r2",
+        "kind": "historical-verifier",
+        "exitCode": 0,
+        "log": "pw-out/c1c32r3r-verify-complete-edition-c1c32r2.log"
+      },
+      {
+        "command": "npm run verify:complete-edition-c1c32r2a",
+        "kind": "historical-verifier",
+        "exitCode": 1,
+        "log": "pw-out/c1c32r3r-verify-complete-edition-c1c32r2a.log",
+        "classification": "EXPECTED_SUCCESSOR_RUNTIME_DIVERGENCE",
+        "reason": "Historical runtime-source fingerprint pins room-storage.ts before Standard Quest-local checkpoint support; prior evidence/source tables are unchanged.",
+        "errorExcerpt": "Error: Historical file changed: src/game-engine/bosses/room-storage.ts"
+      },
+      {
+        "command": "npm run verify:complete-edition-c1c32r2b",
+        "kind": "historical-verifier",
+        "exitCode": 0,
+        "log": "pw-out/c1c32r3r-verify-complete-edition-c1c32r2b.log"
+      },
+      {
+        "command": "npm run verify:complete-edition-c1c32r2c",
+        "kind": "historical-verifier",
+        "exitCode": 1,
+        "log": "pw-out/c1c32r3r-verify-complete-edition-c1c32r2c.log",
+        "classification": "EXPECTED_SUCCESSOR_RUNTIME_DIVERGENCE",
+        "reason": "Superseded R2C matrix retains three v5 executor blockers; R2C-R closed them under opt-in v6 before this baseline. Historical matrix is unchanged.",
+        "errorExcerpt": "Error: C1C32R2C runtime and evidence blockers differ"
+      },
+      {
+        "command": "npm run verify:complete-edition-c1c32r2c-r",
+        "kind": "historical-verifier",
+        "exitCode": 1,
+        "log": "pw-out/c1c32r3r-verify-complete-edition-c1c32r2c-r.log",
+        "classification": "EXPECTED_SUCCESSOR_RUNTIME_DIVERGENCE",
+        "reason": "Historical closure evidence pins current runtime hashes and enumerated Ruins runtime paths; schema-2 Threat integration and added package scripts legitimately extend those paths.",
+        "errorExcerpt": "Error: Stale closure evidence"
+      },
+      {
+        "command": "npm run typecheck",
+        "kind": "typecheck",
+        "exitCode": 0,
+        "log": "pw-out/c1c32r3r-typecheck-final.log"
+      },
+      {
+        "command": "npm run build",
+        "kind": "build",
+        "exitCode": 0,
+        "acceptance": "PASS",
+        "log": "pw-out/c1c32r3r-build-final.log"
+      },
+      {
+        "command": "npm run test:e2e:necromancer-production-threat-full-path",
+        "kind": "browser",
+        "exitCode": 0,
+        "passed": 3,
+        "normalUIRouteWithoutFixtureInjection": true,
+        "log": "pw-out/c1c32r3r-browser-final.log"
+      },
+      {
+        "command": "npx playwright test e2e/c1c32r3-production-entry.spec.ts --reporter=line",
+        "kind": "browser-regression",
+        "exitCode": 0,
+        "passed": 1,
+        "log": "pw-out/c1c32r3r-entry-final.log"
+      },
+      {
+        "command": "npm run test:e2e:necromancer-foundation",
+        "kind": "browser-regression",
+        "exitCode": 0,
+        "passed": 1,
+        "log": "pw-out/c1c32r3r-foundation-browser-final.log"
+      }
+    ],
+    "successorRuntimeFingerprintDifferences": [
+      {
+        "path": "src/game-engine/ruins/battle-runtime.ts",
+        "historicalHash": "dbc67330b82ddf764c3a2a4a91c0315eabbf1e8eed75b91f29a212cf862699e5",
+        "currentHash": "e833ddd3ca5eeb9de13ff9305084b126ffd67794cb9b727f468f1b61dfe6a1ca"
+      },
+      {
+        "path": "src/game-engine/ruins/encounter-draw.ts",
+        "historicalHash": "58894cfc12c1acb811decee398fd6eaefaf769cc47d4d373764763d5fdcf5486",
+        "currentHash": "ae178656ca4b1d96770338e234496d9b4a0f4c2778965abc0f2b52358f8255ff"
+      },
+      {
+        "path": "src/game-engine/save.ts",
+        "historicalHash": "ad0f4476e1d9344cdf2a5d50042ab55ba65d0a3b0a0b814bc26e6e9d4d0e6c48",
+        "currentHash": "3fe949a74a6df5ec82e636f1f96df9e98207298783317ce0955e1718133fdfed"
+      },
+      {
+        "path": "src/types/ruins-executable.ts",
+        "historicalHash": "6f808e5a8935fcb579e184df248247f846efc4249bb10490732ca1c2974f3f77",
+        "currentHash": "cf2916c7ed366e51021f2848a23c79480731d6ca6f5a3adeee9d0615bf234fe0"
+      },
+      {
+        "path": "src/types/index.ts",
+        "historicalHash": "db689bb287eb542f21615699ebea7519f8319910588d6a202a022c7e628514e8",
+        "currentHash": "bd1b2c9d46deea9be638720f65e93b4c53683f699b9f52a22f07fc621c2dca08"
+      },
+      {
+        "path": "package.json",
+        "historicalHash": "396fa6fce6570c9229d3fa0fece1aa68a88286eae9db24972bc31f8119f29567",
+        "currentHash": "97ddc14d7a7fba832be7b8a0237cc878cd556a25112cc3fa654542185238d558"
+      }
+    ],
+    "toolingFix": {
+      "path": "src/data/darkest-dungeon/community-reference/visual-assets.ts",
+      "trigger": "Repository-wide URL expansion imported generated logs and dist assets, blocking browser reload acceptance",
+      "change": "Restrict literal URL prefix to src/assets while preserving manifest resolution and profile authority",
+      "build": "PASS"
+    }
+  },
+  "runtimeHashes": {
+    "e2e/c1c32r3-production-entry.spec.ts": "49c7a53357e11d5d8d6f4117e8aedf61a9014097ed59c280661fc1a7192fed51",
+    "package.json": "97ddc14d7a7fba832be7b8a0237cc878cd556a25112cc3fa654542185238d558",
+    "src/components/battle/ActorSlot.tsx": "be7659016a42d8304471356a18b999015a7fc485cc17a145474555412c7c65ef",
+    "src/data/bosses/threat-registry.ts": "a7b21f75ed94eba17bbdf5a7b989147f37d7a2b1bf81feee24229389225a7c75",
+    "src/data/darkest-dungeon/community-reference/visual-assets.ts": "3e35bf6b18714399e815d07aeafbf0f11542c20bdd2c6f125fa2836bff26cd2e",
+    "src/game-engine/battle.ts": "3fc306081f95bc0345f43904976abc3c5571da59e15057789d6081e5675d3afd",
+    "src/game-engine/bosses/foundation.ts": "093b944db7a4341f8de98dd346ce633d676d30c45a402e2fd9788a510406b042",
+    "src/game-engine/bosses/room-storage.ts": "1dd82ed1f61d471ee14d1277d19064cfb2a045b4aa90ac1ce393afbf23027290",
+    "src/game-engine/bosses/threat-checkpoint.ts": "e6bb9dc675abb16ec281dcbf3c9776817dde869192628f75da6a8bfa0660a26b",
+    "src/game-engine/campaign/campaign-orchestrator.ts": "22a89adfb0ada5e74476bfc7c6db8edc8a2218a6de8526fc5e78a3874ccac813",
+    "src/game-engine/campaign/threat-selection.ts": "05e3832b175341f414c691c92938166637683b2b6513460433ba8162c209f6cb",
+    "src/game-engine/commands/battle.ts": "7d89f72052b1d8806a77d6935cce9111a41cca9bd689d545902633eea7c746dc",
+    "src/game-engine/commands/boss-foundation.ts": "4d3c9ce8cf17bd512b563a9d3dcb0c25ff1a3a2880f6694c6c3e6f508763abac",
+    "src/game-engine/commands/dungeon.ts": "30b42fe54f8bb4b4673b8f0a87b8ddc2090929cca8a915bb0c6f7927ff0f85b1",
+    "src/game-engine/commands/quest.ts": "d26bb4f6a6196e8e827bdb6ff826ce750d8ee532672b44f32d50d59e5613eeeb",
+    "src/game-engine/dungeon.ts": "8f60e888f35c50d086d9049790d551cd5752be561de8a1e064f4e8751c0a4ccb",
+    "src/game-engine/quest-result.ts": "0da37ad5d01f8d61fee14c512baa835ad86a18ca0a7028ef6f0ecf63e483e04a",
+    "src/game-engine/replacement.ts": "cd1c269cde9e8073cdbdb09413c516e76900211140aa7c6bed5707d6c58e9cfc",
+    "src/game-engine/ruins/battle-runtime.ts": "e833ddd3ca5eeb9de13ff9305084b126ffd67794cb9b727f468f1b61dfe6a1ca",
+    "src/game-engine/ruins/encounter-draw.ts": "ae178656ca4b1d96770338e234496d9b4a0f4c2778965abc0f2b52358f8255ff",
+    "src/game-engine/save.ts": "3fe949a74a6df5ec82e636f1f96df9e98207298783317ce0955e1718133fdfed",
+    "src/pages/BattlePage.tsx": "256b1d888b6e1f2e5ab9f8e0100e858dcdcd3a388b015ffc54e659a275251fba",
+    "src/pages/DungeonExplorePage.tsx": "c1b57ea2a37832f9fbbdc3c1b2bf01b7558081052c6eab4e5029f5d82094f740",
+    "src/pages/QuestSelectPage.tsx": "5fe72930791d47e794c4d89c24e58832d0845cbb644b5abc7e0d0f6f7ab8ed60",
+    "src/store/useGameStore.ts": "3f1421daa95d048540c9b8f5fa982cb26a78ee6d24b57ee7d380a3be89b58ce9",
+    "src/types/boss-runtime.ts": "9390589d351d752fd37a8c279555e5e9ed19be8006dd4c229dac449a76af53b8",
+    "src/types/index.ts": "bd1b2c9d46deea9be638720f65e93b4c53683f699b9f52a22f07fc621c2dca08",
+    "src/types/ruins-executable.ts": "cf2916c7ed366e51021f2848a23c79480731d6ca6f5a3adeee9d0615bf234fe0",
+    "e2e/c1c32r3r-production-threat-full-path.spec.ts": "be7d11e9746819ea941f665a4ba5d469a6da249e95f7435485fc0b439eabbdcd",
+    "scripts/audit/c1c32r3r-full-path.ts": "7f2d72fce3b305ef146144a4af42a3958bfc2fb4b8d3f6e1a614e031d9add1bc",
+    "scripts/audit/c1c32r3r-regression.ps1": "9bb6f80e8f6a568817dc82293b97d660f2664778f64263c39aa8b020d5c6c6e8",
+    "scripts/audit/c1c32r3r-replay.ts": "322ab580d84446058ee7d593d416979fb0eb3d3c4634edec9fcc8ece5257b07d",
+    "src/audit/c1c32r3r-production-threat.test.ts": "947c48c91ff27deada16227f2273c58b05b674ea210b05445b601f366b6a716b",
+    "src/data/bosses/production-necromancer-threats.ts": "a071caa6093538cf71944472848578c00d6a13b1fb545590388e4e487cb4735c",
+    "src/game-engine/bosses/quest-threat-history.ts": "f6d1465a39505c5903a51cb970f66c6ef8a453860f222cffa2443ef23f16127c",
+    "src/game-engine/bosses/threat-semantics.ts": "8b5087088b633676241d7d0edbc7a95407d0097f8c55660a73da63cadf683519",
+    "src/game-engine/commands/ordinary-ruins.ts": "24eaaa5c5e5a07c9130d7918295e62c749c924b07328b981f2d7c61fdcd095ff",
+    "src/game-engine/commands/party-deployment.ts": "f60a86c6ede92ead6ca5ea15f70348dbbecf8a6cea59056f58b4cb03cdaf3bdb",
+    "src/game-engine/ruins/production-threat-runtime.ts": "cfc61a559790027323bbeac208f4cdf6b2e54472991c57348445164590744478"
+  },
+  "observationHashes": {
+    "docs/data/complete-edition/c1c32r3r-scenario-c-proof.json": "8f2c3ec05ec9be92d523ae546d6c38f96c42a38f6cdded1f7bbda31b3aeda626",
+    "docs/data/complete-edition/c1c32r3r-validation-observation.json": "7c2b85f9e63aa4d7e0b47460613911113a3e804383b0c871cda84918c49ab76e",
+    "docs/data/complete-edition/c1c32r3r-browser-level1-observation.json": "086116c14ce02d3696a985effc0384b8a6dcbd1825ffd877527c8279a8642798",
+    "docs/data/complete-edition/c1c32r3r-browser-level1-replay-states.json": "7f1d07475746b59587d864345c8700eb321d4589832d3a08371bb69a7ed04dd6",
+    "docs/data/complete-edition/c1c32r3r-browser-level2-observation.json": "ff850bdd42909ef9c5b57b3a404e0631e13ec0d402caf15f2e8e011a05ae5f15",
+    "docs/data/complete-edition/c1c32r3r-browser-level2-replay-states.json": "97d653a70aac5f7b878e9ae849897b91118a272bb51c3a8740e421c9becbb923",
+    "docs/data/complete-edition/c1c32r3r-browser-level3-observation.json": "421225bbf32bbe0fd71c63acbb2b1127fe4eb70534d64169b959702ed9790a39",
+    "docs/data/complete-edition/c1c32r3r-browser-level3-replay-states.json": "8e43a1faed538c4ad5003b2ec5db6606e1eca92a2c48e34927a208f86a839dcd"
+  }
+}

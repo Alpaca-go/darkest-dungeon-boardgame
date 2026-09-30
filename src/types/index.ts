@@ -222,6 +222,8 @@ export interface DungeonRoom {
   sourceRoomToken?: import('./content-runtime').QuestRoomTokenType;
   /** Community Curio rooms cannot clear until the guard roll/battle resolves and a Hero interacts. */
   curioGuardResolved?: boolean;
+  /** Persisted before initializing a source-bound production guarded Curio battle. */
+  curioGuardRoll?: number;
 }
 
 /** Phase 8B：Curio 定义（最小实现，仅承载 Disease 感染来源）。 */
@@ -794,6 +796,10 @@ export interface CampaignState {
   ruinsRuleSetSelection?: import('../game-engine/rules/ruins-v4').RuinsVersionSelection | import('../game-engine/rules/ruins-v5').RuinsV5Selection | import('../game-engine/rules/ruins-v6').RuinsV6Selection;
   ruinsDrawState?: import('../game-engine/ruins/encounter-draw').RuinsDrawState;
   necromancerPreparationDay?: import('../game-engine/campaign/necromancer-preparation-day').NecromancerPreparationDay;
+  /** Settled Standard Quest checkpoints, distinct from completed Boss encounters. */
+  necromancerQuestThreatHistory?: Array<{ questRunId: string; activeThreatId: string;
+    checkpoint: import('./boss-runtime').BossEncounterState;
+    drawState?: import('../game-engine/ruins/encounter-draw').RuinsDrawState }>;
   necromancerGraveyardReceipts?: import('./necromancer-dependencies').GraveyardReceipt[];
   bossRoomStorage?: { roomId: string; roomCardId: number; tileId: string; encounterId: string; lifecycle: 'RESERVED' | 'IN_PLAY' | 'RETURNED' };
   /** Physical ownership receipts for an encounter terminated before Boss victory. */

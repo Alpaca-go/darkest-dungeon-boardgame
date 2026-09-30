@@ -14,7 +14,8 @@ test('new Complete Edition player explicitly selects v6 before Threat initializa
   await page.getByTestId('migrate-hero-dodge-v2').click();
   await page.getByTestId('select-production-ruins-v6').click();
   await expect(page.getByTestId('select-production-ruins-v6')).toHaveCount(0);
-  await page.reload();
+  await page.reload({ waitUntil: 'domcontentloaded' });
+  await expect(page.getByRole('heading', { name: '任务选择', exact: true })).toBeVisible({ timeout: 60_000 });
   await expect(page.getByTestId('select-production-ruins-v6')).toHaveCount(0);
   await expect(page.getByTestId('migrate-hero-dodge-v2')).toHaveCount(0);
   // Read-only inspection of the persisted result; all creation and selections above use player UI.

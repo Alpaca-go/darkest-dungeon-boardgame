@@ -21,7 +21,7 @@ export const RUINS_V5_EXECUTOR_BLOCKERS = [
 ] as const;
 export const RUINS_PRODUCTION_EXECUTOR_BLOCKERS: readonly string[] = [];
 
-function makeRuinsMonsterUnit(encounter: OrdinaryRuinsEncounter, placement: OrdinaryRuinsEncounter['monsters'][number]): BattleUnit {
+export function makeRuinsMonsterUnit(encounter: OrdinaryRuinsEncounter, placement: OrdinaryRuinsEncounter['monsters'][number]): BattleUnit {
   const definition = ruinsMonster(placement.definitionId, encounter.ruleSetVersion);
   return {
     id: `ruins:${encounter.encounterId}:${placement.copyId}`, name: definition.printedName,
@@ -119,6 +119,45 @@ export function validateOrdinaryRuinsBattle(battle: BattleState, draw?: RuinsDra
     }
   }
   const units = [...battle.heroes, ...battle.monsters];
+  const schema2 = context.executionSchemaVersion === 2;
+  const retired = schema2 ? context.retiredMonsterInstances ?? [] : [];
+  const historicalUnits = [...units, ...retired.map(entry => entry.unit)];
+  if (context.executionSchemaVersion !== undefined && !schema2) throw new Error('Unknown Ruins execution schema');
+  if (schema2) {
+    if (context.ruleSetVersion !== RUINS_V6 || !context.threatEncounterId || !context.unitPhysicalBindings
+      || !context.retiredMonsterInstances || !Array.isArray(context.pendingThreatDeathIds)
+      || new Set(historicalUnits.map(u => u.id)).size !== historicalUnits.length
+      || Object.keys(context.unitPhysicalBindings).length !== battle.monsters.length + retired.length)
+      throw new Error('Schema 2 instance history invalid');
+    const liveCopies = new Set<string>();
+    for (const unit of [...battle.monsters, ...retired.map(d => d.unit)]) {
+      const binding = context.unitPhysicalBindings[unit.id];
+      if (!binding || binding.definitionId !== unit.sourceId || !context.physicalCopyIds.includes(binding.copyId)
+        || !ruinsMonster(unit.sourceId, RUINS_V6).physicalCopyIds.includes(binding.copyId)
+        || !Number.isInteger(binding.generation) || binding.generation < 0)
+        throw new Error('Schema 2 physical binding invalid');
+      if (unit.id !== `ruins:${context.encounterId}:${binding.copyId}${binding.generation ? `:generation:${binding.generation}` : ''}`)
+        throw new Error('Schema 2 instance identity invalid');
+      if (binding.generation === 0 ? binding.predecessorUnitId !== null
+        : !retired.some(d => d.unit.id === binding.predecessorUnitId && d.copyId === binding.copyId
+          && d.generation === binding.generation - 1)) throw new Error('Schema 2 predecessor invalid');
+      if (battle.monsters.includes(unit)) {
+        if (liveCopies.has(binding.copyId)) throw new Error('Schema 2 physical copy has duplicate active instance');
+        liveCopies.add(binding.copyId);
+      }
+    }
+    for (const death of retired) {
+      const binding = context.unitPhysicalBindings[death.unit.id];
+      if (death.unit.isAlive || death.unit.hp > 0 || binding.copyId !== death.copyId
+        || binding.definitionId !== death.definitionId || binding.generation !== death.generation
+        || !tile.areas.some(a => a.id === death.areaId) || !tile.areas.some(a => a.id === death.correspondingAreaId)
+        || !death.deathEventId) throw new Error('Schema 2 death snapshot invalid');
+    }
+    if (context.pendingThreatDeathIds.some(id => !battle.monsters.some(m => m.id === id && !m.isAlive)))
+      throw new Error('Schema 2 queued deaths invalid');
+  } else if (context.threatEncounterId !== undefined || context.unitPhysicalBindings !== undefined
+    || context.retiredMonsterInstances !== undefined || context.pendingThreatDeathIds !== undefined
+    || context.pendingReanimationChoice !== undefined) throw new Error('Historical Battle cannot acquire Threat bridge fields');
   validateLargeMovementContract(battle);
   if (!battle.largeMovementContract || JSON.stringify(context.placements) !== JSON.stringify(battle.largeMovementContract.placements))
     throw new Error('Ordinary Ruins spatial ledgers differ');
@@ -126,7 +165,7 @@ export function validateOrdinaryRuinsBattle(battle: BattleState, draw?: RuinsDra
     || Object.keys(context.placements).length !== units.length
     || Object.keys(context.occupiedSpaces).length !== units.length
     || Object.keys(context.definitionIds).length !== battle.monsters.length
-    || context.physicalCopyIds.length !== battle.monsters.length
+    || !schema2 && context.physicalCopyIds.length !== battle.monsters.length
     || new Set(context.physicalCopyIds).size !== context.physicalCopyIds.length)
     throw new Error('Ordinary Ruins Battle unit binding mismatch');
   for (const unit of units) {
@@ -154,8 +193,8 @@ export function validateOrdinaryRuinsBattle(battle: BattleState, draw?: RuinsDra
     || battle.initiativeOrder.some(id => !units.some(unit => unit.id === id))) throw new Error('Ordinary Ruins replay state invalid');
   for (const [index, entry] of context.events.entries()) {
     if (entry.eventId !== `${context.encounterId}:event:${index + 1}` || entry.ruleSetVersion !== context.ruleSetVersion
-      || !units.some(unit => unit.id === entry.actorId)
-      || entry.targetIds.some(id => !units.some(unit => unit.id === id))
+      || !historicalUnits.some(unit => unit.id === entry.actorId)
+      || entry.targetIds.some(id => !historicalUnits.some(unit => unit.id === id))
       || entry.parentEventId && !context.events.slice(0, index).some(prior => prior.eventId === entry.parentEventId))
       throw new Error('Ordinary Ruins event sequence/causality invalid');
   }
@@ -196,14 +235,17 @@ export function validateOrdinaryRuinsBattle(battle: BattleState, draw?: RuinsDra
     const encounter = draw.encounters.find(entry => entry.encounterId === context.encounterId && !entry.returned);
     if (!encounter || encounter.tileId !== context.tileId || encounter.ruleSetVersion !== context.ruleSetVersion
       || JSON.stringify(context.physicalCopyIds) !== JSON.stringify(encounter.monsters.map(entry => entry.copyId))
-      || encounter.monsters.some((entry, index) => context.definitionIds[battle.monsters[index]?.id] !== entry.definitionId))
+      || (schema2 ? encounter.monsters.some(entry => !Object.values(context.unitPhysicalBindings!).some(binding =>
+        binding.copyId === entry.copyId && binding.definitionId === entry.definitionId && binding.generation === 0))
+        : encounter.monsters.some((entry, index) => context.definitionIds[battle.monsters[index]?.id] !== entry.definitionId)))
       throw new Error('Ordinary Ruins Battle differs from physical draw');
   }
 }
 
 export function settleOrdinaryRuinsBattle(draw: RuinsDrawState, battle: BattleState): RuinsDrawState {
   validateOrdinaryRuinsBattle(battle, draw);
-  if (battle.status === 'active' || battle.pendingMonsterAttack || battle.ruinsContext?.pendingChoice)
+  if (battle.status === 'active' || battle.pendingMonsterAttack || battle.ruinsContext?.pendingChoice
+    || battle.ruinsContext?.pendingReanimationChoice || battle.ruinsContext?.pendingThreatDeathIds?.length)
     throw new Error('Ordinary Ruins Battle is unsettled');
   return returnOrdinaryRuinsEncounter({ ...draw, rngCursor: battle.ruinsContext!.rngCursor,
     rngCalls: battle.ruinsContext!.rngCalls }, battle.ruinsContext!.encounterId);

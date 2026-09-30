@@ -15,6 +15,7 @@ import { evaluateQuestRules } from '../quests/quest-special-rule-runtime';
 
 import { beginExplorationMoveTrinketAction } from '../trinkets/dungeon-trinket-bridge';
 import { necromancerQuestEntryError } from '../bosses/production-dependency-gate';
+import { hasProductionOrdinaryThreat } from '../ruins/production-threat-runtime';
 
 export type EnterRoomError =
   | 'cannot-move'
@@ -53,6 +54,7 @@ export function enterDungeonRoom(
   // battle command yet. Never let its guarded Rooms silently use prototype encounters.
   const room = campaign.dungeon.rooms.find(r => r.id === roomId)!;
   if (campaign.bossEncounterCheckpoint?.checkpointContext?.heroDodgeBindings
+    && !hasProductionOrdinaryThreat(campaign)
     && ['lair', 'treasure', 'curio'].includes(room.sourceRoomToken ?? '')) {
     return { ok: false, campaign, error: 'necromancer-threat-domain-bridge-unbound' };
   }

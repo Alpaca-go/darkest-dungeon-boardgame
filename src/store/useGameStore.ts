@@ -1,4 +1,6 @@
 import { create } from 'zustand';
+import { commitOrdinaryRuinsAreaMove, commitOrdinaryRuinsChoice, commitOrdinaryRuinsInteraction } from '../game-engine/commands/ordinary-ruins';
+import { selectPartyDeployment } from '../game-engine/commands/party-deployment';
 import { explicitlyMigrateHeroDodgeToV2 } from '../game-engine/rules/hero-dodge-versioning';
 import { selectProductionRuinsV6, commitNecromancerProductionQuestSelection } from '../game-engine/commands/necromancer-production-entry';
 import { applyBossThreatCheckpointInput, applyBossFoundationInput } from '../game-engine/commands/boss-foundation';
@@ -140,6 +142,9 @@ interface GameStore {
   migrateHeroDodgeToV2: () => void;
   selectProductionRuinsV6: () => void;
   battleHeroAreaMove: (areaId: string) => void;
+  selectPartyDeployment(heroInstanceId: string, stance: import('../types').Stance): void;
+  battleOrdinaryChoice(choiceId: string, selectedId: string): void;
+  battleRoomInteract(ruleId: string): void;
   commitBossChoice(choiceId: string, selectedId: string): void;
   beginGraveyardGuard(): void;
   commitGraveyardGuard(useEffect: boolean): void;
@@ -315,10 +320,23 @@ export const useGameStore = create<GameStore>((set, get) => {
     },
     battleHeroAreaMove: (areaId) => {
       const c=get().campaign;
+      if (c?.battle?.ruinsContext) { commit(commitOrdinaryRuinsAreaMove(c, areaId)); return; }
       if (!c?.battle?.bossEncounter || !c.battle.activeActorId || c.battle.pendingMonsterAttack || c.battle.bossEncounter.pendingChoice) return;
       const changed=applyBossFoundationInput(c,{type:'MOVE_HERO_AREA',heroId:c.battle.activeActorId,areaId});
       const battle=changed.battle!.currentActionPoints===0 ? advanceTurn(changed.battle!) : changed.battle!;
       commit(settleBattleState({...changed,battle}).campaign);
+    },
+    selectPartyDeployment: (heroInstanceId, stance) => {
+      const c = get().campaign;
+      if (c) commit(selectPartyDeployment(c, heroInstanceId, stance));
+    },
+    battleOrdinaryChoice: (choiceId, selectedId) => {
+      const c = get().campaign;
+      if (c?.battle?.ruinsContext) commit(commitOrdinaryRuinsChoice(c, choiceId, selectedId));
+    },
+    battleRoomInteract: (ruleId) => {
+      const c = get().campaign;
+      if (c?.battle?.ruinsContext) commit(commitOrdinaryRuinsInteraction(c, ruleId));
     },
     commitBossChoice: (choiceId, selectedId) => {
       const c = get().campaign;

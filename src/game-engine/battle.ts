@@ -13,6 +13,7 @@ import { finishRuinsAttack, prepareRuinsMonsterTurn, resolveRuinsAttackValues } 
 import { withRuinsRandom, withRuinsBattleSources, recordRuinsEvent } from './ruins/printed-effect-runtime';
 import { applyRuinsEnemyDamage, tickRuinsConditions } from './ruins/condition-runtime';
 import { isRuinsHealingProhibited, runRuinsRoomTrigger } from './ruins/room-runtime';
+import { captureOrdinaryThreatDeaths } from './ruins/production-threat-runtime';
 import { finishSourceMonsterAttack, applyBossRuntimeInput, checkBossRuntimeEnd, withBossEncounterSources } from './bosses/foundation';
 import { getHeroCombatDefinition } from '../data/progression/hero-level-registry';
 import { createId, d10, nowIso } from './random';
@@ -342,7 +343,8 @@ export function initBattle(campaign: CampaignState, roomId: string): CampaignSta
 
 /** 推进到下一个行动者；自动跳过死亡/Stun 单位，并在怪物回合自动执行其动作。 */
 export function advanceTurn(state: BattleState): BattleState {
-  if (state.bossEncounter?.pendingChoice || state.ruinsContext?.pendingChoice || state.pendingMonsterAttack) return state;
+  if (state.ruinsContext?.pendingThreatDeathIds?.length || state.ruinsContext?.pendingReanimationChoice) return state;
+  if (state.bossEncounter?.pendingChoice || (state.ruinsContext?.pendingChoice || state.ruinsContext?.pendingReanimationChoice || state.ruinsContext?.pendingThreatDeathIds?.length) || state.pendingMonsterAttack) return state;
   if (state.bossEncounter) return withBossEncounterSources(state, s => advanceTurnInternal(s));
   if (state.ruinsContext) return withRuinsBattleSources(structuredClone(state), advanceTurnInternal);
   return advanceTurnInternal(state);
@@ -353,7 +355,7 @@ function advanceTurnInternal(state: BattleState): BattleState {
   let s: BattleState = state.ruinsContext && state.activeActorId
     ? runRuinsRoomTrigger(state, 'END_TURN', state.activeActorId) : state;
   if (s.ruinsContext) s = checkEnd(s);
-  if (s.ruinsContext?.pendingChoice || s.status !== 'active') return s;
+  if (s.ruinsContext?.pendingChoice || s.ruinsContext?.pendingReanimationChoice || s.ruinsContext?.pendingThreatDeathIds?.length || s.status !== 'active') return s;
   s = clearTurnBonuses({ ...s });
   let idx = s.initiativeIndex;
   let guard = 0;
@@ -365,7 +367,7 @@ function advanceTurnInternal(state: BattleState): BattleState {
       if (s.ruinsContext) {
         s = runRuinsRoomTrigger(s, 'ROUND_END');
         s = checkEnd(s);
-        if (s.ruinsContext?.pendingChoice || s.status !== 'active') return s;
+        if (s.ruinsContext?.pendingChoice || s.ruinsContext?.pendingReanimationChoice || s.ruinsContext?.pendingThreatDeathIds?.length || s.status !== 'active') return s;
       }
       s = { ...s, round: s.round + 1 };
       if (s.roundLimitPolicy !== 'not-counted' && s.round > s.maxRounds) {
@@ -410,7 +412,7 @@ function advanceTurnInternal(state: BattleState): BattleState {
     // 激活该单位：Bleed/Blight 合并为同一批次，只经过一次统一伤害入口
     s = { ...s, initiativeIndex: idx, activeActorId: id };
     s = activateUnitAfterMental(s, id);
-    if (s.status !== 'active') return s;
+    if (s.status !== 'active' || s.ruinsContext?.pendingThreatDeathIds?.length || s.ruinsContext?.pendingReanimationChoice) return s;
     const activated = findUnit(s, id);
     if (!activated || !activated.isAlive) continue; // 持续伤害致死，跳过
 
@@ -419,7 +421,7 @@ function advanceTurnInternal(state: BattleState): BattleState {
       if (activated.side === 'monster') {
         s = runRuinsRoomTrigger(s, 'END_TURN', id);
         s = checkEnd(s);
-        if (s.status !== 'active') return s;
+        if (s.status !== 'active' || s.ruinsContext?.pendingThreatDeathIds?.length || s.ruinsContext?.pendingReanimationChoice) return s;
         continue;
       }
       s = { ...s, currentActionPoints: Math.max(0, s.currentActionPoints - 1) };
@@ -430,7 +432,7 @@ function advanceTurnInternal(state: BattleState): BattleState {
         s = runMonsterTurn(s, id);
         if (s.bossEncounter?.pendingChoice || s.pendingMonsterAttack) return s;
         s = checkEnd(s);
-        if (s.status !== 'active') return s;
+        if (s.status !== 'active' || s.ruinsContext?.pendingThreatDeathIds?.length || s.ruinsContext?.pendingReanimationChoice) return s;
         continue;
       }
       if (s.stagedIncomingAttacks) {
@@ -439,7 +441,7 @@ function advanceTurnInternal(state: BattleState): BattleState {
         if (s.ruinsContext) {
           s = runRuinsRoomTrigger(s, 'END_TURN', id);
           s = checkEnd(s);
-          if (s.status !== 'active') return s;
+          if (s.status !== 'active' || s.ruinsContext?.pendingThreatDeathIds?.length || s.ruinsContext?.pendingReanimationChoice) return s;
         }
         // No legal attack (for example, every target is out of range): the
         // preparation helper may move/log, but there is no reaction to stage.
@@ -448,7 +450,7 @@ function advanceTurnInternal(state: BattleState): BattleState {
       }
       s = runMonsterTurn(s, id);
       s = checkEnd(s);
-      if (s.status !== 'active') return s;
+      if (s.status !== 'active' || s.ruinsContext?.pendingThreatDeathIds?.length || s.ruinsContext?.pendingReanimationChoice) return s;
       continue; // 继续推进，越过怪物
     }
     return s; // 轮到英雄，交还玩家控制
@@ -472,7 +474,7 @@ function activateUnitAfterMental(state: BattleState, id: string): BattleState {
   for (const m of sof.messages) s = pushBattleLog(s, m, sof.heroDied ? 'danger' : 'warning');
   if (sof.heroDied || (sof.unit.side === 'monster' && !sof.unit.isAlive)) {
     s = checkEnd(s);
-    if (s.status !== 'active') return s;
+    if (s.status !== 'active' || s.ruinsContext?.pendingThreatDeathIds?.length || s.ruinsContext?.pendingReanimationChoice) return s;
   }
   const after = findUnit(s, id);
   if (!after || !after.isAlive) return s;
@@ -509,7 +511,7 @@ export function resumeTurnAfterMentalCheck(state: BattleState): BattleState {
   const unit = findUnit(s, id);
   if (!unit || !unit.isAlive) {
     s = checkEnd(s);
-    if (s.status !== 'active') return s;
+    if (s.status !== 'active' || s.ruinsContext?.pendingThreatDeathIds?.length || s.ruinsContext?.pendingReanimationChoice) return s;
     return advanceTurn(s);
   }
   if (unit.stunned > 0) {
@@ -517,7 +519,7 @@ export function resumeTurnAfterMentalCheck(state: BattleState): BattleState {
     return advanceTurn(s);
   }
   s = activateUnitAfterMental(s, id);
-  if (s.status !== 'active') return s;
+  if (s.status !== 'active' || s.ruinsContext?.pendingThreatDeathIds?.length || s.ruinsContext?.pendingReanimationChoice) return s;
   const after = findUnit(s, id);
   if (!after || !after.isAlive) return advanceTurn(s);
   if (after.side === 'hero' && s.currentActionPoints <= 0) return advanceTurn(s);
@@ -539,7 +541,7 @@ function applyStunSkip(state: BattleState, id: string): BattleState {
 
 /** 英雄是否可朝某方向移动（用于 UI 禁用判定）。 */
 export function canHeroMove(state: BattleState, unitId: string, dir: -1 | 1): boolean {
-  if (state.bossEncounter?.pendingChoice) return false;
+  if (state.bossEncounter?.pendingChoice || state.ruinsContext?.pendingChoice || state.ruinsContext?.pendingReanimationChoice || state.ruinsContext?.pendingThreatDeathIds?.length) return false;
   const actor = findUnit(state, unitId);
   if (!actor || actor.side !== 'hero' || actor.id !== state.activeActorId) return false;
   if (state.currentActionPoints <= 0) return false;
@@ -550,7 +552,7 @@ export function canHeroMove(state: BattleState, unitId: string, dir: -1 | 1): bo
 
 /** 英雄移动一个位置（消耗 1 行动点）。 */
 export function heroMove(state: BattleState, unitId: string, dir: -1 | 1): BattleState {
-  if (state.bossEncounter?.pendingChoice) return state;
+  if (state.bossEncounter?.pendingChoice || state.ruinsContext?.pendingChoice || state.ruinsContext?.pendingReanimationChoice || state.ruinsContext?.pendingThreatDeathIds?.length) return state;
   const actor = findUnit(state, unitId);
   if (!actor || !canHeroMove(state, unitId, dir)) return state;
   const np = actor.position + dir;
@@ -566,7 +568,7 @@ export function heroMove(state: BattleState, unitId: string, dir: -1 | 1): Battl
 
 /** 当前行动英雄对某技能可合法选中的目标 id。 */
 export function legalTargetsForActor(state: BattleState, skillId: string): string[] {
-  if (state.bossEncounter?.pendingChoice || state.ruinsContext?.pendingChoice) return [];
+  if (state.bossEncounter?.pendingChoice || (state.ruinsContext?.pendingChoice || state.ruinsContext?.pendingReanimationChoice || state.ruinsContext?.pendingThreatDeathIds?.length)) return [];
   const actor = getActiveUnit(state);
   if (!actor) return [];
   const raw = getSkillById(skillId);
@@ -629,7 +631,7 @@ export function heroSkillActionError(
   targetId: string
 ): string | null {
   if (state.bossEncounter?.pendingChoice) return '请先完成 Boss 待决选择。';
-  if (state.ruinsContext?.pendingChoice) return '请先完成 Room 待决选择。';
+  if ((state.ruinsContext?.pendingChoice || state.ruinsContext?.pendingReanimationChoice || state.ruinsContext?.pendingThreatDeathIds?.length)) return '请先完成 Room 待决选择。';
   const actor = findUnit(state, unitId);
   if (!actor || actor.side !== 'hero' || actor.id !== state.activeActorId) return '当前不是该英雄的回合。';
   if (state.currentActionPoints <= 0) return '行动点不足。';
@@ -677,13 +679,13 @@ function heroUseSkillInternal(
   finalDamageOverride?: number | null,
 ): BattleState {
   const actor = findUnit(state, unitId);
-  if (state.bossEncounter?.pendingChoice) return state;
+  if (state.bossEncounter?.pendingChoice || state.ruinsContext?.pendingChoice || state.ruinsContext?.pendingReanimationChoice || state.ruinsContext?.pendingThreatDeathIds?.length) return state;
   if (!actor || actor.side !== 'hero' || actor.id !== state.activeActorId) return state;
   if (state.currentActionPoints <= 0) return state;
   const raw = getSkillById(skillId);
   if (!raw) return state;
   const skill = normalizeHeroSkill(raw);
-  if (state.ruinsContext?.pendingChoice) return state;
+  if ((state.ruinsContext?.pendingChoice || state.ruinsContext?.pendingReanimationChoice || state.ruinsContext?.pendingThreatDeathIds?.length)) return state;
   if (skill.kind === 'heal' && isRuinsHealingProhibited(state, targetId)) throw new Error('Room passive prohibits healing');
 
   if (!isSkillUsableFrom(actor, skill)) {
@@ -870,7 +872,7 @@ export function commitHeroAttackResolution(
 
 /** 英雄主动结束回合。 */
 export function endHeroTurn(state: BattleState, unitId: string): BattleState {
-  if (state.bossEncounter?.pendingChoice) return state;
+  if (state.bossEncounter?.pendingChoice || state.ruinsContext?.pendingChoice || state.ruinsContext?.pendingReanimationChoice || state.ruinsContext?.pendingThreatDeathIds?.length) return state;
   const actor = findUnit(state, unitId);
   if (!actor || actor.side !== 'hero' || actor.id !== state.activeActorId) return state;
   return advanceTurn(state);
@@ -1192,12 +1194,14 @@ export function runMonsterTurn(state: BattleState, monsterId: string): BattleSta
  * 仅当所有英雄 isAlive=false（永久死亡）才判负。
  */
 export function checkEnd(state: BattleState): BattleState {
+  state = captureOrdinaryThreatDeaths(state);
+  if (state.ruinsContext?.pendingThreatDeathIds?.length || state.ruinsContext?.pendingReanimationChoice) return state;
   if (state.bossEncounter) {
     state = checkBossRuntimeEnd(state);
     if (state.status !== 'active' || state.bossEncounter?.pendingChoice) return state;
     const deadIds = state.monsters.filter(u => !u.isAlive).map(u => u.id);
     if (deadIds.length) state = applyBossRuntimeInput(state, { type: 'DEATHS', instanceIds: deadIds });
-    if (state.bossEncounter?.pendingChoice) return state;
+    if (state.bossEncounter?.pendingChoice || state.ruinsContext?.pendingChoice || state.ruinsContext?.pendingReanimationChoice || state.ruinsContext?.pendingThreatDeathIds?.length) return state;
   }
   if (state.status !== 'active') return state;
   const monstersAlive = state.monsters.some((m) => m.isAlive);

@@ -78,7 +78,8 @@ export function applyBossFoundationInput(campaign: CampaignState, input: BossRun
   let next = { ...campaign, battle, ...(battle.necromancerFigureBinding
     ? { ruinsBoneFigureSupply: battle.necromancerFigureBinding.supply,
       ...(battle.necromancerFigureBinding.draw ? { ruinsDrawState: battle.necromancerFigureBinding.draw } : {}) } : {}) };
-  if (battle.bossEncounter!.side === 'ABILITY' && campaign.activeThreatRuntime?.active) {
+  if (battle.bossEncounter!.side === 'ABILITY' && campaign.activeThreatRuntime?.active
+    && battle.bossEncounter!.checkpointContext?.questScope !== 'FACE_THE_THREAT') {
     withBossEncounterSources(battle, () => {
       next = { ...next, activeThreatRuntime: { ...campaign.activeThreatRuntime!, active: false, deactivatedAt: nowIso(), deactivationTransactionId: `${battle.battleId}:threat-flip` } };
       return battle;
@@ -125,13 +126,19 @@ export function commitBossFoundationVictory(campaign: CampaignState): CampaignSt
 
 /** Production selector reserves one versioned Threat encounter and one authoritative Room card/tile. */
 export function reserveProductionBossEncounter(campaign: CampaignState): CampaignState {
-  if (campaign.runtimeContentProfile !== 'community-complete-edition' || campaign.currentQuestId !== 'face-the-threat'
+  if (campaign.runtimeContentProfile !== 'community-complete-edition'
+    || campaign.currentQuestId !== 'face-the-threat' && (!campaign.activeThreatRuntime?.active
+      || !campaign.activeThreatRuntime.bossDefinitionId.startsWith('necromancer-source-level-'))
     || campaign.campaignProgress.activeBossFamilyId !== 'necromancer') return campaign;
   if (campaign.bossEncounterCheckpoint) { validateThreatCheckpoint(campaign, campaign.bossEncounterCheckpoint); return campaign; }
+  if (campaign.ruinsDrawState?.encounters.some(e => !e.returned)) throw new Error('Previous Quest still owns ordinary encounter cards');
+  if (campaign.ruinsDrawState && campaign.necromancerQuestThreatHistory?.some(h => h.drawState))
+    campaign = { ...campaign, ruinsDrawState: undefined };
   const level = campaign.campaignProgress.campaignLevel;
   const gate = necromancerProductionDependencyGate(campaign, level);
   if (!gate.enabled) throw new Error('Production Boss dependencies unavailable');
-  const room = campaign.dungeon?.rooms.find(r=>r.type==='objective');
+  const faceTheThreat = campaign.currentQuestId === 'face-the-threat';
+  const room = campaign.dungeon?.rooms.find(r => faceTheThreat ? r.type === 'objective' : r.id === campaign.dungeon?.currentRoomId);
   if (!room) throw new Error('Production Boss objective Room missing');
   const version = campaignHeroDodgeRuleSetVersion(campaign);
   const definition = resolveBossDefinition('necromancer', level, version);
@@ -143,10 +150,15 @@ export function reserveProductionBossEncounter(campaign: CampaignState): Campaig
   const e = bound.battle!.bossEncounter!;
   e.checkpointContext!.heroDodgeBindings = bindings;
   e.checkpointContext!.dependencyAuthority = 'OFFICIAL_SOURCE';
-  return { ...campaign, bossEncounterCheckpoint: e, bossRoomStorage: { roomId: room.id, roomCardId: definition.roomCardId,
-    tileId: 'tile-10', encounterId: e.checkpointContext!.encounterId, lifecycle: 'RESERVED' } };
+  if (!faceTheThreat || campaign.ruinsRuleSetSelection?.ruleSetVersion === 'C1C32R2C-R-DIGITAL-DEFAULT-v6')
+    e.checkpointContext!.questScope = faceTheThreat ? 'FACE_THE_THREAT' : 'STANDARD';
+  const prior = campaign.necromancerQuestThreatHistory?.filter(h => h.activeThreatId === e.checkpointContext!.threatId).at(-1);
+  if (prior) e.threatState.permanentlyRemovedDefinitionIds = [...prior.checkpoint.threatState.permanentlyRemovedDefinitionIds];
+  return { ...campaign, bossEncounterCheckpoint: e, ...(faceTheThreat ? { bossRoomStorage: { roomId: room.id, roomCardId: definition.roomCardId,
+    tileId: 'tile-10', encounterId: e.checkpointContext!.encounterId, lifecycle: 'RESERVED' as const } } : {}) };
 }
 export function enterProductionBossRoom(campaign: CampaignState, roomId: string): CampaignState {
+  if (campaign.currentQuestId !== FACE_THE_THREAT_QUEST_ID) throw new Error('Boss Room requires Face the Threat');
   if (campaign.battle || campaign.ruinsDrawState?.encounters.some(encounter => !encounter.returned)
     || campaign.pendingDungeonTrinketAction || campaign.bossRoomStorage && campaign.bossRoomStorage.lifecycle !== 'RESERVED')
     throw new Error('Settle the ordinary encounter and pending choices before Boss Room entry');

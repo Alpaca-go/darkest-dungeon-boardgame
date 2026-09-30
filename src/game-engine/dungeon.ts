@@ -17,6 +17,7 @@ import type { QuestRoomTokenType } from '../types/content-runtime';
 import { recordQuestQualificationEvent } from './quests/quest-runtime';
 import { enterProductionBossRoom } from './commands/boss-foundation';
 import { necromancerQuestEntryError } from './bosses/production-dependency-gate';
+import { hasProductionOrdinaryThreat, enterProductionOrdinaryThreat } from './ruins/production-threat-runtime';
 
 /** Phase 7：全队压力统一入口（存活英雄各 +amount，走统一管线处理阈值）。 */
 function applyPartyStress(
@@ -223,26 +224,30 @@ function applyRoomResult(campaign: CampaignState, room: DungeonRoom): CampaignSt
   const dungeon = campaign.dungeon!;
   const log = (c: CampaignState, msg: string, kind: 'info' | 'success' | 'warning' | 'danger' = 'info') =>
     pushLog(c, msg, kind);
+  const guardedBattle = (c: CampaignState) => hasProductionOrdinaryThreat(c)
+    ? enterProductionOrdinaryThreat(c, room.id) : initBattle(c, room.id);
 
   if (room.sourceRoomToken === 'dark') {
     const updated = markRoom(dungeon, room.id, 'visited');
     return log({ ...campaign, light: Math.max(0, campaign.light - 1), dungeon: updated }, '进入 Dark Room：Light -1；该房间不能被清除。', 'warning');
   }
   if (room.sourceRoomToken === 'curio') {
-    const guardRoll = d10();
+    const guardRoll = room.curioGuardRoll ?? d10();
+    if (hasProductionOrdinaryThreat(campaign)) campaign = { ...campaign, dungeon: { ...dungeon,
+      rooms: dungeon.rooms.map(entry => entry.id === room.id ? { ...entry, curioGuardRoll: guardRoll } : entry) } };
     if (guardRoll <= 5) {
-      return log(initBattle(campaign, room.id), `Curio Room 守卫判定 ${guardRoll}：遭遇战斗。`, 'danger');
+      return log(guardedBattle(campaign), `Curio Room 守卫判定 ${guardRoll}：遭遇战斗。`, 'danger');
     }
     return log({
       ...campaign,
       dungeon: {
-        ...dungeon,
-        rooms: dungeon.rooms.map((entry) => entry.id === room.id ? { ...entry, curioGuardResolved: true } : entry),
+        ...campaign.dungeon!,
+        rooms: campaign.dungeon!.rooms.map((entry) => entry.id === room.id ? { ...entry, curioGuardResolved: true } : entry),
       },
     }, `Curio Room 守卫判定 ${guardRoll}：无守卫；完成 Curio 互动后清除。`, 'success');
   }
   if (room.sourceRoomToken === 'treasure') {
-    return log(initBattle(campaign, room.id), 'Treasure Room 由怪物守卫；战斗胜利后获得宝藏。', 'danger');
+    return log(guardedBattle(campaign), 'Treasure Room 由怪物守卫；战斗胜利后获得宝藏。', 'danger');
   }
   if (room.sourceRoomToken === 'trap') {
     let next = campaign;
@@ -329,7 +334,7 @@ function applyRoomResult(campaign: CampaignState, room: DungeonRoom): CampaignSt
     }
     case 'battle': {
       // Phase 3：初始化完整战斗并切入战斗阶段。
-      const c = initBattle(campaign, room.id);
+      const c = guardedBattle(campaign);
       return log(c, '进入战斗房间，遭遇敌人！', 'danger');
     }
     default:

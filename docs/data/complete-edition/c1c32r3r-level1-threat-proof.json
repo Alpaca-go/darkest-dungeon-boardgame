@@ -1,0 +1,245 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R3R",
+  "baseline": "fd2ba4d12ecf16b24ed0c5d502eb7ee566893c24",
+  "status": "PASS",
+  "productionProof": true,
+  "removedDefinitions": [
+    "brigand-fusilier",
+    "pliskin",
+    "cultist-acolyte",
+    "webber",
+    "spitter",
+    "maggot",
+    "madman",
+    "brigand-cutthroat"
+  ],
+  "ordinaryEncounters": [
+    {
+      "encounterId": "cmp_1euge2u_1:qrun_1euge2u_50:necromancer:1:ordinary:B",
+      "ruleSetVersion": "C1C32R2C-R-DIGITAL-DEFAULT-v6",
+      "roomNumber": 3,
+      "tileId": "ruins-tile-3",
+      "largeReplacementRulingId": "C1C32R2B-LARGE-REPLACEMENT-RETURN-WITH-BATTLE-v1",
+      "heroes": [
+        {
+          "heroId": "hero_1euge2u_4",
+          "stance": "aggressive",
+          "areaId": "ruins-tile-3:SW"
+        },
+        {
+          "heroId": "hero_1euge2u_5",
+          "stance": "defensive",
+          "areaId": "ruins-tile-3:SE"
+        },
+        {
+          "heroId": "hero_1euge2u_6",
+          "stance": "ranged",
+          "areaId": "ruins-tile-3:SE"
+        },
+        {
+          "heroId": "hero_1euge2u_7",
+          "stance": "support",
+          "areaId": "ruins-tile-3:SW"
+        }
+      ],
+      "monsters": [
+        {
+          "copyId": "bone-rabble:copy-2",
+          "definitionId": "bone-rabble",
+          "slots": 1,
+          "stance": "aggressive",
+          "areaId": "ruins-tile-3:W"
+        },
+        {
+          "copyId": "bone-defender:copy-2",
+          "definitionId": "bone-defender",
+          "slots": 1,
+          "stance": "defensive",
+          "areaId": "ruins-tile-3:E"
+        },
+        {
+          "copyId": "bone-soldier:copy-2",
+          "definitionId": "bone-soldier",
+          "slots": 1,
+          "stance": "ranged",
+          "areaId": "ruins-tile-3:NE"
+        },
+        {
+          "copyId": "bone-courtier:copy-3",
+          "definitionId": "bone-courtier",
+          "slots": 1,
+          "stance": "support",
+          "areaId": "ruins-tile-3:NW"
+        }
+      ],
+      "initiativeCards": [
+        {
+          "cardId": "cmp_1euge2u_1:qrun_1euge2u_50:necromancer:1:ordinary:B:monster:4",
+          "side": "monster"
+        },
+        {
+          "cardId": "cmp_1euge2u_1:qrun_1euge2u_50:necromancer:1:ordinary:B:monster:3",
+          "side": "monster"
+        },
+        {
+          "cardId": "cmp_1euge2u_1:qrun_1euge2u_50:necromancer:1:ordinary:B:hero:2",
+          "side": "hero"
+        },
+        {
+          "cardId": "cmp_1euge2u_1:qrun_1euge2u_50:necromancer:1:ordinary:B:hero:3",
+          "side": "hero"
+        },
+        {
+          "cardId": "cmp_1euge2u_1:qrun_1euge2u_50:necromancer:1:ordinary:B:monster:1",
+          "side": "monster"
+        },
+        {
+          "cardId": "cmp_1euge2u_1:qrun_1euge2u_50:necromancer:1:ordinary:B:monster:2",
+          "side": "monster"
+        },
+        {
+          "cardId": "cmp_1euge2u_1:qrun_1euge2u_50:necromancer:1:ordinary:B:hero:1",
+          "side": "hero"
+        },
+        {
+          "cardId": "cmp_1euge2u_1:qrun_1euge2u_50:necromancer:1:ordinary:B:hero:4",
+          "side": "hero"
+        }
+      ],
+      "drawEvents": [
+        {
+          "type": "DRAW",
+          "copyId": "bone-rabble:copy-2"
+        },
+        {
+          "type": "DRAW",
+          "copyId": "bone-defender:copy-2"
+        },
+        {
+          "type": "DRAW",
+          "copyId": "bone-soldier:copy-2"
+        },
+        {
+          "type": "DRAW",
+          "copyId": "bone-courtier:copy-3"
+        }
+      ],
+      "returned": true
+    },
+    {
+      "encounterId": "cmp_1euge2u_1:qrun_1euge2u_50:necromancer:1:ordinary:C",
+      "ruleSetVersion": "C1C32R2C-R-DIGITAL-DEFAULT-v6",
+      "roomNumber": 9,
+      "tileId": "ruins-tile-9",
+      "largeReplacementRulingId": "C1C32R2B-LARGE-REPLACEMENT-RETURN-WITH-BATTLE-v1",
+      "heroes": [
+        {
+          "heroId": "hero_1euge2u_4",
+          "stance": "aggressive",
+          "areaId": "ruins-tile-9:S"
+        },
+        {
+          "heroId": "hero_1euge2u_5",
+          "stance": "defensive",
+          "areaId": "ruins-tile-9:S"
+        },
+        {
+          "heroId": "hero_1euge2u_6",
+          "stance": "ranged",
+          "areaId": "ruins-tile-9:S"
+        },
+        {
+          "heroId": "hero_1euge2u_7",
+          "stance": "support",
+          "areaId": "ruins-tile-9:S"
+        }
+      ],
+      "monsters": [
+        {
+          "copyId": "bone-courtier:copy-1",
+          "definitionId": "bone-courtier",
+          "slots": 1,
+          "stance": "support",
+          "areaId": "ruins-tile-9:NE"
+        },
+        {
+          "copyId": "bone-defender:copy-2",
+          "definitionId": "bone-defender",
+          "slots": 1,
+          "stance": "aggressive",
+          "areaId": "ruins-tile-9:C"
+        },
+        {
+          "copyId": "brigand-cutthroat:copy-1",
+          "definitionId": "brigand-cutthroat",
+          "slots": 1,
+          "stance": "defensive",
+          "areaId": "ruins-tile-9:C"
+        },
+        {
+          "copyId": "bone-rabble:copy-2",
+          "definitionId": "bone-rabble",
+          "slots": 1,
+          "stance": "ranged",
+          "areaId": "ruins-tile-9:NW"
+        }
+      ],
+      "initiativeCards": [
+        {
+          "cardId": "cmp_1euge2u_1:qrun_1euge2u_50:necromancer:1:ordinary:C:monster:4",
+          "side": "monster"
+        },
+        {
+          "cardId": "cmp_1euge2u_1:qrun_1euge2u_50:necromancer:1:ordinary:C:monster:3",
+          "side": "monster"
+        },
+        {
+          "cardId": "cmp_1euge2u_1:qrun_1euge2u_50:necromancer:1:ordinary:C:hero:1",
+          "side": "hero"
+        },
+        {
+          "cardId": "cmp_1euge2u_1:qrun_1euge2u_50:necromancer:1:ordinary:C:monster:1",
+          "side": "monster"
+        },
+        {
+          "cardId": "cmp_1euge2u_1:qrun_1euge2u_50:necromancer:1:ordinary:C:hero:3",
+          "side": "hero"
+        },
+        {
+          "cardId": "cmp_1euge2u_1:qrun_1euge2u_50:necromancer:1:ordinary:C:hero:4",
+          "side": "hero"
+        },
+        {
+          "cardId": "cmp_1euge2u_1:qrun_1euge2u_50:necromancer:1:ordinary:C:hero:2",
+          "side": "hero"
+        },
+        {
+          "cardId": "cmp_1euge2u_1:qrun_1euge2u_50:necromancer:1:ordinary:C:monster:2",
+          "side": "monster"
+        }
+      ],
+      "drawEvents": [
+        {
+          "type": "DRAW",
+          "copyId": "bone-courtier:copy-1"
+        },
+        {
+          "type": "DRAW",
+          "copyId": "bone-defender:copy-2"
+        },
+        {
+          "type": "DRAW",
+          "copyId": "brigand-cutthroat:copy-1"
+        },
+        {
+          "type": "DRAW",
+          "copyId": "bone-rabble:copy-2"
+        }
+      ],
+      "returned": true
+    }
+  ],
+  "classifier": "shared isNonUnholy",
+  "allPhysicalCopies": true
+}

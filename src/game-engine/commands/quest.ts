@@ -14,7 +14,7 @@ import { evaluateReplacementFlow, failCampaign } from '../stagecoach';
 import { hasUnfinishedProductionBossQuest } from '../bosses/room-storage';
 import { withBossEncounterSources } from '../bosses/foundation';
 import { retargetPendingReplacement } from './replacement';
-import { finalizeQuestReturnToHamlet } from '../campaign/campaign-orchestrator';
+import { finalizeQuestReturnToHamlet, withTransactionRecorded } from '../campaign/campaign-orchestrator';
 import { selectQuest } from '../campaign';
 import { engineChooseQuest } from '../campaign/campaign-orchestrator';
 import { getBossQuestPool, getQuestPool, runtimeContentContext } from '../../data/content-selector';
@@ -165,7 +165,19 @@ export function commitReturnToHamlet(
   // 3. 进入 Hamlet 阶段。
   const preparationCheckpoint = checkpointForPreparationDay(next, input.questRunId);
   const canEnterHamlet = next.gamePhase === 'quest-result' && next.questResultResolved;
-  const hamletInput = canEnterHamlet && preparationCheckpoint && next.bossEncounterCheckpoint ? { ...next, bossEncounterCheckpoint: null } : next;
+  const standardCheckpoint = next.bossEncounterCheckpoint?.checkpointContext?.questScope === 'STANDARD'
+    ? next.bossEncounterCheckpoint : null;
+  if (canEnterHamlet && standardCheckpoint) {
+    if (standardCheckpoint.checkpointContext!.questRunId !== input.questRunId || next.battle
+      || next.ruinsDrawState?.encounters.some(e => !e.returned)) throw new Error('Settle Standard Quest before checkpoint archival');
+    if (!next.necromancerQuestThreatHistory?.some(h => h.questRunId === input.questRunId)) next = withTransactionRecorded({ ...next,
+      necromancerQuestThreatHistory: [...(next.necromancerQuestThreatHistory ?? []), {
+        questRunId: input.questRunId, activeThreatId: standardCheckpoint.checkpointContext!.threatId,
+        checkpoint: structuredClone(standardCheckpoint),
+        ...(next.ruinsDrawState ? { drawState: structuredClone(next.ruinsDrawState) } : {}),
+      }] }, `${standardCheckpoint.checkpointContext!.encounterId}:standard-checkpoint-archive`);
+  }
+  const hamletInput = canEnterHamlet && (preparationCheckpoint || standardCheckpoint) && next.bossEncounterCheckpoint ? { ...next, bossEncounterCheckpoint: null } : next;
   const next2 = enterNecromancerPreparationDay(startHamletPhase(hamletInput), preparationCheckpoint);
   let after: CampaignState = next2 === next ? next : next2;
 

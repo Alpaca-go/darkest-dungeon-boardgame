@@ -1,6 +1,6 @@
 import type { BattleState, CampaignState } from '../../types';
 import type { BossEncounterState } from '../../types/boss-runtime';
-import { assertBossEncounter } from './foundation';
+import { assertBossEncounter, recordBossRuntimeEvent } from './foundation';
 import { resolveBossDefinition } from './definitions';
 import { resolveHeroDodge } from '../rules/hero-dodge';
 
@@ -26,7 +26,8 @@ export function validateThreatCheckpoint(campaign: CampaignState, checkpoint: Bo
   const heroIds = campaign.heroes.filter(h => !h.dead).map(h => `u_${h.instanceId}`);
   if (heroIds.some(id => !Number.isFinite(context.heroDodge[id]))) throw new Error('Checkpoint Hero Dodge missing');
   if (context.heroDodgeBindings) {
-    if (Object.keys(context.heroDodgeBindings).length !== heroIds.length) throw new Error('Checkpoint Hero binding coverage invalid');
+    if (Object.keys(context.heroDodgeBindings).some(id => !campaign.heroes.some(h => `u_${h.instanceId}` === id))
+      || heroIds.some(id => !context.heroDodgeBindings![id])) throw new Error('Checkpoint Hero binding coverage invalid');
     for (const hero of campaign.heroes.filter(h => !h.dead)) {
       const id = `u_${hero.instanceId}`;
       const expected = resolveHeroDodge({heroId:hero.heroId,level:hero.level,ruleSetVersion:checkpoint.ruleSetVersion});
@@ -41,4 +42,23 @@ export function validateThreatCheckpoint(campaign: CampaignState, checkpoint: Bo
     maxRounds: 4, heroes: [], monsters: [], initiativeOrder: [], initiativeIndex: -1, activeActorId: null,
     currentActionPoints: 0, selectedSkillId: null, selectedTargetId: null, battleLog: [], rewards: { gold: 0 }, bossEncounter: checkpoint };
   assertBossEncounter(shell);
+}
+
+/** A Stagecoach replacement binds the new Hero without resetting encounter events or RNG. */
+export function bindReplacementThreatHero(campaign: CampaignState, replacedId: string, newId: string): CampaignState {
+  const saved = campaign.bossEncounterCheckpoint;
+  if (!saved?.checkpointContext?.questScope || !saved.checkpointContext.heroDodgeBindings) return campaign;
+  const hero = campaign.heroes.find(h => h.instanceId === newId && !h.dead);
+  if (!hero) throw new Error('Replacement Hero missing');
+  const checkpoint = structuredClone(saved), context = checkpoint.checkpointContext!;
+  delete context.heroDodge[`u_${replacedId}`];
+  delete context.heroDodgeBindings![`u_${replacedId}`];
+  const binding = resolveHeroDodge({ heroId: hero.heroId, level: hero.level, ruleSetVersion: checkpoint.ruleSetVersion });
+  context.heroDodge[`u_${newId}`] = binding.value;
+  context.heroDodgeBindings![`u_${newId}`] = binding;
+  const shell: BattleState = { battleId: context.battleId, sourceRoomId: checkpoint.roomId, status: 'active', round: checkpoint.round,
+    maxRounds: 4, heroes: [], monsters: [], initiativeOrder: [], initiativeIndex: -1, activeActorId: null, currentActionPoints: 0,
+    selectedSkillId: null, selectedTargetId: null, battleLog: [], rewards: { gold: 0 }, bossEncounter: checkpoint };
+  recordBossRuntimeEvent(shell, 'THREAT_HERO_REPLACED', { replacedId, newId, binding }, [`u_${newId}`]);
+  return { ...campaign, bossEncounterCheckpoint: checkpoint };
 }

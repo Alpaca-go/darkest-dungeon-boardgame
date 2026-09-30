@@ -175,7 +175,7 @@ export function importCommunityVisualAsset(asset: CommunityVisualAssetResolved):
   if (!asset.localPath.startsWith(prefix)) {
     throw new Error(`Community asset localPath must start with ${prefix}: ${asset.localPath}`);
   }
-  return new URL(`../../../../${asset.localPath}`, import.meta.url).href;
+  return new URL(`../../../assets/${asset.localPath.slice(prefix.length)}`, import.meta.url).href;
 }
 
 /** List all ready asset entries (for contact-sheet and tests). */

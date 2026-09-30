@@ -138,6 +138,8 @@ export interface BossEncounterState {
     battleId: string;
     campaignId: string;
     questRunId: string;
+    /** Threat identity spans the Act; this encounter belongs to one Quest. */
+    questScope?: 'STANDARD' | 'FACE_THE_THREAT';
     campaignLevel: number;
     threatId: string;
     definitionVersion: string;

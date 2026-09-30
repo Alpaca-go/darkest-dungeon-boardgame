@@ -1,0 +1,312 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R3R",
+  "baseline": "fd2ba4d12ecf16b24ed0c5d502eb7ee566893c24",
+  "status": "PASS",
+  "route": "Face the Threat → Threat dungeon effects → Boss Room → ABILITY",
+  "encounters": [
+    {
+      "identity": "cmp_1euge2u_1:qrun_1euge2u_50:necromancer:1",
+      "context": {
+        "schemaVersion": 1,
+        "encounterId": "cmp_1euge2u_1:qrun_1euge2u_50:necromancer:1",
+        "battleId": "qrun_1euge2u_50:boss",
+        "campaignId": "cmp_1euge2u_1",
+        "questRunId": "qrun_1euge2u_50",
+        "campaignLevel": 1,
+        "threatId": "necromancer-threat-level-1",
+        "definitionVersion": "C1C31-DIGITAL-DEFAULT-v2",
+        "consumedOnceKeys": [
+          "cmp_1euge2u_1:qrun_1euge2u_50:necromancer:1:ordinary:B:threat-settled",
+          "cmp_1euge2u_1:qrun_1euge2u_50:necromancer:1:ordinary:C:threat-settled"
+        ],
+        "heroDodge": {
+          "u_hero_1euge2u_4": 0,
+          "u_hero_1euge2u_5": 1,
+          "u_hero_1euge2u_6": 1,
+          "u_hero_1euge2u_7": 1
+        },
+        "dependencyAuthority": "OFFICIAL_SOURCE",
+        "heroDodgeBindings": {
+          "u_hero_1euge2u_4": {
+            "heroId": "crusader",
+            "level": 1,
+            "value": 0,
+            "authority": "OFFICIAL_SOURCE",
+            "canonical": true,
+            "canonicalSourceStatus": "OFFICIAL_SOURCE",
+            "rulingId": null,
+            "sourceReferences": [
+              {
+                "path": "docs/DD_EN_COREBOX_RULES.pdf",
+                "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+                "region": "Anatomy of the Hero Boards: labelled Dodge 0",
+                "page": 10
+              }
+            ],
+            "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+          },
+          "u_hero_1euge2u_5": {
+            "heroId": "leper",
+            "level": 1,
+            "value": 1,
+            "authority": "PROJECT_RULING",
+            "canonical": false,
+            "canonicalSourceStatus": "SOURCE_UNRESOLVED",
+            "rulingId": "C1C31R-DODGE-LEPER-L1",
+            "sourceReferences": [],
+            "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+          },
+          "u_hero_1euge2u_6": {
+            "heroId": "highwayman",
+            "level": 1,
+            "value": 1,
+            "authority": "OFFICIAL_SOURCE",
+            "canonical": true,
+            "canonicalSourceStatus": "OFFICIAL_SOURCE",
+            "rulingId": null,
+            "sourceReferences": [
+              {
+                "path": "docs/DD_EN_COREBOX_RULES.pdf",
+                "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+                "region": "Printed Level I Highwayman card in Condition stack example",
+                "page": 20
+              }
+            ],
+            "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+          },
+          "u_hero_1euge2u_7": {
+            "heroId": "vestal",
+            "level": 1,
+            "value": 1,
+            "authority": "PROJECT_RULING",
+            "canonical": false,
+            "canonicalSourceStatus": "SOURCE_UNRESOLVED",
+            "rulingId": "C1C31R-DODGE-VESTAL-L1",
+            "sourceReferences": [],
+            "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+          }
+        },
+        "questScope": "FACE_THE_THREAT"
+      },
+      "events": [
+        {
+          "eventId": "qrun_1euge2u_50:boss:event:30",
+          "eventType": "THREAT_FLIPPED_TO_ABILITY",
+          "sourceCardId": 46037,
+          "authority": "OFFICIAL_SOURCE",
+          "actor": null,
+          "targets": [],
+          "result": {
+            "threatStopped": true,
+            "abilityActive": true
+          },
+          "parentEventId": null,
+          "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+        }
+      ]
+    },
+    {
+      "identity": "cmp_2ht_1:qrun_1euge2u_a:necromancer:2",
+      "context": {
+        "schemaVersion": 1,
+        "encounterId": "cmp_2ht_1:qrun_1euge2u_a:necromancer:2",
+        "battleId": "qrun_1euge2u_a:boss",
+        "campaignId": "cmp_2ht_1",
+        "questRunId": "qrun_1euge2u_a",
+        "campaignLevel": 2,
+        "threatId": "necromancer-threat-level-2",
+        "definitionVersion": "C1C31-DIGITAL-DEFAULT-v2",
+        "consumedOnceKeys": [
+          "cmp_2ht_1:qrun_1euge2u_a:necromancer:2:ordinary:B:threat-settled",
+          "cmp_2ht_1:qrun_1euge2u_a:necromancer:2:ordinary:C:threat-settled"
+        ],
+        "heroDodge": {
+          "u_hero_2ht_4": 0,
+          "u_hero_2ht_5": 1,
+          "u_hero_2ht_6": 1,
+          "u_hero_2ht_7": 1
+        },
+        "dependencyAuthority": "OFFICIAL_SOURCE",
+        "heroDodgeBindings": {
+          "u_hero_2ht_4": {
+            "heroId": "crusader",
+            "level": 1,
+            "value": 0,
+            "authority": "OFFICIAL_SOURCE",
+            "canonical": true,
+            "canonicalSourceStatus": "OFFICIAL_SOURCE",
+            "rulingId": null,
+            "sourceReferences": [
+              {
+                "path": "docs/DD_EN_COREBOX_RULES.pdf",
+                "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+                "region": "Anatomy of the Hero Boards: labelled Dodge 0",
+                "page": 10
+              }
+            ],
+            "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+          },
+          "u_hero_2ht_5": {
+            "heroId": "leper",
+            "level": 1,
+            "value": 1,
+            "authority": "PROJECT_RULING",
+            "canonical": false,
+            "canonicalSourceStatus": "SOURCE_UNRESOLVED",
+            "rulingId": "C1C31R-DODGE-LEPER-L1",
+            "sourceReferences": [],
+            "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+          },
+          "u_hero_2ht_6": {
+            "heroId": "highwayman",
+            "level": 1,
+            "value": 1,
+            "authority": "OFFICIAL_SOURCE",
+            "canonical": true,
+            "canonicalSourceStatus": "OFFICIAL_SOURCE",
+            "rulingId": null,
+            "sourceReferences": [
+              {
+                "path": "docs/DD_EN_COREBOX_RULES.pdf",
+                "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+                "region": "Printed Level I Highwayman card in Condition stack example",
+                "page": 20
+              }
+            ],
+            "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+          },
+          "u_hero_2ht_7": {
+            "heroId": "vestal",
+            "level": 1,
+            "value": 1,
+            "authority": "PROJECT_RULING",
+            "canonical": false,
+            "canonicalSourceStatus": "SOURCE_UNRESOLVED",
+            "rulingId": "C1C31R-DODGE-VESTAL-L1",
+            "sourceReferences": [],
+            "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+          }
+        },
+        "questScope": "FACE_THE_THREAT"
+      },
+      "events": [
+        {
+          "eventId": "qrun_1euge2u_a:boss:event:29",
+          "eventType": "THREAT_FLIPPED_TO_ABILITY",
+          "sourceCardId": 46038,
+          "authority": "OFFICIAL_SOURCE",
+          "actor": null,
+          "targets": [],
+          "result": {
+            "threatStopped": true,
+            "abilityActive": true
+          },
+          "parentEventId": null,
+          "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+        }
+      ]
+    },
+    {
+      "identity": "cmp_2ht_1:qrun_1euge2u_f:necromancer:3",
+      "context": {
+        "schemaVersion": 1,
+        "encounterId": "cmp_2ht_1:qrun_1euge2u_f:necromancer:3",
+        "battleId": "qrun_1euge2u_f:boss",
+        "campaignId": "cmp_2ht_1",
+        "questRunId": "qrun_1euge2u_f",
+        "campaignLevel": 3,
+        "threatId": "necromancer-threat-level-3",
+        "definitionVersion": "C1C31-DIGITAL-DEFAULT-v2",
+        "consumedOnceKeys": [
+          "cmp_2ht_1:qrun_1euge2u_f:necromancer:3:ordinary:B:threat-settled",
+          "cmp_2ht_1:qrun_1euge2u_f:necromancer:3:ordinary:C:threat-settled"
+        ],
+        "heroDodge": {
+          "u_hero_2ht_4": 0,
+          "u_hero_2ht_5": 1,
+          "u_hero_2ht_6": 1,
+          "u_hero_2ht_7": 1
+        },
+        "dependencyAuthority": "OFFICIAL_SOURCE",
+        "heroDodgeBindings": {
+          "u_hero_2ht_4": {
+            "heroId": "crusader",
+            "level": 1,
+            "value": 0,
+            "authority": "OFFICIAL_SOURCE",
+            "canonical": true,
+            "canonicalSourceStatus": "OFFICIAL_SOURCE",
+            "rulingId": null,
+            "sourceReferences": [
+              {
+                "path": "docs/DD_EN_COREBOX_RULES.pdf",
+                "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+                "region": "Anatomy of the Hero Boards: labelled Dodge 0",
+                "page": 10
+              }
+            ],
+            "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+          },
+          "u_hero_2ht_5": {
+            "heroId": "leper",
+            "level": 1,
+            "value": 1,
+            "authority": "PROJECT_RULING",
+            "canonical": false,
+            "canonicalSourceStatus": "SOURCE_UNRESOLVED",
+            "rulingId": "C1C31R-DODGE-LEPER-L1",
+            "sourceReferences": [],
+            "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+          },
+          "u_hero_2ht_6": {
+            "heroId": "highwayman",
+            "level": 1,
+            "value": 1,
+            "authority": "OFFICIAL_SOURCE",
+            "canonical": true,
+            "canonicalSourceStatus": "OFFICIAL_SOURCE",
+            "rulingId": null,
+            "sourceReferences": [
+              {
+                "path": "docs/DD_EN_COREBOX_RULES.pdf",
+                "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+                "region": "Printed Level I Highwayman card in Condition stack example",
+                "page": 20
+              }
+            ],
+            "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+          },
+          "u_hero_2ht_7": {
+            "heroId": "vestal",
+            "level": 1,
+            "value": 1,
+            "authority": "PROJECT_RULING",
+            "canonical": false,
+            "canonicalSourceStatus": "SOURCE_UNRESOLVED",
+            "rulingId": "C1C31R-DODGE-VESTAL-L1",
+            "sourceReferences": [],
+            "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+          }
+        },
+        "questScope": "FACE_THE_THREAT"
+      },
+      "events": [
+        {
+          "eventId": "qrun_1euge2u_f:boss:event:36",
+          "eventType": "THREAT_FLIPPED_TO_ABILITY",
+          "sourceCardId": 46039,
+          "authority": "OFFICIAL_SOURCE",
+          "actor": null,
+          "targets": [],
+          "result": {
+            "threatStopped": true,
+            "abilityActive": true
+          },
+          "parentEventId": null,
+          "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+        }
+      ]
+    }
+  ]
+}

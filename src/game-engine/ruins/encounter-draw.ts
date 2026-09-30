@@ -3,7 +3,7 @@ import { shuffleWithRng } from '../campaign/act-four/rng';
 import { ruinsMonster, ruinsMonsterDefinitions, ruinsTile } from './source-registry';
 import { RUINS_STANCES, RUINS_V4, RUINS_V5, RUINS_V6, RUINS_V5_REPLACEMENT_RULING, type RuinsRuleSetVersion, type RuinsStance } from '../../types/ruins-executable';
 
-export type CopyOwner = { location: 'DECK' | 'DISCARD' } | { location: 'ENCOUNTER' | 'SUMMON_POOL'; encounterId: string };
+export type CopyOwner = { location: 'DECK' | 'DISCARD' | 'PERMANENTLY_REMOVED' } | { location: 'ENCOUNTER' | 'SUMMON_POOL'; encounterId: string };
 export interface OrdinaryRuinsEncounter {
   encounterId: string; ruleSetVersion: RuinsRuleSetVersion; roomNumber: number; tileId: string;
   largeReplacementRulingId?: typeof RUINS_V5_REPLACEMENT_RULING;
@@ -152,7 +152,8 @@ export function validateRuinsDrawState(state: RuinsDrawState): void {
     : state.largeReplacementRulingId !== undefined) throw new Error('Invalid Large replacement ruling provenance');
   const expected = ruinsMonsterDefinitions(state.ruleSetVersion).filter(d => d.drawEligibleFromLevel <= state.level).flatMap(d => d.physicalCopyIds).sort();
   if (Object.keys(state.ownership).sort().join('|') !== expected.join('|') || new Set(state.monsterDeck).size !== state.monsterDeck.length) throw new Error('Physical ownership census differs');
-  if (Object.values(state.ownership).some(owner => !['DECK', 'DISCARD', 'ENCOUNTER', 'SUMMON_POOL'].includes(owner.location)
+  if (Object.values(state.ownership).some(owner => !['DECK', 'DISCARD', 'ENCOUNTER', 'SUMMON_POOL', 'PERMANENTLY_REMOVED'].includes(owner.location)
+    || owner.location === 'PERMANENTLY_REMOVED' && state.ruleSetVersion !== RUINS_V6
     || (owner.location === 'ENCOUNTER' || owner.location === 'SUMMON_POOL') && !owner.encounterId?.trim())) throw new Error('Invalid physical copy owner');
   if (state.monsterDeck.some(id => state.ownership[id]?.location !== 'DECK')
     || Object.entries(state.ownership).some(([id, owner]) => owner.location === 'DECK' && !state.monsterDeck.includes(id))) throw new Error('Deck ownership differs');

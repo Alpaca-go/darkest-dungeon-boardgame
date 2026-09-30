@@ -1,4 +1,5 @@
 import BossChoicePanel from '../components/battle/BossChoicePanel';
+import { hasProductionOrdinaryThreat } from '../game-engine/ruins/production-threat-runtime';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useGameStore } from '../store/useGameStore';
@@ -193,7 +194,8 @@ export default function DungeonExplorePage() {
 
         {/* 地图 */}
         <div className="rounded-lg border border-dd-border bg-dd-panel p-3">
-          {campaign.bossEncounterCheckpoint?.checkpointContext?.heroDodgeBindings && <p role="status" data-testid="necromancer-threat-bridge-blocked" className="mb-3 text-dd-warn">Necromancer Threat 普通战斗尚未完成接入；守卫房间暂不可进入。</p>}
+          {campaign.bossEncounterCheckpoint?.checkpointContext?.heroDodgeBindings && !hasProductionOrdinaryThreat(campaign)
+            && <p role="status" data-testid="necromancer-threat-bridge-blocked" className="mb-3 text-dd-warn">请在初始化前选择 Ruins v6 后进入守卫房间。</p>}
           <DungeonMap dungeon={dungeon} onRoomClick={moveToRoom} />
           <p className="text-[11px] text-dd-muted mt-2">
             点击与当前房间相邻的节点移动；隐藏房间也可进入。当前房间：

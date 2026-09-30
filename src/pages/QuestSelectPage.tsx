@@ -6,7 +6,7 @@ import { canSelectStandardQuest, canSelectBossQuest } from '../game-engine/campa
 import { getThreatById } from '../data/bosses/threat-registry';
 import QuestCard from '../components/quest/QuestCard';
 import { necromancerProductionEntryError, necromancerProductionEntryMessage } from '../game-engine/commands/necromancer-production-entry';
-import { RUINS_V6 } from '../types/ruins-executable';
+import { RUINS_V6, RUINS_STANCES } from '../types/ruins-executable';
 
 /**
  * Phase 11A.1 — 任务选择页最小 UI 改动（dev doc §22）：
@@ -22,6 +22,7 @@ export default function QuestSelectPage() {
   const migrateHeroDodgeToV2=useGameStore(s=>s.migrateHeroDodgeToV2);
   const selectProductionRuinsV6 = useGameStore(s => s.selectProductionRuinsV6);
   const chooseQuest = useGameStore((s) => s.chooseQuest);
+  const selectPartyDeployment = useGameStore(s => s.selectPartyDeployment);
 
   if (!campaign) return <Navigate to="/" replace />;
   if (campaign.heroes.length < 4) return <Navigate to="/setup" replace />;
@@ -29,6 +30,7 @@ export default function QuestSelectPage() {
     return <Navigate to="/loadout" replace />;
 
   const cp = campaign.campaignProgress;
+  const uniqueDeployment = new Set(campaign.heroes.filter(h => !h.dead).map(h => h.stance)).size === 4;
   const standardSelectable = canSelectStandardQuest(cp);
   const bossSelectable = canSelectBossQuest(cp);
   const entryError = campaign.runtimeContentProfile === 'community-complete-edition'
@@ -66,6 +68,16 @@ export default function QuestSelectPage() {
           {!canSelectV6 && <p className="mt-1 text-sm text-dd-muted">已有 Threat 或遭遇不能迁移；请在初始化前选择规则。</p>}
         </div>}
       {/* Phase 11A.1 §22 最小 UI：Campaign 状态条 */}
+      {campaign.ruinsRuleSetSelection?.ruleSetVersion === RUINS_V6 && !campaign.bossEncounterCheckpoint && <fieldset className="mb-4 p-3 border border-dd-border">
+        <legend>Ruins 英雄初始 Stance</legend>
+        {campaign.heroes.filter(h => !h.dead).map(h => <label key={h.instanceId} className="inline-flex gap-2 mr-3">
+          {h.name}<select aria-label={`${h.name} 初始 Stance`} value={h.stance}
+            onChange={event => selectPartyDeployment(h.instanceId, event.target.value as typeof h.stance)}>
+            {RUINS_STANCES.map(stance => <option key={stance} value={stance}>{stance}</option>)}
+          </select>
+        </label>)}
+        {!uniqueDeployment && <p role="status">守卫战斗要求四名英雄使用不同的初始 Stance；请调整队伍部署。</p>}
+      </fieldset>}
       <div className="mb-4 p-3 rounded border border-dd-border bg-dd-panel/40 text-sm">
         <div className="flex flex-wrap gap-3">
           <span>
@@ -101,6 +113,7 @@ export default function QuestSelectPage() {
             (isStandard && !standardSelectable) ||
             (isBoss && !bossSelectable) ||
             (q.id === 'face-the-threat' && necromancerEntryBlocked) ||
+            ((isStandard || q.id === 'face-the-threat') && campaign.ruinsRuleSetSelection?.ruleSetVersion === RUINS_V6 && !uniqueDeployment) ||
             cp.darkestDungeonUnlocked;
           return (
             <QuestCard

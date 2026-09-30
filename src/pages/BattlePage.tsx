@@ -1,4 +1,7 @@
 import { areaDistance } from '../game-engine/bosses/foundation';
+import { ruinsRoom, ruinsTile } from '../game-engine/ruins/source-registry';
+import { ruinsAreaDistance } from '../game-engine/ruins/monster-runtime';
+import { canMoveRuinsUnit } from '../game-engine/ruins/movement-runtime';
 import { useMemo, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useGameStore } from '../store/useGameStore';
@@ -23,6 +26,8 @@ export default function BattlePage() {
   const navigate = useNavigate();
   const campaign = useGameStore((s) => s.campaign);
   const battleHeroAreaMove = useGameStore(s=>s.battleHeroAreaMove);
+  const battleOrdinaryChoice = useGameStore(s => s.battleOrdinaryChoice);
+  const battleRoomInteract = useGameStore(s => s.battleRoomInteract);
   const commitBossChoice = useGameStore((s) => s.commitBossChoice);
   const battleSkillId = useGameStore((s) => s.ui.battleSkillId);
   const selectBattleSkill = useGameStore((s) => s.selectBattleSkill);
@@ -47,7 +52,9 @@ export default function BattlePage() {
   if (!battle) return <Navigate to="/dungeon" replace />;
 
   const activeUnit = getActiveUnit(battle);
-  const isHeroTurn = battle.status === 'active' && activeUnit?.side === 'hero';
+  const isHeroTurn = battle.status === 'active' && activeUnit?.side === 'hero'
+    && !battle.ruinsContext?.pendingChoice && !battle.ruinsContext?.pendingReanimationChoice;
+  const ordinaryChoice = battle.ruinsContext?.pendingReanimationChoice ?? battle.ruinsContext?.pendingChoice;
 
   const colorOf = (u: BattleUnit): string => {
     if (u.side === 'monster') return getMonsterById(u.sourceId)?.color ?? '#8b2b2b';
@@ -84,6 +91,14 @@ export default function BattlePage() {
 
   return (
     <div className="p-6 max-w-5xl mx-auto space-y-4">
+      {ordinaryChoice && <section className="rounded border border-dd-accent p-4" aria-label="Ruins 待决选择">
+        <p>{battle.ruinsContext?.pendingReanimationChoice ? '选择复生的死亡实例' : '选择移动结果'}</p>
+        <div className="flex flex-wrap gap-2 mt-2">{ordinaryChoice.candidateIds.map(id => <button key={id}
+          className="px-3 py-2 rounded bg-dd-panel2 border border-dd-border"
+          onClick={() => battleOrdinaryChoice(ordinaryChoice.choiceId, id)}>
+          {battle.ruinsContext?.retiredMonsterInstances?.find(d => d.unit.id === id)?.unit.name ?? id}
+        </button>)}</div>
+      </section>}
       {battle.bossEncounter?.pendingChoice && <BossChoicePanel key={battle.bossEncounter.pendingChoice.choiceId}
         choice={battle.bossEncounter.pendingChoice} onConfirm={commitBossChoice}
         candidateLabel={id => [...battle.heroes, ...battle.monsters].find(u => u.id === id)?.name ?? id} />}
@@ -95,6 +110,26 @@ export default function BattlePage() {
       </div>
 
       <InitiativeBar battle={battle} />
+      {battle.ruinsContext && <section aria-label="Ruins 房间区域" className="rounded border border-dd-border p-3">
+        <p>Ruins Room {battle.ruinsContext.roomNumber}</p>
+        <div className="grid grid-cols-2 gap-2 mt-2">{ruinsTile(battle.ruinsContext.tileId).areas.map(area => {
+          const context = battle.ruinsContext!;
+          const occupants = [...battle.heroes, ...battle.monsters].filter(u => u.isAlive && context.placements[u.id] === area.id);
+          const movable = isHeroTurn && !battle.pendingAction && !battle.pendingMonsterAttack && battle.currentActionPoints > 0
+            && context.placements[activeUnit!.id] !== area.id
+            && ruinsAreaDistance(ruinsTile(context.tileId), context.placements[activeUnit!.id], area.id) <= activeUnit!.speed
+            && canMoveRuinsUnit(battle, activeUnit!.id, activeUnit!.id, area.id);
+          return <div key={area.id} className="border border-dd-border p-2 text-sm">
+            <p>{area.id} · 容量 {area.capacity}</p><p>{occupants.map(u => u.name).join('、') || '空'}</p>
+            {movable && <button onClick={() => battleHeroAreaMove(area.id)}>移动到 {area.id}</button>}
+          </div>;
+        })}</div>
+        {isHeroTurn && !battle.pendingAction && !battle.pendingMonsterAttack && ruinsRoom(battle.ruinsContext.roomNumber).rules
+          .filter(rule => rule.trigger === 'INTERACT' && rule.areas.includes(battle.ruinsContext!.placements[activeUnit!.id])
+            && battle.currentActionPoints >= rule.actionCost && (!rule.oncePerBattle || !battle.ruinsContext!.roomUses.includes(rule.id))
+            && (!rule.requiresNoMonsters || !battle.monsters.some(u => u.isAlive)))
+          .map(rule => <button key={rule.id} onClick={() => battleRoomInteract(rule.id)}>房间互动 · {rule.id}</button>)}
+      </section>}
       {battle.bossEncounter && isHeroTurn && !battle.pendingMonsterAttack && !battle.bossEncounter.pendingChoice && <div className="flex gap-2" data-testid="boss-area-movement">
         {battle.bossEncounter.definition.areas.filter(a=>a.id!==battle.bossEncounter!.placements[activeUnit!.id]
           && areaDistance(battle.bossEncounter!.definition,battle.bossEncounter!.placements[activeUnit!.id],a.id)<=activeUnit!.speed

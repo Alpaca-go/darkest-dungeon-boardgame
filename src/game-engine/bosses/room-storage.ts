@@ -32,7 +32,7 @@ export function validateProductionBossRoomStorage(campaign: Partial<CampaignStat
   const storage=campaign.bossRoomStorage;
   const encounter=campaign.battle?.bossEncounter ?? campaign.bossEncounterCheckpoint;
   if (!storage) {
-    if (encounter?.checkpointContext?.heroDodgeBindings) throw new Error('Production Room storage absent');
+    if (encounter?.checkpointContext?.heroDodgeBindings && encounter.checkpointContext.questScope !== 'STANDARD') throw new Error('Production Room storage absent');
     return;
   }
   if (!['RESERVED','IN_PLAY','RETURNED'].includes(storage.lifecycle) || storage.tileId!=='tile-10'

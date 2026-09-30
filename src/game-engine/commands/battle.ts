@@ -21,12 +21,13 @@ import {
   processBattleRuleEvents,
   processBattleDiseaseInfections,
 } from '../diseases/battle-bridge';
-import { resumeTurnAfterMentalCheck } from '../battle';
+import { advanceTurn, resumeTurnAfterMentalCheck } from '../battle';
 import { advancePendingMonsterAttack, openBattleTurnStartWindow } from '../trinkets/battle-trinket-bridge';
 import { settleOrdinaryRuinsBattle } from '../ruins/battle-runtime';
 import { returnOrdinaryBoneFigures } from '../ruins/physical-supply';
 import { runRuinsRoomTrigger } from '../ruins/room-runtime';
 import { withRuinsCampaignSources } from '../ruins/printed-effect-runtime';
+import { synchronizeOrdinaryThreatDeaths, endProductionOrdinaryThreat } from '../ruins/production-threat-runtime';
 import { evaluateReplacementFlow } from '../stagecoach';
 import { commitCommunityGuardianVictory, isCommunityGuardianBattle, synchronizeCommunityGuardianDeaths } from '../campaign/act-four/community-guardian-battle';
 
@@ -73,8 +74,13 @@ export function settleBattleState(
   campaign: CampaignState,
   options?: { mentalGuardLimit?: number },
 ): BattleSettlementResult {
+  if (campaign.battle?.ruinsContext?.executionSchemaVersion === 2 && campaign.battle.status === 'active'
+    && !campaign.battle.ruinsContext.pendingChoice && !campaign.battle.ruinsContext.pendingReanimationChoice
+    && !campaign.battle.pendingMonsterAttack && !campaign.battle.pendingAction && !campaign.battle.pendingMentalCheck
+    && (!campaign.battle.activeActorId || campaign.battle.currentActionPoints === 0))
+    campaign = { ...campaign, battle: advanceTurn(campaign.battle) };
   let result!: BattleSettlementResult;
-  const next = withRuinsCampaignSources(campaign, state => {
+  const next = withRuinsCampaignSources(synchronizeOrdinaryThreatDeaths(campaign), state => {
     result = settleBattleStateInternal(state, options);
     const binding = result.campaign.battle?.necromancerFigureBinding;
     return binding ? { ...result.campaign, ruinsBoneFigureSupply: binding.supply,
@@ -87,6 +93,7 @@ function settleBattleStateInternal(
   campaign: CampaignState,
   options?: { mentalGuardLimit?: number },
 ): BattleSettlementResult {
+  if (campaign.battle?.ruinsContext?.pendingReanimationChoice) return { ok: true, campaign, error: null, mentalLoops: 0 };
   if (campaign.battle?.bossEncounter?.pendingChoice) return { ok: true, campaign, error: null, mentalLoops: 0 };
   if (!campaign.battle || campaign.battle.status !== 'active') {
     return { ok: false, campaign, error: 'battle-not-active', mentalLoops: 0 };
@@ -96,10 +103,15 @@ function settleBattleStateInternal(
 
   let next: CampaignState = synchronizeCommunityGuardianDeaths(campaign);
   next = advancePendingMonsterAttack(next);
+  next = synchronizeOrdinaryThreatDeaths(next);
+  if (next.battle?.ruinsContext?.pendingReanimationChoice) return { ok: true, campaign: next, error: null, mentalLoops: 0 };
   if (next.battle?.pendingMonsterAttack) {
     return { ok: true, campaign: next, error: null, mentalLoops: 0 };
   }
   next = processBattleDeaths(next);
+  if (next.battle?.ruinsContext?.executionSchemaVersion === 2 && next.battle.status === 'active'
+    && !next.battle.activeActorId && !next.battle.ruinsContext.pendingChoice && !next.battle.ruinsContext.pendingReanimationChoice)
+    next = { ...next, battle: advanceTurn(next.battle) };
   next = processBattleStressEvents(next);
   next = processBattleRuleEvents(next);
   next = processBattleDiseaseInfections(next);
@@ -122,6 +134,8 @@ function settleBattleStateInternal(
     next = processBattleStressEvents(next);
     next = processBattleRuleEvents(next);
     next = processBattleDiseaseInfections(next);
+    next = synchronizeOrdinaryThreatDeaths(next);
+    if (next.battle?.ruinsContext?.pendingReanimationChoice) break;
   }
 
   if (guard >= limit && next.battle?.pendingMentalCheck) {
@@ -151,6 +165,7 @@ function settleBattleStateInternal(
  *   没有 active 守卫），production 删掉这一步既不丢 effects，也不重复工作。
  */
 export function commitBattleVictory(campaign: CampaignState): BattleSettlementResult {
+  campaign = synchronizeOrdinaryThreatDeaths(campaign);
   if (campaign.battle?.bossEncounter) {
     if (campaign.battle.status !== 'victory') return { ok: false, campaign, error: 'battle-not-victory', mentalLoops: 0 };
     if (campaign.battle.bossEncounter.side === 'THREAT') return { ok: true, campaign: settleBossThreatBattle(campaign), error: null, mentalLoops: 0 };
@@ -164,14 +179,18 @@ export function commitBattleVictory(campaign: CampaignState): BattleSettlementRe
     return { ok: false, campaign, error: 'battle-not-victory', mentalLoops: 0 };
   }
   const ordinaryRuins = campaign.battle.ruinsContext;
-  if (ordinaryRuins) campaign = settleOrdinaryEndEffects(campaign);
+  if (ordinaryRuins) campaign = synchronizeOrdinaryThreatDeaths(settleOrdinaryEndEffects(campaign));
+  if (campaign.battle?.status !== 'victory' || campaign.battle.ruinsContext?.pendingReanimationChoice)
+    return { ok: false, campaign, error: 'battle-not-victory', mentalLoops: 0 };
   const returnedDraw = ordinaryRuins && campaign.ruinsDrawState
     ? settleOrdinaryRuinsBattle(campaign.ruinsDrawState, campaign.battle!) : null;
   const returnedFigures = ordinaryRuins && campaign.ruinsBoneFigureSupply
     ? returnOrdinaryBoneFigures(campaign.ruinsBoneFigureSupply, ordinaryRuins.encounterId) : null;
+  if (returnedDraw && returnedFigures) campaign = endProductionOrdinaryThreat({ ...campaign,
+    ruinsDrawState: returnedDraw, ruinsBoneFigureSupply: returnedFigures });
   let next = engineResolveVictory(campaign);
   if (ordinaryRuins && (!returnedDraw || !returnedFigures)) throw new Error('Ordinary Ruins physical settlement unavailable');
-  if (returnedDraw && returnedFigures) next = { ...next, ruinsDrawState: returnedDraw,
+  if (returnedDraw && returnedFigures && ordinaryRuins?.executionSchemaVersion !== 2) next = { ...next, ruinsDrawState: returnedDraw,
     ruinsBoneFigureSupply: returnedFigures };
   next = evaluateReplacementFlow(next);
   return { ok: true, campaign: next, error: null, mentalLoops: 0 };
@@ -187,6 +206,7 @@ export function commitBattleVictory(campaign: CampaignState): BattleSettlementRe
  * encounter follows the Quest failure transaction; ordinary battle handling stays below.
  */
 export function commitBattleRetreat(campaign: CampaignState): BattleSettlementResult {
+  campaign = synchronizeOrdinaryThreatDeaths(campaign);
   if (!campaign.battle) {
     return { ok: false, campaign, error: 'battle-not-active-for-retreat', mentalLoops: 0 };
   }
@@ -202,14 +222,22 @@ export function commitBattleRetreat(campaign: CampaignState): BattleSettlementRe
     ? { ok: true as const, campaign, error: null, mentalLoops: 0 }
     : settleBattleState(campaign);
   if (!settled.ok) return settled;
-  const ended = settled.campaign.battle?.ruinsContext ? settleOrdinaryEndEffects(settled.campaign) : settled.campaign;
+  if (settled.campaign.battle?.ruinsContext?.pendingReanimationChoice || settled.campaign.battle?.ruinsContext?.pendingThreatDeathIds?.length)
+    return { ok: false, campaign: settled.campaign, error: 'battle-settlement-failed', mentalLoops: settled.mentalLoops };
+  let ended = settled.campaign.battle?.ruinsContext
+    ? synchronizeOrdinaryThreatDeaths(settleOrdinaryEndEffects(settled.campaign)) : settled.campaign;
+  if (ended.battle?.ruinsContext?.pendingReanimationChoice || ended.battle?.ruinsContext?.pendingThreatDeathIds?.length)
+    return { ok: false, campaign: ended, error: 'battle-settlement-failed', mentalLoops: settled.mentalLoops };
   const ordinary = ended.battle?.ruinsContext;
   const returnedDraw = ordinary && ended.ruinsDrawState ? settleOrdinaryRuinsBattle(ended.ruinsDrawState,
     { ...ended.battle!, status: 'defeat' }) : null;
   const returnedFigures = ordinary && ended.ruinsBoneFigureSupply
     ? returnOrdinaryBoneFigures(ended.ruinsBoneFigureSupply, ordinary.encounterId) : null;
+  if (returnedDraw && returnedFigures) ended = endProductionOrdinaryThreat({ ...ended,
+    ruinsDrawState: returnedDraw, ruinsBoneFigureSupply: returnedFigures });
   let next = retreatFromBattle(ended);
-  if (returnedDraw && returnedFigures) next = { ...next, ruinsDrawState: returnedDraw, ruinsBoneFigureSupply: returnedFigures };
+  if (returnedDraw && returnedFigures && ordinary?.executionSchemaVersion !== 2) next = { ...next,
+    ruinsDrawState: returnedDraw, ruinsBoneFigureSupply: returnedFigures };
   return { ok: true, campaign: next, error: null, mentalLoops: settled.mentalLoops };
 }
 

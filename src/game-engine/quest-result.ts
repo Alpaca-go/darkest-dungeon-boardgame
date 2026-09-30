@@ -4,7 +4,7 @@ import type {
   QuestOutcome,
   QuestResultSummary,
 } from '../types';
-import { getQuestById } from '../data/quests';
+import { getQuestById, isStandardQuestId } from '../data/quests';
 import { pushLog } from './log';
 import { convertResolveStatesAtQuestEnd } from './resolve-conversion';
 import { createRuleEventContext, emitPartyRuleEvent } from './quirks';
@@ -63,10 +63,16 @@ export function resolveQuestResult(
   const quest = getQuestById(campaign.currentQuestId ?? '');
   const allDead = !campaign.heroes.some((h) => h.isAlive);
   const objectiveComplete = evaluateQuestCompletion(campaign);
+  // Locked Core p14: ordinary Quests do not fail; award only the objectives
+  // completed so far. Source Threat metadata makes this successor boundary
+  // explicit, so historical outcomes and schema-1 replays retain their mapping.
+  const sourceStandardReturn = campaign.runtimeContentProfile === 'community-complete-edition'
+    && campaign.activeThreatRuntime?.bossDefinitionId.startsWith('necromancer-source-level-')
+    && isStandardQuestId(campaign.currentQuestId ?? '') && quest?.xpUnit?.minimumQuestGoal === null;
 
   let outcome: QuestOutcome;
   if (reason === 'defeat' || allDead) outcome = 'failed';
-  else if (objectiveComplete) outcome = 'completed';
+  else if (objectiveComplete || sourceStandardReturn) outcome = 'completed';
   else outcome = 'incomplete';
 
   // Phase 8D：XP 完全由 Objective 完成数决定（0-3），与 outcome 解耦。

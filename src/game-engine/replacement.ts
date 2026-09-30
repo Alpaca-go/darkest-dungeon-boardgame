@@ -6,6 +6,7 @@ import type {
   ReplacementUpgradeOperation,
 } from '../types';
 import { createId } from './random';
+import { bindReplacementThreatHero } from './bosses/threat-checkpoint';
 import { getHeroById } from '../data/heroes';
 import { getSkillsByHero } from '../data/skills';
 import { getHeroLevelProfile } from '../data/hero-level-profiles';
@@ -348,6 +349,7 @@ export function confirmReplacement(campaign: CampaignState, slotId: string): Cam
   );
 
   // 全部确认 → 完成流程
+  next = bindReplacementThreatHero(next, slot.deadCampaignHeroId, finalHero.instanceId);
   const allConfirmed = next.stagecoach.pendingReplacement!.slots.every((s) => s.confirmed);
   if (allConfirmed) next = completeReplacementFlow(next);
   return next;

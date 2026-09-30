@@ -7,6 +7,7 @@ import { resolveProductionMonsterDefinition } from './component-adapters/bone-co
 import { resolveHeroDodge } from '../rules/hero-dodge';
 import type { ProductionMonsterDefinition } from '../../types/component-combat';
 import { applyBattleUnitDamage } from '../damage';
+import { isNonUnholy, isReanimationEligible } from './threat-semantics';
 import { commitNecromancerFigure, defeatNecromancerFigure, hasNecromancerFigure,
   returnNecromancerFigures, validateNecromancerFigures } from '../ruins/physical-supply';
 
@@ -341,7 +342,7 @@ function resolveDeaths(b: BattleState, ids: string[], rng: () => number): void {
     return { instanceId: unit.id, definition: clone(def), areaId: e.placements[unit.id], correspondingAreaId: e.correspondingAreas[unit.id], unit: clone(unit), tokenId: token?.tokenId ?? null };
   });
   e.queuedDeathIds = e.queuedDeathIds.filter(id => !ids.includes(id));
-  const eligible = snapshots.filter(d => !d.definition.large);
+  const eligible = snapshots.filter(d => isReanimationEligible(d.definition.large));
   if (e.side === 'THREAT' && e.definition.reanimation && !e.reanimationState.firstDeathWindowConsumed && !e.reanimationState.lockedEventId && eligible.length) e.reanimationState.lockedEventId = parent;
   const effects = snapshots.flatMap(d => (d.definition.onDeathEffects ?? []).map(effect => `${d.instanceId}:${effect.effectId}`));
   continueDeathEffects(b, { kind: 'death-effects', deaths: snapshots, remainingEffectIds: effects, nestedDeathIds: [], parentEventId: parent }, rng);
@@ -393,7 +394,7 @@ function continueDeathEffects(b: BattleState, continuation: Extract<BossContinua
   b.initiativeOrder = [...prefix, ...rest]; b.initiativeIndex = prefix.length - 1;
   b.initiativeCards = b.initiativeCards?.filter(c => !c.actorId || !ids.includes(c.actorId));
   recordBossRuntimeEvent(b, 'OLD_INSTANCES_REMOVED', { ids }, ids, undefined, parent);
-  const eligible = snapshots.filter(d => !d.definition.large);
+  const eligible = snapshots.filter(d => isReanimationEligible(d.definition.large));
   if (e.side === 'THREAT' && e.definition.reanimation && !e.reanimationState.firstDeathWindowConsumed && eligible.length && e.reanimationState.lockedEventId === parent) {
     if (eligible.length > 1) {
       createBossRuntimeChoice(b, 'CHOICE_REANIMATION_DEATH', eligible.map(d => d.instanceId), { kind: 'reanimate', deaths: eligible, parentEventId: parent }, 'NECRO_SIMULTANEOUS_FIRST_DEATH_PLAYER_CHOICE', parent);
@@ -560,7 +561,7 @@ function handle(b: BattleState, input: BossRuntimeInput, rng: () => number): voi
       const nonUnholy = e.threatState.appearedDefinitionIds.filter(id => {
         const def = e.spawnDefinitions[id];
         if (!def) throw new Error('Resolved Monster tags required for Threat removal');
-        return !def.tags.some(t => t.toLowerCase() === 'unholy');
+        return isNonUnholy(def.tags);
       });
       for (const id of nonUnholy) if (!e.threatState.permanentlyRemovedDefinitionIds.includes(id)) e.threatState.permanentlyRemovedDefinitionIds.push(id);
       for (const id of nonUnholy) {

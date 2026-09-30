@@ -29,6 +29,7 @@ import {
   shouldDrawThreatForCurrentAct,
   threatDrawTransactionIds,
   withThreatDrawHistory,
+  usesProductionThreatPool,
 } from './threat-selection';
 import { createId, nowIso } from '../random';
 import { pushLog } from '../log';
@@ -611,6 +612,12 @@ export function advanceCampaignAfterBoss(
     now,
     transactionId: threatDrawTransactionIds.forAct(campaign.id, nextAct),
   });
+  // Commit the earned Act transition while holding the next, unbound production
+  // Threat selection. Never substitute an unrelated prototype to grant Boss victory.
+  if (!drawResult.ok && drawResult.reason === 'empty-pool' && usesProductionThreatPool(next)) {
+    next = syncCampaignProgressMirrors(withTransactionRecorded(next, transactionId));
+    return { ok: true, campaign: next, transactionId, alreadyApplied: false, error: null };
+  }
   if (!drawResult.ok) {
     return {
       ok: false,
