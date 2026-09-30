@@ -30,6 +30,15 @@ the C1C33 entry additionally checks all frozen runtime/evidence/acceptance hashe
 Cleanup removes the dependency junction before removing the temporary checkout.
 Errors propagate; no tests are skipped/deleted and no allowlist is broadened.
 
+The first Linux CI run exposed a historical C1C25 asset verifier dependency on
+the original Windows transport JSON path. The already locked input is now
+vendored as a compressed provenance fixture (SHA-256 verified against the frozen
+C1C24 manifest). A narrowly scoped Node preload redirects only that exact read
+to the same decompressed bytes, including in immutable checkout subprocesses.
+Original asset reconstruction, GUID/CardID/deck URL, crop and hash assertions all
+still execute. The transport fixture is not rules authority; no TTS script is
+interpreted, no source acquisition occurs and production has no dependency on it.
+
 The existing CLI exit-contract test previously regenerated shared frozen
 source-manifest/readiness timestamps. Its real subprocess now uses the supported
 `PHASE11A3_REPO_ROOT` override to write to a temporary directory, with the same

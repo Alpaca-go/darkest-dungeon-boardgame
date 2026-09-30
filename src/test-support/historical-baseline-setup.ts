@@ -3,6 +3,7 @@ import { copyFileSync, mkdirSync, mkdtempSync, rmSync, symlinkSync, unlinkSync }
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { verifyHistoricalBaseline } from '../../scripts/audit/historical-baseline';
+import '../../scripts/audit/legacy-transport-preload.mjs';
 
 // Preserve the original test files (also hash-bound by C1C31/R). Only their
 // historical checkout dispatch changes; all semantic and scope assertions use

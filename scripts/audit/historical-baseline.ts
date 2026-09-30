@@ -3,6 +3,7 @@ import { copyFileSync, existsSync, mkdtempSync, readFileSync, rmSync, symlinkSyn
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { createHash } from 'node:crypto';
+import { pathToFileURL } from 'node:url';
 
 export const historicalBaselines = {
   c1c27: { commit: 'aaedb2d30b1e5d90bf8d41e7dbced9f93288f73a', script: 'scripts/audit/verify-complete-edition-c1c27.ts' },
@@ -38,8 +39,9 @@ export function verifyHistoricalBaseline(phase: keyof typeof historicalBaselines
       copyFileSync('docs/DD_EN_COREBOX_RULES.pdf', join(checkout, 'docs/DD_EN_COREBOX_RULES.pdf'));
     }
     symlinkSync(resolve('node_modules'), join(checkout, 'node_modules'), process.platform === 'win32' ? 'junction' : 'dir');
-    execFileSync(process.execPath, [resolve('node_modules/vite-node/vite-node.mjs'), script, ...(phase === 'c1c33' ? ['--verify'] : [])],
-      { cwd: checkout, stdio: 'pipe', maxBuffer: 16 * 1024 * 1024 });
+    execFileSync(process.execPath, ['--import', pathToFileURL(resolve('scripts/audit/legacy-transport-preload.mjs')).href, resolve('node_modules/vite-node/vite-node.mjs'), script, ...(phase === 'c1c33' ? ['--verify'] : [])],
+      { cwd: checkout, stdio: 'pipe', maxBuffer: 16 * 1024 * 1024,
+        env: { ...process.env, DDBG_LEGACY_TRANSPORT_ARCHIVE: resolve('docs/data/complete-edition/source-assets/c1c34/legacy-transport.json.gz') } });
   } finally {
     // Only remove the junction itself; never recurse through the shared dependency directory.
     if (existsSync(join(checkout, 'node_modules'))) unlinkSync(join(checkout, 'node_modules'));

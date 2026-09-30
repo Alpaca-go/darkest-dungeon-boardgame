@@ -49,5 +49,20 @@
     "required": true,
     "workflow": ".github/workflows/release-gate.yml",
     "verification": "Actual GitHub run for committed HEAD; local result does not imply remote PASS"
+  },
+  "portableHistoricalInputs": {
+    "initialRemoteRun": "https://github.com/Alpaca-go/darkest-dungeon-boardgame/actions/runs/36746633367",
+    "initialRemoteFailure": "Three historical asset checks depended on an absolute local TTS transport path",
+    "fix": "Vendored exact hash-locked compressed provenance bytes; narrow read redirect retains original verifier assertions",
+    "rulesAuthority": false,
+    "networkAcquisition": false,
+    "targetedTests": {
+      "passed": 103,
+      "total": 103,
+      "failed": 0
+    },
+    "typecheck": "PASS",
+    "build": "PASS",
+    "fullRegressionAfterFix": "Required by remote release gate on final committed HEAD"
   }
 }
