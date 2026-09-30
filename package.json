@@ -140,9 +140,9 @@
     "verify:complete-edition-c1c26": "vite-node scripts/audit/verify-complete-edition-c1c26.ts",
     "import:complete-edition-c1c27": "node scripts/audit/acquire-c1c27-sources.mjs",
     "audit:complete-edition-c1c27": "vite-node scripts/audit/generate-complete-edition-c1c27.ts",
-    "verify:complete-edition-c1c27": "vite-node scripts/audit/verify-complete-edition-c1c27.ts",
+    "verify:complete-edition-c1c27": "vite-node scripts/audit/verify-historical-baselines.ts c1c27",
     "audit:complete-edition-c1c28": "vite-node scripts/audit/generate-complete-edition-c1c28.ts",
-    "verify:complete-edition-c1c28": "vite-node scripts/audit/verify-complete-edition-c1c28.ts",
+    "verify:complete-edition-c1c28": "vite-node scripts/audit/verify-historical-baselines.ts c1c28",
     "audit:complete-edition-c1c29": "vite-node scripts/audit/generate-complete-edition-c1c29.ts",
     "verify:complete-edition-c1c29": "vite-node scripts/audit/verify-complete-edition-c1c29.ts",
     "test:necromancer-foundation": "vitest run src/game-engine/bosses/foundation.test.ts src/game-engine/commands/boss-foundation.test.ts src/audit/c1c29-necromancer-runtime-foundation.test.ts",
@@ -187,8 +187,11 @@
     "verify:complete-edition-c1c32r3r": "node scripts/audit/c1c33-r3r-prerequisite.mjs",
     "test:necromancer-production-acceptance": "vitest run src/audit/c1c33-necromancer-production-acceptance.test.ts src/audit/c1c32r2c-large-save.test.ts src/audit/c1c32r2c-summon-ledgers.test.ts src/audit/c1c32r3r-production-threat.test.ts src/audit/c1c32r-necromancer-threat-bridge.test.ts",
     "audit:complete-edition-c1c33": "vite-node scripts/audit/c1c33-production-freeze.ts",
-    "verify:complete-edition-c1c33": "vite-node scripts/audit/c1c33-production-freeze.ts --verify",
-    "validate:complete-edition-c1c33": "node scripts/audit/run-c1c33-validation.mjs"
+    "verify:complete-edition-c1c33": "vite-node scripts/audit/verify-historical-baselines.ts c1c33",
+    "validate:complete-edition-c1c33": "node scripts/audit/run-c1c33-validation.mjs",
+    "historical-baseline-validation": "vite-node scripts/audit/verify-historical-baselines.ts",
+    "audit:complete-edition-c1c34": "vite-node scripts/audit/c1c34-rebaseline.ts --write",
+    "verify:complete-edition-c1c34": "vite-node scripts/audit/c1c34-rebaseline.ts --verify"
   },
   "dependencies": {
     "lucide-react": "^0.408.0",

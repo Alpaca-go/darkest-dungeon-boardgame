@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C34",
+  "baseline": "e1fcfac0692eb91c5710552ac93e3bacb25f0240",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "contractVersion": "C1C34-SUCCESSOR-BINDING-v1",
+  "gameplayChanged": false,
+  "productionPromotion": false,
+  "outcome": "PROPHET_PRODUCTION_BINDING_SELECTED",
+  "family": "Prophet",
+  "nextPhase": "C1C35 — Prophet Official Source Binding & Production Foundation",
+  "selectionScope": "SOURCE_BINDING_CONTRACT_ONLY",
+  "foundationExecutionAllowed": false,
+  "canonicalPromotion": false,
+  "productionReady": false,
+  "blockers": [
+    "tile",
+    "d10-area-mapping",
+    "crowded-area-tie",
+    "pew-attack-order-and-save",
+    "target-effect-glyph-binding"
+  ],
+  "contract": {
+    "version": "C1C34-SUCCESSOR-BINDING-v1",
+    "levels": [
+      1,
+      2,
+      3
+    ],
+    "requiredFields": [
+      "level-1-battle",
+      "level-1-stats",
+      "level-1-skill-table",
+      "level-1-rubble",
+      "level-1-threat",
+      "level-2-battle",
+      "level-2-stats",
+      "level-2-skill-table",
+      "level-2-rubble",
+      "level-2-threat",
+      "level-3-battle",
+      "level-3-stats",
+      "level-3-skill-table",
+      "level-3-rubble",
+      "level-3-threat",
+      "room",
+      "tile",
+      "d10-area-mapping",
+      "wooden-pews",
+      "crowded-area-tie",
+      "pew-attack-order-and-save",
+      "target-effect-glyph-binding"
+    ],
+    "executionPaths": [
+      "selector-and-level-binding",
+      "ordinary-threat-and-cross-quest",
+      "room-reservation-and-boss-entry",
+      "three-initiative-ordinal",
+      "first-action-placement",
+      "second-action-skills",
+      "third-action-per-pew",
+      "save-reload-and-tamper",
+      "victory-and-room-return"
+    ],
+    "rulingPolicy": {
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "explicitVersionRequired": true,
+      "canonicalMissingStatus": "SOURCE_UNRESOLVED"
+    },
+    "promotionRequirements": [
+      "Every required source field independently bound to locked evidence",
+      "Every missing executable behavior explicitly reviewed and versioned",
+      "No prototype Room/RNG/repair fallbacks",
+      "Use shared BattleState, damage, RNG, initiative and campaign transactions",
+      "Normal production selector / ordinary Threat / Boss Room / real victory for all levels",
+      "Save/reload/replay and tamper rejection with choices/causal events/ruleset",
+      "Manual production browser gate at successor freeze",
+      "C1C33 immutable integrity and remote release gate PASS"
+    ]
+  },
+  "rationale": [
+    {
+      "family": "Prophet",
+      "cost": 7,
+      "reason": "One non-actor Pew mechanism; existing ordinal/area framework; Ruins Threat/checkpoint/storage reuse."
+    },
+    {
+      "family": "Thing from the stars",
+      "cost": 16,
+      "reason": "Smallest card set, but no family runtime and less direct Ruins production binding."
+    },
+    {
+      "family": "Collector",
+      "cost": 41,
+      "reason": "Collector prototype exists too; summon/ownership reusable, but Collected actors and Loot Chests widen binding."
+    },
+    {
+      "family": "Hag",
+      "cost": 44,
+      "reason": "Cauldron/captive Hero and two-unit lifecycle need new battle/UI/save handling."
+    }
+  ],
+  "necromancerWorkstream": "FROZEN"
+}

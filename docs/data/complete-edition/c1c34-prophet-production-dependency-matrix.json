@@ -1,0 +1,205 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C34",
+  "baseline": "e1fcfac0692eb91c5710552ac93e3bacb25f0240",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "contractVersion": "C1C34-SUCCESSOR-BINDING-v1",
+  "gameplayChanged": false,
+  "productionPromotion": false,
+  "executionPaths": [
+    {
+      "id": "selector-and-level-binding",
+      "requiredFields": [
+        "level-1-battle",
+        "level-2-battle",
+        "level-3-battle"
+      ],
+      "primitive": "src/game-engine/bosses/definitions.ts",
+      "reason": "Shared selector gate; Prophet definitions remain disabled.",
+      "status": "REUSABLE_AFTER_SOURCE_BINDING",
+      "executable": false,
+      "missingSourceOrRuling": [],
+      "requiredAcceptance": [
+        "Level I/II/III source binding",
+        "normal selector / no prototype",
+        "save reload result equivalence",
+        "tamper rejection"
+      ]
+    },
+    {
+      "id": "ordinary-threat-and-cross-quest",
+      "requiredFields": [
+        "level-1-threat",
+        "level-2-threat",
+        "level-3-threat"
+      ],
+      "primitive": "src/game-engine/bosses/threat-checkpoint.ts",
+      "reason": "Checkpoint reusable; entry stress, scouting stress, Unholy spawn and Tavern hooks need Prophet binding.",
+      "status": "REUSABLE_AFTER_SOURCE_BINDING",
+      "executable": false,
+      "missingSourceOrRuling": [],
+      "requiredAcceptance": [
+        "Level I/II/III source binding",
+        "normal selector / no prototype",
+        "save reload result equivalence",
+        "tamper rejection"
+      ]
+    },
+    {
+      "id": "room-reservation-and-boss-entry",
+      "requiredFields": [
+        "room",
+        "tile",
+        "d10-area-mapping"
+      ],
+      "primitive": "src/game-engine/bosses/room-storage.ts",
+      "reason": "Room storage lifecycle reusable; specific Room/Tile/coordinates missing.",
+      "status": "REUSABLE_AFTER_SOURCE_BINDING",
+      "executable": false,
+      "missingSourceOrRuling": [
+        "tile",
+        "d10-area-mapping"
+      ],
+      "requiredAcceptance": [
+        "Level I/II/III source binding",
+        "normal selector / no prototype",
+        "save reload result equivalence",
+        "tamper rejection"
+      ]
+    },
+    {
+      "id": "three-initiative-ordinal",
+      "requiredFields": [
+        "wooden-pews"
+      ],
+      "primitive": "src/game-engine/prophet/runtime.ts",
+      "reason": "Reuse shared initiative stream with Prophet ordinal adapter.",
+      "status": "REUSABLE_AFTER_SOURCE_BINDING",
+      "executable": false,
+      "missingSourceOrRuling": [],
+      "requiredAcceptance": [
+        "Level I/II/III source binding",
+        "normal selector / no prototype",
+        "save reload result equivalence",
+        "tamper rejection"
+      ]
+    },
+    {
+      "id": "first-action-placement",
+      "requiredFields": [
+        "wooden-pews",
+        "d10-area-mapping",
+        "tile"
+      ],
+      "primitive": "src/game-engine/prophet/runtime.ts",
+      "reason": "Four rolls and placement trace reusable; prohibit prototype fallback.",
+      "status": "REUSABLE_AFTER_SOURCE_BINDING",
+      "executable": false,
+      "missingSourceOrRuling": [
+        "d10-area-mapping",
+        "tile"
+      ],
+      "requiredAcceptance": [
+        "Level I/II/III source binding",
+        "normal selector / no prototype",
+        "save reload result equivalence",
+        "tamper rejection"
+      ]
+    },
+    {
+      "id": "second-action-skills",
+      "requiredFields": [
+        "level-1-skill-table",
+        "level-2-skill-table",
+        "level-3-skill-table",
+        "crowded-area-tie",
+        "target-effect-glyph-binding"
+      ],
+      "primitive": "src/game-engine/prophet/runtime.ts",
+      "reason": "Shared damage/target pipeline; exact effect/choice bindings pending.",
+      "status": "REUSABLE_AFTER_SOURCE_BINDING",
+      "executable": false,
+      "missingSourceOrRuling": [
+        "crowded-area-tie",
+        "target-effect-glyph-binding"
+      ],
+      "requiredAcceptance": [
+        "Level I/II/III source binding",
+        "normal selector / no prototype",
+        "save reload result equivalence",
+        "tamper rejection"
+      ]
+    },
+    {
+      "id": "third-action-per-pew",
+      "requiredFields": [
+        "level-1-rubble",
+        "level-2-rubble",
+        "level-3-rubble",
+        "pew-attack-order-and-save"
+      ],
+      "primitive": "src/game-engine/prophet/runtime.ts",
+      "reason": "Independent attacks need resumable cursor/death causality.",
+      "status": "REUSABLE_AFTER_SOURCE_BINDING",
+      "executable": false,
+      "missingSourceOrRuling": [
+        "pew-attack-order-and-save"
+      ],
+      "requiredAcceptance": [
+        "Level I/II/III source binding",
+        "normal selector / no prototype",
+        "save reload result equivalence",
+        "tamper rejection"
+      ]
+    },
+    {
+      "id": "save-reload-and-tamper",
+      "requiredFields": [
+        "tile",
+        "d10-area-mapping",
+        "pew-attack-order-and-save"
+      ],
+      "primitive": "src/game-engine/save.ts",
+      "reason": "Reuse schema-2 metadata and validations; add Prophet hazards/ordinal/cursor contract.",
+      "status": "REUSABLE_AFTER_SOURCE_BINDING",
+      "executable": false,
+      "missingSourceOrRuling": [
+        "tile",
+        "d10-area-mapping",
+        "pew-attack-order-and-save"
+      ],
+      "requiredAcceptance": [
+        "Level I/II/III source binding",
+        "normal selector / no prototype",
+        "save reload result equivalence",
+        "tamper rejection"
+      ]
+    },
+    {
+      "id": "victory-and-room-return",
+      "requiredFields": [
+        "wooden-pews",
+        "room"
+      ],
+      "primitive": "src/game-engine/commands/battle.ts",
+      "reason": "Reuse campaign transactions and storage return; source-bound Prophet cleanup pending.",
+      "status": "REUSABLE_AFTER_SOURCE_BINDING",
+      "executable": false,
+      "missingSourceOrRuling": [],
+      "requiredAcceptance": [
+        "Level I/II/III source binding",
+        "normal selector / no prototype",
+        "save reload result equivalence",
+        "tamper rejection"
+      ]
+    }
+  ],
+  "executablePaths": 0,
+  "blockers": [
+    "tile",
+    "d10-area-mapping",
+    "crowded-area-tie",
+    "pew-attack-order-and-save",
+    "target-effect-glyph-binding"
+  ]
+}
