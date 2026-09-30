@@ -2,7 +2,9 @@ export const RUINS_V4 = 'C1C32R2A-DIGITAL-DEFAULT-v4' as const;
 /** Noncanonical, explicitly selected successor. v4 records are never rewritten. */
 export const RUINS_V5 = 'C1C32R2B-DIGITAL-DEFAULT-v5' as const;
 export const RUINS_V5_REPLACEMENT_RULING = 'C1C32R2B-LARGE-REPLACEMENT-RETURN-WITH-BATTLE-v1' as const;
-export type RuinsRuleSetVersion = typeof RUINS_V4 | typeof RUINS_V5;
+export const RUINS_V6 = 'C1C32R2C-R-DIGITAL-DEFAULT-v6' as const;
+export const RUINS_V6_RULING = 'C1C32R2C-R-ATOMIC-LARGE-CONTRACTS-v1' as const;
+export type RuinsRuleSetVersion = typeof RUINS_V4 | typeof RUINS_V5 | typeof RUINS_V6;
 export const RUINS_STANCES = ['aggressive', 'defensive', 'ranged', 'support'] as const;
 export type RuinsStance = typeof RUINS_STANCES[number];
 export interface PrintedSource {
@@ -34,7 +36,7 @@ export interface RuinsMonster {
   size: 'NORMAL' | 'SMALL' | 'LARGE'; occupiedSpaces: number; stanceSlots: number; life: number; speed: number; dodge: number;
   copyCount: number; physicalCopyIds: string[]; deployment: 'FRONT' | 'BACK'; tags: string[];
   printedProtection: boolean; resistances: PrintedCondition[]; immunities: PrintedCondition[];
-  status: 'SOURCE_BOUND_TYPED_CANDIDATE'; executable: false; skills: RuinsSkill[];
+  status: 'SOURCE_BOUND_TYPED_CANDIDATE' | 'EXECUTABLE_PRODUCTION_DEFINITION'; executable: boolean; skills: RuinsSkill[];
   stanceBehavior: Record<RuinsStance, StanceBehavior>; sourceReferences: PrintedSource[]; unresolvedFields: [];
 }
 export interface RuinsArea {

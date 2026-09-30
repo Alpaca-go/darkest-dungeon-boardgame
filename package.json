@@ -177,7 +177,10 @@
     "verify:complete-edition-c1c32r2b": "vite-node scripts/audit/verify-complete-edition-c1c32r2b.ts",
     "test:ruins-production-executor": "vitest run c1c32r2c",
     "audit:complete-edition-c1c32r2c": "vite-node scripts/audit/c1c32r2c-status.ts",
-    "verify:complete-edition-c1c32r2c": "vite-node scripts/audit/c1c32r2c-status.ts --verify"
+    "verify:complete-edition-c1c32r2c": "vite-node scripts/audit/c1c32r2c-status.ts --verify",
+    "test:ruins-final-runtime-blockers": "vitest run c1c32r2c src/audit/ruins-final-runtime-blockers.test.ts --maxWorkers=2 --minWorkers=2",
+    "audit:complete-edition-c1c32r2c-r": "vite-node scripts/audit/c1c32r2c-r-final-blockers.ts",
+    "verify:complete-edition-c1c32r2c-r": "vite-node scripts/audit/c1c32r2c-r-final-blockers.ts --verify"
   },
   "dependencies": {
     "lucide-react": "^0.408.0",

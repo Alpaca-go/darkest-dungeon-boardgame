@@ -31,7 +31,9 @@ import { validateGraveyardReceipts } from './campaign/necromancer-graveyard';
 import { validateNecromancerPreparationDay } from './campaign/necromancer-preparation-day';
 import { validateRuinsVersionSelection } from './rules/ruins-v4';
 import { validateRuinsV5Selection } from './rules/ruins-v5';
-import { RUINS_V5 } from '../types/ruins-executable';
+import { validateRuinsV6Selection } from './rules/ruins-v6';
+import { validateSourceTrinketRewards } from './trinkets/source-deck';
+import { RUINS_V5, RUINS_V6 } from '../types/ruins-executable';
 import { validateRuinsDrawState } from './ruins/encounter-draw';
 import { validateOrdinaryRuinsBattle } from './ruins/battle-runtime';
 import { validateRuinsPendingAttack } from './ruins/monster-runtime';
@@ -207,7 +209,7 @@ export function validateSaveFile(data: unknown): string | null {
     } catch (error) { return `Boss history/checkpoint invalid: ${error instanceof Error ? error.message : String(error)}`; }
   }
   if (!c || typeof c !== 'object') return '缺少 campaign 字段';
-  try { validateProductionBossRoomStorage(c); validateHeroDodgeCampaignMetadata(c); validateGraveyardReceipts(c); validateNecromancerPreparationDay(c); if (c.ruinsRuleSetSelection?.ruleSetVersion === RUINS_V5) validateRuinsV5Selection(c); else validateRuinsVersionSelection(c); if (c.ruinsDrawState) validateRuinsDrawState(c.ruinsDrawState); if (c.ruinsBoneFigureSupply) validateBoneFigureSupply(c.ruinsBoneFigureSupply, c.ruinsDrawState); if (c.battle) { validateLargeMovementContract(c.battle); validateOrdinaryRuinsBattle(c.battle, c.ruinsDrawState); validateRuinsPendingAttack(c.battle); } }
+  try { validateProductionBossRoomStorage(c); validateHeroDodgeCampaignMetadata(c); validateGraveyardReceipts(c); validateNecromancerPreparationDay(c); validateSourceTrinketRewards(c); if (c.ruinsRuleSetSelection?.ruleSetVersion === RUINS_V6) validateRuinsV6Selection(c); else if (c.ruinsRuleSetSelection?.ruleSetVersion === RUINS_V5) validateRuinsV5Selection(c); else validateRuinsVersionSelection(c); if (c.ruinsDrawState?.ruleSetVersion === RUINS_V6) validateRuinsV6Selection(c); if (c.ruinsDrawState) validateRuinsDrawState(c.ruinsDrawState); if (c.ruinsBoneFigureSupply) validateBoneFigureSupply(c.ruinsBoneFigureSupply, c.ruinsDrawState); if (c.battle) { validateLargeMovementContract(c.battle); validateOrdinaryRuinsBattle(c.battle, c.ruinsDrawState); validateRuinsPendingAttack(c.battle); } }
   catch (error) { return `Hero Dodge metadata invalid: ${error instanceof Error ? error.message : String(error)}`; }
   if (!Array.isArray(c.heroes)) return 'campaign.heroes 缺失或不是数组';
   if (typeof c.gold !== 'number' || Number.isNaN(c.gold)) return 'campaign.gold 非法';
@@ -1756,8 +1758,11 @@ export function restoreSaveSnapshot(save: SaveFile): CampaignState {
   validateHeroDodgeCampaignMetadata(campaign);
   validateGraveyardReceipts(campaign);
   validateNecromancerPreparationDay(campaign);
-  if (campaign.ruinsRuleSetSelection?.ruleSetVersion === RUINS_V5) validateRuinsV5Selection(campaign);
+  validateSourceTrinketRewards(campaign);
+  if (campaign.ruinsRuleSetSelection?.ruleSetVersion === RUINS_V6) validateRuinsV6Selection(campaign);
+  else if (campaign.ruinsRuleSetSelection?.ruleSetVersion === RUINS_V5) validateRuinsV5Selection(campaign);
   else validateRuinsVersionSelection(campaign);
+  if (campaign.ruinsDrawState?.ruleSetVersion === RUINS_V6) validateRuinsV6Selection(campaign);
   if (campaign.ruinsDrawState) validateRuinsDrawState(campaign.ruinsDrawState);
   if (campaign.ruinsBoneFigureSupply) validateBoneFigureSupply(campaign.ruinsBoneFigureSupply, campaign.ruinsDrawState);
   if (campaign.battle) { validateNecromancerFigures(campaign.battle); validateLargeMovementContract(campaign.battle); validateOrdinaryRuinsBattle(campaign.battle, campaign.ruinsDrawState); validateRuinsPendingAttack(campaign.battle); }

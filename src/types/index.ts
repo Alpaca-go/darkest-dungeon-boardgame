@@ -791,7 +791,7 @@ export interface HeroLevelProfile {
 /** 战役状态（存档根对象）。 */
 export interface CampaignState {
   ruinsBoneFigureSupply?: import('../game-engine/ruins/physical-supply').BoneFigureSupplyState;
-  ruinsRuleSetSelection?: import('../game-engine/rules/ruins-v4').RuinsVersionSelection | import('../game-engine/rules/ruins-v5').RuinsV5Selection;
+  ruinsRuleSetSelection?: import('../game-engine/rules/ruins-v4').RuinsVersionSelection | import('../game-engine/rules/ruins-v5').RuinsV5Selection | import('../game-engine/rules/ruins-v6').RuinsV6Selection;
   ruinsDrawState?: import('../game-engine/ruins/encounter-draw').RuinsDrawState;
   necromancerPreparationDay?: import('../game-engine/campaign/necromancer-preparation-day').NecromancerPreparationDay;
   necromancerGraveyardReceipts?: import('./necromancer-dependencies').GraveyardReceipt[];
@@ -894,6 +894,7 @@ export interface CampaignState {
   temporarySkillFormOverrides: TemporarySkillFormOverride[];
   // ---- Phase 8C：Trinket / Nomad Wagon ----
   /** 待分配的 Trinket 队列（先进先出；含死亡转移，刷新可恢复）。 */
+  pendingSourceTrinketRewards?: import('../game-engine/trinkets/source-deck').PendingSourceTrinketReward[];
   pendingTrinketAllocations: PendingTrinketAllocation[];
   /** 当前开放中的 Trinket 使用机会（同一窗口可能同时开多张卡）。 */
   pendingTrinketUseOpportunities: TrinketUseOpportunity[];

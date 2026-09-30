@@ -5,6 +5,9 @@ import { continueRuinsSkillAfterForcedMove, ruinsAreaDistance } from './monster-
 import { applyRuinsPrintedEffects, recordRuinsEvent, withRuinsRandom } from './printed-effect-runtime';
 import { applyBattleUnitDamage } from '../damage';
 import { getQuirkById } from '../../data/quirks';
+import { drawSourceBoundTrinketCard } from '../trinkets/source-deck';
+import { nowIso } from '../random';
+import { RUINS_V6 } from '../../types/ruins-executable';
 import { drawSourceCompleteTrinket } from '../trinkets/draw-trinket';
 import { acquireTrinket } from '../trinkets/acquire-trinket';
 import { runtimeContentContext } from '../../data/content-selector';
@@ -162,6 +165,26 @@ export function interactOrdinaryRuinsRoom(campaign: CampaignState, unitId: strin
     if (effect.type === 'drawTrinket') {
       const level = campaign.campaignProgress.campaignLevel;
       if (![1, 2, 3].includes(level)) throw new Error('Room Trinket draw level unavailable');
+      if (context.ruleSetVersion === RUINS_V6) {
+        const card = drawSourceBoundTrinketCard(level as 1 | 2 | 3,
+          () => withRuinsRandom(nextBattle, random => random()));
+        // The causal draw receipt precedes allocation and shares its atomic campaign commit.
+        recordRuinsEvent(nextBattle.ruinsContext!, 'SOURCE_TRINKET_DRAW', unitId, [unitId], interactionId,
+          { sourceTrinketId: card.id, level: card.level, runtimeEffectReady: card.runtimeEffectReady,
+            rngCursor: nextBattle.ruinsContext!.rngCursor, rngCalls: nextBattle.ruinsContext!.rngCalls,
+            rewardOwner: campaign.id });
+        if (card.runtimeEffectReady) {
+          nextCampaign = acquireTrinket(nextCampaign, { trinketId: card.id, source: 'loot',
+            sourceEventId: interactionId, questId: campaign.currentQuestId, heroId: hero.sourceId }).campaign;
+        } else {
+          nextCampaign = { ...nextCampaign, pendingSourceTrinketRewards: [...(nextCampaign.pendingSourceTrinketRewards ?? []), {
+            sourceTrinketId: card.id, printedName: card.name, level: card.level, sourceEventId: interactionId,
+            questId: campaign.currentQuestId ?? null, acquiredAt: nowIso(), runtimeEffectReady: false,
+            status: 'SOURCE_BOUND_EFFECT_RUNTIME_PENDING',
+          }] };
+        }
+        nextBattle = nextCampaign.battle!;
+      } else {
       const result = drawSourceCompleteTrinket({ level: level as 1 | 2 | 3,
         runtimeContext: runtimeContentContext(campaign),
         rng: () => withRuinsRandom(nextBattle, random => random()) });
@@ -170,6 +193,7 @@ export function interactOrdinaryRuinsRoom(campaign: CampaignState, unitId: strin
         source: 'loot', sourceEventId: interactionId, questId: campaign.currentQuestId,
         heroId: hero.sourceId }).campaign;
       nextBattle = nextCampaign.battle!;
+      }
     } else {
       nextBattle = applyRuinsPrintedEffects(nextBattle, unitId, unitId, [effect as PrintedEffect], interactionId);
       nextCampaign = { ...nextCampaign, battle: nextBattle };

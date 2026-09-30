@@ -1,3 +1,4 @@
+import { RUINS_V6 } from '../types/ruins-executable';
 import { describe, expect, it } from 'vitest';
 import { drawnRuinsFixture, fixtureArea } from '../game-engine/ruins/executor-test-fixture';
 import { ruinsRoom, ruinsTile } from '../game-engine/ruins/source-registry';
@@ -14,7 +15,7 @@ const rules = Array.from({ length: 9 }, (_, index) => ruinsRoom(index + 1))
 
 describe('C1C32R2C all source Room rules execute', () => {
   it.each(rules)('$roomNumber / $rule.id / $rule.trigger', ({ roomNumber, rule }) => {
-    const campaign = drawnRuinsFixture(encounter => encounter.roomNumber === roomNumber);
+    const campaign = drawnRuinsFixture(encounter => encounter.roomNumber === roomNumber, 3, RUINS_V6);
     const battle = structuredClone(campaign.battle);
     const unit = rule.side === 'monster' ? battle.monsters[0] : battle.heroes[0];
     if (rule.id === 'invoking-abyss') {
@@ -45,17 +46,12 @@ describe('C1C32R2C all source Room rules execute', () => {
     }
     if (rule.trigger === 'INTERACT') {
       if (rule.effects.some(effect => effect.type === 'drawTrinket')) {
-        const bytes = JSON.stringify({ ...campaign, battle });
-        // The frozen Core Trinket corpus can fail the downstream draw gate. No invented card or use receipt.
-        try {
-          const after = interactOrdinaryRuinsRoom({ ...campaign, battle }, unit.id, rule.id);
-          expect(after.battle!.ruinsContext!.roomUses).toContain(rule.id);
-          expect(after.battle!.currentActionPoints).toBe(2 - rule.actionCost);
-          expect(after.trinketAcquisitionRecords.length).toBeGreaterThan(campaign.trinketAcquisitionRecords.length);
-        } catch (error) {
-          expect(String(error)).toMatch(/Room Trinket runtime unavailable: (SOURCE_DECK_INCOMPLETE|RUNTIME_POOL_MISMATCH|EMPTY_DECK)/);
-          expect(JSON.stringify({ ...campaign, battle })).toBe(bytes);
-        }
+        const after = interactOrdinaryRuinsRoom({ ...campaign, battle }, unit.id, rule.id);
+        expect(after.battle!.ruinsContext!.roomUses).toContain(rule.id);
+        expect(after.battle!.currentActionPoints).toBe(2 - rule.actionCost);
+        expect(after.battle!.ruinsContext!.events.some(e => e.type === 'SOURCE_TRINKET_DRAW')).toBe(true);
+        expect(after.trinketAcquisitionRecords.length + (after.pendingSourceTrinketRewards?.length ?? 0))
+          .toBeGreaterThan(campaign.trinketAcquisitionRecords.length);
         return;
       }
       const after = interactOrdinaryRuinsRoom({ ...campaign, battle }, unit.id, rule.id);

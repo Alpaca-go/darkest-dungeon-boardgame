@@ -4,7 +4,8 @@ import { ruinsMonster, ruinsRoom, ruinsTile } from './source-registry';
 import { resumeRuinsAttackContinuation, ruinsAreaDistance } from './monster-runtime';
 import { synchronizeRuinsConditions } from './condition-runtime';
 import { canMoveRuinsUnit, moveRuinsUnit, pauseRuinsLargeDisplacement } from './movement-runtime';
-import { RUINS_STANCES } from '../../types/ruins-executable';
+import { shuffleAtomicStanceBlocks } from './stance-shuffle';
+import { RUINS_STANCES, RUINS_V6 } from '../../types/ruins-executable';
 import { applyEffects, applyStatusEffectEvent } from '../status-effects';
 import { ALL_DISEASES } from '../../data/diseases';
 import { drawDisease } from '../diseases/draw-disease';
@@ -109,6 +110,14 @@ export function ruinsDisplacementCandidates(battle: BattleState, unitId: string,
 
 function shuffleStance(battle: BattleState, unitId: string, direction: 'push' | 'pull', distance: number): BattleState {
   const unit = findUnit(battle, unitId);
+  if (unit.side === 'monster' && battle.ruinsContext!.ruleSetVersion === RUINS_V6) {
+    const positions = shuffleAtomicStanceBlocks(battle.monsters.filter(m => m.isAlive).map(m => ({
+      id: m.id, start: m.position - 1,
+      width: ruinsMonsterForShuffle(battle.ruinsContext!, m.id).stanceSlots,
+    })), unitId, direction, distance);
+    return { ...battle, monsters: battle.monsters.map(m => positions[m.id] === undefined ? m
+      : { ...m, position: positions[m.id] + 1, stance: RUINS_STANCES[positions[m.id]] }) };
+  }
   const from = RUINS_STANCES.indexOf(unit.stance);
   const to = Math.max(0, Math.min(3, from + (direction === 'push' ? distance : -distance)));
   const shift = to > from ? -1 : 1;

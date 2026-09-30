@@ -10,6 +10,7 @@ import MentalEventOverlay from '../mental/MentalEventOverlay';
 import QuirkDecisionOverlay from '../quirk/QuirkDecisionOverlay';
 import DiseaseAcquisitionOverlay from '../disease/DiseaseAcquisitionOverlay';
 import TrinketUseOverlay from '../trinkets/TrinketUseOverlay';
+import SourceTrinketRewards from '../trinkets/SourceTrinketRewards';
 import TrinketAllocationOverlay from '../trinkets/TrinketAllocationOverlay';
 import QuestRuleChoiceOverlay from '../quest/QuestRuleChoiceOverlay';
 
@@ -101,6 +102,7 @@ export default function GameShell() {
 
       <main className="flex-1 overflow-auto">
         <ActFourHeader />
+        <SourceTrinketRewards />
         <ErrorBoundary module={ROUTES.find((r) => r.path === location.pathname)?.label ?? '游戏页面'}>
           <Outlet />
         </ErrorBoundary>

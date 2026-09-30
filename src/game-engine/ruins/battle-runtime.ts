@@ -1,9 +1,10 @@
 import type { BattleState, BattleUnit, CampaignState } from '../../types';
-import { RUINS_STANCES, RUINS_V5, type RuinsBattleContext } from '../../types/ruins-executable';
+import { RUINS_STANCES, RUINS_V5, RUINS_V6, type RuinsBattleContext } from '../../types/ruins-executable';
 import type { OrdinaryRuinsEncounter, RuinsDrawState } from './encounter-draw';
 import { validateRuinsDrawState, returnOrdinaryRuinsEncounter } from './encounter-draw';
 import { ruinsMonster, ruinsRoom, ruinsTile } from './source-registry';
 import { makeHeroUnit, MAX_ROUNDS } from '../battle';
+import { validateRuinsV6Selection } from '../rules/ruins-v6';
 import { resolveHeroDodge, HERO_DODGE_V2 } from '../rules/hero-dodge';
 import { runRuinsRoomTrigger, ruinsRoomMovementCandidates } from './room-runtime';
 import { ruinsMonsterTurnMovementCandidates } from './monster-runtime';
@@ -13,11 +14,12 @@ import { bindLargeMovementContract, validateLargeMovementContract } from '../rul
 import { THREAT_DEPENDENCY_V3 } from '../../types/necromancer-dependencies';
 
 /** Production entry remains closed until the listed executable contracts are tested end to end. */
-export const RUINS_PRODUCTION_EXECUTOR_BLOCKERS = [
+export const RUINS_V5_EXECUTOR_BLOCKERS = [
   'INITIAL_DRAW_MIXED_TWO_LARGE_LAYOUT_POLICY_ABSENT',
   'LARGE_STANCE_SHUFFLE_SLOT_COLLISION_CONTRACT_ABSENT',
   'ROOM_TRINKET_SOURCE_COMPLETE_DRAW_UNAVAILABLE',
 ] as const;
+export const RUINS_PRODUCTION_EXECUTOR_BLOCKERS: readonly string[] = [];
 
 function makeRuinsMonsterUnit(encounter: OrdinaryRuinsEncounter, placement: OrdinaryRuinsEncounter['monsters'][number]): BattleUnit {
   const definition = ruinsMonster(placement.definitionId, encounter.ruleSetVersion);
@@ -37,7 +39,8 @@ function makeRuinsMonsterUnit(encounter: OrdinaryRuinsEncounter, placement: Ordi
 /** Bind one already-drawn physical encounter. This command never draws another card. */
 export function initializeOrdinaryRuinsBattle(campaign: CampaignState, draw: RuinsDrawState, encounterId: string): BattleState {
   validateRuinsDrawState(draw);
-  if (draw.ruleSetVersion !== RUINS_V5) throw new Error('Production ordinary Ruins Battle requires pinned v5');
+  if (draw.ruleSetVersion === RUINS_V6) validateRuinsV6Selection(campaign);
+  if (draw.ruleSetVersion !== RUINS_V5 && draw.ruleSetVersion !== RUINS_V6) throw new Error('Production ordinary Ruins Battle requires pinned v5');
   const encounter = draw.encounters.find(candidate => candidate.encounterId === encounterId && !candidate.returned);
   if (!encounter) throw new Error('Active ordinary Ruins encounter unavailable');
   const liveHeroes = campaign.heroes.filter(hero => !hero.dead);
@@ -98,11 +101,23 @@ export function initializeOrdinaryRuinsBattle(campaign: CampaignState, draw: Rui
 export function validateOrdinaryRuinsBattle(battle: BattleState, draw?: RuinsDrawState): void {
   const context = battle.ruinsContext;
   if (!context) return;
-  if (context.ruleSetVersion !== RUINS_V5 || battle.battleId !== `ruins:${context.encounterId}`
+  if ((context.ruleSetVersion !== RUINS_V5 && context.ruleSetVersion !== RUINS_V6) || battle.battleId !== `ruins:${context.encounterId}`
     || !battle.sourceRoomId || context.tileId !== `ruins-tile-${context.roomNumber}`)
     throw new Error('Ordinary Ruins Battle identity/version mismatch');
   const tile = ruinsTile(context.tileId);
   ruinsRoom(context.roomNumber);
+  if (context.ruleSetVersion === RUINS_V6) {
+    const slots = new Set<number>();
+    for (const monster of battle.monsters.filter(m => m.isAlive)) {
+      const width = ruinsMonster(context.definitionIds[monster.id], context.ruleSetVersion).stanceSlots;
+      if (monster.position !== RUINS_STANCES.indexOf(monster.stance) + 1) throw new Error('Stance anchor mismatch');
+      for (let offset = 0; offset < width; offset++) {
+        const slot = monster.position + offset;
+        if (slot < 1 || slot > 4 || slots.has(slot)) throw new Error('Invalid v6 atomic Stance layout');
+        slots.add(slot);
+      }
+    }
+  }
   const units = [...battle.heroes, ...battle.monsters];
   validateLargeMovementContract(battle);
   if (!battle.largeMovementContract || JSON.stringify(context.placements) !== JSON.stringify(battle.largeMovementContract.placements))
@@ -196,8 +211,8 @@ export function settleOrdinaryRuinsBattle(draw: RuinsDrawState, battle: BattleSt
 
 /** Campaign command: reserve figures and bind the drawn encounter in one saveable state. */
 export function beginOrdinaryRuinsBattle(campaign: CampaignState, encounterId: string): CampaignState {
-  if (RUINS_PRODUCTION_EXECUTOR_BLOCKERS.length) throw new Error(
-    `ORDINARY_RUINS_EXECUTABLE_DEPENDENCIES_NOT_CLOSED: ${RUINS_PRODUCTION_EXECUTOR_BLOCKERS.join(', ')}`);
+  if (campaign.ruinsDrawState?.ruleSetVersion !== RUINS_V6) throw new Error(
+    `ORDINARY_RUINS_EXECUTABLE_DEPENDENCIES_NOT_CLOSED: ${RUINS_V5_EXECUTOR_BLOCKERS.join(', ')}`);
   const draw = campaign.ruinsDrawState;
   if (!draw || campaign.battle || campaign.gamePhase !== 'dungeon-explore' || !campaign.dungeon)
     throw new Error('Ordinary Ruins Battle campaign entry unavailable');

@@ -4,26 +4,28 @@ import { commitQuestSelection } from '../commands/quest';
 import { getQuestPool, runtimeContentContext } from '../../data/content-selector';
 import { explicitlySelectRuinsV4 } from '../rules/ruins-v4';
 import { explicitlySelectRuinsV5 } from '../rules/ruins-v5';
-import { RUINS_STANCES, RUINS_V5 } from '../../types/ruins-executable';
+import { explicitlySelectRuinsV6 } from '../rules/ruins-v6';
+import { RUINS_STANCES, RUINS_V5, RUINS_V6, type RuinsRuleSetVersion } from '../../types/ruins-executable';
 import { createRuinsDrawState, drawOrdinaryRuinsEncounter, type OrdinaryRuinsEncounter } from './encounter-draw';
 import { initializeOrdinaryRuinsBattle } from './battle-runtime';
 import { assignOrdinaryBoneFigures, createBoneFigureSupply } from './physical-supply';
 
 /** Source definitions and physical draws, with controlled campaign prerequisites for executor tests. */
-export function drawnRuinsFixture(matches: (encounter: OrdinaryRuinsEncounter) => boolean, level: 1 | 2 | 3 = 3) {
+export function drawnRuinsFixture(matches: (encounter: OrdinaryRuinsEncounter) => boolean, level: 1 | 2 | 3 = 3, version: RuinsRuleSetVersion = RUINS_V5) {
   const chosen = applyDefaultLoadout(selectParty(createNewCampaign('community-complete-edition'),
     ['crusader', 'highwayman', 'vestal', 'hellion']));
   const party = { ...chosen, heroes: chosen.heroes.map((hero, index) => ({ ...hero, stance: RUINS_STANCES[index] })) };
   const stances = Object.fromEntries(party.heroes.map(hero => [hero.instanceId, hero.stance]));
-  const selected = explicitlySelectRuinsV5(explicitlySelectRuinsV4({ ...party, gamePhase: 'quest-select' }, 'before-draw'), 'before-draw');
+  const v5 = explicitlySelectRuinsV5(explicitlySelectRuinsV4({ ...party, gamePhase: 'quest-select' }, 'before-draw'), 'before-draw');
+  const selected = version === RUINS_V6 ? explicitlySelectRuinsV6(v5, 'before-v6-draw') : v5;
   const quest = commitQuestSelection(selected, getQuestPool(runtimeContentContext(selected))[0].id);
   if (!quest.ok) throw new Error(quest.error!);
   for (let seed = 1; seed <= 2000; seed++) {
     let draw;
-    try { draw = drawOrdinaryRuinsEncounter(createRuinsDrawState(level, seed, RUINS_V5), 'source-executor', stances); }
+    try { draw = drawOrdinaryRuinsEncounter(createRuinsDrawState(level, seed, version), 'source-executor', stances); }
     catch (error) {
       // Search only executable source layouts; the omitted initial Large policy is separately reproduced and blocks promotion.
-      if (String(error).includes('Official initial placement could not bind')) continue;
+      if (version === RUINS_V5 && String(error).includes('Official initial placement could not bind')) continue;
       throw error;
     }
     if (!matches(draw.encounters[0])) continue;
