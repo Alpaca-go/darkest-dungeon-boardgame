@@ -1,4 +1,5 @@
 import { withBossEncounterSources } from '../bosses/foundation';
+import { withRuinsRandom } from '../ruins/printed-effect-runtime';
 import { resolveDungeonTrinketOpportunity } from './dungeon-trinket-bridge';
 // Phase 8C：Trinket 与战斗/地牢流程的桥接（开发文档 §11 / §12）。
 //
@@ -56,7 +57,7 @@ export function advancePendingMonsterAttack(campaign: CampaignState, sourceScope
   for (let guard = 0; guard < 50; guard += 1) {
     const battle = next.battle;
     const pending = battle?.pendingMonsterAttack;
-    if (!battle || !pending || battle.bossEncounter?.pendingChoice) return next;
+    if (!battle || !pending || battle.bossEncounter?.pendingChoice || battle.ruinsContext?.pendingChoice) return next;
     if (hasOpenForRoot(next, pending.rootEventId)) return next;
     const target = battle.heroes.find((unit) => unit.id === pending.targetHeroUnitId);
     const hero = target ? findHero(next, target.sourceId) : undefined;
@@ -84,7 +85,7 @@ export function advancePendingMonsterAttack(campaign: CampaignState, sourceScope
 
     if (!pending.hit) {
       const committed = commitPendingMonsterAttackResolution(battle);
-      next = { ...next, battle: committed.status === 'active' && !committed.pendingMonsterAttack && !committed.bossEncounter?.pendingChoice ? advanceTurn(committed) : committed };
+      next = { ...next, battle: committed.status === 'active' && !committed.pendingMonsterAttack && !committed.bossEncounter?.pendingChoice && !committed.ruinsContext?.pendingChoice ? advanceTurn(committed) : committed };
       continue;
     }
     const opened = openTrinketWindow(next, {
@@ -101,7 +102,7 @@ export function advancePendingMonsterAttack(campaign: CampaignState, sourceScope
       return next;
     }
     const committed = commitPendingMonsterAttackResolution(next.battle!);
-    next = { ...next, battle: committed.status === 'active' ? advanceTurn(committed) : committed };
+    next = { ...next, battle: committed.status === 'active' && !committed.ruinsContext?.pendingChoice ? advanceTurn(committed) : committed };
   }
   return next;
 }
@@ -159,7 +160,7 @@ export function beginHeroSkillAction(
   const hero = heroId ? findHero(campaign, heroId) : undefined;
 
   // Roll first. The result is persisted and visible while the reaction window is open.
-  const attackRoll = rollAttackDie();
+  const attackRoll = battle.ruinsContext ? withRuinsRandom(battle, () => rollAttackDie()) : rollAttackDie();
   const rootEventId = `atk:${battle.battleId}:r${battle.round}:i${battle.initiativeIndex}:${actorUnitId}:ap${battle.currentActionPoints}`;
   let next = campaign;
   let openedInstanceIds: string[] = [];
@@ -203,7 +204,9 @@ function advancePendingAction(campaign: CampaignState): CampaignState {
   const pa = battle?.pendingAction;
   if (!battle || !pa) return campaign;
   if (pa.stage === 'post-roll-window') {
-    const prepared = prepareHeroAttackResolution(battle, pa.actorUnitId, pa.skillId, pendingBonuses(pa), pa.attackRoll);
+    const prepared = battle.ruinsContext ? withRuinsRandom(battle,
+      () => prepareHeroAttackResolution(battle, pa.actorUnitId, pa.skillId, pendingBonuses(pa), pa.attackRoll))
+      : prepareHeroAttackResolution(battle, pa.actorUnitId, pa.skillId, pendingBonuses(pa), pa.attackRoll);
     if (!prepared) return { ...campaign, battle: { ...battle, pendingAction: null } };
     const frozen: PendingBattleAction = {
       ...pa, stage: 'pre-damage-window', hit: prepared.hit, crit: prepared.crit, baseDamage: prepared.baseDamage,

@@ -127,6 +127,21 @@ export function reserveRuinsSummonCopy(state: RuinsDrawState, copyId: string, en
   return next;
 }
 
+/** Official p38 uses both the respective Monster card and miniature. Return only this summon owner's cards. */
+export function returnRuinsSummonCopies(state: RuinsDrawState, encounterId: string): RuinsDrawState {
+  validateRuinsDrawState(state);
+  const copies = Object.entries(state.ownership).filter(([, owner]) => owner.location === 'SUMMON_POOL'
+    && owner.encounterId === encounterId).map(([id]) => id).sort();
+  if (!copies.length) return state;
+  const next = structuredClone(state), random = new SeededRandom(1);
+  random.restore(next.rngCursor);
+  for (const id of copies) next.ownership[id] = { location: 'DECK' };
+  next.monsterDeck = shuffleWithRng(() => { next.rngCalls++; return random.next(); }, [...next.monsterDeck, ...copies]);
+  next.rngCursor = random.snapshot();
+  validateRuinsDrawState(next);
+  return next;
+}
+
 export function validateRuinsDrawState(state: RuinsDrawState): void {
   if (state.schemaVersion !== 1 || ![RUINS_V4, RUINS_V5].includes(state.ruleSetVersion) || ![1, 2, 3].includes(state.level)
     || !Number.isInteger(state.rngCursor) || state.rngCursor < 0 || state.rngCursor > 0xffffffff

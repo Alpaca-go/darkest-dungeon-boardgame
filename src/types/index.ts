@@ -379,7 +379,13 @@ export interface PendingBattleAction {
  * resolves the two source-distinct Trinket reaction windows.
  */
 export interface PendingMonsterAttack {
-  sourceAttack?: import('./component-combat').SourceMonsterAttack;
+    sourceAttack?: import('./component-combat').SourceMonsterAttack;
+    ruinsAttack?: {
+      skillNumber: number;
+      skill: MonsterSkillDefinition;
+      remainingTargetIds: string[];
+      parentEventId: string;
+    };
   kind: 'monster-attack';
   rootEventId: string;
   stage: 'incoming-attack-window' | 'hero-hit-window';
@@ -455,6 +461,9 @@ export interface CommunityGuardianRoomState {
 }
 
 export interface BattleState {
+    /** Saved ordinary Ruins encounter; absent from legacy and Boss battles. */
+    ruinsContext?: import('./ruins-executable').RuinsBattleContext;
+    necromancerFigureBinding?: import('../game-engine/ruins/physical-supply').NecromancerFigureBinding;
   /** Generic movement dependency contract. Absent on all historical battles. */
   largeMovementContract?: import('./necromancer-dependencies').LargeMovementContractState;
   /** Serializable, contract-bound ordinary Boss foundation; absent on legacy battles. */
@@ -781,6 +790,7 @@ export interface HeroLevelProfile {
 
 /** 战役状态（存档根对象）。 */
 export interface CampaignState {
+  ruinsBoneFigureSupply?: import('../game-engine/ruins/physical-supply').BoneFigureSupplyState;
   ruinsRuleSetSelection?: import('../game-engine/rules/ruins-v4').RuinsVersionSelection | import('../game-engine/rules/ruins-v5').RuinsV5Selection;
   ruinsDrawState?: import('../game-engine/ruins/encounter-draw').RuinsDrawState;
   necromancerPreparationDay?: import('../game-engine/campaign/necromancer-preparation-day').NecromancerPreparationDay;

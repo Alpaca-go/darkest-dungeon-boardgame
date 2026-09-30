@@ -9,6 +9,10 @@ import type {
   PendingMonsterAttack,
 } from '../types';
 import { applySourceTargetPush, sourceAttackSkill, resolveSourceAttackDodge, preparePrintedMonsterTurn } from './component-monster-runtime';
+import { finishRuinsAttack, prepareRuinsMonsterTurn, resolveRuinsAttackValues } from './ruins/monster-runtime';
+import { withRuinsRandom, withRuinsBattleSources, recordRuinsEvent } from './ruins/printed-effect-runtime';
+import { applyRuinsEnemyDamage, tickRuinsConditions } from './ruins/condition-runtime';
+import { isRuinsHealingProhibited, runRuinsRoomTrigger } from './ruins/room-runtime';
 import { finishSourceMonsterAttack, applyBossRuntimeInput, checkBossRuntimeEnd, withBossEncounterSources } from './bosses/foundation';
 import { getHeroCombatDefinition } from '../data/progression/hero-level-registry';
 import { createId, d10, nowIso } from './random';
@@ -338,14 +342,19 @@ export function initBattle(campaign: CampaignState, roomId: string): CampaignSta
 
 /** 推进到下一个行动者；自动跳过死亡/Stun 单位，并在怪物回合自动执行其动作。 */
 export function advanceTurn(state: BattleState): BattleState {
-  if (state.bossEncounter?.pendingChoice || state.pendingMonsterAttack) return state;
+  if (state.bossEncounter?.pendingChoice || state.ruinsContext?.pendingChoice || state.pendingMonsterAttack) return state;
   if (state.bossEncounter) return withBossEncounterSources(state, s => advanceTurnInternal(s));
+  if (state.ruinsContext) return withRuinsBattleSources(structuredClone(state), advanceTurnInternal);
   return advanceTurnInternal(state);
 }
 function advanceTurnInternal(state: BattleState): BattleState {
   if (state.status !== 'active') return state;
   // Phase 7：上一个行动单位的临时加成在回合结束时清零
-  let s: BattleState = clearTurnBonuses({ ...state });
+  let s: BattleState = state.ruinsContext && state.activeActorId
+    ? runRuinsRoomTrigger(state, 'END_TURN', state.activeActorId) : state;
+  if (s.ruinsContext) s = checkEnd(s);
+  if (s.ruinsContext?.pendingChoice || s.status !== 'active') return s;
+  s = clearTurnBonuses({ ...s });
   let idx = s.initiativeIndex;
   let guard = 0;
 
@@ -353,13 +362,20 @@ function advanceTurnInternal(state: BattleState): BattleState {
     idx += 1;
     if (idx >= s.initiativeOrder.length) {
       // 本轮行动列表耗尽 → 进入下一轮
+      if (s.ruinsContext) {
+        s = runRuinsRoomTrigger(s, 'ROUND_END');
+        s = checkEnd(s);
+        if (s.ruinsContext?.pendingChoice || s.status !== 'active') return s;
+      }
       s = { ...s, round: s.round + 1 };
       if (s.roundLimitPolicy !== 'not-counted' && s.round > s.maxRounds) {
         s = pushBattleLog(s, `第 ${s.maxRounds} 轮结束，怪物仍未清除，小队被迫撤退。`, 'danger');
         return { ...s, status: 'defeat' };
       }
       s = pushBattleLog(s, `—— 第 ${s.round} 轮开始 ——`, 'info');
-      s = { ...s, initiativeOrder: createInitiativeOrder(allUnits(s)), initiativeIndex: -1 };
+      s = { ...s, initiativeOrder: s.ruinsContext
+        ? withRuinsRandom(s, () => createInitiativeOrder(allUnits(s)))
+        : createInitiativeOrder(allUnits(s)), initiativeIndex: -1 };
       idx = -1;
       continue;
     }
@@ -386,7 +402,7 @@ function advanceTurnInternal(state: BattleState): BattleState {
       };
     }
 
-    if (unit.stunned > 0) {
+    if (unit.stunned > 0 && !s.ruinsContext) {
       s = applyStunSkip(s, id);
       continue;
     }
@@ -398,6 +414,17 @@ function advanceTurnInternal(state: BattleState): BattleState {
     const activated = findUnit(s, id);
     if (!activated || !activated.isAlive) continue; // 持续伤害致死，跳过
 
+    if (s.ruinsContext && unit.stunned > 0) {
+      s = setUnit(s, tickStun(activated));
+      if (activated.side === 'monster') {
+        s = runRuinsRoomTrigger(s, 'END_TURN', id);
+        s = checkEnd(s);
+        if (s.status !== 'active') return s;
+        continue;
+      }
+      s = { ...s, currentActionPoints: Math.max(0, s.currentActionPoints - 1) };
+    }
+
     if (activated.side === 'monster') {
       if (s.bossEncounter?.bossState.actorId === id) {
         s = runMonsterTurn(s, id);
@@ -408,7 +435,12 @@ function advanceTurnInternal(state: BattleState): BattleState {
       }
       if (s.stagedIncomingAttacks) {
         s = prepareMonsterAttackResolution(s, id);
-        if (s.pendingMonsterAttack) return s;
+        if (s.pendingMonsterAttack || s.ruinsContext?.pendingChoice) return s;
+        if (s.ruinsContext) {
+          s = runRuinsRoomTrigger(s, 'END_TURN', id);
+          s = checkEnd(s);
+          if (s.status !== 'active') return s;
+        }
         // No legal attack (for example, every target is out of range): the
         // preparation helper may move/log, but there is no reaction to stage.
         // Continue past this monster just like the legacy automatic path.
@@ -433,8 +465,10 @@ function activateUnitAfterMental(state: BattleState, id: string): BattleState {
   const unit = findUnit(s, id);
   if (!unit || !unit.isAlive) return s;
 
-  const sof = resolveStartOfTurnConditions(unit, state.light ?? 0);
+  const sof = s.ruinsContext ? withRuinsRandom(s, () => resolveStartOfTurnConditions(unit, state.light ?? 0))
+    : resolveStartOfTurnConditions(unit, state.light ?? 0);
   s = setUnit(s, sof.unit);
+  if (s.ruinsContext) s = tickRuinsConditions(s, id);
   for (const m of sof.messages) s = pushBattleLog(s, m, sof.heroDied ? 'danger' : 'warning');
   if (sof.heroDied || (sof.unit.side === 'monster' && !sof.unit.isAlive)) {
     s = checkEnd(s);
@@ -532,13 +566,16 @@ export function heroMove(state: BattleState, unitId: string, dir: -1 | 1): Battl
 
 /** 当前行动英雄对某技能可合法选中的目标 id。 */
 export function legalTargetsForActor(state: BattleState, skillId: string): string[] {
-  if (state.bossEncounter?.pendingChoice) return [];
+  if (state.bossEncounter?.pendingChoice || state.ruinsContext?.pendingChoice) return [];
   const actor = getActiveUnit(state);
   if (!actor) return [];
   const raw = getSkillById(skillId);
   if (!raw) return [];
   const skill = normalizeHeroSkill(raw);
-  return computeLegalTargetIds(state, actor, skill);
+  const guarded = state.ruinsContext && skill.targetSide === 'enemy'
+    ? state.monsters.filter(unit => unit.isAlive && state.ruinsContext!.guardStacks[unit.id] > 0).map(unit => unit.id) : [];
+  return computeLegalTargetIds(state, actor, skill).filter(targetId =>
+    (skill.kind !== 'heal' || !isRuinsHealingProhibited(state, targetId)) && (!guarded.length || guarded.includes(targetId)));
 }
 
 /** Phase 8C：Trinket 对冻结动作累计的加成（无 Trinket 时全 0）。 */
@@ -592,15 +629,18 @@ export function heroSkillActionError(
   targetId: string
 ): string | null {
   if (state.bossEncounter?.pendingChoice) return '请先完成 Boss 待决选择。';
+  if (state.ruinsContext?.pendingChoice) return '请先完成 Room 待决选择。';
   const actor = findUnit(state, unitId);
   if (!actor || actor.side !== 'hero' || actor.id !== state.activeActorId) return '当前不是该英雄的回合。';
   if (state.currentActionPoints <= 0) return '行动点不足。';
   const raw = getSkillById(skillId);
   if (!raw) return '技能不存在。';
   const skill = normalizeHeroSkill(raw);
+  if (skill.kind === 'heal' && isRuinsHealingProhibited(state, targetId)) return 'Room prohibits healing.';
   if (!isSkillUsableFrom(actor, skill)) return `无法从当前站位释放 ${skill.name}。`;
   const target = findUnit(state, targetId);
   if (!target || !isLegalTarget(actor, target, skill)) return '目标不合法。';
+  if (state.ruinsContext && !legalTargetsForActor(state, skillId).includes(targetId)) return '目标不合法。';
   if (state.communityFinal?.forbiddenTargetIds.includes(targetId) || (state.communityFinal?.guarded && targetId === state.communityFinal.ancestorUnitId)) {
     return '目标不合法。';
   }
@@ -621,6 +661,21 @@ export function heroUseSkill(
   preparedAttack?: PreparedHeroAttackResolution,
   finalDamageOverride?: number | null,
 ): BattleState {
+  const work = (battle: BattleState) => heroUseSkillInternal(battle, unitId, skillId, targetId,
+    trinketBonuses, preRolledAttack, preparedAttack, finalDamageOverride);
+  return state.ruinsContext ? withRuinsBattleSources(structuredClone(state), work) : work(state);
+}
+
+function heroUseSkillInternal(
+  state: BattleState,
+  unitId: string,
+  skillId: string,
+  targetId: string,
+  trinketBonuses: TrinketActionBonuses = NO_TRINKET_BONUSES,
+  preRolledAttack?: number,
+  preparedAttack?: PreparedHeroAttackResolution,
+  finalDamageOverride?: number | null,
+): BattleState {
   const actor = findUnit(state, unitId);
   if (state.bossEncounter?.pendingChoice) return state;
   if (!actor || actor.side !== 'hero' || actor.id !== state.activeActorId) return state;
@@ -628,12 +683,15 @@ export function heroUseSkill(
   const raw = getSkillById(skillId);
   if (!raw) return state;
   const skill = normalizeHeroSkill(raw);
+  if (state.ruinsContext?.pendingChoice) return state;
+  if (skill.kind === 'heal' && isRuinsHealingProhibited(state, targetId)) throw new Error('Room passive prohibits healing');
 
   if (!isSkillUsableFrom(actor, skill)) {
     return pushBattleLog(state, `${actor.name} 无法从当前站位释放 ${skill.name}。`, 'warning');
   }
   const target = findUnit(state, targetId);
   if (!target || !isLegalTarget(actor, target, skill)) return state;
+  if (state.ruinsContext && !legalTargetsForActor(state, skillId).includes(targetId)) return state;
   if (state.communityFinal?.forbiddenTargetIds.includes(targetId) || (state.communityFinal?.guarded && targetId === state.communityFinal.ancestorUnitId)) {
     return pushBattleLog(state, `${actor.name} 无法攻击受 Guard 保护的目标。`, 'warning');
   }
@@ -694,7 +752,12 @@ export function heroUseSkill(
           'info'
         );
       }
-      const outcome = applyBattleUnitDamage(tgt, totalDamage);
+      const ordinaryDamage = s.ruinsContext ? applyRuinsEnemyDamage(s, actor.id, tgt.id, totalDamage) : null;
+      if (ordinaryDamage) {
+        s = ordinaryDamage.battle;
+        act = findUnit(s, actor.id)!;
+      }
+      const outcome = ordinaryDamage?.outcome ?? applyBattleUnitDamage(tgt, totalDamage);
       tgt = outcome.unit;
       if (outcome.heroDied) tgt = { ...tgt, deathCause: 'deathblow-attack' };
       if (tgt.isAlive && skill.applyEffects?.length) {
@@ -751,7 +814,13 @@ export function heroUseSkill(
       s = queueStressEvent(s, tgt.sourceId, -skill.stressHeal, 'battle-skill', skill.id);
       s = pushBattleLog(s, `${target.name} 压力降低 ${skill.stressHeal}。`, 'success');
     }
-    if (skill.applyEffects?.length) tgt = applyEffects(tgt, skill.applyEffects);
+    if (skill.applyEffects?.length) {
+      if (s.ruinsContext && skill.targetSide !== 'self') {
+        s = applyStatusEffectEvent(setUnit(s, tgt), tgt.id, skill.applyEffects,
+          `skill-effects:${state.battleId}:${state.round}:${state.initiativeIndex}:${unitId}:${state.currentActionPoints}`);
+        tgt = findUnit(s, tgt.id)!;
+      } else tgt = applyEffects(tgt, skill.applyEffects);
+    }
   }
 
   // 位移效果
@@ -825,6 +894,7 @@ function tryMonsterMove(state: BattleState, monsterId: string): BattleState {
 /** Freeze only the attack roll before the incoming-attack window opens. */
 export function prepareMonsterAttackResolution(state: BattleState, monsterId: string): BattleState {
   if (state.pendingMonsterAttack) return state;
+  if (state.ruinsContext) return prepareRuinsMonsterTurn(state, monsterId);
   if (state.bossEncounter?.checkpointContext?.heroDodgeBindings && state.bossEncounter.spawnDefinitions[findUnit(state, monsterId)?.sourceId ?? '']) return preparePrintedMonsterTurn(state, monsterId);
   const monster = findUnit(state, monsterId);
   if (!monster || !monster.isAlive || monster.side !== 'monster') return state;
@@ -852,14 +922,14 @@ export function prepareMonsterAttackResolution(state: BattleState, monsterId: st
 export function freezePendingMonsterAttack(state: BattleState): BattleState {
   const pending = state.pendingMonsterAttack;
   if (!pending || pending.stage !== 'incoming-attack-window') return state;
-  const skill = sourceAttackSkill(state) ?? getMonsterSkillById(pending.skillId);
+  const skill = pending.ruinsAttack?.skill ?? sourceAttackSkill(state) ?? getMonsterSkillById(pending.skillId);
   if (!skill) return { ...state, pendingMonsterAttack: null };
   const source = pending.sourceAttack;
   const attacker = findUnit(state,pending.monsterUnitId);
   const target = findUnit(state,pending.targetHeroUnitId);
   const accuracyModifier = source && target?.marked ? 1 : 0;
   const critModifier = source && attacker ? attacker.buffs.reduce((n,e)=>n+e.amount,0)-attacker.debuffs.reduce((n,e)=>n+e.amount,0) : 0;
-  const resolved = source ? {
+  const resolved = pending.ruinsAttack ? resolveRuinsAttackValues(state) : source ? {
     hit: pending.attackRoll <= skill.accuracy + accuracyModifier - resolveSourceAttackDodge(state) - pending.dodgeModifier,
     crit: source.criticalEnabled && pending.attackRoll <= source.criticalThreshold + critModifier,
     damage: source.criticalEnabled && pending.attackRoll <= source.criticalThreshold + critModifier ? source.criticalDamage : skill.minDamage,
@@ -879,21 +949,28 @@ export function freezePendingMonsterAttack(state: BattleState): BattleState {
 
 /** Commit a prepared monster attack without any attack/damage/disease reroll. */
 export function commitPendingMonsterAttackResolution(state: BattleState): BattleState {
+  return state.ruinsContext ? withRuinsBattleSources(structuredClone(state), commitPendingMonsterAttackResolutionInternal)
+    : commitPendingMonsterAttackResolutionInternal(state);
+}
+
+function commitPendingMonsterAttackResolutionInternal(state: BattleState): BattleState {
   const pending = state.pendingMonsterAttack;
   if (!pending || pending.stage !== 'hero-hit-window' || pending.hit === null ||
       pending.crit === null || pending.baseDamage === null) return state;
   const monster = findUnit(state, pending.monsterUnitId);
-  const skill = sourceAttackSkill(state) ?? getMonsterSkillById(pending.skillId);
+  const skill = pending.ruinsAttack?.skill ?? sourceAttackSkill(state) ?? getMonsterSkillById(pending.skillId);
   const target = findUnit(state, pending.targetHeroUnitId);
   if (!monster || !skill || !target) return { ...state, pendingMonsterAttack: null };
   const cleared: BattleState = { ...state, pendingMonsterAttack: null };
   if (!pending.hit) {
-    return pushBattleLog(pending.sourceAttack ? finishSourceMonsterAttack(state, false) : cleared, `${monster.name} 使用 ${skill.name}，掷 ${pending.attackRoll} 未命中 ${target.name}。`, 'info');
+    const missed = pending.ruinsAttack ? finishRuinsAttack(cleared, pending, false)
+      : pending.sourceAttack ? finishSourceMonsterAttack(state, false) : cleared;
+    return pushBattleLog(missed, `${monster.name} 使用 ${skill.name}，掷 ${pending.attackRoll} 未命中 ${target.name}。`, 'info');
   }
 
   const effectiveCritical = pending.crit || pending.criticalOverride === 'force-critical';
   const effectiveBaseDamage = pending.criticalOverride === 'force-critical' && !pending.crit
-    ? skill.maxDamage
+    ? skill.maxDamage + (pending.ruinsAttack ? pending.baseDamage - skill.minDamage : 0)
     : pending.baseDamage;
   let working: BattleState = cleared;
   let tgt: BattleUnit = target;
@@ -904,7 +981,9 @@ export function commitPendingMonsterAttackResolution(state: BattleState): Battle
   if (inMod.applied.length > 0) {
     working = pushBattleLog(working, `${tgt.name} 承伤修正 ${effectiveBaseDamage} → ${inMod.amount}${describeModifierApplications(inMod.applied)}。`, 'info');
   }
-  const outcome = applyBattleUnitDamage(tgt, transformedDamage);
+  const ordinaryDamage = working.ruinsContext ? applyRuinsEnemyDamage(working, monster.id, tgt.id, transformedDamage) : null;
+  if (ordinaryDamage) working = ordinaryDamage.battle;
+  const outcome = ordinaryDamage?.outcome ?? applyBattleUnitDamage(tgt, transformedDamage);
   tgt = outcome.unit;
   if (outcome.heroDied) tgt = { ...tgt, deathCause: 'deathblow-attack' };
   let queuedStress = 0;
@@ -930,13 +1009,26 @@ export function commitPendingMonsterAttackResolution(state: BattleState): Battle
   let next = setUnit(working, tgt);
   if (queuedStress > 0) next = queueStressEvent(next, tgt.sourceId, queuedStress, 'battle-skill', skill.id);
   if (effectiveCritical) {
-    const targetArea = state.communityRoomState?.heroAreas[target.id]?.areaId;
+    const targetArea = state.ruinsContext?.placements[target.id] ?? state.communityRoomState?.heroAreas[target.id]?.areaId;
+    const ordinaryCriticalTargets = pending.ruinsAttack
+      ? state.ruinsContext!.events.filter(event => event.type === 'MONSTER_ATTACK_ROLLED'
+        && event.parentEventId === pending.ruinsAttack!.parentEventId)[0]?.targetIds ?? [target.id]
+      : [];
+    const ordinaryCriticalAlreadyApplied = pending.ruinsAttack && state.ruinsContext!.events.some(event =>
+      event.type === 'MONSTER_CRITICAL_AREA_STRESS' && event.parentEventId === pending.ruinsAttack!.parentEventId);
     for (const hero of next.heroes) {
       const inSameArea = targetArea === undefined
-        || state.communityRoomState?.heroAreas[hero.id]?.areaId === targetArea;
-      if (hero.isAlive && inSameArea) {
+        || (state.ruinsContext?.placements[hero.id] ?? state.communityRoomState?.heroAreas[hero.id]?.areaId) === targetArea;
+      if (hero.isAlive && inSameArea && (!pending.ruinsAttack || hero.id === target.id
+        || (!ordinaryCriticalAlreadyApplied && !ordinaryCriticalTargets.includes(hero.id)))) {
         next = queueStressEvent(next, hero.sourceId, 1, 'critical', skill.id);
       }
+    }
+    if (pending.ruinsAttack && !ordinaryCriticalAlreadyApplied) {
+      const context = next.ruinsContext!;
+      recordRuinsEvent(context, 'MONSTER_CRITICAL_AREA_STRESS', monster.id,
+        next.heroes.filter(hero => hero.isAlive && context.placements[hero.id] === targetArea).map(hero => hero.id),
+        pending.ruinsAttack.parentEventId, {});
     }
   }
   if (shuffled) {
@@ -962,11 +1054,13 @@ export function commitPendingMonsterAttackResolution(state: BattleState): Battle
     next = applySourceTargetPush({ ...next, pendingMonsterAttack: pending });
     if (!next.bossEncounter?.pendingChoice) next = finishSourceMonsterAttack(next, true);
   }
+  if (pending.ruinsAttack) next = finishRuinsAttack(next, pending, true);
   return checkEnd(next);
 }
 
 /** 执行单个怪物的自动回合。 */
 export function runMonsterTurn(state: BattleState, monsterId: string): BattleState {
+  if (state.ruinsContext) return prepareRuinsMonsterTurn(state, monsterId);
   if (state.bossEncounter?.pendingChoice) return state;
   if (state.bossEncounter?.bossState.actorId === monsterId) {
     if (state.bossEncounter.bossState.lastActionRound === state.round) return state;

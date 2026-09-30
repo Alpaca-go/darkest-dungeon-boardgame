@@ -7,6 +7,8 @@ import { resolveProductionMonsterDefinition } from './component-adapters/bone-co
 import { resolveHeroDodge } from '../rules/hero-dodge';
 import type { ProductionMonsterDefinition } from '../../types/component-combat';
 import { applyBattleUnitDamage } from '../damage';
+import { commitNecromancerFigure, defeatNecromancerFigure, hasNecromancerFigure,
+  returnNecromancerFigures, validateNecromancerFigures } from '../ruins/physical-supply';
 
 const stances: Stance[] = ['aggressive', 'defensive', 'ranged', 'support'];
 const clone = <T>(value: T): T => JSON.parse(JSON.stringify(value)) as T;
@@ -51,6 +53,7 @@ function syncLedger(entry: SummonSupplyEntry): void {
   for (const state of ['available', 'active', 'spentThisBattle', 'permanentlyRemoved'] as const) entry[state] = entry.tokens.filter(t => t.state === state).length;
 }
 export function assertBossEncounter(b: BattleState): void {
+  validateNecromancerFigures(b);
   const e = encounter(b);
   if (e.checkpointContext?.heroDodgeBindings) {
     for (const hero of b.heroes) {
@@ -182,6 +185,7 @@ function commitSpawn(b: BattleState, def: SpawnDefinition, areaId: string, paren
   if (position === null || freeSpace(b, areaId) < def.occupiedSlots || (entry && !token)) throw new Error('Spawn transaction precondition failed');
   const id = `${b.battleId}:spawn:${e.eventSequence + 1}`;
   const unit = freshUnit(def, id, position);
+  if (token) commitNecromancerFigure(b, def.definitionId, token.tokenId, reanimation);
   // Mutations run only on the transaction copy. Any exception discards the entire input.
   if (token) { token.state = 'active'; token.instanceId = id; syncLedger(entry); }
   b.monsters.push(unit);
@@ -202,6 +206,7 @@ function spawn(b: BattleState, continuation: Extract<BossContinuation, { kind: '
   if (!def) { recordBossRuntimeEvent(b, 'SPAWN_DEFINITION_UNBOUND', { definitionId, consumedSupply: false }, [], undefined, parentEventId); return; }
   if (emptyStance(b, def.occupiedSlots) === null) { suppress(b, 'SUMMON_SUPPRESSED_FULL_STANCES', parentEventId); return; }
   if (e.summonSupply[definitionId]?.available === 0) { suppress(b, 'SUMMON_SUPPRESSED_SUPPLY_EXHAUSTED', parentEventId); return; }
+  if (!hasNecromancerFigure(b, definitionId)) { suppress(b, 'SUMMON_SUPPRESSED_PHYSICAL_FIGURE_UNAVAILABLE', parentEventId); return; }
   if (freeSpace(b, areaId) >= def.occupiedSlots) { commitSpawn(b, def, areaId, parentEventId, rng); return; }
   // Official p31: displace an occupant, with Hero precedence, rather than relocating the new summon.
   const occupants = alive(b).filter(u => e.placements[u.id] === areaId);
@@ -378,7 +383,7 @@ function continueDeathEffects(b: BattleState, continuation: Extract<BossContinua
   for (const death of snapshots) {
     const entry = e.summonSupply[death.definition.definitionId];
     const token = entry?.tokens.find(t => t.tokenId === death.tokenId);
-    if (token) { token.state = 'spentThisBattle'; token.instanceId = null; syncLedger(entry); }
+    if (token) { defeatNecromancerFigure(b, token.tokenId); token.state = 'spentThisBattle'; token.instanceId = null; syncLedger(entry); }
     delete e.placements[death.instanceId]; delete e.correspondingAreas[death.instanceId];
   }
   b.monsters = b.monsters.filter(u => !ids.includes(u.id));
@@ -403,6 +408,7 @@ function cleanup(b: BattleState): void {
   if (e.phase !== 'VICTORY') throw new Error('Cleanup requires victory');
   e.phase = 'CLEANUP';
   e.pendingChoice = null; e.activeSummons = []; e.queuedDeathIds = []; e.placements = {}; e.correspondingAreas = {};
+  returnNecromancerFigures(b);
   for (const entry of Object.values(e.summonSupply)) { for (const token of entry.tokens) if (token.state !== 'permanentlyRemoved') { token.state = 'available'; token.instanceId = null; } syncLedger(entry); }
   b.monsters = []; b.initiativeOrder = []; b.initiativeCards = []; b.initiativeDrawPile = []; b.resolvedInitiativeCardIds = [];
   b.boss = null; b.selectedSkillId = null; b.selectedTargetId = null;
@@ -485,6 +491,7 @@ function handle(b: BattleState, input: BossRuntimeInput, rng: () => number): voi
       const parent = recordBossRuntimeEvent(b, 'CAPTAIN_THREAT_CONSUMED', { firstMonster: true }, [], 'NECRO_CAPTAIN_PROJECT_COMPONENT_BINDING');
       const def = e.spawnDefinitions['bone-captain'];
       if (!def) { recordBossRuntimeEvent(b, 'SPAWN_DEFINITION_UNBOUND', { definitionId: 'bone-captain' }, [], undefined, parent); return; }
+      if (!hasNecromancerFigure(b, 'bone-captain')) { suppress(b, 'SUMMON_SUPPRESSED_PHYSICAL_FIGURE_UNAVAILABLE', parent); return; }
       // Separate large initial-draw path: require first placement and two free slots; no replacement.
       if (b.monsters.some(u => u.isAlive) || freeSpace(b, e.definition.bossStartArea) < def.occupiedSlots || emptyStance(b, def.occupiedSlots) !== 1) { suppress(b, 'CAPTAIN_SUPPRESSED_INITIAL_PLACEMENT', parent); return; }
       commitSpawn(b, def, e.definition.bossStartArea, parent, rng);
@@ -548,6 +555,7 @@ function handle(b: BattleState, input: BossRuntimeInput, rng: () => number): voi
   }
   if (input.type === 'END_THREAT_BATTLE') {
     if (e.side !== 'THREAT') throw new Error('Threat expired');
+    returnNecromancerFigures(b);
     if (e.definition.hamlet === 'BLOCK_GRAVEYARD') {
       const nonUnholy = e.threatState.appearedDefinitionIds.filter(id => {
         const def = e.spawnDefinitions[id];

@@ -1,5 +1,3 @@
-import type { BattleState } from './index';
-
 export const RUINS_V4 = 'C1C32R2A-DIGITAL-DEFAULT-v4' as const;
 /** Noncanonical, explicitly selected successor. v4 records are never rewritten. */
 export const RUINS_V5 = 'C1C32R2B-DIGITAL-DEFAULT-v5' as const;
@@ -57,9 +55,20 @@ export interface RuinsRoomRule {
 }
 export interface RuinsRoom { roomNumber: number; rules: RuinsRoomRule[]; sourceReferences: PrintedSource[] }
 export interface RuinsBattleContext {
-  battle: BattleState; tileId: string; placements: Record<string, string>; definitionIds: Record<string, string>;
+  encounterId: string; roomNumber: number; tileId: string; ruleSetVersion: RuinsRuleSetVersion;
+  placements: Record<string, string>; definitionIds: Record<string, string>; physicalCopyIds: string[];
+  occupiedSpaces: Record<string, number>; rngCursor: number; rngCalls: number;
   conditionStacks: Record<string, Array<{ condition: Exclude<PrintedCondition, 'push-pull'>; amount: number; turns: number }>>;
-  eventIds: string[]; roomUses: string[];
-  pendingChoice: null | { choiceId: string; candidateIds: string[]; actorId: string; relativeToId: string;
-    effect: Extract<PrintedEffect, { type: 'shuffle' }>; remainingEffects: PrintedEffect[]; parentEventId: string; ruleSetVersion: typeof RUINS_V4 };
+  events: Array<{ eventId: string; type: string; actorId: string; targetIds: string[]; parentEventId: string | null;
+    ruleSetVersion: RuinsRuleSetVersion; detail: Record<string, unknown> }>;
+  roomUses: string[]; guardStacks: Record<string, number>; riposteStacks: Record<string, number>;
+  pendingChoice: null | {
+    choiceId: string; candidateIds: string[]; actorId: string; sourceActorId: string; relativeToId: string;
+    kind: 'MONSTER_MOVE' | 'PRINTED_SHUFFLE' | 'ROOM_MOVE' | 'LARGE_DISPLACEMENT';
+    shuffleEffect: Extract<PrintedEffect, { type: 'shuffle' }> | null;
+    skillNumber: number | null; targetIds: string[];
+    remainingEffects: PrintedEffect[]; parentEventId: string; ruleSetVersion: RuinsRuleSetVersion;
+    attackContinuation?: { actorId: string; skillNumber: number; targetIds: string[]; parentEventId: string; attackRoll: number | null; selfEffectsApplied: boolean };
+    movementContinuation?: { kind: 'MONSTER_MOVE' | 'PRINTED_SHUFFLE' | 'ROOM_MOVE'; destinationId: string };
+  };
 }

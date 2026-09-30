@@ -10,6 +10,7 @@ import { campaignHeroDodgeRuleSetVersion } from '../rules/hero-dodge-versioning'
 import { resolveBossDefinition } from '../bosses/definitions';
 import { necromancerProductionDependencyGate } from '../bosses/production-dependency-gate';
 import { nowIso } from '../random';
+import { bindNecromancerFigures } from '../ruins/physical-supply';
 
 /** Programmatic production entry. Selector and complete-edition dependency promotion stay gated. */
 export function startBossFoundation(campaign: CampaignState, definition: BossDefinitionContract, seed: number,
@@ -25,7 +26,7 @@ export function startBossFoundation(campaign: CampaignState, definition: BossDef
   const battle: BattleState = { battleId: `${campaign.dungeon.questRunId}:boss`, status: 'active', sourceRoomId: roomId,
     round: 1, maxRounds: 4, heroes, monsters: [], initiativeOrder: heroes.map(h => h.id), initiativeIndex: -1,
     activeActorId: null, currentActionPoints: 0, selectedSkillId: null, selectedTargetId: null, battleLog: [], rewards: { gold: 0 } };
-  const bound = bindBossEncounter(battle, definition, seed, spawnDefinitions);
+  let bound = bindBossEncounter(battle, definition, seed, spawnDefinitions);
   bound.bossEncounter!.checkpointContext = {
     schemaVersion: 1, encounterId: `${campaign.id}:${campaign.dungeon.questRunId}:${definition.family}:${definition.level}`,
     battleId: battle.battleId, campaignId: campaign.id, questRunId: campaign.dungeon.questRunId,
@@ -33,6 +34,7 @@ export function startBossFoundation(campaign: CampaignState, definition: BossDef
     definitionVersion: definition.ruleSetVersion, consumedOnceKeys: [...(campaign.activeThreatRuntime?.consumedOnceKeys ?? [])],
     heroDodge: Object.fromEntries(heroes.map(h => [h.id, h.bossCombatDodge!])), dependencyAuthority: 'EXPLICIT_BINDING',
   };
+  if (campaign.ruinsBoneFigureSupply) bound = bindNecromancerFigures(bound, campaign.ruinsBoneFigureSupply, campaign.ruinsDrawState);
   return { ...campaign, gamePhase: 'battle', battle: bound };
 }
 
@@ -50,7 +52,8 @@ export function resumeBossFoundation(campaign: CampaignState, roomId: string): C
     maxRounds: 4, ...(context.heroDodgeBindings ? {stagedIncomingAttacks:true} : {}), heroes, monsters: [], initiativeOrder: heroes.map(h => h.id), initiativeIndex: -1,
     activeActorId: null, currentActionPoints: 0, selectedSkillId: null, selectedTargetId: null, battleLog: [], rewards: { gold: 0 }, bossEncounter: encounter };
   assertBossEncounter(battle);
-  const resumed = applyBossFoundationInput({ ...campaign, battle, gamePhase: 'battle' }, { type: 'ENTER_BOSS_ROOM' });
+  const physicalBattle = campaign.ruinsBoneFigureSupply ? bindNecromancerFigures(battle, campaign.ruinsBoneFigureSupply, campaign.ruinsDrawState) : battle;
+  const resumed = applyBossFoundationInput({ ...campaign, battle: physicalBattle, gamePhase: 'battle' }, { type: 'ENTER_BOSS_ROOM' });
   return { ...resumed, bossEncounterCheckpoint: context.heroDodgeBindings ? null : campaign.bossEncounterCheckpoint, bossRoomStorage: campaign.bossRoomStorage ? { ...campaign.bossRoomStorage, roomId, lifecycle: 'IN_PLAY' } : undefined, activeThreatRuntime: resumed.activeThreatRuntime ? { ...resumed.activeThreatRuntime,
     consumedOnceKeys: [...new Set([...resumed.activeThreatRuntime.consumedOnceKeys, ...context.consumedOnceKeys])] } : null };
 }
@@ -71,7 +74,9 @@ export function resolveBossThreatCheckpointChoice(campaign: CampaignState, choic
 export function applyBossFoundationInput(campaign: CampaignState, input: BossRuntimeInput): CampaignState {
   if (!campaign.battle?.bossEncounter) throw new Error('No Boss foundation battle');
   const battle = applyBossRuntimeInput(campaign.battle, input);
-  let next = { ...campaign, battle };
+  let next = { ...campaign, battle, ...(battle.necromancerFigureBinding
+    ? { ruinsBoneFigureSupply: battle.necromancerFigureBinding.supply,
+      ...(battle.necromancerFigureBinding.draw ? { ruinsDrawState: battle.necromancerFigureBinding.draw } : {}) } : {}) };
   if (battle.bossEncounter!.side === 'ABILITY' && campaign.activeThreatRuntime?.active) {
     withBossEncounterSources(battle, () => {
       next = { ...next, activeThreatRuntime: { ...campaign.activeThreatRuntime!, active: false, deactivatedAt: nowIso(), deactivationTransactionId: `${battle.battleId}:threat-flip` } };
@@ -85,7 +90,9 @@ export function settleBossThreatBattle(campaign: CampaignState): CampaignState {
   if (!battle?.bossEncounter || battle.bossEncounter.side !== 'THREAT' || battle.status !== 'victory') return campaign;
   const ended = applyBossRuntimeInput(battle, { type: 'END_THREAT_BATTLE' });
   if (ended.bossEncounter!.checkpointContext) ended.bossEncounter!.checkpointContext.consumedOnceKeys = [...(campaign.activeThreatRuntime?.consumedOnceKeys ?? [])];
-  const settled = resolveVictory({ ...campaign, battle: { ...ended, status: 'victory' } });
+  const settled = resolveVictory({ ...campaign, battle: { ...ended, status: 'victory' },
+    ...(ended.necromancerFigureBinding ? { ruinsBoneFigureSupply: ended.necromancerFigureBinding.supply,
+      ...(ended.necromancerFigureBinding.draw ? { ruinsDrawState: ended.necromancerFigureBinding.draw } : {}) } : {}) });
   return { ...settled, bossEncounterCheckpoint: ended.bossEncounter! };
 }
 
@@ -98,7 +105,9 @@ export function commitBossFoundationVictory(campaign: CampaignState): CampaignSt
   const e = cleaned.bossEncounter!;
   let result = campaign;
   withBossEncounterSources(cleaned, () => {
-    const finalized = finalizeBossVictory({ ...campaign, battle: cleaned }, {
+    const finalized = finalizeBossVictory({ ...campaign, battle: cleaned,
+      ...(cleaned.necromancerFigureBinding ? { ruinsBoneFigureSupply: cleaned.necromancerFigureBinding.supply,
+        ...(cleaned.necromancerFigureBinding.draw ? { ruinsDrawState: cleaned.necromancerFigureBinding.draw } : {}) } : {}) }, {
       bossQuestId: FACE_THE_THREAT_QUEST_ID, questRunId: campaign.dungeon!.questRunId,
       threatId: campaign.campaignProgress.activeThreatId!, bossFamilyId: e.bossFamily,
     });

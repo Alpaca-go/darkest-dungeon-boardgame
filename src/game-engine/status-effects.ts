@@ -2,6 +2,7 @@ import type { ActiveEffect, BattleState, BattleUnit, HeroResistanceProfile } fro
 import { applyBattleUnitDamage, type BattleDamageOutcome } from './damage';
 import { applyQuirkModifiersRaw, describeModifierApplications } from './quirk-passives';
 import { rollDie } from './random';
+import { ruinsRoom } from './ruins/source-registry';
 
 /** 给单位施加一个状态效果（返回新单位，不修改原对象）。 */
 export function applyEffectToUnit(unit: BattleUnit, effect: ActiveEffect): BattleUnit {
@@ -117,9 +118,17 @@ export function applyStatusEffectEvent(state: BattleState, targetId: string, eff
     if (prior.targetId !== targetId || JSON.stringify(prior.effects) !== JSON.stringify(effects)) throw new Error('Status effect event payload mismatch');
     return state;
   }
-  const target = [...state.heroes, ...state.monsters].find(unit => unit.id === targetId);
+  let target = [...state.heroes, ...state.monsters].find(unit => unit.id === targetId);
   if (!target || !target.isAlive) throw new Error('Status effect target is unavailable');
+  const targetSide = target.side;
+  const context = state.ruinsContext;
+  const roomImmunities = context ? ruinsRoom(context.roomNumber).rules.filter(rule => rule.trigger === 'PASSIVE'
+    && rule.areas.includes(context.placements[targetId]) && (rule.side === 'all' || rule.side === targetSide))
+    .flatMap(rule => rule.effects.flatMap(effect => effect.type === 'immunity' ? effect.conditions : [])) : [];
+  const ownImmunities = target.immunities;
+  if (roomImmunities.length) target = { ...target, immunities: [...new Set([...(ownImmunities ?? []), ...roomImmunities])] };
   const result = applyEffectsWithResistance(target, effects);
+  if (roomImmunities.length) result.unit = { ...result.unit, immunities: ownImmunities };
   return {
     ...state,
     heroes: state.heroes.map(unit => unit.id === targetId ? result.unit : unit),

@@ -33,6 +33,9 @@ import { validateRuinsVersionSelection } from './rules/ruins-v4';
 import { validateRuinsV5Selection } from './rules/ruins-v5';
 import { RUINS_V5 } from '../types/ruins-executable';
 import { validateRuinsDrawState } from './ruins/encounter-draw';
+import { validateOrdinaryRuinsBattle } from './ruins/battle-runtime';
+import { validateRuinsPendingAttack } from './ruins/monster-runtime';
+import { validateBoneFigureSupply, validateNecromancerFigures } from './ruins/physical-supply';
 import { validateLargeMovementContract } from './rules/large-movement-contract';
 import { createInitialStagecoach } from './stagecoach';
 import { getQuirkById, normalizeQuirkId } from '../data/quirks';
@@ -204,7 +207,7 @@ export function validateSaveFile(data: unknown): string | null {
     } catch (error) { return `Boss history/checkpoint invalid: ${error instanceof Error ? error.message : String(error)}`; }
   }
   if (!c || typeof c !== 'object') return '缺少 campaign 字段';
-  try { validateProductionBossRoomStorage(c); validateHeroDodgeCampaignMetadata(c); validateGraveyardReceipts(c); validateNecromancerPreparationDay(c); if (c.ruinsRuleSetSelection?.ruleSetVersion === RUINS_V5) validateRuinsV5Selection(c); else validateRuinsVersionSelection(c); if (c.ruinsDrawState) validateRuinsDrawState(c.ruinsDrawState); if (c.battle) validateLargeMovementContract(c.battle); }
+  try { validateProductionBossRoomStorage(c); validateHeroDodgeCampaignMetadata(c); validateGraveyardReceipts(c); validateNecromancerPreparationDay(c); if (c.ruinsRuleSetSelection?.ruleSetVersion === RUINS_V5) validateRuinsV5Selection(c); else validateRuinsVersionSelection(c); if (c.ruinsDrawState) validateRuinsDrawState(c.ruinsDrawState); if (c.ruinsBoneFigureSupply) validateBoneFigureSupply(c.ruinsBoneFigureSupply, c.ruinsDrawState); if (c.battle) { validateLargeMovementContract(c.battle); validateOrdinaryRuinsBattle(c.battle, c.ruinsDrawState); validateRuinsPendingAttack(c.battle); } }
   catch (error) { return `Hero Dodge metadata invalid: ${error instanceof Error ? error.message : String(error)}`; }
   if (!Array.isArray(c.heroes)) return 'campaign.heroes 缺失或不是数组';
   if (typeof c.gold !== 'number' || Number.isNaN(c.gold)) return 'campaign.gold 非法';
@@ -461,7 +464,7 @@ export function validateSaveFile(data: unknown): string | null {
           (pending.stage !== 'incoming-attack-window' && pending.stage !== 'hero-hit-window')) return 'pendingMonsterAttack stage 非法';
       if (!b.monsters.some((unit) => unit.id === pending.monsterUnitId && unit.isAlive)) return 'pendingMonsterAttack monster 引用失效';
       if (!b.heroes.some((unit) => unit.id === pending.targetHeroUnitId && unit.isAlive)) return 'pendingMonsterAttack target 引用失效';
-      if (!(sourceAttackSkill(b) ?? getMonsterSkillById(pending.skillId))) return 'pendingMonsterAttack skill 引用失效';
+      if (!(pending.ruinsAttack?.skill ?? sourceAttackSkill(b) ?? getMonsterSkillById(pending.skillId))) return 'pendingMonsterAttack skill 引用失效';
       if (pending.monsterUnitId !== b.activeActorId) return 'pendingMonsterAttack actor 与当前回合不一致';
       if (!Number.isInteger(pending.attackRoll) || pending.attackRoll < 1 || pending.attackRoll > 10) return 'pendingMonsterAttack attackRoll 非法';
       if (!Number.isFinite(pending.dodgeModifier)) return 'pendingMonsterAttack dodgeModifier 非法';
@@ -1756,7 +1759,8 @@ export function restoreSaveSnapshot(save: SaveFile): CampaignState {
   if (campaign.ruinsRuleSetSelection?.ruleSetVersion === RUINS_V5) validateRuinsV5Selection(campaign);
   else validateRuinsVersionSelection(campaign);
   if (campaign.ruinsDrawState) validateRuinsDrawState(campaign.ruinsDrawState);
-  if (campaign.battle) validateLargeMovementContract(campaign.battle);
+  if (campaign.ruinsBoneFigureSupply) validateBoneFigureSupply(campaign.ruinsBoneFigureSupply, campaign.ruinsDrawState);
+  if (campaign.battle) { validateNecromancerFigures(campaign.battle); validateLargeMovementContract(campaign.battle); validateOrdinaryRuinsBattle(campaign.battle, campaign.ruinsDrawState); validateRuinsPendingAttack(campaign.battle); }
   return campaign;
 }
 

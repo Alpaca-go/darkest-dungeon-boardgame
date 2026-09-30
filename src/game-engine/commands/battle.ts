@@ -23,6 +23,10 @@ import {
 } from '../diseases/battle-bridge';
 import { resumeTurnAfterMentalCheck } from '../battle';
 import { advancePendingMonsterAttack, openBattleTurnStartWindow } from '../trinkets/battle-trinket-bridge';
+import { settleOrdinaryRuinsBattle } from '../ruins/battle-runtime';
+import { returnOrdinaryBoneFigures } from '../ruins/physical-supply';
+import { runRuinsRoomTrigger } from '../ruins/room-runtime';
+import { withRuinsCampaignSources } from '../ruins/printed-effect-runtime';
 import { evaluateReplacementFlow } from '../stagecoach';
 import { commitCommunityGuardianVictory, isCommunityGuardianBattle, synchronizeCommunityGuardianDeaths } from '../campaign/act-four/community-guardian-battle';
 
@@ -69,6 +73,20 @@ export function settleBattleState(
   campaign: CampaignState,
   options?: { mentalGuardLimit?: number },
 ): BattleSettlementResult {
+  let result!: BattleSettlementResult;
+  const next = withRuinsCampaignSources(campaign, state => {
+    result = settleBattleStateInternal(state, options);
+    const binding = result.campaign.battle?.necromancerFigureBinding;
+    return binding ? { ...result.campaign, ruinsBoneFigureSupply: binding.supply,
+      ...(binding.draw ? { ruinsDrawState: binding.draw } : {}) } : result.campaign;
+  });
+  return { ...result, campaign: next };
+}
+
+function settleBattleStateInternal(
+  campaign: CampaignState,
+  options?: { mentalGuardLimit?: number },
+): BattleSettlementResult {
   if (campaign.battle?.bossEncounter?.pendingChoice) return { ok: true, campaign, error: null, mentalLoops: 0 };
   if (!campaign.battle || campaign.battle.status !== 'active') {
     return { ok: false, campaign, error: 'battle-not-active', mentalLoops: 0 };
@@ -111,6 +129,7 @@ export function settleBattleState(
   }
 
   next = openBattleTurnStartWindow(next);
+  if (next.battle?.necromancerFigureBinding) next = { ...next, ruinsBoneFigureSupply: next.battle.necromancerFigureBinding.supply };
   return { ok: true, campaign: next, error: null, mentalLoops: guard };
 }
 
@@ -144,7 +163,16 @@ export function commitBattleVictory(campaign: CampaignState): BattleSettlementRe
   if (!campaign.battle || campaign.battle.status !== 'victory') {
     return { ok: false, campaign, error: 'battle-not-victory', mentalLoops: 0 };
   }
+  const ordinaryRuins = campaign.battle.ruinsContext;
+  if (ordinaryRuins) campaign = settleOrdinaryEndEffects(campaign);
+  const returnedDraw = ordinaryRuins && campaign.ruinsDrawState
+    ? settleOrdinaryRuinsBattle(campaign.ruinsDrawState, campaign.battle!) : null;
+  const returnedFigures = ordinaryRuins && campaign.ruinsBoneFigureSupply
+    ? returnOrdinaryBoneFigures(campaign.ruinsBoneFigureSupply, ordinaryRuins.encounterId) : null;
   let next = engineResolveVictory(campaign);
+  if (ordinaryRuins && (!returnedDraw || !returnedFigures)) throw new Error('Ordinary Ruins physical settlement unavailable');
+  if (returnedDraw && returnedFigures) next = { ...next, ruinsDrawState: returnedDraw,
+    ruinsBoneFigureSupply: returnedFigures };
   next = evaluateReplacementFlow(next);
   return { ok: true, campaign: next, error: null, mentalLoops: 0 };
 }
@@ -174,8 +202,30 @@ export function commitBattleRetreat(campaign: CampaignState): BattleSettlementRe
     ? { ok: true as const, campaign, error: null, mentalLoops: 0 }
     : settleBattleState(campaign);
   if (!settled.ok) return settled;
-  const next = retreatFromBattle(settled.campaign);
+  const ended = settled.campaign.battle?.ruinsContext ? settleOrdinaryEndEffects(settled.campaign) : settled.campaign;
+  const ordinary = ended.battle?.ruinsContext;
+  const returnedDraw = ordinary && ended.ruinsDrawState ? settleOrdinaryRuinsBattle(ended.ruinsDrawState,
+    { ...ended.battle!, status: 'defeat' }) : null;
+  const returnedFigures = ordinary && ended.ruinsBoneFigureSupply
+    ? returnOrdinaryBoneFigures(ended.ruinsBoneFigureSupply, ordinary.encounterId) : null;
+  let next = retreatFromBattle(ended);
+  if (returnedDraw && returnedFigures) next = { ...next, ruinsDrawState: returnedDraw, ruinsBoneFigureSupply: returnedFigures };
   return { ok: true, campaign: next, error: null, mentalLoops: settled.mentalLoops };
+}
+
+function settleOrdinaryEndEffects(campaign: CampaignState): CampaignState {
+  const battle = campaign.battle!;
+  if (battle.pendingMonsterAttack || battle.pendingAction || battle.ruinsContext!.pendingChoice)
+    throw new Error('Ordinary Battle end has unresolved choice or reaction');
+  return withRuinsCampaignSources(campaign, state => {
+    let next = { ...state, battle: state.battle!.activeActorId
+      ? runRuinsRoomTrigger(state.battle!, 'END_TURN', state.battle!.activeActorId!) : state.battle };
+    next = processBattleDeaths(next);
+    next = processBattleStressEvents(next);
+    next = processBattleRuleEvents(next);
+    next = processBattleDiseaseInfections(next);
+    return processBattleDeaths(next);
+  });
 }
 
 // Re-export helpers used by commands/dungeon.ts to keep a single import surface.
