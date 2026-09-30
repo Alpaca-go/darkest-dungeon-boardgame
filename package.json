@@ -182,9 +182,13 @@
     "audit:complete-edition-c1c32r2c-r": "vite-node scripts/audit/c1c32r2c-r-final-blockers.ts",
     "verify:complete-edition-c1c32r2c-r": "vite-node scripts/audit/c1c32r2c-r-final-blockers.ts --verify",
     "test:necromancer-production-threat-full-path": "vitest run src/audit/c1c32r3r-production-threat.test.ts src/audit/c1c32r3-production-entry.test.ts",
-    "test:e2e:necromancer-production-threat-full-path": "playwright test e2e/c1c32r3r-production-threat-full-path.spec.ts",
+    "test:e2e:necromancer-production-threat-full-path": "node scripts/e2e/c1c33-production-browser.mjs",
     "audit:complete-edition-c1c32r3r": "vite-node scripts/audit/c1c32r3r-full-path.ts",
-    "verify:complete-edition-c1c32r3r": "vite-node scripts/audit/c1c32r3r-full-path.ts --verify"
+    "verify:complete-edition-c1c32r3r": "node scripts/audit/c1c33-r3r-prerequisite.mjs",
+    "test:necromancer-production-acceptance": "vitest run src/audit/c1c33-necromancer-production-acceptance.test.ts src/audit/c1c32r2c-large-save.test.ts src/audit/c1c32r2c-summon-ledgers.test.ts src/audit/c1c32r3r-production-threat.test.ts src/audit/c1c32r-necromancer-threat-bridge.test.ts",
+    "audit:complete-edition-c1c33": "vite-node scripts/audit/c1c33-production-freeze.ts",
+    "verify:complete-edition-c1c33": "vite-node scripts/audit/c1c33-production-freeze.ts --verify",
+    "validate:complete-edition-c1c33": "node scripts/audit/run-c1c33-validation.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.408.0",

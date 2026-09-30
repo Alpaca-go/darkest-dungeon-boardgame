@@ -764,6 +764,7 @@ export const useGameStore = create<GameStore>((set, get) => {
 
     // ---- Phase 7：Debug 受控入口（统一管线，阈值规则照常生效） ----
     debugApplyStress: (heroId, amount) => {
+      if (!import.meta.env.DEV) return;
       const c = get().campaign;
       if (!c || amount <= 0) return;
       let { campaign: next } = engineApplyStress(c, {
@@ -785,6 +786,7 @@ export const useGameStore = create<GameStore>((set, get) => {
     },
 
     debugRecoverStress: (heroId, amount) => {
+      if (!import.meta.env.DEV) return;
       const c = get().campaign;
       if (!c || amount <= 0) return;
       const { campaign: next } = engineRecoverStress(c, {
@@ -816,6 +818,7 @@ export const useGameStore = create<GameStore>((set, get) => {
     },
 
     debugGrantQuirk: (heroId, quirkId) => {
+      if (!import.meta.env.DEV) return;
       const c = get().campaign;
       if (!c) return;
       const { campaign: acquired, outcome } = engineAcquireQuirk(c, heroId, quirkId, {
@@ -856,6 +859,7 @@ export const useGameStore = create<GameStore>((set, get) => {
     },
 
     debugGrantDisease: (heroId, diseaseId) => {
+      if (!import.meta.env.DEV) return;
       const c = get().campaign;
       if (!c) return;
       const { campaign: acquired } = engineBeginDiseaseAcquisitionWithTrinkets(c, {
@@ -1059,6 +1063,7 @@ export const useGameStore = create<GameStore>((set, get) => {
     },
 
     debugGrantXp: (heroId, amount) => {
+      if (!import.meta.env.DEV) return;
       const c = get().campaign;
       if (!c || amount <= 0) return;
       const next = engineEarnHeroXp(c, heroId, amount, 'Debug 面板发放');
@@ -1067,6 +1072,7 @@ export const useGameStore = create<GameStore>((set, get) => {
     },
 
     debugGrantTrinket: (heroId, trinketId) => {
+      if (!import.meta.env.DEV) return;
       const c = get().campaign;
       if (!c) return;
       const { campaign: next } = engineAcquireTrinket(c, {

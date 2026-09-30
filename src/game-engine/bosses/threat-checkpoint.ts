@@ -23,6 +23,8 @@ export function validateThreatCheckpoint(campaign: CampaignState, checkpoint: Bo
     || checkpoint.activeSummons.length || checkpoint.queuedDeathIds.length
     || Object.values(checkpoint.summonSupply).some(s => s.active)) throw new Error('Checkpoint is not a settled Threat state');
   if (!Array.isArray(context.consumedOnceKeys) || new Set(context.consumedOnceKeys).size !== context.consumedOnceKeys.length) throw new Error('Checkpoint consumed-once keys invalid');
+  if (context.questScope && checkpoint.events.some(event => event.eventType === 'ORDINARY_THREAT_BATTLE_ENTERED')
+    && !checkpoint.threatState.firstBattleConsumed) throw new Error('Checkpoint first Battle consumption rolled back');
   const heroIds = campaign.heroes.filter(h => !h.dead).map(h => `u_${h.instanceId}`);
   if (heroIds.some(id => !Number.isFinite(context.heroDodge[id]))) throw new Error('Checkpoint Hero Dodge missing');
   if (context.heroDodgeBindings) {

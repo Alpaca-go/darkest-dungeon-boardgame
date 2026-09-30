@@ -47,7 +47,7 @@ function choiceProof(kind: 'hero' | 'area' | 'death' | 'placement') {
     choices: final.bossEncounter!.events.filter(event => event.eventType === 'CHOICE_COMMITTED'), saveReload: 'PASS', replay: 'PASS' };
 }
 export function buildArtifacts(): Record<string, unknown> {
-  const baselineHead = execFileSync('git', ['rev-parse', 'codex/phase-11a4-c1c28-necromancer-digital-rulings'], { encoding: 'utf8' }).trim();
+  const baselineHead = execFileSync('git', ['rev-parse', 'b6fa9180b44cd4a33f9fd4ceed97f179e64fbd0f^{commit}'], { encoding: 'utf8' }).trim();
   const frozen = readdirSync(root).filter(name => /^c1c2[0-8]-.*\.json$/.test(name));
   execFileSync('git', ['diff', '--exit-code', baselineHead, '--', ...frozen.map(name => root + name)], { stdio: 'pipe' });
   const frozenInputSha256 = Object.fromEntries(frozen.map(name => [root + name, sha(readFileSync(root + name))]));

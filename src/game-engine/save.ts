@@ -1756,6 +1756,7 @@ export function sanitizeSaveFile(save: SaveFile): SaveFile {
 /** 从快照恢复战役状态（先修复再取 campaign）。 */
 export function restoreSaveSnapshot(save: SaveFile): CampaignState {
   const campaign = sanitizeSaveFile(save).campaign;
+  if (campaign.bossEncounterCheckpoint?.checkpointContext) validateThreatCheckpoint(campaign, campaign.bossEncounterCheckpoint);
   validateProductionBossRoomStorage(campaign);
   validateHeroDodgeCampaignMetadata(campaign);
   validateGraveyardReceipts(campaign);

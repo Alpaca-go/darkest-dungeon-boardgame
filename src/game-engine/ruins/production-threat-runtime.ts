@@ -263,6 +263,12 @@ export function validateProductionOrdinaryThreat(campaign: CampaignState): void 
     || !r.unitPhysicalBindings || !r.retiredMonsterInstances || !Array.isArray(r.pendingThreatDeathIds))
     throw new Error('Ordinary Threat authoritative checkpoint cross-link invalid');
   validateThreatCheckpoint(campaign, e);
+  if (!e.threatState.firstBattleConsumed) throw new Error('Ordinary Threat first Battle consumption rolled back');
+  const enteredIndex = e.events.map(entry => entry.eventType).lastIndexOf('ORDINARY_THREAT_BATTLE_ENTERED');
+  const consumed = e.events.slice(enteredIndex + 1).find(entry => entry.eventType === 'REANIMATION_WINDOW_CONSUMED');
+  if (e.reanimationState.firstDeathWindowConsumed !== !!consumed
+    || e.reanimationState.lockedEventId !== (consumed?.parentEventId ?? r.pendingReanimationChoice?.parentEventId ?? null))
+    throw new Error('Ordinary Reanimation consumption differs from causal history');
   validateOrdinaryRuinsBattle(b!, campaign.ruinsDrawState);
   if (!campaign.ruinsBoneFigureSupply) throw new Error('Ordinary Threat figures absent');
   validateBoneFigureSupply(campaign.ruinsBoneFigureSupply, campaign.ruinsDrawState);

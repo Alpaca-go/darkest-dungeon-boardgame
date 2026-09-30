@@ -1,0 +1,588 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C33",
+  "baseline": "b01a3380aa1f9c24d7c6bafb32be99220ac10421",
+  "status": "PASS",
+  "typecheck": "PASS",
+  "tests": "PASS",
+  "fullRegression": {
+    "total": 2657,
+    "passed": 2655,
+    "pending": 0,
+    "expectedTotal": 2657,
+    "collectionErrors": [],
+    "failedTests": [
+      {
+        "name": "C1C27 authoritative source closure rejects gameplay, other-family, tooling and prior-phase changes",
+        "messages": [
+          "AssertionError: expected [Function] to not throw an error but 'Error: C1C27: scope violation: .gitat…' was thrown\n    at Proxy.<anonymous> (file:///C:/Users/kyrie/AppData/Local/Temp/dd-c1c33-clean-J2Pe7u/repo/node_modules/@vitest/expect/dist/index.js:1509:21)\n    at Proxy.<anonymous> (file:///C:/Users/kyrie/AppData/Local/Temp/dd-c1c33-clean-J2Pe7u/repo/node_modules/@vitest/expect/dist/index.js:972:17)\n    at Proxy.methodWrapper (file:///C:/Users/kyrie/AppData/Local/Temp/dd-c1c33-clean-J2Pe7u/repo/node_modules/chai/index.js:1686:25)\n    at C:\\Users\\kyrie\\AppData\\Local\\Temp\\dd-c1c33-clean-J2Pe7u\\repo\\src\\audit\\c1c27-necromancer-source-closure.test.ts:163:51\n    at file:///C:/Users/kyrie/AppData/Local/Temp/dd-c1c33-clean-J2Pe7u/repo/node_modules/@vitest/runner/dist/index.js:146:14\n    at file:///C:/Users/kyrie/AppData/Local/Temp/dd-c1c33-clean-J2Pe7u/repo/node_modules/@vitest/runner/dist/index.js:533:11\n    at runWithTimeout (file:///C:/Users/kyrie/AppData/Local/Temp/dd-c1c33-clean-J2Pe7u/repo/node_modules/@vitest/runner/dist/index.js:39:7)\n    at runTest (file:///C:/Users/kyrie/AppData/Local/Temp/dd-c1c33-clean-J2Pe7u/repo/node_modules/@vitest/runner/dist/index.js:1056:17)\n    at processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at runSuite (file:///C:/Users/kyrie/AppData/Local/Temp/dd-c1c33-clean-J2Pe7u/repo/node_modules/@vitest/runner/dist/index.js:1205:15)"
+        ]
+      },
+      {
+        "name": "C1C28 canonical source and digital ruling separation C1C28 scope guard freezes gameplay, canonical history, other families and tooling",
+        "messages": [
+          "AssertionError: expected [Function] to not throw an error but 'Error: C1C28: scope violation: .gitat…' was thrown\n    at Proxy.<anonymous> (file:///C:/Users/kyrie/AppData/Local/Temp/dd-c1c33-clean-J2Pe7u/repo/node_modules/@vitest/expect/dist/index.js:1509:21)\n    at Proxy.<anonymous> (file:///C:/Users/kyrie/AppData/Local/Temp/dd-c1c33-clean-J2Pe7u/repo/node_modules/@vitest/expect/dist/index.js:972:17)\n    at Proxy.methodWrapper (file:///C:/Users/kyrie/AppData/Local/Temp/dd-c1c33-clean-J2Pe7u/repo/node_modules/chai/index.js:1686:25)\n    at C:\\Users\\kyrie\\AppData\\Local\\Temp\\dd-c1c33-clean-J2Pe7u\\repo\\src\\audit\\c1c28-necromancer-project-rulings.test.ts:249:48\n    at file:///C:/Users/kyrie/AppData/Local/Temp/dd-c1c33-clean-J2Pe7u/repo/node_modules/@vitest/runner/dist/index.js:146:14\n    at file:///C:/Users/kyrie/AppData/Local/Temp/dd-c1c33-clean-J2Pe7u/repo/node_modules/@vitest/runner/dist/index.js:533:11\n    at runWithTimeout (file:///C:/Users/kyrie/AppData/Local/Temp/dd-c1c33-clean-J2Pe7u/repo/node_modules/@vitest/runner/dist/index.js:39:7)\n    at runTest (file:///C:/Users/kyrie/AppData/Local/Temp/dd-c1c33-clean-J2Pe7u/repo/node_modules/@vitest/runner/dist/index.js:1056:17)\n    at processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at runSuite (file:///C:/Users/kyrie/AppData/Local/Temp/dd-c1c33-clean-J2Pe7u/repo/node_modules/@vitest/runner/dist/index.js:1205:15)"
+        ]
+      }
+    ]
+  },
+  "browser": "PASS",
+  "build": "PASS",
+  "freshCheckout": {
+    "cleanBeforeInstall": true,
+    "path": "C:\\Users\\kyrie\\AppData\\Local\\Temp\\dd-c1c33-clean-J2Pe7u\\repo",
+    "snapshotCommit": "d7ce1a03314e02077ec1cf3e742ad05cf6059c42",
+    "npmCiExitCode": 0
+  },
+  "localSourceIndependence": {
+    "absoluteLocalSourceDependencies": 0,
+    "localPdfRuntimeDependency": false,
+    "localRawAssetRuntimeDependency": false,
+    "scannedFiles": 383
+  },
+  "lockedAuditInput": {
+    "path": "docs/DD_EN_COREBOX_RULES.pdf",
+    "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+    "lockReference": "c1a-rulebook-evidence.json",
+    "newlyAcquired": false,
+    "runtimeDependency": false,
+    "purpose": "Reproduce historical source-integrity checks from a fresh checkout"
+  },
+  "assets": {
+    "status": "PASS",
+    "committedAssets": 313,
+    "hashCheckedManifestReferences": 73
+  },
+  "debugHookAudit": {
+    "debugHooks": 0,
+    "localSourcePaths": 0,
+    "provenanceOnlyLocalPathMatches": 120,
+    "provenanceRef": "docs/data/darkest-dungeon/community-reference/antha-complete-edition/normalized-requirements.json",
+    "provenanceSha256": "82e3f9794c81d021c158610ff47411a7ef0af7d68efe3d23631d9a7e68793562",
+    "classification": "Frozen renders[].path metadata only; committed visual resolver requires src/assets/ localPath; all external network blocked in browser proof",
+    "e2eSeedRemoved": true
+  },
+  "saveReplay": {
+    "status": "PASS",
+    "continuations": [
+      {
+        "level": 1,
+        "point": "after-draw-state-and-encounter-creation",
+        "status": "PASS",
+        "preSaveHash": "2f0b31b928d92d94b3a2f2cdfbb58a761f4973a411d8e8c92f580a7801b3fc9b",
+        "saveHash": "8c546dd91d20be202e961ba5e94f7b76a5aa3cdd5b24b41f18e57066dd3066e5",
+        "reloadedHash": "2f0b31b928d92d94b3a2f2cdfbb58a761f4973a411d8e8c92f580a7801b3fc9b",
+        "uninterruptedResultHash": "4ca76d564dfcc9420b2923b1875f4e25414cc843e8a6cd88c2657e39a5fa6469",
+        "resumedResultHash": "4ca76d564dfcc9420b2923b1875f4e25414cc843e8a6cd88c2657e39a5fa6469",
+        "eventSequenceHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "physicalOwnershipHash": "2ebcb936a6a925383206e1b365356df28ea501c6ce65f18e5bd635f933744295",
+        "ruleSetVersion": "C1C32R2C-R-DIGITAL-DEFAULT-v6"
+      },
+      {
+        "level": 1,
+        "point": "ordinary-battle-active",
+        "status": "PASS",
+        "preSaveHash": "2f0b31b928d92d94b3a2f2cdfbb58a761f4973a411d8e8c92f580a7801b3fc9b",
+        "saveHash": "8c546dd91d20be202e961ba5e94f7b76a5aa3cdd5b24b41f18e57066dd3066e5",
+        "reloadedHash": "2f0b31b928d92d94b3a2f2cdfbb58a761f4973a411d8e8c92f580a7801b3fc9b",
+        "uninterruptedResultHash": "4ca76d564dfcc9420b2923b1875f4e25414cc843e8a6cd88c2657e39a5fa6469",
+        "resumedResultHash": "4ca76d564dfcc9420b2923b1875f4e25414cc843e8a6cd88c2657e39a5fa6469",
+        "eventSequenceHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "physicalOwnershipHash": "2ebcb936a6a925383206e1b365356df28ea501c6ce65f18e5bd635f933744295",
+        "ruleSetVersion": "C1C32R2C-R-DIGITAL-DEFAULT-v6"
+      },
+      {
+        "level": 1,
+        "point": "ordinary-hero-turn-before-skill",
+        "status": "PASS",
+        "preSaveHash": "2f0b31b928d92d94b3a2f2cdfbb58a761f4973a411d8e8c92f580a7801b3fc9b",
+        "saveHash": "8c546dd91d20be202e961ba5e94f7b76a5aa3cdd5b24b41f18e57066dd3066e5",
+        "reloadedHash": "2f0b31b928d92d94b3a2f2cdfbb58a761f4973a411d8e8c92f580a7801b3fc9b",
+        "uninterruptedResultHash": "4ca76d564dfcc9420b2923b1875f4e25414cc843e8a6cd88c2657e39a5fa6469",
+        "resumedResultHash": "4ca76d564dfcc9420b2923b1875f4e25414cc843e8a6cd88c2657e39a5fa6469",
+        "eventSequenceHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "physicalOwnershipHash": "2ebcb936a6a925383206e1b365356df28ea501c6ce65f18e5bd635f933744295",
+        "ruleSetVersion": "C1C32R2C-R-DIGITAL-DEFAULT-v6"
+      },
+      {
+        "level": 1,
+        "point": "after-ordinary-death",
+        "status": "PASS",
+        "preSaveHash": "c37633eabac59ebb15506ca5175d6fed4cfb78684380a5139e6abed586b0c287",
+        "saveHash": "e98bbb69b8dc68f9df64e434b6b9bac487791569fdb64c564a885c7335941e5a",
+        "reloadedHash": "c37633eabac59ebb15506ca5175d6fed4cfb78684380a5139e6abed586b0c287",
+        "uninterruptedResultHash": "62b70ca693c8cde08d90d6e1c30b282b4b07bb7efbee6740cd179c5205c1b944",
+        "resumedResultHash": "62b70ca693c8cde08d90d6e1c30b282b4b07bb7efbee6740cd179c5205c1b944",
+        "eventSequenceHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "physicalOwnershipHash": "9a162a566a41108854634e94ff09203cc3f7c9bc8f613236700fc88920038b4b",
+        "ruleSetVersion": "C1C32R2C-R-DIGITAL-DEFAULT-v6"
+      },
+      {
+        "level": 1,
+        "point": "ordinary-battle-victory",
+        "status": "PASS",
+        "preSaveHash": "8a708a534f4e1c723e71921004a7dd043031727db9755799687663b92297e250",
+        "saveHash": "3f3a71117bbc70c92b1fcbaf706529fc7a640914a798be2418873bbc6c075d29",
+        "reloadedHash": "8a708a534f4e1c723e71921004a7dd043031727db9755799687663b92297e250",
+        "uninterruptedResultHash": "3af8e2b4ceeeb7a03141225d903a246e4ec866d64e60f1f8d64a1d45a9414be8",
+        "resumedResultHash": "3af8e2b4ceeeb7a03141225d903a246e4ec866d64e60f1f8d64a1d45a9414be8",
+        "eventSequenceHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "physicalOwnershipHash": "1023756ce0c0ff9fcf6ec0ddaee30208604095fe3f2247a557c570ed596cee17",
+        "ruleSetVersion": "C1C32R2C-R-DIGITAL-DEFAULT-v6"
+      },
+      {
+        "level": 1,
+        "point": "ordinary-after-settlement",
+        "status": "PASS",
+        "preSaveHash": "db52cbe9bdb023aada668f9ec28273953c30e0c764af3dde822891a3fb37227f",
+        "saveHash": "d2ccc62369bb49239de516d9a8f502bfe56b71a8b3f4dd881bcfa83f3f3228f0",
+        "reloadedHash": "db52cbe9bdb023aada668f9ec28273953c30e0c764af3dde822891a3fb37227f",
+        "uninterruptedResultHash": "5c6701c503fec7bcfc8eb493371a01726e08d68cab4de21710fc1627dcd2cfdf",
+        "resumedResultHash": "5c6701c503fec7bcfc8eb493371a01726e08d68cab4de21710fc1627dcd2cfdf",
+        "eventSequenceHash": "a8761f5aa2e8ed122dccc31361338580524b2044791fbd4f8f3b60e8876d81e4",
+        "physicalOwnershipHash": "4ec2728998544fcb829a7bc28d3031f53859e5186d1258d0b23de82c7684b17d",
+        "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+      },
+      {
+        "level": 1,
+        "point": "after-face-the-threat-selection",
+        "status": "PASS",
+        "preSaveHash": "c58c3c23b62cd48e22b26831c1120be212d997921030b09203c1a0345d12548d",
+        "saveHash": "f70b6b67b77d8bb2fa4c133710c54a01754de5873f9cdace64d8d4a0c7f97f77",
+        "reloadedHash": "c58c3c23b62cd48e22b26831c1120be212d997921030b09203c1a0345d12548d",
+        "uninterruptedResultHash": "f53c10c2a7d84374561f10b267ae143f9ea77a081c70e1a6e1af01ffc2961e0a",
+        "resumedResultHash": "f53c10c2a7d84374561f10b267ae143f9ea77a081c70e1a6e1af01ffc2961e0a",
+        "eventSequenceHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "physicalOwnershipHash": "50e116c6bb8f6c4e8d510e45e2f6325de0ff4bcce3e5b546ec6897719bcbdfd5",
+        "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+      },
+      {
+        "level": 1,
+        "point": "boss-battle-active",
+        "status": "PASS",
+        "preSaveHash": "6eff45215da3535d2cc19a881ef575d46a976c08a9a6e4d32a9de4d658316b17",
+        "saveHash": "43682c25f8217f3b087f2f7d142b8ba824ead4498d326d4475e1c5d6e750bb08",
+        "reloadedHash": "6eff45215da3535d2cc19a881ef575d46a976c08a9a6e4d32a9de4d658316b17",
+        "uninterruptedResultHash": "874b53ade707ccc3b99700c3a0b08a29eaac294e63dee273c66b1d3348ecf4a8",
+        "resumedResultHash": "874b53ade707ccc3b99700c3a0b08a29eaac294e63dee273c66b1d3348ecf4a8",
+        "eventSequenceHash": "db59500e4ea06b482ea1a70c77d8e1ce9202db60fe420e2e3086f916709149e0",
+        "physicalOwnershipHash": "d37a587be84874d80838652c779ac5f2e0202dcc4b25f13911aa09b601649d8c"
+      },
+      {
+        "level": 1,
+        "point": "boss-hero-turn-before-skill",
+        "status": "PASS",
+        "preSaveHash": "6eff45215da3535d2cc19a881ef575d46a976c08a9a6e4d32a9de4d658316b17",
+        "saveHash": "43682c25f8217f3b087f2f7d142b8ba824ead4498d326d4475e1c5d6e750bb08",
+        "reloadedHash": "6eff45215da3535d2cc19a881ef575d46a976c08a9a6e4d32a9de4d658316b17",
+        "uninterruptedResultHash": "874b53ade707ccc3b99700c3a0b08a29eaac294e63dee273c66b1d3348ecf4a8",
+        "resumedResultHash": "874b53ade707ccc3b99700c3a0b08a29eaac294e63dee273c66b1d3348ecf4a8",
+        "eventSequenceHash": "db59500e4ea06b482ea1a70c77d8e1ce9202db60fe420e2e3086f916709149e0",
+        "physicalOwnershipHash": "d37a587be84874d80838652c779ac5f2e0202dcc4b25f13911aa09b601649d8c"
+      },
+      {
+        "level": 1,
+        "point": "boss-battle-victory",
+        "status": "PASS",
+        "preSaveHash": "4d5d056a14e3672ab3624aeb7460ba21f6f6dcacd81a19f428df64b1d840a8c9",
+        "saveHash": "c5019d02a4afef0185d9abe3d667feda0ba57ea5cac25639558f35d57823b5e4",
+        "reloadedHash": "4d5d056a14e3672ab3624aeb7460ba21f6f6dcacd81a19f428df64b1d840a8c9",
+        "uninterruptedResultHash": "c5be1190c1a310351a7adef9ef5aaf75b0e792ca6199400b61701cbfa5ea34b1",
+        "resumedResultHash": "c5be1190c1a310351a7adef9ef5aaf75b0e792ca6199400b61701cbfa5ea34b1",
+        "eventSequenceHash": "db59500e4ea06b482ea1a70c77d8e1ce9202db60fe420e2e3086f916709149e0",
+        "physicalOwnershipHash": "d37a587be84874d80838652c779ac5f2e0202dcc4b25f13911aa09b601649d8c"
+      },
+      {
+        "level": 1,
+        "point": "boss-after-settlement",
+        "status": "PASS",
+        "preSaveHash": "159baa7153df569fb4b9d0292d9d1868d633b9ccd29e786f3fdc19b35a9b06b1",
+        "saveHash": "2def98ed6479d01f697f5266ea41c2d74c517a9802fc41c64ce24c3966afadef",
+        "reloadedHash": "159baa7153df569fb4b9d0292d9d1868d633b9ccd29e786f3fdc19b35a9b06b1",
+        "uninterruptedResultHash": "159baa7153df569fb4b9d0292d9d1868d633b9ccd29e786f3fdc19b35a9b06b1",
+        "resumedResultHash": "159baa7153df569fb4b9d0292d9d1868d633b9ccd29e786f3fdc19b35a9b06b1",
+        "eventSequenceHash": "db59500e4ea06b482ea1a70c77d8e1ce9202db60fe420e2e3086f916709149e0",
+        "physicalOwnershipHash": "d37a587be84874d80838652c779ac5f2e0202dcc4b25f13911aa09b601649d8c",
+        "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+      },
+      {
+        "level": 2,
+        "point": "preparation-PENDING_VISIT",
+        "status": "PASS",
+        "preSaveHash": "1d5d10e804617743e4ab4e1f9e095c6d2849a67482ce8f8fb77684b1185523e1",
+        "saveHash": "4f0d4f81921536f689a4f496c33c8f3945f41d28b435c6498bd6f9a80f248bb4",
+        "reloadedHash": "1d5d10e804617743e4ab4e1f9e095c6d2849a67482ce8f8fb77684b1185523e1",
+        "uninterruptedResultHash": "69f92dbfc1cba3d0b2b14916286a85c7e2fc647f8d8165ce72b5a5fe46126615",
+        "resumedResultHash": "69f92dbfc1cba3d0b2b14916286a85c7e2fc647f8d8165ce72b5a5fe46126615",
+        "eventSequenceHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "physicalOwnershipHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+      },
+      {
+        "level": 2,
+        "point": "preparation-level-II-effect-choice",
+        "status": "PASS",
+        "preSaveHash": "7bf47859243b050d782aaab51df5543906b8732b17f34d2f4d48000ea5cdfd5d",
+        "saveHash": "3e20a7e49ef371e76d7afca9b5f9fc135a91c688098cea9bc8214001ae247c01",
+        "reloadedHash": "7bf47859243b050d782aaab51df5543906b8732b17f34d2f4d48000ea5cdfd5d",
+        "uninterruptedResultHash": "69f92dbfc1cba3d0b2b14916286a85c7e2fc647f8d8165ce72b5a5fe46126615",
+        "resumedResultHash": "69f92dbfc1cba3d0b2b14916286a85c7e2fc647f8d8165ce72b5a5fe46126615",
+        "eventSequenceHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "physicalOwnershipHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+      },
+      {
+        "level": 2,
+        "point": "after-face-the-threat-selection",
+        "status": "PASS",
+        "preSaveHash": "2ae1fed6590ccf1c2e6b0d8836cbeb0dd63a158b061867a9b95770fe7833f414",
+        "saveHash": "6f817888eebc9a46b87c9783bfd4fa2a431c38f039b84fd962640162a69d4700",
+        "reloadedHash": "2ae1fed6590ccf1c2e6b0d8836cbeb0dd63a158b061867a9b95770fe7833f414",
+        "uninterruptedResultHash": "c617c14324e9672bc05b0dc8052c90f875e353324a1b499223afbe984a8fc5d1",
+        "resumedResultHash": "c617c14324e9672bc05b0dc8052c90f875e353324a1b499223afbe984a8fc5d1",
+        "eventSequenceHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "physicalOwnershipHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+      },
+      {
+        "level": 2,
+        "point": "after-draw-state-and-encounter-creation",
+        "status": "PASS",
+        "preSaveHash": "c9dddc6aba8ecf223b98010bcf58794c4456c71d2d487623db1703db36ca0830",
+        "saveHash": "cf04bd2a12a8545641eadcf04587aa1f0273901873abf686f2e5d57e1d7bf796",
+        "reloadedHash": "c9dddc6aba8ecf223b98010bcf58794c4456c71d2d487623db1703db36ca0830",
+        "uninterruptedResultHash": "e0c93b0b07c7e28e7a3c605c514b08dc6907db99739699b36900a163104e1ef2",
+        "resumedResultHash": "e0c93b0b07c7e28e7a3c605c514b08dc6907db99739699b36900a163104e1ef2",
+        "eventSequenceHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "physicalOwnershipHash": "a1d24881e80ebb7fd0af9145d77eda52a00fdb7024193b11b50768cb7bf6b63a",
+        "ruleSetVersion": "C1C32R2C-R-DIGITAL-DEFAULT-v6"
+      },
+      {
+        "level": 2,
+        "point": "ordinary-battle-active",
+        "status": "PASS",
+        "preSaveHash": "c9dddc6aba8ecf223b98010bcf58794c4456c71d2d487623db1703db36ca0830",
+        "saveHash": "cf04bd2a12a8545641eadcf04587aa1f0273901873abf686f2e5d57e1d7bf796",
+        "reloadedHash": "c9dddc6aba8ecf223b98010bcf58794c4456c71d2d487623db1703db36ca0830",
+        "uninterruptedResultHash": "e0c93b0b07c7e28e7a3c605c514b08dc6907db99739699b36900a163104e1ef2",
+        "resumedResultHash": "e0c93b0b07c7e28e7a3c605c514b08dc6907db99739699b36900a163104e1ef2",
+        "eventSequenceHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "physicalOwnershipHash": "a1d24881e80ebb7fd0af9145d77eda52a00fdb7024193b11b50768cb7bf6b63a",
+        "ruleSetVersion": "C1C32R2C-R-DIGITAL-DEFAULT-v6"
+      },
+      {
+        "level": 2,
+        "point": "ordinary-hero-turn-before-skill",
+        "status": "PASS",
+        "preSaveHash": "c9dddc6aba8ecf223b98010bcf58794c4456c71d2d487623db1703db36ca0830",
+        "saveHash": "cf04bd2a12a8545641eadcf04587aa1f0273901873abf686f2e5d57e1d7bf796",
+        "reloadedHash": "c9dddc6aba8ecf223b98010bcf58794c4456c71d2d487623db1703db36ca0830",
+        "uninterruptedResultHash": "e0c93b0b07c7e28e7a3c605c514b08dc6907db99739699b36900a163104e1ef2",
+        "resumedResultHash": "e0c93b0b07c7e28e7a3c605c514b08dc6907db99739699b36900a163104e1ef2",
+        "eventSequenceHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "physicalOwnershipHash": "a1d24881e80ebb7fd0af9145d77eda52a00fdb7024193b11b50768cb7bf6b63a",
+        "ruleSetVersion": "C1C32R2C-R-DIGITAL-DEFAULT-v6"
+      },
+      {
+        "level": 2,
+        "point": "after-ordinary-death",
+        "status": "PASS",
+        "preSaveHash": "0a87fac97a586c42cd2e1eab6b47e178791df82e61b64ec4becd6c5be7c93889",
+        "saveHash": "2888584c2888deaeba0f2beebeef6688961f079caae48a0c61ec8468c77a5125",
+        "reloadedHash": "0a87fac97a586c42cd2e1eab6b47e178791df82e61b64ec4becd6c5be7c93889",
+        "uninterruptedResultHash": "ddc260ccc544befcd829eb4c569eb9b13f5c2855972b830018f75030b54c581a",
+        "resumedResultHash": "ddc260ccc544befcd829eb4c569eb9b13f5c2855972b830018f75030b54c581a",
+        "eventSequenceHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "physicalOwnershipHash": "68c12319f55cebb3ca2bdc2fc04037e003262cf95b1898c9d82f7b2867235973",
+        "ruleSetVersion": "C1C32R2C-R-DIGITAL-DEFAULT-v6"
+      },
+      {
+        "level": 2,
+        "point": "ordinary-battle-victory",
+        "status": "PASS",
+        "preSaveHash": "c8d6bdfd1da667b288762eaa2ca536450f4c138aea83d51dea593f16bfe5b3ad",
+        "saveHash": "80260c1588f78d7e4aa7ddec7ea955cb732fd3b54fc68059e05a1b3110c3345a",
+        "reloadedHash": "c8d6bdfd1da667b288762eaa2ca536450f4c138aea83d51dea593f16bfe5b3ad",
+        "uninterruptedResultHash": "7ba499b197118974fa548226fb3bec7bd5ec292784e03898d780fbed8eb41588",
+        "resumedResultHash": "7ba499b197118974fa548226fb3bec7bd5ec292784e03898d780fbed8eb41588",
+        "eventSequenceHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "physicalOwnershipHash": "54828238fd7f383d0db6510b313a99ccc6db1d3090ce4c1d92b80c8ef6d423f0",
+        "ruleSetVersion": "C1C32R2C-R-DIGITAL-DEFAULT-v6"
+      },
+      {
+        "level": 2,
+        "point": "ordinary-after-settlement",
+        "status": "PASS",
+        "preSaveHash": "ba22540d44cad518c37980e1e7066d0cc1765c9a30e8ff8ed798d6e02a11d69d",
+        "saveHash": "bc09d73eaddd2b54e7fa89a6513760ca32b31f8152227fc04f1029470b154dd6",
+        "reloadedHash": "ba22540d44cad518c37980e1e7066d0cc1765c9a30e8ff8ed798d6e02a11d69d",
+        "uninterruptedResultHash": "3ed17a9fc72d0a10d90319bf02f8a808e14a0692eda81d167e4c94d9b36f2899",
+        "resumedResultHash": "3ed17a9fc72d0a10d90319bf02f8a808e14a0692eda81d167e4c94d9b36f2899",
+        "eventSequenceHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "physicalOwnershipHash": "d00a37d5caa23eb1b2271ade0497b4c954b3e12976a02620596f061428675826",
+        "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+      },
+      {
+        "level": 2,
+        "point": "ordinary-movement-choice",
+        "status": "PASS",
+        "preSaveHash": "fff5f1ec607e6db5aed646fee7468a0148df681e76017aec9c758e01f9da0e7b",
+        "saveHash": "17f8c6e3b9b651bd0037f94eeb6190b83c6e101b8a30c9397c0f23e03cfcc06f",
+        "reloadedHash": "fff5f1ec607e6db5aed646fee7468a0148df681e76017aec9c758e01f9da0e7b",
+        "uninterruptedResultHash": "da4b1285159455d7f006b3ea0be92206fb2e30b21ef63ca2833f5913c92eca7a",
+        "resumedResultHash": "da4b1285159455d7f006b3ea0be92206fb2e30b21ef63ca2833f5913c92eca7a",
+        "eventSequenceHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "physicalOwnershipHash": "dafab82679f657e6efbc2be124efa1f41cc2e9e0654317e86ef74ce0af30975a",
+        "ruleSetVersion": "C1C32R2C-R-DIGITAL-DEFAULT-v6"
+      },
+      {
+        "level": 2,
+        "point": "boss-battle-active",
+        "status": "PASS",
+        "preSaveHash": "e690bf930164aac404c6103359272c7456c21fcb5a3508c01ad60736c9e2167e",
+        "saveHash": "f6f9357538f8059480576e3b652a139d8cdcc594539ebd9450a0efb0a669ceaa",
+        "reloadedHash": "e690bf930164aac404c6103359272c7456c21fcb5a3508c01ad60736c9e2167e",
+        "uninterruptedResultHash": "2ee31faf3953a48e3b13b034011688e12ab80d17aa8a78bcac15e0fbae923109",
+        "resumedResultHash": "2ee31faf3953a48e3b13b034011688e12ab80d17aa8a78bcac15e0fbae923109",
+        "eventSequenceHash": "514245637ab0ade6b71175a87f925dce9ed980afe154017a8b051935cb5707ad",
+        "physicalOwnershipHash": "92bb153f6b686408f5dfdb138686377ab0e317161374adc0e4d935bcc4f0a651",
+        "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+      },
+      {
+        "level": 2,
+        "point": "boss-hero-turn-before-skill",
+        "status": "PASS",
+        "preSaveHash": "e690bf930164aac404c6103359272c7456c21fcb5a3508c01ad60736c9e2167e",
+        "saveHash": "f6f9357538f8059480576e3b652a139d8cdcc594539ebd9450a0efb0a669ceaa",
+        "reloadedHash": "e690bf930164aac404c6103359272c7456c21fcb5a3508c01ad60736c9e2167e",
+        "uninterruptedResultHash": "2ee31faf3953a48e3b13b034011688e12ab80d17aa8a78bcac15e0fbae923109",
+        "resumedResultHash": "2ee31faf3953a48e3b13b034011688e12ab80d17aa8a78bcac15e0fbae923109",
+        "eventSequenceHash": "514245637ab0ade6b71175a87f925dce9ed980afe154017a8b051935cb5707ad",
+        "physicalOwnershipHash": "92bb153f6b686408f5dfdb138686377ab0e317161374adc0e4d935bcc4f0a651",
+        "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+      },
+      {
+        "level": 2,
+        "point": "boss-battle-victory",
+        "status": "PASS",
+        "preSaveHash": "bf63c02ebc9a192818eea2eb7e16e2d556ae4e6d2351962cb001fd275f8c20d3",
+        "saveHash": "d234393ab1c7998de453b04a3d50308fd7ea76b00b106f7f36068ea7798bde36",
+        "reloadedHash": "bf63c02ebc9a192818eea2eb7e16e2d556ae4e6d2351962cb001fd275f8c20d3",
+        "uninterruptedResultHash": "df6b6734827a8b8f00734ae3a71a533c9923cb56a119c0e924eecf55410fba51",
+        "resumedResultHash": "df6b6734827a8b8f00734ae3a71a533c9923cb56a119c0e924eecf55410fba51",
+        "eventSequenceHash": "a9fb84a70e79dd509423edadb54b088fa45d4e3bd00ff408a9faad14d562d460",
+        "physicalOwnershipHash": "1affc9adbf5f3a370b756379721e26d95ba39365462450ffa40085a48935207a",
+        "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+      },
+      {
+        "level": 2,
+        "point": "boss-after-settlement",
+        "status": "PASS",
+        "preSaveHash": "6c61e09e9dc35ccbad3786154954d5147e98824ae12f05ab4fc026e98692e28e",
+        "saveHash": "d8d9f76a80c29279571aed2a1fc1882e7574f2826cfbb6420c3ce18599e23f34",
+        "reloadedHash": "6c61e09e9dc35ccbad3786154954d5147e98824ae12f05ab4fc026e98692e28e",
+        "uninterruptedResultHash": "6c61e09e9dc35ccbad3786154954d5147e98824ae12f05ab4fc026e98692e28e",
+        "resumedResultHash": "6c61e09e9dc35ccbad3786154954d5147e98824ae12f05ab4fc026e98692e28e",
+        "eventSequenceHash": "a9fb84a70e79dd509423edadb54b088fa45d4e3bd00ff408a9faad14d562d460",
+        "physicalOwnershipHash": "1affc9adbf5f3a370b756379721e26d95ba39365462450ffa40085a48935207a",
+        "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+      },
+      {
+        "level": 3,
+        "point": "preparation-PENDING_VISIT",
+        "status": "PASS",
+        "preSaveHash": "e8c6149fb8a0bcc7f9ac5a990c3880d3a45617d17d3316928c7372d2791b70e8",
+        "saveHash": "1606fadd0213061e84b2f39cb9f11cae7ec26e5b6cd55a22d6dfb96e29b175cb",
+        "reloadedHash": "e8c6149fb8a0bcc7f9ac5a990c3880d3a45617d17d3316928c7372d2791b70e8",
+        "uninterruptedResultHash": "de15fd84fa104a51bb83d048d245fb5034142e994d44ff69336c41544f65ee03",
+        "resumedResultHash": "de15fd84fa104a51bb83d048d245fb5034142e994d44ff69336c41544f65ee03",
+        "eventSequenceHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "physicalOwnershipHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+      },
+      {
+        "level": 3,
+        "point": "after-face-the-threat-selection",
+        "status": "PASS",
+        "preSaveHash": "100177cf9662118680f62b5b2f11fb45762683af68583daca226b59eb2e24fd9",
+        "saveHash": "b9709bde0eaea7a6a70bb5ae7a83f1065d3c5eb5abc133c2aba7d67ac369c029",
+        "reloadedHash": "100177cf9662118680f62b5b2f11fb45762683af68583daca226b59eb2e24fd9",
+        "uninterruptedResultHash": "21634a6e7d6be1207ddc6f47f1ba894901b054bf2f02eca253546693f815c804",
+        "resumedResultHash": "21634a6e7d6be1207ddc6f47f1ba894901b054bf2f02eca253546693f815c804",
+        "eventSequenceHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "physicalOwnershipHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+      },
+      {
+        "level": 3,
+        "point": "after-draw-state-and-encounter-creation",
+        "status": "PASS",
+        "preSaveHash": "693d51e991fe556dedd790f71df9917328d05ab38056b943f2f2d79773c3f2c7",
+        "saveHash": "87733bdb816fa53c4c70549e50aa8f7038971ac167c87bc1e567325f5e6db36b",
+        "reloadedHash": "693d51e991fe556dedd790f71df9917328d05ab38056b943f2f2d79773c3f2c7",
+        "uninterruptedResultHash": "e1456825d2911efc4f9bf3d1727f63c2c552269ed022f893641c2790ebdff466",
+        "resumedResultHash": "e1456825d2911efc4f9bf3d1727f63c2c552269ed022f893641c2790ebdff466",
+        "eventSequenceHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "physicalOwnershipHash": "25e419f41c1352b0ea4bb93328f3a78b0f52f1efaf23ad07f84346df5c314007",
+        "ruleSetVersion": "C1C32R2C-R-DIGITAL-DEFAULT-v6"
+      },
+      {
+        "level": 3,
+        "point": "ordinary-battle-active",
+        "status": "PASS",
+        "preSaveHash": "693d51e991fe556dedd790f71df9917328d05ab38056b943f2f2d79773c3f2c7",
+        "saveHash": "87733bdb816fa53c4c70549e50aa8f7038971ac167c87bc1e567325f5e6db36b",
+        "reloadedHash": "693d51e991fe556dedd790f71df9917328d05ab38056b943f2f2d79773c3f2c7",
+        "uninterruptedResultHash": "e1456825d2911efc4f9bf3d1727f63c2c552269ed022f893641c2790ebdff466",
+        "resumedResultHash": "e1456825d2911efc4f9bf3d1727f63c2c552269ed022f893641c2790ebdff466",
+        "eventSequenceHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "physicalOwnershipHash": "25e419f41c1352b0ea4bb93328f3a78b0f52f1efaf23ad07f84346df5c314007",
+        "ruleSetVersion": "C1C32R2C-R-DIGITAL-DEFAULT-v6"
+      },
+      {
+        "level": 3,
+        "point": "ordinary-hero-turn-before-skill",
+        "status": "PASS",
+        "preSaveHash": "693d51e991fe556dedd790f71df9917328d05ab38056b943f2f2d79773c3f2c7",
+        "saveHash": "87733bdb816fa53c4c70549e50aa8f7038971ac167c87bc1e567325f5e6db36b",
+        "reloadedHash": "693d51e991fe556dedd790f71df9917328d05ab38056b943f2f2d79773c3f2c7",
+        "uninterruptedResultHash": "e1456825d2911efc4f9bf3d1727f63c2c552269ed022f893641c2790ebdff466",
+        "resumedResultHash": "e1456825d2911efc4f9bf3d1727f63c2c552269ed022f893641c2790ebdff466",
+        "eventSequenceHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "physicalOwnershipHash": "25e419f41c1352b0ea4bb93328f3a78b0f52f1efaf23ad07f84346df5c314007",
+        "ruleSetVersion": "C1C32R2C-R-DIGITAL-DEFAULT-v6"
+      },
+      {
+        "level": 3,
+        "point": "after-ordinary-death",
+        "status": "PASS",
+        "preSaveHash": "b7de6922dc1b532ffe81f3c7defb324734e6c537fcbee390ac4a9ae68150ee35",
+        "saveHash": "42a3db19d610ac5db61d2ac2b0f730b1edde04353d35fb2a96d9fee65c8bea94",
+        "reloadedHash": "b7de6922dc1b532ffe81f3c7defb324734e6c537fcbee390ac4a9ae68150ee35",
+        "uninterruptedResultHash": "72c3e9053697246c87935adee7d39295d61e4f6bdca24faa6ae463a45f2ca8f2",
+        "resumedResultHash": "72c3e9053697246c87935adee7d39295d61e4f6bdca24faa6ae463a45f2ca8f2",
+        "eventSequenceHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "physicalOwnershipHash": "ea0a56a3182806adfa0f188ab9a98b96cf4743d68a8f1d01274f6376d4a8c024",
+        "ruleSetVersion": "C1C32R2C-R-DIGITAL-DEFAULT-v6"
+      },
+      {
+        "level": 3,
+        "point": "ordinary-battle-victory",
+        "status": "PASS",
+        "preSaveHash": "084ce18ba9a1df3d53c379669b5f04152dbb5a402af9851025023ebef2881b62",
+        "saveHash": "2b3e20201953ecd8d62f1b4a3cda496e48d7d88487022849ae46be0d2dd4e5e9",
+        "reloadedHash": "084ce18ba9a1df3d53c379669b5f04152dbb5a402af9851025023ebef2881b62",
+        "uninterruptedResultHash": "5bca0cf96a05a05fba1852ed6304d78015bab75354e05496e2b7107c6132d16b",
+        "resumedResultHash": "5bca0cf96a05a05fba1852ed6304d78015bab75354e05496e2b7107c6132d16b",
+        "eventSequenceHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "physicalOwnershipHash": "513b4c167fdc38384ca2f43ef67cf0c14f2c7b40a8bda8cf8e5c3a7936cbf1b6",
+        "ruleSetVersion": "C1C32R2C-R-DIGITAL-DEFAULT-v6"
+      },
+      {
+        "level": 3,
+        "point": "ordinary-after-settlement",
+        "status": "PASS",
+        "preSaveHash": "7f8cc447c28803dbd2cd53b310522031bfdc730fc479f1be603617bd183c60cc",
+        "saveHash": "2fc09997d68a1263d0349cb2dd8c755d451d83b9aa04e63e7942a6fec7578281",
+        "reloadedHash": "7f8cc447c28803dbd2cd53b310522031bfdc730fc479f1be603617bd183c60cc",
+        "uninterruptedResultHash": "caacda6cd787fbcc8f4adffb4b3124666e2517571c06894a77fc6f6a00ab2263",
+        "resumedResultHash": "caacda6cd787fbcc8f4adffb4b3124666e2517571c06894a77fc6f6a00ab2263",
+        "eventSequenceHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "physicalOwnershipHash": "55d15851a03e08a6ca3304191c0349f66d28a7129e851dba3ba2319a2e9114d9",
+        "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+      },
+      {
+        "level": 3,
+        "point": "boss-battle-active",
+        "status": "PASS",
+        "preSaveHash": "78ac6a3b5bd5dc2a15c93706371ff65e77873b938a5f2e8653d8207c00ac08a1",
+        "saveHash": "54e95a39cd30cf62a785dbbc59fe408d5c1e48edb3e151623e6ad3c8bfc2b333",
+        "reloadedHash": "78ac6a3b5bd5dc2a15c93706371ff65e77873b938a5f2e8653d8207c00ac08a1",
+        "uninterruptedResultHash": "6c9cbe4408a74f218b5441e0a02994721c3f0242e0506a438e0bede28be497ab",
+        "resumedResultHash": "6c9cbe4408a74f218b5441e0a02994721c3f0242e0506a438e0bede28be497ab",
+        "eventSequenceHash": "72c148569f1c641d3453e2d92846cad0be8ae6c72ebc42e7e91f2057c1f891c9",
+        "physicalOwnershipHash": "6066c799591e5eacaf46d6ae608e560c334c381b8f1414896b6c49db3e23d597",
+        "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+      },
+      {
+        "level": 3,
+        "point": "boss-hero-turn-before-skill",
+        "status": "PASS",
+        "preSaveHash": "78ac6a3b5bd5dc2a15c93706371ff65e77873b938a5f2e8653d8207c00ac08a1",
+        "saveHash": "54e95a39cd30cf62a785dbbc59fe408d5c1e48edb3e151623e6ad3c8bfc2b333",
+        "reloadedHash": "78ac6a3b5bd5dc2a15c93706371ff65e77873b938a5f2e8653d8207c00ac08a1",
+        "uninterruptedResultHash": "6c9cbe4408a74f218b5441e0a02994721c3f0242e0506a438e0bede28be497ab",
+        "resumedResultHash": "6c9cbe4408a74f218b5441e0a02994721c3f0242e0506a438e0bede28be497ab",
+        "eventSequenceHash": "72c148569f1c641d3453e2d92846cad0be8ae6c72ebc42e7e91f2057c1f891c9",
+        "physicalOwnershipHash": "6066c799591e5eacaf46d6ae608e560c334c381b8f1414896b6c49db3e23d597",
+        "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+      },
+      {
+        "level": 3,
+        "point": "boss-battle-victory",
+        "status": "PASS",
+        "preSaveHash": "ad80b452166039bfc01889d3649458f31624c80566f6698306ed8896be4098ce",
+        "saveHash": "ad49a30ab13dd09aeac4d505acf90517147e4fae8235c4145313fa81415e11c4",
+        "reloadedHash": "ad80b452166039bfc01889d3649458f31624c80566f6698306ed8896be4098ce",
+        "uninterruptedResultHash": "461ddcac40fb394fe0c472116d6fb33fbecc0c832a8445ded4c984b696905304",
+        "resumedResultHash": "461ddcac40fb394fe0c472116d6fb33fbecc0c832a8445ded4c984b696905304",
+        "eventSequenceHash": "25f454ada928e58cfed432eb7b25249642689ee986d49806b399119431f8a085",
+        "physicalOwnershipHash": "546381922922291e578e833d3efc01678212b13bb165cc1cca37406377d26794",
+        "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+      },
+      {
+        "level": 3,
+        "point": "boss-after-settlement",
+        "status": "PASS",
+        "preSaveHash": "78c3e8cc46abf404e047f2fbf9bb1c08cf8d4e289261164fc8d35a474082db49",
+        "saveHash": "9de35f388330b97482600757e2104c4112d8e8cf7a3ad27aeed87327df1cac4e",
+        "reloadedHash": "78c3e8cc46abf404e047f2fbf9bb1c08cf8d4e289261164fc8d35a474082db49",
+        "uninterruptedResultHash": "78c3e8cc46abf404e047f2fbf9bb1c08cf8d4e289261164fc8d35a474082db49",
+        "resumedResultHash": "78c3e8cc46abf404e047f2fbf9bb1c08cf8d4e289261164fc8d35a474082db49",
+        "eventSequenceHash": "25f454ada928e58cfed432eb7b25249642689ee986d49806b399119431f8a085",
+        "physicalOwnershipHash": "546381922922291e578e833d3efc01678212b13bb165cc1cca37406377d26794",
+        "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+      }
+    ]
+  },
+  "ownershipAudit": {
+    "duplicatePhysicalOwners": 0,
+    "validators": [
+      "validateSaveFile",
+      "validateRuinsDrawState",
+      "validateBoneFigureSupply",
+      "validateProductionOrdinaryThreat",
+      "validateProductionBossRoomStorage"
+    ],
+    "evidence": "All three real browser routes and their saved states validate; predecessor/copy/generation/figure invariants checked above"
+  },
+  "lifecycleAudit": {
+    "activeThreatCrossQuestLifecycle": true,
+    "questLocalCheckpointLifecycle": true,
+    "duplicateFaceTheThreatEncounter": false,
+    "duplicateBossRoomReservation": false,
+    "room10": [
+      "RESERVED",
+      "IN_PLAY",
+      "RETURNED"
+    ],
+    "reloadMatrix": {
+      "status": "PASS",
+      "points": [
+        "ordinary Battle",
+        "Reanimation",
+        "Boss Room",
+        "Boss Battle",
+        "Preparation Day",
+        "Captain Battle"
+      ],
+      "externalNetworkBlocked": true,
+      "externalRequests": []
+    }
+  },
+  "prototypeReachability": {
+    "status": "PASS",
+    "evidence": "C1C32R3 production entry + R3R real source route tests",
+    "productionReachability": 0
+  }
+}

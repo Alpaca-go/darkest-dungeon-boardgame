@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C33",
+  "baseline": "b01a3380aa1f9c24d7c6bafb32be99220ac10421",
+  "gameplaySemanticsChanged": false,
+  "schema1Migration": false,
+  "fixes": [
+    "Reject schema-2 consumed flag rollback using existing causal events",
+    "Validate settled checkpoints at direct save restoration",
+    "Exclude deterministic seed/debug mutations from production",
+    "Pin C1C29 audit to its immutable baseline commit rather than a local branch"
+  ],
+  "prerequisiteVerification": "Original R3R verifier runs in isolated baseline checkout; successor bytes verified separately",
+  "successorHashes": {
+    "package.json": "3b2432973845c4e8ba100b18590cb2b2d1d19657c30628030c776151ec296fd8",
+    "src/main.tsx": "beee88c7c344d65c13ef33ade62400f63e111536701c21217c2139410e6992f8",
+    "src/store/useGameStore.ts": "b4ab6065787f0cee779bd2973248e4e864fac0dfb0ad57ee2b311f0f89d9a17a",
+    "src/game-engine/ruins/production-threat-runtime.ts": "7f91b30150459335a0c9a8df64529bbdf8f93df42880de61814f5a8f290101d4",
+    "src/game-engine/bosses/threat-checkpoint.ts": "c1dc0c5de807ac4914c8dd177cbfd6057d39d31cd3f88295dbdb2e74f9855640",
+    "src/game-engine/save.ts": "007f1327ac57b5cca64fcb8d630cd436373acc3b72de3fae054077d41dcc1691"
+  }
+}
