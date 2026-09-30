@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { explicitlyMigrateHeroDodgeToV2 } from '../game-engine/rules/hero-dodge-versioning';
+import { selectProductionRuinsV6, commitNecromancerProductionQuestSelection } from '../game-engine/commands/necromancer-production-entry';
 import { applyBossThreatCheckpointInput, applyBossFoundationInput } from '../game-engine/commands/boss-foundation';
 import { advanceTurn } from '../game-engine/battle';
 import { beginNecromancerGraveyardVisit, chooseNecromancerPreparationHero, commitNecromancerGraveyardVisit } from '../game-engine/campaign/necromancer-preparation-day';
@@ -137,6 +138,7 @@ interface UiState {
 }
 interface GameStore {
   migrateHeroDodgeToV2: () => void;
+  selectProductionRuinsV6: () => void;
   battleHeroAreaMove: (areaId: string) => void;
   commitBossChoice(choiceId: string, selectedId: string): void;
   beginGraveyardGuard(): void;
@@ -166,7 +168,7 @@ interface GameStore {
   applyDefaultLoadout(): void;
   proceedToLoadout(): void;
   proceedToQuests(): void;
-  chooseQuest(questId: string): void;
+  chooseQuest(questId: string): boolean;
 
   // ---- Phase 2：地牢探索 ----
   scout(): void;
@@ -302,6 +304,11 @@ export const useGameStore = create<GameStore>((set, get) => {
   };
 
   return {
+    selectProductionRuinsV6: () => {
+      const campaign = get().campaign;
+      if (!campaign) return;
+      commit(selectProductionRuinsV6(campaign));
+    },
     migrateHeroDodgeToV2: () => {
       const c=get().campaign; if (!c || c.battle || c.bossEncounterCheckpoint) return;
       commit(explicitlyMigrateHeroDodgeToV2(c,c.id+':hero-dodge-v2'));
@@ -451,14 +458,17 @@ export const useGameStore = create<GameStore>((set, get) => {
 
     chooseQuest: (questId) => {
       const c = get().campaign;
-      if (!c) return;
+      if (!c) return false;
       // Phase 11A.2.3 §4：commitQuestSelection 收口为单一 Production Command 入口，
       // 内部完成 engineChooseQuest + selectQuest 两步；Store 与 Driver 共用。
-      const r = commitQuestSelection(c, questId);
+      const r = c.runtimeContentProfile === 'community-complete-edition'
+        && questId === 'face-the-threat' && c.campaignProgress.activeBossFamilyId === 'necromancer'
+        ? commitNecromancerProductionQuestSelection(c) : commitQuestSelection(c, questId);
       if (!r.ok) {
-        return;
+        return false;
       }
       commit(r.campaign);
+      return true;
     },
 
     scout: () => {

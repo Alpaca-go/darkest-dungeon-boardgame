@@ -5,7 +5,8 @@ import { getBossQuestPool, getQuestPool, runtimeContentContext } from '../data/c
 import { canSelectStandardQuest, canSelectBossQuest } from '../game-engine/campaign/campaign-progress';
 import { getThreatById } from '../data/bosses/threat-registry';
 import QuestCard from '../components/quest/QuestCard';
-import { necromancerQuestEntryError } from '../game-engine/bosses/production-dependency-gate';
+import { necromancerProductionEntryError, necromancerProductionEntryMessage } from '../game-engine/commands/necromancer-production-entry';
+import { RUINS_V6 } from '../types/ruins-executable';
 
 /**
  * Phase 11A.1 — 任务选择页最小 UI 改动（dev doc §22）：
@@ -19,6 +20,7 @@ export default function QuestSelectPage() {
   const navigate = useNavigate();
   const campaign = useGameStore((s) => s.campaign);
   const migrateHeroDodgeToV2=useGameStore(s=>s.migrateHeroDodgeToV2);
+  const selectProductionRuinsV6 = useGameStore(s => s.selectProductionRuinsV6);
   const chooseQuest = useGameStore((s) => s.chooseQuest);
 
   if (!campaign) return <Navigate to="/" replace />;
@@ -29,7 +31,13 @@ export default function QuestSelectPage() {
   const cp = campaign.campaignProgress;
   const standardSelectable = canSelectStandardQuest(cp);
   const bossSelectable = canSelectBossQuest(cp);
-  const necromancerEntryBlocked = necromancerQuestEntryError(campaign, 'face-the-threat') !== null;
+  const entryError = campaign.runtimeContentProfile === 'community-complete-edition'
+    && cp.activeBossFamilyId === 'necromancer' ? necromancerProductionEntryError(campaign) : null;
+  const necromancerEntryBlocked = entryError !== null;
+  const canSelectV6 = !campaign.battle && !campaign.bossEncounterCheckpoint && !campaign.ruinsDrawState
+    && !campaign.activeThreatRuntime
+    && (!campaign.necromancerPreparationDay || campaign.necromancerPreparationDay.status === 'COMMITTED')
+    && ['hamlet', 'quest-select'].includes(campaign.gamePhase);
   const activeThreat = cp.activeThreatId ? getThreatById(cp.activeThreatId) : null;
   const context = runtimeContentContext(campaign);
   const questPool = cp.bossQuestRequired
@@ -37,8 +45,7 @@ export default function QuestSelectPage() {
     : getQuestPool(context);
 
   const onChoose = (questId: string) => {
-    chooseQuest(questId);
-    navigate('/dungeon');
+    if (chooseQuest(questId)) navigate('/dungeon');
   };
 
   return (
@@ -46,10 +53,18 @@ export default function QuestSelectPage() {
       <h1 className="text-2xl font-bold text-dd-text mb-1">任务选择</h1>
       <p className="text-dd-muted text-sm mb-4">选择一项任务，开始生成对应的地牢。</p>
 
-      {campaign.runtimeContentProfile === 'community-complete-edition' && cp.activeBossFamilyId === 'necromancer'
+      {campaign.runtimeContentProfile === 'community-complete-edition'
         && !campaign.heroDodgeRuleSetSelection && !campaign.battle && !campaign.bossEncounterCheckpoint && <button
           type="button" data-testid="migrate-hero-dodge-v2" onClick={migrateHeroDodgeToV2}
           className="mb-4 rounded border border-dd-accent px-3 py-2">启用已接受的 Hero Dodge v2 规则</button>}
+      {campaign.runtimeContentProfile === 'community-complete-edition'
+        && campaign.ruinsRuleSetSelection?.ruleSetVersion !== RUINS_V6 && <div className="mb-4">
+          <button type="button" data-testid="select-production-ruins-v6" disabled={!canSelectV6}
+            onClick={selectProductionRuinsV6} className="rounded border border-dd-accent px-3 py-2 disabled:opacity-50">
+            显式启用 Ruins v6（含已接受的 Large 布局规则）
+          </button>
+          {!canSelectV6 && <p className="mt-1 text-sm text-dd-muted">已有 Threat 或遭遇不能迁移；请在初始化前选择规则。</p>}
+        </div>}
       {/* Phase 11A.1 §22 最小 UI：Campaign 状态条 */}
       <div className="mb-4 p-3 rounded border border-dd-border bg-dd-panel/40 text-sm">
         <div className="flex flex-wrap gap-3">
@@ -101,7 +116,7 @@ export default function QuestSelectPage() {
 
       {cp.bossQuestRequired && necromancerEntryBlocked ? (
         <p className="mt-3 text-sm text-dd-muted" data-testid="necromancer-production-entry-blocked">
-          Necromancer 暂不可进入：召唤怪物的正式行动定义和部分英雄数据尚未完成验证。
+          {necromancerProductionEntryMessage(entryError!)}
         </p>
       ) : null}
 

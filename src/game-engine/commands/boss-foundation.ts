@@ -11,6 +11,7 @@ import { resolveBossDefinition } from '../bosses/definitions';
 import { necromancerProductionDependencyGate } from '../bosses/production-dependency-gate';
 import { nowIso } from '../random';
 import { bindNecromancerFigures } from '../ruins/physical-supply';
+import { bindProductionCheckpointFigures } from '../bosses/checkpoint-physical-bridge';
 
 /** Programmatic production entry. Selector and complete-edition dependency promotion stay gated. */
 export function startBossFoundation(campaign: CampaignState, definition: BossDefinitionContract, seed: number,
@@ -52,7 +53,7 @@ export function resumeBossFoundation(campaign: CampaignState, roomId: string): C
     maxRounds: 4, ...(context.heroDodgeBindings ? {stagedIncomingAttacks:true} : {}), heroes, monsters: [], initiativeOrder: heroes.map(h => h.id), initiativeIndex: -1,
     activeActorId: null, currentActionPoints: 0, selectedSkillId: null, selectedTargetId: null, battleLog: [], rewards: { gold: 0 }, bossEncounter: encounter };
   assertBossEncounter(battle);
-  const physicalBattle = campaign.ruinsBoneFigureSupply ? bindNecromancerFigures(battle, campaign.ruinsBoneFigureSupply, campaign.ruinsDrawState) : battle;
+  const physicalBattle = bindProductionCheckpointFigures(campaign, battle);
   const resumed = applyBossFoundationInput({ ...campaign, battle: physicalBattle, gamePhase: 'battle' }, { type: 'ENTER_BOSS_ROOM' });
   return { ...resumed, bossEncounterCheckpoint: context.heroDodgeBindings ? null : campaign.bossEncounterCheckpoint, bossRoomStorage: campaign.bossRoomStorage ? { ...campaign.bossRoomStorage, roomId, lifecycle: 'IN_PLAY' } : undefined, activeThreatRuntime: resumed.activeThreatRuntime ? { ...resumed.activeThreatRuntime,
     consumedOnceKeys: [...new Set([...resumed.activeThreatRuntime.consumedOnceKeys, ...context.consumedOnceKeys])] } : null };
@@ -146,6 +147,9 @@ export function reserveProductionBossEncounter(campaign: CampaignState): Campaig
     tileId: 'tile-10', encounterId: e.checkpointContext!.encounterId, lifecycle: 'RESERVED' } };
 }
 export function enterProductionBossRoom(campaign: CampaignState, roomId: string): CampaignState {
+  if (campaign.battle || campaign.ruinsDrawState?.encounters.some(encounter => !encounter.returned)
+    || campaign.pendingDungeonTrinketAction || campaign.bossRoomStorage && campaign.bossRoomStorage.lifecycle !== 'RESERVED')
+    throw new Error('Settle the ordinary encounter and pending choices before Boss Room entry');
   const reserved = reserveProductionBossEncounter(campaign);
   const gate = necromancerProductionDependencyGate(reserved, reserved.campaignProgress.campaignLevel);
   if (!gate.enabled || reserved.bossEncounterCheckpoint?.pendingChoice) throw new Error('Production Boss Room entry blocked');
