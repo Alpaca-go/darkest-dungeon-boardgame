@@ -20,14 +20,38 @@ async function saved(page: Page): Promise<CampaignState> {
   });
 }
 
+/** Resolve the frontmost player overlay before touching controls behind it. */
+async function playerOverlay(page: Page): Promise<boolean> {
+  const top = await page.evaluate(() => {
+    const ids = ['quest-rule-choice', 'mental-event-overlay', 'trinket-allocation-overlay',
+      'trinket-use-overlay', 'disease-overlay', 'quirk-decision-overlay'];
+    return Array.from(document.querySelectorAll<HTMLElement>('[data-testid]'))
+      .filter(node => ids.includes(node.dataset.testid!) && node.getClientRects().length)
+      .map((node, order) => ({ id: node.dataset.testid!, order, z: Number(getComputedStyle(node).zIndex) || 0 }))
+      .sort((a, b) => b.z - a.z || b.order - a.order)[0]?.id;
+  });
+  if (top === 'quest-rule-choice') { await questChoice(page); return true; }
+  const confirmations: Record<string, string> = {
+    'mental-event-overlay': 'mental-overlay-confirm',
+    'trinket-allocation-overlay': 'alloc-discard',
+    'disease-overlay': 'disease-overlay-confirm',
+    'quirk-decision-overlay': 'quirk-discard-incoming',
+  };
+  if (top && confirmations[top]) { await page.getByTestId(confirmations[top]).click(); return true; }
+  if (top === 'trinket-use-overlay') {
+    const decline = page.locator('[data-testid^="trinket-decline-"]');
+    if (await decline.count()) { await decline.first().click(); return true; }
+    const wild = page.locator('[data-testid^="provision-wild-"]');
+    if (await wild.count()) { await wild.first().click(); return true; }
+  }
+  return false;
+}
+
 async function fight(page: Page, inspect?: (c: CampaignState) => Promise<void>) {
   for (let step = 0; step < 200; step++) {
     const frame = await saved(page), battle = frame.battle;
     if(inspect)await inspect(frame);
-    if(await page.getByTestId('mental-overlay-confirm').count()){await page.getByTestId('mental-overlay-confirm').click();continue;}
-    if(await page.getByTestId('disease-overlay-confirm').count()){await page.getByTestId('disease-overlay-confirm').click();continue;}
-    if(await page.getByTestId('trinket-allocation-overlay').count()){await page.getByTestId('alloc-discard').click();continue;}
-    if(await page.getByTestId('quest-rule-choice').count()){await questChoice(page);continue;}
+    if (await playerOverlay(page)) continue;
     if (battle) {
       const domain = battle.ruinsContext ? 'ordinary' : 'boss';
       observe(page, `${domain}-battle-${battle.status}`, frame);
@@ -36,12 +60,6 @@ async function fight(page: Page, inspect?: (c: CampaignState) => Promise<void>) 
       if (battle.ruinsContext?.pendingReanimationChoice) observe(page, 'ordinary-reanimation-choice', frame);
       if (battle.ruinsContext?.retiredMonsterInstances?.length) observe(page, 'after-ordinary-death', frame);
       if (battle.heroes.some(h => h.id === battle.activeActorId)) observe(page, `${domain}-hero-turn-before-skill`, frame);
-    }
-    if(await page.getByTestId('disease-overlay-confirm').count()){await page.getByTestId('disease-overlay-confirm').click();continue;}
-    if(await page.getByTestId('mental-overlay-confirm').count()){await page.getByTestId('mental-overlay-confirm').click();continue;}
-    if (await page.getByTestId('trinket-use-overlay').count()) {
-      const decline = page.locator('[data-testid^="trinket-decline-"]');
-      if (await decline.count()) { await decline.first().click(); continue; }
     }
     if(await page.getByTestId('battle-continue-resolution').count()){await page.getByTestId('battle-continue-resolution').click();continue;}
     const c = await saved(page), b = c.battle;
@@ -189,9 +207,7 @@ async function move(page: Page, roomId: string, inspect?: (c: CampaignState) => 
 
 async function acknowledgeEvents(page:Page){
   for(let n=0;n<30;n++){
-    if(await page.getByTestId('mental-overlay-confirm').count()){await page.getByTestId('mental-overlay-confirm').click();continue;}
-    if(await page.getByTestId('disease-overlay-confirm').count()){await page.getByTestId('disease-overlay-confirm').click();continue;}
-    if(await page.getByTestId('trinket-allocation-overlay').count()){await page.getByTestId('alloc-discard').click();continue;}
+    if (await playerOverlay(page)) continue;
     if((await saved(page)).gamePhase==='replacement'){
       await expect(page.getByTestId('replacement-page')).toBeVisible();
       const slot=page.locator('[data-testid^="replacement-slot-"]').filter({has:page.locator('[data-testid^="candidate-"]')}).first();
