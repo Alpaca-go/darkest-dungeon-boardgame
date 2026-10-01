@@ -11,28 +11,237 @@
   "levels": [
     {
       "level": 1,
-      "stableThreatDrawTransactionId": "threat-draw:cmp_mupu04f0_fr0hrv:act-1",
+      "stableThreatDrawTransactionId": "threat-draw:cmp_mupz2dxa_chsqci:act-1",
       "archives": [
         {
-          "questRunId": "qrun_mupu0781_k5p7ks",
-          "encounterId": "cmp_mupu04f0_fr0hrv:qrun_mupu0781_k5p7ks:prophet:1",
+          "questRunId": "qrun_mupz2g24_devny6",
+          "encounterId": "cmp_mupz2dxa_chsqci:qrun_mupz2g24_devny6:prophet:1",
           "threatCardId": 42009,
           "ruleSetVersion": "C1C35R2-PROPHET-DIGITAL-DEFAULT-v1",
           "receipts": [
-            "cmp_mupu04f0_fr0hrv:qrun_mupu0781_k5p7ks:prophet:1:prophet-threat:qrun_mupu0781_k5p7ks:dungeon-entry"
+            "cmp_mupz2dxa_chsqci:qrun_mupz2g24_devny6:prophet:1:prophet-threat:qrun_mupz2g24_devny6:dungeon-entry"
           ]
         },
         {
-          "questRunId": "qrun_mupu0d9i_yyzyl6",
-          "encounterId": "cmp_mupu04f0_fr0hrv:qrun_mupu0d9i_yyzyl6:prophet:1",
+          "questRunId": "qrun_mupz2kkw_tve34m",
+          "encounterId": "cmp_mupz2dxa_chsqci:qrun_mupz2kkw_tve34m:prophet:1",
           "threatCardId": 42009,
           "ruleSetVersion": "C1C35R2-PROPHET-DIGITAL-DEFAULT-v1",
           "receipts": [
-            "cmp_mupu04f0_fr0hrv:qrun_mupu0d9i_yyzyl6:prophet:1:prophet-threat:qrun_mupu0d9i_yyzyl6:dungeon-entry"
+            "cmp_mupz2dxa_chsqci:qrun_mupz2kkw_tve34m:prophet:1:prophet-threat:qrun_mupz2kkw_tve34m:dungeon-entry"
           ]
         }
       ],
-      "currentQuestRunId": "qrun_mupu0io7_wk9qq5",
+      "currentQuestRunId": "qrun_mupz2pjo_0w8ovy",
+      "threatStress": [
+        {
+          "type": "DUNGEON_ENTRY",
+          "requestedStress": 2,
+          "transactionId": "qrun_mupz2g24_devny6:dungeon-entry",
+          "once": "cmp_mupz2dxa_chsqci:qrun_mupz2g24_devny6:prophet:1:prophet-threat:qrun_mupz2g24_devny6:dungeon-entry",
+          "stress": 2,
+          "heroes": [
+            {
+              "heroId": "hero_mupz2dz1_0p5olo",
+              "before": 0,
+              "after": 2,
+              "modifiedThreatAmount": 2,
+              "trace": [
+                {
+                  "sequence": 1,
+                  "type": "stress-gained",
+                  "sourceType": "exploration",
+                  "sourceId": "42009",
+                  "amount": 2
+                }
+              ]
+            },
+            {
+              "heroId": "hero_mupz2dzz_54e7mq",
+              "before": 0,
+              "after": 2,
+              "modifiedThreatAmount": 2,
+              "trace": [
+                {
+                  "sequence": 2,
+                  "type": "stress-gained",
+                  "sourceType": "exploration",
+                  "sourceId": "42009",
+                  "amount": 2
+                }
+              ]
+            },
+            {
+              "heroId": "hero_mupz2e0v_9itloh",
+              "before": 0,
+              "after": 2,
+              "modifiedThreatAmount": 2,
+              "trace": [
+                {
+                  "sequence": 3,
+                  "type": "stress-gained",
+                  "sourceType": "exploration",
+                  "sourceId": "42009",
+                  "amount": 2
+                }
+              ]
+            },
+            {
+              "heroId": "hero_mupz2e1t_o1xzn8",
+              "before": 0,
+              "after": 2,
+              "modifiedThreatAmount": 2,
+              "trace": [
+                {
+                  "sequence": 4,
+                  "type": "stress-gained",
+                  "sourceType": "exploration",
+                  "sourceId": "42009",
+                  "amount": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "DUNGEON_ENTRY",
+          "requestedStress": 2,
+          "transactionId": "qrun_mupz2kkw_tve34m:dungeon-entry",
+          "once": "cmp_mupz2dxa_chsqci:qrun_mupz2kkw_tve34m:prophet:1:prophet-threat:qrun_mupz2kkw_tve34m:dungeon-entry",
+          "stress": 2,
+          "heroes": [
+            {
+              "heroId": "hero_mupz2dz1_0p5olo",
+              "before": 0,
+              "after": 2,
+              "modifiedThreatAmount": 2,
+              "trace": [
+                {
+                  "sequence": 6,
+                  "type": "stress-gained",
+                  "sourceType": "exploration",
+                  "sourceId": "42009",
+                  "amount": 2
+                }
+              ]
+            },
+            {
+              "heroId": "hero_mupz2dzz_54e7mq",
+              "before": 2,
+              "after": 4,
+              "modifiedThreatAmount": 2,
+              "trace": [
+                {
+                  "sequence": 7,
+                  "type": "stress-gained",
+                  "sourceType": "exploration",
+                  "sourceId": "42009",
+                  "amount": 2
+                }
+              ]
+            },
+            {
+              "heroId": "hero_mupz2e0v_9itloh",
+              "before": 2,
+              "after": 4,
+              "modifiedThreatAmount": 2,
+              "trace": [
+                {
+                  "sequence": 8,
+                  "type": "stress-gained",
+                  "sourceType": "exploration",
+                  "sourceId": "42009",
+                  "amount": 2
+                }
+              ]
+            },
+            {
+              "heroId": "hero_mupz2e1t_o1xzn8",
+              "before": 2,
+              "after": 4,
+              "modifiedThreatAmount": 2,
+              "trace": [
+                {
+                  "sequence": 9,
+                  "type": "stress-gained",
+                  "sourceType": "exploration",
+                  "sourceId": "42009",
+                  "amount": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "DUNGEON_ENTRY",
+          "requestedStress": 2,
+          "transactionId": "qrun_mupz2pjo_0w8ovy:dungeon-entry",
+          "once": "cmp_mupz2dxa_chsqci:qrun_mupz2pjo_0w8ovy:prophet:1:prophet-threat:qrun_mupz2pjo_0w8ovy:dungeon-entry",
+          "stress": 2,
+          "heroes": [
+            {
+              "heroId": "hero_mupz2dz1_0p5olo",
+              "before": 0,
+              "after": 2,
+              "modifiedThreatAmount": 2,
+              "trace": [
+                {
+                  "sequence": 11,
+                  "type": "stress-gained",
+                  "sourceType": "exploration",
+                  "sourceId": "42009",
+                  "amount": 2
+                }
+              ]
+            },
+            {
+              "heroId": "hero_mupz2dzz_54e7mq",
+              "before": 4,
+              "after": 6,
+              "modifiedThreatAmount": 2,
+              "trace": [
+                {
+                  "sequence": 12,
+                  "type": "stress-gained",
+                  "sourceType": "exploration",
+                  "sourceId": "42009",
+                  "amount": 2
+                }
+              ]
+            },
+            {
+              "heroId": "hero_mupz2e0v_9itloh",
+              "before": 4,
+              "after": 6,
+              "modifiedThreatAmount": 2,
+              "trace": [
+                {
+                  "sequence": 13,
+                  "type": "stress-gained",
+                  "sourceType": "exploration",
+                  "sourceId": "42009",
+                  "amount": 2
+                }
+              ]
+            },
+            {
+              "heroId": "hero_mupz2e1t_o1xzn8",
+              "before": 4,
+              "after": 6,
+              "modifiedThreatAmount": 2,
+              "trace": [
+                {
+                  "sequence": 14,
+                  "type": "stress-gained",
+                  "sourceType": "exploration",
+                  "sourceId": "42009",
+                  "amount": 2
+                }
+              ]
+            }
+          ]
+        }
+      ],
       "tavern": [
         {
           "level": 1,
@@ -56,7 +265,7 @@
         },
         {
           "level": 1,
-          "before": 2,
+          "before": 3,
           "after": 0,
           "modifier": 0,
           "active": false,
@@ -69,28 +278,224 @@
     },
     {
       "level": 2,
-      "stableThreatDrawTransactionId": "threat-draw:cmp_mupu2ru1_6900fc:act-2",
+      "stableThreatDrawTransactionId": "threat-draw:cmp_mupz5a2y_7hz1sv:act-2",
       "archives": [
         {
-          "questRunId": "qrun_mupu2uj0_1xkzul",
-          "encounterId": "cmp_mupu2ru1_6900fc:qrun_mupu2uj0_1xkzul:prophet:2",
+          "questRunId": "qrun_mupz5cdi_kb9mza",
+          "encounterId": "cmp_mupz5a2y_7hz1sv:qrun_mupz5cdi_kb9mza:prophet:2",
           "threatCardId": 42010,
           "ruleSetVersion": "C1C35R2-PROPHET-DIGITAL-DEFAULT-v1",
           "receipts": [
-            "cmp_mupu2ru1_6900fc:qrun_mupu2uj0_1xkzul:prophet:2:prophet-threat:qrun_mupu2uj0_1xkzul:scout:start:A,B,C,D,E,F,G,H"
+            "cmp_mupz5a2y_7hz1sv:qrun_mupz5cdi_kb9mza:prophet:2:prophet-threat:qrun_mupz5cdi_kb9mza:scout:start:A,B,C,D,E,F,G,H"
           ]
         },
         {
-          "questRunId": "qrun_mupu31vl_jy00ur",
-          "encounterId": "cmp_mupu2ru1_6900fc:qrun_mupu31vl_jy00ur:prophet:2",
+          "questRunId": "qrun_mupz5j9l_9w5tjp",
+          "encounterId": "cmp_mupz5a2y_7hz1sv:qrun_mupz5j9l_9w5tjp:prophet:2",
           "threatCardId": 42010,
           "ruleSetVersion": "C1C35R2-PROPHET-DIGITAL-DEFAULT-v1",
           "receipts": [
-            "cmp_mupu2ru1_6900fc:qrun_mupu31vl_jy00ur:prophet:2:prophet-threat:qrun_mupu31vl_jy00ur:scout:start:A,B,C,D,E,F,G,H"
+            "cmp_mupz5a2y_7hz1sv:qrun_mupz5j9l_9w5tjp:prophet:2:prophet-threat:qrun_mupz5j9l_9w5tjp:scout:start:A,B,C,D,E,F,G,H"
           ]
         }
       ],
-      "currentQuestRunId": "qrun_mupu39ef_g4uz85",
+      "currentQuestRunId": "qrun_mupz5qpm_mwgc50",
+      "threatStress": [
+        {
+          "type": "SCOUTING",
+          "requestedStress": 1,
+          "transactionId": "qrun_mupz5cdi_kb9mza:scout:start:A,B,C,D,E,F,G,H",
+          "once": "cmp_mupz5a2y_7hz1sv:qrun_mupz5cdi_kb9mza:prophet:2:prophet-threat:qrun_mupz5cdi_kb9mza:scout:start:A,B,C,D,E,F,G,H",
+          "stress": 1,
+          "heroes": [
+            {
+              "heroId": "hero_mupz5a4w_0hge38",
+              "before": 0,
+              "after": 2,
+              "modifiedThreatAmount": 1,
+              "trace": [
+                {
+                  "sequence": 1,
+                  "type": "stress-gained",
+                  "sourceType": "scout",
+                  "sourceId": "scout",
+                  "amount": 1
+                },
+                {
+                  "sequence": 5,
+                  "type": "stress-gained",
+                  "sourceType": "exploration",
+                  "sourceId": "42010",
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "heroId": "hero_mupz5a6s_xa8pt1",
+              "before": 0,
+              "after": 2,
+              "modifiedThreatAmount": 1,
+              "trace": [
+                {
+                  "sequence": 2,
+                  "type": "stress-gained",
+                  "sourceType": "scout",
+                  "sourceId": "scout",
+                  "amount": 1
+                },
+                {
+                  "sequence": 6,
+                  "type": "stress-gained",
+                  "sourceType": "exploration",
+                  "sourceId": "42010",
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "heroId": "hero_mupz5a8o_a7p5wk",
+              "before": 0,
+              "after": 2,
+              "modifiedThreatAmount": 1,
+              "trace": [
+                {
+                  "sequence": 3,
+                  "type": "stress-gained",
+                  "sourceType": "scout",
+                  "sourceId": "scout",
+                  "amount": 1
+                },
+                {
+                  "sequence": 7,
+                  "type": "stress-gained",
+                  "sourceType": "exploration",
+                  "sourceId": "42010",
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "heroId": "hero_mupz5aaj_u8ug0i",
+              "before": 0,
+              "after": 2,
+              "modifiedThreatAmount": 1,
+              "trace": [
+                {
+                  "sequence": 4,
+                  "type": "stress-gained",
+                  "sourceType": "scout",
+                  "sourceId": "scout",
+                  "amount": 1
+                },
+                {
+                  "sequence": 8,
+                  "type": "stress-gained",
+                  "sourceType": "exploration",
+                  "sourceId": "42010",
+                  "amount": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "SCOUTING",
+          "requestedStress": 1,
+          "transactionId": "qrun_mupz5j9l_9w5tjp:scout:start:A,B,C,D,E,F,G,H",
+          "once": "cmp_mupz5a2y_7hz1sv:qrun_mupz5j9l_9w5tjp:prophet:2:prophet-threat:qrun_mupz5j9l_9w5tjp:scout:start:A,B,C,D,E,F,G,H",
+          "stress": 1,
+          "heroes": [
+            {
+              "heroId": "hero_mupz5a4w_0hge38",
+              "before": 1,
+              "after": 3,
+              "modifiedThreatAmount": 1,
+              "trace": [
+                {
+                  "sequence": 10,
+                  "type": "stress-gained",
+                  "sourceType": "scout",
+                  "sourceId": "scout",
+                  "amount": 1
+                },
+                {
+                  "sequence": 14,
+                  "type": "stress-gained",
+                  "sourceType": "exploration",
+                  "sourceId": "42010",
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "heroId": "hero_mupz5a6s_xa8pt1",
+              "before": 2,
+              "after": 4,
+              "modifiedThreatAmount": 1,
+              "trace": [
+                {
+                  "sequence": 11,
+                  "type": "stress-gained",
+                  "sourceType": "scout",
+                  "sourceId": "scout",
+                  "amount": 1
+                },
+                {
+                  "sequence": 15,
+                  "type": "stress-gained",
+                  "sourceType": "exploration",
+                  "sourceId": "42010",
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "heroId": "hero_mupz5a8o_a7p5wk",
+              "before": 2,
+              "after": 4,
+              "modifiedThreatAmount": 1,
+              "trace": [
+                {
+                  "sequence": 12,
+                  "type": "stress-gained",
+                  "sourceType": "scout",
+                  "sourceId": "scout",
+                  "amount": 1
+                },
+                {
+                  "sequence": 16,
+                  "type": "stress-gained",
+                  "sourceType": "exploration",
+                  "sourceId": "42010",
+                  "amount": 1
+                }
+              ]
+            },
+            {
+              "heroId": "hero_mupz5aaj_u8ug0i",
+              "before": 2,
+              "after": 4,
+              "modifiedThreatAmount": 1,
+              "trace": [
+                {
+                  "sequence": 13,
+                  "type": "stress-gained",
+                  "sourceType": "scout",
+                  "sourceId": "scout",
+                  "amount": 1
+                },
+                {
+                  "sequence": 17,
+                  "type": "stress-gained",
+                  "sourceType": "exploration",
+                  "sourceId": "42010",
+                  "amount": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
       "tavern": [
         {
           "level": 2,
@@ -114,8 +519,8 @@
         },
         {
           "level": 2,
-          "before": 2,
-          "after": 0,
+          "before": 4,
+          "after": 1,
           "modifier": 0,
           "active": false,
           "recoveryBeforePassives": 3,
@@ -127,38 +532,34 @@
     },
     {
       "level": 3,
-      "stableThreatDrawTransactionId": "threat-draw:cmp_mupu6vjj_p28p2b:act-3",
+      "stableThreatDrawTransactionId": "threat-draw:cmp_mupz961s_3jlxhs:act-3",
       "archives": [
         {
-          "questRunId": "qrun_mupu6xzk_vw5nfn",
-          "encounterId": "cmp_mupu6vjj_p28p2b:qrun_mupu6xzk_vw5nfn:prophet:3",
+          "questRunId": "qrun_mupz98aw_c8ruh0",
+          "encounterId": "cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3",
           "threatCardId": 42011,
           "ruleSetVersion": "C1C35R2-PROPHET-DIGITAL-DEFAULT-v1",
           "receipts": [
-            "cmp_mupu6vjj_p28p2b:qrun_mupu6xzk_vw5nfn:prophet:3:prophet-threat:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu6xzk_vw5nfn:prophet:3:ordinary:A:spawn:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu6xzk_vw5nfn:prophet:3:ordinary:A:bone-soldier:copy-1",
-            "cmp_mupu6vjj_p28p2b:qrun_mupu6xzk_vw5nfn:prophet:3:prophet-threat:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu6xzk_vw5nfn:prophet:3:ordinary:D:spawn:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu6xzk_vw5nfn:prophet:3:ordinary:D:bone-courtier:copy-1",
-            "cmp_mupu6vjj_p28p2b:qrun_mupu6xzk_vw5nfn:prophet:3:prophet-threat:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu6xzk_vw5nfn:prophet:3:ordinary:D:spawn:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu6xzk_vw5nfn:prophet:3:ordinary:D:bone-rabble:copy-2"
+            "cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:prophet-threat:ruins:cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:A:spawn:ruins:cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:A:bone-spearman:copy-1",
+            "cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:prophet-threat:ruins:cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:D:spawn:ruins:cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:D:bone-rabble:copy-3"
           ]
         },
         {
-          "questRunId": "qrun_mupu7b6t_b3it8a",
-          "encounterId": "cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3",
+          "questRunId": "qrun_mupz9lj4_7xuuxq",
+          "encounterId": "cmp_mupz961s_3jlxhs:qrun_mupz9lj4_7xuuxq:prophet:3",
           "threatCardId": 42011,
           "ruleSetVersion": "C1C35R2-PROPHET-DIGITAL-DEFAULT-v1",
           "receipts": [
-            "cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:prophet-threat:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:ordinary:A:spawn:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:ordinary:A:bone-rabble:copy-2",
-            "cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:prophet-threat:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:ordinary:D:spawn:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:ordinary:D:bone-arbalist:copy-1",
-            "cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:prophet-threat:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:ordinary:D:spawn:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:ordinary:D:bone-spearman:copy-2",
-            "cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:prophet-threat:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:ordinary:D:spawn:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:ordinary:D:bone-courtier:copy-2"
+            "cmp_mupz961s_3jlxhs:qrun_mupz9lj4_7xuuxq:prophet:3:prophet-threat:ruins:cmp_mupz961s_3jlxhs:qrun_mupz9lj4_7xuuxq:prophet:3:ordinary:D:spawn:ruins:cmp_mupz961s_3jlxhs:qrun_mupz9lj4_7xuuxq:prophet:3:ordinary:D:gargoyle:copy-2"
           ]
         }
       ],
-      "currentQuestRunId": "qrun_mupu7qas_ax3b7i",
+      "currentQuestRunId": "qrun_mupza8x6_36p85j",
       "tavern": [
         {
           "level": 3,
-          "before": 6,
-          "after": 6,
+          "before": 7,
+          "after": 7,
           "modifier": -3,
           "active": true,
           "recoveryBeforePassives": 0,
@@ -167,8 +568,8 @@
         },
         {
           "level": 3,
-          "before": 8,
-          "after": 8,
+          "before": 3,
+          "after": 3,
           "modifier": -3,
           "active": true,
           "recoveryBeforePassives": 0,
@@ -177,8 +578,8 @@
         },
         {
           "level": 3,
-          "before": 4,
-          "after": 1,
+          "before": 2,
+          "after": 0,
           "modifier": 0,
           "active": false,
           "recoveryBeforePassives": 3,
@@ -188,8 +589,84 @@
       ],
       "spawnAudits": [
         {
-          "copyId": "rattler:copy-3",
-          "definitionId": "rattler",
+          "copyId": "webber:copy-3",
+          "definitionId": "webber",
+          "unholy": false,
+          "receipt": null
+        },
+        {
+          "copyId": "bone-spearman:copy-1",
+          "definitionId": "bone-spearman",
+          "unholy": true,
+          "receipt": {
+            "transactionId": "ruins:cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:A:spawn:ruins:cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:A:bone-spearman:copy-1",
+            "once": "cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:prophet-threat:ruins:cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:A:spawn:ruins:cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:A:bone-spearman:copy-1",
+            "type": "MONSTER_SPAWN",
+            "stress": 1,
+            "spawn": {
+              "definitionId": "bone-spearman",
+              "copyId": "bone-spearman:copy-1",
+              "encounterId": "cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:A",
+              "actorId": "ruins:cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:A:bone-spearman:copy-1"
+            }
+          }
+        },
+        {
+          "copyId": "maggot:copy-2",
+          "definitionId": "maggot",
+          "unholy": false,
+          "receipt": null
+        },
+        {
+          "copyId": "brigand-fusilier:copy-1",
+          "definitionId": "brigand-fusilier",
+          "unholy": false,
+          "receipt": null
+        },
+        {
+          "copyId": "cultist-acolyte:copy-2",
+          "definitionId": "cultist-acolyte",
+          "unholy": false,
+          "receipt": null
+        },
+        {
+          "copyId": "bone-rabble:copy-3",
+          "definitionId": "bone-rabble",
+          "unholy": true,
+          "receipt": {
+            "transactionId": "ruins:cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:D:spawn:ruins:cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:D:bone-rabble:copy-3",
+            "once": "cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:prophet-threat:ruins:cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:D:spawn:ruins:cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:D:bone-rabble:copy-3",
+            "type": "MONSTER_SPAWN",
+            "stress": 1,
+            "spawn": {
+              "definitionId": "bone-rabble",
+              "copyId": "bone-rabble:copy-3",
+              "encounterId": "cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:D",
+              "actorId": "ruins:cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:D:bone-rabble:copy-3"
+            }
+          }
+        },
+        {
+          "copyId": "cultist-acolyte:copy-1",
+          "definitionId": "cultist-acolyte",
+          "unholy": false,
+          "receipt": null
+        },
+        {
+          "copyId": "maggot:copy-3",
+          "definitionId": "maggot",
+          "unholy": false,
+          "receipt": null
+        },
+        {
+          "copyId": "maggot:copy-3",
+          "definitionId": "maggot",
+          "unholy": false,
+          "receipt": null
+        },
+        {
+          "copyId": "brigand-hunter:copy-3",
+          "definitionId": "brigand-hunter",
           "unholy": false,
           "receipt": null
         },
@@ -200,65 +677,102 @@
           "receipt": null
         },
         {
-          "copyId": "bone-soldier:copy-1",
-          "definitionId": "bone-soldier",
-          "unholy": true,
-          "receipt": {
-            "transactionId": "ruins:cmp_mupu6vjj_p28p2b:qrun_mupu6xzk_vw5nfn:prophet:3:ordinary:A:spawn:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu6xzk_vw5nfn:prophet:3:ordinary:A:bone-soldier:copy-1",
-            "once": "cmp_mupu6vjj_p28p2b:qrun_mupu6xzk_vw5nfn:prophet:3:prophet-threat:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu6xzk_vw5nfn:prophet:3:ordinary:A:spawn:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu6xzk_vw5nfn:prophet:3:ordinary:A:bone-soldier:copy-1",
-            "type": "MONSTER_SPAWN",
-            "stress": 1,
-            "spawn": {
-              "definitionId": "bone-soldier",
-              "copyId": "bone-soldier:copy-1",
-              "encounterId": "cmp_mupu6vjj_p28p2b:qrun_mupu6xzk_vw5nfn:prophet:3:ordinary:A",
-              "actorId": "ruins:cmp_mupu6vjj_p28p2b:qrun_mupu6xzk_vw5nfn:prophet:3:ordinary:A:bone-soldier:copy-1"
-            }
-          }
-        },
-        {
-          "copyId": "spitter:copy-3",
-          "definitionId": "spitter",
+          "copyId": "brigand-hunter:copy-1",
+          "definitionId": "brigand-hunter",
           "unholy": false,
           "receipt": null
         },
         {
-          "copyId": "bone-courtier:copy-1",
-          "definitionId": "bone-courtier",
+          "copyId": "brigand-cutthroat:copy-3",
+          "definitionId": "brigand-cutthroat",
+          "unholy": false,
+          "receipt": null
+        },
+        {
+          "copyId": "cultist-brawler:copy-2",
+          "definitionId": "cultist-brawler",
+          "unholy": false,
+          "receipt": null
+        },
+        {
+          "copyId": "webber:copy-1",
+          "definitionId": "webber",
+          "unholy": false,
+          "receipt": null
+        },
+        {
+          "copyId": "brigand-hunter:copy-2",
+          "definitionId": "brigand-hunter",
+          "unholy": false,
+          "receipt": null
+        },
+        {
+          "copyId": "cultist-acolyte:copy-1",
+          "definitionId": "cultist-acolyte",
+          "unholy": false,
+          "receipt": null
+        },
+        {
+          "copyId": "gargoyle:copy-2",
+          "definitionId": "gargoyle",
           "unholy": true,
           "receipt": {
-            "transactionId": "ruins:cmp_mupu6vjj_p28p2b:qrun_mupu6xzk_vw5nfn:prophet:3:ordinary:D:spawn:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu6xzk_vw5nfn:prophet:3:ordinary:D:bone-courtier:copy-1",
-            "once": "cmp_mupu6vjj_p28p2b:qrun_mupu6xzk_vw5nfn:prophet:3:prophet-threat:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu6xzk_vw5nfn:prophet:3:ordinary:D:spawn:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu6xzk_vw5nfn:prophet:3:ordinary:D:bone-courtier:copy-1",
+            "transactionId": "ruins:cmp_mupz961s_3jlxhs:qrun_mupz9lj4_7xuuxq:prophet:3:ordinary:D:spawn:ruins:cmp_mupz961s_3jlxhs:qrun_mupz9lj4_7xuuxq:prophet:3:ordinary:D:gargoyle:copy-2",
+            "once": "cmp_mupz961s_3jlxhs:qrun_mupz9lj4_7xuuxq:prophet:3:prophet-threat:ruins:cmp_mupz961s_3jlxhs:qrun_mupz9lj4_7xuuxq:prophet:3:ordinary:D:spawn:ruins:cmp_mupz961s_3jlxhs:qrun_mupz9lj4_7xuuxq:prophet:3:ordinary:D:gargoyle:copy-2",
             "type": "MONSTER_SPAWN",
             "stress": 1,
             "spawn": {
-              "definitionId": "bone-courtier",
-              "copyId": "bone-courtier:copy-1",
-              "encounterId": "cmp_mupu6vjj_p28p2b:qrun_mupu6xzk_vw5nfn:prophet:3:ordinary:D",
-              "actorId": "ruins:cmp_mupu6vjj_p28p2b:qrun_mupu6xzk_vw5nfn:prophet:3:ordinary:D:bone-courtier:copy-1"
+              "definitionId": "gargoyle",
+              "copyId": "gargoyle:copy-2",
+              "encounterId": "cmp_mupz961s_3jlxhs:qrun_mupz9lj4_7xuuxq:prophet:3:ordinary:D",
+              "actorId": "ruins:cmp_mupz961s_3jlxhs:qrun_mupz9lj4_7xuuxq:prophet:3:ordinary:D:gargoyle:copy-2"
             }
           }
         },
         {
-          "copyId": "bone-rabble:copy-2",
-          "definitionId": "bone-rabble",
+          "copyId": "adder:copy-1",
+          "definitionId": "adder",
+          "unholy": false,
+          "receipt": null
+        },
+        {
+          "copyId": "bone-arbalist:copy-3",
+          "definitionId": "bone-arbalist",
           "unholy": true,
           "receipt": {
-            "transactionId": "ruins:cmp_mupu6vjj_p28p2b:qrun_mupu6xzk_vw5nfn:prophet:3:ordinary:D:spawn:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu6xzk_vw5nfn:prophet:3:ordinary:D:bone-rabble:copy-2",
-            "once": "cmp_mupu6vjj_p28p2b:qrun_mupu6xzk_vw5nfn:prophet:3:prophet-threat:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu6xzk_vw5nfn:prophet:3:ordinary:D:spawn:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu6xzk_vw5nfn:prophet:3:ordinary:D:bone-rabble:copy-2",
+            "transactionId": "ruins:cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:ordinary:B:spawn:ruins:cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:ordinary:B:bone-arbalist:copy-3",
+            "once": "cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:prophet-threat:ruins:cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:ordinary:B:spawn:ruins:cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:ordinary:B:bone-arbalist:copy-3",
             "type": "MONSTER_SPAWN",
             "stress": 1,
             "spawn": {
-              "definitionId": "bone-rabble",
-              "copyId": "bone-rabble:copy-2",
-              "encounterId": "cmp_mupu6vjj_p28p2b:qrun_mupu6xzk_vw5nfn:prophet:3:ordinary:D",
-              "actorId": "ruins:cmp_mupu6vjj_p28p2b:qrun_mupu6xzk_vw5nfn:prophet:3:ordinary:D:bone-rabble:copy-2"
+              "definitionId": "bone-arbalist",
+              "copyId": "bone-arbalist:copy-3",
+              "encounterId": "cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:ordinary:B",
+              "actorId": "ruins:cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:ordinary:B:bone-arbalist:copy-3"
             }
           }
         },
         {
-          "copyId": "brigand-raider:copy-2",
-          "definitionId": "brigand-raider",
+          "copyId": "brigand-fusilier:copy-2",
+          "definitionId": "brigand-fusilier",
+          "unholy": false,
+          "receipt": null
+        },
+        {
+          "copyId": "brigand-cutthroat:copy-2",
+          "definitionId": "brigand-cutthroat",
+          "unholy": false,
+          "receipt": null
+        },
+        {
+          "copyId": "brigand-cutthroat:copy-3",
+          "definitionId": "brigand-cutthroat",
+          "unholy": false,
+          "receipt": null
+        },
+        {
+          "copyId": "webber:copy-3",
+          "definitionId": "webber",
           "unholy": false,
           "receipt": null
         },
@@ -275,165 +789,21 @@
           "receipt": null
         },
         {
-          "copyId": "bone-rabble:copy-2",
-          "definitionId": "bone-rabble",
-          "unholy": true,
-          "receipt": {
-            "transactionId": "ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:ordinary:A:spawn:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:ordinary:A:bone-rabble:copy-2",
-            "once": "cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:prophet-threat:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:ordinary:A:spawn:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:ordinary:A:bone-rabble:copy-2",
-            "type": "MONSTER_SPAWN",
-            "stress": 1,
-            "spawn": {
-              "definitionId": "bone-rabble",
-              "copyId": "bone-rabble:copy-2",
-              "encounterId": "cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:ordinary:A",
-              "actorId": "ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:ordinary:A:bone-rabble:copy-2"
-            }
-          }
-        },
-        {
-          "copyId": "brigand-fusilier:copy-3",
-          "definitionId": "brigand-fusilier",
-          "unholy": false,
-          "receipt": null
-        },
-        {
-          "copyId": "cultist-acolyte:copy-2",
-          "definitionId": "cultist-acolyte",
-          "unholy": false,
-          "receipt": null
-        },
-        {
-          "copyId": "bone-arbalist:copy-1",
-          "definitionId": "bone-arbalist",
-          "unholy": true,
-          "receipt": {
-            "transactionId": "ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:ordinary:D:spawn:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:ordinary:D:bone-arbalist:copy-1",
-            "once": "cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:prophet-threat:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:ordinary:D:spawn:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:ordinary:D:bone-arbalist:copy-1",
-            "type": "MONSTER_SPAWN",
-            "stress": 1,
-            "spawn": {
-              "definitionId": "bone-arbalist",
-              "copyId": "bone-arbalist:copy-1",
-              "encounterId": "cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:ordinary:D",
-              "actorId": "ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:ordinary:D:bone-arbalist:copy-1"
-            }
-          }
-        },
-        {
-          "copyId": "maggot:copy-2",
-          "definitionId": "maggot",
-          "unholy": false,
-          "receipt": null
-        },
-        {
-          "copyId": "bone-spearman:copy-2",
-          "definitionId": "bone-spearman",
-          "unholy": true,
-          "receipt": {
-            "transactionId": "ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:ordinary:D:spawn:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:ordinary:D:bone-spearman:copy-2",
-            "once": "cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:prophet-threat:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:ordinary:D:spawn:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:ordinary:D:bone-spearman:copy-2",
-            "type": "MONSTER_SPAWN",
-            "stress": 1,
-            "spawn": {
-              "definitionId": "bone-spearman",
-              "copyId": "bone-spearman:copy-2",
-              "encounterId": "cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:ordinary:D",
-              "actorId": "ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:ordinary:D:bone-spearman:copy-2"
-            }
-          }
-        },
-        {
-          "copyId": "bone-courtier:copy-2",
-          "definitionId": "bone-courtier",
-          "unholy": true,
-          "receipt": {
-            "transactionId": "ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:ordinary:D:spawn:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:ordinary:D:bone-courtier:copy-2",
-            "once": "cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:prophet-threat:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:ordinary:D:spawn:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:ordinary:D:bone-courtier:copy-2",
-            "type": "MONSTER_SPAWN",
-            "stress": 1,
-            "spawn": {
-              "definitionId": "bone-courtier",
-              "copyId": "bone-courtier:copy-2",
-              "encounterId": "cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:ordinary:D",
-              "actorId": "ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7b6t_b3it8a:prophet:3:ordinary:D:bone-courtier:copy-2"
-            }
-          }
-        },
-        {
           "copyId": "bone-arbalist:copy-2",
           "definitionId": "bone-arbalist",
           "unholy": true,
           "receipt": {
-            "transactionId": "ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7qas_ax3b7i:prophet:3:ordinary:B:spawn:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7qas_ax3b7i:prophet:3:ordinary:B:bone-arbalist:copy-2",
-            "once": "cmp_mupu6vjj_p28p2b:qrun_mupu7qas_ax3b7i:prophet:3:prophet-threat:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7qas_ax3b7i:prophet:3:ordinary:B:spawn:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7qas_ax3b7i:prophet:3:ordinary:B:bone-arbalist:copy-2",
+            "transactionId": "ruins:cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:ordinary:C:spawn:ruins:cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:ordinary:C:bone-arbalist:copy-2",
+            "once": "cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:prophet-threat:ruins:cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:ordinary:C:spawn:ruins:cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:ordinary:C:bone-arbalist:copy-2",
             "type": "MONSTER_SPAWN",
             "stress": 1,
             "spawn": {
               "definitionId": "bone-arbalist",
               "copyId": "bone-arbalist:copy-2",
-              "encounterId": "cmp_mupu6vjj_p28p2b:qrun_mupu7qas_ax3b7i:prophet:3:ordinary:B",
-              "actorId": "ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7qas_ax3b7i:prophet:3:ordinary:B:bone-arbalist:copy-2"
+              "encounterId": "cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:ordinary:C",
+              "actorId": "ruins:cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:ordinary:C:bone-arbalist:copy-2"
             }
           }
-        },
-        {
-          "copyId": "brigand-cutthroat:copy-1",
-          "definitionId": "brigand-cutthroat",
-          "unholy": false,
-          "receipt": null
-        },
-        {
-          "copyId": "brigand-cutthroat:copy-3",
-          "definitionId": "brigand-cutthroat",
-          "unholy": false,
-          "receipt": null
-        },
-        {
-          "copyId": "bone-spearman:copy-3",
-          "definitionId": "bone-spearman",
-          "unholy": true,
-          "receipt": {
-            "transactionId": "ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7qas_ax3b7i:prophet:3:ordinary:B:spawn:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7qas_ax3b7i:prophet:3:ordinary:B:bone-spearman:copy-3",
-            "once": "cmp_mupu6vjj_p28p2b:qrun_mupu7qas_ax3b7i:prophet:3:prophet-threat:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7qas_ax3b7i:prophet:3:ordinary:B:spawn:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7qas_ax3b7i:prophet:3:ordinary:B:bone-spearman:copy-3",
-            "type": "MONSTER_SPAWN",
-            "stress": 1,
-            "spawn": {
-              "definitionId": "bone-spearman",
-              "copyId": "bone-spearman:copy-3",
-              "encounterId": "cmp_mupu6vjj_p28p2b:qrun_mupu7qas_ax3b7i:prophet:3:ordinary:B",
-              "actorId": "ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7qas_ax3b7i:prophet:3:ordinary:B:bone-spearman:copy-3"
-            }
-          }
-        },
-        {
-          "copyId": "rattler:copy-1",
-          "definitionId": "rattler",
-          "unholy": false,
-          "receipt": null
-        },
-        {
-          "copyId": "gargoyle:copy-1",
-          "definitionId": "gargoyle",
-          "unholy": true,
-          "receipt": {
-            "transactionId": "ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7qas_ax3b7i:prophet:3:ordinary:C:spawn:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7qas_ax3b7i:prophet:3:ordinary:C:gargoyle:copy-1",
-            "once": "cmp_mupu6vjj_p28p2b:qrun_mupu7qas_ax3b7i:prophet:3:prophet-threat:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7qas_ax3b7i:prophet:3:ordinary:C:spawn:ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7qas_ax3b7i:prophet:3:ordinary:C:gargoyle:copy-1",
-            "type": "MONSTER_SPAWN",
-            "stress": 1,
-            "spawn": {
-              "definitionId": "gargoyle",
-              "copyId": "gargoyle:copy-1",
-              "encounterId": "cmp_mupu6vjj_p28p2b:qrun_mupu7qas_ax3b7i:prophet:3:ordinary:C",
-              "actorId": "ruins:cmp_mupu6vjj_p28p2b:qrun_mupu7qas_ax3b7i:prophet:3:ordinary:C:gargoyle:copy-1"
-            }
-          }
-        },
-        {
-          "copyId": "adder:copy-1",
-          "definitionId": "adder",
-          "unholy": false,
-          "receipt": null
         }
       ]
     }

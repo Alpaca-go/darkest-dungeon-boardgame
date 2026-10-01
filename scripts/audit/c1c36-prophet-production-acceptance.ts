@@ -76,6 +76,10 @@ export function buildC1C36Artifacts(){
     assert(b.defeatedBossFamilyIds.includes('prophet')&&b.defeatedThreatIds.includes('prophet-threat-level-'+b.level),'Prophet defeat/deactivation');
     assert(b.tavern.some((r:{active:boolean;modifier:number})=>r.active&&r.modifier===-b.level)
       &&b.tavern.some((r:{active:boolean;modifier:number})=>!r.active&&r.modifier===0),'normal Tavern active/deactivated modifier');
+    if(b.level<3)assert(b.threatStress.length===(b.level===1?3:2)
+      &&b.threatStress.every((r:{type:string;requestedStress:number;stress:number;heroes:unknown[]})=>
+        r.type===(b.level===1?'DUNGEON_ENTRY':'SCOUTING')&&r.requestedStress===(b.level===1?2:1)
+        &&r.stress===r.requestedStress&&r.heroes.length>0),'source-bound Threat stress event trace');
     for(const required of ['Standard Quest 0 Threat effect','Standard Quest 1 Threat effect','Hamlet active Threat','Face the Threat Room 11 RESERVED',
       'Room 11 IN_PLAY before first Prophet activation','after ordinal 1 placement','campaign progression','post-victory Tavern without Prophet modifier'])
       assert(matrix.points.some((p:{level:number;point:string})=>p.level===b.level&&p.point===required),'browser reload '+b.level+': '+required);
@@ -106,7 +110,7 @@ export function buildC1C36Artifacts(){
     'production-path':{...common,status:'PASS',route:['normal Complete Edition campaign','normal Standard Quest selection','active Prophet Threat','source-bound Dungeon',
       'normal Face the Threat selection','Room 11 RESERVED','Room 11 IN_PLAY','three-action Prophet Battle','browser save/reload','victory','physical return','campaign progression'],levels},
     'threat-cross-quest-proof':{...common,status:'PASS',model:'DISJOINT_ARCHIVED_AND_CURRENT_QUEST_RECEIPT_UNION',
-      levels:browser.map(b=>({level:b.level,stableThreatDrawTransactionId:b.threatId,archives:b.archivedQuestReceipts,currentQuestRunId:b.questRunId,tavern:b.tavern,spawnAudits:b.spawnAudits}))},
+      levels:browser.map(b=>({level:b.level,stableThreatDrawTransactionId:b.threatId,archives:b.archivedQuestReceipts,currentQuestRunId:b.questRunId,threatStress:b.threatStress,tavern:b.tavern,spawnAudits:b.spawnAudits}))},
     'physical-ownership-proof':{...common,status:'PASS',levels:browser.map(b=>({level:b.level,room:b.room,returnedPewIds:b.returnedPewIds,activePews:b.activePews,pendingAttack:b.pendingAttack,pendingChoice:b.pendingChoice}))},
     'selector-proof':{...common,status:'PASS',sharedPrintedQuest:{roomCount:8,firewood:PRODUCTION_FACE_THE_THREAT_QUEST.firewoodSetup,hash:hash(PRODUCTION_FACE_THE_THREAT_QUEST),
       rulesAuthority:'LOCKED_OFFICIAL_PRINTED_COMPONENT',transportIsRulesAuthority:false,printedComponentSha256:'3aed3ded69ddd0a3b987fa162c3823159368c569e4514c7a5a1fd2adb7b28001'},levels:selector},

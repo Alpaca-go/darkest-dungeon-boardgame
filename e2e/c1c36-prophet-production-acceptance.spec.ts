@@ -208,6 +208,7 @@ async function move(page: Page, roomId: string, inspect?: (c: CampaignState) => 
   }
   expect(c.dungeon?.currentRoomId).toBe(roomId);
   if (c.battle) await fight(page, inspect);
+  await acknowledgeEvents(page);
 }
 
 async function playerRest(page:Page){
@@ -265,6 +266,42 @@ const hash=(value:unknown)=>createHash('sha256').update(JSON.stringify(value??nu
 const points: Array<{level:number;point:string;stateHash:string;saveHash:string;rngHash:string;eventHash:string;ownershipHash:string}> = [];
 const externalRequests=new Set<string>();
 const tavernAudits=new WeakMap<Page,Array<{level:number;before:number;after:number;modifier:number;active:boolean;recoveryBeforePassives:number;recoveryAfterPassives:number;modifierSources:unknown[]}>>();
+const threatStressAudits=new WeakMap<Page,unknown[]>();
+async function threatStress(page:Page,before:CampaignState,after:CampaignState,type:'DUNGEON_ENTRY'|'SCOUTING',amount:number){
+  const priorIds=new Set(before.bossEncounterCheckpoint?.events.map(e=>e.eventId));
+  const events=after.bossEncounterCheckpoint!.events.filter(e=>!priorIds.has(e.eventId)&&e.eventType==='PROPHET_THREAT_APPLIED'
+    &&(e.result as {type:string}).type===type);
+  expect(events).toHaveLength(1);
+  const receipt=events[0].result as {once:string;transactionId:string;stress:number};
+  expect(receipt.stress).toBe(amount);
+  const priorMentalIds=new Set(before.mentalEvents.map(e=>e.id));
+  const fresh=after.mentalEvents.filter(e=>!priorMentalIds.has(e.id)).sort((a,b)=>a.sequence-b.sequence);
+  const modifiers=await page.evaluate(async({campaign,amount})=>{
+    const {applyQuirkModifiers}=await import('/src/game-engine/quirk-passives.ts');
+    return campaign.heroes.map(h=>({id:h.instanceId,...applyQuirkModifiers(campaign,h.instanceId,'stress-applied',amount)}));
+  },{campaign:after,amount});
+  const rows=[];
+  for(const hero of before.heroes.filter(h=>!h.dead)){
+    let stress=hero.stress;
+    const trace=fresh.filter(e=>e.heroId===hero.instanceId);
+    const source=trace.filter(e=>e.type==='stress-gained'&&e.sourceId===String(after.bossEncounterCheckpoint!.threatAbilityCardId));
+    const modifier=modifiers.find(m=>m.id===hero.instanceId)!;
+    expect(source).toHaveLength(modifier.amount>0?1:0);
+    if(modifier.amount>0)expect(after.processedStressBatchIds.filter(id=>id===`${receipt.once}:${hero.instanceId}`)).toHaveLength(1);
+    if(type==='SCOUTING'&&modifier.amount>0)expect(trace.some(e=>e.type==='stress-gained'&&e.sourceType==='scout')).toBe(true);
+    for(const event of trace){
+      if(source.includes(event))expect(event.amount).toBe(Math.min(modifier.amount,10-stress));
+      if(event.type==='stress-gained')stress=Math.min(10,stress+(event.amount??0));
+      else if(event.type==='stress-recovered')stress=Math.max(0,stress-(event.amount??0));
+      else if(event.type==='resolve-test')stress=0;
+      else if(event.type==='heart-attack')stress=10;
+    }
+    expect(after.heroes.find(h=>h.instanceId===hero.instanceId)!.stress).toBe(stress);
+    rows.push({heroId:hero.instanceId,before:hero.stress,after:stress,modifiedThreatAmount:modifier.amount,
+      trace:trace.map(e=>({sequence:e.sequence,type:e.type,sourceType:e.sourceType,sourceId:e.sourceId,amount:e.amount}))});
+  }
+  threatStressAudits.set(page,[...(threatStressAudits.get(page)??[]),{type,requestedStress:amount,...receipt,heroes:rows}]);
+}
 async function tavernExpectation(page:Page,heroId:string,modifier:number){
   return page.evaluate(async({heroId,modifier})=>{
     const entry=Object.values(localStorage).map(text=>{try{return JSON.parse(text);}catch{return null;}}).find(e=>e?.campaign?.id);
@@ -336,16 +373,16 @@ for(const level of [1,2,3] as const)test('C1C36 Prophet normal player route Leve
       defeatedBossFamilyIds:level===3?['necromancer','hag']:level===2?['necromancer']:[]});localStorage.setItem(key,JSON.stringify(s));},level);
   await page.reload();let threatId='',tavern=false;const receipts:string[][]=[];
   for(let quest=0;quest<2;quest++){
-    const before=(await saved(page)).heroes.map(h=>h.stress);await page.locator('[data-testid^="quest-community-"]').first().click();
+    const before=await saved(page);await page.locator('[data-testid^="quest-community-"]').first().click();
     console.log('C1C36 Standard',level,quest);let c=await saved(page);expect(c.activeThreatRuntime!.bossFamilyId).toBe('prophet');
     if(!threatId)threatId=c.activeThreatRuntime!.drawTransactionId;expect(c.activeThreatRuntime!.drawTransactionId).toBe(threatId);
-    if(level===1)expect(c.heroes.map(h=>h.stress)).toEqual(before.map(n=>n+2));
+    if(level===1)await threatStress(page,before,c,'DUNGEON_ENTRY',2);
     await reload(page,level,'Standard Quest '+quest+' Threat effect');
-    if(level===2){const before=c.heroes.map(h=>h.stress);await page.getByTestId('scout-dungeon').click();c=await saved(page);
-      expect(c.heroes.map(h=>h.stress)).toEqual(before.map(n=>n+2));await reload(page,level,'Scout receipt '+quest);}
+    if(level===2){const before=c;await page.getByTestId('scout-dungeon').click();c=await saved(page);
+      await threatStress(page,before,c,'SCOUTING',1);await reload(page,level,'Scout receipt '+quest);}
     if(level===3){const guarded=c.dungeon!.rooms.find(r=>r.sourceRoomToken==='lair')!;
       for(const room of path(c,guarded.id)){await questChoice(page);await move(page,room);await questChoice(page);}}
-    c=await saved(page);receipts.push(c.bossEncounterCheckpoint!.checkpointContext!.consumedOnceKeys);
+    await acknowledgeEvents(page);c=await saved(page);receipts.push(c.bossEncounterCheckpoint!.checkpointContext!.consumedOnceKeys);
     await page.getByTestId('leave-dungeon').click();await page.getByTestId('leave-dungeon-confirm-ok').click();
     await acknowledgeEvents(page);
     if((await saved(page)).gamePhase==='quest-result')await page.getByTestId('return-hamlet').click();
@@ -355,7 +392,7 @@ for(const level of [1,2,3] as const)test('C1C36 Prophet normal player route Leve
   }
   console.log('C1C36 Boss selection',level);expect(tavern).toBe(true);const preFace=await saved(page);await page.getByTestId('quest-face-the-threat').click();
   let c=await saved(page);expect(c.bossRoomStorage).toMatchObject({roomCardId:44710,tileId:'ruins-tile-11',lifecycle:'RESERVED'});
-  if(level===1)expect(c.heroes.map(h=>h.stress)).toEqual(preFace.heroes.map(h=>h.stress+2));
+  if(level===1)await threatStress(page,preFace,c,'DUNGEON_ENTRY',2);
   expect(c.activeThreatRuntime!.drawTransactionId).toBe(threatId);await reload(page,level,'Face the Threat Room 11 RESERVED');
   const seen=new Set<string>();const inspect=async(c:CampaignState)=>{
     const b=c.battle,p=b?.bossEncounter?.prophetProduction;if(!p)return;
@@ -381,6 +418,7 @@ for(const level of [1,2,3] as const)test('C1C36 Prophet normal player route Leve
   const e=c.bossEncounterHistory!.at(-1)!,p=e.prophetProduction!;
   await acknowledgeEvents(page);
   if((await saved(page)).gamePhase==='dungeon-explore'){
+    const scout=page.getByTestId('scout-dungeon');if(await scout.isEnabled()){await scout.click();await acknowledgeEvents(page);}
     await page.getByTestId('leave-dungeon').click();await page.getByTestId('leave-dungeon-confirm-ok').click();
   }
   await acknowledgeEvents(page);
@@ -388,9 +426,17 @@ for(const level of [1,2,3] as const)test('C1C36 Prophet normal player route Leve
   if((await saved(page)).gamePhase==='quest-result')await page.getByTestId('return-hamlet').click();
   await acknowledgeEvents(page);expect((await saved(page)).gamePhase).toBe('hamlet');
   expect((await saved(page)).campaignProgress).toEqual(committedProgress);
+  const bossQuestResult=(await saved(page)).lastQuestResult!;
   let recovered=false;
   for(let day=0;day<8&&!recovered;day++){
     const current=await saved(page);
+    if(current.gamePhase==='quest-select'){
+      await page.locator('[data-testid^="quest-community-"]').first().click();await acknowledgeEvents(page);
+      const scout=page.getByTestId('scout-dungeon');if(await scout.isEnabled()){await scout.click();await acknowledgeEvents(page);}
+      await page.getByTestId('leave-dungeon').click();await page.getByTestId('leave-dungeon-confirm-ok').click();await acknowledgeEvents(page);
+      if((await saved(page)).gamePhase==='quest-result')await page.getByTestId('return-hamlet').click();
+      await acknowledgeEvents(page);observe(page,'post-victory follow-up Hamlet visit',await saved(page));continue;
+    }
     expect(current.gamePhase,'post-victory preparation must offer Tavern').toBe('hamlet');
     for(const h of current.heroes.filter(h=>!h.dead&&!h.hasActedToday&&h.stress>0)){
       await page.getByTestId('hero-select-'+h.instanceId).click();
@@ -415,10 +461,10 @@ for(const level of [1,2,3] as const)test('C1C36 Prophet normal player route Leve
     defeatedBossFamilyIds:c.campaignProgress.defeatedBossFamilyIds,defeatedThreatIds:c.campaignProgress.defeatedThreatIds,
     act:c.campaignProgress.act,campaignLevel:c.campaignProgress.campaignLevel,
     transactions:c.processedCampaignTransactionIds.filter(id=>id.includes(e.checkpointContext!.questRunId)||id.startsWith('act-start:')||id.startsWith('act-four-unlock:')),
-    questCompletion:{outcome:c.lastQuestResult!.outcome,xpPerHero:c.lastQuestResult!.xpPerHero,heroes:c.heroes.map(h=>({instanceId:h.instanceId,level:h.level,xp:h.xp})),pendingQuestXp:c.pendingQuestXp},
+    questCompletion:{outcome:bossQuestResult.outcome,xpPerHero:bossQuestResult.xpPerHero,heroes:c.heroes.map(h=>({instanceId:h.instanceId,level:h.level,xp:h.xp})),pendingQuestXp:c.pendingQuestXp},
     archivedQuestReceipts:c.prophetQuestThreatHistory!.map(h=>({questRunId:h.questRunId,encounterId:h.checkpoint.checkpointContext!.encounterId,
       threatCardId:h.checkpoint.threatAbilityCardId,ruleSetVersion:h.checkpoint.ruleSetVersion,receipts:h.checkpoint.checkpointContext!.consumedOnceKeys})),
     attacks:p.attacks.map(a=>({transactionId:a.transactionId,physicalOrdinal:a.physicalOrdinal,skillNumber:a.skillNumber,attackRoll:a.attackRoll,targetActorIds:a.targetActorIds})),
-    spawnAudits:level===3?spawnAudits:[],tavern:tavernAudits.get(page),stateObservations:replayStates.get(page)},null,2)+'\n');
+    spawnAudits:level===3?spawnAudits:[],threatStress:threatStressAudits.get(page),tavern:tavernAudits.get(page),stateObservations:replayStates.get(page)},null,2)+'\n');
 });
 test.afterAll(()=>fs.writeFileSync('docs/data/complete-edition/c1c36-prophet-browser-reload-matrix.json',JSON.stringify({points,externalNetworkBlocked:true,externalRequests:[...externalRequests]},null,2)+'\n'));
