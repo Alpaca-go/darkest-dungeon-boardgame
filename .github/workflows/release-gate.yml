@@ -22,8 +22,7 @@ jobs:
       - run: npm test
       - run: npm run build
       - run: npm run historical-baseline-validation
-      - run: npm run verify:complete-edition-c1c33
-      - run: npm run verify:complete-edition-c1c34
-      - run: npm run verify:complete-edition-c1c35
-      - run: npm run verify:complete-edition-c1c35r1
-      - run: npm run verify:complete-edition-c1c35r2
+      - run: npm run verify:immutable-phase-baselines
+      - run: npm run verify:necromancer-successor-compatibility
+      - run: npm run verify:prophet-gate-a
+      - run: npm run verify:complete-edition-c1c35r2a
