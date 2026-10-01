@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C35",
+  "baseline": "051c2c400d391543f5c436cbaa141a54bdf19ac1",
+  "predecessor": "C1C34-SUCCESSOR-BINDING-v1",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "ruleSetVersion": "C1C35-PROPHET-DIGITAL-DEFAULT-v1",
+  "foundationExecutionAllowed": false,
+  "gameplayChanged": false,
+  "productionPromotion": false,
+  "authority": "PROJECT_RULING",
+  "canonical": false,
+  "canonicalStatus": "SOURCE_UNRESOLVED",
+  "inheritsNecromancerRulings": false,
+  "executionEnabled": false,
+  "rulings": [
+    {
+      "id": "crowded-area-tie",
+      "version": "C1C35-PROPHET-DIGITAL-DEFAULT-v1",
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "qualifies": "Count living targetable Heroes by Area; maximum positive count across the bound Tile, before range movement; no Heroes means no target.",
+      "candidateGeneration": "All maximum-count valid Tile Areas; preserve count and actor identities used to generate candidates.",
+      "tie": "One candidate resolves directly; multiple require explicit player PendingChoice.",
+      "playerChoiceRequired": true,
+      "rngAllowed": false,
+      "stableOrdering": "Ascending Area ID using code-point comparison; ordering is display only, never implicit selection.",
+      "saveRepresentation": [
+        "ruleSetVersion",
+        "choiceId",
+        "actionKey",
+        "candidateAreaIds",
+        "candidateHeroIds",
+        "occupancySnapshot",
+        "selectedAreaId"
+      ],
+      "invalidSelection": "Reject missing candidates, unknown selection, stale occupancy, forged actor IDs, wrong action key/version; no RNG consumed."
+    },
+    {
+      "id": "pew-attack-order-and-save",
+      "version": "C1C35-PROPHET-DIGITAL-DEFAULT-v1",
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "attackOrdering": "Physical copy ordinal 1, 2, 3, 4 explicitly, independent of array/storage order.",
+      "sameArea": "Each active Pew gets an independent attack/roll even when another Pew has attacked that Area.",
+      "cursor": "0..4 completed Pew transactions; pendingPewAttack stores copy ordinal, targets, roll and phase.",
+      "damageTransaction": "Use shared attack/damage; freeze target order by authoritative Hero Stance then stable actor ID; journal transaction ID before cursor advancement.",
+      "deathWindows": "Resolve shared death/Death Door and stress windows for each target before next target; complete all targets before next Pew.",
+      "conditionWindows": "Apply target effects only on hit after damage; generic condition ticks remain at actor turn start, not at Pew boundaries.",
+      "interruption": "Persist pending attack phase, resolved target IDs, RNG cursor and causal events when shared PendingChoice interrupts.",
+      "resume": "Continue uncommitted target/phase from journal; never reroll a stored roll or repeat committed damage/death events.",
+      "removedInvalidTarget": "A legally removed dead Hero is skipped with causal event; forged/unknown Area, copy or actor fails validation. Empty Area still consumes its Pew attack roll.",
+      "roundReset": "Require prior sequence complete; reuse four physical copy IDs, atomically clear old placements and assign four new shared-stream rolls; no stale ownership.",
+      "victory": "Cancel remaining attacks, return all four physical Pews once, retain causal journal.",
+      "dependencies": [
+        "source-bound complete Tile",
+        "explicit Rubble target-scope contract",
+        "shared RNG/transaction primitives"
+      ],
+      "saveRepresentation": [
+        "ruleSetVersion",
+        "orderedPhysicalCopyIds",
+        "rubbleCursor",
+        "pendingPewAttack",
+        "resolvedActionKeys",
+        "causalEvents",
+        "shared RNG checkpoint"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,400 @@
+
+> darkest-dungeon-web-prototype@0.1.0 test
+> vitest run
+
+
+ RUN  v2.1.9 D:/darkest-dungoen-boardgame
+
+ ✓ src/game-engine/bosses/shuffling-horror/shuffling-horror.test.ts (55 tests) 152ms
+ ✓ src/game-engine/bosses/templars/templars.test.ts (76 tests) 199ms
+ ✓ src/game-engine/bosses/mammoth-cyst/mammoth-cyst.test.ts (60 tests) 253ms
+ ✓ src/game-engine/campaign/act-four/act-four.test.ts (75 tests) 249ms
+ ✓ src/game-engine/fanatic/fanatic.test.ts (66 tests) 45ms
+ ✓ src/data/darkest-dungeon/community-reference/community-final-production.test.ts (25 tests) 1313ms
+ ✓ src/game-engine/phase8d-guild.test.ts (53 tests) 55ms
+ ✓ src/game-engine/campaign/campaign-orchestrator.test.ts (50 tests) 28ms
+ ✓ src/game-engine/bosses/foundation.test.ts (60 tests) 1074ms
+ ✓ src/game-engine/prophet/prophet.test.ts (41 tests) 45ms
+ ✓ src/game-engine/phase8a.test.ts (32 tests) 48ms
+ ✓ src/game-engine/campaign/act-four/final-forms.test.ts (27 tests) 68ms
+ ✓ src/data/darkest-dungeon/community-reference/runtime-profile.test.ts (55 tests) 101ms
+ ✓ src/data/darkest-dungeon/community-reference/community-guardian-special-skill.test.ts (22 tests) 98ms
+ ✓ src/game-engine/phase7.test.ts (21 tests) 45ms
+ ✓ src/game-engine/phase4.test.ts (29 tests) 54ms
+ ✓ src/data/darkest-dungeon/community-reference/community-final-encounter-save-replay.test.ts (18 tests) 391ms
+ ✓ src/game-engine/phase8c.test.ts (19 tests) 34ms
+ ✓ src/game-engine/phase3.test.ts (28 tests) 27ms
+ ✓ src/game-engine/collector/collector.test.ts (27 tests) 27ms
+ ✓ src/audit/c1c32r2-necromancer-threat-dependencies.test.ts (22 tests) 1200ms
+ ✓ src/game-engine/c1c16-level1-stance-accuracy.test.ts (17 tests) 81ms
+ ✓ src/game-engine/c1c17-survival-guide.test.ts (9 tests) 40ms
+ ✓ src/audit/c1c32r3r-production-threat.test.ts (14 tests) 6691ms
+   ✓ C1C32R3R focused production ordinary Threat contracts > Level 1 keeps one active Threat across distinct Standard and Face checkpoints 731ms
+   ✓ C1C32R3R focused production ordinary Threat contracts > Level 2 keeps one active Threat across distinct Standard and Face checkpoints 1552ms
+   ✓ C1C32R3R focused production ordinary Threat contracts > Level 3 keeps one active Threat across distinct Standard and Face checkpoints 1079ms
+   ✓ C1C32R3R focused production ordinary Threat contracts > uses Captain as the first real initial draw, two slots and one finite miniature 455ms
+   ✓ C1C32R3R focused production ordinary Threat contracts > freezes simultaneous first deaths, persists candidates, and allocates a fresh instance from the same copy 471ms
+   ✓ C1C32R3R focused production ordinary Threat contracts > returns all used/replaced cards, removes every non-Unholy copy, then resumes the same Boss identity 342ms
+stdout | src/audit/c1c28-necromancer-project-rulings.test.ts > C1C28 canonical source and digital ruling separation > C1C28 scope guard freezes gameplay, canonical history, other families and tooling
+c1c28 immutable baseline b6fa9180b44cd4a33f9fd4ceed97f179e64fbd0f: PASS; current frozen evidence: PASS
+
+ ✓ src/audit/c1c28-necromancer-project-rulings.test.ts (39 tests) 55578ms
+   ✓ C1C28 canonical source and digital ruling separation > preserves official leaf values and references without unresolved composites hiding inside them 2125ms
+   ✓ C1C28 canonical source and digital ruling separation > mixed-hits-single-instruction / all-miss-no-summon: hit count is gating, not multiplication 351ms
+   ✓ C1C28 canonical source and digital ruling separation > C1C28 scope guard freezes gameplay, canonical history, other families and tooling 50602ms
+   ✓ C1C28 canonical source and digital ruling separation > detects source promotion, coverage/risk drift and counterfeit foundation decisions 1119ms
+   ✓ C1C28 canonical source and digital ruling separation > is deterministic, offline and scoped to audit rather than production runtime 629ms
+ ✓ src/game-engine/phase5.test.ts (21 tests) 82ms
+ ✓ src/audit/c1c25-necromancer-semantic-source-intake.test.ts (37 tests) 6472ms
+   ✓ C1C25 locked Necromancer semantic source intake > rebuilds original Bone / Room crops and locks tile side and all core crop bytes 5263ms
+stdout | src/audit/c1c27-necromancer-source-closure.test.ts > C1C27 authoritative source closure > rejects gameplay, other-family, tooling and prior-phase changes
+c1c27 immutable baseline aaedb2d30b1e5d90bf8d41e7dbced9f93288f73a: PASS; current frozen evidence: PASS
+
+ ✓ src/audit/c1c27-necromancer-source-closure.test.ts (24 tests) 59543ms
+   ✓ C1C27 authoritative source closure > rejects gameplay, other-family, tooling and prior-phase changes 55615ms
+   ✓ C1C27 authoritative source closure > detects promotion, status, provenance and matrix drift in stored artifacts 2917ms
+   ✓ C1C27 authoritative source closure > verifies deterministic stored artifacts without acquiring network sources 985ms
+ ✓ src/audit/c1c31r-hero-dodge-explicit-table.test.ts (50 tests) 18195ms
+   ✓ C1C31R complete explicit Dodge table and frozen authority > verifies deterministic generated artifacts and immutable v1/C1C31/Bone evidence 18122ms
+ ✓ src/game-engine/c1c15-level3-stance-rings.test.ts (15 tests) 93ms
+ ✓ src/data/darkest-dungeon/community-reference/community-engine-capability-production.test.ts (50 tests) 235ms
+ ✓ src/audit/c1c26-necromancer-source-closure.test.ts (27 tests) 269ms
+ ✓ src/audit/core-campaign/official-source-audit.test.ts (15 tests) 6339ms
+   ✓ official-source-audit (Phase 11A.3 Final Acceptance §6-§12) > A. Missing all Tier B → SOURCE-BLOCKED, requiredMissingCount=26, optionalMissingCount=1 319ms
+   ✓ official-source-audit (Phase 11A.3 Final Acceptance §6-§12) > B. All required Tier B complete + optional errata missing → allRequiredSourcesReady=true 368ms
+   ✓ official-source-audit (Phase 11A.3 Final Acceptance §6-§12) > C. provenance verified but extracted value missing → partial (C-1: empty string; C-2: null) 704ms
+   ✓ official-source-audit (Phase 11A.3 Final Acceptance §6-§12) > D. componentId mismatch → SOURCE-AUDIT-ERROR 391ms
+   ✓ official-source-audit (Phase 11A.3 Final Acceptance §6-§12) > E. duplicate sourceAssetId → SOURCE-AUDIT-ERROR 439ms
+   ✓ official-source-audit (Phase 11A.3 Final Acceptance §6-§12) > F. quantity 1/2 → partial 558ms
+   ✓ official-source-audit (Phase 11A.3 Final Acceptance §6-§12) > enforces dungeon-tile exact quantity and validates every asset 1402ms
+   ✓ official-source-audit (Phase 11A.3 Final Acceptance §6-§12) > H. empty sourceReference → SOURCE-AUDIT-ERROR 512ms
+   ✓ official-source-audit (Phase 11A.3 Final Acceptance §6-§12) > I. rulebook missing → SOURCE-AUDIT-ERROR (NOT-VERIFIED) 541ms
+   ✓ official-source-audit (Phase 11A.3 Final Acceptance §6-§12) > structured provenanceAudit 输出格式正确（dev doc §12） 388ms
+   ✓ official-source-audit (Phase 11A.3 Final Acceptance §6-§12) > resolvedRequirements 包含 sourceReferences 数组（dev doc §10） 357ms
+   ✓ official-source-audit (Phase 11A.3 Final Acceptance §6-§12) > partial 状态保留 partial，不被 generator 写成 missing（dev doc §10） 354ms
+ ✓ src/data/darkest-dungeon/community-reference/community-final-transition-state.test.ts (2 tests) 153ms
+ ✓ src/audit/core-campaign/command-differential.test.ts (14 tests) 28ms
+ ✓ src/data/darkest-dungeon/community-reference/community-runtime-truth-gate.test.ts (15 tests) 146ms
+ ✓ src/audit/c1c32r2c-ruins-production-executor.test.ts (9 tests) 1727ms
+   ✓ C1C32R2C ordinary Ruins Battle binding > initializes Level 2 from exactly the drawn copies and initiative cards, then reloads 315ms
+   ✓ C1C32R2C physical Battle end transaction > returns drawn cards and ordinary figures once while retaining the Room discard 316ms
+ ✓ src/audit/c1c30-necromancer-runtime-foundation.test.ts (25 tests) 526ms
+ ✓ src/game-engine/c1c5-chirurgeons-charm.test.ts (9 tests) 35ms
+ ✓ src/data/darkest-dungeon/community-reference/community-act4-playable-closure-adversarial.test.ts (20 tests) 72ms
+ ✓ src/audit/c1c32r2a-ruins-executable-dependencies.test.ts (16 tests) 9665ms
+   ✓ C1C32R2A source successor and deterministic dependency commands > Level 1 draw is atomic, exclusive, deterministic and never redraws after serialization 2606ms
+   ✓ C1C32R2A source successor and deterministic dependency commands > Level 2 draw is atomic, exclusive, deterministic and never redraws after serialization 2984ms
+   ✓ C1C32R2A source successor and deterministic dependency commands > Level 3 draw is atomic, exclusive, deterministic and never redraws after serialization 2461ms
+   ✓ C1C32R2A saved Threat → real Quest return → Preparation Day commands > Level II useEffect=true survives each decision boundary and commits once 460ms
+   ✓ C1C32R2A saved Threat → real Quest return → Preparation Day commands > Level II useEffect=false survives each decision boundary and commits once 415ms
+ ✓ src/audit/c1c32r2c-printed-effects.test.ts (15 tests) 10854ms
+   ✓ C1C32R2C typed effects and saved combat state > executes stress, party stress, light, fixed healing and ALL_WOUNDS with replay equality 374ms
+   ✓ C1C32R2C typed effects and saved combat state > persists, expires and removes bleed 356ms
+   ✓ C1C32R2C typed effects and saved combat state > persists, expires and removes blight 354ms
+   ✓ C1C32R2C typed effects and saved combat state > persists, expires and removes stun 496ms
+   ✓ C1C32R2C typed effects and saved combat state > persists, expires and removes buff 496ms
+   ✓ C1C32R2C typed effects and saved combat state > persists, expires and removes debuff 460ms
+   ✓ C1C32R2C typed effects and saved combat state > persists, expires and removes mark 468ms
+   ✓ C1C32R2C typed effects and saved combat state > persists, expires and removes guard 311ms
+   ✓ C1C32R2C typed effects and saved combat state > persists, expires and removes riposte 464ms
+   ✓ C1C32R2C typed effects and saved combat state > keeps independently timed Bleed tokens and applies categorical resistance without a random check 347ms
+   ✓ C1C32R2C typed effects and saved combat state > draws a Disease once, reloads the queued acquisition and uses the existing campaign acquisition pipeline 487ms
+   ✓ C1C32R2C typed effects and saved combat state > queues exactly one critical Stress for each Hero across a single source multi-target attack 5162ms
+   ✓ C1C32R2C typed effects and saved combat state > preserves spatial candidates and remaining effects across a Shuffle save without rerolling 496ms
+ ✓ src/audit/c1c32-necromancer-runtime-finalization.test.ts (9 tests) 1759ms
+   ✓ C1C32 production pinning and negative import boundaries > consumes the frozen resolver for all 24 actual production Hero bindings 1235ms
+ ✓ src/data/darkest-dungeon/community-reference/community-final-targeting.test.ts (8 tests) 90ms
+ ✓ src/audit/c1c24-boss-source-intake.test.ts (21 tests) 89951ms
+   ✓ C1C24 ordinary Boss source inventory > rebuilds all 462 exact crops and checks original-byte receipts, MIME, grids and draft binding 77212ms
+   ✓ C1C24 ordinary Boss source inventory > registers every unresolved leaf, not engine gaps masquerading as source gaps 349ms
+   ✓ C1C24 ordinary Boss source inventory > stored artifacts reproduce from locked sources and curated observations 452ms
+   ✓ C1C24 ordinary Boss source inventory > rejects omitted identity 2020ms
+   ✓ C1C24 ordinary Boss source inventory > rejects duplicate definition 1119ms
+   ✓ C1C24 ordinary Boss source inventory > rejects Guardian intrusion 924ms
+   ✓ C1C24 ordinary Boss source inventory > rejects artwork-only subtype 991ms
+   ✓ C1C24 ordinary Boss source inventory > rejects mock authority 971ms
+   ✓ C1C24 ordinary Boss source inventory > rejects conflicting literal 805ms
+   ✓ C1C24 ordinary Boss source inventory > rejects false OCR completion 798ms
+   ✓ C1C24 ordinary Boss source inventory > rejects unregistered gap 725ms
+   ✓ C1C24 ordinary Boss source inventory > rejects counterfeit production Ready 675ms
+   ✓ C1C24 ordinary Boss source inventory > rejects matrix count drift 740ms
+   ✓ C1C24 ordinary Boss source inventory > rejects ROI detached from source 759ms
+   ✓ C1C24 ordinary Boss source inventory > rejects runtime selected without semantics 599ms
+   ✓ C1C24 ordinary Boss source inventory > rejects upstream Ready drift 582ms
+ ✓ src/data/darkest-dungeon/community-reference/community-act4-playable-closure.test.ts (12 tests) 69ms
+ ✓ src/game-engine/phase8d-quest-xp.test.ts (26 tests) 38ms
+ ✓ src/data/darkest-dungeon/community-reference/community-guardian-room-save-replay.test.ts (6 tests) 57ms
+ ✓ src/game-engine/phase8d-replacement.test.ts (12 tests) 29ms
+ ✓ src/game-engine/c1br-production-acceptance.test.ts (13 tests) 15ms
+ ✓ src/game-engine/c1c11-bloodthirst-ring.test.ts (8 tests) 35ms
+ ✓ src/data/darkest-dungeon/community-reference/community-engine-capability-adversarial.test.ts (23 tests) 119596ms
+   ✓ Community final acceptance rejects false green proofs > A12 removing the production Mammoth critical hook fails the real attack case 20414ms
+   ✓ Community final acceptance rejects false green proofs > A13 helper policies cannot conceal a production resistance bypass 22703ms
+   ✓ Community final acceptance rejects false green proofs > A14 removing templarsEncounterState production victory wiring fails the real path 13218ms
+   ✓ Community final acceptance rejects false green proofs > A15 removing mammothCystEncounterState production victory wiring fails the real path 13181ms
+   ✓ Community final acceptance rejects false green proofs > A16 removing shufflingHorrorEncounterState production victory wiring fails the real path 14537ms
+   ✓ Community final acceptance rejects false green proofs > A17 removing the production Templars critical hook fails the real attack case 21722ms
+   ✓ Community final acceptance rejects false green proofs > A18 removing the production Shuffling critical hook fails the real attack case 13723ms
+ ✓ src/audit/core-campaign/campaign-flow.test.ts (8 tests) 1642ms
+   ✓ campaign-flow · act-advance [ISSUE-P0-001 修复固化] > withActStarted / withStandardQuestCompleted / recomputeBossLock 必须有非测试 / 非审计 / 非自身定义文件的真实生产调用方 1147ms
+ ✓ src/game-engine/c1c10-campers-helmet.test.ts (5 tests) 25ms
+ ✓ src/game-engine/c1c13-book-holiness.test.ts (6 tests) 39ms
+ ✓ src/data/darkest-dungeon/community-reference/community-final-skill-source-evidence.test.ts (9 tests) 70ms
+ ✓ src/game-engine/c1c1-community-quest-production.test.ts (7 tests) 24ms
+ ✓ src/game-engine/c1c1r-firewood-real-flow.test.ts (11 tests) 46ms
+ ✓ src/data/darkest-dungeon/community-reference/community-runtime-adversarial.test.ts (20 tests) 89ms
+ ✓ src/data/darkest-dungeon/community-reference/community-guardian-room-adversarial.test.ts (17 tests) 233574ms
+   ✓ Community Guardian / Room R1 adversarial mutation gate (WP-7) > Body Slam event-only pit write (no Hero move) fails production proof 19381ms
+   ✓ Community Guardian / Room R1 adversarial mutation gate (WP-7) > Body Slam missing Bleed fails production proof 29751ms
+   ✓ Community Guardian / Room R1 adversarial mutation gate (WP-7) > Stinger Shot missing Debuff fails production proof 16864ms
+   ✓ Community Guardian / Room R1 adversarial mutation gate (WP-7) > Revivify exceeding max HP fails production proof 22450ms
+   ✓ Community Guardian / Room R1 adversarial mutation gate (WP-7) > Reconstitute healing the wrong target fails production proof 11876ms
+   ✓ Community Guardian / Room R1 adversarial mutation gate (WP-7) > Displace using position + 2 instead of Room 11 Push fails production proof 19733ms
+   ✓ Community Guardian / Room R1 adversarial mutation gate (WP-7) > Teleport destination-only event without Area change fails production proof 22735ms
+   ✓ Community Guardian / Room R1 adversarial mutation gate (WP-7) > Echoing helper-only / missing Priest-Growth fails forced production proof 12976ms
+   ✓ Community Guardian / Room R1 adversarial mutation gate (WP-7) > The Finger helper-only Marked path without +5 fails Monster Turn proof 13023ms
+   ✓ Community Guardian / Room R1 adversarial mutation gate (WP-7) > no-space unresolved tie does not auto-randomize a choice 14780ms
+   ✓ Community Guardian / Room R1 adversarial mutation gate (WP-7) > Front/Back placement side ignore fails production placement proof 21084ms
+   ✓ Community Guardian / Room R1 adversarial mutation gate (WP-7) > save/reload RNG re-consumption fails Undulations save proof 28837ms
+ ✓ src/audit/c1c5r2-trinket-payload-mutations.test.ts (12 tests) 10ms
+ ✓ src/audit/c1c32r2c-room-rules.test.ts (16 tests) 2964ms
+   ✓ C1C32R2C all source Room rules execute > 3 / 'healing-waters' / 'END_TURN' 510ms
+ ✓ src/data/darkest-dungeon/community-reference/community-engine-capability-save-replay.test.ts (22 tests) 253ms
+ ✓ src/game-engine/c1c6-dark-solar-bracer.test.ts (16 tests) 48ms
+ ✓ src/testing/contracts/official-guardian-assembly-contract.test.ts (11 tests) 11ms
+ ✓ src/audit/c1c32r3-production-entry.test.ts (22 tests) 1075ms
+ ✓ src/game-engine/c1c1r2-rest-allocation.test.ts (14 tests) 45ms
+ ✓ src/integration/core-campaign/vertical-campaign.integration.test.ts (5 tests) 27ms
+ ✓ src/data/darkest-dungeon/community-reference/community-visual-asset-resolver.test.ts (10 tests) 17ms
+ ✓ src/game-engine/c1c12-book-constitution.test.ts (7 tests) 18ms
+ ✓ src/data/darkest-dungeon/community-reference/community-runtime-freeze-evidence.test.ts (12 tests) 133ms
+ ✓ src/game-engine/c1c8-incoming-attack.test.ts (10 tests) 31ms
+ ✓ src/audit/c1c23-hamlet-event-source-intake.test.ts (18 tests) 8621ms
+   ✓ C1C23 exact printed source intake > covers exactly all 16 locked physical identities with unique two-sided sheet/cell crops 3321ms
+   ✓ C1C23 exact printed source intake > rejects actual provenance substitutions before accepting a crop manifest 346ms
+   ✓ C1C23 exact printed source intake > rejects omitted physical identity 379ms
+   ✓ C1C23 exact printed source intake > rejects duplicate definition 329ms
+   ✓ C1C23 exact printed source intake > rejects wrong crop sheet hash 316ms
+   ✓ C1C23 exact printed source intake > rejects missing semantic contract 322ms
+   ✓ C1C23 exact printed source intake > rejects capability census shortened 369ms
+   ✓ C1C23 exact printed source intake > rejects false production readiness 367ms
+   ✓ C1C23 exact printed source intake > rejects primitive hits used for ROI 541ms
+   ✓ C1C23 exact printed source intake > rejects ordinary shuffle inferred at exhaustion 537ms
+ ✓ src/audit/c1c32r2b-ruins-production-runtime.test.ts (5 tests) 240ms
+ ✓ src/data/darkest-dungeon/community-reference/community-act4-route-matrix.test.ts (5 tests) 143ms
+ ✓ src/game-engine/phase8d-save.test.ts (10 tests) 28ms
+ ✓ src/game-engine/c1c2-quest-runtime-expansion.test.ts (8 tests) 31ms
+ ✓ src/data/darkest-dungeon/community-reference/community-runtime-save-replay.test.ts (12 tests) 49ms
+ ✓ src/audit/core-campaign/production-command-architecture.test.ts (7 tests) 24ms
+ ✓ src/audit/core-campaign/game-command-route-contract.test.ts (14 tests) 136ms
+ ✓ src/audit/core-campaign/phase11a3-state-machine.test.ts (7 tests) 2494ms
+   ✓ phase11a3 state machine (dev doc §14) > S-01 required source missing → SOURCE-BLOCKED 448ms
+   ✓ phase11a3 state machine (dev doc §14) > S-02 only optional errata missing → readiness.allRequiredSourcesReady=true (READY-FOR-OFFICIAL-IMPORT 入口) 442ms
+   ✓ phase11a3 state machine (dev doc §14) > S-03 all required ready + P0-002 open → readiness 层面 outcome=all-ready（release-gate 决定 phase11A3Status） 412ms
+   ✓ phase11a3 state machine (dev doc §14) > S-04 malformed source → NOT-VERIFIED (source-audit-error) 425ms
+   ✓ phase11a3 state machine (dev doc §14) > S-05 formal implementation fail → readiness 仍 SOURCE-BLOCKED（implementation 错由 run-audit 判定 IMPLEMENTATION-FAIL） 376ms
+   ✓ phase11a3 state machine (dev doc §14) > S-06 formal campaign pass → readiness 全部 ready + all-required-ready=true 382ms
+ ✓ src/audit/core-campaign/report-consistency.test.ts (10 tests) 343ms
+ ✓ src/audit/c1c32r-necromancer-threat-bridge.test.ts (16 tests) 1648ms
+ ✓ src/game-engine/c1c9-condition-duration.test.ts (5 tests) 27ms
+ ✓ src/audit/core-campaign/content-manifest.test.ts (12 tests) 18ms
+ ✓ src/game-engine/phase8d-blacksmith.test.ts (7 tests) 24ms
+ ✓ src/data/darkest-dungeon/community-reference/community-runtime-guardian.test.ts (16 tests) 34ms
+ ✓ src/testing/policies/test-policy-boundary.test.ts (4 tests) 9ms
+ ✓ src/game-engine/c1br-production-proof.test.ts (5 tests) 29ms
+ ✓ src/audit/production-proof-verification.test.ts (13 tests) 21ms
+ ✓ src/game-engine/phase2.test.ts (14 tests) 31ms
+ ✓ src/audit/core-campaign/golden-run.test.ts (10 tests) 864ms
+   ✓ golden-run > replay-determinism [ISSUE-P1-002 CLOSED]: 同 Seed + RuntimeSources Replay A/B/C 完全一致 469ms
+ ✓ src/game-engine/necromancer/necromancer.test.ts (19 tests) 9ms
+ ✓ src/data/darkest-dungeon/community-reference/source-resolution.test.ts (13 tests) 16ms
+ ✓ src/game-engine/commands/boss-foundation.test.ts (6 tests) 169ms
+ ✓ src/audit/core-campaign/cli-exit-contract.test.ts (7 tests) 42608ms
+   ✓ CLI Exit Truth (dev doc §2) > CLI-01 valid source-blocked → audit:official-source exit 0（spawn 实际 CLI） 23141ms
+   ✓ CLI Exit Truth (dev doc §2) > CLI-02 malformed source inject → runOfficialSourceAudit 报 source-audit-error（main() 路径） 402ms
+   ✓ CLI Exit Truth (dev doc §2) > CLI-02-real malformed source → 实际 CLI spawn 返回 1 18719ms
+   ✓ CLI Exit Truth (dev doc §2) > CLI-02b identity-mismatch → outcome=source-audit-error 312ms
+ ✓ src/audit/c1c1r3-rest-budget-semantics.test.ts (8 tests) 8ms
+ ✓ src/data/darkest-dungeon/community-reference/community-runtime-final.test.ts (12 tests) 18ms
+ ✓ src/audit/c1c32r2c-summon-ledgers.test.ts (2 tests) 1006ms
+   ✓ C1C32R2C ordinary and Necromancer card/figure reconciliation > uses the ordinary card and figure again for source Level III Reanimation, with no new reservation 768ms
+ ✓ src/audit/c1c32r2c-monster-matrix.test.ts (24 tests) 17099ms
+   ✓ C1C32R2C every locked Monster identity in runtime > 'bone-soldier': all Stances, all d10 outcomes, all Skills and printed attack thresholds 646ms
+   ✓ C1C32R2C every locked Monster identity in runtime > 'bone-courtier': all Stances, all d10 outcomes, all Skills and printed attack thresholds 776ms
+   ✓ C1C32R2C every locked Monster identity in runtime > 'bone-arbalist': all Stances, all d10 outcomes, all Skills and printed attack thresholds 672ms
+   ✓ C1C32R2C every locked Monster identity in runtime > 'bone-defender': all Stances, all d10 outcomes, all Skills and printed attack thresholds 684ms
+   ✓ C1C32R2C every locked Monster identity in runtime > 'bone-captain': all Stances, all d10 outcomes, all Skills and printed attack thresholds 830ms
+   ✓ C1C32R2C every locked Monster identity in runtime > 'bone-spearman': all Stances, all d10 outcomes, all Skills and printed attack thresholds 946ms
+   ✓ C1C32R2C every locked Monster identity in runtime > 'bone-bearer': all Stances, all d10 outcomes, all Skills and printed attack thresholds 956ms
+   ✓ C1C32R2C every locked Monster identity in runtime > 'cultist-brawler': all Stances, all d10 outcomes, all Skills and printed attack thresholds 903ms
+   ✓ C1C32R2C every locked Monster identity in runtime > 'cultist-acolyte': all Stances, all d10 outcomes, all Skills and printed attack thresholds 668ms
+   ✓ C1C32R2C every locked Monster identity in runtime > 'brigand-cutthroat': all Stances, all d10 outcomes, all Skills and printed attack thresholds 916ms
+   ✓ C1C32R2C every locked Monster identity in runtime > 'brigand-fusilier': all Stances, all d10 outcomes, all Skills and printed attack thresholds 694ms
+   ✓ C1C32R2C every locked Monster identity in runtime > 'brigand-bloodletter': all Stances, all d10 outcomes, all Skills and printed attack thresholds 839ms
+   ✓ C1C32R2C every locked Monster identity in runtime > 'maggot': all Stances, all d10 outcomes, all Skills and printed attack thresholds 419ms
+   ✓ C1C32R2C every locked Monster identity in runtime > 'webber': all Stances, all d10 outcomes, all Skills and printed attack thresholds 523ms
+   ✓ C1C32R2C every locked Monster identity in runtime > 'spitter': all Stances, all d10 outcomes, all Skills and printed attack thresholds 675ms
+   ✓ C1C32R2C every locked Monster identity in runtime > 'bone-rabble': all Stances, all d10 outcomes, all Skills and printed attack thresholds 994ms
+   ✓ C1C32R2C every locked Monster identity in runtime > 'madman': all Stances, all d10 outcomes, all Skills and printed attack thresholds 489ms
+   ✓ C1C32R2C every locked Monster identity in runtime > 'pliskin': all Stances, all d10 outcomes, all Skills and printed attack thresholds 478ms
+   ✓ C1C32R2C every locked Monster identity in runtime > 'ghoul': all Stances, all d10 outcomes, all Skills and printed attack thresholds 570ms
+   ✓ C1C32R2C every locked Monster identity in runtime > 'gargoyle': all Stances, all d10 outcomes, all Skills and printed attack thresholds 635ms
+   ✓ C1C32R2C every locked Monster identity in runtime > 'rattler': all Stances, all d10 outcomes, all Skills and printed attack thresholds 639ms
+   ✓ C1C32R2C every locked Monster identity in runtime > 'brigand-raider': all Stances, all d10 outcomes, all Skills and printed attack thresholds 741ms
+   ✓ C1C32R2C every locked Monster identity in runtime > 'brigand-hunter': all Stances, all d10 outcomes, all Skills and printed attack thresholds 756ms
+   ✓ C1C32R2C every locked Monster identity in runtime > 'adder': all Stances, all d10 outcomes, all Skills and printed attack thresholds 650ms
+ ✓ src/audit/c1c4-rest-source-closure.test.ts (6 tests) 51ms
+ ✓ src/game-engine/c1b-production.test.ts (4 tests) 16ms
+ ✓ src/testing/contracts/replacement-contract.test.ts (3 tests) 6ms
+ ✓ src/data/darkest-dungeon/community-reference/community-act4-playable-closure-save-replay.test.ts (7 tests) 85ms
+ ✓ src/audit/c1c3r-semantic-fidelity.test.ts (8 tests) 18ms
+ ✓ src/audit/c1c32r2c-graveyard-real-command.test.ts (2 tests) 195ms
+ ✓ src/audit/core-campaign/campaign-invariants.test.ts (8 tests) 10ms
+ ✓ src/audit/core-campaign/registry-consistency.test.ts (8 tests) 7ms
+ ✓ src/audit/c1c33-necromancer-production-acceptance.test.ts (24 tests) 26592ms
+   ✓ C1C33 production freeze / save tamper rejection > Level 1 preserves schema-2 state and deterministic command continuation 8035ms
+   ✓ C1C33 production freeze / save tamper rejection > Level 2 preserves schema-2 state and deterministic command continuation 8610ms
+   ✓ C1C33 production freeze / save tamper rejection > Level 3 preserves schema-2 state and deterministic command continuation 7290ms
+ ✓ src/game-engine/runtime-sources.test.ts (12 tests) 11ms
+ ✓ src/audit/c1c11-bloodthirst-semantics.test.ts (9 tests) 7ms
+ ✓ src/audit/c1c16-level1-stance-accuracy.test.ts (2 tests) 12ms
+ ✓ src/data/darkest-dungeon/community-reference/community-special-skill-coverage.test.ts (3 tests) 14ms
+ ✓ src/data/darkest-dungeon/community-reference/community-final-skill-coverage.test.ts (5 tests) 10ms
+ ✓ src/data/darkest-dungeon/community-reference/community-monster-targeting-adversarial.test.ts (4 tests) 27ms
+ ✓ src/audit/core-campaign/production-command-audit.test.ts (6 tests) 173ms
+ ✓ src/audit/c1c5-level2-trinket-deck.test.ts (5 tests) 9ms
+ ✓ src/audit/c1c13-book-holiness-semantics.test.ts (9 tests) 7ms
+ ✓ src/game-engine/c1c7-fortunate-armlet.test.ts (3 tests) 16ms
+ ✓ src/audit/core-campaign/final-acceptance-gate.test.ts (28 tests) 52ms
+ ✓ src/audit/c1c31-necromancer-runtime-foundation.test.ts (10 tests) 65112ms
+   ✓ C1C31 terminal rulebook-only contract review > verifies frozen C1C20–30 evidence, unchanged v1/runtime and deterministic generated artifacts 49646ms
+   ✓ C1C31 terminal rulebook-only contract review > does not claim production hashes, integration selection, or IMPLEMENTED bridges while review is pending 15310ms
+ ✓ src/data/darkest-dungeon/community-reference/validate.test.ts (23 tests) 106ms
+ ✓ src/audit/c1c20-core-terminal-blockers.test.ts (17 tests) 80ms
+ ✓ src/components/darkest-dungeon/community-visual-profile-isolation.test.tsx (8 tests) 46ms
+ ✓ src/audit/c1c7-voluntary-consumer-semantics.test.ts (9 tests) 10ms
+ ✓ src/audit/c1c14-level2-blocker-consolidation.test.ts (4 tests) 10ms
+ ✓ src/audit/c1c35-prophet-source-contract.test.ts (23 tests) 42897ms
+   ✓ C1C35 Prophet source contract and mandatory stop > is deterministic, hash-bound and preserves the production freeze 10913ms
+   ✓ C1C35 Prophet source contract and mandatory stop > rejects guessed capacity 3015ms
+   ✓ C1C35 Prophet source contract and mandatory stop > rejects promotion 2801ms
+   ✓ C1C35 Prophet source contract and mandatory stop > rejects forged input hash 3393ms
+   ✓ C1C35 Prophet source contract and mandatory stop > rejects omitted required field 3014ms
+   ✓ C1C35 Prophet source contract and mandatory stop > rejects prototype definition 2875ms
+   ✓ C1C35 Prophet source contract and mandatory stop > rejects false replay 3083ms
+   ✓ C1C35 Prophet source contract and mandatory stop > rejects hidden runtime acceptance 3044ms
+   ✓ C1C35 Prophet source contract and mandatory stop > rejects cross-level numeric substitution 3485ms
+   ✓ C1C35 Prophet source contract and mandatory stop > rejects unreviewed Rubble scope 3432ms
+   ✓ C1C35 Prophet source contract and mandatory stop > rejects map substitution 3804ms
+ ✓ src/audit/c1c8-incoming-semantics.test.ts (5 tests) 6ms
+ ✓ src/audit/c1c9-condition-semantics.test.ts (6 tests) 6ms
+ ✓ src/audit/c1c12-book-constitution-semantics.test.ts (7 tests) 9ms
+ ✓ src/audit/c1c32r2c-large-save.test.ts (1 test) 3981ms
+   ✓ C1C32R2C source Large movement continuation > reloads inherited v3 displacement candidates, licenses one overflow and attacks only targets left in the Area 3980ms
+ ✓ src/data/darkest-dungeon/community-reference/community-physical-monster-placement-production.test.ts (2 tests) 14ms
+ ✓ src/audit/ruins-final-runtime-blockers.test.ts (13 tests) 237024ms
+   ✓ C1C32R2C-R final runtime blockers > Level 1 scans 4096 seeds without any skipped layouts 79692ms
+   ✓ C1C32R2C-R final runtime blockers > Level 2 scans 4096 seeds without any skipped layouts 79668ms
+   ✓ C1C32R2C-R final runtime blockers > Level 3 scans 4096 seeds without any skipped layouts 74101ms
+   ✓ C1C32R2C-R final runtime blockers > v6 real self Pull survives save before/after resolution and retains its permutation 2719ms
+   ✓ C1C32R2C-R final runtime blockers > Room 6 runtimeEffectReady=false owns actual loot and reload never redraws 366ms
+ ✓ src/audit/core-campaign/consistency.test.ts (11 tests) 1316ms
+   ✓ Consistency Tests C-01..C-10 (Phase 11A.2.2 §36) > setup: 跑一次完整 audit 1279ms
+ ✓ src/game-engine/c1c3-multi-primitive-quest-rule.test.ts (7 tests) 13ms
+ ✓ src/audit/c1c21-standard-quest-live-rebaseline.test.ts (17 tests) 265ms
+ ✓ src/audit/c1c5r-trinket-semantic-scope.test.ts (4 tests) 9ms
+ ✓ src/data/darkest-dungeon/community-reference/community-runtime-excavation.test.ts (6 tests) 28ms
+ ✓ src/audit/c1c10-campers-helmet-semantics.test.ts (8 tests) 7ms
+ ✓ src/audit/core-campaign/audit-truthfulness.test.ts (7 tests) 437ms
+ ✓ src/data/darkest-dungeon/community-reference/community-runtime-monster.test.ts (7 tests) 19ms
+ ✓ src/audit/c1c15-level3-trinket-foundation.test.ts (3 tests) 13ms
+ ✓ src/audit/core-campaign/performance-baseline.test.ts (8 tests) 7ms
+ ✓ src/audit/c1c29-necromancer-runtime-foundation.test.ts (6 tests) 650ms
+   ✓ C1C29 real runtime binding and honest evidence > verifies checked-in traces against the production executor and frozen upstream inputs 618ms
+ ✓ src/audit/core-campaign/source-audit-path-parity.test.ts (3 tests) 1838ms
+   ✓ Phase 11A.3 source audit path parity > uses an external rulebook override when the audit repo has no rulebook 998ms
+   ✓ Phase 11A.3 source audit path parity > reports source-audit errors as NOT-VERIFIED when no override exists 834ms
+ ✓ src/audit/core-campaign/formal-matrix-release-contract.test.ts (7 tests) 6ms
+ ✓ src/audit/c1c17-implementation-gate.test.ts (14 tests) 9ms
+ ✓ src/audit/c1c22-boss-encounter-live-inventory.test.ts (12 tests) 420ms
+ ✓ src/audit/c1c17-survival-guide-semantics.test.ts (15 tests) 8ms
+ ✓ src/audit/c1c32r2c-movement-progress.test.ts (1 test) 1983ms
+   ✓ C1C32R2C incomplete Monster movement > uses available Speed to approach exact Range when that Range cannot yet be reached 1982ms
+ ✓ src/audit/core-campaign/source-input-hash.test.ts (2 tests) 35ms
+ ✓ src/audit/core-campaign/clean-evidence-diagnostics.test.ts (1 test) 27ms
+ ✓ src/testing/e2e/e2e-harness-audit.test.ts (2 tests) 116ms
+ ✓ src/data/darkest-dungeon/community-reference/community-final-skill-source-inventory.test.ts (2 tests) 7ms
+ ✓ src/integration/core-campaign/integration.test.ts (5 tests) 444ms
+ ✓ src/audit/c1c32r2c-contract-blockers.test.ts (2 tests) 5758ms
+   ✓ C1C32R2C omitted executable contracts fail closed > rejects the omitted initial Large layout atomically under frozen v5 2915ms
+   ✓ C1C32R2C omitted executable contracts fail closed > rejects a source self-pull which would overlap an existing two-slot Large card 2841ms
+ ✓ src/data/darkest-dungeon/community-reference/community-runtime-traceability.test.ts (182 tests) 49ms
+ ✓ src/audit/core-campaign/phase11a3-completion-gate.test.ts (9 tests) 5ms
+ ✓ src/audit/core-campaign/phase11a3-status.test.ts (8 tests) 4ms
+ ✓ src/audit/c1c34-successor-rebaseline.test.ts (3 tests) 3449ms
+   ✓ C1C34 successor source and freeze integrity > checks current runtime/evidence against the immutable C1C33 manifest 2995ms
+ ✓ src/audit/core-campaign/phase11a3-terminal-state.test.ts (3 tests) 3ms
+ ✓ src/audit/core-campaign/replay-continuation.test.ts (2 tests) 1077ms
+   ✓ Replay Continuation > M03 serialized checkpoint → restore → M09 equals continuous 626ms
+   ✓ Replay Continuation > M06 serialized checkpoint → restore → M09 equals continuous 449ms
+ ✓ src/data/darkest-dungeon/community-reference/community-runtime-production.test.ts (6 tests) 26ms
+ ✓ src/audit/core-campaign/product-save-round-trip.test.ts (1 test) 64ms
+ ✓ src/data/darkest-dungeon/community-reference/community-runtime-validator.test.ts (3 tests) 6ms
+ ✓ src/audit/core-campaign/official-matrix-runner.contract.test.ts (2 tests) 3ms
+ ✓ src/data/darkest-dungeon/community-reference/community-runtime-setup.test.ts (6 tests) 30ms
+ ✓ src/audit/core-campaign/verification-terminal-contract.test.ts (6 tests) 6ms
+ ✓ src/audit/core-campaign/verification-evidence.test.ts (2 tests) 3ms
+ ✓ src/audit/core-campaign/production-official-matrix-execution.contract.test.ts (1 test) 3ms
+ ✓ src/audit/core-campaign/production-official-matrix-runner.contract.test.ts (1 test) 2ms
+ ✓ src/audit/core-campaign/checkpointable-campaign-runner.test.ts (1 test) 93ms
+ ✓ src/audit/core-campaign/replay-determinism.test.ts (1 test) 411ms
+   ✓ Independent replay determinism: same seed has identical events, RNG and hashes 410ms
+ ✓ src/data/darkest-dungeon/community-reference/community-final-encounter-adversarial.test.ts (41 tests) 510037ms
+   ✓ Community Final encounter mutation gate > Ancestor Reflection stance rerolls after reload 15615ms
+   ✓ Community Final encounter mutation gate > Ancestor Guard allows attacking Ancestor while Reflection alive 17750ms
+   ✓ Community Final encounter mutation gate > Imperfect death applies 10 Wounds twice 29818ms
+   ✓ Community Final encounter mutation gate > vacant stance uses fixed Perfect instead of d10 source table 16813ms
+   ✓ Community Final encounter mutation gate > Time Heals All heals wrong target 22399ms
+   ✓ Community Final encounter mutation gate > Ancestor 2 teleport roll 10 moves anyway 12072ms
+   ✓ Community Final encounter mutation gate > Absolute Nothingness becomes targetable 19677ms
+   ✓ Community Final encounter mutation gate > Absolute Nothingness does not consume Area capacity 22710ms
+   ✓ Community Final encounter mutation gate > Gestating Sispersion uses logical-uniform random instead of physical deck 13111ms
+   ✓ Community Final encounter mutation gate > Sispersion summons Monster but does not add Initiative 13493ms
+   ✓ Community Final encounter mutation gate > non-lethal Ichor misses Hero Blight 14303ms
+   ✓ Community Final encounter mutation gate > non-lethal Ichor misses Heart heal 21868ms
+   ✓ Community Final encounter mutation gate > lethal Ichor ordering is guessed 13934ms
+   ✓ Community Final encounter mutation gate > Heart consumes a different skill than forecast 14909ms
+   ✓ Community Final encounter mutation gate > Heart generates next forecast before action completes 13302ms
+   ✓ Community Final encounter mutation gate > Form transition heals Heroes 14021ms
+   ✓ Community Final encounter mutation gate > Come Unto Your Maker silently executes guessed behavior 13046ms
+   ✓ Community Final encounter mutation gate > WP-14: damage disappears on transition (hp not inherited from previous Form) 11618ms
+   ✓ Community Final encounter mutation gate > WP-14: stress disappears on transition 10333ms
+   ✓ Community Final encounter mutation gate > WP-14: bleed disappears on transition 12024ms
+   ✓ Community Final encounter mutation gate > WP-14: condition durations (mark/stun/bleed) disappear on transition 11296ms
+   ✓ Community Final encounter mutation gate > WP-14: hero HP rebuilt from pre-form Campaign value (inheritance disabled) 9714ms
+   ✓ Community Final encounter mutation gate > WP-14: battleId changes on transition 10591ms
+   ✓ Community Final encounter mutation gate > WP-14: Room changes on transition 10860ms
+   ✓ Community Final encounter mutation gate > WP-14: Round not reset on transition 10653ms
+   ✓ Community Final encounter mutation gate > WP-14: initiative not rebuilt on transition 10749ms
+   ✓ Community Final encounter mutation gate > WP-15: wrong damage (base damage +1) 16652ms
+   ✓ Community Final encounter mutation gate > WP-15: wrong crit (crit never deals crit damage) 12623ms
+   ✓ Community Final encounter mutation gate > WP-15: wrong target (closest policy reversed to furthest) 9915ms
+   ✓ Community Final encounter mutation gate > WP-15: range ignored (all living heroes legal regardless of range) 7446ms
+   ✓ Community Final encounter mutation gate > WP-15: wrong multi-target count (crowded area only hits 1) 8336ms
+   ✓ Community Final encounter mutation gate > WP-15: missing Bleed 7622ms
+   ✓ Community Final encounter mutation gate > WP-15: missing Blight 7533ms
+   ✓ Community Final encounter mutation gate > WP-15: missing Stun 7498ms
+   ✓ Community Final encounter mutation gate > WP-15: missing Mark 8156ms
+   ✓ Community Final encounter mutation gate > WP-15: wrong duration (Mark 2t applied as 1t) 7463ms
+   ✓ Community Final encounter mutation gate > WP-15: missing Stress (shared pipeline skipped) 7550ms
+   ✓ Community Final encounter mutation gate > WP-15: missing Light -1 7519ms
+   ✓ Community Final encounter mutation gate > WP-15: missing marked +3 damage bonus 7592ms
+   ✓ Community Final encounter mutation gate > WP-15: missing Push 2 7449ms
+
+ Test Files  174 passed (174)
+      Tests  2683 passed (2683)
+   Start at  09:02:57
+   Duration  538.53s (transform 21.69s, setup 15.01s, collect 369.56s, tests 1615.17s, environment 227.17s, prepare 28.02s)
+
+(node:20768) [DEP0190] DeprecationWarning: Passing args to a child process with shell option true can lead to security vulnerabilities, as the arguments are not escaped, only concatenated.
+(Use `node --trace-deprecation ...` to show where the warning was created)

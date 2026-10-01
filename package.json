@@ -191,7 +191,10 @@
     "validate:complete-edition-c1c33": "node scripts/audit/run-c1c33-validation.mjs",
     "historical-baseline-validation": "vite-node scripts/audit/verify-historical-baselines.ts",
     "audit:complete-edition-c1c34": "vite-node scripts/audit/c1c34-rebaseline.ts --write",
-    "verify:complete-edition-c1c34": "vite-node scripts/audit/c1c34-rebaseline.ts --verify"
+    "verify:complete-edition-c1c34": "vite-node scripts/audit/c1c34-rebaseline.ts --verify",
+    "audit:complete-edition-c1c35": "vite-node scripts/audit/c1c35-prophet-contract.ts --write",
+    "verify:complete-edition-c1c35": "vite-node scripts/audit/c1c35-prophet-contract.ts --verify",
+    "validate:complete-edition-c1c35": "node scripts/audit/run-c1c35-validation.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.408.0",

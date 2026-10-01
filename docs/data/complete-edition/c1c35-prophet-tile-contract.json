@@ -1,0 +1,629 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C35",
+  "baseline": "051c2c400d391543f5c436cbaa141a54bdf19ac1",
+  "predecessor": "C1C34-SUCCESSOR-BINDING-v1",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "ruleSetVersion": "C1C35-PROPHET-DIGITAL-DEFAULT-v1",
+  "foundationExecutionAllowed": false,
+  "gameplayChanged": false,
+  "productionPromotion": false,
+  "status": "SOURCE_UNRESOLVED",
+  "canonical": false,
+  "tileId": "ruins-tile-11",
+  "roomId": "ruins-room-11",
+  "spatialRelationToRoom11": {
+    "status": "OFFICIAL_SOURCE",
+    "value": "Room 11 depicts the same printed Tile 11",
+    "sourceReferences": [
+      {
+        "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+        "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+        "page": 6,
+        "authority": "OFFICIAL_PRINTED_COMPONENT",
+        "location": "Printed Ruins Tile 11; north at printed 11; excludes crop marks",
+        "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_COREBOX_TILES_FRONT-p6.png",
+        "extractSha256": "9af7fc6a642cfc3b04a57cbb210e800a08a74f07d910d9e91d53d51e6011f044"
+      },
+      {
+        "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+        "sha256": "1434c53d5dac4e79f3fe091c9dc97c0442864644cb043b12c3fc596ae7c30b72",
+        "page": 11,
+        "authority": "OFFICIAL_PRINTED_COMPONENT",
+        "location": "Printed Room 11 miniature Tile illustration",
+        "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_CARDS_63x88_rooms_FRONT-p11.png",
+        "extractSha256": "6561c4d61e70627fd56c56482a752046279484b60b5d9d1196165b82d4e3bcbf"
+      }
+    ]
+  },
+  "tileIdentity": {
+    "status": "OFFICIAL_SOURCE",
+    "value": 11,
+    "sourceReferences": [
+      {
+        "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+        "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+        "page": 6,
+        "authority": "OFFICIAL_PRINTED_COMPONENT",
+        "location": "Printed Ruins Tile 11; north at printed 11; excludes crop marks",
+        "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_COREBOX_TILES_FRONT-p6.png",
+        "extractSha256": "9af7fc6a642cfc3b04a57cbb210e800a08a74f07d910d9e91d53d51e6011f044"
+      }
+    ]
+  },
+  "areas": [
+    {
+      "id": "ruins-tile-11:NW",
+      "printedRolls": [
+        1,
+        2
+      ],
+      "identity": {
+        "status": "OFFICIAL_SOURCE",
+        "sourceReferences": [
+          {
+            "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+            "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+            "page": 6,
+            "authority": "OFFICIAL_PRINTED_COMPONENT",
+            "location": "Printed Ruins Tile 11; north at printed 11; excludes crop marks; region bearing 1/2",
+            "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_COREBOX_TILES_FRONT-p6.png",
+            "extractSha256": "9af7fc6a642cfc3b04a57cbb210e800a08a74f07d910d9e91d53d51e6011f044"
+          }
+        ]
+      },
+      "capacity": {
+        "status": "OFFICIAL_SOURCE",
+        "value": 4,
+        "sourceReferences": [
+          {
+            "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+            "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+            "page": 6,
+            "authority": "OFFICIAL_PRINTED_COMPONENT",
+            "location": "Printed Ruins Tile 11; north at printed 11; excludes crop marks; occupancy dots in NW",
+            "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_COREBOX_TILES_FRONT-p6.png",
+            "extractSha256": "9af7fc6a642cfc3b04a57cbb210e800a08a74f07d910d9e91d53d51e6011f044"
+          },
+          {
+            "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+            "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+            "page": 18,
+            "authority": "OFFICIAL_SOURCE",
+            "location": "Move / Occupancy number/icon",
+            "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_RULES-p18.png",
+            "extractSha256": "7d9606bbe5bc7b63f6cbb2be9c80c2b59a78d9ee86590af997741b19f4b76758"
+          }
+        ]
+      },
+      "adjacent": [
+        "ruins-tile-11:N",
+        "ruins-tile-11:W"
+      ],
+      "adjacencySourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+          "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+          "page": 6,
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "location": "Printed Ruins Tile 11; north at printed 11; excludes crop marks; shared printed boundaries of NW",
+          "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_COREBOX_TILES_FRONT-p6.png",
+          "extractSha256": "9af7fc6a642cfc3b04a57cbb210e800a08a74f07d910d9e91d53d51e6011f044"
+        }
+      ]
+    },
+    {
+      "id": "ruins-tile-11:N",
+      "printedRolls": [
+        3
+      ],
+      "identity": {
+        "status": "OFFICIAL_SOURCE",
+        "sourceReferences": [
+          {
+            "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+            "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+            "page": 6,
+            "authority": "OFFICIAL_PRINTED_COMPONENT",
+            "location": "Printed Ruins Tile 11; north at printed 11; excludes crop marks; region bearing 3",
+            "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_COREBOX_TILES_FRONT-p6.png",
+            "extractSha256": "9af7fc6a642cfc3b04a57cbb210e800a08a74f07d910d9e91d53d51e6011f044"
+          }
+        ]
+      },
+      "capacity": {
+        "status": "OFFICIAL_SOURCE",
+        "value": 3,
+        "sourceReferences": [
+          {
+            "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+            "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+            "page": 6,
+            "authority": "OFFICIAL_PRINTED_COMPONENT",
+            "location": "Printed Ruins Tile 11; north at printed 11; excludes crop marks; occupancy dots in N",
+            "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_COREBOX_TILES_FRONT-p6.png",
+            "extractSha256": "9af7fc6a642cfc3b04a57cbb210e800a08a74f07d910d9e91d53d51e6011f044"
+          },
+          {
+            "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+            "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+            "page": 18,
+            "authority": "OFFICIAL_SOURCE",
+            "location": "Move / Occupancy number/icon",
+            "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_RULES-p18.png",
+            "extractSha256": "7d9606bbe5bc7b63f6cbb2be9c80c2b59a78d9ee86590af997741b19f4b76758"
+          }
+        ]
+      },
+      "adjacent": [
+        "ruins-tile-11:C",
+        "ruins-tile-11:NE",
+        "ruins-tile-11:NW"
+      ],
+      "adjacencySourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+          "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+          "page": 6,
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "location": "Printed Ruins Tile 11; north at printed 11; excludes crop marks; shared printed boundaries of N",
+          "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_COREBOX_TILES_FRONT-p6.png",
+          "extractSha256": "9af7fc6a642cfc3b04a57cbb210e800a08a74f07d910d9e91d53d51e6011f044"
+        }
+      ]
+    },
+    {
+      "id": "ruins-tile-11:NE",
+      "printedRolls": [
+        4
+      ],
+      "identity": {
+        "status": "OFFICIAL_SOURCE",
+        "sourceReferences": [
+          {
+            "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+            "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+            "page": 6,
+            "authority": "OFFICIAL_PRINTED_COMPONENT",
+            "location": "Printed Ruins Tile 11; north at printed 11; excludes crop marks; region bearing 4",
+            "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_COREBOX_TILES_FRONT-p6.png",
+            "extractSha256": "9af7fc6a642cfc3b04a57cbb210e800a08a74f07d910d9e91d53d51e6011f044"
+          }
+        ]
+      },
+      "capacity": {
+        "status": "OFFICIAL_SOURCE",
+        "value": 3,
+        "sourceReferences": [
+          {
+            "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+            "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+            "page": 6,
+            "authority": "OFFICIAL_PRINTED_COMPONENT",
+            "location": "Printed Ruins Tile 11; north at printed 11; excludes crop marks; occupancy dots in NE",
+            "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_COREBOX_TILES_FRONT-p6.png",
+            "extractSha256": "9af7fc6a642cfc3b04a57cbb210e800a08a74f07d910d9e91d53d51e6011f044"
+          },
+          {
+            "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+            "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+            "page": 18,
+            "authority": "OFFICIAL_SOURCE",
+            "location": "Move / Occupancy number/icon",
+            "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_RULES-p18.png",
+            "extractSha256": "7d9606bbe5bc7b63f6cbb2be9c80c2b59a78d9ee86590af997741b19f4b76758"
+          }
+        ]
+      },
+      "adjacent": [
+        "ruins-tile-11:E",
+        "ruins-tile-11:N"
+      ],
+      "adjacencySourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+          "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+          "page": 6,
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "location": "Printed Ruins Tile 11; north at printed 11; excludes crop marks; shared printed boundaries of NE",
+          "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_COREBOX_TILES_FRONT-p6.png",
+          "extractSha256": "9af7fc6a642cfc3b04a57cbb210e800a08a74f07d910d9e91d53d51e6011f044"
+        }
+      ]
+    },
+    {
+      "id": "ruins-tile-11:W",
+      "printedRolls": [
+        5
+      ],
+      "identity": {
+        "status": "OFFICIAL_SOURCE",
+        "sourceReferences": [
+          {
+            "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+            "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+            "page": 6,
+            "authority": "OFFICIAL_PRINTED_COMPONENT",
+            "location": "Printed Ruins Tile 11; north at printed 11; excludes crop marks; region bearing 5",
+            "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_COREBOX_TILES_FRONT-p6.png",
+            "extractSha256": "9af7fc6a642cfc3b04a57cbb210e800a08a74f07d910d9e91d53d51e6011f044"
+          }
+        ]
+      },
+      "capacity": {
+        "status": "OFFICIAL_SOURCE",
+        "value": 3,
+        "sourceReferences": [
+          {
+            "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+            "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+            "page": 6,
+            "authority": "OFFICIAL_PRINTED_COMPONENT",
+            "location": "Printed Ruins Tile 11; north at printed 11; excludes crop marks; occupancy dots in W",
+            "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_COREBOX_TILES_FRONT-p6.png",
+            "extractSha256": "9af7fc6a642cfc3b04a57cbb210e800a08a74f07d910d9e91d53d51e6011f044"
+          },
+          {
+            "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+            "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+            "page": 18,
+            "authority": "OFFICIAL_SOURCE",
+            "location": "Move / Occupancy number/icon",
+            "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_RULES-p18.png",
+            "extractSha256": "7d9606bbe5bc7b63f6cbb2be9c80c2b59a78d9ee86590af997741b19f4b76758"
+          }
+        ]
+      },
+      "adjacent": [
+        "ruins-tile-11:C",
+        "ruins-tile-11:NW",
+        "ruins-tile-11:S",
+        "ruins-tile-11:SW"
+      ],
+      "adjacencySourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+          "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+          "page": 6,
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "location": "Printed Ruins Tile 11; north at printed 11; excludes crop marks; shared printed boundaries of W",
+          "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_COREBOX_TILES_FRONT-p6.png",
+          "extractSha256": "9af7fc6a642cfc3b04a57cbb210e800a08a74f07d910d9e91d53d51e6011f044"
+        }
+      ]
+    },
+    {
+      "id": "ruins-tile-11:C",
+      "printedRolls": [
+        6
+      ],
+      "identity": {
+        "status": "OFFICIAL_SOURCE",
+        "sourceReferences": [
+          {
+            "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+            "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+            "page": 6,
+            "authority": "OFFICIAL_PRINTED_COMPONENT",
+            "location": "Printed Ruins Tile 11; north at printed 11; excludes crop marks; region bearing 6",
+            "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_COREBOX_TILES_FRONT-p6.png",
+            "extractSha256": "9af7fc6a642cfc3b04a57cbb210e800a08a74f07d910d9e91d53d51e6011f044"
+          }
+        ]
+      },
+      "capacity": {
+        "status": "SOURCE_UNRESOLVED",
+        "value": null,
+        "sourceReferences": [
+          {
+            "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+            "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+            "page": 6,
+            "authority": "OFFICIAL_PRINTED_COMPONENT",
+            "location": "Printed Ruins Tile 11; north at printed 11; excludes crop marks; occupancy dots in C",
+            "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_COREBOX_TILES_FRONT-p6.png",
+            "extractSha256": "9af7fc6a642cfc3b04a57cbb210e800a08a74f07d910d9e91d53d51e6011f044"
+          },
+          {
+            "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+            "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+            "page": 18,
+            "authority": "OFFICIAL_SOURCE",
+            "location": "Move / Occupancy number/icon",
+            "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_RULES-p18.png",
+            "extractSha256": "7d9606bbe5bc7b63f6cbb2be9c80c2b59a78d9ee86590af997741b19f4b76758"
+          }
+        ],
+        "reason": "Area C (printed d10 6) has no visible occupancy dots. The locked rulebook p18 identifies occupancy icons but supplies no numeric default for an unmarked Area. Absence is not authority for zero, infinity, four, or a prototype value."
+      },
+      "adjacent": [
+        "ruins-tile-11:E",
+        "ruins-tile-11:N",
+        "ruins-tile-11:S",
+        "ruins-tile-11:W"
+      ],
+      "adjacencySourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+          "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+          "page": 6,
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "location": "Printed Ruins Tile 11; north at printed 11; excludes crop marks; shared printed boundaries of C",
+          "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_COREBOX_TILES_FRONT-p6.png",
+          "extractSha256": "9af7fc6a642cfc3b04a57cbb210e800a08a74f07d910d9e91d53d51e6011f044"
+        }
+      ]
+    },
+    {
+      "id": "ruins-tile-11:E",
+      "printedRolls": [
+        7,
+        8
+      ],
+      "identity": {
+        "status": "OFFICIAL_SOURCE",
+        "sourceReferences": [
+          {
+            "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+            "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+            "page": 6,
+            "authority": "OFFICIAL_PRINTED_COMPONENT",
+            "location": "Printed Ruins Tile 11; north at printed 11; excludes crop marks; region bearing 7/8",
+            "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_COREBOX_TILES_FRONT-p6.png",
+            "extractSha256": "9af7fc6a642cfc3b04a57cbb210e800a08a74f07d910d9e91d53d51e6011f044"
+          }
+        ]
+      },
+      "capacity": {
+        "status": "OFFICIAL_SOURCE",
+        "value": 4,
+        "sourceReferences": [
+          {
+            "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+            "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+            "page": 6,
+            "authority": "OFFICIAL_PRINTED_COMPONENT",
+            "location": "Printed Ruins Tile 11; north at printed 11; excludes crop marks; occupancy dots in E",
+            "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_COREBOX_TILES_FRONT-p6.png",
+            "extractSha256": "9af7fc6a642cfc3b04a57cbb210e800a08a74f07d910d9e91d53d51e6011f044"
+          },
+          {
+            "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+            "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+            "page": 18,
+            "authority": "OFFICIAL_SOURCE",
+            "location": "Move / Occupancy number/icon",
+            "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_RULES-p18.png",
+            "extractSha256": "7d9606bbe5bc7b63f6cbb2be9c80c2b59a78d9ee86590af997741b19f4b76758"
+          }
+        ]
+      },
+      "adjacent": [
+        "ruins-tile-11:C",
+        "ruins-tile-11:NE",
+        "ruins-tile-11:S"
+      ],
+      "adjacencySourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+          "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+          "page": 6,
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "location": "Printed Ruins Tile 11; north at printed 11; excludes crop marks; shared printed boundaries of E",
+          "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_COREBOX_TILES_FRONT-p6.png",
+          "extractSha256": "9af7fc6a642cfc3b04a57cbb210e800a08a74f07d910d9e91d53d51e6011f044"
+        }
+      ]
+    },
+    {
+      "id": "ruins-tile-11:SW",
+      "printedRolls": [
+        9
+      ],
+      "identity": {
+        "status": "OFFICIAL_SOURCE",
+        "sourceReferences": [
+          {
+            "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+            "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+            "page": 6,
+            "authority": "OFFICIAL_PRINTED_COMPONENT",
+            "location": "Printed Ruins Tile 11; north at printed 11; excludes crop marks; region bearing 9",
+            "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_COREBOX_TILES_FRONT-p6.png",
+            "extractSha256": "9af7fc6a642cfc3b04a57cbb210e800a08a74f07d910d9e91d53d51e6011f044"
+          }
+        ]
+      },
+      "capacity": {
+        "status": "OFFICIAL_SOURCE",
+        "value": 3,
+        "sourceReferences": [
+          {
+            "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+            "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+            "page": 6,
+            "authority": "OFFICIAL_PRINTED_COMPONENT",
+            "location": "Printed Ruins Tile 11; north at printed 11; excludes crop marks; occupancy dots in SW",
+            "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_COREBOX_TILES_FRONT-p6.png",
+            "extractSha256": "9af7fc6a642cfc3b04a57cbb210e800a08a74f07d910d9e91d53d51e6011f044"
+          },
+          {
+            "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+            "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+            "page": 18,
+            "authority": "OFFICIAL_SOURCE",
+            "location": "Move / Occupancy number/icon",
+            "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_RULES-p18.png",
+            "extractSha256": "7d9606bbe5bc7b63f6cbb2be9c80c2b59a78d9ee86590af997741b19f4b76758"
+          }
+        ]
+      },
+      "adjacent": [
+        "ruins-tile-11:S",
+        "ruins-tile-11:W"
+      ],
+      "adjacencySourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+          "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+          "page": 6,
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "location": "Printed Ruins Tile 11; north at printed 11; excludes crop marks; shared printed boundaries of SW",
+          "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_COREBOX_TILES_FRONT-p6.png",
+          "extractSha256": "9af7fc6a642cfc3b04a57cbb210e800a08a74f07d910d9e91d53d51e6011f044"
+        }
+      ]
+    },
+    {
+      "id": "ruins-tile-11:S",
+      "printedRolls": [
+        10
+      ],
+      "identity": {
+        "status": "OFFICIAL_SOURCE",
+        "sourceReferences": [
+          {
+            "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+            "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+            "page": 6,
+            "authority": "OFFICIAL_PRINTED_COMPONENT",
+            "location": "Printed Ruins Tile 11; north at printed 11; excludes crop marks; region bearing 10",
+            "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_COREBOX_TILES_FRONT-p6.png",
+            "extractSha256": "9af7fc6a642cfc3b04a57cbb210e800a08a74f07d910d9e91d53d51e6011f044"
+          }
+        ]
+      },
+      "capacity": {
+        "status": "OFFICIAL_SOURCE",
+        "value": 3,
+        "sourceReferences": [
+          {
+            "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+            "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+            "page": 6,
+            "authority": "OFFICIAL_PRINTED_COMPONENT",
+            "location": "Printed Ruins Tile 11; north at printed 11; excludes crop marks; occupancy dots in S",
+            "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_COREBOX_TILES_FRONT-p6.png",
+            "extractSha256": "9af7fc6a642cfc3b04a57cbb210e800a08a74f07d910d9e91d53d51e6011f044"
+          },
+          {
+            "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+            "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+            "page": 18,
+            "authority": "OFFICIAL_SOURCE",
+            "location": "Move / Occupancy number/icon",
+            "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_RULES-p18.png",
+            "extractSha256": "7d9606bbe5bc7b63f6cbb2be9c80c2b59a78d9ee86590af997741b19f4b76758"
+          }
+        ]
+      },
+      "adjacent": [
+        "ruins-tile-11:C",
+        "ruins-tile-11:E",
+        "ruins-tile-11:SW",
+        "ruins-tile-11:W"
+      ],
+      "adjacencySourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+          "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+          "page": 6,
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "location": "Printed Ruins Tile 11; north at printed 11; excludes crop marks; shared printed boundaries of S",
+          "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_COREBOX_TILES_FRONT-p6.png",
+          "extractSha256": "9af7fc6a642cfc3b04a57cbb210e800a08a74f07d910d9e91d53d51e6011f044"
+        }
+      ]
+    }
+  ],
+  "stancePositions": {
+    "status": "OFFICIAL_SOURCE",
+    "heroes": {
+      "aggressive": "ruins-tile-11:NE",
+      "defensive": "ruins-tile-11:S",
+      "ranged": "ruins-tile-11:S",
+      "support": "ruins-tile-11:W"
+    },
+    "monsters": {
+      "aggressive": "ruins-tile-11:C",
+      "defensive": null,
+      "ranged": null,
+      "support": null
+    },
+    "absentMonsterStances": "Not printed; no invented fallback",
+    "sourceReferences": [
+      {
+        "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+        "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+        "page": 6,
+        "authority": "OFFICIAL_PRINTED_COMPONENT",
+        "location": "Printed Ruins Tile 11; north at printed 11; excludes crop marks; yellow Hero / red Monster Stance icons",
+        "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_COREBOX_TILES_FRONT-p6.png",
+        "extractSha256": "9af7fc6a642cfc3b04a57cbb210e800a08a74f07d910d9e91d53d51e6011f044"
+      }
+    ]
+  },
+  "prophetPlacement": {
+    "status": "OFFICIAL_SOURCE",
+    "areaId": "ruins-tile-11:C",
+    "sourceReferences": [
+      {
+        "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+        "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+        "page": 6,
+        "authority": "OFFICIAL_PRINTED_COMPONENT",
+        "location": "Printed Ruins Tile 11; north at printed 11; excludes crop marks; red Aggressive icon",
+        "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_COREBOX_TILES_FRONT-p6.png",
+        "extractSha256": "9af7fc6a642cfc3b04a57cbb210e800a08a74f07d910d9e91d53d51e6011f044"
+      },
+      {
+        "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+        "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+        "page": 38,
+        "authority": "OFFICIAL_SOURCE",
+        "location": "Prophet setup step 2",
+        "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_RULES-p38.png",
+        "extractSha256": "a562b49eff218beef77c707808947b0471af426f70e02dbecad0fd8c7fb9cba6"
+      }
+    ]
+  },
+  "pewEligibleAreas": {
+    "status": "OFFICIAL_SOURCE",
+    "areaIds": [
+      "ruins-tile-11:NW",
+      "ruins-tile-11:N",
+      "ruins-tile-11:NE",
+      "ruins-tile-11:W",
+      "ruins-tile-11:C",
+      "ruins-tile-11:E",
+      "ruins-tile-11:SW",
+      "ruins-tile-11:S"
+    ],
+    "sourceReferences": [
+      {
+        "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+        "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+        "page": 6,
+        "authority": "OFFICIAL_PRINTED_COMPONENT",
+        "location": "Printed Ruins Tile 11; north at printed 11; excludes crop marks",
+        "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_COREBOX_TILES_FRONT-p6.png",
+        "extractSha256": "9af7fc6a642cfc3b04a57cbb210e800a08a74f07d910d9e91d53d51e6011f044"
+      },
+      {
+        "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+        "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+        "page": 38,
+        "authority": "OFFICIAL_SOURCE",
+        "location": "Prophet first turn",
+        "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_RULES-p38.png",
+        "extractSha256": "a562b49eff218beef77c707808947b0471af426f70e02dbecad0fd8c7fb9cba6"
+      }
+    ]
+  },
+  "unresolvedFields": [
+    "areas.ruins-tile-11:C.capacity"
+  ],
+  "reason": "Area C (printed d10 6) has no visible occupancy dots. The locked rulebook p18 identifies occupancy icons but supplies no numeric default for an unmarked Area. Absence is not authority for zero, infinity, four, or a prototype value.",
+  "nonCanonicalDigitalBoardRepresentation": null,
+  "executable": false
+}

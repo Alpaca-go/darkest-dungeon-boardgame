@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C35",
+  "baseline": "051c2c400d391543f5c436cbaa141a54bdf19ac1",
+  "predecessor": "C1C34-SUCCESSOR-BINDING-v1",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "ruleSetVersion": "C1C35-PROPHET-DIGITAL-DEFAULT-v1",
+  "foundationExecutionAllowed": false,
+  "gameplayChanged": false,
+  "productionPromotion": false,
+  "status": "OFFICIAL_SOURCE",
+  "canonical": true,
+  "executable": false,
+  "tileId": "ruins-tile-11",
+  "mapVersion": "C1C35-PROPHET-PRINTED-D10-v1",
+  "sourceReferences": [
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+      "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+      "page": 6,
+      "authority": "OFFICIAL_PRINTED_COMPONENT",
+      "location": "Printed Ruins Tile 11; north at printed 11; excludes crop marks",
+      "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_COREBOX_TILES_FRONT-p6.png",
+      "extractSha256": "9af7fc6a642cfc3b04a57cbb210e800a08a74f07d910d9e91d53d51e6011f044"
+    },
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+      "sha256": "1434c53d5dac4e79f3fe091c9dc97c0442864644cb043b12c3fc596ae7c30b72",
+      "page": 11,
+      "authority": "OFFICIAL_PRINTED_COMPONENT",
+      "location": "Printed Room 11 miniature Tile illustration",
+      "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_CARDS_63x88_rooms_FRONT-p11.png",
+      "extractSha256": "6561c4d61e70627fd56c56482a752046279484b60b5d9d1196165b82d4e3bcbf"
+    }
+  ],
+  "entries": [
+    {
+      "roll": 1,
+      "areaId": "ruins-tile-11:NW"
+    },
+    {
+      "roll": 2,
+      "areaId": "ruins-tile-11:NW"
+    },
+    {
+      "roll": 3,
+      "areaId": "ruins-tile-11:N"
+    },
+    {
+      "roll": 4,
+      "areaId": "ruins-tile-11:NE"
+    },
+    {
+      "roll": 5,
+      "areaId": "ruins-tile-11:W"
+    },
+    {
+      "roll": 6,
+      "areaId": "ruins-tile-11:C"
+    },
+    {
+      "roll": 7,
+      "areaId": "ruins-tile-11:E"
+    },
+    {
+      "roll": 8,
+      "areaId": "ruins-tile-11:E"
+    },
+    {
+      "roll": 9,
+      "areaId": "ruins-tile-11:SW"
+    },
+    {
+      "roll": 10,
+      "areaId": "ruins-tile-11:S"
+    }
+  ],
+  "mapping": {
+    "1": "ruins-tile-11:NW",
+    "2": "ruins-tile-11:NW",
+    "3": "ruins-tile-11:N",
+    "4": "ruins-tile-11:NE",
+    "5": "ruins-tile-11:W",
+    "6": "ruins-tile-11:C",
+    "7": "ruins-tile-11:E",
+    "8": "ruins-tile-11:E",
+    "9": "ruins-tile-11:SW",
+    "10": "ruins-tile-11:S"
+  },
+  "topologySource": {
+    "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_COREBOX_TILES_FRONT.pdf",
+    "sha256": "bf21ac03980e191bc503844710e6e44062caab458d14384cdad8bbd588159071",
+    "page": 6
+  },
+  "executionBlocker": "Tile capacity contract is incomplete; observed mapping alone does not enable placement."
+}

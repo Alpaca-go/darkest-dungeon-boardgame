@@ -1,0 +1,889 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C35",
+  "baseline": "051c2c400d391543f5c436cbaa141a54bdf19ac1",
+  "predecessor": "C1C34-SUCCESSOR-BINDING-v1",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "ruleSetVersion": "C1C35-PROPHET-DIGITAL-DEFAULT-v1",
+  "foundationExecutionAllowed": false,
+  "gameplayChanged": false,
+  "productionPromotion": false,
+  "status": "SOURCE_UNRESOLVED",
+  "bindings": [
+    {
+      "field": "Crowded",
+      "printedGlyph": "Crowded",
+      "normalizedSemantic": "Area with most Heroes",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "page": 24,
+          "authority": "OFFICIAL_SOURCE",
+          "location": "Crowded",
+          "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_RULES-p24.png",
+          "extractSha256": "dcb10866162747bc817c5c3b53f4a228f2ea67c826a7085fa8dd9764fd0de511"
+        }
+      ],
+      "printedReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46604-7b5887-front.png",
+          "sha256": "e7841e60e76498cc720ace5b6efd1da41b9b1f9e5551aa9fa12f3790e7652290",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46604-7b5887-back.png",
+          "sha256": "a7eca176010c24387e582696f7d7bd02e5cd3c7213a909d616549c0d18e374b7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46605-36fbfc-front.png",
+          "sha256": "bf1beb4b5e820bf2fd706029bd3320f006423f2e9561b3473cbbea7832e8262d",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46605-36fbfc-back.png",
+          "sha256": "1fd5bb522e391d1fc8048cfb8bc5f5c85f859a9dbd8a3c8aaea961a4190d1174",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46606-1784ce-front.png",
+          "sha256": "a22d7c1ba5607d5f76e6dbce4f8386774fdd3401ff6b4ba6b2decd6802aa5ad5",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46606-1784ce-back.png",
+          "sha256": "4164824f04674bda928d39342275bbcb5c7b559d7cb6042504242291feea7606",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6",
+          "transportIsAuthority": false
+        }
+      ],
+      "runtimePrimitive": "shared target selection",
+      "timing": "before movement/range",
+      "targetScope": "Hero Areas",
+      "saveRequirement": "persist tied candidates",
+      "executable": false
+    },
+    {
+      "field": "range",
+      "printedGlyph": "curved range arrow + 1",
+      "normalizedSemantic": {
+        "kind": "EXACT",
+        "distance": 1
+      },
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "page": 19,
+          "authority": "OFFICIAL_SOURCE",
+          "location": "range",
+          "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_RULES-p19.png",
+          "extractSha256": "7897ecd0962e7e4d83fbc7e19d2d1cfaead75a2b9b6c185e4a7dc5f877afe77d"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "page": 24,
+          "authority": "OFFICIAL_SOURCE",
+          "location": "range",
+          "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_RULES-p24.png",
+          "extractSha256": "dcb10866162747bc817c5c3b53f4a228f2ea67c826a7085fa8dd9764fd0de511"
+        }
+      ],
+      "printedReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46604-7b5887-front.png",
+          "sha256": "e7841e60e76498cc720ace5b6efd1da41b9b1f9e5551aa9fa12f3790e7652290",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46604-7b5887-back.png",
+          "sha256": "a7eca176010c24387e582696f7d7bd02e5cd3c7213a909d616549c0d18e374b7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46605-36fbfc-front.png",
+          "sha256": "bf1beb4b5e820bf2fd706029bd3320f006423f2e9561b3473cbbea7832e8262d",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46605-36fbfc-back.png",
+          "sha256": "1fd5bb522e391d1fc8048cfb8bc5f5c85f859a9dbd8a3c8aaea961a4190d1174",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46606-1784ce-front.png",
+          "sha256": "a22d7c1ba5607d5f76e6dbce4f8386774fdd3401ff6b4ba6b2decd6802aa5ad5",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46606-1784ce-back.png",
+          "sha256": "4164824f04674bda928d39342275bbcb5c7b559d7cb6042504242291feea7606",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6",
+          "transportIsAuthority": false
+        }
+      ],
+      "runtimePrimitive": "shared distance/movement",
+      "timing": "after target selection",
+      "targetScope": "selected Area",
+      "saveRequirement": "selected Area and movement decisions",
+      "executable": false
+    },
+    {
+      "field": "target-count",
+      "printedGlyph": "two / four yellow Hero icons",
+      "normalizedSemantic": {
+        "eyeOnYou": 2,
+        "fulminate": 4,
+        "order": "Aggressive to Support"
+      },
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "page": 19,
+          "authority": "OFFICIAL_SOURCE",
+          "location": "target-count",
+          "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_RULES-p19.png",
+          "extractSha256": "7897ecd0962e7e4d83fbc7e19d2d1cfaead75a2b9b6c185e4a7dc5f877afe77d"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "page": 24,
+          "authority": "OFFICIAL_SOURCE",
+          "location": "target-count",
+          "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_RULES-p24.png",
+          "extractSha256": "dcb10866162747bc817c5c3b53f4a228f2ea67c826a7085fa8dd9764fd0de511"
+        }
+      ],
+      "printedReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46604-7b5887-front.png",
+          "sha256": "e7841e60e76498cc720ace5b6efd1da41b9b1f9e5551aa9fa12f3790e7652290",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46604-7b5887-back.png",
+          "sha256": "a7eca176010c24387e582696f7d7bd02e5cd3c7213a909d616549c0d18e374b7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46605-36fbfc-front.png",
+          "sha256": "bf1beb4b5e820bf2fd706029bd3320f006423f2e9561b3473cbbea7832e8262d",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46605-36fbfc-back.png",
+          "sha256": "1fd5bb522e391d1fc8048cfb8bc5f5c85f859a9dbd8a3c8aaea961a4190d1174",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46606-1784ce-front.png",
+          "sha256": "a22d7c1ba5607d5f76e6dbce4f8386774fdd3401ff6b4ba6b2decd6802aa5ad5",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46606-1784ce-back.png",
+          "sha256": "4164824f04674bda928d39342275bbcb5c7b559d7cb6042504242291feea7606",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6",
+          "transportIsAuthority": false
+        }
+      ],
+      "runtimePrimitive": "shared Hero targets",
+      "timing": "before attack",
+      "targetScope": "Heroes in selected Area",
+      "saveRequirement": "ordered target identities",
+      "executable": false
+    },
+    {
+      "field": "Stress",
+      "printedGlyph": "black Stress +1",
+      "normalizedSemantic": {
+        "type": "stress",
+        "amount": 1
+      },
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "page": 20,
+          "authority": "OFFICIAL_SOURCE",
+          "location": "Stress",
+          "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_RULES-p20.png",
+          "extractSha256": "50828581b5c1c55973dd8890c66890cac1daf6791ca9ba772196747960db9963"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "page": 21,
+          "authority": "OFFICIAL_SOURCE",
+          "location": "Stress",
+          "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_RULES-p21.png",
+          "extractSha256": "76d88f6647cd4ae28740599c19dfa9ac177e741bfb52262b92029ac96cc18a10"
+        }
+      ],
+      "printedReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46604-7b5887-front.png",
+          "sha256": "e7841e60e76498cc720ace5b6efd1da41b9b1f9e5551aa9fa12f3790e7652290",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46604-7b5887-back.png",
+          "sha256": "a7eca176010c24387e582696f7d7bd02e5cd3c7213a909d616549c0d18e374b7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46605-36fbfc-front.png",
+          "sha256": "bf1beb4b5e820bf2fd706029bd3320f006423f2e9561b3473cbbea7832e8262d",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46605-36fbfc-back.png",
+          "sha256": "1fd5bb522e391d1fc8048cfb8bc5f5c85f859a9dbd8a3c8aaea961a4190d1174",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46606-1784ce-front.png",
+          "sha256": "a22d7c1ba5607d5f76e6dbce4f8386774fdd3401ff6b4ba6b2decd6802aa5ad5",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46606-1784ce-back.png",
+          "sha256": "4164824f04674bda928d39342275bbcb5c7b559d7cb6042504242291feea7606",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6",
+          "transportIsAuthority": false
+        }
+      ],
+      "runtimePrimitive": "shared stress transaction",
+      "timing": "target effect after hit damage",
+      "targetScope": "hit targets",
+      "saveRequirement": "causal effect transaction",
+      "executable": false
+    },
+    {
+      "field": "Stun",
+      "printedGlyph": "yellow three diamonds 2t",
+      "normalizedSemantic": {
+        "type": "stun",
+        "turns": 2
+      },
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "page": 20,
+          "authority": "OFFICIAL_SOURCE",
+          "location": "Stun",
+          "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_RULES-p20.png",
+          "extractSha256": "50828581b5c1c55973dd8890c66890cac1daf6791ca9ba772196747960db9963"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "page": 21,
+          "authority": "OFFICIAL_SOURCE",
+          "location": "Stun",
+          "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_RULES-p21.png",
+          "extractSha256": "76d88f6647cd4ae28740599c19dfa9ac177e741bfb52262b92029ac96cc18a10"
+        }
+      ],
+      "printedReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46604-7b5887-front.png",
+          "sha256": "e7841e60e76498cc720ace5b6efd1da41b9b1f9e5551aa9fa12f3790e7652290",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46604-7b5887-back.png",
+          "sha256": "a7eca176010c24387e582696f7d7bd02e5cd3c7213a909d616549c0d18e374b7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46605-36fbfc-front.png",
+          "sha256": "bf1beb4b5e820bf2fd706029bd3320f006423f2e9561b3473cbbea7832e8262d",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46605-36fbfc-back.png",
+          "sha256": "1fd5bb522e391d1fc8048cfb8bc5f5c85f859a9dbd8a3c8aaea961a4190d1174",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46606-1784ce-front.png",
+          "sha256": "a22d7c1ba5607d5f76e6dbce4f8386774fdd3401ff6b4ba6b2decd6802aa5ad5",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46606-1784ce-back.png",
+          "sha256": "4164824f04674bda928d39342275bbcb5c7b559d7cb6042504242291feea7606",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6",
+          "transportIsAuthority": false
+        }
+      ],
+      "runtimePrimitive": "shared conditions",
+      "timing": "target effect after hit; ticks at target turn start",
+      "targetScope": "hit targets",
+      "saveRequirement": "condition stacks and remaining turns",
+      "executable": false
+    },
+    {
+      "field": "Blight",
+      "printedGlyph": "green droplet 1/2/3 3t",
+      "normalizedSemantic": {
+        "type": "blight",
+        "levelAmounts": [
+          1,
+          2,
+          3
+        ],
+        "turns": 3
+      },
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "page": 20,
+          "authority": "OFFICIAL_SOURCE",
+          "location": "Blight",
+          "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_RULES-p20.png",
+          "extractSha256": "50828581b5c1c55973dd8890c66890cac1daf6791ca9ba772196747960db9963"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "page": 21,
+          "authority": "OFFICIAL_SOURCE",
+          "location": "Blight",
+          "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_RULES-p21.png",
+          "extractSha256": "76d88f6647cd4ae28740599c19dfa9ac177e741bfb52262b92029ac96cc18a10"
+        }
+      ],
+      "printedReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46604-7b5887-front.png",
+          "sha256": "e7841e60e76498cc720ace5b6efd1da41b9b1f9e5551aa9fa12f3790e7652290",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46604-7b5887-back.png",
+          "sha256": "a7eca176010c24387e582696f7d7bd02e5cd3c7213a909d616549c0d18e374b7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46605-36fbfc-front.png",
+          "sha256": "bf1beb4b5e820bf2fd706029bd3320f006423f2e9561b3473cbbea7832e8262d",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46605-36fbfc-back.png",
+          "sha256": "1fd5bb522e391d1fc8048cfb8bc5f5c85f859a9dbd8a3c8aaea961a4190d1174",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46606-1784ce-front.png",
+          "sha256": "a22d7c1ba5607d5f76e6dbce4f8386774fdd3401ff6b4ba6b2decd6802aa5ad5",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46606-1784ce-back.png",
+          "sha256": "4164824f04674bda928d39342275bbcb5c7b559d7cb6042504242291feea7606",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6",
+          "transportIsAuthority": false
+        }
+      ],
+      "runtimePrimitive": "shared conditions",
+      "timing": "target effect after hit; simultaneous condition wounds at turn start",
+      "targetScope": "hit targets",
+      "saveRequirement": "independent condition stacks",
+      "executable": false
+    },
+    {
+      "field": "immunities",
+      "printedGlyph": "yellow diamonds / cyan double chevron",
+      "normalizedSemantic": {
+        "stun": true,
+        "shuffle": true
+      },
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "page": 21,
+          "authority": "OFFICIAL_SOURCE",
+          "location": "immunities",
+          "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_RULES-p21.png",
+          "extractSha256": "76d88f6647cd4ae28740599c19dfa9ac177e741bfb52262b92029ac96cc18a10"
+        }
+      ],
+      "printedReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46604-7b5887-front.png",
+          "sha256": "e7841e60e76498cc720ace5b6efd1da41b9b1f9e5551aa9fa12f3790e7652290",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46604-7b5887-back.png",
+          "sha256": "a7eca176010c24387e582696f7d7bd02e5cd3c7213a909d616549c0d18e374b7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46605-36fbfc-front.png",
+          "sha256": "bf1beb4b5e820bf2fd706029bd3320f006423f2e9561b3473cbbea7832e8262d",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46605-36fbfc-back.png",
+          "sha256": "1fd5bb522e391d1fc8048cfb8bc5f5c85f859a9dbd8a3c8aaea961a4190d1174",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46606-1784ce-front.png",
+          "sha256": "a22d7c1ba5607d5f76e6dbce4f8386774fdd3401ff6b4ba6b2decd6802aa5ad5",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46606-1784ce-back.png",
+          "sha256": "4164824f04674bda928d39342275bbcb5c7b559d7cb6042504242291feea7606",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6",
+          "transportIsAuthority": false
+        }
+      ],
+      "runtimePrimitive": "shared immunity filter",
+      "timing": "condition application",
+      "targetScope": "Prophet",
+      "saveRequirement": "source-bound immunities",
+      "executable": false
+    },
+    {
+      "field": "Unholy",
+      "printedGlyph": "Unholy",
+      "normalizedSemantic": {
+        "tag": "Unholy"
+      },
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "page": 24,
+          "authority": "OFFICIAL_SOURCE",
+          "location": "Unholy",
+          "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_RULES-p24.png",
+          "extractSha256": "dcb10866162747bc817c5c3b53f4a228f2ea67c826a7085fa8dd9764fd0de511"
+        }
+      ],
+      "printedReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46604-7b5887-front.png",
+          "sha256": "e7841e60e76498cc720ace5b6efd1da41b9b1f9e5551aa9fa12f3790e7652290",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46604-7b5887-back.png",
+          "sha256": "a7eca176010c24387e582696f7d7bd02e5cd3c7213a909d616549c0d18e374b7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46605-36fbfc-front.png",
+          "sha256": "bf1beb4b5e820bf2fd706029bd3320f006423f2e9561b3473cbbea7832e8262d",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46605-36fbfc-back.png",
+          "sha256": "1fd5bb522e391d1fc8048cfb8bc5f5c85f859a9dbd8a3c8aaea961a4190d1174",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46606-1784ce-front.png",
+          "sha256": "a22d7c1ba5607d5f76e6dbce4f8386774fdd3401ff6b4ba6b2decd6802aa5ad5",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46606-1784ce-back.png",
+          "sha256": "4164824f04674bda928d39342275bbcb5c7b559d7cb6042504242291feea7606",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6",
+          "transportIsAuthority": false
+        }
+      ],
+      "runtimePrimitive": "shared Monster tags",
+      "timing": "classification",
+      "targetScope": "Prophet",
+      "saveRequirement": "definition identity and level",
+      "executable": false
+    },
+    {
+      "field": "Large",
+      "printedGlyph": "Large",
+      "normalizedSemantic": {
+        "occupiedSpaces": 2
+      },
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "page": 24,
+          "authority": "OFFICIAL_SOURCE",
+          "location": "Large",
+          "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_RULES-p24.png",
+          "extractSha256": "dcb10866162747bc817c5c3b53f4a228f2ea67c826a7085fa8dd9764fd0de511"
+        }
+      ],
+      "printedReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46604-7b5887-front.png",
+          "sha256": "e7841e60e76498cc720ace5b6efd1da41b9b1f9e5551aa9fa12f3790e7652290",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46604-7b5887-back.png",
+          "sha256": "a7eca176010c24387e582696f7d7bd02e5cd3c7213a909d616549c0d18e374b7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46605-36fbfc-front.png",
+          "sha256": "bf1beb4b5e820bf2fd706029bd3320f006423f2e9561b3473cbbea7832e8262d",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46605-36fbfc-back.png",
+          "sha256": "1fd5bb522e391d1fc8048cfb8bc5f5c85f859a9dbd8a3c8aaea961a4190d1174",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46606-1784ce-front.png",
+          "sha256": "a22d7c1ba5607d5f76e6dbce4f8386774fdd3401ff6b4ba6b2decd6802aa5ad5",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46606-1784ce-back.png",
+          "sha256": "4164824f04674bda928d39342275bbcb5c7b559d7cb6042504242291feea7606",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6",
+          "transportIsAuthority": false
+        }
+      ],
+      "runtimePrimitive": "shared capacity/displacement",
+      "timing": "movement/end of turn",
+      "targetScope": "Prophet Area",
+      "saveRequirement": "occupancy / displacement choice",
+      "executable": false
+    },
+    {
+      "field": "critical-and-damage",
+      "printedGlyph": "Crit / lightning / Acc",
+      "normalizedSemantic": {
+        "valuesFrom": "independent C1C34 per-level reviewed card rows",
+        "oneRollPerArea": true
+      },
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "page": 19,
+          "authority": "OFFICIAL_SOURCE",
+          "location": "critical-and-damage",
+          "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_RULES-p19.png",
+          "extractSha256": "7897ecd0962e7e4d83fbc7e19d2d1cfaead75a2b9b6c185e4a7dc5f877afe77d"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "page": 20,
+          "authority": "OFFICIAL_SOURCE",
+          "location": "critical-and-damage",
+          "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_RULES-p20.png",
+          "extractSha256": "50828581b5c1c55973dd8890c66890cac1daf6791ca9ba772196747960db9963"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "page": 24,
+          "authority": "OFFICIAL_SOURCE",
+          "location": "critical-and-damage",
+          "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_RULES-p24.png",
+          "extractSha256": "dcb10866162747bc817c5c3b53f4a228f2ea67c826a7085fa8dd9764fd0de511"
+        }
+      ],
+      "printedReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46604-7b5887-front.png",
+          "sha256": "e7841e60e76498cc720ace5b6efd1da41b9b1f9e5551aa9fa12f3790e7652290",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46604-7b5887-back.png",
+          "sha256": "a7eca176010c24387e582696f7d7bd02e5cd3c7213a909d616549c0d18e374b7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46605-36fbfc-front.png",
+          "sha256": "bf1beb4b5e820bf2fd706029bd3320f006423f2e9561b3473cbbea7832e8262d",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46605-36fbfc-back.png",
+          "sha256": "1fd5bb522e391d1fc8048cfb8bc5f5c85f859a9dbd8a3c8aaea961a4190d1174",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46606-1784ce-front.png",
+          "sha256": "a22d7c1ba5607d5f76e6dbce4f8386774fdd3401ff6b4ba6b2decd6802aa5ad5",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46606-1784ce-back.png",
+          "sha256": "4164824f04674bda928d39342275bbcb5c7b559d7cb6042504242291feea7606",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6",
+          "transportIsAuthority": false
+        }
+      ],
+      "runtimePrimitive": "shared attack/damage",
+      "timing": "roll then individual hit comparison; critical stress window",
+      "targetScope": "selected Heroes",
+      "saveRequirement": "shared RNG cursor / damage causal events",
+      "executable": false
+    },
+    {
+      "field": "Rubble special target",
+      "printedGlyph": "Special; no Hero count or range printed",
+      "normalizedSemantic": {
+        "areas": "each Pew Area",
+        "rolls": "one per Pew",
+        "sameArea": "can attack twice"
+      },
+      "status": "SOURCE_UNRESOLVED",
+      "authority": "SOURCE_UNRESOLVED",
+      "canonical": false,
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "page": 38,
+          "authority": "OFFICIAL_SOURCE",
+          "location": "Prophet third turn",
+          "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_RULES-p38.png",
+          "extractSha256": "a562b49eff218beef77c707808947b0471af426f70e02dbecad0fd8c7fb9cba6"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "page": 39,
+          "authority": "OFFICIAL_SOURCE",
+          "location": "Prophet continuation",
+          "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_RULES-p39.png",
+          "extractSha256": "d011c33afd194e13f31ccdd52cf790dedac811da31fce225a4ef6cbb48718438"
+        }
+      ],
+      "runtimePrimitive": "shared attack/damage",
+      "timing": "ordinal 3 after placement",
+      "targetScope": null,
+      "saveRequirement": "explicit target set per independent Pew attack",
+      "executable": false,
+      "reason": "Special rules identify attacked Areas and independent rolls, but no explicit number of affected Heroes is printed. A versioned all-Hero target-scope ruling is needed before execution; no inference from a visual icon."
+    }
+  ],
+  "unresolvedFields": [
+    "Rubble special target.targetScope"
+  ]
+}
