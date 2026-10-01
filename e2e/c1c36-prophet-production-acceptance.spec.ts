@@ -209,6 +209,7 @@ async function acknowledgeEvents(page:Page){
   for(let n=0;n<30;n++){
     if (await playerOverlay(page)) continue;
     if((await saved(page)).gamePhase==='replacement'){
+      observe(page,'player replacement recruitment',await saved(page));
       await expect(page.getByTestId('replacement-page')).toBeVisible();
       const slot=page.locator('[data-testid^="replacement-slot-"]').filter({has:page.locator('[data-testid^="candidate-"]')}).first();
       await slot.locator('[data-testid^="candidate-"]:not([disabled])').first().click();
@@ -315,7 +316,9 @@ for(const level of [1,2,3] as const)test('C1C36 Prophet normal player route Leve
     c=await saved(page);receipts.push(c.bossEncounterCheckpoint!.checkpointContext!.consumedOnceKeys);
     await page.getByTestId('leave-dungeon').click();await page.getByTestId('leave-dungeon-confirm-ok').click();
     await acknowledgeEvents(page);
-    await page.getByTestId('return-hamlet').click();tavern=(await hamlet(page,level))||tavern;
+    if((await saved(page)).gamePhase==='quest-result')await page.getByTestId('return-hamlet').click();
+    await acknowledgeEvents(page);expect((await saved(page)).gamePhase).toBe('hamlet');
+    tavern=(await hamlet(page,level))||tavern;
     expect((await saved(page)).prophetQuestThreatHistory).toHaveLength(quest+1);
   }
   console.log('C1C36 Boss selection',level);expect(tavern).toBe(true);const preFace=await saved(page);await page.getByTestId('quest-face-the-threat').click();
@@ -350,7 +353,8 @@ for(const level of [1,2,3] as const)test('C1C36 Prophet normal player route Leve
   }
   await acknowledgeEvents(page);
   expect((await saved(page)).lastQuestResult!.outcome).toBe('completed');
-  await page.getByTestId('return-hamlet').click();await acknowledgeEvents(page);
+  if((await saved(page)).gamePhase==='quest-result')await page.getByTestId('return-hamlet').click();
+  await acknowledgeEvents(page);expect((await saved(page)).gamePhase).toBe('hamlet');
   expect((await saved(page)).campaignProgress).toEqual(committedProgress);
   let recovered=false;
   for(let day=0;day<8&&!recovered;day++){
