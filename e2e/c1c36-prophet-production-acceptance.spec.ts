@@ -234,7 +234,20 @@ function path(c: CampaignState, target: string): string[] {
 const hash=(value:unknown)=>createHash('sha256').update(JSON.stringify(value??null)).digest('hex');
 const points: Array<{level:number;point:string;stateHash:string;saveHash:string;rngHash:string;eventHash:string;ownershipHash:string}> = [];
 const externalRequests=new Set<string>();
-const tavernAudits=new WeakMap<Page,Array<{level:number;before:number;after:number;modifier:number;active:boolean}>>();
+const tavernAudits=new WeakMap<Page,Array<{level:number;before:number;after:number;modifier:number;active:boolean;recoveryBeforePassives:number;recoveryAfterPassives:number;modifierSources:unknown[]}>>();
+async function tavernExpectation(page:Page,heroId:string,modifier:number){
+  return page.evaluate(async({heroId,modifier})=>{
+    const entry=Object.values(localStorage).map(text=>{try{return JSON.parse(text);}catch{return null;}}).find(e=>e?.campaign?.id);
+    const campaign=entry.campaign as CampaignState;
+    const threat=campaign.activeThreatRuntime;
+    if(modifier===0&&threat?.active&&threat.bossFamilyId==='prophet')throw new Error('Prophet Tavern modifier remains active');
+    if(modifier!==0&&(!threat?.active||threat.bossFamilyId!=='prophet'||modifier!==-threat.campaignLevel))throw new Error('Active Prophet Tavern identity mismatch');
+    const {applyQuirkModifiers}=await import('/src/game-engine/quirk-passives.ts');
+    const base=3+modifier;
+    const result=base>0?applyQuirkModifiers(campaign,heroId,'stress-recovered',base):{amount:0,applied:[]};
+    return {recoveryBeforePassives:base,recoveryAfterPassives:result.amount,modifierSources:result.applied};
+  },{heroId,modifier});
+}
 const spawnAudits:Array<{copyId:string;definitionId:string;unholy:boolean;receipt:{transactionId:string;stress:number}|null}>=[];
 test.beforeEach(async({page},info)=>{
   const level=Number(info.title.match(/Level (\d)/)?.[1]);
@@ -266,9 +279,9 @@ async function hamlet(page:Page,level:number){
     const c=await saved(page);if(c.gamePhase==='quest-select')break;
     if(!tavern){const hero=c.heroes.find(h=>!h.dead&&!h.hasActedToday&&h.stress>0);
       if(hero){await page.getByTestId('hero-select-'+hero.instanceId).click();const button=page.getByTestId('building-tavern');
-        if(await button.isEnabled()){const before=hero.stress;await button.click();const after=(await saved(page)).heroes.find(h=>h.instanceId===hero.instanceId)!.stress;
-          expect(after).toBe(Math.max(0,before-(3-level)));tavern=true;
-          tavernAudits.set(page,[...(tavernAudits.get(page)??[]),{level,before,after,modifier:-level,active:true}]);}}
+        if(await button.isEnabled()){const before=hero.stress,expected=await tavernExpectation(page,hero.instanceId,-level);await button.click();const after=(await saved(page)).heroes.find(h=>h.instanceId===hero.instanceId)!.stress;
+          expect(after).toBe(Math.max(0,before-expected.recoveryAfterPassives));tavern=true;
+          tavernAudits.set(page,[...(tavernAudits.get(page)??[]),{level,before,after,modifier:-level,active:true,...expected}]);}}
     }
     for(const h of (await saved(page)).heroes.filter(h=>!h.dead&&!h.hasActedToday))await page.getByTestId('skip-'+h.instanceId).click();
     await page.getByTestId('end-day').click();
@@ -347,9 +360,10 @@ for(const level of [1,2,3] as const)test('C1C36 Prophet normal player route Leve
       await page.getByTestId('hero-select-'+h.instanceId).click();
       const button=page.getByTestId('building-tavern');
       if(!await button.isEnabled())continue;
+      const expected=await tavernExpectation(page,h.instanceId,0);
       await button.click();const after=(await saved(page)).heroes.find(hero=>hero.instanceId===h.instanceId)!.stress;
-      expect(after).toBe(Math.max(0,h.stress-3));
-      tavernAudits.set(page,[...(tavernAudits.get(page)??[]),{level,before:h.stress,after,modifier:0,active:false}]);recovered=true;break;
+      expect(after).toBe(Math.max(0,h.stress-expected.recoveryAfterPassives));
+      tavernAudits.set(page,[...(tavernAudits.get(page)??[]),{level,before:h.stress,after,modifier:0,active:false,...expected}]);recovered=true;break;
     }
     if(!recovered){for(const h of current.heroes.filter(h=>!h.dead&&!h.hasActedToday))await page.getByTestId('skip-'+h.instanceId).click();await page.getByTestId('end-day').click();await acknowledgeEvents(page);}
   }
