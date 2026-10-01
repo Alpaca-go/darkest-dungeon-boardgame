@@ -6,6 +6,7 @@ import { validateSourceMonsterAttack, startSourceMonsterAttack, continuePrintedM
 import { resolveProductionMonsterDefinition } from './component-adapters/bone-combat-adapter';
 import { resolveHeroDodge } from '../rules/hero-dodge';
 import {encounterRuleDependencies} from './definitions';
+import {assertProphetHeroEntryPlacement} from '../prophet/production-definition';
 import type { ProductionMonsterDefinition } from '../../types/component-combat';
 import { applyBattleUnitDamage } from '../damage';
 import { isNonUnholy, isReanimationEligible } from './threat-semantics';
@@ -100,6 +101,7 @@ export function assertBossEncounter(b: BattleState): void {
 export function bindBossEncounter(battle: BattleState, definition: BossDefinitionContract, seed: number,
   spawnDefinitions: SpawnDefinition[] = [], permanentlyRemovedTokenIds: string[] = []): BattleState {
   if (battle.bossEncounter) throw new Error('Encounter already reserved on this battle');
+  if (definition.family === 'prophet') assertProphetHeroEntryPlacement(definition.level);
   const b = clone(battle);
   if (definition.family==='prophet' || definition.successorContract) throw new Error('Successor gameplay requires production foundation acceptance');
   const supply: BossEncounterState['summonSupply'] = {};
@@ -583,6 +585,7 @@ function idInAmounts(id: string, amounts: Record<string, number>): boolean { ret
 export function applyBossRuntimeInput(battle: BattleState, input: BossRuntimeInput): BattleState {
   const b = clone(battle);
   const e = encounter(b);
+  if (e.bossFamily === 'prophet' && input.type === 'ENTER_BOSS_ROOM') assertProphetHeroEntryPlacement(e.bossLevel);
   if (e.bossFamily==='prophet' || e.definition.successorContract) throw new Error('Successor gameplay requires production foundation acceptance');
   if (e.cleanupState.completed && input.type === 'CLEANUP') return battle;
   const next = withBossEncounterSources(b, (working, rng) => { handle(working, input, rng); return checkBossRuntimeEnd(working); });

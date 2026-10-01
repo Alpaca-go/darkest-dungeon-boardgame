@@ -13,6 +13,7 @@ export const historicalBaselines = {
   c1c35: { commit: '7b99c36c19159923799b3bda0180af9d8020ef82', script: 'scripts/audit/c1c35-prophet-contract.ts' },
   c1c35r1: { commit: '7a3a483cba0dca0eb537e744980eecd4c55fef24', script: 'scripts/audit/c1c35r1-prophet-contract.ts' },
   c1c35r2: { commit: '101c27c8c15fcb93802f956f399c37ed9c38a2e9', script: 'scripts/audit/c1c35r2-foundation-review.ts' },
+  c1c35r2ar: { phase: 'C1C35R2A-R', commit: '007712ab6aec2c814fa31e06cf5fe05b21a30879', script: 'scripts/audit/c1c35r2a-shared-dispatch.ts', artifactPrefixes: ['c1c35r2a-', 'c1c35r2a-r-'] },
 } as const;
 
 // Historical scope is evaluated by the original, unchanged verifier in its own checkout.
@@ -38,7 +39,7 @@ export function verifyHistoricalBaseline(phase: keyof typeof historicalBaselines
       copyFileSync('docs/DD_EN_COREBOX_RULES.pdf', join(checkout, 'docs/DD_EN_COREBOX_RULES.pdf'));
     }
     symlinkSync(resolve('node_modules'), join(checkout, 'node_modules'), process.platform === 'win32' ? 'junction' : 'dir');
-    const flags = phase === 'c1c35r1' ? ['--verify-r1'] : phase === 'c1c35r2' ? ['--verify-r2'] : phase.startsWith('c1c3') ? ['--verify'] : [];
+    const flags = phase === 'c1c35r2ar' ? ['--verify-dispatch'] : phase === 'c1c35r1' ? ['--verify-r1'] : phase === 'c1c35r2' ? ['--verify-r2'] : phase.startsWith('c1c3') ? ['--verify'] : [];
     execFileSync(process.execPath, ['--import', pathToFileURL(resolve('scripts/audit/legacy-transport-preload.mjs')).href, resolve('node_modules/vite-node/vite-node.mjs'), script, ...flags],
       { cwd: checkout, stdio: 'pipe', maxBuffer: 16 * 1024 * 1024,
         env: { ...process.env, DDBG_LEGACY_TRANSPORT_ARCHIVE: resolve('docs/data/complete-edition/source-assets/c1c34/legacy-transport.json.gz') } });
@@ -60,10 +61,12 @@ export function verifyHistoricalBaseline(phase: keyof typeof historicalBaselines
 }
 
 export function verifyHistoricalArtifacts(phase: keyof typeof historicalBaselines) {
-  const {commit} = historicalBaselines[phase];
+  const checkpoint = historicalBaselines[phase];
+  const {commit} = checkpoint;
+  const prefixes = 'artifactPrefixes' in checkpoint ? checkpoint.artifactPrefixes : [`${phase}-`];
   const git = (args: string[]) => execFileSync('git', args, {maxBuffer: 128 * 1024 * 1024});
   const entries = git(['ls-tree', '-r', '--name-only', commit]).toString().trim().split(/\r?\n/)
-    .filter(p => p.split('/').some(part=>part.startsWith(`${phase}-`)));
+    .filter(p => p.split('/').some(part=>prefixes.some(prefix=>part.startsWith(prefix))));
   for (const path of entries) if (!git(['show', `${commit}:${path}`]).equals(readFileSync(path))) throw new Error(`Frozen ${phase} evidence changed: ${path}`);
   return entries.length;
 }

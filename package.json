@@ -207,7 +207,9 @@
     "audit:complete-edition-c1c35r2a": "vite-node scripts/audit/c1c35r2a-shared-dispatch.ts --write-dispatch",
     "verify:complete-edition-c1c35r2a": "vite-node scripts/audit/c1c35r2a-shared-dispatch.ts --verify-dispatch",
     "test:successor-dispatch": "vitest run src/audit/c1c35r2a-shared-dispatch.test.ts src/audit/successor-historical-boundary.test.ts",
-    "validate:complete-edition-c1c35r2a": "node scripts/audit/run-c1c35r2a-validation.mjs"
+    "validate:complete-edition-c1c35r2a": "node scripts/audit/run-c1c35r2a-validation.mjs",
+    "audit:complete-edition-c1c35r2b": "vite-node scripts/audit/c1c35r2b-foundation.ts --write-r2b",
+    "verify:complete-edition-c1c35r2b": "vite-node scripts/audit/c1c35r2b-foundation.ts --verify-r2b"
   },
   "dependencies": {
     "lucide-react": "^0.408.0",

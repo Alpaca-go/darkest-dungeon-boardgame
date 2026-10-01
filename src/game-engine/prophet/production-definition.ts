@@ -6,6 +6,15 @@ import type {BossDefinitionContract} from '../../types/boss-runtime';
 
 export const PROPHET_RULE_SET_VERSION = 'C1C35R2-PROPHET-DIGITAL-DEFAULT-v1';
 export const PROPHET_ACTOR_CAPACITY_VERSION = 'C1C35R2-PROPHET-AREA-C-CAPACITY-v1';
+export const PROPHET_HERO_ENTRY_BLOCKER = 'PROPHET_FOUNDATION_BLOCKED_ON_HERO_ENTRY_PLACEMENT';
+
+/** Only accepted source-bound definitions can supply the Hero entry coordinate. */
+export function assertProphetHeroEntryPlacement(level: 1 | 2 | 3): void {
+  const definition = prophetProductionDefinition(level);
+  if (!definition.heroStartArea || !definition.areas.some(area => area.id === definition.heroStartArea)) {
+    throw new Error(`${PROPHET_HERO_ENTRY_BLOCKER}: production foundation acceptance requires a bound Room 11 Hero entry contract`);
+  }
+}
 interface SourceDefinition {
   family: string; level: 1|2|3; ruleSetVersion: string; sourceContractVersion: string;
   battle: {cardId: number; physicalIdentity: string}; threat: {cardId: number; physicalIdentity: string};
