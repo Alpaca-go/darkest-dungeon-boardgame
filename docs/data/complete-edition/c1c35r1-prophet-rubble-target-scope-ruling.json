@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C35R1",
+  "baseline": "7b99c36c19159923799b3bda0180af9d8020ef82",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "contractVersion": "C1C35R1-PROPHET-RESIDUAL-CONTRACT-v1",
+  "gameplayChanged": false,
+  "productionPromotion": false,
+  "runtimeImplementationAllowed": false,
+  "rulingId": "C1C35R1-PROPHET-RUBBLE-TARGET-SCOPE-v1",
+  "version": "C1C35R1-PROPHET-RUBBLE-TARGET-SCOPE-v1",
+  "ruleSetVersion": "C1C35-PROPHET-DIGITAL-DEFAULT-v1",
+  "authority": "PROJECT_RULING",
+  "canonical": false,
+  "canonicalTargetScopeStatus": "SOURCE_UNRESOLVED",
+  "status": "EXECUTABLE_CONTRACT_ONLY",
+  "sourceReferences": [
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 38,
+      "authority": "OFFICIAL_SOURCE",
+      "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_RULES-p38.png",
+      "extractSha256": "a562b49eff218beef77c707808947b0471af426f70e02dbecad0fd8c7fb9cba6"
+    },
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 39,
+      "authority": "OFFICIAL_SOURCE",
+      "extractPath": "docs/data/complete-edition/source-assets/c1c35/DD_EN_COREBOX_RULES-p39.png",
+      "extractSha256": "d011c33afd194e13f31ccdd52cf790dedac811da31fce225a4ef6cbb48718438"
+    }
+  ],
+  "officialFacts": [
+    "Pew Areas are attacked",
+    "one independent roll per Pew",
+    "multiple Pews in the same Area produce multiple attacks"
+  ],
+  "projectDecision": {
+    "targetScope": "ALL_LIVING_TARGETABLE_HEROES_IN_CURRENT_PEW_AREA",
+    "targetLimit": null,
+    "oneTransactionPerActivePhysicalPew": true,
+    "readAreaFrom": "authoritative Pew instance",
+    "freezeTargetSet": "at start of each Pew transaction; store IDs before roll",
+    "targetOrdering": {
+      "primitive": "compareCommunityTargetPriority",
+      "path": "src/game-engine/campaign/act-four/community-monster-targeting.ts",
+      "primitiveSha256": "d67b3bef092420228498e8be2dac80f6da3cedd91828d8715600a66e7a2f1cab",
+      "keys": [
+        "authoritative stance",
+        "position",
+        "actor ID"
+      ],
+      "note": "Shared comparator already consumed by production component combat; implementation reuse is not rules authority."
+    },
+    "attackRollsPerPew": 1,
+    "emptyAreaConsumesRoll": true,
+    "sameAreaPewsMerged": false,
+    "damagePipeline": "Shared attack/damage with per-target shared death windows; complete before cursor advance; printed level-specific damage from frozen C1C34.",
+    "subsequentPew": "Read its Area and collect current living targetable Heroes afresh; no reuse of prior Pew target snapshot."
+  },
+  "saveExtension": {
+    "extends": "C1C35 pew-attack-order-and-save without mutating its v1 artifact",
+    "extensionVersion": "C1C35R1-PROPHET-RUBBLE-TARGET-SCOPE-v1",
+    "authoritativeFields": [
+      "ruleSetVersion",
+      "orderedPhysicalCopyIds",
+      "rubbleCursor",
+      "pendingPewAttack.pewCopyId",
+      "pendingPewAttack.areaId",
+      "pendingPewAttack.targetActorIds",
+      "pendingPewAttack.attackRoll",
+      "pendingPewAttack.phase",
+      "pendingPewAttack.resolvedTargetIds",
+      "resolvedActionKeys",
+      "causalEvents",
+      "sharedRngCheckpoint",
+      "targetScopeRulingVersion"
+    ],
+    "pinnedDependencyVersions": {
+      "pewOrder": "C1C35-PROPHET-DIGITAL-DEFAULT-v1",
+      "targetScope": "C1C35R1-PROPHET-RUBBLE-TARGET-SCOPE-v1",
+      "map": "C1C35-PROPHET-PRINTED-D10-v1"
+    },
+    "phases": [
+      "TARGETS_PERSISTED",
+      "ROLL_PERSISTED",
+      "TARGET_WINDOWS_PENDING",
+      "COMPLETE"
+    ],
+    "reloadInvariants": {
+      "targetActorIds": "Exactly persisted IDs and order, no reselection from current board",
+      "attackRoll": "Preserve stored roll; no reroll",
+      "resolvedTargetIds": "Persist completed target windows; skip only already committed or explicitly journaled legal removal",
+      "remainingTargets": "Resume every unresolved frozen target in order",
+      "physicalCopyOrder": "Preserve explicit copy order",
+      "causalEvents": "No duplicated damage or death transaction IDs",
+      "sharedRngCheckpoint": "Continue stored shared stream; no Prophet-private RNG"
+    },
+    "invalidSave": "Reject; never silently repair authoritative targets, roll, cursor, order or journal",
+    "productionSaveSchemaChanged": false
+  },
+  "prototypeAsAuthority": false,
+  "runtimeImplemented": false
+}
