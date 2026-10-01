@@ -1,0 +1,316 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C35R2A-R",
+  "baseline": "c40af8deb4e1ecf683ae78414dd5313c943d2393",
+  "head": "9ffeb7e15c88d8a33fea1c383380a41533b37974",
+  "headMeaning": "Committed release-gate implementation tested by the recorded remote run. This evidence is committed afterward; the final evidence commit must also receive a green release gate.",
+  "outcome": "C1C35R2A_SUCCESSOR_INFRASTRUCTURE_ACCEPTED",
+  "headRegression": {
+    "passed": 2690,
+    "failed": 0,
+    "pending": 0,
+    "todo": 0,
+    "passedSuites": 499,
+    "failedSuites": 0,
+    "referencePassed": 2690,
+    "countChange": 0,
+    "additionalExclusions": 0
+  },
+  "immutableHistoricalCheckpoints": {
+    "C1C33": {
+      "commit": "e1fcfac0692eb91c5710552ac93e3bacb25f0240",
+      "status": "PASS",
+      "protectedArtifactCount": 22,
+      "verification": "ORIGINAL_VERIFIER_IN_DETACHED_ACCEPTED_CHECKOUT_AND_CURRENT_RAW_GIT_BLOB_COMPARISON"
+    },
+    "C1C34": {
+      "commit": "051c2c400d391543f5c436cbaa141a54bdf19ac1",
+      "status": "PASS",
+      "protectedArtifactCount": 10,
+      "verification": "ORIGINAL_VERIFIER_IN_DETACHED_ACCEPTED_CHECKOUT_AND_CURRENT_RAW_GIT_BLOB_COMPARISON"
+    },
+    "C1C35": {
+      "commit": "7b99c36c19159923799b3bda0180af9d8020ef82",
+      "status": "PASS",
+      "protectedArtifactCount": 24,
+      "verification": "ORIGINAL_VERIFIER_IN_DETACHED_ACCEPTED_CHECKOUT_AND_CURRENT_RAW_GIT_BLOB_COMPARISON"
+    },
+    "C1C35R1": {
+      "commit": "7a3a483cba0dca0eb537e744980eecd4c55fef24",
+      "status": "PASS",
+      "protectedArtifactCount": 22,
+      "verification": "ORIGINAL_VERIFIER_IN_DETACHED_ACCEPTED_CHECKOUT_AND_CURRENT_RAW_GIT_BLOB_COMPARISON"
+    },
+    "C1C35R2": {
+      "commit": "101c27c8c15fcb93802f956f399c37ed9c38a2e9",
+      "status": "PASS",
+      "protectedArtifactCount": 26,
+      "verification": "ORIGINAL_VERIFIER_IN_DETACHED_ACCEPTED_CHECKOUT_AND_CURRENT_RAW_GIT_BLOB_COMPARISON"
+    }
+  },
+  "immutablePredecessorSuites": {
+    "commit": "101c27c8c15fcb93802f956f399c37ed9c38a2e9",
+    "passed": 72,
+    "failed": 0,
+    "pending": 0,
+    "todo": 0,
+    "countSource": "Remote job logs, independently recorded from HEAD regression",
+    "executionPath": "src/audit/successor-historical-boundary.test.ts",
+    "files": [
+      "src/audit/c1c34-successor-rebaseline.test.ts",
+      "src/audit/c1c35-prophet-source-contract.test.ts",
+      "src/audit/c1c35r1-prophet-residual-contract.test.ts",
+      "src/audit/c1c35r2-prophet-gate-foundation-review.test.ts"
+    ],
+    "assertionsUnchanged": true
+  },
+  "necromancerSuccessorCompatibility": {
+    "status": "PASS",
+    "verdict": "C1C35R2A-NECROMANCER-SUCCESSOR-COMPATIBILITY-v1: PASS",
+    "immutableOriginVerified": true,
+    "compatibilityVerified": true,
+    "expectedRuntime": "101c27c8c15fcb93802f956f399c37ed9c38a2e9",
+    "actualRuntime": "9ffeb7e15c88d8a33fea1c383380a41533b37974",
+    "expectationsRegenerated": false
+  },
+  "prophetGateA": {
+    "status": "PASS",
+    "executableFieldsPassed": 22,
+    "executableFieldsTotal": 22,
+    "canonicalComplete": false,
+    "digitalExecutionContractComplete": true
+  },
+  "sharedDependencyProbes": {
+    "dependencyProbesPassed": 5,
+    "dependencyProbesRejected": 0,
+    "probes": [
+      {
+        "id": "boss-definition-dispatch",
+        "status": "PASS"
+      },
+      {
+        "id": "hero-dodge-version",
+        "status": "PASS"
+      },
+      {
+        "id": "room-storage-tile-11",
+        "status": "PASS"
+      },
+      {
+        "id": "threat-checkpoint-dispatch",
+        "status": "PASS"
+      },
+      {
+        "id": "shared-large-contract-version",
+        "status": "PASS"
+      }
+    ]
+  },
+  "prototypeReachability": {
+    "productionPrototypeReachability": 0,
+    "auditMethod": "TYPESCRIPT_AST_RUNTIME_IMPORT_EXPORT_DYNAMIC_IMPORT_GRAPH",
+    "entryPoints": [
+      "src/main.tsx",
+      "src/game-engine/bosses/definitions.ts",
+      "src/game-engine/save.ts"
+    ],
+    "visitedRuntimeModuleCount": 339,
+    "forbiddenModules": [
+      "src/game-engine/prophet/runtime.ts",
+      "src/game-engine/prophet/index.ts",
+      "src/data/bosses/prophet-family.ts"
+    ],
+    "forbiddenSymbols": [
+      "PROPHET_PROTOTYPE_ROOM",
+      "PROPHET_PROTOTYPE_BOSS",
+      "PROPHET_PROTOTYPE_RUBBLE_ID",
+      "prototypeRubblePipeline"
+    ]
+  },
+  "prophetRegistry": {
+    "registeredFamilies": [
+      "necromancer",
+      "prophet"
+    ],
+    "levels": [
+      {
+        "level": 1,
+        "runtimeRegistered": true,
+        "gameplayEnabled": false,
+        "productionFoundation": false,
+        "productionAccepted": false
+      },
+      {
+        "level": 2,
+        "runtimeRegistered": true,
+        "gameplayEnabled": false,
+        "productionFoundation": false,
+        "productionAccepted": false
+      },
+      {
+        "level": 3,
+        "runtimeRegistered": true,
+        "gameplayEnabled": false,
+        "productionFoundation": false,
+        "productionAccepted": false
+      }
+    ]
+  },
+  "prophetSharedSaveDispatch": [
+    {
+      "level": 1,
+      "sharedSchemaVersion": 22,
+      "status": "PASS",
+      "proofKind": "INFRASTRUCTURE_CONTRACT_FIXTURE_NOT_GAMEPLAY_ACCEPTANCE"
+    },
+    {
+      "level": 2,
+      "sharedSchemaVersion": 22,
+      "status": "PASS",
+      "proofKind": "INFRASTRUCTURE_CONTRACT_FIXTURE_NOT_GAMEPLAY_ACCEPTANCE"
+    },
+    {
+      "level": 3,
+      "sharedSchemaVersion": 22,
+      "status": "PASS",
+      "proofKind": "INFRASTRUCTURE_CONTRACT_FIXTURE_NOT_GAMEPLAY_ACCEPTANCE"
+    }
+  ],
+  "localValidation": {
+    "allCommandsExitZero": true,
+    "commands": [
+      {
+        "command": "npm ci",
+        "exitCode": 0,
+        "name": "npm-ci"
+      },
+      {
+        "command": "npm run typecheck",
+        "exitCode": 0,
+        "name": "typecheck"
+      },
+      {
+        "command": "npm test -- --reporter=json --outputFile=docs/reports/complete-edition/c1c35r2a-r-validation/head-tests.json",
+        "exitCode": 0,
+        "name": "head-regression"
+      },
+      {
+        "command": "npm run build",
+        "exitCode": 0,
+        "name": "build"
+      },
+      {
+        "command": "npm run historical-baseline-validation",
+        "exitCode": 0,
+        "name": "historical-baseline-validation"
+      },
+      {
+        "command": "npm run verify:immutable-phase-baselines",
+        "exitCode": 0,
+        "name": "immutable-phase-baselines"
+      },
+      {
+        "command": "npm run verify:necromancer-successor-compatibility",
+        "exitCode": 0,
+        "name": "necromancer-successor-compatibility"
+      },
+      {
+        "command": "npm run verify:prophet-gate-a",
+        "exitCode": 0,
+        "name": "prophet-gate-a"
+      },
+      {
+        "command": "npm run verify:complete-edition-c1c35r2a",
+        "exitCode": 0,
+        "name": "shared-dispatch"
+      }
+    ]
+  },
+  "remoteWorkflow": {
+    "name": "Production release gate",
+    "runId": 36825359910,
+    "jobId": 110249721375,
+    "headSha": "9ffeb7e15c88d8a33fea1c383380a41533b37974",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/Alpaca-go/darkest-dungeon-boardgame/actions/runs/36825359910",
+    "requiredSteps": [
+      {
+        "command": "npm ci",
+        "number": 4,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "command": "npm run typecheck",
+        "number": 5,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "command": "npm test",
+        "number": 6,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "command": "npm run build",
+        "number": 7,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "command": "npm run historical-baseline-validation",
+        "number": 8,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "command": "npm run verify:immutable-phase-baselines",
+        "number": 9,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "command": "npm run verify:necromancer-successor-compatibility",
+        "number": 10,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "command": "npm run verify:prophet-gate-a",
+        "number": 11,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "command": "npm run verify:complete-edition-c1c35r2a",
+        "number": 12,
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "runtimeUnchangedFromBaseline": true,
+  "historical383RuntimeHashesUnchanged": true,
+  "successorRuntimeByteFreeze": false,
+  "productionFoundation": false,
+  "productionAccepted": false,
+  "infrastructureFrozen": true,
+  "next": {
+    "phase": "C1C35R2B",
+    "title": "Prophet Production Foundation Implementation",
+    "authorized": true,
+    "scope": [
+      "ordinal 1 / four physical Wooden Pews / shared RNG placement",
+      "ordinal 2 / Crowded targeting / PendingChoice",
+      "ordinal 3 / Rubble of Ruin / per-Pew cursor",
+      "Prophet Threat Level I / II / III hooks",
+      "Room 11 live lifecycle",
+      "shared save/reload / tamper validation",
+      "victory cleanup"
+    ],
+    "c1c36Allowed": false,
+    "c1c36BlockedUntil": "C1C35R2B production-foundation acceptance"
+  }
+}

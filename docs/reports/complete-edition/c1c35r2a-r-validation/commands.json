@@ -1,0 +1,50 @@
+{
+  "phase": "11A.4-C1C35R2A-R",
+  "commands": [
+    {
+      "command": "npm ci",
+      "exitCode": 0,
+      "name": "npm-ci"
+    },
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "name": "typecheck"
+    },
+    {
+      "command": "npm test -- --reporter=json --outputFile=docs/reports/complete-edition/c1c35r2a-r-validation/head-tests.json",
+      "exitCode": 0,
+      "name": "head-regression"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "name": "build"
+    },
+    {
+      "command": "npm run historical-baseline-validation",
+      "exitCode": 0,
+      "name": "historical-baseline-validation"
+    },
+    {
+      "command": "npm run verify:immutable-phase-baselines",
+      "exitCode": 0,
+      "name": "immutable-phase-baselines"
+    },
+    {
+      "command": "npm run verify:necromancer-successor-compatibility",
+      "exitCode": 0,
+      "name": "necromancer-successor-compatibility"
+    },
+    {
+      "command": "npm run verify:prophet-gate-a",
+      "exitCode": 0,
+      "name": "prophet-gate-a"
+    },
+    {
+      "command": "npm run verify:complete-edition-c1c35r2a",
+      "exitCode": 0,
+      "name": "shared-dispatch"
+    }
+  ]
+}
