@@ -1,0 +1,348 @@
+{
+  "status": "PASS",
+  "level": 2,
+  "evidenceVersion": "C1C36-PLAYER-RELOAD-v1",
+  "prerequisiteFixture": "pre-Quest Act/level/family/defeated family prerequisites only",
+  "questBattleFixture": false,
+  "threatId": "threat-draw:cmp_mupoiaio_eqygyt:act-2",
+  "receipts": [
+    [
+      "cmp_mupoiaio_eqygyt:qrun_mupoid8f_8vgd87:prophet:2:prophet-threat:qrun_mupoid8f_8vgd87:scout:start:A,B,C,D,E,F,G,H"
+    ],
+    [
+      "cmp_mupoiaio_eqygyt:qrun_mupoily6_71qqn7:prophet:2:prophet-threat:qrun_mupoily6_71qqn7:scout:start:A,B,C,D,E,F,G,H"
+    ]
+  ],
+  "observed": [
+    "Room 11 IN_PLAY before first Prophet activation",
+    "after ordinal 1 placement",
+    "ordinal 2 Rubble 0",
+    "Crowded PendingChoice",
+    "attack incoming-attack-window Rubble 0",
+    "attack hero-hit-window Rubble 0",
+    "ordinal 3 Rubble 0",
+    "ordinal 3 Rubble 1",
+    "ordinal 3 Rubble 2",
+    "attack incoming-attack-window Rubble 2",
+    "attack hero-hit-window Rubble 2",
+    "ordinal 3 Rubble 3",
+    "ordinal 3 Rubble 4",
+    "ordinal 1 Rubble 4",
+    "attack incoming-attack-window Rubble 1",
+    "attack hero-hit-window Rubble 1",
+    "Boss victory before settlement"
+  ],
+  "finalStateHash": "a885c5bb689a8e618d9f44759acbe9af335b8cd84e428940fe6ce2d19a8c1f4a",
+  "eventHash": "442caa48b19bf09659933114ece815b0b7a8cde963621d9d3a6b6f1f41c461b0",
+  "ruleSetVersion": "C1C35R2-PROPHET-DIGITAL-DEFAULT-v1",
+  "heroDodgeRuleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+  "questRunId": "qrun_mupoiu3p_nu1esa",
+  "encounterId": "cmp_mupoiaio_eqygyt:qrun_mupoiu3p_nu1esa:prophet:2",
+  "room": {
+    "roomId": "D",
+    "roomCardId": 44710,
+    "tileId": "ruins-tile-11",
+    "encounterId": "cmp_mupoiaio_eqygyt:qrun_mupoiu3p_nu1esa:prophet:2",
+    "lifecycle": "RETURNED"
+  },
+  "returnedPewIds": [
+    "qrun_mupoiu3p_nu1esa:boss:wooden-pew:1",
+    "qrun_mupoiu3p_nu1esa:boss:wooden-pew:2",
+    "qrun_mupoiu3p_nu1esa:boss:wooden-pew:3",
+    "qrun_mupoiu3p_nu1esa:boss:wooden-pew:4"
+  ],
+  "activePews": 0,
+  "pendingAttack": null,
+  "pendingChoice": null,
+  "defeatedBossFamilyIds": [
+    "necromancer",
+    "prophet"
+  ],
+  "defeatedThreatIds": [
+    "prophet-threat-level-2"
+  ],
+  "act": 3,
+  "campaignLevel": 3,
+  "transactions": [
+    "act-start:cmp_mupoiaio_eqygyt:act-2",
+    "boss-victory:cmp_mupoiaio_eqygyt:qrun_mupoiu3p_nu1esa",
+    "act-start:cmp_mupoiaio_eqygyt:act-3"
+  ],
+  "questCompletion": {
+    "outcome": "completed",
+    "xpPerHero": 1,
+    "heroes": [
+      {
+        "instanceId": "hero_mupoiaki_uolw99",
+        "level": 1,
+        "xp": 1
+      },
+      {
+        "instanceId": "hero_mupoialf_nlvzxc",
+        "level": 1,
+        "xp": 1
+      },
+      {
+        "instanceId": "hero_mupoiamd_n2l307",
+        "level": 1,
+        "xp": 1
+      },
+      {
+        "instanceId": "hero_mupoiand_tnu0he",
+        "level": 1,
+        "xp": 1
+      }
+    ],
+    "pendingQuestXp": null
+  },
+  "archivedQuestReceipts": [
+    {
+      "questRunId": "qrun_mupoid8f_8vgd87",
+      "encounterId": "cmp_mupoiaio_eqygyt:qrun_mupoid8f_8vgd87:prophet:2",
+      "threatCardId": 42010,
+      "ruleSetVersion": "C1C35R2-PROPHET-DIGITAL-DEFAULT-v1",
+      "receipts": [
+        "cmp_mupoiaio_eqygyt:qrun_mupoid8f_8vgd87:prophet:2:prophet-threat:qrun_mupoid8f_8vgd87:scout:start:A,B,C,D,E,F,G,H"
+      ]
+    },
+    {
+      "questRunId": "qrun_mupoily6_71qqn7",
+      "encounterId": "cmp_mupoiaio_eqygyt:qrun_mupoily6_71qqn7:prophet:2",
+      "threatCardId": 42010,
+      "ruleSetVersion": "C1C35R2-PROPHET-DIGITAL-DEFAULT-v1",
+      "receipts": [
+        "cmp_mupoiaio_eqygyt:qrun_mupoily6_71qqn7:prophet:2:prophet-threat:qrun_mupoily6_71qqn7:scout:start:A,B,C,D,E,F,G,H"
+      ]
+    }
+  ],
+  "attacks": [
+    {
+      "transactionId": "qrun_mupoiu3p_nu1esa:boss:round:1:ordinal:2:normal",
+      "physicalOrdinal": null,
+      "skillNumber": 1,
+      "attackRoll": 7,
+      "targetActorIds": [
+        "u_hero_mupoiamd_n2l307"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupoiu3p_nu1esa:boss:round:1:ordinal:3:pew:1",
+      "physicalOrdinal": 1,
+      "skillNumber": 3,
+      "attackRoll": 9,
+      "targetActorIds": [
+        "u_hero_mupoiand_tnu0he"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupoiu3p_nu1esa:boss:round:1:ordinal:3:pew:2",
+      "physicalOrdinal": 2,
+      "skillNumber": 3,
+      "attackRoll": 3,
+      "targetActorIds": []
+    },
+    {
+      "transactionId": "qrun_mupoiu3p_nu1esa:boss:round:1:ordinal:3:pew:3",
+      "physicalOrdinal": 3,
+      "skillNumber": 3,
+      "attackRoll": 6,
+      "targetActorIds": [
+        "u_hero_mupoialf_nlvzxc"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupoiu3p_nu1esa:boss:round:1:ordinal:3:pew:4",
+      "physicalOrdinal": 4,
+      "skillNumber": 3,
+      "attackRoll": 10,
+      "targetActorIds": []
+    },
+    {
+      "transactionId": "qrun_mupoiu3p_nu1esa:boss:round:2:ordinal:2:normal",
+      "physicalOrdinal": null,
+      "skillNumber": 2,
+      "attackRoll": 5,
+      "targetActorIds": [
+        "u_hero_mupoiamd_n2l307"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupoiu3p_nu1esa:boss:round:2:ordinal:3:pew:1",
+      "physicalOrdinal": 1,
+      "skillNumber": 3,
+      "attackRoll": 2,
+      "targetActorIds": []
+    },
+    {
+      "transactionId": "qrun_mupoiu3p_nu1esa:boss:round:2:ordinal:3:pew:2",
+      "physicalOrdinal": 2,
+      "skillNumber": 3,
+      "attackRoll": 2,
+      "targetActorIds": [
+        "u_hero_mupoiaki_uolw99"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupoiu3p_nu1esa:boss:round:2:ordinal:3:pew:3",
+      "physicalOrdinal": 3,
+      "skillNumber": 3,
+      "attackRoll": 1,
+      "targetActorIds": [
+        "u_hero_mupoiaki_uolw99"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupoiu3p_nu1esa:boss:round:2:ordinal:3:pew:4",
+      "physicalOrdinal": 4,
+      "skillNumber": 3,
+      "attackRoll": 2,
+      "targetActorIds": []
+    },
+    {
+      "transactionId": "qrun_mupoiu3p_nu1esa:boss:round:3:ordinal:2:normal",
+      "physicalOrdinal": null,
+      "skillNumber": 2,
+      "attackRoll": 10,
+      "targetActorIds": [
+        "u_hero_mupoiamd_n2l307"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupoiu3p_nu1esa:boss:round:3:ordinal:3:pew:1",
+      "physicalOrdinal": 1,
+      "skillNumber": 3,
+      "attackRoll": 1,
+      "targetActorIds": []
+    },
+    {
+      "transactionId": "qrun_mupoiu3p_nu1esa:boss:round:3:ordinal:3:pew:2",
+      "physicalOrdinal": 2,
+      "skillNumber": 3,
+      "attackRoll": 6,
+      "targetActorIds": []
+    },
+    {
+      "transactionId": "qrun_mupoiu3p_nu1esa:boss:round:3:ordinal:3:pew:3",
+      "physicalOrdinal": 3,
+      "skillNumber": 3,
+      "attackRoll": 10,
+      "targetActorIds": []
+    },
+    {
+      "transactionId": "qrun_mupoiu3p_nu1esa:boss:round:3:ordinal:3:pew:4",
+      "physicalOrdinal": 4,
+      "skillNumber": 3,
+      "attackRoll": 4,
+      "targetActorIds": []
+    },
+    {
+      "transactionId": "qrun_mupoiu3p_nu1esa:boss:round:4:ordinal:2:normal",
+      "physicalOrdinal": null,
+      "skillNumber": 2,
+      "attackRoll": 1,
+      "targetActorIds": [
+        "u_hero_mupoiamd_n2l307"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupoiu3p_nu1esa:boss:round:4:ordinal:3:pew:1",
+      "physicalOrdinal": 1,
+      "skillNumber": 3,
+      "attackRoll": 9,
+      "targetActorIds": []
+    },
+    {
+      "transactionId": "qrun_mupoiu3p_nu1esa:boss:round:4:ordinal:3:pew:2",
+      "physicalOrdinal": 2,
+      "skillNumber": 3,
+      "attackRoll": 2,
+      "targetActorIds": [
+        "u_hero_mupoiamd_n2l307"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupoiu3p_nu1esa:boss:round:4:ordinal:3:pew:3",
+      "physicalOrdinal": 3,
+      "skillNumber": 3,
+      "attackRoll": 8,
+      "targetActorIds": []
+    },
+    {
+      "transactionId": "qrun_mupoiu3p_nu1esa:boss:round:4:ordinal:3:pew:4",
+      "physicalOrdinal": 4,
+      "skillNumber": 3,
+      "attackRoll": 2,
+      "targetActorIds": []
+    }
+  ],
+  "spawnAudits": [],
+  "tavern": [
+    {
+      "level": 2,
+      "before": 2,
+      "after": 1,
+      "modifier": -2,
+      "active": true
+    },
+    {
+      "level": 2,
+      "before": 3,
+      "after": 2,
+      "modifier": -2,
+      "active": true
+    },
+    {
+      "level": 2,
+      "before": 3,
+      "after": 0,
+      "modifier": 0,
+      "active": false
+    }
+  ],
+  "stateObservations": [
+    {
+      "point": "after-draw-state-and-encounter-creation",
+      "stateHash": "c2bc398acd37a2be04ced3b6c4dfe3caa5d3f83c7f7d4005c8dda942fae7cbb8"
+    },
+    {
+      "point": "ordinary-battle-active",
+      "stateHash": "c2bc398acd37a2be04ced3b6c4dfe3caa5d3f83c7f7d4005c8dda942fae7cbb8"
+    },
+    {
+      "point": "ordinary-hero-turn-before-skill",
+      "stateHash": "c2bc398acd37a2be04ced3b6c4dfe3caa5d3f83c7f7d4005c8dda942fae7cbb8"
+    },
+    {
+      "point": "ordinary-battle-victory",
+      "stateHash": "a8b1519f6f6bc72b03d9e434c9be8c086c6de922b1c1293626d1258950e02a21"
+    },
+    {
+      "point": "ordinary-after-settlement",
+      "stateHash": "6f5bb8f09d6d3abb7799a62476699bb09af7364fd461add106f47f133fac1499"
+    },
+    {
+      "point": "ordinary-movement-choice",
+      "stateHash": "f8c68cc4251b53dcbded47cc6da6d79b6835e53978382d869a75210f4a825691"
+    },
+    {
+      "point": "boss-battle-active",
+      "stateHash": "12253530440a3e1955169b013aede558a9db35bd359f5c4f0d33a024e48da842"
+    },
+    {
+      "point": "boss-hero-turn-before-skill",
+      "stateHash": "a27c34446d10fbbdbf032f92f6f3532f1a8607579a4f79de7c192317ec226316"
+    },
+    {
+      "point": "boss-incoming-reaction",
+      "stateHash": "58b26555eab87c75cc7caa32348e131a641f7dac37b0834772faf1918df98575"
+    },
+    {
+      "point": "boss-battle-victory",
+      "stateHash": "b3d600251173bf9975d0444d30be1b6facd9144f78c18abd4daa105e4c520a65"
+    },
+    {
+      "point": "boss-after-settlement",
+      "stateHash": "86aaa040c6508fd63955876e05743bc351e63ba1701d38c64f0f9b3c7f03734b"
+    }
+  ]
+}

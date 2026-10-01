@@ -485,7 +485,7 @@ export function migrateCampaignToV3(campaign: CampaignState): CampaignState {
     const anyH = h as HeroInstance & Record<string, unknown>;
     const dead = typeof anyH.dead === 'boolean' ? anyH.dead : false;
     // 旧存档：wounds >= maxLife（hp<=0）但未死 → 恢复为 1 HP
-    const wounds = !dead && h.wounds >= h.maxLife ? h.maxLife - 1 : h.wounds;
+    const wounds = !dead && anyH.atDeathsDoor !== true && h.wounds >= h.maxLife ? h.maxLife - 1 : h.wounds;
     return {
       ...h,
       wounds: Math.max(0, wounds),
@@ -1620,9 +1620,10 @@ function sanitizeCampaignProgress(raw: CampaignProgressState): CampaignProgressS
       typeof raw.lastCampaignAdvanceTransactionId === 'string'
         ? raw.lastCampaignAdvanceTransactionId
         : null,
-    // 已有 activeThreatId 时不可能仍处于「待初始化」。
+    // A completed prior Act may retain its defeated Threat identity while the next draw is pending.
     pendingThreatInitialization:
-      typeof raw.activeThreatId === 'string' ? false : raw.pendingThreatInitialization !== false,
+      raw.pendingThreatInitialization === true && strArray(raw.defeatedThreatIds).includes(raw.activeThreatId ?? '')
+        ? true : typeof raw.activeThreatId === 'string' ? false : raw.pendingThreatInitialization !== false,
     actStartTransactionIds: strArray(raw.actStartTransactionIds),
   };
 }

@@ -1,4 +1,5 @@
 import { withBossEncounterSources } from '../bosses/foundation';
+import { applyBossRuntimeInput } from '../bosses/foundation';
 import { withRuinsRandom } from '../ruins/printed-effect-runtime';
 import { resolveDungeonTrinketOpportunity } from './dungeon-trinket-bridge';
 // Phase 8C：Trinket 与战斗/地牢流程的桥接（开发文档 §11 / §12）。
@@ -45,11 +46,12 @@ function hasOpenForRoot(campaign: CampaignState, rootEventId: string): boolean {
  * needed after a window is persisted on pendingMonsterAttack before control is
  * returned to the UI.
  */
-export function advancePendingMonsterAttack(campaign: CampaignState, sourceScope = false): CampaignState {
+export function advancePendingMonsterAttack(campaign: CampaignState, sourceScope = false, playerContinue = false): CampaignState {
+  if(campaign.battle?.bossEncounter?.checkpointContext?.playerRouteVersion && campaign.battle.pendingMonsterAttack && !playerContinue)return campaign;
   if (!sourceScope && campaign.battle?.pendingMonsterAttack?.sourceAttack) {
     let result = campaign;
     const battle = withBossEncounterSources(structuredClone(campaign.battle), b=> {
-      result = advancePendingMonsterAttack({ ...campaign,battle:b },true); return result.battle!;
+      result = advancePendingMonsterAttack({ ...campaign,battle:b },true,playerContinue); return result.battle!;
     });
     return {...result,battle};
   }
@@ -80,12 +82,15 @@ export function advancePendingMonsterAttack(campaign: CampaignState, sourceScope
         return next;
       }
       next = { ...next, battle: freezePendingMonsterAttack(next.battle!) };
+      if(next.battle?.bossEncounter?.checkpointContext?.playerRouteVersion)return next;
       continue;
     }
 
     if (!pending.hit) {
       const committed = commitPendingMonsterAttackResolution(battle);
+      if (committed.bossEncounter?.checkpointContext?.playerRouteVersion) return { ...next, battle: committed };
       next = { ...next, battle: committed.status === 'active' && !committed.pendingMonsterAttack && !committed.bossEncounter?.pendingChoice && !committed.ruinsContext?.pendingChoice ? advanceTurn(committed) : committed };
+      if(next.battle?.bossEncounter?.checkpointContext?.playerRouteVersion)return next;
       continue;
     }
     const opened = openTrinketWindow(next, {
@@ -102,7 +107,9 @@ export function advancePendingMonsterAttack(campaign: CampaignState, sourceScope
       return next;
     }
     const committed = commitPendingMonsterAttackResolution(next.battle!);
+    if (committed.bossEncounter?.checkpointContext?.playerRouteVersion) return { ...next, battle: committed };
     next = { ...next, battle: committed.status === 'active' && !committed.ruinsContext?.pendingChoice ? advanceTurn(committed) : committed };
+    if(next.battle?.bossEncounter?.checkpointContext?.playerRouteVersion)return next;
   }
   return next;
 }
@@ -160,9 +167,12 @@ export function beginHeroSkillAction(
   const hero = heroId ? findHero(campaign, heroId) : undefined;
 
   // Roll first. The result is persisted and visible while the reaction window is open.
-  const attackRoll = battle.ruinsContext ? withRuinsRandom(battle, () => rollAttackDie()) : rollAttackDie();
+  const prophetRoll=battle.bossEncounter?.prophetProduction ? applyBossRuntimeInput(battle,
+    {type:'PROPHET_HERO_ATTACK_ROLL',heroId:actorUnitId,skillId,targetId}) : null;
+  const attackRoll = prophetRoll ? prophetRoll.bossEncounter!.prophetProduction!.playerAttack!.attackRoll
+    : battle.ruinsContext ? withRuinsRandom(battle, () => rollAttackDie()) : rollAttackDie();
   const rootEventId = `atk:${battle.battleId}:r${battle.round}:i${battle.initiativeIndex}:${actorUnitId}:ap${battle.currentActionPoints}`;
-  let next = campaign;
+  let next = prophetRoll ? {...campaign,battle:prophetRoll} : campaign;
   let openedInstanceIds: string[] = [];
   if (hero) {
     const opened = openTrinketWindow(next, {
@@ -204,14 +214,17 @@ function advancePendingAction(campaign: CampaignState): CampaignState {
   const pa = battle?.pendingAction;
   if (!battle || !pa) return campaign;
   if (pa.stage === 'post-roll-window') {
-    const prepared = battle.ruinsContext ? withRuinsRandom(battle,
+    const prophetPrepared=battle.bossEncounter?.prophetProduction ? applyBossRuntimeInput(battle,
+      {type:'PROPHET_HERO_ATTACK_PREPARE',heroId:pa.actorUnitId,skillId:pa.skillId,bonuses:pendingBonuses(pa)}) : null;
+    const prepared = prophetPrepared ? prophetPrepared.bossEncounter!.prophetProduction!.playerAttack!.prepared!
+      : battle.ruinsContext ? withRuinsRandom(battle,
       () => prepareHeroAttackResolution(battle, pa.actorUnitId, pa.skillId, pendingBonuses(pa), pa.attackRoll))
       : prepareHeroAttackResolution(battle, pa.actorUnitId, pa.skillId, pendingBonuses(pa), pa.attackRoll);
     if (!prepared) return { ...campaign, battle: { ...battle, pendingAction: null } };
     const frozen: PendingBattleAction = {
       ...pa, stage: 'pre-damage-window', hit: prepared.hit, crit: prepared.crit, baseDamage: prepared.baseDamage,
     };
-    let next: CampaignState = { ...campaign, battle: { ...battle, pendingAction: frozen } };
+    let next: CampaignState = { ...campaign, battle: { ...(prophetPrepared ?? battle), pendingAction: frozen } };
     if (prepared.hit) {
       const heroId = heroInstanceIdForUnit(next, pa.actorUnitId);
       if (heroId) {

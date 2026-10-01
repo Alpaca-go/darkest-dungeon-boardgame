@@ -1,3 +1,4 @@
+import { validateProphetThreatReceipts } from '../prophet/threat-receipts';
 import type {CampaignState, BattleState} from '../../types';
 import type {BossEncounterState} from '../../types/boss-runtime';
 import {encounterRuleDependencies, resolveBossDefinition} from './definitions';
@@ -46,10 +47,9 @@ export function validateBossSaveContracts(c: Partial<CampaignState>): void {
     if(!ctx||ctx.campaignId!==c.id||ctx.questRunId!==c.dungeon?.questRunId||ctx.battleId!==c.battle.battleId
       ||ctx.campaignLevel!==c.campaignProgress?.campaignLevel||ctx.threatId!==c.campaignProgress.activeThreatId
       ||e.bossFamily!==c.campaignProgress.activeBossFamilyId)throw new Error('Live Prophet campaign identity mismatch');
-    const receipts=e.events.filter(event=>event.eventType==='PROPHET_THREAT_APPLIED').map(event=>(event.result as {once:string}).once);
-    if(JSON.stringify(receipts)!==JSON.stringify(ctx.consumedOnceKeys)||JSON.stringify(receipts)!==JSON.stringify(c.activeThreatRuntime?.consumedOnceKeys??[])
-      ||receipts.some(id=>!c.processedCampaignTransactionIds?.includes(id)))throw new Error('Live Prophet Threat receipt mismatch');
+
   }
+  validateProphetThreatReceipts(c);
   if (c.battle) validateBossBattleContracts(c.battle);
   validateProductionBossRoomStorage(c);
 }

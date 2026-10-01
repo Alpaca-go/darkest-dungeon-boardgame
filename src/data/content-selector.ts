@@ -1,7 +1,9 @@
 import type { CampaignState, QuestDefinition } from '../types';
 import type { CommunityContentSet, CommunityRegion, RuntimeContentMetadata } from '../types/content-runtime';
 import type { TrinketDefinition, TrinketLevel } from '../types/trinkets';
-import { PRODUCTION_NECROMANCER_QUEST } from './quests/production-necromancer-quest';
+import { PRODUCTION_FACE_THE_THREAT_QUEST } from './quests/production-face-the-threat';
+import { resolveProductionBossRuleSetVersion, productionBossFamilyRegistry } from '../game-engine/bosses/definitions';
+import { campaignHeroDodgeRuleSetVersion } from '../game-engine/rules/hero-dodge-versioning';
 import { QUESTS, STANDARD_QUESTS } from './quests';
 import { officialTrinketPool } from './trinkets/trinket-registry';
 import {
@@ -16,6 +18,7 @@ export interface RuntimeContentContext {
   campaignLevel?: number;
   bossFamilyId?: string | null;
   bossRuleSetVersion?: string;
+  heroDodgeRuleSetVersion?: string;
 }
 
 export function runtimeContentContext(campaign: CampaignState): RuntimeContentContext {
@@ -25,7 +28,8 @@ export function runtimeContentContext(campaign: CampaignState): RuntimeContentCo
     enabledRegions: campaign.enabledRegions ?? ['ruins', 'warrens', 'weald', 'cove'],
     campaignLevel: campaign.campaignProgress.campaignLevel,
     bossFamilyId: campaign.campaignProgress.activeBossFamilyId,
-    bossRuleSetVersion: campaign.heroDodgeRuleSetSelection?.ruleSetVersion,
+    bossRuleSetVersion: resolveProductionBossRuleSetVersion(campaign),
+    heroDodgeRuleSetVersion: campaignHeroDodgeRuleSetVersion(campaign),
   };
 }
 
@@ -83,8 +87,10 @@ export function getBossQuestPool(context: RuntimeContentContext): QuestDefinitio
     return QUESTS.filter((quest) => !STANDARD_QUESTS.some((standard) => standard.id === quest.id));
   }
   const existing = filterCommunityQuestCandidates(COMMUNITY_RUNTIME_QUESTS, { ...context, campaignLevel: undefined }).filter(q=>q.type==='boss');
-  if (context.bossFamilyId === 'necromancer' && context.bossRuleSetVersion === 'C1C31-DIGITAL-DEFAULT-v2'
-    && (context.enabledContentSets ?? ['core']).includes('core') && (context.enabledRegions ?? ['ruins']).includes('ruins')) return [...existing,PRODUCTION_NECROMANCER_QUEST];
+  const adapter = productionBossFamilyRegistry.get(context.bossFamilyId ?? '');
+  if (adapter?.unrestrictedSelectorAllowed && adapter.ruleSetVersions.includes(context.bossRuleSetVersion ?? '')
+    && (context.heroDodgeRuleSetVersion ?? (context.bossFamilyId === 'necromancer' ? context.bossRuleSetVersion : undefined)) === 'C1C31-DIGITAL-DEFAULT-v2'
+    && (context.enabledContentSets ?? ['core']).includes('core') && (context.enabledRegions ?? ['ruins']).includes('ruins')) return [...existing.filter(q=>q.id !== PRODUCTION_FACE_THE_THREAT_QUEST.id),PRODUCTION_FACE_THE_THREAT_QUEST];
   return existing;
 }
 

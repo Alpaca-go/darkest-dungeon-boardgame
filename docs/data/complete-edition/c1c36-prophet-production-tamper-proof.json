@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C36",
+  "baseline": "4d1fb9c0af33bb21cf4fa030aa081d5cff3a5106",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "ruleSetVersion": "C1C35R2-PROPHET-DIGITAL-DEFAULT-v1",
+  "heroDodgeRuleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+  "ruinsRuleSetVersion": "C1C32R2C-R-DIGITAL-DEFAULT-v6",
+  "status": "PASS",
+  "proofScope": "DETERMINISTIC_NODE_INTEGRATION_SEPARATE_FROM_BROWSER_ACCEPTANCE",
+  "rows": [
+    {
+      "kind": "globalReceiptMissing",
+      "validationRejected": true,
+      "restoreRejected": true
+    },
+    {
+      "kind": "duplicateGlobalReceipt",
+      "validationRejected": true,
+      "restoreRejected": true
+    },
+    {
+      "kind": "archiveQuestId",
+      "validationRejected": true,
+      "restoreRejected": true
+    },
+    {
+      "kind": "archiveSourceCard",
+      "validationRejected": true,
+      "restoreRejected": true
+    },
+    {
+      "kind": "archiveEventSequence",
+      "validationRejected": true,
+      "restoreRejected": true
+    },
+    {
+      "kind": "archiveCausalParent",
+      "validationRejected": true,
+      "restoreRejected": true
+    },
+    {
+      "kind": "archiveRuleVersion",
+      "validationRejected": true,
+      "restoreRejected": true
+    },
+    {
+      "kind": "archiveOnceKey",
+      "validationRejected": true,
+      "restoreRejected": true
+    },
+    {
+      "kind": "currentQuestId",
+      "validationRejected": true,
+      "restoreRejected": true
+    },
+    {
+      "kind": "currentHeroDependency",
+      "validationRejected": true,
+      "restoreRejected": true
+    },
+    {
+      "kind": "receiptTransaction",
+      "validationRejected": true,
+      "restoreRejected": true
+    },
+    {
+      "kind": "roomOwnership",
+      "validationRejected": true,
+      "restoreRejected": true
+    }
+  ]
+}

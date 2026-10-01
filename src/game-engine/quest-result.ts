@@ -4,7 +4,7 @@ import type {
   QuestOutcome,
   QuestResultSummary,
 } from '../types';
-import { getQuestById, isStandardQuestId } from '../data/quests';
+import { getCampaignQuest, isStandardQuestId } from '../data/quests';
 import { pushLog } from './log';
 import { convertResolveStatesAtQuestEnd } from './resolve-conversion';
 import { createRuleEventContext, emitPartyRuleEvent } from './quirks';
@@ -60,14 +60,14 @@ export function resolveQuestResult(
   campaign: CampaignState,
   reason: QuestEndReason
 ): QuestResultSummary {
-  const quest = getQuestById(campaign.currentQuestId ?? '');
+  const quest = getCampaignQuest(campaign);
   const allDead = !campaign.heroes.some((h) => h.isAlive);
   const objectiveComplete = evaluateQuestCompletion(campaign);
   // Locked Core p14: ordinary Quests do not fail; award only the objectives
   // completed so far. Source Threat metadata makes this successor boundary
   // explicit, so historical outcomes and schema-1 replays retain their mapping.
   const sourceStandardReturn = campaign.runtimeContentProfile === 'community-complete-edition'
-    && campaign.activeThreatRuntime?.bossDefinitionId.startsWith('necromancer-source-level-')
+    && ['necromancer','prophet'].some(f=>campaign.activeThreatRuntime?.bossDefinitionId.startsWith(`${f}-source-level-`))
     && isStandardQuestId(campaign.currentQuestId ?? '') && quest?.xpUnit?.minimumQuestGoal === null;
 
   let outcome: QuestOutcome;

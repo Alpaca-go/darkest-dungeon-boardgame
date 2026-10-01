@@ -167,6 +167,7 @@ export interface BossEncounterState {
     questRunId: string;
     /** Threat identity spans the Act; this encounter belongs to one Quest. */
     questScope?: 'STANDARD' | 'FACE_THE_THREAT';
+    playerRouteVersion?: 'C1C36-PROPHET-PLAYER-ROUTE-v1';
     campaignLevel: number;
     threatId: string;
     definitionVersion: string;
@@ -178,6 +179,12 @@ export interface BossEncounterState {
   };
 }
 export type BossRuntimeInput =
+  | {type:'PROPHET_HERO_ATTACK_ROLL';heroId:string;skillId:string;targetId:string}
+  | {type:'PROPHET_HERO_ATTACK_PREPARE';heroId:string;skillId:string;bonuses:import('../game-engine/battle').TrinketActionBonuses}
+  | {type:'PROPHET_HERO_SKILL';heroId:string;skillId:string;targetId:string;bonuses:import('../game-engine/battle').TrinketActionBonuses;finalDamageOverride?:number|null}
+  | {type:'PROPHET_HERO_MOVE';heroId:string;direction:-1|1}
+  | {type:'PROPHET_CAMPAIGN_CONSEQUENCES';mentalGuardLimit:number}
+  | {type:'PROPHET_CROWDED_ATTACK'}
   | {type:'PROPHET_ADVANCE_TURN'}
   | {type:'PROPHET_NEXT_PEW'}
   | {type:'PROPHET_ATTACK_FREEZE'}

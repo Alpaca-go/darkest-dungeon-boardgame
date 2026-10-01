@@ -1,3 +1,4 @@
+import { enterProphetProductionOrdinary } from '../prophet/production-ordinary';
 import type { BattleState, CampaignState } from '../../types';
 import { RUINS_STANCES, RUINS_V6 } from '../../types/ruins-executable';
 import { createRuinsDrawState, drawOrdinaryRuinsEncounter, validateRuinsDrawState } from './encounter-draw';
@@ -13,8 +14,8 @@ import { advanceTurn, checkEnd } from '../battle';
 
 export function hasProductionOrdinaryThreat(c: CampaignState): boolean {
   return c.ruinsRuleSetSelection?.ruleSetVersion === RUINS_V6
-    && c.bossEncounterCheckpoint?.bossFamily === 'necromancer'
-    && !!c.bossEncounterCheckpoint.checkpointContext?.heroDodgeBindings;
+    && ['necromancer','prophet'].includes(c.bossEncounterCheckpoint?.bossFamily ?? '')
+    && !!c.bossEncounterCheckpoint?.checkpointContext?.heroDodgeBindings;
 }
 
 /** Transient event/source adapter. Never attached to the ordinary Battle or persisted twice. */
@@ -36,6 +37,7 @@ function seed(text: string): number {
 export function enterProductionOrdinaryThreat(campaign: CampaignState, roomId: string): CampaignState {
   if (!hasProductionOrdinaryThreat(campaign) || campaign.battle || !campaign.dungeon
     || campaign.dungeon.currentRoomId !== roomId) throw new Error('Production ordinary Threat entry unavailable');
+  if (campaign.bossEncounterCheckpoint?.bossFamily==='prophet') return enterProphetProductionOrdinary(campaign,roomId);
   validateThreatCheckpoint(campaign, campaign.bossEncounterCheckpoint!);
   const next = structuredClone(campaign);
   const e = next.bossEncounterCheckpoint!;

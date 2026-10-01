@@ -682,6 +682,13 @@ export function finalizeQuestReturnToHamlet(
   },
 ): CampaignCommandResult {
   const now = input.now ?? nowIso();
+  const committedPlayerBoss=campaign.bossEncounterHistory?.find(e=>e.checkpointContext?.playerRouteVersion
+    && e.checkpointContext.questRunId===input.questRunId && e.cleanupState.completed
+    && e.cleanupState.campaignTransactionId===campaignTransactionIds.bossVictory(campaign.id,input.questRunId));
+  // The normal production Battle settlement already committed victory and its earned Act transition.
+  if(input.questId===FACE_THE_THREAT_QUEST_ID&&committedPlayerBoss
+    &&hasTransaction(campaign,committedPlayerBoss.cleanupState.campaignTransactionId!))
+    return {ok:true,campaign,transactionId:committedPlayerBoss.cleanupState.campaignTransactionId!,alreadyApplied:true,error:null};
 
   if (isStandardQuestId(input.questId)) {
     return finalizeQuestProgress(campaign, {

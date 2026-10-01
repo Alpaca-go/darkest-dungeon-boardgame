@@ -3,6 +3,7 @@ import { DUNGEON_NODES, roomTypeMapForQuest } from '../data/dungeons';
 import { CURIOS } from '../data/curios';
 import { createId, d10, pick } from './random';
 import {applyProphetThreatEvent} from './prophet/production-threat';
+import { withTransactionRecorded } from './campaign/campaign-orchestrator';
 import { initBattle } from './battle';
 import { pushLog } from './log';
 import { applyExplorationResult, rollExplorationResult } from './exploration';
@@ -13,11 +14,11 @@ import { drawTrinket } from './trinkets/draw-trinket';
 import { acquireTrinket } from './trinkets/acquire-trinket';
 import type { MentalEventSourceType } from '../types';
 import { runtimeContentContext } from '../data/content-selector';
-import { getQuestById } from '../data/quests';
+import { getCampaignQuest, getQuestById } from '../data/quests';
 import type { QuestRoomTokenType } from '../types/content-runtime';
 import { recordQuestQualificationEvent } from './quests/quest-runtime';
 import { enterProductionBossRoom } from './commands/boss-foundation';
-import { necromancerQuestEntryError } from './bosses/production-dependency-gate';
+import { productionBossQuestEntryError } from './bosses/production-dependency-gate';
 import { hasProductionOrdinaryThreat, enterProductionOrdinaryThreat } from './ruins/production-threat-runtime';
 
 /** Phase 7：全队压力统一入口（存活英雄各 +amount，走统一管线处理阈值）。 */
@@ -206,6 +207,8 @@ export function canMoveTo(dungeon: DungeonState, roomId: string): boolean {
 /** Scout：揭示相邻隐藏房间，全队 Stress +1，记录日志。 */
 export function scoutDungeon(campaign: CampaignState): CampaignState {
   if (!campaign.dungeon || !canScout(campaign.dungeon)) return campaign;
+  const playerRoute=campaign.bossEncounterCheckpoint?.checkpointContext?.playerRouteVersion;
+  const scoutTransaction=playerRoute ? `${campaign.dungeon.questRunId}:scout:${campaign.dungeon.currentRoomId}:${campaign.dungeon.rooms.filter(r=>r.status==='hidden').map(r=>r.id).sort().join(',')}` : createId('prophet-scout');
   let next: CampaignState = {
     ...campaign,
     dungeon: { ...revealAdjacentRooms(campaign.dungeon), scoutedNextMove: true },
@@ -214,7 +217,8 @@ export function scoutDungeon(campaign: CampaignState): CampaignState {
   next = pushLog(next, '小队进行了侦察（Scout），相邻房间被揭示，全队压力 +1。', 'warning');
   // Phase 8A：scout-attempted 时机事件（Fear of the Unknown 等）
   next = emitPartyRuleEvent(next, 'scout-attempted', createRuleEventContext());
-  return applyProphetThreatEvent(next,{type:'SCOUTING',transactionId:createId('prophet-scout')});
+  if(playerRoute) next=withTransactionRecorded(next,scoutTransaction);
+  return applyProphetThreatEvent(next,{type:'SCOUTING',transactionId:scoutTransaction});
 }
 
 /**
@@ -257,7 +261,7 @@ function applyRoomResult(campaign: CampaignState, room: DungeonRoom): CampaignSt
       next = { ...next, dungeon: markRoom(next.dungeon!, room.id, 'visited') };
       return log(next, '使用 1 Tool 忽略 Trap Room；该房间不能被清除。', 'warning');
     }
-    const level = Math.max(1, getQuestById(campaign.currentQuestId ?? '')?.dungeonLevel ?? 1);
+    const level = Math.max(1, getCampaignQuest(campaign)?.dungeonLevel ?? 1);
     next = applyPartyStress(next, level, 'exploration', `trap-room:${room.id}`);
     next = { ...next, dungeon: markRoom(next.dungeon!, room.id, 'visited') };
     return log(next, `Trap Room：每名英雄承受 ${level} Stress；该房间不能被清除。`, 'danger');
@@ -299,7 +303,7 @@ function applyRoomResult(campaign: CampaignState, room: DungeonRoom): CampaignSt
     }
     case 'objective': {
       if (campaign.runtimeContentProfile === 'community-complete-edition' && campaign.currentQuestId === 'face-the-threat'
-        && campaign.campaignProgress.activeBossFamilyId === 'necromancer') return enterProductionBossRoom(campaign, room.id);
+        ) return enterProductionBossRoom(campaign, room.id);
       const updated = markRoom(dungeon, room.id, 'cleared');
       const c: CampaignState = {
         ...campaign,
@@ -366,7 +370,7 @@ export function moveToRoom(campaign: CampaignState, roomId: string): CampaignSta
 
 export function commitMoveToRoom(campaign: CampaignState, roomId: string, result: ExplorationEventResult | null): CampaignState {
   if (campaign.dungeon?.rooms.some(r => r.id === roomId && r.type === 'objective')
-    && necromancerQuestEntryError(campaign, campaign.currentQuestId ?? '')) return campaign;
+    && productionBossQuestEntryError(campaign, campaign.currentQuestId ?? '')) return campaign;
   if (!campaign.dungeon) return campaign;
   if (!canMoveTo(campaign.dungeon, roomId)) return campaign;
 

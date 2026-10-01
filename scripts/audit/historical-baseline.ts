@@ -13,6 +13,7 @@ export const historicalBaselines = {
   c1c35: { commit: '7b99c36c19159923799b3bda0180af9d8020ef82', script: 'scripts/audit/c1c35-prophet-contract.ts' },
   c1c35r1: { commit: '7a3a483cba0dca0eb537e744980eecd4c55fef24', script: 'scripts/audit/c1c35r1-prophet-contract.ts' },
   c1c35r2: { commit: '101c27c8c15fcb93802f956f399c37ed9c38a2e9', script: 'scripts/audit/c1c35r2-foundation-review.ts' },
+  c1c35r2br1: { phase: 'C1C35R2B-R1', commit: '4d1fb9c0af33bb21cf4fa030aa081d5cff3a5106', script: 'scripts/audit/c1c35r2b-foundation.ts', artifactPrefixes: ['c1c35r2br1-'] },
   c1c35r2ar: { phase: 'C1C35R2A-R', commit: '007712ab6aec2c814fa31e06cf5fe05b21a30879', script: 'scripts/audit/c1c35r2a-shared-dispatch.ts', artifactPrefixes: ['c1c35r2a-', 'c1c35r2a-r-'] },
 } as const;
 
@@ -21,6 +22,8 @@ export const historicalBaselines = {
 export function verifyHistoricalBaseline(phase: keyof typeof historicalBaselines, testFiles: string[] = [], probe?: (checkout: string)=>void) {
   // Frozen infrastructure-only rejection is exercised with its original executor, not successor gameplay.
   if(phase==='c1c35r2ar'&&!testFiles.length)testFiles=['src/audit/c1c35r2a-shared-dispatch.test.ts'];
+  const fullProphetFoundation=phase==='c1c35r2br1' && !testFiles.length;
+  if (fullProphetFoundation) testFiles=['src'];
   const { commit, script } = historicalBaselines[phase];
   const git = (args: string[]) => execFileSync('git', args, { maxBuffer: 128 * 1024 * 1024 });
   git(['merge-base', '--is-ancestor', commit, 'HEAD']);
@@ -41,7 +44,7 @@ export function verifyHistoricalBaseline(phase: keyof typeof historicalBaselines
       copyFileSync('docs/DD_EN_COREBOX_RULES.pdf', join(checkout, 'docs/DD_EN_COREBOX_RULES.pdf'));
     }
     symlinkSync(resolve('node_modules'), join(checkout, 'node_modules'), process.platform === 'win32' ? 'junction' : 'dir');
-    const flags = phase === 'c1c35r2ar' ? ['--verify-dispatch'] : phase === 'c1c35r1' ? ['--verify-r1'] : phase === 'c1c35r2' ? ['--verify-r2'] : phase.startsWith('c1c3') ? ['--verify'] : [];
+    const flags = phase === 'c1c35r2br1' ? ['--verify-r2b'] : phase === 'c1c35r2ar' ? ['--verify-dispatch'] : phase === 'c1c35r1' ? ['--verify-r1'] : phase === 'c1c35r2' ? ['--verify-r2'] : phase.startsWith('c1c3') ? ['--verify'] : [];
     execFileSync(process.execPath, ['--import', pathToFileURL(resolve('scripts/audit/legacy-transport-preload.mjs')).href, resolve('node_modules/vite-node/vite-node.mjs'), script, ...flags],
       { cwd: checkout, stdio: 'pipe', maxBuffer: 16 * 1024 * 1024,
         env: { ...process.env, DDBG_LEGACY_TRANSPORT_ARCHIVE: resolve('docs/data/complete-edition/source-assets/c1c34/legacy-transport.json.gz') } });
@@ -50,6 +53,8 @@ export function verifyHistoricalBaseline(phase: keyof typeof historicalBaselines
       execFileSync(process.execPath, [resolve('node_modules/vitest/vitest.mjs'), 'run', ...testFiles, '--maxWorkers=1', '--minWorkers=1', '--reporter=json', '--outputFile', report], {cwd: checkout, stdio: 'pipe', maxBuffer: 16 * 1024 * 1024});
       const tests=JSON.parse(readFileSync(report,'utf8'));
       if (tests.numFailedTests || tests.numFailedTestSuites || tests.numPendingTests || tests.numTodoTests) throw new Error('Historical suites require zero failed/pending/todo');
+      if(fullProphetFoundation && (tests.numPassedTests!==2729 || tests.testResults.find((r:{name:string})=>r.name.replace(/\\/g,'/').endsWith('/c1c35r2br1-prophet-production.test.ts'))?.assertionResults.length!==67))
+        throw new Error('R2B-R1 requires exactly 2729 regression tests and 67 targeted tests');
       console.log(`${phase} unchanged historical suites: ${tests.numPassedTests} passed; 0 failed / pending / todo`);
     }
     probe?.(checkout);

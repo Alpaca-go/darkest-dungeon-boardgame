@@ -19,7 +19,7 @@ import { selectQuest } from '../campaign';
 import { engineChooseQuest } from '../campaign/campaign-orchestrator';
 import { getBossQuestPool, getQuestPool, runtimeContentContext } from '../../data/content-selector';
 import { reserveProductionBossEncounter } from './boss-foundation';
-import { necromancerQuestEntryError } from '../bosses/production-dependency-gate';
+import { productionBossQuestEntryError } from '../bosses/production-dependency-gate';
 import { checkpointForPreparationDay, enterNecromancerPreparationDay } from '../campaign/necromancer-preparation-day';
 
 export type QuestCommandError =
@@ -170,8 +170,9 @@ export function commitReturnToHamlet(
   if (canEnterHamlet && standardCheckpoint) {
     if (standardCheckpoint.checkpointContext!.questRunId !== input.questRunId || next.battle
       || next.ruinsDrawState?.encounters.some(e => !e.returned)) throw new Error('Settle Standard Quest before checkpoint archival');
-    if (!next.necromancerQuestThreatHistory?.some(h => h.questRunId === input.questRunId)) next = withTransactionRecorded({ ...next,
-      necromancerQuestThreatHistory: [...(next.necromancerQuestThreatHistory ?? []), {
+    const historyKey = standardCheckpoint.bossFamily === 'prophet' ? 'prophetQuestThreatHistory' : 'necromancerQuestThreatHistory';
+    if (!next[historyKey]?.some(h => h.questRunId === input.questRunId)) next = withTransactionRecorded({ ...next,
+      [historyKey]: [...(next[historyKey] ?? []), {
         questRunId: input.questRunId, activeThreatId: standardCheckpoint.checkpointContext!.threatId,
         checkpoint: structuredClone(standardCheckpoint),
         ...(next.ruinsDrawState ? { drawState: structuredClone(next.ruinsDrawState) } : {}),
@@ -212,7 +213,7 @@ export function commitQuestSelection(
   questId: string,
   options?: { now?: string },
 ): QuestSelectionResult {
-  const dependencyError = necromancerQuestEntryError(campaign, questId);
+  const dependencyError = productionBossQuestEntryError(campaign, questId);
   if (dependencyError) return { ok: false, campaign, error: dependencyError };
   if (campaign.bossEncounterCheckpoint || campaign.battle?.bossEncounter) {
     if (questId !== campaign.currentQuestId) return {ok:false,campaign,error:'active-boss-encounter'};

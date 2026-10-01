@@ -1,3 +1,5 @@
+import { productionBossFamilyRegistry } from './definitions';
+import { prophetProductionDependencyGate } from '../prophet/production-dependency-gate';
 import type { CampaignState } from '../../types';
 import { getHeroCombatDefinition } from '../../data/progression/hero-level-registry';
 import { HERO_DODGE_V1, resolveHeroDodge } from '../rules/hero-dodge';
@@ -49,4 +51,14 @@ export function necromancerQuestEntryError(campaign: CampaignState, questId: str
     return necromancerProductionDependencyGate(campaign, campaign.campaignProgress.campaignLevel).enabled
       ? null : 'necromancer-production-dependencies-unbound';
   } catch { return 'necromancer-production-dependencies-unbound'; }
+}
+
+/** Normal player route fails closed for unregistered families. */
+export function productionBossQuestEntryError(campaign: CampaignState, questId: string): string | null {
+  if (campaign.runtimeContentProfile !== 'community-complete-edition' || questId !== 'face-the-threat') return null;
+  const family = campaign.campaignProgress.activeBossFamilyId;
+  if (!family || !productionBossFamilyRegistry.has(family)) return 'production-boss-family-unaccepted';
+  if (family === 'necromancer') return necromancerQuestEntryError(campaign,questId);
+  try { return prophetProductionDependencyGate(campaign,campaign.campaignProgress.campaignLevel).enabled
+    ? null : 'prophet-production-dependencies-unbound'; } catch { return 'prophet-production-dependencies-unbound'; }
 }

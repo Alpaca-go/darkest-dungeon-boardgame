@@ -256,7 +256,9 @@ export function isLoadoutComplete(campaign: CampaignState): boolean {
  */
 export function selectQuest(campaign: CampaignState, questId: string): CampaignState {
   const quest = campaign.runtimeContentProfile === 'community-complete-edition' && questId === 'face-the-threat'
-    && campaign.campaignProgress.activeBossFamilyId === 'necromancer' ? PRODUCTION_NECROMANCER_QUEST : getQuestById(questId);
+    && (campaign.campaignProgress.activeBossFamilyId === 'necromancer'
+      || campaign.campaignProgress.activeBossFamilyId === 'prophet' && campaign.activeThreatRuntime?.active
+        && campaign.activeThreatRuntime.bossFamilyId === 'prophet') ? PRODUCTION_NECROMANCER_QUEST : getQuestById(questId);
   if (!quest) return campaign;
   // Phase 11A.1 §8.1 / §8.2：Engine 侧门控（即使 UI 绕过也必须拒绝）。
   const validation = validateQuestSelection(campaign, questId);

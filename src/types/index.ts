@@ -798,6 +798,9 @@ export interface CampaignState {
   ruinsDrawState?: import('../game-engine/ruins/encounter-draw').RuinsDrawState;
   necromancerPreparationDay?: import('../game-engine/campaign/necromancer-preparation-day').NecromancerPreparationDay;
   /** Settled Standard Quest checkpoints, distinct from completed Boss encounters. */
+  prophetQuestThreatHistory?: Array<{ questRunId: string; activeThreatId: string;
+    checkpoint: import('./boss-runtime').BossEncounterState;
+    drawState?: import('../game-engine/ruins/encounter-draw').RuinsDrawState }>;
   necromancerQuestThreatHistory?: Array<{ questRunId: string; activeThreatId: string;
     checkpoint: import('./boss-runtime').BossEncounterState;
     drawState?: import('../game-engine/ruins/encounter-draw').RuinsDrawState }>;

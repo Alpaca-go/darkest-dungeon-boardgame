@@ -18,6 +18,14 @@ export function applyProphetThreatEvent(campaign:CampaignState,event:ProphetThre
     ||event.type==='MONSTER_SPAWN'&&event.transactionId!==`${campaign.battle!.battleId}:spawn:${event.actorId}`)
     throw new Error('Prophet Threat causal transaction identity mismatch');
   const hook=contract.requiredHooks.find(h=>h.level===saved.bossLevel)!;
+  const playerRoute=saved.checkpointContext!.playerRouteVersion;
+  if(playerRoute && event.type==='SCOUTING' && (!event.transactionId.startsWith(`${campaign.dungeon!.questRunId}:scout:`)
+    || !campaign.processedCampaignTransactionIds.includes(event.transactionId))) throw new Error('Prophet Threat requires committed Scout transaction');
+  const spawned=event.type==='MONSTER_SPAWN'?campaign.battle!.monsters.find(m=>m.id===event.actorId)!:null;
+  const drawn=spawned?campaign.ruinsDrawState?.encounters.find(x=>x.encounterId===campaign.battle!.ruinsContext?.encounterId
+    && !x.returned)?.monsters.find(x=>spawned.id===`ruins:${campaign.battle!.ruinsContext!.encounterId}:${x.copyId}` && x.definitionId===spawned.sourceId):null;
+  if(playerRoute && event.type==='MONSTER_SPAWN' && (!drawn || campaign.battle!.ruinsContext?.ruleSetVersion!=='C1C32R2C-R-DIGITAL-DEFAULT-v6'))
+    throw new Error('Prophet Threat requires authoritative physical Ruins spawn');
   const tags=event.type==='MONSTER_SPAWN'?ruinsMonster(campaign.battle!.monsters.find(m=>m.id===event.actorId)!.sourceId,
     campaign.battle!.ruinsContext!.ruleSetVersion).tags:[];
   const eligible=event.type===hook.trigger||event.type==='MONSTER_SPAWN'&&hook.trigger==='UNHOLY_MONSTER_SPAWN_IN_BATTLE'&&tags.includes('Unholy');
@@ -30,7 +38,8 @@ export function applyProphetThreatEvent(campaign:CampaignState,event:ProphetThre
   const updated=withBossEncounterSources(shell,b=>{
     result=applyStressBatch(result,result.heroes.filter(h=>!h.dead).map(h=>({heroId:h.instanceId,amount:hook.stress,
       sourceType:'exploration' as const,sourceId:String(e.threatAbilityCardId),questId:result.currentQuestId??'',batchId:once}))).campaign;
-    recordBossRuntimeEvent(b,'PROPHET_THREAT_APPLIED',{transactionId:event.transactionId,once,type:event.type,stress:hook.stress},
+    recordBossRuntimeEvent(b,'PROPHET_THREAT_APPLIED',{transactionId:event.transactionId,once,type:event.type,stress:hook.stress,
+      ...(playerRoute && drawn?{spawn:{definitionId:drawn.definitionId,copyId:drawn.copyId,encounterId:campaign.battle!.ruinsContext!.encounterId,actorId:spawned!.id}}:{})},
       result.heroes.filter(h=>!h.dead).map(h=>`u_${h.instanceId}`));return b;});
   e=updated.bossEncounter!;e.checkpointContext!.consumedOnceKeys.push(once);
   return withTransactionRecorded({...result,bossEncounterCheckpoint:e,activeThreatRuntime:{...result.activeThreatRuntime!,

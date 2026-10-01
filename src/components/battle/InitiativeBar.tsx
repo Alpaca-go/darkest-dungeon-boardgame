@@ -19,11 +19,11 @@ export default function InitiativeBar({ battle }: InitiativeBarProps) {
       {battle.initiativeOrder.map((id, i) => {
         const u = getUnit(battle, id);
         if (!u) return null;
-        const isCurrent = battle.activeActorId === id;
+        const isCurrent = battle.initiativeIndex === i;
         const acted = i < battle.initiativeIndex;
         return (
           <span
-            key={id}
+            key={`${id}:${i}`}
             className={[
               'px-2 py-0.5 rounded text-[11px] border',
               isCurrent

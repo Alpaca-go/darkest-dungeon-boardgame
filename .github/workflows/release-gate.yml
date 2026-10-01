@@ -8,7 +8,7 @@ permissions:
 jobs:
   release-gate:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
         with:
@@ -19,7 +19,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run typecheck
-      - run: npm test
+      - run: npm test -- --reporter=json --outputFile=tmp-c1c36-final-tests.json
       - run: npm run build
       - run: npm run historical-baseline-validation
       - run: npm run verify:immutable-phase-baselines
@@ -27,3 +27,6 @@ jobs:
       - run: npm run verify:prophet-gate-a
       - run: npm run verify:complete-edition-c1c35r2a
       - run: npm run verify:complete-edition-c1c35r2b
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e:prophet-production-acceptance
+      - run: npm run verify:complete-edition-c1c36

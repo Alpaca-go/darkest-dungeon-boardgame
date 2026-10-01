@@ -12,7 +12,10 @@ import { necromancerProductionDependencyGate } from '../bosses/production-depend
 import { nowIso } from '../random';
 import { bindNecromancerFigures } from '../ruins/physical-supply';
 import { bindProductionCheckpointFigures } from '../bosses/checkpoint-physical-bridge';
+import { reserveProphetProductionEncounter } from '../prophet/production-reservation';
+import { productionBossQuestEntryError } from '../bosses/production-dependency-gate';
 import {sealProphetReplayOrigin} from '../prophet/production-runtime';
+import { prophetCampaignContext } from '../prophet/production-consequences';
 
 /** Programmatic production entry. Selector and complete-edition dependency promotion stay gated. */
 export function startBossFoundation(campaign: CampaignState, definition: BossDefinitionContract, seed: number,
@@ -36,7 +39,7 @@ export function startBossFoundation(campaign: CampaignState, definition: BossDef
     definitionVersion: definition.ruleSetVersion, consumedOnceKeys: [...(campaign.activeThreatRuntime?.consumedOnceKeys ?? [])],
     heroDodge: Object.fromEntries(heroes.map(h => [h.id, h.bossCombatDodge!])), dependencyAuthority: 'EXPLICIT_BINDING',
   };
-  if (campaign.ruinsBoneFigureSupply) bound = bindNecromancerFigures(bound, campaign.ruinsBoneFigureSupply, campaign.ruinsDrawState);
+  if (definition.family === 'necromancer' && campaign.ruinsBoneFigureSupply) bound = bindNecromancerFigures(bound, campaign.ruinsBoneFigureSupply, campaign.ruinsDrawState);
   return { ...campaign, gamePhase: 'battle', battle: bound };
 }
 
@@ -49,12 +52,16 @@ export function resumeBossFoundation(campaign: CampaignState, roomId: string): C
   if (saved.pendingChoice) throw new Error('Resolve saved Threat choice before Room entry');
   const encounter = structuredClone(saved);
   const context = encounter.checkpointContext!;
-  const heroes = campaign.heroes.filter(h => !h.dead).map((hero, index) => ({ ...makeHeroUnit(hero, index, campaign), bossCombatDodge: context.heroDodge[`u_${hero.instanceId}`], heroDodgeBinding: context.heroDodgeBindings?.[`u_${hero.instanceId}`] }));
+  const heroes = campaign.heroes.filter(h => !h.dead).map((hero, index) => ({ ...makeHeroUnit(hero, index, campaign),
+    ...(context.playerRouteVersion ? { equippedTrinketInstanceIds: hero.equippedTrinkets.map(t => t.instanceId) } : {}),
+    bossCombatDodge: context.heroDodge[`u_${hero.instanceId}`], heroDodgeBinding: context.heroDodgeBindings?.[`u_${hero.instanceId}`] }));
   const battle: BattleState = { battleId: context.battleId, sourceRoomId: roomId, status: 'active', round: encounter.round,
+    ...(context.playerRouteVersion ? {light:campaign.light,initiativeCards:[],initiativeDrawPile:[],resolvedInitiativeCardIds:[],pendingMonsterAttack:null} : {}),
     maxRounds: 4, ...(context.heroDodgeBindings ? {stagedIncomingAttacks:true} : {}), heroes, monsters: [], initiativeOrder: heroes.map(h => h.id), initiativeIndex: -1,
     activeActorId: null, currentActionPoints: 0, selectedSkillId: null, selectedTargetId: null, battleLog: [], rewards: { gold: 0 }, bossEncounter: encounter };
   assertBossEncounter(battle);
   const physicalBattle = bindProductionCheckpointFigures(campaign, battle);
+  if(context.playerRouteVersion&&encounter.prophetProduction)encounter.prophetProduction.campaignContext=prophetCampaignContext(campaign);
   if(encounter.bossFamily==='prophet'&&encounter.prophetProduction)sealProphetReplayOrigin(physicalBattle);
   const resumed = applyBossFoundationInput({ ...campaign, battle: physicalBattle, gamePhase: 'battle' }, { type: 'ENTER_BOSS_ROOM' });
   return { ...resumed, bossEncounterCheckpoint: context.heroDodgeBindings ? null : campaign.bossEncounterCheckpoint, bossRoomStorage: campaign.bossRoomStorage ? { ...campaign.bossRoomStorage, roomId, lifecycle: 'IN_PLAY' } : undefined, activeThreatRuntime: resumed.activeThreatRuntime ? { ...resumed.activeThreatRuntime,
@@ -131,6 +138,7 @@ export function commitBossFoundationVictory(campaign: CampaignState): CampaignSt
 
 /** Production selector reserves one versioned Threat encounter and one authoritative Room card/tile. */
 export function reserveProductionBossEncounter(campaign: CampaignState): CampaignState {
+  if (campaign.runtimeContentProfile==='community-complete-edition' && campaign.campaignProgress.activeBossFamilyId==='prophet') return reserveProphetProductionEncounter(campaign);
   if (campaign.runtimeContentProfile !== 'community-complete-edition'
     || campaign.currentQuestId !== 'face-the-threat' && (!campaign.activeThreatRuntime?.active
       || !campaign.activeThreatRuntime.bossDefinitionId.startsWith('necromancer-source-level-'))
@@ -168,10 +176,9 @@ export function enterProductionBossRoom(campaign: CampaignState, roomId: string)
     || campaign.pendingDungeonTrinketAction || campaign.bossRoomStorage && campaign.bossRoomStorage.lifecycle !== 'RESERVED')
     throw new Error('Settle the ordinary encounter and pending choices before Boss Room entry');
   const reserved = reserveProductionBossEncounter(campaign);
-  const gate = necromancerProductionDependencyGate(reserved, reserved.campaignProgress.campaignLevel);
-  if (!gate.enabled || reserved.bossEncounterCheckpoint?.pendingChoice) throw new Error('Production Boss Room entry blocked');
+  if (productionBossQuestEntryError(reserved,reserved.currentQuestId ?? '') || reserved.bossEncounterCheckpoint?.pendingChoice) throw new Error('Production Boss Room entry blocked');
   const resumed=resumeBossFoundation(reserved, roomId);
-  return {...resumed,battle:advanceTurn(resumed.battle!)};
+  return resumed.battle?.bossEncounter?.checkpointContext?.playerRouteVersion ? resumed : {...resumed,battle:advanceTurn(resumed.battle!)};
 }
 
 export function applyBossThreatCheckpointInput(campaign: CampaignState, input: BossRuntimeInput): CampaignState {

@@ -1,3 +1,5 @@
+import type { CampaignState } from '../types';
+import { PRODUCTION_FACE_THE_THREAT_QUEST } from './quests/production-face-the-threat';
 import type { QuestDefinition } from '../types';
 import { FACE_THE_THREAT_QUEST } from './quests/face-the-threat';
 import { COMMUNITY_QUEST_RUNTIME_ADAPTERS, COMMUNITY_RUNTIME_QUESTS } from './community-reference/production-runtime';
@@ -113,4 +115,20 @@ export function isStandardQuestId(id: string): boolean {
 /** 判定一个 Quest id 是否属于 Boss Quest（Phase 9A §8：仅 face-the-threat）。 */
 export function isBossQuestId(id: string): boolean {
   return id === FACE_THE_THREAT_QUEST.id;
+}
+
+/** Campaign-aware lookup prevents the legacy Boss prototype from supplying production fields. */
+export function getCampaignQuest(campaign: CampaignState): QuestDefinition | undefined {
+  if (campaign.runtimeContentProfile==='community-complete-edition' && campaign.currentQuestId==='face-the-threat') {
+    // Settlement may already have selected the next family. The current Quest keeps its encounter authority.
+    const settled=campaign.bossEncounterHistory?.find(e=>e.checkpointContext?.questRunId===campaign.dungeon?.questRunId)
+      ?? (!campaign.dungeon ? campaign.bossEncounterHistory?.at(-1) : undefined);
+    const family=campaign.battle?.bossEncounter?.bossFamily ?? campaign.bossEncounterCheckpoint?.bossFamily
+      ?? settled?.bossFamily
+      ?? campaign.activeThreatRuntime?.bossFamilyId ?? campaign.campaignProgress.activeBossFamilyId;
+    if(family==='prophet')return PRODUCTION_FACE_THE_THREAT_QUEST;
+    // Preserve the accepted Necromancer successor projection; its selection/setup already uses the locked adapter.
+    if(family!=='necromancer')return undefined;
+  }
+  return getQuestById(campaign.currentQuestId ?? '');
 }

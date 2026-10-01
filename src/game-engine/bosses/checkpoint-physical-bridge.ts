@@ -6,6 +6,7 @@ import { validateThreatCheckpoint } from './threat-checkpoint';
  * The frozen initial-binding helper and its event history remain unchanged.
  */
 export function bindProductionCheckpointFigures(campaign: CampaignState, battle: BattleState): BattleState {
+  if (battle.bossEncounter?.bossFamily !== 'necromancer') return battle;
   const supply = campaign.ruinsBoneFigureSupply;
   if (!supply) return battle;
   const encounter = battle.bossEncounter;

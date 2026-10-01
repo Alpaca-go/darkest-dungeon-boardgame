@@ -347,6 +347,7 @@ export function advanceTurn(state: BattleState): BattleState {
   if(state.bossEncounter?.prophetProduction&&!isExecutingProphetCommand())return applyBossRuntimeInput(state,{type:'PROPHET_ADVANCE_TURN'});
   const prophet=state.bossEncounter?.prophetProduction;
   if(prophet&&state.bossEncounter?.phase==='BATTLE_RESOLVING'&&prophet.actionOrdinal===3&&!state.pendingMonsterAttack&&!prophet.pendingPewAttack){
+    if(state.bossEncounter.checkpointContext?.playerRouteVersion&&prophet.rubbleCursor<4)return state;
     let next=state;
     while(next.bossEncounter!.prophetProduction!.rubbleCursor<4&&!next.pendingMonsterAttack)next=applyBossRuntimeInput(next,{type:'PROPHET_NEXT_PEW'});
     if(next.pendingMonsterAttack)return next;
@@ -439,10 +440,11 @@ function advanceTurnInternal(state: BattleState): BattleState {
     if (activated.side === 'monster') {
       if (s.bossEncounter?.bossState.actorId === id) {
         s = runMonsterTurn(s, id);
-        while(s.bossEncounter?.prophetProduction?.actionOrdinal===3&&s.bossEncounter.phase==='BATTLE_RESOLVING'
+        while(!s.bossEncounter?.checkpointContext?.playerRouteVersion&&s.bossEncounter?.prophetProduction?.actionOrdinal===3&&s.bossEncounter.phase==='BATTLE_RESOLVING'
           &&s.bossEncounter.prophetProduction.rubbleCursor<4&&!s.pendingMonsterAttack)
           s=applyBossRuntimeInput(s,{type:'PROPHET_NEXT_PEW'});
         if (s.bossEncounter?.pendingChoice || s.pendingMonsterAttack) return s;
+        if(s.bossEncounter?.checkpointContext?.playerRouteVersion)return s;
         s = checkEnd(s);
         if (s.status !== 'active' || s.ruinsContext?.pendingThreatDeathIds?.length || s.ruinsContext?.pendingReanimationChoice) return s;
         continue;
@@ -564,6 +566,7 @@ export function canHeroMove(state: BattleState, unitId: string, dir: -1 | 1): bo
 
 /** 英雄移动一个位置（消耗 1 行动点）。 */
 export function heroMove(state: BattleState, unitId: string, dir: -1 | 1): BattleState {
+  if(state.bossEncounter?.prophetProduction&&!isExecutingProphetCommand())return applyBossRuntimeInput(state,{type:'PROPHET_HERO_MOVE',heroId:unitId,direction:dir});
   if (state.bossEncounter?.pendingChoice || state.ruinsContext?.pendingChoice || state.ruinsContext?.pendingReanimationChoice || state.ruinsContext?.pendingThreatDeathIds?.length) return state;
   const actor = findUnit(state, unitId);
   if (!actor || !canHeroMove(state, unitId, dir)) return state;
@@ -677,6 +680,8 @@ export function heroUseSkill(
 ): BattleState {
   const work = (battle: BattleState) => heroUseSkillInternal(battle, unitId, skillId, targetId,
     trinketBonuses, preRolledAttack, preparedAttack, finalDamageOverride);
+  if(state.bossEncounter?.prophetProduction&&!isExecutingProphetCommand())return applyBossRuntimeInput(state,
+    {type:'PROPHET_HERO_SKILL',heroId:unitId,skillId,targetId,bonuses:trinketBonuses,finalDamageOverride});
   return state.ruinsContext ? withRuinsBattleSources(structuredClone(state), work) : work(state);
 }
 

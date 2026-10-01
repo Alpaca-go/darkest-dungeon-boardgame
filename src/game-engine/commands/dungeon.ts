@@ -14,7 +14,7 @@ import { settleBattleState } from './battle';
 import { evaluateQuestRules } from '../quests/quest-special-rule-runtime';
 
 import { beginExplorationMoveTrinketAction } from '../trinkets/dungeon-trinket-bridge';
-import { necromancerQuestEntryError } from '../bosses/production-dependency-gate';
+import { productionBossQuestEntryError } from '../bosses/production-dependency-gate';
 import { hasProductionOrdinaryThreat } from '../ruins/production-threat-runtime';
 
 export type EnterRoomError =
@@ -38,7 +38,7 @@ export function enterDungeonRoom(
   roomId: string,
 ): EnterRoomResult {
   if (campaign.dungeon?.rooms.some(r => r.id === roomId && r.type === 'objective')
-    && necromancerQuestEntryError(campaign, campaign.currentQuestId ?? '')) {
+    && productionBossQuestEntryError(campaign, campaign.currentQuestId ?? '')) {
     return { ok: false, campaign, error: 'necromancer-production-dependencies-unbound' };
   }
   if (campaign.questRuntimeState?.pendingRuleChoice) {

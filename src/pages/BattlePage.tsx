@@ -26,6 +26,7 @@ export default function BattlePage() {
   const navigate = useNavigate();
   const campaign = useGameStore((s) => s.campaign);
   const battleHeroAreaMove = useGameStore(s=>s.battleHeroAreaMove);
+  const battleContinueResolution = useGameStore(s=>s.battleContinueResolution);
   const battleOrdinaryChoice = useGameStore(s => s.battleOrdinaryChoice);
   const battleRoomInteract = useGameStore(s => s.battleRoomInteract);
   const commitBossChoice = useGameStore((s) => s.commitBossChoice);
@@ -110,6 +111,20 @@ export default function BattlePage() {
       </div>
 
       <InitiativeBar battle={battle} />
+      {battle.bossEncounter?.prophetProduction && <section aria-label="Prophet 状态" className="rounded border border-dd-border p-3">
+        <p data-testid="prophet-action-ordinal">Prophet 行动 {battle.bossEncounter.prophetProduction.actionOrdinal} / 3</p>
+        {battle.bossEncounter.prophetProduction.pews.slice().sort((a,b)=>a.ordinal-b.ordinal).map(pew=><p key={pew.physicalCopyId} data-testid={'prophet-pew-'+pew.ordinal}>
+          Wooden Pew {pew.ordinal} · {pew.areaId ?? '储存'} · {pew.lifecycle}
+        </p>)}
+        <p data-testid="prophet-rubble-progress">Rubble {battle.bossEncounter.prophetProduction.rubbleCursor} / 4</p>
+      </section>}
+      {battle.bossEncounter?.checkpointContext?.playerRouteVersion && battle.status==='active' && !battle.bossEncounter.pendingChoice
+        && (battle.pendingMonsterAttack || !battle.activeActorId || activeUnit?.side==='monster') && <section
+          data-testid={battle.pendingMonsterAttack?.stage ?? 'battle-resolution-window'} className="rounded border border-dd-border p-3">
+          {battle.pendingMonsterAttack ? <p>攻击骰 {battle.pendingMonsterAttack.attackRoll} · 目标 {battle.heroes.find(h=>h.id===battle.pendingMonsterAttack!.targetHeroUnitId)?.name}
+            {battle.pendingMonsterAttack.stage==='hero-hit-window' ? ` · 伤害 ${battle.pendingMonsterAttack.baseDamage}` : ' · 命中尚未结算'}</p> : <p>继续战斗结算</p>}
+          <button data-testid="battle-continue-resolution" onClick={battleContinueResolution}>继续</button>
+        </section>}
       {battle.ruinsContext && <section aria-label="Ruins 房间区域" className="rounded border border-dd-border p-3">
         <p>Ruins Room {battle.ruinsContext.roomNumber}</p>
         <div className="grid grid-cols-2 gap-2 mt-2">{ruinsTile(battle.ruinsContext.tileId).areas.map(area => {
@@ -134,7 +149,7 @@ export default function BattlePage() {
         {battle.bossEncounter.definition.areas.filter(a=>a.id!==battle.bossEncounter!.placements[activeUnit!.id]
           && areaDistance(battle.bossEncounter!.definition,battle.bossEncounter!.placements[activeUnit!.id],a.id)<=activeUnit!.speed
           && a.capacity > [...battle.heroes,...battle.monsters].filter(u=>u.isAlive && battle.bossEncounter!.placements[u.id]===a.id)
-            .reduce((n,u)=>n+(battle.bossEncounter!.spawnDefinitions[u.sourceId]?.occupiedSlots ?? 1),0))
+            .reduce((n,u)=>n+(battle.actorOccupancy?.occupiedSpaces[u.id] ?? battle.bossEncounter!.spawnDefinitions[u.sourceId]?.occupiedSlots ?? 1),0))
           .map(a=><button key={a.id} disabled={battle.currentActionPoints<=0} data-testid="boss-move-area" data-area-id={a.id}
             onClick={()=>battleHeroAreaMove(a.id)}>移动到 {a.id}</button>)}
       </div>}

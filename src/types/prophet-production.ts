@@ -17,8 +17,11 @@ export interface ProphetProductionState {
   skillSelection?:{actionKey:string;round:number;ordinal:2;skillRoll:number;selectedSkill:number;parentEventId:string};
   crowdedChoice?:{choiceId:string;actionKey:string;round:number;ordinal:2;ruleSetVersion:string;candidateAreaIds:string[];candidateHeroIds:string[];occupancySnapshot:Record<string,string[]>;selectedAreaId:string|null};
   pendingPewAttack:ProphetAttackTransaction|null; attacks:ProphetAttackTransaction[];
+  playerAttack?:{heroId:string;skillId:string;targetId:string;attackRoll:number;prepared?:import('../game-engine/battle').PreparedHeroAttackResolution};
   resolvedActionKeys:string[]; returnedPewIds:string[];
   campaignFinalizationReceipt?:{transactionId:string;before:{rngState:number;clockCursor:number;idCursor:number};after:{rngState:number;clockCursor:number;idCursor:number}};
   /** Replay evidence uses the shared BattleState and shared RNG, never another save format/engine. */
   replayOrigin:BattleState|null; commands:BossRuntimeInput[];
+  /** Bound shared campaign inputs for deterministic Stress, Resolve, death and condition settlement. */
+  campaignContext?:Omit<import('./index').CampaignState,'battle'>;
 }

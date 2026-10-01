@@ -8,6 +8,7 @@ export default defineConfig({
     emptyOutDir: false,
   },
   server: {
+    hmr: process.env.DDBG_PLAYER_BROWSER_ACCEPTANCE === '1' ? false : undefined,
     port: 5173,
     host: true,
   },

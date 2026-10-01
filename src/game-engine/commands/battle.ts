@@ -22,6 +22,7 @@ import {
   processBattleDiseaseInfections,
 } from '../diseases/battle-bridge';
 import { advanceTurn, resumeTurnAfterMentalCheck } from '../battle';
+import { settleProphetConsequences } from '../prophet/production-consequences';
 import { advancePendingMonsterAttack, openBattleTurnStartWindow } from '../trinkets/battle-trinket-bridge';
 import { settleOrdinaryRuinsBattle } from '../ruins/battle-runtime';
 import { returnOrdinaryBoneFigures } from '../ruins/physical-supply';
@@ -108,6 +109,20 @@ function settleBattleStateInternal(
   if (next.battle?.pendingMonsterAttack) {
     return { ok: true, campaign: next, error: null, mentalLoops: 0 };
   }
+  const consequences=settleSharedBattleConsequences(next,limit);
+  if(!consequences.ok)return consequences;
+  next=openBattleTurnStartWindow(consequences.campaign);
+  if (next.battle?.necromancerFigureBinding) next = { ...next, ruinsBoneFigureSupply: next.battle.necromancerFigureBinding.supply };
+  return {...consequences,campaign:next};
+}
+
+/** The existing shared consequence pipeline is also the Prophet replay executor. */
+export function settleSharedBattleConsequences(campaign:CampaignState,limit=BATTLE_MENTAL_GUARD_LIMIT):BattleSettlementResult {
+  if(campaign.battle?.bossEncounter?.checkpointContext?.playerRouteVersion){
+    const replayed=settleProphetConsequences(campaign,limit);
+    if(replayed)return replayed;
+  }
+  let next=campaign;
   next = processBattleDeaths(next);
   if (next.battle?.ruinsContext?.executionSchemaVersion === 2 && next.battle.status === 'active'
     && !next.battle.activeActorId && !next.battle.ruinsContext.pendingChoice && !next.battle.ruinsContext.pendingReanimationChoice)
@@ -142,8 +157,6 @@ function settleBattleStateInternal(
     return { ok: false, campaign: next, error: 'mental-guard-exceeded', mentalLoops: guard };
   }
 
-  next = openBattleTurnStartWindow(next);
-  if (next.battle?.necromancerFigureBinding) next = { ...next, ruinsBoneFigureSupply: next.battle.necromancerFigureBinding.supply };
   return { ok: true, campaign: next, error: null, mentalLoops: guard };
 }
 

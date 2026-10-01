@@ -1,5 +1,5 @@
 import type { CampaignState, DungeonRoom, QuestDefinition } from '../../types';
-import { getQuestById } from '../../data/quests';
+import { getCampaignQuest } from '../../data/quests';
 
 export interface QuestXpEvaluation {
   qualifiedUnitCount: number;
@@ -18,7 +18,7 @@ export function evaluateQuestXpUnits(quest: QuestDefinition, qualifiedUnitCount:
 }
 
 export function calculateQuestXpReward(campaign: CampaignState): QuestXpEvaluation | null {
-  const quest = getQuestById(campaign.currentQuestId ?? '');
+  const quest = getCampaignQuest(campaign);
   if (!quest?.xpUnit) return null;
   if ((campaign.questRuntimeState?.questTokens?.length ?? 0) > 0) {
     return evaluateQuestXpUnits(quest, campaign.questRuntimeState?.qualifiedUnitCount ?? 0);
@@ -189,7 +189,7 @@ export function commitRestAtCamp(campaign: CampaignState, allocation: RestAlloca
 }
 
 export function recordQuestQualificationEvent(campaign: CampaignState, room: DungeonRoom): CampaignState {
-  const quest = getQuestById(campaign.currentQuestId ?? '');
+  const quest = getCampaignQuest(campaign);
   const state = campaign.questRuntimeState;
   if (!quest?.xpUnit || !state || state.definitionId !== quest.id) return campaign;
   const qualifies = quest.xpUnit.targetEntity === 'room'

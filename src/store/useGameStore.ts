@@ -112,6 +112,7 @@ import type { QuestRuleProvision } from '../types/content-runtime';
 import {
   beginHeroSkillAction,
   resolveTrinketOpportunity,
+  advancePendingMonsterAttack,
 } from '../game-engine/trinkets/battle-trinket-bridge';
 import {
   discardTrinket as engineDiscardTrinket,
@@ -139,6 +140,7 @@ interface UiState {
   battleSkillId: string | null;
 }
 interface GameStore {
+  battleContinueResolution: () => void;
   migrateHeroDodgeToV2: () => void;
   selectProductionRuinsV6: () => void;
   battleHeroAreaMove: (areaId: string) => void;
@@ -309,6 +311,19 @@ export const useGameStore = create<GameStore>((set, get) => {
   };
 
   return {
+    battleContinueResolution: () => {
+      const c=get().campaign,b=c?.battle,e=b?.bossEncounter;
+      if(!c||!b||!e?.checkpointContext?.playerRouteVersion||b.status!=='active'||e.pendingChoice)return;
+      let next=c;
+      if(b.pendingMonsterAttack)next=advancePendingMonsterAttack(c,false,true);
+      else if(e.phase==='BATTLE_RESOLVING'&&e.prophetProduction?.actionOrdinal===2&&e.prophetProduction.crowdedChoice?.selectedAreaId)
+        next=applyBossFoundationInput(c,{type:'PROPHET_CROWDED_ATTACK'});
+      else if(e.prophetProduction?.actionOrdinal===3&&e.phase==='BATTLE_RESOLVING'&&e.prophetProduction.rubbleCursor<4)
+        next=applyBossFoundationInput(c,{type:'PROPHET_NEXT_PEW'});
+      else if(!b.activeActorId||b.activeActorId===e.bossState.actorId)next={...c,battle:advanceTurn(b)};
+      else return;
+      commit(settleBattleState(next).campaign);
+    },
     selectProductionRuinsV6: () => {
       const campaign = get().campaign;
       if (!campaign) return;
@@ -349,7 +364,7 @@ export const useGameStore = create<GameStore>((set, get) => {
       if (!c?.battle?.bossEncounter?.pendingChoice) return;
       const changed = applyBossFoundationInput(c, { type: 'CHOICE', choiceId, selectedId });
       let battle = changed.battle!;
-      if (!battle.bossEncounter?.pendingChoice && !battle.pendingMonsterAttack && battle.activeActorId && battle.monsters.some(u => u.id === battle.activeActorId)) battle = advanceTurn(battle);
+        if (!battle.bossEncounter?.checkpointContext?.playerRouteVersion && !battle.bossEncounter?.pendingChoice && !battle.pendingMonsterAttack && battle.activeActorId && battle.monsters.some(u => u.id === battle.activeActorId)) battle = advanceTurn(battle);
       const next = { ...changed, battle };
       commit(battle.bossEncounter?.pendingChoice ? next : settleBattleState(next).campaign);
     },

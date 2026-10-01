@@ -9,7 +9,10 @@ import {resolveBossHeroStartingArea,BOSS_ENTRY_STANCES} from '../bosses/hero-ent
 import {resolveEncounterRuleDependencies} from '../bosses/definitions';
 import {validateActorOccupancy} from '../rules/actor-occupancy';
 import {startSourceMonsterAttack} from '../component-monster-runtime';
-import {freezePendingMonsterAttack,commitPendingMonsterAttackResolution,advanceTurn} from '../battle';
+import {freezePendingMonsterAttack,commitPendingMonsterAttackResolution,advanceTurn,heroSkillActionError,heroUseSkill,heroMove,prepareHeroAttackResolution} from '../battle';
+import {rollAttackDie} from '../combat-resolution';
+import { settleSharedBattleConsequences } from '../commands/battle';
+import { prophetCampaignContext } from './production-consequences';
 import {PROPHET_RULE_SET_VERSION,PROPHET_ACTOR_CAPACITY_VERSION} from './production-definition';
 import {applyBattleUnitDamage} from '../damage';
 
@@ -145,6 +148,8 @@ function raw(b:BattleState,input:BossRuntimeInput,rng:()=>number):BattleState {
       ruleSetVersion:e.ruleSetVersion,life:e.definition.stats.HP,speed:0,large:true,occupiedSlots:2,tags:e.definition.stats.type,skillIds:[]},id,1),
       name:'Prophet',bossCombatDodge:e.definition.stats.dodge,immunities:['stun','shuffle']};
     boss.equippedTrinketInstanceIds=[];
+    if(e.checkpointContext?.playerRouteVersion)Object.assign(boss,{quirkIds:[],diseaseId:null,diseaseInstanceId:null,
+      resolveTestedThisQuest:false,resolveState:'normal',virtueId:null,afflictionId:null,mentalEffectResolvedTurnId:null});
     b.pendingAction=null;b.pendingRuleEvents=[];b.pendingDiseaseInfections=[];
     b.monsters=[boss];e.bossState.actorId=id;e.placements[id]=e.definition.bossStartArea;e.side='ABILITY';e.phase='BATTLE_ACTIVE';
     b.round=1;e.round=1;b.stagedIncomingAttacks=true;b.roundLimitEnabled=false;b.roundLimitPolicy='not-counted';
@@ -157,7 +162,36 @@ function raw(b:BattleState,input:BossRuntimeInput,rng:()=>number):BattleState {
     recordBossRuntimeEvent(b,'BOSS_BATTLE_STARTED',{areaId:e.definition.bossStartArea,entryBindings:p.entryBindings,actionsPerRound:3});return b;
   }
   if(e.side!=='ABILITY')throw new Error('Prophet Boss Room not entered');
+  if(input.type==='PROPHET_CAMPAIGN_CONSEQUENCES'){
+    if(!p.campaignContext||!Number.isInteger(input.mentalGuardLimit)||input.mentalGuardLimit<1||input.mentalGuardLimit>50)throw new Error('Prophet campaign consequence contract unavailable');
+    const result=settleSharedBattleConsequences({...structuredClone(p.campaignContext),battle:b},input.mentalGuardLimit);
+    if(!result.ok||!result.campaign.battle)throw new Error('Prophet shared consequence settlement failed');
+    const settled=result.campaign.battle;
+    state(settled).campaignContext=prophetCampaignContext(result.campaign);
+    recordBossRuntimeEvent(settled,'SHARED_CAMPAIGN_CONSEQUENCES',{mentalLoops:result.mentalLoops});return settled;
+  }
   if(input.type==='PROPHET_ADVANCE_TURN')return advanceTurn(b);
+  if(input.type==='PROPHET_HERO_MOVE')return heroMove(b,input.heroId,input.direction);
+  if(input.type==='PROPHET_HERO_ATTACK_ROLL'){
+    if(heroSkillActionError(b,input.heroId,input.skillId,input.targetId) || p.playerAttack)throw new Error('Illegal Prophet player attack');
+    p.playerAttack={heroId:input.heroId,skillId:input.skillId,targetId:input.targetId,attackRoll:rollAttackDie()};
+    recordBossRuntimeEvent(b,'HERO_ATTACK_ROLLED',{...p.playerAttack},[input.heroId,input.targetId]);return b;
+  }
+  if(input.type==='PROPHET_HERO_ATTACK_PREPARE'){
+    const attack=p.playerAttack;
+    if(!attack || attack.heroId!==input.heroId || attack.skillId!==input.skillId || attack.prepared)throw new Error('Stale Prophet player attack preparation');
+    const prepared=prepareHeroAttackResolution(b,input.heroId,input.skillId,input.bonuses,attack.attackRoll);
+    if(!prepared)throw new Error('Player attack preparation unavailable');
+    attack.prepared=prepared;recordBossRuntimeEvent(b,'HERO_ATTACK_PREPARED',{...prepared},[input.heroId]);return b;
+  }
+  if(input.type==='PROPHET_HERO_SKILL'){
+    if(heroSkillActionError(b,input.heroId,input.skillId,input.targetId))throw new Error('Illegal Prophet player skill');
+    const attack=p.playerAttack;
+    if(attack && (attack.heroId!==input.heroId || attack.skillId!==input.skillId || attack.targetId!==input.targetId || !attack.prepared))throw new Error('Player attack commit linkage mismatch');
+    const result=heroUseSkill(b,input.heroId,input.skillId,input.targetId,input.bonuses,attack?.attackRoll,attack?.prepared,input.finalDamageOverride);
+    delete state(result).playerAttack;
+    recordBossRuntimeEvent(result,'HERO_SKILL_COMMITTED',{skillId:input.skillId,targetId:input.targetId},[input.heroId]);return result;
+  }
   if(input.type==='PROPHET_ATTACK_FREEZE'){
     if(b.pendingMonsterAttack?.stage!=='incoming-attack-window')throw new Error('Attack freeze replay');return freezePendingMonsterAttack(b);}
   if(input.type==='PROPHET_ATTACK_COMMIT'){
@@ -179,9 +213,15 @@ function raw(b:BattleState,input:BossRuntimeInput,rng:()=>number):BattleState {
       ||JSON.stringify(crowded(b))!==JSON.stringify(s.occupancySnapshot))throw new Error('Stale or forged Prophet Crowded choice');
     s.selectedAreaId=input.selectedId;e.pendingChoice=null;
     recordBossRuntimeEvent(b,'CHOICE_COMMITTED',{choiceId:c.choiceId,areaId:input.selectedId},[], 'crowded-area-tie',c.createdAtEventId);
-    normalAttack(b,input.selectedId,rng);return b;
+    if(!e.checkpointContext?.playerRouteVersion)normalAttack(b,input.selectedId,rng);return b;
   }
   if(e.pendingChoice)throw new Error('Resolve Prophet PendingChoice first');
+  if(input.type==='PROPHET_CROWDED_ATTACK'){
+    const choice=p.crowdedChoice;
+    if(p.actionOrdinal!==2||e.phase!=='BATTLE_RESOLVING'||!choice?.selectedAreaId||p.pendingPewAttack||b.pendingMonsterAttack
+      ||choice.actionKey!==key(b)||p.resolvedActionKeys.includes(key(b)))throw new Error('Crowded attack continuation unavailable');
+    normalAttack(b,choice.selectedAreaId,rng);return b;
+  }
   if(input.type==='PROPHET_NEXT_PEW'){nextPew(b,rng);return b;}
   if(input.type==='PROPHET_ROUND'){
     if(!p.resolvedActionKeys.includes(key(b))||p.actionOrdinal!==3||p.rubbleCursor!==4)throw new Error('New round before ordinal 3 completion');
@@ -273,7 +313,14 @@ export function validateProphetProduction(b:BattleState,committedBossDeath=false
       heroes:s.heroes,monsters:s.monsters.map(m=>committedBossDeath&&m.id===x.bossState.actorId?{...m,hp:0,isAlive:false}:m),initiativeOrder:s.initiativeOrder,initiativeIndex:s.initiativeIndex,
       bossMetadata:s.boss,pendingRuleEvents:s.pendingRuleEvents??[]};
   };
-  if(JSON.stringify(projection(b))!==JSON.stringify(projection(replay)))throw new Error('Prophet save/replay transaction mismatch: '+Object.keys(projection(b)).filter(k=>JSON.stringify((projection(b) as Record<string,unknown>)[k])!==JSON.stringify((projection(replay) as Record<string,unknown>)[k])).join(','));
+  if(JSON.stringify(projection(b))!==JSON.stringify(projection(replay))){
+    const changed=Object.keys(projection(b)).filter(k=>JSON.stringify((projection(b) as Record<string,unknown>)[k])!==JSON.stringify((projection(replay) as Record<string,unknown>)[k]));
+    const actualUnits=changed.includes('heroes')?b.heroes:b.monsters;
+    const replayUnits=changed.includes('heroes')?replay.heroes:replay.monsters;
+    const heroChanges=changed.some(k=>k==='heroes'||k==='monsters')?actualUnits.map((h,i)=>Object.keys(h).filter(k=>JSON.stringify((h as unknown as Record<string,unknown>)[k])!==JSON.stringify((replayUnits[i] as unknown as Record<string,unknown>)?.[k]))
+      .map(k=>`${h.id}.${k}: ${JSON.stringify((h as unknown as Record<string,unknown>)[k])} / ${JSON.stringify((replayUnits[i] as unknown as Record<string,unknown>)?.[k])}`)).flat().join('; '):'';
+    throw new Error('Prophet save/replay transaction mismatch: '+changed.join(',')+(heroChanges?' ('+heroChanges+')':''));
+  }
   for(const h of b.heroes){const binding=p.entryBindings[h.id];if(!binding||h.stance!==binding.stance)throw new Error('Hero Stance changed without transaction');}
   if(e.side==='ABILITY')validateActorOccupancy(b);
 }
