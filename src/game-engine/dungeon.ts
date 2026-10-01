@@ -2,6 +2,7 @@ import type { CampaignState, ExplorationEventResult, DungeonRoom, DungeonRoomTyp
 import { DUNGEON_NODES, roomTypeMapForQuest } from '../data/dungeons';
 import { CURIOS } from '../data/curios';
 import { createId, d10, pick } from './random';
+import {applyProphetThreatEvent} from './prophet/production-threat';
 import { initBattle } from './battle';
 import { pushLog } from './log';
 import { applyExplorationResult, rollExplorationResult } from './exploration';
@@ -213,7 +214,7 @@ export function scoutDungeon(campaign: CampaignState): CampaignState {
   next = pushLog(next, '小队进行了侦察（Scout），相邻房间被揭示，全队压力 +1。', 'warning');
   // Phase 8A：scout-attempted 时机事件（Fear of the Unknown 等）
   next = emitPartyRuleEvent(next, 'scout-attempted', createRuleEventContext());
-  return next;
+  return applyProphetThreatEvent(next,{type:'SCOUTING',transactionId:createId('prophet-scout')});
 }
 
 /**

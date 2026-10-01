@@ -13,6 +13,7 @@ import { triggerHeartAttack } from './heart-attack';
 import { graveyardStressTenIsFatal } from './campaign/necromancer-graveyard';
 import { killCampaignHero } from './hero-death';
 import { STRESS_MAX, clampStressValue } from './stress-constants';
+import {prophetTavernRecoveryModifier} from './prophet/production-threat';
 import { applyQuirkModifiers, describeModifierApplications } from './quirk-passives';
 // 注意：quirks.ts 亦引用本模块，形成 ESM 循环依赖。
 // emitRuleEvent / childRuleEventContext / createRuleEventContext 均为函数声明（提升），
@@ -219,7 +220,10 @@ export function recoverStress(
   if (!hero || hero.dead) {
     return { campaign, result: noopResult(input.heroId, hero?.stress ?? 0) };
   }
-  const baseAmount = Math.floor(input.amount);
+  const runtime=campaign.activeThreatRuntime;
+  const prophetTavern=input.sourceId==='tavern'&&runtime?.active&&runtime.bossFamilyId==='prophet'
+    &&runtime.bossDefinitionId===`prophet-source-level-${runtime.campaignLevel}`;
+  const baseAmount = Math.floor(input.amount)+(prophetTavern?prophetTavernRecoveryModifier(runtime!.campaignLevel):0);
   if (baseAmount <= 0) return { campaign, result: noopResult(hero.instanceId, hero.stress) };
 
   // Phase 8A：Quirk 前置修正器（Stress Faster / Nocturnal / Photomania）

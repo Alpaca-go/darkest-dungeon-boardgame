@@ -1,6 +1,7 @@
 import type { CampaignState } from '../../types';
 import { resolveBossDefinition, productionBossFamily, encounterRuleDependencies } from './definitions';
 import { withTransactionRecorded } from '../campaign/campaign-orchestrator';
+import {applyBossRuntimeInput} from './foundation';
 
 export function hasUnfinishedProductionBossQuest(campaign: CampaignState): boolean {
   return campaign.currentQuestId === 'face-the-threat' && !!campaign.bossRoomStorage
@@ -20,9 +21,12 @@ export function returnProductionBossRoomOnTermination(campaign: CampaignState, r
     transactionId, campaignId: campaign.id, questRunId: context.questRunId, encounterId: context.encounterId,
     roomId: storage.roomId, roomCardId: storage.roomCardId, tileId: storage.tileId,
     ruleSetVersion: encounter.ruleSetVersion, previousLifecycle: storage.lifecycle, reason,
-    encounter: structuredClone(encounter),
+    encounter: campaign.battle?.bossEncounter?.prophetProduction
+      ? applyBossRuntimeInput(campaign.battle,{type:'CLEANUP'}).bossEncounter!
+      : structuredClone(encounter),
   };
   return withTransactionRecorded({ ...campaign, battle: null, bossEncounterCheckpoint: null,
+    ...(campaign.battle?.bossEncounter?.prophetProduction?{gamePhase:'dungeon-explore' as const}:{}),
     bossRoomStorage: { ...storage, lifecycle: 'RETURNED' },
     bossRoomReturnHistory: [...(campaign.bossRoomReturnHistory ?? []), receipt],
   }, transactionId);

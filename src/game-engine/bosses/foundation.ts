@@ -7,6 +7,8 @@ import { resolveProductionMonsterDefinition } from './component-adapters/bone-co
 import { resolveHeroDodge } from '../rules/hero-dodge';
 import {encounterRuleDependencies} from './definitions';
 import {assertProphetHeroEntryPlacement} from '../prophet/production-definition';
+import {resolveBossHeroStartingArea} from './hero-entry';
+import {initializeProphetProduction,applyProphetRuntimeInput,finishProphetTarget} from '../prophet/production-runtime';
 import type { ProductionMonsterDefinition } from '../../types/component-combat';
 import { applyBattleUnitDamage } from '../damage';
 import { isNonUnholy, isReanimationEligible } from './threat-semantics';
@@ -30,10 +32,10 @@ export function recordBossRuntimeEvent(b: BattleState, eventType: string, result
   return eventId;
 }
 /** Shared seeded source, restored from persisted state. The existing damage pipeline uses it too. */
-export function withBossEncounterSources(b: BattleState, action: (battle: BattleState, rng: () => number) => BattleState): BattleState {
+export function withBossEncounterSources(b: BattleState, action: (battle: BattleState, rng: () => number) => BattleState, isolated=false): BattleState {
   if (!b.bossEncounter) return action(b, () => getRuntimeSources().random.next());
   const prior = activeEncounterSources;
-  const sources = prior?.battleId === b.battleId ? prior : { battleId: b.battleId, random: new SeededRandom(b.bossEncounter.idSeed), clock: new DeterministicClock(), ids: new DeterministicCounterIdSource(b.bossEncounter.idSeed) };
+  const sources = !isolated&&prior?.battleId === b.battleId ? prior : { battleId: b.battleId, random: new SeededRandom(b.bossEncounter.idSeed), clock: new DeterministicClock(), ids: new DeterministicCounterIdSource(b.bossEncounter.idSeed) };
   if (sources !== prior) {
     sources.random.restore(b.bossEncounter.rngState); sources.clock.restore(b.bossEncounter.clockCursor); sources.ids.restore(b.bossEncounter.idCursor);
   }
@@ -44,7 +46,7 @@ export function withBossEncounterSources(b: BattleState, action: (battle: Battle
     return next;
   } finally { activeEncounterSources = prior; }
 }
-function freshUnit(def: SpawnDefinition, id: string, position: number): BattleUnit {
+export function freshUnit(def: SpawnDefinition, id: string, position: number): BattleUnit {
   const production = def as Partial<ProductionMonsterDefinition>;
   return { ...(production.skills ? {immunities: production.immunities!.slice(), categoricalResistances: production.resistances!.slice() as BattleUnit['categoricalResistances'], bossCombatDodge: production.dodge} : {}), id, name: production.displayName ?? def.definitionId, sourceId: def.definitionId, side: 'monster', maxHp: def.life, hp: def.life,
     speed: def.speed, position, stance: stances[position - 1], stress: 0, isAlive: true,
@@ -103,7 +105,7 @@ export function bindBossEncounter(battle: BattleState, definition: BossDefinitio
   if (battle.bossEncounter) throw new Error('Encounter already reserved on this battle');
   if (definition.family === 'prophet') assertProphetHeroEntryPlacement(definition.level);
   const b = clone(battle);
-  if (definition.family==='prophet' || definition.successorContract) throw new Error('Successor gameplay requires production foundation acceptance');
+  if (definition.successorContract && !definition.successorContract.gameplayEnabled) throw new Error('Successor gameplay requires production foundation acceptance');
   const supply: BossEncounterState['summonSupply'] = {};
   for (const pool of definition.supply) {
     const id = runtimeId(pool.name);
@@ -130,7 +132,7 @@ export function bindBossEncounter(battle: BattleState, definition: BossDefinitio
     bossState: { actorId: null, lastActionRound: 0, storage: 'IN_PLAY' }, summonSupply: supply,
     activeSummons: b.monsters.filter(u => supply[u.sourceId] && u.isAlive).map(u => u.id), queuedDeathIds: [],
     spawnDefinitions: Object.fromEntries(spawnDefinitions.map(d => [d.definitionId, clone(d)])),
-    placements: Object.fromEntries([...b.heroes, ...b.monsters].map(u => [u.id, u.side === 'hero' ? definition.heroStartArea! : definition.bossStartArea])),
+    placements: Object.fromEntries([...b.heroes, ...b.monsters].map(u => [u.id, u.side === 'hero' ? resolveBossHeroStartingArea(definition,u.stance) : definition.bossStartArea])),
     correspondingAreas: Object.fromEntries(b.monsters.map(u => [u.id, definition.bossStartArea])),
     reanimationState: { firstDeathWindowConsumed: false, lockedEventId: null },
     threatState: { firstBattleConsumed: false, preparationDayConsumed: false, forcedHeroId: null, permanentlyRemovedDefinitionIds: [],
@@ -139,6 +141,7 @@ export function bindBossEncounter(battle: BattleState, definition: BossDefinitio
     cleanupState: { completed: false, campaignTransactionId: null, roomCleaned: false } };
   recordBossRuntimeEvent(b, 'ENCOUNTER_SETUP', { roomNumber: definition.roomNumber, level: definition.level, cardIds: [definition.bossIdentityCardId, definition.threatAbilityCardId, definition.battleCardId] });
   encounter(b).phase = 'THREAT_ACTIVE';
+  if(definition.family==='prophet')initializeProphetProduction(b);
   assertBossEncounter(b);
   return b;
 }
@@ -521,7 +524,7 @@ function handle(b: BattleState, input: BossRuntimeInput, rng: () => number): voi
       actionsPerRound: e.definition.actionsPerRound, bossInitiativeCardIds: [], roundLimitEnabled: false, currentRound: 1, bossDefeated: false, victoryResolved: false,
       summonHistory: [], bossRevealTransactionId: `${b.battleId}:reveal`, bossVictoryTransactionId: null, actionSelections: [] };
     e.correspondingAreas[id] = e.definition.bossStartArea;
-    for (const hero of b.heroes) e.placements[hero.id] = e.definition.heroStartArea!;
+    for (const hero of b.heroes) e.placements[hero.id] = resolveBossHeroStartingArea(e.definition,hero.stance);
     b.round = 1; e.round = 1; b.roundLimitEnabled = false; b.roundLimitPolicy = 'not-counted';
     b.initiativeOrder = shuffleWithRng(rng, [...b.heroes.filter(u => u.isAlive).map(u => u.id), id]);
     b.initiativeIndex = -1; b.activeActorId = null;
@@ -586,7 +589,8 @@ export function applyBossRuntimeInput(battle: BattleState, input: BossRuntimeInp
   const b = clone(battle);
   const e = encounter(b);
   if (e.bossFamily === 'prophet' && input.type === 'ENTER_BOSS_ROOM') assertProphetHeroEntryPlacement(e.bossLevel);
-  if (e.bossFamily==='prophet' || e.definition.successorContract) throw new Error('Successor gameplay requires production foundation acceptance');
+  if(e.bossFamily==='prophet')return applyProphetRuntimeInput(battle,input);
+  if (e.definition.successorContract) throw new Error('Successor gameplay requires production foundation acceptance');
   if (e.cleanupState.completed && input.type === 'CLEANUP') return battle;
   const next = withBossEncounterSources(b, (working, rng) => { handle(working, input, rng); return checkBossRuntimeEnd(working); });
   encounter(next).inputs.push(clone(input));
@@ -598,6 +602,7 @@ export function checkBossRuntimeEnd(battle: BattleState): BattleState {
   if (!e || !e.bossState.actorId || e.phase === 'COMPLETE' || e.phase === 'VICTORY') return battle;
   const boss = battle.monsters.find(u => u.id === e.bossState.actorId);
   if (boss?.isAlive) return battle;
+  if(e.prophetProduction&&boss)return applyBossRuntimeInput(battle,{type:'DEATHS',instanceIds:[boss.id]});
   const b = clone(battle);
   encounter(b).pendingChoice = null; encounter(b).phase = 'VICTORY';
   encounter(b).activeSummons = []; encounter(b).queuedDeathIds = [];
@@ -625,6 +630,7 @@ export function restoreBossRuntime(json: string, ruleSetVersion: string): Battle
 /** Complete the generic shared-roll continuation only after every Hero reaction has committed. */
 export function finishSourceMonsterAttack(battle: BattleState, hit: boolean): BattleState {
   return withBossEncounterSources(structuredClone(battle), (b, rng) => {
+    if(b.bossEncounter?.bossFamily==='prophet')return finishProphetTarget(b,hit);
     const pending = b.pendingMonsterAttack!;
     const source = pending.sourceAttack!;
     const resolved = [...source.alreadyResolvedHeroes, pending.targetHeroUnitId];

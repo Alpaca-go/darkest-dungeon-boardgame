@@ -17,7 +17,7 @@ export const productionBossFamilyRegistry: ReadonlyMap<string, ProductionBossFam
     roomContract:{roomNumber:10,tileId:'tile-10'},threatContract:{gameplayEnabled:true},
     dependencies:(version: string)=>({bossRuleSetVersion:version,heroDodgeRuleSetVersion:version})}],
   ['prophet', {familyId:'prophet',resolveDefinition:prophetProductionDefinition,ruleSetVersions:[PROPHET_RULE_SET_VERSION],
-    roomContract:{roomNumber:11,tileId:'ruins-tile-11'},threatContract:{gameplayEnabled:false},
+    roomContract:{roomNumber:11,tileId:'ruins-tile-11'},threatContract:{gameplayEnabled:true},
     dependencies:(version: string)=>({bossRuleSetVersion:version,heroDodgeRuleSetVersion:HERO_DODGE_V2,actorOccupancyRuleSetVersion:PROPHET_ACTOR_CAPACITY_VERSION})}],
 ]);
 export function productionBossFamily(family: string): ProductionBossFamilyAdapter {

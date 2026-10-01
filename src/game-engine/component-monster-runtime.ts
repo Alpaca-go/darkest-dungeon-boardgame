@@ -7,6 +7,7 @@ import {encounterRuleDependencies} from './bosses/definitions';
 import { compareCommunityTargetPriority } from './campaign/act-four/community-monster-targeting';
 import { resolveShuffleCount } from './status-effects';
 import { rollD10 } from './campaign/act-four/rng';
+import {prophetSkillSnapshot} from './prophet/production-runtime';
 
 export function sourceAttackSkill(state: BattleState): MonsterSkillDefinition | undefined {
   return state.pendingMonsterAttack?.sourceAttack?.skill;
@@ -175,7 +176,7 @@ export function validateSourceMonsterAttack(state: BattleState): void {
   const actor=state.monsters.find(m=>m.id===p.monsterUnitId);
   if (!e || !actor || !e.checkpointContext?.heroDodgeBindings || !Number.isInteger(source.skillNumber)) throw new Error('Orphan source attack');
   const parent=e.events.find(event=>event.eventId===source.parentEventId);
-  if (!parent || !['SKILL_ROLLED','MONSTER_SKILL_SELECTED'].includes(parent.eventType)) throw new Error('Source attack causal event absent');
+  if (!parent || !['SKILL_ROLLED','MONSTER_SKILL_SELECTED','PEW_ATTACK_STARTED'].includes(parent.eventType)) throw new Error('Source attack causal event absent');
   const all=[...source.alreadyResolvedHeroes,p.targetHeroUnitId,...source.remainingHeroes];
   if (!Array.isArray(source.alreadyResolvedHeroes) || !Array.isArray(source.remainingHeroes) || !Array.isArray(source.successfulHits)
     || new Set(all).size!==all.length || all.some(id=>!state.heroes.some(h=>h.id===id))
@@ -185,13 +186,13 @@ export function validateSourceMonsterAttack(state: BattleState): void {
   if (actor.id===e.bossState.actorId) {
     const skill=e.definition.skills.find(s=>s.number===source.skillNumber);
     if (!skill) throw new Error('Boss source Skill absent');
-    expectedSkill={ id:'official:'+e.battleCardId+':skill:'+skill.number,monsterId:actor.sourceId,name:skill.name,
+    expectedSkill=e.bossFamily==='prophet'?prophetSkillSnapshot(state,skill.number):{ id:'official:'+e.battleCardId+':skill:'+skill.number,monsterId:actor.sourceId,name:skill.name,
       usableFromPositions:[1,2,3,4],validTargetPositions:[1,2,3,4],targetSide:'enemy',accuracy:skill.accuracy,
       minDamage:typeof skill.damage==='number'?skill.damage:0,maxDamage:typeof skill.critDamage==='number'?skill.critDamage:0,
       stress:skill.stress,description:'Frozen C1C28 Boss semantics' };
     criticalEnabled=typeof skill.crit==='number';
     criticalThreshold=typeof skill.crit==='number'?skill.crit:0; criticalDamage=typeof skill.critDamage==='number'?skill.critDamage:0;
-    push=0; summon=skill.targetEffect.monster.toLowerCase().replace(/ /g,'-');
+    push=0; summon=e.bossFamily==='prophet'?null:skill.targetEffect.monster.toLowerCase().replace(/ /g,'-');
   } else {
     const definition=resolveProductionMonsterDefinition(actor.sourceId,e.ruleSetVersion);
     const skill=definition?.skills.find(s=>s.number===source.skillNumber);

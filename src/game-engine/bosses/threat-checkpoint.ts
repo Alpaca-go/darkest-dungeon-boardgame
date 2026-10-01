@@ -27,6 +27,12 @@ export function validateThreatCheckpoint(campaign: CampaignState, checkpoint: Bo
     || checkpoint.activeSummons.length || checkpoint.queuedDeathIds.length
     || Object.values(checkpoint.summonSupply).some(s => s.active)) throw new Error('Checkpoint is not a settled Threat state');
   if (!Array.isArray(context.consumedOnceKeys) || new Set(context.consumedOnceKeys).size !== context.consumedOnceKeys.length) throw new Error('Checkpoint consumed-once keys invalid');
+  if(checkpoint.bossFamily==='prophet'){
+    const receipts=checkpoint.events.filter(e=>e.eventType==='PROPHET_THREAT_APPLIED').map(e=>(e.result as {once:string}).once);
+    if(new Set(receipts).size!==receipts.length||JSON.stringify(receipts)!==JSON.stringify(context.consumedOnceKeys)
+      ||JSON.stringify(receipts)!==JSON.stringify(campaign.activeThreatRuntime?.consumedOnceKeys??[])
+      ||receipts.some(id=>!campaign.processedCampaignTransactionIds?.includes(id)))throw new Error('Prophet Threat receipt/once-key mismatch');
+  }
   if (context.questScope && checkpoint.events.some(event => event.eventType === 'ORDINARY_THREAT_BATTLE_ENTERED')
     && !checkpoint.threatState.firstBattleConsumed) throw new Error('Checkpoint first Battle consumption rolled back');
   const heroIds = campaign.heroes.filter(h => !h.dead).map(h => `u_${h.instanceId}`);

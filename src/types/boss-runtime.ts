@@ -40,6 +40,7 @@ export interface BossSkill {
   number: number; name: string; range: number; targetCount: number; accuracy: number;
   crit: number | { state: string }; critDamage: number | { state: string }; damage: number | { state: string };
   stress: number; self: { direction: string; count: number }; targetEffect: { monster: string };
+  applyEffects?: import('./index').ActiveEffect[];
 }
 export interface BossDefinitionContract {
   family: string;
@@ -53,6 +54,7 @@ export interface BossDefinitionContract {
   roomNumber: number;
   bossStartArea: string;
   heroStartArea: string | null;
+  heroStartingStanceAreas?: Record<import('./index').Stance, string>;
   initialStance: string;
   stats: { HP: number; speed: number | null; dodge: number; type: string[]; glyphMeanings: Record<string, string>; immunityTokens: string[]; resistanceTokens: string[] };
   actionsPerRound: number;
@@ -69,7 +71,7 @@ export interface BossDefinitionContract {
   /** Successor definitions retain their structured source rows; no Necromancer skill conversion. */
   successorContract?: {
     runtimeRegistered: true;
-    gameplayEnabled: false;
+    gameplayEnabled: boolean;
     sourceContractVersion: string;
     sourceDefinition: unknown;
     rulingReferences: Array<{version: string; path: string; sha256: string}>;
@@ -113,6 +115,7 @@ export interface DeathSnapshot {
   tokenId: string | null;
 }
 export type BossContinuation =
+  | {kind:'prophet-crowded'; actionKey:string; parentEventId:string}
   | { kind: 'monster-move'; monsterId: string; skillNumber: number; targetIds: string[]; targetAreaId: string; parentEventId: string }
   | { kind: 'source-self-move'; monsterId: string; targetIds: string[]; attackRoll: number; source: import('./component-combat').SourceMonsterAttack; parentEventId: string }
   | { kind: 'source-target-push'; characterId: string; parentEventId: string }
@@ -123,6 +126,7 @@ export type BossContinuation =
   | { kind: 'reanimate'; deaths: DeathSnapshot[]; parentEventId: string }
   | { kind: 'death-effects'; deaths: DeathSnapshot[]; remainingEffectIds: string[]; nestedDeathIds: string[]; parentEventId: string };
 export interface BossEncounterState {
+  prophetProduction?: import('./prophet-production').ProphetProductionState;
   bossFamily: string;
   bossLevel: 1 | 2 | 3;
   ruleSetVersion: string;
@@ -174,11 +178,16 @@ export interface BossEncounterState {
   };
 }
 export type BossRuntimeInput =
+  | {type:'PROPHET_ADVANCE_TURN'}
+  | {type:'PROPHET_NEXT_PEW'}
+  | {type:'PROPHET_ATTACK_FREEZE'}
+  | {type:'PROPHET_ATTACK_COMMIT'}
+  | {type:'PROPHET_ROUND'}
   | { type: 'MOVE_HERO_AREA'; heroId: string; areaId: string }
   | { type: 'ENTER_BOSS_ROOM' }
   | { type: 'PREPARATION_DAY'; rolls: Record<string, number> }
   | { type: 'FIRST_DUNGEON_BATTLE' }
-  | { type: 'SKILL'; skillRoll?: number; attackRoll?: number }
+  | { type: 'SKILL'; skillRoll?: number; attackRoll?: number; round?:number; actionOrdinal?:1|2|3 }
   | { type: 'CHOICE'; choiceId: string; selectedId: string }
   | { type: 'DEATHS'; instanceIds: string[] }
   | { type: 'MONSTER_DAMAGE'; amounts: Record<string, number> }

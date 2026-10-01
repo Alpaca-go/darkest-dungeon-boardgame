@@ -12,6 +12,7 @@ import { necromancerProductionDependencyGate } from '../bosses/production-depend
 import { nowIso } from '../random';
 import { bindNecromancerFigures } from '../ruins/physical-supply';
 import { bindProductionCheckpointFigures } from '../bosses/checkpoint-physical-bridge';
+import {sealProphetReplayOrigin} from '../prophet/production-runtime';
 
 /** Programmatic production entry. Selector and complete-edition dependency promotion stay gated. */
 export function startBossFoundation(campaign: CampaignState, definition: BossDefinitionContract, seed: number,
@@ -54,6 +55,7 @@ export function resumeBossFoundation(campaign: CampaignState, roomId: string): C
     activeActorId: null, currentActionPoints: 0, selectedSkillId: null, selectedTargetId: null, battleLog: [], rewards: { gold: 0 }, bossEncounter: encounter };
   assertBossEncounter(battle);
   const physicalBattle = bindProductionCheckpointFigures(campaign, battle);
+  if(encounter.bossFamily==='prophet'&&encounter.prophetProduction)sealProphetReplayOrigin(physicalBattle);
   const resumed = applyBossFoundationInput({ ...campaign, battle: physicalBattle, gamePhase: 'battle' }, { type: 'ENTER_BOSS_ROOM' });
   return { ...resumed, bossEncounterCheckpoint: context.heroDodgeBindings ? null : campaign.bossEncounterCheckpoint, bossRoomStorage: campaign.bossRoomStorage ? { ...campaign.bossRoomStorage, roomId, lifecycle: 'IN_PLAY' } : undefined, activeThreatRuntime: resumed.activeThreatRuntime ? { ...resumed.activeThreatRuntime,
     consumedOnceKeys: [...new Set([...resumed.activeThreatRuntime.consumedOnceKeys, ...context.consumedOnceKeys])] } : null };
@@ -105,6 +107,7 @@ export function commitBossFoundationVictory(campaign: CampaignState): CampaignSt
   if (!campaign.dungeon || !campaign.campaignProgress.activeThreatId) throw new Error('Campaign Boss victory context missing');
   const cleaned = applyBossRuntimeInput(battle, { type: 'CLEANUP' });
   const e = cleaned.bossEncounter!;
+  const prophetBefore=e.prophetProduction?{rngState:e.rngState,clockCursor:e.clockCursor,idCursor:e.idCursor}:null;
   let result = campaign;
   withBossEncounterSources(cleaned, () => {
     const finalized = finalizeBossVictory({ ...campaign, battle: cleaned,
@@ -121,6 +124,8 @@ export function commitBossFoundationVictory(campaign: CampaignState): CampaignSt
     result = resolveVictory(advanced.campaign);
     return cleaned;
   });
+  if(e.prophetProduction&&prophetBefore)e.prophetProduction.campaignFinalizationReceipt={transactionId:e.cleanupState.campaignTransactionId!,before:prophetBefore,
+    after:{rngState:cleaned.bossEncounter!.rngState,clockCursor:cleaned.bossEncounter!.clockCursor,idCursor:cleaned.bossEncounter!.idCursor}};
   return { ...result, bossRoomStorage: campaign.bossRoomStorage ? { ...campaign.bossRoomStorage, lifecycle: 'RETURNED' } : undefined, bossEncounterCheckpoint: null, bossEncounterHistory: [...(result.bossEncounterHistory ?? []), cleaned.bossEncounter!] };
 }
 

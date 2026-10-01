@@ -4,6 +4,7 @@ import type { OrdinaryRuinsEncounter, RuinsDrawState } from './encounter-draw';
 import { validateRuinsDrawState, returnOrdinaryRuinsEncounter } from './encounter-draw';
 import { ruinsMonster, ruinsRoom, ruinsTile } from './source-registry';
 import { makeHeroUnit, MAX_ROUNDS } from '../battle';
+import {applyProphetThreatEvent} from '../prophet/production-threat';
 import { validateRuinsV6Selection } from '../rules/ruins-v6';
 import { resolveHeroDodge, HERO_DODGE_V2 } from '../rules/hero-dodge';
 import { runRuinsRoomTrigger, ruinsRoomMovementCandidates } from './room-runtime';
@@ -263,5 +264,8 @@ export function beginOrdinaryRuinsBattle(campaign: CampaignState, encounterId: s
   const supply = assignOrdinaryBoneFigures(campaign.ruinsBoneFigureSupply ?? createBoneFigureSupply(), draw, encounter);
   const battle = initializeOrdinaryRuinsBattle(campaign, draw, encounterId);
   validateBoneFigureSupply(supply, draw);
-  return { ...campaign, battle, ruinsBoneFigureSupply: supply, gamePhase: 'battle' };
+  let entered:CampaignState={ ...campaign, battle, ruinsBoneFigureSupply: supply, gamePhase: 'battle' };
+  for(const unit of battle.monsters)entered=applyProphetThreatEvent(entered,{type:'MONSTER_SPAWN',
+    transactionId:`${battle.battleId}:spawn:${unit.id}`,actorId:unit.id,tags:ruinsMonster(unit.sourceId,RUINS_V6).tags});
+  return entered;
 }

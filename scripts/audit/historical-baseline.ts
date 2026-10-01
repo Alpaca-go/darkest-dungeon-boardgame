@@ -19,6 +19,8 @@ export const historicalBaselines = {
 // Historical scope is evaluated by the original, unchanged verifier in its own checkout.
 // The successor still verifies current frozen evidence; a baseline PASS cannot hide drift.
 export function verifyHistoricalBaseline(phase: keyof typeof historicalBaselines, testFiles: string[] = [], probe?: (checkout: string)=>void) {
+  // Frozen infrastructure-only rejection is exercised with its original executor, not successor gameplay.
+  if(phase==='c1c35r2ar'&&!testFiles.length)testFiles=['src/audit/c1c35r2a-shared-dispatch.test.ts'];
   const { commit, script } = historicalBaselines[phase];
   const git = (args: string[]) => execFileSync('git', args, { maxBuffer: 128 * 1024 * 1024 });
   git(['merge-base', '--is-ancestor', commit, 'HEAD']);
