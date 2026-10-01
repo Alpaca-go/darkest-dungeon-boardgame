@@ -1,0 +1,24 @@
+# C1C35R2A — Successor freeze boundary and shared dispatch
+
+Baseline: `101c27c8c15fcb93802f956f399c37ed9c38a2e9`.
+Branch: `codex/phase-11a4-c1c35r2a-successor-runtime-dispatch`.
+
+The five shared infrastructure probes pass. Prophet Levels I–III resolve through the production family registry with independently bound accepted R2 printed definition rows. Their historical review metadata remains inside the source snapshot; the successor registration explicitly records `runtimeRegistered: true` and `gameplayEnabled: false`.
+
+Historical checkpoint verification uses detached accepted Git checkouts for C1C33, C1C34, C1C35, C1C35R1 and C1C35R2. Each original verifier runs unchanged there. Current historical artifacts, including phase report directories, scripts and test files, are compared byte-for-byte with accepted Git blobs. The C1C33 manifest and its 383 runtime hashes remain unchanged. `verifyCurrentFreeze` is an evidence-preservation compatibility entry; current runtime compatibility is evaluated separately.
+
+`C1C35R2A-NECROMANCER-SUCCESSOR-COMPATIBILITY-v1` captures definition resolution, complete saved-state hashes, deterministic production command continuation, events, ownership, RNG and campaign results from the accepted baseline. The initial capture preceded shared API edits. A detached R2 origin probe independently reproduces the expectations, including save tamper rejection, without using successor runtime bytes. Regeneration from modified HEAD is prohibited.
+
+The four historical source/freeze suites are preserved unchanged and run inside the accepted R2 checkout through `successor-historical-boundary.test.ts`. They are excluded only from current-runtime collection because their whole-runtime scope guards and five rejected dependency expectations describe historical acceptance. No historical assertion is removed or weakened. Current Necromancer production acceptance and the new successor suite continue to execute against current source.
+
+Prophet Boss rules bind Hero Dodge `C1C31-DIGITAL-DEFAULT-v2` explicitly. Passing the Prophet ruleset directly to Hero Dodge still rejects. Room storage derives physical tile/card identity from the resolved family contract, preserving the shared `RESERVED → IN_PLAY → RETURNED` lifecycle. Checkpoints retain campaign, quest, Threat, family, level, encounter, battle, definition, physical event and dependency validation. Old Necromancer dependency fields stay absent and resolve without changing save bytes.
+
+The family-neutral Actor capacity primitives authorize six spaces in Area C, two for the Large Prophet and one per normal Hero. Pews are outside the Actor list. Prophet cannot acquire the Necromancer overflow contract. The shared save schema dispatches through `validateBossSaveContracts`; malformed successor saves fail before sanitization. The lifecycle and Prophet checkpoint/save proofs in this phase are infrastructure fixtures, explicitly separate from live gameplay acceptance.
+
+The production import/export/dynamic-import graph has zero reachability to the Phase 9C Prophet prototype modules. A family identity constant was extracted so existing campaign registration does not load those modules. Historical Phase 9C tests retain the original prototype definitions and runtime.
+
+The ten deterministic artifacts are under `docs/data/complete-edition/c1c35r2a-*.json`. Generate with `npm run audit:complete-edition-c1c35r2a`, verify with `npm run verify:complete-edition-c1c35r2a`, and run the successor release gate with `npm run validate:complete-edition-c1c35r2a`. The gate runs npm ci, typecheck, full regression, build, historical exact verification, Necromancer compatibility, Prophet Gate A and shared dispatch. Validation logs are kept separately in `c1c35r2a-validation/`.
+
+Final validation: all eight release commands passed. Current full regression passed 2690 tests with zero failed, pending or todo. The separately repeated successor suites passed 33 tests and executed all 72 unchanged historical source/freeze tests successfully in the accepted R2 checkout. The Boss definition probe additionally rejects source-array aliasing: mutating a returned definition must not affect subsequent resolutions. Production prototype reachability is zero and all five shared dependency probes pass. The initial diagnostics were superseded by this complete passing release run; none of the historical acceptance evidence was regenerated.
+
+Outcome: `PROPHET_SHARED_PRODUCTION_DEPENDENCIES_READY`. C1C35R2B is the next authorized workstream. Four-Pew placement, Crowded targeting/PendingChoice, Rubble execution, live Prophet Threat hooks, complete save/reload cursor, live Room cleanup and browser production acceptance remain deferred. C1C36 remains prohibited until R2B acceptance. No new source acquisition or Area C ruling was introduced.

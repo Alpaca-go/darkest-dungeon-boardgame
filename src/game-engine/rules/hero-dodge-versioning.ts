@@ -1,6 +1,7 @@
 import type { CampaignState } from '../../types';
 import type { HeroDodgeReplayRecord, HeroDodgeRuleSetVersion, ResolvedHeroDodge } from '../../types/hero-dodge-rules';
 import { assertHeroDodgeRuleSetVersion, HERO_DODGE_V1, HERO_DODGE_V2, resolveHeroDodge } from './hero-dodge';
+import {encounterRuleDependencies} from '../bosses/definitions';
 
 export const HERO_DODGE_MIGRATION_POLICY = 'C1C31R-PRE-ENCOUNTER-EXPLICIT-MIGRATION-v1';
 
@@ -33,7 +34,7 @@ export function validateHeroDodgeCampaignMetadata(campaign: Partial<CampaignStat
       || !migration.migrationId.trim() || migration.fromVersion !== HERO_DODGE_V1 || migration.toVersion !== HERO_DODGE_V2
       || migration.policyId !== HERO_DODGE_MIGRATION_POLICY) throw new Error('Hero Dodge v2 requires explicit migration provenance');
     const activeEncounters = [campaign.battle?.bossEncounter, campaign.bossEncounterCheckpoint].filter(e => !!e);
-    if (activeEncounters.some(e => e!.ruleSetVersion !== selection.ruleSetVersion)) throw new Error('Hero Dodge selection conflicts with pinned encounter');
+    if (activeEncounters.some(e => encounterRuleDependencies(e!).heroDodgeRuleSetVersion !== selection.ruleSetVersion)) throw new Error('Hero Dodge selection conflicts with pinned encounter');
   }
   if (campaign.heroDodgeReplayRecords !== undefined) {
     if (!Array.isArray(campaign.heroDodgeReplayRecords)
@@ -44,7 +45,7 @@ export function validateHeroDodgeCampaignMetadata(campaign: Partial<CampaignStat
 
 export function campaignHeroDodgeRuleSetVersion(campaign: CampaignState): HeroDodgeRuleSetVersion {
   validateHeroDodgeCampaignMetadata(campaign);
-  const pins = [campaign.battle?.bossEncounter?.ruleSetVersion, campaign.bossEncounterCheckpoint?.ruleSetVersion].filter((v): v is string => !!v);
+  const pins = [campaign.battle?.bossEncounter, campaign.bossEncounterCheckpoint].filter(e=>!!e).map(e=>encounterRuleDependencies(e!).heroDodgeRuleSetVersion);
   pins.forEach(assertHeroDodgeRuleSetVersion);
   if (new Set(pins).size > 1) throw new Error('Conflicting recorded Hero Dodge encounter versions');
   if (pins.length) return pins[0] as HeroDodgeRuleSetVersion;

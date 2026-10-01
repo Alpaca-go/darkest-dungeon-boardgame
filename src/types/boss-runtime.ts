@@ -35,7 +35,7 @@ export interface SummonSupplyEntry {
   tokens: Array<{ tokenId: string; state: 'available' | 'active' | 'spentThisBattle' | 'permanentlyRemoved'; instanceId: string | null }>;
 }
 export type SummonSupplyLedger = Record<string, SummonSupplyEntry>;
-export interface BossRoomArea { id: string; capacity: number; highGround: boolean; }
+export interface BossRoomArea { id: string; capacity: number; highGround: boolean | null; }
 export interface BossSkill {
   number: number; name: string; range: number; targetCount: number; accuracy: number;
   crit: number | { state: string }; critDamage: number | { state: string }; damage: number | { state: string };
@@ -48,13 +48,13 @@ export interface BossDefinitionContract {
   ruleSourcePolicyId: string;
   battleCardId: number;
   threatAbilityCardId: number;
-  bossIdentityCardId: number;
+  bossIdentityCardId: number | null;
   roomCardId: number;
   roomNumber: number;
   bossStartArea: string;
-  heroStartArea: string;
+  heroStartArea: string | null;
   initialStance: string;
-  stats: { HP: number; speed: number; dodge: number; type: string[]; glyphMeanings: Record<string, string>; immunityTokens: string[]; resistanceTokens: string[] };
+  stats: { HP: number; speed: number | null; dodge: number; type: string[]; glyphMeanings: Record<string, string>; immunityTokens: string[]; resistanceTokens: string[] };
   actionsPerRound: number;
   skills: BossSkill[];
   attackTable: Array<{ rollMin: number; rollMax: number; skill: number }>;
@@ -63,9 +63,30 @@ export interface BossDefinitionContract {
   supply: Array<{ name: string; digitalBattleSupplyLimit: number; role: string }>;
   reanimation: boolean;
   captainThreat: boolean;
-  hamlet: 'BLOCK_GRAVEYARD' | 'FORCE_GRAVEYARD_USE' | 'FORCE_GRAVEYARD_NO_USE';
-  alias: { printedLiteral: string; rulebookP38Literal: string; runtimeIdentity: string };
+  hamlet: 'BLOCK_GRAVEYARD' | 'FORCE_GRAVEYARD_USE' | 'FORCE_GRAVEYARD_NO_USE' | null;
+  alias: { printedLiteral: string; rulebookP38Literal: string; runtimeIdentity: string } | null;
   sourceFieldIds: string[];
+  /** Successor definitions retain their structured source rows; no Necromancer skill conversion. */
+  successorContract?: {
+    runtimeRegistered: true;
+    gameplayEnabled: false;
+    sourceContractVersion: string;
+    sourceDefinition: unknown;
+    rulingReferences: Array<{version: string; path: string; sha256: string}>;
+  };
+}
+export interface EncounterRuleDependencies {
+  bossRuleSetVersion: string;
+  heroDodgeRuleSetVersion: string;
+  actorOccupancyRuleSetVersion?: string;
+}
+/** Existing Necromancer callers retain their non-null definition API. */
+export interface NecromancerDefinitionContract extends BossDefinitionContract {
+  bossIdentityCardId: number;
+  heroStartArea: string;
+  stats: BossDefinitionContract['stats'] & {speed: number};
+  hamlet: 'BLOCK_GRAVEYARD' | 'FORCE_GRAVEYARD_USE' | 'FORCE_GRAVEYARD_NO_USE';
+  alias: NonNullable<BossDefinitionContract['alias']>;
 }
 /** A resolved definition is required; the executor never parses card text or invents Life. */
 export interface SpawnDefinition {
@@ -109,7 +130,9 @@ export interface BossEncounterState {
   roomId: string;
   battleCardId: number;
   threatAbilityCardId: number;
-  bossIdentityCardId: number;
+  bossIdentityCardId: number | null;
+  /** Optional only for byte-compatible historical Necromancer saves. Required for successor families. */
+  ruleDependencies?: EncounterRuleDependencies;
   phase: BossEncounterPhase;
   round: number;
   side: 'THREAT' | 'ABILITY';

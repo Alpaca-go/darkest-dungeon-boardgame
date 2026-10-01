@@ -1,24 +1,28 @@
 import type { BattleState, CampaignState } from '../../types';
 import type { BossEncounterState } from '../../types/boss-runtime';
 import { assertBossEncounter, recordBossRuntimeEvent } from './foundation';
-import { resolveBossDefinition } from './definitions';
+import { resolveBossDefinition, encounterRuleDependencies } from './definitions';
 import { resolveHeroDodge } from '../rules/hero-dodge';
 
 /** Reject identity/version changes before any state or RNG is consumed. */
 export function validateThreatCheckpoint(campaign: CampaignState, checkpoint: BossEncounterState): void {
   const context = checkpoint.checkpointContext;
+  const dependencies = encounterRuleDependencies(checkpoint);
   if (!context) throw new Error('Checkpoint metadata absent: explicit migration required');
+  if (checkpoint.bossFamily==='prophet' && !context.heroDodgeBindings) throw new Error('Successor Hero Dodge bindings missing');
   if (context.schemaVersion !== 1 || context.definitionVersion !== checkpoint.ruleSetVersion) throw new Error('Checkpoint definition version mismatch');
   if (context.campaignId !== campaign.id || context.questRunId !== campaign.dungeon?.questRunId
     || context.campaignLevel !== campaign.campaignProgress.campaignLevel
     || context.threatId !== campaign.campaignProgress.activeThreatId
-    || checkpoint.bossFamily !== campaign.campaignProgress.activeBossFamilyId) throw new Error('Checkpoint campaign linkage mismatch');
+    || checkpoint.bossFamily !== campaign.campaignProgress.activeBossFamilyId
+    || checkpoint.bossLevel !== campaign.campaignProgress.campaignLevel) throw new Error('Checkpoint campaign linkage mismatch');
   if (context.encounterId !== `${campaign.id}:${context.questRunId}:${checkpoint.bossFamily}:${checkpoint.bossLevel}`
     || context.battleId !== `${context.questRunId}:boss`) throw new Error('Checkpoint encounter identity mismatch');
   const definition = resolveBossDefinition(checkpoint.bossFamily, checkpoint.bossLevel, checkpoint.ruleSetVersion);
   if (JSON.stringify(definition) !== JSON.stringify(checkpoint.definition)
     || checkpoint.threatAbilityCardId !== definition.threatAbilityCardId
     || checkpoint.battleCardId !== definition.battleCardId || checkpoint.bossIdentityCardId !== definition.bossIdentityCardId) throw new Error('Checkpoint pinned contract mismatch');
+  if (checkpoint.events.some(event=>![definition.battleCardId,definition.threatAbilityCardId].includes(event.sourceCardId))) throw new Error('Checkpoint physical event identity mismatch');
   if (checkpoint.side !== 'THREAT' || checkpoint.phase !== 'THREAT_ACTIVE' || checkpoint.bossState.actorId
     || checkpoint.activeSummons.length || checkpoint.queuedDeathIds.length
     || Object.values(checkpoint.summonSupply).some(s => s.active)) throw new Error('Checkpoint is not a settled Threat state');
@@ -32,7 +36,7 @@ export function validateThreatCheckpoint(campaign: CampaignState, checkpoint: Bo
       || heroIds.some(id => !context.heroDodgeBindings![id])) throw new Error('Checkpoint Hero binding coverage invalid');
     for (const hero of campaign.heroes.filter(h => !h.dead)) {
       const id = `u_${hero.instanceId}`;
-      const expected = resolveHeroDodge({heroId:hero.heroId,level:hero.level,ruleSetVersion:checkpoint.ruleSetVersion});
+      const expected = resolveHeroDodge({heroId:hero.heroId,level:hero.level,ruleSetVersion:dependencies.heroDodgeRuleSetVersion});
       if (JSON.stringify(context.heroDodgeBindings[id]) !== JSON.stringify(expected) || context.heroDodge[id] !== expected.value)
         throw new Error('Checkpoint Hero binding differs from pinned resolver');
     }
@@ -55,7 +59,7 @@ export function bindReplacementThreatHero(campaign: CampaignState, replacedId: s
   const checkpoint = structuredClone(saved), context = checkpoint.checkpointContext!;
   delete context.heroDodge[`u_${replacedId}`];
   delete context.heroDodgeBindings![`u_${replacedId}`];
-  const binding = resolveHeroDodge({ heroId: hero.heroId, level: hero.level, ruleSetVersion: checkpoint.ruleSetVersion });
+  const binding = resolveHeroDodge({ heroId: hero.heroId, level: hero.level, ruleSetVersion: encounterRuleDependencies(checkpoint).heroDodgeRuleSetVersion });
   context.heroDodge[`u_${newId}`] = binding.value;
   context.heroDodgeBindings![`u_${newId}`] = binding;
   const shell: BattleState = { battleId: context.battleId, sourceRoomId: checkpoint.roomId, status: 'active', round: checkpoint.round,

@@ -468,6 +468,7 @@ export interface BattleState {
     necromancerFigureBinding?: import('../game-engine/ruins/physical-supply').NecromancerFigureBinding;
   /** Generic movement dependency contract. Absent on all historical battles. */
   largeMovementContract?: import('./necromancer-dependencies').LargeMovementContractState;
+  actorOccupancy?: import('../game-engine/rules/actor-occupancy').ActorOccupancyState;
   /** Serializable, contract-bound ordinary Boss foundation; absent on legacy battles. */
   bossEncounter?: import('./boss-runtime').BossEncounterState;
   /** Source-backed Guardian rooms do not use the ordinary round timeout. */

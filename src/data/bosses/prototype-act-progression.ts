@@ -36,7 +36,7 @@ import {
   NECROMANCER_FAMILY_ID,
   NECROMANCER_PROTOTYPE_BOSS_ID,
 } from './necromancer-family';
-import { PROPHET_FAMILY_ID } from './prophet-family';
+import { PROPHET_FAMILY_ID } from './family-identities';
 import { PROTOTYPE_BOSS_FAMILY_ID } from './prototype-bosses';
 
 // ---------------------------------------------------------------------------

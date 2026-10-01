@@ -1,5 +1,5 @@
 import type { CampaignState } from '../../types';
-import { resolveBossDefinition } from './definitions';
+import { resolveBossDefinition, productionBossFamily, encounterRuleDependencies } from './definitions';
 import { withTransactionRecorded } from '../campaign/campaign-orchestrator';
 
 export function hasUnfinishedProductionBossQuest(campaign: CampaignState): boolean {
@@ -35,14 +35,16 @@ export function validateProductionBossRoomStorage(campaign: Partial<CampaignStat
     if (encounter?.checkpointContext?.heroDodgeBindings && encounter.checkpointContext.questScope !== 'STANDARD') throw new Error('Production Room storage absent');
     return;
   }
-  if (!['RESERVED','IN_PLAY','RETURNED'].includes(storage.lifecycle) || storage.tileId!=='tile-10'
+  if (!['RESERVED','IN_PLAY','RETURNED'].includes(storage.lifecycle)
     || !storage.roomId || !storage.encounterId) throw new Error('Production Room storage invalid');
   if (storage.lifecycle==='RETURNED') {
     const history=campaign.bossEncounterHistory?.find(e=>e.checkpointContext?.encounterId===storage.encounterId);
     const receipt=campaign.bossRoomReturnHistory?.find(r=>r.encounterId===storage.encounterId);
     const owner=history ?? receipt?.encounter;
+    if (owner) encounterRuleDependencies(owner);
     if (!owner || owner.checkpointContext?.campaignId!==campaign.id
       || owner.checkpointContext?.encounterId!==storage.encounterId || owner.roomId!==storage.roomId
+      || storage.tileId!==productionBossFamily(owner.bossFamily).roomContract.tileId
       || storage.roomCardId!==resolveBossDefinition(owner.bossFamily,owner.bossLevel,owner.ruleSetVersion).roomCardId)
       throw new Error('Returned Room ownership mismatch');
     if (JSON.stringify(owner.definition)!==JSON.stringify(resolveBossDefinition(owner.bossFamily,owner.bossLevel,owner.ruleSetVersion))
@@ -65,7 +67,9 @@ export function validateProductionBossRoomStorage(campaign: Partial<CampaignStat
   if (!encounter || storage.encounterId!==encounter.checkpointContext?.encounterId
     || storage.roomId!==campaign.dungeon?.rooms.find(r=>r.type==='objective')?.id) throw new Error('Production Room ownership mismatch');
   const definition=resolveBossDefinition(encounter.bossFamily,encounter.bossLevel,encounter.ruleSetVersion);
-  if (storage.roomCardId!==definition.roomCardId || definition.roomNumber!==10) throw new Error('Production Room card mismatch');
+  const roomContract=productionBossFamily(encounter.bossFamily).roomContract;
+  if (storage.roomCardId!==definition.roomCardId || definition.roomNumber!==roomContract.roomNumber
+    || storage.tileId!==roomContract.tileId || JSON.stringify(encounter.definition)!==JSON.stringify(definition)) throw new Error('Production Room card mismatch');
   if (storage.lifecycle==='RESERVED' && (encounter.side!=='THREAT' || campaign.battle?.bossEncounter)
     || storage.lifecycle==='IN_PLAY' && (!campaign.battle?.bossEncounter || encounter.side!=='ABILITY' || encounter.roomId!==storage.roomId)) throw new Error('Production Room lifecycle mismatch');
 }

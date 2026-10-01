@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C35R2A",
+  "baseline": "101c27c8c15fcb93802f956f399c37ed9c38a2e9",
+  "productionFoundation": false,
+  "productionAccepted": false,
+  "canonicalComplete": false,
+  "digitalExecutionContractComplete": true,
+  "dependencyProbesPassed": 5,
+  "dependencyProbesRejected": 0,
+  "probes": [
+    {
+      "id": "boss-definition-dispatch",
+      "status": "PASS",
+      "result": [
+        {
+          "level": 1,
+          "cardId": 46604,
+          "threatId": 42009,
+          "runtimeRegistered": true
+        },
+        {
+          "level": 2,
+          "cardId": 46605,
+          "threatId": 42010,
+          "runtimeRegistered": true
+        },
+        {
+          "level": 3,
+          "cardId": 46606,
+          "threatId": 42011,
+          "runtimeRegistered": true
+        }
+      ]
+    },
+    {
+      "id": "hero-dodge-version",
+      "status": "PASS",
+      "result": {
+        "bossRuleSetVersion": "C1C35R2-PROPHET-DIGITAL-DEFAULT-v1",
+        "heroDodgeRuleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+        "actorOccupancyRuleSetVersion": "C1C35R2-PROPHET-AREA-C-CAPACITY-v1"
+      }
+    },
+    {
+      "id": "room-storage-tile-11",
+      "status": "PASS",
+      "result": [
+        "RESERVED",
+        "IN_PLAY",
+        "RETURNED"
+      ]
+    },
+    {
+      "id": "threat-checkpoint-dispatch",
+      "status": "PASS",
+      "result": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "id": "shared-large-contract-version",
+      "status": "PASS",
+      "result": {
+        "capacity": 6,
+        "largeCost": 2,
+        "heroCost": 1,
+        "capacity6Legal": true,
+        "capacity7Rejected": true,
+        "overflowInherited": false
+      }
+    }
+  ]
+}

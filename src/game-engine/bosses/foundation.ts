@@ -5,6 +5,7 @@ import { shuffleWithRng, rollD10 } from '../campaign/act-four/rng';
 import { validateSourceMonsterAttack, startSourceMonsterAttack, continuePrintedMonsterTurn } from '../component-monster-runtime';
 import { resolveProductionMonsterDefinition } from './component-adapters/bone-combat-adapter';
 import { resolveHeroDodge } from '../rules/hero-dodge';
+import {encounterRuleDependencies} from './definitions';
 import type { ProductionMonsterDefinition } from '../../types/component-combat';
 import { applyBattleUnitDamage } from '../damage';
 import { isNonUnholy, isReanimationEligible } from './threat-semantics';
@@ -59,7 +60,7 @@ export function assertBossEncounter(b: BattleState): void {
   if (e.checkpointContext?.heroDodgeBindings) {
     for (const hero of b.heroes) {
       const binding=hero.heroDodgeBinding ?? e.checkpointContext.heroDodgeBindings[hero.id];
-      if (!binding || JSON.stringify(binding)!==JSON.stringify(resolveHeroDodge({...binding,ruleSetVersion:e.ruleSetVersion}))
+      if (!binding || JSON.stringify(binding)!==JSON.stringify(resolveHeroDodge({...binding,ruleSetVersion:encounterRuleDependencies(e).heroDodgeRuleSetVersion}))
         || hero.bossCombatDodge!==binding.value) throw new Error('Pinned Hero Dodge binding invalid');
     }
     for (const definition of Object.values(e.spawnDefinitions).filter(d=>d.definitionId!==e.bossFamily+'-level-'+e.bossLevel)) {
@@ -100,6 +101,7 @@ export function bindBossEncounter(battle: BattleState, definition: BossDefinitio
   spawnDefinitions: SpawnDefinition[] = [], permanentlyRemovedTokenIds: string[] = []): BattleState {
   if (battle.bossEncounter) throw new Error('Encounter already reserved on this battle');
   const b = clone(battle);
+  if (definition.family==='prophet' || definition.successorContract) throw new Error('Successor gameplay requires production foundation acceptance');
   const supply: BossEncounterState['summonSupply'] = {};
   for (const pool of definition.supply) {
     const id = runtimeId(pool.name);
@@ -126,7 +128,7 @@ export function bindBossEncounter(battle: BattleState, definition: BossDefinitio
     bossState: { actorId: null, lastActionRound: 0, storage: 'IN_PLAY' }, summonSupply: supply,
     activeSummons: b.monsters.filter(u => supply[u.sourceId] && u.isAlive).map(u => u.id), queuedDeathIds: [],
     spawnDefinitions: Object.fromEntries(spawnDefinitions.map(d => [d.definitionId, clone(d)])),
-    placements: Object.fromEntries([...b.heroes, ...b.monsters].map(u => [u.id, u.side === 'hero' ? definition.heroStartArea : definition.bossStartArea])),
+    placements: Object.fromEntries([...b.heroes, ...b.monsters].map(u => [u.id, u.side === 'hero' ? definition.heroStartArea! : definition.bossStartArea])),
     correspondingAreas: Object.fromEntries(b.monsters.map(u => [u.id, definition.bossStartArea])),
     reanimationState: { firstDeathWindowConsumed: false, lockedEventId: null },
     threatState: { firstBattleConsumed: false, preparationDayConsumed: false, forcedHeroId: null, permanentlyRemovedDefinitionIds: [],
@@ -506,7 +508,7 @@ function handle(b: BattleState, input: BossRuntimeInput, rng: () => number): voi
     recordBossRuntimeEvent(b, 'THREAT_FLIPPED_TO_ABILITY', { threatStopped: true, abilityActive: true });
     const id = `${b.battleId}:boss`;
     const bossDef: SpawnDefinition = { definitionId: `${e.bossFamily.toLowerCase()}-level-${e.bossLevel}`, sourceCardId: e.battleCardId, dataAuthority: 'OFFICIAL_SOURCE', ruleSetVersion: e.ruleSetVersion, life: e.definition.stats.HP,
-      speed: e.definition.stats.speed, large: false, occupiedSlots: 1, tags: e.definition.stats.type, skillIds: [] };
+      speed: e.definition.stats.speed!, large: false, occupiedSlots: 1, tags: e.definition.stats.type, skillIds: [] };
     const boss = freshUnit(bossDef, id, stances.indexOf(e.definition.initialStance.toLowerCase() as Stance) + 1);
     boss.bossCombatDodge = e.definition.stats.dodge;
     boss.immunities = e.definition.stats.immunityTokens.map(token => e.definition.stats.glyphMeanings[token].toLowerCase());
@@ -517,7 +519,7 @@ function handle(b: BattleState, input: BossRuntimeInput, rng: () => number): voi
       actionsPerRound: e.definition.actionsPerRound, bossInitiativeCardIds: [], roundLimitEnabled: false, currentRound: 1, bossDefeated: false, victoryResolved: false,
       summonHistory: [], bossRevealTransactionId: `${b.battleId}:reveal`, bossVictoryTransactionId: null, actionSelections: [] };
     e.correspondingAreas[id] = e.definition.bossStartArea;
-    for (const hero of b.heroes) e.placements[hero.id] = e.definition.heroStartArea;
+    for (const hero of b.heroes) e.placements[hero.id] = e.definition.heroStartArea!;
     b.round = 1; e.round = 1; b.roundLimitEnabled = false; b.roundLimitPolicy = 'not-counted';
     b.initiativeOrder = shuffleWithRng(rng, [...b.heroes.filter(u => u.isAlive).map(u => u.id), id]);
     b.initiativeIndex = -1; b.activeActorId = null;
@@ -581,6 +583,7 @@ function idInAmounts(id: string, amounts: Record<string, number>): boolean { ret
 export function applyBossRuntimeInput(battle: BattleState, input: BossRuntimeInput): BattleState {
   const b = clone(battle);
   const e = encounter(b);
+  if (e.bossFamily==='prophet' || e.definition.successorContract) throw new Error('Successor gameplay requires production foundation acceptance');
   if (e.cleanupState.completed && input.type === 'CLEANUP') return battle;
   const next = withBossEncounterSources(b, (working, rng) => { handle(working, input, rng); return checkBossRuntimeEnd(working); });
   encounter(next).inputs.push(clone(input));

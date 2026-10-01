@@ -3,6 +3,7 @@ import type { PrintedMonsterSkill, ProductionMonsterDefinition, SourceMonsterAtt
 import { areaDistance, recordBossRuntimeEvent, createBossRuntimeChoice, withBossEncounterSources } from './bosses/foundation';
 import { resolveProductionMonsterDefinition } from './bosses/component-adapters/bone-combat-adapter';
 import { resolveHeroDodge } from './rules/hero-dodge';
+import {encounterRuleDependencies} from './bosses/definitions';
 import { compareCommunityTargetPriority } from './campaign/act-four/community-monster-targeting';
 import { resolveShuffleCount } from './status-effects';
 import { rollD10 } from './campaign/act-four/rng';
@@ -27,7 +28,7 @@ export function resolveSourceAttackDodge(state: BattleState): number {
   const hero = state.heroes.find(h => h.id === pending.targetHeroUnitId);
   const binding = hero?.heroDodgeBinding;
   if (!hero || !binding || !state.bossEncounter) throw new Error('Source attack Hero Dodge binding absent');
-  const resolved = resolveHeroDodge({ heroId: binding.heroId, level: binding.level, ruleSetVersion: state.bossEncounter.ruleSetVersion });
+  const resolved = resolveHeroDodge({ heroId: binding.heroId, level: binding.level, ruleSetVersion: encounterRuleDependencies(state.bossEncounter).heroDodgeRuleSetVersion });
   if (JSON.stringify(resolved) !== JSON.stringify(binding)) throw new Error('Source attack Hero Dodge provenance mismatch');
   return resolved.value;
 }

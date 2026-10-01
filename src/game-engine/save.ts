@@ -23,8 +23,7 @@ import type { QuestRuntimeToken } from '../types/content-runtime';
 import { validateProductionBossRoomStorage } from './bosses/room-storage';
 import { sourceAttackSkill } from './component-monster-runtime';
 import { nowIso } from './random';
-import { assertBossEncounter } from './bosses/foundation';
-import { resolveBossDefinition } from './bosses/definitions';
+import {validateBossSaveContracts} from './bosses/save-dispatch';
 import { validateThreatCheckpoint } from './bosses/threat-checkpoint';
 import { validateHeroDodgeCampaignMetadata } from './rules/hero-dodge-versioning';
 import { validateGraveyardReceipts } from './campaign/necromancer-graveyard';
@@ -201,15 +200,8 @@ export function validateSaveFile(data: unknown): string | null {
   if (!s.gamePhase || !VALID_PHASES.includes(s.gamePhase)) return `非法 gamePhase：${String(s.gamePhase)}`;
 
   const c = s.campaign as Partial<CampaignState> | undefined;
-  if (c?.bossEncounterCheckpoint || c?.bossEncounterHistory) {
-    try {
-      if (c.bossEncounterCheckpoint?.checkpointContext) validateThreatCheckpoint(c as CampaignState, c.bossEncounterCheckpoint);
-      for (const e of [...(c.bossEncounterHistory ?? []), ...(c.bossEncounterCheckpoint ? [c.bossEncounterCheckpoint] : [])]) {
-        if (JSON.stringify(e.definition) !== JSON.stringify(resolveBossDefinition(e.bossFamily, e.bossLevel, e.ruleSetVersion))) return 'Boss history/checkpoint differs from its pinned contract';
-        if (e.events.some(event => event.ruleSetVersion !== e.ruleSetVersion)) return 'Boss history/checkpoint event version mismatch';
-      }
-    } catch (error) { return `Boss history/checkpoint invalid: ${error instanceof Error ? error.message : String(error)}`; }
-  }
+  if (c) try { validateBossSaveContracts(c); }
+  catch (error) { return `Boss successor save invalid: ${error instanceof Error ? error.message : String(error)}`; }
   if (!c || typeof c !== 'object') return '缺少 campaign 字段';
   try { validateProductionBossRoomStorage(c); validateHeroDodgeCampaignMetadata(c); validateGraveyardReceipts(c); validateNecromancerPreparationDay(c); validateSourceTrinketRewards(c); if (c.ruinsRuleSetSelection?.ruleSetVersion === RUINS_V6) validateRuinsV6Selection(c); else if (c.ruinsRuleSetSelection?.ruleSetVersion === RUINS_V5) validateRuinsV5Selection(c); else validateRuinsVersionSelection(c); if (c.ruinsDrawState?.ruleSetVersion === RUINS_V6) validateRuinsV6Selection(c); if (c.ruinsDrawState) validateRuinsDrawState(c.ruinsDrawState); if (c.ruinsBoneFigureSupply) validateBoneFigureSupply(c.ruinsBoneFigureSupply, c.ruinsDrawState); if (c.battle) { validateLargeMovementContract(c.battle); validateOrdinaryRuinsBattle(c.battle, c.ruinsDrawState); validateRuinsPendingAttack(c.battle); } validateProductionOrdinaryThreat(c as CampaignState); validateQuestThreatHistory(c as CampaignState); }
   catch (error) { return `Hero Dodge metadata invalid: ${error instanceof Error ? error.message : String(error)}`; }
@@ -449,14 +441,6 @@ export function validateSaveFile(data: unknown): string | null {
   if (c.gamePhase === 'battle') {
     const b = c.battle as BattleState | null | undefined;
     if (!b || !Array.isArray(b.heroes) || !Array.isArray(b.monsters)) return 'battle 阶段缺少合法的 BattleState';
-    if (b.bossEncounter) {
-      try {
-        const e = b.bossEncounter;
-        const definition = resolveBossDefinition(e.bossFamily, e.bossLevel, e.ruleSetVersion);
-        if (JSON.stringify(e.definition) !== JSON.stringify(definition)) return 'Boss executable definition differs from its pinned contract';
-        assertBossEncounter(b);
-      } catch (error) { return `Boss runtime save invalid: ${error instanceof Error ? error.message : String(error)}`; }
-    }
     for (const u of b.heroes) {
       if (!c.heroes.some((h) => h.instanceId === u.sourceId)) {
         return `战斗单位 ${u.id} 引用了不存在的英雄`;
@@ -1755,6 +1739,7 @@ export function sanitizeSaveFile(save: SaveFile): SaveFile {
 
 /** 从快照恢复战役状态（先修复再取 campaign）。 */
 export function restoreSaveSnapshot(save: SaveFile): CampaignState {
+  validateBossSaveContracts(save.campaign);
   const campaign = sanitizeSaveFile(save).campaign;
   if (campaign.bossEncounterCheckpoint?.checkpointContext) validateThreatCheckpoint(campaign, campaign.bossEncounterCheckpoint);
   validateProductionBossRoomStorage(campaign);
