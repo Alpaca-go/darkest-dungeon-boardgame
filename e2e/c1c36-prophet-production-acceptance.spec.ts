@@ -65,6 +65,8 @@ async function fight(page: Page, inspect?: (c: CampaignState) => Promise<void>) 
     const c = await saved(page), b = c.battle;
 
     if (!b) return;
+    if(b.ruinsContext)for(const monster of b.monsters.filter(m=>m.isAlive))
+      await expect(page.getByTestId('actor-'+monster.id)).toBeVisible();
     if(step%10===0)console.log('C1C36 fight',step,b.status,b.round,b.activeActorId,b.bossEncounter?.prophetProduction?.actionOrdinal,b.pendingMonsterAttack?.stage);
     if (b.status === 'victory') {
       await page.getByRole('button', { name: '领取奖励并返回地牢', exact: true }).click();
@@ -72,6 +74,7 @@ async function fight(page: Page, inspect?: (c: CampaignState) => Promise<void>) 
       return;
     }
     if(b.status==='defeat'&&b.ruinsContext){
+      expect(b.heroes.some(h=>h.isAlive),'ordinary party wipe cannot be treated as a round-limit retreat').toBe(true);
       await page.getByRole('button',{name:'撤退回地牢',exact:true}).click();
       expect((await saved(page)).battle).toBeNull();
       observe(page,'ordinary-round-limit-return',await saved(page));return;
@@ -99,14 +102,14 @@ async function fight(page: Page, inspect?: (c: CampaignState) => Promise<void>) 
     if(!actor&&b.pendingMonsterAttack&&c.pendingTrinketUseOpportunities.some(o=>o.status==='open')){await expect(page.getByTestId('trinket-use-overlay')).toBeVisible();continue;}
     expect(actor, JSON.stringify({ active: b.activeActorId, pending: b.pendingMonsterAttack, phase: c.gamePhase })).toBeTruthy();
     let acted = false;
-    const wounded=b.heroes.filter(h=>h.isAlive&&h.hp<h.maxHp/2).sort((a,z)=>a.hp-z.hp);
+    const wounded=b.heroes.filter(h=>h.isAlive&&h.hp<h.maxHp*0.75).sort((a,z)=>a.hp-z.hp);
     if(wounded.length){
       for(const id of actor!.equippedSkillIds??[]){
         const button=page.getByTestId('skill-'+id);
         if(!await button.count()||!await button.isEnabled()||!(await button.innerText()).includes('治疗'))continue;
         await button.click();
         const target=wounded.map(h=>page.getByTestId('actor-'+h.id));
-        for(const candidate of target)if(await candidate.getAttribute('data-legal-target')==='true'){await candidate.click();acted=true;break;}
+        for(const candidate of target)if(await candidate.count()&&await candidate.getAttribute('data-legal-target')==='true'){await candidate.click();acted=true;break;}
         if(acted)break;await button.click();
       }
       if(acted)continue;
@@ -136,11 +139,11 @@ async function fight(page: Page, inspect?: (c: CampaignState) => Promise<void>) 
       await skill.click();
       const targets = page.getByTestId('monster-side').locator('[data-legal-target="true"]');
       if (!await targets.count()) { await skill.click(); continue; }
-      let target=targets.first();
-      for(const monster of b.monsters.filter(m=>m.isAlive).sort((a,z)=>a.hp-z.hp)){
-        const candidate=page.getByTestId('actor-'+monster.id);
-        if(await candidate.getAttribute('data-legal-target')==='true'){target=candidate;break;}
-      }
+      const renderedTargets=await targets.evaluateAll(nodes=>nodes.map(node=>node.getAttribute('data-testid')));
+      const currentBattle=(await saved(page)).battle!;
+      const preferred=currentBattle.monsters.filter(m=>m.isAlive).sort((a,z)=>a.hp-z.hp)
+        .find(monster=>renderedTargets.includes('actor-'+monster.id));
+      const target=preferred?page.getByTestId('actor-'+preferred.id):targets.first();
       await target.click();
       acted = true;
       break;
@@ -180,8 +183,10 @@ async function fight(page: Page, inspect?: (c: CampaignState) => Promise<void>) 
 
 async function move(page: Page, roomId: string, inspect?: (c: CampaignState) => Promise<void>) {
   await acknowledgeEvents(page);
+  await playerRest(page);
   await page.getByTestId(`dungeon-room-${roomId}`).click();
   for(let n=0;n<20&&(await saved(page)).pendingDungeonTrinketAction;n++){
+    if(await playerOverlay(page))continue;
     const wild=page.locator('[data-testid^="provision-wild-"]');
     const decline=page.locator('[data-testid^="trinket-decline-"]');
     if(await decline.count())await decline.first().click();
@@ -203,6 +208,30 @@ async function move(page: Page, roomId: string, inspect?: (c: CampaignState) => 
   }
   expect(c.dungeon?.currentRoomId).toBe(roomId);
   if (c.battle) await fight(page, inspect);
+}
+
+async function playerRest(page:Page){
+  const c=await saved(page),budget=c.questRuntimeState?.restingPointsRemaining??0;
+  const heroes=c.heroes.filter(h=>!h.dead&&h.isAlive);
+  const button=page.getByTestId('rest-at-camp');
+  if(!budget||!await button.count()||!await button.isEnabled()
+    ||heroes.reduce((sum,h)=>sum+h.wounds+h.stress,0)<budget)return;
+  await button.click();
+  const draft=heroes.map(h=>({hero:h,life:h.wounds,stress:h.stress}));
+  for(let point=0;point<budget;point++){
+    const options=draft.flatMap(row=>(['life','stress'] as const).filter(resource=>row[resource]>0).map(resource=>({row,resource,
+      score:resource==='life'?(row.hero.maxLife-row.life<=row.hero.maxLife/2?100:0)+row.life*2
+        :(row.stress>=7?50:0)+row.stress*2})));
+    const chosen=options.sort((a,b)=>b.score-a.score)[0];
+    expect(chosen,'printed Resting Points must be allocated through player controls').toBeTruthy();
+    await page.getByTestId(`rest-${chosen.row.hero.instanceId}-${chosen.resource}-plus`).click();
+    chosen.row[chosen.resource]--;
+  }
+  await expect(page.getByTestId('rest-points-remaining')).toHaveText('0');
+  await page.getByTestId('rest-allocation-confirm').click();
+  expect((await saved(page)).questRuntimeState!.firewoodTokensRemaining).toBe(c.questRuntimeState!.firewoodTokensRemaining!-1);
+  observe(page,'source-bound player Camp recovery',await saved(page));
+  await acknowledgeEvents(page);
 }
 
 async function acknowledgeEvents(page:Page){
@@ -284,6 +313,9 @@ async function hamlet(page:Page,level:number){
           expect(after).toBe(Math.max(0,before-expected.recoveryAfterPassives));tavern=true;
           tavernAudits.set(page,[...(tavernAudits.get(page)??[]),{level,before,after,modifier:-level,active:true,...expected}]);}}
     }
+    const injured=(await saved(page)).heroes.filter(h=>!h.dead&&!h.hasActedToday&&h.wounds>0).sort((a,b)=>b.wounds-a.wounds)[0];
+    if(injured){await page.getByTestId('hero-select-'+injured.instanceId).click();const treatment=page.getByTestId('building-sanitarium');
+      if(await treatment.isEnabled()){await treatment.click();await page.getByTestId('sanitarium-heal-small').click();await acknowledgeEvents(page);}}
     for(const h of (await saved(page)).heroes.filter(h=>!h.dead&&!h.hasActedToday))await page.getByTestId('skip-'+h.instanceId).click();
     await page.getByTestId('end-day').click();
   }
