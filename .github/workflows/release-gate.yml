@@ -19,6 +19,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run typecheck
+      - run: npm run verify:complete-edition-c1c38
       - run: npm test -- --reporter=json --outputFile=tmp-c1c38-final-tests.json
       - run: npm run build
       - run: npm run historical-baseline-validation
