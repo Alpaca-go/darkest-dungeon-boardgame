@@ -1,0 +1,498 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C38",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "contractVersion": "C1C38-THING-SOURCE-CONTRACT-v1",
+  "baseline": "3ea7854b33dbfaf6dcbd85e3fb5bf86ffc55b0d3",
+  "runtimeImplemented": false,
+  "productionReady": false,
+  "playerRouteEnabled": false,
+  "dependencies": [
+    {
+      "id": "actor.eldritchTagGameplay",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "Printed Eldritch identity is bound; encounter-specific tag interactions cannot be borrowed from videogame or other Bosses."
+    },
+    {
+      "id": "actor.unprintedResistanceDefaults",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "No numeric zero is synthesized for absent resistance fields; any future adapter must model listed conditions."
+    },
+    {
+      "id": "skills.returnExclusiveTrigger",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "Not in the printed normal table; absence does not prove no other encounter-specific trigger exists."
+    },
+    {
+      "id": "RETURN_TO_THE_STARS.crowdedAreaTie",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "Core p24 gives Stance priority for qualifying characters; equal Crowded Areas require a reviewed encounter target rule or digital candidate policy."
+    },
+    {
+      "id": "encounter.contentSet",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "No reviewed locked official clause binds this family-specific model. Core Boss examples, flavor wander, crystal emblem and transport grouping do not establish applicability."
+    },
+    {
+      "id": "encounter.campaignEligibility",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "No reviewed locked official clause binds this family-specific model. Core Boss examples, flavor wander, crystal emblem and transport grouping do not establish applicability."
+    },
+    {
+      "id": "encounter.questEligibility",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "No reviewed locked official clause binds this family-specific model. Core Boss examples, flavor wander, crystal emblem and transport grouping do not establish applicability."
+    },
+    {
+      "id": "encounter.encounterType",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "No reviewed locked official clause binds this family-specific model. Core Boss examples, flavor wander, crystal emblem and transport grouping do not establish applicability."
+    },
+    {
+      "id": "encounter.FaceTheThreatApplicable",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "No reviewed locked official clause binds this family-specific model. Core Boss examples, flavor wander, crystal emblem and transport grouping do not establish applicability."
+    },
+    {
+      "id": "encounter.ThreatModel",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "No reviewed locked official clause binds this family-specific model. Core Boss examples, flavor wander, crystal emblem and transport grouping do not establish applicability."
+    },
+    {
+      "id": "encounter.campaignLevelModel",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "No reviewed locked official clause binds this family-specific model. Core Boss examples, flavor wander, crystal emblem and transport grouping do not establish applicability."
+    },
+    {
+      "id": "encounter.RoomModel",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "No reviewed locked official clause binds this family-specific model. Core Boss examples, flavor wander, crystal emblem and transport grouping do not establish applicability."
+    },
+    {
+      "id": "encounter.TileModel",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "No reviewed locked official clause binds this family-specific model. Core Boss examples, flavor wander, crystal emblem and transport grouping do not establish applicability."
+    },
+    {
+      "id": "encounter.HeroEntryModel",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "No reviewed locked official clause binds this family-specific model. Core Boss examples, flavor wander, crystal emblem and transport grouping do not establish applicability."
+    },
+    {
+      "id": "encounter.BossPlacementModel",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "No reviewed locked official clause binds this family-specific model. Core Boss examples, flavor wander, crystal emblem and transport grouping do not establish applicability."
+    },
+    {
+      "id": "encounter.startingStance",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "No reviewed locked official clause binds this family-specific model. Core Boss examples, flavor wander, crystal emblem and transport grouping do not establish applicability."
+    },
+    {
+      "id": "encounter.initiativeModel",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "No reviewed locked official clause binds this family-specific model. Core Boss examples, flavor wander, crystal emblem and transport grouping do not establish applicability."
+    },
+    {
+      "id": "encounter.victoryModel",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "No reviewed locked official clause binds this family-specific model. Core Boss examples, flavor wander, crystal emblem and transport grouping do not establish applicability."
+    },
+    {
+      "id": "encounter.campaignConsequence",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "No reviewed locked official clause binds this family-specific model. Core Boss examples, flavor wander, crystal emblem and transport grouping do not establish applicability."
+    },
+    {
+      "id": "encounter.questProgression",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "No reviewed locked official clause binds this family-specific model. Core Boss examples, flavor wander, crystal emblem and transport grouping do not establish applicability."
+    },
+    {
+      "id": "encounter.reward",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "No reviewed locked official clause binds this family-specific model. Core Boss examples, flavor wander, crystal emblem and transport grouping do not establish applicability."
+    },
+    {
+      "id": "encounter.escapeOrFailure",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "No reviewed locked official clause binds this family-specific model. Core Boss examples, flavor wander, crystal emblem and transport grouping do not establish applicability."
+    },
+    {
+      "id": "encounter.cleanup",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "No reviewed locked official clause binds this family-specific model. Core Boss examples, flavor wander, crystal emblem and transport grouping do not establish applicability."
+    },
+    {
+      "id": "initiative.freeActionSeparateEntry",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "The Ability binds a free action before action #1; no encounter-specific component instruction establishes a separate initiative card."
+    },
+    {
+      "id": "summon.eligiblePool",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "Ability quantifier plus generic p31 cannot establish eligible physical pool/copies or special supply priority."
+    },
+    {
+      "id": "summon.otherEligibleMonsters",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "Ability quantifier plus generic p31 cannot establish eligible physical pool/copies or special supply priority."
+    },
+    {
+      "id": "summon.poolLevel",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "Ability quantifier plus generic p31 cannot establish eligible physical pool/copies or special supply priority."
+    },
+    {
+      "id": "summon.duplicateDefinitions",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "Ability quantifier plus generic p31 cannot establish eligible physical pool/copies or special supply priority."
+    },
+    {
+      "id": "summon.countAlgorithm",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "Ability quantifier plus generic p31 cannot establish eligible physical pool/copies or special supply priority."
+    },
+    {
+      "id": "summon.mandatoryAberrationSelection",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "Ability quantifier plus generic p31 cannot establish eligible physical pool/copies or special supply priority."
+    },
+    {
+      "id": "summon.exactlyOneVacancy",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "Ability quantifier plus generic p31 cannot establish eligible physical pool/copies or special supply priority."
+    },
+    {
+      "id": "summon.multipleVacancies",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "Ability quantifier plus generic p31 cannot establish eligible physical pool/copies or special supply priority."
+    },
+    {
+      "id": "summon.noAberrationSupply",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "Ability quantifier plus generic p31 cannot establish eligible physical pool/copies or special supply priority."
+    },
+    {
+      "id": "summon.alreadyPresentAberration",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "Ability quantifier plus generic p31 cannot establish eligible physical pool/copies or special supply priority."
+    },
+    {
+      "id": "summon.multipleAberrationCopies",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "Ability quantifier plus generic p31 cannot establish eligible physical pool/copies or special supply priority."
+    },
+    {
+      "id": "summon.priorityAndOverflow",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "Ability quantifier plus generic p31 cannot establish eligible physical pool/copies or special supply priority."
+    },
+    {
+      "id": "summon.activeCopiesReduceSupply",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "Ability quantifier plus generic p31 cannot establish eligible physical pool/copies or special supply priority."
+    },
+    {
+      "id": "summon.copyReturnDestination",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "Ability quantifier plus generic p31 cannot establish eligible physical pool/copies or special supply priority."
+    },
+    {
+      "id": "physical.aberrationCopies",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "No official component census binds finite production supply. TTS object counts are transport inventory only."
+    },
+    {
+      "id": "physical.otherMonsterCopies",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "No official component census binds finite production supply. TTS object counts are transport inventory only."
+    },
+    {
+      "id": "physical.initiativeComponents",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "No official component census binds finite production supply. TTS object counts are transport inventory only."
+    },
+    {
+      "id": "physical.specialTokens",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "No official component census binds finite production supply. TTS object counts are transport inventory only."
+    },
+    {
+      "id": "physical.bossMiniature",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "No official component census binds finite production supply. TTS object counts are transport inventory only."
+    },
+    {
+      "id": "aberration.productionDefinition",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "Level I literal is available. No executable definition exists; whole-table All Heroes scope, delayed self-death, content set and supply need contract closure."
+    },
+    {
+      "id": "aberration.physicalCopySupply",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "Two transport card records with printed Levels I/II do not prove official Level I copy or figure counts."
+    },
+    {
+      "id": "aberration.otherPoolMembership",
+      "kind": "SOURCE",
+      "blocking": true,
+      "notes": "At-least-one clause binds this required member, not the remaining summon pool."
+    },
+    {
+      "id": "scheduler.interruptionAndResume",
+      "kind": "PROJECT_RULING",
+      "blocking": true,
+      "notes": "Version a free-action cursor before normal action #1; no resumed-array-order default."
+    },
+    {
+      "id": "scheduler.reactionDeathOrdering",
+      "kind": "PROJECT_RULING",
+      "blocking": true,
+      "notes": "Preserve reaction windows and a death/victory checkpoint after self effects; simultaneous ties need review."
+    },
+    {
+      "id": "WEAKENING_SHARD.samePhaseSerialization",
+      "kind": "PROJECT_RULING",
+      "blocking": true,
+      "notes": "Printed target effects share a phase; version replay serialization without inventing additional attacks."
+    },
+    {
+      "id": "RETURN_TO_THE_STARS.samePhaseSerialization",
+      "kind": "PROJECT_RULING",
+      "blocking": true,
+      "notes": "Version the order of self Wounds/removal and target Stress/summon, including self-death interruption; shared phase rules alone do not decide all cursor behavior."
+    },
+    {
+      "id": "physical.ownershipLedger",
+      "kind": "PROJECT_RULING",
+      "blocking": true,
+      "notes": "After source supply is bound, record unique physical IDs, duplicate rejection and return transactions."
+    },
+    {
+      "id": "save.round",
+      "kind": "PROJECT_RULING",
+      "blocking": true,
+      "notes": "Future production persistence proposal only; preserve PendingChoice candidates, causal IDs, stored rolls and versioned execution dependencies."
+    },
+    {
+      "id": "save.normalActionOrdinal",
+      "kind": "PROJECT_RULING",
+      "blocking": true,
+      "notes": "Future production persistence proposal only; preserve PendingChoice candidates, causal IDs, stored rolls and versioned execution dependencies."
+    },
+    {
+      "id": "save.freeActionPending",
+      "kind": "PROJECT_RULING",
+      "blocking": true,
+      "notes": "Future production persistence proposal only; preserve PendingChoice candidates, causal IDs, stored rolls and versioned execution dependencies."
+    },
+    {
+      "id": "save.summonTransaction",
+      "kind": "PROJECT_RULING",
+      "blocking": true,
+      "notes": "Future production persistence proposal only; preserve PendingChoice candidates, causal IDs, stored rolls and versioned execution dependencies."
+    },
+    {
+      "id": "save.summonCursor",
+      "kind": "PROJECT_RULING",
+      "blocking": true,
+      "notes": "Future production persistence proposal only; preserve PendingChoice candidates, causal IDs, stored rolls and versioned execution dependencies."
+    },
+    {
+      "id": "save.candidatePhysicalCopies",
+      "kind": "PROJECT_RULING",
+      "blocking": true,
+      "notes": "Future production persistence proposal only; preserve PendingChoice candidates, causal IDs, stored rolls and versioned execution dependencies."
+    },
+    {
+      "id": "save.selectedCopies",
+      "kind": "PROJECT_RULING",
+      "blocking": true,
+      "notes": "Future production persistence proposal only; preserve PendingChoice candidates, causal IDs, stored rolls and versioned execution dependencies."
+    },
+    {
+      "id": "save.placementCursor",
+      "kind": "PROJECT_RULING",
+      "blocking": true,
+      "notes": "Future production persistence proposal only; preserve PendingChoice candidates, causal IDs, stored rolls and versioned execution dependencies."
+    },
+    {
+      "id": "save.postureOccupancy",
+      "kind": "PROJECT_RULING",
+      "blocking": true,
+      "notes": "Future production persistence proposal only; preserve PendingChoice candidates, causal IDs, stored rolls and versioned execution dependencies."
+    },
+    {
+      "id": "save.pendingTargetSelection",
+      "kind": "PROJECT_RULING",
+      "blocking": true,
+      "notes": "Future production persistence proposal only; preserve PendingChoice candidates, causal IDs, stored rolls and versioned execution dependencies."
+    },
+    {
+      "id": "save.pendingAttack",
+      "kind": "PROJECT_RULING",
+      "blocking": true,
+      "notes": "Future production persistence proposal only; preserve PendingChoice candidates, causal IDs, stored rolls and versioned execution dependencies."
+    },
+    {
+      "id": "save.rngCheckpoint",
+      "kind": "PROJECT_RULING",
+      "blocking": true,
+      "notes": "Future production persistence proposal only; preserve PendingChoice candidates, causal IDs, stored rolls and versioned execution dependencies."
+    },
+    {
+      "id": "save.causalEvents",
+      "kind": "PROJECT_RULING",
+      "blocking": true,
+      "notes": "Future production persistence proposal only; preserve PendingChoice candidates, causal IDs, stored rolls and versioned execution dependencies."
+    },
+    {
+      "id": "save.encounterLifecycle",
+      "kind": "PROJECT_RULING",
+      "blocking": true,
+      "notes": "Future production persistence proposal only; preserve PendingChoice candidates, causal IDs, stored rolls and versioned execution dependencies."
+    },
+    {
+      "id": "save.rulingVersion",
+      "kind": "PROJECT_RULING",
+      "blocking": true,
+      "notes": "Future production persistence proposal only; preserve PendingChoice candidates, causal IDs, stored rolls and versioned execution dependencies."
+    },
+    {
+      "id": "save.staleChoiceRejection",
+      "kind": "PROJECT_RULING",
+      "blocking": true,
+      "notes": "Future production persistence proposal only; preserve PendingChoice candidates, causal IDs, stored rolls and versioned execution dependencies."
+    },
+    {
+      "id": "save.reloadBehavior",
+      "kind": "PROJECT_RULING",
+      "blocking": true,
+      "notes": "Future production persistence proposal only; preserve PendingChoice candidates, causal IDs, stored rolls and versioned execution dependencies."
+    },
+    {
+      "id": "save.transactionIdentity",
+      "kind": "PROJECT_RULING",
+      "blocking": true,
+      "notes": "Future production persistence proposal only; preserve PendingChoice candidates, causal IDs, stored rolls and versioned execution dependencies."
+    },
+    {
+      "id": "reaction windows",
+      "kind": "SHARED_RUNTIME",
+      "blocking": false,
+      "notes": "Retain shared hooks; existing execution dispatch contains Necromancer summon semantics."
+    },
+    {
+      "id": "initiative",
+      "kind": "SHARED_RUNTIME",
+      "blocking": false,
+      "notes": "Simple generic order is not multiple-actions Boss activation; review shared Boss ordering."
+    },
+    {
+      "id": "PendingChoice",
+      "kind": "SHARED_RUNTIME",
+      "blocking": false,
+      "notes": "Preserve existing candidate/causal/version shape; add summon-copy and free-action continuations."
+    },
+    {
+      "id": "physical ownership",
+      "kind": "SHARED_RUNTIME",
+      "blocking": false,
+      "notes": "Existing finite ledger is Necromancer/bone-specific; bind independent supply first."
+    },
+    {
+      "id": "save/replay",
+      "kind": "SHARED_RUNTIME",
+      "blocking": false,
+      "notes": "Reviewed family dispatcher and tamper contract required."
+    },
+    {
+      "id": "Monster Posture representation",
+      "kind": "SHARED_RUNTIME",
+      "blocking": false,
+      "notes": "Stance slots/large footprint must be distinct from Area occupancy."
+    },
+    {
+      "id": "summon executor",
+      "kind": "SHARED_RUNTIME",
+      "blocking": false,
+      "notes": "Current spawn helpers include Necromancer counts/rulings; cannot directly dispatch Thing."
+    },
+    {
+      "id": "encounter storage",
+      "kind": "SHARED_RUNTIME",
+      "blocking": false,
+      "notes": "Currently tied to face-the-threat and reserved objective Room. Roomless model only after source establishes it."
+    },
+    {
+      "id": "before-first-action free scheduler",
+      "kind": "SHARED_RUNTIME",
+      "blocking": false,
+      "notes": "Explicit pending/free/resumed state before first normal activation; future work only."
+    },
+    {
+      "id": "encounter-ui",
+      "kind": "UI",
+      "blocking": false,
+      "notes": "Conditional on official encounter route; show copy/placement choices if applicable."
+    },
+    {
+      "id": "persistence",
+      "kind": "SAVE",
+      "blocking": false,
+      "notes": "Versioned free-action/summon cursors and validation after source closure."
+    },
+    {
+      "id": "ownership",
+      "kind": "PHYSICAL_OWNERSHIP",
+      "blocking": true,
+      "notes": "Source-bound finite supply and independent copy ownership required."
+    }
+  ]
+}

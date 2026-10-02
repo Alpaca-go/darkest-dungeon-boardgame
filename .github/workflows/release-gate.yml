@@ -19,7 +19,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run typecheck
-      - run: npm test -- --reporter=json --outputFile=tmp-c1c37-final-tests.json
+      - run: npm test -- --reporter=json --outputFile=tmp-c1c38-final-tests.json
       - run: npm run build
       - run: npm run historical-baseline-validation
       - run: npm run verify:immutable-phase-baselines
@@ -33,3 +33,4 @@ jobs:
       - run: npm run verify:complete-edition-c1c36
       - run: npm run test:e2e:built-bundle-successor
       - run: npm run verify:complete-edition-c1c37
+      - run: npm run verify:complete-edition-c1c38

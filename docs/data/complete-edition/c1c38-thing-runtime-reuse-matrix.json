@@ -1,0 +1,208 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C38",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "contractVersion": "C1C38-THING-SOURCE-CONTRACT-v1",
+  "baseline": "3ea7854b33dbfaf6dcbd85e3fb5bf86ffc55b0d3",
+  "runtimeImplemented": false,
+  "productionReady": false,
+  "playerRouteEnabled": false,
+  "authority": "ENGINEERING_ASSESSMENT",
+  "legacyReuse": 0,
+  "assessmentComplete": true,
+  "items": [
+    {
+      "primitive": "BattleState",
+      "path": "src/types/index.ts",
+      "sha256NormalizedLF": "89d89c3bd886a6b28c425200818b3990413064b0a9900af0ad704da9e3a9c5bd",
+      "hashBasis": "LF_NORMALIZED_ENGINEERING_SOURCE_TEXT_ONLY",
+      "classification": "REUSE_AS_IS",
+      "finding": "Shared state envelope; new fields need explicit versioned extension.",
+      "authority": "ENGINEERING_ASSESSMENT",
+      "canonical": false,
+      "implemented": false
+    },
+    {
+      "primitive": "Actor",
+      "path": "src/types/index.ts",
+      "sha256NormalizedLF": "89d89c3bd886a6b28c425200818b3990413064b0a9900af0ad704da9e3a9c5bd",
+      "hashBasis": "LF_NORMALIZED_ENGINEERING_SOURCE_TEXT_ONLY",
+      "classification": "REUSE_AS_IS",
+      "finding": "BattleUnit identity and damage state.",
+      "authority": "ENGINEERING_ASSESSMENT",
+      "canonical": false,
+      "implemented": false
+    },
+    {
+      "primitive": "damage",
+      "path": "src/game-engine/damage.ts",
+      "sha256NormalizedLF": "6e98891b2e4bfb7db300c8a0a1774ce72421578e7ef84d7c48013f2b93a647e6",
+      "hashBasis": "LF_NORMALIZED_ENGINEERING_SOURCE_TEXT_ONLY",
+      "classification": "REUSE_AS_IS",
+      "finding": "Shared damage once source-bound skill semantics are closed.",
+      "authority": "ENGINEERING_ASSESSMENT",
+      "canonical": false,
+      "implemented": false
+    },
+    {
+      "primitive": "Hero Dodge",
+      "path": "src/game-engine/rules/hero-dodge.ts",
+      "sha256NormalizedLF": "186323a25ada34b3e5a103aca9cc63988050eedb89b01e54b30779bb1e2d28ae",
+      "hashBasis": "LF_NORMALIZED_ENGINEERING_SOURCE_TEXT_ONLY",
+      "classification": "REUSE_AS_IS",
+      "finding": "Dependency selection must be explicit; do not equate Boss version with Hero Dodge.",
+      "authority": "ENGINEERING_ASSESSMENT",
+      "canonical": false,
+      "implemented": false
+    },
+    {
+      "primitive": "reaction windows",
+      "path": "src/game-engine/bosses/foundation.ts",
+      "sha256NormalizedLF": "27d71ac130fbc50597d5514a1bf70faff6ed9cd028b252e05abab76713664fe5",
+      "hashBasis": "LF_NORMALIZED_ENGINEERING_SOURCE_TEXT_ONLY",
+      "classification": "REQUIRES_GENERALIZATION",
+      "finding": "Retain shared hooks; existing execution dispatch contains Necromancer summon semantics.",
+      "authority": "ENGINEERING_ASSESSMENT",
+      "canonical": false,
+      "implemented": false
+    },
+    {
+      "primitive": "conditions",
+      "path": "src/game-engine/ruins/condition-runtime.ts",
+      "sha256NormalizedLF": "21f6301ce5a42e3cfe8d598ccd5f03933d4ea7b6f5d301fb6d918753a6df2277",
+      "hashBasis": "LF_NORMALIZED_ENGINEERING_SOURCE_TEXT_ONLY",
+      "classification": "REUSE_AS_IS",
+      "finding": "Printed condition stack primitives; source duration differs from save cursor.",
+      "authority": "ENGINEERING_ASSESSMENT",
+      "canonical": false,
+      "implemented": false
+    },
+    {
+      "primitive": "initiative",
+      "path": "src/game-engine/initiative.ts",
+      "sha256NormalizedLF": "4e549b5abaabae1ca25faf9fbab39c3d6cbbda045f69098b8aff404ca6d801e4",
+      "hashBasis": "LF_NORMALIZED_ENGINEERING_SOURCE_TEXT_ONLY",
+      "classification": "REQUIRES_GENERALIZATION",
+      "finding": "Simple generic order is not multiple-actions Boss activation; review shared Boss ordering.",
+      "authority": "ENGINEERING_ASSESSMENT",
+      "canonical": false,
+      "implemented": false
+    },
+    {
+      "primitive": "seeded RNG",
+      "path": "src/game-engine/runtime-sources.ts",
+      "sha256NormalizedLF": "5152c93e8735861e7ca2c3acd230557650644b1fcc9896ab0d4478b391f4f472",
+      "hashBasis": "LF_NORMALIZED_ENGINEERING_SOURCE_TEXT_ONLY",
+      "classification": "REUSE_AS_IS",
+      "finding": "Saved seed/checkpoint and deterministic draw helpers.",
+      "authority": "ENGINEERING_ASSESSMENT",
+      "canonical": false,
+      "implemented": false
+    },
+    {
+      "primitive": "PendingChoice",
+      "path": "src/types/boss-runtime.ts",
+      "sha256NormalizedLF": "ff441015e6934cc0b45f266c0d014cb3f39569360da8e9f18a42fb9e3d9dc4fa",
+      "hashBasis": "LF_NORMALIZED_ENGINEERING_SOURCE_TEXT_ONLY",
+      "classification": "REQUIRES_GENERALIZATION",
+      "finding": "Preserve existing candidate/causal/version shape; add summon-copy and free-action continuations.",
+      "authority": "ENGINEERING_ASSESSMENT",
+      "canonical": false,
+      "implemented": false
+    },
+    {
+      "primitive": "physical ownership",
+      "path": "src/game-engine/ruins/physical-supply.ts",
+      "sha256NormalizedLF": "eb67012b714324775d835d9af461ae89f56768997cf511d79ca7d64f263a95cf",
+      "hashBasis": "LF_NORMALIZED_ENGINEERING_SOURCE_TEXT_ONLY",
+      "classification": "REQUIRES_GENERALIZATION",
+      "finding": "Existing finite ledger is Necromancer/bone-specific; bind independent supply first.",
+      "authority": "ENGINEERING_ASSESSMENT",
+      "canonical": false,
+      "implemented": false
+    },
+    {
+      "primitive": "save/replay",
+      "path": "src/game-engine/save.ts",
+      "sha256NormalizedLF": "5f87a55c6cee926e17b41dd8eaf15630c1c04643010ba8b56b7d8ed753010b24",
+      "hashBasis": "LF_NORMALIZED_ENGINEERING_SOURCE_TEXT_ONLY",
+      "classification": "REQUIRES_GENERALIZATION",
+      "finding": "Reviewed family dispatcher and tamper contract required.",
+      "authority": "ENGINEERING_ASSESSMENT",
+      "canonical": false,
+      "implemented": false
+    },
+    {
+      "primitive": "campaign transactions",
+      "path": "src/game-engine/campaign/campaign-orchestrator.ts",
+      "sha256NormalizedLF": "a1c1f9577d5ec5ec138f63eb84ca8fb9e2edeb82700cf12de36366721d675aed",
+      "hashBasis": "LF_NORMALIZED_ENGINEERING_SOURCE_TEXT_ONLY",
+      "classification": "REUSE_AS_IS",
+      "finding": "Idempotent transaction helper; campaign consequence is not yet known.",
+      "authority": "ENGINEERING_ASSESSMENT",
+      "canonical": false,
+      "implemented": false
+    },
+    {
+      "primitive": "Monster Posture representation",
+      "path": "src/types/boss-runtime.ts",
+      "sha256NormalizedLF": "ff441015e6934cc0b45f266c0d014cb3f39569360da8e9f18a42fb9e3d9dc4fa",
+      "hashBasis": "LF_NORMALIZED_ENGINEERING_SOURCE_TEXT_ONLY",
+      "classification": "REQUIRES_GENERALIZATION",
+      "finding": "Stance slots/large footprint must be distinct from Area occupancy.",
+      "authority": "ENGINEERING_ASSESSMENT",
+      "canonical": false,
+      "implemented": false
+    },
+    {
+      "primitive": "summon executor",
+      "path": "src/game-engine/bosses/foundation.ts",
+      "sha256NormalizedLF": "27d71ac130fbc50597d5514a1bf70faff6ed9cd028b252e05abab76713664fe5",
+      "hashBasis": "LF_NORMALIZED_ENGINEERING_SOURCE_TEXT_ONLY",
+      "classification": "REQUIRES_GENERALIZATION",
+      "finding": "Current spawn helpers include Necromancer counts/rulings; cannot directly dispatch Thing.",
+      "authority": "ENGINEERING_ASSESSMENT",
+      "canonical": false,
+      "implemented": false
+    },
+    {
+      "primitive": "encounter storage",
+      "path": "src/game-engine/bosses/room-storage.ts",
+      "sha256NormalizedLF": "cdacd0b4f91655d8aaa719ec952a559de3abb5f499d4511a6f3109a7a6ce253d",
+      "hashBasis": "LF_NORMALIZED_ENGINEERING_SOURCE_TEXT_ONLY",
+      "classification": "REQUIRES_GENERALIZATION",
+      "finding": "Currently tied to face-the-threat and reserved objective Room. Roomless model only after source establishes it.",
+      "authority": "ENGINEERING_ASSESSMENT",
+      "canonical": false,
+      "implemented": false
+    },
+    {
+      "primitive": "before-first-action free scheduler",
+      "path": "src/types/boss-runtime.ts",
+      "sha256NormalizedLF": "ff441015e6934cc0b45f266c0d014cb3f39569360da8e9f18a42fb9e3d9dc4fa",
+      "hashBasis": "LF_NORMALIZED_ENGINEERING_SOURCE_TEXT_ONLY",
+      "classification": "NEW_PRIMITIVE_REQUIRED",
+      "finding": "Explicit pending/free/resumed state before first normal activation; future work only.",
+      "authority": "ENGINEERING_ASSESSMENT",
+      "canonical": false,
+      "implemented": false
+    }
+  ],
+  "prototypeReview": {
+    "searchedPaths": [
+      "src/game-engine",
+      "src/data",
+      "src/types",
+      "src/pages",
+      "src/components"
+    ],
+    "terms": [
+      "thing.from.the.stars",
+      "crystalline aberr"
+    ],
+    "matches": 0,
+    "legacyFound": false,
+    "prototypeFound": false,
+    "authority": "NONE"
+  }
+}

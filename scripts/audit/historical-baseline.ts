@@ -6,6 +6,7 @@ import { createHash } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
 
 export const historicalBaselines = {
+  c1c37: { phase: 'C1C37', commit: '3ea7854b33dbfaf6dcbd85e3fb5bf86ffc55b0d3', script: 'scripts/audit/c1c37-successor.ts', artifactPrefixes: ['c1c37-'] },
   c1c36: { phase: 'C1C36', commit: '87f123b881fbbc44d79c312fe1aebb34eadea240', script: 'scripts/audit/c1c36-prophet-production-acceptance.ts', artifactPrefixes: ['c1c36-'] },
   c1c27: { commit: 'aaedb2d30b1e5d90bf8d41e7dbced9f93288f73a', script: 'scripts/audit/verify-complete-edition-c1c27.ts' },
   c1c28: { commit: 'b6fa9180b44cd4a33f9fd4ceed97f179e64fbd0f', script: 'scripts/audit/verify-complete-edition-c1c28.ts' },
@@ -29,6 +30,19 @@ export function verifyHistoricalBaseline(phase: keyof typeof historicalBaselines
   const git = (args: string[]) => execFileSync('git', args, { maxBuffer: 128 * 1024 * 1024 });
   git(['merge-base', '--is-ancestor', commit, 'HEAD']);
   verifyHistoricalArtifacts(phase);
+  if (phase === 'c1c37') {
+    const read = (name: string) => JSON.parse(readFileSync(`docs/data/complete-edition/c1c37-${name}.json`, 'utf8'));
+    const accepted = read('successor-acceptance'), selected = read('next-family-decision');
+    const registry = read('production-capability-registry');
+    if (accepted.outcome !== 'C1C37-SUCCESSOR-REBASELINE-ACCEPTED'
+      || accepted.nextFamily !== 'thing-from-the-stars' || accepted.runtimeImplementationAuthorized
+      || accepted.necromancerCompatibility !== 'PASS' || accepted.prophetCompatibility !== 'PASS'
+      || selected.selectedFamily !== 'thing-from-the-stars' || selected.productionReady
+      || selected.selectionStatus !== 'SOURCE_CLOSURE_CANDIDATE'
+      || registry.capabilities.map((c: {familyId: string}) => c.familyId).join(',') !== 'necromancer,prophet')
+      throw new Error('C1C37 immutable acceptance identity changed');
+    if (!testFiles.length && !probe) { console.log('c1c37 immutable acceptance: PASS'); return; }
+  }
   // Immutable acceptance is a byte/identity gate, independent of successor behavior.
   // No full historical browser campaign is needed to prove unchanged evidence.
   if (phase === 'c1c36') {
