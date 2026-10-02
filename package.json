@@ -219,7 +219,9 @@
     "verify:complete-edition-c1c37": "vite-node scripts/audit/verify-historical-baselines.ts c1c37",
     "test:e2e:built-bundle-successor": "playwright test --config playwright.built.config.ts e2e/successor-built-bundle.spec.ts",
     "audit:complete-edition-c1c38": "vite-node scripts/audit/c1c38-source-closure.ts --write",
-    "verify:complete-edition-c1c38": "vite-node scripts/audit/c1c38-source-closure.ts --verify"
+    "verify:complete-edition-c1c38": "vite-node scripts/audit/c1c38-source-closure.ts --verify",
+    "audit:complete-edition-c1c38r1": "vite-node scripts/audit/c1c38r1-source-intake.ts --write",
+    "verify:complete-edition-c1c38r1": "vite-node scripts/audit/c1c38r1-source-intake.ts --verify"
   },
   "dependencies": {
     "lucide-react": "^0.408.0",

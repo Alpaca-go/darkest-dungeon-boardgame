@@ -1,0 +1,65 @@
+{
+  "phase": "C1C38R1",
+  "results": [
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "elapsedMs": 40307,
+      "log": "typecheck.log"
+    },
+    {
+      "command": "npm run historical-baseline-validation",
+      "exitCode": 0,
+      "elapsedMs": 43536,
+      "log": "historical-baseline-validation.log"
+    },
+    {
+      "command": "npm run verify:immutable-phase-baselines",
+      "exitCode": 0,
+      "elapsedMs": 1629357,
+      "log": "verify-immutable-phase-baselines.log"
+    },
+    {
+      "command": "npm run verify:necromancer-successor-compatibility",
+      "exitCode": 0,
+      "elapsedMs": 93580,
+      "log": "verify-necromancer-successor-compatibility.log"
+    },
+    {
+      "command": "npm run verify:prophet-successor-compatibility",
+      "exitCode": 0,
+      "elapsedMs": 132208,
+      "log": "verify-prophet-successor-compatibility.log"
+    },
+    {
+      "command": "npm run verify:boss-successor-compatibility",
+      "exitCode": 0,
+      "elapsedMs": 124230,
+      "log": "verify-boss-successor-compatibility.log"
+    },
+    {
+      "command": "npm run verify:complete-edition-c1c37",
+      "exitCode": 0,
+      "elapsedMs": 7512,
+      "log": "verify-complete-edition-c1c37.log"
+    },
+    {
+      "command": "npm run verify:complete-edition-c1c38",
+      "exitCode": 0,
+      "elapsedMs": 16970,
+      "log": "verify-complete-edition-c1c38.log"
+    },
+    {
+      "command": "npm run audit:complete-edition-c1c38r1",
+      "exitCode": 0,
+      "elapsedMs": 21704,
+      "log": "audit-complete-edition-c1c38r1.log"
+    },
+    {
+      "command": "npm run verify:complete-edition-c1c38r1",
+      "exitCode": 0,
+      "elapsedMs": 32327,
+      "log": "verify-complete-edition-c1c38r1.log"
+    }
+  ]
+}

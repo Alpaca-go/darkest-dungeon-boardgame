@@ -1,0 +1,800 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C38R1",
+  "baseline": "dcf017cb2065440251caad8d31075b99bc6355e0",
+  "intakeDate": "2026-10-02",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "contractVersion": "C1C38R1-OFFICIAL-INTAKE-v1",
+  "runtimeImplemented": false,
+  "runtimeImplementationAuthorized": false,
+  "productionReady": false,
+  "playerRouteEnabled": false,
+  "gateAPassed": false,
+  "C1C39Allowed": false,
+  "fields": [
+    {
+      "id": "actor.life",
+      "category": "ACTOR_STATS",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 24,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p24.png",
+          "sha256": "93a652993f051b7573bf6e4da8819d81f203bed61c65cf26fea03230592ab576",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": "130 inside orange Life frame",
+      "normalizedValue": 130,
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "actor.dodge",
+      "category": "ACTOR_STATS",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 19,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p19.png",
+          "sha256": "7fb8e134e4de1b6e6145f6f81df83ae477f709f1ab3d09eac4fd7e340496c0e5",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        },
+        {
+          "page": 24,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p24.png",
+          "sha256": "93a652993f051b7573bf6e4da8819d81f203bed61c65cf26fea03230592ab576",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": "2 over yellow Dodge glyph",
+      "normalizedValue": 2,
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "actor.speed",
+      "category": "ACTOR_STATS",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 24,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p24.png",
+          "sha256": "93a652993f051b7573bf6e4da8819d81f203bed61c65cf26fea03230592ab576",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": "two blue footprint squares",
+      "normalizedValue": 2,
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "actor.tags",
+      "category": "ACTOR_TAGS",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 24,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p24.png",
+          "sha256": "93a652993f051b7573bf6e4da8819d81f203bed61c65cf26fea03230592ab576",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": "Eldritch - Large",
+      "normalizedValue": [
+        "Eldritch"
+      ],
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "actor.size",
+      "category": "ACTOR_STATS",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "literal": "Eldritch - Large",
+      "normalizedValue": "Large",
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "actor.areaFootprint",
+      "category": "ACTOR_STATS",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 24,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p24.png",
+          "sha256": "93a652993f051b7573bf6e4da8819d81f203bed61c65cf26fea03230592ab576",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": "large-sized monsters take up two spaces in an Area",
+      "normalizedValue": 2,
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "Bound to the reviewed locked print-rulebook p24; not inherited from Prophet."
+    },
+    {
+      "id": "actor.postureFootprint",
+      "category": "MONSTER_POSTURE",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 17,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p17.png",
+          "sha256": "96419f3702f041086ccf89c1bef1380b67472c2564cfb1fbf69d48a903e64d3c",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": "Large Monsters occupy two slots on the Stance Tracker",
+      "normalizedValue": 2,
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "actor.resistances",
+      "category": "ACTOR_STATS",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 21,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p21.png",
+          "sha256": "e46cadcf32d8897b3f6fec496c8ef461530c1e09ae73595262396d456e49bc17",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": "green dotted drop; orange double down-chevron",
+      "normalizedValue": [
+        "Blight",
+        "Debuff"
+      ],
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "actor.immunities",
+      "category": "ACTOR_STATS",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 21,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p21.png",
+          "sha256": "e46cadcf32d8897b3f6fec496c8ef461530c1e09ae73595262396d456e49bc17",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": "three yellow diamonds",
+      "normalizedValue": [
+        "Stun"
+      ],
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "actor.resistanceSemantics",
+      "category": "ACTOR_STATS",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "page": 21,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p21.png",
+          "sha256": "e46cadcf32d8897b3f6fec496c8ef461530c1e09ae73595262396d456e49bc17",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": "Resistances",
+      "normalizedValue": "REDUCE_PRINTED_CONDITION_DURATION_BY_ONE_TURN",
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "actor.immunitySemantics",
+      "category": "ACTOR_STATS",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "page": 21,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p21.png",
+          "sha256": "e46cadcf32d8897b3f6fec496c8ef461530c1e09ae73595262396d456e49bc17",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": "Immunities",
+      "normalizedValue": "NEGATE_MATCHING_CONDITION",
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "actor.eldritchTagGameplay",
+      "category": "ACTOR_TAGS",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "sourceId": "CORE-ELDRITCH",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/core-eldritch-skill-pages.pdf",
+          "sha256": "5c3f4a1faebf65ab9390146d035c15530cf84823c6b0f871e06730dfe15c955a",
+          "page": 1,
+          "originalPage": 190,
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "applicability": "Only explicit printed damage bonuses versus Eldritch; no videogame taxonomy behavior."
+        },
+        {
+          "sourceId": "CORE-ELDRITCH",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/core-eldritch-skill-pages.pdf",
+          "sha256": "5c3f4a1faebf65ab9390146d035c15530cf84823c6b0f871e06730dfe15c955a",
+          "page": 2,
+          "originalPage": 191,
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "applicability": "Only explicit printed damage bonuses versus Eldritch; no videogame taxonomy behavior."
+        },
+        {
+          "sourceId": "CORE-ELDRITCH",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/core-eldritch-skill-pages.pdf",
+          "sha256": "5c3f4a1faebf65ab9390146d035c15530cf84823c6b0f871e06730dfe15c955a",
+          "page": 3,
+          "originalPage": 192,
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "applicability": "Only explicit printed damage bonuses versus Eldritch; no videogame taxonomy behavior."
+        },
+        {
+          "sourceId": "CORE-ELDRITCH",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/core-eldritch-skill-pages.pdf",
+          "sha256": "5c3f4a1faebf65ab9390146d035c15530cf84823c6b0f871e06730dfe15c955a",
+          "page": 4,
+          "originalPage": 193,
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "applicability": "Only explicit printed damage bonuses versus Eldritch; no videogame taxonomy behavior."
+        },
+        {
+          "sourceId": "CORE-ELDRITCH",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/core-eldritch-skill-pages.pdf",
+          "sha256": "5c3f4a1faebf65ab9390146d035c15530cf84823c6b0f871e06730dfe15c955a",
+          "page": 5,
+          "originalPage": 194,
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "applicability": "Only explicit printed damage bonuses versus Eldritch; no videogame taxonomy behavior."
+        },
+        {
+          "sourceId": "CORE-ELDRITCH",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/core-eldritch-skill-pages.pdf",
+          "sha256": "5c3f4a1faebf65ab9390146d035c15530cf84823c6b0f871e06730dfe15c955a",
+          "page": 6,
+          "originalPage": 195,
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "applicability": "Only explicit printed damage bonuses versus Eldritch; no videogame taxonomy behavior."
+        }
+      ],
+      "literal": "+1 / +2 / +3 [Damage] vs Eldritch",
+      "normalizedValue": {
+        "interactions": [
+          {
+            "skills": [
+              "Sacrificial Stab",
+              "Abyssal Artillery"
+            ],
+            "levels": [
+              "I",
+              "II",
+              "III"
+            ],
+            "damageBonus": [
+              1,
+              2,
+              3
+            ],
+            "condition": "versus Eldritch"
+          }
+        ],
+        "otherInteractions": "NOT_ESTABLISHED"
+      },
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "Explicit board-game Hero skills match the printed Eldritch tag; no universal tag bonus."
+    },
+    {
+      "id": "actor.unprintedResistanceDefaults",
+      "category": "ACTOR_STATS",
+      "status": "SOURCE_UNRESOLVED",
+      "authority": "NONE",
+      "canonical": false,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "literal": null,
+      "normalizedValue": null,
+      "executionRequired": true,
+      "contractExecutable": false,
+      "blocking": true,
+      "notes": "Core p21 and Monster anatomy p24 define listed symbols, but no explicit omitted-symbol default; preserve absence without numeric zero."
+    },
+    {
+      "id": "skills.table",
+      "category": "SKILL_TABLE",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 21,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p21.png",
+          "sha256": "e46cadcf32d8897b3f6fec496c8ef461530c1e09ae73595262396d456e49bc17",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        },
+        {
+          "page": 24,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p24.png",
+          "sha256": "93a652993f051b7573bf6e4da8819d81f203bed61c65cf26fea03230592ab576",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": "[1] 1-5; [2] 6-10",
+      "normalizedValue": [
+        {
+          "rollMin": 1,
+          "rollMax": 5,
+          "skill": 1
+        },
+        {
+          "rollMin": 6,
+          "rollMax": 10,
+          "skill": 2
+        }
+      ],
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "skills.normalReturnToStarsEntry",
+      "category": "SKILL_TABLE",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "literal": "Printed normal table contains only 1 and 2",
+      "normalizedValue": false,
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "skills.normalEligibleStances",
+      "category": "STANCE",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 12,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p12.png",
+          "sha256": "4a92200dd21f3cacd79e9cee1b70f0bb69462eadc234d02bb087fbd67062cdb0",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        },
+        {
+          "page": 24,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p24.png",
+          "sha256": "93a652993f051b7573bf6e4da8819d81f203bed61c65cf26fea03230592ab576",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": "four colored Monster Stance panels, one shared 1/2 roll table; right-hand panels gray",
+      "normalizedValue": [
+        "Aggressive",
+        "Defensive",
+        "Ranged",
+        "Support"
+      ],
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "Eligibility icons do not specify starting placement."
+    },
+    {
+      "id": "skills.returnExclusiveTrigger",
+      "category": "SKILL_TABLE",
+      "status": "SOURCE_UNRESOLVED",
+      "authority": "NONE",
+      "canonical": false,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-front.png",
+          "sha256": "6a3c7ac7675931e8e699558976f9e590f1f3968de68c06d12706090858d27507",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-back.png",
+          "sha256": "dd9fd65d4c3e14b7c7518fda89b1686cb5f2978183967e518419a5f734af8278",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "literal": null,
+      "normalizedValue": null,
+      "executionRequired": true,
+      "contractExecutable": false,
+      "blocking": true,
+      "notes": "COM p8 corroborates the first-turn free trigger. Neither it nor the Ability proves exclusivity against every additional trigger; retain conservative contract."
+    },
+    {
+      "id": "RETURN_TO_THE_STARS.crowdedAreaTie",
+      "category": "TARGETING",
+      "status": "PROJECT_RULING_REQUIRED",
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "sourceReferences": [
+        {
+          "page": 24,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p24.png",
+          "sha256": "93a652993f051b7573bf6e4da8819d81f203bed61c65cf26fea03230592ab576",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "COM rules p2 and p7 expressly apply core combat; family-specific COM p8 overrides campaign context."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 8,
+          "originalPage": 8,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        }
+      ],
+      "literal": null,
+      "normalizedValue": null,
+      "executionRequired": true,
+      "contractExecutable": false,
+      "blocking": true,
+      "notes": "Reviewed core targeting prioritizes qualifying characters by Stance, but gives no explicit tie among equally Crowded Areas. COM Thing section supplies no Area tie override. Candidate only; unapproved in R1."
+    },
+    {
+      "id": "initiative.freeActionSeparateEntry",
+      "category": "INITIATIVE",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 8,
+          "originalPage": 8,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        }
+      ],
+      "literal": "Shuffle two Initiative Cards ... At the start of its first turn ... Skill for free",
+      "normalizedValue": false,
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "Two prescribed Boss Initiative entries include the first-turn free Skill; no third entry for that Skill."
+    }
+  ],
+  "newRulingCandidates": [
+    {
+      "candidateId": "C1C38R2-CROWDED-AREA-TIE",
+      "fieldId": "RETURN_TO_THE_STARS.crowdedAreaTie",
+      "approved": false,
+      "canonical": false,
+      "version": null,
+      "chosenBehavior": null
+    }
+  ],
+  "originalDigitalCandidatesUnchanged": true
+}

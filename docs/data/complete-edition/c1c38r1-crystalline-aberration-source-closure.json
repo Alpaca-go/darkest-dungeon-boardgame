@@ -1,0 +1,512 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C38R1",
+  "baseline": "dcf017cb2065440251caad8d31075b99bc6355e0",
+  "intakeDate": "2026-10-02",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "contractVersion": "C1C38R1-OFFICIAL-INTAKE-v1",
+  "runtimeImplemented": false,
+  "runtimeImplementationAuthorized": false,
+  "productionReady": false,
+  "playerRouteEnabled": false,
+  "gateAPassed": false,
+  "C1C39Allowed": false,
+  "fields": [
+    {
+      "id": "aberration.requiredPrintedLevel",
+      "category": "CRYSTALLINE_ABERRATION",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-front.png",
+          "sha256": "6a3c7ac7675931e8e699558976f9e590f1f3968de68c06d12706090858d27507",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-back.png",
+          "sha256": "dd9fd65d4c3e14b7c7518fda89b1686cb5f2978183967e518419a5f734af8278",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "literal": "Crystalline Aberration I",
+      "normalizedValue": "I",
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "aberration.levelICardLiteral",
+      "category": "CRYSTALLINE_ABERRATION",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c38/43107-front.png",
+          "sha256": "5ae1e693132918326f73b6e01c7b381ca94ffa7c2fd52d097b90b088deef1d60",
+          "side": "front",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c24/sheets/24f0738f3b51e297b3329c6a6f481a89421ed06a970629fd81bd722009239d44.bin",
+          "sheetSha256": "a465e0436e7f2703035565be008de4460e9764d530f2b979244ace8b7f307594",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c38/43107-back.png",
+          "sha256": "92a254aa562bc55f2763df844cfaaed06c3a3aa6e15ae00cce5a891e956732b7",
+          "side": "back",
+          "sheetPath": "docs/data/complete-edition/source-assets/c1c24/sheets/5376d20b7b1dcf7eefd77b03b75f71ab8b95ac1915c2693713bf70f0388614f9.bin",
+          "sheetSha256": "369239820def6676301df9ae31ca4aef3fcc032632e57915e575036a7bde03f8",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "literal": {
+        "name": "Crystalline Aberration I",
+        "tags": "Eldritch - Back - Small",
+        "life": 3,
+        "dodge": 0,
+        "speed": "PRINTED_ABSENT",
+        "resistances": "PRINTED_ABSENT",
+        "immunities": [
+          "Stun",
+          "Bleed",
+          "Blight",
+          "Debuff",
+          "Shuffle"
+        ],
+        "copyGlyph": "white circular monster copy mark; count not established",
+        "skills": [
+          {
+            "number": 1,
+            "name": "Unstable Resonance",
+            "target": "All Heroes",
+            "range": "PRINTED_ABSENT",
+            "crit": 1,
+            "criticalDamage": 10,
+            "accuracy": 10,
+            "damage": 5,
+            "self": "After the action is finished: 10 [wound token]",
+            "effects": "2 Blight 2t"
+          },
+          {
+            "number": 2,
+            "name": "Explosive Undoing",
+            "target": "All Heroes",
+            "range": "PRINTED_ABSENT",
+            "crit": 1,
+            "criticalDamage": 4,
+            "accuracy": 12,
+            "damage": 2,
+            "self": "After the action is finished: 10 [wound token]",
+            "effects": "Stress +2"
+          }
+        ],
+        "table": "[1] 1-5; [2] 6-10; four stance panels"
+      },
+      "normalizedValue": {
+        "cardId": 43107,
+        "printedName": "Crystalline Aberration",
+        "printedLevel": "I",
+        "transportNickname": "Crystalline Aberation",
+        "contentSet": "SOURCE_UNRESOLVED",
+        "physicalCopies": "SOURCE_UNRESOLVED",
+        "productionDefinition": "SOURCE_UNRESOLVED",
+        "frontReviewed": true,
+        "backReviewed": true,
+        "physicalIdentity": "tts-path:/ObjectStates/48/ContainedObjects/6/ContainedObjects/0/ContainedObjects/3",
+        "crop": {
+          "index": 7,
+          "left": 590,
+          "top": 950,
+          "width": 590,
+          "height": 950
+        },
+        "sourceReferences": [
+          {
+            "path": "docs/data/complete-edition/source-assets/c1c38/43107-front.png",
+            "sha256": "5ae1e693132918326f73b6e01c7b381ca94ffa7c2fd52d097b90b088deef1d60",
+            "side": "front",
+            "sheetPath": "docs/data/complete-edition/source-assets/c1c24/sheets/24f0738f3b51e297b3329c6a6f481a89421ed06a970629fd81bd722009239d44.bin",
+            "sheetSha256": "a465e0436e7f2703035565be008de4460e9764d530f2b979244ace8b7f307594",
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          },
+          {
+            "path": "docs/data/complete-edition/source-assets/c1c38/43107-back.png",
+            "sha256": "92a254aa562bc55f2763df844cfaaed06c3a3aa6e15ae00cce5a891e956732b7",
+            "side": "back",
+            "sheetPath": "docs/data/complete-edition/source-assets/c1c24/sheets/5376d20b7b1dcf7eefd77b03b75f71ab8b95ac1915c2693713bf70f0388614f9.bin",
+            "sheetSha256": "369239820def6676301df9ae31ca4aef3fcc032632e57915e575036a7bde03f8",
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        ],
+        "frontLiteral": {
+          "name": "Crystalline Aberration I",
+          "tags": "Eldritch - Back - Small",
+          "life": 3,
+          "dodge": 0,
+          "speed": "PRINTED_ABSENT",
+          "resistances": "PRINTED_ABSENT",
+          "immunities": [
+            "Stun",
+            "Bleed",
+            "Blight",
+            "Debuff",
+            "Shuffle"
+          ],
+          "copyGlyph": "white circular monster copy mark; count not established",
+          "skills": [
+            {
+              "number": 1,
+              "name": "Unstable Resonance",
+              "target": "All Heroes",
+              "range": "PRINTED_ABSENT",
+              "crit": 1,
+              "criticalDamage": 10,
+              "accuracy": 10,
+              "damage": 5,
+              "self": "After the action is finished: 10 [wound token]",
+              "effects": "2 Blight 2t"
+            },
+            {
+              "number": 2,
+              "name": "Explosive Undoing",
+              "target": "All Heroes",
+              "range": "PRINTED_ABSENT",
+              "crit": 1,
+              "criticalDamage": 4,
+              "accuracy": 12,
+              "damage": 2,
+              "self": "After the action is finished: 10 [wound token]",
+              "effects": "Stress +2"
+            }
+          ],
+          "table": "[1] 1-5; [2] 6-10; four stance panels"
+        },
+        "backLiteral": "Red doorway illustration; no printed text",
+        "literalStatus": "LITERAL_COMPLETE",
+        "semanticScope": "Dependency intake only; Level II does not create Thing Level II"
+      },
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "aberration.productionDefinition",
+      "category": "CRYSTALLINE_ABERRATION",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "sourceId": "COM-MONSTERS",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_CARDS_70_120_monsters_Curio_Spawn_FRONT.pdf",
+          "sha256": "15e13e1acd429e804f9b15594081f79a8b1c71353c23025023f2677b676f7f07",
+          "page": 8,
+          "originalPage": 8,
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "applicability": "Crystalline Aberration I and II printed definitions only; page count is not available miniature/copy supply."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 2,
+          "originalPage": 2,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 3,
+          "originalPage": 3,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 7,
+          "originalPage": 7,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "page": 19,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p19.png",
+          "sha256": "7fb8e134e4de1b6e6145f6f81df83ae477f709f1ab3d09eac4fd7e340496c0e5",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "COM rules p2 and p7 expressly apply core combat; family-specific COM p8 overrides campaign context."
+        },
+        {
+          "page": 20,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p20.png",
+          "sha256": "2dd06b5168bd15abacbca71f36c8c57374f41e76af26edb699a2e80611d5342b",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "COM rules p2 and p7 expressly apply core combat; family-specific COM p8 overrides campaign context."
+        },
+        {
+          "page": 21,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p21.png",
+          "sha256": "e46cadcf32d8897b3f6fec496c8ef461530c1e09ae73595262396d456e49bc17",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "COM rules p2 and p7 expressly apply core combat; family-specific COM p8 overrides campaign context."
+        },
+        {
+          "page": 24,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p24.png",
+          "sha256": "93a652993f051b7573bf6e4da8819d81f203bed61c65cf26fea03230592ab576",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "COM rules p2 and p7 expressly apply core combat; family-specific COM p8 overrides campaign context."
+        }
+      ],
+      "literal": {
+        "name": "Crystalline Aberration I",
+        "tags": "Eldritch - Back - Small",
+        "life": 3,
+        "dodge": 0,
+        "speed": "PRINTED_ABSENT",
+        "resistances": "PRINTED_ABSENT",
+        "immunities": [
+          "Stun",
+          "Bleed",
+          "Blight",
+          "Debuff",
+          "Shuffle"
+        ],
+        "copyGlyph": "white circular monster copy mark; count not established",
+        "skills": [
+          {
+            "number": 1,
+            "name": "Unstable Resonance",
+            "target": "All Heroes",
+            "range": "PRINTED_ABSENT",
+            "crit": 1,
+            "criticalDamage": 10,
+            "accuracy": 10,
+            "damage": 5,
+            "self": "After the action is finished: 10 [wound token]",
+            "effects": "2 Blight 2t"
+          },
+          {
+            "number": 2,
+            "name": "Explosive Undoing",
+            "target": "All Heroes",
+            "range": "PRINTED_ABSENT",
+            "crit": 1,
+            "criticalDamage": 4,
+            "accuracy": 12,
+            "damage": 2,
+            "self": "After the action is finished: 10 [wound token]",
+            "effects": "Stress +2"
+          }
+        ],
+        "table": "[1] 1-5; [2] 6-10; four stance panels"
+      },
+      "normalizedValue": {
+        "kind": "SOURCE_DEFINITION_ONLY",
+        "cardId": 43107,
+        "contentSet": "THE_COLOR_OF_MADNESS",
+        "printedLevel": "I",
+        "literal": {
+          "name": "Crystalline Aberration I",
+          "tags": "Eldritch - Back - Small",
+          "life": 3,
+          "dodge": 0,
+          "speed": "PRINTED_ABSENT",
+          "resistances": "PRINTED_ABSENT",
+          "immunities": [
+            "Stun",
+            "Bleed",
+            "Blight",
+            "Debuff",
+            "Shuffle"
+          ],
+          "copyGlyph": "white circular monster copy mark; count not established",
+          "skills": [
+            {
+              "number": 1,
+              "name": "Unstable Resonance",
+              "target": "All Heroes",
+              "range": "PRINTED_ABSENT",
+              "crit": 1,
+              "criticalDamage": 10,
+              "accuracy": 10,
+              "damage": 5,
+              "self": "After the action is finished: 10 [wound token]",
+              "effects": "2 Blight 2t"
+            },
+            {
+              "number": 2,
+              "name": "Explosive Undoing",
+              "target": "All Heroes",
+              "range": "PRINTED_ABSENT",
+              "crit": 1,
+              "criticalDamage": 4,
+              "accuracy": 12,
+              "damage": 2,
+              "self": "After the action is finished: 10 [wound token]",
+              "effects": "Stress +2"
+            }
+          ],
+          "table": "[1] 1-5; [2] 6-10; four stance panels"
+        },
+        "targetScope": "ALL_HEROES",
+        "targetCount": "ALL",
+        "selfTiming": "AFTER_ACTION_FINISHED",
+        "selfWounds": 10,
+        "runtimeSerialization": "DEFERRED_UNAPPROVED",
+        "physicalSupply": "SOURCE_UNRESOLVED"
+      },
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "Source definition is complete: printed All Heroes covers all Heroes, not one Hero per Area; 10 self Wounds after action finishes. Missing printed stats remain PRINTED_ABSENT. Physical supply and save representation remain separate blockers. Sleeper Focus Point rules on p8 are not applied to Crystalline Aberration."
+    },
+    {
+      "id": "aberration.physicalCopySupply",
+      "category": "PHYSICAL_SUPPLY",
+      "status": "SOURCE_UNRESOLVED",
+      "authority": "NONE",
+      "canonical": false,
+      "sourceReferences": [],
+      "literal": null,
+      "normalizedValue": null,
+      "executionRequired": true,
+      "contractExecutable": false,
+      "blocking": true,
+      "notes": "Two Aberration miniatures and Level I/II stat prints are bound; how those pieces share Level-specific active copies and return supply remains unresolved."
+    },
+    {
+      "id": "aberration.minimumEligibleMembership",
+      "category": "CRYSTALLINE_ABERRATION",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-front.png",
+          "sha256": "6a3c7ac7675931e8e699558976f9e590f1f3968de68c06d12706090858d27507",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-back.png",
+          "sha256": "dd9fd65d4c3e14b7c7518fda89b1686cb5f2978183967e518419a5f734af8278",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "literal": "including at least one Crystalline Aberration I",
+      "normalizedValue": true,
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "aberration.otherPoolMembership",
+      "category": "CRYSTALLINE_ABERRATION",
+      "status": "SOURCE_UNRESOLVED",
+      "authority": "NONE",
+      "canonical": false,
+      "sourceReferences": [],
+      "literal": null,
+      "normalizedValue": null,
+      "executionRequired": true,
+      "contractExecutable": false,
+      "blocking": true,
+      "notes": "COM p8 names a Level I Aberration spawn; frozen official Ability requires as many Monsters as possible including at least one Aberration I. No rule explicitly closes other members, pool Levels, count/selection precedence, exhaustion, active-copy sharing, overflow or return destination. No silent source precedence or unrestricted pool."
+    }
+  ],
+  "sourceDefinition": {
+    "kind": "SOURCE_DEFINITION_ONLY",
+    "cardId": 43107,
+    "contentSet": "THE_COLOR_OF_MADNESS",
+    "printedLevel": "I",
+    "literal": {
+      "name": "Crystalline Aberration I",
+      "tags": "Eldritch - Back - Small",
+      "life": 3,
+      "dodge": 0,
+      "speed": "PRINTED_ABSENT",
+      "resistances": "PRINTED_ABSENT",
+      "immunities": [
+        "Stun",
+        "Bleed",
+        "Blight",
+        "Debuff",
+        "Shuffle"
+      ],
+      "copyGlyph": "white circular monster copy mark; count not established",
+      "skills": [
+        {
+          "number": 1,
+          "name": "Unstable Resonance",
+          "target": "All Heroes",
+          "range": "PRINTED_ABSENT",
+          "crit": 1,
+          "criticalDamage": 10,
+          "accuracy": 10,
+          "damage": 5,
+          "self": "After the action is finished: 10 [wound token]",
+          "effects": "2 Blight 2t"
+        },
+        {
+          "number": 2,
+          "name": "Explosive Undoing",
+          "target": "All Heroes",
+          "range": "PRINTED_ABSENT",
+          "crit": 1,
+          "criticalDamage": 4,
+          "accuracy": 12,
+          "damage": 2,
+          "self": "After the action is finished: 10 [wound token]",
+          "effects": "Stress +2"
+        }
+      ],
+      "table": "[1] 1-5; [2] 6-10; four stance panels"
+    },
+    "targetScope": "ALL_HEROES",
+    "targetCount": "ALL",
+    "selfTiming": "AFTER_ACTION_FINISHED",
+    "selfWounds": 10,
+    "runtimeSerialization": "DEFERRED_UNAPPROVED",
+    "physicalSupply": "SOURCE_UNRESOLVED"
+  },
+  "productionRegistered": false,
+  "allHeroesScope": "ALL_HEROES_NOT_ONE_PER_AREA",
+  "delayedSelfEffect": {
+    "wounds": 10,
+    "timing": "AFTER_ACTION_FINISHED",
+    "saveCursor": "DEFERRED_UNAPPROVED"
+  },
+  "levelIIDoesNotCreateThingLevelII": true,
+  "miniatureCountIsNotLevelICopyCount": true
+}
