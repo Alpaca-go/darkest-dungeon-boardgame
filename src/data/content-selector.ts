@@ -2,6 +2,7 @@ import type { CampaignState, QuestDefinition } from '../types';
 import type { CommunityContentSet, CommunityRegion, RuntimeContentMetadata } from '../types/content-runtime';
 import type { TrinketDefinition, TrinketLevel } from '../types/trinkets';
 import { PRODUCTION_FACE_THE_THREAT_QUEST } from './quests/production-face-the-threat';
+import { productionBossPlayerRouteEnabled } from '../game-engine/bosses/production-capabilities';
 import { resolveProductionBossRuleSetVersion, productionBossFamilyRegistry } from '../game-engine/bosses/definitions';
 import { campaignHeroDodgeRuleSetVersion } from '../game-engine/rules/hero-dodge-versioning';
 import { QUESTS, STANDARD_QUESTS } from './quests';
@@ -88,7 +89,7 @@ export function getBossQuestPool(context: RuntimeContentContext): QuestDefinitio
   }
   const existing = filterCommunityQuestCandidates(COMMUNITY_RUNTIME_QUESTS, { ...context, campaignLevel: undefined }).filter(q=>q.type==='boss');
   const adapter = productionBossFamilyRegistry.get(context.bossFamilyId ?? '');
-  if (adapter?.unrestrictedSelectorAllowed && adapter.ruleSetVersions.includes(context.bossRuleSetVersion ?? '')
+  if (adapter?.unrestrictedSelectorAllowed && productionBossPlayerRouteEnabled(context.bossFamilyId ?? '', context.bossRuleSetVersion ?? '') && adapter.ruleSetVersions.includes(context.bossRuleSetVersion ?? '')
     && (context.heroDodgeRuleSetVersion ?? (context.bossFamilyId === 'necromancer' ? context.bossRuleSetVersion : undefined)) === 'C1C31-DIGITAL-DEFAULT-v2'
     && (context.enabledContentSets ?? ['core']).includes('core') && (context.enabledRegions ?? ['ruins']).includes('ruins')) return [...existing.filter(q=>q.id !== PRODUCTION_FACE_THE_THREAT_QUEST.id),PRODUCTION_FACE_THE_THREAT_QUEST];
   return existing;

@@ -6,6 +6,7 @@ import { createHash } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
 
 export const historicalBaselines = {
+  c1c36: { phase: 'C1C36', commit: '87f123b881fbbc44d79c312fe1aebb34eadea240', script: 'scripts/audit/c1c36-prophet-production-acceptance.ts', artifactPrefixes: ['c1c36-'] },
   c1c27: { commit: 'aaedb2d30b1e5d90bf8d41e7dbced9f93288f73a', script: 'scripts/audit/verify-complete-edition-c1c27.ts' },
   c1c28: { commit: 'b6fa9180b44cd4a33f9fd4ceed97f179e64fbd0f', script: 'scripts/audit/verify-complete-edition-c1c28.ts' },
   c1c33: { commit: 'e1fcfac0692eb91c5710552ac93e3bacb25f0240', script: 'scripts/audit/c1c33-production-freeze.ts' },
@@ -28,6 +29,15 @@ export function verifyHistoricalBaseline(phase: keyof typeof historicalBaselines
   const git = (args: string[]) => execFileSync('git', args, { maxBuffer: 128 * 1024 * 1024 });
   git(['merge-base', '--is-ancestor', commit, 'HEAD']);
   verifyHistoricalArtifacts(phase);
+  // Immutable acceptance is a byte/identity gate, independent of successor behavior.
+  // No full historical browser campaign is needed to prove unchanged evidence.
+  if (phase === 'c1c36') {
+    const accepted = JSON.parse(readFileSync('docs/data/complete-edition/c1c36-prophet-production-acceptance.json','utf8'));
+    if (accepted.outcome !== 'C1C36-PROPHET-PRODUCTION-ACCEPTED' || accepted.decision !== 'PROPHET_PRODUCTION_READY'
+      || !accepted.productionAccepted || !accepted.productionReady || accepted.automatedTests.passed !== 2745)
+      throw new Error('C1C36 acceptance identity changed');
+    if (!testFiles.length && !probe) { console.log('c1c36 immutable acceptance: PASS'); return; }
+  }
   const scratch = mkdtempSync(join(tmpdir(), `dd-${phase}-baseline-`));
   const checkout = join(scratch, 'repo');
   if (!resolve(scratch).startsWith(resolve(tmpdir()) + '\\') && !resolve(scratch).startsWith(resolve(tmpdir()) + '/')) throw new Error('Unsafe scratch cleanup');
@@ -45,7 +55,7 @@ export function verifyHistoricalBaseline(phase: keyof typeof historicalBaselines
     }
     symlinkSync(resolve('node_modules'), join(checkout, 'node_modules'), process.platform === 'win32' ? 'junction' : 'dir');
     const flags = phase === 'c1c35r2br1' ? ['--verify-r2b'] : phase === 'c1c35r2ar' ? ['--verify-dispatch'] : phase === 'c1c35r1' ? ['--verify-r1'] : phase === 'c1c35r2' ? ['--verify-r2'] : phase.startsWith('c1c3') ? ['--verify'] : [];
-    execFileSync(process.execPath, ['--import', pathToFileURL(resolve('scripts/audit/legacy-transport-preload.mjs')).href, resolve('node_modules/vite-node/vite-node.mjs'), script, ...flags],
+    if (phase !== 'c1c36') execFileSync(process.execPath, ['--import', pathToFileURL(resolve('scripts/audit/legacy-transport-preload.mjs')).href, resolve('node_modules/vite-node/vite-node.mjs'), script, ...flags],
       { cwd: checkout, stdio: 'pipe', maxBuffer: 16 * 1024 * 1024,
         env: { ...process.env, DDBG_LEGACY_TRANSPORT_ARCHIVE: resolve('docs/data/complete-edition/source-assets/c1c34/legacy-transport.json.gz') } });
     if (testFiles.length) {

@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C37",
+  "status": "PASS",
+  "scanScope": "ALL_REACHABLE_EMITTED_JS_INCLUDING_DYNAMIC_AND_PRELOAD_CHUNKS",
+  "reachableChunks": [
+    {
+      "path": "assets/index-CmC11JQs.js",
+      "sha256": "8b0ee6ac59ce5b094e3766102081bc4bc494a46365f3fdad10aae6d9eef960cf"
+    }
+  ],
+  "buildIdentity": "a158d09e5910fe8460df211a7aa29063469143aaa519f0259333d24af098005d",
+  "debugHooks": 0,
+  "prototypeProductionReachability": 0,
+  "sourceGraph": {
+    "productionPrototypeReachability": 0,
+    "entryPoints": [
+      "src/main.tsx",
+      "src/game-engine/bosses/definitions.ts",
+      "src/game-engine/save.ts"
+    ],
+    "visitedRuntimeModuleCount": 350,
+    "forbiddenModules": [
+      "src/game-engine/prophet/runtime.ts",
+      "src/game-engine/prophet/index.ts",
+      "src/data/bosses/prophet-family.ts"
+    ],
+    "auditMethod": "TYPESCRIPT_AST_RUNTIME_IMPORT_EXPORT_DYNAMIC_IMPORT_GRAPH",
+    "historicalPrototypeTestsRetained": true
+  },
+  "auditArtifactRuntimeCoupling": 0,
+  "rawLocalRulebookRuntimeDependency": 0
+}

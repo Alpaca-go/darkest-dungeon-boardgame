@@ -1,5 +1,5 @@
 import type { CampaignState } from '../../types';
-import prophetAcceptance from '../../../docs/data/complete-edition/c1c36-prophet-production-acceptance.json';
+import {productionBossPlayerRouteEnabled} from './production-capabilities';
 import { campaignHeroDodgeRuleSetVersion } from '../rules/hero-dodge-versioning';
 import { necromancerDefinition } from '../necromancer/contract-adapter';
 import { assertHeroDodgeRuleSetVersion } from '../rules/hero-dodge';
@@ -15,15 +15,16 @@ export interface ProductionBossFamilyAdapter {
   roomContract: {roomNumber: number; tileId: string};
   threatContract: {gameplayEnabled: boolean};
   dependencies(version: string): EncounterRuleDependencies;
+  selectRuleSetVersion(campaign: CampaignState): string;
 }
 export const productionBossFamilyRegistry: ReadonlyMap<string, ProductionBossFamilyAdapter> = new Map([
-  ['necromancer', {familyId:'necromancer',unrestrictedSelectorAllowed:true,resolveDefinition:necromancerDefinition,ruleSetVersions:[HERO_DODGE_V1,HERO_DODGE_V2],
+  ['necromancer', {familyId:'necromancer',unrestrictedSelectorAllowed:productionBossPlayerRouteEnabled('necromancer',HERO_DODGE_V2),resolveDefinition:necromancerDefinition,ruleSetVersions:[HERO_DODGE_V1,HERO_DODGE_V2],
     roomContract:{roomNumber:10,tileId:'tile-10'},threatContract:{gameplayEnabled:true},
+    selectRuleSetVersion:campaignHeroDodgeRuleSetVersion,
     dependencies:(version: string)=>({bossRuleSetVersion:version,heroDodgeRuleSetVersion:version})}],
-  ['prophet', {familyId:'prophet',unrestrictedSelectorAllowed:prophetAcceptance.productionFoundation&&prophetAcceptance.productionAccepted
-    &&prophetAcceptance.productionReady&&prophetAcceptance.unrestrictedSelectorAllowed&&prophetAcceptance.workstreamFrozen
-    &&prophetAcceptance.ruleSetVersion===PROPHET_RULE_SET_VERSION,resolveDefinition:prophetProductionDefinition,ruleSetVersions:[PROPHET_RULE_SET_VERSION],
+  ['prophet', {familyId:'prophet',unrestrictedSelectorAllowed:productionBossPlayerRouteEnabled('prophet',PROPHET_RULE_SET_VERSION),resolveDefinition:prophetProductionDefinition,ruleSetVersions:[PROPHET_RULE_SET_VERSION],
     roomContract:{roomNumber:11,tileId:'ruins-tile-11'},threatContract:{gameplayEnabled:true},
+    selectRuleSetVersion:()=>PROPHET_RULE_SET_VERSION,
     dependencies:(version: string)=>({bossRuleSetVersion:version,heroDodgeRuleSetVersion:HERO_DODGE_V2,actorOccupancyRuleSetVersion:PROPHET_ACTOR_CAPACITY_VERSION})}],
 ]);
 export function productionBossFamily(family: string): ProductionBossFamilyAdapter {
@@ -58,6 +59,5 @@ export function encounterRuleDependencies(encounter: Pick<BossEncounterState,'bo
 export function resolveProductionBossRuleSetVersion(campaign: CampaignState): string {
   const family = campaign.campaignProgress.activeBossFamilyId;
   if (!family || !productionBossFamilyRegistry.has(family)) return '';
-  return family === 'necromancer' ? campaignHeroDodgeRuleSetVersion(campaign)
-    : productionBossFamily(family).ruleSetVersions[0];
+  return productionBossFamily(family).selectRuleSetVersion(campaign);
 }

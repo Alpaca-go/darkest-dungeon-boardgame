@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C37",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "inputHashes": {
+    "docs/data/complete-edition/c1c24-boss-printed-definitions.json": "dfc9fb3369aa991b6b1d1e9acb3bb3127e7ef91ecaa655126684dbb71eec5483",
+    "docs/data/complete-edition/c1c24-boss-crop-manifest.json": "d98223329c4a4267fcb6d876770a46daa7929cccbe990fb48dcfe1e92bb45d17",
+    "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+    "docs/data/complete-edition/c1c32r2-local-official-source-manifest.json": "8bd56c4fe35a09d32f10d59ffe588db5b8ebad98d83c99096568d243ee724f30",
+    "docs/data/complete-edition/rule-source-policy.json": "ced6c1b05610623c4e98338bab6309b5114e61611937bc8555f53852df8149d0",
+    "docs/data/complete-edition/c1c37-locked-corpus-review-intake.json": "0e7042c93a739cd8a4735a2d5a5f958356f6be19332e39e76d5c1ff0b83de94e"
+  },
+  "externalAcquisition": false,
+  "prototypeAsAuthority": false,
+  "selectedFamily": "thing-from-the-stars",
+  "selectionStatus": "SOURCE_CLOSURE_CANDIDATE",
+  "productionReady": false,
+  "runtimeImplementationAuthorized": false,
+  "previousCandidate": "thing-from-the-stars",
+  "selectionOverride": false,
+  "refreshedCounts": {
+    "physicalCards": 3,
+    "literalComplete": 2,
+    "unresolvedPrintedDefinitions": 1,
+    "sourceGaps": 52,
+    "allSourceSidesBound": true
+  },
+  "rationale": "Smallest physical source surface and lowest recomputed planning cost; Collector reuse does not offset 12 partial definitions; Hag needs captive-Hero/Cauldron lifecycle.",
+  "unresolvedEligibilityIsNotAssumed": true,
+  "productionRegistryPromotion": false,
+  "nextPhase": "C1C38 — Thing from the Stars Official Source Closure & Production Feasibility",
+  "firstObjectives": [
+    "recover remaining Battle literal from locked crop",
+    "bind Battle / Ability / Boss identity",
+    "determine encounter / Quest model",
+    "bind Room / Tile requirements",
+    "bind stats / skills / effects",
+    "review summon components",
+    "identify required project rulings",
+    "produce Gate A executable field matrix"
+  ],
+  "implementationGate": "Source review only until every required executable field and dependency is closed; no gameplay implementation or selector promotion authorized"
+}

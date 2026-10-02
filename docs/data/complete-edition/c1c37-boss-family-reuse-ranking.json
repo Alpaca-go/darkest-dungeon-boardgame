@@ -1,0 +1,417 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C37",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "inputHashes": {
+    "docs/data/complete-edition/c1c24-boss-printed-definitions.json": "dfc9fb3369aa991b6b1d1e9acb3bb3127e7ef91ecaa655126684dbb71eec5483",
+    "docs/data/complete-edition/c1c24-boss-crop-manifest.json": "d98223329c4a4267fcb6d876770a46daa7929cccbe990fb48dcfe1e92bb45d17",
+    "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+    "docs/data/complete-edition/c1c32r2-local-official-source-manifest.json": "8bd56c4fe35a09d32f10d59ffe588db5b8ebad98d83c99096568d243ee724f30",
+    "docs/data/complete-edition/rule-source-policy.json": "ced6c1b05610623c4e98338bab6309b5114e61611937bc8555f53852df8149d0",
+    "docs/data/complete-edition/c1c37-locked-corpus-review-intake.json": "0e7042c93a739cd8a4735a2d5a5f958356f6be19332e39e76d5c1ff0b83de94e"
+  },
+  "externalAcquisition": false,
+  "prototypeAsAuthority": false,
+  "method": "PLANNING_COST_V1_RECOMPUTED_C1C37",
+  "weights": {
+    "unresolvedDefinition": 2,
+    "specialComponent": 2,
+    "saveChange": 2,
+    "newUi": 2,
+    "newBattle": 3,
+    "legacyReuse": -1,
+    "sharedReuse": -1
+  },
+  "scoreIsProjectEstimate": true,
+  "ranking": [
+    {
+      "family": "Thing from the stars",
+      "physicalCards": 3,
+      "literalComplete": 2,
+      "unresolvedDefinitions": 1,
+      "sourceGaps": 52,
+      "profile": {
+        "special": 1,
+        "save": 2,
+        "ui": 1,
+        "battle": 3,
+        "legacy": 0,
+        "shared": 3,
+        "mechanisms": [
+          "Crystalline Aberration summon / physical deck membership"
+        ]
+      },
+      "planningCost": 16,
+      "productionReady": false,
+      "estimateUncertainty": "Eligibility, external summon components and missing semantic fields can increase implementation cost"
+    },
+    {
+      "family": "The Sleeper",
+      "physicalCards": 4,
+      "literalComplete": 2,
+      "unresolvedDefinitions": 2,
+      "sourceGaps": 70,
+      "profile": {
+        "special": 2,
+        "save": 3,
+        "ui": 2,
+        "battle": 4,
+        "legacy": 0,
+        "shared": 2,
+        "mechanisms": [
+          "form/state transitions; encounter model unbound"
+        ]
+      },
+      "planningCost": 28,
+      "productionReady": false,
+      "estimateUncertainty": "Eligibility, external summon components and missing semantic fields can increase implementation cost"
+    },
+    {
+      "family": "The Miller",
+      "physicalCards": 5,
+      "literalComplete": 1,
+      "unresolvedDefinitions": 4,
+      "sourceGaps": 89,
+      "profile": {
+        "special": 2,
+        "save": 3,
+        "ui": 2,
+        "battle": 4,
+        "legacy": 0,
+        "shared": 2,
+        "mechanisms": [
+          "summoned actors; encounter model unbound"
+        ]
+      },
+      "planningCost": 32,
+      "productionReady": false,
+      "estimateUncertainty": "Eligibility, external summon components and missing semantic fields can increase implementation cost"
+    },
+    {
+      "family": "Brigand Vvulf",
+      "physicalCards": 9,
+      "literalComplete": 0,
+      "unresolvedDefinitions": 9,
+      "sourceGaps": 159,
+      "profile": {
+        "special": 2,
+        "save": 3,
+        "ui": 2,
+        "battle": 4,
+        "legacy": 0,
+        "shared": 3,
+        "mechanisms": [
+          "Time's Up / barrel mechanism"
+        ]
+      },
+      "planningCost": 41,
+      "productionReady": false,
+      "estimateUncertainty": "Eligibility, external summon components and missing semantic fields can increase implementation cost"
+    },
+    {
+      "family": "Collector",
+      "physicalCards": 18,
+      "literalComplete": 6,
+      "unresolvedDefinitions": 12,
+      "sourceGaps": 315,
+      "profile": {
+        "special": 4,
+        "save": 3,
+        "ui": 2,
+        "battle": 3,
+        "legacy": 4,
+        "shared": 6,
+        "mechanisms": [
+          "Collected actors",
+          "summon/placement ownership",
+          "Loot Chests"
+        ]
+      },
+      "planningCost": 41,
+      "productionReady": false,
+      "estimateUncertainty": "Eligibility, external summon components and missing semantic fields can increase implementation cost"
+    },
+    {
+      "family": "Shrieker",
+      "physicalCards": 12,
+      "literalComplete": 3,
+      "unresolvedDefinitions": 9,
+      "sourceGaps": 210,
+      "profile": {
+        "special": 2,
+        "save": 3,
+        "ui": 2,
+        "battle": 4,
+        "legacy": 0,
+        "shared": 3,
+        "mechanisms": [
+          "Shrieker's Nest / Call the Murder"
+        ]
+      },
+      "planningCost": 41,
+      "productionReady": false,
+      "estimateUncertainty": "Eligibility, external summon components and missing semantic fields can increase implementation cost"
+    },
+    {
+      "family": "Swine Prince",
+      "physicalCards": 12,
+      "literalComplete": 3,
+      "unresolvedDefinitions": 9,
+      "sourceGaps": 210,
+      "profile": {
+        "special": 2,
+        "save": 3,
+        "ui": 2,
+        "battle": 4,
+        "legacy": 0,
+        "shared": 3,
+        "mechanisms": [
+          "Enraged Destruction / companion actor"
+        ]
+      },
+      "planningCost": 41,
+      "productionReady": false,
+      "estimateUncertainty": "Eligibility, external summon components and missing semantic fields can increase implementation cost"
+    },
+    {
+      "family": "Brigand Pounder",
+      "physicalCards": 12,
+      "literalComplete": 3,
+      "unresolvedDefinitions": 9,
+      "sourceGaps": 210,
+      "profile": {
+        "special": 3,
+        "save": 3,
+        "ui": 2,
+        "battle": 4,
+        "legacy": 0,
+        "shared": 4,
+        "mechanisms": [
+          "Reinforcements / support actors"
+        ]
+      },
+      "planningCost": 42,
+      "productionReady": false,
+      "estimateUncertainty": "Eligibility, external summon components and missing semantic fields can increase implementation cost"
+    },
+    {
+      "family": "Hag",
+      "physicalCards": 15,
+      "literalComplete": 6,
+      "unresolvedDefinitions": 9,
+      "sourceGaps": 255,
+      "profile": {
+        "special": 2,
+        "save": 4,
+        "ui": 3,
+        "battle": 4,
+        "legacy": 0,
+        "shared": 4,
+        "mechanisms": [
+          "Cauldron Empty / Full",
+          "captive Hero lifecycle",
+          "attached two-unit lifecycle"
+        ]
+      },
+      "planningCost": 44,
+      "productionReady": false,
+      "estimateUncertainty": "Eligibility, external summon components and missing semantic fields can increase implementation cost"
+    },
+    {
+      "family": "Fanatic",
+      "physicalCards": 12,
+      "literalComplete": 3,
+      "unresolvedDefinitions": 9,
+      "sourceGaps": 210,
+      "profile": {
+        "special": 2,
+        "save": 4,
+        "ui": 3,
+        "battle": 4,
+        "legacy": 0,
+        "shared": 3,
+        "mechanisms": [
+          "Sentence Rendered / captive mechanism"
+        ]
+      },
+      "planningCost": 45,
+      "productionReady": false,
+      "estimateUncertainty": "Eligibility, external summon components and missing semantic fields can increase implementation cost"
+    },
+    {
+      "family": "Siren",
+      "physicalCards": 9,
+      "literalComplete": 0,
+      "unresolvedDefinitions": 9,
+      "sourceGaps": 159,
+      "profile": {
+        "special": 1,
+        "save": 4,
+        "ui": 3,
+        "battle": 5,
+        "legacy": 0,
+        "shared": 3,
+        "mechanisms": [
+          "Song of Desire / Hero control"
+        ]
+      },
+      "planningCost": 46,
+      "productionReady": false,
+      "estimateUncertainty": "Eligibility, external summon components and missing semantic fields can increase implementation cost"
+    },
+    {
+      "family": "Baron",
+      "physicalCards": 9,
+      "literalComplete": 0,
+      "unresolvedDefinitions": 9,
+      "sourceGaps": 159,
+      "profile": {
+        "special": 3,
+        "save": 4,
+        "ui": 3,
+        "battle": 4,
+        "legacy": 0,
+        "shared": 3,
+        "mechanisms": [
+          "Pulsating Eggs"
+        ]
+      },
+      "planningCost": 47,
+      "productionReady": false,
+      "estimateUncertainty": "Eligibility, external summon components and missing semantic fields can increase implementation cost"
+    },
+    {
+      "family": "Shambler",
+      "physicalCards": 15,
+      "literalComplete": 3,
+      "unresolvedDefinitions": 12,
+      "sourceGaps": 264,
+      "profile": {
+        "special": 3,
+        "save": 3,
+        "ui": 2,
+        "battle": 4,
+        "legacy": 0,
+        "shared": 4,
+        "mechanisms": [
+          "Absolute Darkness / Summon"
+        ]
+      },
+      "planningCost": 48,
+      "productionReady": false,
+      "estimateUncertainty": "Eligibility, external summon components and missing semantic fields can increase implementation cost"
+    },
+    {
+      "family": "Countess",
+      "physicalCards": 9,
+      "literalComplete": 0,
+      "unresolvedDefinitions": 9,
+      "sourceGaps": 159,
+      "profile": {
+        "special": 3,
+        "save": 4,
+        "ui": 3,
+        "battle": 5,
+        "legacy": 0,
+        "shared": 3,
+        "mechanisms": [
+          "Parasite Egg / state handling"
+        ]
+      },
+      "planningCost": 50,
+      "productionReady": false,
+      "estimateUncertainty": "Eligibility, external summon components and missing semantic fields can increase implementation cost"
+    },
+    {
+      "family": "Drowned Crew",
+      "physicalCards": 12,
+      "literalComplete": 0,
+      "unresolvedDefinitions": 12,
+      "sourceGaps": 213,
+      "profile": {
+        "special": 2,
+        "save": 4,
+        "ui": 3,
+        "battle": 4,
+        "legacy": 0,
+        "shared": 3,
+        "mechanisms": [
+          "All Hands On Deck / attached actor"
+        ]
+      },
+      "planningCost": 51,
+      "productionReady": false,
+      "estimateUncertainty": "Eligibility, external summon components and missing semantic fields can increase implementation cost"
+    },
+    {
+      "family": "Garden Guardian",
+      "physicalCards": 21,
+      "literalComplete": 6,
+      "unresolvedDefinitions": 15,
+      "sourceGaps": 369,
+      "profile": {
+        "special": 3,
+        "save": 4,
+        "ui": 3,
+        "battle": 4,
+        "legacy": 4,
+        "shared": 4,
+        "mechanisms": [
+          "One Body / multipart actors"
+        ]
+      },
+      "planningCost": 54,
+      "productionReady": false,
+      "estimateUncertainty": "Eligibility, external summon components and missing semantic fields can increase implementation cost"
+    },
+    {
+      "family": "Viscount",
+      "physicalCards": 18,
+      "literalComplete": 3,
+      "unresolvedDefinitions": 15,
+      "sourceGaps": 318,
+      "profile": {
+        "special": 4,
+        "save": 4,
+        "ui": 3,
+        "battle": 4,
+        "legacy": 0,
+        "shared": 3,
+        "mechanisms": [
+          "The Feast / auxiliary physical actors"
+        ]
+      },
+      "planningCost": 61,
+      "productionReady": false,
+      "estimateUncertainty": "Eligibility, external summon components and missing semantic fields can increase implementation cost"
+    },
+    {
+      "family": "The Flesh",
+      "physicalCards": 18,
+      "literalComplete": 0,
+      "unresolvedDefinitions": 18,
+      "sourceGaps": 321,
+      "profile": {
+        "special": 4,
+        "save": 4,
+        "ui": 3,
+        "battle": 5,
+        "legacy": 0,
+        "shared": 3,
+        "mechanisms": [
+          "One Body / multipart form changes"
+        ]
+      },
+      "planningCost": 70,
+      "productionReady": false,
+      "estimateUncertainty": "Eligibility, external summon components and missing semantic fields can increase implementation cost"
+    }
+  ],
+  "selectionScope": "SOURCE_CLOSURE_ONLY",
+  "comparison": [
+    "Thing from the stars",
+    "Collector",
+    "Hag"
+  ],
+  "historicalRankingUsedAsInput": false
+}

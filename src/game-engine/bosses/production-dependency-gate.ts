@@ -1,4 +1,6 @@
 import { productionBossFamilyRegistry } from './definitions';
+import {productionBossPlayerRouteEnabled} from './production-capabilities';
+import {resolveProductionBossRuleSetVersion} from './definitions';
 import { prophetProductionDependencyGate } from '../prophet/production-dependency-gate';
 import type { CampaignState } from '../../types';
 import { getHeroCombatDefinition } from '../../data/progression/hero-level-registry';
@@ -58,6 +60,7 @@ export function productionBossQuestEntryError(campaign: CampaignState, questId: 
   if (campaign.runtimeContentProfile !== 'community-complete-edition' || questId !== 'face-the-threat') return null;
   const family = campaign.campaignProgress.activeBossFamilyId;
   if (!family || !productionBossFamilyRegistry.has(family)) return 'production-boss-family-unaccepted';
+  if (!productionBossPlayerRouteEnabled(family,resolveProductionBossRuleSetVersion(campaign))) return 'production-boss-family-unaccepted';
   if (family === 'necromancer') return necromancerQuestEntryError(campaign,questId);
   try { return prophetProductionDependencyGate(campaign,campaign.campaignProgress.campaignLevel).enabled
     ? null : 'prophet-production-dependencies-unbound'; } catch { return 'prophet-production-dependencies-unbound'; }
