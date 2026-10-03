@@ -67,7 +67,10 @@ export function buildC2AR1Artifacts():Record<string,any>{
   a['historical-c2a-freeze']={...common,checkpoint:{phase:'11A.5-C2A',commit:C2A_R1_BASELINE,outcome:'HERO_SOURCE_CENSUS_PARTIAL'},c2aArtifactsImmutable:true};
   a['profile-transport-binding']={...common,targeted:37,entries:profiles};
   a['skill-back-transport-binding']={...common,targeted:102,entries:backs};
-  a['hero-physical-census']={...physical,...common,objects,physicalObjectsAccounted:objects.length,physicalObjectsBound:objects.filter((o:any)=>o.status==='OFFICIAL_SOURCE').length};
+  a['hero-physical-census']={...physical,...common,objects,
+    officialPrintedObjects:physical.officialPrintedObjects.map((s:any)=>s.category==='LEVEL_PROFILE_CARD'?{...s,
+      transportBindingStatus:profiles.some((p:any)=>p.heroId===s.heroId&&same(p.officialFront,s.front)&&same(p.officialBack,s.back)&&p.status==='OFFICIAL_SOURCE')?'OFFICIAL_SOURCE':'SOURCE_UNRESOLVED'}:s),
+    physicalObjectsAccounted:objects.length,physicalObjectsBound:objects.filter((o:any)=>o.status==='OFFICIAL_SOURCE').length};
   a['hero-skill-level-form-map']={...map,...common,forms,frontBound:forms.filter((f:any)=>f.status==='OFFICIAL_SOURCE').length,backBound:forms.filter((f:any)=>f.transportBackBindingStatus==='OFFICIAL_SOURCE').length};
   const counts={starting:139,closed:closed.length,remaining:remaining.length,
     profile:{starting:37,closed:closed.filter((g:any)=>g.scope).length,remaining:remaining.filter((g:any)=>g.scope).length},

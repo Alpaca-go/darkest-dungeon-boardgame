@@ -98,7 +98,17 @@ export function verifyHistoricalBaseline(phase: keyof typeof historicalBaselines
         env: { ...process.env, DDBG_LEGACY_TRANSPORT_ARCHIVE: resolve('docs/data/complete-edition/source-assets/c1c34/legacy-transport.json.gz') } });
     if (testFiles.length) {
       const report=join(scratch,'historical-tests.json');
-      execFileSync(process.execPath, [resolve('node_modules/vitest/vitest.mjs'), 'run', ...testFiles, '--maxWorkers=1', '--minWorkers=1', '--reporter=json', '--outputFile', report], {cwd: checkout, stdio: 'pipe', maxBuffer: 16 * 1024 * 1024});
+      try {
+        execFileSync(process.execPath, [resolve('node_modules/vitest/vitest.mjs'), 'run', ...testFiles, '--maxWorkers=1', '--minWorkers=1', '--reporter=json', '--outputFile', report], {cwd: checkout, stdio: 'pipe', maxBuffer: 16 * 1024 * 1024});
+      } catch(error) {
+        if(existsSync(report)) {
+          const failed=JSON.parse(readFileSync(report,'utf8'));
+          const failures=failed.testResults.flatMap((suite:any)=>suite.assertionResults.filter((t:any)=>t.status==='failed').map((t:any)=>({file:suite.name,test:t.fullName,messages:t.failureMessages})));
+          throw new Error('Historical test failure '+phase+': '+JSON.stringify({passed:failed.numPassedTests,failed:failed.numFailedTests,failedSuites:failed.numFailedTestSuites,pending:failed.numPendingTests,todo:failed.numTodoTests,
+            suiteFailures:failed.testResults.filter((s:any)=>s.status==='failed').map((s:any)=>({file:s.name,message:s.message})),failures}));
+        }
+        throw error;
+      }
       const tests=JSON.parse(readFileSync(report,'utf8'));
       if (tests.numFailedTests || tests.numFailedTestSuites || tests.numPendingTests || tests.numTodoTests) throw new Error('Historical suites require zero failed/pending/todo');
       if(fullProphetFoundation && (tests.numPassedTests!==2729 || tests.testResults.find((r:{name:string})=>r.name.replace(/\\/g,'/').endsWith('/c1c35r2br1-prophet-production.test.ts'))?.assertionResults.length!==67))

@@ -1,0 +1,86 @@
+
+> darkest-dungeon-web-prototype@0.1.0 verify:immutable-phase-baselines
+> vite-node scripts/audit/verify-immutable-phase-baselines.ts --verify-immutable
+
+c1c33 immutable baseline e1fcfac0692eb91c5710552ac93e3bacb25f0240: PASS; current frozen evidence: PASS
+c1c34 immutable baseline 051c2c400d391543f5c436cbaa141a54bdf19ac1: PASS; current frozen evidence: PASS
+c1c35 immutable baseline 7b99c36c19159923799b3bda0180af9d8020ef82: PASS; current frozen evidence: PASS
+c1c35r1 immutable baseline 7a3a483cba0dca0eb537e744980eecd4c55fef24: PASS; current frozen evidence: PASS
+c1c35r2 immutable baseline 101c27c8c15fcb93802f956f399c37ed9c38a2e9: PASS; current frozen evidence: PASS
+c1c35r2ar unchanged historical suites: 32 passed; 0 failed / pending / todo
+c1c35r2ar immutable baseline 007712ab6aec2c814fa31e06cf5fe05b21a30879: PASS; current frozen evidence: PASS
+node:internal/errors:986
+  const err = new Error(message);
+              ^
+
+Error: Command failed: C:\Program Files\nodejs\node.exe D:\darkest-dungoen-boardgame\node_modules\vitest\vitest.mjs run src --maxWorkers=1 --minWorkers=1 --reporter=json --outputFile C:\Users\kyrie\AppData\Local\Temp\dd-c1c35r2br1-baseline-aex2Re\historical-tests.json
+(node:31580) [DEP0190] DeprecationWarning: Passing args to a child process with shell option true can lead to security vulnerabilities, as the arguments are not escaped, only concatenated.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+    at genericNodeError (node:internal/errors:986:15)
+    at wrappedFn (node:internal/errors:540:14)
+    at checkExecSyncError (node:child_process:942:11)
+    at Proxy.execFileSync (node:child_process:978:15)
+    at Module.verifyHistoricalBaseline (D:\darkest-dungoen-boardgame\scripts\audit\historical-baseline.ts:107:29)
+    at verifyImmutablePhaseBaselines (D:\darkest-dungoen-boardgame\scripts\audit\verify-immutable-phase-baselines.ts:6:72)
+    at D:\darkest-dungoen-boardgame\scripts\audit\verify-immutable-phase-baselines.ts:11:25
+    at ViteNodeRunner.runModule (file:///D:/darkest-dungoen-boardgame/node_modules/vite-node/dist/client.mjs:399:5)
+    at ViteNodeRunner.directRequest (file:///D:/darkest-dungoen-boardgame/node_modules/vite-node/dist/client.mjs:381:5)
+    at ViteNodeRunner.cachedRequest (file:///D:/darkest-dungoen-boardgame/node_modules/vite-node/dist/client.mjs:206:14) {
+  status: 1,
+  signal: null,
+  output: [
+    null,
+    Buffer(109) [Uint8Array] [
+       74,  83,  79,  78,  32, 114, 101, 112, 111, 114, 116,  32,
+      119, 114, 105, 116, 116, 101, 110,  32, 116, 111,  32,  67,
+       58,  47,  85, 115, 101, 114, 115,  47, 107, 121, 114, 105,
+      101,  47,  65, 112, 112,  68,  97, 116,  97,  47,  76, 111,
+       99,  97, 108,  47,  84, 101, 109, 112,  47, 100, 100,  45,
+       99,  49,  99,  51,  53, 114,  50,  98, 114,  49,  45,  98,
+       97, 115, 101, 108, 105, 110, 101,  45,  97, 101, 120,  50,
+       82, 101,  47, 104, 105, 115, 116, 111, 114, 105,  99,  97,
+      108,  45, 116, 101,
+      ... 9 more items
+    ],
+    Buffer(264) [Uint8Array] [
+       40, 110, 111, 100, 101,  58,  51,  49,  53,  56,  48,  41,
+       32,  91,  68,  69,  80,  48,  49,  57,  48,  93,  32,  68,
+      101, 112, 114, 101,  99,  97, 116, 105, 111, 110,  87,  97,
+      114, 110, 105, 110, 103,  58,  32,  80,  97, 115, 115, 105,
+      110, 103,  32,  97, 114, 103, 115,  32, 116, 111,  32,  97,
+       32,  99, 104, 105, 108, 100,  32, 112, 114, 111,  99, 101,
+      115, 115,  32, 119, 105, 116, 104,  32, 115, 104, 101, 108,
+      108,  32, 111, 112, 116, 105, 111, 110,  32, 116, 114, 117,
+      101,  32,  99,  97,
+      ... 164 more items
+    ]
+  ],
+  pid: 6884,
+  stdout: Buffer(109) [Uint8Array] [
+     74,  83,  79,  78,  32, 114, 101, 112, 111, 114, 116,  32,
+    119, 114, 105, 116, 116, 101, 110,  32, 116, 111,  32,  67,
+     58,  47,  85, 115, 101, 114, 115,  47, 107, 121, 114, 105,
+    101,  47,  65, 112, 112,  68,  97, 116,  97,  47,  76, 111,
+     99,  97, 108,  47,  84, 101, 109, 112,  47, 100, 100,  45,
+     99,  49,  99,  51,  53, 114,  50,  98, 114,  49,  45,  98,
+     97, 115, 101, 108, 105, 110, 101,  45,  97, 101, 120,  50,
+     82, 101,  47, 104, 105, 115, 116, 111, 114, 105,  99,  97,
+    108,  45, 116, 101,
+    ... 9 more items
+  ],
+  stderr: Buffer(264) [Uint8Array] [
+     40, 110, 111, 100, 101,  58,  51,  49,  53,  56,  48,  41,
+     32,  91,  68,  69,  80,  48,  49,  57,  48,  93,  32,  68,
+    101, 112, 114, 101,  99,  97, 116, 105, 111, 110,  87,  97,
+    114, 110, 105, 110, 103,  58,  32,  80,  97, 115, 115, 105,
+    110, 103,  32,  97, 114, 103, 115,  32, 116, 111,  32,  97,
+     32,  99, 104, 105, 108, 100,  32, 112, 114, 111,  99, 101,
+    115, 115,  32, 119, 105, 116, 104,  32, 115, 104, 101, 108,
+    108,  32, 111, 112, 116, 105, 111, 110,  32, 116, 114, 117,
+    101,  32,  99,  97,
+    ... 164 more items
+  ]
+}
+
+Node.js v24.20.0
