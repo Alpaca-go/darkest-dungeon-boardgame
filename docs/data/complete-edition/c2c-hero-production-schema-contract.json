@@ -1,0 +1,26 @@
+{
+  "phase": "11A.5-C2C",
+  "baseline": "84e747b170d4ba65c463d1d5be1cfcd80dd0dd08",
+  "policyId": "SOURCE_AMBIGUITY_DEFER_POLICY_V1",
+  "definitionVersion": "C2C-HERO-PRODUCTION-DEFINITION-v1",
+  "liveRuntimeIntegrated": false,
+  "schemaVersion": "HERO_PRODUCTION_SCHEMA_V1",
+  "typeFile": "src/types/hero-production.ts",
+  "schemas": [
+    "HeroProductionProfileDefinition",
+    "HeroProductionSkillDefinition",
+    "HeroProductionTarget",
+    "HeroProductionEffect",
+    "ConditionEffect",
+    "ConditionTransferEffect",
+    "MovementEffect",
+    "TransformEffect",
+    "DelayedHeroEffectDefinition",
+    "PrintedField",
+    "DeferredSemanticField",
+    "HamletAbilityDefinition"
+  ],
+  "arrayOrdering": "Printed collection order only; no execution ordering implied",
+  "absence": "PRINTED_ABSENT has no value",
+  "runtimeSupport": "REQUIRES_RUNTIME_EXTENSION is independent of semanticStatus"
+}

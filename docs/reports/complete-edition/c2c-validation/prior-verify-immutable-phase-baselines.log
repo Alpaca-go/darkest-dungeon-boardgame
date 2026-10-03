@@ -1,0 +1,26 @@
+
+> darkest-dungeon-web-prototype@0.1.0 verify:immutable-phase-baselines
+> vite-node scripts/audit/verify-immutable-phase-baselines.ts --verify-immutable
+
+c1c33 immutable baseline e1fcfac0692eb91c5710552ac93e3bacb25f0240: PASS; current frozen evidence: PASS
+c1c34 immutable baseline 051c2c400d391543f5c436cbaa141a54bdf19ac1: PASS; current frozen evidence: PASS
+c1c35 immutable baseline 7b99c36c19159923799b3bda0180af9d8020ef82: PASS; current frozen evidence: PASS
+c1c35r1 immutable baseline 7a3a483cba0dca0eb537e744980eecd4c55fef24: PASS; current frozen evidence: PASS
+c1c35r2 immutable baseline 101c27c8c15fcb93802f956f399c37ed9c38a2e9: PASS; current frozen evidence: PASS
+c1c35r2ar unchanged historical suites: 32 passed; 0 failed / pending / todo
+c1c35r2ar immutable baseline 007712ab6aec2c814fa31e06cf5fe05b21a30879: PASS; current frozen evidence: PASS
+D:\darkest-dungoen-boardgame\scripts\audit\historical-baseline.ts:129
+          throw new Error("Historical test failure " + phase + ": " + JSON.stringify({
+                ^
+
+Error: Historical test failure c1c35r2br1: {"passed":2728,"failed":1,"failedSuites":2,"pending":0,"todo":0,"suiteFailures":[{"file":"C:/Users/kyrie/AppData/Local/Temp/dd-c1c35r2br1-baseline-Hf2VWp/repo/src/data/darkest-dungeon/community-reference/community-guardian-room-adversarial.test.ts","message":""}],"failures":[{"file":"C:/Users/kyrie/AppData/Local/Temp/dd-c1c35r2br1-baseline-Hf2VWp/repo/src/data/darkest-dungeon/community-reference/community-guardian-room-adversarial.test.ts","test":"Community Guardian / Room R1 adversarial mutation gate (WP-7) Body Slam missing Bleed fails production proof","messages":["Error: spawnSync C:\\Program Files\\nodejs\\node.exe ETIMEDOUT\n    at Object.spawnSync (node:internal/child_process:1160:20)\n    at spawnSync (node:child_process:928:24)\n    at runGuardianMutation (C:\\Users\\kyrie\\AppData\\Local\\Temp\\dd-c1c35r2br1-baseline-Hf2VWp\\repo\\src\\data\\darkest-dungeon\\community-reference\\community-guardian-room-adversarial.test.ts:59:18)\n    at C:\\Users\\kyrie\\AppData\\Local\\Temp\\dd-c1c35r2br1-baseline-Hf2VWp\\repo\\src\\data\\darkest-dungeon\\community-reference\\community-guardian-room-adversarial.test.ts:120:20\n    at file:///D:/darkest-dungoen-boardgame/node_modules/@vitest/runner/dist/index.js:146:14\n    at file:///D:/darkest-dungoen-boardgame/node_modules/@vitest/runner/dist/index.js:533:11\n    at runWithTimeout (file:///D:/darkest-dungoen-boardgame/node_modules/@vitest/runner/dist/index.js:39:7)\n    at runTest (file:///D:/darkest-dungoen-boardgame/node_modules/@vitest/runner/dist/index.js:1056:17)\n    at processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at runSuite (file:///D:/darkest-dungoen-boardgame/node_modules/@vitest/runner/dist/index.js:1205:15)"]}]}
+    at Module.verifyHistoricalBaseline (D:\darkest-dungoen-boardgame\scripts\audit\historical-baseline.ts:129:17)
+    at verifyImmutablePhaseBaselines (D:\darkest-dungoen-boardgame\scripts\audit\verify-immutable-phase-baselines.ts:6:72)
+    at D:\darkest-dungoen-boardgame\scripts\audit\verify-immutable-phase-baselines.ts:11:25
+    at ViteNodeRunner.runModule (file:///D:/darkest-dungoen-boardgame/node_modules/vite-node/dist/client.mjs:399:5)
+    at ViteNodeRunner.directRequest (file:///D:/darkest-dungoen-boardgame/node_modules/vite-node/dist/client.mjs:381:5)
+    at ViteNodeRunner.cachedRequest (file:///D:/darkest-dungoen-boardgame/node_modules/vite-node/dist/client.mjs:206:14)
+    at ViteNodeRunner.executeFile (file:///D:/darkest-dungoen-boardgame/node_modules/vite-node/dist/client.mjs:169:12)
+    at CAC.run (file:///D:/darkest-dungoen-boardgame/node_modules/vite-node/dist/cli.mjs:99:5)
+
+Node.js v24.20.0

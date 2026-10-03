@@ -6,6 +6,7 @@ import { createHash } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
 
 export const historicalBaselines = {
+  c2b: { phase: '11A.5-C2B', commit: '84e747b170d4ba65c463d1d5be1cfcd80dd0dd08', script: 'scripts/audit/c2b-hero-literal-closure.ts', artifactPrefixes: ['c2b-'] },
   'c2a-r1': { phase: '11A.5-C2A-R1', commit: '173ca67adf0e9a1fa2af18693c0fc3bc42973217', script: 'scripts/audit/c2a-r1-transport-binding.ts', artifactPrefixes: ['c2a-r1-'] },
   c2a: { phase: '11A.5-C2A', commit: '3bb559868ab4e69c8276e85c364be7fbb3fc1d0b', script: 'scripts/audit/c2a-hero-source-census.ts', artifactPrefixes: ['c2a-'] },
   c1c38r1: { phase: 'C1C38R1', commit: '7f4001b956cac441778dbb457cc33041f9057ad5', script: 'scripts/audit/c1c38r1-source-intake.ts', artifactPrefixes: ['c1c38r1-'] },
@@ -34,6 +35,13 @@ export function verifyHistoricalBaseline(phase: keyof typeof historicalBaselines
   const git = (args: string[]) => execFileSync('git', args, { maxBuffer: 128 * 1024 * 1024 });
   git(['merge-base', '--is-ancestor', commit, 'HEAD']);
   verifyHistoricalArtifacts(phase);
+  if (phase === 'c2b' && !testFiles.length && !probe) {
+    const accepted = JSON.parse(readFileSync('docs/data/complete-edition/c2b-hero-literal-closure-acceptance.json','utf8'));
+    if (accepted.outcome !== 'HERO_LITERAL_CLOSURE_BLOCKED' || !accepted.literalTranscriptionComplete || accepted.literalClosureComplete)
+      throw new Error('C2B historical acceptance identity changed');
+    console.log('c2b immutable historical checkpoint: PASS; HERO_LITERAL_CLOSURE_BLOCKED');
+    return;
+  }
   if (phase === 'c2a-r1' && !testFiles.length && !probe) {
     const accepted = JSON.parse(readFileSync('docs/data/complete-edition/c2a-r1-hero-source-census-acceptance.json','utf8'));
     if (accepted.outcome !== 'HERO_SOURCE_CENSUS_ACCEPTED' || !accepted.C2BAllowed || accepted.runtimeModified || accepted.prototypePromoted)
@@ -100,7 +108,7 @@ export function verifyHistoricalBaseline(phase: keyof typeof historicalBaselines
       copyFileSync('docs/DD_EN_COREBOX_RULES.pdf', join(checkout, 'docs/DD_EN_COREBOX_RULES.pdf'));
     }
     symlinkSync(resolve('node_modules'), join(checkout, 'node_modules'), process.platform === 'win32' ? 'junction' : 'dir');
-    const flags = phase === 'c1c35r2br1' ? ['--verify-r2b'] : phase === 'c1c35r2ar' ? ['--verify-dispatch'] : phase === 'c1c35r1' ? ['--verify-r1'] : phase === 'c1c35r2' ? ['--verify-r2'] : phase.startsWith('c1c3') ? ['--verify'] : [];
+    const flags = phase === 'c2b' ? ['--verify'] : phase === 'c1c35r2br1' ? ['--verify-r2b'] : phase === 'c1c35r2ar' ? ['--verify-dispatch'] : phase === 'c1c35r1' ? ['--verify-r1'] : phase === 'c1c35r2' ? ['--verify-r2'] : phase.startsWith('c1c3') ? ['--verify'] : [];
     if (phase !== 'c1c36') execFileSync(process.execPath, ['--import', pathToFileURL(resolve('scripts/audit/legacy-transport-preload.mjs')).href, resolve('node_modules/vite-node/vite-node.mjs'), script, ...flags],
       { cwd: checkout, stdio: 'pipe', maxBuffer: 16 * 1024 * 1024,
         env: { ...process.env, DDBG_LEGACY_TRANSPORT_ARCHIVE: resolve('docs/data/complete-edition/source-assets/c1c34/legacy-transport.json.gz') } });
@@ -139,8 +147,8 @@ export function verifyHistoricalArtifacts(phase: keyof typeof historicalBaseline
   const prefixes = 'artifactPrefixes' in checkpoint ? checkpoint.artifactPrefixes : [`${phase}-`];
   const git = (args: string[]) => execFileSync('git', args, {maxBuffer: 128 * 1024 * 1024});
   const entries = git(['ls-tree', '-r', '--name-only', commit]).toString().trim().split(/\r?\n/)
-    .filter(p => p.split('/').some(part=>prefixes.some(prefix=>part.startsWith(prefix))) || (phase === 'c2a-r1' && /(^|[/_-])c2a-r1([/_.-]|$)/.test(p)) || (phase === 'c2a' && /(^|[/_-])c2a([/_.-]|$)/.test(p)) || (phase === 'c1c38' && /(^|[/_-])c1c38([/_.-]|$)/.test(p)) || (phase === 'c1c38r1' && /(^|[/_-])c1c38r1([/_.-]|$)/.test(p)));
-  if (phase === 'c2a' || phase === 'c2a-r1') {
+    .filter(p => p.split('/').some(part=>prefixes.some(prefix=>part.startsWith(prefix))) || (phase === 'c2b' && /(^|[/_-])c2b([/_.-]|$)/.test(p)) || (phase === 'c2a-r1' && /(^|[/_-])c2a-r1([/_.-]|$)/.test(p)) || (phase === 'c2a' && /(^|[/_-])c2a([/_.-]|$)/.test(p)) || (phase === 'c1c38' && /(^|[/_-])c1c38([/_.-]|$)/.test(p)) || (phase === 'c1c38r1' && /(^|[/_-])c1c38r1([/_.-]|$)/.test(p)));
+  if (phase === 'c2a' || phase === 'c2a-r1' || phase === 'c2b') {
     const actual=execFileSync('git',['hash-object','--stdin-paths'],{input:entries.join('\n')+'\n',maxBuffer:128*1024*1024}).toString().trim().split(/\r?\n/);
     const blobs=new Map(git(['ls-tree','-r',commit]).toString().trim().split(/\r?\n/).map(line=>{const [meta,path]=line.split('\t');return [path,meta.split(' ')[2]];}));
     for(const [i,path] of entries.entries()) if(actual[i]!==blobs.get(path)) {

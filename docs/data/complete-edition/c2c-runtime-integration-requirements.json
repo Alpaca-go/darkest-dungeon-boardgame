@@ -1,0 +1,85 @@
+{
+  "phase": "11A.5-C2C",
+  "baseline": "84e747b170d4ba65c463d1d5be1cfcd80dd0dd08",
+  "policyId": "SOURCE_AMBIGUITY_DEFER_POLICY_V1",
+  "definitionVersion": "C2C-HERO-PRODUCTION-DEFINITION-v1",
+  "liveRuntimeIntegrated": false,
+  "primitives": [
+    {
+      "primitive": "profile-resolver",
+      "priority": "REQUIRED_FOR_BASIC_COMBAT",
+      "runtimeImplemented": false
+    },
+    {
+      "primitive": "skill-resolver",
+      "priority": "REQUIRED_FOR_BASIC_COMBAT",
+      "runtimeImplemented": false
+    },
+    {
+      "primitive": "multi-target-selection",
+      "priority": "REQUIRED_FOR_BASIC_COMBAT",
+      "runtimeImplemented": false
+    },
+    {
+      "primitive": "all-target-resolution",
+      "priority": "REQUIRED_FOR_BASIC_COMBAT",
+      "runtimeImplemented": false
+    },
+    {
+      "primitive": "self-target-effect-separation",
+      "priority": "REQUIRED_FOR_BASIC_COMBAT",
+      "runtimeImplemented": false
+    },
+    {
+      "primitive": "movement-executor",
+      "priority": "REQUIRED_FOR_BASIC_COMBAT",
+      "runtimeImplemented": false
+    },
+    {
+      "primitive": "condition-magnitude-duration",
+      "priority": "REQUIRED_FOR_BASIC_COMBAT",
+      "runtimeImplemented": false
+    },
+    {
+      "primitive": "conditional-modifiers",
+      "priority": "REQUIRED_FOR_SPECIFIC_HEROES",
+      "runtimeImplemented": false
+    },
+    {
+      "primitive": "type-specific-damage",
+      "priority": "REQUIRED_FOR_SPECIFIC_HEROES",
+      "runtimeImplemented": false
+    },
+    {
+      "primitive": "ignore-guard-protection",
+      "priority": "REQUIRED_FOR_SPECIFIC_HEROES",
+      "runtimeImplemented": false
+    },
+    {
+      "primitive": "abomination-forms",
+      "priority": "REQUIRED_FOR_SPECIFIC_HEROES",
+      "runtimeImplemented": false
+    },
+    {
+      "primitive": "hamlet-delayed-effects",
+      "priority": "REQUIRED_FOR_HAMLET",
+      "runtimeImplemented": false
+    },
+    {
+      "primitive": "save-replay",
+      "priority": "REQUIRED_FOR_BASIC_COMBAT",
+      "runtimeImplemented": false
+    },
+    {
+      "primitive": "definition-version-binding",
+      "priority": "REQUIRED_FOR_BASIC_COMBAT",
+      "runtimeImplemented": false
+    },
+    {
+      "primitive": "deferred-clause-execution",
+      "priority": "DEFERRED_MANUAL_VALIDATION_DEPENDENT",
+      "runtimeImplemented": false
+    }
+  ],
+  "deferredClausePolicy": "Implement independent clear behavior; no guessed execution binding"
+}

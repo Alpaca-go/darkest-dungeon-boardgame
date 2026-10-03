@@ -21,6 +21,7 @@ export default defineConfig({
     // Historical rejection expectations run in accepted detached checkouts via the successor boundary suite.
     exclude: ['src/audit/c1c34-successor-rebaseline.test.ts','src/audit/c1c35-prophet-source-contract.test.ts',
       'src/audit/c1c35r1-prophet-residual-contract.test.ts','src/audit/c1c35r2-prophet-gate-foundation-review.test.ts',
-      'src/audit/c1c35r2a-shared-dispatch.test.ts'],
+      'src/audit/c1c35r2a-shared-dispatch.test.ts',
+      'src/audit/c2a-r1-transport-binding.test.ts','src/audit/c2b-hero-literal-closure.test.ts'],
   },
 });

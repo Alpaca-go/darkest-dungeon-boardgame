@@ -1,0 +1,503 @@
+{
+  "phase": "11A.5-C2C",
+  "baseline": "84e747b170d4ba65c463d1d5be1cfcd80dd0dd08",
+  "policyId": "SOURCE_AMBIGUITY_DEFER_POLICY_V1",
+  "definitionVersion": "C2C-HERO-PRODUCTION-DEFINITION-v1",
+  "liveRuntimeIntegrated": false,
+  "files": [
+    "src/data/heroes.ts",
+    "src/data/skills.ts",
+    "src/data/hero-level-profiles.ts"
+  ],
+  "heroes": [
+    {
+      "runtimeId": "crusader",
+      "productionId": "crusader",
+      "relationship": "ID_COMPATIBLE",
+      "replacementProfiles": [
+        "c2b:crusader:profile:L1",
+        "c2b:crusader:profile:L2",
+        "c2b:crusader:profile:L3"
+      ]
+    },
+    {
+      "runtimeId": "vestal",
+      "productionId": "vestal",
+      "relationship": "ID_COMPATIBLE",
+      "replacementProfiles": [
+        "c2b:vestal:profile:L1",
+        "c2b:vestal:profile:L2",
+        "c2b:vestal:profile:L3"
+      ]
+    },
+    {
+      "runtimeId": "highwayman",
+      "productionId": "highwayman",
+      "relationship": "ID_COMPATIBLE",
+      "replacementProfiles": [
+        "c2b:highwayman:profile:L1",
+        "c2b:highwayman:profile:L2",
+        "c2b:highwayman:profile:L3"
+      ]
+    },
+    {
+      "runtimeId": "hellion",
+      "productionId": "hellion",
+      "relationship": "ID_COMPATIBLE",
+      "replacementProfiles": [
+        "c2b:hellion:profile:L1",
+        "c2b:hellion:profile:L2",
+        "c2b:hellion:profile:L3"
+      ]
+    },
+    {
+      "runtimeId": "leper",
+      "productionId": "leper",
+      "relationship": "ID_COMPATIBLE",
+      "replacementProfiles": [
+        "c2b:leper:profile:L1",
+        "c2b:leper:profile:L2",
+        "c2b:leper:profile:L3"
+      ]
+    },
+    {
+      "runtimeId": "occultist",
+      "productionId": "occultist",
+      "relationship": "ID_COMPATIBLE",
+      "replacementProfiles": [
+        "c2b:occultist:profile:L1",
+        "c2b:occultist:profile:L2",
+        "c2b:occultist:profile:L3"
+      ]
+    },
+    {
+      "runtimeId": "plague-doctor",
+      "productionId": "plague-doctor",
+      "relationship": "ID_COMPATIBLE",
+      "replacementProfiles": [
+        "c2b:plague-doctor:profile:L1",
+        "c2b:plague-doctor:profile:L2",
+        "c2b:plague-doctor:profile:L3"
+      ]
+    },
+    {
+      "runtimeId": "grave-robber",
+      "productionId": "grave-robber",
+      "relationship": "ID_COMPATIBLE",
+      "replacementProfiles": [
+        "c2b:grave-robber:profile:L1",
+        "c2b:grave-robber:profile:L2",
+        "c2b:grave-robber:profile:L3"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "runtimeSkillId": "crusader-smite",
+      "heroId": "crusader",
+      "productionSkillId": "crusader-smite",
+      "action": "REPLACE_WITH_INDEPENDENT_SOURCE_LEVELS",
+      "replacementForms": [
+        "c2b:crusader-smite:L1",
+        "c2b:crusader-smite:L2",
+        "c2b:crusader-smite:L3"
+      ]
+    },
+    {
+      "runtimeSkillId": "crusader-holy-lance",
+      "heroId": "crusader",
+      "productionSkillId": "crusader-holy-lance",
+      "action": "REPLACE_WITH_INDEPENDENT_SOURCE_LEVELS",
+      "replacementForms": [
+        "c2b:crusader-holy-lance:L1",
+        "c2b:crusader-holy-lance:L2",
+        "c2b:crusader-holy-lance:L3"
+      ]
+    },
+    {
+      "runtimeSkillId": "crusader-bulwark",
+      "heroId": "crusader",
+      "productionSkillId": "crusader-bulwark-of-faith",
+      "action": "REPLACE_WITH_INDEPENDENT_SOURCE_LEVELS",
+      "replacementForms": [
+        "c2b:crusader-bulwark-of-faith:L1",
+        "c2b:crusader-bulwark-of-faith:L2",
+        "c2b:crusader-bulwark-of-faith:L3"
+      ]
+    },
+    {
+      "runtimeSkillId": "crusader-battle-heal",
+      "heroId": "crusader",
+      "productionSkillId": "crusader-battle-heal",
+      "action": "REPLACE_WITH_INDEPENDENT_SOURCE_LEVELS",
+      "replacementForms": [
+        "c2b:crusader-battle-heal:L1",
+        "c2b:crusader-battle-heal:L2",
+        "c2b:crusader-battle-heal:L3"
+      ]
+    },
+    {
+      "runtimeSkillId": "vestal-divine-grace",
+      "heroId": "vestal",
+      "productionSkillId": "vestal-divine-grace",
+      "action": "REPLACE_WITH_INDEPENDENT_SOURCE_LEVELS",
+      "replacementForms": [
+        "c2b:vestal-divine-grace:L1",
+        "c2b:vestal-divine-grace:L2",
+        "c2b:vestal-divine-grace:L3"
+      ]
+    },
+    {
+      "runtimeSkillId": "vestal-judgement",
+      "heroId": "vestal",
+      "productionSkillId": "vestal-judgement",
+      "action": "REPLACE_WITH_INDEPENDENT_SOURCE_LEVELS",
+      "replacementForms": [
+        "c2b:vestal-judgement:L1",
+        "c2b:vestal-judgement:L2",
+        "c2b:vestal-judgement:L3"
+      ]
+    },
+    {
+      "runtimeSkillId": "vestal-sanctuary",
+      "heroId": "vestal",
+      "productionSkillId": null,
+      "action": "REMOVE_ON_C2D_MIGRATION",
+      "replacementForms": []
+    },
+    {
+      "runtimeSkillId": "vestal-mantra",
+      "heroId": "vestal",
+      "productionSkillId": null,
+      "action": "REMOVE_ON_C2D_MIGRATION",
+      "replacementForms": []
+    },
+    {
+      "runtimeSkillId": "highwayman-pistol-shot",
+      "heroId": "highwayman",
+      "productionSkillId": "highwayman-pistol-shot",
+      "action": "REPLACE_WITH_INDEPENDENT_SOURCE_LEVELS",
+      "replacementForms": [
+        "c2b:highwayman-pistol-shot:L1",
+        "c2b:highwayman-pistol-shot:L2",
+        "c2b:highwayman-pistol-shot:L3"
+      ]
+    },
+    {
+      "runtimeSkillId": "highwayman-wicked-slice",
+      "heroId": "highwayman",
+      "productionSkillId": "highwayman-wicked-slice",
+      "action": "REPLACE_WITH_INDEPENDENT_SOURCE_LEVELS",
+      "replacementForms": [
+        "c2b:highwayman-wicked-slice:L1",
+        "c2b:highwayman-wicked-slice:L2",
+        "c2b:highwayman-wicked-slice:L3"
+      ]
+    },
+    {
+      "runtimeSkillId": "highwayman-duelist",
+      "heroId": "highwayman",
+      "productionSkillId": "highwayman-duelists-advance",
+      "action": "REPLACE_WITH_INDEPENDENT_SOURCE_LEVELS",
+      "replacementForms": [
+        "c2b:highwayman-duelists-advance:L1",
+        "c2b:highwayman-duelists-advance:L2",
+        "c2b:highwayman-duelists-advance:L3"
+      ]
+    },
+    {
+      "runtimeSkillId": "highwayman-open-vein",
+      "heroId": "highwayman",
+      "productionSkillId": "highwayman-open-vein",
+      "action": "REPLACE_WITH_INDEPENDENT_SOURCE_LEVELS",
+      "replacementForms": [
+        "c2b:highwayman-open-vein:L1",
+        "c2b:highwayman-open-vein:L2",
+        "c2b:highwayman-open-vein:L3"
+      ]
+    },
+    {
+      "runtimeSkillId": "hellion-iron-swan",
+      "heroId": "hellion",
+      "productionSkillId": "hellion-iron-swan",
+      "action": "REPLACE_WITH_INDEPENDENT_SOURCE_LEVELS",
+      "replacementForms": [
+        "c2b:hellion-iron-swan:L1",
+        "c2b:hellion-iron-swan:L2",
+        "c2b:hellion-iron-swan:L3"
+      ]
+    },
+    {
+      "runtimeSkillId": "hellion-bash",
+      "heroId": "hellion",
+      "productionSkillId": null,
+      "action": "REMOVE_ON_C2D_MIGRATION",
+      "replacementForms": []
+    },
+    {
+      "runtimeSkillId": "hellion-breakthrough",
+      "heroId": "hellion",
+      "productionSkillId": "hellion-breakthrough",
+      "action": "REPLACE_WITH_INDEPENDENT_SOURCE_LEVELS",
+      "replacementForms": [
+        "c2b:hellion-breakthrough:L1",
+        "c2b:hellion-breakthrough:L2",
+        "c2b:hellion-breakthrough:L3"
+      ]
+    },
+    {
+      "runtimeSkillId": "hellion-adrenaline-rush",
+      "heroId": "hellion",
+      "productionSkillId": "hellion-adrenaline-rush",
+      "action": "REPLACE_WITH_INDEPENDENT_SOURCE_LEVELS",
+      "replacementForms": [
+        "c2b:hellion-adrenaline-rush:L1",
+        "c2b:hellion-adrenaline-rush:L2",
+        "c2b:hellion-adrenaline-rush:L3"
+      ]
+    },
+    {
+      "runtimeSkillId": "leper-hew",
+      "heroId": "leper",
+      "productionSkillId": "leper-hew",
+      "action": "REPLACE_WITH_INDEPENDENT_SOURCE_LEVELS",
+      "replacementForms": [
+        "c2b:leper-hew:L1",
+        "c2b:leper-hew:L2",
+        "c2b:leper-hew:L3"
+      ]
+    },
+    {
+      "runtimeSkillId": "leper-fortify",
+      "heroId": "leper",
+      "productionSkillId": null,
+      "action": "REMOVE_ON_C2D_MIGRATION",
+      "replacementForms": []
+    },
+    {
+      "runtimeSkillId": "leper-reposition",
+      "heroId": "leper",
+      "productionSkillId": null,
+      "action": "REMOVE_ON_C2D_MIGRATION",
+      "replacementForms": []
+    },
+    {
+      "runtimeSkillId": "occultist-sap",
+      "heroId": "occultist",
+      "productionSkillId": null,
+      "action": "REMOVE_ON_C2D_MIGRATION",
+      "replacementForms": []
+    },
+    {
+      "runtimeSkillId": "occultist-ward",
+      "heroId": "occultist",
+      "productionSkillId": null,
+      "action": "REMOVE_ON_C2D_MIGRATION",
+      "replacementForms": []
+    },
+    {
+      "runtimeSkillId": "occultist-blink",
+      "heroId": "occultist",
+      "productionSkillId": null,
+      "action": "REMOVE_ON_C2D_MIGRATION",
+      "replacementForms": []
+    },
+    {
+      "runtimeSkillId": "plague-doctor-noxious",
+      "heroId": "plague-doctor",
+      "productionSkillId": "plague-doctor-noxious-blast",
+      "action": "REPLACE_WITH_INDEPENDENT_SOURCE_LEVELS",
+      "replacementForms": [
+        "c2b:plague-doctor-noxious-blast:L1",
+        "c2b:plague-doctor-noxious-blast:L2",
+        "c2b:plague-doctor-noxious-blast:L3"
+      ]
+    },
+    {
+      "runtimeSkillId": "plague-doctor-guard",
+      "heroId": "plague-doctor",
+      "productionSkillId": null,
+      "action": "REMOVE_ON_C2D_MIGRATION",
+      "replacementForms": []
+    },
+    {
+      "runtimeSkillId": "plague-doctor-tincture",
+      "heroId": "plague-doctor",
+      "productionSkillId": null,
+      "action": "REMOVE_ON_C2D_MIGRATION",
+      "replacementForms": []
+    },
+    {
+      "runtimeSkillId": "grave-robber-flash",
+      "heroId": "grave-robber",
+      "productionSkillId": "grave-robber-flashing-daggers",
+      "action": "REPLACE_WITH_INDEPENDENT_SOURCE_LEVELS",
+      "replacementForms": [
+        "c2b:grave-robber-flashing-daggers:L1",
+        "c2b:grave-robber-flashing-daggers:L2",
+        "c2b:grave-robber-flashing-daggers:L3"
+      ]
+    },
+    {
+      "runtimeSkillId": "grave-robber-dodge",
+      "heroId": "grave-robber",
+      "productionSkillId": null,
+      "action": "REMOVE_ON_C2D_MIGRATION",
+      "replacementForms": []
+    },
+    {
+      "runtimeSkillId": "grave-robber-sneak",
+      "heroId": "grave-robber",
+      "productionSkillId": null,
+      "action": "REMOVE_ON_C2D_MIGRATION",
+      "replacementForms": []
+    }
+  ],
+  "profiles": [
+    {
+      "runtimeId": "crusader",
+      "level": 1,
+      "productionBindingId": "c2b:crusader:profile:L1",
+      "action": "REPLACE_ON_C2D_MIGRATION"
+    },
+    {
+      "runtimeId": "crusader",
+      "level": 2,
+      "productionBindingId": "c2b:crusader:profile:L2",
+      "action": "REPLACE_ON_C2D_MIGRATION"
+    },
+    {
+      "runtimeId": "crusader",
+      "level": 3,
+      "productionBindingId": "c2b:crusader:profile:L3",
+      "action": "REPLACE_ON_C2D_MIGRATION"
+    },
+    {
+      "runtimeId": "hellion",
+      "level": 1,
+      "productionBindingId": "c2b:hellion:profile:L1",
+      "action": "REPLACE_ON_C2D_MIGRATION"
+    },
+    {
+      "runtimeId": "hellion",
+      "level": 2,
+      "productionBindingId": "c2b:hellion:profile:L2",
+      "action": "REPLACE_ON_C2D_MIGRATION"
+    },
+    {
+      "runtimeId": "hellion",
+      "level": 3,
+      "productionBindingId": "c2b:hellion:profile:L3",
+      "action": "REPLACE_ON_C2D_MIGRATION"
+    },
+    {
+      "runtimeId": "highwayman",
+      "level": 1,
+      "productionBindingId": "c2b:highwayman:profile:L1",
+      "action": "REPLACE_ON_C2D_MIGRATION"
+    },
+    {
+      "runtimeId": "highwayman",
+      "level": 2,
+      "productionBindingId": "c2b:highwayman:profile:L2",
+      "action": "REPLACE_ON_C2D_MIGRATION"
+    },
+    {
+      "runtimeId": "highwayman",
+      "level": 3,
+      "productionBindingId": "c2b:highwayman:profile:L3",
+      "action": "REPLACE_ON_C2D_MIGRATION"
+    },
+    {
+      "runtimeId": "vestal",
+      "level": 1,
+      "productionBindingId": "c2b:vestal:profile:L1",
+      "action": "REPLACE_ON_C2D_MIGRATION"
+    },
+    {
+      "runtimeId": "vestal",
+      "level": 2,
+      "productionBindingId": "c2b:vestal:profile:L2",
+      "action": "REPLACE_ON_C2D_MIGRATION"
+    },
+    {
+      "runtimeId": "vestal",
+      "level": 3,
+      "productionBindingId": "c2b:vestal:profile:L3",
+      "action": "REPLACE_ON_C2D_MIGRATION"
+    },
+    {
+      "runtimeId": "plague-doctor",
+      "level": 1,
+      "productionBindingId": "c2b:plague-doctor:profile:L1",
+      "action": "REPLACE_ON_C2D_MIGRATION"
+    },
+    {
+      "runtimeId": "plague-doctor",
+      "level": 2,
+      "productionBindingId": "c2b:plague-doctor:profile:L2",
+      "action": "REPLACE_ON_C2D_MIGRATION"
+    },
+    {
+      "runtimeId": "plague-doctor",
+      "level": 3,
+      "productionBindingId": "c2b:plague-doctor:profile:L3",
+      "action": "REPLACE_ON_C2D_MIGRATION"
+    },
+    {
+      "runtimeId": "grave-robber",
+      "level": 1,
+      "productionBindingId": "c2b:grave-robber:profile:L1",
+      "action": "REPLACE_ON_C2D_MIGRATION"
+    },
+    {
+      "runtimeId": "grave-robber",
+      "level": 2,
+      "productionBindingId": "c2b:grave-robber:profile:L2",
+      "action": "REPLACE_ON_C2D_MIGRATION"
+    },
+    {
+      "runtimeId": "grave-robber",
+      "level": 3,
+      "productionBindingId": "c2b:grave-robber:profile:L3",
+      "action": "REPLACE_ON_C2D_MIGRATION"
+    },
+    {
+      "runtimeId": "occultist",
+      "level": 1,
+      "productionBindingId": "c2b:occultist:profile:L1",
+      "action": "REPLACE_ON_C2D_MIGRATION"
+    },
+    {
+      "runtimeId": "occultist",
+      "level": 2,
+      "productionBindingId": "c2b:occultist:profile:L2",
+      "action": "REPLACE_ON_C2D_MIGRATION"
+    },
+    {
+      "runtimeId": "occultist",
+      "level": 3,
+      "productionBindingId": "c2b:occultist:profile:L3",
+      "action": "REPLACE_ON_C2D_MIGRATION"
+    },
+    {
+      "runtimeId": "leper",
+      "level": 1,
+      "productionBindingId": "c2b:leper:profile:L1",
+      "action": "REPLACE_ON_C2D_MIGRATION"
+    },
+    {
+      "runtimeId": "leper",
+      "level": 2,
+      "productionBindingId": "c2b:leper:profile:L2",
+      "action": "REPLACE_ON_C2D_MIGRATION"
+    },
+    {
+      "runtimeId": "leper",
+      "level": 3,
+      "productionBindingId": "c2b:leper:profile:L3",
+      "action": "REPLACE_ON_C2D_MIGRATION"
+    }
+  ],
+  "migrationPerformed": false
+}

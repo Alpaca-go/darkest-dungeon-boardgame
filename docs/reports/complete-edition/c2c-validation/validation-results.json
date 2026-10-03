@@ -1,0 +1,128 @@
+{
+  "phase": "C2C",
+  "results": [
+    {
+      "command": "npm ci",
+      "exitCode": 0,
+      "elapsedMs": 48386,
+      "log": "ci.log"
+    },
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "elapsedMs": 42074,
+      "log": "typecheck.log"
+    },
+    {
+      "command": "npm test -- --maxWorkers=4 --minWorkers=4 --reporter=json --outputFile=tmp/c2c-final-tests.json",
+      "exitCode": 0,
+      "elapsedMs": 622347,
+      "log": "test.log",
+      "tests": {
+        "passed": 2855,
+        "failed": 0,
+        "pending": 0,
+        "todo": 0,
+        "failedSuites": 0
+      }
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "elapsedMs": 64481,
+      "log": "build.log"
+    },
+    {
+      "command": "npm run historical-baseline-validation",
+      "exitCode": 0,
+      "elapsedMs": 37317,
+      "log": "historical-baseline-validation.log"
+    },
+    {
+      "command": "npm run verify:immutable-phase-baselines",
+      "exitCode": 0,
+      "elapsedMs": 2593575,
+      "log": "verify-immutable-phase-baselines.log"
+    },
+    {
+      "command": "npm run verify:necromancer-successor-compatibility",
+      "exitCode": 0,
+      "elapsedMs": 82668,
+      "log": "verify-necromancer-successor-compatibility.log"
+    },
+    {
+      "command": "npm run verify:prophet-successor-compatibility",
+      "exitCode": 0,
+      "elapsedMs": 104747,
+      "log": "verify-prophet-successor-compatibility.log"
+    },
+    {
+      "command": "npm run verify:boss-successor-compatibility",
+      "exitCode": 0,
+      "elapsedMs": 100059,
+      "log": "verify-boss-successor-compatibility.log"
+    },
+    {
+      "command": "npm run verify:complete-edition-c1c38r1",
+      "exitCode": 0,
+      "elapsedMs": 28097,
+      "log": "verify-complete-edition-c1c38r1.log"
+    },
+    {
+      "command": "npm run verify:complete-edition-c2a",
+      "exitCode": 0,
+      "elapsedMs": 36835,
+      "log": "verify-complete-edition-c2a.log"
+    },
+    {
+      "command": "npm run verify:complete-edition-c2a-r1",
+      "exitCode": 0,
+      "elapsedMs": 6511,
+      "log": "verify-complete-edition-c2a-r1.log"
+    },
+    {
+      "command": "npm run verify:complete-edition-c2b",
+      "exitCode": 0,
+      "elapsedMs": 5880,
+      "log": "verify-complete-edition-c2b.log"
+    },
+    {
+      "command": "npm run audit:complete-edition-c2c",
+      "exitCode": 0,
+      "elapsedMs": 15509,
+      "log": "audit-complete-edition-c2c.log"
+    },
+    {
+      "command": "npm run verify:complete-edition-c2c",
+      "exitCode": 0,
+      "elapsedMs": 27365,
+      "log": "verify-complete-edition-c2c.log"
+    },
+    {
+      "command": "npm run test:e2e:built-bundle-successor",
+      "exitCode": 0,
+      "elapsedMs": 47610,
+      "log": "test-e2e-built-bundle-successor.log"
+    }
+  ],
+  "priorAttempts": [
+    {
+      "command": "npm test -- --maxWorkers=2 --minWorkers=2 --reporter=json --outputFile=tmp/c2c-final-tests.json",
+      "exitCode": 1,
+      "elapsedMs": 1087746,
+      "log": "prior-test.log"
+    },
+    {
+      "command": "npm run verify:complete-edition-c2a-r1",
+      "exitCode": 1,
+      "elapsedMs": 32757,
+      "log": "prior-verify-complete-edition-c2a-r1.log"
+    },
+    {
+      "command": "npm run verify:immutable-phase-baselines",
+      "exitCode": 1,
+      "elapsedMs": 1662967,
+      "log": "prior-verify-immutable-phase-baselines.log"
+    }
+  ]
+}
