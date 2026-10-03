@@ -6,6 +6,7 @@ import { createHash } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
 
 export const historicalBaselines = {
+  'c2a-r1': { phase: '11A.5-C2A-R1', commit: '173ca67adf0e9a1fa2af18693c0fc3bc42973217', script: 'scripts/audit/c2a-r1-transport-binding.ts', artifactPrefixes: ['c2a-r1-'] },
   c2a: { phase: '11A.5-C2A', commit: '3bb559868ab4e69c8276e85c364be7fbb3fc1d0b', script: 'scripts/audit/c2a-hero-source-census.ts', artifactPrefixes: ['c2a-'] },
   c1c38r1: { phase: 'C1C38R1', commit: '7f4001b956cac441778dbb457cc33041f9057ad5', script: 'scripts/audit/c1c38r1-source-intake.ts', artifactPrefixes: ['c1c38r1-'] },
   c1c38: { phase: 'C1C38', commit: 'dcf017cb2065440251caad8d31075b99bc6355e0', script: 'scripts/audit/c1c38-source-closure.ts', artifactPrefixes: ['c1c38-'] },
@@ -33,6 +34,13 @@ export function verifyHistoricalBaseline(phase: keyof typeof historicalBaselines
   const git = (args: string[]) => execFileSync('git', args, { maxBuffer: 128 * 1024 * 1024 });
   git(['merge-base', '--is-ancestor', commit, 'HEAD']);
   verifyHistoricalArtifacts(phase);
+  if (phase === 'c2a-r1' && !testFiles.length && !probe) {
+    const accepted = JSON.parse(readFileSync('docs/data/complete-edition/c2a-r1-hero-source-census-acceptance.json','utf8'));
+    if (accepted.outcome !== 'HERO_SOURCE_CENSUS_ACCEPTED' || !accepted.C2BAllowed || accepted.runtimeModified || accepted.prototypePromoted)
+      throw new Error('C2A-R1 immutable acceptance identity changed');
+    console.log('c2a-r1 immutable acceptance: PASS; HERO_SOURCE_CENSUS_ACCEPTED');
+    return;
+  }
   if (phase === 'c2a' && !testFiles.length && !probe) {
     const accepted = JSON.parse(readFileSync('docs/data/complete-edition/c2a-hero-source-census-acceptance.json','utf8'));
     if (accepted.outcome !== 'HERO_SOURCE_CENSUS_PARTIAL' || accepted.C2BAllowed || accepted.runtimeProductionReady)
@@ -131,11 +139,14 @@ export function verifyHistoricalArtifacts(phase: keyof typeof historicalBaseline
   const prefixes = 'artifactPrefixes' in checkpoint ? checkpoint.artifactPrefixes : [`${phase}-`];
   const git = (args: string[]) => execFileSync('git', args, {maxBuffer: 128 * 1024 * 1024});
   const entries = git(['ls-tree', '-r', '--name-only', commit]).toString().trim().split(/\r?\n/)
-    .filter(p => p.split('/').some(part=>prefixes.some(prefix=>part.startsWith(prefix))) || (phase === 'c2a' && /(^|[/_-])c2a([/_.-]|$)/.test(p)) || (phase === 'c1c38' && /(^|[/_-])c1c38([/_.-]|$)/.test(p)) || (phase === 'c1c38r1' && /(^|[/_-])c1c38r1([/_.-]|$)/.test(p)));
-  if (phase === 'c2a') {
+    .filter(p => p.split('/').some(part=>prefixes.some(prefix=>part.startsWith(prefix))) || (phase === 'c2a-r1' && /(^|[/_-])c2a-r1([/_.-]|$)/.test(p)) || (phase === 'c2a' && /(^|[/_-])c2a([/_.-]|$)/.test(p)) || (phase === 'c1c38' && /(^|[/_-])c1c38([/_.-]|$)/.test(p)) || (phase === 'c1c38r1' && /(^|[/_-])c1c38r1([/_.-]|$)/.test(p)));
+  if (phase === 'c2a' || phase === 'c2a-r1') {
     const actual=execFileSync('git',['hash-object','--stdin-paths'],{input:entries.join('\n')+'\n',maxBuffer:128*1024*1024}).toString().trim().split(/\r?\n/);
     const blobs=new Map(git(['ls-tree','-r',commit]).toString().trim().split(/\r?\n/).map(line=>{const [meta,path]=line.split('\t');return [path,meta.split(' ')[2]];}));
-    for(const [i,path] of entries.entries()) if(actual[i]!==blobs.get(path)) throw new Error('Frozen c2a evidence changed: '+path);
+    for(const [i,path] of entries.entries()) if(actual[i]!==blobs.get(path)) {
+      const original=git(['show', `${commit}:${path}`]);
+      if (!/\.(?:json|ts|mjs|py|md)$/.test(path) || original.toString('utf8').replace(/\r\n/g,'\n')!==readFileSync(path,'utf8').replace(/\r\n/g,'\n')) throw new Error('Frozen '+phase+' evidence changed: '+path);
+    }
     return entries.length;
   }
   for (const path of entries) if (!git(['show', `${commit}:${path}`]).equals(readFileSync(path))) throw new Error(`Frozen ${phase} evidence changed: ${path}`);

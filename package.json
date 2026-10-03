@@ -226,7 +226,9 @@
     "verify:complete-edition-c2a": "vite-node scripts/audit/c2a-hero-source-census.ts --verify",
     "test:complete-edition-c2a": "vitest run src/audit/c2a-hero-source-census.test.ts",
     "audit:complete-edition-c2a-r1": "vite-node scripts/audit/c2a-r1-transport-binding.ts --write",
-    "verify:complete-edition-c2a-r1": "vite-node scripts/audit/c2a-r1-transport-binding.ts --verify"
+    "verify:complete-edition-c2a-r1": "vite-node scripts/audit/c2a-r1-transport-binding.ts --verify",
+    "audit:complete-edition-c2b": "vite-node scripts/audit/c2b-hero-literal-closure.ts --write",
+    "verify:complete-edition-c2b": "vite-node scripts/audit/c2b-hero-literal-closure.ts --verify"
   },
   "dependencies": {
     "lucide-react": "^0.408.0",

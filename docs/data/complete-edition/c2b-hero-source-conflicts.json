@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.5-C2B",
+  "baseline": "173ca67adf0e9a1fa2af18693c0fc3bc42973217",
+  "reviewDate": "2026-10-03",
+  "sourcePolicyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "runtimeModified": false,
+  "prototypePromoted": false,
+  "runtimeImplementationAuthorized": false,
+  "conflicts": [
+    {
+      "conflictId": "C2B-CRUSADER-ZEALOUS-SPEECH-PREPARATION",
+      "heroId": "crusader",
+      "skillId": null,
+      "level": 1,
+      "field": "hamletAbility.preparationDays",
+      "kind": "GAMEPLAY_LITERAL",
+      "sourceA": {
+        "path": "docs/DD_EN_COREBOX_RULES.pdf",
+        "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+        "page": 10,
+        "region": "Crusader I anatomy example Hamlet box",
+        "authority": "OFFICIAL_RULEBOOK"
+      },
+      "sourceB": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+        "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+        "page": 1,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "literalA": "Preparation Days -1",
+      "literalB": "ABSENT; Only as the first action of a day; Day ends immediately; four Hero helmets -5 Stress",
+      "resolutionStatus": "SOURCE_UNRESOLVED",
+      "resolution": null,
+      "affectedLevels": [
+        1,
+        2,
+        3
+      ],
+      "promotionBlocked": true
+    },
+    {
+      "conflictId": "C2B-SELF-SHUFFLE-ROLL-ORDER",
+      "heroId": null,
+      "skillId": null,
+      "level": null,
+      "field": "selfMovement.rollOrdering",
+      "kind": "SHARED_SEMANTIC",
+      "sourceA": {
+        "path": "docs/DD_EN_COREBOX_RULES.pdf",
+        "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+        "page": 20,
+        "region": "Self Effects",
+        "authority": "OFFICIAL_RULEBOOK"
+      },
+      "sourceB": {
+        "path": "docs/DD_EN_COREBOX_RULES.pdf",
+        "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+        "page": 22,
+        "region": "Monster turn example step 6",
+        "authority": "OFFICIAL_RULEBOOK"
+      },
+      "literalA": "Self Effects after roll, before any other effects",
+      "literalB": "Self Pull 1 takes place before the attack roll in the example",
+      "resolutionStatus": "SOURCE_UNRESOLVED",
+      "resolution": null,
+      "promotionBlocked": true
+    }
+  ],
+  "unresolvedConflicts": 2,
+  "silentlyResolved": false
+}
