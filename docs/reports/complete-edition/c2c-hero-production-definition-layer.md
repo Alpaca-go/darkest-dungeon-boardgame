@@ -61,6 +61,12 @@ Guardian mutation subprocess timed out on one attempt; the complete immutable
 baseline retry passed, including all 2,729 original C1C35R2B-R1 tests. The final
 isolation proof covers 807 unchanged live source files and 1,359 frozen evidence
 files. Successor compatibility and the built-bundle smoke test also passed.
+The first remote gate (37146900300, HEAD 6aa26100ed2f9918b53ac02f7de2a1cd33ab35b0)
+failed at the C1C38 source-only verifier: its zero-diff source boundary rejects
+committed successor definition additions. C1C38 and C1C38R1 command entrypoints
+now use the existing immutable checkpoint verifier, preserving frozen evidence
+and accepted identities. Their auditors and adversarial tests remain unchanged;
+the live successor boundary is enforced by the C2C verifier.
 
 The data-layer acceptance is `HERO_PRODUCTION_DEFINITION_LAYER_ACCEPTED`.
 Final release acceptance additionally requires a successful Production release gate
