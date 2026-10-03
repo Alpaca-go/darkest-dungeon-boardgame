@@ -6,6 +6,7 @@ import { createHash } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
 
 export const historicalBaselines = {
+  c1c38r1: { phase: 'C1C38R1', commit: '7f4001b956cac441778dbb457cc33041f9057ad5', script: 'scripts/audit/c1c38r1-source-intake.ts', artifactPrefixes: ['c1c38r1-'] },
   c1c38: { phase: 'C1C38', commit: 'dcf017cb2065440251caad8d31075b99bc6355e0', script: 'scripts/audit/c1c38-source-closure.ts', artifactPrefixes: ['c1c38-'] },
   c1c37: { phase: 'C1C37', commit: '3ea7854b33dbfaf6dcbd85e3fb5bf86ffc55b0d3', script: 'scripts/audit/c1c37-successor.ts', artifactPrefixes: ['c1c37-'] },
   c1c36: { phase: 'C1C36', commit: '87f123b881fbbc44d79c312fe1aebb34eadea240', script: 'scripts/audit/c1c36-prophet-production-acceptance.ts', artifactPrefixes: ['c1c36-'] },
@@ -31,6 +32,13 @@ export function verifyHistoricalBaseline(phase: keyof typeof historicalBaselines
   const git = (args: string[]) => execFileSync('git', args, { maxBuffer: 128 * 1024 * 1024 });
   git(['merge-base', '--is-ancestor', commit, 'HEAD']);
   verifyHistoricalArtifacts(phase);
+  if (phase === 'c1c38r1' && !testFiles.length && !probe) {
+    const decision = JSON.parse(readFileSync('docs/data/complete-edition/c1c38r1-source-intake-decision.json', 'utf8'));
+    if (decision.outcome !== 'THING_OFFICIAL_SOURCE_INTAKE_PARTIAL' || decision.gateAPassed || decision.runtimeImplementationAuthorized || decision.C1C39Allowed)
+      throw new Error('C1C38R1 immutable acceptance identity changed');
+    console.log('c1c38r1 immutable acceptance: PASS; THING_OFFICIAL_SOURCE_INTAKE_PARTIAL');
+    return;
+  }
   if (phase === 'c1c38' && !testFiles.length && !probe) {
     const decision = JSON.parse(readFileSync('docs/data/complete-edition/c1c38-next-workstream-decision.json', 'utf8'));
     if (decision.outcome !== 'THING_SOURCE_CLOSURE_BLOCKED' || decision.gateAPassed || decision.runtimeImplementationAuthorized)
@@ -105,7 +113,7 @@ export function verifyHistoricalArtifacts(phase: keyof typeof historicalBaseline
   const prefixes = 'artifactPrefixes' in checkpoint ? checkpoint.artifactPrefixes : [`${phase}-`];
   const git = (args: string[]) => execFileSync('git', args, {maxBuffer: 128 * 1024 * 1024});
   const entries = git(['ls-tree', '-r', '--name-only', commit]).toString().trim().split(/\r?\n/)
-    .filter(p => p.split('/').some(part=>prefixes.some(prefix=>part.startsWith(prefix))) || (phase === 'c1c38' && /(^|[/_-])c1c38([/_.-]|$)/.test(p)));
+    .filter(p => p.split('/').some(part=>prefixes.some(prefix=>part.startsWith(prefix))) || (phase === 'c1c38' && /(^|[/_-])c1c38([/_.-]|$)/.test(p)) || (phase === 'c1c38r1' && /(^|[/_-])c1c38r1([/_.-]|$)/.test(p)));
   for (const path of entries) if (!git(['show', `${commit}:${path}`]).equals(readFileSync(path))) throw new Error(`Frozen ${phase} evidence changed: ${path}`);
   return entries.length;
 }

@@ -21,6 +21,7 @@ jobs:
       - run: npm run typecheck
       - run: npm run verify:complete-edition-c1c38
       - run: npm run verify:complete-edition-c1c38r1
+      - run: npm run verify:complete-edition-c2a
       - run: npm test -- --reporter=json --outputFile=tmp-c1c38-final-tests.json
       - run: npm run build
       - run: npm run historical-baseline-validation

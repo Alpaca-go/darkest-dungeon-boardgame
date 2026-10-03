@@ -1,0 +1,444 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.5-C2A",
+  "baseline": "7f4001b956cac441778dbb457cc33041f9057ad5",
+  "sourcePolicyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "reviewDate": "2026-10-02",
+  "runtimeModified": false,
+  "prototypePromoted": false,
+  "runtimeImplementationAuthorized": false,
+  "textHashNormalization": "LF; no other text normalization",
+  "files": [
+    {
+      "path": "docs/data/complete-edition/complete-edition-content-coverage.json",
+      "sha256": "e8b5b060aae09c69c20c4bd6a08215bc2442a84f2ade280ba8f57f973d88caea"
+    },
+    {
+      "path": "docs/data/complete-edition/complete-edition-raw-inventory.json",
+      "sha256": "f7bd06a7a726df301cefe26e10586c0fe3a870ceb92903d5190077cfaae66245"
+    },
+    {
+      "path": "docs/data/complete-edition/rule-source-policy.json",
+      "sha256": "ced6c1b05610623c4e98338bab6309b5114e61611937bc8555f53852df8149d0"
+    },
+    {
+      "path": "docs/data/complete-edition/c1c19-hero-caused-condition-source-contract.json",
+      "sha256": "e3adbf12d50d3b61d4a9d2b97b55724420113e6184fffdd3b5a30db4ef1bff88"
+    },
+    {
+      "path": "docs/data/complete-edition/c1c19-hero-skill-condition-source-gap.json",
+      "sha256": "89147fa5680ff3e8711d49f62405b9bef8c38d063de033c72c47435782f1b2da"
+    },
+    {
+      "path": "docs/data/complete-edition/c1c31-necromancer-required-hero-combat-coverage.json",
+      "sha256": "02a230ab0a9bba6e93d9bf32cfb83945ab8f1b3350ec53c0bdb911a35db92968"
+    },
+    {
+      "path": "docs/data/complete-edition/c1c31r-hero-dodge-final-table.json",
+      "sha256": "5cd913b9a84f54333077379c61235b1189f6d33a5e637b8416a1dfc9c3dbc425"
+    },
+    {
+      "path": "docs/data/complete-edition/c1c38r1-source-intake-decision.json",
+      "sha256": "9dfd602d9b1e8fe26555ee446663013d7a6e590ad61b5a3c3ac7df3d0f896bbc"
+    },
+    {
+      "path": "src/data/heroes.ts",
+      "sha256": "e3a423303385c5e0732dfa62a9b7e36ca15d3e619ee07f6117b4e1e04ccd043f"
+    },
+    {
+      "path": "src/data/skills.ts",
+      "sha256": "3343715f175815b8339f2e0e5d2c5135c74bdcd6f383e768f63d2cfdc3c4aff5"
+    },
+    {
+      "path": "src/data/hero-level-profiles.ts",
+      "sha256": "62b248996d8e67a0663f747511dab2dfb42330e5cac7200b043584ebae96c16f"
+    },
+    {
+      "path": "docs/data/complete-edition/source-assets/c2a/print-navigation.json",
+      "sha256": "2cfc94fddab670607a202b2f44d2e59ee1e96a59d9d2b84f0f8ba80252ea743a"
+    },
+    {
+      "path": "docs/data/complete-edition/source-assets/c2a/context-sources.json",
+      "sha256": "f3e94a2b7d83d3658e4b7567c9a1e9f0130cec81786915c1247deed63df0713d"
+    },
+    {
+      "path": "docs/data/complete-edition/source-assets/c2a/transport-match-navigation.json",
+      "sha256": "7e16ee0d58f3d8a3fc0782a1805c2781501c78f3efd0b45ba049f341e6926157"
+    },
+    {
+      "path": "docs/data/complete-edition/source-assets/c2a/transport-back-navigation.json",
+      "sha256": "7343decef3c2c8a78ab1a91b10f46f24f74c9c458a220cd880215bdf330dfe4c"
+    },
+    {
+      "path": "docs/data/complete-edition/source-assets/c2a/reviewed-transport-bindings.json",
+      "sha256": "b4b90c7a97070bfc7821b74eb4ee066a1ed12d6e92363e520a68aaed57e600aa"
+    },
+    {
+      "path": "docs/data/complete-edition/source-assets/c2a/transport/manifest.json",
+      "sha256": "62072643e5956f88619093bbe408158c6640d1ca29bad7262825f5d07a6b16c8"
+    }
+  ],
+  "reviewCodeSha256": "cab50a89d33d0a2870441e0846a1c3c2a79edd0153cbdad33c6027e009cc4fa9",
+  "reviewAtlases": [
+    {
+      "heroId": "crusader",
+      "path": "docs/data/complete-edition/source-assets/c2a/crusader-skills-review.png",
+      "sha256": "f46ab7f49227bbe98b11cec9528a370134a4b944d45c3d0776ee4fedfdd6f2fb"
+    },
+    {
+      "heroId": "crusader",
+      "path": "docs/data/complete-edition/source-assets/c2a/crusader-skills-back-review.png",
+      "sha256": "eb3f6e1aeda40828bc1f93c5627e1669907209de2ff9fb89489f4e3e665b2cef"
+    },
+    {
+      "heroId": "crusader",
+      "path": "docs/data/complete-edition/source-assets/c2a/crusader-transport-review.png",
+      "sha256": "9e9a43ba924a689f99cc50ac9b9be53ea8d04ca4de0cd64bf22acec2b5165924"
+    },
+    {
+      "heroId": "crusader",
+      "path": "docs/data/complete-edition/source-assets/c2a/crusader-transport-back-review.png",
+      "sha256": "dbbd294b3d6b11f75419365d0671977f56968fddb90a4a9f0ae0e2e5cb68127a"
+    },
+    {
+      "heroId": "hellion",
+      "path": "docs/data/complete-edition/source-assets/c2a/hellion-skills-review.png",
+      "sha256": "6ec7586ff35913e03df1122253157a64b7dccf76ec2947df56a5a1fbb1d89df4"
+    },
+    {
+      "heroId": "hellion",
+      "path": "docs/data/complete-edition/source-assets/c2a/hellion-skills-back-review.png",
+      "sha256": "dd1e8ef027a36b66547542a1480e637da2f3a087ebf2b6282c0681883d17ac69"
+    },
+    {
+      "heroId": "hellion",
+      "path": "docs/data/complete-edition/source-assets/c2a/hellion-transport-review.png",
+      "sha256": "49b4a7d7e8b6f96a9d4bbfac38494a6aa9662c16b3605c767a4e49dddbfbe4c1"
+    },
+    {
+      "heroId": "hellion",
+      "path": "docs/data/complete-edition/source-assets/c2a/hellion-transport-back-review.png",
+      "sha256": "483394eeab7d66b063a5f51d489f73cd2818f670d14badbb89c2026132eaf48b"
+    },
+    {
+      "heroId": "bounty-hunter",
+      "path": "docs/data/complete-edition/source-assets/c2a/bounty-hunter-skills-review.png",
+      "sha256": "3de23ff8a833641c7aa74d0923b0ab76354a9acb7a4e833ef99d8887c25f6094"
+    },
+    {
+      "heroId": "bounty-hunter",
+      "path": "docs/data/complete-edition/source-assets/c2a/bounty-hunter-skills-back-review.png",
+      "sha256": "51d887609a28f045ab945198e265b4be33e69c9ae80a6006b05a8bb745863ee2"
+    },
+    {
+      "heroId": "bounty-hunter",
+      "path": "docs/data/complete-edition/source-assets/c2a/bounty-hunter-transport-review.png",
+      "sha256": "32f08d1824f74da719faddfaad37e5201c6414b2baa44fb3d93ffa6a633fcd8a"
+    },
+    {
+      "heroId": "bounty-hunter",
+      "path": "docs/data/complete-edition/source-assets/c2a/bounty-hunter-transport-back-review.png",
+      "sha256": "5208ddeac8d1535f39e031f94143970d32a15fe42a1733538ea67dee271ca730"
+    },
+    {
+      "heroId": "highwayman",
+      "path": "docs/data/complete-edition/source-assets/c2a/highwayman-skills-review.png",
+      "sha256": "a2bd9194513e0812cf117d32954e1ce50d149b204be47ed678656af7c3de11bb"
+    },
+    {
+      "heroId": "highwayman",
+      "path": "docs/data/complete-edition/source-assets/c2a/highwayman-skills-back-review.png",
+      "sha256": "b2e78870bf3f215ec78318a057dbfd6eafa401e563b9e3c52564c5f40a146c4e"
+    },
+    {
+      "heroId": "highwayman",
+      "path": "docs/data/complete-edition/source-assets/c2a/highwayman-transport-review.png",
+      "sha256": "5fe223500be641d026d1eb5e19fdb64484fe2ee6e52210416a227c9996ef4565"
+    },
+    {
+      "heroId": "highwayman",
+      "path": "docs/data/complete-edition/source-assets/c2a/highwayman-transport-back-review.png",
+      "sha256": "522e948ff3d10ecdcc6efb85ab06b28ec7c73c87d1767e4a1bce9e2cdf0be7cb"
+    },
+    {
+      "heroId": "vestal",
+      "path": "docs/data/complete-edition/source-assets/c2a/vestal-skills-review.png",
+      "sha256": "5770510160d15d6902a7ad24ca23561a1dd068219acb517aaa5784e4c3db50e0"
+    },
+    {
+      "heroId": "vestal",
+      "path": "docs/data/complete-edition/source-assets/c2a/vestal-skills-back-review.png",
+      "sha256": "d891e25b9c120b1ac80d4f79241e6bc46aef5f5591f03db592c84b6cd7e5801b"
+    },
+    {
+      "heroId": "vestal",
+      "path": "docs/data/complete-edition/source-assets/c2a/vestal-transport-review.png",
+      "sha256": "a2425ea023427d84c79074913a7cb6155355937c46b83a9e5a9f9baa6d26a481"
+    },
+    {
+      "heroId": "vestal",
+      "path": "docs/data/complete-edition/source-assets/c2a/vestal-transport-back-review.png",
+      "sha256": "671fa3d512875ce2df7793d2d9d64e6d1ff3773680a9ee1253447485b81675ce"
+    },
+    {
+      "heroId": "jester",
+      "path": "docs/data/complete-edition/source-assets/c2a/jester-skills-review.png",
+      "sha256": "e4850ed5d4659407653525cd39952cbd21d0d626a427d24d9fc5e195136cc04b"
+    },
+    {
+      "heroId": "jester",
+      "path": "docs/data/complete-edition/source-assets/c2a/jester-skills-back-review.png",
+      "sha256": "c3165612b0ce253839ae747a972202e2867aaa45e6e302b3780ce44ac1aaf2a3"
+    },
+    {
+      "heroId": "jester",
+      "path": "docs/data/complete-edition/source-assets/c2a/jester-transport-review.png",
+      "sha256": "2f1225e34d10a94d90198a0ff89ad29be705edd01c348c268e98adfc806fc85c"
+    },
+    {
+      "heroId": "jester",
+      "path": "docs/data/complete-edition/source-assets/c2a/jester-transport-back-review.png",
+      "sha256": "ac591210aef5e8e4f9ea3c4ae8ab69da5c894db05d74d421c8180dbb1cfe53b9"
+    },
+    {
+      "heroId": "plague-doctor",
+      "path": "docs/data/complete-edition/source-assets/c2a/plague-doctor-skills-review.png",
+      "sha256": "1062230ea230a91af95089f3b7c53589b9031a4b3de639e86033de730a64e23d"
+    },
+    {
+      "heroId": "plague-doctor",
+      "path": "docs/data/complete-edition/source-assets/c2a/plague-doctor-skills-back-review.png",
+      "sha256": "541b3e44fb4734712d1a1c3c8d14e6cf1b5e22143753b62c3798905e58b3e73a"
+    },
+    {
+      "heroId": "plague-doctor",
+      "path": "docs/data/complete-edition/source-assets/c2a/plague-doctor-transport-review.png",
+      "sha256": "07d7ffad458c223186f3688126d939d769062b04f151382498710956732d90b1"
+    },
+    {
+      "heroId": "plague-doctor",
+      "path": "docs/data/complete-edition/source-assets/c2a/plague-doctor-transport-back-review.png",
+      "sha256": "a0866ac7fa938e193af26f6292974cef88bf40e9c58a0084395758e558b457a2"
+    },
+    {
+      "heroId": "arbalest",
+      "path": "docs/data/complete-edition/source-assets/c2a/arbalest-skills-review.png",
+      "sha256": "5e8e2a53020f0d4240f615891dd45e807789f9c0a334deeaa6fbcc3e6e901148"
+    },
+    {
+      "heroId": "arbalest",
+      "path": "docs/data/complete-edition/source-assets/c2a/arbalest-skills-back-review.png",
+      "sha256": "96f610633b5fb2d748cade0585924798c8ae927652d31b66c730ab28357db932"
+    },
+    {
+      "heroId": "arbalest",
+      "path": "docs/data/complete-edition/source-assets/c2a/arbalest-transport-review.png",
+      "sha256": "c93f928c63d6eef3a2f271ee67d4d412219fcbea56e0935a1770e112e311ed58"
+    },
+    {
+      "heroId": "arbalest",
+      "path": "docs/data/complete-edition/source-assets/c2a/arbalest-transport-back-review.png",
+      "sha256": "df7e8ae6aed18335076f14608ab6ee432d7f7086b1b60d02f13cd8e0bd43474a"
+    },
+    {
+      "heroId": "grave-robber",
+      "path": "docs/data/complete-edition/source-assets/c2a/grave-robber-skills-review.png",
+      "sha256": "c9590842c2aba681aa43a8062ea9e3856018f3b779e4dc46836ffaeb8f111000"
+    },
+    {
+      "heroId": "grave-robber",
+      "path": "docs/data/complete-edition/source-assets/c2a/grave-robber-skills-back-review.png",
+      "sha256": "d981ae5f369b1183ef72529b784882681acb504802f48b8423f2382215500ba3"
+    },
+    {
+      "heroId": "grave-robber",
+      "path": "docs/data/complete-edition/source-assets/c2a/grave-robber-transport-review.png",
+      "sha256": "25931d50cbe761357010c9e8f8868f711002b2dc373b49621c49618057502c54"
+    },
+    {
+      "heroId": "grave-robber",
+      "path": "docs/data/complete-edition/source-assets/c2a/grave-robber-transport-back-review.png",
+      "sha256": "66bdb4189e6914d58b485a5c9fb1ddc44aac4272ec6bdc06f74d43e6bb4d9c07"
+    },
+    {
+      "heroId": "occultist",
+      "path": "docs/data/complete-edition/source-assets/c2a/occultist-skills-review.png",
+      "sha256": "49727938ba208cf9761edec73cd0667af5d17896233fc689e14d3b4404ba2b4f"
+    },
+    {
+      "heroId": "occultist",
+      "path": "docs/data/complete-edition/source-assets/c2a/occultist-skills-back-review.png",
+      "sha256": "059b387d6eec7c6af59fabca61bdc4b91ce867ff424e858337606cddbf69a3fb"
+    },
+    {
+      "heroId": "occultist",
+      "path": "docs/data/complete-edition/source-assets/c2a/occultist-transport-review.png",
+      "sha256": "e988456570a56db62e9c2e8420ad4b2c9653d0a587d8d5e933bf4027d350d481"
+    },
+    {
+      "heroId": "occultist",
+      "path": "docs/data/complete-edition/source-assets/c2a/occultist-transport-back-review.png",
+      "sha256": "e03ea875b87224492fc136158cbfe1c37aee82b521d2b860d16533e96f33d474"
+    },
+    {
+      "heroId": "abomination",
+      "path": "docs/data/complete-edition/source-assets/c2a/abomination-skills-review.png",
+      "sha256": "392154a236c7ff219b3d797e240f833334019d90767b8304f865fdb187f78ccc"
+    },
+    {
+      "heroId": "abomination",
+      "path": "docs/data/complete-edition/source-assets/c2a/abomination-skills-back-review.png",
+      "sha256": "e0d98123bcc38ea909ced4f0480b85c70008a60487271c736b51ccb40bc08d40"
+    },
+    {
+      "heroId": "abomination",
+      "path": "docs/data/complete-edition/source-assets/c2a/abomination-transport-review.png",
+      "sha256": "85f7efd3f7d98243450bda5b3da30604ffe31ca29c0677f447804025a7214b23"
+    },
+    {
+      "heroId": "abomination",
+      "path": "docs/data/complete-edition/source-assets/c2a/abomination-transport-back-review.png",
+      "sha256": "c3801f9a1e4bc10622a43440acf95633f5dfc81850056f2319a683e1922efc68"
+    },
+    {
+      "heroId": "man-at-arms",
+      "path": "docs/data/complete-edition/source-assets/c2a/man-at-arms-skills-review.png",
+      "sha256": "71102c00b7fd198e675d0007454325098ce842c6b336c716daff92d21d147c6b"
+    },
+    {
+      "heroId": "man-at-arms",
+      "path": "docs/data/complete-edition/source-assets/c2a/man-at-arms-skills-back-review.png",
+      "sha256": "89e6f34db0f59ae11c8f8d05873ac877e26af16b89a59356f794b29c6ac20fa9"
+    },
+    {
+      "heroId": "man-at-arms",
+      "path": "docs/data/complete-edition/source-assets/c2a/man-at-arms-transport-review.png",
+      "sha256": "e930d58963b4ef80c8406e4664bf6cbdf5048ca8bb4d308b53c96e1f741b50f0"
+    },
+    {
+      "heroId": "man-at-arms",
+      "path": "docs/data/complete-edition/source-assets/c2a/man-at-arms-transport-back-review.png",
+      "sha256": "8cf25a3fd7d9b706ca353ee4a1f36c5af0e6c1be0a5cbf144a872ff163f84614"
+    },
+    {
+      "heroId": "flagellant",
+      "path": "docs/data/complete-edition/source-assets/c2a/flagellant-skills-review.png",
+      "sha256": "a02662f4eadba3a5abad2eb3bd2f742cc52749eb867eefd477b7e6555a85b50d"
+    },
+    {
+      "heroId": "flagellant",
+      "path": "docs/data/complete-edition/source-assets/c2a/flagellant-skills-back-review.png",
+      "sha256": "4a6af945a018e19bcef5eec5efde79c694fb0c1f16659377d39c3bf1ead84035"
+    },
+    {
+      "heroId": "flagellant",
+      "path": "docs/data/complete-edition/source-assets/c2a/flagellant-transport-review.png",
+      "sha256": "1f8585e688eeb734e5aef00a97b370a86f00b5e4b75180224f86e23554f5ef3c"
+    },
+    {
+      "heroId": "flagellant",
+      "path": "docs/data/complete-edition/source-assets/c2a/flagellant-transport-back-review.png",
+      "sha256": "06c728fd53de1dc6d4059eebabffa9e85630fc623778231ef27519073d133171"
+    },
+    {
+      "heroId": "leper",
+      "path": "docs/data/complete-edition/source-assets/c2a/leper-skills-review.png",
+      "sha256": "f10b06cb8a46f85249bfe594eb77733f12831d0296b7b0fd292e68adb93423c9"
+    },
+    {
+      "heroId": "leper",
+      "path": "docs/data/complete-edition/source-assets/c2a/leper-skills-back-review.png",
+      "sha256": "04bc54bf2e5c253e30116ac520b4b5d7e1f1966eb1f79fa2721f6dc606f02df1"
+    },
+    {
+      "heroId": "leper",
+      "path": "docs/data/complete-edition/source-assets/c2a/leper-transport-review.png",
+      "sha256": "2c16269b3db1e29f7a5ddd318bbd4bbe6bfe0a622c79974dc8bd6a7698194dc9"
+    },
+    {
+      "heroId": "leper",
+      "path": "docs/data/complete-edition/source-assets/c2a/leper-transport-back-review.png",
+      "sha256": "b597bd83d9e51766648a0d5d0a5927d16985ccb271c5fd1096db85f858478e18"
+    },
+    {
+      "heroId": "antiquarian",
+      "path": "docs/data/complete-edition/source-assets/c2a/antiquarian-skills-review.png",
+      "sha256": "ea97e94f7c5f93fc69da8602019e987111ae7c5c0b741fcde5d15ced5017c5ac"
+    },
+    {
+      "heroId": "antiquarian",
+      "path": "docs/data/complete-edition/source-assets/c2a/antiquarian-skills-back-review.png",
+      "sha256": "0a950e96b6765d813f792704d174847113ccfdf3e2048d1484eebd08d2fb8672"
+    },
+    {
+      "heroId": "antiquarian",
+      "path": "docs/data/complete-edition/source-assets/c2a/antiquarian-transport-review.png",
+      "sha256": "9bf7ab9feacb3c4d40ddea0d544483a22691b6ba407f4c35c374a074eff0c0e2"
+    },
+    {
+      "heroId": "antiquarian",
+      "path": "docs/data/complete-edition/source-assets/c2a/antiquarian-transport-back-review.png",
+      "sha256": "915632047a2fc787996b2717f08a913b485cf829d926965f21573276b93bd90f"
+    },
+    {
+      "heroId": "shieldbreaker",
+      "path": "docs/data/complete-edition/source-assets/c2a/shieldbreaker-skills-review.png",
+      "sha256": "07cdf0309cf7048a582c26ddbe60293e9e444057b17d6a3430fe24fdd26d6cdf"
+    },
+    {
+      "heroId": "shieldbreaker",
+      "path": "docs/data/complete-edition/source-assets/c2a/shieldbreaker-skills-back-review.png",
+      "sha256": "1913329f8b59a235c643be2a9028302d84be8df973d455daf3b488cb1b9c5993"
+    },
+    {
+      "heroId": "shieldbreaker",
+      "path": "docs/data/complete-edition/source-assets/c2a/shieldbreaker-transport-review.png",
+      "sha256": "4f098a842d8b30418088ae927b6bf00752758740ce46fe86245839758093596d"
+    },
+    {
+      "heroId": "shieldbreaker",
+      "path": "docs/data/complete-edition/source-assets/c2a/shieldbreaker-transport-back-review.png",
+      "sha256": "8c7bc807ff8876af4e5db9bafe98089ac5bc8b8fc54e5d8333bcd66e0ea348a6"
+    },
+    {
+      "heroId": "hound-master",
+      "path": "docs/data/complete-edition/source-assets/c2a/hound-master-skills-review.png",
+      "sha256": "172be492fbaab529d7b4d28d1ce28dcdc55d202ab8a2c936d21e625965ed0eda"
+    },
+    {
+      "heroId": "hound-master",
+      "path": "docs/data/complete-edition/source-assets/c2a/hound-master-skills-back-review.png",
+      "sha256": "fe145523a6f3aa7f89a8c8fcba6a3bd0f1fe1a05371be43fb3ac89191802d694"
+    },
+    {
+      "heroId": "hound-master",
+      "path": "docs/data/complete-edition/source-assets/c2a/hound-master-transport-review.png",
+      "sha256": "8495695e39efd1643e4850d47098858a589d248b197b76327995a5fac2a93be3"
+    },
+    {
+      "heroId": "hound-master",
+      "path": "docs/data/complete-edition/source-assets/c2a/hound-master-transport-back-review.png",
+      "sha256": "d4bc80e27ff071912272825a7cc13c3619df2b4493511f0a3a34635b979a8aa2"
+    },
+    {
+      "heroId": "musketeer",
+      "path": "docs/data/complete-edition/source-assets/c2a/musketeer-skills-review.png",
+      "sha256": "f3936be8cb89e90d0df60fc5882694a1b079ce59e980290abd106fd1bf21a74c"
+    },
+    {
+      "heroId": "musketeer",
+      "path": "docs/data/complete-edition/source-assets/c2a/musketeer-skills-back-review.png",
+      "sha256": "4ae7fbd54bc418f28d1d3e2301772628d73a95b3a20050466ed688c8d37904db"
+    },
+    {
+      "heroId": "musketeer",
+      "path": "docs/data/complete-edition/source-assets/c2a/musketeer-transport-review.png",
+      "sha256": "250131e2daf30a5fdae30bd6add4d21bdd7f3e68d79c57dc70fbc3182ad07f36"
+    },
+    {
+      "heroId": "musketeer",
+      "path": "docs/data/complete-edition/source-assets/c2a/musketeer-transport-back-review.png",
+      "sha256": "4f88974d7bd72b45cee97848fd5f9f2116b290b3c33868374d533f5b5d913f41"
+    }
+  ]
+}
