@@ -16,7 +16,7 @@ Abomination contributes six gameplay Profile faces within three logical Levels, 
 
 ## Official-source blockers
 
-1. **Crusader / Zealous Speech / Level I / Preparation Days.** The locked Core rulebook page 10 board example prints `Preparation Days -1`. The accepted official Profile I omits this clause. The II/III Profile literals are retained independently; the shared Hamlet action cannot be promoted by choosing a source precedence. Both sources, page hashes, visible clauses and affected forms appear in `c2b-hero-source-conflicts.json`.
+1. **Crusader / Zealous Speech / Levels I–III / Preparation Days.** The locked Core rulebook page 10 board example prints `Preparation Days -1`; page 5 also shows the clause on all three Levels. The accepted official Profiles omit it. Page 33 moves the day counter down after all Heroes have spent their day; it does not establish whether the separately printed reduction is an additional charge or an explanation of immediate termination. No source precedence, equivalence or extra decrement is assumed. All source pairs, page hashes, visible clauses and affected forms appear in `c2b-hero-source-conflicts.json`.
 2. **Self Shuffle / roll ordering.** The Core rulebook page 20 says Self effects occur after the roll. Page 22's Monster-turn example performs Self Pull before the roll. No ordering is silently selected for Hero Self movement.
 
 Missing precedence or omitted official clarification remains `SOURCE_UNRESOLVED`; no FAQ, community, TTS-script or videogame clarification was acquired. No project ruling was approved.
@@ -31,7 +31,7 @@ All combat and Hamlet glyphs are retained. Skill pictograms remain illustrative,
 
 Semantic accounting: 51 forms have complete source and candidate semantics; 381 remain partial. Of those, 378 require a future versioned digital serialization contract review and 123 also have unresolved source semantics. These categories overlap. The executable-field matrix records authority, canonical status, explicit absence, literal status and semantic status separately. This is preparation for C2C, never runtime registration.
 
-The Dodge comparison covers all 54 Hero/Level pairs against `C1C31-DIGITAL-DEFAULT-v2`; it does not overwrite that ruling. The C1C19 successor links preserve the historical artifacts and identify the stronger printed evidence: Holy Lance and Wicked Slice print no Bleed, while Open Vein and Barbaric Yawp supply independent durations.
+The Dodge comparison covers all 54 Hero/Level pairs against `C1C31-DIGITAL-DEFAULT-v2`; it does not overwrite that ruling. The C1C19 successor links preserve the historical artifacts and identify the stronger printed evidence: Holy Lance and Wicked Slice print no Bleed, and Open Vein supplies independent durations. Prototype Bash has no official counterpart in the frozen C2A identity map; its historical gap remains open. Barbaric Yawp is a separate canonical Skill and does not close Bash's gap. A future legacy-save mapping requires an explicit versioned project decision.
 
 ## Deliverables and checks
 

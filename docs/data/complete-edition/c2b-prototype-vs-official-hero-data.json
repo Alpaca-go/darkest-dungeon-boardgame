@@ -935,6 +935,19 @@
       "skillId": "crusader-smite",
       "runtimeSkillId": "crusader-smite",
       "level": 1,
+      "field": "critHeal",
+      "printedOfficialValue": null,
+      "comparisonCandidate": null,
+      "prototypeRuntimeValue": null,
+      "status": "MISSING_RUNTIME_FIELD",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "crusader",
+      "skillId": "crusader-smite",
+      "runtimeSkillId": "crusader-smite",
+      "level": 1,
       "field": "accuracy",
       "printedOfficialValue": 9,
       "comparisonCandidate": 9,
@@ -1282,6 +1295,19 @@
       "field": "critDamage",
       "printedOfficialValue": 13,
       "comparisonCandidate": 13,
+      "prototypeRuntimeValue": null,
+      "status": "MISSING_RUNTIME_FIELD",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "crusader",
+      "skillId": "crusader-holy-lance",
+      "runtimeSkillId": "crusader-holy-lance",
+      "level": 1,
+      "field": "critHeal",
+      "printedOfficialValue": null,
+      "comparisonCandidate": null,
       "prototypeRuntimeValue": null,
       "status": "MISSING_RUNTIME_FIELD",
       "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
@@ -1649,6 +1675,19 @@
       "skillId": "crusader-bulwark-of-faith",
       "runtimeSkillId": "crusader-bulwark",
       "level": 1,
+      "field": "critHeal",
+      "printedOfficialValue": null,
+      "comparisonCandidate": null,
+      "prototypeRuntimeValue": null,
+      "status": "MISSING_RUNTIME_FIELD",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "crusader",
+      "skillId": "crusader-bulwark-of-faith",
+      "runtimeSkillId": "crusader-bulwark",
+      "level": 1,
       "field": "accuracy",
       "printedOfficialValue": null,
       "comparisonCandidate": null,
@@ -1990,6 +2029,19 @@
       "field": "critDamage",
       "printedOfficialValue": null,
       "comparisonCandidate": null,
+      "prototypeRuntimeValue": null,
+      "status": "MISSING_RUNTIME_FIELD",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "crusader",
+      "skillId": "crusader-battle-heal",
+      "runtimeSkillId": "crusader-battle-heal",
+      "level": 1,
+      "field": "critHeal",
+      "printedOfficialValue": 4,
+      "comparisonCandidate": 4,
       "prototypeRuntimeValue": null,
       "status": "MISSING_RUNTIME_FIELD",
       "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
@@ -2359,6 +2411,19 @@
       "skillId": "vestal-divine-grace",
       "runtimeSkillId": "vestal-divine-grace",
       "level": 1,
+      "field": "critHeal",
+      "printedOfficialValue": 5,
+      "comparisonCandidate": 5,
+      "prototypeRuntimeValue": null,
+      "status": "MISSING_RUNTIME_FIELD",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "vestal",
+      "skillId": "vestal-divine-grace",
+      "runtimeSkillId": "vestal-divine-grace",
+      "level": 1,
       "field": "accuracy",
       "printedOfficialValue": 12,
       "comparisonCandidate": 12,
@@ -2716,6 +2781,19 @@
       "skillId": "vestal-judgement",
       "runtimeSkillId": "vestal-judgement",
       "level": 1,
+      "field": "critHeal",
+      "printedOfficialValue": null,
+      "comparisonCandidate": null,
+      "prototypeRuntimeValue": null,
+      "status": "MISSING_RUNTIME_FIELD",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "vestal",
+      "skillId": "vestal-judgement",
+      "runtimeSkillId": "vestal-judgement",
+      "level": 1,
       "field": "accuracy",
       "printedOfficialValue": 9,
       "comparisonCandidate": 9,
@@ -3043,15 +3121,43 @@
       "prototypeAuthority": false
     },
     {
-      "skillId": "vestal-sanctuary",
+      "heroId": "vestal",
+      "skillId": null,
+      "runtimeSkillId": "vestal-sanctuary",
+      "level": 1,
+      "field": "unmatchedPrototypeDefinition",
       "status": "PLACEHOLDER",
       "printedOfficialValue": null,
+      "prototypeRuntimeValue": {
+        "damage": null,
+        "heal": null,
+        "accuracy": 10,
+        "range": 0,
+        "targetSide": "self",
+        "conditionsRaw": null
+      },
+      "identityClassification": "PROTOTYPE_ONLY_NO_OFFICIAL_COUNTERPART",
+      "identityAuthority": "docs/data/complete-edition/c2a-prototype-hero-data-comparison.json",
       "prototypeAuthority": false
     },
     {
-      "skillId": "vestal-mantra",
+      "heroId": "vestal",
+      "skillId": null,
+      "runtimeSkillId": "vestal-mantra",
+      "level": 1,
+      "field": "unmatchedPrototypeDefinition",
       "status": "PLACEHOLDER",
       "printedOfficialValue": null,
+      "prototypeRuntimeValue": {
+        "damage": null,
+        "heal": null,
+        "accuracy": 10,
+        "range": 0,
+        "targetSide": "self",
+        "conditionsRaw": null
+      },
+      "identityClassification": "PROTOTYPE_ONLY_NO_OFFICIAL_COUNTERPART",
+      "identityAuthority": "docs/data/complete-edition/c2a-prototype-hero-data-comparison.json",
       "prototypeAuthority": false
     },
     {
@@ -3075,6 +3181,19 @@
       "field": "critDamage",
       "printedOfficialValue": 9,
       "comparisonCandidate": 9,
+      "prototypeRuntimeValue": null,
+      "status": "MISSING_RUNTIME_FIELD",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "highwayman",
+      "skillId": "highwayman-pistol-shot",
+      "runtimeSkillId": "highwayman-pistol-shot",
+      "level": 1,
+      "field": "critHeal",
+      "printedOfficialValue": null,
+      "comparisonCandidate": null,
       "prototypeRuntimeValue": null,
       "status": "MISSING_RUNTIME_FIELD",
       "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
@@ -3443,6 +3562,19 @@
       "skillId": "highwayman-wicked-slice",
       "runtimeSkillId": "highwayman-wicked-slice",
       "level": 1,
+      "field": "critHeal",
+      "printedOfficialValue": null,
+      "comparisonCandidate": null,
+      "prototypeRuntimeValue": null,
+      "status": "MISSING_RUNTIME_FIELD",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "highwayman",
+      "skillId": "highwayman-wicked-slice",
+      "runtimeSkillId": "highwayman-wicked-slice",
+      "level": 1,
       "field": "accuracy",
       "printedOfficialValue": 9,
       "comparisonCandidate": 9,
@@ -3791,6 +3923,19 @@
       "field": "critDamage",
       "printedOfficialValue": 8,
       "comparisonCandidate": 8,
+      "prototypeRuntimeValue": null,
+      "status": "MISSING_RUNTIME_FIELD",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "highwayman",
+      "skillId": "highwayman-duelists-advance",
+      "runtimeSkillId": "highwayman-duelist",
+      "level": 1,
+      "field": "critHeal",
+      "printedOfficialValue": null,
+      "comparisonCandidate": null,
       "prototypeRuntimeValue": null,
       "status": "MISSING_RUNTIME_FIELD",
       "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
@@ -4159,6 +4304,19 @@
       "skillId": "highwayman-open-vein",
       "runtimeSkillId": "highwayman-open-vein",
       "level": 1,
+      "field": "critHeal",
+      "printedOfficialValue": null,
+      "comparisonCandidate": null,
+      "prototypeRuntimeValue": null,
+      "status": "MISSING_RUNTIME_FIELD",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "highwayman",
+      "skillId": "highwayman-open-vein",
+      "runtimeSkillId": "highwayman-open-vein",
+      "level": 1,
       "field": "accuracy",
       "printedOfficialValue": 10,
       "comparisonCandidate": 10,
@@ -4517,6 +4675,19 @@
       "skillId": "hellion-iron-swan",
       "runtimeSkillId": "hellion-iron-swan",
       "level": 1,
+      "field": "critHeal",
+      "printedOfficialValue": null,
+      "comparisonCandidate": null,
+      "prototypeRuntimeValue": null,
+      "status": "MISSING_RUNTIME_FIELD",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "hellion",
+      "skillId": "hellion-iron-swan",
+      "runtimeSkillId": "hellion-iron-swan",
+      "level": 1,
       "field": "accuracy",
       "printedOfficialValue": 9,
       "comparisonCandidate": 9,
@@ -4843,9 +5014,23 @@
       "prototypeAuthority": false
     },
     {
-      "skillId": "hellion-bash",
+      "heroId": "hellion",
+      "skillId": null,
+      "runtimeSkillId": "hellion-bash",
+      "level": 1,
+      "field": "unmatchedPrototypeDefinition",
       "status": "PLACEHOLDER",
       "printedOfficialValue": null,
+      "prototypeRuntimeValue": {
+        "damage": 5,
+        "heal": null,
+        "accuracy": 8,
+        "range": 1,
+        "targetSide": "enemy",
+        "conditionsRaw": "[{ type: 'stun', amount: 1 }],"
+      },
+      "identityClassification": "PROTOTYPE_ONLY_NO_OFFICIAL_COUNTERPART",
+      "identityAuthority": "docs/data/complete-edition/c2a-prototype-hero-data-comparison.json",
       "prototypeAuthority": false
     },
     {
@@ -4869,6 +5054,19 @@
       "field": "critDamage",
       "printedOfficialValue": 6,
       "comparisonCandidate": 6,
+      "prototypeRuntimeValue": null,
+      "status": "MISSING_RUNTIME_FIELD",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "hellion",
+      "skillId": "hellion-breakthrough",
+      "runtimeSkillId": "hellion-breakthrough",
+      "level": 1,
+      "field": "critHeal",
+      "printedOfficialValue": null,
+      "comparisonCandidate": null,
       "prototypeRuntimeValue": null,
       "status": "MISSING_RUNTIME_FIELD",
       "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
@@ -5237,6 +5435,19 @@
       "skillId": "hellion-adrenaline-rush",
       "runtimeSkillId": "hellion-adrenaline-rush",
       "level": 1,
+      "field": "critHeal",
+      "printedOfficialValue": null,
+      "comparisonCandidate": null,
+      "prototypeRuntimeValue": null,
+      "status": "MISSING_RUNTIME_FIELD",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "hellion",
+      "skillId": "hellion-adrenaline-rush",
+      "runtimeSkillId": "hellion-adrenaline-rush",
+      "level": 1,
       "field": "accuracy",
       "printedOfficialValue": null,
       "comparisonCandidate": null,
@@ -5558,8 +5769,1305 @@
       "prototypeRuntimeValue": "SKILL_LEVEL_BONUS (comparison only)",
       "status": "PLACEHOLDER",
       "prototypeAuthority": false
+    },
+    {
+      "heroId": "leper",
+      "skillId": "leper-hew",
+      "runtimeSkillId": "leper-hew",
+      "level": 1,
+      "field": "crit",
+      "printedOfficialValue": 0,
+      "comparisonCandidate": 0,
+      "prototypeRuntimeValue": null,
+      "status": "MISSING_RUNTIME_FIELD",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "leper",
+      "skillId": "leper-hew",
+      "runtimeSkillId": "leper-hew",
+      "level": 1,
+      "field": "critDamage",
+      "printedOfficialValue": 9,
+      "comparisonCandidate": 9,
+      "prototypeRuntimeValue": null,
+      "status": "MISSING_RUNTIME_FIELD",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "leper",
+      "skillId": "leper-hew",
+      "runtimeSkillId": "leper-hew",
+      "level": 1,
+      "field": "critHeal",
+      "printedOfficialValue": null,
+      "comparisonCandidate": null,
+      "prototypeRuntimeValue": null,
+      "status": "MISSING_RUNTIME_FIELD",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "leper",
+      "skillId": "leper-hew",
+      "runtimeSkillId": "leper-hew",
+      "level": 1,
+      "field": "accuracy",
+      "printedOfficialValue": 7,
+      "comparisonCandidate": 7,
+      "prototypeRuntimeValue": null,
+      "status": "MISSING_RUNTIME_FIELD",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "leper",
+      "skillId": "leper-hew",
+      "runtimeSkillId": "leper-hew",
+      "level": 1,
+      "field": "damage",
+      "printedOfficialValue": 6,
+      "comparisonCandidate": 6,
+      "prototypeRuntimeValue": 7,
+      "status": "PROTOTYPE_MISMATCH",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "leper",
+      "skillId": "leper-hew",
+      "runtimeSkillId": "leper-hew",
+      "level": 1,
+      "field": "heal",
+      "printedOfficialValue": null,
+      "comparisonCandidate": null,
+      "prototypeRuntimeValue": null,
+      "status": "MISSING_RUNTIME_FIELD",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "leper",
+      "skillId": "leper-hew",
+      "runtimeSkillId": "leper-hew",
+      "level": 1,
+      "field": "range",
+      "printedOfficialValue": "1",
+      "comparisonCandidate": 1,
+      "prototypeRuntimeValue": 1,
+      "status": "MATCH",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "leper",
+      "skillId": "leper-hew",
+      "runtimeSkillId": "leper-hew",
+      "level": 1,
+      "field": "targeting",
+      "printedOfficialValue": {
+        "printedNotation": "M2",
+        "groups": [
+          {
+            "side": "MONSTER",
+            "glyph": "monster-target",
+            "count": 2
+          }
+        ],
+        "self": false,
+        "allAllies": false
+      },
+      "prototypeRuntimeValue": null,
+      "status": "UNSUPPORTED_SOURCE_SEMANTIC",
+      "reason": "Prototype target side / position abstraction is not the printed Area and icon-count contract.",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "leper",
+      "skillId": "leper-hew",
+      "runtimeSkillId": "leper-hew",
+      "level": 1,
+      "field": "usableFromStances",
+      "printedOfficialValue": [
+        "defensive",
+        "aggressive"
+      ],
+      "prototypeRuntimeValue": null,
+      "status": "UNSUPPORTED_SOURCE_SEMANTIC",
+      "reason": "Prototype target side / position abstraction is not the printed Area and icon-count contract.",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "leper",
+      "skillId": "leper-hew",
+      "runtimeSkillId": "leper-hew",
+      "level": 1,
+      "field": "targetableStances",
+      "printedOfficialValue": null,
+      "prototypeRuntimeValue": null,
+      "status": "UNSUPPORTED_SOURCE_SEMANTIC",
+      "reason": "Prototype target side / position abstraction is not the printed Area and icon-count contract.",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "leper",
+      "skillId": "leper-hew",
+      "runtimeSkillId": "leper-hew",
+      "level": 1,
+      "field": "conditions/selfEffects/targetEffects",
+      "printedOfficialValue": "",
+      "prototypeRuntimeValue": null,
+      "status": "UNSUPPORTED_SOURCE_SEMANTIC",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "leper",
+      "skillId": "leper-hew",
+      "runtimeSkillId": "leper-hew",
+      "level": 2,
+      "field": "independentLevelDefinition",
+      "printedOfficialValue": {
+        "crit": {
+          "printed": "PRESENT",
+          "literal": 0,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 278,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "critDamage": {
+          "printed": "PRESENT",
+          "literal": 12,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 278,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "critHeal": {
+          "printed": "ABSENT",
+          "literal": null,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 278,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "accuracy": {
+          "printed": "PRESENT",
+          "literal": 8,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 278,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "damage": {
+          "printed": "PRESENT",
+          "literal": 8,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 278,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "heal": {
+          "printed": "ABSENT",
+          "literal": null,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 278,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "resourceCosts": {
+          "printed": "ABSENT",
+          "literal": null,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": []
+        }
+      },
+      "prototypeRuntimeValue": "SKILL_LEVEL_BONUS (comparison only)",
+      "status": "PLACEHOLDER",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "leper",
+      "skillId": "leper-hew",
+      "runtimeSkillId": "leper-hew",
+      "level": 3,
+      "field": "independentLevelDefinition",
+      "printedOfficialValue": {
+        "crit": {
+          "printed": "PRESENT",
+          "literal": 0,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 279,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "critDamage": {
+          "printed": "PRESENT",
+          "literal": 16,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 279,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "critHeal": {
+          "printed": "ABSENT",
+          "literal": null,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 279,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "accuracy": {
+          "printed": "PRESENT",
+          "literal": 9,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 279,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "damage": {
+          "printed": "PRESENT",
+          "literal": 10,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 279,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "heal": {
+          "printed": "ABSENT",
+          "literal": null,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 279,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "resourceCosts": {
+          "printed": "ABSENT",
+          "literal": null,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": []
+        }
+      },
+      "prototypeRuntimeValue": "SKILL_LEVEL_BONUS (comparison only)",
+      "status": "PLACEHOLDER",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "leper",
+      "skillId": null,
+      "runtimeSkillId": "leper-fortify",
+      "level": 1,
+      "field": "unmatchedPrototypeDefinition",
+      "status": "PLACEHOLDER",
+      "printedOfficialValue": null,
+      "prototypeRuntimeValue": {
+        "damage": null,
+        "heal": null,
+        "accuracy": null,
+        "range": 0,
+        "targetSide": null,
+        "conditionsRaw": null
+      },
+      "identityClassification": "PROTOTYPE_ONLY_NO_OFFICIAL_COUNTERPART",
+      "identityAuthority": "docs/data/complete-edition/c2a-prototype-hero-data-comparison.json",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "leper",
+      "skillId": null,
+      "runtimeSkillId": "leper-reposition",
+      "level": 1,
+      "field": "unmatchedPrototypeDefinition",
+      "status": "PLACEHOLDER",
+      "printedOfficialValue": null,
+      "prototypeRuntimeValue": {
+        "damage": null,
+        "heal": null,
+        "accuracy": null,
+        "range": 0,
+        "targetSide": null,
+        "conditionsRaw": null
+      },
+      "identityClassification": "PROTOTYPE_ONLY_NO_OFFICIAL_COUNTERPART",
+      "identityAuthority": "docs/data/complete-edition/c2a-prototype-hero-data-comparison.json",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "occultist",
+      "skillId": null,
+      "runtimeSkillId": "occultist-sap",
+      "level": 1,
+      "field": "unmatchedPrototypeDefinition",
+      "status": "PLACEHOLDER",
+      "printedOfficialValue": null,
+      "prototypeRuntimeValue": {
+        "damage": 5,
+        "heal": null,
+        "accuracy": null,
+        "range": 3,
+        "targetSide": null,
+        "conditionsRaw": null
+      },
+      "identityClassification": "PROTOTYPE_ONLY_NO_OFFICIAL_COUNTERPART",
+      "identityAuthority": "docs/data/complete-edition/c2a-prototype-hero-data-comparison.json",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "occultist",
+      "skillId": null,
+      "runtimeSkillId": "occultist-ward",
+      "level": 1,
+      "field": "unmatchedPrototypeDefinition",
+      "status": "PLACEHOLDER",
+      "printedOfficialValue": null,
+      "prototypeRuntimeValue": {
+        "damage": null,
+        "heal": null,
+        "accuracy": null,
+        "range": 0,
+        "targetSide": null,
+        "conditionsRaw": null
+      },
+      "identityClassification": "PROTOTYPE_ONLY_NO_OFFICIAL_COUNTERPART",
+      "identityAuthority": "docs/data/complete-edition/c2a-prototype-hero-data-comparison.json",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "occultist",
+      "skillId": null,
+      "runtimeSkillId": "occultist-blink",
+      "level": 1,
+      "field": "unmatchedPrototypeDefinition",
+      "status": "PLACEHOLDER",
+      "printedOfficialValue": null,
+      "prototypeRuntimeValue": {
+        "damage": null,
+        "heal": null,
+        "accuracy": null,
+        "range": 1,
+        "targetSide": null,
+        "conditionsRaw": null
+      },
+      "identityClassification": "PROTOTYPE_ONLY_NO_OFFICIAL_COUNTERPART",
+      "identityAuthority": "docs/data/complete-edition/c2a-prototype-hero-data-comparison.json",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "plague-doctor",
+      "skillId": "plague-doctor-noxious-blast",
+      "runtimeSkillId": "plague-doctor-noxious",
+      "level": 1,
+      "field": "crit",
+      "printedOfficialValue": 1,
+      "comparisonCandidate": 1,
+      "prototypeRuntimeValue": null,
+      "status": "MISSING_RUNTIME_FIELD",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "plague-doctor",
+      "skillId": "plague-doctor-noxious-blast",
+      "runtimeSkillId": "plague-doctor-noxious",
+      "level": 1,
+      "field": "critDamage",
+      "printedOfficialValue": 4,
+      "comparisonCandidate": 4,
+      "prototypeRuntimeValue": null,
+      "status": "MISSING_RUNTIME_FIELD",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "plague-doctor",
+      "skillId": "plague-doctor-noxious-blast",
+      "runtimeSkillId": "plague-doctor-noxious",
+      "level": 1,
+      "field": "critHeal",
+      "printedOfficialValue": null,
+      "comparisonCandidate": null,
+      "prototypeRuntimeValue": null,
+      "status": "MISSING_RUNTIME_FIELD",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "plague-doctor",
+      "skillId": "plague-doctor-noxious-blast",
+      "runtimeSkillId": "plague-doctor-noxious",
+      "level": 1,
+      "field": "accuracy",
+      "printedOfficialValue": 9,
+      "comparisonCandidate": 9,
+      "prototypeRuntimeValue": null,
+      "status": "MISSING_RUNTIME_FIELD",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "plague-doctor",
+      "skillId": "plague-doctor-noxious-blast",
+      "runtimeSkillId": "plague-doctor-noxious",
+      "level": 1,
+      "field": "damage",
+      "printedOfficialValue": 2,
+      "comparisonCandidate": 2,
+      "prototypeRuntimeValue": 4,
+      "status": "PROTOTYPE_MISMATCH",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "plague-doctor",
+      "skillId": "plague-doctor-noxious-blast",
+      "runtimeSkillId": "plague-doctor-noxious",
+      "level": 1,
+      "field": "heal",
+      "printedOfficialValue": null,
+      "comparisonCandidate": null,
+      "prototypeRuntimeValue": null,
+      "status": "MISSING_RUNTIME_FIELD",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "plague-doctor",
+      "skillId": "plague-doctor-noxious-blast",
+      "runtimeSkillId": "plague-doctor-noxious",
+      "level": 1,
+      "field": "range",
+      "printedOfficialValue": "1",
+      "comparisonCandidate": 1,
+      "prototypeRuntimeValue": 3,
+      "status": "PROTOTYPE_MISMATCH",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "plague-doctor",
+      "skillId": "plague-doctor-noxious-blast",
+      "runtimeSkillId": "plague-doctor-noxious",
+      "level": 1,
+      "field": "targeting",
+      "printedOfficialValue": {
+        "printedNotation": "M1",
+        "groups": [
+          {
+            "side": "MONSTER",
+            "glyph": "monster-target",
+            "count": 1
+          }
+        ],
+        "self": false,
+        "allAllies": false
+      },
+      "prototypeRuntimeValue": null,
+      "status": "UNSUPPORTED_SOURCE_SEMANTIC",
+      "reason": "Prototype target side / position abstraction is not the printed Area and icon-count contract.",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "plague-doctor",
+      "skillId": "plague-doctor-noxious-blast",
+      "runtimeSkillId": "plague-doctor-noxious",
+      "level": 1,
+      "field": "usableFromStances",
+      "printedOfficialValue": [
+        "support",
+        "ranged",
+        "defensive"
+      ],
+      "prototypeRuntimeValue": null,
+      "status": "UNSUPPORTED_SOURCE_SEMANTIC",
+      "reason": "Prototype target side / position abstraction is not the printed Area and icon-count contract.",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "plague-doctor",
+      "skillId": "plague-doctor-noxious-blast",
+      "runtimeSkillId": "plague-doctor-noxious",
+      "level": 1,
+      "field": "targetableStances",
+      "printedOfficialValue": null,
+      "prototypeRuntimeValue": null,
+      "status": "UNSUPPORTED_SOURCE_SEMANTIC",
+      "reason": "Prototype target side / position abstraction is not the printed Area and icon-count contract.",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "plague-doctor",
+      "skillId": "plague-doctor-noxious-blast",
+      "runtimeSkillId": "plague-doctor-noxious",
+      "level": 1,
+      "field": "conditions/selfEffects/targetEffects",
+      "printedOfficialValue": "Target 4[blight]2t, [debuff]1t",
+      "prototypeRuntimeValue": null,
+      "status": "UNSUPPORTED_SOURCE_SEMANTIC",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "plague-doctor",
+      "skillId": "plague-doctor-noxious-blast",
+      "runtimeSkillId": "plague-doctor-noxious",
+      "level": 2,
+      "field": "independentLevelDefinition",
+      "printedOfficialValue": {
+        "crit": {
+          "printed": "PRESENT",
+          "literal": 1,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 128,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "critDamage": {
+          "printed": "PRESENT",
+          "literal": 6,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 128,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "critHeal": {
+          "printed": "ABSENT",
+          "literal": null,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 128,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "accuracy": {
+          "printed": "PRESENT",
+          "literal": 10,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 128,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "damage": {
+          "printed": "PRESENT",
+          "literal": 3,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 128,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "heal": {
+          "printed": "ABSENT",
+          "literal": null,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 128,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "resourceCosts": {
+          "printed": "ABSENT",
+          "literal": null,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": []
+        }
+      },
+      "prototypeRuntimeValue": "SKILL_LEVEL_BONUS (comparison only)",
+      "status": "PLACEHOLDER",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "plague-doctor",
+      "skillId": "plague-doctor-noxious-blast",
+      "runtimeSkillId": "plague-doctor-noxious",
+      "level": 3,
+      "field": "independentLevelDefinition",
+      "printedOfficialValue": {
+        "crit": {
+          "printed": "PRESENT",
+          "literal": 1,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 129,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "critDamage": {
+          "printed": "PRESENT",
+          "literal": 7,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 129,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "critHeal": {
+          "printed": "ABSENT",
+          "literal": null,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 129,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "accuracy": {
+          "printed": "PRESENT",
+          "literal": 12,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 129,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "damage": {
+          "printed": "PRESENT",
+          "literal": 4,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 129,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "heal": {
+          "printed": "ABSENT",
+          "literal": null,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 129,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "resourceCosts": {
+          "printed": "ABSENT",
+          "literal": null,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": []
+        }
+      },
+      "prototypeRuntimeValue": "SKILL_LEVEL_BONUS (comparison only)",
+      "status": "PLACEHOLDER",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "plague-doctor",
+      "skillId": null,
+      "runtimeSkillId": "plague-doctor-guard",
+      "level": 1,
+      "field": "unmatchedPrototypeDefinition",
+      "status": "PLACEHOLDER",
+      "printedOfficialValue": null,
+      "prototypeRuntimeValue": {
+        "damage": null,
+        "heal": null,
+        "accuracy": null,
+        "range": 0,
+        "targetSide": null,
+        "conditionsRaw": null
+      },
+      "identityClassification": "PROTOTYPE_ONLY_NO_OFFICIAL_COUNTERPART",
+      "identityAuthority": "docs/data/complete-edition/c2a-prototype-hero-data-comparison.json",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "plague-doctor",
+      "skillId": null,
+      "runtimeSkillId": "plague-doctor-tincture",
+      "level": 1,
+      "field": "unmatchedPrototypeDefinition",
+      "status": "PLACEHOLDER",
+      "printedOfficialValue": null,
+      "prototypeRuntimeValue": {
+        "damage": null,
+        "heal": null,
+        "accuracy": null,
+        "range": 0,
+        "targetSide": null,
+        "conditionsRaw": null
+      },
+      "identityClassification": "PROTOTYPE_ONLY_NO_OFFICIAL_COUNTERPART",
+      "identityAuthority": "docs/data/complete-edition/c2a-prototype-hero-data-comparison.json",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "grave-robber",
+      "skillId": "grave-robber-flashing-daggers",
+      "runtimeSkillId": "grave-robber-flash",
+      "level": 1,
+      "field": "crit",
+      "printedOfficialValue": 0,
+      "comparisonCandidate": 0,
+      "prototypeRuntimeValue": null,
+      "status": "MISSING_RUNTIME_FIELD",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "grave-robber",
+      "skillId": "grave-robber-flashing-daggers",
+      "runtimeSkillId": "grave-robber-flash",
+      "level": 1,
+      "field": "critDamage",
+      "printedOfficialValue": 6,
+      "comparisonCandidate": 6,
+      "prototypeRuntimeValue": null,
+      "status": "MISSING_RUNTIME_FIELD",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "grave-robber",
+      "skillId": "grave-robber-flashing-daggers",
+      "runtimeSkillId": "grave-robber-flash",
+      "level": 1,
+      "field": "critHeal",
+      "printedOfficialValue": null,
+      "comparisonCandidate": null,
+      "prototypeRuntimeValue": null,
+      "status": "MISSING_RUNTIME_FIELD",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "grave-robber",
+      "skillId": "grave-robber-flashing-daggers",
+      "runtimeSkillId": "grave-robber-flash",
+      "level": 1,
+      "field": "accuracy",
+      "printedOfficialValue": 9,
+      "comparisonCandidate": 9,
+      "prototypeRuntimeValue": null,
+      "status": "MISSING_RUNTIME_FIELD",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "grave-robber",
+      "skillId": "grave-robber-flashing-daggers",
+      "runtimeSkillId": "grave-robber-flash",
+      "level": 1,
+      "field": "damage",
+      "printedOfficialValue": 3,
+      "comparisonCandidate": 3,
+      "prototypeRuntimeValue": 5,
+      "status": "PROTOTYPE_MISMATCH",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "grave-robber",
+      "skillId": "grave-robber-flashing-daggers",
+      "runtimeSkillId": "grave-robber-flash",
+      "level": 1,
+      "field": "heal",
+      "printedOfficialValue": null,
+      "comparisonCandidate": null,
+      "prototypeRuntimeValue": null,
+      "status": "MISSING_RUNTIME_FIELD",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "grave-robber",
+      "skillId": "grave-robber-flashing-daggers",
+      "runtimeSkillId": "grave-robber-flash",
+      "level": 1,
+      "field": "range",
+      "printedOfficialValue": "1",
+      "comparisonCandidate": 1,
+      "prototypeRuntimeValue": 2,
+      "status": "PROTOTYPE_MISMATCH",
+      "officialAuthority": "OFFICIAL_PRINTED_COMPONENT",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "grave-robber",
+      "skillId": "grave-robber-flashing-daggers",
+      "runtimeSkillId": "grave-robber-flash",
+      "level": 1,
+      "field": "targeting",
+      "printedOfficialValue": {
+        "printedNotation": "M2",
+        "groups": [
+          {
+            "side": "MONSTER",
+            "glyph": "monster-target",
+            "count": 2
+          }
+        ],
+        "self": false,
+        "allAllies": false
+      },
+      "prototypeRuntimeValue": null,
+      "status": "UNSUPPORTED_SOURCE_SEMANTIC",
+      "reason": "Prototype target side / position abstraction is not the printed Area and icon-count contract.",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "grave-robber",
+      "skillId": "grave-robber-flashing-daggers",
+      "runtimeSkillId": "grave-robber-flash",
+      "level": 1,
+      "field": "usableFromStances",
+      "printedOfficialValue": [
+        "support",
+        "ranged",
+        "defensive"
+      ],
+      "prototypeRuntimeValue": null,
+      "status": "UNSUPPORTED_SOURCE_SEMANTIC",
+      "reason": "Prototype target side / position abstraction is not the printed Area and icon-count contract.",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "grave-robber",
+      "skillId": "grave-robber-flashing-daggers",
+      "runtimeSkillId": "grave-robber-flash",
+      "level": 1,
+      "field": "targetableStances",
+      "printedOfficialValue": null,
+      "prototypeRuntimeValue": null,
+      "status": "UNSUPPORTED_SOURCE_SEMANTIC",
+      "reason": "Prototype target side / position abstraction is not the printed Area and icon-count contract.",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "grave-robber",
+      "skillId": "grave-robber-flashing-daggers",
+      "runtimeSkillId": "grave-robber-flash",
+      "level": 1,
+      "field": "conditions/selfEffects/targetEffects",
+      "printedOfficialValue": "",
+      "prototypeRuntimeValue": null,
+      "status": "UNSUPPORTED_SOURCE_SEMANTIC",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "grave-robber",
+      "skillId": "grave-robber-flashing-daggers",
+      "runtimeSkillId": "grave-robber-flash",
+      "level": 2,
+      "field": "independentLevelDefinition",
+      "printedOfficialValue": {
+        "crit": {
+          "printed": "PRESENT",
+          "literal": 0,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 176,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "critDamage": {
+          "printed": "PRESENT",
+          "literal": 7,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 176,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "critHeal": {
+          "printed": "ABSENT",
+          "literal": null,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 176,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "accuracy": {
+          "printed": "PRESENT",
+          "literal": 10,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 176,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "damage": {
+          "printed": "PRESENT",
+          "literal": 4,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 176,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "heal": {
+          "printed": "ABSENT",
+          "literal": null,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 176,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "resourceCosts": {
+          "printed": "ABSENT",
+          "literal": null,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": []
+        }
+      },
+      "prototypeRuntimeValue": "SKILL_LEVEL_BONUS (comparison only)",
+      "status": "PLACEHOLDER",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "grave-robber",
+      "skillId": "grave-robber-flashing-daggers",
+      "runtimeSkillId": "grave-robber-flash",
+      "level": 3,
+      "field": "independentLevelDefinition",
+      "printedOfficialValue": {
+        "crit": {
+          "printed": "PRESENT",
+          "literal": 0,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 177,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "critDamage": {
+          "printed": "PRESENT",
+          "literal": 10,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 177,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "critHeal": {
+          "printed": "ABSENT",
+          "literal": null,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 177,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "accuracy": {
+          "printed": "PRESENT",
+          "literal": 11,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 177,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "damage": {
+          "printed": "PRESENT",
+          "literal": 5,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 177,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "heal": {
+          "printed": "ABSENT",
+          "literal": null,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": [
+            {
+              "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+              "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+              "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+              "page": 177,
+              "authority": "OFFICIAL_PRINTED_COMPONENT"
+            }
+          ]
+        },
+        "resourceCosts": {
+          "printed": "ABSENT",
+          "literal": null,
+          "literalStatus": "LITERAL_COMPLETE",
+          "semanticStatus": "OFFICIAL_SOURCE",
+          "sourceRefs": []
+        }
+      },
+      "prototypeRuntimeValue": "SKILL_LEVEL_BONUS (comparison only)",
+      "status": "PLACEHOLDER",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "grave-robber",
+      "skillId": null,
+      "runtimeSkillId": "grave-robber-dodge",
+      "level": 1,
+      "field": "unmatchedPrototypeDefinition",
+      "status": "PLACEHOLDER",
+      "printedOfficialValue": null,
+      "prototypeRuntimeValue": {
+        "damage": null,
+        "heal": null,
+        "accuracy": null,
+        "range": 0,
+        "targetSide": null,
+        "conditionsRaw": null
+      },
+      "identityClassification": "PROTOTYPE_ONLY_NO_OFFICIAL_COUNTERPART",
+      "identityAuthority": "docs/data/complete-edition/c2a-prototype-hero-data-comparison.json",
+      "prototypeAuthority": false
+    },
+    {
+      "heroId": "grave-robber",
+      "skillId": null,
+      "runtimeSkillId": "grave-robber-sneak",
+      "level": 1,
+      "field": "unmatchedPrototypeDefinition",
+      "status": "PLACEHOLDER",
+      "printedOfficialValue": null,
+      "prototypeRuntimeValue": {
+        "damage": null,
+        "heal": null,
+        "accuracy": null,
+        "range": 1,
+        "targetSide": null,
+        "conditionsRaw": null
+      },
+      "identityClassification": "PROTOTYPE_ONLY_NO_OFFICIAL_COUNTERPART",
+      "identityAuthority": "docs/data/complete-edition/c2a-prototype-hero-data-comparison.json",
+      "prototypeAuthority": false
     }
   ],
+  "heroesCompared": 8,
+  "skillsCompared": 28,
+  "expectedRuntimeHeroes": 8,
+  "expectedRuntimeSkills": 28,
+  "runtimeCoverageComplete": true,
   "runtimeInputPurpose": "COMPARISON_ONLY",
   "runtimeCorrectionsAuthorized": false
 }

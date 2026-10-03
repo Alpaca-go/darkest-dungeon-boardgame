@@ -762,6 +762,30 @@
       ]
     },
     {
+      "gapId": "C2B-LEGACY-PROTOTYPE-IDENTITIES",
+      "semanticStatus": "PROJECT_RULING_REQUIRED",
+      "canonical": false,
+      "executionRequired": true,
+      "reason": "Frozen C2A identifies prototype Skills with no official counterpart, including Bash. Future versioned legacy-save migration decisions are required; no mapping by effect similarity is authorized.",
+      "sourceRefs": [],
+      "identityEvidence": "docs/data/complete-edition/c2a-prototype-hero-data-comparison.json",
+      "historicalSkillIds": [
+        "vestal-sanctuary",
+        "vestal-mantra",
+        "hellion-bash",
+        "leper-fortify",
+        "leper-reposition",
+        "occultist-sap",
+        "occultist-ward",
+        "occultist-blink",
+        "plague-doctor-guard",
+        "plague-doctor-tincture",
+        "grave-robber-dodge",
+        "grave-robber-sneak"
+      ],
+      "affectedForms": []
+    },
+    {
       "gapId": "C2B-ILLUSTRATIVE-PICTOGRAMS",
       "semanticStatus": "SOURCE_UNRESOLVED",
       "canonical": false,
@@ -902,5 +926,5 @@
   ],
   "approvedProjectRulings": [],
   "unresolvedSourceGroups": 7,
-  "projectRulingRequiredGroups": 1
+  "projectRulingRequiredGroups": 2
 }
