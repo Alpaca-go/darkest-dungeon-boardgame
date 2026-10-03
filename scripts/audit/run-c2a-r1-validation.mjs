@@ -14,7 +14,7 @@ for(const args of commands){
   console.log('Running '+command);const started=Date.now();
   const r=spawnSync('npm',args,{encoding:'utf8',shell:process.platform==='win32',maxBuffer:64*1024*1024});
   const logfile=(args[0]==='run'?args[1]:args[0]).replaceAll(':','-')+'.log';
-  writeFileSync(folder+'/'+logfile,((r.stdout??'')+(r.stderr??'')).trimEnd()+'\n');
+  writeFileSync(folder+'/'+logfile,((r.stdout??'')+(r.stderr??'')).replace(/\r\n/g,'\n').trimEnd()+'\n');
   const record={command,exitCode:r.status,elapsedMs:Date.now()-started,log:logfile};
   if(args[0]==='test'&&r.status===0){const t=JSON.parse(readFileSync('tmp/c2a-r1-final-tests.json','utf8'));
     record.tests={passed:t.numPassedTests,failed:t.numFailedTests,pending:t.numPendingTests,todo:t.numTodoTests,failedSuites:t.numFailedTestSuites};
