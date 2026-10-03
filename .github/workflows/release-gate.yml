@@ -23,6 +23,7 @@ jobs:
       - run: npm run verify:complete-edition-c1c38r1
       - run: npm run verify:complete-edition-c2a
       - run: npm test -- --reporter=json --outputFile=tmp-c1c38-final-tests.json
+      - run: node scripts/audit/verify-c2a-test-report.mjs tmp-c1c38-final-tests.json
       - run: npm run build
       - run: npm run historical-baseline-validation
       - run: npm run verify:immutable-phase-baselines

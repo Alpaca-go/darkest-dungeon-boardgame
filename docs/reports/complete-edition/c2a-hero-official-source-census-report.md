@@ -64,6 +64,10 @@ node scripts/audit/run-c2a-validation.mjs
 
 Local command results and logs are in `c2a-validation/validation-results.json`. The runner requires zero failed, pending or todo tests and executes the requested dependency/type/test/build/historical/immutable/Boss/C1C38R1/C2A chain plus the current built-bundle successor browser smoke. `verify:complete-edition-c2a` is also added to **Production release gate**. Final remote evidence must report `head_sha` equal to the final C2A commit and `status=completed`, `conclusion=success`; an earlier green commit does not qualify.
 
+Local completion on 2026-10-03: all 13 commands passed. The successor regression has **2822 passed, 0 failed, 0 pending, 0 todo**; all 27 C2A targeted/adversarial tests also pass after the final observation-table refinement. Typecheck, build, historical and immutable baselines (including the original C1C35R2B-R1 regression), all three Boss compatibility gates, C1C38R1, C2A generation/verification and the built-bundle successor smoke passed. The CI test-report step additionally rejects missing targeted cases, an incomplete regression set, and nonzero failed/pending/todo counters.
+
+Remote final-HEAD evidence is recorded separately in the final delivery and the ignored local `tmp/c2a-final-head-release-gate.json`, avoiding a self-referential commit of its own CI result. GitHub's installed connector returned 403 for draft-PR creation; branch push and public Actions verification remain available.
+
 ## Next decision
 
 Continue **C2A Profile transport and back binding closure**. `identityCensusComplete=false`, `sourceProvenanceComplete=false`, `runtimeProductionReady=false`, `C2BAllowed=false`, and `sourceCompleteHeroSubsets=[]`. Once source binding is accepted, the next phase is C2B Hero Skill & Level Literal Closure, followed by C2C definitions, C2D runtime/save/replay and C2E browser acceptance. Common + Ruins Monsters and then Ruins Room/Tile/Dungeon production data follow the Hero line. This change does not authorize any of those later phases.

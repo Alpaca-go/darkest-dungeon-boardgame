@@ -1,0 +1,106 @@
+{
+  "phase": "C2A",
+  "results": [
+    {
+      "command": "npm ci",
+      "exitCode": 0,
+      "elapsedMs": 53247,
+      "log": "ci.log"
+    },
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "elapsedMs": 42565,
+      "log": "typecheck.log"
+    },
+    {
+      "command": "npm test -- --maxWorkers=2 --minWorkers=2 --reporter=json --outputFile=tmp/c2a-final-tests.json",
+      "exitCode": 0,
+      "elapsedMs": 1027008,
+      "log": "test.log",
+      "tests": {
+        "passed": 2822,
+        "failed": 0,
+        "pending": 0,
+        "todo": 0,
+        "failedSuites": 0
+      }
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "elapsedMs": 59217,
+      "log": "build.log"
+    },
+    {
+      "command": "npm run historical-baseline-validation",
+      "exitCode": 0,
+      "elapsedMs": 45726,
+      "log": "historical-baseline-validation.log"
+    },
+    {
+      "command": "npm run verify:immutable-phase-baselines",
+      "exitCode": 0,
+      "elapsedMs": 1701760,
+      "log": "verify-immutable-phase-baselines.log"
+    },
+    {
+      "command": "npm run verify:necromancer-successor-compatibility",
+      "exitCode": 0,
+      "elapsedMs": 75267,
+      "log": "verify-necromancer-successor-compatibility.log"
+    },
+    {
+      "command": "npm run verify:prophet-successor-compatibility",
+      "exitCode": 0,
+      "elapsedMs": 101825,
+      "log": "verify-prophet-successor-compatibility.log"
+    },
+    {
+      "command": "npm run verify:boss-successor-compatibility",
+      "exitCode": 0,
+      "elapsedMs": 101656,
+      "log": "verify-boss-successor-compatibility.log"
+    },
+    {
+      "command": "npm run verify:complete-edition-c1c38r1",
+      "exitCode": 0,
+      "elapsedMs": 26215,
+      "log": "verify-complete-edition-c1c38r1.log"
+    },
+    {
+      "command": "npm run audit:complete-edition-c2a",
+      "exitCode": 0,
+      "elapsedMs": 18861,
+      "log": "audit-complete-edition-c2a.log"
+    },
+    {
+      "command": "npm run verify:complete-edition-c2a",
+      "exitCode": 0,
+      "elapsedMs": 30929,
+      "log": "verify-complete-edition-c2a.log"
+    },
+    {
+      "command": "npm run test:e2e:built-bundle-successor",
+      "exitCode": 0,
+      "elapsedMs": 46269,
+      "log": "test-e2e-built-bundle-successor.log"
+    }
+  ],
+  "completedDate": "2026-10-03",
+  "postReviewTargetedTests": {
+    "passed": 27,
+    "failed": 0,
+    "pending": 0,
+    "todo": 0
+  },
+  "testReportGuard": {
+    "command": "node scripts/audit/verify-c2a-test-report.mjs tmp/c2a-final-tests.json",
+    "exitCode": 0,
+    "passed": 2822,
+    "failed": 0,
+    "pending": 0,
+    "todo": 0,
+    "targeted": 27
+  }
+}
