@@ -4,9 +4,9 @@
   "definitionVersion": "C2C-HERO-PRODUCTION-DEFINITION-v1",
   "runtimeVersion": "C2D-HERO-PRODUCTION-RUNTIME-v1",
   "ambiguityPolicy": "SOURCE_AMBIGUITY_DEFER_POLICY_V1",
-  "playerPathFingerprint": "080d92aea9e686bec6e1408eb81e43a0141b6a7f9568bbabd2c6d0be06122943",
-  "outcome": "HERO_FULL_PLAYER_PATH_BLOCKED",
-  "heroProductionReady": false,
+  "playerPathFingerprint": "bd335422db3046e9d8918bed2b113270337f57a8cdc7912db3cbdf8358f26c32",
+  "outcome": "HERO_FULL_PLAYER_PATH_ACCEPTED",
+  "heroProductionReady": true,
   "completeGameProductionReady": false,
   "18HeroesPlayerAccessible": true,
   "productionCampaignDefaultPath": true,
@@ -26,9 +26,9 @@
     "status": "PASS"
   },
   "checks": {
-    "playerPathFingerprint": "080d92aea9e686bec6e1408eb81e43a0141b6a7f9568bbabd2c6d0be06122943",
-    "afterFingerprint": "080d92aea9e686bec6e1408eb81e43a0141b6a7f9568bbabd2c6d0be06122943",
-    "status": "BLOCKED",
+    "playerPathFingerprint": "bd335422db3046e9d8918bed2b113270337f57a8cdc7912db3cbdf8358f26c32",
+    "afterFingerprint": "bd335422db3046e9d8918bed2b113270337f57a8cdc7912db3cbdf8358f26c32",
+    "status": "PASS",
     "commands": [
       {
         "command": "npm run typecheck",
@@ -68,9 +68,33 @@
       },
       {
         "command": "npm run verify:immutable-phase-baselines",
-        "exitCode": 1,
-        "status": "FAIL",
+        "exitCode": 0,
+        "status": "PASS",
         "log": "pw-out/c2e-validation-verify-immutable-phase-baselines.log"
+      },
+      {
+        "command": "npm run verify:necromancer-successor-compatibility",
+        "exitCode": 0,
+        "status": "PASS",
+        "log": "pw-out/c2e-validation-verify-necromancer-successor-compatibility.log"
+      },
+      {
+        "command": "npm run verify:prophet-successor-compatibility",
+        "exitCode": 0,
+        "status": "PASS",
+        "log": "pw-out/c2e-validation-verify-prophet-successor-compatibility.log"
+      },
+      {
+        "command": "npm run verify:boss-successor-compatibility",
+        "exitCode": 0,
+        "status": "PASS",
+        "log": "pw-out/c2e-validation-verify-boss-successor-compatibility.log"
+      },
+      {
+        "command": "npm run test:e2e:built-bundle-successor",
+        "exitCode": 0,
+        "status": "PASS",
+        "log": "pw-out/c2e-validation-test-e2e-built-bundle-successor.log"
       }
     ]
   },
