@@ -41,6 +41,12 @@ test('C1C38 successor built production selector, source Standard, Prophet Room r
   const prerequisite=JSON.parse(readFileSync('tmp-c1c37-prophet-prerequisite.json','utf8'));
   await page.evaluate(s=>localStorage.setItem('dd-web-prototype-save-v1',JSON.stringify(s)),prerequisite);
   await page.reload();expect(await saved(page)).toEqual(prerequisite.campaign);
+  // The production Hero route explicitly requires the accepted ordinary runtime
+  // before Quest entry. Complete its normal visible selections for this old prerequisite.
+  if(await page.getByTestId('migrate-hero-dodge-v2').count())await page.getByTestId('migrate-hero-dodge-v2').click();
+  if(await page.getByTestId('select-production-ruins-v6').count())await page.getByTestId('select-production-ruins-v6').click();
+  const deployed=await saved(page);
+  for(const [index,hero] of deployed.heroes.entries())await page.getByLabel(`${hero.name} 初始 Stance`,{exact:true}).selectOption(['aggressive','defensive','ranged','support'][index]);
   await expect(page.getByTestId('quest-face-the-threat')).toBeVisible();await page.getByTestId('quest-face-the-threat').click();
   const prophet=await saved(page);expect(prophet.bossRoomStorage).toMatchObject({roomCardId:44710,tileId:'ruins-tile-11',lifecycle:'RESERVED'});
   expect(prophet.bossEncounterCheckpoint?.bossFamily).toBe('prophet');

@@ -34,3 +34,20 @@ jobs:
       - run: npm run verify:complete-edition-c1c35r2b
       - run: npm run verify:complete-edition-c1c36
       - run: npm run verify:complete-edition-c1c37
+      - name: Preserve C2E validation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: c2e-validation-${{ github.sha }}
+          path: |
+            docs/data/complete-edition/c2e-*.json
+            pw-out/c2e-validation.json
+            pw-out/c2e-vitest-full.json
+            pw-out/c2e-playwright-report.json
+            pw-out/c2e-browser-run-binding.json
+            pw-out/c2e-browser-checkpoints.jsonl
+            pw-out/c2e-browser-network.jsonl
+            pw-out/c2e-validation-*.log
+            pw-out/c2e-browser.log
+            dist/c2d-runtime-module-graph.json
+          if-no-files-found: error
