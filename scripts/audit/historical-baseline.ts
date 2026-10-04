@@ -114,7 +114,7 @@ export function verifyHistoricalBaseline(phase: keyof typeof historicalBaselines
       copyFileSync('docs/DD_EN_COREBOX_RULES.pdf', join(checkout, 'docs/DD_EN_COREBOX_RULES.pdf'));
     }
     symlinkSync(resolve('node_modules'), join(checkout, 'node_modules'), process.platform === 'win32' ? 'junction' : 'dir');
-    const flags = (phase === 'c2b' || phase === 'c2c') ? ['--verify'] : phase === 'c1c35r2br1' ? ['--verify-r2b'] : phase === 'c1c35r2ar' ? ['--verify-dispatch'] : phase === 'c1c35r1' ? ['--verify-r1'] : phase === 'c1c35r2' ? ['--verify-r2'] : phase.startsWith('c1c3') ? ['--verify'] : [];
+    const flags = (phase === 'c2a' || phase === 'c2b' || phase === 'c2c') ? ['--verify'] : phase === 'c1c35r2br1' ? ['--verify-r2b'] : phase === 'c1c35r2ar' ? ['--verify-dispatch'] : phase === 'c1c35r1' ? ['--verify-r1'] : phase === 'c1c35r2' ? ['--verify-r2'] : phase.startsWith('c1c3') ? ['--verify'] : [];
     if (phase !== 'c1c36') execFileSync(process.execPath, ['--import', pathToFileURL(resolve('scripts/audit/legacy-transport-preload.mjs')).href, resolve('node_modules/vite-node/vite-node.mjs'), script, ...flags],
       { cwd: checkout, stdio: 'pipe', maxBuffer: 16 * 1024 * 1024,
         env: { ...process.env, DDBG_LEGACY_TRANSPORT_ARCHIVE: resolve('docs/data/complete-edition/source-assets/c1c34/legacy-transport.json.gz') } });
