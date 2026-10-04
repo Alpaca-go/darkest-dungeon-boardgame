@@ -1,12 +1,12 @@
 import type { BattleState, BattleUnit, MonsterSkillDefinition, PendingMonsterAttack } from '../../types';
 import type { RuinsMonster, RuinsSkill, RuinsStance, RuinsTile } from '../../types/ruins-executable';
-import { RUINS_STANCES } from '../../types/ruins-executable';
 import { resolveRuinsStance } from './source-registry';
 import { ruinsMonster, ruinsRoom, ruinsTile } from './source-registry';
 import { applyRuinsPrintedEffects, recordRuinsEvent, withRuinsRandom } from './printed-effect-runtime';
 import { runRuinsRoomTrigger } from './room-runtime';
 import { canMoveRuinsUnit, moveRuinsUnit, pauseRuinsLargeDisplacement } from './movement-runtime';
 import { resolvePrintedAttackFromRoll } from '../combat-resolution';
+import { compareMonsterTargetPriority } from '../monster-target-priority';
 
 /** Selection is sourced exclusively from the locked typed Stance table. */
 export function resolveRuinsMonsterSkill(definition: RuinsMonster, stance: RuinsStance, d10: number): RuinsSkill | null {
@@ -71,8 +71,7 @@ export function selectRuinsMonsterTargets(context: RuinsTargetContext, actorId: 
     }
   };
   const sorted = units.sort((a, b) => score(b) - score(a)
-    || RUINS_STANCES.indexOf(a.stance) - RUINS_STANCES.indexOf(b.stance)
-    || a.id.localeCompare(b.id));
+    || compareMonsterTargetPriority(a, b));
   const first = sorted[0];
   return sorted.filter(unit => placements[unit.id] === placements[first.id]).slice(0, skill.targets).map(unit => unit.id);
 }

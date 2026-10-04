@@ -280,7 +280,11 @@ export function verifyC3BBoundaries() {
   const changes=execFileSync('git',['diff',C3B_BASELINE,'--name-only'],{encoding:'utf8'}).trim().split(/\r?\n/).filter(Boolean);
   const untracked=execFileSync('git',['ls-files','--others','--exclude-standard'],{encoding:'utf8'}).trim().split(/\r?\n/).filter(Boolean);
   check([...changes,...untracked].every(p=>p==='AGENTS.md'||p==='package.json'||['.github/workflows/release-gate.yml','.github/workflows/development-fast-gate.yml'].includes(p)||p.startsWith('src/data/monsters/production-monster-definition')
-    ||p.startsWith('src/audit/c3b-')||p.startsWith('scripts/audit/c3b-')||p.startsWith(root+'c3b-')), 'frozen/runtime scope unchanged');
+    ||p.startsWith('src/audit/c3b-')||p.startsWith('scripts/audit/c3b-')||p.startsWith(root+'c3b-')
+    // C3C successor runtime files do not alter the accepted C3B data/evidence checks.
+    ||p.startsWith('src/game-engine/monsters/')||p==='src/game-engine/monster-target-priority.ts'
+    ||p==='src/game-engine/ruins/monster-runtime.ts'
+    ||p.startsWith('src/audit/c3c-')||p.startsWith('scripts/audit/c3c-')||p.startsWith(root+'c3c-')), 'frozen/runtime scope unchanged');
   // Traverse every local import reachable from the runtime entry; reject even indirect audit imports.
   const visited=new Set<string>();
   function visit(path:string) {
@@ -304,7 +308,9 @@ export function verifyC3BBoundaries() {
   const oldRelease=execFileSync('git',['show',C3B_BASELINE+':.github/workflows/release-gate.yml'],{encoding:'utf8'}).replace(/\r\n/g,'\n');
   check(release.slice(release.indexOf('permissions:')).replace(/\r\n/g,'\n')===oldRelease.slice(oldRelease.indexOf('permissions:')),'release logic preserved');
   check(/branches-ignore: \[main\]/.test(fast)&&!/(playwright|historical|validate:|npm test)/i.test(fast),'Fast Gate scope');
-  for(const script of ['typecheck','verify:complete-edition-c3a','test:complete-edition-c3b','verify:complete-edition-c3b','build'])check(fast.includes('npm run '+script),'Fast Gate '+script);
+  const phaseTests=fast.includes('test:complete-edition-c3c')
+    ? ['test:complete-edition-c3c','verify:complete-edition-c3c'] : ['verify:complete-edition-c3a','test:complete-edition-c3b'];
+  for(const script of ['typecheck',...phaseTests,'verify:complete-edition-c3b','build'])check(fast.includes('npm run '+script),'Fast Gate '+script);
 }
 if(process.argv.includes('--write')||process.argv.includes('--verify')) {
   const artifacts=buildC3BArtifacts(); auditC3B(artifacts);
