@@ -61,6 +61,10 @@ Original C2C definitions, policy and acceptance files remain frozen. Original
 historical suites execute in their accepted checkouts; current successor
 compatibility checks continue to compare gameplay and real save/reload behavior.
 Historical v22 snapshot hashes retain their original envelope version.
+An explicit scoped metadata adapter runs the unchanged Prophet compatibility
+verifier with its historical campaign headers. The context resets on success or
+failure; normal campaign creation continues to use version 23 and legacy Hero
+selection.
 
 The release workflow runs the full regression suite, build, historical and Boss
 compatibility checks, C2A/B/C checks, C2D audit/verifier and built-bundle browser

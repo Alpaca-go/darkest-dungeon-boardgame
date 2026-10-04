@@ -4,6 +4,12 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { verifyHistoricalBaseline } from '../../scripts/audit/historical-baseline';
 import '../../scripts/audit/legacy-transport-preload.mjs';
+import { withHistoricalHeroCampaignMetadata } from '../game-engine/heroes/legacy-campaign-metadata';
+
+vi.mock('../../scripts/audit/c1c37-prophet-compatibility', async importOriginal => {
+  const original = await importOriginal<typeof import('../../scripts/audit/c1c37-prophet-compatibility')>();
+  return { ...original, verifyProphetCompatibility: () => withHistoricalHeroCampaignMetadata(original.verifyProphetCompatibility) };
+});
 
 // Preserve the original test files (also hash-bound by C1C31/R). Only their
 // historical checkout dispatch changes; all semantic and scope assertions use

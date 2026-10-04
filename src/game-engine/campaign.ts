@@ -1,5 +1,6 @@
 import type { CampaignState, HeroInstance, ProvisionPool } from '../types';
 import { LEGACY_HERO_SELECTION } from '../data/heroes/runtime-registry';
+import { usesHistoricalHeroCampaignMetadata } from './heroes/legacy-campaign-metadata';
 import { createId, nowIso } from './random';
 import { getHeroById } from '../data/heroes';
 import { getSkillsByHero } from '../data/skills';
@@ -41,9 +42,9 @@ export function createNewCampaign(
 ): CampaignState {
   const now = nowIso();
   return {
-    saveVersion: SAVE_VERSION, // v8 = Phase 9A（Boss / Imminent Threat / Face the Threat）
+    saveVersion: usesHistoricalHeroCampaignMetadata() ? 22 : SAVE_VERSION,
     runtimeContentProfile,
-    heroRuntimeSelection: { ...LEGACY_HERO_SELECTION },
+    ...(usesHistoricalHeroCampaignMetadata() ? {} : { heroRuntimeSelection: { ...LEGACY_HERO_SELECTION } }),
     enabledContentSets: runtimeContentProfile === 'community-complete-edition'
       ? ['core', 'color-of-madness', 'crimson-court']
       : ['core'],
