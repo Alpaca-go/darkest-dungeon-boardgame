@@ -238,8 +238,11 @@
     "test:e2e:hero-production-player-path": "node scripts/e2e/run-c2e-browser.mjs",
     "validate:complete-edition-c2e": "node scripts/audit/run-c2e-validation.mjs",
     "audit:complete-edition-c3a": "vite-node scripts/audit/c3a-monster-census.ts --write",
-    "verify:complete-edition-c3a": "vite-node scripts/audit/c3a-monster-census.ts --verify",
-    "test:complete-edition-c3a": "vitest run src/audit/c3a-monster-source-census.test.ts"
+    "verify:complete-edition-c3a": "vite-node scripts/audit/c3b-verify-c3a.ts --verify-c3a",
+    "test:complete-edition-c3a": "vitest run src/audit/c3a-monster-source-census.test.ts",
+    "audit:complete-edition-c3b": "vite-node scripts/audit/c3b-monster-definition-layer.ts --write",
+    "verify:complete-edition-c3b": "vite-node scripts/audit/c3b-monster-definition-layer.ts --verify",
+    "test:complete-edition-c3b": "vitest run --config scripts/audit/c3b-vitest.config.ts"
   },
   "dependencies": {
     "lucide-react": "^0.408.0",

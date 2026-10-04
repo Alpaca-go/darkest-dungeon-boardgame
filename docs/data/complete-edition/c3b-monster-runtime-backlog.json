@@ -1,0 +1,113 @@
+{
+  "phase": "11A.6-C3B",
+  "definitionVersion": "C3B-MONSTER-DEFINITIONS-v1",
+  "sourceContentVersion": "C3A-MONSTER-CONTENT-v1",
+  "next": "11A.6-C3C",
+  "uniqueNewPrimitives": 3,
+  "primitives": [
+    {
+      "primitiveId": "self-wound-sequencing",
+      "affectedActions": 6,
+      "requirements": [
+        {
+          "primitiveId": "self-wound-sequencing",
+          "definitionId": "gatekeeper",
+          "actionId": "gatekeeper:action-2",
+          "requirementId": "gatekeeper:action-2:effect-1",
+          "reason": "Damage helper exists; non-enemy self-wound sequencing and reaction contract need a reusable primitive."
+        },
+        {
+          "primitiveId": "self-wound-sequencing",
+          "definitionId": "drowned-thrall",
+          "actionId": "drowned-thrall:action-2",
+          "requirementId": "drowned-thrall:action-2:effect-2",
+          "reason": "Damage helper exists; non-enemy self-wound sequencing and reaction contract need a reusable primitive."
+        },
+        {
+          "primitiveId": "self-wound-sequencing",
+          "definitionId": "crystalline-aberration-level-1",
+          "actionId": "crystalline-aberration-level-1:action-1",
+          "requirementId": "crystalline-aberration-level-1:action-1:effect-1",
+          "reason": "Damage helper exists; non-enemy self-wound sequencing and reaction contract need a reusable primitive."
+        },
+        {
+          "primitiveId": "self-wound-sequencing",
+          "definitionId": "crystalline-aberration-level-1",
+          "actionId": "crystalline-aberration-level-1:action-2",
+          "requirementId": "crystalline-aberration-level-1:action-2:effect-1",
+          "reason": "Damage helper exists; non-enemy self-wound sequencing and reaction contract need a reusable primitive."
+        },
+        {
+          "primitiveId": "self-wound-sequencing",
+          "definitionId": "crystalline-aberration-level-2",
+          "actionId": "crystalline-aberration-level-2:action-1",
+          "requirementId": "crystalline-aberration-level-2:action-1:effect-1",
+          "reason": "Damage helper exists; non-enemy self-wound sequencing and reaction contract need a reusable primitive."
+        },
+        {
+          "primitiveId": "self-wound-sequencing",
+          "definitionId": "crystalline-aberration-level-2",
+          "actionId": "crystalline-aberration-level-2:action-2",
+          "requirementId": "crystalline-aberration-level-2:action-2:effect-1",
+          "reason": "Damage helper exists; non-enemy self-wound sequencing and reaction contract need a reusable primitive."
+        }
+      ]
+    },
+    {
+      "primitiveId": "all-heroes-targeting",
+      "affectedActions": 4,
+      "requirements": [
+        {
+          "primitiveId": "all-heroes-targeting",
+          "definitionId": "crystalline-aberration-level-1",
+          "actionId": "crystalline-aberration-level-1:action-1",
+          "requirementId": "crystalline-aberration-level-1:action-1:targeting",
+          "reason": "Existing target selector restricts targets to one area; global all-Hero selection needs a primitive."
+        },
+        {
+          "primitiveId": "all-heroes-targeting",
+          "definitionId": "crystalline-aberration-level-1",
+          "actionId": "crystalline-aberration-level-1:action-2",
+          "requirementId": "crystalline-aberration-level-1:action-2:targeting",
+          "reason": "Existing target selector restricts targets to one area; global all-Hero selection needs a primitive."
+        },
+        {
+          "primitiveId": "all-heroes-targeting",
+          "definitionId": "crystalline-aberration-level-2",
+          "actionId": "crystalline-aberration-level-2:action-1",
+          "requirementId": "crystalline-aberration-level-2:action-1:targeting",
+          "reason": "Existing target selector restricts targets to one area; global all-Hero selection needs a primitive."
+        },
+        {
+          "primitiveId": "all-heroes-targeting",
+          "definitionId": "crystalline-aberration-level-2",
+          "actionId": "crystalline-aberration-level-2:action-2",
+          "requirementId": "crystalline-aberration-level-2:action-2:targeting",
+          "reason": "Existing target selector restricts targets to one area; global all-Hero selection needs a primitive."
+        }
+      ]
+    },
+    {
+      "primitiveId": "timed-protection",
+      "affectedActions": 1,
+      "requirements": [
+        {
+          "primitiveId": "timed-protection",
+          "definitionId": "manservant",
+          "actionId": "manservant:action-3",
+          "requirementId": "manservant:action-3:effect-2",
+          "reason": "Static printed Protection exists; timed grant/expiry is not implemented."
+        }
+      ]
+    }
+  ],
+  "deferredExcludedFromImplementation": [
+    "C3A-0018",
+    "C3A-0021",
+    "C3A-0023",
+    "C3A-0042",
+    "C3A-0045",
+    "C3A-0047"
+  ],
+  "integrationBoundary": "Existing Ruins/Boss behavior supplies reuse evidence only. C3C must bind generic contexts without modifying frozen runtimes or assuming definition eligibility."
+}
