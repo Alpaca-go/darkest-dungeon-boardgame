@@ -34,6 +34,18 @@ export function applyEffects(unit: BattleUnit, effects?: ActiveEffect[]): Battle
   return effects.reduce((u, e) => applyEffectToUnit(u, e), unit);
 }
 
+/** Core p20–21: each printed Condition has its own duration stack. Magnitude remains optional. */
+export function synchronizePrintedConditionTokens(unit: BattleUnit): BattleUnit {
+  if (!unit.printedConditionTokens) return unit;
+  const tokens=unit.printedConditionTokens.filter(t=>t.turns>0);
+  const amount=(type:string)=>tokens.filter(t=>t.type===type).reduce((sum,t)=>sum+(t.magnitude.presence==='PRINTED_VALUE'?t.magnitude.value:1),0);
+  const duration=(type:string)=>Math.max(0,...tokens.filter(t=>t.type===type).map(t=>t.turns));
+  return {...unit,printedConditionTokens:tokens,bleed:amount('bleed'),blight:amount('blight'),stunned:amount('stun'),marked:amount('mark')>0,
+    buffs:tokens.filter(t=>t.type==='buff').map(t=>({type:'buff',amount:t.magnitude.presence==='PRINTED_VALUE'?t.magnitude.value:1,durationTurns:t.turns})),
+    debuffs:tokens.filter(t=>t.type==='debuff').map(t=>({type:'debuff',amount:t.magnitude.presence==='PRINTED_VALUE'?t.magnitude.value:1,durationTurns:t.turns})),
+    conditionDurations:{bleed:duration('bleed'),blight:duration('blight'),stun:duration('stun'),mark:duration('mark')}};
+}
+
 // ---------------------------------------------------------------------------
 // Phase 8D：Hero Level 派生抗性 / 免疫在战斗内即时生效
 //
@@ -235,6 +247,7 @@ export function resolveStartOfTurnConditions(unit: BattleUnit, light = 0): Start
   }
 
   if (total <= 0) {
+    if (unit.printedConditionTokens) next=synchronizePrintedConditionTokens({...next,printedConditionTokens:unit.printedConditionTokens.map(t=>({...t,turns:t.turns-1}))});
     return {
       unit: next,
       messages,
@@ -247,6 +260,7 @@ export function resolveStartOfTurnConditions(unit: BattleUnit, light = 0): Start
   // 单次批量伤害入口（batch：Bleed + Blight 只有一次死亡判定）
   const outcome: BattleDamageOutcome = applyBattleUnitDamage(next, total);
   let resolved = outcome.unit;
+  if (unit.printedConditionTokens) resolved=synchronizePrintedConditionTokens({...resolved,printedConditionTokens:unit.printedConditionTokens.map(t=>({...t,turns:t.turns-1}))});
   if (outcome.heroDied) {
     resolved = { ...resolved, deathCause: 'deathblow-periodic' };
   }

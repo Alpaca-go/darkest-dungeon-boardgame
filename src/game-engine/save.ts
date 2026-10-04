@@ -21,6 +21,8 @@ import type {
 } from '../types';
 import type { QuestRuntimeToken } from '../types/content-runtime';
 import { validateProductionBossRoomStorage } from './bosses/room-storage';
+import { migrateHeroRuntimeV23, validateHeroRuntime, stableHeroState } from './heroes/save-contract';
+import { HERO_RUNTIME_VERSION } from '../data/heroes/runtime-registry';
 import { sourceAttackSkill } from './component-monster-runtime';
 import { nowIso } from './random';
 import {validateBossSaveContracts} from './bosses/save-dispatch';
@@ -112,7 +114,7 @@ export const STORAGE_KEY = 'dd-web-prototype-save-v1';
  *      Load 后由存档数据自行补齐（如缺失则视为空字符串，等待下次 selectQuest 重新生成）。
  *      迁移**不**根据 questCount 推断 Act，**不**代掷任何随机数，**不**触发 Threat Draw。
  */
-export const SAVE_VERSION = 22;
+export const SAVE_VERSION = 23;
 
 /**
  * v2 存档文件结构。
@@ -138,7 +140,7 @@ interface SaveEnvelopeV1 {
 }
 
 /** 可被迁移到当前版本的历史存档版本号。 */
-const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
+const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22];
 
 /** 读档结果：区分正常 / 无存档 / 损坏 / 版本不支持。 */
 export type LoadStatus = 'ok' | 'empty' | 'corrupt' | 'unsupported';
@@ -203,6 +205,10 @@ export function validateSaveFile(data: unknown): string | null {
   if (c) try { validateBossSaveContracts(c); }
   catch (error) { return `Boss successor save invalid: ${error instanceof Error ? error.message : String(error)}`; }
   if (!c || typeof c !== 'object') return '缺少 campaign 字段';
+  try {
+    validateHeroRuntime(c as CampaignState);
+    if (c.heroRuntimeSelection?.runtimeVersion === HERO_RUNTIME_VERSION && stableHeroState(s.battle) !== stableHeroState(c.battle)) throw new Error('Production Battle mirror mismatch');
+  } catch (error) { return `Hero runtime save invalid: ${error instanceof Error ? error.message : String(error)}`; }
   try { validateProductionBossRoomStorage(c); validateHeroDodgeCampaignMetadata(c); validateGraveyardReceipts(c); validateNecromancerPreparationDay(c); validateSourceTrinketRewards(c); if (c.ruinsRuleSetSelection?.ruleSetVersion === RUINS_V6) validateRuinsV6Selection(c); else if (c.ruinsRuleSetSelection?.ruleSetVersion === RUINS_V5) validateRuinsV5Selection(c); else validateRuinsVersionSelection(c); if (c.ruinsDrawState?.ruleSetVersion === RUINS_V6) validateRuinsV6Selection(c); if (c.ruinsDrawState) validateRuinsDrawState(c.ruinsDrawState); if (c.ruinsBoneFigureSupply) validateBoneFigureSupply(c.ruinsBoneFigureSupply, c.ruinsDrawState); if (c.battle) { validateLargeMovementContract(c.battle); validateOrdinaryRuinsBattle(c.battle, c.ruinsDrawState); validateRuinsPendingAttack(c.battle); } validateProductionOrdinaryThreat(c as CampaignState); validateQuestThreatHistory(c as CampaignState); }
   catch (error) { return `Hero Dodge metadata invalid: ${error instanceof Error ? error.message : String(error)}`; }
   if (!Array.isArray(c.heroes)) return 'campaign.heroes 缺失或不是数组';
@@ -1635,7 +1641,8 @@ function sanitizeCampaignProgress(raw: CampaignProgressState): CampaignProgressS
  *  → v16 = Phase 10E Final Encounter 四形态 → v17 = Phase 11A.1 Campaign Orchestration）。
  */
 export function migrateCampaignToLatest(campaign: CampaignState): CampaignState {
-  return migrateCampaignToV22(migrateCampaignToV20(migrateCampaignToV19(migrateCampaignToV18(migrateCampaignToV17(
+  if (campaign.heroRuntimeSelection?.runtimeVersion === HERO_RUNTIME_VERSION) return migrateHeroRuntimeV23(campaign);
+  return migrateHeroRuntimeV23(migrateCampaignToV22(migrateCampaignToV20(migrateCampaignToV19(migrateCampaignToV18(migrateCampaignToV17(
     migrateCampaignToV16(
       migrateCampaignToV15(
         migrateCampaignToV14(
@@ -1653,7 +1660,7 @@ export function migrateCampaignToLatest(campaign: CampaignState): CampaignState 
         ),
       ),
     ),
-  )))));
+  ))))));
 }
 
 /**
@@ -1667,6 +1674,9 @@ export function migrateCampaignToLatest(campaign: CampaignState): CampaignState 
  * → v15（Phase 10D Shuffling Horror：actFourState.shufflingHorrorEncounterState）。
  */
 export function migrateSaveFile(raw: unknown): SaveFile | null {
+  try { return migrateSaveFileUnchecked(raw); } catch { return null; }
+}
+function migrateSaveFileUnchecked(raw: unknown): SaveFile | null {
   if (!raw || typeof raw !== 'object') return null;
   const anyRaw = raw as Record<string, unknown>;
 
@@ -1712,7 +1722,7 @@ export function migrateSaveFile(raw: unknown): SaveFile | null {
  * - gold 为负 → 归零。
  */
 export function sanitizeSaveFile(save: SaveFile): SaveFile {
-  let c = migrateCampaignToV22(save.campaign);
+  let c = { ...migrateCampaignToV22(save.campaign), saveVersion: save.campaign.saveVersion };
   if (c.gold < 0) c = { ...c, gold: 0 };
 
   if (c.gamePhase === 'battle' && !c.battle) {
@@ -1740,6 +1750,11 @@ export function sanitizeSaveFile(save: SaveFile): SaveFile {
 
 /** 从快照恢复战役状态（先修复再取 campaign）。 */
 export function restoreSaveSnapshot(save: SaveFile): CampaignState {
+  validateHeroRuntime(save.campaign);
+  if (save.campaign.heroRuntimeSelection?.runtimeVersion === HERO_RUNTIME_VERSION) {
+    const error = validateSaveFile(save); if (error) throw new Error(error);
+    return save.campaign;
+  }
   validateBossSaveContracts(save.campaign);
   const campaign = sanitizeSaveFile(save).campaign;
   if (campaign.bossEncounterCheckpoint?.checkpointContext) validateThreatCheckpoint(campaign, campaign.bossEncounterCheckpoint);

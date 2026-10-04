@@ -7,7 +7,7 @@ import { applyRuinsPrintedEffects } from './printed-effect-runtime';
 import { resumeRuinsAttackContinuation } from './monster-runtime';
 
 /** Ordinary movement keeps the inherited ledger valid without changing the frozen v3 module. */
-function moveNormalCharacter(battle: BattleState, actorId: string, to: string): BattleState {
+export function moveNormalCharacter(battle: BattleState, actorId: string, to: string): BattleState {
   validateLargeMovementContract(battle);
   const next = structuredClone(battle), contract = next.largeMovementContract;
   const living = [...next.heroes, ...next.monsters].filter(unit => unit.isAlive);

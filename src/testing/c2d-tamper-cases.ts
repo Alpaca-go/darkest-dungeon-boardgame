@@ -1,0 +1,21 @@
+import type { CampaignState } from '../types';
+export const heroTamperCases:Record<string,(c:CampaignState)=>void>={
+  'unknown Hero':c=>{c.heroes[0].heroId='forged';},
+  'wrong Hero Level':c=>{c.heroes[0].level=4 as 1;},
+  'unknown definitionVersion':c=>{c.heroRuntimeSelection!.definitionVersion='unknown';},
+  'unknown runtimeVersion':c=>{c.heroRuntimeSelection!.runtimeVersion='unknown';},
+  'wrong Skill ownership':c=>{c.heroes[0].equippedSkillIds=['vestal-divine-grace'];c.heroes[0].skillLevels={'vestal-divine-grace':1};},
+  'prototype-only Skill':c=>{c.heroes[0].equippedSkillIds=['vestal-sanctuary'];c.heroes[0].skillLevels={'vestal-sanctuary':1};},
+  'Skill Level mismatch':c=>{c.heroes[0].skillLevels['highwayman-point-blank-shot']=3;},
+  'forged form':c=>{c.heroes[0].productionIdentity!.form='BEAST';},
+  'changed roll':c=>{c.heroProductionSession!.pendingAction!.storedRolls[0]=10;},
+  'changed targets':c=>{c.heroProductionSession!.pendingAction!.frozenTargetIds=['fixture-monster-4'];},
+  'changed phase':c=>{c.heroProductionSession!.pendingAction!.phase='ROLL';},
+  'duplicate resolved effect':c=>{const p=c.heroProductionSession!.pendingAction!;p.resolvedEffectIds.push(p.resolvedEffectIds[0]);},
+  'RNG rollback':c=>{c.heroProductionSession!.rngCursor=c.heroProductionSession!.pendingAction!.rngCheckpoint;},
+  'unknown deferredId':c=>{c.heroProductionSession!.events.find(e=>e.deferredId)!.deferredId='unknown';},
+  'production loaded as legacy':c=>{c.heroRuntimeSelection={runtimeVersion:'LEGACY_HERO_RUNTIME_V1',definitionVersion:'LEGACY_HERO_DEFINITION_V1'};},
+  'prototype HP':c=>{c.heroes[0].maxLife=999;},
+  'forged battle Dodge':c=>{c.battle!.heroes[0].bossCombatDodge=999;},
+  'removed runtime selection':c=>{delete c.heroRuntimeSelection;},
+};

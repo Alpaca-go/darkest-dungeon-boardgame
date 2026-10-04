@@ -123,6 +123,7 @@ export interface ProvisionPool {
  * dead 与 atDeathsDoor 不得同时为 true。
  */
 export interface HeroInstance {
+  productionIdentity?: import('./hero-runtime').HeroProductionIdentity;
   instanceId: string;
   heroId: string;
   name: string;
@@ -259,6 +260,10 @@ export interface DungeonState {
 
 /** 战斗单位（英雄或怪物）。所有字段均可序列化以支持 localStorage 存档。 */
 export interface BattleUnit {
+  productionIdentity?: import('./hero-runtime').HeroProductionIdentity;
+  actorTypeTags?: { tags: string[]; sourceBindingId: string };
+  productionMovement?: import('./hero-production').PrintedField<{ glyphId: string; count: number }>;
+  printedConditionTokens?: Array<{ eventId: string; type: string; magnitude: import('./hero-production').PrintedField<number>; turns: number }>;
   /** Definition-bound board-game Dodge for the Boss foundation. */
   bossCombatDodge?: number;
   heroDodgeBinding?: import('./hero-dodge-rules').ResolvedHeroDodge;
@@ -793,6 +798,8 @@ export interface HeroLevelProfile {
 
 /** 战役状态（存档根对象）。 */
 export interface CampaignState {
+  heroRuntimeSelection?: import('./hero-runtime').HeroRuntimeSelection;
+  heroProductionSession?: import('./hero-runtime').HeroProductionSession;
   ruinsBoneFigureSupply?: import('../game-engine/ruins/physical-supply').BoneFigureSupplyState;
   ruinsRuleSetSelection?: import('../game-engine/rules/ruins-v4').RuinsVersionSelection | import('../game-engine/rules/ruins-v5').RuinsV5Selection | import('../game-engine/rules/ruins-v6').RuinsV6Selection;
   ruinsDrawState?: import('../game-engine/ruins/encounter-draw').RuinsDrawState;

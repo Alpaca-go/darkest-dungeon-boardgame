@@ -165,6 +165,7 @@ export function getActiveUnit(state: BattleState): BattleUnit | undefined {
  * 但必须复用同一套英雄单位构建逻辑，故导出。
  */
 export function makeHeroUnit(hero: HeroInstance, index: number, campaign: CampaignState): BattleUnit {
+  if (hero.productionIdentity) throw new Error('Production Hero requires the controlled Hero runtime deployment route');
   const combatDefinition = getHeroCombatDefinition(hero.heroId, hero.level);
   const hp = Math.max(0, hero.maxLife - hero.wounds);
   const effectiveSkillLevels: Record<string, 1 | 2 | 3> = {};
@@ -625,6 +626,7 @@ export function prepareHeroAttackResolution(
   if (state.bossEncounter?.pendingChoice) return null;
   const actor = findUnit(state, unitId);
   const raw = getSkillById(skillId);
+  if (actor?.productionIdentity) throw new Error('Production Hero requires a production action plan');
   if (!actor || !raw) return null;
   const skill = normalizeHeroSkill(raw);
   if (skill.targetSide !== 'enemy') return null;
@@ -696,6 +698,7 @@ function heroUseSkillInternal(
   finalDamageOverride?: number | null,
 ): BattleState {
   const actor = findUnit(state, unitId);
+  if (actor?.productionIdentity) throw new Error('Production Hero requires a production action plan');
   if (state.bossEncounter?.pendingChoice || state.ruinsContext?.pendingChoice || state.ruinsContext?.pendingReanimationChoice || state.ruinsContext?.pendingThreatDeathIds?.length) return state;
   if (!actor || actor.side !== 'hero' || actor.id !== state.activeActorId) return state;
   if (state.currentActionPoints <= 0) return state;

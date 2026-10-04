@@ -108,9 +108,9 @@ export function ruinsDisplacementCandidates(battle: BattleState, unitId: string,
   return frontier.filter(id => id !== from).sort();
 }
 
-function shuffleStance(battle: BattleState, unitId: string, direction: 'push' | 'pull', distance: number): BattleState {
+export function shuffleStance(battle: BattleState, unitId: string, direction: 'push' | 'pull', distance: number): BattleState {
   const unit = findUnit(battle, unitId);
-  if (unit.side === 'monster' && battle.ruinsContext!.ruleSetVersion === RUINS_V6) {
+  if (unit.side === 'monster' && battle.ruinsContext?.ruleSetVersion === RUINS_V6) {
     const positions = shuffleAtomicStanceBlocks(battle.monsters.filter(m => m.isAlive).map(m => ({
       id: m.id, start: m.position - 1,
       width: ruinsMonsterForShuffle(battle.ruinsContext!, m.id).stanceSlots,
@@ -132,7 +132,8 @@ function shuffleStance(battle: BattleState, unitId: string, direction: 'push' | 
   if (unit.side === 'monster') {
     const slots = new Set<number>();
     for (const monster of next.monsters.filter(candidate => candidate.isAlive)) {
-      const width = ruinsMonster(battle.ruinsContext!.definitionIds[monster.id], battle.ruinsContext!.ruleSetVersion).stanceSlots;
+      const width = battle.ruinsContext ? ruinsMonster(battle.ruinsContext.definitionIds[monster.id], battle.ruinsContext.ruleSetVersion).stanceSlots
+        : battle.bossEncounter?.spawnDefinitions[monster.sourceId]?.occupiedSlots ?? 1;
       for (let offset = 0; offset < width; offset++) {
         const slot = monster.position + offset;
         if (slot > 4 || slots.has(slot)) throw new Error('SOURCE_UNRESOLVED: LARGE_STANCE_SHUFFLE_SLOT_COLLISION');

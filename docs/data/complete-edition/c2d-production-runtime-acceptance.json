@@ -1,0 +1,24 @@
+{
+  "phase": "11A.5-C2D",
+  "baseline": "e1e9f27c882000bee59cec115ec0d1b3f7fcb5de",
+  "definitionVersion": "C2C-HERO-PRODUCTION-DEFINITION-v1",
+  "runtimeVersion": "C2D-HERO-PRODUCTION-RUNTIME-v1",
+  "ambiguityPolicy": "SOURCE_AMBIGUITY_DEFER_POLICY_V1",
+  "normalPlayerRouteEnabled": false,
+  "productionReady": false,
+  "outcome": "HERO_PRODUCTION_RUNTIME_FOUNDATION_ACCEPTED",
+  "runtimeFoundation": true,
+  "productionProfilesExecutable": true,
+  "productionSkillsCompileComplete": true,
+  "saveReplayAccepted": true,
+  "legacySaveCompatibility": true,
+  "deferredManualValidationPreserved": true,
+  "C2EAllowed": true,
+  "releaseGateRequirement": {
+    "workflow": "Production release gate",
+    "headBinding": "EXACT_FINAL_C2D_HEAD",
+    "statusRequired": "completed",
+    "conclusionRequired": "success",
+    "proofLocation": "GitHub Actions; final exact-head receipt is external to the self-referential commit"
+  }
+}

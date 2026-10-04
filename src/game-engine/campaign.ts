@@ -1,4 +1,5 @@
 import type { CampaignState, HeroInstance, ProvisionPool } from '../types';
+import { LEGACY_HERO_SELECTION } from '../data/heroes/runtime-registry';
 import { createId, nowIso } from './random';
 import { getHeroById } from '../data/heroes';
 import { getSkillsByHero } from '../data/skills';
@@ -42,6 +43,7 @@ export function createNewCampaign(
   return {
     saveVersion: SAVE_VERSION, // v8 = Phase 9A（Boss / Imminent Threat / Face the Threat）
     runtimeContentProfile,
+    heroRuntimeSelection: { ...LEGACY_HERO_SELECTION },
     enabledContentSets: runtimeContentProfile === 'community-complete-edition'
       ? ['core', 'color-of-madness', 'crimson-court']
       : ['core'],

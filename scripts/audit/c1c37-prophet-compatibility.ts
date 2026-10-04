@@ -25,6 +25,8 @@ const assert=(ok:unknown,message:string)=>{if(!ok)throw new Error(message);};
 
 export function prophetPrerequisite(level:1|2|3):CampaignState {
   let c=applyDefaultLoadout(selectParty(createNewCampaign('community-complete-edition'),['crusader','leper','highwayman','vestal']));
+  // This scenario reproduces the accepted v22 legacy save family, not a new C2D campaign.
+  c.saveVersion=22; delete c.heroRuntimeSelection;
   c.gamePhase='quest-select';c=selectProductionRuinsV6(explicitlyMigrateHeroDodgeToV2(c,'c1c37-compatibility-dodge'));
   c.act=level;c.campaignLevel=level;
   Object.assign(c.campaignProgress,{act:level,campaignLevel:level,activeBossFamilyId:'prophet',defeatedBossFamilyIds:level===3?['necromancer','hag']:level===2?['necromancer']:[]});

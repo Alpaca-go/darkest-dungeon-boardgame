@@ -5,6 +5,7 @@ import { shuffleWithRng, rollD10 } from '../campaign/act-four/rng';
 import { validateSourceMonsterAttack, startSourceMonsterAttack, continuePrintedMonsterTurn } from '../component-monster-runtime';
 import { resolveProductionMonsterDefinition } from './component-adapters/bone-combat-adapter';
 import { resolveHeroDodge } from '../rules/hero-dodge';
+import { resolveProductionUnitDodge } from '../heroes/production-hero';
 import {encounterRuleDependencies} from './definitions';
 import {assertProphetHeroEntryPlacement} from '../prophet/production-definition';
 import {resolveBossHeroStartingArea} from './hero-entry';
@@ -62,6 +63,7 @@ export function assertBossEncounter(b: BattleState): void {
   const e = encounter(b);
   if (e.checkpointContext?.heroDodgeBindings) {
     for (const hero of b.heroes) {
+      if (hero.productionIdentity) { resolveProductionUnitDodge(hero); continue; }
       const binding=hero.heroDodgeBinding ?? e.checkpointContext.heroDodgeBindings[hero.id];
       if (!binding || JSON.stringify(binding)!==JSON.stringify(resolveHeroDodge({...binding,ruleSetVersion:encounterRuleDependencies(e).heroDodgeRuleSetVersion}))
         || hero.bossCombatDodge!==binding.value) throw new Error('Pinned Hero Dodge binding invalid');

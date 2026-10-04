@@ -28,6 +28,8 @@ jobs:
       - run: npm test -- --reporter=json --outputFile=tmp-c1c38-final-tests.json
       - run: node scripts/audit/verify-c2a-test-report.mjs tmp-c1c38-final-tests.json
       - run: npm run build
+      - run: npm run audit:complete-edition-c2d
+      - run: npm run verify:complete-edition-c2d
       - run: npm run historical-baseline-validation
       - run: npm run verify:immutable-phase-baselines
       - run: npm run verify:necromancer-successor-compatibility

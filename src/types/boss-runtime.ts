@@ -115,6 +115,7 @@ export interface DeathSnapshot {
   tokenId: string | null;
 }
 export type BossContinuation =
+  | { kind: 'hero-production'; actionId: string; field: string }
   | {kind:'prophet-crowded'; actionKey:string; parentEventId:string}
   | { kind: 'monster-move'; monsterId: string; skillNumber: number; targetIds: string[]; targetAreaId: string; parentEventId: string }
   | { kind: 'source-self-move'; monsterId: string; targetIds: string[]; attackRoll: number; source: import('./component-combat').SourceMonsterAttack; parentEventId: string }

@@ -17,6 +17,13 @@ vi.mock('../../scripts/audit/c1c28-contract', async importOriginal => {
   return { ...original, verifyBaselineAndScope: () => verifyHistoricalBaseline('c1c28') };
 });
 
+// C1C31's frozen entry-attempt hash includes the pre-C2D save envelope metadata.
+// Exercise its original evidence verifier and tests at the accepted C2C checkout.
+vi.mock('../../scripts/audit/c1c31-contract', async importOriginal => {
+  const original = await importOriginal<typeof import('../../scripts/audit/c1c31-contract')>();
+  return { ...original, verifyArtifacts: () => verifyHistoricalBaseline('c2c',['src/audit/c1c31-necromancer-runtime-foundation.test.ts']) };
+});
+
 // The legacy CLI test invokes the real generator. Its supported environment
 // overrides route generated outputs outside the frozen repository, while it
 // still consumes the actual official-source inputs and locked rulebook.

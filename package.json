@@ -230,7 +230,9 @@
     "audit:complete-edition-c2b": "vite-node scripts/audit/c2b-hero-literal-closure.ts --write",
     "verify:complete-edition-c2b": "vite-node scripts/audit/verify-historical-baselines.ts c2b",
     "audit:complete-edition-c2c": "vite-node scripts/audit/c2c-hero-production.ts --write",
-    "verify:complete-edition-c2c": "vite-node scripts/audit/c2c-hero-production.ts --verify"
+    "verify:complete-edition-c2c": "vite-node scripts/audit/verify-historical-baselines.ts c2c",
+    "audit:complete-edition-c2d": "vite-node scripts/audit/c2d-hero-runtime.ts --write",
+    "verify:complete-edition-c2d": "vite-node scripts/audit/c2d-hero-runtime.ts --verify"
   },
   "dependencies": {
     "lucide-react": "^0.408.0",

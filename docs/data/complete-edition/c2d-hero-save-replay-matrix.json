@@ -1,0 +1,1103 @@
+{
+  "phase": "11A.5-C2D",
+  "baseline": "e1e9f27c882000bee59cec115ec0d1b3f7fcb5de",
+  "definitionVersion": "C2C-HERO-PRODUCTION-DEFINITION-v1",
+  "runtimeVersion": "C2D-HERO-PRODUCTION-RUNTIME-v1",
+  "ambiguityPolicy": "SOURCE_AMBIGUITY_DEFER_POLICY_V1",
+  "normalPlayerRouteEnabled": false,
+  "productionReady": false,
+  "productionRuntime": [
+    {
+      "skillId": "highwayman-point-blank-shot",
+      "status": "PASS",
+      "idle": "PASS",
+      "checkpoints": [
+        {
+          "phase": "VALIDATE_ACTIVATION",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [],
+          "storedRolls": [],
+          "resolvedEffectCount": 0,
+          "pendingTransition": null
+        },
+        {
+          "phase": "SELECT_TARGETS",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [],
+          "storedRolls": [],
+          "resolvedEffectCount": 0,
+          "pendingTransition": null
+        },
+        {
+          "phase": "SELECT_TARGETS",
+          "pendingEffectIndex": 0,
+          "choice": "hero-production",
+          "frozenTargets": [],
+          "storedRolls": [],
+          "resolvedEffectCount": 0,
+          "pendingTransition": null
+        },
+        {
+          "phase": "ROLL",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "fixture-monster-1"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 0,
+          "pendingTransition": null
+        },
+        {
+          "phase": "SELF_EFFECTS",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "fixture-monster-1"
+          ],
+          "storedRolls": [
+            7
+          ],
+          "resolvedEffectCount": 0,
+          "pendingTransition": null
+        },
+        {
+          "phase": "SELF_EFFECTS",
+          "pendingEffectIndex": 1,
+          "choice": null,
+          "frozenTargets": [
+            "fixture-monster-1"
+          ],
+          "storedRolls": [
+            7
+          ],
+          "resolvedEffectCount": 1,
+          "pendingTransition": null
+        },
+        {
+          "phase": "TARGET_EFFECTS",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "fixture-monster-1"
+          ],
+          "storedRolls": [
+            7
+          ],
+          "resolvedEffectCount": 1,
+          "pendingTransition": null
+        },
+        {
+          "phase": "TARGET_EFFECTS",
+          "pendingEffectIndex": 1,
+          "choice": null,
+          "frozenTargets": [
+            "fixture-monster-1"
+          ],
+          "storedRolls": [
+            7
+          ],
+          "resolvedEffectCount": 2,
+          "pendingTransition": null
+        },
+        {
+          "phase": "TARGET_EFFECTS",
+          "pendingEffectIndex": 2,
+          "choice": null,
+          "frozenTargets": [
+            "fixture-monster-1"
+          ],
+          "storedRolls": [
+            7
+          ],
+          "resolvedEffectCount": 3,
+          "pendingTransition": null
+        },
+        {
+          "phase": "REACTION_WINDOWS",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "fixture-monster-1"
+          ],
+          "storedRolls": [
+            7
+          ],
+          "resolvedEffectCount": 3,
+          "pendingTransition": null
+        },
+        {
+          "phase": "COMMIT",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "fixture-monster-1"
+          ],
+          "storedRolls": [
+            7
+          ],
+          "resolvedEffectCount": 3,
+          "pendingTransition": null
+        },
+        {
+          "phase": "COMPLETE",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "fixture-monster-1"
+          ],
+          "storedRolls": [
+            7
+          ],
+          "resolvedEffectCount": 3,
+          "pendingTransition": null
+        }
+      ],
+      "finalStateMatches": true,
+      "eventJournalMatches": true
+    },
+    {
+      "skillId": "vestal-divine-comfort",
+      "status": "PASS",
+      "idle": "PASS",
+      "checkpoints": [
+        {
+          "phase": "VALIDATE_ACTIVATION",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [],
+          "storedRolls": [],
+          "resolvedEffectCount": 0,
+          "pendingTransition": null
+        },
+        {
+          "phase": "SELECT_TARGETS",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [],
+          "storedRolls": [],
+          "resolvedEffectCount": 0,
+          "pendingTransition": null
+        },
+        {
+          "phase": "SELECT_TARGETS",
+          "pendingEffectIndex": 0,
+          "choice": "hero-production",
+          "frozenTargets": [],
+          "storedRolls": [],
+          "resolvedEffectCount": 0,
+          "pendingTransition": null
+        },
+        {
+          "phase": "ROLL",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1",
+            "u_production-2",
+            "u_production-3"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 0,
+          "pendingTransition": null
+        },
+        {
+          "phase": "SELF_EFFECTS",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1",
+            "u_production-2",
+            "u_production-3"
+          ],
+          "storedRolls": [
+            7
+          ],
+          "resolvedEffectCount": 0,
+          "pendingTransition": null
+        },
+        {
+          "phase": "SELF_EFFECTS",
+          "pendingEffectIndex": 1,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1",
+            "u_production-2",
+            "u_production-3"
+          ],
+          "storedRolls": [
+            7
+          ],
+          "resolvedEffectCount": 1,
+          "pendingTransition": null
+        },
+        {
+          "phase": "TARGET_EFFECTS",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1",
+            "u_production-2",
+            "u_production-3"
+          ],
+          "storedRolls": [
+            7
+          ],
+          "resolvedEffectCount": 1,
+          "pendingTransition": null
+        },
+        {
+          "phase": "TARGET_EFFECTS",
+          "pendingEffectIndex": 1,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1",
+            "u_production-2",
+            "u_production-3"
+          ],
+          "storedRolls": [
+            7
+          ],
+          "resolvedEffectCount": 2,
+          "pendingTransition": null
+        },
+        {
+          "phase": "TARGET_EFFECTS",
+          "pendingEffectIndex": 2,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1",
+            "u_production-2",
+            "u_production-3"
+          ],
+          "storedRolls": [
+            7
+          ],
+          "resolvedEffectCount": 3,
+          "pendingTransition": null
+        },
+        {
+          "phase": "TARGET_EFFECTS",
+          "pendingEffectIndex": 3,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1",
+            "u_production-2",
+            "u_production-3"
+          ],
+          "storedRolls": [
+            7
+          ],
+          "resolvedEffectCount": 4,
+          "pendingTransition": null
+        },
+        {
+          "phase": "REACTION_WINDOWS",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1",
+            "u_production-2",
+            "u_production-3"
+          ],
+          "storedRolls": [
+            7
+          ],
+          "resolvedEffectCount": 4,
+          "pendingTransition": null
+        },
+        {
+          "phase": "COMMIT",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1",
+            "u_production-2",
+            "u_production-3"
+          ],
+          "storedRolls": [
+            7
+          ],
+          "resolvedEffectCount": 4,
+          "pendingTransition": null
+        },
+        {
+          "phase": "COMPLETE",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1",
+            "u_production-2",
+            "u_production-3"
+          ],
+          "storedRolls": [
+            7
+          ],
+          "resolvedEffectCount": 4,
+          "pendingTransition": null
+        }
+      ],
+      "finalStateMatches": true,
+      "eventJournalMatches": true
+    },
+    {
+      "skillId": "flagellant-suffer",
+      "status": "PASS",
+      "idle": "PASS",
+      "checkpoints": [
+        {
+          "phase": "VALIDATE_ACTIVATION",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [],
+          "storedRolls": [],
+          "resolvedEffectCount": 0,
+          "pendingTransition": null
+        },
+        {
+          "phase": "SELECT_TARGETS",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [],
+          "storedRolls": [],
+          "resolvedEffectCount": 0,
+          "pendingTransition": null
+        },
+        {
+          "phase": "SELECT_TARGETS",
+          "pendingEffectIndex": 0,
+          "choice": "hero-production",
+          "frozenTargets": [],
+          "storedRolls": [],
+          "resolvedEffectCount": 0,
+          "pendingTransition": null
+        },
+        {
+          "phase": "ROLL",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 0,
+          "pendingTransition": null
+        },
+        {
+          "phase": "SELF_EFFECTS",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 0,
+          "pendingTransition": null
+        },
+        {
+          "phase": "SELF_EFFECTS",
+          "pendingEffectIndex": 1,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 1,
+          "pendingTransition": null
+        },
+        {
+          "phase": "SELF_EFFECTS",
+          "pendingEffectIndex": 2,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 2,
+          "pendingTransition": null
+        },
+        {
+          "phase": "TARGET_EFFECTS",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 2,
+          "pendingTransition": null
+        },
+        {
+          "phase": "TARGET_EFFECTS",
+          "pendingEffectIndex": 1,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 3,
+          "pendingTransition": null
+        },
+        {
+          "phase": "TARGET_EFFECTS",
+          "pendingEffectIndex": 2,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 4,
+          "pendingTransition": null
+        },
+        {
+          "phase": "REACTION_WINDOWS",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 4,
+          "pendingTransition": null
+        },
+        {
+          "phase": "COMMIT",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 4,
+          "pendingTransition": null
+        },
+        {
+          "phase": "COMPLETE",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 4,
+          "pendingTransition": null
+        }
+      ],
+      "finalStateMatches": true,
+      "eventJournalMatches": true
+    },
+    {
+      "skillId": "abomination-transform-to-beast",
+      "status": "PASS",
+      "idle": "PASS",
+      "checkpoints": [
+        {
+          "phase": "VALIDATE_ACTIVATION",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [],
+          "storedRolls": [],
+          "resolvedEffectCount": 0,
+          "pendingTransition": null
+        },
+        {
+          "phase": "SELECT_TARGETS",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [],
+          "storedRolls": [],
+          "resolvedEffectCount": 0,
+          "pendingTransition": null
+        },
+        {
+          "phase": "ROLL",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1",
+            "u_production-2",
+            "u_production-3",
+            "u_production-4"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 0,
+          "pendingTransition": null
+        },
+        {
+          "phase": "SELF_EFFECTS",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1",
+            "u_production-2",
+            "u_production-3",
+            "u_production-4"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 0,
+          "pendingTransition": null
+        },
+        {
+          "phase": "SELF_EFFECTS",
+          "pendingEffectIndex": 1,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1",
+            "u_production-2",
+            "u_production-3",
+            "u_production-4"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 1,
+          "pendingTransition": {
+            "from": "HUMAN",
+            "to": "BEAST"
+          }
+        },
+        {
+          "phase": "SELF_EFFECTS",
+          "pendingEffectIndex": 2,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1",
+            "u_production-2",
+            "u_production-3",
+            "u_production-4"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 2,
+          "pendingTransition": {
+            "from": "HUMAN",
+            "to": "BEAST"
+          }
+        },
+        {
+          "phase": "SELF_EFFECTS",
+          "pendingEffectIndex": 3,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1",
+            "u_production-2",
+            "u_production-3",
+            "u_production-4"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 3,
+          "pendingTransition": {
+            "from": "HUMAN",
+            "to": "BEAST"
+          }
+        },
+        {
+          "phase": "SELF_EFFECTS",
+          "pendingEffectIndex": 4,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1",
+            "u_production-2",
+            "u_production-3",
+            "u_production-4"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 4,
+          "pendingTransition": {
+            "from": "HUMAN",
+            "to": "BEAST"
+          }
+        },
+        {
+          "phase": "TARGET_EFFECTS",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1",
+            "u_production-2",
+            "u_production-3",
+            "u_production-4"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 4,
+          "pendingTransition": {
+            "from": "HUMAN",
+            "to": "BEAST"
+          }
+        },
+        {
+          "phase": "TARGET_EFFECTS",
+          "pendingEffectIndex": 1,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1",
+            "u_production-2",
+            "u_production-3",
+            "u_production-4"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 5,
+          "pendingTransition": {
+            "from": "HUMAN",
+            "to": "BEAST"
+          }
+        },
+        {
+          "phase": "TARGET_EFFECTS",
+          "pendingEffectIndex": 2,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1",
+            "u_production-2",
+            "u_production-3",
+            "u_production-4"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 6,
+          "pendingTransition": {
+            "from": "HUMAN",
+            "to": "BEAST"
+          }
+        },
+        {
+          "phase": "TARGET_EFFECTS",
+          "pendingEffectIndex": 3,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1",
+            "u_production-2",
+            "u_production-3",
+            "u_production-4"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 7,
+          "pendingTransition": {
+            "from": "HUMAN",
+            "to": "BEAST"
+          }
+        },
+        {
+          "phase": "TARGET_EFFECTS",
+          "pendingEffectIndex": 4,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1",
+            "u_production-2",
+            "u_production-3",
+            "u_production-4"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 8,
+          "pendingTransition": {
+            "from": "HUMAN",
+            "to": "BEAST"
+          }
+        },
+        {
+          "phase": "TARGET_EFFECTS",
+          "pendingEffectIndex": 5,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1",
+            "u_production-2",
+            "u_production-3",
+            "u_production-4"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 9,
+          "pendingTransition": {
+            "from": "HUMAN",
+            "to": "BEAST"
+          }
+        },
+        {
+          "phase": "TARGET_EFFECTS",
+          "pendingEffectIndex": 6,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1",
+            "u_production-2",
+            "u_production-3",
+            "u_production-4"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 10,
+          "pendingTransition": {
+            "from": "HUMAN",
+            "to": "BEAST"
+          }
+        },
+        {
+          "phase": "TARGET_EFFECTS",
+          "pendingEffectIndex": 7,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1",
+            "u_production-2",
+            "u_production-3",
+            "u_production-4"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 11,
+          "pendingTransition": {
+            "from": "HUMAN",
+            "to": "BEAST"
+          }
+        },
+        {
+          "phase": "TARGET_EFFECTS",
+          "pendingEffectIndex": 8,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1",
+            "u_production-2",
+            "u_production-3",
+            "u_production-4"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 12,
+          "pendingTransition": {
+            "from": "HUMAN",
+            "to": "BEAST"
+          }
+        },
+        {
+          "phase": "REACTION_WINDOWS",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1",
+            "u_production-2",
+            "u_production-3",
+            "u_production-4"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 12,
+          "pendingTransition": {
+            "from": "HUMAN",
+            "to": "BEAST"
+          }
+        },
+        {
+          "phase": "COMMIT",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1",
+            "u_production-2",
+            "u_production-3",
+            "u_production-4"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 12,
+          "pendingTransition": {
+            "from": "HUMAN",
+            "to": "BEAST"
+          }
+        },
+        {
+          "phase": "COMPLETE",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1",
+            "u_production-2",
+            "u_production-3",
+            "u_production-4"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 12,
+          "pendingTransition": {
+            "from": "HUMAN",
+            "to": "BEAST"
+          }
+        }
+      ],
+      "finalStateMatches": true,
+      "eventJournalMatches": true
+    },
+    {
+      "skillId": "plague-doctor-emboldening-vapours",
+      "status": "PASS",
+      "idle": "PASS",
+      "checkpoints": [
+        {
+          "phase": "VALIDATE_ACTIVATION",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [],
+          "storedRolls": [],
+          "resolvedEffectCount": 0,
+          "pendingTransition": null
+        },
+        {
+          "phase": "SELECT_TARGETS",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [],
+          "storedRolls": [],
+          "resolvedEffectCount": 0,
+          "pendingTransition": null
+        },
+        {
+          "phase": "SELECT_TARGETS",
+          "pendingEffectIndex": 0,
+          "choice": "hero-production",
+          "frozenTargets": [],
+          "storedRolls": [],
+          "resolvedEffectCount": 0,
+          "pendingTransition": null
+        },
+        {
+          "phase": "ROLL",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 0,
+          "pendingTransition": null
+        },
+        {
+          "phase": "SELF_EFFECTS",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 0,
+          "pendingTransition": null
+        },
+        {
+          "phase": "TARGET_EFFECTS",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 0,
+          "pendingTransition": null
+        },
+        {
+          "phase": "TARGET_EFFECTS",
+          "pendingEffectIndex": 1,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 1,
+          "pendingTransition": null
+        },
+        {
+          "phase": "TARGET_EFFECTS",
+          "pendingEffectIndex": 2,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 2,
+          "pendingTransition": null
+        },
+        {
+          "phase": "REACTION_WINDOWS",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 2,
+          "pendingTransition": null
+        },
+        {
+          "phase": "COMMIT",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 2,
+          "pendingTransition": null
+        },
+        {
+          "phase": "COMPLETE",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "u_production-1"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 2,
+          "pendingTransition": null
+        }
+      ],
+      "finalStateMatches": true,
+      "eventJournalMatches": true
+    },
+    {
+      "skillId": "plague-doctor-noxious-blast",
+      "status": "PASS",
+      "idle": "PASS",
+      "checkpoints": [
+        {
+          "phase": "VALIDATE_ACTIVATION",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [],
+          "storedRolls": [],
+          "resolvedEffectCount": 0,
+          "pendingTransition": null
+        },
+        {
+          "phase": "SELECT_TARGETS",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [],
+          "storedRolls": [],
+          "resolvedEffectCount": 0,
+          "pendingTransition": null
+        },
+        {
+          "phase": "SELECT_TARGETS",
+          "pendingEffectIndex": 0,
+          "choice": "hero-production",
+          "frozenTargets": [],
+          "storedRolls": [],
+          "resolvedEffectCount": 0,
+          "pendingTransition": null
+        },
+        {
+          "phase": "ROLL",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "fixture-monster-1"
+          ],
+          "storedRolls": [],
+          "resolvedEffectCount": 0,
+          "pendingTransition": null
+        },
+        {
+          "phase": "SELF_EFFECTS",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "fixture-monster-1"
+          ],
+          "storedRolls": [
+            7
+          ],
+          "resolvedEffectCount": 0,
+          "pendingTransition": null
+        },
+        {
+          "phase": "TARGET_EFFECTS",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "fixture-monster-1"
+          ],
+          "storedRolls": [
+            7
+          ],
+          "resolvedEffectCount": 0,
+          "pendingTransition": null
+        },
+        {
+          "phase": "TARGET_EFFECTS",
+          "pendingEffectIndex": 1,
+          "choice": null,
+          "frozenTargets": [
+            "fixture-monster-1"
+          ],
+          "storedRolls": [
+            7
+          ],
+          "resolvedEffectCount": 1,
+          "pendingTransition": null
+        },
+        {
+          "phase": "TARGET_EFFECTS",
+          "pendingEffectIndex": 2,
+          "choice": null,
+          "frozenTargets": [
+            "fixture-monster-1"
+          ],
+          "storedRolls": [
+            7
+          ],
+          "resolvedEffectCount": 2,
+          "pendingTransition": null
+        },
+        {
+          "phase": "TARGET_EFFECTS",
+          "pendingEffectIndex": 3,
+          "choice": null,
+          "frozenTargets": [
+            "fixture-monster-1"
+          ],
+          "storedRolls": [
+            7
+          ],
+          "resolvedEffectCount": 3,
+          "pendingTransition": null
+        },
+        {
+          "phase": "REACTION_WINDOWS",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "fixture-monster-1"
+          ],
+          "storedRolls": [
+            7
+          ],
+          "resolvedEffectCount": 3,
+          "pendingTransition": null
+        },
+        {
+          "phase": "COMMIT",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "fixture-monster-1"
+          ],
+          "storedRolls": [
+            7
+          ],
+          "resolvedEffectCount": 3,
+          "pendingTransition": null
+        },
+        {
+          "phase": "COMPLETE",
+          "pendingEffectIndex": 0,
+          "choice": null,
+          "frozenTargets": [
+            "fixture-monster-1"
+          ],
+          "storedRolls": [
+            7
+          ],
+          "resolvedEffectCount": 3,
+          "pendingTransition": null
+        }
+      ],
+      "finalStateMatches": true,
+      "eventJournalMatches": true
+    }
+  ],
+  "legacyRuntime": {
+    "version": 22,
+    "migration": "metadata only",
+    "heroRuntimeSelection": "LEGACY_HERO_RUNTIME_V1",
+    "idsPreserved": true
+  },
+  "rerolls": 0,
+  "duplicateEffects": 0,
+  "duplicateDeferredReceipts": 0
+}
