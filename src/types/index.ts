@@ -260,6 +260,7 @@ export interface DungeonState {
 
 /** 战斗单位（英雄或怪物）。所有字段均可序列化以支持 localStorage 存档。 */
 export interface BattleUnit {
+  productionMonsterProfile?: { definitionId: string; tags: string[]; baseProtection: boolean | null; printedSpeed: number | null; dodge: number; stanceSlots: number };
   productionIdentity?: import('./hero-runtime').HeroProductionIdentity;
   actorTypeTags?: { tags: string[]; sourceBindingId: string };
   productionMovement?: import('./hero-production').PrintedField<{ glyphId: string; count: number }>;
@@ -386,6 +387,11 @@ export interface PendingBattleAction {
  * resolves the two source-distinct Trinket reaction windows.
  */
 export interface PendingMonsterAttack {
+  productionMonsterAttack?: {
+    runtimeVersion: string; integrationVersion: string; definitionId: string; actionId: string;
+    operationIndex: number; targetIds: string[]; parentEventId: string;
+    operation: Extract<import('../game-engine/monsters/production-runtime-types').MonsterRuntimeOperation, { kind: 'ATTACK' }>;
+  };
     sourceAttack?: import('./component-combat').SourceMonsterAttack;
     ruinsAttack?: {
       skillNumber: number;
@@ -468,6 +474,7 @@ export interface CommunityGuardianRoomState {
 }
 
 export interface BattleState {
+  productionMonsterContext?: import('../game-engine/monsters/production-battle-types').ProductionMonsterBattleContext;
     /** Saved ordinary Ruins encounter; absent from legacy and Boss battles. */
     ruinsContext?: import('./ruins-executable').RuinsBattleContext;
     necromancerFigureBinding?: import('../game-engine/ruins/physical-supply').NecromancerFigureBinding;

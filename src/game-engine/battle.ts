@@ -12,6 +12,9 @@ import { applySourceTargetPush, sourceAttackSkill, resolveSourceAttackDodge, pre
 import { finishRuinsAttack, prepareRuinsMonsterTurn, resolveRuinsAttackValues } from './ruins/monster-runtime';
 import { withRuinsRandom, withRuinsBattleSources, recordRuinsEvent } from './ruins/printed-effect-runtime';
 import { applyRuinsEnemyDamage, tickRuinsConditions } from './ruins/condition-runtime';
+import { beginProductionMonsterTurn, withProductionMonsterSources, productionMonsterAttackSkill,
+  resolveProductionMonsterAttackValues, finishProductionMonsterAttack, applyProductionMonsterEnemyDamage,
+  tickProductionMonsterProtection } from './monsters/production-battle-runtime';
 import { isRuinsHealingProhibited, runRuinsRoomTrigger } from './ruins/room-runtime';
 import { makeProductionHeroUnit } from './heroes/production-hero';
 import { captureOrdinaryThreatDeaths } from './ruins/production-threat-runtime';
@@ -357,6 +360,10 @@ export function advanceTurn(state: BattleState): BattleState {
   }
   if (state.ruinsContext?.pendingThreatDeathIds?.length || state.ruinsContext?.pendingReanimationChoice) return state;
   if (state.bossEncounter?.pendingChoice || (state.ruinsContext?.pendingChoice || state.ruinsContext?.pendingReanimationChoice || state.ruinsContext?.pendingThreatDeathIds?.length) || state.pendingMonsterAttack) return state;
+  if (state.productionMonsterContext) {
+    if (state.productionMonsterContext.pendingExecution || state.productionMonsterContext.pendingChoice || state.productionMonsterContext.blocker) return state;
+    return withProductionMonsterSources(structuredClone(state), advanceTurnInternal);
+  }
   if (state.bossEncounter) return withBossEncounterSources(state, s => advanceTurnInternal(s));
   if (state.ruinsContext) return withRuinsBattleSources(structuredClone(state), advanceTurnInternal);
   return advanceTurnInternal(state);
@@ -440,6 +447,13 @@ function advanceTurnInternal(state: BattleState): BattleState {
     }
 
     if (activated.side === 'monster') {
+      if (s.productionMonsterContext) {
+        s = beginProductionMonsterTurn(s, id);
+        if (s.pendingMonsterAttack || s.productionMonsterContext?.pendingChoice || s.productionMonsterContext?.blocker || s.ruinsContext?.pendingChoice) return s;
+        s = checkEnd(s);
+        if (s.status !== 'active') return s;
+        continue;
+      }
       if (s.bossEncounter?.bossState.actorId === id) {
         s = runMonsterTurn(s, id);
         while(!s.bossEncounter?.checkpointContext?.playerRouteVersion&&s.bossEncounter?.prophetProduction?.actionOrdinal===3&&s.bossEncounter.phase==='BATTLE_RESOLVING'
@@ -483,10 +497,11 @@ function activateUnitAfterMental(state: BattleState, id: string): BattleState {
   const unit = findUnit(s, id);
   if (!unit || !unit.isAlive) return s;
 
-  const sof = s.ruinsContext ? withRuinsRandom(s, () => resolveStartOfTurnConditions(unit, state.light ?? 0))
+  const sof = s.ruinsContext && !s.productionMonsterContext ? withRuinsRandom(s, () => resolveStartOfTurnConditions(unit, state.light ?? 0))
     : resolveStartOfTurnConditions(unit, state.light ?? 0);
   s = setUnit(s, sof.unit);
   if (s.ruinsContext) s = tickRuinsConditions(s, id);
+  if (s.productionMonsterContext) s = tickProductionMonsterProtection(s, id, unit);
   for (const m of sof.messages) s = pushBattleLog(s, m, sof.heroDied ? 'danger' : 'warning');
   if (sof.heroDied || (sof.unit.side === 'monster' && !sof.unit.isAlive)) {
     s = checkEnd(s);
@@ -685,6 +700,7 @@ export function heroUseSkill(
     trinketBonuses, preRolledAttack, preparedAttack, finalDamageOverride);
   if(state.bossEncounter?.prophetProduction&&!isExecutingProphetCommand())return applyBossRuntimeInput(state,
     {type:'PROPHET_HERO_SKILL',heroId:unitId,skillId,targetId,bonuses:trinketBonuses,finalDamageOverride});
+  if (state.productionMonsterContext) return withProductionMonsterSources(structuredClone(state), work);
   return state.ruinsContext ? withRuinsBattleSources(structuredClone(state), work) : work(state);
 }
 
@@ -775,7 +791,8 @@ function heroUseSkillInternal(
           'info'
         );
       }
-      const ordinaryDamage = s.ruinsContext ? applyRuinsEnemyDamage(s, actor.id, tgt.id, totalDamage) : null;
+      const ordinaryDamage = s.productionMonsterContext ? applyProductionMonsterEnemyDamage(s, actor.id, tgt.id, totalDamage)
+        : s.ruinsContext ? applyRuinsEnemyDamage(s, actor.id, tgt.id, totalDamage) : null;
       if (ordinaryDamage) {
         s = ordinaryDamage.battle;
         act = findUnit(s, actor.id)!;
@@ -917,6 +934,7 @@ function tryMonsterMove(state: BattleState, monsterId: string): BattleState {
 /** Freeze only the attack roll before the incoming-attack window opens. */
 export function prepareMonsterAttackResolution(state: BattleState, monsterId: string): BattleState {
   if (state.pendingMonsterAttack) return state;
+  if (state.productionMonsterContext) return beginProductionMonsterTurn(state, monsterId);
   if (state.ruinsContext) return prepareRuinsMonsterTurn(state, monsterId);
   if (state.bossEncounter?.checkpointContext?.heroDodgeBindings && state.bossEncounter.spawnDefinitions[findUnit(state, monsterId)?.sourceId ?? '']) return preparePrintedMonsterTurn(state, monsterId);
   const monster = findUnit(state, monsterId);
@@ -946,14 +964,14 @@ export function freezePendingMonsterAttack(state: BattleState): BattleState {
   if(state.bossEncounter?.prophetProduction&&!isExecutingProphetCommand())return applyBossRuntimeInput(state,{type:'PROPHET_ATTACK_FREEZE'});
   const pending = state.pendingMonsterAttack;
   if (!pending || pending.stage !== 'incoming-attack-window') return state;
-  const skill = pending.ruinsAttack?.skill ?? sourceAttackSkill(state) ?? getMonsterSkillById(pending.skillId);
+  const skill = productionMonsterAttackSkill(state) ?? pending.ruinsAttack?.skill ?? sourceAttackSkill(state) ?? getMonsterSkillById(pending.skillId);
   if (!skill) return { ...state, pendingMonsterAttack: null };
   const source = pending.sourceAttack;
   const attacker = findUnit(state,pending.monsterUnitId);
   const target = findUnit(state,pending.targetHeroUnitId);
   const accuracyModifier = source && target?.marked ? 1 : 0;
   const critModifier = source && attacker ? attacker.buffs.reduce((n,e)=>n+e.amount,0)-attacker.debuffs.reduce((n,e)=>n+e.amount,0) : 0;
-  const resolved = pending.ruinsAttack ? resolveRuinsAttackValues(state) : source ? {
+  const resolved = pending.productionMonsterAttack ? resolveProductionMonsterAttackValues(state) : pending.ruinsAttack ? resolveRuinsAttackValues(state) : source ? {
     hit: pending.attackRoll <= skill.accuracy + accuracyModifier - resolveSourceAttackDodge(state) - pending.dodgeModifier,
     crit: source.criticalEnabled && pending.attackRoll <= source.criticalThreshold + critModifier,
     damage: source.criticalEnabled && pending.attackRoll <= source.criticalThreshold + critModifier ? source.criticalDamage : skill.minDamage,
@@ -973,6 +991,7 @@ export function freezePendingMonsterAttack(state: BattleState): BattleState {
 
 /** Commit a prepared monster attack without any attack/damage/disease reroll. */
 export function commitPendingMonsterAttackResolution(state: BattleState): BattleState {
+  if (state.productionMonsterContext) return withProductionMonsterSources(structuredClone(state), commitPendingMonsterAttackResolutionInternal);
   if(state.bossEncounter?.prophetProduction&&!isExecutingProphetCommand())return applyBossRuntimeInput(state,{type:'PROPHET_ATTACK_COMMIT'});
   return state.ruinsContext ? withRuinsBattleSources(structuredClone(state), commitPendingMonsterAttackResolutionInternal)
     : commitPendingMonsterAttackResolutionInternal(state);
@@ -983,19 +1002,19 @@ function commitPendingMonsterAttackResolutionInternal(state: BattleState): Battl
   if (!pending || pending.stage !== 'hero-hit-window' || pending.hit === null ||
       pending.crit === null || pending.baseDamage === null) return state;
   const monster = findUnit(state, pending.monsterUnitId);
-  const skill = pending.ruinsAttack?.skill ?? sourceAttackSkill(state) ?? getMonsterSkillById(pending.skillId);
+  const skill = productionMonsterAttackSkill(state) ?? pending.ruinsAttack?.skill ?? sourceAttackSkill(state) ?? getMonsterSkillById(pending.skillId);
   const target = findUnit(state, pending.targetHeroUnitId);
   if (!monster || !skill || !target) return { ...state, pendingMonsterAttack: null };
   const cleared: BattleState = { ...state, pendingMonsterAttack: null };
   if (!pending.hit) {
-    const missed = pending.ruinsAttack ? finishRuinsAttack(cleared, pending, false)
+    const missed = pending.productionMonsterAttack ? finishProductionMonsterAttack(cleared, pending) : pending.ruinsAttack ? finishRuinsAttack(cleared, pending, false)
       : pending.sourceAttack ? finishSourceMonsterAttack(state, false) : cleared;
     return pushBattleLog(missed, `${monster.name} 使用 ${skill.name}，掷 ${pending.attackRoll} 未命中 ${target.name}。`, 'info');
   }
 
   const effectiveCritical = pending.crit || pending.criticalOverride === 'force-critical';
   const effectiveBaseDamage = pending.criticalOverride === 'force-critical' && !pending.crit
-    ? skill.maxDamage + (pending.ruinsAttack ? pending.baseDamage - skill.minDamage : 0)
+    ? skill.maxDamage + (pending.ruinsAttack || pending.productionMonsterAttack ? pending.baseDamage - skill.minDamage : 0)
     : pending.baseDamage;
   let working: BattleState = cleared;
   let tgt: BattleUnit = target;
@@ -1006,7 +1025,8 @@ function commitPendingMonsterAttackResolutionInternal(state: BattleState): Battl
   if (inMod.applied.length > 0) {
     working = pushBattleLog(working, `${tgt.name} 承伤修正 ${effectiveBaseDamage} → ${inMod.amount}${describeModifierApplications(inMod.applied)}。`, 'info');
   }
-  const ordinaryDamage = working.ruinsContext ? applyRuinsEnemyDamage(working, monster.id, tgt.id, transformedDamage) : null;
+  const ordinaryDamage = working.productionMonsterContext ? applyProductionMonsterEnemyDamage(working, monster.id, tgt.id, transformedDamage)
+    : working.ruinsContext ? applyRuinsEnemyDamage(working, monster.id, tgt.id, transformedDamage) : null;
   if (ordinaryDamage) working = ordinaryDamage.battle;
   const outcome = ordinaryDamage?.outcome ?? applyBattleUnitDamage(tgt, transformedDamage);
   tgt = outcome.unit;
@@ -1035,7 +1055,7 @@ function commitPendingMonsterAttackResolutionInternal(state: BattleState): Battl
   if (queuedStress > 0) next = queueStressEvent(next, tgt.sourceId, queuedStress, 'battle-skill', skill.id);
   if (effectiveCritical) {
     const prophet=state.bossEncounter?.bossFamily==='prophet';
-    const targetArea = state.ruinsContext?.placements[target.id] ?? (prophet?state.bossEncounter!.placements[target.id]:state.communityRoomState?.heroAreas[target.id]?.areaId);
+    const targetArea = state.productionMonsterContext?.placements[target.id] ?? state.ruinsContext?.placements[target.id] ?? (prophet?state.bossEncounter!.placements[target.id]:state.communityRoomState?.heroAreas[target.id]?.areaId);
     const ordinaryCriticalTargets = pending.ruinsAttack
       ? state.ruinsContext!.events.filter(event => event.type === 'MONSTER_ATTACK_ROLLED'
         && event.parentEventId === pending.ruinsAttack!.parentEventId)[0]?.targetIds ?? [target.id]
@@ -1044,12 +1064,16 @@ function commitPendingMonsterAttackResolutionInternal(state: BattleState): Battl
       event.type === 'MONSTER_CRITICAL_AREA_STRESS' && event.parentEventId === pending.ruinsAttack!.parentEventId);
     for (const hero of next.heroes) {
       const inSameArea = targetArea === undefined
-        || (state.ruinsContext?.placements[hero.id] ?? (prophet?state.bossEncounter!.placements[hero.id]:state.communityRoomState?.heroAreas[hero.id]?.areaId)) === targetArea;
+        || (state.productionMonsterContext?.placements[hero.id] ?? state.ruinsContext?.placements[hero.id] ?? (prophet?state.bossEncounter!.placements[hero.id]:state.communityRoomState?.heroAreas[hero.id]?.areaId)) === targetArea;
+      const productionCursor = next.productionMonsterContext?.pendingExecution;
+      const productionEligible = !pending.productionMonsterAttack || hero.id === target.id
+        || (!productionCursor!.targetIds.includes(hero.id) && !productionCursor!.criticalStressHeroIds.includes(hero.id));
       const prophetTargets=state.bossEncounter?.prophetProduction?.pendingPewAttack?.targetActorIds??[];
       const prophetEligible=!prophet||hero.id===target.id||(!pending.sourceAttack!.alreadyResolvedHeroes.length&&!prophetTargets.includes(hero.id));
-      if (hero.isAlive && inSameArea && prophetEligible && (!pending.ruinsAttack || hero.id === target.id
+      if (hero.isAlive && inSameArea && prophetEligible && productionEligible && (!pending.ruinsAttack || hero.id === target.id
         || (!ordinaryCriticalAlreadyApplied && !ordinaryCriticalTargets.includes(hero.id)))) {
         next = queueStressEvent(next, hero.sourceId, 1, 'critical', skill.id);
+        if (pending.productionMonsterAttack) productionCursor!.criticalStressHeroIds.push(hero.id);
       }
     }
     if (pending.ruinsAttack && !ordinaryCriticalAlreadyApplied) {
@@ -1083,11 +1107,13 @@ function commitPendingMonsterAttackResolutionInternal(state: BattleState): Battl
     if (!next.bossEncounter?.pendingChoice) next = finishSourceMonsterAttack(next, true);
   }
   if (pending.ruinsAttack) next = finishRuinsAttack(next, pending, true);
+  if (pending.productionMonsterAttack) next = finishProductionMonsterAttack(next, pending);
   return checkEnd(next);
 }
 
 /** 执行单个怪物的自动回合。 */
 export function runMonsterTurn(state: BattleState, monsterId: string): BattleState {
+  if (state.productionMonsterContext) return beginProductionMonsterTurn(state, monsterId);
   if (state.ruinsContext) return prepareRuinsMonsterTurn(state, monsterId);
   if (state.bossEncounter?.pendingChoice) return state;
   if (state.bossEncounter?.bossState.actorId === monsterId) {

@@ -18,7 +18,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run typecheck
-      - run: npm run verify:complete-edition-c3b
-      - run: npm run test:complete-edition-c3c
       - run: npm run verify:complete-edition-c3c
+      - run: npm run test:complete-edition-c3d
+      - run: npm run verify:complete-edition-c3d
       - run: npm run build

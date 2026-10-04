@@ -36,6 +36,7 @@ import { findHero } from './trinket-state';
 import { synchronizeCommunityGuardianDeaths } from '../campaign/act-four/community-guardian-battle';
 import { beginHealingTrinketAction, resolveHealingTrinketOpportunity } from './healing-trinket-bridge';
 import { resolveDiseaseTrinketOpportunity } from './disease-trinket-bridge';
+import { withProductionMonsterSources, finishProductionMonsterAttack } from '../monsters/production-battle-runtime';
 
 function hasOpenForRoot(campaign: CampaignState, rootEventId: string): boolean {
   return openOpportunities(campaign).some((entry) => entry.rootEventId === rootEventId);
@@ -47,6 +48,13 @@ function hasOpenForRoot(campaign: CampaignState, rootEventId: string): boolean {
  * returned to the UI.
  */
 export function advancePendingMonsterAttack(campaign: CampaignState, sourceScope = false, playerContinue = false): CampaignState {
+  if (!sourceScope && campaign.battle?.productionMonsterContext) {
+    let result = campaign;
+    const battle = withProductionMonsterSources(structuredClone(campaign.battle), b => {
+      result = advancePendingMonsterAttack({ ...campaign, battle: b }, true, playerContinue); return result.battle!;
+    });
+    return { ...result, battle };
+  }
   if(campaign.battle?.bossEncounter?.checkpointContext?.playerRouteVersion && campaign.battle.pendingMonsterAttack && !playerContinue)return campaign;
   if (!sourceScope && campaign.battle?.pendingMonsterAttack?.sourceAttack) {
     let result = campaign;
@@ -59,11 +67,17 @@ export function advancePendingMonsterAttack(campaign: CampaignState, sourceScope
   for (let guard = 0; guard < 50; guard += 1) {
     const battle = next.battle;
     const pending = battle?.pendingMonsterAttack;
-    if (!battle || !pending || battle.bossEncounter?.pendingChoice || battle.ruinsContext?.pendingChoice) return next;
+    if (!battle || !pending || battle.productionMonsterContext?.pendingChoice || battle.bossEncounter?.pendingChoice || battle.ruinsContext?.pendingChoice) return next;
     if (hasOpenForRoot(next, pending.rootEventId)) return next;
     const target = battle.heroes.find((unit) => unit.id === pending.targetHeroUnitId);
     const hero = target ? findHero(next, target.sourceId) : undefined;
     if (!hero || !target?.isAlive) {
+      if (pending.productionMonsterAttack && target && !target.isAlive) {
+        const skipped = finishProductionMonsterAttack({ ...battle, pendingMonsterAttack: null }, { ...pending, hit: false });
+        next = { ...next, battle: skipped.status === 'active' && !skipped.pendingMonsterAttack && !skipped.productionMonsterContext?.pendingExecution
+          && !skipped.productionMonsterContext?.pendingChoice && !skipped.ruinsContext?.pendingChoice ? advanceTurn(skipped) : skipped }; continue;
+      }
+      if (pending.productionMonsterAttack) throw new Error('Production reaction Hero campaign binding absent');
       return { ...next, battle: { ...battle, pendingMonsterAttack: null } };
     }
 
@@ -108,7 +122,7 @@ export function advancePendingMonsterAttack(campaign: CampaignState, sourceScope
     }
     const committed = commitPendingMonsterAttackResolution(next.battle!);
     if (committed.bossEncounter?.checkpointContext?.playerRouteVersion) return { ...next, battle: committed };
-    next = { ...next, battle: committed.status === 'active' && !committed.ruinsContext?.pendingChoice ? advanceTurn(committed) : committed };
+    next = { ...next, battle: committed.status === 'active' && !committed.pendingMonsterAttack && !committed.productionMonsterContext?.pendingChoice && !committed.ruinsContext?.pendingChoice ? advanceTurn(committed) : committed };
     if(next.battle?.bossEncounter?.checkpointContext?.playerRouteVersion)return next;
   }
   return next;

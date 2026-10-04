@@ -129,7 +129,12 @@ export function verifyC3CRuntimeBoundaries() {
   check(readFileSync(legacyPath, 'utf8').replace(/\r\n/g, '\n') === extractedLegacy, 'only exact behavior-preserving Ruins helper extraction allowed');
   const changed = execFileSync('git', ['diff', C3C_BASELINE, '--name-only'], { encoding: 'utf8' }).trim().split(/\r?\n/).filter(Boolean);
   const untracked = execFileSync('git', ['ls-files', '--others', '--exclude-standard'], { encoding: 'utf8' }).trim().split(/\r?\n/).filter(Boolean);
+  // Explicit successor verification keeps the C3C planner fence on its accepted files.
+  // C3D owns BattleState integration imports, scopes and gate validation independently.
+  const successorIntegration = process.argv.includes('--successor-integration');
   const allowed = (p: string) => p.startsWith('src/game-engine/monsters/') || p.startsWith('src/audit/c3c-')
+    || successorIntegration && (p.startsWith('src/audit/c3d-') || p.startsWith('scripts/audit/c3d-') || p.startsWith(root + 'c3d-')
+      || ['src/game-engine/battle.ts', 'src/game-engine/commands/ordinary-monsters.ts', 'src/game-engine/trinkets/battle-trinket-bridge.ts', 'src/types/index.ts'].includes(p))
     || p.startsWith('scripts/audit/c3c-') || p.startsWith(root + 'c3c-') || ['package.json', '.github/workflows/development-fast-gate.yml',
       'scripts/audit/c3b-monster-definition-layer.ts', 'src/game-engine/monster-target-priority.ts',
       'src/game-engine/ruins/monster-runtime.ts'].includes(p);
@@ -153,12 +158,15 @@ export function verifyC3CRuntimeBoundaries() {
       visit(resolved);
     }
   }
-  for (const name of readdirSync('src/game-engine/monsters')) if (name.endsWith('.ts')) visit('src/game-engine/monsters/' + name);
+  const acceptedRuntimeFiles = ['production-runtime-types.ts', 'production-action-selection.ts', 'production-targeting.ts',
+    'production-runtime-primitives.ts', 'production-effect-executor.ts', 'production-runtime.ts'];
+  for (const name of successorIntegration ? acceptedRuntimeFiles : readdirSync('src/game-engine/monsters')) if (name.endsWith('.ts')) visit('src/game-engine/monsters/' + name);
   const payload = readFileSync('src/data/monsters/production-monster-definitions.generated.json', 'utf8');
   check(!/"(?:printedText|sourceReferences|sha256|physicalCopyIds|visualReview|relativePath)"/.test(payload), 'compact metadata fence');
   const fast = readFileSync('.github/workflows/development-fast-gate.yml', 'utf8');
   check(!/(playwright|historical|validate:|npm test)/i.test(fast), 'small Development Fast Gate');
-  for (const script of ['typecheck', 'verify:complete-edition-c3b', 'test:complete-edition-c3c', 'verify:complete-edition-c3c', 'build'])
+  for (const script of successorIntegration ? ['typecheck', 'verify:complete-edition-c3c', 'test:complete-edition-c3d', 'verify:complete-edition-c3d', 'build']
+    : ['typecheck', 'verify:complete-edition-c3b', 'test:complete-edition-c3c', 'verify:complete-edition-c3c', 'build'])
     check(fast.includes('npm run ' + script), 'Fast Gate ' + script);
 }
 
