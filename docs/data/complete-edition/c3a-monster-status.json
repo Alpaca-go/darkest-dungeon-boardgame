@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.6-C3A",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "baseline": "b983cea103e2a50e4ad9ba68357bb924a77483a8",
+  "status": "COMPLETE",
+  "verdict": "C3A_MONSTER_DATA_REBASELINED",
+  "monsterCount": 77,
+  "physicalCopyCount": 190,
+  "sourceBound": 77,
+  "sourcePartial": 0,
+  "sourceUnresolved": 0,
+  "profileComplete": 77,
+  "actionDataComplete": 77,
+  "stanceDataComplete": 77,
+  "deferred": 79,
+  "legacyMismatchCount": 15,
+  "runtimeImplemented": false,
+  "productionAcceptance": false,
+  "next": "11A.6-C3B",
+  "countUnit": "canonical printed identity plus printed level form",
+  "actionDataCompleteMeaning": "Printed skill literals captured; does not assert executable semantics.",
+  "ruinsPreserved": {
+    "canonicalCount": 24,
+    "physicalCopyCount": 62,
+    "runtimeChanged": false
+  },
+  "frozenInputSha256": {
+    "docs/data/complete-edition/c1c32r2-ruins-monster-definitions.json": "73e4d69774d560165ae97c5b276937000027f24bf6a8230b11627d8075432e38",
+    "docs/data/complete-edition/c1c32r2a-ruins-monster-executable-definitions.json": "70fb9b7b630b18a86948fcc1fcd98187ec694dcf43f5cfb4bcf2d50dcfb3e626",
+    "docs/data/complete-edition/c1c32r2-ruins-monster-deck-contract.json": "ef4724f51c21a06e7d15b12b1972d39fd651dd3090bab39f814c93e022253034",
+    "docs/data/complete-edition/c1c32r2a-ruins-monster-effect-contract.json": "8db33ab729f669cf7c41291c34fe31ea8de77aff960a5700f0f26d69e7f760ab"
+  },
+  "reviewInputSha256": {
+    "docs/data/complete-edition/source-assets/c1c38r1/repository-source-inventory.json": "34162879000b430aa0fba2f02a314ef7cc2cfcc2f5dae85f278cc4569c8ca1d0",
+    "docs/data/complete-edition/c3a-monster-print-extracts.json": "2b250a5aec6f287e9a0d54b672ed8bf0548eae9e4c734170ff9bfd192c88bd6a",
+    "scripts/audit/c3a-reviewed-print.ts": "f4828d2543df002c0d3a9625dbb451919efd6a8cac17f10943560e84c781c713"
+  },
+  "bossChanged": false,
+  "heroChanged": false,
+  "fullRegressionExecuted": false,
+  "fullPlaywrightExecuted": false
+}
