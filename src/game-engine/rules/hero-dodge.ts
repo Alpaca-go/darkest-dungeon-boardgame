@@ -1,3 +1,5 @@
+import {HERO_RUNTIME_VERSION,resolveProductionHeroProfile} from '../../data/heroes/runtime-registry';
+import type {HeroInstance} from '../../types';
 import finalTableJson from '../../../docs/data/complete-edition/c1c31r-hero-dodge-final-table.json?raw';
 import rulingOverlayJson from '../../../docs/data/complete-edition/c1c31r-project-rulings-v2.json?raw';
 import reviewedV1Json from '../../../docs/data/complete-edition/c1c30-reviewed-component-combat.json?raw';
@@ -46,6 +48,11 @@ validateTable();
 
 /** Explicit version, explicit pair. No class formula, level inheritance, or zero fallback. */
 export function resolveHeroDodge(input: { heroId: string; level: number; ruleSetVersion: string }): ResolvedHeroDodge {
+  if(input.ruleSetVersion===HERO_RUNTIME_VERSION) {
+    const p=resolveProductionHeroProfile(input.heroId,input.level,input.heroId==='abomination'?'HUMAN':null);
+    if(p.dodge.presence!=='PRINTED_VALUE')throw new Error('Production Profile Dodge absent');
+    return {heroId:input.heroId,level:input.level as 1|2|3,value:p.dodge.value,authority:'OFFICIAL_SOURCE',canonical:true,canonicalSourceStatus:'OFFICIAL_SOURCE',rulingId:null,sourceReferences:[],ruleSetVersion:HERO_RUNTIME_VERSION};
+  }
   assertHeroDodgeRuleSetVersion(input.ruleSetVersion);
   if (!classes.includes(input.heroId) || ![1, 2, 3].includes(input.level)) throw new Error(`Unknown Hero Dodge pair: ${key(input.heroId, input.level)}`);
   if (input.ruleSetVersion === HERO_DODGE_V1) {
@@ -59,4 +66,16 @@ export function resolveHeroDodge(input: { heroId: string; level: number; ruleSet
   return { heroId: row.heroId, level: row.level, value: row.dodge, authority: row.authority, canonical: row.canonical,
     canonicalSourceStatus: row.canonicalSourceStatus, rulingId: row.rulingId,
     sourceReferences: structuredClone(row.sourceReferences), ruleSetVersion: HERO_DODGE_V2 };
+}
+
+/** Production actor identity takes precedence over the legacy encounter dependency pin. */
+export function resolveHeroDodgeForHero(hero:HeroInstance,legacyVersion:string):ResolvedHeroDodge {
+ if(hero.productionIdentity) {
+  const id=hero.productionIdentity,p=resolveProductionHeroProfile(hero.heroId,hero.level,id.form);
+  if(id.runtimeVersion!==HERO_RUNTIME_VERSION||id.heroId!==hero.heroId||id.level!==hero.level||id.sourceBindingId!==p.sourceBindingId)throw new Error('Invalid production Hero Dodge identity');
+  const result=resolveHeroDodge({heroId:hero.heroId,level:hero.level,ruleSetVersion:HERO_RUNTIME_VERSION});
+  if(p.dodge.presence!=='PRINTED_VALUE'||result.value!==p.dodge.value)throw new Error('Production form Dodge differs');
+  return result;
+ }
+ return resolveHeroDodge({heroId:hero.heroId,level:hero.level,ruleSetVersion:legacyVersion});
 }

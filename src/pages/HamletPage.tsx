@@ -4,7 +4,7 @@ import { useGameStore, routeForPhase } from '../store/useGameStore';
 import { HAMLET_BUILDINGS, getHamletBuildingById } from '../data/hamlet-buildings';
 import { getHamletEventById } from '../data/hamlet-events';
 import { buildingVisitError, canEndHamletDay } from '../game-engine/commands/hamlet-preparation-day';
-import { getHeroById } from '../data/heroes';
+import {legacyHeroColor} from '../game-engine/heroes/legacy-player';
 import { getQuirkById } from '../data/quirks';
 import { getDiseaseById } from '../data/diseases';
 import { SANITARIUM_SERVICES } from '../game-engine/hamlet/sanitarium';
@@ -186,7 +186,7 @@ export default function HamletPage() {
             <HamletHeroCard
               key={h.instanceId}
               hero={h}
-              color={getHeroById(h.heroId)?.color ?? '#463b34'}
+              color={h.productionIdentity ? '#675849' : legacyHeroColor(h.heroId) ?? '#463b34'}
               selected={h.instanceId === selectedHeroId}
               onSelect={() =>
                 setSelectedHeroId(h.instanceId === selectedHeroId ? null : h.instanceId)

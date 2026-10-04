@@ -31,7 +31,7 @@ export default function ActorDetails({ unit }: { unit: BattleUnit | null }) {
           {!unit.isAlive && <span className="text-red-400 ml-1">（已倒下）</span>}
         </li>
         {unit.side === 'hero' && <li>压力：{unit.stress}</li>}
-        <li>速度：{unit.speed}</li>
+        {unit.productionIdentity ? <><li>Level {unit.heroLevel} · Form {unit.productionIdentity.form} · Stance {unit.stance}</li><li>Dodge {unit.bossCombatDodge} · Movement {unit.productionMovement?.presence==='PRINTED_VALUE'?unit.productionMovement.value.count:'—'}</li><li>Skill Levels {Object.values(unit.skillLevels??{}).map(l=>['','I','II','III'][l]).join(', ')}</li></> : <li>速度：{unit.speed}</li>}
         {unit.targetRule && <li>AI：{RULE_LABEL[unit.targetRule] ?? unit.targetRule}</li>}
         {monster && <li>技能数：{monster.skillIds.length}</li>}
         {(unit.bleed > 0 || unit.blight > 0 || unit.stunned > 0 || unit.marked) && (

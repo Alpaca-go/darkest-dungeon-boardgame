@@ -1,7 +1,7 @@
 import type { CampaignState } from '../../types';
 import foundation from '../../../docs/data/complete-edition/c1c35r2br1-prophet-production-foundation-acceptance.json';
 import { prophetProductionDefinition, PROPHET_RULE_SET_VERSION, assertProphetHeroEntryPlacement } from './production-definition';
-import { HERO_DODGE_V2, resolveHeroDodge } from '../rules/hero-dodge';
+import { HERO_DODGE_V2, resolveHeroDodgeForHero } from '../rules/hero-dodge';
 import { RUINS_V6 } from '../../types/ruins-executable';
 import { validateThreatCheckpoint } from '../bosses/threat-checkpoint';
 import { productionBossFamilyRegistry } from '../bosses/definitions';
@@ -21,7 +21,7 @@ export function prophetProductionDependencyGate(campaign: CampaignState, level: 
     const definition = prophetProductionDefinition(level);
     assertProphetHeroEntryPlacement(level);
     if (definition.roomNumber !== 11 || definition.roomCardId !== 44710) unresolved.push('Room11:UNBOUND');
-    for (const h of campaign.heroes.filter(h=>!h.dead)) resolveHeroDodge({heroId:h.heroId,level:h.level,ruleSetVersion:HERO_DODGE_V2});
+    for (const h of campaign.heroes.filter(h=>!h.dead)) resolveHeroDodgeForHero(h,HERO_DODGE_V2);
   } catch { unresolved.push('Prophet:SOURCE_CONTRACT_UNBOUND'); }
   if (campaign.bossRoomStorage && campaign.bossRoomStorage.lifecycle !== 'RETURNED'
     && campaign.bossRoomStorage.encounterId !== campaign.bossEncounterCheckpoint?.checkpointContext?.encounterId

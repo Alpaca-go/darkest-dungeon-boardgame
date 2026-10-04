@@ -5,7 +5,8 @@ import { useEffect, useState } from 'react';
 import { useGameStore } from '../store/useGameStore';
 import { canScout } from '../game-engine/dungeon';
 import { getRoomMeta } from '../data/rooms';
-import { getHeroById } from '../data/heroes';
+import {legacyHeroColor} from '../game-engine/heroes/legacy-player';
+import ProductionHeroCard from '../components/hero/ProductionHeroCard';
 import { getCurioById } from '../data/curios';
 import DiseaseBadge from '../components/disease/DiseaseBadge';
 import DungeonMap from '../components/dungeon/DungeonMap';
@@ -156,12 +157,13 @@ export default function DungeonExplorePage() {
         <div className="flex flex-col gap-2">
           <h2 className="text-sm font-bold text-dd-text">小队</h2>
           {campaign.heroes.map((h) => {
-            const def = getHeroById(h.heroId);
+            if(h.productionIdentity)return <ProductionHeroCard key={h.instanceId} hero={h}/>;
+            const color=legacyHeroColor(h.heroId);
             return (
               <HeroCard
                 key={h.instanceId}
                 name={h.name}
-                color={def?.color ?? '#463b34'}
+                color={color ?? '#463b34'}
                 life={h.maxLife}
                 wounds={h.wounds}
                 stress={h.stress}

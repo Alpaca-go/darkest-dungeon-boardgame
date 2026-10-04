@@ -1,0 +1,84 @@
+{
+  "phase": "11A.5-C2E",
+  "baseline": "2d979652c3b713d6104bd21c7007fcd24fe1af63",
+  "definitionVersion": "C2C-HERO-PRODUCTION-DEFINITION-v1",
+  "runtimeVersion": "C2D-HERO-PRODUCTION-RUNTIME-v1",
+  "ambiguityPolicy": "SOURCE_AMBIGUITY_DEFER_POLICY_V1",
+  "playerPathFingerprint": "080d92aea9e686bec6e1408eb81e43a0141b6a7f9568bbabd2c6d0be06122943",
+  "outcome": "HERO_FULL_PLAYER_PATH_BLOCKED",
+  "heroProductionReady": false,
+  "completeGameProductionReady": false,
+  "18HeroesPlayerAccessible": true,
+  "productionCampaignDefaultPath": true,
+  "productionLoadoutEnabled": true,
+  "productionBattleEnabled": true,
+  "productionProgressionEnabled": true,
+  "productionStagecoachEnabled": true,
+  "productionGuildEnabled": true,
+  "browserSaveReplayAccepted": true,
+  "legacySavePathPreserved": true,
+  "deferredManualValidationPreserved": true,
+  "regression": {
+    "passed": 3447,
+    "failed": 0,
+    "pending": 0,
+    "todo": 0,
+    "status": "PASS"
+  },
+  "checks": {
+    "playerPathFingerprint": "080d92aea9e686bec6e1408eb81e43a0141b6a7f9568bbabd2c6d0be06122943",
+    "afterFingerprint": "080d92aea9e686bec6e1408eb81e43a0141b6a7f9568bbabd2c6d0be06122943",
+    "status": "BLOCKED",
+    "commands": [
+      {
+        "command": "npm run typecheck",
+        "exitCode": 0,
+        "status": "PASS",
+        "log": "pw-out/c2e-validation-typecheck.log"
+      },
+      {
+        "command": "npm test -- --maxWorkers=2 --minWorkers=2 --reporter=json --outputFile=pw-out/c2e-vitest-full.json",
+        "exitCode": 0,
+        "status": "PASS",
+        "log": "pw-out/c2e-validation-test.log"
+      },
+      {
+        "command": "npm run build",
+        "exitCode": 0,
+        "status": "PASS",
+        "log": "pw-out/c2e-validation-build.log"
+      },
+      {
+        "command": "npm run verify:complete-edition-c2c",
+        "exitCode": 0,
+        "status": "PASS",
+        "log": "pw-out/c2e-validation-verify-complete-edition-c2c.log"
+      },
+      {
+        "command": "npm run verify:complete-edition-c2d",
+        "exitCode": 0,
+        "status": "PASS",
+        "log": "pw-out/c2e-validation-verify-complete-edition-c2d.log"
+      },
+      {
+        "command": "npm run historical-baseline-validation",
+        "exitCode": 0,
+        "status": "PASS",
+        "log": "pw-out/c2e-validation-historical-baseline-validation.log"
+      },
+      {
+        "command": "npm run verify:immutable-phase-baselines",
+        "exitCode": 1,
+        "status": "FAIL",
+        "log": "pw-out/c2e-validation-verify-immutable-phase-baselines.log"
+      }
+    ]
+  },
+  "releaseGateRequirement": {
+    "workflow": "Production release gate",
+    "headBinding": "EXACT_FINAL_C2E_HEAD",
+    "statusRequired": "completed",
+    "conclusionRequired": "success",
+    "proofLocation": "GitHub Actions; exact-head receipt external to the self-referential commit"
+  }
+}

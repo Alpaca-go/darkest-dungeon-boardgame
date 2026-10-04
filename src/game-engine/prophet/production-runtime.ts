@@ -1,4 +1,6 @@
-import type {BattleState,MonsterSkillDefinition} from '../../types';
+import type {BattleState,MonsterSkillDefinition,CampaignState} from '../../types';
+import type {HeroRuntimeInput,HeroProductionSession} from '../../types/hero-runtime';
+import {applyProductionHeroInput} from '../heroes/production-runtime';
 import type {BossRuntimeInput,BossEncounterState} from '../../types/boss-runtime';
 import type {ProphetProductionState,ProphetAttackTransaction} from '../../types/prophet-production';
 import mapJson from '../../../docs/data/complete-edition/c1c35-prophet-d10-area-map.json?raw';
@@ -18,6 +20,28 @@ import {applyBattleUnitDamage} from '../damage';
 
 const mapping=JSON.parse(mapJson) as {entries:Array<{roll:number;areaId:string}>};
 let commandDepth=0;
+let productionHeroStepSession:HeroProductionSession|undefined;
+let productionHeroStepBattleId:string|undefined;
+let productionHeroCapture: ((campaign:CampaignState)=>void)|null=null;
+/** Replay the shared Hero executor inside the existing Prophet transaction log. */
+export function applyProphetProductionHeroInput(c:CampaignState,input:HeroRuntimeInput):CampaignState {
+  const {battle,heroProductionSession}=c;
+  if(!battle||!heroProductionSession)throw new Error('Production Hero checkpoint absent');
+  const {origin,...session}=heroProductionSession;
+  let captured:CampaignState|undefined;
+  const previous=productionHeroCapture;
+  productionHeroCapture=result=>{captured=result;};
+  let next:BattleState;
+  try {
+    const priorStep=battle.bossEncounter!.prophetProduction!.commands.some(command=>command.type==='PROPHET_PRODUCTION_HERO_STEP');
+    const {completedActions,events,...segment}=session;
+    next=applyProphetRuntimeInput(battle,{type:'PROPHET_PRODUCTION_HERO_STEP',input,...(input.type==='START'?{campaign:prophetCampaignContext({...c,updatedAt:origin.updatedAt}),session:priorStep?segment:{...segment,completedActions,events}}:{})});
+  }
+  finally {productionHeroCapture=previous;}
+  if(!captured)throw new Error('Production Hero transaction result absent');
+  return {...c,...captured,battle:next,heroProductionSession:{...captured.heroProductionSession!,origin}};
+}
+export function applyProphetHeroDamage(b:BattleState,id:string,amount:number):BattleState {return raw(b,{type:'MONSTER_DAMAGE',amounts:{[id]:amount}},()=>{throw new Error('Damage cannot draw RNG');});}
 export function isExecutingProphetCommand():boolean{return commandDepth>0;}
 export function prophetD10Area(roll:number):string {
   if(!Number.isInteger(roll)||roll<1||roll>10)throw new Error('Invalid Prophet printed D10');
@@ -135,6 +159,22 @@ export function returnProphetPews(b:BattleState):void {
     w.lifecycle='STORED';w.areaId=null;w.placementRoll=null;w.placementRound=null;}
 }
 function raw(b:BattleState,input:BossRuntimeInput,rng:()=>number):BattleState {
+  if(input.type==='PROPHET_PRODUCTION_HERO_STEP') {
+    const p=state(b),first=!p.commands.some(command=>command.type==='PROPHET_PRODUCTION_HERO_STEP');
+    if(input.input.type==='START') {
+      if(!input.session||!input.campaign||first&&(!input.session.completedActions||!input.session.events))throw new Error('Production Hero segment origin absent');
+      productionHeroStepSession={...(first?{}:productionHeroStepSession),...structuredClone(input.session)} as HeroProductionSession;
+      productionHeroStepBattleId=b.battleId;
+    } else if(input.session||input.campaign||first||productionHeroStepBattleId!==b.battleId||!productionHeroStepSession)throw new Error('Production Hero continuation linkage absent');
+    const origin={...structuredClone(input.campaign??p.campaignContext!),battle:b};
+    const c={...origin,heroProductionSession:{...structuredClone(productionHeroStepSession!),origin}} as CampaignState;
+    const result=applyProductionHeroInput(c,input.input);
+    const next=result.battle!;
+    productionHeroStepSession=result.heroProductionSession;
+    state(next).campaignContext=prophetCampaignContext(result);
+    if(productionHeroCapture)productionHeroCapture(result);
+    return next;
+  }
   const e=b.bossEncounter!,p=state(b);
   if(input.type==='CLEANUP'){
     if(!e.cleanupState.completed){returnProphetPews(b);e.cleanupState.completed=true;e.bossState.storage='BOSS_ENCOUNTER_STORAGE';e.phase='COMPLETE';
@@ -233,7 +273,7 @@ function raw(b:BattleState,input:BossRuntimeInput,rng:()=>number):BattleState {
   if(input.type==='MOVE_HERO_AREA'){
     const hero=b.heroes.find(h=>h.id===input.heroId&&h.isAlive);
     if(!hero||b.activeActorId!==hero.id||b.currentActionPoints<1||!e.definition.areas.some(a=>a.id===input.areaId)
-      ||areaDistance(e.definition,e.placements[hero.id],input.areaId)>hero.speed)throw new Error('Illegal Hero Area movement');
+      ||areaDistance(e.definition,e.placements[hero.id],input.areaId)>(hero.productionMovement?.presence==='PRINTED_VALUE'?hero.productionMovement.value.count:hero.speed))throw new Error('Illegal Hero Area movement');
     e.placements[hero.id]=input.areaId;syncOccupancy(b);b.currentActionPoints--;
     recordBossRuntimeEvent(b,'HERO_AREA_MOVED',{areaId:input.areaId},[hero.id]);return b;
   }
@@ -321,7 +361,7 @@ export function validateProphetProduction(b:BattleState,committedBossDeath=false
       .map(k=>`${h.id}.${k}: ${JSON.stringify((h as unknown as Record<string,unknown>)[k])} / ${JSON.stringify((replayUnits[i] as unknown as Record<string,unknown>)?.[k])}`)).flat().join('; '):'';
     throw new Error('Prophet save/replay transaction mismatch: '+changed.join(',')+(heroChanges?' ('+heroChanges+')':''));
   }
-  for(const h of b.heroes){const binding=p.entryBindings[h.id];if(!binding||h.stance!==binding.stance)throw new Error('Hero Stance changed without transaction');}
+  for(const h of b.heroes){const binding=p.entryBindings[h.id];if(!binding||h.stance!==binding.stance&&!(h.productionIdentity&&p.commands.some(input=>input.type==='PROPHET_PRODUCTION_HERO_STEP')))throw new Error('Hero Stance changed without transaction');}
   if(e.side==='ABILITY')validateActorOccupancy(b);
 }
 

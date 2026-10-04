@@ -1,7 +1,7 @@
 import type {CampaignState} from '../../types';
 import {startBossFoundation,resumeBossFoundation} from '../commands/boss-foundation';
 import {prophetProductionDefinition} from './production-definition';
-import {resolveHeroDodge,HERO_DODGE_V2} from '../rules/hero-dodge';
+import {resolveHeroDodgeForHero,HERO_DODGE_V2} from '../rules/hero-dodge';
 import {validateThreatCheckpoint} from '../bosses/threat-checkpoint';
 import {applyProphetThreatEvent} from './production-threat';
 import {nowIso} from '../random';
@@ -15,7 +15,7 @@ export function reserveProphetFoundationEncounter(campaign:CampaignState,seed:nu
   if(campaign.campaignProgress.activeThreatId!==`prophet-threat-level-${level}`)throw new Error('Prophet Threat level mismatch');
   const room=campaign.dungeon.rooms.find(r=>r.type==='objective');if(!room)throw new Error('Boss objective Room required');
   const bindings=Object.fromEntries(campaign.heroes.filter(h=>!h.dead).map(h=>[`u_${h.instanceId}`,
-    resolveHeroDodge({heroId:h.heroId,level:h.level,ruleSetVersion:HERO_DODGE_V2})]));
+    resolveHeroDodgeForHero(h,HERO_DODGE_V2)]));
   let next=startBossFoundation(campaign,definition,seed,room.id,
     Object.fromEntries(campaign.heroes.filter(h=>!h.dead).map(h=>[h.instanceId,bindings[`u_${h.instanceId}`].value])),[]);
   const e=next.battle!.bossEncounter!;

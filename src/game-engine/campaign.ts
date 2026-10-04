@@ -1,4 +1,7 @@
 import type { CampaignState, HeroInstance, ProvisionPool } from '../types';
+import { isProductionCampaign } from '../data/heroes/player-registry';
+import { createProductionHero } from './heroes/production-hero';
+import { PRODUCTION_HERO_SELECTION, productionHeroSkillIds } from '../data/heroes/runtime-registry';
 import { LEGACY_HERO_SELECTION } from '../data/heroes/runtime-registry';
 import { usesHistoricalHeroCampaignMetadata } from './heroes/legacy-campaign-metadata';
 import { createId, nowIso } from './random';
@@ -39,12 +42,13 @@ export const DEFAULT_PROVISIONS: ProvisionPool = {
  */
 export function createNewCampaign(
   runtimeContentProfile: RuntimeContentProfile = 'legacy-prototype',
+  heroSelection = runtimeContentProfile === 'community-complete-edition' ? PRODUCTION_HERO_SELECTION : LEGACY_HERO_SELECTION,
 ): CampaignState {
   const now = nowIso();
   return {
     saveVersion: usesHistoricalHeroCampaignMetadata() ? 22 : SAVE_VERSION,
     runtimeContentProfile,
-    ...(usesHistoricalHeroCampaignMetadata() ? {} : { heroRuntimeSelection: { ...LEGACY_HERO_SELECTION } }),
+    ...(usesHistoricalHeroCampaignMetadata() ? {} : { heroRuntimeSelection: { ...heroSelection } }),
     enabledContentSets: runtimeContentProfile === 'community-complete-edition'
       ? ['core', 'color-of-madness', 'crimson-court']
       : ['core'],
@@ -146,6 +150,10 @@ export function createNewCampaign(
   };
 }
 
+/** Explicit provisional deployment fallback, visible/editable in Setup. */
+export function createPlayerHero(heroId:string,partySlot:number,stance:import('../types').Stance='aggressive') {
+ return createProductionHero({heroId,level:1,instanceId:createId('hero'),stance,partySlot,skills:[],skillLevels:Object.fromEntries(productionHeroSkillIds(heroId).map(id=>[id,1]))});
+}
 /** 由英雄定义创建战役内的英雄实例。 */
 export function createHeroInstance(heroId: string, partySlot = 0): HeroInstance | null {
   const def = getHeroById(heroId);
@@ -199,7 +207,7 @@ export function createHeroInstance(heroId: string, partySlot = 0): HeroInstance 
 export function selectParty(campaign: CampaignState, heroIds: string[]): CampaignState {
   const unique = Array.from(new Set(heroIds)).slice(0, 4);
   const heroes = unique
-    .map((id, i) => createHeroInstance(id, i + 1))
+    .map((id, i) => isProductionCampaign(campaign) ? createPlayerHero(id,i+1) : createHeroInstance(id, i + 1))
     .filter((h): h is HeroInstance => h !== null);
   return { ...campaign, heroes };
 }
@@ -216,6 +224,7 @@ export function equipSkill(
 ): CampaignState {
   const heroes = campaign.heroes.map((h) => {
     if (h.heroId !== heroId) return h;
+    if(h.productionIdentity && !productionHeroSkillIds(h.heroId).includes(skillId)) return h;
     const has = h.equippedSkillIds.includes(skillId);
     if (has) {
       return { ...h, equippedSkillIds: h.equippedSkillIds.filter((id) => id !== skillId) };
@@ -229,7 +238,7 @@ export function equipSkill(
 /** 为全部英雄套用默认技能配置（按 Hero Level 派生的槽位数取前 N 个技能）。 */
 export function applyDefaultLoadout(campaign: CampaignState): CampaignState {
   const heroes = campaign.heroes.map((h) => {
-    const skills = getSkillsByHero(h.heroId)
+    const skills = (h.productionIdentity ? productionHeroSkillIds(h.heroId).map(id=>({id})) : getSkillsByHero(h.heroId))
       .slice(0, getHeroSkillSlots(h))
       .map((s) => s.id);
     return { ...h, equippedSkillIds: skills };

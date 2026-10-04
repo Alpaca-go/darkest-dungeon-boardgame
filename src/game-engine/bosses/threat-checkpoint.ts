@@ -3,7 +3,7 @@ import type { BattleState, CampaignState } from '../../types';
 import type { BossEncounterState } from '../../types/boss-runtime';
 import { assertBossEncounter, recordBossRuntimeEvent } from './foundation';
 import { resolveBossDefinition, encounterRuleDependencies } from './definitions';
-import { resolveHeroDodge } from '../rules/hero-dodge';
+import { resolveHeroDodgeForHero } from '../rules/hero-dodge';
 
 /** Reject identity/version changes before any state or RNG is consumed. */
 export function validateThreatCheckpoint(campaign: CampaignState, checkpoint: BossEncounterState): void {
@@ -38,7 +38,7 @@ export function validateThreatCheckpoint(campaign: CampaignState, checkpoint: Bo
       || heroIds.some(id => !context.heroDodgeBindings![id])) throw new Error('Checkpoint Hero binding coverage invalid');
     for (const hero of campaign.heroes.filter(h => !h.dead)) {
       const id = `u_${hero.instanceId}`;
-      const expected = resolveHeroDodge({heroId:hero.heroId,level:hero.level,ruleSetVersion:dependencies.heroDodgeRuleSetVersion});
+      const expected = resolveHeroDodgeForHero(hero,dependencies.heroDodgeRuleSetVersion);
       if (JSON.stringify(context.heroDodgeBindings[id]) !== JSON.stringify(expected) || context.heroDodge[id] !== expected.value)
         throw new Error('Checkpoint Hero binding differs from pinned resolver');
     }
@@ -61,7 +61,7 @@ export function bindReplacementThreatHero(campaign: CampaignState, replacedId: s
   const checkpoint = structuredClone(saved), context = checkpoint.checkpointContext!;
   delete context.heroDodge[`u_${replacedId}`];
   delete context.heroDodgeBindings![`u_${replacedId}`];
-  const binding = resolveHeroDodge({ heroId: hero.heroId, level: hero.level, ruleSetVersion: encounterRuleDependencies(checkpoint).heroDodgeRuleSetVersion });
+  const binding = resolveHeroDodgeForHero(hero,encounterRuleDependencies(checkpoint).heroDodgeRuleSetVersion);
   context.heroDodge[`u_${newId}`] = binding.value;
   context.heroDodgeBindings![`u_${newId}`] = binding;
   const shell: BattleState = { battleId: context.battleId, sourceRoomId: checkpoint.roomId, status: 'active', round: checkpoint.round,

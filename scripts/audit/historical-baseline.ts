@@ -6,6 +6,7 @@ import { createHash } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
 
 export const historicalBaselines = {
+  c2d: {phase:'11A.5-C2D',commit:'2d979652c3b713d6104bd21c7007fcd24fe1af63',script:'scripts/audit/c2d-hero-runtime.ts',artifactPrefixes:['c2d-']},
   c2c: { phase: '11A.5-C2C', commit: 'e1e9f27c882000bee59cec115ec0d1b3f7fcb5de', script: 'scripts/audit/c2c-hero-production.ts', artifactPrefixes: ['c2c-'] },
   c2b: { phase: '11A.5-C2B', commit: '84e747b170d4ba65c463d1d5be1cfcd80dd0dd08', script: 'scripts/audit/c2b-hero-literal-closure.ts', artifactPrefixes: ['c2b-'] },
   'c2a-r1': { phase: '11A.5-C2A-R1', commit: '173ca67adf0e9a1fa2af18693c0fc3bc42973217', script: 'scripts/audit/c2a-r1-transport-binding.ts', artifactPrefixes: ['c2a-r1-'] },
@@ -36,10 +37,20 @@ export function verifyHistoricalBaseline(phase: keyof typeof historicalBaselines
   const git = (args: string[]) => execFileSync('git', args, { maxBuffer: 128 * 1024 * 1024 });
   git(['merge-base', '--is-ancestor', commit, 'HEAD']);
   verifyHistoricalArtifacts(phase);
+  if(phase==='c2d' && !testFiles.length && !probe) {
+    const accepted=JSON.parse(readFileSync('docs/data/complete-edition/c2d-production-runtime-acceptance.json','utf8'));
+    if(accepted.outcome!=='HERO_PRODUCTION_RUNTIME_FOUNDATION_ACCEPTED') throw new Error('C2D acceptance identity changed');
+    console.log('c2d immutable checkpoint: PASS; HERO_PRODUCTION_RUNTIME_FOUNDATION_ACCEPTED');return;
+  }
   if (phase === 'c2c' && !testFiles.length && !probe) {
     const accepted = JSON.parse(readFileSync('docs/data/complete-edition/c2c-production-definition-acceptance.json','utf8'));
     if (accepted.outcome !== 'HERO_PRODUCTION_DEFINITION_LAYER_ACCEPTED' || !accepted.C2DAllowed || accepted.runtimeProductionReady || accepted.deferredManualValidationRemaining !== 8) throw new Error('C2C historical acceptance identity changed');
     console.log('c2c immutable checkpoint: PASS; HERO_PRODUCTION_DEFINITION_LAYER_ACCEPTED'); return;
+  }
+  if(phase==='c2d'&&!testFiles.length&&!probe) {
+    const accepted=JSON.parse(readFileSync('docs/data/complete-edition/c2d-production-runtime-acceptance.json','utf8'));
+    if(accepted.outcome!=='HERO_PRODUCTION_RUNTIME_FOUNDATION_ACCEPTED'||!accepted.C2EAllowed||accepted.productionReady||accepted.normalPlayerRouteEnabled||accepted.runtimeVersion!=='C2D-HERO-PRODUCTION-RUNTIME-v1')throw new Error('C2D immutable acceptance identity changed');
+    console.log('c2d immutable historical checkpoint: PASS; HERO_PRODUCTION_RUNTIME_FOUNDATION_ACCEPTED');return;
   }
   if (phase === 'c2b' && !testFiles.length && !probe) {
     const accepted = JSON.parse(readFileSync('docs/data/complete-edition/c2b-hero-literal-closure-acceptance.json','utf8'));

@@ -17,12 +17,13 @@ function continueBattle(campaign: CampaignState): CampaignState {
 }
 
 export function commitOrdinaryRuinsAreaMove(c: CampaignState, areaId: string): CampaignState {
+  if(c.heroProductionSession?.pendingAction&&c.heroProductionSession.pendingAction.phase!=='COMPLETE')throw new Error('Finish the pending Hero action first');
   const b = c.battle, r = b?.ruinsContext, hero = b?.heroes.find(u => u.id === b.activeActorId && u.isAlive);
   if (!b || !r || !hero || b.status !== 'active' || b.currentActionPoints < 1 || b.pendingAction
     || b.pendingMonsterAttack || r.pendingChoice || r.pendingReanimationChoice || r.pendingThreatDeathIds?.length)
     throw new Error('Ordinary Hero Area movement unavailable');
   const tile = ruinsTile(r.tileId);
-  if (areaId === r.placements[hero.id] || ruinsAreaDistance(tile, r.placements[hero.id], areaId) > hero.speed
+  if (areaId === r.placements[hero.id] || ruinsAreaDistance(tile, r.placements[hero.id], areaId) > (hero.productionMovement?.presence==='PRINTED_VALUE'?hero.productionMovement.value.count:hero.speed)
     || !canMoveRuinsUnit(b, hero.id, hero.id, areaId)) throw new Error('Illegal ordinary Hero Area');
   let moved = moveRuinsUnit(b, hero.id, hero.id, areaId);
   moved.currentActionPoints--;
@@ -43,6 +44,7 @@ export function commitOrdinaryRuinsChoice(c: CampaignState, choiceId: string, se
 }
 
 export function commitOrdinaryRuinsInteraction(c: CampaignState, ruleId: string): CampaignState {
+  if(c.heroProductionSession?.pendingAction&&c.heroProductionSession.pendingAction.phase!=='COMPLETE')throw new Error('Finish the pending Hero action first');
   if (!c.battle?.activeActorId || c.battle.ruinsContext?.pendingReanimationChoice
     || c.battle.ruinsContext?.pendingThreatDeathIds?.length) throw new Error('Ordinary interaction unavailable');
   return continueBattle(interactOrdinaryRuinsRoom(c, c.battle.activeActorId, ruleId));

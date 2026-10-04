@@ -5,7 +5,7 @@ import { isExecutingProphetCommand } from './production-runtime';
 
 /** The replay binds shared engine inputs once; physical archives stay in their existing owners. */
 export function prophetCampaignContext(c:CampaignState):Omit<CampaignState,'battle'> {
-  const {battle,bossEncounterCheckpoint,bossEncounterHistory,bossRoomReturnHistory,prophetQuestThreatHistory,
+  const {battle,heroProductionSession,bossEncounterCheckpoint,bossEncounterHistory,bossRoomReturnHistory,prophetQuestThreatHistory,
     necromancerQuestThreatHistory,ruinsDrawState,...context}=c;
   return structuredClone(context);
 }

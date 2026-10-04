@@ -478,7 +478,7 @@ function handle(b: BattleState, input: BossRuntimeInput, rng: () => number): voi
     const hero = b.heroes.find(h=>h.id===input.heroId && h.isAlive);
     const from = hero ? e.placements[hero.id] : '';
     if (!hero || b.activeActorId!==hero.id || b.currentActionPoints<=0 || !e.definition.areas.some(a=>a.id===input.areaId)
-      || from===input.areaId || areaDistance(e.definition,from,input.areaId)>hero.speed || freeSpace(b,input.areaId)<1) throw new Error('Illegal Hero Area movement');
+      || from===input.areaId || areaDistance(e.definition,from,input.areaId)>(hero.productionMovement?.presence==='PRINTED_VALUE'?hero.productionMovement.value.count:hero.speed) || freeSpace(b,input.areaId)<1) throw new Error('Illegal Hero Area movement');
     e.placements[hero.id]=input.areaId; b.currentActionPoints--;
     recordBossRuntimeEvent(b,'HERO_AREA_MOVED',{from,to:input.areaId,actionPoints:b.currentActionPoints},[hero.id]); return;
   }

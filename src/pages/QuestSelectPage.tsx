@@ -1,3 +1,4 @@
+import {isProductionCampaign} from '../data/heroes/player-registry';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useGameStore } from '../store/useGameStore';
 import { isStandardQuestId, isBossQuestId, getQuestById } from '../data/quests';
@@ -109,7 +110,7 @@ export default function QuestSelectPage() {
         {questPool.map((q) => {
           const isStandard = isStandardQuestId(q.id);
           const isBoss = isBossQuestId(q.id);
-          const isDisabled =
+          const isDisabled = (isProductionCampaign(campaign)&&campaign.ruinsRuleSetSelection?.ruleSetVersion!==RUINS_V6) ||
             (isStandard && !standardSelectable) ||
             (isBoss && !bossSelectable) ||
             (q.id === 'face-the-threat' && necromancerEntryBlocked) ||

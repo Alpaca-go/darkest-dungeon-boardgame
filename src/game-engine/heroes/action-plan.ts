@@ -18,7 +18,7 @@ export function deferredClauses(value: unknown): string[] {
   visit(value); return [...ids].sort();
 }
 /** No schema feature is silently dropped; every source effect gets a plan node. */
-export function compileHeroProductionActionPlan(skill: RuntimeSkill, actor: BattleUnit, actionId: string, rngCheckpoint: number, face: 'front'|'back'='front'): HeroProductionActionPlan {
+export function compileHeroProductionActionPlan(skill: RuntimeSkill, actor: Pick<BattleUnit,'id'|'productionIdentity'>, actionId: string, rngCheckpoint: number, face: 'front'|'back'='front'): HeroProductionActionPlan {
   const identity=actor.productionIdentity;
   if (!identity || identity.heroId!==skill.heroId || skill.definitionVersion!==HERO_DEFINITION_VERSION || identity.runtimeVersion!==HERO_RUNTIME_VERSION) throw new Error('Unbound Hero action');
   const action=skill.actions[face];

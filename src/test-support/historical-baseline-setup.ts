@@ -49,3 +49,14 @@ if (expect.getState().testPath?.replace(/\\/g, '/').endsWith('/core-campaign/cli
     rmSync(scratch, {recursive:true,force:true});
   });
 }
+
+// Pre-Hero-migration C1 fixtures intentionally exercise the preserved legacy player
+// route. Select it explicitly; the production constructor/executors are unchanged.
+vi.mock('../game-engine/campaign', async importOriginal => {
+  const original=await importOriginal<typeof import('../game-engine/campaign')>();
+  const {LEGACY_HERO_SELECTION}=await import('../data/heroes/runtime-registry');
+  return {...original,createNewCampaign:(...args:Parameters<typeof original.createNewCampaign>)=> {
+    const historical=/[/\\]c1[^/\\]*\.test\.tsx?$/.test(expect.getState().testPath??'');
+    return historical&&args[1]===undefined?original.createNewCampaign(args[0],LEGACY_HERO_SELECTION):original.createNewCampaign(...args);
+  }};
+});

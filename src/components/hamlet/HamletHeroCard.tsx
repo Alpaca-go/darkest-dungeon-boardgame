@@ -1,3 +1,4 @@
+import ProductionHeroCard from '../hero/ProductionHeroCard';
 import type { HeroInstance } from '../../types';
 import ResolveStateBadge from '../mental/ResolveStateBadge';
 import DiseaseBadge from '../disease/DiseaseBadge';
@@ -45,6 +46,7 @@ export default function HamletHeroCard({
       ].join(' ')}
       data-testid={`hamlet-hero-${hero.instanceId}`}
     >
+      {hero.productionIdentity&&<ProductionHeroCard hero={hero}/>}
       {/*
         选中入口是这颗内层按钮，而不是外层卡片 div。外层 div 还包含 TrinketSlots /
         「跳过」按钮等无选中语义的区域，点它们不应改变选中态。E2E 请始终定位

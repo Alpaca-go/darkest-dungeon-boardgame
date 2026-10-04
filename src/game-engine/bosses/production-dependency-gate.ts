@@ -4,7 +4,7 @@ import {resolveProductionBossRuleSetVersion} from './definitions';
 import { prophetProductionDependencyGate } from '../prophet/production-dependency-gate';
 import type { CampaignState } from '../../types';
 import { getHeroCombatDefinition } from '../../data/progression/hero-level-registry';
-import { HERO_DODGE_V1, resolveHeroDodge } from '../rules/hero-dodge';
+import { HERO_DODGE_V1, resolveHeroDodgeForHero } from '../rules/hero-dodge';
 import { campaignHeroDodgeRuleSetVersion } from '../rules/hero-dodge-versioning';
 import { inspectProductionBoneCombatDependency, inspectBoneCombatDependency, productionBoneDefinitions, validateBoneCombatDependency } from './component-adapters/bone-combat-adapter';
 import { resolveBossDefinition } from './definitions';
@@ -30,7 +30,7 @@ export function necromancerProductionDependencyGate(campaign: CampaignState, lev
     unresolved.push(...(candidate ? validateBoneCombatDependency(candidate) : ['definition']).map(field => `${id}:${field}`));
   }
   for (const hero of campaign.heroes.filter(h => !h.dead)) {
-    try { resolveHeroDodge({ heroId: hero.heroId, level: hero.level, ruleSetVersion }); }
+    try { resolveHeroDodgeForHero(hero,ruleSetVersion); }
     catch { unresolved.push(`hero:${hero.heroId}:level-${hero.level}:dodge`); }
   }
   if (definition.roomNumber !== 10 || !definition.roomCardId || !definition.areas.length) unresolved.push('RoomStorage:UNBOUND');

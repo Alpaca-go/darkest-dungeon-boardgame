@@ -10,7 +10,7 @@ export interface ResolvedHeroDodge {
   canonicalSourceStatus: 'OFFICIAL_SOURCE' | 'SOURCE_UNRESOLVED';
   rulingId: string | null;
   sourceReferences: CombatSourceReference[];
-  ruleSetVersion: HeroDodgeRuleSetVersion;
+  ruleSetVersion: HeroDodgeRuleSetVersion | 'C2D-HERO-PRODUCTION-RUNTIME-v1';
 }
 /** Serializable rule-only record. It does not create or promote a combat encounter. */
 export interface HeroDodgeReplayRecord {

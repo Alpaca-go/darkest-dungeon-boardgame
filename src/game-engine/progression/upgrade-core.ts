@@ -18,6 +18,9 @@ import {
   maxAvailableSkillLevel,
 } from '../../data/progression/skill-level-registry';
 import { GUILD_UPGRADE_COSTS } from '../../data/progression/guild-costs';
+import { HERO_PLAYER_POLICY, productionMaxHeroLevel, productionMaxSkillLevel } from '../../data/heroes/player-registry';
+import { resolveProductionHeroProfile, resolveProductionHeroSkill } from '../../data/heroes/runtime-registry';
+import { printedValue } from '../heroes/production-hero';
 import { createId } from '../random';
 import { getHeroXp, spendXpOnHero } from './xp-ledger';
 
@@ -70,16 +73,19 @@ export function getEffectiveSkillLevel(
 
 /** 由 Hero Level 派生的技能槽位数（不落盘）。 */
 export function getHeroSkillSlots(hero: HeroInstance): number {
+  if(hero.productionIdentity) return HERO_PLAYER_POLICY.skillSlots;
   return getHeroLevelDefinition(hero.heroId, getEffectiveHeroLevel(hero))?.skillSlots ?? 3;
 }
 
 /** 由 Hero Level 派生的饰品容量（不落盘）。 */
 export function getHeroTrinketCapacity(hero: HeroInstance): number {
+  if(hero.productionIdentity) return HERO_PLAYER_POLICY.trinketSlots;
   return getHeroLevelDefinition(hero.heroId, getEffectiveHeroLevel(hero))?.trinketSlots ?? 1;
 }
 
 /** 由 Hero Level 派生的抗性档案（不落盘）。 */
-export function getHeroResistances(hero: HeroInstance): HeroResistanceProfile {
+export function getHeroResistances(hero: HeroInstance): HeroResistanceProfile & {categorical?:string[];sourceBindingId?:string} {
+  if(hero.productionIdentity) {const p=resolveProductionHeroProfile(hero.heroId,hero.level,hero.productionIdentity.form);return {...FALLBACK_RESISTANCES,categorical:p.categoricalResistances.presence==='PRINTED_VALUE'?[...p.categoricalResistances.value]:[],sourceBindingId:p.sourceBindingId};} // No invented numerical resistance percentages.
   return (
     getHeroLevelDefinition(hero.heroId, getEffectiveHeroLevel(hero))?.resistances ??
     FALLBACK_RESISTANCES
@@ -88,6 +94,7 @@ export function getHeroResistances(hero: HeroInstance): HeroResistanceProfile {
 
 /** 由 Hero Level 派生的免疫列表（不落盘，战斗内即时生效）。 */
 export function getHeroImmunities(hero: HeroInstance): string[] {
+  if(hero.productionIdentity) {const p=resolveProductionHeroProfile(hero.heroId,hero.level,hero.productionIdentity.form);return p.immunities.presence==='PRINTED_VALUE'?[...p.immunities.value]:[];}
   return getHeroLevelDefinition(hero.heroId, getEffectiveHeroLevel(hero))?.immunities ?? [];
 }
 
@@ -181,7 +188,7 @@ export function validateProgressionUpgrade(
     const from = projectedHeroLevel(hero, choices);
     if (from >= 3) return fail('英雄等级已达上限 III', from, from);
     const to = (from + 1) as 2 | 3;
-    if (to > maxAvailableHeroLevel(hero.heroId)) {
+    if (to > (hero.productionIdentity ? productionMaxHeroLevel(hero.heroId) : maxAvailableHeroLevel(hero.heroId))) {
       return fail(`缺少 ${hero.name} Level ${to} 的卡面数据，无法升级`, from, from);
     }
     if (remainingXp < cost.xp) return fail(`XP 不足（需要 ${cost.xp}，剩余 ${remainingXp}）`, from, to);
@@ -196,7 +203,8 @@ export function validateProgressionUpgrade(
   const from = projectedSkillLevel(hero, skillId, choices);
   if (from >= 3) return fail('技能等级已达上限 III', from, from);
   const to = (from + 1) as 2 | 3;
-  if (to > maxAvailableSkillLevel(skillId)) {
+  if(hero.productionIdentity && to>projectedHeroLevel(hero,choices)) return fail('技能等级不可超过英雄等级',from,to);
+  if (to > (hero.productionIdentity ? productionMaxSkillLevel(hero.heroId,skillId) : maxAvailableSkillLevel(skillId))) {
     return fail(`缺少该技能 Level ${to} 的卡面数据，无法升级`, from, from);
   }
   if (remainingXp < cost.xp) return fail(`XP 不足（需要 ${cost.xp}，剩余 ${remainingXp}）`, from, to);
@@ -234,6 +242,16 @@ export function applyUpgradeChoiceToHero(
   hero: HeroInstance,
   choice: ProgressionUpgradeChoice
 ): HeroInstance | null {
+  if(hero.productionIdentity) {
+    if(choice.heroInstanceId!==hero.instanceId || (choice.type==='hero-level' ? choice.fromLevel!==hero.level || choice.toLevel!==hero.level+1 : !choice.skillId || !hero.equippedSkillIds.includes(choice.skillId) || choice.fromLevel!==getPermanentSkillLevel(hero,choice.skillId) || choice.toLevel!==choice.fromLevel+1 || choice.toLevel>hero.level)) return null;
+    const paid=spendXpOnHero(hero,choice.xpCost);if(!paid)return null;
+    if(choice.type==='hero-level') {
+      const p=resolveProductionHeroProfile(hero.heroId,choice.toLevel,hero.productionIdentity.form);
+      return {...paid,level:choice.toLevel,maxLife:printedValue(p.life,'life'),wounds:paid.wounds,productionIdentity:{...hero.productionIdentity,level:choice.toLevel,sourceBindingId:p.sourceBindingId},speed:p.speed.presence==='PRINTED_VALUE'?p.speed.value:0};
+    }
+    resolveProductionHeroSkill(hero.heroId,choice.skillId!,choice.toLevel);
+    return {...paid,skillLevels:{...paid.skillLevels,[choice.skillId!]:choice.toLevel}};
+  }
   const paid = spendXpOnHero(hero, choice.xpCost);
   if (!paid) return null;
 

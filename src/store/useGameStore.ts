@@ -1,3 +1,6 @@
+import {commitProductionHeroInput,pendingProductionAction,rebaseProductionCheckpoint} from '../game-engine/heroes/player-commands';
+import type {HeroRuntimeInput} from '../types/hero-runtime';
+import { isProductionCampaign } from '../data/heroes/player-registry';
 import { create } from 'zustand';
 import { commitOrdinaryRuinsAreaMove, commitOrdinaryRuinsChoice, commitOrdinaryRuinsInteraction } from '../game-engine/commands/ordinary-ruins';
 import { selectPartyDeployment } from '../game-engine/commands/party-deployment';
@@ -10,6 +13,7 @@ import type { CampaignState, ProvisionPool } from '../types';
 import {
   createNewCampaign,
   createHeroInstance,
+  createPlayerHero,
   equipSkill as engineEquipSkill,
   applyDefaultLoadout as engineApplyDefaultLoadout,
 } from '../game-engine/campaign';
@@ -169,7 +173,9 @@ interface GameStore {
   enterCommunityReferenceGuardian(questRoll?: number): string | null;
 
   // ---- Phase 2：战役准备 ----
+  productionHeroInput(input:HeroRuntimeInput):string|null;
   chooseHero(heroId: string): void;
+  setSetupStance(instanceId:string,stance:import('../types').Stance):void;
   removeHero(heroId: string): void;
   equipSkill(heroId: string, skillId: string): void;
   applyDefaultLoadout(): void;
@@ -306,6 +312,14 @@ const initialCampaign = loadCampaign();
 export const useGameStore = create<GameStore>((set, get) => {
   /** 写入存档并应用到状态。所有重要变更都经过此方法以保证自动保存。 */
   const commit = (next: CampaignState): void => {
+    const previous=get().campaign;
+    if(previous&&pendingProductionAction(previous)) {
+      const prior=previous.heroProductionSession!,session=next.heroProductionSession;
+      const advanced=session&&session.inputs.length===prior.inputs.length+1;
+      const completed=session&&session.completedActions.length===prior.completedActions.length+1&&session.completedActions[session.completedActions.length-1].actionId===prior.pendingAction!.actionId;
+      if(!advanced&&!completed)return;
+    }
+    if(next.heroProductionSession&&!pendingProductionAction(next)) next=rebaseProductionCheckpoint(next);
     saveCampaign(next);
     set({ campaign: next });
   };
@@ -313,7 +327,7 @@ export const useGameStore = create<GameStore>((set, get) => {
   return {
     battleContinueResolution: () => {
       const c=get().campaign,b=c?.battle,e=b?.bossEncounter;
-      if(!c||!b||!e?.checkpointContext?.playerRouteVersion||b.status!=='active'||e.pendingChoice)return;
+      if(!c||pendingProductionAction(c)||!b||!e?.checkpointContext?.playerRouteVersion||b.status!=='active'||e.pendingChoice)return;
       let next=c;
       if(b.pendingMonsterAttack)next=advancePendingMonsterAttack(c,false,true);
       else if(e.phase==='BATTLE_RESOLVING'&&e.prophetProduction?.actionOrdinal===2&&e.prophetProduction.crowdedChoice?.selectedAreaId)
@@ -443,6 +457,7 @@ export const useGameStore = create<GameStore>((set, get) => {
     },
 
     // 切换式选择：已选则移除，未选且未满 4 人则加入（不影响其他英雄配置）。
+    setSetupStance:(id,stance)=>{const c=get().campaign;if(!c||c.gamePhase!=='campaign-setup'||!['aggressive','defensive','ranged','support'].includes(stance))return;commit({...c,heroes:c.heroes.map(h=>h.instanceId===id?{...h,stance}:h)});},
     chooseHero: (heroId) => {
       const c = get().campaign;
       if (!c) return;
@@ -452,7 +467,8 @@ export const useGameStore = create<GameStore>((set, get) => {
         heroes = c.heroes.filter((h) => h.heroId !== heroId);
       } else {
         if (c.heroes.length >= 4) return; // 已满 4 人
-        const inst = createHeroInstance(heroId, c.heroes.length + 1);
+        const slot=[1,2,3,4].find(n=>!c.heroes.some(h=>h.partySlot===n))!;
+        const inst=isProductionCampaign(c) ? createPlayerHero(heroId,slot) : createHeroInstance(heroId,slot);
         if (!inst) return;
         heroes = [...c.heroes, inst];
       }
@@ -557,13 +573,16 @@ export const useGameStore = create<GameStore>((set, get) => {
     },
 
     // ---- Phase 3：战斗动作（全部委托给 game-engine，并自动保存） ----
+    productionHeroInput:input=>{const c=get().campaign;if(!c)return 'No campaign';try {commit(commitProductionHeroInput(c,input));return null;} catch(error) {return error instanceof Error?error.message:String(error);}},
     selectBattleSkill: (skillId) => {
+      const c=get().campaign;
+      if(c&&isProductionCampaign(c)&&skillId&&c.battle?.activeActorId) {get().productionHeroInput({type:'START',actorId:c.battle.activeActorId,skillId});return;}
       set((st) => ({ ui: { ...st.ui, battleSkillId: skillId } }));
     },
 
     battleHeroMove: (dir) => {
       const c = get().campaign;
-      if (!c?.battle || c.battle.status !== 'active' || !c.battle.activeActorId) return;
+      if (!c?.battle || pendingProductionAction(c) || c.battle.status !== 'active' || !c.battle.activeActorId) return;
       const battle = engineHeroMove(c.battle, c.battle.activeActorId, dir);
       if (battle === c.battle) return;
       set((st) => ({ ui: { ...st.ui, battleSkillId: null } }));
@@ -592,7 +611,7 @@ export const useGameStore = create<GameStore>((set, get) => {
 
     battleEndTurn: () => {
       const c = get().campaign;
-      if (!c?.battle || c.battle.status !== 'active' || !c.battle.activeActorId) return;
+      if (!c?.battle || pendingProductionAction(c) || c.battle.status !== 'active' || !c.battle.activeActorId) return;
       set((st) => ({ ui: { ...st.ui, battleSkillId: null } }));
       const battle = engineEndHeroTurn(c.battle, c.battle.activeActorId);
       const settled = settleBattleState({ ...c, battle });

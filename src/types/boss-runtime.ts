@@ -180,6 +180,7 @@ export interface BossEncounterState {
   };
 }
 export type BossRuntimeInput =
+  | {type:'PROPHET_PRODUCTION_HERO_STEP';input:import('./hero-runtime').HeroRuntimeInput;campaign?:Omit<import('./index').CampaignState,'battle'|'heroProductionSession'>;session?:Partial<Omit<import('./hero-runtime').HeroProductionSession,'origin'>>}
   | {type:'PROPHET_HERO_ATTACK_ROLL';heroId:string;skillId:string;targetId:string}
   | {type:'PROPHET_HERO_ATTACK_PREPARE';heroId:string;skillId:string;bonuses:import('../game-engine/battle').TrinketActionBonuses}
   | {type:'PROPHET_HERO_SKILL';heroId:string;skillId:string;targetId:string;bonuses:import('../game-engine/battle').TrinketActionBonuses;finalDamageOverride?:number|null}

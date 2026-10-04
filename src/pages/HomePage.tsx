@@ -1,3 +1,4 @@
+import {LEGACY_HERO_RUNTIME} from '../data/heroes/runtime-registry';
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGameStore, routeForPhase } from '../store/useGameStore';
@@ -29,7 +30,7 @@ export default function HomePage() {
   const saveDetail = loadSaveDetailed();
   const broken = saveDetail.status === 'corrupt' || saveDetail.status === 'unsupported';
 
-  const [newProfile, setNewProfile] = useState<'legacy-prototype' | 'community-complete-edition'>('legacy-prototype');
+  const [newProfile, setNewProfile] = useState<'legacy-prototype' | 'community-complete-edition'>('community-complete-edition');
 
   const doNew = () => {
     newCampaign(newProfile);
@@ -276,6 +277,7 @@ export default function HomePage() {
         )}
       </div>
 
+      {campaign?.heroRuntimeSelection?.runtimeVersion===LEGACY_HERO_RUNTIME&&<p data-testid="legacy-ruleset">Legacy Hero ruleset · Manual validation pending: official identity comparison; original save identities retained.</p>}
       <ConfirmModal
         open={confirm === 'new'}
         title="覆盖现有存档？"

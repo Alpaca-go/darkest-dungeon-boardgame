@@ -2,7 +2,7 @@ import type { CampaignState } from '../../types';
 import { startBossFoundation } from '../commands/boss-foundation';
 import { prophetProductionDefinition } from './production-definition';
 import { prophetProductionDependencyGate } from './production-dependency-gate';
-import { HERO_DODGE_V2, resolveHeroDodge } from '../rules/hero-dodge';
+import { HERO_DODGE_V2, resolveHeroDodgeForHero } from '../rules/hero-dodge';
 import { validateThreatCheckpoint } from '../bosses/threat-checkpoint';
 import { applyProphetThreatEvent } from './production-threat';
 
@@ -19,7 +19,7 @@ export function reserveProphetProductionEncounter(campaign: CampaignState): Camp
   const room=campaign.dungeon?.rooms.find(r=>face?r.type==='objective':r.id===campaign.dungeon?.currentRoomId);
   if (!room) throw new Error('Production Quest Room required');
   const definition=prophetProductionDefinition(level);
-  const bindings=Object.fromEntries(campaign.heroes.filter(h=>!h.dead).map(h=>[`u_${h.instanceId}`,resolveHeroDodge({heroId:h.heroId,level:h.level,ruleSetVersion:HERO_DODGE_V2})]));
+  const bindings=Object.fromEntries(campaign.heroes.filter(h=>!h.dead).map(h=>[`u_${h.instanceId}`,resolveHeroDodgeForHero(h,HERO_DODGE_V2)]));
   const seed=Array.from(`${campaign.dungeon!.questRunId}:prophet:${level}`).reduce((n,c)=>Math.imul(n^c.charCodeAt(0),16777619)>>>0,2166136261);
   const bound=startBossFoundation(campaign,definition,seed,room.id,Object.fromEntries(campaign.heroes.filter(h=>!h.dead).map(h=>[h.instanceId,bindings[`u_${h.instanceId}`].value])),[]);
   const e=bound.battle!.bossEncounter!;

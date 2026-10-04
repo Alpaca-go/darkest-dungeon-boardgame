@@ -5,7 +5,9 @@ import { canMoveRuinsUnit } from '../game-engine/ruins/movement-runtime';
 import { useMemo, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useGameStore } from '../store/useGameStore';
-import { getHeroById } from '../data/heroes';
+import ProductionHeroActionPanel from '../components/battle/ProductionHeroActionPanel';
+import {pendingProductionAction} from '../game-engine/heroes/player-commands';
+import {legacyHeroColor} from '../game-engine/heroes/legacy-player';
 import { getMonsterById } from '../data/monsters';
 import { getActiveUnit, getUnit, legalTargetsForActor } from '../game-engine/battle';
 import type { BattleUnit } from '../types';
@@ -46,6 +48,7 @@ export default function BattlePage() {
   // 当前英雄可选技能的合法目标（仅在已选技能时计算）。
   const legalTargetIds = useMemo(() => {
     if (!battle || battle.status !== 'active' || !battleSkillId) return [];
+    if(battle.heroes.some(h=>h.id===battle.activeActorId&&h.productionIdentity))return [];
     return legalTargetsForActor(battle, battleSkillId);
   }, [battle, battleSkillId]);
 
@@ -60,7 +63,7 @@ export default function BattlePage() {
   const colorOf = (u: BattleUnit): string => {
     if (u.side === 'monster') return getMonsterById(u.sourceId)?.color ?? '#8b2b2b';
     const inst = campaign.heroes.find((h) => h.instanceId === u.sourceId);
-    return (inst && getHeroById(inst.heroId)?.color) ?? '#5b8a5b';
+    return (inst && (inst.productionIdentity ? '#675849' : legacyHeroColor(inst.heroId))) ?? '#5b8a5b';
   };
 
   const onPickTarget = (unitId: string) => {
@@ -92,6 +95,7 @@ export default function BattlePage() {
 
   return (
     <div className="p-6 max-w-5xl mx-auto space-y-4">
+      <ProductionHeroActionPanel key={campaign.heroProductionSession?.pendingAction?.actionId??'idle'} campaign={campaign}/>
       {ordinaryChoice && <section className="rounded border border-dd-accent p-4" aria-label="Ruins 待决选择">
         <p>{battle.ruinsContext?.pendingReanimationChoice ? '选择复生的死亡实例' : '选择移动结果'}</p>
         <div className="flex flex-wrap gap-2 mt-2">{ordinaryChoice.candidateIds.map(id => <button key={id}
@@ -130,24 +134,24 @@ export default function BattlePage() {
         <div className="grid grid-cols-2 gap-2 mt-2">{ruinsTile(battle.ruinsContext.tileId).areas.map(area => {
           const context = battle.ruinsContext!;
           const occupants = [...battle.heroes, ...battle.monsters].filter(u => u.isAlive && context.placements[u.id] === area.id);
-          const movable = isHeroTurn && !battle.pendingAction && !battle.pendingMonsterAttack && battle.currentActionPoints > 0
+          const movable = isHeroTurn && !pendingProductionAction(campaign) && !battle.pendingAction && !battle.pendingMonsterAttack && battle.currentActionPoints > 0
             && context.placements[activeUnit!.id] !== area.id
-            && ruinsAreaDistance(ruinsTile(context.tileId), context.placements[activeUnit!.id], area.id) <= activeUnit!.speed
+            && ruinsAreaDistance(ruinsTile(context.tileId), context.placements[activeUnit!.id], area.id) <= (activeUnit!.productionMovement?.presence==='PRINTED_VALUE'?activeUnit!.productionMovement.value.count:activeUnit!.speed)
             && canMoveRuinsUnit(battle, activeUnit!.id, activeUnit!.id, area.id);
           return <div key={area.id} className="border border-dd-border p-2 text-sm">
             <p>{area.id} · 容量 {area.capacity}</p><p>{occupants.map(u => u.name).join('、') || '空'}</p>
             {movable && <button onClick={() => battleHeroAreaMove(area.id)}>移动到 {area.id}</button>}
           </div>;
         })}</div>
-        {isHeroTurn && !battle.pendingAction && !battle.pendingMonsterAttack && ruinsRoom(battle.ruinsContext.roomNumber).rules
+        {isHeroTurn && !pendingProductionAction(campaign) && !battle.pendingAction && !battle.pendingMonsterAttack && ruinsRoom(battle.ruinsContext.roomNumber).rules
           .filter(rule => rule.trigger === 'INTERACT' && rule.areas.includes(battle.ruinsContext!.placements[activeUnit!.id])
             && battle.currentActionPoints >= rule.actionCost && (!rule.oncePerBattle || !battle.ruinsContext!.roomUses.includes(rule.id))
             && (!rule.requiresNoMonsters || !battle.monsters.some(u => u.isAlive)))
           .map(rule => <button key={rule.id} onClick={() => battleRoomInteract(rule.id)}>房间互动 · {rule.id}</button>)}
       </section>}
-      {battle.bossEncounter && isHeroTurn && !battle.pendingMonsterAttack && !battle.bossEncounter.pendingChoice && <div className="flex gap-2" data-testid="boss-area-movement">
+      {battle.bossEncounter && isHeroTurn && !pendingProductionAction(campaign) && !battle.pendingMonsterAttack && !battle.bossEncounter.pendingChoice && <div className="flex gap-2" data-testid="boss-area-movement">
         {battle.bossEncounter.definition.areas.filter(a=>a.id!==battle.bossEncounter!.placements[activeUnit!.id]
-          && areaDistance(battle.bossEncounter!.definition,battle.bossEncounter!.placements[activeUnit!.id],a.id)<=activeUnit!.speed
+          && areaDistance(battle.bossEncounter!.definition,battle.bossEncounter!.placements[activeUnit!.id],a.id)<=(activeUnit!.productionMovement?.presence==='PRINTED_VALUE'?activeUnit!.productionMovement.value.count:activeUnit!.speed)
           && a.capacity > [...battle.heroes,...battle.monsters].filter(u=>u.isAlive && battle.bossEncounter!.placements[u.id]===a.id)
             .reduce((n,u)=>n+(battle.actorOccupancy?.occupiedSpaces[u.id] ?? battle.bossEncounter!.spawnDefinitions[u.sourceId]?.occupiedSlots ?? 1),0))
           .map(a=><button key={a.id} disabled={battle.currentActionPoints<=0} data-testid="boss-move-area" data-area-id={a.id}

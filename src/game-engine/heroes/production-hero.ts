@@ -2,6 +2,7 @@ import type { BattleUnit, HeroInstance, Stance } from '../../types';
 import type { HeroForm, HeroProductionIdentity } from '../../types/hero-runtime';
 import type { PrintedField } from '../../types/hero-production';
 import { resolveProductionHeroProfile, resolveProductionHeroSkill, PRODUCTION_HERO_SELECTION, productionHeroSkillIds } from '../../data/heroes/runtime-registry';
+import { playerHero } from '../../data/heroes/player-registry';
 import { createInitialXpState } from '../progression/xp-ledger';
 
 export function printedValue<T>(field: PrintedField<T>, name: string): T {
@@ -21,7 +22,7 @@ export function createProductionHero(input: { heroId: string; level: 1 | 2 | 3; 
   }
   for (const id of input.skills) if (!levels[id] || !productionHeroSkillIds(input.heroId).includes(id)) throw new Error('Production Skill level/ownership missing');
   const identity: HeroProductionIdentity = { ...PRODUCTION_HERO_SELECTION, heroId: input.heroId, level: input.level, form, sourceBindingId: p.sourceBindingId };
-  return { instanceId:input.instanceId, heroId:input.heroId, name:input.heroId, level:input.level, productionIdentity:identity,
+  return { instanceId:input.instanceId, heroId:input.heroId, name:playerHero(input.heroId,input.level,form).printedName, level:input.level, productionIdentity:identity,
     maxLife:printedValue(p.life,'life'), wounds:0, stress:0,
     // Speed is not used by the card-based controlled initiative. This adapter slot is non-applicable.
     speed:p.speed.presence === 'PRINTED_VALUE' ? p.speed.value : 0, stance:input.stance, partySlot:input.partySlot,

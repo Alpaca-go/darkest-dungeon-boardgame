@@ -47,7 +47,7 @@ export default function TrinketSlots({ hero, mode = 'view' }: Props) {
       data-testid={`trinket-slots-${hero.instanceId}`}
     >
       <div className="flex items-center justify-between text-[10px] text-dd-muted">
-        <span>饰品容量（= 等级）</span>
+        <span>{hero.productionIdentity?'饰品容量 · Manual validation pending':'饰品容量（= 等级）'}</span>
         <span className={free === 0 ? 'text-amber-400 font-semibold' : 'text-dd-text'}>
           {trinkets.length}/{cap}
         </span>

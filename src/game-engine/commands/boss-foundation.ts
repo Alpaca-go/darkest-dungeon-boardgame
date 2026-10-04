@@ -5,7 +5,7 @@ import { applyBossRuntimeInput, assertBossEncounter, bindBossEncounter, withBoss
 import { validateThreatCheckpoint } from '../bosses/threat-checkpoint';
 import { finalizeBossVictory, advanceCampaignAfterBoss } from '../campaign/campaign-orchestrator';
 import { FACE_THE_THREAT_QUEST_ID } from '../../data/quests/face-the-threat';
-import { resolveHeroDodge } from '../rules/hero-dodge';
+import { resolveHeroDodgeForHero } from '../rules/hero-dodge';
 import { campaignHeroDodgeRuleSetVersion } from '../rules/hero-dodge-versioning';
 import { resolveBossDefinition } from '../bosses/definitions';
 import { necromancerProductionDependencyGate } from '../bosses/production-dependency-gate';
@@ -82,6 +82,7 @@ export function resolveBossThreatCheckpointChoice(campaign: CampaignState, choic
   return { ...campaign, bossEncounterCheckpoint: resolved.bossEncounter! };
 }
 export function applyBossFoundationInput(campaign: CampaignState, input: BossRuntimeInput): CampaignState {
+  if(campaign.heroProductionSession?.pendingAction&&campaign.heroProductionSession.pendingAction.phase!=='COMPLETE')throw new Error('Finish the pending Hero action first');
   if (!campaign.battle?.bossEncounter) throw new Error('No Boss foundation battle');
   const battle = applyBossRuntimeInput(campaign.battle, input);
   let next = { ...campaign, battle, ...(battle.necromancerFigureBinding
@@ -156,7 +157,7 @@ export function reserveProductionBossEncounter(campaign: CampaignState): Campaig
   const version = campaignHeroDodgeRuleSetVersion(campaign);
   const definition = resolveBossDefinition('necromancer', level, version);
   const bindings = Object.fromEntries(campaign.heroes.filter(h=>!h.dead).map(h=>
-    ['u_' + h.instanceId, resolveHeroDodge({ heroId: h.heroId, level: h.level, ruleSetVersion: version })]));
+    ['u_' + h.instanceId, resolveHeroDodgeForHero(h,version)]));
   const seed = Array.from(campaign.dungeon!.questRunId).reduce((n,c)=>Math.imul(n^c.charCodeAt(0),16777619)>>>0,2166136261);
   const bound = startBossFoundation(campaign, definition, seed, room.id,
     Object.fromEntries(campaign.heroes.filter(h=>!h.dead).map(h=>[h.instanceId,bindings['u_'+h.instanceId].value])), gate.spawnDefinitions);

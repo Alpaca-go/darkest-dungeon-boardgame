@@ -24,7 +24,7 @@ test('C1C38 successor built production selector, source Standard, Prophet Room r
   const runtimeRequests:string[]=[];page.on('request',r=>runtimeRequests.push(r.url()));
   await page.goto('/');await page.getByTestId('runtime-content-profile').selectOption('community-complete-edition');
   await page.getByRole('button',{name:'新建战役',exact:true}).click();
-  for(const hero of ['Crusader','Leper','Highwayman','Vestal'])await page.getByText(hero,{exact:true}).first().click();
+  for(const [hero,stance] of [['crusader','aggressive'],['leper','defensive'],['highwayman','ranged'],['vestal','support']]){await page.getByTestId('choose-'+hero).click();await page.getByTestId('stance-'+hero).selectOption(stance);}
   await page.getByRole('button',{name:'继续（技能配置）',exact:true}).click();
   await page.getByRole('button',{name:'使用默认配置（全部英雄）',exact:true}).click();
   await page.getByRole('button',{name:'继续（任务选择）',exact:true}).click();

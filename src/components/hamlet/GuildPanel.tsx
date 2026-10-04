@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import type { CampaignState, HeroInstance } from '../../types';
 import { useGameStore } from '../../store/useGameStore';
-import { getSkillById } from '../../data/skills';
+import {playerSkillName} from '../../data/heroes/player-registry';
+import {legacySkillName} from '../../game-engine/heroes/legacy-player';
 import {
   getPermanentSkillLevel,
   pendingCostTotals,
@@ -40,6 +41,7 @@ export default function GuildPanel({
   const session = getGuildSession(campaign);
   if (!session) return null;
 
+  const skillName=(id:string)=>hero.productionIdentity?playerSkillName(hero,id):legacySkillName(id);
   const choices = session.choices;
   const totals = pendingCostTotals(choices);
   const xpNow = getHeroXp(hero);
@@ -75,6 +77,7 @@ export default function GuildPanel({
           。本次访问最多 {session.maxUpgrades} 次升级（已选 {choices.length}）。
         </p>
 
+        {hero.productionIdentity&&<p data-testid="guild-policy" className="text-xs text-amber-400">Guild cost / two upgrades per visit: official rulebook. Quest XP policy: Manual validation pending.</p>}
         {/* 英雄等级升级 */}
         <div className="mb-3">
           <div className="text-xs font-bold text-dd-text mb-1">英雄等级</div>
@@ -112,7 +115,7 @@ export default function GuildPanel({
           <div className="text-xs font-bold text-dd-text mb-1">技能等级（仅已装备技能）</div>
           <div className="space-y-1.5">
             {hero.equippedSkillIds.map((skillId) => {
-              const skill = getSkillById(skillId);
+              const skill = {name:skillName(skillId)};
               const v = validateGuildUpgrade(campaign, { type: 'skill-level', skillId });
               const from = projectedSkillLevel(hero, skillId, choices);
               return (
@@ -170,7 +173,7 @@ export default function GuildPanel({
                   <span>
                     {c.type === 'hero-level'
                       ? `英雄等级 ${ROMAN[c.fromLevel]} → ${ROMAN[c.toLevel]}`
-                      : `技能「${getSkillById(c.skillId ?? '')?.name ?? c.skillId}」 ${ROMAN[c.fromLevel]} → ${ROMAN[c.toLevel]}`}
+                      : `技能「${skillName(c.skillId ?? '')}」 ${ROMAN[c.fromLevel]} → ${ROMAN[c.toLevel]}`}
                     <span className="ml-1 text-dd-muted">
                       （-{c.xpCost} XP，-{c.goldCost} Gold）
                     </span>

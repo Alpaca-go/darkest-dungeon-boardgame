@@ -1,0 +1,69 @@
+{
+  "phase": "11A.5-C2E",
+  "baseline": "2d979652c3b713d6104bd21c7007fcd24fe1af63",
+  "definitionVersion": "C2C-HERO-PRODUCTION-DEFINITION-v1",
+  "runtimeVersion": "C2D-HERO-PRODUCTION-RUNTIME-v1",
+  "ambiguityPolicy": "SOURCE_AMBIGUITY_DEFER_POLICY_V1",
+  "playerPathFingerprint": "080d92aea9e686bec6e1408eb81e43a0141b6a7f9568bbabd2c6d0be06122943",
+  "policyId": "C2E-HERO-PLAYER-PATH-v1",
+  "partySize": 4,
+  "saveVersion": 23,
+  "completeEditionHeroCount": 18,
+  "skillCount": 126,
+  "productionCampaignDefaultPath": true,
+  "newCampaignRuntime": {
+    "runtimeVersion": "C2D-HERO-PRODUCTION-RUNTIME-v1",
+    "definitionVersion": "C2C-HERO-PRODUCTION-DEFINITION-v1"
+  },
+  "heroSelectorSource": "src/data/heroes/player-registry.ts",
+  "skillSelectorSource": "src/data/heroes/runtime-registry.ts",
+  "progressionSource": "Exact source Profile and Skill Level definitions",
+  "battleExecutor": "src/game-engine/heroes/production-runtime.ts",
+  "legacyBehavior": "Explicit LEGACY_HERO_RUNTIME_V1 preserves original identities and executor; no automatic conversion",
+  "policies": {
+    "version": "C2E-HERO-PLAYER-POLICY-v1",
+    "canonical": false,
+    "semanticStatus": "DEFERRED_MANUAL_VALIDATION",
+    "skillSlots": 3,
+    "trinketSlots": 1,
+    "completeEditionPool": 18
+  },
+  "legacySelectionPreserved": true,
+  "initialSkillSlots": {
+    "value": 3,
+    "canonical": true,
+    "source": "Locked rulebook page 11"
+  },
+  "progressionPolicy": {
+    "costs": {
+      "heroLevel": {
+        "xp": 4,
+        "gold": 2
+      },
+      "skillLevel": {
+        "xp": 2,
+        "gold": 1
+      }
+    },
+    "guildMaxUpgrades": 2,
+    "canonical": true,
+    "source": "Locked rulebook page 34"
+  },
+  "stagecoachXp": {
+    "canonical": true,
+    "source": "Locked rulebook page 33"
+  },
+  "questXp": {
+    "canonical": false,
+    "version": "C2E-HERO-PLAYER-POLICY-v1",
+    "semanticStatus": "DEFERRED_MANUAL_VALIDATION"
+  },
+  "sourceReacquisition": false,
+  "checkpointBoundaryPolicy": {
+    "version": "C2E-HERO-PLAYER-CHECKPOINT-v1",
+    "canonical": false,
+    "activeSegment": "Strict input replay",
+    "completedHistory": "Immutable source/version-bound receipts retained across campaign boundaries; historical segment origins are not retained",
+    "authorization": "C2E player save/continuation contract"
+  }
+}

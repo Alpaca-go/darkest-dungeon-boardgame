@@ -6,7 +6,7 @@ import { ruinsMonster, ruinsRoom, ruinsTile } from './source-registry';
 import { makeHeroUnit, MAX_ROUNDS } from '../battle';
 import {applyProphetThreatEvent} from '../prophet/production-threat';
 import { validateRuinsV6Selection } from '../rules/ruins-v6';
-import { resolveHeroDodge, HERO_DODGE_V2 } from '../rules/hero-dodge';
+import { resolveHeroDodgeForHero, resolveHeroDodge, HERO_DODGE_V2 } from '../rules/hero-dodge';
 import { runRuinsRoomTrigger, ruinsRoomMovementCandidates } from './room-runtime';
 import { ruinsMonsterTurnMovementCandidates } from './monster-runtime';
 import { ruinsDisplacementCandidates } from './printed-effect-runtime';
@@ -50,7 +50,7 @@ export function initializeOrdinaryRuinsBattle(campaign: CampaignState, draw: Rui
   const heroes = encounter.heroes.map((entry, index) => {
     const hero = liveHeroes.find(candidate => candidate.instanceId === entry.heroId)!;
     if (hero.stance !== entry.stance) throw new Error('Drawn Hero Stance differs from campaign');
-    const binding = resolveHeroDodge({ heroId: hero.heroId, level: hero.level, ruleSetVersion: HERO_DODGE_V2 });
+    const binding = resolveHeroDodgeForHero(hero,HERO_DODGE_V2);
     return { ...makeHeroUnit(hero, index, campaign), bossCombatDodge: binding.value, heroDodgeBinding: binding };
   });
   const monsters = encounter.monsters.map(entry => makeRuinsMonsterUnit(encounter, entry));
@@ -178,7 +178,7 @@ export function validateOrdinaryRuinsBattle(battle: BattleState, draw?: RuinsDra
     if (unit.side === 'hero') {
       const binding = unit.heroDodgeBinding;
       if (!binding || JSON.stringify(binding) !== JSON.stringify(resolveHeroDodge({
-        heroId: binding.heroId, level: binding.level, ruleSetVersion: HERO_DODGE_V2,
+        heroId: binding.heroId, level: binding.level, ruleSetVersion: unit.productionIdentity ? unit.productionIdentity.runtimeVersion : HERO_DODGE_V2,
       })) || unit.bossCombatDodge !== binding.value) throw new Error('Ordinary Ruins Hero Dodge binding mismatch');
     }
   }

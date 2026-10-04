@@ -13,6 +13,7 @@ import { finishRuinsAttack, prepareRuinsMonsterTurn, resolveRuinsAttackValues } 
 import { withRuinsRandom, withRuinsBattleSources, recordRuinsEvent } from './ruins/printed-effect-runtime';
 import { applyRuinsEnemyDamage, tickRuinsConditions } from './ruins/condition-runtime';
 import { isRuinsHealingProhibited, runRuinsRoomTrigger } from './ruins/room-runtime';
+import { makeProductionHeroUnit } from './heroes/production-hero';
 import { captureOrdinaryThreatDeaths } from './ruins/production-threat-runtime';
 import { finishSourceMonsterAttack, applyBossRuntimeInput, checkBossRuntimeEnd, withBossEncounterSources } from './bosses/foundation';
 import {isExecutingProphetCommand} from './prophet/production-runtime';
@@ -165,7 +166,7 @@ export function getActiveUnit(state: BattleState): BattleUnit | undefined {
  * 但必须复用同一套英雄单位构建逻辑，故导出。
  */
 export function makeHeroUnit(hero: HeroInstance, index: number, campaign: CampaignState): BattleUnit {
-  if (hero.productionIdentity) throw new Error('Production Hero requires the controlled Hero runtime deployment route');
+  if (hero.productionIdentity) return makeProductionHeroUnit(hero);
   const combatDefinition = getHeroCombatDefinition(hero.heroId, hero.level);
   const hp = Math.max(0, hero.maxLife - hero.wounds);
   const effectiveSkillLevels: Record<string, 1 | 2 | 3> = {};

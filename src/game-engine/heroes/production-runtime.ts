@@ -13,6 +13,10 @@ import { resolvePrintedAttackFromRoll } from '../combat-resolution';
 import { applyStress, recoverStress } from '../stress';
 import { killCampaignHero } from '../hero-death';
 import { SeededRandom, DeterministicClock, DeterministicCounterIdSource, withRuntimeSources } from '../runtime-sources';
+import {heroActionTopology} from './action-topology';
+import {validateActorOccupancy} from '../rules/actor-occupancy';
+import {applyBossRuntimeInput} from '../bosses/foundation';
+import {isExecutingProphetCommand,applyProphetHeroDamage,applyProphetProductionHeroInput} from '../prophet/production-runtime';
 
 const units=(c:CampaignState)=>[...c.battle!.heroes,...c.battle!.monsters];
 const unit=(c:CampaignState,id:string)=>{const u=units(c).find(u=>u.id===id);if(!u)throw new Error('Hero action actor/target absent');return u;};
@@ -34,7 +38,7 @@ function event(c:CampaignState,plan:HeroProductionActionPlan,eventType:string,fi
   if(deferredId)plan.deferredEventIds.push(eventId);
 }
 function rangeDistance(b:BattleState,actor:string,target:string):number {
-  const contract=b.largeMovementContract;
+  const contract=heroActionTopology(b);
   if(!contract)throw new Error('Production activation requires shared Area topology');
   const from=contract.placements[actor],to=contract.placements[target];
   if(!from||!to)throw new Error('Production Area placement absent');
@@ -54,15 +58,43 @@ export function productionTargetCandidates(c:CampaignState,plan:HeroProductionAc
     const limits=r.split('-').map(Number);if(limits.some(n=>!Number.isFinite(n)))throw new Error('Unsupported range');
     const distance=rangeDistance(c.battle!,plan.heroActorId,u.id);
     return distance>=limits[0]&&distance<=limits[limits.length-1];
+  }).filter(u=>{
+    if(u.side!=='monster'||t.targetCount?.kind==='all')return true;
+    const area=heroActionTopology(c.battle!).placements[u.id];
+    const guards=c.battle!.monsters.filter(v=>v.isAlive&&heroActionTopology(c.battle!).placements[v.id]===area
+      &&(hasToken(v,'guard')||(c.battle!.ruinsContext?.guardStacks[v.id]??0)>0));
+    return !guards.length||guards.some(v=>v.id===u.id);
   }).map(u=>u.id).sort();
+}
+/** Compute activation and candidates with the same executor, without committing a Boss log or consuming RNG. */
+export function previewProductionHeroTargets(campaign:CampaignState,input:Extract<HeroRuntimeInput,{type:'START'}>):CampaignState {
+ const c=campaign.heroProductionSession?structuredClone(campaign):beginProductionHeroSession(campaign,1);
+ const noRandom=()=>{throw new Error('Activation preview cannot consume RNG');};
+ advance(c,input,noRandom);advance(c,{type:'ADVANCE'},noRandom);advance(c,{type:'ADVANCE'},noRandom);return c;
+}
+export function productionLegalTargetSelection(c:CampaignState):string[]|null {
+ const p=c.heroProductionSession!.pendingAction!,t=actionDefinition(p).targeting;
+ const ids=p.pendingChoice?.candidateIds??p.frozenTargetIds;
+ if(!p.pendingChoice)return ids.length?ids:null;
+ const topology=heroActionTopology(c.battle!);
+ for(const area of [...new Set(ids.map(id=>topology.placements[id]))]) {
+  const candidates=ids.filter(id=>topology.placements[id]===area);
+  const selected=t.groups.length?t.groups.flatMap(g=>candidates.filter(id=>unit(c,id).side===(g.side==='HERO'?'hero':'monster')).slice(0,g.targetCount.kind==='exact'?g.targetCount.value:1)):candidates.slice(0,t.targetCount?.kind==='exact'?t.targetCount.value:1);
+  if(productionTargetSelectionError(c,selected)===null)return selected;
+ }
+ return null;
+}
+export function productionTargetSelectionError(c:CampaignState,ids:string[]):string|null {
+  try {validateTargets(c,c.heroProductionSession!.pendingAction!,ids);return null;}
+  catch(error) {return error instanceof Error?error.message:String(error);}
 }
 function validateTargets(c:CampaignState,p:HeroProductionActionPlan,ids:string[]) {
   const candidates=productionTargetCandidates(c,p),t=actionDefinition(p).targeting;
   if(!ids.length||new Set(ids).size!==ids.length||ids.some(id=>!candidates.includes(id)))throw new Error('Invalid production target choice');
-  if(t.targetCount?.kind!=='all'&&t.scope!=='SELF'&&new Set(ids.map(id=>c.battle!.largeMovementContract!.placements[id])).size!==1)throw new Error('Skill targets must share one Area');
+  if(t.targetCount?.kind!=='all'&&t.scope!=='SELF'&&new Set(ids.map(id=>heroActionTopology(c.battle!).placements[id])).size!==1)throw new Error('Skill targets must share one Area');
   if(t.groups.some(g=>g.side==='MONSTER')) {
-    const area=c.battle!.largeMovementContract!.placements[ids[0]];
-    const guards=c.battle!.monsters.filter(u=>u.isAlive&&c.battle!.largeMovementContract!.placements[u.id]===area&&(hasToken(u,'guard')||(c.battle!.ruinsContext?.guardStacks[u.id]??0)>0));
+    const area=heroActionTopology(c.battle!).placements[ids[0]];
+    const guards=c.battle!.monsters.filter(u=>u.isAlive&&heroActionTopology(c.battle!).placements[u.id]===area&&(hasToken(u,'guard')||(c.battle!.ruinsContext?.guardStacks[u.id]??0)>0));
     if(guards.length&&ids.some(id=>unit(c,id).side==='monster'&&!guards.some(u=>u.id===id)))throw new Error('Guard requires selecting guarded enemies');
   }
   for(const g of t.groups){const count=ids.filter(id=>unit(c,id).side===(g.side==='HERO'?'hero':'monster')).length;
@@ -92,14 +124,17 @@ export function executeProductionHeroMovement(b:BattleState,id:string,e:Extract<
   const distance=e.alternative?.direction===selected?e.alternative.distance:printedValue(e.distance,'movement');
   let next=b;
   if(destinationId) {
-    next=moveNormalCharacter(b,id,destinationId);
+    if(b.bossEncounter) {
+      next=structuredClone(b);next.bossEncounter!.placements[id]=destinationId;
+      if(next.actorOccupancy){next.actorOccupancy.placements[id]=destinationId;validateActorOccupancy(next);}
+    } else next=moveNormalCharacter(b,id,destinationId);
     if(next.ruinsContext)next.ruinsContext.placements={...next.largeMovementContract!.placements};
-    if(next.bossEncounter)next.bossEncounter.placements={...next.largeMovementContract!.placements};
+
   }
   return shuffleStance(next,id,selected==='PUSH'?'push':'pull',resolveShuffleCount(u,distance));
 }
 function movementOptions(c:CampaignState,p:HeroProductionActionPlan,targetId:string,e:Extract<RuntimeEffect,{kind:'MOVEMENT'}>):string[] {
-  const contract=c.battle!.largeMovementContract!,target=unit(c,targetId);
+  const contract=heroActionTopology(c.battle!),target=unit(c,targetId);
   const from=contract.placements[targetId],directions=[e.direction!,...(e.alternative?[e.alternative.direction]:[])];
   const options:string[]=[];
   for(const direction of directions) {
@@ -108,7 +143,7 @@ function movementOptions(c:CampaignState,p:HeroProductionActionPlan,targetId:str
     for(let step=0;step<steps;step++) {
       const reachable=new Set<string>();
       for(const area of frontier) {
-        const distanceTo=(to:string)=>{const shell=structuredClone(c.battle!);shell.largeMovementContract!.placements[targetId]=to;return rangeDistance(shell,p.heroActorId,targetId);};
+        const distanceTo=(to:string)=>{const shell=structuredClone(c.battle!);heroActionTopology(shell).placements[targetId]=to;return rangeDistance(shell,p.heroActorId,targetId);};
         const candidates=contract.areas.find(a=>a.id===area)!.adjacent.filter(to=>{
           const d=distanceTo(to),here=distanceTo(area);
           if(direction==='PUSH'?d<=here:d>=here)return false;
@@ -130,7 +165,11 @@ function syncHero(c:CampaignState,id:string) {
   if(!u.isAlive){const outcome=killCampaignHero(c,{heroInstanceId:u.sourceId,cause:'deathblow-attack',source:'battle',resumePhase:'dungeon-explore',battleId:c.battle!.battleId,sourceSkillId:c.heroProductionSession!.pendingAction!.skillId});Object.assign(c,outcome);}
 }
 function healing(c:CampaignState,id:string,amount:number) {replace(c,applyBattleUnitHealing(unit(c,id),amount).unit);syncHero(c,id);}
-function damage(c:CampaignState,id:string,amount:number) {replace(c,applyBattleUnitDamage(unit(c,id),amount).unit);syncHero(c,id);}
+function damage(c:CampaignState,id:string,amount:number) {
+ if(c.battle!.bossEncounter&&unit(c,id).side==='monster')c.battle=c.battle!.bossEncounter.prophetProduction&&isExecutingProphetCommand()?applyProphetHeroDamage(c.battle!,id,amount):applyBossRuntimeInput(c.battle!,{type:'MONSTER_DAMAGE',amounts:{[id]:amount}});
+ else replace(c,applyBattleUnitDamage(unit(c,id),amount).unit);
+ syncHero(c,id);
+}
 function attackDamage(c:CampaignState,p:HeroProductionActionPlan,id:string,amount:number) {
   const actor=unit(c,p.heroActorId),target=unit(c,id);
   if(amount>0&&(hasToken(target,'riposte')||(c.battle!.ruinsContext?.riposteStacks[id]??0)>0)&&actor.isAlive) {
@@ -204,6 +243,13 @@ function executeEffect(c:CampaignState,p:HeroProductionActionPlan,e:RuntimeEffec
   }
   p.resolvedEffectIds.push(effectId);event(c,p,'HERO_EFFECT_RESOLVED',`${field}:${targetId}`,{kind:e.kind,targetId});return true;
 }
+/** Ordinary Monsters bind Dodge through their pinned source definition; Bosses carry it on the unit. */
+function productionTargetDodge(c:CampaignState,id:string):number {
+ const target=unit(c,id),context=c.battle!.ruinsContext;
+ if(target.side==='monster'&&context)return ruinsMonster(context.definitionIds[id],context.ruleSetVersion).dodge;
+ if(typeof target.bossCombatDodge!=='number')throw new Error('Target Dodge source binding absent');
+ return target.bossCombatDodge;
+}
 function rollOutcome(c:CampaignState,p:HeroProductionActionPlan,id:string) {
   const a=actionDefinition(p),roll=p.storedRolls[0];
   if(!a.roll.requiresRoll)return {hit:true,crit:false,damage:null};
@@ -211,13 +257,13 @@ function rollOutcome(c:CampaignState,p:HeroProductionActionPlan,id:string) {
   const target=unit(c,id),actor=unit(c,p.heroActorId);
   const markBonus=target.marked?1:0,critBonus=actor.buffs.reduce((n,b)=>n+b.amount,0)+target.debuffs.reduce((n,b)=>n+b.amount,0);
   if(a.attack) {
-    const t=unit(c,id);if(typeof t.bossCombatDodge!=='number')throw new Error('Target Dodge source binding absent');
+    const dodge=productionTargetDodge(c,id);
     const damageValue=printedValue(a.attack.damage,'damage');
     const crit=a.attack.crit.presence==='PRINTED_VALUE'?a.attack.crit.value:null;
-    if(crit===null)return {hit:roll<=accuracy+markBonus-t.bossCombatDodge,crit:false,damage:roll<=accuracy+markBonus-t.bossCombatDodge?damageValue:0};
-    return resolvePrintedAttackFromRoll({accuracy,damage:damageValue,crit,critDamage:printedValue(a.attack.critDamage,'critDamage')},roll,t.bossCombatDodge,markBonus,critBonus);
+    if(crit===null)return {hit:roll<=accuracy+markBonus-dodge,crit:false,damage:roll<=accuracy+markBonus-dodge?damageValue:0};
+    return resolvePrintedAttackFromRoll({accuracy,damage:damageValue,crit,critDamage:printedValue(a.attack.critDamage,'critDamage')},roll,dodge,markBonus,critBonus);
   }
-  const dodge=unit(c,id).bossCombatDodge;if(typeof dodge!=='number')throw new Error('Target Dodge source binding absent');
+  const dodge=productionTargetDodge(c,id);
   return {hit:roll<=accuracy+markBonus-dodge,crit:a.roll.crit.presence==='PRINTED_VALUE'&&roll<=a.roll.crit.value+critBonus&&roll<=accuracy+markBonus-dodge,damage:null};
 }
 function recipients(c:CampaignState,p:HeroProductionActionPlan,e:RuntimeEffect,targetId:string):string[] {
@@ -280,8 +326,8 @@ function advance(c:CampaignState,input:HeroRuntimeInput,random:()=>number) {
     }
     case 'REACTION_WINDOWS':
       for(const [targetId,result] of Object.entries(p.storedOutcomes))if(result.crit) {
-        const area=c.battle!.largeMovementContract!.placements[p.heroActorId];
-        for(const hero of c.battle!.heroes.filter(h=>h.isAlive&&c.battle!.largeMovementContract!.placements[h.id]===area))stress(c,hero.id,-1,p);
+        const area=heroActionTopology(c.battle!).placements[p.heroActorId];
+        for(const hero of c.battle!.heroes.filter(h=>h.isAlive&&heroActionTopology(c.battle!).placements[h.id]===area))stress(c,hero.id,-1,p);
         event(c,p,'HERO_CRITICAL_STRESS_RECOVERED',`critical:${targetId}`);
       }
       event(c,p,'HERO_REACTION_WINDOWS_RESOLVED','reactions');p.phase='COMMIT';break;
@@ -289,7 +335,7 @@ function advance(c:CampaignState,input:HeroRuntimeInput,random:()=>number) {
       p.phase='COMPLETE';event(c,p,'HERO_ACTION_COMPLETE','complete');s.completedActions.push(structuredClone(p));break;
   }
 }
-/** Explicit controlled engine route. Normal campaign creation never calls this. */
+/** Open a deterministic segment for a production Hero action. */
 export function beginProductionHeroSession(campaign:CampaignState,seed:number):CampaignState {
   if(campaign.heroProductionSession||!campaign.battle||!campaign.heroes.length||campaign.heroes.some(h=>!h.productionIdentity))throw new Error('Production session requires an explicitly constructed party');
   if(JSON.stringify(campaign.heroRuntimeSelection)!==JSON.stringify(PRODUCTION_HERO_SELECTION))throw new Error('Production campaign selection required');
@@ -297,6 +343,7 @@ export function beginProductionHeroSession(campaign:CampaignState,seed:number):C
   return {...campaign,heroProductionSession:{origin,seed,rngCursor:rng.snapshot(),rngCalls:0,clockCursor:0,idCursor:0,inputs:[],pendingAction:null,completedActions:[],events:[]}};
 }
 export function applyProductionHeroInput(campaign:CampaignState,input:HeroRuntimeInput):CampaignState {
+  if(campaign.battle?.bossEncounter?.prophetProduction&&!isExecutingProphetCommand())return applyProphetProductionHeroInput(campaign,input);
   if(!campaign.heroProductionSession||JSON.stringify(campaign.heroRuntimeSelection)!==JSON.stringify(PRODUCTION_HERO_SELECTION))throw new Error('Production controlled route absent');
   const c=structuredClone(campaign),s=c.heroProductionSession!;
   const rng=new SeededRandom(s.seed);rng.restore(s.rngCursor);const clock=new DeterministicClock();clock.restore(s.clockCursor);const ids=new DeterministicCounterIdSource(s.seed);ids.restore(s.idCursor);
@@ -309,6 +356,13 @@ export function replayProductionHeroSession(campaign:CampaignState):CampaignStat
   const s=campaign.heroProductionSession!;
   if(!s||s.origin.heroProductionSession)throw new Error('Invalid replay origin');
   let replay=beginProductionHeroSession(s.origin,s.seed);
+  // C2E checkpoint v1: accepted completed receipts precede the current replay segment.
+  const starts=s.inputs.filter(i=>i.type==='START').length;
+  const completedInSegment=starts-(s.pendingAction&&s.pendingAction.phase!=='COMPLETE'?1:0);
+  const archived=s.completedActions.slice(0,s.completedActions.length-completedInSegment);
+  const archivedIds=new Set(archived.map(p=>p.actionId));
+  replay.heroProductionSession!.completedActions=structuredClone(archived);
+  replay.heroProductionSession!.events=structuredClone(s.events.filter(e=>archivedIds.has(e.actionId)));
   for(const input of s.inputs)replay=applyProductionHeroInput(replay,input);
   return replay;
 }

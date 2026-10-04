@@ -3,6 +3,7 @@ import { HERO_RUNTIME_VERSION, LEGACY_HERO_SELECTION, LEGACY_HERO_RUNTIME, PRODU
 import { getHeroById } from '../../data/heroes';
 import { getSkillById } from '../../data/skills';
 import { resolveProductionUnitDodge, printedValue } from './production-hero';
+import {compileHeroProductionActionPlan} from './action-plan';
 import { replayProductionHeroSession } from './production-runtime';
 
 export function stableHeroState(v:unknown):string {
@@ -39,6 +40,14 @@ export function validateHeroRuntime(c:CampaignState,checkReplay=true):void {
   const s=c.heroProductionSession;
   if(s&&checkReplay) {
     if(!Array.isArray(s.inputs)||s.inputs.length>10000||s.origin.heroProductionSession)throw new Error('Invalid Hero replay envelope');
+    if(new Set(s.events.map(e=>e.eventId)).size!==s.events.length||new Set(s.completedActions.map(p=>p.actionId)).size!==s.completedActions.length)throw new Error('Duplicate Hero receipts');
+    for(const event of s.events)if(event.runtimeVersion!==selection.runtimeVersion||event.definitionVersion!==selection.definitionVersion)throw new Error('Hero receipt version mismatch');
+    for(const plan of s.completedActions) {
+      const skill=resolveProductionHeroSkill(plan.heroId,plan.skillId,plan.skillLevel),action=skill.actions[plan.face];
+      const actor={id:plan.heroActorId,productionIdentity:{...plan}};
+      const expected=compileHeroProductionActionPlan(skill,actor,plan.actionId,plan.rngCheckpoint,plan.face);
+      if(!action||plan.phase!=='COMPLETE'||plan.pendingChoice||plan.sourceBindingId!==skill.sourceBindingId||plan.runtimeVersion!==selection.runtimeVersion||plan.definitionVersion!==selection.definitionVersion||stableHeroState(plan.nodes)!==stableHeroState(expected.nodes)||plan.storedRolls.length!==(action.roll.requiresRoll?1:0)||plan.storedRolls.some(roll=>!Number.isInteger(roll)||roll<1||roll>10)||new Set(plan.resolvedEffectIds).size!==plan.resolvedEffectIds.length||!s.events.some(e=>e.actionId===plan.actionId&&e.eventType==='HERO_ACTION_COMPLETE'))throw new Error('Invalid completed Hero receipt');
+    }
     validateHeroRuntime(s.origin,false);
     const replay=replayProductionHeroSession(c);
     const normalized=(v:CampaignState)=>{const {updatedAt,saveVersion,...gameplay}=v;void updatedAt;void saveVersion;return gameplay;};

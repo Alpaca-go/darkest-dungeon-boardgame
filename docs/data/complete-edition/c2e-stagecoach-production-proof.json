@@ -1,0 +1,483 @@
+{
+  "phase": "11A.5-C2E",
+  "baseline": "2d979652c3b713d6104bd21c7007fcd24fe1af63",
+  "definitionVersion": "C2C-HERO-PRODUCTION-DEFINITION-v1",
+  "runtimeVersion": "C2D-HERO-PRODUCTION-RUNTIME-v1",
+  "ambiguityPolicy": "SOURCE_AMBIGUITY_DEFER_POLICY_V1",
+  "playerPathFingerprint": "080d92aea9e686bec6e1408eb81e43a0141b6a7f9568bbabd2c6d0be06122943",
+  "poolCount": 18,
+  "candidates": [
+    {
+      "heroId": "crusader",
+      "selectable": false,
+      "reason": "该英雄已在本战役阵亡"
+    },
+    {
+      "heroId": "hellion",
+      "selectable": true,
+      "reason": null
+    },
+    {
+      "heroId": "bounty-hunter",
+      "selectable": true,
+      "reason": null
+    },
+    {
+      "heroId": "highwayman",
+      "selectable": false,
+      "reason": "已在当前队伍中"
+    },
+    {
+      "heroId": "vestal",
+      "selectable": false,
+      "reason": "已在当前队伍中"
+    },
+    {
+      "heroId": "jester",
+      "selectable": true,
+      "reason": null
+    },
+    {
+      "heroId": "plague-doctor",
+      "selectable": true,
+      "reason": null
+    },
+    {
+      "heroId": "arbalest",
+      "selectable": true,
+      "reason": null
+    },
+    {
+      "heroId": "grave-robber",
+      "selectable": true,
+      "reason": null
+    },
+    {
+      "heroId": "occultist",
+      "selectable": true,
+      "reason": null
+    },
+    {
+      "heroId": "abomination",
+      "selectable": false,
+      "reason": "已在当前队伍中"
+    },
+    {
+      "heroId": "man-at-arms",
+      "selectable": true,
+      "reason": null
+    },
+    {
+      "heroId": "flagellant",
+      "selectable": true,
+      "reason": null
+    },
+    {
+      "heroId": "leper",
+      "selectable": true,
+      "reason": null
+    },
+    {
+      "heroId": "antiquarian",
+      "selectable": true,
+      "reason": null
+    },
+    {
+      "heroId": "shieldbreaker",
+      "selectable": true,
+      "reason": null
+    },
+    {
+      "heroId": "hound-master",
+      "selectable": true,
+      "reason": null
+    },
+    {
+      "heroId": "musketeer",
+      "selectable": true,
+      "reason": null
+    }
+  ],
+  "replacements": [
+    {
+      "heroId": "hellion",
+      "identity": {
+        "runtimeVersion": "C2D-HERO-PRODUCTION-RUNTIME-v1",
+        "definitionVersion": "C2C-HERO-PRODUCTION-DEFINITION-v1",
+        "heroId": "hellion",
+        "level": 1,
+        "form": null,
+        "sourceBindingId": "c2b:hellion:profile:L1:HERO_PROFILE"
+      },
+      "skillIds": [
+        "hellion-adrenaline-rush",
+        "hellion-bleed-out",
+        "hellion-iron-swan"
+      ],
+      "skillLevels": {
+        "hellion-adrenaline-rush": 1,
+        "hellion-bleed-out": 1,
+        "hellion-iron-swan": 1,
+        "hellion-wicked-hack": 1,
+        "hellion-barbaric-yawp": 1,
+        "hellion-if-it-bleeds": 1,
+        "hellion-breakthrough": 1
+      },
+      "waitingTokens": 1,
+      "status": "PASS"
+    },
+    {
+      "heroId": "bounty-hunter",
+      "identity": {
+        "runtimeVersion": "C2D-HERO-PRODUCTION-RUNTIME-v1",
+        "definitionVersion": "C2C-HERO-PRODUCTION-DEFINITION-v1",
+        "heroId": "bounty-hunter",
+        "level": 1,
+        "form": null,
+        "sourceBindingId": "c2b:bounty-hunter:profile:L1:HERO_PROFILE"
+      },
+      "skillIds": [
+        "bounty-hunter-flashbang",
+        "bounty-hunter-collect-bounty",
+        "bounty-hunter-uppercut"
+      ],
+      "skillLevels": {
+        "bounty-hunter-flashbang": 1,
+        "bounty-hunter-collect-bounty": 1,
+        "bounty-hunter-uppercut": 1,
+        "bounty-hunter-caltrops": 1,
+        "bounty-hunter-mark-for-death": 1,
+        "bounty-hunter-come-hither": 1,
+        "bounty-hunter-finish-him": 1
+      },
+      "waitingTokens": 1,
+      "status": "PASS"
+    },
+    {
+      "heroId": "jester",
+      "identity": {
+        "runtimeVersion": "C2D-HERO-PRODUCTION-RUNTIME-v1",
+        "definitionVersion": "C2C-HERO-PRODUCTION-DEFINITION-v1",
+        "heroId": "jester",
+        "level": 1,
+        "form": null,
+        "sourceBindingId": "c2b:jester:profile:L1:HERO_PROFILE"
+      },
+      "skillIds": [
+        "jester-battle-ballad",
+        "jester-inspiring-tune",
+        "jester-dirk-stab"
+      ],
+      "skillLevels": {
+        "jester-battle-ballad": 1,
+        "jester-inspiring-tune": 1,
+        "jester-dirk-stab": 1,
+        "jester-harvest": 1,
+        "jester-finale": 1,
+        "jester-solo": 1,
+        "jester-slice-off": 1
+      },
+      "waitingTokens": 1,
+      "status": "PASS"
+    },
+    {
+      "heroId": "plague-doctor",
+      "identity": {
+        "runtimeVersion": "C2D-HERO-PRODUCTION-RUNTIME-v1",
+        "definitionVersion": "C2C-HERO-PRODUCTION-DEFINITION-v1",
+        "heroId": "plague-doctor",
+        "level": 1,
+        "form": null,
+        "sourceBindingId": "c2b:plague-doctor:profile:L1:HERO_PROFILE"
+      },
+      "skillIds": [
+        "plague-doctor-blinding-gas",
+        "plague-doctor-battlefield-medicine",
+        "plague-doctor-incision"
+      ],
+      "skillLevels": {
+        "plague-doctor-blinding-gas": 1,
+        "plague-doctor-battlefield-medicine": 1,
+        "plague-doctor-incision": 1,
+        "plague-doctor-emboldening-vapours": 1,
+        "plague-doctor-plague-grenade": 1,
+        "plague-doctor-disorienting-blast": 1,
+        "plague-doctor-noxious-blast": 1
+      },
+      "waitingTokens": 1,
+      "status": "PASS"
+    },
+    {
+      "heroId": "arbalest",
+      "identity": {
+        "runtimeVersion": "C2D-HERO-PRODUCTION-RUNTIME-v1",
+        "definitionVersion": "C2C-HERO-PRODUCTION-DEFINITION-v1",
+        "heroId": "arbalest",
+        "level": 1,
+        "form": null,
+        "sourceBindingId": "c2b:arbalest:profile:L1:HERO_PROFILE"
+      },
+      "skillIds": [
+        "arbalest-battlefield-bandage",
+        "arbalest-rallying-flare",
+        "arbalest-sniper-shot"
+      ],
+      "skillLevels": {
+        "arbalest-battlefield-bandage": 1,
+        "arbalest-rallying-flare": 1,
+        "arbalest-sniper-shot": 1,
+        "arbalest-suppressive-fire": 1,
+        "arbalest-snipers-mark": 1,
+        "arbalest-bola": 1,
+        "arbalest-blindfire": 1
+      },
+      "waitingTokens": 1,
+      "status": "PASS"
+    },
+    {
+      "heroId": "grave-robber",
+      "identity": {
+        "runtimeVersion": "C2D-HERO-PRODUCTION-RUNTIME-v1",
+        "definitionVersion": "C2C-HERO-PRODUCTION-DEFINITION-v1",
+        "heroId": "grave-robber",
+        "level": 1,
+        "form": null,
+        "sourceBindingId": "c2b:grave-robber:profile:L1:HERO_PROFILE"
+      },
+      "skillIds": [
+        "grave-robber-shadow-fade",
+        "grave-robber-poison-dart",
+        "grave-robber-flashing-daggers"
+      ],
+      "skillLevels": {
+        "grave-robber-shadow-fade": 1,
+        "grave-robber-poison-dart": 1,
+        "grave-robber-flashing-daggers": 1,
+        "grave-robber-pick-to-the-face": 1,
+        "grave-robber-lunge": 1,
+        "grave-robber-throw-dagger": 1,
+        "grave-robber-toxin-trickery": 1
+      },
+      "waitingTokens": 1,
+      "status": "PASS"
+    },
+    {
+      "heroId": "occultist",
+      "identity": {
+        "runtimeVersion": "C2D-HERO-PRODUCTION-RUNTIME-v1",
+        "definitionVersion": "C2C-HERO-PRODUCTION-DEFINITION-v1",
+        "heroId": "occultist",
+        "level": 1,
+        "form": null,
+        "sourceBindingId": "c2b:occultist:profile:L1:HERO_PROFILE"
+      },
+      "skillIds": [
+        "occultist-daemons-pull",
+        "occultist-hands-from-the-abyss",
+        "occultist-sacrificial-stab"
+      ],
+      "skillLevels": {
+        "occultist-daemons-pull": 1,
+        "occultist-hands-from-the-abyss": 1,
+        "occultist-sacrificial-stab": 1,
+        "occultist-vulnerability-hex": 1,
+        "occultist-abyssal-artillery": 1,
+        "occultist-weakening-curse": 1,
+        "occultist-wyrd-reconstruction": 1
+      },
+      "waitingTokens": 1,
+      "status": "PASS"
+    },
+    {
+      "heroId": "man-at-arms",
+      "identity": {
+        "runtimeVersion": "C2D-HERO-PRODUCTION-RUNTIME-v1",
+        "definitionVersion": "C2C-HERO-PRODUCTION-DEFINITION-v1",
+        "heroId": "man-at-arms",
+        "level": 1,
+        "form": null,
+        "sourceBindingId": "c2b:man-at-arms:profile:L1:HERO_PROFILE"
+      },
+      "skillIds": [
+        "man-at-arms-bellow",
+        "man-at-arms-defender",
+        "man-at-arms-retribution"
+      ],
+      "skillLevels": {
+        "man-at-arms-bellow": 1,
+        "man-at-arms-defender": 1,
+        "man-at-arms-retribution": 1,
+        "man-at-arms-crush": 1,
+        "man-at-arms-rampart": 1,
+        "man-at-arms-command": 1,
+        "man-at-arms-bolster": 1
+      },
+      "waitingTokens": 1,
+      "status": "PASS"
+    },
+    {
+      "heroId": "flagellant",
+      "identity": {
+        "runtimeVersion": "C2D-HERO-PRODUCTION-RUNTIME-v1",
+        "definitionVersion": "C2C-HERO-PRODUCTION-DEFINITION-v1",
+        "heroId": "flagellant",
+        "level": 1,
+        "form": null,
+        "sourceBindingId": "c2b:flagellant:profile:L1:HERO_PROFILE"
+      },
+      "skillIds": [
+        "flagellant-endure",
+        "flagellant-suffer",
+        "flagellant-redeem"
+      ],
+      "skillLevels": {
+        "flagellant-endure": 1,
+        "flagellant-suffer": 1,
+        "flagellant-redeem": 1,
+        "flagellant-reclaim": 1,
+        "flagellant-exsanguinate": 1,
+        "flagellant-punish": 1,
+        "flagellant-rain-of-sorrows": 1
+      },
+      "waitingTokens": 1,
+      "status": "PASS"
+    },
+    {
+      "heroId": "leper",
+      "identity": {
+        "runtimeVersion": "C2D-HERO-PRODUCTION-RUNTIME-v1",
+        "definitionVersion": "C2C-HERO-PRODUCTION-DEFINITION-v1",
+        "heroId": "leper",
+        "level": 1,
+        "form": null,
+        "sourceBindingId": "c2b:leper:profile:L1:HERO_PROFILE"
+      },
+      "skillIds": [
+        "leper-revenge",
+        "leper-chop",
+        "leper-hew"
+      ],
+      "skillLevels": {
+        "leper-revenge": 1,
+        "leper-chop": 1,
+        "leper-hew": 1,
+        "leper-purge": 1,
+        "leper-withstand": 1,
+        "leper-solemnity": 1,
+        "leper-intimidate": 1
+      },
+      "waitingTokens": 1,
+      "status": "PASS"
+    },
+    {
+      "heroId": "antiquarian",
+      "identity": {
+        "runtimeVersion": "C2D-HERO-PRODUCTION-RUNTIME-v1",
+        "definitionVersion": "C2C-HERO-PRODUCTION-DEFINITION-v1",
+        "heroId": "antiquarian",
+        "level": 1,
+        "form": null,
+        "sourceBindingId": "c2b:antiquarian:profile:L1:HERO_PROFILE"
+      },
+      "skillIds": [
+        "antiquarian-invigorating-vapours",
+        "antiquarian-nervous-stab",
+        "antiquarian-flashpowder"
+      ],
+      "skillLevels": {
+        "antiquarian-invigorating-vapours": 1,
+        "antiquarian-nervous-stab": 1,
+        "antiquarian-flashpowder": 1,
+        "antiquarian-protect-me": 1,
+        "antiquarian-festering-vapours": 1,
+        "antiquarian-get-down": 1,
+        "antiquarian-fortifying-vapours": 1
+      },
+      "waitingTokens": 1,
+      "status": "PASS"
+    },
+    {
+      "heroId": "shieldbreaker",
+      "identity": {
+        "runtimeVersion": "C2D-HERO-PRODUCTION-RUNTIME-v1",
+        "definitionVersion": "C2C-HERO-PRODUCTION-DEFINITION-v1",
+        "heroId": "shieldbreaker",
+        "level": 1,
+        "form": null,
+        "sourceBindingId": "c2b:shieldbreaker:profile:L1:HERO_PROFILE"
+      },
+      "skillIds": [
+        "shieldbreaker-adders-kiss",
+        "shieldbreaker-expose",
+        "shieldbreaker-captivate"
+      ],
+      "skillLevels": {
+        "shieldbreaker-adders-kiss": 1,
+        "shieldbreaker-expose": 1,
+        "shieldbreaker-captivate": 1,
+        "shieldbreaker-pierce": 1,
+        "shieldbreaker-serpent-sway": 1,
+        "shieldbreaker-impale": 1,
+        "shieldbreaker-puncture": 1
+      },
+      "waitingTokens": 1,
+      "status": "PASS"
+    },
+    {
+      "heroId": "hound-master",
+      "identity": {
+        "runtimeVersion": "C2D-HERO-PRODUCTION-RUNTIME-v1",
+        "definitionVersion": "C2C-HERO-PRODUCTION-DEFINITION-v1",
+        "heroId": "hound-master",
+        "level": 1,
+        "form": null,
+        "sourceBindingId": "c2b:hound-master:profile:L1:HERO_PROFILE"
+      },
+      "skillIds": [
+        "hound-master-target-whistle",
+        "hound-master-hounds-rush",
+        "hound-master-blackjack"
+      ],
+      "skillLevels": {
+        "hound-master-target-whistle": 1,
+        "hound-master-hounds-rush": 1,
+        "hound-master-blackjack": 1,
+        "hound-master-lick-wounds": 1,
+        "hound-master-guard-dog": 1,
+        "hound-master-cry-havoc": 1,
+        "hound-master-hounds-harry": 1
+      },
+      "waitingTokens": 1,
+      "status": "PASS"
+    },
+    {
+      "heroId": "musketeer",
+      "identity": {
+        "runtimeVersion": "C2D-HERO-PRODUCTION-RUNTIME-v1",
+        "definitionVersion": "C2C-HERO-PRODUCTION-DEFINITION-v1",
+        "heroId": "musketeer",
+        "level": 1,
+        "form": null,
+        "sourceBindingId": "c2b:musketeer:profile:L1:HERO_PROFILE"
+      },
+      "skillIds": [
+        "musketeer-call-the-shot",
+        "musketeer-buckshot",
+        "musketeer-aimed-shot"
+      ],
+      "skillLevels": {
+        "musketeer-call-the-shot": 1,
+        "musketeer-buckshot": 1,
+        "musketeer-aimed-shot": 1,
+        "musketeer-smokescreen": 1,
+        "musketeer-sidearm": 1,
+        "musketeer-patch-up": 1,
+        "musketeer-skeet-shot": 1
+      },
+      "waitingTokens": 1,
+      "status": "PASS"
+    }
+  ],
+  "economyMarker": "Manual validation pending for recruitment upgrade policy; source XP accumulation preserved",
+  "status": "PASS"
+}
