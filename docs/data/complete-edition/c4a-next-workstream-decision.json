@@ -1,0 +1,258 @@
+{
+  "schemaVersion": "C4A-QUEST-REBASELINE-v1",
+  "phase": "11A.7-C4A",
+  "baseMainHead": "ed84d1359907268736b7d163b68c5b359c4d71fd",
+  "sourcePolicy": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "nextPhase": "11A.7-C4B",
+  "decisionCount": 1,
+  "selectedKind": "SOURCE_EVIDENCE_SUCCESSOR",
+  "selectedCapabilityFamily": "REST_OFFICIAL_CONTRACT_REVIEW",
+  "implementationBatchSelected": false,
+  "reason": "No source-clear whole-Quest implementation batch exists under the frozen dependencies. Every non-ready Quest retains a canonical source gate; adapter completion alone promotes zero.",
+  "affectedQuestIds": [
+    "community-quest-boss-face-the-threat",
+    "community-quest-cove-lvl1-deep-horrors",
+    "community-quest-cove-lvl1-deep-waters",
+    "community-quest-cove-lvl1-purify-the-eldritch-signs",
+    "community-quest-cove-lvl1-test-the-waters",
+    "community-quest-cove-lvl1-unclean-waters",
+    "community-quest-cove-lvl2-deep-horrors-2",
+    "community-quest-cove-lvl2-deep-waters-2",
+    "community-quest-cove-lvl2-eldritch-purging",
+    "community-quest-cove-lvl2-the-deep-ones",
+    "community-quest-cove-lvl2-unclean-waters-2",
+    "community-quest-cove-lvl3-deep-waters-3",
+    "community-quest-cove-lvl3-the-deep-ones-2",
+    "community-quest-cove-lvl3-the-shipwrecks",
+    "community-quest-cove-lvl3-unclean-waters-3",
+    "community-quest-crimson-court-lvl1-deep-in-the-swamp",
+    "community-quest-crimson-court-lvl1-lost-and-found",
+    "community-quest-crimson-court-lvl1-rest-in-rubble",
+    "community-quest-crimson-court-lvl1-rivers-run-red",
+    "community-quest-crimson-court-lvl1-they-are-swarm",
+    "community-quest-crimson-court-lvl2-deeper-into-the-swamp",
+    "community-quest-crimson-court-lvl2-lurkers",
+    "community-quest-crimson-court-lvl2-pest-control",
+    "community-quest-crimson-court-lvl2-ruin-the-party",
+    "community-quest-crimson-court-lvl2-take-em-back",
+    "community-quest-crimson-court-lvl3-breeders",
+    "community-quest-crimson-court-lvl3-cut-the-buzz",
+    "community-quest-crimson-court-lvl3-rest-in-rubble-iii",
+    "community-quest-crimson-court-lvl3-the-endless-marsh",
+    "community-quest-crimson-court-lvl3-uninvited",
+    "community-quest-ruins-lvl1-dem-bones",
+    "community-quest-ruins-lvl1-fundraiser",
+    "community-quest-ruins-lvl1-rising-threat",
+    "community-quest-ruins-lvl1-scout-ahead",
+    "community-quest-ruins-lvl1-wipe-em-out",
+    "community-quest-ruins-lvl2-break-them",
+    "community-quest-ruins-lvl2-clear-the-path",
+    "community-quest-ruins-lvl2-disruption",
+    "community-quest-ruins-lvl2-purify-the-fountains",
+    "community-quest-ruins-lvl2-reduce-to-rubble",
+    "community-quest-ruins-lvl3-creeping-darkness",
+    "community-quest-ruins-lvl3-forward-camps",
+    "community-quest-ruins-lvl3-the-threat-is-real",
+    "community-quest-ruins-lvl3-they-are-back",
+    "community-quest-ruins-lvl3-warm-up-the-halls",
+    "community-quest-warrens-lvl1-disarm-them",
+    "community-quest-warrens-lvl1-pork-chop",
+    "community-quest-warrens-lvl1-worm-squash",
+    "community-quest-warrens-lvl2-a-new-breed",
+    "community-quest-warrens-lvl2-bait-them-out",
+    "community-quest-warrens-lvl2-carrion-infestation",
+    "community-quest-warrens-lvl2-ringleaders",
+    "community-quest-warrens-lvl3-alpha-swine",
+    "community-quest-warrens-lvl3-drums-of-doom",
+    "community-quest-warrens-lvl3-foul-arsenal",
+    "community-quest-warrens-lvl3-infighting",
+    "community-quest-weald-lvl1-circle-of-witches",
+    "community-quest-weald-lvl1-disinfection",
+    "community-quest-weald-lvl1-fungal-research",
+    "community-quest-weald-lvl1-patrol-the-woods",
+    "community-quest-weald-lvl1-purge-the-woods",
+    "community-quest-weald-lvl2-hounds-of-the-woods",
+    "community-quest-weald-lvl2-lost-supplies",
+    "community-quest-weald-lvl2-lost-treasures",
+    "community-quest-weald-lvl2-searching-in-the-dark",
+    "community-quest-weald-lvl2-spreaders-of-miasma",
+    "community-quest-weald-lvl3-final-swipe",
+    "community-quest-weald-lvl3-great-unclean-ones",
+    "community-quest-weald-lvl3-no-other-way",
+    "community-quest-weald-lvl3-the-infected",
+    "community-quest-weald-lvl3-whispering-woods"
+  ],
+  "expectedQuestCoverageGain": 0,
+  "conditionalSourceGateReduction": 71,
+  "conditionalExistingAdapterCandidates": [
+    "community-quest-crimson-court-lvl1-deep-in-the-swamp",
+    "community-quest-crimson-court-lvl2-deeper-into-the-swamp",
+    "community-quest-crimson-court-lvl2-pest-control",
+    "community-quest-ruins-lvl1-scout-ahead",
+    "community-quest-ruins-lvl1-wipe-em-out",
+    "community-quest-ruins-lvl2-clear-the-path",
+    "community-quest-ruins-lvl2-reduce-to-rubble",
+    "community-quest-warrens-lvl1-pork-chop"
+  ],
+  "conditionalCandidateQualification": "Existing simple adapters only; not a promotion promise. Requires official Rest closure, current production/save/player-path proof and selector recheck.",
+  "sourceClear": false,
+  "existingPrimitivesReused": [
+    {
+      "path": "src/game-engine/quests/quest-runtime.ts",
+      "symbol": "validateRestAllocation; commitRestAtCamp"
+    },
+    {
+      "path": "src/game-engine/quests/quest-runtime.ts",
+      "symbol": "createQuestRuntimeState; evaluateQuestXpUnits; recordQuestQualificationEvent"
+    },
+    {
+      "path": "src/game-engine/save.ts"
+    }
+  ],
+  "newRuntimePrimitivesRequired": [],
+  "whyHigherROI": "Rest is shared across all Firewood Quests and gates already-authored simple adapters. Monster/Hero routing cannot remove it; Trinket-only Quests retain independent frozen source timing gates.",
+  "alternatives": [
+    {
+      "id": "NEEDS_QUEST_ADAPTER:QUEST_SAVE_CHOICE_TRANSACTION_BINDING",
+      "expectedQuestCoverageGain": 0,
+      "affectedQuestCount": 73
+    },
+    {
+      "id": "NEEDS_QUEST_ADAPTER:QUEST_DUNGEON_COMPOSITION",
+      "expectedQuestCoverageGain": 0,
+      "affectedQuestCount": 63
+    },
+    {
+      "id": "NEEDS_QUEST_ADAPTER:QUEST_OBJECTIVE_QUALIFICATION",
+      "expectedQuestCoverageGain": 0,
+      "affectedQuestCount": 43
+    },
+    {
+      "id": "NEEDS_QUEST_ADAPTER:QUEST_ROOM_CARD_SELECTION",
+      "expectedQuestCoverageGain": 0,
+      "affectedQuestCount": 26
+    },
+    {
+      "id": "NEEDS_QUEST_ADAPTER:QUEST_MONSTER_ENCOUNTER_ROUTING",
+      "expectedQuestCoverageGain": 0,
+      "affectedQuestCount": 21
+    },
+    {
+      "id": "NEEDS_QUEST_ADAPTER:QUEST_OBJECTIVE_INTERACTION",
+      "expectedQuestCoverageGain": 0,
+      "affectedQuestCount": 12
+    },
+    {
+      "id": "NEEDS_QUEST_ADAPTER:QUEST_HERO_EVENT_ROUTING",
+      "expectedQuestCoverageGain": 0,
+      "affectedQuestCount": 9
+    },
+    {
+      "id": "NEEDS_QUEST_ADAPTER:QUEST_MONSTER_POOL_FILTER",
+      "expectedQuestCoverageGain": 0,
+      "affectedQuestCount": 9
+    },
+    {
+      "id": "NEEDS_QUEST_ADAPTER:QUEST_BATTLE_START_POLICY",
+      "expectedQuestCoverageGain": 0,
+      "affectedQuestCount": 7
+    },
+    {
+      "id": "NEEDS_QUEST_ADAPTER:QUEST_PROVISION_SETUP",
+      "expectedQuestCoverageGain": 0,
+      "affectedQuestCount": 7
+    },
+    {
+      "id": "NEEDS_QUEST_ADAPTER:QUEST_MONSTER_OVERRIDE_ROUTING",
+      "expectedQuestCoverageGain": 0,
+      "affectedQuestCount": 6
+    },
+    {
+      "id": "NEEDS_QUEST_ADAPTER:QUEST_CURIO_POLICY",
+      "expectedQuestCoverageGain": 0,
+      "affectedQuestCount": 4
+    },
+    {
+      "id": "NEEDS_QUEST_ADAPTER:QUEST_LOOT_OVERRIDE",
+      "expectedQuestCoverageGain": 0,
+      "affectedQuestCount": 4
+    },
+    {
+      "id": "DEFERRED_SEMANTIC:QUEST_REQUIRED_MONSTER_ACTIONS",
+      "expectedQuestCoverageGain": 0,
+      "affectedQuestCount": 3
+    },
+    {
+      "id": "NEEDS_QUEST_ADAPTER:QUEST_RESOURCE_REWARD_EXCHANGE",
+      "expectedQuestCoverageGain": 0,
+      "affectedQuestCount": 3
+    },
+    {
+      "id": "NEEDS_QUEST_ADAPTER:QUEST_TRINKET_ACQUISITION_RETURN",
+      "expectedQuestCoverageGain": 0,
+      "affectedQuestCount": 3
+    },
+    {
+      "id": "NEEDS_NEW_RUNTIME_PRIMITIVE:QUEST_DYNAMIC_MONSTER_ROSTER",
+      "expectedQuestCoverageGain": 0,
+      "affectedQuestCount": 2
+    },
+    {
+      "id": "NEEDS_QUEST_ADAPTER:QUEST_BATTLE_RESULT_POLICY",
+      "expectedQuestCoverageGain": 0,
+      "affectedQuestCount": 2
+    },
+    {
+      "id": "NEEDS_QUEST_ADAPTER:QUEST_FIRST_ROUND_INITIATIVE",
+      "expectedQuestCoverageGain": 0,
+      "affectedQuestCount": 2
+    },
+    {
+      "id": "NEEDS_QUEST_ADAPTER:QUEST_HAMLET_RESOLUTION",
+      "expectedQuestCoverageGain": 0,
+      "affectedQuestCount": 2
+    },
+    {
+      "id": "NEEDS_NEW_RUNTIME_PRIMITIVE:QUEST_ADDITIONAL_INITIATIVE",
+      "expectedQuestCoverageGain": 0,
+      "affectedQuestCount": 1
+    },
+    {
+      "id": "NEEDS_NEW_RUNTIME_PRIMITIVE:QUEST_DELAYED_ROUND_OBJECTIVE",
+      "expectedQuestCoverageGain": 0,
+      "affectedQuestCount": 1
+    },
+    {
+      "id": "NEEDS_NEW_RUNTIME_PRIMITIVE:QUEST_REGENERATING_ROOM_LIFECYCLE",
+      "expectedQuestCoverageGain": 0,
+      "affectedQuestCount": 1
+    },
+    {
+      "id": "NEEDS_NEW_RUNTIME_PRIMITIVE:QUEST_TAINTED_TRINKET_LIFECYCLE",
+      "expectedQuestCoverageGain": 0,
+      "affectedQuestCount": 1
+    },
+    {
+      "id": "NEEDS_QUEST_ADAPTER:QUEST_BOSS_SETUP_BINDING",
+      "expectedQuestCoverageGain": 0,
+      "affectedQuestCount": 1
+    },
+    {
+      "id": "NEEDS_QUEST_ADAPTER:QUEST_EXPLORATION_POLICY",
+      "expectedQuestCoverageGain": 0,
+      "affectedQuestCount": 1
+    },
+    {
+      "id": "NEEDS_QUEST_ADAPTER:QUEST_GUARD_TRANSFER",
+      "expectedQuestCoverageGain": 0,
+      "affectedQuestCount": 1
+    },
+    {
+      "id": "NEEDS_QUEST_ADAPTER:QUEST_NEGATIVE_QUIRK_SEQUENCE",
+      "expectedQuestCoverageGain": 0,
+      "affectedQuestCount": 1
+    }
+  ],
+  "authorizedNextAction": "Review existing locked official rulebook/page bindings for Rest authority. Reopen acquisition only if an omitted locked official page is identified or the user changes policy. Otherwise retain SOURCE_UNRESOLVED and wait; no FAQ/community acquisition, no project ruling, no C4B implementation in C4A.",
+  "stopAfterC4A": true
+}

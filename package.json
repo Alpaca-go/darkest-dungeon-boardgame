@@ -252,7 +252,10 @@
     "verify:complete-edition-c3e": "vite-node scripts/audit/c3e-monster-production-acceptance.ts --verify --development",
     "audit:complete-edition-c3e": "vite-node scripts/audit/c3e-monster-production-acceptance.ts --write",
     "test:e2e:monster-production": "node scripts/e2e/c3e-run-browser.mjs",
-    "validate:complete-edition-c3e-production": "node scripts/audit/c3e-run-production-gate.mjs"
+    "validate:complete-edition-c3e-production": "node scripts/audit/c3e-run-production-gate.mjs",
+    "audit:complete-edition-c4a": "vite-node scripts/audit/c4a-standard-quest-rebaseline.ts --write",
+    "test:complete-edition-c4a": "vitest run src/audit/c4a-standard-quest-rebaseline.test.ts --maxWorkers=2 --minWorkers=2",
+    "verify:complete-edition-c4a": "vite-node scripts/audit/c4a-standard-quest-rebaseline.ts --verify"
   },
   "dependencies": {
     "lucide-react": "^0.408.0",

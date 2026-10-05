@@ -1,0 +1,5447 @@
+{
+  "schemaVersion": "C4A-QUEST-REBASELINE-v1",
+  "phase": "11A.7-C4A",
+  "baseMainHead": "ed84d1359907268736b7d163b68c5b359c4d71fd",
+  "sourcePolicy": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "definitionCount": 76,
+  "corpusBoundary": "Union of current normalized source definitions and printed evidence: 76 identities (75 standard-tagged plus Face the Threat). Frozen runtime catalog has 75; Rest in Rubble III is source-blocked and omitted there. Separate prototype, Darkest Dungeon and production Boss adapters excluded.",
+  "runtimeCatalogDefinitionCount": 75,
+  "sourceOnlyDefinitionIds": [
+    "community-quest-crimson-court-lvl3-rest-in-rubble-iii"
+  ],
+  "identitySet": [
+    "community-quest-boss-face-the-threat",
+    "community-quest-cove-lvl1-deep-horrors",
+    "community-quest-cove-lvl1-deep-waters",
+    "community-quest-cove-lvl1-purify-the-eldritch-signs",
+    "community-quest-cove-lvl1-test-the-waters",
+    "community-quest-cove-lvl1-unclean-waters",
+    "community-quest-cove-lvl2-deep-horrors-2",
+    "community-quest-cove-lvl2-deep-waters-2",
+    "community-quest-cove-lvl2-eldritch-purging",
+    "community-quest-cove-lvl2-the-deep-ones",
+    "community-quest-cove-lvl2-unclean-waters-2",
+    "community-quest-cove-lvl3-deep-waters-3",
+    "community-quest-cove-lvl3-tainted-trinkets",
+    "community-quest-cove-lvl3-the-deep-ones-2",
+    "community-quest-cove-lvl3-the-shipwrecks",
+    "community-quest-cove-lvl3-unclean-waters-3",
+    "community-quest-crimson-court-lvl1-deep-in-the-swamp",
+    "community-quest-crimson-court-lvl1-lost-and-found",
+    "community-quest-crimson-court-lvl1-rest-in-rubble",
+    "community-quest-crimson-court-lvl1-rivers-run-red",
+    "community-quest-crimson-court-lvl1-they-are-swarm",
+    "community-quest-crimson-court-lvl2-deeper-into-the-swamp",
+    "community-quest-crimson-court-lvl2-lurkers",
+    "community-quest-crimson-court-lvl2-pest-control",
+    "community-quest-crimson-court-lvl2-ruin-the-party",
+    "community-quest-crimson-court-lvl2-take-em-back",
+    "community-quest-crimson-court-lvl3-breeders",
+    "community-quest-crimson-court-lvl3-cut-the-buzz",
+    "community-quest-crimson-court-lvl3-rest-in-rubble-iii",
+    "community-quest-crimson-court-lvl3-the-endless-marsh",
+    "community-quest-crimson-court-lvl3-uninvited",
+    "community-quest-ruins-lvl1-dem-bones",
+    "community-quest-ruins-lvl1-fundraiser",
+    "community-quest-ruins-lvl1-rising-threat",
+    "community-quest-ruins-lvl1-scout-ahead",
+    "community-quest-ruins-lvl1-wipe-em-out",
+    "community-quest-ruins-lvl2-break-them",
+    "community-quest-ruins-lvl2-clear-the-path",
+    "community-quest-ruins-lvl2-disruption",
+    "community-quest-ruins-lvl2-purify-the-fountains",
+    "community-quest-ruins-lvl2-reduce-to-rubble",
+    "community-quest-ruins-lvl3-creeping-darkness",
+    "community-quest-ruins-lvl3-forward-camps",
+    "community-quest-ruins-lvl3-the-threat-is-real",
+    "community-quest-ruins-lvl3-they-are-back",
+    "community-quest-ruins-lvl3-warm-up-the-halls",
+    "community-quest-warrens-lvl1-disarm-them",
+    "community-quest-warrens-lvl1-explore-the-sewers",
+    "community-quest-warrens-lvl1-family-trinkets",
+    "community-quest-warrens-lvl1-pork-chop",
+    "community-quest-warrens-lvl1-worm-squash",
+    "community-quest-warrens-lvl2-a-new-breed",
+    "community-quest-warrens-lvl2-bait-them-out",
+    "community-quest-warrens-lvl2-carrion-infestation",
+    "community-quest-warrens-lvl2-mapping-the-sewers",
+    "community-quest-warrens-lvl2-ringleaders",
+    "community-quest-warrens-lvl3-alpha-swine",
+    "community-quest-warrens-lvl3-deep-in-the-warrens",
+    "community-quest-warrens-lvl3-drums-of-doom",
+    "community-quest-warrens-lvl3-foul-arsenal",
+    "community-quest-warrens-lvl3-infighting",
+    "community-quest-weald-lvl1-circle-of-witches",
+    "community-quest-weald-lvl1-disinfection",
+    "community-quest-weald-lvl1-fungal-research",
+    "community-quest-weald-lvl1-patrol-the-woods",
+    "community-quest-weald-lvl1-purge-the-woods",
+    "community-quest-weald-lvl2-hounds-of-the-woods",
+    "community-quest-weald-lvl2-lost-supplies",
+    "community-quest-weald-lvl2-lost-treasures",
+    "community-quest-weald-lvl2-searching-in-the-dark",
+    "community-quest-weald-lvl2-spreaders-of-miasma",
+    "community-quest-weald-lvl3-final-swipe",
+    "community-quest-weald-lvl3-great-unclean-ones",
+    "community-quest-weald-lvl3-no-other-way",
+    "community-quest-weald-lvl3-the-infected",
+    "community-quest-weald-lvl3-whispering-woods"
+  ],
+  "monsterFacts": {
+    "identities": 71,
+    "definitions": 77,
+    "actions": 175,
+    "runtimeReady": 168,
+    "deferredSemantic": 7,
+    "automaticEncounter": 24,
+    "explicitManifest": 53
+  },
+  "quests": [
+    {
+      "definitionId": "community-quest-boss-face-the-threat",
+      "name": "Face the Threat!",
+      "level": null,
+      "region": "boss",
+      "family": "defeat-boss",
+      "questType": "boss",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-boss-face-the-threat:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-boss-face-the-threat:rest:allocation",
+          "community-quest-boss-face-the-threat:rest:capacity",
+          "community-quest-boss-face-the-threat:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_BOSS_SETUP_BINDING",
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_HAMLET_RESOLUTION",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_ROOM_SETUP",
+          "QUEST_RULE_QUEST_COMPLETION"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl1-deep-horrors",
+      "name": "Deep Horrors",
+      "level": 1,
+      "region": "cove",
+      "family": "kill-entity",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-cove-lvl1-deep-horrors:rule-0:monster-0",
+          "community-quest-cove-lvl1-deep-horrors:monster-action:uca-major:action-1",
+          "community-quest-cove-lvl1-deep-horrors:monster-action:uca-major:action-2",
+          "community-quest-cove-lvl1-deep-horrors:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-cove-lvl1-deep-horrors:rest:allocation",
+          "community-quest-cove-lvl1-deep-horrors:rest:capacity",
+          "community-quest-cove-lvl1-deep-horrors:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_MONSTER_ENCOUNTER_ROUTING",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_MONSTER_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl1-deep-waters",
+      "name": "Deep Waters",
+      "level": 1,
+      "region": "cove",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 8
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-cove-lvl1-deep-waters:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-cove-lvl1-deep-waters:rest:allocation",
+          "community-quest-cove-lvl1-deep-waters:rest:capacity",
+          "community-quest-cove-lvl1-deep-waters:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_BATTLE_START_POLICY",
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_BATTLE_SETUP"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl1-purify-the-eldritch-signs",
+      "name": "Purify the Eldritch Signs",
+      "level": 1,
+      "region": "cove",
+      "family": "purify",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-cove-lvl1-purify-the-eldritch-signs:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-cove-lvl1-purify-the-eldritch-signs:rest:allocation",
+          "community-quest-cove-lvl1-purify-the-eldritch-signs:rest:capacity",
+          "community-quest-cove-lvl1-purify-the-eldritch-signs:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_OBJECTIVE_INTERACTION",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_PROVISION_SETUP",
+          "QUEST_ROOM_CARD_SELECTION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_ROOM_SETUP",
+          "QUEST_RULE_QUEST_COMPLETION"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl1-test-the-waters",
+      "name": "Test the Waters",
+      "level": 1,
+      "region": "cove",
+      "family": "collect",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-cove-lvl1-test-the-waters:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-cove-lvl1-test-the-waters:rest:allocation",
+          "community-quest-cove-lvl1-test-the-waters:rest:capacity",
+          "community-quest-cove-lvl1-test-the-waters:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_OBJECTIVE_INTERACTION",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_ROOM_CARD_SELECTION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_ROOM_SETUP",
+          "QUEST_RULE_QUEST_COMPLETION"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl1-unclean-waters",
+      "name": "Unclean Waters",
+      "level": 1,
+      "region": "cove",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [
+          "community-quest-cove-lvl1-unclean-waters:rule-0:effect",
+          "community-quest-cove-lvl1-unclean-waters:rule-0:hook"
+        ],
+        "monster": [
+          "community-quest-cove-lvl1-unclean-waters:rule-0:hook",
+          "community-quest-cove-lvl1-unclean-waters:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-cove-lvl1-unclean-waters:rest:allocation",
+          "community-quest-cove-lvl1-unclean-waters:rest:capacity",
+          "community-quest-cove-lvl1-unclean-waters:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_HERO_EVENT_ROUTING",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_HERO_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl2-deep-horrors-2",
+      "name": "Deep Horrors 2",
+      "level": 2,
+      "region": "cove",
+      "family": "kill-entity",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "MULTI_BLOCKED",
+      "blockerClasses": [
+        "DEFERRED_SEMANTIC",
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-cove-lvl2-deep-horrors-2:rule-0:monster-0",
+          "community-quest-cove-lvl2-deep-horrors-2:rule-0:monster-1",
+          "community-quest-cove-lvl2-deep-horrors-2:monster-action:uca-major:action-1",
+          "community-quest-cove-lvl2-deep-horrors-2:monster-action:uca-major:action-2",
+          "community-quest-cove-lvl2-deep-horrors-2:monster-action:squiffy-ghast:action-1",
+          "community-quest-cove-lvl2-deep-horrors-2:monster-action:squiffy-ghast:action-2",
+          "community-quest-cove-lvl2-deep-horrors-2:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-cove-lvl2-deep-horrors-2:rest:allocation",
+          "community-quest-cove-lvl2-deep-horrors-2:rest:capacity",
+          "community-quest-cove-lvl2-deep-horrors-2:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_MONSTER_ENCOUNTER_ROUTING",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_MONSTER_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl2-deep-waters-2",
+      "name": "Deep Waters 2",
+      "level": 2,
+      "region": "cove",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 8
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-cove-lvl2-deep-waters-2:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-cove-lvl2-deep-waters-2:rest:allocation",
+          "community-quest-cove-lvl2-deep-waters-2:rest:capacity",
+          "community-quest-cove-lvl2-deep-waters-2:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_BATTLE_START_POLICY",
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_BATTLE_SETUP"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl2-eldritch-purging",
+      "name": "Eldritch Purging",
+      "level": 2,
+      "region": "cove",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-cove-lvl2-eldritch-purging:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-cove-lvl2-eldritch-purging:rest:allocation",
+          "community-quest-cove-lvl2-eldritch-purging:rest:capacity",
+          "community-quest-cove-lvl2-eldritch-purging:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_BATTLE_START_POLICY",
+          "QUEST_CURIO_POLICY",
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_BATTLE_SETUP",
+          "QUEST_RULE_TOKEN_INTERACTION"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl2-the-deep-ones",
+      "name": "The Deep Ones",
+      "level": 2,
+      "region": "cove",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 8
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-cove-lvl2-the-deep-ones:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-cove-lvl2-the-deep-ones:rest:allocation",
+          "community-quest-cove-lvl2-the-deep-ones:rest:capacity",
+          "community-quest-cove-lvl2-the-deep-ones:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_MONSTER_POOL_FILTER",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_ROOM_CARD_SELECTION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_ROOM_SETUP",
+          "QUEST_RULE_MONSTER_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl2-unclean-waters-2",
+      "name": "Unclean Waters 2",
+      "level": 2,
+      "region": "cove",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [
+          "community-quest-cove-lvl2-unclean-waters-2:rule-0:effect",
+          "community-quest-cove-lvl2-unclean-waters-2:rule-0:hook"
+        ],
+        "monster": [
+          "community-quest-cove-lvl2-unclean-waters-2:rule-0:hook",
+          "community-quest-cove-lvl2-unclean-waters-2:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-cove-lvl2-unclean-waters-2:rest:allocation",
+          "community-quest-cove-lvl2-unclean-waters-2:rest:capacity",
+          "community-quest-cove-lvl2-unclean-waters-2:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_HERO_EVENT_ROUTING",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_HERO_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl3-deep-waters-3",
+      "name": "Deep Waters 3",
+      "level": 3,
+      "region": "cove",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 8
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-cove-lvl3-deep-waters-3:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-cove-lvl3-deep-waters-3:rest:allocation",
+          "community-quest-cove-lvl3-deep-waters-3:rest:capacity",
+          "community-quest-cove-lvl3-deep-waters-3:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_BATTLE_START_POLICY",
+          "QUEST_CURIO_POLICY",
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_BATTLE_SETUP",
+          "QUEST_RULE_TOKEN_INTERACTION"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl3-tainted-trinkets",
+      "name": "Tainted Trinkets",
+      "level": 3,
+      "region": "cove",
+      "family": "cleanse",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "MULTI_BLOCKED",
+      "blockerClasses": [
+        "NEEDS_NEW_RUNTIME_PRIMITIVE",
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_CLEAR",
+        "firewood": {
+          "tokens": 0,
+          "restingPoints": 0
+        },
+        "canonicalMissingFields": [],
+        "currentPolicyUnacceptedFields": []
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [],
+        "trinket": [
+          "community-quest-cove-lvl3-tainted-trinkets:trinket-3:source",
+          "community-quest-cove-lvl3-tainted-trinkets:trinket-3:draw",
+          "community-quest-cove-lvl3-tainted-trinkets:trinket-3:effects",
+          "community-quest-cove-lvl3-tainted-trinkets:trinket-3:quest-route",
+          "community-quest-cove-lvl3-tainted-trinkets:semantic-TT-01",
+          "community-quest-cove-lvl3-tainted-trinkets:semantic-TT-02",
+          "community-quest-cove-lvl3-tainted-trinkets:semantic-TT-03",
+          "community-quest-cove-lvl3-tainted-trinkets:semantic-TT-04",
+          "community-quest-cove-lvl3-tainted-trinkets:semantic-TT-05",
+          "community-quest-cove-lvl3-tainted-trinkets:semantic-TT-06",
+          "community-quest-cove-lvl3-tainted-trinkets:semantic-TT-07",
+          "community-quest-cove-lvl3-tainted-trinkets:semantic-TT-08",
+          "community-quest-cove-lvl3-tainted-trinkets:semantic-TT-09"
+        ],
+        "rest": [],
+        "questAdapters": [
+          "QUEST_HAMLET_RESOLUTION",
+          "QUEST_NEGATIVE_QUIRK_SEQUENCE",
+          "QUEST_OBJECTIVE_INTERACTION",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_PROVISION_SETUP",
+          "QUEST_ROOM_CARD_SELECTION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING",
+          "QUEST_TRINKET_ACQUISITION_RETURN"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": "c1c3-multi-primitive-quest-v1",
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_ROOM_SETUP",
+          "QUEST_RULE_QUEST_COMPLETION",
+          "QUEST_RULE_ROOM_IDENTITY_SELECTION",
+          "QUEST_RULE_TRINKET_ACQUISITION",
+          "QUEST_RULE_TRINKET_FALLBACK_CHOICE",
+          "QUEST_RULE_TRINKET_STATE",
+          "QUEST_RULE_ACTION_AREA_INTERACTION",
+          "QUEST_RULE_ACTION_ECONOMY",
+          "QUEST_RULE_HAMLET_CHOICE",
+          "QUEST_RULE_QUIRK_GAIN"
+        ],
+        "sourceGates": [
+          "BLOCKED_BY_LEVEL_3_TRINKET_SOURCE_DECK"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl3-the-deep-ones-2",
+      "name": "The Deep Ones 2",
+      "level": 3,
+      "region": "cove",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "MULTI_BLOCKED",
+      "blockerClasses": [
+        "DEFERRED_SEMANTIC",
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 8
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-cove-lvl3-the-deep-ones-2:rule-2:monster-0",
+          "community-quest-cove-lvl3-the-deep-ones-2:monster-action:squiffy-ghast:action-1",
+          "community-quest-cove-lvl3-the-deep-ones-2:monster-action:squiffy-ghast:action-2",
+          "community-quest-cove-lvl3-the-deep-ones-2:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-cove-lvl3-the-deep-ones-2:rest:allocation",
+          "community-quest-cove-lvl3-the-deep-ones-2:rest:capacity",
+          "community-quest-cove-lvl3-the-deep-ones-2:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_MONSTER_ENCOUNTER_ROUTING",
+          "QUEST_MONSTER_POOL_FILTER",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_ROOM_CARD_SELECTION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_ROOM_SETUP",
+          "QUEST_RULE_MONSTER_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl3-the-shipwrecks",
+      "name": "The Shipwrecks",
+      "level": 3,
+      "region": "cove",
+      "family": "find",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 4
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-cove-lvl3-the-shipwrecks:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-cove-lvl3-the-shipwrecks:rest:allocation",
+          "community-quest-cove-lvl3-the-shipwrecks:rest:capacity",
+          "community-quest-cove-lvl3-the-shipwrecks:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_OBJECTIVE_INTERACTION",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_ROOM_CARD_SELECTION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_ROOM_SETUP",
+          "QUEST_RULE_QUEST_COMPLETION"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-cove-lvl3-unclean-waters-3",
+      "name": "Unclean Waters 3",
+      "level": 3,
+      "region": "cove",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [
+          "community-quest-cove-lvl3-unclean-waters-3:rule-0:effect",
+          "community-quest-cove-lvl3-unclean-waters-3:rule-0:hook"
+        ],
+        "monster": [
+          "community-quest-cove-lvl3-unclean-waters-3:rule-0:hook",
+          "community-quest-cove-lvl3-unclean-waters-3:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-cove-lvl3-unclean-waters-3:rest:allocation",
+          "community-quest-cove-lvl3-unclean-waters-3:rest:capacity",
+          "community-quest-cove-lvl3-unclean-waters-3:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_HERO_EVENT_ROUTING",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_HERO_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl1-deep-in-the-swamp",
+      "name": "Deep in the Swamp",
+      "level": 1,
+      "region": "crimson-court",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [],
+        "trinket": [],
+        "rest": [
+          "community-quest-crimson-court-lvl1-deep-in-the-swamp:rest:allocation",
+          "community-quest-crimson-court-lvl1-deep-in-the-swamp:rest:capacity",
+          "community-quest-crimson-court-lvl1-deep-in-the-swamp:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": "c1c1-simple-community-quest-v1",
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_REST_ALLOCATION_SEMANTICS"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl1-lost-and-found",
+      "name": "Lost and Found",
+      "level": 1,
+      "region": "crimson-court",
+      "family": "return-resource",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 8
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-crimson-court-lvl1-lost-and-found:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-crimson-court-lvl1-lost-and-found:rest:allocation",
+          "community-quest-crimson-court-lvl1-lost-and-found:rest:capacity",
+          "community-quest-crimson-court-lvl1-lost-and-found:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_LOOT_OVERRIDE",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_ROOM_CARD_SELECTION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_ROOM_SETUP",
+          "QUEST_RULE_TOKEN_INTERACTION"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl1-rest-in-rubble",
+      "name": "Rest in Rubble",
+      "level": 1,
+      "region": "crimson-court",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 8
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-crimson-court-lvl1-rest-in-rubble:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-crimson-court-lvl1-rest-in-rubble:rest:allocation",
+          "community-quest-crimson-court-lvl1-rest-in-rubble:rest:capacity",
+          "community-quest-crimson-court-lvl1-rest-in-rubble:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_CURIO_POLICY",
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_ROOM_CLEAR",
+          "QUEST_RULE_TOKEN_INTERACTION"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl1-rivers-run-red",
+      "name": "Rivers Run Red",
+      "level": 1,
+      "region": "crimson-court",
+      "family": "return-resource",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-crimson-court-lvl1-rivers-run-red:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-crimson-court-lvl1-rivers-run-red:rest:allocation",
+          "community-quest-crimson-court-lvl1-rivers-run-red:rest:capacity",
+          "community-quest-crimson-court-lvl1-rivers-run-red:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_OBJECTIVE_INTERACTION",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_ROOM_CARD_SELECTION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_ROOM_SETUP",
+          "QUEST_RULE_QUEST_COMPLETION"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl1-they-are-swarm",
+      "name": "They Are Swarm",
+      "level": 1,
+      "region": "crimson-court",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-crimson-court-lvl1-they-are-swarm:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-crimson-court-lvl1-they-are-swarm:rest:allocation",
+          "community-quest-crimson-court-lvl1-they-are-swarm:rest:capacity",
+          "community-quest-crimson-court-lvl1-they-are-swarm:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_MONSTER_POOL_FILTER",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_MONSTER_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl2-deeper-into-the-swamp",
+      "name": "Deeper into the Swamp",
+      "level": 2,
+      "region": "crimson-court",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 8
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [],
+        "trinket": [],
+        "rest": [
+          "community-quest-crimson-court-lvl2-deeper-into-the-swamp:rest:allocation",
+          "community-quest-crimson-court-lvl2-deeper-into-the-swamp:rest:capacity",
+          "community-quest-crimson-court-lvl2-deeper-into-the-swamp:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": "c1c1-simple-community-quest-v1",
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_REST_ALLOCATION_SEMANTICS"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl2-lurkers",
+      "name": "Lurkers",
+      "level": 2,
+      "region": "crimson-court",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-crimson-court-lvl2-lurkers:rule-0:monster-0",
+          "community-quest-crimson-court-lvl2-lurkers:monster-action:crocodillian:action-1",
+          "community-quest-crimson-court-lvl2-lurkers:monster-action:crocodillian:action-2",
+          "community-quest-crimson-court-lvl2-lurkers:monster-action:crocodillian:action-3",
+          "community-quest-crimson-court-lvl2-lurkers:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-crimson-court-lvl2-lurkers:rest:allocation",
+          "community-quest-crimson-court-lvl2-lurkers:rest:capacity",
+          "community-quest-crimson-court-lvl2-lurkers:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_MONSTER_ENCOUNTER_ROUTING",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_MONSTER_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl2-pest-control",
+      "name": "Pest Control",
+      "level": 2,
+      "region": "crimson-court",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [],
+        "trinket": [],
+        "rest": [
+          "community-quest-crimson-court-lvl2-pest-control:rest:allocation",
+          "community-quest-crimson-court-lvl2-pest-control:rest:capacity",
+          "community-quest-crimson-court-lvl2-pest-control:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": "c1c1-simple-community-quest-v1",
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_REST_ALLOCATION_SEMANTICS"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl2-ruin-the-party",
+      "name": "Ruin the Party",
+      "level": 2,
+      "region": "crimson-court",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-crimson-court-lvl2-ruin-the-party:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-crimson-court-lvl2-ruin-the-party:rest:allocation",
+          "community-quest-crimson-court-lvl2-ruin-the-party:rest:capacity",
+          "community-quest-crimson-court-lvl2-ruin-the-party:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_MONSTER_POOL_FILTER",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_ROOM_CARD_SELECTION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_ROOM_SETUP",
+          "QUEST_RULE_MONSTER_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl2-take-em-back",
+      "name": "Take 'Em Back",
+      "level": 2,
+      "region": "crimson-court",
+      "family": "return-resource",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-crimson-court-lvl2-take-em-back:encounter:eligibility"
+        ],
+        "trinket": [
+          "community-quest-crimson-court-lvl2-take-em-back:trinket-2:source",
+          "community-quest-crimson-court-lvl2-take-em-back:trinket-2:draw",
+          "community-quest-crimson-court-lvl2-take-em-back:trinket-2:effects",
+          "community-quest-crimson-court-lvl2-take-em-back:trinket-2:quest-route"
+        ],
+        "rest": [
+          "community-quest-crimson-court-lvl2-take-em-back:rest:allocation",
+          "community-quest-crimson-court-lvl2-take-em-back:rest:capacity",
+          "community-quest-crimson-court-lvl2-take-em-back:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_LOOT_OVERRIDE",
+          "QUEST_MONSTER_OVERRIDE_ROUTING",
+          "QUEST_OBJECTIVE_INTERACTION",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_RESOURCE_REWARD_EXCHANGE",
+          "QUEST_ROOM_CARD_SELECTION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING",
+          "QUEST_TRINKET_ACQUISITION_RETURN"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_ROOM_SETUP",
+          "QUEST_RULE_MONSTER_STATE",
+          "QUEST_RULE_TOKEN_INTERACTION",
+          "QUEST_RULE_QUEST_COMPLETION",
+          "QUEST_RULE_REWARD_OVERRIDE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl3-breeders",
+      "name": "Breeders",
+      "level": 3,
+      "region": "crimson-court",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-crimson-court-lvl3-breeders:rule-2:monster-0",
+          "community-quest-crimson-court-lvl3-breeders:rule-2:monster-1",
+          "community-quest-crimson-court-lvl3-breeders:monster-action:crocodillian:action-1",
+          "community-quest-crimson-court-lvl3-breeders:monster-action:crocodillian:action-2",
+          "community-quest-crimson-court-lvl3-breeders:monster-action:crocodillian:action-3",
+          "community-quest-crimson-court-lvl3-breeders:monster-action:adder:action-1",
+          "community-quest-crimson-court-lvl3-breeders:monster-action:adder:action-2",
+          "community-quest-crimson-court-lvl3-breeders:monster-action:adder:action-3",
+          "community-quest-crimson-court-lvl3-breeders:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-crimson-court-lvl3-breeders:rest:allocation",
+          "community-quest-crimson-court-lvl3-breeders:rest:capacity",
+          "community-quest-crimson-court-lvl3-breeders:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_MONSTER_ENCOUNTER_ROUTING",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_ROOM_CARD_SELECTION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_ROOM_SETUP",
+          "QUEST_RULE_MONSTER_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl3-cut-the-buzz",
+      "name": "Cut the Buzz",
+      "level": 3,
+      "region": "crimson-court",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [
+          "community-quest-crimson-court-lvl3-cut-the-buzz:rule-0:effect",
+          "community-quest-crimson-court-lvl3-cut-the-buzz:rule-0:hook"
+        ],
+        "monster": [
+          "community-quest-crimson-court-lvl3-cut-the-buzz:rule-0:hook",
+          "community-quest-crimson-court-lvl3-cut-the-buzz:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-crimson-court-lvl3-cut-the-buzz:rest:allocation",
+          "community-quest-crimson-court-lvl3-cut-the-buzz:rest:capacity",
+          "community-quest-crimson-court-lvl3-cut-the-buzz:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_HERO_EVENT_ROUTING",
+          "QUEST_MONSTER_OVERRIDE_ROUTING",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_HERO_STATE",
+          "QUEST_RULE_MONSTER_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl3-rest-in-rubble-iii",
+      "name": "Rest in Rubble III",
+      "level": 3,
+      "region": "crimson-court",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": false,
+      "sourceCompleteness": {
+        "literalComplete": false,
+        "executableSourceClear": false,
+        "unresolvedFields": [
+          "specialRules.1.parameters.onClear"
+        ]
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-crimson-court-lvl3-rest-in-rubble-iii:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-crimson-court-lvl3-rest-in-rubble-iii:rest:allocation",
+          "community-quest-crimson-court-lvl3-rest-in-rubble-iii:rest:capacity",
+          "community-quest-crimson-court-lvl3-rest-in-rubble-iii:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_BATTLE_START_POLICY",
+          "QUEST_CURIO_POLICY",
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "ABSENT",
+        "requiredPrimitives": [],
+        "sourceGates": []
+      }
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl3-the-endless-marsh",
+      "name": "The Endless Marsh",
+      "level": 3,
+      "region": "crimson-court",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "MULTI_BLOCKED",
+      "blockerClasses": [
+        "NEEDS_NEW_RUNTIME_PRIMITIVE",
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 8
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-crimson-court-lvl3-the-endless-marsh:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-crimson-court-lvl3-the-endless-marsh:rest:allocation",
+          "community-quest-crimson-court-lvl3-the-endless-marsh:rest:capacity",
+          "community-quest-crimson-court-lvl3-the-endless-marsh:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_ROOM_SETUP",
+          "QUEST_RULE_EXPLORATION"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl3-uninvited",
+      "name": "Uninvited",
+      "level": 3,
+      "region": "crimson-court",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "MULTI_BLOCKED",
+      "blockerClasses": [
+        "DEFERRED_SEMANTIC",
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-crimson-court-lvl3-uninvited:rule-1:monster-0",
+          "community-quest-crimson-court-lvl3-uninvited:rule-1:monster-1",
+          "community-quest-crimson-court-lvl3-uninvited:monster-action:courtesan:action-1",
+          "community-quest-crimson-court-lvl3-uninvited:monster-action:courtesan:action-2",
+          "community-quest-crimson-court-lvl3-uninvited:monster-action:courtesan:action-3",
+          "community-quest-crimson-court-lvl3-uninvited:monster-action:chevalier:action-1",
+          "community-quest-crimson-court-lvl3-uninvited:monster-action:chevalier:action-2",
+          "community-quest-crimson-court-lvl3-uninvited:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-crimson-court-lvl3-uninvited:rest:allocation",
+          "community-quest-crimson-court-lvl3-uninvited:rest:capacity",
+          "community-quest-crimson-court-lvl3-uninvited:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_MONSTER_ENCOUNTER_ROUTING",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_ROOM_CARD_SELECTION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_ROOM_SETUP",
+          "QUEST_RULE_MONSTER_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-dem-bones",
+      "name": "Dem Bones",
+      "level": 1,
+      "region": "ruins",
+      "family": "collect",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 8
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [],
+        "trinket": [],
+        "rest": [
+          "community-quest-ruins-lvl1-dem-bones:rest:allocation",
+          "community-quest-ruins-lvl1-dem-bones:rest:capacity",
+          "community-quest-ruins-lvl1-dem-bones:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_OBJECTIVE_INTERACTION",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_ROOM_CARD_SELECTION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_ROOM_SETUP",
+          "QUEST_RULE_QUEST_COMPLETION"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-fundraiser",
+      "name": "Fundraiser",
+      "level": 1,
+      "region": "ruins",
+      "family": "return-resource",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 8
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [],
+        "trinket": [],
+        "rest": [
+          "community-quest-ruins-lvl1-fundraiser:rest:allocation",
+          "community-quest-ruins-lvl1-fundraiser:rest:capacity",
+          "community-quest-ruins-lvl1-fundraiser:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_RESOURCE_REWARD_EXCHANGE",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_QUEST_COMPLETION",
+          "QUEST_RULE_REWARD_OVERRIDE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-rising-threat",
+      "name": "Rising Threat",
+      "level": 1,
+      "region": "ruins",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [],
+        "trinket": [],
+        "rest": [
+          "community-quest-ruins-lvl1-rising-threat:rest:allocation",
+          "community-quest-ruins-lvl1-rising-threat:rest:capacity",
+          "community-quest-ruins-lvl1-rising-threat:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_BATTLE_START_POLICY",
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_MONSTER_ENCOUNTER_ROUTING",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_BATTLE_SETUP",
+          "QUEST_RULE_MONSTER_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-scout-ahead",
+      "name": "Scout Ahead",
+      "level": 1,
+      "region": "ruins",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 8
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [],
+        "trinket": [],
+        "rest": [
+          "community-quest-ruins-lvl1-scout-ahead:rest:allocation",
+          "community-quest-ruins-lvl1-scout-ahead:rest:capacity",
+          "community-quest-ruins-lvl1-scout-ahead:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": "c1c1-simple-community-quest-v1",
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_REST_ALLOCATION_SEMANTICS"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-wipe-em-out",
+      "name": "Wipe 'Em Out",
+      "level": 1,
+      "region": "ruins",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [],
+        "trinket": [],
+        "rest": [
+          "community-quest-ruins-lvl1-wipe-em-out:rest:allocation",
+          "community-quest-ruins-lvl1-wipe-em-out:rest:capacity",
+          "community-quest-ruins-lvl1-wipe-em-out:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": "c1c1-simple-community-quest-v1",
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_REST_ALLOCATION_SEMANTICS"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-break-them",
+      "name": "Break Them",
+      "level": 2,
+      "region": "ruins",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 8
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-ruins-lvl2-break-them:rule-0:monster-0",
+          "community-quest-ruins-lvl2-break-them:monster-action:bone-bearer:action-1",
+          "community-quest-ruins-lvl2-break-them:monster-action:bone-bearer:action-2",
+          "community-quest-ruins-lvl2-break-them:monster-action:bone-bearer:action-3"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-ruins-lvl2-break-them:rest:allocation",
+          "community-quest-ruins-lvl2-break-them:rest:capacity",
+          "community-quest-ruins-lvl2-break-them:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_MONSTER_ENCOUNTER_ROUTING",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_MONSTER_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-clear-the-path",
+      "name": "Clear the Path",
+      "level": 2,
+      "region": "ruins",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 8
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [],
+        "trinket": [],
+        "rest": [
+          "community-quest-ruins-lvl2-clear-the-path:rest:allocation",
+          "community-quest-ruins-lvl2-clear-the-path:rest:capacity",
+          "community-quest-ruins-lvl2-clear-the-path:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": "c1c1-simple-community-quest-v1",
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_REST_ALLOCATION_SEMANTICS"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-disruption",
+      "name": "Disruption",
+      "level": 2,
+      "region": "ruins",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [],
+        "trinket": [],
+        "rest": [
+          "community-quest-ruins-lvl2-disruption:rest:allocation",
+          "community-quest-ruins-lvl2-disruption:rest:capacity",
+          "community-quest-ruins-lvl2-disruption:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_ROOM_CARD_SELECTION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_ROOM_SETUP"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-purify-the-fountains",
+      "name": "Purify the Fountains",
+      "level": 2,
+      "region": "ruins",
+      "family": "purify",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [],
+        "trinket": [],
+        "rest": [
+          "community-quest-ruins-lvl2-purify-the-fountains:rest:allocation",
+          "community-quest-ruins-lvl2-purify-the-fountains:rest:capacity",
+          "community-quest-ruins-lvl2-purify-the-fountains:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_OBJECTIVE_INTERACTION",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_PROVISION_SETUP",
+          "QUEST_ROOM_CARD_SELECTION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_ROOM_SETUP",
+          "QUEST_RULE_QUEST_COMPLETION"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-reduce-to-rubble",
+      "name": "Reduce to Rubble",
+      "level": 2,
+      "region": "ruins",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [],
+        "trinket": [],
+        "rest": [
+          "community-quest-ruins-lvl2-reduce-to-rubble:rest:allocation",
+          "community-quest-ruins-lvl2-reduce-to-rubble:rest:capacity",
+          "community-quest-ruins-lvl2-reduce-to-rubble:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": "c1c1-simple-community-quest-v1",
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_REST_ALLOCATION_SEMANTICS"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl3-creeping-darkness",
+      "name": "Creeping Darkness",
+      "level": 3,
+      "region": "ruins",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 8
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [
+          "community-quest-ruins-lvl3-creeping-darkness:rule-0:effect",
+          "community-quest-ruins-lvl3-creeping-darkness:rule-0:hook"
+        ],
+        "monster": [
+          "community-quest-ruins-lvl3-creeping-darkness:rule-0:hook"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-ruins-lvl3-creeping-darkness:rest:allocation",
+          "community-quest-ruins-lvl3-creeping-darkness:rest:capacity",
+          "community-quest-ruins-lvl3-creeping-darkness:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_HERO_EVENT_ROUTING",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_HERO_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl3-forward-camps",
+      "name": "Forward Camps",
+      "level": 3,
+      "region": "ruins",
+      "family": "establish",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 8
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [],
+        "trinket": [],
+        "rest": [
+          "community-quest-ruins-lvl3-forward-camps:rest:allocation",
+          "community-quest-ruins-lvl3-forward-camps:rest:capacity",
+          "community-quest-ruins-lvl3-forward-camps:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_OBJECTIVE_INTERACTION",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_QUEST_COMPLETION",
+          "QUEST_RULE_ROOM_SETUP"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl3-the-threat-is-real",
+      "name": "The Threat is Real",
+      "level": 3,
+      "region": "ruins",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 8
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [],
+        "trinket": [],
+        "rest": [
+          "community-quest-ruins-lvl3-the-threat-is-real:rest:allocation",
+          "community-quest-ruins-lvl3-the-threat-is-real:rest:capacity",
+          "community-quest-ruins-lvl3-the-threat-is-real:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_MONSTER_POOL_FILTER",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_MONSTER_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl3-they-are-back",
+      "name": "They Are Back",
+      "level": 3,
+      "region": "ruins",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 8
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-ruins-lvl3-they-are-back:rule-0:monster-0",
+          "community-quest-ruins-lvl3-they-are-back:monster-action:bone-captain:action-1",
+          "community-quest-ruins-lvl3-they-are-back:monster-action:bone-captain:action-2"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-ruins-lvl3-they-are-back:rest:allocation",
+          "community-quest-ruins-lvl3-they-are-back:rest:capacity",
+          "community-quest-ruins-lvl3-they-are-back:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_MONSTER_ENCOUNTER_ROUTING",
+          "QUEST_MONSTER_OVERRIDE_ROUTING",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_MONSTER_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl3-warm-up-the-halls",
+      "name": "Warm Up the Halls",
+      "level": 3,
+      "region": "ruins",
+      "family": "illuminate-and-clear",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 4
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [],
+        "trinket": [],
+        "rest": [
+          "community-quest-ruins-lvl3-warm-up-the-halls:rest:allocation",
+          "community-quest-ruins-lvl3-warm-up-the-halls:rest:capacity",
+          "community-quest-ruins-lvl3-warm-up-the-halls:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_OBJECTIVE_INTERACTION",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_PROVISION_SETUP",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_PROVISION_INTERACTION",
+          "QUEST_RULE_QUEST_COMPLETION"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-disarm-them",
+      "name": "Disarm Them",
+      "level": 1,
+      "region": "warrens",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-warrens-lvl1-disarm-them:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-warrens-lvl1-disarm-them:rest:allocation",
+          "community-quest-warrens-lvl1-disarm-them:rest:capacity",
+          "community-quest-warrens-lvl1-disarm-them:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_MONSTER_POOL_FILTER",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_ROOM_CARD_SELECTION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_ROOM_SETUP",
+          "QUEST_RULE_MONSTER_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-explore-the-sewers",
+      "name": "Explore the Sewers",
+      "level": 1,
+      "region": "warrens",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": true,
+        "unresolvedFields": []
+      },
+      "readiness": "PRODUCTION_READY_EXISTING",
+      "blockerClasses": [],
+      "rest": {
+        "status": "SOURCE_CLEAR",
+        "firewood": {
+          "tokens": 0,
+          "restingPoints": 0
+        },
+        "canonicalMissingFields": [],
+        "currentPolicyUnacceptedFields": []
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [],
+        "trinket": [],
+        "rest": [],
+        "questAdapters": []
+      },
+      "currentBinding": {
+        "adapterId": "c1c1-simple-community-quest-v1",
+        "selectorReachable": true,
+        "boundProductionProof": true
+      },
+      "historical": {
+        "productionReady": true,
+        "productionStatus": "PRODUCTION_READY",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING"
+        ],
+        "sourceGates": []
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-family-trinkets",
+      "name": "Family Trinkets",
+      "level": 1,
+      "region": "warrens",
+      "family": "return-resource",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_CLEAR",
+        "firewood": {
+          "tokens": 0,
+          "restingPoints": 0
+        },
+        "canonicalMissingFields": [],
+        "currentPolicyUnacceptedFields": []
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [],
+        "trinket": [
+          "community-quest-warrens-lvl1-family-trinkets:trinket-2:source",
+          "community-quest-warrens-lvl1-family-trinkets:trinket-2:draw",
+          "community-quest-warrens-lvl1-family-trinkets:trinket-2:effects",
+          "community-quest-warrens-lvl1-family-trinkets:trinket-2:quest-route",
+          "community-quest-warrens-lvl1-family-trinkets:semantic-FT-01",
+          "community-quest-warrens-lvl1-family-trinkets:semantic-FT-02",
+          "community-quest-warrens-lvl1-family-trinkets:semantic-FT-03",
+          "community-quest-warrens-lvl1-family-trinkets:semantic-FT-04",
+          "community-quest-warrens-lvl1-family-trinkets:semantic-FT-05",
+          "community-quest-warrens-lvl1-family-trinkets:semantic-FT-06"
+        ],
+        "rest": [],
+        "questAdapters": [
+          "QUEST_LOOT_OVERRIDE",
+          "QUEST_OBJECTIVE_INTERACTION",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_ROOM_CARD_SELECTION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING",
+          "QUEST_TRINKET_ACQUISITION_RETURN"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": "c1c3-multi-primitive-quest-v1",
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_ROOM_SETUP",
+          "QUEST_RULE_TOKEN_INTERACTION",
+          "QUEST_RULE_QUEST_COMPLETION",
+          "QUEST_RULE_LOOT_CHEST_SELECTION",
+          "QUEST_RULE_TRINKET_ACQUISITION",
+          "QUEST_RULE_TRINKET_PROVENANCE",
+          "QUEST_RULE_TRINKET_RETURN_EXCHANGE",
+          "LEVEL_2_TRINKET_SOURCE_DECK_COMPLETE"
+        ],
+        "sourceGates": [
+          "BLOCKED_BY_LEVEL_2_TRINKET_SOURCE_DECK"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-pork-chop",
+      "name": "Pork Chop",
+      "level": 1,
+      "region": "warrens",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 8
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [],
+        "trinket": [],
+        "rest": [
+          "community-quest-warrens-lvl1-pork-chop:rest:allocation",
+          "community-quest-warrens-lvl1-pork-chop:rest:capacity",
+          "community-quest-warrens-lvl1-pork-chop:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": "c1c1-simple-community-quest-v1",
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_REST_ALLOCATION_SEMANTICS"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-worm-squash",
+      "name": "Worm Squash",
+      "level": 1,
+      "region": "warrens",
+      "family": "kill-entity",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-warrens-lvl1-worm-squash:rule-1:monster-0",
+          "community-quest-warrens-lvl1-worm-squash:monster-action:large-carrion-eater:action-1",
+          "community-quest-warrens-lvl1-worm-squash:monster-action:large-carrion-eater:action-2",
+          "community-quest-warrens-lvl1-worm-squash:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-warrens-lvl1-worm-squash:rest:allocation",
+          "community-quest-warrens-lvl1-worm-squash:rest:capacity",
+          "community-quest-warrens-lvl1-worm-squash:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_MONSTER_ENCOUNTER_ROUTING",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_ROOM_CARD_SELECTION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_ROOM_SETUP",
+          "QUEST_RULE_MONSTER_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-a-new-breed",
+      "name": "A New Breed",
+      "level": 2,
+      "region": "warrens",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 8
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-warrens-lvl2-a-new-breed:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-warrens-lvl2-a-new-breed:rest:allocation",
+          "community-quest-warrens-lvl2-a-new-breed:rest:capacity",
+          "community-quest-warrens-lvl2-a-new-breed:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_MONSTER_OVERRIDE_ROUTING",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_MONSTER_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-bait-them-out",
+      "name": "Bait Them Out",
+      "level": 2,
+      "region": "warrens",
+      "family": "kill-entity",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-warrens-lvl2-bait-them-out:rule-2:monster-0",
+          "community-quest-warrens-lvl2-bait-them-out:monster-action:swine-skiver:action-1",
+          "community-quest-warrens-lvl2-bait-them-out:monster-action:swine-skiver:action-2",
+          "community-quest-warrens-lvl2-bait-them-out:monster-action:swine-skiver:action-3",
+          "community-quest-warrens-lvl2-bait-them-out:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-warrens-lvl2-bait-them-out:rest:allocation",
+          "community-quest-warrens-lvl2-bait-them-out:rest:capacity",
+          "community-quest-warrens-lvl2-bait-them-out:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_BATTLE_START_POLICY",
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_MONSTER_ENCOUNTER_ROUTING",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_PROVISION_SETUP",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_ROOM_SETUP",
+          "QUEST_RULE_BATTLE_SETUP",
+          "QUEST_RULE_MONSTER_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-carrion-infestation",
+      "name": "Carrion Infestation",
+      "level": 2,
+      "region": "warrens",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "MULTI_BLOCKED",
+      "blockerClasses": [
+        "NEEDS_NEW_RUNTIME_PRIMITIVE",
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 4
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-warrens-lvl2-carrion-infestation:rule-0:monster-0",
+          "community-quest-warrens-lvl2-carrion-infestation:rule-0:monster-1",
+          "community-quest-warrens-lvl2-carrion-infestation:rule-1:monster-0",
+          "community-quest-warrens-lvl2-carrion-infestation:rule-1:monster-1",
+          "community-quest-warrens-lvl2-carrion-infestation:rule-1:monster-2",
+          "community-quest-warrens-lvl2-carrion-infestation:rule-1:monster-3",
+          "community-quest-warrens-lvl2-carrion-infestation:monster-action:large-carrion-eater:action-1",
+          "community-quest-warrens-lvl2-carrion-infestation:monster-action:large-carrion-eater:action-2",
+          "community-quest-warrens-lvl2-carrion-infestation:monster-action:carrion-eater:action-1",
+          "community-quest-warrens-lvl2-carrion-infestation:monster-action:maggot:action-1",
+          "community-quest-warrens-lvl2-carrion-infestation:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-warrens-lvl2-carrion-infestation:rest:allocation",
+          "community-quest-warrens-lvl2-carrion-infestation:rest:capacity",
+          "community-quest-warrens-lvl2-carrion-infestation:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_BATTLE_RESULT_POLICY",
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_MONSTER_ENCOUNTER_ROUTING",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_MONSTER_STATE",
+          "QUEST_RULE_BATTLE_RESULT",
+          "QUEST_RULE_QUEST_COMPLETION"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-mapping-the-sewers",
+      "name": "Mapping the Sewers",
+      "level": 2,
+      "region": "warrens",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": true,
+        "unresolvedFields": []
+      },
+      "readiness": "PRODUCTION_READY_EXISTING",
+      "blockerClasses": [],
+      "rest": {
+        "status": "SOURCE_CLEAR",
+        "firewood": {
+          "tokens": 0,
+          "restingPoints": 0
+        },
+        "canonicalMissingFields": [],
+        "currentPolicyUnacceptedFields": []
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [],
+        "trinket": [],
+        "rest": [],
+        "questAdapters": []
+      },
+      "currentBinding": {
+        "adapterId": "c1c1-simple-community-quest-v1",
+        "selectorReachable": true,
+        "boundProductionProof": true
+      },
+      "historical": {
+        "productionReady": true,
+        "productionStatus": "PRODUCTION_READY",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING"
+        ],
+        "sourceGates": []
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-ringleaders",
+      "name": "Ringleaders",
+      "level": 2,
+      "region": "warrens",
+      "family": "kill-entity",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-warrens-lvl2-ringleaders:rule-1:monster-0",
+          "community-quest-warrens-lvl2-ringleaders:rule-1:monster-1",
+          "community-quest-warrens-lvl2-ringleaders:monster-action:swine-skiver:action-1",
+          "community-quest-warrens-lvl2-ringleaders:monster-action:swine-skiver:action-2",
+          "community-quest-warrens-lvl2-ringleaders:monster-action:swine-skiver:action-3",
+          "community-quest-warrens-lvl2-ringleaders:monster-action:large-carrion-eater:action-1",
+          "community-quest-warrens-lvl2-ringleaders:monster-action:large-carrion-eater:action-2",
+          "community-quest-warrens-lvl2-ringleaders:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-warrens-lvl2-ringleaders:rest:allocation",
+          "community-quest-warrens-lvl2-ringleaders:rest:capacity",
+          "community-quest-warrens-lvl2-ringleaders:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_BATTLE_RESULT_POLICY",
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_MONSTER_ENCOUNTER_ROUTING",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_ROOM_CARD_SELECTION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_ROOM_SETUP",
+          "QUEST_RULE_MONSTER_STATE",
+          "QUEST_RULE_BATTLE_RESULT"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl3-alpha-swine",
+      "name": "Alpha Swine",
+      "level": 3,
+      "region": "warrens",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 8
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-warrens-lvl3-alpha-swine:rule-0:monster-0",
+          "community-quest-warrens-lvl3-alpha-swine:monster-action:swinetaur:action-1",
+          "community-quest-warrens-lvl3-alpha-swine:monster-action:swinetaur:action-2",
+          "community-quest-warrens-lvl3-alpha-swine:monster-action:swinetaur:action-3",
+          "community-quest-warrens-lvl3-alpha-swine:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-warrens-lvl3-alpha-swine:rest:allocation",
+          "community-quest-warrens-lvl3-alpha-swine:rest:capacity",
+          "community-quest-warrens-lvl3-alpha-swine:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_MONSTER_ENCOUNTER_ROUTING",
+          "QUEST_MONSTER_OVERRIDE_ROUTING",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_MONSTER_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl3-deep-in-the-warrens",
+      "name": "Deep in the Warrens",
+      "level": 3,
+      "region": "warrens",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": true,
+        "unresolvedFields": []
+      },
+      "readiness": "PRODUCTION_READY_EXISTING",
+      "blockerClasses": [],
+      "rest": {
+        "status": "SOURCE_CLEAR",
+        "firewood": {
+          "tokens": 0,
+          "restingPoints": 0
+        },
+        "canonicalMissingFields": [],
+        "currentPolicyUnacceptedFields": []
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [],
+        "trinket": [],
+        "rest": [],
+        "questAdapters": []
+      },
+      "currentBinding": {
+        "adapterId": "c1c2-provision-discard-quest-v1",
+        "selectorReachable": true,
+        "boundProductionProof": true
+      },
+      "historical": {
+        "productionReady": true,
+        "productionStatus": "PRODUCTION_READY",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_PROVISION_INTERACTION"
+        ],
+        "sourceGates": []
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl3-drums-of-doom",
+      "name": "Drums of Doom",
+      "level": 3,
+      "region": "warrens",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 8
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-warrens-lvl3-drums-of-doom:rule-0:monster-0",
+          "community-quest-warrens-lvl3-drums-of-doom:monster-action:swine-drummer:action-1",
+          "community-quest-warrens-lvl3-drums-of-doom:monster-action:swine-drummer:action-2",
+          "community-quest-warrens-lvl3-drums-of-doom:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-warrens-lvl3-drums-of-doom:rest:allocation",
+          "community-quest-warrens-lvl3-drums-of-doom:rest:capacity",
+          "community-quest-warrens-lvl3-drums-of-doom:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_GUARD_TRANSFER",
+          "QUEST_MONSTER_ENCOUNTER_ROUTING",
+          "QUEST_MONSTER_OVERRIDE_ROUTING",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_MONSTER_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl3-foul-arsenal",
+      "name": "Foul Arsenal",
+      "level": 3,
+      "region": "warrens",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [
+          "community-quest-warrens-lvl3-foul-arsenal:rule-1:effect",
+          "community-quest-warrens-lvl3-foul-arsenal:rule-1:hook"
+        ],
+        "monster": [
+          "community-quest-warrens-lvl3-foul-arsenal:rule-1:hook",
+          "community-quest-warrens-lvl3-foul-arsenal:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-warrens-lvl3-foul-arsenal:rest:allocation",
+          "community-quest-warrens-lvl3-foul-arsenal:rest:capacity",
+          "community-quest-warrens-lvl3-foul-arsenal:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_HERO_EVENT_ROUTING",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_ROOM_CARD_SELECTION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_ROOM_SETUP",
+          "QUEST_RULE_HERO_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl3-infighting",
+      "name": "Infighting",
+      "level": 3,
+      "region": "warrens",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 8
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-warrens-lvl3-infighting:rule-0:monster-0",
+          "community-quest-warrens-lvl3-infighting:monster-action:swine-skiver:action-1",
+          "community-quest-warrens-lvl3-infighting:monster-action:swine-skiver:action-2",
+          "community-quest-warrens-lvl3-infighting:monster-action:swine-skiver:action-3",
+          "community-quest-warrens-lvl3-infighting:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-warrens-lvl3-infighting:rest:allocation",
+          "community-quest-warrens-lvl3-infighting:rest:capacity",
+          "community-quest-warrens-lvl3-infighting:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_EXPLORATION_POLICY",
+          "QUEST_FIRST_ROUND_INITIATIVE",
+          "QUEST_MONSTER_ENCOUNTER_ROUTING",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_MONSTER_STATE",
+          "QUEST_RULE_EXPLORATION",
+          "QUEST_RULE_BATTLE_SETUP"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-weald-lvl1-circle-of-witches",
+      "name": "Circle of Witches",
+      "level": 1,
+      "region": "weald",
+      "family": "kill-entity",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-weald-lvl1-circle-of-witches:rule-1:monster-0",
+          "community-quest-weald-lvl1-circle-of-witches:monster-action:crone:action-1",
+          "community-quest-weald-lvl1-circle-of-witches:monster-action:crone:action-2",
+          "community-quest-weald-lvl1-circle-of-witches:monster-action:crone:action-3",
+          "community-quest-weald-lvl1-circle-of-witches:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-weald-lvl1-circle-of-witches:rest:allocation",
+          "community-quest-weald-lvl1-circle-of-witches:rest:capacity",
+          "community-quest-weald-lvl1-circle-of-witches:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_MONSTER_ENCOUNTER_ROUTING",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_ROOM_CARD_SELECTION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_ROOM_SETUP",
+          "QUEST_RULE_MONSTER_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-weald-lvl1-disinfection",
+      "name": "Disinfection",
+      "level": 1,
+      "region": "weald",
+      "family": "disinfect",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 8
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-weald-lvl1-disinfection:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-weald-lvl1-disinfection:rest:allocation",
+          "community-quest-weald-lvl1-disinfection:rest:capacity",
+          "community-quest-weald-lvl1-disinfection:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_OBJECTIVE_INTERACTION",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_PROVISION_SETUP",
+          "QUEST_ROOM_CARD_SELECTION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_ROOM_SETUP",
+          "QUEST_RULE_QUEST_COMPLETION"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-weald-lvl1-fungal-research",
+      "name": "Fungal Research",
+      "level": 1,
+      "region": "weald",
+      "family": "collect-and-return",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 8
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-weald-lvl1-fungal-research:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-weald-lvl1-fungal-research:rest:allocation",
+          "community-quest-weald-lvl1-fungal-research:rest:capacity",
+          "community-quest-weald-lvl1-fungal-research:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_ROOM_CARD_SELECTION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_ROOM_SETUP",
+          "QUEST_RULE_QUEST_COMPLETION"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-weald-lvl1-patrol-the-woods",
+      "name": "Patrol the Woods",
+      "level": 1,
+      "region": "weald",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 8
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-weald-lvl1-patrol-the-woods:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-weald-lvl1-patrol-the-woods:rest:allocation",
+          "community-quest-weald-lvl1-patrol-the-woods:rest:capacity",
+          "community-quest-weald-lvl1-patrol-the-woods:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_FIRST_ROUND_INITIATIVE",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_BATTLE_SETUP"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-weald-lvl1-purge-the-woods",
+      "name": "Purge the Woods",
+      "level": 1,
+      "region": "weald",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 4
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-weald-lvl1-purge-the-woods:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-weald-lvl1-purge-the-woods:rest:allocation",
+          "community-quest-weald-lvl1-purge-the-woods:rest:capacity",
+          "community-quest-weald-lvl1-purge-the-woods:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_MONSTER_POOL_FILTER",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_MONSTER_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-weald-lvl2-hounds-of-the-woods",
+      "name": "Hounds of the Woods",
+      "level": 2,
+      "region": "weald",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 8
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-weald-lvl2-hounds-of-the-woods:rule-2:monster-0",
+          "community-quest-weald-lvl2-hounds-of-the-woods:monster-action:rabid-gnasher:action-1",
+          "community-quest-weald-lvl2-hounds-of-the-woods:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-weald-lvl2-hounds-of-the-woods:rest:allocation",
+          "community-quest-weald-lvl2-hounds-of-the-woods:rest:capacity",
+          "community-quest-weald-lvl2-hounds-of-the-woods:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_MONSTER_ENCOUNTER_ROUTING",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_ROOM_CARD_SELECTION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_ROOM_SETUP",
+          "QUEST_RULE_MONSTER_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-weald-lvl2-lost-supplies",
+      "name": "Lost Supplies",
+      "level": 2,
+      "region": "weald",
+      "family": "return-resource",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-weald-lvl2-lost-supplies:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-weald-lvl2-lost-supplies:rest:allocation",
+          "community-quest-weald-lvl2-lost-supplies:rest:capacity",
+          "community-quest-weald-lvl2-lost-supplies:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_LOOT_OVERRIDE",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_PROVISION_SETUP",
+          "QUEST_RESOURCE_REWARD_EXCHANGE",
+          "QUEST_ROOM_CARD_SELECTION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_ROOM_SETUP",
+          "QUEST_RULE_TOKEN_INTERACTION",
+          "QUEST_RULE_REWARD_OVERRIDE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-weald-lvl2-lost-treasures",
+      "name": "Lost Treasures",
+      "level": 2,
+      "region": "weald",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-weald-lvl2-lost-treasures:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-weald-lvl2-lost-treasures:rest:allocation",
+          "community-quest-weald-lvl2-lost-treasures:rest:capacity",
+          "community-quest-weald-lvl2-lost-treasures:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_MONSTER_POOL_FILTER",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_MONSTER_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-weald-lvl2-searching-in-the-dark",
+      "name": "Searching in the Dark",
+      "level": 2,
+      "region": "weald",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-weald-lvl2-searching-in-the-dark:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-weald-lvl2-searching-in-the-dark:rest:allocation",
+          "community-quest-weald-lvl2-searching-in-the-dark:rest:capacity",
+          "community-quest-weald-lvl2-searching-in-the-dark:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_MONSTER_POOL_FILTER",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_ROOM_SETUP",
+          "QUEST_RULE_MONSTER_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-weald-lvl2-spreaders-of-miasma",
+      "name": "Spreaders of Miasma",
+      "level": 2,
+      "region": "weald",
+      "family": "kill-entity",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-weald-lvl2-spreaders-of-miasma:rule-0:monster-0",
+          "community-quest-weald-lvl2-spreaders-of-miasma:monster-action:hateful-virago:action-1",
+          "community-quest-weald-lvl2-spreaders-of-miasma:monster-action:hateful-virago:action-2",
+          "community-quest-weald-lvl2-spreaders-of-miasma:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-weald-lvl2-spreaders-of-miasma:rest:allocation",
+          "community-quest-weald-lvl2-spreaders-of-miasma:rest:capacity",
+          "community-quest-weald-lvl2-spreaders-of-miasma:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_MONSTER_ENCOUNTER_ROUTING",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_MONSTER_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-weald-lvl3-final-swipe",
+      "name": "Final Swipe",
+      "level": 3,
+      "region": "weald",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [
+          "community-quest-weald-lvl3-final-swipe:rule-0:effect",
+          "community-quest-weald-lvl3-final-swipe:rule-0:hook"
+        ],
+        "monster": [
+          "community-quest-weald-lvl3-final-swipe:rule-0:hook",
+          "community-quest-weald-lvl3-final-swipe:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-weald-lvl3-final-swipe:rest:allocation",
+          "community-quest-weald-lvl3-final-swipe:rest:capacity",
+          "community-quest-weald-lvl3-final-swipe:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_HERO_EVENT_ROUTING",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_HERO_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-weald-lvl3-great-unclean-ones",
+      "name": "Great Unclean Ones",
+      "level": 3,
+      "region": "weald",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "MULTI_BLOCKED",
+      "blockerClasses": [
+        "NEEDS_NEW_RUNTIME_PRIMITIVE",
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 12
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-weald-lvl3-great-unclean-ones:rule-0:monster-0",
+          "community-quest-weald-lvl3-great-unclean-ones:monster-action:unclean-giant:action-1",
+          "community-quest-weald-lvl3-great-unclean-ones:monster-action:unclean-giant:action-2",
+          "community-quest-weald-lvl3-great-unclean-ones:monster-action:unclean-giant:action-3",
+          "community-quest-weald-lvl3-great-unclean-ones:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-weald-lvl3-great-unclean-ones:rest:allocation",
+          "community-quest-weald-lvl3-great-unclean-ones:rest:capacity",
+          "community-quest-weald-lvl3-great-unclean-ones:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_MONSTER_ENCOUNTER_ROUTING",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_MONSTER_STATE",
+          "QUEST_RULE_BATTLE_SETUP"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-weald-lvl3-no-other-way",
+      "name": "No Other Way",
+      "level": 3,
+      "region": "weald",
+      "family": "burn",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "MULTI_BLOCKED",
+      "blockerClasses": [
+        "NEEDS_NEW_RUNTIME_PRIMITIVE",
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 8
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [],
+        "monster": [
+          "community-quest-weald-lvl3-no-other-way:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-weald-lvl3-no-other-way:rest:allocation",
+          "community-quest-weald-lvl3-no-other-way:rest:capacity",
+          "community-quest-weald-lvl3-no-other-way:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_MONSTER_ENCOUNTER_ROUTING",
+          "QUEST_OBJECTIVE_QUALIFICATION",
+          "QUEST_ROOM_CARD_SELECTION",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_ROOM_SETUP",
+          "QUEST_RULE_QUEST_COMPLETION",
+          "QUEST_RULE_MONSTER_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-weald-lvl3-the-infected",
+      "name": "The Infected",
+      "level": 3,
+      "region": "weald",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 8
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [
+          "community-quest-weald-lvl3-the-infected:rule-0:effect",
+          "community-quest-weald-lvl3-the-infected:rule-0:hook"
+        ],
+        "monster": [
+          "community-quest-weald-lvl3-the-infected:rule-0:hook",
+          "community-quest-weald-lvl3-the-infected:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-weald-lvl3-the-infected:rest:allocation",
+          "community-quest-weald-lvl3-the-infected:rest:capacity",
+          "community-quest-weald-lvl3-the-infected:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_HERO_EVENT_ROUTING",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_HERO_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    },
+    {
+      "definitionId": "community-quest-weald-lvl3-whispering-woods",
+      "name": "Whispering Woods",
+      "level": 3,
+      "region": "weald",
+      "family": "clear-rooms",
+      "questType": "standard",
+      "presentInCurrentRuntimeCatalog": true,
+      "sourceCompleteness": {
+        "literalComplete": true,
+        "executableSourceClear": false,
+        "unresolvedFields": []
+      },
+      "readiness": "SOURCE_BLOCKED",
+      "blockerClasses": [
+        "SOURCE_BLOCKED"
+      ],
+      "rest": {
+        "status": "SOURCE_BLOCKED",
+        "firewood": {
+          "tokens": 1,
+          "restingPoints": 8
+        },
+        "canonicalMissingFields": [
+          "insufficientRecoveryCapacity"
+        ],
+        "currentPolicyUnacceptedFields": [
+          "budgetConsumption",
+          "partialSpend",
+          "zeroPointRest"
+        ]
+      },
+      "dependencies": {
+        "hero": [
+          "community-quest-weald-lvl3-whispering-woods:rule-0:effect",
+          "community-quest-weald-lvl3-whispering-woods:rule-0:hook"
+        ],
+        "monster": [
+          "community-quest-weald-lvl3-whispering-woods:rule-0:hook",
+          "community-quest-weald-lvl3-whispering-woods:encounter:eligibility"
+        ],
+        "trinket": [],
+        "rest": [
+          "community-quest-weald-lvl3-whispering-woods:rest:allocation",
+          "community-quest-weald-lvl3-whispering-woods:rest:capacity",
+          "community-quest-weald-lvl3-whispering-woods:rest:authority"
+        ],
+        "questAdapters": [
+          "QUEST_DUNGEON_COMPOSITION",
+          "QUEST_HERO_EVENT_ROUTING",
+          "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+        ]
+      },
+      "currentBinding": {
+        "adapterId": null,
+        "selectorReachable": false,
+        "boundProductionProof": false
+      },
+      "historical": {
+        "productionReady": false,
+        "productionStatus": "SOURCE_BLOCKED",
+        "requiredPrimitives": [
+          "QUEST_ROOM_TOKEN_COMPOSITION",
+          "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+          "QUEST_XP_UNIT_ACCOUNTING",
+          "QUEST_RULE_HERO_STATE"
+        ],
+        "sourceGates": [
+          "REST_INSUFFICIENT_RECOVERY_CAPACITY"
+        ]
+      }
+    }
+  ]
+}
