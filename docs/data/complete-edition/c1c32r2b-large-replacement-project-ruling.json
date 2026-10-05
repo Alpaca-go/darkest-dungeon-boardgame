@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R2B",
+  "rulingId": "C1C32R2B-LARGE-REPLACEMENT-RETURN-WITH-BATTLE-v1",
+  "ruleSetVersion": "C1C32R2B-DIGITAL-DEFAULT-v5",
+  "authority": "PROJECT_RULING",
+  "canonical": false,
+  "field": "initialLargeReplacementDiscard.returnTiming",
+  "candidates": [
+    {
+      "id": "A",
+      "policy": "Keep the replaced card in encounter-scoped DISCARD during Battle, then shuffle it with active Monster cards into the deck at Battle End.",
+      "consequence": "All cards drawn for that Battle are available to later ordinary encounters; the replacement card cannot be drawn or summoned while Battle is active."
+    },
+    {
+      "id": "B",
+      "policy": "Keep the replaced card discarded for the current Dungeon run.",
+      "consequence": "The Monster deck depletes more quickly and future encounters have a changed composition."
+    },
+    {
+      "id": "C",
+      "policy": "Return the replaced card immediately before Battle initialization.",
+      "consequence": "The card could be drawn again by another setup step; it introduces an extra shuffle/RNG event absent from the printed setup."
+    }
+  ],
+  "selected": "A",
+  "rationale": "An encounter-scoped discard preserves the explicit p17 discard through the whole Battle, then uses the existing p25 end-of-Battle shuffle boundary without introducing an extra random operation. This is a digital lifecycle choice, not an official rule claim.",
+  "ownershipTransition": "ENCOUNTER -> DISCARD on replacement; DISCARD -> DECK only in the idempotent Battle End return transaction",
+  "saveReplayImpact": "v5 saves persist every physical copy owner, replacement event, RNG cursor and rule version. Reload before or after Battle End produces the same card ownership and shuffle. v1-v4 records retain their prior semantics and are not migrated in place."
+}

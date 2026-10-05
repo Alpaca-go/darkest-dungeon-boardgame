@@ -18,6 +18,7 @@ import type {
   TrinketAcquisitionRecord,
   TrinketSourceKind,
 } from '../../types';
+import { assertSourceTrinketEffectAvailable } from './source-deck';
 import { createId, nowIso } from '../random';
 import { pushLog } from '../log';
 import { getTrinketById, trinketDisplayName } from '../../data/trinkets/trinket-registry';
@@ -71,6 +72,7 @@ export function acquireTrinket(
   campaign: CampaignState,
   cmd: AcquireTrinketCommand
 ): AcquireTrinketResult {
+  assertSourceTrinketEffectAvailable(campaign, cmd.trinketId);
   const questId = cmd.questId ?? campaign.currentQuestId ?? null;
 
   // 1) 幂等

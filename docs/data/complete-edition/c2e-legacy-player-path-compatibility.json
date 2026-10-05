@@ -1,0 +1,27 @@
+{
+  "phase": "11A.5-C2E",
+  "baseline": "2d979652c3b713d6104bd21c7007fcd24fe1af63",
+  "definitionVersion": "C2C-HERO-PRODUCTION-DEFINITION-v1",
+  "runtimeVersion": "C2D-HERO-PRODUCTION-RUNTIME-v1",
+  "ambiguityPolicy": "SOURCE_AMBIGUITY_DEFER_POLICY_V1",
+  "playerPathFingerprint": "bd335422db3046e9d8918bed2b113270337f57a8cdc7912db3cbdf8358f26c32",
+  "status": "PASS",
+  "sourceVersion": 22,
+  "targetVersion": 23,
+  "conversion": "metadata only",
+  "legacyHeroIdentityPreserved": true,
+  "legacyExecutorPreserved": true,
+  "browserCase": {
+    "title": "real browser v22 load remains legacy and selectable",
+    "file": "c2e-hero-player-path.spec.ts",
+    "line": 36,
+    "results": [
+      {
+        "status": "passed",
+        "durationMs": 895,
+        "errors": []
+      }
+    ],
+    "status": "PASS"
+  }
+}

@@ -1,3 +1,4 @@
+import {isProductionCampaign} from '../data/heroes/player-registry';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useGameStore } from '../store/useGameStore';
 import { isStandardQuestId, isBossQuestId, getQuestById } from '../data/quests';
@@ -5,6 +6,8 @@ import { getBossQuestPool, getQuestPool, runtimeContentContext } from '../data/c
 import { canSelectStandardQuest, canSelectBossQuest } from '../game-engine/campaign/campaign-progress';
 import { getThreatById } from '../data/bosses/threat-registry';
 import QuestCard from '../components/quest/QuestCard';
+import { necromancerProductionEntryError, necromancerProductionEntryMessage } from '../game-engine/commands/necromancer-production-entry';
+import { RUINS_V6, RUINS_STANCES } from '../types/ruins-executable';
 
 /**
  * Phase 11A.1 — 任务选择页最小 UI 改动（dev doc §22）：
@@ -17,7 +20,11 @@ import QuestCard from '../components/quest/QuestCard';
 export default function QuestSelectPage() {
   const navigate = useNavigate();
   const campaign = useGameStore((s) => s.campaign);
+  const migrateHeroDodgeToV2=useGameStore(s=>s.migrateHeroDodgeToV2);
+  const selectProductionRuinsV6 = useGameStore(s => s.selectProductionRuinsV6);
+  const selectMonsterRoute = useGameStore(s=>s.selectProductionMonsterPlayerRoute);
   const chooseQuest = useGameStore((s) => s.chooseQuest);
+  const selectPartyDeployment = useGameStore(s => s.selectPartyDeployment);
 
   if (!campaign) return <Navigate to="/" replace />;
   if (campaign.heroes.length < 4) return <Navigate to="/setup" replace />;
@@ -25,8 +32,16 @@ export default function QuestSelectPage() {
     return <Navigate to="/loadout" replace />;
 
   const cp = campaign.campaignProgress;
+  const uniqueDeployment = new Set(campaign.heroes.filter(h => !h.dead).map(h => h.stance)).size === 4;
   const standardSelectable = canSelectStandardQuest(cp);
   const bossSelectable = canSelectBossQuest(cp);
+  const entryError = campaign.runtimeContentProfile === 'community-complete-edition'
+    && cp.activeBossFamilyId === 'necromancer' ? necromancerProductionEntryError(campaign) : null;
+  const necromancerEntryBlocked = entryError !== null;
+  const canSelectV6 = !campaign.battle && !campaign.bossEncounterCheckpoint && !campaign.ruinsDrawState
+    && !campaign.activeThreatRuntime
+    && (!campaign.necromancerPreparationDay || campaign.necromancerPreparationDay.status === 'COMMITTED')
+    && ['hamlet', 'quest-select'].includes(campaign.gamePhase);
   const activeThreat = cp.activeThreatId ? getThreatById(cp.activeThreatId) : null;
   const context = runtimeContentContext(campaign);
   const questPool = cp.bossQuestRequired
@@ -34,8 +49,7 @@ export default function QuestSelectPage() {
     : getQuestPool(context);
 
   const onChoose = (questId: string) => {
-    chooseQuest(questId);
-    navigate('/dungeon');
+    if (chooseQuest(questId)) navigate('/dungeon');
   };
 
   return (
@@ -43,7 +57,30 @@ export default function QuestSelectPage() {
       <h1 className="text-2xl font-bold text-dd-text mb-1">任务选择</h1>
       <p className="text-dd-muted text-sm mb-4">选择一项任务，开始生成对应的地牢。</p>
 
+      {campaign.runtimeContentProfile === 'community-complete-edition'
+        && !campaign.heroDodgeRuleSetSelection && !campaign.battle && !campaign.bossEncounterCheckpoint && <button
+          type="button" data-testid="migrate-hero-dodge-v2" onClick={migrateHeroDodgeToV2}
+          className="mb-4 rounded border border-dd-accent px-3 py-2">启用已接受的 Hero Dodge v2 规则</button>}
+      {campaign.runtimeContentProfile === 'community-complete-edition'
+        && campaign.ruinsRuleSetSelection?.ruleSetVersion !== RUINS_V6 && <div className="mb-4">
+          <button type="button" data-testid="select-production-ruins-v6" disabled={!canSelectV6}
+            onClick={selectProductionRuinsV6} className="rounded border border-dd-accent px-3 py-2 disabled:opacity-50">
+            显式启用 Ruins v6（含已接受的 Large 布局规则）
+          </button>
+          {!canSelectV6 && <p className="mt-1 text-sm text-dd-muted">已有 Threat 或遭遇不能迁移；请在初始化前选择规则。</p>}
+        </div>}
+      {canSelectV6 && campaign.ruinsRuleSetSelection?.ruleSetVersion === RUINS_V6 && !campaign.monsterPlayerRouteVersion && <button data-testid="select-monster-production" onClick={selectMonsterRoute}>启用生产怪物普通遭遇</button>}
       {/* Phase 11A.1 §22 最小 UI：Campaign 状态条 */}
+      {campaign.ruinsRuleSetSelection?.ruleSetVersion === RUINS_V6 && !campaign.bossEncounterCheckpoint && <fieldset className="mb-4 p-3 border border-dd-border">
+        <legend>Ruins 英雄初始 Stance</legend>
+        {campaign.heroes.filter(h => !h.dead).map(h => <label key={h.instanceId} className="inline-flex gap-2 mr-3">
+          {h.name}<select aria-label={`${h.name} 初始 Stance`} value={h.stance}
+            onChange={event => selectPartyDeployment(h.instanceId, event.target.value as typeof h.stance)}>
+            {RUINS_STANCES.map(stance => <option key={stance} value={stance}>{stance}</option>)}
+          </select>
+        </label>)}
+        {!uniqueDeployment && <p role="status">守卫战斗要求四名英雄使用不同的初始 Stance；请调整队伍部署。</p>}
+      </fieldset>}
       <div className="mb-4 p-3 rounded border border-dd-border bg-dd-panel/40 text-sm">
         <div className="flex flex-wrap gap-3">
           <span>
@@ -75,9 +112,11 @@ export default function QuestSelectPage() {
         {questPool.map((q) => {
           const isStandard = isStandardQuestId(q.id);
           const isBoss = isBossQuestId(q.id);
-          const isDisabled =
+          const isDisabled = (isProductionCampaign(campaign)&&campaign.ruinsRuleSetSelection?.ruleSetVersion!==RUINS_V6) ||
             (isStandard && !standardSelectable) ||
             (isBoss && !bossSelectable) ||
+            (q.id === 'face-the-threat' && necromancerEntryBlocked) ||
+            ((isStandard || q.id === 'face-the-threat') && campaign.ruinsRuleSetSelection?.ruleSetVersion === RUINS_V6 && !uniqueDeployment) ||
             cp.darkestDungeonUnlocked;
           return (
             <QuestCard
@@ -90,6 +129,12 @@ export default function QuestSelectPage() {
           );
         })}
       </div>
+
+      {cp.bossQuestRequired && necromancerEntryBlocked ? (
+        <p className="mt-3 text-sm text-dd-muted" data-testid="necromancer-production-entry-blocked">
+          {necromancerProductionEntryMessage(entryError!)}
+        </p>
+      ) : null}
 
       {questPool.length === 0 ? (
         <div className="mt-4 rounded border border-dd-danger bg-dd-danger/10 p-4" data-testid="community-quest-pool-blocked">

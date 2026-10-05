@@ -1,3 +1,4 @@
+import { useLocation } from 'react-router-dom';
 import { useGameStore } from '../../store/useGameStore';
 import { openOpportunities } from '../../game-engine/trinkets/trinket-opportunities';
 import { getDiseaseById } from '../../data/diseases';
@@ -9,12 +10,13 @@ import { getDiseaseById } from '../../data/diseases';
  * 非战斗窗口（hero-turn-start / room-entered）的机会同样在此结清。
  */
 export default function TrinketUseOverlay() {
+  const location = useLocation();
   const campaign = useGameStore((s) => s.campaign);
   const useOpp = useGameStore((s) => s.useTrinketOpportunity);
   const declineOpp = useGameStore((s) => s.declineTrinketOpportunity);
   const chooseWild = useGameStore((s) => s.chooseDungeonProvisionWild);
 
-  if (!campaign) return null;
+  if (!campaign || (campaign.battle?.productionMonsterContext?.playerRouteVersion && location.pathname === '/')) return null;
   const opps = openOpportunities(campaign);
   const dungeonAction = campaign.pendingDungeonTrinketAction;
   const wildDice = dungeonAction?.pendingProvisionDice?.filter((die) => die.selectedFace === null) ?? [];

@@ -1,0 +1,789 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C31R",
+  "baselineHead": "02d18d00ece61c9136ac0821ee5ce30ada038191",
+  "ruleSourcePolicyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "externalSourceAcquisition": false,
+  "status": "ACCEPTED_FROZEN",
+  "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+  "inherits": "C1C28-DIGITAL-DEFAULT-v1",
+  "selectedCandidate": "B_CLASS_BASELINE",
+  "officialPairs": 3,
+  "projectRulingPairs": 21,
+  "rows": [
+    {
+      "heroId": "crusader",
+      "level": 1,
+      "dodge": 0,
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "canonicalSourceStatus": "OFFICIAL_SOURCE",
+      "rulingId": null,
+      "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "sourceReferences": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "region": "Anatomy of the Hero Boards: labelled Dodge 0",
+          "page": 10
+        }
+      ],
+      "reason": "Frozen source-bound Level I value retained unchanged."
+    },
+    {
+      "heroId": "crusader",
+      "level": 2,
+      "dodge": 0,
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "canonicalSourceStatus": "SOURCE_UNRESOLVED",
+      "rulingId": "C1C31R-DODGE-CRUSADER-L2",
+      "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "sourceReferences": [],
+      "reason": "Explicit Crusader class baseline 0 at this level, anchored to known Crusader I. No official higher-level value is inferred.",
+      "riskMetadata": {
+        "classification": "HIGH_COMBAT_BALANCE",
+        "boundedRange": [
+          0,
+          1
+        ],
+        "perAttackHitChangeVsZeroFillPercentagePoints": 0,
+        "saturationNote": "Ten-point reduction only in the unsaturated threshold region. Accuracy 11/12 at Dodge 1 remains 100%.",
+        "rationale": "Balance consequence is quantified, not certified by a complete campaign simulation.",
+        "affectedPaths": [
+          "Boss hit/miss",
+          "Bone hit/miss",
+          "Hero damage/death",
+          "Trinket incoming reaction",
+          "summon/Reanimation consequences",
+          "campaign resource consumption"
+        ],
+        "saveReplayImpact": "Resolved value, authority, ruling ID and recorded rule version must survive saves and rule-only replays.",
+        "migrationImpact": "Explicit pre-encounter upgrade only; any existing Battle or Threat checkpoint blocks migration.",
+        "futureOverrideAllowed": true,
+        "futureOverridePolicy": "A new version and explicit migration, never an in-place v2 edit."
+      }
+    },
+    {
+      "heroId": "crusader",
+      "level": 3,
+      "dodge": 0,
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "canonicalSourceStatus": "SOURCE_UNRESOLVED",
+      "rulingId": "C1C31R-DODGE-CRUSADER-L3",
+      "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "sourceReferences": [],
+      "reason": "Explicit Crusader class baseline 0 at this level, anchored to known Crusader I. No official higher-level value is inferred.",
+      "riskMetadata": {
+        "classification": "HIGH_COMBAT_BALANCE",
+        "boundedRange": [
+          0,
+          1
+        ],
+        "perAttackHitChangeVsZeroFillPercentagePoints": 0,
+        "saturationNote": "Ten-point reduction only in the unsaturated threshold region. Accuracy 11/12 at Dodge 1 remains 100%.",
+        "rationale": "Balance consequence is quantified, not certified by a complete campaign simulation.",
+        "affectedPaths": [
+          "Boss hit/miss",
+          "Bone hit/miss",
+          "Hero damage/death",
+          "Trinket incoming reaction",
+          "summon/Reanimation consequences",
+          "campaign resource consumption"
+        ],
+        "saveReplayImpact": "Resolved value, authority, ruling ID and recorded rule version must survive saves and rule-only replays.",
+        "migrationImpact": "Explicit pre-encounter upgrade only; any existing Battle or Threat checkpoint blocks migration.",
+        "futureOverrideAllowed": true,
+        "futureOverridePolicy": "A new version and explicit migration, never an in-place v2 edit."
+      }
+    },
+    {
+      "heroId": "vestal",
+      "level": 1,
+      "dodge": 1,
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "canonicalSourceStatus": "SOURCE_UNRESOLVED",
+      "rulingId": "C1C31R-DODGE-VESTAL-L1",
+      "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "sourceReferences": [],
+      "reason": "Explicit class baseline 1 at this level. One minimal nonzero design value for all seven non-Crusader classes avoids unsupported per-class distinctions and level scaling.",
+      "riskMetadata": {
+        "classification": "HIGH_COMBAT_BALANCE",
+        "boundedRange": [
+          0,
+          1
+        ],
+        "perAttackHitChangeVsZeroFillPercentagePoints": -10,
+        "saturationNote": "Ten-point reduction only in the unsaturated threshold region. Accuracy 11/12 at Dodge 1 remains 100%.",
+        "rationale": "Balance consequence is quantified, not certified by a complete campaign simulation.",
+        "affectedPaths": [
+          "Boss hit/miss",
+          "Bone hit/miss",
+          "Hero damage/death",
+          "Trinket incoming reaction",
+          "summon/Reanimation consequences",
+          "campaign resource consumption"
+        ],
+        "saveReplayImpact": "Resolved value, authority, ruling ID and recorded rule version must survive saves and rule-only replays.",
+        "migrationImpact": "Explicit pre-encounter upgrade only; any existing Battle or Threat checkpoint blocks migration.",
+        "futureOverrideAllowed": true,
+        "futureOverridePolicy": "A new version and explicit migration, never an in-place v2 edit."
+      }
+    },
+    {
+      "heroId": "vestal",
+      "level": 2,
+      "dodge": 1,
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "canonicalSourceStatus": "SOURCE_UNRESOLVED",
+      "rulingId": "C1C31R-DODGE-VESTAL-L2",
+      "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "sourceReferences": [],
+      "reason": "Explicit class baseline 1 at this level. One minimal nonzero design value for all seven non-Crusader classes avoids unsupported per-class distinctions and level scaling.",
+      "riskMetadata": {
+        "classification": "HIGH_COMBAT_BALANCE",
+        "boundedRange": [
+          0,
+          1
+        ],
+        "perAttackHitChangeVsZeroFillPercentagePoints": -10,
+        "saturationNote": "Ten-point reduction only in the unsaturated threshold region. Accuracy 11/12 at Dodge 1 remains 100%.",
+        "rationale": "Balance consequence is quantified, not certified by a complete campaign simulation.",
+        "affectedPaths": [
+          "Boss hit/miss",
+          "Bone hit/miss",
+          "Hero damage/death",
+          "Trinket incoming reaction",
+          "summon/Reanimation consequences",
+          "campaign resource consumption"
+        ],
+        "saveReplayImpact": "Resolved value, authority, ruling ID and recorded rule version must survive saves and rule-only replays.",
+        "migrationImpact": "Explicit pre-encounter upgrade only; any existing Battle or Threat checkpoint blocks migration.",
+        "futureOverrideAllowed": true,
+        "futureOverridePolicy": "A new version and explicit migration, never an in-place v2 edit."
+      }
+    },
+    {
+      "heroId": "vestal",
+      "level": 3,
+      "dodge": 1,
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "canonicalSourceStatus": "SOURCE_UNRESOLVED",
+      "rulingId": "C1C31R-DODGE-VESTAL-L3",
+      "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "sourceReferences": [],
+      "reason": "Explicit class baseline 1 at this level. One minimal nonzero design value for all seven non-Crusader classes avoids unsupported per-class distinctions and level scaling.",
+      "riskMetadata": {
+        "classification": "HIGH_COMBAT_BALANCE",
+        "boundedRange": [
+          0,
+          1
+        ],
+        "perAttackHitChangeVsZeroFillPercentagePoints": -10,
+        "saturationNote": "Ten-point reduction only in the unsaturated threshold region. Accuracy 11/12 at Dodge 1 remains 100%.",
+        "rationale": "Balance consequence is quantified, not certified by a complete campaign simulation.",
+        "affectedPaths": [
+          "Boss hit/miss",
+          "Bone hit/miss",
+          "Hero damage/death",
+          "Trinket incoming reaction",
+          "summon/Reanimation consequences",
+          "campaign resource consumption"
+        ],
+        "saveReplayImpact": "Resolved value, authority, ruling ID and recorded rule version must survive saves and rule-only replays.",
+        "migrationImpact": "Explicit pre-encounter upgrade only; any existing Battle or Threat checkpoint blocks migration.",
+        "futureOverrideAllowed": true,
+        "futureOverridePolicy": "A new version and explicit migration, never an in-place v2 edit."
+      }
+    },
+    {
+      "heroId": "highwayman",
+      "level": 1,
+      "dodge": 1,
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "canonicalSourceStatus": "OFFICIAL_SOURCE",
+      "rulingId": null,
+      "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "sourceReferences": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "region": "Printed Level I Highwayman card in Condition stack example",
+          "page": 20
+        }
+      ],
+      "reason": "Frozen source-bound Level I value retained unchanged."
+    },
+    {
+      "heroId": "highwayman",
+      "level": 2,
+      "dodge": 1,
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "canonicalSourceStatus": "SOURCE_UNRESOLVED",
+      "rulingId": "C1C31R-DODGE-HIGHWAYMAN-L2",
+      "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "sourceReferences": [],
+      "reason": "Explicit class baseline 1 at this level. One minimal nonzero design value for all seven non-Crusader classes avoids unsupported per-class distinctions and level scaling.",
+      "riskMetadata": {
+        "classification": "HIGH_COMBAT_BALANCE",
+        "boundedRange": [
+          0,
+          1
+        ],
+        "perAttackHitChangeVsZeroFillPercentagePoints": -10,
+        "saturationNote": "Ten-point reduction only in the unsaturated threshold region. Accuracy 11/12 at Dodge 1 remains 100%.",
+        "rationale": "Balance consequence is quantified, not certified by a complete campaign simulation.",
+        "affectedPaths": [
+          "Boss hit/miss",
+          "Bone hit/miss",
+          "Hero damage/death",
+          "Trinket incoming reaction",
+          "summon/Reanimation consequences",
+          "campaign resource consumption"
+        ],
+        "saveReplayImpact": "Resolved value, authority, ruling ID and recorded rule version must survive saves and rule-only replays.",
+        "migrationImpact": "Explicit pre-encounter upgrade only; any existing Battle or Threat checkpoint blocks migration.",
+        "futureOverrideAllowed": true,
+        "futureOverridePolicy": "A new version and explicit migration, never an in-place v2 edit."
+      }
+    },
+    {
+      "heroId": "highwayman",
+      "level": 3,
+      "dodge": 1,
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "canonicalSourceStatus": "SOURCE_UNRESOLVED",
+      "rulingId": "C1C31R-DODGE-HIGHWAYMAN-L3",
+      "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "sourceReferences": [],
+      "reason": "Explicit class baseline 1 at this level. One minimal nonzero design value for all seven non-Crusader classes avoids unsupported per-class distinctions and level scaling.",
+      "riskMetadata": {
+        "classification": "HIGH_COMBAT_BALANCE",
+        "boundedRange": [
+          0,
+          1
+        ],
+        "perAttackHitChangeVsZeroFillPercentagePoints": -10,
+        "saturationNote": "Ten-point reduction only in the unsaturated threshold region. Accuracy 11/12 at Dodge 1 remains 100%.",
+        "rationale": "Balance consequence is quantified, not certified by a complete campaign simulation.",
+        "affectedPaths": [
+          "Boss hit/miss",
+          "Bone hit/miss",
+          "Hero damage/death",
+          "Trinket incoming reaction",
+          "summon/Reanimation consequences",
+          "campaign resource consumption"
+        ],
+        "saveReplayImpact": "Resolved value, authority, ruling ID and recorded rule version must survive saves and rule-only replays.",
+        "migrationImpact": "Explicit pre-encounter upgrade only; any existing Battle or Threat checkpoint blocks migration.",
+        "futureOverrideAllowed": true,
+        "futureOverridePolicy": "A new version and explicit migration, never an in-place v2 edit."
+      }
+    },
+    {
+      "heroId": "hellion",
+      "level": 1,
+      "dodge": 1,
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "canonicalSourceStatus": "OFFICIAL_SOURCE",
+      "rulingId": null,
+      "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "sha256": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+          "region": "Clumsy Axeblade against Hellion: 5 Accuracy minus 1 Dodge",
+          "page": 22
+        }
+      ],
+      "reason": "Frozen source-bound Level I value retained unchanged."
+    },
+    {
+      "heroId": "hellion",
+      "level": 2,
+      "dodge": 1,
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "canonicalSourceStatus": "SOURCE_UNRESOLVED",
+      "rulingId": "C1C31R-DODGE-HELLION-L2",
+      "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "sourceReferences": [],
+      "reason": "Explicit class baseline 1 at this level. One minimal nonzero design value for all seven non-Crusader classes avoids unsupported per-class distinctions and level scaling.",
+      "riskMetadata": {
+        "classification": "HIGH_COMBAT_BALANCE",
+        "boundedRange": [
+          0,
+          1
+        ],
+        "perAttackHitChangeVsZeroFillPercentagePoints": -10,
+        "saturationNote": "Ten-point reduction only in the unsaturated threshold region. Accuracy 11/12 at Dodge 1 remains 100%.",
+        "rationale": "Balance consequence is quantified, not certified by a complete campaign simulation.",
+        "affectedPaths": [
+          "Boss hit/miss",
+          "Bone hit/miss",
+          "Hero damage/death",
+          "Trinket incoming reaction",
+          "summon/Reanimation consequences",
+          "campaign resource consumption"
+        ],
+        "saveReplayImpact": "Resolved value, authority, ruling ID and recorded rule version must survive saves and rule-only replays.",
+        "migrationImpact": "Explicit pre-encounter upgrade only; any existing Battle or Threat checkpoint blocks migration.",
+        "futureOverrideAllowed": true,
+        "futureOverridePolicy": "A new version and explicit migration, never an in-place v2 edit."
+      }
+    },
+    {
+      "heroId": "hellion",
+      "level": 3,
+      "dodge": 1,
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "canonicalSourceStatus": "SOURCE_UNRESOLVED",
+      "rulingId": "C1C31R-DODGE-HELLION-L3",
+      "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "sourceReferences": [],
+      "reason": "Explicit class baseline 1 at this level. One minimal nonzero design value for all seven non-Crusader classes avoids unsupported per-class distinctions and level scaling.",
+      "riskMetadata": {
+        "classification": "HIGH_COMBAT_BALANCE",
+        "boundedRange": [
+          0,
+          1
+        ],
+        "perAttackHitChangeVsZeroFillPercentagePoints": -10,
+        "saturationNote": "Ten-point reduction only in the unsaturated threshold region. Accuracy 11/12 at Dodge 1 remains 100%.",
+        "rationale": "Balance consequence is quantified, not certified by a complete campaign simulation.",
+        "affectedPaths": [
+          "Boss hit/miss",
+          "Bone hit/miss",
+          "Hero damage/death",
+          "Trinket incoming reaction",
+          "summon/Reanimation consequences",
+          "campaign resource consumption"
+        ],
+        "saveReplayImpact": "Resolved value, authority, ruling ID and recorded rule version must survive saves and rule-only replays.",
+        "migrationImpact": "Explicit pre-encounter upgrade only; any existing Battle or Threat checkpoint blocks migration.",
+        "futureOverrideAllowed": true,
+        "futureOverridePolicy": "A new version and explicit migration, never an in-place v2 edit."
+      }
+    },
+    {
+      "heroId": "leper",
+      "level": 1,
+      "dodge": 1,
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "canonicalSourceStatus": "SOURCE_UNRESOLVED",
+      "rulingId": "C1C31R-DODGE-LEPER-L1",
+      "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "sourceReferences": [],
+      "reason": "Explicit class baseline 1 at this level. One minimal nonzero design value for all seven non-Crusader classes avoids unsupported per-class distinctions and level scaling.",
+      "riskMetadata": {
+        "classification": "HIGH_COMBAT_BALANCE",
+        "boundedRange": [
+          0,
+          1
+        ],
+        "perAttackHitChangeVsZeroFillPercentagePoints": -10,
+        "saturationNote": "Ten-point reduction only in the unsaturated threshold region. Accuracy 11/12 at Dodge 1 remains 100%.",
+        "rationale": "Balance consequence is quantified, not certified by a complete campaign simulation.",
+        "affectedPaths": [
+          "Boss hit/miss",
+          "Bone hit/miss",
+          "Hero damage/death",
+          "Trinket incoming reaction",
+          "summon/Reanimation consequences",
+          "campaign resource consumption"
+        ],
+        "saveReplayImpact": "Resolved value, authority, ruling ID and recorded rule version must survive saves and rule-only replays.",
+        "migrationImpact": "Explicit pre-encounter upgrade only; any existing Battle or Threat checkpoint blocks migration.",
+        "futureOverrideAllowed": true,
+        "futureOverridePolicy": "A new version and explicit migration, never an in-place v2 edit."
+      }
+    },
+    {
+      "heroId": "leper",
+      "level": 2,
+      "dodge": 1,
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "canonicalSourceStatus": "SOURCE_UNRESOLVED",
+      "rulingId": "C1C31R-DODGE-LEPER-L2",
+      "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "sourceReferences": [],
+      "reason": "Explicit class baseline 1 at this level. One minimal nonzero design value for all seven non-Crusader classes avoids unsupported per-class distinctions and level scaling.",
+      "riskMetadata": {
+        "classification": "HIGH_COMBAT_BALANCE",
+        "boundedRange": [
+          0,
+          1
+        ],
+        "perAttackHitChangeVsZeroFillPercentagePoints": -10,
+        "saturationNote": "Ten-point reduction only in the unsaturated threshold region. Accuracy 11/12 at Dodge 1 remains 100%.",
+        "rationale": "Balance consequence is quantified, not certified by a complete campaign simulation.",
+        "affectedPaths": [
+          "Boss hit/miss",
+          "Bone hit/miss",
+          "Hero damage/death",
+          "Trinket incoming reaction",
+          "summon/Reanimation consequences",
+          "campaign resource consumption"
+        ],
+        "saveReplayImpact": "Resolved value, authority, ruling ID and recorded rule version must survive saves and rule-only replays.",
+        "migrationImpact": "Explicit pre-encounter upgrade only; any existing Battle or Threat checkpoint blocks migration.",
+        "futureOverrideAllowed": true,
+        "futureOverridePolicy": "A new version and explicit migration, never an in-place v2 edit."
+      }
+    },
+    {
+      "heroId": "leper",
+      "level": 3,
+      "dodge": 1,
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "canonicalSourceStatus": "SOURCE_UNRESOLVED",
+      "rulingId": "C1C31R-DODGE-LEPER-L3",
+      "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "sourceReferences": [],
+      "reason": "Explicit class baseline 1 at this level. One minimal nonzero design value for all seven non-Crusader classes avoids unsupported per-class distinctions and level scaling.",
+      "riskMetadata": {
+        "classification": "HIGH_COMBAT_BALANCE",
+        "boundedRange": [
+          0,
+          1
+        ],
+        "perAttackHitChangeVsZeroFillPercentagePoints": -10,
+        "saturationNote": "Ten-point reduction only in the unsaturated threshold region. Accuracy 11/12 at Dodge 1 remains 100%.",
+        "rationale": "Balance consequence is quantified, not certified by a complete campaign simulation.",
+        "affectedPaths": [
+          "Boss hit/miss",
+          "Bone hit/miss",
+          "Hero damage/death",
+          "Trinket incoming reaction",
+          "summon/Reanimation consequences",
+          "campaign resource consumption"
+        ],
+        "saveReplayImpact": "Resolved value, authority, ruling ID and recorded rule version must survive saves and rule-only replays.",
+        "migrationImpact": "Explicit pre-encounter upgrade only; any existing Battle or Threat checkpoint blocks migration.",
+        "futureOverrideAllowed": true,
+        "futureOverridePolicy": "A new version and explicit migration, never an in-place v2 edit."
+      }
+    },
+    {
+      "heroId": "occultist",
+      "level": 1,
+      "dodge": 1,
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "canonicalSourceStatus": "SOURCE_UNRESOLVED",
+      "rulingId": "C1C31R-DODGE-OCCULTIST-L1",
+      "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "sourceReferences": [],
+      "reason": "Explicit class baseline 1 at this level. One minimal nonzero design value for all seven non-Crusader classes avoids unsupported per-class distinctions and level scaling.",
+      "riskMetadata": {
+        "classification": "HIGH_COMBAT_BALANCE",
+        "boundedRange": [
+          0,
+          1
+        ],
+        "perAttackHitChangeVsZeroFillPercentagePoints": -10,
+        "saturationNote": "Ten-point reduction only in the unsaturated threshold region. Accuracy 11/12 at Dodge 1 remains 100%.",
+        "rationale": "Balance consequence is quantified, not certified by a complete campaign simulation.",
+        "affectedPaths": [
+          "Boss hit/miss",
+          "Bone hit/miss",
+          "Hero damage/death",
+          "Trinket incoming reaction",
+          "summon/Reanimation consequences",
+          "campaign resource consumption"
+        ],
+        "saveReplayImpact": "Resolved value, authority, ruling ID and recorded rule version must survive saves and rule-only replays.",
+        "migrationImpact": "Explicit pre-encounter upgrade only; any existing Battle or Threat checkpoint blocks migration.",
+        "futureOverrideAllowed": true,
+        "futureOverridePolicy": "A new version and explicit migration, never an in-place v2 edit."
+      }
+    },
+    {
+      "heroId": "occultist",
+      "level": 2,
+      "dodge": 1,
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "canonicalSourceStatus": "SOURCE_UNRESOLVED",
+      "rulingId": "C1C31R-DODGE-OCCULTIST-L2",
+      "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "sourceReferences": [],
+      "reason": "Explicit class baseline 1 at this level. One minimal nonzero design value for all seven non-Crusader classes avoids unsupported per-class distinctions and level scaling.",
+      "riskMetadata": {
+        "classification": "HIGH_COMBAT_BALANCE",
+        "boundedRange": [
+          0,
+          1
+        ],
+        "perAttackHitChangeVsZeroFillPercentagePoints": -10,
+        "saturationNote": "Ten-point reduction only in the unsaturated threshold region. Accuracy 11/12 at Dodge 1 remains 100%.",
+        "rationale": "Balance consequence is quantified, not certified by a complete campaign simulation.",
+        "affectedPaths": [
+          "Boss hit/miss",
+          "Bone hit/miss",
+          "Hero damage/death",
+          "Trinket incoming reaction",
+          "summon/Reanimation consequences",
+          "campaign resource consumption"
+        ],
+        "saveReplayImpact": "Resolved value, authority, ruling ID and recorded rule version must survive saves and rule-only replays.",
+        "migrationImpact": "Explicit pre-encounter upgrade only; any existing Battle or Threat checkpoint blocks migration.",
+        "futureOverrideAllowed": true,
+        "futureOverridePolicy": "A new version and explicit migration, never an in-place v2 edit."
+      }
+    },
+    {
+      "heroId": "occultist",
+      "level": 3,
+      "dodge": 1,
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "canonicalSourceStatus": "SOURCE_UNRESOLVED",
+      "rulingId": "C1C31R-DODGE-OCCULTIST-L3",
+      "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "sourceReferences": [],
+      "reason": "Explicit class baseline 1 at this level. One minimal nonzero design value for all seven non-Crusader classes avoids unsupported per-class distinctions and level scaling.",
+      "riskMetadata": {
+        "classification": "HIGH_COMBAT_BALANCE",
+        "boundedRange": [
+          0,
+          1
+        ],
+        "perAttackHitChangeVsZeroFillPercentagePoints": -10,
+        "saturationNote": "Ten-point reduction only in the unsaturated threshold region. Accuracy 11/12 at Dodge 1 remains 100%.",
+        "rationale": "Balance consequence is quantified, not certified by a complete campaign simulation.",
+        "affectedPaths": [
+          "Boss hit/miss",
+          "Bone hit/miss",
+          "Hero damage/death",
+          "Trinket incoming reaction",
+          "summon/Reanimation consequences",
+          "campaign resource consumption"
+        ],
+        "saveReplayImpact": "Resolved value, authority, ruling ID and recorded rule version must survive saves and rule-only replays.",
+        "migrationImpact": "Explicit pre-encounter upgrade only; any existing Battle or Threat checkpoint blocks migration.",
+        "futureOverrideAllowed": true,
+        "futureOverridePolicy": "A new version and explicit migration, never an in-place v2 edit."
+      }
+    },
+    {
+      "heroId": "plague-doctor",
+      "level": 1,
+      "dodge": 1,
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "canonicalSourceStatus": "SOURCE_UNRESOLVED",
+      "rulingId": "C1C31R-DODGE-PLAGUE-DOCTOR-L1",
+      "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "sourceReferences": [],
+      "reason": "Explicit class baseline 1 at this level. One minimal nonzero design value for all seven non-Crusader classes avoids unsupported per-class distinctions and level scaling.",
+      "riskMetadata": {
+        "classification": "HIGH_COMBAT_BALANCE",
+        "boundedRange": [
+          0,
+          1
+        ],
+        "perAttackHitChangeVsZeroFillPercentagePoints": -10,
+        "saturationNote": "Ten-point reduction only in the unsaturated threshold region. Accuracy 11/12 at Dodge 1 remains 100%.",
+        "rationale": "Balance consequence is quantified, not certified by a complete campaign simulation.",
+        "affectedPaths": [
+          "Boss hit/miss",
+          "Bone hit/miss",
+          "Hero damage/death",
+          "Trinket incoming reaction",
+          "summon/Reanimation consequences",
+          "campaign resource consumption"
+        ],
+        "saveReplayImpact": "Resolved value, authority, ruling ID and recorded rule version must survive saves and rule-only replays.",
+        "migrationImpact": "Explicit pre-encounter upgrade only; any existing Battle or Threat checkpoint blocks migration.",
+        "futureOverrideAllowed": true,
+        "futureOverridePolicy": "A new version and explicit migration, never an in-place v2 edit."
+      }
+    },
+    {
+      "heroId": "plague-doctor",
+      "level": 2,
+      "dodge": 1,
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "canonicalSourceStatus": "SOURCE_UNRESOLVED",
+      "rulingId": "C1C31R-DODGE-PLAGUE-DOCTOR-L2",
+      "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "sourceReferences": [],
+      "reason": "Explicit class baseline 1 at this level. One minimal nonzero design value for all seven non-Crusader classes avoids unsupported per-class distinctions and level scaling.",
+      "riskMetadata": {
+        "classification": "HIGH_COMBAT_BALANCE",
+        "boundedRange": [
+          0,
+          1
+        ],
+        "perAttackHitChangeVsZeroFillPercentagePoints": -10,
+        "saturationNote": "Ten-point reduction only in the unsaturated threshold region. Accuracy 11/12 at Dodge 1 remains 100%.",
+        "rationale": "Balance consequence is quantified, not certified by a complete campaign simulation.",
+        "affectedPaths": [
+          "Boss hit/miss",
+          "Bone hit/miss",
+          "Hero damage/death",
+          "Trinket incoming reaction",
+          "summon/Reanimation consequences",
+          "campaign resource consumption"
+        ],
+        "saveReplayImpact": "Resolved value, authority, ruling ID and recorded rule version must survive saves and rule-only replays.",
+        "migrationImpact": "Explicit pre-encounter upgrade only; any existing Battle or Threat checkpoint blocks migration.",
+        "futureOverrideAllowed": true,
+        "futureOverridePolicy": "A new version and explicit migration, never an in-place v2 edit."
+      }
+    },
+    {
+      "heroId": "plague-doctor",
+      "level": 3,
+      "dodge": 1,
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "canonicalSourceStatus": "SOURCE_UNRESOLVED",
+      "rulingId": "C1C31R-DODGE-PLAGUE-DOCTOR-L3",
+      "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "sourceReferences": [],
+      "reason": "Explicit class baseline 1 at this level. One minimal nonzero design value for all seven non-Crusader classes avoids unsupported per-class distinctions and level scaling.",
+      "riskMetadata": {
+        "classification": "HIGH_COMBAT_BALANCE",
+        "boundedRange": [
+          0,
+          1
+        ],
+        "perAttackHitChangeVsZeroFillPercentagePoints": -10,
+        "saturationNote": "Ten-point reduction only in the unsaturated threshold region. Accuracy 11/12 at Dodge 1 remains 100%.",
+        "rationale": "Balance consequence is quantified, not certified by a complete campaign simulation.",
+        "affectedPaths": [
+          "Boss hit/miss",
+          "Bone hit/miss",
+          "Hero damage/death",
+          "Trinket incoming reaction",
+          "summon/Reanimation consequences",
+          "campaign resource consumption"
+        ],
+        "saveReplayImpact": "Resolved value, authority, ruling ID and recorded rule version must survive saves and rule-only replays.",
+        "migrationImpact": "Explicit pre-encounter upgrade only; any existing Battle or Threat checkpoint blocks migration.",
+        "futureOverrideAllowed": true,
+        "futureOverridePolicy": "A new version and explicit migration, never an in-place v2 edit."
+      }
+    },
+    {
+      "heroId": "grave-robber",
+      "level": 1,
+      "dodge": 1,
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "canonicalSourceStatus": "SOURCE_UNRESOLVED",
+      "rulingId": "C1C31R-DODGE-GRAVE-ROBBER-L1",
+      "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "sourceReferences": [],
+      "reason": "Explicit class baseline 1 at this level. One minimal nonzero design value for all seven non-Crusader classes avoids unsupported per-class distinctions and level scaling.",
+      "riskMetadata": {
+        "classification": "HIGH_COMBAT_BALANCE",
+        "boundedRange": [
+          0,
+          1
+        ],
+        "perAttackHitChangeVsZeroFillPercentagePoints": -10,
+        "saturationNote": "Ten-point reduction only in the unsaturated threshold region. Accuracy 11/12 at Dodge 1 remains 100%.",
+        "rationale": "Balance consequence is quantified, not certified by a complete campaign simulation.",
+        "affectedPaths": [
+          "Boss hit/miss",
+          "Bone hit/miss",
+          "Hero damage/death",
+          "Trinket incoming reaction",
+          "summon/Reanimation consequences",
+          "campaign resource consumption"
+        ],
+        "saveReplayImpact": "Resolved value, authority, ruling ID and recorded rule version must survive saves and rule-only replays.",
+        "migrationImpact": "Explicit pre-encounter upgrade only; any existing Battle or Threat checkpoint blocks migration.",
+        "futureOverrideAllowed": true,
+        "futureOverridePolicy": "A new version and explicit migration, never an in-place v2 edit."
+      }
+    },
+    {
+      "heroId": "grave-robber",
+      "level": 2,
+      "dodge": 1,
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "canonicalSourceStatus": "SOURCE_UNRESOLVED",
+      "rulingId": "C1C31R-DODGE-GRAVE-ROBBER-L2",
+      "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "sourceReferences": [],
+      "reason": "Explicit class baseline 1 at this level. One minimal nonzero design value for all seven non-Crusader classes avoids unsupported per-class distinctions and level scaling.",
+      "riskMetadata": {
+        "classification": "HIGH_COMBAT_BALANCE",
+        "boundedRange": [
+          0,
+          1
+        ],
+        "perAttackHitChangeVsZeroFillPercentagePoints": -10,
+        "saturationNote": "Ten-point reduction only in the unsaturated threshold region. Accuracy 11/12 at Dodge 1 remains 100%.",
+        "rationale": "Balance consequence is quantified, not certified by a complete campaign simulation.",
+        "affectedPaths": [
+          "Boss hit/miss",
+          "Bone hit/miss",
+          "Hero damage/death",
+          "Trinket incoming reaction",
+          "summon/Reanimation consequences",
+          "campaign resource consumption"
+        ],
+        "saveReplayImpact": "Resolved value, authority, ruling ID and recorded rule version must survive saves and rule-only replays.",
+        "migrationImpact": "Explicit pre-encounter upgrade only; any existing Battle or Threat checkpoint blocks migration.",
+        "futureOverrideAllowed": true,
+        "futureOverridePolicy": "A new version and explicit migration, never an in-place v2 edit."
+      }
+    },
+    {
+      "heroId": "grave-robber",
+      "level": 3,
+      "dodge": 1,
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "canonicalSourceStatus": "SOURCE_UNRESOLVED",
+      "rulingId": "C1C31R-DODGE-GRAVE-ROBBER-L3",
+      "ruleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "sourceReferences": [],
+      "reason": "Explicit class baseline 1 at this level. One minimal nonzero design value for all seven non-Crusader classes avoids unsupported per-class distinctions and level scaling.",
+      "riskMetadata": {
+        "classification": "HIGH_COMBAT_BALANCE",
+        "boundedRange": [
+          0,
+          1
+        ],
+        "perAttackHitChangeVsZeroFillPercentagePoints": -10,
+        "saturationNote": "Ten-point reduction only in the unsaturated threshold region. Accuracy 11/12 at Dodge 1 remains 100%.",
+        "rationale": "Balance consequence is quantified, not certified by a complete campaign simulation.",
+        "affectedPaths": [
+          "Boss hit/miss",
+          "Bone hit/miss",
+          "Hero damage/death",
+          "Trinket incoming reaction",
+          "summon/Reanimation consequences",
+          "campaign resource consumption"
+        ],
+        "saveReplayImpact": "Resolved value, authority, ruling ID and recorded rule version must survive saves and rule-only replays.",
+        "migrationImpact": "Explicit pre-encounter upgrade only; any existing Battle or Threat checkpoint blocks migration.",
+        "futureOverrideAllowed": true,
+        "futureOverridePolicy": "A new version and explicit migration, never an in-place v2 edit."
+      }
+    }
+  ],
+  "fallbackAllowed": false,
+  "runtimeLevelInheritanceAllowed": false,
+  "designRationale": "Class equality is explicitly ruled in 24 rows. Unknown class baseline 1 matches the modal known value, avoids zero-fill difficulty shifts in the unsaturated region, and adds no level-up evasion benefit."
+}

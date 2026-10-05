@@ -1,0 +1,299 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C38R1",
+  "baseline": "dcf017cb2065440251caad8d31075b99bc6355e0",
+  "intakeDate": "2026-10-02",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "contractVersion": "C1C38R1-OFFICIAL-INTAKE-v1",
+  "runtimeImplemented": false,
+  "runtimeImplementationAuthorized": false,
+  "productionReady": false,
+  "playerRouteEnabled": false,
+  "gateAPassed": false,
+  "C1C39Allowed": false,
+  "gaps": [
+    {
+      "id": "actor.unprintedResistanceDefaults",
+      "status": "SOURCE_UNRESOLVED",
+      "canonical": false,
+      "executionRequired": true,
+      "blocking": true,
+      "reason": "Core p21 and Monster anatomy p24 define listed symbols, but no explicit omitted-symbol default; preserve absence without numeric zero."
+    },
+    {
+      "id": "skills.returnExclusiveTrigger",
+      "status": "SOURCE_UNRESOLVED",
+      "canonical": false,
+      "executionRequired": true,
+      "blocking": true,
+      "reason": "COM p8 corroborates the first-turn free trigger. Neither it nor the Ability proves exclusivity against every additional trigger; retain conservative contract."
+    },
+    {
+      "id": "encounter.reward",
+      "status": "SOURCE_UNRESOLVED",
+      "canonical": false,
+      "executionRequired": true,
+      "blocking": true,
+      "reason": "COM p6 grants two Shards per Monster kill. Thing defeat gives victory, but terminal reward/loot handling (including Room 3 chest markers) is not fully specified."
+    },
+    {
+      "id": "encounter.escapeOrFailure",
+      "status": "SOURCE_UNRESOLVED",
+      "canonical": false,
+      "executionRequired": true,
+      "blocking": true,
+      "reason": "COM p4 explicitly ends the session in defeat if a Hero dies. Full escape/retreat handling remains unspecified; no campaign retreat imported."
+    },
+    {
+      "id": "encounter.cleanup",
+      "status": "SOURCE_UNRESOLVED",
+      "canonical": false,
+      "executionRequired": true,
+      "blocking": true,
+      "reason": "COM p8 ends the fight on Thing defeat; destination/reuse of surviving summons, physical cards and tokens is not stated."
+    },
+    {
+      "id": "summon.eligiblePool",
+      "status": "SOURCE_UNRESOLVED",
+      "canonical": false,
+      "executionRequired": true,
+      "blocking": true,
+      "reason": "COM p8 names a Level I Aberration spawn; frozen official Ability requires as many Monsters as possible including at least one Aberration I. No rule explicitly closes other members, pool Levels, count/selection precedence, exhaustion, active-copy sharing, overflow or return destination. No silent source precedence or unrestricted pool."
+    },
+    {
+      "id": "summon.otherEligibleMonsters",
+      "status": "SOURCE_UNRESOLVED",
+      "canonical": false,
+      "executionRequired": true,
+      "blocking": true,
+      "reason": "COM p8 names a Level I Aberration spawn; frozen official Ability requires as many Monsters as possible including at least one Aberration I. No rule explicitly closes other members, pool Levels, count/selection precedence, exhaustion, active-copy sharing, overflow or return destination. No silent source precedence or unrestricted pool."
+    },
+    {
+      "id": "summon.poolLevel",
+      "status": "SOURCE_UNRESOLVED",
+      "canonical": false,
+      "executionRequired": true,
+      "blocking": true,
+      "reason": "COM p8 names a Level I Aberration spawn; frozen official Ability requires as many Monsters as possible including at least one Aberration I. No rule explicitly closes other members, pool Levels, count/selection precedence, exhaustion, active-copy sharing, overflow or return destination. No silent source precedence or unrestricted pool."
+    },
+    {
+      "id": "summon.duplicateDefinitions",
+      "status": "SOURCE_UNRESOLVED",
+      "canonical": false,
+      "executionRequired": true,
+      "blocking": true,
+      "reason": "COM p8 names a Level I Aberration spawn; frozen official Ability requires as many Monsters as possible including at least one Aberration I. No rule explicitly closes other members, pool Levels, count/selection precedence, exhaustion, active-copy sharing, overflow or return destination. No silent source precedence or unrestricted pool."
+    },
+    {
+      "id": "summon.countAlgorithm",
+      "status": "SOURCE_UNRESOLVED",
+      "canonical": false,
+      "executionRequired": true,
+      "blocking": true,
+      "reason": "COM p8 names a Level I Aberration spawn; frozen official Ability requires as many Monsters as possible including at least one Aberration I. No rule explicitly closes other members, pool Levels, count/selection precedence, exhaustion, active-copy sharing, overflow or return destination. No silent source precedence or unrestricted pool."
+    },
+    {
+      "id": "summon.mandatoryAberrationSelection",
+      "status": "SOURCE_UNRESOLVED",
+      "canonical": false,
+      "executionRequired": true,
+      "blocking": true,
+      "reason": "COM p8 names a Level I Aberration spawn; frozen official Ability requires as many Monsters as possible including at least one Aberration I. No rule explicitly closes other members, pool Levels, count/selection precedence, exhaustion, active-copy sharing, overflow or return destination. No silent source precedence or unrestricted pool."
+    },
+    {
+      "id": "summon.exactlyOneVacancy",
+      "status": "SOURCE_UNRESOLVED",
+      "canonical": false,
+      "executionRequired": true,
+      "blocking": true,
+      "reason": "COM p8 names a Level I Aberration spawn; frozen official Ability requires as many Monsters as possible including at least one Aberration I. No rule explicitly closes other members, pool Levels, count/selection precedence, exhaustion, active-copy sharing, overflow or return destination. No silent source precedence or unrestricted pool."
+    },
+    {
+      "id": "summon.multipleVacancies",
+      "status": "SOURCE_UNRESOLVED",
+      "canonical": false,
+      "executionRequired": true,
+      "blocking": true,
+      "reason": "COM p8 names a Level I Aberration spawn; frozen official Ability requires as many Monsters as possible including at least one Aberration I. No rule explicitly closes other members, pool Levels, count/selection precedence, exhaustion, active-copy sharing, overflow or return destination. No silent source precedence or unrestricted pool."
+    },
+    {
+      "id": "summon.noAberrationSupply",
+      "status": "SOURCE_UNRESOLVED",
+      "canonical": false,
+      "executionRequired": true,
+      "blocking": true,
+      "reason": "COM p8 names a Level I Aberration spawn; frozen official Ability requires as many Monsters as possible including at least one Aberration I. No rule explicitly closes other members, pool Levels, count/selection precedence, exhaustion, active-copy sharing, overflow or return destination. No silent source precedence or unrestricted pool."
+    },
+    {
+      "id": "summon.alreadyPresentAberration",
+      "status": "SOURCE_UNRESOLVED",
+      "canonical": false,
+      "executionRequired": true,
+      "blocking": true,
+      "reason": "COM p8 names a Level I Aberration spawn; frozen official Ability requires as many Monsters as possible including at least one Aberration I. No rule explicitly closes other members, pool Levels, count/selection precedence, exhaustion, active-copy sharing, overflow or return destination. No silent source precedence or unrestricted pool."
+    },
+    {
+      "id": "summon.multipleAberrationCopies",
+      "status": "SOURCE_UNRESOLVED",
+      "canonical": false,
+      "executionRequired": true,
+      "blocking": true,
+      "reason": "COM p8 names a Level I Aberration spawn; frozen official Ability requires as many Monsters as possible including at least one Aberration I. No rule explicitly closes other members, pool Levels, count/selection precedence, exhaustion, active-copy sharing, overflow or return destination. No silent source precedence or unrestricted pool."
+    },
+    {
+      "id": "summon.priorityAndOverflow",
+      "status": "SOURCE_UNRESOLVED",
+      "canonical": false,
+      "executionRequired": true,
+      "blocking": true,
+      "reason": "COM p8 names a Level I Aberration spawn; frozen official Ability requires as many Monsters as possible including at least one Aberration I. No rule explicitly closes other members, pool Levels, count/selection precedence, exhaustion, active-copy sharing, overflow or return destination. No silent source precedence or unrestricted pool."
+    },
+    {
+      "id": "summon.activeCopiesReduceSupply",
+      "status": "SOURCE_UNRESOLVED",
+      "canonical": false,
+      "executionRequired": true,
+      "blocking": true,
+      "reason": "COM p8 names a Level I Aberration spawn; frozen official Ability requires as many Monsters as possible including at least one Aberration I. No rule explicitly closes other members, pool Levels, count/selection precedence, exhaustion, active-copy sharing, overflow or return destination. No silent source precedence or unrestricted pool."
+    },
+    {
+      "id": "summon.copyReturnDestination",
+      "status": "SOURCE_UNRESOLVED",
+      "canonical": false,
+      "executionRequired": true,
+      "blocking": true,
+      "reason": "COM p8 names a Level I Aberration spawn; frozen official Ability requires as many Monsters as possible including at least one Aberration I. No rule explicitly closes other members, pool Levels, count/selection precedence, exhaustion, active-copy sharing, overflow or return destination. No silent source precedence or unrestricted pool."
+    },
+    {
+      "id": "physical.aberrationCopies",
+      "status": "SOURCE_UNRESOLVED",
+      "canonical": false,
+      "executionRequired": true,
+      "blocking": true,
+      "reason": "COM p3 binds two miniature pieces shared across Levels; print pp8/18 bind one stat-card print slot per Level. Neither establishes two Level I physical combat copies nor simultaneous eligibility."
+    },
+    {
+      "id": "physical.otherMonsterCopies",
+      "status": "SOURCE_UNRESOLVED",
+      "canonical": false,
+      "executionRequired": true,
+      "blocking": true,
+      "reason": "COM p3 binds finite miniature counts by named Monster. Which definitions Return can summon, and Level-specific card/miniature ownership remain unresolved."
+    },
+    {
+      "id": "physical.specialTokens",
+      "status": "SOURCE_UNRESOLVED",
+      "canonical": false,
+      "executionRequired": true,
+      "blocking": true,
+      "reason": "Rules p3 lists 44 Shards,22 Healing Crystals,8 Focus Point/Aberration,10 Curio,1 Light,14 Buff (=99). Box p2 says 33 Tokens; scope/count conflict remains open."
+    },
+    {
+      "id": "aberration.physicalCopySupply",
+      "status": "SOURCE_UNRESOLVED",
+      "canonical": false,
+      "executionRequired": true,
+      "blocking": true,
+      "reason": "Two Aberration miniatures and Level I/II stat prints are bound; how those pieces share Level-specific active copies and return supply remains unresolved."
+    },
+    {
+      "id": "aberration.otherPoolMembership",
+      "status": "SOURCE_UNRESOLVED",
+      "canonical": false,
+      "executionRequired": true,
+      "blocking": true,
+      "reason": "COM p8 names a Level I Aberration spawn; frozen official Ability requires as many Monsters as possible including at least one Aberration I. No rule explicitly closes other members, pool Levels, count/selection precedence, exhaustion, active-copy sharing, overflow or return destination. No silent source precedence or unrestricted pool."
+    }
+  ],
+  "conflicts": [
+    {
+      "id": "RETURN_SUMMON_SCOPE",
+      "authority": "OFFICIAL_SOURCE_CONTRACT_REVIEW_REQUIRED",
+      "canonicalResolution": false,
+      "sources": [
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 8,
+          "originalPage": 8,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-ABILITY",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_CARDS_70_120_Boss_Abilities_FRONT.pdf",
+          "sha256": "42d826a02542848ef46afeb8742cd0f3092437860144065307f48ec885fd030f",
+          "page": 4,
+          "originalPage": 4,
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "applicability": "Independent official print corroborates frozen Thing Identity/Ability; does not replace C1C38 literals."
+        }
+      ],
+      "literals": [
+        "will spawn a Level 1 Crystalline Abberation",
+        "summon as many monsters as possible ... including at least one Crystalline Aberration I"
+      ],
+      "review": "Minimum I member is compatible; exhaustive pool/count and precedence are not resolved. Do not replace the frozen Ability quantifier or claim exactly one total spawn.",
+      "blocksPromotion": true
+    },
+    {
+      "id": "TOKEN_CENSUS_SCOPE",
+      "authority": "OFFICIAL_SOURCE_CONTRACT_REVIEW_REQUIRED",
+      "canonicalResolution": false,
+      "sources": [
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 3,
+          "originalPage": 3,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-BOX",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_BOX.pdf",
+          "sha256": "722365df1b8189d75f732bd10bc1fe255cacb4f1ba7e98de6fac79df68d02877",
+          "page": 2,
+          "originalPage": 2,
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "applicability": "Standalone mode explicitly outside main campaign; aggregate components only. Box token total conflicts with rules list."
+        }
+      ],
+      "literals": [
+        "44 + 22 + 8 + 10 + 1 + 14 tokens",
+        "33 Tokens"
+      ],
+      "review": "Record both publisher counts; do not choose a total or infinite supply.",
+      "blocksPromotion": true
+    }
+  ],
+  "unapprovedDigitalFields": [
+    "scheduler.interruptionAndResume",
+    "scheduler.reactionDeathOrdering",
+    "WEAKENING_SHARD.samePhaseSerialization",
+    "RETURN_TO_THE_STARS.samePhaseSerialization",
+    "RETURN_TO_THE_STARS.crowdedAreaTie",
+    "physical.ownershipLedger",
+    "save.round",
+    "save.normalActionOrdinal",
+    "save.freeActionPending",
+    "save.summonTransaction",
+    "save.summonCursor",
+    "save.candidatePhysicalCopies",
+    "save.selectedCopies",
+    "save.placementCursor",
+    "save.postureOccupancy",
+    "save.pendingTargetSelection",
+    "save.pendingAttack",
+    "save.rngCheckpoint",
+    "save.causalEvents",
+    "save.encounterLifecycle",
+    "save.rulingVersion",
+    "save.staleChoiceRejection",
+    "save.reloadBehavior",
+    "save.transactionIdentity"
+  ],
+  "sourceBlockersRemaining": 24
+}

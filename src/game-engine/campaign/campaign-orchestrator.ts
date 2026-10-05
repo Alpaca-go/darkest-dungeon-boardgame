@@ -29,6 +29,7 @@ import {
   shouldDrawThreatForCurrentAct,
   threatDrawTransactionIds,
   withThreatDrawHistory,
+  usesProductionThreatPool,
 } from './threat-selection';
 import { createId, nowIso } from '../random';
 import { pushLog } from '../log';
@@ -115,7 +116,7 @@ export function syncCampaignProgressMirrors(campaign: CampaignState): CampaignSt
 
 const TRANSACTION_HISTORY_LIMIT = 100;
 
-function withTransactionRecorded(
+export function withTransactionRecorded(
   campaign: CampaignState,
   transactionId: string,
 ): CampaignState {
@@ -611,6 +612,12 @@ export function advanceCampaignAfterBoss(
     now,
     transactionId: threatDrawTransactionIds.forAct(campaign.id, nextAct),
   });
+  // Commit the earned Act transition while holding the next, unbound production
+  // Threat selection. Never substitute an unrelated prototype to grant Boss victory.
+  if (!drawResult.ok && drawResult.reason === 'empty-pool' && usesProductionThreatPool(next)) {
+    next = syncCampaignProgressMirrors(withTransactionRecorded(next, transactionId));
+    return { ok: true, campaign: next, transactionId, alreadyApplied: false, error: null };
+  }
   if (!drawResult.ok) {
     return {
       ok: false,
@@ -675,6 +682,13 @@ export function finalizeQuestReturnToHamlet(
   },
 ): CampaignCommandResult {
   const now = input.now ?? nowIso();
+  const committedPlayerBoss=campaign.bossEncounterHistory?.find(e=>e.checkpointContext?.playerRouteVersion
+    && e.checkpointContext.questRunId===input.questRunId && e.cleanupState.completed
+    && e.cleanupState.campaignTransactionId===campaignTransactionIds.bossVictory(campaign.id,input.questRunId));
+  // The normal production Battle settlement already committed victory and its earned Act transition.
+  if(input.questId===FACE_THE_THREAT_QUEST_ID&&committedPlayerBoss
+    &&hasTransaction(campaign,committedPlayerBoss.cleanupState.campaignTransactionId!))
+    return {ok:true,campaign,transactionId:committedPlayerBoss.cleanupState.campaignTransactionId!,alreadyApplied:true,error:null};
 
   if (isStandardQuestId(input.questId)) {
     return finalizeQuestProgress(campaign, {

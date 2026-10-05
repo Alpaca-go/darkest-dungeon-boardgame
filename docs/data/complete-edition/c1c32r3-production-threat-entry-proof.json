@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R3",
+  "status": "SCOPED_ENTRY_PASS",
+  "fullProductPathPassed": false,
+  "unitCommand": "npx vitest run src/audit/c1c32r3-production-entry.test.ts --maxWorkers=2 --minWorkers=2",
+  "unitTestFile": "src/audit/c1c32r3-production-entry.test.ts",
+  "unitTestsPassed": 22,
+  "unitFixtureScope": "Campaign prerequisites are prepared and invalid boundary inputs are deliberately injected; not player-route proof",
+  "browserCommand": "npx playwright test e2e/c1c32r3-production-entry.spec.ts",
+  "browserTestFile": "e2e/c1c32r3-production-entry.spec.ts",
+  "browserTestsPassed": 1,
+  "browserFixtureStateInjection": false,
+  "browserProvenRoute": [
+    "New Complete Edition campaign",
+    "Party selection",
+    "Default skill loadout",
+    "Quest Select",
+    "Explicit Hero Dodge v2 selection",
+    "Explicit Ruins v6 selection",
+    "Page reload with persisted selections"
+  ],
+  "browserUnprovenRoute": [
+    "Face the Threat selection",
+    "Guarded ordinary Threat Battle",
+    "Captain injection",
+    "Reanimation",
+    "Preparation Day / Graveyard",
+    "Boss Room and Boss victory"
+  ],
+  "rules": {
+    "heroDodge": "C1C31-DIGITAL-DEFAULT-v2",
+    "ordinaryRuins": "C1C32R2C-R-DIGITAL-DEFAULT-v6",
+    "soleV6MigrationAuthority": "explicitlySelectRuinsV6",
+    "newRulingVersion": false
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C37",
+  "contractVersion": "C1C37-BOSS-SUCCESSOR-COMPATIBILITY-v1",
+  "baseline": "87f123b881fbbc44d79c312fe1aebb34eadea240",
+  "version": "C1C37-PRODUCTION-BOSS-CAPABILITIES-v1",
+  "authority": "PRODUCTION_CONFIGURATION",
+  "acceptanceEvidenceIsRuntimeAuthority": false,
+  "capabilities": [
+    {
+      "familyId": "necromancer",
+      "bossRuleSetVersions": [
+        "C1C28-DIGITAL-DEFAULT-v1",
+        "C1C31-DIGITAL-DEFAULT-v2"
+      ],
+      "playerRouteEnabled": true
+    },
+    {
+      "familyId": "prophet",
+      "bossRuleSetVersions": [
+        "C1C35R2-PROPHET-DIGITAL-DEFAULT-v1"
+      ],
+      "playerRouteEnabled": true
+    }
+  ],
+  "recognizedCompatibilityVersions": {
+    "necromancer": [
+      "C1C28-DIGITAL-DEFAULT-v1",
+      "C1C31-DIGITAL-DEFAULT-v2"
+    ],
+    "prophet": [
+      "C1C35R2-PROPHET-DIGITAL-DEFAULT-v1"
+    ]
+  },
+  "dependencies": [
+    {
+      "family": "necromancer",
+      "versions": [
+        {
+          "bossRuleSetVersion": "C1C28-DIGITAL-DEFAULT-v1",
+          "heroDodgeRuleSetVersion": "C1C28-DIGITAL-DEFAULT-v1"
+        },
+        {
+          "bossRuleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+          "heroDodgeRuleSetVersion": "C1C31-DIGITAL-DEFAULT-v2"
+        }
+      ]
+    },
+    {
+      "family": "prophet",
+      "versions": [
+        {
+          "bossRuleSetVersion": "C1C35R2-PROPHET-DIGITAL-DEFAULT-v1",
+          "heroDodgeRuleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+          "actorOccupancyRuleSetVersion": "C1C35R2-PROPHET-AREA-C-CAPACITY-v1"
+        }
+      ]
+    }
+  ],
+  "sharedContracts": [
+    "explicit EncounterRuleDependencies",
+    "per-family selectRuleSetVersion(campaign)",
+    "capability family/version gate",
+    "save dependency validation"
+  ],
+  "familySpecificContracts": [
+    "Hero entry geometry",
+    "Quest eligibility / content set / region",
+    "Room reservation",
+    "Threat hooks",
+    "number of campaign Levels"
+  ],
+  "dependencyReview": [
+    {
+      "path": "src/game-engine/bosses/definitions.ts",
+      "finding": "Ruleset selection moved to per-family adapter; dependencies(version) keeps Boss / Hero Dodge / occupancy identities independent."
+    },
+    {
+      "path": "src/data/content-selector.ts",
+      "finding": "The accepted Face the Threat route currently requires core / Ruins / Hero Dodge v2. This is a route-specific contract, not universal Boss eligibility."
+    },
+    {
+      "path": "src/game-engine/bosses/production-dependency-gate.ts",
+      "finding": "Only the two accepted family gates are dispatched. A new encounter model needs its own reviewed gate before registry promotion."
+    },
+    {
+      "path": "src/game-engine/bosses/room-storage.ts",
+      "finding": "Shared ownership / lifecycle ledger is reusable; one reserved objective Room and Levels I–III must not be presumed for expansion encounters."
+    }
+  ],
+  "noImplicitBossEqualsHeroDodge": true,
+  "unacceptedFamiliesFailClosed": true
+}

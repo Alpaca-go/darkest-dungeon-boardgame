@@ -1,0 +1,2828 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.5-C2A",
+  "baseline": "7f4001b956cac441778dbb457cc33041f9057ad5",
+  "sourcePolicyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "reviewDate": "2026-10-02",
+  "runtimeModified": false,
+  "prototypePromoted": false,
+  "runtimeImplementationAuthorized": false,
+  "identity": {
+    "heroClassId": "shieldbreaker",
+    "printedName": "SHIELDBREAKER",
+    "discoveryDisplayName": "Shieldbreaker",
+    "sourceGuid": "031448",
+    "ttsPath": "/ObjectStates/49/ContainedObjects/0",
+    "status": "OFFICIAL_SOURCE",
+    "sourceReferences": [
+      {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+        "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+        "page": 32,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      }
+    ],
+    "contentSet": {
+      "id": "weald",
+      "kind": "EXPANSION",
+      "officialSource": {
+        "sourceId": "DD_EN_WEALD_BOX",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_WEALD_BOX-p2.pdf",
+        "sha256": "64ddfa610fa95ce5acf9bd38245f952c1ff4d479c7efda11f187690a16f14a70",
+        "page": 1,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "productionEligibilityDecided": false
+    },
+    "artEdition": "THE_DARKEST_HEROES_ALTERNATE_ART",
+    "artEditionSource": {
+      "sourceId": "DD_EN_THE_DARKEST_HEROES_BOX",
+      "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_BOX-p2.pdf",
+      "sha256": "2231192b932bc2ea57775fadb40547fd57c40bdd89abe904812f3e5c5c365c42",
+      "page": 1,
+      "authority": "OFFICIAL_PRINTED_COMPONENT"
+    }
+  },
+  "transport": {
+    "authority": "DISCOVERY_TRANSPORT_ONLY",
+    "sourceGuid": "031448",
+    "ttsPath": "/ObjectStates/49/ContainedObjects/0",
+    "transportRefs": [
+      {
+        "guid": "ea3169",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/0/ContainedObjects/0",
+        "cardId": 41934,
+        "deckId": 419,
+        "cardIndex": 34,
+        "customDeckId": "419",
+        "numWidth": 10,
+        "numHeight": 4,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/12677869863913797937/23DA479FBC06416C765A38D6B273EBE0D4507782/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/17594467170742406184/90697A96C017765569632EF9C7E4258CB2414AA5/",
+        "frontSheetSha256": null,
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "6d823a",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/0/ContainedObjects/1",
+        "cardId": 41933,
+        "deckId": 419,
+        "cardIndex": 33,
+        "customDeckId": "419",
+        "numWidth": 10,
+        "numHeight": 4,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/12677869863913797937/23DA479FBC06416C765A38D6B273EBE0D4507782/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/17594467170742406184/90697A96C017765569632EF9C7E4258CB2414AA5/",
+        "frontSheetSha256": null,
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "28b7cc",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/1/ContainedObjects/0",
+        "cardId": 49700,
+        "deckId": 497,
+        "cardIndex": 0,
+        "customDeckId": "497",
+        "numWidth": 1,
+        "numHeight": 1,
+        "uniqueBack": false,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/13581163415803319731/DECD9C7271FED538331B2F191C94F25F967695C1/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15394172897636459690/72881BE599BF617D79B66BC70CF467B5EDFCEFEF/",
+        "frontSheetSha256": "bdaeaaa4875d8b1137af95703e98327ea2172b5b66942af74db0799cab580e6e",
+        "backSheetSha256": "c6c24c75bc9e164af0b5f5efd82f9ebb794362fadaf7fc46f6b2be6335f806ae",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "9b6aff",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/1/ContainedObjects/1",
+        "cardId": 49800,
+        "deckId": 498,
+        "cardIndex": 0,
+        "customDeckId": "498",
+        "numWidth": 1,
+        "numHeight": 1,
+        "uniqueBack": false,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15732844747222725451/0AA794C64DFAFCD29E40EB518C33D544E89BDF4F/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9985661759903444405/BB4807A5B5C1E44543AE5913D28511C61C1B6528/",
+        "frontSheetSha256": "49751718f0bc9768dd0704863feab2fc36405df01768800a95dee61ca9728627",
+        "backSheetSha256": "09df3494477960c3485b3be3d7dfeddfa1200a119ee5bc84e3ea9a3011e606af",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "e3a392",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/0",
+        "cardId": 48566,
+        "deckId": 485,
+        "cardIndex": 66,
+        "customDeckId": "485",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/12478850034110056566/7538AD62231BEC4CBBF6C68AC7AC00AEB6238A04/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/11226169451079291667/D962CB2FA027BF4D41AE3AF009267B1A680F33B7/",
+        "frontSheetSha256": "71246e90c115efb51f72cd8dec7192df80bab634ce3019a549a57742c97cc9b1",
+        "backSheetSha256": "b002e9bfdafe57945353a8f92463b573d4e81b52dc2299487095fc3740f0cd9b",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "5d26ba",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/0/States/2",
+        "cardId": 49067,
+        "deckId": 490,
+        "cardIndex": 67,
+        "customDeckId": "490",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/12478850034110056566/7538AD62231BEC4CBBF6C68AC7AC00AEB6238A04/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/11226169451079291667/D962CB2FA027BF4D41AE3AF009267B1A680F33B7/",
+        "frontSheetSha256": "71246e90c115efb51f72cd8dec7192df80bab634ce3019a549a57742c97cc9b1",
+        "backSheetSha256": "b002e9bfdafe57945353a8f92463b573d4e81b52dc2299487095fc3740f0cd9b",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "4bba66",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/0/States/3",
+        "cardId": 48968,
+        "deckId": 489,
+        "cardIndex": 68,
+        "customDeckId": "489",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/12478850034110056566/7538AD62231BEC4CBBF6C68AC7AC00AEB6238A04/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/11226169451079291667/D962CB2FA027BF4D41AE3AF009267B1A680F33B7/",
+        "frontSheetSha256": "71246e90c115efb51f72cd8dec7192df80bab634ce3019a549a57742c97cc9b1",
+        "backSheetSha256": "b002e9bfdafe57945353a8f92463b573d4e81b52dc2299487095fc3740f0cd9b",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "261640",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/1",
+        "cardId": 42103,
+        "deckId": 421,
+        "cardIndex": 3,
+        "customDeckId": "421",
+        "numWidth": 10,
+        "numHeight": 4,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+        "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "1182ab",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/1/States/2",
+        "cardId": 42104,
+        "deckId": 421,
+        "cardIndex": 4,
+        "customDeckId": "421",
+        "numWidth": 10,
+        "numHeight": 4,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+        "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "931b5b",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/1/States/3",
+        "cardId": 42105,
+        "deckId": 421,
+        "cardIndex": 5,
+        "customDeckId": "421",
+        "numWidth": 10,
+        "numHeight": 4,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+        "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "38535b",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/2",
+        "cardId": 42106,
+        "deckId": 421,
+        "cardIndex": 6,
+        "customDeckId": "421",
+        "numWidth": 10,
+        "numHeight": 4,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+        "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "3e02b8",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/2/States/2",
+        "cardId": 42107,
+        "deckId": 421,
+        "cardIndex": 7,
+        "customDeckId": "421",
+        "numWidth": 10,
+        "numHeight": 4,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+        "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "246a5a",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/2/States/3",
+        "cardId": 42108,
+        "deckId": 421,
+        "cardIndex": 8,
+        "customDeckId": "421",
+        "numWidth": 10,
+        "numHeight": 4,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+        "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "38dc11",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/3",
+        "cardId": 48560,
+        "deckId": 485,
+        "cardIndex": 60,
+        "customDeckId": "485",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/12478850034110056566/7538AD62231BEC4CBBF6C68AC7AC00AEB6238A04/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/11226169451079291667/D962CB2FA027BF4D41AE3AF009267B1A680F33B7/",
+        "frontSheetSha256": "71246e90c115efb51f72cd8dec7192df80bab634ce3019a549a57742c97cc9b1",
+        "backSheetSha256": "b002e9bfdafe57945353a8f92463b573d4e81b52dc2299487095fc3740f0cd9b",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "ef8968",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/3/States/2",
+        "cardId": 49061,
+        "deckId": 490,
+        "cardIndex": 61,
+        "customDeckId": "490",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/12478850034110056566/7538AD62231BEC4CBBF6C68AC7AC00AEB6238A04/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/11226169451079291667/D962CB2FA027BF4D41AE3AF009267B1A680F33B7/",
+        "frontSheetSha256": "71246e90c115efb51f72cd8dec7192df80bab634ce3019a549a57742c97cc9b1",
+        "backSheetSha256": "b002e9bfdafe57945353a8f92463b573d4e81b52dc2299487095fc3740f0cd9b",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "acd5ef",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/3/States/3",
+        "cardId": 48962,
+        "deckId": 489,
+        "cardIndex": 62,
+        "customDeckId": "489",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/12478850034110056566/7538AD62231BEC4CBBF6C68AC7AC00AEB6238A04/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/11226169451079291667/D962CB2FA027BF4D41AE3AF009267B1A680F33B7/",
+        "frontSheetSha256": "71246e90c115efb51f72cd8dec7192df80bab634ce3019a549a57742c97cc9b1",
+        "backSheetSha256": "b002e9bfdafe57945353a8f92463b573d4e81b52dc2299487095fc3740f0cd9b",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "f093ba",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/4",
+        "cardId": 42109,
+        "deckId": 421,
+        "cardIndex": 9,
+        "customDeckId": "421",
+        "numWidth": 10,
+        "numHeight": 4,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+        "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "08373b",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/4/States/2",
+        "cardId": 42110,
+        "deckId": 421,
+        "cardIndex": 10,
+        "customDeckId": "421",
+        "numWidth": 10,
+        "numHeight": 4,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+        "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "e1163e",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/4/States/3",
+        "cardId": 42111,
+        "deckId": 421,
+        "cardIndex": 11,
+        "customDeckId": "421",
+        "numWidth": 10,
+        "numHeight": 4,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+        "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "776c99",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/5",
+        "cardId": 42100,
+        "deckId": 421,
+        "cardIndex": 0,
+        "customDeckId": "421",
+        "numWidth": 10,
+        "numHeight": 4,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+        "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "f266c1",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/5/States/2",
+        "cardId": 42101,
+        "deckId": 421,
+        "cardIndex": 1,
+        "customDeckId": "421",
+        "numWidth": 10,
+        "numHeight": 4,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+        "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "8e3d37",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/5/States/3",
+        "cardId": 42102,
+        "deckId": 421,
+        "cardIndex": 2,
+        "customDeckId": "421",
+        "numWidth": 10,
+        "numHeight": 4,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+        "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "0360b7",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/6",
+        "cardId": 48563,
+        "deckId": 485,
+        "cardIndex": 63,
+        "customDeckId": "485",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/12478850034110056566/7538AD62231BEC4CBBF6C68AC7AC00AEB6238A04/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/11226169451079291667/D962CB2FA027BF4D41AE3AF009267B1A680F33B7/",
+        "frontSheetSha256": "71246e90c115efb51f72cd8dec7192df80bab634ce3019a549a57742c97cc9b1",
+        "backSheetSha256": "b002e9bfdafe57945353a8f92463b573d4e81b52dc2299487095fc3740f0cd9b",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "509cf2",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/6/States/2",
+        "cardId": 48964,
+        "deckId": 489,
+        "cardIndex": 64,
+        "customDeckId": "489",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/12478850034110056566/7538AD62231BEC4CBBF6C68AC7AC00AEB6238A04/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/11226169451079291667/D962CB2FA027BF4D41AE3AF009267B1A680F33B7/",
+        "frontSheetSha256": "71246e90c115efb51f72cd8dec7192df80bab634ce3019a549a57742c97cc9b1",
+        "backSheetSha256": "b002e9bfdafe57945353a8f92463b573d4e81b52dc2299487095fc3740f0cd9b",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "07b206",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/6/States/3",
+        "cardId": 49065,
+        "deckId": 490,
+        "cardIndex": 65,
+        "customDeckId": "490",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/12478850034110056566/7538AD62231BEC4CBBF6C68AC7AC00AEB6238A04/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/11226169451079291667/D962CB2FA027BF4D41AE3AF009267B1A680F33B7/",
+        "frontSheetSha256": "71246e90c115efb51f72cd8dec7192df80bab634ce3019a549a57742c97cc9b1",
+        "backSheetSha256": "b002e9bfdafe57945353a8f92463b573d4e81b52dc2299487095fc3740f0cd9b",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      }
+    ]
+  },
+  "heroCards": [
+    {
+      "physicalId": "c2a-shieldbreaker-28b7cc",
+      "heroId": "shieldbreaker",
+      "category": "HERO_PVP_CARD",
+      "transportGuid": "28b7cc",
+      "transportPath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/1/ContainedObjects/0",
+      "transport": {
+        "guid": "28b7cc",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/1/ContainedObjects/0",
+        "cardId": 49700,
+        "deckId": 497,
+        "cardIndex": 0,
+        "customDeckId": "497",
+        "numWidth": 1,
+        "numHeight": 1,
+        "uniqueBack": false,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/13581163415803319731/DECD9C7271FED538331B2F191C94F25F967695C1/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15394172897636459690/72881BE599BF617D79B66BC70CF467B5EDFCEFEF/",
+        "frontSheetSha256": "bdaeaaa4875d8b1137af95703e98327ea2172b5b66942af74db0799cab580e6e",
+        "backSheetSha256": "c6c24c75bc9e164af0b5f5efd82f9ebb794362fadaf7fc46f6b2be6335f806ae",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "frontHash": "1981ca61401b0d14ab8248d29f9111bb211eb743237d1d0ce8574c79a5574173",
+      "frontImage": "docs/data/complete-edition/source-assets/c2a/transport/28b7cc-fa4b9e00-front.png",
+      "backHash": "9d9cb7336af8bcbb6beaa74c81d08a0e50998b79dbf5403bff7c7457c269b640",
+      "backImage": "docs/data/complete-edition/source-assets/c2a/transport/28b7cc-fa4b9e00-back.png",
+      "officialSourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_PVP_FRONT",
+      "officialSourceRefs": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_PVP_FRONT",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_PVP_FRONT.pdf",
+          "sha256": "3a1244fa6c3fb7f3bfbd627e4f26d6955d8baaf07fdae68b99066639d7e6358e",
+          "page": 31,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "logicalIdentity": "shieldbreaker:pvp-board:31",
+      "duplicateOf": null,
+      "status": "OFFICIAL_SOURCE",
+      "visualReview": "PASS",
+      "printedName": "SHIELDBREAKER",
+      "cardSubtype": "PVP_HERO_BOARD",
+      "printedLevel": null,
+      "stanceInformation": "Visible stance icons; not transcribed as gameplay",
+      "statInformation": "Visible printed stats; not normalized",
+      "backSourceStatus": "OFFICIAL_SOURCE",
+      "officialBackSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_PVP_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_PVP_BACK.pdf",
+        "sha256": "2eefef286639786563535d05de931160d28708c5298a99457bffddcd6c0139c0",
+        "page": 31,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      }
+    },
+    {
+      "physicalId": "c2a-shieldbreaker-9b6aff",
+      "heroId": "shieldbreaker",
+      "category": "HERO_PVP_CARD",
+      "transportGuid": "9b6aff",
+      "transportPath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/1/ContainedObjects/1",
+      "transport": {
+        "guid": "9b6aff",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/1/ContainedObjects/1",
+        "cardId": 49800,
+        "deckId": 498,
+        "cardIndex": 0,
+        "customDeckId": "498",
+        "numWidth": 1,
+        "numHeight": 1,
+        "uniqueBack": false,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15732844747222725451/0AA794C64DFAFCD29E40EB518C33D544E89BDF4F/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9985661759903444405/BB4807A5B5C1E44543AE5913D28511C61C1B6528/",
+        "frontSheetSha256": "49751718f0bc9768dd0704863feab2fc36405df01768800a95dee61ca9728627",
+        "backSheetSha256": "09df3494477960c3485b3be3d7dfeddfa1200a119ee5bc84e3ea9a3011e606af",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "frontHash": "a132f3e44c4f36ffec66c0bd0ff13760bd7518bd3cbacf4420548e47708fcd43",
+      "frontImage": "docs/data/complete-edition/source-assets/c2a/transport/9b6aff-74184079-front.png",
+      "backHash": "49159e8ffb51c554d44f86aa0abe2bcd73b619dd6c7c13a39488912fd2b0ceed",
+      "backImage": "docs/data/complete-edition/source-assets/c2a/transport/9b6aff-74184079-back.png",
+      "officialSourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_PVP_FRONT",
+      "officialSourceRefs": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_PVP_FRONT",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_PVP_FRONT.pdf",
+          "sha256": "3a1244fa6c3fb7f3bfbd627e4f26d6955d8baaf07fdae68b99066639d7e6358e",
+          "page": 32,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "logicalIdentity": "shieldbreaker:pvp-board:32",
+      "duplicateOf": null,
+      "status": "OFFICIAL_SOURCE",
+      "visualReview": "PASS",
+      "printedName": "SHIELDBREAKER",
+      "cardSubtype": "PVP_HERO_BOARD",
+      "printedLevel": null,
+      "stanceInformation": "Visible stance icons; not transcribed as gameplay",
+      "statInformation": "Visible printed stats; not normalized",
+      "backSourceStatus": "OFFICIAL_SOURCE",
+      "officialBackSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_PVP_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_PVP_BACK.pdf",
+        "sha256": "2eefef286639786563535d05de931160d28708c5298a99457bffddcd6c0139c0",
+        "page": 32,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      }
+    }
+  ],
+  "levelProfileCards": [
+    {
+      "physicalId": "c2a-shieldbreaker-ea3169",
+      "heroId": "shieldbreaker",
+      "category": "LEVEL_PROFILE_CARD",
+      "transportGuid": "ea3169",
+      "transportPath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/0/ContainedObjects/0",
+      "transport": {
+        "guid": "ea3169",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/0/ContainedObjects/0",
+        "cardId": 41934,
+        "deckId": 419,
+        "cardIndex": 34,
+        "customDeckId": "419",
+        "numWidth": 10,
+        "numHeight": 4,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/12677869863913797937/23DA479FBC06416C765A38D6B273EBE0D4507782/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/17594467170742406184/90697A96C017765569632EF9C7E4258CB2414AA5/",
+        "frontSheetSha256": null,
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "frontHash": null,
+      "frontImage": null,
+      "backHash": null,
+      "backImage": null,
+      "officialSourceId": null,
+      "officialSourceRefs": [],
+      "logicalIdentity": null,
+      "duplicateOf": null,
+      "status": "SOURCE_UNRESOLVED",
+      "visualReview": "BLOCKED",
+      "cardSubtype": "CAMPAIGN_HERO_PROFILE",
+      "printedName": null,
+      "printedLevel": null,
+      "officialPrintCandidates": [
+        {
+          "front": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 32,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          },
+          "back": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK.pdf",
+            "sha256": "41f46559e7c5fefdc2f4d6018c5bf98a22a7c89de33cc2031337867eeaadfaba",
+            "page": 32,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "front": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 33,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          },
+          "back": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK.pdf",
+            "sha256": "41f46559e7c5fefdc2f4d6018c5bf98a22a7c89de33cc2031337867eeaadfaba",
+            "page": 33,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ]
+    },
+    {
+      "physicalId": "c2a-shieldbreaker-6d823a",
+      "heroId": "shieldbreaker",
+      "category": "LEVEL_PROFILE_CARD",
+      "transportGuid": "6d823a",
+      "transportPath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/0/ContainedObjects/1",
+      "transport": {
+        "guid": "6d823a",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/0/ContainedObjects/1",
+        "cardId": 41933,
+        "deckId": 419,
+        "cardIndex": 33,
+        "customDeckId": "419",
+        "numWidth": 10,
+        "numHeight": 4,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/12677869863913797937/23DA479FBC06416C765A38D6B273EBE0D4507782/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/17594467170742406184/90697A96C017765569632EF9C7E4258CB2414AA5/",
+        "frontSheetSha256": null,
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "frontHash": null,
+      "frontImage": null,
+      "backHash": null,
+      "backImage": null,
+      "officialSourceId": null,
+      "officialSourceRefs": [],
+      "logicalIdentity": null,
+      "duplicateOf": null,
+      "status": "SOURCE_UNRESOLVED",
+      "visualReview": "BLOCKED",
+      "cardSubtype": "CAMPAIGN_HERO_PROFILE",
+      "printedName": null,
+      "printedLevel": null,
+      "officialPrintCandidates": [
+        {
+          "front": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 32,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          },
+          "back": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK.pdf",
+            "sha256": "41f46559e7c5fefdc2f4d6018c5bf98a22a7c89de33cc2031337867eeaadfaba",
+            "page": 32,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "front": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 33,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          },
+          "back": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK.pdf",
+            "sha256": "41f46559e7c5fefdc2f4d6018c5bf98a22a7c89de33cc2031337867eeaadfaba",
+            "page": 33,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "skillId": "shieldbreaker-adders-kiss",
+      "heroId": "shieldbreaker",
+      "printedName": "Adder’s Kiss",
+      "physicalCardId": "c2a-shieldbreaker-e3a392",
+      "transportObjectId": "e3a392",
+      "levelForms": [
+        {
+          "level": 1,
+          "printedLevelMarker": "I",
+          "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/0",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 322,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 2,
+          "printedLevelMarker": "II",
+          "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/0/States/2",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 323,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 3,
+          "printedLevelMarker": "III",
+          "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/0/States/3",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 324,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialSourceStatus": "OFFICIAL_SOURCE",
+      "visualReview": "PASS",
+      "gameplayTranscribed": false,
+      "acceptedEvidenceRefs": [],
+      "priorConditionRefs": []
+    },
+    {
+      "skillId": "shieldbreaker-expose",
+      "heroId": "shieldbreaker",
+      "printedName": "Expose",
+      "physicalCardId": "c2a-shieldbreaker-261640",
+      "transportObjectId": "261640",
+      "levelForms": [
+        {
+          "level": 1,
+          "printedLevelMarker": "I",
+          "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/1",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 328,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 2,
+          "printedLevelMarker": "II",
+          "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/1/States/2",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 329,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 3,
+          "printedLevelMarker": "III",
+          "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/1/States/3",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 330,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialSourceStatus": "OFFICIAL_SOURCE",
+      "visualReview": "PASS",
+      "gameplayTranscribed": false,
+      "acceptedEvidenceRefs": [],
+      "priorConditionRefs": []
+    },
+    {
+      "skillId": "shieldbreaker-captivate",
+      "heroId": "shieldbreaker",
+      "printedName": "Captivate",
+      "physicalCardId": "c2a-shieldbreaker-38535b",
+      "transportObjectId": "38535b",
+      "levelForms": [
+        {
+          "level": 1,
+          "printedLevelMarker": "I",
+          "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/2",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 331,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 2,
+          "printedLevelMarker": "II",
+          "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/2/States/2",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 332,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 3,
+          "printedLevelMarker": "III",
+          "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/2/States/3",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 333,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialSourceStatus": "OFFICIAL_SOURCE",
+      "visualReview": "PASS",
+      "gameplayTranscribed": false,
+      "acceptedEvidenceRefs": [],
+      "priorConditionRefs": []
+    },
+    {
+      "skillId": "shieldbreaker-pierce",
+      "heroId": "shieldbreaker",
+      "printedName": "Pierce",
+      "physicalCardId": "c2a-shieldbreaker-38dc11",
+      "transportObjectId": "38dc11",
+      "levelForms": [
+        {
+          "level": 1,
+          "printedLevelMarker": "I",
+          "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/3",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 316,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 2,
+          "printedLevelMarker": "II",
+          "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/3/States/2",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 317,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 3,
+          "printedLevelMarker": "III",
+          "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/3/States/3",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 318,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialSourceStatus": "OFFICIAL_SOURCE",
+      "visualReview": "PASS",
+      "gameplayTranscribed": false,
+      "acceptedEvidenceRefs": [],
+      "priorConditionRefs": []
+    },
+    {
+      "skillId": "shieldbreaker-serpent-sway",
+      "heroId": "shieldbreaker",
+      "printedName": "Serpent Sway",
+      "physicalCardId": "c2a-shieldbreaker-f093ba",
+      "transportObjectId": "f093ba",
+      "levelForms": [
+        {
+          "level": 1,
+          "printedLevelMarker": "I",
+          "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/4",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 334,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 2,
+          "printedLevelMarker": "II",
+          "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/4/States/2",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 335,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 3,
+          "printedLevelMarker": "III",
+          "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/4/States/3",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 336,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialSourceStatus": "OFFICIAL_SOURCE",
+      "visualReview": "PASS",
+      "gameplayTranscribed": false,
+      "acceptedEvidenceRefs": [],
+      "priorConditionRefs": []
+    },
+    {
+      "skillId": "shieldbreaker-impale",
+      "heroId": "shieldbreaker",
+      "printedName": "Impale",
+      "physicalCardId": "c2a-shieldbreaker-776c99",
+      "transportObjectId": "776c99",
+      "levelForms": [
+        {
+          "level": 1,
+          "printedLevelMarker": "I",
+          "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/5",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 325,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 2,
+          "printedLevelMarker": "II",
+          "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/5/States/2",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 326,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 3,
+          "printedLevelMarker": "III",
+          "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/5/States/3",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 327,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialSourceStatus": "OFFICIAL_SOURCE",
+      "visualReview": "PASS",
+      "gameplayTranscribed": false,
+      "acceptedEvidenceRefs": [],
+      "priorConditionRefs": []
+    },
+    {
+      "skillId": "shieldbreaker-puncture",
+      "heroId": "shieldbreaker",
+      "printedName": "Puncture",
+      "physicalCardId": "c2a-shieldbreaker-0360b7",
+      "transportObjectId": "0360b7",
+      "levelForms": [
+        {
+          "level": 1,
+          "printedLevelMarker": "I",
+          "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/6",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 319,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 2,
+          "printedLevelMarker": "II",
+          "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/6/States/2",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 320,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 3,
+          "printedLevelMarker": "III",
+          "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/6/States/3",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 321,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialSourceStatus": "OFFICIAL_SOURCE",
+      "visualReview": "PASS",
+      "gameplayTranscribed": false,
+      "acceptedEvidenceRefs": [],
+      "priorConditionRefs": []
+    }
+  ],
+  "skillStates": [
+    {
+      "skillId": "shieldbreaker-adders-kiss",
+      "heroId": "shieldbreaker",
+      "level": 1,
+      "stateId": "base",
+      "stateGuid": "e3a392",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/0",
+      "physicalCardId": "c2a-shieldbreaker-e3a392",
+      "visualHash": "bc3082d42c4d5da34ab81db6399786cd55641b7877eae4dd9742b161abdf5d6c",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/e3a392-8707bcc6-front.png",
+      "printedLevelMarker": "I",
+      "printedName": "Adder’s Kiss",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 322,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 322,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "OFFICIAL_SOURCE",
+      "backVisualHash": "b19a739d117a07188ded556952d839fe415aedba24692d1bf8c59177d2b08a40",
+      "backVisualImage": "docs/data/complete-edition/source-assets/c2a/transport/e3a392-8707bcc6-back.png",
+      "printedBackName": "Adder’s Kiss",
+      "transport": {
+        "guid": "e3a392",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/0",
+        "cardId": 48566,
+        "deckId": 485,
+        "cardIndex": 66,
+        "customDeckId": "485",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/12478850034110056566/7538AD62231BEC4CBBF6C68AC7AC00AEB6238A04/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/11226169451079291667/D962CB2FA027BF4D41AE3AF009267B1A680F33B7/",
+        "frontSheetSha256": "71246e90c115efb51f72cd8dec7192df80bab634ce3019a549a57742c97cc9b1",
+        "backSheetSha256": "b002e9bfdafe57945353a8f92463b573d4e81b52dc2299487095fc3740f0cd9b",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "shieldbreaker-adders-kiss",
+      "heroId": "shieldbreaker",
+      "level": 2,
+      "stateId": "2",
+      "stateGuid": "5d26ba",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/0/States/2",
+      "physicalCardId": "c2a-shieldbreaker-e3a392",
+      "visualHash": "2d6203cb25edba9bb5dc4629231bba1e86f0051d2de3ccb58002b6682e707a68",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/5d26ba-2a91f839-front.png",
+      "printedLevelMarker": "II",
+      "printedName": "Adder’s Kiss",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 323,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 323,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "OFFICIAL_SOURCE",
+      "backVisualHash": "3e60055ce515a66cf8766e3c9986b6d35cb6543d9e8d747f2d08fcdb606cac3b",
+      "backVisualImage": "docs/data/complete-edition/source-assets/c2a/transport/5d26ba-2a91f839-back.png",
+      "printedBackName": "Adder’s Kiss",
+      "transport": {
+        "guid": "5d26ba",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/0/States/2",
+        "cardId": 49067,
+        "deckId": 490,
+        "cardIndex": 67,
+        "customDeckId": "490",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/12478850034110056566/7538AD62231BEC4CBBF6C68AC7AC00AEB6238A04/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/11226169451079291667/D962CB2FA027BF4D41AE3AF009267B1A680F33B7/",
+        "frontSheetSha256": "71246e90c115efb51f72cd8dec7192df80bab634ce3019a549a57742c97cc9b1",
+        "backSheetSha256": "b002e9bfdafe57945353a8f92463b573d4e81b52dc2299487095fc3740f0cd9b",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "shieldbreaker-adders-kiss",
+      "heroId": "shieldbreaker",
+      "level": 3,
+      "stateId": "3",
+      "stateGuid": "4bba66",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/0/States/3",
+      "physicalCardId": "c2a-shieldbreaker-e3a392",
+      "visualHash": "876b8f6b34842555ed49dfbad553e3a9bf4ecb88c8f124817c6ebe6b166247ee",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/4bba66-458de974-front.png",
+      "printedLevelMarker": "III",
+      "printedName": "Adder’s Kiss",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 324,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 324,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "OFFICIAL_SOURCE",
+      "backVisualHash": "46e4799a17f847d2a4198902a54398356cb651e7f2e1ff6332d33994c432e79d",
+      "backVisualImage": "docs/data/complete-edition/source-assets/c2a/transport/4bba66-458de974-back.png",
+      "printedBackName": "Adder’s Kiss",
+      "transport": {
+        "guid": "4bba66",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/0/States/3",
+        "cardId": 48968,
+        "deckId": 489,
+        "cardIndex": 68,
+        "customDeckId": "489",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/12478850034110056566/7538AD62231BEC4CBBF6C68AC7AC00AEB6238A04/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/11226169451079291667/D962CB2FA027BF4D41AE3AF009267B1A680F33B7/",
+        "frontSheetSha256": "71246e90c115efb51f72cd8dec7192df80bab634ce3019a549a57742c97cc9b1",
+        "backSheetSha256": "b002e9bfdafe57945353a8f92463b573d4e81b52dc2299487095fc3740f0cd9b",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "shieldbreaker-expose",
+      "heroId": "shieldbreaker",
+      "level": 1,
+      "stateId": "base",
+      "stateGuid": "261640",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/1",
+      "physicalCardId": "c2a-shieldbreaker-261640",
+      "visualHash": "6ccd37c6b8beaa75d3685a23ad6380225bd74ecf1d3a8c78acd2ea010735b52e",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/261640-d566b5ad-front.png",
+      "printedLevelMarker": "I",
+      "printedName": "Expose",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 328,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 328,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "SOURCE_UNRESOLVED",
+      "backVisualHash": null,
+      "backVisualImage": null,
+      "printedBackName": "Expose",
+      "transport": {
+        "guid": "261640",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/1",
+        "cardId": 42103,
+        "deckId": 421,
+        "cardIndex": 3,
+        "customDeckId": "421",
+        "numWidth": 10,
+        "numHeight": 4,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+        "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "shieldbreaker-expose",
+      "heroId": "shieldbreaker",
+      "level": 2,
+      "stateId": "2",
+      "stateGuid": "1182ab",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/1/States/2",
+      "physicalCardId": "c2a-shieldbreaker-261640",
+      "visualHash": "1ec612088331a8f4f68679c31d25a827d1a179d790dbda0159ab389f5cf685b0",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/1182ab-18908d49-front.png",
+      "printedLevelMarker": "II",
+      "printedName": "Expose",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 329,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 329,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "SOURCE_UNRESOLVED",
+      "backVisualHash": null,
+      "backVisualImage": null,
+      "printedBackName": "Expose",
+      "transport": {
+        "guid": "1182ab",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/1/States/2",
+        "cardId": 42104,
+        "deckId": 421,
+        "cardIndex": 4,
+        "customDeckId": "421",
+        "numWidth": 10,
+        "numHeight": 4,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+        "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "shieldbreaker-expose",
+      "heroId": "shieldbreaker",
+      "level": 3,
+      "stateId": "3",
+      "stateGuid": "931b5b",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/1/States/3",
+      "physicalCardId": "c2a-shieldbreaker-261640",
+      "visualHash": "c405a4957f3830f4bee63da686fea808554a64bc06179c8f89486fcecc71e275",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/931b5b-7876e022-front.png",
+      "printedLevelMarker": "III",
+      "printedName": "Expose",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 330,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 330,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "SOURCE_UNRESOLVED",
+      "backVisualHash": null,
+      "backVisualImage": null,
+      "printedBackName": "Expose",
+      "transport": {
+        "guid": "931b5b",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/1/States/3",
+        "cardId": 42105,
+        "deckId": 421,
+        "cardIndex": 5,
+        "customDeckId": "421",
+        "numWidth": 10,
+        "numHeight": 4,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+        "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "shieldbreaker-captivate",
+      "heroId": "shieldbreaker",
+      "level": 1,
+      "stateId": "base",
+      "stateGuid": "38535b",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/2",
+      "physicalCardId": "c2a-shieldbreaker-38535b",
+      "visualHash": "f738a1b49bdb3d64ae7146e9e6e76b71ebdcd9311229a48abbf34ddc1668e485",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/38535b-487e6589-front.png",
+      "printedLevelMarker": "I",
+      "printedName": "Captivate",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 331,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 331,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "SOURCE_UNRESOLVED",
+      "backVisualHash": null,
+      "backVisualImage": null,
+      "printedBackName": "Captivate",
+      "transport": {
+        "guid": "38535b",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/2",
+        "cardId": 42106,
+        "deckId": 421,
+        "cardIndex": 6,
+        "customDeckId": "421",
+        "numWidth": 10,
+        "numHeight": 4,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+        "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "shieldbreaker-captivate",
+      "heroId": "shieldbreaker",
+      "level": 2,
+      "stateId": "2",
+      "stateGuid": "3e02b8",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/2/States/2",
+      "physicalCardId": "c2a-shieldbreaker-38535b",
+      "visualHash": "48bb7e4215c505a53033be9de103fa4e971904586153e8f07bc66fef15ee7e91",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/3e02b8-a4007d1f-front.png",
+      "printedLevelMarker": "II",
+      "printedName": "Captivate",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 332,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 332,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "SOURCE_UNRESOLVED",
+      "backVisualHash": null,
+      "backVisualImage": null,
+      "printedBackName": "Captivate",
+      "transport": {
+        "guid": "3e02b8",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/2/States/2",
+        "cardId": 42107,
+        "deckId": 421,
+        "cardIndex": 7,
+        "customDeckId": "421",
+        "numWidth": 10,
+        "numHeight": 4,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+        "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "shieldbreaker-captivate",
+      "heroId": "shieldbreaker",
+      "level": 3,
+      "stateId": "3",
+      "stateGuid": "246a5a",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/2/States/3",
+      "physicalCardId": "c2a-shieldbreaker-38535b",
+      "visualHash": "75692444189c4c949708a007adb3aea3b0c418fdcfc7d72d9949660ade84c5c2",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/246a5a-016bc75c-front.png",
+      "printedLevelMarker": "III",
+      "printedName": "Captivate",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 333,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 333,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "SOURCE_UNRESOLVED",
+      "backVisualHash": null,
+      "backVisualImage": null,
+      "printedBackName": "Captivate",
+      "transport": {
+        "guid": "246a5a",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/2/States/3",
+        "cardId": 42108,
+        "deckId": 421,
+        "cardIndex": 8,
+        "customDeckId": "421",
+        "numWidth": 10,
+        "numHeight": 4,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+        "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "shieldbreaker-pierce",
+      "heroId": "shieldbreaker",
+      "level": 1,
+      "stateId": "base",
+      "stateGuid": "38dc11",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/3",
+      "physicalCardId": "c2a-shieldbreaker-38dc11",
+      "visualHash": "d508202881b1d2e63f03c291a53fbd4eee5f8539733be7c0bd3eef0acbac8e71",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/38dc11-a7895062-front.png",
+      "printedLevelMarker": "I",
+      "printedName": "Pierce",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 316,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 316,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "OFFICIAL_SOURCE",
+      "backVisualHash": "5223a38b8494d7ac8a84df7a8da1ffd60499a755e24a15e6d0e57cd35e7e8cdd",
+      "backVisualImage": "docs/data/complete-edition/source-assets/c2a/transport/38dc11-a7895062-back.png",
+      "printedBackName": "Pierce",
+      "transport": {
+        "guid": "38dc11",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/3",
+        "cardId": 48560,
+        "deckId": 485,
+        "cardIndex": 60,
+        "customDeckId": "485",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/12478850034110056566/7538AD62231BEC4CBBF6C68AC7AC00AEB6238A04/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/11226169451079291667/D962CB2FA027BF4D41AE3AF009267B1A680F33B7/",
+        "frontSheetSha256": "71246e90c115efb51f72cd8dec7192df80bab634ce3019a549a57742c97cc9b1",
+        "backSheetSha256": "b002e9bfdafe57945353a8f92463b573d4e81b52dc2299487095fc3740f0cd9b",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "shieldbreaker-pierce",
+      "heroId": "shieldbreaker",
+      "level": 2,
+      "stateId": "2",
+      "stateGuid": "ef8968",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/3/States/2",
+      "physicalCardId": "c2a-shieldbreaker-38dc11",
+      "visualHash": "856fdfef6374faf12459b4acf75e127679832d82dd5122cfa99afb970412ee73",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/ef8968-55395690-front.png",
+      "printedLevelMarker": "II",
+      "printedName": "Pierce",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 317,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 317,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "OFFICIAL_SOURCE",
+      "backVisualHash": "601d375dbbed1b7460f91a1a8936159eb764cfd8d99eddcd0c9ba9ed5368786d",
+      "backVisualImage": "docs/data/complete-edition/source-assets/c2a/transport/ef8968-55395690-back.png",
+      "printedBackName": "Pierce",
+      "transport": {
+        "guid": "ef8968",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/3/States/2",
+        "cardId": 49061,
+        "deckId": 490,
+        "cardIndex": 61,
+        "customDeckId": "490",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/12478850034110056566/7538AD62231BEC4CBBF6C68AC7AC00AEB6238A04/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/11226169451079291667/D962CB2FA027BF4D41AE3AF009267B1A680F33B7/",
+        "frontSheetSha256": "71246e90c115efb51f72cd8dec7192df80bab634ce3019a549a57742c97cc9b1",
+        "backSheetSha256": "b002e9bfdafe57945353a8f92463b573d4e81b52dc2299487095fc3740f0cd9b",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "shieldbreaker-pierce",
+      "heroId": "shieldbreaker",
+      "level": 3,
+      "stateId": "3",
+      "stateGuid": "acd5ef",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/3/States/3",
+      "physicalCardId": "c2a-shieldbreaker-38dc11",
+      "visualHash": "3af17418f474c81a9eb544b79f918e596d257adca0b7f4b8832b5a62d0a64e75",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/acd5ef-08199366-front.png",
+      "printedLevelMarker": "III",
+      "printedName": "Pierce",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 318,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 318,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "OFFICIAL_SOURCE",
+      "backVisualHash": "00efcd09cb442229e9314f3e8f96362469ea6c56659674a63fbb89d327612caf",
+      "backVisualImage": "docs/data/complete-edition/source-assets/c2a/transport/acd5ef-08199366-back.png",
+      "printedBackName": "Pierce",
+      "transport": {
+        "guid": "acd5ef",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/3/States/3",
+        "cardId": 48962,
+        "deckId": 489,
+        "cardIndex": 62,
+        "customDeckId": "489",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/12478850034110056566/7538AD62231BEC4CBBF6C68AC7AC00AEB6238A04/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/11226169451079291667/D962CB2FA027BF4D41AE3AF009267B1A680F33B7/",
+        "frontSheetSha256": "71246e90c115efb51f72cd8dec7192df80bab634ce3019a549a57742c97cc9b1",
+        "backSheetSha256": "b002e9bfdafe57945353a8f92463b573d4e81b52dc2299487095fc3740f0cd9b",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "shieldbreaker-serpent-sway",
+      "heroId": "shieldbreaker",
+      "level": 1,
+      "stateId": "base",
+      "stateGuid": "f093ba",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/4",
+      "physicalCardId": "c2a-shieldbreaker-f093ba",
+      "visualHash": "dfd14f786946f89042c5c4852a70409f4a36ebcb86f3795cb12f66ff169d6927",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/f093ba-c9b18be2-front.png",
+      "printedLevelMarker": "I",
+      "printedName": "Serpent Sway",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 334,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 334,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "SOURCE_UNRESOLVED",
+      "backVisualHash": null,
+      "backVisualImage": null,
+      "printedBackName": "Serpent Sway",
+      "transport": {
+        "guid": "f093ba",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/4",
+        "cardId": 42109,
+        "deckId": 421,
+        "cardIndex": 9,
+        "customDeckId": "421",
+        "numWidth": 10,
+        "numHeight": 4,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+        "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "shieldbreaker-serpent-sway",
+      "heroId": "shieldbreaker",
+      "level": 2,
+      "stateId": "2",
+      "stateGuid": "08373b",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/4/States/2",
+      "physicalCardId": "c2a-shieldbreaker-f093ba",
+      "visualHash": "24d51adba90248417280e3fd07a2a70cd1e6255a5cfa0f04dd8adf78783defa9",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/08373b-14d70d91-front.png",
+      "printedLevelMarker": "II",
+      "printedName": "Serpent Sway",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 335,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 335,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "SOURCE_UNRESOLVED",
+      "backVisualHash": null,
+      "backVisualImage": null,
+      "printedBackName": "Serpent Sway",
+      "transport": {
+        "guid": "08373b",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/4/States/2",
+        "cardId": 42110,
+        "deckId": 421,
+        "cardIndex": 10,
+        "customDeckId": "421",
+        "numWidth": 10,
+        "numHeight": 4,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+        "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "shieldbreaker-serpent-sway",
+      "heroId": "shieldbreaker",
+      "level": 3,
+      "stateId": "3",
+      "stateGuid": "e1163e",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/4/States/3",
+      "physicalCardId": "c2a-shieldbreaker-f093ba",
+      "visualHash": "967c4783452040e42f4e963fe12e7762210d6e00aaaedfb65bd40a2b38423f5d",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/e1163e-47aa6b3f-front.png",
+      "printedLevelMarker": "III",
+      "printedName": "Serpent Sway",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 336,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 336,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "SOURCE_UNRESOLVED",
+      "backVisualHash": null,
+      "backVisualImage": null,
+      "printedBackName": "Serpent Sway",
+      "transport": {
+        "guid": "e1163e",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/4/States/3",
+        "cardId": 42111,
+        "deckId": 421,
+        "cardIndex": 11,
+        "customDeckId": "421",
+        "numWidth": 10,
+        "numHeight": 4,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+        "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "shieldbreaker-impale",
+      "heroId": "shieldbreaker",
+      "level": 1,
+      "stateId": "base",
+      "stateGuid": "776c99",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/5",
+      "physicalCardId": "c2a-shieldbreaker-776c99",
+      "visualHash": "b5d291a1c58579c4a0f538e0b5c3b5c98060305dba15aee1e1635ea06fee94ea",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/776c99-69ddf2eb-front.png",
+      "printedLevelMarker": "I",
+      "printedName": "Impale",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 325,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 325,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "SOURCE_UNRESOLVED",
+      "backVisualHash": null,
+      "backVisualImage": null,
+      "printedBackName": "Impale",
+      "transport": {
+        "guid": "776c99",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/5",
+        "cardId": 42100,
+        "deckId": 421,
+        "cardIndex": 0,
+        "customDeckId": "421",
+        "numWidth": 10,
+        "numHeight": 4,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+        "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "shieldbreaker-impale",
+      "heroId": "shieldbreaker",
+      "level": 2,
+      "stateId": "2",
+      "stateGuid": "f266c1",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/5/States/2",
+      "physicalCardId": "c2a-shieldbreaker-776c99",
+      "visualHash": "7b8c03430aa08db46e9a7c49e4d8dd71545f4389ebe37c4a5a927bfe5d6accd8",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/f266c1-8ad2a351-front.png",
+      "printedLevelMarker": "II",
+      "printedName": "Impale",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 326,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 326,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "SOURCE_UNRESOLVED",
+      "backVisualHash": null,
+      "backVisualImage": null,
+      "printedBackName": "Impale",
+      "transport": {
+        "guid": "f266c1",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/5/States/2",
+        "cardId": 42101,
+        "deckId": 421,
+        "cardIndex": 1,
+        "customDeckId": "421",
+        "numWidth": 10,
+        "numHeight": 4,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+        "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "shieldbreaker-impale",
+      "heroId": "shieldbreaker",
+      "level": 3,
+      "stateId": "3",
+      "stateGuid": "8e3d37",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/5/States/3",
+      "physicalCardId": "c2a-shieldbreaker-776c99",
+      "visualHash": "58ce8fd4f42848b22c0c9a5725f91b4b59929cce2b7e471e99c5d468a50e4bb5",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/8e3d37-a8f8ed45-front.png",
+      "printedLevelMarker": "III",
+      "printedName": "Impale",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 327,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 327,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "SOURCE_UNRESOLVED",
+      "backVisualHash": null,
+      "backVisualImage": null,
+      "printedBackName": "Impale",
+      "transport": {
+        "guid": "8e3d37",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/5/States/3",
+        "cardId": 42102,
+        "deckId": 421,
+        "cardIndex": 2,
+        "customDeckId": "421",
+        "numWidth": 10,
+        "numHeight": 4,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+        "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "shieldbreaker-puncture",
+      "heroId": "shieldbreaker",
+      "level": 1,
+      "stateId": "base",
+      "stateGuid": "0360b7",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/6",
+      "physicalCardId": "c2a-shieldbreaker-0360b7",
+      "visualHash": "987bdde94621ce92fa3fe8f5f5f06b99602d7bf055f63b17d747252e29151cdc",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/0360b7-539a4b5b-front.png",
+      "printedLevelMarker": "I",
+      "printedName": "Puncture",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 319,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 319,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "OFFICIAL_SOURCE",
+      "backVisualHash": "2721fdbf52824ed5c600376f475b85739194aa591376b364d83d3a53b08c1508",
+      "backVisualImage": "docs/data/complete-edition/source-assets/c2a/transport/0360b7-539a4b5b-back.png",
+      "printedBackName": "Puncture",
+      "transport": {
+        "guid": "0360b7",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/6",
+        "cardId": 48563,
+        "deckId": 485,
+        "cardIndex": 63,
+        "customDeckId": "485",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/12478850034110056566/7538AD62231BEC4CBBF6C68AC7AC00AEB6238A04/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/11226169451079291667/D962CB2FA027BF4D41AE3AF009267B1A680F33B7/",
+        "frontSheetSha256": "71246e90c115efb51f72cd8dec7192df80bab634ce3019a549a57742c97cc9b1",
+        "backSheetSha256": "b002e9bfdafe57945353a8f92463b573d4e81b52dc2299487095fc3740f0cd9b",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "shieldbreaker-puncture",
+      "heroId": "shieldbreaker",
+      "level": 2,
+      "stateId": "2",
+      "stateGuid": "509cf2",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/6/States/2",
+      "physicalCardId": "c2a-shieldbreaker-0360b7",
+      "visualHash": "5e56b91193ff180d6e12fd1e434469c132af871b051694682449f729734c49c3",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/509cf2-bcecaa60-front.png",
+      "printedLevelMarker": "II",
+      "printedName": "Puncture",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 320,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 320,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "OFFICIAL_SOURCE",
+      "backVisualHash": "e6f5005d373d2e6e98a99d4e19a69f2f0636c993badcd9f66c134143bf018664",
+      "backVisualImage": "docs/data/complete-edition/source-assets/c2a/transport/509cf2-bcecaa60-back.png",
+      "printedBackName": "Puncture",
+      "transport": {
+        "guid": "509cf2",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/6/States/2",
+        "cardId": 48964,
+        "deckId": 489,
+        "cardIndex": 64,
+        "customDeckId": "489",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/12478850034110056566/7538AD62231BEC4CBBF6C68AC7AC00AEB6238A04/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/11226169451079291667/D962CB2FA027BF4D41AE3AF009267B1A680F33B7/",
+        "frontSheetSha256": "71246e90c115efb51f72cd8dec7192df80bab634ce3019a549a57742c97cc9b1",
+        "backSheetSha256": "b002e9bfdafe57945353a8f92463b573d4e81b52dc2299487095fc3740f0cd9b",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "shieldbreaker-puncture",
+      "heroId": "shieldbreaker",
+      "level": 3,
+      "stateId": "3",
+      "stateGuid": "07b206",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/6/States/3",
+      "physicalCardId": "c2a-shieldbreaker-0360b7",
+      "visualHash": "94849fe32f8b3a53ab5d3a9fdd7eca8c882d596d3250b98f76576aba20809001",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/07b206-473e0a26-front.png",
+      "printedLevelMarker": "III",
+      "printedName": "Puncture",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 321,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 321,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "OFFICIAL_SOURCE",
+      "backVisualHash": "91885ed2544e47527a115c45ebee1f0829a7e43fd945495aa77c0cf356acb531",
+      "backVisualImage": "docs/data/complete-edition/source-assets/c2a/transport/07b206-473e0a26-back.png",
+      "printedBackName": "Puncture",
+      "transport": {
+        "guid": "07b206",
+        "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/6/States/3",
+        "cardId": 49065,
+        "deckId": 490,
+        "cardIndex": 65,
+        "customDeckId": "490",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/12478850034110056566/7538AD62231BEC4CBBF6C68AC7AC00AEB6238A04/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/11226169451079291667/D962CB2FA027BF4D41AE3AF009267B1A680F33B7/",
+        "frontSheetSha256": "71246e90c115efb51f72cd8dec7192df80bab634ce3019a549a57742c97cc9b1",
+        "backSheetSha256": "b002e9bfdafe57945353a8f92463b573d4e81b52dc2299487095fc3740f0cd9b",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    }
+  ],
+  "officialSources": [
+    "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+    "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+    "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK"
+  ],
+  "officialProfileInventory": [
+    {
+      "printSlot": "shieldbreaker:profile:0",
+      "printedName": "SHIELDBREAKER",
+      "front": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+        "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+        "page": 32,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "back": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK.pdf",
+        "sha256": "41f46559e7c5fefdc2f4d6018c5bf98a22a7c89de33cc2031337867eeaadfaba",
+        "page": 32,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "frontLevelMarker": "I",
+      "backLevelMarker": "II",
+      "frontRole": "HERO_PROFILE",
+      "backRole": "HERO_PROFILE",
+      "visualReview": "PASS",
+      "transportBindingStatus": "SOURCE_UNRESOLVED"
+    },
+    {
+      "printSlot": "shieldbreaker:profile:1",
+      "printedName": "SHIELDBREAKER",
+      "front": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+        "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+        "page": 33,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "back": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK.pdf",
+        "sha256": "41f46559e7c5fefdc2f4d6018c5bf98a22a7c89de33cc2031337867eeaadfaba",
+        "page": 33,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "frontLevelMarker": "III",
+      "backLevelMarker": null,
+      "frontRole": "HERO_PROFILE",
+      "backRole": "ILLUSTRATED_CARD_BACK",
+      "visualReview": "PASS",
+      "transportBindingStatus": "SOURCE_UNRESOLVED"
+    }
+  ],
+  "existingPrototypeLinks": {
+    "hero": null,
+    "skills": []
+  },
+  "duplicateRefs": [],
+  "unresolvedRefs": [
+    "profile-ea3169",
+    "profile-6d823a",
+    "skill-back-261640",
+    "skill-back-1182ab",
+    "skill-back-931b5b",
+    "skill-back-38535b",
+    "skill-back-3e02b8",
+    "skill-back-246a5a",
+    "skill-back-f093ba",
+    "skill-back-08373b",
+    "skill-back-e1163e",
+    "skill-back-776c99",
+    "skill-back-f266c1",
+    "skill-back-8e3d37"
+  ],
+  "sourceGaps": [
+    {
+      "gapId": "profile-ea3169",
+      "heroId": "shieldbreaker",
+      "physicalId": "c2a-shieldbreaker-ea3169",
+      "category": "STATE_RELATION_UNRESOLVED",
+      "scope": "PROFILE_TRANSPORT_CORRELATION",
+      "status": "SOURCE_UNRESOLVED",
+      "affectedFields": [
+        "transport image to printed profile identity",
+        "front/back physical pairing"
+      ],
+      "detail": "Official Profile PDFs are available and reviewed. Shared transport front/back sheets time out; no CardID-to-print-page inference is allowed.",
+      "officialSourceCandidates": [
+        {
+          "front": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 32,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          },
+          "back": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK.pdf",
+            "sha256": "41f46559e7c5fefdc2f4d6018c5bf98a22a7c89de33cc2031337867eeaadfaba",
+            "page": 32,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "front": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 33,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          },
+          "back": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK.pdf",
+            "sha256": "41f46559e7c5fefdc2f4d6018c5bf98a22a7c89de33cc2031337867eeaadfaba",
+            "page": 33,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "transportRefs": [
+        {
+          "guid": "ea3169",
+          "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/0/ContainedObjects/0",
+          "cardId": 41934,
+          "deckId": 419,
+          "cardIndex": 34,
+          "customDeckId": "419",
+          "numWidth": 10,
+          "numHeight": 4,
+          "uniqueBack": true,
+          "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/12677869863913797937/23DA479FBC06416C765A38D6B273EBE0D4507782/",
+          "backImage": "https://steamusercontent-a.akamaihd.net/ugc/17594467170742406184/90697A96C017765569632EF9C7E4258CB2414AA5/",
+          "frontSheetSha256": null,
+          "backSheetSha256": null,
+          "authority": "DISCOVERY_TRANSPORT_ONLY"
+        }
+      ]
+    },
+    {
+      "gapId": "profile-6d823a",
+      "heroId": "shieldbreaker",
+      "physicalId": "c2a-shieldbreaker-6d823a",
+      "category": "STATE_RELATION_UNRESOLVED",
+      "scope": "PROFILE_TRANSPORT_CORRELATION",
+      "status": "SOURCE_UNRESOLVED",
+      "affectedFields": [
+        "transport image to printed profile identity",
+        "front/back physical pairing"
+      ],
+      "detail": "Official Profile PDFs are available and reviewed. Shared transport front/back sheets time out; no CardID-to-print-page inference is allowed.",
+      "officialSourceCandidates": [
+        {
+          "front": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 32,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          },
+          "back": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK.pdf",
+            "sha256": "41f46559e7c5fefdc2f4d6018c5bf98a22a7c89de33cc2031337867eeaadfaba",
+            "page": 32,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "front": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 33,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          },
+          "back": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK.pdf",
+            "sha256": "41f46559e7c5fefdc2f4d6018c5bf98a22a7c89de33cc2031337867eeaadfaba",
+            "page": 33,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "transportRefs": [
+        {
+          "guid": "6d823a",
+          "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/0/ContainedObjects/1",
+          "cardId": 41933,
+          "deckId": 419,
+          "cardIndex": 33,
+          "customDeckId": "419",
+          "numWidth": 10,
+          "numHeight": 4,
+          "uniqueBack": true,
+          "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/12677869863913797937/23DA479FBC06416C765A38D6B273EBE0D4507782/",
+          "backImage": "https://steamusercontent-a.akamaihd.net/ugc/17594467170742406184/90697A96C017765569632EF9C7E4258CB2414AA5/",
+          "frontSheetSha256": null,
+          "backSheetSha256": null,
+          "authority": "DISCOVERY_TRANSPORT_ONLY"
+        }
+      ]
+    },
+    {
+      "gapId": "skill-back-261640",
+      "heroId": "shieldbreaker",
+      "physicalId": "c2a-shieldbreaker-261640",
+      "skillId": "shieldbreaker-expose",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/1",
+      "category": "STATE_RELATION_UNRESOLVED",
+      "status": "SOURCE_UNRESOLVED",
+      "affectedFields": [
+        "transport back to official print back pairing"
+      ],
+      "detail": "Official back PDF reviewed; transport back atlas unavailable. Front identity remains bound; back pairing is not inferred.",
+      "officialSourceCandidates": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+          "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+          "page": 328,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "transportRefs": [
+        {
+          "guid": "261640",
+          "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/1",
+          "cardId": 42103,
+          "deckId": 421,
+          "cardIndex": 3,
+          "customDeckId": "421",
+          "numWidth": 10,
+          "numHeight": 4,
+          "uniqueBack": true,
+          "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+          "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+          "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+          "backSheetSha256": null,
+          "authority": "DISCOVERY_TRANSPORT_ONLY"
+        }
+      ]
+    },
+    {
+      "gapId": "skill-back-1182ab",
+      "heroId": "shieldbreaker",
+      "physicalId": "c2a-shieldbreaker-261640",
+      "skillId": "shieldbreaker-expose",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/1/States/2",
+      "category": "STATE_RELATION_UNRESOLVED",
+      "status": "SOURCE_UNRESOLVED",
+      "affectedFields": [
+        "transport back to official print back pairing"
+      ],
+      "detail": "Official back PDF reviewed; transport back atlas unavailable. Front identity remains bound; back pairing is not inferred.",
+      "officialSourceCandidates": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+          "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+          "page": 329,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "transportRefs": [
+        {
+          "guid": "1182ab",
+          "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/1/States/2",
+          "cardId": 42104,
+          "deckId": 421,
+          "cardIndex": 4,
+          "customDeckId": "421",
+          "numWidth": 10,
+          "numHeight": 4,
+          "uniqueBack": true,
+          "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+          "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+          "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+          "backSheetSha256": null,
+          "authority": "DISCOVERY_TRANSPORT_ONLY"
+        }
+      ]
+    },
+    {
+      "gapId": "skill-back-931b5b",
+      "heroId": "shieldbreaker",
+      "physicalId": "c2a-shieldbreaker-261640",
+      "skillId": "shieldbreaker-expose",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/1/States/3",
+      "category": "STATE_RELATION_UNRESOLVED",
+      "status": "SOURCE_UNRESOLVED",
+      "affectedFields": [
+        "transport back to official print back pairing"
+      ],
+      "detail": "Official back PDF reviewed; transport back atlas unavailable. Front identity remains bound; back pairing is not inferred.",
+      "officialSourceCandidates": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+          "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+          "page": 330,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "transportRefs": [
+        {
+          "guid": "931b5b",
+          "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/1/States/3",
+          "cardId": 42105,
+          "deckId": 421,
+          "cardIndex": 5,
+          "customDeckId": "421",
+          "numWidth": 10,
+          "numHeight": 4,
+          "uniqueBack": true,
+          "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+          "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+          "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+          "backSheetSha256": null,
+          "authority": "DISCOVERY_TRANSPORT_ONLY"
+        }
+      ]
+    },
+    {
+      "gapId": "skill-back-38535b",
+      "heroId": "shieldbreaker",
+      "physicalId": "c2a-shieldbreaker-38535b",
+      "skillId": "shieldbreaker-captivate",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/2",
+      "category": "STATE_RELATION_UNRESOLVED",
+      "status": "SOURCE_UNRESOLVED",
+      "affectedFields": [
+        "transport back to official print back pairing"
+      ],
+      "detail": "Official back PDF reviewed; transport back atlas unavailable. Front identity remains bound; back pairing is not inferred.",
+      "officialSourceCandidates": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+          "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+          "page": 331,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "transportRefs": [
+        {
+          "guid": "38535b",
+          "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/2",
+          "cardId": 42106,
+          "deckId": 421,
+          "cardIndex": 6,
+          "customDeckId": "421",
+          "numWidth": 10,
+          "numHeight": 4,
+          "uniqueBack": true,
+          "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+          "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+          "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+          "backSheetSha256": null,
+          "authority": "DISCOVERY_TRANSPORT_ONLY"
+        }
+      ]
+    },
+    {
+      "gapId": "skill-back-3e02b8",
+      "heroId": "shieldbreaker",
+      "physicalId": "c2a-shieldbreaker-38535b",
+      "skillId": "shieldbreaker-captivate",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/2/States/2",
+      "category": "STATE_RELATION_UNRESOLVED",
+      "status": "SOURCE_UNRESOLVED",
+      "affectedFields": [
+        "transport back to official print back pairing"
+      ],
+      "detail": "Official back PDF reviewed; transport back atlas unavailable. Front identity remains bound; back pairing is not inferred.",
+      "officialSourceCandidates": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+          "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+          "page": 332,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "transportRefs": [
+        {
+          "guid": "3e02b8",
+          "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/2/States/2",
+          "cardId": 42107,
+          "deckId": 421,
+          "cardIndex": 7,
+          "customDeckId": "421",
+          "numWidth": 10,
+          "numHeight": 4,
+          "uniqueBack": true,
+          "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+          "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+          "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+          "backSheetSha256": null,
+          "authority": "DISCOVERY_TRANSPORT_ONLY"
+        }
+      ]
+    },
+    {
+      "gapId": "skill-back-246a5a",
+      "heroId": "shieldbreaker",
+      "physicalId": "c2a-shieldbreaker-38535b",
+      "skillId": "shieldbreaker-captivate",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/2/States/3",
+      "category": "STATE_RELATION_UNRESOLVED",
+      "status": "SOURCE_UNRESOLVED",
+      "affectedFields": [
+        "transport back to official print back pairing"
+      ],
+      "detail": "Official back PDF reviewed; transport back atlas unavailable. Front identity remains bound; back pairing is not inferred.",
+      "officialSourceCandidates": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+          "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+          "page": 333,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "transportRefs": [
+        {
+          "guid": "246a5a",
+          "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/2/States/3",
+          "cardId": 42108,
+          "deckId": 421,
+          "cardIndex": 8,
+          "customDeckId": "421",
+          "numWidth": 10,
+          "numHeight": 4,
+          "uniqueBack": true,
+          "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+          "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+          "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+          "backSheetSha256": null,
+          "authority": "DISCOVERY_TRANSPORT_ONLY"
+        }
+      ]
+    },
+    {
+      "gapId": "skill-back-f093ba",
+      "heroId": "shieldbreaker",
+      "physicalId": "c2a-shieldbreaker-f093ba",
+      "skillId": "shieldbreaker-serpent-sway",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/4",
+      "category": "STATE_RELATION_UNRESOLVED",
+      "status": "SOURCE_UNRESOLVED",
+      "affectedFields": [
+        "transport back to official print back pairing"
+      ],
+      "detail": "Official back PDF reviewed; transport back atlas unavailable. Front identity remains bound; back pairing is not inferred.",
+      "officialSourceCandidates": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+          "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+          "page": 334,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "transportRefs": [
+        {
+          "guid": "f093ba",
+          "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/4",
+          "cardId": 42109,
+          "deckId": 421,
+          "cardIndex": 9,
+          "customDeckId": "421",
+          "numWidth": 10,
+          "numHeight": 4,
+          "uniqueBack": true,
+          "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+          "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+          "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+          "backSheetSha256": null,
+          "authority": "DISCOVERY_TRANSPORT_ONLY"
+        }
+      ]
+    },
+    {
+      "gapId": "skill-back-08373b",
+      "heroId": "shieldbreaker",
+      "physicalId": "c2a-shieldbreaker-f093ba",
+      "skillId": "shieldbreaker-serpent-sway",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/4/States/2",
+      "category": "STATE_RELATION_UNRESOLVED",
+      "status": "SOURCE_UNRESOLVED",
+      "affectedFields": [
+        "transport back to official print back pairing"
+      ],
+      "detail": "Official back PDF reviewed; transport back atlas unavailable. Front identity remains bound; back pairing is not inferred.",
+      "officialSourceCandidates": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+          "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+          "page": 335,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "transportRefs": [
+        {
+          "guid": "08373b",
+          "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/4/States/2",
+          "cardId": 42110,
+          "deckId": 421,
+          "cardIndex": 10,
+          "customDeckId": "421",
+          "numWidth": 10,
+          "numHeight": 4,
+          "uniqueBack": true,
+          "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+          "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+          "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+          "backSheetSha256": null,
+          "authority": "DISCOVERY_TRANSPORT_ONLY"
+        }
+      ]
+    },
+    {
+      "gapId": "skill-back-e1163e",
+      "heroId": "shieldbreaker",
+      "physicalId": "c2a-shieldbreaker-f093ba",
+      "skillId": "shieldbreaker-serpent-sway",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/4/States/3",
+      "category": "STATE_RELATION_UNRESOLVED",
+      "status": "SOURCE_UNRESOLVED",
+      "affectedFields": [
+        "transport back to official print back pairing"
+      ],
+      "detail": "Official back PDF reviewed; transport back atlas unavailable. Front identity remains bound; back pairing is not inferred.",
+      "officialSourceCandidates": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+          "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+          "page": 336,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "transportRefs": [
+        {
+          "guid": "e1163e",
+          "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/4/States/3",
+          "cardId": 42111,
+          "deckId": 421,
+          "cardIndex": 11,
+          "customDeckId": "421",
+          "numWidth": 10,
+          "numHeight": 4,
+          "uniqueBack": true,
+          "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+          "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+          "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+          "backSheetSha256": null,
+          "authority": "DISCOVERY_TRANSPORT_ONLY"
+        }
+      ]
+    },
+    {
+      "gapId": "skill-back-776c99",
+      "heroId": "shieldbreaker",
+      "physicalId": "c2a-shieldbreaker-776c99",
+      "skillId": "shieldbreaker-impale",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/5",
+      "category": "STATE_RELATION_UNRESOLVED",
+      "status": "SOURCE_UNRESOLVED",
+      "affectedFields": [
+        "transport back to official print back pairing"
+      ],
+      "detail": "Official back PDF reviewed; transport back atlas unavailable. Front identity remains bound; back pairing is not inferred.",
+      "officialSourceCandidates": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+          "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+          "page": 325,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "transportRefs": [
+        {
+          "guid": "776c99",
+          "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/5",
+          "cardId": 42100,
+          "deckId": 421,
+          "cardIndex": 0,
+          "customDeckId": "421",
+          "numWidth": 10,
+          "numHeight": 4,
+          "uniqueBack": true,
+          "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+          "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+          "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+          "backSheetSha256": null,
+          "authority": "DISCOVERY_TRANSPORT_ONLY"
+        }
+      ]
+    },
+    {
+      "gapId": "skill-back-f266c1",
+      "heroId": "shieldbreaker",
+      "physicalId": "c2a-shieldbreaker-776c99",
+      "skillId": "shieldbreaker-impale",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/5/States/2",
+      "category": "STATE_RELATION_UNRESOLVED",
+      "status": "SOURCE_UNRESOLVED",
+      "affectedFields": [
+        "transport back to official print back pairing"
+      ],
+      "detail": "Official back PDF reviewed; transport back atlas unavailable. Front identity remains bound; back pairing is not inferred.",
+      "officialSourceCandidates": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+          "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+          "page": 326,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "transportRefs": [
+        {
+          "guid": "f266c1",
+          "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/5/States/2",
+          "cardId": 42101,
+          "deckId": 421,
+          "cardIndex": 1,
+          "customDeckId": "421",
+          "numWidth": 10,
+          "numHeight": 4,
+          "uniqueBack": true,
+          "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+          "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+          "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+          "backSheetSha256": null,
+          "authority": "DISCOVERY_TRANSPORT_ONLY"
+        }
+      ]
+    },
+    {
+      "gapId": "skill-back-8e3d37",
+      "heroId": "shieldbreaker",
+      "physicalId": "c2a-shieldbreaker-776c99",
+      "skillId": "shieldbreaker-impale",
+      "statePath": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/5/States/3",
+      "category": "STATE_RELATION_UNRESOLVED",
+      "status": "SOURCE_UNRESOLVED",
+      "affectedFields": [
+        "transport back to official print back pairing"
+      ],
+      "detail": "Official back PDF reviewed; transport back atlas unavailable. Front identity remains bound; back pairing is not inferred.",
+      "officialSourceCandidates": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+          "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+          "page": 327,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "transportRefs": [
+        {
+          "guid": "8e3d37",
+          "path": "/ObjectStates/49/ContainedObjects/0/ContainedObjects/5/ContainedObjects/5/States/3",
+          "cardId": 42102,
+          "deckId": 421,
+          "cardIndex": 2,
+          "customDeckId": "421",
+          "numWidth": 10,
+          "numHeight": 4,
+          "uniqueBack": true,
+          "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10670679099079875239/F0CD71ACAAD7C8F08612ADB21CA5F25FBBBC3A07/",
+          "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15372150367501651526/3AA3BED37CE3987FB86FB21E548AB426C4EBADDA/",
+          "frontSheetSha256": "b8f29477d372eedb072d7083533f4598dc192aabea2f2a61de7e3019ffb05d24",
+          "backSheetSha256": null,
+          "authority": "DISCOVERY_TRANSPORT_ONLY"
+        }
+      ]
+    }
+  ],
+  "censusStatus": "CENSUS_PARTIAL",
+  "counts": {
+    "transportOwners": 11,
+    "heroCards": 2,
+    "levelProfileCards": 2,
+    "skillOwners": 7,
+    "skillForms": 21
+  },
+  "specialInventoryExplanation": null
+}

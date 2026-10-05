@@ -62,6 +62,7 @@ export default function ActorSlot({
       onClick={onClick}
       className={`relative w-[104px] rounded-md border bg-dd-panel p-1.5 text-left transition-all cursor-pointer ${frame}`}
       data-testid={`actor-${unit.id}`}
+      data-legal-target={isLegalTarget ? 'true' : 'false'}
     >
       <span className="absolute -top-2 -left-2 w-5 h-5 rounded-full bg-dd-panel2 border border-dd-border text-[10px] text-dd-muted flex items-center justify-center">
         {unit.position}

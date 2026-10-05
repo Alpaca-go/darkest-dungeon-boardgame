@@ -1,10 +1,20 @@
+import { commitProductionMonsterChoice, selectProductionMonsterPlayerRoute } from '../game-engine/commands/ordinary-monsters';
+import {commitProductionHeroInput,pendingProductionAction,rebaseProductionCheckpoint} from '../game-engine/heroes/player-commands';
+import type {HeroRuntimeInput} from '../types/hero-runtime';
+import { isProductionCampaign } from '../data/heroes/player-registry';
 import { create } from 'zustand';
-import { applyBossFoundationInput } from '../game-engine/commands/boss-foundation';
+import { commitOrdinaryRuinsAreaMove, commitOrdinaryRuinsChoice, commitOrdinaryRuinsInteraction } from '../game-engine/commands/ordinary-ruins';
+import { selectPartyDeployment } from '../game-engine/commands/party-deployment';
+import { explicitlyMigrateHeroDodgeToV2 } from '../game-engine/rules/hero-dodge-versioning';
+import { selectProductionRuinsV6, commitNecromancerProductionQuestSelection } from '../game-engine/commands/necromancer-production-entry';
+import { applyBossThreatCheckpointInput, applyBossFoundationInput } from '../game-engine/commands/boss-foundation';
 import { advanceTurn } from '../game-engine/battle';
+import { beginNecromancerGraveyardVisit, chooseNecromancerPreparationHero, commitNecromancerGraveyardVisit } from '../game-engine/campaign/necromancer-preparation-day';
 import type { CampaignState, ProvisionPool } from '../types';
 import {
   createNewCampaign,
   createHeroInstance,
+  createPlayerHero,
   equipSkill as engineEquipSkill,
   applyDefaultLoadout as engineApplyDefaultLoadout,
 } from '../game-engine/campaign';
@@ -21,7 +31,7 @@ import {
   visitAbbey as engineVisitAbbey,
   skipHeroAction,
   endHamletDay as engineEndHamletDay,
-} from '../game-engine/hamlet';
+} from '../game-engine/commands/hamlet-preparation-day';
 // ---- Phase 11A.2.3 §4：chooseQuest 收口为 commitQuestSelection（Store 不再自己组合编排） ----
 import {
   proceedCampaignToLoadout,
@@ -107,6 +117,7 @@ import type { QuestRuleProvision } from '../types/content-runtime';
 import {
   beginHeroSkillAction,
   resolveTrinketOpportunity,
+  advancePendingMonsterAttack,
 } from '../game-engine/trinkets/battle-trinket-bridge';
 import {
   discardTrinket as engineDiscardTrinket,
@@ -134,7 +145,17 @@ interface UiState {
   battleSkillId: string | null;
 }
 interface GameStore {
+  selectProductionMonsterPlayerRoute: () => void;
+  battleContinueResolution: () => void;
+  migrateHeroDodgeToV2: () => void;
+  selectProductionRuinsV6: () => void;
+  battleHeroAreaMove: (areaId: string) => void;
+  selectPartyDeployment(heroInstanceId: string, stance: import('../types').Stance): void;
+  battleOrdinaryChoice(choiceId: string, selectedId: string): void;
+  battleRoomInteract(ruleId: string): void;
   commitBossChoice(choiceId: string, selectedId: string): void;
+  beginGraveyardGuard(): void;
+  commitGraveyardGuard(useEffect: boolean): void;
   campaign: CampaignState | null;
   ui: UiState;
 
@@ -154,13 +175,15 @@ interface GameStore {
   enterCommunityReferenceGuardian(questRoll?: number): string | null;
 
   // ---- Phase 2：战役准备 ----
+  productionHeroInput(input:HeroRuntimeInput):string|null;
   chooseHero(heroId: string): void;
+  setSetupStance(instanceId:string,stance:import('../types').Stance):void;
   removeHero(heroId: string): void;
   equipSkill(heroId: string, skillId: string): void;
   applyDefaultLoadout(): void;
   proceedToLoadout(): void;
   proceedToQuests(): void;
-  chooseQuest(questId: string): void;
+  chooseQuest(questId: string): boolean;
 
   // ---- Phase 2：地牢探索 ----
   scout(): void;
@@ -291,19 +314,91 @@ const initialCampaign = loadCampaign();
 export const useGameStore = create<GameStore>((set, get) => {
   /** 写入存档并应用到状态。所有重要变更都经过此方法以保证自动保存。 */
   const commit = (next: CampaignState): void => {
+    const previous=get().campaign;
+    if(previous&&pendingProductionAction(previous)) {
+      const prior=previous.heroProductionSession!,session=next.heroProductionSession;
+      const advanced=session&&session.inputs.length===prior.inputs.length+1;
+      const completed=session&&session.completedActions.length===prior.completedActions.length+1&&session.completedActions[session.completedActions.length-1].actionId===prior.pendingAction!.actionId;
+      if(!advanced&&!completed)return;
+    }
+    if(next.heroProductionSession&&!pendingProductionAction(next)) next=rebaseProductionCheckpoint(next);
     saveCampaign(next);
     set({ campaign: next });
   };
 
   return {
+    selectProductionMonsterPlayerRoute: () => { const c=get().campaign; if(c) commit(selectProductionMonsterPlayerRoute(c)); },
+    battleContinueResolution: () => {
+      const c=get().campaign,b=c?.battle,e=b?.bossEncounter;
+      if(!c||pendingProductionAction(c)||!b||b.status!=='active')return;
+      if(b.productionMonsterContext?.playerRouteVersion) {
+        if(b.productionMonsterContext.pendingChoice || b.productionMonsterContext.blocker || b.ruinsContext?.pendingChoice)return;
+        const next=b.pendingMonsterAttack ? advancePendingMonsterAttack(c,false,true) : {...c,battle:advanceTurn(b)};
+        commit(settleBattleState(next).campaign); return;
+      }
+      if(!e?.checkpointContext?.playerRouteVersion||e.pendingChoice)return;
+      let next=c;
+      if(b.pendingMonsterAttack)next=advancePendingMonsterAttack(c,false,true);
+      else if(e.phase==='BATTLE_RESOLVING'&&e.prophetProduction?.actionOrdinal===2&&e.prophetProduction.crowdedChoice?.selectedAreaId)
+        next=applyBossFoundationInput(c,{type:'PROPHET_CROWDED_ATTACK'});
+      else if(e.prophetProduction?.actionOrdinal===3&&e.phase==='BATTLE_RESOLVING'&&e.prophetProduction.rubbleCursor<4)
+        next=applyBossFoundationInput(c,{type:'PROPHET_NEXT_PEW'});
+      else if(!b.activeActorId||b.activeActorId===e.bossState.actorId)next={...c,battle:advanceTurn(b)};
+      else return;
+      commit(settleBattleState(next).campaign);
+    },
+    selectProductionRuinsV6: () => {
+      const campaign = get().campaign;
+      if (!campaign) return;
+      commit(selectProductionRuinsV6(campaign));
+    },
+    migrateHeroDodgeToV2: () => {
+      const c=get().campaign; if (!c || c.battle || c.bossEncounterCheckpoint) return;
+      commit(explicitlyMigrateHeroDodgeToV2(c,c.id+':hero-dodge-v2'));
+    },
+    battleHeroAreaMove: (areaId) => {
+      const c=get().campaign;
+      if (c?.battle?.ruinsContext) { commit(commitOrdinaryRuinsAreaMove(c, areaId)); return; }
+      if (!c?.battle?.bossEncounter || !c.battle.activeActorId || c.battle.pendingMonsterAttack || c.battle.bossEncounter.pendingChoice) return;
+      const changed=applyBossFoundationInput(c,{type:'MOVE_HERO_AREA',heroId:c.battle.activeActorId,areaId});
+      const battle=changed.battle!.currentActionPoints===0 ? advanceTurn(changed.battle!) : changed.battle!;
+      commit(settleBattleState({...changed,battle}).campaign);
+    },
+    selectPartyDeployment: (heroInstanceId, stance) => {
+      const c = get().campaign;
+      if (c) commit(selectPartyDeployment(c, heroInstanceId, stance));
+    },
+    battleOrdinaryChoice: (choiceId, selectedId) => {
+      const c = get().campaign;
+      if (c?.battle?.productionMonsterContext) { commit(commitProductionMonsterChoice(c, choiceId, selectedId)); return; }
+      if (c?.battle?.ruinsContext) commit(commitOrdinaryRuinsChoice(c, choiceId, selectedId));
+    },
+    battleRoomInteract: (ruleId) => {
+      const c = get().campaign;
+      if (c?.battle?.ruinsContext) commit(commitOrdinaryRuinsInteraction(c, ruleId));
+    },
     commitBossChoice: (choiceId, selectedId) => {
       const c = get().campaign;
+      if (c?.necromancerPreparationDay?.status === 'PENDING_TIE') {
+        commit(chooseNecromancerPreparationHero(c, choiceId, selectedId)); return;
+      }
+      if (c?.bossEncounterCheckpoint?.pendingChoice && !c.battle) {
+        commit(applyBossThreatCheckpointInput(c,{type:'CHOICE',choiceId,selectedId})); return;
+      }
       if (!c?.battle?.bossEncounter?.pendingChoice) return;
       const changed = applyBossFoundationInput(c, { type: 'CHOICE', choiceId, selectedId });
       let battle = changed.battle!;
-      if (!battle.bossEncounter?.pendingChoice && battle.activeActorId && battle.monsters.some(u => u.id === battle.activeActorId)) battle = advanceTurn(battle);
+        if (!battle.bossEncounter?.checkpointContext?.playerRouteVersion && !battle.bossEncounter?.pendingChoice && !battle.pendingMonsterAttack && battle.activeActorId && battle.monsters.some(u => u.id === battle.activeActorId)) battle = advanceTurn(battle);
       const next = { ...changed, battle };
       commit(battle.bossEncounter?.pendingChoice ? next : settleBattleState(next).campaign);
+    },
+    beginGraveyardGuard: () => {
+      const c = get().campaign;
+      if (c?.necromancerPreparationDay?.status === 'PENDING_VISIT') commit(beginNecromancerGraveyardVisit(c));
+    },
+    commitGraveyardGuard: (useEffect) => {
+      const c = get().campaign;
+      if (c?.necromancerPreparationDay?.status === 'PENDING_LEVEL_II_EFFECT') commit(commitNecromancerGraveyardVisit(c, useEffect));
     },
     campaign: initialCampaign,
     ui: EMPTY_UI,
@@ -372,6 +467,7 @@ export const useGameStore = create<GameStore>((set, get) => {
     },
 
     // 切换式选择：已选则移除，未选且未满 4 人则加入（不影响其他英雄配置）。
+    setSetupStance:(id,stance)=>{const c=get().campaign;if(!c||c.gamePhase!=='campaign-setup'||!['aggressive','defensive','ranged','support'].includes(stance))return;commit({...c,heroes:c.heroes.map(h=>h.instanceId===id?{...h,stance}:h)});},
     chooseHero: (heroId) => {
       const c = get().campaign;
       if (!c) return;
@@ -381,7 +477,8 @@ export const useGameStore = create<GameStore>((set, get) => {
         heroes = c.heroes.filter((h) => h.heroId !== heroId);
       } else {
         if (c.heroes.length >= 4) return; // 已满 4 人
-        const inst = createHeroInstance(heroId, c.heroes.length + 1);
+        const slot=[1,2,3,4].find(n=>!c.heroes.some(h=>h.partySlot===n))!;
+        const inst=isProductionCampaign(c) ? createPlayerHero(heroId,slot) : createHeroInstance(heroId,slot);
         if (!inst) return;
         heroes = [...c.heroes, inst];
       }
@@ -420,14 +517,17 @@ export const useGameStore = create<GameStore>((set, get) => {
 
     chooseQuest: (questId) => {
       const c = get().campaign;
-      if (!c) return;
+      if (!c) return false;
       // Phase 11A.2.3 §4：commitQuestSelection 收口为单一 Production Command 入口，
       // 内部完成 engineChooseQuest + selectQuest 两步；Store 与 Driver 共用。
-      const r = commitQuestSelection(c, questId);
+      const r = c.runtimeContentProfile === 'community-complete-edition'
+        && questId === 'face-the-threat' && c.campaignProgress.activeBossFamilyId === 'necromancer'
+        ? commitNecromancerProductionQuestSelection(c) : commitQuestSelection(c, questId);
       if (!r.ok) {
-        return;
+        return false;
       }
       commit(r.campaign);
+      return true;
     },
 
     scout: () => {
@@ -483,13 +583,16 @@ export const useGameStore = create<GameStore>((set, get) => {
     },
 
     // ---- Phase 3：战斗动作（全部委托给 game-engine，并自动保存） ----
+    productionHeroInput:input=>{const c=get().campaign;if(!c)return 'No campaign';try {commit(commitProductionHeroInput(c,input));return null;} catch(error) {return error instanceof Error?error.message:String(error);}},
     selectBattleSkill: (skillId) => {
+      const c=get().campaign;
+      if(c&&isProductionCampaign(c)&&skillId&&c.battle?.activeActorId) {get().productionHeroInput({type:'START',actorId:c.battle.activeActorId,skillId});return;}
       set((st) => ({ ui: { ...st.ui, battleSkillId: skillId } }));
     },
 
     battleHeroMove: (dir) => {
       const c = get().campaign;
-      if (!c?.battle || c.battle.status !== 'active' || !c.battle.activeActorId) return;
+      if (!c?.battle || pendingProductionAction(c) || c.battle.status !== 'active' || !c.battle.activeActorId) return;
       const battle = engineHeroMove(c.battle, c.battle.activeActorId, dir);
       if (battle === c.battle) return;
       set((st) => ({ ui: { ...st.ui, battleSkillId: null } }));
@@ -518,7 +621,7 @@ export const useGameStore = create<GameStore>((set, get) => {
 
     battleEndTurn: () => {
       const c = get().campaign;
-      if (!c?.battle || c.battle.status !== 'active' || !c.battle.activeActorId) return;
+      if (!c?.battle || pendingProductionAction(c) || c.battle.status !== 'active' || !c.battle.activeActorId) return;
       set((st) => ({ ui: { ...st.ui, battleSkillId: null } }));
       const battle = engineEndHeroTurn(c.battle, c.battle.activeActorId);
       const settled = settleBattleState({ ...c, battle });
@@ -705,6 +808,7 @@ export const useGameStore = create<GameStore>((set, get) => {
 
     // ---- Phase 7：Debug 受控入口（统一管线，阈值规则照常生效） ----
     debugApplyStress: (heroId, amount) => {
+      if (!import.meta.env.DEV) return;
       const c = get().campaign;
       if (!c || amount <= 0) return;
       let { campaign: next } = engineApplyStress(c, {
@@ -726,6 +830,7 @@ export const useGameStore = create<GameStore>((set, get) => {
     },
 
     debugRecoverStress: (heroId, amount) => {
+      if (!import.meta.env.DEV) return;
       const c = get().campaign;
       if (!c || amount <= 0) return;
       const { campaign: next } = engineRecoverStress(c, {
@@ -757,6 +862,7 @@ export const useGameStore = create<GameStore>((set, get) => {
     },
 
     debugGrantQuirk: (heroId, quirkId) => {
+      if (!import.meta.env.DEV) return;
       const c = get().campaign;
       if (!c) return;
       const { campaign: acquired, outcome } = engineAcquireQuirk(c, heroId, quirkId, {
@@ -797,6 +903,7 @@ export const useGameStore = create<GameStore>((set, get) => {
     },
 
     debugGrantDisease: (heroId, diseaseId) => {
+      if (!import.meta.env.DEV) return;
       const c = get().campaign;
       if (!c) return;
       const { campaign: acquired } = engineBeginDiseaseAcquisitionWithTrinkets(c, {
@@ -1000,6 +1107,7 @@ export const useGameStore = create<GameStore>((set, get) => {
     },
 
     debugGrantXp: (heroId, amount) => {
+      if (!import.meta.env.DEV) return;
       const c = get().campaign;
       if (!c || amount <= 0) return;
       const next = engineEarnHeroXp(c, heroId, amount, 'Debug 面板发放');
@@ -1008,6 +1116,7 @@ export const useGameStore = create<GameStore>((set, get) => {
     },
 
     debugGrantTrinket: (heroId, trinketId) => {
+      if (!import.meta.env.DEV) return;
       const c = get().campaign;
       if (!c) return;
       const { campaign: next } = engineAcquireTrinket(c, {

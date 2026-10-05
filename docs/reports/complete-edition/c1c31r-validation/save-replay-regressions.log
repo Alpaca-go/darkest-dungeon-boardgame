@@ -1,0 +1,24 @@
+
+ RUN  v2.1.9 D:/darkest-dungoen-boardgame
+
+ ✓ src/game-engine/bosses/foundation.test.ts (60 tests) 787ms
+ ✓ src/game-engine/commands/boss-foundation.test.ts (6 tests) 164ms
+ ✓ src/game-engine/phase8d-save.test.ts (10 tests) 30ms
+ ✓ src/game-engine/c1c8-incoming-attack.test.ts (10 tests) 28ms
+ ✓ src/audit/c1c30-necromancer-runtime-foundation.test.ts (25 tests) 522ms
+ ✓ src/audit/c1c29-necromancer-runtime-foundation.test.ts (6 tests) 571ms
+   ✓ C1C29 real runtime binding and honest evidence > verifies checked-in traces against the production executor and frozen upstream inputs 503ms
+ ✓ src/audit/core-campaign/product-save-round-trip.test.ts (1 test) 60ms
+ ✓ src/audit/core-campaign/replay-determinism.test.ts (1 test) 624ms
+   ✓ Independent replay determinism: same seed has identical events, RNG and hashes 620ms
+ ✓ src/audit/core-campaign/replay-continuation.test.ts (2 tests) 1050ms
+   ✓ Replay Continuation > M03 serialized checkpoint → restore → M09 equals continuous 585ms
+   ✓ Replay Continuation > M06 serialized checkpoint → restore → M09 equals continuous 465ms
+ ✓ src/audit/c1c31-necromancer-runtime-foundation.test.ts (10 tests) 178344ms
+   ✓ C1C31 terminal rulebook-only contract review > verifies frozen C1C20–30 evidence, unchanged v1/runtime and deterministic generated artifacts 124841ms
+   ✓ C1C31 terminal rulebook-only contract review > does not claim production hashes, integration selection, or IMPLEMENTED bridges while review is pending 53233ms
+
+ Test Files  10 passed (10)
+      Tests  131 passed (131)
+   Start at  11:53:24
+   Duration  187.99s (transform 5.06s, setup 0ms, collect 35.50s, tests 182.18s, environment 8.73s, prepare 1.20s)

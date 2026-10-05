@@ -8,6 +8,15 @@ export interface AttackResult {
   damage: number;
 }
 
+/** Printed tabletop attacks have fixed ordinary/critical damage and a low d10 Crit threshold. */
+export function resolvePrintedAttackFromRoll(skill: { accuracy: number; damage: number; crit: number; critDamage: number },
+  roll: number, dodge: number, accuracyBonus = 0, critBonus = 0): AttackResult {
+  if (!Number.isInteger(roll) || roll < 1 || roll > 10) throw new Error('Printed attack requires saved d10');
+  const hit = roll <= skill.accuracy + accuracyBonus - dodge;
+  const crit = hit && roll <= skill.crit + critBonus;
+  return { roll, hit, crit, damage: hit ? (crit ? skill.critDamage : skill.damage) : 0 };
+}
+
 /** An attack result whose random damage roll has already been generated. */
 export type PreparedAttackResolution = AttackResult;
 

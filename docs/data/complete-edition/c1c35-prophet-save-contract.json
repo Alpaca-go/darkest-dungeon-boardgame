@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C35",
+  "baseline": "051c2c400d391543f5c436cbaa141a54bdf19ac1",
+  "predecessor": "C1C34-SUCCESSOR-BINDING-v1",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "ruleSetVersion": "C1C35-PROPHET-DIGITAL-DEFAULT-v1",
+  "foundationExecutionAllowed": false,
+  "gameplayChanged": false,
+  "productionPromotion": false,
+  "status": "NOT_IMPLEMENTED_GATE_A_BLOCKED",
+  "productionSaveSchemaChanged": false,
+  "silentRepairAllowed": false,
+  "requiredFailClosedChecks": [
+    "ruleset mismatch",
+    "tile/map mismatch",
+    "invalid Pew count",
+    "duplicate Pew ownership",
+    "invalid Area",
+    "placement roll mismatch",
+    "invalid action ordinal",
+    "duplicate resolved action",
+    "invalid Rubble cursor",
+    "missing PendingChoice candidates",
+    "forged choice",
+    "RNG continuation mismatch",
+    "Threat identity mismatch",
+    "Room identity mismatch"
+  ],
+  "rulingReferences": [
+    {
+      "id": "crowded-area-tie",
+      "version": "C1C35-PROPHET-DIGITAL-DEFAULT-v1"
+    },
+    {
+      "id": "pew-attack-order-and-save",
+      "version": "C1C35-PROPHET-DIGITAL-DEFAULT-v1"
+    }
+  ],
+  "replayProof": null
+}

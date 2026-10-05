@@ -7,11 +7,12 @@ import type {
   ProgressionUpgradeValidation,
 } from '../../types';
 import { MAX_UPGRADES_PER_GUILD_VISIT } from '../../data/progression/guild-costs';
-import { getSkillById } from '../../data/skills';
+import {playerSkillName} from '../../data/heroes/player-registry';
+import {legacySkillName} from '../heroes/legacy-player';
 import { getHamletBuildingById } from '../../data/hamlet-buildings';
 import { createId, nowIso } from '../random';
 import { pushLog } from '../log';
-import { buildingVisitError } from '../hamlet';
+import { buildingVisitError } from '../commands/hamlet-preparation-day';
 import {
   applyUpgradeChoicesToHero,
   buildUpgradeChoice,
@@ -248,7 +249,7 @@ export function commitGuildVisit(campaign: CampaignState): GuildCommitResult {
           id: createId('hlog'),
           at: nowIso(),
           message: `${hero.name} 在 ${building?.name ?? 'Guild'} 完成 ${revalidated.length} 次升级：${revalidated
-            .map((c) => describeUpgradeChoice(c, c.skillId ? getSkillById(c.skillId)?.name : undefined))
+            .map((c) => describeUpgradeChoice(c, c.skillId ? (hero.productionIdentity ? playerSkillName(hero,c.skillId) : legacySkillName(c.skillId)) : undefined))
             .join('，')}（-${totals.xp} XP，-${totals.gold} Gold）。`,
           kind: 'success' as const,
         },

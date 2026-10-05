@@ -1,7 +1,13 @@
+import { areaDistance } from '../game-engine/bosses/foundation';
+import { ruinsRoom, ruinsTile } from '../game-engine/ruins/source-registry';
+import { ruinsAreaDistance } from '../game-engine/ruins/monster-runtime';
+import { canMoveRuinsUnit } from '../game-engine/ruins/movement-runtime';
 import { useMemo, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useGameStore } from '../store/useGameStore';
-import { getHeroById } from '../data/heroes';
+import ProductionHeroActionPanel from '../components/battle/ProductionHeroActionPanel';
+import {pendingProductionAction} from '../game-engine/heroes/player-commands';
+import {legacyHeroColor} from '../game-engine/heroes/legacy-player';
 import { getMonsterById } from '../data/monsters';
 import { getActiveUnit, getUnit, legalTargetsForActor } from '../game-engine/battle';
 import type { BattleUnit } from '../types';
@@ -21,6 +27,10 @@ import TrinketSlots from '../components/trinkets/TrinketSlots';
 export default function BattlePage() {
   const navigate = useNavigate();
   const campaign = useGameStore((s) => s.campaign);
+  const battleHeroAreaMove = useGameStore(s=>s.battleHeroAreaMove);
+  const battleContinueResolution = useGameStore(s=>s.battleContinueResolution);
+  const battleOrdinaryChoice = useGameStore(s => s.battleOrdinaryChoice);
+  const battleRoomInteract = useGameStore(s => s.battleRoomInteract);
   const commitBossChoice = useGameStore((s) => s.commitBossChoice);
   const battleSkillId = useGameStore((s) => s.ui.battleSkillId);
   const selectBattleSkill = useGameStore((s) => s.selectBattleSkill);
@@ -38,6 +48,7 @@ export default function BattlePage() {
   // 当前英雄可选技能的合法目标（仅在已选技能时计算）。
   const legalTargetIds = useMemo(() => {
     if (!battle || battle.status !== 'active' || !battleSkillId) return [];
+    if(battle.heroes.some(h=>h.id===battle.activeActorId&&h.productionIdentity))return [];
     return legalTargetsForActor(battle, battleSkillId);
   }, [battle, battleSkillId]);
 
@@ -45,12 +56,15 @@ export default function BattlePage() {
   if (!battle) return <Navigate to="/dungeon" replace />;
 
   const activeUnit = getActiveUnit(battle);
-  const isHeroTurn = battle.status === 'active' && activeUnit?.side === 'hero';
+  const isHeroTurn = battle.status === 'active' && activeUnit?.side === 'hero'
+    && !battle.ruinsContext?.pendingChoice && !battle.ruinsContext?.pendingReanimationChoice
+    && !battle.productionMonsterContext?.pendingChoice && !battle.productionMonsterContext?.blocker;
+  const ordinaryChoice = battle.productionMonsterContext?.pendingChoice ?? battle.ruinsContext?.pendingReanimationChoice ?? battle.ruinsContext?.pendingChoice;
 
   const colorOf = (u: BattleUnit): string => {
     if (u.side === 'monster') return getMonsterById(u.sourceId)?.color ?? '#8b2b2b';
     const inst = campaign.heroes.find((h) => h.instanceId === u.sourceId);
-    return (inst && getHeroById(inst.heroId)?.color) ?? '#5b8a5b';
+    return (inst && (inst.productionIdentity ? '#675849' : legacyHeroColor(inst.heroId))) ?? '#5b8a5b';
   };
 
   const onPickTarget = (unitId: string) => {
@@ -82,6 +96,16 @@ export default function BattlePage() {
 
   return (
     <div className="p-6 max-w-5xl mx-auto space-y-4">
+      <ProductionHeroActionPanel key={campaign.heroProductionSession?.pendingAction?.actionId??'idle'} campaign={campaign}/>
+      {battle.productionMonsterContext?.blocker && <p role="alert" data-testid="monster-semantic-blocker">此怪物动作无法执行：官方来源语义尚未明确（DEFERRED_SEMANTIC）。{battle.productionMonsterContext.blocker.actionId}</p>}
+      {ordinaryChoice && <section className="rounded border border-dd-accent p-4" aria-label="Ruins 待决选择">
+        <p>{battle.ruinsContext?.pendingReanimationChoice ? '选择复生的死亡实例' : '选择移动结果'}</p>
+        <div className="flex flex-wrap gap-2 mt-2">{ordinaryChoice.candidateIds.map(id => <button key={id}
+          className="px-3 py-2 rounded bg-dd-panel2 border border-dd-border"
+          onClick={() => battleOrdinaryChoice(ordinaryChoice.choiceId, id)}>
+          {battle.ruinsContext?.retiredMonsterInstances?.find(d => d.unit.id === id)?.unit.name ?? id}
+        </button>)}</div>
+      </section>}
       {battle.bossEncounter?.pendingChoice && <BossChoicePanel key={battle.bossEncounter.pendingChoice.choiceId}
         choice={battle.bossEncounter.pendingChoice} onConfirm={commitBossChoice}
         candidateLabel={id => [...battle.heroes, ...battle.monsters].find(u => u.id === id)?.name ?? id} />}
@@ -93,6 +117,49 @@ export default function BattlePage() {
       </div>
 
       <InitiativeBar battle={battle} />
+      {battle.bossEncounter?.prophetProduction && <section aria-label="Prophet 状态" className="rounded border border-dd-border p-3">
+        <p data-testid="prophet-action-ordinal">Prophet 行动 {battle.bossEncounter.prophetProduction.actionOrdinal} / 3</p>
+        {battle.bossEncounter.prophetProduction.pews.slice().sort((a,b)=>a.ordinal-b.ordinal).map(pew=><p key={pew.physicalCopyId} data-testid={'prophet-pew-'+pew.ordinal}>
+          Wooden Pew {pew.ordinal} · {pew.areaId ?? '储存'} · {pew.lifecycle}
+        </p>)}
+        <p data-testid="prophet-rubble-progress">Rubble {battle.bossEncounter.prophetProduction.rubbleCursor} / 4</p>
+      </section>}
+      {(battle.bossEncounter?.checkpointContext?.playerRouteVersion || battle.productionMonsterContext?.playerRouteVersion) && battle.status==='active' && !battle.bossEncounter?.pendingChoice
+        && !ordinaryChoice && !battle.productionMonsterContext?.blocker
+        && (battle.pendingMonsterAttack || !battle.activeActorId || activeUnit?.side==='monster') && <section
+          data-testid={battle.pendingMonsterAttack?.stage ?? 'battle-resolution-window'} className="rounded border border-dd-border p-3">
+          {battle.pendingMonsterAttack ? <p>攻击骰 {battle.pendingMonsterAttack.attackRoll} · 目标 {battle.heroes.find(h=>h.id===battle.pendingMonsterAttack!.targetHeroUnitId)?.name}
+            {battle.pendingMonsterAttack.stage==='hero-hit-window' ? ` · 伤害 ${battle.pendingMonsterAttack.baseDamage}` : ' · 命中尚未结算'}</p> : <p>继续战斗结算</p>}
+          <button data-testid="battle-continue-resolution" onClick={battleContinueResolution}>继续</button>
+        </section>}
+      {battle.ruinsContext && <section aria-label="Ruins 房间区域" className="rounded border border-dd-border p-3">
+        <p>Ruins Room {battle.ruinsContext.roomNumber}</p>
+        <div className="grid grid-cols-2 gap-2 mt-2">{ruinsTile(battle.ruinsContext.tileId).areas.map(area => {
+          const context = battle.ruinsContext!;
+          const occupants = [...battle.heroes, ...battle.monsters].filter(u => u.isAlive && context.placements[u.id] === area.id);
+          const movable = isHeroTurn && !pendingProductionAction(campaign) && !battle.pendingAction && !battle.pendingMonsterAttack && battle.currentActionPoints > 0
+            && context.placements[activeUnit!.id] !== area.id
+            && ruinsAreaDistance(ruinsTile(context.tileId), context.placements[activeUnit!.id], area.id) <= (activeUnit!.productionMovement?.presence==='PRINTED_VALUE'?activeUnit!.productionMovement.value.count:activeUnit!.speed)
+            && canMoveRuinsUnit(battle, activeUnit!.id, activeUnit!.id, area.id);
+          return <div key={area.id} className="border border-dd-border p-2 text-sm">
+            <p>{area.id} · 容量 {area.capacity}</p><p>{occupants.map(u => u.name).join('、') || '空'}</p>
+            {movable && <button onClick={() => battleHeroAreaMove(area.id)}>移动到 {area.id}</button>}
+          </div>;
+        })}</div>
+        {isHeroTurn && !pendingProductionAction(campaign) && !battle.pendingAction && !battle.pendingMonsterAttack && ruinsRoom(battle.ruinsContext.roomNumber).rules
+          .filter(rule => rule.trigger === 'INTERACT' && rule.areas.includes(battle.ruinsContext!.placements[activeUnit!.id])
+            && battle.currentActionPoints >= rule.actionCost && (!rule.oncePerBattle || !battle.ruinsContext!.roomUses.includes(rule.id))
+            && (!rule.requiresNoMonsters || !battle.monsters.some(u => u.isAlive)))
+          .map(rule => <button key={rule.id} onClick={() => battleRoomInteract(rule.id)}>房间互动 · {rule.id}</button>)}
+      </section>}
+      {battle.bossEncounter && isHeroTurn && !pendingProductionAction(campaign) && !battle.pendingMonsterAttack && !battle.bossEncounter.pendingChoice && <div className="flex gap-2" data-testid="boss-area-movement">
+        {battle.bossEncounter.definition.areas.filter(a=>a.id!==battle.bossEncounter!.placements[activeUnit!.id]
+          && areaDistance(battle.bossEncounter!.definition,battle.bossEncounter!.placements[activeUnit!.id],a.id)<=(activeUnit!.productionMovement?.presence==='PRINTED_VALUE'?activeUnit!.productionMovement.value.count:activeUnit!.speed)
+          && a.capacity > [...battle.heroes,...battle.monsters].filter(u=>u.isAlive && battle.bossEncounter!.placements[u.id]===a.id)
+            .reduce((n,u)=>n+(battle.actorOccupancy?.occupiedSpaces[u.id] ?? battle.bossEncounter!.spawnDefinitions[u.sourceId]?.occupiedSlots ?? 1),0))
+          .map(a=><button key={a.id} disabled={battle.currentActionPoints<=0} data-testid="boss-move-area" data-area-id={a.id}
+            onClick={()=>battleHeroAreaMove(a.id)}>移动到 {a.id}</button>)}
+      </div>}
 
       {battle.pendingAction ? (
         <div

@@ -1,0 +1,863 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C34",
+  "baseline": "e1fcfac0692eb91c5710552ac93e3bacb25f0240",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "contractVersion": "C1C34-SUCCESSOR-BINDING-v1",
+  "gameplayChanged": false,
+  "productionPromotion": false,
+  "inputHashes": {
+    "docs/data/complete-edition/c1c24-boss-printed-definitions.json": "dfc9fb3369aa991b6b1d1e9acb3bb3127e7ef91ecaa655126684dbb71eec5483",
+    "docs/data/complete-edition/c1c24-boss-family-completeness-matrix.json": "883348365fddf909d8fdab193497f0ff70f50988ff21fd72c5e40a814d056d42",
+    "docs/data/complete-edition/c1c24-boss-crop-manifest.json": "d98223329c4a4267fcb6d876770a46daa7929cccbe990fb48dcfe1e92bb45d17",
+    "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+    "docs/data/complete-edition/c1c32r2-ruins-room-deck-contract.json": "b8df3eb4e12b41a206094614f36e25632cdc462c39f2729a80806e7f41169cd9",
+    "docs/data/complete-edition/c1c32r2a-ruins-tile-area-definitions.json": "f0f619d412701bf6f7e2c1d0049a60dbcbf92efaaf2c65e9dfbb0b3c7028a0b2",
+    "docs/data/complete-edition/rule-source-policy.json": "ced6c1b05610623c4e98338bab6309b5114e61611937bc8555f53852df8149d0"
+  },
+  "prototypeAsAuthority": false,
+  "externalAcquisition": false,
+  "legacyAudit": {
+    "path": "docs/reports/phase-9c-prophet-data-audit.md",
+    "sha256": "261d5a51b0930124300154a0b9ae0b3b446bef66d979b4f0694d9fafc0941175"
+  },
+  "physicalCards": 9,
+  "frozenCensusLiteralComplete": 6,
+  "items": [
+    {
+      "id": "level-1-battle",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "value": {
+        "cardId": 46604,
+        "legacyLiteralStatus": "LITERAL_PARTIAL",
+        "visualReview": "C1C34 independent locked crop review; unresolved glyph binding remains below",
+        "literalComplete": false
+      },
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46604-7b5887-front.png",
+          "sha256": "e7841e60e76498cc720ace5b6efd1da41b9b1f9e5551aa9fa12f3790e7652290",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46604-7b5887-back.png",
+          "sha256": "a7eca176010c24387e582696f7d7bd02e5cd3c7213a909d616549c0d18e374b7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "transportIsAuthority": false
+        }
+      ],
+      "reason": "Card image is available; C1C24 partial literal is frozen, not promoted.",
+      "executable": false
+    },
+    {
+      "id": "level-1-stats",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "value": {
+        "life": 79,
+        "dodge": 0,
+        "printedType": "Unholy - Front - Large",
+        "resistanceColumn": "EMPTY",
+        "immunityGlyphs": [
+          "YELLOW_THREE_DIAMONDS",
+          "CYAN_DOUBLE_LEFT_CHEVRON"
+        ]
+      },
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46604-7b5887-front.png",
+          "sha256": "e7841e60e76498cc720ace5b6efd1da41b9b1f9e5551aa9fa12f3790e7652290",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46604-7b5887-back.png",
+          "sha256": "a7eca176010c24387e582696f7d7bd02e5cd3c7213a909d616549c0d18e374b7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "transportIsAuthority": false
+        }
+      ],
+      "reason": "Numbers and glyph appearances read independently for this level. Glyph execution needs binding.",
+      "executable": false
+    },
+    {
+      "id": "level-1-skill-table",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "value": {
+        "stance": "AGGRESSIVE",
+        "rollToSkill": {
+          "1-5": "Eye on You",
+          "6-10": "Fulminate"
+        },
+        "secondActionOnly": true,
+        "skills": [
+          {
+            "name": "Eye on You",
+            "crit": 0,
+            "criticalDamage": 2,
+            "accuracy": 9,
+            "damage": 1,
+            "targetLabel": "Crowded",
+            "printedRange": 1,
+            "printedTargetGlyphCount": 2,
+            "targetEffectLiteral": "YELLOW_THREE_DIAMONDS 2t; BLACK_STRESS_ICON +1"
+          },
+          {
+            "name": "Fulminate",
+            "crit": 0,
+            "criticalDamage": 2,
+            "accuracy": 8,
+            "damage": 1,
+            "targetLabel": "Crowded",
+            "printedRange": 1,
+            "printedTargetGlyphCount": 4,
+            "targetEffectLiteral": "1 GREEN_DROPLET 3t"
+          },
+          {
+            "name": "Rubble of Ruin",
+            "crit": 0,
+            "criticalDamage": 14,
+            "accuracy": 8,
+            "damage": 9,
+            "targetLabel": "Special",
+            "printedRange": null,
+            "printedTargetGlyphCount": null,
+            "targetEffectLiteral": "NONE_PRINTED"
+          }
+        ]
+      },
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46604-7b5887-front.png",
+          "sha256": "e7841e60e76498cc720ace5b6efd1da41b9b1f9e5551aa9fa12f3790e7652290",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46604-7b5887-back.png",
+          "sha256": "a7eca176010c24387e582696f7d7bd02e5cd3c7213a909d616549c0d18e374b7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "transportIsAuthority": false
+        }
+      ],
+      "reason": "Printed values available; exact target/effect ordering is not inferred from existing code.",
+      "executable": false
+    },
+    {
+      "id": "level-1-rubble",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "value": {
+        "name": "Rubble of Ruin",
+        "crit": 0,
+        "criticalDamage": 14,
+        "accuracy": 8,
+        "damage": 9,
+        "targetLabel": "Special"
+      },
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46604-7b5887-front.png",
+          "sha256": "e7841e60e76498cc720ace5b6efd1da41b9b1f9e5551aa9fa12f3790e7652290",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46604-7b5887-back.png",
+          "sha256": "a7eca176010c24387e582696f7d7bd02e5cd3c7213a909d616549c0d18e374b7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "transportIsAuthority": false
+        }
+      ],
+      "reason": "Numerical source gap from Phase 9C is closed; each Pew still requires source-bound attack execution.",
+      "executable": false
+    },
+    {
+      "id": "level-1-threat",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "value": {
+        "cardId": 42009,
+        "frontLiteral": "Prophet\n[LEVEL:I]\nACTIONS / Round: 3\nCalamitous Prognostication: On his first turn each round, instead of using a Skill, the Prophet rolls 4 [D10] and places the 4 Wooden Pews in the corresponding Areas on the board.\nRubble of Ruin: On his third turn each round, the Prophet uses his Rubble of Ruin Skill, targeting all Areas with Wooden Pews. Roll an attack for each pew separately.",
+        "backLiteral": "[LEVEL:I]\n[GREEN_DUNGEON_ARCH]\nVisions of a Torturous End\nWhen entering the Dungeon, each Hero suffers [BLACK_STRESS_SQUARE]+2.\n[LOWER_HALF_ROTATED_180]\nVisions of Past Deeds\nThe Tavern recovers [BLACK_STRESS_SQUARE]-1.",
+        "literalComplete": true
+      },
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/42009-0485bd-front.png",
+          "sha256": "54860fdcb77235fcb99cdcbf38a6726052b549ce2b2892dcf1b89e4579549a15",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/1",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/42009-0485bd-back.png",
+          "sha256": "f7ed2e01f4e1bf88f1ffd6ea7bd5a8df5183e2e3af721d6018c23ce175584cfe",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/1",
+          "transportIsAuthority": false
+        }
+      ],
+      "reason": "Both printed sides locked; lifecycle hooks require production binding.",
+      "executable": false
+    },
+    {
+      "id": "level-2-battle",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "value": {
+        "cardId": 46605,
+        "legacyLiteralStatus": "LITERAL_PARTIAL",
+        "visualReview": "C1C34 independent locked crop review; unresolved glyph binding remains below",
+        "literalComplete": false
+      },
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46605-36fbfc-front.png",
+          "sha256": "bf1beb4b5e820bf2fd706029bd3320f006423f2e9561b3473cbbea7832e8262d",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46605-36fbfc-back.png",
+          "sha256": "1fd5bb522e391d1fc8048cfb8bc5f5c85f859a9dbd8a3c8aaea961a4190d1174",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "transportIsAuthority": false
+        }
+      ],
+      "reason": "Card image is available; C1C24 partial literal is frozen, not promoted.",
+      "executable": false
+    },
+    {
+      "id": "level-2-stats",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "value": {
+        "life": 106,
+        "dodge": 1,
+        "printedType": "Unholy - Front - Large",
+        "resistanceColumn": "EMPTY",
+        "immunityGlyphs": [
+          "YELLOW_THREE_DIAMONDS",
+          "CYAN_DOUBLE_LEFT_CHEVRON"
+        ]
+      },
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46605-36fbfc-front.png",
+          "sha256": "bf1beb4b5e820bf2fd706029bd3320f006423f2e9561b3473cbbea7832e8262d",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46605-36fbfc-back.png",
+          "sha256": "1fd5bb522e391d1fc8048cfb8bc5f5c85f859a9dbd8a3c8aaea961a4190d1174",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "transportIsAuthority": false
+        }
+      ],
+      "reason": "Numbers and glyph appearances read independently for this level. Glyph execution needs binding.",
+      "executable": false
+    },
+    {
+      "id": "level-2-skill-table",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "value": {
+        "stance": "AGGRESSIVE",
+        "rollToSkill": {
+          "1-5": "Eye on You",
+          "6-10": "Fulminate"
+        },
+        "secondActionOnly": true,
+        "skills": [
+          {
+            "name": "Eye on You",
+            "crit": 1,
+            "criticalDamage": 3,
+            "accuracy": 10,
+            "damage": 2,
+            "targetLabel": "Crowded",
+            "printedRange": 1,
+            "printedTargetGlyphCount": 2,
+            "targetEffectLiteral": "YELLOW_THREE_DIAMONDS 2t; BLACK_STRESS_ICON +1"
+          },
+          {
+            "name": "Fulminate",
+            "crit": 1,
+            "criticalDamage": 3,
+            "accuracy": 9,
+            "damage": 2,
+            "targetLabel": "Crowded",
+            "printedRange": 1,
+            "printedTargetGlyphCount": 4,
+            "targetEffectLiteral": "2 GREEN_DROPLET 3t"
+          },
+          {
+            "name": "Rubble of Ruin",
+            "crit": 0,
+            "criticalDamage": 19,
+            "accuracy": 9,
+            "damage": 12,
+            "targetLabel": "Special",
+            "printedRange": null,
+            "printedTargetGlyphCount": null,
+            "targetEffectLiteral": "NONE_PRINTED"
+          }
+        ]
+      },
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46605-36fbfc-front.png",
+          "sha256": "bf1beb4b5e820bf2fd706029bd3320f006423f2e9561b3473cbbea7832e8262d",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46605-36fbfc-back.png",
+          "sha256": "1fd5bb522e391d1fc8048cfb8bc5f5c85f859a9dbd8a3c8aaea961a4190d1174",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "transportIsAuthority": false
+        }
+      ],
+      "reason": "Printed values available; exact target/effect ordering is not inferred from existing code.",
+      "executable": false
+    },
+    {
+      "id": "level-2-rubble",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "value": {
+        "name": "Rubble of Ruin",
+        "crit": 0,
+        "criticalDamage": 19,
+        "accuracy": 9,
+        "damage": 12,
+        "targetLabel": "Special"
+      },
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46605-36fbfc-front.png",
+          "sha256": "bf1beb4b5e820bf2fd706029bd3320f006423f2e9561b3473cbbea7832e8262d",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46605-36fbfc-back.png",
+          "sha256": "1fd5bb522e391d1fc8048cfb8bc5f5c85f859a9dbd8a3c8aaea961a4190d1174",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "transportIsAuthority": false
+        }
+      ],
+      "reason": "Numerical source gap from Phase 9C is closed; each Pew still requires source-bound attack execution.",
+      "executable": false
+    },
+    {
+      "id": "level-2-threat",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "value": {
+        "cardId": 42010,
+        "frontLiteral": "Prophet\n[LEVEL:II]\nACTIONS / Round: 3\nCalamitous Prognostication: On his first turn each round, instead of using a Skill, the Prophet rolls 4 [D10] and places the 4 Wooden Pews in the corresponding Areas on the board.\nRubble of Ruin: On his third turn each round, the Prophet uses his Rubble of Ruin Skill, targeting all Areas with Wooden Pews. Roll an attack for each pew separately.",
+        "backLiteral": "[LEVEL:II]\n[GREEN_DUNGEON_ARCH]\nConvoluted Farsight\nWhen scouting, Heroes suffer [BLACK_STRESS_SQUARE]+1.\n[LOWER_HALF_ROTATED_180]\nVisions of a Bleak Future\nThe Tavern recovers [BLACK_STRESS_SQUARE]-2.",
+        "literalComplete": true
+      },
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/42010-a1750d-front.png",
+          "sha256": "efe6c9449e3ecb7c317889fbb3d89f79fbe4ccbaf891ffe83f921f23f7050a72",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/0",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/42010-a1750d-back.png",
+          "sha256": "ff157ac1915916741afc10aa32bfba5e5525299faaffe91a99fd0d4ce6cb842a",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/0",
+          "transportIsAuthority": false
+        }
+      ],
+      "reason": "Both printed sides locked; lifecycle hooks require production binding.",
+      "executable": false
+    },
+    {
+      "id": "level-3-battle",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "value": {
+        "cardId": 46606,
+        "legacyLiteralStatus": "LITERAL_PARTIAL",
+        "visualReview": "C1C34 independent locked crop review; unresolved glyph binding remains below",
+        "literalComplete": false
+      },
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46606-1784ce-front.png",
+          "sha256": "a22d7c1ba5607d5f76e6dbce4f8386774fdd3401ff6b4ba6b2decd6802aa5ad5",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46606-1784ce-back.png",
+          "sha256": "4164824f04674bda928d39342275bbcb5c7b559d7cb6042504242291feea7606",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6",
+          "transportIsAuthority": false
+        }
+      ],
+      "reason": "Card image is available; C1C24 partial literal is frozen, not promoted.",
+      "executable": false
+    },
+    {
+      "id": "level-3-stats",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "value": {
+        "life": 151,
+        "dodge": 3,
+        "printedType": "Unholy - Front - Large",
+        "resistanceColumn": "EMPTY",
+        "immunityGlyphs": [
+          "YELLOW_THREE_DIAMONDS",
+          "CYAN_DOUBLE_LEFT_CHEVRON"
+        ]
+      },
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46606-1784ce-front.png",
+          "sha256": "a22d7c1ba5607d5f76e6dbce4f8386774fdd3401ff6b4ba6b2decd6802aa5ad5",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46606-1784ce-back.png",
+          "sha256": "4164824f04674bda928d39342275bbcb5c7b559d7cb6042504242291feea7606",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6",
+          "transportIsAuthority": false
+        }
+      ],
+      "reason": "Numbers and glyph appearances read independently for this level. Glyph execution needs binding.",
+      "executable": false
+    },
+    {
+      "id": "level-3-skill-table",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "value": {
+        "stance": "AGGRESSIVE",
+        "rollToSkill": {
+          "1-5": "Eye on You",
+          "6-10": "Fulminate"
+        },
+        "secondActionOnly": true,
+        "skills": [
+          {
+            "name": "Eye on You",
+            "crit": 1,
+            "criticalDamage": 5,
+            "accuracy": 11,
+            "damage": 3,
+            "targetLabel": "Crowded",
+            "printedRange": 1,
+            "printedTargetGlyphCount": 2,
+            "targetEffectLiteral": "YELLOW_THREE_DIAMONDS 2t; BLACK_STRESS_ICON +1"
+          },
+          {
+            "name": "Fulminate",
+            "crit": 1,
+            "criticalDamage": 5,
+            "accuracy": 10,
+            "damage": 3,
+            "targetLabel": "Crowded",
+            "printedRange": 1,
+            "printedTargetGlyphCount": 4,
+            "targetEffectLiteral": "3 GREEN_DROPLET 3t"
+          },
+          {
+            "name": "Rubble of Ruin",
+            "crit": 0,
+            "criticalDamage": 24,
+            "accuracy": 10,
+            "damage": 16,
+            "targetLabel": "Special",
+            "printedRange": null,
+            "printedTargetGlyphCount": null,
+            "targetEffectLiteral": "NONE_PRINTED"
+          }
+        ]
+      },
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46606-1784ce-front.png",
+          "sha256": "a22d7c1ba5607d5f76e6dbce4f8386774fdd3401ff6b4ba6b2decd6802aa5ad5",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46606-1784ce-back.png",
+          "sha256": "4164824f04674bda928d39342275bbcb5c7b559d7cb6042504242291feea7606",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6",
+          "transportIsAuthority": false
+        }
+      ],
+      "reason": "Printed values available; exact target/effect ordering is not inferred from existing code.",
+      "executable": false
+    },
+    {
+      "id": "level-3-rubble",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "value": {
+        "name": "Rubble of Ruin",
+        "crit": 0,
+        "criticalDamage": 24,
+        "accuracy": 10,
+        "damage": 16,
+        "targetLabel": "Special"
+      },
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46606-1784ce-front.png",
+          "sha256": "a22d7c1ba5607d5f76e6dbce4f8386774fdd3401ff6b4ba6b2decd6802aa5ad5",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46606-1784ce-back.png",
+          "sha256": "4164824f04674bda928d39342275bbcb5c7b559d7cb6042504242291feea7606",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6",
+          "transportIsAuthority": false
+        }
+      ],
+      "reason": "Numerical source gap from Phase 9C is closed; each Pew still requires source-bound attack execution.",
+      "executable": false
+    },
+    {
+      "id": "level-3-threat",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "value": {
+        "cardId": 42011,
+        "frontLiteral": "Prophet\n[LEVEL:III]\nACTIONS / Round: 3\nCalamitous Prognostication: On his first turn each round, instead of using a Skill, the Prophet rolls 4 [D10] and places the 4 Wooden Pews in the corresponding Areas on the board.\nRubble of Ruin: On his third turn each round, the Prophet uses his Rubble of Ruin Skill, targeting all Areas with Wooden Pews. Roll an attack for each pew separately.",
+        "backLiteral": "[LEVEL:III]\n[GREEN_DUNGEON_ARCH]\nFear of the Beyond\nWhenever an unholy Monster is spawned in Battle, each Hero suffers [BLACK_STRESS_SQUARE]+1.\n[LOWER_HALF_ROTATED_180]\nVisions of Doom\nThe Tavern recovers [BLACK_STRESS_SQUARE]-3.",
+        "literalComplete": true
+      },
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/42011-00a8b4-front.png",
+          "sha256": "de5ec1972cb2657dbde83efbdafc5a2a1d2bfa9dfa05bc5b17937cf1a9bb1620",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/5",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/42011-00a8b4-back.png",
+          "sha256": "642a419a1ef419839393c1b81e22f07cc03f2db6a1dfb6cd130e86ba1afd6818",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/5",
+          "transportIsAuthority": false
+        }
+      ],
+      "reason": "Both printed sides locked; lifecycle hooks require production binding.",
+      "executable": false
+    },
+    {
+      "id": "room",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "value": {
+        "roomNumber": 11,
+        "sourceCardId": 44710,
+        "tileId": "ruins-tile-11",
+        "printedText": "6\n3\n4\n7-8\n10\n5\n9\n1-2\n11\n11—Prophet Room\nBOSS"
+      },
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "sha256": "1434c53d5dac4e79f3fe091c9dc97c0442864644cb043b12c3fc596ae7c30b72",
+          "page": 11,
+          "location": "full printed face",
+          "componentId": "ruins-room-11",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "sha256": "82128bffbce39d6624fde4a42cb2f9466d46b657bf13fb14ee6ac7ae11f094b2",
+          "page": 11,
+          "location": "printed back",
+          "componentId": "ruins-room-11",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "reason": "Locked Room 11 extraction exists; spatial positions were not captured by linear text.",
+      "executable": false
+    },
+    {
+      "id": "tile",
+      "status": "SOURCE_UNRESOLVED",
+      "canonical": false,
+      "value": null,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "sha256": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+          "pages": [
+            38,
+            39
+          ]
+        }
+      ],
+      "reason": "No locked executable Prophet Tile 11 geometry; Ruins v6 binds only ordinary tiles 1-9.",
+      "executable": false
+    },
+    {
+      "id": "d10-area-mapping",
+      "status": "SOURCE_UNRESOLVED",
+      "canonical": false,
+      "value": null,
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "sha256": "1434c53d5dac4e79f3fe091c9dc97c0442864644cb043b12c3fc596ae7c30b72",
+          "page": 11,
+          "location": "full printed face",
+          "componentId": "ruins-room-11",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "sha256": "82128bffbce39d6624fde4a42cb2f9466d46b657bf13fb14ee6ac7ae11f094b2",
+          "page": 11,
+          "location": "printed back",
+          "componentId": "ruins-room-11",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "reason": "Printed roll labels are available but their exact Area positions are unbound. Do not use prototype map or evenly distribute rolls.",
+      "executable": false
+    },
+    {
+      "id": "wooden-pews",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "value": {
+        "count": 4,
+        "firstTurnDice": 4,
+        "initiatives": 3,
+        "stance": "AGGRESSIVE",
+        "thirdAction": "Rubble of Ruin",
+        "attackEachPewSeparately": true,
+        "occupiesSpace": false,
+        "targetable": false,
+        "removeOnBossDefeat": true
+      },
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "sha256": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+          "pages": [
+            38,
+            39
+          ]
+        }
+      ],
+      "reason": "p38 right-column / p39 left-column; reusable behavior independent of missing spatial definitions.",
+      "executable": false
+    },
+    {
+      "id": "crowded-area-tie",
+      "status": "PROJECT_RULING_REQUIRED",
+      "canonical": false,
+      "value": null,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46604-7b5887-front.png",
+          "sha256": "e7841e60e76498cc720ace5b6efd1da41b9b1f9e5551aa9fa12f3790e7652290",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46604-7b5887-back.png",
+          "sha256": "a7eca176010c24387e582696f7d7bd02e5cd3c7213a909d616549c0d18e374b7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46605-36fbfc-front.png",
+          "sha256": "bf1beb4b5e820bf2fd706029bd3320f006423f2e9561b3473cbbea7832e8262d",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46605-36fbfc-back.png",
+          "sha256": "1fd5bb522e391d1fc8048cfb8bc5f5c85f859a9dbd8a3c8aaea961a4190d1174",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46606-1784ce-front.png",
+          "sha256": "a22d7c1ba5607d5f76e6dbce4f8386774fdd3401ff6b4ba6b2decd6802aa5ad5",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46606-1784ce-back.png",
+          "sha256": "4164824f04674bda928d39342275bbcb5c7b559d7cb6042504242291feea7606",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6",
+          "transportIsAuthority": false
+        }
+      ],
+      "reason": "No Prophet-specific versioned choice/ordering contract. Necromancer rulings may inform review but do not automatically apply.",
+      "executable": false
+    },
+    {
+      "id": "pew-attack-order-and-save",
+      "status": "PROJECT_RULING_REQUIRED",
+      "canonical": false,
+      "value": null,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "sha256": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+          "pages": [
+            38,
+            39
+          ]
+        }
+      ],
+      "reason": "Bind independent attack order, atomic death windows, interrupted cursor and causal replay before execution. No implicit array order.",
+      "executable": false
+    },
+    {
+      "id": "target-effect-glyph-binding",
+      "status": "SOURCE_UNRESOLVED",
+      "canonical": false,
+      "value": null,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46604-7b5887-front.png",
+          "sha256": "e7841e60e76498cc720ace5b6efd1da41b9b1f9e5551aa9fa12f3790e7652290",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46604-7b5887-back.png",
+          "sha256": "a7eca176010c24387e582696f7d7bd02e5cd3c7213a909d616549c0d18e374b7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/2",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46605-36fbfc-front.png",
+          "sha256": "bf1beb4b5e820bf2fd706029bd3320f006423f2e9561b3473cbbea7832e8262d",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46605-36fbfc-back.png",
+          "sha256": "1fd5bb522e391d1fc8048cfb8bc5f5c85f859a9dbd8a3c8aaea961a4190d1174",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/4",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46606-1784ce-front.png",
+          "sha256": "a22d7c1ba5607d5f76e6dbce4f8386774fdd3401ff6b4ba6b2decd6802aa5ad5",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6",
+          "transportIsAuthority": false
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/46606-1784ce-back.png",
+          "sha256": "4164824f04674bda928d39342275bbcb5c7b559d7cb6042504242291feea7606",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "physicalIdentity": "tts-path:/ObjectStates/47/ContainedObjects/6/ContainedObjects/0/ContainedObjects/2/ContainedObjects/6",
+          "transportIsAuthority": false
+        }
+      ],
+      "reason": "Normalize immunity, target icons and effect timing through locked rulebook clauses; crop recognition alone is not an executable definition.",
+      "executable": false
+    }
+  ]
+}

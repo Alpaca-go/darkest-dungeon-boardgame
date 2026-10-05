@@ -1,3 +1,4 @@
+import { productionMonsterAttackSkill, validateProductionMonsterBattle } from './monsters/production-battle-runtime';
 import type {
   ActiveThreatRuntime,
   BattleState,
@@ -20,9 +21,28 @@ import type {
   TrinketSide,
 } from '../types';
 import type { QuestRuntimeToken } from '../types/content-runtime';
+import { validateProductionBossRoomStorage } from './bosses/room-storage';
+import { migrateHeroRuntimeV23, validateHeroRuntime, stableHeroState } from './heroes/save-contract';
+import { HERO_RUNTIME_VERSION } from '../data/heroes/runtime-registry';
+import { sourceAttackSkill } from './component-monster-runtime';
 import { nowIso } from './random';
-import { assertBossEncounter } from './bosses/foundation';
-import { resolveBossDefinition } from './bosses/definitions';
+import {validateBossSaveContracts} from './bosses/save-dispatch';
+import { validateThreatCheckpoint } from './bosses/threat-checkpoint';
+import { validateHeroDodgeCampaignMetadata } from './rules/hero-dodge-versioning';
+import { validateGraveyardReceipts } from './campaign/necromancer-graveyard';
+import { validateNecromancerPreparationDay } from './campaign/necromancer-preparation-day';
+import { validateRuinsVersionSelection } from './rules/ruins-v4';
+import { validateRuinsV5Selection } from './rules/ruins-v5';
+import { validateRuinsV6Selection } from './rules/ruins-v6';
+import { validateSourceTrinketRewards } from './trinkets/source-deck';
+import { RUINS_V5, RUINS_V6 } from '../types/ruins-executable';
+import { validateRuinsDrawState } from './ruins/encounter-draw';
+import { validateOrdinaryRuinsBattle } from './ruins/battle-runtime';
+import { validateQuestThreatHistory } from './bosses/quest-threat-history';
+import { validateProductionOrdinaryThreat } from './ruins/production-threat-runtime';
+import { validateRuinsPendingAttack } from './ruins/monster-runtime';
+import { validateBoneFigureSupply, validateNecromancerFigures } from './ruins/physical-supply';
+import { validateLargeMovementContract } from './rules/large-movement-contract';
 import { createInitialStagecoach } from './stagecoach';
 import { getQuirkById, normalizeQuirkId } from '../data/quirks';
 import { getDiseaseById } from '../data/diseases';
@@ -95,7 +115,7 @@ export const STORAGE_KEY = 'dd-web-prototype-save-v1';
  *      Load 后由存档数据自行补齐（如缺失则视为空字符串，等待下次 selectQuest 重新生成）。
  *      迁移**不**根据 questCount 推断 Act，**不**代掷任何随机数，**不**触发 Threat Draw。
  */
-export const SAVE_VERSION = 22;
+export const SAVE_VERSION = 23;
 
 /**
  * v2 存档文件结构。
@@ -121,7 +141,7 @@ interface SaveEnvelopeV1 {
 }
 
 /** 可被迁移到当前版本的历史存档版本号。 */
-const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
+const LEGACY_SAVE_VERSIONS: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22];
 
 /** 读档结果：区分正常 / 无存档 / 损坏 / 版本不支持。 */
 export type LoadStatus = 'ok' | 'empty' | 'corrupt' | 'unsupported';
@@ -183,15 +203,15 @@ export function validateSaveFile(data: unknown): string | null {
   if (!s.gamePhase || !VALID_PHASES.includes(s.gamePhase)) return `非法 gamePhase：${String(s.gamePhase)}`;
 
   const c = s.campaign as Partial<CampaignState> | undefined;
-  if (c?.bossEncounterCheckpoint || c?.bossEncounterHistory) {
-    try {
-      for (const e of [...(c.bossEncounterHistory ?? []), ...(c.bossEncounterCheckpoint ? [c.bossEncounterCheckpoint] : [])]) {
-        if (JSON.stringify(e.definition) !== JSON.stringify(resolveBossDefinition(e.bossFamily, e.bossLevel, e.ruleSetVersion))) return 'Boss history/checkpoint differs from its pinned contract';
-        if (e.events.some(event => event.ruleSetVersion !== e.ruleSetVersion)) return 'Boss history/checkpoint event version mismatch';
-      }
-    } catch (error) { return `Boss history/checkpoint invalid: ${error instanceof Error ? error.message : String(error)}`; }
-  }
+  if (c) try { validateBossSaveContracts(c); }
+  catch (error) { return `Boss successor save invalid: ${error instanceof Error ? error.message : String(error)}`; }
   if (!c || typeof c !== 'object') return '缺少 campaign 字段';
+  try {
+    validateHeroRuntime(c as CampaignState);
+    if (c.heroRuntimeSelection?.runtimeVersion === HERO_RUNTIME_VERSION && stableHeroState(s.battle) !== stableHeroState(c.battle)) throw new Error('Production Battle mirror mismatch');
+  } catch (error) { return `Hero runtime save invalid: ${error instanceof Error ? error.message : String(error)}`; }
+  try { validateProductionBossRoomStorage(c); validateHeroDodgeCampaignMetadata(c); validateGraveyardReceipts(c); validateNecromancerPreparationDay(c); validateSourceTrinketRewards(c); if (c.ruinsRuleSetSelection?.ruleSetVersion === RUINS_V6) validateRuinsV6Selection(c); else if (c.ruinsRuleSetSelection?.ruleSetVersion === RUINS_V5) validateRuinsV5Selection(c); else validateRuinsVersionSelection(c); if (c.ruinsDrawState?.ruleSetVersion === RUINS_V6) validateRuinsV6Selection(c); if (c.ruinsDrawState) validateRuinsDrawState(c.ruinsDrawState); if (c.ruinsBoneFigureSupply) validateBoneFigureSupply(c.ruinsBoneFigureSupply, c.ruinsDrawState); if (c.battle) { validateLargeMovementContract(c.battle); validateProductionMonsterBattle(c.battle); validateOrdinaryRuinsBattle(c.battle, c.ruinsDrawState); validateRuinsPendingAttack(c.battle); } validateProductionOrdinaryThreat(c as CampaignState); validateQuestThreatHistory(c as CampaignState); }
+  catch (error) { return `Hero Dodge metadata invalid: ${error instanceof Error ? error.message : String(error)}`; }
   if (!Array.isArray(c.heroes)) return 'campaign.heroes 缺失或不是数组';
   if (typeof c.gold !== 'number' || Number.isNaN(c.gold)) return 'campaign.gold 非法';
   if (!c.gamePhase || !VALID_PHASES.includes(c.gamePhase)) return 'campaign.gamePhase 非法';
@@ -428,14 +448,6 @@ export function validateSaveFile(data: unknown): string | null {
   if (c.gamePhase === 'battle') {
     const b = c.battle as BattleState | null | undefined;
     if (!b || !Array.isArray(b.heroes) || !Array.isArray(b.monsters)) return 'battle 阶段缺少合法的 BattleState';
-    if (b.bossEncounter) {
-      try {
-        const e = b.bossEncounter;
-        const definition = resolveBossDefinition(e.bossFamily, e.bossLevel, e.ruleSetVersion);
-        if (JSON.stringify(e.definition) !== JSON.stringify(definition)) return 'Boss executable definition differs from its pinned contract';
-        assertBossEncounter(b);
-      } catch (error) { return `Boss runtime save invalid: ${error instanceof Error ? error.message : String(error)}`; }
-    }
     for (const u of b.heroes) {
       if (!c.heroes.some((h) => h.instanceId === u.sourceId)) {
         return `战斗单位 ${u.id} 引用了不存在的英雄`;
@@ -447,7 +459,7 @@ export function validateSaveFile(data: unknown): string | null {
           (pending.stage !== 'incoming-attack-window' && pending.stage !== 'hero-hit-window')) return 'pendingMonsterAttack stage 非法';
       if (!b.monsters.some((unit) => unit.id === pending.monsterUnitId && unit.isAlive)) return 'pendingMonsterAttack monster 引用失效';
       if (!b.heroes.some((unit) => unit.id === pending.targetHeroUnitId && unit.isAlive)) return 'pendingMonsterAttack target 引用失效';
-      if (!getMonsterSkillById(pending.skillId)) return 'pendingMonsterAttack skill 引用失效';
+      if (!((pending.productionMonsterAttack ? productionMonsterAttackSkill(b) : null) ?? pending.ruinsAttack?.skill ?? sourceAttackSkill(b) ?? getMonsterSkillById(pending.skillId))) return 'pendingMonsterAttack skill 引用失效';
       if (pending.monsterUnitId !== b.activeActorId) return 'pendingMonsterAttack actor 与当前回合不一致';
       if (!Number.isInteger(pending.attackRoll) || pending.attackRoll < 1 || pending.attackRoll > 10) return 'pendingMonsterAttack attackRoll 非法';
       if (!Number.isFinite(pending.dodgeModifier)) return 'pendingMonsterAttack dodgeModifier 非法';
@@ -480,7 +492,7 @@ export function migrateCampaignToV3(campaign: CampaignState): CampaignState {
     const anyH = h as HeroInstance & Record<string, unknown>;
     const dead = typeof anyH.dead === 'boolean' ? anyH.dead : false;
     // 旧存档：wounds >= maxLife（hp<=0）但未死 → 恢复为 1 HP
-    const wounds = !dead && h.wounds >= h.maxLife ? h.maxLife - 1 : h.wounds;
+    const wounds = !dead && anyH.atDeathsDoor !== true && h.wounds >= h.maxLife ? h.maxLife - 1 : h.wounds;
     return {
       ...h,
       wounds: Math.max(0, wounds),
@@ -1423,7 +1435,7 @@ export function migrateCampaignToV20(campaign: CampaignState): CampaignState {
     && battle.activeActorId === pending.monsterUnitId
     && battle.monsters.some((unit) => unit.id === pending.monsterUnitId && unit.isAlive)
     && battle.heroes.some((unit) => unit.id === pending.targetHeroUnitId && unit.isAlive)
-    && typeof pending.skillId === 'string' && Boolean(getMonsterSkillById(pending.skillId))
+    && typeof pending.skillId === 'string' && Boolean((pending.productionMonsterAttack ? productionMonsterAttackSkill(battle) : null) ?? sourceAttackSkill(battle) ?? getMonsterSkillById(pending.skillId))
     && Number.isInteger(pending.attackRoll) && pending.attackRoll >= 1 && pending.attackRoll <= 10
     && typeof pending.dodgeModifier === 'number' && Number.isFinite(pending.dodgeModifier)
     && Number.isInteger(pending.incomingDamageNumerator) && pending.incomingDamageNumerator >= 0
@@ -1615,9 +1627,10 @@ function sanitizeCampaignProgress(raw: CampaignProgressState): CampaignProgressS
       typeof raw.lastCampaignAdvanceTransactionId === 'string'
         ? raw.lastCampaignAdvanceTransactionId
         : null,
-    // 已有 activeThreatId 时不可能仍处于「待初始化」。
+    // A completed prior Act may retain its defeated Threat identity while the next draw is pending.
     pendingThreatInitialization:
-      typeof raw.activeThreatId === 'string' ? false : raw.pendingThreatInitialization !== false,
+      raw.pendingThreatInitialization === true && strArray(raw.defeatedThreatIds).includes(raw.activeThreatId ?? '')
+        ? true : typeof raw.activeThreatId === 'string' ? false : raw.pendingThreatInitialization !== false,
     actStartTransactionIds: strArray(raw.actStartTransactionIds),
   };
 }
@@ -1629,7 +1642,8 @@ function sanitizeCampaignProgress(raw: CampaignProgressState): CampaignProgressS
  *  → v16 = Phase 10E Final Encounter 四形态 → v17 = Phase 11A.1 Campaign Orchestration）。
  */
 export function migrateCampaignToLatest(campaign: CampaignState): CampaignState {
-  return migrateCampaignToV22(migrateCampaignToV20(migrateCampaignToV19(migrateCampaignToV18(migrateCampaignToV17(
+  if (campaign.heroRuntimeSelection?.runtimeVersion === HERO_RUNTIME_VERSION) return migrateHeroRuntimeV23(campaign);
+  return migrateHeroRuntimeV23(migrateCampaignToV22(migrateCampaignToV20(migrateCampaignToV19(migrateCampaignToV18(migrateCampaignToV17(
     migrateCampaignToV16(
       migrateCampaignToV15(
         migrateCampaignToV14(
@@ -1647,7 +1661,7 @@ export function migrateCampaignToLatest(campaign: CampaignState): CampaignState 
         ),
       ),
     ),
-  )))));
+  ))))));
 }
 
 /**
@@ -1661,6 +1675,9 @@ export function migrateCampaignToLatest(campaign: CampaignState): CampaignState 
  * → v15（Phase 10D Shuffling Horror：actFourState.shufflingHorrorEncounterState）。
  */
 export function migrateSaveFile(raw: unknown): SaveFile | null {
+  try { return migrateSaveFileUnchecked(raw); } catch { return null; }
+}
+function migrateSaveFileUnchecked(raw: unknown): SaveFile | null {
   if (!raw || typeof raw !== 'object') return null;
   const anyRaw = raw as Record<string, unknown>;
 
@@ -1706,7 +1723,7 @@ export function migrateSaveFile(raw: unknown): SaveFile | null {
  * - gold 为负 → 归零。
  */
 export function sanitizeSaveFile(save: SaveFile): SaveFile {
-  let c = migrateCampaignToV22(save.campaign);
+  let c = { ...migrateCampaignToV22(save.campaign), saveVersion: save.campaign.saveVersion };
   if (c.gold < 0) c = { ...c, gold: 0 };
 
   if (c.gamePhase === 'battle' && !c.battle) {
@@ -1734,7 +1751,27 @@ export function sanitizeSaveFile(save: SaveFile): SaveFile {
 
 /** 从快照恢复战役状态（先修复再取 campaign）。 */
 export function restoreSaveSnapshot(save: SaveFile): CampaignState {
-  return sanitizeSaveFile(save).campaign;
+  validateHeroRuntime(save.campaign);
+  if (save.campaign.heroRuntimeSelection?.runtimeVersion === HERO_RUNTIME_VERSION) {
+    const error = validateSaveFile(save); if (error) throw new Error(error);
+    return save.campaign;
+  }
+  validateBossSaveContracts(save.campaign);
+  const campaign = sanitizeSaveFile(save).campaign;
+  if (campaign.bossEncounterCheckpoint?.checkpointContext) validateThreatCheckpoint(campaign, campaign.bossEncounterCheckpoint);
+  validateProductionBossRoomStorage(campaign);
+  validateHeroDodgeCampaignMetadata(campaign);
+  validateGraveyardReceipts(campaign);
+  validateNecromancerPreparationDay(campaign);
+  validateSourceTrinketRewards(campaign);
+  if (campaign.ruinsRuleSetSelection?.ruleSetVersion === RUINS_V6) validateRuinsV6Selection(campaign);
+  else if (campaign.ruinsRuleSetSelection?.ruleSetVersion === RUINS_V5) validateRuinsV5Selection(campaign);
+  else validateRuinsVersionSelection(campaign);
+  if (campaign.ruinsDrawState?.ruleSetVersion === RUINS_V6) validateRuinsV6Selection(campaign);
+  if (campaign.ruinsDrawState) validateRuinsDrawState(campaign.ruinsDrawState);
+  if (campaign.ruinsBoneFigureSupply) validateBoneFigureSupply(campaign.ruinsBoneFigureSupply, campaign.ruinsDrawState);
+  if (campaign.battle) { validateNecromancerFigures(campaign.battle); validateLargeMovementContract(campaign.battle); validateProductionMonsterBattle(campaign.battle); validateOrdinaryRuinsBattle(campaign.battle, campaign.ruinsDrawState); validateRuinsPendingAttack(campaign.battle); } validateProductionOrdinaryThreat(campaign); validateQuestThreatHistory(campaign);
+  return campaign;
 }
 
 // ---------------------------------------------------------------------------

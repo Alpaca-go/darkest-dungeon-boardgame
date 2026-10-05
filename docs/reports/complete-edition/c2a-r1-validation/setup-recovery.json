@@ -1,0 +1,16 @@
+{
+  "phase": "C2A-R1",
+  "initialAttempt": {
+    "command": "npm ci",
+    "exitCode": 1,
+    "error": "EPERM unlink node_modules/@esbuild/win32-x64/esbuild.exe",
+    "cause": "Installation started while the targeted Vitest process still held esbuild.exe.",
+    "dependentCommands": "Failed because installation was incomplete; not treated as product regressions."
+  },
+  "recovery": {
+    "action": "Waited for the targeted test process to exit, then restarted the full sequential validation runner.",
+    "npmCiExitCode": 0,
+    "evidence": "ci.log and validation-results.json",
+    "runtimeFilesModified": false
+  }
+}

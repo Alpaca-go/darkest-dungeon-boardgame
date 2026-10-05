@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C30",
+  "baselineHead": "4c01f006324b38f4233803bc34c4259cd69f4ced",
+  "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1",
+  "ruleSourcePolicyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "status": "REQUIRED_DEPENDENCY_REVIEW_UNRESOLVED_PROMOTION_STOPPED",
+  "c1c28RulingChanged": false,
+  "externalSourceUsed": false,
+  "newProjectRulingRequired": false,
+  "newProjectRulingIntroduced": false,
+  "blockers": [
+    {
+      "dependency": "bone-rabble",
+      "status": "SOURCE_UNRESOLVED",
+      "fields": [
+        "stanceSelections.aggressive",
+        "stanceSelections.defensive"
+      ],
+      "evidence": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c25/crops/46140-50acd2839a8f-front.png",
+          "sha256": "03d61f59c6143691e65ab77ca56dac2fda92d6948ed31e8c4888adba0daab4c2",
+          "region": "Printed stats, Skills, Stance icons and selection numbers"
+        },
+        {
+          "path": "docs/data/complete-edition/c1c25-necromancer-bone-source-binding.json",
+          "sha256": "ed3d427224322e0b4d3cae466956cc4aaf897966d7a2818fb24344585b2bf862",
+          "region": "Bone Rabble"
+        }
+      ],
+      "resolution": "Review locked printed Stance selections and existing official rulebook examples; do not infer a default Skill from unmarked icons."
+    },
+    {
+      "dependency": "bone-soldier",
+      "status": "SOURCE_UNRESOLVED",
+      "fields": [
+        "stanceSelections.aggressive",
+        "stanceSelections.defensive"
+      ],
+      "evidence": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c25/crops/46100-b380fe530b9e-front.png",
+          "sha256": "66266ceb68479bbe62c68129e9228c277400d0b6aa62e9a236cd19e1e1c01653",
+          "region": "Printed stats, Skills, Stance icons and selection numbers"
+        },
+        {
+          "path": "docs/data/complete-edition/c1c25-necromancer-bone-source-binding.json",
+          "sha256": "ed3d427224322e0b4d3cae466956cc4aaf897966d7a2818fb24344585b2bf862",
+          "region": "Bone Soldier"
+        }
+      ],
+      "resolution": "Review locked printed Stance selections and existing official rulebook examples; do not infer a default Skill from unmarked icons."
+    },
+    {
+      "dependency": "bone-spearman",
+      "status": "SOURCE_UNRESOLVED",
+      "fields": [
+        "stanceSelections.aggressive",
+        "stanceSelections.ranged"
+      ],
+      "evidence": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c25/crops/46114-77091661b3ce-front.png",
+          "sha256": "799b7cea2cac0c0069f979854f60d8b421fe12dabaf5b563536159bafd7889c8",
+          "region": "Printed stats, Skills, Stance icons and selection numbers"
+        },
+        {
+          "path": "docs/data/complete-edition/c1c25-necromancer-bone-source-binding.json",
+          "sha256": "ed3d427224322e0b4d3cae466956cc4aaf897966d7a2818fb24344585b2bf862",
+          "region": "Bone Spearman"
+        }
+      ],
+      "resolution": "Review locked printed Stance selections and existing official rulebook examples; do not infer a default Skill from unmarked icons."
+    },
+    {
+      "dependency": "bone-captain",
+      "status": "SOURCE_UNRESOLVED",
+      "fields": [
+        "stanceSelections.defensive",
+        "stanceSelections.ranged"
+      ],
+      "evidence": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c25/crops/46600-50d4373aa783-front.png",
+          "sha256": "39a941da6f308058845dca81641efd3a79d510c49fec75d1d418112d54acc92f",
+          "region": "Printed stats, Skills, Stance icons and selection numbers"
+        },
+        {
+          "path": "docs/data/complete-edition/c1c25-necromancer-bone-source-binding.json",
+          "sha256": "ed3d427224322e0b4d3cae466956cc4aaf897966d7a2818fb24344585b2bf862",
+          "region": "Bone Captain"
+        }
+      ],
+      "resolution": "Review locked printed Stance selections and existing official rulebook examples; do not infer a default Skill from unmarked icons."
+    }
+  ],
+  "heroCoverageBlocker": "No reviewed source-bound Dodge for remaining class/level pairs. Do not extrapolate Level I or use zero fallback.",
+  "affectedPromotionStopped": [
+    "Bone combat execution",
+    "normal production entry",
+    "production save/replay proof",
+    "C1C31 selection"
+  ],
+  "missingBehaviorPolicy": "SOURCE_UNRESOLVED; no new ruling permitted in this phase",
+  "historicalScopeTestPolicy": "Historical source-only workspace assertions remain unchanged and are excluded from later-phase acceptance; list actual test failures in the validation report.",
+  "returnToSourceAcquisition": false
+}

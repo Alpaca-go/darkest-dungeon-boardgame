@@ -55,6 +55,8 @@ export interface HeroLevelDefinition {
   credibility: DataCredibility;
   /** 数据出处说明（便于后续替换为 verified 卡面）。 */
   sourceNote: string;
+  /** Independently verified combat fields; does not promote prototype HP/slots. */
+  combatDefinition?: import('./component-combat').HeroCombatDefinition;
 }
 
 /** Skill Level 卡面定义（Registry 唯一数据来源）。 */

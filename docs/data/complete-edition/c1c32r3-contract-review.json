@@ -1,0 +1,30 @@
+{
+  "phase": "C1C32R3",
+  "promotionStopped": true,
+  "reason": "Production Threat full path remains unimplemented/unproven",
+  "changesToHistoricalEvidence": false,
+  "historicalV5Verifier": {
+    "error": "C1C32R2C runtime and evidence blockers differ",
+    "matrixByteIdenticalToBaseline": true,
+    "frozenBlockers": [
+      "INITIAL_DRAW_MIXED_TWO_LARGE_LAYOUT_POLICY_ABSENT",
+      "LARGE_STANCE_SHUFFLE_SLOT_COLLISION_CONTRACT_ABSENT",
+      "ROOM_TRINKET_SOURCE_COMPLETE_DRAW_UNAVAILABLE"
+    ],
+    "currentV6Blockers": []
+  },
+  "initialHashMismatchAttempt": [
+    {
+      "path": "src/game-engine/ruins/physical-supply.ts",
+      "expectedSha256": "eb67012b714324775d835d9af461ae89f56768997cf511d79ca7d64f263a95cf",
+      "currentSha256": "0a3252dd86425de40c78dc6b2dc785fb152e91684d856076efbe7263b3f70a19"
+    },
+    {
+      "path": "package.json",
+      "expectedSha256": "396fa6fce6570c9229d3fa0fece1aa68a88286eae9db24972bc31f8119f29567",
+      "currentSha256": "d8bf359fdf39e3d79a0020a14cc1622eda5334cce40f0018e543a89c720e5150"
+    }
+  ],
+  "frozenV6CurrentHashMismatches": [],
+  "resolution": "Frozen physical-supply helper and package restored; settled-checkpoint extension lives in new bosses/checkpoint-physical-bridge.ts and uses the accepted validators."
+}

@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R2C-R",
+  "baseline": "182b9f351e6115daa678fb36dc2fa6196f15e6cf",
+  "ruleSetVersion": "C1C32R2C-R-DIGITAL-DEFAULT-v6",
+  "scans": [
+    {
+      "level": 1,
+      "seeds": 4096,
+      "patterns": [
+        "LNN",
+        "NLN",
+        "NNL",
+        "NNNL",
+        "NNNN"
+      ],
+      "largeCopies": 1,
+      "skippedSeeds": [],
+      "occupiedSlots": 4
+    },
+    {
+      "level": 2,
+      "seeds": 4096,
+      "patterns": [
+        "LL",
+        "LNL",
+        "LNN",
+        "NLL",
+        "NLN",
+        "NNL",
+        "NNNL",
+        "NNNN"
+      ],
+      "largeCopies": 3,
+      "skippedSeeds": [],
+      "occupiedSlots": 4
+    },
+    {
+      "level": 3,
+      "seeds": 4096,
+      "patterns": [
+        "LL",
+        "LNL",
+        "LNN",
+        "NLL",
+        "NLN",
+        "NNL",
+        "NNNL",
+        "NNNN"
+      ],
+      "largeCopies": 4,
+      "skippedSeeds": [],
+      "occupiedSlots": 4
+    }
+  ],
+  "totalSeeds": 12288,
+  "skippedSeeds": []
+}

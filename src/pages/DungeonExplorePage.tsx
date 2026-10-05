@@ -1,9 +1,12 @@
+import BossChoicePanel from '../components/battle/BossChoicePanel';
+import { hasProductionOrdinaryThreat } from '../game-engine/ruins/production-threat-runtime';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useGameStore } from '../store/useGameStore';
 import { canScout } from '../game-engine/dungeon';
 import { getRoomMeta } from '../data/rooms';
-import { getHeroById } from '../data/heroes';
+import {legacyHeroColor} from '../game-engine/heroes/legacy-player';
+import ProductionHeroCard from '../components/hero/ProductionHeroCard';
 import { getCurioById } from '../data/curios';
 import DiseaseBadge from '../components/disease/DiseaseBadge';
 import DungeonMap from '../components/dungeon/DungeonMap';
@@ -16,6 +19,7 @@ import type { RestAllocation, RestRecoveryResource } from '../game-engine/quests
 
 export default function DungeonExplorePage() {
   const navigate = useNavigate();
+  const commitBossChoice=useGameStore(s=>s.commitBossChoice);
   const campaign = useGameStore((s) => s.campaign);
   const scout = useGameStore((s) => s.scout);
   const moveToRoom = useGameStore((s) => s.moveToRoom);
@@ -94,13 +98,17 @@ export default function DungeonExplorePage() {
 
   return (
     <div className="p-4 max-w-6xl mx-auto flex flex-col gap-4">
+      {campaign.bossEncounterCheckpoint?.pendingChoice && <BossChoicePanel choice={campaign.bossEncounterCheckpoint.pendingChoice} onConfirm={commitBossChoice} />}
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-bold text-dd-text">地牢探索</h1>
         <div className="flex items-center gap-2">
         <button
           onClick={onRequestLeave}
+          disabled={!!campaign.bossRoomStorage && campaign.bossRoomStorage.lifecycle !== 'RETURNED'}
           className="px-3 py-1.5 rounded font-semibold text-sm bg-dd-panel2 text-dd-text border border-dd-border hover:bg-dd-panel transition-colors"
-          title="离开地牢并进行任务结算（未完成目标视为任务未完成）"
+          title={campaign.bossRoomStorage && campaign.bossRoomStorage.lifecycle !== 'RETURNED'
+            ? 'Face the Threat：击败 Boss 后才能离开地牢。'
+            : '离开地牢并进行任务结算（未完成目标视为任务未完成）'}
           data-testid="leave-dungeon"
         >
           离开地牢
@@ -149,12 +157,13 @@ export default function DungeonExplorePage() {
         <div className="flex flex-col gap-2">
           <h2 className="text-sm font-bold text-dd-text">小队</h2>
           {campaign.heroes.map((h) => {
-            const def = getHeroById(h.heroId);
+            if(h.productionIdentity)return <ProductionHeroCard key={h.instanceId} hero={h}/>;
+            const color=legacyHeroColor(h.heroId);
             return (
               <HeroCard
                 key={h.instanceId}
                 name={h.name}
-                color={def?.color ?? '#463b34'}
+                color={color ?? '#463b34'}
                 life={h.maxLife}
                 wounds={h.wounds}
                 stress={h.stress}
@@ -187,6 +196,8 @@ export default function DungeonExplorePage() {
 
         {/* 地图 */}
         <div className="rounded-lg border border-dd-border bg-dd-panel p-3">
+          {campaign.bossEncounterCheckpoint?.checkpointContext?.heroDodgeBindings && !hasProductionOrdinaryThreat(campaign)
+            && <p role="status" data-testid="necromancer-threat-bridge-blocked" className="mb-3 text-dd-warn">请在初始化前选择 Ruins v6 后进入守卫房间。</p>}
           <DungeonMap dungeon={dungeon} onRoomClick={moveToRoom} />
           <p className="text-[11px] text-dd-muted mt-2">
             点击与当前房间相邻的节点移动；隐藏房间也可进入。当前房间：

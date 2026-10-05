@@ -1,7 +1,10 @@
+import { hasProductionMonsterPlayerRoute, enterProductionMonsterRoom } from './commands/ordinary-monsters';
 import type { CampaignState, ExplorationEventResult, DungeonRoom, DungeonRoomType, DungeonState, QuestDefinition } from '../types';
 import { DUNGEON_NODES, roomTypeMapForQuest } from '../data/dungeons';
 import { CURIOS } from '../data/curios';
 import { createId, d10, pick } from './random';
+import {applyProphetThreatEvent} from './prophet/production-threat';
+import { withTransactionRecorded } from './campaign/campaign-orchestrator';
 import { initBattle } from './battle';
 import { pushLog } from './log';
 import { applyExplorationResult, rollExplorationResult } from './exploration';
@@ -12,9 +15,12 @@ import { drawTrinket } from './trinkets/draw-trinket';
 import { acquireTrinket } from './trinkets/acquire-trinket';
 import type { MentalEventSourceType } from '../types';
 import { runtimeContentContext } from '../data/content-selector';
-import { getQuestById } from '../data/quests';
+import { getCampaignQuest, getQuestById } from '../data/quests';
 import type { QuestRoomTokenType } from '../types/content-runtime';
 import { recordQuestQualificationEvent } from './quests/quest-runtime';
+import { enterProductionBossRoom } from './commands/boss-foundation';
+import { productionBossQuestEntryError } from './bosses/production-dependency-gate';
+import { hasProductionOrdinaryThreat, enterProductionOrdinaryThreat } from './ruins/production-threat-runtime';
 
 /** Phase 7：全队压力统一入口（存活英雄各 +amount，走统一管线处理阈值）。 */
 function applyPartyStress(
@@ -96,6 +102,15 @@ export function generateCommunityDungeon(quest: QuestDefinition, seed = quest.id
     throw new Error(`Community Quest room composition mismatch: ${quest.id}`);
   }
   const arranged = deterministicShuffle(tokens, `${quest.id}:${seed}`);
+  if (quest.type === 'boss') {
+    const edges = COMMUNITY_ROOM_NODES.filter(n=>n.id!=='start' && n.adjacentRoomIds.length===1);
+    const edge = edges[stableSeed(seed + ':boss-edge') % edges.length];
+    if (!edge) throw new Error('Boss Dungeon has no legal edge');
+    const slot = COMMUNITY_ROOM_NODES.findIndex(n=>n.id===edge.id)-1;
+    const current = arranged.indexOf('objective');
+    if (current<0) throw new Error('Boss Objective token missing');
+    [arranged[slot],arranged[current]]=[arranged[current],arranged[slot]];
+  }
   const rooms: DungeonRoom[] = COMMUNITY_ROOM_NODES.map((node, index) => {
     if (node.id === 'start') {
       return { id: node.id, type: 'start', status: 'current', adjacentRoomIds: [...node.adjacentRoomIds], curioId: null, curioUsed: false };
@@ -193,6 +208,8 @@ export function canMoveTo(dungeon: DungeonState, roomId: string): boolean {
 /** Scout：揭示相邻隐藏房间，全队 Stress +1，记录日志。 */
 export function scoutDungeon(campaign: CampaignState): CampaignState {
   if (!campaign.dungeon || !canScout(campaign.dungeon)) return campaign;
+  const playerRoute=campaign.bossEncounterCheckpoint?.checkpointContext?.playerRouteVersion;
+  const scoutTransaction=playerRoute ? `${campaign.dungeon.questRunId}:scout:${campaign.dungeon.currentRoomId}:${campaign.dungeon.rooms.filter(r=>r.status==='hidden').map(r=>r.id).sort().join(',')}` : createId('prophet-scout');
   let next: CampaignState = {
     ...campaign,
     dungeon: { ...revealAdjacentRooms(campaign.dungeon), scoutedNextMove: true },
@@ -201,7 +218,8 @@ export function scoutDungeon(campaign: CampaignState): CampaignState {
   next = pushLog(next, '小队进行了侦察（Scout），相邻房间被揭示，全队压力 +1。', 'warning');
   // Phase 8A：scout-attempted 时机事件（Fear of the Unknown 等）
   next = emitPartyRuleEvent(next, 'scout-attempted', createRuleEventContext());
-  return next;
+  if(playerRoute) next=withTransactionRecorded(next,scoutTransaction);
+  return applyProphetThreatEvent(next,{type:'SCOUTING',transactionId:scoutTransaction});
 }
 
 /**
@@ -212,26 +230,30 @@ function applyRoomResult(campaign: CampaignState, room: DungeonRoom): CampaignSt
   const dungeon = campaign.dungeon!;
   const log = (c: CampaignState, msg: string, kind: 'info' | 'success' | 'warning' | 'danger' = 'info') =>
     pushLog(c, msg, kind);
+  const guardedBattle = (c: CampaignState) => hasProductionMonsterPlayerRoute(c) ? enterProductionMonsterRoom(c, room.id) : hasProductionOrdinaryThreat(c)
+    ? enterProductionOrdinaryThreat(c, room.id) : initBattle(c, room.id);
 
   if (room.sourceRoomToken === 'dark') {
     const updated = markRoom(dungeon, room.id, 'visited');
     return log({ ...campaign, light: Math.max(0, campaign.light - 1), dungeon: updated }, '进入 Dark Room：Light -1；该房间不能被清除。', 'warning');
   }
   if (room.sourceRoomToken === 'curio') {
-    const guardRoll = d10();
+    const guardRoll = room.curioGuardRoll ?? d10();
+    if (hasProductionOrdinaryThreat(campaign)) campaign = { ...campaign, dungeon: { ...dungeon,
+      rooms: dungeon.rooms.map(entry => entry.id === room.id ? { ...entry, curioGuardRoll: guardRoll } : entry) } };
     if (guardRoll <= 5) {
-      return log(initBattle(campaign, room.id), `Curio Room 守卫判定 ${guardRoll}：遭遇战斗。`, 'danger');
+      return log(guardedBattle(campaign), `Curio Room 守卫判定 ${guardRoll}：遭遇战斗。`, 'danger');
     }
     return log({
       ...campaign,
       dungeon: {
-        ...dungeon,
-        rooms: dungeon.rooms.map((entry) => entry.id === room.id ? { ...entry, curioGuardResolved: true } : entry),
+        ...campaign.dungeon!,
+        rooms: campaign.dungeon!.rooms.map((entry) => entry.id === room.id ? { ...entry, curioGuardResolved: true } : entry),
       },
     }, `Curio Room 守卫判定 ${guardRoll}：无守卫；完成 Curio 互动后清除。`, 'success');
   }
   if (room.sourceRoomToken === 'treasure') {
-    return log(initBattle(campaign, room.id), 'Treasure Room 由怪物守卫；战斗胜利后获得宝藏。', 'danger');
+    return log(guardedBattle(campaign), 'Treasure Room 由怪物守卫；战斗胜利后获得宝藏。', 'danger');
   }
   if (room.sourceRoomToken === 'trap') {
     let next = campaign;
@@ -240,7 +262,7 @@ function applyRoomResult(campaign: CampaignState, room: DungeonRoom): CampaignSt
       next = { ...next, dungeon: markRoom(next.dungeon!, room.id, 'visited') };
       return log(next, '使用 1 Tool 忽略 Trap Room；该房间不能被清除。', 'warning');
     }
-    const level = Math.max(1, getQuestById(campaign.currentQuestId ?? '')?.dungeonLevel ?? 1);
+    const level = Math.max(1, getCampaignQuest(campaign)?.dungeonLevel ?? 1);
     next = applyPartyStress(next, level, 'exploration', `trap-room:${room.id}`);
     next = { ...next, dungeon: markRoom(next.dungeon!, room.id, 'visited') };
     return log(next, `Trap Room：每名英雄承受 ${level} Stress；该房间不能被清除。`, 'danger');
@@ -281,6 +303,8 @@ function applyRoomResult(campaign: CampaignState, room: DungeonRoom): CampaignSt
       return recordQuestQualificationEvent(c, room);
     }
     case 'objective': {
+      if (campaign.runtimeContentProfile === 'community-complete-edition' && campaign.currentQuestId === 'face-the-threat'
+        ) return enterProductionBossRoom(campaign, room.id);
       const updated = markRoom(dungeon, room.id, 'cleared');
       const c: CampaignState = {
         ...campaign,
@@ -316,7 +340,7 @@ function applyRoomResult(campaign: CampaignState, room: DungeonRoom): CampaignSt
     }
     case 'battle': {
       // Phase 3：初始化完整战斗并切入战斗阶段。
-      const c = initBattle(campaign, room.id);
+      const c = guardedBattle(campaign);
       return log(c, '进入战斗房间，遭遇敌人！', 'danger');
     }
     default:
@@ -346,6 +370,8 @@ export function moveToRoom(campaign: CampaignState, roomId: string): CampaignSta
 }
 
 export function commitMoveToRoom(campaign: CampaignState, roomId: string, result: ExplorationEventResult | null): CampaignState {
+  if (campaign.dungeon?.rooms.some(r => r.id === roomId && r.type === 'objective')
+    && productionBossQuestEntryError(campaign, campaign.currentQuestId ?? '')) return campaign;
   if (!campaign.dungeon) return campaign;
   if (!canMoveTo(campaign.dungeon, roomId)) return campaign;
 

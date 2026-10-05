@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R2C-R",
+  "physicalGate": "TRINKET_PHYSICAL_SOURCE_DECK_COMPLETE",
+  "effectGate": "TRINKET_EFFECT_RUNTIME_READY",
+  "registry": "src/game-engine/trinkets/source-deck.ts",
+  "drawCommand": "drawSourceBoundTrinketCard",
+  "source": "src/data/community-reference/trinkets/data.json",
+  "requirements": [
+    "Core membership",
+    "known identity/name/level",
+    "source-supported",
+    "source semantic completeness",
+    "nonempty physical card membership"
+  ],
+  "sourceTrinketCounts": {
+    "L1": 14,
+    "L2": 11,
+    "L3": 12,
+    "total": 37
+  },
+  "runtimeReady": 15,
+  "runtimePending": 22,
+  "strictCommandPreserved": "drawSourceCompleteTrinket",
+  "pendingStatus": "SOURCE_BOUND_EFFECT_RUNTIME_PENDING",
+  "pendingOwnership": "Campaign-owned physical loot; source identity/event/quest/acquiredAt persisted; effect action fails TRINKET_EFFECT_RUNTIME_UNAVAILABLE.",
+  "reroll": false,
+  "partialDeckSubstitution": false,
+  "historicalC1C20Unchanged": true
+}

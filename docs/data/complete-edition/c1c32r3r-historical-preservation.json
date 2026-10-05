@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R3R",
+  "baseline": "fd2ba4d12ecf16b24ed0c5d502eb7ee566893c24",
+  "status": "PASS",
+  "modifiedHistoricalFiles": [],
+  "runtimeDivergence": [
+    {
+      "command": "npm run verify:complete-edition-c1c32r2a",
+      "kind": "historical-verifier",
+      "exitCode": 1,
+      "log": "pw-out/c1c32r3r-verify-complete-edition-c1c32r2a.log",
+      "classification": "EXPECTED_SUCCESSOR_RUNTIME_DIVERGENCE",
+      "reason": "Historical runtime-source fingerprint pins room-storage.ts before Standard Quest-local checkpoint support; prior evidence/source tables are unchanged.",
+      "errorExcerpt": "Error: Historical file changed: src/game-engine/bosses/room-storage.ts"
+    },
+    {
+      "command": "npm run verify:complete-edition-c1c32r2c",
+      "kind": "historical-verifier",
+      "exitCode": 1,
+      "log": "pw-out/c1c32r3r-verify-complete-edition-c1c32r2c.log",
+      "classification": "EXPECTED_SUCCESSOR_RUNTIME_DIVERGENCE",
+      "reason": "Superseded R2C matrix retains three v5 executor blockers; R2C-R closed them under opt-in v6 before this baseline. Historical matrix is unchanged.",
+      "errorExcerpt": "Error: C1C32R2C runtime and evidence blockers differ"
+    },
+    {
+      "command": "npm run verify:complete-edition-c1c32r2c-r",
+      "kind": "historical-verifier",
+      "exitCode": 1,
+      "log": "pw-out/c1c32r3r-verify-complete-edition-c1c32r2c-r.log",
+      "classification": "EXPECTED_SUCCESSOR_RUNTIME_DIVERGENCE",
+      "reason": "Historical closure evidence pins current runtime hashes and enumerated Ruins runtime paths; schema-2 Threat integration and added package scripts legitimately extend those paths.",
+      "errorExcerpt": "Error: Stale closure evidence"
+    }
+  ],
+  "frozenCounts": {
+    "trinkets": "15/37",
+    "quests": "3/75",
+    "componentCensus": 278,
+    "bossCensus": "231/20 families"
+  },
+  "historicalEvidenceRewritten": false,
+  "c1c33AuthorizedByHistoricalFiles": false
+}

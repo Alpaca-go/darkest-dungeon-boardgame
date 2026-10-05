@@ -1,0 +1,1804 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C38R1",
+  "baseline": "dcf017cb2065440251caad8d31075b99bc6355e0",
+  "intakeDate": "2026-10-02",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "contractVersion": "C1C38R1-OFFICIAL-INTAKE-v1",
+  "runtimeImplemented": false,
+  "runtimeImplementationAuthorized": false,
+  "productionReady": false,
+  "playerRouteEnabled": false,
+  "gateAPassed": false,
+  "C1C39Allowed": false,
+  "fields": [
+    {
+      "id": "ability.actionsPerRound",
+      "category": "ACTION_SCHEDULER",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-front.png",
+          "sha256": "6a3c7ac7675931e8e699558976f9e590f1f3968de68c06d12706090858d27507",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-back.png",
+          "sha256": "dd9fd65d4c3e14b7c7518fda89b1686cb5f2978183967e518419a5f734af8278",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "literal": "ACTIONS / Round: 2",
+      "normalizedValue": 2,
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "ability.trigger",
+      "category": "ACTION_SCHEDULER",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-front.png",
+          "sha256": "6a3c7ac7675931e8e699558976f9e590f1f3968de68c06d12706090858d27507",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-back.png",
+          "sha256": "dd9fd65d4c3e14b7c7518fda89b1686cb5f2978183967e518419a5f734af8278",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "literal": "Before its first action of each round",
+      "normalizedValue": "BEFORE_FIRST_NORMAL_ACTION",
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "ability.frequency",
+      "category": "ACTION_SCHEDULER",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-front.png",
+          "sha256": "6a3c7ac7675931e8e699558976f9e590f1f3968de68c06d12706090858d27507",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-back.png",
+          "sha256": "dd9fd65d4c3e14b7c7518fda89b1686cb5f2978183967e518419a5f734af8278",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "literal": "Before its first action of each round",
+      "normalizedValue": "ONCE_PER_ROUND",
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "ability.freeSkill",
+      "category": "ACTION_SCHEDULER",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-front.png",
+          "sha256": "6a3c7ac7675931e8e699558976f9e590f1f3968de68c06d12706090858d27507",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-back.png",
+          "sha256": "dd9fd65d4c3e14b7c7518fda89b1686cb5f2978183967e518419a5f734af8278",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "literal": "[SKILL_NUMBER:3] Return to the Stars",
+      "normalizedValue": 3,
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "ability.consumesNormalAction",
+      "category": "ACTION_SCHEDULER",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-front.png",
+          "sha256": "6a3c7ac7675931e8e699558976f9e590f1f3968de68c06d12706090858d27507",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-back.png",
+          "sha256": "dd9fd65d4c3e14b7c7518fda89b1686cb5f2978183967e518419a5f734af8278",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "literal": "as a free action",
+      "normalizedValue": false,
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "RETURN_TO_THE_STARS.name",
+      "category": "RETURN_TO_THE_STARS",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "literal": "Return to the Stars",
+      "normalizedValue": "Return to the Stars",
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "RETURN_TO_THE_STARS.number",
+      "category": "RETURN_TO_THE_STARS",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-front.png",
+          "sha256": "6a3c7ac7675931e8e699558976f9e590f1f3968de68c06d12706090858d27507",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-back.png",
+          "sha256": "dd9fd65d4c3e14b7c7518fda89b1686cb5f2978183967e518419a5f734af8278",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "literal": 3,
+      "normalizedValue": 3,
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "RETURN_TO_THE_STARS.timing",
+      "category": "RETURN_TO_THE_STARS",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-front.png",
+          "sha256": "6a3c7ac7675931e8e699558976f9e590f1f3968de68c06d12706090858d27507",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-back.png",
+          "sha256": "dd9fd65d4c3e14b7c7518fda89b1686cb5f2978183967e518419a5f734af8278",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "literal": "as a free action",
+      "normalizedValue": "BEFORE_FIRST_NORMAL_ACTION_EACH_ROUND",
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "RETURN_TO_THE_STARS.critPrinted",
+      "category": "RETURN_TO_THE_STARS",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "literal": "No crit stat line printed for skill 3",
+      "normalizedValue": "PRINTED_ABSENT",
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "Absence is not zero; the Self 5 wound glyph is a separate effect."
+    },
+    {
+      "id": "RETURN_TO_THE_STARS.criticalDamagePrinted",
+      "category": "RETURN_TO_THE_STARS",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "literal": "No criticalDamage stat line printed for skill 3",
+      "normalizedValue": "PRINTED_ABSENT",
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "Absence is not zero; the Self 5 wound glyph is a separate effect."
+    },
+    {
+      "id": "RETURN_TO_THE_STARS.accuracyPrinted",
+      "category": "RETURN_TO_THE_STARS",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "literal": "No accuracy stat line printed for skill 3",
+      "normalizedValue": "PRINTED_ABSENT",
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "Absence is not zero; the Self 5 wound glyph is a separate effect."
+    },
+    {
+      "id": "RETURN_TO_THE_STARS.damagePrinted",
+      "category": "RETURN_TO_THE_STARS",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "literal": "No damage stat line printed for skill 3",
+      "normalizedValue": "PRINTED_ABSENT",
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "Absence is not zero; the Self 5 wound glyph is a separate effect."
+    },
+    {
+      "id": "RETURN_TO_THE_STARS.accuracyRoll",
+      "category": "RETURN_TO_THE_STARS",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 19,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p19.png",
+          "sha256": "7fb8e134e4de1b6e6145f6f81df83ae477f709f1ab3d09eac4fd7e340496c0e5",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": "If a Skill has no Acc value, then no roll is required",
+      "normalizedValue": "NO_ROLL_WHEN_NO_ACC_PRINTED",
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "RETURN_TO_THE_STARS.range",
+      "category": "RETURN_TO_THE_STARS",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 19,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p19.png",
+          "sha256": "7fb8e134e4de1b6e6145f6f81df83ae477f709f1ab3d09eac4fd7e340496c0e5",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": "curved arrow 2",
+      "normalizedValue": 2,
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "RETURN_TO_THE_STARS.targetSide",
+      "category": "RETURN_TO_THE_STARS",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 19,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p19.png",
+          "sha256": "7fb8e134e4de1b6e6145f6f81df83ae477f709f1ab3d09eac4fd7e340496c0e5",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": "yellow Hero head glyphs",
+      "normalizedValue": "HERO",
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "RETURN_TO_THE_STARS.targetScope",
+      "category": "RETURN_TO_THE_STARS",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 24,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p24.png",
+          "sha256": "93a652993f051b7573bf6e4da8819d81f203bed61c65cf26fea03230592ab576",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": "Crowded",
+      "normalizedValue": "CROWDED_AREA",
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "RETURN_TO_THE_STARS.targetCount",
+      "category": "RETURN_TO_THE_STARS",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 19,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p19.png",
+          "sha256": "7fb8e134e4de1b6e6145f6f81df83ae477f709f1ab3d09eac4fd7e340496c0e5",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": "four yellow Hero head glyphs",
+      "normalizedValue": 4,
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "RETURN_TO_THE_STARS.printedGlyphs",
+      "category": "RETURN_TO_THE_STARS",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "literal": "Self 5[wound], remove [green drop][red drop]; target [Stress]+2, [skull/red down-arrow]",
+      "normalizedValue": [
+        "SELF_ARROW",
+        "WOUND_TOKEN",
+        "BLIGHT",
+        "BLEED",
+        "TARGET_ARROW",
+        "STRESS",
+        "SUMMON"
+      ],
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "RETURN_TO_THE_STARS.selfWounds",
+      "category": "RETURN_TO_THE_STARS",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 19,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p19.png",
+          "sha256": "7fb8e134e4de1b6e6145f6f81df83ae477f709f1ab3d09eac4fd7e340496c0e5",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        },
+        {
+          "page": 20,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p20.png",
+          "sha256": "2dd06b5168bd15abacbca71f36c8c57374f41e76af26edb699a2e80611d5342b",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": "Self 5[wound token]",
+      "normalizedValue": 5,
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "Five Wounds on self; not Heal 5, not Attack Damage 5. Separate effect from absent attack Damage line."
+    },
+    {
+      "id": "RETURN_TO_THE_STARS.removeConditions",
+      "category": "RETURN_TO_THE_STARS",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 21,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p21.png",
+          "sha256": "e46cadcf32d8897b3f6fec496c8ef461530c1e09ae73595262396d456e49bc17",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": "remove [green drop][red drop]",
+      "normalizedValue": [
+        "ALL_BLIGHT_STACKS",
+        "ALL_BLEED_STACKS"
+      ],
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "RETURN_TO_THE_STARS.stress",
+      "category": "RETURN_TO_THE_STARS",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 20,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p20.png",
+          "sha256": "2dd06b5168bd15abacbca71f36c8c57374f41e76af26edb699a2e80611d5342b",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        },
+        {
+          "page": 21,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p21.png",
+          "sha256": "e46cadcf32d8897b3f6fec496c8ef461530c1e09ae73595262396d456e49bc17",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": "target arrow [Stress]+2",
+      "normalizedValue": 2,
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "RETURN_TO_THE_STARS.duration",
+      "category": "RETURN_TO_THE_STARS",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "literal": "no t duration in Skill 3",
+      "normalizedValue": "PRINTED_ABSENT",
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "RETURN_TO_THE_STARS.movement",
+      "category": "RETURN_TO_THE_STARS",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 24,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p24.png",
+          "sha256": "93a652993f051b7573bf6e4da8819d81f203bed61c65cf26fea03230592ab576",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": "Range 2; two Speed squares",
+      "normalizedValue": {
+        "maxAreas": 2,
+        "rule": "MOVE_TO_EXACT_RANGE_OR_SKIP_REST_OF_TURN"
+      },
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "RETURN_TO_THE_STARS.summonClause",
+      "category": "RETURN_TO_THE_STARS",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-front.png",
+          "sha256": "6a3c7ac7675931e8e699558976f9e590f1f3968de68c06d12706090858d27507",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-back.png",
+          "sha256": "dd9fd65d4c3e14b7c7518fda89b1686cb5f2978183967e518419a5f734af8278",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "literal": "summon as many monsters as possible if the Monster Posture track is not full, including at least one Crystalline Aberration I",
+      "normalizedValue": "Thing from the Stars\nACTIONS / Round: 2\nReturn to the Stars: Before its first action of each round, the Star Thing will use the [SKILL_NUMBER:3] Return to the Stars skill as a free action. Among its effects, this skill will summon as many monsters as possible if the Monster Posture track is not full, including at least one Crystalline Aberration I.",
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "RETURN_TO_THE_STARS.effectPhases",
+      "category": "RETURN_TO_THE_STARS",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 20,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p20.png",
+          "sha256": "2dd06b5168bd15abacbca71f36c8c57374f41e76af26edb699a2e80611d5342b",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": "Self Effects; Target Effects",
+      "normalizedValue": [
+        "SELF_EFFECTS_BEFORE_OTHER_EFFECTS",
+        "TARGET_EFFECTS_LAST"
+      ],
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "RETURN_TO_THE_STARS.samePhaseSerialization",
+      "category": "EFFECT_ORDER",
+      "status": "PROJECT_RULING_REQUIRED",
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "sourceReferences": [],
+      "literal": null,
+      "normalizedValue": null,
+      "executionRequired": true,
+      "contractExecutable": false,
+      "blocking": true,
+      "notes": "Version the order of self Wounds/removal and target Stress/summon, including self-death interruption; shared phase rules alone do not decide all cursor behavior."
+    },
+    {
+      "id": "RETURN_TO_THE_STARS.crowdedAreaTie",
+      "category": "TARGETING",
+      "status": "PROJECT_RULING_REQUIRED",
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "sourceReferences": [
+        {
+          "page": 24,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p24.png",
+          "sha256": "93a652993f051b7573bf6e4da8819d81f203bed61c65cf26fea03230592ab576",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "COM rules p2 and p7 expressly apply core combat; family-specific COM p8 overrides campaign context."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 8,
+          "originalPage": 8,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        }
+      ],
+      "literal": null,
+      "normalizedValue": null,
+      "executionRequired": true,
+      "contractExecutable": false,
+      "blocking": true,
+      "notes": "Reviewed core targeting prioritizes qualifying characters by Stance, but gives no explicit tie among equally Crowded Areas. COM Thing section supplies no Area tie override. Candidate only; unapproved in R1."
+    },
+    {
+      "id": "posture.capacity",
+      "category": "MONSTER_POSTURE",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "page": 12,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p12.png",
+          "sha256": "4a92200dd21f3cacd79e9cee1b70f0bb69462eadc234d02bb087fbd67062cdb0",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        },
+        {
+          "page": 17,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p17.png",
+          "sha256": "96419f3702f041086ccf89c1bef1380b67472c2564cfb1fbf69d48a903e64d3c",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": "four Stance slots",
+      "normalizedValue": 4,
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "posture.distinctFromArea",
+      "category": "MONSTER_POSTURE",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "page": 17,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p17.png",
+          "sha256": "96419f3702f041086ccf89c1bef1380b67472c2564cfb1fbf69d48a903e64d3c",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        },
+        {
+          "page": 24,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p24.png",
+          "sha256": "93a652993f051b7573bf6e4da8819d81f203bed61c65cf26fea03230592ab576",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        },
+        {
+          "page": 31,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p31.png",
+          "sha256": "abb13d6eaa3aa8ea7839c416395498fd1dcc5c26d831090e0f7061d3b6c5531e",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": "Stance Tracker slots vs Areas on Room Tile",
+      "normalizedValue": true,
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "summon.minimumAberration",
+      "category": "SUMMON_POOL",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-front.png",
+          "sha256": "6a3c7ac7675931e8e699558976f9e590f1f3968de68c06d12706090858d27507",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-back.png",
+          "sha256": "dd9fd65d4c3e14b7c7518fda89b1686cb5f2978183967e518419a5f734af8278",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "literal": "including at least one Crystalline Aberration I",
+      "normalizedValue": 1,
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "Conditional on Monster Posture track not being full; no guarantee is invented when physical supply is exhausted."
+    },
+    {
+      "id": "summon.minimumCondition",
+      "category": "SUMMON_POOL",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-front.png",
+          "sha256": "6a3c7ac7675931e8e699558976f9e590f1f3968de68c06d12706090858d27507",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-back.png",
+          "sha256": "dd9fd65d4c3e14b7c7518fda89b1686cb5f2978183967e518419a5f734af8278",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "literal": "if the Monster Posture track is not full",
+      "normalizedValue": "TRACK_NOT_FULL",
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "summon.genericFullTrack",
+      "category": "MONSTER_POSTURE",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "page": 31,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p31.png",
+          "sha256": "abb13d6eaa3aa8ea7839c416395498fd1dcc5c26d831090e0f7061d3b6c5531e",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": "the invocation is ignored if the track is already full",
+      "normalizedValue": "SUMMON_IGNORED",
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "Shared printed rule only. Other Skill 3 self/Stress effects are not canceled by this clause."
+    },
+    {
+      "id": "summon.genericPlacement",
+      "category": "PLACEMENT",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "page": 31,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p31.png",
+          "sha256": "abb13d6eaa3aa8ea7839c416395498fd1dcc5c26d831090e0f7061d3b6c5531e",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": "first empty Stance Slot; corresponding Area; unless the Boss specifies otherwise",
+      "normalizedValue": "FIRST_EMPTY_STANCE_AND_CORRESPONDING_TILE_AREA_UNLESS_OVERRIDDEN",
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "Source-bound shared rule, but actual Tile/Area identity and any special override remain unresolved."
+    },
+    {
+      "id": "summon.genericInitiative",
+      "category": "INITIATIVE",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "page": 31,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p31.png",
+          "sha256": "abb13d6eaa3aa8ea7839c416395498fd1dcc5c26d831090e0f7061d3b6c5531e",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": "shuffle an Initiative Card for the Monster into the Initiative Deck; act during the round",
+      "normalizedValue": "SHUFFLE_CARD_INTO_REMAINING_DECK_CAN_ACT_THIS_ROUND",
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": ""
+    },
+    {
+      "id": "initiative.genericMultipleActions",
+      "category": "INITIATIVE",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "page": 30,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p30.png",
+          "sha256": "3185998089adba470431380892b73671e50eb32d183b48f883207ea160e45614",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": "check how many actions/round the Boss has and add that many Monster Initiative Cards",
+      "normalizedValue": "INITIATIVE_CARDS_EQUAL_ACTIONS_PER_ROUND",
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "Shared rule only; final Thing initiative setup must be confirmed by its encounter rules."
+    },
+    {
+      "id": "initiative.freeActionSeparateEntry",
+      "category": "INITIATIVE",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 8,
+          "originalPage": 8,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        }
+      ],
+      "literal": "Shuffle two Initiative Cards ... At the start of its first turn ... Skill for free",
+      "normalizedValue": false,
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "Two prescribed Boss Initiative entries include the first-turn free Skill; no third entry for that Skill."
+    },
+    {
+      "id": "summon.genericAreaDisplacement",
+      "category": "PLACEMENT",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "page": 31,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p31.png",
+          "sha256": "abb13d6eaa3aa8ea7839c416395498fd1dcc5c26d831090e0f7061d3b6c5531e",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": "Monster Summoning displacement",
+      "normalizedValue": {
+        "hero": "nearest available Area",
+        "monstersOnly": "players choose one to move to nearest available Area"
+      },
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "Not a Necromancer overflow ruling. Missing Thing Tile prevents execution."
+    },
+    {
+      "id": "summon.eligiblePool",
+      "category": "SUMMON_POOL",
+      "status": "SOURCE_UNRESOLVED",
+      "authority": "NONE",
+      "canonical": false,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-front.png",
+          "sha256": "6a3c7ac7675931e8e699558976f9e590f1f3968de68c06d12706090858d27507",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-back.png",
+          "sha256": "dd9fd65d4c3e14b7c7518fda89b1686cb5f2978183967e518419a5f734af8278",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 31,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p31.png",
+          "sha256": "abb13d6eaa3aa8ea7839c416395498fd1dcc5c26d831090e0f7061d3b6c5531e",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": null,
+      "normalizedValue": null,
+      "executionRequired": true,
+      "contractExecutable": false,
+      "blocking": true,
+      "notes": "COM p8 names a Level I Aberration spawn; frozen official Ability requires as many Monsters as possible including at least one Aberration I. No rule explicitly closes other members, pool Levels, count/selection precedence, exhaustion, active-copy sharing, overflow or return destination. No silent source precedence or unrestricted pool."
+    },
+    {
+      "id": "summon.otherEligibleMonsters",
+      "category": "SUMMON_POOL",
+      "status": "SOURCE_UNRESOLVED",
+      "authority": "NONE",
+      "canonical": false,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-front.png",
+          "sha256": "6a3c7ac7675931e8e699558976f9e590f1f3968de68c06d12706090858d27507",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-back.png",
+          "sha256": "dd9fd65d4c3e14b7c7518fda89b1686cb5f2978183967e518419a5f734af8278",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 31,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p31.png",
+          "sha256": "abb13d6eaa3aa8ea7839c416395498fd1dcc5c26d831090e0f7061d3b6c5531e",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": null,
+      "normalizedValue": null,
+      "executionRequired": true,
+      "contractExecutable": false,
+      "blocking": true,
+      "notes": "COM p8 names a Level I Aberration spawn; frozen official Ability requires as many Monsters as possible including at least one Aberration I. No rule explicitly closes other members, pool Levels, count/selection precedence, exhaustion, active-copy sharing, overflow or return destination. No silent source precedence or unrestricted pool."
+    },
+    {
+      "id": "summon.poolLevel",
+      "category": "SUMMON_POOL",
+      "status": "SOURCE_UNRESOLVED",
+      "authority": "NONE",
+      "canonical": false,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-front.png",
+          "sha256": "6a3c7ac7675931e8e699558976f9e590f1f3968de68c06d12706090858d27507",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-back.png",
+          "sha256": "dd9fd65d4c3e14b7c7518fda89b1686cb5f2978183967e518419a5f734af8278",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 31,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p31.png",
+          "sha256": "abb13d6eaa3aa8ea7839c416395498fd1dcc5c26d831090e0f7061d3b6c5531e",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": null,
+      "normalizedValue": null,
+      "executionRequired": true,
+      "contractExecutable": false,
+      "blocking": true,
+      "notes": "COM p8 names a Level I Aberration spawn; frozen official Ability requires as many Monsters as possible including at least one Aberration I. No rule explicitly closes other members, pool Levels, count/selection precedence, exhaustion, active-copy sharing, overflow or return destination. No silent source precedence or unrestricted pool."
+    },
+    {
+      "id": "summon.duplicateDefinitions",
+      "category": "SUMMON_POOL",
+      "status": "SOURCE_UNRESOLVED",
+      "authority": "NONE",
+      "canonical": false,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-front.png",
+          "sha256": "6a3c7ac7675931e8e699558976f9e590f1f3968de68c06d12706090858d27507",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-back.png",
+          "sha256": "dd9fd65d4c3e14b7c7518fda89b1686cb5f2978183967e518419a5f734af8278",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 31,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p31.png",
+          "sha256": "abb13d6eaa3aa8ea7839c416395498fd1dcc5c26d831090e0f7061d3b6c5531e",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": null,
+      "normalizedValue": null,
+      "executionRequired": true,
+      "contractExecutable": false,
+      "blocking": true,
+      "notes": "COM p8 names a Level I Aberration spawn; frozen official Ability requires as many Monsters as possible including at least one Aberration I. No rule explicitly closes other members, pool Levels, count/selection precedence, exhaustion, active-copy sharing, overflow or return destination. No silent source precedence or unrestricted pool."
+    },
+    {
+      "id": "summon.countAlgorithm",
+      "category": "SUMMON_POOL",
+      "status": "SOURCE_UNRESOLVED",
+      "authority": "NONE",
+      "canonical": false,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-front.png",
+          "sha256": "6a3c7ac7675931e8e699558976f9e590f1f3968de68c06d12706090858d27507",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-back.png",
+          "sha256": "dd9fd65d4c3e14b7c7518fda89b1686cb5f2978183967e518419a5f734af8278",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 31,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p31.png",
+          "sha256": "abb13d6eaa3aa8ea7839c416395498fd1dcc5c26d831090e0f7061d3b6c5531e",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": null,
+      "normalizedValue": null,
+      "executionRequired": true,
+      "contractExecutable": false,
+      "blocking": true,
+      "notes": "COM p8 names a Level I Aberration spawn; frozen official Ability requires as many Monsters as possible including at least one Aberration I. No rule explicitly closes other members, pool Levels, count/selection precedence, exhaustion, active-copy sharing, overflow or return destination. No silent source precedence or unrestricted pool."
+    },
+    {
+      "id": "summon.mandatoryAberrationSelection",
+      "category": "SUMMON_POOL",
+      "status": "SOURCE_UNRESOLVED",
+      "authority": "NONE",
+      "canonical": false,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-front.png",
+          "sha256": "6a3c7ac7675931e8e699558976f9e590f1f3968de68c06d12706090858d27507",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-back.png",
+          "sha256": "dd9fd65d4c3e14b7c7518fda89b1686cb5f2978183967e518419a5f734af8278",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 31,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p31.png",
+          "sha256": "abb13d6eaa3aa8ea7839c416395498fd1dcc5c26d831090e0f7061d3b6c5531e",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": null,
+      "normalizedValue": null,
+      "executionRequired": true,
+      "contractExecutable": false,
+      "blocking": true,
+      "notes": "COM p8 names a Level I Aberration spawn; frozen official Ability requires as many Monsters as possible including at least one Aberration I. No rule explicitly closes other members, pool Levels, count/selection precedence, exhaustion, active-copy sharing, overflow or return destination. No silent source precedence or unrestricted pool."
+    },
+    {
+      "id": "summon.exactlyOneVacancy",
+      "category": "SUMMON_POOL",
+      "status": "SOURCE_UNRESOLVED",
+      "authority": "NONE",
+      "canonical": false,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-front.png",
+          "sha256": "6a3c7ac7675931e8e699558976f9e590f1f3968de68c06d12706090858d27507",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-back.png",
+          "sha256": "dd9fd65d4c3e14b7c7518fda89b1686cb5f2978183967e518419a5f734af8278",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 31,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p31.png",
+          "sha256": "abb13d6eaa3aa8ea7839c416395498fd1dcc5c26d831090e0f7061d3b6c5531e",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": null,
+      "normalizedValue": null,
+      "executionRequired": true,
+      "contractExecutable": false,
+      "blocking": true,
+      "notes": "COM p8 names a Level I Aberration spawn; frozen official Ability requires as many Monsters as possible including at least one Aberration I. No rule explicitly closes other members, pool Levels, count/selection precedence, exhaustion, active-copy sharing, overflow or return destination. No silent source precedence or unrestricted pool."
+    },
+    {
+      "id": "summon.multipleVacancies",
+      "category": "SUMMON_POOL",
+      "status": "SOURCE_UNRESOLVED",
+      "authority": "NONE",
+      "canonical": false,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-front.png",
+          "sha256": "6a3c7ac7675931e8e699558976f9e590f1f3968de68c06d12706090858d27507",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-back.png",
+          "sha256": "dd9fd65d4c3e14b7c7518fda89b1686cb5f2978183967e518419a5f734af8278",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 31,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p31.png",
+          "sha256": "abb13d6eaa3aa8ea7839c416395498fd1dcc5c26d831090e0f7061d3b6c5531e",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": null,
+      "normalizedValue": null,
+      "executionRequired": true,
+      "contractExecutable": false,
+      "blocking": true,
+      "notes": "COM p8 names a Level I Aberration spawn; frozen official Ability requires as many Monsters as possible including at least one Aberration I. No rule explicitly closes other members, pool Levels, count/selection precedence, exhaustion, active-copy sharing, overflow or return destination. No silent source precedence or unrestricted pool."
+    },
+    {
+      "id": "summon.noAberrationSupply",
+      "category": "SUMMON_POOL",
+      "status": "SOURCE_UNRESOLVED",
+      "authority": "NONE",
+      "canonical": false,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-front.png",
+          "sha256": "6a3c7ac7675931e8e699558976f9e590f1f3968de68c06d12706090858d27507",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-back.png",
+          "sha256": "dd9fd65d4c3e14b7c7518fda89b1686cb5f2978183967e518419a5f734af8278",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 31,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p31.png",
+          "sha256": "abb13d6eaa3aa8ea7839c416395498fd1dcc5c26d831090e0f7061d3b6c5531e",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": null,
+      "normalizedValue": null,
+      "executionRequired": true,
+      "contractExecutable": false,
+      "blocking": true,
+      "notes": "COM p8 names a Level I Aberration spawn; frozen official Ability requires as many Monsters as possible including at least one Aberration I. No rule explicitly closes other members, pool Levels, count/selection precedence, exhaustion, active-copy sharing, overflow or return destination. No silent source precedence or unrestricted pool."
+    },
+    {
+      "id": "summon.alreadyPresentAberration",
+      "category": "SUMMON_POOL",
+      "status": "SOURCE_UNRESOLVED",
+      "authority": "NONE",
+      "canonical": false,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-front.png",
+          "sha256": "6a3c7ac7675931e8e699558976f9e590f1f3968de68c06d12706090858d27507",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-back.png",
+          "sha256": "dd9fd65d4c3e14b7c7518fda89b1686cb5f2978183967e518419a5f734af8278",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 31,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p31.png",
+          "sha256": "abb13d6eaa3aa8ea7839c416395498fd1dcc5c26d831090e0f7061d3b6c5531e",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": null,
+      "normalizedValue": null,
+      "executionRequired": true,
+      "contractExecutable": false,
+      "blocking": true,
+      "notes": "COM p8 names a Level I Aberration spawn; frozen official Ability requires as many Monsters as possible including at least one Aberration I. No rule explicitly closes other members, pool Levels, count/selection precedence, exhaustion, active-copy sharing, overflow or return destination. No silent source precedence or unrestricted pool."
+    },
+    {
+      "id": "summon.multipleAberrationCopies",
+      "category": "SUMMON_POOL",
+      "status": "SOURCE_UNRESOLVED",
+      "authority": "NONE",
+      "canonical": false,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-front.png",
+          "sha256": "6a3c7ac7675931e8e699558976f9e590f1f3968de68c06d12706090858d27507",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-back.png",
+          "sha256": "dd9fd65d4c3e14b7c7518fda89b1686cb5f2978183967e518419a5f734af8278",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 31,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p31.png",
+          "sha256": "abb13d6eaa3aa8ea7839c416395498fd1dcc5c26d831090e0f7061d3b6c5531e",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": null,
+      "normalizedValue": null,
+      "executionRequired": true,
+      "contractExecutable": false,
+      "blocking": true,
+      "notes": "COM p8 names a Level I Aberration spawn; frozen official Ability requires as many Monsters as possible including at least one Aberration I. No rule explicitly closes other members, pool Levels, count/selection precedence, exhaustion, active-copy sharing, overflow or return destination. No silent source precedence or unrestricted pool."
+    },
+    {
+      "id": "summon.priorityAndOverflow",
+      "category": "SUMMON_POOL",
+      "status": "SOURCE_UNRESOLVED",
+      "authority": "NONE",
+      "canonical": false,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-front.png",
+          "sha256": "6a3c7ac7675931e8e699558976f9e590f1f3968de68c06d12706090858d27507",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-back.png",
+          "sha256": "dd9fd65d4c3e14b7c7518fda89b1686cb5f2978183967e518419a5f734af8278",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 31,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p31.png",
+          "sha256": "abb13d6eaa3aa8ea7839c416395498fd1dcc5c26d831090e0f7061d3b6c5531e",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": null,
+      "normalizedValue": null,
+      "executionRequired": true,
+      "contractExecutable": false,
+      "blocking": true,
+      "notes": "COM p8 names a Level I Aberration spawn; frozen official Ability requires as many Monsters as possible including at least one Aberration I. No rule explicitly closes other members, pool Levels, count/selection precedence, exhaustion, active-copy sharing, overflow or return destination. No silent source precedence or unrestricted pool."
+    },
+    {
+      "id": "summon.activeCopiesReduceSupply",
+      "category": "SUMMON_POOL",
+      "status": "SOURCE_UNRESOLVED",
+      "authority": "NONE",
+      "canonical": false,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-front.png",
+          "sha256": "6a3c7ac7675931e8e699558976f9e590f1f3968de68c06d12706090858d27507",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-back.png",
+          "sha256": "dd9fd65d4c3e14b7c7518fda89b1686cb5f2978183967e518419a5f734af8278",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 31,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p31.png",
+          "sha256": "abb13d6eaa3aa8ea7839c416395498fd1dcc5c26d831090e0f7061d3b6c5531e",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": null,
+      "normalizedValue": null,
+      "executionRequired": true,
+      "contractExecutable": false,
+      "blocking": true,
+      "notes": "COM p8 names a Level I Aberration spawn; frozen official Ability requires as many Monsters as possible including at least one Aberration I. No rule explicitly closes other members, pool Levels, count/selection precedence, exhaustion, active-copy sharing, overflow or return destination. No silent source precedence or unrestricted pool."
+    },
+    {
+      "id": "summon.copyReturnDestination",
+      "category": "SUMMON_POOL",
+      "status": "SOURCE_UNRESOLVED",
+      "authority": "NONE",
+      "canonical": false,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-front.png",
+          "sha256": "6a3c7ac7675931e8e699558976f9e590f1f3968de68c06d12706090858d27507",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41903-274696-back.png",
+          "sha256": "dd9fd65d4c3e14b7c7518fda89b1686cb5f2978183967e518419a5f734af8278",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 31,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p31.png",
+          "sha256": "abb13d6eaa3aa8ea7839c416395498fd1dcc5c26d831090e0f7061d3b6c5531e",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "literal": null,
+      "normalizedValue": null,
+      "executionRequired": true,
+      "contractExecutable": false,
+      "blocking": true,
+      "notes": "COM p8 names a Level I Aberration spawn; frozen official Ability requires as many Monsters as possible including at least one Aberration I. No rule explicitly closes other members, pool Levels, count/selection precedence, exhaustion, active-copy sharing, overflow or return destination. No silent source precedence or unrestricted pool."
+    }
+  ],
+  "frozenSelfWounds": 5,
+  "frozenTargetStress": 2,
+  "eligiblePool": "SOURCE_UNRESOLVED",
+  "countAlgorithm": "SOURCE_UNRESOLVED",
+  "conflicts": [
+    {
+      "id": "RETURN_SUMMON_SCOPE",
+      "authority": "OFFICIAL_SOURCE_CONTRACT_REVIEW_REQUIRED",
+      "canonicalResolution": false,
+      "sources": [
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 8,
+          "originalPage": 8,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-ABILITY",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_CARDS_70_120_Boss_Abilities_FRONT.pdf",
+          "sha256": "42d826a02542848ef46afeb8742cd0f3092437860144065307f48ec885fd030f",
+          "page": 4,
+          "originalPage": 4,
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "applicability": "Independent official print corroborates frozen Thing Identity/Ability; does not replace C1C38 literals."
+        }
+      ],
+      "literals": [
+        "will spawn a Level 1 Crystalline Abberation",
+        "summon as many monsters as possible ... including at least one Crystalline Aberration I"
+      ],
+      "review": "Minimum I member is compatible; exhaustive pool/count and precedence are not resolved. Do not replace the frozen Ability quantifier or claim exactly one total spawn.",
+      "blocksPromotion": true
+    }
+  ],
+  "contractRulingReview": "REQUIRED_STOP_AFFECTED_PROMOTION"
+}

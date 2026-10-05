@@ -1,0 +1,571 @@
+{
+  "status": "PASS",
+  "level": 2,
+  "evidenceVersion": "C1C36-PLAYER-RELOAD-v1",
+  "prerequisiteFixture": "pre-Quest Act/level/family/defeated family prerequisites only",
+  "questBattleFixture": false,
+  "threatId": "threat-draw:cmp_mupz5a2y_7hz1sv:act-2",
+  "receipts": [
+    [
+      "cmp_mupz5a2y_7hz1sv:qrun_mupz5cdi_kb9mza:prophet:2:prophet-threat:qrun_mupz5cdi_kb9mza:scout:start:A,B,C,D,E,F,G,H"
+    ],
+    [
+      "cmp_mupz5a2y_7hz1sv:qrun_mupz5j9l_9w5tjp:prophet:2:prophet-threat:qrun_mupz5j9l_9w5tjp:scout:start:A,B,C,D,E,F,G,H"
+    ]
+  ],
+  "observed": [
+    "Room 11 IN_PLAY before first Prophet activation",
+    "after ordinal 1 placement",
+    "ordinal 2 Rubble 0",
+    "Crowded PendingChoice",
+    "attack incoming-attack-window Rubble 0",
+    "attack hero-hit-window Rubble 0",
+    "ordinal 3 Rubble 0",
+    "ordinal 3 Rubble 1",
+    "ordinal 3 Rubble 2",
+    "attack incoming-attack-window Rubble 2",
+    "attack hero-hit-window Rubble 2",
+    "ordinal 3 Rubble 3",
+    "ordinal 3 Rubble 4",
+    "ordinal 1 Rubble 4",
+    "attack incoming-attack-window Rubble 1",
+    "attack hero-hit-window Rubble 1",
+    "attack incoming-attack-window Rubble 3",
+    "attack hero-hit-window Rubble 3",
+    "Boss victory before settlement"
+  ],
+  "finalStateHash": "c29b54d2f88b2a830acffa9ff5deeb53232caaf494746107d9b9cdec7033537d",
+  "eventHash": "2d905075ffc10a248ca842c81dba8f5badd6fee2f7af301ccd5717f099819eb2",
+  "ruleSetVersion": "C1C35R2-PROPHET-DIGITAL-DEFAULT-v1",
+  "heroDodgeRuleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+  "questRunId": "qrun_mupz5qpm_mwgc50",
+  "encounterId": "cmp_mupz5a2y_7hz1sv:qrun_mupz5qpm_mwgc50:prophet:2",
+  "room": {
+    "roomId": "D",
+    "roomCardId": 44710,
+    "tileId": "ruins-tile-11",
+    "encounterId": "cmp_mupz5a2y_7hz1sv:qrun_mupz5qpm_mwgc50:prophet:2",
+    "lifecycle": "RETURNED"
+  },
+  "returnedPewIds": [
+    "qrun_mupz5qpm_mwgc50:boss:wooden-pew:1",
+    "qrun_mupz5qpm_mwgc50:boss:wooden-pew:2",
+    "qrun_mupz5qpm_mwgc50:boss:wooden-pew:3",
+    "qrun_mupz5qpm_mwgc50:boss:wooden-pew:4"
+  ],
+  "activePews": 0,
+  "pendingAttack": null,
+  "pendingChoice": null,
+  "defeatedBossFamilyIds": [
+    "necromancer",
+    "prophet"
+  ],
+  "defeatedThreatIds": [
+    "prophet-threat-level-2"
+  ],
+  "act": 3,
+  "campaignLevel": 3,
+  "transactions": [
+    "act-start:cmp_mupz5a2y_7hz1sv:act-2",
+    "boss-victory:cmp_mupz5a2y_7hz1sv:qrun_mupz5qpm_mwgc50",
+    "act-start:cmp_mupz5a2y_7hz1sv:act-3"
+  ],
+  "questCompletion": {
+    "outcome": "completed",
+    "xpPerHero": 1,
+    "heroes": [
+      {
+        "instanceId": "hero_mupz5a4w_0hge38",
+        "level": 1,
+        "xp": 1
+      },
+      {
+        "instanceId": "hero_mupz5a6s_xa8pt1",
+        "level": 1,
+        "xp": 1
+      },
+      {
+        "instanceId": "hero_mupz5a8o_a7p5wk",
+        "level": 1,
+        "xp": 1
+      },
+      {
+        "instanceId": "hero_mupz8xva_dw2dpg",
+        "level": 1,
+        "xp": 1
+      }
+    ],
+    "pendingQuestXp": null
+  },
+  "archivedQuestReceipts": [
+    {
+      "questRunId": "qrun_mupz5cdi_kb9mza",
+      "encounterId": "cmp_mupz5a2y_7hz1sv:qrun_mupz5cdi_kb9mza:prophet:2",
+      "threatCardId": 42010,
+      "ruleSetVersion": "C1C35R2-PROPHET-DIGITAL-DEFAULT-v1",
+      "receipts": [
+        "cmp_mupz5a2y_7hz1sv:qrun_mupz5cdi_kb9mza:prophet:2:prophet-threat:qrun_mupz5cdi_kb9mza:scout:start:A,B,C,D,E,F,G,H"
+      ]
+    },
+    {
+      "questRunId": "qrun_mupz5j9l_9w5tjp",
+      "encounterId": "cmp_mupz5a2y_7hz1sv:qrun_mupz5j9l_9w5tjp:prophet:2",
+      "threatCardId": 42010,
+      "ruleSetVersion": "C1C35R2-PROPHET-DIGITAL-DEFAULT-v1",
+      "receipts": [
+        "cmp_mupz5a2y_7hz1sv:qrun_mupz5j9l_9w5tjp:prophet:2:prophet-threat:qrun_mupz5j9l_9w5tjp:scout:start:A,B,C,D,E,F,G,H"
+      ]
+    }
+  ],
+  "attacks": [
+    {
+      "transactionId": "qrun_mupz5qpm_mwgc50:boss:round:1:ordinal:2:normal",
+      "physicalOrdinal": null,
+      "skillNumber": 1,
+      "attackRoll": 2,
+      "targetActorIds": [
+        "u_hero_mupz5a6s_xa8pt1"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupz5qpm_mwgc50:boss:round:1:ordinal:3:pew:1",
+      "physicalOrdinal": 1,
+      "skillNumber": 3,
+      "attackRoll": 7,
+      "targetActorIds": [
+        "u_hero_mupz5aaj_u8ug0i"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupz5qpm_mwgc50:boss:round:1:ordinal:3:pew:2",
+      "physicalOrdinal": 2,
+      "skillNumber": 3,
+      "attackRoll": 7,
+      "targetActorIds": []
+    },
+    {
+      "transactionId": "qrun_mupz5qpm_mwgc50:boss:round:1:ordinal:3:pew:3",
+      "physicalOrdinal": 3,
+      "skillNumber": 3,
+      "attackRoll": 8,
+      "targetActorIds": [
+        "u_hero_mupz5a4w_0hge38"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupz5qpm_mwgc50:boss:round:1:ordinal:3:pew:4",
+      "physicalOrdinal": 4,
+      "skillNumber": 3,
+      "attackRoll": 3,
+      "targetActorIds": []
+    },
+    {
+      "transactionId": "qrun_mupz5qpm_mwgc50:boss:round:2:ordinal:2:normal",
+      "physicalOrdinal": null,
+      "skillNumber": 2,
+      "attackRoll": 9,
+      "targetActorIds": [
+        "u_hero_mupz5a6s_xa8pt1"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupz5qpm_mwgc50:boss:round:2:ordinal:3:pew:1",
+      "physicalOrdinal": 1,
+      "skillNumber": 3,
+      "attackRoll": 4,
+      "targetActorIds": []
+    },
+    {
+      "transactionId": "qrun_mupz5qpm_mwgc50:boss:round:2:ordinal:3:pew:2",
+      "physicalOrdinal": 2,
+      "skillNumber": 3,
+      "attackRoll": 7,
+      "targetActorIds": []
+    },
+    {
+      "transactionId": "qrun_mupz5qpm_mwgc50:boss:round:2:ordinal:3:pew:3",
+      "physicalOrdinal": 3,
+      "skillNumber": 3,
+      "attackRoll": 10,
+      "targetActorIds": [
+        "u_hero_mupz5a8o_a7p5wk"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupz5qpm_mwgc50:boss:round:2:ordinal:3:pew:4",
+      "physicalOrdinal": 4,
+      "skillNumber": 3,
+      "attackRoll": 10,
+      "targetActorIds": []
+    },
+    {
+      "transactionId": "qrun_mupz5qpm_mwgc50:boss:round:3:ordinal:2:normal",
+      "physicalOrdinal": null,
+      "skillNumber": 1,
+      "attackRoll": 7,
+      "targetActorIds": [
+        "u_hero_mupz5a6s_xa8pt1"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupz5qpm_mwgc50:boss:round:3:ordinal:3:pew:1",
+      "physicalOrdinal": 1,
+      "skillNumber": 3,
+      "attackRoll": 9,
+      "targetActorIds": [
+        "u_hero_mupz5a8o_a7p5wk"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupz5qpm_mwgc50:boss:round:3:ordinal:3:pew:2",
+      "physicalOrdinal": 2,
+      "skillNumber": 3,
+      "attackRoll": 7,
+      "targetActorIds": [
+        "u_hero_mupz5a8o_a7p5wk"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupz5qpm_mwgc50:boss:round:3:ordinal:3:pew:3",
+      "physicalOrdinal": 3,
+      "skillNumber": 3,
+      "attackRoll": 5,
+      "targetActorIds": [
+        "u_hero_mupz5a8o_a7p5wk"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupz5qpm_mwgc50:boss:round:3:ordinal:3:pew:4",
+      "physicalOrdinal": 4,
+      "skillNumber": 3,
+      "attackRoll": 3,
+      "targetActorIds": [
+        "u_hero_mupz5aaj_u8ug0i"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupz5qpm_mwgc50:boss:round:4:ordinal:2:normal",
+      "physicalOrdinal": null,
+      "skillNumber": 1,
+      "attackRoll": 6,
+      "targetActorIds": [
+        "u_hero_mupz5a6s_xa8pt1"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupz5qpm_mwgc50:boss:round:4:ordinal:3:pew:1",
+      "physicalOrdinal": 1,
+      "skillNumber": 3,
+      "attackRoll": 5,
+      "targetActorIds": [
+        "u_hero_mupz5aaj_u8ug0i"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupz5qpm_mwgc50:boss:round:4:ordinal:3:pew:2",
+      "physicalOrdinal": 2,
+      "skillNumber": 3,
+      "attackRoll": 2,
+      "targetActorIds": []
+    },
+    {
+      "transactionId": "qrun_mupz5qpm_mwgc50:boss:round:4:ordinal:3:pew:3",
+      "physicalOrdinal": 3,
+      "skillNumber": 3,
+      "attackRoll": 1,
+      "targetActorIds": [
+        "u_hero_mupz5aaj_u8ug0i"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupz5qpm_mwgc50:boss:round:4:ordinal:3:pew:4",
+      "physicalOrdinal": 4,
+      "skillNumber": 3,
+      "attackRoll": 4,
+      "targetActorIds": []
+    }
+  ],
+  "spawnAudits": [],
+  "threatStress": [
+    {
+      "type": "SCOUTING",
+      "requestedStress": 1,
+      "transactionId": "qrun_mupz5cdi_kb9mza:scout:start:A,B,C,D,E,F,G,H",
+      "once": "cmp_mupz5a2y_7hz1sv:qrun_mupz5cdi_kb9mza:prophet:2:prophet-threat:qrun_mupz5cdi_kb9mza:scout:start:A,B,C,D,E,F,G,H",
+      "stress": 1,
+      "heroes": [
+        {
+          "heroId": "hero_mupz5a4w_0hge38",
+          "before": 0,
+          "after": 2,
+          "modifiedThreatAmount": 1,
+          "trace": [
+            {
+              "sequence": 1,
+              "type": "stress-gained",
+              "sourceType": "scout",
+              "sourceId": "scout",
+              "amount": 1
+            },
+            {
+              "sequence": 5,
+              "type": "stress-gained",
+              "sourceType": "exploration",
+              "sourceId": "42010",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "heroId": "hero_mupz5a6s_xa8pt1",
+          "before": 0,
+          "after": 2,
+          "modifiedThreatAmount": 1,
+          "trace": [
+            {
+              "sequence": 2,
+              "type": "stress-gained",
+              "sourceType": "scout",
+              "sourceId": "scout",
+              "amount": 1
+            },
+            {
+              "sequence": 6,
+              "type": "stress-gained",
+              "sourceType": "exploration",
+              "sourceId": "42010",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "heroId": "hero_mupz5a8o_a7p5wk",
+          "before": 0,
+          "after": 2,
+          "modifiedThreatAmount": 1,
+          "trace": [
+            {
+              "sequence": 3,
+              "type": "stress-gained",
+              "sourceType": "scout",
+              "sourceId": "scout",
+              "amount": 1
+            },
+            {
+              "sequence": 7,
+              "type": "stress-gained",
+              "sourceType": "exploration",
+              "sourceId": "42010",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "heroId": "hero_mupz5aaj_u8ug0i",
+          "before": 0,
+          "after": 2,
+          "modifiedThreatAmount": 1,
+          "trace": [
+            {
+              "sequence": 4,
+              "type": "stress-gained",
+              "sourceType": "scout",
+              "sourceId": "scout",
+              "amount": 1
+            },
+            {
+              "sequence": 8,
+              "type": "stress-gained",
+              "sourceType": "exploration",
+              "sourceId": "42010",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "SCOUTING",
+      "requestedStress": 1,
+      "transactionId": "qrun_mupz5j9l_9w5tjp:scout:start:A,B,C,D,E,F,G,H",
+      "once": "cmp_mupz5a2y_7hz1sv:qrun_mupz5j9l_9w5tjp:prophet:2:prophet-threat:qrun_mupz5j9l_9w5tjp:scout:start:A,B,C,D,E,F,G,H",
+      "stress": 1,
+      "heroes": [
+        {
+          "heroId": "hero_mupz5a4w_0hge38",
+          "before": 1,
+          "after": 3,
+          "modifiedThreatAmount": 1,
+          "trace": [
+            {
+              "sequence": 10,
+              "type": "stress-gained",
+              "sourceType": "scout",
+              "sourceId": "scout",
+              "amount": 1
+            },
+            {
+              "sequence": 14,
+              "type": "stress-gained",
+              "sourceType": "exploration",
+              "sourceId": "42010",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "heroId": "hero_mupz5a6s_xa8pt1",
+          "before": 2,
+          "after": 4,
+          "modifiedThreatAmount": 1,
+          "trace": [
+            {
+              "sequence": 11,
+              "type": "stress-gained",
+              "sourceType": "scout",
+              "sourceId": "scout",
+              "amount": 1
+            },
+            {
+              "sequence": 15,
+              "type": "stress-gained",
+              "sourceType": "exploration",
+              "sourceId": "42010",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "heroId": "hero_mupz5a8o_a7p5wk",
+          "before": 2,
+          "after": 4,
+          "modifiedThreatAmount": 1,
+          "trace": [
+            {
+              "sequence": 12,
+              "type": "stress-gained",
+              "sourceType": "scout",
+              "sourceId": "scout",
+              "amount": 1
+            },
+            {
+              "sequence": 16,
+              "type": "stress-gained",
+              "sourceType": "exploration",
+              "sourceId": "42010",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "heroId": "hero_mupz5aaj_u8ug0i",
+          "before": 2,
+          "after": 4,
+          "modifiedThreatAmount": 1,
+          "trace": [
+            {
+              "sequence": 13,
+              "type": "stress-gained",
+              "sourceType": "scout",
+              "sourceId": "scout",
+              "amount": 1
+            },
+            {
+              "sequence": 17,
+              "type": "stress-gained",
+              "sourceType": "exploration",
+              "sourceId": "42010",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "tavern": [
+    {
+      "level": 2,
+      "before": 2,
+      "after": 1,
+      "modifier": -2,
+      "active": true,
+      "recoveryBeforePassives": 1,
+      "recoveryAfterPassives": 1,
+      "modifierSources": []
+    },
+    {
+      "level": 2,
+      "before": 3,
+      "after": 2,
+      "modifier": -2,
+      "active": true,
+      "recoveryBeforePassives": 1,
+      "recoveryAfterPassives": 1,
+      "modifierSources": []
+    },
+    {
+      "level": 2,
+      "before": 4,
+      "after": 1,
+      "modifier": 0,
+      "active": false,
+      "recoveryBeforePassives": 3,
+      "recoveryAfterPassives": 3,
+      "modifierSources": []
+    }
+  ],
+  "stateObservations": [
+    {
+      "point": "source-bound player Camp recovery",
+      "stateHash": "ee61c18ece4b6100c8e8677e5025b202edd97c0f365b55a52ab2df709f86a38a"
+    },
+    {
+      "point": "after-draw-state-and-encounter-creation",
+      "stateHash": "60be703a4cffe5a90cb704386e06fb664e9b00b5d5329eb6c9313d8c063d63ce"
+    },
+    {
+      "point": "ordinary-battle-active",
+      "stateHash": "60be703a4cffe5a90cb704386e06fb664e9b00b5d5329eb6c9313d8c063d63ce"
+    },
+    {
+      "point": "ordinary-hero-turn-before-skill",
+      "stateHash": "60be703a4cffe5a90cb704386e06fb664e9b00b5d5329eb6c9313d8c063d63ce"
+    },
+    {
+      "point": "ordinary-battle-victory",
+      "stateHash": "c7b4ddaae7b39c127df11baf4d24f2ca9cf8a3b38cc60026c27f14cf84421414"
+    },
+    {
+      "point": "ordinary-after-settlement",
+      "stateHash": "cd50117b5b9b75773140467ed3513c59f20150856160db29a59b97443eaa109a"
+    },
+    {
+      "point": "ordinary-movement-choice",
+      "stateHash": "ba67b054a96a5e7708c89fc3db015f50a463ea46aff5c5fffb675503d43a9f43"
+    },
+    {
+      "point": "boss-battle-active",
+      "stateHash": "4f5fe3cc265692ff47d820a94439848468718d17e55e006147d2c9c8b59524f5"
+    },
+    {
+      "point": "boss-hero-turn-before-skill",
+      "stateHash": "1f0dec88c25e45f4c7b748bdf3bf9b9df2849b41cc2c53c8a9785fd9b33e3a9e"
+    },
+    {
+      "point": "boss-incoming-reaction",
+      "stateHash": "95bf5a239d2ae4066275e2459141cf75d68921ac460253d12acfdf7073f88643"
+    },
+    {
+      "point": "boss-battle-victory",
+      "stateHash": "05a43fe60aab204428691ad5e69f14c3e6f71029a097615ffdaf5f9d4deb0fc5"
+    },
+    {
+      "point": "boss-after-settlement",
+      "stateHash": "d8728b585af3dac119f28695349a304b09ca95819d36947563cb1014ba7c1124"
+    },
+    {
+      "point": "player replacement recruitment",
+      "stateHash": "064f9dd99886e8bc0f838ac8d8ae7d29051c861f0da9daa6fa30fde9d44337a4"
+    }
+  ]
+}

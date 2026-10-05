@@ -13,6 +13,7 @@ import type { CampaignState, DiseaseTreatmentRecord, SanitariumService } from '.
 import { getDiseaseById } from '../../data/diseases';
 import { pushMentalEvent } from '../mental-log';
 import { createId, nowIso } from '../random';
+import { preparationDayActionBlocked } from '../campaign/necromancer-preparation-day';
 
 /** 移除 Disease 的固定费用。 */
 export const REMOVE_DISEASE_COST = 2 as const;
@@ -55,6 +56,7 @@ export function sanitariumRemoveDiseaseError(
   heroInstanceId: string
 ): string | null {
   if (campaign.gamePhase !== 'hamlet') return '当前不在 Hamlet 阶段';
+  if (preparationDayActionBlocked(campaign, heroInstanceId)) return '请先完成 Graveyard 守卫任务';
   const hero = campaign.heroes.find((h) => h.instanceId === heroInstanceId);
   if (!hero) return '英雄不存在';
   if (!hero.isAlive || hero.dead) return '阵亡英雄无法行动';

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C35R2B",
+  "baseline": "007712ab6aec2c814fa31e06cf5fe05b21a30879",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "ruleSetVersion": "C1C35R2-PROPHET-DIGITAL-DEFAULT-v1",
+  "sourceContractVersion": "C1C35R2-PROPHET-EXECUTION-CONTRACT-v1",
+  "heroDodgeRuleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+  "outcome": "PROPHET_PRODUCTION_FOUNDATION_BLOCKED",
+  "blocker": "PROPHET_FOUNDATION_BLOCKED_ON_HERO_ENTRY_PLACEMENT",
+  "canonicalSourceStatus": "SOURCE_UNRESOLVED",
+  "implicitProjectRulingCreated": false,
+  "productionFoundation": false,
+  "productionAccepted": false,
+  "controlledFoundationRouteAllowed": false,
+  "unrestrictedSelectorAllowed": false,
+  "c1c36Allowed": false,
+  "evidence": {
+    "sourceFacts": "Existing accepted source rows remain unchanged; no Hero entry Area bound for Tile 11.",
+    "projectRulings": "Existing accepted rulings remain pinned; none resolves Hero entry placement.",
+    "runtimeImplementation": "Shared bind and ENTER_BOSS_ROOM reject before mutation or RNG.",
+    "testProof": "Entry rejection and predecessor infrastructure only; no Prophet gameplay acceptance.",
+    "productionAcceptance": "BLOCKED"
+  },
+  "inputHashes": {
+    "docs/data/complete-edition/c1c35-prophet-tile-contract.json": "9fb1558340adca1f66d52f3473824f7e81e48b2481c9ac85ef661943aa75d614",
+    "docs/data/complete-edition/c1c35r2-prophet-production-definitions.json": "dd8576ecda578f97519d60075e6810fbd0a0455c9048897b8556d0aab6488431",
+    "docs/data/complete-edition/c1c32r2a-ruins-tile-area-definitions.json": "f0f619d412701bf6f7e2c1d0049a60dbcbf92efaaf2c65e9dfbb0b3c7028a0b2",
+    "docs/data/complete-edition/c1c32r2-ordinary-threat-encounter-draw-contract.json": "08915a55670dbd01322007916aab23c9794ebcccb928451f921a2a42dad03bbd",
+    "docs/data/complete-edition/rule-source-policy.json": "ced6c1b05610623c4e98338bab6309b5114e61611937bc8555f53852df8149d0"
+  },
+  "status": "BLOCKED",
+  "dependency": "Live Room 11 encounter required before physical Pew runtime acceptance",
+  "executedProductionGameplayTests": 0
+}

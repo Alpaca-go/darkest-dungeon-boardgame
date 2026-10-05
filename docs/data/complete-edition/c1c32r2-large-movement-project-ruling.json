@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R2",
+  "baselineHead": "35a42ac46ba97b07ed941bca078dc53fb5fab1bb",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "rulingId": "C1C32R2-LARGE-SINGLE-DISPLACEMENT-OVERFLOW-v1",
+  "ruleSetVersion": "C1C32R2-DIGITAL-DEFAULT-v3",
+  "inherits": "C1C31-DIGITAL-DEFAULT-v2",
+  "authority": "PROJECT_RULING",
+  "canonical": false,
+  "scope": "NEW GENERIC LARGE MOVEMENT DEPENDENCY CONTRACT ONLY; production ordinary runtime integration remains gated",
+  "alternatives": [
+    {
+      "id": "STRICT_CAPACITY",
+      "chosen": false,
+      "validBoard": true,
+      "oneCharacterDisplacement": false,
+      "largeTwoSpaces": true,
+      "deterministic": true,
+      "reason": "Moving two normals would contradict printed singular displacement; suppressing full-Area movement contradicts permission."
+    },
+    {
+      "id": "COUNT_LARGE_AS_ONE",
+      "chosen": false,
+      "validBoard": true,
+      "oneCharacterDisplacement": true,
+      "largeTwoSpaces": false,
+      "deterministic": true,
+      "reason": "Changes the explicitly printed Large footprint."
+    },
+    {
+      "id": "LICENSED_OVERFLOW_ONE",
+      "chosen": true,
+      "validBoard": "v3 board invariant capacity + at most one recorded extra space",
+      "oneCharacterDisplacement": true,
+      "largeTwoSpaces": true,
+      "deterministic": true,
+      "reason": "Keep both printed facts; persist an explicit exception rather than changing footprints or capacity."
+    }
+  ],
+  "selectedContract": {
+    "occupiedSpaces": "Large=2; normal/small=1",
+    "overflowMaximum": 1,
+    "displaced": "Exactly one living non-Target occupant; any size if final occupancy <=capacity+1",
+    "destinations": "Adjacent normal-capacity-legal Area; source may be freed atomically; never another overflow Area",
+    "choice": "Sorted character/destination pairs; all candidates saved with causal event and version",
+    "noLegalDestination": "Block movement without changing placements; retain attempted-move causal event",
+    "overflowOwnership": "Grant tied to incoming Large and displacement event; prevent further entry while grant present; remove once normal capacity restored",
+    "rngConsumed": 0
+  },
+  "migration": "Explicit opt-in before encounter initialization only. Historical Boss encounters cannot bind successor contract. Existing v1/v2 combat, Dodge and replay artifacts unchanged.",
+  "runtimeFile": "src/game-engine/rules/large-movement-contract.ts",
+  "implemented": true,
+  "productionOrdinaryMovementIntegrated": false
+}

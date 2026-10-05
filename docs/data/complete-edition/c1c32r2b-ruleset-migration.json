@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R2B",
+  "from": "C1C32R2A-DIGITAL-DEFAULT-v4",
+  "to": "C1C32R2B-DIGITAL-DEFAULT-v5",
+  "explicitOnly": true,
+  "allowedBoundary": "BEFORE_ORDINARY_ENCOUNTER_INITIALIZATION",
+  "implementation": "explicitlySelectRuinsV5",
+  "rejectIf": [
+    "battle active",
+    "Ruins draw state exists",
+    "Boss checkpoint active",
+    "Threat runtime active",
+    "Preparation Day transaction pending",
+    "not at Hamlet or Quest Select"
+  ],
+  "historicalReplayMigration": false
+}

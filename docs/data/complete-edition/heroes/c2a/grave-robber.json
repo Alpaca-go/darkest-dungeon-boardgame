@@ -1,0 +1,2463 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.5-C2A",
+  "baseline": "7f4001b956cac441778dbb457cc33041f9057ad5",
+  "sourcePolicyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "reviewDate": "2026-10-02",
+  "runtimeModified": false,
+  "prototypePromoted": false,
+  "runtimeImplementationAuthorized": false,
+  "identity": {
+    "heroClassId": "grave-robber",
+    "printedName": "GRAVE ROBBER",
+    "discoveryDisplayName": "Grave Robber",
+    "sourceGuid": "80e6f0",
+    "ttsPath": "/ObjectStates/49/ContainedObjects/12",
+    "status": "OFFICIAL_SOURCE",
+    "sourceReferences": [
+      {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+        "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+        "page": 17,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      }
+    ],
+    "contentSet": {
+      "id": "core",
+      "kind": "CORE",
+      "officialSource": {
+        "sourceId": "DD_EN_COREBOX_RULES",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_COREBOX_RULES-p6.pdf",
+        "sha256": "0da1398da453a41685d970c90a34e23635ee6e7428e06c9504dc59ba73f51430",
+        "page": 1,
+        "authority": "OFFICIAL_RULEBOOK"
+      },
+      "productionEligibilityDecided": false
+    },
+    "artEdition": "THE_DARKEST_HEROES_ALTERNATE_ART",
+    "artEditionSource": {
+      "sourceId": "DD_EN_THE_DARKEST_HEROES_BOX",
+      "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_BOX-p2.pdf",
+      "sha256": "2231192b932bc2ea57775fadb40547fd57c40bdd89abe904812f3e5c5c365c42",
+      "page": 1,
+      "authority": "OFFICIAL_PRINTED_COMPONENT"
+    }
+  },
+  "transport": {
+    "authority": "DISCOVERY_TRANSPORT_ONLY",
+    "sourceGuid": "80e6f0",
+    "ttsPath": "/ObjectStates/49/ContainedObjects/12",
+    "transportRefs": [
+      {
+        "guid": "2d7986",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/0/ContainedObjects/0",
+        "cardId": 41919,
+        "deckId": 419,
+        "cardIndex": 19,
+        "customDeckId": "419",
+        "numWidth": 10,
+        "numHeight": 4,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/12677869863913797937/23DA479FBC06416C765A38D6B273EBE0D4507782/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/17594467170742406184/90697A96C017765569632EF9C7E4258CB2414AA5/",
+        "frontSheetSha256": null,
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "eebfe6",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/0/ContainedObjects/1",
+        "cardId": 41918,
+        "deckId": 419,
+        "cardIndex": 18,
+        "customDeckId": "419",
+        "numWidth": 10,
+        "numHeight": 4,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/12677869863913797937/23DA479FBC06416C765A38D6B273EBE0D4507782/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/17594467170742406184/90697A96C017765569632EF9C7E4258CB2414AA5/",
+        "frontSheetSha256": null,
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "7346eb",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/2/ContainedObjects/0",
+        "cardId": 48100,
+        "deckId": 481,
+        "cardIndex": 0,
+        "customDeckId": "481",
+        "numWidth": 1,
+        "numHeight": 1,
+        "uniqueBack": false,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10857428155057345709/E56D9890EE72CE37A68F4107D43F7519CBB691E5/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15235231901860912575/B13C35772D591833C4B1D601E0519B28EC724C46/",
+        "frontSheetSha256": "4e63513ab300cf03cbb72d368d8cd89d938406bdc05afae6e4e7db0ca33fd0a4",
+        "backSheetSha256": "09efc2289455835b9edb794abb6d725322c9b902c30f069ff2bdd8c3fb7c751d",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "db2f2f",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/2/ContainedObjects/1",
+        "cardId": 48200,
+        "deckId": 482,
+        "cardIndex": 0,
+        "customDeckId": "482",
+        "numWidth": 1,
+        "numHeight": 1,
+        "uniqueBack": false,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/11370974005221457354/CE9C951DB821EA02C43755C4198D72DD3F37F3A2/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/16241113030030945539/AF7504687CC5F62DAE704803942034D34B69A76E/",
+        "frontSheetSha256": "f98b02533c8d3ccbcb6f1954f391f6ce608f9fdd76696014e1a6c362d26f1167",
+        "backSheetSha256": "51f7280400284666b79cf9f5385f76701e2204a431aa63567708b668256522d0",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "94ed5a",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/0",
+        "cardId": 42460,
+        "deckId": 424,
+        "cardIndex": 60,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "088d84",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/0/States/2",
+        "cardId": 42461,
+        "deckId": 424,
+        "cardIndex": 61,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "4a3697",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/0/States/3",
+        "cardId": 42462,
+        "deckId": 424,
+        "cardIndex": 62,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "035b56",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/1",
+        "cardId": 42466,
+        "deckId": 424,
+        "cardIndex": 66,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "7d7d8c",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/1/States/2",
+        "cardId": 42467,
+        "deckId": 424,
+        "cardIndex": 67,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "7b8326",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/1/States/3",
+        "cardId": 42468,
+        "deckId": 424,
+        "cardIndex": 68,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "8d9c26",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/2",
+        "cardId": 42457,
+        "deckId": 424,
+        "cardIndex": 57,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "68fe3d",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/2/States/2",
+        "cardId": 42458,
+        "deckId": 424,
+        "cardIndex": 58,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "309709",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/2/States/3",
+        "cardId": 42459,
+        "deckId": 424,
+        "cardIndex": 59,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "5383c7",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/3",
+        "cardId": 42451,
+        "deckId": 424,
+        "cardIndex": 51,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "a4bc01",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/3/States/2",
+        "cardId": 42452,
+        "deckId": 424,
+        "cardIndex": 52,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "c81549",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/3/States/3",
+        "cardId": 42453,
+        "deckId": 424,
+        "cardIndex": 53,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "3291e5",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/4",
+        "cardId": 42454,
+        "deckId": 424,
+        "cardIndex": 54,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "8c2bbf",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/4/States/2",
+        "cardId": 42455,
+        "deckId": 424,
+        "cardIndex": 55,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "272aa0",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/4/States/3",
+        "cardId": 42456,
+        "deckId": 424,
+        "cardIndex": 56,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "bcdc4a",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/5",
+        "cardId": 42463,
+        "deckId": 424,
+        "cardIndex": 63,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "283b72",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/5/States/2",
+        "cardId": 42464,
+        "deckId": 424,
+        "cardIndex": 64,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "fb0af0",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/5/States/3",
+        "cardId": 42465,
+        "deckId": 424,
+        "cardIndex": 65,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "d3eef1",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/6",
+        "cardId": 51400,
+        "deckId": 514,
+        "cardIndex": 0,
+        "customDeckId": "514",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/14816015110844575620/188C1ED93C87CB8CC9942A06EA5BD6CFA09239A4/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15793152662319086447/AC3FD2CC5E7E907F9404B424D8D9EE6A42DBEA8F/",
+        "frontSheetSha256": "16d81a4cc423bff3377e72f8844084290ce1308c40acb324b5c274aceabc0d4a",
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "b9d7f0",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/6/States/2",
+        "cardId": 51601,
+        "deckId": 516,
+        "cardIndex": 1,
+        "customDeckId": "516",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/14816015110844575620/188C1ED93C87CB8CC9942A06EA5BD6CFA09239A4/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15793152662319086447/AC3FD2CC5E7E907F9404B424D8D9EE6A42DBEA8F/",
+        "frontSheetSha256": "16d81a4cc423bff3377e72f8844084290ce1308c40acb324b5c274aceabc0d4a",
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      {
+        "guid": "ba984e",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/6/States/3",
+        "cardId": 47002,
+        "deckId": 470,
+        "cardIndex": 2,
+        "customDeckId": "470",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/14816015110844575620/188C1ED93C87CB8CC9942A06EA5BD6CFA09239A4/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15793152662319086447/AC3FD2CC5E7E907F9404B424D8D9EE6A42DBEA8F/",
+        "frontSheetSha256": "16d81a4cc423bff3377e72f8844084290ce1308c40acb324b5c274aceabc0d4a",
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      }
+    ]
+  },
+  "heroCards": [
+    {
+      "physicalId": "c2a-grave-robber-7346eb",
+      "heroId": "grave-robber",
+      "category": "HERO_PVP_CARD",
+      "transportGuid": "7346eb",
+      "transportPath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/2/ContainedObjects/0",
+      "transport": {
+        "guid": "7346eb",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/2/ContainedObjects/0",
+        "cardId": 48100,
+        "deckId": 481,
+        "cardIndex": 0,
+        "customDeckId": "481",
+        "numWidth": 1,
+        "numHeight": 1,
+        "uniqueBack": false,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/10857428155057345709/E56D9890EE72CE37A68F4107D43F7519CBB691E5/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15235231901860912575/B13C35772D591833C4B1D601E0519B28EC724C46/",
+        "frontSheetSha256": "4e63513ab300cf03cbb72d368d8cd89d938406bdc05afae6e4e7db0ca33fd0a4",
+        "backSheetSha256": "09efc2289455835b9edb794abb6d725322c9b902c30f069ff2bdd8c3fb7c751d",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "frontHash": "929180abb5bdb7a093365284c38b368f6dbce1cc5577155cc5974534628727f0",
+      "frontImage": "docs/data/complete-edition/source-assets/c2a/transport/7346eb-a6bc5fca-front.png",
+      "backHash": "2a4d683700fc16b6bb8e48b6f6504050d9aa1fc8eb9bdb607acc3c54ad61e004",
+      "backImage": "docs/data/complete-edition/source-assets/c2a/transport/7346eb-a6bc5fca-back.png",
+      "officialSourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_PVP_FRONT",
+      "officialSourceRefs": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_PVP_FRONT",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_PVP_FRONT.pdf",
+          "sha256": "3a1244fa6c3fb7f3bfbd627e4f26d6955d8baaf07fdae68b99066639d7e6358e",
+          "page": 15,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "logicalIdentity": "grave-robber:pvp-board:15",
+      "duplicateOf": null,
+      "status": "OFFICIAL_SOURCE",
+      "visualReview": "PASS",
+      "printedName": "GRAVE ROBBER",
+      "cardSubtype": "PVP_HERO_BOARD",
+      "printedLevel": null,
+      "stanceInformation": "Visible stance icons; not transcribed as gameplay",
+      "statInformation": "Visible printed stats; not normalized",
+      "backSourceStatus": "OFFICIAL_SOURCE",
+      "officialBackSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_PVP_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_PVP_BACK.pdf",
+        "sha256": "2eefef286639786563535d05de931160d28708c5298a99457bffddcd6c0139c0",
+        "page": 15,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      }
+    },
+    {
+      "physicalId": "c2a-grave-robber-db2f2f",
+      "heroId": "grave-robber",
+      "category": "HERO_PVP_CARD",
+      "transportGuid": "db2f2f",
+      "transportPath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/2/ContainedObjects/1",
+      "transport": {
+        "guid": "db2f2f",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/2/ContainedObjects/1",
+        "cardId": 48200,
+        "deckId": 482,
+        "cardIndex": 0,
+        "customDeckId": "482",
+        "numWidth": 1,
+        "numHeight": 1,
+        "uniqueBack": false,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/11370974005221457354/CE9C951DB821EA02C43755C4198D72DD3F37F3A2/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/16241113030030945539/AF7504687CC5F62DAE704803942034D34B69A76E/",
+        "frontSheetSha256": "f98b02533c8d3ccbcb6f1954f391f6ce608f9fdd76696014e1a6c362d26f1167",
+        "backSheetSha256": "51f7280400284666b79cf9f5385f76701e2204a431aa63567708b668256522d0",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "frontHash": "86c1c640f754ffbb89cbf175159bd7cff5661ec807c16caf325f3595f1defe5e",
+      "frontImage": "docs/data/complete-edition/source-assets/c2a/transport/db2f2f-546f3ebd-front.png",
+      "backHash": "446db46516499d7b088656f7c6100a69d82adb14dfec09bce3a71b5d7576663f",
+      "backImage": "docs/data/complete-edition/source-assets/c2a/transport/db2f2f-546f3ebd-back.png",
+      "officialSourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_PVP_FRONT",
+      "officialSourceRefs": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_PVP_FRONT",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_PVP_FRONT.pdf",
+          "sha256": "3a1244fa6c3fb7f3bfbd627e4f26d6955d8baaf07fdae68b99066639d7e6358e",
+          "page": 16,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "logicalIdentity": "grave-robber:pvp-board:16",
+      "duplicateOf": null,
+      "status": "OFFICIAL_SOURCE",
+      "visualReview": "PASS",
+      "printedName": "GRAVE ROBBER",
+      "cardSubtype": "PVP_HERO_BOARD",
+      "printedLevel": null,
+      "stanceInformation": "Visible stance icons; not transcribed as gameplay",
+      "statInformation": "Visible printed stats; not normalized",
+      "backSourceStatus": "OFFICIAL_SOURCE",
+      "officialBackSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_PVP_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_PVP_BACK.pdf",
+        "sha256": "2eefef286639786563535d05de931160d28708c5298a99457bffddcd6c0139c0",
+        "page": 16,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      }
+    }
+  ],
+  "levelProfileCards": [
+    {
+      "physicalId": "c2a-grave-robber-2d7986",
+      "heroId": "grave-robber",
+      "category": "LEVEL_PROFILE_CARD",
+      "transportGuid": "2d7986",
+      "transportPath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/0/ContainedObjects/0",
+      "transport": {
+        "guid": "2d7986",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/0/ContainedObjects/0",
+        "cardId": 41919,
+        "deckId": 419,
+        "cardIndex": 19,
+        "customDeckId": "419",
+        "numWidth": 10,
+        "numHeight": 4,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/12677869863913797937/23DA479FBC06416C765A38D6B273EBE0D4507782/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/17594467170742406184/90697A96C017765569632EF9C7E4258CB2414AA5/",
+        "frontSheetSha256": null,
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "frontHash": null,
+      "frontImage": null,
+      "backHash": null,
+      "backImage": null,
+      "officialSourceId": null,
+      "officialSourceRefs": [],
+      "logicalIdentity": null,
+      "duplicateOf": null,
+      "status": "SOURCE_UNRESOLVED",
+      "visualReview": "BLOCKED",
+      "cardSubtype": "CAMPAIGN_HERO_PROFILE",
+      "printedName": null,
+      "printedLevel": null,
+      "officialPrintCandidates": [
+        {
+          "front": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 17,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          },
+          "back": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK.pdf",
+            "sha256": "41f46559e7c5fefdc2f4d6018c5bf98a22a7c89de33cc2031337867eeaadfaba",
+            "page": 17,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "front": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 18,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          },
+          "back": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK.pdf",
+            "sha256": "41f46559e7c5fefdc2f4d6018c5bf98a22a7c89de33cc2031337867eeaadfaba",
+            "page": 18,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ]
+    },
+    {
+      "physicalId": "c2a-grave-robber-eebfe6",
+      "heroId": "grave-robber",
+      "category": "LEVEL_PROFILE_CARD",
+      "transportGuid": "eebfe6",
+      "transportPath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/0/ContainedObjects/1",
+      "transport": {
+        "guid": "eebfe6",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/0/ContainedObjects/1",
+        "cardId": 41918,
+        "deckId": 419,
+        "cardIndex": 18,
+        "customDeckId": "419",
+        "numWidth": 10,
+        "numHeight": 4,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/12677869863913797937/23DA479FBC06416C765A38D6B273EBE0D4507782/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/17594467170742406184/90697A96C017765569632EF9C7E4258CB2414AA5/",
+        "frontSheetSha256": null,
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "frontHash": null,
+      "frontImage": null,
+      "backHash": null,
+      "backImage": null,
+      "officialSourceId": null,
+      "officialSourceRefs": [],
+      "logicalIdentity": null,
+      "duplicateOf": null,
+      "status": "SOURCE_UNRESOLVED",
+      "visualReview": "BLOCKED",
+      "cardSubtype": "CAMPAIGN_HERO_PROFILE",
+      "printedName": null,
+      "printedLevel": null,
+      "officialPrintCandidates": [
+        {
+          "front": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 17,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          },
+          "back": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK.pdf",
+            "sha256": "41f46559e7c5fefdc2f4d6018c5bf98a22a7c89de33cc2031337867eeaadfaba",
+            "page": 17,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "front": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 18,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          },
+          "back": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK.pdf",
+            "sha256": "41f46559e7c5fefdc2f4d6018c5bf98a22a7c89de33cc2031337867eeaadfaba",
+            "page": 18,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "skillId": "grave-robber-shadow-fade",
+      "heroId": "grave-robber",
+      "printedName": "Shadow Fade",
+      "physicalCardId": "c2a-grave-robber-94ed5a",
+      "transportObjectId": "94ed5a",
+      "levelForms": [
+        {
+          "level": 1,
+          "printedLevelMarker": "I",
+          "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/0",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 178,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 2,
+          "printedLevelMarker": "II",
+          "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/0/States/2",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 179,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 3,
+          "printedLevelMarker": "III",
+          "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/0/States/3",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 180,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialSourceStatus": "OFFICIAL_SOURCE",
+      "visualReview": "PASS",
+      "gameplayTranscribed": false,
+      "acceptedEvidenceRefs": [],
+      "priorConditionRefs": []
+    },
+    {
+      "skillId": "grave-robber-poison-dart",
+      "heroId": "grave-robber",
+      "printedName": "Poison Dart",
+      "physicalCardId": "c2a-grave-robber-035b56",
+      "transportObjectId": "035b56",
+      "levelForms": [
+        {
+          "level": 1,
+          "printedLevelMarker": "I",
+          "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/1",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 184,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 2,
+          "printedLevelMarker": "II",
+          "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/1/States/2",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 185,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 3,
+          "printedLevelMarker": "III",
+          "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/1/States/3",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 186,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialSourceStatus": "OFFICIAL_SOURCE",
+      "visualReview": "PASS",
+      "gameplayTranscribed": false,
+      "acceptedEvidenceRefs": [],
+      "priorConditionRefs": []
+    },
+    {
+      "skillId": "grave-robber-flashing-daggers",
+      "heroId": "grave-robber",
+      "printedName": "Flashing Daggers",
+      "physicalCardId": "c2a-grave-robber-8d9c26",
+      "transportObjectId": "8d9c26",
+      "levelForms": [
+        {
+          "level": 1,
+          "printedLevelMarker": "I",
+          "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/2",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 175,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 2,
+          "printedLevelMarker": "II",
+          "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/2/States/2",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 176,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 3,
+          "printedLevelMarker": "III",
+          "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/2/States/3",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 177,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialSourceStatus": "OFFICIAL_SOURCE",
+      "visualReview": "PASS",
+      "gameplayTranscribed": false,
+      "acceptedEvidenceRefs": [],
+      "priorConditionRefs": []
+    },
+    {
+      "skillId": "grave-robber-pick-to-the-face",
+      "heroId": "grave-robber",
+      "printedName": "Pick to the Face",
+      "physicalCardId": "c2a-grave-robber-5383c7",
+      "transportObjectId": "5383c7",
+      "levelForms": [
+        {
+          "level": 1,
+          "printedLevelMarker": "I",
+          "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/3",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 169,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 2,
+          "printedLevelMarker": "II",
+          "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/3/States/2",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 170,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 3,
+          "printedLevelMarker": "III",
+          "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/3/States/3",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 171,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialSourceStatus": "OFFICIAL_SOURCE",
+      "visualReview": "PASS",
+      "gameplayTranscribed": false,
+      "acceptedEvidenceRefs": [],
+      "priorConditionRefs": []
+    },
+    {
+      "skillId": "grave-robber-lunge",
+      "heroId": "grave-robber",
+      "printedName": "Lunge",
+      "physicalCardId": "c2a-grave-robber-3291e5",
+      "transportObjectId": "3291e5",
+      "levelForms": [
+        {
+          "level": 1,
+          "printedLevelMarker": "I",
+          "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/4",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 172,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 2,
+          "printedLevelMarker": "II",
+          "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/4/States/2",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 173,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 3,
+          "printedLevelMarker": "III",
+          "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/4/States/3",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 174,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialSourceStatus": "OFFICIAL_SOURCE",
+      "visualReview": "PASS",
+      "gameplayTranscribed": false,
+      "acceptedEvidenceRefs": [],
+      "priorConditionRefs": []
+    },
+    {
+      "skillId": "grave-robber-throw-dagger",
+      "heroId": "grave-robber",
+      "printedName": "Throw Dagger",
+      "physicalCardId": "c2a-grave-robber-bcdc4a",
+      "transportObjectId": "bcdc4a",
+      "levelForms": [
+        {
+          "level": 1,
+          "printedLevelMarker": "I",
+          "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/5",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 181,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 2,
+          "printedLevelMarker": "II",
+          "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/5/States/2",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 182,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 3,
+          "printedLevelMarker": "III",
+          "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/5/States/3",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 183,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialSourceStatus": "OFFICIAL_SOURCE",
+      "visualReview": "PASS",
+      "gameplayTranscribed": false,
+      "acceptedEvidenceRefs": [],
+      "priorConditionRefs": []
+    },
+    {
+      "skillId": "grave-robber-toxin-trickery",
+      "heroId": "grave-robber",
+      "printedName": "Toxin Trickery",
+      "physicalCardId": "c2a-grave-robber-d3eef1",
+      "transportObjectId": "d3eef1",
+      "levelForms": [
+        {
+          "level": 1,
+          "printedLevelMarker": "I",
+          "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/6",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 187,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 2,
+          "printedLevelMarker": "II",
+          "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/6/States/2",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 188,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 3,
+          "printedLevelMarker": "III",
+          "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/6/States/3",
+          "officialSource": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 189,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialSourceStatus": "OFFICIAL_SOURCE",
+      "visualReview": "PASS",
+      "gameplayTranscribed": false,
+      "acceptedEvidenceRefs": [],
+      "priorConditionRefs": []
+    }
+  ],
+  "skillStates": [
+    {
+      "skillId": "grave-robber-shadow-fade",
+      "heroId": "grave-robber",
+      "level": 1,
+      "stateId": "base",
+      "stateGuid": "94ed5a",
+      "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/0",
+      "physicalCardId": "c2a-grave-robber-94ed5a",
+      "visualHash": "bf5b494aa8452e83f7ffc5ebc93a67ca73b3caefac7440c42f50906f2498e6de",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/94ed5a-365e7aea-front.png",
+      "printedLevelMarker": "I",
+      "printedName": "Shadow Fade",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 178,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 178,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "OFFICIAL_SOURCE",
+      "backVisualHash": "aee63bb5a190ab7ee25f21583e654750a9ba1b12fb99f86df123fdb935e08f8a",
+      "backVisualImage": "docs/data/complete-edition/source-assets/c2a/transport/94ed5a-365e7aea-back.png",
+      "printedBackName": "Shadow Fade",
+      "transport": {
+        "guid": "94ed5a",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/0",
+        "cardId": 42460,
+        "deckId": 424,
+        "cardIndex": 60,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "grave-robber-shadow-fade",
+      "heroId": "grave-robber",
+      "level": 2,
+      "stateId": "2",
+      "stateGuid": "088d84",
+      "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/0/States/2",
+      "physicalCardId": "c2a-grave-robber-94ed5a",
+      "visualHash": "850b27172b5763273c93472d99891303c7a768bab652b87c729dc2c91423ad3d",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/088d84-4105044c-front.png",
+      "printedLevelMarker": "II",
+      "printedName": "Shadow Fade",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 179,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 179,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "OFFICIAL_SOURCE",
+      "backVisualHash": "fa162882e9b4b14649de75cd8225a2bc2bc32b3caf6c69e0f6dd69008ec457b2",
+      "backVisualImage": "docs/data/complete-edition/source-assets/c2a/transport/088d84-4105044c-back.png",
+      "printedBackName": "Shadow Fade",
+      "transport": {
+        "guid": "088d84",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/0/States/2",
+        "cardId": 42461,
+        "deckId": 424,
+        "cardIndex": 61,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "grave-robber-shadow-fade",
+      "heroId": "grave-robber",
+      "level": 3,
+      "stateId": "3",
+      "stateGuid": "4a3697",
+      "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/0/States/3",
+      "physicalCardId": "c2a-grave-robber-94ed5a",
+      "visualHash": "128c4dbdd10b6484a001031f620406b54147d1f5547ddd7120ae13b6a3deaa42",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/4a3697-f4cc2450-front.png",
+      "printedLevelMarker": "III",
+      "printedName": "Shadow Fade",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 180,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 180,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "OFFICIAL_SOURCE",
+      "backVisualHash": "e79571cf4e132830ce777fc9b7c113a28aa631203457eed3476814419c958b2f",
+      "backVisualImage": "docs/data/complete-edition/source-assets/c2a/transport/4a3697-f4cc2450-back.png",
+      "printedBackName": "Shadow Fade",
+      "transport": {
+        "guid": "4a3697",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/0/States/3",
+        "cardId": 42462,
+        "deckId": 424,
+        "cardIndex": 62,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "grave-robber-poison-dart",
+      "heroId": "grave-robber",
+      "level": 1,
+      "stateId": "base",
+      "stateGuid": "035b56",
+      "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/1",
+      "physicalCardId": "c2a-grave-robber-035b56",
+      "visualHash": "3f9603f7d3f5e62dd575e8281b78f2bb029e7313d5c9a38448c8c16e7953afe9",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/035b56-c72c3a85-front.png",
+      "printedLevelMarker": "I",
+      "printedName": "Poison Dart",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 184,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 184,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "OFFICIAL_SOURCE",
+      "backVisualHash": "559bbaeb09f7ffc06e239b90454be64520a33bd9a6e874f2059f3463c7467591",
+      "backVisualImage": "docs/data/complete-edition/source-assets/c2a/transport/035b56-c72c3a85-back.png",
+      "printedBackName": "Poison Dart",
+      "transport": {
+        "guid": "035b56",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/1",
+        "cardId": 42466,
+        "deckId": 424,
+        "cardIndex": 66,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "grave-robber-poison-dart",
+      "heroId": "grave-robber",
+      "level": 2,
+      "stateId": "2",
+      "stateGuid": "7d7d8c",
+      "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/1/States/2",
+      "physicalCardId": "c2a-grave-robber-035b56",
+      "visualHash": "5f1c0eae364aa7d23bd1133cbaa335d83446174a4a2c52c4fb74db179d968d98",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/7d7d8c-234da0b3-front.png",
+      "printedLevelMarker": "II",
+      "printedName": "Poison Dart",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 185,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 185,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "OFFICIAL_SOURCE",
+      "backVisualHash": "3bb34bd82ad97124d34a0059aea3574fbf8135f9962fc6268b2d8021dda74669",
+      "backVisualImage": "docs/data/complete-edition/source-assets/c2a/transport/7d7d8c-234da0b3-back.png",
+      "printedBackName": "Poison Dart",
+      "transport": {
+        "guid": "7d7d8c",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/1/States/2",
+        "cardId": 42467,
+        "deckId": 424,
+        "cardIndex": 67,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "grave-robber-poison-dart",
+      "heroId": "grave-robber",
+      "level": 3,
+      "stateId": "3",
+      "stateGuid": "7b8326",
+      "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/1/States/3",
+      "physicalCardId": "c2a-grave-robber-035b56",
+      "visualHash": "20c7c4ee73a11fcc5e2097f8289781fb7ac393280d49fa97cb6e1302842c4a82",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/7b8326-0e9624df-front.png",
+      "printedLevelMarker": "III",
+      "printedName": "Poison Dart",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 186,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 186,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "OFFICIAL_SOURCE",
+      "backVisualHash": "bf6d3431b5f55226e0a56ac14af92e9b89c11da40944a6a5c54939fe2eb54d3f",
+      "backVisualImage": "docs/data/complete-edition/source-assets/c2a/transport/7b8326-0e9624df-back.png",
+      "printedBackName": "Poison Dart",
+      "transport": {
+        "guid": "7b8326",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/1/States/3",
+        "cardId": 42468,
+        "deckId": 424,
+        "cardIndex": 68,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "grave-robber-flashing-daggers",
+      "heroId": "grave-robber",
+      "level": 1,
+      "stateId": "base",
+      "stateGuid": "8d9c26",
+      "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/2",
+      "physicalCardId": "c2a-grave-robber-8d9c26",
+      "visualHash": "8ff63da301c02bf2ae0695c783740a301979e705bf97c18c7d7d0b3ebf88227a",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/8d9c26-461dd55d-front.png",
+      "printedLevelMarker": "I",
+      "printedName": "Flashing Daggers",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 175,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 175,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "OFFICIAL_SOURCE",
+      "backVisualHash": "14bb928b4aad200d5511206a36773781536ab8b8d0489b372191c3fe6bcd18ab",
+      "backVisualImage": "docs/data/complete-edition/source-assets/c2a/transport/8d9c26-461dd55d-back.png",
+      "printedBackName": "Flashing Daggers",
+      "transport": {
+        "guid": "8d9c26",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/2",
+        "cardId": 42457,
+        "deckId": 424,
+        "cardIndex": 57,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "grave-robber-flashing-daggers",
+      "heroId": "grave-robber",
+      "level": 2,
+      "stateId": "2",
+      "stateGuid": "68fe3d",
+      "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/2/States/2",
+      "physicalCardId": "c2a-grave-robber-8d9c26",
+      "visualHash": "3e3e5ccafb4b888a1dc234a2777a0798c4cae960718bd06adeb9616399ec7ab0",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/68fe3d-73370a32-front.png",
+      "printedLevelMarker": "II",
+      "printedName": "Flashing Daggers",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 176,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 176,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "OFFICIAL_SOURCE",
+      "backVisualHash": "830adc6e6eb54fcfcce18149bb96718a54cf0654f1c7d250f6392ed43307321f",
+      "backVisualImage": "docs/data/complete-edition/source-assets/c2a/transport/68fe3d-73370a32-back.png",
+      "printedBackName": "Flashing Daggers",
+      "transport": {
+        "guid": "68fe3d",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/2/States/2",
+        "cardId": 42458,
+        "deckId": 424,
+        "cardIndex": 58,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "grave-robber-flashing-daggers",
+      "heroId": "grave-robber",
+      "level": 3,
+      "stateId": "3",
+      "stateGuid": "309709",
+      "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/2/States/3",
+      "physicalCardId": "c2a-grave-robber-8d9c26",
+      "visualHash": "361606c963573744f8e080209968e0d7d3d3037aef555d70a0528f0b7d33d3fb",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/309709-ae939f72-front.png",
+      "printedLevelMarker": "III",
+      "printedName": "Flashing Daggers",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 177,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 177,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "OFFICIAL_SOURCE",
+      "backVisualHash": "cc2abd46d267a71dc192ccd77d8b30fcc143014ef8d5f281dc82d0dc849aceb5",
+      "backVisualImage": "docs/data/complete-edition/source-assets/c2a/transport/309709-ae939f72-back.png",
+      "printedBackName": "Flashing Daggers",
+      "transport": {
+        "guid": "309709",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/2/States/3",
+        "cardId": 42459,
+        "deckId": 424,
+        "cardIndex": 59,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "grave-robber-pick-to-the-face",
+      "heroId": "grave-robber",
+      "level": 1,
+      "stateId": "base",
+      "stateGuid": "5383c7",
+      "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/3",
+      "physicalCardId": "c2a-grave-robber-5383c7",
+      "visualHash": "b36224639afa15f6fb9a039ec42553052b480c823410024004682a8bc04f15da",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/5383c7-ea9597cc-front.png",
+      "printedLevelMarker": "I",
+      "printedName": "Pick to the Face",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 169,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 169,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "OFFICIAL_SOURCE",
+      "backVisualHash": "5bc69caeef58f16770edbefd2c1f2c6d6493e4e7d2ab60cd1301a727e5bf6302",
+      "backVisualImage": "docs/data/complete-edition/source-assets/c2a/transport/5383c7-ea9597cc-back.png",
+      "printedBackName": "Pick to the Face",
+      "transport": {
+        "guid": "5383c7",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/3",
+        "cardId": 42451,
+        "deckId": 424,
+        "cardIndex": 51,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "grave-robber-pick-to-the-face",
+      "heroId": "grave-robber",
+      "level": 2,
+      "stateId": "2",
+      "stateGuid": "a4bc01",
+      "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/3/States/2",
+      "physicalCardId": "c2a-grave-robber-5383c7",
+      "visualHash": "80475c39a292b5270138f684dfe79695245f53c9b577bbb24a39d39f97fb9cc5",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/a4bc01-14837e7d-front.png",
+      "printedLevelMarker": "II",
+      "printedName": "Pick to the Face",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 170,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 170,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "OFFICIAL_SOURCE",
+      "backVisualHash": "437028c55c8ec3ae311cbdf684ca7512430287af36c089366d6c19dcd7c2733c",
+      "backVisualImage": "docs/data/complete-edition/source-assets/c2a/transport/a4bc01-14837e7d-back.png",
+      "printedBackName": "Pick to the Face",
+      "transport": {
+        "guid": "a4bc01",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/3/States/2",
+        "cardId": 42452,
+        "deckId": 424,
+        "cardIndex": 52,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "grave-robber-pick-to-the-face",
+      "heroId": "grave-robber",
+      "level": 3,
+      "stateId": "3",
+      "stateGuid": "c81549",
+      "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/3/States/3",
+      "physicalCardId": "c2a-grave-robber-5383c7",
+      "visualHash": "19f62dc899953c1b9c02ea254b727e5b7f505d7eed15c9fe89fafe88dfced6e9",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/c81549-9f8400e2-front.png",
+      "printedLevelMarker": "III",
+      "printedName": "Pick to the Face",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 171,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 171,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "OFFICIAL_SOURCE",
+      "backVisualHash": "e8712c6644984d049bd5492f957e6f64b0b908631995526fc822e8583a7ea9ae",
+      "backVisualImage": "docs/data/complete-edition/source-assets/c2a/transport/c81549-9f8400e2-back.png",
+      "printedBackName": "Pick to the Face",
+      "transport": {
+        "guid": "c81549",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/3/States/3",
+        "cardId": 42453,
+        "deckId": 424,
+        "cardIndex": 53,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "grave-robber-lunge",
+      "heroId": "grave-robber",
+      "level": 1,
+      "stateId": "base",
+      "stateGuid": "3291e5",
+      "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/4",
+      "physicalCardId": "c2a-grave-robber-3291e5",
+      "visualHash": "ed254ad807afe8a8ab7152deb280d370f9fe1c3851d2ecca0c829514bff6bf41",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/3291e5-9962f61c-front.png",
+      "printedLevelMarker": "I",
+      "printedName": "Lunge",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 172,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 172,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "OFFICIAL_SOURCE",
+      "backVisualHash": "7877bd62227ce4a923df54a40f667b5ad5f789d1d13480fa6f5c43566e445471",
+      "backVisualImage": "docs/data/complete-edition/source-assets/c2a/transport/3291e5-9962f61c-back.png",
+      "printedBackName": "Lunge",
+      "transport": {
+        "guid": "3291e5",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/4",
+        "cardId": 42454,
+        "deckId": 424,
+        "cardIndex": 54,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "grave-robber-lunge",
+      "heroId": "grave-robber",
+      "level": 2,
+      "stateId": "2",
+      "stateGuid": "8c2bbf",
+      "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/4/States/2",
+      "physicalCardId": "c2a-grave-robber-3291e5",
+      "visualHash": "6136c3ae02c7512c65b4fbef0aef859d89cd8619e52b060a23365b42cb265653",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/8c2bbf-d6e05652-front.png",
+      "printedLevelMarker": "II",
+      "printedName": "Lunge",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 173,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 173,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "OFFICIAL_SOURCE",
+      "backVisualHash": "4e014c0e15ece6a66f61b19e7790e178de224652f210ed494d6aadb6673e7795",
+      "backVisualImage": "docs/data/complete-edition/source-assets/c2a/transport/8c2bbf-d6e05652-back.png",
+      "printedBackName": "Lunge",
+      "transport": {
+        "guid": "8c2bbf",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/4/States/2",
+        "cardId": 42455,
+        "deckId": 424,
+        "cardIndex": 55,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "grave-robber-lunge",
+      "heroId": "grave-robber",
+      "level": 3,
+      "stateId": "3",
+      "stateGuid": "272aa0",
+      "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/4/States/3",
+      "physicalCardId": "c2a-grave-robber-3291e5",
+      "visualHash": "def6af3edd73d05d910ca856140b61accbefb282e2d5fdd7092906d1c20f6c21",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/272aa0-904a32b3-front.png",
+      "printedLevelMarker": "III",
+      "printedName": "Lunge",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 174,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 174,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "OFFICIAL_SOURCE",
+      "backVisualHash": "a9d93bac42a33197beeaee3a62e6d778ef930c3b720a4eeeacd299be7d8c5c69",
+      "backVisualImage": "docs/data/complete-edition/source-assets/c2a/transport/272aa0-904a32b3-back.png",
+      "printedBackName": "Lunge",
+      "transport": {
+        "guid": "272aa0",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/4/States/3",
+        "cardId": 42456,
+        "deckId": 424,
+        "cardIndex": 56,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "grave-robber-throw-dagger",
+      "heroId": "grave-robber",
+      "level": 1,
+      "stateId": "base",
+      "stateGuid": "bcdc4a",
+      "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/5",
+      "physicalCardId": "c2a-grave-robber-bcdc4a",
+      "visualHash": "a038dcf87a7cfac8ac45f6646eccf1d6c1138d4db835c6b4e97c27cd8f7204de",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/bcdc4a-ab5f08ef-front.png",
+      "printedLevelMarker": "I",
+      "printedName": "Throw Dagger",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 181,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 181,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "OFFICIAL_SOURCE",
+      "backVisualHash": "b2b4fd10c51c668b36b66985a5f2afeb5f57a7bc243f4c72b454d6162f19154d",
+      "backVisualImage": "docs/data/complete-edition/source-assets/c2a/transport/bcdc4a-ab5f08ef-back.png",
+      "printedBackName": "Throw Dagger",
+      "transport": {
+        "guid": "bcdc4a",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/5",
+        "cardId": 42463,
+        "deckId": 424,
+        "cardIndex": 63,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "grave-robber-throw-dagger",
+      "heroId": "grave-robber",
+      "level": 2,
+      "stateId": "2",
+      "stateGuid": "283b72",
+      "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/5/States/2",
+      "physicalCardId": "c2a-grave-robber-bcdc4a",
+      "visualHash": "2d1d0b39d13e17d5fde1640df4bea6cf5a5f528e10c00e11a838b9c817922bc6",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/283b72-caff5a10-front.png",
+      "printedLevelMarker": "II",
+      "printedName": "Throw Dagger",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 182,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 182,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "OFFICIAL_SOURCE",
+      "backVisualHash": "388a4db34141e3c48005ebee8f79bfb5dc15aa4affe86469c3d2719c73b613be",
+      "backVisualImage": "docs/data/complete-edition/source-assets/c2a/transport/283b72-caff5a10-back.png",
+      "printedBackName": "Throw Dagger",
+      "transport": {
+        "guid": "283b72",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/5/States/2",
+        "cardId": 42464,
+        "deckId": 424,
+        "cardIndex": 64,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "grave-robber-throw-dagger",
+      "heroId": "grave-robber",
+      "level": 3,
+      "stateId": "3",
+      "stateGuid": "fb0af0",
+      "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/5/States/3",
+      "physicalCardId": "c2a-grave-robber-bcdc4a",
+      "visualHash": "6b9e6660e8a37d6126088bef29610054b476d1aa9abc2db3741f00d69505e08c",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/fb0af0-79c21f1a-front.png",
+      "printedLevelMarker": "III",
+      "printedName": "Throw Dagger",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 183,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 183,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "OFFICIAL_SOURCE",
+      "backVisualHash": "5410fb3156cf1e6904ac1d9113fcfcdaa8ed59fe1e364787191fac184bbb9d04",
+      "backVisualImage": "docs/data/complete-edition/source-assets/c2a/transport/fb0af0-79c21f1a-back.png",
+      "printedBackName": "Throw Dagger",
+      "transport": {
+        "guid": "fb0af0",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/5/States/3",
+        "cardId": 42465,
+        "deckId": 424,
+        "cardIndex": 65,
+        "customDeckId": "424",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/15300998407281270248/192F7F62E9A3D222FAED6377FDC53B918031FEFF/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/9714097579073025703/F98464D012697FCED143353B21F00BA493DA7985/",
+        "frontSheetSha256": "118da9ca56657f0a574c9a2b235d2554d558cc8f174ed68e7b373e72cfe5c3df",
+        "backSheetSha256": "59668e1bcb689989670f6a9af2a221b9c45c434d9cbd63c2ca6b3b9ddce20638",
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "grave-robber-toxin-trickery",
+      "heroId": "grave-robber",
+      "level": 1,
+      "stateId": "base",
+      "stateGuid": "d3eef1",
+      "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/6",
+      "physicalCardId": "c2a-grave-robber-d3eef1",
+      "visualHash": "a38319e3ec290554da10e196ddc0d13dbd90e880b8269234fd0fbaa306b5232a",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/d3eef1-a6c4d77f-front.png",
+      "printedLevelMarker": "I",
+      "printedName": "Toxin Trickery",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 187,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 187,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "SOURCE_UNRESOLVED",
+      "backVisualHash": null,
+      "backVisualImage": null,
+      "printedBackName": "Toxin Trickery",
+      "transport": {
+        "guid": "d3eef1",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/6",
+        "cardId": 51400,
+        "deckId": 514,
+        "cardIndex": 0,
+        "customDeckId": "514",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/14816015110844575620/188C1ED93C87CB8CC9942A06EA5BD6CFA09239A4/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15793152662319086447/AC3FD2CC5E7E907F9404B424D8D9EE6A42DBEA8F/",
+        "frontSheetSha256": "16d81a4cc423bff3377e72f8844084290ce1308c40acb324b5c274aceabc0d4a",
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "grave-robber-toxin-trickery",
+      "heroId": "grave-robber",
+      "level": 2,
+      "stateId": "2",
+      "stateGuid": "b9d7f0",
+      "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/6/States/2",
+      "physicalCardId": "c2a-grave-robber-d3eef1",
+      "visualHash": "cdd89c574d295536d12a6f3030d6a0a41e53daf0a21071ed0c1f2f4b6f689ec1",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/b9d7f0-f2457c56-front.png",
+      "printedLevelMarker": "II",
+      "printedName": "Toxin Trickery",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 188,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 188,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "SOURCE_UNRESOLVED",
+      "backVisualHash": null,
+      "backVisualImage": null,
+      "printedBackName": "Toxin Trickery",
+      "transport": {
+        "guid": "b9d7f0",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/6/States/2",
+        "cardId": 51601,
+        "deckId": 516,
+        "cardIndex": 1,
+        "customDeckId": "516",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/14816015110844575620/188C1ED93C87CB8CC9942A06EA5BD6CFA09239A4/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15793152662319086447/AC3FD2CC5E7E907F9404B424D8D9EE6A42DBEA8F/",
+        "frontSheetSha256": "16d81a4cc423bff3377e72f8844084290ce1308c40acb324b5c274aceabc0d4a",
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    },
+    {
+      "skillId": "grave-robber-toxin-trickery",
+      "heroId": "grave-robber",
+      "level": 3,
+      "stateId": "3",
+      "stateGuid": "ba984e",
+      "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/6/States/3",
+      "physicalCardId": "c2a-grave-robber-d3eef1",
+      "visualHash": "80c6ac7f4097eabf37050be01c755f1b83b7cc42fc6bf239ff1f9eb583a4fbe6",
+      "visualImage": "docs/data/complete-edition/source-assets/c2a/transport/ba984e-a7cc59b3-front.png",
+      "printedLevelMarker": "III",
+      "printedName": "Toxin Trickery",
+      "officialSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+        "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+        "page": 189,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackCandidate": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+        "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+        "page": 189,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "officialBackVisualReview": "PASS",
+      "transportBackBindingStatus": "SOURCE_UNRESOLVED",
+      "backVisualHash": null,
+      "backVisualImage": null,
+      "printedBackName": "Toxin Trickery",
+      "transport": {
+        "guid": "ba984e",
+        "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/6/States/3",
+        "cardId": 47002,
+        "deckId": 470,
+        "cardIndex": 2,
+        "customDeckId": "470",
+        "numWidth": 10,
+        "numHeight": 7,
+        "uniqueBack": true,
+        "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/14816015110844575620/188C1ED93C87CB8CC9942A06EA5BD6CFA09239A4/",
+        "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15793152662319086447/AC3FD2CC5E7E907F9404B424D8D9EE6A42DBEA8F/",
+        "frontSheetSha256": "16d81a4cc423bff3377e72f8844084290ce1308c40acb324b5c274aceabc0d4a",
+        "backSheetSha256": null,
+        "authority": "DISCOVERY_TRANSPORT_ONLY"
+      },
+      "visualReview": "PASS",
+      "status": "OFFICIAL_SOURCE",
+      "mappingBasis": "Direct visual Roman marker and Skill name match against official print page; never state index authority."
+    }
+  ],
+  "officialSources": [
+    "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+    "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+    "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK"
+  ],
+  "officialProfileInventory": [
+    {
+      "printSlot": "grave-robber:profile:0",
+      "printedName": "GRAVE ROBBER",
+      "front": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+        "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+        "page": 17,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "back": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK.pdf",
+        "sha256": "41f46559e7c5fefdc2f4d6018c5bf98a22a7c89de33cc2031337867eeaadfaba",
+        "page": 17,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "frontLevelMarker": "I",
+      "backLevelMarker": "II",
+      "frontRole": "HERO_PROFILE",
+      "backRole": "HERO_PROFILE",
+      "visualReview": "PASS",
+      "transportBindingStatus": "SOURCE_UNRESOLVED"
+    },
+    {
+      "printSlot": "grave-robber:profile:1",
+      "printedName": "GRAVE ROBBER",
+      "front": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+        "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+        "page": 18,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "back": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK.pdf",
+        "sha256": "41f46559e7c5fefdc2f4d6018c5bf98a22a7c89de33cc2031337867eeaadfaba",
+        "page": 18,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "frontLevelMarker": "III",
+      "backLevelMarker": null,
+      "frontRole": "HERO_PROFILE",
+      "backRole": "ILLUSTRATED_CARD_BACK",
+      "visualReview": "PASS",
+      "transportBindingStatus": "SOURCE_UNRESOLVED"
+    }
+  ],
+  "existingPrototypeLinks": {
+    "hero": "grave-robber",
+    "skills": [
+      "grave-robber-flash",
+      "grave-robber-dodge",
+      "grave-robber-sneak"
+    ]
+  },
+  "duplicateRefs": [],
+  "unresolvedRefs": [
+    "profile-2d7986",
+    "profile-eebfe6",
+    "skill-back-d3eef1",
+    "skill-back-b9d7f0",
+    "skill-back-ba984e"
+  ],
+  "sourceGaps": [
+    {
+      "gapId": "profile-2d7986",
+      "heroId": "grave-robber",
+      "physicalId": "c2a-grave-robber-2d7986",
+      "category": "STATE_RELATION_UNRESOLVED",
+      "scope": "PROFILE_TRANSPORT_CORRELATION",
+      "status": "SOURCE_UNRESOLVED",
+      "affectedFields": [
+        "transport image to printed profile identity",
+        "front/back physical pairing"
+      ],
+      "detail": "Official Profile PDFs are available and reviewed. Shared transport front/back sheets time out; no CardID-to-print-page inference is allowed.",
+      "officialSourceCandidates": [
+        {
+          "front": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 17,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          },
+          "back": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK.pdf",
+            "sha256": "41f46559e7c5fefdc2f4d6018c5bf98a22a7c89de33cc2031337867eeaadfaba",
+            "page": 17,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "front": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 18,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          },
+          "back": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK.pdf",
+            "sha256": "41f46559e7c5fefdc2f4d6018c5bf98a22a7c89de33cc2031337867eeaadfaba",
+            "page": 18,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "transportRefs": [
+        {
+          "guid": "2d7986",
+          "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/0/ContainedObjects/0",
+          "cardId": 41919,
+          "deckId": 419,
+          "cardIndex": 19,
+          "customDeckId": "419",
+          "numWidth": 10,
+          "numHeight": 4,
+          "uniqueBack": true,
+          "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/12677869863913797937/23DA479FBC06416C765A38D6B273EBE0D4507782/",
+          "backImage": "https://steamusercontent-a.akamaihd.net/ugc/17594467170742406184/90697A96C017765569632EF9C7E4258CB2414AA5/",
+          "frontSheetSha256": null,
+          "backSheetSha256": null,
+          "authority": "DISCOVERY_TRANSPORT_ONLY"
+        }
+      ]
+    },
+    {
+      "gapId": "profile-eebfe6",
+      "heroId": "grave-robber",
+      "physicalId": "c2a-grave-robber-eebfe6",
+      "category": "STATE_RELATION_UNRESOLVED",
+      "scope": "PROFILE_TRANSPORT_CORRELATION",
+      "status": "SOURCE_UNRESOLVED",
+      "affectedFields": [
+        "transport image to printed profile identity",
+        "front/back physical pairing"
+      ],
+      "detail": "Official Profile PDFs are available and reviewed. Shared transport front/back sheets time out; no CardID-to-print-page inference is allowed.",
+      "officialSourceCandidates": [
+        {
+          "front": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 17,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          },
+          "back": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK.pdf",
+            "sha256": "41f46559e7c5fefdc2f4d6018c5bf98a22a7c89de33cc2031337867eeaadfaba",
+            "page": 17,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "front": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 18,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          },
+          "back": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK.pdf",
+            "sha256": "41f46559e7c5fefdc2f4d6018c5bf98a22a7c89de33cc2031337867eeaadfaba",
+            "page": 18,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "transportRefs": [
+        {
+          "guid": "eebfe6",
+          "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/0/ContainedObjects/1",
+          "cardId": 41918,
+          "deckId": 419,
+          "cardIndex": 18,
+          "customDeckId": "419",
+          "numWidth": 10,
+          "numHeight": 4,
+          "uniqueBack": true,
+          "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/12677869863913797937/23DA479FBC06416C765A38D6B273EBE0D4507782/",
+          "backImage": "https://steamusercontent-a.akamaihd.net/ugc/17594467170742406184/90697A96C017765569632EF9C7E4258CB2414AA5/",
+          "frontSheetSha256": null,
+          "backSheetSha256": null,
+          "authority": "DISCOVERY_TRANSPORT_ONLY"
+        }
+      ]
+    },
+    {
+      "gapId": "skill-back-d3eef1",
+      "heroId": "grave-robber",
+      "physicalId": "c2a-grave-robber-d3eef1",
+      "skillId": "grave-robber-toxin-trickery",
+      "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/6",
+      "category": "STATE_RELATION_UNRESOLVED",
+      "status": "SOURCE_UNRESOLVED",
+      "affectedFields": [
+        "transport back to official print back pairing"
+      ],
+      "detail": "Official back PDF reviewed; transport back atlas unavailable. Front identity remains bound; back pairing is not inferred.",
+      "officialSourceCandidates": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+          "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+          "page": 187,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "transportRefs": [
+        {
+          "guid": "d3eef1",
+          "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/6",
+          "cardId": 51400,
+          "deckId": 514,
+          "cardIndex": 0,
+          "customDeckId": "514",
+          "numWidth": 10,
+          "numHeight": 7,
+          "uniqueBack": true,
+          "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/14816015110844575620/188C1ED93C87CB8CC9942A06EA5BD6CFA09239A4/",
+          "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15793152662319086447/AC3FD2CC5E7E907F9404B424D8D9EE6A42DBEA8F/",
+          "frontSheetSha256": "16d81a4cc423bff3377e72f8844084290ce1308c40acb324b5c274aceabc0d4a",
+          "backSheetSha256": null,
+          "authority": "DISCOVERY_TRANSPORT_ONLY"
+        }
+      ]
+    },
+    {
+      "gapId": "skill-back-b9d7f0",
+      "heroId": "grave-robber",
+      "physicalId": "c2a-grave-robber-d3eef1",
+      "skillId": "grave-robber-toxin-trickery",
+      "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/6/States/2",
+      "category": "STATE_RELATION_UNRESOLVED",
+      "status": "SOURCE_UNRESOLVED",
+      "affectedFields": [
+        "transport back to official print back pairing"
+      ],
+      "detail": "Official back PDF reviewed; transport back atlas unavailable. Front identity remains bound; back pairing is not inferred.",
+      "officialSourceCandidates": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+          "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+          "page": 188,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "transportRefs": [
+        {
+          "guid": "b9d7f0",
+          "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/6/States/2",
+          "cardId": 51601,
+          "deckId": 516,
+          "cardIndex": 1,
+          "customDeckId": "516",
+          "numWidth": 10,
+          "numHeight": 7,
+          "uniqueBack": true,
+          "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/14816015110844575620/188C1ED93C87CB8CC9942A06EA5BD6CFA09239A4/",
+          "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15793152662319086447/AC3FD2CC5E7E907F9404B424D8D9EE6A42DBEA8F/",
+          "frontSheetSha256": "16d81a4cc423bff3377e72f8844084290ce1308c40acb324b5c274aceabc0d4a",
+          "backSheetSha256": null,
+          "authority": "DISCOVERY_TRANSPORT_ONLY"
+        }
+      ]
+    },
+    {
+      "gapId": "skill-back-ba984e",
+      "heroId": "grave-robber",
+      "physicalId": "c2a-grave-robber-d3eef1",
+      "skillId": "grave-robber-toxin-trickery",
+      "statePath": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/6/States/3",
+      "category": "STATE_RELATION_UNRESOLVED",
+      "status": "SOURCE_UNRESOLVED",
+      "affectedFields": [
+        "transport back to official print back pairing"
+      ],
+      "detail": "Official back PDF reviewed; transport back atlas unavailable. Front identity remains bound; back pairing is not inferred.",
+      "officialSourceCandidates": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_BACK.pdf",
+          "sha256": "d97b059b3594d1c77742da988b7d58cc5db1dae925a3e7cab41abf3049db80ab",
+          "page": 189,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "transportRefs": [
+        {
+          "guid": "ba984e",
+          "path": "/ObjectStates/49/ContainedObjects/12/ContainedObjects/6/ContainedObjects/6/States/3",
+          "cardId": 47002,
+          "deckId": 470,
+          "cardIndex": 2,
+          "customDeckId": "470",
+          "numWidth": 10,
+          "numHeight": 7,
+          "uniqueBack": true,
+          "frontImage": "https://steamusercontent-a.akamaihd.net/ugc/14816015110844575620/188C1ED93C87CB8CC9942A06EA5BD6CFA09239A4/",
+          "backImage": "https://steamusercontent-a.akamaihd.net/ugc/15793152662319086447/AC3FD2CC5E7E907F9404B424D8D9EE6A42DBEA8F/",
+          "frontSheetSha256": "16d81a4cc423bff3377e72f8844084290ce1308c40acb324b5c274aceabc0d4a",
+          "backSheetSha256": null,
+          "authority": "DISCOVERY_TRANSPORT_ONLY"
+        }
+      ]
+    }
+  ],
+  "censusStatus": "CENSUS_PARTIAL",
+  "counts": {
+    "transportOwners": 11,
+    "heroCards": 2,
+    "levelProfileCards": 2,
+    "skillOwners": 7,
+    "skillForms": 21
+  },
+  "specialInventoryExplanation": null
+}

@@ -1,0 +1,718 @@
+{
+  "status": "PASS",
+  "level": 3,
+  "evidenceVersion": "C1C36-PLAYER-RELOAD-v1",
+  "prerequisiteFixture": "pre-Quest Act/level/family/defeated family prerequisites only",
+  "questBattleFixture": false,
+  "threatId": "threat-draw:cmp_mupz961s_3jlxhs:act-3",
+  "receipts": [
+    [
+      "cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:prophet-threat:ruins:cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:A:spawn:ruins:cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:A:bone-spearman:copy-1",
+      "cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:prophet-threat:ruins:cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:D:spawn:ruins:cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:D:bone-rabble:copy-3"
+    ],
+    [
+      "cmp_mupz961s_3jlxhs:qrun_mupz9lj4_7xuuxq:prophet:3:prophet-threat:ruins:cmp_mupz961s_3jlxhs:qrun_mupz9lj4_7xuuxq:prophet:3:ordinary:D:spawn:ruins:cmp_mupz961s_3jlxhs:qrun_mupz9lj4_7xuuxq:prophet:3:ordinary:D:gargoyle:copy-2"
+    ]
+  ],
+  "observed": [
+    "Room 11 IN_PLAY before first Prophet activation",
+    "after ordinal 1 placement",
+    "ordinal 2 Rubble 0",
+    "Crowded PendingChoice",
+    "attack incoming-attack-window Rubble 0",
+    "attack hero-hit-window Rubble 0",
+    "ordinal 3 Rubble 0",
+    "ordinal 3 Rubble 1",
+    "ordinal 3 Rubble 2",
+    "attack incoming-attack-window Rubble 2",
+    "attack hero-hit-window Rubble 2",
+    "ordinal 3 Rubble 3",
+    "ordinal 3 Rubble 4",
+    "ordinal 1 Rubble 4",
+    "attack incoming-attack-window Rubble 3",
+    "attack hero-hit-window Rubble 3",
+    "attack incoming-attack-window Rubble 1",
+    "attack hero-hit-window Rubble 1",
+    "Boss victory before settlement"
+  ],
+  "finalStateHash": "fdabb0dfa28e9aec5bed5e6a0f4312d101e6ef2a5c28cbcc6bf63540eb1fc00d",
+  "eventHash": "82faae76e60106df77b0ff410b2641c7b2a07fb5546ff7d39966823f5564a574",
+  "ruleSetVersion": "C1C35R2-PROPHET-DIGITAL-DEFAULT-v1",
+  "heroDodgeRuleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+  "questRunId": "qrun_mupza8x6_36p85j",
+  "encounterId": "cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3",
+  "room": {
+    "roomId": "D",
+    "roomCardId": 44710,
+    "tileId": "ruins-tile-11",
+    "encounterId": "cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3",
+    "lifecycle": "RETURNED"
+  },
+  "returnedPewIds": [
+    "qrun_mupza8x6_36p85j:boss:wooden-pew:1",
+    "qrun_mupza8x6_36p85j:boss:wooden-pew:2",
+    "qrun_mupza8x6_36p85j:boss:wooden-pew:3",
+    "qrun_mupza8x6_36p85j:boss:wooden-pew:4"
+  ],
+  "activePews": 0,
+  "pendingAttack": null,
+  "pendingChoice": null,
+  "defeatedBossFamilyIds": [
+    "necromancer",
+    "hag",
+    "prophet"
+  ],
+  "defeatedThreatIds": [
+    "prophet-threat-level-3"
+  ],
+  "act": 4,
+  "campaignLevel": 3,
+  "transactions": [
+    "act-start:cmp_mupz961s_3jlxhs:act-3",
+    "cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:prophet-threat:ruins:cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:ordinary:B:spawn:ruins:cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:ordinary:B:bone-arbalist:copy-3",
+    "cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:prophet-threat:ruins:cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:ordinary:C:spawn:ruins:cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:ordinary:C:bone-arbalist:copy-2",
+    "boss-victory:cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j",
+    "act-start:cmp_mupz961s_3jlxhs:act-4",
+    "act-four-unlock:cmp_mupz961s_3jlxhs"
+  ],
+  "questCompletion": {
+    "outcome": "completed",
+    "xpPerHero": 1,
+    "heroes": [
+      {
+        "instanceId": "hero_mupz963x_xyjjw2",
+        "level": 1,
+        "xp": 3
+      },
+      {
+        "instanceId": "hero_mupzicqs_tylu9a",
+        "level": 1,
+        "xp": 3
+      },
+      {
+        "instanceId": "hero_mupz966d_w1hnc1",
+        "level": 1,
+        "xp": 3
+      },
+      {
+        "instanceId": "hero_mupz967a_xndutn",
+        "level": 1,
+        "xp": 3
+      }
+    ],
+    "pendingQuestXp": null
+  },
+  "archivedQuestReceipts": [
+    {
+      "questRunId": "qrun_mupz98aw_c8ruh0",
+      "encounterId": "cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3",
+      "threatCardId": 42011,
+      "ruleSetVersion": "C1C35R2-PROPHET-DIGITAL-DEFAULT-v1",
+      "receipts": [
+        "cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:prophet-threat:ruins:cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:A:spawn:ruins:cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:A:bone-spearman:copy-1",
+        "cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:prophet-threat:ruins:cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:D:spawn:ruins:cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:D:bone-rabble:copy-3"
+      ]
+    },
+    {
+      "questRunId": "qrun_mupz9lj4_7xuuxq",
+      "encounterId": "cmp_mupz961s_3jlxhs:qrun_mupz9lj4_7xuuxq:prophet:3",
+      "threatCardId": 42011,
+      "ruleSetVersion": "C1C35R2-PROPHET-DIGITAL-DEFAULT-v1",
+      "receipts": [
+        "cmp_mupz961s_3jlxhs:qrun_mupz9lj4_7xuuxq:prophet:3:prophet-threat:ruins:cmp_mupz961s_3jlxhs:qrun_mupz9lj4_7xuuxq:prophet:3:ordinary:D:spawn:ruins:cmp_mupz961s_3jlxhs:qrun_mupz9lj4_7xuuxq:prophet:3:ordinary:D:gargoyle:copy-2"
+      ]
+    }
+  ],
+  "attacks": [
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:1:ordinal:2:normal",
+      "physicalOrdinal": null,
+      "skillNumber": 1,
+      "attackRoll": 6,
+      "targetActorIds": [
+        "u_hero_mupz965f_ldv05e"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:1:ordinal:3:pew:1",
+      "physicalOrdinal": 1,
+      "skillNumber": 3,
+      "attackRoll": 10,
+      "targetActorIds": []
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:1:ordinal:3:pew:2",
+      "physicalOrdinal": 2,
+      "skillNumber": 3,
+      "attackRoll": 9,
+      "targetActorIds": []
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:1:ordinal:3:pew:3",
+      "physicalOrdinal": 3,
+      "skillNumber": 3,
+      "attackRoll": 8,
+      "targetActorIds": [
+        "u_hero_mupz966d_w1hnc1"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:1:ordinal:3:pew:4",
+      "physicalOrdinal": 4,
+      "skillNumber": 3,
+      "attackRoll": 8,
+      "targetActorIds": []
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:2:ordinal:2:normal",
+      "physicalOrdinal": null,
+      "skillNumber": 2,
+      "attackRoll": 6,
+      "targetActorIds": [
+        "u_hero_mupz965f_ldv05e"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:2:ordinal:3:pew:1",
+      "physicalOrdinal": 1,
+      "skillNumber": 3,
+      "attackRoll": 5,
+      "targetActorIds": []
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:2:ordinal:3:pew:2",
+      "physicalOrdinal": 2,
+      "skillNumber": 3,
+      "attackRoll": 1,
+      "targetActorIds": []
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:2:ordinal:3:pew:3",
+      "physicalOrdinal": 3,
+      "skillNumber": 3,
+      "attackRoll": 6,
+      "targetActorIds": [
+        "u_hero_mupz967a_xndutn"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:2:ordinal:3:pew:4",
+      "physicalOrdinal": 4,
+      "skillNumber": 3,
+      "attackRoll": 9,
+      "targetActorIds": [
+        "u_hero_mupz963x_xyjjw2"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:3:ordinal:2:normal",
+      "physicalOrdinal": null,
+      "skillNumber": 2,
+      "attackRoll": 9,
+      "targetActorIds": [
+        "u_hero_mupz965f_ldv05e"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:3:ordinal:3:pew:1",
+      "physicalOrdinal": 1,
+      "skillNumber": 3,
+      "attackRoll": 2,
+      "targetActorIds": [
+        "u_hero_mupz965f_ldv05e"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:3:ordinal:3:pew:2",
+      "physicalOrdinal": 2,
+      "skillNumber": 3,
+      "attackRoll": 8,
+      "targetActorIds": [
+        "u_hero_mupz966d_w1hnc1"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:3:ordinal:3:pew:3",
+      "physicalOrdinal": 3,
+      "skillNumber": 3,
+      "attackRoll": 7,
+      "targetActorIds": [
+        "u_hero_mupz965f_ldv05e"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:3:ordinal:3:pew:4",
+      "physicalOrdinal": 4,
+      "skillNumber": 3,
+      "attackRoll": 3,
+      "targetActorIds": []
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:4:ordinal:2:normal",
+      "physicalOrdinal": null,
+      "skillNumber": 2,
+      "attackRoll": 5,
+      "targetActorIds": [
+        "u_hero_mupz965f_ldv05e"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:4:ordinal:3:pew:1",
+      "physicalOrdinal": 1,
+      "skillNumber": 3,
+      "attackRoll": 9,
+      "targetActorIds": []
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:4:ordinal:3:pew:2",
+      "physicalOrdinal": 2,
+      "skillNumber": 3,
+      "attackRoll": 5,
+      "targetActorIds": [
+        "u_hero_mupz963x_xyjjw2"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:4:ordinal:3:pew:3",
+      "physicalOrdinal": 3,
+      "skillNumber": 3,
+      "attackRoll": 10,
+      "targetActorIds": []
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:4:ordinal:3:pew:4",
+      "physicalOrdinal": 4,
+      "skillNumber": 3,
+      "attackRoll": 3,
+      "targetActorIds": [
+        "u_hero_mupz963x_xyjjw2"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:5:ordinal:2:normal",
+      "physicalOrdinal": null,
+      "skillNumber": 1,
+      "attackRoll": 2,
+      "targetActorIds": [
+        "u_hero_mupz965f_ldv05e"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:5:ordinal:3:pew:1",
+      "physicalOrdinal": 1,
+      "skillNumber": 3,
+      "attackRoll": 3,
+      "targetActorIds": []
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:5:ordinal:3:pew:2",
+      "physicalOrdinal": 2,
+      "skillNumber": 3,
+      "attackRoll": 1,
+      "targetActorIds": [
+        "u_hero_mupz966d_w1hnc1"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:5:ordinal:3:pew:3",
+      "physicalOrdinal": 3,
+      "skillNumber": 3,
+      "attackRoll": 8,
+      "targetActorIds": [
+        "u_hero_mupz963x_xyjjw2"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:5:ordinal:3:pew:4",
+      "physicalOrdinal": 4,
+      "skillNumber": 3,
+      "attackRoll": 5,
+      "targetActorIds": [
+        "u_hero_mupz965f_ldv05e"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:6:ordinal:2:normal",
+      "physicalOrdinal": null,
+      "skillNumber": 2,
+      "attackRoll": 9,
+      "targetActorIds": [
+        "u_hero_mupz965f_ldv05e"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:6:ordinal:3:pew:1",
+      "physicalOrdinal": 1,
+      "skillNumber": 3,
+      "attackRoll": 9,
+      "targetActorIds": []
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:6:ordinal:3:pew:2",
+      "physicalOrdinal": 2,
+      "skillNumber": 3,
+      "attackRoll": 1,
+      "targetActorIds": [
+        "u_hero_mupz967a_xndutn"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:6:ordinal:3:pew:3",
+      "physicalOrdinal": 3,
+      "skillNumber": 3,
+      "attackRoll": 2,
+      "targetActorIds": []
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:6:ordinal:3:pew:4",
+      "physicalOrdinal": 4,
+      "skillNumber": 3,
+      "attackRoll": 9,
+      "targetActorIds": [
+        "u_hero_mupz966d_w1hnc1"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:7:ordinal:2:normal",
+      "physicalOrdinal": null,
+      "skillNumber": 2,
+      "attackRoll": 8,
+      "targetActorIds": [
+        "u_hero_mupz967a_xndutn"
+      ]
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:7:ordinal:3:pew:1",
+      "physicalOrdinal": 1,
+      "skillNumber": 3,
+      "attackRoll": 8,
+      "targetActorIds": []
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:7:ordinal:3:pew:2",
+      "physicalOrdinal": 2,
+      "skillNumber": 3,
+      "attackRoll": 4,
+      "targetActorIds": []
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:7:ordinal:3:pew:3",
+      "physicalOrdinal": 3,
+      "skillNumber": 3,
+      "attackRoll": 2,
+      "targetActorIds": []
+    },
+    {
+      "transactionId": "qrun_mupza8x6_36p85j:boss:round:7:ordinal:3:pew:4",
+      "physicalOrdinal": 4,
+      "skillNumber": 3,
+      "attackRoll": 3,
+      "targetActorIds": []
+    }
+  ],
+  "spawnAudits": [
+    {
+      "copyId": "webber:copy-3",
+      "definitionId": "webber",
+      "unholy": false,
+      "receipt": null
+    },
+    {
+      "copyId": "bone-spearman:copy-1",
+      "definitionId": "bone-spearman",
+      "unholy": true,
+      "receipt": {
+        "transactionId": "ruins:cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:A:spawn:ruins:cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:A:bone-spearman:copy-1",
+        "once": "cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:prophet-threat:ruins:cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:A:spawn:ruins:cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:A:bone-spearman:copy-1",
+        "type": "MONSTER_SPAWN",
+        "stress": 1,
+        "spawn": {
+          "definitionId": "bone-spearman",
+          "copyId": "bone-spearman:copy-1",
+          "encounterId": "cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:A",
+          "actorId": "ruins:cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:A:bone-spearman:copy-1"
+        }
+      }
+    },
+    {
+      "copyId": "maggot:copy-2",
+      "definitionId": "maggot",
+      "unholy": false,
+      "receipt": null
+    },
+    {
+      "copyId": "brigand-fusilier:copy-1",
+      "definitionId": "brigand-fusilier",
+      "unholy": false,
+      "receipt": null
+    },
+    {
+      "copyId": "cultist-acolyte:copy-2",
+      "definitionId": "cultist-acolyte",
+      "unholy": false,
+      "receipt": null
+    },
+    {
+      "copyId": "bone-rabble:copy-3",
+      "definitionId": "bone-rabble",
+      "unholy": true,
+      "receipt": {
+        "transactionId": "ruins:cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:D:spawn:ruins:cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:D:bone-rabble:copy-3",
+        "once": "cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:prophet-threat:ruins:cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:D:spawn:ruins:cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:D:bone-rabble:copy-3",
+        "type": "MONSTER_SPAWN",
+        "stress": 1,
+        "spawn": {
+          "definitionId": "bone-rabble",
+          "copyId": "bone-rabble:copy-3",
+          "encounterId": "cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:D",
+          "actorId": "ruins:cmp_mupz961s_3jlxhs:qrun_mupz98aw_c8ruh0:prophet:3:ordinary:D:bone-rabble:copy-3"
+        }
+      }
+    },
+    {
+      "copyId": "cultist-acolyte:copy-1",
+      "definitionId": "cultist-acolyte",
+      "unholy": false,
+      "receipt": null
+    },
+    {
+      "copyId": "maggot:copy-3",
+      "definitionId": "maggot",
+      "unholy": false,
+      "receipt": null
+    },
+    {
+      "copyId": "maggot:copy-3",
+      "definitionId": "maggot",
+      "unholy": false,
+      "receipt": null
+    },
+    {
+      "copyId": "brigand-hunter:copy-3",
+      "definitionId": "brigand-hunter",
+      "unholy": false,
+      "receipt": null
+    },
+    {
+      "copyId": "madman:copy-1",
+      "definitionId": "madman",
+      "unholy": false,
+      "receipt": null
+    },
+    {
+      "copyId": "brigand-hunter:copy-1",
+      "definitionId": "brigand-hunter",
+      "unholy": false,
+      "receipt": null
+    },
+    {
+      "copyId": "brigand-cutthroat:copy-3",
+      "definitionId": "brigand-cutthroat",
+      "unholy": false,
+      "receipt": null
+    },
+    {
+      "copyId": "cultist-brawler:copy-2",
+      "definitionId": "cultist-brawler",
+      "unholy": false,
+      "receipt": null
+    },
+    {
+      "copyId": "webber:copy-1",
+      "definitionId": "webber",
+      "unholy": false,
+      "receipt": null
+    },
+    {
+      "copyId": "brigand-hunter:copy-2",
+      "definitionId": "brigand-hunter",
+      "unholy": false,
+      "receipt": null
+    },
+    {
+      "copyId": "cultist-acolyte:copy-1",
+      "definitionId": "cultist-acolyte",
+      "unholy": false,
+      "receipt": null
+    },
+    {
+      "copyId": "gargoyle:copy-2",
+      "definitionId": "gargoyle",
+      "unholy": true,
+      "receipt": {
+        "transactionId": "ruins:cmp_mupz961s_3jlxhs:qrun_mupz9lj4_7xuuxq:prophet:3:ordinary:D:spawn:ruins:cmp_mupz961s_3jlxhs:qrun_mupz9lj4_7xuuxq:prophet:3:ordinary:D:gargoyle:copy-2",
+        "once": "cmp_mupz961s_3jlxhs:qrun_mupz9lj4_7xuuxq:prophet:3:prophet-threat:ruins:cmp_mupz961s_3jlxhs:qrun_mupz9lj4_7xuuxq:prophet:3:ordinary:D:spawn:ruins:cmp_mupz961s_3jlxhs:qrun_mupz9lj4_7xuuxq:prophet:3:ordinary:D:gargoyle:copy-2",
+        "type": "MONSTER_SPAWN",
+        "stress": 1,
+        "spawn": {
+          "definitionId": "gargoyle",
+          "copyId": "gargoyle:copy-2",
+          "encounterId": "cmp_mupz961s_3jlxhs:qrun_mupz9lj4_7xuuxq:prophet:3:ordinary:D",
+          "actorId": "ruins:cmp_mupz961s_3jlxhs:qrun_mupz9lj4_7xuuxq:prophet:3:ordinary:D:gargoyle:copy-2"
+        }
+      }
+    },
+    {
+      "copyId": "adder:copy-1",
+      "definitionId": "adder",
+      "unholy": false,
+      "receipt": null
+    },
+    {
+      "copyId": "bone-arbalist:copy-3",
+      "definitionId": "bone-arbalist",
+      "unholy": true,
+      "receipt": {
+        "transactionId": "ruins:cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:ordinary:B:spawn:ruins:cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:ordinary:B:bone-arbalist:copy-3",
+        "once": "cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:prophet-threat:ruins:cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:ordinary:B:spawn:ruins:cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:ordinary:B:bone-arbalist:copy-3",
+        "type": "MONSTER_SPAWN",
+        "stress": 1,
+        "spawn": {
+          "definitionId": "bone-arbalist",
+          "copyId": "bone-arbalist:copy-3",
+          "encounterId": "cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:ordinary:B",
+          "actorId": "ruins:cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:ordinary:B:bone-arbalist:copy-3"
+        }
+      }
+    },
+    {
+      "copyId": "brigand-fusilier:copy-2",
+      "definitionId": "brigand-fusilier",
+      "unholy": false,
+      "receipt": null
+    },
+    {
+      "copyId": "brigand-cutthroat:copy-2",
+      "definitionId": "brigand-cutthroat",
+      "unholy": false,
+      "receipt": null
+    },
+    {
+      "copyId": "brigand-cutthroat:copy-3",
+      "definitionId": "brigand-cutthroat",
+      "unholy": false,
+      "receipt": null
+    },
+    {
+      "copyId": "webber:copy-3",
+      "definitionId": "webber",
+      "unholy": false,
+      "receipt": null
+    },
+    {
+      "copyId": "cultist-brawler:copy-3",
+      "definitionId": "cultist-brawler",
+      "unholy": false,
+      "receipt": null
+    },
+    {
+      "copyId": "cultist-brawler:copy-2",
+      "definitionId": "cultist-brawler",
+      "unholy": false,
+      "receipt": null
+    },
+    {
+      "copyId": "bone-arbalist:copy-2",
+      "definitionId": "bone-arbalist",
+      "unholy": true,
+      "receipt": {
+        "transactionId": "ruins:cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:ordinary:C:spawn:ruins:cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:ordinary:C:bone-arbalist:copy-2",
+        "once": "cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:prophet-threat:ruins:cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:ordinary:C:spawn:ruins:cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:ordinary:C:bone-arbalist:copy-2",
+        "type": "MONSTER_SPAWN",
+        "stress": 1,
+        "spawn": {
+          "definitionId": "bone-arbalist",
+          "copyId": "bone-arbalist:copy-2",
+          "encounterId": "cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:ordinary:C",
+          "actorId": "ruins:cmp_mupz961s_3jlxhs:qrun_mupza8x6_36p85j:prophet:3:ordinary:C:bone-arbalist:copy-2"
+        }
+      }
+    }
+  ],
+  "tavern": [
+    {
+      "level": 3,
+      "before": 7,
+      "after": 7,
+      "modifier": -3,
+      "active": true,
+      "recoveryBeforePassives": 0,
+      "recoveryAfterPassives": 0,
+      "modifierSources": []
+    },
+    {
+      "level": 3,
+      "before": 3,
+      "after": 3,
+      "modifier": -3,
+      "active": true,
+      "recoveryBeforePassives": 0,
+      "recoveryAfterPassives": 0,
+      "modifierSources": []
+    },
+    {
+      "level": 3,
+      "before": 2,
+      "after": 0,
+      "modifier": 0,
+      "active": false,
+      "recoveryBeforePassives": 3,
+      "recoveryAfterPassives": 3,
+      "modifierSources": []
+    }
+  ],
+  "stateObservations": [
+    {
+      "point": "after-draw-state-and-encounter-creation",
+      "stateHash": "7dfb27779390611604b2c9e38bbf5b1595f7c2910dec7ae2a5462e61cae781ef"
+    },
+    {
+      "point": "ordinary-battle-active",
+      "stateHash": "de5524764bd6b984306b23a818f33a31c207438e60bc67941f954822826d0f38"
+    },
+    {
+      "point": "ordinary-hero-turn-before-skill",
+      "stateHash": "de5524764bd6b984306b23a818f33a31c207438e60bc67941f954822826d0f38"
+    },
+    {
+      "point": "ordinary-movement-choice",
+      "stateHash": "52fffe15e558452eb87c5760f97733e16f0031999a6a9ddbdaf49ff2f0e60183"
+    },
+    {
+      "point": "ordinary-battle-victory",
+      "stateHash": "ab8cbc72f921db7e65008c0d6c409e99c743ca5ec4a5f4489f9dc73f751dc03f"
+    },
+    {
+      "point": "ordinary-after-settlement",
+      "stateHash": "f9689650cc934d62c33f945fb918d1c4fdf34c060cddb9514422654e2d970b3d"
+    },
+    {
+      "point": "source-bound player Camp recovery",
+      "stateHash": "14f55bf8542f5df188312958ef56cc641404a9a523d11e4b8d1ddc31ee52e265"
+    },
+    {
+      "point": "boss-battle-active",
+      "stateHash": "84cf9aa46ab62fe02ef1d341fb805501112775a7e478f0ca1c72de518d94388b"
+    },
+    {
+      "point": "boss-hero-turn-before-skill",
+      "stateHash": "979e388d3f707b18daa0d94926766ffdc46b3b4d2bd6ad418a64deb85f9c1c6e"
+    },
+    {
+      "point": "boss-incoming-reaction",
+      "stateHash": "ec43d6730ba1ade49ae1d142cb056dc48d167e73e83b1611e5e432e21f9d8acf"
+    },
+    {
+      "point": "boss-battle-victory",
+      "stateHash": "fa380f6c24140f1cc034cc1972b6669be351b3d9b9d1c8481d92c1a14ce25fe4"
+    },
+    {
+      "point": "boss-after-settlement",
+      "stateHash": "5d8247bbd506e726c97782394f2d4fc3417019933ddb5be2e85b4b48041935c5"
+    },
+    {
+      "point": "player replacement recruitment",
+      "stateHash": "b2b99ff9a6f71863af2e4f1690183ce9d11860641cacde088510bf229cbd19f3"
+    }
+  ]
+}

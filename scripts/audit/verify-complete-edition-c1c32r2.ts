@@ -1,0 +1,30 @@
+import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { graveyardDependencyProofs } from './c1c32r2-graveyard-proof';
+const root='docs/data/complete-edition/';
+const read=(name:string)=>JSON.parse(readFileSync(root+`c1c32r2-${name}.json`,'utf8'));
+const check=(condition:boolean,message:string)=>{if(!condition)throw new Error(message);};
+const sha=(data:Buffer)=>createHash('sha256').update(data).digest('hex');
+const manifest=read('local-official-source-manifest');
+check(manifest.externalSourcesUsed===false&&manifest.sourcePDFsCommitted===false,'Source policy drift');
+for(const f of manifest.files){
+  check(sha(readFileSync(join(manifest.mandatoryRoot,f.relativePath)))===f.sha256,'Local official source hash changed: '+f.relativePath);
+  check(f.pages.every((p:{page:number;componentId:string;location:string})=>Number.isInteger(p.page)&&p.page>0&&!!p.location&&!!p.componentId),'Missing page/slot identity');
+}
+for(const f of read('historical-preservation').files)check(sha(readFileSync(f.path))===f.sha256,'Frozen historical artifact changed: '+f.path);
+const defs=read('ruins-monster-definitions'),deck=read('ruins-monster-deck-contract');
+check(defs.definitions.length===24&&deck.physicalCopies===62,'Ruins + Common physical census drift');
+check(defs.definitions.filter((d:{executable:boolean})=>!d.executable).length===deck.missingMonsterDefinitions,'Definition blocker accounting drift');
+check(defs.sourceMismatches.length>0&&deck.prototypeMonsterDefinitions===0&&deck.syntheticMonsterDefinitions===0,'Unsupported data fallback');
+const captain=defs.definitions.find((d:{canonicalId:string})=>d.canonicalId==='bone-captain');
+check(captain.acceptedDefinitionReference?.monsterId==='bone-captain'&&!captain.skills,'Accepted Captain duplicated');
+const rooms=read('ruins-room-deck-contract');check(!rooms.ordinaryDrawPool.includes('ruins-room-10')&&!rooms.room10CanBeOrdinary,'Room 10 ordinary leakage');
+const ruling=read('large-movement-project-ruling');check(ruling.canonical===false&&ruling.authority==='PROJECT_RULING'&&ruling.ruleSetVersion==='C1C32R2-DIGITAL-DEFAULT-v3','Large ruling version drift');
+check(JSON.stringify(read('graveyard-transaction-proof').proofs)===JSON.stringify(graveyardDependencyProofs()),'Graveyard command/save proof drift');
+const matrix=read('runtime-dependency-matrix'),decision=read('next-workstream-decision');
+check(matrix.accepted===false&&matrix.productionReady===0&&matrix.scenarioC.combatHashes===null,'Unsupported combat acceptance');
+check(decision.promoteC1C33===false&&decision.integrationReady===false&&decision.verdict.endsWith('NOT-CLOSED'),'Unsupported phase promotion');
+check(matrix.gates.drawableProductionMonsterDefinitionsMissing===23&&matrix.gates.tileAreaContractsComplete===false&&matrix.gates.ordinaryEncounterDrawContractComplete===false,'False closure');
+console.log('C1C32R2 evidence integrity PASS; dependency acceptance NOT-CLOSED.');
+if(process.argv.includes('--require-accepted'))throw new Error('C1C32R2 dependency gates are not closed; runtime integration promotion rejected');

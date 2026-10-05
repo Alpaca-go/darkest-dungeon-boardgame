@@ -35,11 +35,12 @@ export interface SummonSupplyEntry {
   tokens: Array<{ tokenId: string; state: 'available' | 'active' | 'spentThisBattle' | 'permanentlyRemoved'; instanceId: string | null }>;
 }
 export type SummonSupplyLedger = Record<string, SummonSupplyEntry>;
-export interface BossRoomArea { id: string; capacity: number; highGround: boolean; }
+export interface BossRoomArea { id: string; capacity: number; highGround: boolean | null; }
 export interface BossSkill {
   number: number; name: string; range: number; targetCount: number; accuracy: number;
   crit: number | { state: string }; critDamage: number | { state: string }; damage: number | { state: string };
   stress: number; self: { direction: string; count: number }; targetEffect: { monster: string };
+  applyEffects?: import('./index').ActiveEffect[];
 }
 export interface BossDefinitionContract {
   family: string;
@@ -48,13 +49,14 @@ export interface BossDefinitionContract {
   ruleSourcePolicyId: string;
   battleCardId: number;
   threatAbilityCardId: number;
-  bossIdentityCardId: number;
+  bossIdentityCardId: number | null;
   roomCardId: number;
   roomNumber: number;
   bossStartArea: string;
-  heroStartArea: string;
+  heroStartArea: string | null;
+  heroStartingStanceAreas?: Record<import('./index').Stance, string>;
   initialStance: string;
-  stats: { HP: number; speed: number; dodge: number; type: string[]; glyphMeanings: Record<string, string>; immunityTokens: string[]; resistanceTokens: string[] };
+  stats: { HP: number; speed: number | null; dodge: number; type: string[]; glyphMeanings: Record<string, string>; immunityTokens: string[]; resistanceTokens: string[] };
   actionsPerRound: number;
   skills: BossSkill[];
   attackTable: Array<{ rollMin: number; rollMax: number; skill: number }>;
@@ -63,9 +65,30 @@ export interface BossDefinitionContract {
   supply: Array<{ name: string; digitalBattleSupplyLimit: number; role: string }>;
   reanimation: boolean;
   captainThreat: boolean;
-  hamlet: 'BLOCK_GRAVEYARD' | 'FORCE_GRAVEYARD_USE' | 'FORCE_GRAVEYARD_NO_USE';
-  alias: { printedLiteral: string; rulebookP38Literal: string; runtimeIdentity: string };
+  hamlet: 'BLOCK_GRAVEYARD' | 'FORCE_GRAVEYARD_USE' | 'FORCE_GRAVEYARD_NO_USE' | null;
+  alias: { printedLiteral: string; rulebookP38Literal: string; runtimeIdentity: string } | null;
   sourceFieldIds: string[];
+  /** Successor definitions retain their structured source rows; no Necromancer skill conversion. */
+  successorContract?: {
+    runtimeRegistered: true;
+    gameplayEnabled: boolean;
+    sourceContractVersion: string;
+    sourceDefinition: unknown;
+    rulingReferences: Array<{version: string; path: string; sha256: string}>;
+  };
+}
+export interface EncounterRuleDependencies {
+  bossRuleSetVersion: string;
+  heroDodgeRuleSetVersion: string;
+  actorOccupancyRuleSetVersion?: string;
+}
+/** Existing Necromancer callers retain their non-null definition API. */
+export interface NecromancerDefinitionContract extends BossDefinitionContract {
+  bossIdentityCardId: number;
+  heroStartArea: string;
+  stats: BossDefinitionContract['stats'] & {speed: number};
+  hamlet: 'BLOCK_GRAVEYARD' | 'FORCE_GRAVEYARD_USE' | 'FORCE_GRAVEYARD_NO_USE';
+  alias: NonNullable<BossDefinitionContract['alias']>;
 }
 /** A resolved definition is required; the executor never parses card text or invents Life. */
 export interface SpawnDefinition {
@@ -92,6 +115,11 @@ export interface DeathSnapshot {
   tokenId: string | null;
 }
 export type BossContinuation =
+  | { kind: 'hero-production'; actionId: string; field: string }
+  | {kind:'prophet-crowded'; actionKey:string; parentEventId:string}
+  | { kind: 'monster-move'; monsterId: string; skillNumber: number; targetIds: string[]; targetAreaId: string; parentEventId: string }
+  | { kind: 'source-self-move'; monsterId: string; targetIds: string[]; attackRoll: number; source: import('./component-combat').SourceMonsterAttack; parentEventId: string }
+  | { kind: 'source-target-push'; characterId: string; parentEventId: string }
   | { kind: 'graveyard' }
   | { kind: 'skill'; skillNumber: number; attackRoll: number | null; parentEventId: string; movementDone?: boolean; selfPushDone?: boolean }
   | { kind: 'boss-move' | 'self-push'; skillNumber: number; attackRoll: number | null; parentEventId: string; targetAreaId: string }
@@ -99,6 +127,7 @@ export type BossContinuation =
   | { kind: 'reanimate'; deaths: DeathSnapshot[]; parentEventId: string }
   | { kind: 'death-effects'; deaths: DeathSnapshot[]; remainingEffectIds: string[]; nestedDeathIds: string[]; parentEventId: string };
 export interface BossEncounterState {
+  prophetProduction?: import('./prophet-production').ProphetProductionState;
   bossFamily: string;
   bossLevel: 1 | 2 | 3;
   ruleSetVersion: string;
@@ -106,7 +135,9 @@ export interface BossEncounterState {
   roomId: string;
   battleCardId: number;
   threatAbilityCardId: number;
-  bossIdentityCardId: number;
+  bossIdentityCardId: number | null;
+  /** Optional only for byte-compatible historical Necromancer saves. Required for successor families. */
+  ruleDependencies?: EncounterRuleDependencies;
   phase: BossEncounterPhase;
   round: number;
   side: 'THREAT' | 'ABILITY';
@@ -128,12 +159,44 @@ export interface BossEncounterState {
   idCursor: number;
   idSeed: number;
   cleanupState: { completed: boolean; campaignTransactionId: string | null; roomCleaned: boolean };
+  /** Bridge metadata for checkpoints created from C1C30 onward. */
+  checkpointContext?: {
+    schemaVersion: 1;
+    encounterId: string;
+    battleId: string;
+    campaignId: string;
+    questRunId: string;
+    /** Threat identity spans the Act; this encounter belongs to one Quest. */
+    questScope?: 'STANDARD' | 'FACE_THE_THREAT';
+    playerRouteVersion?: 'C1C36-PROPHET-PLAYER-ROUTE-v1';
+    campaignLevel: number;
+    threatId: string;
+    definitionVersion: string;
+    consumedOnceKeys: string[];
+    heroDodge: Record<string, number>;
+    heroDodgeBindings?: Record<string, import('./hero-dodge-rules').ResolvedHeroDodge>;
+    heroCombatDefinitions?: Record<string, import('./component-combat').HeroCombatDefinition>;
+    dependencyAuthority: 'EXPLICIT_BINDING' | 'OFFICIAL_SOURCE';
+  };
 }
 export type BossRuntimeInput =
+  | {type:'PROPHET_PRODUCTION_HERO_STEP';input:import('./hero-runtime').HeroRuntimeInput;campaign?:Omit<import('./index').CampaignState,'battle'|'heroProductionSession'>;session?:Partial<Omit<import('./hero-runtime').HeroProductionSession,'origin'>>}
+  | {type:'PROPHET_HERO_ATTACK_ROLL';heroId:string;skillId:string;targetId:string}
+  | {type:'PROPHET_HERO_ATTACK_PREPARE';heroId:string;skillId:string;bonuses:import('../game-engine/battle').TrinketActionBonuses}
+  | {type:'PROPHET_HERO_SKILL';heroId:string;skillId:string;targetId:string;bonuses:import('../game-engine/battle').TrinketActionBonuses;finalDamageOverride?:number|null}
+  | {type:'PROPHET_HERO_MOVE';heroId:string;direction:-1|1}
+  | {type:'PROPHET_CAMPAIGN_CONSEQUENCES';mentalGuardLimit:number}
+  | {type:'PROPHET_CROWDED_ATTACK'}
+  | {type:'PROPHET_ADVANCE_TURN'}
+  | {type:'PROPHET_NEXT_PEW'}
+  | {type:'PROPHET_ATTACK_FREEZE'}
+  | {type:'PROPHET_ATTACK_COMMIT'}
+  | {type:'PROPHET_ROUND'}
+  | { type: 'MOVE_HERO_AREA'; heroId: string; areaId: string }
   | { type: 'ENTER_BOSS_ROOM' }
   | { type: 'PREPARATION_DAY'; rolls: Record<string, number> }
   | { type: 'FIRST_DUNGEON_BATTLE' }
-  | { type: 'SKILL'; skillRoll?: number; attackRoll?: number }
+  | { type: 'SKILL'; skillRoll?: number; attackRoll?: number; round?:number; actionOrdinal?:1|2|3 }
   | { type: 'CHOICE'; choiceId: string; selectedId: string }
   | { type: 'DEATHS'; instanceIds: string[] }
   | { type: 'MONSTER_DAMAGE'; amounts: Record<string, number> }

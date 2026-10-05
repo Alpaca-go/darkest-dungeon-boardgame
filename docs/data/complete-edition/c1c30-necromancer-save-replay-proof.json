@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C30",
+  "baselineHead": "4c01f006324b38f4233803bc34c4259cd69f4ced",
+  "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1",
+  "ruleSourcePolicyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "status": "BLOCKED_FOR_PRODUCTION_ACCEPTANCE",
+  "cases": [
+    {
+      "scenario": "Threat checkpoint before Room",
+      "status": "UNIT_ISOLATION_PASS",
+      "productionAcceptance": false
+    },
+    {
+      "scenario": "lowest-roll tie",
+      "status": "UNIT_ISOLATION_PASS",
+      "productionAcceptance": false
+    },
+    {
+      "scenario": "real Bone summon",
+      "status": "BLOCKED",
+      "productionAcceptance": false
+    },
+    {
+      "scenario": "Reanimation boundary",
+      "status": "BLOCKED",
+      "productionAcceptance": false
+    },
+    {
+      "scenario": "Area tie with production dependencies",
+      "status": "BLOCKED",
+      "productionAcceptance": false
+    },
+    {
+      "scenario": "incoming Trinket reaction",
+      "status": "BLOCKED",
+      "productionAcceptance": false
+    },
+    {
+      "scenario": "cleanup production replay",
+      "status": "BLOCKED",
+      "productionAcceptance": false
+    }
+  ],
+  "isolatedBridgeProof": {
+    "classification": "UNIT_ISOLATION_ONLY",
+    "productionAcceptance": false,
+    "sourceBoundDodge": [
+      0,
+      1,
+      1
+    ],
+    "syntheticBoneDefinitionUsed": false,
+    "prototypeHeroHpRetained": true,
+    "completeBoneDefinitionCount": 0,
+    "checkpointSha256": "8f030dc5d94ef8ce4157673a0be9f256ef940447a13821fc564cde8b993a3392",
+    "finalStateSha256": "084e255192ba819296fd9bfae1175154d6102f754db433bc2fa5e4df01e6a667",
+    "reloadStateSha256": "084e255192ba819296fd9bfae1175154d6102f754db433bc2fa5e4df01e6a667",
+    "bridgeSaveReload": "PASS",
+    "encounterSetupEventCount": 1
+  },
+  "noSyntheticAcceptanceProof": true
+}

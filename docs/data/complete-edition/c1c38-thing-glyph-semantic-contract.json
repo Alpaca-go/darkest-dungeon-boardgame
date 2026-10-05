@@ -1,0 +1,762 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C38",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "contractVersion": "C1C38-THING-SOURCE-CONTRACT-v1",
+  "baseline": "3ea7854b33dbfaf6dcbd85e3fb5bf86ffc55b0d3",
+  "runtimeImplemented": false,
+  "productionReady": false,
+  "playerRouteEnabled": false,
+  "glyphs": [
+    {
+      "id": "dodge",
+      "literal": "yellow silhouette square",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "normalizedSemantic": "DODGE",
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 19,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p19.png",
+          "sha256": "7fb8e134e4de1b6e6145f6f81df83ae477f709f1ab3d09eac4fd7e340496c0e5",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        },
+        {
+          "page": 24,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p24.png",
+          "sha256": "93a652993f051b7573bf6e4da8819d81f203bed61c65cf26fea03230592ab576",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "engineDurationRepresentation": "Separate future execution representation; printed t remains per-condition stack."
+    },
+    {
+      "id": "speed",
+      "literal": "blue footprint square repeated twice",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "normalizedSemantic": "SPEED",
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 24,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p24.png",
+          "sha256": "93a652993f051b7573bf6e4da8819d81f203bed61c65cf26fea03230592ab576",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "engineDurationRepresentation": "Separate future execution representation; printed t remains per-condition stack."
+    },
+    {
+      "id": "life",
+      "literal": "orange Life frame",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "normalizedSemantic": "LIFE",
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 24,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p24.png",
+          "sha256": "93a652993f051b7573bf6e4da8819d81f203bed61c65cf26fea03230592ab576",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "engineDurationRepresentation": "Separate future execution representation; printed t remains per-condition stack."
+    },
+    {
+      "id": "range",
+      "literal": "curved arrow",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "normalizedSemantic": "EXACT_AREA_RANGE",
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 19,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p19.png",
+          "sha256": "7fb8e134e4de1b6e6145f6f81df83ae477f709f1ab3d09eac4fd7e340496c0e5",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "engineDurationRepresentation": "Separate future execution representation; printed t remains per-condition stack."
+    },
+    {
+      "id": "hero-target",
+      "literal": "yellow head repeated 1/1/4",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "normalizedSemantic": "HERO_TARGET_COUNT",
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 19,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p19.png",
+          "sha256": "7fb8e134e4de1b6e6145f6f81df83ae477f709f1ab3d09eac4fd7e340496c0e5",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "engineDurationRepresentation": "Separate future execution representation; printed t remains per-condition stack."
+    },
+    {
+      "id": "damage",
+      "literal": "red bolt",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "normalizedSemantic": "ATTACK_DAMAGE_OR_CRITICAL_DAMAGE",
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 19,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p19.png",
+          "sha256": "7fb8e134e4de1b6e6145f6f81df83ae477f709f1ab3d09eac4fd7e340496c0e5",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        },
+        {
+          "page": 20,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p20.png",
+          "sha256": "2dd06b5168bd15abacbca71f36c8c57374f41e76af26edb699a2e80611d5342b",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "engineDurationRepresentation": "Separate future execution representation; printed t remains per-condition stack."
+    },
+    {
+      "id": "self-arrow",
+      "literal": "bent arrow above Self",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "normalizedSemantic": "SELF_EFFECTS_BEFORE_OTHER_EFFECTS",
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 20,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p20.png",
+          "sha256": "2dd06b5168bd15abacbca71f36c8c57374f41e76af26edb699a2e80611d5342b",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "engineDurationRepresentation": "Separate future execution representation; printed t remains per-condition stack."
+    },
+    {
+      "id": "target-arrow",
+      "literal": "bent arrow preceding effect list",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "normalizedSemantic": "TARGET_EFFECTS_AFTER_OTHER_EFFECTS",
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 20,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p20.png",
+          "sha256": "2dd06b5168bd15abacbca71f36c8c57374f41e76af26edb699a2e80611d5342b",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "engineDurationRepresentation": "Separate future execution representation; printed t remains per-condition stack."
+    },
+    {
+      "id": "wound",
+      "literal": "orange outline black heart token",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "normalizedSemantic": "WOUND_TOKEN",
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 19,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p19.png",
+          "sha256": "7fb8e134e4de1b6e6145f6f81df83ae477f709f1ab3d09eac4fd7e340496c0e5",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        },
+        {
+          "page": 20,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p20.png",
+          "sha256": "2dd06b5168bd15abacbca71f36c8c57374f41e76af26edb699a2e80611d5342b",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "engineDurationRepresentation": "Separate future execution representation; printed t remains per-condition stack."
+    },
+    {
+      "id": "stress",
+      "literal": "black arch/white stress face",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "normalizedSemantic": "STRESS",
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 21,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p21.png",
+          "sha256": "e46cadcf32d8897b3f6fec496c8ef461530c1e09ae73595262396d456e49bc17",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "engineDurationRepresentation": "Separate future execution representation; printed t remains per-condition stack."
+    },
+    {
+      "id": "blight",
+      "literal": "green dotted drop",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "normalizedSemantic": "BLIGHT",
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 21,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p21.png",
+          "sha256": "e46cadcf32d8897b3f6fec496c8ef461530c1e09ae73595262396d456e49bc17",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "engineDurationRepresentation": "Separate future execution representation; printed t remains per-condition stack."
+    },
+    {
+      "id": "bleed",
+      "literal": "red drop",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "normalizedSemantic": "BLEED",
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 21,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p21.png",
+          "sha256": "e46cadcf32d8897b3f6fec496c8ef461530c1e09ae73595262396d456e49bc17",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "engineDurationRepresentation": "Separate future execution representation; printed t remains per-condition stack."
+    },
+    {
+      "id": "stun",
+      "literal": "three yellow diamonds",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "normalizedSemantic": "STUN",
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 21,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p21.png",
+          "sha256": "e46cadcf32d8897b3f6fec496c8ef461530c1e09ae73595262396d456e49bc17",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "engineDurationRepresentation": "Separate future execution representation; printed t remains per-condition stack."
+    },
+    {
+      "id": "debuff",
+      "literal": "orange double downward chevron",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "normalizedSemantic": "DEBUFF",
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 21,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p21.png",
+          "sha256": "e46cadcf32d8897b3f6fec496c8ef461530c1e09ae73595262396d456e49bc17",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "engineDurationRepresentation": "Separate future execution representation; printed t remains per-condition stack."
+    },
+    {
+      "id": "summon",
+      "literal": "white skull on red downward arrow",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "normalizedSemantic": "SUMMON",
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 31,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p31.png",
+          "sha256": "abb13d6eaa3aa8ea7839c416395498fd1dcc5c26d831090e0f7061d3b6c5531e",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "engineDurationRepresentation": "Separate future execution representation; printed t remains per-condition stack."
+    },
+    {
+      "id": "aggressive",
+      "literal": "red crossed blades",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "normalizedSemantic": "AGGRESSIVE_STANCE",
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 12,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p12.png",
+          "sha256": "4a92200dd21f3cacd79e9cee1b70f0bb69462eadc234d02bb087fbd67062cdb0",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "engineDurationRepresentation": "Separate future execution representation; printed t remains per-condition stack."
+    },
+    {
+      "id": "defensive",
+      "literal": "red shield",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "normalizedSemantic": "DEFENSIVE_STANCE",
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 12,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p12.png",
+          "sha256": "4a92200dd21f3cacd79e9cee1b70f0bb69462eadc234d02bb087fbd67062cdb0",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "engineDurationRepresentation": "Separate future execution representation; printed t remains per-condition stack."
+    },
+    {
+      "id": "ranged",
+      "literal": "red diagonal slashes",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "normalizedSemantic": "RANGED_STANCE",
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 12,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p12.png",
+          "sha256": "4a92200dd21f3cacd79e9cee1b70f0bb69462eadc234d02bb087fbd67062cdb0",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "engineDurationRepresentation": "Separate future execution representation; printed t remains per-condition stack."
+    },
+    {
+      "id": "support",
+      "literal": "red banner",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "normalizedSemantic": "SUPPORT_STANCE",
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 12,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p12.png",
+          "sha256": "4a92200dd21f3cacd79e9cee1b70f0bb69462eadc234d02bb087fbd67062cdb0",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "engineDurationRepresentation": "Separate future execution representation; printed t remains per-condition stack."
+    },
+    {
+      "id": "turn-duration",
+      "literal": "t suffix",
+      "status": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "normalizedSemantic": "TURN_DURATION_STACKS",
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "page": 20,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p20.png",
+          "sha256": "2dd06b5168bd15abacbca71f36c8c57374f41e76af26edb699a2e80611d5342b",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        },
+        {
+          "page": 21,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p21.png",
+          "sha256": "e46cadcf32d8897b3f6fec496c8ef461530c1e09ae73595262396d456e49bc17",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        }
+      ],
+      "engineDurationRepresentation": "Separate future execution representation; printed t remains per-condition stack."
+    },
+    {
+      "id": "crystal-emblem",
+      "literal": "teal crystal banner",
+      "status": "SOURCE_UNRESOLVED",
+      "canonical": false,
+      "normalizedSemantic": null,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-front.png",
+          "sha256": "4665e688292554a0bfb023a497c45d08966ec8f81a7d47a6c783c8722dc22c66",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/43703-0cd9e0-back.png",
+          "sha256": "37e8638dc6073a818fe38607b77cbd54c708c856d9c4e73df4c8b5118ba689d7",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "engineDurationRepresentation": "Not a duration; no official content-set legend found."
+    }
+  ]
+}

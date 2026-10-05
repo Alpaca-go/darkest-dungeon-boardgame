@@ -4,7 +4,7 @@ import type {
   QuestObjectiveProgress,
   QuestXpResult,
 } from '../../types';
-import { getQuestById } from '../../data/quests';
+import { getCampaignQuest, getQuestById } from '../../data/quests';
 import { QUEST_XP_POLICY } from '../../data/progression/guild-costs';
 import { createId, nowIso } from '../random';
 import { calculateQuestXpReward } from '../quests/quest-runtime';
@@ -92,7 +92,7 @@ export function evaluateObjective(
 
 /** 纯函数：评估当前任务的所有 Objective 进度。 */
 export function evaluateQuestObjectives(campaign: CampaignState): QuestObjectiveProgress[] {
-  return getQuestObjectives(campaign.currentQuestId ?? '').map((def) =>
+  return (getCampaignQuest(campaign)?.objectives ?? []).map((def) =>
     evaluateObjective(campaign, def),
   );
 }
@@ -129,7 +129,7 @@ export function eligibleXpHeroIds(campaign: CampaignState): string[] {
  */
 export function createQuestXpResult(campaign: CampaignState): QuestXpResult {
   const objectives = evaluateQuestObjectives(campaign);
-  const quest = getQuestById(campaign.currentQuestId ?? '');
+  const quest = getCampaignQuest(campaign);
   const sourceXp = quest?.xpUnit ? calculateQuestXpReward(campaign) : null;
   const computed = computeQuestXp(objectives);
   const completedObjectiveCount = sourceXp?.xpUnitsEarned ?? computed.completedObjectiveCount;

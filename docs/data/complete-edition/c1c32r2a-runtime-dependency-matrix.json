@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R2A",
+  "baselineHead": "624a2b5c20b9f40ee9e87ac103780cb9eb3c2053",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "accepted": false,
+  "gates": {
+    "drawableProductionMonsterDefinitionsMissing": 24,
+    "baselineDrawableProductionMonsterDefinitionsMissing": 23,
+    "prototypeMonsterDependencies": 0,
+    "syntheticMonsterDefinitions": 0,
+    "typedSourceCandidateIdentities": 24,
+    "successorExecutableDefinitionsAccepted": 0,
+    "printedStanceGroupingComplete": true,
+    "productionMonsterEffectAdapterComplete": false,
+    "tileAreaContractsComplete": false,
+    "tileStructuralValidation": true,
+    "roomEffectBindingsComplete": false,
+    "roomGlyphTranscriptionComplete": true,
+    "roomDeckContractComplete": true,
+    "room10ExclusionBound": true,
+    "ordinaryEncounterDrawContractComplete": false,
+    "ordinaryEncounterDomainDrawImplemented": true,
+    "ordinaryEncounterDrawExecutable": false,
+    "officialBoneSourceMismatchResolvedByVersioning": true,
+    "historicalV1V2V3Preserved": true,
+    "graveyardCampaignTransactionImplemented": true,
+    "preparationDayCheckpointDomainBridge": false
+  },
+  "blockers": [
+    "ORDINARY_MONSTER_EFFECT_ADAPTER_NOT_BOUND",
+    "EXTENDED_PRINTED_EFFECT_INTERPRETER_NOT_BOUND",
+    "ORDINARY_TILE_AREA_FINAL_VISUAL_TOPOLOGY_VALIDATION",
+    "ORDINARY_ROOM_EFFECT_EXECUTOR_NOT_BOUND",
+    "ORDINARY_ENCOUNTER_EXECUTABLE_COMPONENT_ACCEPTANCE",
+    "NORMAL_PRODUCT_THREAT_PREPARATION_ENTRY_PROOF",
+    "ACTIVE_QUEST_AND_EXPIRED_REAL_COMMAND_SAVE_PROOF",
+    "INITIAL_LARGE_REPLACEMENT_DISCARD_RETURN_SOURCE_UNRESOLVED"
+  ],
+  "remainingExecutableDependencyBlockers": 8,
+  "scenarioC": {
+    "status": "NOT_PROVEN",
+    "combatHashes": null
+  },
+  "candidateDataNeverPromotesProductionGate": true
+}

@@ -8,6 +8,7 @@ import type { BossThreatDefinition, CampaignLevel } from '../../types/bosses';
 import { PROTOTYPE_THREATS } from './prototype-threats';
 import { ACT_PROGRESSION_THREATS } from './prototype-act-progression';
 import { getBossDefinitionById } from './boss-registry';
+import { productionNecromancerThreat } from './production-necromancer-threats';
 
 /** 当前 Threat 数据模式（与 Boss 保持一致）。 */
 export const THREAT_DATA_MODE: DataMode = 'prototype';
@@ -23,6 +24,8 @@ export const THREAT_REGISTRY: BossThreatDefinition[] = [
 
 /** 按 id 取 Threat。 */
 export function getThreatById(threatId: string): BossThreatDefinition | undefined {
+  const productionLevel = /^necromancer-threat-level-([123])$/.exec(threatId);
+  if (productionLevel) return productionNecromancerThreat(Number(productionLevel[1]) as CampaignLevel);
   return THREAT_REGISTRY.find((t) => t.id === threatId);
 }
 

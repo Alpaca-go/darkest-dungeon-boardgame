@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C31",
+  "baselineHead": "2ab674d7d8c15dbbd7367bb3b2011243facb5517",
+  "ruleSourcePolicyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1",
+  "externalSourceUsed": false,
+  "syntheticFallbackAllowed": false,
+  "status": "BLOCKED",
+  "productionAcceptance": false,
+  "scenarios": [
+    {
+      "scenario": "A selector → Threat → Room → Skill → real Bone summon",
+      "status": "PRODUCT_FAILURE",
+      "productionAcceptance": false,
+      "initialHash": null,
+      "saveHash": null,
+      "reloadedHash": null,
+      "finalHash": null,
+      "eventSequence": [],
+      "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1",
+      "reason": "Production selector prerequisite fails before these transitions. Null hashes denote unavailable evidence, never a successful proof."
+    },
+    {
+      "scenario": "B Bone turn → reaction window",
+      "status": "PRODUCT_FAILURE",
+      "productionAcceptance": false,
+      "initialHash": null,
+      "saveHash": null,
+      "reloadedHash": null,
+      "finalHash": null,
+      "eventSequence": [],
+      "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1",
+      "reason": "Production selector prerequisite fails before these transitions. Null hashes denote unavailable evidence, never a successful proof."
+    },
+    {
+      "scenario": "C Bone death → Reanimation → initiative",
+      "status": "PRODUCT_FAILURE",
+      "productionAcceptance": false,
+      "initialHash": null,
+      "saveHash": null,
+      "reloadedHash": null,
+      "finalHash": null,
+      "eventSequence": [],
+      "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1",
+      "reason": "Production selector prerequisite fails before these transitions. Null hashes denote unavailable evidence, never a successful proof."
+    },
+    {
+      "scenario": "D Boss victory → cleanup → campaign",
+      "status": "PRODUCT_FAILURE",
+      "productionAcceptance": false,
+      "initialHash": null,
+      "saveHash": null,
+      "reloadedHash": null,
+      "finalHash": null,
+      "eventSequence": [],
+      "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1",
+      "reason": "Production selector prerequisite fails before these transitions. Null hashes denote unavailable evidence, never a successful proof."
+    }
+  ]
+}

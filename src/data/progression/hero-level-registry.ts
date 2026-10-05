@@ -7,6 +7,10 @@ import type {
   RegistryValidationIssue,
 } from '../../types/progression';
 import { HERO_LEVEL_PROFILES } from '../hero-level-profiles';
+import reviewedCombatJson from '../../../docs/data/complete-edition/c1c30-reviewed-component-combat.json?raw';
+import type { HeroCombatDefinition } from '../../types/component-combat';
+
+const reviewedCombat = (JSON.parse(reviewedCombatJson) as { heroDodge: HeroCombatDefinition[] }).heroDodge;
 
 // ---------------------------------------------------------------------------
 // Phase 8D：Hero Level Registry
@@ -71,9 +75,17 @@ export const HERO_LEVEL_REGISTRY: Record<string, HeroLevelDefinition[]> = Object
       immunities: immunitiesForLevel(p.level),
       credibility: 'prototype' as DataCredibility,
       sourceNote: PROTOTYPE_NOTE,
+      combatDefinition: reviewedCombat.find(d => d.heroId === heroClassId && d.level === p.level),
     })),
   ])
 );
+
+/** Standard Hero combat API. Missing Dodge remains missing, including other levels. */
+export function getHeroCombatDefinition(heroId: string, level: HeroLevel): HeroCombatDefinition | undefined {
+  const definition = getHeroLevelDefinition(heroId, level)?.combatDefinition;
+  if (!definition || !Number.isFinite(definition.dodge) || definition.dodge < 0 || !definition.sourceReferences.length) return undefined;
+  return structuredClone(definition);
+}
 
 /** 查询某英雄某等级的定义。缺数据返回 undefined（调用方必须降级，不得白屏）。 */
 export function getHeroLevelDefinition(

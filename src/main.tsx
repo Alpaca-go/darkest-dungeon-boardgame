@@ -7,11 +7,11 @@ import { createSeededRandom, setRandomSource } from './game-engine/random';
 import './index.css';
 import { seededRuntimeSources, setRuntimeSources } from './game-engine/runtime-sources';
 import { stableHash } from './audit/core-campaign/types';
-if (import.meta.env.VITE_E2E_MODE === '1') setRuntimeSources(seededRuntimeSources(parseInt(stableHash('golden-normal-success-01'), 16) >>> 0));
+if (import.meta.env.DEV && import.meta.env.VITE_E2E_MODE === '1') setRuntimeSources(seededRuntimeSources(parseInt(stableHash('golden-normal-success-01'), 16) >>> 0));
 
 // E2E / 调试用确定性随机源：localStorage 存在 dd-fixed-rng 时启用。
 // 正常游玩不受影响；同一 seed 产生完全一致的随机序列。
-try {
+if (import.meta.env.DEV) try {
   const seed = window.localStorage.getItem('dd-fixed-rng');
   if (seed) setRandomSource(createSeededRandom(Number(seed) || 1));
 } catch {

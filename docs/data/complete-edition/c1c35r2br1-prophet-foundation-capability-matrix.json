@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C35R2B-R1",
+  "baseline": "007712ab6aec2c814fa31e06cf5fe05b21a30879",
+  "ruleSetVersion": "C1C35R2-PROPHET-DIGITAL-DEFAULT-v1",
+  "heroDodgeRuleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "outcome": "PROPHET_PRODUCTION_FOUNDATION_ACCEPTED",
+  "productionFoundation": true,
+  "productionAccepted": false,
+  "controlledFoundationRouteAllowed": true,
+  "unrestrictedSelectorAllowed": false,
+  "c1c36Allowed": true,
+  "inputHashes": {
+    "c1c35-prophet-tile-contract.json": "9fb1558340adca1f66d52f3473824f7e81e48b2481c9ac85ef661943aa75d614",
+    "c1c35-prophet-d10-area-map.json": "3d16b004171e8fd3b03a248b4514784e2e9fc9177033f160cca285b9c1061983",
+    "c1c35r2-prophet-production-definitions.json": "dd8576ecda578f97519d60075e6810fbd0a0455c9048897b8556d0aab6488431",
+    "c1c35-prophet-glyph-semantic-contract.json": "a83bb484a5ed3aedd16b240e083f958ad4f6a481d5d5909112d6cd2e85ad12d3",
+    "c1c35r2-prophet-threat-contract.json": "fe2e353b981b029baf17a258e3ebd519e7860333b511e542da48c9209c95b0d7",
+    "c1c32r2-ordinary-threat-encounter-draw-contract.json": "08915a55670dbd01322007916aab23c9794ebcccb928451f921a2a42dad03bbd"
+  },
+  "evidenceClassification": {
+    "sourceFact": "Pinned official printed components and rulebooks",
+    "projectRuling": "Existing versioned R1/R2 rulings only",
+    "runtimeImplementation": "Shared source-bound production transactions",
+    "testProof": "Executed campaign, attack-window, save, tamper and cleanup traces",
+    "productionAcceptance": "Foundation only; browser acceptance deferred to C1C36"
+  },
+  "rows": [
+    {
+      "capability": "ProductionDefinitionL1",
+      "status": "PRODUCTION_FOUNDATION_ACCEPTED",
+      "evidence": "Source-bound execution artifacts plus src/audit/c1c35r2br1-prophet-production.test.ts"
+    },
+    {
+      "capability": "ProductionDefinitionL2",
+      "status": "PRODUCTION_FOUNDATION_ACCEPTED",
+      "evidence": "Source-bound execution artifacts plus src/audit/c1c35r2br1-prophet-production.test.ts"
+    },
+    {
+      "capability": "ProductionDefinitionL3",
+      "status": "PRODUCTION_FOUNDATION_ACCEPTED",
+      "evidence": "Source-bound execution artifacts plus src/audit/c1c35r2br1-prophet-production.test.ts"
+    },
+    {
+      "capability": "Room11Lifecycle",
+      "status": "PRODUCTION_FOUNDATION_ACCEPTED",
+      "evidence": "Source-bound execution artifacts plus src/audit/c1c35r2br1-prophet-production.test.ts"
+    },
+    {
+      "capability": "ActorOccupancy",
+      "status": "PRODUCTION_FOUNDATION_ACCEPTED",
+      "evidence": "Source-bound execution artifacts plus src/audit/c1c35r2br1-prophet-production.test.ts"
+    },
+    {
+      "capability": "PhysicalPewOwnership",
+      "status": "PRODUCTION_FOUNDATION_ACCEPTED",
+      "evidence": "Source-bound execution artifacts plus src/audit/c1c35r2br1-prophet-production.test.ts"
+    },
+    {
+      "capability": "Ordinal1Placement",
+      "status": "PRODUCTION_FOUNDATION_ACCEPTED",
+      "evidence": "Source-bound execution artifacts plus src/audit/c1c35r2br1-prophet-production.test.ts"
+    },
+    {
+      "capability": "Ordinal2NormalSkill",
+      "status": "PRODUCTION_FOUNDATION_ACCEPTED",
+      "evidence": "Source-bound execution artifacts plus src/audit/c1c35r2br1-prophet-production.test.ts"
+    },
+    {
+      "capability": "CrowdedPendingChoice",
+      "status": "PRODUCTION_FOUNDATION_ACCEPTED",
+      "evidence": "Source-bound execution artifacts plus src/audit/c1c35r2br1-prophet-production.test.ts"
+    },
+    {
+      "capability": "Ordinal3Rubble",
+      "status": "PRODUCTION_FOUNDATION_ACCEPTED",
+      "evidence": "Source-bound execution artifacts plus src/audit/c1c35r2br1-prophet-production.test.ts"
+    },
+    {
+      "capability": "ThreatLevel1",
+      "status": "PRODUCTION_FOUNDATION_ACCEPTED",
+      "evidence": "Source-bound execution artifacts plus src/audit/c1c35r2br1-prophet-production.test.ts"
+    },
+    {
+      "capability": "ThreatLevel2",
+      "status": "PRODUCTION_FOUNDATION_ACCEPTED",
+      "evidence": "Source-bound execution artifacts plus src/audit/c1c35r2br1-prophet-production.test.ts"
+    },
+    {
+      "capability": "ThreatLevel3",
+      "status": "PRODUCTION_FOUNDATION_ACCEPTED",
+      "evidence": "Source-bound execution artifacts plus src/audit/c1c35r2br1-prophet-production.test.ts"
+    },
+    {
+      "capability": "SaveReplay",
+      "status": "PRODUCTION_FOUNDATION_ACCEPTED",
+      "evidence": "Source-bound execution artifacts plus src/audit/c1c35r2br1-prophet-production.test.ts"
+    },
+    {
+      "capability": "TamperValidation",
+      "status": "PRODUCTION_FOUNDATION_ACCEPTED",
+      "evidence": "Source-bound execution artifacts plus src/audit/c1c35r2br1-prophet-production.test.ts"
+    },
+    {
+      "capability": "VictoryCleanup",
+      "status": "PRODUCTION_FOUNDATION_ACCEPTED",
+      "evidence": "Source-bound execution artifacts plus src/audit/c1c35r2br1-prophet-production.test.ts"
+    },
+    {
+      "capability": "PrototypeIsolation",
+      "status": "PRODUCTION_FOUNDATION_ACCEPTED",
+      "evidence": "Source-bound execution artifacts plus src/audit/c1c35r2br1-prophet-production.test.ts"
+    }
+  ],
+  "isolation": {
+    "productionPrototypeReachability": 0,
+    "entryPoints": [
+      "src/main.tsx",
+      "src/game-engine/bosses/definitions.ts",
+      "src/game-engine/save.ts"
+    ],
+    "visitedRuntimeModuleCount": 342,
+    "forbiddenModules": [
+      "src/game-engine/prophet/runtime.ts",
+      "src/game-engine/prophet/index.ts",
+      "src/data/bosses/prophet-family.ts"
+    ],
+    "auditMethod": "TYPESCRIPT_AST_RUNTIME_IMPORT_EXPORT_DYNAMIC_IMPORT_GRAPH",
+    "historicalPrototypeTestsRetained": true
+  }
+}

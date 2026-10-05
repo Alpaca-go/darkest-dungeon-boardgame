@@ -1,0 +1,1691 @@
+{
+  "phase": "11A.5-C2E",
+  "baseline": "2d979652c3b713d6104bd21c7007fcd24fe1af63",
+  "definitionVersion": "C2C-HERO-PRODUCTION-DEFINITION-v1",
+  "runtimeVersion": "C2D-HERO-PRODUCTION-RUNTIME-v1",
+  "ambiguityPolicy": "SOURCE_AMBIGUITY_DEFER_POLICY_V1",
+  "playerPathFingerprint": "bd335422db3046e9d8918bed2b113270337f57a8cdc7912db3cbdf8358f26c32",
+  "playerImportFence": [
+    {
+      "path": "src/pages/CampaignSetupPage.tsx",
+      "imports": [
+        "react-router-dom",
+        "../store/useGameStore",
+        "../data/heroes/player-registry",
+        "./legacy/CampaignSetupPage",
+        "../components/hero/ProductionHeroCard"
+      ],
+      "forbidden": [],
+      "legacyCompatibilityEdges": [
+        "./legacy/CampaignSetupPage"
+      ],
+      "scope": "Static direct gameplay imports of production player components; explicit legacy fallback edges retained",
+      "status": "PASS"
+    },
+    {
+      "path": "src/pages/SkillLoadoutPage.tsx",
+      "imports": [
+        "react",
+        "react-router-dom",
+        "../store/useGameStore",
+        "../data/heroes/player-registry",
+        "../game-engine/progression/upgrade-core",
+        "../game-engine/campaign",
+        "./legacy/SkillLoadoutPage",
+        "../components/skill/ProductionSkillCard",
+        "../components/hero/ProductionHeroCard"
+      ],
+      "forbidden": [],
+      "legacyCompatibilityEdges": [
+        "./legacy/SkillLoadoutPage"
+      ],
+      "scope": "Static direct gameplay imports of production player components; explicit legacy fallback edges retained",
+      "status": "PASS"
+    },
+    {
+      "path": "src/components/hamlet/GuildPanel.tsx",
+      "imports": [
+        "react",
+        "../../types",
+        "../../store/useGameStore",
+        "../../data/heroes/player-registry",
+        "../../game-engine/heroes/legacy-player",
+        "../../game-engine/progression/upgrade-core",
+        "../../game-engine/progression/xp-ledger",
+        "../../game-engine/hamlet/guild",
+        "../../data/progression/guild-costs"
+      ],
+      "forbidden": [],
+      "legacyCompatibilityEdges": [
+        "../../game-engine/heroes/legacy-player"
+      ],
+      "scope": "Static direct gameplay imports of production player components; explicit legacy fallback edges retained",
+      "status": "PASS"
+    },
+    {
+      "path": "src/pages/ReplacementPage.tsx",
+      "imports": [
+        "../components/hero/ProductionHeroCard",
+        "react-router-dom",
+        "../store/useGameStore",
+        "../data/heroes/player-registry",
+        "../game-engine/heroes/legacy-player",
+        "../game-engine/stagecoach",
+        "../game-engine/replacement",
+        "../types"
+      ],
+      "forbidden": [],
+      "legacyCompatibilityEdges": [
+        "../game-engine/heroes/legacy-player"
+      ],
+      "scope": "Static direct gameplay imports of production player components; explicit legacy fallback edges retained",
+      "status": "PASS"
+    },
+    {
+      "path": "src/components/battle/SkillBar.tsx",
+      "imports": [
+        "react",
+        "../../types",
+        "../../store/useGameStore",
+        "../../game-engine/heroes/player-commands",
+        "./legacy/SkillBar",
+        "../skill/ProductionSkillCard"
+      ],
+      "forbidden": [],
+      "legacyCompatibilityEdges": [
+        "./legacy/SkillBar"
+      ],
+      "scope": "Static direct gameplay imports of production player components; explicit legacy fallback edges retained",
+      "status": "PASS"
+    },
+    {
+      "path": "src/components/skill/ProductionSkillCard.tsx",
+      "imports": [
+        "../../types/hero-runtime",
+        "../../types/hero-production"
+      ],
+      "forbidden": [],
+      "legacyCompatibilityEdges": [],
+      "scope": "Static direct gameplay imports of production player components; explicit legacy fallback edges retained",
+      "status": "PASS"
+    },
+    {
+      "path": "src/components/hero/ProductionHeroCard.tsx",
+      "imports": [
+        "../../types",
+        "../../data/heroes/player-registry"
+      ],
+      "forbidden": [],
+      "legacyCompatibilityEdges": [],
+      "scope": "Static direct gameplay imports of production player components; explicit legacy fallback edges retained",
+      "status": "PASS"
+    }
+  ],
+  "surfaces": [
+    {
+      "surface": "Campaign Setup",
+      "path": "src/pages/CampaignSetupPage.tsx",
+      "sha256": "ac5afae5ca07989afe74cdfbfdd19cf1cc81f2828b87f4d860874cba97d8f5bc",
+      "productionSource": "Compact C2D runtime profile/skill registry",
+      "legacyFallback": "Explicit runtime identity only",
+      "status": "PASS"
+    },
+    {
+      "surface": "Skill Loadout",
+      "path": "src/pages/SkillLoadoutPage.tsx",
+      "sha256": "b5e3839600c4e1647d2a98baed544f846bef0c76093ed3e59a10e58f8b23d161",
+      "productionSource": "Compact C2D runtime profile/skill registry",
+      "legacyFallback": "Explicit runtime identity only",
+      "status": "PASS"
+    },
+    {
+      "surface": "Battle",
+      "path": "src/components/battle/SkillBar.tsx",
+      "sha256": "3d97dc09a332b084ab4390fe3ad716660b885325e522bc6e5d6930dc4561589a",
+      "productionSource": "Compact C2D runtime profile/skill registry",
+      "legacyFallback": "Explicit runtime identity only",
+      "status": "PASS"
+    },
+    {
+      "surface": "Progression",
+      "path": "src/game-engine/progression/upgrade-core.ts",
+      "sha256": "180644e98f8fef3ec8c11d80e32de6ad8c72ac4d22aa30ccc7f6190e5cfac8e9",
+      "productionSource": "Compact C2D runtime profile/skill registry",
+      "legacyFallback": "Explicit runtime identity only",
+      "status": "PASS"
+    },
+    {
+      "surface": "Stagecoach",
+      "path": "src/pages/ReplacementPage.tsx",
+      "sha256": "d182531b02ba3220d33061911fb4b10445aea5e5b1a745131b4a46cb7feeaceb",
+      "productionSource": "Compact C2D runtime profile/skill registry",
+      "legacyFallback": "Explicit runtime identity only",
+      "status": "PASS"
+    },
+    {
+      "surface": "Guild",
+      "path": "src/components/hamlet/GuildPanel.tsx",
+      "sha256": "da7ffa4920dce6e1756ea76d88851f0390ed13406ff43a832125eac8b1cd3f6b",
+      "productionSource": "Compact C2D runtime profile/skill registry",
+      "legacyFallback": "Explicit runtime identity only",
+      "status": "PASS"
+    },
+    {
+      "surface": "Hamlet",
+      "path": "src/components/hamlet/HamletHeroCard.tsx",
+      "sha256": "2adc300a5fb26e07da6d8aed71595b93fe6d0b445c6e54c57a30cb6ffd9412e8",
+      "productionSource": "Compact C2D runtime profile/skill registry",
+      "legacyFallback": "Explicit runtime identity only",
+      "status": "PASS"
+    }
+  ],
+  "heroes": [
+    {
+      "heroId": "crusader",
+      "printedName": "CRUSADER",
+      "contentSet": {
+        "id": "core",
+        "kind": "CORE"
+      },
+      "skillIds": [
+        "crusader-bulwark-of-faith",
+        "crusader-stunning-blow",
+        "crusader-battle-heal",
+        "crusader-holy-lance",
+        "crusader-inspiring-cry",
+        "crusader-zealous-accusation",
+        "crusader-smite"
+      ],
+      "selectable": true
+    },
+    {
+      "heroId": "hellion",
+      "printedName": "HELLION",
+      "contentSet": {
+        "id": "core",
+        "kind": "CORE"
+      },
+      "skillIds": [
+        "hellion-adrenaline-rush",
+        "hellion-bleed-out",
+        "hellion-iron-swan",
+        "hellion-wicked-hack",
+        "hellion-barbaric-yawp",
+        "hellion-if-it-bleeds",
+        "hellion-breakthrough"
+      ],
+      "selectable": true
+    },
+    {
+      "heroId": "bounty-hunter",
+      "printedName": "BOUNTY HUNTER",
+      "contentSet": {
+        "id": "core",
+        "kind": "CORE"
+      },
+      "skillIds": [
+        "bounty-hunter-flashbang",
+        "bounty-hunter-collect-bounty",
+        "bounty-hunter-uppercut",
+        "bounty-hunter-caltrops",
+        "bounty-hunter-mark-for-death",
+        "bounty-hunter-come-hither",
+        "bounty-hunter-finish-him"
+      ],
+      "selectable": true
+    },
+    {
+      "heroId": "highwayman",
+      "printedName": "HIGHWAYMAN",
+      "contentSet": {
+        "id": "core",
+        "kind": "CORE"
+      },
+      "skillIds": [
+        "highwayman-pistol-shot",
+        "highwayman-wicked-slice",
+        "highwayman-point-blank-shot",
+        "highwayman-grapeshot-blast",
+        "highwayman-tracking-shot",
+        "highwayman-duelists-advance",
+        "highwayman-open-vein"
+      ],
+      "selectable": true
+    },
+    {
+      "heroId": "vestal",
+      "printedName": "VESTAL",
+      "contentSet": {
+        "id": "core",
+        "kind": "CORE"
+      },
+      "skillIds": [
+        "vestal-dazzling-light",
+        "vestal-mace-bash",
+        "vestal-hand-of-light",
+        "vestal-illumination",
+        "vestal-divine-comfort",
+        "vestal-divine-grace",
+        "vestal-judgement"
+      ],
+      "selectable": true
+    },
+    {
+      "heroId": "jester",
+      "printedName": "JESTER",
+      "contentSet": {
+        "id": "core",
+        "kind": "CORE"
+      },
+      "skillIds": [
+        "jester-battle-ballad",
+        "jester-inspiring-tune",
+        "jester-dirk-stab",
+        "jester-harvest",
+        "jester-finale",
+        "jester-solo",
+        "jester-slice-off"
+      ],
+      "selectable": true
+    },
+    {
+      "heroId": "plague-doctor",
+      "printedName": "PLAGUE DOCTOR",
+      "contentSet": {
+        "id": "core",
+        "kind": "CORE"
+      },
+      "skillIds": [
+        "plague-doctor-blinding-gas",
+        "plague-doctor-battlefield-medicine",
+        "plague-doctor-incision",
+        "plague-doctor-emboldening-vapours",
+        "plague-doctor-plague-grenade",
+        "plague-doctor-disorienting-blast",
+        "plague-doctor-noxious-blast"
+      ],
+      "selectable": true
+    },
+    {
+      "heroId": "arbalest",
+      "printedName": "ARBALEST",
+      "contentSet": {
+        "id": "core",
+        "kind": "CORE"
+      },
+      "skillIds": [
+        "arbalest-battlefield-bandage",
+        "arbalest-rallying-flare",
+        "arbalest-sniper-shot",
+        "arbalest-suppressive-fire",
+        "arbalest-snipers-mark",
+        "arbalest-bola",
+        "arbalest-blindfire"
+      ],
+      "selectable": true
+    },
+    {
+      "heroId": "grave-robber",
+      "printedName": "GRAVE ROBBER",
+      "contentSet": {
+        "id": "core",
+        "kind": "CORE"
+      },
+      "skillIds": [
+        "grave-robber-shadow-fade",
+        "grave-robber-poison-dart",
+        "grave-robber-flashing-daggers",
+        "grave-robber-pick-to-the-face",
+        "grave-robber-lunge",
+        "grave-robber-throw-dagger",
+        "grave-robber-toxin-trickery"
+      ],
+      "selectable": true
+    },
+    {
+      "heroId": "occultist",
+      "printedName": "OCCULTIST",
+      "contentSet": {
+        "id": "core",
+        "kind": "CORE"
+      },
+      "skillIds": [
+        "occultist-daemons-pull",
+        "occultist-hands-from-the-abyss",
+        "occultist-sacrificial-stab",
+        "occultist-vulnerability-hex",
+        "occultist-abyssal-artillery",
+        "occultist-weakening-curse",
+        "occultist-wyrd-reconstruction"
+      ],
+      "selectable": true
+    },
+    {
+      "heroId": "abomination",
+      "printedName": "ABOMINATION",
+      "contentSet": {
+        "id": "core",
+        "kind": "CORE"
+      },
+      "skillIds": [
+        "abomination-rake",
+        "abomination-beasts-bile",
+        "abomination-absolution",
+        "abomination-transform-to-beast",
+        "abomination-rage",
+        "abomination-slam",
+        "abomination-manacles"
+      ],
+      "selectable": true
+    },
+    {
+      "heroId": "man-at-arms",
+      "printedName": "MAN-AT-ARMS",
+      "contentSet": {
+        "id": "cove",
+        "kind": "EXPANSION"
+      },
+      "skillIds": [
+        "man-at-arms-bellow",
+        "man-at-arms-defender",
+        "man-at-arms-retribution",
+        "man-at-arms-crush",
+        "man-at-arms-rampart",
+        "man-at-arms-command",
+        "man-at-arms-bolster"
+      ],
+      "selectable": true
+    },
+    {
+      "heroId": "flagellant",
+      "printedName": "FLAGELLANT",
+      "contentSet": {
+        "id": "cove",
+        "kind": "EXPANSION"
+      },
+      "skillIds": [
+        "flagellant-endure",
+        "flagellant-suffer",
+        "flagellant-redeem",
+        "flagellant-reclaim",
+        "flagellant-exsanguinate",
+        "flagellant-punish",
+        "flagellant-rain-of-sorrows"
+      ],
+      "selectable": true
+    },
+    {
+      "heroId": "leper",
+      "printedName": "LEPER",
+      "contentSet": {
+        "id": "warrens",
+        "kind": "EXPANSION"
+      },
+      "skillIds": [
+        "leper-revenge",
+        "leper-chop",
+        "leper-hew",
+        "leper-purge",
+        "leper-withstand",
+        "leper-solemnity",
+        "leper-intimidate"
+      ],
+      "selectable": true
+    },
+    {
+      "heroId": "antiquarian",
+      "printedName": "ANTIQUARIAN",
+      "contentSet": {
+        "id": "warrens",
+        "kind": "EXPANSION"
+      },
+      "skillIds": [
+        "antiquarian-invigorating-vapours",
+        "antiquarian-nervous-stab",
+        "antiquarian-flashpowder",
+        "antiquarian-protect-me",
+        "antiquarian-festering-vapours",
+        "antiquarian-get-down",
+        "antiquarian-fortifying-vapours"
+      ],
+      "selectable": true
+    },
+    {
+      "heroId": "shieldbreaker",
+      "printedName": "SHIELDBREAKER",
+      "contentSet": {
+        "id": "weald",
+        "kind": "EXPANSION"
+      },
+      "skillIds": [
+        "shieldbreaker-adders-kiss",
+        "shieldbreaker-expose",
+        "shieldbreaker-captivate",
+        "shieldbreaker-pierce",
+        "shieldbreaker-serpent-sway",
+        "shieldbreaker-impale",
+        "shieldbreaker-puncture"
+      ],
+      "selectable": true
+    },
+    {
+      "heroId": "hound-master",
+      "printedName": "HOUNDMASTER",
+      "contentSet": {
+        "id": "weald",
+        "kind": "EXPANSION"
+      },
+      "skillIds": [
+        "hound-master-target-whistle",
+        "hound-master-hounds-rush",
+        "hound-master-blackjack",
+        "hound-master-lick-wounds",
+        "hound-master-guard-dog",
+        "hound-master-cry-havoc",
+        "hound-master-hounds-harry"
+      ],
+      "selectable": true
+    },
+    {
+      "heroId": "musketeer",
+      "printedName": "MUSKETEER",
+      "contentSet": {
+        "id": "musketeer-promo",
+        "kind": "DLC_ADD_ON"
+      },
+      "skillIds": [
+        "musketeer-call-the-shot",
+        "musketeer-buckshot",
+        "musketeer-aimed-shot",
+        "musketeer-smokescreen",
+        "musketeer-sidearm",
+        "musketeer-patch-up",
+        "musketeer-skeet-shot"
+      ],
+      "selectable": true
+    }
+  ],
+  "skills": [
+    {
+      "heroId": "crusader",
+      "skillId": "crusader-bulwark-of-faith",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "crusader",
+      "skillId": "crusader-stunning-blow",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "crusader",
+      "skillId": "crusader-battle-heal",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "crusader",
+      "skillId": "crusader-holy-lance",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SELF-MOVEMENT-ORDER",
+        "C2C-DEFER-MODIFIER-PHASE",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "crusader",
+      "skillId": "crusader-inspiring-cry",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "crusader",
+      "skillId": "crusader-zealous-accusation",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "crusader",
+      "skillId": "crusader-smite",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-MODIFIER-PHASE",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "hellion",
+      "skillId": "hellion-adrenaline-rush",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "hellion",
+      "skillId": "hellion-bleed-out",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "hellion",
+      "skillId": "hellion-iron-swan",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "hellion",
+      "skillId": "hellion-wicked-hack",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "hellion",
+      "skillId": "hellion-barbaric-yawp",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "hellion",
+      "skillId": "hellion-if-it-bleeds",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "hellion",
+      "skillId": "hellion-breakthrough",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SELF-MOVEMENT-ORDER",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "bounty-hunter",
+      "skillId": "bounty-hunter-flashbang",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "bounty-hunter",
+      "skillId": "bounty-hunter-collect-bounty",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-MODIFIER-PHASE",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "bounty-hunter",
+      "skillId": "bounty-hunter-uppercut",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "bounty-hunter",
+      "skillId": "bounty-hunter-caltrops",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "bounty-hunter",
+      "skillId": "bounty-hunter-mark-for-death",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "bounty-hunter",
+      "skillId": "bounty-hunter-come-hither",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "bounty-hunter",
+      "skillId": "bounty-hunter-finish-him",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-MODIFIER-PHASE",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "highwayman",
+      "skillId": "highwayman-pistol-shot",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-MODIFIER-PHASE",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "highwayman",
+      "skillId": "highwayman-wicked-slice",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "highwayman",
+      "skillId": "highwayman-point-blank-shot",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SELF-MOVEMENT-ORDER",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "highwayman",
+      "skillId": "highwayman-grapeshot-blast",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "highwayman",
+      "skillId": "highwayman-tracking-shot",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "highwayman",
+      "skillId": "highwayman-duelists-advance",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SELF-MOVEMENT-ORDER",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "highwayman",
+      "skillId": "highwayman-open-vein",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "vestal",
+      "skillId": "vestal-dazzling-light",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "vestal",
+      "skillId": "vestal-mace-bash",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-MODIFIER-PHASE",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "vestal",
+      "skillId": "vestal-hand-of-light",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-MODIFIER-PHASE",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "vestal",
+      "skillId": "vestal-illumination",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "vestal",
+      "skillId": "vestal-divine-comfort",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "vestal",
+      "skillId": "vestal-divine-grace",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "vestal",
+      "skillId": "vestal-judgement",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "jester",
+      "skillId": "jester-battle-ballad",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "jester",
+      "skillId": "jester-inspiring-tune",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "jester",
+      "skillId": "jester-dirk-stab",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SELF-MOVEMENT-ORDER",
+        "C2C-DEFER-MODIFIER-PHASE",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "jester",
+      "skillId": "jester-harvest",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "jester",
+      "skillId": "jester-finale",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SELF-MOVEMENT-ORDER",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "jester",
+      "skillId": "jester-solo",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SELF-MOVEMENT-ORDER",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "jester",
+      "skillId": "jester-slice-off",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "plague-doctor",
+      "skillId": "plague-doctor-blinding-gas",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "plague-doctor",
+      "skillId": "plague-doctor-battlefield-medicine",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "plague-doctor",
+      "skillId": "plague-doctor-incision",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "plague-doctor",
+      "skillId": "plague-doctor-emboldening-vapours",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "plague-doctor",
+      "skillId": "plague-doctor-plague-grenade",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "plague-doctor",
+      "skillId": "plague-doctor-disorienting-blast",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "plague-doctor",
+      "skillId": "plague-doctor-noxious-blast",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "arbalest",
+      "skillId": "arbalest-battlefield-bandage",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "arbalest",
+      "skillId": "arbalest-rallying-flare",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "arbalest",
+      "skillId": "arbalest-sniper-shot",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-MODIFIER-PHASE",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "arbalest",
+      "skillId": "arbalest-suppressive-fire",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "arbalest",
+      "skillId": "arbalest-snipers-mark",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "arbalest",
+      "skillId": "arbalest-bola",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SELF-MOVEMENT-ORDER",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "arbalest",
+      "skillId": "arbalest-blindfire",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SELF-MOVEMENT-ORDER",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "grave-robber",
+      "skillId": "grave-robber-shadow-fade",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SELF-MOVEMENT-ORDER",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "grave-robber",
+      "skillId": "grave-robber-poison-dart",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "grave-robber",
+      "skillId": "grave-robber-flashing-daggers",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "grave-robber",
+      "skillId": "grave-robber-pick-to-the-face",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-MODIFIER-PHASE",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "grave-robber",
+      "skillId": "grave-robber-lunge",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SELF-MOVEMENT-ORDER",
+        "C2C-DEFER-MODIFIER-PHASE",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "grave-robber",
+      "skillId": "grave-robber-throw-dagger",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-MODIFIER-PHASE",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "grave-robber",
+      "skillId": "grave-robber-toxin-trickery",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "occultist",
+      "skillId": "occultist-daemons-pull",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "occultist",
+      "skillId": "occultist-hands-from-the-abyss",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "occultist",
+      "skillId": "occultist-sacrificial-stab",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-MODIFIER-PHASE",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "occultist",
+      "skillId": "occultist-vulnerability-hex",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "occultist",
+      "skillId": "occultist-abyssal-artillery",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-MODIFIER-PHASE",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "occultist",
+      "skillId": "occultist-weakening-curse",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "occultist",
+      "skillId": "occultist-wyrd-reconstruction",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "abomination",
+      "skillId": "abomination-rake",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "abomination",
+      "skillId": "abomination-beasts-bile",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "abomination",
+      "skillId": "abomination-absolution",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "abomination",
+      "skillId": "abomination-transform-to-beast",
+      "rendered": true,
+      "faces": 2,
+      "deferredIds": [
+        "C2C-DEFER-TRANSFORM-ATOMIC-ORDER",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "abomination",
+      "skillId": "abomination-rage",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "abomination",
+      "skillId": "abomination-slam",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SELF-MOVEMENT-ORDER",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "abomination",
+      "skillId": "abomination-manacles",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "man-at-arms",
+      "skillId": "man-at-arms-bellow",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "man-at-arms",
+      "skillId": "man-at-arms-defender",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "man-at-arms",
+      "skillId": "man-at-arms-retribution",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "man-at-arms",
+      "skillId": "man-at-arms-crush",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "man-at-arms",
+      "skillId": "man-at-arms-rampart",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SELF-MOVEMENT-ORDER",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "man-at-arms",
+      "skillId": "man-at-arms-command",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "man-at-arms",
+      "skillId": "man-at-arms-bolster",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "flagellant",
+      "skillId": "flagellant-endure",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "flagellant",
+      "skillId": "flagellant-suffer",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-CONDITION-TRANSFER-STACKS",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "flagellant",
+      "skillId": "flagellant-redeem",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "flagellant",
+      "skillId": "flagellant-reclaim",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "flagellant",
+      "skillId": "flagellant-exsanguinate",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "flagellant",
+      "skillId": "flagellant-punish",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-CONDITIONAL-CONNECTIVE",
+        "C2C-DEFER-MODIFIER-PHASE",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "flagellant",
+      "skillId": "flagellant-rain-of-sorrows",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-CONDITIONAL-CONNECTIVE",
+        "C2C-DEFER-MODIFIER-PHASE",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "leper",
+      "skillId": "leper-revenge",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "leper",
+      "skillId": "leper-chop",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "leper",
+      "skillId": "leper-hew",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "leper",
+      "skillId": "leper-purge",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "leper",
+      "skillId": "leper-withstand",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "leper",
+      "skillId": "leper-solemnity",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "leper",
+      "skillId": "leper-intimidate",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-MODIFIER-PHASE",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "antiquarian",
+      "skillId": "antiquarian-invigorating-vapours",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "antiquarian",
+      "skillId": "antiquarian-nervous-stab",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "antiquarian",
+      "skillId": "antiquarian-flashpowder",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "antiquarian",
+      "skillId": "antiquarian-protect-me",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "antiquarian",
+      "skillId": "antiquarian-festering-vapours",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "antiquarian",
+      "skillId": "antiquarian-get-down",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SELF-MOVEMENT-ORDER",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "antiquarian",
+      "skillId": "antiquarian-fortifying-vapours",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "shieldbreaker",
+      "skillId": "shieldbreaker-adders-kiss",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SELF-MOVEMENT-ORDER",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "shieldbreaker",
+      "skillId": "shieldbreaker-expose",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SELF-MOVEMENT-ORDER",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "shieldbreaker",
+      "skillId": "shieldbreaker-captivate",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-MODIFIER-PHASE",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "shieldbreaker",
+      "skillId": "shieldbreaker-pierce",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SELF-MOVEMENT-ORDER",
+        "C2C-DEFER-MODIFIER-PHASE",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "shieldbreaker",
+      "skillId": "shieldbreaker-serpent-sway",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SELF-MOVEMENT-ORDER",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "shieldbreaker",
+      "skillId": "shieldbreaker-impale",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SELF-MOVEMENT-ORDER",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "shieldbreaker",
+      "skillId": "shieldbreaker-puncture",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SELF-MOVEMENT-ORDER",
+        "C2C-DEFER-MODIFIER-PHASE",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "hound-master",
+      "skillId": "hound-master-target-whistle",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "hound-master",
+      "skillId": "hound-master-hounds-rush",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "hound-master",
+      "skillId": "hound-master-blackjack",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "hound-master",
+      "skillId": "hound-master-lick-wounds",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "hound-master",
+      "skillId": "hound-master-guard-dog",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "hound-master",
+      "skillId": "hound-master-cry-havoc",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "hound-master",
+      "skillId": "hound-master-hounds-harry",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "musketeer",
+      "skillId": "musketeer-call-the-shot",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "musketeer",
+      "skillId": "musketeer-buckshot",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SELF-MOVEMENT-ORDER",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "musketeer",
+      "skillId": "musketeer-aimed-shot",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-MODIFIER-PHASE",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "musketeer",
+      "skillId": "musketeer-smokescreen",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "musketeer",
+      "skillId": "musketeer-sidearm",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SELF-MOVEMENT-ORDER",
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "musketeer",
+      "skillId": "musketeer-patch-up",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    },
+    {
+      "heroId": "musketeer",
+      "skillId": "musketeer-skeet-shot",
+      "rendered": true,
+      "faces": 1,
+      "deferredIds": [
+        "C2C-DEFER-SERIALIZATION"
+      ]
+    }
+  ]
+}

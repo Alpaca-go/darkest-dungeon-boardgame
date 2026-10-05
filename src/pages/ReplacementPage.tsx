@@ -1,12 +1,14 @@
+import ProductionHeroCard from '../components/hero/ProductionHeroCard';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useGameStore, routeForPhase } from '../store/useGameStore';
-import { getHeroById } from '../data/heroes';
-import { getSkillsByHero } from '../data/skills';
+import {playerSkillName,isProductionCampaign} from '../data/heroes/player-registry';
+import {legacySkillName} from '../game-engine/heroes/legacy-player';
+
 import {
   getReplacementCandidates,
   replacementBlockReason,
 } from '../game-engine/stagecoach';
-import { upgradeXpSpent } from '../game-engine/replacement';
+import { upgradeXpSpent,validateReplacementUpgrade,applyUpgradesToDraft } from '../game-engine/replacement';
 import type { ReplacementSlot } from '../types';
 
 /**
@@ -80,7 +82,9 @@ export default function ReplacementPage() {
         const spent = upgradeXpSpent(slot.upgradeOperations);
         const available = stagecoach.accumulatedXp - spent;
         const draft = slot.draftHero;
-        const draftSkills = draft ? getSkillsByHero(draft.heroId).slice(0, 3) : [];
+        const projected=draft?applyUpgradesToDraft(draft,slot.upgradeOperations,stagecoach.accumulatedXp):null;
+        const draftSkills=draft ? draft.equippedSkillIds.map(id=>({id,name:draft.productionIdentity?playerSkillName(draft,id):legacySkillName(id)})) : [];
+        const provisional=isProductionCampaign(campaign);
         const heroLevelUps = slot.upgradeOperations.filter((o) => o.type === 'hero-level').length;
 
         return (
@@ -91,6 +95,7 @@ export default function ReplacementPage() {
             }`}
             data-testid={`replacement-slot-${slot.partySlot}`}
           >
+            {provisional&&<p>Manual validation pending: Complete Edition pool / deployment / upgrade economy.</p>}
             {/* 阵亡英雄摘要 */}
             <div className="flex items-center justify-between">
               <div>
@@ -136,7 +141,7 @@ export default function ReplacementPage() {
                         />
                         <span className="font-semibold text-dd-text">{hero.name}</span>
                         <span className="block text-dd-muted">
-                          HP {hero.baseLife} · 速度 {hero.speed}
+                          HP {hero.life} · Movement {hero.movement}
                         </span>
                         {disabled && <span className="block text-dd-danger mt-1">{reason}</span>}
                       </button>
@@ -147,6 +152,7 @@ export default function ReplacementPage() {
                 {/* 升级面板 */}
                 {draft && (
                   <div className="rounded border border-dd-border p-3 space-y-2" data-testid="upgrade-panel">
+                    {draft.productionIdentity&&<ProductionHeroCard hero={projected??draft}/>}
                     <p className="text-xs text-dd-text">
                       新英雄：<span className="font-bold">{draft.name}</span> · 等级{' '}
                       {Math.min(3, 1 + heroLevelUps)} · HP {draft.maxLife} · 可用 XP{' '}
@@ -157,7 +163,7 @@ export default function ReplacementPage() {
                       <button
                         onClick={() => addReplacementUpgrade(slot.deadCampaignHeroId, { type: 'hero-level' })}
                         disabled={
-                          slot.upgradeOperations.length >= 2 || available < 4 || 1 + heroLevelUps >= 3
+                          !validateReplacementUpgrade(campaign,slot.deadCampaignHeroId,{type:'hero-level'}).ok
                         }
                         className="px-3 py-1 rounded border border-dd-border text-xs text-dd-text hover:border-dd-accent disabled:opacity-40 disabled:cursor-not-allowed"
                         data-testid="upgrade-hero-level"
@@ -177,7 +183,7 @@ export default function ReplacementPage() {
                                 skillId: sk.id,
                               })
                             }
-                            disabled={slot.upgradeOperations.length >= 2 || available < 2 || 1 + ups >= 3}
+                            disabled={!validateReplacementUpgrade(campaign,slot.deadCampaignHeroId,{type:'skill-level',skillId:sk.id}).ok}
                             className="px-3 py-1 rounded border border-dd-border text-xs text-dd-text hover:border-dd-accent disabled:opacity-40 disabled:cursor-not-allowed"
                             data-testid={`upgrade-skill-${sk.id}`}
                           >
@@ -222,7 +228,7 @@ export default function ReplacementPage() {
 
             {slot.confirmed && draft && (
               <p className="text-xs text-dd-muted">
-                {getHeroById(draft.heroId)?.name ?? draft.name} 已加入队伍（槽位 {slot.partySlot}）。
+                {draft.name} 已加入队伍（槽位 {slot.partySlot}）。
               </p>
             )}
           </div>

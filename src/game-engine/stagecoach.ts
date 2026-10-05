@@ -1,8 +1,10 @@
-import type { CampaignState, HeroDefinition, StagecoachState } from '../types';
+import type { CampaignState, StagecoachState } from '../types';
+import {HERO_PLAYER_REGISTRY,isProductionCampaign} from '../data/heroes/player-registry';
 import { HEROES } from '../data/heroes';
 import { getSkillsByHero } from '../data/skills';
 import { hasCompleteLevelProfiles } from '../data/hero-level-profiles';
 import { pushLog } from './log';
+import { returnProductionBossRoomOnTermination } from './bosses/room-storage';
 
 /** 新战役的 Stagecoach 初始状态：2 个 Waiting Token、0 XP。 */
 export function createInitialStagecoach(): StagecoachState {
@@ -36,7 +38,7 @@ export function applyQuestXpToStagecoach(campaign: CampaignState, xp: number): C
 
 /** 候选英雄与不可选原因。 */
 export interface ReplacementCandidate {
-  hero: HeroDefinition;
+  hero: {id:string;name:string;life:number;movement:number;color:string};
   selectable: boolean;
   reason: string | null;
 }
@@ -56,13 +58,16 @@ export function getReplacementCandidates(campaign: CampaignState): ReplacementCa
     .map((s) => s.selectedHeroClassId)
     .filter((id): id is string => !!id);
 
-  return HEROES.map((hero) => {
+  const production=isProductionCampaign(campaign);
+  const pool=production ? HERO_PLAYER_REGISTRY.map(h=>({id:h.heroId,name:h.printedName,life:h.profile.life.presence==='PRINTED_VALUE'?h.profile.life.value:0,movement:h.profile.movement.presence==='PRINTED_VALUE'?h.profile.movement.value.count:0,color:'#675849'})) : HEROES.map(h=>({id:h.id,name:h.name,life:h.baseLife,movement:h.speed,color:h.color}));
+  return pool.map((hero) => {
     let reason: string | null = null;
     if (activeClassIds.includes(hero.id)) reason = '已在当前队伍中';
     else if (deadClassIds.includes(hero.id)) reason = '该英雄已在本战役阵亡';
+    else if (campaign.stagecoach.recruitedHeroClassIds.includes(hero.id)) reason = '该英雄已被招募 / 退役';
     else if (pickedByOtherSlots.includes(hero.id)) reason = '已被其他替补槽位选择';
-    else if (getSkillsByHero(hero.id).length < 3) reason = '英雄数据不完整（技能不足）';
-    else if (!hasCompleteLevelProfiles(hero.id)) reason = '英雄数据不完整（缺少等级数据）';
+    else if (!production && getSkillsByHero(hero.id).length < 3) reason = '英雄数据不完整（技能不足）';
+    else if (!production && !hasCompleteLevelProfiles(hero.id)) reason = '英雄数据不完整（缺少等级数据）';
     return { hero, selectable: reason === null, reason };
   });
 }
@@ -96,6 +101,7 @@ export function replacementBlockReason(campaign: CampaignState): string | null {
 /** 标记战役失败并进入 campaign-over（不删除存档）。 */
 export function failCampaign(campaign: CampaignState, reason: string): CampaignState {
   if (campaign.gamePhase === 'campaign-over') return campaign;
+  campaign = returnProductionBossRoomOnTermination(campaign, 'failed');
   let next: CampaignState = {
     ...campaign,
     gamePhase: 'campaign-over',

@@ -5,7 +5,10 @@ import type {
   ReplacementSlot,
   ReplacementUpgradeOperation,
 } from '../types';
+import {isProductionCampaign} from '../data/heroes/player-registry';
+import {createPlayerHero} from './campaign';
 import { createId } from './random';
+import { bindReplacementThreatHero } from './bosses/threat-checkpoint';
 import { getHeroById } from '../data/heroes';
 import { getSkillsByHero } from '../data/skills';
 import { getHeroLevelProfile } from '../data/hero-level-profiles';
@@ -94,8 +97,8 @@ export function selectReplacementHero(
 ): CampaignState {
   const slot = findSlot(campaign, slotId);
   if (!slot || slot.confirmed) return campaign;
-  const def = getHeroById(heroClassId);
-  if (!def) return campaign;
+  const def=isProductionCampaign(campaign) ? null : getHeroById(heroClassId);
+  if(!isProductionCampaign(campaign)&&!def) return campaign;
 
   // 候选合法性（排除本槽位当前已选，允许改选）
   const candidate = getReplacementCandidates({
@@ -114,6 +117,14 @@ export function selectReplacementHero(
   }).find((c) => c.hero.id === heroClassId);
   if (!candidate?.selectable) return campaign;
 
+  if(isProductionCampaign(campaign)) {
+    if(campaign.stagecoach.waitingTokens<1) return campaign;
+    const draft=createPlayerHero(heroClassId,slot.partySlot,campaign.heroes.find(h=>h.instanceId===slot.deadCampaignHeroId)?.stance??'aggressive');
+    draft.equippedSkillIds=Object.keys(draft.skillLevels).slice(0,getHeroSkillSlots(draft));
+    draft.xp=campaign.stagecoach.accumulatedXp;draft.xpState=createInitialXpState(draft.xp);
+    return updateSlot(campaign,slotId,s=>({...s,selectedHeroClassId:heroClassId,draftHero:draft,upgradeOperations:[]}));
+  }
+  if(!def) return campaign;
   const profile = getHeroLevelProfile(heroClassId, 1);
   const defaultSkills = getSkillsByHero(heroClassId).slice(0, LEVEL_1_SKILL_SLOTS);
   const skillLevels: Record<string, 1 | 2 | 3> = {};
@@ -348,6 +359,7 @@ export function confirmReplacement(campaign: CampaignState, slotId: string): Cam
   );
 
   // 全部确认 → 完成流程
+  next = bindReplacementThreatHero(next, slot.deadCampaignHeroId, finalHero.instanceId);
   const allConfirmed = next.stagecoach.pendingReplacement!.slots.every((s) => s.confirmed);
   if (allConfirmed) next = completeReplacementFlow(next);
   return next;

@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C35R2",
+  "baseline": "7a3a483cba0dca0eb537e744980eecd4c55fef24",
+  "ruleSetVersion": "C1C35R2-PROPHET-DIGITAL-DEFAULT-v1",
+  "sourceContractVersion": "C1C35R2-PROPHET-EXECUTION-CONTRACT-v1",
+  "gateAPassed": true,
+  "productionFoundation": false,
+  "productionAccepted": false,
+  "runtimeImplemented": false,
+  "status": "PROPHET_PRODUCTION_FOUNDATION_BLOCKED",
+  "proofKind": "SOURCE_AND_EXECUTABLE_DEPENDENCY_REVIEW_NOT_RUNTIME_ACCEPTANCE",
+  "inputHashes": {
+    "docs/data/complete-edition/c1c35-prophet-project-rulings.json": "210b8161f94c8c35e6b1a5210a302a21d4d73f831e7725500c0ec84df57b3e1f",
+    "docs/data/complete-edition/c1c35r1-prophet-rubble-target-scope-ruling.json": "ebe3498ed5c3e36c41a06d710e42a348f870ac4c9896b3f41f99f6a875c3dcb8",
+    "docs/data/complete-edition/c1c35r1-prophet-source-closure.json": "4463e36736627ee2d6c8d9ba49f1b4a524c37e57c2fb9adfb2ada68a2e745bb8",
+    "docs/data/complete-edition/c1c35-prophet-tile-contract.json": "9fb1558340adca1f66d52f3473824f7e81e48b2481c9ac85ef661943aa75d614",
+    "docs/data/complete-edition/rule-source-policy.json": "ced6c1b05610623c4e98338bab6309b5114e61611937bc8555f53852df8149d0",
+    "docs/data/complete-edition/c1c35-prophet-d10-area-map.json": "3d16b004171e8fd3b03a248b4514784e2e9fc9177033f160cca285b9c1061983",
+    "docs/data/complete-edition/c1c35-prophet-glyph-semantic-contract.json": "a83bb484a5ed3aedd16b240e083f958ad4f6a481d5d5909112d6cd2e85ad12d3",
+    "docs/data/complete-edition/c1c35-prophet-source-closure.json": "d6ecb8d724a8e77e498ee76d9a94a1bb504fdc9a171b03cc1597e526e754dcbd",
+    "docs/data/complete-edition/c1c33-necromancer-production-freeze-manifest.json": "885fdd7044a55e186ac736a92ec5727a09f51e797a17731b12db2dfe9cd452ad",
+    "src/game-engine/bosses/definitions.ts": "2999d398a6c594a375c95ea2d97f15d22d7d249705cda3aad652588722970ffc",
+    "src/game-engine/rules/hero-dodge.ts": "186323a25ada34b3e5a103aca9cc63988050eedb89b01e54b30779bb1e2d28ae",
+    "src/game-engine/bosses/room-storage.ts": "1dd82ed1f61d471ee14d1277d19064cfb2a045b4aa90ac1ce393afbf23027290",
+    "src/game-engine/bosses/threat-checkpoint.ts": "c1dc0c5de807ac4914c8dd177cbfd6057d39d31cd3f88295dbdb2e74f9855640",
+    "src/game-engine/rules/large-movement-contract.ts": "6cab1c4810602e0493bb194b895665e84e3e4d7c918d1cbb34acde5e7d39d5b7",
+    "src/game-engine/save.ts": "007f1327ac57b5cca64fcb8d630cd436373acc3b72de3fae054077d41dcc1691",
+    "src/game-engine/component-monster-runtime.ts": "bf44718ce9203c95cdb3669110569ea8086cb9378ae6501abd8a9cc9c8f35efd",
+    "scripts/audit/c1c35r2-gate-a.ts": "157ad817b2a8f9e676946aad743aa26c5ad236e229ae1bc2d250a38ce120e161",
+    "scripts/audit/c1c35r2-foundation-review.ts": "c9a8c53a7a30294408c8791690f3f3693bca2eb42848e182b3f8e64541b8c8b6",
+    "src/audit/c1c35r2-prophet-gate-foundation-review.test.ts": "e711a334f9fc11525b8e293680aadd48be30bf0f002f84fbdd26e860784dc1e7"
+  },
+  "rulingReferences": [
+    {
+      "path": "docs/data/complete-edition/c1c35-prophet-project-rulings.json",
+      "version": "C1C35-PROPHET-DIGITAL-DEFAULT-v1",
+      "sha256": "210b8161f94c8c35e6b1a5210a302a21d4d73f831e7725500c0ec84df57b3e1f"
+    },
+    {
+      "path": "docs/data/complete-edition/c1c35r1-prophet-rubble-target-scope-ruling.json",
+      "version": "C1C35R1-PROPHET-RUBBLE-TARGET-SCOPE-v1",
+      "sha256": "ebe3498ed5c3e36c41a06d710e42a348f870ac4c9896b3f41f99f6a875c3dcb8"
+    },
+    {
+      "path": "docs/data/complete-edition/c1c35r2-prophet-area-c-capacity-ruling.json",
+      "version": "C1C35R2-PROPHET-AREA-C-CAPACITY-v1",
+      "sha256": "52fb1b6f35381261f53c76ee7cb54fee520b6da083962c47421e1a023b7fd3dd"
+    }
+  ],
+  "outcome": "PROPHET_PRODUCTION_FOUNDATION_BLOCKED",
+  "canonicalComplete": false,
+  "digitalExecutionContractComplete": true,
+  "dependencyProbesPassed": 0,
+  "dependencyProbesRejected": 5,
+  "productionAcceptanceTestsPassed": 0,
+  "failedInvariant": "Shared production APIs cannot bind the Prophet identity/ruleset/Room/Tile without an explicit successor dependency contract.",
+  "frozenPredecessorsRetained": true,
+  "browserAcceptancePerformed": false
+}

@@ -1,0 +1,276 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C38R1",
+  "baseline": "dcf017cb2065440251caad8d31075b99bc6355e0",
+  "intakeDate": "2026-10-02",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "contractVersion": "C1C38R1-OFFICIAL-INTAKE-v1",
+  "runtimeImplemented": false,
+  "runtimeImplementationAuthorized": false,
+  "productionReady": false,
+  "playerRouteEnabled": false,
+  "gateAPassed": false,
+  "C1C39Allowed": false,
+  "fields": [
+    {
+      "id": "physical.aberrationCopies",
+      "category": "PHYSICAL_SUPPLY",
+      "status": "SOURCE_UNRESOLVED",
+      "authority": "NONE",
+      "canonical": false,
+      "sourceReferences": [],
+      "literal": null,
+      "normalizedValue": null,
+      "executionRequired": true,
+      "contractExecutable": false,
+      "blocking": true,
+      "notes": "COM p3 binds two miniature pieces shared across Levels; print pp8/18 bind one stat-card print slot per Level. Neither establishes two Level I physical combat copies nor simultaneous eligibility."
+    },
+    {
+      "id": "physical.otherMonsterCopies",
+      "category": "PHYSICAL_SUPPLY",
+      "status": "SOURCE_UNRESOLVED",
+      "authority": "NONE",
+      "canonical": false,
+      "sourceReferences": [],
+      "literal": null,
+      "normalizedValue": null,
+      "executionRequired": true,
+      "contractExecutable": false,
+      "blocking": true,
+      "notes": "COM p3 binds finite miniature counts by named Monster. Which definitions Return can summon, and Level-specific card/miniature ownership remain unresolved."
+    },
+    {
+      "id": "physical.initiativeComponents",
+      "category": "PHYSICAL_SUPPLY",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 4,
+          "originalPage": 4,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 8,
+          "originalPage": 8,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        }
+      ],
+      "literal": "Take the 8 Initiative Cards (4 Heroes and 4 Monsters); Shuffle two Initiative Cards for it",
+      "normalizedValue": {
+        "borrowedCorePool": {
+          "heroCards": 4,
+          "monsterCards": 4
+        },
+        "thingSetupCards": 2
+      },
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "Printed core borrowing instruction and Thing setup; no TTS-object census."
+    },
+    {
+      "id": "physical.specialTokens",
+      "category": "PHYSICAL_SUPPLY",
+      "status": "SOURCE_UNRESOLVED",
+      "authority": "NONE",
+      "canonical": false,
+      "sourceReferences": [],
+      "literal": null,
+      "normalizedValue": null,
+      "executionRequired": true,
+      "contractExecutable": false,
+      "blocking": true,
+      "notes": "Rules p3 lists 44 Shards,22 Healing Crystals,8 Focus Point/Aberration,10 Curio,1 Light,14 Buff (=99). Box p2 says 33 Tokens; scope/count conflict remains open."
+    },
+    {
+      "id": "physical.bossMiniature",
+      "category": "PHYSICAL_SUPPLY",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 3,
+          "originalPage": 3,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-BOX",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_BOX.pdf",
+          "sha256": "722365df1b8189d75f732bd10bc1fe255cacb4f1ba7e98de6fac79df68d02877",
+          "page": 2,
+          "originalPage": 2,
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "applicability": "Standalone mode explicitly outside main campaign; aggregate components only. Box token total conflicts with rules list."
+        }
+      ],
+      "literal": "Thing from the Stars [one miniature pictured/listed]",
+      "normalizedValue": {
+        "thingMiniatures": 1
+      },
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "Official miniature list has one Thing, and all listed miniatures sum to packaging total 26."
+    },
+    {
+      "id": "physical.ownershipLedger",
+      "category": "PHYSICAL_SUPPLY",
+      "status": "PROJECT_RULING_REQUIRED",
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "sourceReferences": [],
+      "literal": null,
+      "normalizedValue": null,
+      "executionRequired": true,
+      "contractExecutable": false,
+      "blocking": true,
+      "notes": "After source supply is bound, record unique physical IDs, duplicate rejection and return transactions."
+    },
+    {
+      "id": "aberration.physicalCopySupply",
+      "category": "PHYSICAL_SUPPLY",
+      "status": "SOURCE_UNRESOLVED",
+      "authority": "NONE",
+      "canonical": false,
+      "sourceReferences": [],
+      "literal": null,
+      "normalizedValue": null,
+      "executionRequired": true,
+      "contractExecutable": false,
+      "blocking": true,
+      "notes": "Two Aberration miniatures and Level I/II stat prints are bound; how those pieces share Level-specific active copies and return supply remains unresolved."
+    }
+  ],
+  "officialMiniatureList": {
+    "crystallineAberration": 2,
+    "plowHorse": 2,
+    "frozenFarmhand": 2,
+    "farmhand": 4,
+    "foreman": 4,
+    "scarecrow": 4,
+    "sleepersHerald": 4,
+    "sleepersDream": 1,
+    "miller": 1,
+    "sleeper": 1,
+    "thing": 1,
+    "total": 26,
+    "sources": [
+      {
+        "sourceId": "COM-RULES",
+        "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+        "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+        "page": 3,
+        "originalPage": 3,
+        "authority": "OFFICIAL_RULEBOOK",
+        "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+      },
+      {
+        "sourceId": "COM-BOX",
+        "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_BOX.pdf",
+        "sha256": "722365df1b8189d75f732bd10bc1fe255cacb4f1ba7e98de6fac79df68d02877",
+        "page": 2,
+        "originalPage": 2,
+        "authority": "OFFICIAL_PRINTED_COMPONENT",
+        "applicability": "Standalone mode explicitly outside main campaign; aggregate components only. Box token total conflicts with rules list."
+      }
+    ]
+  },
+  "aberrationCardPrintSlots": {
+    "levelI": 1,
+    "levelII": 1,
+    "source": [
+      {
+        "sourceId": "COM-MONSTERS",
+        "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_CARDS_70_120_monsters_Curio_Spawn_FRONT.pdf",
+        "sha256": "15e13e1acd429e804f9b15594081f79a8b1c71353c23025023f2677b676f7f07",
+        "page": 8,
+        "originalPage": 8,
+        "authority": "OFFICIAL_PRINTED_COMPONENT",
+        "applicability": "Crystalline Aberration I and II printed definitions only; page count is not available miniature/copy supply."
+      },
+      {
+        "sourceId": "COM-MONSTERS",
+        "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_CARDS_70_120_monsters_Curio_Spawn_FRONT.pdf",
+        "sha256": "15e13e1acd429e804f9b15594081f79a8b1c71353c23025023f2677b676f7f07",
+        "page": 18,
+        "originalPage": 18,
+        "authority": "OFFICIAL_PRINTED_COMPONENT",
+        "applicability": "Crystalline Aberration I and II printed definitions only; page count is not available miniature/copy supply."
+      }
+    ],
+    "authority": "OFFICIAL_PRINTED_DEFINITIONS_ONLY",
+    "levelICopySupply": "SOURCE_UNRESOLVED"
+  },
+  "rulebookTokenList": {
+    "shards": 44,
+    "healingCrystals": 22,
+    "focusPointAberration": 8,
+    "curio": 10,
+    "light": 1,
+    "buff": 14,
+    "total": 99,
+    "sources": [
+      {
+        "sourceId": "COM-RULES",
+        "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+        "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+        "page": 3,
+        "originalPage": 3,
+        "authority": "OFFICIAL_RULEBOOK",
+        "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+      }
+    ]
+  },
+  "boxTokenTotal": 33,
+  "conflicts": [
+    {
+      "id": "TOKEN_CENSUS_SCOPE",
+      "authority": "OFFICIAL_SOURCE_CONTRACT_REVIEW_REQUIRED",
+      "canonicalResolution": false,
+      "sources": [
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 3,
+          "originalPage": 3,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-BOX",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_BOX.pdf",
+          "sha256": "722365df1b8189d75f732bd10bc1fe255cacb4f1ba7e98de6fac79df68d02877",
+          "page": 2,
+          "originalPage": 2,
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "applicability": "Standalone mode explicitly outside main campaign; aggregate components only. Box token total conflicts with rules list."
+        }
+      ],
+      "literals": [
+        "44 + 22 + 8 + 10 + 1 + 14 tokens",
+        "33 Tokens"
+      ],
+      "review": "Record both publisher counts; do not choose a total or infinite supply.",
+      "blocksPromotion": true
+    }
+  ],
+  "transportObjectCountsAccepted": false,
+  "infiniteSupplyAllowed": false
+}

@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C30",
+  "baselineHead": "4c01f006324b38f4233803bc34c4259cd69f4ced",
+  "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1",
+  "ruleSourcePolicyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "capabilities": {
+    "coreBossDefinitions": {
+      "status": "IMPLEMENTED",
+      "count": 9,
+      "note": "Frozen C1C29 executor and C1C28 v1 contract retained."
+    },
+    "BoneCombatDefinitions": {
+      "status": "PARTIAL",
+      "printedStatsAndSkillsReviewed": 4,
+      "executableDefinitions": 0,
+      "note": "Unresolved Stance selections block validated runtime definitions."
+    },
+    "HeroDodgeBinding": {
+      "status": "PARTIAL",
+      "classLevelPairs": [
+        "crusader:1",
+        "highwayman:1",
+        "hellion:1"
+      ],
+      "note": "Standard registry API; all other class/level pairs fail closed. Other Hero fields keep their prototype credibility."
+    },
+    "BoneSkillExecutor": {
+      "status": "BLOCKED",
+      "note": "No source-complete activation contract; simplified Phase 3 executor is not a production substitute."
+    },
+    "NormalSelectorEntry": {
+      "status": "BLOCKED",
+      "note": "UI, quest command, Room command and direct Room commit enforce the production dependency gate."
+    },
+    "ThreatCheckpointResume": {
+      "status": "PARTIAL",
+      "bridgeUnitIsolation": "PASS",
+      "note": "Validated identity/version/linkage and deterministic resume implemented. Production Room bridge remains gated."
+    },
+    "HamletEffectBridge": {
+      "status": "BLOCKED",
+      "note": "Stored forcedHeroId and resumable choice retained; preparation/Graveyard transaction bridge is not closed."
+    },
+    "IncomingAttackReaction": {
+      "status": "BLOCKED",
+      "note": "Existing Boss Target effects do not yet stage complete per-Hero Trinket defense windows. No production promotion."
+    },
+    "RoomStorage": {
+      "status": "BLOCKED",
+      "note": "Room 10 semantic binding retained; authoritative physical card/tile lifecycle has not been integrated."
+    },
+    "BossResistanceIntegration": {
+      "status": "PARTIAL",
+      "note": "Frozen immunity binding retained; categorical Debuff and Shuffle resistance is not closed."
+    },
+    "SaveReplayProduction": {
+      "status": "BLOCKED",
+      "note": "No production Bone activation path available. Isolation proofs are not production acceptance."
+    }
+  },
+  "hardGates": [
+    "BoneCombatDefinitions",
+    "HeroDodgeBinding",
+    "BoneSkillExecutor",
+    "NormalSelectorEntry",
+    "ThreatCheckpointResume"
+  ],
+  "hardGatesPassed": false,
+  "productionReady": 0
+}

@@ -1,0 +1,21 @@
+
+> darkest-dungeon-web-prototype@0.1.0 verify:complete-edition-c2a-r1
+> vite-node scripts/audit/c2a-r1-transport-binding.ts --verify
+
+c2a immutable acceptance: PASS; HERO_SOURCE_CENSUS_PARTIAL
+D:\darkest-dungoen-boardgame\scripts\audit\c2a-r1-transport-binding.ts:18
+  if (!ok) throw new Error("C2A-R1: " + why);
+                 ^
+
+Error: C2A-R1: no new runtime registry src/data/heroes/production-freeze.ts
+    at check (D:\darkest-dungoen-boardgame\scripts\audit\c2a-r1-transport-binding.ts:18:18)
+    at verifyRuntimeBoundary (D:\darkest-dungoen-boardgame\scripts\audit\c2a-r1-transport-binding.ts:250:59)
+    at verifyC2AR1 (D:\darkest-dungoen-boardgame\scripts\audit\c2a-r1-transport-binding.ts:264:3)
+    at D:\darkest-dungoen-boardgame\scripts\audit\c2a-r1-transport-binding.ts:288:46
+    at ViteNodeRunner.runModule (file:///D:/darkest-dungoen-boardgame/node_modules/vite-node/dist/client.mjs:399:5)
+    at ViteNodeRunner.directRequest (file:///D:/darkest-dungoen-boardgame/node_modules/vite-node/dist/client.mjs:381:5)
+    at ViteNodeRunner.cachedRequest (file:///D:/darkest-dungoen-boardgame/node_modules/vite-node/dist/client.mjs:206:14)
+    at ViteNodeRunner.executeFile (file:///D:/darkest-dungoen-boardgame/node_modules/vite-node/dist/client.mjs:169:12)
+    at CAC.run (file:///D:/darkest-dungoen-boardgame/node_modules/vite-node/dist/cli.mjs:99:5)
+
+Node.js v24.20.0

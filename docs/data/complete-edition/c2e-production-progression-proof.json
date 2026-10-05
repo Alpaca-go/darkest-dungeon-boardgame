@@ -1,0 +1,1282 @@
+{
+  "phase": "11A.5-C2E",
+  "baseline": "2d979652c3b713d6104bd21c7007fcd24fe1af63",
+  "definitionVersion": "C2C-HERO-PRODUCTION-DEFINITION-v1",
+  "runtimeVersion": "C2D-HERO-PRODUCTION-RUNTIME-v1",
+  "ambiguityPolicy": "SOURCE_AMBIGUITY_DEFER_POLICY_V1",
+  "playerPathFingerprint": "bd335422db3046e9d8918bed2b113270337f57a8cdc7912db3cbdf8358f26c32",
+  "profiles": [
+    {
+      "heroId": "crusader",
+      "level": 1,
+      "form": null,
+      "sourceBindingId": "c2b:crusader:profile:L1:HERO_PROFILE",
+      "life": 17,
+      "dodge": 0,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 1
+        }
+      },
+      "categoricalResistances": [
+        "stun"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "crusader",
+      "level": 2,
+      "form": null,
+      "sourceBindingId": "c2b:crusader:profile:L2:HERO_PROFILE",
+      "life": 24,
+      "dodge": 1,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 1
+        }
+      },
+      "categoricalResistances": [
+        "stun",
+        "shuffle"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "crusader",
+      "level": 3,
+      "form": null,
+      "sourceBindingId": "c2b:crusader:profile:L3:HERO_PROFILE",
+      "life": 32,
+      "dodge": 2,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 1
+        }
+      },
+      "categoricalResistances": [
+        "stun",
+        "debuff"
+      ],
+      "immunities": [
+        "shuffle"
+      ],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "hellion",
+      "level": 1,
+      "form": null,
+      "sourceBindingId": "c2b:hellion:profile:L1:HERO_PROFILE",
+      "life": 14,
+      "dodge": 1,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 2
+        }
+      },
+      "categoricalResistances": [
+        "bleed"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "hellion",
+      "level": 2,
+      "form": null,
+      "sourceBindingId": "c2b:hellion:profile:L2:HERO_PROFILE",
+      "life": 18,
+      "dodge": 2,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 2
+        }
+      },
+      "categoricalResistances": [
+        "bleed",
+        "blight"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "hellion",
+      "level": 3,
+      "form": null,
+      "sourceBindingId": "c2b:hellion:profile:L3:HERO_PROFILE",
+      "life": 24,
+      "dodge": 3,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 2
+        }
+      },
+      "categoricalResistances": [
+        "stun",
+        "bleed",
+        "blight"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "bounty-hunter",
+      "level": 1,
+      "form": null,
+      "sourceBindingId": "c2b:bounty-hunter:profile:L1:HERO_PROFILE",
+      "life": 14,
+      "dodge": 1,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 2
+        }
+      },
+      "categoricalResistances": [
+        "stun"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "bounty-hunter",
+      "level": 2,
+      "form": null,
+      "sourceBindingId": "c2b:bounty-hunter:profile:L2:HERO_PROFILE",
+      "life": 18,
+      "dodge": 2,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 2
+        }
+      },
+      "categoricalResistances": [
+        "stun",
+        "debuff"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "bounty-hunter",
+      "level": 3,
+      "form": null,
+      "sourceBindingId": "c2b:bounty-hunter:profile:L3:HERO_PROFILE",
+      "life": 23,
+      "dodge": 3,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 2
+        }
+      },
+      "categoricalResistances": [
+        "stun",
+        "debuff",
+        "bleed"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "highwayman",
+      "level": 1,
+      "form": null,
+      "sourceBindingId": "c2b:highwayman:profile:L1:HERO_PROFILE",
+      "life": 12,
+      "dodge": 1,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 2
+        }
+      },
+      "categoricalResistances": [
+        "stun"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "highwayman",
+      "level": 2,
+      "form": null,
+      "sourceBindingId": "c2b:highwayman:profile:L2:HERO_PROFILE",
+      "life": 17,
+      "dodge": 2,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 2
+        }
+      },
+      "categoricalResistances": [
+        "stun",
+        "bleed"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "highwayman",
+      "level": 3,
+      "form": null,
+      "sourceBindingId": "c2b:highwayman:profile:L3:HERO_PROFILE",
+      "life": 22,
+      "dodge": 3,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 3
+        }
+      },
+      "categoricalResistances": [
+        "stun",
+        "bleed",
+        "blight"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "vestal",
+      "level": 1,
+      "form": null,
+      "sourceBindingId": "c2b:vestal:profile:L1:HERO_PROFILE",
+      "life": 12,
+      "dodge": 0,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 1
+        }
+      },
+      "categoricalResistances": [
+        "bleed"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "vestal",
+      "level": 2,
+      "form": null,
+      "sourceBindingId": "c2b:vestal:profile:L2:HERO_PROFILE",
+      "life": 17,
+      "dodge": 1,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 1
+        }
+      },
+      "categoricalResistances": [
+        "stun",
+        "bleed"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "vestal",
+      "level": 3,
+      "form": null,
+      "sourceBindingId": "c2b:vestal:profile:L3:HERO_PROFILE",
+      "life": 22,
+      "dodge": 2,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 2
+        }
+      },
+      "categoricalResistances": [
+        "stun",
+        "bleed"
+      ],
+      "immunities": [
+        "disease"
+      ],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "jester",
+      "level": 1,
+      "form": null,
+      "sourceBindingId": "c2b:jester:profile:L1:HERO_PROFILE",
+      "life": 10,
+      "dodge": 2,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 3
+        }
+      },
+      "categoricalResistances": [
+        "debuff"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "jester",
+      "level": 2,
+      "form": null,
+      "sourceBindingId": "c2b:jester:profile:L2:HERO_PROFILE",
+      "life": 14,
+      "dodge": 3,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 3
+        }
+      },
+      "categoricalResistances": [
+        "debuff",
+        "bleed"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "jester",
+      "level": 3,
+      "form": null,
+      "sourceBindingId": "c2b:jester:profile:L3:HERO_PROFILE",
+      "life": 18,
+      "dodge": 4,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 3
+        }
+      },
+      "categoricalResistances": [
+        "debuff",
+        "bleed",
+        "blight"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "plague-doctor",
+      "level": 1,
+      "form": null,
+      "sourceBindingId": "c2b:plague-doctor:profile:L1:HERO_PROFILE",
+      "life": 11,
+      "dodge": 0,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 3
+        }
+      },
+      "categoricalResistances": [
+        "blight"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "plague-doctor",
+      "level": 2,
+      "form": null,
+      "sourceBindingId": "c2b:plague-doctor:profile:L2:HERO_PROFILE",
+      "life": 15,
+      "dodge": 1,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 3
+        }
+      },
+      "categoricalResistances": [
+        "blight"
+      ],
+      "immunities": [
+        "disease"
+      ],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "plague-doctor",
+      "level": 3,
+      "form": null,
+      "sourceBindingId": "c2b:plague-doctor:profile:L3:HERO_PROFILE",
+      "life": 19,
+      "dodge": 2,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 3
+        }
+      },
+      "categoricalResistances": [],
+      "immunities": [
+        "blight",
+        "disease"
+      ],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "arbalest",
+      "level": 1,
+      "form": null,
+      "sourceBindingId": "c2b:arbalest:profile:L1:HERO_PROFILE",
+      "life": 14,
+      "dodge": 0,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 1
+        }
+      },
+      "categoricalResistances": [
+        "shuffle"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "arbalest",
+      "level": 2,
+      "form": null,
+      "sourceBindingId": "c2b:arbalest:profile:L2:HERO_PROFILE",
+      "life": 19,
+      "dodge": 1,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 1
+        }
+      },
+      "categoricalResistances": [
+        "stun",
+        "shuffle"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "arbalest",
+      "level": 3,
+      "form": null,
+      "sourceBindingId": "c2b:arbalest:profile:L3:HERO_PROFILE",
+      "life": 24,
+      "dodge": 2,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 2
+        }
+      },
+      "categoricalResistances": [
+        "stun"
+      ],
+      "immunities": [
+        "shuffle"
+      ],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "grave-robber",
+      "level": 1,
+      "form": null,
+      "sourceBindingId": "c2b:grave-robber:profile:L1:HERO_PROFILE",
+      "life": 11,
+      "dodge": 1,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 3
+        }
+      },
+      "categoricalResistances": [
+        "blight"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "grave-robber",
+      "level": 2,
+      "form": null,
+      "sourceBindingId": "c2b:grave-robber:profile:L2:HERO_PROFILE",
+      "life": 15,
+      "dodge": 2,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 3
+        }
+      },
+      "categoricalResistances": [
+        "blight",
+        "debuff"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "grave-robber",
+      "level": 3,
+      "form": null,
+      "sourceBindingId": "c2b:grave-robber:profile:L3:HERO_PROFILE",
+      "life": 19,
+      "dodge": 3,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 3
+        }
+      },
+      "categoricalResistances": [
+        "bleed",
+        "blight",
+        "debuff"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "occultist",
+      "level": 1,
+      "form": null,
+      "sourceBindingId": "c2b:occultist:profile:L1:HERO_PROFILE",
+      "life": 10,
+      "dodge": 1,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 2
+        }
+      },
+      "categoricalResistances": [
+        "debuff"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "occultist",
+      "level": 2,
+      "form": null,
+      "sourceBindingId": "c2b:occultist:profile:L2:HERO_PROFILE",
+      "life": 14,
+      "dodge": 2,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 2
+        }
+      },
+      "categoricalResistances": [
+        "bleed",
+        "debuff"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "occultist",
+      "level": 3,
+      "form": null,
+      "sourceBindingId": "c2b:occultist:profile:L3:HERO_PROFILE",
+      "life": 18,
+      "dodge": 3,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 3
+        }
+      },
+      "categoricalResistances": [
+        "bleed",
+        "blight",
+        "debuff"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "abomination",
+      "level": 1,
+      "form": "HUMAN",
+      "sourceBindingId": "c2b:abomination:profile:L1:HUMAN_FORM",
+      "life": 13,
+      "dodge": 1,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 2
+        }
+      },
+      "categoricalResistances": [
+        "blight"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "abomination",
+      "level": 1,
+      "form": "BEAST",
+      "sourceBindingId": "c2b:abomination:profile:L1:BEAST_FORM",
+      "life": 13,
+      "dodge": 1,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 2
+        }
+      },
+      "categoricalResistances": [
+        "blight"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "abomination",
+      "level": 2,
+      "form": "HUMAN",
+      "sourceBindingId": "c2b:abomination:profile:L2:HUMAN_FORM",
+      "life": 18,
+      "dodge": 2,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 3
+        }
+      },
+      "categoricalResistances": [
+        "stun",
+        "blight"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "abomination",
+      "level": 2,
+      "form": "BEAST",
+      "sourceBindingId": "c2b:abomination:profile:L2:BEAST_FORM",
+      "life": 18,
+      "dodge": 2,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 3
+        }
+      },
+      "categoricalResistances": [
+        "stun",
+        "blight"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "abomination",
+      "level": 3,
+      "form": "HUMAN",
+      "sourceBindingId": "c2b:abomination:profile:L3:HUMAN_FORM",
+      "life": 23,
+      "dodge": 3,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 3
+        }
+      },
+      "categoricalResistances": [
+        "stun"
+      ],
+      "immunities": [
+        "blight"
+      ],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "abomination",
+      "level": 3,
+      "form": "BEAST",
+      "sourceBindingId": "c2b:abomination:profile:L3:BEAST_FORM",
+      "life": 23,
+      "dodge": 3,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 3
+        }
+      },
+      "categoricalResistances": [
+        "stun"
+      ],
+      "immunities": [
+        "blight"
+      ],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "man-at-arms",
+      "level": 1,
+      "form": null,
+      "sourceBindingId": "c2b:man-at-arms:profile:L1:HERO_PROFILE",
+      "life": 16,
+      "dodge": 1,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 1
+        }
+      },
+      "categoricalResistances": [
+        "shuffle"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "man-at-arms",
+      "level": 2,
+      "form": null,
+      "sourceBindingId": "c2b:man-at-arms:profile:L2:HERO_PROFILE",
+      "life": 22,
+      "dodge": 2,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 1
+        }
+      },
+      "categoricalResistances": [
+        "shuffle",
+        "bleed"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "man-at-arms",
+      "level": 3,
+      "form": null,
+      "sourceBindingId": "c2b:man-at-arms:profile:L3:HERO_PROFILE",
+      "life": 28,
+      "dodge": 3,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 1
+        }
+      },
+      "categoricalResistances": [
+        "stun",
+        "shuffle",
+        "bleed"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "flagellant",
+      "level": 1,
+      "form": null,
+      "sourceBindingId": "c2b:flagellant:profile:L1:HERO_PROFILE",
+      "life": 12,
+      "dodge": 2,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 2
+        }
+      },
+      "categoricalResistances": [
+        "bleed"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "flagellant",
+      "level": 2,
+      "form": null,
+      "sourceBindingId": "c2b:flagellant:profile:L2:HERO_PROFILE",
+      "life": 16,
+      "dodge": 3,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 2
+        }
+      },
+      "categoricalResistances": [
+        "shuffle",
+        "bleed"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "flagellant",
+      "level": 3,
+      "form": null,
+      "sourceBindingId": "c2b:flagellant:profile:L3:HERO_PROFILE",
+      "life": 22,
+      "dodge": 3,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 3
+        }
+      },
+      "categoricalResistances": [
+        "stun",
+        "shuffle",
+        "bleed"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "leper",
+      "level": 1,
+      "form": null,
+      "sourceBindingId": "c2b:leper:profile:L1:HERO_PROFILE",
+      "life": 18,
+      "dodge": 0,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 1
+        }
+      },
+      "categoricalResistances": [
+        "debuff"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "leper",
+      "level": 2,
+      "form": null,
+      "sourceBindingId": "c2b:leper:profile:L2:HERO_PROFILE",
+      "life": 25,
+      "dodge": 1,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 1
+        }
+      },
+      "categoricalResistances": [
+        "shuffle",
+        "debuff"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "leper",
+      "level": 3,
+      "form": null,
+      "sourceBindingId": "c2b:leper:profile:L3:HERO_PROFILE",
+      "life": 33,
+      "dodge": 2,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 1
+        }
+      },
+      "categoricalResistances": [
+        "stun",
+        "shuffle",
+        "debuff"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "antiquarian",
+      "level": 1,
+      "form": null,
+      "sourceBindingId": "c2b:antiquarian:profile:L1:HERO_PROFILE",
+      "life": 9,
+      "dodge": 1,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 2
+        }
+      },
+      "categoricalResistances": [
+        "shuffle"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "antiquarian",
+      "level": 2,
+      "form": null,
+      "sourceBindingId": "c2b:antiquarian:profile:L2:HERO_PROFILE",
+      "life": 12,
+      "dodge": 2,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 2
+        }
+      },
+      "categoricalResistances": [
+        "stun",
+        "shuffle"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "antiquarian",
+      "level": 3,
+      "form": null,
+      "sourceBindingId": "c2b:antiquarian:profile:L3:HERO_PROFILE",
+      "life": 15,
+      "dodge": 3,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 2
+        }
+      },
+      "categoricalResistances": [
+        "stun"
+      ],
+      "immunities": [
+        "shuffle",
+        "disease"
+      ],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "shieldbreaker",
+      "level": 1,
+      "form": null,
+      "sourceBindingId": "c2b:shieldbreaker:profile:L1:HERO_PROFILE",
+      "life": 11,
+      "dodge": 1,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 3
+        }
+      },
+      "categoricalResistances": [
+        "stun"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "shieldbreaker",
+      "level": 2,
+      "form": null,
+      "sourceBindingId": "c2b:shieldbreaker:profile:L2:HERO_PROFILE",
+      "life": 15,
+      "dodge": 2,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 3
+        }
+      },
+      "categoricalResistances": [
+        "stun",
+        "shuffle"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "shieldbreaker",
+      "level": 3,
+      "form": null,
+      "sourceBindingId": "c2b:shieldbreaker:profile:L3:HERO_PROFILE",
+      "life": 19,
+      "dodge": 3,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 3
+        }
+      },
+      "categoricalResistances": [
+        "stun"
+      ],
+      "immunities": [
+        "shuffle"
+      ],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "hound-master",
+      "level": 1,
+      "form": null,
+      "sourceBindingId": "c2b:hound-master:profile:L1:HERO_PROFILE",
+      "life": 11,
+      "dodge": 1,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 2
+        }
+      },
+      "categoricalResistances": [
+        "stun"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "hound-master",
+      "level": 2,
+      "form": null,
+      "sourceBindingId": "c2b:hound-master:profile:L2:HERO_PROFILE",
+      "life": 15,
+      "dodge": 2,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 2
+        }
+      },
+      "categoricalResistances": [
+        "stun",
+        "bleed"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "hound-master",
+      "level": 3,
+      "form": null,
+      "sourceBindingId": "c2b:hound-master:profile:L3:HERO_PROFILE",
+      "life": 19,
+      "dodge": 3,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 2
+        }
+      },
+      "categoricalResistances": [
+        "stun",
+        "bleed",
+        "blight"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "musketeer",
+      "level": 1,
+      "form": null,
+      "sourceBindingId": "c2b:musketeer:profile:L1:HERO_PROFILE",
+      "life": 14,
+      "dodge": 0,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 1
+        }
+      },
+      "categoricalResistances": [
+        "shuffle"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "musketeer",
+      "level": 2,
+      "form": null,
+      "sourceBindingId": "c2b:musketeer:profile:L2:HERO_PROFILE",
+      "life": 19,
+      "dodge": 1,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 1
+        }
+      },
+      "categoricalResistances": [
+        "stun",
+        "shuffle"
+      ],
+      "immunities": [],
+      "skillCount": 7,
+      "status": "PASS"
+    },
+    {
+      "heroId": "musketeer",
+      "level": 3,
+      "form": null,
+      "sourceBindingId": "c2b:musketeer:profile:L3:HERO_PROFILE",
+      "life": 24,
+      "dodge": 2,
+      "movement": {
+        "presence": "PRINTED_VALUE",
+        "value": {
+          "glyphId": "movement-boot",
+          "count": 2
+        }
+      },
+      "categoricalResistances": [
+        "stun"
+      ],
+      "immunities": [
+        "shuffle"
+      ],
+      "skillCount": 7,
+      "status": "PASS"
+    }
+  ],
+  "heroReceipt": {
+    "fromLevel": 1,
+    "toLevel": 3,
+    "life": 32,
+    "wounds": 3,
+    "xpSpent": 8,
+    "goldSpent": 4
+  },
+  "skillReceipt": {
+    "skillId": "crusader-bulwark-of-faith",
+    "level": 3,
+    "sourceBindingId": "c2b:crusader-bulwark-of-faith:L3"
+  },
+  "woundsPolicy": "Existing wounds preserved across source Life change",
+  "status": "PASS"
+}

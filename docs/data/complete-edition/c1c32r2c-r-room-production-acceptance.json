@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R2C-R",
+  "baseline": "182b9f351e6115daa678fb36dc2fa6196f15e6cf",
+  "ruleSetVersion": "C1C32R2C-R-DIGITAL-DEFAULT-v6",
+  "accepted": true,
+  "executableRooms": 9,
+  "executableRoomRules": 14,
+  "roomEffectExecutorComplete": true,
+  "rooms": [
+    {
+      "roomNumber": 1,
+      "rules": [
+        "cornered"
+      ]
+    },
+    {
+      "roomNumber": 2,
+      "rules": [
+        "unholy-aura"
+      ]
+    },
+    {
+      "roomNumber": 3,
+      "rules": [
+        "healing-waters"
+      ]
+    },
+    {
+      "roomNumber": 4,
+      "rules": [
+        "circle-of-power",
+        "spiked-pit-END_TURN",
+        "spiked-pit-SHUFFLED_INTO"
+      ]
+    },
+    {
+      "roomNumber": 5,
+      "rules": [
+        "stressful-darkness",
+        "beacon-of-light"
+      ]
+    },
+    {
+      "roomNumber": 6,
+      "rules": [
+        "loot-chest",
+        "hide-and-heal"
+      ]
+    },
+    {
+      "roomNumber": 7,
+      "rules": [
+        "ancestors-glory"
+      ]
+    },
+    {
+      "roomNumber": 8,
+      "rules": [
+        "the-invokers",
+        "invoking-abyss"
+      ]
+    },
+    {
+      "roomNumber": 9,
+      "rules": [
+        "feeling-the-presence"
+      ]
+    }
+  ],
+  "expectedBlockers": [],
+  "evidence": {
+    "result": "docs/data/complete-edition/c1c32r2c-r-test-results.json",
+    "resultHash": "0a84cf1af294d8fef40f7451cd630f734ef41b1a74c286fc938656111f583e34",
+    "passed": 85,
+    "failed": 0,
+    "skipped": 0,
+    "hashes": {
+      "src/game-engine/ruins/battle-runtime.ts": "dbc67330b82ddf764c3a2a4a91c0315eabbf1e8eed75b91f29a212cf862699e5",
+      "src/game-engine/ruins/condition-runtime.ts": "21f6301ce5a42e3cfe8d598ccd5f03933d4ea7b6f5d301fb6d918753a6df2277",
+      "src/game-engine/ruins/encounter-draw.ts": "58894cfc12c1acb811decee398fd6eaefaf769cc47d4d373764763d5fdcf5486",
+      "src/game-engine/ruins/executor-test-fixture.ts": "8ec51055f6b329a8a6b90e12a7dc84eb6a2f7eb3205cb147a96c5b721f8471c8",
+      "src/game-engine/ruins/monster-runtime.ts": "5e7e99efa0e5701ff56e07704709e5b0c8139c2103114cae29aabb0e7c5d8ae0",
+      "src/game-engine/ruins/movement-runtime.ts": "403625e4498012d9c3f2e6069adea082c75edafbe0231e7d7e3ff290a279a63f",
+      "src/game-engine/ruins/physical-supply.ts": "eb67012b714324775d835d9af461ae89f56768997cf511d79ca7d64f263a95cf",
+      "src/game-engine/ruins/printed-effect-runtime.ts": "a1507a7be5b6ae5d2382b516a82c40e5ba3a656f783fe0b2ee62b97203d50954",
+      "src/game-engine/ruins/room-runtime.ts": "a7e9b58f72a6b6162a117818403f9342cf289471efd850796315876cfed9aadc",
+      "src/game-engine/ruins/source-registry.ts": "0269be2c31b92087dfbe2934025b2756ef3997f82fc493ea104f20dc39e00d85",
+      "src/game-engine/ruins/stance-shuffle.ts": "be5f2e7062ba12ee01973820a03082744f334e4a5a88e487df4cd21fa3b2d57f",
+      "src/game-engine/rules/ruins-v6.ts": "42e3b71d832cbc041162346de4e51057af7cbe612a95f1ec484725e98bbfbed7",
+      "src/game-engine/trinkets/source-deck.ts": "7d65bd9e331548d48469fd42a7a6a175289bf12ea88234cf1fdcc9979f859913",
+      "src/game-engine/trinkets/draw-trinket.ts": "8cd48a75405ac806ffabd0c29b74f00f015aebe99d40fe206e6adbdd9c9019c5",
+      "src/game-engine/trinkets/acquire-trinket.ts": "c5a7ba805d6ba28c164880e76f0938e7293ea6740f6af22d619d3b0a4c1a832d",
+      "src/game-engine/save.ts": "ad0f4476e1d9344cdf2a5d50042ab55ba65d0a3b0a0b814bc26e6e9d4d0e6c48",
+      "src/types/ruins-executable.ts": "6f808e5a8935fcb579e184df248247f846efc4249bb10490732ca1c2974f3f77",
+      "src/types/index.ts": "db689bb287eb542f21615699ebea7519f8319910588d6a202a022c7e628514e8",
+      "scripts/audit/c1c32r2c-r-final-blockers.ts": "b0df8680a8b6f2ee24036a095bccae0a5533c5394227c1877e7ac884983aecb7",
+      "scripts/audit/run-c1c32r2c-r-validation.mjs": "bed395c6e312c5cf9a46f9303f271afb696f3f634b80d6e8837ec2f246aff94c",
+      "package.json": "396fa6fce6570c9229d3fa0fece1aa68a88286eae9db24972bc31f8119f29567",
+      "docs/data/complete-edition/c1c32r2c-r-large-mixed-layout-review.json": "e0f1f4d45af9deee404e60f091f85247bb894e1601e4dd422064415efb3bd129",
+      "docs/data/complete-edition/c1c32r2c-r-large-stance-shuffle-review.json": "89d5caf0a1585de0d136298b29663a951bca7074bc1eb6ba5ad0287c08fc44f9",
+      "docs/data/complete-edition/c1c32r2c-r-ruleset-v6.json": "c6297c324fb64e16936fd1c54f25421da802e78a6e2171e5b23fe7c016dcd73b",
+      "docs/data/complete-edition/c1c32r2c-r-ruleset-migration.json": "c714007955414f884b94f2b955bbbc438896f60958717ac08277e227ad13dc65",
+      "docs/data/complete-edition/c1c32r2c-r-source-trinket-deck-contract.json": "620c2fdeae58fc009e1b8b39af35bc820f8a80f33b50e9fa246afc1c70fd0b22",
+      "docs/data/complete-edition/c1c32r2c-r-seed-scan-proof.json": "645369ca20afbb8fe5d053583ca57ccd0c6cd361ebb03174edd089abe10c71cd",
+      "src/components/trinkets/SourceTrinketRewards.tsx": "6aff280fb5eae8d328787452b8a2b46b3c171d48d345ac516512c149c4df015b",
+      "src/components/layout/GameShell.tsx": "263ca2f5ed0c58307a6e7ab3e57219030c272f236c1d31787a6447411503909c",
+      "src/audit/c1c32r2c-contract-blockers.test.ts": "3d201a7ffbda049a7006e7731dccd4c1d6e0cdce837c7a963488dcf04eafef0a",
+      "src/audit/c1c32r2c-graveyard-real-command.test.ts": "69c093b5cfaedf492b468bb3325f5ab1ab1a381392152c7d06ca09e3b1293735",
+      "src/audit/c1c32r2c-large-save.test.ts": "c7a6de7a31d82baa30f1b6daaa99a3ccae1c6d6ce8b68ec2ef1e376c615bbd63",
+      "src/audit/c1c32r2c-monster-matrix.test.ts": "742e2660bfac3daabcddaafc4c1e78b49f6768f78c08ba40523f1433d8476cf1",
+      "src/audit/c1c32r2c-movement-progress.test.ts": "cd026c81b22d1e797993286897ec9ebc41504834122b3220fb4f9b8f04220a72",
+      "src/audit/c1c32r2c-printed-effects.test.ts": "cf0c1b7d0c9afb7a9f49f626c41aef68f91644797f0bfc0b085dab579d88e4a0",
+      "src/audit/c1c32r2c-room-rules.test.ts": "8593cd562b04947b16479effc77573b24b06e8d76d1b7b33f2872b36587de973",
+      "src/audit/c1c32r2c-ruins-production-executor.test.ts": "e53afb758d3f8eeed4f0617c31ccb813a0fc484061012c2361df103f50e9f33a",
+      "src/audit/c1c32r2c-summon-ledgers.test.ts": "9dbc782a8c8ea747323b9b1574794707bdb460abf33baeaf653ea67731c15d7c",
+      "src/audit/ruins-final-runtime-blockers.test.ts": "3c5210b564e7ae346ab335747776130612e3009c732cc8ddac8ccbd5bb5b2c4a"
+    },
+    "fullResultHash": "0d38409f5328ca58e426eaae3637b9f53c5df45119624defc46b598c30cc5b0e",
+    "regressionHash": "8ec204dc31bf7303e3b78f55b4c81af74afc85b9e5917271f7283630217d70ef"
+  }
+}

@@ -1,0 +1,1427 @@
+{
+  "phase": "11A.6-C3B",
+  "definitionVersion": "C3B-MONSTER-DEFINITIONS-v1",
+  "sourceContentVersion": "C3A-MONSTER-CONTENT-v1",
+  "issueCount": 79,
+  "issues": [
+    {
+      "id": "C3A-0001",
+      "monsterId": "bone-soldier",
+      "category": "LEGACY_DATA_MISMATCH",
+      "field": "speed",
+      "reason": "Accepted historical value differs from official print; frozen rule sets remain unchanged.",
+      "status": "DEFERRED",
+      "sourceStatus": "NOT_APPLICABLE",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "historicalValue": 0,
+      "officialValue": 1,
+      "affectedRulesets": [
+        "C1C28-DIGITAL-DEFAULT-v1",
+        "C1C31-DIGITAL-DEFAULT-v2"
+      ],
+      "disposition": "LEGACY_MISMATCH_PRESERVED",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0002",
+      "monsterId": "bone-soldier",
+      "category": "LEGACY_DATA_MISMATCH",
+      "field": "dodge",
+      "reason": "Accepted historical value differs from official print; frozen rule sets remain unchanged.",
+      "status": "DEFERRED",
+      "sourceStatus": "NOT_APPLICABLE",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "historicalValue": 1,
+      "officialValue": 0,
+      "affectedRulesets": [
+        "C1C28-DIGITAL-DEFAULT-v1",
+        "C1C31-DIGITAL-DEFAULT-v2"
+      ],
+      "disposition": "LEGACY_MISMATCH_PRESERVED",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0003",
+      "monsterId": "bone-spearman",
+      "category": "LEGACY_DATA_MISMATCH",
+      "field": "speed",
+      "reason": "Accepted historical value differs from official print; frozen rule sets remain unchanged.",
+      "status": "DEFERRED",
+      "sourceStatus": "NOT_APPLICABLE",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "historicalValue": 1,
+      "officialValue": 2,
+      "affectedRulesets": [
+        "C1C28-DIGITAL-DEFAULT-v1",
+        "C1C31-DIGITAL-DEFAULT-v2"
+      ],
+      "disposition": "LEGACY_MISMATCH_PRESERVED",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0004",
+      "monsterId": "bone-spearman",
+      "category": "LEGACY_DATA_MISMATCH",
+      "field": "dodge",
+      "reason": "Accepted historical value differs from official print; frozen rule sets remain unchanged.",
+      "status": "DEFERRED",
+      "sourceStatus": "NOT_APPLICABLE",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "historicalValue": 2,
+      "officialValue": 1,
+      "affectedRulesets": [
+        "C1C28-DIGITAL-DEFAULT-v1",
+        "C1C31-DIGITAL-DEFAULT-v2"
+      ],
+      "disposition": "LEGACY_MISMATCH_PRESERVED",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0005",
+      "monsterId": "bone-rabble",
+      "category": "LEGACY_DATA_MISMATCH",
+      "field": "speed",
+      "reason": "Accepted historical value differs from official print; frozen rule sets remain unchanged.",
+      "status": "DEFERRED",
+      "sourceStatus": "NOT_APPLICABLE",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "historicalValue": 0,
+      "officialValue": 1,
+      "affectedRulesets": [
+        "C1C28-DIGITAL-DEFAULT-v1",
+        "C1C31-DIGITAL-DEFAULT-v2"
+      ],
+      "disposition": "LEGACY_MISMATCH_PRESERVED",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0006",
+      "monsterId": "bone-rabble",
+      "category": "LEGACY_DATA_MISMATCH",
+      "field": "dodge",
+      "reason": "Accepted historical value differs from official print; frozen rule sets remain unchanged.",
+      "status": "DEFERRED",
+      "sourceStatus": "NOT_APPLICABLE",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "historicalValue": 1,
+      "officialValue": 0,
+      "affectedRulesets": [
+        "C1C28-DIGITAL-DEFAULT-v1",
+        "C1C31-DIGITAL-DEFAULT-v2"
+      ],
+      "disposition": "LEGACY_MISMATCH_PRESERVED",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0007",
+      "monsterId": "ascended-brawler",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "ascended-brawler:front:824ca31e:p63",
+        "ascended-brawler:back:12967a89:p63"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0008",
+      "monsterId": "ascended-witch",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "ascended-witch:front:824ca31e:p66",
+        "ascended-witch:back:12967a89:p66"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0009",
+      "monsterId": "rapturous-cultist",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "rapturous-cultist:front:824ca31e:p69",
+        "rapturous-cultist:back:12967a89:p69"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0010",
+      "monsterId": "cultist-priest",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "cultist-priest:front:824ca31e:p72",
+        "cultist-priest:back:12967a89:p72"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0011",
+      "monsterId": "malignant-growth",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "malignant-growth:front:824ca31e:p75",
+        "malignant-growth:back:12967a89:p75"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0012",
+      "monsterId": "flesh-hound",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "flesh-hound:front:824ca31e:p78",
+        "flesh-hound:back:12967a89:p78"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0013",
+      "monsterId": "polyp",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "polyp:front:824ca31e:p80",
+        "polyp:back:12967a89:p80"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0014",
+      "monsterId": "antibody",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "antibody:front:824ca31e:p83",
+        "antibody:back:12967a89:p83"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0015",
+      "monsterId": "defensive-growth",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "defensive-growth:front:824ca31e:p86",
+        "defensive-growth:back:12967a89:p86"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0016",
+      "monsterId": "manservant",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "manservant:front:a59736e6:p1",
+        "manservant:back:c1c8f14f:p1"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0017",
+      "monsterId": "esquire",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "esquire:front:a59736e6:p4",
+        "esquire:back:c1c8f14f:p4"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0018",
+      "monsterId": "supplicant",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "action-1.cardGlyphSemantic",
+      "reason": "Printed card glyph is preserved. Card-family dispatch/acquisition semantics are not promoted by C3A.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "supplicant:front:a59736e6:p7",
+        "supplicant:back:c1c8f14f:p7"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0019",
+      "monsterId": "supplicant",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "supplicant:front:a59736e6:p7",
+        "supplicant:back:c1c8f14f:p7"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0020",
+      "monsterId": "gatekeeper",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "gatekeeper:front:a59736e6:p10",
+        "gatekeeper:back:c1c8f14f:p10"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0021",
+      "monsterId": "sycophant",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "action-2.cardGlyphSemantic",
+      "reason": "Printed card glyph is preserved. Card-family dispatch/acquisition semantics are not promoted by C3A.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "sycophant:front:a59736e6:p13",
+        "sycophant:back:c1c8f14f:p13"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0022",
+      "monsterId": "sycophant",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "sycophant:front:a59736e6:p13",
+        "sycophant:back:c1c8f14f:p13"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0023",
+      "monsterId": "courtesan",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "action-3.cardGlyphSemantic",
+      "reason": "Printed card glyph is preserved. Card-family dispatch/acquisition semantics are not promoted by C3A.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "courtesan:front:a59736e6:p16",
+        "courtesan:back:c1c8f14f:p16"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0024",
+      "monsterId": "courtesan",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "courtesan:front:a59736e6:p16",
+        "courtesan:back:c1c8f14f:p16"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0025",
+      "monsterId": "chevalier",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "chevalier:front:a59736e6:p19",
+        "chevalier:back:c1c8f14f:p19"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0026",
+      "monsterId": "crocodillian",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "crocodillian:front:a59736e6:p22",
+        "crocodillian:back:c1c8f14f:p22",
+        "crocodillian:front:9ba480a4:p1"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0027",
+      "monsterId": "swine-chopper",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "swine-chopper:front:5db52473:p1",
+        "swine-chopper:back:53144850:p1"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0028",
+      "monsterId": "swine-slasher",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "swine-slasher:front:5db52473:p4",
+        "swine-slasher:back:53144850:p4"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0029",
+      "monsterId": "swine-wretch",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "swine-wretch:front:5db52473:p7",
+        "swine-wretch:back:53144850:p7"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0030",
+      "monsterId": "swine-drummer",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "swine-drummer:front:5db52473:p10",
+        "swine-drummer:back:53144850:p10"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0031",
+      "monsterId": "carrion-eater",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "carrion-eater:front:5db52473:p13",
+        "carrion-eater:back:53144850:p13"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0032",
+      "monsterId": "large-carrion-eater",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "large-carrion-eater:front:5db52473:p16",
+        "large-carrion-eater:back:53144850:p16",
+        "large-carrion-eater:front:7a2f0205:p8"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0033",
+      "monsterId": "swinetaur",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "swinetaur:front:5db52473:p17",
+        "swinetaur:back:53144850:p17",
+        "swinetaur:front:7a2f0205:p1"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0034",
+      "monsterId": "swine-skiver",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "swine-skiver:front:5db52473:p18",
+        "swine-skiver:back:53144850:p18"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0035",
+      "monsterId": "pelagic-shaman",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "pelagic-shaman:front:70bcc7ea:p1",
+        "pelagic-shaman:back:a0816394:p1"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0036",
+      "monsterId": "drowned-thrall",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "drowned-thrall:front:70bcc7ea:p4",
+        "drowned-thrall:back:a0816394:p4"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0037",
+      "monsterId": "pelagic-grouper",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "pelagic-grouper:front:70bcc7ea:p7",
+        "pelagic-grouper:back:a0816394:p7"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0038",
+      "monsterId": "deep-stinger",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "deep-stinger:front:70bcc7ea:p10",
+        "deep-stinger:back:a0816394:p10"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0039",
+      "monsterId": "sea-maggot",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "sea-maggot:front:70bcc7ea:p13",
+        "sea-maggot:back:a0816394:p13"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0040",
+      "monsterId": "pelagic-guardian",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "pelagic-guardian:front:70bcc7ea:p16",
+        "pelagic-guardian:back:a0816394:p16"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0041",
+      "monsterId": "uca-major",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "uca-major:front:70bcc7ea:p18",
+        "uca-major:back:a0816394:p18",
+        "uca-major:front:5f1a7f2a:p1",
+        "uca-major:front:5f1a7f2a:p2"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0042",
+      "monsterId": "squiffy-ghast",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "action-2.cardGlyphSemantic",
+      "reason": "Printed card glyph is preserved. Card-family dispatch/acquisition semantics are not promoted by C3A.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "squiffy-ghast:front:70bcc7ea:p20",
+        "squiffy-ghast:back:a0816394:p20"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0043",
+      "monsterId": "squiffy-ghast",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "squiffy-ghast:front:70bcc7ea:p20",
+        "squiffy-ghast:back:a0816394:p20"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0044",
+      "monsterId": "ectoplasm",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "ectoplasm:front:c1497248:p1",
+        "ectoplasm:back:9f3c63a2:p1"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0045",
+      "monsterId": "ectoplasm",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "summonTimingAndSupply",
+      "reason": "Printed summon identity and amount are retained; supply exhaustion, placement, and timing await a separate source/ruling review.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "ectoplasm:front:c1497248:p1",
+        "ectoplasm:back:9f3c63a2:p1"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0046",
+      "monsterId": "large-ectoplasm",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "large-ectoplasm:front:c1497248:p4",
+        "large-ectoplasm:back:9f3c63a2:p4",
+        "large-ectoplasm:front:d182afc6:p1",
+        "large-ectoplasm:front:d182afc6:p2"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0047",
+      "monsterId": "large-ectoplasm",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "summonTimingAndSupply",
+      "reason": "Printed summon identity and amount are retained; supply exhaustion, placement, and timing await a separate source/ruling review.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "large-ectoplasm:front:c1497248:p4",
+        "large-ectoplasm:back:9f3c63a2:p4",
+        "large-ectoplasm:front:d182afc6:p1",
+        "large-ectoplasm:front:d182afc6:p2"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0048",
+      "monsterId": "rabid-gnasher",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "rabid-gnasher:front:c1497248:p6",
+        "rabid-gnasher:back:9f3c63a2:p6"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0049",
+      "monsterId": "fungal-scratcher",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "fungal-scratcher:front:c1497248:p9",
+        "fungal-scratcher:back:9f3c63a2:p9"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0050",
+      "monsterId": "fungal-artillery",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "fungal-artillery:front:c1497248:p12",
+        "fungal-artillery:back:9f3c63a2:p12"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0051",
+      "monsterId": "crone",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "crone:front:c1497248:p15",
+        "crone:back:9f3c63a2:p15"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0052",
+      "monsterId": "unclean-giant",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "unclean-giant:front:c1497248:p17",
+        "unclean-giant:back:9f3c63a2:p17",
+        "unclean-giant:front:d182afc6:p3"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0053",
+      "monsterId": "hateful-virago",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "hateful-virago:front:c1497248:p18",
+        "hateful-virago:back:9f3c63a2:p18"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0054",
+      "monsterId": "farmhand-level-1",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "farmhand-level-1:front:487637b3:p1",
+        "farmhand-level-1:back:ba0a9520:p1"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0055",
+      "monsterId": "foreman-level-1",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "foreman-level-1:front:487637b3:p3",
+        "foreman-level-1:back:ba0a9520:p3"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0056",
+      "monsterId": "scarecrow-level-1",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "scarecrow-level-1:front:487637b3:p5",
+        "scarecrow-level-1:back:ba0a9520:p5"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0057",
+      "monsterId": "plow-horse-level-1",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "plow-horse-level-1:front:487637b3:p7",
+        "plow-horse-level-1:back:ba0a9520:p7",
+        "plow-horse-level-1:front:9b73199a:p1"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0058",
+      "monsterId": "crystalline-aberration-level-1",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "crystalline-aberration-level-1:front:487637b3:p8",
+        "crystalline-aberration-level-1:back:ba0a9520:p8"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0059",
+      "monsterId": "crystalline-aberration-level-1",
+      "category": "PHYSICAL_COPY_UNRESOLVED",
+      "field": "miniatureSupply",
+      "reason": "One printed deck-card face per level is counted here. Available summon/miniature supply remains SOURCE_UNRESOLVED under the frozen C1C38R1 contract; print page count cannot settle it.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "crystalline-aberration-level-1:front:487637b3:p8",
+        "crystalline-aberration-level-1:back:ba0a9520:p8"
+      ],
+      "disposition": "SOURCE_UNRESOLVED_PRESERVED",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0060",
+      "monsterId": "sleepers-herald-level-1",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "sleepers-herald-level-1:front:487637b3:p9",
+        "sleepers-herald-level-1:back:ba0a9520:p9"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0061",
+      "monsterId": "farmhand-level-2",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "farmhand-level-2:front:487637b3:p11",
+        "farmhand-level-2:back:ba0a9520:p11"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0062",
+      "monsterId": "foreman-level-2",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "foreman-level-2:front:487637b3:p13",
+        "foreman-level-2:back:ba0a9520:p13"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0063",
+      "monsterId": "scarecrow-level-2",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "scarecrow-level-2:front:487637b3:p15",
+        "scarecrow-level-2:back:ba0a9520:p15"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0064",
+      "monsterId": "plow-horse-level-2",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "plow-horse-level-2:front:487637b3:p17",
+        "plow-horse-level-2:back:ba0a9520:p17",
+        "plow-horse-level-2:front:9b73199a:p2"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0065",
+      "monsterId": "crystalline-aberration-level-2",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "crystalline-aberration-level-2:front:487637b3:p18",
+        "crystalline-aberration-level-2:back:ba0a9520:p18"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0066",
+      "monsterId": "crystalline-aberration-level-2",
+      "category": "PHYSICAL_COPY_UNRESOLVED",
+      "field": "miniatureSupply",
+      "reason": "One printed deck-card face per level is counted here. Available summon/miniature supply remains SOURCE_UNRESOLVED under the frozen C1C38R1 contract; print page count cannot settle it.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "crystalline-aberration-level-2:front:487637b3:p18",
+        "crystalline-aberration-level-2:back:ba0a9520:p18"
+      ],
+      "disposition": "SOURCE_UNRESOLVED_PRESERVED",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0067",
+      "monsterId": "sleepers-herald-level-2",
+      "category": "UNRESOLVED_EFFECT_SEMANTIC",
+      "field": "drawEligibleFromLevel",
+      "reason": "Printed level is captured. Eligibility/deck mixing across content sets is not inferred from card level.",
+      "status": "DEFERRED",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "sourceBindingIds": [
+        "sleepers-herald-level-2:front:487637b3:p19",
+        "sleepers-herald-level-2:back:ba0a9520:p19"
+      ],
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0068",
+      "monsterId": "bone-soldier",
+      "category": "LEGACY_DATA_MISMATCH",
+      "field": "maxHp/life",
+      "reason": "Phase 3 simplified prototype differs from official production content; prototype remains untouched.",
+      "status": "DEFERRED",
+      "sourceStatus": "NOT_APPLICABLE",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "historicalValue": 20,
+      "officialValue": 7,
+      "legacyPath": "src/data/monsters.ts",
+      "disposition": "LEGACY_MISMATCH_PRESERVED",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0069",
+      "monsterId": "bone-soldier",
+      "category": "LEGACY_DATA_MISMATCH",
+      "field": "speed",
+      "reason": "Phase 3 simplified prototype differs from official production content; prototype remains untouched.",
+      "status": "DEFERRED",
+      "sourceStatus": "NOT_APPLICABLE",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "historicalValue": 3,
+      "officialValue": 1,
+      "legacyPath": "src/data/monsters.ts",
+      "disposition": "LEGACY_MISMATCH_PRESERVED",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0070",
+      "monsterId": "bone-soldier",
+      "category": "LEGACY_DATA_MISMATCH",
+      "field": "skillsAndTargeting",
+      "reason": "Prototype skill names and simplified closest/random target rules are not the printed actions/tables. No runtime migration.",
+      "status": "DEFERRED",
+      "sourceStatus": "NOT_APPLICABLE",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "legacyPath": "src/data/monster-skills.ts",
+      "disposition": "LEGACY_MISMATCH_PRESERVED",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0071",
+      "monsterId": "bone-arbalist",
+      "category": "LEGACY_DATA_MISMATCH",
+      "field": "maxHp/life",
+      "reason": "Phase 3 simplified prototype differs from official production content; prototype remains untouched.",
+      "status": "DEFERRED",
+      "sourceStatus": "NOT_APPLICABLE",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "historicalValue": 14,
+      "officialValue": 11,
+      "legacyPath": "src/data/monsters.ts",
+      "disposition": "LEGACY_MISMATCH_PRESERVED",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0072",
+      "monsterId": "bone-arbalist",
+      "category": "LEGACY_DATA_MISMATCH",
+      "field": "speed",
+      "reason": "Phase 3 simplified prototype differs from official production content; prototype remains untouched.",
+      "status": "DEFERRED",
+      "sourceStatus": "NOT_APPLICABLE",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "historicalValue": 5,
+      "officialValue": 2,
+      "legacyPath": "src/data/monsters.ts",
+      "disposition": "LEGACY_MISMATCH_PRESERVED",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0073",
+      "monsterId": "bone-arbalist",
+      "category": "LEGACY_DATA_MISMATCH",
+      "field": "skillsAndTargeting",
+      "reason": "Prototype skill names and simplified closest/random target rules are not the printed actions/tables. No runtime migration.",
+      "status": "DEFERRED",
+      "sourceStatus": "NOT_APPLICABLE",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "legacyPath": "src/data/monster-skills.ts",
+      "disposition": "LEGACY_MISMATCH_PRESERVED",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0074",
+      "monsterId": "bone-courtier",
+      "category": "LEGACY_DATA_MISMATCH",
+      "field": "maxHp/life",
+      "reason": "Phase 3 simplified prototype differs from official production content; prototype remains untouched.",
+      "status": "DEFERRED",
+      "sourceStatus": "NOT_APPLICABLE",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "historicalValue": 18,
+      "officialValue": 7,
+      "legacyPath": "src/data/monsters.ts",
+      "disposition": "LEGACY_MISMATCH_PRESERVED",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0075",
+      "monsterId": "bone-courtier",
+      "category": "LEGACY_DATA_MISMATCH",
+      "field": "speed",
+      "reason": "Phase 3 simplified prototype differs from official production content; prototype remains untouched.",
+      "status": "DEFERRED",
+      "sourceStatus": "NOT_APPLICABLE",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "historicalValue": 4,
+      "officialValue": 3,
+      "legacyPath": "src/data/monsters.ts",
+      "disposition": "LEGACY_MISMATCH_PRESERVED",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0076",
+      "monsterId": "bone-courtier",
+      "category": "LEGACY_DATA_MISMATCH",
+      "field": "skillsAndTargeting",
+      "reason": "Prototype skill names and simplified closest/random target rules are not the printed actions/tables. No runtime migration.",
+      "status": "DEFERRED",
+      "sourceStatus": "NOT_APPLICABLE",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "legacyPath": "src/data/monster-skills.ts",
+      "disposition": "LEGACY_MISMATCH_PRESERVED",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0077",
+      "monsterId": null,
+      "category": "RUNTIME_NOT_IMPLEMENTED",
+      "field": "generalizedMonsterRuntime",
+      "reason": "C3A exports content only. Existing accepted Ruins runtime is preserved; generalized ordinary Monster execution is a C3C successor task.",
+      "status": "DEFERRED",
+      "sourceStatus": "NOT_APPLICABLE",
+      "blocksC3A": false,
+      "recommendedPhase": "C3C",
+      "disposition": "CARRIED_TO_C3C",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    },
+    {
+      "id": "C3A-0078",
+      "monsterId": null,
+      "category": "PARTIAL_SOURCE",
+      "field": "developmentCI",
+      "reason": "C3-INFRA-01: Current branch-push workflow runs historical Production release validation. Split a development fast gate in the tooling workstream; no push or CI rewrite is needed for this local content baseline.",
+      "status": "DEFERRED",
+      "sourceStatus": "NOT_APPLICABLE",
+      "blocksC3A": false,
+      "recommendedPhase": "INFRA",
+      "disposition": "RESOLVED_INFRASTRUCTURE",
+      "c3bStatus": "RESOLVED",
+      "resolution": "C3-INFRA-01: main-only full release triggers and non-main development Fast Gate."
+    },
+    {
+      "id": "C3A-0079",
+      "monsterId": null,
+      "category": "DEFERRED_MANUAL_VALIDATION",
+      "field": "repeatedCopyGlyphVariance",
+      "reason": "Representative new front faces and large panels were visually transcribed. Repeated deck pages bind printed identity and copy count; full glyph/art variance review of every repeated copy is deferred. Text equality alone does not prove graphical equality.",
+      "status": "DEFERRED",
+      "sourceStatus": "DEFERRED_MANUAL_VALIDATION",
+      "blocksC3A": false,
+      "recommendedPhase": "C3B",
+      "disposition": "CARRIED_TO_MANUAL_VALIDATION",
+      "c3bStatus": "PRESERVED",
+      "resolution": null
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C38R1",
+  "baseline": "dcf017cb2065440251caad8d31075b99bc6355e0",
+  "intakeDate": "2026-10-02",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "contractVersion": "C1C38R1-OFFICIAL-INTAKE-v1",
+  "runtimeImplemented": false,
+  "runtimeImplementationAuthorized": false,
+  "productionReady": false,
+  "playerRouteEnabled": false,
+  "gateAPassed": false,
+  "C1C39Allowed": false,
+  "requests": [
+    {
+      "sourceGroup": "THING_SUMMON_AND_SHARED_PHYSICAL_SUPPLY",
+      "blockedFields": [
+        "summon.eligiblePool",
+        "summon.otherEligibleMonsters",
+        "summon.poolLevel",
+        "summon.duplicateDefinitions",
+        "summon.countAlgorithm",
+        "summon.mandatoryAberrationSelection",
+        "summon.exactlyOneVacancy",
+        "summon.multipleVacancies",
+        "summon.noAberrationSupply",
+        "summon.alreadyPresentAberration",
+        "summon.multipleAberrationCopies",
+        "summon.priorityAndOverflow",
+        "summon.activeCopiesReduceSupply",
+        "summon.copyReturnDestination",
+        "physical.aberrationCopies",
+        "physical.otherMonsterCopies",
+        "physical.specialTokens",
+        "aberration.physicalCopySupply",
+        "aberration.otherPoolMembership"
+      ],
+      "officialSourceNeeded": "Official printed Thing summon-pool/setup/component sheet establishing eligible definitions and Levels, finite Level I copies, shared miniatures, selection/exhaustion, active-copy and return rules; an official printed source that resolves the rulebook/Ability summon wording and token census scope.",
+      "repositorySourcesAlreadyReviewed": [
+        "COM-RULES pp2–8",
+        "COM-ABILITY p4",
+        "COM-MONSTERS pp8,18",
+        "COM-BOX p2",
+        "core summoning p31",
+        "complete repository/archive inventory"
+      ],
+      "externalOfficialSourcesReviewed": [
+        {
+          "date": "2026-10-02",
+          "location": "https://mythicgames.net/",
+          "result": "Redirected to unrelated skilletruf.net gambling content; rejected. No official board-game file acquired.",
+          "authority": "NONE"
+        },
+        {
+          "date": "2026-10-02",
+          "location": "https://www.darkestdungeon.com/",
+          "result": "Domain-restricted search for publisher board-game/files yielded no usable official supplement. No download.",
+          "authority": "NONE"
+        }
+      ],
+      "whyProjectRulingCannotReplaceIt": "Missing eligible physical content and finite ownership supply cannot be invented as a digital choice."
+    },
+    {
+      "sourceGroup": "STANDALONE_ENDING_ESCAPE_AND_REWARD",
+      "blockedFields": [
+        "encounter.reward",
+        "encounter.escapeOrFailure",
+        "encounter.cleanup"
+      ],
+      "officialSourceNeeded": "Official printed standalone Boss Fight ending/retreat/reward/cleanup instructions for Thing Room 3, including chest markers and return destinations for surviving summons.",
+      "repositorySourcesAlreadyReviewed": [
+        "COM-RULES pp4,6,7,8",
+        "COM-ROOM3 p2",
+        "COM-BOX p2",
+        "core p16,24,31"
+      ],
+      "externalOfficialSourcesReviewed": [
+        {
+          "date": "2026-10-02",
+          "location": "https://mythicgames.net/",
+          "result": "Redirected to unrelated skilletruf.net gambling content; rejected. No official board-game file acquired.",
+          "authority": "NONE"
+        },
+        {
+          "date": "2026-10-02",
+          "location": "https://www.darkestdungeon.com/",
+          "result": "Domain-restricted search for publisher board-game/files yielded no usable official supplement. No download.",
+          "authority": "NONE"
+        }
+      ],
+      "whyProjectRulingCannotReplaceIt": "Victory trigger is closed, but physical rewards, escape and cleanup instructions cannot be substituted by campaign Boss architecture."
+    },
+    {
+      "sourceGroup": "GENERIC_COMBAT_DEFAULTS_AND_TRIGGER_BOUNDARY",
+      "blockedFields": [
+        "actor.unprintedResistanceDefaults",
+        "skills.returnExclusiveTrigger"
+      ],
+      "officialSourceNeeded": "Official printed symbol-default rule and complete Thing trigger boundary (if such printed material exists). Keep exclusive trigger conservative unless officially established.",
+      "repositorySourcesAlreadyReviewed": [
+        "core pp19–24",
+        "COM-RULES p8",
+        "COM-ABILITY p4",
+        "COM-BATTLE p4"
+      ],
+      "externalOfficialSourcesReviewed": [
+        {
+          "date": "2026-10-02",
+          "location": "https://mythicgames.net/",
+          "result": "Redirected to unrelated skilletruf.net gambling content; rejected. No official board-game file acquired.",
+          "authority": "NONE"
+        },
+        {
+          "date": "2026-10-02",
+          "location": "https://www.darkestdungeon.com/",
+          "result": "Domain-restricted search for publisher board-game/files yielded no usable official supplement. No download.",
+          "authority": "NONE"
+        }
+      ],
+      "whyProjectRulingCannotReplaceIt": "R1 may document an unapproved digital candidate, but may not claim absence/default/exclusivity as an official rule."
+    }
+  ],
+  "sourceAcquisitionRequired": true,
+  "exactDocumentTitlesNotInvented": true,
+  "unresolvedFieldCoverage": [
+    "actor.unprintedResistanceDefaults",
+    "skills.returnExclusiveTrigger",
+    "encounter.reward",
+    "encounter.escapeOrFailure",
+    "encounter.cleanup",
+    "summon.eligiblePool",
+    "summon.otherEligibleMonsters",
+    "summon.poolLevel",
+    "summon.duplicateDefinitions",
+    "summon.countAlgorithm",
+    "summon.mandatoryAberrationSelection",
+    "summon.exactlyOneVacancy",
+    "summon.multipleVacancies",
+    "summon.noAberrationSupply",
+    "summon.alreadyPresentAberration",
+    "summon.multipleAberrationCopies",
+    "summon.priorityAndOverflow",
+    "summon.activeCopiesReduceSupply",
+    "summon.copyReturnDestination",
+    "physical.aberrationCopies",
+    "physical.otherMonsterCopies",
+    "physical.specialTokens",
+    "aberration.physicalCopySupply",
+    "aberration.otherPoolMembership"
+  ]
+}

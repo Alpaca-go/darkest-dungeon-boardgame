@@ -1,0 +1,589 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C31",
+  "baselineHead": "2ab674d7d8c15dbbd7367bb3b2011243facb5517",
+  "ruleSourcePolicyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1",
+  "externalSourceUsed": false,
+  "syntheticFallbackAllowed": false,
+  "reviewId": "C1C31-HERO-DODGE-EXPLICIT-TABLE-REVIEW",
+  "status": "EXPLICIT_DIGITAL_RULING_REVIEW_REQUIRED",
+  "c1c28RulingChanged": false,
+  "newProjectRulingActivated": false,
+  "proposedVersion": "C1C31-DIGITAL-DEFAULT-v2",
+  "approvedRuleSetVersion": "C1C28-DIGITAL-DEFAULT-v1",
+  "sourceReview": {
+    "reviewedPages": [
+      10,
+      11,
+      16,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      29,
+      38,
+      42
+    ],
+    "rulebook": {
+      "path": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "region": "Locked official core rulebook"
+    },
+    "dodgeMentionPages": [
+      10,
+      19,
+      20,
+      22,
+      24,
+      27,
+      29
+    ],
+    "conclusion": "These locked rulebook examples bind three Level I pairs. No reviewed locked printed Hero board binds the remaining reachable pairs. Generic Dodge/level-up rules do not specify those numbers.",
+    "boneStanceConclusion": "Printed cluster mapping closes the eight earlier null fields without any Bone Stance project ruling."
+  },
+  "rulingRequests": [
+    {
+      "rulingId": "C1C31-DODGE-CRUSADER-L2",
+      "requiredPair": "crusader:2",
+      "canonicalStatus": "SOURCE_UNRESOLVED",
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "status": "DRAFT_REVIEW_REQUIRED",
+      "proposedDodge": 0,
+      "proposedRuleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "inherits": "C1C28-DIGITAL-DEFAULT-v1",
+      "rationale": "Explicit conservative no-evasion digital value for this pair only; no claim of printed accuracy, no array default and no Level I inheritance.",
+      "riskClassification": "HIGH_COMBAT_BALANCE",
+      "risk": "Unverified zero Dodge changes hit probability, deaths and resource consumption; locked evidence cannot determine the class/level value.",
+      "affectedRuntimePaths": [
+        "Boss multi-Hero attack",
+        "Bone turn",
+        "incoming Trinket window",
+        "production selector dependency gate"
+      ],
+      "saveReplayImpact": "Persist this resolved pair and v2 provenance in attack continuations/checkpoint bindings. Never reroll after reload.",
+      "migrationImpact": "No silent v1 upgrade. Existing v1 saves load with v1; activation would require explicit migration metadata and tests.",
+      "futureOverrideAllowed": true
+    },
+    {
+      "rulingId": "C1C31-DODGE-CRUSADER-L3",
+      "requiredPair": "crusader:3",
+      "canonicalStatus": "SOURCE_UNRESOLVED",
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "status": "DRAFT_REVIEW_REQUIRED",
+      "proposedDodge": 0,
+      "proposedRuleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "inherits": "C1C28-DIGITAL-DEFAULT-v1",
+      "rationale": "Explicit conservative no-evasion digital value for this pair only; no claim of printed accuracy, no array default and no Level I inheritance.",
+      "riskClassification": "HIGH_COMBAT_BALANCE",
+      "risk": "Unverified zero Dodge changes hit probability, deaths and resource consumption; locked evidence cannot determine the class/level value.",
+      "affectedRuntimePaths": [
+        "Boss multi-Hero attack",
+        "Bone turn",
+        "incoming Trinket window",
+        "production selector dependency gate"
+      ],
+      "saveReplayImpact": "Persist this resolved pair and v2 provenance in attack continuations/checkpoint bindings. Never reroll after reload.",
+      "migrationImpact": "No silent v1 upgrade. Existing v1 saves load with v1; activation would require explicit migration metadata and tests.",
+      "futureOverrideAllowed": true
+    },
+    {
+      "rulingId": "C1C31-DODGE-VESTAL-L1",
+      "requiredPair": "vestal:1",
+      "canonicalStatus": "SOURCE_UNRESOLVED",
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "status": "DRAFT_REVIEW_REQUIRED",
+      "proposedDodge": 0,
+      "proposedRuleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "inherits": "C1C28-DIGITAL-DEFAULT-v1",
+      "rationale": "Explicit conservative no-evasion digital value for this pair only; no claim of printed accuracy, no array default and no Level I inheritance.",
+      "riskClassification": "HIGH_COMBAT_BALANCE",
+      "risk": "Unverified zero Dodge changes hit probability, deaths and resource consumption; locked evidence cannot determine the class/level value.",
+      "affectedRuntimePaths": [
+        "Boss multi-Hero attack",
+        "Bone turn",
+        "incoming Trinket window",
+        "production selector dependency gate"
+      ],
+      "saveReplayImpact": "Persist this resolved pair and v2 provenance in attack continuations/checkpoint bindings. Never reroll after reload.",
+      "migrationImpact": "No silent v1 upgrade. Existing v1 saves load with v1; activation would require explicit migration metadata and tests.",
+      "futureOverrideAllowed": true
+    },
+    {
+      "rulingId": "C1C31-DODGE-VESTAL-L2",
+      "requiredPair": "vestal:2",
+      "canonicalStatus": "SOURCE_UNRESOLVED",
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "status": "DRAFT_REVIEW_REQUIRED",
+      "proposedDodge": 0,
+      "proposedRuleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "inherits": "C1C28-DIGITAL-DEFAULT-v1",
+      "rationale": "Explicit conservative no-evasion digital value for this pair only; no claim of printed accuracy, no array default and no Level I inheritance.",
+      "riskClassification": "HIGH_COMBAT_BALANCE",
+      "risk": "Unverified zero Dodge changes hit probability, deaths and resource consumption; locked evidence cannot determine the class/level value.",
+      "affectedRuntimePaths": [
+        "Boss multi-Hero attack",
+        "Bone turn",
+        "incoming Trinket window",
+        "production selector dependency gate"
+      ],
+      "saveReplayImpact": "Persist this resolved pair and v2 provenance in attack continuations/checkpoint bindings. Never reroll after reload.",
+      "migrationImpact": "No silent v1 upgrade. Existing v1 saves load with v1; activation would require explicit migration metadata and tests.",
+      "futureOverrideAllowed": true
+    },
+    {
+      "rulingId": "C1C31-DODGE-VESTAL-L3",
+      "requiredPair": "vestal:3",
+      "canonicalStatus": "SOURCE_UNRESOLVED",
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "status": "DRAFT_REVIEW_REQUIRED",
+      "proposedDodge": 0,
+      "proposedRuleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "inherits": "C1C28-DIGITAL-DEFAULT-v1",
+      "rationale": "Explicit conservative no-evasion digital value for this pair only; no claim of printed accuracy, no array default and no Level I inheritance.",
+      "riskClassification": "HIGH_COMBAT_BALANCE",
+      "risk": "Unverified zero Dodge changes hit probability, deaths and resource consumption; locked evidence cannot determine the class/level value.",
+      "affectedRuntimePaths": [
+        "Boss multi-Hero attack",
+        "Bone turn",
+        "incoming Trinket window",
+        "production selector dependency gate"
+      ],
+      "saveReplayImpact": "Persist this resolved pair and v2 provenance in attack continuations/checkpoint bindings. Never reroll after reload.",
+      "migrationImpact": "No silent v1 upgrade. Existing v1 saves load with v1; activation would require explicit migration metadata and tests.",
+      "futureOverrideAllowed": true
+    },
+    {
+      "rulingId": "C1C31-DODGE-HIGHWAYMAN-L2",
+      "requiredPair": "highwayman:2",
+      "canonicalStatus": "SOURCE_UNRESOLVED",
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "status": "DRAFT_REVIEW_REQUIRED",
+      "proposedDodge": 0,
+      "proposedRuleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "inherits": "C1C28-DIGITAL-DEFAULT-v1",
+      "rationale": "Explicit conservative no-evasion digital value for this pair only; no claim of printed accuracy, no array default and no Level I inheritance.",
+      "riskClassification": "HIGH_COMBAT_BALANCE",
+      "risk": "Unverified zero Dodge changes hit probability, deaths and resource consumption; locked evidence cannot determine the class/level value.",
+      "affectedRuntimePaths": [
+        "Boss multi-Hero attack",
+        "Bone turn",
+        "incoming Trinket window",
+        "production selector dependency gate"
+      ],
+      "saveReplayImpact": "Persist this resolved pair and v2 provenance in attack continuations/checkpoint bindings. Never reroll after reload.",
+      "migrationImpact": "No silent v1 upgrade. Existing v1 saves load with v1; activation would require explicit migration metadata and tests.",
+      "futureOverrideAllowed": true
+    },
+    {
+      "rulingId": "C1C31-DODGE-HIGHWAYMAN-L3",
+      "requiredPair": "highwayman:3",
+      "canonicalStatus": "SOURCE_UNRESOLVED",
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "status": "DRAFT_REVIEW_REQUIRED",
+      "proposedDodge": 0,
+      "proposedRuleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "inherits": "C1C28-DIGITAL-DEFAULT-v1",
+      "rationale": "Explicit conservative no-evasion digital value for this pair only; no claim of printed accuracy, no array default and no Level I inheritance.",
+      "riskClassification": "HIGH_COMBAT_BALANCE",
+      "risk": "Unverified zero Dodge changes hit probability, deaths and resource consumption; locked evidence cannot determine the class/level value.",
+      "affectedRuntimePaths": [
+        "Boss multi-Hero attack",
+        "Bone turn",
+        "incoming Trinket window",
+        "production selector dependency gate"
+      ],
+      "saveReplayImpact": "Persist this resolved pair and v2 provenance in attack continuations/checkpoint bindings. Never reroll after reload.",
+      "migrationImpact": "No silent v1 upgrade. Existing v1 saves load with v1; activation would require explicit migration metadata and tests.",
+      "futureOverrideAllowed": true
+    },
+    {
+      "rulingId": "C1C31-DODGE-HELLION-L2",
+      "requiredPair": "hellion:2",
+      "canonicalStatus": "SOURCE_UNRESOLVED",
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "status": "DRAFT_REVIEW_REQUIRED",
+      "proposedDodge": 0,
+      "proposedRuleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "inherits": "C1C28-DIGITAL-DEFAULT-v1",
+      "rationale": "Explicit conservative no-evasion digital value for this pair only; no claim of printed accuracy, no array default and no Level I inheritance.",
+      "riskClassification": "HIGH_COMBAT_BALANCE",
+      "risk": "Unverified zero Dodge changes hit probability, deaths and resource consumption; locked evidence cannot determine the class/level value.",
+      "affectedRuntimePaths": [
+        "Boss multi-Hero attack",
+        "Bone turn",
+        "incoming Trinket window",
+        "production selector dependency gate"
+      ],
+      "saveReplayImpact": "Persist this resolved pair and v2 provenance in attack continuations/checkpoint bindings. Never reroll after reload.",
+      "migrationImpact": "No silent v1 upgrade. Existing v1 saves load with v1; activation would require explicit migration metadata and tests.",
+      "futureOverrideAllowed": true
+    },
+    {
+      "rulingId": "C1C31-DODGE-HELLION-L3",
+      "requiredPair": "hellion:3",
+      "canonicalStatus": "SOURCE_UNRESOLVED",
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "status": "DRAFT_REVIEW_REQUIRED",
+      "proposedDodge": 0,
+      "proposedRuleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "inherits": "C1C28-DIGITAL-DEFAULT-v1",
+      "rationale": "Explicit conservative no-evasion digital value for this pair only; no claim of printed accuracy, no array default and no Level I inheritance.",
+      "riskClassification": "HIGH_COMBAT_BALANCE",
+      "risk": "Unverified zero Dodge changes hit probability, deaths and resource consumption; locked evidence cannot determine the class/level value.",
+      "affectedRuntimePaths": [
+        "Boss multi-Hero attack",
+        "Bone turn",
+        "incoming Trinket window",
+        "production selector dependency gate"
+      ],
+      "saveReplayImpact": "Persist this resolved pair and v2 provenance in attack continuations/checkpoint bindings. Never reroll after reload.",
+      "migrationImpact": "No silent v1 upgrade. Existing v1 saves load with v1; activation would require explicit migration metadata and tests.",
+      "futureOverrideAllowed": true
+    },
+    {
+      "rulingId": "C1C31-DODGE-LEPER-L1",
+      "requiredPair": "leper:1",
+      "canonicalStatus": "SOURCE_UNRESOLVED",
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "status": "DRAFT_REVIEW_REQUIRED",
+      "proposedDodge": 0,
+      "proposedRuleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "inherits": "C1C28-DIGITAL-DEFAULT-v1",
+      "rationale": "Explicit conservative no-evasion digital value for this pair only; no claim of printed accuracy, no array default and no Level I inheritance.",
+      "riskClassification": "HIGH_COMBAT_BALANCE",
+      "risk": "Unverified zero Dodge changes hit probability, deaths and resource consumption; locked evidence cannot determine the class/level value.",
+      "affectedRuntimePaths": [
+        "Boss multi-Hero attack",
+        "Bone turn",
+        "incoming Trinket window",
+        "production selector dependency gate"
+      ],
+      "saveReplayImpact": "Persist this resolved pair and v2 provenance in attack continuations/checkpoint bindings. Never reroll after reload.",
+      "migrationImpact": "No silent v1 upgrade. Existing v1 saves load with v1; activation would require explicit migration metadata and tests.",
+      "futureOverrideAllowed": true
+    },
+    {
+      "rulingId": "C1C31-DODGE-LEPER-L2",
+      "requiredPair": "leper:2",
+      "canonicalStatus": "SOURCE_UNRESOLVED",
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "status": "DRAFT_REVIEW_REQUIRED",
+      "proposedDodge": 0,
+      "proposedRuleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "inherits": "C1C28-DIGITAL-DEFAULT-v1",
+      "rationale": "Explicit conservative no-evasion digital value for this pair only; no claim of printed accuracy, no array default and no Level I inheritance.",
+      "riskClassification": "HIGH_COMBAT_BALANCE",
+      "risk": "Unverified zero Dodge changes hit probability, deaths and resource consumption; locked evidence cannot determine the class/level value.",
+      "affectedRuntimePaths": [
+        "Boss multi-Hero attack",
+        "Bone turn",
+        "incoming Trinket window",
+        "production selector dependency gate"
+      ],
+      "saveReplayImpact": "Persist this resolved pair and v2 provenance in attack continuations/checkpoint bindings. Never reroll after reload.",
+      "migrationImpact": "No silent v1 upgrade. Existing v1 saves load with v1; activation would require explicit migration metadata and tests.",
+      "futureOverrideAllowed": true
+    },
+    {
+      "rulingId": "C1C31-DODGE-LEPER-L3",
+      "requiredPair": "leper:3",
+      "canonicalStatus": "SOURCE_UNRESOLVED",
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "status": "DRAFT_REVIEW_REQUIRED",
+      "proposedDodge": 0,
+      "proposedRuleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "inherits": "C1C28-DIGITAL-DEFAULT-v1",
+      "rationale": "Explicit conservative no-evasion digital value for this pair only; no claim of printed accuracy, no array default and no Level I inheritance.",
+      "riskClassification": "HIGH_COMBAT_BALANCE",
+      "risk": "Unverified zero Dodge changes hit probability, deaths and resource consumption; locked evidence cannot determine the class/level value.",
+      "affectedRuntimePaths": [
+        "Boss multi-Hero attack",
+        "Bone turn",
+        "incoming Trinket window",
+        "production selector dependency gate"
+      ],
+      "saveReplayImpact": "Persist this resolved pair and v2 provenance in attack continuations/checkpoint bindings. Never reroll after reload.",
+      "migrationImpact": "No silent v1 upgrade. Existing v1 saves load with v1; activation would require explicit migration metadata and tests.",
+      "futureOverrideAllowed": true
+    },
+    {
+      "rulingId": "C1C31-DODGE-OCCULTIST-L1",
+      "requiredPair": "occultist:1",
+      "canonicalStatus": "SOURCE_UNRESOLVED",
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "status": "DRAFT_REVIEW_REQUIRED",
+      "proposedDodge": 0,
+      "proposedRuleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "inherits": "C1C28-DIGITAL-DEFAULT-v1",
+      "rationale": "Explicit conservative no-evasion digital value for this pair only; no claim of printed accuracy, no array default and no Level I inheritance.",
+      "riskClassification": "HIGH_COMBAT_BALANCE",
+      "risk": "Unverified zero Dodge changes hit probability, deaths and resource consumption; locked evidence cannot determine the class/level value.",
+      "affectedRuntimePaths": [
+        "Boss multi-Hero attack",
+        "Bone turn",
+        "incoming Trinket window",
+        "production selector dependency gate"
+      ],
+      "saveReplayImpact": "Persist this resolved pair and v2 provenance in attack continuations/checkpoint bindings. Never reroll after reload.",
+      "migrationImpact": "No silent v1 upgrade. Existing v1 saves load with v1; activation would require explicit migration metadata and tests.",
+      "futureOverrideAllowed": true
+    },
+    {
+      "rulingId": "C1C31-DODGE-OCCULTIST-L2",
+      "requiredPair": "occultist:2",
+      "canonicalStatus": "SOURCE_UNRESOLVED",
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "status": "DRAFT_REVIEW_REQUIRED",
+      "proposedDodge": 0,
+      "proposedRuleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "inherits": "C1C28-DIGITAL-DEFAULT-v1",
+      "rationale": "Explicit conservative no-evasion digital value for this pair only; no claim of printed accuracy, no array default and no Level I inheritance.",
+      "riskClassification": "HIGH_COMBAT_BALANCE",
+      "risk": "Unverified zero Dodge changes hit probability, deaths and resource consumption; locked evidence cannot determine the class/level value.",
+      "affectedRuntimePaths": [
+        "Boss multi-Hero attack",
+        "Bone turn",
+        "incoming Trinket window",
+        "production selector dependency gate"
+      ],
+      "saveReplayImpact": "Persist this resolved pair and v2 provenance in attack continuations/checkpoint bindings. Never reroll after reload.",
+      "migrationImpact": "No silent v1 upgrade. Existing v1 saves load with v1; activation would require explicit migration metadata and tests.",
+      "futureOverrideAllowed": true
+    },
+    {
+      "rulingId": "C1C31-DODGE-OCCULTIST-L3",
+      "requiredPair": "occultist:3",
+      "canonicalStatus": "SOURCE_UNRESOLVED",
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "status": "DRAFT_REVIEW_REQUIRED",
+      "proposedDodge": 0,
+      "proposedRuleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "inherits": "C1C28-DIGITAL-DEFAULT-v1",
+      "rationale": "Explicit conservative no-evasion digital value for this pair only; no claim of printed accuracy, no array default and no Level I inheritance.",
+      "riskClassification": "HIGH_COMBAT_BALANCE",
+      "risk": "Unverified zero Dodge changes hit probability, deaths and resource consumption; locked evidence cannot determine the class/level value.",
+      "affectedRuntimePaths": [
+        "Boss multi-Hero attack",
+        "Bone turn",
+        "incoming Trinket window",
+        "production selector dependency gate"
+      ],
+      "saveReplayImpact": "Persist this resolved pair and v2 provenance in attack continuations/checkpoint bindings. Never reroll after reload.",
+      "migrationImpact": "No silent v1 upgrade. Existing v1 saves load with v1; activation would require explicit migration metadata and tests.",
+      "futureOverrideAllowed": true
+    },
+    {
+      "rulingId": "C1C31-DODGE-PLAGUE-DOCTOR-L1",
+      "requiredPair": "plague-doctor:1",
+      "canonicalStatus": "SOURCE_UNRESOLVED",
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "status": "DRAFT_REVIEW_REQUIRED",
+      "proposedDodge": 0,
+      "proposedRuleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "inherits": "C1C28-DIGITAL-DEFAULT-v1",
+      "rationale": "Explicit conservative no-evasion digital value for this pair only; no claim of printed accuracy, no array default and no Level I inheritance.",
+      "riskClassification": "HIGH_COMBAT_BALANCE",
+      "risk": "Unverified zero Dodge changes hit probability, deaths and resource consumption; locked evidence cannot determine the class/level value.",
+      "affectedRuntimePaths": [
+        "Boss multi-Hero attack",
+        "Bone turn",
+        "incoming Trinket window",
+        "production selector dependency gate"
+      ],
+      "saveReplayImpact": "Persist this resolved pair and v2 provenance in attack continuations/checkpoint bindings. Never reroll after reload.",
+      "migrationImpact": "No silent v1 upgrade. Existing v1 saves load with v1; activation would require explicit migration metadata and tests.",
+      "futureOverrideAllowed": true
+    },
+    {
+      "rulingId": "C1C31-DODGE-PLAGUE-DOCTOR-L2",
+      "requiredPair": "plague-doctor:2",
+      "canonicalStatus": "SOURCE_UNRESOLVED",
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "status": "DRAFT_REVIEW_REQUIRED",
+      "proposedDodge": 0,
+      "proposedRuleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "inherits": "C1C28-DIGITAL-DEFAULT-v1",
+      "rationale": "Explicit conservative no-evasion digital value for this pair only; no claim of printed accuracy, no array default and no Level I inheritance.",
+      "riskClassification": "HIGH_COMBAT_BALANCE",
+      "risk": "Unverified zero Dodge changes hit probability, deaths and resource consumption; locked evidence cannot determine the class/level value.",
+      "affectedRuntimePaths": [
+        "Boss multi-Hero attack",
+        "Bone turn",
+        "incoming Trinket window",
+        "production selector dependency gate"
+      ],
+      "saveReplayImpact": "Persist this resolved pair and v2 provenance in attack continuations/checkpoint bindings. Never reroll after reload.",
+      "migrationImpact": "No silent v1 upgrade. Existing v1 saves load with v1; activation would require explicit migration metadata and tests.",
+      "futureOverrideAllowed": true
+    },
+    {
+      "rulingId": "C1C31-DODGE-PLAGUE-DOCTOR-L3",
+      "requiredPair": "plague-doctor:3",
+      "canonicalStatus": "SOURCE_UNRESOLVED",
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "status": "DRAFT_REVIEW_REQUIRED",
+      "proposedDodge": 0,
+      "proposedRuleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "inherits": "C1C28-DIGITAL-DEFAULT-v1",
+      "rationale": "Explicit conservative no-evasion digital value for this pair only; no claim of printed accuracy, no array default and no Level I inheritance.",
+      "riskClassification": "HIGH_COMBAT_BALANCE",
+      "risk": "Unverified zero Dodge changes hit probability, deaths and resource consumption; locked evidence cannot determine the class/level value.",
+      "affectedRuntimePaths": [
+        "Boss multi-Hero attack",
+        "Bone turn",
+        "incoming Trinket window",
+        "production selector dependency gate"
+      ],
+      "saveReplayImpact": "Persist this resolved pair and v2 provenance in attack continuations/checkpoint bindings. Never reroll after reload.",
+      "migrationImpact": "No silent v1 upgrade. Existing v1 saves load with v1; activation would require explicit migration metadata and tests.",
+      "futureOverrideAllowed": true
+    },
+    {
+      "rulingId": "C1C31-DODGE-GRAVE-ROBBER-L1",
+      "requiredPair": "grave-robber:1",
+      "canonicalStatus": "SOURCE_UNRESOLVED",
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "status": "DRAFT_REVIEW_REQUIRED",
+      "proposedDodge": 0,
+      "proposedRuleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "inherits": "C1C28-DIGITAL-DEFAULT-v1",
+      "rationale": "Explicit conservative no-evasion digital value for this pair only; no claim of printed accuracy, no array default and no Level I inheritance.",
+      "riskClassification": "HIGH_COMBAT_BALANCE",
+      "risk": "Unverified zero Dodge changes hit probability, deaths and resource consumption; locked evidence cannot determine the class/level value.",
+      "affectedRuntimePaths": [
+        "Boss multi-Hero attack",
+        "Bone turn",
+        "incoming Trinket window",
+        "production selector dependency gate"
+      ],
+      "saveReplayImpact": "Persist this resolved pair and v2 provenance in attack continuations/checkpoint bindings. Never reroll after reload.",
+      "migrationImpact": "No silent v1 upgrade. Existing v1 saves load with v1; activation would require explicit migration metadata and tests.",
+      "futureOverrideAllowed": true
+    },
+    {
+      "rulingId": "C1C31-DODGE-GRAVE-ROBBER-L2",
+      "requiredPair": "grave-robber:2",
+      "canonicalStatus": "SOURCE_UNRESOLVED",
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "status": "DRAFT_REVIEW_REQUIRED",
+      "proposedDodge": 0,
+      "proposedRuleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "inherits": "C1C28-DIGITAL-DEFAULT-v1",
+      "rationale": "Explicit conservative no-evasion digital value for this pair only; no claim of printed accuracy, no array default and no Level I inheritance.",
+      "riskClassification": "HIGH_COMBAT_BALANCE",
+      "risk": "Unverified zero Dodge changes hit probability, deaths and resource consumption; locked evidence cannot determine the class/level value.",
+      "affectedRuntimePaths": [
+        "Boss multi-Hero attack",
+        "Bone turn",
+        "incoming Trinket window",
+        "production selector dependency gate"
+      ],
+      "saveReplayImpact": "Persist this resolved pair and v2 provenance in attack continuations/checkpoint bindings. Never reroll after reload.",
+      "migrationImpact": "No silent v1 upgrade. Existing v1 saves load with v1; activation would require explicit migration metadata and tests.",
+      "futureOverrideAllowed": true
+    },
+    {
+      "rulingId": "C1C31-DODGE-GRAVE-ROBBER-L3",
+      "requiredPair": "grave-robber:3",
+      "canonicalStatus": "SOURCE_UNRESOLVED",
+      "authority": "PROJECT_RULING",
+      "canonical": false,
+      "status": "DRAFT_REVIEW_REQUIRED",
+      "proposedDodge": 0,
+      "proposedRuleSetVersion": "C1C31-DIGITAL-DEFAULT-v2",
+      "inherits": "C1C28-DIGITAL-DEFAULT-v1",
+      "rationale": "Explicit conservative no-evasion digital value for this pair only; no claim of printed accuracy, no array default and no Level I inheritance.",
+      "riskClassification": "HIGH_COMBAT_BALANCE",
+      "risk": "Unverified zero Dodge changes hit probability, deaths and resource consumption; locked evidence cannot determine the class/level value.",
+      "affectedRuntimePaths": [
+        "Boss multi-Hero attack",
+        "Bone turn",
+        "incoming Trinket window",
+        "production selector dependency gate"
+      ],
+      "saveReplayImpact": "Persist this resolved pair and v2 provenance in attack continuations/checkpoint bindings. Never reroll after reload.",
+      "migrationImpact": "No silent v1 upgrade. Existing v1 saves load with v1; activation would require explicit migration metadata and tests.",
+      "futureOverrideAllowed": true
+    }
+  ],
+  "alternative": "A restriction to the three bound Level I pairs would change the current selector/Guild/replacement scope and still cannot cover required Level II/III paths.",
+  "affectedPromotionStopped": [
+    "BoneCombatDefinitions",
+    "HeroDodgeBinding",
+    "BoneSkillExecutor",
+    "NormalSelectorEntry",
+    "ThreatCheckpointResume",
+    "HamletEffectBridge",
+    "IncomingAttackReaction",
+    "RoomStorage",
+    "BossResistanceIntegration",
+    "SaveReplayProduction"
+  ],
+  "implementationDebtAfterReview": [
+    {
+      "id": "BoneCombatDefinitions",
+      "status": "PARTIAL"
+    },
+    {
+      "id": "HeroDodgeBinding",
+      "status": "PARTIAL"
+    },
+    {
+      "id": "BoneSkillExecutor",
+      "status": "BLOCKED"
+    },
+    {
+      "id": "NormalSelectorEntry",
+      "status": "BLOCKED"
+    },
+    {
+      "id": "ThreatCheckpointResume",
+      "status": "PARTIAL"
+    },
+    {
+      "id": "HamletEffectBridge",
+      "status": "BLOCKED"
+    },
+    {
+      "id": "IncomingAttackReaction",
+      "status": "BLOCKED"
+    },
+    {
+      "id": "RoomStorage",
+      "status": "BLOCKED"
+    },
+    {
+      "id": "BossResistanceIntegration",
+      "status": "PARTIAL"
+    },
+    {
+      "id": "SaveReplayProduction",
+      "status": "BLOCKED"
+    }
+  ],
+  "returnToSourceAcquisition": false,
+  "ordinaryFoundationContinuationAllowed": false
+}

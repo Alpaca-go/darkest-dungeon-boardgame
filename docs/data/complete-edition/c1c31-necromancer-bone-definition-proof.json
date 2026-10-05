@@ -1,0 +1,559 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C31",
+  "baselineHead": "2ab674d7d8c15dbbd7367bb3b2011243facb5517",
+  "ruleSourcePolicyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1",
+  "externalSourceUsed": false,
+  "syntheticFallbackAllowed": false,
+  "authority": "OFFICIAL_SOURCE",
+  "sourceReviewed": 4,
+  "executableProductionDefinitions": 0,
+  "bones": [
+    {
+      "monsterId": "bone-rabble",
+      "displayName": "Bone Rabble",
+      "life": 6,
+      "speed": 0,
+      "dodge": 1,
+      "size": "NORMAL",
+      "sourceCardId": 46140,
+      "skills": [
+        {
+          "number": 1,
+          "name": "Bump in the Night",
+          "range": 0,
+          "targets": 1,
+          "targeting": "Closest",
+          "accuracy": 7,
+          "damage": 4,
+          "crit": 0,
+          "critDamage": 6,
+          "selfPull": 0,
+          "targetPush": 0,
+          "targetDebuffTurns": 0,
+          "targetStunTurns": 0
+        },
+        {
+          "number": 2,
+          "name": "Tic-Toc",
+          "range": 1,
+          "targets": 1,
+          "targeting": "Closest",
+          "accuracy": 5,
+          "damage": 4,
+          "crit": 0,
+          "critDamage": 6,
+          "selfPull": 1,
+          "targetPush": 0,
+          "targetDebuffTurns": 0,
+          "targetStunTurns": 0
+        }
+      ],
+      "stanceSelections": {
+        "aggressive": [
+          {
+            "min": 1,
+            "max": 10,
+            "skill": 1
+          }
+        ],
+        "defensive": [
+          {
+            "min": 1,
+            "max": 10,
+            "skill": 1
+          }
+        ],
+        "ranged": [
+          {
+            "min": 1,
+            "max": 10,
+            "skill": 1
+          }
+        ],
+        "support": [
+          {
+            "min": 1,
+            "max": 10,
+            "skill": 2
+          }
+        ]
+      },
+      "immunities": [
+        "bleed"
+      ],
+      "resistances": [],
+      "initiative": {
+        "cardsPerInstance": 1,
+        "sourceReferences": [
+          {
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "sha256": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+            "region": "Monster Initiative Card per spawned miniature",
+            "page": 17
+          },
+          {
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "sha256": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+            "region": "Necromancer summon Initiative insertion",
+            "page": 38
+          }
+        ]
+      },
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c25/crops/46140-50acd2839a8f-front.png",
+          "sha256": "03d61f59c6143691e65ab77ca56dac2fda92d6948ed31e8c4888adba0daab4c2",
+          "region": "Printed stats, Skills, Stance icons and selection numbers"
+        },
+        {
+          "path": "docs/data/complete-edition/c1c25-necromancer-bone-source-binding.json",
+          "sha256": "ed3d427224322e0b4d3cae466956cc4aaf897966d7a2818fb24344585b2bf862",
+          "region": "Bone Rabble"
+        },
+        {
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "sha256": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+          "region": "Stance determines the printed Skill; roll only for multiple Skills",
+          "page": 21
+        },
+        {
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "sha256": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+          "region": "Monster Card anatomy: Stance/Skill Eligibility",
+          "page": 24
+        }
+      ],
+      "status": "SOURCE_REVIEW_COMPLETE",
+      "unresolvedFields": [],
+      "canonicalMissingStatus": "RESOLVED_BY_LOCKED_PRINTED_CLUSTER_REVIEW",
+      "reviewNote": "Explicit cluster transcription under core p21/p24; historical C1C30 interpretation is preserved separately.",
+      "executableProductionDefinition": false,
+      "normalSkillSummonPool": true,
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "derivedSemanticRelation": "The adjacent Aggressive/Defensive/Ranged cluster shares the trailing printed 1; the separate Support cluster has 2.",
+      "printedField": "Bottom Stance/Skill Eligibility clusters, not one independent number per icon",
+      "corrections": [],
+      "productionPromotion": "STOPPED_PENDING_HERO_DODGE_RULING_AND_GENERIC_EXECUTOR_BINDING"
+    },
+    {
+      "monsterId": "bone-soldier",
+      "displayName": "Bone Soldier",
+      "life": 7,
+      "speed": 0,
+      "dodge": 1,
+      "size": "NORMAL",
+      "sourceCardId": 46100,
+      "skills": [
+        {
+          "number": 1,
+          "name": "Graveyard Slash",
+          "range": 1,
+          "targets": 1,
+          "targeting": "Most Wounded",
+          "accuracy": 9,
+          "damage": 5,
+          "crit": 1,
+          "critDamage": 9,
+          "selfPull": 0,
+          "targetPush": 0,
+          "targetDebuffTurns": 0,
+          "targetStunTurns": 0
+        },
+        {
+          "number": 2,
+          "name": "Graveyard Stumble",
+          "range": 1,
+          "targets": 1,
+          "targeting": "Furthest",
+          "accuracy": 5,
+          "damage": 3,
+          "crit": 0,
+          "critDamage": 6,
+          "selfPull": 1,
+          "targetPush": 0,
+          "targetDebuffTurns": 0,
+          "targetStunTurns": 0
+        }
+      ],
+      "stanceSelections": {
+        "aggressive": [
+          {
+            "min": 1,
+            "max": 10,
+            "skill": 1
+          }
+        ],
+        "defensive": [
+          {
+            "min": 1,
+            "max": 10,
+            "skill": 1
+          }
+        ],
+        "ranged": [
+          {
+            "min": 1,
+            "max": 10,
+            "skill": 1
+          }
+        ],
+        "support": [
+          {
+            "min": 1,
+            "max": 10,
+            "skill": 2
+          }
+        ]
+      },
+      "immunities": [
+        "bleed"
+      ],
+      "resistances": [],
+      "initiative": {
+        "cardsPerInstance": 1,
+        "sourceReferences": [
+          {
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "sha256": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+            "region": "Monster Initiative Card per spawned miniature",
+            "page": 17
+          },
+          {
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "sha256": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+            "region": "Necromancer summon Initiative insertion",
+            "page": 38
+          }
+        ]
+      },
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c25/crops/46100-b380fe530b9e-front.png",
+          "sha256": "66266ceb68479bbe62c68129e9228c277400d0b6aa62e9a236cd19e1e1c01653",
+          "region": "Printed stats, Skills, Stance icons and selection numbers"
+        },
+        {
+          "path": "docs/data/complete-edition/c1c25-necromancer-bone-source-binding.json",
+          "sha256": "ed3d427224322e0b4d3cae466956cc4aaf897966d7a2818fb24344585b2bf862",
+          "region": "Bone Soldier"
+        },
+        {
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "sha256": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+          "region": "Stance determines the printed Skill; roll only for multiple Skills",
+          "page": 21
+        },
+        {
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "sha256": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+          "region": "Monster Card anatomy: Stance/Skill Eligibility",
+          "page": 24
+        },
+        {
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "sha256": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+          "region": "Soldier card in setup illustration",
+          "page": 16
+        }
+      ],
+      "status": "SOURCE_REVIEW_COMPLETE",
+      "unresolvedFields": [],
+      "canonicalMissingStatus": "RESOLVED_BY_LOCKED_PRINTED_CLUSTER_REVIEW",
+      "reviewNote": "Explicit cluster transcription under core p21/p24; historical C1C30 interpretation is preserved separately.",
+      "executableProductionDefinition": false,
+      "normalSkillSummonPool": true,
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "derivedSemanticRelation": "The adjacent Aggressive/Defensive/Ranged cluster shares the trailing printed 1; the separate Support cluster has 2.",
+      "printedField": "Bottom Stance/Skill Eligibility clusters, not one independent number per icon",
+      "corrections": [],
+      "productionPromotion": "STOPPED_PENDING_HERO_DODGE_RULING_AND_GENERIC_EXECUTOR_BINDING"
+    },
+    {
+      "monsterId": "bone-spearman",
+      "displayName": "Bone Spearman",
+      "life": 15,
+      "speed": 1,
+      "dodge": 2,
+      "size": "NORMAL",
+      "sourceCardId": 46114,
+      "skills": [
+        {
+          "number": 1,
+          "name": "Spear Thrust",
+          "range": 0,
+          "targets": 1,
+          "targeting": "Closest",
+          "accuracy": 8,
+          "damage": 8,
+          "crit": 1,
+          "critDamage": 12,
+          "selfPull": 0,
+          "targetPush": 1,
+          "targetDebuffTurns": 0,
+          "targetStunTurns": 0
+        },
+        {
+          "number": 2,
+          "name": "Impale",
+          "range": 1,
+          "targets": 4,
+          "targeting": "Crowded",
+          "accuracy": 9,
+          "damage": 5,
+          "crit": 2,
+          "critDamage": 7,
+          "selfPull": 0,
+          "targetPush": 0,
+          "targetDebuffTurns": 0,
+          "targetStunTurns": 0
+        }
+      ],
+      "stanceSelections": {
+        "aggressive": [
+          {
+            "min": 1,
+            "max": 5,
+            "skill": 2
+          },
+          {
+            "min": 6,
+            "max": 10,
+            "skill": 1
+          }
+        ],
+        "defensive": [
+          {
+            "min": 1,
+            "max": 5,
+            "skill": 2
+          },
+          {
+            "min": 6,
+            "max": 10,
+            "skill": 1
+          }
+        ],
+        "ranged": [
+          {
+            "min": 1,
+            "max": 10,
+            "skill": 1
+          }
+        ],
+        "support": [
+          {
+            "min": 1,
+            "max": 10,
+            "skill": 1
+          }
+        ]
+      },
+      "immunities": [
+        "bleed"
+      ],
+      "resistances": [],
+      "initiative": {
+        "cardsPerInstance": 1,
+        "sourceReferences": [
+          {
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "sha256": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+            "region": "Monster Initiative Card per spawned miniature",
+            "page": 17
+          },
+          {
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "sha256": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+            "region": "Necromancer summon Initiative insertion",
+            "page": 38
+          }
+        ]
+      },
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c25/crops/46114-77091661b3ce-front.png",
+          "sha256": "799b7cea2cac0c0069f979854f60d8b421fe12dabaf5b563536159bafd7889c8",
+          "region": "Printed stats, Skills, Stance icons and selection numbers"
+        },
+        {
+          "path": "docs/data/complete-edition/c1c25-necromancer-bone-source-binding.json",
+          "sha256": "ed3d427224322e0b4d3cae466956cc4aaf897966d7a2818fb24344585b2bf862",
+          "region": "Bone Spearman"
+        },
+        {
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "sha256": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+          "region": "Stance determines the printed Skill; roll only for multiple Skills",
+          "page": 21
+        },
+        {
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "sha256": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+          "region": "Monster Card anatomy: Stance/Skill Eligibility",
+          "page": 24
+        }
+      ],
+      "status": "SOURCE_REVIEW_COMPLETE",
+      "unresolvedFields": [],
+      "canonicalMissingStatus": "RESOLVED_BY_LOCKED_PRINTED_CLUSTER_REVIEW",
+      "reviewNote": "Explicit cluster transcription under core p21/p24; historical C1C30 interpretation is preserved separately.",
+      "executableProductionDefinition": false,
+      "normalSkillSummonPool": true,
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "derivedSemanticRelation": "Aggressive/Defensive share the printed 2 on 1-5 and 1 on 6-10; Ranged/Support share the trailing 1.",
+      "printedField": "Bottom Stance/Skill Eligibility clusters, not one independent number per icon",
+      "corrections": [],
+      "productionPromotion": "STOPPED_PENDING_HERO_DODGE_RULING_AND_GENERIC_EXECUTOR_BINDING"
+    },
+    {
+      "monsterId": "bone-captain",
+      "displayName": "Bone Captain",
+      "life": 33,
+      "speed": 1,
+      "dodge": 1,
+      "size": "LARGE",
+      "sourceCardId": 46600,
+      "skills": [
+        {
+          "number": 1,
+          "name": "Crushing Blow",
+          "range": 1,
+          "targets": 1,
+          "targeting": "Closest",
+          "accuracy": 9,
+          "damage": 11,
+          "crit": 2,
+          "critDamage": 17,
+          "selfPull": 0,
+          "targetPush": 1,
+          "targetDebuffTurns": 0,
+          "targetStunTurns": 0
+        },
+        {
+          "number": 2,
+          "name": "Ground Pound",
+          "range": 0,
+          "targets": 4,
+          "targeting": "Crowded",
+          "accuracy": 9,
+          "damage": 5,
+          "crit": 1,
+          "critDamage": 7,
+          "selfPull": 0,
+          "targetPush": 0,
+          "targetDebuffTurns": 0,
+          "targetStunTurns": 2
+        }
+      ],
+      "stanceSelections": {
+        "aggressive": [
+          {
+            "min": 1,
+            "max": 6,
+            "skill": 1
+          },
+          {
+            "min": 7,
+            "max": 10,
+            "skill": 2
+          }
+        ],
+        "defensive": [
+          {
+            "min": 1,
+            "max": 6,
+            "skill": 1
+          },
+          {
+            "min": 7,
+            "max": 10,
+            "skill": 2
+          }
+        ],
+        "ranged": [
+          {
+            "min": 1,
+            "max": 10,
+            "skill": 2
+          }
+        ],
+        "support": [
+          {
+            "min": 1,
+            "max": 10,
+            "skill": 2
+          }
+        ]
+      },
+      "immunities": [
+        "bleed",
+        "stun"
+      ],
+      "resistances": [
+        "shuffle"
+      ],
+      "initiative": {
+        "cardsPerInstance": 1,
+        "sourceReferences": [
+          {
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "sha256": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+            "region": "Monster Initiative Card per spawned miniature",
+            "page": 17
+          },
+          {
+            "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+            "sha256": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+            "region": "Necromancer summon Initiative insertion",
+            "page": 38
+          }
+        ]
+      },
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c25/crops/46600-50d4373aa783-front.png",
+          "sha256": "39a941da6f308058845dca81641efd3a79d510c49fec75d1d418112d54acc92f",
+          "region": "Printed stats, Skills, Stance icons and selection numbers"
+        },
+        {
+          "path": "docs/data/complete-edition/c1c25-necromancer-bone-source-binding.json",
+          "sha256": "ed3d427224322e0b4d3cae466956cc4aaf897966d7a2818fb24344585b2bf862",
+          "region": "Bone Captain"
+        },
+        {
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "sha256": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+          "region": "Stance determines the printed Skill; roll only for multiple Skills",
+          "page": 21
+        },
+        {
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "sha256": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+          "region": "Monster Card anatomy: Stance/Skill Eligibility",
+          "page": 24
+        }
+      ],
+      "status": "SOURCE_REVIEW_COMPLETE",
+      "unresolvedFields": [],
+      "canonicalMissingStatus": "RESOLVED_BY_LOCKED_PRINTED_CLUSTER_REVIEW",
+      "reviewNote": "Explicit cluster transcription under core p21/p24; historical C1C30 interpretation is preserved separately.",
+      "executableProductionDefinition": false,
+      "normalSkillSummonPool": false,
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "derivedSemanticRelation": "Aggressive/Defensive share 1 on 1-6 and 2 on 7-10; Ranged/Support share 2. The grey right-hand artwork is not another selection table.",
+      "printedField": "Bottom Stance/Skill Eligibility clusters, not one independent number per icon",
+      "corrections": [
+        "Yellow three-diamond immunity is Stun, not Debuff.",
+        "Ground Pound Target yellow three-diamond 2t is Stun, not Debuff."
+      ],
+      "productionPromotion": "STOPPED_PENDING_HERO_DODGE_RULING_AND_GENERIC_EXECUTOR_BINDING"
+    }
+  ],
+  "runtimePromotionStopped": true
+}

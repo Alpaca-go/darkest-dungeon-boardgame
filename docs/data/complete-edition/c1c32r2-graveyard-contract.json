@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R2",
+  "baselineHead": "35a42ac46ba97b07ed941bca078dc53fb5fab1bb",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "authority": "OFFICIAL_SOURCE",
+  "sourceReferences": [
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 33,
+      "location": "full printed face",
+      "componentId": "first preparation-day building visit",
+      "sourceClass": "OFFICIAL_SOURCE"
+    },
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 34,
+      "location": "full printed face",
+      "componentId": "The Graveyard",
+      "sourceClass": "OFFICIAL_SOURCE"
+    }
+  ],
+  "printedThreatReferences": [
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_Boss_Abilities_BACK.pdf",
+      "fileName": "DD_EN_COREBOX_CARDS_70_120_Boss_Abilities_BACK.pdf",
+      "sha256": "8bc69a94bc92b2aa97776d7ec4f1310bcd0d6c550e0cc1bd194d9278407a79a8",
+      "page": 5,
+      "location": "full Threat face",
+      "componentId": "necromancer-threat-level-2",
+      "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+    },
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_Boss_Abilities_BACK.pdf",
+      "fileName": "DD_EN_COREBOX_CARDS_70_120_Boss_Abilities_BACK.pdf",
+      "sha256": "8bc69a94bc92b2aa97776d7ec4f1310bcd0d6c550e0cc1bd194d9278407a79a8",
+      "page": 6,
+      "location": "full Threat face",
+      "componentId": "necromancer-threat-level-3",
+      "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+    }
+  ],
+  "trigger": "First Preparation Day; settled lowest-roll selection from bossEncounterCheckpoint.threatState.forcedHeroId",
+  "eligibility": "Living selected Hero; ties must resolve existing saved PendingChoice first",
+  "levels": {
+    "I": "Graveyard blocked; no guard transaction",
+    "II": "Forced guard visit consumes first day; Graveyard effect optional",
+    "III": "Forced guard visit consumes first day; Graveyard effect forbidden"
+  },
+  "effect": "Draw one Virtue once and preserve it for next Quest. Next time Stress reaches 10 in that Quest, Hero dies.",
+  "goldFee": 0,
+  "healing": 0,
+  "additionalRewards": 0,
+  "duration": "next Quest only",
+  "lifecycle": "PENDING_NEXT_QUEST -> ACTIVE_QUEST after normal mental reset -> EXPIRED at Quest result; receipt persists",
+  "transactionId": "necromancer-graveyard:<campaign>:<sourceQuestRun>:necromancer:<level>:first-preparation-day",
+  "rulesetProvenance": "Pinned checkpoint ruleSetVersion, never mutate historical ruling set",
+  "runtimeCommand": "applyNecromancerPreparationDayGraveyard",
+  "productionUIWiring": false,
+  "existingVirtueDrawAuthority": "New source-bound five-card pool; no prototype Virtue definitions consumed. Existing shared seeded pick and effect pipelines reused.",
+  "virtueDefinitionFile": "docs/data/complete-edition/c1c32r2-graveyard-virtue-definitions.json"
+}

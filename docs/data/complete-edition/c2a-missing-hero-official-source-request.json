@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.5-C2A",
+  "baseline": "7f4001b956cac441778dbb457cc33041f9057ad5",
+  "sourcePolicyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "reviewDate": "2026-10-02",
+  "runtimeModified": false,
+  "prototypePromoted": false,
+  "runtimeImplementationAuthorized": false,
+  "officialFrontPrintDocumentsMissing": 0,
+  "groups": [
+    {
+      "id": "PROFILE-TRANSPORT-CORRELATION",
+      "heroes": [
+        "crusader",
+        "hellion",
+        "bounty-hunter",
+        "highwayman",
+        "vestal",
+        "jester",
+        "plague-doctor",
+        "arbalest",
+        "grave-robber",
+        "occultist",
+        "abomination",
+        "man-at-arms",
+        "flagellant",
+        "leper",
+        "antiquarian",
+        "shieldbreaker",
+        "hound-master",
+        "musketeer"
+      ],
+      "physicalObjects": 37,
+      "required": "Recover hash-bound shared Profile front/back atlas or directly verify all GUID/CardID-to-official-profile front/back pairs.",
+      "officialPrintsAlreadyAvailable": true,
+      "missingAuthorityIsNotReplacedByTransport": true
+    },
+    {
+      "id": "SKILL-BACK-TRANSPORT-CORRELATION",
+      "heroes": [
+        "grave-robber",
+        "occultist",
+        "abomination",
+        "man-at-arms",
+        "flagellant",
+        "shieldbreaker",
+        "hound-master"
+      ],
+      "levelForms": 102,
+      "required": "Recover the two unavailable hash-bound transport back atlases and directly correlate 102 backs to already reviewed official print pages.",
+      "officialPrintsAlreadyAvailable": true
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R2C",
+  "baselineHead": "6c8dd14b855dd8996d2f01fc5591c9f27db58d67",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "ruleSetVersion": "C1C32R2B-DIGITAL-DEFAULT-v5",
+  "evidence": {
+    "result": "docs/data/complete-edition/c1c32r2c-test-results.json",
+    "passed": 72,
+    "failed": 0,
+    "testHashes": {
+      "src/audit/c1c32r2c-contract-blockers.test.ts": "3d201a7ffbda049a7006e7731dccd4c1d6e0cdce837c7a963488dcf04eafef0a",
+      "src/audit/c1c32r2c-graveyard-real-command.test.ts": "69c093b5cfaedf492b468bb3325f5ab1ab1a381392152c7d06ca09e3b1293735",
+      "src/audit/c1c32r2c-large-save.test.ts": "c7a6de7a31d82baa30f1b6daaa99a3ccae1c6d6ce8b68ec2ef1e376c615bbd63",
+      "src/audit/c1c32r2c-monster-matrix.test.ts": "80cbe3835e93f9a27a9ad3334ae0499386a447ed06c7829ea7469ab153f9d59d",
+      "src/audit/c1c32r2c-movement-progress.test.ts": "cd026c81b22d1e797993286897ec9ebc41504834122b3220fb4f9b8f04220a72",
+      "src/audit/c1c32r2c-printed-effects.test.ts": "cf0c1b7d0c9afb7a9f49f626c41aef68f91644797f0bfc0b085dab579d88e4a0",
+      "src/audit/c1c32r2c-room-rules.test.ts": "44b4590dd9869a06a6e441455e1b50995b6518e84631070d24baa501674dd230",
+      "src/audit/c1c32r2c-ruins-production-executor.test.ts": "e53afb758d3f8eeed4f0617c31ccb813a0fc484061012c2361df103f50e9f33a",
+      "src/audit/c1c32r2c-summon-ledgers.test.ts": "9dbc782a8c8ea747323b9b1574794707bdb460abf33baeaf653ea67731c15d7c"
+    },
+    "runtimeHashes": {
+      "src/game-engine/ruins/battle-runtime.ts": "86a4a11a39bafafd85b6b1ce228afac9e9c780f4cfcef78968f07f8ecc8d3b63",
+      "src/game-engine/ruins/condition-runtime.ts": "21f6301ce5a42e3cfe8d598ccd5f03933d4ea7b6f5d301fb6d918753a6df2277",
+      "src/game-engine/ruins/encounter-draw.ts": "851839956cc353f37e9306a3c660a2efe7e28efbf9c4bbac2635dc819f991955",
+      "src/game-engine/ruins/executor-test-fixture.ts": "3805ea514aa099c1e914853aa61521f5e514ac0316c1ae512dc1b9ddc9dff93f",
+      "src/game-engine/ruins/monster-runtime.ts": "5e7e99efa0e5701ff56e07704709e5b0c8139c2103114cae29aabb0e7c5d8ae0",
+      "src/game-engine/ruins/movement-runtime.ts": "403625e4498012d9c3f2e6069adea082c75edafbe0231e7d7e3ff290a279a63f",
+      "src/game-engine/ruins/physical-supply.ts": "eb67012b714324775d835d9af461ae89f56768997cf511d79ca7d64f263a95cf",
+      "src/game-engine/ruins/printed-effect-runtime.ts": "aa98bd8c06b8e2a4e91eea7a2dc1c435c378f90c57ebeb5229c47833559f253b",
+      "src/game-engine/ruins/room-runtime.ts": "9295de5e7cc028d562e433e138394e818a312f42d23cfb79ef597030db1969dc",
+      "src/game-engine/ruins/source-registry.ts": "121f7c70577f95acbdcbfa5b18c2bea2433579f0cc901bd3e2fa380bf6b2fedb",
+      "src/game-engine/battle.ts": "68194f8fa853379527489c02e320c63187d2c378c09ea8be27b02cacc73705e6",
+      "src/game-engine/save.ts": "1a2399fbaac09d01c14184c110d922b024b87740745bf1f038caca92d3a838fe",
+      "src/game-engine/status-effects.ts": "329c3583247601bfd70575b3925989502dab7bd1fbf61a5c2a74af1c37bc1d52",
+      "src/game-engine/combat-resolution.ts": "1ecada3b9255688cdcf5b0c8f199c5c322adcf6c6ad9dd6f707e528b889b8e68",
+      "src/game-engine/bosses/foundation.ts": "0a638d175d7af0b6fc3415b7d908e6226f4095799c9d269daa3bcbc335652ac3",
+      "src/game-engine/commands/battle.ts": "287bfce19b5b59e2d66517a34932982760fca514ce8ea6810d7452801892e929",
+      "src/game-engine/commands/boss-foundation.ts": "56943c73999e0bac4d65058048434af45004c75daf1f6da6f6bb9bd9741c97f2",
+      "src/game-engine/trinkets/battle-trinket-bridge.ts": "082d80d299b2a43cf4800072ab9db389a493fa24626798375ebe1bc6c717e7f7",
+      "src/game-engine/diseases/draw-disease.ts": "d788cf7c87360b13ba9ca480c1f3f8bff69ae87b977afe4d528dd82bfa7ec55f",
+      "src/types/index.ts": "62c6c0e9e4172fe70c54c0d00e1e5d7416f6a85d1d9f000fdb01a5868a52db74",
+      "src/types/ruins-executable.ts": "dfaba18884d19990b382926d1fd7be47c850bca3d12412c99242baa2c3b84dd3"
+    }
+  },
+  "productionEntryEnabled": false,
+  "status": "SOURCE_BOSS_DOMAIN_CARD_AND_FIGURE_PROVEN",
+  "coverage": [
+    "finite joint inventory",
+    "ordinary owners retained while summon reserves remaining supply",
+    "explicit Captain injection",
+    "Level III reanimation reuses ordinary card and figure",
+    "save validation rejects tampering/duplicate bindings",
+    "cleanup returns summons only and is idempotent"
+  ],
+  "bossFixtureRuleset": "existing v2 source Boss domain; v5 ordinary draw",
+  "fullV5BossProductIntegrationProven": false
+}

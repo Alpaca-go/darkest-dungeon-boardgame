@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C38R1",
+  "baseline": "dcf017cb2065440251caad8d31075b99bc6355e0",
+  "intakeDate": "2026-10-02",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "contractVersion": "C1C38R1-OFFICIAL-INTAKE-v1",
+  "runtimeImplemented": false,
+  "runtimeImplementationAuthorized": false,
+  "productionReady": false,
+  "playerRouteEnabled": false,
+  "gateAPassed": false,
+  "C1C39Allowed": false,
+  "outcome": "THING_OFFICIAL_SOURCE_INTAKE_PARTIAL",
+  "sourceBlockersRemaining": 24,
+  "sourceAcquisitionRequired": true,
+  "accounting": {
+    "startingOfficial": 86,
+    "startingSourceUnresolved": 46,
+    "startingProjectRulingRequired": 23,
+    "startingProjectRuling": 0,
+    "final": {
+      "total": 155,
+      "official": 107,
+      "sourceUnresolved": 24,
+      "projectRulingRequired": 24,
+      "projectRuling": 0
+    },
+    "sourceFieldsClosed": 21,
+    "sourceFieldsDeferredToUnapprovedRuling": 1,
+    "executionIrrelevantFields": 0
+  },
+  "productionModelBound": false,
+  "encounterModel": "EXPANSION_SPECIAL_ENCOUNTER",
+  "digitalRulingClosureAuthorized": false,
+  "C1C38R2Allowed": false,
+  "requiredNext": "Obtain remaining official summon/supply and end-of-session instructions; contract review must resolve source scope discrepancies before affected promotion.",
+  "acceptedProjectRulings": [],
+  "gateAFailureReason": "Remaining canonical physical/source blockers plus 24 unapproved digital fields. R1 never authorizes gameplay.",
+  "next": "CONTINUE_OFFICIAL_SOURCE_INTAKE_AND_CONTRACT_REVIEW",
+  "C1C39": "BLOCKED",
+  "C1C38R2": "NOT_AUTHORIZED_WHILE_PHYSICAL_CONTENT_UNRESOLVED"
+}

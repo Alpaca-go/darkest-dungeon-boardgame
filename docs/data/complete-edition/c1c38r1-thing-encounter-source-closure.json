@@ -1,0 +1,1012 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C38R1",
+  "baseline": "dcf017cb2065440251caad8d31075b99bc6355e0",
+  "intakeDate": "2026-10-02",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "contractVersion": "C1C38R1-OFFICIAL-INTAKE-v1",
+  "runtimeImplemented": false,
+  "runtimeImplementationAuthorized": false,
+  "productionReady": false,
+  "playerRouteEnabled": false,
+  "gateAPassed": false,
+  "C1C39Allowed": false,
+  "fields": [
+    {
+      "id": "encounter.contentSet",
+      "category": "CONTENT_ELIGIBILITY",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 2,
+          "originalPage": 2,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 3,
+          "originalPage": 3,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 8,
+          "originalPage": 8,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        }
+      ],
+      "literal": "The Color of Madness; Thing listed among expansion Bosses",
+      "normalizedValue": "THE_COLOR_OF_MADNESS",
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "Content binding comes from named rulebook sections and printed components."
+    },
+    {
+      "id": "encounter.campaignEligibility",
+      "category": "CONTENT_ELIGIBILITY",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 2,
+          "originalPage": 2,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 4,
+          "originalPage": 4,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 7,
+          "originalPage": 7,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 8,
+          "originalPage": 8,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-BOX",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_BOX.pdf",
+          "sha256": "722365df1b8189d75f732bd10bc1fe255cacb4f1ba7e98de6fac79df68d02877",
+          "page": 2,
+          "originalPage": 2,
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "applicability": "Standalone mode explicitly outside main campaign; aggregate components only. Box token total conflicts with rules list."
+        }
+      ],
+      "literal": "This game mode is not part of the main campaign",
+      "normalizedValue": "STANDALONE_OUTSIDE_MAIN_CAMPAIGN",
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "Packaging explicitly excludes main campaign; no imported Threat lifecycle."
+    },
+    {
+      "id": "encounter.questEligibility",
+      "category": "CONTENT_ELIGIBILITY",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 2,
+          "originalPage": 2,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 4,
+          "originalPage": 4,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 7,
+          "originalPage": 7,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 8,
+          "originalPage": 8,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        }
+      ],
+      "literal": "You do not use it to expand the core game with new Quests and Monsters",
+      "normalizedValue": "STANDALONE_SESSION_FINAL_BOSS",
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "Final phase follows Onslaught then Resting; no campaign Quest selector."
+    },
+    {
+      "id": "encounter.encounterType",
+      "category": "ENCOUNTER_MODEL",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 4,
+          "originalPage": 4,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 7,
+          "originalPage": 7,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 8,
+          "originalPage": 8,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        }
+      ],
+      "literal": "Onslaught phase, Resting phase and Boss Fight phase",
+      "normalizedValue": "EXPANSION_SPECIAL_ENCOUNTER",
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "Exactly one source-supported classification: standalone expansion final Boss fight."
+    },
+    {
+      "id": "encounter.FaceTheThreatApplicable",
+      "category": "ENCOUNTER_MODEL",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 2,
+          "originalPage": 2,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 4,
+          "originalPage": 4,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 7,
+          "originalPage": 7,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 8,
+          "originalPage": 8,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-BOX",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_BOX.pdf",
+          "sha256": "722365df1b8189d75f732bd10bc1fe255cacb4f1ba7e98de6fac79df68d02877",
+          "page": 2,
+          "originalPage": 2,
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "applicability": "Standalone mode explicitly outside main campaign; aggregate components only. Box token total conflicts with rules list."
+        }
+      ],
+      "literal": "standalone session; not part of the main campaign",
+      "normalizedValue": false,
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "Canonical scope excludes main-campaign Face the Threat preparation; ordinary combat rules still apply."
+    },
+    {
+      "id": "encounter.ThreatModel",
+      "category": "ENCOUNTER_MODEL",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 4,
+          "originalPage": 4,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 8,
+          "originalPage": 8,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        }
+      ],
+      "literal": "boss does not have any threat ability that applies during the first two phases, only a combat ability ... final phase",
+      "normalizedValue": "NO_THREAT_FIRST_TWO_PHASES_COMBAT_ABILITY_FINAL_PHASE",
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "No active main campaign Threat state is established."
+    },
+    {
+      "id": "encounter.campaignLevelModel",
+      "category": "CAMPAIGN_MODEL",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 4,
+          "originalPage": 4,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 7,
+          "originalPage": 7,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 8,
+          "originalPage": 8,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-BATTLE",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_CARDS_140x140_monster_large_FRONT.pdf",
+          "sha256": "8dbec6fb9d9ab59574201a50fffd93a806d7cbb98a048e15abe330e4a4e7bd7e",
+          "page": 4,
+          "originalPage": 4,
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "applicability": "Independent official print corroborates frozen single Thing Battle; no new Thing Levels."
+        }
+      ],
+      "literal": "all Heroes start at Level 1; pick a Boss at random ... all its necessary components; Level Up with Shards",
+      "normalizedValue": {
+        "model": "STANDALONE_FINAL_BOSS",
+        "sourceBoundThingBattleLevels": [
+          "I"
+        ],
+        "heroesStartLevel": 1,
+        "heroAndSkillLevelUp": "SHARDS"
+      },
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "Single standalone Boss setup and existing Level I print; no campaign-dependent Thing II/III cards synthesized."
+    },
+    {
+      "id": "encounter.RoomModel",
+      "category": "ROOM_TILE",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 8,
+          "originalPage": 8,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-ROOM3",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_COM_TILES_FRONT.pdf",
+          "sha256": "0013c5d839e31c51258c8f7a4ef4c9796e4460f7372b2b9337be53ec4e0ea6b5",
+          "page": 2,
+          "originalPage": 2,
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "applicability": "Physical crystal-emblem Room 3, areas, entry stance icons; not a fabricated RoomStorage card."
+        }
+      ],
+      "literal": "Find the Thing’s Room ... room [crystal] 3",
+      "normalizedValue": {
+        "model": "DEDICATED_EXPANSION_BOSS_ROOM",
+        "physicalRoom": 3,
+        "emblem": "CRYSTAL"
+      },
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "Dedicated official tile; this does not create a campaign RoomStorage record."
+    },
+    {
+      "id": "encounter.TileModel",
+      "category": "ROOM_TILE",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "sourceId": "COM-ROOM3",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_COM_TILES_FRONT.pdf",
+          "sha256": "0013c5d839e31c51258c8f7a4ef4c9796e4460f7372b2b9337be53ec4e0ea6b5",
+          "page": 2,
+          "originalPage": 2,
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "applicability": "Physical crystal-emblem Room 3, areas, entry stance icons; not a fabricated RoomStorage card."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 8,
+          "originalPage": 8,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        }
+      ],
+      "literal": "crystal emblem 3",
+      "normalizedValue": {
+        "file": "DD_COM_TILES_FRONT.pdf",
+        "page": 2,
+        "room": 3
+      },
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "Tile identity bound by matching printed number/emblem and explicit Thing setup."
+    },
+    {
+      "id": "encounter.HeroEntryModel",
+      "category": "PLACEMENT",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 2,
+          "originalPage": 2,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 7,
+          "originalPage": 7,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 8,
+          "originalPage": 8,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "page": 16,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p16.png",
+          "sha256": "f3152f1389081628f61c2adb987958c9a3b6cb86ec61740e4b9c65b43d5c9d1b",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "COM rules p2 and p7 expressly apply core combat; family-specific COM p8 overrides campaign context."
+        },
+        {
+          "sourceId": "COM-ROOM3",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_COM_TILES_FRONT.pdf",
+          "sha256": "0013c5d839e31c51258c8f7a4ef4c9796e4460f7372b2b9337be53ec4e0ea6b5",
+          "page": 2,
+          "originalPage": 2,
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "applicability": "Physical crystal-emblem Room 3, areas, entry stance icons; not a fabricated RoomStorage card."
+        }
+      ],
+      "literal": "Place each Hero’s miniature on the Area indicated, according to the Hero’s Stance",
+      "normalizedValue": "ROOM3_PRINTED_HERO_STANCE_AREAS",
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "Expansion expressly adopts core Boss combat; Room 3 supplies Hero entry icons. Do not use Onslaught entry marker for Boss room."
+    },
+    {
+      "id": "encounter.BossPlacementModel",
+      "category": "PLACEMENT",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 8,
+          "originalPage": 8,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-ROOM3",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_COM_TILES_FRONT.pdf",
+          "sha256": "0013c5d839e31c51258c8f7a4ef4c9796e4460f7372b2b9337be53ec4e0ea6b5",
+          "page": 2,
+          "originalPage": 2,
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "applicability": "Physical crystal-emblem Room 3, areas, entry stance icons; not a fabricated RoomStorage card."
+        }
+      ],
+      "literal": "its miniature in the corresponding Area on the board",
+      "normalizedValue": "ROOM3_AREA_CORRESPONDING_TO_AGGRESSIVE_STANCE",
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "Explicit Thing instruction, independently bound to official Room 3."
+    },
+    {
+      "id": "encounter.startingStance",
+      "category": "STANCE",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 8,
+          "originalPage": 8,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        }
+      ],
+      "literal": "Place the Thing’s Card on the Aggressive Stance",
+      "normalizedValue": "Aggressive",
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "Family-specific instruction, no inference from other Bosses."
+    },
+    {
+      "id": "encounter.initiativeModel",
+      "category": "INITIATIVE",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 7,
+          "originalPage": 7,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 8,
+          "originalPage": 8,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        }
+      ],
+      "literal": "Shuffle two Initiative Cards for it into the Initiative Deck",
+      "normalizedValue": {
+        "bossInitiativeCards": 2,
+        "shuffleInto": "INITIATIVE_DECK",
+        "coreCombat": true
+      },
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "Free Skill precedes the first turn; normal Boss initiative remains two cards."
+    },
+    {
+      "id": "encounter.victoryModel",
+      "category": "VICTORY",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 4,
+          "originalPage": 4,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 8,
+          "originalPage": 8,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        }
+      ],
+      "literal": "When The Thing From the Stars is defeated, the fight ends and party is victorious!",
+      "normalizedValue": {
+        "trigger": "THING_DEFEATED",
+        "endsFightImmediately": true,
+        "partyVictorious": true,
+        "summonsMustAlsoDie": false
+      },
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "Explicit family-specific immediate ending; no extra kill-all-summons requirement."
+    },
+    {
+      "id": "encounter.campaignConsequence",
+      "category": "CAMPAIGN_MODEL",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 2,
+          "originalPage": 2,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 4,
+          "originalPage": 4,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 7,
+          "originalPage": 7,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 8,
+          "originalPage": 8,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-BOX",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_BOX.pdf",
+          "sha256": "722365df1b8189d75f732bd10bc1fe255cacb4f1ba7e98de6fac79df68d02877",
+          "page": 2,
+          "originalPage": 2,
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "applicability": "Standalone mode explicitly outside main campaign; aggregate components only. Box token total conflicts with rules list."
+        }
+      ],
+      "literal": "This game mode is not part of the main campaign",
+      "normalizedValue": "STANDALONE_SESSION_RESULT_NO_MAIN_CAMPAIGN_PROGRESSION",
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "No main campaign defeatedBossFamilyIds or Quest progression applies."
+    },
+    {
+      "id": "encounter.questProgression",
+      "category": "CAMPAIGN_MODEL",
+      "status": "OFFICIAL_SOURCE",
+      "authority": "OFFICIAL_SOURCE",
+      "canonical": true,
+      "sourceReferences": [
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 2,
+          "originalPage": 2,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 4,
+          "originalPage": 4,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 7,
+          "originalPage": 7,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-RULES",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+          "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+          "page": 8,
+          "originalPage": 8,
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+        },
+        {
+          "sourceId": "COM-BOX",
+          "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_BOX.pdf",
+          "sha256": "722365df1b8189d75f732bd10bc1fe255cacb4f1ba7e98de6fac79df68d02877",
+          "page": 2,
+          "originalPage": 2,
+          "authority": "OFFICIAL_PRINTED_COMPONENT",
+          "applicability": "Standalone mode explicitly outside main campaign; aggregate components only. Box token total conflicts with rules list."
+        }
+      ],
+      "literal": "three phases ... party is victorious",
+      "normalizedValue": "ONSLAUGHT_THEN_RESTING_THEN_BOSS_FIGHT_THEN_SESSION_RESULT",
+      "executionRequired": true,
+      "contractExecutable": true,
+      "blocking": false,
+      "notes": "Standalone phase progression; not campaign Quest completion."
+    },
+    {
+      "id": "encounter.reward",
+      "category": "REWARD",
+      "status": "SOURCE_UNRESOLVED",
+      "authority": "NONE",
+      "canonical": false,
+      "sourceReferences": [
+        {
+          "page": 16,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p16.png",
+          "sha256": "f3152f1389081628f61c2adb987958c9a3b6cb86ec61740e4b9c65b43d5c9d1b",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        },
+        {
+          "page": 25,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p25.png",
+          "sha256": "3eee895cc7dd32661e8d447f777c55cd90d8d340682481e9efca4365632fdc58",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        },
+        {
+          "page": 30,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p30.png",
+          "sha256": "3185998089adba470431380892b73671e50eb32d183b48f883207ea160e45614",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        },
+        {
+          "page": 31,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p31.png",
+          "sha256": "abb13d6eaa3aa8ea7839c416395498fd1dcc5c26d831090e0f7061d3b6c5531e",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41902-d93a01-front.png",
+          "sha256": "b4fc71043b6350e86726d8346d5ed5904894634c0d4f21bbfde96d8404b33241",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41902-d93a01-back.png",
+          "sha256": "fa7696ee2e5ec69f7adeb2faff6ad1803cf75910a33f6d18df26b7b6b2ae4460",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "literal": null,
+      "normalizedValue": null,
+      "executionRequired": true,
+      "contractExecutable": false,
+      "blocking": true,
+      "notes": "COM p6 grants two Shards per Monster kill. Thing defeat gives victory, but terminal reward/loot handling (including Room 3 chest markers) is not fully specified."
+    },
+    {
+      "id": "encounter.escapeOrFailure",
+      "category": "VICTORY",
+      "status": "SOURCE_UNRESOLVED",
+      "authority": "NONE",
+      "canonical": false,
+      "sourceReferences": [
+        {
+          "page": 16,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p16.png",
+          "sha256": "f3152f1389081628f61c2adb987958c9a3b6cb86ec61740e4b9c65b43d5c9d1b",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        },
+        {
+          "page": 25,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p25.png",
+          "sha256": "3eee895cc7dd32661e8d447f777c55cd90d8d340682481e9efca4365632fdc58",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        },
+        {
+          "page": 30,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p30.png",
+          "sha256": "3185998089adba470431380892b73671e50eb32d183b48f883207ea160e45614",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        },
+        {
+          "page": 31,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p31.png",
+          "sha256": "abb13d6eaa3aa8ea7839c416395498fd1dcc5c26d831090e0f7061d3b6c5531e",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41902-d93a01-front.png",
+          "sha256": "b4fc71043b6350e86726d8346d5ed5904894634c0d4f21bbfde96d8404b33241",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41902-d93a01-back.png",
+          "sha256": "fa7696ee2e5ec69f7adeb2faff6ad1803cf75910a33f6d18df26b7b6b2ae4460",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "literal": null,
+      "normalizedValue": null,
+      "executionRequired": true,
+      "contractExecutable": false,
+      "blocking": true,
+      "notes": "COM p4 explicitly ends the session in defeat if a Hero dies. Full escape/retreat handling remains unspecified; no campaign retreat imported."
+    },
+    {
+      "id": "encounter.cleanup",
+      "category": "CLEANUP",
+      "status": "SOURCE_UNRESOLVED",
+      "authority": "NONE",
+      "canonical": false,
+      "sourceReferences": [
+        {
+          "page": 16,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p16.png",
+          "sha256": "f3152f1389081628f61c2adb987958c9a3b6cb86ec61740e4b9c65b43d5c9d1b",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        },
+        {
+          "page": 25,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p25.png",
+          "sha256": "3eee895cc7dd32661e8d447f777c55cd90d8d340682481e9efca4365632fdc58",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        },
+        {
+          "page": 30,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p30.png",
+          "sha256": "3185998089adba470431380892b73671e50eb32d183b48f883207ea160e45614",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        },
+        {
+          "page": 31,
+          "path": "docs/data/complete-edition/source-assets/c1c38/core-print-p31.png",
+          "sha256": "abb13d6eaa3aa8ea7839c416395498fd1dcc5c26d831090e0f7061d3b6c5531e",
+          "pdfRelativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+          "pdfSha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+          "renderScale": 1.5,
+          "review": "DIRECT_VISUAL_REVIEW",
+          "context": "Shared core rules or core-specific examples only; Thing applicability not established.",
+          "authority": "OFFICIAL_RULEBOOK",
+          "applicability": "SHARED_LEGEND_OR_RULE_ONLY; DOES_NOT_ESTABLISH_THING_ENCOUNTER_ELIGIBILITY"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41902-d93a01-front.png",
+          "sha256": "b4fc71043b6350e86726d8346d5ed5904894634c0d4f21bbfde96d8404b33241",
+          "side": "front",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "path": "docs/data/complete-edition/source-assets/c1c24/crops/41902-d93a01-back.png",
+          "sha256": "fa7696ee2e5ec69f7adeb2faff6ad1803cf75910a33f6d18df26b7b6b2ae4460",
+          "side": "back",
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "literal": null,
+      "normalizedValue": null,
+      "executionRequired": true,
+      "contractExecutable": false,
+      "blocking": true,
+      "notes": "COM p8 ends the fight on Thing defeat; destination/reuse of surviving summons, physical cards and tokens is not stated."
+    }
+  ],
+  "encounterModel": "EXPANSION_SPECIAL_ENCOUNTER",
+  "contentSet": "THE_COLOR_OF_MADNESS",
+  "mainCampaignApplicable": false,
+  "synthesizedLevels": [],
+  "sourceBoundBattleLevels": [
+    "I"
+  ],
+  "failureFact": {
+    "heroDeath": "SESSION_DEFEAT",
+    "sources": [
+      {
+        "sourceId": "COM-RULES",
+        "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+        "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+        "page": 4,
+        "originalPage": 4,
+        "authority": "OFFICIAL_RULEBOOK",
+        "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+      }
+    ]
+  },
+  "rewardFact": {
+    "monsterKillShards": 2,
+    "sources": [
+      {
+        "sourceId": "COM-RULES",
+        "path": "docs/data/complete-edition/source-assets/c1c38r1/DD_EN_COM_RULES.pdf",
+        "sha256": "0ef28358778ff27b1947c7ced05648d1b4129ebf9c012060ebe19cedde393e4e",
+        "page": 6,
+        "originalPage": 6,
+        "authority": "OFFICIAL_RULEBOOK",
+        "applicability": "Standalone Color of Madness session, its Boss Fight phase and printed components; not main campaign integration."
+      }
+    ],
+    "scope": "Generic kill reward; terminal reward/loot remains unresolved."
+  }
+}

@@ -32,7 +32,8 @@ import type {
 // ---------------------------------------------------------------------------
 
 /** Prophet 正式家族 id。 */
-export const PROPHET_FAMILY_ID = 'prophet';
+export { PROPHET_FAMILY_ID } from './family-identities';
+import { PROPHET_FAMILY_ID } from './family-identities';
 
 /** 开发模式 Prototype 家族 id（明确标注，绝不进正式池）。 */
 export const PROPHET_PROTOTYPE_FAMILY_ID = 'prototype-prophet-family';

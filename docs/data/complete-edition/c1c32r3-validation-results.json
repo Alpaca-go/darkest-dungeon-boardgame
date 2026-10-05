@@ -1,0 +1,135 @@
+{
+  "phase": "C1C32R3",
+  "accepted": false,
+  "commands": [
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "log": "tmp\\c1c32r3\\typecheck.log"
+    },
+    {
+      "command": "npm run test:necromancer-foundation",
+      "exitCode": 0,
+      "log": "tmp\\c1c32r3\\test-necromancer-foundation.log"
+    },
+    {
+      "command": "npm run test:necromancer-finalization",
+      "exitCode": 0,
+      "log": "tmp\\c1c32r3\\test-necromancer-finalization.log"
+    },
+    {
+      "command": "npm run test:necromancer-threat-bridge",
+      "exitCode": 0,
+      "log": "tmp\\c1c32r3\\test-necromancer-threat-bridge.log"
+    },
+    {
+      "command": "npm run test:necromancer-threat-dependencies",
+      "exitCode": 0,
+      "log": "tmp\\c1c32r3\\test-necromancer-threat-dependencies.log"
+    },
+    {
+      "command": "npm run test:ruins-executable-dependencies",
+      "exitCode": 0,
+      "log": "tmp\\c1c32r3\\test-ruins-executable-dependencies.log"
+    },
+    {
+      "command": "npm run test:ruins-production-runtime",
+      "exitCode": 0,
+      "log": "tmp\\c1c32r3\\test-ruins-production-runtime.log"
+    },
+    {
+      "command": "npm run test:ruins-production-executor",
+      "exitCode": 0,
+      "log": "tmp\\c1c32r3\\test-ruins-production-executor.log"
+    },
+    {
+      "command": "npm run test:ruins-final-runtime-blockers",
+      "exitCode": 0,
+      "log": "tmp\\c1c32r3\\test-ruins-final-runtime-blockers.log"
+    },
+    {
+      "command": "npm run verify:complete-edition-c1c29",
+      "exitCode": 0,
+      "log": "tmp\\c1c32r3\\verify-complete-edition-c1c29.log"
+    },
+    {
+      "command": "npm run verify:complete-edition-c1c30",
+      "exitCode": 0,
+      "log": "tmp\\c1c32r3\\verify-complete-edition-c1c30.log"
+    },
+    {
+      "command": "npm run verify:complete-edition-c1c31",
+      "exitCode": 0,
+      "log": "tmp\\c1c32r3\\verify-complete-edition-c1c31.log"
+    },
+    {
+      "command": "npm run verify:complete-edition-c1c31r",
+      "exitCode": 0,
+      "log": "tmp\\c1c32r3\\verify-complete-edition-c1c31r.log"
+    },
+    {
+      "command": "npm run verify:complete-edition-c1c32",
+      "exitCode": 0,
+      "log": "tmp\\c1c32r3\\verify-complete-edition-c1c32.log"
+    },
+    {
+      "command": "npm run verify:complete-edition-c1c32r",
+      "exitCode": 0,
+      "log": "tmp\\c1c32r3\\verify-complete-edition-c1c32r.log"
+    },
+    {
+      "command": "npm run verify:complete-edition-c1c32r2",
+      "exitCode": 0,
+      "log": "tmp\\c1c32r3\\verify-complete-edition-c1c32r2.log"
+    },
+    {
+      "command": "npm run verify:complete-edition-c1c32r2a",
+      "exitCode": 0,
+      "log": "tmp\\c1c32r3\\verify-complete-edition-c1c32r2a.log"
+    },
+    {
+      "command": "npm run verify:complete-edition-c1c32r2b",
+      "exitCode": 0,
+      "log": "tmp\\c1c32r3\\verify-complete-edition-c1c32r2b.log"
+    },
+    {
+      "command": "npm run verify:complete-edition-c1c32r2c",
+      "exitCode": 1,
+      "log": "tmp\\c1c32r3\\verify-complete-edition-c1c32r2c.log"
+    },
+    {
+      "command": "npm run verify:complete-edition-c1c32r2c-r",
+      "exitCode": 1,
+      "log": "tmp\\c1c32r3\\verify-complete-edition-c1c32r2c-r.log"
+    }
+  ],
+  "finalV6Verifier": {
+    "command": "npm run verify:complete-edition-c1c32r2c-r",
+    "exitCode": 0,
+    "log": "tmp/c1c32r3/verify-complete-edition-c1c32r2c-r-final.log"
+  },
+  "finalTypecheck": {
+    "command": "npm run typecheck",
+    "exitCode": 0
+  },
+  "focusedTests": {
+    "newEntryPassed": 22,
+    "finalEntryAndBossCommandsPassed": 28,
+    "playerUISelectionPassed": 1,
+    "fullProductPath": false
+  },
+  "fullRegression": {
+    "passed": 2617,
+    "total": 2619,
+    "historicalScopeGuardFailures": 2,
+    "unexpectedFailures": 0,
+    "beforeFinalBridgeRelocation": true
+  },
+  "build": {
+    "status": "BUILD_ACCEPTANCE_UNVERIFIED",
+    "knownToolingBlocker": true,
+    "typescriptPassed": true,
+    "viteTransformPassed": true,
+    "transformedModules": 18365
+  }
+}

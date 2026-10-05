@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "method": "DIRECT_FRONT_AND_BACK_VISUAL_REVIEW",
+  "ocrAssistanceUsed": false,
+  "frontLiteral": "{\n  \"name\": \"Thing from the Stars\",\n  \"tags\": \"Eldritch - Large\",\n  \"dodge\": 2,\n  \"resistances\": [\n    \"Blight\",\n    \"Debuff\"\n  ],\n  \"immunity\": [\n    \"Stun\"\n  ],\n  \"speedGlyphCount\": 2,\n  \"life\": 130,\n  \"emblem\": \"teal crystal banner; meaning SOURCE_UNRESOLVED\",\n  \"skill1\": {\n    \"number\": 1,\n    \"name\": \"Vorpal Strike\",\n    \"priority\": \"Closest\",\n    \"range\": 1,\n    \"heroHeads\": 1,\n    \"crit\": 2,\n    \"criticalDamage\": 16,\n    \"accuracy\": 11,\n    \"damage\": 11,\n    \"target\": \"Stress +2\",\n    \"duration\": \"PRINTED_ABSENT\"\n  },\n  \"skill2\": {\n    \"number\": 2,\n    \"name\": \"Weakening Shard\",\n    \"priority\": \"Furthest\",\n    \"range\": 2,\n    \"heroHeads\": 1,\n    \"crit\": 2,\n    \"criticalDamage\": 4,\n    \"accuracy\": 11,\n    \"damage\": 2,\n    \"target\": \"Stun 2t; 4 Blight 2t; Stress +1; Debuff 3t\"\n  },\n  \"skill3\": {\n    \"number\": 3,\n    \"name\": \"Return to the Stars\",\n    \"priority\": \"Crowded\",\n    \"range\": 2,\n    \"heroHeads\": 4,\n    \"crit\": \"PRINTED_ABSENT\",\n    \"criticalDamage\": \"PRINTED_ABSENT\",\n    \"accuracy\": \"PRINTED_ABSENT\",\n    \"damage\": \"PRINTED_ABSENT\",\n    \"self\": \"5 [orange-outline black-heart token]; remove [green dotted drop] [red drop]\",\n    \"target\": \"[Stress] +2; [white skull on red downward arrow]\",\n    \"duration\": \"PRINTED_ABSENT\"\n  },\n  \"stancePanels\": \"four colored Aggressive/Defensive/Ranged/Support panels; four gray panels\",\n  \"table\": \"[1] 1-5; [2] 6-10\",\n  \"back\": \"BOSS [LEVEL:I]\"\n}",
+  "fields": [
+    {
+      "id": "name",
+      "literal": "Thing from the Stars",
+      "confidence": "HIGH_DIRECT_VISUAL",
+      "absenceIsZero": false,
+      "semanticAuthority": "See separately hash-bound glyph and semantic contracts"
+    },
+    {
+      "id": "tags",
+      "literal": "Eldritch - Large",
+      "confidence": "HIGH_DIRECT_VISUAL",
+      "absenceIsZero": false,
+      "semanticAuthority": "See separately hash-bound glyph and semantic contracts"
+    },
+    {
+      "id": "dodge",
+      "literal": 2,
+      "confidence": "HIGH_DIRECT_VISUAL",
+      "absenceIsZero": false,
+      "semanticAuthority": "See separately hash-bound glyph and semantic contracts"
+    },
+    {
+      "id": "resistances",
+      "literal": [
+        "Blight",
+        "Debuff"
+      ],
+      "confidence": "HIGH_DIRECT_VISUAL",
+      "absenceIsZero": false,
+      "semanticAuthority": "See separately hash-bound glyph and semantic contracts"
+    },
+    {
+      "id": "immunity",
+      "literal": [
+        "Stun"
+      ],
+      "confidence": "HIGH_DIRECT_VISUAL",
+      "absenceIsZero": false,
+      "semanticAuthority": "See separately hash-bound glyph and semantic contracts"
+    },
+    {
+      "id": "speedGlyphCount",
+      "literal": 2,
+      "confidence": "HIGH_DIRECT_VISUAL",
+      "absenceIsZero": false,
+      "semanticAuthority": "See separately hash-bound glyph and semantic contracts"
+    },
+    {
+      "id": "life",
+      "literal": 130,
+      "confidence": "HIGH_DIRECT_VISUAL",
+      "absenceIsZero": false,
+      "semanticAuthority": "See separately hash-bound glyph and semantic contracts"
+    },
+    {
+      "id": "emblem",
+      "literal": "teal crystal banner; meaning SOURCE_UNRESOLVED",
+      "confidence": "HIGH_DIRECT_VISUAL",
+      "absenceIsZero": false,
+      "semanticAuthority": "See separately hash-bound glyph and semantic contracts"
+    },
+    {
+      "id": "skill1",
+      "literal": {
+        "number": 1,
+        "name": "Vorpal Strike",
+        "priority": "Closest",
+        "range": 1,
+        "heroHeads": 1,
+        "crit": 2,
+        "criticalDamage": 16,
+        "accuracy": 11,
+        "damage": 11,
+        "target": "Stress +2",
+        "duration": "PRINTED_ABSENT"
+      },
+      "confidence": "HIGH_DIRECT_VISUAL",
+      "absenceIsZero": false,
+      "semanticAuthority": "See separately hash-bound glyph and semantic contracts"
+    },
+    {
+      "id": "skill2",
+      "literal": {
+        "number": 2,
+        "name": "Weakening Shard",
+        "priority": "Furthest",
+        "range": 2,
+        "heroHeads": 1,
+        "crit": 2,
+        "criticalDamage": 4,
+        "accuracy": 11,
+        "damage": 2,
+        "target": "Stun 2t; 4 Blight 2t; Stress +1; Debuff 3t"
+      },
+      "confidence": "HIGH_DIRECT_VISUAL",
+      "absenceIsZero": false,
+      "semanticAuthority": "See separately hash-bound glyph and semantic contracts"
+    },
+    {
+      "id": "skill3",
+      "literal": {
+        "number": 3,
+        "name": "Return to the Stars",
+        "priority": "Crowded",
+        "range": 2,
+        "heroHeads": 4,
+        "crit": "PRINTED_ABSENT",
+        "criticalDamage": "PRINTED_ABSENT",
+        "accuracy": "PRINTED_ABSENT",
+        "damage": "PRINTED_ABSENT",
+        "self": "5 [orange-outline black-heart token]; remove [green dotted drop] [red drop]",
+        "target": "[Stress] +2; [white skull on red downward arrow]",
+        "duration": "PRINTED_ABSENT"
+      },
+      "confidence": "HIGH_DIRECT_VISUAL",
+      "absenceIsZero": false,
+      "semanticAuthority": "See separately hash-bound glyph and semantic contracts"
+    },
+    {
+      "id": "stancePanels",
+      "literal": "four colored Aggressive/Defensive/Ranged/Support panels; four gray panels",
+      "confidence": "HIGH_DIRECT_VISUAL",
+      "absenceIsZero": false,
+      "semanticAuthority": "See separately hash-bound glyph and semantic contracts"
+    },
+    {
+      "id": "table",
+      "literal": "[1] 1-5; [2] 6-10",
+      "confidence": "HIGH_DIRECT_VISUAL",
+      "absenceIsZero": false,
+      "semanticAuthority": "See separately hash-bound glyph and semantic contracts"
+    },
+    {
+      "id": "back",
+      "literal": "BOSS [LEVEL:I]",
+      "confidence": "HIGH_DIRECT_VISUAL",
+      "absenceIsZero": false,
+      "semanticAuthority": "See separately hash-bound glyph and semantic contracts"
+    }
+  ]
+}

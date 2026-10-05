@@ -123,6 +123,7 @@ export interface ProvisionPool {
  * dead 与 atDeathsDoor 不得同时为 true。
  */
 export interface HeroInstance {
+  productionIdentity?: import('./hero-runtime').HeroProductionIdentity;
   instanceId: string;
   heroId: string;
   name: string;
@@ -222,6 +223,8 @@ export interface DungeonRoom {
   sourceRoomToken?: import('./content-runtime').QuestRoomTokenType;
   /** Community Curio rooms cannot clear until the guard roll/battle resolves and a Hero interacts. */
   curioGuardResolved?: boolean;
+  /** Persisted before initializing a source-bound production guarded Curio battle. */
+  curioGuardRoll?: number;
 }
 
 /** Phase 8B：Curio 定义（最小实现，仅承载 Disease 感染来源）。 */
@@ -257,8 +260,15 @@ export interface DungeonState {
 
 /** 战斗单位（英雄或怪物）。所有字段均可序列化以支持 localStorage 存档。 */
 export interface BattleUnit {
+  productionMonsterProfile?: { definitionId: string; tags: string[]; baseProtection: boolean | null; printedSpeed: number | null; dodge: number; stanceSlots: number };
+  productionIdentity?: import('./hero-runtime').HeroProductionIdentity;
+  actorTypeTags?: { tags: string[]; sourceBindingId: string };
+  productionMovement?: import('./hero-production').PrintedField<{ glyphId: string; count: number }>;
+  printedConditionTokens?: Array<{ eventId: string; type: string; magnitude: import('./hero-production').PrintedField<number>; turns: number }>;
   /** Definition-bound board-game Dodge for the Boss foundation. */
   bossCombatDodge?: number;
+  heroDodgeBinding?: import('./hero-dodge-rules').ResolvedHeroDodge;
+  heroCombatDefinition?: import('./component-combat').HeroCombatDefinition;
   id: string;
   name: string;
   side: BattleSide;
@@ -333,7 +343,7 @@ export interface BattleUnit {
   /** 由 Hero Level Registry 派生的免疫状态列表（如 'stun'）。 */
   immunities?: string[];
   /** Board-game categorical resistance: reduce matching Condition duration by one turn. */
-  categoricalResistances?: StatusEffectType[];
+  categoricalResistances?: Array<StatusEffectType | 'debuff' | 'shuffle'>;
   /** Source-backed duration bookkeeping, separate from Bleed/Blight potency. */
   conditionDurations?: Partial<Record<StatusEffectType, number>>;
   // ---- Phase 8C：Trinket 快照（仅英雄；获取/翻面等权威状态始终在战役英雄上） ----
@@ -377,6 +387,18 @@ export interface PendingBattleAction {
  * resolves the two source-distinct Trinket reaction windows.
  */
 export interface PendingMonsterAttack {
+  productionMonsterAttack?: {
+    runtimeVersion: string; integrationVersion: string; definitionId: string; actionId: string;
+    operationIndex: number; targetIds: string[]; parentEventId: string;
+    operation: Extract<import('../game-engine/monsters/production-runtime-types').MonsterRuntimeOperation, { kind: 'ATTACK' }>;
+  };
+    sourceAttack?: import('./component-combat').SourceMonsterAttack;
+    ruinsAttack?: {
+      skillNumber: number;
+      skill: MonsterSkillDefinition;
+      remainingTargetIds: string[];
+      parentEventId: string;
+    };
   kind: 'monster-attack';
   rootEventId: string;
   stage: 'incoming-attack-window' | 'hero-hit-window';
@@ -452,6 +474,13 @@ export interface CommunityGuardianRoomState {
 }
 
 export interface BattleState {
+  productionMonsterContext?: import('../game-engine/monsters/production-battle-types').ProductionMonsterBattleContext;
+    /** Saved ordinary Ruins encounter; absent from legacy and Boss battles. */
+    ruinsContext?: import('./ruins-executable').RuinsBattleContext;
+    necromancerFigureBinding?: import('../game-engine/ruins/physical-supply').NecromancerFigureBinding;
+  /** Generic movement dependency contract. Absent on all historical battles. */
+  largeMovementContract?: import('./necromancer-dependencies').LargeMovementContractState;
+  actorOccupancy?: import('../game-engine/rules/actor-occupancy').ActorOccupancyState;
   /** Serializable, contract-bound ordinary Boss foundation; absent on legacy battles. */
   bossEncounter?: import('./boss-runtime').BossEncounterState;
   /** Source-backed Guardian rooms do not use the ordinary round timeout. */
@@ -776,6 +805,34 @@ export interface HeroLevelProfile {
 
 /** 战役状态（存档根对象）。 */
 export interface CampaignState {
+  monsterPlayerRouteVersion?: 'C3E-MONSTER-PLAYER-PATH-v1';
+  heroRuntimeSelection?: import('./hero-runtime').HeroRuntimeSelection;
+  heroProductionSession?: import('./hero-runtime').HeroProductionSession;
+  ruinsBoneFigureSupply?: import('../game-engine/ruins/physical-supply').BoneFigureSupplyState;
+  ruinsRuleSetSelection?: import('../game-engine/rules/ruins-v4').RuinsVersionSelection | import('../game-engine/rules/ruins-v5').RuinsV5Selection | import('../game-engine/rules/ruins-v6').RuinsV6Selection;
+  ruinsDrawState?: import('../game-engine/ruins/encounter-draw').RuinsDrawState;
+  necromancerPreparationDay?: import('../game-engine/campaign/necromancer-preparation-day').NecromancerPreparationDay;
+  /** Settled Standard Quest checkpoints, distinct from completed Boss encounters. */
+  prophetQuestThreatHistory?: Array<{ questRunId: string; activeThreatId: string;
+    checkpoint: import('./boss-runtime').BossEncounterState;
+    drawState?: import('../game-engine/ruins/encounter-draw').RuinsDrawState }>;
+  necromancerQuestThreatHistory?: Array<{ questRunId: string; activeThreatId: string;
+    checkpoint: import('./boss-runtime').BossEncounterState;
+    drawState?: import('../game-engine/ruins/encounter-draw').RuinsDrawState }>;
+  necromancerGraveyardReceipts?: import('./necromancer-dependencies').GraveyardReceipt[];
+  bossRoomStorage?: { roomId: string; roomCardId: number; tileId: string; encounterId: string; lifecycle: 'RESERVED' | 'IN_PLAY' | 'RETURNED' };
+  /** Physical ownership receipts for an encounter terminated before Boss victory. */
+  bossRoomReturnHistory?: Array<{
+    transactionId: string; campaignId: string; questRunId: string; encounterId: string;
+    roomId: string; roomCardId: number; tileId: string; ruleSetVersion: string;
+    previousLifecycle: 'RESERVED' | 'IN_PLAY'; reason: 'incomplete' | 'failed';
+    encounter: import('./boss-runtime').BossEncounterState;
+  }>;
+
+  /** C1C31R explicit pre-encounter Dodge rule selection; absent legacy saves remain v1. */
+  heroDodgeRuleSetSelection?: import('./hero-dodge-rules').HeroDodgeRuleSetSelection;
+  /** Rule-only replay provenance; does not promote Boss combat or migrate old records. */
+  heroDodgeReplayRecords?: import('./hero-dodge-rules').HeroDodgeReplayRecord[];
   /** Completed contract-bound encounters preserve rule version and replay provenance. */
   bossEncounterHistory?: import('./boss-runtime').BossEncounterState[];
   /** Pre-flip encounter state survives ordinary Battle settlement; Room entry bridge resumes it later. */
@@ -862,6 +919,7 @@ export interface CampaignState {
   temporarySkillFormOverrides: TemporarySkillFormOverride[];
   // ---- Phase 8C：Trinket / Nomad Wagon ----
   /** 待分配的 Trinket 队列（先进先出；含死亡转移，刷新可恢复）。 */
+  pendingSourceTrinketRewards?: import('../game-engine/trinkets/source-deck').PendingSourceTrinketReward[];
   pendingTrinketAllocations: PendingTrinketAllocation[];
   /** 当前开放中的 Trinket 使用机会（同一窗口可能同时开多张卡）。 */
   pendingTrinketUseOpportunities: TrinketUseOpportunity[];
@@ -1115,6 +1173,9 @@ export interface ResolveTestModifiers {
 
 /** 精神效果（数据驱动执行器使用，不为每张卡写独立 if/else）。 */
 export type ResolveEffect =
+  | { type: 'stress-party'; amount: number }
+  | { type: 'buff-self' | 'buff-party'; turns: number }
+  | { type: 'heal-self-per-level'; amount: number }
   | { type: 'stress-self'; amount: number }
   | { type: 'stress-allies'; amount: number }
   | { type: 'heal-self'; amount: number }

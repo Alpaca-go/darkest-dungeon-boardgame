@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R2A",
+  "baselineHead": "624a2b5c20b9f40ee9e87ac103780cb9eb3c2053",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "status": "DOMAIN_AND_UI_WIRING_ADDED_SCOPED_PROOFS",
+  "modules": [
+    "src/game-engine/campaign/necromancer-preparation-day.ts",
+    "src/game-engine/commands/quest.ts",
+    "src/store/useGameStore.ts",
+    "src/pages/HamletPage.tsx"
+  ],
+  "testFile": "src/audit/c1c32r2a-ruins-executable-dependencies.test.ts",
+  "path": [
+    "saved Threat checkpoint",
+    "existing Quest result / Room return",
+    "real commitReturnToHamlet",
+    "saved tie selection",
+    "forced visit",
+    "Level II use/decline or Level III guard-only",
+    "accepted campaign transaction"
+  ],
+  "manualPhaseMutationAfterInitialFixture": false,
+  "savedSelectionRerolled": false,
+  "acceptedCommandRewritten": false,
+  "provenBoundaries": [
+    "PENDING_TIE",
+    "PENDING_VISIT",
+    "PENDING_LEVEL_II_EFFECT",
+    "COMMITTED",
+    "PENDING_NEXT_QUEST",
+    "GUARD_ONLY"
+  ],
+  "fullProductPathProven": false,
+  "activeQuestAndExpiryThroughRealNextQuestProven": false,
+  "remaining": [
+    "NORMAL_PRODUCT_THREAT_PREPARATION_ENTRY_PROOF",
+    "ACTIVE_QUEST_AND_EXPIRED_REAL_COMMAND_SAVE_PROOF"
+  ],
+  "limitation": "Scoped tests cancel a reserved Boss Quest through finishQuest. The normal UI forbids voluntary Boss Quest exit. This is domain bridge coverage, not a certified complete product journey."
+}

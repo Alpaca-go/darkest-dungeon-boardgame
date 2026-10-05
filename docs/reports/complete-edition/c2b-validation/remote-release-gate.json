@@ -1,0 +1,159 @@
+{
+  "phase": "C2B",
+  "name": "Production release gate",
+  "head_sha": "a0c657eb2ded3894348fc9a7ed0e4ad9677c9ae8",
+  "expectedFinalHead": "a0c657eb2ded3894348fc9a7ed0e4ad9677c9ae8",
+  "exactHeadMatch": true,
+  "id": 37127325431,
+  "status": "completed",
+  "conclusion": "success",
+  "url": "https://github.com/Alpaca-go/darkest-dungeon-boardgame/actions/runs/37127325431",
+  "checkedAt": "2026-10-03T14:26:34.6492586Z",
+  "steps": [
+    {
+      "name": "Set up job",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/checkout@v4",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/setup-node@v4",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run npm ci",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run npm run typecheck",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run npm run verify:complete-edition-c1c38",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run npm run verify:complete-edition-c1c38r1",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run npm run verify:complete-edition-c2a",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run npm run verify:complete-edition-c2a-r1",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run npm run verify:complete-edition-c2b",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run npm test -- --reporter=json --outputFile=tmp-c1c38-final-tests.json",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run node scripts/audit/verify-c2a-test-report.mjs tmp-c1c38-final-tests.json",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run npm run build",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run npm run historical-baseline-validation",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run npm run verify:immutable-phase-baselines",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run npm run verify:necromancer-successor-compatibility",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run npm run verify:prophet-successor-compatibility",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run npm run verify:boss-successor-compatibility",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run npm run verify:prophet-gate-a",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run npm run verify:complete-edition-c1c35r2a",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run npm run verify:complete-edition-c1c35r2b",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run npx playwright install --with-deps chromium",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run npm run verify:complete-edition-c1c36",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run npm run test:e2e:built-bundle-successor",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run npm run verify:complete-edition-c1c37",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run npm run verify:complete-edition-c1c38",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Run actions/setup-node@v4",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Run actions/checkout@v4",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Complete job",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ]
+}

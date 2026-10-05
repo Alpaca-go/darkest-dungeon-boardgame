@@ -1,0 +1,1543 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.5-C2B",
+  "baseline": "173ca67adf0e9a1fa2af18693c0fc3bc42973217",
+  "reviewDate": "2026-10-03",
+  "sourcePolicyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "runtimeModified": false,
+  "prototypePromoted": false,
+  "runtimeImplementationAuthorized": false,
+  "bindings": [
+    {
+      "glyphId": "affliction-card",
+      "visualDescription": "red card silhouette",
+      "sourceExamples": [
+        {
+          "heroId": "jester",
+          "level": 3,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 12,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 28,
+          "region": "Affliction card example",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Affliction card",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "bleed",
+      "visualDescription": "red droplet",
+      "sourceExamples": [
+        {
+          "heroId": "hellion",
+          "level": 3,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 4,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "skillId": "hellion-adrenaline-rush",
+          "level": 1,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 37,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 21,
+          "region": "Bleed magnitude and turn stack",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Bleed",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "blight",
+      "visualDescription": "green droplet",
+      "sourceExamples": [
+        {
+          "heroId": "hellion",
+          "level": 3,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 4,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "skillId": "hellion-adrenaline-rush",
+          "level": 1,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 37,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 21,
+          "region": "Blight magnitude and turn stack",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Blight",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "buff",
+      "visualDescription": "blue upward double chevron",
+      "sourceExamples": [
+        {
+          "heroId": "hellion",
+          "level": 3,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 4,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "skillId": "hellion-adrenaline-rush",
+          "level": 1,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 37,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 21,
+          "region": "+1 Crit per active stack",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Buff",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "d10",
+      "visualDescription": "ten-sided die",
+      "sourceExamples": [
+        {
+          "heroId": "arbalest",
+          "level": 3,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 16,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 19,
+          "region": "Roll one ten-sided die",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "d10",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "damage",
+      "visualDescription": "red lightning bolts",
+      "sourceExamples": [
+        {
+          "heroId": "leper",
+          "level": 3,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 29,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "skillId": "crusader-stunning-blow",
+          "level": 1,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 7,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 19,
+          "region": "Hit effects: damage deals Wounds",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Damage",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "death-door-slot",
+      "visualDescription": "red skull in framed die slot",
+      "sourceExamples": [
+        {
+          "heroId": "crusader",
+          "level": 3,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 2,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 29,
+          "region": "place die at Death’s Door",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Deathblow die slot",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "debuff",
+      "visualDescription": "orange downward double chevron",
+      "sourceExamples": [
+        {
+          "heroId": "crusader",
+          "level": 3,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 2,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "skillId": "bounty-hunter-caltrops",
+          "level": 1,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 61,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 21,
+          "region": "attacker +1 Crit per active stack",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Debuff",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "disease",
+      "visualDescription": "yellow pathogen glyph",
+      "sourceExamples": [
+        {
+          "heroId": "vestal",
+          "level": 3,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 10,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 27,
+          "region": "Disease cards; profile Immunities",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Disease",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "dodge",
+      "visualDescription": "yellow darting silhouette with white numeral",
+      "sourceExamples": [
+        {
+          "heroId": "crusader",
+          "level": 3,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 2,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 10,
+          "region": "Dodge label",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Dodge",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "duration-t",
+      "visualDescription": "printed digit followed by t",
+      "sourceExamples": [
+        {
+          "skillId": "crusader-bulwark-of-faith",
+          "level": 1,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 10,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 20,
+          "region": "one stack token per turn duration",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Condition turns",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "gold",
+      "visualDescription": "gold coin",
+      "sourceExamples": [
+        {
+          "heroId": "antiquarian",
+          "level": 3,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 31,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 29,
+          "region": "Guild costs use Gold",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Gold",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "guard",
+      "visualDescription": "cyan shield",
+      "sourceExamples": [
+        {
+          "skillId": "jester-dirk-stab",
+          "level": 1,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 106,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 21,
+          "region": "enemies must target guarded character unless Skill targets allies",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Guard",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "heal",
+      "visualDescription": "green cross",
+      "sourceExamples": [
+        {
+          "heroId": "plague-doctor",
+          "level": 3,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 14,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "skillId": "crusader-battle-heal",
+          "level": 1,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 13,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 19,
+          "region": "Healing removes Wounds",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Healing",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "heart-outline",
+      "visualDescription": "black heart outlined red in a square",
+      "sourceExamples": [
+        {
+          "heroId": "flagellant",
+          "level": 3,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 27,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "skillId": "hellion-bleed-out",
+          "level": 1,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 40,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 21,
+          "region": "Wounds and Damage are distinct",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Wounds",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "hero-target",
+      "visualDescription": "yellow helmet",
+      "sourceExamples": [
+        {
+          "heroId": "crusader",
+          "level": 3,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 2,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "skillId": "crusader-battle-heal",
+          "level": 1,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 13,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 19,
+          "region": "count helmets for target count",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Hero target",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "life",
+      "visualDescription": "white number over fiery red heart",
+      "sourceExamples": [
+        {
+          "heroId": "crusader",
+          "level": 3,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 2,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 10,
+          "region": "Hero Life label",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Life",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "loot-chest",
+      "visualDescription": "closed treasure chest",
+      "sourceExamples": [
+        {
+          "heroId": "grave-robber",
+          "level": 3,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 18,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 10,
+          "region": "ten Loot Chest Tokens in Loot pile",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Loot Chest",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "mark",
+      "visualDescription": "red circular crosshair",
+      "sourceExamples": [
+        {
+          "skillId": "crusader-bulwark-of-faith",
+          "level": 1,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 10,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 21,
+          "region": "attacker +1 Accuracy per stack",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Mark",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "monster-target",
+      "visualDescription": "red skull",
+      "sourceExamples": [
+        {
+          "skillId": "crusader-stunning-blow",
+          "level": 1,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 7,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 19,
+          "region": "count skulls for target count",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Monster target",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "movement-boot",
+      "visualDescription": "pale boot icons",
+      "sourceExamples": [
+        {
+          "heroId": "crusader",
+          "level": 3,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 2,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 10,
+          "region": "count boots; not initiative Speed numeral",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Hero movement",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "protection",
+      "visualDescription": "grey breastplate",
+      "sourceExamples": [
+        {
+          "heroId": "abomination",
+          "level": 3,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 23,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "skillId": "crusader-bulwark-of-faith",
+          "level": 1,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 10,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 21,
+          "region": "halve Damage rounded up",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Protection",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "range-arrow",
+      "visualDescription": "grey curved arrow",
+      "sourceExamples": [
+        {
+          "skillId": "crusader-stunning-blow",
+          "level": 1,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 7,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 19,
+          "region": "exact or bracketed range",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Range in Areas",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "riposte",
+      "visualDescription": "orange curved counterattack mark",
+      "sourceExamples": [
+        {
+          "skillId": "highwayman-duelists-advance",
+          "level": 1,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 79,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 21,
+          "region": "return half incoming enemy Damage rounded up",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Riposte",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "self-effect-arrow",
+      "visualDescription": "gold bent arrow pointing up-left",
+      "sourceExamples": [
+        {
+          "skillId": "crusader-bulwark-of-faith",
+          "level": 1,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 10,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 20,
+          "region": "after roll before other effects; hit or miss",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Self Effects",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "shuffle",
+      "visualDescription": "blue double lateral chevrons",
+      "sourceExamples": [
+        {
+          "heroId": "crusader",
+          "level": 3,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 2,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "skillId": "crusader-holy-lance",
+          "level": 1,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 16,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 21,
+          "region": "Push/Pull changes Areas and Stance",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Shuffle",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "stance-aggressive",
+      "visualDescription": "yellow crossed swords",
+      "sourceExamples": [
+        {
+          "skillId": "crusader-bulwark-of-faith",
+          "level": 1,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 10,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 19,
+          "region": "eligible Stances",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Aggressive Stance",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "stance-defensive",
+      "visualDescription": "yellow shield",
+      "sourceExamples": [
+        {
+          "skillId": "crusader-bulwark-of-faith",
+          "level": 1,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 10,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 19,
+          "region": "eligible Stances",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Defensive Stance",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "stance-ranged",
+      "visualDescription": "yellow arrows",
+      "sourceExamples": [
+        {
+          "skillId": "crusader-battle-heal",
+          "level": 1,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 13,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 19,
+          "region": "eligible Stances",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Ranged Stance",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "stance-support",
+      "visualDescription": "yellow castle outline",
+      "sourceExamples": [
+        {
+          "skillId": "crusader-battle-heal",
+          "level": 1,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 13,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 19,
+          "region": "eligible Stances",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Support Stance",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "stress",
+      "visualDescription": "grey framed spiked semicircle",
+      "sourceExamples": [
+        {
+          "heroId": "crusader",
+          "level": 3,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 2,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "skillId": "crusader-inspiring-cry",
+          "level": 1,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 19,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 28,
+          "region": "Stress tracker and resolve test",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Stress",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "stun",
+      "visualDescription": "three yellow diamond stars",
+      "sourceExamples": [
+        {
+          "heroId": "crusader",
+          "level": 3,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 2,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "skillId": "crusader-stunning-blow",
+          "level": 1,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 7,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 21,
+          "region": "Hero loses an action; Monster loses turn",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Stun",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "target-effect-arrow",
+      "visualDescription": "gold bent arrow pointing right",
+      "sourceExamples": [
+        {
+          "skillId": "crusader-stunning-blow",
+          "level": 1,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 7,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 20,
+          "region": "after other effects; only on hit",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Target Effects",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "torch",
+      "visualDescription": "orange flame on black torch",
+      "sourceExamples": [
+        {
+          "skillId": "crusader-bulwark-of-faith",
+          "level": 1,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 10,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 29,
+          "region": "Light tracker",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Light",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "trinket-slot",
+      "visualDescription": "gold bag in frame",
+      "sourceExamples": [
+        {
+          "heroId": "crusader",
+          "level": 3,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 2,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 10,
+          "region": "Trinket Slot label",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Trinket slot",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    },
+    {
+      "glyphId": "virtue-card",
+      "visualDescription": "green card silhouette",
+      "sourceExamples": [
+        {
+          "heroId": "flagellant",
+          "level": 3,
+          "sourceRef": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 27,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "officialRulebookBinding": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 28,
+          "region": "Virtue card example",
+          "authority": "OFFICIAL_RULEBOOK"
+        }
+      ],
+      "normalizedConcept": "Virtue card",
+      "status": "OFFICIAL_SOURCE",
+      "executionRequired": true,
+      "illustrative": false
+    }
+  ],
+  "rules": [
+    {
+      "path": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "page": 19,
+      "region": "Stances, Area range, target count, accuracy, omitted Accuracy, Damage and Heal",
+      "authority": "OFFICIAL_RULEBOOK"
+    },
+    {
+      "path": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "page": 20,
+      "region": "critical replacement; Self / Target; turn stacks",
+      "authority": "OFFICIAL_RULEBOOK"
+    },
+    {
+      "path": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "page": 21,
+      "region": "conditions, resistance, immunity and Shuffle",
+      "authority": "OFFICIAL_RULEBOOK"
+    },
+    {
+      "path": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "page": 28,
+      "region": "stress",
+      "authority": "OFFICIAL_RULEBOOK"
+    },
+    {
+      "path": "docs/DD_EN_COREBOX_RULES.pdf",
+      "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+      "page": 29,
+      "region": "Life, Death’s Door and independent Hero / Skill levels",
+      "authority": "OFFICIAL_RULEBOOK"
+    }
+  ],
+  "c1c19SuccessorLinks": [
+    {
+      "historicalSkillId": "crusader-holy-lance",
+      "historicalCondition": "bleed",
+      "historicalSource": "docs/data/complete-edition/c1c19-hero-skill-condition-source-gap.json",
+      "historicalContract": "docs/data/complete-edition/c1c19-hero-caused-condition-source-contract.json",
+      "identityAuthority": "docs/data/complete-edition/c2a-prototype-hero-data-comparison.json",
+      "successorSkillId": "crusader-holy-lance",
+      "successorForms": [
+        {
+          "level": 1,
+          "literal": "Self [shuffle]Pull 1; Target [damage]+1 vs Unholy",
+          "source": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 16,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 2,
+          "literal": "Self [shuffle]Pull 1; Target [damage]+2 vs Unholy",
+          "source": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 17,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 3,
+          "literal": "Self [shuffle]Pull 1; Target [damage]+3 vs Unholy",
+          "source": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 18,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "status": "OFFICIAL_PRINT_HAS_NO_BLEED",
+      "runtimeMappingAuthorized": false,
+      "historicalArtifactsChanged": false
+    },
+    {
+      "historicalSkillId": "highwayman-wicked-slice",
+      "historicalCondition": "bleed",
+      "historicalSource": "docs/data/complete-edition/c1c19-hero-skill-condition-source-gap.json",
+      "historicalContract": "docs/data/complete-edition/c1c19-hero-caused-condition-source-contract.json",
+      "identityAuthority": "docs/data/complete-edition/c2a-prototype-hero-data-comparison.json",
+      "successorSkillId": "highwayman-wicked-slice",
+      "successorForms": [
+        {
+          "level": 1,
+          "literal": "",
+          "source": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 64,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 2,
+          "literal": "",
+          "source": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 65,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 3,
+          "literal": "",
+          "source": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 66,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "status": "OFFICIAL_PRINT_HAS_NO_BLEED",
+      "runtimeMappingAuthorized": false,
+      "historicalArtifactsChanged": false
+    },
+    {
+      "historicalSkillId": "highwayman-open-vein",
+      "historicalCondition": "bleed",
+      "historicalSource": "docs/data/complete-edition/c1c19-hero-skill-condition-source-gap.json",
+      "historicalContract": "docs/data/complete-edition/c1c19-hero-caused-condition-source-contract.json",
+      "identityAuthority": "docs/data/complete-edition/c2a-prototype-hero-data-comparison.json",
+      "successorSkillId": "highwayman-open-vein",
+      "successorForms": [
+        {
+          "level": 1,
+          "literal": "Target 2[bleed]2t",
+          "source": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 82,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 2,
+          "literal": "Target 2[bleed]3t",
+          "source": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 83,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        },
+        {
+          "level": 3,
+          "literal": "Target 3[bleed]3t",
+          "source": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_44x68_SKILLS_FRONT.pdf",
+            "sha256": "8dd769422036f24c8c17b02e23c1df5173df2f81c507938af93b1d7f6ebb7636",
+            "page": 84,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          }
+        }
+      ],
+      "status": "OFFICIAL_DURATION_BOUND",
+      "runtimeMappingAuthorized": false,
+      "historicalArtifactsChanged": false
+    },
+    {
+      "historicalSkillId": "hellion-bash",
+      "historicalCondition": "stun",
+      "historicalSource": "docs/data/complete-edition/c1c19-hero-skill-condition-source-gap.json",
+      "historicalContract": "docs/data/complete-edition/c1c19-hero-caused-condition-source-contract.json",
+      "identityAuthority": "docs/data/complete-edition/c2a-prototype-hero-data-comparison.json",
+      "successorSkillId": null,
+      "successorForms": [],
+      "status": "PROTOTYPE_ONLY_NO_OFFICIAL_COUNTERPART",
+      "runtimeMappingAuthorized": false,
+      "historicalArtifactsChanged": false
+    }
+  ],
+  "approvedProjectRulings": [],
+  "unresolvedGlyphs": [
+    "skill-emblem-abomination-absolution",
+    "skill-emblem-abomination-beasts-bile",
+    "skill-emblem-abomination-manacles",
+    "skill-emblem-abomination-rage",
+    "skill-emblem-abomination-rake",
+    "skill-emblem-abomination-slam",
+    "skill-emblem-abomination-transform-to-beast",
+    "skill-emblem-abomination-transform-to-human",
+    "skill-emblem-antiquarian-festering-vapours",
+    "skill-emblem-antiquarian-flashpowder",
+    "skill-emblem-antiquarian-fortifying-vapours",
+    "skill-emblem-antiquarian-get-down",
+    "skill-emblem-antiquarian-invigorating-vapours",
+    "skill-emblem-antiquarian-nervous-stab",
+    "skill-emblem-antiquarian-protect-me",
+    "skill-emblem-arbalest-battlefield-bandage",
+    "skill-emblem-arbalest-blindfire",
+    "skill-emblem-arbalest-bola",
+    "skill-emblem-arbalest-rallying-flare",
+    "skill-emblem-arbalest-sniper-shot",
+    "skill-emblem-arbalest-snipers-mark",
+    "skill-emblem-arbalest-suppressive-fire",
+    "skill-emblem-bounty-hunter-caltrops",
+    "skill-emblem-bounty-hunter-collect-bounty",
+    "skill-emblem-bounty-hunter-come-hither",
+    "skill-emblem-bounty-hunter-finish-him",
+    "skill-emblem-bounty-hunter-flashbang",
+    "skill-emblem-bounty-hunter-mark-for-death",
+    "skill-emblem-bounty-hunter-uppercut",
+    "skill-emblem-crusader-battle-heal",
+    "skill-emblem-crusader-bulwark-of-faith",
+    "skill-emblem-crusader-holy-lance",
+    "skill-emblem-crusader-inspiring-cry",
+    "skill-emblem-crusader-smite",
+    "skill-emblem-crusader-stunning-blow",
+    "skill-emblem-crusader-zealous-accusation",
+    "skill-emblem-flagellant-endure",
+    "skill-emblem-flagellant-exsanguinate",
+    "skill-emblem-flagellant-punish",
+    "skill-emblem-flagellant-rain-of-sorrows",
+    "skill-emblem-flagellant-reclaim",
+    "skill-emblem-flagellant-redeem",
+    "skill-emblem-flagellant-suffer",
+    "skill-emblem-grave-robber-flashing-daggers",
+    "skill-emblem-grave-robber-lunge",
+    "skill-emblem-grave-robber-pick-to-the-face",
+    "skill-emblem-grave-robber-poison-dart",
+    "skill-emblem-grave-robber-shadow-fade",
+    "skill-emblem-grave-robber-throw-dagger",
+    "skill-emblem-grave-robber-toxin-trickery",
+    "skill-emblem-hellion-adrenaline-rush",
+    "skill-emblem-hellion-barbaric-yawp",
+    "skill-emblem-hellion-bleed-out",
+    "skill-emblem-hellion-breakthrough",
+    "skill-emblem-hellion-if-it-bleeds",
+    "skill-emblem-hellion-iron-swan",
+    "skill-emblem-hellion-wicked-hack",
+    "skill-emblem-highwayman-duelists-advance",
+    "skill-emblem-highwayman-grapeshot-blast",
+    "skill-emblem-highwayman-open-vein",
+    "skill-emblem-highwayman-pistol-shot",
+    "skill-emblem-highwayman-point-blank-shot",
+    "skill-emblem-highwayman-tracking-shot",
+    "skill-emblem-highwayman-wicked-slice",
+    "skill-emblem-hound-master-blackjack",
+    "skill-emblem-hound-master-cry-havoc",
+    "skill-emblem-hound-master-guard-dog",
+    "skill-emblem-hound-master-hounds-harry",
+    "skill-emblem-hound-master-hounds-rush",
+    "skill-emblem-hound-master-lick-wounds",
+    "skill-emblem-hound-master-target-whistle",
+    "skill-emblem-jester-battle-ballad",
+    "skill-emblem-jester-dirk-stab",
+    "skill-emblem-jester-finale",
+    "skill-emblem-jester-harvest",
+    "skill-emblem-jester-inspiring-tune",
+    "skill-emblem-jester-slice-off",
+    "skill-emblem-jester-solo",
+    "skill-emblem-leper-chop",
+    "skill-emblem-leper-hew",
+    "skill-emblem-leper-intimidate",
+    "skill-emblem-leper-purge",
+    "skill-emblem-leper-revenge",
+    "skill-emblem-leper-solemnity",
+    "skill-emblem-leper-withstand",
+    "skill-emblem-man-at-arms-bellow",
+    "skill-emblem-man-at-arms-bolster",
+    "skill-emblem-man-at-arms-command",
+    "skill-emblem-man-at-arms-crush",
+    "skill-emblem-man-at-arms-defender",
+    "skill-emblem-man-at-arms-rampart",
+    "skill-emblem-man-at-arms-retribution",
+    "skill-emblem-musketeer-aimed-shot",
+    "skill-emblem-musketeer-buckshot",
+    "skill-emblem-musketeer-call-the-shot",
+    "skill-emblem-musketeer-patch-up",
+    "skill-emblem-musketeer-sidearm",
+    "skill-emblem-musketeer-skeet-shot",
+    "skill-emblem-musketeer-smokescreen",
+    "skill-emblem-occultist-abyssal-artillery",
+    "skill-emblem-occultist-daemons-pull",
+    "skill-emblem-occultist-hands-from-the-abyss",
+    "skill-emblem-occultist-sacrificial-stab",
+    "skill-emblem-occultist-vulnerability-hex",
+    "skill-emblem-occultist-weakening-curse",
+    "skill-emblem-occultist-wyrd-reconstruction",
+    "skill-emblem-plague-doctor-battlefield-medicine",
+    "skill-emblem-plague-doctor-blinding-gas",
+    "skill-emblem-plague-doctor-disorienting-blast",
+    "skill-emblem-plague-doctor-emboldening-vapours",
+    "skill-emblem-plague-doctor-incision",
+    "skill-emblem-plague-doctor-noxious-blast",
+    "skill-emblem-plague-doctor-plague-grenade",
+    "skill-emblem-shieldbreaker-adders-kiss",
+    "skill-emblem-shieldbreaker-captivate",
+    "skill-emblem-shieldbreaker-expose",
+    "skill-emblem-shieldbreaker-impale",
+    "skill-emblem-shieldbreaker-pierce",
+    "skill-emblem-shieldbreaker-puncture",
+    "skill-emblem-shieldbreaker-serpent-sway",
+    "skill-emblem-vestal-dazzling-light",
+    "skill-emblem-vestal-divine-comfort",
+    "skill-emblem-vestal-divine-grace",
+    "skill-emblem-vestal-hand-of-light",
+    "skill-emblem-vestal-illumination",
+    "skill-emblem-vestal-judgement",
+    "skill-emblem-vestal-mace-bash"
+  ]
+}

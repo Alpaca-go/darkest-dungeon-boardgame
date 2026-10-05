@@ -1,0 +1,678 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.5-C2A",
+  "baseline": "7f4001b956cac441778dbb457cc33041f9057ad5",
+  "sourcePolicyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "reviewDate": "2026-10-02",
+  "runtimeModified": false,
+  "prototypePromoted": false,
+  "runtimeImplementationAuthorized": false,
+  "heroes": [
+    {
+      "heroClassId": "crusader",
+      "printedName": "CRUSADER",
+      "discoveryDisplayName": "Crusader",
+      "sourceGuid": "d0b813",
+      "ttsPath": "/ObjectStates/49/ContainedObjects/3",
+      "status": "OFFICIAL_SOURCE",
+      "sourceReferences": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+          "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+          "page": 1,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "contentSet": {
+        "id": "core",
+        "kind": "CORE",
+        "officialSource": {
+          "sourceId": "DD_EN_COREBOX_RULES",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_COREBOX_RULES-p6.pdf",
+          "sha256": "0da1398da453a41685d970c90a34e23635ee6e7428e06c9504dc59ba73f51430",
+          "page": 1,
+          "authority": "OFFICIAL_RULEBOOK"
+        },
+        "productionEligibilityDecided": false
+      },
+      "artEdition": "THE_DARKEST_HEROES_ALTERNATE_ART",
+      "artEditionSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_BOX",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_BOX-p2.pdf",
+        "sha256": "2231192b932bc2ea57775fadb40547fd57c40bdd89abe904812f3e5c5c365c42",
+        "page": 1,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      }
+    },
+    {
+      "heroClassId": "hellion",
+      "printedName": "HELLION",
+      "discoveryDisplayName": "Hellion",
+      "sourceGuid": "0f365a",
+      "ttsPath": "/ObjectStates/49/ContainedObjects/16",
+      "status": "OFFICIAL_SOURCE",
+      "sourceReferences": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+          "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+          "page": 3,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "contentSet": {
+        "id": "core",
+        "kind": "CORE",
+        "officialSource": {
+          "sourceId": "DD_EN_COREBOX_RULES",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_COREBOX_RULES-p6.pdf",
+          "sha256": "0da1398da453a41685d970c90a34e23635ee6e7428e06c9504dc59ba73f51430",
+          "page": 1,
+          "authority": "OFFICIAL_RULEBOOK"
+        },
+        "productionEligibilityDecided": false
+      },
+      "artEdition": "THE_DARKEST_HEROES_ALTERNATE_ART",
+      "artEditionSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_BOX",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_BOX-p2.pdf",
+        "sha256": "2231192b932bc2ea57775fadb40547fd57c40bdd89abe904812f3e5c5c365c42",
+        "page": 1,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      }
+    },
+    {
+      "heroClassId": "bounty-hunter",
+      "printedName": "BOUNTY HUNTER",
+      "discoveryDisplayName": "Bounty Hunter",
+      "sourceGuid": "786731",
+      "ttsPath": "/ObjectStates/49/ContainedObjects/14",
+      "status": "OFFICIAL_SOURCE",
+      "sourceReferences": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+          "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+          "page": 5,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "contentSet": {
+        "id": "core",
+        "kind": "CORE",
+        "officialSource": {
+          "sourceId": "DD_EN_COREBOX_RULES",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_COREBOX_RULES-p6.pdf",
+          "sha256": "0da1398da453a41685d970c90a34e23635ee6e7428e06c9504dc59ba73f51430",
+          "page": 1,
+          "authority": "OFFICIAL_RULEBOOK"
+        },
+        "productionEligibilityDecided": false
+      },
+      "artEdition": "THE_DARKEST_HEROES_ALTERNATE_ART",
+      "artEditionSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_BOX",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_BOX-p2.pdf",
+        "sha256": "2231192b932bc2ea57775fadb40547fd57c40bdd89abe904812f3e5c5c365c42",
+        "page": 1,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      }
+    },
+    {
+      "heroClassId": "highwayman",
+      "printedName": "HIGHWAYMAN",
+      "discoveryDisplayName": "Highwayman",
+      "sourceGuid": "3ba5a3",
+      "ttsPath": "/ObjectStates/49/ContainedObjects/8",
+      "status": "OFFICIAL_SOURCE",
+      "sourceReferences": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+          "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+          "page": 7,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "contentSet": {
+        "id": "core",
+        "kind": "CORE",
+        "officialSource": {
+          "sourceId": "DD_EN_COREBOX_RULES",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_COREBOX_RULES-p6.pdf",
+          "sha256": "0da1398da453a41685d970c90a34e23635ee6e7428e06c9504dc59ba73f51430",
+          "page": 1,
+          "authority": "OFFICIAL_RULEBOOK"
+        },
+        "productionEligibilityDecided": false
+      },
+      "artEdition": "THE_DARKEST_HEROES_ALTERNATE_ART",
+      "artEditionSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_BOX",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_BOX-p2.pdf",
+        "sha256": "2231192b932bc2ea57775fadb40547fd57c40bdd89abe904812f3e5c5c365c42",
+        "page": 1,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      }
+    },
+    {
+      "heroClassId": "vestal",
+      "printedName": "VESTAL",
+      "discoveryDisplayName": "Vestal",
+      "sourceGuid": "ea4b25",
+      "ttsPath": "/ObjectStates/49/ContainedObjects/11",
+      "status": "OFFICIAL_SOURCE",
+      "sourceReferences": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+          "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+          "page": 9,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "contentSet": {
+        "id": "core",
+        "kind": "CORE",
+        "officialSource": {
+          "sourceId": "DD_EN_COREBOX_RULES",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_COREBOX_RULES-p6.pdf",
+          "sha256": "0da1398da453a41685d970c90a34e23635ee6e7428e06c9504dc59ba73f51430",
+          "page": 1,
+          "authority": "OFFICIAL_RULEBOOK"
+        },
+        "productionEligibilityDecided": false
+      },
+      "artEdition": "THE_DARKEST_HEROES_ALTERNATE_ART",
+      "artEditionSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_BOX",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_BOX-p2.pdf",
+        "sha256": "2231192b932bc2ea57775fadb40547fd57c40bdd89abe904812f3e5c5c365c42",
+        "page": 1,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      }
+    },
+    {
+      "heroClassId": "jester",
+      "printedName": "JESTER",
+      "discoveryDisplayName": "Jester",
+      "sourceGuid": "f56cc5",
+      "ttsPath": "/ObjectStates/49/ContainedObjects/5",
+      "status": "OFFICIAL_SOURCE",
+      "sourceReferences": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+          "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+          "page": 11,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "contentSet": {
+        "id": "core",
+        "kind": "CORE",
+        "officialSource": {
+          "sourceId": "DD_EN_COREBOX_RULES",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_COREBOX_RULES-p6.pdf",
+          "sha256": "0da1398da453a41685d970c90a34e23635ee6e7428e06c9504dc59ba73f51430",
+          "page": 1,
+          "authority": "OFFICIAL_RULEBOOK"
+        },
+        "productionEligibilityDecided": false
+      },
+      "artEdition": "THE_DARKEST_HEROES_ALTERNATE_ART",
+      "artEditionSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_BOX",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_BOX-p2.pdf",
+        "sha256": "2231192b932bc2ea57775fadb40547fd57c40bdd89abe904812f3e5c5c365c42",
+        "page": 1,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      }
+    },
+    {
+      "heroClassId": "plague-doctor",
+      "printedName": "PLAGUE DOCTOR",
+      "discoveryDisplayName": "Plague Doctor",
+      "sourceGuid": "9ca52f",
+      "ttsPath": "/ObjectStates/49/ContainedObjects/2",
+      "status": "OFFICIAL_SOURCE",
+      "sourceReferences": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+          "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+          "page": 13,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "contentSet": {
+        "id": "core",
+        "kind": "CORE",
+        "officialSource": {
+          "sourceId": "DD_EN_COREBOX_RULES",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_COREBOX_RULES-p6.pdf",
+          "sha256": "0da1398da453a41685d970c90a34e23635ee6e7428e06c9504dc59ba73f51430",
+          "page": 1,
+          "authority": "OFFICIAL_RULEBOOK"
+        },
+        "productionEligibilityDecided": false
+      },
+      "artEdition": "THE_DARKEST_HEROES_ALTERNATE_ART",
+      "artEditionSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_BOX",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_BOX-p2.pdf",
+        "sha256": "2231192b932bc2ea57775fadb40547fd57c40bdd89abe904812f3e5c5c365c42",
+        "page": 1,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      }
+    },
+    {
+      "heroClassId": "arbalest",
+      "printedName": "ARBALEST",
+      "discoveryDisplayName": "Arbalest",
+      "sourceGuid": "6803dd",
+      "ttsPath": "/ObjectStates/49/ContainedObjects/9",
+      "status": "OFFICIAL_SOURCE",
+      "sourceReferences": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+          "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+          "page": 15,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "contentSet": {
+        "id": "core",
+        "kind": "CORE",
+        "officialSource": {
+          "sourceId": "DD_EN_COREBOX_RULES",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_COREBOX_RULES-p6.pdf",
+          "sha256": "0da1398da453a41685d970c90a34e23635ee6e7428e06c9504dc59ba73f51430",
+          "page": 1,
+          "authority": "OFFICIAL_RULEBOOK"
+        },
+        "productionEligibilityDecided": false
+      },
+      "artEdition": "THE_DARKEST_HEROES_ALTERNATE_ART",
+      "artEditionSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_BOX",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_BOX-p2.pdf",
+        "sha256": "2231192b932bc2ea57775fadb40547fd57c40bdd89abe904812f3e5c5c365c42",
+        "page": 1,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      }
+    },
+    {
+      "heroClassId": "grave-robber",
+      "printedName": "GRAVE ROBBER",
+      "discoveryDisplayName": "Grave Robber",
+      "sourceGuid": "80e6f0",
+      "ttsPath": "/ObjectStates/49/ContainedObjects/12",
+      "status": "OFFICIAL_SOURCE",
+      "sourceReferences": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+          "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+          "page": 17,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "contentSet": {
+        "id": "core",
+        "kind": "CORE",
+        "officialSource": {
+          "sourceId": "DD_EN_COREBOX_RULES",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_COREBOX_RULES-p6.pdf",
+          "sha256": "0da1398da453a41685d970c90a34e23635ee6e7428e06c9504dc59ba73f51430",
+          "page": 1,
+          "authority": "OFFICIAL_RULEBOOK"
+        },
+        "productionEligibilityDecided": false
+      },
+      "artEdition": "THE_DARKEST_HEROES_ALTERNATE_ART",
+      "artEditionSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_BOX",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_BOX-p2.pdf",
+        "sha256": "2231192b932bc2ea57775fadb40547fd57c40bdd89abe904812f3e5c5c365c42",
+        "page": 1,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      }
+    },
+    {
+      "heroClassId": "occultist",
+      "printedName": "OCCULTIST",
+      "discoveryDisplayName": "Occultist",
+      "sourceGuid": "c7ae3d",
+      "ttsPath": "/ObjectStates/49/ContainedObjects/7",
+      "status": "OFFICIAL_SOURCE",
+      "sourceReferences": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+          "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+          "page": 19,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "contentSet": {
+        "id": "core",
+        "kind": "CORE",
+        "officialSource": {
+          "sourceId": "DD_EN_COREBOX_RULES",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_COREBOX_RULES-p6.pdf",
+          "sha256": "0da1398da453a41685d970c90a34e23635ee6e7428e06c9504dc59ba73f51430",
+          "page": 1,
+          "authority": "OFFICIAL_RULEBOOK"
+        },
+        "productionEligibilityDecided": false
+      },
+      "artEdition": "THE_DARKEST_HEROES_ALTERNATE_ART",
+      "artEditionSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_BOX",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_BOX-p2.pdf",
+        "sha256": "2231192b932bc2ea57775fadb40547fd57c40bdd89abe904812f3e5c5c365c42",
+        "page": 1,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      }
+    },
+    {
+      "heroClassId": "abomination",
+      "printedName": "ABOMINATION",
+      "discoveryDisplayName": "Abomination",
+      "sourceGuid": "e837b5",
+      "ttsPath": "/ObjectStates/49/ContainedObjects/4",
+      "status": "OFFICIAL_SOURCE",
+      "sourceReferences": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+          "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+          "page": 21,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "contentSet": {
+        "id": "core",
+        "kind": "CORE",
+        "officialSource": {
+          "sourceId": "DD_EN_COREBOX_RULES",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_COREBOX_RULES-p6.pdf",
+          "sha256": "0da1398da453a41685d970c90a34e23635ee6e7428e06c9504dc59ba73f51430",
+          "page": 1,
+          "authority": "OFFICIAL_RULEBOOK"
+        },
+        "productionEligibilityDecided": false
+      },
+      "artEdition": "THE_DARKEST_HEROES_ALTERNATE_ART",
+      "artEditionSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_BOX",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_BOX-p2.pdf",
+        "sha256": "2231192b932bc2ea57775fadb40547fd57c40bdd89abe904812f3e5c5c365c42",
+        "page": 1,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      }
+    },
+    {
+      "heroClassId": "man-at-arms",
+      "printedName": "MAN-AT-ARMS",
+      "discoveryDisplayName": "Man-At-Arms",
+      "sourceGuid": "55b79a",
+      "ttsPath": "/ObjectStates/49/ContainedObjects/13",
+      "status": "OFFICIAL_SOURCE",
+      "sourceReferences": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+          "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+          "page": 24,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "contentSet": {
+        "id": "cove",
+        "kind": "EXPANSION",
+        "officialSource": {
+          "sourceId": "DD_EN_COVE_BOX",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_COVE_BOX-p2.pdf",
+          "sha256": "244681ccee5e438e75cf49b389e4b94f986d50bd5f825c0a6fc525d5cdf162d7",
+          "page": 1,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        "productionEligibilityDecided": false
+      },
+      "artEdition": "THE_DARKEST_HEROES_ALTERNATE_ART",
+      "artEditionSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_BOX",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_BOX-p2.pdf",
+        "sha256": "2231192b932bc2ea57775fadb40547fd57c40bdd89abe904812f3e5c5c365c42",
+        "page": 1,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      }
+    },
+    {
+      "heroClassId": "flagellant",
+      "printedName": "FLAGELLANT",
+      "discoveryDisplayName": "Flagellant",
+      "sourceGuid": "45c034",
+      "ttsPath": "/ObjectStates/49/ContainedObjects/1",
+      "status": "OFFICIAL_SOURCE",
+      "sourceReferences": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+          "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+          "page": 26,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "contentSet": {
+        "id": "cove",
+        "kind": "EXPANSION",
+        "officialSource": {
+          "sourceId": "DD_EN_COVE_BOX",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_COVE_BOX-p2.pdf",
+          "sha256": "244681ccee5e438e75cf49b389e4b94f986d50bd5f825c0a6fc525d5cdf162d7",
+          "page": 1,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        "productionEligibilityDecided": false
+      },
+      "artEdition": "THE_DARKEST_HEROES_ALTERNATE_ART",
+      "artEditionSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_BOX",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_BOX-p2.pdf",
+        "sha256": "2231192b932bc2ea57775fadb40547fd57c40bdd89abe904812f3e5c5c365c42",
+        "page": 1,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      }
+    },
+    {
+      "heroClassId": "leper",
+      "printedName": "LEPER",
+      "discoveryDisplayName": "Leper",
+      "sourceGuid": "098235",
+      "ttsPath": "/ObjectStates/49/ContainedObjects/15",
+      "status": "OFFICIAL_SOURCE",
+      "sourceReferences": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+          "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+          "page": 28,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "contentSet": {
+        "id": "warrens",
+        "kind": "EXPANSION",
+        "officialSource": {
+          "sourceId": "DD_EN_WARRENS_BOX",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_WARRENS_BOX-p2.pdf",
+          "sha256": "9f9914109ac375439e8c43bf61aae5bca047162435de8c86183d6c09e3c81c00",
+          "page": 1,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        "productionEligibilityDecided": false
+      },
+      "artEdition": "THE_DARKEST_HEROES_ALTERNATE_ART",
+      "artEditionSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_BOX",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_BOX-p2.pdf",
+        "sha256": "2231192b932bc2ea57775fadb40547fd57c40bdd89abe904812f3e5c5c365c42",
+        "page": 1,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      }
+    },
+    {
+      "heroClassId": "antiquarian",
+      "printedName": "ANTIQUARIAN",
+      "discoveryDisplayName": "Antiquarian",
+      "sourceGuid": "309eaf",
+      "ttsPath": "/ObjectStates/49/ContainedObjects/17",
+      "status": "OFFICIAL_SOURCE",
+      "sourceReferences": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+          "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+          "page": 30,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "contentSet": {
+        "id": "warrens",
+        "kind": "EXPANSION",
+        "officialSource": {
+          "sourceId": "DD_EN_WARRENS_BOX",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_WARRENS_BOX-p2.pdf",
+          "sha256": "9f9914109ac375439e8c43bf61aae5bca047162435de8c86183d6c09e3c81c00",
+          "page": 1,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        "productionEligibilityDecided": false
+      },
+      "artEdition": "THE_DARKEST_HEROES_ALTERNATE_ART",
+      "artEditionSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_BOX",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_BOX-p2.pdf",
+        "sha256": "2231192b932bc2ea57775fadb40547fd57c40bdd89abe904812f3e5c5c365c42",
+        "page": 1,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      }
+    },
+    {
+      "heroClassId": "shieldbreaker",
+      "printedName": "SHIELDBREAKER",
+      "discoveryDisplayName": "Shieldbreaker",
+      "sourceGuid": "031448",
+      "ttsPath": "/ObjectStates/49/ContainedObjects/0",
+      "status": "OFFICIAL_SOURCE",
+      "sourceReferences": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+          "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+          "page": 32,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "contentSet": {
+        "id": "weald",
+        "kind": "EXPANSION",
+        "officialSource": {
+          "sourceId": "DD_EN_WEALD_BOX",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_WEALD_BOX-p2.pdf",
+          "sha256": "64ddfa610fa95ce5acf9bd38245f952c1ff4d479c7efda11f187690a16f14a70",
+          "page": 1,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        "productionEligibilityDecided": false
+      },
+      "artEdition": "THE_DARKEST_HEROES_ALTERNATE_ART",
+      "artEditionSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_BOX",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_BOX-p2.pdf",
+        "sha256": "2231192b932bc2ea57775fadb40547fd57c40bdd89abe904812f3e5c5c365c42",
+        "page": 1,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      }
+    },
+    {
+      "heroClassId": "hound-master",
+      "printedName": "HOUNDMASTER",
+      "discoveryDisplayName": "Hound Master",
+      "sourceGuid": "6ebae9",
+      "ttsPath": "/ObjectStates/49/ContainedObjects/10",
+      "status": "OFFICIAL_SOURCE",
+      "sourceReferences": [
+        {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+          "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+          "page": 34,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "contentSet": {
+        "id": "weald",
+        "kind": "EXPANSION",
+        "officialSource": {
+          "sourceId": "DD_EN_WEALD_BOX",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_WEALD_BOX-p2.pdf",
+          "sha256": "64ddfa610fa95ce5acf9bd38245f952c1ff4d479c7efda11f187690a16f14a70",
+          "page": 1,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        "productionEligibilityDecided": false
+      },
+      "artEdition": "THE_DARKEST_HEROES_ALTERNATE_ART",
+      "artEditionSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_BOX",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_BOX-p2.pdf",
+        "sha256": "2231192b932bc2ea57775fadb40547fd57c40bdd89abe904812f3e5c5c365c42",
+        "page": 1,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      }
+    },
+    {
+      "heroClassId": "musketeer",
+      "printedName": "MUSKETEER",
+      "discoveryDisplayName": "Musketeer",
+      "sourceGuid": "a92b03",
+      "ttsPath": "/ObjectStates/49/ContainedObjects/6",
+      "status": "OFFICIAL_SOURCE",
+      "sourceReferences": [
+        {
+          "sourceId": "DD_EN_MUSKETEER_CARDS_100x180_Hero_STAT_FRONT",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_MUSKETEER_CARDS_100x180_Hero_STAT_FRONT.pdf",
+          "sha256": "f4ee33fe1fd8ae1491b5d989cef4688bcba6f61183a91882f5c3e29be2097e41",
+          "page": 1,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "contentSet": {
+        "id": "musketeer-promo",
+        "kind": "DLC_ADD_ON",
+        "officialSource": {
+          "sourceId": "DD_EN_THE_DARKEST_HEROES_BOX",
+          "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_BOX-p2.pdf",
+          "sha256": "2231192b932bc2ea57775fadb40547fd57c40bdd89abe904812f3e5c5c365c42",
+          "page": 1,
+          "authority": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        "productionEligibilityDecided": false
+      },
+      "artEdition": "MUSKETEER_PROMO",
+      "artEditionSource": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_BOX",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_BOX-p2.pdf",
+        "sha256": "2231192b932bc2ea57775fadb40547fd57c40bdd89abe904812f3e5c5c365c42",
+        "page": 1,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      }
+    }
+  ]
+}

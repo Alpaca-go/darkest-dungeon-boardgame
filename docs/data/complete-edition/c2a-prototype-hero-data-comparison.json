@@ -1,0 +1,486 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.5-C2A",
+  "baseline": "7f4001b956cac441778dbb457cc33041f9057ad5",
+  "sourcePolicyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "reviewDate": "2026-10-02",
+  "runtimeModified": false,
+  "prototypePromoted": false,
+  "runtimeImplementationAuthorized": false,
+  "heroes": [
+    {
+      "existingId": "crusader",
+      "existingDisplayName": "Crusader",
+      "officialHeroId": "crusader",
+      "officialPrintedName": "CRUSADER",
+      "sourceAvailability": "OFFICIAL_SOURCE",
+      "identityClassification": "SOURCE_MATCHED_IDENTITY",
+      "definitionClassification": "PROTOTYPE_ONLY",
+      "numericalComparisonPerformed": false
+    },
+    {
+      "existingId": "vestal",
+      "existingDisplayName": "Vestal",
+      "officialHeroId": "vestal",
+      "officialPrintedName": "VESTAL",
+      "sourceAvailability": "OFFICIAL_SOURCE",
+      "identityClassification": "SOURCE_MATCHED_IDENTITY",
+      "definitionClassification": "PROTOTYPE_ONLY",
+      "numericalComparisonPerformed": false
+    },
+    {
+      "existingId": "highwayman",
+      "existingDisplayName": "Highwayman",
+      "officialHeroId": "highwayman",
+      "officialPrintedName": "HIGHWAYMAN",
+      "sourceAvailability": "OFFICIAL_SOURCE",
+      "identityClassification": "SOURCE_MATCHED_IDENTITY",
+      "definitionClassification": "PROTOTYPE_ONLY",
+      "numericalComparisonPerformed": false
+    },
+    {
+      "existingId": "hellion",
+      "existingDisplayName": "Hellion",
+      "officialHeroId": "hellion",
+      "officialPrintedName": "HELLION",
+      "sourceAvailability": "OFFICIAL_SOURCE",
+      "identityClassification": "SOURCE_MATCHED_IDENTITY",
+      "definitionClassification": "PROTOTYPE_ONLY",
+      "numericalComparisonPerformed": false
+    },
+    {
+      "existingId": "leper",
+      "existingDisplayName": "Leper",
+      "officialHeroId": "leper",
+      "officialPrintedName": "LEPER",
+      "sourceAvailability": "OFFICIAL_SOURCE",
+      "identityClassification": "SOURCE_MATCHED_IDENTITY",
+      "definitionClassification": "PLACEHOLDER",
+      "numericalComparisonPerformed": false
+    },
+    {
+      "existingId": "occultist",
+      "existingDisplayName": "Occultist",
+      "officialHeroId": "occultist",
+      "officialPrintedName": "OCCULTIST",
+      "sourceAvailability": "OFFICIAL_SOURCE",
+      "identityClassification": "SOURCE_MATCHED_IDENTITY",
+      "definitionClassification": "PLACEHOLDER",
+      "numericalComparisonPerformed": false
+    },
+    {
+      "existingId": "plague-doctor",
+      "existingDisplayName": "Plague Doctor",
+      "officialHeroId": "plague-doctor",
+      "officialPrintedName": "PLAGUE DOCTOR",
+      "sourceAvailability": "OFFICIAL_SOURCE",
+      "identityClassification": "SOURCE_MATCHED_IDENTITY",
+      "definitionClassification": "PLACEHOLDER",
+      "numericalComparisonPerformed": false
+    },
+    {
+      "existingId": "grave-robber",
+      "existingDisplayName": "Grave Robber",
+      "officialHeroId": "grave-robber",
+      "officialPrintedName": "GRAVE ROBBER",
+      "sourceAvailability": "OFFICIAL_SOURCE",
+      "identityClassification": "SOURCE_MATCHED_IDENTITY",
+      "definitionClassification": "PLACEHOLDER",
+      "numericalComparisonPerformed": false
+    }
+  ],
+  "skills": [
+    {
+      "existingId": "crusader-smite",
+      "existingName": "Smite",
+      "heroId": "crusader",
+      "officialSkillId": "crusader-smite",
+      "officialPrintedName": "Smite",
+      "nameClassification": "EXACT_NAME_MATCH",
+      "identityClassification": "SOURCE_MATCHED_IDENTITY",
+      "valueClassification": "PROTOTYPE_ONLY",
+      "numericalComparisonPerformed": false,
+      "printedIdentityDoesNotValidateRuntimeValues": true
+    },
+    {
+      "existingId": "crusader-holy-lance",
+      "existingName": "Holy Lance",
+      "heroId": "crusader",
+      "officialSkillId": "crusader-holy-lance",
+      "officialPrintedName": "Holy Lance",
+      "nameClassification": "EXACT_NAME_MATCH",
+      "identityClassification": "SOURCE_MATCHED_IDENTITY",
+      "valueClassification": "PROTOTYPE_ONLY",
+      "numericalComparisonPerformed": false,
+      "printedIdentityDoesNotValidateRuntimeValues": true
+    },
+    {
+      "existingId": "crusader-bulwark",
+      "existingName": "Bulwark",
+      "heroId": "crusader",
+      "officialSkillId": "crusader-bulwark-of-faith",
+      "officialPrintedName": "Bulwark of Faith",
+      "nameClassification": "PARTIAL_MATCH",
+      "identityClassification": "SOURCE_MISMATCH",
+      "valueClassification": "PROTOTYPE_ONLY",
+      "numericalComparisonPerformed": false,
+      "printedIdentityDoesNotValidateRuntimeValues": true
+    },
+    {
+      "existingId": "crusader-battle-heal",
+      "existingName": "Battle Heal",
+      "heroId": "crusader",
+      "officialSkillId": "crusader-battle-heal",
+      "officialPrintedName": "Battle Heal",
+      "nameClassification": "EXACT_NAME_MATCH",
+      "identityClassification": "SOURCE_MATCHED_IDENTITY",
+      "valueClassification": "PROTOTYPE_ONLY",
+      "numericalComparisonPerformed": false,
+      "printedIdentityDoesNotValidateRuntimeValues": true
+    },
+    {
+      "existingId": "vestal-divine-grace",
+      "existingName": "Divine Grace",
+      "heroId": "vestal",
+      "officialSkillId": "vestal-divine-grace",
+      "officialPrintedName": "Divine Grace",
+      "nameClassification": "EXACT_NAME_MATCH",
+      "identityClassification": "SOURCE_MATCHED_IDENTITY",
+      "valueClassification": "PROTOTYPE_ONLY",
+      "numericalComparisonPerformed": false,
+      "printedIdentityDoesNotValidateRuntimeValues": true
+    },
+    {
+      "existingId": "vestal-judgement",
+      "existingName": "Judgement",
+      "heroId": "vestal",
+      "officialSkillId": "vestal-judgement",
+      "officialPrintedName": "Judgement",
+      "nameClassification": "EXACT_NAME_MATCH",
+      "identityClassification": "SOURCE_MATCHED_IDENTITY",
+      "valueClassification": "PROTOTYPE_ONLY",
+      "numericalComparisonPerformed": false,
+      "printedIdentityDoesNotValidateRuntimeValues": true
+    },
+    {
+      "existingId": "vestal-sanctuary",
+      "existingName": "Sanctuary",
+      "heroId": "vestal",
+      "officialSkillId": null,
+      "officialPrintedName": null,
+      "nameClassification": "MISSING_FROM_OFFICIAL_SET",
+      "identityClassification": "PROTOTYPE_ONLY",
+      "valueClassification": "PROTOTYPE_ONLY",
+      "numericalComparisonPerformed": false,
+      "printedIdentityDoesNotValidateRuntimeValues": true
+    },
+    {
+      "existingId": "vestal-mantra",
+      "existingName": "Mantra",
+      "heroId": "vestal",
+      "officialSkillId": null,
+      "officialPrintedName": null,
+      "nameClassification": "MISSING_FROM_OFFICIAL_SET",
+      "identityClassification": "PROTOTYPE_ONLY",
+      "valueClassification": "PROTOTYPE_ONLY",
+      "numericalComparisonPerformed": false,
+      "printedIdentityDoesNotValidateRuntimeValues": true
+    },
+    {
+      "existingId": "highwayman-pistol-shot",
+      "existingName": "Pistol Shot",
+      "heroId": "highwayman",
+      "officialSkillId": "highwayman-pistol-shot",
+      "officialPrintedName": "Pistol Shot",
+      "nameClassification": "EXACT_NAME_MATCH",
+      "identityClassification": "SOURCE_MATCHED_IDENTITY",
+      "valueClassification": "PROTOTYPE_ONLY",
+      "numericalComparisonPerformed": false,
+      "printedIdentityDoesNotValidateRuntimeValues": true
+    },
+    {
+      "existingId": "highwayman-wicked-slice",
+      "existingName": "Wicked Slice",
+      "heroId": "highwayman",
+      "officialSkillId": "highwayman-wicked-slice",
+      "officialPrintedName": "Wicked Slice",
+      "nameClassification": "EXACT_NAME_MATCH",
+      "identityClassification": "SOURCE_MATCHED_IDENTITY",
+      "valueClassification": "PROTOTYPE_ONLY",
+      "numericalComparisonPerformed": false,
+      "printedIdentityDoesNotValidateRuntimeValues": true
+    },
+    {
+      "existingId": "highwayman-duelist",
+      "existingName": "Duelist",
+      "heroId": "highwayman",
+      "officialSkillId": "highwayman-duelists-advance",
+      "officialPrintedName": "Duelist’s Advance",
+      "nameClassification": "PARTIAL_MATCH",
+      "identityClassification": "SOURCE_MISMATCH",
+      "valueClassification": "PROTOTYPE_ONLY",
+      "numericalComparisonPerformed": false,
+      "printedIdentityDoesNotValidateRuntimeValues": true
+    },
+    {
+      "existingId": "highwayman-open-vein",
+      "existingName": "Open Vein",
+      "heroId": "highwayman",
+      "officialSkillId": "highwayman-open-vein",
+      "officialPrintedName": "Open Vein",
+      "nameClassification": "EXACT_NAME_MATCH",
+      "identityClassification": "SOURCE_MATCHED_IDENTITY",
+      "valueClassification": "PROTOTYPE_ONLY",
+      "numericalComparisonPerformed": false,
+      "printedIdentityDoesNotValidateRuntimeValues": true
+    },
+    {
+      "existingId": "hellion-iron-swan",
+      "existingName": "Iron Swan",
+      "heroId": "hellion",
+      "officialSkillId": "hellion-iron-swan",
+      "officialPrintedName": "Iron Swan",
+      "nameClassification": "EXACT_NAME_MATCH",
+      "identityClassification": "SOURCE_MATCHED_IDENTITY",
+      "valueClassification": "PROTOTYPE_ONLY",
+      "numericalComparisonPerformed": false,
+      "printedIdentityDoesNotValidateRuntimeValues": true
+    },
+    {
+      "existingId": "hellion-bash",
+      "existingName": "Bash",
+      "heroId": "hellion",
+      "officialSkillId": null,
+      "officialPrintedName": null,
+      "nameClassification": "MISSING_FROM_OFFICIAL_SET",
+      "identityClassification": "PROTOTYPE_ONLY",
+      "valueClassification": "PROTOTYPE_ONLY",
+      "numericalComparisonPerformed": false,
+      "printedIdentityDoesNotValidateRuntimeValues": true
+    },
+    {
+      "existingId": "hellion-breakthrough",
+      "existingName": "Breakthrough",
+      "heroId": "hellion",
+      "officialSkillId": "hellion-breakthrough",
+      "officialPrintedName": "Breakthrough",
+      "nameClassification": "EXACT_NAME_MATCH",
+      "identityClassification": "SOURCE_MATCHED_IDENTITY",
+      "valueClassification": "PROTOTYPE_ONLY",
+      "numericalComparisonPerformed": false,
+      "printedIdentityDoesNotValidateRuntimeValues": true
+    },
+    {
+      "existingId": "hellion-adrenaline-rush",
+      "existingName": "Adrenaline Rush",
+      "heroId": "hellion",
+      "officialSkillId": "hellion-adrenaline-rush",
+      "officialPrintedName": "Adrenaline Rush",
+      "nameClassification": "EXACT_NAME_MATCH",
+      "identityClassification": "SOURCE_MATCHED_IDENTITY",
+      "valueClassification": "PROTOTYPE_ONLY",
+      "numericalComparisonPerformed": false,
+      "printedIdentityDoesNotValidateRuntimeValues": true
+    },
+    {
+      "existingId": "leper-hew",
+      "existingName": "Hew",
+      "heroId": "leper",
+      "officialSkillId": "leper-hew",
+      "officialPrintedName": "Hew",
+      "nameClassification": "EXACT_NAME_MATCH",
+      "identityClassification": "SOURCE_MATCHED_IDENTITY",
+      "valueClassification": "PROTOTYPE_ONLY",
+      "numericalComparisonPerformed": false,
+      "printedIdentityDoesNotValidateRuntimeValues": true
+    },
+    {
+      "existingId": "leper-fortify",
+      "existingName": "Fortify",
+      "heroId": "leper",
+      "officialSkillId": null,
+      "officialPrintedName": null,
+      "nameClassification": "PROTOTYPE_ONLY",
+      "identityClassification": "PLACEHOLDER",
+      "valueClassification": "PROTOTYPE_ONLY",
+      "numericalComparisonPerformed": false,
+      "printedIdentityDoesNotValidateRuntimeValues": true
+    },
+    {
+      "existingId": "leper-reposition",
+      "existingName": "Reposition",
+      "heroId": "leper",
+      "officialSkillId": null,
+      "officialPrintedName": null,
+      "nameClassification": "PROTOTYPE_ONLY",
+      "identityClassification": "PLACEHOLDER",
+      "valueClassification": "PROTOTYPE_ONLY",
+      "numericalComparisonPerformed": false,
+      "printedIdentityDoesNotValidateRuntimeValues": true
+    },
+    {
+      "existingId": "occultist-sap",
+      "existingName": "Sap",
+      "heroId": "occultist",
+      "officialSkillId": null,
+      "officialPrintedName": null,
+      "nameClassification": "PROTOTYPE_ONLY",
+      "identityClassification": "PLACEHOLDER",
+      "valueClassification": "PROTOTYPE_ONLY",
+      "numericalComparisonPerformed": false,
+      "printedIdentityDoesNotValidateRuntimeValues": true
+    },
+    {
+      "existingId": "occultist-ward",
+      "existingName": "Ward",
+      "heroId": "occultist",
+      "officialSkillId": null,
+      "officialPrintedName": null,
+      "nameClassification": "PROTOTYPE_ONLY",
+      "identityClassification": "PLACEHOLDER",
+      "valueClassification": "PROTOTYPE_ONLY",
+      "numericalComparisonPerformed": false,
+      "printedIdentityDoesNotValidateRuntimeValues": true
+    },
+    {
+      "existingId": "occultist-blink",
+      "existingName": "Blink",
+      "heroId": "occultist",
+      "officialSkillId": null,
+      "officialPrintedName": null,
+      "nameClassification": "PROTOTYPE_ONLY",
+      "identityClassification": "PLACEHOLDER",
+      "valueClassification": "PROTOTYPE_ONLY",
+      "numericalComparisonPerformed": false,
+      "printedIdentityDoesNotValidateRuntimeValues": true
+    },
+    {
+      "existingId": "plague-doctor-noxious",
+      "existingName": "Noxious Blast",
+      "heroId": "plague-doctor",
+      "officialSkillId": "plague-doctor-noxious-blast",
+      "officialPrintedName": "Noxious Blast",
+      "nameClassification": "EXACT_NAME_MATCH",
+      "identityClassification": "SOURCE_MATCHED_IDENTITY",
+      "valueClassification": "PROTOTYPE_ONLY",
+      "numericalComparisonPerformed": false,
+      "printedIdentityDoesNotValidateRuntimeValues": true
+    },
+    {
+      "existingId": "plague-doctor-guard",
+      "existingName": "Guard",
+      "heroId": "plague-doctor",
+      "officialSkillId": null,
+      "officialPrintedName": null,
+      "nameClassification": "PROTOTYPE_ONLY",
+      "identityClassification": "PLACEHOLDER",
+      "valueClassification": "PROTOTYPE_ONLY",
+      "numericalComparisonPerformed": false,
+      "printedIdentityDoesNotValidateRuntimeValues": true
+    },
+    {
+      "existingId": "plague-doctor-tincture",
+      "existingName": "Tincture",
+      "heroId": "plague-doctor",
+      "officialSkillId": null,
+      "officialPrintedName": null,
+      "nameClassification": "PROTOTYPE_ONLY",
+      "identityClassification": "PLACEHOLDER",
+      "valueClassification": "PROTOTYPE_ONLY",
+      "numericalComparisonPerformed": false,
+      "printedIdentityDoesNotValidateRuntimeValues": true
+    },
+    {
+      "existingId": "grave-robber-flash",
+      "existingName": "Flash",
+      "heroId": "grave-robber",
+      "officialSkillId": "grave-robber-flashing-daggers",
+      "officialPrintedName": "Flashing Daggers",
+      "nameClassification": "PARTIAL_MATCH",
+      "identityClassification": "SOURCE_MISMATCH",
+      "valueClassification": "PROTOTYPE_ONLY",
+      "numericalComparisonPerformed": false,
+      "printedIdentityDoesNotValidateRuntimeValues": true
+    },
+    {
+      "existingId": "grave-robber-dodge",
+      "existingName": "Dodge",
+      "heroId": "grave-robber",
+      "officialSkillId": null,
+      "officialPrintedName": null,
+      "nameClassification": "PROTOTYPE_ONLY",
+      "identityClassification": "PLACEHOLDER",
+      "valueClassification": "PROTOTYPE_ONLY",
+      "numericalComparisonPerformed": false,
+      "printedIdentityDoesNotValidateRuntimeValues": true
+    },
+    {
+      "existingId": "grave-robber-sneak",
+      "existingName": "Sneak",
+      "heroId": "grave-robber",
+      "officialSkillId": null,
+      "officialPrintedName": null,
+      "nameClassification": "PROTOTYPE_ONLY",
+      "identityClassification": "PLACEHOLDER",
+      "valueClassification": "PROTOTYPE_ONLY",
+      "numericalComparisonPerformed": false,
+      "printedIdentityDoesNotValidateRuntimeValues": true
+    }
+  ],
+  "profiles": [
+    {
+      "heroId": "crusader",
+      "classification": "PROTOTYPE_ONLY",
+      "levelIIandIII": "HAND_AUTHORED_PROTOTYPE",
+      "sourceAuthority": false
+    },
+    {
+      "heroId": "vestal",
+      "classification": "PROTOTYPE_ONLY",
+      "levelIIandIII": "HAND_AUTHORED_PROTOTYPE",
+      "sourceAuthority": false
+    },
+    {
+      "heroId": "highwayman",
+      "classification": "PROTOTYPE_ONLY",
+      "levelIIandIII": "HAND_AUTHORED_PROTOTYPE",
+      "sourceAuthority": false
+    },
+    {
+      "heroId": "hellion",
+      "classification": "PROTOTYPE_ONLY",
+      "levelIIandIII": "HAND_AUTHORED_PROTOTYPE",
+      "sourceAuthority": false
+    },
+    {
+      "heroId": "leper",
+      "classification": "PROTOTYPE_ONLY",
+      "levelIIandIII": "HAND_AUTHORED_PROTOTYPE",
+      "sourceAuthority": false
+    },
+    {
+      "heroId": "occultist",
+      "classification": "PROTOTYPE_ONLY",
+      "levelIIandIII": "HAND_AUTHORED_PROTOTYPE",
+      "sourceAuthority": false
+    },
+    {
+      "heroId": "plague-doctor",
+      "classification": "PROTOTYPE_ONLY",
+      "levelIIandIII": "HAND_AUTHORED_PROTOTYPE",
+      "sourceAuthority": false
+    },
+    {
+      "heroId": "grave-robber",
+      "classification": "PROTOTYPE_ONLY",
+      "levelIIandIII": "HAND_AUTHORED_PROTOTYPE",
+      "sourceAuthority": false
+    }
+  ],
+  "skillLevelBonus": {
+    "symbol": "SKILL_LEVEL_BONUS",
+    "classification": "PROTOTYPE_ONLY",
+    "futureProductionAuthorityAllowed": false
+  },
+  "runtimeMigrationPerformed": false
+}

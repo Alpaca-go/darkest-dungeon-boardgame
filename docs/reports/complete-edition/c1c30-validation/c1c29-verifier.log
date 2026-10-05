@@ -1,0 +1,43 @@
+
+> darkest-dungeon-web-prototype@0.1.0 verify:complete-edition-c1c29
+> vite-node scripts/audit/verify-complete-edition-c1c29.ts
+
+fatal: ambiguous argument 'codex/phase-11a4-c1c28-necromancer-digital-rulings': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'
+node:internal/errors:986
+  const err = new Error(message);
+              ^
+
+Error: Command failed: git rev-parse codex/phase-11a4-c1c28-necromancer-digital-rulings
+fatal: ambiguous argument 'codex/phase-11a4-c1c28-necromancer-digital-rulings': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'
+
+    at genericNodeError (node:internal/errors:986:15)
+    at wrappedFn (node:internal/errors:540:14)
+    at checkExecSyncError (node:child_process:942:11)
+    at Proxy.execFileSync (node:child_process:978:15)
+    at buildArtifacts (D:\darkest-dungoen-boardgame\scripts\audit\c1c29-contract.ts:67:46)
+    at Module.verifyArtifacts (D:\darkest-dungoen-boardgame\scripts\audit\c1c29-contract.ts:202:20)
+    at D:\darkest-dungoen-boardgame\scripts\audit\verify-complete-edition-c1c29.ts:3:23
+    at ViteNodeRunner.runModule (file:///D:/darkest-dungoen-boardgame/node_modules/vite-node/dist/client.mjs:399:5)
+    at ViteNodeRunner.directRequest (file:///D:/darkest-dungoen-boardgame/node_modules/vite-node/dist/client.mjs:381:5)
+    at ViteNodeRunner.cachedRequest (file:///D:/darkest-dungoen-boardgame/node_modules/vite-node/dist/client.mjs:206:14) {
+  status: 128,
+  signal: null,
+  output: [
+    null,
+    'codex/phase-11a4-c1c28-necromancer-digital-rulings\n',
+    "fatal: ambiguous argument 'codex/phase-11a4-c1c28-necromancer-digital-rulings': unknown revision or path not in the working tree.\n" +
+      "Use '--' to separate paths from revisions, like this:\n" +
+      "'git <command> [<revision>...] -- [<file>...]'\n"
+  ],
+  pid: 13840,
+  stdout: 'codex/phase-11a4-c1c28-necromancer-digital-rulings\n',
+  stderr: "fatal: ambiguous argument 'codex/phase-11a4-c1c28-necromancer-digital-rulings': unknown revision or path not in the working tree.\n" +
+    "Use '--' to separate paths from revisions, like this:\n" +
+    "'git <command> [<revision>...] -- [<file>...]'\n"
+}
+
+Node.js v24.20.0

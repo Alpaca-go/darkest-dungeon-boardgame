@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R2B",
+  "baselineHead": "2c4dfcf849579a5b53581f7a6d804285fe720c52",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "question": "Does a normal Monster card discarded before Battle to make room for an initial Large Monster return with cards used in Battle?",
+  "scope": "Targeted final local official Core Rules, Player Aids, setup/Monster references and official expansion Rules text search; no community or TTS authority",
+  "screenedOfficialPdfCount": 25,
+  "screenedPageMode": "ALL_PAGES_TEXT_SEARCH; relevant Core Rules pages separately visually reviewed",
+  "evidence": [
+    {
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 17,
+      "printedMeaning": "When a fourth initial Large draw cannot fit after three Monsters, discard the last spawned non-Large Monster before Battle."
+    },
+    {
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 25,
+      "printedMeaning": "At Battle End, shuffle Monster cards used in Battle back into the Monster deck."
+    }
+  ],
+  "playerAidPagesSearched": 16,
+  "officialClarificationFound": false,
+  "canonicalStatus": "SOURCE_UNRESOLVED",
+  "unresolvedPoint": "The p17 replacement card never enters Battle; p25 does not classify it as used in Battle or specify another return time.",
+  "resolutionRoute": "Explicit noncanonical PROJECT_RULING in v5; v4 remains historically unresolved."
+}

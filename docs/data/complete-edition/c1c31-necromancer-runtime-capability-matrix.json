@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C31",
+  "baselineHead": "2ab674d7d8c15dbbd7367bb3b2011243facb5517",
+  "ruleSourcePolicyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1",
+  "externalSourceUsed": false,
+  "syntheticFallbackAllowed": false,
+  "capabilities": {
+    "coreBossDefinitions": {
+      "status": "IMPLEMENTED",
+      "count": 9
+    },
+    "BoneCombatDefinitions": {
+      "status": "PARTIAL",
+      "stanceSourceClosure": "4/4",
+      "executableDefinitions": 0,
+      "note": "Reviewed clusters and Captain Stun correction; runtime promotion stopped."
+    },
+    "HeroDodgeBinding": {
+      "status": "PARTIAL",
+      "requiredPairs": 24,
+      "boundPairs": 3,
+      "reviewId": "C1C31-HERO-DODGE-EXPLICIT-TABLE-REVIEW"
+    },
+    "BoneSkillExecutor": {
+      "status": "BLOCKED",
+      "note": "Generic source-bound Area turn pipeline is not implemented; Phase 3 is not a substitute."
+    },
+    "NormalSelectorEntry": {
+      "status": "BLOCKED",
+      "note": "Actual production command rejects missing Hero/Bone bindings before entering."
+    },
+    "ThreatCheckpointResume": {
+      "status": "PARTIAL",
+      "note": "C1C30 isolation bridge retained; real Room entry cannot be certified."
+    },
+    "HamletEffectBridge": {
+      "status": "BLOCKED",
+      "note": "Graveyard campaign transaction bridge remains unimplemented."
+    },
+    "IncomingAttackReaction": {
+      "status": "BLOCKED",
+      "note": "Per-Hero staged incoming Trinket windows remain unimplemented."
+    },
+    "RoomStorage": {
+      "status": "BLOCKED",
+      "note": "Authoritative physical Room card/tile storage remains unimplemented."
+    },
+    "BossResistanceIntegration": {
+      "status": "PARTIAL",
+      "note": "Generic categorical Debuff/Shuffle binding remains unimplemented."
+    },
+    "SaveReplayProduction": {
+      "status": "BLOCKED",
+      "note": "No real complete dependency path exists. No fabricated hash proof."
+    }
+  },
+  "allCapabilityGatesImplemented": false,
+  "foundationAccepted": false,
+  "productionReady": 0
+}

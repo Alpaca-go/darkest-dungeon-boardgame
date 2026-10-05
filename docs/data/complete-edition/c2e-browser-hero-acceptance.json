@@ -1,0 +1,260 @@
+{
+  "phase": "11A.5-C2E",
+  "baseline": "2d979652c3b713d6104bd21c7007fcd24fe1af63",
+  "definitionVersion": "C2C-HERO-PRODUCTION-DEFINITION-v1",
+  "runtimeVersion": "C2D-HERO-PRODUCTION-RUNTIME-v1",
+  "ambiguityPolicy": "SOURCE_AMBIGUITY_DEFER_POLICY_V1",
+  "playerPathFingerprint": "bd335422db3046e9d8918bed2b113270337f57a8cdc7912db3cbdf8358f26c32",
+  "status": "PASS",
+  "server": "vite preview",
+  "e2eControls": false,
+  "browserBinding": {
+    "playerPathFingerprint": "bd335422db3046e9d8918bed2b113270337f57a8cdc7912db3cbdf8358f26c32",
+    "afterFingerprint": "bd335422db3046e9d8918bed2b113270337f57a8cdc7912db3cbdf8358f26c32",
+    "status": "PASS",
+    "server": "vite preview",
+    "e2eControls": false,
+    "report": "pw-out/c2e-playwright-report.json"
+  },
+  "cases": [
+    {
+      "title": "18-Hero selector, four production Heroes, owned source loadout and new campaign reload",
+      "file": "c2e-hero-player-path.spec.ts",
+      "line": 15,
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1378,
+          "errors": []
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "title": "normal new campaign starts a source Quest and continues a real ordinary production Skill",
+      "file": "c2e-hero-player-path.spec.ts",
+      "line": 16,
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 8259,
+          "errors": []
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "title": "ordinary Monster source fixture continues using production executor",
+      "file": "c2e-hero-player-path.spec.ts",
+      "line": 29,
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 6399,
+          "errors": []
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "title": "synthetic checkpoint coverage: multi-target, stored roll and partial effects reload without duplicate receipts",
+      "file": "c2e-hero-player-path.spec.ts",
+      "line": 30,
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 3941,
+          "errors": []
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "title": "synthetic checkpoint coverage: player movement destination survives reload",
+      "file": "c2e-hero-player-path.spec.ts",
+      "line": 31,
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1808,
+          "errors": []
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "title": "Guild Hero II and III upgrades preserve wounds and render exact source Profile",
+      "file": "c2e-hero-player-path.spec.ts",
+      "line": 32,
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1269,
+          "errors": []
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "title": "Guild Skill II resolves exact definition on later loadout",
+      "file": "c2e-hero-player-path.spec.ts",
+      "line": 33,
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1303,
+          "errors": []
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "title": "Stagecoach replacement creates an expansion production Hero",
+      "file": "c2e-hero-player-path.spec.ts",
+      "line": 34,
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1207,
+          "errors": []
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "title": "Abomination HUMAN/BEAST restriction and skipped transform remain visible",
+      "file": "c2e-hero-player-path.spec.ts",
+      "line": 35,
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 7582,
+          "errors": []
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "title": "real browser v22 load remains legacy and selectable",
+      "file": "c2e-hero-player-path.spec.ts",
+      "line": 36,
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 895,
+          "errors": []
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "title": "real necromancer Boss continues source Hero executor through browser reload",
+      "file": "c2e-hero-player-path.spec.ts",
+      "line": 38,
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 10310,
+          "errors": []
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "title": "real prophet Boss continues source Hero executor through browser reload",
+      "file": "c2e-hero-player-path.spec.ts",
+      "line": 38,
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 15167,
+          "errors": []
+        }
+      ],
+      "status": "PASS"
+    }
+  ],
+  "network": [
+    {
+      "title": "18-Hero selector, four production Heroes, owned source loadout and new campaign reload",
+      "externalRequests": [],
+      "appErrors": [],
+      "sourceModuleRequests": []
+    },
+    {
+      "title": "normal new campaign starts a source Quest and continues a real ordinary production Skill",
+      "externalRequests": [],
+      "appErrors": [],
+      "sourceModuleRequests": []
+    },
+    {
+      "title": "ordinary Monster source fixture continues using production executor",
+      "externalRequests": [],
+      "appErrors": [],
+      "sourceModuleRequests": []
+    },
+    {
+      "title": "synthetic checkpoint coverage: multi-target, stored roll and partial effects reload without duplicate receipts",
+      "externalRequests": [],
+      "appErrors": [],
+      "sourceModuleRequests": []
+    },
+    {
+      "title": "synthetic checkpoint coverage: player movement destination survives reload",
+      "externalRequests": [],
+      "appErrors": [],
+      "sourceModuleRequests": []
+    },
+    {
+      "title": "Guild Hero II and III upgrades preserve wounds and render exact source Profile",
+      "externalRequests": [],
+      "appErrors": [],
+      "sourceModuleRequests": []
+    },
+    {
+      "title": "Guild Skill II resolves exact definition on later loadout",
+      "externalRequests": [],
+      "appErrors": [],
+      "sourceModuleRequests": []
+    },
+    {
+      "title": "Stagecoach replacement creates an expansion production Hero",
+      "externalRequests": [],
+      "appErrors": [],
+      "sourceModuleRequests": []
+    },
+    {
+      "title": "Abomination HUMAN/BEAST restriction and skipped transform remain visible",
+      "externalRequests": [],
+      "appErrors": [],
+      "sourceModuleRequests": []
+    },
+    {
+      "title": "real browser v22 load remains legacy and selectable",
+      "externalRequests": [],
+      "appErrors": [],
+      "sourceModuleRequests": []
+    },
+    {
+      "title": "real necromancer Boss continues source Hero executor through browser reload",
+      "externalRequests": [],
+      "appErrors": [],
+      "sourceModuleRequests": []
+    },
+    {
+      "title": "real prophet Boss continues source Hero executor through browser reload",
+      "externalRequests": [],
+      "appErrors": [],
+      "sourceModuleRequests": []
+    }
+  ],
+  "networkPassed": true,
+  "stats": {
+    "startTime": "2026-10-04T11:13:44.717Z",
+    "duration": 61694.221,
+    "expected": 12,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

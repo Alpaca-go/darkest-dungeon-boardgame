@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R2C-R",
+  "sourcePolicy": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "reviewStatus": "SOURCE_EXHAUSTED",
+  "canonicalStatus": "SOURCE_UNRESOLVED",
+  "authority": "PROJECT_RULING",
+  "canonical": false,
+  "sourceReferences": [
+    {
+      "path": "C:\\Users\\kyrie\\Desktop\\新建文件夹\\DARKEST DUNGEON EN_FILES\\DARKEST_DUNGEON_PRINT_EN_WAVE 1\\MG_DD_01_EN_COREBOX_Print\\DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "pages": [
+        16,
+        17,
+        18,
+        21
+      ]
+    },
+    {
+      "path": "C:\\Users\\kyrie\\Desktop\\新建文件夹\\DARKEST DUNGEON EN_FILES\\DARKEST_DUNGEON_PRINT_EN_WAVE 1\\MG_DD_01_EN_COREBOX_Print\\02_DD_CARDS_COREBOX\\DD_EN_COREBOX_CARDS_70_120_PLAYER_AIDS_BACK.pdf",
+      "sha256": "b83b6c4331cbc7b7315b6a26c8417f24dc17bba5f76b0c669dd341caadb84f8b",
+      "pages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "path": "C:\\Users\\kyrie\\Desktop\\新建文件夹\\DARKEST DUNGEON EN_FILES\\DARKEST_DUNGEON_PRINT_EN_WAVE 1\\MG_DD_01_EN_COREBOX_Print\\02_DD_CARDS_COREBOX\\DD_EN_COREBOX_CARDS_70_120_PLAYER_AIDS_FRONT.pdf",
+      "sha256": "e034a88db094cac38558e3c647aa9ee82012dfb430c8adf3cad2ea715fe6d362",
+      "pages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    }
+  ],
+  "existingBoundExtract": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+  "officialClarificationFound": false,
+  "finding": "Core p17 requires two contiguous slots; p21 requires Stance displacement and shifting other characters, without defining a one-slot destination inside a Large card. Player aids do not specify it.",
+  "selected": "ATOMIC_ADJACENT_EXCHANGE_OUTWARD_ROUNDING",
+  "candidates": [
+    {
+      "id": "ATOMIC_ADJACENT_EXCHANGE_OUTWARD_ROUNDING",
+      "initial": [
+        "L",
+        "L",
+        "N",
+        "M"
+      ],
+      "requested": "N Pull 1",
+      "result": [
+        "N",
+        "L",
+        "L",
+        "M"
+      ],
+      "largeContiguity": true,
+      "normalDisplacement": -2,
+      "largeDisplacement": 1,
+      "edgeBehavior": "Stop at the tracker edge; actor and neighbor are indivisible blocks.",
+      "pushSymmetry": "Mirror: [M,N,L,L], N Push 1 -> [M,L,L,N].",
+      "pullSymmetry": "Reverse N Push 1 restores [L,L,N,M].",
+      "saveReplayImpact": "No RNG. Persist positions and v6; replay uses saved blocks, including explicit vacancy slots.",
+      "accepted": true
+    },
+    {
+      "id": "ATOMIC_COLLISION_TRUNCATION",
+      "initial": [
+        "L",
+        "L",
+        "N",
+        "M"
+      ],
+      "requested": "N Pull 1",
+      "result": [
+        "L",
+        "L",
+        "N",
+        "M"
+      ],
+      "largeContiguity": true,
+      "normalDisplacement": 0,
+      "edgeBehavior": "Round inward to last legal boundary.",
+      "pushSymmetry": "Mirrored collision is also truncated.",
+      "pullSymmetry": "Both directions deterministic.",
+      "saveReplayImpact": "No RNG; unchanged slots.",
+      "accepted": false,
+      "rejection": "An in-bounds requested Shuffle can do nothing solely because it intersects a Large. Outward rounding allows the interaction while preserving card contiguity."
+    }
+  ],
+  "contract": "Represent all four slots as ordered blocks: living cards of printed width, plus explicit one-slot vacancies. For Push/Pull, exchange the actor with its adjacent block in that direction, subtract the neighbor width from remaining distance and repeat while positive. The final exchange may overshoot requested distance. Stop at the edge. Anchor equals first occupied slot. Input array order cannot decide the result.",
+  "areaMovement": "Unchanged inherited v3; spatial candidates resolve independently."
+}

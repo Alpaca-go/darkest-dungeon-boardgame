@@ -3,8 +3,8 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { useGameStore, routeForPhase } from '../store/useGameStore';
 import { HAMLET_BUILDINGS, getHamletBuildingById } from '../data/hamlet-buildings';
 import { getHamletEventById } from '../data/hamlet-events';
-import { buildingVisitError, canEndHamletDay } from '../game-engine/hamlet';
-import { getHeroById } from '../data/heroes';
+import { buildingVisitError, canEndHamletDay } from '../game-engine/commands/hamlet-preparation-day';
+import {legacyHeroColor} from '../game-engine/heroes/legacy-player';
 import { getQuirkById } from '../data/quirks';
 import { getDiseaseById } from '../data/diseases';
 import { SANITARIUM_SERVICES } from '../game-engine/hamlet/sanitarium';
@@ -35,6 +35,9 @@ export default function HamletPage() {
   const visitSanitariumRemoveDisease = useGameStore((s) => s.visitSanitariumRemoveDisease);
   const sanitariumRemoveDiseaseError = useGameStore((s) => s.sanitariumRemoveDiseaseError);
   const startGuildVisit = useGameStore((s) => s.startGuildVisit);
+  const commitBossChoice = useGameStore((s) => s.commitBossChoice);
+  const beginGraveyardGuard = useGameStore((s) => s.beginGraveyardGuard);
+  const commitGraveyardGuard = useGameStore((s) => s.commitGraveyardGuard);
   const [selectedHeroId, setSelectedHeroId] = useState<string | null>(null);
   // Phase 8A：Abbey 需要选择移除哪个 Quirk，用局部弹层承载（不写入存档）。
   const [abbeyHeroId, setAbbeyHeroId] = useState<string | null>(null);
@@ -57,6 +60,8 @@ export default function HamletPage() {
   }
 
   const hamlet = campaign.hamlet;
+  const preparation = campaign.necromancerPreparationDay;
+  const guardHero = campaign.heroes.find(h => `u_${h.instanceId}` === preparation?.checkpoint.threatState.forcedHeroId);
   const event = getHamletEventById(hamlet.currentEventId);
   const blockedBuilding = getHamletBuildingById(hamlet.caretakerBlockedBuildingId);
   const canEnd = canEndHamletDay(campaign);
@@ -150,6 +155,27 @@ export default function HamletPage() {
         ) : null}
       </div>
 
+      {preparation && preparation.status !== 'COMMITTED' && (
+        <section aria-label="Graveyard 守卫任务" className="border border-dd-danger rounded p-4 space-y-3">
+          <h2 className="font-bold">Graveyard 守卫任务</h2>
+          {preparation.status === 'PENDING_TIE' && <>
+            <p>最低骰点并列，请选择今天前往墓地的英雄。</p>
+            {preparation.checkpoint.pendingChoice?.candidateIds.map(id => <button type="button" key={id}
+              className="btn-secondary mr-2" onClick={() => commitBossChoice(preparation.checkpoint.pendingChoice!.choiceId, id)}>
+              {campaign.heroes.find(h => `u_${h.instanceId}` === id)?.name}
+            </button>)}
+          </>}
+          {preparation.status === 'PENDING_VISIT' && <>
+            <p>{guardHero?.name} 必须在第一天守卫墓地。{preparation.checkpoint.bossLevel === 3 ? '这次无法使用墓地效果。' : ''}</p>
+            <button type="button" className="btn-secondary" onClick={beginGraveyardGuard}>前往墓地</button>
+          </>}
+          {preparation.status === 'PENDING_LEVEL_II_EFFECT' && <>
+            <p>{guardHero?.name} 已前往墓地。是否使用墓地效果，为下一次任务抽取 Virtue？</p>
+            <button type="button" className="btn-secondary mr-2" onClick={() => commitGraveyardGuard(true)}>使用效果</button>
+            <button type="button" className="btn-secondary" onClick={() => commitGraveyardGuard(false)}>只完成守卫</button>
+          </>}
+        </section>
+      )}
       <div className="grid lg:grid-cols-[240px_1fr_280px] gap-4">
         {/* 左：英雄 */}
         <div className="flex flex-col gap-2">
@@ -160,7 +186,7 @@ export default function HamletPage() {
             <HamletHeroCard
               key={h.instanceId}
               hero={h}
-              color={getHeroById(h.heroId)?.color ?? '#463b34'}
+              color={h.productionIdentity ? '#675849' : legacyHeroColor(h.heroId) ?? '#463b34'}
               selected={h.instanceId === selectedHeroId}
               onSelect={() =>
                 setSelectedHeroId(h.instanceId === selectedHeroId ? null : h.instanceId)

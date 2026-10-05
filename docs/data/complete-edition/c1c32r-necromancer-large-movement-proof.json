@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R",
+  "baselineHead": "75fe2e71e6670ddeea0c5df890d329f4914e5566",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "productionReady": 0,
+  "foundationAccepted": false,
+  "allCapabilityGatesImplemented": false,
+  "status": "SOURCE_UNRESOLVED",
+  "review": {
+    "componentId": "large-movement",
+    "sourceFile": "DD_EN_COREBOX_RULES.pdf",
+    "page": 24,
+    "status": "SOURCE_UNRESOLVED_EXECUTABLE_BOUNDARY",
+    "confirmed": [
+      "Large occupies two spaces",
+      "may end turn in fully occupied Area",
+      "move one other character to adjacent Area",
+      "target cannot be displaced"
+    ],
+    "unresolved": "Under the frozen slot model a full capacity-4 Area plus Large 2 minus one normal 1 still occupies 5. No accepted overcapacity representation or additional displacement ruling exists. Do not invent a Captain exception."
+  },
+  "runtimeChanged": false
+}

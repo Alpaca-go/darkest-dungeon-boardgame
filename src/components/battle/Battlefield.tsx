@@ -23,10 +23,13 @@ function EmptySlot({ pos }: { pos: number }) {
  * 双方的位置 1（前排）在中线两侧相邻。
  */
 export default function Battlefield({ battle, colorOf, legalTargetIds, onPickTarget }: BattlefieldProps) {
-  const renderSide = (units: BattleUnit[], order: number[]) =>
-    order.map((pos) => {
-      const u = units.find((x) => x.position === pos);
-      if (!u) return <EmptySlot key={pos} pos={pos} />;
+  const production = !!(battle.ruinsContext || battle.bossEncounter);
+  const renderSide = (units: BattleUnit[], order: number[]) => {
+    // Production stance positions are shared by distinct physical units.
+    const slots = production ? [...units].sort((a, b) => order.indexOf(a.position) - order.indexOf(b.position))
+      : order.map(pos => units.find(unit => unit.position === pos) ?? pos);
+    return slots.map((u) => {
+      if (typeof u === 'number') return <EmptySlot key={u} pos={u} />;
       return (
         <ActorSlot
           key={u.id}
@@ -39,6 +42,7 @@ export default function Battlefield({ battle, colorOf, legalTargetIds, onPickTar
         />
       );
     });
+  };
 
   return (
     <div className="rounded-lg border border-dd-border bg-dd-panel2/40 p-4 overflow-x-auto">

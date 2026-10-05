@@ -1,0 +1,1192 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R2",
+  "baselineHead": "35a42ac46ba97b07ed941bca078dc53fb5fab1bb",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "authority": "OFFICIAL_SOURCE",
+  "sourceReferences": [
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 6,
+      "location": "full printed face",
+      "componentId": "ruins-monster-miniatures",
+      "sourceClass": "OFFICIAL_SOURCE"
+    },
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 7,
+      "location": "full printed face",
+      "componentId": "common-monster-miniatures",
+      "sourceClass": "OFFICIAL_SOURCE"
+    },
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 9,
+      "location": "full printed face",
+      "componentId": "common-location-mixing",
+      "sourceClass": "OFFICIAL_SOURCE"
+    },
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 10,
+      "location": "full printed face",
+      "componentId": "level-I-monster-deck",
+      "sourceClass": "OFFICIAL_SOURCE"
+    },
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 35,
+      "location": "full printed face",
+      "componentId": "additive-level-II-III-deck",
+      "sourceClass": "OFFICIAL_SOURCE"
+    }
+  ],
+  "compositionComplete": true,
+  "definitionClosureComplete": false,
+  "levelPolicy": "ADDITIVE: printed level <= campaign level; preserve permanently removed physical copies",
+  "identities": [
+    {
+      "canonicalId": "bone-soldier",
+      "group": "RUINS",
+      "copyCount": 3,
+      "printedLevel": 1,
+      "drawEligibleFromLevel": 1,
+      "size": "NORMAL",
+      "stanceSlots": 1,
+      "physicalCopyIds": [
+        "bone-soldier:copy-1",
+        "bone-soldier:copy-2",
+        "bone-soldier:copy-3"
+      ],
+      "sourceCardIds": [
+        46100
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 1,
+          "location": "whole card",
+          "componentId": "bone-soldier",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 1,
+          "location": "card back",
+          "componentId": "bone-soldier",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "BLOCKED_SOURCE_MISMATCH",
+      "blockers": [
+        "FROZEN_BONE_SOURCE_MISMATCH_REVIEW",
+        "PRINTED_STANCE_GROUPING_REVIEW"
+      ]
+    },
+    {
+      "canonicalId": "bone-courtier",
+      "group": "RUINS",
+      "copyCount": 3,
+      "printedLevel": 1,
+      "drawEligibleFromLevel": 1,
+      "size": "NORMAL",
+      "stanceSlots": 1,
+      "physicalCopyIds": [
+        "bone-courtier:copy-1",
+        "bone-courtier:copy-2",
+        "bone-courtier:copy-3"
+      ],
+      "sourceCardIds": [
+        46105
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 4,
+          "location": "whole card",
+          "componentId": "bone-courtier",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 4,
+          "location": "card back",
+          "componentId": "bone-courtier",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "SOURCE_BOUND_INTAKE",
+      "blockers": [
+        "ORDINARY_MONSTER_EFFECT_ADAPTER_NOT_BOUND",
+        "PRINTED_STANCE_GROUPING_REVIEW"
+      ]
+    },
+    {
+      "canonicalId": "bone-arbalist",
+      "group": "RUINS",
+      "copyCount": 3,
+      "printedLevel": 1,
+      "drawEligibleFromLevel": 1,
+      "size": "NORMAL",
+      "stanceSlots": 1,
+      "physicalCopyIds": [
+        "bone-arbalist:copy-1",
+        "bone-arbalist:copy-2",
+        "bone-arbalist:copy-3"
+      ],
+      "sourceCardIds": [
+        46107
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 7,
+          "location": "whole card",
+          "componentId": "bone-arbalist",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 7,
+          "location": "card back",
+          "componentId": "bone-arbalist",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "SOURCE_BOUND_INTAKE",
+      "blockers": [
+        "ORDINARY_MONSTER_EFFECT_ADAPTER_NOT_BOUND",
+        "PRINTED_STANCE_GROUPING_REVIEW"
+      ]
+    },
+    {
+      "canonicalId": "bone-defender",
+      "group": "RUINS",
+      "copyCount": 2,
+      "printedLevel": 1,
+      "drawEligibleFromLevel": 1,
+      "size": "NORMAL",
+      "stanceSlots": 1,
+      "physicalCopyIds": [
+        "bone-defender:copy-1",
+        "bone-defender:copy-2"
+      ],
+      "sourceCardIds": [
+        46110
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 10,
+          "location": "whole card",
+          "componentId": "bone-defender",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 10,
+          "location": "card back",
+          "componentId": "bone-defender",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "SOURCE_BOUND_INTAKE",
+      "blockers": [
+        "ORDINARY_MONSTER_EFFECT_ADAPTER_NOT_BOUND",
+        "PRINTED_STANCE_GROUPING_REVIEW"
+      ]
+    },
+    {
+      "canonicalId": "bone-captain",
+      "group": "RUINS",
+      "copyCount": 1,
+      "printedLevel": 2,
+      "drawEligibleFromLevel": 2,
+      "size": "LARGE",
+      "stanceSlots": 2,
+      "physicalCopyIds": [
+        "bone-captain:copy-1"
+      ],
+      "sourceCardIds": [
+        46111,
+        46600
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 12,
+          "location": "large-card reference/proxy; not an additional physical copy",
+          "componentId": "bone-captain",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 12,
+          "location": "card back",
+          "componentId": "bone-captain",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_140x140_monster_large_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_140x140_monster_large_FRONT.pdf",
+          "sha256": "0be4a5a5a0a7c3b7759562114656eb536f80a9087c21f38fc160086dd5b73974",
+          "page": 1,
+          "location": "full printed face",
+          "componentId": "bone-captain",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_140x140_monster_large_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_140x140_monster_large_BACK.pdf",
+          "sha256": "ba2e2458c0bc9c333d8f5324406b4f9d8234820a630c71c2d819a18d6d10cb69",
+          "page": 1,
+          "location": "card back",
+          "componentId": "bone-captain",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "ACCEPTED_BONE_ADAPTER_REUSED",
+      "blockers": []
+    },
+    {
+      "canonicalId": "bone-spearman",
+      "group": "RUINS",
+      "copyCount": 3,
+      "printedLevel": 2,
+      "drawEligibleFromLevel": 2,
+      "size": "NORMAL",
+      "stanceSlots": 1,
+      "physicalCopyIds": [
+        "bone-spearman:copy-1",
+        "bone-spearman:copy-2",
+        "bone-spearman:copy-3"
+      ],
+      "sourceCardIds": [
+        46112,
+        46114
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 13,
+          "location": "whole card",
+          "componentId": "bone-spearman",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 13,
+          "location": "card back",
+          "componentId": "bone-spearman",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "BLOCKED_SOURCE_MISMATCH",
+      "blockers": [
+        "FROZEN_BONE_SOURCE_MISMATCH_REVIEW",
+        "PRINTED_STANCE_GROUPING_REVIEW"
+      ]
+    },
+    {
+      "canonicalId": "bone-bearer",
+      "group": "RUINS",
+      "copyCount": 2,
+      "printedLevel": 3,
+      "drawEligibleFromLevel": 3,
+      "size": "NORMAL",
+      "stanceSlots": 1,
+      "physicalCopyIds": [
+        "bone-bearer:copy-1",
+        "bone-bearer:copy-2"
+      ],
+      "sourceCardIds": [
+        46116
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 16,
+          "location": "whole card",
+          "componentId": "bone-bearer",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 16,
+          "location": "card back",
+          "componentId": "bone-bearer",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "SOURCE_BOUND_INTAKE",
+      "blockers": [
+        "ORDINARY_MONSTER_EFFECT_ADAPTER_NOT_BOUND",
+        "PRINTED_STANCE_GROUPING_REVIEW"
+      ]
+    },
+    {
+      "canonicalId": "cultist-brawler",
+      "group": "COMMON",
+      "copyCount": 3,
+      "printedLevel": 1,
+      "drawEligibleFromLevel": 1,
+      "size": "NORMAL",
+      "stanceSlots": 1,
+      "physicalCopyIds": [
+        "cultist-brawler:copy-1",
+        "cultist-brawler:copy-2",
+        "cultist-brawler:copy-3"
+      ],
+      "sourceCardIds": [
+        46117,
+        46118,
+        46119
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 18,
+          "location": "whole card",
+          "componentId": "cultist-brawler",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 18,
+          "location": "card back",
+          "componentId": "cultist-brawler",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "SOURCE_BOUND_INTAKE",
+      "blockers": [
+        "ORDINARY_MONSTER_EFFECT_ADAPTER_NOT_BOUND",
+        "PRINTED_STANCE_GROUPING_REVIEW"
+      ]
+    },
+    {
+      "canonicalId": "cultist-acolyte",
+      "group": "COMMON",
+      "copyCount": 3,
+      "printedLevel": 1,
+      "drawEligibleFromLevel": 1,
+      "size": "NORMAL",
+      "stanceSlots": 1,
+      "physicalCopyIds": [
+        "cultist-acolyte:copy-1",
+        "cultist-acolyte:copy-2",
+        "cultist-acolyte:copy-3"
+      ],
+      "sourceCardIds": [
+        46120,
+        46121,
+        46122
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 21,
+          "location": "whole card",
+          "componentId": "cultist-acolyte",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 21,
+          "location": "card back",
+          "componentId": "cultist-acolyte",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "SOURCE_BOUND_INTAKE",
+      "blockers": [
+        "ORDINARY_MONSTER_EFFECT_ADAPTER_NOT_BOUND",
+        "PRINTED_STANCE_GROUPING_REVIEW"
+      ]
+    },
+    {
+      "canonicalId": "brigand-cutthroat",
+      "group": "COMMON",
+      "copyCount": 3,
+      "printedLevel": 1,
+      "drawEligibleFromLevel": 1,
+      "size": "NORMAL",
+      "stanceSlots": 1,
+      "physicalCopyIds": [
+        "brigand-cutthroat:copy-1",
+        "brigand-cutthroat:copy-2",
+        "brigand-cutthroat:copy-3"
+      ],
+      "sourceCardIds": [
+        46123,
+        46124,
+        46125
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 24,
+          "location": "whole card",
+          "componentId": "brigand-cutthroat",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 24,
+          "location": "card back",
+          "componentId": "brigand-cutthroat",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "SOURCE_BOUND_INTAKE",
+      "blockers": [
+        "ORDINARY_MONSTER_EFFECT_ADAPTER_NOT_BOUND",
+        "PRINTED_STANCE_GROUPING_REVIEW"
+      ]
+    },
+    {
+      "canonicalId": "brigand-fusilier",
+      "group": "COMMON",
+      "copyCount": 3,
+      "printedLevel": 1,
+      "drawEligibleFromLevel": 1,
+      "size": "NORMAL",
+      "stanceSlots": 1,
+      "physicalCopyIds": [
+        "brigand-fusilier:copy-1",
+        "brigand-fusilier:copy-2",
+        "brigand-fusilier:copy-3"
+      ],
+      "sourceCardIds": [
+        46126,
+        46127,
+        46128
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 27,
+          "location": "whole card",
+          "componentId": "brigand-fusilier",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 27,
+          "location": "card back",
+          "componentId": "brigand-fusilier",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "SOURCE_BOUND_INTAKE",
+      "blockers": [
+        "ORDINARY_MONSTER_EFFECT_ADAPTER_NOT_BOUND",
+        "PRINTED_STANCE_GROUPING_REVIEW"
+      ]
+    },
+    {
+      "canonicalId": "brigand-bloodletter",
+      "group": "COMMON",
+      "copyCount": 1,
+      "printedLevel": 1,
+      "drawEligibleFromLevel": 1,
+      "size": "LARGE",
+      "stanceSlots": 2,
+      "physicalCopyIds": [
+        "brigand-bloodletter:copy-1"
+      ],
+      "sourceCardIds": [
+        46601
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 30,
+          "location": "large-card reference/proxy; not an additional physical copy",
+          "componentId": "brigand-bloodletter",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 30,
+          "location": "card back",
+          "componentId": "brigand-bloodletter",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_140x140_monster_large_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_140x140_monster_large_FRONT.pdf",
+          "sha256": "0be4a5a5a0a7c3b7759562114656eb536f80a9087c21f38fc160086dd5b73974",
+          "page": 2,
+          "location": "full printed face",
+          "componentId": "brigand-bloodletter",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_140x140_monster_large_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_140x140_monster_large_BACK.pdf",
+          "sha256": "ba2e2458c0bc9c333d8f5324406b4f9d8234820a630c71c2d819a18d6d10cb69",
+          "page": 2,
+          "location": "card back",
+          "componentId": "brigand-bloodletter",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "SOURCE_BOUND_INTAKE",
+      "blockers": [
+        "ORDINARY_MONSTER_EFFECT_ADAPTER_NOT_BOUND",
+        "PRINTED_STANCE_GROUPING_REVIEW"
+      ]
+    },
+    {
+      "canonicalId": "maggot",
+      "group": "COMMON",
+      "copyCount": 3,
+      "printedLevel": 1,
+      "drawEligibleFromLevel": 1,
+      "size": "SMALL",
+      "stanceSlots": 1,
+      "physicalCopyIds": [
+        "maggot:copy-1",
+        "maggot:copy-2",
+        "maggot:copy-3"
+      ],
+      "sourceCardIds": [
+        46130,
+        46131,
+        46132
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 31,
+          "location": "whole card",
+          "componentId": "maggot",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 31,
+          "location": "card back",
+          "componentId": "maggot",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "SOURCE_BOUND_INTAKE",
+      "blockers": [
+        "ORDINARY_MONSTER_EFFECT_ADAPTER_NOT_BOUND",
+        "PRINTED_STANCE_GROUPING_REVIEW"
+      ]
+    },
+    {
+      "canonicalId": "webber",
+      "group": "COMMON",
+      "copyCount": 3,
+      "printedLevel": 1,
+      "drawEligibleFromLevel": 1,
+      "size": "SMALL",
+      "stanceSlots": 1,
+      "physicalCopyIds": [
+        "webber:copy-1",
+        "webber:copy-2",
+        "webber:copy-3"
+      ],
+      "sourceCardIds": [
+        46133,
+        46134,
+        46135
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 34,
+          "location": "whole card",
+          "componentId": "webber",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 34,
+          "location": "card back",
+          "componentId": "webber",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "SOURCE_BOUND_INTAKE",
+      "blockers": [
+        "ORDINARY_MONSTER_EFFECT_ADAPTER_NOT_BOUND",
+        "PRINTED_STANCE_GROUPING_REVIEW"
+      ]
+    },
+    {
+      "canonicalId": "spitter",
+      "group": "COMMON",
+      "copyCount": 3,
+      "printedLevel": 1,
+      "drawEligibleFromLevel": 1,
+      "size": "SMALL",
+      "stanceSlots": 1,
+      "physicalCopyIds": [
+        "spitter:copy-1",
+        "spitter:copy-2",
+        "spitter:copy-3"
+      ],
+      "sourceCardIds": [
+        46136,
+        46137,
+        46138
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 37,
+          "location": "whole card",
+          "componentId": "spitter",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 37,
+          "location": "card back",
+          "componentId": "spitter",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "SOURCE_BOUND_INTAKE",
+      "blockers": [
+        "ORDINARY_MONSTER_EFFECT_ADAPTER_NOT_BOUND",
+        "PRINTED_STANCE_GROUPING_REVIEW"
+      ]
+    },
+    {
+      "canonicalId": "bone-rabble",
+      "group": "COMMON",
+      "copyCount": 3,
+      "printedLevel": 1,
+      "drawEligibleFromLevel": 1,
+      "size": "NORMAL",
+      "stanceSlots": 1,
+      "physicalCopyIds": [
+        "bone-rabble:copy-1",
+        "bone-rabble:copy-2",
+        "bone-rabble:copy-3"
+      ],
+      "sourceCardIds": [
+        46139,
+        46140,
+        46141
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 40,
+          "location": "whole card",
+          "componentId": "bone-rabble",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 40,
+          "location": "card back",
+          "componentId": "bone-rabble",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "BLOCKED_SOURCE_MISMATCH",
+      "blockers": [
+        "FROZEN_BONE_SOURCE_MISMATCH_REVIEW",
+        "PRINTED_STANCE_GROUPING_REVIEW"
+      ]
+    },
+    {
+      "canonicalId": "madman",
+      "group": "COMMON",
+      "copyCount": 3,
+      "printedLevel": 1,
+      "drawEligibleFromLevel": 1,
+      "size": "NORMAL",
+      "stanceSlots": 1,
+      "physicalCopyIds": [
+        "madman:copy-1",
+        "madman:copy-2",
+        "madman:copy-3"
+      ],
+      "sourceCardIds": [
+        46142,
+        46143,
+        46144
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 43,
+          "location": "whole card",
+          "componentId": "madman",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 43,
+          "location": "card back",
+          "componentId": "madman",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "SOURCE_BOUND_INTAKE",
+      "blockers": [
+        "ORDINARY_MONSTER_EFFECT_ADAPTER_NOT_BOUND",
+        "PRINTED_STANCE_GROUPING_REVIEW"
+      ]
+    },
+    {
+      "canonicalId": "pliskin",
+      "group": "COMMON",
+      "copyCount": 3,
+      "printedLevel": 1,
+      "drawEligibleFromLevel": 1,
+      "size": "NORMAL",
+      "stanceSlots": 1,
+      "physicalCopyIds": [
+        "pliskin:copy-1",
+        "pliskin:copy-2",
+        "pliskin:copy-3"
+      ],
+      "sourceCardIds": [
+        46145,
+        46146,
+        46147
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 46,
+          "location": "whole card",
+          "componentId": "pliskin",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 46,
+          "location": "card back",
+          "componentId": "pliskin",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "SOURCE_BOUND_INTAKE",
+      "blockers": [
+        "ORDINARY_MONSTER_EFFECT_ADAPTER_NOT_BOUND",
+        "PRINTED_STANCE_GROUPING_REVIEW"
+      ]
+    },
+    {
+      "canonicalId": "ghoul",
+      "group": "COMMON",
+      "copyCount": 1,
+      "printedLevel": 2,
+      "drawEligibleFromLevel": 2,
+      "size": "LARGE",
+      "stanceSlots": 2,
+      "physicalCopyIds": [
+        "ghoul:copy-1"
+      ],
+      "sourceCardIds": [
+        46602
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 49,
+          "location": "large-card reference/proxy; not an additional physical copy",
+          "componentId": "ghoul",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 49,
+          "location": "card back",
+          "componentId": "ghoul",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_140x140_monster_large_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_140x140_monster_large_FRONT.pdf",
+          "sha256": "0be4a5a5a0a7c3b7759562114656eb536f80a9087c21f38fc160086dd5b73974",
+          "page": 3,
+          "location": "full printed face",
+          "componentId": "ghoul",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_140x140_monster_large_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_140x140_monster_large_BACK.pdf",
+          "sha256": "ba2e2458c0bc9c333d8f5324406b4f9d8234820a630c71c2d819a18d6d10cb69",
+          "page": 3,
+          "location": "card back",
+          "componentId": "ghoul",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "SOURCE_BOUND_INTAKE",
+      "blockers": [
+        "ORDINARY_MONSTER_EFFECT_ADAPTER_NOT_BOUND",
+        "PRINTED_STANCE_GROUPING_REVIEW"
+      ]
+    },
+    {
+      "canonicalId": "gargoyle",
+      "group": "COMMON",
+      "copyCount": 3,
+      "printedLevel": 2,
+      "drawEligibleFromLevel": 2,
+      "size": "NORMAL",
+      "stanceSlots": 1,
+      "physicalCopyIds": [
+        "gargoyle:copy-1",
+        "gargoyle:copy-2",
+        "gargoyle:copy-3"
+      ],
+      "sourceCardIds": [
+        46000,
+        46149,
+        46150
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 50,
+          "location": "whole card",
+          "componentId": "gargoyle",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 50,
+          "location": "card back",
+          "componentId": "gargoyle",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "SOURCE_BOUND_INTAKE",
+      "blockers": [
+        "ORDINARY_MONSTER_EFFECT_ADAPTER_NOT_BOUND",
+        "PRINTED_STANCE_GROUPING_REVIEW"
+      ]
+    },
+    {
+      "canonicalId": "rattler",
+      "group": "COMMON",
+      "copyCount": 3,
+      "printedLevel": 2,
+      "drawEligibleFromLevel": 2,
+      "size": "NORMAL",
+      "stanceSlots": 1,
+      "physicalCopyIds": [
+        "rattler:copy-1",
+        "rattler:copy-2",
+        "rattler:copy-3"
+      ],
+      "sourceCardIds": [
+        46001,
+        46002,
+        46003
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 53,
+          "location": "whole card",
+          "componentId": "rattler",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 53,
+          "location": "card back",
+          "componentId": "rattler",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "SOURCE_BOUND_INTAKE",
+      "blockers": [
+        "ORDINARY_MONSTER_EFFECT_ADAPTER_NOT_BOUND",
+        "PRINTED_STANCE_GROUPING_REVIEW"
+      ]
+    },
+    {
+      "canonicalId": "brigand-raider",
+      "group": "COMMON",
+      "copyCount": 3,
+      "printedLevel": 3,
+      "drawEligibleFromLevel": 3,
+      "size": "NORMAL",
+      "stanceSlots": 1,
+      "physicalCopyIds": [
+        "brigand-raider:copy-1",
+        "brigand-raider:copy-2",
+        "brigand-raider:copy-3"
+      ],
+      "sourceCardIds": [
+        46004,
+        46005,
+        46006
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 56,
+          "location": "whole card",
+          "componentId": "brigand-raider",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 56,
+          "location": "card back",
+          "componentId": "brigand-raider",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "SOURCE_BOUND_INTAKE",
+      "blockers": [
+        "ORDINARY_MONSTER_EFFECT_ADAPTER_NOT_BOUND",
+        "PRINTED_STANCE_GROUPING_REVIEW"
+      ]
+    },
+    {
+      "canonicalId": "brigand-hunter",
+      "group": "COMMON",
+      "copyCount": 3,
+      "printedLevel": 3,
+      "drawEligibleFromLevel": 3,
+      "size": "NORMAL",
+      "stanceSlots": 1,
+      "physicalCopyIds": [
+        "brigand-hunter:copy-1",
+        "brigand-hunter:copy-2",
+        "brigand-hunter:copy-3"
+      ],
+      "sourceCardIds": [
+        46007,
+        46008,
+        46009
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 59,
+          "location": "whole card",
+          "componentId": "brigand-hunter",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 59,
+          "location": "card back",
+          "componentId": "brigand-hunter",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "SOURCE_BOUND_INTAKE",
+      "blockers": [
+        "ORDINARY_MONSTER_EFFECT_ADAPTER_NOT_BOUND",
+        "PRINTED_STANCE_GROUPING_REVIEW"
+      ]
+    },
+    {
+      "canonicalId": "adder",
+      "group": "COMMON",
+      "copyCount": 1,
+      "printedLevel": 3,
+      "drawEligibleFromLevel": 3,
+      "size": "LARGE",
+      "stanceSlots": 2,
+      "physicalCopyIds": [
+        "adder:copy-1"
+      ],
+      "sourceCardIds": [
+        46603
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_FRONT.pdf",
+          "sha256": "ee35632cfec351ed176f9dd09d9d21adc3f357a5dfb632519514325d9635b09c",
+          "page": 62,
+          "location": "large-card reference/proxy; not an additional physical copy",
+          "componentId": "adder",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_70_120_monsters_medium_BACK.pdf",
+          "sha256": "8a083b8d6cd1ef54f0a5c4b05f4c092dfb9aa51395839b51f5610fb28ffd2a7b",
+          "page": 62,
+          "location": "card back",
+          "componentId": "adder",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_140x140_monster_large_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_140x140_monster_large_FRONT.pdf",
+          "sha256": "0be4a5a5a0a7c3b7759562114656eb536f80a9087c21f38fc160086dd5b73974",
+          "page": 4,
+          "location": "full printed face",
+          "componentId": "adder",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_140x140_monster_large_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_140x140_monster_large_BACK.pdf",
+          "sha256": "ba2e2458c0bc9c333d8f5324406b4f9d8234820a630c71c2d819a18d6d10cb69",
+          "page": 4,
+          "location": "card back",
+          "componentId": "adder",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT"
+        }
+      ],
+      "status": "SOURCE_BOUND_INTAKE",
+      "blockers": [
+        "ORDINARY_MONSTER_EFFECT_ADAPTER_NOT_BOUND",
+        "PRINTED_STANCE_GROUPING_REVIEW"
+      ]
+    }
+  ],
+  "physicalCopies": 62,
+  "countsByCampaignLevel": [
+    {
+      "level": 1,
+      "copies": 42
+    },
+    {
+      "level": 2,
+      "copies": 53
+    },
+    {
+      "level": 3,
+      "copies": 62
+    }
+  ],
+  "bossOnlyExclusions": [
+    "necromancer",
+    "prophet",
+    "collector",
+    "fanatic",
+    "pyre",
+    "collected-highwayman",
+    "collected-man-at-arms",
+    "collected-vestal"
+  ],
+  "darkestDungeonExcluded": true,
+  "summonOnlyBoneDefinitions": [],
+  "summonSharedPhysicalIdentities": [
+    "bone-rabble",
+    "bone-soldier",
+    "bone-spearman"
+  ],
+  "largeProxyCardsAreExtraCopies": false,
+  "missingMonsterDefinitions": 23,
+  "syntheticMonsterDefinitions": 0,
+  "prototypeMonsterDefinitions": 0
+}

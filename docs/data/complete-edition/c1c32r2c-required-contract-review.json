@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R2C",
+  "ruleSetVersion": "C1C32R2B-DIGITAL-DEFAULT-v5",
+  "status": "REQUIRED_EXECUTABLE_CONTRACT_ABSENT",
+  "canonicalStatus": "SOURCE_UNRESOLVED",
+  "canonical": false,
+  "sourcePolicy": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "rulingSetChanged": false,
+  "productionPromotionStopped": true,
+  "reproduction": {
+    "level": 3,
+    "seed": 147,
+    "error": "Error: Official initial placement could not bind",
+    "startingRoom": 2,
+    "leadingCards": [
+      {
+        "copyId": "brigand-bloodletter:copy-1",
+        "definitionId": "brigand-bloodletter",
+        "size": "LARGE",
+        "stanceSlots": 2,
+        "deployment": "FRONT"
+      },
+      {
+        "copyId": "brigand-raider:copy-3",
+        "definitionId": "brigand-raider",
+        "size": "NORMAL",
+        "stanceSlots": 1,
+        "deployment": "FRONT"
+      },
+      {
+        "copyId": "bone-captain:copy-1",
+        "definitionId": "bone-captain",
+        "size": "LARGE",
+        "stanceSlots": 2,
+        "deployment": "FRONT"
+      },
+      {
+        "copyId": "rattler:copy-3",
+        "definitionId": "rattler",
+        "size": "NORMAL",
+        "stanceSlots": 1,
+        "deployment": "FRONT"
+      },
+      {
+        "copyId": "madman:copy-2",
+        "definitionId": "madman",
+        "size": "NORMAL",
+        "stanceSlots": 1,
+        "deployment": "BACK"
+      }
+    ]
+  },
+  "blockers": [
+    {
+      "id": "INITIAL_DRAW_MIXED_TWO_LARGE_LAYOUT_POLICY_ABSENT",
+      "code": "src/game-engine/ruins/encounter-draw.ts",
+      "requirement": "Resolve a Large + Normal + Large draw or fragmented Large destination without guessing a discard/return policy.",
+      "existingContractScope": "Official p17 and R2B review specify replacing the last non-Large after three Monsters; v5 only adds return timing.",
+      "missingContract": "No accepted treatment of the second Large when only two Monster cards are already in play."
+    },
+    {
+      "id": "LARGE_STANCE_SHUFFLE_SLOT_COLLISION_CONTRACT_ABSENT",
+      "code": "src/game-engine/ruins/printed-effect-runtime.ts",
+      "requirement": "A Shuffle across a two-slot Large card must have a legal, deterministic Stance permutation.",
+      "existingContractScope": "Official p17 specifies two Stance slots; p21 specifies equal-number-of-spaces Shuffle and shifting other characters. The inherited v3 contract licenses spatial Area overflow only.",
+      "missingContract": "No pinned executable Stance permutation policy for a one-space move intersecting a two-slot card. Runtime rejects the collision."
+    }
+  ],
+  "sourceReferences": [
+    {
+      "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+      "pages": [
+        17,
+        21,
+        24,
+        38
+      ],
+      "sourceSha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae"
+    },
+    {
+      "path": "docs/data/complete-edition/c1c32r2b-large-replacement-source-review.json"
+    },
+    {
+      "path": "docs/data/complete-edition/c1c32r2b-large-replacement-project-ruling.json"
+    },
+    {
+      "path": "docs/data/complete-edition/c1c32r2-large-movement-project-ruling.json"
+    }
+  ],
+  "nextAction": "Review an explicit successor PROJECT_RULING for these newly exposed ambiguities. Do not mutate v1-v5, infer a runtime discard, or launch broad source intake."
+}

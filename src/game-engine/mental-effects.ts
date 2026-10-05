@@ -23,6 +23,8 @@ import { applyBattleUnitHealing } from './healing';
 import { currentTurnKey } from './battle';
 import { getVirtueById } from '../data/virtues';
 import { getAfflictionById } from '../data/afflictions';
+import { resolveGraveyardVirtue } from './campaign/graveyard-virtues';
+import { applyEffectToUnit } from './status-effects';
 
 /** 向进行中战斗追加日志（battle.ts 的 pushBattleLog 为私有，这里等价实现）。 */
 function pushBattleLogOnCampaign(
@@ -51,7 +53,13 @@ function setBattleUnit(campaign: CampaignState, unit: BattleUnit): CampaignState
 }
 
 /** 查找当前精神检定对应的卡牌定义。 */
-function getCardForUnit(unit: BattleUnit): ResolveEffectDefinition | undefined {
+function getCardForUnit(unit: BattleUnit, campaign: CampaignState): ResolveEffectDefinition | undefined {
+  if (unit.resolveState === 'virtuous' && unit.virtueId?.startsWith('official-graveyard:')) {
+    const receipt = campaign.necromancerGraveyardReceipts?.find(r => r.lifecycle === 'ACTIVE_QUEST'
+      && r.heroInstanceId === unit.sourceId && r.virtueId === unit.virtueId && r.targetQuestRunId === campaign.dungeon?.questRunId);
+    if (!receipt) throw new Error('Graveyard Virtue lacks active Quest provenance');
+    return resolveGraveyardVirtue(unit.virtueId);
+  }
   if (unit.resolveState === 'virtuous' && unit.virtueId) return getVirtueById(unit.virtueId);
   if (unit.resolveState === 'afflicted' && unit.afflictionId) return getAfflictionById(unit.afflictionId);
   return undefined;
@@ -99,6 +107,23 @@ function executeSingleEffect(
   const heroName = unit.name;
 
   switch (effect.type) {
+    case 'buff-self':
+    case 'buff-party': {
+      for (const target of (effect.type === 'buff-self' ? [unit] : c.battle!.heroes.filter(u => u.isAlive))) {
+        c = setBattleUnit(c, applyEffectToUnit(target, { type: 'buff', amount: 1, durationTurns: effect.turns }));
+      }
+      break;
+    }
+    case 'heal-self-per-level': {
+      const level = c.heroes.find(h => h.instanceId === heroInstanceId)!.level;
+      c = executeSingleEffect(c, unit, heroInstanceId, { type: 'heal-self', amount: effect.amount * level }, card, questId);
+      break;
+    }
+    case 'stress-party': {
+      c = executeSingleEffect(c, unit, heroInstanceId, { type: 'stress-self', amount: effect.amount }, card, questId);
+      c = executeSingleEffect(c, unit, heroInstanceId, { type: 'stress-allies', amount: effect.amount }, card, questId);
+      break;
+    }
     case 'stress-self': {
       if (effect.amount >= 0) {
         // 正数走 applyStress（可能触发 Heart Attack —— 已 Resolve 过的英雄再达 10）
@@ -275,7 +300,7 @@ export function resolveTurnStartMentalEffect(campaign: CampaignState): TurnStart
   if (!hero || hero.dead) return { campaign, checked: false };
   const questId = campaign.currentQuestId ?? 'unknown-quest';
 
-  const card = getCardForUnit(unit);
+  const card = getCardForUnit(unit, campaign);
   // 先标记已处理（即使卡牌缺失也不重复检定）
   let c = setBattleUnit(campaign, { ...unit, mentalEffectResolvedTurnId: turnKey });
 

@@ -1,0 +1,190 @@
+{
+  "phase": "11A.5-C2D",
+  "baseline": "e1e9f27c882000bee59cec115ec0d1b3f7fcb5de",
+  "definitionVersion": "C2C-HERO-PRODUCTION-DEFINITION-v1",
+  "runtimeVersion": "C2D-HERO-PRODUCTION-RUNTIME-v1",
+  "ambiguityPolicy": "SOURCE_AMBIGUITY_DEFER_POLICY_V1",
+  "normalPlayerRouteEnabled": false,
+  "productionReady": false,
+  "heroes": [
+    {
+      "heroId": "crusader",
+      "status": "RUNTIME_FOUNDATION_ACCEPTED"
+    },
+    {
+      "heroId": "hellion",
+      "status": "RUNTIME_FOUNDATION_ACCEPTED"
+    },
+    {
+      "heroId": "bounty-hunter",
+      "status": "RUNTIME_FOUNDATION_ACCEPTED"
+    },
+    {
+      "heroId": "highwayman",
+      "status": "RUNTIME_FOUNDATION_ACCEPTED"
+    },
+    {
+      "heroId": "vestal",
+      "status": "RUNTIME_FOUNDATION_ACCEPTED"
+    },
+    {
+      "heroId": "jester",
+      "status": "RUNTIME_FOUNDATION_ACCEPTED"
+    },
+    {
+      "heroId": "plague-doctor",
+      "status": "RUNTIME_FOUNDATION_ACCEPTED"
+    },
+    {
+      "heroId": "arbalest",
+      "status": "RUNTIME_FOUNDATION_ACCEPTED"
+    },
+    {
+      "heroId": "grave-robber",
+      "status": "RUNTIME_FOUNDATION_ACCEPTED"
+    },
+    {
+      "heroId": "occultist",
+      "status": "RUNTIME_FOUNDATION_ACCEPTED"
+    },
+    {
+      "heroId": "abomination",
+      "status": "RUNTIME_FOUNDATION_ACCEPTED"
+    },
+    {
+      "heroId": "man-at-arms",
+      "status": "RUNTIME_FOUNDATION_ACCEPTED"
+    },
+    {
+      "heroId": "flagellant",
+      "status": "RUNTIME_FOUNDATION_ACCEPTED"
+    },
+    {
+      "heroId": "leper",
+      "status": "RUNTIME_FOUNDATION_ACCEPTED"
+    },
+    {
+      "heroId": "antiquarian",
+      "status": "RUNTIME_FOUNDATION_ACCEPTED"
+    },
+    {
+      "heroId": "shieldbreaker",
+      "status": "RUNTIME_FOUNDATION_ACCEPTED"
+    },
+    {
+      "heroId": "hound-master",
+      "status": "RUNTIME_FOUNDATION_ACCEPTED"
+    },
+    {
+      "heroId": "musketeer",
+      "status": "RUNTIME_FOUNDATION_ACCEPTED"
+    }
+  ],
+  "capabilities": [
+    {
+      "category": "basic attack",
+      "status": "RUNTIME_FOUNDATION_ACCEPTED",
+      "independentExecution": "PASS",
+      "skillId": "crusader-smite"
+    },
+    {
+      "category": "heal",
+      "status": "RUNTIME_FOUNDATION_ACCEPTED",
+      "independentExecution": "PASS",
+      "skillId": "vestal-divine-grace"
+    },
+    {
+      "category": "Stress heal",
+      "status": "RUNTIME_FOUNDATION_ACCEPTED",
+      "independentExecution": "PASS",
+      "skillId": "jester-inspiring-tune"
+    },
+    {
+      "category": "condition application",
+      "status": "RUNTIME_FOUNDATION_ACCEPTED",
+      "independentExecution": "PASS",
+      "skillId": "plague-doctor-noxious-blast"
+    },
+    {
+      "category": "condition removal",
+      "status": "RUNTIME_FOUNDATION_ACCEPTED",
+      "independentExecution": "PASS",
+      "skillId": "plague-doctor-battlefield-medicine"
+    },
+    {
+      "category": "multi-target",
+      "status": "RUNTIME_FOUNDATION_ACCEPTED",
+      "independentExecution": "PASS",
+      "skillId": "vestal-divine-comfort"
+    },
+    {
+      "category": "all-target",
+      "status": "RUNTIME_FOUNDATION_ACCEPTED",
+      "independentExecution": "PASS",
+      "skillId": "abomination-transform-to-beast"
+    },
+    {
+      "category": "Self + Target",
+      "status": "RUNTIME_FOUNDATION_ACCEPTED",
+      "independentExecution": "PASS",
+      "skillId": "highwayman-point-blank-shot"
+    },
+    {
+      "category": "movement",
+      "status": "RUNTIME_FOUNDATION_ACCEPTED",
+      "independentExecution": "PASS",
+      "skillId": "bounty-hunter-uppercut"
+    },
+    {
+      "category": "conditional bonus",
+      "status": "DEFERRED_MANUAL_VALIDATION",
+      "independentExecution": "PASS",
+      "skillId": "flagellant-punish"
+    },
+    {
+      "category": "type-specific bonus",
+      "status": "DEFERRED_MANUAL_VALIDATION",
+      "independentExecution": "PASS",
+      "skillId": "crusader-smite"
+    },
+    {
+      "category": "ignore Guard",
+      "status": "DEFERRED_MANUAL_VALIDATION",
+      "independentExecution": "PASS",
+      "skillId": "jester-dirk-stab"
+    },
+    {
+      "category": "ignore Protection",
+      "status": "DEFERRED_MANUAL_VALIDATION",
+      "independentExecution": "PASS",
+      "skillId": "leper-intimidate"
+    },
+    {
+      "category": "form restriction",
+      "status": "RUNTIME_FOUNDATION_ACCEPTED",
+      "independentExecution": "PASS",
+      "skillId": "abomination-rake"
+    },
+    {
+      "category": "transform",
+      "status": "DEFERRED_MANUAL_VALIDATION",
+      "independentExecution": "PASS",
+      "skillId": "abomination-transform-to-beast"
+    },
+    {
+      "category": "party-wide effect",
+      "status": "RUNTIME_FOUNDATION_ACCEPTED",
+      "independentExecution": "PASS",
+      "skillId": "abomination-transform-to-beast"
+    },
+    {
+      "category": "Hamlet ability execution",
+      "status": "NOT_REQUIRED_IN_C2D"
+    },
+    {
+      "category": "normal Guild/Stagecoach/browser rollout",
+      "status": "NOT_REQUIRED_IN_C2D"
+    }
+  ],
+  "blocked": 0
+}

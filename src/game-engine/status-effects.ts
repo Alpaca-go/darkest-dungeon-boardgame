@@ -2,6 +2,7 @@ import type { ActiveEffect, BattleState, BattleUnit, HeroResistanceProfile } fro
 import { applyBattleUnitDamage, type BattleDamageOutcome } from './damage';
 import { applyQuirkModifiersRaw, describeModifierApplications } from './quirk-passives';
 import { rollDie } from './random';
+import { ruinsRoom } from './ruins/source-registry';
 
 /** 给单位施加一个状态效果（返回新单位，不修改原对象）。 */
 export function applyEffectToUnit(unit: BattleUnit, effect: ActiveEffect): BattleUnit {
@@ -31,6 +32,18 @@ export function applyEffectToUnit(unit: BattleUnit, effect: ActiveEffect): Battl
 export function applyEffects(unit: BattleUnit, effects?: ActiveEffect[]): BattleUnit {
   if (!effects || effects.length === 0) return unit;
   return effects.reduce((u, e) => applyEffectToUnit(u, e), unit);
+}
+
+/** Core p20–21: each printed Condition has its own duration stack. Magnitude remains optional. */
+export function synchronizePrintedConditionTokens(unit: BattleUnit): BattleUnit {
+  if (!unit.printedConditionTokens) return unit;
+  const tokens=unit.printedConditionTokens.filter(t=>t.turns>0);
+  const amount=(type:string)=>tokens.filter(t=>t.type===type).reduce((sum,t)=>sum+(t.magnitude.presence==='PRINTED_VALUE'?t.magnitude.value:1),0);
+  const duration=(type:string)=>Math.max(0,...tokens.filter(t=>t.type===type).map(t=>t.turns));
+  return {...unit,printedConditionTokens:tokens,bleed:amount('bleed'),blight:amount('blight'),stunned:amount('stun'),marked:amount('mark')>0,
+    buffs:tokens.filter(t=>t.type==='buff').map(t=>({type:'buff',amount:t.magnitude.presence==='PRINTED_VALUE'?t.magnitude.value:1,durationTurns:t.turns})),
+    debuffs:tokens.filter(t=>t.type==='debuff').map(t=>({type:'debuff',amount:t.magnitude.presence==='PRINTED_VALUE'?t.magnitude.value:1,durationTurns:t.turns})),
+    conditionDurations:{bleed:duration('bleed'),blight:duration('blight'),stun:duration('stun'),mark:duration('mark')}};
 }
 
 // ---------------------------------------------------------------------------
@@ -89,11 +102,11 @@ export function applyEffectsWithResistance(
       blocked.push({ type: effect.type, reason: 'immune' });
       continue;
     }
-    if (effect.type !== 'buff' && effect.type !== 'debuff' && categoricalResistances.includes(effect.type)) {
+    if (effect.type !== 'buff' && categoricalResistances.includes(effect.type as 'debuff')) {
       const from = effect.durationTurns ?? effect.amount;
       const to = Math.max(0, from - 1);
       blocked.push({ type: effect.type, reason: 'resisted', durationReducedFrom: from, durationReducedTo: to });
-      if (to > 0) next = applyEffectToUnit(next, { ...effect, durationTurns: to });
+      if (to > 0) next = applyEffectToUnit(next, { ...effect, amount: effect.type === 'stun' ? Math.min(effect.amount,to) : effect.amount, durationTurns: to });
       continue;
     }
     const key = RESIST_KEY_BY_EFFECT[effect.type];
@@ -117,9 +130,17 @@ export function applyStatusEffectEvent(state: BattleState, targetId: string, eff
     if (prior.targetId !== targetId || JSON.stringify(prior.effects) !== JSON.stringify(effects)) throw new Error('Status effect event payload mismatch');
     return state;
   }
-  const target = [...state.heroes, ...state.monsters].find(unit => unit.id === targetId);
+  let target = [...state.heroes, ...state.monsters].find(unit => unit.id === targetId);
   if (!target || !target.isAlive) throw new Error('Status effect target is unavailable');
+  const targetSide = target.side;
+  const context = state.ruinsContext;
+  const roomImmunities = context ? ruinsRoom(context.roomNumber).rules.filter(rule => rule.trigger === 'PASSIVE'
+    && rule.areas.includes(context.placements[targetId]) && (rule.side === 'all' || rule.side === targetSide))
+    .flatMap(rule => rule.effects.flatMap(effect => effect.type === 'immunity' ? effect.conditions : [])) : [];
+  const ownImmunities = target.immunities;
+  if (roomImmunities.length) target = { ...target, immunities: [...new Set([...(ownImmunities ?? []), ...roomImmunities])] };
   const result = applyEffectsWithResistance(target, effects);
+  if (roomImmunities.length) result.unit = { ...result.unit, immunities: ownImmunities };
   return {
     ...state,
     heroes: state.heroes.map(unit => unit.id === targetId ? result.unit : unit),
@@ -226,6 +247,7 @@ export function resolveStartOfTurnConditions(unit: BattleUnit, light = 0): Start
   }
 
   if (total <= 0) {
+    if (unit.printedConditionTokens) next=synchronizePrintedConditionTokens({...next,printedConditionTokens:unit.printedConditionTokens.map(t=>({...t,turns:t.turns-1}))});
     return {
       unit: next,
       messages,
@@ -238,6 +260,7 @@ export function resolveStartOfTurnConditions(unit: BattleUnit, light = 0): Start
   // 单次批量伤害入口（batch：Bleed + Blight 只有一次死亡判定）
   const outcome: BattleDamageOutcome = applyBattleUnitDamage(next, total);
   let resolved = outcome.unit;
+  if (unit.printedConditionTokens) resolved=synchronizePrintedConditionTokens({...resolved,printedConditionTokens:unit.printedConditionTokens.map(t=>({...t,turns:t.turns-1}))});
   if (outcome.heroDied) {
     resolved = { ...resolved, deathCause: 'deathblow-periodic' };
   }
@@ -276,4 +299,11 @@ export function tickStun(unit: BattleUnit): BattleUnit {
     stunned: remaining > 0 ? unit.stunned : 0,
     conditionDurations: { ...unit.conditionDurations, stun: remaining },
   };
+}
+
+/** Categorical printed Shuffle resistance, shared by every source-bound character. */
+export function resolveShuffleCount(unit: BattleUnit, distance: number): number {
+  if (unit.immunities?.some(i => i.toLowerCase() === 'shuffle')) return 0;
+  if (unit.categoricalResistances?.includes('shuffle')) return Math.sign(distance) * Math.max(0,Math.abs(distance)-1);
+  return distance;
 }

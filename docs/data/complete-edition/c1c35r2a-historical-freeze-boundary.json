@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C35R2A",
+  "baseline": "101c27c8c15fcb93802f956f399c37ed9c38a2e9",
+  "productionFoundation": false,
+  "productionAccepted": false,
+  "canonicalComplete": false,
+  "digitalExecutionContractComplete": true,
+  "policyVersion": "C1C35R2A-IMMUTABLE-PHASE-BASELINES-v1",
+  "checkpoints": [
+    {
+      "phase": "c1c33",
+      "commit": "e1fcfac0692eb91c5710552ac93e3bacb25f0240",
+      "script": "scripts/audit/c1c33-production-freeze.ts",
+      "protectedArtifactCount": 22
+    },
+    {
+      "phase": "c1c34",
+      "commit": "051c2c400d391543f5c436cbaa141a54bdf19ac1",
+      "script": "scripts/audit/c1c34-rebaseline.ts",
+      "protectedArtifactCount": 10
+    },
+    {
+      "phase": "c1c35",
+      "commit": "7b99c36c19159923799b3bda0180af9d8020ef82",
+      "script": "scripts/audit/c1c35-prophet-contract.ts",
+      "protectedArtifactCount": 24
+    },
+    {
+      "phase": "c1c35r1",
+      "commit": "7a3a483cba0dca0eb537e744980eecd4c55fef24",
+      "script": "scripts/audit/c1c35r1-prophet-contract.ts",
+      "protectedArtifactCount": 22
+    },
+    {
+      "phase": "c1c35r2",
+      "commit": "101c27c8c15fcb93802f956f399c37ed9c38a2e9",
+      "script": "scripts/audit/c1c35r2-foundation-review.ts",
+      "protectedArtifactCount": 26
+    }
+  ],
+  "exactRuntimeVerification": "ORIGINAL_VERIFIER_IN_DETACHED_ACCEPTED_CHECKOUT",
+  "successorRuntimeVerification": "C1C35R2A-NECROMANCER-SUCCESSOR-COMPATIBILITY-v1",
+  "currentArtifactsComparedWith": "ACCEPTED_RAW_GIT_BLOBS",
+  "original383RuntimeHashesRetained": true,
+  "successorRuntimeByteFreeze": false
+}

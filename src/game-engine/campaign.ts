@@ -1,12 +1,19 @@
 import type { CampaignState, HeroInstance, ProvisionPool } from '../types';
+import { isProductionCampaign } from '../data/heroes/player-registry';
+import { createProductionHero } from './heroes/production-hero';
+import { PRODUCTION_HERO_SELECTION, productionHeroSkillIds } from '../data/heroes/runtime-registry';
+import { LEGACY_HERO_SELECTION } from '../data/heroes/runtime-registry';
+import { usesHistoricalHeroCampaignMetadata } from './heroes/legacy-campaign-metadata';
 import { createId, nowIso } from './random';
 import { getHeroById } from '../data/heroes';
 import { getSkillsByHero } from '../data/skills';
 import { getQuestById } from '../data/quests';
-import { generateDungeon } from './dungeon';
+import { PRODUCTION_NECROMANCER_QUEST } from '../data/quests/production-necromancer-quest';
+import { generateDungeonForQuest } from './dungeon';
 import { pushLog } from './log';
 import { createInitialStagecoach } from './stagecoach';
 import { resetMentalStateForNewQuest } from './resolve-conversion';
+import { activateGraveyardForNextQuest } from './campaign/necromancer-graveyard';
 import { SAVE_VERSION } from './save';
 import { createInitialXpState } from './progression/xp-ledger';
 import { getHeroSkillSlots } from './progression/upgrade-core';
@@ -35,11 +42,13 @@ export const DEFAULT_PROVISIONS: ProvisionPool = {
  */
 export function createNewCampaign(
   runtimeContentProfile: RuntimeContentProfile = 'legacy-prototype',
+  heroSelection = runtimeContentProfile === 'community-complete-edition' ? PRODUCTION_HERO_SELECTION : LEGACY_HERO_SELECTION,
 ): CampaignState {
   const now = nowIso();
   return {
-    saveVersion: SAVE_VERSION, // v8 = Phase 9A（Boss / Imminent Threat / Face the Threat）
+    saveVersion: usesHistoricalHeroCampaignMetadata() ? 22 : SAVE_VERSION,
     runtimeContentProfile,
+    ...(usesHistoricalHeroCampaignMetadata() ? {} : { heroRuntimeSelection: { ...heroSelection } }),
     enabledContentSets: runtimeContentProfile === 'community-complete-edition'
       ? ['core', 'color-of-madness', 'crimson-court']
       : ['core'],
@@ -141,6 +150,10 @@ export function createNewCampaign(
   };
 }
 
+/** Explicit provisional deployment fallback, visible/editable in Setup. */
+export function createPlayerHero(heroId:string,partySlot:number,stance:import('../types').Stance='aggressive') {
+ return createProductionHero({heroId,level:1,instanceId:createId('hero'),stance,partySlot,skills:[],skillLevels:Object.fromEntries(productionHeroSkillIds(heroId).map(id=>[id,1]))});
+}
 /** 由英雄定义创建战役内的英雄实例。 */
 export function createHeroInstance(heroId: string, partySlot = 0): HeroInstance | null {
   const def = getHeroById(heroId);
@@ -194,7 +207,7 @@ export function createHeroInstance(heroId: string, partySlot = 0): HeroInstance 
 export function selectParty(campaign: CampaignState, heroIds: string[]): CampaignState {
   const unique = Array.from(new Set(heroIds)).slice(0, 4);
   const heroes = unique
-    .map((id, i) => createHeroInstance(id, i + 1))
+    .map((id, i) => isProductionCampaign(campaign) ? createPlayerHero(id,i+1) : createHeroInstance(id, i + 1))
     .filter((h): h is HeroInstance => h !== null);
   return { ...campaign, heroes };
 }
@@ -211,6 +224,7 @@ export function equipSkill(
 ): CampaignState {
   const heroes = campaign.heroes.map((h) => {
     if (h.heroId !== heroId) return h;
+    if(h.productionIdentity && !productionHeroSkillIds(h.heroId).includes(skillId)) return h;
     const has = h.equippedSkillIds.includes(skillId);
     if (has) {
       return { ...h, equippedSkillIds: h.equippedSkillIds.filter((id) => id !== skillId) };
@@ -224,7 +238,7 @@ export function equipSkill(
 /** 为全部英雄套用默认技能配置（按 Hero Level 派生的槽位数取前 N 个技能）。 */
 export function applyDefaultLoadout(campaign: CampaignState): CampaignState {
   const heroes = campaign.heroes.map((h) => {
-    const skills = getSkillsByHero(h.heroId)
+    const skills = (h.productionIdentity ? productionHeroSkillIds(h.heroId).map(id=>({id})) : getSkillsByHero(h.heroId))
       .slice(0, getHeroSkillSlots(h))
       .map((s) => s.id);
     return { ...h, equippedSkillIds: skills };
@@ -253,7 +267,10 @@ export function isLoadoutComplete(campaign: CampaignState): boolean {
  * - Phase 11A.1 §8：Engine 侧门控 —— Boss 锁定时禁止 Standard；Standard 未达 2/2 时禁止 Boss Quest。
  */
 export function selectQuest(campaign: CampaignState, questId: string): CampaignState {
-  const quest = getQuestById(questId);
+  const quest = campaign.runtimeContentProfile === 'community-complete-edition' && questId === 'face-the-threat'
+    && (campaign.campaignProgress.activeBossFamilyId === 'necromancer'
+      || campaign.campaignProgress.activeBossFamilyId === 'prophet' && campaign.activeThreatRuntime?.active
+        && campaign.activeThreatRuntime.bossFamilyId === 'prophet') ? PRODUCTION_NECROMANCER_QUEST : getQuestById(questId);
   if (!quest) return campaign;
   // Phase 11A.1 §8.1 / §8.2：Engine 侧门控（即使 UI 绕过也必须拒绝）。
   const validation = validateQuestSelection(campaign, questId);
@@ -276,7 +293,7 @@ export function selectQuest(campaign: CampaignState, questId: string): CampaignS
       `${campaign.id}:${questId}:run-${campaign.completedQuestCount + 1}`,
     ),
     questStatus: 'active',
-    dungeon: generateDungeon(questId),
+    dungeon: generateDungeonForQuest(quest),
     battle: null,
     provisions,
     gamePhase: 'dungeon-explore',
@@ -292,6 +309,7 @@ export function selectQuest(campaign: CampaignState, questId: string): CampaignS
   };
   // Phase 7：新任务重置精神状态（resolveTestedThisQuest / 兜底清理未转换状态）
   next = resetMentalStateForNewQuest(next);
+  next = activateGraveyardForNextQuest(next);
   // Phase 8D：初始化本次任务的 Objective 进度快照（全部未完成）
   next = refreshObjectiveProgress(next);
   next = applyQuestRoomSetup(next);

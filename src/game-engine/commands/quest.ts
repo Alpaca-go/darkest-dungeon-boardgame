@@ -10,17 +10,23 @@
 import type { CampaignState, QuestOutcome } from '../../types';
 import { finishQuest, failQuestFromBattle } from '../quest-result';
 import { startHamletPhase, hamletEntryBlockedByTrinkets } from '../hamlet';
-import { evaluateReplacementFlow } from '../stagecoach';
+import { evaluateReplacementFlow, failCampaign } from '../stagecoach';
+import { hasUnfinishedProductionBossQuest } from '../bosses/room-storage';
+import { withBossEncounterSources } from '../bosses/foundation';
 import { retargetPendingReplacement } from './replacement';
-import { finalizeQuestReturnToHamlet } from '../campaign/campaign-orchestrator';
+import { finalizeQuestReturnToHamlet, withTransactionRecorded } from '../campaign/campaign-orchestrator';
 import { selectQuest } from '../campaign';
 import { engineChooseQuest } from '../campaign/campaign-orchestrator';
 import { getBossQuestPool, getQuestPool, runtimeContentContext } from '../../data/content-selector';
+import { reserveProductionBossEncounter } from './boss-foundation';
+import { productionBossQuestEntryError } from '../bosses/production-dependency-gate';
+import { checkpointForPreparationDay, enterNecromancerPreparationDay } from '../campaign/necromancer-preparation-day';
 
 export type QuestCommandError =
   | 'already-resolved'
   | 'no-active-quest'
   | 'no-summary'
+  | 'boss-quest-cannot-leave'
   | 'trinket-pending-choice';
 
 export interface QuestCommandResult {
@@ -48,6 +54,7 @@ export function commitLeaveDungeon(
   if (campaign.questResultResolved) {
     return { ok: false, campaign, error: 'already-resolved' };
   }
+  if (hasUnfinishedProductionBossQuest(campaign)) return { ok: false, campaign, error: 'boss-quest-cannot-leave' };
   let next = finishQuest(campaign, 'left');
   if (next === campaign) return { ok: false, campaign: next, error: 'no-active-quest' };
   next = retargetPendingReplacement(next, resumePhase);
@@ -63,11 +70,30 @@ export function commitQuestFailureFromDefeat(
   campaign: CampaignState,
   resumePhase: ReplacementResumePhase = 'quest-result',
 ): QuestCommandResult {
+  if (hasUnfinishedProductionBossQuest(campaign) && campaign.battle?.bossEncounter && campaign.battle.status === 'defeat') {
+    let result!: QuestCommandResult;
+    withBossEncounterSources(structuredClone(campaign.battle), battle => {
+      result = commitQuestFailureFromDefeatInternal({ ...campaign, battle }, resumePhase);
+      return battle;
+    });
+    return result;
+  }
+  return commitQuestFailureFromDefeatInternal(campaign, resumePhase);
+}
+
+function commitQuestFailureFromDefeatInternal(campaign: CampaignState, resumePhase: ReplacementResumePhase): QuestCommandResult {
   if (!campaign.battle || campaign.battle.status !== 'defeat') {
     return { ok: false, campaign, error: 'no-active-quest' };
   }
+  const productionBossFailure = hasUnfinishedProductionBossQuest(campaign);
   let next = failQuestFromBattle(campaign);
   if (next === campaign) return { ok: false, campaign: next, error: 'no-active-quest' };
+  if (productionBossFailure) {
+    const transaction = finalizeQuestReturnToHamlet(next, { questId: campaign.currentQuestId!,
+      questRunId: campaign.dungeon!.questRunId, questOutcome: 'failed' });
+    if (!transaction.ok) throw new Error('Production Boss failure transaction rejected');
+    return { ok: true, campaign: failCampaign(transaction.campaign, 'Face the Threat：未击败 Boss，战役失败。'), error: null };
+  }
   next = retargetPendingReplacement(next, resumePhase);
   next = evaluateReplacementFlow(next);
   return { ok: true, campaign: next, error: null };
@@ -137,7 +163,23 @@ export function commitReturnToHamlet(
   }
 
   // 3. 进入 Hamlet 阶段。
-  const next2 = startHamletPhase(next);
+  const preparationCheckpoint = checkpointForPreparationDay(next, input.questRunId);
+  const canEnterHamlet = next.gamePhase === 'quest-result' && next.questResultResolved;
+  const standardCheckpoint = next.bossEncounterCheckpoint?.checkpointContext?.questScope === 'STANDARD'
+    ? next.bossEncounterCheckpoint : null;
+  if (canEnterHamlet && standardCheckpoint) {
+    if (standardCheckpoint.checkpointContext!.questRunId !== input.questRunId || next.battle
+      || next.ruinsDrawState?.encounters.some(e => !e.returned)) throw new Error('Settle Standard Quest before checkpoint archival');
+    const historyKey = standardCheckpoint.bossFamily === 'prophet' ? 'prophetQuestThreatHistory' : 'necromancerQuestThreatHistory';
+    if (!next[historyKey]?.some(h => h.questRunId === input.questRunId)) next = withTransactionRecorded({ ...next,
+      [historyKey]: [...(next[historyKey] ?? []), {
+        questRunId: input.questRunId, activeThreatId: standardCheckpoint.checkpointContext!.threatId,
+        checkpoint: structuredClone(standardCheckpoint),
+        ...(next.ruinsDrawState ? { drawState: structuredClone(next.ruinsDrawState) } : {}),
+      }] }, `${standardCheckpoint.checkpointContext!.encounterId}:standard-checkpoint-archive`);
+  }
+  const hamletInput = canEnterHamlet && (preparationCheckpoint || standardCheckpoint) && next.bossEncounterCheckpoint ? { ...next, bossEncounterCheckpoint: null } : next;
+  const next2 = enterNecromancerPreparationDay(startHamletPhase(hamletInput), preparationCheckpoint);
   let after: CampaignState = next2 === next ? next : next2;
 
   // 4. retarget + 5. replacement 始终执行。
@@ -171,6 +213,12 @@ export function commitQuestSelection(
   questId: string,
   options?: { now?: string },
 ): QuestSelectionResult {
+  const dependencyError = productionBossQuestEntryError(campaign, questId);
+  if (dependencyError) return { ok: false, campaign, error: dependencyError };
+  if (campaign.bossEncounterCheckpoint || campaign.battle?.bossEncounter) {
+    if (questId !== campaign.currentQuestId) return {ok:false,campaign,error:'active-boss-encounter'};
+    return {ok:true,campaign,error:null};
+  }
   const context = runtimeContentContext(campaign);
   const eligible = [...getQuestPool(context), ...getBossQuestPool(context)];
   if (!eligible.some((quest) => quest.id === questId)) {
@@ -181,5 +229,5 @@ export function commitQuestSelection(
     return { ok: false, campaign, error: 'no-active-quest' };
   }
   const next = selectQuest(gate.campaign, questId);
-  return { ok: true, campaign: next, error: null };
+  return { ok: true, campaign: reserveProductionBossEncounter(next), error: null };
 }

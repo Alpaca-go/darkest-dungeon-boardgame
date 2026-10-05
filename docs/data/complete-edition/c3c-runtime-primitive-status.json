@@ -1,0 +1,71 @@
+{
+  "phase": "11A.6-C3C",
+  "primitives": [
+    {
+      "primitiveId": "self-wound-sequencing",
+      "status": "IMPLEMENTED",
+      "affectedActions": [
+        "gatekeeper:action-2",
+        "drowned-thrall:action-2",
+        "crystalline-aberration-level-1:action-1",
+        "crystalline-aberration-level-1:action-2",
+        "crystalline-aberration-level-2:action-1",
+        "crystalline-aberration-level-2:action-2"
+      ],
+      "implementationPath": "src/game-engine/monsters/production-effect-executor.ts",
+      "implementationSymbol": "buildProductionMonsterOperations",
+      "targetedTests": "src/audit/c3c-monster-production-runtime.test.ts"
+    },
+    {
+      "primitiveId": "all-heroes-targeting",
+      "status": "IMPLEMENTED",
+      "affectedActions": [
+        "crystalline-aberration-level-1:action-1",
+        "crystalline-aberration-level-1:action-2",
+        "crystalline-aberration-level-2:action-1",
+        "crystalline-aberration-level-2:action-2"
+      ],
+      "implementationPath": "src/game-engine/monsters/production-runtime-primitives.ts",
+      "implementationSymbol": "selectAllLivingHeroes",
+      "targetedTests": "src/audit/c3c-monster-production-runtime.test.ts"
+    },
+    {
+      "primitiveId": "timed-protection",
+      "status": "IMPLEMENTED",
+      "affectedActions": [
+        "manservant:action-3"
+      ],
+      "implementationPath": "src/game-engine/monsters/production-runtime-primitives.ts",
+      "implementationSymbol": "grantTimedProtection / expireTimedProtection / hasRuntimeProtection",
+      "targetedTests": "src/audit/c3c-monster-production-runtime.test.ts"
+    }
+  ],
+  "reusedPrimitives": [
+    "targeting",
+    "area-distance",
+    "attack-roll",
+    "damage",
+    "condition",
+    "condition-duration",
+    "spatial-displacement",
+    "stance-shuffle",
+    "stress",
+    "marked-damage-bonus",
+    "heal",
+    "disease-draw",
+    "disease-infection",
+    "guard",
+    "light",
+    "riposte",
+    "remove-condition"
+  ],
+  "bindings": {
+    "targeting": "compareMonsterTargetPriority (behavior-preserving extraction) + production-targeting area priorities",
+    "attackAndDamage": "Adapter.attack: resolvePrintedAttackFromRoll + applyBattleUnitDamage; C3D can stage READY operations into PendingMonsterAttack",
+    "conditions": "Adapter.effect: applyEffectsWithResistance / applyStatusEffectEvent + existing condition tokens",
+    "heal": "Adapter.effect: applyBattleUnitHealing",
+    "shuffle": "Adapter.effect: shuffleAtomicStanceBlocks / shuffleStance + ruinsDisplacementCandidates / moveRuinsUnit",
+    "disease": "Adapter.effect: drawDisease + existing pendingDiseaseInfections",
+    "stressLightGuardRiposteRemoval": "Adapter.effect: existing printed-effect transaction/token contracts; synthetic adapter records isolated equivalents"
+  }
+}

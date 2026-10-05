@@ -25,6 +25,18 @@ import { createId, nowIso, pick } from '../random';
 import { getEligibleThreats } from '../../data/bosses/threat-registry';
 import { getBossDefinitionById } from '../../data/bosses/boss-registry';
 import { campaignLevelForAct, withActiveThreat } from './campaign-progress';
+import { productionProphetThreat } from '../../data/bosses/production-prophet-threats';
+import { PROPHET_RULE_SET_VERSION } from '../prophet/production-definition';
+import { productionNecromancerThreat } from '../../data/bosses/production-necromancer-threats';
+import { RUINS_V6 } from '../../types/ruins-executable';
+import { HERO_DODGE_V2 } from '../rules/hero-dodge';
+import { resolveBossDefinition } from '../bosses/definitions';
+
+export function usesProductionThreatPool(campaign: CampaignState): boolean {
+  return campaign.runtimeContentProfile === 'community-complete-edition'
+    && campaign.ruinsRuleSetSelection?.ruleSetVersion === RUINS_V6
+    && campaign.heroDodgeRuleSetSelection?.ruleSetVersion === HERO_DODGE_V2;
+}
 
 // ---------------------------------------------------------------------------
 // 公开错误（content-blocked / state error）
@@ -150,7 +162,11 @@ export function drawThreatForCurrentAct(
 
   // ---- 取可入池 Threat ----
   const level: CampaignLevel = actToLevel(act);
-  const pool = getEligibleThreats({
+  const production = usesProductionThreatPool(campaign);
+  const completingAcceptedNecromancer=campaign.battle?.bossEncounter?.bossFamily==='necromancer';
+  const pool = production ? (cp.activeBossFamilyId === 'prophet' && !cp.defeatedBossFamilyIds.includes('prophet') ? [productionProphetThreat(level)]
+    : !cp.defeatedBossFamilyIds.includes('necromancer') ? [productionNecromancerThreat(level)]
+    : !completingAcceptedNecromancer && !cp.defeatedBossFamilyIds.includes('prophet') ? [productionProphetThreat(level)] : []) : getEligibleThreats({
     campaignLevel: level,
     excludedBossFamilyIds: cp.defeatedBossFamilyIds,
   });
@@ -171,7 +187,7 @@ export function drawThreatForCurrentAct(
 
   // ---- 校验 Threat 指向的 Boss 定义存在（按 definitionId 查找；familyId 在 Phase 9B/9C/9D
   //      可能与 Prototype Boss 的 familyId 不一致，这是既有约定） ----
-  const boss = getBossDefinitionById(threat.bossDefinitionId);
+  const boss = production ? resolveBossDefinition(threat.bossFamilyId, level, threat.bossFamilyId==='prophet'?PROPHET_RULE_SET_VERSION:HERO_DODGE_V2) : getBossDefinitionById(threat.bossDefinitionId);
   if (!boss) {
     return {
       ok: false,

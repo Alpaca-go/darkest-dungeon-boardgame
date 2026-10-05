@@ -1,0 +1,14 @@
+{
+  "failedRun": 37146900300,
+  "head_sha": "6aa26100ed2f9918b53ac02f7de2a1cd33ab35b0",
+  "status": "completed",
+  "conclusion": "failure",
+  "failedStep": "npm run verify:complete-edition-c1c38",
+  "localReproduction": "Original source-only git diff guard rejects committed C2C additions; git output exceeds default buffer.",
+  "repair": "Route C1C38 and C1C38R1 npm verifiers to existing immutable checkpoint verifier; original auditors and tests unchanged.",
+  "checks": [
+    "verify:complete-edition-c1c38 PASS",
+    "verify:complete-edition-c1c38r1 PASS",
+    "verify:complete-edition-c2c PASS"
+  ]
+}

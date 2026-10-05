@@ -1,0 +1,38 @@
+
+> darkest-dungeon-web-prototype@0.1.0 test:e2e:necromancer-closure
+> playwright test e2e/c1c31-necromancer-production-attempt.spec.ts
+
+[WebServer] (node:106324) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:106044) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"phase":"C1C31","productionResult":"PRODUCT_FAILURE","failureBoundary":"NORMAL_SELECTOR_DEPENDENCY_VALIDATION","commandError":"necromancer-production-dependencies-unbound","unresolvedDependencies":["bone-rabble:stanceSelections.aggressive","bone-rabble:stanceSelections.defensive","bone-soldier:stanceSelections.aggressive","bone-soldier:stanceSelections.defensive","bone-spearman:stanceSelections.aggressive","bone-spearman:stanceSelections.ranged","bone-captain:stanceSelections.defensive","bone-captain:stanceSelections.ranged","hero:vestal:level-1:dodge","BoneSkillExecutor:SOURCE_UNRESOLVED_STANCE_BINDINGS","IncomingAttackReaction:BRIDGE_NOT_CLOSED"],"inputCampaignUnchanged":true,"downstreamNotReached":["Threat","Room 10","Ability","Boss Skill","real Bone summon","Bone turn","Bone death","Reanimation","reaction save/reload","victory","cleanup"],"pendingChoiceProductionProof":"NOT_REACHED","syntheticDependenciesUsed":false}
+  x  1 e2e\c1c31-necromancer-production-attempt.spec.ts:4:1 › C1C31 production attempt: selector to cleanup stops at dependency validation (PRODUCT_FAILURE) (3.1m)
+
+
+  1) e2e\c1c31-necromancer-production-attempt.spec.ts:4:1 › C1C31 production attempt: selector to cleanup stops at dependency validation (PRODUCT_FAILURE)
+
+    Test timeout of 180000ms exceeded.
+
+    Error: page.reload: Test timeout of 180000ms exceeded.
+    Call log:
+      - waiting for navigation until "domcontentloaded"
+        - navigated to "http://localhost:5199/quests"
+
+
+      40 |   await page.goto('/quests', { waitUntil: 'domcontentloaded' });
+      41 |   await expect(page.getByTestId('necromancer-production-entry-blocked')).toBeVisible();
+    > 42 |   await page.reload({ waitUntil: 'domcontentloaded' });
+         |              ^
+      43 |   await expect(page.getByTestId('necromancer-production-entry-blocked')).toBeVisible();
+      44 | });
+      45 |
+        at D:\darkest-dungoen-boardgame\e2e\c1c31-necromancer-production-attempt.spec.ts:42:14
+
+    Error Context: pw-out\main-1790651041519\c1c31-necromancer-producti-8e434-validation-PRODUCT-FAILURE-\error-context.md
+
+  1 failed
+    e2e\c1c31-necromancer-production-attempt.spec.ts:4:1 › C1C31 production attempt: selector to cleanup stops at dependency validation (PRODUCT_FAILURE)

@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R2C-R",
+  "sourcePolicy": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "reviewStatus": "SOURCE_EXHAUSTED",
+  "canonicalStatus": "SOURCE_UNRESOLVED",
+  "authority": "PROJECT_RULING",
+  "canonical": false,
+  "sourceReferences": [
+    {
+      "path": "C:\\Users\\kyrie\\Desktop\\新建文件夹\\DARKEST DUNGEON EN_FILES\\DARKEST_DUNGEON_PRINT_EN_WAVE 1\\MG_DD_01_EN_COREBOX_Print\\DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "pages": [
+        16,
+        17,
+        18,
+        21
+      ]
+    },
+    {
+      "path": "C:\\Users\\kyrie\\Desktop\\新建文件夹\\DARKEST DUNGEON EN_FILES\\DARKEST_DUNGEON_PRINT_EN_WAVE 1\\MG_DD_01_EN_COREBOX_Print\\02_DD_CARDS_COREBOX\\DD_EN_COREBOX_CARDS_70_120_PLAYER_AIDS_BACK.pdf",
+      "sha256": "b83b6c4331cbc7b7315b6a26c8417f24dc17bba5f76b0c669dd341caadb84f8b",
+      "pages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "path": "C:\\Users\\kyrie\\Desktop\\新建文件夹\\DARKEST DUNGEON EN_FILES\\DARKEST_DUNGEON_PRINT_EN_WAVE 1\\MG_DD_01_EN_COREBOX_Print\\02_DD_CARDS_COREBOX\\DD_EN_COREBOX_CARDS_70_120_PLAYER_AIDS_FRONT.pdf",
+      "sha256": "e034a88db094cac38558e3c647aa9ee82012dfb430c8adf3cad2ea715fe6d362",
+      "pages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    }
+  ],
+  "existingBoundExtract": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+  "officialClarificationFound": false,
+  "selected": "REPLACE_LAST_NORMAL_AND_COMPACT",
+  "reproduction": {
+    "level": 3,
+    "seed": 147,
+    "room": 2,
+    "prefix": [
+      "Brigand Bloodletter",
+      "Brigand Raider",
+      "Bone Captain"
+    ]
+  },
+  "finding": "Core p17 licenses a two-Large encounter but explicitly describes replacement only after three Monsters. Player aids add no mixed two-card prefix contract.",
+  "contract": "When an incoming Large cannot fit after one Large and one Normal, discard the most recently drawn Normal, compact the remaining Large toward Aggressive, then place the incoming Large in the remaining two slots. Large draw order is unchanged.",
+  "ownership": "Encounter-scoped DISCARD; inherit immutable v5 return-and-shuffle at Battle End."
+}

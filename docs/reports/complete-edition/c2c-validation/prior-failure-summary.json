@@ -1,0 +1,23 @@
+{
+  "passed": 2851,
+  "failed": 2,
+  "pending": 0,
+  "todo": 0,
+  "failures": [
+    {
+      "suite": "audit/c1c31-necromancer-runtime-foundation.test.ts",
+      "name": "C1C31 terminal rulebook-only contract review verifies frozen C1C20–30 evidence, unchanged v1/runtime and deterministic generated artifacts",
+      "messages": [
+        "Error: Frozen C1C30 baseline changed: AGENTS.md\n    at D:\\darkest-dungoen-boardgame\\scripts\\audit\\c1c31-contract.ts:76:249\n    at Array.map (<anonymous>)\n    at frozenBaseline (D:\\darkest-dungoen-boardgame\\scripts\\audit\\c1c31-contract.ts:73:42)\n    at buildArtifacts (D:\\darkest-dungoen-boardgame\\scripts\\audit\\c1c31-contract.ts:82:29)\n    at Module.verifyArtifacts (D:\\darkest-dungoen-boardgame\\scripts\\audit\\c1c31-contract.ts:185:49)\n    at D:\\darkest-dungoen-boardgame\\src\\audit\\c1c31-necromancer-runtime-foundation.test.ts:11:5\n    at file:///D:/darkest-dungoen-boardgame/node_modules/@vitest/runner/dist/index.js:146:14\n    at file:///D:/darkest-dungoen-boardgame/node_modules/@vitest/runner/dist/index.js:533:11\n    at runWithTimeout (file:///D:/darkest-dungoen-boardgame/node_modules/@vitest/runner/dist/index.js:39:7)\n    at runTest (file:///D:/darkest-dungoen-boardgame/node_modules/@vitest/runner/dist/index.js:1056:17)"
+      ]
+    },
+    {
+      "suite": "audit/c1c31-necromancer-runtime-foundation.test.ts",
+      "name": "C1C31 terminal rulebook-only contract review does not claim production hashes, integration selection, or IMPLEMENTED bridges while review is pending",
+      "messages": [
+        "Error: Frozen C1C30 baseline changed: AGENTS.md\n    at D:\\darkest-dungoen-boardgame\\scripts\\audit\\c1c31-contract.ts:76:249\n    at Array.map (<anonymous>)\n    at frozenBaseline (D:\\darkest-dungoen-boardgame\\scripts\\audit\\c1c31-contract.ts:73:42)\n    at Module.buildArtifacts (D:\\darkest-dungoen-boardgame\\scripts\\audit\\c1c31-contract.ts:82:29)\n    at D:\\darkest-dungoen-boardgame\\src\\audit\\c1c31-necromancer-runtime-foundation.test.ts:74:15\n    at file:///D:/darkest-dungoen-boardgame/node_modules/@vitest/runner/dist/index.js:146:14\n    at file:///D:/darkest-dungoen-boardgame/node_modules/@vitest/runner/dist/index.js:533:11\n    at runWithTimeout (file:///D:/darkest-dungoen-boardgame/node_modules/@vitest/runner/dist/index.js:39:7)\n    at runTest (file:///D:/darkest-dungoen-boardgame/node_modules/@vitest/runner/dist/index.js:1056:17)\n    at processTicksAndRejections (node:internal/process/task_queues:104:5)"
+      ]
+    }
+  ],
+  "repair": "Restore frozen root AGENTS.md; retain forward policy in versioned C2C policy artifact."
+}

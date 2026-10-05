@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "results": [
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "passed": true,
+      "logPath": "docs/reports/complete-edition/c1c35r1-validation/typecheck.log"
+    },
+    {
+      "command": "npm test",
+      "exitCode": 0,
+      "passed": true,
+      "logPath": "docs/reports/complete-edition/c1c35r1-validation/test.log"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "passed": true,
+      "logPath": "docs/reports/complete-edition/c1c35r1-validation/build.log"
+    },
+    {
+      "command": "npm run historical-baseline-validation",
+      "exitCode": 0,
+      "passed": true,
+      "logPath": "docs/reports/complete-edition/c1c35r1-validation/historical-baseline-validation.log"
+    },
+    {
+      "command": "npm run verify:complete-edition-c1c33",
+      "exitCode": 0,
+      "passed": true,
+      "logPath": "docs/reports/complete-edition/c1c35r1-validation/verify-complete-edition-c1c33.log"
+    },
+    {
+      "command": "npm run verify:complete-edition-c1c34",
+      "exitCode": 0,
+      "passed": true,
+      "logPath": "docs/reports/complete-edition/c1c35r1-validation/verify-complete-edition-c1c34.log"
+    },
+    {
+      "command": "npm run verify:complete-edition-c1c35",
+      "exitCode": 0,
+      "passed": true,
+      "logPath": "docs/reports/complete-edition/c1c35r1-validation/verify-complete-edition-c1c35.log"
+    },
+    {
+      "command": "npm run audit:complete-edition-c1c35r1",
+      "exitCode": 0,
+      "passed": true,
+      "logPath": "docs/reports/complete-edition/c1c35r1-validation/audit-complete-edition-c1c35r1.log"
+    },
+    {
+      "command": "npm run verify:complete-edition-c1c35r1",
+      "exitCode": 0,
+      "passed": true,
+      "logPath": "docs/reports/complete-edition/c1c35r1-validation/verify-complete-edition-c1c35r1.log"
+    }
+  ],
+  "remoteReleaseGate": "NOT_YET_VERIFIED"
+}

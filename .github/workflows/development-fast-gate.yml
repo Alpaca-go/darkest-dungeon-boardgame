@@ -1,0 +1,26 @@
+name: Development Fast Gate
+on:
+  push:
+    branches-ignore: [main]
+permissions:
+  contents: read
+jobs:
+  fast-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run verify:complete-edition-c3c
+      - run: npm run test:complete-edition-c3d
+      - run: npm run verify:complete-edition-c3d
+      - run: npm run test:complete-edition-c3e
+      - run: npm run verify:complete-edition-c3e
+      - run: npm run build

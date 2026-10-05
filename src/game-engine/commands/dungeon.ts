@@ -14,11 +14,15 @@ import { settleBattleState } from './battle';
 import { evaluateQuestRules } from '../quests/quest-special-rule-runtime';
 
 import { beginExplorationMoveTrinketAction } from '../trinkets/dungeon-trinket-bridge';
+import { productionBossQuestEntryError } from '../bosses/production-dependency-gate';
+import { hasProductionOrdinaryThreat } from '../ruins/production-threat-runtime';
 
 export type EnterRoomError =
   | 'cannot-move'
   | 'pending-quest-rule-choice'
-  | 'battle-settlement-failed';
+  | 'battle-settlement-failed'
+  | 'necromancer-threat-domain-bridge-unbound'
+  | 'necromancer-production-dependencies-unbound';
 
 export interface EnterRoomResult {
   ok: boolean;
@@ -33,6 +37,10 @@ export function enterDungeonRoom(
   campaign: CampaignState,
   roomId: string,
 ): EnterRoomResult {
+  if (campaign.dungeon?.rooms.some(r => r.id === roomId && r.type === 'objective')
+    && productionBossQuestEntryError(campaign, campaign.currentQuestId ?? '')) {
+    return { ok: false, campaign, error: 'necromancer-production-dependencies-unbound' };
+  }
   if (campaign.questRuntimeState?.pendingRuleChoice) {
     return { ok: false, campaign, error: 'pending-quest-rule-choice' };
   }
@@ -40,6 +48,15 @@ export function enterDungeonRoom(
     || !campaign.dungeon || !canMoveTo(campaign.dungeon, roomId)
     || !campaign.dungeon.rooms.some((room) => room.id === roomId)) {
     return { ok: false, campaign, error: 'cannot-move' };
+  }
+
+  // Stop affected promotion: the saved production Threat has no ordinary source-bound
+  // battle command yet. Never let its guarded Rooms silently use prototype encounters.
+  const room = campaign.dungeon.rooms.find(r => r.id === roomId)!;
+  if (campaign.bossEncounterCheckpoint?.checkpointContext?.heroDodgeBindings
+    && !hasProductionOrdinaryThreat(campaign)
+    && ['lair', 'treasure', 'curio'].includes(room.sourceRoomToken ?? '')) {
+    return { ok: false, campaign, error: 'necromancer-threat-domain-bridge-unbound' };
   }
 
   const begun = beginExplorationMoveTrinketAction(campaign, roomId);

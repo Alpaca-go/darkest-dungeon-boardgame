@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R2",
+  "baselineHead": "35a42ac46ba97b07ed941bca078dc53fb5fab1bb",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "authority": "OFFICIAL_SOURCE",
+  "canonicalAnswerComplete": false,
+  "canonicalStatus": "SOURCE_UNRESOLVED",
+  "sourceReferences": [
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 16,
+      "location": "full printed face",
+      "componentId": "deployment",
+      "sourceClass": "OFFICIAL_SOURCE"
+    },
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 17,
+      "location": "full printed face",
+      "componentId": "large-stance-slots",
+      "sourceClass": "OFFICIAL_SOURCE"
+    },
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 18,
+      "location": "full printed face",
+      "componentId": "hero-movement-occupancy",
+      "sourceClass": "OFFICIAL_SOURCE"
+    },
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 21,
+      "location": "full printed face",
+      "componentId": "push-pull",
+      "sourceClass": "OFFICIAL_SOURCE"
+    },
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 24,
+      "location": "full printed face",
+      "componentId": "Large and Small Monsters",
+      "sourceClass": "OFFICIAL_SOURCE"
+    },
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 25,
+      "location": "full printed face",
+      "componentId": "battle-end",
+      "sourceClass": "OFFICIAL_SOURCE"
+    },
+    {
+      "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/DD_EN_COREBOX_RULES.pdf",
+      "fileName": "DD_EN_COREBOX_RULES.pdf",
+      "sha256": "4c0bf3471bd0264443044b656b58d5a2d54c94b397aee19a049d20c0978e0125",
+      "page": 31,
+      "location": "full printed face",
+      "componentId": "summon-displacement",
+      "sourceClass": "OFFICIAL_SOURCE"
+    }
+  ],
+  "reviewedRelatedSectionsComplete": true,
+  "officialFacts": [
+    "Large=2 spaces",
+    "Large may end in fully occupied Area",
+    "move one other character into adjacent Area",
+    "Target is excluded"
+  ],
+  "missingSemantics": [
+    "residual one-space overflow",
+    "no legal adjacent destination"
+  ],
+  "frozenModelExample": {
+    "capacity": 4,
+    "occupied": 4,
+    "incoming": 2,
+    "normalDisplaced": 1,
+    "result": 5
+  },
+  "decision": "Explicit bounded noncanonical ruling selected, not indefinite SOURCE_UNRESOLVED at executable boundary"
+}

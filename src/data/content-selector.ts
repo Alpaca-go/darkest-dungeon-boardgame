@@ -1,6 +1,10 @@
 import type { CampaignState, QuestDefinition } from '../types';
 import type { CommunityContentSet, CommunityRegion, RuntimeContentMetadata } from '../types/content-runtime';
 import type { TrinketDefinition, TrinketLevel } from '../types/trinkets';
+import { PRODUCTION_FACE_THE_THREAT_QUEST } from './quests/production-face-the-threat';
+import { productionBossPlayerRouteEnabled } from '../game-engine/bosses/production-capabilities';
+import { resolveProductionBossRuleSetVersion, productionBossFamilyRegistry } from '../game-engine/bosses/definitions';
+import { campaignHeroDodgeRuleSetVersion } from '../game-engine/rules/hero-dodge-versioning';
 import { QUESTS, STANDARD_QUESTS } from './quests';
 import { officialTrinketPool } from './trinkets/trinket-registry';
 import {
@@ -13,6 +17,9 @@ export interface RuntimeContentContext {
   enabledContentSets?: CampaignState['enabledContentSets'];
   enabledRegions?: CampaignState['enabledRegions'];
   campaignLevel?: number;
+  bossFamilyId?: string | null;
+  bossRuleSetVersion?: string;
+  heroDodgeRuleSetVersion?: string;
 }
 
 export function runtimeContentContext(campaign: CampaignState): RuntimeContentContext {
@@ -20,7 +27,10 @@ export function runtimeContentContext(campaign: CampaignState): RuntimeContentCo
     runtimeContentProfile: campaign.runtimeContentProfile ?? 'legacy-prototype',
     enabledContentSets: campaign.enabledContentSets ?? ['core'],
     enabledRegions: campaign.enabledRegions ?? ['ruins', 'warrens', 'weald', 'cove'],
-    campaignLevel: campaign.campaignLevel,
+    campaignLevel: campaign.campaignProgress.campaignLevel,
+    bossFamilyId: campaign.campaignProgress.activeBossFamilyId,
+    bossRuleSetVersion: resolveProductionBossRuleSetVersion(campaign),
+    heroDodgeRuleSetVersion: campaignHeroDodgeRuleSetVersion(campaign),
   };
 }
 
@@ -77,10 +87,12 @@ export function getBossQuestPool(context: RuntimeContentContext): QuestDefinitio
   if ((context.runtimeContentProfile ?? 'legacy-prototype') === 'legacy-prototype') {
     return QUESTS.filter((quest) => !STANDARD_QUESTS.some((standard) => standard.id === quest.id));
   }
-  return filterCommunityQuestCandidates(COMMUNITY_RUNTIME_QUESTS, {
-    ...context,
-    campaignLevel: undefined,
-  }).filter((quest) => quest.type === 'boss');
+  const existing = filterCommunityQuestCandidates(COMMUNITY_RUNTIME_QUESTS, { ...context, campaignLevel: undefined }).filter(q=>q.type==='boss');
+  const adapter = productionBossFamilyRegistry.get(context.bossFamilyId ?? '');
+  if (adapter?.unrestrictedSelectorAllowed && productionBossPlayerRouteEnabled(context.bossFamilyId ?? '', context.bossRuleSetVersion ?? '') && adapter.ruleSetVersions.includes(context.bossRuleSetVersion ?? '')
+    && (context.heroDodgeRuleSetVersion ?? (context.bossFamilyId === 'necromancer' ? context.bossRuleSetVersion : undefined)) === 'C1C31-DIGITAL-DEFAULT-v2'
+    && (context.enabledContentSets ?? ['core']).includes('core') && (context.enabledRegions ?? ['ruins']).includes('ruins')) return [...existing.filter(q=>q.id !== PRODUCTION_FACE_THE_THREAT_QUEST.id),PRODUCTION_FACE_THE_THREAT_QUEST];
+  return existing;
 }
 
 export function getTrinketPool(context: RuntimeContentContext): TrinketDefinition[] {

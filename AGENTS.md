@@ -27,3 +27,10 @@ From C1C29 onward, use `docs/data/complete-edition/rule-source-policy.json`
 For C1C29 changes, relevant checks are `npm run typecheck`,
 `npm run test:necromancer-foundation`, `npm run verify:complete-edition-c1c29`, and
 `npm run test:e2e:necromancer-foundation`. Broaden regression checks as appropriate.
+
+From C3A onward, ordinary Monster development uses CONTENT-FIRST / FAST-GATE.
+During C3A–C3D, run targeted phase tests, typecheck and build; preserve frozen
+workstreams and defer non-blocking semantic uncertainty. Do not routinely run
+the complete historical regression or full Playwright acceptance. Full regression
+and historical acceptance belong to explicit production freeze or release phases
+such as C3E.

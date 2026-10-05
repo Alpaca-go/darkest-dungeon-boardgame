@@ -39,6 +39,7 @@ import {
   removeTrinketFromHero,
 } from './trinkets/trinket-state';
 import { hasOpenTrinketOpportunity } from './trinkets/trinket-opportunities';
+import { preparationDayActionBlocked } from './campaign/necromancer-preparation-day';
 
 // ---------------------------------------------------------------------------
 // 工具
@@ -95,6 +96,7 @@ export function nomadWagonVisitError(
   heroInstanceId: string
 ): string | null {
   if (campaign.gamePhase !== 'hamlet') return '当前不在 Hamlet 阶段';
+  if (preparationDayActionBlocked(campaign, heroInstanceId)) return '请先完成 Graveyard 守卫任务';
   const hero = findHero(campaign, heroInstanceId);
   if (!hero) return '英雄不存在';
   if (!hero.isAlive || hero.dead) return '阵亡英雄无法访问';

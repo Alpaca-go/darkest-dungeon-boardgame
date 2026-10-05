@@ -1,0 +1,157 @@
+{
+  "phase": "11A.5-C2C",
+  "baseline": "84e747b170d4ba65c463d1d5be1cfcd80dd0dd08",
+  "policyId": "SOURCE_AMBIGUITY_DEFER_POLICY_V1",
+  "definitionVersion": "C2C-HERO-PRODUCTION-DEFINITION-v1",
+  "liveRuntimeIntegrated": false,
+  "conflicts": [
+    {
+      "conflictId": "C2B-CRUSADER-ZEALOUS-SPEECH-PREPARATION",
+      "heroId": "crusader",
+      "skillId": null,
+      "printedAbilityName": "Zealous Speech",
+      "level": 1,
+      "field": "hamletAbility.preparationDays",
+      "kind": "GAMEPLAY_LITERAL",
+      "sourceA": {
+        "path": "docs/DD_EN_COREBOX_RULES.pdf",
+        "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+        "page": 10,
+        "region": "Crusader I anatomy example Hamlet box",
+        "authority": "OFFICIAL_RULEBOOK"
+      },
+      "sourceB": {
+        "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+        "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+        "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+        "page": 1,
+        "authority": "OFFICIAL_PRINTED_COMPONENT"
+      },
+      "literalA": "Preparation Days -1",
+      "literalB": "ABSENT; Only as the first action of a day; Day ends immediately; four Hero helmets -5 Stress",
+      "resolutionStatus": "DEFERRED_MANUAL_VALIDATION",
+      "resolution": null,
+      "affectedLevels": [
+        1,
+        2,
+        3
+      ],
+      "affectedSourcePairs": [
+        {
+          "level": 1,
+          "sourceA": {
+            "path": "docs/DD_EN_COREBOX_RULES.pdf",
+            "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+            "page": 5,
+            "region": "Crusader I / II / III component examples: Preparation Days -1",
+            "authority": "OFFICIAL_RULEBOOK"
+          },
+          "sourceB": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 1,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          },
+          "literalA": "Preparation Days -1",
+          "literalB": "ABSENT"
+        },
+        {
+          "level": 2,
+          "sourceA": {
+            "path": "docs/DD_EN_COREBOX_RULES.pdf",
+            "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+            "page": 5,
+            "region": "Crusader I / II / III component examples: Preparation Days -1",
+            "authority": "OFFICIAL_RULEBOOK"
+          },
+          "sourceB": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_BACK.pdf",
+            "sha256": "41f46559e7c5fefdc2f4d6018c5bf98a22a7c89de33cc2031337867eeaadfaba",
+            "page": 1,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          },
+          "literalA": "Preparation Days -1",
+          "literalB": "ABSENT"
+        },
+        {
+          "level": 3,
+          "sourceA": {
+            "path": "docs/DD_EN_COREBOX_RULES.pdf",
+            "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+            "page": 5,
+            "region": "Crusader I / II / III component examples: Preparation Days -1",
+            "authority": "OFFICIAL_RULEBOOK"
+          },
+          "sourceB": {
+            "sourceId": "DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT",
+            "path": "docs/data/complete-edition/source-assets/c2a/DD_EN_THE_DARKEST_HEROES_CARDS_100x180_Hero_STAT_FRONT.pdf",
+            "sha256": "bff25cb41e9fbfbc96408850815232ced1c8ea0f289416a8d1d67fda00b69495",
+            "page": 2,
+            "authority": "OFFICIAL_PRINTED_COMPONENT"
+          },
+          "literalA": "Preparation Days -1",
+          "literalB": "ABSENT"
+        }
+      ],
+      "sharedRuleReview": {
+        "sourceRef": {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "page": 33,
+          "region": "Spend your Days",
+          "authority": "OFFICIAL_RULEBOOK"
+        },
+        "finding": "Ordinary day-counter decrement follows all Heroes spending their day. This does not specify whether the separately printed Preparation Days -1 is an additional charge or an explanation of immediate day termination. No equivalence or extra decrement is assumed.",
+        "status": "SOURCE_UNRESOLVED"
+      },
+      "promotionBlocked": false,
+      "deferredId": "C2C-DEFER-CRUSADER-PREPARATION-DAYS",
+      "historicalStatus": "SOURCE_UNRESOLVED",
+      "successorStatus": "DEFERRED_MANUAL_VALIDATION",
+      "semanticStatus": "DEFERRED_MANUAL_VALIDATION",
+      "blocksNextPhase": false,
+      "blocksProductionDefinition": false,
+      "blocksRuntimeFoundation": false,
+      "manualValidationRequired": true,
+      "canonical": false
+    },
+    {
+      "conflictId": "C2B-SELF-SHUFFLE-ROLL-ORDER",
+      "heroId": null,
+      "skillId": null,
+      "level": null,
+      "field": "selfMovement.rollOrdering",
+      "kind": "SHARED_SEMANTIC",
+      "sourceA": {
+        "path": "docs/DD_EN_COREBOX_RULES.pdf",
+        "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+        "page": 20,
+        "region": "Self Effects",
+        "authority": "OFFICIAL_RULEBOOK"
+      },
+      "sourceB": {
+        "path": "docs/DD_EN_COREBOX_RULES.pdf",
+        "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+        "page": 22,
+        "region": "Monster turn example step 6",
+        "authority": "OFFICIAL_RULEBOOK"
+      },
+      "literalA": "Self Effects after roll, before any other effects",
+      "literalB": "Self Pull 1 takes place before the attack roll in the example",
+      "resolutionStatus": "DEFERRED_MANUAL_VALIDATION",
+      "resolution": null,
+      "promotionBlocked": false,
+      "deferredId": "C2C-DEFER-SELF-MOVEMENT-ORDER",
+      "historicalStatus": "SOURCE_UNRESOLVED",
+      "successorStatus": "DEFERRED_MANUAL_VALIDATION",
+      "semanticStatus": "DEFERRED_MANUAL_VALIDATION",
+      "blocksNextPhase": false,
+      "blocksProductionDefinition": false,
+      "blocksRuntimeFoundation": false,
+      "manualValidationRequired": true,
+      "canonical": false
+    }
+  ]
+}

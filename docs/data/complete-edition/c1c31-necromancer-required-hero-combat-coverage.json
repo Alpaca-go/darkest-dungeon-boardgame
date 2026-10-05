@@ -1,0 +1,302 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C31",
+  "baselineHead": "2ab674d7d8c15dbbd7367bb3b2011243facb5517",
+  "ruleSourcePolicyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "ruleSetVersion": "C1C28-DIGITAL-DEFAULT-v1",
+  "externalSourceUsed": false,
+  "syntheticFallbackAllowed": false,
+  "reachabilityAuthority": "EXISTING_PRODUCTION_ROSTER_AND_GUILD",
+  "rosterSource": {
+    "path": "src/data/heroes.ts",
+    "sha256": "e3a423303385c5e0732dfa62a9b7e36ca15d3e619ee07f6117b4e1e04ccd043f",
+    "region": "Selectable standard Hero roster"
+  },
+  "requiredPairs": [
+    {
+      "requiredPair": "crusader:1",
+      "heroId": "crusader",
+      "level": 1,
+      "productionReachable": true,
+      "reachabilityReason": "Selectable/replacement Hero in the standard registry; independent Guild upgrades remain reachable in Acts II/III.",
+      "sourceStatus": "OFFICIAL_SOURCE",
+      "dodge": 0,
+      "sourceReferences": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "region": "Anatomy of the Hero Boards: labelled Dodge 0",
+          "page": 10
+        }
+      ],
+      "executable": true
+    },
+    {
+      "requiredPair": "crusader:2",
+      "heroId": "crusader",
+      "level": 2,
+      "productionReachable": true,
+      "reachabilityReason": "Selectable/replacement Hero in the standard registry; independent Guild upgrades remain reachable in Acts II/III.",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "dodge": null,
+      "sourceReferences": [],
+      "executable": false
+    },
+    {
+      "requiredPair": "crusader:3",
+      "heroId": "crusader",
+      "level": 3,
+      "productionReachable": true,
+      "reachabilityReason": "Selectable/replacement Hero in the standard registry; independent Guild upgrades remain reachable in Acts II/III.",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "dodge": null,
+      "sourceReferences": [],
+      "executable": false
+    },
+    {
+      "requiredPair": "vestal:1",
+      "heroId": "vestal",
+      "level": 1,
+      "productionReachable": true,
+      "reachabilityReason": "Selectable/replacement Hero in the standard registry; independent Guild upgrades remain reachable in Acts II/III.",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "dodge": null,
+      "sourceReferences": [],
+      "executable": false
+    },
+    {
+      "requiredPair": "vestal:2",
+      "heroId": "vestal",
+      "level": 2,
+      "productionReachable": true,
+      "reachabilityReason": "Selectable/replacement Hero in the standard registry; independent Guild upgrades remain reachable in Acts II/III.",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "dodge": null,
+      "sourceReferences": [],
+      "executable": false
+    },
+    {
+      "requiredPair": "vestal:3",
+      "heroId": "vestal",
+      "level": 3,
+      "productionReachable": true,
+      "reachabilityReason": "Selectable/replacement Hero in the standard registry; independent Guild upgrades remain reachable in Acts II/III.",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "dodge": null,
+      "sourceReferences": [],
+      "executable": false
+    },
+    {
+      "requiredPair": "highwayman:1",
+      "heroId": "highwayman",
+      "level": 1,
+      "productionReachable": true,
+      "reachabilityReason": "Selectable/replacement Hero in the standard registry; independent Guild upgrades remain reachable in Acts II/III.",
+      "sourceStatus": "OFFICIAL_SOURCE",
+      "dodge": 1,
+      "sourceReferences": [
+        {
+          "path": "docs/DD_EN_COREBOX_RULES.pdf",
+          "sha256": "9b254ac284f2b00bb194c314e7568269c164dfdbe88c2a42cc1a9d8da84728ae",
+          "region": "Printed Level I Highwayman card in Condition stack example",
+          "page": 20
+        }
+      ],
+      "executable": true
+    },
+    {
+      "requiredPair": "highwayman:2",
+      "heroId": "highwayman",
+      "level": 2,
+      "productionReachable": true,
+      "reachabilityReason": "Selectable/replacement Hero in the standard registry; independent Guild upgrades remain reachable in Acts II/III.",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "dodge": null,
+      "sourceReferences": [],
+      "executable": false
+    },
+    {
+      "requiredPair": "highwayman:3",
+      "heroId": "highwayman",
+      "level": 3,
+      "productionReachable": true,
+      "reachabilityReason": "Selectable/replacement Hero in the standard registry; independent Guild upgrades remain reachable in Acts II/III.",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "dodge": null,
+      "sourceReferences": [],
+      "executable": false
+    },
+    {
+      "requiredPair": "hellion:1",
+      "heroId": "hellion",
+      "level": 1,
+      "productionReachable": true,
+      "reachabilityReason": "Selectable/replacement Hero in the standard registry; independent Guild upgrades remain reachable in Acts II/III.",
+      "sourceStatus": "OFFICIAL_SOURCE",
+      "dodge": 1,
+      "sourceReferences": [
+        {
+          "path": "docs/data/complete-edition/c1c19-rulebook-extracted-evidence.json",
+          "sha256": "dfa0b51cf89e133cac3a4195bd3b116665a51561be71fa8e69adf6f493b2fd41",
+          "region": "Clumsy Axeblade against Hellion: 5 Accuracy minus 1 Dodge",
+          "page": 22
+        }
+      ],
+      "executable": true
+    },
+    {
+      "requiredPair": "hellion:2",
+      "heroId": "hellion",
+      "level": 2,
+      "productionReachable": true,
+      "reachabilityReason": "Selectable/replacement Hero in the standard registry; independent Guild upgrades remain reachable in Acts II/III.",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "dodge": null,
+      "sourceReferences": [],
+      "executable": false
+    },
+    {
+      "requiredPair": "hellion:3",
+      "heroId": "hellion",
+      "level": 3,
+      "productionReachable": true,
+      "reachabilityReason": "Selectable/replacement Hero in the standard registry; independent Guild upgrades remain reachable in Acts II/III.",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "dodge": null,
+      "sourceReferences": [],
+      "executable": false
+    },
+    {
+      "requiredPair": "leper:1",
+      "heroId": "leper",
+      "level": 1,
+      "productionReachable": true,
+      "reachabilityReason": "Selectable/replacement Hero in the standard registry; independent Guild upgrades remain reachable in Acts II/III.",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "dodge": null,
+      "sourceReferences": [],
+      "executable": false
+    },
+    {
+      "requiredPair": "leper:2",
+      "heroId": "leper",
+      "level": 2,
+      "productionReachable": true,
+      "reachabilityReason": "Selectable/replacement Hero in the standard registry; independent Guild upgrades remain reachable in Acts II/III.",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "dodge": null,
+      "sourceReferences": [],
+      "executable": false
+    },
+    {
+      "requiredPair": "leper:3",
+      "heroId": "leper",
+      "level": 3,
+      "productionReachable": true,
+      "reachabilityReason": "Selectable/replacement Hero in the standard registry; independent Guild upgrades remain reachable in Acts II/III.",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "dodge": null,
+      "sourceReferences": [],
+      "executable": false
+    },
+    {
+      "requiredPair": "occultist:1",
+      "heroId": "occultist",
+      "level": 1,
+      "productionReachable": true,
+      "reachabilityReason": "Selectable/replacement Hero in the standard registry; independent Guild upgrades remain reachable in Acts II/III.",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "dodge": null,
+      "sourceReferences": [],
+      "executable": false
+    },
+    {
+      "requiredPair": "occultist:2",
+      "heroId": "occultist",
+      "level": 2,
+      "productionReachable": true,
+      "reachabilityReason": "Selectable/replacement Hero in the standard registry; independent Guild upgrades remain reachable in Acts II/III.",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "dodge": null,
+      "sourceReferences": [],
+      "executable": false
+    },
+    {
+      "requiredPair": "occultist:3",
+      "heroId": "occultist",
+      "level": 3,
+      "productionReachable": true,
+      "reachabilityReason": "Selectable/replacement Hero in the standard registry; independent Guild upgrades remain reachable in Acts II/III.",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "dodge": null,
+      "sourceReferences": [],
+      "executable": false
+    },
+    {
+      "requiredPair": "plague-doctor:1",
+      "heroId": "plague-doctor",
+      "level": 1,
+      "productionReachable": true,
+      "reachabilityReason": "Selectable/replacement Hero in the standard registry; independent Guild upgrades remain reachable in Acts II/III.",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "dodge": null,
+      "sourceReferences": [],
+      "executable": false
+    },
+    {
+      "requiredPair": "plague-doctor:2",
+      "heroId": "plague-doctor",
+      "level": 2,
+      "productionReachable": true,
+      "reachabilityReason": "Selectable/replacement Hero in the standard registry; independent Guild upgrades remain reachable in Acts II/III.",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "dodge": null,
+      "sourceReferences": [],
+      "executable": false
+    },
+    {
+      "requiredPair": "plague-doctor:3",
+      "heroId": "plague-doctor",
+      "level": 3,
+      "productionReachable": true,
+      "reachabilityReason": "Selectable/replacement Hero in the standard registry; independent Guild upgrades remain reachable in Acts II/III.",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "dodge": null,
+      "sourceReferences": [],
+      "executable": false
+    },
+    {
+      "requiredPair": "grave-robber:1",
+      "heroId": "grave-robber",
+      "level": 1,
+      "productionReachable": true,
+      "reachabilityReason": "Selectable/replacement Hero in the standard registry; independent Guild upgrades remain reachable in Acts II/III.",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "dodge": null,
+      "sourceReferences": [],
+      "executable": false
+    },
+    {
+      "requiredPair": "grave-robber:2",
+      "heroId": "grave-robber",
+      "level": 2,
+      "productionReachable": true,
+      "reachabilityReason": "Selectable/replacement Hero in the standard registry; independent Guild upgrades remain reachable in Acts II/III.",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "dodge": null,
+      "sourceReferences": [],
+      "executable": false
+    },
+    {
+      "requiredPair": "grave-robber:3",
+      "heroId": "grave-robber",
+      "level": 3,
+      "productionReachable": true,
+      "reachabilityReason": "Selectable/replacement Hero in the standard registry; independent Guild upgrades remain reachable in Acts II/III.",
+      "sourceStatus": "SOURCE_UNRESOLVED",
+      "dodge": null,
+      "sourceReferences": [],
+      "executable": false
+    }
+  ]
+}

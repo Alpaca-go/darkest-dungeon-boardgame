@@ -1,0 +1,558 @@
+{
+  "schemaVersion": 1,
+  "phase": "11A.4-C1C32R2A",
+  "baselineHead": "624a2b5c20b9f40ee9e87ac103780cb9eb3c2053",
+  "policyId": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "rooms": [
+    {
+      "roomNumber": 1,
+      "rules": [
+        {
+          "id": "cornered",
+          "trigger": "END_TURN",
+          "areas": [
+            "ruins-tile-1:NE",
+            "ruins-tile-1:SW"
+          ],
+          "side": "hero",
+          "effects": [
+            {
+              "type": "stress",
+              "target": "target",
+              "amount": 1
+            }
+          ],
+          "actionCost": 0,
+          "oncePerBattle": false,
+          "requiresNoMonsters": false
+        }
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "sha256": "1434c53d5dac4e79f3fe091c9dc97c0442864644cb043b12c3fc596ae7c30b72",
+          "page": 1,
+          "location": "full printed face",
+          "componentId": "ruins-room-1",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "sha256": "82128bffbce39d6624fde4a42cb2f9466d46b657bf13fb14ee6ac7ae11f094b2",
+          "page": 1,
+          "location": "printed back",
+          "componentId": "ruins-room-1",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    },
+    {
+      "roomNumber": 2,
+      "rules": [
+        {
+          "id": "unholy-aura",
+          "trigger": "PASSIVE",
+          "areas": [
+            "ruins-tile-2:S"
+          ],
+          "side": "hero",
+          "effects": [
+            {
+              "type": "healingProhibited"
+            }
+          ],
+          "actionCost": 0,
+          "oncePerBattle": false,
+          "requiresNoMonsters": false
+        }
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "sha256": "1434c53d5dac4e79f3fe091c9dc97c0442864644cb043b12c3fc596ae7c30b72",
+          "page": 2,
+          "location": "full printed face",
+          "componentId": "ruins-room-2",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "sha256": "82128bffbce39d6624fde4a42cb2f9466d46b657bf13fb14ee6ac7ae11f094b2",
+          "page": 2,
+          "location": "printed back",
+          "componentId": "ruins-room-2",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    },
+    {
+      "roomNumber": 3,
+      "rules": [
+        {
+          "id": "healing-waters",
+          "trigger": "END_TURN",
+          "areas": [
+            "ruins-tile-3:FOUNTAIN"
+          ],
+          "side": "hero",
+          "effects": [
+            {
+              "type": "heal",
+              "target": "target",
+              "amount": 3
+            }
+          ],
+          "actionCost": 0,
+          "oncePerBattle": false,
+          "requiresNoMonsters": false
+        }
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "sha256": "1434c53d5dac4e79f3fe091c9dc97c0442864644cb043b12c3fc596ae7c30b72",
+          "page": 3,
+          "location": "full printed face",
+          "componentId": "ruins-room-3",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "sha256": "82128bffbce39d6624fde4a42cb2f9466d46b657bf13fb14ee6ac7ae11f094b2",
+          "page": 3,
+          "location": "printed back",
+          "componentId": "ruins-room-3",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    },
+    {
+      "roomNumber": 4,
+      "rules": [
+        {
+          "id": "circle-of-power",
+          "trigger": "END_TURN",
+          "areas": [
+            "ruins-tile-4:CIRCLE"
+          ],
+          "side": "monster",
+          "effects": [
+            {
+              "type": "heal",
+              "target": "target",
+              "amount": 4
+            }
+          ],
+          "actionCost": 0,
+          "oncePerBattle": false,
+          "requiresNoMonsters": false
+        },
+        {
+          "id": "spiked-pit-END_TURN",
+          "trigger": "END_TURN",
+          "areas": [
+            "ruins-tile-4:PIT_W",
+            "ruins-tile-4:PIT_E"
+          ],
+          "side": "all",
+          "effects": [
+            {
+              "type": "damage",
+              "amount": 3
+            },
+            {
+              "type": "condition",
+              "target": "target",
+              "condition": "bleed",
+              "amount": 1,
+              "turns": 3
+            }
+          ],
+          "actionCost": 0,
+          "oncePerBattle": false,
+          "requiresNoMonsters": false
+        },
+        {
+          "id": "spiked-pit-SHUFFLED_INTO",
+          "trigger": "SHUFFLED_INTO",
+          "areas": [
+            "ruins-tile-4:PIT_W",
+            "ruins-tile-4:PIT_E"
+          ],
+          "side": "all",
+          "effects": [
+            {
+              "type": "damage",
+              "amount": 3
+            },
+            {
+              "type": "condition",
+              "target": "target",
+              "condition": "bleed",
+              "amount": 1,
+              "turns": 3
+            }
+          ],
+          "actionCost": 0,
+          "oncePerBattle": false,
+          "requiresNoMonsters": false
+        }
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "sha256": "1434c53d5dac4e79f3fe091c9dc97c0442864644cb043b12c3fc596ae7c30b72",
+          "page": 4,
+          "location": "full printed face",
+          "componentId": "ruins-room-4",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "sha256": "82128bffbce39d6624fde4a42cb2f9466d46b657bf13fb14ee6ac7ae11f094b2",
+          "page": 4,
+          "location": "printed back",
+          "componentId": "ruins-room-4",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    },
+    {
+      "roomNumber": 5,
+      "rules": [
+        {
+          "id": "stressful-darkness",
+          "trigger": "END_TURN",
+          "areas": [
+            "ruins-tile-5:NW",
+            "ruins-tile-5:W",
+            "ruins-tile-5:SW",
+            "ruins-tile-5:S",
+            "ruins-tile-5:SE"
+          ],
+          "side": "hero",
+          "effects": [
+            {
+              "type": "stress",
+              "target": "target",
+              "amount": 1
+            }
+          ],
+          "actionCost": 0,
+          "oncePerBattle": false,
+          "requiresNoMonsters": false
+        },
+        {
+          "id": "beacon-of-light",
+          "trigger": "END_TURN",
+          "areas": [
+            "ruins-tile-5:NE"
+          ],
+          "side": "hero",
+          "effects": [
+            {
+              "type": "stress",
+              "target": "target",
+              "amount": -1
+            }
+          ],
+          "actionCost": 0,
+          "oncePerBattle": false,
+          "requiresNoMonsters": false
+        }
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "sha256": "1434c53d5dac4e79f3fe091c9dc97c0442864644cb043b12c3fc596ae7c30b72",
+          "page": 5,
+          "location": "full printed face",
+          "componentId": "ruins-room-5",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "sha256": "82128bffbce39d6624fde4a42cb2f9466d46b657bf13fb14ee6ac7ae11f094b2",
+          "page": 5,
+          "location": "printed back",
+          "componentId": "ruins-room-5",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    },
+    {
+      "roomNumber": 6,
+      "rules": [
+        {
+          "id": "loot-chest",
+          "trigger": "INTERACT",
+          "areas": [
+            "ruins-tile-6:CHEST"
+          ],
+          "side": "hero",
+          "effects": [
+            {
+              "type": "drawTrinket"
+            }
+          ],
+          "actionCost": 2,
+          "oncePerBattle": true,
+          "requiresNoMonsters": false
+        },
+        {
+          "id": "hide-and-heal",
+          "trigger": "INTERACT",
+          "areas": [
+            "ruins-tile-6:HIDE"
+          ],
+          "side": "hero",
+          "effects": [
+            {
+              "type": "stress",
+              "target": "target",
+              "amount": 2
+            },
+            {
+              "type": "heal",
+              "target": "target",
+              "amount": "ALL_WOUNDS"
+            }
+          ],
+          "actionCost": 1,
+          "oncePerBattle": false,
+          "requiresNoMonsters": true
+        }
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "sha256": "1434c53d5dac4e79f3fe091c9dc97c0442864644cb043b12c3fc596ae7c30b72",
+          "page": 6,
+          "location": "full printed face",
+          "componentId": "ruins-room-6",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "sha256": "82128bffbce39d6624fde4a42cb2f9466d46b657bf13fb14ee6ac7ae11f094b2",
+          "page": 6,
+          "location": "printed back",
+          "componentId": "ruins-room-6",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    },
+    {
+      "roomNumber": 7,
+      "rules": [
+        {
+          "id": "ancestors-glory",
+          "trigger": "PASSIVE",
+          "areas": [
+            "ruins-tile-7:TOMB"
+          ],
+          "side": "hero",
+          "effects": [
+            {
+              "type": "immunity",
+              "conditions": [
+                "blight",
+                "bleed",
+                "debuff",
+                "stun",
+                "mark",
+                "push-pull"
+              ]
+            },
+            {
+              "type": "removeCondition",
+              "target": "target",
+              "condition": "blight"
+            },
+            {
+              "type": "removeCondition",
+              "target": "target",
+              "condition": "bleed"
+            },
+            {
+              "type": "removeCondition",
+              "target": "target",
+              "condition": "debuff"
+            },
+            {
+              "type": "removeCondition",
+              "target": "target",
+              "condition": "stun"
+            },
+            {
+              "type": "removeCondition",
+              "target": "target",
+              "condition": "mark"
+            },
+            {
+              "type": "removeCondition",
+              "target": "target",
+              "condition": "push-pull"
+            }
+          ],
+          "actionCost": 0,
+          "oncePerBattle": false,
+          "requiresNoMonsters": false
+        }
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "sha256": "1434c53d5dac4e79f3fe091c9dc97c0442864644cb043b12c3fc596ae7c30b72",
+          "page": 7,
+          "location": "full printed face",
+          "componentId": "ruins-room-7",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "sha256": "82128bffbce39d6624fde4a42cb2f9466d46b657bf13fb14ee6ac7ae11f094b2",
+          "page": 7,
+          "location": "printed back",
+          "componentId": "ruins-room-7",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    },
+    {
+      "roomNumber": 8,
+      "rules": [
+        {
+          "id": "the-invokers",
+          "trigger": "LAST_MONSTER_MOVE",
+          "areas": [],
+          "side": "monster",
+          "effects": [
+            {
+              "type": "moveTowards",
+              "areaId": "ruins-tile-8:CIRCLE"
+            }
+          ],
+          "actionCost": 0,
+          "oncePerBattle": false,
+          "requiresNoMonsters": false
+        },
+        {
+          "id": "invoking-abyss",
+          "trigger": "ROUND_END",
+          "areas": [
+            "ruins-tile-8:CIRCLE"
+          ],
+          "side": "monster",
+          "effects": [
+            {
+              "type": "stress",
+              "target": "party",
+              "amount": 2
+            }
+          ],
+          "actionCost": 0,
+          "oncePerBattle": false,
+          "requiresNoMonsters": false
+        }
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "sha256": "1434c53d5dac4e79f3fe091c9dc97c0442864644cb043b12c3fc596ae7c30b72",
+          "page": 8,
+          "location": "full printed face",
+          "componentId": "ruins-room-8",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "sha256": "82128bffbce39d6624fde4a42cb2f9466d46b657bf13fb14ee6ac7ae11f094b2",
+          "page": 8,
+          "location": "printed back",
+          "componentId": "ruins-room-8",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    },
+    {
+      "roomNumber": 9,
+      "rules": [
+        {
+          "id": "feeling-the-presence",
+          "trigger": "END_TURN",
+          "areas": [
+            "ruins-tile-9:N",
+            "ruins-tile-9:C"
+          ],
+          "side": "hero",
+          "effects": [
+            {
+              "type": "quirkStressAndHealing",
+              "stressPerNegative": 1,
+              "healPerPositivePerLevel": 1
+            }
+          ],
+          "actionCost": 0,
+          "oncePerBattle": false,
+          "requiresNoMonsters": false
+        }
+      ],
+      "sourceReferences": [
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_FRONT.pdf",
+          "sha256": "1434c53d5dac4e79f3fe091c9dc97c0442864644cb043b12c3fc596ae7c30b72",
+          "page": 9,
+          "location": "full printed face",
+          "componentId": "ruins-room-9",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        },
+        {
+          "relativePath": "DARKEST_DUNGEON_PRINT_EN_WAVE 1/MG_DD_01_EN_COREBOX_Print/02_DD_CARDS_COREBOX/DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "fileName": "DD_EN_COREBOX_CARDS_63x88_rooms_BACK.pdf",
+          "sha256": "82128bffbce39d6624fde4a42cb2f9466d46b657bf13fb14ee6ac7ae11f094b2",
+          "page": 9,
+          "location": "printed back",
+          "componentId": "ruins-room-9",
+          "sourceClass": "OFFICIAL_PRINTED_COMPONENT",
+          "visualReview": true
+        }
+      ]
+    }
+  ],
+  "visualReview": true
+}
