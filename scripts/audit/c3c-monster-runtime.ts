@@ -133,8 +133,13 @@ export function verifyC3CRuntimeBoundaries() {
   // C3D owns BattleState integration imports, scopes and gate validation independently.
   const successorIntegration = process.argv.includes('--successor-integration') || existsSync(root+'c3d-monster-integration-status.json');
   const playerSuccessor=existsSync(root+'c3e-monster-production-freeze.json');
-  const releaseInfrastructure=(p:string)=>playerSuccessor&&p==='scripts/audit/historical-baseline.ts'
-    &&execFileSync('git',['hash-object',p],{encoding:'utf8'}).trim()==='4628b645996711efeb7179cae0be49cdf3886f71';
+  const infrastructureObjects:Record<string,string>={
+    'scripts/audit/historical-baseline.ts':'21f7198204527af26ee1190dd22d4471cad265d7',
+    'scripts/audit/historical-object-closure.ts':'d2b610e3cedd7bc627c9c5532ba34586c29cb1b1',
+    'scripts/audit/c1c35r2br1-object-closure.json':'e78e7396b4f16e34eaadc485257d5babc69f40cc',
+  };
+  const releaseInfrastructure=(p:string)=>playerSuccessor&&p in infrastructureObjects
+    &&execFileSync('git',['hash-object',p],{encoding:'utf8'}).trim()===infrastructureObjects[p];
   const allowed = (p: string) => releaseInfrastructure(p)||playerSuccessor && (p.startsWith('src/audit/c3e-') || p.startsWith('scripts/audit/c3e-') || p.startsWith('scripts/e2e/c3e-') || p.startsWith('e2e/c3e-') || p.startsWith(root+'c3e-') || ['playwright.c3e.config.ts','src/game-engine/heroes/production-runtime.ts','src/game-engine/commands/battle.ts','src/game-engine/dungeon.ts','src/game-engine/save.ts','src/game-engine/ruins/movement-runtime.ts','src/pages/BattlePage.tsx','src/pages/QuestSelectPage.tsx','src/store/useGameStore.ts','src/test-support/historical-baseline-setup.ts','src/components/trinkets/TrinketUseOverlay.tsx','scripts/audit/c3e-run-production-gate.mjs','.github/workflows/release-gate.yml'].includes(p))
     || p.startsWith('src/game-engine/monsters/') || p.startsWith('src/audit/c3c-')
     || successorIntegration && (p.startsWith('src/audit/c3d-') || p.startsWith('scripts/audit/c3d-') || p.startsWith(root + 'c3d-')

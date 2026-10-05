@@ -20,10 +20,13 @@ const allowlist:Record<string,string>={
 };
 export function sourceFingerprint(infrastructureBaseline?:string){
  const tracked=execFileSync('git',['ls-files','--cached','--others','--exclude-standard'],{encoding:'utf8'}).trim().split(/\r?\n/);
- const paths=tracked.filter(p=>/^(src\/|scripts\/|e2e\/|\.github\/|package|playwright|vite|tsconfig)/.test(p)&&!p.endsWith('.tsbuildinfo')).sort();
+ const infrastructureAdditions=['scripts/audit/historical-object-closure.ts','scripts/audit/c1c35r2br1-object-closure.json'];
+ const paths=tracked.filter(p=>/^(src\/|scripts\/|e2e\/|\.github\/|package|playwright|vite|tsconfig)/.test(p)&&!p.endsWith('.tsbuildinfo')
+   &&!(infrastructureBaseline&&infrastructureAdditions.includes(p))).sort();
  // Development/release verification may carry this infrastructure-only repair
  // without rewriting the accepted candidate's browser/regression receipts.
- // Every other source byte and the complete path set still participate.
+ // Added object-closure infrastructure is separately hash-pinned below. Every
+ // other source byte and path still participates in the accepted fingerprint.
  const infrastructure=['scripts/audit/historical-baseline.ts','scripts/audit/c3b-monster-definition-layer.ts',
    'scripts/audit/c3c-monster-runtime.ts','scripts/audit/c3e-monster-production-acceptance.ts'];
  return hash(paths.map(p=>p+':'+hash(infrastructureBaseline&&infrastructure.includes(p)
@@ -67,9 +70,11 @@ if(process.argv.includes('--write')||process.argv.includes('--verify')){
    const candidate='88f29123eaea6b6ed316f90084c81919a82288ed';
    execFileSync('git',['merge-base','--is-ancestor',candidate,'HEAD']);
    for(const [path,expected] of Object.entries({
-    'scripts/audit/historical-baseline.ts':'8fe6e8ee32db68b57ec1c316e0cabb1ec28072f7c827d6e279ec4fb7956f4bf3',
-    'scripts/audit/c3b-monster-definition-layer.ts':'99b7920ca1aa3785f779d899e6fd81b408e2b543a65c096815665b05ecc60f89',
-    'scripts/audit/c3c-monster-runtime.ts':'c9ccce698e89e1f8f67e0d692d9bf20f6ac2573ce72088b4c46d516e76ee4764',
+    'scripts/audit/historical-baseline.ts':'8e30d8761e0b88f4846f4ff18e6498a1cdff03df8712e59b8135f346690a48cf',
+    'scripts/audit/historical-object-closure.ts':'622d846aba1497540a85971544ca22c480583376b122aff0b08594c363745ae1',
+    'scripts/audit/c1c35r2br1-object-closure.json':'9d7c28c1938d94e8d5979dac2d9cd5456d414719627f1d68698102eba281b508',
+    'scripts/audit/c3b-monster-definition-layer.ts':'f509079474b7c64c73a2a2e04cbbe9e37f264d01321a3fb009becbbd3a8de1cd',
+    'scripts/audit/c3c-monster-runtime.ts':'d89d61ed03c09cb7ee449533cd373a4265d438c72bcf219d4ca463e0fd4b5f77',
    }))assert.equal(hash(readFileSync(path)),expected,'Unreviewed historical Git infrastructure repair: '+path);
    assert.equal(previous.sourceFingerprint,sourceFingerprint(candidate),'Frozen C3E non-infrastructure inputs changed');
   }else assert.equal(previous.sourceFingerprint,next.sourceFingerprint,'Frozen C3E inputs changed; use an explicit successor phase');

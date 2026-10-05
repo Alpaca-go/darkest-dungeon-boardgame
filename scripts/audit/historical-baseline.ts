@@ -4,6 +4,7 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
+import { supplyProphetHistoricalObjects } from './historical-object-closure';
 
 export const historicalBaselines = {
   c2d: {phase:'11A.5-C2D',commit:'2d979652c3b713d6104bd21c7007fcd24fe1af63',script:'scripts/audit/c2d-hero-runtime.ts',artifactPrefixes:['c2d-']},
@@ -117,9 +118,11 @@ export function verifyHistoricalBaseline(phase: keyof typeof historicalBaselines
   try {
     if (fullProphetFoundation) {
       // Its unchanged suite creates further C1C27/C1C28 worktrees. Give that
-      // nested verifier its own repository/refs, retaining the complete object
-      // ancestry via a local alternate rather than an outer linked worktree.
+      // nested verifier its own repository/refs, retaining locally available
+      // objects via an alternate, then explicitly supply historical objects
+      // absent from the Actions checkout.
       git(['clone', '--quiet', '--shared', '--no-checkout', resolve('.'), checkout]);
+      supplyProphetHistoricalObjects(checkout);
       execFileSync('git', ['-c', 'core.autocrlf=false', 'checkout', '--quiet', '--detach', commit], { cwd: checkout });
     } else {
       git(['-c', 'core.autocrlf=false', 'worktree', 'add', '--quiet', '--detach', checkout, commit]);
