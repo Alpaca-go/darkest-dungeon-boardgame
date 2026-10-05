@@ -258,7 +258,10 @@
     "verify:complete-edition-c4a": "vite-node scripts/audit/c4a-standard-quest-rebaseline.ts --verify",
     "audit:complete-edition-c4b": "vite-node scripts/audit/c4b-rest-official-contract.ts --write",
     "test:complete-edition-c4b": "vitest run src/audit/c4b-rest-official-contract.test.ts --maxWorkers=2 --minWorkers=2",
-    "verify:complete-edition-c4b": "vite-node scripts/audit/c4b-rest-official-contract.ts --verify"
+    "verify:complete-edition-c4b": "vite-node scripts/audit/c4b-rest-official-contract.ts --verify",
+    "audit:complete-edition-c4c": "vite-node scripts/audit/c4c-rest-simple-quest.ts --write",
+    "test:complete-edition-c4c": "vitest run src/audit/c4c-rest-project-ruling.test.ts src/audit/c4c-simple-quest-runtime.test.ts src/audit/c4c-audit-fast-gate.test.ts --maxWorkers=2 --minWorkers=2",
+    "verify:complete-edition-c4c": "vite-node scripts/audit/c4c-rest-simple-quest.ts --verify"
   },
   "dependencies": {
     "lucide-react": "^0.408.0",

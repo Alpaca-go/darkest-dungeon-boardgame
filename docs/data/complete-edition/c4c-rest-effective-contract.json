@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "C4C-REST-EFFECTIVE-CONTRACT-v1",
+  "phase": "11A.7-C4C",
+  "officialContract": "docs/data/complete-edition/c4b-rest-official-contract.json",
+  "officialOutcome": "REST_OFFICIAL_CONTRACT_UNRESOLVED",
+  "canonicalClosure": false,
+  "rulingId": "C4C-REST-PROJECT-RULING-v1",
+  "productionAuthorized": true,
+  "fields": [
+    {
+      "field": "firewoodUse",
+      "officialStatus": "OFFICIAL_EXPLICIT",
+      "projectRulingStatus": "NOT_REQUIRED",
+      "effectiveProductionBehavior": "One supplied Firewood token permits one Rest; completing that Rest discards one Firewood token.",
+      "effectiveAuthority": "OFFICIAL",
+      "rulingId": null
+    },
+    {
+      "field": "sessionBudget",
+      "officialStatus": "OFFICIAL_EXPLICIT",
+      "projectRulingStatus": "NOT_REQUIRED",
+      "effectiveProductionBehavior": "The current Quest card supplies the Resting Point amount available to the party for the Rest.",
+      "effectiveAuthority": "OFFICIAL",
+      "rulingId": null
+    },
+    {
+      "field": "restingPointAllocation",
+      "officialStatus": "OFFICIAL_EXPLICIT",
+      "projectRulingStatus": "NOT_REQUIRED",
+      "effectiveProductionBehavior": "Whole party agrees to Rest, then collectively allocates points; an equal split is available if distribution cannot be agreed.",
+      "effectiveAuthority": "OFFICIAL",
+      "rulingId": null
+    },
+    {
+      "field": "pointConversion",
+      "officialStatus": "OFFICIAL_EXPLICIT",
+      "projectRulingStatus": "NOT_REQUIRED",
+      "effectiveProductionBehavior": "Each point spent recovers exactly 1 Life or exactly 1 Stress.",
+      "effectiveAuthority": "OFFICIAL",
+      "rulingId": null
+    },
+    {
+      "field": "multiplePointsPerHero",
+      "officialStatus": "OFFICIAL_DERIVED",
+      "projectRulingStatus": "NOT_REQUIRED",
+      "effectiveProductionBehavior": "A Hero may receive multiple points and chooses how to spend that Hero's allocation.",
+      "effectiveAuthority": "OFFICIAL",
+      "rulingId": null
+    },
+    {
+      "field": "onePurposePerPoint",
+      "officialStatus": "OFFICIAL_DERIVED",
+      "projectRulingStatus": "NOT_REQUIRED",
+      "effectiveProductionBehavior": "A point recovers Life or Stress, never both.",
+      "effectiveAuthority": "OFFICIAL",
+      "rulingId": null
+    },
+    {
+      "field": "budgetConsumption",
+      "officialStatus": "OFFICIAL_INSUFFICIENT",
+      "projectRulingStatus": "PROJECT_RULING_EXPLICIT",
+      "effectiveProductionBehavior": "INTEGER_ZERO_THROUGH_PRINTED_MAXIMUM",
+      "effectiveAuthority": "PROJECT_RULING",
+      "rulingId": "C4C-REST-PROJECT-RULING-v1"
+    },
+    {
+      "field": "partialSpend",
+      "officialStatus": "OFFICIAL_INSUFFICIENT",
+      "projectRulingStatus": "PROJECT_RULING_EXPLICIT",
+      "effectiveProductionBehavior": "ALLOWED_UNUSED_POINTS_EXPIRE",
+      "effectiveAuthority": "PROJECT_RULING",
+      "rulingId": "C4C-REST-PROJECT-RULING-v1"
+    },
+    {
+      "field": "zeroPointRest",
+      "officialStatus": "OFFICIAL_INSUFFICIENT",
+      "projectRulingStatus": "PROJECT_RULING_EXPLICIT",
+      "effectiveProductionBehavior": "ALLOWED_FIREWOOD_CONSUMED",
+      "effectiveAuthority": "PROJECT_RULING",
+      "rulingId": "C4C-REST-PROJECT-RULING-v1"
+    },
+    {
+      "field": "insufficientRecoveryCapacity",
+      "officialStatus": "SOURCE_UNRESOLVED",
+      "projectRulingStatus": "PROJECT_RULING_EXPLICIT",
+      "effectiveProductionBehavior": "REST_ALLOWED_UNUSED_POINTS_EXPIRE",
+      "effectiveAuthority": "PROJECT_RULING",
+      "rulingId": "C4C-REST-PROJECT-RULING-v1"
+    },
+    {
+      "field": "roomGate",
+      "officialStatus": "OFFICIAL_EXPLICIT",
+      "projectRulingStatus": "NOT_REQUIRED",
+      "effectiveProductionBehavior": "Rest is legal only in a cleared Room.",
+      "effectiveAuthority": "OFFICIAL",
+      "rulingId": null
+    },
+    {
+      "field": "recoveryCap",
+      "officialStatus": "OFFICIAL_INSUFFICIENT",
+      "projectRulingStatus": "PROJECT_RULING_EXPLICIT",
+      "effectiveProductionBehavior": "REJECT_ALLOCATION_ABOVE_REAL_RECOVERY_CAPACITY",
+      "effectiveAuthority": "PROJECT_RULING",
+      "rulingId": "C4C-REST-PROJECT-RULING-v1"
+    }
+  ]
+}

@@ -27,6 +27,8 @@ export interface QuestRuntimeState {
   firewoodTokensRemaining?: number;
   restingPointsRemaining?: number;
   restingPointsSpent?: number;
+  restSemanticAuthority?: 'OFFICIAL' | 'PROJECT_RULING';
+  restRuleVersion?: string;
   pendingRuleChoice?: QuestRulePendingChoice | null;
   processedRuleTransactionIds?: string[];
   /** Deterministic output of QUEST_RULE_ROOM_SETUP. Never regenerated on reload. */

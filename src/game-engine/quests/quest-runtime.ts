@@ -1,5 +1,6 @@
 import type { CampaignState, DungeonRoom, QuestDefinition } from '../../types';
 import { getCampaignQuest } from '../../data/quests';
+import { C4C_REST_RULING_ID, effectiveRestSemanticsAuthorized } from '../../audit/c4c-rest-effective-contract';
 
 export interface QuestXpEvaluation {
   qualifiedUnitCount: number;
@@ -46,6 +47,7 @@ export function createQuestRuntimeState(quest: QuestDefinition, questInstanceId 
     firewoodTokensRemaining: quest.firewoodSetup?.tokens ?? 0,
     restingPointsRemaining: quest.firewoodSetup?.restingPoints ?? 0,
     restingPointsSpent: 0,
+    ...(quest.type === 'standard' && quest.firewoodSetup?.tokens ? { restSemanticAuthority: 'PROJECT_RULING' as const, restRuleVersion: C4C_REST_RULING_ID } : {}),
     pendingRuleChoice: null,
     processedRuleTransactionIds: [],
     roomSetup: null,
@@ -73,6 +75,7 @@ export interface RestAllocation {
 }
 
 export type RestAllocationError =
+  | 'REST_SEMANTICS_UNAUTHORIZED'
   | 'REST_NOT_COMMUNITY_QUEST'
   | 'REST_NOT_IN_DUNGEON_EXPLORE'
   | 'REST_NOT_IN_CLEARED_ROOM'
@@ -117,6 +120,10 @@ export function validateRestAllocation(
   if (!current || current.status !== 'cleared') return invalid('REST_NOT_IN_CLEARED_ROOM');
   if (!state || (state.firewoodTokensRemaining ?? 0) <= 0) return invalid('REST_NO_FIREWOOD');
   if (budget <= 0) return invalid('REST_NO_RESTING_POINTS');
+  const standardRest = getCampaignQuest(campaign)?.type === 'standard';
+  if (standardRest && (!effectiveRestSemanticsAuthorized() || state.restRuleVersion && state.restRuleVersion !== C4C_REST_RULING_ID)) {
+    return invalid('REST_SEMANTICS_UNAUTHORIZED');
+  }
   if (!allocation || !Array.isArray(allocation.allocations)) return invalid('REST_ALLOCATION_INVALID_POINTS');
 
   const requestedByHeroAndResource = new Map<string, number>();
@@ -140,7 +147,8 @@ export function validateRestAllocation(
     requestedByHeroAndResource.set(key, requested);
   }
 
-  if (spentPoints !== budget) return invalid('REST_ALLOCATION_INCOMPLETE_BUDGET', spentPoints);
+  // C4C authorizes standard Quest Rest only. Preserve frozen Boss/prototype execution.
+  if (!standardRest && spentPoints !== budget) return invalid('REST_ALLOCATION_INCOMPLETE_BUDGET', spentPoints);
 
   return { ok: true, error: null, availablePoints: budget, spentPoints };
 }
@@ -148,7 +156,7 @@ export function validateRestAllocation(
 /**
  * Atomically commits the allocation chosen by the players. One point recovers one Life
  * (represented by removing one Wound) or one Stress. Confirming ends the Rest and discards
- * one Firewood. The source-backed full-budget gate requires every printed point to be allocated.
+ * one Firewood. C4C-REST-PROJECT-RULING-v1 permits partial/zero spend; unused points expire.
  */
 export function commitRestAtCamp(campaign: CampaignState, allocation: RestAllocation): QuestRestResult {
   const validation = validateRestAllocation(campaign, allocation);
@@ -181,6 +189,8 @@ export function commitRestAtCamp(campaign: CampaignState, allocation: RestAlloca
         firewoodTokensRemaining: (state.firewoodTokensRemaining ?? 0) - 1,
         restingPointsRemaining: 0,
         restingPointsSpent: totalSpent,
+        ...(getCampaignQuest(campaign)?.type === 'standard'
+          ? { restSemanticAuthority: 'PROJECT_RULING' as const, restRuleVersion: C4C_REST_RULING_ID } : {}),
         counters: { ...state.counters, restingPointsSpent: totalSpent },
       },
     },

@@ -1,3 +1,5 @@
+import { C4C_SIMPLE_QUEST_IDS } from './c4c-quest-batch';
+
 export type ProductionProofType = 'production-runtime' | 'save-replay' | 'selector' | 'e2e';
 export type ProductionProofStatus = 'active' | 'skip' | 'todo';
 
@@ -76,6 +78,11 @@ export function proof(entry: RegisteredProductionProof): RegisteredProductionPro
 }
 
 export const PRODUCTION_PROOF_REGISTRY: Readonly<Record<string, RegisteredProductionProof>> = Object.freeze(Object.fromEntries([
+  ...(['production-runtime', 'save-replay', 'selector'] as const).map((proofType, index) => proof({
+    proofId: ['C4C-SIMPLE-RUNTIME', 'C4C-SIMPLE-SAVE-REPLAY', 'C4C-SIMPLE-SELECTOR'][index],
+    definitionIds: [...C4C_SIMPLE_QUEST_IDS], proofType,
+    testFile: 'src/audit/c4c-simple-quest-runtime.test.ts', runner: 'vitest', status: 'active', scope: 'definition',
+  })),
   ...['RUNTIME', 'RESULT-TRANSFORM', 'MULTI-COPY', 'SAVE-REPLAY', 'SELECTOR'].map((key) => proof({
     proofId: 'C1C17-SURVIVAL-GUIDE-' + key, definitionIds: [SURVIVAL_GUIDE_ID],
     proofType: key === 'SAVE-REPLAY' ? 'save-replay' : key === 'SELECTOR' ? 'selector' : 'production-runtime',

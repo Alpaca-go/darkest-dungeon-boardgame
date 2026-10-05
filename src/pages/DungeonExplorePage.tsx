@@ -304,6 +304,7 @@ export default function DungeonExplorePage() {
               <h3 id="rest-allocation-title" className="text-base font-bold text-dd-text">Allocate Resting Points</h3>
               <p className="text-xs text-dd-muted mt-1">
                 Choose how the party spends its Resting Points. Each point recovers 1 Life or 1 Stress.
+                You may use fewer points, including zero. Confirming consumes one Firewood; unused points expire.
               </p>
             </div>
             <div className="grid grid-cols-3 gap-2 text-sm">
@@ -340,9 +341,9 @@ export default function DungeonExplorePage() {
                 );
               })}
             </div>
-            {(restError || restValidation.error === 'REST_ALLOCATION_INCOMPLETE_BUDGET') && (
+            {restError && (
               <p className="text-xs text-red-300" role="alert" data-testid="rest-allocation-error">
-                {restError ?? `${restRemaining} Resting Points still need allocation`}
+                {restError}
               </p>
             )}
             <div className="flex justify-end gap-2">

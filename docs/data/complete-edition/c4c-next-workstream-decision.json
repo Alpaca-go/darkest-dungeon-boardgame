@@ -1,0 +1,321 @@
+{
+  "phase": "11A.7-C4C",
+  "decisionCount": 1,
+  "selectedWorkstream": "QUEST_SAVE_CHOICE_TRANSACTION_BINDING",
+  "expectedNextCoverageGain": 0,
+  "expectedAuthorizedBindingCoverage": 11,
+  "priority": [
+    "authorized whole-Quest gain",
+    "authorized affected Quests",
+    "reuse",
+    "existing primitives",
+    "architecture cost",
+    "ambiguity"
+  ],
+  "candidates": [
+    {
+      "family": "QUEST_SAVE_CHOICE_TRANSACTION_BINDING",
+      "affectedQuestCount": 65,
+      "effectivelyAuthorizedQuestCount": 11,
+      "expectedWholeQuestCoverageGain": 0,
+      "unlockedQuestIds": [],
+      "authorizedQuestIds": [
+        "community-quest-ruins-lvl1-dem-bones",
+        "community-quest-ruins-lvl1-fundraiser",
+        "community-quest-ruins-lvl1-rising-threat",
+        "community-quest-ruins-lvl2-break-them",
+        "community-quest-ruins-lvl2-disruption",
+        "community-quest-ruins-lvl2-purify-the-fountains",
+        "community-quest-ruins-lvl3-creeping-darkness",
+        "community-quest-ruins-lvl3-forward-camps",
+        "community-quest-ruins-lvl3-the-threat-is-real",
+        "community-quest-ruins-lvl3-they-are-back",
+        "community-quest-ruins-lvl3-warm-up-the-halls"
+      ],
+      "existingPrimitiveReuse": true,
+      "architectureCost": "MEDIUM_BINDING_AND_TRANSACTION",
+      "semanticAmbiguity": "LOW_FOR_SOURCE_CLEAR_BINDING_ONLY"
+    },
+    {
+      "family": "QUEST_DUNGEON_COMPOSITION",
+      "affectedQuestCount": 63,
+      "effectivelyAuthorizedQuestCount": 11,
+      "expectedWholeQuestCoverageGain": 0,
+      "unlockedQuestIds": [],
+      "authorizedQuestIds": [
+        "community-quest-ruins-lvl1-dem-bones",
+        "community-quest-ruins-lvl1-fundraiser",
+        "community-quest-ruins-lvl1-rising-threat",
+        "community-quest-ruins-lvl2-break-them",
+        "community-quest-ruins-lvl2-disruption",
+        "community-quest-ruins-lvl2-purify-the-fountains",
+        "community-quest-ruins-lvl3-creeping-darkness",
+        "community-quest-ruins-lvl3-forward-camps",
+        "community-quest-ruins-lvl3-the-threat-is-real",
+        "community-quest-ruins-lvl3-they-are-back",
+        "community-quest-ruins-lvl3-warm-up-the-halls"
+      ],
+      "existingPrimitiveReuse": true,
+      "architectureCost": "MEDIUM_BINDING_AND_TRANSACTION",
+      "semanticAmbiguity": "LOW_FOR_SOURCE_CLEAR_BINDING_ONLY"
+    },
+    {
+      "family": "QUEST_OBJECTIVE_QUALIFICATION",
+      "affectedQuestCount": 43,
+      "effectivelyAuthorizedQuestCount": 9,
+      "expectedWholeQuestCoverageGain": 0,
+      "unlockedQuestIds": [],
+      "authorizedQuestIds": [
+        "community-quest-ruins-lvl1-dem-bones",
+        "community-quest-ruins-lvl1-fundraiser",
+        "community-quest-ruins-lvl1-rising-threat",
+        "community-quest-ruins-lvl2-break-them",
+        "community-quest-ruins-lvl2-disruption",
+        "community-quest-ruins-lvl2-purify-the-fountains",
+        "community-quest-ruins-lvl3-forward-camps",
+        "community-quest-ruins-lvl3-they-are-back",
+        "community-quest-ruins-lvl3-warm-up-the-halls"
+      ],
+      "existingPrimitiveReuse": true,
+      "architectureCost": "MEDIUM_BINDING_AND_TRANSACTION",
+      "semanticAmbiguity": "LOW_FOR_SOURCE_CLEAR_BINDING_ONLY"
+    },
+    {
+      "family": "QUEST_OBJECTIVE_INTERACTION",
+      "affectedQuestCount": 12,
+      "effectivelyAuthorizedQuestCount": 4,
+      "expectedWholeQuestCoverageGain": 0,
+      "unlockedQuestIds": [],
+      "authorizedQuestIds": [
+        "community-quest-ruins-lvl1-dem-bones",
+        "community-quest-ruins-lvl2-purify-the-fountains",
+        "community-quest-ruins-lvl3-forward-camps",
+        "community-quest-ruins-lvl3-warm-up-the-halls"
+      ],
+      "existingPrimitiveReuse": true,
+      "architectureCost": "MEDIUM_BINDING_AND_TRANSACTION",
+      "semanticAmbiguity": "LOW_FOR_SOURCE_CLEAR_BINDING_ONLY"
+    },
+    {
+      "family": "QUEST_ROOM_CARD_SELECTION",
+      "affectedQuestCount": 26,
+      "effectivelyAuthorizedQuestCount": 3,
+      "expectedWholeQuestCoverageGain": 0,
+      "unlockedQuestIds": [],
+      "authorizedQuestIds": [
+        "community-quest-ruins-lvl1-dem-bones",
+        "community-quest-ruins-lvl2-disruption",
+        "community-quest-ruins-lvl2-purify-the-fountains"
+      ],
+      "existingPrimitiveReuse": true,
+      "architectureCost": "MEDIUM_BINDING_AND_TRANSACTION",
+      "semanticAmbiguity": "LOW_FOR_SOURCE_CLEAR_BINDING_ONLY"
+    },
+    {
+      "family": "QUEST_MONSTER_ENCOUNTER_ROUTING",
+      "affectedQuestCount": 21,
+      "effectivelyAuthorizedQuestCount": 3,
+      "expectedWholeQuestCoverageGain": 0,
+      "unlockedQuestIds": [],
+      "authorizedQuestIds": [
+        "community-quest-ruins-lvl1-rising-threat",
+        "community-quest-ruins-lvl2-break-them",
+        "community-quest-ruins-lvl3-they-are-back"
+      ],
+      "existingPrimitiveReuse": true,
+      "architectureCost": "MEDIUM_BINDING_AND_TRANSACTION",
+      "semanticAmbiguity": "LOW_FOR_SOURCE_CLEAR_BINDING_ONLY"
+    },
+    {
+      "family": "QUEST_PROVISION_SETUP",
+      "affectedQuestCount": 7,
+      "effectivelyAuthorizedQuestCount": 2,
+      "expectedWholeQuestCoverageGain": 0,
+      "unlockedQuestIds": [],
+      "authorizedQuestIds": [
+        "community-quest-ruins-lvl2-purify-the-fountains",
+        "community-quest-ruins-lvl3-warm-up-the-halls"
+      ],
+      "existingPrimitiveReuse": true,
+      "architectureCost": "MEDIUM_BINDING_AND_TRANSACTION",
+      "semanticAmbiguity": "LOW_FOR_SOURCE_CLEAR_BINDING_ONLY"
+    },
+    {
+      "family": "QUEST_HERO_EVENT_ROUTING",
+      "affectedQuestCount": 9,
+      "effectivelyAuthorizedQuestCount": 1,
+      "expectedWholeQuestCoverageGain": 0,
+      "unlockedQuestIds": [],
+      "authorizedQuestIds": [
+        "community-quest-ruins-lvl3-creeping-darkness"
+      ],
+      "existingPrimitiveReuse": true,
+      "architectureCost": "MEDIUM_BINDING_AND_TRANSACTION",
+      "semanticAmbiguity": "LOW_FOR_SOURCE_CLEAR_BINDING_ONLY"
+    },
+    {
+      "family": "QUEST_MONSTER_POOL_FILTER",
+      "affectedQuestCount": 9,
+      "effectivelyAuthorizedQuestCount": 1,
+      "expectedWholeQuestCoverageGain": 0,
+      "unlockedQuestIds": [],
+      "authorizedQuestIds": [
+        "community-quest-ruins-lvl3-the-threat-is-real"
+      ],
+      "existingPrimitiveReuse": true,
+      "architectureCost": "MEDIUM_BINDING_AND_TRANSACTION",
+      "semanticAmbiguity": "LOW_FOR_SOURCE_CLEAR_BINDING_ONLY"
+    },
+    {
+      "family": "QUEST_BATTLE_START_POLICY",
+      "affectedQuestCount": 7,
+      "effectivelyAuthorizedQuestCount": 1,
+      "expectedWholeQuestCoverageGain": 0,
+      "unlockedQuestIds": [],
+      "authorizedQuestIds": [
+        "community-quest-ruins-lvl1-rising-threat"
+      ],
+      "existingPrimitiveReuse": true,
+      "architectureCost": "MEDIUM_BINDING_AND_TRANSACTION",
+      "semanticAmbiguity": "LOW_FOR_SOURCE_CLEAR_BINDING_ONLY"
+    },
+    {
+      "family": "QUEST_MONSTER_OVERRIDE_ROUTING",
+      "affectedQuestCount": 6,
+      "effectivelyAuthorizedQuestCount": 1,
+      "expectedWholeQuestCoverageGain": 0,
+      "unlockedQuestIds": [],
+      "authorizedQuestIds": [
+        "community-quest-ruins-lvl3-they-are-back"
+      ],
+      "existingPrimitiveReuse": true,
+      "architectureCost": "MEDIUM_BINDING_AND_TRANSACTION",
+      "semanticAmbiguity": "LOW_FOR_SOURCE_CLEAR_BINDING_ONLY"
+    },
+    {
+      "family": "QUEST_RESOURCE_REWARD_EXCHANGE",
+      "affectedQuestCount": 3,
+      "effectivelyAuthorizedQuestCount": 1,
+      "expectedWholeQuestCoverageGain": 0,
+      "unlockedQuestIds": [],
+      "authorizedQuestIds": [
+        "community-quest-ruins-lvl1-fundraiser"
+      ],
+      "existingPrimitiveReuse": true,
+      "architectureCost": "MEDIUM_BINDING_AND_TRANSACTION",
+      "semanticAmbiguity": "LOW_FOR_SOURCE_CLEAR_BINDING_ONLY"
+    },
+    {
+      "family": "QUEST_CURIO_POLICY",
+      "affectedQuestCount": 4,
+      "effectivelyAuthorizedQuestCount": 0,
+      "expectedWholeQuestCoverageGain": 0,
+      "unlockedQuestIds": [],
+      "authorizedQuestIds": [],
+      "existingPrimitiveReuse": true,
+      "architectureCost": "MEDIUM_BINDING_AND_TRANSACTION",
+      "semanticAmbiguity": "LOW_FOR_SOURCE_CLEAR_BINDING_ONLY"
+    },
+    {
+      "family": "QUEST_LOOT_OVERRIDE",
+      "affectedQuestCount": 4,
+      "effectivelyAuthorizedQuestCount": 0,
+      "expectedWholeQuestCoverageGain": 0,
+      "unlockedQuestIds": [],
+      "authorizedQuestIds": [],
+      "existingPrimitiveReuse": true,
+      "architectureCost": "MEDIUM_BINDING_AND_TRANSACTION",
+      "semanticAmbiguity": "LOW_FOR_SOURCE_CLEAR_BINDING_ONLY"
+    },
+    {
+      "family": "QUEST_TRINKET_ACQUISITION_RETURN",
+      "affectedQuestCount": 3,
+      "effectivelyAuthorizedQuestCount": 0,
+      "expectedWholeQuestCoverageGain": 0,
+      "unlockedQuestIds": [],
+      "authorizedQuestIds": [],
+      "existingPrimitiveReuse": true,
+      "architectureCost": "MEDIUM_BINDING_AND_TRANSACTION",
+      "semanticAmbiguity": "LOW_FOR_SOURCE_CLEAR_BINDING_ONLY"
+    },
+    {
+      "family": "QUEST_BATTLE_RESULT_POLICY",
+      "affectedQuestCount": 2,
+      "effectivelyAuthorizedQuestCount": 0,
+      "expectedWholeQuestCoverageGain": 0,
+      "unlockedQuestIds": [],
+      "authorizedQuestIds": [],
+      "existingPrimitiveReuse": true,
+      "architectureCost": "MEDIUM_BINDING_AND_TRANSACTION",
+      "semanticAmbiguity": "LOW_FOR_SOURCE_CLEAR_BINDING_ONLY"
+    },
+    {
+      "family": "QUEST_FIRST_ROUND_INITIATIVE",
+      "affectedQuestCount": 2,
+      "effectivelyAuthorizedQuestCount": 0,
+      "expectedWholeQuestCoverageGain": 0,
+      "unlockedQuestIds": [],
+      "authorizedQuestIds": [],
+      "existingPrimitiveReuse": true,
+      "architectureCost": "MEDIUM_BINDING_AND_TRANSACTION",
+      "semanticAmbiguity": "LOW_FOR_SOURCE_CLEAR_BINDING_ONLY"
+    },
+    {
+      "family": "QUEST_HAMLET_RESOLUTION",
+      "affectedQuestCount": 2,
+      "effectivelyAuthorizedQuestCount": 0,
+      "expectedWholeQuestCoverageGain": 0,
+      "unlockedQuestIds": [],
+      "authorizedQuestIds": [],
+      "existingPrimitiveReuse": true,
+      "architectureCost": "MEDIUM_BINDING_AND_TRANSACTION",
+      "semanticAmbiguity": "LOW_FOR_SOURCE_CLEAR_BINDING_ONLY"
+    },
+    {
+      "family": "QUEST_BOSS_SETUP_BINDING",
+      "affectedQuestCount": 1,
+      "effectivelyAuthorizedQuestCount": 0,
+      "expectedWholeQuestCoverageGain": 0,
+      "unlockedQuestIds": [],
+      "authorizedQuestIds": [],
+      "existingPrimitiveReuse": true,
+      "architectureCost": "MEDIUM_BINDING_AND_TRANSACTION",
+      "semanticAmbiguity": "LOW_FOR_SOURCE_CLEAR_BINDING_ONLY"
+    },
+    {
+      "family": "QUEST_EXPLORATION_POLICY",
+      "affectedQuestCount": 1,
+      "effectivelyAuthorizedQuestCount": 0,
+      "expectedWholeQuestCoverageGain": 0,
+      "unlockedQuestIds": [],
+      "authorizedQuestIds": [],
+      "existingPrimitiveReuse": true,
+      "architectureCost": "MEDIUM_BINDING_AND_TRANSACTION",
+      "semanticAmbiguity": "LOW_FOR_SOURCE_CLEAR_BINDING_ONLY"
+    },
+    {
+      "family": "QUEST_GUARD_TRANSFER",
+      "affectedQuestCount": 1,
+      "effectivelyAuthorizedQuestCount": 0,
+      "expectedWholeQuestCoverageGain": 0,
+      "unlockedQuestIds": [],
+      "authorizedQuestIds": [],
+      "existingPrimitiveReuse": true,
+      "architectureCost": "MEDIUM_BINDING_AND_TRANSACTION",
+      "semanticAmbiguity": "LOW_FOR_SOURCE_CLEAR_BINDING_ONLY"
+    },
+    {
+      "family": "QUEST_NEGATIVE_QUIRK_SEQUENCE",
+      "affectedQuestCount": 1,
+      "effectivelyAuthorizedQuestCount": 0,
+      "expectedWholeQuestCoverageGain": 0,
+      "unlockedQuestIds": [],
+      "authorizedQuestIds": [],
+      "existingPrimitiveReuse": true,
+      "architectureCost": "MEDIUM_BINDING_AND_TRANSACTION",
+      "semanticAmbiguity": "LOW_FOR_SOURCE_CLEAR_BINDING_ONLY"
+    }
+  ],
+  "automaticImplementation": false,
+  "reason": "Recomputed from post-C4C non-Rest obligations. Partial binding coverage is not whole-Quest readiness; official-source and deferred gates remain."
+}

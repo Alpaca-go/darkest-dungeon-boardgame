@@ -1365,6 +1365,9 @@ function sanitizeQuestRuntimeState(value: unknown): CampaignState['questRuntimeS
     firewoodTokensRemaining: optionalCount('firewoodTokensRemaining') ?? 0,
     restingPointsRemaining: optionalCount('restingPointsRemaining') ?? 0,
     restingPointsSpent: optionalCount('restingPointsSpent') ?? 0,
+    ...(raw.restSemanticAuthority === 'OFFICIAL' || raw.restSemanticAuthority === 'PROJECT_RULING'
+      ? { restSemanticAuthority: raw.restSemanticAuthority } : {}),
+    ...(typeof raw.restRuleVersion === 'string' ? { restRuleVersion: raw.restRuleVersion } : {}),
     pendingRuleChoice,
     processedRuleTransactionIds,
     roomSetup,

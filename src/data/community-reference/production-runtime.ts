@@ -23,7 +23,8 @@ import {
   runtimeSemanticComplete as obligationsAreRuntimeComplete,
   type QuestSemanticObligation,
 } from '../../audit/quest-semantic-coverage';
-import { restAllocationSemanticsImplemented } from '../../audit/rest-semantic-contract';
+import { C4C_SIMPLE_QUEST_IDS } from '../../audit/c4c-quest-batch';
+import { C4C_REST_RULING_ID, effectiveRestSemanticsAuthorized, officialRestSemanticsComplete } from '../../audit/c4c-rest-effective-contract';
 import { liveTrinketMissingPrimitives } from '../../audit/trinket-live-runtime-coverage';
 import type { CampaignState } from '../../types';
 import type { QuestRuntimeState } from '../../types/content-runtime';
@@ -46,6 +47,10 @@ export interface RuntimeProofState {
 }
 
 export interface RuntimeCapabilityRecord {
+  restSemanticAuthority?: 'OFFICIAL' | 'PROJECT_RULING' | 'NOT_APPLICABLE';
+  restRuleVersion?: string;
+  effectiveSemanticComplete?: boolean;
+  productionRuntimeReady?: boolean;
   definitionId: string;
   sourceSupported: boolean;
   engineCapable: boolean;
@@ -145,7 +150,7 @@ export const normalizePrimitives = (message: string): string[] => {
   return primitives.length > 0 ? primitives : [message.replace(/[^A-Za-z0-9]+/g, '_').replace(/^_|_$/g, '').toUpperCase()];
 };
 
-export function implementedQuestPrimitives(restSemanticsReady = restAllocationSemanticsImplemented()): ReadonlySet<string> {
+export function implementedQuestPrimitives(restSemanticsReady = effectiveRestSemanticsAuthorized()): ReadonlySet<string> {
   return new Set([
     'QUEST_ROOM_TOKEN_COMPOSITION',
     'QUEST_FIREWOOD_RESTING_POINT_SETUP',
@@ -366,27 +371,27 @@ export const COMMUNITY_QUEST_PRODUCTION_PROOFS: Readonly<Record<string, Communit
     definitionId,
     runtimeAdapterId: COMMUNITY_QUEST_RUNTIME_ADAPTERS[definitionId].adapterId,
     requiredPrimitives: [...COMMUNITY_QUEST_RUNTIME_ADAPTERS[definitionId].requiredPrimitives],
-    primitiveProofRequirements: COMMUNITY_QUEST_RUNTIME_ADAPTERS[definitionId].definition.firewoodSetup!.tokens > 0
+    primitiveProofRequirements: !C4C_SIMPLE_QUEST_IDS.includes(definitionId) && COMMUNITY_QUEST_RUNTIME_ADAPTERS[definitionId].definition.firewoodSetup!.tokens > 0
       ? { 'C1C1R2-E2E-REST-ALLOCATION': 'QUEST_REST_ALLOCATION_SEMANTICS' }
       : undefined,
     sourceSupported: true,
     semanticSupported: true,
     stateful: true,
-    productionTests: definitionId === TAINTED_TRINKETS_ID ? ['C1C3-TAINTED-RUNTIME']
+    productionTests: C4C_SIMPLE_QUEST_IDS.includes(definitionId) ? ['C4C-SIMPLE-RUNTIME'] : definitionId === TAINTED_TRINKETS_ID ? ['C1C3-TAINTED-RUNTIME']
       : definitionId === FAMILY_TRINKETS_ID ? ['C1C3-FAMILY-RUNTIME']
       : definitionId === DEEP_IN_THE_WARRENS_ID
       ? ['C1C2-SPECIAL-RULE-RUNTIME']
       : definitionId.startsWith('community-quest-crimson-court-')
         ? ['C1C2-ADAPTER-RUNTIME'] : ['C1C1-QUEST-RUNTIME', 'C1C1R-QUEST-SOURCE-SETUP'],
-    saveReplayTests: definitionId === TAINTED_TRINKETS_ID ? ['C1C3-TAINTED-SAVE-REPLAY']
+    saveReplayTests: C4C_SIMPLE_QUEST_IDS.includes(definitionId) ? ['C4C-SIMPLE-SAVE-REPLAY'] : definitionId === TAINTED_TRINKETS_ID ? ['C1C3-TAINTED-SAVE-REPLAY']
       : definitionId === FAMILY_TRINKETS_ID ? ['C1C3-FAMILY-SAVE-REPLAY']
       : definitionId === DEEP_IN_THE_WARRENS_ID ? ['C1C2-SPECIAL-RULE-SAVE-REPLAY']
       : definitionId.startsWith('community-quest-crimson-court-') ? ['C1C2-ADAPTER-SAVE-REPLAY'] : ['C1C1-QUEST-SAVE-REPLAY'],
-    selectorTests: definitionId === TAINTED_TRINKETS_ID ? ['C1C3-TAINTED-SELECTOR']
+    selectorTests: C4C_SIMPLE_QUEST_IDS.includes(definitionId) ? ['C4C-SIMPLE-SELECTOR'] : definitionId === TAINTED_TRINKETS_ID ? ['C1C3-TAINTED-SELECTOR']
       : definitionId === FAMILY_TRINKETS_ID ? ['C1C3-FAMILY-SELECTOR']
       : definitionId === DEEP_IN_THE_WARRENS_ID ? ['C1C2-SPECIAL-RULE-SELECTOR']
       : definitionId.startsWith('community-quest-crimson-court-') ? ['C1C2-ADAPTER-SELECTOR'] : ['C1C1-QUEST-SELECTOR'],
-    e2eTests: definitionId === TAINTED_TRINKETS_ID ? ['C1C3-E2E-TAINTED-TRINKETS']
+    e2eTests: C4C_SIMPLE_QUEST_IDS.includes(definitionId) ? [] : definitionId === TAINTED_TRINKETS_ID ? ['C1C3-E2E-TAINTED-TRINKETS']
       : definitionId === FAMILY_TRINKETS_ID ? ['C1C3-E2E-FAMILY-TRINKETS']
       : definitionId === DEEP_IN_THE_WARRENS_ID ? ['C1C2-E2E-SPECIAL-RULE'] : [
       'C1C1R-E2E-SIMPLE-QUEST-ADAPTER',
@@ -432,8 +437,12 @@ export function evaluateCommunityQuestCapability(
   const sourceSemanticComplete = !sourceBlocked
     && source.unresolvedFields.length === 0
     && !specialRulePrimitives.includes('SOURCE_SEMANTIC_UNRESOLVED')
-    && (!(Number(source.firewood.tokens) > 0) || implementedPrimitives.has('QUEST_REST_ALLOCATION_SEMANTICS'));
-  const runtimeSemanticComplete = sourceSemanticComplete && obligationsAreRuntimeComplete(source.id, semanticObligations);
+    && (!(Number(source.firewood.tokens) > 0) || officialRestSemanticsComplete());
+  const effectiveSemanticComplete = !sourceBlocked && source.unresolvedFields.length === 0
+    && !specialRulePrimitives.includes('SOURCE_SEMANTIC_UNRESOLVED')
+    && (!(Number(source.firewood.tokens) > 0) || effectiveRestSemanticsAuthorized()
+      && implementedPrimitives.has('QUEST_REST_ALLOCATION_SEMANTICS'));
+  const runtimeSemanticComplete = effectiveSemanticComplete && obligationsAreRuntimeComplete(source.id, semanticObligations);
   const adapterValid = Boolean(adapter && questAdapterSourceSetupErrors(source, adapter).length === 0);
   const proof = proofs[source.id];
   const proofMatches = Boolean(adapterValid && adapter && proof && proof.definitionId === source.id && proof.runtimeAdapterId === adapter.adapterId);
@@ -457,6 +466,14 @@ export function evaluateCommunityQuestCapability(
   const proofComplete = Boolean(proofMatches && proof.sourceSupported && proof.semanticSupported
     && measuredRuntimeProof.productionProofPresent && measuredRuntimeProof.saveReplayProofPresent
     && measuredRuntimeProof.selectorProofPresent && productionUiProofComplete);
+  // Runtime activation is separate from all-player-path production UI acceptance.
+  const productionRuntimeReady = C4C_SIMPLE_QUEST_IDS.includes(source.id) && runtimeSemanticComplete
+    && missingPrimitives.length === 0 && adapterValid && proofMatches
+    && proof?.productionTests.join(',') === 'C4C-SIMPLE-RUNTIME'
+    && proof?.saveReplayTests.join(',') === 'C4C-SIMPLE-SAVE-REPLAY'
+    && proof?.selectorTests.join(',') === 'C4C-SIMPLE-SELECTOR'
+    && measuredRuntimeProof.productionProofPresent && measuredRuntimeProof.saveReplayProofPresent
+    && measuredRuntimeProof.selectorProofPresent;
   const productionStatus: ProductionStatus = sourceBlocked ? 'SOURCE_BLOCKED'
     : missingPrimitives.length > 0 ? 'ENGINE_PRIMITIVE_MISSING'
       : runtimeSemanticComplete && adapterValid && proofComplete ? 'PRODUCTION_READY' : 'ADAPTER_REQUIRED';
@@ -475,6 +492,11 @@ export function evaluateCommunityQuestCapability(
       ])];
   return {
     definitionId: source.id,
+    restSemanticAuthority: Number(source.firewood.tokens) <= 0 ? 'NOT_APPLICABLE'
+      : officialRestSemanticsComplete() ? 'OFFICIAL' : 'PROJECT_RULING',
+    ...(Number(source.firewood.tokens) > 0 ? { restRuleVersion: C4C_REST_RULING_ID } : {}),
+    effectiveSemanticComplete,
+    productionRuntimeReady,
     sourceSupported: !sourceBlocked,
     engineCapable: missingPrimitives.length === 0,
     sourceSemanticComplete,
@@ -1091,7 +1113,7 @@ export const COMMUNITY_RUNTIME_TRINKETS: TrinketDefinition[] = COMMUNITY_TRINKET
   .filter((definition): definition is TrinketDefinition => Boolean(definition));
 
 export const COMMUNITY_RUNTIME_QUESTS: QuestDefinition[] = COMMUNITY_QUEST_CAPABILITIES
-  .filter((capability) => capability.productionStatus === 'PRODUCTION_READY')
+  .filter((capability) => capability.productionStatus === 'PRODUCTION_READY' || capability.productionRuntimeReady)
   .map((capability) => COMMUNITY_QUEST_RUNTIME_ADAPTERS[capability.definitionId]?.definition)
   .filter((definition): definition is QuestDefinition => Boolean(definition));
 

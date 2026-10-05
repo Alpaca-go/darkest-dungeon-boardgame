@@ -1,0 +1,48 @@
+{
+  "phase": "11A.7-C4C",
+  "completion": "C4C_REST_RULING_AND_SIMPLE_QUEST_RUNTIME_COMPLETE",
+  "baseC4BHead": "56dd2dc1d863fc02f781aeaa57441351c3921225",
+  "rulingId": "C4C-REST-PROJECT-RULING-v1",
+  "authority": "PROJECT_RULING",
+  "canonical": false,
+  "productionAuthorized": true,
+  "officialRestOutcome": "REST_OFFICIAL_CONTRACT_UNRESOLVED",
+  "restGatedQuestCount": 71,
+  "effectiveRestGatesSatisfiedByRuling": 71,
+  "effectiveRestObligationsSatisfied": 142,
+  "officialSourceGatesFalselyClosed": 0,
+  "counts": {
+    "SOURCE_BLOCKED": 46,
+    "MULTI_BLOCKED": 8,
+    "PRODUCTION_RUNTIME_READY": 8,
+    "ADAPTER_READY": 11,
+    "PRODUCTION_READY_EXISTING": 3
+  },
+  "totalExecutableQuestDefinitions": 11,
+  "remainingOfficialRestSourceBlockedCount": 71,
+  "newProductionRuntimeReady": 8,
+  "newAdapterReady": 11,
+  "remainingOfficialNonRestSourceBlockedCount": 54,
+  "remainingRuntimePrimitiveBlockedCount": 5,
+  "remainingDeferredSemanticCount": 3,
+  "selectedNextWorkstream": "QUEST_SAVE_CHOICE_TRANSACTION_BINDING",
+  "expectedNextCoverageGain": 0,
+  "externalCommunityRuleAuthorityUsed": false,
+  "fullRegressionRun": false,
+  "fullBrowserSuiteRun": false,
+  "productionReleaseGate": "NOT_RUN",
+  "freezeReview": {
+    "frozenFileCount": 26,
+    "officialRestContractChanged": false,
+    "predecessorEvidenceChanged": false
+  },
+  "validationScope": [
+    "npm ci",
+    "typecheck",
+    "exact-base C4B verifier",
+    "C4C tests",
+    "C4C verifier",
+    "build"
+  ],
+  "stopAfterCompletion": true
+}

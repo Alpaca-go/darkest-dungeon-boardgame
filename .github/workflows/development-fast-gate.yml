@@ -25,11 +25,11 @@ jobs:
           BRANCH_NAME: ${{ github.ref_name }}
         run: |
           phase=c3
-          if [[ "$BRANCH_NAME" =~ (^|-)c4([a-z])(-|$) ]]; then
+          if [[ "$BRANCH_NAME" =~ (^|[-/])c4([^/-]*)(-|$) ]]; then
             phase="c4${BASH_REMATCH[2]}"
           fi
           case "$phase" in
-            c3|c4a|c4b) echo "phase=$phase" >> "$GITHUB_OUTPUT" ;;
+            c3|c4a|c4b|c4c) echo "phase=$phase" >> "$GITHUB_OUTPUT" ;;
             *) echo "Unsupported C4 workstream: $phase" >&2; exit 1 ;;
           esac
       - run: npm run verify:complete-edition-c3c
@@ -74,4 +74,20 @@ jobs:
         if: ${{ steps.workstream.outputs.phase == 'c4b' }}
       - run: npm run verify:complete-edition-c4b
         if: ${{ steps.workstream.outputs.phase == 'c4b' }}
+      - name: Verify C4B at the accepted C4C base
+        if: ${{ steps.workstream.outputs.phase == 'c4c' }}
+        shell: bash
+        run: |
+          base_worktree="$RUNNER_TEMP/c4c-c4b-base"
+          git worktree add --detach "$base_worktree" 56dd2dc1d863fc02f781aeaa57441351c3921225
+          trap 'git worktree remove --force "$base_worktree"' EXIT
+          (
+            cd "$base_worktree"
+            npm ci
+            npm run verify:complete-edition-c4b
+          )
+      - run: npm run test:complete-edition-c4c
+        if: ${{ steps.workstream.outputs.phase == 'c4c' }}
+      - run: npm run verify:complete-edition-c4c
+        if: ${{ steps.workstream.outputs.phase == 'c4c' }}
       - run: npm run build

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "C4C-REST-PROJECT-RULING-v1",
+  "phase": "11A.7-C4C",
+  "rulingId": "C4C-REST-PROJECT-RULING-v1",
+  "authority": "PROJECT_RULING",
+  "canonical": false,
+  "productionAuthorized": true,
+  "authorizationKind": "EXPLICIT_USER_PROJECT_AUTHORIZATION",
+  "officialBaselinePhase": "11A.7-C4B",
+  "officialContractOutcome": "REST_OFFICIAL_CONTRACT_UNRESOLVED",
+  "officialSourceStatus": "STILL_UNRESOLVED_WHERE_C4B_REPORTED_UNRESOLVED",
+  "effectiveFromPhase": "11A.7-C4C",
+  "fields": {
+    "budgetConsumption": "INTEGER_ZERO_THROUGH_PRINTED_MAXIMUM",
+    "partialSpend": "ALLOWED_UNUSED_POINTS_EXPIRE",
+    "zeroPointRest": "ALLOWED_FIREWOOD_CONSUMED",
+    "insufficientRecoveryCapacity": "REST_ALLOWED_UNUSED_POINTS_EXPIRE",
+    "recoveryCap": "REJECT_ALLOCATION_ABOVE_REAL_RECOVERY_CAPACITY"
+  },
+  "behavior": {
+    "budgetIsMaximum": true,
+    "unusedPointsExpire": true,
+    "carryOver": false,
+    "unusedReward": false,
+    "pointConversion": "1 Life OR 1 Stress, never both",
+    "firewood": "Completing Rest consumes exactly one token",
+    "eligibility": "Preserve official restrictions including cleared Room and party agreement"
+  },
+  "supersedesRuntimeBehavior": "Mandatory full-budget allocation and incomplete-budget rejection",
+  "doesNotSupersedeOfficialEvidence": true
+}
