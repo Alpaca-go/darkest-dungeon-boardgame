@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "C4B-REST-OFFICIAL-REVIEW-v1",
+  "phase": "11A.7-C4B",
+  "baseC4AHead": "8ac3de01c53dc23b47a9549cb8e219d4c93ff968",
+  "sourcePolicy": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "corpusExhaustedUnderCurrentPolicy": true,
+  "exhaustedScope": "All locked rulebooks/tutorials in the current manifests and existing printed Quest evidence; no external clarification acquired.",
+  "gaps": [
+    {
+      "field": "budgetConsumption",
+      "currentOfficialStatus": "OFFICIAL_INSUFFICIENT",
+      "officialEvidence": [
+        "C4B:CORE:p15",
+        "C4B:CORE-PRINT:p15"
+      ],
+      "blockingReason": "Distributing the printed amount and recovering per point spent does not explicitly require spending every point. The historical all-points forum authority is inadmissible.",
+      "canonicalStatus": "SOURCE_UNRESOLVED",
+      "executableBehaviorAuthorized": false
+    },
+    {
+      "field": "partialSpend",
+      "currentOfficialStatus": "OFFICIAL_INSUFFICIENT",
+      "officialEvidence": [
+        "C4B:CORE:p15",
+        "C4B:CORE-PRINT:p15"
+      ],
+      "blockingReason": "Official text supplies neither permission nor prohibition to finish after a partial spend. The historical prohibition relies on the disallowed all-points clarification.",
+      "canonicalStatus": "SOURCE_UNRESOLVED",
+      "executableBehaviorAuthorized": false
+    },
+    {
+      "field": "zeroPointRest",
+      "currentOfficialStatus": "OFFICIAL_INSUFFICIENT",
+      "officialEvidence": [
+        "C4B:CORE:p15",
+        "C4B:CORE-PRINT:p15"
+      ],
+      "blockingReason": "The historical derivation depends on a full-budget requirement that official evidence does not establish. Firewood discard after Rest does not establish zero-point completion legality.",
+      "canonicalStatus": "SOURCE_UNRESOLVED",
+      "executableBehaviorAuthorized": false
+    },
+    {
+      "field": "insufficientRecoveryCapacity",
+      "currentOfficialStatus": "SOURCE_UNRESOLVED",
+      "officialEvidence": [
+        "C4B:CORE:p15",
+        "C4B:CORE:p32",
+        "C4B:CORE:p36",
+        "C4B:CORE-PRINT:p15",
+        "C4B:CORE-PRINT:p32",
+        "C4B:CORE-PRINT:p36",
+        "C4B:WEALD:p3"
+      ],
+      "blockingReason": "No standard Rest passage selects waste-without-effect, discard, partial completion, inability to Rest, or another completion rule when recovery need is lower than the printed amount.",
+      "canonicalStatus": "SOURCE_UNRESOLVED",
+      "executableBehaviorAuthorized": false
+    },
+    {
+      "field": "recoveryCap",
+      "currentOfficialStatus": "OFFICIAL_INSUFFICIENT",
+      "officialEvidence": [
+        "C4B:CORE:p15",
+        "C4B:CORE:p19",
+        "C4B:CORE:p21",
+        "C4B:CORE:p28",
+        "C4B:CORE-PRINT:p15",
+        "C4B:CORE-PRINT:p19",
+        "C4B:CORE-PRINT:p21",
+        "C4B:CORE-PRINT:p28"
+      ],
+      "blockingReason": "Official Wound removal and the Stress track bound actual recovery, but do not establish the historical rule rejecting allocations above missing Life/current Stress. C4B does not infer allocation legality from a model invariant.",
+      "canonicalStatus": "SOURCE_UNRESOLVED",
+      "executableBehaviorAuthorized": false
+    }
+  ],
+  "insufficientCapacityAlternatives": [
+    "spend with no recovery effect",
+    "discard unused points",
+    "complete after partial use",
+    "Rest cannot complete",
+    "another official rule"
+  ],
+  "selectedAlternative": null,
+  "furtherProgressRequires": [
+    "Explicit user authorization for a versioned non-canonical PROJECT_RULING",
+    "Identification of an omitted locked official rulebook page"
+  ],
+  "externalSourceUsed": false,
+  "projectRulingIntroduced": false
+}

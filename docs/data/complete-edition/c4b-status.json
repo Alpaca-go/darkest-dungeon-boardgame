@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "C4B-REST-OFFICIAL-REVIEW-v1",
+  "phase": "11A.7-C4B",
+  "baseC4AHead": "8ac3de01c53dc23b47a9549cb8e219d4c93ff968",
+  "sourcePolicy": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "completion": "C4B_REST_OFFICIAL_CONTRACT_REVIEW_COMPLETE",
+  "outcome": "REST_OFFICIAL_CONTRACT_UNRESOLVED",
+  "sourceMapSha256": "3967060e8b26b10b275aa07e5b37ab2c2a5b42041ca6972c4cfb80438f2e732a",
+  "officialSourceFilesReviewed": 10,
+  "officialStandardRestPages": [
+    11,
+    15,
+    25,
+    30,
+    36
+  ],
+  "productionRequiredFields": [
+    "firewoodUse",
+    "sessionBudget",
+    "restingPointAllocation",
+    "pointConversion",
+    "multiplePointsPerHero",
+    "onePurposePerPoint",
+    "budgetConsumption",
+    "partialSpend",
+    "zeroPointRest",
+    "insufficientRecoveryCapacity",
+    "roomGate",
+    "recoveryCap"
+  ],
+  "officiallyClosedFields": [
+    "firewoodUse",
+    "sessionBudget",
+    "restingPointAllocation",
+    "pointConversion",
+    "multiplePointsPerHero",
+    "onePurposePerPoint",
+    "roomGate"
+  ],
+  "unresolvedFields": [
+    "budgetConsumption",
+    "partialSpend",
+    "zeroPointRest",
+    "insufficientRecoveryCapacity",
+    "recoveryCap"
+  ],
+  "corpusExhaustedUnderCurrentPolicy": true,
+  "restGatedQuestCount": 71,
+  "restSourceGatesRemoved": 0,
+  "counts": {
+    "PRODUCTION_READY_EXISTING": 3,
+    "ADAPTER_READY": 0,
+    "RUNTIME_PRIMITIVE_BLOCKED": 0,
+    "SOURCE_BLOCKED": 65,
+    "DEFERRED_SEMANTIC": 0,
+    "MULTI_BLOCKED": 8
+  },
+  "newProductionReadyExisting": 0,
+  "newAdapterReady": 0,
+  "implementationEligibleCandidateIds": [],
+  "selectedWorkstream": "REST_SOURCE_POLICY_DECISION_REQUIRED",
+  "freezeReview": {
+    "baseC4AHead": "8ac3de01c53dc23b47a9549cb8e219d4c93ff968",
+    "frozenFilesReviewed": 4763,
+    "gameplayRuntimeChanged": false,
+    "historicalRestContractChanged": false,
+    "c4aArtifactsChanged": false,
+    "c3FrozenVerifiersChanged": false,
+    "releaseGateWorkflowChanged": false
+  },
+  "externalCommunitySourceUsed": false,
+  "projectRulingIntroduced": false,
+  "fullRegressionRun": false,
+  "browserTestsRun": false,
+  "questAdaptersImplemented": false,
+  "validationScope": [
+    "npm ci",
+    "typecheck",
+    "verify:complete-edition-c4a (exact accepted base checkout)",
+    "test:complete-edition-c4b",
+    "verify:complete-edition-c4b",
+    "build"
+  ]
+}

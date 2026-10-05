@@ -18,18 +18,32 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run typecheck
+      - name: Select development workstream
+        id: workstream
+        shell: bash
+        env:
+          BRANCH_NAME: ${{ github.ref_name }}
+        run: |
+          phase=c3
+          if [[ "$BRANCH_NAME" =~ (^|-)c4([a-z])(-|$) ]]; then
+            phase="c4${BASH_REMATCH[2]}"
+          fi
+          case "$phase" in
+            c3|c4a|c4b) echo "phase=$phase" >> "$GITHUB_OUTPUT" ;;
+            *) echo "Unsupported C4 workstream: $phase" >&2; exit 1 ;;
+          esac
       - run: npm run verify:complete-edition-c3c
-        if: ${{ !contains(github.ref_name, '-c4a-') }}
+        if: ${{ steps.workstream.outputs.phase == 'c3' }}
       - run: npm run test:complete-edition-c3d
-        if: ${{ !contains(github.ref_name, '-c4a-') }}
+        if: ${{ steps.workstream.outputs.phase == 'c3' }}
       - run: npm run verify:complete-edition-c3d
-        if: ${{ !contains(github.ref_name, '-c4a-') }}
+        if: ${{ steps.workstream.outputs.phase == 'c3' }}
       - run: npm run test:complete-edition-c3e
-        if: ${{ !contains(github.ref_name, '-c4a-') }}
+        if: ${{ steps.workstream.outputs.phase == 'c3' }}
       - run: npm run verify:complete-edition-c3e
-        if: ${{ !contains(github.ref_name, '-c4a-') }}
+        if: ${{ steps.workstream.outputs.phase == 'c3' }}
       - name: Verify C3E at the authoritative C4A base
-        if: ${{ contains(github.ref_name, '-c4a-') }}
+        if: ${{ steps.workstream.outputs.phase == 'c4a' }}
         shell: bash
         run: |
           base_worktree="$RUNNER_TEMP/c4a-c3e-base"
@@ -41,7 +55,23 @@ jobs:
             npm run verify:complete-edition-c3e
           )
       - run: npm run test:complete-edition-c4a
-        if: ${{ contains(github.ref_name, '-c4a-') }}
+        if: ${{ steps.workstream.outputs.phase == 'c4a' }}
       - run: npm run verify:complete-edition-c4a
-        if: ${{ contains(github.ref_name, '-c4a-') }}
+        if: ${{ steps.workstream.outputs.phase == 'c4a' }}
+      - name: Verify C4A at the accepted C4B base
+        if: ${{ steps.workstream.outputs.phase == 'c4b' }}
+        shell: bash
+        run: |
+          base_worktree="$RUNNER_TEMP/c4b-c4a-base"
+          git worktree add --detach "$base_worktree" 8ac3de01c53dc23b47a9549cb8e219d4c93ff968
+          trap 'git worktree remove --force "$base_worktree"' EXIT
+          (
+            cd "$base_worktree"
+            npm ci
+            npm run verify:complete-edition-c4a
+          )
+      - run: npm run test:complete-edition-c4b
+        if: ${{ steps.workstream.outputs.phase == 'c4b' }}
+      - run: npm run verify:complete-edition-c4b
+        if: ${{ steps.workstream.outputs.phase == 'c4b' }}
       - run: npm run build

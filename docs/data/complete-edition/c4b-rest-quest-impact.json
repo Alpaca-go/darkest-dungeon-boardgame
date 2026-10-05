@@ -1,0 +1,2889 @@
+{
+  "schemaVersion": "C4B-REST-OFFICIAL-REVIEW-v1",
+  "phase": "11A.7-C4B",
+  "baseC4AHead": "8ac3de01c53dc23b47a9549cb8e219d4c93ff968",
+  "sourcePolicy": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "sourceCensus": "docs/data/complete-edition/c4a-standard-quest-census.json",
+  "sourceObligations": "docs/data/complete-edition/c4a-standard-quest-capability-matrix.json",
+  "independentBlockerDetails": "Obligation IDs refer to frozen C4A matrix; no non-Rest obligations reclassified.",
+  "currentQuestDefinitionCount": 76,
+  "restGatedQuestCount": 71,
+  "previousRestSourceGateCount": 142,
+  "restSourceGatesRemoved": 0,
+  "questsWithRestSourceGateRemoved": 0,
+  "newProductionReadyExisting": [],
+  "newAdapterReady": [],
+  "counts": {
+    "PRODUCTION_READY_EXISTING": 3,
+    "ADAPTER_READY": 0,
+    "RUNTIME_PRIMITIVE_BLOCKED": 0,
+    "SOURCE_BLOCKED": 65,
+    "DEFERRED_SEMANTIC": 0,
+    "MULTI_BLOCKED": 8
+  },
+  "affectedQuests": [
+    {
+      "definitionId": "community-quest-boss-face-the-threat",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-boss-face-the-threat:rest:capacity",
+        "community-quest-boss-face-the-threat:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-boss-face-the-threat:rest:capacity",
+        "community-quest-boss-face-the-threat:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-boss-face-the-threat:dungeonComposition",
+        "community-quest-boss-face-the-threat:objective",
+        "community-quest-boss-face-the-threat:persistence",
+        "community-quest-boss-face-the-threat:rule-0:binding",
+        "community-quest-boss-face-the-threat:rule-1:binding",
+        "community-quest-boss-face-the-threat:encounter:eligibility",
+        "community-quest-boss-face-the-threat:boss:scope"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-cove-lvl1-deep-horrors",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-cove-lvl1-deep-horrors:rest:capacity",
+        "community-quest-cove-lvl1-deep-horrors:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-cove-lvl1-deep-horrors:rest:capacity",
+        "community-quest-cove-lvl1-deep-horrors:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-cove-lvl1-deep-horrors:dungeonComposition",
+        "community-quest-cove-lvl1-deep-horrors:objective",
+        "community-quest-cove-lvl1-deep-horrors:persistence",
+        "community-quest-cove-lvl1-deep-horrors:rule-0:binding",
+        "community-quest-cove-lvl1-deep-horrors:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-cove-lvl1-deep-waters",
+      "restingPoints": 8,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-cove-lvl1-deep-waters:rest:capacity",
+        "community-quest-cove-lvl1-deep-waters:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-cove-lvl1-deep-waters:rest:capacity",
+        "community-quest-cove-lvl1-deep-waters:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-cove-lvl1-deep-waters:dungeonComposition",
+        "community-quest-cove-lvl1-deep-waters:persistence",
+        "community-quest-cove-lvl1-deep-waters:rule-0:binding",
+        "community-quest-cove-lvl1-deep-waters:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-cove-lvl1-purify-the-eldritch-signs",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-cove-lvl1-purify-the-eldritch-signs:rest:capacity",
+        "community-quest-cove-lvl1-purify-the-eldritch-signs:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-cove-lvl1-purify-the-eldritch-signs:rest:capacity",
+        "community-quest-cove-lvl1-purify-the-eldritch-signs:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-cove-lvl1-purify-the-eldritch-signs:dungeonComposition",
+        "community-quest-cove-lvl1-purify-the-eldritch-signs:objective",
+        "community-quest-cove-lvl1-purify-the-eldritch-signs:persistence",
+        "community-quest-cove-lvl1-purify-the-eldritch-signs:rule-0:binding",
+        "community-quest-cove-lvl1-purify-the-eldritch-signs:rule-1:binding",
+        "community-quest-cove-lvl1-purify-the-eldritch-signs:rule-2:binding",
+        "community-quest-cove-lvl1-purify-the-eldritch-signs:rule-3:binding",
+        "community-quest-cove-lvl1-purify-the-eldritch-signs:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-cove-lvl1-test-the-waters",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-cove-lvl1-test-the-waters:rest:capacity",
+        "community-quest-cove-lvl1-test-the-waters:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-cove-lvl1-test-the-waters:rest:capacity",
+        "community-quest-cove-lvl1-test-the-waters:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-cove-lvl1-test-the-waters:dungeonComposition",
+        "community-quest-cove-lvl1-test-the-waters:objective",
+        "community-quest-cove-lvl1-test-the-waters:persistence",
+        "community-quest-cove-lvl1-test-the-waters:rule-0:binding",
+        "community-quest-cove-lvl1-test-the-waters:rule-1:binding",
+        "community-quest-cove-lvl1-test-the-waters:rule-2:binding",
+        "community-quest-cove-lvl1-test-the-waters:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-cove-lvl1-unclean-waters",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-cove-lvl1-unclean-waters:rest:capacity",
+        "community-quest-cove-lvl1-unclean-waters:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-cove-lvl1-unclean-waters:rest:capacity",
+        "community-quest-cove-lvl1-unclean-waters:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-cove-lvl1-unclean-waters:dungeonComposition",
+        "community-quest-cove-lvl1-unclean-waters:persistence",
+        "community-quest-cove-lvl1-unclean-waters:rule-0:hook",
+        "community-quest-cove-lvl1-unclean-waters:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-cove-lvl2-deep-horrors-2",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "MULTI_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-cove-lvl2-deep-horrors-2:rest:capacity",
+        "community-quest-cove-lvl2-deep-horrors-2:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-cove-lvl2-deep-horrors-2:rest:capacity",
+        "community-quest-cove-lvl2-deep-horrors-2:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-cove-lvl2-deep-horrors-2:dungeonComposition",
+        "community-quest-cove-lvl2-deep-horrors-2:objective",
+        "community-quest-cove-lvl2-deep-horrors-2:persistence",
+        "community-quest-cove-lvl2-deep-horrors-2:rule-0:binding",
+        "community-quest-cove-lvl2-deep-horrors-2:monster-action:squiffy-ghast:action-2",
+        "community-quest-cove-lvl2-deep-horrors-2:encounter:eligibility"
+      ],
+      "currentReadiness": "MULTI_BLOCKED",
+      "potentialReadinessAfterRestClosure": "MULTI_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-cove-lvl2-deep-waters-2",
+      "restingPoints": 8,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-cove-lvl2-deep-waters-2:rest:capacity",
+        "community-quest-cove-lvl2-deep-waters-2:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-cove-lvl2-deep-waters-2:rest:capacity",
+        "community-quest-cove-lvl2-deep-waters-2:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-cove-lvl2-deep-waters-2:dungeonComposition",
+        "community-quest-cove-lvl2-deep-waters-2:persistence",
+        "community-quest-cove-lvl2-deep-waters-2:rule-0:binding",
+        "community-quest-cove-lvl2-deep-waters-2:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-cove-lvl2-eldritch-purging",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-cove-lvl2-eldritch-purging:rest:capacity",
+        "community-quest-cove-lvl2-eldritch-purging:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-cove-lvl2-eldritch-purging:rest:capacity",
+        "community-quest-cove-lvl2-eldritch-purging:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-cove-lvl2-eldritch-purging:dungeonComposition",
+        "community-quest-cove-lvl2-eldritch-purging:objective",
+        "community-quest-cove-lvl2-eldritch-purging:persistence",
+        "community-quest-cove-lvl2-eldritch-purging:rule-0:binding",
+        "community-quest-cove-lvl2-eldritch-purging:rule-1:binding",
+        "community-quest-cove-lvl2-eldritch-purging:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-cove-lvl2-the-deep-ones",
+      "restingPoints": 8,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-cove-lvl2-the-deep-ones:rest:capacity",
+        "community-quest-cove-lvl2-the-deep-ones:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-cove-lvl2-the-deep-ones:rest:capacity",
+        "community-quest-cove-lvl2-the-deep-ones:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-cove-lvl2-the-deep-ones:dungeonComposition",
+        "community-quest-cove-lvl2-the-deep-ones:objective",
+        "community-quest-cove-lvl2-the-deep-ones:persistence",
+        "community-quest-cove-lvl2-the-deep-ones:rule-0:binding",
+        "community-quest-cove-lvl2-the-deep-ones:rule-1:binding",
+        "community-quest-cove-lvl2-the-deep-ones:rule-2:binding",
+        "community-quest-cove-lvl2-the-deep-ones:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-cove-lvl2-unclean-waters-2",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-cove-lvl2-unclean-waters-2:rest:capacity",
+        "community-quest-cove-lvl2-unclean-waters-2:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-cove-lvl2-unclean-waters-2:rest:capacity",
+        "community-quest-cove-lvl2-unclean-waters-2:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-cove-lvl2-unclean-waters-2:dungeonComposition",
+        "community-quest-cove-lvl2-unclean-waters-2:persistence",
+        "community-quest-cove-lvl2-unclean-waters-2:rule-0:hook",
+        "community-quest-cove-lvl2-unclean-waters-2:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-cove-lvl3-deep-waters-3",
+      "restingPoints": 8,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-cove-lvl3-deep-waters-3:rest:capacity",
+        "community-quest-cove-lvl3-deep-waters-3:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-cove-lvl3-deep-waters-3:rest:capacity",
+        "community-quest-cove-lvl3-deep-waters-3:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-cove-lvl3-deep-waters-3:dungeonComposition",
+        "community-quest-cove-lvl3-deep-waters-3:persistence",
+        "community-quest-cove-lvl3-deep-waters-3:rule-0:binding",
+        "community-quest-cove-lvl3-deep-waters-3:rule-1:binding",
+        "community-quest-cove-lvl3-deep-waters-3:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-cove-lvl3-the-deep-ones-2",
+      "restingPoints": 8,
+      "firewoodCount": 1,
+      "previousReadiness": "MULTI_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-cove-lvl3-the-deep-ones-2:rest:capacity",
+        "community-quest-cove-lvl3-the-deep-ones-2:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-cove-lvl3-the-deep-ones-2:rest:capacity",
+        "community-quest-cove-lvl3-the-deep-ones-2:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-cove-lvl3-the-deep-ones-2:dungeonComposition",
+        "community-quest-cove-lvl3-the-deep-ones-2:objective",
+        "community-quest-cove-lvl3-the-deep-ones-2:persistence",
+        "community-quest-cove-lvl3-the-deep-ones-2:rule-0:binding",
+        "community-quest-cove-lvl3-the-deep-ones-2:rule-1:binding",
+        "community-quest-cove-lvl3-the-deep-ones-2:rule-2:binding",
+        "community-quest-cove-lvl3-the-deep-ones-2:rule-3:binding",
+        "community-quest-cove-lvl3-the-deep-ones-2:monster-action:squiffy-ghast:action-2",
+        "community-quest-cove-lvl3-the-deep-ones-2:encounter:eligibility"
+      ],
+      "currentReadiness": "MULTI_BLOCKED",
+      "potentialReadinessAfterRestClosure": "MULTI_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-cove-lvl3-the-shipwrecks",
+      "restingPoints": 4,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-cove-lvl3-the-shipwrecks:rest:capacity",
+        "community-quest-cove-lvl3-the-shipwrecks:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-cove-lvl3-the-shipwrecks:rest:capacity",
+        "community-quest-cove-lvl3-the-shipwrecks:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-cove-lvl3-the-shipwrecks:dungeonComposition",
+        "community-quest-cove-lvl3-the-shipwrecks:objective",
+        "community-quest-cove-lvl3-the-shipwrecks:persistence",
+        "community-quest-cove-lvl3-the-shipwrecks:rule-0:binding",
+        "community-quest-cove-lvl3-the-shipwrecks:rule-1:binding",
+        "community-quest-cove-lvl3-the-shipwrecks:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-cove-lvl3-unclean-waters-3",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-cove-lvl3-unclean-waters-3:rest:capacity",
+        "community-quest-cove-lvl3-unclean-waters-3:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-cove-lvl3-unclean-waters-3:rest:capacity",
+        "community-quest-cove-lvl3-unclean-waters-3:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-cove-lvl3-unclean-waters-3:dungeonComposition",
+        "community-quest-cove-lvl3-unclean-waters-3:persistence",
+        "community-quest-cove-lvl3-unclean-waters-3:rule-0:hook",
+        "community-quest-cove-lvl3-unclean-waters-3:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl1-deep-in-the-swamp",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-crimson-court-lvl1-deep-in-the-swamp:rest:capacity",
+        "community-quest-crimson-court-lvl1-deep-in-the-swamp:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-crimson-court-lvl1-deep-in-the-swamp:rest:capacity",
+        "community-quest-crimson-court-lvl1-deep-in-the-swamp:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-crimson-court-lvl1-deep-in-the-swamp:persistence"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "ADAPTER_READY",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl1-lost-and-found",
+      "restingPoints": 8,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-crimson-court-lvl1-lost-and-found:rest:capacity",
+        "community-quest-crimson-court-lvl1-lost-and-found:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-crimson-court-lvl1-lost-and-found:rest:capacity",
+        "community-quest-crimson-court-lvl1-lost-and-found:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-crimson-court-lvl1-lost-and-found:dungeonComposition",
+        "community-quest-crimson-court-lvl1-lost-and-found:objective",
+        "community-quest-crimson-court-lvl1-lost-and-found:persistence",
+        "community-quest-crimson-court-lvl1-lost-and-found:rule-0:binding",
+        "community-quest-crimson-court-lvl1-lost-and-found:rule-1:binding",
+        "community-quest-crimson-court-lvl1-lost-and-found:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl1-rest-in-rubble",
+      "restingPoints": 8,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-crimson-court-lvl1-rest-in-rubble:rest:capacity",
+        "community-quest-crimson-court-lvl1-rest-in-rubble:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-crimson-court-lvl1-rest-in-rubble:rest:capacity",
+        "community-quest-crimson-court-lvl1-rest-in-rubble:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-crimson-court-lvl1-rest-in-rubble:dungeonComposition",
+        "community-quest-crimson-court-lvl1-rest-in-rubble:objective",
+        "community-quest-crimson-court-lvl1-rest-in-rubble:persistence",
+        "community-quest-crimson-court-lvl1-rest-in-rubble:rule-0:binding",
+        "community-quest-crimson-court-lvl1-rest-in-rubble:rule-1:binding",
+        "community-quest-crimson-court-lvl1-rest-in-rubble:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl1-rivers-run-red",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-crimson-court-lvl1-rivers-run-red:rest:capacity",
+        "community-quest-crimson-court-lvl1-rivers-run-red:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-crimson-court-lvl1-rivers-run-red:rest:capacity",
+        "community-quest-crimson-court-lvl1-rivers-run-red:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-crimson-court-lvl1-rivers-run-red:dungeonComposition",
+        "community-quest-crimson-court-lvl1-rivers-run-red:objective",
+        "community-quest-crimson-court-lvl1-rivers-run-red:persistence",
+        "community-quest-crimson-court-lvl1-rivers-run-red:rule-0:binding",
+        "community-quest-crimson-court-lvl1-rivers-run-red:rule-1:binding",
+        "community-quest-crimson-court-lvl1-rivers-run-red:rule-2:binding",
+        "community-quest-crimson-court-lvl1-rivers-run-red:rule-3:binding",
+        "community-quest-crimson-court-lvl1-rivers-run-red:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl1-they-are-swarm",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-crimson-court-lvl1-they-are-swarm:rest:capacity",
+        "community-quest-crimson-court-lvl1-they-are-swarm:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-crimson-court-lvl1-they-are-swarm:rest:capacity",
+        "community-quest-crimson-court-lvl1-they-are-swarm:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-crimson-court-lvl1-they-are-swarm:dungeonComposition",
+        "community-quest-crimson-court-lvl1-they-are-swarm:persistence",
+        "community-quest-crimson-court-lvl1-they-are-swarm:rule-0:binding",
+        "community-quest-crimson-court-lvl1-they-are-swarm:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl2-deeper-into-the-swamp",
+      "restingPoints": 8,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-crimson-court-lvl2-deeper-into-the-swamp:rest:capacity",
+        "community-quest-crimson-court-lvl2-deeper-into-the-swamp:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-crimson-court-lvl2-deeper-into-the-swamp:rest:capacity",
+        "community-quest-crimson-court-lvl2-deeper-into-the-swamp:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-crimson-court-lvl2-deeper-into-the-swamp:persistence"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "ADAPTER_READY",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl2-lurkers",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-crimson-court-lvl2-lurkers:rest:capacity",
+        "community-quest-crimson-court-lvl2-lurkers:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-crimson-court-lvl2-lurkers:rest:capacity",
+        "community-quest-crimson-court-lvl2-lurkers:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-crimson-court-lvl2-lurkers:dungeonComposition",
+        "community-quest-crimson-court-lvl2-lurkers:persistence",
+        "community-quest-crimson-court-lvl2-lurkers:rule-0:binding",
+        "community-quest-crimson-court-lvl2-lurkers:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl2-pest-control",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-crimson-court-lvl2-pest-control:rest:capacity",
+        "community-quest-crimson-court-lvl2-pest-control:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-crimson-court-lvl2-pest-control:rest:capacity",
+        "community-quest-crimson-court-lvl2-pest-control:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-crimson-court-lvl2-pest-control:persistence"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "ADAPTER_READY",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl2-ruin-the-party",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-crimson-court-lvl2-ruin-the-party:rest:capacity",
+        "community-quest-crimson-court-lvl2-ruin-the-party:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-crimson-court-lvl2-ruin-the-party:rest:capacity",
+        "community-quest-crimson-court-lvl2-ruin-the-party:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-crimson-court-lvl2-ruin-the-party:dungeonComposition",
+        "community-quest-crimson-court-lvl2-ruin-the-party:objective",
+        "community-quest-crimson-court-lvl2-ruin-the-party:persistence",
+        "community-quest-crimson-court-lvl2-ruin-the-party:rule-0:binding",
+        "community-quest-crimson-court-lvl2-ruin-the-party:rule-1:binding",
+        "community-quest-crimson-court-lvl2-ruin-the-party:rule-2:binding",
+        "community-quest-crimson-court-lvl2-ruin-the-party:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl2-take-em-back",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-crimson-court-lvl2-take-em-back:rest:capacity",
+        "community-quest-crimson-court-lvl2-take-em-back:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-crimson-court-lvl2-take-em-back:rest:capacity",
+        "community-quest-crimson-court-lvl2-take-em-back:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-crimson-court-lvl2-take-em-back:dungeonComposition",
+        "community-quest-crimson-court-lvl2-take-em-back:objective",
+        "community-quest-crimson-court-lvl2-take-em-back:persistence",
+        "community-quest-crimson-court-lvl2-take-em-back:rule-0:binding",
+        "community-quest-crimson-court-lvl2-take-em-back:rule-1:binding",
+        "community-quest-crimson-court-lvl2-take-em-back:rule-2:binding",
+        "community-quest-crimson-court-lvl2-take-em-back:rule-3:binding",
+        "community-quest-crimson-court-lvl2-take-em-back:rule-4:binding",
+        "community-quest-crimson-court-lvl2-take-em-back:rule-5:binding",
+        "community-quest-crimson-court-lvl2-take-em-back:trinket-2:effects",
+        "community-quest-crimson-court-lvl2-take-em-back:trinket-2:quest-route",
+        "community-quest-crimson-court-lvl2-take-em-back:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl3-breeders",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-crimson-court-lvl3-breeders:rest:capacity",
+        "community-quest-crimson-court-lvl3-breeders:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-crimson-court-lvl3-breeders:rest:capacity",
+        "community-quest-crimson-court-lvl3-breeders:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-crimson-court-lvl3-breeders:dungeonComposition",
+        "community-quest-crimson-court-lvl3-breeders:objective",
+        "community-quest-crimson-court-lvl3-breeders:persistence",
+        "community-quest-crimson-court-lvl3-breeders:rule-0:binding",
+        "community-quest-crimson-court-lvl3-breeders:rule-1:binding",
+        "community-quest-crimson-court-lvl3-breeders:rule-2:binding",
+        "community-quest-crimson-court-lvl3-breeders:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl3-cut-the-buzz",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-crimson-court-lvl3-cut-the-buzz:rest:capacity",
+        "community-quest-crimson-court-lvl3-cut-the-buzz:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-crimson-court-lvl3-cut-the-buzz:rest:capacity",
+        "community-quest-crimson-court-lvl3-cut-the-buzz:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-crimson-court-lvl3-cut-the-buzz:dungeonComposition",
+        "community-quest-crimson-court-lvl3-cut-the-buzz:persistence",
+        "community-quest-crimson-court-lvl3-cut-the-buzz:rule-0:hook",
+        "community-quest-crimson-court-lvl3-cut-the-buzz:rule-1:binding",
+        "community-quest-crimson-court-lvl3-cut-the-buzz:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl3-rest-in-rubble-iii",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-crimson-court-lvl3-rest-in-rubble-iii:rest:capacity",
+        "community-quest-crimson-court-lvl3-rest-in-rubble-iii:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-crimson-court-lvl3-rest-in-rubble-iii:rest:capacity",
+        "community-quest-crimson-court-lvl3-rest-in-rubble-iii:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-crimson-court-lvl3-rest-in-rubble-iii:dungeonComposition",
+        "community-quest-crimson-court-lvl3-rest-in-rubble-iii:objective",
+        "community-quest-crimson-court-lvl3-rest-in-rubble-iii:persistence",
+        "community-quest-crimson-court-lvl3-rest-in-rubble-iii:literal-source",
+        "community-quest-crimson-court-lvl3-rest-in-rubble-iii:rule-0:binding",
+        "community-quest-crimson-court-lvl3-rest-in-rubble-iii:rule-1:unresolved",
+        "community-quest-crimson-court-lvl3-rest-in-rubble-iii:rule-2:binding",
+        "community-quest-crimson-court-lvl3-rest-in-rubble-iii:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl3-the-endless-marsh",
+      "restingPoints": 8,
+      "firewoodCount": 1,
+      "previousReadiness": "MULTI_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-crimson-court-lvl3-the-endless-marsh:rest:capacity",
+        "community-quest-crimson-court-lvl3-the-endless-marsh:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-crimson-court-lvl3-the-endless-marsh:rest:capacity",
+        "community-quest-crimson-court-lvl3-the-endless-marsh:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-crimson-court-lvl3-the-endless-marsh:dungeonComposition",
+        "community-quest-crimson-court-lvl3-the-endless-marsh:persistence",
+        "community-quest-crimson-court-lvl3-the-endless-marsh:rule-0:binding",
+        "community-quest-crimson-court-lvl3-the-endless-marsh:rule-1:effect",
+        "community-quest-crimson-court-lvl3-the-endless-marsh:encounter:eligibility"
+      ],
+      "currentReadiness": "MULTI_BLOCKED",
+      "potentialReadinessAfterRestClosure": "MULTI_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl3-uninvited",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "MULTI_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-crimson-court-lvl3-uninvited:rest:capacity",
+        "community-quest-crimson-court-lvl3-uninvited:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-crimson-court-lvl3-uninvited:rest:capacity",
+        "community-quest-crimson-court-lvl3-uninvited:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-crimson-court-lvl3-uninvited:dungeonComposition",
+        "community-quest-crimson-court-lvl3-uninvited:objective",
+        "community-quest-crimson-court-lvl3-uninvited:persistence",
+        "community-quest-crimson-court-lvl3-uninvited:rule-0:binding",
+        "community-quest-crimson-court-lvl3-uninvited:rule-1:binding",
+        "community-quest-crimson-court-lvl3-uninvited:monster-action:courtesan:action-3",
+        "community-quest-crimson-court-lvl3-uninvited:encounter:eligibility"
+      ],
+      "currentReadiness": "MULTI_BLOCKED",
+      "potentialReadinessAfterRestClosure": "MULTI_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-dem-bones",
+      "restingPoints": 8,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-ruins-lvl1-dem-bones:rest:capacity",
+        "community-quest-ruins-lvl1-dem-bones:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-ruins-lvl1-dem-bones:rest:capacity",
+        "community-quest-ruins-lvl1-dem-bones:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-ruins-lvl1-dem-bones:dungeonComposition",
+        "community-quest-ruins-lvl1-dem-bones:objective",
+        "community-quest-ruins-lvl1-dem-bones:persistence",
+        "community-quest-ruins-lvl1-dem-bones:rule-0:binding",
+        "community-quest-ruins-lvl1-dem-bones:rule-1:binding",
+        "community-quest-ruins-lvl1-dem-bones:rule-2:binding"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "ADAPTER_READY",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-fundraiser",
+      "restingPoints": 8,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-ruins-lvl1-fundraiser:rest:capacity",
+        "community-quest-ruins-lvl1-fundraiser:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-ruins-lvl1-fundraiser:rest:capacity",
+        "community-quest-ruins-lvl1-fundraiser:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-ruins-lvl1-fundraiser:dungeonComposition",
+        "community-quest-ruins-lvl1-fundraiser:objective",
+        "community-quest-ruins-lvl1-fundraiser:persistence",
+        "community-quest-ruins-lvl1-fundraiser:rule-0:binding",
+        "community-quest-ruins-lvl1-fundraiser:rule-1:binding",
+        "community-quest-ruins-lvl1-fundraiser:rule-2:binding"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "ADAPTER_READY",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-rising-threat",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-ruins-lvl1-rising-threat:rest:capacity",
+        "community-quest-ruins-lvl1-rising-threat:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-ruins-lvl1-rising-threat:rest:capacity",
+        "community-quest-ruins-lvl1-rising-threat:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-ruins-lvl1-rising-threat:dungeonComposition",
+        "community-quest-ruins-lvl1-rising-threat:objective",
+        "community-quest-ruins-lvl1-rising-threat:persistence",
+        "community-quest-ruins-lvl1-rising-threat:rule-0:binding",
+        "community-quest-ruins-lvl1-rising-threat:rule-1:binding"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "ADAPTER_READY",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-scout-ahead",
+      "restingPoints": 8,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-ruins-lvl1-scout-ahead:rest:capacity",
+        "community-quest-ruins-lvl1-scout-ahead:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-ruins-lvl1-scout-ahead:rest:capacity",
+        "community-quest-ruins-lvl1-scout-ahead:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-ruins-lvl1-scout-ahead:persistence"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "ADAPTER_READY",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-wipe-em-out",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-ruins-lvl1-wipe-em-out:rest:capacity",
+        "community-quest-ruins-lvl1-wipe-em-out:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-ruins-lvl1-wipe-em-out:rest:capacity",
+        "community-quest-ruins-lvl1-wipe-em-out:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-ruins-lvl1-wipe-em-out:persistence"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "ADAPTER_READY",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-break-them",
+      "restingPoints": 8,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-ruins-lvl2-break-them:rest:capacity",
+        "community-quest-ruins-lvl2-break-them:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-ruins-lvl2-break-them:rest:capacity",
+        "community-quest-ruins-lvl2-break-them:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-ruins-lvl2-break-them:dungeonComposition",
+        "community-quest-ruins-lvl2-break-them:objective",
+        "community-quest-ruins-lvl2-break-them:persistence",
+        "community-quest-ruins-lvl2-break-them:rule-0:binding"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "ADAPTER_READY",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-clear-the-path",
+      "restingPoints": 8,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-ruins-lvl2-clear-the-path:rest:capacity",
+        "community-quest-ruins-lvl2-clear-the-path:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-ruins-lvl2-clear-the-path:rest:capacity",
+        "community-quest-ruins-lvl2-clear-the-path:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-ruins-lvl2-clear-the-path:persistence"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "ADAPTER_READY",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-disruption",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-ruins-lvl2-disruption:rest:capacity",
+        "community-quest-ruins-lvl2-disruption:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-ruins-lvl2-disruption:rest:capacity",
+        "community-quest-ruins-lvl2-disruption:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-ruins-lvl2-disruption:dungeonComposition",
+        "community-quest-ruins-lvl2-disruption:objective",
+        "community-quest-ruins-lvl2-disruption:persistence",
+        "community-quest-ruins-lvl2-disruption:rule-0:binding",
+        "community-quest-ruins-lvl2-disruption:rule-1:binding"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "ADAPTER_READY",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-purify-the-fountains",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-ruins-lvl2-purify-the-fountains:rest:capacity",
+        "community-quest-ruins-lvl2-purify-the-fountains:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-ruins-lvl2-purify-the-fountains:rest:capacity",
+        "community-quest-ruins-lvl2-purify-the-fountains:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-ruins-lvl2-purify-the-fountains:dungeonComposition",
+        "community-quest-ruins-lvl2-purify-the-fountains:objective",
+        "community-quest-ruins-lvl2-purify-the-fountains:persistence",
+        "community-quest-ruins-lvl2-purify-the-fountains:rule-0:binding",
+        "community-quest-ruins-lvl2-purify-the-fountains:rule-1:binding",
+        "community-quest-ruins-lvl2-purify-the-fountains:rule-2:binding",
+        "community-quest-ruins-lvl2-purify-the-fountains:rule-3:binding",
+        "community-quest-ruins-lvl2-purify-the-fountains:rule-4:binding"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "ADAPTER_READY",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-reduce-to-rubble",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-ruins-lvl2-reduce-to-rubble:rest:capacity",
+        "community-quest-ruins-lvl2-reduce-to-rubble:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-ruins-lvl2-reduce-to-rubble:rest:capacity",
+        "community-quest-ruins-lvl2-reduce-to-rubble:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-ruins-lvl2-reduce-to-rubble:persistence"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "ADAPTER_READY",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl3-creeping-darkness",
+      "restingPoints": 8,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-ruins-lvl3-creeping-darkness:rest:capacity",
+        "community-quest-ruins-lvl3-creeping-darkness:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-ruins-lvl3-creeping-darkness:rest:capacity",
+        "community-quest-ruins-lvl3-creeping-darkness:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-ruins-lvl3-creeping-darkness:dungeonComposition",
+        "community-quest-ruins-lvl3-creeping-darkness:persistence",
+        "community-quest-ruins-lvl3-creeping-darkness:rule-0:hook"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "ADAPTER_READY",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl3-forward-camps",
+      "restingPoints": 8,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-ruins-lvl3-forward-camps:rest:capacity",
+        "community-quest-ruins-lvl3-forward-camps:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-ruins-lvl3-forward-camps:rest:capacity",
+        "community-quest-ruins-lvl3-forward-camps:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-ruins-lvl3-forward-camps:dungeonComposition",
+        "community-quest-ruins-lvl3-forward-camps:objective",
+        "community-quest-ruins-lvl3-forward-camps:persistence",
+        "community-quest-ruins-lvl3-forward-camps:rule-0:binding",
+        "community-quest-ruins-lvl3-forward-camps:rule-1:binding"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "ADAPTER_READY",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl3-the-threat-is-real",
+      "restingPoints": 8,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-ruins-lvl3-the-threat-is-real:rest:capacity",
+        "community-quest-ruins-lvl3-the-threat-is-real:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-ruins-lvl3-the-threat-is-real:rest:capacity",
+        "community-quest-ruins-lvl3-the-threat-is-real:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-ruins-lvl3-the-threat-is-real:dungeonComposition",
+        "community-quest-ruins-lvl3-the-threat-is-real:persistence",
+        "community-quest-ruins-lvl3-the-threat-is-real:rule-0:binding"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "ADAPTER_READY",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl3-they-are-back",
+      "restingPoints": 8,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-ruins-lvl3-they-are-back:rest:capacity",
+        "community-quest-ruins-lvl3-they-are-back:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-ruins-lvl3-they-are-back:rest:capacity",
+        "community-quest-ruins-lvl3-they-are-back:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-ruins-lvl3-they-are-back:dungeonComposition",
+        "community-quest-ruins-lvl3-they-are-back:objective",
+        "community-quest-ruins-lvl3-they-are-back:persistence",
+        "community-quest-ruins-lvl3-they-are-back:rule-0:binding",
+        "community-quest-ruins-lvl3-they-are-back:rule-1:binding"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "ADAPTER_READY",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl3-warm-up-the-halls",
+      "restingPoints": 4,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-ruins-lvl3-warm-up-the-halls:rest:capacity",
+        "community-quest-ruins-lvl3-warm-up-the-halls:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-ruins-lvl3-warm-up-the-halls:rest:capacity",
+        "community-quest-ruins-lvl3-warm-up-the-halls:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-ruins-lvl3-warm-up-the-halls:dungeonComposition",
+        "community-quest-ruins-lvl3-warm-up-the-halls:objective",
+        "community-quest-ruins-lvl3-warm-up-the-halls:persistence",
+        "community-quest-ruins-lvl3-warm-up-the-halls:rule-0:binding",
+        "community-quest-ruins-lvl3-warm-up-the-halls:rule-1:binding",
+        "community-quest-ruins-lvl3-warm-up-the-halls:rule-2:binding",
+        "community-quest-ruins-lvl3-warm-up-the-halls:rule-3:binding"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "ADAPTER_READY",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-disarm-them",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-warrens-lvl1-disarm-them:rest:capacity",
+        "community-quest-warrens-lvl1-disarm-them:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-warrens-lvl1-disarm-them:rest:capacity",
+        "community-quest-warrens-lvl1-disarm-them:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-warrens-lvl1-disarm-them:dungeonComposition",
+        "community-quest-warrens-lvl1-disarm-them:objective",
+        "community-quest-warrens-lvl1-disarm-them:persistence",
+        "community-quest-warrens-lvl1-disarm-them:rule-0:binding",
+        "community-quest-warrens-lvl1-disarm-them:rule-1:binding",
+        "community-quest-warrens-lvl1-disarm-them:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-pork-chop",
+      "restingPoints": 8,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-warrens-lvl1-pork-chop:rest:capacity",
+        "community-quest-warrens-lvl1-pork-chop:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-warrens-lvl1-pork-chop:rest:capacity",
+        "community-quest-warrens-lvl1-pork-chop:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-warrens-lvl1-pork-chop:persistence"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "ADAPTER_READY",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-worm-squash",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-warrens-lvl1-worm-squash:rest:capacity",
+        "community-quest-warrens-lvl1-worm-squash:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-warrens-lvl1-worm-squash:rest:capacity",
+        "community-quest-warrens-lvl1-worm-squash:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-warrens-lvl1-worm-squash:dungeonComposition",
+        "community-quest-warrens-lvl1-worm-squash:objective",
+        "community-quest-warrens-lvl1-worm-squash:persistence",
+        "community-quest-warrens-lvl1-worm-squash:rule-0:binding",
+        "community-quest-warrens-lvl1-worm-squash:rule-1:binding",
+        "community-quest-warrens-lvl1-worm-squash:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-a-new-breed",
+      "restingPoints": 8,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-warrens-lvl2-a-new-breed:rest:capacity",
+        "community-quest-warrens-lvl2-a-new-breed:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-warrens-lvl2-a-new-breed:rest:capacity",
+        "community-quest-warrens-lvl2-a-new-breed:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-warrens-lvl2-a-new-breed:dungeonComposition",
+        "community-quest-warrens-lvl2-a-new-breed:persistence",
+        "community-quest-warrens-lvl2-a-new-breed:rule-0:binding",
+        "community-quest-warrens-lvl2-a-new-breed:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-bait-them-out",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-warrens-lvl2-bait-them-out:rest:capacity",
+        "community-quest-warrens-lvl2-bait-them-out:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-warrens-lvl2-bait-them-out:rest:capacity",
+        "community-quest-warrens-lvl2-bait-them-out:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-warrens-lvl2-bait-them-out:dungeonComposition",
+        "community-quest-warrens-lvl2-bait-them-out:objective",
+        "community-quest-warrens-lvl2-bait-them-out:persistence",
+        "community-quest-warrens-lvl2-bait-them-out:rule-0:binding",
+        "community-quest-warrens-lvl2-bait-them-out:rule-1:binding",
+        "community-quest-warrens-lvl2-bait-them-out:rule-2:binding",
+        "community-quest-warrens-lvl2-bait-them-out:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-carrion-infestation",
+      "restingPoints": 4,
+      "firewoodCount": 1,
+      "previousReadiness": "MULTI_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-warrens-lvl2-carrion-infestation:rest:capacity",
+        "community-quest-warrens-lvl2-carrion-infestation:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-warrens-lvl2-carrion-infestation:rest:capacity",
+        "community-quest-warrens-lvl2-carrion-infestation:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-warrens-lvl2-carrion-infestation:dungeonComposition",
+        "community-quest-warrens-lvl2-carrion-infestation:objective",
+        "community-quest-warrens-lvl2-carrion-infestation:persistence",
+        "community-quest-warrens-lvl2-carrion-infestation:rule-0:binding",
+        "community-quest-warrens-lvl2-carrion-infestation:rule-1:binding",
+        "community-quest-warrens-lvl2-carrion-infestation:rule-1:effect",
+        "community-quest-warrens-lvl2-carrion-infestation:rule-2:binding",
+        "community-quest-warrens-lvl2-carrion-infestation:rule-3:binding",
+        "community-quest-warrens-lvl2-carrion-infestation:encounter:eligibility"
+      ],
+      "currentReadiness": "MULTI_BLOCKED",
+      "potentialReadinessAfterRestClosure": "MULTI_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl2-ringleaders",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-warrens-lvl2-ringleaders:rest:capacity",
+        "community-quest-warrens-lvl2-ringleaders:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-warrens-lvl2-ringleaders:rest:capacity",
+        "community-quest-warrens-lvl2-ringleaders:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-warrens-lvl2-ringleaders:dungeonComposition",
+        "community-quest-warrens-lvl2-ringleaders:objective",
+        "community-quest-warrens-lvl2-ringleaders:persistence",
+        "community-quest-warrens-lvl2-ringleaders:rule-0:binding",
+        "community-quest-warrens-lvl2-ringleaders:rule-1:binding",
+        "community-quest-warrens-lvl2-ringleaders:rule-2:binding",
+        "community-quest-warrens-lvl2-ringleaders:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl3-alpha-swine",
+      "restingPoints": 8,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-warrens-lvl3-alpha-swine:rest:capacity",
+        "community-quest-warrens-lvl3-alpha-swine:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-warrens-lvl3-alpha-swine:rest:capacity",
+        "community-quest-warrens-lvl3-alpha-swine:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-warrens-lvl3-alpha-swine:dungeonComposition",
+        "community-quest-warrens-lvl3-alpha-swine:persistence",
+        "community-quest-warrens-lvl3-alpha-swine:rule-0:binding",
+        "community-quest-warrens-lvl3-alpha-swine:rule-1:binding",
+        "community-quest-warrens-lvl3-alpha-swine:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl3-drums-of-doom",
+      "restingPoints": 8,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-warrens-lvl3-drums-of-doom:rest:capacity",
+        "community-quest-warrens-lvl3-drums-of-doom:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-warrens-lvl3-drums-of-doom:rest:capacity",
+        "community-quest-warrens-lvl3-drums-of-doom:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-warrens-lvl3-drums-of-doom:dungeonComposition",
+        "community-quest-warrens-lvl3-drums-of-doom:persistence",
+        "community-quest-warrens-lvl3-drums-of-doom:rule-0:binding",
+        "community-quest-warrens-lvl3-drums-of-doom:rule-1:binding",
+        "community-quest-warrens-lvl3-drums-of-doom:rule-2:binding",
+        "community-quest-warrens-lvl3-drums-of-doom:rule-3:binding",
+        "community-quest-warrens-lvl3-drums-of-doom:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl3-foul-arsenal",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-warrens-lvl3-foul-arsenal:rest:capacity",
+        "community-quest-warrens-lvl3-foul-arsenal:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-warrens-lvl3-foul-arsenal:rest:capacity",
+        "community-quest-warrens-lvl3-foul-arsenal:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-warrens-lvl3-foul-arsenal:dungeonComposition",
+        "community-quest-warrens-lvl3-foul-arsenal:objective",
+        "community-quest-warrens-lvl3-foul-arsenal:persistence",
+        "community-quest-warrens-lvl3-foul-arsenal:rule-0:binding",
+        "community-quest-warrens-lvl3-foul-arsenal:rule-1:hook",
+        "community-quest-warrens-lvl3-foul-arsenal:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl3-infighting",
+      "restingPoints": 8,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-warrens-lvl3-infighting:rest:capacity",
+        "community-quest-warrens-lvl3-infighting:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-warrens-lvl3-infighting:rest:capacity",
+        "community-quest-warrens-lvl3-infighting:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-warrens-lvl3-infighting:dungeonComposition",
+        "community-quest-warrens-lvl3-infighting:persistence",
+        "community-quest-warrens-lvl3-infighting:rule-0:binding",
+        "community-quest-warrens-lvl3-infighting:rule-1:binding",
+        "community-quest-warrens-lvl3-infighting:rule-2:binding",
+        "community-quest-warrens-lvl3-infighting:rule-3:binding",
+        "community-quest-warrens-lvl3-infighting:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-weald-lvl1-circle-of-witches",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-weald-lvl1-circle-of-witches:rest:capacity",
+        "community-quest-weald-lvl1-circle-of-witches:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-weald-lvl1-circle-of-witches:rest:capacity",
+        "community-quest-weald-lvl1-circle-of-witches:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-weald-lvl1-circle-of-witches:dungeonComposition",
+        "community-quest-weald-lvl1-circle-of-witches:objective",
+        "community-quest-weald-lvl1-circle-of-witches:persistence",
+        "community-quest-weald-lvl1-circle-of-witches:rule-0:binding",
+        "community-quest-weald-lvl1-circle-of-witches:rule-1:binding",
+        "community-quest-weald-lvl1-circle-of-witches:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-weald-lvl1-disinfection",
+      "restingPoints": 8,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-weald-lvl1-disinfection:rest:capacity",
+        "community-quest-weald-lvl1-disinfection:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-weald-lvl1-disinfection:rest:capacity",
+        "community-quest-weald-lvl1-disinfection:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-weald-lvl1-disinfection:dungeonComposition",
+        "community-quest-weald-lvl1-disinfection:objective",
+        "community-quest-weald-lvl1-disinfection:persistence",
+        "community-quest-weald-lvl1-disinfection:rule-0:binding",
+        "community-quest-weald-lvl1-disinfection:rule-1:binding",
+        "community-quest-weald-lvl1-disinfection:rule-2:binding",
+        "community-quest-weald-lvl1-disinfection:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-weald-lvl1-fungal-research",
+      "restingPoints": 8,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-weald-lvl1-fungal-research:rest:capacity",
+        "community-quest-weald-lvl1-fungal-research:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-weald-lvl1-fungal-research:rest:capacity",
+        "community-quest-weald-lvl1-fungal-research:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-weald-lvl1-fungal-research:dungeonComposition",
+        "community-quest-weald-lvl1-fungal-research:objective",
+        "community-quest-weald-lvl1-fungal-research:persistence",
+        "community-quest-weald-lvl1-fungal-research:rule-0:binding",
+        "community-quest-weald-lvl1-fungal-research:rule-1:binding",
+        "community-quest-weald-lvl1-fungal-research:rule-2:source",
+        "community-quest-weald-lvl1-fungal-research:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-weald-lvl1-patrol-the-woods",
+      "restingPoints": 8,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-weald-lvl1-patrol-the-woods:rest:capacity",
+        "community-quest-weald-lvl1-patrol-the-woods:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-weald-lvl1-patrol-the-woods:rest:capacity",
+        "community-quest-weald-lvl1-patrol-the-woods:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-weald-lvl1-patrol-the-woods:dungeonComposition",
+        "community-quest-weald-lvl1-patrol-the-woods:persistence",
+        "community-quest-weald-lvl1-patrol-the-woods:rule-0:binding",
+        "community-quest-weald-lvl1-patrol-the-woods:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-weald-lvl1-purge-the-woods",
+      "restingPoints": 4,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-weald-lvl1-purge-the-woods:rest:capacity",
+        "community-quest-weald-lvl1-purge-the-woods:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-weald-lvl1-purge-the-woods:rest:capacity",
+        "community-quest-weald-lvl1-purge-the-woods:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-weald-lvl1-purge-the-woods:dungeonComposition",
+        "community-quest-weald-lvl1-purge-the-woods:persistence",
+        "community-quest-weald-lvl1-purge-the-woods:rule-0:binding",
+        "community-quest-weald-lvl1-purge-the-woods:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-weald-lvl2-hounds-of-the-woods",
+      "restingPoints": 8,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-weald-lvl2-hounds-of-the-woods:rest:capacity",
+        "community-quest-weald-lvl2-hounds-of-the-woods:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-weald-lvl2-hounds-of-the-woods:rest:capacity",
+        "community-quest-weald-lvl2-hounds-of-the-woods:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-weald-lvl2-hounds-of-the-woods:dungeonComposition",
+        "community-quest-weald-lvl2-hounds-of-the-woods:objective",
+        "community-quest-weald-lvl2-hounds-of-the-woods:persistence",
+        "community-quest-weald-lvl2-hounds-of-the-woods:rule-0:binding",
+        "community-quest-weald-lvl2-hounds-of-the-woods:rule-1:binding",
+        "community-quest-weald-lvl2-hounds-of-the-woods:rule-2:binding",
+        "community-quest-weald-lvl2-hounds-of-the-woods:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-weald-lvl2-lost-supplies",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-weald-lvl2-lost-supplies:rest:capacity",
+        "community-quest-weald-lvl2-lost-supplies:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-weald-lvl2-lost-supplies:rest:capacity",
+        "community-quest-weald-lvl2-lost-supplies:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-weald-lvl2-lost-supplies:dungeonComposition",
+        "community-quest-weald-lvl2-lost-supplies:objective",
+        "community-quest-weald-lvl2-lost-supplies:persistence",
+        "community-quest-weald-lvl2-lost-supplies:rule-0:binding",
+        "community-quest-weald-lvl2-lost-supplies:rule-1:binding",
+        "community-quest-weald-lvl2-lost-supplies:rule-2:binding",
+        "community-quest-weald-lvl2-lost-supplies:rule-3:binding",
+        "community-quest-weald-lvl2-lost-supplies:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-weald-lvl2-lost-treasures",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-weald-lvl2-lost-treasures:rest:capacity",
+        "community-quest-weald-lvl2-lost-treasures:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-weald-lvl2-lost-treasures:rest:capacity",
+        "community-quest-weald-lvl2-lost-treasures:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-weald-lvl2-lost-treasures:dungeonComposition",
+        "community-quest-weald-lvl2-lost-treasures:objective",
+        "community-quest-weald-lvl2-lost-treasures:persistence",
+        "community-quest-weald-lvl2-lost-treasures:rule-0:binding",
+        "community-quest-weald-lvl2-lost-treasures:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-weald-lvl2-searching-in-the-dark",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-weald-lvl2-searching-in-the-dark:rest:capacity",
+        "community-quest-weald-lvl2-searching-in-the-dark:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-weald-lvl2-searching-in-the-dark:rest:capacity",
+        "community-quest-weald-lvl2-searching-in-the-dark:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-weald-lvl2-searching-in-the-dark:dungeonComposition",
+        "community-quest-weald-lvl2-searching-in-the-dark:persistence",
+        "community-quest-weald-lvl2-searching-in-the-dark:rule-0:binding",
+        "community-quest-weald-lvl2-searching-in-the-dark:rule-1:binding",
+        "community-quest-weald-lvl2-searching-in-the-dark:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-weald-lvl2-spreaders-of-miasma",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-weald-lvl2-spreaders-of-miasma:rest:capacity",
+        "community-quest-weald-lvl2-spreaders-of-miasma:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-weald-lvl2-spreaders-of-miasma:rest:capacity",
+        "community-quest-weald-lvl2-spreaders-of-miasma:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-weald-lvl2-spreaders-of-miasma:dungeonComposition",
+        "community-quest-weald-lvl2-spreaders-of-miasma:objective",
+        "community-quest-weald-lvl2-spreaders-of-miasma:persistence",
+        "community-quest-weald-lvl2-spreaders-of-miasma:rule-0:binding",
+        "community-quest-weald-lvl2-spreaders-of-miasma:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-weald-lvl3-final-swipe",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-weald-lvl3-final-swipe:rest:capacity",
+        "community-quest-weald-lvl3-final-swipe:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-weald-lvl3-final-swipe:rest:capacity",
+        "community-quest-weald-lvl3-final-swipe:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-weald-lvl3-final-swipe:dungeonComposition",
+        "community-quest-weald-lvl3-final-swipe:persistence",
+        "community-quest-weald-lvl3-final-swipe:rule-0:hook",
+        "community-quest-weald-lvl3-final-swipe:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-weald-lvl3-great-unclean-ones",
+      "restingPoints": 12,
+      "firewoodCount": 1,
+      "previousReadiness": "MULTI_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-weald-lvl3-great-unclean-ones:rest:capacity",
+        "community-quest-weald-lvl3-great-unclean-ones:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-weald-lvl3-great-unclean-ones:rest:capacity",
+        "community-quest-weald-lvl3-great-unclean-ones:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-weald-lvl3-great-unclean-ones:dungeonComposition",
+        "community-quest-weald-lvl3-great-unclean-ones:objective",
+        "community-quest-weald-lvl3-great-unclean-ones:persistence",
+        "community-quest-weald-lvl3-great-unclean-ones:rule-0:binding",
+        "community-quest-weald-lvl3-great-unclean-ones:rule-1:effect",
+        "community-quest-weald-lvl3-great-unclean-ones:rule-2:effect",
+        "community-quest-weald-lvl3-great-unclean-ones:encounter:eligibility"
+      ],
+      "currentReadiness": "MULTI_BLOCKED",
+      "potentialReadinessAfterRestClosure": "MULTI_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-weald-lvl3-no-other-way",
+      "restingPoints": 8,
+      "firewoodCount": 1,
+      "previousReadiness": "MULTI_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-weald-lvl3-no-other-way:rest:capacity",
+        "community-quest-weald-lvl3-no-other-way:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-weald-lvl3-no-other-way:rest:capacity",
+        "community-quest-weald-lvl3-no-other-way:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-weald-lvl3-no-other-way:dungeonComposition",
+        "community-quest-weald-lvl3-no-other-way:objective",
+        "community-quest-weald-lvl3-no-other-way:persistence",
+        "community-quest-weald-lvl3-no-other-way:rule-0:binding",
+        "community-quest-weald-lvl3-no-other-way:rule-1:effect",
+        "community-quest-weald-lvl3-no-other-way:rule-2:binding",
+        "community-quest-weald-lvl3-no-other-way:rule-2:effect",
+        "community-quest-weald-lvl3-no-other-way:rule-3:binding",
+        "community-quest-weald-lvl3-no-other-way:encounter:eligibility"
+      ],
+      "currentReadiness": "MULTI_BLOCKED",
+      "potentialReadinessAfterRestClosure": "MULTI_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-weald-lvl3-the-infected",
+      "restingPoints": 8,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-weald-lvl3-the-infected:rest:capacity",
+        "community-quest-weald-lvl3-the-infected:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-weald-lvl3-the-infected:rest:capacity",
+        "community-quest-weald-lvl3-the-infected:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-weald-lvl3-the-infected:dungeonComposition",
+        "community-quest-weald-lvl3-the-infected:persistence",
+        "community-quest-weald-lvl3-the-infected:rule-0:hook",
+        "community-quest-weald-lvl3-the-infected:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    },
+    {
+      "definitionId": "community-quest-weald-lvl3-whispering-woods",
+      "restingPoints": 8,
+      "firewoodCount": 1,
+      "previousReadiness": "SOURCE_BLOCKED",
+      "previousRestBlockers": [
+        "community-quest-weald-lvl3-whispering-woods:rest:capacity",
+        "community-quest-weald-lvl3-whispering-woods:rest:authority"
+      ],
+      "currentRestBlockers": [
+        "community-quest-weald-lvl3-whispering-woods:rest:capacity",
+        "community-quest-weald-lvl3-whispering-woods:rest:authority"
+      ],
+      "removedRestSourceGates": [],
+      "sourceGateRemoved": false,
+      "restSourceClearAfterC4B": false,
+      "unresolvedRestFields": [
+        "budgetConsumption",
+        "partialSpend",
+        "zeroPointRest",
+        "insufficientRecoveryCapacity",
+        "recoveryCap"
+      ],
+      "remainingNonRestBlockers": [
+        "community-quest-weald-lvl3-whispering-woods:dungeonComposition",
+        "community-quest-weald-lvl3-whispering-woods:persistence",
+        "community-quest-weald-lvl3-whispering-woods:rule-0:hook",
+        "community-quest-weald-lvl3-whispering-woods:encounter:eligibility"
+      ],
+      "currentReadiness": "SOURCE_BLOCKED",
+      "potentialReadinessAfterRestClosure": "SOURCE_BLOCKED",
+      "hypotheticalOnly": true
+    }
+  ],
+  "conditionalCandidates": [
+    {
+      "definitionId": "community-quest-crimson-court-lvl1-deep-in-the-swamp",
+      "restSourceClearAfterC4B": false,
+      "remainingSourceBlockers": [
+        "community-quest-crimson-court-lvl1-deep-in-the-swamp:rest:capacity",
+        "community-quest-crimson-court-lvl1-deep-in-the-swamp:rest:authority"
+      ],
+      "remainingNonRestSourceBlockers": [],
+      "remainingAdapterWork": [
+        "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+      ],
+      "existingRuntimeAdapter": {
+        "adapterId": "c1c1-simple-community-quest-v1",
+        "availability": "EXISTING_HISTORICAL_ADAPTER",
+        "productionProofBound": false,
+        "officialRestCompatibility": "UNPROVEN; historical Rest validator cannot supply canonical completion semantics"
+      },
+      "saveReplayProofStatus": "NO_CURRENT_PRODUCTION_BOUND_PROOF",
+      "frozenPersistenceEvidence": {
+        "existingProof": {
+          "definitionId": "community-quest-crimson-court-lvl1-deep-in-the-swamp",
+          "runtimeAdapterId": "c1c1-simple-community-quest-v1",
+          "requiredPrimitives": [
+            "QUEST_ROOM_TOKEN_COMPOSITION",
+            "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+            "QUEST_XP_UNIT_ACCOUNTING",
+            "QUEST_REST_ALLOCATION_SEMANTICS"
+          ],
+          "primitiveProofRequirements": {
+            "C1C1R2-E2E-REST-ALLOCATION": "QUEST_REST_ALLOCATION_SEMANTICS"
+          },
+          "sourceSupported": true,
+          "semanticSupported": true,
+          "stateful": true,
+          "productionTests": [
+            "C1C2-ADAPTER-RUNTIME"
+          ],
+          "saveReplayTests": [
+            "C1C2-ADAPTER-SAVE-REPLAY"
+          ],
+          "selectorTests": [
+            "C1C2-ADAPTER-SELECTOR"
+          ],
+          "e2eTests": [
+            "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+            "C1C1R2-E2E-REST-ALLOCATION"
+          ]
+        }
+      },
+      "selectorProofStatus": "NOT_SELECTOR_REACHABLE",
+      "implementationEligible": false
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl2-deeper-into-the-swamp",
+      "restSourceClearAfterC4B": false,
+      "remainingSourceBlockers": [
+        "community-quest-crimson-court-lvl2-deeper-into-the-swamp:rest:capacity",
+        "community-quest-crimson-court-lvl2-deeper-into-the-swamp:rest:authority"
+      ],
+      "remainingNonRestSourceBlockers": [],
+      "remainingAdapterWork": [
+        "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+      ],
+      "existingRuntimeAdapter": {
+        "adapterId": "c1c1-simple-community-quest-v1",
+        "availability": "EXISTING_HISTORICAL_ADAPTER",
+        "productionProofBound": false,
+        "officialRestCompatibility": "UNPROVEN; historical Rest validator cannot supply canonical completion semantics"
+      },
+      "saveReplayProofStatus": "NO_CURRENT_PRODUCTION_BOUND_PROOF",
+      "frozenPersistenceEvidence": {
+        "existingProof": {
+          "definitionId": "community-quest-crimson-court-lvl2-deeper-into-the-swamp",
+          "runtimeAdapterId": "c1c1-simple-community-quest-v1",
+          "requiredPrimitives": [
+            "QUEST_ROOM_TOKEN_COMPOSITION",
+            "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+            "QUEST_XP_UNIT_ACCOUNTING",
+            "QUEST_REST_ALLOCATION_SEMANTICS"
+          ],
+          "primitiveProofRequirements": {
+            "C1C1R2-E2E-REST-ALLOCATION": "QUEST_REST_ALLOCATION_SEMANTICS"
+          },
+          "sourceSupported": true,
+          "semanticSupported": true,
+          "stateful": true,
+          "productionTests": [
+            "C1C2-ADAPTER-RUNTIME"
+          ],
+          "saveReplayTests": [
+            "C1C2-ADAPTER-SAVE-REPLAY"
+          ],
+          "selectorTests": [
+            "C1C2-ADAPTER-SELECTOR"
+          ],
+          "e2eTests": [
+            "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+            "C1C1R2-E2E-REST-ALLOCATION"
+          ]
+        }
+      },
+      "selectorProofStatus": "NOT_SELECTOR_REACHABLE",
+      "implementationEligible": false
+    },
+    {
+      "definitionId": "community-quest-crimson-court-lvl2-pest-control",
+      "restSourceClearAfterC4B": false,
+      "remainingSourceBlockers": [
+        "community-quest-crimson-court-lvl2-pest-control:rest:capacity",
+        "community-quest-crimson-court-lvl2-pest-control:rest:authority"
+      ],
+      "remainingNonRestSourceBlockers": [],
+      "remainingAdapterWork": [
+        "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+      ],
+      "existingRuntimeAdapter": {
+        "adapterId": "c1c1-simple-community-quest-v1",
+        "availability": "EXISTING_HISTORICAL_ADAPTER",
+        "productionProofBound": false,
+        "officialRestCompatibility": "UNPROVEN; historical Rest validator cannot supply canonical completion semantics"
+      },
+      "saveReplayProofStatus": "NO_CURRENT_PRODUCTION_BOUND_PROOF",
+      "frozenPersistenceEvidence": {
+        "existingProof": {
+          "definitionId": "community-quest-crimson-court-lvl2-pest-control",
+          "runtimeAdapterId": "c1c1-simple-community-quest-v1",
+          "requiredPrimitives": [
+            "QUEST_ROOM_TOKEN_COMPOSITION",
+            "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+            "QUEST_XP_UNIT_ACCOUNTING",
+            "QUEST_REST_ALLOCATION_SEMANTICS"
+          ],
+          "primitiveProofRequirements": {
+            "C1C1R2-E2E-REST-ALLOCATION": "QUEST_REST_ALLOCATION_SEMANTICS"
+          },
+          "sourceSupported": true,
+          "semanticSupported": true,
+          "stateful": true,
+          "productionTests": [
+            "C1C2-ADAPTER-RUNTIME"
+          ],
+          "saveReplayTests": [
+            "C1C2-ADAPTER-SAVE-REPLAY"
+          ],
+          "selectorTests": [
+            "C1C2-ADAPTER-SELECTOR"
+          ],
+          "e2eTests": [
+            "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+            "C1C1R2-E2E-REST-ALLOCATION"
+          ]
+        }
+      },
+      "selectorProofStatus": "NOT_SELECTOR_REACHABLE",
+      "implementationEligible": false
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-scout-ahead",
+      "restSourceClearAfterC4B": false,
+      "remainingSourceBlockers": [
+        "community-quest-ruins-lvl1-scout-ahead:rest:capacity",
+        "community-quest-ruins-lvl1-scout-ahead:rest:authority"
+      ],
+      "remainingNonRestSourceBlockers": [],
+      "remainingAdapterWork": [
+        "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+      ],
+      "existingRuntimeAdapter": {
+        "adapterId": "c1c1-simple-community-quest-v1",
+        "availability": "EXISTING_HISTORICAL_ADAPTER",
+        "productionProofBound": false,
+        "officialRestCompatibility": "UNPROVEN; historical Rest validator cannot supply canonical completion semantics"
+      },
+      "saveReplayProofStatus": "NO_CURRENT_PRODUCTION_BOUND_PROOF",
+      "frozenPersistenceEvidence": {
+        "existingProof": {
+          "definitionId": "community-quest-ruins-lvl1-scout-ahead",
+          "runtimeAdapterId": "c1c1-simple-community-quest-v1",
+          "requiredPrimitives": [
+            "QUEST_ROOM_TOKEN_COMPOSITION",
+            "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+            "QUEST_XP_UNIT_ACCOUNTING",
+            "QUEST_REST_ALLOCATION_SEMANTICS"
+          ],
+          "primitiveProofRequirements": {
+            "C1C1R2-E2E-REST-ALLOCATION": "QUEST_REST_ALLOCATION_SEMANTICS"
+          },
+          "sourceSupported": true,
+          "semanticSupported": true,
+          "stateful": true,
+          "productionTests": [
+            "C1C1-QUEST-RUNTIME",
+            "C1C1R-QUEST-SOURCE-SETUP"
+          ],
+          "saveReplayTests": [
+            "C1C1-QUEST-SAVE-REPLAY"
+          ],
+          "selectorTests": [
+            "C1C1-QUEST-SELECTOR"
+          ],
+          "e2eTests": [
+            "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+            "C1C1R2-E2E-REST-ALLOCATION"
+          ]
+        }
+      },
+      "selectorProofStatus": "NOT_SELECTOR_REACHABLE",
+      "implementationEligible": false
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl1-wipe-em-out",
+      "restSourceClearAfterC4B": false,
+      "remainingSourceBlockers": [
+        "community-quest-ruins-lvl1-wipe-em-out:rest:capacity",
+        "community-quest-ruins-lvl1-wipe-em-out:rest:authority"
+      ],
+      "remainingNonRestSourceBlockers": [],
+      "remainingAdapterWork": [
+        "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+      ],
+      "existingRuntimeAdapter": {
+        "adapterId": "c1c1-simple-community-quest-v1",
+        "availability": "EXISTING_HISTORICAL_ADAPTER",
+        "productionProofBound": false,
+        "officialRestCompatibility": "UNPROVEN; historical Rest validator cannot supply canonical completion semantics"
+      },
+      "saveReplayProofStatus": "NO_CURRENT_PRODUCTION_BOUND_PROOF",
+      "frozenPersistenceEvidence": {
+        "existingProof": {
+          "definitionId": "community-quest-ruins-lvl1-wipe-em-out",
+          "runtimeAdapterId": "c1c1-simple-community-quest-v1",
+          "requiredPrimitives": [
+            "QUEST_ROOM_TOKEN_COMPOSITION",
+            "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+            "QUEST_XP_UNIT_ACCOUNTING",
+            "QUEST_REST_ALLOCATION_SEMANTICS"
+          ],
+          "primitiveProofRequirements": {
+            "C1C1R2-E2E-REST-ALLOCATION": "QUEST_REST_ALLOCATION_SEMANTICS"
+          },
+          "sourceSupported": true,
+          "semanticSupported": true,
+          "stateful": true,
+          "productionTests": [
+            "C1C1-QUEST-RUNTIME",
+            "C1C1R-QUEST-SOURCE-SETUP"
+          ],
+          "saveReplayTests": [
+            "C1C1-QUEST-SAVE-REPLAY"
+          ],
+          "selectorTests": [
+            "C1C1-QUEST-SELECTOR"
+          ],
+          "e2eTests": [
+            "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+            "C1C1R2-E2E-REST-ALLOCATION"
+          ]
+        }
+      },
+      "selectorProofStatus": "NOT_SELECTOR_REACHABLE",
+      "implementationEligible": false
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-clear-the-path",
+      "restSourceClearAfterC4B": false,
+      "remainingSourceBlockers": [
+        "community-quest-ruins-lvl2-clear-the-path:rest:capacity",
+        "community-quest-ruins-lvl2-clear-the-path:rest:authority"
+      ],
+      "remainingNonRestSourceBlockers": [],
+      "remainingAdapterWork": [
+        "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+      ],
+      "existingRuntimeAdapter": {
+        "adapterId": "c1c1-simple-community-quest-v1",
+        "availability": "EXISTING_HISTORICAL_ADAPTER",
+        "productionProofBound": false,
+        "officialRestCompatibility": "UNPROVEN; historical Rest validator cannot supply canonical completion semantics"
+      },
+      "saveReplayProofStatus": "NO_CURRENT_PRODUCTION_BOUND_PROOF",
+      "frozenPersistenceEvidence": {
+        "existingProof": {
+          "definitionId": "community-quest-ruins-lvl2-clear-the-path",
+          "runtimeAdapterId": "c1c1-simple-community-quest-v1",
+          "requiredPrimitives": [
+            "QUEST_ROOM_TOKEN_COMPOSITION",
+            "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+            "QUEST_XP_UNIT_ACCOUNTING",
+            "QUEST_REST_ALLOCATION_SEMANTICS"
+          ],
+          "primitiveProofRequirements": {
+            "C1C1R2-E2E-REST-ALLOCATION": "QUEST_REST_ALLOCATION_SEMANTICS"
+          },
+          "sourceSupported": true,
+          "semanticSupported": true,
+          "stateful": true,
+          "productionTests": [
+            "C1C1-QUEST-RUNTIME",
+            "C1C1R-QUEST-SOURCE-SETUP"
+          ],
+          "saveReplayTests": [
+            "C1C1-QUEST-SAVE-REPLAY"
+          ],
+          "selectorTests": [
+            "C1C1-QUEST-SELECTOR"
+          ],
+          "e2eTests": [
+            "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+            "C1C1R2-E2E-REST-ALLOCATION"
+          ]
+        }
+      },
+      "selectorProofStatus": "NOT_SELECTOR_REACHABLE",
+      "implementationEligible": false
+    },
+    {
+      "definitionId": "community-quest-ruins-lvl2-reduce-to-rubble",
+      "restSourceClearAfterC4B": false,
+      "remainingSourceBlockers": [
+        "community-quest-ruins-lvl2-reduce-to-rubble:rest:capacity",
+        "community-quest-ruins-lvl2-reduce-to-rubble:rest:authority"
+      ],
+      "remainingNonRestSourceBlockers": [],
+      "remainingAdapterWork": [
+        "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+      ],
+      "existingRuntimeAdapter": {
+        "adapterId": "c1c1-simple-community-quest-v1",
+        "availability": "EXISTING_HISTORICAL_ADAPTER",
+        "productionProofBound": false,
+        "officialRestCompatibility": "UNPROVEN; historical Rest validator cannot supply canonical completion semantics"
+      },
+      "saveReplayProofStatus": "NO_CURRENT_PRODUCTION_BOUND_PROOF",
+      "frozenPersistenceEvidence": {
+        "existingProof": {
+          "definitionId": "community-quest-ruins-lvl2-reduce-to-rubble",
+          "runtimeAdapterId": "c1c1-simple-community-quest-v1",
+          "requiredPrimitives": [
+            "QUEST_ROOM_TOKEN_COMPOSITION",
+            "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+            "QUEST_XP_UNIT_ACCOUNTING",
+            "QUEST_REST_ALLOCATION_SEMANTICS"
+          ],
+          "primitiveProofRequirements": {
+            "C1C1R2-E2E-REST-ALLOCATION": "QUEST_REST_ALLOCATION_SEMANTICS"
+          },
+          "sourceSupported": true,
+          "semanticSupported": true,
+          "stateful": true,
+          "productionTests": [
+            "C1C1-QUEST-RUNTIME",
+            "C1C1R-QUEST-SOURCE-SETUP"
+          ],
+          "saveReplayTests": [
+            "C1C1-QUEST-SAVE-REPLAY"
+          ],
+          "selectorTests": [
+            "C1C1-QUEST-SELECTOR"
+          ],
+          "e2eTests": [
+            "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+            "C1C1R2-E2E-REST-ALLOCATION"
+          ]
+        }
+      },
+      "selectorProofStatus": "NOT_SELECTOR_REACHABLE",
+      "implementationEligible": false
+    },
+    {
+      "definitionId": "community-quest-warrens-lvl1-pork-chop",
+      "restSourceClearAfterC4B": false,
+      "remainingSourceBlockers": [
+        "community-quest-warrens-lvl1-pork-chop:rest:capacity",
+        "community-quest-warrens-lvl1-pork-chop:rest:authority"
+      ],
+      "remainingNonRestSourceBlockers": [],
+      "remainingAdapterWork": [
+        "QUEST_SAVE_CHOICE_TRANSACTION_BINDING"
+      ],
+      "existingRuntimeAdapter": {
+        "adapterId": "c1c1-simple-community-quest-v1",
+        "availability": "EXISTING_HISTORICAL_ADAPTER",
+        "productionProofBound": false,
+        "officialRestCompatibility": "UNPROVEN; historical Rest validator cannot supply canonical completion semantics"
+      },
+      "saveReplayProofStatus": "NO_CURRENT_PRODUCTION_BOUND_PROOF",
+      "frozenPersistenceEvidence": {
+        "existingProof": {
+          "definitionId": "community-quest-warrens-lvl1-pork-chop",
+          "runtimeAdapterId": "c1c1-simple-community-quest-v1",
+          "requiredPrimitives": [
+            "QUEST_ROOM_TOKEN_COMPOSITION",
+            "QUEST_FIREWOOD_RESTING_POINT_SETUP",
+            "QUEST_XP_UNIT_ACCOUNTING",
+            "QUEST_REST_ALLOCATION_SEMANTICS"
+          ],
+          "primitiveProofRequirements": {
+            "C1C1R2-E2E-REST-ALLOCATION": "QUEST_REST_ALLOCATION_SEMANTICS"
+          },
+          "sourceSupported": true,
+          "semanticSupported": true,
+          "stateful": true,
+          "productionTests": [
+            "C1C1-QUEST-RUNTIME",
+            "C1C1R-QUEST-SOURCE-SETUP"
+          ],
+          "saveReplayTests": [
+            "C1C1-QUEST-SAVE-REPLAY"
+          ],
+          "selectorTests": [
+            "C1C1-QUEST-SELECTOR"
+          ],
+          "e2eTests": [
+            "C1C1R-E2E-SIMPLE-QUEST-ADAPTER",
+            "C1C1R2-E2E-REST-ALLOCATION"
+          ]
+        }
+      },
+      "selectorProofStatus": "NOT_SELECTOR_REACHABLE",
+      "implementationEligible": false
+    }
+  ],
+  "implementationEligibleCandidateIds": []
+}

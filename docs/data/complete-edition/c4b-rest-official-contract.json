@@ -1,0 +1,281 @@
+{
+  "schemaVersion": "C4B-REST-OFFICIAL-REVIEW-v1",
+  "phase": "11A.7-C4B",
+  "baseC4AHead": "8ac3de01c53dc23b47a9549cb8e219d4c93ff968",
+  "sourcePolicy": "RULEBOOK_ONLY_SOURCE_POLICY_V1",
+  "contractVersion": "C4B-REST-OFFICIAL-CONTRACT-v1",
+  "canonicalClosure": false,
+  "scope": "Source review only; no successor execution, runtime binding or permission to use unresolved fields.",
+  "productionRequiredFields": [
+    "firewoodUse",
+    "sessionBudget",
+    "restingPointAllocation",
+    "pointConversion",
+    "multiplePointsPerHero",
+    "onePurposePerPoint",
+    "budgetConsumption",
+    "partialSpend",
+    "zeroPointRest",
+    "insufficientRecoveryCapacity",
+    "roomGate",
+    "recoveryCap"
+  ],
+  "closedFields": [
+    "firewoodUse",
+    "sessionBudget",
+    "restingPointAllocation",
+    "pointConversion",
+    "multiplePointsPerHero",
+    "onePurposePerPoint",
+    "roomGate"
+  ],
+  "unresolvedFields": [
+    "budgetConsumption",
+    "partialSpend",
+    "zeroPointRest",
+    "insufficientRecoveryCapacity",
+    "recoveryCap"
+  ],
+  "criticalAuthorityRepairs": [],
+  "outcome": "REST_OFFICIAL_CONTRACT_UNRESOLVED",
+  "fields": [
+    {
+      "field": "firewoodUse",
+      "historicalStatus": "SOURCE_EXPLICIT",
+      "historicalEvidenceIds": [
+        "C1C1R2:S4:p11",
+        "C1C1R2:S4:p15"
+      ],
+      "currentOfficialStatus": "OFFICIAL_EXPLICIT",
+      "officialEvidence": [
+        "C4B:CORE:p11",
+        "C4B:CORE:p15",
+        "C4B:CORE-PRINT:p11",
+        "C4B:CORE-PRINT:p15"
+      ],
+      "derivation": null,
+      "productionRequired": true,
+      "productionRequirement": "Determine Firewood eligibility and the resource debit after completing a standard Rest.",
+      "productionUsable": true,
+      "blockingReason": null,
+      "rule": "One supplied Firewood token permits one Rest; completing that Rest discards one Firewood token."
+    },
+    {
+      "field": "sessionBudget",
+      "historicalStatus": "SOURCE_EXPLICIT",
+      "historicalEvidenceIds": [
+        "C1C1R2:S4:p11",
+        "C1C1R2:S4:p15"
+      ],
+      "currentOfficialStatus": "OFFICIAL_EXPLICIT",
+      "officialEvidence": [
+        "C4B:CORE:p11",
+        "C4B:CORE:p15",
+        "C4B:CORE-PRINT:p11",
+        "C4B:CORE-PRINT:p15"
+      ],
+      "derivation": null,
+      "productionRequired": true,
+      "productionRequirement": "Bind the correct current Quest budget to each Rest session.",
+      "productionUsable": true,
+      "blockingReason": null,
+      "rule": "The current Quest card supplies the Resting Point amount available to the party for the Rest."
+    },
+    {
+      "field": "restingPointAllocation",
+      "historicalStatus": "SOURCE_EXPLICIT",
+      "historicalEvidenceIds": [
+        "C1C1R2:S4:p15"
+      ],
+      "currentOfficialStatus": "OFFICIAL_EXPLICIT",
+      "officialEvidence": [
+        "C4B:CORE:p15",
+        "C4B:CORE-PRINT:p15"
+      ],
+      "derivation": null,
+      "productionRequired": true,
+      "productionRequirement": "Keep allocation under player control with party agreement and the printed equal-split fallback.",
+      "productionUsable": true,
+      "blockingReason": null,
+      "rule": "Whole party agrees to Rest, then collectively allocates points; an equal split is available if distribution cannot be agreed."
+    },
+    {
+      "field": "pointConversion",
+      "historicalStatus": "SOURCE_EXPLICIT",
+      "historicalEvidenceIds": [
+        "C1C1R2:S4:p15"
+      ],
+      "currentOfficialStatus": "OFFICIAL_EXPLICIT",
+      "officialEvidence": [
+        "C4B:CORE:p15",
+        "C4B:CORE-PRINT:p15"
+      ],
+      "derivation": null,
+      "productionRequired": true,
+      "productionRequirement": "Convert each spent point into the specified base Life or Stress recovery.",
+      "productionUsable": true,
+      "blockingReason": null,
+      "rule": "Each point spent recovers exactly 1 Life or exactly 1 Stress."
+    },
+    {
+      "field": "multiplePointsPerHero",
+      "historicalStatus": "SOURCE_EXPLICIT",
+      "historicalEvidenceIds": [
+        "C1C1R2:S4:p15"
+      ],
+      "currentOfficialStatus": "OFFICIAL_DERIVED",
+      "officialEvidence": [
+        "C4B:CORE:p15",
+        "C4B:CORE-PRINT:p15"
+      ],
+      "derivation": "The party chooses how much each Hero receives; the equal-split fallback and discussion of amounts support more than one point per Hero. No new per-Hero limit is introduced.",
+      "productionRequired": true,
+      "productionRequirement": "Determine whether more than one point can be allocated to the same Hero.",
+      "productionUsable": true,
+      "blockingReason": null,
+      "rule": "A Hero may receive multiple points and chooses how to spend that Hero's allocation."
+    },
+    {
+      "field": "onePurposePerPoint",
+      "historicalStatus": "SOURCE_EXPLICIT",
+      "historicalEvidenceIds": [
+        "C1C1R2:S4:p15"
+      ],
+      "currentOfficialStatus": "OFFICIAL_DERIVED",
+      "officialEvidence": [
+        "C4B:CORE:p15",
+        "C4B:CORE-PRINT:p15"
+      ],
+      "derivation": "One Life or one Stress per point is an alternative conversion; the same point is not two recoveries.",
+      "productionRequired": true,
+      "productionRequirement": "Prevent the same point from being counted as both Life and Stress recovery.",
+      "productionUsable": true,
+      "blockingReason": null,
+      "rule": "A point recovers Life or Stress, never both."
+    },
+    {
+      "field": "budgetConsumption",
+      "historicalStatus": "SOURCE_EXPLICIT",
+      "historicalEvidenceIds": [
+        "C1C1R3:S2:ARGYRIS-ALL-POINTS"
+      ],
+      "currentOfficialStatus": "OFFICIAL_INSUFFICIENT",
+      "officialEvidence": [
+        "C4B:CORE:p15",
+        "C4B:CORE-PRINT:p15"
+      ],
+      "derivation": null,
+      "productionRequired": true,
+      "productionRequirement": "Determine the budget condition required to commit a completed Rest.",
+      "productionUsable": false,
+      "blockingReason": "Distributing the printed amount and recovering per point spent does not explicitly require spending every point. The historical all-points forum authority is inadmissible.",
+      "rule": null
+    },
+    {
+      "field": "partialSpend",
+      "historicalStatus": "SOURCE_EXPLICIT",
+      "historicalEvidenceIds": [
+        "C1C1R3:S2:ARGYRIS-ALL-POINTS"
+      ],
+      "currentOfficialStatus": "OFFICIAL_INSUFFICIENT",
+      "officialEvidence": [
+        "C4B:CORE:p15",
+        "C4B:CORE-PRINT:p15"
+      ],
+      "derivation": null,
+      "productionRequired": true,
+      "productionRequirement": "Determine whether a partly spent positive budget may complete Rest.",
+      "productionUsable": false,
+      "blockingReason": "Official text supplies neither permission nor prohibition to finish after a partial spend. The historical prohibition relies on the disallowed all-points clarification.",
+      "rule": null
+    },
+    {
+      "field": "zeroPointRest",
+      "historicalStatus": "SOURCE_DERIVED",
+      "historicalEvidenceIds": [
+        "C1C1R3:S2:ARGYRIS-ALL-POINTS"
+      ],
+      "currentOfficialStatus": "OFFICIAL_INSUFFICIENT",
+      "officialEvidence": [
+        "C4B:CORE:p15",
+        "C4B:CORE-PRINT:p15"
+      ],
+      "derivation": null,
+      "productionRequired": true,
+      "productionRequirement": "Determine whether Rest with a positive printed budget can complete with no points spent.",
+      "productionUsable": false,
+      "blockingReason": "The historical derivation depends on a full-budget requirement that official evidence does not establish. Firewood discard after Rest does not establish zero-point completion legality.",
+      "rule": null
+    },
+    {
+      "field": "insufficientRecoveryCapacity",
+      "historicalStatus": "SOURCE_UNRESOLVED",
+      "historicalEvidenceIds": [
+        "C1C4:S1:CORE-RULEBOOK-FULL-TEXT",
+        "C1C4:S1:DESIGNER-FAQ-UNAVAILABLE",
+        "C1C4:S2:ARGYRIOS-ALL-POINTS"
+      ],
+      "currentOfficialStatus": "SOURCE_UNRESOLVED",
+      "officialEvidence": [
+        "C4B:CORE:p15",
+        "C4B:CORE:p32",
+        "C4B:CORE:p36",
+        "C4B:CORE-PRINT:p15",
+        "C4B:CORE-PRINT:p32",
+        "C4B:CORE-PRINT:p36",
+        "C4B:WEALD:p3"
+      ],
+      "derivation": null,
+      "productionRequired": true,
+      "productionRequirement": "Determine completion legality when the printed budget exceeds total recoverable Life/Stress.",
+      "productionUsable": false,
+      "blockingReason": "No standard Rest passage selects waste-without-effect, discard, partial completion, inability to Rest, or another completion rule when recovery need is lower than the printed amount.",
+      "rule": null
+    },
+    {
+      "field": "roomGate",
+      "historicalStatus": "SOURCE_EXPLICIT",
+      "historicalEvidenceIds": [
+        "C1C1R2:S4:p15"
+      ],
+      "currentOfficialStatus": "OFFICIAL_EXPLICIT",
+      "officialEvidence": [
+        "C4B:CORE:p15",
+        "C4B:CORE:p25",
+        "C4B:CORE-PRINT:p15",
+        "C4B:CORE-PRINT:p25"
+      ],
+      "derivation": null,
+      "productionRequired": true,
+      "productionRequirement": "Restrict standard Rest initiation to a cleared Room.",
+      "productionUsable": true,
+      "blockingReason": null,
+      "rule": "Rest is legal only in a cleared Room."
+    },
+    {
+      "field": "recoveryCap",
+      "historicalStatus": "MODEL_INVARIANT",
+      "historicalEvidenceIds": [
+        "C1C1R2:S4:p15"
+      ],
+      "currentOfficialStatus": "OFFICIAL_INSUFFICIENT",
+      "officialEvidence": [
+        "C4B:CORE:p15",
+        "C4B:CORE:p19",
+        "C4B:CORE:p21",
+        "C4B:CORE:p28",
+        "C4B:CORE-PRINT:p15",
+        "C4B:CORE-PRINT:p19",
+        "C4B:CORE-PRINT:p21",
+        "C4B:CORE-PRINT:p28"
+      ],
+      "derivation": null,
+      "productionRequired": true,
+      "productionRequirement": "Determine legal allocations above current recovery need, not merely clamp actual recovery results.",
+      "productionUsable": false,
+      "blockingReason": "Official Wound removal and the Stress track bound actual recovery, but do not establish the historical rule rejecting allocations above missing Life/current Stress. C4B does not infer allocation legality from a model invariant.",
+      "rule": null
+    }
+  ],
+  "projectRulingIntroduced": false
+}
