@@ -1,3 +1,4 @@
+import { hasProductionMonsterPlayerRoute, enterProductionMonsterRoom } from './commands/ordinary-monsters';
 import type { CampaignState, ExplorationEventResult, DungeonRoom, DungeonRoomType, DungeonState, QuestDefinition } from '../types';
 import { DUNGEON_NODES, roomTypeMapForQuest } from '../data/dungeons';
 import { CURIOS } from '../data/curios';
@@ -229,7 +230,7 @@ function applyRoomResult(campaign: CampaignState, room: DungeonRoom): CampaignSt
   const dungeon = campaign.dungeon!;
   const log = (c: CampaignState, msg: string, kind: 'info' | 'success' | 'warning' | 'danger' = 'info') =>
     pushLog(c, msg, kind);
-  const guardedBattle = (c: CampaignState) => hasProductionOrdinaryThreat(c)
+  const guardedBattle = (c: CampaignState) => hasProductionMonsterPlayerRoute(c) ? enterProductionMonsterRoom(c, room.id) : hasProductionOrdinaryThreat(c)
     ? enterProductionOrdinaryThreat(c, room.id) : initBattle(c, room.id);
 
   if (room.sourceRoomToken === 'dark') {

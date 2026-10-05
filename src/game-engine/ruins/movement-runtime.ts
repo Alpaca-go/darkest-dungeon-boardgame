@@ -19,6 +19,7 @@ export function moveNormalCharacter(battle: BattleState, actorId: string, to: st
   if (!area || used(to) - (contract.placements[actorId] === to ? 1 : 0) + 1 > area.capacity)
     throw new Error('Normal character Area capacity exceeded');
   contract.placements[actorId] = to;
+  if (next.productionMonsterContext) next.productionMonsterContext.placements = { ...contract.placements };
   contract.overflow = contract.overflow.filter(grant => used(grant.areaId)
     > contract.areas.find(area => area.id === grant.areaId)!.capacity);
   validateLargeMovementContract(next);

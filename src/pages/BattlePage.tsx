@@ -57,8 +57,9 @@ export default function BattlePage() {
 
   const activeUnit = getActiveUnit(battle);
   const isHeroTurn = battle.status === 'active' && activeUnit?.side === 'hero'
-    && !battle.ruinsContext?.pendingChoice && !battle.ruinsContext?.pendingReanimationChoice;
-  const ordinaryChoice = battle.ruinsContext?.pendingReanimationChoice ?? battle.ruinsContext?.pendingChoice;
+    && !battle.ruinsContext?.pendingChoice && !battle.ruinsContext?.pendingReanimationChoice
+    && !battle.productionMonsterContext?.pendingChoice && !battle.productionMonsterContext?.blocker;
+  const ordinaryChoice = battle.productionMonsterContext?.pendingChoice ?? battle.ruinsContext?.pendingReanimationChoice ?? battle.ruinsContext?.pendingChoice;
 
   const colorOf = (u: BattleUnit): string => {
     if (u.side === 'monster') return getMonsterById(u.sourceId)?.color ?? '#8b2b2b';
@@ -96,6 +97,7 @@ export default function BattlePage() {
   return (
     <div className="p-6 max-w-5xl mx-auto space-y-4">
       <ProductionHeroActionPanel key={campaign.heroProductionSession?.pendingAction?.actionId??'idle'} campaign={campaign}/>
+      {battle.productionMonsterContext?.blocker && <p role="alert" data-testid="monster-semantic-blocker">此怪物动作无法执行：官方来源语义尚未明确（DEFERRED_SEMANTIC）。{battle.productionMonsterContext.blocker.actionId}</p>}
       {ordinaryChoice && <section className="rounded border border-dd-accent p-4" aria-label="Ruins 待决选择">
         <p>{battle.ruinsContext?.pendingReanimationChoice ? '选择复生的死亡实例' : '选择移动结果'}</p>
         <div className="flex flex-wrap gap-2 mt-2">{ordinaryChoice.candidateIds.map(id => <button key={id}
@@ -122,7 +124,8 @@ export default function BattlePage() {
         </p>)}
         <p data-testid="prophet-rubble-progress">Rubble {battle.bossEncounter.prophetProduction.rubbleCursor} / 4</p>
       </section>}
-      {battle.bossEncounter?.checkpointContext?.playerRouteVersion && battle.status==='active' && !battle.bossEncounter.pendingChoice
+      {(battle.bossEncounter?.checkpointContext?.playerRouteVersion || battle.productionMonsterContext?.playerRouteVersion) && battle.status==='active' && !battle.bossEncounter?.pendingChoice
+        && !ordinaryChoice && !battle.productionMonsterContext?.blocker
         && (battle.pendingMonsterAttack || !battle.activeActorId || activeUnit?.side==='monster') && <section
           data-testid={battle.pendingMonsterAttack?.stage ?? 'battle-resolution-window'} className="rounded border border-dd-border p-3">
           {battle.pendingMonsterAttack ? <p>攻击骰 {battle.pendingMonsterAttack.attackRoll} · 目标 {battle.heroes.find(h=>h.id===battle.pendingMonsterAttack!.targetHeroUnitId)?.name}

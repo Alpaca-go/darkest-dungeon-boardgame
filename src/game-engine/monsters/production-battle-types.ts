@@ -15,6 +15,7 @@ export interface ProductionMonsterChoice {
   candidateIds: string[]; resumePhase: 'MOVEMENT' | 'OPERATIONS';
 }
 export interface ProductionMonsterBattleContext {
+  playerRouteVersion?: 'C3E-MONSTER-PLAYER-PATH-v1';
   schemaVersion: 1; integrationVersion: string; runtimeVersion: string; encounterId: string;
   definitionIds: Record<string, string>; placements: Record<string, string>;
   occupiedSpaces: Record<string, number>;

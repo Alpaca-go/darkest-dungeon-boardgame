@@ -22,6 +22,7 @@ export default function QuestSelectPage() {
   const campaign = useGameStore((s) => s.campaign);
   const migrateHeroDodgeToV2=useGameStore(s=>s.migrateHeroDodgeToV2);
   const selectProductionRuinsV6 = useGameStore(s => s.selectProductionRuinsV6);
+  const selectMonsterRoute = useGameStore(s=>s.selectProductionMonsterPlayerRoute);
   const chooseQuest = useGameStore((s) => s.chooseQuest);
   const selectPartyDeployment = useGameStore(s => s.selectPartyDeployment);
 
@@ -68,6 +69,7 @@ export default function QuestSelectPage() {
           </button>
           {!canSelectV6 && <p className="mt-1 text-sm text-dd-muted">已有 Threat 或遭遇不能迁移；请在初始化前选择规则。</p>}
         </div>}
+      {canSelectV6 && campaign.ruinsRuleSetSelection?.ruleSetVersion === RUINS_V6 && !campaign.monsterPlayerRouteVersion && <button data-testid="select-monster-production" onClick={selectMonsterRoute}>启用生产怪物普通遭遇</button>}
       {/* Phase 11A.1 §22 最小 UI：Campaign 状态条 */}
       {campaign.ruinsRuleSetSelection?.ruleSetVersion === RUINS_V6 && !campaign.bossEncounterCheckpoint && <fieldset className="mb-4 p-3 border border-dd-border">
         <legend>Ruins 英雄初始 Stance</legend>

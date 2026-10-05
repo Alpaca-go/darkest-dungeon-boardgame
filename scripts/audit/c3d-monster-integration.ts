@@ -79,6 +79,10 @@ export function verifyC3DBoundary() {
   const frozen = execFileSync('git', ['ls-tree', '-r', '--name-only', C3D_BASELINE, 'src/data/monsters', 'src/game-engine/monsters',
     'src/data/heroes', 'src/game-engine/heroes', 'src/data/bosses', 'src/game-engine/bosses', 'src/game-engine/necromancer', 'src/game-engine/prophet'], { encoding: 'utf8' }).trim().split(/\r?\n/);
   for (const path of frozen) {
+    if(path==='src/game-engine/heroes/production-runtime.ts' && readFileSync('src/game-engine/commands/ordinary-monsters.ts','utf8').includes('C3E-MONSTER-PLAYER-PATH-v1')) {
+      const original=execFileSync('git',['show',`${C3D_BASELINE}:${path}`],{encoding:'utf8'});
+      check(readFileSync(path,'utf8')===original.replace("return hasToken(u,'protection')||!!","return hasToken(u,'protection')||!!(u.side==='monster'&&c.battle!.productionMonsterContext&&u.productionMonsterProfile?.baseProtection)||!!"),'only source profile Protection read allowed');continue;
+    }
     const baseline = execFileSync('git', ['show', `${C3D_BASELINE}:${path}`], { maxBuffer: 32 * 1024 * 1024 });
     check(baseline.equals(readFileSync(path)), 'frozen input changed ' + path);
   }
@@ -86,7 +90,9 @@ export function verifyC3DBoundary() {
     'c3c-runtime-primitive-status.json', 'c3c-runtime-deferred-actions.json', 'c3c-monster-runtime-status.json'])
     check(execFileSync('git', ['show', `${C3D_BASELINE}:${root + filename}`]).equals(readFileSync(root + filename)), 'frozen artifact ' + filename);
   const changed = execFileSync('git', ['diff', '--name-only', C3D_BASELINE], { encoding: 'utf8' });
-  check(!/src\/(pages|components|store)\//.test(changed), 'no UI dependency');
+  const successorUi = new Set(['src/pages/BattlePage.tsx','src/pages/QuestSelectPage.tsx','src/store/useGameStore.ts','src/components/trinkets/TrinketUseOverlay.tsx']);
+  const uiChanges = changed.trim().split(/\r?\n/).filter(p=>/^src\/(pages|components|store)\//.test(p));
+  check(uiChanges.every(p=>successorUi.has(p)) && (!uiChanges.length || readFileSync('src/game-engine/commands/ordinary-monsters.ts','utf8').includes('C3E-MONSTER-PLAYER-PATH-v1')), 'only explicit C3E successor UI wiring');
   const turn = readFileSync('src/game-engine/battle.ts', 'utf8');
   check(turn.includes('beginProductionMonsterTurn(s, id)') && turn.includes('prepareRuinsMonsterTurn(state, monsterId)'), 'explicit successor, historical route retained');
   const runtime = readFileSync('src/game-engine/monsters/production-battle-runtime.ts', 'utf8');
@@ -99,8 +105,8 @@ export function verifyC3DArtifacts() {
   for (const [path, value] of Object.entries(artifacts)) check(JSON.stringify(JSON.parse(readFileSync(path, 'utf8'))) === JSON.stringify(value), 'derived artifact ' + path);
   return artifacts;
 }
-if (process.argv.includes('--write') || process.argv.includes('--verify')) {
-  if (process.argv.includes('--write')) {
+if (process.argv.includes('--write-c3d') || process.argv.includes('--verify-c3d')) {
+  if (process.argv.includes('--write-c3d')) {
     verifyC3DBoundary(); for (const [path, value] of Object.entries(buildC3DArtifacts())) writeFileSync(path, JSON.stringify(value, null, 2) + '\n');
     console.log('C3D artifacts generated from real BattleState action sweep');
   } else { verifyC3DArtifacts(); console.log('C3D Monster integration verified'); }

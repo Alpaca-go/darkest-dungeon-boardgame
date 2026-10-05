@@ -55,7 +55,7 @@ export function advancePendingMonsterAttack(campaign: CampaignState, sourceScope
     });
     return { ...result, battle };
   }
-  if(campaign.battle?.bossEncounter?.checkpointContext?.playerRouteVersion && campaign.battle.pendingMonsterAttack && !playerContinue)return campaign;
+  if((campaign.battle?.bossEncounter?.checkpointContext?.playerRouteVersion || campaign.battle?.productionMonsterContext?.playerRouteVersion) && campaign.battle.pendingMonsterAttack && !playerContinue)return campaign;
   if (!sourceScope && campaign.battle?.pendingMonsterAttack?.sourceAttack) {
     let result = campaign;
     const battle = withBossEncounterSources(structuredClone(campaign.battle), b=> {
@@ -96,15 +96,15 @@ export function advancePendingMonsterAttack(campaign: CampaignState, sourceScope
         return next;
       }
       next = { ...next, battle: freezePendingMonsterAttack(next.battle!) };
-      if(next.battle?.bossEncounter?.checkpointContext?.playerRouteVersion)return next;
+      if(next.battle?.bossEncounter?.checkpointContext?.playerRouteVersion || next.battle?.productionMonsterContext?.playerRouteVersion)return next;
       continue;
     }
 
     if (!pending.hit) {
       const committed = commitPendingMonsterAttackResolution(battle);
-      if (committed.bossEncounter?.checkpointContext?.playerRouteVersion) return { ...next, battle: committed };
+      if (committed.bossEncounter?.checkpointContext?.playerRouteVersion || committed.productionMonsterContext?.playerRouteVersion) return { ...next, battle: committed };
       next = { ...next, battle: committed.status === 'active' && !committed.pendingMonsterAttack && !committed.bossEncounter?.pendingChoice && !committed.ruinsContext?.pendingChoice ? advanceTurn(committed) : committed };
-      if(next.battle?.bossEncounter?.checkpointContext?.playerRouteVersion)return next;
+      if(next.battle?.bossEncounter?.checkpointContext?.playerRouteVersion || next.battle?.productionMonsterContext?.playerRouteVersion)return next;
       continue;
     }
     const opened = openTrinketWindow(next, {
@@ -121,9 +121,9 @@ export function advancePendingMonsterAttack(campaign: CampaignState, sourceScope
       return next;
     }
     const committed = commitPendingMonsterAttackResolution(next.battle!);
-    if (committed.bossEncounter?.checkpointContext?.playerRouteVersion) return { ...next, battle: committed };
+    if (committed.bossEncounter?.checkpointContext?.playerRouteVersion || committed.productionMonsterContext?.playerRouteVersion) return { ...next, battle: committed };
     next = { ...next, battle: committed.status === 'active' && !committed.pendingMonsterAttack && !committed.productionMonsterContext?.pendingChoice && !committed.ruinsContext?.pendingChoice ? advanceTurn(committed) : committed };
-    if(next.battle?.bossEncounter?.checkpointContext?.playerRouteVersion)return next;
+    if(next.battle?.bossEncounter?.checkpointContext?.playerRouteVersion || next.battle?.productionMonsterContext?.playerRouteVersion)return next;
   }
   return next;
 }
@@ -291,6 +291,13 @@ export function resolveTrinketOpportunity(
   opportunityId: string,
   action: 'use' | 'decline', sourceScope = false
 ): ResolveOpportunityResult {
+  if (!sourceScope && campaign.battle?.productionMonsterContext) {
+    let result: ResolveOpportunityResult = { campaign, error: null, resumed: false };
+    const battle = withProductionMonsterSources(structuredClone(campaign.battle), b => {
+      result = resolveTrinketOpportunity({ ...campaign, battle: b }, opportunityId, action, true); return result.campaign.battle!;
+    });
+    return { ...result, campaign: { ...result.campaign, battle } };
+  }
   if (!sourceScope && campaign.battle?.pendingMonsterAttack?.sourceAttack) {
     let result: ResolveOpportunityResult = {campaign,error:null,resumed:false};
     const battle = withBossEncounterSources(structuredClone(campaign.battle), b=>{

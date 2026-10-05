@@ -24,7 +24,7 @@ export function createProductionMonsterUnit(definitionId: string, instanceId: st
     virtueId: null, afflictionId: null, mentalEffectResolvedTurnId: null,
     immunities: [...(d.profile.immunities ?? [])],
     categoricalResistances: [...(d.profile.resistances ?? [])] as BattleUnit['categoricalResistances'],
-    printedConditionTokens: [], conditionDurations: {},
+    printedConditionTokens: [], conditionDurations: {}, bossCombatDodge: d.profile.dodge ?? 0,
     productionMonsterProfile: { definitionId, tags: [...(d.profile.tags ?? [])],
       baseProtection: d.profile.protection, printedSpeed: d.profile.speed, dodge: d.profile.dodge ?? 0, stanceSlots: d.profile.stanceSlots ?? 1 },
   };

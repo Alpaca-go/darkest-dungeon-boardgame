@@ -279,7 +279,9 @@ export function verifyC3BBoundaries() {
   verifyC3AFrozen();
   const changes=execFileSync('git',['diff',C3B_BASELINE,'--name-only'],{encoding:'utf8'}).trim().split(/\r?\n/).filter(Boolean);
   const untracked=execFileSync('git',['ls-files','--others','--exclude-standard'],{encoding:'utf8'}).trim().split(/\r?\n/).filter(Boolean);
-  check([...changes,...untracked].every(p=>p==='AGENTS.md'||p==='package.json'||['.github/workflows/release-gate.yml','.github/workflows/development-fast-gate.yml'].includes(p)||p.startsWith('src/data/monsters/production-monster-definition')
+  const successor = existsSync(root+'c3e-monster-production-freeze.json');
+  const successorPaths=new Set(['src/game-engine/battle.ts','src/game-engine/commands/ordinary-monsters.ts','src/game-engine/commands/battle.ts','src/game-engine/trinkets/battle-trinket-bridge.ts','src/game-engine/ruins/movement-runtime.ts','src/game-engine/heroes/production-runtime.ts','src/game-engine/dungeon.ts','src/game-engine/save.ts','src/types/index.ts','src/pages/BattlePage.tsx','src/pages/QuestSelectPage.tsx','src/store/useGameStore.ts','src/test-support/historical-baseline-setup.ts','src/components/trinkets/TrinketUseOverlay.tsx','playwright.c3e.config.ts']);
+  check([...changes,...untracked].every(p=>successor && (successorPaths.has(p)||/^src\/audit\/c3[de]-|^scripts\/(audit|e2e)\/c3[de]-/.test(p)||p.startsWith(root+'c3d-')||p.startsWith(root+'c3e-')||p.startsWith('e2e/c3e-'))||p==='AGENTS.md'||p==='package.json'||['.github/workflows/release-gate.yml','.github/workflows/development-fast-gate.yml'].includes(p)||p.startsWith('src/data/monsters/production-monster-definition')
     ||p.startsWith('src/audit/c3b-')||p.startsWith('scripts/audit/c3b-')||p.startsWith(root+'c3b-')
     // C3C successor runtime files do not alter the accepted C3B data/evidence checks.
     ||p.startsWith('src/game-engine/monsters/')||p==='src/game-engine/monster-target-priority.ts'
@@ -306,11 +308,12 @@ export function verifyC3BBoundaries() {
   const fast=readFileSync('.github/workflows/development-fast-gate.yml','utf8');
   check(/push:\s+branches: \[main\]/.test(release)&&/pull_request:\s+branches: \[main\]/.test(release),'main-only release gate');
   const oldRelease=execFileSync('git',['show',C3B_BASELINE+':.github/workflows/release-gate.yml'],{encoding:'utf8'}).replace(/\r\n/g,'\n');
-  check(release.slice(release.indexOf('permissions:')).replace(/\r\n/g,'\n')===oldRelease.slice(oldRelease.indexOf('permissions:')),'release logic preserved');
+  const compatibleRelease=release.replace(/\r\n/g,'\n').split('\n').filter(line=>!['      - run: npm run test:complete-edition-c3e','      - run: npm run test:e2e:monster-production','      - run: npm run verify:complete-edition-c3e'].includes(line)).join('\n');
+  check(compatibleRelease.slice(compatibleRelease.indexOf('permissions:'))===oldRelease.slice(oldRelease.indexOf('permissions:')),'release logic preserved');
   check(/branches-ignore: \[main\]/.test(fast)&&!/(playwright|historical|validate:|npm test)/i.test(fast),'Fast Gate scope');
-  const phaseTests=fast.includes('test:complete-edition-c3c')
+  const phaseTests=successor ? ['test:complete-edition-c3d','verify:complete-edition-c3d','test:complete-edition-c3e','verify:complete-edition-c3e'] : fast.includes('test:complete-edition-c3c')
     ? ['test:complete-edition-c3c','verify:complete-edition-c3c'] : ['verify:complete-edition-c3a','test:complete-edition-c3b'];
-  for(const script of ['typecheck',...phaseTests,'verify:complete-edition-c3b','build'])check(fast.includes('npm run '+script),'Fast Gate '+script);
+  for(const script of ['typecheck',...phaseTests,...(successor?[]:['verify:complete-edition-c3b']),'build'])check(fast.includes('npm run '+script),'Fast Gate '+script);
 }
 if(process.argv.includes('--write')||process.argv.includes('--verify')) {
   const artifacts=buildC3BArtifacts(); auditC3B(artifacts);

@@ -246,8 +246,13 @@
     "test:complete-edition-c3c": "vitest run --config scripts/audit/c3c-vitest.config.ts",
     "verify:complete-edition-c3c": "vite-node scripts/audit/c3c-monster-runtime.ts --verify --successor-integration",
     "test:complete-edition-c3d": "vitest run --config scripts/audit/c3d-vitest.config.ts",
-    "verify:complete-edition-c3d": "vite-node scripts/audit/c3d-monster-integration.ts --verify",
-    "audit:complete-edition-c3d": "vite-node scripts/audit/c3d-monster-integration.ts --write"
+    "verify:complete-edition-c3d": "vite-node scripts/audit/c3d-monster-integration.ts --verify-c3d",
+    "audit:complete-edition-c3d": "vite-node scripts/audit/c3d-monster-integration.ts --write-c3d",
+    "test:complete-edition-c3e": "vitest run --config scripts/audit/c3e-vitest.config.ts",
+    "verify:complete-edition-c3e": "vite-node scripts/audit/c3e-monster-production-acceptance.ts --verify --development",
+    "audit:complete-edition-c3e": "vite-node scripts/audit/c3e-monster-production-acceptance.ts --write",
+    "test:e2e:monster-production": "node scripts/e2e/c3e-run-browser.mjs",
+    "validate:complete-edition-c3e-production": "node scripts/audit/c3e-run-production-gate.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.408.0",

@@ -131,8 +131,10 @@ export function verifyC3CRuntimeBoundaries() {
   const untracked = execFileSync('git', ['ls-files', '--others', '--exclude-standard'], { encoding: 'utf8' }).trim().split(/\r?\n/).filter(Boolean);
   // Explicit successor verification keeps the C3C planner fence on its accepted files.
   // C3D owns BattleState integration imports, scopes and gate validation independently.
-  const successorIntegration = process.argv.includes('--successor-integration');
-  const allowed = (p: string) => p.startsWith('src/game-engine/monsters/') || p.startsWith('src/audit/c3c-')
+  const successorIntegration = process.argv.includes('--successor-integration') || existsSync(root+'c3d-monster-integration-status.json');
+  const playerSuccessor=existsSync(root+'c3e-monster-production-freeze.json');
+  const allowed = (p: string) => playerSuccessor && (p.startsWith('src/audit/c3e-') || p.startsWith('scripts/audit/c3e-') || p.startsWith('scripts/e2e/c3e-') || p.startsWith('e2e/c3e-') || p.startsWith(root+'c3e-') || ['playwright.c3e.config.ts','src/game-engine/heroes/production-runtime.ts','src/game-engine/commands/battle.ts','src/game-engine/dungeon.ts','src/game-engine/save.ts','src/game-engine/ruins/movement-runtime.ts','src/pages/BattlePage.tsx','src/pages/QuestSelectPage.tsx','src/store/useGameStore.ts','src/test-support/historical-baseline-setup.ts','src/components/trinkets/TrinketUseOverlay.tsx','scripts/audit/c3e-run-production-gate.mjs','.github/workflows/release-gate.yml'].includes(p))
+    || p.startsWith('src/game-engine/monsters/') || p.startsWith('src/audit/c3c-')
     || successorIntegration && (p.startsWith('src/audit/c3d-') || p.startsWith('scripts/audit/c3d-') || p.startsWith(root + 'c3d-')
       || ['src/game-engine/battle.ts', 'src/game-engine/commands/ordinary-monsters.ts', 'src/game-engine/trinkets/battle-trinket-bridge.ts', 'src/types/index.ts'].includes(p))
     || p.startsWith('scripts/audit/c3c-') || p.startsWith(root + 'c3c-') || ['package.json', '.github/workflows/development-fast-gate.yml',

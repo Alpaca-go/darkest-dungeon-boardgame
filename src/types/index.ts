@@ -805,6 +805,7 @@ export interface HeroLevelProfile {
 
 /** 战役状态（存档根对象）。 */
 export interface CampaignState {
+  monsterPlayerRouteVersion?: 'C3E-MONSTER-PLAYER-PATH-v1';
   heroRuntimeSelection?: import('./hero-runtime').HeroRuntimeSelection;
   heroProductionSession?: import('./hero-runtime').HeroProductionSession;
   ruinsBoneFigureSupply?: import('../game-engine/ruins/physical-supply').BoneFigureSupplyState;

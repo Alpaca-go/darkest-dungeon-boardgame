@@ -24,7 +24,7 @@ const replace=(c:CampaignState,u:BattleUnit)=>{c.battle!.heroes=c.battle!.heroes
 const hasToken=(u:BattleUnit,type:string)=>u.printedConditionTokens?.some(t=>t.type===type&&t.turns>0)??false;
 function hasProtection(c:CampaignState,u:BattleUnit) {
   const context=c.battle!.ruinsContext;
-  return hasToken(u,'protection')||!!(u.side==='monster'&&context&&ruinsMonster(context.definitionIds[u.id],context.ruleSetVersion).printedProtection);
+  return hasToken(u,'protection')||!!(u.side==='monster'&&c.battle!.productionMonsterContext&&u.productionMonsterProfile?.baseProtection)||!!(u.side==='monster'&&context&&ruinsMonster(context.definitionIds[u.id],context.ruleSetVersion).printedProtection);
 }
 function actionDefinition(plan:HeroProductionActionPlan): RuntimeAction {
   const a=resolveProductionHeroSkill(plan.heroId,plan.skillId,plan.skillLevel).actions[plan.face];

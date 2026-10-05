@@ -1,3 +1,5 @@
+import { RUINS_V6 } from '../../types/ruins-executable';
+import { createRuinsDrawState, drawOrdinaryRuinsEncounter } from '../ruins/encounter-draw';
 import type { CampaignState } from '../../types';
 import type { ProductionMonsterEncounterManifest } from '../monsters/production-battle-types';
 import { initializeProductionMonsterBattle, initializeProductionRuinsBattle } from '../monsters/production-encounter';
@@ -13,13 +15,17 @@ export function beginExplicitProductionMonsterEncounter(campaign: CampaignState,
   if (campaign.battle?.status === 'active') throw new Error('An active Battle already exists');
   const roster = campaign.heroes.filter(h => !h.dead).map(h => h.instanceId);
   if (manifest.heroes.length !== roster.length || manifest.heroes.some(h => !roster.includes(h.unit.sourceId))) throw new Error('Explicit encounter campaign Hero roster differs');
-  return settleBattleState({ ...campaign, gamePhase: 'battle', battle: advanceTurn(initializeProductionMonsterBattle(manifest)) }).campaign;
+  const battle = initializeProductionMonsterBattle(manifest);
+  battle.productionMonsterContext!.playerRouteVersion = 'C3E-MONSTER-PLAYER-PATH-v1';
+  return settleBattleState({ ...campaign, gamePhase: 'battle', battle: advanceTurn(battle) }).campaign;
 }
 export function beginProductionRuinsEncounter(campaign: CampaignState, encounterId: string): CampaignState {
   if (campaign.battle?.status === 'active' || !campaign.ruinsDrawState) throw new Error('Production Ruins encounter unavailable');
   // Reuse accepted figure reservation and spawn transactions before selecting the successor action route.
   const entered = beginOrdinaryRuinsBattle(campaign, encounterId);
-  return settleBattleState({ ...entered, battle: advanceTurn(initializeProductionRuinsBattle(entered, entered.ruinsDrawState!, encounterId)) }).campaign;
+  const battle = initializeProductionRuinsBattle(entered, entered.ruinsDrawState!, encounterId);
+  battle.productionMonsterContext!.playerRouteVersion = 'C3E-MONSTER-PLAYER-PATH-v1';
+  return settleBattleState({ ...entered, battle: advanceTurn(battle) }).campaign;
 }
 export function commitProductionMonsterChoice(campaign: CampaignState, choiceId: string, selectedId: string): CampaignState {
   if (!campaign.battle) throw new Error('Production Battle absent');
@@ -34,4 +40,24 @@ export function commitProductionMonsterChoice(campaign: CampaignState, choiceId:
   validateProductionMonsterBattle(battle);
   if (!battle.pendingMonsterAttack && !battle.productionMonsterContext!.pendingExecution && !battle.productionMonsterContext!.pendingChoice) battle = advanceTurn(battle);
   return settleBattleState({ ...campaign, battle }).campaign;
+}
+
+/** Explicit successor selection; never inferred when restoring historical saves. */
+export function selectProductionMonsterPlayerRoute(c: CampaignState): CampaignState {
+  if (c.battle || c.bossEncounterCheckpoint || c.ruinsDrawState || !['quest-select', 'hamlet'].includes(c.gamePhase)) throw new Error('Select Monster route before encounter initialization');
+  return { ...c, monsterPlayerRouteVersion: 'C3E-MONSTER-PLAYER-PATH-v1' };
+}
+
+export function hasProductionMonsterPlayerRoute(c: CampaignState): boolean {
+  return c.monsterPlayerRouteVersion === 'C3E-MONSTER-PLAYER-PATH-v1' && c.ruinsRuleSetSelection?.ruleSetVersion === RUINS_V6
+    && c.currentQuestId !== 'face-the-threat' && !c.battle;
+}
+export function enterProductionMonsterRoom(c: CampaignState, roomId: string): CampaignState {
+  if (!hasProductionMonsterPlayerRoute(c) || !c.dungeon || c.dungeon.currentRoomId !== roomId) throw new Error('Production Monster Room unavailable');
+  // Source-closed ordinary physical deck only; no expansion eligibility inference.
+  const seed = Array.from(c.id + c.dungeon.questRunId).reduce((n, ch) => Math.imul(n ^ ch.charCodeAt(0),16777619) >>> 0,2166136261);
+  const draw = c.ruinsDrawState ?? createRuinsDrawState(c.campaignProgress.campaignLevel as 1|2|3,seed,RUINS_V6);
+  const encounterId = c.dungeon.questRunId + ':monster:' + roomId;
+  return beginProductionRuinsEncounter({ ...c, ruinsDrawState: drawOrdinaryRuinsEncounter(draw,encounterId,
+    Object.fromEntries(c.heroes.filter(h=>!h.dead).map(h=>[h.instanceId,h.stance]))) },encounterId);
 }

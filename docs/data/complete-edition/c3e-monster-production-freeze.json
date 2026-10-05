@@ -1,0 +1,81 @@
+{
+  "phase": "11A.6-C3E",
+  "startingHead": "eef7fdcb4be3ca3b0bd104518f1fd35d2ca07eb7",
+  "runtimeVersion": "C3C-GENERIC-MONSTER-RUNTIME-v1",
+  "integrationVersion": "C3D-MONSTER-INTEGRATION-v1",
+  "monsterIdentities": 71,
+  "monsterDefinitions": 77,
+  "monsterActions": 175,
+  "runtimeReadyActions": 168,
+  "deferredSemanticActions": 7,
+  "unknownActions": 0,
+  "definitionsInstantiable": 77,
+  "autoEncounterDefinitions": 24,
+  "explicitManifestDefinitions": 53,
+  "ruinsPhysicalCopies": 62,
+  "status": "FROZEN",
+  "playerPathAccepted": true,
+  "saveReplayAccepted": true,
+  "browserAccepted": true,
+  "fullRegressionAccepted": true,
+  "productionReleaseGateAccepted": true,
+  "monsterProductionFrozen": true,
+  "sourceFingerprint": "a106609217a5388aefdf2dd9d0301487a3953d32804a0e8195fedd336beac2d3",
+  "frozenInputReview": [
+    {
+      "path": "src/game-engine/monsters/production-battle-runtime.ts",
+      "reason": "Reject orphaned/forged saved action cursors instead of silently discarding continuation.",
+      "baselineSha256": "6255fb834c1bed7ba658639e3ba13cd900df2bb72d042d474b9b0b04875e19ae",
+      "successorSha256": "63b956574e0edaa689257c71cd82f35b25072261101a7af7457eb37163731b45"
+    },
+    {
+      "path": "src/game-engine/monsters/production-battle-types.ts",
+      "reason": "Optional explicit C3E player route; historical saves remain opt-out.",
+      "baselineSha256": "f89b1611571882739694e2abd821214740f4087e12522c8d4ecf8b31882e98a4",
+      "successorSha256": "90accab1c1bf69723238665742b17fd2e670422ef58ea2610362310730516126"
+    },
+    {
+      "path": "src/game-engine/monsters/production-encounter.ts",
+      "reason": "Real Hero attack acceptance exposed absent shared target Dodge binding; bind immutable printed Dodge at instantiation.",
+      "baselineSha256": "7f4be07f8b7d221c8a7b01e9971ce7b1c635a88e40091d6b6abb58feb96dcf62",
+      "successorSha256": "a60a446c3b1748a7f2eb6a15784ece53ec5ade695d1029f70b5fa1db6f15a6c4"
+    },
+    {
+      "path": "src/game-engine/heroes/production-runtime.ts",
+      "reason": "One source-profile Protection read for explicit non-Ruins targets; Hero action executor unchanged.",
+      "baselineSha256": "0396b6da2ade42f38861b36b366e7c66a26744d91f812975c992817958c8ce3c",
+      "successorSha256": "209febffc46e4dd3063ca3fd914ee98eca35a50ad4f5c3464e57a90b48486cc9"
+    }
+  ],
+  "evidence": {
+    "targetedPassed": 15,
+    "browserPassed": 8,
+    "fullPassed": 3535,
+    "productionGateSteps": [
+      "verify:complete-edition-c1c38",
+      "verify:complete-edition-c1c38r1",
+      "verify:complete-edition-c2a",
+      "verify:complete-edition-c2a-r1",
+      "verify:complete-edition-c2b",
+      "typecheck",
+      "build",
+      "verify:complete-edition-c2c",
+      "verify:complete-edition-c2d",
+      "historical-baseline-validation",
+      "verify:immutable-phase-baselines",
+      "verify:necromancer-successor-compatibility",
+      "verify:prophet-successor-compatibility",
+      "verify:boss-successor-compatibility",
+      "test:e2e:built-bundle-successor",
+      "verify-c2a-test-report",
+      "test:e2e:hero-production-player-path",
+      "audit:complete-edition-c2e",
+      "verify:complete-edition-c2e",
+      "verify:prophet-gate-a",
+      "verify:complete-edition-c1c35r2a",
+      "verify:complete-edition-c1c35r2b",
+      "verify:complete-edition-c1c36",
+      "verify:complete-edition-c1c37"
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+import {spawnSync} from 'node:child_process';
+import {readFileSync,writeFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+const run=(name,args)=>{console.log('C3E final acceptance: '+name);const r=spawnSync(process.execPath,args,{stdio:'inherit'});if(r.status!==0)process.exit(r.status??1);};
+const fingerprint=()=>{const r=spawnSync(process.execPath,['node_modules/vite-node/vite-node.mjs','scripts/audit/c3e-monster-production-acceptance.ts','--fingerprint'],{encoding:'utf8'});if(r.status!==0)throw new Error(r.stderr);return r.stdout.trim();};
+const before=fingerprint();
+run('targeted save / replay',['node_modules/vitest/vitest.mjs','run','--config','scripts/audit/c3e-vitest.config.ts','--reporter=json','--outputFile=pw-out/c3e-targeted-report.json']);
+run('focused browser matrix',['scripts/e2e/c3e-run-browser.mjs']);
+if(before!==fingerprint())throw new Error('Final candidate changed during targeted/browser acceptance');
+const sha=(path)=>createHash('sha256').update(readFileSync(path)).digest('hex');
+writeFileSync('pw-out/c3e-evidence-binding.json',JSON.stringify({sourceFingerprint:before,targetedReportSha256:sha('pw-out/c3e-targeted-report.json'),browserReportSha256:sha('pw-out/c3e-playwright-report.json')},null,2)+'\n');
+run('ONE final full regression',['node_modules/vitest/vitest.mjs','run','--maxWorkers=2','--minWorkers=2','--reporter=json','--outputFile=pw-out/c3e-full-report.json']);
+run('ONE final production gate',['scripts/audit/c3e-run-production-gate.mjs']);
+run('freeze artifacts',['node_modules/vite-node/vite-node.mjs','scripts/audit/c3e-monster-production-acceptance.ts','--write']);
+run('strict freeze verification',['node_modules/vite-node/vite-node.mjs','scripts/audit/c3e-monster-production-acceptance.ts','--verify','--require-freeze']);

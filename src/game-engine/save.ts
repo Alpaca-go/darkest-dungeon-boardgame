@@ -1,3 +1,4 @@
+import { productionMonsterAttackSkill, validateProductionMonsterBattle } from './monsters/production-battle-runtime';
 import type {
   ActiveThreatRuntime,
   BattleState,
@@ -209,7 +210,7 @@ export function validateSaveFile(data: unknown): string | null {
     validateHeroRuntime(c as CampaignState);
     if (c.heroRuntimeSelection?.runtimeVersion === HERO_RUNTIME_VERSION && stableHeroState(s.battle) !== stableHeroState(c.battle)) throw new Error('Production Battle mirror mismatch');
   } catch (error) { return `Hero runtime save invalid: ${error instanceof Error ? error.message : String(error)}`; }
-  try { validateProductionBossRoomStorage(c); validateHeroDodgeCampaignMetadata(c); validateGraveyardReceipts(c); validateNecromancerPreparationDay(c); validateSourceTrinketRewards(c); if (c.ruinsRuleSetSelection?.ruleSetVersion === RUINS_V6) validateRuinsV6Selection(c); else if (c.ruinsRuleSetSelection?.ruleSetVersion === RUINS_V5) validateRuinsV5Selection(c); else validateRuinsVersionSelection(c); if (c.ruinsDrawState?.ruleSetVersion === RUINS_V6) validateRuinsV6Selection(c); if (c.ruinsDrawState) validateRuinsDrawState(c.ruinsDrawState); if (c.ruinsBoneFigureSupply) validateBoneFigureSupply(c.ruinsBoneFigureSupply, c.ruinsDrawState); if (c.battle) { validateLargeMovementContract(c.battle); validateOrdinaryRuinsBattle(c.battle, c.ruinsDrawState); validateRuinsPendingAttack(c.battle); } validateProductionOrdinaryThreat(c as CampaignState); validateQuestThreatHistory(c as CampaignState); }
+  try { validateProductionBossRoomStorage(c); validateHeroDodgeCampaignMetadata(c); validateGraveyardReceipts(c); validateNecromancerPreparationDay(c); validateSourceTrinketRewards(c); if (c.ruinsRuleSetSelection?.ruleSetVersion === RUINS_V6) validateRuinsV6Selection(c); else if (c.ruinsRuleSetSelection?.ruleSetVersion === RUINS_V5) validateRuinsV5Selection(c); else validateRuinsVersionSelection(c); if (c.ruinsDrawState?.ruleSetVersion === RUINS_V6) validateRuinsV6Selection(c); if (c.ruinsDrawState) validateRuinsDrawState(c.ruinsDrawState); if (c.ruinsBoneFigureSupply) validateBoneFigureSupply(c.ruinsBoneFigureSupply, c.ruinsDrawState); if (c.battle) { validateLargeMovementContract(c.battle); validateProductionMonsterBattle(c.battle); validateOrdinaryRuinsBattle(c.battle, c.ruinsDrawState); validateRuinsPendingAttack(c.battle); } validateProductionOrdinaryThreat(c as CampaignState); validateQuestThreatHistory(c as CampaignState); }
   catch (error) { return `Hero Dodge metadata invalid: ${error instanceof Error ? error.message : String(error)}`; }
   if (!Array.isArray(c.heroes)) return 'campaign.heroes 缺失或不是数组';
   if (typeof c.gold !== 'number' || Number.isNaN(c.gold)) return 'campaign.gold 非法';
@@ -458,7 +459,7 @@ export function validateSaveFile(data: unknown): string | null {
           (pending.stage !== 'incoming-attack-window' && pending.stage !== 'hero-hit-window')) return 'pendingMonsterAttack stage 非法';
       if (!b.monsters.some((unit) => unit.id === pending.monsterUnitId && unit.isAlive)) return 'pendingMonsterAttack monster 引用失效';
       if (!b.heroes.some((unit) => unit.id === pending.targetHeroUnitId && unit.isAlive)) return 'pendingMonsterAttack target 引用失效';
-      if (!(pending.ruinsAttack?.skill ?? sourceAttackSkill(b) ?? getMonsterSkillById(pending.skillId))) return 'pendingMonsterAttack skill 引用失效';
+      if (!((pending.productionMonsterAttack ? productionMonsterAttackSkill(b) : null) ?? pending.ruinsAttack?.skill ?? sourceAttackSkill(b) ?? getMonsterSkillById(pending.skillId))) return 'pendingMonsterAttack skill 引用失效';
       if (pending.monsterUnitId !== b.activeActorId) return 'pendingMonsterAttack actor 与当前回合不一致';
       if (!Number.isInteger(pending.attackRoll) || pending.attackRoll < 1 || pending.attackRoll > 10) return 'pendingMonsterAttack attackRoll 非法';
       if (!Number.isFinite(pending.dodgeModifier)) return 'pendingMonsterAttack dodgeModifier 非法';
@@ -1434,7 +1435,7 @@ export function migrateCampaignToV20(campaign: CampaignState): CampaignState {
     && battle.activeActorId === pending.monsterUnitId
     && battle.monsters.some((unit) => unit.id === pending.monsterUnitId && unit.isAlive)
     && battle.heroes.some((unit) => unit.id === pending.targetHeroUnitId && unit.isAlive)
-    && typeof pending.skillId === 'string' && Boolean(sourceAttackSkill(battle) ?? getMonsterSkillById(pending.skillId))
+    && typeof pending.skillId === 'string' && Boolean((pending.productionMonsterAttack ? productionMonsterAttackSkill(battle) : null) ?? sourceAttackSkill(battle) ?? getMonsterSkillById(pending.skillId))
     && Number.isInteger(pending.attackRoll) && pending.attackRoll >= 1 && pending.attackRoll <= 10
     && typeof pending.dodgeModifier === 'number' && Number.isFinite(pending.dodgeModifier)
     && Number.isInteger(pending.incomingDamageNumerator) && pending.incomingDamageNumerator >= 0
@@ -1769,7 +1770,7 @@ export function restoreSaveSnapshot(save: SaveFile): CampaignState {
   if (campaign.ruinsDrawState?.ruleSetVersion === RUINS_V6) validateRuinsV6Selection(campaign);
   if (campaign.ruinsDrawState) validateRuinsDrawState(campaign.ruinsDrawState);
   if (campaign.ruinsBoneFigureSupply) validateBoneFigureSupply(campaign.ruinsBoneFigureSupply, campaign.ruinsDrawState);
-  if (campaign.battle) { validateNecromancerFigures(campaign.battle); validateLargeMovementContract(campaign.battle); validateOrdinaryRuinsBattle(campaign.battle, campaign.ruinsDrawState); validateRuinsPendingAttack(campaign.battle); } validateProductionOrdinaryThreat(campaign); validateQuestThreatHistory(campaign);
+  if (campaign.battle) { validateNecromancerFigures(campaign.battle); validateLargeMovementContract(campaign.battle); validateProductionMonsterBattle(campaign.battle); validateOrdinaryRuinsBattle(campaign.battle, campaign.ruinsDrawState); validateRuinsPendingAttack(campaign.battle); } validateProductionOrdinaryThreat(campaign); validateQuestThreatHistory(campaign);
   return campaign;
 }
 

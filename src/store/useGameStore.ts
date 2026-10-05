@@ -1,3 +1,4 @@
+import { commitProductionMonsterChoice, selectProductionMonsterPlayerRoute } from '../game-engine/commands/ordinary-monsters';
 import {commitProductionHeroInput,pendingProductionAction,rebaseProductionCheckpoint} from '../game-engine/heroes/player-commands';
 import type {HeroRuntimeInput} from '../types/hero-runtime';
 import { isProductionCampaign } from '../data/heroes/player-registry';
@@ -144,6 +145,7 @@ interface UiState {
   battleSkillId: string | null;
 }
 interface GameStore {
+  selectProductionMonsterPlayerRoute: () => void;
   battleContinueResolution: () => void;
   migrateHeroDodgeToV2: () => void;
   selectProductionRuinsV6: () => void;
@@ -325,9 +327,16 @@ export const useGameStore = create<GameStore>((set, get) => {
   };
 
   return {
+    selectProductionMonsterPlayerRoute: () => { const c=get().campaign; if(c) commit(selectProductionMonsterPlayerRoute(c)); },
     battleContinueResolution: () => {
       const c=get().campaign,b=c?.battle,e=b?.bossEncounter;
-      if(!c||pendingProductionAction(c)||!b||!e?.checkpointContext?.playerRouteVersion||b.status!=='active'||e.pendingChoice)return;
+      if(!c||pendingProductionAction(c)||!b||b.status!=='active')return;
+      if(b.productionMonsterContext?.playerRouteVersion) {
+        if(b.productionMonsterContext.pendingChoice || b.productionMonsterContext.blocker || b.ruinsContext?.pendingChoice)return;
+        const next=b.pendingMonsterAttack ? advancePendingMonsterAttack(c,false,true) : {...c,battle:advanceTurn(b)};
+        commit(settleBattleState(next).campaign); return;
+      }
+      if(!e?.checkpointContext?.playerRouteVersion||e.pendingChoice)return;
       let next=c;
       if(b.pendingMonsterAttack)next=advancePendingMonsterAttack(c,false,true);
       else if(e.phase==='BATTLE_RESOLVING'&&e.prophetProduction?.actionOrdinal===2&&e.prophetProduction.crowdedChoice?.selectedAreaId)
@@ -361,6 +370,7 @@ export const useGameStore = create<GameStore>((set, get) => {
     },
     battleOrdinaryChoice: (choiceId, selectedId) => {
       const c = get().campaign;
+      if (c?.battle?.productionMonsterContext) { commit(commitProductionMonsterChoice(c, choiceId, selectedId)); return; }
       if (c?.battle?.ruinsContext) commit(commitOrdinaryRuinsChoice(c, choiceId, selectedId));
     },
     battleRoomInteract: (ruleId) => {

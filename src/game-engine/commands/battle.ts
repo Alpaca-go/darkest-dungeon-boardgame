@@ -94,6 +94,7 @@ function settleBattleStateInternal(
   campaign: CampaignState,
   options?: { mentalGuardLimit?: number },
 ): BattleSettlementResult {
+  if (campaign.battle?.productionMonsterContext?.pendingChoice || campaign.battle?.productionMonsterContext?.blocker) return { ok: true, campaign, error: null, mentalLoops: 0 };
   if (campaign.battle?.ruinsContext?.pendingReanimationChoice) return { ok: true, campaign, error: null, mentalLoops: 0 };
   if (campaign.battle?.bossEncounter?.pendingChoice) return { ok: true, campaign, error: null, mentalLoops: 0 };
   if (!campaign.battle || campaign.battle.status !== 'active') {

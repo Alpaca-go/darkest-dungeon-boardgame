@@ -376,8 +376,34 @@ export function validateProductionMonsterBattle(b: BattleState): void {
   if (c.schemaVersion !== 1 || c.protectionStorage !== 'BATTLE_UNIT_PRINTED_CONDITION_TOKENS'
     || c.integrationVersion !== PRODUCTION_MONSTER_INTEGRATION_VERSION || c.runtimeVersion !== PRODUCTION_MONSTER_RUNTIME_VERSION || b.bossEncounter)
     throw new Error('Production Monster context version invalid');
+  if (c.playerRouteVersion && c.playerRouteVersion !== 'C3E-MONSTER-PLAYER-PATH-v1') throw new Error('Production player route invalid');
+  if (!Number.isInteger(c.rngCursor) || !Number.isInteger(c.rngCalls) || c.rngCalls < 0) throw new Error('Production RNG invalid');
+  const p = c.pendingExecution, pending = b.pendingMonsterAttack?.productionMonsterAttack;
+  if (p) {
+    const definition = getProductionMonsterDefinition(p.definitionId);
+    if (p.runtimeVersion !== c.runtimeVersion || c.definitionIds[p.actorUnitId] !== p.definitionId
+      || !definition?.actions.some(a=>a.actionId===p.actionId) || ![p.skillRoll,p.attackRoll].every(n=>Number.isInteger(n)&&n>=1&&n<=10)
+      || !Number.isInteger(p.operationIndex) || p.operationIndex<0 || p.operationIndex>p.operations.length
+      || new Set(p.targetIds).size!==p.targetIds.length || p.targetIds.some(id=>!units(b).some(u=>u.id===id))
+      || !c.events.some(e=>e.eventId===p.parentEventId)) throw new Error('Production execution invalid');
+    const action = definition!.actions.find(a=>a.actionId===p.actionId)!;
+    if (JSON.stringify(p.operations)!==JSON.stringify(buildProductionMonsterOperations(p.actorUnitId,action,p.targetIds,p.attackRoll))) throw new Error('Production operations differ from source action');
+    if (pending && (pending.runtimeVersion!==c.runtimeVersion || pending.integrationVersion!==c.integrationVersion
+      || pending.parentEventId!==p.parentEventId || pending.actionId!==p.actionId || pending.definitionId!==p.definitionId
+      || pending.operationIndex!==p.operationIndex || JSON.stringify(p.operations[p.operationIndex])!==JSON.stringify(pending.operation)
+      || JSON.stringify(p.targetIds)!==JSON.stringify(pending.targetIds) || b.pendingMonsterAttack!.attackRoll!==p.attackRoll)) throw new Error('Production attack continuation invalid');
+  } else if (pending) throw new Error('Production attack orphaned');
+  if (c.blocker && (p || pending || c.pendingChoice)) throw new Error('Production blocker partially executed');
+  if (c.pendingChoice && !c.events.some(e=>e.eventId===c.pendingChoice!.choiceId && JSON.stringify(e.detail.candidateIds)===JSON.stringify(c.pendingChoice!.candidateIds))) throw new Error('Production choice candidates differ from causal event');
+  if (c.pendingChoice && (c.pendingChoice.integrationVersion!==c.integrationVersion
+    || new Set(c.pendingChoice.candidateIds).size!==c.pendingChoice.candidateIds.length)) throw new Error('Production saved choice invalid');
   validateLargeMovementContract(b);
-  for (const u of b.monsters) if (u.productionMonsterProfile?.definitionId !== c.definitionIds[u.id] || !getProductionMonsterDefinition(c.definitionIds[u.id])) throw new Error('Production definition binding invalid');
+  for (const u of b.monsters) {
+    const d = getProductionMonsterDefinition(c.definitionIds[u.id]), profile = u.productionMonsterProfile;
+    if (!d || profile?.definitionId !== d.definitionId || profile.baseProtection !== d.profile.protection
+      || profile.dodge !== (d.profile.dodge ?? 0) || profile.printedSpeed !== d.profile.speed
+      || profile.stanceSlots !== (d.profile.stanceSlots ?? 1)) throw new Error('Production definition binding invalid');
+  }
   if (JSON.stringify(c.placements) !== JSON.stringify(b.largeMovementContract!.placements)) throw new Error('Production placements differ from live ledger');
   if (c.pendingChoice && (!c.pendingExecution || c.pendingChoice.parentEventId !== c.pendingExecution.parentEventId || !c.pendingChoice.candidateIds.length)) throw new Error('Production choice continuation absent');
 }
