@@ -115,8 +115,16 @@ export function verifyHistoricalBaseline(phase: keyof typeof historicalBaselines
   if (!resolve(checkout).startsWith(resolve(scratch) + '\\') && !resolve(checkout).startsWith(resolve(scratch) + '/')) throw new Error('Unsafe checkout cleanup');
   let added = false;
   try {
-    git(['-c', 'core.autocrlf=false', 'worktree', 'add', '--quiet', '--detach', checkout, commit]);
-    added = true;
+    if (fullProphetFoundation) {
+      // Its unchanged suite creates further C1C27/C1C28 worktrees. Give that
+      // nested verifier its own repository/refs, retaining the complete object
+      // ancestry via a local alternate rather than an outer linked worktree.
+      git(['clone', '--quiet', '--shared', '--no-checkout', resolve('.'), checkout]);
+      execFileSync('git', ['-c', 'core.autocrlf=false', 'checkout', '--quiet', '--detach', commit], { cwd: checkout });
+    } else {
+      git(['-c', 'core.autocrlf=false', 'worktree', 'add', '--quiet', '--detach', checkout, commit]);
+      added = true;
+    }
     // These phases used an ignored rulebook. Supply only the exact, now vendored locked bytes.
     if (!existsSync(join(checkout, 'docs/DD_EN_COREBOX_RULES.pdf'))) {
       const locked = JSON.parse(readFileSync('docs/data/complete-edition/c1a-rulebook-evidence.json', 'utf8'));

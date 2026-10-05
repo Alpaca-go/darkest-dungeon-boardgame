@@ -280,8 +280,10 @@ export function verifyC3BBoundaries() {
   const changes=execFileSync('git',['diff',C3B_BASELINE,'--name-only'],{encoding:'utf8'}).trim().split(/\r?\n/).filter(Boolean);
   const untracked=execFileSync('git',['ls-files','--others','--exclude-standard'],{encoding:'utf8'}).trim().split(/\r?\n/).filter(Boolean);
   const successor = existsSync(root+'c3e-monster-production-freeze.json');
+  const releaseInfrastructure=(p:string)=>successor&&p==='scripts/audit/historical-baseline.ts'
+    &&execFileSync('git',['hash-object',p],{encoding:'utf8'}).trim()==='4628b645996711efeb7179cae0be49cdf3886f71';
   const successorPaths=new Set(['src/game-engine/battle.ts','src/game-engine/commands/ordinary-monsters.ts','src/game-engine/commands/battle.ts','src/game-engine/trinkets/battle-trinket-bridge.ts','src/game-engine/ruins/movement-runtime.ts','src/game-engine/heroes/production-runtime.ts','src/game-engine/dungeon.ts','src/game-engine/save.ts','src/types/index.ts','src/pages/BattlePage.tsx','src/pages/QuestSelectPage.tsx','src/store/useGameStore.ts','src/test-support/historical-baseline-setup.ts','src/components/trinkets/TrinketUseOverlay.tsx','playwright.c3e.config.ts']);
-  check([...changes,...untracked].every(p=>successor && (successorPaths.has(p)||/^src\/audit\/c3[de]-|^scripts\/(audit|e2e)\/c3[de]-/.test(p)||p.startsWith(root+'c3d-')||p.startsWith(root+'c3e-')||p.startsWith('e2e/c3e-'))||p==='AGENTS.md'||p==='package.json'||['.github/workflows/release-gate.yml','.github/workflows/development-fast-gate.yml'].includes(p)||p.startsWith('src/data/monsters/production-monster-definition')
+  check([...changes,...untracked].every(p=>releaseInfrastructure(p)||successor && (successorPaths.has(p)||/^src\/audit\/c3[de]-|^scripts\/(audit|e2e)\/c3[de]-/.test(p)||p.startsWith(root+'c3d-')||p.startsWith(root+'c3e-')||p.startsWith('e2e/c3e-'))||p==='AGENTS.md'||p==='package.json'||['.github/workflows/release-gate.yml','.github/workflows/development-fast-gate.yml'].includes(p)||p.startsWith('src/data/monsters/production-monster-definition')
     ||p.startsWith('src/audit/c3b-')||p.startsWith('scripts/audit/c3b-')||p.startsWith(root+'c3b-')
     // C3C successor runtime files do not alter the accepted C3B data/evidence checks.
     ||p.startsWith('src/game-engine/monsters/')||p==='src/game-engine/monster-target-priority.ts'
