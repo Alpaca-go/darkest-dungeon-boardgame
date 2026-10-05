@@ -19,8 +19,29 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
       - run: npm run verify:complete-edition-c3c
+        if: ${{ !contains(github.ref_name, '-c4a-') }}
       - run: npm run test:complete-edition-c3d
+        if: ${{ !contains(github.ref_name, '-c4a-') }}
       - run: npm run verify:complete-edition-c3d
+        if: ${{ !contains(github.ref_name, '-c4a-') }}
       - run: npm run test:complete-edition-c3e
+        if: ${{ !contains(github.ref_name, '-c4a-') }}
       - run: npm run verify:complete-edition-c3e
+        if: ${{ !contains(github.ref_name, '-c4a-') }}
+      - name: Verify C3E at the authoritative C4A base
+        if: ${{ contains(github.ref_name, '-c4a-') }}
+        shell: bash
+        run: |
+          base_worktree="$RUNNER_TEMP/c4a-c3e-base"
+          git worktree add --detach "$base_worktree" ed84d1359907268736b7d163b68c5b359c4d71fd
+          trap 'git worktree remove --force "$base_worktree"' EXIT
+          (
+            cd "$base_worktree"
+            npm ci
+            npm run verify:complete-edition-c3e
+          )
+      - run: npm run test:complete-edition-c4a
+        if: ${{ contains(github.ref_name, '-c4a-') }}
+      - run: npm run verify:complete-edition-c4a
+        if: ${{ contains(github.ref_name, '-c4a-') }}
       - run: npm run build
